@@ -35,6 +35,8 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
 public class RetrieveUserMonsterTeamAction {
@@ -53,6 +55,9 @@ public class RetrieveUserMonsterTeamAction {
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	private MonsterStuffUtils monsterStuffUtils;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -65,7 +70,10 @@ public class RetrieveUserMonsterTeamAction {
 			HazelcastPvpUtil hazelcastPvpUtil,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil,
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil)
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
+			MonsterStuffUtils monsterStuffUtils,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -79,6 +87,9 @@ public class RetrieveUserMonsterTeamAction {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -166,8 +177,9 @@ public class RetrieveUserMonsterTeamAction {
 
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
-		allButRetrieverUserIdToUserMonsterIdToDroppedId = MonsterStuffUtils
-				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters);
+		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
+				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters, 
+						monsterLevelInfoRetrieveUtils);
 
 		//calculate the PvpBattleOutcome
 		StartUpResource sup = new StartUpResource(userRetrieveUtil,
@@ -192,7 +204,8 @@ public class RetrieveUserMonsterTeamAction {
 
 			User u = userIdToUser.get(userId);
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-					retrieveUser, retrieverElo, pu.getElo(), u);
+					retrieveUser, retrieverElo, u, pu.getElo(),
+					serverToggleRetrieveUtil);
 
 			allButRetrieverUserIdToCashLost.put(userId,
 					potentialResult.getUnsignedCashAttackerWins());
@@ -245,8 +258,9 @@ public class RetrieveUserMonsterTeamAction {
 
 		//need to calculate whether or not these donated monsters drop a piece
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
-			allButRetrieverUserIdToMsfuMonsterDropId = MonsterStuffUtils
-					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu);
+			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
+					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu, 
+							monsterLevelInfoRetrieveUtils);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
 		}

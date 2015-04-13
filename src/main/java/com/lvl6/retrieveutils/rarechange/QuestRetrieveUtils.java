@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,9 @@ public class QuestRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	//private static Map<Integer, List<Quest>> cityIdToQuests;
 	private static Map<Integer, Quest> questIdsToQuests;
@@ -33,7 +37,7 @@ public class QuestRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_QUEST_CONFIG;
 
-	public static Map<Integer, Quest> getQuestIdsToQuests() {
+	public Map<Integer, Quest> getQuestIdsToQuests() {
 		log.debug("retrieving all quest data");
 		if (questIdsToQuests == null) {
 			setStaticQuestIdsToQuests();
@@ -41,7 +45,7 @@ public class QuestRetrieveUtils {
 		return questIdsToQuests;
 	}
 
-	public static Quest getQuestForQuestId(int questId) {
+	public Quest getQuestForQuestId(int questId) {
 		log.debug("retrieving quest with questId " + questId);
 		if (questIdsToQuests == null) {
 			setStaticQuestIdsToQuests();
@@ -49,7 +53,7 @@ public class QuestRetrieveUtils {
 		return questIdsToQuests.get(questId);
 	}
 
-	public static QuestGraph getQuestGraph() {
+	public QuestGraph getQuestGraph() {
 		log.debug("retrieving quest graph");
 		if (questGraph == null) {
 			setStaticQuestGraph();
@@ -57,7 +61,7 @@ public class QuestRetrieveUtils {
 		return questGraph;
 	}
 
-	private static void setStaticQuestIdsToQuests() {
+	private void setStaticQuestIdsToQuests() {
 		log.debug("setting static map of questIds to quests");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -90,7 +94,7 @@ public class QuestRetrieveUtils {
 		}
 	}
 
-	private static void setStaticQuestGraph() {
+	private void setStaticQuestGraph() {
 		log.debug("setting static quest graph");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -125,7 +129,7 @@ public class QuestRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		//setStaticCityIdsToQuests();
 		setStaticQuestGraph();
 		setStaticQuestIdsToQuests();
@@ -134,7 +138,7 @@ public class QuestRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
+	private Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
 		String delimiter = ",";
 
 		int id = rs.getInt(DBConstants.QUEST__ID);
@@ -145,7 +149,7 @@ public class QuestRetrieveUtils {
 
 		String acceptDialogueBlob = rs
 				.getString(DBConstants.QUEST__ACCEPT_DIALOGUE);
-		Dialogue acceptDialogue = MiscMethods
+		Dialogue acceptDialogue = miscMethods
 				.createDialogue(acceptDialogueBlob);
 
 		//    String questType = rs.getString(DBConstants.);
@@ -164,7 +168,7 @@ public class QuestRetrieveUtils {
 				.getString(DBConstants.QUEST__QUESTS_REQUIRED_FOR_THIS);
 		List<Integer> questsRequiredForThis = new ArrayList<Integer>();
 		if (questsRequiredForThisString != null) {
-			MiscMethods.explodeIntoInts(questsRequiredForThisString, delimiter,
+			miscMethods.explodeIntoInts(questsRequiredForThisString, delimiter,
 					questsRequiredForThis);
 		}
 

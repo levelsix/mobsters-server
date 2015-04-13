@@ -43,6 +43,9 @@ public class CreateBattleItemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -144,7 +147,7 @@ public class CreateBattleItemController extends EventController {
 					deletedList, updatedList, newList, cashChange, maxCash,
 					oilChange, maxOil, gemCostForCreating, userRetrieveUtil,
 					battleItemForUserRetrieveUtil, insertUtil, updateUtil,
-					deleteUtil);
+					deleteUtil, miscMethods);
 
 			cbia.execute(resBuilder);
 
@@ -157,7 +160,7 @@ public class CreateBattleItemController extends EventController {
 			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -225,7 +228,7 @@ public class CreateBattleItemController extends EventController {
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
 			CreateBattleItemAction cbia) {
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
 				cbia.getCurrencyDeltas(), cbia.getPreviousCurrencies(),
 				cbia.getCurrentCurrencies(), cbia.getReasons(),
 				cbia.getDetails());

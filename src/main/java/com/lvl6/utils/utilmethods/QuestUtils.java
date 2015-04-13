@@ -4,18 +4,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
+
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.QuestGraph;
 
+@Component
+@DependsOn("gameServer")
 public class QuestUtils {
 
+	@Autowired
+	protected QuestRetrieveUtils questRetrieveUtils;
+	
+	
 	//	private static final Logger log = LoggerFactory.getLogger(QuestUtils.class);
 
-	public static List<Integer> getAvailableQuestsForUser(
+	public List<Integer> getAvailableQuestsForUser(
 			List<Integer> redeemed, List<Integer> inProgress) {
-		QuestGraph graph = QuestRetrieveUtils.getQuestGraph();
+		QuestGraph graph = questRetrieveUtils.getQuestGraph();
 		return graph.getQuestsAvailable(redeemed, inProgress);
 	}
 

@@ -27,7 +27,7 @@ public class ResearchPropertyRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_RESEARCH_PROPERTY_CONFIG;
 
-	public static Map<Integer, Map<Integer, ResearchProperty>> getResearchIdsToIdsToResearchProperties() {
+	public Map<Integer, Map<Integer, ResearchProperty>> getResearchIdsToIdsToResearchProperties() {
 		log.debug("retrieving all researchIds to ResearchProperty data map");
 		if (null == researchIdsToIdsToResearchProperties) {
 			setStaticResearchIdsToIdsToResearchProperties();
@@ -35,7 +35,7 @@ public class ResearchPropertyRetrieveUtils {
 		return researchIdsToIdsToResearchProperties;
 	}
 
-	public static ResearchProperty getResearchPropertyForResearchPropertyId(
+	public ResearchProperty getResearchPropertyForResearchPropertyId(
 			int researchPropertyId) {
 		if (null == researchPropertyIdsToResearchProperties) {
 			setStaticResearchIdsToIdsToResearchProperties();
@@ -50,7 +50,7 @@ public class ResearchPropertyRetrieveUtils {
 		return researchPropertyIdsToResearchProperties.get(researchPropertyId);
 	}
 
-	public static Map<Integer, ResearchProperty> getResearchPropertiesForResearchId(
+	public Map<Integer, ResearchProperty> getResearchPropertiesForResearchId(
 			int researchId) {
 		log.debug(String.format("retrieve research data for research=%s",
 				researchId));
@@ -60,7 +60,7 @@ public class ResearchPropertyRetrieveUtils {
 		return researchIdsToIdsToResearchProperties.get(researchId);
 	}
 
-	private static void setStaticResearchIdsToIdsToResearchProperties() {
+	private void setStaticResearchIdsToIdsToResearchProperties() {
 		log.debug("setting static map of researchIds to researchProperties");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -121,14 +121,14 @@ public class ResearchPropertyRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticResearchIdsToIdsToResearchProperties();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ResearchProperty convertRSRowToResearchProperty(ResultSet rs)
+	private ResearchProperty convertRSRowToResearchProperty(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.RESEARCH_PROPERTY__ID);
 		String name = rs.getString(DBConstants.RESEARCH_PROPERTY__NAME);

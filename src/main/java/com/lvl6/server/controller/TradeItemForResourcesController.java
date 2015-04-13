@@ -26,6 +26,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -42,10 +43,16 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
-	UserRetrieveUtils2 userRetrieveUtil;
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected ItemRetrieveUtils itemRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -112,8 +119,8 @@ public class TradeItemForResourcesController extends EventController {
 
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
-					itemForUserRetrieveUtil, userRetrieveUtil,
-					UpdateUtils.get());
+					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
+					UpdateUtils.get(), miscMethods);
 
 			tifsua.execute(resBuilder);
 
@@ -127,7 +134,7 @@ public class TradeItemForResourcesController extends EventController {
 			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder
 					.getStatus())) {
 				User user = tifsua.getUser();
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -162,7 +169,7 @@ public class TradeItemForResourcesController extends EventController {
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
 			TradeItemForResourcesAction tifsua) {
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
 				tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
 				tifsua.getCurrentCurrencies(), tifsua.getReasons(),
 				tifsua.getDetails());

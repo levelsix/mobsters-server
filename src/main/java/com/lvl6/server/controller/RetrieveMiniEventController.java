@@ -21,6 +21,11 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -51,6 +56,21 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	
+	@Autowired
+	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -108,7 +128,9 @@ public class RetrieveMiniEventController extends EventController {
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 					userId, now, userRetrieveUtil,
 					miniEventForUserRetrieveUtil, miniEventGoalForUserRetrieveUtil,
-					insertUtil, deleteUtil);
+					insertUtil, deleteUtil, miniEventGoalRetrieveUtils,
+					miniEventForPlayerLvlRetrieveUtils, miniEventRetrieveUtils,
+					miniEventTierRewardRetrieveUtils, miniEventLeaderboardRewardRetrieveUtils);
 
 			rmea.execute(resBuilder);
 
@@ -117,7 +139,7 @@ public class RetrieveMiniEventController extends EventController {
 			{
 				//get UserMiniEvent info and create the proto to set into resBuilder
 				//TODO: Consider protofying MiniEvent stuff
-				UserMiniEventProto umep = CreateInfoProtoUtils
+				UserMiniEventProto umep = createInfoProtoUtils
 						.createUserMiniEventProto(
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 								rmea.getMegfus(),

@@ -56,14 +56,14 @@ public class ItemRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_CONFIG;
 
-	public static Map<Integer, Item> getItemIdsToItems() {
+	public Map<Integer, Item> getItemIdsToItems() {
 		if (null == itemIdsToItems) {
 			setStaticItemIdsToItems();
 		}
 		return itemIdsToItems;
 	}
 
-	public static Item getItemForId(int itemId) {
+	public Item getItemForId(int itemId) {
 		if (null == itemIdsToItems) {
 			setStaticItemIdsToItems();
 		}
@@ -75,7 +75,7 @@ public class ItemRetrieveUtils {
 		return itemIdsToItems.get(itemId);
 	}
 
-	public static Map<Integer, Item> getItemsForIds(Collection<Integer> ids) {
+	public Map<Integer, Item> getItemsForIds(Collection<Integer> ids) {
 		if (null == itemIdsToItems) {
 			setStaticItemIdsToItems();
 		}
@@ -88,7 +88,7 @@ public class ItemRetrieveUtils {
 		return returnMap;
 	}
 
-	public static Item nextItem(float probability) {
+	public Item nextItem(float probability) {
 		if (null == christmasTree) {
 			log.error("object to select secret gift nonexistent.");
 			return null;
@@ -106,7 +106,7 @@ public class ItemRetrieveUtils {
 		return secretGift;
 	}
 
-	private static void setStaticItemIdsToItems() {
+	private void setStaticItemIdsToItems() {
 		log.debug("setting static map of item ids to items");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -148,7 +148,7 @@ public class ItemRetrieveUtils {
 		}
 	}
 
-	private static void setUpRandomItemSelection() {
+	private void setUpRandomItemSelection() {
 		if (secretGiftProbabilitySum <= 0) {
 			log.error("There are no items with secret gift probabilities set.");
 			return;
@@ -187,7 +187,7 @@ public class ItemRetrieveUtils {
 		christmasTree = christmasTreeTemp;
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticItemIdsToItems();
 		setUpRandomItemSelection();
 	}
@@ -195,7 +195,7 @@ public class ItemRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Item convertRSRowToItem(ResultSet rs) throws SQLException {
+	private Item convertRSRowToItem(ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.ITEM__ID);
 		String name = rs.getString(DBConstants.ITEM__NAME);
 		String shortName = rs.getString(DBConstants.ITEM__SHORT_NAME);

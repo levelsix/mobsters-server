@@ -54,6 +54,9 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public AcceptAndRejectFbInvitesForSlotsController() {
 		numAllocatedThreads = 4;
@@ -166,7 +169,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 
 					//create the proto for the invites
 
-					UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+					UserFacebookInviteForSlotProto inviteProto = createInfoProtoUtils
 							.createUserFacebookInviteForSlotProtoFromInvite(
 									invite, inviter, clan, inviterProto);
 

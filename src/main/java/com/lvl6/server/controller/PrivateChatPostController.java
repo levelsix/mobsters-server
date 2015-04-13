@@ -62,6 +62,9 @@ public class PrivateChatPostController extends EventController {
 //	protected MiscMethods miscMethods;
 
 	@Autowired
+	protected MiscMethods miscMethods;
+
+	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
@@ -156,7 +159,7 @@ public class PrivateChatPostController extends EventController {
 			if (legitPost) {
 				// record in db
 				Timestamp timeOfPost = new Timestamp(new Date().getTime());
-				String censoredContent = MiscMethods.censorUserInput(content);
+				String censoredContent = miscMethods.censorUserInput(content);
 				String privateChatPostId = insertUtils
 						.insertIntoPrivateChatPosts(posterId, recipientId,
 								censoredContent, timeOfPost, contentLanguage.toString());
@@ -225,11 +228,12 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = MiscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
+						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
 
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatType chatType = ChatType.PRIVATE_CHAT;
-							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl));
+							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl),
+									chatTranslationsRetrieveUtils);
 							tt.setLanguage(recipientLanguage.toString());
 							tt.setText(translatedMessage.get(tl));
 						}
@@ -282,14 +286,14 @@ public class PrivateChatPostController extends EventController {
 					PrivateChatPostProto pcpp;
 
 					if(translationRequired) {
-						pcpp = CreateInfoProtoUtils
+						pcpp = createInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
 										recipientClan, translatedMessage, contentLanguage);
 
 					}
 					else {
-						pcpp = CreateInfoProtoUtils
+						pcpp = createInfoProtoUtils
 								.createPrivateChatPostProtoFromPrivateChatPost(pwp,
 										poster, posterClan, recipient,
 										recipientClan, null, contentLanguage);
@@ -379,7 +383,7 @@ public class PrivateChatPostController extends EventController {
 					+ " tries to post on wall with owner " + recipientId);
 			return false;
 		}
-		Set<Integer> banned = BannedUserRetrieveUtils.getAllBannedUsers();
+		Set<Integer> banned = bannedUserRetrieveUtils.getAllBannedUsers();
 		if (null != banned && banned.contains(posterId)) {
 			resBuilder.setStatus(PrivateChatPostStatus.BANNED);
 			log.warn("banned user tried to send a post. posterId=" + posterId);

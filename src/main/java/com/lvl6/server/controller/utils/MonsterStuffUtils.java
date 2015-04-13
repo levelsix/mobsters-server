@@ -10,6 +10,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.Monster;
@@ -35,14 +38,24 @@ import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
+@Component
+@DependsOn("gameServer")
 public class MonsterStuffUtils {
 
+
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	//extract and return the ids from the UserMonsterCurrentHealthProtos, also
 	//return mapping of userMonsterIdToExpectedHealth
-	public static List<String> getUserMonsterIds(
+	public List<String> getUserMonsterIds(
 			List<UserMonsterCurrentHealthProto> umchpList,
 			Map<String, Integer> userMonsterIdToExpectedHealth) {
 		List<String> idList = new ArrayList<String>();
@@ -60,7 +73,7 @@ public class MonsterStuffUtils {
 		return idList;
 	}
 
-	public static List<String> getUserMonsterIds(
+	public List<String> getUserMonsterIds(
 			List<FullUserMonsterProto> mfuList) {
 		List<String> idList = new ArrayList<String>();
 
@@ -76,7 +89,7 @@ public class MonsterStuffUtils {
 	}
 
 	//transforming list to map with key = monsterForUserId.
-	public static Map<String, UserMonsterHealingProto> convertIntoUserMonsterIdToUmhpProtoMap(
+	public Map<String, UserMonsterHealingProto> convertIntoUserMonsterIdToUmhpProtoMap(
 			List<UserMonsterHealingProto> umhpList) {
 		Map<String, UserMonsterHealingProto> returnMap = new HashMap<String, UserMonsterHealingProto>();
 		if (null == umhpList) {
@@ -90,7 +103,7 @@ public class MonsterStuffUtils {
 		return returnMap;
 	}
 
-	public static Map<String, UserEnhancementItemProto> convertIntoUserMonsterIdToUeipProtoMap(
+	public Map<String, UserEnhancementItemProto> convertIntoUserMonsterIdToUeipProtoMap(
 			List<UserEnhancementItemProto> ueipList) {
 		Map<String, UserEnhancementItemProto> returnMap = new HashMap<String, UserEnhancementItemProto>();
 		if (null == ueipList) {
@@ -108,7 +121,7 @@ public class MonsterStuffUtils {
 	 * selected monsters (the second argument) might be modified, nothing is done if
 	 * selected monsters is empty.
 	 */
-	public static void retainValidMonsters(Set<String> domain,
+	public void retainValidMonsters(Set<String> domain,
 			Map<String, ?> selectedMonsters, boolean keepThingsInDomain,
 			boolean keepThingsNotInDomain) {
 		Set<String> selectedIds = selectedMonsters.keySet();
@@ -134,7 +147,7 @@ public class MonsterStuffUtils {
 	/*
 	 * the second argument might be modified
 	 */
-	public static void retainValidMonsterIds(Set<String> existing,
+	public void retainValidMonsterIds(Set<String> existing,
 			List<String> ids) {
 		//  	ids.add(123456789L);
 		//  	log.info("existing=" + existing + "\t ids=" + ids);
@@ -152,7 +165,7 @@ public class MonsterStuffUtils {
 		}
 	}
 
-	public static List<MonsterHealingForUser> convertToMonsterHealingForUser(
+	public List<MonsterHealingForUser> convertToMonsterHealingForUser(
 			String userId, Map<String, UserMonsterHealingProto> protos) {
 
 		List<MonsterHealingForUser> nonProtos = new ArrayList<MonsterHealingForUser>();
@@ -181,7 +194,7 @@ public class MonsterStuffUtils {
 		return nonProtos;
 	}
 
-	public static List<MonsterEnhancingForUser> convertToMonsterEnhancingForUser(
+	public List<MonsterEnhancingForUser> convertToMonsterEnhancingForUser(
 			String userId, Map<String, UserEnhancementItemProto> protos) {
 
 		List<MonsterEnhancingForUser> nonProtos = new ArrayList<MonsterEnhancingForUser>();
@@ -215,7 +228,7 @@ public class MonsterStuffUtils {
 	// a user_monster
 	// ALSO MODIFIES the monsters in monsterIdToIncompleteUserMonster
 	//monsterIdToQuantity will not be modified
-	public static Map<Integer, Integer> completeMonstersFromQuantities(
+	public Map<Integer, Integer> completeMonstersFromQuantities(
 			Map<Integer, MonsterForUser> monsterIdToIncompleteUserMonster,
 			Map<Integer, Integer> monsterIdToQuantity, Date combineTime) {
 
@@ -231,7 +244,7 @@ public class MonsterStuffUtils {
 		//needed to complete the Monster
 		Set<Integer> incompleteMonsterIds = new HashSet<Integer>(
 				monsterIdToIncompleteUserMonster.keySet());
-		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
+		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
 				.getMonstersForMonsterIds(incompleteMonsterIds);
 
 		//for each incomplete user monster, try to complete it with the
@@ -278,7 +291,7 @@ public class MonsterStuffUtils {
 	//(breaking the abstraction) MonsterForUser mfu will be modified.
 	//returns the number of pieces remaining after using up the pieces
 	//available in order to try completing the monster_for_user
-	public static int completePieceDeficientMonster(MonsterForUser mfu,
+	public int completePieceDeficientMonster(MonsterForUser mfu,
 			int numPiecesAvailable, Monster monzter, Date combineTime) {
 		int numPiecesRemaining = 0;
 
@@ -320,10 +333,11 @@ public class MonsterStuffUtils {
 		return numPiecesRemaining;
 	}
 
-	public static List<MonsterForUser> createMonstersForUserFromQuantities(
+	public List<MonsterForUser> createMonstersForUserFromQuantities(
 			String userId, Map<Integer, Integer> monsterIdsToQuantities,
 			Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity,
-			Date combineStartTime) {
+			Date combineStartTime, MonsterLevelInfoRetrieveUtils 
+			monsterLevelInfoRetrieveUtils) {
 		List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
 
 		Set<Integer> monsterIds = new HashSet<Integer>();
@@ -336,7 +350,7 @@ public class MonsterStuffUtils {
 			monsterIds.addAll(monsterIdToLvlToQuantity.keySet());
 		}
 
-		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
+		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
 				.getMonstersForMonsterIds(monsterIds);
 
 		if (!monsterIdsToQuantities.isEmpty()) {
@@ -351,7 +365,7 @@ public class MonsterStuffUtils {
 								monsterId, quantity, monzter));
 
 				List<MonsterForUser> newUserMonsters = createMonsterForUserFromQuantity(
-						userId, monzter, quantity, combineStartTime);
+						userId, monzter, quantity, combineStartTime, monsterLevelInfoRetrieveUtils);
 				log.info(String
 						.format("some amount of a certain monster created. monster(s)=%s",
 								newUserMonsters));
@@ -371,7 +385,7 @@ public class MonsterStuffUtils {
 
 					List<MonsterForUser> newUserMonsters = createLeveledMonsterForUserFromQuantity(
 							userId, monzter, lvlToQuantity.get(lvl),
-							combineStartTime, lvl);
+							combineStartTime, lvl, monsterLevelInfoRetrieveUtils);
 
 					log.info(String
 							.format("some amount of a certain leveled monster created. monster(s)=%s",
@@ -387,11 +401,12 @@ public class MonsterStuffUtils {
 
 	//for A GIVEN MONSTER and QUANTITY of pieces, create as many of this monster as possible
 	//THE ID PROPERTY FOR ALL these monsterForUser will be a useless value, say 0
-	public static List<MonsterForUser> createMonsterForUserFromQuantity(
-			String userId, Monster monzter, int quantity, Date combineStartTime) {
+	public List<MonsterForUser> createMonsterForUserFromQuantity(
+			String userId, Monster monzter, int quantity, Date combineStartTime, 
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
 
-		Map<Integer, MonsterLevelInfo> levelToInfo = MonsterLevelInfoRetrieveUtils
+		Map<Integer, MonsterLevelInfo> levelToInfo = monsterLevelInfoRetrieveUtils
 				.getMonsterLevelInfoForMonsterId(monzter.getId());
 		MonsterLevelInfo info = levelToInfo.get(1); //not sure if this is right
 
@@ -444,12 +459,13 @@ public class MonsterStuffUtils {
 
 	//for A GIVEN MONSTER and QUANTITY of them, create as many of this monster as possible
 	//THE ID PROPERTY FOR ALL these monsterForUser will be a useless value, say 0
-	public static List<MonsterForUser> createLeveledMonsterForUserFromQuantity(
+	public List<MonsterForUser> createLeveledMonsterForUserFromQuantity(
 			String userId, Monster monzter, int quantity,
-			Date combineStartTime, int lvl) {
+			Date combineStartTime, int lvl, MonsterLevelInfoRetrieveUtils 
+			monsterLevelInfoRetrieveUtils) {
 		List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
 
-		Map<Integer, MonsterLevelInfo> levelToInfo = MonsterLevelInfoRetrieveUtils
+		Map<Integer, MonsterLevelInfo> levelToInfo = monsterLevelInfoRetrieveUtils
 				.getAllPartialMonsterLevelInfo(monzter.getId());
 		MonsterLevelInfo info = levelToInfo.get(lvl); //not sure if this is right
 
@@ -481,10 +497,11 @@ public class MonsterStuffUtils {
 
 	//TODO: move this into AwardRewardAction
 	//METHOD TO REWARD A USER WITH SOME MONSTERS
-	public static List<FullUserMonsterProto> updateUserMonsters(String userId,
+	public List<FullUserMonsterProto> updateUserMonsters(String userId,
 			Map<Integer, Integer> monsterIdToNumPieces,
 			Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity,
-			String sourceOfPieces, Date combineStartDate) {
+			String sourceOfPieces, Date combineStartDate, 
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		log.info(String.format("the monster pieces the user gets:%s",
 				monsterIdToNumPieces));
 		log.info(String.format("the monsters the user gets:%s",
@@ -519,7 +536,7 @@ public class MonsterStuffUtils {
 		//the user will get. SET THE combineStartTime
 		List<MonsterForUser> newMonsters = createMonstersForUserFromQuantities(
 				userId, monsterIdToRemainingPieces, monsterIdToLvlToQuantity,
-				combineStartDate);
+				combineStartDate, monsterLevelInfoRetrieveUtils);
 		if (!newMonsters.isEmpty()) {
 			log.info("the monsters that are new: {}", newMonsters);
 			List<String> monsterForUserIds = InsertUtils.get()
@@ -538,13 +555,13 @@ public class MonsterStuffUtils {
 		List<MonsterForUser> newOrUpdated = new ArrayList<MonsterForUser>();
 		newOrUpdated.addAll(dirtyMonsterForUserList);
 		newOrUpdated.addAll(newMonsters);
-		List<FullUserMonsterProto> protos = CreateInfoProtoUtils
+		List<FullUserMonsterProto> protos = createInfoProtoUtils
 				.createFullUserMonsterProtoList(newOrUpdated);
 
 		return protos;
 	}
 
-	private static void awardPieces(String userId,
+	private void awardPieces(String userId,
 			Map<Integer, Integer> monsterIdToNumPieces,
 			Map<Integer, MonsterForUser> monsterIdsToIncompletes,
 			Map<Integer, Integer> monsterIdToRemainingPieces, Date combineTime) {
@@ -568,7 +585,7 @@ public class MonsterStuffUtils {
 	}
 
 	//returns user monster ids
-	public static List<String> getWholeButNotCombinedUserMonsters(
+	public List<String> getWholeButNotCombinedUserMonsters(
 			Map<String, MonsterForUser> idsToUserMonsters) {
 		List<String> wholeUserMonsterIds = new ArrayList<String>();
 
@@ -578,7 +595,7 @@ public class MonsterStuffUtils {
 		}
 		//get the monsters in order to determine num pieces to be considered whole
 		List<Integer> monsterIds = new ArrayList<Integer>(uniqMonsterIds);
-		Map<Integer, Monster> idsToMonsters = MonsterRetrieveUtils
+		Map<Integer, Monster> idsToMonsters = monsterRetrieveUtils
 				.getMonstersForMonsterIds(monsterIds);
 
 		//loop through user monsters and monsters and see if user monster is whole
@@ -608,7 +625,7 @@ public class MonsterStuffUtils {
 		return wholeUserMonsterIds;
 	}
 
-	public static Map<String, Integer> convertToMonsterForUserIdToCashAmount(
+	public Map<String, Integer> convertToMonsterForUserIdToCashAmount(
 			List<MinimumUserMonsterSellProto> userMonsters) {
 		Map<String, Integer> idToCashAmount = new HashMap<String, Integer>();
 
@@ -622,7 +639,7 @@ public class MonsterStuffUtils {
 		return idToCashAmount;
 	}
 
-	public static float sumProbabilities(
+	public float sumProbabilities(
 			List<TaskStageMonster> taskStageMonsters) {
 		float sumProbabilities = 0.0f;
 
@@ -633,13 +650,13 @@ public class MonsterStuffUtils {
 		return sumProbabilities;
 	}
 
-	public static MonsterForUser createNewUserMonster(String userId,
+	public MonsterForUser createNewUserMonster(String userId,
 			int numPieces, Monster monzter, Date now, boolean hasAllPieces,
-			boolean isComplete) {
+			boolean isComplete, MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 
 		int monsterId = monzter.getId();
 
-		Map<Integer, MonsterLevelInfo> levelToInfo = MonsterLevelInfoRetrieveUtils
+		Map<Integer, MonsterLevelInfo> levelToInfo = monsterLevelInfoRetrieveUtils
 				.getMonsterLevelInfoForMonsterId(monsterId);
 		MonsterLevelInfo info = levelToInfo.get(1); //not sure if this is right
 
@@ -659,7 +676,7 @@ public class MonsterStuffUtils {
 	}
 
 	//gather up the user monster ids in the evolution(s)
-	public static Set<String> getUserMonsterIdsUsedInEvolution(
+	public Set<String> getUserMonsterIdsUsedInEvolution(
 			MonsterEvolvingForUser mefu,
 			Map<Long, MonsterEvolvingForUser> catalystIdToMonsterEvolutionForUser) {
 		Set<String> userMonsterIds = new HashSet<String>();
@@ -689,7 +706,7 @@ public class MonsterStuffUtils {
 		return userMonsterIds;
 	}
 
-	public static List<String> getUserMonsterIdsInClanRaid(
+	public List<String> getUserMonsterIdsInClanRaid(
 			Map<String, ClanEventPersistentForUser> userIdToCepfu) {
 		List<String> userMonsterIds = new ArrayList<String>();
 
@@ -701,8 +718,8 @@ public class MonsterStuffUtils {
 		return userMonsterIds;
 	}
 
-	public static Element getMonsterElementForMonsterId(int monsterId) {
-		Monster mon = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+	public Element getMonsterElementForMonsterId(int monsterId) {
+		Monster mon = monsterRetrieveUtils.getMonsterForMonsterId(monsterId);
 
 		if (null != mon) {
 			Element me = null;
@@ -717,7 +734,7 @@ public class MonsterStuffUtils {
 		return null;
 	}
 
-	public static boolean checkAllUserMonstersAreComplete(
+	public boolean checkAllUserMonstersAreComplete(
 			List<Long> deleteUserMonsterIds,
 			Map<Long, MonsterForUser> deletedUserMonsters) {
 		//make sure the monsters are all complete
@@ -734,15 +751,15 @@ public class MonsterStuffUtils {
 		return true;
 	}
 
-	public static Map<String, Map<String, Integer>> calculatePvpDrops(
-			Map<String, List<MonsterForUser>> userIdToUserMonsters) {
+	public Map<String, Map<String, Integer>> calculatePvpDrops(
+			Map<String, List<MonsterForUser>> userIdToUserMonsters, 
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = new HashMap<String, Map<String, Integer>>();
 
 		for (String userId : userIdToUserMonsters.keySet()) {
 			List<MonsterForUser> userMonsters = userIdToUserMonsters
 					.get(userId);
-			Map<String, Integer> monsterDropIds = MonsterStuffUtils
-					.calculatePvpDropIds(userMonsters);
+			Map<String, Integer> monsterDropIds = calculatePvpDropIds(userMonsters, monsterLevelInfoRetrieveUtils);
 
 			userIdToUserMonsterIdToDroppedId.put(userId, monsterDropIds);
 		}
@@ -755,8 +772,8 @@ public class MonsterStuffUtils {
 	 * @param userMonsters
 	 * @return map(userMonsterId -> monsterId or -1 if no drop)
 	 */
-	public static Map<String, Integer> calculatePvpDropIds(
-			List<MonsterForUser> userMonsters) {
+	public Map<String, Integer> calculatePvpDropIds(
+			List<MonsterForUser> userMonsters, MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		Map<String, Integer> userMonsterIdToDroppedId = new HashMap<String, Integer>();
 
 		for (MonsterForUser userMonster : userMonsters) {
@@ -765,13 +782,13 @@ public class MonsterStuffUtils {
 			int lvl = userMonster.getCurrentLvl();
 
 			//calculate if dropped
-			boolean dropped = MonsterLevelInfoRetrieveUtils.didPvpMonsterDrop(
+			boolean dropped = monsterLevelInfoRetrieveUtils.didPvpMonsterDrop(
 					monsterId, lvl);
 
 			//if dropped set monster
 			Monster mon = null;
 			if (dropped) {
-				mon = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+				mon = monsterRetrieveUtils.getMonsterForMonsterId(monsterId);
 			}
 
 			//get the pvpMonsterDropId if monster not null.
@@ -788,14 +805,15 @@ public class MonsterStuffUtils {
 		return userMonsterIdToDroppedId;
 	}
 
-	public static Map<String, Integer> calculateMsfuPvpDrops(
-			Map<String, MonsterSnapshotForUser> userIdToUserMonsterSnapshot) {
+	public Map<String, Integer> calculateMsfuPvpDrops(
+			Map<String, MonsterSnapshotForUser> userIdToUserMonsterSnapshot,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		Map<String, Integer> userIdToMsfuDroppedId = new HashMap<String, Integer>();
 
 		for (String userId : userIdToUserMonsterSnapshot.keySet()) {
 			MonsterSnapshotForUser msfu = userIdToUserMonsterSnapshot
 					.get(userId);
-			int monsterDropId = MonsterStuffUtils.calculateMsfuPvpDropIds(msfu);
+			int monsterDropId = calculateMsfuPvpDropIds(msfu, monsterLevelInfoRetrieveUtils);
 
 			userIdToMsfuDroppedId.put(userId, monsterDropId);
 		}
@@ -808,20 +826,21 @@ public class MonsterStuffUtils {
 	 * @param userMonsters
 	 * @return monsterId or -1 if no drop
 	 */
-	public static int calculateMsfuPvpDropIds(
-			MonsterSnapshotForUser userMonsterSnapshot) {
+	public int calculateMsfuPvpDropIds(
+			MonsterSnapshotForUser userMonsterSnapshot, 
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 
 		int monsterId = userMonsterSnapshot.getMonsterId();
 		int lvl = userMonsterSnapshot.getCurrentLvl();
 
 		//calculate if dropped
-		boolean dropped = MonsterLevelInfoRetrieveUtils.didPvpMonsterDrop(
+		boolean dropped = monsterLevelInfoRetrieveUtils.didPvpMonsterDrop(
 				monsterId, lvl);
 
 		//if dropped set monster
 		Monster mon = null;
 		if (dropped) {
-			mon = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+			mon = monsterRetrieveUtils.getMonsterForMonsterId(monsterId);
 		}
 
 		//get the pvpMonsterDropId if monster not null.
@@ -835,7 +854,7 @@ public class MonsterStuffUtils {
 		return pvpMonsterDropId;
 	}
 
-	public static MonsterSnapshotForUser javafyFullUserMonsterProto(
+	public MonsterSnapshotForUser javafyFullUserMonsterProto(
 			FullUserMonsterProto fump) {
 		MonsterSnapshotForUser msfu = new MonsterSnapshotForUser();
 		msfu.setUserId(fump.getUserUuid());
@@ -851,7 +870,7 @@ public class MonsterStuffUtils {
 		return msfu;
 	}
 
-	public static MonsterSnapshotForUser javafyUserMonsterSnapshotProto(
+	public MonsterSnapshotForUser javafyUserMonsterSnapshotProto(
 			UserMonsterSnapshotProto umsp) {
 		MonsterSnapshotForUser msfu = new MonsterSnapshotForUser();
 		msfu.setId(umsp.getSnapshotUuid());

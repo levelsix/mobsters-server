@@ -239,7 +239,7 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		//create the protoList
 		privateChatPostIds = new ArrayList<String>();
 		privateChatPostIds.addAll(userIdsToPrivateChatPostIds.values());
-		List<PrivateChatPostProto> pcppList = CreateInfoProtoUtils
+		List<PrivateChatPostProto> pcppList = createInfoProtoUtils
 				.createPrivateChatPostProtoList(clanIdsToClans,
 						clanIdsToUserIdSet, userIdsToUsers,
 						clanlessUserUserIds, privateChatPostIds,

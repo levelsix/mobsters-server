@@ -49,6 +49,9 @@ public class BeginMiniJobController extends EventController {
 
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public BeginMiniJobController() {
 		numAllocatedThreads = 4;
@@ -170,7 +173,7 @@ public class BeginMiniJobController extends EventController {
 					+ " mfuIdsToUserMonsters=" + mfuIdsToUserMonsters);
 
 			Set<String> existing = mfuIdsToUserMonsters.keySet();
-			MonsterStuffUtils.retainValidMonsterIds(existing, userMonsterIds);
+			monsterStuffUtils.retainValidMonsterIds(existing, userMonsterIds);
 		}
 
 		if (userMonsterIds.isEmpty()) {

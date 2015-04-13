@@ -28,7 +28,7 @@ public class MonsterBattleDialogueRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_BATTLE_DIALOGUE_CONFIG;
 
-	public static List<MonsterBattleDialogue> getMonsterBattleDialogueForMonsterId(
+	public List<MonsterBattleDialogue> getMonsterBattleDialogueForMonsterId(
 			int monsterId) {
 		log.debug("retrieving data for monsterBattleDialogue with monster id "
 				+ monsterId);
@@ -38,7 +38,7 @@ public class MonsterBattleDialogueRetrieveUtils {
 		return monsterIdToBattleDialogue.get(monsterId);
 	}
 
-	public static Map<Integer, List<MonsterBattleDialogue>> getMonsterIdToBattleDialogue() {
+	public Map<Integer, List<MonsterBattleDialogue>> getMonsterIdToBattleDialogue() {
 		log.debug("retrieving all cities data");
 		if (monsterIdToBattleDialogue == null) {
 			setStaticMonsterIdToMonsterBattleDialogue();
@@ -46,7 +46,7 @@ public class MonsterBattleDialogueRetrieveUtils {
 		return monsterIdToBattleDialogue;
 	}
 
-	private static void setStaticMonsterIdToMonsterBattleDialogue() {
+	private void setStaticMonsterIdToMonsterBattleDialogue() {
 		log.debug("setting static map of monsterIds to monsterBattleDialogue");
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
@@ -87,14 +87,14 @@ public class MonsterBattleDialogueRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticMonsterIdToMonsterBattleDialogue();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static MonsterBattleDialogue convertRSRowToMonsterBattleDialogue(
+	private MonsterBattleDialogue convertRSRowToMonsterBattleDialogue(
 			ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.MONSTER_BATTLE_DIALOGUE__ID);
 		int monsterId = rs

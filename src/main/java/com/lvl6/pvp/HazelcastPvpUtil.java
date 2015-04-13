@@ -253,7 +253,6 @@ public class HazelcastPvpUtil implements InitializingBean {
 		PagingPredicate advPredicate = new PagingPredicate(sqlPredicate,
 				new PvpUserComparator(true, IterationType.VALUE), 1);
 		
-		
 		return advPredicate;
 	}
 

@@ -37,6 +37,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -53,6 +54,9 @@ public class EvolutionFinishedController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -62,6 +66,19 @@ public class EvolutionFinishedController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
 
 	public EvolutionFinishedController() {
 		numAllocatedThreads = 3;
@@ -162,7 +179,7 @@ public class EvolutionFinishedController extends EventController {
 						existingUserMonsters);
 
 				MonsterForUser evolvedMfu = evolvedUserMonster.get(0);
-				FullUserMonsterProto fump = CreateInfoProtoUtils
+				FullUserMonsterProto fump = createInfoProtoUtils
 						.createFullUserMonsterProtoFromUserMonster(evolvedMfu);
 				resBuilder.setEvolvedMonster(fump);
 				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
@@ -176,7 +193,7 @@ public class EvolutionFinishedController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -291,10 +308,10 @@ public class EvolutionFinishedController extends EventController {
 			} else {
 				//everything went well
 				if (0 != oilChange) {
-					money.put(MiscMethods.oil, oilChange);
+					money.put(miscMethods.oil, oilChange);
 				}
 				if (0 != gemsSpent) {
-					money.put(MiscMethods.gems, gemChange);
+					money.put(miscMethods.gems, gemChange);
 				}
 			}
 		}
@@ -340,13 +357,14 @@ public class EvolutionFinishedController extends EventController {
 			String uMonsterIdOne, Map<String, MonsterForUser> idsToUserMonsters) {
 		MonsterForUser unevolvedMonster = idsToUserMonsters.get(uMonsterIdOne);
 		int monsterId = unevolvedMonster.getMonsterId();
-		Monster evolvedMonster = MonsterRetrieveUtils
+		Monster evolvedMonster = monsterRetrieveUtils
 				.getEvolvedFormForMonster(monsterId);
 		int numPieces = evolvedMonster.getNumPuzzlePieces();
 		boolean hasAllPieces = true;
 		boolean isComplete = true;
-		MonsterForUser mfu = MonsterStuffUtils.createNewUserMonster(uId,
-				numPieces, evolvedMonster, now, hasAllPieces, isComplete);
+		MonsterForUser mfu = monsterStuffUtils.createNewUserMonster(uId,
+				numPieces, evolvedMonster, now, hasAllPieces, isComplete, 
+				monsterLevelInfoRetrieveUtils);
 
 		return mfu;
 	}
@@ -372,7 +390,7 @@ public class EvolutionFinishedController extends EventController {
 		if (moneyChange.isEmpty()) {
 			return;
 		}
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		Timestamp date = new Timestamp((now.getTime()));
 		String catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
@@ -406,7 +424,7 @@ public class EvolutionFinishedController extends EventController {
 		changeReasonsMap.put(gems, reasonForChange);
 		detailsMap.put(gems, detailSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 	}

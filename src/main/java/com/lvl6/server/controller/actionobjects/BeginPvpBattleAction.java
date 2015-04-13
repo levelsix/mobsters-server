@@ -19,6 +19,7 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -39,13 +40,16 @@ public class BeginPvpBattleAction {
 	private TimeUtils timeUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	public BeginPvpBattleAction(String attackerId, String defenderId,
 			int defenderElo, Date clientDate, boolean exactingRevenge,
 			Timestamp previousBattleEndTime,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			HazelcastPvpUtil hazelcastPvpUtil, TimeUtils timeUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil)
+	{
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -58,19 +62,20 @@ public class BeginPvpBattleAction {
 		this.timeUtil = timeUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 	}
 
 	//	//encapsulates the return value from this Action Object
 	//	static class QueueUpResource {
-	//		
-	//		
+	//
+	//
 	//		public QueueUpResource() {
-	//			
+	//
 	//		}
 	//	}
 	//
 	//	public QueueUpResource execute() {
-	//		
+	//
 	//	}
 
 	//derived state
@@ -160,11 +165,11 @@ public class BeginPvpBattleAction {
 		//	    //his shield end times should be in the past
 		//	    Date shieldEndTime = enemyPlfu.getShieldEndTime();
 		//	    Date inBattleEndTime = enemyPlfu.getInBattleShieldEndTime();
-		//    
+		//
 		//	    if (shieldEndTime.getTime() > curDate.getTime() ||
 		//	    		inBattleEndTime.getTime() > curDate.getTime()) {
 		//	    	//this is possible if another attacker got to this person first
-		//	    	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE); 
+		//	    	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE);
 		//	    	log.warn("The user this client wants to attack has already been atttacked" +
 		//	    			" or is being attacked. pvpUser=" + enemyPlfu + "\t curDate" + curDate);
 		//	    	return false;
@@ -241,7 +246,7 @@ public class BeginPvpBattleAction {
 		user.setOil(0);
 		user.setId(defenderId);
 		PvpBattleOutcome results = new PvpBattleOutcome(attacker, attackerElo,
-				defenderElo, user);
+				user, defenderElo, serverToggleRetrieveUtil);
 
 		attackerWins(defenderElo, results);
 		attackerLoses(attackerElo, results);
@@ -314,14 +319,15 @@ public class BeginPvpBattleAction {
 
 			PvpUser attackerOpu = new PvpUser(attackerPlfu);
 			//			attackerOpu.setShieldEndTime(login);
-			//			attackerOpu.setInBattleEndTime(login);               
+			//			attackerOpu.setInBattleEndTime(login);
 			attackerOpu.setShieldEndTime(clientDate);
 			attackerOpu.setInBattleEndTime(clientDate);
 			hazelcastPvpUtil.replacePvpUser(attackerOpu, attackerId);
-			//Note: changes in Hazelcast take time to propagate 
+			//Note: changes in Hazelcast take time to propagate
 			//			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
 			log.info("(should be same as 1cur pvpUser) 3cur pvpuser={}",
 					attackerOpu);
 		}
 	}
+
 }

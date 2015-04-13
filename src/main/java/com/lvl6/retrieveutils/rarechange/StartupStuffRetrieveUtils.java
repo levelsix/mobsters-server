@@ -32,7 +32,7 @@ public class StartupStuffRetrieveUtils {
 
 	private static User adminChatUser;
 
-	public static User getAdminChatUser() {
+	public User getAdminChatUser() {
 		log.debug("retrieving adminChatUserProto");
 		if (null == adminChatUser) {
 			setStaticAdminChatUser();
@@ -41,13 +41,13 @@ public class StartupStuffRetrieveUtils {
 		return adminChatUser;
 	}
 
-	private static void setStaticAdminChatUser() {
+	private void setStaticAdminChatUser() {
 		User adminChatUserTemp = RetrieveUtils.userRetrieveUtils().getUserById(
 				ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID);
 		adminChatUser = adminChatUserTemp;
 	}
 
-	public static List<String> getAllActiveAlerts() {
+	public List<String> getAllActiveAlerts() {
 		log.debug("retrieving all alerts placed in a set");
 		if (null == notices) {
 			setStaticActiveAlerts();
@@ -55,7 +55,7 @@ public class StartupStuffRetrieveUtils {
 		return notices;
 	}
 
-	private static void setStaticActiveAlerts() {
+	private void setStaticActiveAlerts() {
 		log.debug("setting static Set of notices");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -93,7 +93,7 @@ public class StartupStuffRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticAdminChatUser();
 		setStaticActiveAlerts();
 	}
@@ -101,7 +101,7 @@ public class StartupStuffRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static String convertRSRowToAlerts(ResultSet rs)
+	private String convertRSRowToAlerts(ResultSet rs)
 			throws SQLException {
 		String noticesTerm = rs
 				.getString(DBConstants.ALERT_ON_STARTUP__MESSAGE);

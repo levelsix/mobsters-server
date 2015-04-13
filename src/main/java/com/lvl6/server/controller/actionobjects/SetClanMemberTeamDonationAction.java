@@ -30,19 +30,22 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 	private final String userId;
 	private final ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	private final MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetClanMemberTeamDonationAction(
 			ClanDataProto.Builder cdpBuilder,
 			User user,
 			String userId,
 			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -162,11 +165,11 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 			//only need MonsterSnapshotForUser for current user's solicitation
 			if (solicitorId.equals(userId) && null != donationToMe) {
 				msfu = donationToMe;
-				donatorProto = CreateInfoProtoUtils
+				donatorProto = createInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(donator, c);
 			}
 
-			ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
+			ClanMemberTeamDonationProto cmtdp = createInfoProtoUtils
 					.createClanMemberTeamDonationProto(cmtd, msfu, solicitor,
 							donatorProto);
 
@@ -180,7 +183,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 		for (String solicitorId : solicitors.keySet()) {
 			User solicitor = solicitors.get(solicitorId);
 
-			MinimumUserProto mup = CreateInfoProtoUtils
+			MinimumUserProto mup = createInfoProtoUtils
 					.createMinimumUserProtoFromUserAndClan(solicitor, c);
 			mupSolicitors.put(solicitorId, mup);
 		}

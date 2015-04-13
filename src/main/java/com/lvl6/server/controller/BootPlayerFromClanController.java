@@ -52,6 +52,9 @@ public class BootPlayerFromClanController extends EventController {
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
@@ -144,7 +147,7 @@ public class BootPlayerFromClanController extends EventController {
 			}
 
 			if (success) {
-				MinimumUserProto mup = CreateInfoProtoUtils
+				MinimumUserProto mup = createInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(playerToBoot,
 								null);
 				resBuilder.setPlayerToBoot(mup);

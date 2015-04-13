@@ -30,6 +30,8 @@ message MiniEventGoalProto {
 	optional int32 goalAmt = 4;
 	optional string goalDesc = 5;
 	optional int32 pointsGained = 6;
+	optional string actionDescription = 7;
+	
 	
 	enum MiniEventGoalType {
 		NO_GOAL = 1;

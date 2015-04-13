@@ -31,14 +31,18 @@ public class TradeItemForResourcesAction {
 	private int maxCash;
 	private int maxOil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private ItemRetrieveUtils itemRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private UpdateUtil updateUtil;
+	private MiscMethods miscMethods;
 
 	public TradeItemForResourcesAction(String userId,
 			List<Integer> itemIdsUsed, List<ItemForUser> nuUserItems,
 			int maxCash, int maxOil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			UserRetrieveUtils2 userRetrieveUtil, UpdateUtil updateUtil) {
+			ItemRetrieveUtils itemRetrieveUtils,
+			UserRetrieveUtils2 userRetrieveUtil, UpdateUtil updateUtil,
+			MiscMethods miscMethods) {
 		super();
 		this.userId = userId;
 		this.itemIdsUsed = itemIdsUsed;
@@ -46,8 +50,10 @@ public class TradeItemForResourcesAction {
 		this.maxCash = maxCash;
 		this.maxOil = maxOil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.itemRetrieveUtils = itemRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.updateUtil = updateUtil;
+		this.miscMethods = miscMethods;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -130,7 +136,7 @@ public class TradeItemForResourcesAction {
 			itemIdToQuantityUsed.put(itemId, quantity);
 
 			//aggregate the amount of resources to give user
-			Item item = ItemRetrieveUtils.getItemForId(itemId);
+			Item item = itemRetrieveUtils.getItemForId(itemId);
 
 			String itemType = item.getItemType();
 			int amount = item.getAmount();
@@ -217,13 +223,13 @@ public class TradeItemForResourcesAction {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (0 != gemsGained) {
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
+			prevCurrencies.put(miscMethods.gems, user.getGems());
 		}
 		if (0 != cashGained) {
-			prevCurrencies.put(MiscMethods.cash, user.getCash());
+			prevCurrencies.put(miscMethods.cash, user.getCash());
 		}
 		if (0 != oilGained) {
-			prevCurrencies.put(MiscMethods.oil, user.getOil());
+			prevCurrencies.put(miscMethods.oil, user.getOil());
 		}
 
 		//update items to reflect being used
@@ -242,9 +248,9 @@ public class TradeItemForResourcesAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = MiscMethods.gems;
-		String cash = MiscMethods.cash;
-		String oil = MiscMethods.oil;
+		String gems = miscMethods.gems;
+		String cash = miscMethods.cash;
+		String oil = miscMethods.oil;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

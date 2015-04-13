@@ -58,6 +58,9 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.SalesDisplayItem;
+import com.lvl6.info.SalesItem;
+import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
@@ -101,6 +104,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
@@ -155,12 +159,21 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
@@ -172,12 +185,14 @@ import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -214,13 +229,34 @@ public class StartupController extends EventController {
 	}
 
 	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
+	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
+
+	@Autowired
+	protected QuestRetrieveUtils questRetrieveUtils;
+
+	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
+
+	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
 
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	protected TimeUtils timeUtils;
+
+	@Autowired
+	protected UpdateUtil updateUtil;
+
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected Globals globals;
@@ -272,6 +308,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
+
+	@Autowired
+	protected SecretGiftUtils secretGiftUtils;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
@@ -349,10 +388,16 @@ public class StartupController extends EventController {
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 
 	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+
+	@Autowired
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
 	@Autowired
 	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
+
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -360,6 +405,29 @@ public class StartupController extends EventController {
 	@Autowired
 	protected DeleteUtil deleteUtil;
 
+	@Autowired
+	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+
+	@Autowired
+	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+
+	@Autowired
+	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
+
+	@Autowired
+	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+
+	@Autowired
+	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+
+	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -389,8 +457,8 @@ public class StartupController extends EventController {
 				: null;
 
 		String playerId = null;
-		MiscMethods.setMDCProperties(udid, null,
-				MiscMethods.getIPOfPlayer(server, null, udid));
+		miscMethods.setMDCProperties(udid, null,
+				miscMethods.getIPOfPlayer(server, null, udid));
 		log.info("{}ms at getIpOfPlayer", stopWatch.getTime());
 
 		VersionNumberProto version = null;
@@ -672,6 +740,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
+			setSalesForUser(resBuilder, user);
+			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
@@ -710,45 +780,48 @@ public class StartupController extends EventController {
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
 					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
-					createInfoProtoUtils, translationSettingsForUserRetrieveUtil,
+					getCreateInfoProtoUtils(), translationSettingsForUserRetrieveUtil,
 					updatedTsfuList);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
 			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(
 					resBuilder, user, playerId,
-					getUserFacebookInviteForSlotRetrieveUtils());
+					getUserFacebookInviteForSlotRetrieveUtils(),
+					getCreateInfoProtoUtils());
 			sfesa.setUp(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
-					hazelcastPvpUtil);
+					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
+					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
-					user, getClanChatPostRetrieveUtils());
+					user, getClanChatPostRetrieveUtils(),
+					getCreateInfoProtoUtils());
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 
 			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user,
-					playerId, clanHelpRetrieveUtil);
+					playerId, clanHelpRetrieveUtil, getCreateInfoProtoUtils());
 			scha.setUp(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
 			SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
 					cdpb, user, playerId, clanAvengeRetrieveUtil,
-					clanAvengeUserRetrieveUtil);
+					clanAvengeUserRetrieveUtil, getCreateInfoProtoUtils());
 			scra.setUp(fillMe);
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 
 			SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
 					cdpb, user, playerId, clanMemberTeamDonationRetrieveUtil,
-					monsterSnapshotForUserRetrieveUtil);
+					monsterSnapshotForUserRetrieveUtil, getCreateInfoProtoUtils());
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 
@@ -794,7 +867,7 @@ public class StartupController extends EventController {
 			if (user.getClanId() != null) {
 				clan = fillMe.getClanIdsToClans().get(user.getClanId());
 			}
-			FullUserProto fup = CreateInfoProtoUtils
+			FullUserProto fup = createInfoProtoUtils
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
@@ -848,7 +921,7 @@ public class StartupController extends EventController {
 		Set<Integer> questIds = new HashSet<Integer>();
 		List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
-		Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils
+		Map<Integer, Quest> questIdToQuests = questRetrieveUtils
 				.getQuestIdsToQuests();
 		for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
 			int questId = uq.getQuestId();
@@ -869,7 +942,7 @@ public class StartupController extends EventController {
 				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);
 
 		//generate the user quests
-		List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
+		List<FullUserQuestProto> currentUserQuests = createInfoProtoUtils
 				.createFullUserQuestDataLarges(inProgressQuests,
 						questIdToQuests, questIdToUserQuestJobs);
 		resBuilder.addAllUserQuests(currentUserQuests);
@@ -884,14 +957,14 @@ public class StartupController extends EventController {
 		List<UserClan> userClans = getUserClanRetrieveUtils()
 				.getUserClansRelatedToUser(userId);
 		for (UserClan uc : userClans) {
-			resBuilder.addUserClanInfo(CreateInfoProtoUtils
+			resBuilder.addUserClanInfo(createInfoProtoUtils
 					.createFullUserClanProtoFromUserClan(uc));
 		}
 	}
 
 	private void setNoticesToPlayers(Builder resBuilder) {
 		/*NOTE: DB CALL*/
-		List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
+		List<String> notices = startupStuffRetrieveUtils.getAllActiveAlerts();
 		if (null != notices) {
 			for (String notice : notices) {
 				resBuilder.addNoticesToPlayers(notice);
@@ -907,7 +980,7 @@ public class StartupController extends EventController {
 
 		if (null != userMonsters && !userMonsters.isEmpty()) {
 			for (MonsterForUser mfu : userMonsters) {
-				FullUserMonsterProto fump = CreateInfoProtoUtils
+				FullUserMonsterProto fump = createInfoProtoUtils
 						.createFullUserMonsterProtoFromUserMonster(mfu);
 				resBuilder.addUsersMonsters(fump);
 			}
@@ -922,7 +995,7 @@ public class StartupController extends EventController {
 			Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing
 					.values();
 			for (MonsterHealingForUser mhfu : healingMonsters) {
-				UserMonsterHealingProto umhp = CreateInfoProtoUtils
+				UserMonsterHealingProto umhp = createInfoProtoUtils
 						.createUserMonsterHealingProtoFromObj(mhfu);
 				resBuilder.addMonstersHealing(umhp);
 			}
@@ -941,7 +1014,7 @@ public class StartupController extends EventController {
 			List<String> feederUserMonsterIds = new ArrayList<String>();
 			List<UserEnhancementItemProto> feederProtos = new ArrayList<UserEnhancementItemProto>();
 			for (MonsterEnhancingForUser mefu : enhancingMonsters) {
-				UserEnhancementItemProto ueip = CreateInfoProtoUtils
+				UserEnhancementItemProto ueip = createInfoProtoUtils
 						.createUserEnhancementItemProtoFromObj(mefu);
 
 				//TODO: if user has no monsters with null start time
@@ -967,7 +1040,7 @@ public class StartupController extends EventController {
 						enhancingMonsters);
 				deleteOrphanedEnhancements(userId, feederUserMonsterIds);
 			} else {
-				UserEnhancementProto uep = CreateInfoProtoUtils
+				UserEnhancementProto uep = createInfoProtoUtils
 						.createUserEnhancementProtoFromObj(userId, baseMonster,
 								feederProtos);
 
@@ -982,7 +1055,7 @@ public class StartupController extends EventController {
 		if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
 
 			for (MonsterEvolvingForUser mefu : userMonsterEvolving.values()) {
-				UserMonsterEvolutionProto uep = CreateInfoProtoUtils
+				UserMonsterEvolutionProto uep = createInfoProtoUtils
 						.createUserEvolutionProtoFromEvolution(mefu);
 
 				//TODO: NOTE THAT IF MORE THAN ONE EVOLUTION IS ALLLOWED AT A TIME, THIS METHOD
@@ -1035,7 +1108,7 @@ public class StartupController extends EventController {
 		/*NOTE: DB CALL*/
 		List<UserTaskCompleted> utcList = taskForUserCompletedRetrieveUtils
 				.getAllCompletedTasksForUser(userId);
-		List<UserTaskCompletedProto> utcpList = CreateInfoProtoUtils
+		List<UserTaskCompletedProto> utcpList = createInfoProtoUtils
 				.createUserTaskCompletedProto(utcList);
 		resBuilder.addAllCompletedTasks(utcpList);
 
@@ -1061,7 +1134,7 @@ public class StartupController extends EventController {
 				.getUserPersistentEventForUserId(userId);
 
 		for (EventPersistentForUser epfu : events) {
-			UserPersistentEventProto upep = CreateInfoProtoUtils
+			UserPersistentEventProto upep = createInfoProtoUtils
 					.createUserPersistentEventProto(epfu);
 			resBuilder.addUserEvents(upep);
 		}
@@ -1072,7 +1145,7 @@ public class StartupController extends EventController {
 		List<PvpBoardObstacleForUser> boList = pvpBoardObstacleForUserRetrieveUtil
 				.getPvpBoardObstacleForUserId(userId);
 		for (PvpBoardObstacleForUser pbofu : boList) {
-			UserPvpBoardObstacleProto upbop = CreateInfoProtoUtils
+			UserPvpBoardObstacleProto upbop = createInfoProtoUtils
 					.createUserPvpBoardObstacleProto(pbofu);
 			resBuilder.addUserPvpBoardObstacles(upbop);
 		}
@@ -1133,9 +1206,17 @@ public class StartupController extends EventController {
 		UUID defenderUuid = null;
 		boolean invalidUuids = true;
 
-		if(defenderId == null || defenderId.equalsIgnoreCase("")) {
-			try {
+		try {
+			if(defenderId != null && !defenderId.equalsIgnoreCase("")) {
 				defenderUuid = UUID.fromString(defenderId);
+
+			}
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format("UUID error. incorrect defenderId=%s",
+					defenderId), e);
+			invalidUuids = true;
+		}
 
 				invalidUuids = false;
 			} catch (Exception e) {
@@ -1169,9 +1250,9 @@ public class StartupController extends EventController {
 
 			//update hazelcast map and ready arguments for pvp battle history
 			int attackerCurElo = attackerPlfu.getElo() + eloAttackerLoses;
-			attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+			attackerCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
 					attackerCurElo, attackerPrevLeague);
-			attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(
+			attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(
 					attackerCurElo, attackerCurLeague);
 
 			int attacksLost = attackerPlfu.getAttacksLost() + 1;
@@ -1202,9 +1283,9 @@ public class StartupController extends EventController {
 				defenderPrevRank = defenderPlfu.getRank();
 				//update hazelcast map and ready arguments for pvp battle history
 				int defenderCurElo = defenderEloBefore + eloDefenderWins;
-				defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+				defenderCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
 						defenderCurElo, defenderPrevLeague);
-				defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(
+				defenderCurRank = pvpLeagueRetrieveUtils.getRankForElo(
 						defenderCurElo, defenderCurLeague);
 
 				int defensesWon = defenderPlfu.getDefensesWon() + 1;
@@ -1261,7 +1342,7 @@ public class StartupController extends EventController {
 	private void setOngoingTask(Builder resBuilder, String userId,
 			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
 		try {
-			MinimumUserTaskProto mutp = CreateInfoProtoUtils
+			MinimumUserTaskProto mutp = createInfoProtoUtils
 					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
 			resBuilder.setCurTask(mutp);
 
@@ -1293,7 +1374,7 @@ public class StartupController extends EventController {
 			for (Integer stageNum : stageNumToTsfu.keySet()) {
 				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
 
-				TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+				TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
 						taskId, stageNum, monsters);
 				resBuilder.addCurTaskStages(tsp);
 			}
@@ -1307,7 +1388,7 @@ public class StartupController extends EventController {
 
 	private void setAllStaticData(Builder resBuilder, String userId,
 			boolean userIdSet) {
-		StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet,
+		StaticDataProto sdp = miscMethods.getAllStaticData(userId, userIdSet,
 				getQuestForUserRetrieveUtils());
 
 		resBuilder.setStaticDataStuffProto(sdp);
@@ -1353,7 +1434,7 @@ public class StartupController extends EventController {
 			idsToAttackers, attackerIdsToProspectiveCashWinnings,
 			attackerIdsToProspectiveOilWinnings);
 
-		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
 				attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
@@ -1458,7 +1539,7 @@ public class StartupController extends EventController {
 						null);
 
 		for (AchievementForUser afu : achievementIdToUserAchievements.values()) {
-			UserAchievementProto uap = CreateInfoProtoUtils
+			UserAchievementProto uap = createInfoProtoUtils
 					.createUserAchievementProto(afu);
 			resBuilder.addUserAchievements(uap);
 		}
@@ -1475,7 +1556,7 @@ public class StartupController extends EventController {
 
 		List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
 				miniJobIdToUserMiniJobs.values());
-		List<UserMiniJobProto> umjpList = CreateInfoProtoUtils
+		List<UserMiniJobProto> umjpList = createInfoProtoUtils
 				.createUserMiniJobProtos(mjfuList, null);
 
 		resBuilder.addAllUserMiniJobProtos(umjpList);
@@ -1487,7 +1568,7 @@ public class StartupController extends EventController {
 				.getSpecificOrAllItemForUserMap(userId, null);
 
 		if (!itemIdToUserItems.isEmpty()) {
-			List<UserItemProto> uipList = CreateInfoProtoUtils
+			List<UserItemProto> uipList = createInfoProtoUtils
 					.createUserItemProtosFromUserItems(new ArrayList<ItemForUser>(
 							itemIdToUserItems.values()));
 
@@ -1499,7 +1580,7 @@ public class StartupController extends EventController {
 				.getItemForUserUsage(userId, null);
 
 		for (ItemForUserUsage ifuu : itemsUsed) {
-			UserItemUsageProto uiup = CreateInfoProtoUtils
+			UserItemUsageProto uiup = createInfoProtoUtils
 					.createUserItemUsageProto(ifuu);
 			resBuilder.addItemsInUse(uiup);
 		}
@@ -1531,7 +1612,7 @@ public class StartupController extends EventController {
 			giveGifts(userId, now, gifts, numGifts);
 		}
 
-		Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+		Collection<UserItemSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
 				.createUserItemSecretGiftProto(gifts);
 		resBuilder.addAllGifts(nuGiftsProtos);
 	}
@@ -1539,7 +1620,7 @@ public class StartupController extends EventController {
 	//need to enforce 2 gift minimum
 	private void giveGifts(String userId, long now,
 			Collection<ItemSecretGiftForUser> gifts, int numGifts) {
-		List<ItemSecretGiftForUser> giftList = RedeemSecretGiftAction
+		List<ItemSecretGiftForUser> giftList = secretGiftUtils
 				.calculateGiftsForUser(userId, numGifts, now);
 
 		List<String> ids = insertUtil
@@ -1570,7 +1651,7 @@ public class StartupController extends EventController {
 				.getAllResearchForUser(userId);
 
 		if (null != userResearchs && !userResearchs.isEmpty()) {
-			Collection<UserResearchProto> urpList = CreateInfoProtoUtils
+			Collection<UserResearchProto> urpList = createInfoProtoUtils
 					.createUserResearchProto(userResearchs);
 
 			resBuilder.addAllUserResearchs(urpList);
@@ -1581,45 +1662,114 @@ public class StartupController extends EventController {
 		List<BattleItemQueueForUser> biqfuList = battleItemQueueForUserRetrieveUtil
 				.getUserBattleItemQueuesForUser(userId);
 		if (null != biqfuList && !biqfuList.isEmpty()) {
-			Collection<BattleItemQueueForUserProto> biqfupList = CreateInfoProtoUtils
+			Collection<BattleItemQueueForUserProto> biqfupList = createInfoProtoUtils
 					.createBattleItemQueueForUserProtoList(biqfuList);
 
 			resBuilder.addAllBattleItemQueue(biqfupList);
 		}
 	}
 
-//	private void setSalesForUser(Builder resBuilder, User user) {
-//		//update user jump two tier's value
-//		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-//		if(salesJumpTwoTiers) {
-//			Date lastPurchaseTime = user.getLastPurchaseTime();
-//			if(lastPurchaseTime == null) {
-//				lastPurchaseTime = new Date();
-//				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
-//				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
-//			}
-//			Date now = new Date();
-//			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
-//			if(diffInDays > 5) {
-//				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
-//				salesJumpTwoTiers = false;
-//			}
-//		}
-//
-//		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-//		Map<Integer, Map<Integer, SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
-//				.getSalesItemIdsToSalesItemsForSalesPackIds();
-//		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
-//				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
-//		int userSalesValue = user.getSalesValue();
-//
-//		double newMinPrice = 0.0;
-//
+	public void setSalesForUser(Builder resBuilder, User user) {
+
+		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+
+		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
+				.getSalesItemIdsToSalesItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+		int userSalesValue = user.getSalesValue();
+
+		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
+
+		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
+			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {
+				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+
+				//get the sales items associated with this booster pack
+				List<SalesItem> salesItemsList = salesPackageIdToSalesItems
+						.get(salesPackageId);
+
+				//get the booster display items for this booster pack
+				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
+						.get(salesPackageId);
+				Collection<SalesDisplayItem> displayItems = null;
+				if (null != displayIdsToDisplayItems) {
+					ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+					displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+					Collections.sort(displayItemIds);
+
+					displayItems = new ArrayList<SalesDisplayItem>();
+
+					for (Integer displayItemId : displayItemIds) {
+						displayItems.add(displayIdsToDisplayItems
+								.get(displayItemId));
+					}
+				}
+
+				SalesPackageProto spProto = CreateInfoProtoUtils
+						.createSalesPackageProto(sp, salesItemsList, displayItems);
+				resBuilder.addSalesPackages(spProto);
+			}
+		}
+	}
+
+	public boolean updateUserSalesJumpTwoTiers(User user) {
+		//update user jump two tier's value
+		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		if(salesJumpTwoTiers) {
+			Date lastPurchaseTime = user.getLastPurchaseTime();
+			if(lastPurchaseTime == null) {
+				lastPurchaseTime = new Date();
+				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
+				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+			}
+			Date now = new Date();
+			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+			if(diffInDays > 5) {
+				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+				salesJumpTwoTiers = false;
+			}
+		}
+		return salesJumpTwoTiers;
+	}
+
+	public int priceForSalesPackToBeShown(int userSalesValue, boolean salesJumpTwoTiers) {
+
+		int newMinPrice = 0;
+
+		//arin's formula
+		if(userSalesValue == 0) {
+			newMinPrice = 5;
+		}
+		else if(userSalesValue == 1) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 20;
+			}
+			else newMinPrice = 10;
+		}
+		else if(userSalesValue == 2) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 50;
+			}
+			else newMinPrice = 20;
+		}
+		else if(userSalesValue == 3) {
+			if(salesJumpTwoTiers) {
+				newMinPrice = 100;
+			}
+			else newMinPrice = 50;
+		}
+		else newMinPrice = 100;
+
+		return newMinPrice;
+	}
+
 	private void setBattleItemForUser(Builder resBuilder, String userId) {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);
 		if (null != bifuList && !bifuList.isEmpty()) {
-			Collection<UserBattleItemProto> biqfupList = CreateInfoProtoUtils
+			Collection<UserBattleItemProto> biqfupList = createInfoProtoUtils
 					.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
 
 			resBuilder.addAllBattleItem(biqfupList);
@@ -1655,10 +1805,14 @@ public class StartupController extends EventController {
 		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
 				RetrieveMiniEventResponseProto.newBuilder();
 
+
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 				userId, now, userRetrieveUtils,
 				miniEventForUserRetrieveUtil,
-				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
+				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
+				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils,
+				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils,
+				miniEventLeaderboardRewardRetrieveUtils);
 
 		rmea.execute(rmeaResBuilder);
 //		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
@@ -1670,7 +1824,7 @@ public class StartupController extends EventController {
 		{
 			//get UserMiniEvent info and create the proto to set into resBuilder
 			//TODO: Consider protofying MiniEvent stuff
-			UserMiniEventProto umep = CreateInfoProtoUtils
+			UserMiniEventProto umep = createInfoProtoUtils
 					.createUserMiniEventProto(
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 							rmea.getMegfus(),
@@ -1701,7 +1855,7 @@ public class StartupController extends EventController {
 			return;
 		}
 
-		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+		PersistentClanEventClanInfoProto pcecip = createInfoProtoUtils
 				.createPersistentClanEventClanInfoProto(cepfc);
 		resBuilder.setCurRaidClanInfo(pcecip);
 
@@ -1719,7 +1873,7 @@ public class StartupController extends EventController {
 			return;
 		}
 
-		List<String> userMonsterIds = MonsterStuffUtils
+		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 		/*NOTE: DB CALL*/
@@ -1729,7 +1883,7 @@ public class StartupController extends EventController {
 				.getSpecificUserMonsters(userMonsterIds);
 
 		for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-			PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+			PersistentClanEventUserInfoProto pceuip = createInfoProtoUtils
 					.createPersistentClanEventUserInfoProto(cepfu,
 							idsToUserMonsters, null);
 			resBuilder.addCurRaidClanUserInfo(pceuip);
@@ -1763,7 +1917,7 @@ public class StartupController extends EventController {
 				rewards = timesToUserRewards.get(aDate);
 			}
 
-			PersistentClanEventRaidStageHistoryProto stageProto = CreateInfoProtoUtils
+			PersistentClanEventRaidStageHistoryProto stageProto = createInfoProtoUtils
 					.createPersistentClanEventRaidStageHistoryProto(cepfursh,
 							rewards);
 
@@ -1777,14 +1931,14 @@ public class StartupController extends EventController {
 	//
 	//    for (Monster b : bossIdsToBosses.values()) {
 	//      FullBossProto fbp =
-	//          CreateInfoProtoUtils.createFullBossProtoFromBoss(type, b);
+	//          createInfoProtoUtils.createFullBossProtoFromBoss(type, b);
 	//      resBuilder.addBosses(fbp);
 	//    }
 	//  }
 
 	// retrieve's the active leaderboard event prizes and rewards for the events
 	//  private void setLeaderboardEventStuff(StartupResponseProto.Builder resBuilder) {
-	//    resBuilder.addAllLeaderboardEvents(MiscMethods.currentTournamentEventProtos());
+	//    resBuilder.addAllLeaderboardEvents(miscMethods.currentTournamentEventProtos());
 	//  }
 
 	private void sendOfferChartInstall(Date installTime, String advertiserId) {
@@ -1952,7 +2106,7 @@ public class StartupController extends EventController {
 	//    long dateLastMillis = dateLastAwarded.getTime();
 	//    boolean awardedInThePast = nowDateMillis > dateLastMillis;
 	//
-	//    int dayDiff = MiscMethods.dateDifferenceInDays(dateLastAwarded, nowDate);
+	//    int dayDiff = miscMethods.dateDifferenceInDays(dateLastAwarded, nowDate);
 	//    // log.info("dateLastAwarded=" + dateLastAwarded + ", nowDate=" +
 	//    // nowDate + ", day difference=" + dayDiff);
 	//    if (1 < dayDiff && awardedInThePast) {
@@ -2036,9 +2190,9 @@ public class StartupController extends EventController {
 	//    String key = "";
 	//    int value = ControllerConstants.NOT_SET;
 	//
-	//    String silver = MiscMethods.silver;
-	//    String gold = MiscMethods.gold;
-	//    String boosterPackIdString = MiscMethods.boosterPackId;
+	//    String silver = miscMethods.silver;
+	//    String gold = miscMethods.gold;
+	//    String boosterPackIdString = miscMethods.boosterPackId;
 	//
 	//    // mimicking fall through in switch statement, setting reward user just
 	//    // got
@@ -2048,7 +2202,7 @@ public class StartupController extends EventController {
 	//      // need equip id
 	//      key = boosterPackIdString;
 	//      List<Integer> boosterPackIds = reward.getDayFiveBoosterPackIds();
-	//      value = MiscMethods.getRandomIntFromList(boosterPackIds);
+	//      value = miscMethods.getRandomIntFromList(boosterPackIds);
 	//    }
 	//    if (4 == numConsecutiveDaysPlayed) {
 	//      key = silver;
@@ -2090,7 +2244,7 @@ public class StartupController extends EventController {
 		//      List<Long> userEquipIds = new ArrayList<Long>();
 		//
 		//      // actually selecting equips
-		//      boolean resetOccurred = MiscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
+		//      boolean resetOccurred = miscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
 		//          boosterItemIdsToNumCollected, numBoosterItemsUserWants, aUser, aPack, itemsUserReceives,
 		//          collectedBeforeReset);
 		//      newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>(boosterItemIdsToNumCollected);
@@ -2100,7 +2254,7 @@ public class StartupController extends EventController {
 		//      if (successful) {
 		//        //exclude from daily limit check in PurchaseBoosterPackController
 		//        boolean excludeFromLimitCheck = true;
-		//        MiscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId,
+		//        miscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId,
 		//            numBoosterItemsUserWants, now, itemsUserReceives, excludeFromLimitCheck,
 		//            userEquipIds);
 		//        equipId = getEquipId(numBoosterItemsUserWants, itemsUserReceives);
@@ -2115,7 +2269,7 @@ public class StartupController extends EventController {
 	//  private int getEquipId(int numBoosterItemsUserWants, List<BoosterItem> itemsUserReceives) {
 	//    if (1 != numBoosterItemsUserWants) {
 	//      log.error("unexpected error: trying to buy more than one equip from booster pack. boosterItems="
-	//          + MiscMethods.shallowListToString(itemsUserReceives));
+	//          + miscMethods.shallowListToString(itemsUserReceives));
 	//      return ControllerConstants.NOT_SET;
 	//    }
 	//    BoosterItem bi = itemsUserReceives.get(0);
@@ -2129,19 +2283,19 @@ public class StartupController extends EventController {
 			List<Boolean> collectedBeforeReset, boolean resetOccurred,
 			Timestamp now, List<Long> userEquipIdsForHistoryTable) {
 		//    int userId = aUser.getId();
-		//    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId,
+		//    List<Long> userEquipIds = miscMethods.insertNewUserEquips(userId,
 		//        itemsUserReceives, now, ControllerConstants.UER__DAILY_BONUS_REWARD);
 		//    if (null == userEquipIds || userEquipIds.isEmpty() || userEquipIds.size() != itemsUserReceives.size()) {
 		//      log.error("unexpected error: failed to insert equip for user. boosteritems="
-		//          + MiscMethods.shallowListToString(itemsUserReceives) + "\t userEquipIds="+ userEquipIds);
+		//          + miscMethods.shallowListToString(itemsUserReceives) + "\t userEquipIds="+ userEquipIds);
 		//      return false;
 		//    }
 		//
-		//    if (!MiscMethods.updateUserBoosterItems(itemsUserReceives, collectedBeforeReset,
+		//    if (!miscMethods.updateUserBoosterItems(itemsUserReceives, collectedBeforeReset,
 		//        boosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, userId, resetOccurred)) {
 		//      // failed to update user_booster_items
 		//      log.error("unexpected error: failed to update user_booster_items for userId: " + userId
-		//          + " attempting to delete equips given: " + MiscMethods.shallowListToString(userEquipIds));
+		//          + " attempting to delete equips given: " + miscMethods.shallowListToString(userEquipIds));
 		//      DeleteUtils.get().deleteUserEquips(userEquipIds);
 		//      return false;
 		//    }
@@ -2173,7 +2327,7 @@ public class StartupController extends EventController {
 
 		int previousSilver = aUser.getCash();
 		int previousGold = aUser.getGems();
-		if (key.equals(MiscMethods.boosterPackId)) {
+		if (key.equals(miscMethods.boosterPackId)) {
 			// since user got a booster pack id as reward, need to "buy it" for
 			// him
 			int numBoosterItemsUserWants = 1;
@@ -2186,7 +2340,7 @@ public class StartupController extends EventController {
 				return false;
 			}
 		}
-		if (key.equals(MiscMethods.cash)) {
+		if (key.equals(miscMethods.cash)) {
 			if (!aUser.updateRelativeCashNaive(value)) {
 				log.error("unexpected error: could not give silver bonus of "
 						+ value + " to user " + aUser);
@@ -2196,7 +2350,7 @@ public class StartupController extends EventController {
 						currentDayReward);
 			}
 		}
-		if (key.equals(MiscMethods.gems)) {
+		if (key.equals(miscMethods.gems)) {
 			if (!aUser.updateRelativeGemsNaive(value, 0)) {
 				log.error("unexpected error: could not give silver bonus of "
 						+ value + " to user " + aUser);
@@ -2218,9 +2372,9 @@ public class StartupController extends EventController {
 		//    boolean isCoins = false;
 		//    int boosterPackIdRewarded = ControllerConstants.NOT_SET;
 		//
-		//    String boosterPackId = MiscMethods.boosterPackId;
-		//    String silver = MiscMethods.silver;
-		//    String gold = MiscMethods.gold;
+		//    String boosterPackId = miscMethods.boosterPackId;
+		//    String silver = miscMethods.silver;
+		//    String gold = miscMethods.gold;
 		//    if (rewardForUser.containsKey(boosterPackId)) {
 		//      boosterPackIdRewarded = rewardForUser.get(boosterPackId);
 		//    }
@@ -2262,7 +2416,7 @@ public class StartupController extends EventController {
 	//      Map<Integer, BoosterItem> biMap = BoosterItemRetrieveUtils
 	//          .getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 	//      Collection<BoosterItem> biList = biMap.values();
-	//      BoosterPackProto aBoosterPackProto = CreateInfoProtoUtils.createBoosterPackProto(bp, biList);
+	//      BoosterPackProto aBoosterPackProto = createInfoProtoUtils.createBoosterPackProto(bp, biList);
 	//      dbib.setBoosterPack(aBoosterPackProto);
 	//
 	//      // log.info("setting 5th consecutive day reward");
@@ -2335,10 +2489,10 @@ public class StartupController extends EventController {
 
 	private void setConstants(Builder startupBuilder,
 			StartupStatus startupStatus) {
-		startupBuilder.setStartupConstants(MiscMethods
+		startupBuilder.setStartupConstants(miscMethods
 				.createStartupConstantsProto(globals));
 		if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
-			TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
+			TutorialConstants tc = miscMethods.createTutorialConstantsProto();
 			startupBuilder.setTutorialConstants(tc);
 		}
 	}
@@ -2346,8 +2500,8 @@ public class StartupController extends EventController {
 	//TODO: FIX THIS
 	public void writeToUserCurrencyHistory(User aUser, String goldSilver,
 			int previousMoney, Map<String, Integer> goldSilverChange) {
-		//String cash = MiscMethods.cash;
-		//String gems = MiscMethods.gems;
+		//String cash = miscMethods.cash;
+		//String gems = miscMethods.gems;
 
 		//    Timestamp date = new Timestamp((new Date()).getTime());
 		//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
@@ -2362,7 +2516,7 @@ public class StartupController extends EventController {
 		//      reasonsForChanges.put(gems, reasonForChange);
 		//    }
 		//
-		//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+		//    miscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 		//        previousGoldSilver, reasonsForChanges);
 	}
 
@@ -2766,6 +2920,127 @@ public class StartupController extends EventController {
 		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
 	}
 
+	public TranslationSettingsForUserRetrieveUtil getTranslationSettingsForUserRetrieveUtil() {
+		return translationSettingsForUserRetrieveUtil;
+	}
+
+	public void setTranslationSettingsForUserRetrieveUtil(
+			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
+		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public StartupStuffRetrieveUtils getStartupStuffRetrieveUtils() {
+		return startupStuffRetrieveUtils;
+	}
+
+	public void setStartupStuffRetrieveUtils(
+			StartupStuffRetrieveUtils startupStuffRetrieveUtils) {
+		this.startupStuffRetrieveUtils = startupStuffRetrieveUtils;
+	}
+
+	public QuestRetrieveUtils getQuestRetrieveUtils() {
+		return questRetrieveUtils;
+	}
+
+	public void setQuestRetrieveUtils(QuestRetrieveUtils questRetrieveUtils) {
+		this.questRetrieveUtils = questRetrieveUtils;
+	}
+
+	public PvpLeagueRetrieveUtils getPvpLeagueRetrieveUtils() {
+		return pvpLeagueRetrieveUtils;
+	}
+
+	public void setPvpLeagueRetrieveUtils(
+			PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils) {
+		this.pvpLeagueRetrieveUtils = pvpLeagueRetrieveUtils;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
+	}
+
+	public SecretGiftUtils getSecretGiftUtils() {
+		return secretGiftUtils;
+	}
+
+	public void setSecretGiftUtils(SecretGiftUtils secretGiftUtils) {
+		this.secretGiftUtils = secretGiftUtils;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public MiniEventGoalRetrieveUtils getMiniEventGoalRetrieveUtils() {
+		return miniEventGoalRetrieveUtils;
+	}
+
+	public void setMiniEventGoalRetrieveUtils(
+			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils) {
+		this.miniEventGoalRetrieveUtils = miniEventGoalRetrieveUtils;
+	}
+
+	public MiniEventForPlayerLvlRetrieveUtils getMiniEventForPlayerLvlRetrieveUtils() {
+		return miniEventForPlayerLvlRetrieveUtils;
+	}
+
+	public void setMiniEventForPlayerLvlRetrieveUtils(
+			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils) {
+		this.miniEventForPlayerLvlRetrieveUtils = miniEventForPlayerLvlRetrieveUtils;
+	}
+
+	public MiniEventRetrieveUtils getMiniEventRetrieveUtils() {
+		return miniEventRetrieveUtils;
+	}
+
+	public void setMiniEventRetrieveUtils(
+			MiniEventRetrieveUtils miniEventRetrieveUtils) {
+		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
+	}
+
+	public MiniEventTierRewardRetrieveUtils getMiniEventTierRewardRetrieveUtils() {
+		return miniEventTierRewardRetrieveUtils;
+	}
+
+	public void setMiniEventTierRewardRetrieveUtils(
+			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils) {
+		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
+	}
+
+	public MiniEventLeaderboardRewardRetrieveUtils getMiniEventLeaderboardRewardRetrieveUtils() {
+		return miniEventLeaderboardRewardRetrieveUtils;
+	}
+
+	public void setMiniEventLeaderboardRewardRetrieveUtils(
+			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils) {
+		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
+	}
+
 	public InsertUtil getInsertUtil() {
 		return insertUtil;
 	}
@@ -2780,6 +3055,50 @@ public class StartupController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+		return salesPackageRetrieveUtils;
+	}
+
+	public void setSalesPackageRetrieveUtils(
+			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+	}
+
+	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
+		return salesItemRetrieveUtils;
+	}
+
+	public void setSalesItemRetrieveUtils(
+			SalesItemRetrieveUtils salesItemRetrieveUtils) {
+		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
+	}
+
+	public SalesDisplayItemRetrieveUtils getSalesDisplayItemRetrieveUtils() {
+		return salesDisplayItemRetrieveUtils;
+	}
+
+	public void setSalesDisplayItemRetrieveUtils(
+			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils) {
+		this.salesDisplayItemRetrieveUtils = salesDisplayItemRetrieveUtils;
 	}
 
 }

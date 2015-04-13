@@ -25,7 +25,9 @@ import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -45,13 +47,23 @@ public class RedeemMiniEventRewardAction {
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private MonsterStuffUtils monsterStuffUtils;
+	private MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtils;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
 			Date clientTime, UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			MonsterStuffUtils monsterStuffUtils,
+			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils,
+			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
+			RewardRetrieveUtils rewardRetrieveUtils,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -65,6 +77,11 @@ public class RedeemMiniEventRewardAction {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
+		this.miniEventForPlayerLvlRetrieveUtils = miniEventForPlayerLvlRetrieveUtils;
+		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -123,7 +140,7 @@ public class RedeemMiniEventRewardAction {
 
 	private boolean verifySemantics(Builder resBuilder) {
 		//check to make sure the MiniEventForPlayerLvl exists
-		MiniEventForPlayerLvl me = MiniEventForPlayerLvlRetrieveUtils
+		MiniEventForPlayerLvl me = miniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvlById(mefplId);
 
 		if (null == me) {
@@ -132,7 +149,7 @@ public class RedeemMiniEventRewardAction {
 		}
 
 		//check to see there are rewards
-		miniEventTierRewards = MiniEventTierRewardRetrieveUtils
+		miniEventTierRewards = miniEventTierRewardRetrieveUtils
 				.getMiniEventTierReward(mefplId);
 		log.info("all MiniEventTierRewards: {}", miniEventTierRewards);
 
@@ -190,7 +207,7 @@ public class RedeemMiniEventRewardAction {
 		sb.append(ControllerConstants.MFUSOP__REDEEM_MINI_EVENT_REWARD);
 		for (MiniEventTierReward metr : miniEventTierRewards) {
 			int rewardId = metr.getRewardId();
-			Reward r = RewardRetrieveUtils.getRewardById(rewardId);
+			Reward r = rewardRetrieveUtils.getRewardById(rewardId);
 
 			rewards.add(r);
 
@@ -206,7 +223,8 @@ public class RedeemMiniEventRewardAction {
 		ara = new AwardRewardAction(userId, user, maxCash, maxOil,
 				clientTime, sb.toString(), rewards,
 				userRetrieveUtil, itemForUserRetrieveUtil,
-				insertUtil, updateUtil);
+				insertUtil, updateUtil, monsterStuffUtils,
+				monsterLevelInfoRetrieveUtils);
 
 		boolean awardedRewards = ara.execute();
 

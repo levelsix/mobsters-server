@@ -38,6 +38,9 @@ public class UpdateUserCurrencyController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	public UpdateUserCurrencyController() {
 		numAllocatedThreads = 4;
@@ -131,7 +134,7 @@ public class UpdateUserCurrencyController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -268,13 +271,13 @@ public class UpdateUserCurrencyController extends EventController {
 			return false;
 		} else {
 			if (0 != gemsChange) {
-				currencyChange.put(MiscMethods.gems, gemsChange);
+				currencyChange.put(miscMethods.gems, gemsChange);
 			}
 			if (0 != cashChange) {
-				currencyChange.put(MiscMethods.cash, cashChange);
+				currencyChange.put(miscMethods.cash, cashChange);
 			}
 			if (0 != oilChange) {
-				currencyChange.put(MiscMethods.oil, oilChange);
+				currencyChange.put(miscMethods.oil, oilChange);
 			}
 		}
 
@@ -305,9 +308,9 @@ public class UpdateUserCurrencyController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = MiscMethods.gems;
-		String cash = MiscMethods.cash;
-		String oil = MiscMethods.oil;
+		String gems = miscMethods.gems;
+		String cash = miscMethods.cash;
+		String oil = miscMethods.oil;
 
 		previousCurrency.put(gems, previousGems);
 		previousCurrency.put(cash, previousCash);
@@ -322,7 +325,7 @@ public class UpdateUserCurrencyController extends EventController {
 		detailsMap.put(cash, details);
 		detailsMap.put(oil, details);
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

@@ -56,7 +56,11 @@ public class User implements Serializable {
 	private String pvpDefendingMessage;
 	private Date lastTeamDonateSolicitation;
 	private boolean boughtRiggedBoosterPack;
+	private int salesValue;
+	private Date lastPurchaseTime;
+	private boolean salesJumpTwoTiers;
 	private long totalStrength;
+
 
 	public User() {
 		super();
@@ -76,8 +80,10 @@ public class User implements Serializable {
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
-			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack, 
+			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
+			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
 			long totalStrength) {
+
 		super();
 		this.id = id;
 		this.name = name;
@@ -120,7 +126,19 @@ public class User implements Serializable {
 		this.pvpDefendingMessage = pvpDefendingMessage;
 		this.lastTeamDonateSolicitation = lastTeamDonateSolicitation;
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
+		this.salesValue = salesValue;
+		this.lastPurchaseTime = lastPurchaseTime;
+		this.salesJumpTwoTiers = salesJumpTwoTiers;
 		this.totalStrength = totalStrength;
+
+	}
+
+	public boolean isSalesJumpTwoTiers() {
+		return salesJumpTwoTiers;
+	}
+
+	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
+		this.salesJumpTwoTiers = salesJumpTwoTiers;
 	}
 
 	public long getTotalStrength() {
@@ -129,6 +147,7 @@ public class User implements Serializable {
 
 	public void setTotalStrength(long totalStrength) {
 		this.totalStrength = totalStrength;
+ 
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1447,6 +1466,8 @@ public class User implements Serializable {
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
@@ -1477,8 +1498,26 @@ public class User implements Serializable {
 				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
 				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
 				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
-				+ boughtRiggedBoosterPack + ", totalStrength=" + totalStrength
-				+ "]";
+				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
+				+ ", lastPurchaseTime=" + lastPurchaseTime
+				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
+				+ ", totalStrength=" + totalStrength + "]";
+	}
+
+	public int getSalesValue() {
+		return salesValue;
+	}
+
+	public void setSalesValue(int salesValue) {
+		this.salesValue = salesValue;
+	}
+
+	public Date getLastPurchaseTime() {
+		return lastPurchaseTime;
+	}
+
+	public void setLastPurchaseTime(Date lastPurchaseTime) {
+		this.lastPurchaseTime = lastPurchaseTime;
 	}
 
 }

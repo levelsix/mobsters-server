@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -32,6 +33,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class StructureForUserRetrieveUtils2 {
 
+	
+	@Autowired
+	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
@@ -70,7 +75,7 @@ public class StructureForUserRetrieveUtils2 {
 			String userStructId) {
 		log.debug(String.format("retrieving money tree for userId %s", userId));
 
-		Map<Integer, StructureMoneyTree> moneyTreesMap = StructureMoneyTreeRetrieveUtils
+		Map<Integer, StructureMoneyTree> moneyTreesMap = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
 		List<StructureForUser> returnList = new ArrayList<StructureForUser>();
 

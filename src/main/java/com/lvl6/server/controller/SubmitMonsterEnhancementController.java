@@ -56,6 +56,9 @@ public class SubmitMonsterEnhancementController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
 	@Autowired
 	protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
@@ -64,6 +67,9 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -104,7 +110,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 		int maxOil = senderResourcesProto.getMaxOil();
 
-		Map<String, UserEnhancementItemProto> newMap = MonsterStuffUtils
+		Map<String, UserEnhancementItemProto> newMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
 
 		//set some values to send to the client (the response proto)
@@ -195,7 +201,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -284,7 +290,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 			}
 
 			//retain only the userMonsters in newMap that are not in evolutions
-			Set<String> idsInEvolutions = MonsterStuffUtils
+			Set<String> idsInEvolutions = monsterStuffUtils
 					.getUserMonsterIdsUsedInEvolution(evolution, null);
 			if (!Collections.disjoint(idsInEvolutions, newMapIds)) {
 				log.error("some monsters are evolving. evolving={}, newMap={}",
@@ -420,10 +426,10 @@ public class SubmitMonsterEnhancementController extends EventController {
 			} else {
 				//everything went well
 				if (0 != oilChange) {
-					money.put(MiscMethods.oil, oilChange);
+					money.put(miscMethods.oil, oilChange);
 				}
 				if (0 != gemsSpent) {
-					money.put(MiscMethods.gems, gemChange);
+					money.put(miscMethods.gems, gemChange);
 				}
 			}
 		}
@@ -445,7 +451,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		//	  		uId, protoUpdateMap);
 		//		log.info(String.format("updateMap=%s", updateMap));
 		//		
-		List<MonsterEnhancingForUser> newMap = MonsterStuffUtils
+		List<MonsterEnhancingForUser> newMap = monsterStuffUtils
 				.convertToMonsterEnhancingForUser(uId, protoNewMap);
 		log.info(String.format("newMap=%s", newMap));
 
@@ -515,8 +521,8 @@ public class SubmitMonsterEnhancementController extends EventController {
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reason = ControllerConstants.UCHRFC__ENHANCING;
-		String oil = MiscMethods.oil;
-		String gems = MiscMethods.gems;
+		String oil = miscMethods.oil;
+		String gems = miscMethods.gems;
 
 		previousCurrency.put(oil, previousOil);
 		previousCurrency.put(gems, previousGems);
@@ -528,7 +534,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		detailsMap.put(oil, detailsSb.toString());
 		detailsMap.put(gems, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

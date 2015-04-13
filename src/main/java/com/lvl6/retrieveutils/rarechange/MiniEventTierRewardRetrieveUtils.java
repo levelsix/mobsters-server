@@ -29,7 +29,7 @@ public class MiniEventTierRewardRetrieveUtils {
 	private static Map<Integer, MiniEventTierReward> idToMiniEventTierReward;
 	private static Map<Integer, Collection<MiniEventTierReward>> mefplIdToReward;
 
-	public static Map<Integer, MiniEventTierReward> getAllIdsToMiniEventTierRewards() {
+	public Map<Integer, MiniEventTierReward> getAllIdsToMiniEventTierRewards() {
 		if (null == idToMiniEventTierReward) {
 			setStaticIdsToMiniEventTierRewards();
 		}
@@ -37,7 +37,7 @@ public class MiniEventTierRewardRetrieveUtils {
 		return idToMiniEventTierReward;
 	}
 
-	public static MiniEventTierReward getMiniEventTierRewardById(int id) {
+	public MiniEventTierReward getMiniEventTierRewardById(int id) {
 		if (null == idToMiniEventTierReward) {
 			setStaticIdsToMiniEventTierRewards();
 		}
@@ -48,7 +48,7 @@ public class MiniEventTierRewardRetrieveUtils {
 		return ep;
 	}
 
-	public static Collection<MiniEventTierReward> getMiniEventTierReward(int mefplId)
+	public Collection<MiniEventTierReward> getMiniEventTierReward(int mefplId)
 	{
 		if (null == mefplIdToReward) {
 			log.warn("no MiniEventTierRewards");
@@ -64,11 +64,11 @@ public class MiniEventTierRewardRetrieveUtils {
 		return mefplIdToReward.get(mefplId);
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdsToMiniEventTierRewards();
 	}
 
-	private static void setStaticIdsToMiniEventTierRewards() {
+	private void setStaticIdsToMiniEventTierRewards() {
 		log.debug("setting static map of id to MiniEventTierReward");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -121,7 +121,7 @@ public class MiniEventTierRewardRetrieveUtils {
 		}
 	}
 
-	private static MiniEventTierReward convertRSRowToMiniEventTierReward(ResultSet rs)
+	private MiniEventTierReward convertRSRowToMiniEventTierReward(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MINI_EVENT_TIER_REWARD__ID);
 		int mefplId = rs.getInt(DBConstants.MINI_EVENT_TIER_REWARD__MINI_EVENT_FOR_PLAYER_LVL_ID);
