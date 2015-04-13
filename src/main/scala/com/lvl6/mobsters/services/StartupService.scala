@@ -13,9 +13,8 @@ import java.util.UUID
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
-import scala.concurrent.ExecutionContext.Implicits.global
+import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
-import scala.concurrent.future
 
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
