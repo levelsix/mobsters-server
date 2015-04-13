@@ -679,11 +679,13 @@ class StartupService extends LazyLogging{
               feederUserMonsterIds.add(mefu.getMonsterForUserId)
             }
           }
-          if(baseMonster == null && !feederUserMonsterIds.isEmpty()) {
+          if(baseMonster == null ) {
             logger.error(s"no base monster enhancement. deleting inEnhancing=$userMonstersEnhancing.values()")
             try {
-              val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(userId, feederUserMonsterIds)
-              logger.info(s"numDeleted enhancements: $numDeleted")
+              if(!feederUserMonsterIds.isEmpty()) {
+                val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(userId, feederUserMonsterIds)
+                logger.info(s"numDeleted enhancements: $numDeleted")
+              }
             }catch{
               case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
             }
