@@ -1673,11 +1673,12 @@ public class StartupController extends EventController {
 		int userSalesValue = user.getSalesValue();
 
 		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
+		Date now = new Date();
 
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
-			if(idsToSalesPackages.get(salesPackageId).getPrice() == newMinPrice) {
-				SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-
+			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+			if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
+					(sp.getTimeEnd().getTime() > now.getTime())) {
 				//get the sales items associated with this booster pack
 				List<SalesItem> salesItemsList = salesPackageIdToSalesItems
 						.get(salesPackageId);
