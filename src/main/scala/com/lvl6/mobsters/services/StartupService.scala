@@ -401,7 +401,7 @@ class StartupService extends LazyLogging{
       logger.info(s"no major update... getting user info")
       val userId = playerId;
       val userInfo:Future[PvpLeagueForUser] = for{
-        sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
+        //sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
         suci <-    setUserClanInfos(resBuilder, userId)
         sntp <-    setNoticesToPlayers(resBuilder)
         sums <-    setUserMonsterStuff(resBuilder, userId)
