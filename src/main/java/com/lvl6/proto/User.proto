@@ -123,12 +123,11 @@ message FullUserProto {
 	
 	optional string pvpDefendingMessage = 56;
 	optional int64 lastTeamDonationSolicitation = 57;
-	optional int64 totalStrength = 58;
+	optional int64 totalStrength = 60;
 	
 	optional float salesValue = 58;
 	optional int64 salesLastPurchaseTime = 59;
 
-	optional int64 totalStrength = 60;
 	
 	
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this

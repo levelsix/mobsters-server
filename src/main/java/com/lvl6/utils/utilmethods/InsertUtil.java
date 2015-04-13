@@ -162,13 +162,8 @@ public interface InsertUtil {
 			List<String> contents, List<Date> timeOfPosts);
 
 	public abstract String insertIntoChatTranslations(ChatType chatType, String chatId,
-			TranslateLanguages language, String message, ChatTranslationsRetrieveUtils 
+			TranslateLanguages language, String message, ChatTranslationsRetrieveUtils
 			chatTranslationsRetrieveUtils);
-	
-	public abstract boolean insertTranslateSettings(String receiverId, String senderId, 
-			String language, String chatType, boolean translateOn);
-	
-	public abstract boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats);
 
 	public abstract boolean insertTranslateSettings(String receiverId, String senderId,
 			String language, String chatType, boolean translateOn);
@@ -342,6 +337,6 @@ public interface InsertUtil {
 			Collection<MiniEventGoalForUser> megfus);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts, 
+			List<PrivateChatPost> listOfPrivateChatPosts,
 			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
 }
