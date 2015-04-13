@@ -403,13 +403,13 @@ public class InAppPurchaseSalesAction {
 
 	public void processPurchase(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
+		prevCurrencies.put(MiscMethods.gems, user.getGems());
 
 		if (gemChange != 0) {
-
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
 			user.updateRelativeCashAndOilAndGems(0, 0, gemChange);
 		}
+
 		prepCurrencyHistory();
 	}
 
@@ -520,10 +520,8 @@ public class InAppPurchaseSalesAction {
 		currencyDeltas.put(gems, gemChange);
 
 		reasonsForChanges = new HashMap<String, String>();
-		if (0 != gemChange) {
-			reasonsForChanges.put(gems,
-					ControllerConstants.UCHRFC__IN_APP_PURCHASE_SALES_PACK);
-		}
+		reasonsForChanges.put(gems,
+				ControllerConstants.UCHRFC__IN_APP_PURCHASE_SALES_PACK);
 		details = new HashMap<String, String>();
 		details.put(gems, "buying sales pack with uuid " + uuid);
 	}
