@@ -417,7 +417,7 @@ class StartupService extends LazyLogging{
         sr   <-    setResearch(resBuilder, playerId)
         sbifu <-   setBattleItemForUser(resBuilder, playerId)
         sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
-        smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
+        //smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
         scrs  <-   setClanRaidStuff(resBuilder, user, playerId, now)
         plfu  <-   pvpBattleStuff(resBuilder, user, playerId, freshRestart, now)
       } yield plfu
