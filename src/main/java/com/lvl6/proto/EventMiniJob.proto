@@ -120,6 +120,9 @@ message RefreshMiniJobRequestProto {
 	optional int32 gemsSpent = 5;
 	optional Quality minQualitySpawned = 6;
 	optional int64 clientTime = 7;
+	
+	//id of structure (that user built) that controls mini jobs
+	optional int32 structId = 8;
 }
 
 
