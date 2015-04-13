@@ -8,7 +8,7 @@ object Metrics {
   
   var reg:MetricRegistry = null
   def registry = {
-   if(reg == null) reg = AppContext.getApplicationContext.getBean(classOf[MetricRegistry])
+   if(reg == null) reg = AppContext.getApplicationContext.getBean("metrics").asInstanceOf[MetricRegistry]
    reg
   }
   
