@@ -80,6 +80,7 @@ enum ResearchType {
 	RESOURCE_STORAGE = 17;
 	UNLOCK_ITEM = 18;
 	UNLOCK_OBSTACLE = 19;
+	RESOURCE_GENERATOR_STORAGE = 20;
 }
 
 enum ResearchDomain {
