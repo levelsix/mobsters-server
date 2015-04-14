@@ -992,6 +992,7 @@ public class DBConstants {
 	public static final String ITEM__ALWAYS_DISPLAY_TO_USER = "always_display_to_user";
 	public static final String ITEM__SHORT_NAME = "short_name";
 	public static final String ITEM__ACTION_GAME_TYPE = "action_game_type";
+	public static final String ITEM__QUALITY = "quality";
 
 	public static final String MINI_EVENT__ID = GENERIC__ID;
 	public static final String MINI_EVENT__START_TIME = "start_time";
