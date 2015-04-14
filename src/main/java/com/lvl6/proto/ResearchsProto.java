@@ -89,6 +89,10 @@ public final class ResearchsProto {
      * <code>UNLOCK_OBSTACLE = 19;</code>
      */
     UNLOCK_OBSTACLE(18, 19),
+    /**
+     * <code>RESOURCE_GENERATOR_STORAGE = 20;</code>
+     */
+    RESOURCE_GENERATOR_STORAGE(19, 20),
     ;
 
     /**
@@ -167,6 +171,10 @@ public final class ResearchsProto {
      * <code>UNLOCK_OBSTACLE = 19;</code>
      */
     public static final int UNLOCK_OBSTACLE_VALUE = 19;
+    /**
+     * <code>RESOURCE_GENERATOR_STORAGE = 20;</code>
+     */
+    public static final int RESOURCE_GENERATOR_STORAGE_VALUE = 20;
 
 
     public final int getNumber() { return value; }
@@ -192,6 +200,7 @@ public final class ResearchsProto {
         case 17: return RESOURCE_STORAGE;
         case 18: return UNLOCK_ITEM;
         case 19: return UNLOCK_OBSTACLE;
+        case 20: return RESOURCE_GENERATOR_STORAGE;
         default: return null;
       }
     }
@@ -4350,7 +4359,7 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010*\266\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\017\n\013" +
+      "(\010*\326\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\017\n\013" +
       "HP_INCREASE\020\002\022\023\n\017ATTACK_INCREASE\020\003\022\022\n\016SP",
       "EED_INCREASE\020\004\022\020\n\014HEALING_COST\020\005\022\021\n\rHEAL" +
       "ING_SPEED\020\006\022\020\n\014ENHANCE_COST\020\007\022\031\n\025DECREAS" +
@@ -4361,10 +4370,11 @@ public final class ResearchsProto {
       "TION_SPEED\020\016\022\030\n\024ITEM_PRODUCTION_COST\020\017\022\027" +
       "\n\023RESOURCE_PRODUCTION\020\020\022\024\n\020RESOURCE_STOR" +
       "AGE\020\021\022\017\n\013UNLOCK_ITEM\020\022\022\023\n\017UNLOCK_OBSTACL" +
-      "E\020\023*z\n\016ResearchDomain\022\r\n\tNO_DOMAIN\020\001\022\013\n\007",
-      "HEALING\020\002\022\r\n\tENHANCING\020\003\022\n\n\006BATTLE\020\004\022\r\n\t" +
-      "RESOURCES\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBST" +
-      "ACLES\020\007B\020B\016ResearchsProto"
+      "E\020\023\022\036\n\032RESOURCE_GENERATOR_STORAGE\020\024*z\n\016R",
+      "esearchDomain\022\r\n\tNO_DOMAIN\020\001\022\013\n\007HEALING\020" +
+      "\002\022\r\n\tENHANCING\020\003\022\n\n\006BATTLE\020\004\022\r\n\tRESOURCE" +
+      "S\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBSTACLES\020\007B" +
+      "\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
