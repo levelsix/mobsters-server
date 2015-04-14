@@ -21,6 +21,8 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanGift;
+import com.lvl6.info.ClanGiftRewards;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.EventPersistent;
@@ -34,7 +36,6 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Reward;
-
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
@@ -65,6 +66,7 @@ import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoardProto.BoardLayoutProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
+import com.lvl6.proto.ClanGiftsProto.ClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
@@ -73,7 +75,6 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
-
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
@@ -110,6 +111,8 @@ import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -133,7 +136,6 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
-
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -172,191 +174,197 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //	snapshot of all static data.
 @Component
 public class StaticDataContainer {
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected AchievementRetrieveUtils achievementRetrieveUtils;
-	
+
 	@Autowired
 	protected BannedUserRetrieveUtils bannedUserRetrieveUtils;
-	
+
 	@Autowired
 	protected BattleItemRetrieveUtils battleItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoardObstacleRetrieveUtils boardObstacleRetrieveUtils;
-	
+
 	@Autowired
 	protected BoardRetrieveUtils boardRetrieveUtils;
 
 	@Autowired
 	protected BoardPropertyRetrieveUtils boardPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterDisplayItemRetrieveUtils boosterDisplayItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	
+
+	@Autowired
+	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
 	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidRetrieveUtils clanRaidRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected EventPersistentRetrieveUtils eventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
-	
+
 	@Autowired
 	protected GoldSaleRetrieveUtils goldSaleRetrieveUtils;
-	
+
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterBattleDialogueRetrieveUtils monsterBattleDialogueRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected ObstacleRetrieveUtils obstacleRetrieveUtils;
-	
+
 	@Autowired
 	protected PrerequisiteRetrieveUtils prerequisiteRetrieveUtils;
-	
+
 	@Autowired
 	protected ProfanityRetrieveUtils profanityRetrieveUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobRetrieveUtils questJobRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillPropertyRetrieveUtils skillPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillSideEffectRetrieveUtils skillSideEffectRetrieveUtils;
-	
+
 	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
- 
+
 	@Autowired
 	protected StaticUserLevelInfoRetrieveUtils staticUserLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureBattleItemFactoryRetrieveUtils structureBattleItemFactoryRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureClanHouseRetrieveUtils structureClanHouseRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureEvoChamberRetrieveUtils structureEvoChamberRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureHospitalRetrieveUtils structureHospitalRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureLabRetrieveUtils structureLabRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureMiniJobRetrieveUtils structureMiniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	
+
 	@Autowired
 	protected StructurePvpBoardRetrieveUtils structurePvpBoardRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResearchHouseRetrieveUtils structureResearchHouseRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResidenceRetrieveUtils structureResidenceRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceStorageRetrieveUtils structureResourceStorageRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureTeamCenterRetrieveUtils structureTeamCenterRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureTownHallRetrieveUtils structureTownHallRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
-	
-	
+
+
 
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -404,6 +412,7 @@ public class StaticDataContainer {
 		setBattleItem(sdpb);
 		setRewards(sdpb);
 		setSales(sdpb);
+		setClanGifts(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -1075,14 +1084,15 @@ public class StaticDataContainer {
 			sdpb.addBattleItem(bip);
 		}
 	}
-	
+
 	private void setSales(Builder sdpb) {
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
 				.getSalesPackageIdsToSalesPackages();
 		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
-		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
-				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems =
+				salesDisplayItemRetrieveUtils.
+				getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 
 		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
@@ -1090,10 +1100,10 @@ public class StaticDataContainer {
 			//get the sales items associated with this booster pack
 			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
 					.get(salesPackageId);
-			
+
 			//get the booster display items for this booster pack
-			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
-					.get(salesPackageId);
+			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems =
+					salesPackageIdToDisplayIdsToDisplayItems.get(salesPackageId);
 			Collection<SalesDisplayItem> displayItems = null;
 			if (null != displayIdsToDisplayItems) {
 				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
@@ -1107,9 +1117,9 @@ public class StaticDataContainer {
 							.get(displayItemId));
 				}
 			}
-			
-			SalesPackageProto spProto = CreateInfoProtoUtils
-					.createSalesPackageProto(sp, salesItemList, displayItems);			
+
+			SalesPackageProto spProto = createInfoProtoUtils
+					.createSalesPackageProto(sp, salesItemList, displayItems);
 		}
 	}
 
@@ -1130,6 +1140,23 @@ public class StaticDataContainer {
 					.createRewardProto(r);
 
 			sdpb.addReward(rp);
+		}
+	}
+
+	private void setClanGifts(Builder sdpb) {
+		Map<Integer, ClanGift> idsToClanGift = clanGiftRetrieveUtils.getClanGiftIdsToClanGifts();
+
+		if(null == idsToClanGift || idsToClanGift.isEmpty()) {
+			log.warn("setClanGifts no clan gifts");
+			return;
+		}
+
+		for(Integer clanGiftId : idsToClanGift.keySet()) {
+			ClanGift cg = idsToClanGift.get(clanGiftId);
+			List<ClanGiftRewards> clanGiftRewardsList = clanGiftRewardsRetrieveUtils.getClanGiftRewardsForClanGift(clanGiftId);
+
+			ClanGiftProto cgp = createInfoProtoUtils.createClanGiftProto(cg, clanGiftRewardsList);
+			sdpb.addClanGifts(cgp);
 		}
 	}
 
