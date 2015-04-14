@@ -75,3 +75,8 @@ message UserItemSecretGiftProto {
 	optional int64 createTime = 5;
 }
 
+//------------------------------------------------------------------------------------------
+message ItemGemPriceProto {
+	optional int32 itemId = 1;
+	optional int32 gemPrice = 2;
+}
