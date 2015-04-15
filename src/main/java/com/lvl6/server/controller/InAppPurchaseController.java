@@ -381,7 +381,7 @@ public class InAppPurchaseController extends EventController {
 				iapsa.execute(resBuilder);
 			}
 			else {
-				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, now,
+				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,
 						uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
 						miscMethods, inAppPurchaseUtils);
 
