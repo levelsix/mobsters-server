@@ -1091,7 +1091,7 @@ public class StaticDataContainer {
 
 			SalesPackageProto spProto = inAppPurchaseUtils
 					.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils);
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 			sdpb.addSalesPackage(spProto);
 		}
 	}
