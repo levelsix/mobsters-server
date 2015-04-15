@@ -29,6 +29,7 @@ public class InAppPurchaseAction {
 	private JSONObject receiptFromApple;
 	private Date now;
 	private String uuid;
+    private String packageName;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
@@ -43,7 +44,7 @@ public class InAppPurchaseAction {
 	}
 
 	public InAppPurchaseAction(String userId, User user,
-			JSONObject receiptFromApple, Date now,
+			JSONObject receiptFromApple, String packageName, Date now,
 			String uuid, IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			CreateInfoProtoUtils createInfoProtoUtils,
@@ -53,6 +54,7 @@ public class InAppPurchaseAction {
 		this.userId = userId;
 		this.user = user;
 		this.receiptFromApple = receiptFromApple;
+		this.packageName = packageName;
 		this.now = now;
 		this.uuid = uuid;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
@@ -64,7 +66,6 @@ public class InAppPurchaseAction {
 	}
 
 	//derived state
-	private String packageName;
 	private int gemChange;
 
 	private Map<String, Integer> currencyDeltas;

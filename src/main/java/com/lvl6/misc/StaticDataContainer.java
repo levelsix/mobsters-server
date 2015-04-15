@@ -23,7 +23,6 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
-import com.lvl6.info.CustomMenu;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
@@ -35,7 +34,6 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Reward;
-import com.lvl6.info.SalesPackage;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
@@ -66,13 +64,11 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
-import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
-import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -408,8 +404,6 @@ public class StaticDataContainer {
 		setResearch(sdpb);
 		setBattleItem(sdpb);
 		setRewards(sdpb);
-		setSales(sdpb);
-		setCustomMenu(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -1082,34 +1076,34 @@ public class StaticDataContainer {
 		}
 	}
 
-	private void setSales(Builder sdpb) {
-		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
-				.getSalesPackageIdsToSalesPackages();
-
-		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
-			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-
-			SalesPackageProto spProto = inAppPurchaseUtils
-					.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils);
-			sdpb.addSalesPackage(spProto);
-		}
-	}
+//	private void setSales(Builder sdpb) {
+//		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
+//				.getSalesPackageIdsToSalesPackages();
+//
+//		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
+//			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+//
+//			SalesPackageProto spProto = inAppPurchaseUtils
+//					.createSalesPackageProto(sp, salesItemRetrieveUtils,
+//							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+//			sdpb.addSalesPackage(spProto);
+//		}
+//	}
 
 	private void setCustomMenu(Builder sdpb) {
-		Map<Integer, CustomMenu> idsToCustomMenus = customMenuRetrieveUtils.getIdsToCustomMenus();
-
-		if (null == idsToCustomMenus || idsToCustomMenus.isEmpty()) {
-			log.warn("setCustomMenu() no settings");
-			return;
-		}
-
-		for(Integer customMenuId : idsToCustomMenus.keySet()) {
-			CustomMenu cm = idsToCustomMenus.get(customMenuId);
-
-			CustomMenuProto cmp = createInfoProtoUtils.createCustomMenuProto(cm);
-			sdpb.addCustomMenu(cmp);
-		}
+//		Map<Integer, List<CustomMenu>> idsToCustomMenus = customMenuRetrieveUtils.getIdsToCustomMenus();
+//
+//		if (null == idsToCustomMenus || idsToCustomMenus.isEmpty()) {
+//			log.warn("setCustomMenu() no settings");
+//			return;
+//		}
+//
+//		for(Integer customMenuId : idsToCustomMenus.keySet()) {
+//			CustomMenu cm = idsToCustomMenus.get(customMenuId);
+//
+//			CustomMenuProto cmp = createInfoProtoUtils.createCustomMenuProto(cm);
+//			sdpb.addCustomMenu(cmp);
+//		}
 
 	}
 

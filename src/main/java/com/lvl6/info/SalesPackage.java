@@ -63,12 +63,12 @@ public class SalesPackage {
 	}
 
 	@Override
-	public String toString() {
-		return "SalesPackage [id=" + id + ", productId=" + productId
-				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
-				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
-				+ ", customMenuId=" + customMenuId + "]";
-	}
+    public String toString() {
+        return "SalesPackage [id=" + id + ", productId=" + productId
+                + ", price=" + price + ", uuid=" + uuid + ", timeStart="
+                + timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+                + ", customMenuId=" + customMenuId + "]";
+    }
 
 	public Date getTimeStart() {
 		return timeStart;
@@ -89,13 +89,13 @@ public class SalesPackage {
 		this.succId = succId;
 	}
 
-	public int getCustomMenuId() {
-		return customMenuId;
-	}
+    public int getCustomMenuId() {
+        return customMenuId;
+    }
 
-	public void setCustomMenuId(int customMenuId) {
-		this.customMenuId = customMenuId;
-	}
+    public void setCustomMenuId(int customMenuId) {
+        this.customMenuId = customMenuId;
+    }
 
 
 

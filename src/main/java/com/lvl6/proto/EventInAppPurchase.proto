@@ -46,7 +46,8 @@ message InAppPurchaseResponseProto {
 	repeated FullUserStructureProto updatedMoneyTree = 10;
 	
 	optional SalesPackageProto successorSalesPackage = 11;
-	optional UserRewardProto rewards = 12;
+	optional SalesPackageProto purchasedSalesPackage = 12;
+	optional UserRewardProto rewards = 13;
 		
 	enum InAppPurchaseStatus {
 		SUCCESS = 1;

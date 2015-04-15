@@ -158,6 +158,7 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
@@ -426,8 +427,11 @@ public class StartupController extends EventController {
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
-	@Autowired
-	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+    @Autowired
+    protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+
+    @Autowired
+    protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -1681,7 +1685,7 @@ public class StartupController extends EventController {
 				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
 						(sp.getTimeEnd().getTime() > now.getTime())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
-							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils);
+							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}
@@ -1697,7 +1701,7 @@ public class StartupController extends EventController {
 				SalesPackage sp = idsToSalesPackages.get(id);
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
 					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils);
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}

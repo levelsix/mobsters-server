@@ -964,7 +964,8 @@ public class DBConstants {
 	public static final String CUSTOM_MENU__POSITION_X = "position_x";
 	public static final String CUSTOM_MENU__POSITION_Y = "position_y";
 	public static final String CUSTOM_MENU__POSITION_Z = "position_z";
-	public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
+    public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
+    public static final String CUSTOM_MENU__IMAGE_NAME = "image_name";
 
 	public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
@@ -1237,8 +1238,8 @@ public class DBConstants {
 	public static final String SALES_PACKAGE__UUID = "uuid";
 	public static final String SALES_PACKAGE__START_TIME = "time_start";
 	public static final String SALES_PACKAGE__END_TIME = "time_end";
-	public static final String SALES_PACKAGE__SUCC_ID = "succ_id";
-	public static final String SALES_PACKAGE__CUSTOM_MENU_ID = "custom_menu_id";
+    public static final String SALES_PACKAGE__SUCC_ID = "succ_id";
+    public static final String SALES_PACKAGE__CUSTOM_MENU_ID = "custom_menu_id";
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";

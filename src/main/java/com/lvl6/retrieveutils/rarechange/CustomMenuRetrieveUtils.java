@@ -3,7 +3,9 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -22,11 +24,11 @@ public class CustomMenuRetrieveUtils {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private static Map<Integer, CustomMenu> idsToCustomMenus;
+	private static Map<Integer, List<CustomMenu>> idsToCustomMenus;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CUSTOM_MENU_CONFIG;
 
-	public Map<Integer, CustomMenu> getIdsToCustomMenus() {
+	public Map<Integer, List<CustomMenu>> getIdsToCustomMenus() {
 		log.debug("retrieving all filedownload map");
 		if (null == idsToCustomMenus) {
 			setStaticIdsToCustomMenus();
@@ -34,7 +36,7 @@ public class CustomMenuRetrieveUtils {
 		return idsToCustomMenus;
 	}
 
-	public CustomMenu getCustomMenuForId(int customMenuId) {
+	public List<CustomMenu> getCustomMenuForId(int customMenuId) {
 		log.debug(String.format("retrieve skill data for skill=%s",
 				customMenuId));
 		if (null == idsToCustomMenus) {
@@ -56,7 +58,7 @@ public class CustomMenuRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, CustomMenu> idsToCustomMenuTemp = new HashMap<Integer, CustomMenu>();
+						Map<Integer, List<CustomMenu>> idsToCustomMenuTemp = new HashMap<Integer, List<CustomMenu>>();
 						//loop through each row and convert it into a java object
 						while (rs.next()) {
 							CustomMenu fd = convertRSRowToCustomMenu(rs);
@@ -65,7 +67,15 @@ public class CustomMenuRetrieveUtils {
 							}
 
 							int customMenuId = fd.getId();
-							idsToCustomMenuTemp.put(customMenuId, fd);
+							
+							List<CustomMenu> cms = idsToCustomMenuTemp.get(customMenuId);
+							
+							if (cms == null) {
+							    cms = new ArrayList<CustomMenu>();
+							    idsToCustomMenuTemp.put(customMenuId, cms);
+							}
+							
+							cms.add(fd);
 						}
 						idsToCustomMenus = idsToCustomMenuTemp;
 
@@ -95,9 +105,10 @@ public class CustomMenuRetrieveUtils {
 		int positionX = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_X);
 		int positionY = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Y);
 		int positionZ = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Z);
-		boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
+        boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
+        String imgName = rs.getString(DBConstants.CUSTOM_MENU__IMAGE_NAME);
 
-		CustomMenu fd = new CustomMenu(id, positionX, positionY, positionZ, isJiggle);
+		CustomMenu fd = new CustomMenu(id, positionX, positionY, positionZ, isJiggle, imgName);
 		return fd;
 	}
 

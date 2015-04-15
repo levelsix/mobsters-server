@@ -1115,30 +1115,6 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> 
-        getSalesPackageList();
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    com.lvl6.proto.SalesProto.SalesPackageProto getSalesPackage(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    int getSalesPackageCount();
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
-        getSalesPackageOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackageOrBuilder(
-        int index);
-
-    /**
      * <code>repeated .com.lvl6.proto.PvpBoardObstacleProto pvpBoardObstacleProtos = 40;</code>
      *
      * <pre>
@@ -1204,30 +1180,6 @@ public final class StaticDataStuffProto {
      * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
      */
     com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
-        int index);
-
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> 
-        getCustomMenuList();
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCustomMenu(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    int getCustomMenuCount();
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
-        getCustomMenuOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCustomMenuOrBuilder(
         int index);
   }
   /**
@@ -1598,9 +1550,9 @@ public final class StaticDataStuffProto {
               break;
             }
             case 322: {
-              if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
+              if (!((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
                 pvpBoardObstacleProtos_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.PvpBoardObstacleProto>();
-                mutable_bitField1_ |= 0x00000400;
+                mutable_bitField1_ |= 0x00000200;
               }
               pvpBoardObstacleProtos_.add(input.readMessage(com.lvl6.proto.StructureProto.PvpBoardObstacleProto.PARSER, extensionRegistry));
               break;
@@ -1629,28 +1581,12 @@ public final class StaticDataStuffProto {
               battleItem_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemProto.PARSER, extensionRegistry));
               break;
             }
-            case 354: {
-              if (!((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
-                salesPackage_ = new java.util.ArrayList<com.lvl6.proto.SalesProto.SalesPackageProto>();
-                mutable_bitField1_ |= 0x00000200;
-              }
-              salesPackage_.add(input.readMessage(com.lvl6.proto.SalesProto.SalesPackageProto.PARSER, extensionRegistry));
-              break;
-            }
             case 362: {
-              if (!((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
+              if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
                 reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>();
-                mutable_bitField1_ |= 0x00000800;
+                mutable_bitField1_ |= 0x00000400;
               }
               reward_.add(input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry));
-              break;
-            }
-            case 370: {
-              if (!((mutable_bitField1_ & 0x00001000) == 0x00001000)) {
-                customMenu_ = new java.util.ArrayList<com.lvl6.proto.CustomMenuesProto.CustomMenuProto>();
-                mutable_bitField1_ |= 0x00001000;
-              }
-              customMenu_.add(input.readMessage(com.lvl6.proto.CustomMenuesProto.CustomMenuProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1769,7 +1705,7 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
           allPvpBoardHouses_ = java.util.Collections.unmodifiableList(allPvpBoardHouses_);
         }
-        if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
+        if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
           pvpBoardObstacleProtos_ = java.util.Collections.unmodifiableList(pvpBoardObstacleProtos_);
         }
         if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
@@ -1781,14 +1717,8 @@ public final class StaticDataStuffProto {
         if (((mutable_bitField1_ & 0x00000100) == 0x00000100)) {
           battleItem_ = java.util.Collections.unmodifiableList(battleItem_);
         }
-        if (((mutable_bitField1_ & 0x00000200) == 0x00000200)) {
-          salesPackage_ = java.util.Collections.unmodifiableList(salesPackage_);
-        }
-        if (((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
+        if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
           reward_ = java.util.Collections.unmodifiableList(reward_);
-        }
-        if (((mutable_bitField1_ & 0x00001000) == 0x00001000)) {
-          customMenu_ = java.util.Collections.unmodifiableList(customMenu_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3369,41 +3299,6 @@ public final class StaticDataStuffProto {
       return battleItem_.get(index);
     }
 
-    public static final int SALESPACKAGE_FIELD_NUMBER = 44;
-    private java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> salesPackage_;
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    public java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> getSalesPackageList() {
-      return salesPackage_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
-        getSalesPackageOrBuilderList() {
-      return salesPackage_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    public int getSalesPackageCount() {
-      return salesPackage_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    public com.lvl6.proto.SalesProto.SalesPackageProto getSalesPackage(int index) {
-      return salesPackage_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-     */
-    public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackageOrBuilder(
-        int index) {
-      return salesPackage_.get(index);
-    }
-
     public static final int PVPBOARDOBSTACLEPROTOS_FIELD_NUMBER = 40;
     private java.util.List<com.lvl6.proto.StructureProto.PvpBoardObstacleProto> pvpBoardObstacleProtos_;
     /**
@@ -3494,41 +3389,6 @@ public final class StaticDataStuffProto {
       return reward_.get(index);
     }
 
-    public static final int CUSTOMMENU_FIELD_NUMBER = 46;
-    private java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> customMenu_;
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    public java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> getCustomMenuList() {
-      return customMenu_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
-        getCustomMenuOrBuilderList() {
-      return customMenu_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    public int getCustomMenuCount() {
-      return customMenu_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCustomMenu(int index) {
-      return customMenu_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-     */
-    public com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCustomMenuOrBuilder(
-        int index) {
-      return customMenu_.get(index);
-    }
-
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -3571,10 +3431,8 @@ public final class StaticDataStuffProto {
       boards_ = java.util.Collections.emptyList();
       research_ = java.util.Collections.emptyList();
       battleItem_ = java.util.Collections.emptyList();
-      salesPackage_ = java.util.Collections.emptyList();
       pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
       reward_ = java.util.Collections.emptyList();
-      customMenu_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3715,14 +3573,8 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < battleItem_.size(); i++) {
         output.writeMessage(43, battleItem_.get(i));
       }
-      for (int i = 0; i < salesPackage_.size(); i++) {
-        output.writeMessage(44, salesPackage_.get(i));
-      }
       for (int i = 0; i < reward_.size(); i++) {
         output.writeMessage(45, reward_.get(i));
-      }
-      for (int i = 0; i < customMenu_.size(); i++) {
-        output.writeMessage(46, customMenu_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3901,17 +3753,9 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(43, battleItem_.get(i));
       }
-      for (int i = 0; i < salesPackage_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(44, salesPackage_.get(i));
-      }
       for (int i = 0; i < reward_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(45, reward_.get(i));
-      }
-      for (int i = 0; i < customMenu_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(46, customMenu_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4063,10 +3907,8 @@ public final class StaticDataStuffProto {
           getBoardsFieldBuilder();
           getResearchFieldBuilder();
           getBattleItemFieldBuilder();
-          getSalesPackageFieldBuilder();
           getPvpBoardObstacleProtosFieldBuilder();
           getRewardFieldBuilder();
-          getCustomMenuFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4321,29 +4163,17 @@ public final class StaticDataStuffProto {
         } else {
           battleItemBuilder_.clear();
         }
-        if (salesPackageBuilder_ == null) {
-          salesPackage_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000200);
-        } else {
-          salesPackageBuilder_.clear();
-        }
         if (pvpBoardObstacleProtosBuilder_ == null) {
           pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000400);
+          bitField1_ = (bitField1_ & ~0x00000200);
         } else {
           pvpBoardObstacleProtosBuilder_.clear();
         }
         if (rewardBuilder_ == null) {
           reward_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000800);
+          bitField1_ = (bitField1_ & ~0x00000400);
         } else {
           rewardBuilder_.clear();
-        }
-        if (customMenuBuilder_ == null) {
-          customMenu_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00001000);
-        } else {
-          customMenuBuilder_.clear();
         }
         return this;
       }
@@ -4741,41 +4571,23 @@ public final class StaticDataStuffProto {
         } else {
           result.battleItem_ = battleItemBuilder_.build();
         }
-        if (salesPackageBuilder_ == null) {
-          if (((bitField1_ & 0x00000200) == 0x00000200)) {
-            salesPackage_ = java.util.Collections.unmodifiableList(salesPackage_);
-            bitField1_ = (bitField1_ & ~0x00000200);
-          }
-          result.salesPackage_ = salesPackage_;
-        } else {
-          result.salesPackage_ = salesPackageBuilder_.build();
-        }
         if (pvpBoardObstacleProtosBuilder_ == null) {
-          if (((bitField1_ & 0x00000400) == 0x00000400)) {
+          if (((bitField1_ & 0x00000200) == 0x00000200)) {
             pvpBoardObstacleProtos_ = java.util.Collections.unmodifiableList(pvpBoardObstacleProtos_);
-            bitField1_ = (bitField1_ & ~0x00000400);
+            bitField1_ = (bitField1_ & ~0x00000200);
           }
           result.pvpBoardObstacleProtos_ = pvpBoardObstacleProtos_;
         } else {
           result.pvpBoardObstacleProtos_ = pvpBoardObstacleProtosBuilder_.build();
         }
         if (rewardBuilder_ == null) {
-          if (((bitField1_ & 0x00000800) == 0x00000800)) {
+          if (((bitField1_ & 0x00000400) == 0x00000400)) {
             reward_ = java.util.Collections.unmodifiableList(reward_);
-            bitField1_ = (bitField1_ & ~0x00000800);
+            bitField1_ = (bitField1_ & ~0x00000400);
           }
           result.reward_ = reward_;
         } else {
           result.reward_ = rewardBuilder_.build();
-        }
-        if (customMenuBuilder_ == null) {
-          if (((bitField1_ & 0x00001000) == 0x00001000)) {
-            customMenu_ = java.util.Collections.unmodifiableList(customMenu_);
-            bitField1_ = (bitField1_ & ~0x00001000);
-          }
-          result.customMenu_ = customMenu_;
-        } else {
-          result.customMenu_ = customMenuBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -5813,37 +5625,11 @@ public final class StaticDataStuffProto {
             }
           }
         }
-        if (salesPackageBuilder_ == null) {
-          if (!other.salesPackage_.isEmpty()) {
-            if (salesPackage_.isEmpty()) {
-              salesPackage_ = other.salesPackage_;
-              bitField1_ = (bitField1_ & ~0x00000200);
-            } else {
-              ensureSalesPackageIsMutable();
-              salesPackage_.addAll(other.salesPackage_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.salesPackage_.isEmpty()) {
-            if (salesPackageBuilder_.isEmpty()) {
-              salesPackageBuilder_.dispose();
-              salesPackageBuilder_ = null;
-              salesPackage_ = other.salesPackage_;
-              bitField1_ = (bitField1_ & ~0x00000200);
-              salesPackageBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getSalesPackageFieldBuilder() : null;
-            } else {
-              salesPackageBuilder_.addAllMessages(other.salesPackage_);
-            }
-          }
-        }
         if (pvpBoardObstacleProtosBuilder_ == null) {
           if (!other.pvpBoardObstacleProtos_.isEmpty()) {
             if (pvpBoardObstacleProtos_.isEmpty()) {
               pvpBoardObstacleProtos_ = other.pvpBoardObstacleProtos_;
-              bitField1_ = (bitField1_ & ~0x00000400);
+              bitField1_ = (bitField1_ & ~0x00000200);
             } else {
               ensurePvpBoardObstacleProtosIsMutable();
               pvpBoardObstacleProtos_.addAll(other.pvpBoardObstacleProtos_);
@@ -5856,7 +5642,7 @@ public final class StaticDataStuffProto {
               pvpBoardObstacleProtosBuilder_.dispose();
               pvpBoardObstacleProtosBuilder_ = null;
               pvpBoardObstacleProtos_ = other.pvpBoardObstacleProtos_;
-              bitField1_ = (bitField1_ & ~0x00000400);
+              bitField1_ = (bitField1_ & ~0x00000200);
               pvpBoardObstacleProtosBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPvpBoardObstacleProtosFieldBuilder() : null;
@@ -5869,7 +5655,7 @@ public final class StaticDataStuffProto {
           if (!other.reward_.isEmpty()) {
             if (reward_.isEmpty()) {
               reward_ = other.reward_;
-              bitField1_ = (bitField1_ & ~0x00000800);
+              bitField1_ = (bitField1_ & ~0x00000400);
             } else {
               ensureRewardIsMutable();
               reward_.addAll(other.reward_);
@@ -5882,38 +5668,12 @@ public final class StaticDataStuffProto {
               rewardBuilder_.dispose();
               rewardBuilder_ = null;
               reward_ = other.reward_;
-              bitField1_ = (bitField1_ & ~0x00000800);
+              bitField1_ = (bitField1_ & ~0x00000400);
               rewardBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRewardFieldBuilder() : null;
             } else {
               rewardBuilder_.addAllMessages(other.reward_);
-            }
-          }
-        }
-        if (customMenuBuilder_ == null) {
-          if (!other.customMenu_.isEmpty()) {
-            if (customMenu_.isEmpty()) {
-              customMenu_ = other.customMenu_;
-              bitField1_ = (bitField1_ & ~0x00001000);
-            } else {
-              ensureCustomMenuIsMutable();
-              customMenu_.addAll(other.customMenu_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.customMenu_.isEmpty()) {
-            if (customMenuBuilder_.isEmpty()) {
-              customMenuBuilder_.dispose();
-              customMenuBuilder_ = null;
-              customMenu_ = other.customMenu_;
-              bitField1_ = (bitField1_ & ~0x00001000);
-              customMenuBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getCustomMenuFieldBuilder() : null;
-            } else {
-              customMenuBuilder_.addAllMessages(other.customMenu_);
             }
           }
         }
@@ -16041,252 +15801,12 @@ public final class StaticDataStuffProto {
         return battleItemBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> salesPackage_ =
-        java.util.Collections.emptyList();
-      private void ensureSalesPackageIsMutable() {
-        if (!((bitField1_ & 0x00000200) == 0x00000200)) {
-          salesPackage_ = new java.util.ArrayList<com.lvl6.proto.SalesProto.SalesPackageProto>(salesPackage_);
-          bitField1_ |= 0x00000200;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> salesPackageBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> getSalesPackageList() {
-        if (salesPackageBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(salesPackage_);
-        } else {
-          return salesPackageBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public int getSalesPackageCount() {
-        if (salesPackageBuilder_ == null) {
-          return salesPackage_.size();
-        } else {
-          return salesPackageBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public com.lvl6.proto.SalesProto.SalesPackageProto getSalesPackage(int index) {
-        if (salesPackageBuilder_ == null) {
-          return salesPackage_.get(index);
-        } else {
-          return salesPackageBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder setSalesPackage(
-          int index, com.lvl6.proto.SalesProto.SalesPackageProto value) {
-        if (salesPackageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureSalesPackageIsMutable();
-          salesPackage_.set(index, value);
-          onChanged();
-        } else {
-          salesPackageBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder setSalesPackage(
-          int index, com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
-        if (salesPackageBuilder_ == null) {
-          ensureSalesPackageIsMutable();
-          salesPackage_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          salesPackageBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder addSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
-        if (salesPackageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureSalesPackageIsMutable();
-          salesPackage_.add(value);
-          onChanged();
-        } else {
-          salesPackageBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder addSalesPackage(
-          int index, com.lvl6.proto.SalesProto.SalesPackageProto value) {
-        if (salesPackageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureSalesPackageIsMutable();
-          salesPackage_.add(index, value);
-          onChanged();
-        } else {
-          salesPackageBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder addSalesPackage(
-          com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
-        if (salesPackageBuilder_ == null) {
-          ensureSalesPackageIsMutable();
-          salesPackage_.add(builderForValue.build());
-          onChanged();
-        } else {
-          salesPackageBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder addSalesPackage(
-          int index, com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
-        if (salesPackageBuilder_ == null) {
-          ensureSalesPackageIsMutable();
-          salesPackage_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          salesPackageBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder addAllSalesPackage(
-          java.lang.Iterable<? extends com.lvl6.proto.SalesProto.SalesPackageProto> values) {
-        if (salesPackageBuilder_ == null) {
-          ensureSalesPackageIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, salesPackage_);
-          onChanged();
-        } else {
-          salesPackageBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder clearSalesPackage() {
-        if (salesPackageBuilder_ == null) {
-          salesPackage_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000200);
-          onChanged();
-        } else {
-          salesPackageBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public Builder removeSalesPackage(int index) {
-        if (salesPackageBuilder_ == null) {
-          ensureSalesPackageIsMutable();
-          salesPackage_.remove(index);
-          onChanged();
-        } else {
-          salesPackageBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder getSalesPackageBuilder(
-          int index) {
-        return getSalesPackageFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackageOrBuilder(
-          int index) {
-        if (salesPackageBuilder_ == null) {
-          return salesPackage_.get(index);  } else {
-          return salesPackageBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
-           getSalesPackageOrBuilderList() {
-        if (salesPackageBuilder_ != null) {
-          return salesPackageBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(salesPackage_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder addSalesPackageBuilder() {
-        return getSalesPackageFieldBuilder().addBuilder(
-            com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder addSalesPackageBuilder(
-          int index) {
-        return getSalesPackageFieldBuilder().addBuilder(
-            index, com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackage = 44;</code>
-       */
-      public java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto.Builder> 
-           getSalesPackageBuilderList() {
-        return getSalesPackageFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
-          getSalesPackageFieldBuilder() {
-        if (salesPackageBuilder_ == null) {
-          salesPackageBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
-                  salesPackage_,
-                  ((bitField1_ & 0x00000200) == 0x00000200),
-                  getParentForChildren(),
-                  isClean());
-          salesPackage_ = null;
-        }
-        return salesPackageBuilder_;
-      }
-
       private java.util.List<com.lvl6.proto.StructureProto.PvpBoardObstacleProto> pvpBoardObstacleProtos_ =
         java.util.Collections.emptyList();
       private void ensurePvpBoardObstacleProtosIsMutable() {
-        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField1_ & 0x00000200) == 0x00000200)) {
           pvpBoardObstacleProtos_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.PvpBoardObstacleProto>(pvpBoardObstacleProtos_);
-          bitField1_ |= 0x00000400;
+          bitField1_ |= 0x00000200;
          }
       }
 
@@ -16480,7 +16000,7 @@ public final class StaticDataStuffProto {
       public Builder clearPvpBoardObstacleProtos() {
         if (pvpBoardObstacleProtosBuilder_ == null) {
           pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000400);
+          bitField1_ = (bitField1_ & ~0x00000200);
           onChanged();
         } else {
           pvpBoardObstacleProtosBuilder_.clear();
@@ -16585,7 +16105,7 @@ public final class StaticDataStuffProto {
           pvpBoardObstacleProtosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.StructureProto.PvpBoardObstacleProto, com.lvl6.proto.StructureProto.PvpBoardObstacleProto.Builder, com.lvl6.proto.StructureProto.PvpBoardObstacleProtoOrBuilder>(
                   pvpBoardObstacleProtos_,
-                  ((bitField1_ & 0x00000400) == 0x00000400),
+                  ((bitField1_ & 0x00000200) == 0x00000200),
                   getParentForChildren(),
                   isClean());
           pvpBoardObstacleProtos_ = null;
@@ -16596,9 +16116,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_ =
         java.util.Collections.emptyList();
       private void ensureRewardIsMutable() {
-        if (!((bitField1_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
           reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>(reward_);
-          bitField1_ |= 0x00000800;
+          bitField1_ |= 0x00000400;
          }
       }
 
@@ -16748,7 +16268,7 @@ public final class StaticDataStuffProto {
       public Builder clearReward() {
         if (rewardBuilder_ == null) {
           reward_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000800);
+          bitField1_ = (bitField1_ & ~0x00000400);
           onChanged();
         } else {
           rewardBuilder_.clear();
@@ -16825,252 +16345,12 @@ public final class StaticDataStuffProto {
           rewardBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
                   reward_,
-                  ((bitField1_ & 0x00000800) == 0x00000800),
+                  ((bitField1_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           reward_ = null;
         }
         return rewardBuilder_;
-      }
-
-      private java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> customMenu_ =
-        java.util.Collections.emptyList();
-      private void ensureCustomMenuIsMutable() {
-        if (!((bitField1_ & 0x00001000) == 0x00001000)) {
-          customMenu_ = new java.util.ArrayList<com.lvl6.proto.CustomMenuesProto.CustomMenuProto>(customMenu_);
-          bitField1_ |= 0x00001000;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> customMenuBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> getCustomMenuList() {
-        if (customMenuBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(customMenu_);
-        } else {
-          return customMenuBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public int getCustomMenuCount() {
-        if (customMenuBuilder_ == null) {
-          return customMenu_.size();
-        } else {
-          return customMenuBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCustomMenu(int index) {
-        if (customMenuBuilder_ == null) {
-          return customMenu_.get(index);
-        } else {
-          return customMenuBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder setCustomMenu(
-          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
-        if (customMenuBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureCustomMenuIsMutable();
-          customMenu_.set(index, value);
-          onChanged();
-        } else {
-          customMenuBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder setCustomMenu(
-          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder builderForValue) {
-        if (customMenuBuilder_ == null) {
-          ensureCustomMenuIsMutable();
-          customMenu_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          customMenuBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder addCustomMenu(com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
-        if (customMenuBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureCustomMenuIsMutable();
-          customMenu_.add(value);
-          onChanged();
-        } else {
-          customMenuBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder addCustomMenu(
-          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
-        if (customMenuBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureCustomMenuIsMutable();
-          customMenu_.add(index, value);
-          onChanged();
-        } else {
-          customMenuBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder addCustomMenu(
-          com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder builderForValue) {
-        if (customMenuBuilder_ == null) {
-          ensureCustomMenuIsMutable();
-          customMenu_.add(builderForValue.build());
-          onChanged();
-        } else {
-          customMenuBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder addCustomMenu(
-          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder builderForValue) {
-        if (customMenuBuilder_ == null) {
-          ensureCustomMenuIsMutable();
-          customMenu_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          customMenuBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder addAllCustomMenu(
-          java.lang.Iterable<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProto> values) {
-        if (customMenuBuilder_ == null) {
-          ensureCustomMenuIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, customMenu_);
-          onChanged();
-        } else {
-          customMenuBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder clearCustomMenu() {
-        if (customMenuBuilder_ == null) {
-          customMenu_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00001000);
-          onChanged();
-        } else {
-          customMenuBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public Builder removeCustomMenu(int index) {
-        if (customMenuBuilder_ == null) {
-          ensureCustomMenuIsMutable();
-          customMenu_.remove(index);
-          onChanged();
-        } else {
-          customMenuBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder getCustomMenuBuilder(
-          int index) {
-        return getCustomMenuFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCustomMenuOrBuilder(
-          int index) {
-        if (customMenuBuilder_ == null) {
-          return customMenu_.get(index);  } else {
-          return customMenuBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
-           getCustomMenuOrBuilderList() {
-        if (customMenuBuilder_ != null) {
-          return customMenuBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(customMenu_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder addCustomMenuBuilder() {
-        return getCustomMenuFieldBuilder().addBuilder(
-            com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder addCustomMenuBuilder(
-          int index) {
-        return getCustomMenuFieldBuilder().addBuilder(
-            index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.CustomMenuProto customMenu = 46;</code>
-       */
-      public java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder> 
-           getCustomMenuBuilderList() {
-        return getCustomMenuFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
-          getCustomMenuFieldBuilder() {
-        if (customMenuBuilder_ == null) {
-          customMenuBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder>(
-                  customMenu_,
-                  ((bitField1_ & 0x00001000) == 0x00001000),
-                  getParentForChildren(),
-                  isClean());
-          customMenu_ = null;
-        }
-        return customMenuBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
@@ -17106,7 +16386,7 @@ public final class StaticDataStuffProto {
       "o\032\022Prerequisite.proto\032\013Quest.proto\032\016Rese" +
       "arch.proto\032\013Sales.proto\032\014Reward.proto\032\013S" +
       "kill.proto\032\017Structure.proto\032\nTask.proto\032" +
-      "\nUser.proto\"\316\023\n\017StaticDataProto\0220\n\006sende" +
+      "\nUser.proto\"\340\022\n\017StaticDataProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
       "o\022>\n\016expansionCosts\030\002 \003(\0132&.com.lvl6.pro" +
       "to.CityExpansionCostProto\0220\n\tallCities\030\003" +
@@ -17163,13 +16443,10 @@ public final class StaticDataStuffProto {
       "(\0132 .com.lvl6.proto.BoardLayoutProto\022/\n\010" +
       "research\030# \003(\0132\035.com.lvl6.proto.Research" +
       "Proto\0223\n\nbattleItem\030+ \003(\0132\037.com.lvl6.pro" +
-      "to.BattleItemProto\0227\n\014salesPackage\030, \003(\013" +
-      "2!.com.lvl6.proto.SalesPackageProto\022E\n\026p" +
-      "vpBoardObstacleProtos\030( \003(\0132%.com.lvl6.p" +
-      "roto.PvpBoardObstacleProto\022+\n\006reward\030- \003" +
-      "(\0132\033.com.lvl6.proto.RewardProto\0223\n\ncusto",
-      "mMenu\030. \003(\0132\037.com.lvl6.proto.CustomMenuP" +
-      "rotoB\026B\024StaticDataStuffProto"
+      "to.BattleItemProto\022E\n\026pvpBoardObstaclePr" +
+      "otos\030( \003(\0132%.com.lvl6.proto.PvpBoardObst" +
+      "acleProto\022+\n\006reward\030- \003(\0132\033.com.lvl6.pro" +
+      "to.RewardProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17207,7 +16484,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "SalesPackage", "PvpBoardObstacleProtos", "Reward", "CustomMenu", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "Reward", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();

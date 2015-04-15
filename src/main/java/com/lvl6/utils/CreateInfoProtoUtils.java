@@ -5187,6 +5187,7 @@ public class CreateInfoProtoUtils {
 		cmpb.setPositionY(cm.getPositionY());
 		cmpb.setPositionZ(cm.getPositionZ());
 		cmpb.setIsJiggle(cm.isJiggle());
+		cmpb.setImageName(cm.getImageName());
 		return cmpb.build();
 
 	}

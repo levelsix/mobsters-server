@@ -56,6 +56,20 @@ public final class CustomMenuesProto {
      * <code>optional bool isJiggle = 5;</code>
      */
     boolean getIsJiggle();
+
+    /**
+     * <code>optional string imageName = 6;</code>
+     */
+    boolean hasImageName();
+    /**
+     * <code>optional string imageName = 6;</code>
+     */
+    java.lang.String getImageName();
+    /**
+     * <code>optional string imageName = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getImageNameBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CustomMenuProto}
@@ -132,6 +146,12 @@ public final class CustomMenuesProto {
             case 40: {
               bitField0_ |= 0x00000010;
               isJiggle_ = input.readBool();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              imageName_ = bs;
               break;
             }
           }
@@ -249,12 +269,55 @@ public final class CustomMenuesProto {
       return isJiggle_;
     }
 
+    public static final int IMAGENAME_FIELD_NUMBER = 6;
+    private java.lang.Object imageName_;
+    /**
+     * <code>optional string imageName = 6;</code>
+     */
+    public boolean hasImageName() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string imageName = 6;</code>
+     */
+    public java.lang.String getImageName() {
+      java.lang.Object ref = imageName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          imageName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string imageName = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getImageNameBytes() {
+      java.lang.Object ref = imageName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        imageName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       customMenuId_ = 0;
       positionX_ = 0;
       positionY_ = 0;
       positionZ_ = 0;
       isJiggle_ = false;
+      imageName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -284,6 +347,9 @@ public final class CustomMenuesProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBool(5, isJiggle_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getImageNameBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -312,6 +378,10 @@ public final class CustomMenuesProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, isJiggle_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getImageNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -440,6 +510,8 @@ public final class CustomMenuesProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         isJiggle_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
+        imageName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -488,6 +560,10 @@ public final class CustomMenuesProto {
           to_bitField0_ |= 0x00000010;
         }
         result.isJiggle_ = isJiggle_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.imageName_ = imageName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -518,6 +594,11 @@ public final class CustomMenuesProto {
         }
         if (other.hasIsJiggle()) {
           setIsJiggle(other.getIsJiggle());
+        }
+        if (other.hasImageName()) {
+          bitField0_ |= 0x00000020;
+          imageName_ = other.imageName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -706,6 +787,82 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      private java.lang.Object imageName_ = "";
+      /**
+       * <code>optional string imageName = 6;</code>
+       */
+      public boolean hasImageName() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string imageName = 6;</code>
+       */
+      public java.lang.String getImageName() {
+        java.lang.Object ref = imageName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imageName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string imageName = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getImageNameBytes() {
+        java.lang.Object ref = imageName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          imageName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string imageName = 6;</code>
+       */
+      public Builder setImageName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        imageName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string imageName = 6;</code>
+       */
+      public Builder clearImageName() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        imageName_ = getDefaultInstance().getImageName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string imageName = 6;</code>
+       */
+      public Builder setImageNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        imageName_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CustomMenuProto)
     }
 
@@ -731,11 +888,11 @@ public final class CustomMenuesProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020CustomMenu.proto\022\016com.lvl6.proto\"r\n\017Cu" +
-      "stomMenuProto\022\024\n\014customMenuId\030\001 \001(\005\022\021\n\tp" +
-      "ositionX\030\002 \001(\005\022\021\n\tpositionY\030\003 \001(\005\022\021\n\tpos" +
-      "itionZ\030\004 \001(\005\022\020\n\010isJiggle\030\005 \001(\010B\023B\021Custom" +
-      "MenuesProto"
+      "\n\020CustomMenu.proto\022\016com.lvl6.proto\"\205\001\n\017C" +
+      "ustomMenuProto\022\024\n\014customMenuId\030\001 \001(\005\022\021\n\t" +
+      "positionX\030\002 \001(\005\022\021\n\tpositionY\030\003 \001(\005\022\021\n\tpo" +
+      "sitionZ\030\004 \001(\005\022\020\n\010isJiggle\030\005 \001(\010\022\021\n\timage" +
+      "Name\030\006 \001(\tB\023B\021CustomMenuesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -754,7 +911,7 @@ public final class CustomMenuesProto {
     internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CustomMenuProto_descriptor,
-        new java.lang.String[] { "CustomMenuId", "PositionX", "PositionY", "PositionZ", "IsJiggle", });
+        new java.lang.String[] { "CustomMenuId", "PositionX", "PositionY", "PositionZ", "IsJiggle", "ImageName", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

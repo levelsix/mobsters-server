@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +22,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -28,7 +30,9 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
@@ -36,6 +40,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -118,8 +123,11 @@ public class InAppPurchaseController extends EventController {
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
 
-	@Autowired
-	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+    @Autowired
+    protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+
+    @Autowired
+    protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
@@ -386,7 +394,7 @@ public class InAppPurchaseController extends EventController {
 				iapsa.execute(resBuilder);
 			}
 			else {
-				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, now,
+				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,
 						uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
 						miscMethods, inAppPurchaseUtils);
 
@@ -409,7 +417,8 @@ public class InAppPurchaseController extends EventController {
 					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
 				}
 				else if(isSalesPack) {
-					setNewSalesPackage(resBuilder, iapsa);
+					setNewAndPurchasedSalesPackage(resBuilder, iapsa);
+					createRewardProto(resBuilder, iapsa);
 					writeToUserCurrencyHistory(userId, date, null, null, null, iapsa);
 				}
 				else {
@@ -437,7 +446,7 @@ public class InAppPurchaseController extends EventController {
 		return false;
 	}
 
-	public void setNewSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
+	public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
 			InAppPurchaseSalesAction iapsa) {
 
 		boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
@@ -458,9 +467,27 @@ public class InAppPurchaseController extends EventController {
 			}
 		}
 
-		SalesPackageProto spp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
-				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils);
-		resBuilder.setSuccessorSalesPackage(spp);
+        SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
+                salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
+				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+		resBuilder.setPurchasedSalesPackage(curSpp);
+		resBuilder.setSuccessorSalesPackage(preSpp);
+
+	}
+
+	public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
+			InAppPurchaseSalesAction iapsa) {
+		Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+			Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
+			int gemsGained = iapsa.getAra().getGemsGained();
+			int cashGained = iapsa.getAra().getCashGained();
+			int oilGained = iapsa.getAra().getOilGained();
+
+			//TODO: protofy the rewards
+			UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
+					nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+			resBuilder.setRewards(urp);
 
 	}
 
