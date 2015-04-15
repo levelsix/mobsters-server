@@ -58,8 +58,6 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
-import com.lvl6.info.SalesDisplayItem;
-import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
@@ -70,6 +68,7 @@ import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
+import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
@@ -739,6 +738,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
+			setStarterPackForUser(resBuilder, user);
+			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 
@@ -1663,46 +1664,37 @@ public class StartupController extends EventController {
 
 	public void setSalesForUser(Builder resBuilder, User user) {
 
-		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
-
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
-				.getSalesItemIdsToSalesItemsForSalesPackIds();
-		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
-				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
-		int userSalesValue = user.getSalesValue();
 
+		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+		int userSalesValue = user.getSalesValue();
 		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
 		Date now = new Date();
 
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-			if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
-					(sp.getTimeEnd().getTime() > now.getTime())) {
-				//get the sales items associated with this booster pack
-				List<SalesItem> salesItemsList = salesPackageIdToSalesItems
-						.get(salesPackageId);
-
-				//get the booster display items for this booster pack
-				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
-						.get(salesPackageId);
-				Collection<SalesDisplayItem> displayItems = null;
-				if (null != displayIdsToDisplayItems) {
-					ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
-					displayItemIds.addAll(displayIdsToDisplayItems.keySet());
-					Collections.sort(displayItemIds);
-
-					displayItems = new ArrayList<SalesDisplayItem>();
-
-					for (Integer displayItemId : displayItemIds) {
-						displayItems.add(displayIdsToDisplayItems
-								.get(displayItemId));
-					}
+			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) { //make sure it's not starter pack
+				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
+						(sp.getTimeEnd().getTime() > now.getTime())) {
+					SalesPackageProto spProto = createInfoProtoUtils
+							.createSalesPackageProto(sp);
+					resBuilder.addSalesPackages(spProto);
 				}
+			}
+		}
+	}
 
-				SalesPackageProto spProto = CreateInfoProtoUtils
-						.createSalesPackageProto(sp, salesItemsList, displayItems);
-				resBuilder.addSalesPackages(spProto);
+	public void setStarterPackForUser(Builder resBuilder, User user) {
+		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
+
+		if(numBeginnerSalesPurchased == 0) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(Integer id : idsToSalesPackages.keySet()) {
+				SalesPackage sp = idsToSalesPackages.get(id);
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
+					SalesPackageProto spProto = createInfoProtoUtils.createSalesPackageProto(sp);
+					resBuilder.addSalesPackages(spProto);
+				}
 			}
 		}
 	}

@@ -1701,6 +1701,19 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
         int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    boolean hasSuccessorSalesPackage();
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProto getSuccessorSalesPackage();
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseResponseProto}
@@ -1831,6 +1844,19 @@ public final class EventInAppPurchaseProto {
                 mutable_bitField0_ |= 0x00000200;
               }
               updatedMoneyTree_.add(input.readMessage(com.lvl6.proto.StructureProto.FullUserStructureProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 90: {
+              com.lvl6.proto.SalesProto.SalesPackageProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = successorSalesPackage_.toBuilder();
+              }
+              successorSalesPackage_ = input.readMessage(com.lvl6.proto.SalesProto.SalesPackageProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(successorSalesPackage_);
+                successorSalesPackage_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
               break;
             }
           }
@@ -2286,6 +2312,27 @@ public final class EventInAppPurchaseProto {
       return updatedMoneyTree_.get(index);
     }
 
+    public static final int SUCCESSORSALESPACKAGE_FIELD_NUMBER = 11;
+    private com.lvl6.proto.SalesProto.SalesPackageProto successorSalesPackage_;
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    public boolean hasSuccessorSalesPackage() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProto getSuccessorSalesPackage() {
+      return successorSalesPackage_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder() {
+      return successorSalesPackage_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
@@ -2297,6 +2344,7 @@ public final class EventInAppPurchaseProto {
       updatedOrNew_ = java.util.Collections.emptyList();
       updatedUserItems_ = java.util.Collections.emptyList();
       updatedMoneyTree_ = java.util.Collections.emptyList();
+      successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2340,6 +2388,9 @@ public final class EventInAppPurchaseProto {
       }
       for (int i = 0; i < updatedMoneyTree_.size(); i++) {
         output.writeMessage(10, updatedMoneyTree_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(11, successorSalesPackage_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2389,6 +2440,10 @@ public final class EventInAppPurchaseProto {
       for (int i = 0; i < updatedMoneyTree_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, updatedMoneyTree_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, successorSalesPackage_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2507,6 +2562,7 @@ public final class EventInAppPurchaseProto {
           getUpdatedOrNewFieldBuilder();
           getUpdatedUserItemsFieldBuilder();
           getUpdatedMoneyTreeFieldBuilder();
+          getSuccessorSalesPackageFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2551,6 +2607,12 @@ public final class EventInAppPurchaseProto {
         } else {
           updatedMoneyTreeBuilder_.clear();
         }
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+        } else {
+          successorSalesPackageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -2637,6 +2699,14 @@ public final class EventInAppPurchaseProto {
           result.updatedMoneyTree_ = updatedMoneyTree_;
         } else {
           result.updatedMoneyTree_ = updatedMoneyTreeBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        if (successorSalesPackageBuilder_ == null) {
+          result.successorSalesPackage_ = successorSalesPackage_;
+        } else {
+          result.successorSalesPackage_ = successorSalesPackageBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2756,6 +2826,9 @@ public final class EventInAppPurchaseProto {
               updatedMoneyTreeBuilder_.addAllMessages(other.updatedMoneyTree_);
             }
           }
+        }
+        if (other.hasSuccessorSalesPackage()) {
+          mergeSuccessorSalesPackage(other.getSuccessorSalesPackage());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4043,6 +4116,122 @@ public final class EventInAppPurchaseProto {
           updatedMoneyTree_ = null;
         }
         return updatedMoneyTreeBuilder_;
+      }
+
+      private com.lvl6.proto.SalesProto.SalesPackageProto successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> successorSalesPackageBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public boolean hasSuccessorSalesPackage() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto getSuccessorSalesPackage() {
+        if (successorSalesPackageBuilder_ == null) {
+          return successorSalesPackage_;
+        } else {
+          return successorSalesPackageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder setSuccessorSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (successorSalesPackageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          successorSalesPackage_ = value;
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder setSuccessorSalesPackage(
+          com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackage_ = builderForValue.build();
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder mergeSuccessorSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (successorSalesPackageBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              successorSalesPackage_ != com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance()) {
+            successorSalesPackage_ =
+              com.lvl6.proto.SalesProto.SalesPackageProto.newBuilder(successorSalesPackage_).mergeFrom(value).buildPartial();
+          } else {
+            successorSalesPackage_ = value;
+          }
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder clearSuccessorSalesPackage() {
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder getSuccessorSalesPackageBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getSuccessorSalesPackageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder() {
+        if (successorSalesPackageBuilder_ != null) {
+          return successorSalesPackageBuilder_.getMessageOrBuilder();
+        } else {
+          return successorSalesPackage_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+          getSuccessorSalesPackageFieldBuilder() {
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
+                  getSuccessorSalesPackage(),
+                  getParentForChildren(),
+                  isClean());
+          successorSalesPackage_ = null;
+        }
+        return successorSalesPackageBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InAppPurchaseResponseProto)
@@ -7131,53 +7320,55 @@ public final class EventInAppPurchaseProto {
     java.lang.String[] descriptorData = {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
       "to\032\023InAppPurchase.proto\032\nItem.proto\032\022Mon" +
-      "sterStuff.proto\032\017Structure.proto\032\nUser.p" +
-      "roto\"\267\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
-      "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
-      "\022\016\n\006ipaddr\030\006 \001(\t\022\014\n\004uuid\030\007 \001(\t\"\207\004\n\032InApp" +
-      "PurchaseResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022N\n\006statu",
-      "s\030\002 \001(\0162>.com.lvl6.proto.InAppPurchaseRe" +
-      "sponseProto.InAppPurchaseStatus\022\026\n\016diamo" +
-      "ndsGained\030\003 \001(\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001" +
-      "\022\023\n\013packageName\030\005 \001(\t\022\024\n\014packagePrice\030\006 " +
-      "\001(\001\022\017\n\007receipt\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003" +
-      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
-      "\0227\n\020updatedUserItems\030\t \003(\0132\035.com.lvl6.pr" +
-      "oto.UserItemProto\022@\n\020updatedMoneyTree\030\n " +
-      "\003(\0132&.com.lvl6.proto.FullUserStructurePr" +
-      "oto\"C\n\023InAppPurchaseStatus\022\013\n\007SUCCESS\020\001\022",
-      "\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034Ear" +
-      "nFreeDiamondsRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022J\n\020f" +
-      "reeDiamondsType\030\002 \001(\0162$.com.lvl6.proto.E" +
-      "arnFreeDiamondsType:\nFB_CONNECT\022\022\n\nclien" +
-      "tTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022T\n\006status\030\002 \001(\0162D.com.lv" +
-      "l6.proto.EarnFreeDiamondsResponseProto.E" +
-      "arnFreeDiamondsStatus\022J\n\020freeDiamondsTyp",
-      "e\030\003 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
-      "sType:\nFB_CONNECT\"v\n\026EarnFreeDiamondsSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_APART_FRO" +
-      "M_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020" +
-      "\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGemsForRes" +
-      "ourcesRequestProto\022@\n\006sender\030\001 \001(\01320.com" +
-      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
-      "rces\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResources\030\003 " +
-      "\001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.lvl6.pro" +
-      "to.ResourceType:\004CASH\022\022\n\nclientTime\030\005 \001(",
-      "\003\"\252\002\n%ExchangeGemsForResourcesResponsePr" +
-      "oto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Min" +
-      "imumUserProtoWithMaxResources\022d\n\006status\030" +
-      "\002 \001(\0162T.com.lvl6.proto.ExchangeGemsForRe" +
-      "sourcesResponseProto.ExchangeGemsForReso" +
-      "urcesStatus\"Y\n\036ExchangeGemsForResourcesS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FA" +
-      "IL_INSUFFICIENT_GEMS\020\003B\031B\027EventInAppPurc" +
-      "haseProto"
+      "sterStuff.proto\032\013Sales.proto\032\017Structure." +
+      "proto\032\nUser.proto\"\267\001\n\031InAppPurchaseReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlo" +
+      "calcents\030\003 \001(\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n" +
+      "\006locale\030\005 \001(\t\022\016\n\006ipaddr\030\006 \001(\t\022\014\n\004uuid\030\007 " +
+      "\001(\t\"\311\004\n\032InAppPurchaseResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
+      "roto\022N\n\006status\030\002 \001(\0162>.com.lvl6.proto.In" +
+      "AppPurchaseResponseProto.InAppPurchaseSt" +
+      "atus\022\026\n\016diamondsGained\030\003 \001(\005\022\027\n\013coinsGai" +
+      "ned\030\004 \001(\005B\002\030\001\022\023\n\013packageName\030\005 \001(\t\022\024\n\014pa" +
+      "ckagePrice\030\006 \001(\001\022\017\n\007receipt\030\007 \001(\t\022:\n\014upd" +
+      "atedOrNew\030\010 \003(\0132$.com.lvl6.proto.FullUse" +
+      "rMonsterProto\0227\n\020updatedUserItems\030\t \003(\0132" +
+      "\035.com.lvl6.proto.UserItemProto\022@\n\020update" +
+      "dMoneyTree\030\n \003(\0132&.com.lvl6.proto.FullUs" +
+      "erStructureProto\022@\n\025successorSalesPackag",
+      "e\030\013 \001(\0132!.com.lvl6.proto.SalesPackagePro" +
+      "to\"C\n\023InAppPurchaseStatus\022\013\n\007SUCCESS\020\001\022\010" +
+      "\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034Earn" +
+      "FreeDiamondsRequestProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022J\n\020fr" +
+      "eeDiamondsType\030\002 \001(\0162$.com.lvl6.proto.Ea" +
+      "rnFreeDiamondsType:\nFB_CONNECT\022\022\n\nclient" +
+      "Time\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022T\n\006status\030\002 \001(\0162D.com.lvl",
+      "6.proto.EarnFreeDiamondsResponseProto.Ea" +
+      "rnFreeDiamondsStatus\022J\n\020freeDiamondsType" +
+      "\030\003 \001(\0162$.com.lvl6.proto.EarnFreeDiamonds" +
+      "Type:\nFB_CONNECT\"v\n\026EarnFreeDiamondsStat" +
+      "us\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_APART_FROM" +
+      "_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003" +
+      "\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGemsForReso" +
+      "urcesRequestProto\022@\n\006sender\030\001 \001(\01320.com." +
+      "lvl6.proto.MinimumUserProtoWithMaxResour" +
+      "ces\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResources\030\003 \001",
+      "(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.lvl6.prot" +
+      "o.ResourceType:\004CASH\022\022\n\nclientTime\030\005 \001(\003" +
+      "\"\252\002\n%ExchangeGemsForResourcesResponsePro" +
+      "to\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mini" +
+      "mumUserProtoWithMaxResources\022d\n\006status\030\002" +
+      " \001(\0162T.com.lvl6.proto.ExchangeGemsForRes" +
+      "ourcesResponseProto.ExchangeGemsForResou" +
+      "rcesStatus\"Y\n\036ExchangeGemsForResourcesSt" +
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAI" +
+      "L_INSUFFICIENT_GEMS\020\003B\031B\027EventInAppPurch",
+      "aseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7193,6 +7384,7 @@ public final class EventInAppPurchaseProto {
           com.lvl6.proto.InAppPurchaseProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SalesProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -7207,7 +7399,7 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", });
+        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", "SuccessorSalesPackage", });
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new
@@ -7235,6 +7427,7 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.InAppPurchaseProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SalesProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

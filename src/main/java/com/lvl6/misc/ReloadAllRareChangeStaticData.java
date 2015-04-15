@@ -21,6 +21,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -77,202 +78,205 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected AchievementRetrieveUtils achievementRetrieveUtils;
-	
+
 	@Autowired
 	protected BannedUserRetrieveUtils bannedUserRetrieveUtils;
-	
+
 	@Autowired
 	protected BattleItemRetrieveUtils battleItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoardObstacleRetrieveUtils boardObstacleRetrieveUtils;
-	
+
 	@Autowired
 	protected BoardRetrieveUtils boardRetrieveUtils;
 
 	@Autowired
 	protected BoardPropertyRetrieveUtils boardPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterDisplayItemRetrieveUtils boosterDisplayItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidRetrieveUtils clanRaidRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
-	
+
+	@Autowired
+	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+
 	@Autowired
 	protected EventPersistentRetrieveUtils eventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
-	
+
 	@Autowired
 	protected GoldSaleRetrieveUtils goldSaleRetrieveUtils;
-	
+
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterBattleDialogueRetrieveUtils monsterBattleDialogueRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected ObstacleRetrieveUtils obstacleRetrieveUtils;
-	
+
 	@Autowired
 	protected PrerequisiteRetrieveUtils prerequisiteRetrieveUtils;
-	
+
 	@Autowired
 	protected ProfanityRetrieveUtils profanityRetrieveUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobRetrieveUtils questJobRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
-	
+
 	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;	
-	
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+
 	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillPropertyRetrieveUtils skillPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillSideEffectRetrieveUtils skillSideEffectRetrieveUtils;
-	
+
 	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
- 
+
 	@Autowired
 	protected StaticUserLevelInfoRetrieveUtils staticUserLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureBattleItemFactoryRetrieveUtils structureBattleItemFactoryRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureClanHouseRetrieveUtils structureClanHouseRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureEvoChamberRetrieveUtils structureEvoChamberRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureHospitalRetrieveUtils structureHospitalRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureLabRetrieveUtils structureLabRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureMiniJobRetrieveUtils structureMiniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	
+
 	@Autowired
 	protected StructurePvpBoardRetrieveUtils structurePvpBoardRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResearchHouseRetrieveUtils structureResearchHouseRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResidenceRetrieveUtils structureResidenceRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceStorageRetrieveUtils structureResourceStorageRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureTeamCenterRetrieveUtils structureTeamCenterRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureTownHallRetrieveUtils structureTownHallRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
-	
+
 	@Autowired
 	protected StaticDataContainer staticDataContainer;
-	
+
 	private static final Logger log = LoggerFactory
 			.getLogger(MiscMethods.class);
-	
+
 	public void reloadAllRareChangeStaticData() {
 		log.info("Reloading rare change static data");
 		achievementRetrieveUtils.reload();
@@ -285,7 +289,7 @@ public class ReloadAllRareChangeStaticData {
 		boosterItemRetrieveUtils.reload();
 		boosterPackRetrieveUtils.reload();
 		//    CityBossRetrieveUtils.reload();
-		//		CityElementsRetrieveUtils.reload(); 
+		//		CityElementsRetrieveUtils.reload();
 		//		CityRetrieveUtils.reload();
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
@@ -295,6 +299,7 @@ public class ReloadAllRareChangeStaticData {
 		clanRaidStageRetrieveUtils.reload();
 		clanRaidStageMonsterRetrieveUtils.reload();
 		clanRaidStageRewardRetrieveUtils.reload();
+		customMenuRetrieveUtils.reload();
 		eventPersistentRetrieveUtils.reload();
 		fileDownloadRetrieveUtils.reload();
 		//		ExpansionCostRetrieveUtils.reload();
@@ -352,5 +357,5 @@ public class ReloadAllRareChangeStaticData {
 
 		staticDataContainer.reload();
 	}
-	
+
 }

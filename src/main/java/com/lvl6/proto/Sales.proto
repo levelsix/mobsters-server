@@ -14,7 +14,7 @@ option java_outer_classname = "SalesProto";
 
 message SalesPackageProto {
 	optional int32 salesPackageId = 1;
-	optional string salesPackageName = 2;
+	optional string salesProductId = 2;
 	optional int64 price = 3;
 	optional string uuid = 4;
 	repeated SalesItemProto sip = 5;

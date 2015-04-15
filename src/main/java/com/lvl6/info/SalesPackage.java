@@ -9,27 +9,27 @@ public class SalesPackage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalesPackage(int id, String name, int price, String uuid,
-			Date timeStart, Date timeEnd, int predId) {
+	public SalesPackage(int id, String productId, int price, String uuid,
+			Date timeStart, Date timeEnd, int succId) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.productId = productId;
 		this.price = price;
 		this.uuid = uuid;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
-		this.predId = predId;
+		this.succId = succId;
 	}
 
 	private static final long serialVersionUID = 1549953377153488834L;
 
 	private int id;
-	private String name;
+	private String productId;
 	private int price;
 	private String uuid;
 	private Date timeStart;
 	private Date timeEnd;
-	private int predId;
+	private int succId;
 
 	public int getId() {
 		return id;
@@ -37,11 +37,14 @@ public class SalesPackage {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+
+	public String getProductId() {
+		return productId;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	public double getPrice() {
@@ -59,9 +62,10 @@ public class SalesPackage {
 
 	@Override
 	public String toString() {
-		return "SalesPackage [id=" + id + ", name=" + name + ", price=" + price
-				+ ", uuid=" + uuid + ", timeStart=" + timeStart + ", timeEnd="
-				+ timeEnd + ", predId=" + predId + "]";
+		return "SalesPackage [id=" + id + ", productId=" + productId
+				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
+				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+				+ "]";
 	}
 
 	public Date getTimeStart() {
@@ -76,11 +80,11 @@ public class SalesPackage {
 	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
 	}
-	public int getPredId() {
-		return predId;
+	public int getSuccId() {
+		return succId;
 	}
-	public void setPredId(int predId) {
-		this.predId = predId;
+	public void setSuccId(int succId) {
+		this.succId = succId;
 	}
 
 

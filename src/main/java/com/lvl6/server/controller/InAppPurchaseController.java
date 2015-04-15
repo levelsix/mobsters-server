@@ -29,6 +29,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -37,6 +38,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
@@ -98,6 +100,9 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+
+	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
@@ -315,39 +320,39 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseStarterPackAction iapspa = null;
 			InAppPurchaseMoneyTreeAction iapmta = null;
 
-			if(IAPValues.packageIsStarterPack(packageName)) {
-				isStarterPack = true;
-				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-						boosterItemRetrieveUtils, monsterRetrieveUtils,
-						monsterLevelInfoRetrieveUtils);
-
-				iapspa.execute(resBuilder);
-
-//				//for testing
-//				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-//						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
+//			if(IAPValues.packageIsStarterPack(packageName)) {
+//				isStarterPack = true;
+//				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
+//						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
+//						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
+//						boosterItemRetrieveUtils, monsterRetrieveUtils,
+//						monsterLevelInfoRetrieveUtils);
 //
-//				for(String name : salesPackageNamesToSalesPackages.keySet()) {
-//					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
-//					if(sp.getUuid().equals(uuid)) {
-//						salesPackage = sp;
-//						log.info("found sales pack");
-//					}
-//				}
+//				iapspa.execute(resBuilder);
 //
-//				isSalesPack = true;
-//				iapsa = new InAppPurchaseSalesAction(userId,
-//						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-//						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-//						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-//						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-//						salesPackage);
-//
-//				iapsa.execute(resBuilder);
-			}
-			else if(IAPValues.packageIsMoneyTree(packageName)) {
+////				//for testing
+////				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+////						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
+////
+////				for(String name : salesPackageNamesToSalesPackages.keySet()) {
+////					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
+////					if(sp.getUuid().equals(uuid)) {
+////						salesPackage = sp;
+////						log.info("found sales pack");
+////					}
+////				}
+////
+////				isSalesPack = true;
+////				iapsa = new InAppPurchaseSalesAction(userId,
+////						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+////						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+////						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+////						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+////						salesPackage);
+////
+////				iapsa.execute(resBuilder);
+//			}
+			if(IAPValues.packageIsMoneyTree(packageName)) {
 				isMoneyTree = true;
 				iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
 						iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
@@ -391,6 +396,7 @@ public class InAppPurchaseController extends EventController {
 					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
 				}
 				else if(isSalesPack) {
+					setNewSalesPackage(resBuilder, iapsa);
 					writeToUserCurrencyHistory(userId, date, null, null, null, iapsa);
 				}
 				else {
@@ -402,20 +408,46 @@ public class InAppPurchaseController extends EventController {
 		}
 	}
 
-	public boolean packageIsSalesPackage(String packageName, String uuid) {
+	public boolean packageIsSalesPackage(String productId, String uuid) {
 		Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-				salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
+				salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
 
-		for(String name : salesPackageNamesToSalesPackages.keySet()) {
-			SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
-			if(name.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
+		for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
+			SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
+			if(productId2.equalsIgnoreCase(productId) && sp.getUuid().equals(uuid)) {
 				salesPackage = sp;
 				return true;
 			}
 		}
 		log.info("packagename {} does not exist in table of sales packages",
-				packageName);
+				productId);
 		return false;
+	}
+
+	public void setNewSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
+			InAppPurchaseSalesAction iapsa) {
+
+		boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
+		SalesPackage predecessorSalesPackage;
+
+		if(salesPackage.getSuccId() == 0) {
+			predecessorSalesPackage = salesPackage;
+		}
+		else {
+			predecessorSalesPackage = salesPackageRetrieveUtils.
+					getSalesPackageForSalesPackageId(salesPackage.getSuccId());
+
+			if(jumpTwoTiers) {
+				if(predecessorSalesPackage.getSuccId() != 0) {
+					predecessorSalesPackage = salesPackageRetrieveUtils.
+							getSalesPackageForSalesPackageId(predecessorSalesPackage.getSuccId());
+				}
+			}
+		}
+
+		SalesPackageProto spp = createInfoProtoUtils.createSalesPackageProto(predecessorSalesPackage);
+		resBuilder.setSuccessorSalesPackage(spp);
+
 	}
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,

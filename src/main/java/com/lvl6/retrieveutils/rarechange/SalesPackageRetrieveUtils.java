@@ -50,7 +50,7 @@ public class SalesPackageRetrieveUtils {
 	//    return returnValue;
 	//  }
 
-	public Map<String, SalesPackage> getSalesPackageNamesToSalesPackages() {
+	public Map<String, SalesPackage> getSalesPackageProductIdToSalesPackages() {
 		log.debug("retrieving all sales packs data map");
 		if (salesPackageIdsToSalesPackages == null) {
 			setStaticSalesPackageIdsToSalesPackages();
@@ -59,7 +59,7 @@ public class SalesPackageRetrieveUtils {
 		Map<String, SalesPackage> returnMap = new HashMap<String, SalesPackage>();
 		for(Integer i : salesPackageIdsToSalesPackages.keySet()) {
 			SalesPackage sp = salesPackageIdsToSalesPackages.get(i);
-			returnMap.put(sp.getName(), sp);
+			returnMap.put(sp.getProductId(), sp);
 		}
 		return returnMap;
 	}
@@ -117,7 +117,7 @@ public class SalesPackageRetrieveUtils {
 	private SalesPackage convertRSRowToSalesPackage(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SALES_PACKAGE__ID);
-		String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
+		String productId = rs.getString(DBConstants.SALES_PACKAGE__PRODUCT_ID);
 		int price = rs.getInt(DBConstants.SALES_PACKAGE__PRICE);
 		String uuid = rs.getString(DBConstants.SALES_PACKAGE__UUID);
 		Date timeStart = null;
@@ -142,9 +142,9 @@ public class SalesPackageRetrieveUtils {
 			log.error("last_purchase_time null...?", e);
 		}
 
-		int predId = rs.getInt(DBConstants.SALES_PACKAGE__PRED_ID);
+		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
 
-		SalesPackage salesPackage = new SalesPackage(id, name, price, uuid, timeStart, timeEnd, predId);
+		SalesPackage salesPackage = new SalesPackage(id, productId, price, uuid, timeStart, timeEnd, succId);
 		return salesPackage;
 	}
 }

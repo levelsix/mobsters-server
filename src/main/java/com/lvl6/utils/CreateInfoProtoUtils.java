@@ -67,6 +67,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
@@ -192,6 +193,9 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -235,6 +239,15 @@ public class CreateInfoProtoUtils {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+
+	@Autowired
+	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+
+	@Autowired
+	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
@@ -5172,15 +5185,13 @@ public class CreateInfoProtoUtils {
 
 	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
 
-	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
-			Collection<SalesItem> siList,
-			Collection<SalesDisplayItem> sdiList) {
+	public SalesPackageProto createSalesPackageProto(SalesPackage sp) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
 		b.setSalesPackageId(sp.getId());
 
-		String str = sp.getName();
+		String str = sp.getProductId();
 		if (null != str && !str.isEmpty()) {
-			b.setSalesPackageName(str);
+			b.setSalesProductId(str);
 		}
 
 		b.setPrice((long)sp.getPrice());
@@ -5190,15 +5201,41 @@ public class CreateInfoProtoUtils {
 			b.setUuid(str);
 		}
 
-		if (siList != null) {
-			for (SalesItem si : siList) {
+		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
+				.getSalesItemIdsToSalesItemsForSalesPackIds();
+		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+
+		//get the sales items associated with this booster pack
+		List<SalesItem> salesItemsList = salesPackageIdToSalesItems
+				.get(sp.getId());
+
+		//get the booster display items for this booster pack
+		Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
+				.get(sp.getId());
+		Collection<SalesDisplayItem> displayItems = null;
+		if (null != displayIdsToDisplayItems) {
+			ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+			displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+			Collections.sort(displayItemIds);
+
+			displayItems = new ArrayList<SalesDisplayItem>();
+
+			for (Integer displayItemId : displayItemIds) {
+				displayItems.add(displayIdsToDisplayItems
+						.get(displayItemId));
+			}
+		}
+
+		if (salesItemsList != null) {
+			for (SalesItem si : salesItemsList) {
 				SalesItemProto sip = createSalesItemProtoFromSalesItem(si);
 				b.addSip(sip);
 			}
 		}
 
-		if (null != sdiList) {
-			for (SalesDisplayItem sdi : sdiList) {
+		if (null != displayItems) {
+			for (SalesDisplayItem sdi : displayItems) {
 				SalesDisplayItemProto sdip = createSalesDisplayItemProtoFromSalesDisplayItem(sdi);
 				b.addSdip(sdip);
 			}
@@ -5207,7 +5244,7 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
+	public SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
 		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
 		sipb.setSalesItemId(si.getId());
 		sipb.setSalesPackageId(si.getSalesPackageId());
@@ -5219,7 +5256,7 @@ public class CreateInfoProtoUtils {
 		return sipb.build();
 	}
 
-	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
+	public SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
 		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
 		sdipb.setSalesItemId(sdi.getId());
 		sdipb.setSalesPackageId(sdi.getSalesPackageId());
@@ -5229,6 +5266,17 @@ public class CreateInfoProtoUtils {
 		sdipb.setItemQuantity(sdi.getItemQuantity());
 
 		return sdipb.build();
+	}
+
+	public CustomMenuProto createCustomMenuProto(CustomMenu cm) {
+		CustomMenuProto.Builder cmpb = CustomMenuProto.newBuilder();
+		cmpb.setCustomMenuId(cm.getId());
+		cmpb.setPositionX(cm.getPositionX());
+		cmpb.setPositionY(cm.getPositionY());
+		cmpb.setPositionZ(cm.getPositionZ());
+		cmpb.setIsJiggle(cm.isJiggle());
+		return cmpb.build();
+
 	}
 
 

@@ -41,6 +41,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_RAID_STAGE_CONFIG = "clan_raid_stage_config";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG = "clan_raid_stage_monster_config";
 	public static final String TABLE_CLAN_RAID_STAGE_REWARD_CONFIG = "clan_raid_stage_reward_config";
+	public static final String TABLE_CUSTOM_MENU_CONFIG = "custom_menu_config";
 	public static final String TABLE_EVENT_PERSISTENT_CONFIG = "event_persistent_config";
 	public static final String TABLE_EVENT_PERSISTENT_FOR_USER = "event_persistent_for_user";
 	public static final String TABLE_EXPANSION_COST_CONFIG = "expansion_cost_config";				//TODO: delete
@@ -959,6 +960,12 @@ public class DBConstants {
 	public static final String CLAN_ICON__IMG_NAME = "img_name";
 	public static final String CLAN_ICON__IS_AVAILABLE = "is_available";
 
+	public static final String CUSTOM_MENU__ID = GENERIC__ID;
+	public static final String CUSTOM_MENU__POSITION_X = "position_x";
+	public static final String CUSTOM_MENU__POSITION_Y = "position_y";
+	public static final String CUSTOM_MENU__POSITION_Z = "position_z";
+	public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
+
 	public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
 	public static final String EVENT_PERSISTENT__START_HOUR = "start_hour";
@@ -1224,12 +1231,12 @@ public class DBConstants {
 	public static final String SALES_ITEM__GEM_REWARD = "gem_reward";
 
 	public static final String SALES_PACKAGE__ID = GENERIC__ID;
-	public static final String SALES_PACKAGE__NAME = "name";
+	public static final String SALES_PACKAGE__PRODUCT_ID = "product_id";
 	public static final String SALES_PACKAGE__PRICE = "price";
 	public static final String SALES_PACKAGE__UUID = "uuid";
 	public static final String SALES_PACKAGE__START_TIME = "time_start";
 	public static final String SALES_PACKAGE__END_TIME = "time_end";
-	public static final String SALES_PACKAGE__PRED_ID = "pred_id";
+	public static final String SALES_PACKAGE__SUCC_ID = "succ_id";
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";

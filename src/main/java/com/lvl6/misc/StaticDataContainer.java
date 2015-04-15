@@ -23,6 +23,7 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
+import com.lvl6.info.CustomMenu;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
@@ -34,9 +35,6 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
 import com.lvl6.info.Reward;
-
-import com.lvl6.info.SalesDisplayItem;
-import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
@@ -68,12 +66,12 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
+import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
-
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
@@ -115,6 +113,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -133,7 +132,6 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
-
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -172,191 +170,194 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //	snapshot of all static data.
 @Component
 public class StaticDataContainer {
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected AchievementRetrieveUtils achievementRetrieveUtils;
-	
+
 	@Autowired
 	protected BannedUserRetrieveUtils bannedUserRetrieveUtils;
-	
+
 	@Autowired
 	protected BattleItemRetrieveUtils battleItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoardObstacleRetrieveUtils boardObstacleRetrieveUtils;
-	
+
 	@Autowired
 	protected BoardRetrieveUtils boardRetrieveUtils;
 
 	@Autowired
 	protected BoardPropertyRetrieveUtils boardPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterDisplayItemRetrieveUtils boosterDisplayItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidRetrieveUtils clanRaidRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
-	
+
+	@Autowired
+	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+
 	@Autowired
 	protected EventPersistentRetrieveUtils eventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
-	
+
 	@Autowired
 	protected GoldSaleRetrieveUtils goldSaleRetrieveUtils;
-	
+
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterBattleDialogueRetrieveUtils monsterBattleDialogueRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected ObstacleRetrieveUtils obstacleRetrieveUtils;
-	
+
 	@Autowired
 	protected PrerequisiteRetrieveUtils prerequisiteRetrieveUtils;
-	
+
 	@Autowired
 	protected ProfanityRetrieveUtils profanityRetrieveUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobRetrieveUtils questJobRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
-	
+
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillPropertyRetrieveUtils skillPropertyRetrieveUtils;
-	
+
 	@Autowired
 	protected SkillSideEffectRetrieveUtils skillSideEffectRetrieveUtils;
-	
+
 	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
- 
+
 	@Autowired
 	protected StaticUserLevelInfoRetrieveUtils staticUserLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureBattleItemFactoryRetrieveUtils structureBattleItemFactoryRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureClanHouseRetrieveUtils structureClanHouseRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureEvoChamberRetrieveUtils structureEvoChamberRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureHospitalRetrieveUtils structureHospitalRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureLabRetrieveUtils structureLabRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureMiniJobRetrieveUtils structureMiniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	
+
 	@Autowired
 	protected StructurePvpBoardRetrieveUtils structurePvpBoardRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResearchHouseRetrieveUtils structureResearchHouseRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResidenceRetrieveUtils structureResidenceRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceStorageRetrieveUtils structureResourceStorageRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureTeamCenterRetrieveUtils structureTeamCenterRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureTownHallRetrieveUtils structureTownHallRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
-	
-	
+
+
 
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -404,6 +405,7 @@ public class StaticDataContainer {
 		setBattleItem(sdpb);
 		setRewards(sdpb);
 		setSales(sdpb);
+		setCustomMenu(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -1075,42 +1077,35 @@ public class StaticDataContainer {
 			sdpb.addBattleItem(bip);
 		}
 	}
-	
+
 	private void setSales(Builder sdpb) {
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
 				.getSalesPackageIdsToSalesPackages();
-		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
-				.getSalesItemIdsToSalesItemsForSalesPackIds();
-		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
-				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 
 		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 
-			//get the sales items associated with this booster pack
-			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
-					.get(salesPackageId);
-			
-			//get the booster display items for this booster pack
-			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
-					.get(salesPackageId);
-			Collection<SalesDisplayItem> displayItems = null;
-			if (null != displayIdsToDisplayItems) {
-				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
-				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
-				Collections.sort(displayItemIds);
-
-				displayItems = new ArrayList<SalesDisplayItem>();
-
-				for (Integer displayItemId : displayItemIds) {
-					displayItems.add(displayIdsToDisplayItems
-							.get(displayItemId));
-				}
-			}
-			
-			SalesPackageProto spProto = CreateInfoProtoUtils
-					.createSalesPackageProto(sp, salesItemList, displayItems);			
+			SalesPackageProto spProto = createInfoProtoUtils
+					.createSalesPackageProto(sp);
+			sdpb.addSalesPackage(spProto);
 		}
+	}
+
+	private void setCustomMenu(Builder sdpb) {
+		Map<Integer, CustomMenu> idsToCustomMenus = customMenuRetrieveUtils.getIdsToCustomMenus();
+
+		if (null == idsToCustomMenus || idsToCustomMenus.isEmpty()) {
+			log.warn("setCustomMenu() no settings");
+			return;
+		}
+
+		for(Integer customMenuId : idsToCustomMenus.keySet()) {
+			CustomMenu cm = idsToCustomMenus.get(customMenuId);
+
+			CustomMenuProto cmp = createInfoProtoUtils.createCustomMenuProto(cm);
+			sdpb.addCustomMenu(cmp);
+		}
+
 	}
 
 
@@ -1132,6 +1127,8 @@ public class StaticDataContainer {
 			sdpb.addReward(rp);
 		}
 	}
+
+
 
 
 }

@@ -22,18 +22,18 @@ public final class SalesProto {
     int getSalesPackageId();
 
     /**
-     * <code>optional string salesPackageName = 2;</code>
+     * <code>optional string salesProductId = 2;</code>
      */
-    boolean hasSalesPackageName();
+    boolean hasSalesProductId();
     /**
-     * <code>optional string salesPackageName = 2;</code>
+     * <code>optional string salesProductId = 2;</code>
      */
-    java.lang.String getSalesPackageName();
+    java.lang.String getSalesProductId();
     /**
-     * <code>optional string salesPackageName = 2;</code>
+     * <code>optional string salesProductId = 2;</code>
      */
     com.google.protobuf.ByteString
-        getSalesPackageNameBytes();
+        getSalesProductIdBytes();
 
     /**
      * <code>optional int64 price = 3;</code>
@@ -166,7 +166,7 @@ public final class SalesProto {
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              salesPackageName_ = bs;
+              salesProductId_ = bs;
               break;
             }
             case 24: {
@@ -257,19 +257,19 @@ public final class SalesProto {
       return salesPackageId_;
     }
 
-    public static final int SALESPACKAGENAME_FIELD_NUMBER = 2;
-    private java.lang.Object salesPackageName_;
+    public static final int SALESPRODUCTID_FIELD_NUMBER = 2;
+    private java.lang.Object salesProductId_;
     /**
-     * <code>optional string salesPackageName = 2;</code>
+     * <code>optional string salesProductId = 2;</code>
      */
-    public boolean hasSalesPackageName() {
+    public boolean hasSalesProductId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string salesPackageName = 2;</code>
+     * <code>optional string salesProductId = 2;</code>
      */
-    public java.lang.String getSalesPackageName() {
-      java.lang.Object ref = salesPackageName_;
+    public java.lang.String getSalesProductId() {
+      java.lang.Object ref = salesProductId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -277,22 +277,22 @@ public final class SalesProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          salesPackageName_ = s;
+          salesProductId_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string salesPackageName = 2;</code>
+     * <code>optional string salesProductId = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getSalesPackageNameBytes() {
-      java.lang.Object ref = salesPackageName_;
+        getSalesProductIdBytes() {
+      java.lang.Object ref = salesProductId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        salesPackageName_ = b;
+        salesProductId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -428,7 +428,7 @@ public final class SalesProto {
 
     private void initFields() {
       salesPackageId_ = 0;
-      salesPackageName_ = "";
+      salesProductId_ = "";
       price_ = 0L;
       uuid_ = "";
       sip_ = java.util.Collections.emptyList();
@@ -451,7 +451,7 @@ public final class SalesProto {
         output.writeInt32(1, salesPackageId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getSalesPackageNameBytes());
+        output.writeBytes(2, getSalesProductIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, price_);
@@ -480,7 +480,7 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getSalesPackageNameBytes());
+          .computeBytesSize(2, getSalesProductIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -619,7 +619,7 @@ public final class SalesProto {
         super.clear();
         salesPackageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        salesPackageName_ = "";
+        salesProductId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         price_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -672,7 +672,7 @@ public final class SalesProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.salesPackageName_ = salesPackageName_;
+        result.salesProductId_ = salesProductId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -718,9 +718,9 @@ public final class SalesProto {
         if (other.hasSalesPackageId()) {
           setSalesPackageId(other.getSalesPackageId());
         }
-        if (other.hasSalesPackageName()) {
+        if (other.hasSalesProductId()) {
           bitField0_ |= 0x00000002;
-          salesPackageName_ = other.salesPackageName_;
+          salesProductId_ = other.salesProductId_;
           onChanged();
         }
         if (other.hasPrice()) {
@@ -842,24 +842,24 @@ public final class SalesProto {
         return this;
       }
 
-      private java.lang.Object salesPackageName_ = "";
+      private java.lang.Object salesProductId_ = "";
       /**
-       * <code>optional string salesPackageName = 2;</code>
+       * <code>optional string salesProductId = 2;</code>
        */
-      public boolean hasSalesPackageName() {
+      public boolean hasSalesProductId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string salesPackageName = 2;</code>
+       * <code>optional string salesProductId = 2;</code>
        */
-      public java.lang.String getSalesPackageName() {
-        java.lang.Object ref = salesPackageName_;
+      public java.lang.String getSalesProductId() {
+        java.lang.Object ref = salesProductId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            salesPackageName_ = s;
+            salesProductId_ = s;
           }
           return s;
         } else {
@@ -867,53 +867,53 @@ public final class SalesProto {
         }
       }
       /**
-       * <code>optional string salesPackageName = 2;</code>
+       * <code>optional string salesProductId = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getSalesPackageNameBytes() {
-        java.lang.Object ref = salesPackageName_;
+          getSalesProductIdBytes() {
+        java.lang.Object ref = salesProductId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          salesPackageName_ = b;
+          salesProductId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string salesPackageName = 2;</code>
+       * <code>optional string salesProductId = 2;</code>
        */
-      public Builder setSalesPackageName(
+      public Builder setSalesProductId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        salesPackageName_ = value;
+        salesProductId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string salesPackageName = 2;</code>
+       * <code>optional string salesProductId = 2;</code>
        */
-      public Builder clearSalesPackageName() {
+      public Builder clearSalesProductId() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        salesPackageName_ = getDefaultInstance().getSalesPackageName();
+        salesProductId_ = getDefaultInstance().getSalesProductId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string salesPackageName = 2;</code>
+       * <code>optional string salesProductId = 2;</code>
        */
-      public Builder setSalesPackageNameBytes(
+      public Builder setSalesProductIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        salesPackageName_ = value;
+        salesProductId_ = value;
         onChanged();
         return this;
       }
@@ -3272,21 +3272,21 @@ public final class SalesProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Sales.proto\022\016com.lvl6.proto\032\026SharedEnu" +
-      "mConfig.proto\032\nUser.proto\"\304\001\n\021SalesPacka" +
-      "geProto\022\026\n\016salesPackageId\030\001 \001(\005\022\030\n\020sales" +
-      "PackageName\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uuid" +
-      "\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.Sal" +
-      "esItemProto\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.pro" +
-      "to.SalesDisplayItemProto\"\242\001\n\016SalesItemPr" +
-      "oto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackage" +
-      "Id\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQu" +
-      "antity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuan",
-      "tity\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(\005\"\251\001\n\025SalesD" +
-      "isplayItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016" +
-      "salesPackageId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022" +
-      "\027\n\017monsterQuantity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005" +
-      "\022\024\n\014itemQuantity\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(" +
-      "\005B\014B\nSalesProto"
+      "mConfig.proto\032\nUser.proto\"\302\001\n\021SalesPacka" +
+      "geProto\022\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016sales" +
+      "ProductId\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uuid\030\004" +
+      " \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.Sales" +
+      "ItemProto\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.proto" +
+      ".SalesDisplayItemProto\"\242\001\n\016SalesItemProt" +
+      "o\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackageId" +
+      "\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQuan" +
+      "tity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuanti",
+      "ty\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(\005\"\251\001\n\025SalesDis" +
+      "playItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016sa" +
+      "lesPackageId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n" +
+      "\017monsterQuantity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024" +
+      "\n\014itemQuantity\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(\005B" +
+      "\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3307,7 +3307,7 @@ public final class SalesProto {
     internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesPackageProto_descriptor,
-        new java.lang.String[] { "SalesPackageId", "SalesPackageName", "Price", "Uuid", "Sip", "Sdip", });
+        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", });
     internal_static_com_lvl6_proto_SalesItemProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new

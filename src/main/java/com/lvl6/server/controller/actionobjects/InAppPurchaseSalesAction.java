@@ -100,6 +100,7 @@ public class InAppPurchaseSalesAction {
 	//derived state
 	private double salesPackagePrice;
 	private int gemChange;
+	private boolean salesJumpTwoTiers;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -172,7 +173,7 @@ public class InAppPurchaseSalesAction {
 
 	public boolean userSalesValueMatchesSalesPackage() {
 		int salesValue = user.getSalesValue();
-		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+		salesJumpTwoTiers = user.isSalesJumpTwoTiers();
 		salesPackagePrice = salesPackage.getPrice();
 		if(salesValue == 0) {
 			if(salesPackagePrice == 5)
@@ -723,6 +724,15 @@ public class InAppPurchaseSalesAction {
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
+
+	public boolean isSalesJumpTwoTiers() {
+		return salesJumpTwoTiers;
+	}
+
+	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
+		this.salesJumpTwoTiers = salesJumpTwoTiers;
+	}
+
 
 
 }

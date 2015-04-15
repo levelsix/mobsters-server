@@ -1,0 +1,20 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+
+package com.lvl6.proto;
+
+option java_outer_classname = "CustomMenuesProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message CustomMenuProto {
+	optional int32 customMenuId = 1;
+	optional int32 positionX = 2;
+	optional int32 positionY = 3;
+	optional int32 positionZ = 4;
+	optional bool isJiggle = 5;
+	
+}
