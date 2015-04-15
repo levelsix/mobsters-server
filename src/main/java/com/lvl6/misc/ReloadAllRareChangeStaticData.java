@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRefreshItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -153,6 +154,9 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+
+	@Autowired
+	protected MiniJobRefreshItemRetrieveUtils miniJobRefreshItemRetrieveUtils;
 
 	@Autowired
 	protected MonsterBattleDialogueRetrieveUtils monsterBattleDialogueRetrieveUtils;
@@ -307,12 +311,13 @@ public class ReloadAllRareChangeStaticData {
 		itemRetrieveUtils.reload();
 		//		LockBoxEventRetrieveUtils.reload();
 		//    MonsterForPvpRetrieveUtils.staticReload();
-		miniJobRetrieveUtils.reload();
 		miniEventForPlayerLvlRetrieveUtils.reload();
 		miniEventGoalRetrieveUtils.reload();
 		miniEventLeaderboardRewardRetrieveUtils.reload();
 		miniEventRetrieveUtils.reload();
 		miniEventTierRewardRetrieveUtils.reload();
+		miniJobRetrieveUtils.reload();
+		miniJobRefreshItemRetrieveUtils.reload();
 		monsterBattleDialogueRetrieveUtils.reload();
 		monsterLevelInfoRetrieveUtils.reload();
 		monsterRetrieveUtils.reload();
