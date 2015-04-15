@@ -2134,58 +2134,17 @@ public final class SalesProto {
     int getSalesPackageId();
 
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasMonsterId();
+    boolean hasReward();
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    int getMonsterId();
-
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
     /**
-     * <code>optional int32 monsterQuantity = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasMonsterQuantity();
-    /**
-     * <code>optional int32 monsterQuantity = 4;</code>
-     */
-    int getMonsterQuantity();
-
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    boolean hasItemId();
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    int getItemId();
-
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    boolean hasItemQuantity();
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    int getItemQuantity();
-
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    int getGemReward();
-
-    /**
-     * <code>optional int32 rewardId = 8;</code>
-     */
-    boolean hasRewardId();
-    /**
-     * <code>optional int32 rewardId = 8;</code>
-     */
-    int getRewardId();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesItemProto}
@@ -2249,34 +2208,17 @@ public final class SalesProto {
               salesPackageId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              monsterId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              monsterQuantity_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              itemId_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              itemQuantity_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              gemReward_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              rewardId_ = input.readInt32();
               break;
             }
           }
@@ -2349,105 +2291,31 @@ public final class SalesProto {
       return salesPackageId_;
     }
 
-    public static final int MONSTERID_FIELD_NUMBER = 3;
-    private int monsterId_;
+    public static final int REWARD_FIELD_NUMBER = 3;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public boolean hasMonsterId() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public int getMonsterId() {
-      return monsterId_;
-    }
-
-    public static final int MONSTERQUANTITY_FIELD_NUMBER = 4;
-    private int monsterQuantity_;
-    /**
-     * <code>optional int32 monsterQuantity = 4;</code>
-     */
-    public boolean hasMonsterQuantity() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional int32 monsterQuantity = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public int getMonsterQuantity() {
-      return monsterQuantity_;
-    }
-
-    public static final int ITEMID_FIELD_NUMBER = 5;
-    private int itemId_;
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    public static final int ITEMQUANTITY_FIELD_NUMBER = 6;
-    private int itemQuantity_;
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    public boolean hasItemQuantity() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    public int getItemQuantity() {
-      return itemQuantity_;
-    }
-
-    public static final int GEMREWARD_FIELD_NUMBER = 7;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
-    }
-
-    public static final int REWARDID_FIELD_NUMBER = 8;
-    private int rewardId_;
-    /**
-     * <code>optional int32 rewardId = 8;</code>
-     */
-    public boolean hasRewardId() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 rewardId = 8;</code>
-     */
-    public int getRewardId() {
-      return rewardId_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
-      monsterId_ = 0;
-      monsterQuantity_ = 0;
-      itemId_ = 0;
-      itemQuantity_ = 0;
-      gemReward_ = 0;
-      rewardId_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2469,22 +2337,7 @@ public final class SalesProto {
         output.writeInt32(2, salesPackageId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, monsterId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, monsterQuantity_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, itemId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, itemQuantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, gemReward_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, rewardId_);
+        output.writeMessage(3, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2505,27 +2358,7 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, monsterId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, monsterQuantity_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, itemId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, itemQuantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, gemReward_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, rewardId_);
+          .computeMessageSize(3, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2636,6 +2469,7 @@ public final class SalesProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2648,18 +2482,12 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         salesPackageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        monsterId_ = 0;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        monsterQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        itemQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        rewardId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -2699,27 +2527,11 @@ public final class SalesProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.monsterId_ = monsterId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
         }
-        result.monsterQuantity_ = monsterQuantity_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.itemId_ = itemId_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.itemQuantity_ = itemQuantity_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.rewardId_ = rewardId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2742,23 +2554,8 @@ public final class SalesProto {
         if (other.hasSalesPackageId()) {
           setSalesPackageId(other.getSalesPackageId());
         }
-        if (other.hasMonsterId()) {
-          setMonsterId(other.getMonsterId());
-        }
-        if (other.hasMonsterQuantity()) {
-          setMonsterQuantity(other.getMonsterQuantity());
-        }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        if (other.hasItemQuantity()) {
-          setItemQuantity(other.getItemQuantity());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasRewardId()) {
-          setRewardId(other.getRewardId());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2851,196 +2648,120 @@ public final class SalesProto {
         return this;
       }
 
-      private int monsterId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public boolean hasMonsterId() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public int getMonsterId() {
-        return monsterId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setMonsterId(int value) {
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000004;
-        monsterId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder clearMonsterId() {
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        monsterId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int monsterQuantity_ ;
-      /**
-       * <code>optional int32 monsterQuantity = 4;</code>
-       */
-      public boolean hasMonsterQuantity() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 monsterQuantity = 4;</code>
-       */
-      public int getMonsterQuantity() {
-        return monsterQuantity_;
-      }
-      /**
-       * <code>optional int32 monsterQuantity = 4;</code>
-       */
-      public Builder setMonsterQuantity(int value) {
-        bitField0_ |= 0x00000008;
-        monsterQuantity_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 monsterQuantity = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder clearMonsterQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        monsterQuantity_ = 0;
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000004;
         onChanged();
-        return this;
-      }
-
-      private int itemId_ ;
-      /**
-       * <code>optional int32 itemId = 5;</code>
-       */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return getRewardFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional int32 itemId = 5;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public int getItemId() {
-        return itemId_;
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
       }
       /**
-       * <code>optional int32 itemId = 5;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000010;
-        itemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemId = 5;</code>
-       */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        itemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemQuantity_ ;
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public boolean hasItemQuantity() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public int getItemQuantity() {
-        return itemQuantity_;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public Builder setItemQuantity(int value) {
-        bitField0_ |= 0x00000020;
-        itemQuantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public Builder clearItemQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        itemQuantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000040;
-        gemReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int rewardId_ ;
-      /**
-       * <code>optional int32 rewardId = 8;</code>
-       */
-      public boolean hasRewardId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 rewardId = 8;</code>
-       */
-      public int getRewardId() {
-        return rewardId_;
-      }
-      /**
-       * <code>optional int32 rewardId = 8;</code>
-       */
-      public Builder setRewardId(int value) {
-        bitField0_ |= 0x00000080;
-        rewardId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 rewardId = 8;</code>
-       */
-      public Builder clearRewardId() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        rewardId_ = 0;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SalesItemProto)
@@ -3077,49 +2798,17 @@ public final class SalesProto {
     int getSalesPackageId();
 
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasMonsterId();
+    boolean hasReward();
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    int getMonsterId();
-
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
     /**
-     * <code>optional int32 monsterQuantity = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasMonsterQuantity();
-    /**
-     * <code>optional int32 monsterQuantity = 4;</code>
-     */
-    int getMonsterQuantity();
-
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    boolean hasItemId();
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    int getItemId();
-
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    boolean hasItemQuantity();
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    int getItemQuantity();
-
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    int getGemReward();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesDisplayItemProto}
@@ -3183,29 +2872,17 @@ public final class SalesProto {
               salesPackageId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              monsterId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              monsterQuantity_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              itemId_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              itemQuantity_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              gemReward_ = input.readInt32();
               break;
             }
           }
@@ -3278,89 +2955,31 @@ public final class SalesProto {
       return salesPackageId_;
     }
 
-    public static final int MONSTERID_FIELD_NUMBER = 3;
-    private int monsterId_;
+    public static final int REWARD_FIELD_NUMBER = 3;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public boolean hasMonsterId() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 monsterId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public int getMonsterId() {
-      return monsterId_;
-    }
-
-    public static final int MONSTERQUANTITY_FIELD_NUMBER = 4;
-    private int monsterQuantity_;
-    /**
-     * <code>optional int32 monsterQuantity = 4;</code>
-     */
-    public boolean hasMonsterQuantity() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional int32 monsterQuantity = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public int getMonsterQuantity() {
-      return monsterQuantity_;
-    }
-
-    public static final int ITEMID_FIELD_NUMBER = 5;
-    private int itemId_;
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 itemId = 5;</code>
-     */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    public static final int ITEMQUANTITY_FIELD_NUMBER = 6;
-    private int itemQuantity_;
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    public boolean hasItemQuantity() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 itemQuantity = 6;</code>
-     */
-    public int getItemQuantity() {
-      return itemQuantity_;
-    }
-
-    public static final int GEMREWARD_FIELD_NUMBER = 7;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
-      monsterId_ = 0;
-      monsterQuantity_ = 0;
-      itemId_ = 0;
-      itemQuantity_ = 0;
-      gemReward_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3382,19 +3001,7 @@ public final class SalesProto {
         output.writeInt32(2, salesPackageId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, monsterId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, monsterQuantity_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, itemId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, itemQuantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, gemReward_);
+        output.writeMessage(3, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3415,23 +3022,7 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, monsterId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, monsterQuantity_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, itemId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, itemQuantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, gemReward_);
+          .computeMessageSize(3, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3542,6 +3133,7 @@ public final class SalesProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3554,16 +3146,12 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         salesPackageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        monsterId_ = 0;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        monsterQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        itemQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -3603,23 +3191,11 @@ public final class SalesProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.monsterId_ = monsterId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
         }
-        result.monsterQuantity_ = monsterQuantity_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.itemId_ = itemId_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.itemQuantity_ = itemQuantity_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.gemReward_ = gemReward_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3642,20 +3218,8 @@ public final class SalesProto {
         if (other.hasSalesPackageId()) {
           setSalesPackageId(other.getSalesPackageId());
         }
-        if (other.hasMonsterId()) {
-          setMonsterId(other.getMonsterId());
-        }
-        if (other.hasMonsterQuantity()) {
-          setMonsterQuantity(other.getMonsterQuantity());
-        }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        if (other.hasItemQuantity()) {
-          setItemQuantity(other.getItemQuantity());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3748,164 +3312,120 @@ public final class SalesProto {
         return this;
       }
 
-      private int monsterId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public boolean hasMonsterId() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public int getMonsterId() {
-        return monsterId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setMonsterId(int value) {
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000004;
-        monsterId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 monsterId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder clearMonsterId() {
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        monsterId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int monsterQuantity_ ;
-      /**
-       * <code>optional int32 monsterQuantity = 4;</code>
-       */
-      public boolean hasMonsterQuantity() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 monsterQuantity = 4;</code>
-       */
-      public int getMonsterQuantity() {
-        return monsterQuantity_;
-      }
-      /**
-       * <code>optional int32 monsterQuantity = 4;</code>
-       */
-      public Builder setMonsterQuantity(int value) {
-        bitField0_ |= 0x00000008;
-        monsterQuantity_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 monsterQuantity = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder clearMonsterQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        monsterQuantity_ = 0;
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000004;
         onChanged();
-        return this;
-      }
-
-      private int itemId_ ;
-      /**
-       * <code>optional int32 itemId = 5;</code>
-       */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return getRewardFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional int32 itemId = 5;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public int getItemId() {
-        return itemId_;
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
       }
       /**
-       * <code>optional int32 itemId = 5;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000010;
-        itemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemId = 5;</code>
-       */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        itemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemQuantity_ ;
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public boolean hasItemQuantity() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public int getItemQuantity() {
-        return itemQuantity_;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public Builder setItemQuantity(int value) {
-        bitField0_ |= 0x00000020;
-        itemQuantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 6;</code>
-       */
-      public Builder clearItemQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        itemQuantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000040;
-        gemReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        gemReward_ = 0;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SalesDisplayItemProto)
@@ -3944,24 +3464,21 @@ public final class SalesProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Sales.proto\022\016com.lvl6.proto\032\026SharedEnu" +
-      "mConfig.proto\032\nUser.proto\032\020CustomMenu.pr" +
-      "oto\"\244\002\n\021SalesPackageProto\022\026\n\016salesPackag" +
-      "eId\030\001 \001(\005\022\026\n\016salesProductId\030\002 \001(\t\022\r\n\005pri" +
-      "ce\030\003 \001(\003\022\014\n\004uuid\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.co" +
-      "m.lvl6.proto.SalesItemProto\0223\n\004sdip\030\006 \003(" +
-      "\0132%.com.lvl6.proto.SalesDisplayItemProto" +
-      "\022,\n\003cmp\030\007 \003(\0132\037.com.lvl6.proto.CustomMen" +
-      "uProto\022\016\n\006succId\030\010 \001(\005\022\021\n\ttimeStart\030\t \001(" +
-      "\003\022\017\n\007timeEnd\030\n \001(\003\"\264\001\n\016SalesItemProto\022\023\n",
-      "\013salesItemId\030\001 \001(\005\022\026\n\016salesPackageId\030\002 \001" +
-      "(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQuantity" +
-      "\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuantity\030\006" +
-      " \001(\005\022\021\n\tgemReward\030\007 \001(\005\022\020\n\010rewardId\030\010 \001(" +
-      "\005\"\251\001\n\025SalesDisplayItemProto\022\023\n\013salesItem" +
-      "Id\030\001 \001(\005\022\026\n\016salesPackageId\030\002 \001(\005\022\021\n\tmons" +
-      "terId\030\003 \001(\005\022\027\n\017monsterQuantity\030\004 \001(\005\022\016\n\006" +
-      "itemId\030\005 \001(\005\022\024\n\014itemQuantity\030\006 \001(\005\022\021\n\tge" +
-      "mReward\030\007 \001(\005B\014B\nSalesProto"
+      "mConfig.proto\032\014Reward.proto\032\nUser.proto\032" +
+      "\020CustomMenu.proto\"\244\002\n\021SalesPackageProto\022" +
+      "\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016salesProductI" +
+      "d\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uuid\030\004 \001(\t\022+\n\003" +
+      "sip\030\005 \003(\0132\036.com.lvl6.proto.SalesItemProt" +
+      "o\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.proto.SalesDi" +
+      "splayItemProto\022,\n\003cmp\030\007 \003(\0132\037.com.lvl6.p" +
+      "roto.CustomMenuProto\022\016\n\006succId\030\010 \001(\005\022\021\n\t" +
+      "timeStart\030\t \001(\003\022\017\n\007timeEnd\030\n \001(\003\"j\n\016Sale",
+      "sItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016sales" +
+      "PackageId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lv" +
+      "l6.proto.RewardProto\"q\n\025SalesDisplayItem" +
+      "Proto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPacka" +
+      "geId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.pr" +
+      "oto.RewardProtoB\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3975,6 +3492,7 @@ public final class SalesProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
           com.lvl6.proto.CustomMenuesProto.getDescriptor(),
         }, assigner);
@@ -3989,14 +3507,15 @@ public final class SalesProto {
     internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesItemProto_descriptor,
-        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", "GemReward", "RewardId", });
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
     internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_SalesDisplayItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor,
-        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", "GemReward", });
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
     com.lvl6.proto.CustomMenuesProto.getDescriptor();
   }

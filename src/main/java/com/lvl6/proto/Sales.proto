@@ -2,6 +2,7 @@
 
 //import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
+import "Reward.proto";
 import "User.proto";
 import "CustomMenu.proto";
 
@@ -31,12 +32,7 @@ message SalesPackageProto {
 message SalesItemProto {
 	optional int32 salesItemId = 1;
 	optional int32 salesPackageId = 2;
-	optional int32 monsterId = 3;
-	optional int32 monsterQuantity = 4;
-	optional int32 itemId = 5;
-	optional int32 itemQuantity = 6;
-	optional int32 gemReward = 7;
-	optional int32 rewardId = 8;
+	optional RewardProto reward = 3;
 }
 
 //------------------------------------------------------------------------------------------
@@ -44,10 +40,6 @@ message SalesItemProto {
 message SalesDisplayItemProto {
 	optional int32 salesItemId = 1;
 	optional int32 salesPackageId = 2;
-	optional int32 monsterId = 3;
-	optional int32 monsterQuantity = 4;
-	optional int32 itemId = 5;
-	optional int32 itemQuantity = 6;
-	optional int32 gemReward = 7;
+	optional RewardProto reward = 3;
 	
 }
