@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.SalesPackage;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.properties.Globals;
 import com.lvl6.utils.DBConnection;
 
 @Component
@@ -146,6 +147,9 @@ public class SalesPackageRetrieveUtils {
 
         int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);
 
+        productId =  Globals.APPLE_BUNDLE_ID() + "."
+                + productId;
+        
 		SalesPackage salesPackage = new SalesPackage(id, productId, price, uuid, timeStart, timeEnd, succId, customMenuId);
 		return salesPackage;
 	}
