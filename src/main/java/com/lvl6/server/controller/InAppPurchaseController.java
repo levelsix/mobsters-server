@@ -36,6 +36,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
@@ -117,8 +118,11 @@ public class InAppPurchaseController extends EventController {
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
 
-	@Autowired
-	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+    @Autowired
+    protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+
+    @Autowired
+    protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
 
 	public InAppPurchaseController() {
@@ -450,7 +454,7 @@ public class InAppPurchaseController extends EventController {
 		}
 
 		SalesPackageProto spp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
-				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils);
+				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setSuccessorSalesPackage(spp);
 
 	}
