@@ -32,7 +32,6 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
-import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -81,14 +80,6 @@ public class InAppPurchaseStarterPackTest {
 		iapa.setUpdateUtil(mockedUpdateUtil);
 	}
 
-	@Test
-	public void testCheckIfDuplicateReceipt() {
-		assertFalse(InAppPurchaseUtils.checkIfDuplicateReceipt(mockedReceiptFromApple1,
-				mockedIAPHistoryRetrieveUtil));
-
-		assertTrue(InAppPurchaseUtils.checkIfDuplicateReceipt(mockedReceiptFromApple2,
-				mockedIAPHistoryRetrieveUtil));
-	}
 
 //	@Test
 //	public void testPackageIsSalesPackage() {

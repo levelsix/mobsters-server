@@ -159,6 +159,7 @@ import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 //goal is to not compute proto analog of static data
@@ -230,6 +231,9 @@ public class StaticDataContainer {
 
 	@Autowired
 	protected GoldSaleRetrieveUtils goldSaleRetrieveUtils;
+
+	@Autowired
+	protected InAppPurchaseUtils inAppPurchaseUtils;
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
@@ -1085,8 +1089,9 @@ public class StaticDataContainer {
 		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 
-			SalesPackageProto spProto = createInfoProtoUtils
-					.createSalesPackageProto(sp);
+			SalesPackageProto spProto = inAppPurchaseUtils
+					.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils);
 			sdpb.addSalesPackage(spProto);
 		}
 	}

@@ -183,6 +183,7 @@ import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
+import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -250,6 +251,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+
+	@Autowired
+	protected InAppPurchaseUtils inAppPurchaseUtils;
 
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -1676,8 +1680,8 @@ public class StartupController extends EventController {
 			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
 						(sp.getTimeEnd().getTime() > now.getTime())) {
-					SalesPackageProto spProto = createInfoProtoUtils
-							.createSalesPackageProto(sp);
+					SalesPackageProto spProto = inAppPurchaseUtils
+							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}
@@ -1692,7 +1696,8 @@ public class StartupController extends EventController {
 			for(Integer id : idsToSalesPackages.keySet()) {
 				SalesPackage sp = idsToSalesPackages.get(id);
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
-					SalesPackageProto spProto = createInfoProtoUtils.createSalesPackageProto(sp);
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}

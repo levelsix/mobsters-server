@@ -34,6 +34,7 @@ public class InAppPurchaseAction {
 	protected UpdateUtil updateUtil;
 	private CreateInfoProtoUtils createInfoProtoUtils;
 	private MiscMethods miscMethods;
+	private InAppPurchaseUtils inAppPurchaseUtils;
 
 
 	public InAppPurchaseAction() {
@@ -46,7 +47,8 @@ public class InAppPurchaseAction {
 			String uuid, IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			CreateInfoProtoUtils createInfoProtoUtils,
-			MiscMethods miscMethods) {
+			MiscMethods miscMethods,
+			InAppPurchaseUtils inAppPurchaseUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -58,6 +60,7 @@ public class InAppPurchaseAction {
 		this.updateUtil = updateUtil;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.miscMethods = miscMethods;
+		this.inAppPurchaseUtils = inAppPurchaseUtils;
 	}
 
 	//derived state
@@ -106,7 +109,7 @@ public class InAppPurchaseAction {
 
 	public boolean verifyPurchase(Builder resBuilder) {
 		boolean duplicateReceipt = true;
-		duplicateReceipt = InAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
+		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
 		if(duplicateReceipt) {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
