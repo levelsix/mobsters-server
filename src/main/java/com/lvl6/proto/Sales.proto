@@ -32,7 +32,7 @@ message SalesPackageProto {
 message SalesItemProto {
 	optional int32 salesItemId = 1;
 	optional int32 salesPackageId = 2;
-	optional RewardProto reward = 3;
+	repeated RewardProto reward = 3;
 }
 
 //------------------------------------------------------------------------------------------
@@ -40,6 +40,6 @@ message SalesItemProto {
 message SalesDisplayItemProto {
 	optional int32 salesItemId = 1;
 	optional int32 salesPackageId = 2;
-	optional RewardProto reward = 3;
+	repeated RewardProto reward = 3;
 	
 }

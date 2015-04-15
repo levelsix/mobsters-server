@@ -2134,17 +2134,28 @@ public final class SalesProto {
     int getSalesPackageId();
 
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasReward();
+    java.util.List<com.lvl6.proto.RewardsProto.RewardProto> 
+        getRewardList();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    com.lvl6.proto.RewardsProto.RewardProto getReward(int index);
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
+    int getRewardCount();
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+        getRewardOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesItemProto}
@@ -2209,16 +2220,11 @@ public final class SalesProto {
               break;
             }
             case 26: {
-              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = reward_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>();
+                mutable_bitField0_ |= 0x00000004;
               }
-              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(reward_);
-                reward_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
+              reward_.add(input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -2229,6 +2235,9 @@ public final class SalesProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          reward_ = java.util.Collections.unmodifiableList(reward_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2292,30 +2301,44 @@ public final class SalesProto {
     }
 
     public static final int REWARD_FIELD_NUMBER = 3;
-    private com.lvl6.proto.RewardsProto.RewardProto reward_;
+    private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_;
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public boolean hasReward() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+    public java.util.List<com.lvl6.proto.RewardsProto.RewardProto> getRewardList() {
       return reward_;
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+    public java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+        getRewardOrBuilderList() {
       return reward_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public int getRewardCount() {
+      return reward_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getReward(int index) {
+      return reward_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
+        int index) {
+      return reward_.get(index);
     }
 
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
-      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      reward_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2336,8 +2359,8 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, salesPackageId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, reward_);
+      for (int i = 0; i < reward_.size(); i++) {
+        output.writeMessage(3, reward_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2356,9 +2379,9 @@ public final class SalesProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, salesPackageId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      for (int i = 0; i < reward_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, reward_);
+          .computeMessageSize(3, reward_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2483,11 +2506,11 @@ public final class SalesProto {
         salesPackageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (rewardBuilder_ == null) {
-          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          reward_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           rewardBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -2524,10 +2547,11 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000002;
         }
         result.salesPackageId_ = salesPackageId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            reward_ = java.util.Collections.unmodifiableList(reward_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
           result.reward_ = reward_;
         } else {
           result.reward_ = rewardBuilder_.build();
@@ -2554,8 +2578,31 @@ public final class SalesProto {
         if (other.hasSalesPackageId()) {
           setSalesPackageId(other.getSalesPackageId());
         }
-        if (other.hasReward()) {
-          mergeReward(other.getReward());
+        if (rewardBuilder_ == null) {
+          if (!other.reward_.isEmpty()) {
+            if (reward_.isEmpty()) {
+              reward_ = other.reward_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureRewardIsMutable();
+              reward_.addAll(other.reward_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.reward_.isEmpty()) {
+            if (rewardBuilder_.isEmpty()) {
+              rewardBuilder_.dispose();
+              rewardBuilder_ = null;
+              reward_ = other.reward_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              rewardBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRewardFieldBuilder() : null;
+            } else {
+              rewardBuilder_.addAllMessages(other.reward_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2648,115 +2695,239 @@ public final class SalesProto {
         return this;
       }
 
-      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
-       */
-      public boolean hasReward() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+      private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_ =
+        java.util.Collections.emptyList();
+      private void ensureRewardIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>(reward_);
+          bitField0_ |= 0x00000004;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      public java.util.List<com.lvl6.proto.RewardsProto.RewardProto> getRewardList() {
         if (rewardBuilder_ == null) {
-          return reward_;
+          return java.util.Collections.unmodifiableList(reward_);
         } else {
-          return rewardBuilder_.getMessage();
+          return rewardBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+      public int getRewardCount() {
+        if (rewardBuilder_ == null) {
+          return reward_.size();
+        } else {
+          return rewardBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getReward(int index) {
+        if (rewardBuilder_ == null) {
+          return reward_.get(index);
+        } else {
+          return rewardBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder setReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto value) {
         if (rewardBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          reward_ = value;
+          ensureRewardIsMutable();
+          reward_.set(index, value);
           onChanged();
         } else {
-          rewardBuilder_.setMessage(value);
+          rewardBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
       public Builder setReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          ensureRewardIsMutable();
+          reward_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRewardIsMutable();
+          reward_.add(value);
+          onChanged();
+        } else {
+          rewardBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRewardIsMutable();
+          reward_.add(index, value);
+          onChanged();
+        } else {
+          rewardBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addReward(
           com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
         if (rewardBuilder_ == null) {
-          reward_ = builderForValue.build();
+          ensureRewardIsMutable();
+          reward_.add(builderForValue.build());
           onChanged();
         } else {
-          rewardBuilder_.setMessage(builderForValue.build());
+          rewardBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+      public Builder addReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
         if (rewardBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
-            reward_ =
-              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
-          } else {
-            reward_ = value;
-          }
+          ensureRewardIsMutable();
+          reward_.add(index, builderForValue.build());
           onChanged();
         } else {
-          rewardBuilder_.mergeFrom(value);
+          rewardBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addAllReward(
+          java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.RewardProto> values) {
+        if (rewardBuilder_ == null) {
+          ensureRewardIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, reward_);
+          onChanged();
+        } else {
+          rewardBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
       public Builder clearReward() {
         if (rewardBuilder_ == null) {
-          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          reward_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           rewardBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getRewardFieldBuilder().getBuilder();
+      public Builder removeReward(int index) {
+        if (rewardBuilder_ == null) {
+          ensureRewardIsMutable();
+          reward_.remove(index);
+          onChanged();
+        } else {
+          rewardBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
-        if (rewardBuilder_ != null) {
-          return rewardBuilder_.getMessageOrBuilder();
-        } else {
-          return reward_;
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder(
+          int index) {
+        return getRewardFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
+          int index) {
+        if (rewardBuilder_ == null) {
+          return reward_.get(index);  } else {
+          return rewardBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+           getRewardOrBuilderList() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(reward_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder addRewardBuilder() {
+        return getRewardFieldBuilder().addBuilder(
+            com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder addRewardBuilder(
+          int index) {
+        return getRewardFieldBuilder().addBuilder(
+            index, com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public java.util.List<com.lvl6.proto.RewardsProto.RewardProto.Builder> 
+           getRewardBuilderList() {
+        return getRewardFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
           getRewardFieldBuilder() {
         if (rewardBuilder_ == null) {
-          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          rewardBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getReward(),
+                  reward_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           reward_ = null;
@@ -2798,17 +2969,28 @@ public final class SalesProto {
     int getSalesPackageId();
 
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasReward();
+    java.util.List<com.lvl6.proto.RewardsProto.RewardProto> 
+        getRewardList();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    com.lvl6.proto.RewardsProto.RewardProto getReward(int index);
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
+    int getRewardCount();
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+        getRewardOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesDisplayItemProto}
@@ -2873,16 +3055,11 @@ public final class SalesProto {
               break;
             }
             case 26: {
-              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = reward_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>();
+                mutable_bitField0_ |= 0x00000004;
               }
-              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(reward_);
-                reward_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
+              reward_.add(input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -2893,6 +3070,9 @@ public final class SalesProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          reward_ = java.util.Collections.unmodifiableList(reward_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2956,30 +3136,44 @@ public final class SalesProto {
     }
 
     public static final int REWARD_FIELD_NUMBER = 3;
-    private com.lvl6.proto.RewardsProto.RewardProto reward_;
+    private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_;
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public boolean hasReward() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+    public java.util.List<com.lvl6.proto.RewardsProto.RewardProto> getRewardList() {
       return reward_;
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+    public java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+        getRewardOrBuilderList() {
       return reward_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public int getRewardCount() {
+      return reward_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getReward(int index) {
+      return reward_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
+        int index) {
+      return reward_.get(index);
     }
 
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
-      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      reward_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3000,8 +3194,8 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, salesPackageId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, reward_);
+      for (int i = 0; i < reward_.size(); i++) {
+        output.writeMessage(3, reward_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3020,9 +3214,9 @@ public final class SalesProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, salesPackageId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      for (int i = 0; i < reward_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, reward_);
+          .computeMessageSize(3, reward_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3147,11 +3341,11 @@ public final class SalesProto {
         salesPackageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (rewardBuilder_ == null) {
-          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          reward_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           rewardBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -3188,10 +3382,11 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000002;
         }
         result.salesPackageId_ = salesPackageId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            reward_ = java.util.Collections.unmodifiableList(reward_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
           result.reward_ = reward_;
         } else {
           result.reward_ = rewardBuilder_.build();
@@ -3218,8 +3413,31 @@ public final class SalesProto {
         if (other.hasSalesPackageId()) {
           setSalesPackageId(other.getSalesPackageId());
         }
-        if (other.hasReward()) {
-          mergeReward(other.getReward());
+        if (rewardBuilder_ == null) {
+          if (!other.reward_.isEmpty()) {
+            if (reward_.isEmpty()) {
+              reward_ = other.reward_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureRewardIsMutable();
+              reward_.addAll(other.reward_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.reward_.isEmpty()) {
+            if (rewardBuilder_.isEmpty()) {
+              rewardBuilder_.dispose();
+              rewardBuilder_ = null;
+              reward_ = other.reward_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              rewardBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRewardFieldBuilder() : null;
+            } else {
+              rewardBuilder_.addAllMessages(other.reward_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3312,115 +3530,239 @@ public final class SalesProto {
         return this;
       }
 
-      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
-       */
-      public boolean hasReward() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+      private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_ =
+        java.util.Collections.emptyList();
+      private void ensureRewardIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>(reward_);
+          bitField0_ |= 0x00000004;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      public java.util.List<com.lvl6.proto.RewardsProto.RewardProto> getRewardList() {
         if (rewardBuilder_ == null) {
-          return reward_;
+          return java.util.Collections.unmodifiableList(reward_);
         } else {
-          return rewardBuilder_.getMessage();
+          return rewardBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+      public int getRewardCount() {
+        if (rewardBuilder_ == null) {
+          return reward_.size();
+        } else {
+          return rewardBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getReward(int index) {
+        if (rewardBuilder_ == null) {
+          return reward_.get(index);
+        } else {
+          return rewardBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder setReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto value) {
         if (rewardBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          reward_ = value;
+          ensureRewardIsMutable();
+          reward_.set(index, value);
           onChanged();
         } else {
-          rewardBuilder_.setMessage(value);
+          rewardBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
       public Builder setReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          ensureRewardIsMutable();
+          reward_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRewardIsMutable();
+          reward_.add(value);
+          onChanged();
+        } else {
+          rewardBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRewardIsMutable();
+          reward_.add(index, value);
+          onChanged();
+        } else {
+          rewardBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addReward(
           com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
         if (rewardBuilder_ == null) {
-          reward_ = builderForValue.build();
+          ensureRewardIsMutable();
+          reward_.add(builderForValue.build());
           onChanged();
         } else {
-          rewardBuilder_.setMessage(builderForValue.build());
+          rewardBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+      public Builder addReward(
+          int index, com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
         if (rewardBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
-            reward_ =
-              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
-          } else {
-            reward_ = value;
-          }
+          ensureRewardIsMutable();
+          reward_.add(index, builderForValue.build());
           onChanged();
         } else {
-          rewardBuilder_.mergeFrom(value);
+          rewardBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder addAllReward(
+          java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.RewardProto> values) {
+        if (rewardBuilder_ == null) {
+          ensureRewardIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, reward_);
+          onChanged();
+        } else {
+          rewardBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
       public Builder clearReward() {
         if (rewardBuilder_ == null) {
-          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          reward_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           rewardBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getRewardFieldBuilder().getBuilder();
+      public Builder removeReward(int index) {
+        if (rewardBuilder_ == null) {
+          ensureRewardIsMutable();
+          reward_.remove(index);
+          onChanged();
+        } else {
+          rewardBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
-        if (rewardBuilder_ != null) {
-          return rewardBuilder_.getMessageOrBuilder();
-        } else {
-          return reward_;
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder(
+          int index) {
+        return getRewardFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
+          int index) {
+        if (rewardBuilder_ == null) {
+          return reward_.get(index);  } else {
+          return rewardBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+           getRewardOrBuilderList() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(reward_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder addRewardBuilder() {
+        return getRewardFieldBuilder().addBuilder(
+            com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder addRewardBuilder(
+          int index) {
+        return getRewardFieldBuilder().addBuilder(
+            index, com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public java.util.List<com.lvl6.proto.RewardsProto.RewardProto.Builder> 
+           getRewardBuilderList() {
+        return getRewardFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
           getRewardFieldBuilder() {
         if (rewardBuilder_ == null) {
-          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          rewardBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getReward(),
+                  reward_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           reward_ = null;
@@ -3474,10 +3816,10 @@ public final class SalesProto {
       "roto.CustomMenuProto\022\016\n\006succId\030\010 \001(\005\022\021\n\t" +
       "timeStart\030\t \001(\003\022\017\n\007timeEnd\030\n \001(\003\"j\n\016Sale",
       "sItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016sales" +
-      "PackageId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lv" +
+      "PackageId\030\002 \001(\005\022+\n\006reward\030\003 \003(\0132\033.com.lv" +
       "l6.proto.RewardProto\"q\n\025SalesDisplayItem" +
       "Proto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPacka" +
-      "geId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.pr" +
+      "geId\030\002 \001(\005\022+\n\006reward\030\003 \003(\0132\033.com.lvl6.pr" +
       "oto.RewardProtoB\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
