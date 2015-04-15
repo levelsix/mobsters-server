@@ -47,6 +47,7 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseStarterPackAction;
+import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -70,6 +71,9 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
+	protected InAppPurchaseUtils inAppPurchaseUtils;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -357,7 +361,7 @@ public class InAppPurchaseController extends EventController {
 				iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
 						iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
 						createInfoProtoUtils, miscMethods, structureMoneyTreeRetrieveUtils,
-						structureForUserRetrieveUtils);
+						structureForUserRetrieveUtils, inAppPurchaseUtils);
 
 				iapmta.execute(resBuilder);
 			}
@@ -368,14 +372,14 @@ public class InAppPurchaseController extends EventController {
 						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
 						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
 						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-						salesPackage);
+						salesPackage, inAppPurchaseUtils);
 
 				iapsa.execute(resBuilder);
 			}
 			else {
 				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, now,
 						uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
-						miscMethods);
+						miscMethods, inAppPurchaseUtils);
 
 				iapa.execute(resBuilder);
 			}
@@ -445,7 +449,8 @@ public class InAppPurchaseController extends EventController {
 			}
 		}
 
-		SalesPackageProto spp = createInfoProtoUtils.createSalesPackageProto(predecessorSalesPackage);
+		SalesPackageProto spp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
+				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils);
 		resBuilder.setSuccessorSalesPackage(spp);
 
 	}

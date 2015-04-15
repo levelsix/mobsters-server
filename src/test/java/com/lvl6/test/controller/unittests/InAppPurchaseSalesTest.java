@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -32,7 +30,6 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
-import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -40,33 +37,16 @@ public class InAppPurchaseSalesTest {
 
 	private static User mockedUser;
 	private static UpdateUtil mockedUpdateUtil;
-	private static JSONObject mockedReceiptFromApple1;
-	private static JSONObject mockedReceiptFromApple2;
 	private static IAPHistoryRetrieveUtils mockedIAPHistoryRetrieveUtil;
 	private static MonsterRetrieveUtils mockedMonsterRetrieveUtils;
 	private static MonsterStuffUtils mockedMonsterStuffUtils;
 	private static InAppPurchaseSalesAction iapa;
 
+
 	@BeforeClass
 	public static void setUp() {
 		mockedUser = mock(User.class);
 		when(mockedUser.getId()).thenReturn("userId");
-
-		mockedReceiptFromApple1 = mock(JSONObject.class);
-		mockedReceiptFromApple2 = mock(JSONObject.class);
-		try {
-			when(mockedReceiptFromApple1.getString(any(String.class))).thenReturn("123");
-			when(mockedReceiptFromApple2.getString(any(String.class))).thenReturn("456");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		mockedIAPHistoryRetrieveUtil = mock(IAPHistoryRetrieveUtils.class);
-		long uniqueLong = 123;
-		long duplicateLong = 456;
-		when(mockedIAPHistoryRetrieveUtil.checkIfDuplicateTransaction(uniqueLong)).thenReturn(false);
-		when(mockedIAPHistoryRetrieveUtil.checkIfDuplicateTransaction(duplicateLong)).thenReturn(true);
 
 		mockedMonsterRetrieveUtils = mock(MonsterRetrieveUtils.class);
 
@@ -81,14 +61,6 @@ public class InAppPurchaseSalesTest {
 		iapa.setUpdateUtil(mockedUpdateUtil);
 	}
 
-	@Test
-	public void testCheckIfDuplicateReceipt() {
-		assertFalse(InAppPurchaseUtils.checkIfDuplicateReceipt(mockedReceiptFromApple1,
-				mockedIAPHistoryRetrieveUtil));
-
-		assertTrue(InAppPurchaseUtils.checkIfDuplicateReceipt(mockedReceiptFromApple2,
-				mockedIAPHistoryRetrieveUtil));
-	}
 
 //	@Test
 //	public void testPackageIsSalesPackage() {

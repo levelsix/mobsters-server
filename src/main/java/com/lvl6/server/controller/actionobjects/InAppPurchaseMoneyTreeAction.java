@@ -48,6 +48,7 @@ public class InAppPurchaseMoneyTreeAction {
 	private MiscMethods miscMethods;
 	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+	private InAppPurchaseUtils inAppPurchaseUtils;
 
 	public StructureMoneyTreeRetrieveUtils getStructureMoneyTreeRetrieveUtils() {
 		return structureMoneyTreeRetrieveUtils;
@@ -80,7 +81,8 @@ public class InAppPurchaseMoneyTreeAction {
 			CreateInfoProtoUtils createInfoProtoUtils,
 			MiscMethods miscMethods,
 			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils,
-			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
+			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils,
+			InAppPurchaseUtils inAppPurchaseUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -95,6 +97,7 @@ public class InAppPurchaseMoneyTreeAction {
 		this.miscMethods = miscMethods;
 		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
 		this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
+		this.inAppPurchaseUtils = inAppPurchaseUtils;
 	}
 
 	//derived state
@@ -144,7 +147,7 @@ public class InAppPurchaseMoneyTreeAction {
 
 	public boolean verifyMoneyTree(Builder resBuilder) {
 		boolean duplicateReceipt = true;
-		duplicateReceipt = InAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
+		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
 		if(duplicateReceipt) {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);

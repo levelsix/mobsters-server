@@ -58,6 +58,7 @@ public class InAppPurchaseSalesAction {
 	private MonsterRetrieveUtils monsterRetrieveUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private SalesPackage salesPackage;
+	private InAppPurchaseUtils inAppPurchaseUtils;
 
 	public InAppPurchaseSalesAction() {
 		super();
@@ -76,7 +77,7 @@ public class InAppPurchaseSalesAction {
 			SalesItemRetrieveUtils salesItemRetrieveUtils,
 			MonsterRetrieveUtils monsterRetrieveUtils,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			SalesPackage salesPackage) {
+			SalesPackage salesPackage, InAppPurchaseUtils inAppPurchaseUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -95,6 +96,7 @@ public class InAppPurchaseSalesAction {
 		this.monsterRetrieveUtils = monsterRetrieveUtils;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 		this.salesPackage = salesPackage;
+		this.inAppPurchaseUtils = inAppPurchaseUtils;
 	}
 
 	//derived state
@@ -144,7 +146,7 @@ public class InAppPurchaseSalesAction {
 
 	public boolean verifySalesPackage(Builder resBuilder) {
 		boolean duplicateReceipt = true;
-		duplicateReceipt = InAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
+		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
 		if(duplicateReceipt) {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
