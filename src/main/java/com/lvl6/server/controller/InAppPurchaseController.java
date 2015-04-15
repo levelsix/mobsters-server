@@ -453,9 +453,12 @@ public class InAppPurchaseController extends EventController {
 			}
 		}
 
-		SalesPackageProto spp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
+        SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
+                salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-		resBuilder.setSuccessorSalesPackage(spp);
+		resBuilder.setPurchasedSalesPackage(curSpp);
+		resBuilder.setSuccessorSalesPackage(preSpp);
 
 	}
 
