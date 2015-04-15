@@ -9,11 +9,12 @@ public class SalesPackage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalesPackage(int id, String productId, int price, String uuid,
+	public SalesPackage(int id, String productId, String name, int price, String uuid,
 			Date timeStart, Date timeEnd, int succId, int customMenuId) {
 		super();
 		this.id = id;
 		this.productId = productId;
+		this.name = name;
 		this.price = price;
 		this.uuid = uuid;
 		this.timeStart = timeStart;
@@ -32,6 +33,7 @@ public class SalesPackage {
 	private Date timeEnd;
 	private int succId;
 	private int customMenuId;
+	private String name;
 
 	public int getId() {
 		return id;
@@ -63,12 +65,12 @@ public class SalesPackage {
 	}
 
 	@Override
-    public String toString() {
-        return "SalesPackage [id=" + id + ", productId=" + productId
-                + ", price=" + price + ", uuid=" + uuid + ", timeStart="
-                + timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
-                + ", customMenuId=" + customMenuId + "]";
-    }
+	public String toString() {
+		return "SalesPackage [id=" + id + ", productId=" + productId
+				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
+				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+				+ ", customMenuId=" + customMenuId + ", name=" + name + "]";
+	}
 
 	public Date getTimeStart() {
 		return timeStart;
@@ -96,6 +98,14 @@ public class SalesPackage {
     public void setCustomMenuId(int customMenuId) {
         this.customMenuId = customMenuId;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 
 

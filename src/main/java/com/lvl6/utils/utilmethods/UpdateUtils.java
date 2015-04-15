@@ -48,7 +48,7 @@ public class UpdateUtils implements UpdateUtil {
 		return (UpdateUtil) AppContext.getApplicationContext().getBean(
 				"updateUtils");
 	}
-	
+
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -65,7 +65,7 @@ public class UpdateUtils implements UpdateUtil {
 	@Override
 	public void updateNullifyDeviceTokens(Set<String> deviceTokens) {
 		if (deviceTokens != null && deviceTokens.size() > 0) {
-			//			String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__DEVICE_TOKEN 
+			//			String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__DEVICE_TOKEN
 			//					+ "=? where ";
 			String query = String.format("update %s set %s=? where ",
 					DBConstants.TABLE_USER, DBConstants.USER__DEVICE_TOKEN);
@@ -534,7 +534,7 @@ public class UpdateUtils implements UpdateUtil {
 
 	/*@Override
 	public boolean updateUsersClanId(Integer clanId, List<Integer> userIds) {
-		String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__CLAN_ID 
+		String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__CLAN_ID
 				+ "=? where (" ;
 		List<Object> values = new ArrayList<Object>();
 		values.add(clanId);
@@ -724,7 +724,7 @@ public class UpdateUtils implements UpdateUtil {
 		//this holds the (...) clauses that go after "VALUES"
 		clauses.clear();
 		//if map(userMonsterId -> expectedHealth) is set then use it
-		//this generates the (...) clauses that go after "VALUES" 
+		//this generates the (...) clauses that go after "VALUES"
 		for (String userMonsterId : userMonsterIdsToHealths.keySet()) {
 			int health = userMonsterIdsToHealths.get(userMonsterId);
 			String subclause = "(?,?)";
@@ -1093,7 +1093,7 @@ public class UpdateUtils implements UpdateUtil {
 	@Override
 	public int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems) {
 		String tableName = DBConstants.TABLE_ITEM_FOR_USER;
-		
+
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		for(Integer itemId : itemIdsToUpdatedItems.keySet()) {
 			ItemForUser ifu = itemIdsToUpdatedItems.get(itemId);
@@ -1112,7 +1112,7 @@ public class UpdateUtils implements UpdateUtil {
 		replaceTheseColumns.add(DBConstants.ITEM_FOR_USER__QUANTITY);
 		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
 				tableName, newRows, replaceTheseColumns);
-		
+
 		return numUpdated;
 	}*/
 
@@ -1877,7 +1877,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean updateUserSalesValue(String userId, int newSalesValue, Date now) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1885,7 +1885,10 @@ public class UpdateUtils implements UpdateUtil {
 				.put(DBConstants.USER__ID, userId);
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__SALES_VALUE, newSalesValue);
+		if(newSalesValue != 0) {
+			absoluteParams.put(DBConstants.USER__SALES_VALUE, newSalesValue);
+		}
+
 		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
 
 		int numUpdated = DBConnection.get().updateTableRows(
@@ -1896,7 +1899,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
-		
+
 	@Override
 	public boolean updateUserBattleItems(String userId,
 			List<BattleItemForUser> updateList) {
@@ -1911,24 +1914,24 @@ public class UpdateUtils implements UpdateUtil {
 		sb.append("insert into %s (%s, %s, %s) values ");
 		List<String> questionsList = Collections.nCopies(updateList.size(),"(?, ?, ?)");
 		String questionMarks = StringUtils.csvList(questionsList);
-		
+
 		for(BattleItemForUser bifu : updateList) {
 			values.add(bifu.getId());
 			values.add(bifu.getUserId());
 			values.add(bifu.getQuantity());
 		}
-		
+
 		sb.append(questionMarks);
 		sb.append(" on duplicate key update %s = values(%s)");
-		
+
 		log.info(sb.toString());
 		log.info(""+ values);
-		
+
 		String query = String.format(sb.toString(), tableName,
-				DBConstants.BATTLE_ITEM_FOR_USER__ID, DBConstants.BATTLE_ITEM_FOR_USER__USER_ID, 
-				DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, 
+				DBConstants.BATTLE_ITEM_FOR_USER__ID, DBConstants.BATTLE_ITEM_FOR_USER__USER_ID,
+				DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY, DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY,
 				DBConstants.BATTLE_ITEM_FOR_USER__QUANTITY);
-		
+
 		log.info(query);
 
 		try {
@@ -1943,8 +1946,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return true;
 	}
-		
-	
+
+
 	@Override
 	public boolean updateUserSalesJumpTwoTiers(String userId, boolean jumpTwoTiers) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1962,15 +1965,15 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean updateUserTranslationSetting(String recipientId, 
+	public boolean updateUserTranslationSetting(String recipientId,
 			String senderId, String newLanguage, boolean translateOn) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
-		
-		log.info("updating language setting for user=%s from senderuser=%s", 
+
+		log.info("updating language setting for user=%s from senderuser=%s",
 				recipientId, senderId);
-		
+
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
 				recipientId);
@@ -1978,9 +1981,9 @@ public class UpdateUtils implements UpdateUtil {
 				senderId);
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, 
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE,
 				newLanguage);
-		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, 
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
 				translateOn);
 
 		int numUpdated = DBConnection.get().updateTableRows(
@@ -1990,15 +1993,15 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean updateUserTranslationSettingGlobalLanguage(String recipientId, 
+	public boolean updateUserTranslationSettingGlobalLanguage(String recipientId,
 			String chatType, String language, boolean translateOn) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
-		
-		log.info("updating language setting for global user=%s from senderuser=%s", 
+
+		log.info("updating language setting for global user=%s from senderuser=%s",
 				recipientId);
-		
+
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
 				recipientId);
@@ -2006,9 +2009,9 @@ public class UpdateUtils implements UpdateUtil {
 				chatType);
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, 
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE,
 				language);
-		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, 
+		absoluteParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
 				translateOn);
 
 		int numUpdated = DBConnection.get().updateTableRows(
@@ -2022,18 +2025,18 @@ public class UpdateUtils implements UpdateUtil {
 	@Override
 	public boolean updateUserStrength(String userId, long updatedStrength) {
 		String tableName = DBConstants.TABLE_USER;
-		
-		log.info("updating user strength, user={} and strength ={}", 
+
+		log.info("updating user strength, user={} and strength ={}",
 				userId, updatedStrength);
-		
+
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID,
 				userId);
-		
+
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__TOTAL_STRENGTH, 
+		absoluteParams.put(DBConstants.USER__TOTAL_STRENGTH,
 				updatedStrength);
-		
+
 		int numUpdated = DBConnection.get().updateTableRows(
 				tableName, null, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
@@ -2042,20 +2045,21 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	@Override
 	public boolean updateUserSalesLastPurchaseTime(String userId, Timestamp ts) {
 		String tableName = DBConstants.TABLE_USER;
-		
-		log.info("updating user sales last purchasetime for user={}", 
+
+		log.info("updating user sales last purchasetime for user={}",
 				userId);
-		
+
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID,
 				userId);
-		
+
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, 
+		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME,
 				ts);
-		
+
 		int numUpdated = DBConnection.get().updateTableRows(
 				tableName, null, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
@@ -2064,9 +2068,9 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	
-	
-	
-	
-	
+
+
+
+
+
 }

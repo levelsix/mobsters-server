@@ -149,7 +149,9 @@ public class SalesPackageRetrieveUtils {
         productId =  Globals.APPLE_BUNDLE_ID() + "."
                 + productId;
 
-		SalesPackage salesPackage = new SalesPackage(id, productId, price, uuid, timeStart, timeEnd, succId, customMenuId);
+        String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
+
+		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid, timeStart, timeEnd, succId, customMenuId);
 		return salesPackage;
 	}
 }

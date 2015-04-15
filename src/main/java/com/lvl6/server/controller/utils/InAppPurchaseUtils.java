@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CustomMenu;
+import com.lvl6.info.Reward;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
@@ -23,6 +24,7 @@ import com.lvl6.proto.SalesProto.SalesItemProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -39,6 +41,9 @@ public class InAppPurchaseUtils {
 
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+
+    @Autowired
+    protected RewardRetrieveUtils rewardRetrieveUtils;
 
 
 	public boolean checkIfDuplicateReceipt(JSONObject receiptFromApple,
@@ -142,10 +147,8 @@ public class InAppPurchaseUtils {
 		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
 		sipb.setSalesItemId(si.getId());
 		sipb.setSalesPackageId(si.getSalesPackageId());
-		sipb.setMonsterId(si.getMonsterId());
-		sipb.setMonsterQuantity(si.getMonsterQuantity());
-		sipb.setItemId(si.getItemId());
-		sipb.setItemQuantity(si.getItemQuantity());
+		Reward r = rewardRetrieveUtils.getRewardById(si.getRewardId());
+		sipb.setReward(createInfoProtoUtils.createRewardProto(r));
 
 		return sipb.build();
 	}
@@ -154,10 +157,8 @@ public class InAppPurchaseUtils {
 		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
 		sdipb.setSalesItemId(sdi.getId());
 		sdipb.setSalesPackageId(sdi.getSalesPackageId());
-		sdipb.setMonsterId(sdi.getMonsterId());
-		sdipb.setMonsterQuantity(sdi.getMonsterQuantity());
-		sdipb.setItemId(sdi.getItemId());
-		sdipb.setItemQuantity(sdi.getItemQuantity());
+		Reward r = rewardRetrieveUtils.getRewardById(sdi.getRewardId());
+		sdipb.setReward(createInfoProtoUtils.createRewardProto(r));
 
 		return sdipb.build();
 	}

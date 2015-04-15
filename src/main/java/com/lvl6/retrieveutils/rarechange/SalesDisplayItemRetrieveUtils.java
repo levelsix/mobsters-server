@@ -169,17 +169,12 @@ public class SalesDisplayItemRetrieveUtils {
 		int id = rs.getInt(DBConstants.SALES_DISPLAY_ITEM__ID);
 		int salesPackageId = rs
 				.getInt(DBConstants.SALES_DISPLAY_ITEM__SALES_PACKAGE_ID);
-		int monsterId = rs
-				.getInt(DBConstants.SALES_DISPLAY_ITEM__MONSTER_ID);
-		int monsterQuantity = rs
-				.getInt(DBConstants.SALES_DISPLAY_ITEM__MONSTER_QUANTITY);
-		int itemId = rs
-				.getInt(DBConstants.SALES_DISPLAY_ITEM__ITEM_ID);
-		int itemQuantity = rs.getInt(DBConstants.SALES_DISPLAY_ITEM__ITEM_QUANTITY);
-		
+		int rewardId = rs.getInt(DBConstants.SALES_DISPLAY_ITEM__REWARD_ID);
+
+
 		SalesDisplayItem salesDisplayItem = new SalesDisplayItem(id, salesPackageId,
-				monsterId, monsterQuantity, itemId, itemQuantity);
-		
+				rewardId);
+
 		return salesDisplayItem;
 	}
 }
