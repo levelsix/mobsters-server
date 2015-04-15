@@ -1097,19 +1097,19 @@ public class StaticDataContainer {
 	}
 
 	private void setCustomMenu(Builder sdpb) {
-		Map<Integer, CustomMenu> idsToCustomMenus = customMenuRetrieveUtils.getIdsToCustomMenus();
-
-		if (null == idsToCustomMenus || idsToCustomMenus.isEmpty()) {
-			log.warn("setCustomMenu() no settings");
-			return;
-		}
-
-		for(Integer customMenuId : idsToCustomMenus.keySet()) {
-			CustomMenu cm = idsToCustomMenus.get(customMenuId);
-
-			CustomMenuProto cmp = createInfoProtoUtils.createCustomMenuProto(cm);
-			sdpb.addCustomMenu(cmp);
-		}
+//		Map<Integer, List<CustomMenu>> idsToCustomMenus = customMenuRetrieveUtils.getIdsToCustomMenus();
+//
+//		if (null == idsToCustomMenus || idsToCustomMenus.isEmpty()) {
+//			log.warn("setCustomMenu() no settings");
+//			return;
+//		}
+//
+//		for(Integer customMenuId : idsToCustomMenus.keySet()) {
+//			CustomMenu cm = idsToCustomMenus.get(customMenuId);
+//
+//			CustomMenuProto cmp = createInfoProtoUtils.createCustomMenuProto(cm);
+//			sdpb.addCustomMenu(cmp);
+//		}
 
 	}
 
