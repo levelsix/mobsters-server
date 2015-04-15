@@ -20,7 +20,7 @@ message SalesPackageProto {
 	optional string uuid = 4;
 	repeated SalesItemProto sip = 5;
 	repeated SalesDisplayItemProto sdip = 6;
-	optional CustomMenuProto cmp = 7;
+	repeated CustomMenuProto cmp = 7;
 }
 
 //------------------------------------------------------------------------------------------

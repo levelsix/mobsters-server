@@ -120,8 +120,13 @@ public class InAppPurchaseUtils {
 			}
 		}
 		
-		CustomMenu cm = customMenuRetrieveUtils.getCustomMenuForId(sp.getCustomMenuId());
-		b.setCmp(createInfoProtoUtils.createCustomMenuProto(cm));
+		List<CustomMenu> cms = customMenuRetrieveUtils.getCustomMenuForId(sp.getCustomMenuId());
+		
+		if (cms != null && !cms.isEmpty()) {
+		    for (CustomMenu cm : cms) {
+		        b.addCmp(createInfoProtoUtils.createCustomMenuProto(cm));
+		    }
+		}
 
 		return b.build();
 	}

@@ -107,17 +107,28 @@ public final class SalesProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
      */
-    boolean hasCmp();
+    java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> 
+        getCmpList();
     /**
-     * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
      */
-    com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCmp();
+    com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCmp(int index);
     /**
-     * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
      */
-    com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder();
+    int getCmpCount();
+    /**
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
+        getCmpOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     */
+    com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesPackageProto}
@@ -210,16 +221,11 @@ public final class SalesProto {
               break;
             }
             case 58: {
-              com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
-                subBuilder = cmp_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                cmp_ = new java.util.ArrayList<com.lvl6.proto.CustomMenuesProto.CustomMenuProto>();
+                mutable_bitField0_ |= 0x00000040;
               }
-              cmp_ = input.readMessage(com.lvl6.proto.CustomMenuesProto.CustomMenuProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(cmp_);
-                cmp_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000010;
+              cmp_.add(input.readMessage(com.lvl6.proto.CustomMenuesProto.CustomMenuProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -235,6 +241,9 @@ public final class SalesProto {
         }
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           sdip_ = java.util.Collections.unmodifiableList(sdip_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          cmp_ = java.util.Collections.unmodifiableList(cmp_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -453,24 +462,38 @@ public final class SalesProto {
     }
 
     public static final int CMP_FIELD_NUMBER = 7;
-    private com.lvl6.proto.CustomMenuesProto.CustomMenuProto cmp_;
+    private java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> cmp_;
     /**
-     * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
      */
-    public boolean hasCmp() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
-     */
-    public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCmp() {
+    public java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> getCmpList() {
       return cmp_;
     }
     /**
-     * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
      */
-    public com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder() {
+    public java.util.List<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
+        getCmpOrBuilderList() {
       return cmp_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     */
+    public int getCmpCount() {
+      return cmp_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     */
+    public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCmp(int index) {
+      return cmp_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+     */
+    public com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder(
+        int index) {
+      return cmp_.get(index);
     }
 
     private void initFields() {
@@ -480,7 +503,7 @@ public final class SalesProto {
       uuid_ = "";
       sip_ = java.util.Collections.emptyList();
       sdip_ = java.util.Collections.emptyList();
-      cmp_ = com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance();
+      cmp_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -513,8 +536,8 @@ public final class SalesProto {
       for (int i = 0; i < sdip_.size(); i++) {
         output.writeMessage(6, sdip_.get(i));
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(7, cmp_);
+      for (int i = 0; i < cmp_.size(); i++) {
+        output.writeMessage(7, cmp_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -549,9 +572,9 @@ public final class SalesProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, sdip_.get(i));
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      for (int i = 0; i < cmp_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, cmp_);
+          .computeMessageSize(7, cmp_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -694,11 +717,11 @@ public final class SalesProto {
           sdipBuilder_.clear();
         }
         if (cmpBuilder_ == null) {
-          cmp_ = com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance();
+          cmp_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           cmpBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -761,10 +784,11 @@ public final class SalesProto {
         } else {
           result.sdip_ = sdipBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000010;
-        }
         if (cmpBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            cmp_ = java.util.Collections.unmodifiableList(cmp_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
           result.cmp_ = cmp_;
         } else {
           result.cmp_ = cmpBuilder_.build();
@@ -853,8 +877,31 @@ public final class SalesProto {
             }
           }
         }
-        if (other.hasCmp()) {
-          mergeCmp(other.getCmp());
+        if (cmpBuilder_ == null) {
+          if (!other.cmp_.isEmpty()) {
+            if (cmp_.isEmpty()) {
+              cmp_ = other.cmp_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureCmpIsMutable();
+              cmp_.addAll(other.cmp_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.cmp_.isEmpty()) {
+            if (cmpBuilder_.isEmpty()) {
+              cmpBuilder_.dispose();
+              cmpBuilder_ = null;
+              cmp_ = other.cmp_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              cmpBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getCmpFieldBuilder() : null;
+            } else {
+              cmpBuilder_.addAllMessages(other.cmp_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1579,115 +1626,239 @@ public final class SalesProto {
         return sdipBuilder_;
       }
 
-      private com.lvl6.proto.CustomMenuesProto.CustomMenuProto cmp_ = com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> cmpBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
-       */
-      public boolean hasCmp() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+      private java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> cmp_ =
+        java.util.Collections.emptyList();
+      private void ensureCmpIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          cmp_ = new java.util.ArrayList<com.lvl6.proto.CustomMenuesProto.CustomMenuProto>(cmp_);
+          bitField0_ |= 0x00000040;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> cmpBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCmp() {
+      public java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> getCmpList() {
         if (cmpBuilder_ == null) {
-          return cmp_;
+          return java.util.Collections.unmodifiableList(cmp_);
         } else {
-          return cmpBuilder_.getMessage();
+          return cmpBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
-      public Builder setCmp(com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
+      public int getCmpCount() {
+        if (cmpBuilder_ == null) {
+          return cmp_.size();
+        } else {
+          return cmpBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getCmp(int index) {
+        if (cmpBuilder_ == null) {
+          return cmp_.get(index);
+        } else {
+          return cmpBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public Builder setCmp(
+          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
         if (cmpBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          cmp_ = value;
+          ensureCmpIsMutable();
+          cmp_.set(index, value);
           onChanged();
         } else {
-          cmpBuilder_.setMessage(value);
+          cmpBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
       public Builder setCmp(
+          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder builderForValue) {
+        if (cmpBuilder_ == null) {
+          ensureCmpIsMutable();
+          cmp_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          cmpBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public Builder addCmp(com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
+        if (cmpBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCmpIsMutable();
+          cmp_.add(value);
+          onChanged();
+        } else {
+          cmpBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public Builder addCmp(
+          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
+        if (cmpBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCmpIsMutable();
+          cmp_.add(index, value);
+          onChanged();
+        } else {
+          cmpBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public Builder addCmp(
           com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder builderForValue) {
         if (cmpBuilder_ == null) {
-          cmp_ = builderForValue.build();
+          ensureCmpIsMutable();
+          cmp_.add(builderForValue.build());
           onChanged();
         } else {
-          cmpBuilder_.setMessage(builderForValue.build());
+          cmpBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
-      public Builder mergeCmp(com.lvl6.proto.CustomMenuesProto.CustomMenuProto value) {
+      public Builder addCmp(
+          int index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder builderForValue) {
         if (cmpBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              cmp_ != com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance()) {
-            cmp_ =
-              com.lvl6.proto.CustomMenuesProto.CustomMenuProto.newBuilder(cmp_).mergeFrom(value).buildPartial();
-          } else {
-            cmp_ = value;
-          }
+          ensureCmpIsMutable();
+          cmp_.add(index, builderForValue.build());
           onChanged();
         } else {
-          cmpBuilder_.mergeFrom(value);
+          cmpBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public Builder addAllCmp(
+          java.lang.Iterable<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProto> values) {
+        if (cmpBuilder_ == null) {
+          ensureCmpIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, cmp_);
+          onChanged();
+        } else {
+          cmpBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
       public Builder clearCmp() {
         if (cmpBuilder_ == null) {
-          cmp_ = com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance();
+          cmp_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           cmpBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder getCmpBuilder() {
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return getCmpFieldBuilder().getBuilder();
+      public Builder removeCmp(int index) {
+        if (cmpBuilder_ == null) {
+          ensureCmpIsMutable();
+          cmp_.remove(index);
+          onChanged();
+        } else {
+          cmpBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder() {
-        if (cmpBuilder_ != null) {
-          return cmpBuilder_.getMessageOrBuilder();
-        } else {
-          return cmp_;
+      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder getCmpBuilder(
+          int index) {
+        return getCmpFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder(
+          int index) {
+        if (cmpBuilder_ == null) {
+          return cmp_.get(index);  } else {
+          return cmpBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
+           getCmpOrBuilderList() {
+        if (cmpBuilder_ != null) {
+          return cmpBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(cmp_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder addCmpBuilder() {
+        return getCmpFieldBuilder().addBuilder(
+            com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder addCmpBuilder(
+          int index) {
+        return getCmpFieldBuilder().addBuilder(
+            index, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
+       */
+      public java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder> 
+           getCmpBuilderList() {
+        return getCmpFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder> 
           getCmpFieldBuilder() {
         if (cmpBuilder_ == null) {
-          cmpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          cmpBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.CustomMenuesProto.CustomMenuProto, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder, com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder>(
-                  getCmp(),
+                  cmp_,
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           cmp_ = null;
@@ -3467,7 +3638,7 @@ public final class SalesProto {
       "ce\030\003 \001(\003\022\014\n\004uuid\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.co" +
       "m.lvl6.proto.SalesItemProto\0223\n\004sdip\030\006 \003(" +
       "\0132%.com.lvl6.proto.SalesDisplayItemProto" +
-      "\022,\n\003cmp\030\007 \001(\0132\037.com.lvl6.proto.CustomMen" +
+      "\022,\n\003cmp\030\007 \003(\0132\037.com.lvl6.proto.CustomMen" +
       "uProto\"\242\001\n\016SalesItemProto\022\023\n\013salesItemId" +
       "\030\001 \001(\005\022\026\n\016salesPackageId\030\002 \001(\005\022\021\n\tmonste",
       "rId\030\003 \001(\005\022\027\n\017monsterQuantity\030\004 \001(\005\022\016\n\006it" +
