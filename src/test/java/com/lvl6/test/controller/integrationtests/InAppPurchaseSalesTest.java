@@ -206,7 +206,7 @@ public class InAppPurchaseSalesTest {
 				+ "R1cyIgPSAiMCI7Cn0=";
 
 		iaprpb.setReceipt(receipt1);
-		iaprpb.setUuid("test1");
+		iaprpb.setUuid("udid");
 
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);

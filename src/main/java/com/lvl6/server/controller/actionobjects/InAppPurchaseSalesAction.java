@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.Reward;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
@@ -21,12 +22,12 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
-import com.lvl6.proto.ItemsProto.UserItemProto;
-import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
@@ -59,6 +60,8 @@ public class InAppPurchaseSalesAction {
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private SalesPackage salesPackage;
 	private InAppPurchaseUtils inAppPurchaseUtils;
+	private RewardRetrieveUtils rewardRetrieveUtils;
+	private UserRetrieveUtils2 userRetrieveUtil;
 
 	public InAppPurchaseSalesAction() {
 		super();
@@ -77,7 +80,9 @@ public class InAppPurchaseSalesAction {
 			SalesItemRetrieveUtils salesItemRetrieveUtils,
 			MonsterRetrieveUtils monsterRetrieveUtils,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			SalesPackage salesPackage, InAppPurchaseUtils inAppPurchaseUtils) {
+			SalesPackage salesPackage, InAppPurchaseUtils inAppPurchaseUtils,
+			RewardRetrieveUtils rewardRetrieveUtils,
+			UserRetrieveUtils2 userRetrieveUtil) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -97,12 +102,16 @@ public class InAppPurchaseSalesAction {
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 		this.salesPackage = salesPackage;
 		this.inAppPurchaseUtils = inAppPurchaseUtils;
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
 	//derived state
 	private double salesPackagePrice;
 	private int gemChange;
 	private boolean salesJumpTwoTiers;
+	private List<Reward> listOfRewards;
+	private AwardRewardAction ara;
 
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
@@ -136,7 +145,27 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public boolean verifySyntax(Builder resBuilder) {
+		List<SalesItem> salesItemList = salesItemRetrieveUtils.getSalesItemsForSalesPackageId(salesPackage.getId());
+		if(salesItemList == null || salesItemList.isEmpty()) {
+			log.error("no sales items for sales package {}", salesPackage);
+			return false;
+		}
 
+		Map<Integer, Reward> idsToRewards = rewardRetrieveUtils.getRewardIdsToRewards();
+		if(idsToRewards == null || idsToRewards.isEmpty()) {
+			log.error("there are no rewards...at all");
+			return false;
+		}
+
+		listOfRewards = new ArrayList<Reward>();
+		for(SalesItem si : salesItemList) {
+			Reward r = idsToRewards.get(si.getRewardId());
+			listOfRewards.add(r);
+		}
+		if(listOfRewards.size() != salesItemList.size()) {
+			log.error("did not properly convert all sales item to rewaards");
+			return false;
+		}
 		return true;
 	}
 
@@ -152,7 +181,7 @@ public class InAppPurchaseSalesAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		if (duplicateReceipt || !userSalesValueMatchesSalesPackage() || !saleIsWithinTimeConstraints()) {
+		if (duplicateReceipt || !saleIsWithinTimeConstraints()) {
 			log.error("user should be buying more expensive sales package! {}",
 					 user);
 			return false;
@@ -173,47 +202,47 @@ public class InAppPurchaseSalesAction {
 		return false;
 	}
 
-	public boolean userSalesValueMatchesSalesPackage() {
-		int salesValue = user.getSalesValue();
-		salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-		salesPackagePrice = salesPackage.getPrice();
-		if(salesValue == 0) {
-			if(salesPackagePrice == 5)
-				return true;
-		}
-		else if(salesValue == 1) {
-			if(!salesJumpTwoTiers && salesPackagePrice == 10)
-				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice == 20)
-				return true;
-		}
-		else if(salesValue == 2) {
-			if(!salesJumpTwoTiers && salesPackagePrice == 20)
-				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice == 50)
-				return true;
-		}
-		else if(salesValue == 3) {
-			if(!salesJumpTwoTiers && salesPackagePrice == 50)
-				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice == 100)
-				return true;
-		}
-		else if(salesValue >= 4) {
-			if(salesPackagePrice == 100)
-				return true;
-		}
-		else {
-			log.error("the sale user is trying to buy has a price of: "
-					+ salesPackagePrice + "but his salesValue is " + salesValue);
-			return false;
-
-		}
-		log.error("the sale user is trying to buy has a price of: "
-				+ salesPackagePrice + "but his salesValue is " + salesValue);
-		return false;
-
-	}
+//	public boolean userSalesValueMatchesSalesPackage() {
+//		int salesValue = user.getSalesValue();
+//		salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+//		salesPackagePrice = salesPackage.getPrice();
+//		if(salesValue == 0) {
+//			if(salesPackagePrice == 5)
+//				return true;
+//		}
+//		else if(salesValue == 1) {
+//			if(!salesJumpTwoTiers && salesPackagePrice == 10)
+//				return true;
+//			else if(salesJumpTwoTiers && salesPackagePrice == 20)
+//				return true;
+//		}
+//		else if(salesValue == 2) {
+//			if(!salesJumpTwoTiers && salesPackagePrice == 20)
+//				return true;
+//			else if(salesJumpTwoTiers && salesPackagePrice == 50)
+//				return true;
+//		}
+//		else if(salesValue == 3) {
+//			if(!salesJumpTwoTiers && salesPackagePrice == 50)
+//				return true;
+//			else if(salesJumpTwoTiers && salesPackagePrice == 100)
+//				return true;
+//		}
+//		else if(salesValue >= 4) {
+//			if(salesPackagePrice == 100)
+//				return true;
+//		}
+//		else {
+//			log.error("the sale user is trying to buy has a price of: "
+//					+ salesPackagePrice + "but his salesValue is " + salesValue);
+//			return false;
+//
+//		}
+//		log.error("the sale user is trying to buy has a price of: "
+//				+ salesPackagePrice + "but his salesValue is " + salesValue);
+//		return false;
+//
+//	}
 
 	public boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
@@ -261,77 +290,89 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public void processSalesPackagePurchase(Builder resBuilder) {
-		Map<Integer, SalesPackage> idsToSalesPackage = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-		for(Integer salesPackageId : idsToSalesPackage.keySet()) {
-			SalesPackage sp = idsToSalesPackage.get(salesPackageId);
-			if(sp.getUuid().equals(uuid)) {
-				List<SalesItem> salesItemList = salesItemRetrieveUtils
-						.getSalesItemsForSalesPackageId(salesPackageId);
-				if (null == salesItemList || salesItemList.isEmpty()) {
-					throw new RuntimeException(String.format(
-							"no sales package for salesPackageId=%s", salesPackageId));
-				}
 
-				boolean legit = checkIfMonstersExistInSalesItem(salesItemList);
-				if (!legit) {
-					throw new RuntimeException(String.format(
-							"illegal monster in sales item for salespackageId=%s",
-							salesPackageId));
-				}
+		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package", listOfRewards,
+				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
+				monsterLevelInfoRetrieveUtils);
 
-				//booster packs can give out gems, so  reuse processPurchase logic
-				processPurchase(resBuilder);
+		ara.execute();
 
-				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-				List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
-				//sop = source of pieces
-
-				String mfusop = createUpdateUserMonsterArgumentsForSales(userId,
-						sp.getId(), salesItemList, monsterIdToNumPieces,
-						completeUserMonsters, now);
-
-				log.info("!!!!!!!!!mfusop={}", mfusop);
-				//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
-				if (!completeUserMonsters.isEmpty()) {
-					List<String> monsterForUserIds = insertUtil
-							.insertIntoMonsterForUserReturnIds(userId,
-									completeUserMonsters, mfusop, now);
-					List<FullUserMonsterProto> newOrUpdated = miscMethods
-							.createFullUserMonsterProtos(monsterForUserIds,
-									completeUserMonsters);
-
-					String preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
-					log.info("{} monster(s) newOrUpdated: {} \t sPackId={}",
-							new Object[] { preface, newOrUpdated, sp.getId() });
-					//set the builder that will be sent to the client
-					resBuilder.addAllUpdatedOrNew(newOrUpdated);
-				}
-
-				//this is if the user did not buy a complete monster, UPDATE DB
-				if (!monsterIdToNumPieces.isEmpty()) {
-					//assume things just work while updating user monsters
-					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
-							.updateUserMonsters(userId, monsterIdToNumPieces, null,
-									mfusop, now, monsterLevelInfoRetrieveUtils);
-
-					String preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
-					log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",
-							new Object[] { preface, newOrUpdated, sp.getId() });
-					//set the builder that will be sent to the client
-					resBuilder.addAllUpdatedOrNew(newOrUpdated);
-				}
-
-				//item reward
-				List<ItemForUser> ifuList = awardSalesItemItemRewards(userId,
-						salesItemList, itemForUserRetrieveUtil, updateUtil);
-
-				if (null != ifuList && !ifuList.isEmpty()) {
-					List<UserItemProto> uipList = createInfoProtoUtils
-							.createUserItemProtosFromUserItems(ifuList);
-					resBuilder.addAllUpdatedUserItems(uipList);
-				}
-			}
-		}
+//
+//
+//
+//
+//
+//		Map<Integer, SalesPackage> idsToSalesPackage = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+//		for(Integer salesPackageId : idsToSalesPackage.keySet()) {
+//			SalesPackage sp = idsToSalesPackage.get(salesPackageId);
+//			if(sp.getUuid().equals(uuid)) {
+//				List<SalesItem> salesItemList = salesItemRetrieveUtils
+//						.getSalesItemsForSalesPackageId(salesPackageId);
+//				if (null == salesItemList || salesItemList.isEmpty()) {
+//					throw new RuntimeException(String.format(
+//							"no sales package for salesPackageId=%s", salesPackageId));
+//				}
+//
+//				boolean legit = checkIfMonstersExistInSalesItem(salesItemList);
+//				if (!legit) {
+//					throw new RuntimeException(String.format(
+//							"illegal monster in sales item for salespackageId=%s",
+//							salesPackageId));
+//				}
+//
+//				//booster packs can give out gems, so  reuse processPurchase logic
+//				processPurchase(resBuilder);
+//
+//				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+//				List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
+//				//sop = source of pieces
+//
+//				String mfusop = createUpdateUserMonsterArgumentsForSales(userId,
+//						sp.getId(), salesItemList, monsterIdToNumPieces,
+//						completeUserMonsters, now);
+//
+//				log.info("!!!!!!!!!mfusop={}", mfusop);
+//				//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
+//				if (!completeUserMonsters.isEmpty()) {
+//					List<String> monsterForUserIds = insertUtil
+//							.insertIntoMonsterForUserReturnIds(userId,
+//									completeUserMonsters, mfusop, now);
+//					List<FullUserMonsterProto> newOrUpdated = miscMethods
+//							.createFullUserMonsterProtos(monsterForUserIds,
+//									completeUserMonsters);
+//
+//					String preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
+//					log.info("{} monster(s) newOrUpdated: {} \t sPackId={}",
+//							new Object[] { preface, newOrUpdated, sp.getId() });
+//					//set the builder that will be sent to the client
+//					resBuilder.addAllUpdatedOrNew(newOrUpdated);
+//				}
+//
+//				//this is if the user did not buy a complete monster, UPDATE DB
+//				if (!monsterIdToNumPieces.isEmpty()) {
+//					//assume things just work while updating user monsters
+//					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
+//							.updateUserMonsters(userId, monsterIdToNumPieces, null,
+//									mfusop, now, monsterLevelInfoRetrieveUtils);
+//
+//					String preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
+//					log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",
+//							new Object[] { preface, newOrUpdated, sp.getId() });
+//					//set the builder that will be sent to the client
+//					resBuilder.addAllUpdatedOrNew(newOrUpdated);
+//				}
+//
+//				//item reward
+//				List<ItemForUser> ifuList = awardSalesItemItemRewards(userId,
+//						salesItemList, itemForUserRetrieveUtil, updateUtil);
+//
+//				if (null != ifuList && !ifuList.isEmpty()) {
+//					List<UserItemProto> uipList = createInfoProtoUtils
+//							.createUserItemProtosFromUserItems(ifuList);
+//					resBuilder.addAllUpdatedUserItems(uipList);
+//				}
+//			}
+//		}
 
 	}
 
@@ -733,6 +774,14 @@ public class InAppPurchaseSalesAction {
 
 	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
 		this.salesJumpTwoTiers = salesJumpTwoTiers;
+	}
+
+	public AwardRewardAction getAra() {
+		return ara;
+	}
+
+	public void setAra(AwardRewardAction ara) {
+		this.ara = ara;
 	}
 
 

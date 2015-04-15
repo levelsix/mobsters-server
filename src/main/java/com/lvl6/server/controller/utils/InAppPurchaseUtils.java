@@ -71,6 +71,11 @@ public class InAppPurchaseUtils {
 			b.setUuid(str);
 		}
 
+		b.setSuccId(sp.getSuccId());
+		b.setCustomMenuId(sp.getCustomMenuId());
+		b.setTimeStart(sp.getTimeStart().getTime());
+		b.setTimeEnd(sp.getTimeEnd().getTime());
+
 		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils

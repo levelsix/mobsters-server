@@ -25,7 +25,6 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.SalesItem;
-import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -95,86 +94,86 @@ public class InAppPurchaseStarterPackTest {
 //		assertFalse(iapa.packageIsSalesPackage("name0", salesPackageNamesToSalesPackages));
 //	}
 
-	@Test
-	public void testUserSalesValueMatchesSalesPackage() {
-		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(true);
-		SalesPackage sp = new SalesPackage();
-		iapa.setUser(mockedUser);
-
-		when(mockedUser.getSalesValue()).thenReturn(0);
-		sp.setPrice(5);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(1);
-		sp.setPrice(20);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(2);
-		sp.setPrice(50);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(3);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(4);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(5);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(6);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		//set salesjumptwotiers to false, this is when user hasn't
-		//bought in a while
-		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(false);
-
-		when(mockedUser.getSalesValue()).thenReturn(0);
-		sp.setPrice(5);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(1);
-		sp.setPrice(10);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(2);
-		sp.setPrice(20);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(3);
-		sp.setPrice(50);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(4);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(5);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-
-		when(mockedUser.getSalesValue()).thenReturn(6);
-		sp.setPrice(100);
-		iapa.setSalesPackage(sp);
-		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-	}
+//	@Test
+//	public void testUserSalesValueMatchesSalesPackage() {
+//		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(true);
+//		SalesPackage sp = new SalesPackage();
+//		iapa.setUser(mockedUser);
+//
+//		when(mockedUser.getSalesValue()).thenReturn(0);
+//		sp.setPrice(5);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(1);
+//		sp.setPrice(20);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(2);
+//		sp.setPrice(50);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(3);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(4);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(5);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(6);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		//set salesjumptwotiers to false, this is when user hasn't
+//		//bought in a while
+//		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(false);
+//
+//		when(mockedUser.getSalesValue()).thenReturn(0);
+//		sp.setPrice(5);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(1);
+//		sp.setPrice(10);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(2);
+//		sp.setPrice(20);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(3);
+//		sp.setPrice(50);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(4);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(5);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//
+//		when(mockedUser.getSalesValue()).thenReturn(6);
+//		sp.setPrice(100);
+//		iapa.setSalesPackage(sp);
+//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
+//	}
 
 	@Test
 	public void testGetDiamondsForSalesPackage() {

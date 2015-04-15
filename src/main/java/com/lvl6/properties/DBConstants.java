@@ -960,7 +960,7 @@ public class DBConstants {
 	public static final String CLAN_ICON__IMG_NAME = "img_name";
 	public static final String CLAN_ICON__IS_AVAILABLE = "is_available";
 
-	public static final String CUSTOM_MENU__ID = GENERIC__ID;
+	public static final String CUSTOM_MENU__ID = "custom_menu_id";
 	public static final String CUSTOM_MENU__POSITION_X = "position_x";
 	public static final String CUSTOM_MENU__POSITION_Y = "position_y";
 	public static final String CUSTOM_MENU__POSITION_Z = "position_z";
@@ -1215,7 +1215,7 @@ public class DBConstants {
 	public static final String RESEARCH_PROPERTY__VALUE = "value";
 
 	public static final String SALES_DISPLAY_ITEM__ID = GENERIC__ID;
-	public static final String SALES_DISPLAY_ITEM__SALES_PACKAGE_ID = "booster_pack_id";
+	public static final String SALES_DISPLAY_ITEM__SALES_PACKAGE_ID = "sales_package_id";
 	public static final String SALES_DISPLAY_ITEM__MONSTER_ID = "monster_id";
 	public static final String SALES_DISPLAY_ITEM__MONSTER_QUANTITY = "monster_quantity";
 	public static final String SALES_DISPLAY_ITEM__ITEM_ID = "item_id";
@@ -1229,6 +1229,7 @@ public class DBConstants {
 	public static final String SALES_ITEM__ITEM_ID = "item_id";
 	public static final String SALES_ITEM__ITEM_QUANTITY = "item_quantity";
 	public static final String SALES_ITEM__GEM_REWARD = "gem_reward";
+	public static final String SALES_ITEM__REWARD_ID = "reward_id";
 
 	public static final String SALES_PACKAGE__ID = GENERIC__ID;
 	public static final String SALES_PACKAGE__PRODUCT_ID = "product_id";
@@ -1237,6 +1238,7 @@ public class DBConstants {
 	public static final String SALES_PACKAGE__START_TIME = "time_start";
 	public static final String SALES_PACKAGE__END_TIME = "time_end";
 	public static final String SALES_PACKAGE__SUCC_ID = "succ_id";
+	public static final String SALES_PACKAGE__CUSTOM_MENU_ID = "custom_menu_id";
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";

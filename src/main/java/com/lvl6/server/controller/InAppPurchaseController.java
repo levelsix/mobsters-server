@@ -38,6 +38,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -119,6 +120,12 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
+
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
 
 	public InAppPurchaseController() {
@@ -334,27 +341,29 @@ public class InAppPurchaseController extends EventController {
 //
 //				iapspa.execute(resBuilder);
 //
-////				//for testing
-////				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-////						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
-////
-////				for(String name : salesPackageNamesToSalesPackages.keySet()) {
-////					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
-////					if(sp.getUuid().equals(uuid)) {
-////						salesPackage = sp;
-////						log.info("found sales pack");
-////					}
-////				}
-////
-////				isSalesPack = true;
-////				iapsa = new InAppPurchaseSalesAction(userId,
-////						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-////						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-////						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-////						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-////						salesPackage);
-////
-////				iapsa.execute(resBuilder);
+//				//for testing
+//				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+//						salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
+//
+//				for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
+//					SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
+//					if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
+//						salesPackage = sp;
+//					}
+//				}
+//				log.info("packagename {} does not exist in table of sales packages",
+//						packageName);
+//
+//				isSalesPack = true;
+//				iapsa = new InAppPurchaseSalesAction(userId,
+//						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+//						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+//						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+//						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+//						salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+//
+//
+//				iapsa.execute(resBuilder);
 //			}
 			if(IAPValues.packageIsMoneyTree(packageName)) {
 				isMoneyTree = true;
@@ -372,7 +381,7 @@ public class InAppPurchaseController extends EventController {
 						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
 						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
 						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-						salesPackage, inAppPurchaseUtils);
+						salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
 
 				iapsa.execute(resBuilder);
 			}
@@ -482,9 +491,9 @@ public class InAppPurchaseController extends EventController {
 
 		if(iapsa != null) {
 			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapsa.getCurrencyDeltas(), iapsa.getPrevCurrencies(),
-					iapsa.getCurCurrencies(), iapsa.getReasonsForChanges(),
-					iapsa.getDetails());
+					iapsa.getAra().getCurrencyDeltas(), iapsa.getAra().getPreviousCurrencies(),
+					iapsa.getAra().getCurrentCurrencies(), iapsa.getAra().getReasons(),
+					iapsa.getAra().getDetails());
 		}
 
 	}

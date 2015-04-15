@@ -7,7 +7,8 @@ public class SalesItem {
 		// TODO Auto-generated constructor stub
 	}
 	public SalesItem(int id, int salesPackageId, int monsterId, int monsterLevel,
-			int monsterQuantity, int itemId, int itemQuantity, int gemReward) {
+			int monsterQuantity, int itemId, int itemQuantity, int gemReward,
+			int rewardId) {
 		super();
 		this.id = id;
 		this.salesPackageId = salesPackageId;
@@ -17,6 +18,7 @@ public class SalesItem {
 		this.itemId = itemId;
 		this.itemQuantity = itemQuantity;
 		this.gemReward = gemReward;
+		this.rewardId = rewardId;
 
 	}
 
@@ -30,6 +32,7 @@ public class SalesItem {
 	private int itemId;
 	private int itemQuantity;
 	private int gemReward;
+	private int rewardId;
 
 
 	public int getId() {
@@ -65,6 +68,12 @@ public class SalesItem {
 	public int getItemQuantity() {
 		return itemQuantity;
 	}
+	public int getRewardId() {
+		return rewardId;
+	}
+	public void setRewardId(int rewardId) {
+		this.rewardId = rewardId;
+	}
 	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
@@ -75,7 +84,7 @@ public class SalesItem {
 				+ ", monsterId=" + monsterId + ", monsterLevel=" + monsterLevel
 				+ ", monsterQuantity=" + monsterQuantity + ", itemId=" + itemId
 				+ ", itemQuantity=" + itemQuantity + ", gemReward=" + gemReward
-				+ "]";
+				+ ", rewardId=" + rewardId + "]";
 	}
 	public int getGemReward() {
 		return gemReward;

@@ -105,6 +105,42 @@ public final class SalesProto {
      */
     com.lvl6.proto.SalesProto.SalesDisplayItemProtoOrBuilder getSdipOrBuilder(
         int index);
+
+    /**
+     * <code>optional int32 customMenuId = 7;</code>
+     */
+    boolean hasCustomMenuId();
+    /**
+     * <code>optional int32 customMenuId = 7;</code>
+     */
+    int getCustomMenuId();
+
+    /**
+     * <code>optional int32 succId = 8;</code>
+     */
+    boolean hasSuccId();
+    /**
+     * <code>optional int32 succId = 8;</code>
+     */
+    int getSuccId();
+
+    /**
+     * <code>optional int64 timeStart = 9;</code>
+     */
+    boolean hasTimeStart();
+    /**
+     * <code>optional int64 timeStart = 9;</code>
+     */
+    long getTimeStart();
+
+    /**
+     * <code>optional int64 timeEnd = 10;</code>
+     */
+    boolean hasTimeEnd();
+    /**
+     * <code>optional int64 timeEnd = 10;</code>
+     */
+    long getTimeEnd();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesPackageProto}
@@ -194,6 +230,26 @@ public final class SalesProto {
                 mutable_bitField0_ |= 0x00000020;
               }
               sdip_.add(input.readMessage(com.lvl6.proto.SalesProto.SalesDisplayItemProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000010;
+              customMenuId_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000020;
+              succId_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              timeStart_ = input.readInt64();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              timeEnd_ = input.readInt64();
               break;
             }
           }
@@ -426,6 +482,66 @@ public final class SalesProto {
       return sdip_.get(index);
     }
 
+    public static final int CUSTOMMENUID_FIELD_NUMBER = 7;
+    private int customMenuId_;
+    /**
+     * <code>optional int32 customMenuId = 7;</code>
+     */
+    public boolean hasCustomMenuId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 customMenuId = 7;</code>
+     */
+    public int getCustomMenuId() {
+      return customMenuId_;
+    }
+
+    public static final int SUCCID_FIELD_NUMBER = 8;
+    private int succId_;
+    /**
+     * <code>optional int32 succId = 8;</code>
+     */
+    public boolean hasSuccId() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 succId = 8;</code>
+     */
+    public int getSuccId() {
+      return succId_;
+    }
+
+    public static final int TIMESTART_FIELD_NUMBER = 9;
+    private long timeStart_;
+    /**
+     * <code>optional int64 timeStart = 9;</code>
+     */
+    public boolean hasTimeStart() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int64 timeStart = 9;</code>
+     */
+    public long getTimeStart() {
+      return timeStart_;
+    }
+
+    public static final int TIMEEND_FIELD_NUMBER = 10;
+    private long timeEnd_;
+    /**
+     * <code>optional int64 timeEnd = 10;</code>
+     */
+    public boolean hasTimeEnd() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int64 timeEnd = 10;</code>
+     */
+    public long getTimeEnd() {
+      return timeEnd_;
+    }
+
     private void initFields() {
       salesPackageId_ = 0;
       salesProductId_ = "";
@@ -433,6 +549,10 @@ public final class SalesProto {
       uuid_ = "";
       sip_ = java.util.Collections.emptyList();
       sdip_ = java.util.Collections.emptyList();
+      customMenuId_ = 0;
+      succId_ = 0;
+      timeStart_ = 0L;
+      timeEnd_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -464,6 +584,18 @@ public final class SalesProto {
       }
       for (int i = 0; i < sdip_.size(); i++) {
         output.writeMessage(6, sdip_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(7, customMenuId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(8, succId_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(9, timeStart_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt64(10, timeEnd_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -497,6 +629,22 @@ public final class SalesProto {
       for (int i = 0; i < sdip_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, sdip_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, customMenuId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, succId_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(9, timeStart_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(10, timeEnd_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -637,6 +785,14 @@ public final class SalesProto {
         } else {
           sdipBuilder_.clear();
         }
+        customMenuId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        succId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        timeStart_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        timeEnd_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -699,6 +855,22 @@ public final class SalesProto {
         } else {
           result.sdip_ = sdipBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.customMenuId_ = customMenuId_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.succId_ = succId_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.timeStart_ = timeStart_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.timeEnd_ = timeEnd_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -782,6 +954,18 @@ public final class SalesProto {
               sdipBuilder_.addAllMessages(other.sdip_);
             }
           }
+        }
+        if (other.hasCustomMenuId()) {
+          setCustomMenuId(other.getCustomMenuId());
+        }
+        if (other.hasSuccId()) {
+          setSuccId(other.getSuccId());
+        }
+        if (other.hasTimeStart()) {
+          setTimeStart(other.getTimeStart());
+        }
+        if (other.hasTimeEnd()) {
+          setTimeEnd(other.getTimeEnd());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1506,6 +1690,134 @@ public final class SalesProto {
         return sdipBuilder_;
       }
 
+      private int customMenuId_ ;
+      /**
+       * <code>optional int32 customMenuId = 7;</code>
+       */
+      public boolean hasCustomMenuId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 customMenuId = 7;</code>
+       */
+      public int getCustomMenuId() {
+        return customMenuId_;
+      }
+      /**
+       * <code>optional int32 customMenuId = 7;</code>
+       */
+      public Builder setCustomMenuId(int value) {
+        bitField0_ |= 0x00000040;
+        customMenuId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 customMenuId = 7;</code>
+       */
+      public Builder clearCustomMenuId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        customMenuId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int succId_ ;
+      /**
+       * <code>optional int32 succId = 8;</code>
+       */
+      public boolean hasSuccId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 succId = 8;</code>
+       */
+      public int getSuccId() {
+        return succId_;
+      }
+      /**
+       * <code>optional int32 succId = 8;</code>
+       */
+      public Builder setSuccId(int value) {
+        bitField0_ |= 0x00000080;
+        succId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 succId = 8;</code>
+       */
+      public Builder clearSuccId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        succId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long timeStart_ ;
+      /**
+       * <code>optional int64 timeStart = 9;</code>
+       */
+      public boolean hasTimeStart() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional int64 timeStart = 9;</code>
+       */
+      public long getTimeStart() {
+        return timeStart_;
+      }
+      /**
+       * <code>optional int64 timeStart = 9;</code>
+       */
+      public Builder setTimeStart(long value) {
+        bitField0_ |= 0x00000100;
+        timeStart_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 timeStart = 9;</code>
+       */
+      public Builder clearTimeStart() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        timeStart_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long timeEnd_ ;
+      /**
+       * <code>optional int64 timeEnd = 10;</code>
+       */
+      public boolean hasTimeEnd() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int64 timeEnd = 10;</code>
+       */
+      public long getTimeEnd() {
+        return timeEnd_;
+      }
+      /**
+       * <code>optional int64 timeEnd = 10;</code>
+       */
+      public Builder setTimeEnd(long value) {
+        bitField0_ |= 0x00000200;
+        timeEnd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 timeEnd = 10;</code>
+       */
+      public Builder clearTimeEnd() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        timeEnd_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SalesPackageProto)
     }
 
@@ -1583,6 +1895,15 @@ public final class SalesProto {
      * <code>optional int32 gemReward = 7;</code>
      */
     int getGemReward();
+
+    /**
+     * <code>optional int32 rewardId = 8;</code>
+     */
+    boolean hasRewardId();
+    /**
+     * <code>optional int32 rewardId = 8;</code>
+     */
+    int getRewardId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesItemProto}
@@ -1669,6 +1990,11 @@ public final class SalesProto {
             case 56: {
               bitField0_ |= 0x00000040;
               gemReward_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              rewardId_ = input.readInt32();
               break;
             }
           }
@@ -1816,6 +2142,21 @@ public final class SalesProto {
       return gemReward_;
     }
 
+    public static final int REWARDID_FIELD_NUMBER = 8;
+    private int rewardId_;
+    /**
+     * <code>optional int32 rewardId = 8;</code>
+     */
+    public boolean hasRewardId() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 rewardId = 8;</code>
+     */
+    public int getRewardId() {
+      return rewardId_;
+    }
+
     private void initFields() {
       salesItemId_ = 0;
       salesPackageId_ = 0;
@@ -1824,6 +2165,7 @@ public final class SalesProto {
       itemId_ = 0;
       itemQuantity_ = 0;
       gemReward_ = 0;
+      rewardId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1858,6 +2200,9 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, gemReward_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, rewardId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1895,6 +2240,10 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, gemReward_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, rewardId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2027,6 +2376,8 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         gemReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        rewardId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -2083,6 +2434,10 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000040;
         }
         result.gemReward_ = gemReward_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.rewardId_ = rewardId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2119,6 +2474,9 @@ public final class SalesProto {
         }
         if (other.hasGemReward()) {
           setGemReward(other.getGemReward());
+        }
+        if (other.hasRewardId()) {
+          setRewardId(other.getRewardId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2367,6 +2725,38 @@ public final class SalesProto {
       public Builder clearGemReward() {
         bitField0_ = (bitField0_ & ~0x00000040);
         gemReward_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int rewardId_ ;
+      /**
+       * <code>optional int32 rewardId = 8;</code>
+       */
+      public boolean hasRewardId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 rewardId = 8;</code>
+       */
+      public int getRewardId() {
+        return rewardId_;
+      }
+      /**
+       * <code>optional int32 rewardId = 8;</code>
+       */
+      public Builder setRewardId(int value) {
+        bitField0_ |= 0x00000080;
+        rewardId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rewardId = 8;</code>
+       */
+      public Builder clearRewardId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        rewardId_ = 0;
         onChanged();
         return this;
       }
@@ -3272,21 +3662,23 @@ public final class SalesProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Sales.proto\022\016com.lvl6.proto\032\026SharedEnu" +
-      "mConfig.proto\032\nUser.proto\"\302\001\n\021SalesPacka" +
+      "mConfig.proto\032\nUser.proto\"\214\002\n\021SalesPacka" +
       "geProto\022\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016sales" +
       "ProductId\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uuid\030\004" +
       " \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.Sales" +
       "ItemProto\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.proto" +
-      ".SalesDisplayItemProto\"\242\001\n\016SalesItemProt" +
-      "o\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackageId" +
-      "\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQuan" +
-      "tity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuanti",
-      "ty\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(\005\"\251\001\n\025SalesDis" +
-      "playItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016sa" +
-      "lesPackageId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\027\n" +
-      "\017monsterQuantity\030\004 \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024" +
-      "\n\014itemQuantity\030\006 \001(\005\022\021\n\tgemReward\030\007 \001(\005B" +
-      "\014B\nSalesProto"
+      ".SalesDisplayItemProto\022\024\n\014customMenuId\030\007" +
+      " \001(\005\022\016\n\006succId\030\010 \001(\005\022\021\n\ttimeStart\030\t \001(\003\022" +
+      "\017\n\007timeEnd\030\n \001(\003\"\264\001\n\016SalesItemProto\022\023\n\013s" +
+      "alesItemId\030\001 \001(\005\022\026\n\016salesPackageId\030\002 \001(\005",
+      "\022\021\n\tmonsterId\030\003 \001(\005\022\027\n\017monsterQuantity\030\004" +
+      " \001(\005\022\016\n\006itemId\030\005 \001(\005\022\024\n\014itemQuantity\030\006 \001" +
+      "(\005\022\021\n\tgemReward\030\007 \001(\005\022\020\n\010rewardId\030\010 \001(\005\"" +
+      "\251\001\n\025SalesDisplayItemProto\022\023\n\013salesItemId" +
+      "\030\001 \001(\005\022\026\n\016salesPackageId\030\002 \001(\005\022\021\n\tmonste" +
+      "rId\030\003 \001(\005\022\027\n\017monsterQuantity\030\004 \001(\005\022\016\n\006it" +
+      "emId\030\005 \001(\005\022\024\n\014itemQuantity\030\006 \001(\005\022\021\n\tgemR" +
+      "eward\030\007 \001(\005B\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3307,13 +3699,13 @@ public final class SalesProto {
     internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesPackageProto_descriptor,
-        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", });
+        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "CustomMenuId", "SuccId", "TimeStart", "TimeEnd", });
     internal_static_com_lvl6_proto_SalesItemProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesItemProto_descriptor,
-        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", "GemReward", });
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "MonsterId", "MonsterQuantity", "ItemId", "ItemQuantity", "GemReward", "RewardId", });
     internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_SalesDisplayItemProto_fieldAccessorTable = new

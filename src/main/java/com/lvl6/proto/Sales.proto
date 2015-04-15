@@ -19,6 +19,10 @@ message SalesPackageProto {
 	optional string uuid = 4;
 	repeated SalesItemProto sip = 5;
 	repeated SalesDisplayItemProto sdip = 6;
+	optional int32 customMenuId = 7;
+	optional int32 succId = 8;
+	optional int64 timeStart = 9;
+	optional int64 timeEnd = 10;
 }
 
 //------------------------------------------------------------------------------------------
@@ -31,6 +35,7 @@ message SalesItemProto {
 	optional int32 itemId = 5;
 	optional int32 itemQuantity = 6;
 	optional int32 gemReward = 7;
+	optional int32 rewardId = 8;
 }
 
 //------------------------------------------------------------------------------------------

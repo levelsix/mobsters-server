@@ -152,35 +152,35 @@ public class SalesItemRetrieveUtils {
 		int id = rs.getInt(DBConstants.SALES_ITEM__ID);
 		int salesPackageId = rs
 				.getInt(DBConstants.SALES_ITEM__SALES_PACKAGE_ID);
-		
+
 		int monsterId = 0;
 		monsterId = rs.getInt(DBConstants.SALES_ITEM__MONSTER_ID);
-		
+
 		int monsterLevel = 0;
-		
+
 		rs.getInt(DBConstants.SALES_ITEM__MONSTER_LEVEL);
 		if(rs.wasNull()) {
 			monsterLevel = -1;
 		}
 		else monsterLevel = rs.getInt(DBConstants.SALES_ITEM__MONSTER_LEVEL);
-		
+
 		int monsterQuantity = 0;
 		monsterQuantity = rs.getInt(DBConstants.SALES_ITEM__MONSTER_QUANTITY);
-		
+
 		int itemId = 0;
 		itemId = rs.getInt(DBConstants.SALES_ITEM__ITEM_ID);
-		
+
 		int itemQuantity = 0;
 		itemQuantity = rs.getInt(DBConstants.SALES_ITEM__ITEM_QUANTITY);
-		
+
 		int gemReward = 0;
 		gemReward = rs.getInt(DBConstants.SALES_ITEM__GEM_REWARD);
 
 		SalesItem salesItem = new SalesItem();
-		
+
 		salesItem.setId(id);
 		salesItem.setSalesPackageId(salesPackageId);
-		
+
 		if(monsterId != 0) {
 			salesItem.setMonsterId(monsterId);
 		}
@@ -199,7 +199,10 @@ public class SalesItemRetrieveUtils {
 		if(gemReward != 0) {
 			salesItem.setGemReward(gemReward);
 		}
-		
+		int rewardId = 0;
+		rewardId = rs.getInt(DBConstants.SALES_ITEM__REWARD_ID);
+		salesItem.setRewardId(rewardId);
+
 		return salesItem;
 	}
 }
