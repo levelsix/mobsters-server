@@ -3,6 +3,7 @@
 //import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
 import "User.proto";
+import "CustomMenu.proto";
 
 package com.lvl6.proto;
 
@@ -19,6 +20,7 @@ message SalesPackageProto {
 	optional string uuid = 4;
 	repeated SalesItemProto sip = 5;
 	repeated SalesDisplayItemProto sdip = 6;
+	optional CustomMenuProto cmp = 7;
 }
 
 //------------------------------------------------------------------------------------------

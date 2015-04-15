@@ -144,7 +144,9 @@ public class SalesPackageRetrieveUtils {
 
 		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
 
-		SalesPackage salesPackage = new SalesPackage(id, productId, price, uuid, timeStart, timeEnd, succId);
+        int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);
+
+		SalesPackage salesPackage = new SalesPackage(id, productId, price, uuid, timeStart, timeEnd, succId, customMenuId);
 		return salesPackage;
 	}
 }

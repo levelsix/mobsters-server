@@ -10,8 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.CustomMenu;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
@@ -20,8 +22,11 @@ import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
 import com.lvl6.proto.SalesProto.SalesItemProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
 public class InAppPurchaseUtils {
@@ -29,6 +34,9 @@ public class InAppPurchaseUtils {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
+
+    @Autowired
+    protected CreateInfoProtoUtils createInfoProtoUtils;
 
 
 	public boolean checkIfDuplicateReceipt(JSONObject receiptFromApple,
@@ -55,7 +63,8 @@ public class InAppPurchaseUtils {
 
 	public SalesPackageProto createSalesPackageProto(SalesPackage sp,
 			SalesItemRetrieveUtils salesItemRetrieveUtils,
-			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils ) {
+			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils,
+			CustomMenuRetrieveUtils customMenuRetrieveUtils) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
 		b.setSalesPackageId(sp.getId());
 
@@ -110,6 +119,9 @@ public class InAppPurchaseUtils {
 				b.addSdip(sdip);
 			}
 		}
+		
+		CustomMenu cm = customMenuRetrieveUtils.getCustomMenuForId(sp.getCustomMenuId());
+		b.setCmp(createInfoProtoUtils.createCustomMenuProto(cm));
 
 		return b.build();
 	}

@@ -10,7 +10,7 @@ public class SalesPackage {
 	}
 
 	public SalesPackage(int id, String productId, int price, String uuid,
-			Date timeStart, Date timeEnd, int succId) {
+			Date timeStart, Date timeEnd, int succId, int customMenuId) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -19,6 +19,7 @@ public class SalesPackage {
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.succId = succId;
+		this.customMenuId = customMenuId;
 	}
 
 	private static final long serialVersionUID = 1549953377153488834L;
@@ -30,6 +31,7 @@ public class SalesPackage {
 	private Date timeStart;
 	private Date timeEnd;
 	private int succId;
+	private int customMenuId;
 
 	public int getId() {
 		return id;
@@ -61,12 +63,12 @@ public class SalesPackage {
 	}
 
 	@Override
-	public String toString() {
-		return "SalesPackage [id=" + id + ", productId=" + productId
-				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
-				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
-				+ "]";
-	}
+    public String toString() {
+        return "SalesPackage [id=" + id + ", productId=" + productId
+                + ", price=" + price + ", uuid=" + uuid + ", timeStart="
+                + timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+                + ", customMenuId=" + customMenuId + "]";
+    }
 
 	public Date getTimeStart() {
 		return timeStart;
@@ -86,6 +88,14 @@ public class SalesPackage {
 	public void setSuccId(int succId) {
 		this.succId = succId;
 	}
+
+    public int getCustomMenuId() {
+        return customMenuId;
+    }
+
+    public void setCustomMenuId(int customMenuId) {
+        this.customMenuId = customMenuId;
+    }
 
 
 
