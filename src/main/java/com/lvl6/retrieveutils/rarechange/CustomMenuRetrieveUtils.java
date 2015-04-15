@@ -95,9 +95,10 @@ public class CustomMenuRetrieveUtils {
 		int positionX = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_X);
 		int positionY = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Y);
 		int positionZ = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Z);
-		boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
+        boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
+        String imgName = rs.getString(DBConstants.CUSTOM_MENU__IMAGE_NAME);
 
-		CustomMenu fd = new CustomMenu(id, positionX, positionY, positionZ, isJiggle);
+		CustomMenu fd = new CustomMenu(id, positionX, positionY, positionZ, isJiggle, imgName);
 		return fd;
 	}
 

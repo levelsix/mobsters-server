@@ -964,7 +964,8 @@ public class DBConstants {
 	public static final String CUSTOM_MENU__POSITION_X = "position_x";
 	public static final String CUSTOM_MENU__POSITION_Y = "position_y";
 	public static final String CUSTOM_MENU__POSITION_Z = "position_z";
-	public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
+    public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
+    public static final String CUSTOM_MENU__IMAGE_NAME = "image_name";
 
 	public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";

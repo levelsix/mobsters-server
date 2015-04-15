@@ -16,5 +16,5 @@ message CustomMenuProto {
 	optional int32 positionY = 3;
 	optional int32 positionZ = 4;
 	optional bool isJiggle = 5;
-	
+	optional string imageName = 6;
 }

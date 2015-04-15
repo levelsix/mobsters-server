@@ -7,15 +7,17 @@ public class CustomMenu {
 	private int positionY;
 	private int positionZ;
 	private boolean isJiggle;
+	private String imageName;
 
 	public CustomMenu(int id, int positionX, int positionY, int positionZ,
-			boolean isJiggle) {
+			boolean isJiggle, String imageName) {
 		super();
 		this.id = id;
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.positionZ = positionZ;
 		this.isJiggle = isJiggle;
+		this.imageName = imageName;
 	}
 
 	public int getId() {
@@ -49,11 +51,19 @@ public class CustomMenu {
 		this.isJiggle = isJiggle;
 	}
 
-	@Override
-	public String toString() {
-		return "CustomMenu [id=" + id + ", positionX=" + positionX
-				+ ", positionY=" + positionY + ", positionZ=" + positionZ
-				+ ", isJiggle=" + isJiggle + "]";
-	}
+	public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomMenu [id=" + id + ", positionX=" + positionX
+                + ", positionY=" + positionY + ", positionZ=" + positionZ
+                + ", isJiggle=" + isJiggle + ", imageName=" + imageName + "]";
+    }
 
 }
