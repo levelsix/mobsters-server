@@ -433,6 +433,8 @@ public class InAppPurchaseController extends EventController {
 	public boolean packageIsSalesPackage(String productId, String uuid) {
 		Map<String, SalesPackage> salesPackageNamesToSalesPackages =
 				salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
+		
+		log.info(salesPackageNamesToSalesPackages+"");
 
 		for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
 			SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
