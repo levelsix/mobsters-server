@@ -8,6 +8,7 @@ import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -63,227 +64,227 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @DependsOn("gameServer")
 public class InAppPurchaseController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+    private static Logger log = LoggerFactory.getLogger(new Object() {
+    }.getClass().getEnclosingClass());
 
-	private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
-	private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
+    private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
+    private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
 
-	@Autowired
-	protected Locker locker;
+    @Autowired
+    protected Locker locker;
 
-	@Autowired
-	protected MiscMethods miscMethods;
+    @Autowired
+    protected MiscMethods miscMethods;
 
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
+    @Autowired
+    protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	@Autowired
-	protected InAppPurchaseUtils inAppPurchaseUtils;
+    @Autowired
+    protected InAppPurchaseUtils inAppPurchaseUtils;
 
-	@Autowired
-	protected InsertUtil insertUtil;
+    @Autowired
+    protected InsertUtil insertUtil;
 
-	@Autowired
-	protected UpdateUtil updateUtil;
+    @Autowired
+    protected UpdateUtil updateUtil;
 
-	@Autowired
-	protected UserRetrieveUtils2 userRetrieveUtil;
+    @Autowired
+    protected UserRetrieveUtils2 userRetrieveUtil;
 
-	@Autowired
-	protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
+    @Autowired
+    protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 
-	@Autowired
-	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+    @Autowired
+    protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
-	@Autowired
-	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
+    @Autowired
+    protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
 
-	@Autowired
-	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
+    @Autowired
+    protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 
-	@Autowired
-	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
+    @Autowired
+    protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+    @Autowired
+    protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
 
-	@Autowired
-	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
+    @Autowired
+    protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
-	@Autowired
-	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
+    @Autowired
+    protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
 
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
+    @Autowired
+    protected MonsterStuffUtils monsterStuffUtils;
 
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+    @Autowired
+    protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
+    @Autowired
+    protected MonsterRetrieveUtils monsterRetrieveUtils;
 
-	@Autowired
-	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+    @Autowired
+    protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
-	@Autowired
-	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+    @Autowired
+    protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
-	@Autowired
-	protected RewardRetrieveUtils rewardRetrieveUtils;
+    @Autowired
+    protected RewardRetrieveUtils rewardRetrieveUtils;
 
-	@Autowired
-	protected UserRetrieveUtils2 userRetrieveUtils;
+    @Autowired
+    protected UserRetrieveUtils2 userRetrieveUtils;
 
 
-	public InAppPurchaseController() {
-		numAllocatedThreads = 2;
-	}
+    public InAppPurchaseController() {
+        numAllocatedThreads = 2;
+    }
 
-	@Override
-	public RequestEvent createRequestEvent() {
-		return new InAppPurchaseRequestEvent();
-	}
+    @Override
+    public RequestEvent createRequestEvent() {
+        return new InAppPurchaseRequestEvent();
+    }
 
-	@Override
-	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_IN_APP_PURCHASE_EVENT;
-	}
+    @Override
+    public EventProtocolRequest getEventType() {
+        return EventProtocolRequest.C_IN_APP_PURCHASE_EVENT;
+    }
 
-	private SalesPackage salesPackage;
-	private boolean isStarterPack = false;
-	private boolean isMoneyTree = false;
-	private boolean isSalesPack = false;
+    private SalesPackage salesPackage;
+    private boolean isStarterPack = false;
+    private boolean isMoneyTree = false;
+    private boolean isSalesPack = false;
 
-	/*
-	 * db stuff done before sending event to eventwriter/client because the
-	 * client's not waiting on it immediately anyways
-	 */
-	// @SuppressWarnings("deprecation")
-	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
-		InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
-				.getInAppPurchaseRequestProto();
+    /*
+     * db stuff done before sending event to eventwriter/client because the
+     * client's not waiting on it immediately anyways
+     */
+    // @SuppressWarnings("deprecation")
+    @Override
+    protected void processRequestEvent(RequestEvent event) throws Exception {
+        InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
+                .getInAppPurchaseRequestProto();
 
-		log.info("reqProto: {}", reqProto);
+        log.info("reqProto: {}", reqProto);
 
-		MinimumUserProto senderProto = reqProto.getSender();
-		String userId = senderProto.getUserUuid();
-		String receipt = reqProto.getReceipt();
-		boolean hasUuid = reqProto.hasUuid();
-		String uuid = null;
+        MinimumUserProto senderProto = reqProto.getSender();
+        String userId = senderProto.getUserUuid();
+        String receipt = reqProto.getReceipt();
+        boolean hasUuid = reqProto.hasUuid();
+        String uuid = null;
 
-		if(hasUuid) {
-			uuid = reqProto.getUuid();
-		}
+        if(hasUuid) {
+            uuid = reqProto.getUuid();
+        }
 
-		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto
-				.newBuilder();
-		resBuilder.setSender(senderProto);
-		resBuilder.setReceipt(reqProto.getReceipt());
+        InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto
+                .newBuilder();
+        resBuilder.setSender(senderProto);
+        resBuilder.setReceipt(reqProto.getReceipt());
 
-		UUID userUuid = null;
-		boolean invalidUuids = true;
-		try {
-			userUuid = UUID.fromString(userId);
+        UUID userUuid = null;
+        boolean invalidUuids = true;
+        try {
+            userUuid = UUID.fromString(userId);
 
-			invalidUuids = false;
-		} catch (Exception e) {
-			log.error(String.format("UUID error. incorrect userId=%s", userId),
-					e);
-			invalidUuids = true;
-		}
+            invalidUuids = false;
+        } catch (Exception e) {
+            log.error(String.format("UUID error. incorrect userId=%s", userId),
+                    e);
+            invalidUuids = true;
+        }
 
-		//UUID checks
-		if (invalidUuids) {
-			resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
-					userId);
-			resEvent.setTag(event.getTag());
-			resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
-			return;
-		}
+        //UUID checks
+        if (invalidUuids) {
+            resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+            InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
+                    userId);
+            resEvent.setTag(event.getTag());
+            resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+            server.writeEvent(resEvent);
+            return;
+        }
 
-		// Lock this player's ID
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
-		try {
-			User user = userRetrieveUtil.getUserById(userId);
+        // Lock this player's ID
+        locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+        try {
+            User user = userRetrieveUtil.getUserById(userId);
 
-			JSONObject response;
-			JSONObject jsonReceipt = new JSONObject();
-			jsonReceipt.put(IAPValues.RECEIPT_DATA, receipt);
-			log.info("Processing purchase: {}", jsonReceipt.toString(4));
-			// Send data
-			URL url = new URL(PRODUCTION_URL);
+            JSONObject response;
+            JSONObject jsonReceipt = new JSONObject();
+            jsonReceipt.put(IAPValues.RECEIPT_DATA, receipt);
+            log.info("Processing purchase: {}", jsonReceipt.toString(4));
+            // Send data
+            URL url = new URL(PRODUCTION_URL);
 
-			log.info("Sending purchase request to: {}", url.toString());
+            log.info("Sending purchase request to: {}", url.toString());
 
-			URLConnection conn = url.openConnection();
-			conn.setDoOutput(true);
-			OutputStreamWriter wr = new OutputStreamWriter(
-					conn.getOutputStream());
-			wr.write(jsonReceipt.toString());
-			wr.flush();
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(
+                    conn.getOutputStream());
+            wr.write(jsonReceipt.toString());
+            wr.flush();
 
-			// Get the response
-			BufferedReader rd = new BufferedReader(new InputStreamReader(
-					conn.getInputStream()));
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(
+                    conn.getInputStream()));
 
-			String responseString = "";
-			String line;
-			while ((line = rd.readLine()) != null) {
-				responseString += line;
-			}
-			log.info("Response: {}", responseString);
+            String responseString = "";
+            String line;
+            while ((line = rd.readLine()) != null) {
+                responseString += line;
+            }
+            log.info("Response: {}", responseString);
 
-			response = new JSONObject(responseString);
+            response = new JSONObject(responseString);
 
-			if (response.getInt(IAPValues.STATUS) == 21007
-					|| response.getInt(IAPValues.STATUS) == 21008) {
-				wr.close();
-				rd.close();
-				url = new URL(SANDBOX_URL);
-				conn = url.openConnection();
-				conn.setDoOutput(true);
-				wr = new OutputStreamWriter(conn.getOutputStream());
-				wr.write(jsonReceipt.toString());
-				wr.flush();
-				rd = new BufferedReader(new InputStreamReader(
-						conn.getInputStream()));
-				responseString = "";
-				while ((line = rd.readLine()) != null) {
-					responseString += line;
-				}
-				response = new JSONObject(responseString);
-			}
+            if (response.getInt(IAPValues.STATUS) == 21007
+                    || response.getInt(IAPValues.STATUS) == 21008) {
+                wr.close();
+                rd.close();
+                url = new URL(SANDBOX_URL);
+                conn = url.openConnection();
+                conn.setDoOutput(true);
+                wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(jsonReceipt.toString());
+                wr.flush();
+                rd = new BufferedReader(new InputStreamReader(
+                        conn.getInputStream()));
+                responseString = "";
+                while ((line = rd.readLine()) != null) {
+                    responseString += line;
+                }
+                response = new JSONObject(responseString);
+            }
 
-			JSONObject receiptFromApple = null;
-			if (response.getInt(IAPValues.STATUS) == 0) {
-				receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-				writeChangesToDb(userId, resBuilder, user, receiptFromApple, uuid);
-			} else {
-				log.error(
-						"problem with in-app purchase that client sent, with receipt {}",
-						receipt);
-			}
+            JSONObject receiptFromApple = null;
+            if (response.getInt(IAPValues.STATUS) == 0) {
+                receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
+                writeChangesToDb(userId, resBuilder, user, receiptFromApple, uuid);
+            } else {
+                log.error(
+                        "problem with in-app purchase that client sent, with receipt {}",
+                        receipt);
+            }
 
-			wr.close();
-			rd.close();
+            wr.close();
+            rd.close();
 
-			if (!resBuilder.hasStatus()) {
-				resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-			}
+            if (!resBuilder.hasStatus()) {
+                resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+            }
 
-			InAppPurchaseResponseProto resProto = resBuilder.build();
+            InAppPurchaseResponseProto resProto = resBuilder.build();
 
-			InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
-					senderProto.getUserUuid());
-			resEvent.setTag(event.getTag());
-			resEvent.setInAppPurchaseResponseProto(resProto);
-			server.writeEvent(resEvent);
+            InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
+                    senderProto.getUserUuid());
+            resEvent.setTag(event.getTag());
+            resEvent.setInAppPurchaseResponseProto(resProto);
+            server.writeEvent(resEvent);
 
-			/*if (Globals.KABAM_ENABLED()) {
+            /*if (Globals.KABAM_ENABLED()) {
 			if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
 			JSONObject logJson = getKabamJsonLogObject(reqProto, resBuilder, receiptFromApple);
 			List<NameValuePair> queryParams = getKabamQueryParams(receipt, user, logJson);
@@ -291,244 +292,244 @@ public class InAppPurchaseController extends EventController {
 			}
 			}*/
 
-			//null PvpLeagueFromUser means will pull from hazelcast instead
-			UpdateClientUserResponseEvent resEventUpdate = miscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-							user, null, null);
-			resEventUpdate.setTag(event.getTag());
-			server.writeEvent(resEventUpdate);
+            //null PvpLeagueFromUser means will pull from hazelcast instead
+            UpdateClientUserResponseEvent resEventUpdate = miscMethods
+                    .createUpdateClientUserResponseEventAndUpdateLeaderboard(
+                            user, null, null);
+            resEventUpdate.setTag(event.getTag());
+            server.writeEvent(resEventUpdate);
 
-			//      //in case user has a mentor, check if user completed mentor's quest
-			//      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
-			//        MenteeQuestType type = MenteeQuestType.BOUGHT_A_PACKAGE;
-			//        MiscMethods.sendMenteeFinishedQuests(senderProto, type, server);
-			//      }
-		} catch (Exception e) {
-			log.error("exception in InAppPurchaseController processEvent", e);
-			//don't let the client hang
-			try {
-				resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-				InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
-						userId);
-				resEvent.setTag(event.getTag());
-				resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
-			} catch (Exception e2) {
-				log.error("exception2 in InAppPurchaseController processEvent",
-						e);
-			}
-		} finally {
-			// Unlock this player
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
-		}
-	}
+            //      //in case user has a mentor, check if user completed mentor's quest
+            //      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
+            //        MenteeQuestType type = MenteeQuestType.BOUGHT_A_PACKAGE;
+            //        MiscMethods.sendMenteeFinishedQuests(senderProto, type, server);
+            //      }
+        } catch (Exception e) {
+            log.error("exception in InAppPurchaseController processEvent", e);
+            //don't let the client hang
+            try {
+                resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+                InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
+                        userId);
+                resEvent.setTag(event.getTag());
+                resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+                server.writeEvent(resEvent);
+            } catch (Exception e2) {
+                log.error("exception2 in InAppPurchaseController processEvent",
+                        e);
+            }
+        } finally {
+            // Unlock this player
+            locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+        }
+    }
 
-	private void writeChangesToDb(String userId,
-			InAppPurchaseResponseProto.Builder resBuilder, User user,
-			JSONObject receiptFromApple, String uuid) {
-		try {
-			String packageName = receiptFromApple
-					.getString(IAPValues.PRODUCT_ID);
-			double realLifeCashCost = IAPValues
-					.getCashSpentForPackageName(packageName);
+    private void writeChangesToDb(String userId,
+            InAppPurchaseResponseProto.Builder resBuilder, User user,
+            JSONObject receiptFromApple, String uuid) {
+        try {
+            String packageName = receiptFromApple
+                    .getString(IAPValues.PRODUCT_ID);
+            double realLifeCashCost = IAPValues
+                    .getCashSpentForPackageName(packageName);
 
-			Date now = new Date();
+            Date now = new Date();
 
-			InAppPurchaseAction iapa = null;
-			InAppPurchaseSalesAction iapsa = null;
-			InAppPurchaseStarterPackAction iapspa = null;
-			InAppPurchaseMoneyTreeAction iapmta = null;
+            InAppPurchaseAction iapa = null;
+            InAppPurchaseSalesAction iapsa = null;
+            InAppPurchaseStarterPackAction iapspa = null;
+            InAppPurchaseMoneyTreeAction iapmta = null;
 
-//						if(IAPValues.packageIsStarterPack(packageName)) {
-////							isStarterPack = true;
-////							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-////									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-////									insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-////									boosterItemRetrieveUtils, monsterRetrieveUtils,
-////									monsterLevelInfoRetrieveUtils);
-////
-////							iapspa.execute(resBuilder);
-//
-//							//for testing
-//							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-//									salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
-//
-//							for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
-//								SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
-//								if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
-//									salesPackage = sp;
-//								}
-//							}
-//							log.info("packagename {} does not exist in table of sales packages",
-//									packageName);
-//
-//							isSalesPack = true;
-//							iapsa = new InAppPurchaseSalesAction(userId,
-//									user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-//									itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-//									createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-//									salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-//									salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
-//
-//
-//							iapsa.execute(resBuilder);
-//						}
-			if(IAPValues.packageIsMoneyTree(packageName)) {
-				isMoneyTree = true;
-				iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
-						iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
-						createInfoProtoUtils, miscMethods, structureMoneyTreeRetrieveUtils,
-						structureForUserRetrieveUtils, inAppPurchaseUtils);
+            //						if(IAPValues.packageIsStarterPack(packageName)) {
+            ////							isStarterPack = true;
+            ////							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
+            ////									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
+            ////									insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
+            ////									boosterItemRetrieveUtils, monsterRetrieveUtils,
+            ////									monsterLevelInfoRetrieveUtils);
+            ////
+            ////							iapspa.execute(resBuilder);
+            //
+            //							//for testing
+            //							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+            //									salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
+            //
+            //							for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
+            //								SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
+            //								if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
+            //									salesPackage = sp;
+            //								}
+            //							}
+            //							log.info("packagename {} does not exist in table of sales packages",
+            //									packageName);
+            //
+            //							isSalesPack = true;
+            //							iapsa = new InAppPurchaseSalesAction(userId,
+            //									user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+            //									itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+            //									createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+            //									salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+            //									salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+            //
+            //
+            //							iapsa.execute(resBuilder);
+            //						}
+            if(IAPValues.packageIsMoneyTree(packageName)) {
+                isMoneyTree = true;
+                iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
+                        iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
+                        createInfoProtoUtils, miscMethods, structureMoneyTreeRetrieveUtils,
+                        structureForUserRetrieveUtils, inAppPurchaseUtils);
 
-				iapmta.execute(resBuilder);
-			}
-			else if(packageIsSalesPackage(packageName, uuid)) {
-				isSalesPack = true;
-				iapsa = new InAppPurchaseSalesAction(userId,
-						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-						salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+                iapmta.execute(resBuilder);
+            }
+            else if(packageIsSalesPackage(packageName, uuid)) {
+                isSalesPack = true;
+                iapsa = new InAppPurchaseSalesAction(userId,
+                        user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+                        itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+                        createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+                        salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+                        salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
 
-				iapsa.execute(resBuilder);
-			}
-			else {
-				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,
-						uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
-						miscMethods, inAppPurchaseUtils);
+                iapsa.execute(resBuilder);
+            }
+            else {
+                iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,
+                        uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
+                        miscMethods, inAppPurchaseUtils);
 
-				iapa.execute(resBuilder);
-			}
+                iapa.execute(resBuilder);
+            }
 
-			if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS)) {
-				resBuilder.setPackageName(packageName);
-				resBuilder.setPackagePrice(realLifeCashCost);
+            if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS)) {
+                resBuilder.setPackageName(packageName);
+                resBuilder.setPackagePrice(realLifeCashCost);
 
-				log.info(
-						"successful in-app purchase from user {} for package {}",
-						userId, packageName);
+                log.info(
+                        "successful in-app purchase from user {} for package {}",
+                        userId, packageName);
 
-				Timestamp date = new Timestamp(now.getTime());
-				if(isStarterPack) {
-					writeToUserCurrencyHistory(userId, date, null, iapspa, null, null);
-				}
-				else if(isMoneyTree) {
-					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
-				}
-				else if(isSalesPack) {
-					setNewAndPurchasedSalesPackage(resBuilder, iapsa);
-					createRewardProto(resBuilder, iapsa);
-					writeToUserCurrencyHistory(userId, date, null, null, null, iapsa);
-				}
-				else {
-					writeToUserCurrencyHistory(userId, date, iapa, null, null, null);
-				}
-			}
-		} catch (Exception e) {
-			log.error("problem with in app purchase flow", e);
-		}
-	}
+                Timestamp date = new Timestamp(now.getTime());
+                if(isStarterPack) {
+                    writeToUserCurrencyHistory(userId, date, null, iapspa, null, null);
+                }
+                else if(isMoneyTree) {
+                    writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
+                }
+                else if(isSalesPack) {
+                    setNewAndPurchasedSalesPackage(resBuilder, iapsa);
+                    createRewardProto(resBuilder, iapsa);
+                    writeToUserCurrencyHistory(userId, date, null, null, null, iapsa);
+                }
+                else {
+                    writeToUserCurrencyHistory(userId, date, iapa, null, null, null);
+                }
+            }
+        } catch (Exception e) {
+            log.error("problem with in app purchase flow", e);
+        }
+    }
 
-	public boolean packageIsSalesPackage(String productId, String uuid) {
-		Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-				salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
-		
-		log.info(salesPackageNamesToSalesPackages+"");
+    public boolean packageIsSalesPackage(String productId, String uuid) {
+        Map<String, List<SalesPackage>> salesPackageNamesToSalesPackages =
+                salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
 
-		for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
-			SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
-			if(productId2.equalsIgnoreCase(productId) && sp.getUuid().equals(uuid)) {
-				salesPackage = sp;
-				return true;
-			}
-		}
-		log.info("packagename {} does not exist in table of sales packages",
-				productId);
-		return false;
-	}
+        List<SalesPackage> pkgs = salesPackageNamesToSalesPackages.get(productId);
+        if (pkgs != null && !pkgs.isEmpty()) {
+            for (SalesPackage sp : pkgs) {
+                if (sp.getProductId().equalsIgnoreCase(productId) && sp.getUuid().equals(uuid)) {
+                    salesPackage = sp;
+                    return true;
+                }
+            }
+        }
+        log.info("packagename {} does not exist in table of sales packages",
+                productId);
+        return false;
+    }
 
-	public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
-			InAppPurchaseSalesAction iapsa) {
+    public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
+            InAppPurchaseSalesAction iapsa) {
 
-		boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
-		SalesPackage successorSalesPackage;
+        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
+        SalesPackage successorSalesPackage;
 
-		if(salesPackage.getSuccId() == 0) {
-			successorSalesPackage = salesPackage;
-		}
-		else {
-			successorSalesPackage = salesPackageRetrieveUtils.
-					getSalesPackageForSalesPackageId(salesPackage.getSuccId());
+        if(salesPackage.getSuccId() == 0) {
+            successorSalesPackage = salesPackage;
+        }
+        else {
+            successorSalesPackage = salesPackageRetrieveUtils.
+                    getSalesPackageForSalesPackageId(salesPackage.getSuccId());
 
-			if(jumpTwoTiers) {
-				if(successorSalesPackage.getSuccId() != 0) {
-					successorSalesPackage = salesPackageRetrieveUtils.
-							getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
-				}
-			}
-		}
+            if(jumpTwoTiers) {
+                if(successorSalesPackage.getSuccId() != 0) {
+                    successorSalesPackage = salesPackageRetrieveUtils.
+                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
+                }
+            }
+        }
 
-		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
-				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
-				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-		resBuilder.setPurchasedSalesPackage(curSpp);
-		resBuilder.setSuccessorSalesPackage(preSpp);
+        SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
+                salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+        SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
+                salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+        resBuilder.setPurchasedSalesPackage(curSpp);
+        resBuilder.setSuccessorSalesPackage(preSpp);
 
-	}
+    }
 
-	public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
-			InAppPurchaseSalesAction iapsa) {
-		Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
-		Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
-		int gemsGained = iapsa.getAra().getGemsGained();
-		int cashGained = iapsa.getAra().getCashGained();
-		int oilGained = iapsa.getAra().getOilGained();
+    public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
+            InAppPurchaseSalesAction iapsa) {
+        Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+        Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
+        int gemsGained = iapsa.getAra().getGemsGained();
+        int cashGained = iapsa.getAra().getCashGained();
+        int oilGained = iapsa.getAra().getOilGained();
 
-		//TODO: protofy the rewards
-		UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-				nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
-		resBuilder.setRewards(urp);
+        //TODO: protofy the rewards
+        UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
+                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+        resBuilder.setRewards(urp);
 
-	}
+    }
 
-	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-			InAppPurchaseAction iapa, InAppPurchaseStarterPackAction iapspa,
-			InAppPurchaseMoneyTreeAction iapmta, InAppPurchaseSalesAction iapsa) {
+    private void writeToUserCurrencyHistory(String userId, Timestamp date,
+            InAppPurchaseAction iapa, InAppPurchaseStarterPackAction iapspa,
+            InAppPurchaseMoneyTreeAction iapmta, InAppPurchaseSalesAction iapsa) {
 
-		if(iapa != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
-					iapa.getCurrentCurrencies(), iapa.getReasons(),
-					iapa.getDetails());
-		}
+        if(iapa != null) {
+            miscMethods.writeToUserCurrencyOneUser(userId, date,
+                    iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
+                    iapa.getCurrentCurrencies(), iapa.getReasons(),
+                    iapa.getDetails());
+        }
 
-		if(iapspa != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapspa.getCurrencyDeltas(), iapspa.getPrevCurrencies(),
-					iapspa.getCurCurrencies(), iapspa.getReasonsForChanges(),
-					iapspa.getDetails());
-		}
+        if(iapspa != null) {
+            miscMethods.writeToUserCurrencyOneUser(userId, date,
+                    iapspa.getCurrencyDeltas(), iapspa.getPrevCurrencies(),
+                    iapspa.getCurCurrencies(), iapspa.getReasonsForChanges(),
+                    iapspa.getDetails());
+        }
 
-		if(iapmta != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapmta.getCurrencyDeltas(), iapmta.getPrevCurrencies(),
-					iapmta.getCurCurrencies(), iapmta.getReasonsForChanges(),
-					iapmta.getDetails());
-		}
+        if(iapmta != null) {
+            miscMethods.writeToUserCurrencyOneUser(userId, date,
+                    iapmta.getCurrencyDeltas(), iapmta.getPrevCurrencies(),
+                    iapmta.getCurCurrencies(), iapmta.getReasonsForChanges(),
+                    iapmta.getDetails());
+        }
 
-		if(iapsa != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapsa.getAra().getCurrencyDeltas(), iapsa.getAra().getPreviousCurrencies(),
-					iapsa.getAra().getCurrentCurrencies(), iapsa.getAra().getReasons(),
-					iapsa.getAra().getDetails());
-		}
+        if(iapsa != null) {
+            miscMethods.writeToUserCurrencyOneUser(userId, date,
+                    iapsa.getAra().getCurrencyDeltas(), iapsa.getAra().getPreviousCurrencies(),
+                    iapsa.getAra().getCurrentCurrencies(), iapsa.getAra().getReasons(),
+                    iapsa.getAra().getDetails());
+        }
 
-	}
+    }
 
 
-	/*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
+    /*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
 	log.info("Posting to Kabam");
 	String host = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_PAYMENT_URL : KabamProperties.PRODUCTION_PAYMENT_URL;
 	HttpClient client = new DefaultHttpClient();
@@ -597,67 +598,67 @@ public class InAppPurchaseController extends EventController {
 	return logJson;
 	}*/
 
-	//	private static String sha1(String input) throws NoSuchAlgorithmException {
-	//		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-	//		byte[] result = mDigest.digest(input.getBytes());
-	//		StringBuilder sb = new StringBuilder();
-	//		for (int i = 0; i < result.length; i++) {
-	//			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-	//		}
-	//
-	//		return sb.toString();
-	//	}
+    //	private static String sha1(String input) throws NoSuchAlgorithmException {
+    //		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+    //		byte[] result = mDigest.digest(input.getBytes());
+    //		StringBuilder sb = new StringBuilder();
+    //		for (int i = 0; i < result.length; i++) {
+    //			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+    //		}
+    //
+    //		return sb.toString();
+    //	}
 
 
 
-	public Locker getLocker() {
-		return locker;
-	}
+    public Locker getLocker() {
+        return locker;
+    }
 
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
 
-	public InsertUtil getInsertUtil() {
-		return insertUtil;
-	}
+    public InsertUtil getInsertUtil() {
+        return insertUtil;
+    }
 
-	public void setInsertUtil(InsertUtil insertUtil) {
-		this.insertUtil = insertUtil;
-	}
+    public void setInsertUtil(InsertUtil insertUtil) {
+        this.insertUtil = insertUtil;
+    }
 
-	public UpdateUtil getUpdateUtil() {
-		return updateUtil;
-	}
+    public UpdateUtil getUpdateUtil() {
+        return updateUtil;
+    }
 
-	public void setUpdateUtil(UpdateUtil updateUtil) {
-		this.updateUtil = updateUtil;
-	}
+    public void setUpdateUtil(UpdateUtil updateUtil) {
+        this.updateUtil = updateUtil;
+    }
 
-	public UserRetrieveUtils2 getUserRetrieveUtil() {
-		return userRetrieveUtil;
-	}
+    public UserRetrieveUtils2 getUserRetrieveUtil() {
+        return userRetrieveUtil;
+    }
 
-	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
-		this.userRetrieveUtil = userRetrieveUtil;
-	}
+    public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+        this.userRetrieveUtil = userRetrieveUtil;
+    }
 
-	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil() {
-		return iapHistoryRetrieveUtil;
-	}
+    public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil() {
+        return iapHistoryRetrieveUtil;
+    }
 
-	public void setIapHistoryRetrieveUtil(
-			IAPHistoryRetrieveUtils iapHistoryRetrieveUtil) {
-		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
-	}
+    public void setIapHistoryRetrieveUtil(
+            IAPHistoryRetrieveUtils iapHistoryRetrieveUtil) {
+        this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+    }
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
-		return itemForUserRetrieveUtil;
-	}
+    public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
+        return itemForUserRetrieveUtil;
+    }
 
-	public void setItemForUserRetrieveUtil(
-			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
-		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-	}
+    public void setItemForUserRetrieveUtil(
+            ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+        this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+    }
 
 }

@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -51,16 +53,23 @@ public class SalesPackageRetrieveUtils {
 	//    return returnValue;
 	//  }
 
-	public Map<String, SalesPackage> getSalesPackageProductIdToSalesPackages() {
+	public Map<String, List<SalesPackage>> getSalesPackageProductIdToSalesPackages() {
 		log.debug("retrieving all sales packs data map");
 		if (salesPackageIdsToSalesPackages == null) {
 			setStaticSalesPackageIdsToSalesPackages();
 		}
 
-		Map<String, SalesPackage> returnMap = new HashMap<String, SalesPackage>();
+		Map<String, List<SalesPackage>> returnMap = new HashMap<String, List<SalesPackage>>();
 		for(Integer i : salesPackageIdsToSalesPackages.keySet()) {
 			SalesPackage sp = salesPackageIdsToSalesPackages.get(i);
-			returnMap.put(sp.getProductId(), sp);
+			
+			List<SalesPackage> list = returnMap.get(sp.getProductId());
+			
+			if (list == null) {
+			    list = new ArrayList<SalesPackage>();
+			    returnMap.put(sp.getProductId(), list);
+			}
+			list.add(sp);
 		}
 		return returnMap;
 	}
