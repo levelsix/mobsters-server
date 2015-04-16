@@ -53,7 +53,6 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
-import com.lvl6.server.controller.actionobjects.InAppPurchaseStarterPackAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -378,15 +377,15 @@ public class InAppPurchaseController extends EventController {
 				Timestamp date = new Timestamp(now.getTime());
 
 				if(isMoneyTree) {
-					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
+					writeToUserCurrencyHistory(userId, date, null, iapmta, null);
 				}
 				else if(isSalesPack) {
 					setNewAndPurchasedSalesPackage(resBuilder, iapsa);
 					createRewardProto(resBuilder, iapsa);
-					writeToUserCurrencyHistory(userId, date, null, null, null, iapsa);
+					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
 				else {
-					writeToUserCurrencyHistory(userId, date, iapa, null, null, null);
+					writeToUserCurrencyHistory(userId, date, iapa, null, null);
 				}
 			}
 		} catch (Exception e) {
@@ -459,21 +458,14 @@ public class InAppPurchaseController extends EventController {
     }
 
     private void writeToUserCurrencyHistory(String userId, Timestamp date,
-            InAppPurchaseAction iapa, InAppPurchaseStarterPackAction iapspa,
-            InAppPurchaseMoneyTreeAction iapmta, InAppPurchaseSalesAction iapsa) {
+            InAppPurchaseAction iapa, InAppPurchaseMoneyTreeAction iapmta,
+            InAppPurchaseSalesAction iapsa) {
 
         if(iapa != null) {
             miscMethods.writeToUserCurrencyOneUser(userId, date,
                     iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
                     iapa.getCurrentCurrencies(), iapa.getReasons(),
                     iapa.getDetails());
-        }
-
-        if(iapspa != null) {
-            miscMethods.writeToUserCurrencyOneUser(userId, date,
-                    iapspa.getCurrencyDeltas(), iapspa.getPrevCurrencies(),
-                    iapspa.getCurCurrencies(), iapspa.getReasonsForChanges(),
-                    iapspa.getDetails());
         }
 
         if(iapmta != null) {
