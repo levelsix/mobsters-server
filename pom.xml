@@ -154,17 +154,18 @@
 		<amqp.vhost>devmobsters</amqp.vhost>
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
-		<amqp.client.messages.queue>clientMessages1.4</amqp.client.messages.queue>
+		<amqp.client.messages.queue>clientMessages1.5</amqp.client.messages.queue>
 		<!-- <amqp.client.messages.bindings><![CDATA[
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
 		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
 		]]></amqp.client.messages.bindings> -->
 		<amqp.client.messages.bindings><![CDATA[
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.1" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.2" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.3" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.4" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.1" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.2" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.3" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.4" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.5" />
 		]]></amqp.client.messages.bindings>
 
 
