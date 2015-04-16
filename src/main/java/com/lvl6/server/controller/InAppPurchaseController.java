@@ -340,14 +340,14 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseMoneyTreeAction iapmta = null;
 
 //						if(IAPValues.packageIsStarterPack(packageName)) {
-//							isStarterPack = true;
-//							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-//									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-//									insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-//									boosterItemRetrieveUtils, monsterRetrieveUtils,
-//									monsterLevelInfoRetrieveUtils);
-//
-//							iapspa.execute(resBuilder);
+////							isStarterPack = true;
+////							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
+////									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
+////									insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
+////									boosterItemRetrieveUtils, monsterRetrieveUtils,
+////									monsterLevelInfoRetrieveUtils);
+////
+////							iapspa.execute(resBuilder);
 //
 //							//for testing
 //							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
