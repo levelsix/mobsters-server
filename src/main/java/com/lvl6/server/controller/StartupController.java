@@ -727,7 +727,7 @@ public class StartupController extends EventController {
 			PvpLeagueForUser plfu = pvpBattleStuff(resBuilder, user, playerId,
 					freshRestart, now);
 			log.info("{}ms at pvpBattleStuff", stopWatch.getTime());
-			setAchievementStuff(resBuilder, playerId);
+			setAchievementStuff(resBuilder, playerId, user, now, stopWatch);
 			log.info("{}ms at achivementStuff", stopWatch.getTime());
 			setMiniJob(resBuilder, playerId);
 			log.info("{}ms at miniJobStuff", stopWatch.getTime());
@@ -748,8 +748,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setStarterPackForUser(resBuilder, user);
 			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
-			setMiniEventForUser(resBuilder, user, playerId, nowDate);
-			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
+			
 
 
 			//db request for user monsters
@@ -1533,7 +1532,7 @@ public class StartupController extends EventController {
 	}
 	*/
 
-	private void setAchievementStuff(Builder resBuilder, String userId) {
+	private void setAchievementStuff(Builder resBuilder, String userId, User user, Date nowDate, StopWatch stopWatch) {
 		/*NOTE: DB CALL*/
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = getAchievementForUserRetrieveUtil()
 				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
@@ -1543,6 +1542,29 @@ public class StartupController extends EventController {
 			UserAchievementProto uap = createInfoProtoUtils
 					.createUserAchievementProto(afu);
 			resBuilder.addUserAchievements(uap);
+			
+		}
+		boolean calculateMiniEvent = true;
+		for (int i = 0; i < ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS.length; i++) {
+			int achievementId = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS[i];
+			
+			if (!achievementIdToUserAchievements.containsKey(achievementId))
+			{
+				calculateMiniEvent = false;
+				break;
+			}
+			
+			AchievementForUser afu = achievementIdToUserAchievements.get(achievementId);
+			if (!afu.isRedeemed())
+			{
+				calculateMiniEvent = false;
+				break;
+			}
+		}
+		
+		if (calculateMiniEvent) {
+			setMiniEventForUser(resBuilder, user, userId, nowDate);
+			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 		}
 	}
 
