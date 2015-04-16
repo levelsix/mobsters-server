@@ -1,6 +1,9 @@
 
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -13,6 +16,9 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectClanGiftsRequestEvent;
 import com.lvl6.events.response.CollectClanGiftsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ClanGiftForUser;
+import com.lvl6.proto.ClanGiftsProto.ClanGiftProto;
+import com.lvl6.proto.ClanGiftsProto.UserClanGiftProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsRequestProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus;
@@ -89,6 +95,7 @@ public class CollectClanGiftsController extends EventController {
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
+		List<UserClanGiftProto> listOfClanGiftProtos = reqProto.getUserClanGiftList();
 
 		//all positive numbers, server will change to negative
 
@@ -125,7 +132,7 @@ public class CollectClanGiftsController extends EventController {
 			CollectClanGiftsAction uusa = new CollectClanGiftsAction(userId, userRetrieveUtils,
 					clanGiftForUserRetrieveUtils, rewardRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, monsterLevelInfoRetrieveUtils, insertUtil, updateUtil,
-					deleteUtil);
+					deleteUtil, listOfClanGiftProtos);
 
 			uusa.execute(resBuilder);
 
@@ -164,6 +171,25 @@ public class CollectClanGiftsController extends EventController {
 			}
 		} finally {
 			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+		}
+	}
+
+	public List<ClanGiftForUser> convertProtos(List<UserClanGiftProto> protoList) {
+		List<ClanGiftForUser> returnList = new ArrayList<ClanGiftForUser>();
+		for(UserClanGiftProto ucgp : protoList) {
+			ClanGiftForUser cgfu = new ClanGiftForUser();
+			cgfu.setId(ucgp.getUserClanGiftId());
+
+			if(ucgp.getGifterUserId() != null) {
+				cgfu.setGifterUserId(ucgp.getGifterUserId());
+			}
+
+			ClanGiftProto cgp = ucgp.getClanGift();
+			cgfu.setClanGiftId(cgp.getClanGiftId());
+			cgfu.setReceiverUserId(ucgp.getReceiverUserId());
+			cgfu.setRewardId(ucgp.getReward().getRewardId());
+			cgfu.setTimeReceived(new Date(ucgp.getTimeReceived()));
+
 		}
 	}
 

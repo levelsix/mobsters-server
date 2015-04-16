@@ -22,7 +22,6 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanGift;
-import com.lvl6.info.ClanGiftRewards;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.EventPersistent;
@@ -1176,9 +1175,7 @@ public class StaticDataContainer {
 
 		for(Integer clanGiftId : idsToClanGift.keySet()) {
 			ClanGift cg = idsToClanGift.get(clanGiftId);
-			List<ClanGiftRewards> clanGiftRewardsList = clanGiftRewardsRetrieveUtils.getClanGiftRewardsForClanGift(clanGiftId);
-
-			ClanGiftProto cgp = createInfoProtoUtils.createClanGiftProto(cg, clanGiftRewardsList);
+			ClanGiftProto cgp = createInfoProtoUtils.createClanGiftProto(cg);
 			sdpb.addClanGifts(cgp);
 		}
 	}

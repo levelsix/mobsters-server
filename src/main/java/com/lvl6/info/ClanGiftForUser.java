@@ -17,8 +17,6 @@ public class ClanGiftForUser {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public ClanGiftForUser(String id, String receiverUserId,
 			String gifterUserId, int clanGiftId, int rewardId,
 			Date timeReceived, String reasonForGift) {

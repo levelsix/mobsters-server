@@ -43,6 +43,29 @@ public final class ClanGiftsProto {
      * <code>optional int32 hoursUntilExpiration = 3;</code>
      */
     int getHoursUntilExpiration();
+
+    /**
+     * <code>optional string imageName = 4;</code>
+     */
+    boolean hasImageName();
+    /**
+     * <code>optional string imageName = 4;</code>
+     */
+    java.lang.String getImageName();
+    /**
+     * <code>optional string imageName = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getImageNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     */
+    boolean hasRarity();
+    /**
+     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.Quality getRarity();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
@@ -110,6 +133,23 @@ public final class ClanGiftsProto {
             case 24: {
               bitField0_ |= 0x00000004;
               hoursUntilExpiration_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              imageName_ = bs;
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                rarity_ = value;
+              }
               break;
             }
           }
@@ -224,10 +264,69 @@ public final class ClanGiftsProto {
       return hoursUntilExpiration_;
     }
 
+    public static final int IMAGENAME_FIELD_NUMBER = 4;
+    private java.lang.Object imageName_;
+    /**
+     * <code>optional string imageName = 4;</code>
+     */
+    public boolean hasImageName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string imageName = 4;</code>
+     */
+    public java.lang.String getImageName() {
+      java.lang.Object ref = imageName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          imageName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string imageName = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getImageNameBytes() {
+      java.lang.Object ref = imageName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        imageName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RARITY_FIELD_NUMBER = 5;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality rarity_;
+    /**
+     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     */
+    public boolean hasRarity() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getRarity() {
+      return rarity_;
+    }
+
     private void initFields() {
       clanGiftId_ = 0;
       name_ = "";
       hoursUntilExpiration_ = 0;
+      imageName_ = "";
+      rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -251,6 +350,12 @@ public final class ClanGiftsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, hoursUntilExpiration_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, rarity_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -271,6 +376,14 @@ public final class ClanGiftsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, hoursUntilExpiration_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, rarity_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -395,6 +508,10 @@ public final class ClanGiftsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         hoursUntilExpiration_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        imageName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -435,6 +552,14 @@ public final class ClanGiftsProto {
           to_bitField0_ |= 0x00000004;
         }
         result.hoursUntilExpiration_ = hoursUntilExpiration_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.imageName_ = imageName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.rarity_ = rarity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -461,6 +586,14 @@ public final class ClanGiftsProto {
         }
         if (other.hasHoursUntilExpiration()) {
           setHoursUntilExpiration(other.getHoursUntilExpiration());
+        }
+        if (other.hasImageName()) {
+          bitField0_ |= 0x00000008;
+          imageName_ = other.imageName_;
+          onChanged();
+        }
+        if (other.hasRarity()) {
+          setRarity(other.getRarity());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -625,6 +758,117 @@ public final class ClanGiftsProto {
       public Builder clearHoursUntilExpiration() {
         bitField0_ = (bitField0_ & ~0x00000004);
         hoursUntilExpiration_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object imageName_ = "";
+      /**
+       * <code>optional string imageName = 4;</code>
+       */
+      public boolean hasImageName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string imageName = 4;</code>
+       */
+      public java.lang.String getImageName() {
+        java.lang.Object ref = imageName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imageName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string imageName = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getImageNameBytes() {
+        java.lang.Object ref = imageName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          imageName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string imageName = 4;</code>
+       */
+      public Builder setImageName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        imageName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string imageName = 4;</code>
+       */
+      public Builder clearImageName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        imageName_ = getDefaultInstance().getImageName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string imageName = 4;</code>
+       */
+      public Builder setImageNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        imageName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Quality rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      /**
+       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       */
+      public boolean hasRarity() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getRarity() {
+        return rarity_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       */
+      public Builder setRarity(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        rarity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       */
+      public Builder clearRarity() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         onChanged();
         return this;
       }
@@ -1938,14 +2182,16 @@ public final class ClanGiftsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017ClanGifts.proto\022\016com.lvl6.proto\032\014Rewar" +
-      "d.proto\"O\n\rClanGiftProto\022\022\n\nclanGiftId\030\001" +
-      " \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilExpirati" +
-      "on\030\003 \001(\005\"\315\001\n\021UserClanGiftProto\022\026\n\016userCl" +
-      "anGiftId\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001(\t\022\024" +
-      "\n\014gifterUserId\030\003 \001(\t\022/\n\010clanGift\030\004 \001(\0132\035" +
-      ".com.lvl6.proto.ClanGiftProto\022\024\n\014timeRec" +
-      "eived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com.lvl6.p" +
-      "roto.RewardProtoB\020B\016ClanGiftsProto"
+      "d.proto\032\026SharedEnumConfig.proto\"\213\001\n\rClan" +
+      "GiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004name\030\002 " +
+      "\001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021\n\tima" +
+      "geName\030\004 \001(\t\022\'\n\006rarity\030\005 \001(\0162\027.com.lvl6." +
+      "proto.Quality\"\315\001\n\021UserClanGiftProto\022\026\n\016u" +
+      "serClanGiftId\030\001 \001(\t\022\026\n\016receiverUserId\030\002 " +
+      "\001(\t\022\024\n\014gifterUserId\030\003 \001(\t\022/\n\010clanGift\030\004 " +
+      "\001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014ti" +
+      "meReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com.l",
+      "vl6.proto.RewardProtoB\020B\016ClanGiftsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1959,13 +2205,14 @@ public final class ClanGiftsProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_ClanGiftProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanGiftProto_descriptor,
-        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", });
+        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ImageName", "Rarity", });
     internal_static_com_lvl6_proto_UserClanGiftProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
@@ -1973,6 +2220,7 @@ public final class ClanGiftsProto {
         internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
         new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUserId", "ClanGift", "TimeReceived", "Reward", });
     com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

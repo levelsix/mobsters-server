@@ -40,26 +40,35 @@ public class CollectClanGiftsAction {
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 	private DeleteUtil deleteUtil;
+	private List<ClanGiftForUser> listOfClanGifts;
 
 	public CollectClanGiftsAction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CollectClanGiftsAction(String userId, UserRetrieveUtils2 userRetrieveUtils,
+
+public CollectClanGiftsAction(String userId,
+			UserRetrieveUtils2 userRetrieveUtils,
 			ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			InsertUtil insertUtil, UpdateUtil updateUtil, DeleteUtil deleteUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			DeleteUtil deleteUtil, List<ClanGiftForUser> listOfClanGifts) {
 		super();
 		this.userId = userId;
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.clanGiftForUserRetrieveUtils = clanGiftForUserRetrieveUtils;
 		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.monsterStuffUtils = monsterStuffUtils;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 		this.insertUtil = insertUtil;
+		this.updateUtil = updateUtil;
 		this.deleteUtil = deleteUtil;
+		this.listOfClanGifts = listOfClanGifts;
 	}
 
 	private List<ClanGiftRewards> rewardsForClanGift;
@@ -110,24 +119,22 @@ public class CollectClanGiftsAction {
 
 	private boolean writeChangesToDB() {
 		//get all the clan gifts for user
-		List<ClanGiftForUser> listOfGifts = clanGiftForUserRetrieveUtils.
-				getUserClanGiftsForUser(userId);
-		String reasonForGift;
+		String reasonForGift = null;
 		List<Reward> listOfRewards = new ArrayList<Reward>();
-		for(ClanGiftForUser cgfu : listOfGifts) {
+		for(ClanGiftForUser cgfu : listOfClanGifts) {
 			reasonForGift = cgfu.getReasonForGift();
 			listOfRewards.add(rewardIdsToRewards.get(cgfu.getRewardId()));
 		}
 
 		//give the rewards
 		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, new Date(),
-				"clan gift", listOfRewards, userRetrieveUtils, itemForUserRetrieveUtil,
+				reasonForGift, listOfRewards, userRetrieveUtils, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils);
 
 		ara.execute();
 
 		//delete the rows in clan gifts for user
-		boolean success = deleteUtil.deleteFromClanGiftForUser(listOfGifts);
+		boolean success = deleteUtil.deleteFromClanGiftForUser(listOfClanGifts);
 		return success;
 	}
 
@@ -161,6 +168,97 @@ public class CollectClanGiftsAction {
 
 	public void setClanMembers(List<UserClan> clanMembers) {
 		this.clanMembers = clanMembers;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtils;
+	}
+
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
+	public ClanGiftForUserRetrieveUtils getClanGiftForUserRetrieveUtils() {
+		return clanGiftForUserRetrieveUtils;
+	}
+
+	public void setClanGiftForUserRetrieveUtils(
+			ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils) {
+		this.clanGiftForUserRetrieveUtils = clanGiftForUserRetrieveUtils;
+	}
+
+	public RewardRetrieveUtils getRewardRetrieveUtils() {
+		return rewardRetrieveUtils;
+	}
+
+	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public DeleteUtil getDeleteUtil() {
+		return deleteUtil;
+	}
+
+	public void setDeleteUtil(DeleteUtil deleteUtil) {
+		this.deleteUtil = deleteUtil;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Map<Integer, Reward> getRewardIdsToRewards() {
+		return rewardIdsToRewards;
+	}
+
+	public void setRewardIdsToRewards(Map<Integer, Reward> rewardIdsToRewards) {
+		this.rewardIdsToRewards = rewardIdsToRewards;
 	}
 
 
