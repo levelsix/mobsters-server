@@ -41,6 +41,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
@@ -75,6 +76,7 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatType;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ClanGiftsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -122,6 +124,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -304,7 +307,7 @@ public class StartupControllerOld extends EventController {
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
 	@Autowired
-	protected ClanGiftForUserRetrieveUtil clanGiftForUserRetrieveUtil;
+	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtil;
 
 	@Autowired
 	protected BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
@@ -772,7 +775,6 @@ public class StartupControllerOld extends EventController {
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 			setClanGiftForUser(resBuilder, playerId);
-			log.info("{}ms at setClanGiftForUser", stopWatch.getTime());
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1971,10 +1973,11 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setClanGiftForUser(Builder resBuilder, String playerId) {
-
-
-
-
+		List<ClanGiftForUser> listOfClanGifts = clanGiftForUserRetrieveUtil.getUserClanGiftsForUser(playerId);
+		for(ClanGiftForUser cgfu : listOfClanGifts) {
+			UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu);
+			resBuilder.addUserClanGifts(ucgp);
+		}
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,

@@ -50,6 +50,7 @@ import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
 import com.lvl6.proto.ClanGiftsProto.ClanGiftProto;
+import com.lvl6.proto.ClanGiftsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
@@ -184,6 +185,7 @@ import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
@@ -192,6 +194,7 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -202,6 +205,9 @@ public class CreateInfoProtoUtils {
 
 	@Autowired
 	protected MiscMethods miscMethods;
+
+	@Autowired
+	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
 
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
@@ -235,6 +241,9 @@ public class CreateInfoProtoUtils {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
@@ -5246,12 +5255,24 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-//	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg) {
-//
-//
-//
-//
-//	}
+	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg) {
+		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();
+		b.setUserClanGiftId(ucg.getId());
+		b.setReceiverUserId(ucg.getReceiverUserId());
+
+		if(ucg.getGifterUserId() != null) {
+			b.setGifterUserId(ucg.getGifterUserId());
+		}
+		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
+
+		b.setClanGift(createClanGiftProto(cg));
+		b.setTimeReceived(ucg.getTimeReceived().getTime());
+
+		Reward r = rewardRetrieveUtils.getRewardById(ucg.getRewardId());
+		b.setReward(createRewardProto(r));
+
+		return b.build();
+	}
 
 
 
