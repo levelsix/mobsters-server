@@ -123,11 +123,11 @@ public class InAppPurchaseController extends EventController {
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
 
-    @Autowired
-    protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+	@Autowired
+	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
-    @Autowired
-    protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+	@Autowired
+	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
@@ -339,40 +339,40 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseStarterPackAction iapspa = null;
 			InAppPurchaseMoneyTreeAction iapmta = null;
 
-//			if(IAPValues.packageIsStarterPack(packageName)) {
-//				isStarterPack = true;
-//				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-//						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-//						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-//						boosterItemRetrieveUtils, monsterRetrieveUtils,
-//						monsterLevelInfoRetrieveUtils);
+						if(IAPValues.packageIsStarterPack(packageName)) {
+//							isStarterPack = true;
+//							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
+//									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
+//									insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
+//									boosterItemRetrieveUtils, monsterRetrieveUtils,
+//									monsterLevelInfoRetrieveUtils);
 //
-//				iapspa.execute(resBuilder);
-//
-//				//for testing
-//				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-//						salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
-//
-//				for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
-//					SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
-//					if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
-//						salesPackage = sp;
-//					}
-//				}
-//				log.info("packagename {} does not exist in table of sales packages",
-//						packageName);
-//
-//				isSalesPack = true;
-//				iapsa = new InAppPurchaseSalesAction(userId,
-//						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-//						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-//						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-//						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-//						salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
-//
-//
-//				iapsa.execute(resBuilder);
-//			}
+//							iapspa.execute(resBuilder);
+
+							//for testing
+							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+									salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
+
+							for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
+								SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
+								if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
+									salesPackage = sp;
+								}
+							}
+							log.info("packagename {} does not exist in table of sales packages",
+									packageName);
+
+							isSalesPack = true;
+							iapsa = new InAppPurchaseSalesAction(userId,
+									user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+									itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+									createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+									salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+									salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+
+
+							iapsa.execute(resBuilder);
+						}
 			if(IAPValues.packageIsMoneyTree(packageName)) {
 				isMoneyTree = true;
 				iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
@@ -450,26 +450,26 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseSalesAction iapsa) {
 
 		boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
-		SalesPackage predecessorSalesPackage;
+		SalesPackage successorSalesPackage;
 
 		if(salesPackage.getSuccId() == 0) {
-			predecessorSalesPackage = salesPackage;
+			successorSalesPackage = salesPackage;
 		}
 		else {
-			predecessorSalesPackage = salesPackageRetrieveUtils.
+			successorSalesPackage = salesPackageRetrieveUtils.
 					getSalesPackageForSalesPackageId(salesPackage.getSuccId());
 
 			if(jumpTwoTiers) {
-				if(predecessorSalesPackage.getSuccId() != 0) {
-					predecessorSalesPackage = salesPackageRetrieveUtils.
-							getSalesPackageForSalesPackageId(predecessorSalesPackage.getSuccId());
+				if(successorSalesPackage.getSuccId() != 0) {
+					successorSalesPackage = salesPackageRetrieveUtils.
+							getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
 				}
 			}
 		}
 
-        SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
-                salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(predecessorSalesPackage,
+		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
+				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		resBuilder.setSuccessorSalesPackage(preSpp);
@@ -479,15 +479,15 @@ public class InAppPurchaseController extends EventController {
 	public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
 			InAppPurchaseSalesAction iapsa) {
 		Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
-			Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
-			int gemsGained = iapsa.getAra().getGemsGained();
-			int cashGained = iapsa.getAra().getCashGained();
-			int oilGained = iapsa.getAra().getOilGained();
+		Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
+		int gemsGained = iapsa.getAra().getGemsGained();
+		int cashGained = iapsa.getAra().getCashGained();
+		int oilGained = iapsa.getAra().getOilGained();
 
-			//TODO: protofy the rewards
-			UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-					nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
-			resBuilder.setRewards(urp);
+		//TODO: protofy the rewards
+		UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
+				nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+		resBuilder.setRewards(urp);
 
 	}
 

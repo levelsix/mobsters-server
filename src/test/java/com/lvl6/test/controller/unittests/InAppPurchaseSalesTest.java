@@ -1,33 +1,19 @@
 package com.lvl6.test.controller.unittests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.Monster;
-import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.MonsterLevelInfo;
-import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -61,21 +47,6 @@ public class InAppPurchaseSalesTest {
 		iapa.setUpdateUtil(mockedUpdateUtil);
 	}
 
-
-//	@Test
-//	public void testPackageIsSalesPackage() {
-//		Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-//				new HashMap<String, SalesPackage>();
-//		salesPackageNamesToSalesPackages.put("name1", new SalesPackage());
-//		salesPackageNamesToSalesPackages.put("name2", new SalesPackage());
-//		salesPackageNamesToSalesPackages.put("name3", new SalesPackage());
-//
-//		assertTrue(iapa.packageIsSalesPackage("name1", salesPackageNamesToSalesPackages));
-//		assertTrue(iapa.packageIsSalesPackage("name2", salesPackageNamesToSalesPackages));
-//		assertTrue(iapa.packageIsSalesPackage("name3", salesPackageNamesToSalesPackages));
-//		assertFalse(iapa.packageIsSalesPackage("name0", salesPackageNamesToSalesPackages));
-//	}
-
 	@Test
 	public void testSaleIsWithinTimeConstraints() {
 		SalesPackage sp = new SalesPackage();
@@ -94,223 +65,213 @@ public class InAppPurchaseSalesTest {
 		assertFalse(iapa.saleIsWithinTimeConstraints());
 	}
 
-//	@Test
-//	public void testUserSalesValueMatchesSalesPackage() {
-//		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(true);
-//		SalesPackage sp = new SalesPackage();
-//		iapa.setUser(mockedUser);
-//
-//		when(mockedUser.getSalesValue()).thenReturn(0);
-//		sp.setPrice(5);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(1);
-//		sp.setPrice(20);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(2);
-//		sp.setPrice(50);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(3);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(4);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(5);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(6);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		//set salesjumptwotiers to false, this is when user hasn't
-//		//bought in a while
-//		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(false);
-//
-//		when(mockedUser.getSalesValue()).thenReturn(0);
-//		sp.setPrice(5);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(1);
-//		sp.setPrice(10);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(2);
-//		sp.setPrice(20);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(3);
-//		sp.setPrice(50);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(4);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(5);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//
-//		when(mockedUser.getSalesValue()).thenReturn(6);
-//		sp.setPrice(100);
-//		iapa.setSalesPackage(sp);
-//		assertTrue(iapa.userSalesValueMatchesSalesPackage());
-//	}
-
 	@Test
-	public void testGetDiamondsForSalesPackage() {
-		Map<Integer, List<SalesItem>> salesItemIdsToSalesItemsForSalesPackIds =
-				new HashMap<Integer, List<SalesItem>>();
+	public void testUserSalesValueLessThanSalesPackage() {
+		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(true);
 
-		salesItemIdsToSalesItemsForSalesPackIds.put(1, new ArrayList<SalesItem>());
+		when(mockedUser.getSalesValue()).thenReturn(0);
 
-		List<SalesItem> siList = new ArrayList<SalesItem>();
-		SalesItem si = new SalesItem();
-		si.setGemReward(1);
-		salesItemIdsToSalesItemsForSalesPackIds.get(1).add(si);
+		SalesPackage sp = new SalesPackage();
+		sp.setId(2);
+		sp.setPrice(5);
 
-		SalesItem si2 = new SalesItem();
-		si2.setGemReward(10);
-		salesItemIdsToSalesItemsForSalesPackIds.get(1).add(si2);
+		iapa.setSalesPackage(sp);
 
-		SalesItem si3 = new SalesItem();
-		si3.setGemReward(100);
-		salesItemIdsToSalesItemsForSalesPackIds.get(1).add(si3);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
 
-		assertEquals(111, iapa.getDiamondsForSalesPackage(1, salesItemIdsToSalesItemsForSalesPackIds));
-		assertEquals(0, iapa.getDiamondsForSalesPackage(11, salesItemIdsToSalesItemsForSalesPackIds));
-	}
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-	@Test
-	public void testCheckIfMonstersExistInSalesItem() {
-		Map<Integer, Monster> map = new HashMap<Integer, Monster>();
-		map.put(1, new Monster());
-		map.put(2, new Monster());
-		map.put(3, new Monster());
-		when(mockedMonsterRetrieveUtils.getMonsterIdsToMonsters()).thenReturn(map);
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		List<SalesItem> salesItemList = new ArrayList<SalesItem>();
-		SalesItem si = new SalesItem();
-		si.setMonsterId(1);
-		salesItemList.add(si);
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		SalesItem si2 = new SalesItem();
-		si2.setMonsterId(3);
-		salesItemList.add(si2);
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		iapa.setMonsterRetrieveUtils(mockedMonsterRetrieveUtils);
-		assertTrue(iapa.checkIfMonstersExistInSalesItem(salesItemList));
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		SalesItem si3 = new SalesItem();
-		si2.setMonsterId(4);
-		salesItemList.add(si3);
+		sp.setPrice(10);
+		iapa.setSalesPackage(sp);
 
-		assertFalse(iapa.checkIfMonstersExistInSalesItem(salesItemList));
-	}
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-	@Test
-	public void testCreateUpdateUserMonsterArgumentsForSales() {
-		Monster monster = new Monster();
-		monster.setId(1);
-		monster.setNumPuzzlePieces(2);
-		monster.setBaseDefensiveSkillId(0);
-		monster.setBaseOffensiveSkillId(0);
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		when(mockedMonsterRetrieveUtils.getMonsterForMonsterId(1)).thenReturn(monster);
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		MonsterLevelInfoRetrieveUtils mockedMonsterLevelInfoRetrieveUtils = mock(MonsterLevelInfoRetrieveUtils.class);
-		Map<Integer, MonsterLevelInfo> levelToInfo = new HashMap<Integer, MonsterLevelInfo>();
-		MonsterLevelInfo mli = new MonsterLevelInfo();
-		mli.setCurLvlRequiredExp(100);
-		mli.setHp(100);
-		levelToInfo.put(1, mli);
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		when(mockedMonsterLevelInfoRetrieveUtils.getAllPartialMonsterLevelInfo(1)).thenReturn(levelToInfo);
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-//		ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+		sp.setPrice(20);
+		iapa.setSalesPackage(sp);
 
-		//this assumes createLeveledMonsterForUserFromQuantity works as intended
-		when(mockedMonsterStuffUtils.createLeveledMonsterForUserFromQuantity(any(String.class), any(Monster.class),
-				any(Integer.class), any(Date.class), any(Integer.class), any(MonsterLevelInfoRetrieveUtils.class))).
-				thenReturn(new ArrayList<MonsterForUser>(Collections.nCopies(3, new MonsterForUser())));
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
 
-		List<SalesItem> salesItemList = new ArrayList<SalesItem>();
-		SalesItem si = new SalesItem();
-		si.setMonsterId(1);
-		si.setMonsterLevel(1);
-		si.setMonsterQuantity(3);
-		salesItemList.add(si);
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		iapa.setMonsterRetrieveUtils(mockedMonsterRetrieveUtils);
-		iapa.setMonsterStuffUtils(mockedMonsterStuffUtils);
-		iapa.setMonsterLevelInfoRetrieveUtils(mockedMonsterLevelInfoRetrieveUtils);
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
-		iapa.createUpdateUserMonsterArgumentsForSales(mockedUser.getId(), 1, salesItemList, monsterIdToNumPieces,
-				completeUserMonsters, new Date());
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		assertEquals(3, completeUserMonsters.size());
-		assertTrue(monsterIdToNumPieces.isEmpty());
-	}
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-	@Test
-	public void testCalculateItemRewards() {
-		ItemForUserRetrieveUtil mockedItemForUserRetrieveUtil = mock(ItemForUserRetrieveUtil.class);
+		sp.setPrice(50);
+		iapa.setSalesPackage(sp);
 
-		Map<Integer, ItemForUser> userExistingItems = new HashMap<Integer, ItemForUser>();
-		ItemForUser ifu = new ItemForUser();
-		ifu.setItemId(1);
-		ifu.setQuantity(5);
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
 
-		ItemForUser ifu2 = new ItemForUser();
-		ifu2.setItemId(2);
-		ifu2.setQuantity(2);
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
 
-		ItemForUser ifu3 = new ItemForUser();
-		ifu3.setItemId(3);
-		ifu3.setQuantity(10);
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		userExistingItems.put(1, ifu);
-		userExistingItems.put(2, ifu2);
-		userExistingItems.put(3, ifu3);
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		when(mockedItemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(any(String.class), any(Collection.class))).
-			thenReturn(userExistingItems);
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
 
-		Map<Integer, Integer> itemsReceived = new HashMap<Integer, Integer>();
-		itemsReceived.put(1, 5);
-		itemsReceived.put(2, 8);
-		itemsReceived.put(4, 10);
+		sp.setPrice(100);
+		iapa.setSalesPackage(sp);
 
-		List<ItemForUser> returnList = iapa.calculateItemRewards(mockedUser.getId(), mockedItemForUserRetrieveUtil,
-				itemsReceived);
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
 
-		for(ItemForUser ifu1 : returnList) {
-			assertTrue(ifu1.getQuantity() == 10);
-		}
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+
+
+		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(false);
+
+		sp.setPrice(5);
+		iapa.setSalesPackage(sp);
+
+		when(mockedUser.getSalesValue()).thenReturn(0);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		sp.setPrice(10);
+		iapa.setSalesPackage(sp);
+
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		sp.setPrice(20);
+		iapa.setSalesPackage(sp);
+
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		sp.setPrice(50);
+		iapa.setSalesPackage(sp);
+
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertTrue(iapa.userSalesValueLessThanSalesPackage());
+
+		sp.setPrice(100);
+		iapa.setSalesPackage(sp);
+
+		when(mockedUser.getSalesValue()).thenReturn(1);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(2);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(3);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(4);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
+		when(mockedUser.getSalesValue()).thenReturn(5);
+		assertFalse(iapa.userSalesValueLessThanSalesPackage());
+
 	}
 
 	@Test
 	public void testUpdateUserSalesValueAndLastPurchaseTime() {
+		when(mockedUser.isSalesJumpTwoTiers()).thenReturn(true);
+		SalesPackage sp = new SalesPackage();
+		sp.setId(2);
+		sp.setPrice(5);
+
 		when(mockedUser.getSalesValue()).thenReturn(0);
 		assertTrue(iapa.updateUserSalesValueAndLastPurchaseTime());
 
@@ -335,7 +296,6 @@ public class InAppPurchaseSalesTest {
 		when(mockedUser.getSalesValue()).thenReturn(-1);
 		assertFalse(iapa.updateUserSalesValueAndLastPurchaseTime());
 	}
-
 
 
 }

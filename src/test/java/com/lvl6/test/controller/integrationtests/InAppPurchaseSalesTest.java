@@ -206,7 +206,7 @@ public class InAppPurchaseSalesTest {
 				+ "R1cyIgPSAiMCI7Cn0=";
 
 		iaprpb.setReceipt(receipt1);
-		iaprpb.setUuid("udid");
+		iaprpb.setUuid("12581D5C-D488-4E2B-B8B4-642D012855C6");
 
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
@@ -226,6 +226,8 @@ public class InAppPurchaseSalesTest {
 		assertTrue(mfuList.size() == 4);
 		assertEquals(userGems1 + 100, userGems2);
 		assertTrue(ifuList.size() == 2);
+		assertTrue(user.getSalesValue() == 1);
+		assertTrue(user.isSalesJumpTwoTiers());
 	}
 
 }
