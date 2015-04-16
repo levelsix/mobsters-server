@@ -2126,12 +2126,14 @@ public class CreateInfoProtoUtils {
 		}
 
 		str = item.getQuality();
-		try {
-			Quality iq = Quality.valueOf(str);
-			ipb.setQuality(iq);
-		} catch (Exception e) {
-			log.error(String.format("invalid item quality. item=%s",
-					item), e);
+		if (null != str) {
+	        try {
+	            Quality iq = Quality.valueOf(str);
+	            ipb.setQuality(iq);
+	        } catch (Exception e) {
+	            log.error(String.format("invalid item quality. item=%s",
+	                    item), e);
+	        }
 		}
 
 		return ipb.build();
