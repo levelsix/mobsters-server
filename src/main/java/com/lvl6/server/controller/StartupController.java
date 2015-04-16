@@ -748,7 +748,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setStarterPackForUser(resBuilder, user);
 			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
-			
+
 
 
 			//db request for user monsters
@@ -1542,18 +1542,18 @@ public class StartupController extends EventController {
 			UserAchievementProto uap = createInfoProtoUtils
 					.createUserAchievementProto(afu);
 			resBuilder.addUserAchievements(uap);
-			
+
 		}
 		boolean calculateMiniEvent = true;
 		for (int i = 0; i < ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS.length; i++) {
 			int achievementId = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS[i];
-			
+
 			if (!achievementIdToUserAchievements.containsKey(achievementId))
 			{
 				calculateMiniEvent = false;
 				break;
 			}
-			
+
 			AchievementForUser afu = achievementIdToUserAchievements.get(achievementId);
 			if (!afu.isRedeemed())
 			{
@@ -1561,7 +1561,7 @@ public class StartupController extends EventController {
 				break;
 			}
 		}
-		
+
 		if (calculateMiniEvent) {
 			setMiniEventForUser(resBuilder, user, userId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
@@ -1696,14 +1696,15 @@ public class StartupController extends EventController {
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 
-		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
 		int userSalesValue = user.getSalesValue();
-		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
+		int newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 		Date now = new Date();
 
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) { //make sure it's not starter pack
+			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
+					sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
 						(sp.getTimeEnd().getTime() > now.getTime())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
@@ -1730,6 +1731,8 @@ public class StartupController extends EventController {
 		}
 	}
 
+
+
 	public boolean updateUserSalesJumpTwoTiers(User user) {
 		//update user jump two tier's value
 		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
@@ -1750,33 +1753,49 @@ public class StartupController extends EventController {
 		return salesJumpTwoTiers;
 	}
 
-	public int priceForSalesPackToBeShown(int userSalesValue, boolean salesJumpTwoTiers) {
+	public int priceForSalesPackToBeShown(int userSalesValue) {
 
 		int newMinPrice = 0;
 
-		//arin's formula
+//		//arin's formula
+//		if(userSalesValue == 0) {
+//			newMinPrice = 5;
+//		}
+//		else if(userSalesValue == 1) {
+//			if(salesJumpTwoTiers) {
+//				newMinPrice = 20;
+//			}
+//			else newMinPrice = 10;
+//		}
+//		else if(userSalesValue == 2) {
+//			if(salesJumpTwoTiers) {
+//				newMinPrice = 50;
+//			}
+//			else newMinPrice = 20;
+//		}
+//		else if(userSalesValue == 3) {
+//			if(salesJumpTwoTiers) {
+//				newMinPrice = 100;
+//			}
+//			else newMinPrice = 50;
+//		}
+//		else newMinPrice = 100;
+
 		if(userSalesValue == 0) {
 			newMinPrice = 5;
 		}
 		else if(userSalesValue == 1) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 20;
-			}
-			else newMinPrice = 10;
+			newMinPrice = 10;
 		}
 		else if(userSalesValue == 2) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 50;
-			}
-			else newMinPrice = 20;
+			newMinPrice = 20;
 		}
 		else if(userSalesValue == 3) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 100;
-			}
-			else newMinPrice = 50;
+			newMinPrice = 50;
 		}
-		else newMinPrice = 100;
+		else if(userSalesValue > 3) {
+			newMinPrice = 100;
+		}
 
 		return newMinPrice;
 	}

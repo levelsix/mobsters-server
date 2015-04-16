@@ -337,43 +337,8 @@ public class InAppPurchaseController extends EventController {
 
             InAppPurchaseAction iapa = null;
             InAppPurchaseSalesAction iapsa = null;
-            InAppPurchaseStarterPackAction iapspa = null;
             InAppPurchaseMoneyTreeAction iapmta = null;
 
-            //						if(IAPValues.packageIsStarterPack(packageName)) {
-            ////							isStarterPack = true;
-            ////							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-            ////									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-            ////									insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-            ////									boosterItemRetrieveUtils, monsterRetrieveUtils,
-            ////									monsterLevelInfoRetrieveUtils);
-            ////
-            ////							iapspa.execute(resBuilder);
-            //
-            //							//for testing
-            //							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-            //									salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
-            //
-            //							for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
-            //								SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
-            //								if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
-            //									salesPackage = sp;
-            //								}
-            //							}
-            //							log.info("packagename {} does not exist in table of sales packages",
-            //									packageName);
-            //
-            //							isSalesPack = true;
-            //							iapsa = new InAppPurchaseSalesAction(userId,
-            //									user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-            //									itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-            //									createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-            //									salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-            //									salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
-            //
-            //
-            //							iapsa.execute(resBuilder);
-            //						}
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
                 iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
@@ -411,9 +376,7 @@ public class InAppPurchaseController extends EventController {
                         userId, packageName);
 
 				Timestamp date = new Timestamp(now.getTime());
-//				if(isStarterPack) {
-//					writeToUserCurrencyHistory(userId, date, null, iapspa, null, null);
-//				}
+
 				if(isMoneyTree) {
 					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
 				}
@@ -475,7 +438,7 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
-		if(!iapsa.isStarterPack()) {
+		if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
 			resBuilder.setSuccessorSalesPackage(preSpp);
 		}
 	}

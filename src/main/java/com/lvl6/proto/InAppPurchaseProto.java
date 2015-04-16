@@ -302,6 +302,10 @@ public final class InAppPurchaseProto {
        * <code>SALE = 5;</code>
        */
       SALE(4, 5),
+      /**
+       * <code>BUILDER_PACK = 6;</code>
+       */
+      BUILDER_PACK(5, 6),
       ;
 
       /**
@@ -324,6 +328,10 @@ public final class InAppPurchaseProto {
        * <code>SALE = 5;</code>
        */
       public static final int SALE_VALUE = 5;
+      /**
+       * <code>BUILDER_PACK = 6;</code>
+       */
+      public static final int BUILDER_PACK_VALUE = 6;
 
 
       public final int getNumber() { return value; }
@@ -335,6 +343,7 @@ public final class InAppPurchaseProto {
           case 2: return STARTER_PACK;
           case 3: return MONEY_TREE;
           case 5: return SALE;
+          case 6: return BUILDER_PACK;
           default: return null;
         }
       }
@@ -3549,30 +3558,30 @@ public final class InAppPurchaseProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\257\002" +
+      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\302\002" +
       "\n\031InAppPurchasePackageProto\022\024\n\014iapPackag" +
       "eId\030\001 \001(\t\022\026\n\016currencyAmount\030\002 \001(\005\022\021\n\tima" +
       "geName\030\003 \001(\t\022Z\n\016iapPackageType\030\004 \001(\0162B.c" +
       "om.lvl6.proto.InAppPurchasePackageProto." +
-      "InAppPurchasePackageType\"u\n\030InAppPurchas" +
-      "ePackageType\022#\n\037NO_IN_APP_PURCHASE_PACKA" +
-      "GE_TYPE\020\004\022\010\n\004GEMS\020\001\022\020\n\014STARTER_PACK\020\002\022\016\n" +
-      "\nMONEY_TREE\020\003\022\010\n\004SALE\020\005\"\327\003\n\rGoldSaleProt" +
-      "o\022\016\n\006saleId\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007",
-      "endDate\030\003 \001(\003\022\036\n\026package1SaleIdentifier\030" +
-      "\004 \001(\t\022\036\n\026package2SaleIdentifier\030\005 \001(\t\022\036\n" +
-      "\026package3SaleIdentifier\030\006 \001(\t\022\036\n\026package" +
-      "4SaleIdentifier\030\007 \001(\t\022\036\n\026package5SaleIde" +
-      "ntifier\030\010 \001(\t\022\033\n\023goldShoppeImageName\030\t \001" +
-      "(\t\022\030\n\020goldBarImageName\030\n \001(\t\022\037\n\027packageS" +
-      "1SaleIdentifier\030\013 \001(\t\022\037\n\027packageS2SaleId" +
-      "entifier\030\014 \001(\t\022\037\n\027packageS3SaleIdentifie" +
-      "r\030\r \001(\t\022\037\n\027packageS4SaleIdentifier\030\016 \001(\t" +
-      "\022\037\n\027packageS5SaleIdentifier\030\017 \001(\t\022\026\n\016isB",
-      "eginnerSale\030\020 \001(\010*Q\n\024EarnFreeDiamondsTyp" +
-      "e\022\016\n\nFB_CONNECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_" +
-      "VIDEO\020\003\022\013\n\007TWITTER\020\004B\024B\022InAppPurchasePro" +
-      "to"
+      "InAppPurchasePackageType\"\207\001\n\030InAppPurcha" +
+      "sePackageType\022#\n\037NO_IN_APP_PURCHASE_PACK" +
+      "AGE_TYPE\020\004\022\010\n\004GEMS\020\001\022\020\n\014STARTER_PACK\020\002\022\016" +
+      "\n\nMONEY_TREE\020\003\022\010\n\004SALE\020\005\022\020\n\014BUILDER_PACK" +
+      "\020\006\"\327\003\n\rGoldSaleProto\022\016\n\006saleId\030\001 \001(\005\022\021\n\t",
+      "startDate\030\002 \001(\003\022\017\n\007endDate\030\003 \001(\003\022\036\n\026pack" +
+      "age1SaleIdentifier\030\004 \001(\t\022\036\n\026package2Sale" +
+      "Identifier\030\005 \001(\t\022\036\n\026package3SaleIdentifi" +
+      "er\030\006 \001(\t\022\036\n\026package4SaleIdentifier\030\007 \001(\t" +
+      "\022\036\n\026package5SaleIdentifier\030\010 \001(\t\022\033\n\023gold" +
+      "ShoppeImageName\030\t \001(\t\022\030\n\020goldBarImageNam" +
+      "e\030\n \001(\t\022\037\n\027packageS1SaleIdentifier\030\013 \001(\t" +
+      "\022\037\n\027packageS2SaleIdentifier\030\014 \001(\t\022\037\n\027pac" +
+      "kageS3SaleIdentifier\030\r \001(\t\022\037\n\027packageS4S" +
+      "aleIdentifier\030\016 \001(\t\022\037\n\027packageS5SaleIden",
+      "tifier\030\017 \001(\t\022\026\n\016isBeginnerSale\030\020 \001(\010*Q\n\024" +
+      "EarnFreeDiamondsType\022\016\n\nFB_CONNECT\020\001\022\n\n\006" +
+      "TAPJOY\020\002\022\020\n\014FLURRY_VIDEO\020\003\022\013\n\007TWITTER\020\004B" +
+      "\024B\022InAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

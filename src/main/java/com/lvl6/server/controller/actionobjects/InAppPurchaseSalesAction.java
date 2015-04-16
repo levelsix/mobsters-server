@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
@@ -109,6 +110,8 @@ public class InAppPurchaseSalesAction {
 	private List<Reward> listOfRewards;
 	private AwardRewardAction ara;
 	private boolean isStarterPack;
+	private boolean isBuilderPack;
+	private String packageName;
 
 
 	public void execute(Builder resBuilder) {
@@ -137,6 +140,13 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public boolean verifySyntax(Builder resBuilder) {
+		try {
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		List<SalesItem> salesItemList = salesItemRetrieveUtils.getSalesItemsForSalesPackageId(salesPackage.getId());
 		if(salesItemList == null || salesItemList.isEmpty()) {
 			log.error("no sales items for sales package {}", salesPackage);
@@ -158,6 +168,7 @@ public class InAppPurchaseSalesAction {
 			log.error("did not properly convert all sales item to rewaards");
 			return false;
 		}
+
 		return true;
 	}
 
@@ -173,6 +184,8 @@ public class InAppPurchaseSalesAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
+		builderCheck();
+
 		if (duplicateReceipt || !saleIsWithinTimeConstraints()) {
 			log.error("user should be buying more expensive sales package! {}",
 					 user);
@@ -182,9 +195,34 @@ public class InAppPurchaseSalesAction {
 		return true;
 	}
 
+	public void builderCheck() {
+		isBuilderPack = false;
+		if(IAPValues.packageIsBuilderPack(packageName)) {
+			isBuilderPack = true;
+			List<Integer> itemIdForBuilder = new ArrayList<Integer>();
+			itemIdForBuilder.add(10000);
+			List<ItemForUser> listOfUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUser(userId, itemIdForBuilder);
+			//something fucked up, bc if he has a builder item it means he alrdy bought builder pack!
+			if(!listOfUserItems.isEmpty()) {
+				for(Reward r : listOfRewards) {
+					if(r.getStaticDataId() == 10000 && r.getType().equalsIgnoreCase("ITEM")) {
+						listOfRewards.remove(r);
+						log.error("removing builder from list of rewards bc user alrdy has a builder item");
+					}
+				}
+			}
+		}
+
+	}
+
+	//when start and end time both null, it's for starter/builder packs, they dont expire
 	public boolean saleIsWithinTimeConstraints() {
 		Date saleStartTime = salesPackage.getTimeStart();
 		Date saleEndTime = salesPackage.getTimeEnd();
+
+		if(saleStartTime == null && saleEndTime == null) {
+			return true;
+		}
 
 		if((now.getTime() - saleStartTime.getTime() > 0) && (saleEndTime.getTime() - now.getTime() > 0)) {
 			return true;
@@ -232,76 +270,70 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public void updateIfBeginnerPack() {
-		try {
-			String packageName = receiptFromApple
-					.getString(IAPValues.PRODUCT_ID);
-			if(IAPValues.packageIsStarterPack(packageName)) {
-				user.updateRelativeDiamondsBeginnerSale(0, true);
-				isStarterPack = true;
-			}
-			else isStarterPack = false;
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(IAPValues.packageIsStarterPack(packageName)) {
+			user.updateRelativeDiamondsBeginnerSale(0, true);
+			isStarterPack = true;
 		}
+		else isStarterPack = false;
 	}
 
 	public boolean updateUserSalesValueAndLastPurchaseTime() {
-		if(!userSalesValueLessThanSalesPackage()) {
+		if(!salesPackageLessThanUserSalesValue()) {
 			int salesValue = user.getSalesValue();
-			boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+//			boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
 
-			if(salesValue == 0) {
-				salesValue = 1;
-			}
-			else if(salesValue > 3) {
-				salesValue = 5;
-			}
-			else if(salesJumpTwoTiers) {
-				salesValue += 2;
-			}
-			else {
-				salesValue += 1;
-			}
-			if(salesValue < 1 || salesValue > 5) {
-				log.info("invalid sales value {}", salesValue);
-				return false;
-			}
+//			if(salesValue == 0) {
+//				salesValue = 1;
+//			}
+//			else if(salesValue > 3) {
+//				salesValue = 5;
+//			}
+//			else if(salesJumpTwoTiers) {
+//				salesValue += 2;
+//			}
+//			else {
+//				salesValue += 1;
+//			}
+//			if(salesValue < 1 || salesValue > 5) {
+//				log.info("invalid sales value {}", salesValue);
+//				return false;
+//			}
+
+			if(salesValue < 4)
+				salesValue++;
+
 			return updateUtil.updateUserSalesValue(userId, salesValue, now);
 		}
 		else return updateUtil.updateUserSalesValue(userId, 0, now);
 	}
 
-	public boolean userSalesValueLessThanSalesPackage() {
+	public boolean salesPackageLessThanUserSalesValue() {
 		int salesValue = user.getSalesValue();
-		salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+//		salesJumpTwoTiers = user.isSalesJumpTwoTiers();
 		salesPackagePrice = salesPackage.getPrice();
 		if(salesValue == 0) {
 			if(salesPackagePrice < 5)
 				return true;
 		}
 		else if(salesValue == 1) {
-			if(!salesJumpTwoTiers && salesPackagePrice < 10)
+			if(salesPackagePrice < 10) {
 				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice < 20)
-				return true;
+			}
 		}
 		else if(salesValue == 2) {
-			if(!salesJumpTwoTiers && salesPackagePrice < 20)
+			if(salesPackagePrice < 20) {
 				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice < 50)
-				return true;
+			}
 		}
 		else if(salesValue == 3) {
-			if(!salesJumpTwoTiers && salesPackagePrice < 50)
+			if(salesPackagePrice < 50) {
 				return true;
-			else if(salesJumpTwoTiers && salesPackagePrice < 100)
-				return true;
+			}
 		}
 		else if(salesValue >= 4) {
-			if(salesPackagePrice < 100)
+			if(salesPackagePrice < 100) {
 				return true;
+			}
 		}
 		else {
 			return false;
@@ -492,6 +524,14 @@ public class InAppPurchaseSalesAction {
 
 	public void setStarterPack(boolean isStarterPack) {
 		this.isStarterPack = isStarterPack;
+	}
+
+	public boolean isBuilderPack() {
+		return isBuilderPack;
+	}
+
+	public void setBuilderPack(boolean isBuilderPack) {
+		this.isBuilderPack = isBuilderPack;
 	}
 
 
