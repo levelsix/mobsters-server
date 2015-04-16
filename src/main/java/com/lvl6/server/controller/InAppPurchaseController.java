@@ -410,10 +410,10 @@ public class InAppPurchaseController extends EventController {
 						userId, packageName);
 
 				Timestamp date = new Timestamp(now.getTime());
-				if(isStarterPack) {
-					writeToUserCurrencyHistory(userId, date, null, iapspa, null, null);
-				}
-				else if(isMoneyTree) {
+//				if(isStarterPack) {
+//					writeToUserCurrencyHistory(userId, date, null, iapspa, null, null);
+//				}
+				if(isMoneyTree) {
 					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
 				}
 				else if(isSalesPack) {
@@ -472,8 +472,9 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
-		resBuilder.setSuccessorSalesPackage(preSpp);
-
+		if(!iapsa.isStarterPack()) {
+			resBuilder.setSuccessorSalesPackage(preSpp);
+		}
 	}
 
 	public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,

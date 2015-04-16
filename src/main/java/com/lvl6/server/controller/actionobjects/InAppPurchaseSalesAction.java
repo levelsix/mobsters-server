@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
@@ -106,6 +108,7 @@ public class InAppPurchaseSalesAction {
 	private boolean salesJumpTwoTiers;
 	private List<Reward> listOfRewards;
 	private AwardRewardAction ara;
+	private boolean isStarterPack;
 
 
 	public void execute(Builder resBuilder) {
@@ -195,6 +198,7 @@ public class InAppPurchaseSalesAction {
 		boolean success = true;
 		try {
 			processSalesPackagePurchase(resBuilder);
+			updateIfBeginnerPack();
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, ara.getGemsGained(),
 					user, salesPackagePrice)) {
@@ -225,6 +229,22 @@ public class InAppPurchaseSalesAction {
 
 		ara.execute();
 
+	}
+
+	public void updateIfBeginnerPack() {
+		try {
+			String packageName = receiptFromApple
+					.getString(IAPValues.PRODUCT_ID);
+			if(IAPValues.packageIsStarterPack(packageName)) {
+				user.updateRelativeDiamondsBeginnerSale(0, true);
+				isStarterPack = true;
+			}
+			else isStarterPack = false;
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean updateUserSalesValueAndLastPurchaseTime() {
@@ -464,6 +484,14 @@ public class InAppPurchaseSalesAction {
 
 	public void setAra(AwardRewardAction ara) {
 		this.ara = ara;
+	}
+
+	public boolean isStarterPack() {
+		return isStarterPack;
+	}
+
+	public void setStarterPack(boolean isStarterPack) {
+		this.isStarterPack = isStarterPack;
 	}
 
 
