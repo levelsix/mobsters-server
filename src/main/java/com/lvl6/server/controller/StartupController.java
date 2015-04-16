@@ -731,7 +731,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at achivementStuff", stopWatch.getTime());
 			setMiniJob(resBuilder, playerId);
 			log.info("{}ms at miniJobStuff", stopWatch.getTime());
-			setUserItems(resBuilder, playerId);
+			Map<Integer, ItemForUser> userItemMap = setUserItems(resBuilder, playerId);
 			log.info("{}ms at setUserItems", stopWatch.getTime());
 			setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			log.info("{}ms at whetherCompletedInAppPurchase",
@@ -748,7 +748,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setStarterPackForUser(resBuilder, user);
 			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
-
+			setBuilderPackForUser(resBuilder, user, userItemMap);
+			log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
 
 
 			//db request for user monsters
@@ -1585,7 +1586,7 @@ public class StartupController extends EventController {
 		resBuilder.addAllUserMiniJobProtos(umjpList);
 	}
 
-	private void setUserItems(Builder resBuilder, String userId) {
+	private Map<Integer, ItemForUser> setUserItems(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		Map<Integer, ItemForUser> itemIdToUserItems = itemForUserRetrieveUtil
 				.getSpecificOrAllItemForUserMap(userId, null);
@@ -1607,6 +1608,8 @@ public class StartupController extends EventController {
 					.createUserItemUsageProto(ifuu);
 			resBuilder.addItemsInUse(uiup);
 		}
+
+		return itemIdToUserItems;
 	}
 
 	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder,
@@ -1731,7 +1734,27 @@ public class StartupController extends EventController {
 		}
 	}
 
+	public void setBuilderPackForUser(Builder resBuilder, User user, Map<Integer, ItemForUser> userItemMap) {
+		boolean hasExtraBuilder = false;
+		for(Integer itemId : userItemMap.keySet()) {
+			ItemForUser ifu = userItemMap.get(itemId);
+			if(ifu.getItemId() == 10000) { //builder's id
+				hasExtraBuilder = true;
+			}
+		}
 
+		if(!hasExtraBuilder) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(Integer id : idsToSalesPackages.keySet()) {
+				SalesPackage sp = idsToSalesPackages.get(id);
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+					resBuilder.addSalesPackages(spProto);
+				}
+			}
+		}
+	}
 
 	public boolean updateUserSalesJumpTwoTiers(User user) {
 		//update user jump two tier's value
