@@ -5241,6 +5241,12 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
+//	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg) {
+//
+//
+//
+//
+//	}
 
 
 
