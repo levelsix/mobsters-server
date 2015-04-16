@@ -43,30 +43,6 @@ public final class ClanGiftsProto {
      * <code>optional int32 hoursUntilExpiration = 3;</code>
      */
     int getHoursUntilExpiration();
-
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    java.util.List<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto> 
-        getClanGiftsList();
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto getClanGifts(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    int getClanGiftsCount();
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder> 
-        getClanGiftsOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder getClanGiftsOrBuilder(
-        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
@@ -136,14 +112,6 @@ public final class ClanGiftsProto {
               hoursUntilExpiration_ = input.readInt32();
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                clanGifts_ = new java.util.ArrayList<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              clanGifts_.add(input.readMessage(com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.PARSER, extensionRegistry));
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -152,9 +120,6 @@ public final class ClanGiftsProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          clanGifts_ = java.util.Collections.unmodifiableList(clanGifts_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -259,46 +224,10 @@ public final class ClanGiftsProto {
       return hoursUntilExpiration_;
     }
 
-    public static final int CLANGIFTS_FIELD_NUMBER = 4;
-    private java.util.List<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto> clanGifts_;
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    public java.util.List<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto> getClanGiftsList() {
-      return clanGifts_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder> 
-        getClanGiftsOrBuilderList() {
-      return clanGifts_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    public int getClanGiftsCount() {
-      return clanGifts_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto getClanGifts(int index) {
-      return clanGifts_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-     */
-    public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder getClanGiftsOrBuilder(
-        int index) {
-      return clanGifts_.get(index);
-    }
-
     private void initFields() {
       clanGiftId_ = 0;
       name_ = "";
       hoursUntilExpiration_ = 0;
-      clanGifts_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -322,9 +251,6 @@ public final class ClanGiftsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, hoursUntilExpiration_);
       }
-      for (int i = 0; i < clanGifts_.size(); i++) {
-        output.writeMessage(4, clanGifts_.get(i));
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -345,10 +271,6 @@ public final class ClanGiftsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, hoursUntilExpiration_);
-      }
-      for (int i = 0; i < clanGifts_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, clanGifts_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -459,7 +381,6 @@ public final class ClanGiftsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getClanGiftsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -474,12 +395,6 @@ public final class ClanGiftsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         hoursUntilExpiration_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (clanGiftsBuilder_ == null) {
-          clanGifts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        } else {
-          clanGiftsBuilder_.clear();
-        }
         return this;
       }
 
@@ -520,15 +435,6 @@ public final class ClanGiftsProto {
           to_bitField0_ |= 0x00000004;
         }
         result.hoursUntilExpiration_ = hoursUntilExpiration_;
-        if (clanGiftsBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            clanGifts_ = java.util.Collections.unmodifiableList(clanGifts_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.clanGifts_ = clanGifts_;
-        } else {
-          result.clanGifts_ = clanGiftsBuilder_.build();
-        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -555,32 +461,6 @@ public final class ClanGiftsProto {
         }
         if (other.hasHoursUntilExpiration()) {
           setHoursUntilExpiration(other.getHoursUntilExpiration());
-        }
-        if (clanGiftsBuilder_ == null) {
-          if (!other.clanGifts_.isEmpty()) {
-            if (clanGifts_.isEmpty()) {
-              clanGifts_ = other.clanGifts_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensureClanGiftsIsMutable();
-              clanGifts_.addAll(other.clanGifts_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.clanGifts_.isEmpty()) {
-            if (clanGiftsBuilder_.isEmpty()) {
-              clanGiftsBuilder_.dispose();
-              clanGiftsBuilder_ = null;
-              clanGifts_ = other.clanGifts_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              clanGiftsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getClanGiftsFieldBuilder() : null;
-            } else {
-              clanGiftsBuilder_.addAllMessages(other.clanGifts_);
-            }
-          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -749,246 +629,6 @@ public final class ClanGiftsProto {
         return this;
       }
 
-      private java.util.List<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto> clanGifts_ =
-        java.util.Collections.emptyList();
-      private void ensureClanGiftsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          clanGifts_ = new java.util.ArrayList<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto>(clanGifts_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder> clanGiftsBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public java.util.List<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto> getClanGiftsList() {
-        if (clanGiftsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(clanGifts_);
-        } else {
-          return clanGiftsBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public int getClanGiftsCount() {
-        if (clanGiftsBuilder_ == null) {
-          return clanGifts_.size();
-        } else {
-          return clanGiftsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto getClanGifts(int index) {
-        if (clanGiftsBuilder_ == null) {
-          return clanGifts_.get(index);
-        } else {
-          return clanGiftsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder setClanGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto value) {
-        if (clanGiftsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureClanGiftsIsMutable();
-          clanGifts_.set(index, value);
-          onChanged();
-        } else {
-          clanGiftsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder setClanGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder builderForValue) {
-        if (clanGiftsBuilder_ == null) {
-          ensureClanGiftsIsMutable();
-          clanGifts_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          clanGiftsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder addClanGifts(com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto value) {
-        if (clanGiftsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureClanGiftsIsMutable();
-          clanGifts_.add(value);
-          onChanged();
-        } else {
-          clanGiftsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder addClanGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto value) {
-        if (clanGiftsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureClanGiftsIsMutable();
-          clanGifts_.add(index, value);
-          onChanged();
-        } else {
-          clanGiftsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder addClanGifts(
-          com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder builderForValue) {
-        if (clanGiftsBuilder_ == null) {
-          ensureClanGiftsIsMutable();
-          clanGifts_.add(builderForValue.build());
-          onChanged();
-        } else {
-          clanGiftsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder addClanGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder builderForValue) {
-        if (clanGiftsBuilder_ == null) {
-          ensureClanGiftsIsMutable();
-          clanGifts_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          clanGiftsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder addAllClanGifts(
-          java.lang.Iterable<? extends com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto> values) {
-        if (clanGiftsBuilder_ == null) {
-          ensureClanGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanGifts_);
-          onChanged();
-        } else {
-          clanGiftsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder clearClanGifts() {
-        if (clanGiftsBuilder_ == null) {
-          clanGifts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
-        } else {
-          clanGiftsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public Builder removeClanGifts(int index) {
-        if (clanGiftsBuilder_ == null) {
-          ensureClanGiftsIsMutable();
-          clanGifts_.remove(index);
-          onChanged();
-        } else {
-          clanGiftsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder getClanGiftsBuilder(
-          int index) {
-        return getClanGiftsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder getClanGiftsOrBuilder(
-          int index) {
-        if (clanGiftsBuilder_ == null) {
-          return clanGifts_.get(index);  } else {
-          return clanGiftsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder> 
-           getClanGiftsOrBuilderList() {
-        if (clanGiftsBuilder_ != null) {
-          return clanGiftsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(clanGifts_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder addClanGiftsBuilder() {
-        return getClanGiftsFieldBuilder().addBuilder(
-            com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder addClanGiftsBuilder(
-          int index) {
-        return getClanGiftsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ClanGiftRewardsProto clanGifts = 4;</code>
-       */
-      public java.util.List<com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder> 
-           getClanGiftsBuilderList() {
-        return getClanGiftsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder> 
-          getClanGiftsFieldBuilder() {
-        if (clanGiftsBuilder_ == null) {
-          clanGiftsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder>(
-                  clanGifts_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
-                  getParentForChildren(),
-                  isClean());
-          clanGifts_ = null;
-        }
-        return clanGiftsBuilder_;
-      }
-
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanGiftProto)
     }
 
@@ -998,637 +638,6 @@ public final class ClanGiftsProto {
     }
 
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanGiftProto)
-  }
-
-  public interface ClanGiftRewardsProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanGiftRewardsProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 clanGiftRewardId = 1;</code>
-     */
-    boolean hasClanGiftRewardId();
-    /**
-     * <code>optional int32 clanGiftRewardId = 1;</code>
-     */
-    int getClanGiftRewardId();
-
-    /**
-     * <code>optional int32 clanGiftId = 2;</code>
-     */
-    boolean hasClanGiftId();
-    /**
-     * <code>optional int32 clanGiftId = 2;</code>
-     */
-    int getClanGiftId();
-
-    /**
-     * <code>optional int32 rewardId = 3;</code>
-     */
-    boolean hasRewardId();
-    /**
-     * <code>optional int32 rewardId = 3;</code>
-     */
-    int getRewardId();
-
-    /**
-     * <code>optional float chanceOfDrop = 4;</code>
-     */
-    boolean hasChanceOfDrop();
-    /**
-     * <code>optional float chanceOfDrop = 4;</code>
-     */
-    float getChanceOfDrop();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.ClanGiftRewardsProto}
-   */
-  public static final class ClanGiftRewardsProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanGiftRewardsProto)
-      ClanGiftRewardsProtoOrBuilder {
-    // Use ClanGiftRewardsProto.newBuilder() to construct.
-    private ClanGiftRewardsProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private ClanGiftRewardsProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ClanGiftRewardsProto defaultInstance;
-    public static ClanGiftRewardsProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public ClanGiftRewardsProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ClanGiftRewardsProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              clanGiftRewardId_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              clanGiftId_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              rewardId_ = input.readInt32();
-              break;
-            }
-            case 37: {
-              bitField0_ |= 0x00000008;
-              chanceOfDrop_ = input.readFloat();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.ClanGiftsProto.internal_static_com_lvl6_proto_ClanGiftRewardsProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.ClanGiftsProto.internal_static_com_lvl6_proto_ClanGiftRewardsProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.class, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<ClanGiftRewardsProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClanGiftRewardsProto>() {
-      public ClanGiftRewardsProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClanGiftRewardsProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ClanGiftRewardsProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int CLANGIFTREWARDID_FIELD_NUMBER = 1;
-    private int clanGiftRewardId_;
-    /**
-     * <code>optional int32 clanGiftRewardId = 1;</code>
-     */
-    public boolean hasClanGiftRewardId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 clanGiftRewardId = 1;</code>
-     */
-    public int getClanGiftRewardId() {
-      return clanGiftRewardId_;
-    }
-
-    public static final int CLANGIFTID_FIELD_NUMBER = 2;
-    private int clanGiftId_;
-    /**
-     * <code>optional int32 clanGiftId = 2;</code>
-     */
-    public boolean hasClanGiftId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 clanGiftId = 2;</code>
-     */
-    public int getClanGiftId() {
-      return clanGiftId_;
-    }
-
-    public static final int REWARDID_FIELD_NUMBER = 3;
-    private int rewardId_;
-    /**
-     * <code>optional int32 rewardId = 3;</code>
-     */
-    public boolean hasRewardId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 rewardId = 3;</code>
-     */
-    public int getRewardId() {
-      return rewardId_;
-    }
-
-    public static final int CHANCEOFDROP_FIELD_NUMBER = 4;
-    private float chanceOfDrop_;
-    /**
-     * <code>optional float chanceOfDrop = 4;</code>
-     */
-    public boolean hasChanceOfDrop() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional float chanceOfDrop = 4;</code>
-     */
-    public float getChanceOfDrop() {
-      return chanceOfDrop_;
-    }
-
-    private void initFields() {
-      clanGiftRewardId_ = 0;
-      clanGiftId_ = 0;
-      rewardId_ = 0;
-      chanceOfDrop_ = 0F;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, clanGiftRewardId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, clanGiftId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, rewardId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeFloat(4, chanceOfDrop_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, clanGiftRewardId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, clanGiftId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, rewardId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, chanceOfDrop_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.ClanGiftRewardsProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanGiftRewardsProto)
-        com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.ClanGiftsProto.internal_static_com_lvl6_proto_ClanGiftRewardsProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.ClanGiftsProto.internal_static_com_lvl6_proto_ClanGiftRewardsProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.class, com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        clanGiftRewardId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        clanGiftId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        rewardId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        chanceOfDrop_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.ClanGiftsProto.internal_static_com_lvl6_proto_ClanGiftRewardsProto_descriptor;
-      }
-
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto getDefaultInstanceForType() {
-        return com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto build() {
-        com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto buildPartial() {
-        com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto result = new com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.clanGiftRewardId_ = clanGiftRewardId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.clanGiftId_ = clanGiftId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.rewardId_ = rewardId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.chanceOfDrop_ = chanceOfDrop_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto) {
-          return mergeFrom((com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto other) {
-        if (other == com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto.getDefaultInstance()) return this;
-        if (other.hasClanGiftRewardId()) {
-          setClanGiftRewardId(other.getClanGiftRewardId());
-        }
-        if (other.hasClanGiftId()) {
-          setClanGiftId(other.getClanGiftId());
-        }
-        if (other.hasRewardId()) {
-          setRewardId(other.getRewardId());
-        }
-        if (other.hasChanceOfDrop()) {
-          setChanceOfDrop(other.getChanceOfDrop());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int clanGiftRewardId_ ;
-      /**
-       * <code>optional int32 clanGiftRewardId = 1;</code>
-       */
-      public boolean hasClanGiftRewardId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 clanGiftRewardId = 1;</code>
-       */
-      public int getClanGiftRewardId() {
-        return clanGiftRewardId_;
-      }
-      /**
-       * <code>optional int32 clanGiftRewardId = 1;</code>
-       */
-      public Builder setClanGiftRewardId(int value) {
-        bitField0_ |= 0x00000001;
-        clanGiftRewardId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 clanGiftRewardId = 1;</code>
-       */
-      public Builder clearClanGiftRewardId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        clanGiftRewardId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int clanGiftId_ ;
-      /**
-       * <code>optional int32 clanGiftId = 2;</code>
-       */
-      public boolean hasClanGiftId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 clanGiftId = 2;</code>
-       */
-      public int getClanGiftId() {
-        return clanGiftId_;
-      }
-      /**
-       * <code>optional int32 clanGiftId = 2;</code>
-       */
-      public Builder setClanGiftId(int value) {
-        bitField0_ |= 0x00000002;
-        clanGiftId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 clanGiftId = 2;</code>
-       */
-      public Builder clearClanGiftId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        clanGiftId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int rewardId_ ;
-      /**
-       * <code>optional int32 rewardId = 3;</code>
-       */
-      public boolean hasRewardId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 rewardId = 3;</code>
-       */
-      public int getRewardId() {
-        return rewardId_;
-      }
-      /**
-       * <code>optional int32 rewardId = 3;</code>
-       */
-      public Builder setRewardId(int value) {
-        bitField0_ |= 0x00000004;
-        rewardId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 rewardId = 3;</code>
-       */
-      public Builder clearRewardId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        rewardId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private float chanceOfDrop_ ;
-      /**
-       * <code>optional float chanceOfDrop = 4;</code>
-       */
-      public boolean hasChanceOfDrop() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional float chanceOfDrop = 4;</code>
-       */
-      public float getChanceOfDrop() {
-        return chanceOfDrop_;
-      }
-      /**
-       * <code>optional float chanceOfDrop = 4;</code>
-       */
-      public Builder setChanceOfDrop(float value) {
-        bitField0_ |= 0x00000008;
-        chanceOfDrop_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float chanceOfDrop = 4;</code>
-       */
-      public Builder clearChanceOfDrop() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        chanceOfDrop_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanGiftRewardsProto)
-    }
-
-    static {
-      defaultInstance = new ClanGiftRewardsProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanGiftRewardsProto)
   }
 
   public interface UserClanGiftProtoOrBuilder extends
@@ -1678,13 +687,17 @@ public final class ClanGiftsProto {
         getGifterUserIdBytes();
 
     /**
-     * <code>optional int32 clanGiftId = 4;</code>
+     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
      */
-    boolean hasClanGiftId();
+    boolean hasClanGift();
     /**
-     * <code>optional int32 clanGiftId = 4;</code>
+     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
      */
-    int getClanGiftId();
+    com.lvl6.proto.ClanGiftsProto.ClanGiftProto getClanGift();
+    /**
+     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     */
+    com.lvl6.proto.ClanGiftsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder();
 
     /**
      * <code>optional int64 timeReceived = 5;</code>
@@ -1694,6 +707,19 @@ public final class ClanGiftsProto {
      * <code>optional int64 timeReceived = 5;</code>
      */
     long getTimeReceived();
+
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+     */
+    boolean hasReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserClanGiftProto}
@@ -1765,14 +791,35 @@ public final class ClanGiftsProto {
               gifterUserId_ = bs;
               break;
             }
-            case 32: {
+            case 34: {
+              com.lvl6.proto.ClanGiftsProto.ClanGiftProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = clanGift_.toBuilder();
+              }
+              clanGift_ = input.readMessage(com.lvl6.proto.ClanGiftsProto.ClanGiftProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(clanGift_);
+                clanGift_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000008;
-              clanGiftId_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
               timeReceived_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -1941,19 +988,25 @@ public final class ClanGiftsProto {
       }
     }
 
-    public static final int CLANGIFTID_FIELD_NUMBER = 4;
-    private int clanGiftId_;
+    public static final int CLANGIFT_FIELD_NUMBER = 4;
+    private com.lvl6.proto.ClanGiftsProto.ClanGiftProto clanGift_;
     /**
-     * <code>optional int32 clanGiftId = 4;</code>
+     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
      */
-    public boolean hasClanGiftId() {
+    public boolean hasClanGift() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 clanGiftId = 4;</code>
+     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
      */
-    public int getClanGiftId() {
-      return clanGiftId_;
+    public com.lvl6.proto.ClanGiftsProto.ClanGiftProto getClanGift() {
+      return clanGift_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     */
+    public com.lvl6.proto.ClanGiftsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder() {
+      return clanGift_;
     }
 
     public static final int TIMERECEIVED_FIELD_NUMBER = 5;
@@ -1971,12 +1024,34 @@ public final class ClanGiftsProto {
       return timeReceived_;
     }
 
+    public static final int REWARD_FIELD_NUMBER = 6;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+     */
+    public boolean hasReward() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
+    }
+
     private void initFields() {
       userClanGiftId_ = "";
       receiverUserId_ = "";
       gifterUserId_ = "";
-      clanGiftId_ = 0;
+      clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
       timeReceived_ = 0L;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2001,10 +1076,13 @@ public final class ClanGiftsProto {
         output.writeBytes(3, getGifterUserIdBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, clanGiftId_);
+        output.writeMessage(4, clanGift_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, timeReceived_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(6, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2029,11 +1107,15 @@ public final class ClanGiftsProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, clanGiftId_);
+          .computeMessageSize(4, clanGift_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, timeReceived_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2144,6 +1226,8 @@ public final class ClanGiftsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getClanGiftFieldBuilder();
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2158,10 +1242,20 @@ public final class ClanGiftsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         gifterUserId_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        clanGiftId_ = 0;
+        if (clanGiftBuilder_ == null) {
+          clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
+        } else {
+          clanGiftBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
         timeReceived_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -2205,11 +1299,23 @@ public final class ClanGiftsProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.clanGiftId_ = clanGiftId_;
+        if (clanGiftBuilder_ == null) {
+          result.clanGift_ = clanGift_;
+        } else {
+          result.clanGift_ = clanGiftBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
         result.timeReceived_ = timeReceived_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2241,11 +1347,14 @@ public final class ClanGiftsProto {
           gifterUserId_ = other.gifterUserId_;
           onChanged();
         }
-        if (other.hasClanGiftId()) {
-          setClanGiftId(other.getClanGiftId());
+        if (other.hasClanGift()) {
+          mergeClanGift(other.getClanGift());
         }
         if (other.hasTimeReceived()) {
           setTimeReceived(other.getTimeReceived());
+        }
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2502,36 +1611,120 @@ public final class ClanGiftsProto {
         return this;
       }
 
-      private int clanGiftId_ ;
+      private com.lvl6.proto.ClanGiftsProto.ClanGiftProto clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanGiftsProto.ClanGiftProto, com.lvl6.proto.ClanGiftsProto.ClanGiftProto.Builder, com.lvl6.proto.ClanGiftsProto.ClanGiftProtoOrBuilder> clanGiftBuilder_;
       /**
-       * <code>optional int32 clanGiftId = 4;</code>
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
        */
-      public boolean hasClanGiftId() {
+      public boolean hasClanGift() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 clanGiftId = 4;</code>
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
        */
-      public int getClanGiftId() {
-        return clanGiftId_;
+      public com.lvl6.proto.ClanGiftsProto.ClanGiftProto getClanGift() {
+        if (clanGiftBuilder_ == null) {
+          return clanGift_;
+        } else {
+          return clanGiftBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 clanGiftId = 4;</code>
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
        */
-      public Builder setClanGiftId(int value) {
+      public Builder setClanGift(com.lvl6.proto.ClanGiftsProto.ClanGiftProto value) {
+        if (clanGiftBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          clanGift_ = value;
+          onChanged();
+        } else {
+          clanGiftBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000008;
-        clanGiftId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 clanGiftId = 4;</code>
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
        */
-      public Builder clearClanGiftId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        clanGiftId_ = 0;
-        onChanged();
+      public Builder setClanGift(
+          com.lvl6.proto.ClanGiftsProto.ClanGiftProto.Builder builderForValue) {
+        if (clanGiftBuilder_ == null) {
+          clanGift_ = builderForValue.build();
+          onChanged();
+        } else {
+          clanGiftBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       */
+      public Builder mergeClanGift(com.lvl6.proto.ClanGiftsProto.ClanGiftProto value) {
+        if (clanGiftBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              clanGift_ != com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance()) {
+            clanGift_ =
+              com.lvl6.proto.ClanGiftsProto.ClanGiftProto.newBuilder(clanGift_).mergeFrom(value).buildPartial();
+          } else {
+            clanGift_ = value;
+          }
+          onChanged();
+        } else {
+          clanGiftBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       */
+      public Builder clearClanGift() {
+        if (clanGiftBuilder_ == null) {
+          clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
+          onChanged();
+        } else {
+          clanGiftBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       */
+      public com.lvl6.proto.ClanGiftsProto.ClanGiftProto.Builder getClanGiftBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getClanGiftFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       */
+      public com.lvl6.proto.ClanGiftsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder() {
+        if (clanGiftBuilder_ != null) {
+          return clanGiftBuilder_.getMessageOrBuilder();
+        } else {
+          return clanGift_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanGiftsProto.ClanGiftProto, com.lvl6.proto.ClanGiftsProto.ClanGiftProto.Builder, com.lvl6.proto.ClanGiftsProto.ClanGiftProtoOrBuilder> 
+          getClanGiftFieldBuilder() {
+        if (clanGiftBuilder_ == null) {
+          clanGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanGiftsProto.ClanGiftProto, com.lvl6.proto.ClanGiftsProto.ClanGiftProto.Builder, com.lvl6.proto.ClanGiftsProto.ClanGiftProtoOrBuilder>(
+                  getClanGift(),
+                  getParentForChildren(),
+                  isClean());
+          clanGift_ = null;
+        }
+        return clanGiftBuilder_;
       }
 
       private long timeReceived_ ;
@@ -2566,6 +1759,122 @@ public final class ClanGiftsProto {
         return this;
       }
 
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public boolean hasReward() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserClanGiftProto)
     }
 
@@ -2583,11 +1892,6 @@ public final class ClanGiftsProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClanGiftRewardsProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClanGiftRewardsProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2601,17 +1905,15 @@ public final class ClanGiftsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017ClanGifts.proto\022\016com.lvl6.proto\"\210\001\n\rCl" +
-      "anGiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004name\030" +
-      "\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\0227\n\tc" +
-      "lanGifts\030\004 \003(\0132$.com.lvl6.proto.ClanGift" +
-      "RewardsProto\"l\n\024ClanGiftRewardsProto\022\030\n\020" +
-      "clanGiftRewardId\030\001 \001(\005\022\022\n\nclanGiftId\030\002 \001" +
-      "(\005\022\020\n\010rewardId\030\003 \001(\005\022\024\n\014chanceOfDrop\030\004 \001" +
-      "(\002\"\203\001\n\021UserClanGiftProto\022\026\n\016userClanGift" +
-      "Id\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001(\t\022\024\n\014gift" +
-      "erUserId\030\003 \001(\t\022\022\n\nclanGiftId\030\004 \001(\005\022\024\n\014ti",
-      "meReceived\030\005 \001(\003B\020B\016ClanGiftsProto"
+      "\n\017ClanGifts.proto\022\016com.lvl6.proto\032\014Rewar" +
+      "d.proto\"O\n\rClanGiftProto\022\022\n\nclanGiftId\030\001" +
+      " \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilExpirati" +
+      "on\030\003 \001(\005\"\315\001\n\021UserClanGiftProto\022\026\n\016userCl" +
+      "anGiftId\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001(\t\022\024" +
+      "\n\014gifterUserId\030\003 \001(\t\022/\n\010clanGift\030\004 \001(\0132\035" +
+      ".com.lvl6.proto.ClanGiftProto\022\024\n\014timeRec" +
+      "eived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com.lvl6.p" +
+      "roto.RewardProtoB\020B\016ClanGiftsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2624,25 +1926,21 @@ public final class ClanGiftsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.RewardsProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_ClanGiftProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanGiftProto_descriptor,
-        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ClanGifts", });
-    internal_static_com_lvl6_proto_ClanGiftRewardsProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_ClanGiftRewardsProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClanGiftRewardsProto_descriptor,
-        new java.lang.String[] { "ClanGiftRewardId", "ClanGiftId", "RewardId", "ChanceOfDrop", });
+        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", });
     internal_static_com_lvl6_proto_UserClanGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
-        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUserId", "ClanGiftId", "TimeReceived", });
+        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUserId", "ClanGift", "TimeReceived", "Reward", });
+    com.lvl6.proto.RewardsProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

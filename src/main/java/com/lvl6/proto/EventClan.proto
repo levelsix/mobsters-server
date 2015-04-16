@@ -666,6 +666,7 @@ message VoidTeamDonationSolicitationResponseProto {
 
 message CollectClanGiftsRequestProto {
 	optional MinimumUserProto sender = 1;
+	repeated UserClanGiftProto userClanGift = 2;
 }
 
 message CollectClanGiftsResponseProto {
