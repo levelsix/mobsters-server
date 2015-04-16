@@ -44,7 +44,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	@Autowired
 	protected ServerInstance serverInstance;
-	
+
 	@Autowired
 	protected ReloadAllRareChangeStaticData reloadAllRareChangeStaticData;
 
@@ -308,7 +308,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	/**
 	 * finds the EventController for a given event type
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public EventController getEventControllerByEventType(
@@ -345,7 +345,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	/**
 	 * shutdown the GameServer
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void shutdown() throws IOException {
