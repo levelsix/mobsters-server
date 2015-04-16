@@ -339,7 +339,7 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseStarterPackAction iapspa = null;
 			InAppPurchaseMoneyTreeAction iapmta = null;
 
-						if(IAPValues.packageIsStarterPack(packageName)) {
+//						if(IAPValues.packageIsStarterPack(packageName)) {
 //							isStarterPack = true;
 //							iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
 //									uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
@@ -348,31 +348,31 @@ public class InAppPurchaseController extends EventController {
 //									monsterLevelInfoRetrieveUtils);
 //
 //							iapspa.execute(resBuilder);
-
-							//for testing
-							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-									salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
-
-							for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
-								SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
-								if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
-									salesPackage = sp;
-								}
-							}
-							log.info("packagename {} does not exist in table of sales packages",
-									packageName);
-
-							isSalesPack = true;
-							iapsa = new InAppPurchaseSalesAction(userId,
-									user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-									itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-									createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-									salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-									salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
-
-
-							iapsa.execute(resBuilder);
-						}
+//
+//							//for testing
+//							Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+//									salesPackageRetrieveUtils.getSalesPackageProductIdToSalesPackages();
+//
+//							for(String productId2 : salesPackageNamesToSalesPackages.keySet()) {
+//								SalesPackage sp = salesPackageNamesToSalesPackages.get(productId2);
+//								if(productId2.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
+//									salesPackage = sp;
+//								}
+//							}
+//							log.info("packagename {} does not exist in table of sales packages",
+//									packageName);
+//
+//							isSalesPack = true;
+//							iapsa = new InAppPurchaseSalesAction(userId,
+//									user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+//									itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+//									createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+//									salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+//									salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+//
+//
+//							iapsa.execute(resBuilder);
+//						}
 			if(IAPValues.packageIsMoneyTree(packageName)) {
 				isMoneyTree = true;
 				iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
