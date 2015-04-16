@@ -1133,6 +1133,10 @@ public class MiscMethods {
 			Map<String, Integer> currentCurrencyMap,
 			Map<String, String> changeReasonsMap, Map<String, String> detailsMap) {
 		try {
+		    // Safeguard against null pointer
+		    if (changeMap == null || changeMap.isEmpty()) {
+		        return;
+		    }
 
 			//getting rid of changes that are 0
 			Set<String> keys = new HashSet<String>(changeMap.keySet());

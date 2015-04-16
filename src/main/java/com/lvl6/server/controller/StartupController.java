@@ -731,7 +731,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at achivementStuff", stopWatch.getTime());
 			setMiniJob(resBuilder, playerId);
 			log.info("{}ms at miniJobStuff", stopWatch.getTime());
-			setUserItems(resBuilder, playerId);
+			Map<Integer, ItemForUser> userItemMap = setUserItems(resBuilder, playerId);
 			log.info("{}ms at setUserItems", stopWatch.getTime());
 			setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			log.info("{}ms at whetherCompletedInAppPurchase",
@@ -748,7 +748,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setStarterPackForUser(resBuilder, user);
 			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
-			
+			setBuilderPackForUser(resBuilder, user, userItemMap);
+			log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
 
 
 			//db request for user monsters
@@ -1542,7 +1543,7 @@ public class StartupController extends EventController {
 			UserAchievementProto uap = createInfoProtoUtils
 					.createUserAchievementProto(afu);
 			resBuilder.addUserAchievements(uap);
-			
+
 		}
 		boolean calculateMiniEvent = true;
 		log.info("clanAchievementIds={}", ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS);
@@ -1553,7 +1554,7 @@ public class StartupController extends EventController {
 				calculateMiniEvent = false;
 				break;
 			}
-			
+
 			AchievementForUser afu = achievementIdToUserAchievements.get(achievementId);
 			log.info("afu={}", afu);
 			if (!afu.isRedeemed())
@@ -1562,7 +1563,7 @@ public class StartupController extends EventController {
 				break;
 			}
 		}
-		
+
 		if (calculateMiniEvent) {
 			setMiniEventForUser(resBuilder, user, userId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
@@ -1586,7 +1587,7 @@ public class StartupController extends EventController {
 		resBuilder.addAllUserMiniJobProtos(umjpList);
 	}
 
-	private void setUserItems(Builder resBuilder, String userId) {
+	private Map<Integer, ItemForUser> setUserItems(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		Map<Integer, ItemForUser> itemIdToUserItems = itemForUserRetrieveUtil
 				.getSpecificOrAllItemForUserMap(userId, null);
@@ -1608,6 +1609,8 @@ public class StartupController extends EventController {
 					.createUserItemUsageProto(ifuu);
 			resBuilder.addItemsInUse(uiup);
 		}
+
+		return itemIdToUserItems;
 	}
 
 	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder,
@@ -1697,14 +1700,15 @@ public class StartupController extends EventController {
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 
-		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
 		int userSalesValue = user.getSalesValue();
-		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
+		int newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 		Date now = new Date();
 
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) { //make sure it's not starter pack
+			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
+					sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
 						(sp.getTimeEnd().getTime() > now.getTime())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
@@ -1723,6 +1727,28 @@ public class StartupController extends EventController {
 			for(Integer id : idsToSalesPackages.keySet()) {
 				SalesPackage sp = idsToSalesPackages.get(id);
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+					resBuilder.addSalesPackages(spProto);
+				}
+			}
+		}
+	}
+
+	public void setBuilderPackForUser(Builder resBuilder, User user, Map<Integer, ItemForUser> userItemMap) {
+		boolean hasExtraBuilder = false;
+		for(Integer itemId : userItemMap.keySet()) {
+			ItemForUser ifu = userItemMap.get(itemId);
+			if(ifu.getItemId() == 10000) { //builder's id
+				hasExtraBuilder = true;
+			}
+		}
+
+		if(!hasExtraBuilder) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(Integer id : idsToSalesPackages.keySet()) {
+				SalesPackage sp = idsToSalesPackages.get(id);
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
 					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
 							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
@@ -1751,33 +1777,25 @@ public class StartupController extends EventController {
 		return salesJumpTwoTiers;
 	}
 
-	public int priceForSalesPackToBeShown(int userSalesValue, boolean salesJumpTwoTiers) {
+	public int priceForSalesPackToBeShown(int userSalesValue) {
 
 		int newMinPrice = 0;
 
-		//arin's formula
 		if(userSalesValue == 0) {
 			newMinPrice = 5;
 		}
 		else if(userSalesValue == 1) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 20;
-			}
-			else newMinPrice = 10;
+			newMinPrice = 10;
 		}
 		else if(userSalesValue == 2) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 50;
-			}
-			else newMinPrice = 20;
+			newMinPrice = 20;
 		}
 		else if(userSalesValue == 3) {
-			if(salesJumpTwoTiers) {
-				newMinPrice = 100;
-			}
-			else newMinPrice = 50;
+			newMinPrice = 50;
 		}
-		else newMinPrice = 100;
+		else if(userSalesValue > 3) {
+			newMinPrice = 100;
+		}
 
 		return newMinPrice;
 	}

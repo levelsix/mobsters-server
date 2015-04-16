@@ -89,8 +89,13 @@ public class InAppPurchaseUtils {
 
 		b.setSuccId(sp.getSuccId());
 
-		b.setTimeStart(sp.getTimeStart().getTime());
-		b.setTimeEnd(sp.getTimeEnd().getTime());
+		if(sp.getTimeStart() != null) {
+			b.setTimeStart(sp.getTimeStart().getTime());
+		}
+
+		if(sp.getTimeEnd() != null) {
+			b.setTimeEnd(sp.getTimeEnd().getTime());
+		}
 
 		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();

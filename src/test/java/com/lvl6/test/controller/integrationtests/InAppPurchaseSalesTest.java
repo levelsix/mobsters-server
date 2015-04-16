@@ -226,8 +226,8 @@ public class InAppPurchaseSalesTest {
 		assertTrue(mfuList.size() == 4);
 		assertEquals(userGems1 + 100, userGems2);
 		assertTrue(ifuList.size() == 2);
-		assertTrue(user.getSalesValue() == 1);
-		assertTrue(user.isSalesJumpTwoTiers());
+		assertTrue(user2.getSalesValue() == 1);
+		assertTrue(user2.isSalesJumpTwoTiers());
 	}
 
 }
