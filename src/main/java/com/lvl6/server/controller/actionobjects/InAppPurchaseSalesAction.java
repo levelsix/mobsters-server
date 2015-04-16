@@ -212,7 +212,6 @@ public class InAppPurchaseSalesAction {
 				}
 			}
 		}
-
 	}
 
 	//when start and end time both null, it's for starter/builder packs, they dont expire
@@ -280,24 +279,6 @@ public class InAppPurchaseSalesAction {
 	public boolean updateUserSalesValueAndLastPurchaseTime() {
 		if(!salesPackageLessThanUserSalesValue()) {
 			int salesValue = user.getSalesValue();
-//			boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-
-//			if(salesValue == 0) {
-//				salesValue = 1;
-//			}
-//			else if(salesValue > 3) {
-//				salesValue = 5;
-//			}
-//			else if(salesJumpTwoTiers) {
-//				salesValue += 2;
-//			}
-//			else {
-//				salesValue += 1;
-//			}
-//			if(salesValue < 1 || salesValue > 5) {
-//				log.info("invalid sales value {}", salesValue);
-//				return false;
-//			}
 
 			if(salesValue < 4)
 				salesValue++;

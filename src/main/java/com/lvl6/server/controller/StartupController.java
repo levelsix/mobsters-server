@@ -1757,25 +1757,25 @@ public class StartupController extends EventController {
 		}
 	}
 
-	public boolean updateUserSalesJumpTwoTiers(User user) {
-		//update user jump two tier's value
-		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
-		if(salesJumpTwoTiers) {
-			Date lastPurchaseTime = user.getLastPurchaseTime();
-			if(lastPurchaseTime == null) {
-				lastPurchaseTime = new Date();
-				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
-				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
-			}
-			Date now = new Date();
-			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
-			if(diffInDays > 5) {
-				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
-				salesJumpTwoTiers = false;
-			}
-		}
-		return salesJumpTwoTiers;
-	}
+//	public boolean updateUserSalesJumpTwoTiers(User user) {
+//		//update user jump two tier's value
+//		boolean salesJumpTwoTiers = user.isSalesJumpTwoTiers();
+//		if(salesJumpTwoTiers) {
+//			Date lastPurchaseTime = user.getLastPurchaseTime();
+//			if(lastPurchaseTime == null) {
+//				lastPurchaseTime = new Date();
+//				Timestamp ts = new Timestamp(lastPurchaseTime.getTime());
+//				updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+//			}
+//			Date now = new Date();
+//			int diffInDays = (int)(now.getTime() - lastPurchaseTime.getTime())/(24*60*60*1000);
+//			if(diffInDays > 5) {
+//				updateUtil.updateUserSalesJumpTwoTiers(user.getId(), false);
+//				salesJumpTwoTiers = false;
+//			}
+//		}
+//		return salesJumpTwoTiers;
+//	}
 
 	public int priceForSalesPackToBeShown(int userSalesValue) {
 
