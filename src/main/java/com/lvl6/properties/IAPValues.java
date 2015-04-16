@@ -77,7 +77,7 @@ public class IAPValues {
 
 	public static final List<String> iapPackageNames = Arrays.asList(PACKAGE1,
 			PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5, STARTERPACK, MONEYTREE,
-			MONEYTREENOSALE);
+			MONEYTREENOSALE, SALE5, SALE10, SALE20, SALE50, SALE100);
 
 	//    public static final List<String> packageNames = 
 	//            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
@@ -164,21 +164,22 @@ public class IAPValues {
 	}
 	
 	public static InAppPurchasePackageType getPackageType(String packageName) {
-		if (packageName.equals(PACKAGE1)) {
+		if (packageName.equals(PACKAGE1) ||
+		    packageName.equals(PACKAGE2) ||
+		    packageName.equals(PACKAGE3) ||
+		    packageName.equals(PACKAGE4) ||
+		    packageName.equals(PACKAGE5)) {
+		    
 			return InAppPurchasePackageType.GEMS;
 		}
-		if (packageName.equals(PACKAGE2)) {
-			return InAppPurchasePackageType.GEMS;
-		}
-		if (packageName.equals(PACKAGE3)) {
-			return InAppPurchasePackageType.GEMS;
-		}
-		if (packageName.equals(PACKAGE4)) {
-			return InAppPurchasePackageType.GEMS;
-		}
-		if (packageName.equals(PACKAGE5)) {
-			return InAppPurchasePackageType.GEMS;
-		}
+        if (packageName.equals(SALE5) ||
+                packageName.equals(SALE10) ||
+                packageName.equals(SALE20) ||
+                packageName.equals(SALE50) ||
+                packageName.equals(SALE100)) {
+                
+                return InAppPurchasePackageType.SALE;
+            }
 		if (packageName.equals(STARTERPACK)) {
 			return InAppPurchasePackageType.STARTER_PACK;
 		}
