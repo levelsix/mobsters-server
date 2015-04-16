@@ -1217,23 +1217,15 @@ public class DBConstants {
 
 	public static final String SALES_DISPLAY_ITEM__ID = GENERIC__ID;
 	public static final String SALES_DISPLAY_ITEM__SALES_PACKAGE_ID = "sales_package_id";
-	public static final String SALES_DISPLAY_ITEM__MONSTER_ID = "monster_id";
-	public static final String SALES_DISPLAY_ITEM__MONSTER_QUANTITY = "monster_quantity";
-	public static final String SALES_DISPLAY_ITEM__ITEM_ID = "item_id";
-	public static final String SALES_DISPLAY_ITEM__ITEM_QUANTITY = "item_quantity";
+	public static final String SALES_DISPLAY_ITEM__REWARD_ID = "reward_id";
 
 	public static final String SALES_ITEM__ID = GENERIC__ID;
 	public static final String SALES_ITEM__SALES_PACKAGE_ID = "sales_package_id";
-	public static final String SALES_ITEM__MONSTER_ID = "monster_id";
-	public static final String SALES_ITEM__MONSTER_LEVEL = "monster_level";
-	public static final String SALES_ITEM__MONSTER_QUANTITY = "monster_quantity";
-	public static final String SALES_ITEM__ITEM_ID = "item_id";
-	public static final String SALES_ITEM__ITEM_QUANTITY = "item_quantity";
-	public static final String SALES_ITEM__GEM_REWARD = "gem_reward";
 	public static final String SALES_ITEM__REWARD_ID = "reward_id";
 
 	public static final String SALES_PACKAGE__ID = GENERIC__ID;
 	public static final String SALES_PACKAGE__PRODUCT_ID = "product_id";
+	public static final String SALES_PACKAGE__NAME = "name";
 	public static final String SALES_PACKAGE__PRICE = "price";
 	public static final String SALES_PACKAGE__UUID = "uuid";
 	public static final String SALES_PACKAGE__START_TIME = "time_start";

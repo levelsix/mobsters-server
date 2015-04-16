@@ -38,7 +38,6 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
-import com.lvl6.info.SalesItem;
 import com.lvl6.info.User;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
@@ -225,14 +224,14 @@ public class MiscMethods {
 	//purpose of this method is to discover if the booster items that contain
 	//monsters as rewards, if the monster ids are valid
 
-	public static int determineGemRewardForSale(List<SalesItem> saleItems) {
-		int gemReward = 0;
-		for (SalesItem si : saleItems) {
-			gemReward += si.getGemReward();
-		}
-
-		return gemReward;
-	}
+//	public static int determineGemRewardForSale(List<SalesItem> saleItems) {
+//		int gemReward = 0;
+//		for (SalesItem si : saleItems) {
+//			gemReward += si.getGemReward();
+//		}
+//
+//		return gemReward;
+//	}
 
 	//TODO: move to createInfoProtoUtils
 	public List<FullUserMonsterProto> createFullUserMonsterProtos(
