@@ -1780,30 +1780,6 @@ public class StartupController extends EventController {
 
 		int newMinPrice = 0;
 
-//		//arin's formula
-//		if(userSalesValue == 0) {
-//			newMinPrice = 5;
-//		}
-//		else if(userSalesValue == 1) {
-//			if(salesJumpTwoTiers) {
-//				newMinPrice = 20;
-//			}
-//			else newMinPrice = 10;
-//		}
-//		else if(userSalesValue == 2) {
-//			if(salesJumpTwoTiers) {
-//				newMinPrice = 50;
-//			}
-//			else newMinPrice = 20;
-//		}
-//		else if(userSalesValue == 3) {
-//			if(salesJumpTwoTiers) {
-//				newMinPrice = 100;
-//			}
-//			else newMinPrice = 50;
-//		}
-//		else newMinPrice = 100;
-
 		if(userSalesValue == 0) {
 			newMinPrice = 5;
 		}
