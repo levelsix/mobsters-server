@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -146,6 +147,13 @@ public class InAppPurchaseMoneyTreeAction {
 	}
 
 	public boolean verifyMoneyTree(Builder resBuilder) {
+		try {
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		boolean duplicateReceipt = true;
 		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
@@ -153,7 +161,7 @@ public class InAppPurchaseMoneyTreeAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		if (!(duplicateReceipt && userOwnsOneMoneyTreeMax())) {
+		if (duplicateReceipt || !userOwnsOneMoneyTreeMax()) {
 			log.error("user trying to buy the starter pack again! {}, {}",
 					packageName, user);
 			return false;
@@ -164,6 +172,11 @@ public class InAppPurchaseMoneyTreeAction {
 	public boolean userOwnsOneMoneyTreeMax() {
 		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
+
+		for(Integer structId : structIdsToMoneyTreesMap.keySet()) {
+			smt = structIdsToMoneyTreesMap.get(structId);
+		}
+
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils
 				.getUserStructsForUser(userId);
 		int numOfMoneyTrees = 0;
@@ -266,6 +279,7 @@ public class InAppPurchaseMoneyTreeAction {
 	public void prepCurrencyHistory() {
 		String gems = miscMethods.gems;
 
+		prevCurrencies = new HashMap<String, Integer>();
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		curCurrencies.put(gems, user.getGems());

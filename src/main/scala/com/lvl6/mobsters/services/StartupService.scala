@@ -451,7 +451,7 @@ class StartupService extends LazyLogging{
         spbo <-    setPvpBoardObstacles(resBuilder, userId)
         sas  <-    setAchievementStuff(resBuilder, user, userId, now)
         smj  <-    setMiniJob(resBuilder, userId)
-        sui  <-    setUserItems(resBuilder, userId);
+        sui  <-    setUserItems(resBuilder, user, userId);
         swpciap <- setWhetherPlayerCompletedInAppPurchase(resBuilder, user)
         ssg  <-    setSecretGifts(resBuilder, userId, now.getTime())
         sr   <-    setResearch(resBuilder, userId)
@@ -648,7 +648,9 @@ class StartupService extends LazyLogging{
         	val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId)
             usga.convertUserIdIntoInt();
             val segmentationGroup: Int = usga.getSegmentationGroup();
-            user.updateUserSegmentationGroup(segmentationGroup);
+            if(!user.updateUserSegmentationGroup(segmentationGroup)) {
+            	logger.error(s"something wrong with updating user's segmentation group value:$segmentationGroup");
+            }
         }
       }
   }
@@ -1028,7 +1030,7 @@ class StartupService extends LazyLogging{
         timed("StartupService.setAchievementStuff"){
             achievementsIdToUserAchievements = achievementForUserRetrieveUtil.getSpecificOrAllAchievementIdToAchievementForUserId(userId, null)
             achievementsIdToUserAchievements.values.foreach{ afu =>
-              resBuilder.addUserAchievements(CreateInfoProtoUtils.createUserAchievementProto(afu))  
+              resBuilder.addUserAchievements(createInfoProtoUtils.createUserAchievementProto(afu))  
             }
         }
       
@@ -1055,17 +1057,22 @@ class StartupService extends LazyLogging{
       timed("StartupService.setMiniEventForUser"){
         val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
         val rmea = new RetrieveMiniEventAction(
-            userId, 
-            now, 
+            userId,
+            now,
             userRetrieveUtils,
             miniEventForUserRetrieveUtil,
-            miniEventGoalForUserRetrieveUtil, 
-            insertUtil, 
-            deleteUtil);
+            miniEventGoalForUserRetrieveUtil,
+            insertUtil,
+            deleteUtil,
+            miniEventGoalRetrieveUtil,
+            miniEventForPlayerLvlRetrieveUtil,
+            miniEventRetrieveUtil,
+            miniEventTierRewardRetrieveUtil,
+            miniEventLeaderboardRewardRetrieveUtil);
         rmea.execute(rmeaResBuilder);
         if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&  null != rmea.getCurActiveMiniEvent()){
           //get UserMiniEvent info and create the proto to set into resBuilder
-          val  umep = CreateInfoProtoUtils.createUserMiniEventProto(
+          val  umep = createInfoProtoUtils.createUserMiniEventProto(
                   rmea.getMefu(), 
                   rmea.getCurActiveMiniEvent(),
                   rmea.getMegfus(),
@@ -1136,8 +1143,10 @@ class StartupService extends LazyLogging{
           
           val usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
           if(usga.returnAppropriateObjectGroup().equals("COOPER")){
+              logger.info("sending starterbuilderpack");
         	  return true;
           } else {
+              logger.info("sending starter and builder pack");
         	  return false;
           }    
       }
@@ -1300,15 +1309,16 @@ class StartupService extends LazyLogging{
   def setSalesForUser(resBuilder:Builder ,  user:User):Future[Unit]= {
     Future{
       timed("StartupService.setSalesForUser"){
-          val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
           val userSalesValue = user.getSalesValue()
           val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
           val now = new Date
           
+          val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
           idsToSalesPackages.values().foreach { sp:SalesPackage =>
               if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
-                 && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK))
-              {
+                 && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
+                 && !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
+              { //make sure it's not starter pack
                   if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
                         timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
                     val spProto = inAppPurchaseUtil.createSalesPackageProto(

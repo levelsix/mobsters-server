@@ -525,7 +525,9 @@ public class StartupControllerOld extends EventController {
 						UserSegmentationGroupAction usga = new UserSegmentationGroupAction(playerId);
 						usga.convertUserIdIntoInt();
 						int segmentationGroup = usga.getSegmentationGroup();
-						user.updateUserSegmentationGroup(segmentationGroup);
+						if(!user.updateUserSegmentationGroup(segmentationGroup)) {
+							log.error("something wrong with updating user's segmentation group value:{}",segmentationGroup);
+						}
 					}
 
 					loginExistingUser(stopWatch, udid, playerId, resBuilder,
@@ -1150,7 +1152,7 @@ public class StartupControllerOld extends EventController {
 	private void setOngoingTask(Builder resBuilder, String userId,
 			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
 		try {
-			MinimumUserTaskProto mutp = CreateInfoProtoUtils
+			MinimumUserTaskProto mutp = createInfoProtoUtils
 					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
 			resBuilder.setCurTask(mutp);
 
@@ -1182,7 +1184,7 @@ public class StartupControllerOld extends EventController {
 			for (Integer stageNum : stageNumToTsfu.keySet()) {
 				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
 
-				TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+				TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
 						taskId, stageNum, monsters);
 				resBuilder.addCurTaskStages(tsp);
 			}
@@ -1576,9 +1578,18 @@ public class StartupControllerOld extends EventController {
 				RetrieveMiniEventResponseProto.newBuilder();
 
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-				userId, now, userRetrieveUtils,
+				userId,
+				now,
+				userRetrieveUtils,
 				miniEventForUserRetrieveUtil,
-				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
+				miniEventGoalForUserRetrieveUtil,
+				insertUtil,
+				deleteUtil,
+				miniEventGoalRetrieveUtils,
+				miniEventForPlayerLvlRetrieveUtils,
+				miniEventRetrieveUtils,
+				miniEventTierRewardRetrieveUtils,
+				miniEventLeaderboardRewardRetrieveUtils);
 
 		rmea.execute(rmeaResBuilder);
 //		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
@@ -1589,7 +1600,7 @@ public class StartupControllerOld extends EventController {
 				null != rmea.getCurActiveMiniEvent())
 		{
 			//get UserMiniEvent info and create the proto to set into resBuilder
-			UserMiniEventProto umep = CreateInfoProtoUtils
+			UserMiniEventProto umep = createInfoProtoUtils
 					.createUserMiniEventProto(
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 							rmea.getMegfus(),
@@ -1668,9 +1679,14 @@ public class StartupControllerOld extends EventController {
 
 		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
 
-		if(usga.returnAppropriateObjectGroup().equals("COOPER"))
+		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
+			log.info("sending starterbuilderpack");
 			return true;
-		else return false;
+		}
+		else {
+			log.info("sending starter and builder pack");
+			return false;
+		}
 	}
 	//TODO: Get rid of this copy pasted code
 	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {
@@ -1702,12 +1718,12 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 	}
+	
 	//TODO: Get rid of this copy pasted code
 	public void setBuilderPackForUser(Builder resBuilder, User user, Set<Integer> userItemIds) {
 		boolean hasExtraBuilder = false;
 		for(Integer itemId : userItemIds) {
-//			ItemForUser ifu = userItemMap.get(itemId);
-            //TODO: Make a constant out of this number for builder's id
+			//TODO: Make a constant out of this number for builder's id
 			if(itemId == 10000) { //builder's id
 				hasExtraBuilder = true;
 			}
@@ -1715,8 +1731,7 @@ public class StartupControllerOld extends EventController {
 
 		if(!hasExtraBuilder) {
 			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-			for(Integer id : idsToSalesPackages.keySet()) {
-				SalesPackage sp = idsToSalesPackages.get(id);
+			for(SalesPackage sp : idsToSalesPackages.values()) {
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
 					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
 							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
@@ -1816,12 +1831,12 @@ public class StartupControllerOld extends EventController {
 		int newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 		Date now = new Date();
 
-		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
-			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+		for(SalesPackage sp : idsToSalesPackages.values()) {
 			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
-					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) { //make sure it's not starter pack
-				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
-						(sp.getTimeEnd().getTime() > now.getTime())) {
+					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK) &&
+					!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
+				if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
 							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
