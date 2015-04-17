@@ -172,6 +172,11 @@ public class InAppPurchaseMoneyTreeAction {
 	public boolean userOwnsOneMoneyTreeMax() {
 		Map<Integer, StructureMoneyTree> structIdsToMoneyTreesMap = structureMoneyTreeRetrieveUtils
 				.getStructIdsToMoneyTrees();
+
+		for(Integer structId : structIdsToMoneyTreesMap.keySet()) {
+			smt = structIdsToMoneyTreesMap.get(structId);
+		}
+
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils
 				.getUserStructsForUser(userId);
 		int numOfMoneyTrees = 0;
@@ -180,7 +185,6 @@ public class InAppPurchaseMoneyTreeAction {
 			int structId = sfu.getStructId();
 			for (Integer ids : structIdsToMoneyTreesMap.keySet()) {
 				if (structId == ids) {
-					smt = structIdsToMoneyTreesMap.get(ids);
 					numOfMoneyTrees++;
 				}
 			}
