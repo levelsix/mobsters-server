@@ -852,10 +852,18 @@ public final class RewardsProto {
 
     /**
      * <code>optional int32 gems = 3;</code>
+     *
+     * <pre>
+     *amounts gained
+     * </pre>
      */
     boolean hasGems();
     /**
      * <code>optional int32 gems = 3;</code>
+     *
+     * <pre>
+     *amounts gained
+     * </pre>
      */
     int getGems();
 
@@ -1085,12 +1093,20 @@ public final class RewardsProto {
     private int gems_;
     /**
      * <code>optional int32 gems = 3;</code>
+     *
+     * <pre>
+     *amounts gained
+     * </pre>
      */
     public boolean hasGems() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional int32 gems = 3;</code>
+     *
+     * <pre>
+     *amounts gained
+     * </pre>
      */
     public int getGems() {
       return gems_;
@@ -1977,18 +1993,30 @@ public final class RewardsProto {
       private int gems_ ;
       /**
        * <code>optional int32 gems = 3;</code>
+       *
+       * <pre>
+       *amounts gained
+       * </pre>
        */
       public boolean hasGems() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional int32 gems = 3;</code>
+       *
+       * <pre>
+       *amounts gained
+       * </pre>
        */
       public int getGems() {
         return gems_;
       }
       /**
        * <code>optional int32 gems = 3;</code>
+       *
+       * <pre>
+       *amounts gained
+       * </pre>
        */
       public Builder setGems(int value) {
         bitField0_ |= 0x00000004;
@@ -1998,6 +2026,10 @@ public final class RewardsProto {
       }
       /**
        * <code>optional int32 gems = 3;</code>
+       *
+       * <pre>
+       *amounts gained
+       * </pre>
        */
       public Builder clearGems() {
         bitField0_ = (bitField0_ & ~0x00000004);

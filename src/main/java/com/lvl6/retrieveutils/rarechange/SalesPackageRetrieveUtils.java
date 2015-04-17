@@ -158,10 +158,26 @@ public class SalesPackageRetrieveUtils {
         productId =  Globals.APPLE_BUNDLE_ID() + "."
                 + productId;
 
-        String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
+        String str;
+        String name = "";
+        String animatingIcon = "";
+        String slamIcon = "";
 
-        String animatingIcon = rs.getString(DBConstants.SALES_PACKAGE__ANIMATING_ICON);
-        String slamIcon = rs.getString(DBConstants.SALES_PACKAGE__SLAM_ICON);
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__NAME);
+        if(!rs.wasNull()) {
+        	name = str;
+        }
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__ANIMATING_ICON);
+        if(!rs.wasNull()) {
+        	animatingIcon = str;
+        }
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__SLAM_ICON);
+        if(!rs.wasNull()) {
+        	slamIcon = str;
+        }
 
 		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid,
 				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon);
