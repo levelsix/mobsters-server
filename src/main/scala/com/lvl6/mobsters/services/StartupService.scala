@@ -26,6 +26,7 @@ import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
 import com.lvl6.events.response.ForceLogoutResponseEvent
 import com.lvl6.events.response.StartupResponseEvent
+import com.lvl6.info.AchievementForUser
 import com.lvl6.info.Clan
 import com.lvl6.info.ClanEventPersistentUserReward
 import com.lvl6.info.ItemForUser
@@ -283,30 +284,30 @@ class StartupService extends LazyLogging{
     val freshRestart = reqProto.getIsFreshRestart();
     var newNumConsecutiveDaysLoggedIn = 0;
     if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
-        val users = userRetrieveUtils.getUserByUDIDorFbId(udid, fbId);
-        user = selectUser(users, udid, fbId);
+    	val users = userRetrieveUtils.getUserByUDIDorFbId(udid, fbId);
+    	user = selectUser(users, udid, fbId);
 
-        val isLogin = true;
-        var goingThroughTutorial = false;
-        var userIdSet = true;
+    	val isLogin = true;
+    	var goingThroughTutorial = false;
+    	var userIdSet = true;
 
-        if (user != null) {
-          playerId = user.getId();
-          //if can't lock player, exception will be thrown
-          locker.lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
-          startupStatus = StartupStatus.USER_IN_DB;
-          logger.info("No major update... getting user info");
-          val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
-          loginExistingUser(sd);
-        } else {
-          logger.info(s"tutorial player with udid=$udid");
-          goingThroughTutorial = true;
-          userIdSet = false;
-          tutorialUserAccounting(reqProto, udid, now);
-          val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
-          finishStartup(sd)
-        }
-      }
+    	if (user != null) {
+    		playerId = user.getId();
+    		//if can't lock player, exception will be thrown
+    		locker.lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
+    		startupStatus = StartupStatus.USER_IN_DB;
+    		logger.info("No major update... getting user info");
+    		val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
+    		loginExistingUser(sd);
+    	} else {
+    		logger.info(s"tutorial player with udid=$udid");
+    		goingThroughTutorial = true;
+    		userIdSet = false;
+    		tutorialUserAccounting(reqProto, udid, now);
+    		val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
+    		finishStartup(sd)
+    	}
+    }
   }
   
   
@@ -359,10 +360,10 @@ class StartupService extends LazyLogging{
       }
 
     } else {
-      val tempClientVersionNum = clientVersionNum * 10;
-      val tempLatestVersionNum = GameServer.clientVersionNumber * 10;
+      val tempClientVersionNum : Float = clientVersionNum * 10F;
+      val tempLatestVersionNum : Float = GameServer.clientVersionNumber * 10F;
       // Check version number
-      if (tempClientVersionNum < tempLatestVersionNum) {
+      if (tempClientVersionNum.asInstanceOf[Int] < tempLatestVersionNum.asInstanceOf[Int]) {
         updateStatus = UpdateStatus.MAJOR_UPDATE;
         logger.info("player has been notified of forced update");
       } else if (tempClientVersionNum < tempLatestVersionNum) {
@@ -398,7 +399,6 @@ class StartupService extends LazyLogging{
   def tutorialUserAccounting(reqProto:StartupRequestProto , udid:String , now:Timestamp )= {
     timed("StartupService.tutorialUserAccounting"){
       val userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
-      //TODO: Retrieve from user table
       val numOldAccounts = userRetrieveUtils.numAccountsForUDID(udid);
       val alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
       var isFirstTimeUser = false;
@@ -412,7 +412,7 @@ class StartupService extends LazyLogging{
           + isFirstTimeUser);
   
       if (isFirstTimeUser) {
-        logger.info("new player with udid " + udid);
+        logger.info("new player with udid {}", udid);
         insertUtil.insertIntoFirstTimeUsers(udid, null, reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
       }
   
@@ -449,21 +449,21 @@ class StartupService extends LazyLogging{
         sts  <-    setTaskStuff(resBuilder, userId)
         ses  <-    setEventStuff(resBuilder, userId)
         spbo <-    setPvpBoardObstacles(resBuilder, userId)
-        sas  <-    setAchievementStuff(resBuilder, playerId)
-        smj  <-    setMiniJob(resBuilder, playerId)
-        sui  <-    setUserItems(resBuilder, user, playerId);
+        sas  <-    setAchievementStuff(resBuilder, user, userId, now)
+        smj  <-    setMiniJob(resBuilder, userId)
+        sui  <-    setUserItems(resBuilder, userId);
         swpciap <- setWhetherPlayerCompletedInAppPurchase(resBuilder, user)
-        ssg  <-    setSecretGifts(resBuilder, playerId, now.getTime())
-        sr   <-    setResearch(resBuilder, playerId)
-        sbifu <-   setBattleItemForUser(resBuilder, playerId)
-        sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
-        sbiqfu <-  setSalesForUser(resBuilder, user)
-        scrs  <-   setClanRaidStuff(resBuilder, user, playerId, now)
-        plfu  <-   pvpBattleStuff(resBuilder, user, playerId, freshRestart, now)
+        ssg  <-    setSecretGifts(resBuilder, userId, now.getTime())
+        sr   <-    setResearch(resBuilder, userId)
+        sbifu <-   setBattleItemForUser(resBuilder, userId)
+        sbiqfu <-  setBattleItemQueueForUser(resBuilder, userId)
+		ssfu  <-   setSalesForUser(resBuilder, user)
+        scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
+        plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
       
       userInfo onSuccess {
-        case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, playerId, nowDate, plfu, sd) 
+        case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd) 
       }
       
       userInfo onFailure {
@@ -659,18 +659,18 @@ class StartupService extends LazyLogging{
         val inProgressAndredeemedUserQuests = questForUserRetrieveUtils.getUserQuestsForUser(userId)
         if(inProgressAndredeemedUserQuests != null) {
           val inProgressQuests = new ArrayList[QuestForUser]()
-          val questIds = new HashSet[Integer]()
+          val inProgressQuestsIds = new HashSet[Integer]()
           val redeemedQuestIds = new ArrayList[Integer]()
           val questIdtoQuests = questRetrieveUtil.getQuestIdsToQuests
           inProgressAndredeemedUserQuests.foreach{ uq:QuestForUser  =>
             if(!uq.isRedeemed()) {
               inProgressQuests.add(uq)
-              questIds.add(uq.getQuestId)
+              inProgressQuestsIds.add(uq.getQuestId)
             }else {
               redeemedQuestIds.add(uq.getQuestId)
             }
           }
-          val questIdtoUserQuestJobs = questJobForUserRetrieveUtil.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds)
+          val questIdtoUserQuestJobs = questJobForUserRetrieveUtil.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, inProgressQuestsIds)
           val currentUserQuests = createInfoProtoUtils.createFullUserQuestDataLarges(inProgressQuests, questIdtoQuests, questIdtoUserQuestJobs)
           resBuilder.addAllUserQuests(currentUserQuests)
           resBuilder.addAllRedeemedQuestIds(redeemedQuestIds)
@@ -868,10 +868,12 @@ class StartupService extends LazyLogging{
   
   def setPvpBoardObstacles(resBuilder:Builder, userId:String):Future[Unit]= {
     Future{
-      val boList = pvpBoardObstacleForUserRetrieveUtil.getPvpBoardObstacleForUserId(userId)
-      boList.foreach{ pbofu => 
-        resBuilder.addUserPvpBoardObstacles(createInfoProtoUtils.createUserPvpBoardObstacleProto(pbofu))  
-      }
+        timed("StartupService.setPvpBoardObstacles"){
+        	val boList = pvpBoardObstacleForUserRetrieveUtil.getPvpBoardObstacleForUserId(userId)
+        			boList.foreach{ pbofu => 
+        			resBuilder.addUserPvpBoardObstacles(createInfoProtoUtils.createUserPvpBoardObstacleProto(pbofu))  
+        	}
+        }
     }
   }
   
@@ -886,8 +888,8 @@ class StartupService extends LazyLogging{
           if(battle != null) {
           	val battleStartTime = new Timestamp(battle.getBattleStartTime.getTime)
             var eloAttackerLoses = battle.getAttackerLoseEloChange
-            if(plfu.getElo+eloAttackerLoses < 0) {
-              eloAttackerLoses = -1*plfu.getElo
+            if(plfu.getElo+eloAttackerLoses < ControllerConstants.PVP__DEFAULT_MIN_ELO) {
+              eloAttackerLoses = plfu.getElo - ControllerConstants.PVP__DEFAULT_MIN_ELO;
             }
             val defenderId = battle.getDefenderId
             var eloDefenderWins = battle.getDefenderWinEloChange
@@ -922,19 +924,20 @@ class StartupService extends LazyLogging{
       var defenderUuid:UUID = null
       var invalidUuids = true
       timed("StartupService.penalizeUserForLeavingGameWhileInPvp") {
-        if(defenderId == null || defenderId.isEmpty()) {
           try {
-            defenderUuid = UUID.fromString(defenderId)
+        	  if(defenderId != null && !defenderId.isEmpty()) {
+        		  defenderUuid = UUID.fromString(defenderId)
+        	  }
             invalidUuids = false
           }catch{
-            case t:Throwable => {
-              logger.error(s"UUID error. Incorrect defenderId=$defenderId", t)
-            }
+              case t:Throwable => {
+                  logger.error(s"UUID error. Incorrect defenderId=$defenderId", t)
+              }
+              invalidUuids = true
           }
           if (invalidUuids) return
           //only lock real users
           if (null != defenderUuid)  locker.lockPlayer(defenderUuid, this.getClass().getSimpleName())
-        }
         try {
           var attackerEloBefore = attackerPlfu.getElo();
           var defenderEloBefore = 0;
@@ -1019,17 +1022,63 @@ class StartupService extends LazyLogging{
     }
   }
   
-  def setAchievementStuff(resBuilder:Builder, userId:String):Future[Unit]= {
+  def setAchievementStuff(resBuilder:Builder, user:User, userId:String, now:Date):Future[Unit]= {
     Future{
-      timed("StartupService.setAchievementStuff"){
-        val achievementsIdToUserAchievements = achievementForUserRetrieveUtil.getSpecificOrAllAchievementIdToAchievementForUserId(userId, null)
-        achievementsIdToUserAchievements.values.foreach{ afu =>
-          resBuilder.addUserAchievements(createInfoProtoUtils.createUserAchievementProto(afu))  
+        var achievementsIdToUserAchievements: java.util.Map[Integer, AchievementForUser] = null
+        timed("StartupService.setAchievementStuff"){
+            achievementsIdToUserAchievements = achievementForUserRetrieveUtil.getSpecificOrAllAchievementIdToAchievementForUserId(userId, null)
+            achievementsIdToUserAchievements.values.foreach{ afu =>
+              resBuilder.addUserAchievements(CreateInfoProtoUtils.createUserAchievementProto(afu))  
+            }
+        }
+      
+        var calculateMiniEvent: Boolean = true
+        for (achievementId <- ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS) {
+        	if (!achievementsIdToUserAchievements.containsKey(achievementId)) {
+        		calculateMiniEvent = false
+        	}
+            val afu = achievementsIdToUserAchievements.get(achievementId)
+            if (!afu.isRedeemed()) {
+                calculateMiniEvent = false
+            }
+        }
+      
+        if (calculateMiniEvent) {
+			//calculate only if user finished all clan achievements
+        	setMiniEventForUser(resBuilder, user, userId, now)
+        }
+    }
+  }
+  
+  def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date):Future[Unit]={
+    Future{
+      timed("StartupService.setMiniEventForUser"){
+        val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
+        val rmea = new RetrieveMiniEventAction(
+            userId, 
+            now, 
+            userRetrieveUtils,
+            miniEventForUserRetrieveUtil,
+            miniEventGoalForUserRetrieveUtil, 
+            insertUtil, 
+            deleteUtil);
+        rmea.execute(rmeaResBuilder);
+        if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&  null != rmea.getCurActiveMiniEvent()){
+          //get UserMiniEvent info and create the proto to set into resBuilder
+          val  umep = CreateInfoProtoUtils.createUserMiniEventProto(
+                  rmea.getMefu(), 
+                  rmea.getCurActiveMiniEvent(),
+                  rmea.getMegfus(),
+                  rmea.getLvlEntered(), 
+                  rmea.getRewards(),
+                  rmea.getGoals(), 
+                  rmea.getLeaderboardRewards());
+          resBuilder.setUserMiniEvent(umep);
         }
       }
     }
   }
-  
+
   def setMiniJob(resBuilder:Builder, userId:String):Future[Unit]= {
     Future{
       timed("StartupService.setMiniJob"){
@@ -1309,54 +1358,17 @@ class StartupService extends LazyLogging{
     }
   }
   
-  def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date):Future[Unit]={
-    Future{
-      timed("StartupService.setMiniEventForUser"){
-        val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
-        val rmea = new RetrieveMiniEventAction(
-            userId, 
-            now, 
-            userRetrieveUtils,
-            miniEventForUserRetrieveUtil,
-            miniEventGoalForUserRetrieveUtil, 
-            insertUtil, 
-            deleteUtil,
-            miniEventGoalRetrieveUtil,
-            miniEventForPlayerLvlRetrieveUtil,
-            miniEventRetrieveUtil,
-            miniEventTierRewardRetrieveUtil,
-            miniEventLeaderboardRewardRetrieveUtil);
-        rmea.execute(rmeaResBuilder);
-        if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&  null != rmea.getCurActiveMiniEvent()){
-          //get UserMiniEvent info and create the proto to set into resBuilder
-          //TODO: Consider protofying MiniEvent stuff
-          val  umep = createInfoProtoUtils.createUserMiniEventProto(
-                  rmea.getMefu(), 
-                  rmea.getCurActiveMiniEvent(),
-                  rmea.getMegfus(),
-                  rmea.getLvlEntered(), 
-                  rmea.getRewards(),
-                  rmea.getGoals(), 
-                  rmea.getLeaderboardRewards());
-          resBuilder.setUserMiniEvent(umep);
-        }
-      }
-    }
-  }
-
   def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
     Future{
       timed("StartupService.setClanRaidStuff"){
         val nowDate = new Date(now.getTime());
         val clanId = user.getClanId();
         if (clanId != null) {
-          /*NOTE: DB CALL*/
           //get the clan raid information for the clan
           val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
           if (null != cepfc) {
             val pcecip = createInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
             resBuilder.setCurRaidClanInfo(pcecip);
-            /*NOTE: DB CALL*/
             //get the clan raid information for all the clan users
             //shouldn't be null (per the retrieveUtils)
             val userIdToCepfu = clanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
@@ -1365,7 +1377,6 @@ class StartupService extends LazyLogging{
               logger.info("no users involved in clan raid. clanRaid=$cepfc");
             }else {
               val userMonsterIds = monsterStuffUtil.getUserMonsterIdsInClanRaid(userIdToCepfu);
-              /*NOTE: DB CALL*/
               //TODO: when retrieving clan info, and user's current teams, maybe query for
               //these monsters as well
               val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
@@ -1385,12 +1396,10 @@ class StartupService extends LazyLogging{
   
   def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
     timed("StartupService.setClanRaidHistoryStuff"){
-      /*NOTE: DB CALL*/
       //the raid stage and reward history for past 7 days
       val nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY;
       val timesToRaidStageHistory = cepfuRaidStageHistoryRetrieveUtils
         .getRaidStageHistoryForPastNDaysForUserId(userId, nDays, nowDate, timeUtils);
-      /*NOTE: DB CALL*/
       val timesToUserRewards = clanEventPersistentUserRewardRetrieveUtils
         .getCepUserRewardForPastNDaysForUserId(userId, nDays, nowDate, timeUtils);
       //possible for ClanRaidStageHistory to have no rewards if clan didn't beat stage

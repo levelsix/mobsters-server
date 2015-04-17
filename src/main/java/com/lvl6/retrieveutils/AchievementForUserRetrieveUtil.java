@@ -79,8 +79,8 @@ public class AchievementForUserRetrieveUtil {
 							inConditions, inDelim, overallDelim, values,
 							preparedStatement);
 
-			log.info("getSpecificOrAllAchievementIdToAchievementForUserId() query="
-					+ query);
+			log.info("getSpecificOrAllAchievementIdToAchievementForUserId() query={}",
+					query);
 
 			List<AchievementForUser> afuList = this.jdbcTemplate.query(query,
 					values.toArray(), rowMapper);

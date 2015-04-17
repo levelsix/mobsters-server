@@ -595,8 +595,8 @@ public class StartupControllerOld extends EventController {
 
 	protected UpdateStatus checkVersionNoVersionProto(StartupRequestProto reqProto) {
 		UpdateStatus updateStatus;
-		double tempClientVersionNum = reqProto.getVersionNum() * 10;
-		double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
+		double tempClientVersionNum = reqProto.getVersionNum() * 10D;
+		double tempLatestVersionNum = GameServer.clientVersionNumber * 10D;
 		// Check version number
 		if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
 			updateStatus = UpdateStatus.MAJOR_UPDATE;
@@ -691,7 +691,6 @@ public class StartupControllerOld extends EventController {
 			String udid, Timestamp now) {
 		boolean userLoggedIn = LoginHistoryRetrieveUtils
 				.userLoggedInByUDID(udid);
-		//TODO: Retrieve from user table
 		int numOldAccounts = getUserRetrieveUtils().numAccountsForUDID(udid);
 		boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils
 				.userExistsWithUDID(udid);
@@ -706,7 +705,7 @@ public class StartupControllerOld extends EventController {
 				+ isFirstTimeUser);
 
 		if (isFirstTimeUser) {
-			log.info("new player with udid " + udid);
+			log.info("new player with udid {}", udid);
 			InsertUtils.get().insertIntoFirstTimeUsers(udid, null,
 					reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
 		}
@@ -938,7 +937,7 @@ public class StartupControllerOld extends EventController {
 		//  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
 
 		List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
-		Set<Integer> questIds = new HashSet<Integer>();
+		Set<Integer> inProgressQuestsIds = new HashSet<Integer>();
 		List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
 		Map<Integer, Quest> questIdToQuests = questRetrieveUtils
@@ -949,17 +948,17 @@ public class StartupControllerOld extends EventController {
 			if (!uq.isRedeemed()) {
 				//unredeemed quest section
 				inProgressQuests.add(uq);
-				questIds.add(questId);
+				inProgressQuestsIds.add(questId);
 
 			} else {
 				redeemedQuestIds.add(questId);
 			}
 		}
 
-		// TODO: get the QuestJobForUser for ONLY the inProgressQuests
+		// get the QuestJobForUser for ONLY the inProgressQuests
 		/*NOTE: DB CALL*/
 		Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs = getQuestJobForUserRetrieveUtil()
-				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);
+				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, inProgressQuestsIds);
 
 		//generate the user quests
 		List<FullUserQuestProto> currentUserQuests = createInfoProtoUtils
@@ -1148,6 +1147,53 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
+	private void setOngoingTask(Builder resBuilder, String userId,
+			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
+		try {
+			MinimumUserTaskProto mutp = CreateInfoProtoUtils
+					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
+			resBuilder.setCurTask(mutp);
+
+			//create protos for stages
+			String userTaskId = aTaskForUser.getId();
+			/*NOTE: DB CALL*/
+			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
+					.getTaskStagesForUserWithTaskForUserId(userTaskId);
+
+			//group taskStageForUsers by stage nums because more than one
+			//taskStageForUser with the same stage num means this stage
+			//has more than one monster
+			Map<Integer, List<TaskStageForUser>> stageNumToTsfu = new HashMap<Integer, List<TaskStageForUser>>();
+			for (TaskStageForUser tsfu : taskStages) {
+				int stageNum = tsfu.getStageNum();
+
+				if (!stageNumToTsfu.containsKey(stageNum)) {
+					List<TaskStageForUser> a = new ArrayList<TaskStageForUser>();
+					stageNumToTsfu.put(stageNum, a);
+				}
+
+				List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
+				tsfuList.add(tsfu);
+			}
+
+			//now that we have grouped all the monsters in their corresponding
+			//task stages, protofy them
+			int taskId = aTaskForUser.getTaskId();
+			for (Integer stageNum : stageNumToTsfu.keySet()) {
+				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
+
+				TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+						taskId, stageNum, monsters);
+				resBuilder.addCurTaskStages(tsp);
+			}
+
+		} catch (Exception e) {
+			log.error(
+					"could not create existing user task, letting it get deleted when user starts another task.",
+					e);
+		}
+	}
+
 	private void setEventStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		List<EventPersistentForUser> events = getEventPersistentForUserRetrieveUtils()
@@ -1175,8 +1221,6 @@ public class StartupControllerOld extends EventController {
 			String userId, boolean isFreshRestart, Timestamp battleEndTime) {
 
 		//	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
-		/*NOTE: DB CALL*/
-		//TODO: should I be doing this?
 		PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
 				.getUserPvpLeagueForId(userId);
 
@@ -1188,7 +1232,6 @@ public class StartupControllerOld extends EventController {
 			return plfu;
 		}
 
-		/*NOTE: DB CALL*/
 		//if bool isFreshRestart is true, then deduct user's elo by amount specified in
 		//the table (pvp_battle_for_user), since user auto loses
 		PvpBattleForUser battle = getPvpBattleForUserRetrieveUtils()
@@ -1201,8 +1244,8 @@ public class StartupControllerOld extends EventController {
 				.getTime());
 		//capping max elo attacker loses
 		int eloAttackerLoses = battle.getAttackerLoseEloChange();
-		if (plfu.getElo() + eloAttackerLoses < 0) {
-			eloAttackerLoses = -1 * plfu.getElo();
+		if (plfu.getElo() + eloAttackerLoses < ControllerConstants.PVP__DEFAULT_MIN_ELO) {
+			eloAttackerLoses = plfu.getElo() - ControllerConstants.PVP__DEFAULT_MIN_ELO;
 		}
 
 		String defenderId = battle.getDefenderId();
@@ -1222,14 +1265,11 @@ public class StartupControllerOld extends EventController {
 		//NOTE: this lock ordering might result in a temp deadlock
 		//doesn't reeeally matter if can't penalize defender...
 
-
 		UUID defenderUuid = null;
 		boolean invalidUuids = true;
-
 		try {
-			if(defenderId != null && !defenderId.equalsIgnoreCase("")) {
+			if(defenderId != null && !defenderId.isEmpty()) {
 				defenderUuid = UUID.fromString(defenderId);
-
 			}
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -1237,20 +1277,14 @@ public class StartupControllerOld extends EventController {
 					defenderId), e);
 			invalidUuids = true;
 		}
-
-
-
-		//UUID checks
 		if (invalidUuids) {
 			return;
 		}
-
 		//only lock real users
 		if (null != defenderUuid) {
 			getLocker().lockPlayer(defenderUuid,
 					this.getClass().getSimpleName());
 		}
-
 		try {
 			int attackerEloBefore = attackerPlfu.getElo();
 			int defenderEloBefore = 0;
@@ -1308,9 +1342,8 @@ public class StartupControllerOld extends EventController {
 				numUpdated = UpdateUtils.get().updatePvpLeagueForUser(
 						defenderId, defenderCurLeague, defenderCurRank,
 						eloDefenderWins, null, null, 0, 1, 0, 0, -1);
-				log.info(String
-						.format("num updated when changing defender's elo because of reset=%s",
-								numUpdated));
+				log.info("num updated when changing defender's elo because of reset={}",
+						numUpdated);
 
 				defenderPlfu.setElo(defenderCurElo);
 				defenderPlfu.setPvpLeagueId(defenderCurLeague);
@@ -1333,13 +1366,12 @@ public class StartupControllerOld extends EventController {
 					0, 0, -1, attackerWon, cancelled, defenderGotRevenge,
 					displayToDefender);
 
-			log.info(String.format("numInserted into battle history=%s",
-					numInserted));
+			log.info("numInserted into battle history={}",
+					numInserted);
 			//delete that this battle occurred
 			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
-			log.info(String
-					.format("successfully penalized, rewarded attacker and defender respectively. battle=%s, numDeleted=%s",
-							battle, numDeleted));
+			log.info("successfully penalized, rewarded attacker and defender respectively. battle={}, numDeleted={}",
+					battle, numDeleted);
 
 		} catch (Exception e) {
 			log.error(
@@ -1351,53 +1383,6 @@ public class StartupControllerOld extends EventController {
 				getLocker().unlockPlayer(defenderUuid,
 						this.getClass().getSimpleName());
 			}
-		}
-	}
-
-	private void setOngoingTask(Builder resBuilder, String userId,
-			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
-		try {
-			MinimumUserTaskProto mutp = createInfoProtoUtils
-					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
-			resBuilder.setCurTask(mutp);
-
-			//create protos for stages
-			String userTaskId = aTaskForUser.getId();
-			/*NOTE: DB CALL*/
-			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
-					.getTaskStagesForUserWithTaskForUserId(userTaskId);
-
-			//group taskStageForUsers by stage nums because more than one
-			//taskStageForUser with the same stage num means this stage
-			//has more than one monster
-			Map<Integer, List<TaskStageForUser>> stageNumToTsfu = new HashMap<Integer, List<TaskStageForUser>>();
-			for (TaskStageForUser tsfu : taskStages) {
-				int stageNum = tsfu.getStageNum();
-
-				if (!stageNumToTsfu.containsKey(stageNum)) {
-					List<TaskStageForUser> a = new ArrayList<TaskStageForUser>();
-					stageNumToTsfu.put(stageNum, a);
-				}
-
-				List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
-				tsfuList.add(tsfu);
-			}
-
-			//now that we have grouped all the monsters in their corresponding
-			//task stages, protofy them
-			int taskId = aTaskForUser.getTaskId();
-			for (Integer stageNum : stageNumToTsfu.keySet()) {
-				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
-
-				TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
-						taskId, stageNum, monsters);
-				resBuilder.addCurTaskStages(tsp);
-			}
-
-		} catch (Exception e) {
-			log.error(
-					"could not create existing user task, letting it get deleted when user starts another task.",
-					e);
 		}
 	}
 
@@ -1584,8 +1569,38 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
+	private void setMiniEventForUser(
+			Builder resBuilder, User u, String userId, Date now)
+	{
+		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
+				RetrieveMiniEventResponseProto.newBuilder();
+
+		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
+				userId, now, userRetrieveUtils,
+				miniEventForUserRetrieveUtil,
+				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil);
+
+		rmea.execute(rmeaResBuilder);
+//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
+
+		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+				null != rmea.getCurActiveMiniEvent())
+		{
+			//get UserMiniEvent info and create the proto to set into resBuilder
+			UserMiniEventProto umep = CreateInfoProtoUtils
+					.createUserMiniEventProto(
+							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+							rmea.getMegfus(),
+							rmea.getLvlEntered(), rmea.getRewards(),
+							rmea.getGoals(), rmea.getLeaderboardRewards());
+			resBuilder.setUserMiniEvent(umep);
+		}
+
+	}
+
 	private void setMiniJob(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
 		Map<String, MiniJobForUser> miniJobIdToUserMiniJobs = getMiniJobForUserRetrieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, null);
 
@@ -1713,7 +1728,6 @@ public class StartupControllerOld extends EventController {
 
 	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder,
 			User user) {
-		/*NOTE: DB CALL*/
 		boolean hasPurchased = getIapHistoryRetrieveUtils()
 				.checkIfUserHasPurchased(user.getId());
 		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
@@ -1764,9 +1778,8 @@ public class StartupControllerOld extends EventController {
 			gifts.addAll(giftList);
 
 		} else {
-			log.error(String
-					.format("Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
-							giftList, ids));
+			log.error("Error calculating the new SecretGifts. nuGifts={}, ids={}",
+					giftList, ids);
 		}
 
 	}
@@ -1895,42 +1908,6 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
-	private void setMiniEventForUser(
-			Builder resBuilder, User u, String userId, Date now)
-	{
-		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
-				RetrieveMiniEventResponseProto.newBuilder();
-
-
-		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-				userId, now, userRetrieveUtils,
-				miniEventForUserRetrieveUtil,
-				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
-				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils,
-				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils,
-				miniEventLeaderboardRewardRetrieveUtils);
-
-		rmea.execute(rmeaResBuilder);
-//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
-//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
-
-		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
-				null != rmea.getCurActiveMiniEvent())
-		{
-			//get UserMiniEvent info and create the proto to set into resBuilder
-			//TODO: Consider protofying MiniEvent stuff
-			UserMiniEventProto umep = createInfoProtoUtils
-					.createUserMiniEventProto(
-							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
-							rmea.getMegfus(),
-							rmea.getLvlEntered(), rmea.getRewards(),
-							rmea.getGoals(), rmea.getLeaderboardRewards());
-			resBuilder.setUserMiniEvent(umep);
-		}
-
-	}
-
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
 			Timestamp now) {
 		Date nowDate = new Date(now.getTime());
@@ -1939,15 +1916,13 @@ public class StartupControllerOld extends EventController {
 		if (clanId == null) {
 			return;
 		}
-		/*NOTE: DB CALL*/
 		//get the clan raid information for the clan
 		ClanEventPersistentForClan cepfc = getClanEventPersistentForClanRetrieveUtils()
 				.getPersistentEventForClanId(clanId);
 
 		if (null == cepfc) {
-			log.info(String.format(
-					"no clan raid stuff existing for clan=%s, user=%s", clanId,
-					user));
+			log.info("no clan raid stuff existing for clanId={}, user={}",
+					clanId, user);
 			return;
 		}
 
@@ -1955,24 +1930,22 @@ public class StartupControllerOld extends EventController {
 				.createPersistentClanEventClanInfoProto(cepfc);
 		resBuilder.setCurRaidClanInfo(pcecip);
 
-		/*NOTE: DB CALL*/
 		//get the clan raid information for all the clan users
 		//shouldn't be null (per the retrieveUtils)
 		Map<String, ClanEventPersistentForUser> userIdToCepfu = getClanEventPersistentForUserRetrieveUtils()
 				.getPersistentEventUserInfoForClanId(clanId);
-		log.info(String.format("the users involved in clan raid:%s",
-				userIdToCepfu));
+		log.info("the users involved in clan raid:{}",
+				userIdToCepfu);
 
 		if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
-			log.info(String.format(
-					"no users involved in clan raid. clanRaid=%s", cepfc));
+			log.info( "no users involved in clan raid. clanRaid={}",
+					cepfc );
 			return;
 		}
 
 		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
-		/*NOTE: DB CALL*/
 		//TODO: when retrieving clan info, and user's current teams, maybe query for
 		//these monsters as well
 		Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
@@ -1992,14 +1965,12 @@ public class StartupControllerOld extends EventController {
 	private void setClanRaidHistoryStuff(Builder resBuilder, String userId,
 			Date nowDate) {
 
-		/*NOTE: DB CALL*/
 		//the raid stage and reward history for past 7 days
 		int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY;
 		Map<Date, CepfuRaidStageHistory> timesToRaidStageHistory = getCepfuRaidStageHistoryRetrieveUtils()
 				.getRaidStageHistoryForPastNDaysForUserId(userId, nDays,
 						nowDate, timeUtils);
 
-		/*NOTE: DB CALL*/
 		Map<Date, List<ClanEventPersistentUserReward>> timesToUserRewards = getClanEventPersistentUserRewardRetrieveUtils()
 				.getCepUserRewardForPastNDaysForUserId(userId, nDays, nowDate,
 						timeUtils);
