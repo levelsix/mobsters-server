@@ -43,7 +43,9 @@ public class TranslateSelectMessagesAction {
 			String senderUserId, TranslateLanguages languageEnum,
 			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
-			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil) {
+			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil,
+			MiscMethods miscMethods,
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		super();
 		this.recipientUserId = recipientUserId;
 		this.senderUserId = senderUserId;
@@ -54,6 +56,8 @@ public class TranslateSelectMessagesAction {
 		this.translateOn = translateOn;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.miscMethods = miscMethods;
+		this.chatTranslationsRetrieveUtils = chatTranslationsRetrieveUtils;
 	}
 
 	private User recipientUser;
@@ -88,7 +92,7 @@ public class TranslateSelectMessagesAction {
 			return true;
 		}
 
-		language = MiscMethods.convertFromEnumToLanguage(languageEnum);
+		language = miscMethods.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
 			log.error("not valid language for TranslationLanguage: " + languageEnum);

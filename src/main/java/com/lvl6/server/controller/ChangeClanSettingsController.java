@@ -48,6 +48,9 @@ public class ChangeClanSettingsController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -253,7 +256,7 @@ public class ChangeClanSettingsController extends EventController {
 		}
 
 		if (isChangeIcon) {
-			ClanIcon ci = ClanIconRetrieveUtils.getClanIconForId(iconId);
+			ClanIcon ci = clanIconRetrieveUtils.getClanIconForId(iconId);
 			if (null == ci) {
 				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
 				log.warn(String.format("no clan icon with id=%s", iconId));
@@ -281,11 +284,11 @@ public class ChangeClanSettingsController extends EventController {
 		Map<String, Integer> clanIdToSize = userClanRetrieveUtil
 				.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
 
-		resBuilder.setMinClan(CreateInfoProtoUtils
+		resBuilder.setMinClan(createInfoProtoUtils
 				.createMinimumClanProtoFromClan(clan));
 
 		int size = clanIdToSize.get(clanId);
-		resBuilder.setFullClan(CreateInfoProtoUtils
+		resBuilder.setFullClan(createInfoProtoUtils
 				.createFullClanProtoWithClanSize(clan, size));
 
 		clanSizeContainer.add(size);

@@ -4,6 +4,8 @@
 import "InAppPurchase.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
+import "Reward.proto";
+import "Sales.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -19,6 +21,7 @@ message InAppPurchaseRequestProto {
 	optional string localcurrency = 4;
 	optional string locale = 5;
 	optional string ipaddr = 6;
+	optional string uuid = 7; //uuid for sales packages
 }
 
 																						//DONE
@@ -41,6 +44,10 @@ message InAppPurchaseResponseProto {
 	repeated UserItemProto updatedUserItems = 9;
 	
 	repeated FullUserStructureProto updatedMoneyTree = 10;
+	
+	optional SalesPackageProto successorSalesPackage = 11;
+	optional SalesPackageProto purchasedSalesPackage = 12;
+	optional UserRewardProto rewards = 13;
 		
 	enum InAppPurchaseStatus {
 		SUCCESS = 1;

@@ -7198,6 +7198,2293 @@ public final class EventMiniJobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemMiniJobResponseProto)
   }
 
+  public interface RefreshMiniJobRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RefreshMiniJobRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    com.google.protobuf.ProtocolStringList
+        getDeleteUserMiniJobIdsList();
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    int getDeleteUserMiniJobIdsCount();
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    java.lang.String getDeleteUserMiniJobIds(int index);
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDeleteUserMiniJobIdsBytes(int index);
+
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    boolean hasItemId();
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    int getItemId();
+
+    /**
+     * <code>optional int32 numToSpawn = 4;</code>
+     */
+    boolean hasNumToSpawn();
+    /**
+     * <code>optional int32 numToSpawn = 4;</code>
+     */
+    int getNumToSpawn();
+
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     *
+     * <pre>
+     *if itemId is set these two don't need to be, vice versa
+     * </pre>
+     */
+    boolean hasGemsSpent();
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     *
+     * <pre>
+     *if itemId is set these two don't need to be, vice versa
+     * </pre>
+     */
+    int getGemsSpent();
+
+    /**
+     * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+     */
+    boolean hasMinQualitySpawned();
+    /**
+     * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.Quality getMinQualitySpawned();
+
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    long getClientTime();
+
+    /**
+     * <code>optional int32 structId = 8;</code>
+     *
+     * <pre>
+     *id of structure (that user built) that controls mini jobs
+     * </pre>
+     */
+    boolean hasStructId();
+    /**
+     * <code>optional int32 structId = 8;</code>
+     *
+     * <pre>
+     *id of structure (that user built) that controls mini jobs
+     * </pre>
+     */
+    int getStructId();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.RefreshMiniJobRequestProto}
+   */
+  public static final class RefreshMiniJobRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RefreshMiniJobRequestProto)
+      RefreshMiniJobRequestProtoOrBuilder {
+    // Use RefreshMiniJobRequestProto.newBuilder() to construct.
+    private RefreshMiniJobRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RefreshMiniJobRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RefreshMiniJobRequestProto defaultInstance;
+    public static RefreshMiniJobRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RefreshMiniJobRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RefreshMiniJobRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                deleteUserMiniJobIds_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              deleteUserMiniJobIds_.add(bs);
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              itemId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              numToSpawn_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(6, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                minQualitySpawned_ = value;
+              }
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              clientTime_ = input.readInt64();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              structId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          deleteUserMiniJobIds_ = deleteUserMiniJobIds_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.class, com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RefreshMiniJobRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<RefreshMiniJobRequestProto>() {
+      public RefreshMiniJobRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RefreshMiniJobRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RefreshMiniJobRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int DELETEUSERMINIJOBIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList deleteUserMiniJobIds_;
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getDeleteUserMiniJobIdsList() {
+      return deleteUserMiniJobIds_;
+    }
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    public int getDeleteUserMiniJobIdsCount() {
+      return deleteUserMiniJobIds_.size();
+    }
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    public java.lang.String getDeleteUserMiniJobIds(int index) {
+      return deleteUserMiniJobIds_.get(index);
+    }
+    /**
+     * <code>repeated string deleteUserMiniJobIds = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDeleteUserMiniJobIdsBytes(int index) {
+      return deleteUserMiniJobIds_.getByteString(index);
+    }
+
+    public static final int ITEMID_FIELD_NUMBER = 3;
+    private int itemId_;
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    public int getItemId() {
+      return itemId_;
+    }
+
+    public static final int NUMTOSPAWN_FIELD_NUMBER = 4;
+    private int numToSpawn_;
+    /**
+     * <code>optional int32 numToSpawn = 4;</code>
+     */
+    public boolean hasNumToSpawn() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 numToSpawn = 4;</code>
+     */
+    public int getNumToSpawn() {
+      return numToSpawn_;
+    }
+
+    public static final int GEMSSPENT_FIELD_NUMBER = 5;
+    private int gemsSpent_;
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     *
+     * <pre>
+     *if itemId is set these two don't need to be, vice versa
+     * </pre>
+     */
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     *
+     * <pre>
+     *if itemId is set these two don't need to be, vice versa
+     * </pre>
+     */
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+
+    public static final int MINQUALITYSPAWNED_FIELD_NUMBER = 6;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality minQualitySpawned_;
+    /**
+     * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+     */
+    public boolean hasMinQualitySpawned() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getMinQualitySpawned() {
+      return minQualitySpawned_;
+    }
+
+    public static final int CLIENTTIME_FIELD_NUMBER = 7;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
+    public static final int STRUCTID_FIELD_NUMBER = 8;
+    private int structId_;
+    /**
+     * <code>optional int32 structId = 8;</code>
+     *
+     * <pre>
+     *id of structure (that user built) that controls mini jobs
+     * </pre>
+     */
+    public boolean hasStructId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 structId = 8;</code>
+     *
+     * <pre>
+     *id of structure (that user built) that controls mini jobs
+     * </pre>
+     */
+    public int getStructId() {
+      return structId_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      deleteUserMiniJobIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      itemId_ = 0;
+      numToSpawn_ = 0;
+      gemsSpent_ = 0;
+      minQualitySpawned_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      clientTime_ = 0L;
+      structId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < deleteUserMiniJobIds_.size(); i++) {
+        output.writeBytes(2, deleteUserMiniJobIds_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(3, itemId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, numToSpawn_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(6, minQualitySpawned_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(7, clientTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, structId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < deleteUserMiniJobIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(deleteUserMiniJobIds_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getDeleteUserMiniJobIdsList().size();
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, itemId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, numToSpawn_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, minQualitySpawned_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, clientTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, structId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.RefreshMiniJobRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RefreshMiniJobRequestProto)
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.class, com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        deleteUserMiniJobIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        numToSpawn_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        minQualitySpawned_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        structId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto build() {
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto buildPartial() {
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto result = new com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          deleteUserMiniJobIds_ = deleteUserMiniJobIds_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.deleteUserMiniJobIds_ = deleteUserMiniJobIds_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.numToSpawn_ = numToSpawn_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.minQualitySpawned_ = minQualitySpawned_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.clientTime_ = clientTime_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.structId_ = structId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto other) {
+        if (other == com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (!other.deleteUserMiniJobIds_.isEmpty()) {
+          if (deleteUserMiniJobIds_.isEmpty()) {
+            deleteUserMiniJobIds_ = other.deleteUserMiniJobIds_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureDeleteUserMiniJobIdsIsMutable();
+            deleteUserMiniJobIds_.addAll(other.deleteUserMiniJobIds_);
+          }
+          onChanged();
+        }
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
+        }
+        if (other.hasNumToSpawn()) {
+          setNumToSpawn(other.getNumToSpawn());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasMinQualitySpawned()) {
+          setMinQualitySpawned(other.getMinQualitySpawned());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
+        }
+        if (other.hasStructId()) {
+          setStructId(other.getStructId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList deleteUserMiniJobIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureDeleteUserMiniJobIdsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          deleteUserMiniJobIds_ = new com.google.protobuf.LazyStringArrayList(deleteUserMiniJobIds_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getDeleteUserMiniJobIdsList() {
+        return deleteUserMiniJobIds_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public int getDeleteUserMiniJobIdsCount() {
+        return deleteUserMiniJobIds_.size();
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public java.lang.String getDeleteUserMiniJobIds(int index) {
+        return deleteUserMiniJobIds_.get(index);
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDeleteUserMiniJobIdsBytes(int index) {
+        return deleteUserMiniJobIds_.getByteString(index);
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public Builder setDeleteUserMiniJobIds(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDeleteUserMiniJobIdsIsMutable();
+        deleteUserMiniJobIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public Builder addDeleteUserMiniJobIds(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDeleteUserMiniJobIdsIsMutable();
+        deleteUserMiniJobIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public Builder addAllDeleteUserMiniJobIds(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureDeleteUserMiniJobIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, deleteUserMiniJobIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public Builder clearDeleteUserMiniJobIds() {
+        deleteUserMiniJobIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deleteUserMiniJobIds = 2;</code>
+       */
+      public Builder addDeleteUserMiniJobIdsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDeleteUserMiniJobIdsIsMutable();
+        deleteUserMiniJobIds_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private int itemId_ ;
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public int getItemId() {
+        return itemId_;
+      }
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000004;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        itemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int numToSpawn_ ;
+      /**
+       * <code>optional int32 numToSpawn = 4;</code>
+       */
+      public boolean hasNumToSpawn() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 numToSpawn = 4;</code>
+       */
+      public int getNumToSpawn() {
+        return numToSpawn_;
+      }
+      /**
+       * <code>optional int32 numToSpawn = 4;</code>
+       */
+      public Builder setNumToSpawn(int value) {
+        bitField0_ |= 0x00000008;
+        numToSpawn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 numToSpawn = 4;</code>
+       */
+      public Builder clearNumToSpawn() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        numToSpawn_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gemsSpent_ ;
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       *
+       * <pre>
+       *if itemId is set these two don't need to be, vice versa
+       * </pre>
+       */
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       *
+       * <pre>
+       *if itemId is set these two don't need to be, vice versa
+       * </pre>
+       */
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       *
+       * <pre>
+       *if itemId is set these two don't need to be, vice versa
+       * </pre>
+       */
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000010;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       *
+       * <pre>
+       *if itemId is set these two don't need to be, vice versa
+       * </pre>
+       */
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Quality minQualitySpawned_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      /**
+       * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+       */
+      public boolean hasMinQualitySpawned() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getMinQualitySpawned() {
+        return minQualitySpawned_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+       */
+      public Builder setMinQualitySpawned(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        minQualitySpawned_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality minQualitySpawned = 6;</code>
+       */
+      public Builder clearMinQualitySpawned() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        minQualitySpawned_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000040;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int structId_ ;
+      /**
+       * <code>optional int32 structId = 8;</code>
+       *
+       * <pre>
+       *id of structure (that user built) that controls mini jobs
+       * </pre>
+       */
+      public boolean hasStructId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 structId = 8;</code>
+       *
+       * <pre>
+       *id of structure (that user built) that controls mini jobs
+       * </pre>
+       */
+      public int getStructId() {
+        return structId_;
+      }
+      /**
+       * <code>optional int32 structId = 8;</code>
+       *
+       * <pre>
+       *id of structure (that user built) that controls mini jobs
+       * </pre>
+       */
+      public Builder setStructId(int value) {
+        bitField0_ |= 0x00000080;
+        structId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 structId = 8;</code>
+       *
+       * <pre>
+       *id of structure (that user built) that controls mini jobs
+       * </pre>
+       */
+      public Builder clearStructId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        structId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RefreshMiniJobRequestProto)
+    }
+
+    static {
+      defaultInstance = new RefreshMiniJobRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RefreshMiniJobRequestProto)
+  }
+
+  public interface RefreshMiniJobResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RefreshMiniJobResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> 
+        getMiniJobsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto getMiniJobs(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    int getMiniJobsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder> 
+        getMiniJobsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder getMiniJobsOrBuilder(
+        int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     */
+    com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.RefreshMiniJobResponseProto}
+   */
+  public static final class RefreshMiniJobResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RefreshMiniJobResponseProto)
+      RefreshMiniJobResponseProtoOrBuilder {
+    // Use RefreshMiniJobResponseProto.newBuilder() to construct.
+    private RefreshMiniJobResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RefreshMiniJobResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RefreshMiniJobResponseProto defaultInstance;
+    public static RefreshMiniJobResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RefreshMiniJobResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RefreshMiniJobResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                miniJobs_ = new java.util.ArrayList<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              miniJobs_.add(input.readMessage(com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus value = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          miniJobs_ = java.util.Collections.unmodifiableList(miniJobs_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.class, com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RefreshMiniJobResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<RefreshMiniJobResponseProto>() {
+      public RefreshMiniJobResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RefreshMiniJobResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RefreshMiniJobResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus}
+     */
+    public enum RefreshMiniJobStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
+       */
+      FAIL_INSUFFICIENT_GEMS(1, 2),
+      /**
+       * <code>FAIL_INSUFFICIENT_ITEMS = 3;</code>
+       */
+      FAIL_INSUFFICIENT_ITEMS(2, 3),
+      /**
+       * <code>FAIL_OTHER = 4;</code>
+       */
+      FAIL_OTHER(3, 4),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
+       */
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
+      /**
+       * <code>FAIL_INSUFFICIENT_ITEMS = 3;</code>
+       */
+      public static final int FAIL_INSUFFICIENT_ITEMS_VALUE = 3;
+      /**
+       * <code>FAIL_OTHER = 4;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 4;
+
+
+      public final int getNumber() { return value; }
+
+      public static RefreshMiniJobStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_INSUFFICIENT_GEMS;
+          case 3: return FAIL_INSUFFICIENT_ITEMS;
+          case 4: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<RefreshMiniJobStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<RefreshMiniJobStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<RefreshMiniJobStatus>() {
+              public RefreshMiniJobStatus findValueByNumber(int number) {
+                return RefreshMiniJobStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final RefreshMiniJobStatus[] VALUES = values();
+
+      public static RefreshMiniJobStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private RefreshMiniJobStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int MINIJOBS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> miniJobs_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> getMiniJobsList() {
+      return miniJobs_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder> 
+        getMiniJobsOrBuilderList() {
+      return miniJobs_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    public int getMiniJobsCount() {
+      return miniJobs_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto getMiniJobs(int index) {
+      return miniJobs_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+     */
+    public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder getMiniJobsOrBuilder(
+        int index) {
+      return miniJobs_.get(index);
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     */
+    public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      miniJobs_ = java.util.Collections.emptyList();
+      status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < miniJobs_.size(); i++) {
+        output.writeMessage(2, miniJobs_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < miniJobs_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, miniJobs_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.RefreshMiniJobResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RefreshMiniJobResponseProto)
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.class, com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getMiniJobsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (miniJobsBuilder_ == null) {
+          miniJobs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          miniJobsBuilder_.clear();
+        }
+        status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventMiniJobProto.internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto build() {
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto buildPartial() {
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto result = new com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (miniJobsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            miniJobs_ = java.util.Collections.unmodifiableList(miniJobs_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.miniJobs_ = miniJobs_;
+        } else {
+          result.miniJobs_ = miniJobsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto other) {
+        if (other == com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (miniJobsBuilder_ == null) {
+          if (!other.miniJobs_.isEmpty()) {
+            if (miniJobs_.isEmpty()) {
+              miniJobs_ = other.miniJobs_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureMiniJobsIsMutable();
+              miniJobs_.addAll(other.miniJobs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.miniJobs_.isEmpty()) {
+            if (miniJobsBuilder_.isEmpty()) {
+              miniJobsBuilder_.dispose();
+              miniJobsBuilder_ = null;
+              miniJobs_ = other.miniJobs_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              miniJobsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMiniJobsFieldBuilder() : null;
+            } else {
+              miniJobsBuilder_.addAllMessages(other.miniJobs_);
+            }
+          }
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> miniJobs_ =
+        java.util.Collections.emptyList();
+      private void ensureMiniJobsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          miniJobs_ = new java.util.ArrayList<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto>(miniJobs_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder> miniJobsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> getMiniJobsList() {
+        if (miniJobsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(miniJobs_);
+        } else {
+          return miniJobsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public int getMiniJobsCount() {
+        if (miniJobsBuilder_ == null) {
+          return miniJobs_.size();
+        } else {
+          return miniJobsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto getMiniJobs(int index) {
+        if (miniJobsBuilder_ == null) {
+          return miniJobs_.get(index);
+        } else {
+          return miniJobsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder setMiniJobs(
+          int index, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto value) {
+        if (miniJobsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMiniJobsIsMutable();
+          miniJobs_.set(index, value);
+          onChanged();
+        } else {
+          miniJobsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder setMiniJobs(
+          int index, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder builderForValue) {
+        if (miniJobsBuilder_ == null) {
+          ensureMiniJobsIsMutable();
+          miniJobs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          miniJobsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder addMiniJobs(com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto value) {
+        if (miniJobsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMiniJobsIsMutable();
+          miniJobs_.add(value);
+          onChanged();
+        } else {
+          miniJobsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder addMiniJobs(
+          int index, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto value) {
+        if (miniJobsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMiniJobsIsMutable();
+          miniJobs_.add(index, value);
+          onChanged();
+        } else {
+          miniJobsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder addMiniJobs(
+          com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder builderForValue) {
+        if (miniJobsBuilder_ == null) {
+          ensureMiniJobsIsMutable();
+          miniJobs_.add(builderForValue.build());
+          onChanged();
+        } else {
+          miniJobsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder addMiniJobs(
+          int index, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder builderForValue) {
+        if (miniJobsBuilder_ == null) {
+          ensureMiniJobsIsMutable();
+          miniJobs_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          miniJobsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder addAllMiniJobs(
+          java.lang.Iterable<? extends com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> values) {
+        if (miniJobsBuilder_ == null) {
+          ensureMiniJobsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, miniJobs_);
+          onChanged();
+        } else {
+          miniJobsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder clearMiniJobs() {
+        if (miniJobsBuilder_ == null) {
+          miniJobs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          miniJobsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public Builder removeMiniJobs(int index) {
+        if (miniJobsBuilder_ == null) {
+          ensureMiniJobsIsMutable();
+          miniJobs_.remove(index);
+          onChanged();
+        } else {
+          miniJobsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder getMiniJobsBuilder(
+          int index) {
+        return getMiniJobsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder getMiniJobsOrBuilder(
+          int index) {
+        if (miniJobsBuilder_ == null) {
+          return miniJobs_.get(index);  } else {
+          return miniJobsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder> 
+           getMiniJobsOrBuilderList() {
+        if (miniJobsBuilder_ != null) {
+          return miniJobsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(miniJobs_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder addMiniJobsBuilder() {
+        return getMiniJobsFieldBuilder().addBuilder(
+            com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder addMiniJobsBuilder(
+          int index) {
+        return getMiniJobsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserMiniJobProto miniJobs = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder> 
+           getMiniJobsBuilderList() {
+        return getMiniJobsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder> 
+          getMiniJobsFieldBuilder() {
+        if (miniJobsBuilder_ == null) {
+          miniJobsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder>(
+                  miniJobs_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          miniJobs_ = null;
+        }
+        return miniJobsBuilder_;
+      }
+
+      private com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       */
+      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RefreshMiniJobResponseProto)
+    }
+
+    static {
+      defaultInstance = new RefreshMiniJobResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RefreshMiniJobResponseProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor;
   private static
@@ -7238,6 +9525,16 @@ public final class EventMiniJobProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -7248,52 +9545,68 @@ public final class EventMiniJobProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\022EventMiniJob.proto\022\016com.lvl6.proto\032\023Mi" +
-      "niJobConfig.proto\032\022MonsterStuff.proto\032\nU" +
-      "ser.proto\"\206\001\n\030SpawnMiniJobRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\022\n\nclientTime\030\002 \001(\003\022\022\n\nnumToSpa" +
-      "wn\030\003 \001(\005\022\020\n\010structId\030\004 \001(\005\"\202\002\n\031SpawnMini" +
-      "JobResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\0222\n\010miniJobs\030\002" +
-      " \003(\0132 .com.lvl6.proto.UserMiniJobProto\022L" +
-      "\n\006status\030\003 \001(\0162<.com.lvl6.proto.SpawnMin",
-      "iJobResponseProto.SpawnMiniJobStatus\"1\n\022" +
-      "SpawnMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"\223\001\n\030BeginMiniJobRequestProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\022\n\nclientTime\030\002 \001(\003\022\030\n\020userMonste" +
-      "rUuids\030\003 \003(\t\022\027\n\017userMiniJobUuid\030\004 \001(\t\"\353\001" +
-      "\n\031BeginMiniJobResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022L\n" +
-      "\006status\030\002 \001(\0162<.com.lvl6.proto.BeginMini" +
-      "JobResponseProto.BeginMiniJobStatus\"N\n\022B",
-      "eginMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\003\"\240\001\n\033" +
-      "CompleteMiniJobRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\022\n" +
-      "\nclientTime\030\002 \001(\003\022\027\n\017userMiniJobUuid\030\003 \001" +
-      "(\t\022\021\n\tisSpeedUp\030\004 \001(\010\022\017\n\007gemCost\030\005 \001(\005\"\223" +
-      "\002\n\034CompleteMiniJobResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Compl" +
-      "eteMiniJobResponseProto.CompleteMiniJobS",
-      "tatus\"m\n\025CompleteMiniJobStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT" +
-      "_GEMS\020\003\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\004\"\310\001\n" +
-      "\031RedeemMiniJobRequestProto\022@\n\006sender\030\001 \001" +
-      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
-      "MaxResources\022\022\n\nclientTime\030\002 \001(\003\022\027\n\017user" +
-      "MiniJobUuid\030\003 \001(\t\022<\n\005umchp\030\006 \003(\0132-.com.l" +
-      "vl6.proto.UserMonsterCurrentHealthProto\"" +
-      "\321\002\n\032RedeemMiniJobResponseProto\022@\n\006sender" +
-      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto",
-      "WithMaxResources\0222\n\004fump\030\002 \001(\0132$.com.lvl" +
-      "6.proto.FullUserMonsterProto\022N\n\006status\030\003" +
-      " \001(\0162>.com.lvl6.proto.RedeemMiniJobRespo" +
-      "nseProto.RedeemMiniJobStatus\"m\n\023RedeemMi" +
-      "niJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
-      "\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\003\022\034\n\030FAIL_MI" +
-      "NI_JOB_INCOMPLETE\020\004B\023B\021EventMiniJobProto"
+      "niJobConfig.proto\032\022MonsterStuff.proto\032\026S" +
+      "haredEnumConfig.proto\032\nUser.proto\"\206\001\n\030Sp" +
+      "awnMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\022\n\nclie" +
+      "ntTime\030\002 \001(\003\022\022\n\nnumToSpawn\030\003 \001(\005\022\020\n\010stru" +
+      "ctId\030\004 \001(\005\"\202\002\n\031SpawnMiniJobResponseProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6." +
+      "proto.UserMiniJobProto\022L\n\006status\030\003 \001(\0162<",
+      ".com.lvl6.proto.SpawnMiniJobResponseProt" +
+      "o.SpawnMiniJobStatus\"1\n\022SpawnMiniJobStat" +
+      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\223\001\n\030Begi" +
+      "nMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\022\n\nclient" +
+      "Time\030\002 \001(\003\022\030\n\020userMonsterUuids\030\003 \003(\t\022\027\n\017" +
+      "userMiniJobUuid\030\004 \001(\t\"\353\001\n\031BeginMiniJobRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022L\n\006status\030\002 \001(\0162<." +
+      "com.lvl6.proto.BeginMiniJobResponseProto",
+      ".BeginMiniJobStatus\"N\n\022BeginMiniJobStatu" +
+      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_N" +
+      "O_MINI_JOB_EXISTS\020\003\"\240\001\n\033CompleteMiniJobR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\022\n\nclientTime\030\002 \001(" +
+      "\003\022\027\n\017userMiniJobUuid\030\003 \001(\t\022\021\n\tisSpeedUp\030" +
+      "\004 \001(\010\022\017\n\007gemCost\030\005 \001(\005\"\223\002\n\034CompleteMiniJ" +
+      "obResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022R\n\006status\030\002 \001(" +
+      "\0162B.com.lvl6.proto.CompleteMiniJobRespon",
+      "seProto.CompleteMiniJobStatus\"m\n\025Complet" +
+      "eMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
+      "R\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022\033\n\027FAIL_" +
+      "NO_MINI_JOB_EXISTS\020\004\"\310\001\n\031RedeemMiniJobRe" +
+      "questProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
+      "oto.MinimumUserProtoWithMaxResources\022\022\n\n" +
+      "clientTime\030\002 \001(\003\022\027\n\017userMiniJobUuid\030\003 \001(" +
+      "\t\022<\n\005umchp\030\006 \003(\0132-.com.lvl6.proto.UserMo" +
+      "nsterCurrentHealthProto\"\321\002\n\032RedeemMiniJo" +
+      "bResponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl",
+      "6.proto.MinimumUserProtoWithMaxResources" +
+      "\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto.FullUser" +
+      "MonsterProto\022N\n\006status\030\003 \001(\0162>.com.lvl6." +
+      "proto.RedeemMiniJobResponseProto.RedeemM" +
+      "iniJobStatus\"m\n\023RedeemMiniJobStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_NO_MINI" +
+      "_JOB_EXISTS\020\003\022\034\n\030FAIL_MINI_JOB_INCOMPLET" +
+      "E\020\004\"\375\001\n\032RefreshMiniJobRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\034\n\024deleteUserMiniJobIds\030\002 \003(\t\022\016\n\006it",
+      "emId\030\003 \001(\005\022\022\n\nnumToSpawn\030\004 \001(\005\022\021\n\tgemsSp" +
+      "ent\030\005 \001(\005\0222\n\021minQualitySpawned\030\006 \001(\0162\027.c" +
+      "om.lvl6.proto.Quality\022\022\n\nclientTime\030\007 \001(" +
+      "\003\022\020\n\010structId\030\010 \001(\005\"\303\002\n\033RefreshMiniJobRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\0222\n\010miniJobs\030\002 \003(\0132" +
+      " .com.lvl6.proto.UserMiniJobProto\022P\n\006sta" +
+      "tus\030\003 \001(\0162@.com.lvl6.proto.RefreshMiniJo" +
+      "bResponseProto.RefreshMiniJobStatus\"l\n\024R" +
+      "efreshMiniJobStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL",
+      "_INSUFFICIENT_GEMS\020\002\022\033\n\027FAIL_INSUFFICIEN" +
+      "T_ITEMS\020\003\022\016\n\nFAIL_OTHER\020\004B\023B\021EventMiniJo" +
+      "bProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7308,6 +9621,7 @@ public final class EventMiniJobProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MiniJobConfigProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_SpawnMiniJobRequestProto_descriptor =
@@ -7358,8 +9672,21 @@ public final class EventMiniJobProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Fump", "Status", });
+    internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "DeleteUserMiniJobIds", "ItemId", "NumToSpawn", "GemsSpent", "MinQualitySpawned", "ClientTime", "StructId", });
+    internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RefreshMiniJobResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "MiniJobs", "Status", });
     com.lvl6.proto.MiniJobConfigProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

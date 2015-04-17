@@ -40,7 +40,7 @@ message RewardProto {
 message UserRewardProto {
 	repeated FullUserMonsterProto updatedOrNewMonsters = 1;
 	repeated UserItemProto updatedUserItems = 2;
-	optional int32 gems = 3;
+	optional int32 gems = 3; //amounts gained
 	optional int32 cash = 4;
 	optional int32 oil = 5;
 }

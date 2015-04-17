@@ -56,7 +56,12 @@ public class User implements Serializable {
 	private String pvpDefendingMessage;
 	private Date lastTeamDonateSolicitation;
 	private boolean boughtRiggedBoosterPack;
+	private int salesValue;
+	private Date lastPurchaseTime;
+	private boolean salesJumpTwoTiers;
 	private long totalStrength;
+	private int segmentationGroup;
+
 
 	public User() {
 		super();
@@ -76,8 +81,10 @@ public class User implements Serializable {
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
-			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack, 
-			long totalStrength) {
+			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
+			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
+			long totalStrength, int segmentationGroup) {
+
 		super();
 		this.id = id;
 		this.name = name;
@@ -120,16 +127,15 @@ public class User implements Serializable {
 		this.pvpDefendingMessage = pvpDefendingMessage;
 		this.lastTeamDonateSolicitation = lastTeamDonateSolicitation;
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
+		this.salesValue = salesValue;
+		this.lastPurchaseTime = lastPurchaseTime;
+		this.salesJumpTwoTiers = salesJumpTwoTiers;
 		this.totalStrength = totalStrength;
+		this.segmentationGroup = segmentationGroup;
+
 	}
 
-	public long getTotalStrength() {
-		return totalStrength;
-	}
 
-	public void setTotalStrength(long totalStrength) {
-		this.totalStrength = totalStrength;
-	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -182,7 +188,7 @@ public class User implements Serializable {
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__KABAM_NAID, kabamNaid);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams,
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.kabamNaid = kabamNaid;
@@ -221,7 +227,7 @@ public class User implements Serializable {
 	//		absoluteParams.put(DBConstants.USER__NUM_BADGES, 0);
 	//		absoluteParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
 	//
-	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams,
 	//				conditionParams, "and");
 	//		if (numUpdated == 1) {
 	//			this.numBadges = 0;
@@ -238,7 +244,7 @@ public class User implements Serializable {
 	//		Map <String, Object> relativeParams = new HashMap<String, Object>();
 	//		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
 	//
-	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
+	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
 	//				conditionParams, "and");
 	//		if (numUpdated == 1) {
 	//			this.numBadges += badgeChange;
@@ -257,7 +263,7 @@ public class User implements Serializable {
 	//		Map <String, Object> relativeParams = new HashMap<String, Object>();
 	//		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
 	//
-	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams,
 	//				conditionParams, "and");
 	//		if (numUpdated == 1) {
 	//			this.numBadges += badgeChange;
@@ -278,7 +284,7 @@ public class User implements Serializable {
 	//		Map <String, Object> relativeParams = new HashMap<String, Object>();
 	//		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
 	//
-	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams,
 	//				conditionParams, "and");
 	//		if (numUpdated == 1) {
 	//			this.numBadges += badgeChange;
@@ -483,7 +489,7 @@ public class User implements Serializable {
 	//			relativeParams.put(DBConstants.USER__GEMS, diamondChange);
 	//		}
 	//
-	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
+	//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
 	//				conditionParams, "and");
 	//		if (numUpdated == 1) {
 	//			this.gems += diamondChange;
@@ -744,9 +750,9 @@ public class User implements Serializable {
 	public boolean updateLastObstacleSpawnedTime(Timestamp lastObstacleSpawnedTime) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
-		
+
 		Map<String, Object> relativeParams = null;
-		
+
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
 
@@ -1118,6 +1124,26 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateUserSegmentationGroup(int segmentationGroup) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (segmentationGroup != 0) {
+			relativeParams.put(DBConstants.USER__SEGMENTATION_GROUP, segmentationGroup);
+		}
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, relativeParams, null, conditionParams,
+				"and");
+
+		if (numUpdated == 1) {
+			this.segmentationGroup = segmentationGroup;
+			return true;
+		}
+		return false;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -1447,6 +1473,8 @@ public class User implements Serializable {
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
@@ -1477,8 +1505,53 @@ public class User implements Serializable {
 				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
 				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
 				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
-				+ boughtRiggedBoosterPack + ", totalStrength=" + totalStrength
-				+ "]";
+				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
+				+ ", lastPurchaseTime=" + lastPurchaseTime
+				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
+				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
+				+ segmentationGroup + "]";
 	}
+
+	public int getSalesValue() {
+		return salesValue;
+	}
+
+	public void setSalesValue(int salesValue) {
+		this.salesValue = salesValue;
+	}
+
+	public Date getLastPurchaseTime() {
+		return lastPurchaseTime;
+	}
+
+	public void setLastPurchaseTime(Date lastPurchaseTime) {
+		this.lastPurchaseTime = lastPurchaseTime;
+	}
+
+	public boolean isSalesJumpTwoTiers() {
+		return salesJumpTwoTiers;
+	}
+
+	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
+		this.salesJumpTwoTiers = salesJumpTwoTiers;
+	}
+
+	public long getTotalStrength() {
+		return totalStrength;
+	}
+
+	public void setTotalStrength(long totalStrength) {
+		this.totalStrength = totalStrength;
+
+	}
+
+	public int getSegmentationGroup() {
+		return segmentationGroup;
+	}
+
+	public void setSegmentationGroup(int segmentationGroup) {
+		this.segmentationGroup = segmentationGroup;
+	}
+
 
 }

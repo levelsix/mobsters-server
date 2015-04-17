@@ -25,7 +25,7 @@ public class MonsterRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_CONFIG;
 
-	public static Map<Integer, Monster> getMonsterIdsToMonsters() {
+	public Map<Integer, Monster> getMonsterIdsToMonsters() {
 		log.debug("retrieving all monsteres data map");
 		if (monsterIdsToMonsters == null) {
 			setStaticMonsterIdsToMonsters();
@@ -33,7 +33,7 @@ public class MonsterRetrieveUtils {
 		return monsterIdsToMonsters;
 	}
 
-	public static Monster getMonsterForMonsterId(int monsterId) {
+	public Monster getMonsterForMonsterId(int monsterId) {
 		log.debug("retrieve monster data for monster " + monsterId);
 		if (monsterIdsToMonsters == null) {
 			setStaticMonsterIdsToMonsters();
@@ -47,7 +47,7 @@ public class MonsterRetrieveUtils {
 		}
 	}
 
-	public static Map<Integer, Monster> getMonstersForMonsterIds(
+	public Map<Integer, Monster> getMonstersForMonsterIds(
 			Collection<Integer> ids) {
 		log.debug("retrieve monster data for monsterids " + ids);
 		if (monsterIdsToMonsters == null) {
@@ -64,7 +64,7 @@ public class MonsterRetrieveUtils {
 		return toreturn;
 	}
 
-	public static Monster getEvolvedFormForMonster(int monsterId) {
+	public Monster getEvolvedFormForMonster(int monsterId) {
 		if (null == monsterIdsToMonsters) {
 			setStaticMonsterIdsToMonsters();
 		}
@@ -75,7 +75,7 @@ public class MonsterRetrieveUtils {
 		return monsterIdsToMonsters.get(evolvedId);
 	}
 
-	private static void setStaticMonsterIdsToMonsters() {
+	private void setStaticMonsterIdsToMonsters() {
 		log.debug("setting static map of monsterIds to monsters");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -109,14 +109,14 @@ public class MonsterRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticMonsterIdsToMonsters();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Monster convertRSRowToMonster(ResultSet rs)
+	private Monster convertRSRowToMonster(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MONSTER__ID);
 		String evolutionGroup = rs

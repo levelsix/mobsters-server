@@ -70,10 +70,19 @@ public class AttackClanRaidMonsterController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected ClanStuffUtils clanStuffUtils;
+
+	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected ClanEventUtil clanEventUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtil;
@@ -86,6 +95,20 @@ public class AttackClanRaidMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
+	
+	@Autowired
+	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
+	
+	@Autowired 
+	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+
 
 	public AttackClanRaidMonsterController() {
 		numAllocatedThreads = 4;
@@ -121,7 +144,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		List<UserMonsterCurrentHealthProto> monsterHealthProtos = reqProto
 				.getMonsterHealthsList();
 		Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
-		MonsterStuffUtils.getUserMonsterIds(monsterHealthProtos,
+		monsterStuffUtils.getUserMonsterIds(monsterHealthProtos,
 				userMonsterIdToExpectedHealth);
 
 		FullUserMonsterProto userMonsterThatAttacked = reqProto
@@ -198,7 +221,7 @@ public class AttackClanRaidMonsterController extends EventController {
 				if (!clanEventList.isEmpty()) {
 					clanEvent = clanEventList.get(0);
 				}
-				ClanEventPersistentForClan clanEventClientSent = ClanStuffUtils
+				ClanEventPersistentForClan clanEventClientSent = clanStuffUtils
 						.createClanEventPersistentForClan(eventDetails);
 
 				//clanevent MIGHT BE MODIFIED (this will always be sent to the client)
@@ -298,7 +321,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		ClanEventPersistentForClan raidStartedByClan = clanEventPersistentForClanRetrieveUtil
 				.getPersistentEventForClanId(clanId);
 
-		ClanEventPersistentForClan eventClientSent = ClanStuffUtils
+		ClanEventPersistentForClan eventClientSent = clanStuffUtils
 				.createClanEventPersistentForClan(eventDetails);
 
 		//still want to deduct user's monsters' healths
@@ -425,9 +448,9 @@ public class AttackClanRaidMonsterController extends EventController {
 			getAllClanUserDmgInfo(userId, clanId, newDmg, userIdToCepfu);
 		}
 
-		ClanRaidStage nextStage = ClanRaidStageRetrieveUtils
+		ClanRaidStage nextStage = clanRaidStageRetrieveUtils
 				.getNextStageForClanRaidStageId(curCrsId, curCrId);
-		ClanRaidStageMonster curStageNextCrsm = ClanRaidStageMonsterRetrieveUtils
+		ClanRaidStageMonster curStageNextCrsm = clanRaidStageMonsterRetrieveUtils
 				.getNextMonsterForClanRaidStageMonsterId(curCrsmId, curCrsId);
 
 		if (null == nextStage && monsterDied) {
@@ -476,7 +499,7 @@ public class AttackClanRaidMonsterController extends EventController {
 					.getPersistentEventUserInfoForUserIdClanId(userId, clanId);
 
 			//want to send to everyone in clan this user's clan event information
-			PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+			PersistentClanEventUserInfoProto pceuip = createInfoProtoUtils
 					.createPersistentClanEventUserInfoProto(cepfu, null,
 							ucmtp.getCurrentTeamList());
 			resBuilder.addClanUsersDetails(pceuip);
@@ -507,7 +530,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			int dmgDealt,
 			Map<String, ClanEventPersistentForUser> userIdToCepfu,
 			List<Integer> newDmgList) {
-		ClanRaidStageMonster crsm = ClanRaidStageMonsterRetrieveUtils
+		ClanRaidStageMonster crsm = clanRaidStageMonsterRetrieveUtils
 				.getClanRaidStageMonsterForClanRaidStageMonsterId(crsmId);
 
 		//userIdToCepfu might actually be populated
@@ -668,7 +691,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			DeleteUtils.get().deleteClanEventPersistentForUsers(userIdList);
 
 			//record to the clan raid stage user history
-			int stageHp = ClanRaidStageRetrieveUtils
+			int stageHp = clanRaidStageRetrieveUtils
 					.getClanRaidStageHealthForCrsId(crsId);
 			numInserted = InsertUtils.get().insertIntoCepfuRaidStageHistory(
 					clanEventId, stageStartTime, now, stageHp, userIdToCepfu);
@@ -696,7 +719,7 @@ public class AttackClanRaidMonsterController extends EventController {
 				.getTime());
 
 		int nextCrsId = nextStage.getId();
-		ClanRaidStageMonster nextCrsFirstCrsm = ClanRaidStageMonsterRetrieveUtils
+		ClanRaidStageMonster nextCrsFirstCrsm = clanRaidStageMonsterRetrieveUtils
 				.getFirstMonsterForClanRaidStage(nextCrsId);
 
 		if (null == nextCrsFirstCrsm) {
@@ -736,7 +759,7 @@ public class AttackClanRaidMonsterController extends EventController {
 				replaceCrsmDmg);
 
 		//record to the clan raid stage user history, since stage ended
-		int stageHp = ClanRaidStageRetrieveUtils
+		int stageHp = clanRaidStageRetrieveUtils
 				.getClanRaidStageHealthForCrsId(curCrsId);
 		int numInserted = InsertUtils.get().insertIntoCepfuRaidStageHistory(
 				eventId, stageStartTime, curTime, stageHp, userIdToCepfu);
@@ -788,14 +811,14 @@ public class AttackClanRaidMonsterController extends EventController {
 	private List<ClanEventPersistentUserReward> awardRewards(int crsId,
 			Date crsStartDate, Date crsEndDate, int clanEventId,
 			Map<String, ClanEventPersistentForUser> userIdToCepfu) {
-		int stageHp = ClanRaidStageRetrieveUtils
+		int stageHp = clanRaidStageRetrieveUtils
 				.getClanRaidStageHealthForCrsId(crsId);
 		Timestamp crsStartTime = new Timestamp(crsStartDate.getTime());
 		Timestamp crsEndTime = new Timestamp(crsEndDate.getTime());
 
 		List<ClanEventPersistentUserReward> allRewards = new ArrayList<ClanEventPersistentUserReward>();
 
-		Map<Integer, ClanRaidStageReward> rewardIdsToRewards = ClanRaidStageRewardRetrieveUtils
+		Map<Integer, ClanRaidStageReward> rewardIdsToRewards = clanRaidStageRewardRetrieveUtils
 				.getClanRaidStageRewardsForClanRaidStageId(crsId);
 
 		//for each user generate the rewards he gets based on his contribution
@@ -852,13 +875,13 @@ public class AttackClanRaidMonsterController extends EventController {
 		//TODO: FIGURE OUT IF CURRENCY CALCULATION IS OK (right now just truncating the value) 
 		//create the userOilReward maybe
 		int userOilReward = (int) ((reward.getOilDrop()) * userCrsContribution);
-		createClanEventPersistentUserReward(MiscMethods.OIL, userOilReward,
+		createClanEventPersistentUserReward(miscMethods.OIL, userOilReward,
 				staticDataId, crsId, crsStartDate, crsEndDate, clanEventId,
 				userId, userRewards);
 
 		//create the userOilReward maybe  	
 		int userCashReward = (int) ((reward.getCashDrop()) * userCrsContribution);
-		createClanEventPersistentUserReward(MiscMethods.CASH, userCashReward,
+		createClanEventPersistentUserReward(miscMethods.CASH, userCashReward,
 				staticDataId, crsId, crsStartDate, crsEndDate, clanEventId,
 				userId, userRewards);
 
@@ -876,7 +899,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			//user gets the monster reward
 			staticDataId = monsterId;
 			int quantity = 1;
-			createClanEventPersistentUserReward(MiscMethods.MONSTER,
+			createClanEventPersistentUserReward(miscMethods.MONSTER,
 					staticDataId, quantity, crsId, crsStartDate, crsEndDate,
 					clanEventId, userId, userRewards);
 		}
@@ -907,7 +930,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		if (!clanEventList.isEmpty()) {
 			ClanEventPersistentForClan cepfc = clanEventList.get(0);
 			if (null != cepfc) {
-				PersistentClanEventClanInfoProto updatedEventDetails = CreateInfoProtoUtils
+				PersistentClanEventClanInfoProto updatedEventDetails = createInfoProtoUtils
 						.createPersistentClanEventClanInfoProto(cepfc);
 				resBuilder.setEventDetails(updatedEventDetails);
 			}
@@ -918,14 +941,14 @@ public class AttackClanRaidMonsterController extends EventController {
 			Map<String, ClanEventPersistentForUser> userIdToCepfu) {
 		if (!userIdToCepfu.isEmpty()) {
 			//whenever server has this information send it to the clients
-			List<String> userMonsterIds = MonsterStuffUtils
+			List<String> userMonsterIds = monsterStuffUtils
 					.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 			Map<String, MonsterForUser> idsToUserMonsters = monsterForUserRetrieveUtil
 					.getSpecificUserMonsters(userMonsterIds);
 
 			for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-				PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+				PersistentClanEventUserInfoProto pceuip = createInfoProtoUtils
 						.createPersistentClanEventUserInfoProto(cepfu,
 								idsToUserMonsters, null);
 				resBuilder.addClanUsersDetails(pceuip);
@@ -950,7 +973,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		resBuilder.setCrsId(crsId);
 
 		for (ClanEventPersistentUserReward reward : allRewards) {
-			PersistentClanEventUserRewardProto rewardProto = CreateInfoProtoUtils
+			PersistentClanEventUserRewardProto rewardProto = createInfoProtoUtils
 					.createPersistentClanEventUserRewardProto(reward);
 			resBuilder.addAllRewards(rewardProto);
 		}

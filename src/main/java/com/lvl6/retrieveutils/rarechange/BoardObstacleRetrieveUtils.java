@@ -26,7 +26,7 @@ public class BoardObstacleRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BOARD_OBSTACLE_CONFIG;
 
-	public static Map<Integer, BoardObstacle> getIdsToBoardObstacles() {
+	public Map<Integer, BoardObstacle> getIdsToBoardObstacles() {
 		log.debug("retrieving all BoardObstacles data map");
 		if (null == idsToBoardObstacles) {
 			setStaticIdsToBoardObstacles();
@@ -34,7 +34,7 @@ public class BoardObstacleRetrieveUtils {
 		return idsToBoardObstacles;
 	}
 
-	public static BoardObstacle getBoardObstacleForId(int boardObstacleId) {
+	public BoardObstacle getBoardObstacleForId(int boardObstacleId) {
 		log.debug(String.format(
 				"retrieve boardObstacle data for boardObstacle=%s",
 				boardObstacleId));
@@ -44,7 +44,7 @@ public class BoardObstacleRetrieveUtils {
 		return idsToBoardObstacles.get(boardObstacleId);
 	}
 
-	private static void setStaticIdsToBoardObstacles() {
+	private void setStaticIdsToBoardObstacles() {
 		log.debug("setting static map of boardObstacleIds to boardObstacles");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -84,14 +84,14 @@ public class BoardObstacleRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdsToBoardObstacles();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static BoardObstacle convertRSRowToBoardObstacle(ResultSet rs)
+	private BoardObstacle convertRSRowToBoardObstacle(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.BOARD_OBSTACLE__ID);
 		String name = rs.getString(DBConstants.BOARD_OBSTACLE__NAME);

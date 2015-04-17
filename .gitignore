@@ -13,6 +13,7 @@ src/main/resources/KingdomAPNSProdKey.p12
 .classpath
 .settings/
 .metadata
+.cache
 
 target/
 */target/
@@ -20,6 +21,7 @@ target/
 #generated files
 bin/
 gen/
+log/
 
 */target/*
 target/

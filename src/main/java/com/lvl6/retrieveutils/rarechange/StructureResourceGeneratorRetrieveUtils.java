@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +23,15 @@ public class StructureResourceGeneratorRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureResourceGenerator> structIdsToResourceGenerators;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_GENERATOR_CONFIG;
 
-	public static Map<Integer, StructureResourceGenerator> getStructIdsToResourceGenerators() {
+	public Map<Integer, StructureResourceGenerator> getStructIdsToResourceGenerators() {
 		log.debug("retrieving all structs data");
 		if (structIdsToResourceGenerators == null) {
 			setStaticStructIdsToResourceGenerators();
@@ -35,7 +39,7 @@ public class StructureResourceGeneratorRetrieveUtils {
 		return structIdsToResourceGenerators;
 	}
 
-	public static StructureResourceGenerator getResourceGeneratorForStructId(
+	public StructureResourceGenerator getResourceGeneratorForStructId(
 			int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToResourceGenerators == null) {
@@ -44,13 +48,13 @@ public class StructureResourceGeneratorRetrieveUtils {
 		return structIdsToResourceGenerators.get(structId);
 	}
 
-	public static StructureResourceGenerator getUpgradedResourceGeneratorForStructId(
+	public StructureResourceGenerator getUpgradedResourceGeneratorForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToResourceGenerators == null) {
 			setStaticStructIdsToResourceGenerators();
 		}
-		Structure curStruct = StructureRetrieveUtils
+		Structure curStruct = structureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -61,13 +65,13 @@ public class StructureResourceGeneratorRetrieveUtils {
 		return null;
 	}
 
-	public static StructureResourceGenerator getPredecessorResourceGeneratorForStructId(
+	public StructureResourceGenerator getPredecessorResourceGeneratorForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToResourceGenerators == null) {
 			setStaticStructIdsToResourceGenerators();
 		}
-		Structure curStruct = StructureRetrieveUtils
+		Structure curStruct = structureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -78,7 +82,7 @@ public class StructureResourceGeneratorRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToResourceGenerators() {
+	private void setStaticStructIdsToResourceGenerators() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -112,14 +116,14 @@ public class StructureResourceGeneratorRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToResourceGenerators();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureResourceGenerator convertRSRowToResourceGenerator(
+	private StructureResourceGenerator convertRSRowToResourceGenerator(
 			ResultSet rs) throws SQLException {
 		int structId = rs
 				.getInt(DBConstants.STRUCTURE_RESOURCE_GENERATOR__STRUCT_ID);

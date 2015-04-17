@@ -46,6 +46,7 @@ import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskComplete
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -66,6 +67,9 @@ public class EndDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -81,6 +85,24 @@ public class EndDungeonController extends EventController {
 
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
+	
+	@Autowired
+	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
+	
+	@Autowired
+	protected TaskRetrieveUtils taskRetrieveUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	public EndDungeonController() {
 		numAllocatedThreads = 4;
@@ -171,7 +193,7 @@ public class EndDungeonController extends EventController {
 				taskId = ut.getTaskId();
 				resBuilder.setTaskId(taskId);
 
-				tme = TaskMapElementRetrieveUtils
+				tme = taskMapElementRetrieveUtils
 						.getTaskMapElementForTaskId(taskId);
 				oldUtc = taskForUserCompletedRetrieveUtil
 						.getCompletedTaskForUser(userId, taskId);
@@ -211,10 +233,10 @@ public class EndDungeonController extends EventController {
 					mfusopB.append(" ");
 					mfusopB.append(taskForUserId);
 					String mfusop = mfusopB.toString();
-					List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+					List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 							.updateUserMonsters(userId, monsterIdToNumPieces,
 									monsterIdToLvlToQuantity, mfusop,
-									currentDate);
+									currentDate, monsterLevelInfoRetrieveUtils);
 
 					awardOneTimeItem(resBuilder, userId, itemId, taskId, tme);
 
@@ -235,7 +257,7 @@ public class EndDungeonController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -306,7 +328,7 @@ public class EndDungeonController extends EventController {
 
 		if (firstTimeUserWonTask && null != tme) {
 			//first time user completed task, TaskMapElement has extra rewards
-			Task t = TaskRetrieveUtils.getTaskForTaskId(taskId);
+			Task t = taskRetrieveUtils.getTaskForTaskId(taskId);
 			expGained += t.getExpReward();
 			remainingCash = tme.getCashReward();
 			remainingOil = tme.getOilReward();
@@ -332,10 +354,10 @@ public class EndDungeonController extends EventController {
 				return false;
 			} else {
 				if (0 != cashGained) {
-					money.put(MiscMethods.cash, cashGained);
+					money.put(miscMethods.cash, cashGained);
 				}
 				if (0 != oilGained) {
-					money.put(MiscMethods.oil, oilGained);
+					money.put(miscMethods.oil, oilGained);
 				}
 			}
 		}
@@ -376,7 +398,7 @@ public class EndDungeonController extends EventController {
 		List<Integer> unclaimedResourceContainer = new ArrayList<Integer>();
 
 		//unclaimedCash is populated after this call
-		int cashGained = calcResourceGained(MiscMethods.CASH, u.getCash(),
+		int cashGained = calcResourceGained(miscMethods.CASH, u.getCash(),
 				ut.getCashGained(), maxCash, remainingCash,
 				unclaimedResourceContainer);
 
@@ -384,7 +406,7 @@ public class EndDungeonController extends EventController {
 		//could reset unclaimedResourceContainer... 
 
 		//unclaimedOil is populated after this call
-		int oilGained = calcResourceGained(MiscMethods.OIL, u.getOil(),
+		int oilGained = calcResourceGained(miscMethods.OIL, u.getOil(),
 				ut.getOilGained(), maxOil, remainingOil,
 				unclaimedResourceContainer);
 		utc.setUnclaimedOil(unclaimedResourceContainer.get(1));
@@ -396,7 +418,7 @@ public class EndDungeonController extends EventController {
 	private int calcResourceGained(String resource, int currentResourceAmt,
 			int resourceGained, int maxResourceAmt, int additionalResources,
 			List<Integer> unclaimedResourceContainer) {
-		int cappedResourceGained = MiscMethods.capResourceGain(
+		int cappedResourceGained = miscMethods.capResourceGain(
 				currentResourceAmt, resourceGained, maxResourceAmt);
 		if (cappedResourceGained < resourceGained) {
 			//this means the user collected resources beyond storage capacity
@@ -423,7 +445,7 @@ public class EndDungeonController extends EventController {
 		}
 
 		int resourceGained2 = resourceGained + additionalResources;
-		cappedResourceGained = MiscMethods.capResourceGain(currentResourceAmt,
+		cappedResourceGained = miscMethods.capResourceGain(currentResourceAmt,
 				resourceGained2, maxResourceAmt);
 
 		if (cappedResourceGained < resourceGained2) {
@@ -511,7 +533,7 @@ public class EndDungeonController extends EventController {
 			monsterPieceDropped.add(dropped);
 			itemIdDropped.add(tsfu.getItemIdDropped());
 
-			TaskStageMonster tsm = TaskStageMonsterRetrieveUtils
+			TaskStageMonster tsm = taskStageMonsterRetrieveUtils
 					.getTaskStageMonsterForId(tsmId);
 			monsterIdDrops.add(tsm.getMonsterIdDrop());
 			monsterDropLvls.add(tsm.getMonsterDropLvl());
@@ -553,7 +575,7 @@ public class EndDungeonController extends EventController {
 		//retrieve those task stage monsters. aggregate the quantities by monster id
 		//assume different task stage monsters can be the same monster
 		Collection<Integer> tsmIds = tsmIdToQuantity.keySet();
-		Map<Integer, TaskStageMonster> monstersThatDropped = TaskStageMonsterRetrieveUtils
+		Map<Integer, TaskStageMonster> monstersThatDropped = taskStageMonsterRetrieveUtils
 				.getTaskStageMonstersForIds(tsmIds);
 
 		for (int tsmId : tsmIds) {
@@ -621,7 +643,7 @@ public class EndDungeonController extends EventController {
 
 			if (ifuList.size() > 0) {
 				ItemForUser ifu = ifuList.get(0);
-				UserItemProto uip = CreateInfoProtoUtils
+				UserItemProto uip = createInfoProtoUtils
 						.createUserItemProtoFromUserItem(ifu);
 				resBuilder.setUserItem(uip);
 				//	        resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
@@ -647,7 +669,7 @@ public class EndDungeonController extends EventController {
 			resBuilder.addAllUpdatedOrNew(protos);
 		}
 
-		resBuilder.setUtcp(CreateInfoProtoUtils
+		resBuilder.setUtcp(createInfoProtoUtils
 				.createUserTaskCompletedProto(utc));
 	}
 
@@ -736,8 +758,8 @@ public class EndDungeonController extends EventController {
 		sb.append(userTaskId);
 		sb.append(" taskId=");
 		sb.append(taskId);
-		String cash = MiscMethods.cash;
-		String oil = MiscMethods.oil;
+		String cash = miscMethods.cash;
+		String oil = miscMethods.oil;
 		String reasonForChange = ControllerConstants.UCHRFC__END_TASK;
 
 		String userId = aUser.getId();
@@ -759,7 +781,7 @@ public class EndDungeonController extends EventController {
 		reasonsForChanges.put(oil, reasonForChange);
 		detailsMap.put(cash, sb.toString());
 		detailsMap.put(oil, sb.toString());
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				detailsMap);
 

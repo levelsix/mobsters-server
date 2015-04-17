@@ -42,12 +42,18 @@ public class ReviveInDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public ReviveInDungeonController() {
 		numAllocatedThreads = 4;
@@ -144,7 +150,7 @@ public class ReviveInDungeonController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -193,7 +199,7 @@ public class ReviveInDungeonController extends EventController {
 		//    }
 
 		//extract the ids so it's easier to get userMonsters from db
-		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
 				reviveMeProtoList, userMonsterIdToExpectedHealth);
 		Map<String, MonsterForUser> userMonsters = getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
@@ -242,7 +248,7 @@ public class ReviveInDungeonController extends EventController {
 			return false;
 		} else {
 			if (0 != gemsChange) {
-				currencyChange.put(MiscMethods.gems, gemsSpent);
+				currencyChange.put(miscMethods.gems, gemsSpent);
 			}
 		}
 
@@ -306,14 +312,14 @@ public class ReviveInDungeonController extends EventController {
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reason = ControllerConstants.UCHRFC__REVIVE_IN_DUNGEON;
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		previousCurrency.put(gems, previousGems);
 		currentCurrency.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

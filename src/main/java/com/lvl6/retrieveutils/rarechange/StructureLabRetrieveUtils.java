@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +23,15 @@ public class StructureLabRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureLab> structIdsToLabs;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_LAB_CONFIG;
 
-	public static Map<Integer, StructureLab> getStructIdsToLabs() {
+	public Map<Integer, StructureLab> getStructIdsToLabs() {
 		log.debug("retrieving all structs data");
 		if (structIdsToLabs == null) {
 			setStaticStructIdsToLabs();
@@ -35,7 +39,7 @@ public class StructureLabRetrieveUtils {
 		return structIdsToLabs;
 	}
 
-	public static StructureLab getLabForStructId(int structId) {
+	public StructureLab getLabForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToLabs == null) {
 			setStaticStructIdsToLabs();
@@ -43,12 +47,12 @@ public class StructureLabRetrieveUtils {
 		return structIdsToLabs.get(structId);
 	}
 
-	public static StructureLab getUpgradedLabForStructId(int structId) {
+	public StructureLab getUpgradedLabForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToLabs == null) {
 			setStaticStructIdsToLabs();
 		}
-		Structure curStruct = StructureRetrieveUtils
+		Structure curStruct = structureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -59,12 +63,12 @@ public class StructureLabRetrieveUtils {
 		return null;
 	}
 
-	public static StructureLab getPredecessorLabForStructId(int structId) {
+	public StructureLab getPredecessorLabForStructId(int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToLabs == null) {
 			setStaticStructIdsToLabs();
 		}
-		Structure curStruct = StructureRetrieveUtils
+		Structure curStruct = structureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -75,7 +79,7 @@ public class StructureLabRetrieveUtils {
 		return null;
 	}
 
-	private static void setStaticStructIdsToLabs() {
+	private void setStaticStructIdsToLabs() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -109,14 +113,14 @@ public class StructureLabRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToLabs();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static StructureLab convertRSRowToLab(ResultSet rs)
+	private StructureLab convertRSRowToLab(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_LAB__STRUCT_ID);
 		int queueSize = rs.getInt(DBConstants.STRUCTURE_LAB__QUEUE_SIZE);

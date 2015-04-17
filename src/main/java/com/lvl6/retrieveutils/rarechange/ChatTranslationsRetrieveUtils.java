@@ -33,7 +33,7 @@ public class ChatTranslationsRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CHAT_TRANSLATIONS;
 
-	public static Map<String, ChatTranslations> getChatTranslationsIdsToChatTranslationss() {
+	public Map<String, ChatTranslations> getChatTranslationsIdsToChatTranslationss() {
 		log.debug("retrieving all ChatTranslationss data map");
 		if (chatTranslationsIdsToChatTranslationss == null) {
 			setStaticChatTranslationsIdsToChatTranslationss();
@@ -41,7 +41,7 @@ public class ChatTranslationsRetrieveUtils {
 		return chatTranslationsIdsToChatTranslationss;
 	}
 
-	public static ChatTranslations getChatTranslationsForChatTranslationsId(String chatTranslationsId) {
+	public ChatTranslations getChatTranslationsForChatTranslationsId(String chatTranslationsId) {
 		log.debug("retrieve chatTranslations data for chatTranslations " + chatTranslationsId);
 		if (chatTranslationsIdsToChatTranslationss == null) {
 			setStaticChatTranslationsIdsToChatTranslationss();
@@ -49,7 +49,7 @@ public class ChatTranslationsRetrieveUtils {
 		return chatTranslationsIdsToChatTranslationss.get(chatTranslationsId);
 	}
 	
-	public static Map<String, List<ChatTranslations>> getChatTranslationsForSpecificChatIds(List<String> chatIds) {
+	public Map<String, List<ChatTranslations>> getChatTranslationsForSpecificChatIds(List<String> chatIds) {
 		log.debug("retrieve chatTranslations data for chat Ids " + chatIds);
 		if (chatIdsToChatTranslations == null) {
 			setStaticChatTranslationsIdsToChatTranslationss();
@@ -65,7 +65,7 @@ public class ChatTranslationsRetrieveUtils {
 		return chatTranslationsMap;
 	}
 	
-	public static void addChatTranslationToMap(ChatTranslations ct) {
+	public void addChatTranslationToMap(ChatTranslations ct) {
 		if (chatTranslationsIdsToChatTranslationss == null) {
 			setStaticChatTranslationsIdsToChatTranslationss();
 		}
@@ -83,7 +83,7 @@ public class ChatTranslationsRetrieveUtils {
 
 	}
 
-	private static void setStaticChatTranslationsIdsToChatTranslationss() {
+	private void setStaticChatTranslationsIdsToChatTranslationss() {
 		log.debug("setting static map of chatTranslationsIds to chatTranslationss");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -129,14 +129,14 @@ public class ChatTranslationsRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticChatTranslationsIdsToChatTranslationss();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static ChatTranslations convertRSRowToChatTranslations(ResultSet rs)
+	private ChatTranslations convertRSRowToChatTranslations(ResultSet rs)
 			throws SQLException {
 		String id = rs.getString(DBConstants.CHAT_TRANSLATIONS__ID);
 		String chatTypeString = rs.getString(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE);

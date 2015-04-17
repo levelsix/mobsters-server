@@ -235,6 +235,10 @@ public interface UpdateUtil {
 	public abstract boolean updateUserResearchCompleteStatus(
 			String userResearchUuid);
 	
+	public abstract boolean updateUserSalesValue(String userId, int newSalesValue, Date now);
+	
+	public abstract boolean updateUserSalesJumpTwoTiers(String userId, boolean jumpTwoTiers);
+	
 	public abstract boolean updateUserBattleItems(String userId,
 			List<BattleItemForUser> updateList);
 	
@@ -245,5 +249,8 @@ public interface UpdateUtil {
 			String chatType, String language, boolean translateOn);
 	
 	public abstract boolean updateUserStrength(String userId, long updatedStrength);
+	
+	public abstract boolean updateUserSalesLastPurchaseTime(String userId, Timestamp ts);
+
 
 }

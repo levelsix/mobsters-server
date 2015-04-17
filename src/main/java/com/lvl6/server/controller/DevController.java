@@ -30,6 +30,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -47,7 +48,19 @@ public class DevController extends EventController {
 	}
 
 	@Autowired
+	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -123,7 +136,7 @@ public class DevController extends EventController {
 			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
 
-			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+			UpdateClientUserResponseEvent resEventUpdate = miscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 							aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
@@ -167,9 +180,9 @@ public class DevController extends EventController {
 					Collections.singletonMap(1, quantity));
 
 			String mfusop = "cheater, cheater, pumpkin eater";
-			List<FullUserMonsterProto> reward = MonsterStuffUtils
+			List<FullUserMonsterProto> reward = monsterStuffUtils
 					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity,
-							mfusop, new Date());
+							mfusop, new Date(), monsterLevelInfoRetrieveUtils);
 			resBuilder.addAllFump(reward);
 			break;
 
@@ -208,7 +221,7 @@ public class DevController extends EventController {
 			ItemForUser ifu = (itemForUserRetrieveUtil
 					.getSpecificOrAllItemForUser(userId,
 							Collections.singleton(staticDataId))).get(0);
-			UserItemProto uip = CreateInfoProtoUtils
+			UserItemProto uip = createInfoProtoUtils
 					.createUserItemProtoFromUserItem(ifu);
 			resBuilder.setUip(uip);
 			break;

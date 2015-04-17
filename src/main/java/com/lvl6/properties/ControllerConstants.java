@@ -69,7 +69,7 @@ public class ControllerConstants {
 	public static final float[] CLAN_HELP__PERCENT_REMOVED = { 0.01F, 0.01F,
 			0.01F, 0.01F, 0.01F, 0.01F, 0.01F };
 
-	
+
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 
@@ -106,6 +106,7 @@ public class ControllerConstants {
 
 	//MFUSOP = monster_for_user_source_of_pieces
 	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
+	public static final String MFUSOP__SALES_PACKAGE = "salesPackageId";
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId";
 	public static final String MFUSOP__MINI_JOB = "miniJobId";
 	public static final String MFUSOP__PVP = "pvp";
@@ -213,7 +214,7 @@ public class ControllerConstants {
 
 	public static final String TRANSLATION_SETTINGS__DEFAULT_LANGUAGE = "ENGLISH";
 	public static final boolean TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON = false;
-	
+
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
 	//the monster id that is used in tutorial
@@ -267,6 +268,8 @@ public class ControllerConstants {
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
 	public static final String UCHRFC__IN_APP_PURCHASE = "in app purchase: ";
 	public static final String UCHRFC__IN_APP_PURCHASE_MONEY_TREE = "in app purchase: money tree";
+	public static final String UCHRFC__IN_APP_PURCHASE_STARTER_PACK = "in app purchase: starter pack";
+	public static final String UCHRFC__IN_APP_PURCHASE_SALES_PACK = "in app purchase: sales pack";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
 	public static final String UCHRFC__PERFORMING_RESEARCH = "performing research";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
@@ -275,6 +278,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__PVP_BATTLE = "pvp battle";
 	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
 	public static final String UCHRFC__REMOVE_OBSTACLE = "remove obstacle";
+	public static final String UCHRFC__RESET_MINI_JOB = "reset_mini_job";
 	public static final String UCHRFC__REVIVE_IN_DUNGEON = "revive in dungeon";
 	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
 	public static final String UCHRFC__SOLICIT_CLAN_MEMBER_TEAM_DONATION = "solicit clan member team donation";

@@ -41,8 +41,11 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -60,7 +63,13 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 	protected HazelcastPvpUtil hazelcastPvpUtil;
 
 	@Autowired
+	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtil;
+
+	@Autowired
 	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
+
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtil;
 
 	@Autowired
 	protected TimeUtils timeUtil;
@@ -88,6 +97,15 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+
+	@Autowired
+	private MonsterStuffUtils monsterStuffUtil;
+
+	@Autowired
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+
+	@Autowired
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil;
 
 	@Autowired
 	private InsertUtil insertUtil;
@@ -138,7 +156,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 		int elo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
 		int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
-		List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils
+		List<PvpLeague> pvpLeagueList = pvpLeagueRetrieveUtil
 				.getLeaguesForElo(elo);
 		if (pvpLeagueList.size() > 1) {
 			log.error(
@@ -150,7 +168,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 			pvpLeagueId = pvpLeagueList.get(0).getId();
 		}
 
-		int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, pvpLeagueId);
+		int rank = pvpLeagueRetrieveUtil.getRankForElo(elo, pvpLeagueId);
 
 		int numInserted = InsertUtils.get().insertPvpLeagueForUser(userId,
 				pvpLeagueId, rank, elo, createTime, createTime);
@@ -227,7 +245,8 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				monsterForUserRetrieveUtil, clanMemberTeamDonationRetrieveUtil,
 				monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 				pvpLeagueForUserRetrieveUtil,
-				pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil);
+				pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
+				monsterStuffUtil, serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil);
 		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
 				.newBuilder();
 		rumta.execute(resBuilder);
@@ -238,7 +257,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 						+ rumta.getAllButRetrieverUserIdToUserMonsters(),
 				amount, rumta.getAllButRetrieverUserIdToUserMonsters().size());
 
-		List<PvpProto> ppList = CreateInfoProtoUtils.createPvpProtos(
+		List<PvpProto> ppList = createInfoProtoUtil.createPvpProtos(
 				rumta.getAllUsersExceptRetriever(), rumta.getUserIdToClan(),
 				null, rumta.getUserIdToPvpUsers(),
 				rumta.getAllButRetrieverUserIdToUserMonsters(),
@@ -376,6 +395,66 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public PvpLeagueRetrieveUtils getPvpLeagueRetrieveUtil() {
+		return pvpLeagueRetrieveUtil;
+	}
+
+	public void setPvpLeagueRetrieveUtil(
+			PvpLeagueRetrieveUtils pvpLeagueRetrieveUtil) {
+		this.pvpLeagueRetrieveUtil = pvpLeagueRetrieveUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtil() {
+		return createInfoProtoUtil;
+	}
+
+	public void setCreateInfoProtoUtil(CreateInfoProtoUtils createInfoProtoUtil) {
+		this.createInfoProtoUtil = createInfoProtoUtil;
+	}
+
+	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {
+		return researchForUserRetrieveUtil;
+	}
+
+	public void setResearchForUserRetrieveUtil(
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
+		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtil() {
+		return monsterStuffUtil;
+	}
+
+	public void setMonsterStuffUtil(MonsterStuffUtils monsterStuffUtil) {
+		this.monsterStuffUtil = monsterStuffUtil;
+	}
+
+	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
+		return serverToggleRetrieveUtil;
+	}
+
+	public void setServerToggleRetrieveUtil(
+			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
+		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtil() {
+		return monsterLevelInfoRetrieveUtil;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtil(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil) {
+		this.monsterLevelInfoRetrieveUtil = monsterLevelInfoRetrieveUtil;
+	}
+
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 }

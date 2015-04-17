@@ -94,6 +94,32 @@ public final class EventInAppPurchaseProto {
      */
     com.google.protobuf.ByteString
         getIpaddrBytes();
+
+    /**
+     * <code>optional string uuid = 7;</code>
+     *
+     * <pre>
+     *uuid for sales packages
+     * </pre>
+     */
+    boolean hasUuid();
+    /**
+     * <code>optional string uuid = 7;</code>
+     *
+     * <pre>
+     *uuid for sales packages
+     * </pre>
+     */
+    java.lang.String getUuid();
+    /**
+     * <code>optional string uuid = 7;</code>
+     *
+     * <pre>
+     *uuid for sales packages
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseRequestProto}
@@ -188,6 +214,12 @@ public final class EventInAppPurchaseProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
               ipaddr_ = bs;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              uuid_ = bs;
               break;
             }
           }
@@ -461,6 +493,60 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    public static final int UUID_FIELD_NUMBER = 7;
+    private java.lang.Object uuid_;
+    /**
+     * <code>optional string uuid = 7;</code>
+     *
+     * <pre>
+     *uuid for sales packages
+     * </pre>
+     */
+    public boolean hasUuid() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string uuid = 7;</code>
+     *
+     * <pre>
+     *uuid for sales packages
+     * </pre>
+     */
+    public java.lang.String getUuid() {
+      java.lang.Object ref = uuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          uuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string uuid = 7;</code>
+     *
+     * <pre>
+     *uuid for sales packages
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUuidBytes() {
+      java.lang.Object ref = uuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        uuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       receipt_ = "";
@@ -468,6 +554,7 @@ public final class EventInAppPurchaseProto {
       localcurrency_ = "";
       locale_ = "";
       ipaddr_ = "";
+      uuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -499,6 +586,9 @@ public final class EventInAppPurchaseProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getIpaddrBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -532,6 +622,10 @@ public final class EventInAppPurchaseProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getIpaddrBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -667,6 +761,8 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         ipaddr_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        uuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -723,6 +819,10 @@ public final class EventInAppPurchaseProto {
           to_bitField0_ |= 0x00000020;
         }
         result.ipaddr_ = ipaddr_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.uuid_ = uuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -765,6 +865,11 @@ public final class EventInAppPurchaseProto {
         if (other.hasIpaddr()) {
           bitField0_ |= 0x00000020;
           ipaddr_ = other.ipaddr_;
+          onChanged();
+        }
+        if (other.hasUuid()) {
+          bitField0_ |= 0x00000040;
+          uuid_ = other.uuid_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -1290,6 +1395,106 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      private java.lang.Object uuid_ = "";
+      /**
+       * <code>optional string uuid = 7;</code>
+       *
+       * <pre>
+       *uuid for sales packages
+       * </pre>
+       */
+      public boolean hasUuid() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string uuid = 7;</code>
+       *
+       * <pre>
+       *uuid for sales packages
+       * </pre>
+       */
+      public java.lang.String getUuid() {
+        java.lang.Object ref = uuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            uuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string uuid = 7;</code>
+       *
+       * <pre>
+       *uuid for sales packages
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUuidBytes() {
+        java.lang.Object ref = uuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          uuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string uuid = 7;</code>
+       *
+       * <pre>
+       *uuid for sales packages
+       * </pre>
+       */
+      public Builder setUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        uuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string uuid = 7;</code>
+       *
+       * <pre>
+       *uuid for sales packages
+       * </pre>
+       */
+      public Builder clearUuid() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        uuid_ = getDefaultInstance().getUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string uuid = 7;</code>
+       *
+       * <pre>
+       *uuid for sales packages
+       * </pre>
+       */
+      public Builder setUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        uuid_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InAppPurchaseRequestProto)
     }
 
@@ -1496,6 +1701,45 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
         int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    boolean hasSuccessorSalesPackage();
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProto getSuccessorSalesPackage();
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+     */
+    boolean hasPurchasedSalesPackage();
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProto getPurchasedSalesPackage();
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+     */
+    com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getPurchasedSalesPackageOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+     */
+    boolean hasRewards();
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserRewardProto getRewards();
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseResponseProto}
@@ -1626,6 +1870,45 @@ public final class EventInAppPurchaseProto {
                 mutable_bitField0_ |= 0x00000200;
               }
               updatedMoneyTree_.add(input.readMessage(com.lvl6.proto.StructureProto.FullUserStructureProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 90: {
+              com.lvl6.proto.SalesProto.SalesPackageProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = successorSalesPackage_.toBuilder();
+              }
+              successorSalesPackage_ = input.readMessage(com.lvl6.proto.SalesProto.SalesPackageProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(successorSalesPackage_);
+                successorSalesPackage_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
+              break;
+            }
+            case 98: {
+              com.lvl6.proto.SalesProto.SalesPackageProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                subBuilder = purchasedSalesPackage_.toBuilder();
+              }
+              purchasedSalesPackage_ = input.readMessage(com.lvl6.proto.SalesProto.SalesPackageProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(purchasedSalesPackage_);
+                purchasedSalesPackage_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000100;
+              break;
+            }
+            case 106: {
+              com.lvl6.proto.RewardsProto.UserRewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000200) == 0x00000200)) {
+                subBuilder = rewards_.toBuilder();
+              }
+              rewards_ = input.readMessage(com.lvl6.proto.RewardsProto.UserRewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rewards_);
+                rewards_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000200;
               break;
             }
           }
@@ -2081,6 +2364,69 @@ public final class EventInAppPurchaseProto {
       return updatedMoneyTree_.get(index);
     }
 
+    public static final int SUCCESSORSALESPACKAGE_FIELD_NUMBER = 11;
+    private com.lvl6.proto.SalesProto.SalesPackageProto successorSalesPackage_;
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    public boolean hasSuccessorSalesPackage() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProto getSuccessorSalesPackage() {
+      return successorSalesPackage_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder() {
+      return successorSalesPackage_;
+    }
+
+    public static final int PURCHASEDSALESPACKAGE_FIELD_NUMBER = 12;
+    private com.lvl6.proto.SalesProto.SalesPackageProto purchasedSalesPackage_;
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+     */
+    public boolean hasPurchasedSalesPackage() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProto getPurchasedSalesPackage() {
+      return purchasedSalesPackage_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+     */
+    public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getPurchasedSalesPackageOrBuilder() {
+      return purchasedSalesPackage_;
+    }
+
+    public static final int REWARDS_FIELD_NUMBER = 13;
+    private com.lvl6.proto.RewardsProto.UserRewardProto rewards_;
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+     */
+    public boolean hasRewards() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserRewardProto getRewards() {
+      return rewards_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder() {
+      return rewards_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
@@ -2092,6 +2438,9 @@ public final class EventInAppPurchaseProto {
       updatedOrNew_ = java.util.Collections.emptyList();
       updatedUserItems_ = java.util.Collections.emptyList();
       updatedMoneyTree_ = java.util.Collections.emptyList();
+      successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+      purchasedSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+      rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2135,6 +2484,15 @@ public final class EventInAppPurchaseProto {
       }
       for (int i = 0; i < updatedMoneyTree_.size(); i++) {
         output.writeMessage(10, updatedMoneyTree_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(11, successorSalesPackage_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(12, purchasedSalesPackage_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(13, rewards_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2184,6 +2542,18 @@ public final class EventInAppPurchaseProto {
       for (int i = 0; i < updatedMoneyTree_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, updatedMoneyTree_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, successorSalesPackage_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, purchasedSalesPackage_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, rewards_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2302,6 +2672,9 @@ public final class EventInAppPurchaseProto {
           getUpdatedOrNewFieldBuilder();
           getUpdatedUserItemsFieldBuilder();
           getUpdatedMoneyTreeFieldBuilder();
+          getSuccessorSalesPackageFieldBuilder();
+          getPurchasedSalesPackageFieldBuilder();
+          getRewardsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2346,6 +2719,24 @@ public final class EventInAppPurchaseProto {
         } else {
           updatedMoneyTreeBuilder_.clear();
         }
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+        } else {
+          successorSalesPackageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        if (purchasedSalesPackageBuilder_ == null) {
+          purchasedSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+        } else {
+          purchasedSalesPackageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000800);
+        if (rewardsBuilder_ == null) {
+          rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+        } else {
+          rewardsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -2432,6 +2823,30 @@ public final class EventInAppPurchaseProto {
           result.updatedMoneyTree_ = updatedMoneyTree_;
         } else {
           result.updatedMoneyTree_ = updatedMoneyTreeBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        if (successorSalesPackageBuilder_ == null) {
+          result.successorSalesPackage_ = successorSalesPackage_;
+        } else {
+          result.successorSalesPackage_ = successorSalesPackageBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        if (purchasedSalesPackageBuilder_ == null) {
+          result.purchasedSalesPackage_ = purchasedSalesPackage_;
+        } else {
+          result.purchasedSalesPackage_ = purchasedSalesPackageBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (rewardsBuilder_ == null) {
+          result.rewards_ = rewards_;
+        } else {
+          result.rewards_ = rewardsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2551,6 +2966,15 @@ public final class EventInAppPurchaseProto {
               updatedMoneyTreeBuilder_.addAllMessages(other.updatedMoneyTree_);
             }
           }
+        }
+        if (other.hasSuccessorSalesPackage()) {
+          mergeSuccessorSalesPackage(other.getSuccessorSalesPackage());
+        }
+        if (other.hasPurchasedSalesPackage()) {
+          mergePurchasedSalesPackage(other.getPurchasedSalesPackage());
+        }
+        if (other.hasRewards()) {
+          mergeRewards(other.getRewards());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3838,6 +4262,354 @@ public final class EventInAppPurchaseProto {
           updatedMoneyTree_ = null;
         }
         return updatedMoneyTreeBuilder_;
+      }
+
+      private com.lvl6.proto.SalesProto.SalesPackageProto successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> successorSalesPackageBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public boolean hasSuccessorSalesPackage() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto getSuccessorSalesPackage() {
+        if (successorSalesPackageBuilder_ == null) {
+          return successorSalesPackage_;
+        } else {
+          return successorSalesPackageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder setSuccessorSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (successorSalesPackageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          successorSalesPackage_ = value;
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder setSuccessorSalesPackage(
+          com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackage_ = builderForValue.build();
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder mergeSuccessorSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (successorSalesPackageBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              successorSalesPackage_ != com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance()) {
+            successorSalesPackage_ =
+              com.lvl6.proto.SalesProto.SalesPackageProto.newBuilder(successorSalesPackage_).mergeFrom(value).buildPartial();
+          } else {
+            successorSalesPackage_ = value;
+          }
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public Builder clearSuccessorSalesPackage() {
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+          onChanged();
+        } else {
+          successorSalesPackageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder getSuccessorSalesPackageBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getSuccessorSalesPackageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder() {
+        if (successorSalesPackageBuilder_ != null) {
+          return successorSalesPackageBuilder_.getMessageOrBuilder();
+        } else {
+          return successorSalesPackage_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+          getSuccessorSalesPackageFieldBuilder() {
+        if (successorSalesPackageBuilder_ == null) {
+          successorSalesPackageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
+                  getSuccessorSalesPackage(),
+                  getParentForChildren(),
+                  isClean());
+          successorSalesPackage_ = null;
+        }
+        return successorSalesPackageBuilder_;
+      }
+
+      private com.lvl6.proto.SalesProto.SalesPackageProto purchasedSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> purchasedSalesPackageBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public boolean hasPurchasedSalesPackage() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto getPurchasedSalesPackage() {
+        if (purchasedSalesPackageBuilder_ == null) {
+          return purchasedSalesPackage_;
+        } else {
+          return purchasedSalesPackageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public Builder setPurchasedSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (purchasedSalesPackageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          purchasedSalesPackage_ = value;
+          onChanged();
+        } else {
+          purchasedSalesPackageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public Builder setPurchasedSalesPackage(
+          com.lvl6.proto.SalesProto.SalesPackageProto.Builder builderForValue) {
+        if (purchasedSalesPackageBuilder_ == null) {
+          purchasedSalesPackage_ = builderForValue.build();
+          onChanged();
+        } else {
+          purchasedSalesPackageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public Builder mergePurchasedSalesPackage(com.lvl6.proto.SalesProto.SalesPackageProto value) {
+        if (purchasedSalesPackageBuilder_ == null) {
+          if (((bitField0_ & 0x00000800) == 0x00000800) &&
+              purchasedSalesPackage_ != com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance()) {
+            purchasedSalesPackage_ =
+              com.lvl6.proto.SalesProto.SalesPackageProto.newBuilder(purchasedSalesPackage_).mergeFrom(value).buildPartial();
+          } else {
+            purchasedSalesPackage_ = value;
+          }
+          onChanged();
+        } else {
+          purchasedSalesPackageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public Builder clearPurchasedSalesPackage() {
+        if (purchasedSalesPackageBuilder_ == null) {
+          purchasedSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
+          onChanged();
+        } else {
+          purchasedSalesPackageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000800);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProto.Builder getPurchasedSalesPackageBuilder() {
+        bitField0_ |= 0x00000800;
+        onChanged();
+        return getPurchasedSalesPackageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      public com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getPurchasedSalesPackageOrBuilder() {
+        if (purchasedSalesPackageBuilder_ != null) {
+          return purchasedSalesPackageBuilder_.getMessageOrBuilder();
+        } else {
+          return purchasedSalesPackage_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> 
+          getPurchasedSalesPackageFieldBuilder() {
+        if (purchasedSalesPackageBuilder_ == null) {
+          purchasedSalesPackageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
+                  getPurchasedSalesPackage(),
+                  getParentForChildren(),
+                  isClean());
+          purchasedSalesPackage_ = null;
+        }
+        return purchasedSalesPackageBuilder_;
+      }
+
+      private com.lvl6.proto.RewardsProto.UserRewardProto rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> rewardsBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public boolean hasRewards() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProto getRewards() {
+        if (rewardsBuilder_ == null) {
+          return rewards_;
+        } else {
+          return rewardsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public Builder setRewards(com.lvl6.proto.RewardsProto.UserRewardProto value) {
+        if (rewardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rewards_ = value;
+          onChanged();
+        } else {
+          rewardsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public Builder setRewards(
+          com.lvl6.proto.RewardsProto.UserRewardProto.Builder builderForValue) {
+        if (rewardsBuilder_ == null) {
+          rewards_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public Builder mergeRewards(com.lvl6.proto.RewardsProto.UserRewardProto value) {
+        if (rewardsBuilder_ == null) {
+          if (((bitField0_ & 0x00001000) == 0x00001000) &&
+              rewards_ != com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance()) {
+            rewards_ =
+              com.lvl6.proto.RewardsProto.UserRewardProto.newBuilder(rewards_).mergeFrom(value).buildPartial();
+          } else {
+            rewards_ = value;
+          }
+          onChanged();
+        } else {
+          rewardsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public Builder clearRewards() {
+        if (rewardsBuilder_ == null) {
+          rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00001000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProto.Builder getRewardsBuilder() {
+        bitField0_ |= 0x00001000;
+        onChanged();
+        return getRewardsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder() {
+        if (rewardsBuilder_ != null) {
+          return rewardsBuilder_.getMessageOrBuilder();
+        } else {
+          return rewards_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> 
+          getRewardsFieldBuilder() {
+        if (rewardsBuilder_ == null) {
+          rewardsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder>(
+                  getRewards(),
+                  getParentForChildren(),
+                  isClean());
+          rewards_ = null;
+        }
+        return rewardsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InAppPurchaseResponseProto)
@@ -6926,52 +7698,58 @@ public final class EventInAppPurchaseProto {
     java.lang.String[] descriptorData = {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
       "to\032\023InAppPurchase.proto\032\nItem.proto\032\022Mon" +
-      "sterStuff.proto\032\017Structure.proto\032\nUser.p" +
-      "roto\"\251\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
+      "sterStuff.proto\032\014Reward.proto\032\013Sales.pro" +
+      "to\032\017Structure.proto\032\nUser.proto\"\267\001\n\031InAp" +
+      "pPurchaseRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\017\n\007recei" +
+      "pt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(\t\022\025\n\rlocalcur" +
+      "rency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t\022\016\n\006ipaddr\030\006 " +
+      "\001(\t\022\014\n\004uuid\030\007 \001(\t\"\275\005\n\032InAppPurchaseRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot",
+      "o.MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com" +
+      ".lvl6.proto.InAppPurchaseResponseProto.I" +
+      "nAppPurchaseStatus\022\026\n\016diamondsGained\030\003 \001" +
+      "(\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001\022\023\n\013packageNa" +
+      "me\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receip" +
+      "t\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6" +
+      ".proto.FullUserMonsterProto\0227\n\020updatedUs" +
+      "erItems\030\t \003(\0132\035.com.lvl6.proto.UserItemP" +
+      "roto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl" +
+      "6.proto.FullUserStructureProto\022@\n\025succes",
+      "sorSalesPackage\030\013 \001(\0132!.com.lvl6.proto.S" +
+      "alesPackageProto\022@\n\025purchasedSalesPackag" +
+      "e\030\014 \001(\0132!.com.lvl6.proto.SalesPackagePro" +
+      "to\0220\n\007rewards\030\r \001(\0132\037.com.lvl6.proto.Use" +
+      "rRewardProto\"C\n\023InAppPurchaseStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020" +
+      "\003\"\260\001\n\034EarnFreeDiamondsRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
-      "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
-      "\022\016\n\006ipaddr\030\006 \001(\t\"\207\004\n\032InAppPurchaseRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com.",
-      "lvl6.proto.InAppPurchaseResponseProto.In" +
-      "AppPurchaseStatus\022\026\n\016diamondsGained\030\003 \001(" +
-      "\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001\022\023\n\013packageNam" +
-      "e\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receipt" +
-      "\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6." +
-      "proto.FullUserMonsterProto\0227\n\020updatedUse" +
-      "rItems\030\t \003(\0132\035.com.lvl6.proto.UserItemPr" +
-      "oto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl6" +
-      ".proto.FullUserStructureProto\"C\n\023InAppPu" +
-      "rchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021D",
-      "UPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamondsR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022J\n\020freeDiamondsTyp" +
-      "e\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
-      "sType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(\003\"\353\002" +
-      "\n\035EarnFreeDiamondsResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.EarnF" +
-      "reeDiamondsResponseProto.EarnFreeDiamond" +
-      "sStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$.com.",
-      "lvl6.proto.EarnFreeDiamondsType:\nFB_CONN" +
-      "ECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUCCESS" +
-      "\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020" +
-      "\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER_FAI" +
-      "L\020\004\"\335\001\n$ExchangeGemsForResourcesRequestP" +
-      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
-      "nimumUserProtoWithMaxResources\022\017\n\007numGem" +
-      "s\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014resourc" +
-      "eType\030\004 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
-      "e:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\252\002\n%Exchange",
-      "GemsForResourcesResponseProto\022@\n\006sender\030" +
-      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022d\n\006status\030\002 \001(\0162T.com.lv" +
-      "l6.proto.ExchangeGemsForResourcesRespons" +
-      "eProto.ExchangeGemsForResourcesStatus\"Y\n" +
-      "\036ExchangeGemsForResourcesStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
-      "T_GEMS\020\003B\031B\027EventInAppPurchaseProto"
+      "roto\022J\n\020freeDiamondsType\030\002 \001(\0162$.com.lvl" +
+      "6.proto.EarnFreeDiamondsType:\nFB_CONNECT",
+      "\022\022\n\nclientTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamond" +
+      "sResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022T\n\006status\030\002 \001(\016" +
+      "2D.com.lvl6.proto.EarnFreeDiamondsRespon" +
+      "seProto.EarnFreeDiamondsStatus\022J\n\020freeDi" +
+      "amondsType\030\003 \001(\0162$.com.lvl6.proto.EarnFr" +
+      "eeDiamondsType:\nFB_CONNECT\"v\n\026EarnFreeDi" +
+      "amondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_" +
+      "APART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_S" +
+      "UPPORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeG",
+      "emsForResourcesRequestProto\022@\n\006sender\030\001 " +
+      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
+      "hMaxResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numRes" +
+      "ources\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com" +
+      ".lvl6.proto.ResourceType:\004CASH\022\022\n\nclient" +
+      "Time\030\005 \001(\003\"\252\002\n%ExchangeGemsForResourcesR" +
+      "esponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
+      "proto.MinimumUserProtoWithMaxResources\022d" +
+      "\n\006status\030\002 \001(\0162T.com.lvl6.proto.Exchange" +
+      "GemsForResourcesResponseProto.ExchangeGe",
+      "msForResourcesStatus\"Y\n\036ExchangeGemsForR" +
+      "esourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
+      "R\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B\027Event" +
+      "InAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6987,6 +7765,8 @@ public final class EventInAppPurchaseProto {
           com.lvl6.proto.InAppPurchaseProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SalesProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -6995,13 +7775,13 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", });
+        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", "Uuid", });
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", });
+        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", "SuccessorSalesPackage", "PurchasedSalesPackage", "Rewards", });
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new
@@ -7029,6 +7809,8 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.InAppPurchaseProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SalesProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

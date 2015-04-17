@@ -26,7 +26,7 @@ public class StructureRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_CONFIG;
 
-	public static Map<Integer, Structure> getStructIdsToStructs() {
+	public Map<Integer, Structure> getStructIdsToStructs() {
 		log.debug("retrieving all structs data");
 		if (structIdsToStructs == null) {
 			setStaticStructIdsToStructs();
@@ -34,7 +34,7 @@ public class StructureRetrieveUtils {
 		return structIdsToStructs;
 	}
 
-	public static Structure getStructForStructId(int structId) {
+	public Structure getStructForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToStructs == null) {
 			setStaticStructIdsToStructs();
@@ -42,7 +42,7 @@ public class StructureRetrieveUtils {
 		return structIdsToStructs.get(structId);
 	}
 
-	public static Structure getUpgradedStructForStructId(int structId) {
+	public Structure getUpgradedStructForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToStructs == null) {
 			setStaticStructIdsToStructs();
@@ -58,7 +58,7 @@ public class StructureRetrieveUtils {
 		return null;
 	}
 
-	public static Structure getPredecessorStructForStructId(int structId) {
+	public Structure getPredecessorStructForStructId(int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (null == structIdsToStructs) {
 			setStaticStructIdsToStructs();
@@ -75,7 +75,7 @@ public class StructureRetrieveUtils {
 	}
 
 	//RECURSION!!!
-	public static Structure getPredecessorStructForStructIdAndLvl(int structId,
+	public Structure getPredecessorStructForStructIdAndLvl(int structId,
 			int lvl) {
 		log.debug("retrieve predecessor struct data for structId=" + structId
 				+ " and lvl=" + lvl);
@@ -100,7 +100,7 @@ public class StructureRetrieveUtils {
 
 	}
 
-	private static void setStaticStructIdsToStructs() {
+	private void setStaticStructIdsToStructs() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -134,14 +134,14 @@ public class StructureRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticStructIdsToStructs();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Structure convertRSRowToStruct(ResultSet rs)
+	private Structure convertRSRowToStruct(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.STRUCTURE__ID);
 		String name = rs.getString(DBConstants.STRUCTURE__NAME);

@@ -20,6 +20,7 @@ import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMin
 import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.UpdateMiniEventAction;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -37,6 +38,9 @@ public class UpdateMiniEventController extends EventController {
 	@Autowired
 	protected InsertUtil insertUtil;
 
+	@Autowired
+	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new UpdateMiniEventRequestEvent();
@@ -95,7 +99,7 @@ public class UpdateMiniEventController extends EventController {
 			List<MiniEventGoalForUser> megfuList = javafyUserMiniEventProto(umegpList);
 
 			UpdateMiniEventAction rmea = new UpdateMiniEventAction(
-					userId, megfuList, insertUtil);
+					userId, megfuList, insertUtil, miniEventGoalRetrieveUtils);
 
 			rmea.execute(resBuilder);
 

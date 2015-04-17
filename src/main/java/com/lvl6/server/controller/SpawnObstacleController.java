@@ -39,6 +39,12 @@ public class SpawnObstacleController extends EventController {
 
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected Locker locker;
@@ -118,7 +124,7 @@ public class SpawnObstacleController extends EventController {
 			if (success) {
 				//client needs the object protos but with the ids set
 				for (ObstacleForUser ofu : ofuList) {
-					UserObstacleProto obp = CreateInfoProtoUtils
+					UserObstacleProto obp = createInfoProtoUtils
 							.createUserObstacleProto(ofu);
 					resBuilder.addSpawnedObstacles(obp);
 				}
@@ -133,7 +139,7 @@ public class SpawnObstacleController extends EventController {
 			if (success) {
 				//modified the user, the last obstacle removed time
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());

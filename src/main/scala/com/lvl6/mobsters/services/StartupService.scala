@@ -36,6 +36,7 @@ import com.lvl6.info.MonsterHealingForUser
 import com.lvl6.info.PvpBattleForUser
 import com.lvl6.info.PvpLeagueForUser
 import com.lvl6.info.QuestForUser
+import com.lvl6.info.SalesPackage
 import com.lvl6.info.TaskForUserClientState
 import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
@@ -44,6 +45,7 @@ import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
+import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
 import com.lvl6.proto.ChatProto.ChatType
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto
@@ -59,6 +61,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
@@ -105,8 +108,19 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2
 import com.lvl6.retrieveutils.UserRetrieveUtils2
+import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.server.EventWriter
 import com.lvl6.server.GameServer
@@ -122,7 +136,11 @@ import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
 import com.lvl6.server.controller.actionobjects.StartUpResource
+import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
+import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
+import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
+import com.lvl6.server.controller.utils.SecretGiftUtils
 import com.lvl6.server.controller.utils.TimeUtils
 import com.lvl6.server.metrics.Metrics._
 import com.lvl6.utils.CreateInfoProtoUtils
@@ -195,12 +213,31 @@ class StartupService extends LazyLogging{
   @Autowired var  userFacebookInviteForSlotRetrieveUtils : UserFacebookInviteForSlotRetrieveUtils2  = null
   @Autowired var  userRetrieveUtils : UserRetrieveUtils2  = null
   
-  @Autowired var  createInfoProtoUtils : CreateInfoProtoUtils =null
+  @Autowired var  customMenuRetrieveUtil : CustomMenuRetrieveUtils = null
+  @Autowired var  inAppPurchaseUtil : InAppPurchaseUtils = null
+  @Autowired var  miniEventRetrieveUtil : MiniEventRetrieveUtils = null
+  @Autowired var  miniEventForPlayerLvlRetrieveUtil : MiniEventForPlayerLvlRetrieveUtils = null
+  @Autowired var  miniEventGoalRetrieveUtil : MiniEventGoalRetrieveUtils = null
+  @Autowired var  miniEventLeaderboardRewardRetrieveUtil : MiniEventLeaderboardRewardRetrieveUtils = null
+  @Autowired var  miniEventTierRewardRetrieveUtil : MiniEventTierRewardRetrieveUtils = null
+  @Autowired var  monsterLevelInfoRetrieveUtil : MonsterLevelInfoRetrieveUtils = null
+  @Autowired var  pvpLeagueRetrieveUtil : PvpLeagueRetrieveUtils  = null
+  @Autowired var  questRetrieveUtil : QuestRetrieveUtils  = null
+  @Autowired var  salesDisplayItemRetrieveUtil : SalesDisplayItemRetrieveUtils = null
+  @Autowired var  salesItemRetrieveUtil : SalesItemRetrieveUtils = null
+  @Autowired var  salesPackageRetrieveUtil : SalesPackageRetrieveUtils = null
+  @Autowired var  serverToggleRetrieveUtil : ServerToggleRetrieveUtils = null
+  @Autowired var  startupStuffRetrieveUtil : StartupStuffRetrieveUtils = null
+  
+  @Autowired var  createInfoProtoUtils : CreateInfoProtoUtils = null
   @Autowired var  deleteUtil : DeleteUtil = null
   @Autowired var  insertUtil : InsertUtil = null
   @Autowired var  updateUtil : UpdateUtil = null
   @Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
+  @Autowired var  monsterStuffUtil : MonsterStuffUtils = null
+  @Autowired var  secretGiftUtil : SecretGiftUtils = null
   @Autowired var  timeUtils : TimeUtils  = null
+  @Autowired var  miscMethods: MiscMethods = null
   @Autowired var  locker :  Locker = null
   @Autowired var  eventWriter:EventWriter = null
   
@@ -221,7 +258,7 @@ class StartupService extends LazyLogging{
       apsalarId = reqProto.getApsalarId()
     }
     var playerId:String = null;
-    MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
+    miscMethods.setMDCProperties(udid, null, miscMethods.getIPOfPlayer(server, null, udid));
     var version:VersionNumberProto  = null;
     if (reqProto.hasVersionNumberProto()) {
       version = reqProto.getVersionNumberProto();
@@ -399,8 +436,12 @@ class StartupService extends LazyLogging{
       forceLogoutOthers(udid, playerId, user, fbId)
       logger.info(s"no major update... getting user info")
       val userId = playerId;
+      
+      //NOTE: will only ever be executed once for each user
+      setUserSegmentationGroup(resBuilder, user, userId)
+      
       val userInfo:Future[PvpLeagueForUser] = for{
-        //sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
+        sipaaq <-  setInProgressAndAvailableQuests(resBuilder, userId)
         suci <-    setUserClanInfos(resBuilder, userId)
         sntp <-    setNoticesToPlayers(resBuilder)
         sums <-    setUserMonsterStuff(resBuilder, userId)
@@ -410,13 +451,13 @@ class StartupService extends LazyLogging{
         spbo <-    setPvpBoardObstacles(resBuilder, userId)
         sas  <-    setAchievementStuff(resBuilder, playerId)
         smj  <-    setMiniJob(resBuilder, playerId)
-        sui  <-    setUserItems(resBuilder, playerId);
+        sui  <-    setUserItems(resBuilder, user, playerId);
         swpciap <- setWhetherPlayerCompletedInAppPurchase(resBuilder, user)
         ssg  <-    setSecretGifts(resBuilder, playerId, now.getTime())
         sr   <-    setResearch(resBuilder, playerId)
         sbifu <-   setBattleItemForUser(resBuilder, playerId)
         sbiqfu <-  setBattleItemQueueForUser(resBuilder, playerId)
-        //smefu <-   setMiniEventForUser(resBuilder, user, playerId, nowDate)
+        sbiqfu <-  setSalesForUser(resBuilder, user)
         scrs  <-   setClanRaidStuff(resBuilder, user, playerId, now)
         plfu  <-   pvpBattleStuff(resBuilder, user, playerId, freshRestart, now)
       } yield plfu
@@ -486,7 +527,8 @@ class StartupService extends LazyLogging{
             resBuilder, 
             user, 
             playerId,
-            userFacebookInviteForSlotRetrieveUtils);
+            userFacebookInviteForSlotRetrieveUtils,
+            createInfoProtoUtils);
         sfesa.setUp(fillMe);
     
         val spbha = new SetPvpBattleHistoryAction(
@@ -496,18 +538,37 @@ class StartupService extends LazyLogging{
             pvpBattleHistoryRetrieveUtil,
             monsterForUserRetrieveUtils, 
             clanRetrieveUtils,
-            hazelcastPvpUtil);
+            hazelcastPvpUtil,
+            monsterStuffUtil,
+            createInfoProtoUtils,
+            serverToggleRetrieveUtil,
+            monsterLevelInfoRetrieveUtil);
         spbha.setUp(fillMe);
     
         //CLAN DATA
         val cdpb = ClanDataProto.newBuilder();
-        val sccma = new SetClanChatMessageAction(cdpb, user, clanChatPostRetrieveUtils);
+        val sccma = new SetClanChatMessageAction(
+            cdpb,
+            user,
+            clanChatPostRetrieveUtils,
+            createInfoProtoUtils);
         sccma.setUp(fillMe);
     
-        val scha = new SetClanHelpingsAction(cdpb, user, playerId, clanHelpRetrieveUtil);
+        val scha = new SetClanHelpingsAction(
+            cdpb,
+            user,
+            playerId,
+            clanHelpRetrieveUtil,
+            createInfoProtoUtils);
         scha.setUp(fillMe);
     
-        val scra = new SetClanRetaliationsAction(cdpb, user, playerId, clanAvengeRetrieveUtil, clanAvengeUserRetrieveUtil);
+        val scra = new SetClanRetaliationsAction(
+            cdpb,
+            user,
+            playerId,
+            clanAvengeRetrieveUtil,
+            clanAvengeUserRetrieveUtil,
+            createInfoProtoUtils);
         scra.setUp(fillMe);
     
         val scmtda = new SetClanMemberTeamDonationAction(
@@ -515,7 +576,8 @@ class StartupService extends LazyLogging{
             user, 
             playerId, 
             clanMemberTeamDonationRetrieveUtil,
-            monsterSnapshotForUserRetrieveUtil);
+            monsterSnapshotForUserRetrieveUtil,
+            createInfoProtoUtils);
         scmtda.setUp(fillMe);
         //Now since all the ids of resources are known, get them from db
         fillMe.fetch();
@@ -542,7 +604,7 @@ class StartupService extends LazyLogging{
         if (user.getClanId() != null) {
           clan = fillMe.getClanIdsToClans().get(user.getClanId());
         }
-        val fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
+        val fup = createInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
         resBuilder.setSender(fup);
         finishStartup(sd)
       }catch{
@@ -579,6 +641,18 @@ class StartupService extends LazyLogging{
     }
   }
   
+  //NOTE: will only ever be executed once for each user,
+  def setUserSegmentationGroup(resBuilder:Builder, user:User, userId:String)= {
+      timed("StartupService.setUserSegmentationGroup"){
+        if(user.getSegmentationGroup() == 0) {
+        	val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId)
+            usga.convertUserIdIntoInt();
+            val segmentationGroup: Int = usga.getSegmentationGroup();
+            user.updateUserSegmentationGroup(segmentationGroup);
+        }
+      }
+  }
+  
   def setInProgressAndAvailableQuests(resBuilder:Builder, userId:String):Future[Unit]= {
     Future{
       timed("StartupService.setInProgressAndAvailableQuests"){
@@ -587,7 +661,7 @@ class StartupService extends LazyLogging{
           val inProgressQuests = new ArrayList[QuestForUser]()
           val questIds = new HashSet[Integer]()
           val redeemedQuestIds = new ArrayList[Integer]()
-          val questIdtoQuests = QuestRetrieveUtils.getQuestIdsToQuests
+          val questIdtoQuests = questRetrieveUtil.getQuestIdsToQuests
           inProgressAndredeemedUserQuests.foreach{ uq:QuestForUser  =>
             if(!uq.isRedeemed()) {
               inProgressQuests.add(uq)
@@ -597,7 +671,7 @@ class StartupService extends LazyLogging{
             }
           }
           val questIdtoUserQuestJobs = questJobForUserRetrieveUtil.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds)
-          val currentUserQuests = CreateInfoProtoUtils.createFullUserQuestDataLarges(inProgressQuests, questIdtoQuests, questIdtoUserQuestJobs)
+          val currentUserQuests = createInfoProtoUtils.createFullUserQuestDataLarges(inProgressQuests, questIdtoQuests, questIdtoUserQuestJobs)
           resBuilder.addAllUserQuests(currentUserQuests)
           resBuilder.addAllRedeemedQuestIds(redeemedQuestIds)
         }
@@ -610,7 +684,7 @@ class StartupService extends LazyLogging{
     Future{
       timed("StartupService.setUserClanInfos"){
         userClanRetrieveUtils.getUserClansRelatedToUser(userId).foreach{ uc:UserClan =>
-          resBuilder.addUserClanInfo(CreateInfoProtoUtils.createFullUserClanProtoFromUserClan(uc))
+          resBuilder.addUserClanInfo(createInfoProtoUtils.createFullUserClanProtoFromUserClan(uc))
         }
       }
     }
@@ -619,7 +693,7 @@ class StartupService extends LazyLogging{
   
   def setNoticesToPlayers(resBuilder:Builder):Future[Unit]= {
     Future{
-      val notices = StartupStuffRetrieveUtils.getAllActiveAlerts
+      val notices = startupStuffRetrieveUtil.getAllActiveAlerts
       if(notices != null) {
         notices.foreach(resBuilder.addNoticesToPlayers(_))
       }
@@ -641,7 +715,7 @@ class StartupService extends LazyLogging{
       timed("StartupService.setUserMonsters"){
         val userMonsters = monsterForUserRetrieveUtils.getMonstersForUser(userId)
         if(userMonsters != null) {
-          userMonsters.foreach{ mfu:MonsterForUser => resBuilder.addUsersMonsters(CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu))}
+          userMonsters.foreach{ mfu:MonsterForUser => resBuilder.addUsersMonsters(createInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu))}
         }
       }
     }
@@ -653,7 +727,7 @@ class StartupService extends LazyLogging{
         val userMonstersHealing = monsterHealingForUserRetrieveUtils.getMonstersForUser(userId)
         if(userMonstersHealing != null) {
           userMonstersHealing.values.foreach{ mhfu:MonsterHealingForUser =>
-              resBuilder.addMonstersHealing(CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu))
+              resBuilder.addMonstersHealing(createInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu))
           }
         }
       }
@@ -669,7 +743,7 @@ class StartupService extends LazyLogging{
           val feederUserMonsterIds = new ArrayList[String]();
           val feederProtos = new ArrayList[UserEnhancementItemProto]();
           userMonstersEnhancing.values().foreach{mefu =>
-            val ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu)
+            val ueip = createInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu)
             val startTime = mefu.getExpectedStartTime;
             if(startTime == null) {
               baseMonster = ueip
@@ -689,7 +763,7 @@ class StartupService extends LazyLogging{
               case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
             }
           }else {
-            val uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
+            val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
             resBuilder.setEnhancements(uep)
           }
         }
@@ -703,7 +777,7 @@ class StartupService extends LazyLogging{
         val userMonstersEvolving = monsterEvolvingForUserRetrieveUtils.getCatalystIdsToEvolutionsForUser(userId)
         if(userMonstersEvolving != null) {
           userMonstersEvolving.values.foreach{ mefu =>
-            val eup = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu)
+            val eup = createInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu)
             resBuilder.setEvolution(eup)
           }
         }
@@ -731,7 +805,7 @@ class StartupService extends LazyLogging{
     def completedTasksFuture = Future{
       timed("StartupService.setTaskStuff_completedTasks"){
         val utcList = taskForUserCompletedRetrieveUtils.getAllCompletedTasksForUser(userId)
-        resBuilder.addAllCompletedTasks(CreateInfoProtoUtils.createUserTaskCompletedProto(utcList))
+        resBuilder.addAllCompletedTasks(createInfoProtoUtils.createUserTaskCompletedProto(utcList))
         val taskIds = taskForUserCompletedRetrieveUtils.getTaskIds(utcList)
         resBuilder.addAllCompletedTaskIds(taskIds)
       }
@@ -755,7 +829,7 @@ class StartupService extends LazyLogging{
   
   def setOngoingTask(resBuilder:Builder, userId:String, aTaskForUser:TaskForUserOngoing, tfucs:TaskForUserClientState):Unit= {
     try {
-      val mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(userId, aTaskForUser, tfucs)
+      val mutp = createInfoProtoUtils.createMinimumUserTaskProto(userId, aTaskForUser, tfucs)
       resBuilder.setCurTask(mutp)
       val userTaskId = aTaskForUser.getId
       val taskStages = taskStageForUserRetrieveUtils.getTaskStagesForUserWithTaskForUserId(userTaskId)
@@ -771,7 +845,7 @@ class StartupService extends LazyLogging{
       }
       val taskId = aTaskForUser.getTaskId
       stageNumToTsfu.keySet.foreach{ stageNum =>
-        val tsp = CreateInfoProtoUtils.createTaskStageProto(taskId, stageNum, stageNumToTsfu.get(stageNum))
+        val tsp = createInfoProtoUtils.createTaskStageProto(taskId, stageNum, stageNumToTsfu.get(stageNum))
         resBuilder.addCurTaskStages(tsp)
       }
     }catch{
@@ -785,7 +859,7 @@ class StartupService extends LazyLogging{
       timed("StartupService.setEventStuff"){
         val events = eventPersistentForUserRetrieveUtils.getUserPersistentEventForUserId(userId)
         events.foreach{ epfu =>
-          resBuilder.addUserEvents(CreateInfoProtoUtils.createUserPersistentEventProto(epfu))  
+          resBuilder.addUserEvents(createInfoProtoUtils.createUserPersistentEventProto(epfu))  
         }
       }
     }
@@ -796,7 +870,7 @@ class StartupService extends LazyLogging{
     Future{
       val boList = pvpBoardObstacleForUserRetrieveUtil.getPvpBoardObstacleForUserId(userId)
       boList.foreach{ pbofu => 
-        resBuilder.addUserPvpBoardObstacles(CreateInfoProtoUtils.createUserPvpBoardObstacleProto(pbofu))  
+        resBuilder.addUserPvpBoardObstacles(createInfoProtoUtils.createUserPvpBoardObstacleProto(pbofu))  
       }
     }
   }
@@ -874,8 +948,8 @@ class StartupService extends LazyLogging{
           var defenderCurRank = 0;
           
           var attackerCurElo = attackerPlfu.getElo + eloAttackerLoses
-          attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(attackerCurElo, attackerPrevLeague)
-          attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(attackerCurElo, attackerCurLeague);
+          attackerCurLeague = pvpLeagueRetrieveUtil.getLeagueIdForElo(attackerCurElo, attackerPrevLeague)
+          attackerCurRank = pvpLeagueRetrieveUtil.getRankForElo(attackerCurElo, attackerCurLeague);
           var attacksLost = attackerPlfu.getAttacksLost+1
           
           var numUpdated = updateUtil.updatePvpLeagueForUser(userId,
@@ -897,8 +971,8 @@ class StartupService extends LazyLogging{
             defenderPrevRank = defenderPlfu.getRank();
             //update hazelcast map and ready arguments for pvp battle history
             var defenderCurElo = defenderEloBefore + eloDefenderWins;
-            defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(defenderCurElo, defenderPrevLeague);
-            defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(defenderCurElo, defenderCurLeague);
+            defenderCurLeague = pvpLeagueRetrieveUtil.getLeagueIdForElo(defenderCurElo, defenderPrevLeague);
+            defenderCurRank = pvpLeagueRetrieveUtil.getRankForElo(defenderCurElo, defenderCurLeague);
     
             var defensesWon = defenderPlfu.getDefensesWon() + 1;
     
@@ -940,7 +1014,7 @@ class StartupService extends LazyLogging{
   
   def setAllStaticData(resBuilder:Builder, userId:String, userIdSet:Boolean):Future[Unit]= {
     Future{
-      val sdp = MiscMethods.getAllStaticData(userId, userIdSet, questForUserRetrieveUtils)
+      val sdp = miscMethods.getAllStaticData(userId, userIdSet, questForUserRetrieveUtils)
       resBuilder.setStaticDataStuffProto(sdp)
     }
   }
@@ -950,7 +1024,7 @@ class StartupService extends LazyLogging{
       timed("StartupService.setAchievementStuff"){
         val achievementsIdToUserAchievements = achievementForUserRetrieveUtil.getSpecificOrAllAchievementIdToAchievementForUserId(userId, null)
         achievementsIdToUserAchievements.values.foreach{ afu =>
-          resBuilder.addUserAchievements(CreateInfoProtoUtils.createUserAchievementProto(afu))  
+          resBuilder.addUserAchievements(createInfoProtoUtils.createUserAchievementProto(afu))  
         }
       }
     }
@@ -962,34 +1036,131 @@ class StartupService extends LazyLogging{
         val miniJobIdtoUserMiniJobs = miniJobForUserRetrieveUtil.getSpecificOrAllIdToMiniJobForUser(userId, null)
         if(!miniJobIdtoUserMiniJobs.isEmpty()) {
           val mjfuList = new ArrayList[MiniJobForUser](miniJobIdtoUserMiniJobs.values)
-          resBuilder.addAllUserMiniJobProtos(CreateInfoProtoUtils.createUserMiniJobProtos(mjfuList, null))
+          resBuilder.addAllUserMiniJobProtos(createInfoProtoUtils.createUserMiniJobProtos(mjfuList, null))
         }
       }
     }
   }
   
-  def setUserItems(resBuilder:Builder, userId:String):Future[Unit]= {
+  def setUserItems(resBuilder:Builder, user:User, userId:String):Future[Unit]= {
     Future{
-      /*NOTE: DB CALL*/
-      timed("StartupService.setUserItems"){
-        val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId, null);
-        if (!itemIdToUserItems.isEmpty()) {
-          val uipList = CreateInfoProtoUtils.createUserItemProtosFromUserItems(new ArrayList[ItemForUser](itemIdToUserItems.values()));
-          resBuilder.addAllUserItems(uipList);
+        var userItemIds: java.util.Set[Integer] = null
+        timed("StartupService.setUserItems"){
+    	    val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(userId, null);
+            if (!itemIdToUserItems.isEmpty()) {
+              val uipList = createInfoProtoUtils.createUserItemProtosFromUserItems(new ArrayList[ItemForUser](itemIdToUserItems.values()));
+              resBuilder.addAllUserItems(uipList);
+            }
+            
+            //TODO: could be run in parallel with above code
+            val itemsUsed = itemForUserUsageRetrieveUtil.getItemForUserUsage(userId, null);
+            itemsUsed.foreach{ ifuu =>
+              val uiup = createInfoProtoUtils.createUserItemUsageProto(ifuu);
+              resBuilder.addItemsInUse(uiup);
+            }
+            userItemIds = itemIdToUserItems.keySet()
         }
-        /*NOTE: DB CALL*/
-        val itemsUsed = itemForUserUsageRetrieveUtil.getItemForUserUsage(userId, null);
-        itemsUsed.foreach{ ifuu =>
-          val uiup = CreateInfoProtoUtils.createUserItemUsageProto(ifuu);
-          resBuilder.addItemsInUse(uiup);
+        
+        if (userItemIds != null) {
+            setSalePack(resBuilder, user, userItemIds);
+        }
+        
+    }
+  }
+  
+  def setSalePack(resBuilder:Builder, user:User, userItemIds:java.util.Set[Integer])= {
+      timed("StartupService.setSalePack"){
+        if(serviceCombinedStarterAndBuilderPack(user)) {
+            setStarterBuilderPackForUser(resBuilder, user);
+        }
+        else {
+            setStarterPackForUser(resBuilder, user);
+            setBuilderPackForUser(resBuilder, user, userItemIds);
         }
       }
-    }
+  }
+  
+  def serviceCombinedStarterAndBuilderPack(user:User):Boolean= {
+      timed("StartupService.serviceCombinedStarterAndBuilderPack"){
+          val objArray: Array[Object] = Array("COOPER", "ALEX")
+          val floatArray: Array[java.lang.Float] = Array(0.5F, 0.5F)
+          
+          val usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
+          if(usga.returnAppropriateObjectGroup().equals("COOPER")){
+        	  return true;
+          } else {
+        	  return false;
+          }    
+      }
+  }
+  
+  //TODO: Get rid of this copy pasted code
+  def setStarterBuilderPackForUser(resBuilder:Builder, user:User)= {
+      timed("StartupService.serviceCombinedStarterAndBuilderPack"){
+          val numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
+          if(numBeginnerSalesPurchased == 0) {
+              val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages() 
+              idsToSalesPackages.values().foreach{ sp:SalesPackage =>
+                if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) {
+                    val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                            sp,
+                            salesItemRetrieveUtil,
+                            salesDisplayItemRetrieveUtil,
+                            customMenuRetrieveUtil);
+                    resBuilder.addSalesPackages(spProto);
+                }
+              }
+          }
+      }
+  }
+  //TODO: Get rid of this copy pasted code
+  def setStarterPackForUser(resBuilder: Builder, user:User)= {
+      timed("StartupService.setStarterPackForUser"){
+          val numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
+          if(numBeginnerSalesPurchased == 0) {
+              val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages() 
+              idsToSalesPackages.values().foreach{ sp:SalesPackage =>
+                if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
+                    val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                            sp,
+                            salesItemRetrieveUtil,
+                            salesDisplayItemRetrieveUtil,
+                            customMenuRetrieveUtil);
+                    resBuilder.addSalesPackages(spProto);
+                }
+              }
+          }
+      }
+  }
+  //TODO: Get rid of this copy pasted code
+  def setBuilderPackForUser(resBuilder: Builder, user:User, userItemIds:java.util.Set[Integer])= {
+      timed("StartupService.setStarterPackForUser"){
+          var hasExtraBuilder = false
+          userItemIds.foreach { itemId =>
+              //TODO: Make a constant out of this number for builder's id
+              if (itemId == 10000) {
+            	  hasExtraBuilder = true
+              }
+          }
+          
+          if(!hasExtraBuilder) {
+              val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages() 
+              idsToSalesPackages.values().foreach{ sp:SalesPackage =>
+                if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
+                    val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                            sp,
+                            salesItemRetrieveUtil,
+                            salesDisplayItemRetrieveUtil,
+                            customMenuRetrieveUtil);
+                    resBuilder.addSalesPackages(spProto);
+                }
+              }
+          }
+      }
   }
   
   def setWhetherPlayerCompletedInAppPurchase(resBuilder:Builder, user:User):Future[Unit]= {
     Future{
-      /*NOTE: DB CALL*/
       timed("StartupService.setWhetherPlayerCompletedInAppPurchase"){
         val hasPurchased = iapHistoryRetrieveUtils.checkIfUserHasPurchased(user.getId());
         resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
@@ -1012,7 +1183,7 @@ class StartupService extends LazyLogging{
         if (numGifts > 0) {
           giveGifts(userId, now, gifts, numGifts);
         }
-        val nuGiftsProtos = CreateInfoProtoUtils.createUserItemSecretGiftProto(gifts);
+        val nuGiftsProtos = createInfoProtoUtils.createUserItemSecretGiftProto(gifts);
         resBuilder.addAllGifts(nuGiftsProtos);
       }
     }
@@ -1025,7 +1196,7 @@ class StartupService extends LazyLogging{
       gifts:Collection[ItemSecretGiftForUser], 
       numGifts:Int) {
     timed("StartupService.giveGifts"){
-      var giftList = RedeemSecretGiftAction.calculateGiftsForUser(userId, numGifts, now);
+      var giftList = secretGiftUtil.calculateGiftsForUser(userId, numGifts, now);
       var ids = insertUtil.insertIntoItemSecretGiftForUserGetId(giftList);
       //need to set the ids
       if (null != ids && ids.size() == giftList.size()) {
@@ -1046,11 +1217,23 @@ class StartupService extends LazyLogging{
       timed("StartupService.setResearch"){
         val userResearchs = researchForUserRetrieveUtil.getAllResearchForUser(userId);
         if(null != userResearchs && !userResearchs.isEmpty()) {
-          val urpList = CreateInfoProtoUtils.createUserResearchProto(userResearchs);
+          val urpList = createInfoProtoUtils.createUserResearchProto(userResearchs);
           resBuilder.addAllUserResearchs(urpList);
         }
       }
     }
+  }
+  
+  def setBattleItemForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
+		  Future{
+			  timed("StartupService.setBattleItemForUser"){
+				  val bifuList = battleItemForUserRetrieveUtil.getUserBattleItemsForUser(userId);
+				  if (null != bifuList && !bifuList.isEmpty()) {
+					  val biqfupList = createInfoProtoUtils.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
+					  resBuilder.addAllBattleItem(biqfupList);
+				  }
+			  }
+		  }
   }
 
   def setBattleItemQueueForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
@@ -1058,25 +1241,57 @@ class StartupService extends LazyLogging{
       timed("StartupService.setBattleItemQueueForUser"){
         var biqfuList = battleItemQueueForUserRetrieveUtil.getUserBattleItemQueuesForUser(userId)
         if (null != biqfuList && !biqfuList.isEmpty()) {
-          val biqfupList = CreateInfoProtoUtils.createBattleItemQueueForUserProtoList(biqfuList);
+          val biqfupList = createInfoProtoUtils.createBattleItemQueueForUserProtoList(biqfuList);
           resBuilder.addAllBattleItemQueue(biqfupList);
         }
       }
     }
   }
   
-  def setBattleItemForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
+  def setSalesForUser(resBuilder:Builder ,  user:User):Future[Unit]= {
     Future{
-      timed("StartupService.setBattleItemForUser"){
-        val bifuList = battleItemForUserRetrieveUtil.getUserBattleItemsForUser(userId);
-        if (null != bifuList && !bifuList.isEmpty()) {
-          val biqfupList = CreateInfoProtoUtils.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
-          resBuilder.addAllBattleItem(biqfupList);
-        }
+      timed("StartupService.setSalesForUser"){
+          val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
+          val userSalesValue = user.getSalesValue()
+          val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
+          val now = new Date
+          
+          idsToSalesPackages.values().foreach { sp:SalesPackage =>
+              if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
+                 && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK))
+              {
+                  if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+                    val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                            sp,
+                            salesItemRetrieveUtil,
+                            salesDisplayItemRetrieveUtil,
+                            customMenuRetrieveUtil);
+                    resBuilder.addSalesPackages(spProto);
+                  }
+              }
+          }
       }
     }
   }
 
+  def priceForSalesPackToBeShown(userSalesValue:Int):Int= {
+      //TODO: Possible to rewrite it more succinctly in scala?
+      var newMinPrice = 0;
+      if(userSalesValue == 0) {
+    	  newMinPrice = 5;
+      } else if(userSalesValue == 1) {
+    	  newMinPrice = 10;
+      } else if(userSalesValue == 2) {
+    	  newMinPrice = 20;
+      } else if(userSalesValue == 3) {
+    	  newMinPrice = 50;
+      } else if(userSalesValue > 3) {
+    	  newMinPrice = 100;
+      }
+      return newMinPrice
+  }
+  
   def setDefaultLanguagesForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
     Future{
       timed("StartupService.setDefaultLanguagesForUser"){
@@ -1105,12 +1320,17 @@ class StartupService extends LazyLogging{
             miniEventForUserRetrieveUtil,
             miniEventGoalForUserRetrieveUtil, 
             insertUtil, 
-            deleteUtil);
+            deleteUtil,
+            miniEventGoalRetrieveUtil,
+            miniEventForPlayerLvlRetrieveUtil,
+            miniEventRetrieveUtil,
+            miniEventTierRewardRetrieveUtil,
+            miniEventLeaderboardRewardRetrieveUtil);
         rmea.execute(rmeaResBuilder);
         if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&  null != rmea.getCurActiveMiniEvent()){
           //get UserMiniEvent info and create the proto to set into resBuilder
           //TODO: Consider protofying MiniEvent stuff
-          val  umep = CreateInfoProtoUtils.createUserMiniEventProto(
+          val  umep = createInfoProtoUtils.createUserMiniEventProto(
                   rmea.getMefu(), 
                   rmea.getCurActiveMiniEvent(),
                   rmea.getMegfus(),
@@ -1134,7 +1354,7 @@ class StartupService extends LazyLogging{
           //get the clan raid information for the clan
           val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
           if (null != cepfc) {
-            val pcecip = CreateInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
+            val pcecip = createInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
             resBuilder.setCurRaidClanInfo(pcecip);
             /*NOTE: DB CALL*/
             //get the clan raid information for all the clan users
@@ -1144,13 +1364,13 @@ class StartupService extends LazyLogging{
             if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
               logger.info("no users involved in clan raid. clanRaid=$cepfc");
             }else {
-              val userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
+              val userMonsterIds = monsterStuffUtil.getUserMonsterIdsInClanRaid(userIdToCepfu);
               /*NOTE: DB CALL*/
               //TODO: when retrieving clan info, and user's current teams, maybe query for
               //these monsters as well
               val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
               userIdToCepfu.values.foreach { cepfu =>
-                val pceuip = CreateInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+                val pceuip = createInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
                 resBuilder.addCurRaidClanUserInfo(pceuip);
               }
               setClanRaidHistoryStuff(resBuilder, userId, nowDate);
@@ -1180,7 +1400,7 @@ class StartupService extends LazyLogging{
         if (timesToUserRewards.containsKey(aDate)) {
           rewards = timesToUserRewards.get(aDate);
         }
-        val stageProto = CreateInfoProtoUtils.createPersistentClanEventRaidStageHistoryProto(cepfursh, rewards);
+        val stageProto = createInfoProtoUtils.createPersistentClanEventRaidStageHistoryProto(cepfursh, rewards);
         resBuilder.addRaidStageHistory(stageProto);
       }
     }
@@ -1257,9 +1477,9 @@ class StartupService extends LazyLogging{
   }
   
   def setConstants(startupBuilder:Builder ,  startupStatus:StartupStatus )= {
-    startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto(globals));
+    startupBuilder.setStartupConstants(miscMethods.createStartupConstantsProto(globals));
     if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
-      val tc = MiscMethods.createTutorialConstantsProto();
+      val tc = miscMethods.createTutorialConstantsProto();
       startupBuilder.setTutorialConstants(tc);
     }
   }  

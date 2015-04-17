@@ -41,8 +41,9 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
+import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -57,6 +58,9 @@ public class RedeemMiniJobController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected MiscMethods miscMethods;
+
+	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	@Autowired
@@ -69,7 +73,16 @@ public class RedeemMiniJobController extends EventController {
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
+	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+
+	@Autowired
 	protected UpdateUtil updateUtil;
+
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public RedeemMiniJobController() {
 		numAllocatedThreads = 4;
@@ -170,7 +183,7 @@ public class RedeemMiniJobController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -229,7 +242,7 @@ public class RedeemMiniJobController extends EventController {
 
 		//sanity check
 		int miniJobId = mjfu.getMiniJobId();
-		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 		if (null == mj) {
 			log.error("no MiniJob exists with id=" + miniJobId
 					+ "\t invalid MiniJobForUser=" + mjfu);
@@ -237,7 +250,7 @@ public class RedeemMiniJobController extends EventController {
 			return false;
 		}
 
-		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
 				umchpList, userMonsterIdToExpectedHealth);
 
 		Map<String, MonsterForUser> mfuIdsToUserMonsters = getMonsterForUserRetrieveUtils()
@@ -271,7 +284,7 @@ public class RedeemMiniJobController extends EventController {
 			Map<String, Integer> currencyChange,
 			Map<String, Integer> previousCurrency) {
 		int miniJobId = mjfu.getMiniJobId();
-		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 
 		int prevGems = user.getGems();
 		int prevCash = user.getCash();
@@ -291,16 +304,16 @@ public class RedeemMiniJobController extends EventController {
 			return false;
 		} else {
 			if (0 != gemsChange) {
-				currencyChange.put(MiscMethods.gems, gemsChange);
-				previousCurrency.put(MiscMethods.gems, prevGems);
+				currencyChange.put(miscMethods.gems, gemsChange);
+				previousCurrency.put(miscMethods.gems, prevGems);
 			}
 			if (0 != cashChange) {
-				currencyChange.put(MiscMethods.cash, cashChange);
-				previousCurrency.put(MiscMethods.cash, prevCash);
+				currencyChange.put(miscMethods.cash, cashChange);
+				previousCurrency.put(miscMethods.cash, prevCash);
 			}
 			if (0 != oilChange) {
-				currencyChange.put(MiscMethods.oil, oilChange);
-				previousCurrency.put(MiscMethods.oil, prevOil);
+				currencyChange.put(miscMethods.oil, oilChange);
+				previousCurrency.put(miscMethods.oil, prevOil);
 			}
 		}
 
@@ -317,9 +330,9 @@ public class RedeemMiniJobController extends EventController {
 
 			log.info("rewarding user with {monsterId->amount}: {}",
 					monsterIdToNumPieces);
-			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now);
+							mfusop, now, monsterLevelInfoRetrieveUtils);
 			FullUserMonsterProto fump = newOrUpdated.get(0);
 			resBuilder.setFump(fump);
 		}
@@ -365,10 +378,10 @@ public class RedeemMiniJobController extends EventController {
 			//    		itemIdReward, itemRewardQuantity);
 			//    	int numUpdated = updateUtil.updateItemForUser(
 			//    		userId, itemIdReward, itemRewardQuantity);
-			//    	
-			//    	
-			//    	String preface = "rewarding user with more items."; 
-			//    	log.info( 
+			//
+			//
+			//    	String preface = "rewarding user with more items.";
+			//    	log.info(
 			//    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
 			//    		new Object[] { preface, itemIdReward, itemRewardQuantity,
 			//    			numUpdated});
@@ -382,7 +395,7 @@ public class RedeemMiniJobController extends EventController {
 			itemIdToQuantity.put(secondItemIdReward, newQuantity);
 		}
 
-		List<ItemForUser> ifuList = PurchaseBoosterPackAction
+		List<ItemForUser> ifuList = BoosterItemUtils
 				.calculateItemRewards(userId, itemForUserRetrieveUtil,
 						itemIdToQuantity);
 		return ifuList;
@@ -432,13 +445,13 @@ public class RedeemMiniJobController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		currentCurrency.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, detailsSb.toString());
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

@@ -10530,6 +10530,30 @@ public final class StructureProto {
      * <code>optional int32 hoursBetweenJobGeneration = 3;</code>
      */
     int getHoursBetweenJobGeneration();
+
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> 
+        getRefreshMiniJobItemPricesList();
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    int getRefreshMiniJobItemPricesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
+        getRefreshMiniJobItemPricesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniJobCenterProto}
@@ -10606,6 +10630,14 @@ public final class StructureProto {
               hoursBetweenJobGeneration_ = input.readInt32();
               break;
             }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                refreshMiniJobItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              refreshMiniJobItemPrices_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemGemPriceProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -10614,6 +10646,9 @@ public final class StructureProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          refreshMiniJobItemPrices_ = java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -10697,10 +10732,46 @@ public final class StructureProto {
       return hoursBetweenJobGeneration_;
     }
 
+    public static final int REFRESHMINIJOBITEMPRICES_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> refreshMiniJobItemPrices_;
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getRefreshMiniJobItemPricesList() {
+      return refreshMiniJobItemPrices_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
+        getRefreshMiniJobItemPricesOrBuilderList() {
+      return refreshMiniJobItemPrices_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    public int getRefreshMiniJobItemPricesCount() {
+      return refreshMiniJobItemPrices_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    public com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index) {
+      return refreshMiniJobItemPrices_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+     */
+    public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
+        int index) {
+      return refreshMiniJobItemPrices_.get(index);
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       generatedJobLimit_ = 0;
       hoursBetweenJobGeneration_ = 0;
+      refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10724,6 +10795,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, hoursBetweenJobGeneration_);
       }
+      for (int i = 0; i < refreshMiniJobItemPrices_.size(); i++) {
+        output.writeMessage(4, refreshMiniJobItemPrices_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -10744,6 +10818,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, hoursBetweenJobGeneration_);
+      }
+      for (int i = 0; i < refreshMiniJobItemPrices_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, refreshMiniJobItemPrices_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10855,6 +10933,7 @@ public final class StructureProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getStructInfoFieldBuilder();
+          getRefreshMiniJobItemPricesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -10873,6 +10952,12 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         hoursBetweenJobGeneration_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          refreshMiniJobItemPricesBuilder_.clear();
+        }
         return this;
       }
 
@@ -10917,6 +11002,15 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000004;
         }
         result.hoursBetweenJobGeneration_ = hoursBetweenJobGeneration_;
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            refreshMiniJobItemPrices_ = java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.refreshMiniJobItemPrices_ = refreshMiniJobItemPrices_;
+        } else {
+          result.refreshMiniJobItemPrices_ = refreshMiniJobItemPricesBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10941,6 +11035,32 @@ public final class StructureProto {
         }
         if (other.hasHoursBetweenJobGeneration()) {
           setHoursBetweenJobGeneration(other.getHoursBetweenJobGeneration());
+        }
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          if (!other.refreshMiniJobItemPrices_.isEmpty()) {
+            if (refreshMiniJobItemPrices_.isEmpty()) {
+              refreshMiniJobItemPrices_ = other.refreshMiniJobItemPrices_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureRefreshMiniJobItemPricesIsMutable();
+              refreshMiniJobItemPrices_.addAll(other.refreshMiniJobItemPrices_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.refreshMiniJobItemPrices_.isEmpty()) {
+            if (refreshMiniJobItemPricesBuilder_.isEmpty()) {
+              refreshMiniJobItemPricesBuilder_.dispose();
+              refreshMiniJobItemPricesBuilder_ = null;
+              refreshMiniJobItemPrices_ = other.refreshMiniJobItemPrices_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              refreshMiniJobItemPricesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRefreshMiniJobItemPricesFieldBuilder() : null;
+            } else {
+              refreshMiniJobItemPricesBuilder_.addAllMessages(other.refreshMiniJobItemPrices_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11147,6 +11267,246 @@ public final class StructureProto {
         hoursBetweenJobGeneration_ = 0;
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> refreshMiniJobItemPrices_ =
+        java.util.Collections.emptyList();
+      private void ensureRefreshMiniJobItemPricesIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          refreshMiniJobItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>(refreshMiniJobItemPrices_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> refreshMiniJobItemPricesBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getRefreshMiniJobItemPricesList() {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+        } else {
+          return refreshMiniJobItemPricesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public int getRefreshMiniJobItemPricesCount() {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          return refreshMiniJobItemPrices_.size();
+        } else {
+          return refreshMiniJobItemPricesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          return refreshMiniJobItemPrices_.get(index);
+        } else {
+          return refreshMiniJobItemPricesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder setRefreshMiniJobItemPrices(
+          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.set(index, value);
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder setRefreshMiniJobItemPrices(
+          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder addRefreshMiniJobItemPrices(com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.add(value);
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder addRefreshMiniJobItemPrices(
+          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.add(index, value);
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder addRefreshMiniJobItemPrices(
+          com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.add(builderForValue.build());
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder addRefreshMiniJobItemPrices(
+          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder addAllRefreshMiniJobItemPrices(
+          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProto> values) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          ensureRefreshMiniJobItemPricesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, refreshMiniJobItemPrices_);
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder clearRefreshMiniJobItemPrices() {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public Builder removeRefreshMiniJobItemPrices(int index) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          ensureRefreshMiniJobItemPricesIsMutable();
+          refreshMiniJobItemPrices_.remove(index);
+          onChanged();
+        } else {
+          refreshMiniJobItemPricesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder getRefreshMiniJobItemPricesBuilder(
+          int index) {
+        return getRefreshMiniJobItemPricesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
+          int index) {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          return refreshMiniJobItemPrices_.get(index);  } else {
+          return refreshMiniJobItemPricesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
+           getRefreshMiniJobItemPricesOrBuilderList() {
+        if (refreshMiniJobItemPricesBuilder_ != null) {
+          return refreshMiniJobItemPricesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addRefreshMiniJobItemPricesBuilder() {
+        return getRefreshMiniJobItemPricesFieldBuilder().addBuilder(
+            com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addRefreshMiniJobItemPricesBuilder(
+          int index) {
+        return getRefreshMiniJobItemPricesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder> 
+           getRefreshMiniJobItemPricesBuilderList() {
+        return getRefreshMiniJobItemPricesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
+          getRefreshMiniJobItemPricesFieldBuilder() {
+        if (refreshMiniJobItemPricesBuilder_ == null) {
+          refreshMiniJobItemPricesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder>(
+                  refreshMiniJobItemPrices_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          refreshMiniJobItemPrices_ = null;
+        }
+        return refreshMiniJobItemPricesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniJobCenterProto)
@@ -21840,127 +22200,129 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\032\026Share" +
-      "dEnumConfig.proto\"\277\006\n\022StructureInfoProto" +
-      "\022\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005leve" +
-      "l\030\003 \001(\005\022A\n\nstructType\030\004 \001(\0162-.com.lvl6.p" +
-      "roto.StructureInfoProto.StructType\0227\n\021bu" +
-      "ildResourceType\030\005 \001(\0162\034.com.lvl6.proto.R" +
-      "esourceType\022\021\n\tbuildCost\030\006 \001(\005\022\026\n\016minute" +
-      "sToBuild\030\007 \001(\005\022\r\n\005width\030\010 \001(\005\022\016\n\006height\030" +
-      "\t \001(\005\022\033\n\023predecessorStructId\030\n \001(\005\022\031\n\021su" +
-      "ccessorStructId\030\013 \001(\005\022\017\n\007imgName\030\014 \001(\t\022\036",
-      "\n\026imgVerticalPixelOffset\030\r \001(\002\022 \n\030imgHor" +
-      "izontalPixelOffset\030\016 \001(\002\022\023\n\013description\030" +
-      "\017 \001(\t\022\030\n\020shortDescription\030\020 \001(\t\022\025\n\rshado" +
-      "wImgName\030\022 \001(\t\022\034\n\024shadowVerticalOffset\030\023" +
-      " \001(\002\022\037\n\027shadowHorizontalOfffset\030\024 \001(\002\022\023\n" +
-      "\013shadowScale\030\025 \001(\002\022\020\n\010strength\030\026 \001(\005\"\374\001\n" +
-      "\nStructType\022\r\n\tNO_STRUCT\020\010\022\026\n\022RESOURCE_G" +
-      "ENERATOR\020\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSP" +
-      "ITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003" +
-      "LAB\020\006\022\007\n\003EVO\020\007\022\014\n\010MINI_JOB\020\t\022\017\n\013TEAM_CEN",
-      "TER\020\n\022\010\n\004CLAN\020\013\022\016\n\nMONEY_TREE\020\014\022\r\n\tPVP_B" +
-      "OARD\020\r\022\022\n\016RESEARCH_HOUSE\020\016\022\027\n\023BATTLE_ITE" +
-      "M_FACTORY\020\017\"\256\001\n\026ResourceGeneratorProto\0226" +
-      "\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Stru" +
-      "ctureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034.c" +
-      "om.lvl6.proto.ResourceType\022\026\n\016production" +
-      "Rate\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024Resourc" +
-      "eStorageProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
-      "lvl6.proto.StructureInfoProto\0222\n\014resourc" +
-      "eType\030\002 \001(\0162\034.com.lvl6.proto.ResourceTyp",
-      "e\022\020\n\010capacity\030\003 \001(\005\"\322\001\n\016MoneyTreeProto\0226" +
-      "\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Stru" +
-      "ctureInfoProto\022\026\n\016productionRate\030\002 \001(\002\022\020" +
-      "\n\010capacity\030\003 \001(\005\022\026\n\016daysOfDuration\030\004 \001(\005" +
-      "\022\026\n\016daysForRenewal\030\005 \001(\005\022\024\n\014iapProductId" +
-      "\030\006 \001(\t\022\030\n\020fakeIAPProductId\030\007 \001(\t\"m\n\022Rese" +
-      "archHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
-      ".lvl6.proto.StructureInfoProto\022\037\n\027resear" +
-      "chSpeedMultiplier\030\002 \001(\002\"\232\001\n\rHospitalProt" +
-      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S",
-      "tructureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\033\n\017" +
-      "healthPerSecond\030\003 \001(\002B\002\030\001\022!\n\031secsToFully" +
-      "HealMultiplier\030\004 \001(\002\"o\n\010LabProto\0226\n\nstru" +
-      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
-      "nfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\030\n\020pointsMul" +
-      "tiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\0226\n\nstru" +
-      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
-      "nfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024num" +
-      "BonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequir" +
-      "ed\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022\026",
-      "\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001(" +
-      "\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030\001 \001(\0132" +
-      "\".com.lvl6.proto.StructureInfoProto\022 \n\030n" +
-      "umResourceOneGenerators\030\002 \001(\005\022\036\n\026numReso" +
-      "urceOneStorages\030\003 \001(\005\022 \n\030numResourceTwoG" +
-      "enerators\030\004 \001(\005\022\036\n\026numResourceTwoStorage" +
-      "s\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumResi" +
-      "dences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017\n" +
-      "\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(\005" +
-      "\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoCham",
-      "bers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nstr" +
-      "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
-      "InfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n\031" +
-      "hoursBetweenJobGeneration\030\003 \001(\005\"\236\002\n\026Full" +
-      "UserStructureProto\022\026\n\016userStructUuid\030\001 \001" +
-      "(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022\025" +
-      "\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 " +
-      "\001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007" +
-      " \001(\0132\037.com.lvl6.proto.CoordinateProto\0226\n" +
-      "\013orientation\030\010 \001(\0162!.com.lvl6.proto.Stru",
-      "ctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(\005" +
-      "\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(" +
-      "\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 \001" +
-      "(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nobs" +
-      "tacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCo" +
-      "stType\030\003 \001(\0162\034.com.lvl6.proto.ResourceTy" +
-      "pe\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(" +
-      "\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgN" +
-      "ame\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001(",
-      "\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppear" +
-      "\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadowV" +
-      "erticalOffset\030\r \001(\002\022\037\n\027shadowHorizontalO" +
-      "fffset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022\n" +
-      "\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037." +
-      "com.lvl6.proto.CoordinateProto\0226\n\013orient" +
-      "ation\030\005 \001(\0162!.com.lvl6.proto.StructOrien" +
-      "tation\"\333\001\n\021UserObstacleProto\022\030\n\020userObst" +
-      "acleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobst" +
-      "acleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.",
-      "lvl6.proto.CoordinateProto\0226\n\013orientatio" +
-      "n\030\005 \001(\0162!.com.lvl6.proto.StructOrientati" +
-      "on\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017EvoCham" +
-      "berProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
-      "proto.StructureInfoProto\0228\n\017qualityUnloc" +
-      "ked\030\002 \001(\0162\027.com.lvl6.proto.Quality:\006COMM" +
-      "ON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCente" +
-      "rProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
-      "oto.StructureInfoProto\022\025\n\rteamCostLimit\030" +
-      "\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstructInfo\030\001",
-      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
-      "\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005\022\036\n\026t" +
-      "eamDonationPowerLimit\030\003 \001(\005\"h\n\022PvpBoardH" +
-      "ouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\022\032\n\022pvpBoardPow" +
-      "erLimit\030\002 \001(\005\"\240\001\n\025PvpBoardObstacleProto\022" +
-      "\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\014obs" +
-      "tacleType\030\003 \001(\0162!.com.lvl6.proto.BoardOb" +
-      "stacleType\022\020\n\010powerAmt\030\004 \001(\005\022\032\n\022initiall" +
-      "yAvailable\030\005 \001(\010\"}\n\031UserPvpBoardObstacle",
-      "Proto\022\036\n\026userPvpBoardObstacleId\030\001 \001(\005\022\020\n" +
-      "\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\022\014\n\004p" +
-      "osX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026BattleItemFac" +
-      "toryProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\022\022\n\npowerLimit\030" +
-      "\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022\010" +
-      "\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024" +
-      "*G\n\021StructOrientation\022\022\n\016NO_ORIENTATION\020" +
-      "\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*2\n\021Boa" +
-      "rdObstacleType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004H",
-      "OLE\020\003B\020B\016StructureProto"
+      "\n\017Structure.proto\022\016com.lvl6.proto\032\nItem." +
+      "proto\032\026SharedEnumConfig.proto\"\277\006\n\022Struct" +
+      "ureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002" +
+      " \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 \001(\0162" +
+      "-.com.lvl6.proto.StructureInfoProto.Stru" +
+      "ctType\0227\n\021buildResourceType\030\005 \001(\0162\034.com." +
+      "lvl6.proto.ResourceType\022\021\n\tbuildCost\030\006 \001" +
+      "(\005\022\026\n\016minutesToBuild\030\007 \001(\005\022\r\n\005width\030\010 \001(" +
+      "\005\022\016\n\006height\030\t \001(\005\022\033\n\023predecessorStructId" +
+      "\030\n \001(\005\022\031\n\021successorStructId\030\013 \001(\005\022\017\n\007img",
+      "Name\030\014 \001(\t\022\036\n\026imgVerticalPixelOffset\030\r \001" +
+      "(\002\022 \n\030imgHorizontalPixelOffset\030\016 \001(\002\022\023\n\013" +
+      "description\030\017 \001(\t\022\030\n\020shortDescription\030\020 " +
+      "\001(\t\022\025\n\rshadowImgName\030\022 \001(\t\022\034\n\024shadowVert" +
+      "icalOffset\030\023 \001(\002\022\037\n\027shadowHorizontalOfff" +
+      "set\030\024 \001(\002\022\023\n\013shadowScale\030\025 \001(\002\022\020\n\010streng" +
+      "th\030\026 \001(\005\"\374\001\n\nStructType\022\r\n\tNO_STRUCT\020\010\022\026" +
+      "\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESOURCE_STORA" +
+      "GE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\tTOW" +
+      "N_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\022\014\n\010MINI_JOB\020\t",
+      "\022\017\n\013TEAM_CENTER\020\n\022\010\n\004CLAN\020\013\022\016\n\nMONEY_TRE" +
+      "E\020\014\022\r\n\tPVP_BOARD\020\r\022\022\n\016RESEARCH_HOUSE\020\016\022\027" +
+      "\n\023BATTLE_ITEM_FACTORY\020\017\"\256\001\n\026ResourceGene" +
+      "ratorProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
+      "6.proto.StructureInfoProto\0222\n\014resourceTy" +
+      "pe\030\002 \001(\0162\034.com.lvl6.proto.ResourceType\022\026" +
+      "\n\016productionRate\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005" +
+      "\"\224\001\n\024ResourceStorageProto\0226\n\nstructInfo\030" +
+      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
+      "o\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6.proto",
+      ".ResourceType\022\020\n\010capacity\030\003 \001(\005\"\322\001\n\016Mone" +
+      "yTreeProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
+      "6.proto.StructureInfoProto\022\026\n\016production" +
+      "Rate\030\002 \001(\002\022\020\n\010capacity\030\003 \001(\005\022\026\n\016daysOfDu" +
+      "ration\030\004 \001(\005\022\026\n\016daysForRenewal\030\005 \001(\005\022\024\n\014" +
+      "iapProductId\030\006 \001(\t\022\030\n\020fakeIAPProductId\030\007" +
+      " \001(\t\"m\n\022ResearchHouseProto\0226\n\nstructInfo" +
+      "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
+      "to\022\037\n\027researchSpeedMultiplier\030\002 \001(\002\"\232\001\n\r" +
+      "HospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".com.",
+      "lvl6.proto.StructureInfoProto\022\021\n\tqueueSi" +
+      "ze\030\002 \001(\005\022\033\n\017healthPerSecond\030\003 \001(\002B\002\030\001\022!\n" +
+      "\031secsToFullyHealMultiplier\030\004 \001(\002\"o\n\010LabP" +
+      "roto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.prot" +
+      "o.StructureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022" +
+      "\030\n\020pointsMultiplier\030\004 \001(\002\"\341\001\n\016ResidenceP" +
+      "roto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.prot" +
+      "o.StructureInfoProto\022\027\n\017numMonsterSlots\030" +
+      "\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017n" +
+      "umGemsRequired\030\004 \001(\005\022\034\n\024numAcceptedFbInv",
+      "ites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\tim" +
+      "gSuffix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\nstruc" +
+      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
+      "foProto\022 \n\030numResourceOneGenerators\030\002 \001(" +
+      "\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 \n\030num" +
+      "ResourceTwoGenerators\030\004 \001(\005\022\036\n\026numResour" +
+      "ceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(" +
+      "\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterSl" +
+      "ots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCa" +
+      "shCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026",
+      "\n\016numEvoChambers\030\014 \001(\005\"\317\001\n\022MiniJobCenter" +
+      "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
+      "to.StructureInfoProto\022\031\n\021generatedJobLim" +
+      "it\030\002 \001(\005\022!\n\031hoursBetweenJobGeneration\030\003 " +
+      "\001(\005\022C\n\030refreshMiniJobItemPrices\030\004 \003(\0132!." +
+      "com.lvl6.proto.ItemGemPriceProto\"\236\002\n\026Ful" +
+      "lUserStructureProto\022\026\n\016userStructUuid\030\001 " +
+      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022" +
+      "\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005" +
+      " \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030",
+      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
+      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str" +
+      "uctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(" +
+      "\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001" +
+      "(\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 " +
+      "\001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto" +
+      ".CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nob" +
+      "stacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalC" +
+      "ostType\030\003 \001(\0162\034.com.lvl6.proto.ResourceT" +
+      "ype\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001",
+      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img" +
+      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001" +
+      "(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppea" +
+      "r\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadow" +
+      "VerticalOffset\030\r \001(\002\022\037\n\027shadowHorizontal" +
+      "Offfset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022" +
+      "\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037" +
+      ".com.lvl6.proto.CoordinateProto\0226\n\013orien" +
+      "tation\030\005 \001(\0162!.com.lvl6.proto.StructOrie" +
+      "ntation\"\333\001\n\021UserObstacleProto\022\030\n\020userObs",
+      "tacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobs" +
+      "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com" +
+      ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
+      "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
+      "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017EvoCha" +
+      "mberProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
+      ".proto.StructureInfoProto\0228\n\017qualityUnlo" +
+      "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality:\006COM" +
+      "MON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCent" +
+      "erProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p",
+      "roto.StructureInfoProto\022\025\n\rteamCostLimit" +
+      "\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstructInfo\030" +
+      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
+      "o\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005\022\036\n\026" +
+      "teamDonationPowerLimit\030\003 \001(\005\"h\n\022PvpBoard" +
+      "HouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
+      "6.proto.StructureInfoProto\022\032\n\022pvpBoardPo" +
+      "werLimit\030\002 \001(\005\"\240\001\n\025PvpBoardObstacleProto" +
+      "\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\014ob" +
+      "stacleType\030\003 \001(\0162!.com.lvl6.proto.BoardO",
+      "bstacleType\022\020\n\010powerAmt\030\004 \001(\005\022\032\n\022initial" +
+      "lyAvailable\030\005 \001(\010\"}\n\031UserPvpBoardObstacl" +
+      "eProto\022\036\n\026userPvpBoardObstacleId\030\001 \001(\005\022\020" +
+      "\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\022\014\n\004" +
+      "posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026BattleItemFa" +
+      "ctoryProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
+      "6.proto.StructureInfoProto\022\022\n\npowerLimit" +
+      "\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022" +
+      "\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020" +
+      "\024*G\n\021StructOrientation\022\022\n\016NO_ORIENTATION",
+      "\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*2\n\021Bo" +
+      "ardObstacleType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004" +
+      "HOLE\020\003B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -21973,6 +22335,7 @@ public final class StructureProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_StructureInfoProto_descriptor =
@@ -22034,7 +22397,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_MiniJobCenterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor,
-        new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", });
+        new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", "RefreshMiniJobItemPrices", });
     internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
@@ -22113,6 +22476,7 @@ public final class StructureProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemFactoryProto_descriptor,
         new java.lang.String[] { "StructInfo", "PowerLimit", });
+    com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

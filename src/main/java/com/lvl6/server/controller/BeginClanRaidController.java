@@ -69,12 +69,27 @@ public class BeginClanRaidController extends EventController {
 
 	@Autowired
 	protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtil;
+	
+	@Autowired
+	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
+	
+	@Autowired
+	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
+	
+	@Autowired
+	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
 
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	@Autowired
 	protected ClanEventUtil clanEventUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public BeginClanRaidController() {
 		numAllocatedThreads = 4;
@@ -108,7 +123,7 @@ public class BeginClanRaidController extends EventController {
 		boolean setMonsterTeamForRaid = reqProto.getSetMonsterTeamForRaid();
 		List<FullUserMonsterProto> userMonsters = reqProto
 				.getUserMonstersList();
-		List<String> userMonsterIds = MonsterStuffUtils
+		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIds(userMonsters);
 		boolean isFirstStage = reqProto.getIsFirstStage();
 
@@ -180,7 +195,7 @@ public class BeginClanRaidController extends EventController {
 			if (success) {
 				if (!setMonsterTeamForRaid) {
 					ClanEventPersistentForClan cepfc = clanInfoList.get(0);
-					PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
+					PersistentClanEventClanInfoProto eventDetails = createInfoProtoUtils
 							.createPersistentClanEventClanInfoProto(cepfc);
 					resBuilder.setEventDetails(eventDetails);
 				}
@@ -249,7 +264,7 @@ public class BeginClanRaidController extends EventController {
 
 		//user can only start raid if an event exists for it, check if event exists,
 		//clan raid events CAN overlap
-		Map<Integer, ClanEventPersistent> clanEventIdToEvent = ClanEventPersistentRetrieveUtils
+		Map<Integer, ClanEventPersistent> clanEventIdToEvent = clanEventPersistentRetrieveUtils
 				.getActiveClanEventIdsToEvents(curDate, timeUtils);
 		if (!clanEventIdToEvent.containsKey(clanEventId)) {
 			resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
@@ -445,11 +460,11 @@ public class BeginClanRaidController extends EventController {
 					+ numInserted);
 
 		} else if (isFirstStage) {
-			ClanRaidStage crs = ClanRaidStageRetrieveUtils
+			ClanRaidStage crs = clanRaidStageRetrieveUtils
 					.getFirstStageForClanRaid(clanRaidId);
 			int clanRaidStageId = crs.getId();
 
-			Map<Integer, ClanRaidStageMonster> stageIdToMonster = ClanRaidStageMonsterRetrieveUtils
+			Map<Integer, ClanRaidStageMonster> stageIdToMonster = clanRaidStageMonsterRetrieveUtils
 					.getClanRaidStageMonstersForClanRaidStageId(clanRaidStageId);
 			ClanRaidStageMonster crsm = stageIdToMonster.get(clanRaidStageId);
 			int crsmId = crsm.getId();
@@ -514,7 +529,7 @@ public class BeginClanRaidController extends EventController {
 		ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(
 				userId, clanId, clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne,
 				userMonsterIdTwo, userMonsterIdThree);
-		PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
+		PersistentClanEventUserInfoProto userDetails = createInfoProtoUtils
 				.createPersistentClanEventUserInfoProto(cepfu, null,
 						userMonsters);
 		resBuilder.setUserDetails(userDetails);

@@ -43,6 +43,10 @@ public final class ItemsProto {
      * </pre>
      */
     BUILDER(4, 5),
+    /**
+     * <code>REFRESH_MINI_JOB = 6;</code>
+     */
+    REFRESH_MINI_JOB(5, 6),
     ;
 
     /**
@@ -75,6 +79,10 @@ public final class ItemsProto {
      * </pre>
      */
     public static final int BUILDER_VALUE = 5;
+    /**
+     * <code>REFRESH_MINI_JOB = 6;</code>
+     */
+    public static final int REFRESH_MINI_JOB_VALUE = 6;
 
 
     public final int getNumber() { return value; }
@@ -86,6 +94,7 @@ public final class ItemsProto {
         case 3: return ITEM_CASH;
         case 4: return SPEED_UP;
         case 5: return BUILDER;
+        case 6: return REFRESH_MINI_JOB;
         default: return null;
       }
     }
@@ -864,13 +873,13 @@ public final class ItemsProto {
     boolean getAlwaysDisplayToUser();
 
     /**
-     * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
      */
-    boolean hasActionGameType();
+    boolean hasGameActionType();
     /**
-     * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
      */
-    com.lvl6.proto.SharedEnumConfigProto.GameType getActionGameType();
+    com.lvl6.proto.SharedEnumConfigProto.GameActionType getGameActionType();
 
     /**
      * <code>optional string shortName = 10;</code>
@@ -885,6 +894,23 @@ public final class ItemsProto {
      */
     com.google.protobuf.ByteString
         getShortNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *atm, only valid for ItemType=REFRESH_MINI_JOB;
+     * </pre>
+     */
+    boolean hasQuality();
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *atm, only valid for ItemType=REFRESH_MINI_JOB;
+     * </pre>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemProto}
@@ -988,12 +1014,12 @@ public final class ItemsProto {
             }
             case 72: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.GameType value = com.lvl6.proto.SharedEnumConfigProto.GameType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.GameActionType value = com.lvl6.proto.SharedEnumConfigProto.GameActionType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(9, rawValue);
               } else {
                 bitField0_ |= 0x00000100;
-                actionGameType_ = value;
+                gameActionType_ = value;
               }
               break;
             }
@@ -1001,6 +1027,17 @@ public final class ItemsProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
               shortName_ = bs;
+              break;
+            }
+            case 88: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(11, rawValue);
+              } else {
+                bitField0_ |= 0x00000400;
+                quality_ = value;
+              }
               break;
             }
           }
@@ -1225,19 +1262,19 @@ public final class ItemsProto {
       return alwaysDisplayToUser_;
     }
 
-    public static final int ACTIONGAMETYPE_FIELD_NUMBER = 9;
-    private com.lvl6.proto.SharedEnumConfigProto.GameType actionGameType_;
+    public static final int GAMEACTIONTYPE_FIELD_NUMBER = 9;
+    private com.lvl6.proto.SharedEnumConfigProto.GameActionType gameActionType_;
     /**
-     * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
      */
-    public boolean hasActionGameType() {
+    public boolean hasGameActionType() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
      */
-    public com.lvl6.proto.SharedEnumConfigProto.GameType getActionGameType() {
-      return actionGameType_;
+    public com.lvl6.proto.SharedEnumConfigProto.GameActionType getGameActionType() {
+      return gameActionType_;
     }
 
     public static final int SHORTNAME_FIELD_NUMBER = 10;
@@ -1282,6 +1319,29 @@ public final class ItemsProto {
       }
     }
 
+    public static final int QUALITY_FIELD_NUMBER = 11;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *atm, only valid for ItemType=REFRESH_MINI_JOB;
+     * </pre>
+     */
+    public boolean hasQuality() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *atm, only valid for ItemType=REFRESH_MINI_JOB;
+     * </pre>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+      return quality_;
+    }
+
     private void initFields() {
       itemId_ = 0;
       name_ = "";
@@ -1291,8 +1351,9 @@ public final class ItemsProto {
       amount_ = 0;
       secretGiftChance_ = 0F;
       alwaysDisplayToUser_ = false;
-      actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+      gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       shortName_ = "";
+      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1332,10 +1393,13 @@ public final class ItemsProto {
         output.writeBool(8, alwaysDisplayToUser_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeEnum(9, actionGameType_.getNumber());
+        output.writeEnum(9, gameActionType_.getNumber());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(10, getShortNameBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeEnum(11, quality_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1380,11 +1444,15 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(9, actionGameType_.getNumber());
+          .computeEnumSize(9, gameActionType_.getNumber());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getShortNameBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(11, quality_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1519,10 +1587,12 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         alwaysDisplayToUser_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
-        actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+        gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         bitField0_ = (bitField0_ & ~0x00000100);
         shortName_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1586,11 +1656,15 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.actionGameType_ = actionGameType_;
+        result.gameActionType_ = gameActionType_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
         result.shortName_ = shortName_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.quality_ = quality_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1635,13 +1709,16 @@ public final class ItemsProto {
         if (other.hasAlwaysDisplayToUser()) {
           setAlwaysDisplayToUser(other.getAlwaysDisplayToUser());
         }
-        if (other.hasActionGameType()) {
-          setActionGameType(other.getActionGameType());
+        if (other.hasGameActionType()) {
+          setGameActionType(other.getGameActionType());
         }
         if (other.hasShortName()) {
           bitField0_ |= 0x00000200;
           shortName_ = other.shortName_;
           onChanged();
+        }
+        if (other.hasQuality()) {
+          setQuality(other.getQuality());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2033,37 +2110,37 @@ public final class ItemsProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.GameType actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+      private com.lvl6.proto.SharedEnumConfigProto.GameActionType gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       /**
-       * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
        */
-      public boolean hasActionGameType() {
+      public boolean hasGameActionType() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
        */
-      public com.lvl6.proto.SharedEnumConfigProto.GameType getActionGameType() {
-        return actionGameType_;
+      public com.lvl6.proto.SharedEnumConfigProto.GameActionType getGameActionType() {
+        return gameActionType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
        */
-      public Builder setActionGameType(com.lvl6.proto.SharedEnumConfigProto.GameType value) {
+      public Builder setGameActionType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000100;
-        actionGameType_ = value;
+        gameActionType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
+       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
        */
-      public Builder clearActionGameType() {
+      public Builder clearGameActionType() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
+        gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         onChanged();
         return this;
       }
@@ -2140,6 +2217,57 @@ public final class ItemsProto {
   }
   bitField0_ |= 0x00000200;
         shortName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *atm, only valid for ItemType=REFRESH_MINI_JOB;
+       * </pre>
+       */
+      public boolean hasQuality() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *atm, only valid for ItemType=REFRESH_MINI_JOB;
+       * </pre>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+        return quality_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *atm, only valid for ItemType=REFRESH_MINI_JOB;
+       * </pre>
+       */
+      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000400;
+        quality_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *atm, only valid for ItemType=REFRESH_MINI_JOB;
+       * </pre>
+       */
+      public Builder clearQuality() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         onChanged();
         return this;
       }
@@ -4125,6 +4253,489 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemSecretGiftProto)
   }
 
+  public interface ItemGemPriceProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ItemGemPriceProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 itemId = 1;</code>
+     */
+    boolean hasItemId();
+    /**
+     * <code>optional int32 itemId = 1;</code>
+     */
+    int getItemId();
+
+    /**
+     * <code>optional int32 gemPrice = 2;</code>
+     */
+    boolean hasGemPrice();
+    /**
+     * <code>optional int32 gemPrice = 2;</code>
+     */
+    int getGemPrice();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.ItemGemPriceProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   * </pre>
+   */
+  public static final class ItemGemPriceProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ItemGemPriceProto)
+      ItemGemPriceProtoOrBuilder {
+    // Use ItemGemPriceProto.newBuilder() to construct.
+    private ItemGemPriceProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ItemGemPriceProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ItemGemPriceProto defaultInstance;
+    public static ItemGemPriceProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ItemGemPriceProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ItemGemPriceProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              itemId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              gemPrice_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_ItemGemPriceProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ItemsProto.ItemGemPriceProto.class, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ItemGemPriceProto> PARSER =
+        new com.google.protobuf.AbstractParser<ItemGemPriceProto>() {
+      public ItemGemPriceProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ItemGemPriceProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ItemGemPriceProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int ITEMID_FIELD_NUMBER = 1;
+    private int itemId_;
+    /**
+     * <code>optional int32 itemId = 1;</code>
+     */
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 itemId = 1;</code>
+     */
+    public int getItemId() {
+      return itemId_;
+    }
+
+    public static final int GEMPRICE_FIELD_NUMBER = 2;
+    private int gemPrice_;
+    /**
+     * <code>optional int32 gemPrice = 2;</code>
+     */
+    public boolean hasGemPrice() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 gemPrice = 2;</code>
+     */
+    public int getGemPrice() {
+      return gemPrice_;
+    }
+
+    private void initFields() {
+      itemId_ = 0;
+      gemPrice_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, itemId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, gemPrice_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, itemId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, gemPrice_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.ItemGemPriceProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ItemsProto.ItemGemPriceProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.ItemGemPriceProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ItemGemPriceProto)
+        com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_ItemGemPriceProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ItemsProto.ItemGemPriceProto.class, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ItemsProto.ItemGemPriceProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        gemPrice_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor;
+      }
+
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto build() {
+        com.lvl6.proto.ItemsProto.ItemGemPriceProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto buildPartial() {
+        com.lvl6.proto.ItemsProto.ItemGemPriceProto result = new com.lvl6.proto.ItemsProto.ItemGemPriceProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gemPrice_ = gemPrice_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ItemsProto.ItemGemPriceProto) {
+          return mergeFrom((com.lvl6.proto.ItemsProto.ItemGemPriceProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ItemsProto.ItemGemPriceProto other) {
+        if (other == com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance()) return this;
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
+        }
+        if (other.hasGemPrice()) {
+          setGemPrice(other.getGemPrice());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ItemsProto.ItemGemPriceProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ItemsProto.ItemGemPriceProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int itemId_ ;
+      /**
+       * <code>optional int32 itemId = 1;</code>
+       */
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 itemId = 1;</code>
+       */
+      public int getItemId() {
+        return itemId_;
+      }
+      /**
+       * <code>optional int32 itemId = 1;</code>
+       */
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000001;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemId = 1;</code>
+       */
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        itemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gemPrice_ ;
+      /**
+       * <code>optional int32 gemPrice = 2;</code>
+       */
+      public boolean hasGemPrice() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 gemPrice = 2;</code>
+       */
+      public int getGemPrice() {
+        return gemPrice_;
+      }
+      /**
+       * <code>optional int32 gemPrice = 2;</code>
+       */
+      public Builder setGemPrice(int value) {
+        bitField0_ |= 0x00000002;
+        gemPrice_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemPrice = 2;</code>
+       */
+      public Builder clearGemPrice() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        gemPrice_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ItemGemPriceProto)
+    }
+
+    static {
+      defaultInstance = new ItemGemPriceProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ItemGemPriceProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserItemProto_descriptor;
   private static
@@ -4145,6 +4756,11 @@ public final class ItemsProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ItemGemPriceProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4157,23 +4773,27 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
-      "\005\"\210\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
+      "\005\"\304\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
       "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
       "ance\030\007 \001(\002\022\033\n\023alwaysDisplayToUser\030\010 \001(\010\022" +
-      "0\n\016actionGameType\030\t \001(\0162\030.com.lvl6.proto" +
-      ".GameType\022\021\n\tshortName\030\n \001(\t\"\261\001\n\022UserIte",
-      "mUsageProto\022\021\n\tusageUuid\030\001 \001(\t\022\020\n\010userUu" +
-      "id\030\002 \001(\t\022\016\n\006itemId\030\003 \001(\005\022\023\n\013timeOfEntry\030" +
-      "\004 \001(\003\022\024\n\014userDataUuid\030\005 \001(\t\022;\n\nactionTyp" +
-      "e\030\006 \001(\0162\036.com.lvl6.proto.GameActionType:" +
-      "\007NO_HELP\"}\n\027UserItemSecretGiftProto\022\020\n\010u" +
-      "isgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n\022secsT" +
-      "illCollection\030\003 \001(\005\022\016\n\006itemId\030\004 \001(\005\022\022\n\nc" +
-      "reateTime\030\005 \001(\003*T\n\010ItemType\022\020\n\014BOOSTER_P" +
-      "ACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SP" +
-      "EED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\nItemsProto"
+      "6\n\016gameActionType\030\t \001(\0162\036.com.lvl6.proto" +
+      ".GameActionType\022\021\n\tshortName\030\n \001(\t\0224\n\007qu",
+      "ality\030\013 \001(\0162\027.com.lvl6.proto.Quality:\nNO" +
+      "_QUALITY\"\261\001\n\022UserItemUsageProto\022\021\n\tusage" +
+      "Uuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId\030\003" +
+      " \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataUui" +
+      "d\030\005 \001(\t\022;\n\nactionType\030\006 \001(\0162\036.com.lvl6.p" +
+      "roto.GameActionType:\007NO_HELP\"}\n\027UserItem" +
+      "SecretGiftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010use" +
+      "rUuid\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022" +
+      "\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003\"5\n\021I" +
+      "temGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022\020\n\010gemP",
+      "rice\030\002 \001(\005*j\n\010ItemType\022\020\n\014BOOSTER_PACK\020\001" +
+      "\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_U" +
+      "P\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006B\014" +
+      "B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4199,7 +4819,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "ActionGameType", "ShortName", });
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "GameActionType", "ShortName", "Quality", });
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new
@@ -4212,6 +4832,12 @@ public final class ItemsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor,
         new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "ItemId", "CreateTime", });
+    internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_ItemGemPriceProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor,
+        new java.lang.String[] { "ItemId", "GemPrice", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

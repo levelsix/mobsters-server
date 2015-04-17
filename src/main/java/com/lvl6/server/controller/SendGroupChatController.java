@@ -49,6 +49,7 @@ import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -66,6 +67,15 @@ public class SendGroupChatController extends EventController {
 	protected EventWriter eventWriter;
 
 	@Autowired
+	protected MiscMethods miscMethods;
+
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
+	BannedUserRetrieveUtils bannedUserRetrieveUtils;
+
+	@Autowired
 	protected Locker locker;
 
 	@Autowired
@@ -76,7 +86,7 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
-	
+
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
@@ -86,6 +96,8 @@ public class SendGroupChatController extends EventController {
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
 	}
+
+	private ReceivedGroupChatResponseProto rgcrp;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -151,43 +163,46 @@ public class SendGroupChatController extends EventController {
 
 			if (legitSend) {
 				log.info("Group chat message is legit... sending to group");
-				String censoredChatMessage = MiscMethods
+				String censoredChatMessage = miscMethods
 						.censorUserInput(chatMessage);
 				writeChangesToDB(user, scope, censoredChatMessage, timeOfPost);
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
-				
-				Map<TranslateLanguages, String> translateMap = MiscMethods.translate(null, null, censoredChatMessage);				
-					
-				MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
+
+				Language contentLanguage = miscMethods.convertFromEnumToLanguage(globalLanguage);
+				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(contentLanguage, censoredChatMessage);
+
+				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
 								senderProto);
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
-				
-				GroupChatMessageProto gcmp = CreateInfoProtoUtils
+
+				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
 								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
-				
-				chatProto.setMessage(gcmp);	
+
+				chatProto.setMessage(gcmp);
 
                 //legacy implementation
                 chatProto.setChatMessage(censoredChatMessage);
 
-				ReceivedGroupChatResponseProto rgcr = chatProto.build();
-				
+				rgcrp = chatProto.build();
+
+				log.info("receive group chat response proto : {}", rgcrp);
+
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcr, globalLanguage);
-				
+						censoredChatMessage, rgcrp, globalLanguage);
+
 				// send messages in background so sending player can unlock
 				/*
 				 * executor.execute(new Runnable() {
@@ -227,7 +242,7 @@ public class SendGroupChatController extends EventController {
 		} else {
 			log.info("Sending global chat ");
 			//add new message to front of list
-			chatMessages.add(0, CreateInfoProtoUtils
+			chatMessages.add(0, createInfoProtoUtils
 					.createGroupChatMessageProto(time, chatProto.getSender(),
 							censoredChatMessage, isAdmin, null, null, globalLanguage));
 			//remove older messages
@@ -270,19 +285,19 @@ public class SendGroupChatController extends EventController {
 		// if (!user.updateRelativeNumGroupChatsRemainingAndDiamonds(-1, 0)) {
 		// log.error("problem with decrementing a global chat");
 		// }
-		
+
 		Map<TranslateLanguages, String> translatedTextMap;
 
 		if (scope == GroupChatScope.CLAN) {
 			String clanId = user.getClanId();
-			
+
 //			translatedTextMap = MiscMethods.translate(null, content);
 
 			String clanChatId = InsertUtils.get().insertClanChatPost(user.getId(), clanId, content,
 					timeOfPost);
-			
+
 //			ChatType chatType = ChatType.CLAN_CHAT;
-//			
+//
 //			boolean success = InsertUtils.get().insertTranslatedText(chatType, clanChatId, translatedTextMap);
 //			if(!success) {
 //				log.error("error inserting translated texts into table");
@@ -332,7 +347,7 @@ public class SendGroupChatController extends EventController {
 			return false;
 		}
 
-		Set<Integer> banned = BannedUserRetrieveUtils.getAllBannedUsers();
+		Set<Integer> banned = bannedUserRetrieveUtils.getAllBannedUsers();
 		if (banned.contains(user.getId())) {
 			resBuilder.setStatus(SendGroupChatStatus.BANNED);
 			log.warn("banned user tried to send a post. user=" + user);
@@ -401,5 +416,15 @@ public class SendGroupChatController extends EventController {
 	public void setClanSearch(ClanSearch clanSearch) {
 		this.clanSearch = clanSearch;
 	}
+
+	public ReceivedGroupChatResponseProto getRgcrp() {
+		return rgcrp;
+	}
+
+	public void setRgcrp(ReceivedGroupChatResponseProto rgcrp) {
+		this.rgcrp = rgcrp;
+	}
+
+
 
 }

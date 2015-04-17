@@ -33,6 +33,7 @@ public class SolicitTeamDonationAction {
 	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private MiscMethods miscMethods;
 
 	public SolicitTeamDonationAction(
 			String userId,
@@ -43,7 +44,7 @@ public class SolicitTeamDonationAction {
 			int gemsSpent,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil, MiscMethods miscMethods) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -55,6 +56,7 @@ public class SolicitTeamDonationAction {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.miscMethods = miscMethods;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -164,7 +166,7 @@ public class SolicitTeamDonationAction {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (0 != gemsSpent) {
-			prevCurrencies.put(MiscMethods.gems, user.getGems());
+			prevCurrencies.put(miscMethods.gems, user.getGems());
 		}
 
 		int gemsDelta = gemsSpent * -1;
@@ -205,7 +207,7 @@ public class SolicitTeamDonationAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

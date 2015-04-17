@@ -38,6 +38,9 @@ public class FinishPerformingResearchController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected TimeUtils timeUtils;
@@ -119,7 +122,7 @@ public class FinishPerformingResearchController extends EventController {
 			Date now = new Date();
 			FinishPerformingResearchAction fpra = new FinishPerformingResearchAction(
 					userId, user, userResearchUuid, gemsCost, now, updateUtil,
-					researchForUserRetrieveUtil);
+					researchForUserRetrieveUtil, miscMethods);
 
 			fpra.execute(resBuilder);
 
@@ -133,7 +136,7 @@ public class FinishPerformingResearchController extends EventController {
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
 			if(gemsCost > 0 && resBuilder.getStatus().equals(FinishPerformingResearchStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								fpra.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -167,7 +170,7 @@ public class FinishPerformingResearchController extends EventController {
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 			FinishPerformingResearchAction pra) {
-		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
 				pra.getCurrencyDeltas(), pra.getPreviousCurrencies(),
 				pra.getCurrentCurrencies(), pra.getReasons(), pra.getDetails());
 	}

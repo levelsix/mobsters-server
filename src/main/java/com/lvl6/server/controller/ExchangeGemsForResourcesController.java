@@ -38,6 +38,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -110,9 +113,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
 			if (legit) {
-				previousCurrency.put(MiscMethods.cash, user.getCash());
-				previousCurrency.put(MiscMethods.oil, user.getOil());
-				previousCurrency.put(MiscMethods.gems, user.getGems());
+				previousCurrency.put(miscMethods.cash, user.getCash());
+				previousCurrency.put(miscMethods.oil, user.getOil());
+				previousCurrency.put(miscMethods.gems, user.getGems());
 				successful = writeChangesToDb(user, numGems, resourceType,
 						numResources, maxCash, maxOil, currencyChange);
 			}
@@ -129,7 +132,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -227,13 +230,13 @@ public class ExchangeGemsForResourcesController extends EventController {
 			success = false;
 		} else {
 			if (0 != cashChange) {
-				currencyChange.put(MiscMethods.cash, cashChange);
+				currencyChange.put(miscMethods.cash, cashChange);
 			}
 			if (0 != oilChange) {
-				currencyChange.put(MiscMethods.oil, oilChange);
+				currencyChange.put(miscMethods.oil, oilChange);
 			}
 			if (0 != gemChange) {
-				currencyChange.put(MiscMethods.gems, gemChange);
+				currencyChange.put(miscMethods.gems, gemChange);
 			}
 		}
 
@@ -248,9 +251,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 		if (currencyChange.isEmpty()) {
 			return;
 		}
-		String cash = MiscMethods.cash;
-		String oil = MiscMethods.oil;
-		String gems = MiscMethods.gems;
+		String cash = miscMethods.cash;
+		String oil = miscMethods.oil;
+		String gems = miscMethods.gems;
 
 		String reasonForChange = ControllerConstants.UCHRFC__CURRENCY_EXCHANGE;
 		StringBuilder detailsSb = new StringBuilder();
@@ -276,7 +279,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 		details.put(oil, detailsSb.toString());
 		details.put(gems, detailsSb.toString());
 
-		MiscMethods
+		miscMethods
 				.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 						previousCurrency, currentCurrencies, reasonsForChanges,
 						details);

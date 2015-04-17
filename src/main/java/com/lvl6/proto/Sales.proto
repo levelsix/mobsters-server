@@ -1,0 +1,47 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+//import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
+import "Reward.proto";
+import "User.proto";
+import "CustomMenu.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "SalesProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message SalesPackageProto {
+	optional int32 salesPackageId = 1;
+	optional string salesProductId = 2;
+	optional int64 price = 3;
+	optional string uuid = 4;
+	repeated SalesItemProto sip = 5;
+	repeated SalesDisplayItemProto sdip = 6;
+	repeated CustomMenuProto cmp = 7;
+	optional int32 succId = 8;
+	optional int64 timeStart = 9;
+	optional int64 timeEnd = 10;
+	optional string animatingIcon = 11;
+	optional string slamIcon = 12;
+}
+
+//------------------------------------------------------------------------------------------
+
+message SalesItemProto {
+	optional int32 salesItemId = 1;
+	optional int32 salesPackageId = 2;
+	optional RewardProto reward = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message SalesDisplayItemProto {
+	optional int32 salesItemId = 1;
+	optional int32 salesPackageId = 2;
+	optional RewardProto reward = 3;
+	
+}

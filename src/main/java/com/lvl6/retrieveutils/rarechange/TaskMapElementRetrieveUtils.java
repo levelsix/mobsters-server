@@ -27,7 +27,7 @@ public class TaskMapElementRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_MAP_ELEMENT_CONFIG;
 
-	public static Map<Integer, TaskMapElement> getTaskMapElement() {
+	public Map<Integer, TaskMapElement> getTaskMapElement() {
 		log.debug("retrieve task map elements");
 		if (null == idToTaskMapElement) {
 			setStaticIdToTaskMapElement();
@@ -35,7 +35,7 @@ public class TaskMapElementRetrieveUtils {
 		return idToTaskMapElement;
 	}
 
-	public static TaskMapElement getTaskMapElementForTaskId(int taskId) {
+	public TaskMapElement getTaskMapElementForTaskId(int taskId) {
 		log.debug(String.format("retrieve task map element for taskId=%s",
 				taskId));
 		if (null == idToTaskMapElement) {
@@ -49,7 +49,7 @@ public class TaskMapElementRetrieveUtils {
 		return taskIdToTaskMapElement.get(taskId);
 	}
 
-	private static void setStaticIdToTaskMapElement() {
+	private void setStaticIdToTaskMapElement() {
 		log.debug("setting static map of ids to TaskMapElement elements");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -92,14 +92,14 @@ public class TaskMapElementRetrieveUtils {
 		taskIdToTaskMapElement = taskIdsToTaskMapElementsTemp;
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdToTaskMapElement();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static TaskMapElement convertRSRowToTaskMapElement(ResultSet rs)
+	private TaskMapElement convertRSRowToTaskMapElement(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.TASK_MAP_ELEMENT__ID);
 		int taskId = rs.getInt(DBConstants.TASK_MAP_ELEMENT__TASK_ID);

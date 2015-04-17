@@ -154,16 +154,18 @@
 		<amqp.vhost>devmobsters</amqp.vhost>
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
-		<amqp.client.messages.queue>clientMessages1.4</amqp.client.messages.queue>
-		<!-- <amqp.client.messages.bindings><![CDATA[ <rabbit:binding queue="clientMessages1.1" 
-			key="messagesFromPlayers" /> <rabbit:binding queue="clientMessages1.1" key="messagesFromPlayers1.1" 
-			/> ]]></amqp.client.messages.bindings> -->
+		<amqp.client.messages.queue>clientMessages1.5</amqp.client.messages.queue>
+		<!-- <amqp.client.messages.bindings><![CDATA[
+		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
+		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
+		]]></amqp.client.messages.bindings> -->
 		<amqp.client.messages.bindings><![CDATA[
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.1" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.2" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.3" />
-		<rabbit:binding queue="clientMessages1.4"	key="messagesFromPlayers1.4" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.1" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.2" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.3" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.4" />
+		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.5" />
 		]]></amqp.client.messages.bindings>
 
 
@@ -648,12 +650,12 @@
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast-all</artifactId>
-				<version>3.3.1</version>
+				<version>3.4.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast-spring</artifactId>
-				<version>3.3.1</version>
+				<version>3.4.2</version>
 			</dependency>
 			<!-- <dependency> <groupId>com.hazelcast</groupId> <artifactId>hazelcast-wm</artifactId> 
 				<version>2.2</version> </dependency> -->
@@ -817,48 +819,53 @@
 				<artifactId>httpclient</artifactId>
 				<version>4.2.1</version>
 			</dependency>
+<!--     		<dependency> -->
+<!--         		<groupid>junit</groupId> -->
+<!--         		<artifactid>junit</artifactId> -->
+<!--         		<version>4.11</version> -->
+<!--         		<scope>test</scope> -->
+<!--         		<type>jar</type> -->
+<!--     		</dependency> -->
+    		<dependency>
+        		<groupId>org.mockito</groupId>
+        		<artifactId>mockito-core</artifactId>
+        		<version>1.9.5</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-module-junit4</artifactId>
+        		<version>1.5.4</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-api-mockito</artifactId>
+        		<version>1.5.4</version>
+        		<scope>test</scope>
+    		</dependency>
+    		<!-- Required for PowerMockRule -->
+    		<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-module-junit4-rule-agent</artifactId>
+        		<version>1.5.4</version>
+        		<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-javaagent</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+        		<groupId>org.powermock</groupId>
+        		<artifactId>powermock-classloading-xstream</artifactId>
+        		<version>1.5.4</version>
+        		<scope>test</scope>
+			</dependency>
 			<dependency>
 				<groupId>com.memetix</groupId>
 				<artifactId>microsoft-translator-java-api</artifactId>
 				<version>0.6.2</version>
-			</dependency>
-			<!-- <dependency> -->
-			<!-- <groupid>junit</groupId> -->
-			<!-- <artifactid>junit</artifactId> -->
-			<!-- <version>4.11</version> -->
-			<!-- <scope>test</scope> -->
-			<!-- <type>jar</type> -->
-			<!-- </dependency> -->
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>
-				<version>1.9.5</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-module-junit4</artifactId>
-				<version>1.5.1</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-api-mockito</artifactId>
-				<version>1.5.1</version>
-				<scope>test</scope>
-			</dependency>
-			<!-- Required for PowerMockRule -->
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-module-junit4-rule-agent</artifactId>
-				<version>1.5.1</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-classloading-xstream</artifactId>
-				<version>1.5.1</version>
-				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -1105,18 +1112,26 @@
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4-rule-agent</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-classloading-xstream</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-javaagent</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.memetix</groupId>

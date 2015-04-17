@@ -41,6 +41,12 @@ public class BeginClanAvengingController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected ClanStuffUtils clanStuffUtils;
 
 	public BeginClanAvengingController() {
 		numAllocatedThreads = 4;
@@ -126,9 +132,9 @@ public class BeginClanAvengingController extends EventController {
 		//		boolean lockedClan = getLocker().lockClan(clanUuid);
 		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			List<ClanAvenge> caList = ClanStuffUtils.javafyPvpHistoryProto(
+			List<ClanAvenge> caList = clanStuffUtils.javafyPvpHistoryProto(
 					userId, clanId, recentNBattles, clientTime);
-			Map<String, MinimumUserProtoWithLevel> attackerMupwlMap = ClanStuffUtils
+			Map<String, MinimumUserProtoWithLevel> attackerMupwlMap = clanStuffUtils
 					.extractAttackerFullUserProto(recentNBattles);
 
 			BeginClanAvengingAction bcaa = new BeginClanAvengingAction(userId,
@@ -145,7 +151,7 @@ public class BeginClanAvengingController extends EventController {
 				//only write to clan if success
 				List<ClanAvenge> retaliationRequestsWithIds = bcaa
 						.getRetaliationRequestsWithIds();
-				List<PvpClanAvengeProto> retaliationProtos = CreateInfoProtoUtils
+				List<PvpClanAvengeProto> retaliationProtos = createInfoProtoUtils
 						.createPvpClanAvengeProto(retaliationRequestsWithIds,
 								senderProto, clanId, attackerMupwlMap);
 

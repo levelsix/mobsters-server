@@ -2160,6 +2160,20 @@ public final class MiniEventProtos {
      * <code>optional int32 pointsGained = 6;</code>
      */
     int getPointsGained();
+
+    /**
+     * <code>optional string actionDescription = 7;</code>
+     */
+    boolean hasActionDescription();
+    /**
+     * <code>optional string actionDescription = 7;</code>
+     */
+    java.lang.String getActionDescription();
+    /**
+     * <code>optional string actionDescription = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getActionDescriptionBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniEventGoalProto}
@@ -2250,6 +2264,12 @@ public final class MiniEventProtos {
               pointsGained_ = input.readInt32();
               break;
             }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              actionDescription_ = bs;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2299,25 +2319,89 @@ public final class MiniEventProtos {
        */
       NO_GOAL(0, 1),
       /**
-       * <code>HEAL_HP = 2;</code>
+       * <code>GAIN_BUILDING_STRENGTH = 2;</code>
        */
-      HEAL_HP(1, 2),
+      GAIN_BUILDING_STRENGTH(1, 2),
       /**
-       * <code>ENHANCE_TOON_XP = 3;</code>
+       * <code>GAIN_RESEARCH_STRENGTH = 3;</code>
        */
-      ENHANCE_TOON_XP(2, 3),
+      GAIN_RESEARCH_STRENGTH(2, 3),
       /**
-       * <code>USE_CASH_UPGRADING_BUILDING = 4;</code>
+       * <code>SPIN_BASIC_GRAB = 4;</code>
        */
-      USE_CASH_UPGRADING_BUILDING(3, 4),
+      SPIN_BASIC_GRAB(3, 4),
       /**
-       * <code>USE_OIL_UPGRADING_BUILDING = 5;</code>
+       * <code>SPIN_ULTIMATE_GRAB = 5;</code>
        */
-      USE_OIL_UPGRADING_BUILDING(4, 5),
+      SPIN_ULTIMATE_GRAB(4, 5),
       /**
-       * <code>CAPTURE_SCIENTIST = 6;</code>
+       * <code>ENHANCE_COMMON = 6;</code>
        */
-      CAPTURE_SCIENTIST(5, 6),
+      ENHANCE_COMMON(5, 6),
+      /**
+       * <code>ENHANCE_RARE = 7;</code>
+       */
+      ENHANCE_RARE(6, 7),
+      /**
+       * <code>ENHANCE_SUPER = 8;</code>
+       */
+      ENHANCE_SUPER(7, 8),
+      /**
+       * <code>ENHANCE_ULTRA = 9;</code>
+       */
+      ENHANCE_ULTRA(8, 9),
+      /**
+       * <code>ENHANCE_EPIC = 10;</code>
+       */
+      ENHANCE_EPIC(9, 10),
+      /**
+       * <code>CLAN_HELP = 11;</code>
+       */
+      CLAN_HELP(10, 11),
+      /**
+       * <code>CLAN_DONATE = 12;</code>
+       */
+      CLAN_DONATE(11, 12),
+      /**
+       * <code>BATTLE_AVENGE_REQUEST = 13;</code>
+       */
+      BATTLE_AVENGE_REQUEST(12, 13),
+      /**
+       * <code>BATTLE_AVENGE_WIN = 14;</code>
+       */
+      BATTLE_AVENGE_WIN(13, 14),
+      /**
+       * <code>BATTLE_REVENGE_WIN = 15;</code>
+       */
+      BATTLE_REVENGE_WIN(14, 15),
+      /**
+       * <code>STEAL_CASH = 16;</code>
+       */
+      STEAL_CASH(15, 16),
+      /**
+       * <code>STEAL_OIL = 17;</code>
+       */
+      STEAL_OIL(16, 17),
+      /**
+       * <code>PVP_CATCH_COMMON = 18;</code>
+       */
+      PVP_CATCH_COMMON(17, 18),
+      /**
+       * <code>PVP_CATCH_RARE = 19;</code>
+       */
+      PVP_CATCH_RARE(18, 19),
+      /**
+       * <code>PVP_CATCH_SUPER = 20;</code>
+       */
+      PVP_CATCH_SUPER(19, 20),
+      /**
+       * <code>PVP_CATCH_ULTRA = 21;</code>
+       */
+      PVP_CATCH_ULTRA(20, 21),
+      /**
+       * <code>PVP_CATCH_EPIC = 22;</code>
+       */
+      PVP_CATCH_EPIC(21, 22),
       ;
 
       /**
@@ -2325,25 +2409,89 @@ public final class MiniEventProtos {
        */
       public static final int NO_GOAL_VALUE = 1;
       /**
-       * <code>HEAL_HP = 2;</code>
+       * <code>GAIN_BUILDING_STRENGTH = 2;</code>
        */
-      public static final int HEAL_HP_VALUE = 2;
+      public static final int GAIN_BUILDING_STRENGTH_VALUE = 2;
       /**
-       * <code>ENHANCE_TOON_XP = 3;</code>
+       * <code>GAIN_RESEARCH_STRENGTH = 3;</code>
        */
-      public static final int ENHANCE_TOON_XP_VALUE = 3;
+      public static final int GAIN_RESEARCH_STRENGTH_VALUE = 3;
       /**
-       * <code>USE_CASH_UPGRADING_BUILDING = 4;</code>
+       * <code>SPIN_BASIC_GRAB = 4;</code>
        */
-      public static final int USE_CASH_UPGRADING_BUILDING_VALUE = 4;
+      public static final int SPIN_BASIC_GRAB_VALUE = 4;
       /**
-       * <code>USE_OIL_UPGRADING_BUILDING = 5;</code>
+       * <code>SPIN_ULTIMATE_GRAB = 5;</code>
        */
-      public static final int USE_OIL_UPGRADING_BUILDING_VALUE = 5;
+      public static final int SPIN_ULTIMATE_GRAB_VALUE = 5;
       /**
-       * <code>CAPTURE_SCIENTIST = 6;</code>
+       * <code>ENHANCE_COMMON = 6;</code>
        */
-      public static final int CAPTURE_SCIENTIST_VALUE = 6;
+      public static final int ENHANCE_COMMON_VALUE = 6;
+      /**
+       * <code>ENHANCE_RARE = 7;</code>
+       */
+      public static final int ENHANCE_RARE_VALUE = 7;
+      /**
+       * <code>ENHANCE_SUPER = 8;</code>
+       */
+      public static final int ENHANCE_SUPER_VALUE = 8;
+      /**
+       * <code>ENHANCE_ULTRA = 9;</code>
+       */
+      public static final int ENHANCE_ULTRA_VALUE = 9;
+      /**
+       * <code>ENHANCE_EPIC = 10;</code>
+       */
+      public static final int ENHANCE_EPIC_VALUE = 10;
+      /**
+       * <code>CLAN_HELP = 11;</code>
+       */
+      public static final int CLAN_HELP_VALUE = 11;
+      /**
+       * <code>CLAN_DONATE = 12;</code>
+       */
+      public static final int CLAN_DONATE_VALUE = 12;
+      /**
+       * <code>BATTLE_AVENGE_REQUEST = 13;</code>
+       */
+      public static final int BATTLE_AVENGE_REQUEST_VALUE = 13;
+      /**
+       * <code>BATTLE_AVENGE_WIN = 14;</code>
+       */
+      public static final int BATTLE_AVENGE_WIN_VALUE = 14;
+      /**
+       * <code>BATTLE_REVENGE_WIN = 15;</code>
+       */
+      public static final int BATTLE_REVENGE_WIN_VALUE = 15;
+      /**
+       * <code>STEAL_CASH = 16;</code>
+       */
+      public static final int STEAL_CASH_VALUE = 16;
+      /**
+       * <code>STEAL_OIL = 17;</code>
+       */
+      public static final int STEAL_OIL_VALUE = 17;
+      /**
+       * <code>PVP_CATCH_COMMON = 18;</code>
+       */
+      public static final int PVP_CATCH_COMMON_VALUE = 18;
+      /**
+       * <code>PVP_CATCH_RARE = 19;</code>
+       */
+      public static final int PVP_CATCH_RARE_VALUE = 19;
+      /**
+       * <code>PVP_CATCH_SUPER = 20;</code>
+       */
+      public static final int PVP_CATCH_SUPER_VALUE = 20;
+      /**
+       * <code>PVP_CATCH_ULTRA = 21;</code>
+       */
+      public static final int PVP_CATCH_ULTRA_VALUE = 21;
+      /**
+       * <code>PVP_CATCH_EPIC = 22;</code>
+       */
+      public static final int PVP_CATCH_EPIC_VALUE = 22;
 
 
       public final int getNumber() { return value; }
@@ -2351,11 +2499,27 @@ public final class MiniEventProtos {
       public static MiniEventGoalType valueOf(int value) {
         switch (value) {
           case 1: return NO_GOAL;
-          case 2: return HEAL_HP;
-          case 3: return ENHANCE_TOON_XP;
-          case 4: return USE_CASH_UPGRADING_BUILDING;
-          case 5: return USE_OIL_UPGRADING_BUILDING;
-          case 6: return CAPTURE_SCIENTIST;
+          case 2: return GAIN_BUILDING_STRENGTH;
+          case 3: return GAIN_RESEARCH_STRENGTH;
+          case 4: return SPIN_BASIC_GRAB;
+          case 5: return SPIN_ULTIMATE_GRAB;
+          case 6: return ENHANCE_COMMON;
+          case 7: return ENHANCE_RARE;
+          case 8: return ENHANCE_SUPER;
+          case 9: return ENHANCE_ULTRA;
+          case 10: return ENHANCE_EPIC;
+          case 11: return CLAN_HELP;
+          case 12: return CLAN_DONATE;
+          case 13: return BATTLE_AVENGE_REQUEST;
+          case 14: return BATTLE_AVENGE_WIN;
+          case 15: return BATTLE_REVENGE_WIN;
+          case 16: return STEAL_CASH;
+          case 17: return STEAL_OIL;
+          case 18: return PVP_CATCH_COMMON;
+          case 19: return PVP_CATCH_RARE;
+          case 20: return PVP_CATCH_SUPER;
+          case 21: return PVP_CATCH_ULTRA;
+          case 22: return PVP_CATCH_EPIC;
           default: return null;
         }
       }
@@ -2525,6 +2689,48 @@ public final class MiniEventProtos {
       return pointsGained_;
     }
 
+    public static final int ACTIONDESCRIPTION_FIELD_NUMBER = 7;
+    private java.lang.Object actionDescription_;
+    /**
+     * <code>optional string actionDescription = 7;</code>
+     */
+    public boolean hasActionDescription() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string actionDescription = 7;</code>
+     */
+    public java.lang.String getActionDescription() {
+      java.lang.Object ref = actionDescription_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          actionDescription_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string actionDescription = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getActionDescriptionBytes() {
+      java.lang.Object ref = actionDescription_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        actionDescription_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       miniEventGoalId_ = 0;
       miniEventId_ = 0;
@@ -2532,6 +2738,7 @@ public final class MiniEventProtos {
       goalAmt_ = 0;
       goalDesc_ = "";
       pointsGained_ = 0;
+      actionDescription_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2563,6 +2770,9 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, pointsGained_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getActionDescriptionBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2596,6 +2806,10 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, pointsGained_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getActionDescriptionBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2726,6 +2940,8 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000010);
         pointsGained_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        actionDescription_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2778,6 +2994,10 @@ public final class MiniEventProtos {
           to_bitField0_ |= 0x00000020;
         }
         result.pointsGained_ = pointsGained_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.actionDescription_ = actionDescription_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2813,6 +3033,11 @@ public final class MiniEventProtos {
         }
         if (other.hasPointsGained()) {
           setPointsGained(other.getPointsGained());
+        }
+        if (other.hasActionDescription()) {
+          bitField0_ |= 0x00000040;
+          actionDescription_ = other.actionDescription_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3076,6 +3301,82 @@ public final class MiniEventProtos {
       public Builder clearPointsGained() {
         bitField0_ = (bitField0_ & ~0x00000020);
         pointsGained_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object actionDescription_ = "";
+      /**
+       * <code>optional string actionDescription = 7;</code>
+       */
+      public boolean hasActionDescription() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string actionDescription = 7;</code>
+       */
+      public java.lang.String getActionDescription() {
+        java.lang.Object ref = actionDescription_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            actionDescription_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string actionDescription = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getActionDescriptionBytes() {
+        java.lang.Object ref = actionDescription_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          actionDescription_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string actionDescription = 7;</code>
+       */
+      public Builder setActionDescription(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        actionDescription_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string actionDescription = 7;</code>
+       */
+      public Builder clearActionDescription() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        actionDescription_ = getDefaultInstance().getActionDescription();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string actionDescription = 7;</code>
+       */
+      public Builder setActionDescriptionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        actionDescription_ = value;
         onChanged();
         return this;
       }
@@ -7838,37 +8139,45 @@ public final class MiniEventProtos {
       "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
       "vl6.proto.MiniEventLeaderboardRewardProt" +
       "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
-      "(\t\022\014\n\004icon\030\n \001(\t\"\351\002\n\022MiniEventGoalProto\022",
+      "(\t\022\014\n\004icon\030\n \001(\t\"\276\005\n\022MiniEventGoalProto\022",
       "\027\n\017miniEventGoalId\030\001 \001(\005\022\023\n\013miniEventId\030" +
       "\002 \001(\005\022O\n\010goalType\030\003 \001(\01624.com.lvl6.proto" +
       ".MiniEventGoalProto.MiniEventGoalType:\007N" +
       "O_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(" +
-      "\t\022\024\n\014pointsGained\030\006 \001(\005\"\232\001\n\021MiniEventGoa" +
-      "lType\022\013\n\007NO_GOAL\020\001\022\013\n\007HEAL_HP\020\002\022\023\n\017ENHAN" +
-      "CE_TOON_XP\020\003\022\037\n\033USE_CASH_UPGRADING_BUILD" +
-      "ING\020\004\022\036\n\032USE_OIL_UPGRADING_BUILDING\020\005\022\025\n" +
-      "\021CAPTURE_SCIENTIST\020\006\"\362\001\n\034MiniEventForPla" +
-      "yerLevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEv",
-      "entId\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014pla" +
-      "yerLvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025" +
-      "\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPts" +
-      "\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.proto" +
-      ".MiniEventTierRewardProto\"^\n\030MiniEventTi" +
-      "erRewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId" +
-      "\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(" +
-      "\005\"s\n\037MiniEventLeaderboardRewardProto\022\016\n\006" +
-      "melrId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\020\n\010rew" +
-      "ardId\030\003 \001(\005\022\031\n\021leaderboardMinPos\030\004 \001(\005\"\203",
-      "\002\n\022UserMiniEventProto\022\023\n\013miniEventId\030\001 \001" +
-      "(\005\022\020\n\010userUuid\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n" +
-      "\017tierOneRedeemed\030\004 \001(\010\022\027\n\017tierTwoRedeeme" +
-      "d\030\005 \001(\010\022\031\n\021tierThreeRedeemed\030\006 \001(\010\0221\n\tmi" +
-      "niEvent\030\007 \001(\0132\036.com.lvl6.proto.MiniEvent" +
-      "Proto\0225\n\005goals\030\010 \003(\0132&.com.lvl6.proto.Us" +
-      "erMiniEventGoalProto\"U\n\026UserMiniEventGoa" +
-      "lProto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017miniEventGoa" +
-      "lId\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021B\017MiniEvent" +
-      "Protos"
+      "\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n\021actionDescrip" +
+      "tion\030\007 \001(\t\"\324\003\n\021MiniEventGoalType\022\013\n\007NO_G" +
+      "OAL\020\001\022\032\n\026GAIN_BUILDING_STRENGTH\020\002\022\032\n\026GAI" +
+      "N_RESEARCH_STRENGTH\020\003\022\023\n\017SPIN_BASIC_GRAB" +
+      "\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005\022\022\n\016ENHANCE_CO" +
+      "MMON\020\006\022\020\n\014ENHANCE_RARE\020\007\022\021\n\rENHANCE_SUPE",
+      "R\020\010\022\021\n\rENHANCE_ULTRA\020\t\022\020\n\014ENHANCE_EPIC\020\n" +
+      "\022\r\n\tCLAN_HELP\020\013\022\017\n\013CLAN_DONATE\020\014\022\031\n\025BATT" +
+      "LE_AVENGE_REQUEST\020\r\022\025\n\021BATTLE_AVENGE_WIN" +
+      "\020\016\022\026\n\022BATTLE_REVENGE_WIN\020\017\022\016\n\nSTEAL_CASH" +
+      "\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP_CATCH_COMMON\020\022\022" +
+      "\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017PVP_CATCH_SUPER\020\024" +
+      "\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n\016PVP_CATCH_EPIC\020" +
+      "\026\"\362\001\n\034MiniEventForPlayerLevelProto\022\017\n\007me" +
+      "fplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014play" +
+      "erLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025\n\r",
+      "tierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006 \001" +
+      "(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewards\030\010" +
+      " \003(\0132(.com.lvl6.proto.MiniEventTierRewar" +
+      "dProto\"^\n\030MiniEventTierRewardProto\022\016\n\006me" +
+      "trId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewardId\030" +
+      "\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEventLeade" +
+      "rboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013min" +
+      "iEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n\021lead" +
+      "erboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEventPro" +
+      "to\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(",
+      "\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeemed\030\004 " +
+      "\001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tierThre" +
+      "eRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132\036.com" +
+      ".lvl6.proto.MiniEventProto\0225\n\005goals\030\010 \003(" +
+      "\0132&.com.lvl6.proto.UserMiniEventGoalProt" +
+      "o\"U\n\026UserMiniEventGoalProto\022\020\n\010userUuid\030" +
+      "\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010progre" +
+      "ss\030\003 \001(\005B\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7893,7 +8202,7 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor,
-        new java.lang.String[] { "MiniEventGoalId", "MiniEventId", "GoalType", "GoalAmt", "GoalDesc", "PointsGained", });
+        new java.lang.String[] { "MiniEventGoalId", "MiniEventId", "GoalType", "GoalAmt", "GoalDesc", "PointsGained", "ActionDescription", });
     internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_fieldAccessorTable = new

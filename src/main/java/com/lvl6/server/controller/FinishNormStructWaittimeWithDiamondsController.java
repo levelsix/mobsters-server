@@ -42,12 +42,18 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
+	
+	@Autowired
+	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public FinishNormStructWaittimeWithDiamondsController() {
 		numAllocatedThreads = 2;
@@ -121,8 +127,8 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 			if (userStruct != null) {
 				int structId = userStruct.getStructId();
-				struct = StructureRetrieveUtils.getStructForStructId(structId);
-				formerStruct = StructureRetrieveUtils
+				struct = structureRetrieveUtils.getStructForStructId(structId);
+				formerStruct = structureRetrieveUtils
 						.getPredecessorStructForStructId(structId);
 			}
 
@@ -149,7 +155,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -220,7 +226,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 								expChange));
 				return false;
 			} else {
-				money.put(MiscMethods.gems, gemChange);
+				money.put(miscMethods.gems, gemChange);
 			}
 		}
 
@@ -275,7 +281,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> details = new HashMap<String, String>();
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_NORM_STRUCT;
-		String gems = MiscMethods.gems;
+		String gems = miscMethods.gems;
 
 		previousCurrencies.put(gems, previousGems);
 		currentCurrencies.put(gems, aUser.getGems());
@@ -283,7 +289,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 		String detail = structDetails.toString();
 		details.put(gems, detail);
 
-		MiscMethods.writeToUserCurrencyOneUser(userId, timeOfPurchase, money,
+		miscMethods.writeToUserCurrencyOneUser(userId, timeOfPurchase, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				details);
 	}

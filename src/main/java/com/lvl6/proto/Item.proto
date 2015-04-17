@@ -28,8 +28,11 @@ message ItemProto {
 	optional int32 amount = 6;
 	optional float secretGiftChance = 7;
 	optional bool alwaysDisplayToUser = 8;
-	optional GameType actionGameType = 9;
+	optional GameActionType gameActionType = 9;
 	optional string shortName = 10;
+	
+	//atm, only valid for ItemType=REFRESH_MINI_JOB;
+	optional Quality quality = 11 [default = NO_QUALITY];
 }
 
 //------------------------------------------------------------------------------------------
@@ -47,6 +50,7 @@ enum ItemType {
 	SPEED_UP = 4;
 	//entity allowing user to build multiple structures
 	BUILDER = 5;
+	REFRESH_MINI_JOB = 6;
 }
 
 //------------------------------------------------------------------------------------------
@@ -71,5 +75,8 @@ message UserItemSecretGiftProto {
 	optional int64 createTime = 5;
 }
 
-
-
+//------------------------------------------------------------------------------------------
+message ItemGemPriceProto {
+	optional int32 itemId = 1;
+	optional int32 gemPrice = 2;
+}

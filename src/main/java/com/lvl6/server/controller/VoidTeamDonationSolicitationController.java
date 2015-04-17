@@ -39,6 +39,9 @@ public class VoidTeamDonationSolicitationController extends EventController {
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
+	
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtils;
 
 	public VoidTeamDonationSolicitationController() {
 		numAllocatedThreads = 4;
@@ -100,7 +103,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 								new ArrayList<MonsterSnapshotForUser>());
 					}
 
-					MonsterSnapshotForUser msfu = MonsterStuffUtils
+					MonsterSnapshotForUser msfu = monsterStuffUtils
 							.javafyUserMonsterSnapshotProto(umsp);
 
 					List<MonsterSnapshotForUser> msfuList = donationIdsToSnapshots

@@ -53,7 +53,7 @@ public class MiniEventRetrieveUtils {
 		}
 	}
 
-	public static MiniEvent getCurrentlyActiveMiniEvent( Date now )
+	public MiniEvent getCurrentlyActiveMiniEvent( Date now )
 	{
 		if (null == miniEventTree) {
 			log.warn("no MiniEvent tree created");
@@ -75,7 +75,7 @@ public class MiniEventRetrieveUtils {
 		return active;
 	}
 
-	public static Map<Integer, MiniEvent> getAllIdsToMiniEvents() {
+	public Map<Integer, MiniEvent> getAllIdsToMiniEvents() {
 		if (null == idToMiniEvent) {
 			reload();
 		}
@@ -83,7 +83,7 @@ public class MiniEventRetrieveUtils {
 		return idToMiniEvent;
 	}
 
-	public static MiniEvent getMiniEventById(int id) {
+	public MiniEvent getMiniEventById(int id) {
 		if (null == idToMiniEvent) {
 			reload();
 		}
@@ -94,12 +94,12 @@ public class MiniEventRetrieveUtils {
 		return ep;
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdsToMiniEvents();
 		setOrderedMiniEvents();
 	}
 
-	private static void setStaticIdsToMiniEvents() {
+	private void setStaticIdsToMiniEvents() {
 		log.debug("setting static map of id to MiniEvent");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -132,7 +132,7 @@ public class MiniEventRetrieveUtils {
 		}
 	}
 
-	private static void setOrderedMiniEvents() {
+	private void setOrderedMiniEvents() {
 		if ( null == idToMiniEvent) {
 			log.warn("NO MINIEVENTS!");
 			return;
@@ -152,7 +152,7 @@ public class MiniEventRetrieveUtils {
 
 	}
 
-	private static MiniEvent convertRSRowToMiniEvent(ResultSet rs)
+	private MiniEvent convertRSRowToMiniEvent(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MINI_EVENT__ID);
 		Timestamp ts = rs.getTimestamp(DBConstants.MINI_EVENT__START_TIME);

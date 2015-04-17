@@ -28,6 +28,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
+import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -47,12 +48,21 @@ public class RedeemSecretGiftController extends EventController {
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected SecretGiftUtils secretGiftUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -112,14 +122,14 @@ public class RedeemSecretGiftController extends EventController {
 			//
 			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(userId,
 					idsRedeemed, clientTime, itemSecretGiftForUserRetrieveUtil,
-					userRetrieveUtil, itemForUserRetrieveUtil,
+					userRetrieveUtil, itemForUserRetrieveUtil, secretGiftUtils,
 					DeleteUtils.get(), UpdateUtils.get(), InsertUtils.get());
 
 			rsga.execute(resBuilder);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				Collection<ItemSecretGiftForUser> nuGifts = rsga.getGifts();
-				Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+				Collection<UserItemSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
 						.createUserItemSecretGiftProto(nuGifts);
 				log.info(String.format("setting nuGifts: %s,\t protos: %s",
 						nuGifts, nuGiftsProtos));
@@ -137,7 +147,7 @@ public class RedeemSecretGiftController extends EventController {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = rsga.getUser();
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								u, null, null);
 				resEventUpdate.setTag(event.getTag());

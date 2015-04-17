@@ -26,7 +26,7 @@ public class FileDownloadRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_FILE_DOWNLOAD_CONFIG;
 
-	public static Map<Integer, FileDownload> getIdsToFileDownloads() {
+	public Map<Integer, FileDownload> getIdsToFileDownloads() {
 		log.debug("retrieving all filedownload map");
 		if (null == idsToFileDownloads) {
 			setStaticIdsToFileDownloads();
@@ -34,7 +34,7 @@ public class FileDownloadRetrieveUtils {
 		return idsToFileDownloads;
 	}
 
-	public static FileDownload getFileDownloadForId(int fileDownloadId) {
+	public FileDownload getFileDownloadForId(int fileDownloadId) {
 		log.debug(String.format("retrieve skill data for skill=%s",
 				fileDownloadId));
 		if (null == idsToFileDownloads) {
@@ -43,7 +43,7 @@ public class FileDownloadRetrieveUtils {
 		return idsToFileDownloads.get(fileDownloadId);
 	}
 
-	private static void setStaticIdsToFileDownloads() {
+	private void setStaticIdsToFileDownloads() {
 		log.debug("setting static map of skillIds to skills");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -82,14 +82,14 @@ public class FileDownloadRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticIdsToFileDownloads();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static FileDownload convertRSRowToFileDownload(ResultSet rs)
+	private FileDownload convertRSRowToFileDownload(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.FILE_DOWNLOAD__ID);
 		String filename = rs.getString(DBConstants.FILE_DOWNLOAD__FILENAME);

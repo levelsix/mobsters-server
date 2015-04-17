@@ -27,10 +27,24 @@ public class IAPValues {
 	public static final String PACKAGE5 = Globals.APPLE_BUNDLE_ID() + ".gem5";
 	public static final String STARTERPACK = Globals.APPLE_BUNDLE_ID()
 			+ ".starterpack";
+	public static final String BUILDERPACK = Globals.APPLE_BUNDLE_ID()
+			+ ".builderpack";
+	public static final String STARTERBUILDERPACK = Globals.APPLE_BUNDLE_ID()
+			+ ".starterbuilderpack";
 	public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID()
 			+ ".moneytree1";
 	public static final String MONEYTREENOSALE = Globals.APPLE_BUNDLE_ID()
-			+ ".moneytreenosale1";
+			+ ".moneytreenosale";
+	public static final String SALE5 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale5";
+	public static final String SALE10 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale10";
+	public static final String SALE20 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale20";
+	public static final String SALE50 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale50";
+	public static final String SALE100 = Globals.APPLE_BUNDLE_ID()
+			+ ".sale100";
 
 	public static final String PACKAGE1IMG = "pilegems.png";
 	public static final String PACKAGE2IMG = "baggems.png";
@@ -58,17 +72,20 @@ public class IAPValues {
 	public static final double PACKAGE_4_PRICE = 49.99;
 	public static final double PACKAGE_5_PRICE = 99.99;
 	public static final double STARTER_PACK_PRICE = 4.99;
+	public static final double BUILDER_PACK_PRICE = 9.99;
+	public static final double STARTER_BUILDER_PACK_PRICE = 4.99;
 	public static final double MONEY_TREE_PRICE = 4.99;
 
 	public static final List<String> iapPackageNames = Arrays.asList(PACKAGE1,
-			PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5, STARTERPACK, MONEYTREE,
-			MONEYTREENOSALE);
+			PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5, STARTERPACK, BUILDERPACK,
+			STARTERBUILDERPACK, MONEYTREE, MONEYTREENOSALE, SALE5, SALE10,
+			SALE20, SALE50, SALE100);
 
-	//    public static final List<String> packageNames = 
+	//    public static final List<String> packageNames =
 	//            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
 
-	//    public static final List<Integer> packageGivenDiamonds = 
-	//            Arrays.asList(PACKAGE_1_DIAMONDS, PACKAGE_2_DIAMONDS, PACKAGE_3_DIAMONDS, 
+	//    public static final List<Integer> packageGivenDiamonds =
+	//            Arrays.asList(PACKAGE_1_DIAMONDS, PACKAGE_2_DIAMONDS, PACKAGE_3_DIAMONDS,
 	//                    PACKAGE_4_DIAMONDS, PACKAGE_5_DIAMONDS);
 
 	public static int getDiamondsForPackageName(String packageName) {
@@ -128,6 +145,12 @@ public class IAPValues {
 		if (packageName.equals(STARTERPACK)) {
 			return STARTER_PACK_PRICE;
 		}
+		if(packageName.equals(BUILDERPACK)) {
+			return BUILDER_PACK_PRICE;
+		}
+		if(packageName.equals(STARTERBUILDERPACK)) {
+			return STARTER_BUILDER_PACK_PRICE;
+		}
 		if (packageName.equals(MONEYTREE)) {
 			return MONEY_TREE_PRICE;
 		}
@@ -141,6 +164,20 @@ public class IAPValues {
 		return false;
 	}
 
+	public static boolean packageIsBuilderPack(String packageName) {
+		if(packageName.equals(BUILDERPACK)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean packageIsStarterBuilderPack(String packageName) {
+		if(packageName.equals(STARTERBUILDERPACK)) {
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean packageIsMoneyTree(String packageName) {
 		if (packageName.equals(MONEYTREE)) {
 			return true;
@@ -149,23 +186,30 @@ public class IAPValues {
 	}
 
 	public static InAppPurchasePackageType getPackageType(String packageName) {
-		if (packageName.equals(PACKAGE1)) {
+		if (packageName.equals(PACKAGE1) ||
+		    packageName.equals(PACKAGE2) ||
+		    packageName.equals(PACKAGE3) ||
+		    packageName.equals(PACKAGE4) ||
+		    packageName.equals(PACKAGE5)) {
+
 			return InAppPurchasePackageType.GEMS;
 		}
-		if (packageName.equals(PACKAGE2)) {
-			return InAppPurchasePackageType.GEMS;
-		}
-		if (packageName.equals(PACKAGE3)) {
-			return InAppPurchasePackageType.GEMS;
-		}
-		if (packageName.equals(PACKAGE4)) {
-			return InAppPurchasePackageType.GEMS;
-		}
-		if (packageName.equals(PACKAGE5)) {
-			return InAppPurchasePackageType.GEMS;
-		}
+        if (packageName.equals(SALE5) ||
+                packageName.equals(SALE10) ||
+                packageName.equals(SALE20) ||
+                packageName.equals(SALE50) ||
+                packageName.equals(SALE100)) {
+
+                return InAppPurchasePackageType.SALE;
+            }
 		if (packageName.equals(STARTERPACK)) {
 			return InAppPurchasePackageType.STARTER_PACK;
+		}
+		if(packageName.equals(BUILDERPACK)) {
+			return InAppPurchasePackageType.BUILDER_PACK;
+		}
+		if(packageName.equals(STARTERBUILDERPACK)) {
+			return InAppPurchasePackageType.STARTER_BUILDER_PACK;
 		}
 
 		return InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;

@@ -36,6 +36,12 @@ public class SetFacebookIdController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -133,7 +139,7 @@ public class SetFacebookIdController extends EventController {
 			server.writeEvent(resEvent);
 
 			if (SetFacebookIdStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -198,7 +204,7 @@ public class SetFacebookIdController extends EventController {
 					continue;
 				}
 
-				MinimumUserProto existingProto = CreateInfoProtoUtils
+				MinimumUserProto existingProto = createInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(u, null);
 				resBuilder.setExisting(existingProto);
 				break;

@@ -26,7 +26,7 @@ public class PrerequisiteRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_PREREQUISITE_CONFIG;
 
-	public static Map<Integer, Prerequisite> getPrerequisiteIdsToPrerequisites() {
+	public Map<Integer, Prerequisite> getPrerequisiteIdsToPrerequisites() {
 		if (null == prerequisiteIdsToPrerequisites) {
 			setStaticPrerequisiteIdsToPrerequisites();
 		}
@@ -60,7 +60,7 @@ public class PrerequisiteRetrieveUtils {
 	}
 	*/
 
-	private static void setStaticPrerequisiteIdsToPrerequisites() {
+	private void setStaticPrerequisiteIdsToPrerequisites() {
 		log.debug("setting static map of prerequisite ids to prerequisites");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -98,14 +98,14 @@ public class PrerequisiteRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticPrerequisiteIdsToPrerequisites();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static Prerequisite convertRSRowToPrerequisite(ResultSet rs)
+	private Prerequisite convertRSRowToPrerequisite(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.PREREQUISITE__ID);
 		String gameType = rs.getString(DBConstants.PREREQUISITE__GAME_TYPE);

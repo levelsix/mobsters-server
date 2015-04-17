@@ -81,6 +81,10 @@ public class RetrieveClanInfoController extends EventController {
 
 	@Autowired
 	protected ClanHelpCountForUserRetrieveUtil clanHelpCountForUserRetrieveUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public RetrieveClanInfoController() {
 		numAllocatedThreads = 8;
@@ -297,7 +301,7 @@ public class RetrieveClanInfoController extends EventController {
 				//might be better if just got all user's battle wons from db
 				//instead of one by one from hazelcast 
 				int battlesWon = getBattlesWonForUser(userId);
-				MinimumUserProtoForClans minUser = CreateInfoProtoUtils
+				MinimumUserProtoForClans minUser = createInfoProtoUtils
 						.createMinimumUserProtoForClans(u, c, uc.getStatus(),
 								clanRaidContribution, battlesWon, uchc);
 				resBuilder.addMembers(minUser);
@@ -306,7 +310,7 @@ public class RetrieveClanInfoController extends EventController {
 				if (userIdsToMonsterTeams.containsKey(userId)) {
 					List<MonsterForUser> monsterTeam = userIdsToMonsterTeams
 							.get(userId);
-					List<FullUserMonsterProto> proto = CreateInfoProtoUtils
+					List<FullUserMonsterProto> proto = createInfoProtoUtils
 							.createFullUserMonsterProtoList(monsterTeam);
 
 					//create the user monster team proto via the builder
@@ -358,7 +362,7 @@ public class RetrieveClanInfoController extends EventController {
 		for (Clan c : clanList) {
 			String clanId = c.getId();
 			int size = clanIdsToSizes.get(clanId);
-			resBuilder.addClanInfo(CreateInfoProtoUtils
+			resBuilder.addClanInfo(createInfoProtoUtils
 					.createFullClanProtoWithClanSize(c, size));
 		}
 	}

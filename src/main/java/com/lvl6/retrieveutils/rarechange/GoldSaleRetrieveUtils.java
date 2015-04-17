@@ -29,7 +29,7 @@ public class GoldSaleRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_GOLD_SALE_CONFIG;
 
-	public static Map<Integer, GoldSale> getGoldSaleIdsToGoldSales() {
+	public Map<Integer, GoldSale> getGoldSaleIdsToGoldSales() {
 		log.debug("retrieving all goldSales data map");
 		if (goldSaleIdsToGoldSales == null) {
 			setStaticGoldSaleIdsToGoldSales();
@@ -37,7 +37,7 @@ public class GoldSaleRetrieveUtils {
 		return goldSaleIdsToGoldSales;
 	}
 
-	public static List<GoldSale> getCurrentAndFutureGoldSales() {
+	public List<GoldSale> getCurrentAndFutureGoldSales() {
 		log.debug("retrieve current and future gold sales");
 		if (goldSaleIdsToGoldSales == null) {
 			setStaticGoldSaleIdsToGoldSales();
@@ -54,7 +54,7 @@ public class GoldSaleRetrieveUtils {
 		return sales;
 	}
 
-	public static GoldSale getGoldSaleForGoldSaleId(int goldSaleId) {
+	public GoldSale getGoldSaleForGoldSaleId(int goldSaleId) {
 		log.debug("retrieve goldSale data for goldSale " + goldSaleId);
 		if (goldSaleIdsToGoldSales == null) {
 			setStaticGoldSaleIdsToGoldSales();
@@ -62,7 +62,7 @@ public class GoldSaleRetrieveUtils {
 		return goldSaleIdsToGoldSales.get(goldSaleId);
 	}
 
-	public static Map<Integer, GoldSale> getGoldSalesForGoldSaleIds(
+	public Map<Integer, GoldSale> getGoldSalesForGoldSaleIds(
 			List<Integer> ids) {
 		log.debug("retrieve goldSale data for goldSaleids " + ids);
 		if (goldSaleIdsToGoldSales == null) {
@@ -75,7 +75,7 @@ public class GoldSaleRetrieveUtils {
 		return toreturn;
 	}
 
-	private static void setStaticGoldSaleIdsToGoldSales() {
+	private void setStaticGoldSaleIdsToGoldSales() {
 		log.debug("setting static map of goldSaleIds to goldSales");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -109,14 +109,14 @@ public class GoldSaleRetrieveUtils {
 		}
 	}
 
-	public static void reload() {
+	public void reload() {
 		setStaticGoldSaleIdsToGoldSales();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static GoldSale convertRSRowToGoldSale(ResultSet rs)
+	private GoldSale convertRSRowToGoldSale(ResultSet rs)
 			throws SQLException {
 		int i = 1;
 		int id = rs.getInt(i++);

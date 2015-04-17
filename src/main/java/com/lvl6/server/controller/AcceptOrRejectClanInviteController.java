@@ -41,6 +41,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AcceptOrRejectClanInviteAction;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -54,6 +55,9 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -172,7 +176,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 						rejectedInviteIds, userRetrieveUtil,
 						RetrieveUtils.userClanRetrieveUtils(),
 						InsertUtils.get(), DeleteUtils.get(), clanRetrieveUtil,
-						clanInviteRetrieveUtil);
+						clanInviteRetrieveUtil, createInfoProtoUtils);
 				aorcia.execute(resBuilder);
 			}
 
@@ -199,7 +203,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 						fillMe, clanHelpRetrieveUtil, clanAvengeRetrieveUtil,
 						clanAvengeUserRetrieveUtil, clanChatPostRetrieveUtils,
 						clanMemberTeamDonationRetrieveUtil,
-						monsterSnapshotForUserRetrieveUtil);
+						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 				ClanDataProto cdp = scdpa.execute();
 
 				sendClanData(event, senderProto, userId, cdp);
