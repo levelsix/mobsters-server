@@ -111,7 +111,7 @@
 //	//	PurchaseCityExpansionController purchaseCityExpansionController;
 //
 //	@Autowired
-//	StartupController startupController;
+//	StartupControllerOld startupController;
 //
 //	@Autowired
 //	UserCreateController userCreateController;
@@ -1400,11 +1400,11 @@
 //	//		this.purchaseCityExpansionController = purchaseCityExpansionController;
 //	//	}
 //
-//	public StartupController getStartupController() {
+//	public StartupControllerOld getStartupController() {
 //		return startupController;
 //	}
 //
-//	public void setStartupController(StartupController startupController) {
+//	public void setStartupController(StartupControllerOld startupController) {
 //		this.startupController = startupController;
 //	}
 //

@@ -99,6 +99,7 @@ public class UserClanRetrieveUtils2 {
 			log.error("user clan retrieve db error.", e);
 			//		} finally {
 			//			DBConnection.get().close(rs, null, conn);
+			userClans = new ArrayList<UserClan>();
 		}
 		return userClans;
 	}
