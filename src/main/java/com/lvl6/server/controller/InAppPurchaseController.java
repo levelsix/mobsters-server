@@ -53,9 +53,9 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
+import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.server.controller.utils.UserSegmentingUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -136,8 +136,6 @@ public class InAppPurchaseController extends EventController {
     @Autowired
     protected UserRetrieveUtils2 userRetrieveUtils;
 
-    @Autowired
-    protected UserSegmentingUtil userSegmentingUtil;
 
     public InAppPurchaseController() {
         numAllocatedThreads = 2;
@@ -441,7 +439,17 @@ public class InAppPurchaseController extends EventController {
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 
-		if(userSegmentingUtil.serviceCombinedStarterAndBuilderPack(user)) {
+		Object[] objArray = new Object[2];
+		objArray[0] = "COOPER";
+		objArray[1] = "ALEX";
+
+		Float[] floatArray = new Float[2];
+		floatArray[0] = (float)0.5;
+		floatArray[1] = (float)0.5;
+
+		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
+
+		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
 			if(!iapsa.isStarterPack()) {
 				resBuilder.setSuccessorSalesPackage(preSpp);
 			}

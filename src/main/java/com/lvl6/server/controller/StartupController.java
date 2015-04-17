@@ -184,11 +184,11 @@ import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
+import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.server.controller.utils.UserSegmentingUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -434,8 +434,6 @@ public class StartupController extends EventController {
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
-    @Autowired
-    protected UserSegmentingUtil userSegmentingUtil;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -573,7 +571,9 @@ public class StartupController extends EventController {
 					log.info("No major update... getting user info");
 
 					if(user.getSegmentationGroup() == 0) {
-						int segmentationGroup = userSegmentingUtil.convertUserIdIntoInt(playerId);
+						UserSegmentationGroupAction usga = new UserSegmentationGroupAction(playerId);
+						usga.convertUserIdIntoInt();
+						int segmentationGroup = usga.getSegmentationGroup();
 						user.updateUserSegmentationGroup(segmentationGroup);
 					}
 
@@ -756,7 +756,7 @@ public class StartupController extends EventController {
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 
-			if(userSegmentingUtil.serviceCombinedStarterAndBuilderPack(user)) {
+			if(serviceCombinedStarterAndBuilderPack(user)) {
 				setStarterBuilderPackForUser(resBuilder, user);
 				log.info("{}ms at setStarterBuilderPackForUser", stopWatch.getTime());
 			}
@@ -1733,6 +1733,25 @@ public class StartupController extends EventController {
 			}
 		}
 	}
+
+	public boolean serviceCombinedStarterAndBuilderPack(User user) {
+		Object[] objArray = new Object[2];
+		objArray[0] = "COOPER";
+		objArray[1] = "ALEX";
+
+		Float[] floatArray = new Float[2];
+		floatArray[0] = (float)0.5;
+		floatArray[1] = (float)0.5;
+
+		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
+
+		if(usga.returnAppropriateObjectGroup().equals("COOPER"))
+			return true;
+		else return false;
+	}
+
+
+
 
 	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {
 		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
