@@ -1356,7 +1356,7 @@ class StartupService extends LazyLogging{
     Future{
       timed("StartupService.setDefaultLanguagesForUser"){
       val tsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(userId);
-        logger.info("tsfuList: $tsfuList");
+        logger.info(s"tsfuList: $tsfuList");
         var dlp:DefaultLanguagesProto  = null;
         if(tsfuList != null && !tsfuList.isEmpty()) {
           dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
