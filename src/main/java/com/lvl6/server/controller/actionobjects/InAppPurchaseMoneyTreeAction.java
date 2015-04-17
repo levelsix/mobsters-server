@@ -279,6 +279,7 @@ public class InAppPurchaseMoneyTreeAction {
 	public void prepCurrencyHistory() {
 		String gems = miscMethods.gems;
 
+		prevCurrencies = new HashMap<String, Integer>();
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		curCurrencies.put(gems, user.getGems());

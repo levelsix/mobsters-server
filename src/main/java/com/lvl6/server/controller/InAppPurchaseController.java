@@ -152,9 +152,7 @@ public class InAppPurchaseController extends EventController {
     }
 
     private SalesPackage salesPackage;
-    private boolean isStarterPack = false;
-    private boolean isMoneyTree = false;
-    private boolean isSalesPack = false;
+
 
     /*
      * db stuff done before sending event to eventwriter/client because the
@@ -339,6 +337,8 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseAction iapa = null;
             InAppPurchaseSalesAction iapsa = null;
             InAppPurchaseMoneyTreeAction iapmta = null;
+            boolean isMoneyTree = false;
+            boolean isSalesPack = false;
 
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
