@@ -153,7 +153,7 @@ public class InAppPurchaseMoneyTreeAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		if (!(duplicateReceipt && userOwnsOneMoneyTreeMax())) {
+		if (duplicateReceipt || !userOwnsOneMoneyTreeMax()) {
 			log.error("user trying to buy the starter pack again! {}, {}",
 					packageName, user);
 			return false;
