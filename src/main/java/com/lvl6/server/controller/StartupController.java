@@ -753,8 +753,6 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
-			setSalesForUser(resBuilder, user);
-			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 
 			if(serviceCombinedStarterAndBuilderPack(user)) {
 				setStarterBuilderPackForUser(resBuilder, user);
@@ -766,6 +764,9 @@ public class StartupController extends EventController {
 				setBuilderPackForUser(resBuilder, user, userItemMap);
 				log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
 			}
+
+			setSalesForUser(resBuilder, user);
+			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1723,7 +1724,8 @@ public class StartupController extends EventController {
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
-					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) { //make sure it's not starter pack
+					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK) &&
+					!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
 						(sp.getTimeEnd().getTime() > now.getTime())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
@@ -1749,9 +1751,6 @@ public class StartupController extends EventController {
 			return true;
 		else return false;
 	}
-
-
-
 
 	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {
 		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
