@@ -180,6 +180,7 @@ public class InAppPurchaseMoneyTreeAction {
 			int structId = sfu.getStructId();
 			for (Integer ids : structIdsToMoneyTreesMap.keySet()) {
 				if (structId == ids) {
+					smt = structIdsToMoneyTreesMap.get(ids);
 					numOfMoneyTrees++;
 				}
 			}
