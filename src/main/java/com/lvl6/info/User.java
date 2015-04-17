@@ -6,12 +6,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
+
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static final long serialVersionUID = -1551162148806486099L;
 
@@ -1128,19 +1134,18 @@ public class User implements Serializable {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (segmentationGroup != 0) {
-			relativeParams.put(DBConstants.USER__SEGMENTATION_GROUP, segmentationGroup);
-		}
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(
+				DBConstants.USER__SEGMENTATION_GROUP, segmentationGroup);
 
-		int numUpdated = DBConnection.get().updateTableRows(
-				DBConstants.TABLE_USER, relativeParams, null, conditionParams,
-				"and");
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null,
+				absoluteParams, conditionParams, "and");
 
 		if (numUpdated == 1) {
 			this.segmentationGroup = segmentationGroup;
 			return true;
 		}
+		log.error("did not update user segmentation group");
 		return false;
 	}
 

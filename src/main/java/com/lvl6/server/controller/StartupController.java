@@ -574,7 +574,9 @@ public class StartupController extends EventController {
 						UserSegmentationGroupAction usga = new UserSegmentationGroupAction(playerId);
 						usga.convertUserIdIntoInt();
 						int segmentationGroup = usga.getSegmentationGroup();
-						user.updateUserSegmentationGroup(segmentationGroup);
+						if(!user.updateUserSegmentationGroup(segmentationGroup)) {
+							log.error("something wrong with updating user's segmentation group value");
+						}
 					}
 
 					loginExistingUser(stopWatch, udid, playerId, resBuilder,
@@ -1747,9 +1749,14 @@ public class StartupController extends EventController {
 
 		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
 
-		if(usga.returnAppropriateObjectGroup().equals("COOPER"))
+		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
+			log.info("sending starterbuilderpack");
 			return true;
-		else return false;
+		}
+		else {
+			log.info("sending starter and builder pack");
+			return false;
+		}
 	}
 
 	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {

@@ -63,9 +63,25 @@ public class UserSegmentationGroupTest {
 		usga.setUserId("11009"); //5
 		assertTrue(usga.returnAppropriateObjectGroup().equals(sp));
 
-
-
 	}
+
+	@Test
+	public void test() {
+			Object[] objArray = new Object[2];
+			objArray[0] = "COOPER";
+			objArray[1] = "ALEX";
+
+			Float[] floatArray = new Float[2];
+			floatArray[0] = (float)0.9;
+			floatArray[1] = (float)0.1;
+
+			UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, "baaaf");
+
+			assertTrue(usga.returnAppropriateObjectGroup().equals("ALEX"));
+
+		}
+
+
 
 
 }
