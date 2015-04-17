@@ -1723,7 +1723,7 @@ public class StartupController extends EventController {
 		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
 			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
-					sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) { //make sure it's not starter pack
+					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
 						(sp.getTimeEnd().getTime() > now.getTime())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
