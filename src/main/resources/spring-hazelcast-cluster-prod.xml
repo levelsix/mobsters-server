@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.hazelcast.com/schema/spring
-        http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd
+        http://www.hazelcast.com/schema/spring/hazelcast-spring-3.2.xsd
 		">
 
 
@@ -19,7 +19,7 @@
 				<hz:property name="hazelcast.max.no.heartbeat.seconds">40</hz:property>
 				
 			</hz:properties>
-			<hz:network port="5701" port-auto-increment="false">
+			<hz:network port="5701" port-auto-increment="true">
 				<hz:join>
 					<hz:multicast enabled="false" />
 	                <hz:tcp-ip enabled="false" />
@@ -30,21 +30,7 @@
 					security-group-name="${hazelcast.ec2.security.group}" />
 				</hz:join>
 			</hz:network>
-
-<!--  			<hz:map name="playersByPlayerId"	backup-count="3"   max-size="0" >
-			</hz:map>
-
-
-			<hz:map  name="playersPreDatabaseByUDID"
-				backup-count="3"   max-size="0" />
-
-			<hz:map  name="messagesForDisconnectedPlayers"
-				backup-count="3"   max-size="0" />
-
-
-			<hz:map  name="playersInActionSet"
-				backup-count="3"   max-size="0" />
- -->
+	
 		</hz:config>
 	</hz:hazelcast>
 
