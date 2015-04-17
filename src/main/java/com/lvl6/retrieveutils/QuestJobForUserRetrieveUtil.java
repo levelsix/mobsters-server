@@ -68,7 +68,7 @@ public class QuestJobForUserRetrieveUtil {
 
 			log.info("getSpecificUserQuestJob() query={}", query);
 
-			qjfu = this.jdbcTemplate.queryForObject(query,
+			qjfu = this.jdbcTemplate.queryForObject(query, values.toArray(),
 					new UserQuestJobForClientMapper());
 		} catch (Exception e) {
 			log.error("could not retrieve user quest job for userId=" + userId
@@ -105,7 +105,7 @@ public class QuestJobForUserRetrieveUtil {
 
 			log.info("getQuestJobIdsToJobs() query={}", query);
 
-			List<QuestJobForUser> qjfuList = this.jdbcTemplate.query(query,
+			List<QuestJobForUser> qjfuList = this.jdbcTemplate.query(query, values.toArray(),
 					new UserQuestJobForClientMapper());
 
 			//map by quest job id to QuestJobForUser
@@ -158,7 +158,7 @@ public class QuestJobForUserRetrieveUtil {
 
 			log.info("getUserQuestJobForUserId() query={}", query);
 
-			List<QuestJobForUser> qjfuList = this.jdbcTemplate.query(query,
+			List<QuestJobForUser> qjfuList = this.jdbcTemplate.query(query, values.toArray(),
 					new UserQuestJobForClientMapper());
 
 			questIdToQjfuList = new HashMap<Integer, Collection<QuestJobForUser>>();
