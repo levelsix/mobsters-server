@@ -75,6 +75,12 @@ public class IAPValues {
 	public static final double BUILDER_PACK_PRICE = 9.99;
 	public static final double STARTER_BUILDER_PACK_PRICE = 4.99;
 	public static final double MONEY_TREE_PRICE = 4.99;
+	public static final double SALE_5_PRICE = 4.99;
+	public static final double SALE_10_PRICE = 9.99;
+	public static final double SALE_20_PRICE = 19.99;
+	public static final double SALE_50_PRICE = 49.99;
+	public static final double SALE_100_PRICE = 99.99;
+
 
 	public static final List<String> iapPackageNames = Arrays.asList(PACKAGE1,
 			PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5, STARTERPACK, BUILDERPACK,
@@ -153,6 +159,21 @@ public class IAPValues {
 		}
 		if (packageName.equals(MONEYTREE)) {
 			return MONEY_TREE_PRICE;
+		}
+		if(packageName.equals(SALE5)) {
+			return SALE_5_PRICE;
+		}
+		if(packageName.equals(SALE10)) {
+			return SALE_10_PRICE;
+		}
+		if(packageName.equals(SALE20)) {
+			return SALE_20_PRICE;
+		}
+		if(packageName.equals(SALE50)) {
+			return SALE_50_PRICE;
+		}
+		if(packageName.equals(SALE100)) {
+			return SALE_100_PRICE;
 		}
 		return 0;
 	}

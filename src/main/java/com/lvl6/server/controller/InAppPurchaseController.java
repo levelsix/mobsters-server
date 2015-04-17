@@ -277,6 +277,7 @@ public class InAppPurchaseController extends EventController {
             }
 
             InAppPurchaseResponseProto resProto = resBuilder.build();
+            log.info("res proto: " + resProto);
 
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     senderProto.getUserUuid());
@@ -438,6 +439,7 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
+		log.info("prespp: " + preSpp);
 
 		Object[] objArray = new Object[2];
 		objArray[0] = "COOPER";
@@ -473,6 +475,7 @@ public class InAppPurchaseController extends EventController {
         //TODO: protofy the rewards
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
                 nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+        log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
 
     }

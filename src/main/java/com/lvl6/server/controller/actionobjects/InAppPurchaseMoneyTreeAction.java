@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -146,6 +147,13 @@ public class InAppPurchaseMoneyTreeAction {
 	}
 
 	public boolean verifyMoneyTree(Builder resBuilder) {
+		try {
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		boolean duplicateReceipt = true;
 		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
