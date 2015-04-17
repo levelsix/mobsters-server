@@ -112,6 +112,7 @@ public class InAppPurchaseSalesAction {
 	private boolean isStarterPack;
 	private boolean isBuilderPack;
 	private String packageName;
+	private int salesValue;
 
 
 	public void execute(Builder resBuilder) {
@@ -184,7 +185,12 @@ public class InAppPurchaseSalesAction {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
-		builderCheck();
+		isBuilderPack = false;
+		if(IAPValues.packageIsBuilderPack(packageName) ||
+				IAPValues.packageIsStarterBuilderPack(packageName)) {
+			isBuilderPack = true;
+			builderCheck();
+		}
 
 		if (duplicateReceipt || !saleIsWithinTimeConstraints()) {
 			log.error("user should be buying more expensive sales package! {}",
@@ -196,22 +202,20 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public void builderCheck() {
-		isBuilderPack = false;
-		if(IAPValues.packageIsBuilderPack(packageName) ||
-				IAPValues.packageIsStarterBuilderPack(packageName)) {
-			isBuilderPack = true;
-			List<Integer> itemIdForBuilder = new ArrayList<Integer>();
-			itemIdForBuilder.add(10000);
-			List<ItemForUser> listOfUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUser(userId, itemIdForBuilder);
-			//something fucked up, bc if he has a builder item it means he alrdy bought builder pack!
-			if(!listOfUserItems.isEmpty()) {
-				for(Reward r : listOfRewards) {
-					if(r.getStaticDataId() == 10000 && r.getType().equalsIgnoreCase("ITEM")) {
-						listOfRewards.remove(r);
-						log.error("removing builder from list of rewards bc user alrdy has a builder item");
-					}
+		Reward builderReward = null;
+		List<Integer> itemIdForBuilder = new ArrayList<Integer>();
+		itemIdForBuilder.add(10000);
+		List<ItemForUser> listOfUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUser(userId, itemIdForBuilder);
+		//something fucked up, bc if he has a builder item it means he alrdy bought builder pack!
+		if(!listOfUserItems.isEmpty()) {
+			for(Reward r : listOfRewards) {
+				if(r.getStaticDataId() == 10000 && r.getType().equalsIgnoreCase("ITEM")) {
+					builderReward = r;
 				}
 			}
+			listOfRewards.remove(builderReward);
+			log.error("removing builder from list of rewards bc user alrdy has a builder item");
+
 		}
 	}
 
@@ -246,8 +250,12 @@ public class InAppPurchaseSalesAction {
 				success = false;
 			}
 
-			updateUserSalesValueAndLastPurchaseTime();
-
+			if(!salesPackageLessThanUserSalesValue()) {
+				updateUserSalesValueAndLastPurchaseTime();
+			}
+			else {
+				success = updateUtil.updateUserSalesValue(userId, 0, now);
+			}
 		} catch (Exception e) {
 			log.error(
 					String.format(
@@ -279,19 +287,16 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public boolean updateUserSalesValueAndLastPurchaseTime() {
-		if(!salesPackageLessThanUserSalesValue()) {
-			int salesValue = user.getSalesValue();
 
-			if(salesValue < 4)
-				salesValue++;
+		if(salesValue < 4)
+			salesValue++;
 
-			return updateUtil.updateUserSalesValue(userId, salesValue, now);
-		}
-		else return updateUtil.updateUserSalesValue(userId, 0, now);
+		return updateUtil.updateUserSalesValue(userId, salesValue, now);
+
 	}
 
 	public boolean salesPackageLessThanUserSalesValue() {
-		int salesValue = user.getSalesValue();
+		salesValue = user.getSalesValue();
 //		salesJumpTwoTiers = user.isSalesJumpTwoTiers();
 		salesPackagePrice = salesPackage.getPrice();
 		if(salesValue == 0) {
@@ -515,6 +520,62 @@ public class InAppPurchaseSalesAction {
 
 	public void setBuilderPack(boolean isBuilderPack) {
 		this.isBuilderPack = isBuilderPack;
+	}
+
+	public static Logger getLog() {
+		return log;
+	}
+
+	public static void setLog(Logger log) {
+		InAppPurchaseSalesAction.log = log;
+	}
+
+	public InAppPurchaseUtils getInAppPurchaseUtils() {
+		return inAppPurchaseUtils;
+	}
+
+	public void setInAppPurchaseUtils(InAppPurchaseUtils inAppPurchaseUtils) {
+		this.inAppPurchaseUtils = inAppPurchaseUtils;
+	}
+
+	public RewardRetrieveUtils getRewardRetrieveUtils() {
+		return rewardRetrieveUtils;
+	}
+
+	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public List<Reward> getListOfRewards() {
+		return listOfRewards;
+	}
+
+	public void setListOfRewards(List<Reward> listOfRewards) {
+		this.listOfRewards = listOfRewards;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	public int getSalesValue() {
+		return salesValue;
+	}
+
+	public void setSalesValue(int salesValue) {
+		this.salesValue = salesValue;
 	}
 
 
