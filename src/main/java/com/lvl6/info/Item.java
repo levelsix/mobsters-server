@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-	private static final long serialVersionUID = 3895046328659290460L;
+	private static final long serialVersionUID = 7492830836189155716L;
 
 	private int id;
 	private String name;
@@ -16,6 +16,7 @@ public class Item implements Serializable {
 	private float secretGiftChance;
 	private boolean alwaysDisplayToUser;
 	private String gameActionType;
+	private String quality;
 
 	//variable to assist in randomly selecting this Item
 	private float normalizedSecretGiftProbability;
@@ -27,7 +28,7 @@ public class Item implements Serializable {
 	public Item(int id, String name, String shortName, String imgName,
 			String itemType, int staticDataId, int amount,
 			float secretGiftChance, boolean alwaysDisplayToUser,
-			String gameActionType)
+			String gameActionType, String quality)
  	{
 		super();
 		this.id = id;
@@ -40,6 +41,7 @@ public class Item implements Serializable {
 		this.secretGiftChance = secretGiftChance;
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
 		this.gameActionType = gameActionType;
+		this.quality = quality;
 
 		//this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 	}
@@ -135,6 +137,14 @@ public class Item implements Serializable {
 
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
+	}
+
+	public String getQuality() {
+		return quality;
+	}
+
+	public void setQuality(String quality) {
+		this.quality = quality;
 	}
 
 	@Override

@@ -25,6 +25,7 @@ import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.Item;
+import com.lvl6.info.MiniJobRefreshItem;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
@@ -114,6 +115,7 @@ import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRefreshItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -236,6 +238,9 @@ public class StaticDataContainer {
 
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
+
+	@Autowired
+	protected MiniJobRefreshItemRetrieveUtils miniJobRefreshItemRetrieveUtils;
 
 	@Autowired
 	protected MonsterBattleDialogueRetrieveUtils monsterBattleDialogueRetrieveUtils;
@@ -686,13 +691,23 @@ public class StaticDataContainer {
 			Map<Integer, StructureInfoProto> structProtos) {
 		Map<Integer, StructureMiniJob> idsToMiniJobs = structureMiniJobRetrieveUtils
 				.getStructIdsToMiniJobs();
+
+		Map<Integer, Map<Integer, MiniJobRefreshItem>> structIdToIdToMjri =
+				miniJobRefreshItemRetrieveUtils.getMiniJobRefreshItem();
+
 		for (Integer structId : idsToMiniJobs.keySet()) {
 			Structure s = structs.get(structId);
 			StructureInfoProto sip = structProtos.get(structId);
 			StructureMiniJob smj = idsToMiniJobs.get(structId);
 
+			Map<Integer, MiniJobRefreshItem> idToMjriMap = null;
+			if (structIdToIdToMjri.containsKey(structId))
+			{
+				idToMjriMap = structIdToIdToMjri.get(structId);
+			}
+
 			MiniJobCenterProto mjcp = createInfoProtoUtils
-					.createMiniJobCenterProto(s, sip, smj);
+					.createMiniJobCenterProto(s, sip, smj, idToMjriMap);
 			sdpb.addAllMiniJobCenters(mjcp);
 		}
 	}

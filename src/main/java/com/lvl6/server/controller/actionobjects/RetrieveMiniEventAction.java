@@ -253,6 +253,7 @@ public class RetrieveMiniEventAction {
 			return success;
 		}
 
+		log.info("processNonexistentUserMiniEvent, newEvent:{}", curActiveMiniEvent);
 		success = insertUpdateUserMiniEvent(meId, userLvl);
 		if (!success) {
 			log.warn("unable to create a new MiniEvent for the user.");
@@ -307,6 +308,7 @@ public class RetrieveMiniEventAction {
 		//active MiniEvent going on and user doesn't have one so create one
 		generateNewMiniEvent(meId, userLvl);
 
+		log.info("inserting/updating. mefu={}", mefu);
 		return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
 	}
 
@@ -375,13 +377,16 @@ public class RetrieveMiniEventAction {
 			return retrieveMiniEventRelatedData(meId, userLvl);
 		}
 
-
+		//mini events are different
+		meId = curActiveMeId;
 		boolean success = retrieveMiniEventRelatedData(meId, userLvl);
 		if (!success) {
 			log.warn("unable to continue replaceCurrentUserMiniEvent()");
 			return success;
 		}
 
+		log.info("replaceCurrentUserMiniEvent. oldId:{}, \t newEvent:{}",
+				meId, curActiveMiniEvent);
 		success = insertUpdateUserMiniEvent(meId, userLvl);
 		if (!success) {
 			log.warn("unable to replace MiniEvent for the user.");

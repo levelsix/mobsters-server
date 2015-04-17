@@ -71,6 +71,7 @@ import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.ItemsProto.ItemGemPriceProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
@@ -190,9 +191,6 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -236,15 +234,6 @@ public class CreateInfoProtoUtils {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
-
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-
-	@Autowired
-	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
-
-	@Autowired
-	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
@@ -2136,6 +2125,17 @@ public class CreateInfoProtoUtils {
 			}
 		}
 
+		str = item.getQuality();
+		if (null != str) {
+	        try {
+	            Quality iq = Quality.valueOf(str);
+	            ipb.setQuality(iq);
+	        } catch (Exception e) {
+	            log.error(String.format("invalid item quality. item=%s",
+	                    item), e);
+	        }
+		}
+
 		return ipb.build();
 	}
 
@@ -2235,6 +2235,30 @@ public class CreateInfoProtoUtils {
 		uisgpb.setCreateTime(createTime.getTime());
 
 		return uisgpb.build();
+	}
+
+	public List<ItemGemPriceProto> createItemGemPriceProto(
+			Map<Integer, MiniJobRefreshItem> idToMjriMap)
+	{
+		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
+
+		for (Integer id : idToMjriMap.keySet())
+		{
+			MiniJobRefreshItem mjri = idToMjriMap.get(id);
+			ItemGemPriceProto igpp = createItemGemPriceProto(mjri);
+			igppList.add(igpp);
+		}
+
+		return igppList;
+	}
+
+	public ItemGemPriceProto createItemGemPriceProto(MiniJobRefreshItem mjri)
+	{
+		ItemGemPriceProto.Builder igppb = ItemGemPriceProto.newBuilder();
+		igppb.setGemPrice(mjri.getGemPrice());
+		igppb.setItemId(mjri.getItemId());
+
+		return igppb.build();
 	}
 
 	/** MiniEvent.proto ********************************************/
@@ -3970,7 +3994,9 @@ public class CreateInfoProtoUtils {
 	}
 
 	public MiniJobCenterProto createMiniJobCenterProto(Structure s,
-			StructureInfoProto sip, StructureMiniJob miniJobCenter) {
+			StructureInfoProto sip, StructureMiniJob miniJobCenter,
+			Map<Integer, MiniJobRefreshItem> idToMjriMap)
+	{
 		if (null == sip) {
 			sip = createStructureInfoProtoFromStructure(s);
 		}
@@ -3980,6 +4006,12 @@ public class CreateInfoProtoUtils {
 		smjcpb.setGeneratedJobLimit(miniJobCenter.getGeneratedJobLimit());
 		smjcpb.setHoursBetweenJobGeneration(miniJobCenter
 				.getHoursBetweenJobGeneration());
+
+		if (null != idToMjriMap && !idToMjriMap.isEmpty())
+		{
+			List<ItemGemPriceProto> igppList = createItemGemPriceProto(idToMjriMap);
+			smjcpb.addAllRefreshMiniJobItemPrices(igppList);
+		}
 
 		return smjcpb.build();
 	}
@@ -5192,6 +5224,7 @@ public class CreateInfoProtoUtils {
 		cmpb.setIsJiggle(cm.isJiggle());
 		cmpb.setImageName(cm.getImageName());
 		return cmpb.build();
+	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
 
 	}
 

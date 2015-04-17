@@ -67,6 +67,7 @@ public class DBConstants {
 	public static final String TABLE_MINI_JOB_CONFIG = "mini_job_config";
 	public static final String TABLE_MINI_JOB_FOR_USER = "mini_job_for_user";
 	public static final String TABLE_MINI_JOB_FOR_USER_HISTORY = "mini_job_for_user_history";
+	public static final String TABLE_MINI_JOB_REFRESH_ITEM_CONFIG = "mini_job_refresh_item_config";
 	public static final String TABLE_MONSTER_CONFIG = "monster_config";
 	public static final String TABLE_MONSTER_BATTLE_DIALOGUE_CONFIG = "monster_battle_dialogue_config";
 	public static final String TABLE_MONSTER_ENHANCING_FOR_USER = "monster_enhancing_for_user";
@@ -993,6 +994,7 @@ public class DBConstants {
 	public static final String ITEM__ALWAYS_DISPLAY_TO_USER = "always_display_to_user";
 	public static final String ITEM__SHORT_NAME = "short_name";
 	public static final String ITEM__ACTION_GAME_TYPE = "action_game_type";
+	public static final String ITEM__QUALITY = "quality";
 
 	public static final String MINI_EVENT__ID = GENERIC__ID;
 	public static final String MINI_EVENT__START_TIME = "start_time";
@@ -1049,6 +1051,10 @@ public class DBConstants {
 	public static final String MINI_JOB__DURATION_MIN_MINUTES = "duration_min_minutes";
 	public static final String MINI_JOB__DURATION_MAX_MINUTES = "duration_max_minutes";
 	public static final String MINI_JOB__EXP_REWARD = "exp_reward";
+
+	public static final String MINI_JOB_REFRESH_ITEM__STRUCT_ID = "struct_id";
+	public static final String MINI_JOB_REFRESH_ITEM__ITEM_ID = "item_id";
+	public static final String MINI_JOB_REFRESH_ITEM__GEM_PRICE = "gem_price";
 
 	public static final String MONSTER_BATTLE_DIALOGUE__ID = GENERIC__ID;
 	public static final String MONSTER_BATTLE_DIALOGUE__MONSTER_ID = "monster_id";

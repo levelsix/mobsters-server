@@ -1561,9 +1561,9 @@ public class StartupController extends EventController {
 
 		}
 		boolean calculateMiniEvent = true;
+		log.info("clanAchievementIds={}", ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS);
 		for (int i = 0; i < ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS.length; i++) {
 			int achievementId = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS[i];
-
 			if (!achievementIdToUserAchievements.containsKey(achievementId))
 			{
 				calculateMiniEvent = false;
@@ -1571,6 +1571,7 @@ public class StartupController extends EventController {
 			}
 
 			AchievementForUser afu = achievementIdToUserAchievements.get(achievementId);
+			log.info("afu={}", afu);
 			if (!afu.isRedeemed())
 			{
 				calculateMiniEvent = false;

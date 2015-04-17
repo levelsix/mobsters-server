@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Item.proto";
 import "SharedEnumConfig.proto";
 
 package com.lvl6.proto;
@@ -193,6 +194,8 @@ message MiniJobCenterProto {
 	optional StructureInfoProto structInfo = 1;
 	optional int32 generatedJobLimit = 2;
 	optional int32 hoursBetweenJobGeneration = 3;
+	
+	repeated ItemGemPriceProto refreshMiniJobItemPrices = 4;
 }
 
 

@@ -278,6 +278,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__PVP_BATTLE = "pvp battle";
 	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
 	public static final String UCHRFC__REMOVE_OBSTACLE = "remove obstacle";
+	public static final String UCHRFC__RESET_MINI_JOB = "reset_mini_job";
 	public static final String UCHRFC__REVIVE_IN_DUNGEON = "revive in dungeon";
 	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
 	public static final String UCHRFC__SOLICIT_CLAN_MEMBER_TEAM_DONATION = "solicit clan member team donation";

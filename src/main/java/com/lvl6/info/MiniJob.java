@@ -96,13 +96,13 @@ public class MiniJob implements Serializable {
 
 	//	public int getDurationMinutes() {
 	//		int minMaxDiff = durationMaxMinutes - durationMinMinutes;
-	//		
+	//
 	//		if (minMaxDiff <= 0) {
 	//			return Math.max(durationMinMinutes, durationMaxMinutes);
 	//		}
-	//		
+	//
 	//		int randMinutes = rand.nextInt(minMaxDiff + 1);
-	//		
+	//
 	//		return randMinutes + getDurationMinMinutes();
 	//	}
 

@@ -68,6 +68,8 @@ public interface DeleteUtil {
 
 	public abstract int deleteMiniJobForUser(String userMiniJobId);
 
+	public abstract int deleteMiniJobForUser(String userId, Collection<String> userMiniJobIds);
+
 	public abstract int deleteClanHelp(String userId,
 			List<String> clanHelpIdList);
 

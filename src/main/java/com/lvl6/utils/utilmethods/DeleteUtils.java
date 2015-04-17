@@ -414,6 +414,33 @@ public class DeleteUtils implements DeleteUtil {
 	}
 
 	@Override
+	public int deleteMiniJobForUser(
+			String userId,
+			Collection<String> userMiniJobIds )
+	{
+		String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
+
+		int size = userMiniJobIds.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionsStr = StringUtils.getListInString(questions, ",");
+
+		String query = String.format(
+				"DELETE FROM %s WHERE %s=? AND %s IN (%s);",
+				tableName,
+				DBConstants.MINI_JOB_FOR_USER__USER_ID,
+				DBConstants.MINI_JOB_FOR_USER__ID,
+				questionsStr);
+
+		List<Object> values = new ArrayList<Object>();
+		values.add(userId);
+		values.addAll(userMiniJobIds);
+
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
+				values);
+		return numDeleted;
+	}
+
+	@Override
 	public int deleteClanHelp(String userId, List<String> clanHelpIdList) {
 		String tableName = DBConstants.TABLE_CLAN_HELP;
 
