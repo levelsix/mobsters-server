@@ -30,21 +30,7 @@
 					security-group-name="${hazelcast.ec2.security.group}" />
 				</hz:join>
 			</hz:network>
-
-<!--  			<hz:map name="playersByPlayerId"	backup-count="3"   max-size="0" >
-			</hz:map>
-
-
-			<hz:map  name="playersPreDatabaseByUDID"
-				backup-count="3"   max-size="0" />
-
-			<hz:map  name="messagesForDisconnectedPlayers"
-				backup-count="3"   max-size="0" />
-
-
-			<hz:map  name="playersInActionSet"
-				backup-count="3"   max-size="0" />
- -->
+	
 		</hz:config>
 	</hz:hazelcast>
 
