@@ -1038,10 +1038,11 @@ class StartupService extends LazyLogging{
         for (achievementId <- ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS) {
         	if (!achievementsIdToUserAchievements.containsKey(achievementId)) {
         		calculateMiniEvent = false
-        	}
-            val afu = achievementsIdToUserAchievements.get(achievementId)
-            if (!afu.isRedeemed()) {
-                calculateMiniEvent = false
+        	} else {
+        		val afu = achievementsIdToUserAchievements.get(achievementId)
+        		if (!afu.isRedeemed()) {
+        			calculateMiniEvent = false
+        		}
             }
         }
       
