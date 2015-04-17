@@ -10,7 +10,8 @@ public class SalesPackage {
 	}
 
 	public SalesPackage(int id, String productId, String name, int price, String uuid,
-			Date timeStart, Date timeEnd, int succId, int customMenuId) {
+			Date timeStart, Date timeEnd, int succId, int customMenuId,
+			String animatingIcon, String slamIcon) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -21,6 +22,8 @@ public class SalesPackage {
 		this.timeEnd = timeEnd;
 		this.succId = succId;
 		this.customMenuId = customMenuId;
+		this.animatingIcon = animatingIcon;
+		this.slamIcon = slamIcon;
 	}
 
 	private static final long serialVersionUID = 1549953377153488834L;
@@ -34,6 +37,8 @@ public class SalesPackage {
 	private int succId;
 	private int customMenuId;
 	private String name;
+	private String animatingIcon;
+	private String slamIcon;
 
 	public int getId() {
 		return id;
@@ -69,7 +74,9 @@ public class SalesPackage {
 		return "SalesPackage [id=" + id + ", productId=" + productId
 				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
 				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
-				+ ", customMenuId=" + customMenuId + ", name=" + name + "]";
+				+ ", customMenuId=" + customMenuId + ", name=" + name
+				+ ", animatingIcon=" + animatingIcon + ", slamIcon=" + slamIcon
+				+ "]";
 	}
 
 	public Date getTimeStart() {
@@ -105,6 +112,22 @@ public class SalesPackage {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getAnimatingIcon() {
+		return animatingIcon;
+	}
+
+	public void setAnimatingIcon(String animatingIcon) {
+		this.animatingIcon = animatingIcon;
+	}
+
+	public String getSlamIcon() {
+		return slamIcon;
+	}
+
+	public void setSlamIcon(String slamIcon) {
+		this.slamIcon = slamIcon;
 	}
 
 

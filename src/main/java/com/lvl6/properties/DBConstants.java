@@ -809,6 +809,7 @@ public class DBConstants {
 	public static final String USER__SALES_LAST_PURCHASE_TIME = "sales_last_purchase_time";
 	public static final String USER__SALES_JUMP_TWO_TIERS = "sales_jump_two_tiers";
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
+	public static final String USER__SEGMENTATION_GROUP = "segmentation_group";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -1232,6 +1233,8 @@ public class DBConstants {
 	public static final String SALES_PACKAGE__END_TIME = "time_end";
     public static final String SALES_PACKAGE__SUCC_ID = "succ_id";
     public static final String SALES_PACKAGE__CUSTOM_MENU_ID = "custom_menu_id";
+    public static final String SALES_PACKAGE__ANIMATING_ICON = "animating_icon";
+    public static final String SALES_PACKAGE__SLAM_ICON = "slam_icon";
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";

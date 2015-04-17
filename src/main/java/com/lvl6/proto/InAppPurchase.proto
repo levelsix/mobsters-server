@@ -20,6 +20,7 @@ message InAppPurchasePackageProto {
 		MONEY_TREE = 3;
 		SALE = 5;
 		BUILDER_PACK = 6;
+		STARTER_BUILDER_PACK = 7;
 		
 		//NO_IN_APP_PURCHASE_PACKAGE_TYPE = 4;
 	}

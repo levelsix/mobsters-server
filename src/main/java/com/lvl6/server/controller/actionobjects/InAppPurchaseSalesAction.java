@@ -197,7 +197,8 @@ public class InAppPurchaseSalesAction {
 
 	public void builderCheck() {
 		isBuilderPack = false;
-		if(IAPValues.packageIsBuilderPack(packageName)) {
+		if(IAPValues.packageIsBuilderPack(packageName) ||
+				IAPValues.packageIsStarterBuilderPack(packageName)) {
 			isBuilderPack = true;
 			List<Integer> itemIdForBuilder = new ArrayList<Integer>();
 			itemIdForBuilder.add(10000);
@@ -269,7 +270,8 @@ public class InAppPurchaseSalesAction {
 	}
 
 	public void updateIfBeginnerPack() {
-		if(IAPValues.packageIsStarterPack(packageName)) {
+		if(IAPValues.packageIsStarterPack(packageName) ||
+				IAPValues.packageIsStarterBuilderPack(packageName)) {
 			user.updateRelativeDiamondsBeginnerSale(0, true);
 			isStarterPack = true;
 		}

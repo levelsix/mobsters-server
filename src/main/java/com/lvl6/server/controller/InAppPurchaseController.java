@@ -55,6 +55,7 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.UserSegmentingUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -135,6 +136,8 @@ public class InAppPurchaseController extends EventController {
     @Autowired
     protected UserRetrieveUtils2 userRetrieveUtils;
 
+    @Autowired
+    protected UserSegmentingUtil userSegmentingUtil;
 
     public InAppPurchaseController() {
         numAllocatedThreads = 2;
@@ -380,7 +383,7 @@ public class InAppPurchaseController extends EventController {
 					writeToUserCurrencyHistory(userId, date, null, iapmta, null);
 				}
 				else if(isSalesPack) {
-					setNewAndPurchasedSalesPackage(resBuilder, iapsa);
+					setNewAndPurchasedSalesPackage(resBuilder, iapsa, iapsa.getUser());
 					createRewardProto(resBuilder, iapsa);
 					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
@@ -412,7 +415,7 @@ public class InAppPurchaseController extends EventController {
     }
 
     public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
-            InAppPurchaseSalesAction iapsa) {
+            InAppPurchaseSalesAction iapsa, User user) {
 
         boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
@@ -437,9 +440,18 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
-		if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
-			resBuilder.setSuccessorSalesPackage(preSpp);
+
+		if(userSegmentingUtil.serviceCombinedStarterAndBuilderPack(user)) {
+			if(!iapsa.isStarterPack()) {
+				resBuilder.setSuccessorSalesPackage(preSpp);
+			}
 		}
+		else {
+			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
+				resBuilder.setSuccessorSalesPackage(preSpp);
+			}
+		}
+
 	}
 
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,

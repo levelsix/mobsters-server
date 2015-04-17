@@ -188,6 +188,7 @@ import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.controller.utils.UserSegmentingUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -433,6 +434,9 @@ public class StartupController extends EventController {
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
+    @Autowired
+    protected UserSegmentingUtil userSegmentingUtil;
+
 	public StartupController() {
 		numAllocatedThreads = 3;
 	}
@@ -567,6 +571,11 @@ public class StartupController extends EventController {
 					log.info("{}ms at got lock", stopWatch.getTime());
 					startupStatus = StartupStatus.USER_IN_DB;
 					log.info("No major update... getting user info");
+
+					if(user.getSegmentationGroup() == 0) {
+						int segmentationGroup = userSegmentingUtil.convertUserIdIntoInt(playerId);
+						user.updateUserSegmentationGroup(segmentationGroup);
+					}
 
 					loginExistingUser(stopWatch, udid, playerId, resBuilder,
 							nowDate, now, user, fbId, freshRestart);
@@ -746,11 +755,17 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
-			setStarterPackForUser(resBuilder, user);
-			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
-			setBuilderPackForUser(resBuilder, user, userItemMap);
-			log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
 
+			if(userSegmentingUtil.serviceCombinedStarterAndBuilderPack(user)) {
+				setStarterBuilderPackForUser(resBuilder, user);
+				log.info("{}ms at setStarterBuilderPackForUser", stopWatch.getTime());
+			}
+			else {
+				setStarterPackForUser(resBuilder, user);
+				log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
+				setBuilderPackForUser(resBuilder, user, userItemMap);
+				log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
+			}
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1712,6 +1727,22 @@ public class StartupController extends EventController {
 						(sp.getTimeEnd().getTime() > now.getTime())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
 							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+					resBuilder.addSalesPackages(spProto);
+				}
+			}
+		}
+	}
+
+	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {
+		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
+
+		if(numBeginnerSalesPurchased == 0) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(Integer id : idsToSalesPackages.keySet()) {
+				SalesPackage sp = idsToSalesPackages.get(id);
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) {
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}

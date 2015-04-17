@@ -270,7 +270,7 @@ public class UserRetrieveUtils2 {
 	//		log.debug(String.format(
 	//			"retrieving user with udid %s",
 	//			UDID));
-	//		
+	//
 	//		Object[] values = { UDID };
 	//		String query = String.format(
 	//			"select * from %s where %s=?",
@@ -488,9 +488,9 @@ public class UserRetrieveUtils2 {
 
 			boolean boughtRiggedBoosterPack = rs
 					.getBoolean(DBConstants.USER__BOUGHT_RIGGED_BOOSTER_PACK);
-			
+
 			int salesValue = rs.getInt(DBConstants.USER__SALES_VALUE);
-			
+
 			Date lastPurchaseTime = null;
 			try {
 				ts = rs.getTimestamp(DBConstants.USER__SALES_LAST_PURCHASE_TIME);
@@ -500,10 +500,12 @@ public class UserRetrieveUtils2 {
 			} catch (Exception e) {
 				log.error("last_purchase_time null...?", e);
 			}
-			
+
 			boolean salesJumpTwoTiers = rs.getBoolean(DBConstants.USER__SALES_JUMP_TWO_TIERS);
-			
+
 			long totalStrength = rs.getLong(DBConstants.USER__TOTAL_STRENGTH);
+
+			int segmentationGroup = rs.getInt(DBConstants.USER__SEGMENTATION_GROUP);
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 					tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -518,8 +520,9 @@ public class UserRetrieveUtils2 {
 					avatarMonsterId, lastFreeBoosterPackTime, numClanHelps,
 					lastSecretGiftCollectTime, pvpDefendingMessage,
 					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
-					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength);
-					
+					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength,
+					segmentationGroup);
+
 			return user;
 		}
 

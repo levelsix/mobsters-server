@@ -127,7 +127,8 @@ message FullUserProto {
 	
 	optional float salesValue = 58;
 	optional int64 salesLastPurchaseTime = 59;
-
+	
+	optional int32 segmentationGroup = 500;
 	
 	
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this

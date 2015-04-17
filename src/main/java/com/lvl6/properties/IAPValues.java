@@ -29,6 +29,8 @@ public class IAPValues {
 			+ ".starterpack";
 	public static final String BUILDERPACK = Globals.APPLE_BUNDLE_ID()
 			+ ".builderpack";
+	public static final String STARTERBUILDERPACK = Globals.APPLE_BUNDLE_ID()
+			+ ".starterbuilderpack";
 	public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID()
 			+ ".moneytree1";
 	public static final String MONEYTREENOSALE = Globals.APPLE_BUNDLE_ID()
@@ -70,12 +72,14 @@ public class IAPValues {
 	public static final double PACKAGE_4_PRICE = 49.99;
 	public static final double PACKAGE_5_PRICE = 99.99;
 	public static final double STARTER_PACK_PRICE = 4.99;
-	public static final double BUILDER_PACK_PRICE = 4.99;
+	public static final double BUILDER_PACK_PRICE = 9.99;
+	public static final double STARTER_BUILDER_PACK_PRICE = 4.99;
 	public static final double MONEY_TREE_PRICE = 4.99;
 
 	public static final List<String> iapPackageNames = Arrays.asList(PACKAGE1,
 			PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5, STARTERPACK, BUILDERPACK,
-			MONEYTREE, MONEYTREENOSALE, SALE5, SALE10, SALE20, SALE50, SALE100);
+			STARTERBUILDERPACK, MONEYTREE, MONEYTREENOSALE, SALE5, SALE10,
+			SALE20, SALE50, SALE100);
 
 	//    public static final List<String> packageNames =
 	//            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
@@ -144,6 +148,9 @@ public class IAPValues {
 		if(packageName.equals(BUILDERPACK)) {
 			return BUILDER_PACK_PRICE;
 		}
+		if(packageName.equals(STARTERBUILDERPACK)) {
+			return STARTER_BUILDER_PACK_PRICE;
+		}
 		if (packageName.equals(MONEYTREE)) {
 			return MONEY_TREE_PRICE;
 		}
@@ -159,6 +166,13 @@ public class IAPValues {
 
 	public static boolean packageIsBuilderPack(String packageName) {
 		if(packageName.equals(BUILDERPACK)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean packageIsStarterBuilderPack(String packageName) {
+		if(packageName.equals(STARTERBUILDERPACK)) {
 			return true;
 		}
 		return false;
@@ -193,6 +207,9 @@ public class IAPValues {
 		}
 		if(packageName.equals(BUILDERPACK)) {
 			return InAppPurchasePackageType.BUILDER_PACK;
+		}
+		if(packageName.equals(STARTERBUILDERPACK)) {
+			return InAppPurchasePackageType.STARTER_BUILDER_PACK;
 		}
 
 		return InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;

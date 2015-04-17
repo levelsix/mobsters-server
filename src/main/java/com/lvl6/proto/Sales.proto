@@ -25,6 +25,8 @@ message SalesPackageProto {
 	optional int32 succId = 8;
 	optional int64 timeStart = 9;
 	optional int64 timeEnd = 10;
+	optional string animatingIcon = 11;
+	optional string slamIcon = 12;
 }
 
 //------------------------------------------------------------------------------------------

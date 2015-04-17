@@ -62,9 +62,9 @@ public class SalesPackageRetrieveUtils {
 		Map<String, List<SalesPackage>> returnMap = new HashMap<String, List<SalesPackage>>();
 		for(Integer i : salesPackageIdsToSalesPackages.keySet()) {
 			SalesPackage sp = salesPackageIdsToSalesPackages.get(i);
-			
+
 			List<SalesPackage> list = returnMap.get(sp.getProductId());
-			
+
 			if (list == null) {
 			    list = new ArrayList<SalesPackage>();
 			    returnMap.put(sp.getProductId(), list);
@@ -160,7 +160,11 @@ public class SalesPackageRetrieveUtils {
 
         String name = rs.getString(DBConstants.SALES_PACKAGE__NAME);
 
-		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid, timeStart, timeEnd, succId, customMenuId);
+        String animatingIcon = rs.getString(DBConstants.SALES_PACKAGE__ANIMATING_ICON);
+        String slamIcon = rs.getString(DBConstants.SALES_PACKAGE__SLAM_ICON);
+
+		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid,
+				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon);
 		return salesPackage;
 	}
 }

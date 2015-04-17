@@ -5062,6 +5062,9 @@ public class CreateInfoProtoUtils {
 		long totalStrength = u.getTotalStrength();
 		builder.setTotalStrength(totalStrength);
 
+		int segmentationGroup = u.getSegmentationGroup();
+		builder.setSegmentationGroup(segmentationGroup);
+
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
