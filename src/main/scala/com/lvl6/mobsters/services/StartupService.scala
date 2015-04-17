@@ -740,7 +740,7 @@ class StartupService extends LazyLogging{
     Future{
       timed("StartupService.setUsersMonstersEnhancing"){
         val userMonstersEnhancing = monsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId)
-        if(userMonstersEnhancing != null) {
+        if(userMonstersEnhancing != null && !userMonstersEnhancing.isEmpty()) {
           var baseMonster:UserEnhancementItemProto = null;
           val feederUserMonsterIds = new ArrayList[String]();
           val feederProtos = new ArrayList[UserEnhancementItemProto]();
