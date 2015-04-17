@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
 import com.lvl6.events.RequestEvent;
@@ -197,15 +196,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component
+//@Component
 @DependsOn("gameServer")
-public class StartupController extends EventController {
+public class StartupControllerOld extends EventController {
 	//  private static String nameRulesFile = "namerulesElven.txt";
 	//  private static int syllablesInName1 = 2;
 	//  private static int syllablesInName2 = 3;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StartupControllerOld.class);
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
@@ -435,7 +433,7 @@ public class StartupController extends EventController {
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
 
-	public StartupController() {
+	public StartupControllerOld() {
 		numAllocatedThreads = 3;
 	}
 
@@ -474,57 +472,10 @@ public class StartupController extends EventController {
 		}
 
 		if (null != version) {
-			int superNum = version.getSuperNum();
-			int majorNum = version.getMajorNum();
-			int minorNum = version.getMinorNum();
-
-			int serverSuperNum = Globals.VERSION_SUPER_NUMBER();
-			int serverMajorNum = Globals.VERSION_MAJOR_NUMBER();
-			int serverMinorNum = Globals.VERSION_MINOR_NUMBER();
-
-			boolean clientSuperGreater = superNum > serverSuperNum;
-			boolean clientSuperEqual = superNum == serverSuperNum;
-
-			boolean clientMajorGreater = majorNum > serverMajorNum;
-			boolean clientMajorEqual = majorNum == serverMajorNum;
-
-			boolean clientMinorGreater = minorNum > serverMinorNum;
-
-			if (clientSuperGreater
-					|| (clientSuperEqual && clientMajorGreater)
-					|| (clientSuperEqual && clientMajorEqual && clientMinorGreater)) {
-				String preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
-				log.error(
-						"{} clientVersion={}.{}.{} \t serverVersion={}.{}.{}",
-						new Object[] { preface, superNum, majorNum, minorNum,
-								serverSuperNum, serverMajorNum, serverMinorNum });
-
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
-
-			if (superNum < serverSuperNum || majorNum < serverMajorNum) {
-				updateStatus = UpdateStatus.MAJOR_UPDATE;
-				log.info("player has been notified of forced update");
-
-			} else if (minorNum < serverMinorNum) {
-				updateStatus = UpdateStatus.MINOR_UPDATE;
-				log.info("player has been notified of minor update");
-			} else {
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
+			updateStatus = checkVersion(version);
 
 		} else {
-			double tempClientVersionNum = reqProto.getVersionNum() * 10;
-			double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
-			// Check version number
-			if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
-				updateStatus = UpdateStatus.MAJOR_UPDATE;
-				log.info("player has been notified of forced update");
-			} else if (tempClientVersionNum < tempLatestVersionNum) {
-				updateStatus = UpdateStatus.MINOR_UPDATE;
-			} else {
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
+			updateStatus = checkVersionNoVersionProto(reqProto);
 
 		}
 
@@ -575,7 +526,7 @@ public class StartupController extends EventController {
 						usga.convertUserIdIntoInt();
 						int segmentationGroup = usga.getSegmentationGroup();
 						if(!user.updateUserSegmentationGroup(segmentationGroup)) {
-							log.error("something wrong with updating user's segmentation group value");
+							log.error("something wrong with updating user's segmentation group value:{}",segmentationGroup);
 						}
 					}
 
@@ -644,6 +595,65 @@ public class StartupController extends EventController {
 		//log.info("user after change user login via db. user=" + user);
 	}
 
+	protected UpdateStatus checkVersionNoVersionProto(StartupRequestProto reqProto) {
+		UpdateStatus updateStatus;
+		double tempClientVersionNum = reqProto.getVersionNum() * 10D;
+		double tempLatestVersionNum = GameServer.clientVersionNumber * 10D;
+		// Check version number
+		if ((int) tempClientVersionNum < (int) tempLatestVersionNum) {
+			updateStatus = UpdateStatus.MAJOR_UPDATE;
+			log.info("player has been notified of forced update");
+		} else if (tempClientVersionNum < tempLatestVersionNum) {
+			updateStatus = UpdateStatus.MINOR_UPDATE;
+		} else {
+			updateStatus = UpdateStatus.NO_UPDATE;
+		}
+		return updateStatus;
+	}
+
+	protected UpdateStatus checkVersion(VersionNumberProto version) {
+		UpdateStatus updateStatus;
+		int superNum = version.getSuperNum();
+		int majorNum = version.getMajorNum();
+		int minorNum = version.getMinorNum();
+
+		int serverSuperNum = Globals.VERSION_SUPER_NUMBER();
+		int serverMajorNum = Globals.VERSION_MAJOR_NUMBER();
+		int serverMinorNum = Globals.VERSION_MINOR_NUMBER();
+
+		boolean clientSuperGreater = superNum > serverSuperNum;
+		boolean clientSuperEqual = superNum == serverSuperNum;
+
+		boolean clientMajorGreater = majorNum > serverMajorNum;
+		boolean clientMajorEqual = majorNum == serverMajorNum;
+
+		boolean clientMinorGreater = minorNum > serverMinorNum;
+
+		if (clientSuperGreater
+				|| (clientSuperEqual && clientMajorGreater)
+				|| (clientSuperEqual && clientMajorEqual && clientMinorGreater)) {
+			String preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
+			log.error(
+					"{} clientVersion={}.{}.{} \t serverVersion={}.{}.{}",
+					new Object[] { preface, superNum, majorNum, minorNum,
+							serverSuperNum, serverMajorNum, serverMinorNum });
+
+			updateStatus = UpdateStatus.NO_UPDATE;
+		}
+
+		if (superNum < serverSuperNum || majorNum < serverMajorNum) {
+			updateStatus = UpdateStatus.MAJOR_UPDATE;
+			log.info("player has been notified of forced update");
+
+		} else if (minorNum < serverMinorNum) {
+			updateStatus = UpdateStatus.MINOR_UPDATE;
+			log.info("player has been notified of minor update");
+		} else {
+			updateStatus = UpdateStatus.NO_UPDATE;
+		}
+		return updateStatus;
+	}
+
 	//priority of user returned is
 	//user with specified fbId
 	//user with specified udid
@@ -683,7 +693,6 @@ public class StartupController extends EventController {
 			String udid, Timestamp now) {
 		boolean userLoggedIn = LoginHistoryRetrieveUtils
 				.userLoggedInByUDID(udid);
-		//TODO: Retrieve from user table
 		int numOldAccounts = getUserRetrieveUtils().numAccountsForUDID(udid);
 		boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils
 				.userExistsWithUDID(udid);
@@ -698,7 +707,7 @@ public class StartupController extends EventController {
 				+ isFirstTimeUser);
 
 		if (isFirstTimeUser) {
-			log.info("new player with udid " + udid);
+			log.info("new player with udid {}", udid);
 			InsertUtils.get().insertIntoFirstTimeUsers(udid, null,
 					reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
 		}
@@ -742,7 +751,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at achivementStuff", stopWatch.getTime());
 			setMiniJob(resBuilder, playerId);
 			log.info("{}ms at miniJobStuff", stopWatch.getTime());
-			Map<Integer, ItemForUser> userItemMap = setUserItems(resBuilder, playerId);
+			setUserItems(stopWatch, resBuilder, user, playerId);
 			log.info("{}ms at setUserItems", stopWatch.getTime());
 			setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			log.info("{}ms at whetherCompletedInAppPurchase",
@@ -755,18 +764,6 @@ public class StartupController extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
-
-			if(serviceCombinedStarterAndBuilderPack(user)) {
-				setStarterBuilderPackForUser(resBuilder, user);
-				log.info("{}ms at setStarterBuilderPackForUser", stopWatch.getTime());
-			}
-			else {
-				setStarterPackForUser(resBuilder, user);
-				log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
-				setBuilderPackForUser(resBuilder, user, userItemMap);
-				log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
-			}
-
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 
@@ -803,22 +800,22 @@ public class StartupController extends EventController {
 
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
-					getCreateInfoProtoUtils(), translationSettingsForUserRetrieveUtil,
+					privateChatPostRetrieveUtils, tsfuListIsNull, insertUtil,
+					createInfoProtoUtils, translationSettingsForUserRetrieveUtil,
 					updatedTsfuList);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
 			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(
 					resBuilder, user, playerId,
-					getUserFacebookInviteForSlotRetrieveUtils(),
-					getCreateInfoProtoUtils());
+					userFacebookInviteForSlotRetrieveUtils,
+					createInfoProtoUtils);
 			sfesa.setUp(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
-					getMonsterForUserRetrieveUtils(), getClanRetrieveUtils(),
+					monsterForUserRetrieveUtils, clanRetrieveUtils,
 					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils);
 			spbha.setUp(fillMe);
@@ -827,25 +824,25 @@ public class StartupController extends EventController {
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
-					user, getClanChatPostRetrieveUtils(),
-					getCreateInfoProtoUtils());
+					user, clanChatPostRetrieveUtils,
+					createInfoProtoUtils);
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 
 			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user,
-					playerId, clanHelpRetrieveUtil, getCreateInfoProtoUtils());
+					playerId, clanHelpRetrieveUtil, createInfoProtoUtils);
 			scha.setUp(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
 			SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
 					cdpb, user, playerId, clanAvengeRetrieveUtil,
-					clanAvengeUserRetrieveUtil, getCreateInfoProtoUtils());
+					clanAvengeUserRetrieveUtil, createInfoProtoUtils);
 			scra.setUp(fillMe);
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 
 			SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
 					cdpb, user, playerId, clanMemberTeamDonationRetrieveUtil,
-					monsterSnapshotForUserRetrieveUtil, getCreateInfoProtoUtils());
+					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 
@@ -942,7 +939,7 @@ public class StartupController extends EventController {
 		//  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
 
 		List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
-		Set<Integer> questIds = new HashSet<Integer>();
+		Set<Integer> inProgressQuestsIds = new HashSet<Integer>();
 		List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
 		Map<Integer, Quest> questIdToQuests = questRetrieveUtils
@@ -953,17 +950,17 @@ public class StartupController extends EventController {
 			if (!uq.isRedeemed()) {
 				//unredeemed quest section
 				inProgressQuests.add(uq);
-				questIds.add(questId);
+				inProgressQuestsIds.add(questId);
 
 			} else {
 				redeemedQuestIds.add(questId);
 			}
 		}
 
-		// TODO: get the QuestJobForUser for ONLY the inProgressQuests
+		// get the QuestJobForUser for ONLY the inProgressQuests
 		/*NOTE: DB CALL*/
 		Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs = getQuestJobForUserRetrieveUtil()
-				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);
+				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, inProgressQuestsIds);
 
 		//generate the user quests
 		List<FullUserQuestProto> currentUserQuests = createInfoProtoUtils
@@ -1152,6 +1149,53 @@ public class StartupController extends EventController {
 		}
 	}
 
+	private void setOngoingTask(Builder resBuilder, String userId,
+			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
+		try {
+			MinimumUserTaskProto mutp = createInfoProtoUtils
+					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
+			resBuilder.setCurTask(mutp);
+
+			//create protos for stages
+			String userTaskId = aTaskForUser.getId();
+			/*NOTE: DB CALL*/
+			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
+					.getTaskStagesForUserWithTaskForUserId(userTaskId);
+
+			//group taskStageForUsers by stage nums because more than one
+			//taskStageForUser with the same stage num means this stage
+			//has more than one monster
+			Map<Integer, List<TaskStageForUser>> stageNumToTsfu = new HashMap<Integer, List<TaskStageForUser>>();
+			for (TaskStageForUser tsfu : taskStages) {
+				int stageNum = tsfu.getStageNum();
+
+				if (!stageNumToTsfu.containsKey(stageNum)) {
+					List<TaskStageForUser> a = new ArrayList<TaskStageForUser>();
+					stageNumToTsfu.put(stageNum, a);
+				}
+
+				List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
+				tsfuList.add(tsfu);
+			}
+
+			//now that we have grouped all the monsters in their corresponding
+			//task stages, protofy them
+			int taskId = aTaskForUser.getTaskId();
+			for (Integer stageNum : stageNumToTsfu.keySet()) {
+				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
+
+				TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
+						taskId, stageNum, monsters);
+				resBuilder.addCurTaskStages(tsp);
+			}
+
+		} catch (Exception e) {
+			log.error(
+					"could not create existing user task, letting it get deleted when user starts another task.",
+					e);
+		}
+	}
+
 	private void setEventStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		List<EventPersistentForUser> events = getEventPersistentForUserRetrieveUtils()
@@ -1179,8 +1223,6 @@ public class StartupController extends EventController {
 			String userId, boolean isFreshRestart, Timestamp battleEndTime) {
 
 		//	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
-		/*NOTE: DB CALL*/
-		//TODO: should I be doing this?
 		PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
 				.getUserPvpLeagueForId(userId);
 
@@ -1192,7 +1234,6 @@ public class StartupController extends EventController {
 			return plfu;
 		}
 
-		/*NOTE: DB CALL*/
 		//if bool isFreshRestart is true, then deduct user's elo by amount specified in
 		//the table (pvp_battle_for_user), since user auto loses
 		PvpBattleForUser battle = getPvpBattleForUserRetrieveUtils()
@@ -1205,8 +1246,8 @@ public class StartupController extends EventController {
 				.getTime());
 		//capping max elo attacker loses
 		int eloAttackerLoses = battle.getAttackerLoseEloChange();
-		if (plfu.getElo() + eloAttackerLoses < 0) {
-			eloAttackerLoses = -1 * plfu.getElo();
+		if (plfu.getElo() + eloAttackerLoses < ControllerConstants.PVP__DEFAULT_MIN_ELO) {
+			eloAttackerLoses = plfu.getElo() - ControllerConstants.PVP__DEFAULT_MIN_ELO;
 		}
 
 		String defenderId = battle.getDefenderId();
@@ -1226,14 +1267,11 @@ public class StartupController extends EventController {
 		//NOTE: this lock ordering might result in a temp deadlock
 		//doesn't reeeally matter if can't penalize defender...
 
-
 		UUID defenderUuid = null;
 		boolean invalidUuids = true;
-
 		try {
-			if(defenderId != null && !defenderId.equalsIgnoreCase("")) {
+			if(defenderId != null && !defenderId.isEmpty()) {
 				defenderUuid = UUID.fromString(defenderId);
-
 			}
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -1241,20 +1279,14 @@ public class StartupController extends EventController {
 					defenderId), e);
 			invalidUuids = true;
 		}
-
-
-
-		//UUID checks
 		if (invalidUuids) {
 			return;
 		}
-
 		//only lock real users
 		if (null != defenderUuid) {
 			getLocker().lockPlayer(defenderUuid,
 					this.getClass().getSimpleName());
 		}
-
 		try {
 			int attackerEloBefore = attackerPlfu.getElo();
 			int defenderEloBefore = 0;
@@ -1312,9 +1344,8 @@ public class StartupController extends EventController {
 				numUpdated = UpdateUtils.get().updatePvpLeagueForUser(
 						defenderId, defenderCurLeague, defenderCurRank,
 						eloDefenderWins, null, null, 0, 1, 0, 0, -1);
-				log.info(String
-						.format("num updated when changing defender's elo because of reset=%s",
-								numUpdated));
+				log.info("num updated when changing defender's elo because of reset={}",
+						numUpdated);
 
 				defenderPlfu.setElo(defenderCurElo);
 				defenderPlfu.setPvpLeagueId(defenderCurLeague);
@@ -1337,13 +1368,12 @@ public class StartupController extends EventController {
 					0, 0, -1, attackerWon, cancelled, defenderGotRevenge,
 					displayToDefender);
 
-			log.info(String.format("numInserted into battle history=%s",
-					numInserted));
+			log.info("numInserted into battle history={}",
+					numInserted);
 			//delete that this battle occurred
 			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
-			log.info(String
-					.format("successfully penalized, rewarded attacker and defender respectively. battle=%s, numDeleted=%s",
-							battle, numDeleted));
+			log.info("successfully penalized, rewarded attacker and defender respectively. battle={}, numDeleted={}",
+					battle, numDeleted);
 
 		} catch (Exception e) {
 			log.error(
@@ -1355,53 +1385,6 @@ public class StartupController extends EventController {
 				getLocker().unlockPlayer(defenderUuid,
 						this.getClass().getSimpleName());
 			}
-		}
-	}
-
-	private void setOngoingTask(Builder resBuilder, String userId,
-			TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
-		try {
-			MinimumUserTaskProto mutp = createInfoProtoUtils
-					.createMinimumUserTaskProto(userId, aTaskForUser, tfucs);
-			resBuilder.setCurTask(mutp);
-
-			//create protos for stages
-			String userTaskId = aTaskForUser.getId();
-			/*NOTE: DB CALL*/
-			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
-					.getTaskStagesForUserWithTaskForUserId(userTaskId);
-
-			//group taskStageForUsers by stage nums because more than one
-			//taskStageForUser with the same stage num means this stage
-			//has more than one monster
-			Map<Integer, List<TaskStageForUser>> stageNumToTsfu = new HashMap<Integer, List<TaskStageForUser>>();
-			for (TaskStageForUser tsfu : taskStages) {
-				int stageNum = tsfu.getStageNum();
-
-				if (!stageNumToTsfu.containsKey(stageNum)) {
-					List<TaskStageForUser> a = new ArrayList<TaskStageForUser>();
-					stageNumToTsfu.put(stageNum, a);
-				}
-
-				List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
-				tsfuList.add(tsfu);
-			}
-
-			//now that we have grouped all the monsters in their corresponding
-			//task stages, protofy them
-			int taskId = aTaskForUser.getTaskId();
-			for (Integer stageNum : stageNumToTsfu.keySet()) {
-				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
-
-				TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
-						taskId, stageNum, monsters);
-				resBuilder.addCurTaskStages(tsp);
-			}
-
-		} catch (Exception e) {
-			log.error(
-					"could not create existing user task, letting it get deleted when user starts another task.",
-					e);
 		}
 	}
 
@@ -1588,8 +1571,47 @@ public class StartupController extends EventController {
 		}
 	}
 
+	private void setMiniEventForUser(
+			Builder resBuilder, User u, String userId, Date now)
+	{
+		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
+				RetrieveMiniEventResponseProto.newBuilder();
+
+		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
+				userId,
+				now,
+				userRetrieveUtils,
+				miniEventForUserRetrieveUtil,
+				miniEventGoalForUserRetrieveUtil,
+				insertUtil,
+				deleteUtil,
+				miniEventGoalRetrieveUtils,
+				miniEventForPlayerLvlRetrieveUtils,
+				miniEventRetrieveUtils,
+				miniEventTierRewardRetrieveUtils,
+				miniEventLeaderboardRewardRetrieveUtils);
+
+		rmea.execute(rmeaResBuilder);
+//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
+
+		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+				null != rmea.getCurActiveMiniEvent())
+		{
+			//get UserMiniEvent info and create the proto to set into resBuilder
+			UserMiniEventProto umep = createInfoProtoUtils
+					.createUserMiniEventProto(
+							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+							rmea.getMegfus(),
+							rmea.getLvlEntered(), rmea.getRewards(),
+							rmea.getGoals(), rmea.getLeaderboardRewards());
+			resBuilder.setUserMiniEvent(umep);
+		}
+
+	}
+
 	private void setMiniJob(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
 		Map<String, MiniJobForUser> miniJobIdToUserMiniJobs = getMiniJobForUserRetrieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, null);
 
@@ -1605,8 +1627,9 @@ public class StartupController extends EventController {
 		resBuilder.addAllUserMiniJobProtos(umjpList);
 	}
 
-	private Map<Integer, ItemForUser> setUserItems(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+	private void setUserItems(StopWatch stopWatch, Builder resBuilder,
+			User user, String userId)
+	{
 		Map<Integer, ItemForUser> itemIdToUserItems = itemForUserRetrieveUtil
 				.getSpecificOrAllItemForUserMap(userId, null);
 
@@ -1618,7 +1641,6 @@ public class StartupController extends EventController {
 			resBuilder.addAllUserItems(uipList);
 		}
 
-		/*NOTE: DB CALL*/
 		List<ItemForUserUsage> itemsUsed = itemForUserUsageRetrieveUtil
 				.getItemForUserUsage(userId, null);
 
@@ -1628,12 +1650,99 @@ public class StartupController extends EventController {
 			resBuilder.addItemsInUse(uiup);
 		}
 
-		return itemIdToUserItems;
+		Set<Integer> userItemIds = itemIdToUserItems.keySet();
+		setSalePack(stopWatch, resBuilder, user, userItemIds);
+	}
+
+	private void setSalePack(StopWatch stopWatch, Builder resBuilder,
+			User user, Set<Integer> userItemIds) {
+		if(serviceCombinedStarterAndBuilderPack(user)) {
+			setStarterBuilderPackForUser(resBuilder, user);
+			log.info("{}ms at setStarterBuilderPackForUser", stopWatch.getTime());
+		}
+		else {
+			setStarterPackForUser(resBuilder, user);
+			log.info("{}ms at setStarterPackForUser", stopWatch.getTime());
+			setBuilderPackForUser(resBuilder, user, userItemIds);
+			log.info("{}ms at setBuilderPackForUser", stopWatch.getTime());
+		}
+	}
+
+	public boolean serviceCombinedStarterAndBuilderPack(User user) {
+		Object[] objArray = new Object[2];
+		objArray[0] = "COOPER";
+		objArray[1] = "ALEX";
+
+		Float[] floatArray = new Float[2];
+		floatArray[0] = (float)0.5;
+		floatArray[1] = (float)0.5;
+
+		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
+
+		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
+			log.info("sending starterbuilderpack");
+			return true;
+		}
+		else {
+			log.info("sending starter and builder pack");
+			return false;
+		}
+	}
+	//TODO: Get rid of this copy pasted code
+	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {
+		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
+
+		if(numBeginnerSalesPurchased == 0) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(SalesPackage sp : idsToSalesPackages.values()) {
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) {
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+					resBuilder.addSalesPackages(spProto);
+				}
+			}
+		}
+	}
+	//TODO: Get rid of this copy pasted code
+	public void setStarterPackForUser(Builder resBuilder, User user) {
+		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
+
+		if(numBeginnerSalesPurchased == 0) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(SalesPackage sp : idsToSalesPackages.values()) {
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+					resBuilder.addSalesPackages(spProto);
+				}
+			}
+		}
+	}
+	
+	//TODO: Get rid of this copy pasted code
+	public void setBuilderPackForUser(Builder resBuilder, User user, Set<Integer> userItemIds) {
+		boolean hasExtraBuilder = false;
+		for(Integer itemId : userItemIds) {
+			//TODO: Make a constant out of this number for builder's id
+			if(itemId == 10000) { //builder's id
+				hasExtraBuilder = true;
+			}
+		}
+
+		if(!hasExtraBuilder) {
+			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+			for(SalesPackage sp : idsToSalesPackages.values()) {
+				if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
+					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+					resBuilder.addSalesPackages(spProto);
+				}
+			}
+		}
 	}
 
 	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder,
 			User user) {
-		/*NOTE: DB CALL*/
 		boolean hasPurchased = getIapHistoryRetrieveUtils()
 				.checkIfUserHasPurchased(user.getId());
 		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
@@ -1684,9 +1793,8 @@ public class StartupController extends EventController {
 			gifts.addAll(giftList);
 
 		} else {
-			log.error(String
-					.format("Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
-							giftList, ids));
+			log.error("Error calculating the new SecretGifts. nuGifts={}, ids={}",
+					giftList, ids);
 		}
 
 	}
@@ -1723,13 +1831,12 @@ public class StartupController extends EventController {
 		int newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 		Date now = new Date();
 
-		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
-			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+		for(SalesPackage sp : idsToSalesPackages.values()) {
 			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
 					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK) &&
 					!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
-				if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
-						(sp.getTimeEnd().getTime() > now.getTime())) {
+				if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
 							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
@@ -1738,79 +1845,27 @@ public class StartupController extends EventController {
 		}
 	}
 
-	public boolean serviceCombinedStarterAndBuilderPack(User user) {
-		Object[] objArray = new Object[2];
-		objArray[0] = "COOPER";
-		objArray[1] = "ALEX";
-
-		Float[] floatArray = new Float[2];
-		floatArray[0] = (float)0.5;
-		floatArray[1] = (float)0.5;
-
-		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
-
-		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
-			log.info("sending starterbuilderpack");
-			return true;
+	public int priceForSalesPackToBeShown(int userSalesValue) {
+		
+		int newMinPrice = 0;
+		
+		if(userSalesValue == 0) {
+			newMinPrice = 5;
 		}
-		else {
-			log.info("sending starter and builder pack");
-			return false;
+		else if(userSalesValue == 1) {
+			newMinPrice = 10;
 		}
-	}
-
-	public void setStarterBuilderPackForUser(Builder resBuilder, User user) {
-		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
-
-		if(numBeginnerSalesPurchased == 0) {
-			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-			for(Integer id : idsToSalesPackages.keySet()) {
-				SalesPackage sp = idsToSalesPackages.get(id);
-				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) {
-					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-					resBuilder.addSalesPackages(spProto);
-				}
-			}
+		else if(userSalesValue == 2) {
+			newMinPrice = 20;
 		}
-	}
-
-	public void setStarterPackForUser(Builder resBuilder, User user) {
-		int numBeginnerSalesPurchased = user.getNumBeginnerSalesPurchased();
-
-		if(numBeginnerSalesPurchased == 0) {
-			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-			for(Integer id : idsToSalesPackages.keySet()) {
-				SalesPackage sp = idsToSalesPackages.get(id);
-				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
-					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-					resBuilder.addSalesPackages(spProto);
-				}
-			}
+		else if(userSalesValue == 3) {
+			newMinPrice = 50;
 		}
-	}
-
-	public void setBuilderPackForUser(Builder resBuilder, User user, Map<Integer, ItemForUser> userItemMap) {
-		boolean hasExtraBuilder = false;
-		for(Integer itemId : userItemMap.keySet()) {
-			ItemForUser ifu = userItemMap.get(itemId);
-			if(ifu.getItemId() == 10000) { //builder's id
-				hasExtraBuilder = true;
-			}
+		else if(userSalesValue > 3) {
+			newMinPrice = 100;
 		}
-
-		if(!hasExtraBuilder) {
-			Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-			for(Integer id : idsToSalesPackages.keySet()) {
-				SalesPackage sp = idsToSalesPackages.get(id);
-				if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
-					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-					resBuilder.addSalesPackages(spProto);
-				}
-			}
-		}
+		
+		return newMinPrice;
 	}
 
 //	public boolean updateUserSalesJumpTwoTiers(User user) {
@@ -1833,28 +1888,6 @@ public class StartupController extends EventController {
 //		return salesJumpTwoTiers;
 //	}
 
-	public int priceForSalesPackToBeShown(int userSalesValue) {
-
-		int newMinPrice = 0;
-
-		if(userSalesValue == 0) {
-			newMinPrice = 5;
-		}
-		else if(userSalesValue == 1) {
-			newMinPrice = 10;
-		}
-		else if(userSalesValue == 2) {
-			newMinPrice = 20;
-		}
-		else if(userSalesValue == 3) {
-			newMinPrice = 50;
-		}
-		else if(userSalesValue > 3) {
-			newMinPrice = 100;
-		}
-
-		return newMinPrice;
-	}
 
 	private void setBattleItemForUser(Builder resBuilder, String userId) {
 		List<BattleItemForUser> bifuList = battleItemForUserRetrieveUtil
@@ -1890,42 +1923,6 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setMiniEventForUser(
-			Builder resBuilder, User u, String userId, Date now)
-	{
-		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
-				RetrieveMiniEventResponseProto.newBuilder();
-
-
-		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-				userId, now, userRetrieveUtils,
-				miniEventForUserRetrieveUtil,
-				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
-				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils,
-				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils,
-				miniEventLeaderboardRewardRetrieveUtils);
-
-		rmea.execute(rmeaResBuilder);
-//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
-//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
-
-		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
-				null != rmea.getCurActiveMiniEvent())
-		{
-			//get UserMiniEvent info and create the proto to set into resBuilder
-			//TODO: Consider protofying MiniEvent stuff
-			UserMiniEventProto umep = createInfoProtoUtils
-					.createUserMiniEventProto(
-							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
-							rmea.getMegfus(),
-							rmea.getLvlEntered(), rmea.getRewards(),
-							rmea.getGoals(), rmea.getLeaderboardRewards());
-			resBuilder.setUserMiniEvent(umep);
-		}
-
-	}
-
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
 			Timestamp now) {
 		Date nowDate = new Date(now.getTime());
@@ -1934,15 +1931,13 @@ public class StartupController extends EventController {
 		if (clanId == null) {
 			return;
 		}
-		/*NOTE: DB CALL*/
 		//get the clan raid information for the clan
 		ClanEventPersistentForClan cepfc = getClanEventPersistentForClanRetrieveUtils()
 				.getPersistentEventForClanId(clanId);
 
 		if (null == cepfc) {
-			log.info(String.format(
-					"no clan raid stuff existing for clan=%s, user=%s", clanId,
-					user));
+			log.info("no clan raid stuff existing for clanId={}, user={}",
+					clanId, user);
 			return;
 		}
 
@@ -1950,24 +1945,22 @@ public class StartupController extends EventController {
 				.createPersistentClanEventClanInfoProto(cepfc);
 		resBuilder.setCurRaidClanInfo(pcecip);
 
-		/*NOTE: DB CALL*/
 		//get the clan raid information for all the clan users
 		//shouldn't be null (per the retrieveUtils)
 		Map<String, ClanEventPersistentForUser> userIdToCepfu = getClanEventPersistentForUserRetrieveUtils()
 				.getPersistentEventUserInfoForClanId(clanId);
-		log.info(String.format("the users involved in clan raid:%s",
-				userIdToCepfu));
+		log.info("the users involved in clan raid:{}",
+				userIdToCepfu);
 
 		if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
-			log.info(String.format(
-					"no users involved in clan raid. clanRaid=%s", cepfc));
+			log.info( "no users involved in clan raid. clanRaid={}",
+					cepfc );
 			return;
 		}
 
 		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
-		/*NOTE: DB CALL*/
 		//TODO: when retrieving clan info, and user's current teams, maybe query for
 		//these monsters as well
 		Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
@@ -1987,14 +1980,12 @@ public class StartupController extends EventController {
 	private void setClanRaidHistoryStuff(Builder resBuilder, String userId,
 			Date nowDate) {
 
-		/*NOTE: DB CALL*/
 		//the raid stage and reward history for past 7 days
 		int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY;
 		Map<Date, CepfuRaidStageHistory> timesToRaidStageHistory = getCepfuRaidStageHistoryRetrieveUtils()
 				.getRaidStageHistoryForPastNDaysForUserId(userId, nDays,
 						nowDate, timeUtils);
 
-		/*NOTE: DB CALL*/
 		Map<Date, List<ClanEventPersistentUserReward>> timesToUserRewards = getClanEventPersistentUserRewardRetrieveUtils()
 				.getCepUserRewardForPastNDaysForUserId(userId, nDays, nowDate,
 						timeUtils);

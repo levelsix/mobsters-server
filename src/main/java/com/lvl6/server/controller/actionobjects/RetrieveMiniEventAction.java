@@ -178,12 +178,15 @@ public class RetrieveMiniEventAction {
 			//if user didn't get into TierOne, then user eligible to start new event
 			return true;
 		} else if (curPts >= tierOne && curPts < tierTwo) {
+			log.warn("not getting a new event, rewards1 aren't redeemed");
 			return mefu.isTierOneRedeemed();
 
 		} else if (curPts >= tierTwo && curPts < tierThree) {
+			log.warn("not getting a new event, rewards2 aren't redeemed");
 			return mefu.isTierTwoRedeemed();
 
 		} else if (curPts >= tierThree) {
+			log.warn("not getting a new event, rewards3 aren't redeemed");
 			return mefu.isTierThreeRedeemed();
 		}
 
