@@ -58,15 +58,15 @@ public class QuestJobForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityConditions(columnsToSelected,
 							TABLE_NAME, equalityConditions, conditionDelimiter,
 							values, preparedStatement);
 
-			log.info("getSpecificUserQuestJob() query=" + query);
+			log.info("getSpecificUserQuestJob() query={}", query);
 
 			qjfu = this.jdbcTemplate.queryForObject(query,
 					new UserQuestJobForClientMapper());
@@ -95,15 +95,15 @@ public class QuestJobForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityConditions(columnsToSelected,
 							TABLE_NAME, equalityConditions, conditionDelimiter,
 							values, preparedStatement);
 
-			log.info("getQuestJobIdsToJobs() query=" + query);
+			log.info("getQuestJobIdsToJobs() query={}", query);
 
 			List<QuestJobForUser> qjfuList = this.jdbcTemplate.query(query,
 					new UserQuestJobForClientMapper());
@@ -147,8 +147,8 @@ public class QuestJobForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityAndInConditions(columnsToSelected,
@@ -156,7 +156,7 @@ public class QuestJobForUserRetrieveUtil {
 							inConditions, inDelim, overallDelim, values,
 							preparedStatement);
 
-			log.info("getUserQuestJobForUserId() query=" + query);
+			log.info("getUserQuestJobForUserId() query={}", query);
 
 			List<QuestJobForUser> qjfuList = this.jdbcTemplate.query(query,
 					new UserQuestJobForClientMapper());
