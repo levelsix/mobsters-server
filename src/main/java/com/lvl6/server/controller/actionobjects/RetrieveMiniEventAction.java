@@ -26,6 +26,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -45,6 +46,7 @@ public class RetrieveMiniEventAction {
 	private MiniEventRetrieveUtils miniEventRetrieveUtils;
 	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
 	private MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	private TimeUtils timeUtil;
 
 	public RetrieveMiniEventAction(String userId, Date now,
 			UserRetrieveUtils2 userRetrieveUtil,
@@ -55,7 +57,9 @@ public class RetrieveMiniEventAction {
 			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils,
 			MiniEventRetrieveUtils miniEventRetrieveUtils,
 			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
-			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils) {
+			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils,
+			TimeUtils timeUtil)
+	{
 		super();
 		this.userId = userId;
 		this.now = now;
@@ -69,6 +73,7 @@ public class RetrieveMiniEventAction {
 		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
 		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
 		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
+		this.timeUtil = timeUtil;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -140,8 +145,17 @@ public class RetrieveMiniEventAction {
 		if (null == mefu) {
 			return true;
 		}
-
+		
 		int miniEventId = mefu.getMiniEventId();
+		//if the event has not even started yet then don't send it
+		MiniEvent me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
+		if (null == me || timeUtil.isFirstEarlierThanSecond(now, me.getStartTime()))
+		{
+			log.warn("user's miniEvent not active. {} \t {}", mefu, me);
+			mefu = null;
+			return true;
+		}
+
 		Collection<MiniEventGoal> goals = miniEventGoalRetrieveUtils
 				.getGoalsForMiniEventId(miniEventId);
 		if (null == goals || goals.isEmpty()) {
