@@ -58,14 +58,16 @@ public class ItemRetrieveUtils {
 
 	public Map<Integer, Item> getItemIdsToItems() {
 		if (null == itemIdsToItems) {
-			setStaticItemIdsToItems();
+//			setStaticItemIdsToItems();
+			reload();
 		}
 		return itemIdsToItems;
 	}
 
 	public Item getItemForId(int itemId) {
 		if (null == itemIdsToItems) {
-			setStaticItemIdsToItems();
+//			setStaticItemIdsToItems();
+			reload();
 		}
 
 		if (!itemIdsToItems.containsKey(itemId)) {
@@ -77,7 +79,8 @@ public class ItemRetrieveUtils {
 
 	public Map<Integer, Item> getItemsForIds(Collection<Integer> ids) {
 		if (null == itemIdsToItems) {
-			setStaticItemIdsToItems();
+//			setStaticItemIdsToItems();
+			reload();
 		}
 		Map<Integer, Item> returnMap = new HashMap<Integer, Item>();
 
@@ -149,6 +152,7 @@ public class ItemRetrieveUtils {
 	}
 
 	private void setUpRandomItemSelection() {
+		log.debug("setting setUpRandomItemSelection");
 		if (secretGiftProbabilitySum <= 0) {
 			log.error("There are no items with secret gift probabilities set.");
 			return;

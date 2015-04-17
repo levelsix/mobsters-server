@@ -76,7 +76,8 @@ public class MiniJobRetrieveUtils {
 	public Map<Integer, MiniJob> getMiniJobIdsToMiniJobs() {
 		log.debug("retrieving all miniJob data");
 		if (null == miniJobIdsToMiniJobs) {
-			setStaticMiniJobIdsToMiniJobs();
+//			setStaticMiniJobIdsToMiniJobs();
+			reload();
 		}
 		return miniJobIdsToMiniJobs;
 	}
@@ -84,7 +85,8 @@ public class MiniJobRetrieveUtils {
 	public MiniJob getMiniJobForMiniJobId(int miniJobId) {
 		log.debug("retrieving miniJob with miniJobId " + miniJobId);
 		if (null == miniJobIdsToMiniJobs) {
-			setStaticMiniJobIdsToMiniJobs();
+//			setStaticMiniJobIdsToMiniJobs();
+			reload();
 		}
 		if (!miniJobIdsToMiniJobs.containsKey(miniJobId)) {
 			log.error("no MiniJobs for miniJobId=" + miniJobId);
@@ -96,7 +98,8 @@ public class MiniJobRetrieveUtils {
 	public Map<Integer, MiniJob> getMiniJobForStructId(int structId) {
 		log.debug("retrieving miniJob with structId " + structId);
 		if (null == structureIdToMiniJobIdToMiniJob) {
-			setStaticMiniJobIdsToMiniJobs();
+//			setStaticMiniJobIdsToMiniJobs();
+			reload();
 		}
 
 		if (!structureIdToMiniJobIdToMiniJob.containsKey(structId)) {
@@ -113,7 +116,8 @@ public class MiniJobRetrieveUtils {
 	public float getMiniJobProbabilitySumForStructId(int structId) {
 		log.debug("retrieving MiniJob probability sum for structId=" + structId);
 		if (null == structureIdToSumMiniJobProbability) {
-			setStaticMiniJobIdsToMiniJobs();
+//			setStaticMiniJobIdsToMiniJobs();
+			reload();
 		}
 
 		if (!structureIdToSumMiniJobProbability.containsKey(structId)) {
@@ -321,6 +325,7 @@ public class MiniJobRetrieveUtils {
 		{
 			log.info("reloading");
 			setStaticMiniJobIdsToMiniJobs();
+//			reload();
 		}
 		//precaution
 		if (null == structIdToQualityToProbabilitySum ||
