@@ -19,7 +19,7 @@
 				<hz:property name="hazelcast.max.no.heartbeat.seconds">40</hz:property>
 				
 			</hz:properties>
-			<hz:network port="5701" port-auto-increment="true">
+			<hz:network port="5701" port-auto-increment="false">
 				<hz:join>
 					<hz:multicast enabled="false" />
 	                <hz:tcp-ip enabled="false" />
@@ -27,6 +27,8 @@
 					access-key="${hazelcast.ec2.awsId}" 
 					secret-key="${hazelcast.ec2.awsSecretKey}"
 					region="${hazelcast.ec2.region}" 
+					tag-key="${hazelcast.tag.key}"
+					tag-value="${hazelcast.tag.value}"
 					 />
 					 <!-- security-group-name="${hazelcast.ec2.security.group}" -->
 				</hz:join>
