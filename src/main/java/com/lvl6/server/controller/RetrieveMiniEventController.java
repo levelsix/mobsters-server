@@ -18,6 +18,7 @@ import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Retriev
 import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -27,7 +28,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
-import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -45,6 +46,9 @@ public class RetrieveMiniEventController extends EventController {
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
+	@Autowired
+	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
+	
 	@Autowired
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
@@ -71,6 +75,9 @@ public class RetrieveMiniEventController extends EventController {
 	
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -126,11 +133,13 @@ public class RetrieveMiniEventController extends EventController {
 		try {
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-					userId, now, userRetrieveUtil,
+					userId, now, true, userRetrieveUtil,
+					achievementForUserRetrieveUtil,
 					miniEventForUserRetrieveUtil, miniEventGoalForUserRetrieveUtil,
 					insertUtil, deleteUtil, miniEventGoalRetrieveUtils,
 					miniEventForPlayerLvlRetrieveUtils, miniEventRetrieveUtils,
-					miniEventTierRewardRetrieveUtils, miniEventLeaderboardRewardRetrieveUtils);
+					miniEventTierRewardRetrieveUtils,
+					miniEventLeaderboardRewardRetrieveUtils, timeUtil);
 
 			rmea.execute(resBuilder);
 

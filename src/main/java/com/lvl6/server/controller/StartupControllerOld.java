@@ -1580,7 +1580,9 @@ public class StartupControllerOld extends EventController {
 		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 				userId,
 				now,
+				false,
 				userRetrieveUtils,
+				achievementForUserRetrieveUtil,
 				miniEventForUserRetrieveUtil,
 				miniEventGoalForUserRetrieveUtil,
 				insertUtil,
@@ -1589,8 +1591,10 @@ public class StartupControllerOld extends EventController {
 				miniEventForPlayerLvlRetrieveUtils,
 				miniEventRetrieveUtils,
 				miniEventTierRewardRetrieveUtils,
-				miniEventLeaderboardRewardRetrieveUtils);
+				miniEventLeaderboardRewardRetrieveUtils,
+				timeUtils);
 
+		
 		rmea.execute(rmeaResBuilder);
 //		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
 //				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
