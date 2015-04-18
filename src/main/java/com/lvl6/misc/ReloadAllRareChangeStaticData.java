@@ -45,6 +45,7 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -191,8 +192,11 @@ public class ReloadAllRareChangeStaticData {
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
 
-	@Autowired
-	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
+    @Autowired
+    protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
+
+    @Autowired
+    protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
@@ -330,6 +334,7 @@ public class ReloadAllRareChangeStaticData {
 		questRetrieveUtils.reload();
 		researchRetrieveUtils.reload();
 		researchPropertyRetrieveUtils.reload();
+		rewardRetrieveUtils.reload();
 		skillRetrieveUtils.reload();
 		skillPropertyRetrieveUtils.reload();
 		skillSideEffectRetrieveUtils.reload();
