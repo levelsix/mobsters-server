@@ -3,11 +3,15 @@ package com.lvl6.server.controller.actionobjects;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import scala.actors.threadpool.Arrays;
+
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.MiniEvent;
 import com.lvl6.info.MiniEventForPlayerLvl;
 import com.lvl6.info.MiniEventForUser;
@@ -16,8 +20,10 @@ import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
+import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -36,7 +42,9 @@ public class RetrieveMiniEventAction {
 
 	private String userId;
 	private Date now;
+	private boolean completedClanAchievements;
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	private AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
 	private MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 	private MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
 	private InsertUtil insertUtil;
@@ -49,7 +57,9 @@ public class RetrieveMiniEventAction {
 	private TimeUtils timeUtil;
 
 	public RetrieveMiniEventAction(String userId, Date now,
+			boolean completedClanAchievements,
 			UserRetrieveUtils2 userRetrieveUtil,
+			AchievementForUserRetrieveUtil achievementForUserRetrieveUtil,
 			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil,
 			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil,
 			InsertUtil insertUtil, DeleteUtil deleteUtil,
@@ -63,6 +73,7 @@ public class RetrieveMiniEventAction {
 		super();
 		this.userId = userId;
 		this.now = now;
+		this.completedClanAchievements = completedClanAchievements;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
 		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
@@ -139,6 +150,12 @@ public class RetrieveMiniEventAction {
 			return false;
 		}
 
+		completedClanAchievements();
+		if (!completedClanAchievements)
+		{
+			log.info("did not finish clan achievements");
+			return true;
+		}
 
 		mefu = miniEventForUserRetrieveUtil
 				.getSpecificUserMiniEvent(userId);
@@ -173,6 +190,43 @@ public class RetrieveMiniEventAction {
 		}
 
 		return true;
+	}
+	
+	private void completedClanAchievements()
+	{
+		//caller says clan achievements are completed
+		if (completedClanAchievements)
+		{
+			return;
+		}
+		
+		//assume user completed clan achievements
+		completedClanAchievements = true;
+		
+		//prove that he didn't complete the clan achievements
+		Integer[] clanAchievementIds = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS;
+		@SuppressWarnings("unchecked")
+		List<Integer> caIdList = Arrays.asList(clanAchievementIds);
+		
+		Map<Integer, AchievementForUser> achievementIdToUserAchievements = achievementForUserRetrieveUtil
+				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
+						caIdList);
+		
+		for (int i = 0; i < caIdList.size(); i++) {
+			int achievementId = caIdList.get(i);
+			if (!achievementIdToUserAchievements.containsKey(achievementId))
+			{
+				completedClanAchievements = false;
+				break;
+			}
+
+			AchievementForUser afu = achievementIdToUserAchievements.get(achievementId);
+			if (!afu.isRedeemed())
+			{
+				completedClanAchievements = false;
+				break;
+			}
+		}
 	}
 
 	private boolean verifyRewardsCollected(Collection<MiniEventGoal> goals) {
@@ -243,6 +297,12 @@ public class RetrieveMiniEventAction {
 
 	private boolean writeChangesToDB(Builder resBuilder)
 	{
+		if (!completedClanAchievements)
+		{
+			log.info("user has not finished clan achievements, not giving mini event");
+			return true;
+		}
+		
 		if (null == mefu) {
 			return processNonexistentUserMiniEvent();
 		} else {

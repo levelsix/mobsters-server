@@ -1060,7 +1060,9 @@ class StartupService extends LazyLogging{
         val rmea = new RetrieveMiniEventAction(
             userId,
             now,
+            false,
             userRetrieveUtils,
+            achievementForUserRetrieveUtil,
             miniEventForUserRetrieveUtil,
             miniEventGoalForUserRetrieveUtil,
             insertUtil,
@@ -1069,7 +1071,8 @@ class StartupService extends LazyLogging{
             miniEventForPlayerLvlRetrieveUtil,
             miniEventRetrieveUtil,
             miniEventTierRewardRetrieveUtil,
-            miniEventLeaderboardRewardRetrieveUtil);
+            miniEventLeaderboardRewardRetrieveUtil,
+            timeUtils);
         rmea.execute(rmeaResBuilder);
         if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&  null != rmea.getCurActiveMiniEvent()){
           //get UserMiniEvent info and create the proto to set into resBuilder
