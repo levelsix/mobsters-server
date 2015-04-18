@@ -1,10 +1,11 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 //import "MonsterStuff.proto";
-import "SharedEnumConfig.proto";
-import "Reward.proto";
-import "User.proto";
+import "Chat.proto";
 import "CustomMenu.proto";
+import "Reward.proto";
+import "SharedEnumConfig.proto";
+import "User.proto";
 
 package com.lvl6.proto;
 
@@ -27,6 +28,7 @@ message SalesPackageProto {
 	optional int64 timeEnd = 10;
 	optional string animatingIcon = 11;
 	optional string slamIcon = 12;
+	optional string titleColor = 13;
 }
 
 //------------------------------------------------------------------------------------------

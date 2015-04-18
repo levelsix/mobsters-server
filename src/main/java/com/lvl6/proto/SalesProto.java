@@ -184,6 +184,20 @@ public final class SalesProto {
      */
     com.google.protobuf.ByteString
         getSlamIconBytes();
+
+    /**
+     * <code>optional string titleColor = 13;</code>
+     */
+    boolean hasTitleColor();
+    /**
+     * <code>optional string titleColor = 13;</code>
+     */
+    java.lang.String getTitleColor();
+    /**
+     * <code>optional string titleColor = 13;</code>
+     */
+    com.google.protobuf.ByteString
+        getTitleColorBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesPackageProto}
@@ -308,6 +322,12 @@ public final class SalesProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
               slamIcon_ = bs;
+              break;
+            }
+            case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000200;
+              titleColor_ = bs;
               break;
             }
           }
@@ -707,6 +727,48 @@ public final class SalesProto {
       }
     }
 
+    public static final int TITLECOLOR_FIELD_NUMBER = 13;
+    private java.lang.Object titleColor_;
+    /**
+     * <code>optional string titleColor = 13;</code>
+     */
+    public boolean hasTitleColor() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional string titleColor = 13;</code>
+     */
+    public java.lang.String getTitleColor() {
+      java.lang.Object ref = titleColor_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          titleColor_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string titleColor = 13;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTitleColorBytes() {
+      java.lang.Object ref = titleColor_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        titleColor_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       salesPackageId_ = 0;
       salesProductId_ = "";
@@ -720,6 +782,7 @@ public final class SalesProto {
       timeEnd_ = 0L;
       animatingIcon_ = "";
       slamIcon_ = "";
+      titleColor_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -769,6 +832,9 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(12, getSlamIconBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(13, getTitleColorBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -826,6 +892,10 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(12, getSlamIconBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(13, getTitleColorBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -983,6 +1053,8 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000400);
         slamIcon_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
+        titleColor_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -1074,6 +1146,10 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000100;
         }
         result.slamIcon_ = slamIcon_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.titleColor_ = titleColor_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1201,6 +1277,11 @@ public final class SalesProto {
         if (other.hasSlamIcon()) {
           bitField0_ |= 0x00000800;
           slamIcon_ = other.slamIcon_;
+          onChanged();
+        }
+        if (other.hasTitleColor()) {
+          bitField0_ |= 0x00001000;
+          titleColor_ = other.titleColor_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -2410,6 +2491,82 @@ public final class SalesProto {
   }
   bitField0_ |= 0x00000800;
         slamIcon_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object titleColor_ = "";
+      /**
+       * <code>optional string titleColor = 13;</code>
+       */
+      public boolean hasTitleColor() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional string titleColor = 13;</code>
+       */
+      public java.lang.String getTitleColor() {
+        java.lang.Object ref = titleColor_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            titleColor_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string titleColor = 13;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTitleColorBytes() {
+        java.lang.Object ref = titleColor_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          titleColor_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string titleColor = 13;</code>
+       */
+      public Builder setTitleColor(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        titleColor_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string titleColor = 13;</code>
+       */
+      public Builder clearTitleColor() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        titleColor_ = getDefaultInstance().getTitleColor();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string titleColor = 13;</code>
+       */
+      public Builder setTitleColorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        titleColor_ = value;
         onChanged();
         return this;
       }
@@ -3777,23 +3934,24 @@ public final class SalesProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Sales.proto\022\016com.lvl6.proto\032\026SharedEnu" +
-      "mConfig.proto\032\014Reward.proto\032\nUser.proto\032" +
-      "\020CustomMenu.proto\"\315\002\n\021SalesPackageProto\022" +
-      "\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016salesProductI" +
-      "d\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uuid\030\004 \001(\t\022+\n\003" +
-      "sip\030\005 \003(\0132\036.com.lvl6.proto.SalesItemProt" +
-      "o\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.proto.SalesDi" +
-      "splayItemProto\022,\n\003cmp\030\007 \003(\0132\037.com.lvl6.p" +
-      "roto.CustomMenuProto\022\016\n\006succId\030\010 \001(\005\022\021\n\t" +
-      "timeStart\030\t \001(\003\022\017\n\007timeEnd\030\n \001(\003\022\025\n\ranim",
-      "atingIcon\030\013 \001(\t\022\020\n\010slamIcon\030\014 \001(\t\"j\n\016Sal" +
-      "esItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016sale" +
-      "sPackageId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.l" +
-      "vl6.proto.RewardProto\"q\n\025SalesDisplayIte" +
-      "mProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPack" +
-      "ageId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.p" +
-      "roto.RewardProtoB\014B\nSalesProto"
+      "\n\013Sales.proto\022\016com.lvl6.proto\032\nChat.prot" +
+      "o\032\020CustomMenu.proto\032\014Reward.proto\032\026Share" +
+      "dEnumConfig.proto\032\nUser.proto\"\341\002\n\021SalesP" +
+      "ackageProto\022\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016s" +
+      "alesProductId\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uu" +
+      "id\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.S" +
+      "alesItemProto\0223\n\004sdip\030\006 \003(\0132%.com.lvl6.p" +
+      "roto.SalesDisplayItemProto\022,\n\003cmp\030\007 \003(\0132" +
+      "\037.com.lvl6.proto.CustomMenuProto\022\016\n\006succ" +
+      "Id\030\010 \001(\005\022\021\n\ttimeStart\030\t \001(\003\022\017\n\007timeEnd\030\n",
+      " \001(\003\022\025\n\ranimatingIcon\030\013 \001(\t\022\020\n\010slamIcon\030" +
+      "\014 \001(\t\022\022\n\ntitleColor\030\r \001(\t\"j\n\016SalesItemPr" +
+      "oto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackage" +
+      "Id\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.prot" +
+      "o.RewardProto\"q\n\025SalesDisplayItemProto\022\023" +
+      "\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackageId\030\002 " +
+      "\001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.proto.Rew" +
+      "ardProtoB\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3806,17 +3964,18 @@ public final class SalesProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
-          com.lvl6.proto.RewardsProto.getDescriptor(),
-          com.lvl6.proto.UserProto.getDescriptor(),
+          com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.CustomMenuesProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
+          com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_SalesPackageProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesPackageProto_descriptor,
-        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "Cmp", "SuccId", "TimeStart", "TimeEnd", "AnimatingIcon", "SlamIcon", });
+        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "Cmp", "SuccId", "TimeStart", "TimeEnd", "AnimatingIcon", "SlamIcon", "TitleColor", });
     internal_static_com_lvl6_proto_SalesItemProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
@@ -3829,10 +3988,11 @@ public final class SalesProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor,
         new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.RewardsProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
+    com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.CustomMenuesProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

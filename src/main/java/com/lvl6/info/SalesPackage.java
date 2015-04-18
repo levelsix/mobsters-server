@@ -1,17 +1,32 @@
 package com.lvl6.info;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SalesPackage {
+public class SalesPackage implements Serializable {
+
+    private static final long serialVersionUID = 1549953377153488834L;
+
+    private int id;
+    private String productId;
+    private int price;
+    private String uuid;
+    private Date timeStart;
+    private Date timeEnd;
+    private int succId;
+    private int customMenuId;
+    private String name;
+    private String animatingIcon;
+    private String slamIcon;
+    private String titleColor;
 
 	public SalesPackage() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public SalesPackage(int id, String productId, String name, int price, String uuid,
 			Date timeStart, Date timeEnd, int succId, int customMenuId,
-			String animatingIcon, String slamIcon) {
+			String animatingIcon, String slamIcon, String titleColor) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -24,21 +39,8 @@ public class SalesPackage {
 		this.customMenuId = customMenuId;
 		this.animatingIcon = animatingIcon;
 		this.slamIcon = slamIcon;
+		this.titleColor = titleColor;
 	}
-
-	private static final long serialVersionUID = 1549953377153488834L;
-
-	private int id;
-	private String productId;
-	private int price;
-	private String uuid;
-	private Date timeStart;
-	private Date timeEnd;
-	private int succId;
-	private int customMenuId;
-	private String name;
-	private String animatingIcon;
-	private String slamIcon;
 
 	public int getId() {
 		return id;

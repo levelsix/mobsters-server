@@ -99,6 +99,7 @@ public class InAppPurchaseUtils {
 
 		b.setAnimatingIcon(sp.getAnimatingIcon());
 		b.setSlamIcon(sp.getSlamIcon());
+		b.setTitleColor(sp.getTitleColor());
 
 
 

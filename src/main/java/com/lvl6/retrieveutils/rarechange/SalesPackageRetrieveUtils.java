@@ -162,6 +162,7 @@ public class SalesPackageRetrieveUtils {
         String name = "";
         String animatingIcon = "";
         String slamIcon = "";
+        String titleColor = "";
 
 
         str = rs.getString(DBConstants.SALES_PACKAGE__NAME);
@@ -176,11 +177,16 @@ public class SalesPackageRetrieveUtils {
 
         str = rs.getString(DBConstants.SALES_PACKAGE__SLAM_ICON);
         if(!rs.wasNull()) {
-        	slamIcon = str;
+            slamIcon = str;
+        }
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__TITLE_COLOR);
+        if(!rs.wasNull()) {
+            titleColor = str;
         }
 
 		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid,
-				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon);
+				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon, titleColor);
 		return salesPackage;
 	}
 }

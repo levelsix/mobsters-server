@@ -1241,6 +1241,7 @@ public class DBConstants {
     public static final String SALES_PACKAGE__CUSTOM_MENU_ID = "custom_menu_id";
     public static final String SALES_PACKAGE__ANIMATING_ICON = "animating_icon";
     public static final String SALES_PACKAGE__SLAM_ICON = "slam_icon";
+    public static final String SALES_PACKAGE__TITLE_COLOR = "title_color";
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";
