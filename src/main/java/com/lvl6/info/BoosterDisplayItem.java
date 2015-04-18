@@ -12,7 +12,6 @@ public class BoosterDisplayItem implements Serializable {
 	
 	public BoosterDisplayItem() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BoosterDisplayItem(int id, int boosterPackId, int rewardId) {

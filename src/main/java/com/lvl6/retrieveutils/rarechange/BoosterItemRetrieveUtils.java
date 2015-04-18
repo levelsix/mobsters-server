@@ -127,7 +127,6 @@ public class BoosterItemRetrieveUtils {
 										boosterItem.getId(), boosterItem);
 						}
 						boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItemsTemp;
-						log.info("boosteritemidstoboosteritems: " + boosterItemIdsToBoosterItems);
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
