@@ -17,6 +17,7 @@ public class BoosterItem implements Serializable {
 	private float chanceToAppear;
 	private int itemId;
 	private int itemQuantity;
+	private int rewardId;
 
 	public BoosterItem() {
 		super();
@@ -24,7 +25,8 @@ public class BoosterItem implements Serializable {
 
 	public BoosterItem(int id, int boosterPackId, int monsterId, int numPieces,
 			boolean isComplete, boolean isSpecial, int gemReward,
-			int cashReward, float chanceToAppear, int itemId, int itemQuantity) {
+			int cashReward, float chanceToAppear, int itemId, int itemQuantity,
+			int rewardId) {
 		super();
 		this.id = id;
 		this.boosterPackId = boosterPackId;
@@ -37,6 +39,7 @@ public class BoosterItem implements Serializable {
 		this.chanceToAppear = chanceToAppear;
 		this.itemId = itemId;
 		this.itemQuantity = itemQuantity;
+		this.rewardId = rewardId;
 	}
 
 	public int getId() {
@@ -127,6 +130,14 @@ public class BoosterItem implements Serializable {
 		this.itemQuantity = itemQuantity;
 	}
 
+	public int getRewardId() {
+		return rewardId;
+	}
+
+	public void setRewardId(int rewardId) {
+		this.rewardId = rewardId;
+	}
+
 	@Override
 	public String toString() {
 		return "BoosterItem [id=" + id + ", boosterPackId=" + boosterPackId
@@ -134,7 +145,8 @@ public class BoosterItem implements Serializable {
 				+ ", isComplete=" + isComplete + ", isSpecial=" + isSpecial
 				+ ", gemReward=" + gemReward + ", cashReward=" + cashReward
 				+ ", chanceToAppear=" + chanceToAppear + ", itemId=" + itemId
-				+ ", itemQuantity=" + itemQuantity + "]";
+				+ ", itemQuantity=" + itemQuantity + ", rewardId=" + rewardId
+				+ "]";
 	}
 
 }
