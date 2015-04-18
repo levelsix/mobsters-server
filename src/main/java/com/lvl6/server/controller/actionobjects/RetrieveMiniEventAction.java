@@ -9,8 +9,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import scala.actors.threadpool.Arrays;
-
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.MiniEvent;
 import com.lvl6.info.MiniEventForPlayerLvl;
@@ -206,7 +204,7 @@ public class RetrieveMiniEventAction {
 		//prove that he didn't complete the clan achievements
 		Integer[] clanAchievementIds = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS;
 		@SuppressWarnings("unchecked")
-		List<Integer> caIdList = Arrays.asList(clanAchievementIds);
+		List<Integer> caIdList = java.util.Arrays.asList(clanAchievementIds);
 		
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = achievementForUserRetrieveUtil
 				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
