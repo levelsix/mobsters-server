@@ -100,6 +100,8 @@ public class InAppPurchaseUtils {
 		b.setAnimatingIcon(sp.getAnimatingIcon());
 		b.setSlamIcon(sp.getSlamIcon());
 
+
+
 		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
