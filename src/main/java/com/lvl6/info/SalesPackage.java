@@ -42,7 +42,15 @@ public class SalesPackage implements Serializable {
 		this.titleColor = titleColor;
 	}
 
-	public int getId() {
+	public String getTitleColor() {
+        return titleColor;
+    }
+
+    public void setTitleColor(String titleColor) {
+        this.titleColor = titleColor;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -72,14 +80,14 @@ public class SalesPackage implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "SalesPackage [id=" + id + ", productId=" + productId
-				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
-				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
-				+ ", customMenuId=" + customMenuId + ", name=" + name
-				+ ", animatingIcon=" + animatingIcon + ", slamIcon=" + slamIcon
-				+ "]";
-	}
+    public String toString() {
+        return "SalesPackage [id=" + id + ", productId=" + productId
+                + ", price=" + price + ", uuid=" + uuid + ", timeStart="
+                + timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+                + ", customMenuId=" + customMenuId + ", name=" + name
+                + ", animatingIcon=" + animatingIcon + ", slamIcon=" + slamIcon
+                + ", titleColor=" + titleColor + "]";
+    }
 
 	public Date getTimeStart() {
 		return timeStart;
