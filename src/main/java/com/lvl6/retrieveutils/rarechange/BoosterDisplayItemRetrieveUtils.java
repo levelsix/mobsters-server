@@ -190,9 +190,11 @@ public class BoosterDisplayItemRetrieveUtils {
 			}
 		}
 
+		int rewardId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__REWARD_ID);
+
 		BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(id,
 				boosterPackId, isMonster, isComplete, monsterQuality,
-				gemReward, quantity, itemId, itemQuantity);
+				gemReward, quantity, itemId, itemQuantity, rewardId);
 		return boosterDisplayItem;
 	}
 }
