@@ -15,10 +15,11 @@ public class BoosterDisplayItem implements Serializable {
 	private int quantity;
 	private int itemId;
 	private int itemQuantity;
+	private int rewardId;
 
 	public BoosterDisplayItem(int id, int boosterPackId, boolean isMonster,
 			boolean isComplete, String monsterQuality, int gemReward,
-			int quantity, int itemId, int itemQuantity) {
+			int quantity, int itemId, int itemQuantity, int rewardId) {
 		super();
 		this.id = id;
 		this.boosterPackId = boosterPackId;
@@ -29,6 +30,7 @@ public class BoosterDisplayItem implements Serializable {
 		this.quantity = quantity;
 		this.itemId = itemId;
 		this.itemQuantity = itemQuantity;
+		this.rewardId = rewardId;
 	}
 
 	public int getId() {
@@ -103,13 +105,22 @@ public class BoosterDisplayItem implements Serializable {
 		this.itemQuantity = itemQuantity;
 	}
 
+	public int getRewardId() {
+		return rewardId;
+	}
+
+	public void setRewardId(int rewardId) {
+		this.rewardId = rewardId;
+	}
+
 	@Override
 	public String toString() {
 		return "BoosterDisplayItem [id=" + id + ", boosterPackId="
 				+ boosterPackId + ", isMonster=" + isMonster + ", isComplete="
 				+ isComplete + ", monsterQuality=" + monsterQuality
 				+ ", gemReward=" + gemReward + ", quantity=" + quantity
-				+ ", itemId=" + itemId + ", itemQuantity=" + itemQuantity + "]";
+				+ ", itemId=" + itemId + ", itemQuantity=" + itemQuantity
+				+ ", rewardId=" + rewardId + "]";
 	}
 
 }

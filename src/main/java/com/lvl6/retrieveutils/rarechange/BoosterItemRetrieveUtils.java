@@ -164,10 +164,11 @@ public class BoosterItemRetrieveUtils {
 				.getFloat(DBConstants.BOOSTER_ITEM__CHANCE_TO_APPEAR);
 		int itemId = rs.getInt(DBConstants.BOOSTER_ITEM__ITEM_ID);
 		int itemQuantity = rs.getInt(DBConstants.BOOSTER_ITEM__ITEM_QUANTITY);
+		int rewardId = rs.getInt(DBConstants.BOOSTER_ITEM__REWARD_ID);
 
 		BoosterItem boosterItem = new BoosterItem(id, boosterPackId, monsterId,
 				numPieces, isComplete, isSpecial, gemReward, cashReward,
-				chanceToAppear, itemId, itemQuantity);
+				chanceToAppear, itemId, itemQuantity, rewardId);
 		return boosterItem;
 	}
 }
