@@ -457,7 +457,7 @@ class StartupService extends LazyLogging{
         sr   <-    setResearch(resBuilder, userId)
         sbifu <-   setBattleItemForUser(resBuilder, userId)
         sbiqfu <-  setBattleItemQueueForUser(resBuilder, userId)
-		ssfu  <-   setSalesForUser(resBuilder, user)
+		    ssfu  <-   setSalesForUser(resBuilder, user)
         scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
         plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
@@ -1169,6 +1169,7 @@ class StartupService extends LazyLogging{
                             salesItemRetrieveUtil,
                             salesDisplayItemRetrieveUtil,
                             customMenuRetrieveUtil);
+                    logger.info(s"spProto: $spProto");
                     resBuilder.addSalesPackages(spProto);
                 }
               }
@@ -1188,6 +1189,8 @@ class StartupService extends LazyLogging{
                             salesItemRetrieveUtil,
                             salesDisplayItemRetrieveUtil,
                             customMenuRetrieveUtil);
+                    logger.info(s"spProto: $spProto");
+
                     resBuilder.addSalesPackages(spProto);
                 }
               }
@@ -1214,6 +1217,8 @@ class StartupService extends LazyLogging{
                             salesItemRetrieveUtil,
                             salesDisplayItemRetrieveUtil,
                             customMenuRetrieveUtil);
+                    logger.info(s"spProto: $spProto");
+
                     resBuilder.addSalesPackages(spProto);
                 }
               }
@@ -1269,7 +1274,7 @@ class StartupService extends LazyLogging{
         }
         gifts.addAll(giftList);
       } else {
-        logger.error("Error calculating the new SecretGifts. nuGifts=$giftList, ids=$ids");
+        logger.error(s"Error calculating the new SecretGifts. nuGifts=$giftList, ids=$ids");
       }
     }
   }
@@ -1334,6 +1339,8 @@ class StartupService extends LazyLogging{
                   }
               }
           }
+          
+          logger.info(s"list of sales packages protos $resBuilder.getSalesPackagesList")
       }
     }
   }
