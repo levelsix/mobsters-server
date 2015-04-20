@@ -247,6 +247,7 @@ public class PurchaseBoosterPackAction {
 		if(buyingInBulk) {
 			gachaCreditsPrice = gachaCreditsPrice * ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE;
 		}
+
 		return true;
 	}
 
@@ -276,6 +277,7 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
+
 		selectBoosterItems();
 
 		boolean legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
@@ -313,7 +315,6 @@ public class PurchaseBoosterPackAction {
 		for(BoosterItem bi : itemsUserReceives) {
 			Reward r = idsToRewards.get(bi.getRewardId());
 			listOfRewards.add(r);
-			log.info("size of listofrewards: " + listOfRewards.size());
 		}
 
 		ara = new AwardRewardAction(userId, user, 0, 0, now, "booster packs id " + aPack.getId(), listOfRewards,
@@ -528,6 +529,14 @@ public class PurchaseBoosterPackAction {
 		this.boosterPackIdPurchased = boosterPackIdPurchased;
 	}
 
+	public int getGemPrice() {
+		return gemPrice;
+	}
+
+	public void setGemPrice(int gemPrice) {
+		this.gemPrice = gemPrice;
+	}
+
 	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
 		return boosterItemIdsToBoosterItems;
 	}
@@ -535,6 +544,14 @@ public class PurchaseBoosterPackAction {
 	public void setBoosterItemIdsToBoosterItems(
 			Map<Integer, BoosterItem> boosterItemIdsToBoosterItems) {
 		this.boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItems;
+	}
+
+	public int getUserGems() {
+		return userGems;
+	}
+
+	public void setUserGems(int userGems) {
+		this.userGems = userGems;
 	}
 
 	public List<Reward> getListOfRewards() {
@@ -561,6 +578,14 @@ public class PurchaseBoosterPackAction {
 		this.gemReward = gemReward;
 	}
 
+	public int getGemChange() {
+		return gemChange;
+	}
+
+	public void setGemChange(int gemChange) {
+		this.gemChange = gemChange;
+	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -575,8 +600,6 @@ public class PurchaseBoosterPackAction {
 
 	public int getGachaCreditsChange() {
 		return gachaCreditsChange;
-	}
-
 	public void setGachaCreditsChange(int gachaCreditsChange) {
 		this.gachaCreditsChange = gachaCreditsChange;
 	}
@@ -588,6 +611,5 @@ public class PurchaseBoosterPackAction {
 	public void setGachaCreditsReward(int gachaCreditsReward) {
 		this.gachaCreditsReward = gachaCreditsReward;
 	}
-
 
 }
