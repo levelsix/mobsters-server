@@ -33,6 +33,8 @@ public class ControllerConstants {
 
 	//BOOSTER_PACK
 	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
+	public static final int BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE = 10;
+	public static final int BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE = 11;
 
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 20
