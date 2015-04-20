@@ -148,7 +148,7 @@ message StartupResponseProto {
 
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
 	
-	repeated UserClanGiftProto userClanGifts = 54;
+	repeated UserClanGiftProto userClanGifts = 500; 
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

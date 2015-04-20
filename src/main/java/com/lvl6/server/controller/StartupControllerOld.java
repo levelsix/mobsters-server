@@ -304,6 +304,9 @@ public class StartupControllerOld extends EventController {
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
 	@Autowired
+	protected ClanGiftForUserRetrieveUtil clanGiftForUserRetrieveUtil;
+
+	@Autowired
 	protected BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
 
 	@Autowired
@@ -766,6 +769,10 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
+			setMiniEventForUser(resBuilder, user, playerId, nowDate);
+			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
+			setClanGiftForUser(resBuilder, playerId);
+			log.info("{}ms at setClanGiftForUser", stopWatch.getTime());
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1925,6 +1932,49 @@ public class StartupControllerOld extends EventController {
 		if (null != dlp) {
 			resBuilder.setUserDefaultLanguages(dlp);
 		}
+	}
+
+	private void setMiniEventForUser(
+			Builder resBuilder, User u, String userId, Date now)
+	{
+		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
+				RetrieveMiniEventResponseProto.newBuilder();
+
+
+		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
+				userId, now, userRetrieveUtils,
+				miniEventForUserRetrieveUtil,
+				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
+				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils,
+				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils,
+				miniEventLeaderboardRewardRetrieveUtils);
+
+		rmea.execute(rmeaResBuilder);
+//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
+//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
+//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
+
+		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+				null != rmea.getCurActiveMiniEvent())
+		{
+			//get UserMiniEvent info and create the proto to set into resBuilder
+			//TODO: Consider protofying MiniEvent stuff
+			UserMiniEventProto umep = createInfoProtoUtils
+					.createUserMiniEventProto(
+							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+							rmea.getMegfus(),
+							rmea.getLvlEntered(), rmea.getRewards(),
+							rmea.getGoals(), rmea.getLeaderboardRewards());
+			resBuilder.setUserMiniEvent(umep);
+		}
+
+	}
+
+	private void setClanGiftForUser(Builder resBuilder, String playerId) {
+
+
+
+
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId,
