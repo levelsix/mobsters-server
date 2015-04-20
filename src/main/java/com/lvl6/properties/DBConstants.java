@@ -32,6 +32,9 @@ public class DBConstants {
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	public static final String TABLE_CLAN_GIFT_CONFIG = "clan_gift_config";
+	public static final String TABLE_CLAN_GIFT_FOR_USER = "clan_gift_for_user";
+	public static final String TABLE_CLAN_GIFT_REWARD_CONFIG = "clan_gift_reward_config";
 	public static final String TABLE_CLAN_HELP = "clan_help";
 	public static final String TABLE_CLAN_HELP_COUNT_FOR_USER = "clan_help_count_for_user";
 	public static final String TABLE_CLAN_ICON_CONFIG = "clan_icon_config";
@@ -317,6 +320,15 @@ public class DBConstants {
 	public static final String CLAN_FOR_USER__CLAN_ID = "clan_id";
 	public static final String CLAN_FOR_USER__STATUS = "status";
 	public static final String CLAN_FOR_USER__REQUEST_TIME = "request_time";
+
+	/*CLAN GIFT FOR USER*/
+	public static final String CLAN_GIFT_FOR_USER__ID = GENERIC__ID;
+	public static final String CLAN_GIFT_FOR_USER__RECEIVER_USER_ID = "receiver_user_id";
+	public static final String CLAN_GIFT_FOR_USER__GIFTER_USER_ID = "gifter_user_id";
+	public static final String CLAN_GIFT_FOR_USER__CLAN_GIFT_ID = "clan_gift_id";
+	public static final String CLAN_GIFT_FOR_USER__REWARD_ID = "reward_id";
+	public static final String CLAN_GIFT_FOR_USER__TIME_RECEIVED = "time_received";
+	public static final String CLAN_GIFT_FOR_USER__REASON_FOR_GIFT = "reason_for_gift";
 
 	/*CLAN HELP*/
 	public static final String CLAN_HELP__ID = GENERIC__ID;
@@ -957,6 +969,15 @@ public class DBConstants {
 	public static final String CLAN_EVENT_PERSISTENT__START_HOUR = "start_hour";
 	public static final String CLAN_EVENT_PERSISTENT__EVENT_DURATION_MINUTES = "event_duration_minutes";
 	public static final String CLAN_EVENT_PERSISTENT__CLAN_RAID_ID = "clan_raid_id";
+
+	public static final String CLAN_GIFT__ID = GENERIC__ID;
+	public static final String CLAN_GIFT__NAME = "name";
+	public static final String CLAN_GIFT__HOURS_UNTIL_EXPIRATION= "hours_until_expiration";
+
+	public static final String CLAN_GIFT_REWARD__ID = GENERIC__ID;
+	public static final String CLAN_GIFT_REWARD__CLAN_GIFT_ID = "clan_gift_id";
+	public static final String CLAN_GIFT_REWARD__REWARD_ID = "reward_id";
+	public static final String CLAN_GIFT_REWARD__CHANCE_OF_DROP = "chance_of_drop";
 
 	public static final String CLAN_ICON__ID = GENERIC__ID;
 	public static final String CLAN_ICON__IMG_NAME = "img_name";

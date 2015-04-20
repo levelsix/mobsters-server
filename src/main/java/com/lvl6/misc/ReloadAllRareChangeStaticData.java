@@ -16,6 +16,8 @@ import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -106,6 +108,12 @@ public class ReloadAllRareChangeStaticData {
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
 
 	@Autowired
+	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
 
 	@Autowired
@@ -191,12 +199,6 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-
-    @Autowired
-    protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
-
-    @Autowired
-    protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
@@ -301,6 +303,8 @@ public class ReloadAllRareChangeStaticData {
 		//		CityRetrieveUtils.reload();
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
+		clanGiftRetrieveUtils.reload();
+		clanGiftRewardsRetrieveUtils.reload();
 		clanIconRetrieveUtils.reload();
 		clanEventPersistentRetrieveUtils.reload();
 		clanRaidRetrieveUtils.reload();

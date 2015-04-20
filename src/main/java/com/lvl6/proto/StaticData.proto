@@ -8,6 +8,7 @@ import "Board.proto";
 import "BoosterPackStuff.proto";
 import "City.proto";
 import "Clan.proto";
+import "ClanGifts.proto";
 import "CustomMenu.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
@@ -96,6 +97,9 @@ message StaticDataProto {
 	//repeated BattleItemFactoryProto allBattleItemFactorys = 42; defined above
 	
 	repeated RewardProto reward = 45;	
+	
+	repeated ClanGiftProto clanGifts = 46;
+	
 	
 }
 	
