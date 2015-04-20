@@ -171,7 +171,7 @@ import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -425,9 +425,9 @@ public class StartupControllerOld extends EventController {
 
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+//
+//	@Autowired
+//	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
 
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
@@ -770,7 +770,7 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
-			setSalesForUser(resBuilder, user);
+//			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
@@ -1836,7 +1836,51 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
-	public void setSalesForUser(Builder resBuilder, User user) {
+//	public void setSalesForUser(Builder resBuilder, User user) {
+//
+//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+//
+//		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+//		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
+//				.getSalesItemIdsToSalesItemsForSalesPackIds();
+//		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
+//				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+//		int userSalesValue = user.getSalesValue();
+//
+//		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
+//		Date now = new Date();
+//
+//		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
+//			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+//			if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
+//					(sp.getTimeEnd().getTime() > now.getTime())) {
+//				//get the sales items associated with this booster pack
+//				List<SalesItem> salesItemsList = salesPackageIdToSalesItems
+//						.get(salesPackageId);
+//
+//				//get the booster display items for this booster pack
+//				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
+//						.get(salesPackageId);
+//				Collection<SalesDisplayItem> displayItems = null;
+//				if (null != displayIdsToDisplayItems) {
+//					ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+//					displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+//					Collections.sort(displayItemIds);
+//
+//					displayItems = new ArrayList<SalesDisplayItem>();
+//
+//					for (Integer displayItemId : displayItemIds) {
+//						displayItems.add(displayIdsToDisplayItems
+//								.get(displayItemId));
+//					}
+//				}
+//
+//				SalesPackageProto spProto = createInfoProtoUtils
+//						.createSalesPackageProto(sp, salesItemsList, displayItems);
+//				resBuilder.addSalesPackages(spProto);
+//			}
+//		}
+//	}
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 
@@ -3216,14 +3260,14 @@ public class StartupControllerOld extends EventController {
 		this.updateUtil = updateUtil;
 	}
 
-	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
-		return salesPackageRetrieveUtils;
-	}
-
-	public void setSalesPackageRetrieveUtils(
-			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
-		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
-	}
+//	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+//		return salesPackageRetrieveUtils;
+//	}
+//
+//	public void setSalesPackageRetrieveUtils(
+//			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+//		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+//	}
 
 	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
 		return salesItemRetrieveUtils;

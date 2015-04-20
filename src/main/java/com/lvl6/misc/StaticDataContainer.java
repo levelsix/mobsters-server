@@ -140,7 +140,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -301,8 +301,8 @@ public class StaticDataContainer {
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+//	@Autowired
+//	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
 
 	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
@@ -423,7 +423,7 @@ public class StaticDataContainer {
 		setResearch(sdpb);
 		setBattleItem(sdpb);
 		setRewards(sdpb);
-		setSales(sdpb);
+//		setSales(sdpb);
 		setClanGifts(sdpb);
 
 		staticDataBuilder = sdpb;
@@ -1107,43 +1107,43 @@ public class StaticDataContainer {
 		}
 	}
 
-	private void setSales(Builder sdpb) {
-		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
-				.getSalesPackageIdsToSalesPackages();
-		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
-				.getSalesItemIdsToSalesItemsForSalesPackIds();
-		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems =
-				salesDisplayItemRetrieveUtils.
-				getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
-
-		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
-			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-
-			//get the sales items associated with this booster pack
-			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
-					.get(salesPackageId);
-
-			//get the booster display items for this booster pack
-			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems =
-					salesPackageIdToDisplayIdsToDisplayItems.get(salesPackageId);
-			Collection<SalesDisplayItem> displayItems = null;
-			if (null != displayIdsToDisplayItems) {
-				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
-				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
-				Collections.sort(displayItemIds);
-
-				displayItems = new ArrayList<SalesDisplayItem>();
-
-				for (Integer displayItemId : displayItemIds) {
-					displayItems.add(displayIdsToDisplayItems
-							.get(displayItemId));
-				}
-			}
-
-			SalesPackageProto spProto = createInfoProtoUtils
-					.createSalesPackageProto(sp, salesItemList, displayItems);
-		}
-	}
+//	private void setSales(Builder sdpb) {
+//		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
+//				.getSalesPackageIdsToSalesPackages();
+//		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+//				.getSalesItemIdsToSalesItemsForSalesPackIds();
+//		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems =
+//				salesDisplayItemRetrieveUtils.
+//				getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
+//
+//		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
+//			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
+//
+//			//get the sales items associated with this booster pack
+//			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
+//					.get(salesPackageId);
+//
+//			//get the booster display items for this booster pack
+//			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems =
+//					salesPackageIdToDisplayIdsToDisplayItems.get(salesPackageId);
+//			Collection<SalesDisplayItem> displayItems = null;
+//			if (null != displayIdsToDisplayItems) {
+//				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+//				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+//				Collections.sort(displayItemIds);
+//
+//				displayItems = new ArrayList<SalesDisplayItem>();
+//
+//				for (Integer displayItemId : displayItemIds) {
+//					displayItems.add(displayIdsToDisplayItems
+//							.get(displayItemId));
+//				}
+//			}
+//
+//			SalesPackageProto spProto = createInfoProtoUtils
+//					.createSalesPackageProto(sp, salesItemList, displayItems);
+//		}
+//	}
 
 
 	private void setRewards(Builder sdpb) {

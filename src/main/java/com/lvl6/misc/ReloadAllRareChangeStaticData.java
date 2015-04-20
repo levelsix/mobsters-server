@@ -50,7 +50,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -206,8 +206,8 @@ public class ReloadAllRareChangeStaticData {
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+//	@Autowired
+//	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
 
 	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
@@ -344,7 +344,7 @@ public class ReloadAllRareChangeStaticData {
 		skillSideEffectRetrieveUtils.reload();
 		salesDisplayItemRetrieveUtils.reload();
 		salesItemRetrieveUtils.reload();
-		salesPackageRetrieveUtils.reload();
+//		salesPackageRetrieveUtils.reload();
 		startupStuffRetrieveUtils.reload();
 		staticUserLevelInfoRetrieveUtils.reload();
 		structureBattleItemFactoryRetrieveUtils.reload();
