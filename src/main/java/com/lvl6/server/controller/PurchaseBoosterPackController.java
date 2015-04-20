@@ -139,7 +139,7 @@ public class PurchaseBoosterPackController extends EventController {
 
 		boolean freeBoosterPack = reqProto.getDailyFreeBoosterPack();
 		
-		log.info("reqProto: " + reqProto);
+		log.info("reqProto: {}", reqProto);
 
 		//values to send to client
 		PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto
@@ -318,7 +318,7 @@ public class PurchaseBoosterPackController extends EventController {
 		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIds(fumpList);
 
-//		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
+//		int num = insertUtil.insertIntoBoosterPackPurchaseHistory(
 //				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
 //
 //		log.info(
