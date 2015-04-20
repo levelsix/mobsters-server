@@ -470,6 +470,7 @@ public final class ProtocolsProto {
      */
     C_UPDATE_USER_STRENGTH_EVENT(109, 211),
     /**
+<<<<<<< HEAD
      * <code>C_REFRESH_MINI_JOB_EVENT = 212;</code>
      */
     C_REFRESH_MINI_JOB_EVENT(110, 212),
@@ -477,6 +478,15 @@ public final class ProtocolsProto {
      * <code>C_COLLECT_CLAN_GIFTS = 500;</code>
      */
     C_COLLECT_CLAN_GIFTS(111, 500),
+=======
+     * <code>C_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
+     */
+    C_COLLECT_CLAN_GIFTS_EVENT(110, 500),
+    /**
+     * <code>C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT = 501;</code>
+     */
+    C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT(111, 501),
+>>>>>>> two controllers, working on startup for clan gifts
     ;
 
     /**
@@ -936,6 +946,7 @@ public final class ProtocolsProto {
      */
     public static final int C_UPDATE_USER_STRENGTH_EVENT_VALUE = 211;
     /**
+<<<<<<< HEAD
      * <code>C_REFRESH_MINI_JOB_EVENT = 212;</code>
      */
     public static final int C_REFRESH_MINI_JOB_EVENT_VALUE = 212;
@@ -943,6 +954,15 @@ public final class ProtocolsProto {
      * <code>C_COLLECT_CLAN_GIFTS = 500;</code>
      */
     public static final int C_COLLECT_CLAN_GIFTS_VALUE = 500;
+=======
+     * <code>C_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
+     */
+    public static final int C_COLLECT_CLAN_GIFTS_EVENT_VALUE = 500;
+    /**
+     * <code>C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT = 501;</code>
+     */
+    public static final int C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT_VALUE = 501;
+>>>>>>> two controllers, working on startup for clan gifts
 
 
     public final int getNumber() { return value; }
@@ -1059,8 +1079,13 @@ public final class ProtocolsProto {
         case 209: return C_UPDATE_MINI_EVENT_EVENT;
         case 210: return C_TRANSLATE_SELECT_MESSAGES_EVENT;
         case 211: return C_UPDATE_USER_STRENGTH_EVENT;
+<<<<<<< HEAD
         case 212: return C_REFRESH_MINI_JOB_EVENT;
         case 500: return C_COLLECT_CLAN_GIFTS;
+=======
+        case 500: return C_COLLECT_CLAN_GIFTS_EVENT;
+        case 501: return C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT;
+>>>>>>> two controllers, working on startup for clan gifts
         default: return null;
       }
     }
@@ -1610,6 +1635,7 @@ public final class ProtocolsProto {
      */
     S_UPDATE_USER_STRENGTH_EVENT(118, 211),
     /**
+<<<<<<< HEAD
      * <code>S_REFRESH_MINI_JOB_EVENT = 212;</code>
      */
     S_REFRESH_MINI_JOB_EVENT(119, 212),
@@ -1617,6 +1643,15 @@ public final class ProtocolsProto {
      * <code>S_COLLECT_CLAN_GIFTS = 500;</code>
      */
     S_COLLECT_CLAN_GIFTS(120, 500),
+=======
+     * <code>S_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
+     */
+    S_COLLECT_CLAN_GIFTS_EVENT(119, 500),
+    /**
+     * <code>S_CLEAR_EXPIRED_CLAN_GIFTS_EVENT = 501;</code>
+     */
+    S_CLEAR_EXPIRED_CLAN_GIFTS_EVENT(120, 501),
+>>>>>>> two controllers, working on startup for clan gifts
     ;
 
     /**
@@ -2112,6 +2147,7 @@ public final class ProtocolsProto {
      */
     public static final int S_UPDATE_USER_STRENGTH_EVENT_VALUE = 211;
     /**
+<<<<<<< HEAD
      * <code>S_REFRESH_MINI_JOB_EVENT = 212;</code>
      */
     public static final int S_REFRESH_MINI_JOB_EVENT_VALUE = 212;
@@ -2119,6 +2155,15 @@ public final class ProtocolsProto {
      * <code>S_COLLECT_CLAN_GIFTS = 500;</code>
      */
     public static final int S_COLLECT_CLAN_GIFTS_VALUE = 500;
+=======
+     * <code>S_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
+     */
+    public static final int S_COLLECT_CLAN_GIFTS_EVENT_VALUE = 500;
+    /**
+     * <code>S_CLEAR_EXPIRED_CLAN_GIFTS_EVENT = 501;</code>
+     */
+    public static final int S_CLEAR_EXPIRED_CLAN_GIFTS_EVENT_VALUE = 501;
+>>>>>>> two controllers, working on startup for clan gifts
 
 
     public final int getNumber() { return value; }
@@ -2244,8 +2289,13 @@ public final class ProtocolsProto {
         case 209: return S_UPDATE_MINI_EVENT_EVENT;
         case 210: return S_TRANSLATE_SELECT_MESSAGES_EVENT;
         case 211: return S_UPDATE_USER_STRENGTH_EVENT;
+<<<<<<< HEAD
         case 212: return S_REFRESH_MINI_JOB_EVENT;
         case 500: return S_COLLECT_CLAN_GIFTS;
+=======
+        case 500: return S_COLLECT_CLAN_GIFTS_EVENT;
+        case 501: return S_CLEAR_EXPIRED_CLAN_GIFTS_EVENT;
+>>>>>>> two controllers, working on startup for clan gifts
         default: return null;
       }
     }
@@ -2329,7 +2379,11 @@ public final class ProtocolsProto {
       "proto\032\026SharedEnumConfig.proto\032\013Skill.pro" +
       "to\032\020StaticData.proto\032\017Structure.proto\032\nT" +
       "ask.proto\032\025TournamentStuff.proto\032\nUser.p" +
+<<<<<<< HEAD
       "roto*\371\035\n\024EventProtocolRequest\022\023\n\017C_START" +
+=======
+      "roto*\207\036\n\024EventProtocolRequest\022\023\n\017C_START" +
+>>>>>>> two controllers, working on startup for clan gifts
       "UP_EVENT\020\001\022\033\n\027C_IN_APP_PURCHASE_EVENT\020\002\022" +
       "#\n\037C_PURCHASE_NORM_STRUCTURE_EVENT\020\003\022)\n%" +
       "C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT\020\004\022" +
@@ -2423,6 +2477,7 @@ public final class ProtocolsProto {
       "\001\022 \n\033C_RETRIEVE_MINI_EVENT_EVENT\020\320\001\022\036\n\031C" +
       "_UPDATE_MINI_EVENT_EVENT\020\321\001\022&\n!C_TRANSLA" +
       "TE_SELECT_MESSAGES_EVENT\020\322\001\022!\n\034C_UPDATE_" +
+<<<<<<< HEAD
       "USER_STRENGTH_EVENT\020\323\001\022\035\n\030C_REFRESH_MINI" +
       "_JOB_EVENT\020\324\001\022\031\n\024C_COLLECT_CLAN_GIFTS\020\364\003" +
       "*\270 \n\025EventProtocolResponse\022\023\n\017S_STARTUP_",
@@ -2530,6 +2585,116 @@ public final class ProtocolsProto {
       "STRENGTH_EVENT\020\323\001\022\035\n\030S_REFRESH_MINI_JOB_" +
       "EVENT\020\324\001\022\031\n\024S_COLLECT_CLAN_GIFTS\020\364\003B\020B\016P" +
       "rotocolsProto"
+=======
+      "USER_STRENGTH_EVENT\020\323\001\022\037\n\032C_COLLECT_CLAN" +
+      "_GIFTS_EVENT\020\364\003\022%\n C_CLEAR_EXPIRED_CLAN_" +
+      "GIFTS_EVENT\020\365\003*\306 \n\025EventProtocolResponse",
+      "\022\023\n\017S_STARTUP_EVENT\020\001\022\033\n\027S_IN_APP_PURCHA" +
+      "SE_EVENT\020\002\022#\n\037S_PURCHASE_NORM_STRUCTURE_" +
+      "EVENT\020\003\022)\n%S_MOVE_OR_ROTATE_NORM_STRUCTU" +
+      "RE_EVENT\020\004\022\033\n\027S_SET_FACEBOOK_ID_EVENT\020\005\022" +
+      "\"\n\036S_UPGRADE_NORM_STRUCTURE_EVENT\020\006\0221\n-S" +
+      "_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_E" +
+      "VENT\020\007\0225\n1S_FINISH_NORM_STRUCT_WAITTIME_" +
+      "WITH_DIAMONDS_EVENT\020\010\022%\n!S_NORM_STRUCT_W" +
+      "AIT_COMPLETE_EVENT\020\t\022\034\n\030S_LOAD_PLAYER_CI" +
+      "TY_EVENT\020\n\022\'\n#S_EXCHANGE_GEMS_FOR_RESOUR",
+      "CES_EVENT\020\013\022\030\n\024S_QUEST_ACCEPT_EVENT\020\014\022\032\n" +
+      "\026S_QUEST_PROGRESS_EVENT\020\r\022\030\n\024S_QUEST_RED" +
+      "EEM_EVENT\020\016\022#\n\037S_PURCHASE_CITY_EXPANSION" +
+      "_EVENT\020\017\022#\n\037S_EXPANSION_WAIT_COMPLETE_EV" +
+      "ENT\020\020\022\024\n\020S_LEVEL_UP_EVENT\020\021\022\027\n\023S_ENABLE_" +
+      "APNS_EVENT\020\022\022\027\n\023S_USER_CREATE_EVENT\020\023\022\025\n" +
+      "\021S_LOAD_CITY_EVENT\020\024\022\'\n#S_RETRIEVE_USERS" +
+      "_FOR_USER_IDS_EVENT\020\025\022\036\n\032S_EARN_FREE_DIA" +
+      "MONDS_EVENT\020\026\022\033\n\027S_SEND_GROUP_CHAT_EVENT" +
+      "\020\027\022\027\n\023S_CREATE_CLAN_EVENT\020\030\022\026\n\022S_LEAVE_C",
+      "LAN_EVENT\020\031\022\035\n\031S_REQUEST_JOIN_CLAN_EVENT" +
+      "\020\032\022%\n!S_RETRACT_REQUEST_JOIN_CLAN_EVENT\020" +
+      "\033\0222\n.S_APPROVE_OR_REJECT_REQUEST_TO_JOIN" +
+      "_CLAN_EVENT\020\034\022\035\n\031S_TRANSFER_CLAN_OWNERSH" +
+      "IP\020\035\022\036\n\032S_RETRIEVE_CLAN_INFO_EVENT\020\036\022 \n\034" +
+      "S_CHANGE_CLAN_SETTINGS_EVENT\020\037\022!\n\035S_BOOT" +
+      "_PLAYER_FROM_CLAN_EVENT\020 \022\031\n\025S_PICK_LOCK" +
+      "_BOX_EVENT\020!\022(\n$S_RETRIEVE_TOURNAMENT_RA" +
+      "NKINGS_EVENT\020\"\022&\n\"S_SUBMIT_MONSTER_ENHAN" +
+      "CEMENT_EVENT\020#\022\032\n\026S_EVOLVE_MONSTER_EVENT",
+      "\020$\022!\n\035S_PURCHASE_BOOSTER_PACK_EVENT\020%\022\036\n" +
+      "\032S_EVOLUTION_FINISHED_EVENT\020&\022 \n\034S_ACHIE" +
+      "VEMENT_PROGRESS_EVENT\020\'\022\035\n\031S_PRIVATE_CHA" +
+      "T_POST_EVENT\020(\022&\n\"S_RETRIEVE_PRIVATE_CHA" +
+      "T_POST_EVENT\020)\022&\n\"S_REDEEM_USER_LOCK_BOX" +
+      "_ITEMS_EVENT\020*\022\031\n\025S_BEGIN_DUNGEON_EVENT\020" +
+      "+\022\027\n\023S_END_DUNGEON_EVENT\020,\022\035\n\031S_REVIVE_I" +
+      "N_DUNGEON_EVENT\020-\022\024\n\020S_QUEUE_UP_EVENT\020.\022" +
+      "!\n\035S_UPDATE_MONSTER_HEALTH_EVENT\020/\022\030\n\024S_" +
+      "HEAL_MONSTER_EVENT\0200\022\036\n\032S_ACHIEVEMENT_RE",
+      "DEEM_EVENT\0201\022&\n\"S_ADD_MONSTER_TO_BATTLE_" +
+      "TEAM_EVENT\0202\022+\n\'S_REMOVE_MONSTER_FROM_BA" +
+      "TTLE_TEAM_EVENT\0203\022+\n\'S_INCREASE_MONSTER_" +
+      "INVENTORY_SLOT_EVENT\0204\022*\n&S_ENHANCEMENT_" +
+      "WAIT_TIME_COMPLETE_EVENT\0205\022\'\n#S_COMBINE_" +
+      "USER_MONSTER_PIECES_EVENT\0206\022\035\n\031S_SELL_US" +
+      "ER_MONSTER_EVENT\0207\022\'\n#S_INVITE_FB_FRIEND" +
+      "S_FOR_SLOTS_EVENT\0208\0221\n-S_ACCEPT_AND_REJE" +
+      "CT_FB_INVITE_FOR_SLOTS_EVENT\0209\022 \n\034S_UPDA" +
+      "TE_USER_CURRENCY_EVENT\020;\022\034\n\030S_BEGIN_PVP_",
+      "BATTLE_EVENT\020<\022\032\n\026S_END_PVP_BATTLE_EVENT" +
+      "\020=\022\033\n\027S_BEGIN_CLAN_RAID_EVENT\020>\022$\n S_ATT" +
+      "ACK_CLAN_RAID_MONSTER_EVENT\020?\022\"\n\036S_RECOR" +
+      "D_CLAN_RAID_STATS_EVENT\020@\022&\n\"S_PROMOTE_D" +
+      "EMOTE_CLAN_MEMBER_EVENT\020A\022\036\n\032S_SET_GAME_" +
+      "CENTER_ID_EVENT\020B\022\032\n\026S_SPAWN_OBSTACLE_EV" +
+      "ENT\020C\022\"\n\036S_BEGIN_OBSTACLE_REMOVAL_EVENT\020" +
+      "D\022%\n!S_OBSTACLE_REMOVAL_COMPLETE_EVENT\020E" +
+      "\022\032\n\026S_SPAWN_MINI_JOB_EVENT\020F\022\032\n\026S_BEGIN_" +
+      "MINI_JOB_EVENT\020G\022\035\n\031S_COMPLETE_MINI_JOB_",
+      "EVENT\020H\022\033\n\027S_REDEEM_MINI_JOB_EVENT\020I\022\036\n\032" +
+      "S_SET_AVATAR_MONSTER_EVENT\020J\022!\n\035S_RESTRI" +
+      "CT_USER_MONSTER_EVENT\020K\022#\n\037S_UNRESTRICT_" +
+      "USER_MONSTER_EVENT\020L\022\033\n\027S_ENHANCE_MONSTE" +
+      "R_EVENT\020M\022\"\n\036S_TRADE_ITEM_FOR_BOOSTER_EV" +
+      "ENT\020N\022\035\n\031S_SOLICIT_CLAN_HELP_EVENT\020O\022\032\n\026" +
+      "S_GIVE_CLAN_HELP_EVENT\020P\022\031\n\025S_END_CLAN_H" +
+      "ELP_EVENT\020Q\022\032\n\026S_INVITE_TO_CLAN_EVENT\020R\022" +
+      "(\n$S_ACCEPT_OR_REJECT_CLAN_INVITE_EVENT\020" +
+      "S\022\'\n#S_COLLECT_MONSTER_ENHANCEMENT_EVENT",
+      "\020T\022$\n S_TRADE_ITEM_FOR_SPEED_UPS_EVENT\020U" +
+      "\022!\n\035S_REMOVE_USER_ITEM_USED_EVENT\020V\022$\n S" +
+      "_TRADE_ITEM_FOR_RESOURCES_EVENT\020W\022\036\n\032S_R" +
+      "EDEEM_SECRET_GIFT_EVENT\020X\022\035\n\031S_SET_DEFEN" +
+      "DING_MSG_EVENT\020Y\022\037\n\033S_BEGIN_CLAN_AVENGIN" +
+      "G_EVENT\020Z\022\035\n\031S_END_CLAN_AVENGING_EVENT\020[" +
+      "\022\034\n\030S_AVENGE_CLAN_MATE_EVENT\020\\\022$\n S_UPDA" +
+      "TE_CLIENT_TASK_STATE_EVENT\020]\022!\n\035S_SOLICI" +
+      "T_TEAM_DONATION_EVENT\020^\022.\n*S_FULFILL_TEA" +
+      "M_DONATION_SOLICITATION_EVENT\020_\022+\n\'S_VOI",
+      "D_TEAM_DONATION_SOLICITATION_EVENT\020`\022&\n\"" +
+      "S_RETRIEVE_USER_MONSTER_TEAM_EVENT\020a\022(\n$" +
+      "S_DESTROY_MONEY_TREE_STRUCTURE_EVENT\020b\022\036" +
+      "\n\032S_UPDATE_CLIENT_USER_EVENT\020e\022\036\n\032S_REFE" +
+      "RRAL_CODE_USED_EVENT\020f\022\035\n\031S_PURGE_STATIC" +
+      "_DATA_EVENT\020g\022\037\n\033S_RECEIVED_GROUP_CHAT_E" +
+      "VENT\020h\022\036\n\032S_SEND_ADMIN_MESSAGE_EVENT\020i\022 " +
+      "\n\034S_GENERAL_NOTIFICATION_EVENT\020j\022*\n&S_RE" +
+      "CEIVED_RARE_BOOSTER_PURCHASE_EVENT\020k\022(\n$" +
+      "S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT\020l\022\030",
+      "\n\024S_FORCE_LOGOUT_EVENT\020m\022\036\n\032S_RETRIEVE_C" +
+      "LAN_DATA_EVENT\020n\022\020\n\013S_DEV_EVENT\020\310\001\022\035\n\030S_" +
+      "PERFORM_RESEARCH_EVENT\020\311\001\022\'\n\"S_FINISH_PE" +
+      "RFORMING_RESEARCH_EVENT\020\312\001\022)\n$S_CUSTOMIZ" +
+      "E_PVP_BOARD_OBSTACLE_EVENT\020\313\001\022\037\n\032S_CREAT" +
+      "E_BATTLE_ITEM_EVENT\020\314\001\022 \n\033S_DISCARD_BATT" +
+      "LE_ITEM_EVENT\020\315\001\022!\n\034S_COMPLETE_BATTLE_IT" +
+      "EM_EVENT\020\316\001\022%\n S_REDEEM_MINI_EVENT_REWAR" +
+      "D_EVENT\020\317\001\022 \n\033S_RETRIEVE_MINI_EVENT_EVEN" +
+      "T\020\320\001\022\036\n\031S_UPDATE_MINI_EVENT_EVENT\020\321\001\022&\n!",
+      "S_TRANSLATE_SELECT_MESSAGES_EVENT\020\322\001\022!\n\034" +
+      "S_UPDATE_USER_STRENGTH_EVENT\020\323\001\022\037\n\032S_COL" +
+      "LECT_CLAN_GIFTS_EVENT\020\364\003\022%\n S_CLEAR_EXPI" +
+      "RED_CLAN_GIFTS_EVENT\020\365\003B\020B\016ProtocolsProt" +
+      "o"
+>>>>>>> two controllers, working on startup for clan gifts
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

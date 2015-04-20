@@ -17,7 +17,7 @@ message ClanGiftProto {
 	optional string name = 2;
 	optional int32 hoursUntilExpiration = 3;	
 	optional string imageName = 4;
-	optional Quality rarity = 5;
+	optional Quality quality = 5;
 }
 
 //------------------------------------------------------------------------------------------

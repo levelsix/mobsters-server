@@ -48,7 +48,7 @@ public class CollectClanGiftsAction {
 	}
 
 
-public CollectClanGiftsAction(String userId,
+	public CollectClanGiftsAction(String userId,
 			UserRetrieveUtils2 userRetrieveUtils,
 			ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtils,
@@ -79,11 +79,11 @@ public CollectClanGiftsAction(String userId,
 	public void execute(Builder resBuilder) {
 
 		//check out inputs before db interaction
-//		boolean valid = verifySyntax(resBuilder);
-//
-//		if (!valid) {
-//			return;
-//		}
+		//		boolean valid = verifySyntax(resBuilder);
+		//
+		//		if (!valid) {
+		//			return;
+		//		}
 		resBuilder.setStatus(CollectClanGiftsStatus.FAIL_OTHER);
 
 		boolean valid = verifySemantics();

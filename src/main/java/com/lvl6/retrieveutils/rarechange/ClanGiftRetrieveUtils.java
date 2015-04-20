@@ -103,8 +103,10 @@ public class ClanGiftRetrieveUtils {
 		int id = rs.getInt(DBConstants.CLAN_GIFT__ID);
 		String name = rs.getString(DBConstants.CLAN_GIFT__NAME);
 		int hoursUntilExpiration = rs.getInt(DBConstants.CLAN_GIFT__HOURS_UNTIL_EXPIRATION);
+		String imageName = rs.getString(DBConstants.CLAN_GIFT__IMAGE_NAME);
+		String quality = rs.getString(DBConstants.CLAN_GIFT__QUALITY);
 
-		ClanGift clanGift = new ClanGift(id, name, hoursUntilExpiration);
+		ClanGift clanGift = new ClanGift(id, name, hoursUntilExpiration, imageName, quality);
 		return clanGift;
 	}
 }

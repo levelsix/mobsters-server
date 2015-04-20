@@ -59,13 +59,13 @@ public final class ClanGiftsProto {
         getImageNameBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
      */
-    boolean hasRarity();
+    boolean hasQuality();
     /**
-     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
      */
-    com.lvl6.proto.SharedEnumConfigProto.Quality getRarity();
+    com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
@@ -148,7 +148,7 @@ public final class ClanGiftsProto {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
                 bitField0_ |= 0x00000010;
-                rarity_ = value;
+                quality_ = value;
               }
               break;
             }
@@ -306,19 +306,19 @@ public final class ClanGiftsProto {
       }
     }
 
-    public static final int RARITY_FIELD_NUMBER = 5;
-    private com.lvl6.proto.SharedEnumConfigProto.Quality rarity_;
+    public static final int QUALITY_FIELD_NUMBER = 5;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     /**
-     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
      */
-    public boolean hasRarity() {
+    public boolean hasQuality() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+     * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
      */
-    public com.lvl6.proto.SharedEnumConfigProto.Quality getRarity() {
-      return rarity_;
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+      return quality_;
     }
 
     private void initFields() {
@@ -326,7 +326,7 @@ public final class ClanGiftsProto {
       name_ = "";
       hoursUntilExpiration_ = 0;
       imageName_ = "";
-      rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -354,7 +354,7 @@ public final class ClanGiftsProto {
         output.writeBytes(4, getImageNameBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeEnum(5, rarity_.getNumber());
+        output.writeEnum(5, quality_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -383,7 +383,7 @@ public final class ClanGiftsProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, rarity_.getNumber());
+          .computeEnumSize(5, quality_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -510,7 +510,7 @@ public final class ClanGiftsProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         imageName_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -559,7 +559,7 @@ public final class ClanGiftsProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.rarity_ = rarity_;
+        result.quality_ = quality_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -592,8 +592,8 @@ public final class ClanGiftsProto {
           imageName_ = other.imageName_;
           onChanged();
         }
-        if (other.hasRarity()) {
-          setRarity(other.getRarity());
+        if (other.hasQuality()) {
+          setQuality(other.getQuality());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -838,37 +838,37 @@ public final class ClanGiftsProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.Quality rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       /**
-       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
        */
-      public boolean hasRarity() {
+      public boolean hasQuality() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
        */
-      public com.lvl6.proto.SharedEnumConfigProto.Quality getRarity() {
-        return rarity_;
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+        return quality_;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
        */
-      public Builder setRarity(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000010;
-        rarity_ = value;
+        quality_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality rarity = 5;</code>
+       * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
        */
-      public Builder clearRarity() {
+      public Builder clearQuality() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        rarity_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         onChanged();
         return this;
       }
@@ -2182,16 +2182,16 @@ public final class ClanGiftsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017ClanGifts.proto\022\016com.lvl6.proto\032\014Rewar" +
-      "d.proto\032\026SharedEnumConfig.proto\"\213\001\n\rClan" +
+      "d.proto\032\026SharedEnumConfig.proto\"\214\001\n\rClan" +
       "GiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004name\030\002 " +
       "\001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021\n\tima" +
-      "geName\030\004 \001(\t\022\'\n\006rarity\030\005 \001(\0162\027.com.lvl6." +
-      "proto.Quality\"\315\001\n\021UserClanGiftProto\022\026\n\016u" +
-      "serClanGiftId\030\001 \001(\t\022\026\n\016receiverUserId\030\002 " +
-      "\001(\t\022\024\n\014gifterUserId\030\003 \001(\t\022/\n\010clanGift\030\004 " +
-      "\001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014ti" +
-      "meReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com.l",
-      "vl6.proto.RewardProtoB\020B\016ClanGiftsProto"
+      "geName\030\004 \001(\t\022(\n\007quality\030\005 \001(\0162\027.com.lvl6" +
+      ".proto.Quality\"\315\001\n\021UserClanGiftProto\022\026\n\016" +
+      "userClanGiftId\030\001 \001(\t\022\026\n\016receiverUserId\030\002" +
+      " \001(\t\022\024\n\014gifterUserId\030\003 \001(\t\022/\n\010clanGift\030\004" +
+      " \001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014t" +
+      "imeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com.",
+      "lvl6.proto.RewardProtoB\020B\016ClanGiftsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2212,7 +2212,7 @@ public final class ClanGiftsProto {
     internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanGiftProto_descriptor,
-        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ImageName", "Rarity", });
+        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ImageName", "Quality", });
     internal_static_com_lvl6_proto_UserClanGiftProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new

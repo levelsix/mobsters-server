@@ -5235,8 +5235,13 @@ public class CreateInfoProtoUtils {
 	public ClanGiftProto createClanGiftProto(ClanGift cg) {
 		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
 		b.setClanGiftId(cg.getId());
-		b.setName(cg.getName());
+		if(cg.getName() != null) {
+			b.setName(cg.getName());
+		}
+
 		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
+		b.setImageName(cg.getImageName());
+		b.setQuality(Quality.valueOf(cg.getQuality()));
 
 		return b.build();
 	}

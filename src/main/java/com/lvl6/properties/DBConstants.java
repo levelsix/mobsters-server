@@ -973,6 +973,8 @@ public class DBConstants {
 	public static final String CLAN_GIFT__ID = GENERIC__ID;
 	public static final String CLAN_GIFT__NAME = "name";
 	public static final String CLAN_GIFT__HOURS_UNTIL_EXPIRATION= "hours_until_expiration";
+	public static final String CLAN_GIFT__IMAGE_NAME = "image_name";
+	public static final String CLAN_GIFT__QUALITY = "quality";
 
 	public static final String CLAN_GIFT_REWARD__ID = GENERIC__ID;
 	public static final String CLAN_GIFT_REWARD__CLAN_GIFT_ID = "clan_gift_id";
