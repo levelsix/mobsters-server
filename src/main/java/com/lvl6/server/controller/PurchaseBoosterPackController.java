@@ -275,9 +275,9 @@ public class PurchaseBoosterPackController extends EventController {
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 			PurchaseBoosterPackAction pbpa) {
 		miscMethods.writeToUserCurrencyOneUser(userId, date,
-				pbpa.getAra().getCurrencyDeltas(), pbpa.getPreviousCurrencies(),
-				pbpa.getCurrentCurrencies(), pbpa.getReasons(),
-				pbpa.getDetails());
+				pbpa.getAra().getCurrencyDeltas(), pbpa.getAra().getPreviousCurrencies(),
+				pbpa.getAra().getCurrentCurrencies(), pbpa.getAra().getReasons(),
+				pbpa.getAra().getDetails());
 	}
 
 	private void writeToBoosterPackPurchaseHistory(String userId,
