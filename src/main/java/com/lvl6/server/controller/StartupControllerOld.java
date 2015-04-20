@@ -58,6 +58,8 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.SalesDisplayItem;
+import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
@@ -104,6 +106,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
@@ -170,6 +173,7 @@ import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -424,9 +428,9 @@ public class StartupControllerOld extends EventController {
 
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-//
-//	@Autowired
-//	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+
+	@Autowired
+	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
 
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
@@ -769,7 +773,7 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setBattleItemForUser", stopWatch.getTime());
 			setBattleItemQueueForUser(resBuilder, playerId);
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
-//			setSalesForUser(resBuilder, user);
+			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
@@ -1835,55 +1839,11 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
-//	public void setSalesForUser(Builder resBuilder, User user) {
-//
-//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
-//
-//		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-//		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
-//				.getSalesItemIdsToSalesItemsForSalesPackIds();
-//		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils
-//				.getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
-//		int userSalesValue = user.getSalesValue();
-//
-//		int newMinPrice = priceForSalesPackToBeShown(userSalesValue, salesJumpTwoTiers);
-//		Date now = new Date();
-//
-//		for(Integer salesPackageId : idsToSalesPackages.keySet()) {
-//			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
-//			if(sp.getPrice() == newMinPrice && (sp.getTimeStart().getTime() < now.getTime()) &&
-//					(sp.getTimeEnd().getTime() > now.getTime())) {
-//				//get the sales items associated with this booster pack
-//				List<SalesItem> salesItemsList = salesPackageIdToSalesItems
-//						.get(salesPackageId);
-//
-//				//get the booster display items for this booster pack
-//				Map<Integer, SalesDisplayItem> displayIdsToDisplayItems = salesPackageIdToDisplayIdsToDisplayItems
-//						.get(salesPackageId);
-//				Collection<SalesDisplayItem> displayItems = null;
-//				if (null != displayIdsToDisplayItems) {
-//					ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
-//					displayItemIds.addAll(displayIdsToDisplayItems.keySet());
-//					Collections.sort(displayItemIds);
-//
-//					displayItems = new ArrayList<SalesDisplayItem>();
-//
-//					for (Integer displayItemId : displayItemIds) {
-//						displayItems.add(displayIdsToDisplayItems
-//								.get(displayItemId));
-//					}
-//				}
-//
-//				SalesPackageProto spProto = createInfoProtoUtils
-//						.createSalesPackageProto(sp, salesItemsList, displayItems);
-//				resBuilder.addSalesPackages(spProto);
-//			}
-//		}
-//	}
+	public void setSalesForUser(Builder resBuilder, User user) {
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 
-//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+		//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
 		int userSalesValue = user.getSalesValue();
 		int newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 		Date now = new Date();
@@ -1893,7 +1853,7 @@ public class StartupControllerOld extends EventController {
 					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK) &&
 					!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+						timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
 							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
@@ -1980,41 +1940,7 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
-	private void setMiniEventForUser(
-			Builder resBuilder, User u, String userId, Date now)
-	{
-		RetrieveMiniEventResponseProto.Builder rmeaResBuilder =
-				RetrieveMiniEventResponseProto.newBuilder();
-
-
-		RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
-				userId, now, userRetrieveUtils,
-				miniEventForUserRetrieveUtil,
-				miniEventGoalForUserRetrieveUtil, insertUtil, deleteUtil,
-				miniEventGoalRetrieveUtils, miniEventForPlayerLvlRetrieveUtils,
-				miniEventRetrieveUtils, miniEventTierRewardRetrieveUtils,
-				miniEventLeaderboardRewardRetrieveUtils);
-
-		rmea.execute(rmeaResBuilder);
-//		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
-//				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
-//		log.info("resProto for MiniEvent={}", rmeaResBuilder.build());
-
-		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
-				null != rmea.getCurActiveMiniEvent())
-		{
-			//get UserMiniEvent info and create the proto to set into resBuilder
-			//TODO: Consider protofying MiniEvent stuff
-			UserMiniEventProto umep = createInfoProtoUtils
-					.createUserMiniEventProto(
-							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
-							rmea.getMegfus(),
-							rmea.getLvlEntered(), rmea.getRewards(),
-							rmea.getGoals(), rmea.getLeaderboardRewards());
-			resBuilder.setUserMiniEvent(umep);
-		}
-
-	}
+	
 
 	private void setClanGiftForUser(Builder resBuilder, String playerId) {
 		List<ClanGiftForUser> listOfClanGifts = clanGiftForUserRetrieveUtil.getUserClanGiftsForUser(playerId);
