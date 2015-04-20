@@ -50,7 +50,6 @@ import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
 import com.lvl6.proto.ClanGiftsProto.ClanGiftProto;
-import com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
@@ -5226,9 +5225,24 @@ public class CreateInfoProtoUtils {
 		cmpb.setIsJiggle(cm.isJiggle());
 		cmpb.setImageName(cm.getImageName());
 		return cmpb.build();
-	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
-
 	}
+
+
+
+
+	///////////////////////////////CLAN GIFTS PROTOS/////////////////////////////////////////////
+
+	public ClanGiftProto createClanGiftProto(ClanGift cg) {
+		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
+		b.setClanGiftId(cg.getId());
+		b.setName(cg.getName());
+		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
+
+		return b.build();
+	}
+
+
+
 
 
 

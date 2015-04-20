@@ -701,10 +701,18 @@ public final class ClanGiftsProto {
 
     /**
      * <code>optional int64 timeReceived = 5;</code>
+     *
+     * <pre>
+     *when the gift gets sent out to everyone
+     * </pre>
      */
     boolean hasTimeReceived();
     /**
      * <code>optional int64 timeReceived = 5;</code>
+     *
+     * <pre>
+     *when the gift gets sent out to everyone
+     * </pre>
      */
     long getTimeReceived();
 
@@ -1013,12 +1021,20 @@ public final class ClanGiftsProto {
     private long timeReceived_;
     /**
      * <code>optional int64 timeReceived = 5;</code>
+     *
+     * <pre>
+     *when the gift gets sent out to everyone
+     * </pre>
      */
     public boolean hasTimeReceived() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 timeReceived = 5;</code>
+     *
+     * <pre>
+     *when the gift gets sent out to everyone
+     * </pre>
      */
     public long getTimeReceived() {
       return timeReceived_;
@@ -1730,18 +1746,30 @@ public final class ClanGiftsProto {
       private long timeReceived_ ;
       /**
        * <code>optional int64 timeReceived = 5;</code>
+       *
+       * <pre>
+       *when the gift gets sent out to everyone
+       * </pre>
        */
       public boolean hasTimeReceived() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 timeReceived = 5;</code>
+       *
+       * <pre>
+       *when the gift gets sent out to everyone
+       * </pre>
        */
       public long getTimeReceived() {
         return timeReceived_;
       }
       /**
        * <code>optional int64 timeReceived = 5;</code>
+       *
+       * <pre>
+       *when the gift gets sent out to everyone
+       * </pre>
        */
       public Builder setTimeReceived(long value) {
         bitField0_ |= 0x00000010;
@@ -1751,6 +1779,10 @@ public final class ClanGiftsProto {
       }
       /**
        * <code>optional int64 timeReceived = 5;</code>
+       *
+       * <pre>
+       *when the gift gets sent out to everyone
+       * </pre>
        */
       public Builder clearTimeReceived() {
         bitField0_ = (bitField0_ & ~0x00000010);
