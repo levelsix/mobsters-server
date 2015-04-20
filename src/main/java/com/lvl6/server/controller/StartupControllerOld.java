@@ -775,6 +775,7 @@ public class StartupControllerOld extends EventController {
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
 			setClanGiftForUser(resBuilder, playerId);
+			log.info("finish setting user clan gift protos");
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1974,8 +1975,10 @@ public class StartupControllerOld extends EventController {
 
 	private void setClanGiftForUser(Builder resBuilder, String playerId) {
 		List<ClanGiftForUser> listOfClanGifts = clanGiftForUserRetrieveUtil.getUserClanGiftsForUser(playerId);
+		log.info("size of user clan gifts list: " + listOfClanGifts.size());
 		for(ClanGiftForUser cgfu : listOfClanGifts) {
 			UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu);
+			log.info("userclangiftproto: " + ucgp);
 			resBuilder.addUserClanGifts(ucgp);
 		}
 	}
