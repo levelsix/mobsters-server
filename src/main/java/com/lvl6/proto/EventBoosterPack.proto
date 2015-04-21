@@ -23,6 +23,7 @@ message PurchaseBoosterPackRequestProto {
 	//used to implement one free booster pack per day,
 	//set to true to make server not charge user
 	optional bool dailyFreeBoosterPack = 4;
+	
 	optional bool buyingInBulk = 5; //cant be true when getting rigged pack
 }
 
