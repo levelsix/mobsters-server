@@ -42,7 +42,6 @@ public class Monster implements Serializable {
 
 	public Monster() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Monster(int id, String evolutionGroup, String monsterGroup,

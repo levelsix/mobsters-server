@@ -20,7 +20,6 @@ public class BoosterItem implements Serializable {
 
 	public BoosterItem() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BoosterItem(int id, int boosterPackId, int monsterId, int numPieces,

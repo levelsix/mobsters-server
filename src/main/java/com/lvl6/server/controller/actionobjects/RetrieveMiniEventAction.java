@@ -160,7 +160,7 @@ public class RetrieveMiniEventAction {
 		if (null == mefu) {
 			return true;
 		}
-		
+
 		int miniEventId = mefu.getMiniEventId();
 		//if the event has not even started yet then don't send it
 		MiniEvent me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
@@ -189,7 +189,7 @@ public class RetrieveMiniEventAction {
 
 		return true;
 	}
-	
+
 	private void completedClanAchievements()
 	{
 		//caller says clan achievements are completed
@@ -197,19 +197,19 @@ public class RetrieveMiniEventAction {
 		{
 			return;
 		}
-		
+
 		//assume user completed clan achievements
 		completedClanAchievements = true;
-		
+
 		//prove that he didn't complete the clan achievements
 		Integer[] clanAchievementIds = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS;
 		@SuppressWarnings("unchecked")
 		List<Integer> caIdList = java.util.Arrays.asList(clanAchievementIds);
-		
+
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = achievementForUserRetrieveUtil
 				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
 						caIdList);
-		
+
 		for (int i = 0; i < caIdList.size(); i++) {
 			int achievementId = caIdList.get(i);
 			if (!achievementIdToUserAchievements.containsKey(achievementId))
@@ -300,7 +300,7 @@ public class RetrieveMiniEventAction {
 			log.info("user has not finished clan achievements, not giving mini event");
 			return true;
 		}
-		
+
 		if (null == mefu) {
 			return processNonexistentUserMiniEvent();
 		} else {
@@ -381,20 +381,22 @@ public class RetrieveMiniEventAction {
 		log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
 
 		//active MiniEvent going on and user doesn't have one so create one
-		generateNewMiniEvent(meId, userLvl);
+		mefu = generateNewMiniEvent(meId, userLvl);
 
 		log.info("inserting/updating. mefu={}", mefu);
 		return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
 	}
 
-	private void generateNewMiniEvent(int meId, int userLvl) {
-		mefu = new MiniEventForUser();
+	private MiniEventForUser generateNewMiniEvent(int meId, int userLvl) {
+		MiniEventForUser mefu = new MiniEventForUser();
 		mefu.setUserId(userId);
 		mefu.setMiniEventId(meId);
 		mefu.setUserLvl(userLvl);
 		mefu.setTierOneRedeemed(false);
 		mefu.setTierTwoRedeemed(false);
 		mefu.setTierThreeRedeemed(false);
+
+		return mefu;
 	}
 
 	private boolean processExistingUserMiniEvent()
@@ -453,8 +455,7 @@ public class RetrieveMiniEventAction {
 		}
 
 		//mini events are different
-		meId = curActiveMeId;
-		boolean success = retrieveMiniEventRelatedData(meId, userLvl);
+		boolean success = retrieveMiniEventRelatedData(curActiveMeId, userLvl);
 		if (!success) {
 			log.warn("unable to continue replaceCurrentUserMiniEvent()");
 			return success;
@@ -462,7 +463,7 @@ public class RetrieveMiniEventAction {
 
 		log.info("replaceCurrentUserMiniEvent. oldId:{}, \t newEvent:{}",
 				meId, curActiveMiniEvent);
-		success = insertUpdateUserMiniEvent(meId, userLvl);
+		success = insertUpdateUserMiniEvent(curActiveMeId, userLvl);
 		if (!success) {
 			log.warn("unable to replace MiniEvent for the user.");
 		}

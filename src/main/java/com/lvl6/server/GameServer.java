@@ -250,7 +250,6 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 			log.info("finished calculating recommended clans");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error("failed to calculate recommended clans", e);
 		}
 

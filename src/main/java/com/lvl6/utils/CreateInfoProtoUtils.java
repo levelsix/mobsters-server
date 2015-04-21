@@ -4471,7 +4471,6 @@ public class CreateInfoProtoUtils {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error(String.format(
 					"unable to convert byte[] to google.ByteString, userId=%s",
 					userId), e);

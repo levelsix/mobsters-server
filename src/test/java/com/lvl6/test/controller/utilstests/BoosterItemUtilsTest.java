@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ItemForUser;
@@ -30,12 +32,15 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.server.controller.StartupControllerOld;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class BoosterItemUtilsTest {
+
+	private static Logger log = LoggerFactory.getLogger(StartupControllerOld.class);
 
 	private static User mockedUser;
 	private static UpdateUtil mockedUpdateUtil;
@@ -57,8 +62,7 @@ public class BoosterItemUtilsTest {
 			when(mockedReceiptFromApple1.getString(any(String.class))).thenReturn("123");
 			when(mockedReceiptFromApple2.getString(any(String.class))).thenReturn("456");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("BoosterItemUtilsTest setup() exception.", e);
 		}
 
 		mockedIAPHistoryRetrieveUtil = mock(IAPHistoryRetrieveUtils.class);

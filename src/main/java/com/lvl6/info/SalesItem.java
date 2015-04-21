@@ -1,11 +1,19 @@
 package com.lvl6.info;
 
-public class SalesItem {
+import java.io.Serializable;
+
+public class SalesItem implements Serializable {
+
+	private static final long serialVersionUID = 8732007664237765170L;
+
+	private int id;
+	private int salesPackageId;
+	private int rewardId;
 
 	public SalesItem() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
 	public SalesItem(int id, int salesPackageId, int rewardId) {
 		super();
 		this.id = id;
@@ -13,13 +21,6 @@ public class SalesItem {
 		this.rewardId = rewardId;
 
 	}
-
-	private static final long serialVersionUID = 1549953377153488834L;
-
-	private int id;
-	private int salesPackageId;
-	private int rewardId;
-
 
 	public int getId() {
 		return id;

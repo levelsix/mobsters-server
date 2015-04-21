@@ -12,11 +12,13 @@ import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MiniEvent;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.DBConnection;
 
 @Component
@@ -32,12 +34,15 @@ public class MiniEventRetrieveUtils {
 	private static TreeSet<MiniEvent> miniEventTree;
 	private static final MiniEventComparator comparator = new MiniEventComparator();
 
+	@Autowired
+	protected TimeUtils timeUtil;
+	
 	private static final class MiniEventComparator implements Comparator<MiniEvent>
 	{
 		@Override
 		public int compare(MiniEvent o1, MiniEvent o2) {
-			long o1Time = o1.getEndTime().getTime();
-			long o2Time = o2.getEndTime().getTime();
+			long o1Time = o1.getStartTime().getTime();
+			long o2Time = o2.getStartTime().getTime();
 			if ( o1Time < o2Time ) {
 				return -1;
 			} else if ( o1Time > o2Time ) {
@@ -47,7 +52,7 @@ public class MiniEventRetrieveUtils {
 			} else if (o1.getId() > o2.getId()) {
 				return 1;
 			} else {
-				return 0;
+				return 0; 
 			}
 
 		}
@@ -67,11 +72,24 @@ public class MiniEventRetrieveUtils {
 
 		MiniEvent me = new MiniEvent();
 		me.setId(0);
-		me.setEndTime(now);
-		MiniEvent active = miniEventTree.ceiling(me);
+//		me.setEndTime(now);
+		me.setStartTime(now);
+//		MiniEvent active = miniEventTree.ceiling(me);
+		MiniEvent active = miniEventTree.floor(me);
 
+		//found the MiniEvent with a startTime before $now
+		//need to make sure MiniEvent endTime is after $now
+		if (null != me) {
+			Date activeEndTime = active.getEndTime();
+			if (timeUtil.isFirstEarlierThanSecond(activeEndTime, now))
+			{
+				active = null;
+			}
+			
+		}
 		log.info("for given time={}, selected {}",
 				now, active);
+		
 		return active;
 	}
 
