@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Battle.proto";
+import "Chat.proto";
 import "Clan.proto";
 import "ClanGifts.proto";
 import "MonsterStuff.proto";
@@ -695,5 +696,13 @@ message ClearExpiredClanGiftsResponseProto {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message ReceivedClanGiftResponseProto {
+	optional MinimumUserProto sender = 1;  //person who gave out the gift to everyone
+	optional GroupChatScope scope = 2 [default = CLAN];
+	repeated UserClanGiftProto userClanGifts = 3;
 }
 

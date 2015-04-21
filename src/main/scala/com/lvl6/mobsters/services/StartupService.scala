@@ -126,6 +126,7 @@ import com.lvl6.server.Locker
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetClanGiftsAction
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction
@@ -458,7 +459,6 @@ class StartupService extends LazyLogging{
         sbiqfu <-  setBattleItemQueueForUser(resBuilder, userId)
 		    ssfu  <-   setSalesForUser(resBuilder, user)
         scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
-        scgfu <-   setClanGiftForUser(resBuilder, userId)
         plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
       
@@ -579,6 +579,16 @@ class StartupService extends LazyLogging{
             monsterSnapshotForUserRetrieveUtil,
             createInfoProtoUtils);
         scmtda.setUp(fillMe);
+        
+        //SETTING CLAN GIFTS, it adds protos straight to resbuilder
+        val scga = new SetClanGiftsAction(
+             resBuilder,
+             user,
+             playerId,
+             clanGiftForUserRetrieveUtil,
+             createInfoProtoUtils);
+     
+        
         //Now since all the ids of resources are known, get them from db
         fillMe.fetch();
         spcma.execute(fillMe);
@@ -590,6 +600,7 @@ class StartupService extends LazyLogging{
         scha.execute(fillMe);
         scra.execute(fillMe);
         scmtda.execute(fillMe);
+        scga.execute(fillMe);
         resBuilder.setClanData(cdpb.build());
         //TODO: DELETE IN FUTURE. This is for legacy client
         resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -1415,17 +1426,6 @@ class StartupService extends LazyLogging{
     }
   }
   
-  def setClanGiftForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
-    Future{
-      timed("StartupService.setClanGiftForUser") {
-        val listOfClanGifts = clanGiftForUserRetrieveUtil.getUserClanGiftsForUser(userId)
-        listOfClanGifts.foreach { cgfu:ClanGiftForUser =>
-          val ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu)
-          resBuilder.addUserClanGifts(ucgp)
-        }
-      }
-    }
-  }
   
   def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
     timed("StartupService.setClanRaidHistoryStuff"){
@@ -1447,7 +1447,6 @@ class StartupService extends LazyLogging{
       }
     }
   }
-  
   
   
   def sendOfferChartInstall(installTime:Date , advertiserId:String):Future[Unit] ={

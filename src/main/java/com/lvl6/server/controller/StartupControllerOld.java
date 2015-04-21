@@ -58,8 +58,6 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
-import com.lvl6.info.SalesDisplayItem;
-import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
@@ -181,6 +179,7 @@ import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetClanGiftsAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
@@ -258,6 +257,9 @@ public class StartupControllerOld extends EventController {
 	@Autowired
 	protected UpdateUtil updateUtil;
 
+	@Autowired
+	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
+	
 	@Autowired
 	protected InAppPurchaseUtils inAppPurchaseUtils;
 
@@ -777,8 +779,7 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
-			setClanGiftForUser(resBuilder, playerId);
-			log.info("finish setting user clan gift protos");
+			
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -858,6 +859,11 @@ public class StartupControllerOld extends EventController {
 					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
+			
+			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId, 
+					clanGiftForUserRetrieveUtils, createInfoProtoUtils);
+			scga.setUp(fillMe);
+			
 
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -884,7 +890,9 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			scmtda.execute(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-
+			scga.execute(fillMe);
+			log.info("{}ms at setClanGifts", stopWatch.getTime());
+			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
 			resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -905,6 +913,7 @@ public class StartupControllerOld extends EventController {
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
+			
 
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);
@@ -1937,18 +1946,6 @@ public class StartupControllerOld extends EventController {
 		//if there's no default languages, they havent ever been set
 		if (null != dlp) {
 			resBuilder.setUserDefaultLanguages(dlp);
-		}
-	}
-
-	
-
-	private void setClanGiftForUser(Builder resBuilder, String playerId) {
-		List<ClanGiftForUser> listOfClanGifts = clanGiftForUserRetrieveUtil.getUserClanGiftsForUser(playerId);
-		log.info("size of user clan gifts list: " + listOfClanGifts.size());
-		for(ClanGiftForUser cgfu : listOfClanGifts) {
-			UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu);
-			log.info("userclangiftproto: " + ucgp);
-			resBuilder.addUserClanGifts(ucgp);
 		}
 	}
 

@@ -917,18 +917,17 @@ public final class ClanGiftsProto {
         getReceiverUserIdBytes();
 
     /**
-     * <code>optional string gifterUserId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
-    boolean hasGifterUserId();
+    boolean hasGifterUser();
     /**
-     * <code>optional string gifterUserId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
-    java.lang.String getGifterUserId();
+    com.lvl6.proto.UserProto.MinimumUserProto getGifterUser();
     /**
-     * <code>optional string gifterUserId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
-    com.google.protobuf.ByteString
-        getGifterUserIdBytes();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
@@ -1038,9 +1037,16 @@ public final class ClanGiftsProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = gifterUser_.toBuilder();
+              }
+              gifterUser_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(gifterUser_);
+                gifterUser_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              gifterUserId_ = bs;
               break;
             }
             case 34: {
@@ -1198,46 +1204,25 @@ public final class ClanGiftsProto {
       }
     }
 
-    public static final int GIFTERUSERID_FIELD_NUMBER = 3;
-    private java.lang.Object gifterUserId_;
+    public static final int GIFTERUSER_FIELD_NUMBER = 3;
+    private com.lvl6.proto.UserProto.MinimumUserProto gifterUser_;
     /**
-     * <code>optional string gifterUserId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
-    public boolean hasGifterUserId() {
+    public boolean hasGifterUser() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string gifterUserId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
-    public java.lang.String getGifterUserId() {
-      java.lang.Object ref = gifterUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          gifterUserId_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProto getGifterUser() {
+      return gifterUser_;
     }
     /**
-     * <code>optional string gifterUserId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
-    public com.google.protobuf.ByteString
-        getGifterUserIdBytes() {
-      java.lang.Object ref = gifterUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        gifterUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder() {
+      return gifterUser_;
     }
 
     public static final int CLANGIFT_FIELD_NUMBER = 4;
@@ -1308,7 +1293,7 @@ public final class ClanGiftsProto {
     private void initFields() {
       userClanGiftId_ = "";
       receiverUserId_ = "";
-      gifterUserId_ = "";
+      gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
       timeReceived_ = 0L;
       reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
@@ -1333,7 +1318,7 @@ public final class ClanGiftsProto {
         output.writeBytes(2, getReceiverUserIdBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getGifterUserIdBytes());
+        output.writeMessage(3, gifterUser_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(4, clanGift_);
@@ -1363,7 +1348,7 @@ public final class ClanGiftsProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getGifterUserIdBytes());
+          .computeMessageSize(3, gifterUser_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1486,6 +1471,7 @@ public final class ClanGiftsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getGifterUserFieldBuilder();
           getClanGiftFieldBuilder();
           getRewardFieldBuilder();
         }
@@ -1500,7 +1486,11 @@ public final class ClanGiftsProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         receiverUserId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        gifterUserId_ = "";
+        if (gifterUserBuilder_ == null) {
+          gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          gifterUserBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
         if (clanGiftBuilder_ == null) {
           clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
@@ -1555,7 +1545,11 @@ public final class ClanGiftsProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.gifterUserId_ = gifterUserId_;
+        if (gifterUserBuilder_ == null) {
+          result.gifterUser_ = gifterUser_;
+        } else {
+          result.gifterUser_ = gifterUserBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -1602,10 +1596,8 @@ public final class ClanGiftsProto {
           receiverUserId_ = other.receiverUserId_;
           onChanged();
         }
-        if (other.hasGifterUserId()) {
-          bitField0_ |= 0x00000004;
-          gifterUserId_ = other.gifterUserId_;
-          onChanged();
+        if (other.hasGifterUser()) {
+          mergeGifterUser(other.getGifterUser());
         }
         if (other.hasClanGift()) {
           mergeClanGift(other.getClanGift());
@@ -1795,80 +1787,120 @@ public final class ClanGiftsProto {
         return this;
       }
 
-      private java.lang.Object gifterUserId_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> gifterUserBuilder_;
       /**
-       * <code>optional string gifterUserId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
        */
-      public boolean hasGifterUserId() {
+      public boolean hasGifterUser() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string gifterUserId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
        */
-      public java.lang.String getGifterUserId() {
-        java.lang.Object ref = gifterUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            gifterUserId_ = s;
+      public com.lvl6.proto.UserProto.MinimumUserProto getGifterUser() {
+        if (gifterUserBuilder_ == null) {
+          return gifterUser_;
+        } else {
+          return gifterUserBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
+       */
+      public Builder setGifterUser(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (gifterUserBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          gifterUser_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          gifterUserBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string gifterUserId = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getGifterUserIdBytes() {
-        java.lang.Object ref = gifterUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          gifterUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string gifterUserId = 3;</code>
-       */
-      public Builder setGifterUserId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        gifterUserId_ = value;
-        onChanged();
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional string gifterUserId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
        */
-      public Builder clearGifterUserId() {
+      public Builder setGifterUser(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (gifterUserBuilder_ == null) {
+          gifterUser_ = builderForValue.build();
+          onChanged();
+        } else {
+          gifterUserBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
+       */
+      public Builder mergeGifterUser(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (gifterUserBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              gifterUser_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            gifterUser_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(gifterUser_).mergeFrom(value).buildPartial();
+          } else {
+            gifterUser_ = value;
+          }
+          onChanged();
+        } else {
+          gifterUserBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
+       */
+      public Builder clearGifterUser() {
+        if (gifterUserBuilder_ == null) {
+          gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          gifterUserBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        gifterUserId_ = getDefaultInstance().getGifterUserId();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string gifterUserId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
        */
-      public Builder setGifterUserIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        gifterUserId_ = value;
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getGifterUserBuilder() {
+        bitField0_ |= 0x00000004;
         onChanged();
-        return this;
+        return getGifterUserFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder() {
+        if (gifterUserBuilder_ != null) {
+          return gifterUserBuilder_.getMessageOrBuilder();
+        } else {
+          return gifterUser_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getGifterUserFieldBuilder() {
+        if (gifterUserBuilder_ == null) {
+          gifterUserBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getGifterUser(),
+                  getParentForChildren(),
+                  isClean());
+          gifterUser_ = null;
+        }
+        return gifterUserBuilder_;
       }
 
       private com.lvl6.proto.ClanGiftsProto.ClanGiftProto clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
@@ -2182,16 +2214,18 @@ public final class ClanGiftsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017ClanGifts.proto\022\016com.lvl6.proto\032\014Rewar" +
-      "d.proto\032\026SharedEnumConfig.proto\"\214\001\n\rClan" +
-      "GiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004name\030\002 " +
-      "\001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021\n\tima" +
-      "geName\030\004 \001(\t\022(\n\007quality\030\005 \001(\0162\027.com.lvl6" +
-      ".proto.Quality\"\315\001\n\021UserClanGiftProto\022\026\n\016" +
-      "userClanGiftId\030\001 \001(\t\022\026\n\016receiverUserId\030\002" +
-      " \001(\t\022\024\n\014gifterUserId\030\003 \001(\t\022/\n\010clanGift\030\004" +
-      " \001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014t" +
-      "imeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com.",
-      "lvl6.proto.RewardProtoB\020B\016ClanGiftsProto"
+      "d.proto\032\026SharedEnumConfig.proto\032\nUser.pr" +
+      "oto\"\214\001\n\rClanGiftProto\022\022\n\nclanGiftId\030\001 \001(" +
+      "\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030" +
+      "\003 \001(\005\022\021\n\timageName\030\004 \001(\t\022(\n\007quality\030\005 \001(" +
+      "\0162\027.com.lvl6.proto.Quality\"\355\001\n\021UserClanG" +
+      "iftProto\022\026\n\016userClanGiftId\030\001 \001(\t\022\026\n\016rece" +
+      "iverUserId\030\002 \001(\t\0224\n\ngifterUser\030\003 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022/\n\010clanGi" +
+      "ft\030\004 \001(\0132\035.com.lvl6.proto.ClanGiftProto\022",
+      "\024\n\014timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033." +
+      "com.lvl6.proto.RewardProtoB\020B\016ClanGiftsP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2206,6 +2240,7 @@ public final class ClanGiftsProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
+          com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_ClanGiftProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2218,9 +2253,10 @@ public final class ClanGiftsProto {
     internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
-        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUserId", "ClanGift", "TimeReceived", "Reward", });
+        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUser", "ClanGift", "TimeReceived", "Reward", });
     com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

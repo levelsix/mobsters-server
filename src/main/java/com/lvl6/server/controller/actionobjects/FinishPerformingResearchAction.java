@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;

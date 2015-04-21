@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.lvl6.utils.DBConnection;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.support.FileSystemXmlApplicationContext;
-
 import au.com.bytecode.opencsv.CSVReader;
-
-import com.lvl6.utils.DBConnection;
 
 public class CSVEquipReplacement {
 	private static String csvFileName = "src/main/java/com/lvl6/scriptsjava/csvequipreplacement/weaponchanges.csv";

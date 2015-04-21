@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,11 +8,18 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ClanGiftRewards;
+import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
+import com.lvl6.proto.ChatProto.GroupChatScope;
+import com.lvl6.proto.ClanGiftsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class AwardClanGiftsAction {
@@ -20,6 +28,7 @@ public class AwardClanGiftsAction {
 	}.getClass().getEnclosingClass());
 
 	private String gifterUserId;
+	private User gifterUser;
 	private String clanId;
 	private int clanGiftId;
 	private UserClanStatus userClanStatus;
@@ -27,30 +36,34 @@ public class AwardClanGiftsAction {
 	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private InsertUtil insertUtil;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public AwardClanGiftsAction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AwardClanGiftsAction(String gifterUserId, int clanGiftId, String reasonForGift,
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+	public AwardClanGiftsAction(String gifterUserId, User gifterUser, int clanGiftId, 
+			String reasonForGift, ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils, InsertUtil insertUtil,
-			UserClanStatus userClanStatus) {
+			UserClanStatus userClanStatus, CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.gifterUserId = gifterUserId;
+		this.gifterUser = gifterUser;
 		this.clanGiftId = clanGiftId;
 		this.userClanStatus = userClanStatus;
 		this.reasonForGift = reasonForGift;
 		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.insertUtil = insertUtil;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	private List<ClanGiftRewards> rewardsForClanGift;
 	private List<UserClan> clanMembers;
-
-
+	private ReceivedClanGiftResponseProto.Builder chatProto;
+	private MinimumUserProto mup; //this is the dude who sent the gifts
+	
 	public boolean execute() {
 
 		//check out inputs before db interaction
@@ -60,6 +73,8 @@ public class AwardClanGiftsAction {
 //			return;
 //		}
 
+		setUpReceivedClanGiftResponseProtoBuilder();
+		
 		boolean valid = verifySemantics();
 
 		if (!valid) {
@@ -72,6 +87,15 @@ public class AwardClanGiftsAction {
 		}
 
 		return true;
+	}
+	
+	public void setUpReceivedClanGiftResponseProtoBuilder() {
+		chatProto = ReceivedClanGiftResponseProto.newBuilder();
+		
+		mup = createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(gifterUser, null);
+		
+		chatProto.setSender(mup);
+		chatProto.setScope(GroupChatScope.CLAN);
 	}
 
 	private boolean verifySemantics() {
@@ -101,6 +125,15 @@ public class AwardClanGiftsAction {
 				String receiverUserId = uc.getUserId();
 				int rewardId = determineReward();
 				userIdToRewardId.put(receiverUserId, rewardId);
+				ClanGiftForUser cgfu = new ClanGiftForUser();
+				cgfu.setClanGiftId(clanGiftId);
+				cgfu.setGifterUserId(gifterUserId);
+				cgfu.setReasonForGift(reasonForGift);
+				cgfu.setReceiverUserId(receiverUserId);
+				cgfu.setRewardId(rewardId);
+				cgfu.setTimeReceived(new Date());
+				UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
+				chatProto.addUserClanGifts(ucgp);
 			}
 		}
 

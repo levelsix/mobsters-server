@@ -16,7 +16,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemQueueForUser;
-
 import com.lvl6.properties.DBConstants;
 
 @Component

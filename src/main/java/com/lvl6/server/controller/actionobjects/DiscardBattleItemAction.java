@@ -1,14 +1,12 @@
 package com.lvl6.server.controller.actionobjects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.BattleItem;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.Builder;

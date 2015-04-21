@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;

@@ -7,7 +7,6 @@ import com.lvl6.info.User;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class UpdateUserStrengthAction {

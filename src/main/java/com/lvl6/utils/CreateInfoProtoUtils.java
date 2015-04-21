@@ -5255,14 +5255,15 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg) {
+	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg, MinimumUserProto mup) {
 		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();
 		b.setUserClanGiftId(ucg.getId());
 		b.setReceiverUserId(ucg.getReceiverUserId());
 
-		if(ucg.getGifterUserId() != null) {
-			b.setGifterUserId(ucg.getGifterUserId());
+		if(mup != null) {
+			b.setGifterUser(mup);	
 		}
+		
 		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
 
 		b.setClanGift(createClanGiftProto(cg));

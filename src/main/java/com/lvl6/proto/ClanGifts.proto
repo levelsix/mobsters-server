@@ -5,6 +5,7 @@ package com.lvl6.proto;
 
 import "Reward.proto";
 import "SharedEnumConfig.proto";
+import "User.proto";
 
 option java_outer_classname = "ClanGiftsProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
@@ -23,9 +24,9 @@ message ClanGiftProto {
 //------------------------------------------------------------------------------------------
 
 message UserClanGiftProto {
-	optional MinimumUserProto userClanGiftId = 1;
+	optional string userClanGiftId = 1;
 	optional string receiverUserId = 2;
-	optional string gifterUserId = 3;
+	optional MinimumUserProto gifterUser = 3;
 	optional ClanGiftProto clanGift = 4;
 	optional int64 timeReceived = 5; //when the gift gets sent out to everyone
 	optional RewardProto reward = 6;

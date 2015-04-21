@@ -179,8 +179,8 @@ public class ClearExpiredClanGiftsController extends EventController {
 			ClanGiftForUser cgfu = new ClanGiftForUser();
 			cgfu.setId(ucgp.getUserClanGiftId());
 
-			if(ucgp.getGifterUserId() != null) {
-				cgfu.setGifterUserId(ucgp.getGifterUserId());
+			if(ucgp.getGifterUser() != null) {
+				cgfu.setGifterUserId(ucgp.getGifterUser().getUserUuid());
 			}
 
 			ClanGiftProto cgp = ucgp.getClanGift();
