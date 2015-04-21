@@ -9,9 +9,9 @@ public final class ChatProto {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   /**
-   * Protobuf enum {@code com.lvl6.proto.GroupChatScope}
+   * Protobuf enum {@code com.lvl6.proto.ChatScope}
    */
-  public enum GroupChatScope
+  public enum ChatScope
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>CLAN = 1;</code>
@@ -21,6 +21,10 @@ public final class ChatProto {
      * <code>GLOBAL = 2;</code>
      */
     GLOBAL(1, 2),
+    /**
+     * <code>PRIVATE = 3;</code>
+     */
+    PRIVATE(2, 3),
     ;
 
     /**
@@ -31,27 +35,32 @@ public final class ChatProto {
      * <code>GLOBAL = 2;</code>
      */
     public static final int GLOBAL_VALUE = 2;
+    /**
+     * <code>PRIVATE = 3;</code>
+     */
+    public static final int PRIVATE_VALUE = 3;
 
 
     public final int getNumber() { return value; }
 
-    public static GroupChatScope valueOf(int value) {
+    public static ChatScope valueOf(int value) {
       switch (value) {
         case 1: return CLAN;
         case 2: return GLOBAL;
+        case 3: return PRIVATE;
         default: return null;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<GroupChatScope>
+    public static com.google.protobuf.Internal.EnumLiteMap<ChatScope>
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<GroupChatScope>
+    private static com.google.protobuf.Internal.EnumLiteMap<ChatScope>
         internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<GroupChatScope>() {
-            public GroupChatScope findValueByNumber(int number) {
-              return GroupChatScope.valueOf(number);
+          new com.google.protobuf.Internal.EnumLiteMap<ChatScope>() {
+            public ChatScope findValueByNumber(int number) {
+              return ChatScope.valueOf(number);
             }
           };
 
@@ -68,9 +77,9 @@ public final class ChatProto {
       return com.lvl6.proto.ChatProto.getDescriptor().getEnumTypes().get(0);
     }
 
-    private static final GroupChatScope[] VALUES = values();
+    private static final ChatScope[] VALUES = values();
 
-    public static GroupChatScope valueOf(
+    public static ChatScope valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -82,94 +91,12 @@ public final class ChatProto {
     private final int index;
     private final int value;
 
-    private GroupChatScope(int index, int value) {
+    private ChatScope(int index, int value) {
       this.index = index;
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GroupChatScope)
-  }
-
-  /**
-   * Protobuf enum {@code com.lvl6.proto.ChatType}
-   */
-  public enum ChatType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>GLOBAL_CHAT = 1;</code>
-     */
-    GLOBAL_CHAT(0, 1),
-    /**
-     * <code>PRIVATE_CHAT = 2;</code>
-     */
-    PRIVATE_CHAT(1, 2),
-    ;
-
-    /**
-     * <code>GLOBAL_CHAT = 1;</code>
-     */
-    public static final int GLOBAL_CHAT_VALUE = 1;
-    /**
-     * <code>PRIVATE_CHAT = 2;</code>
-     */
-    public static final int PRIVATE_CHAT_VALUE = 2;
-
-
-    public final int getNumber() { return value; }
-
-    public static ChatType valueOf(int value) {
-      switch (value) {
-        case 1: return GLOBAL_CHAT;
-        case 2: return PRIVATE_CHAT;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<ChatType>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<ChatType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ChatType>() {
-            public ChatType findValueByNumber(int number) {
-              return ChatType.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.ChatProto.getDescriptor().getEnumTypes().get(1);
-    }
-
-    private static final ChatType[] VALUES = values();
-
-    public static ChatType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private ChatType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ChatType)
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ChatScope)
   }
 
   /**
@@ -274,7 +201,7 @@ public final class ChatProto {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.lvl6.proto.ChatProto.getDescriptor().getEnumTypes().get(2);
+      return com.lvl6.proto.ChatProto.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final TranslateLanguages[] VALUES = values();
@@ -6118,12 +6045,11 @@ public final class ChatProto {
       "nguageProto\022\027\n\017recipientUserId\030\001 \001(\t\022\024\n\014" +
       "senderUserId\030\002 \001(\t\022;\n\017defaultLanguage\030\003 " +
       "\001(\0162\".com.lvl6.proto.TranslateLanguages\022" +
-      "\023\n\013translateOn\030\004 \001(\010*&\n\016GroupChatScope\022\010",
-      "\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002*-\n\010ChatType\022\017\n\013GLOB" +
-      "AL_CHAT\020\001\022\020\n\014PRIVATE_CHAT\020\002*s\n\022Translate" +
-      "Languages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022\n\n\006FR" +
-      "ENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RUSSI" +
-      "AN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
+      "\023\n\013translateOn\030\004 \001(\010*.\n\tChatScope\022\010\n\004CLA",
+      "N\020\001\022\n\n\006GLOBAL\020\002\022\013\n\007PRIVATE\020\003*s\n\022Translat" +
+      "eLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022\n\n\006F" +
+      "RENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RUSS" +
+      "IAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

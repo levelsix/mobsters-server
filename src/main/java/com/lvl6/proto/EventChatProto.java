@@ -1489,13 +1489,13 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
     boolean hasScope();
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
-    com.lvl6.proto.ChatProto.GroupChatScope getScope();
+    com.lvl6.proto.ChatProto.ChatScope getScope();
 
     /**
      * <code>optional string chatMessage = 3;</code>
@@ -1596,7 +1596,7 @@ public final class EventChatProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.ChatProto.GroupChatScope value = com.lvl6.proto.ChatProto.GroupChatScope.valueOf(rawValue);
+              com.lvl6.proto.ChatProto.ChatScope value = com.lvl6.proto.ChatProto.ChatScope.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1689,17 +1689,17 @@ public final class EventChatProto {
     }
 
     public static final int SCOPE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.ChatProto.GroupChatScope scope_;
+    private com.lvl6.proto.ChatProto.ChatScope scope_;
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
     public boolean hasScope() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
-    public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
+    public com.lvl6.proto.ChatProto.ChatScope getScope() {
       return scope_;
     }
 
@@ -1777,7 +1777,7 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+      scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       chatMessage_ = "";
       clientTime_ = 0L;
       globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
@@ -1963,7 +1963,7 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+        scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         bitField0_ = (bitField0_ & ~0x00000002);
         chatMessage_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -2199,23 +2199,23 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ChatProto.GroupChatScope scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+      private com.lvl6.proto.ChatProto.ChatScope scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
       public boolean hasScope() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
+      public com.lvl6.proto.ChatProto.ChatScope getScope() {
         return scope_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
-      public Builder setScope(com.lvl6.proto.ChatProto.GroupChatScope value) {
+      public Builder setScope(com.lvl6.proto.ChatProto.ChatScope value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2225,11 +2225,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
       public Builder clearScope() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+        scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         onChanged();
         return this;
       }
@@ -3101,13 +3101,13 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
     boolean hasScope();
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
-    com.lvl6.proto.ChatProto.GroupChatScope getScope();
+    com.lvl6.proto.ChatProto.ChatScope getScope();
 
     /**
      * <code>optional .com.lvl6.proto.GroupChatMessageProto message = 3;</code>
@@ -3212,7 +3212,7 @@ public final class EventChatProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.ChatProto.GroupChatScope value = com.lvl6.proto.ChatProto.GroupChatScope.valueOf(rawValue);
+              com.lvl6.proto.ChatProto.ChatScope value = com.lvl6.proto.ChatProto.ChatScope.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -3307,17 +3307,17 @@ public final class EventChatProto {
     }
 
     public static final int SCOPE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.ChatProto.GroupChatScope scope_;
+    private com.lvl6.proto.ChatProto.ChatScope scope_;
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
     public boolean hasScope() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
-    public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
+    public com.lvl6.proto.ChatProto.ChatScope getScope() {
       return scope_;
     }
 
@@ -3401,7 +3401,7 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
-      scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+      scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       message_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
       chatMessage_ = "";
       isAdmin_ = false;
@@ -3588,7 +3588,7 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+        scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (messageBuilder_ == null) {
           message_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
@@ -3832,23 +3832,23 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ChatProto.GroupChatScope scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+      private com.lvl6.proto.ChatProto.ChatScope scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
       public boolean hasScope() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
+      public com.lvl6.proto.ChatProto.ChatScope getScope() {
         return scope_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
-      public Builder setScope(com.lvl6.proto.ChatProto.GroupChatScope value) {
+      public Builder setScope(com.lvl6.proto.ChatProto.ChatScope value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3858,11 +3858,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
       public Builder clearScope() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+        scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         onChanged();
         return this;
       }
@@ -8502,13 +8502,13 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
      */
     boolean hasChatType();
     /**
-     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
      */
-    com.lvl6.proto.ChatProto.ChatType getChatType();
+    com.lvl6.proto.ChatProto.ChatScope getChatType();
 
     /**
      * <code>optional string otherUserUuid = 3;</code>
@@ -8633,7 +8633,7 @@ public final class EventChatProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.ChatProto.ChatType value = com.lvl6.proto.ChatProto.ChatType.valueOf(rawValue);
+              com.lvl6.proto.ChatProto.ChatScope value = com.lvl6.proto.ChatProto.ChatScope.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -8749,17 +8749,17 @@ public final class EventChatProto {
     }
 
     public static final int CHATTYPE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.ChatProto.ChatType chatType_;
+    private com.lvl6.proto.ChatProto.ChatScope chatType_;
     /**
-     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
      */
     public boolean hasChatType() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+     * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
      */
-    public com.lvl6.proto.ChatProto.ChatType getChatType() {
+    public com.lvl6.proto.ChatProto.ChatScope getChatType() {
       return chatType_;
     }
 
@@ -8872,7 +8872,7 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
+      chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       otherUserUuid_ = "";
       language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       messagesToBeTranslated_ = java.util.Collections.emptyList();
@@ -9067,7 +9067,7 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
+        chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         bitField0_ = (bitField0_ & ~0x00000002);
         otherUserUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -9380,23 +9380,23 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ChatProto.ChatType chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
+      private com.lvl6.proto.ChatProto.ChatScope chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       /**
-       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
        */
       public boolean hasChatType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
        */
-      public com.lvl6.proto.ChatProto.ChatType getChatType() {
+      public com.lvl6.proto.ChatProto.ChatScope getChatType() {
         return chatType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
        */
-      public Builder setChatType(com.lvl6.proto.ChatProto.ChatType value) {
+      public Builder setChatType(com.lvl6.proto.ChatProto.ChatScope value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9406,11 +9406,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ChatType chatType = 2;</code>
+       * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
        */
       public Builder clearChatType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        chatType_ = com.lvl6.proto.ChatProto.ChatType.GLOBAL_CHAT;
+        chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         onChanged();
         return this;
       }
@@ -9991,40 +9991,40 @@ public final class EventChatProto {
     public enum TranslateSelectMessagesStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>FAIL_OTHER = 1;</code>
+       * <code>SUCCESS = 1;</code>
        */
-      FAIL_OTHER(0, 1),
+      SUCCESS(0, 1),
       /**
-       * <code>FAIL_NOT_VALID_LANGUAGE = 2;</code>
+       * <code>FAIL_OTHER = 2;</code>
        */
-      FAIL_NOT_VALID_LANGUAGE(1, 2),
+      FAIL_OTHER(1, 2),
       /**
-       * <code>SUCCESS = 3;</code>
+       * <code>FAIL_NOT_VALID_LANGUAGE = 3;</code>
        */
-      SUCCESS(2, 3),
+      FAIL_NOT_VALID_LANGUAGE(2, 3),
       ;
 
       /**
-       * <code>FAIL_OTHER = 1;</code>
+       * <code>SUCCESS = 1;</code>
        */
-      public static final int FAIL_OTHER_VALUE = 1;
+      public static final int SUCCESS_VALUE = 1;
       /**
-       * <code>FAIL_NOT_VALID_LANGUAGE = 2;</code>
+       * <code>FAIL_OTHER = 2;</code>
        */
-      public static final int FAIL_NOT_VALID_LANGUAGE_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 2;
       /**
-       * <code>SUCCESS = 3;</code>
+       * <code>FAIL_NOT_VALID_LANGUAGE = 3;</code>
        */
-      public static final int SUCCESS_VALUE = 3;
+      public static final int FAIL_NOT_VALID_LANGUAGE_VALUE = 3;
 
 
       public final int getNumber() { return value; }
 
       public static TranslateSelectMessagesStatus valueOf(int value) {
         switch (value) {
-          case 1: return FAIL_OTHER;
-          case 2: return FAIL_NOT_VALID_LANGUAGE;
-          case 3: return SUCCESS;
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          case 3: return FAIL_NOT_VALID_LANGUAGE;
           default: return null;
         }
       }
@@ -10151,7 +10151,7 @@ public final class EventChatProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       messagesTranslated_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
+      status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10327,7 +10327,7 @@ public final class EventChatProto {
         } else {
           messagesTranslatedBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
+        status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -10809,7 +10809,7 @@ public final class EventChatProto {
         return messagesTranslatedBuilder_;
       }
 
-      private com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
+      private com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
        */
@@ -10839,7 +10839,7 @@ public final class EventChatProto {
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.FAIL_OTHER;
+        status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -10924,73 +10924,72 @@ public final class EventChatProto {
       "ponseProto\022\022\n\nsenderUuid\030\001 \001(\t\022\017\n\007messag" +
       "e\030\002 \001(\t\"l\n GeneralNotificationResponsePr" +
       "oto\022\r\n\005title\030\001 \001(\t\022\020\n\010subtitle\030\002 \001(\t\022\'\n\003" +
-      "rgb\030\003 \001(\0132\032.com.lvl6.proto.ColorProto\"\347\001" +
+      "rgb\030\003 \001(\0132\032.com.lvl6.proto.ColorProto\"\342\001" +
       "\n\031SendGroupChatRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\0223\n" +
-      "\005scope\030\002 \001(\0162\036.com.lvl6.proto.GroupChatS" +
-      "cope:\004CLAN\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclien",
-      "tTime\030\004 \001(\003\022:\n\016globalLanguage\030\005 \001(\0162\".co" +
-      "m.lvl6.proto.TranslateLanguages\"\354\001\n\032Send" +
-      "GroupChatResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022N\n\006stat" +
-      "us\030\002 \001(\0162>.com.lvl6.proto.SendGroupChatR" +
-      "esponseProto.SendGroupChatStatus\"L\n\023Send" +
-      "GroupChatStatus\022\013\n\007SUCCESS\020\001\022\014\n\010TOO_LONG" +
-      "\020\002\022\016\n\nOTHER_FAIL\020\003\022\n\n\006BANNED\020\004\"\366\001\n\036Recei" +
-      "vedGroupChatResponseProto\0229\n\006sender\030\001 \001(" +
-      "\0132).com.lvl6.proto.MinimumUserProtoWithL",
-      "evel\0223\n\005scope\030\002 \001(\0162\036.com.lvl6.proto.Gro" +
-      "upChatScope:\004CLAN\0226\n\007message\030\003 \001(\0132%.com" +
-      ".lvl6.proto.GroupChatMessageProto\022\027\n\013cha" +
-      "tMessage\030\004 \001(\tB\002\030\001\022\023\n\007isAdmin\030\005 \001(\010B\002\030\001\"" +
-      "\275\001\n\033PrivateChatPostRequestProto\0220\n\006sende" +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022.\n" +
+      "\005scope\030\002 \001(\0162\031.com.lvl6.proto.ChatScope:" +
+      "\004CLAN\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclientTime",
+      "\030\004 \001(\003\022:\n\016globalLanguage\030\005 \001(\0162\".com.lvl" +
+      "6.proto.TranslateLanguages\"\354\001\n\032SendGroup" +
+      "ChatResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022N\n\006status\030\002 " +
+      "\001(\0162>.com.lvl6.proto.SendGroupChatRespon" +
+      "seProto.SendGroupChatStatus\"L\n\023SendGroup" +
+      "ChatStatus\022\013\n\007SUCCESS\020\001\022\014\n\010TOO_LONG\020\002\022\016\n" +
+      "\nOTHER_FAIL\020\003\022\n\n\006BANNED\020\004\"\361\001\n\036ReceivedGr" +
+      "oupChatResponseProto\0229\n\006sender\030\001 \001(\0132).c" +
+      "om.lvl6.proto.MinimumUserProtoWithLevel\022",
+      ".\n\005scope\030\002 \001(\0162\031.com.lvl6.proto.ChatScop" +
+      "e:\004CLAN\0226\n\007message\030\003 \001(\0132%.com.lvl6.prot" +
+      "o.GroupChatMessageProto\022\027\n\013chatMessage\030\004" +
+      " \001(\tB\002\030\001\022\023\n\007isAdmin\030\005 \001(\010B\002\030\001\"\275\001\n\033Privat" +
+      "eChatPostRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\025\n\rrecip" +
+      "ientUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\022D\n\017conte" +
+      "ntLanguage\030\004 \001(\0162\".com.lvl6.proto.Transl" +
+      "ateLanguages:\007ENGLISH\"\315\003\n\034PrivateChatPos" +
+      "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl",
+      "6.proto.MinimumUserProto\022R\n\006status\030\002 \001(\016" +
+      "2B.com.lvl6.proto.PrivateChatPostRespons" +
+      "eProto.PrivateChatPostStatus\0222\n\004post\030\003 \001" +
+      "(\0132$.com.lvl6.proto.PrivateChatPostProto" +
+      "\022K\n\022translationSetting\030\004 \001(\0132/.com.lvl6." +
+      "proto.PrivateChatDefaultLanguageProto\022;\n" +
+      "\014adminMessage\030\005 \001(\0132%.com.lvl6.proto.Gro" +
+      "upChatMessageProto\"i\n\025PrivateChatPostSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022\n" +
+      "\016POST_TOO_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BAN",
+      "NED\020\005\"\306\001\n$RetrievePrivateChatPostsReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\025\n\rotherUserUuid\030\002 \001(\t\022" +
+      "\037\n\023beforePrivateChatId\030\003 \001(\005B\002\030\001\0224\n\010lang" +
+      "uage\030\004 \001(\0162\".com.lvl6.proto.TranslateLan" +
+      "guages\"\346\002\n%RetrievePrivateChatPostsRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\0224\n\005posts\030\002 \003(\0132%.com." +
+      "lvl6.proto.GroupChatMessageProto\022\037\n\023befo" +
+      "rePrivateChatId\030\003 \001(\005B\002\030\001\022d\n\006status\030\004 \001(",
+      "\0162T.com.lvl6.proto.RetrievePrivateChatPo" +
+      "stsResponseProto.RetrievePrivateChatPost" +
+      "sStatus\022\025\n\rotherUserUuid\030\005 \001(\t\"7\n\036Retrie" +
+      "vePrivateChatPostsStatus\022\013\n\007SUCCESS\020\001\022\010\n" +
+      "\004FAIL\020\002\"\254\002\n#TranslateSelectMessagesReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022+\n\010chatType\030\002 \001(\0162\031.co" +
+      "m.lvl6.proto.ChatScope\022\025\n\rotherUserUuid\030" +
+      "\003 \001(\t\0224\n\010language\030\004 \001(\0162\".com.lvl6.proto" +
+      ".TranslateLanguages\022D\n\026messagesToBeTrans",
+      "lated\030\005 \003(\0132$.com.lvl6.proto.PrivateChat" +
+      "PostProto\022\023\n\013translateOn\030\006 \001(\010\"\331\002\n$Trans" +
+      "lateSelectMessagesResponseProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\025\n\rrecipientUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(" +
-      "\t\022D\n\017contentLanguage\030\004 \001(\0162\".com.lvl6.pr" +
-      "oto.TranslateLanguages:\007ENGLISH\"\315\003\n\034Priv" +
-      "ateChatPostResponseProto\0220\n\006sender\030\001 \001(\013",
-      "2 .com.lvl6.proto.MinimumUserProto\022R\n\006st" +
-      "atus\030\002 \001(\0162B.com.lvl6.proto.PrivateChatP" +
-      "ostResponseProto.PrivateChatPostStatus\0222" +
-      "\n\004post\030\003 \001(\0132$.com.lvl6.proto.PrivateCha" +
-      "tPostProto\022K\n\022translationSetting\030\004 \001(\0132/" +
-      ".com.lvl6.proto.PrivateChatDefaultLangua" +
-      "geProto\022;\n\014adminMessage\030\005 \001(\0132%.com.lvl6" +
-      ".proto.GroupChatMessageProto\"i\n\025PrivateC" +
-      "hatPostStatus\022\013\n\007SUCCESS\020\001\022\023\n\017NO_CONTENT" +
-      "_SENT\020\002\022\022\n\016POST_TOO_LARGE\020\003\022\016\n\nOTHER_FAI",
-      "L\020\004\022\n\n\006BANNED\020\005\"\306\001\n$RetrievePrivateChatP" +
-      "ostsRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\025\n\rotherUserU" +
-      "uid\030\002 \001(\t\022\037\n\023beforePrivateChatId\030\003 \001(\005B\002" +
-      "\030\001\0224\n\010language\030\004 \001(\0162\".com.lvl6.proto.Tr" +
-      "anslateLanguages\"\346\002\n%RetrievePrivateChat" +
-      "PostsResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\0224\n\005posts\030\002 " +
-      "\003(\0132%.com.lvl6.proto.GroupChatMessagePro" +
-      "to\022\037\n\023beforePrivateChatId\030\003 \001(\005B\002\030\001\022d\n\006s",
-      "tatus\030\004 \001(\0162T.com.lvl6.proto.RetrievePri" +
-      "vateChatPostsResponseProto.RetrievePriva" +
-      "teChatPostsStatus\022\025\n\rotherUserUuid\030\005 \001(\t" +
-      "\"7\n\036RetrievePrivateChatPostsStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\010\n\004FAIL\020\002\"\253\002\n#TranslateSelectMes" +
-      "sagesRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022*\n\010chatType\030" +
-      "\002 \001(\0162\030.com.lvl6.proto.ChatType\022\025\n\rother" +
-      "UserUuid\030\003 \001(\t\0224\n\010language\030\004 \001(\0162\".com.l" +
-      "vl6.proto.TranslateLanguages\022D\n\026messages",
-      "ToBeTranslated\030\005 \003(\0132$.com.lvl6.proto.Pr" +
-      "ivateChatPostProto\022\023\n\013translateOn\030\006 \001(\010\"" +
-      "\331\002\n$TranslateSelectMessagesResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022@\n\022messagesTranslated\030\002 \003(\0132$" +
-      ".com.lvl6.proto.PrivateChatPostProto\022b\n\006" +
-      "status\030\003 \001(\0162R.com.lvl6.proto.TranslateS" +
-      "electMessagesResponseProto.TranslateSele" +
-      "ctMessagesStatus\"Y\n\035TranslateSelectMessa" +
-      "gesStatus\022\016\n\nFAIL_OTHER\020\001\022\033\n\027FAIL_NOT_VA",
-      "LID_LANGUAGE\020\002\022\013\n\007SUCCESS\020\003B\020B\016EventChat" +
-      "Proto"
+      "o\022@\n\022messagesTranslated\030\002 \003(\0132$.com.lvl6" +
+      ".proto.PrivateChatPostProto\022b\n\006status\030\003 " +
+      "\001(\0162R.com.lvl6.proto.TranslateSelectMess" +
+      "agesResponseProto.TranslateSelectMessage" +
+      "sStatus\"Y\n\035TranslateSelectMessagesStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_NO",
+      "T_VALID_LANGUAGE\020\003B\020B\016EventChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
