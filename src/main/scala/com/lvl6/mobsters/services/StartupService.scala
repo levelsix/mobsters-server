@@ -9,18 +9,15 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -46,7 +43,7 @@ import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
-import com.lvl6.properties.IAPValues;
+import com.lvl6.properties.IAPValues
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
 import com.lvl6.proto.ChatProto.ChatType
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto
@@ -62,7 +59,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
-import com.lvl6.proto.SalesProto.SalesPackageProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
@@ -149,8 +146,9 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
+import com.lvl6.info.ClanGiftForUser
 
 case class StartupData(
       resBuilder:Builder, 
@@ -181,7 +179,8 @@ class StartupService extends LazyLogging{
 	@Autowired var  clanEventPersistentForClanRetrieveUtils : ClanEventPersistentForClanRetrieveUtils2  = null
 	@Autowired var  clanEventPersistentForUserRetrieveUtils : ClanEventPersistentForUserRetrieveUtils2  = null
 	@Autowired var  clanEventPersistentUserRewardRetrieveUtils : ClanEventPersistentUserRewardRetrieveUtils2  = null
-	@Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
+	@Autowired var  clanGiftForUserRetrieveUtil : ClanGiftForUserRetrieveUtils = null
+  @Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
 	@Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
 	@Autowired var  clanRetrieveUtils : ClanRetrieveUtils2  = null
 	@Autowired var  eventPersistentForUserRetrieveUtils : EventPersistentForUserRetrieveUtils2  = null
@@ -459,6 +458,7 @@ class StartupService extends LazyLogging{
         sbiqfu <-  setBattleItemQueueForUser(resBuilder, userId)
 		    ssfu  <-   setSalesForUser(resBuilder, user)
         scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
+        scgfu <-   setClanGiftForUser(resBuilder, userId)
         plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
       
@@ -1415,6 +1415,18 @@ class StartupService extends LazyLogging{
     }
   }
   
+  def setClanGiftForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
+    Future{
+      timed("StartupService.setClanGiftForUser") {
+        val listOfClanGifts = clanGiftForUserRetrieveUtil.getUserClanGiftsForUser(userId)
+        listOfClanGifts.foreach { cgfu:ClanGiftForUser =>
+          val ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu)
+          resBuilder.addUserClanGifts(ucgp)
+        }
+      }
+    }
+  }
+  
   def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
     timed("StartupService.setClanRaidHistoryStuff"){
       //the raid stage and reward history for past 7 days
@@ -1519,7 +1531,7 @@ class StartupService extends LazyLogging{
     if (user != null) {
       val userId = user.getId()
       logger.info(s"Updating leaderboard for user $userId");
-      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn)
+      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn);
     }
   }
 }
