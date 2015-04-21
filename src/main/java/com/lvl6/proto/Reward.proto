@@ -30,6 +30,7 @@ message RewardProto {
 		GEMS = 3;
 		CASH = 4;
 		OIL = 5;
+		GACHA_CREDITS = 7;
 		MONSTER = 6;
 	}
 	
@@ -43,4 +44,5 @@ message UserRewardProto {
 	optional int32 gems = 3; //amounts gained
 	optional int32 cash = 4;
 	optional int32 oil = 5;
+	optional int32 gachaCredits = 6;
 }

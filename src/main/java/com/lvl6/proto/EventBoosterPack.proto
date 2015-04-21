@@ -3,6 +3,7 @@
 import "BoosterPackStuff.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
+import "Reward.proto";
 import "User.proto";
 
 package com.lvl6.proto;

@@ -199,9 +199,13 @@ public final class RewardsProto {
        */
       OIL(4, 5),
       /**
+       * <code>GACHA_CREDITS = 7;</code>
+       */
+      GACHA_CREDITS(5, 7),
+      /**
        * <code>MONSTER = 6;</code>
        */
-      MONSTER(5, 6),
+      MONSTER(6, 6),
       ;
 
       /**
@@ -225,6 +229,10 @@ public final class RewardsProto {
        */
       public static final int OIL_VALUE = 5;
       /**
+       * <code>GACHA_CREDITS = 7;</code>
+       */
+      public static final int GACHA_CREDITS_VALUE = 7;
+      /**
        * <code>MONSTER = 6;</code>
        */
       public static final int MONSTER_VALUE = 6;
@@ -239,6 +247,7 @@ public final class RewardsProto {
           case 3: return GEMS;
           case 4: return CASH;
           case 5: return OIL;
+          case 7: return GACHA_CREDITS;
           case 6: return MONSTER;
           default: return null;
         }
@@ -884,6 +893,15 @@ public final class RewardsProto {
      * <code>optional int32 oil = 5;</code>
      */
     int getOil();
+
+    /**
+     * <code>optional int32 gachaCredits = 6;</code>
+     */
+    boolean hasGachaCredits();
+    /**
+     * <code>optional int32 gachaCredits = 6;</code>
+     */
+    int getGachaCredits();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserRewardProto}
@@ -971,6 +989,11 @@ public final class RewardsProto {
             case 40: {
               bitField0_ |= 0x00000004;
               oil_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000008;
+              gachaCredits_ = input.readInt32();
               break;
             }
           }
@@ -1142,12 +1165,28 @@ public final class RewardsProto {
       return oil_;
     }
 
+    public static final int GACHACREDITS_FIELD_NUMBER = 6;
+    private int gachaCredits_;
+    /**
+     * <code>optional int32 gachaCredits = 6;</code>
+     */
+    public boolean hasGachaCredits() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 gachaCredits = 6;</code>
+     */
+    public int getGachaCredits() {
+      return gachaCredits_;
+    }
+
     private void initFields() {
       updatedOrNewMonsters_ = java.util.Collections.emptyList();
       updatedUserItems_ = java.util.Collections.emptyList();
       gems_ = 0;
       cash_ = 0;
       oil_ = 0;
+      gachaCredits_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1177,6 +1216,9 @@ public final class RewardsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(5, oil_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(6, gachaCredits_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1205,6 +1247,10 @@ public final class RewardsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, oil_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, gachaCredits_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1348,6 +1394,8 @@ public final class RewardsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         oil_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        gachaCredits_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -1406,6 +1454,10 @@ public final class RewardsProto {
           to_bitField0_ |= 0x00000004;
         }
         result.oil_ = oil_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gachaCredits_ = gachaCredits_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1482,6 +1534,9 @@ public final class RewardsProto {
         }
         if (other.hasOil()) {
           setOil(other.getOil());
+        }
+        if (other.hasGachaCredits()) {
+          setGachaCredits(other.getGachaCredits());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2102,6 +2157,38 @@ public final class RewardsProto {
         return this;
       }
 
+      private int gachaCredits_ ;
+      /**
+       * <code>optional int32 gachaCredits = 6;</code>
+       */
+      public boolean hasGachaCredits() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 gachaCredits = 6;</code>
+       */
+      public int getGachaCredits() {
+        return gachaCredits_;
+      }
+      /**
+       * <code>optional int32 gachaCredits = 6;</code>
+       */
+      public Builder setGachaCredits(int value) {
+        bitField0_ |= 0x00000020;
+        gachaCredits_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gachaCredits = 6;</code>
+       */
+      public Builder clearGachaCredits() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        gachaCredits_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserRewardProto)
     }
 
@@ -2133,17 +2220,18 @@ public final class RewardsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Reward.proto\022\016com.lvl6.proto\032\022MonsterS" +
-      "tuff.proto\032\nItem.proto\"\310\001\n\013RewardProto\022\020" +
+      "tuff.proto\032\nItem.proto\"\333\001\n\013RewardProto\022\020" +
       "\n\010rewardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223" +
       "\n\003typ\030\003 \001(\0162&.com.lvl6.proto.RewardProto" +
-      ".RewardType\022\013\n\003amt\030\004 \001(\005\"O\n\nRewardType\022\r" +
+      ".RewardType\022\013\n\003amt\030\004 \001(\005\"b\n\nRewardType\022\r" +
       "\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003\022\010\n\004CAS" +
-      "H\020\004\022\007\n\003OIL\020\005\022\013\n\007MONSTER\020\006\"\267\001\n\017UserReward" +
-      "Proto\022B\n\024updatedOrNewMonsters\030\001 \003(\0132$.co" +
-      "m.lvl6.proto.FullUserMonsterProto\0227\n\020upd" +
-      "atedUserItems\030\002 \003(\0132\035.com.lvl6.proto.Use",
-      "rItemProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013" +
-      "\n\003oil\030\005 \001(\005B\016B\014RewardsProto"
+      "H\020\004\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013\n\007MONST" +
+      "ER\020\006\"\315\001\n\017UserRewardProto\022B\n\024updatedOrNew" +
+      "Monsters\030\001 \003(\0132$.com.lvl6.proto.FullUser" +
+      "MonsterProto\0227\n\020updatedUserItems\030\002 \003(\0132\035",
+      ".com.lvl6.proto.UserItemProto\022\014\n\004gems\030\003 " +
+      "\001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 \001(\005\022\024\n\014gachaC" +
+      "redits\030\006 \001(\005B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2170,7 +2258,7 @@ public final class RewardsProto {
     internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserRewardProto_descriptor,
-        new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", });
+        new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", "GachaCredits", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
   }

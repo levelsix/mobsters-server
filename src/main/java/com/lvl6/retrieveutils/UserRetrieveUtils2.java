@@ -506,6 +506,8 @@ public class UserRetrieveUtils2 {
 			long totalStrength = rs.getLong(DBConstants.USER__TOTAL_STRENGTH);
 
 			int segmentationGroup = rs.getInt(DBConstants.USER__SEGMENTATION_GROUP);
+			
+			int gachaCredits = rs.getInt(DBConstants.USER__GACHA_CREDITS);
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 					tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -521,7 +523,7 @@ public class UserRetrieveUtils2 {
 					lastSecretGiftCollectTime, pvpDefendingMessage,
 					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
 					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength,
-					segmentationGroup);
+					segmentationGroup, gachaCredits);
 
 			return user;
 		}
