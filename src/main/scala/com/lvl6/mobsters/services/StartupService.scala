@@ -1017,11 +1017,9 @@ class StartupService extends LazyLogging{
   }
   
   
-  def setAllStaticData(resBuilder:Builder, userId:String, userIdSet:Boolean):Future[Unit]= {
-    Future{
+  def setAllStaticData(resBuilder:Builder, userId:String, userIdSet:Boolean) {
       val sdp = miscMethods.getAllStaticData(userId, userIdSet, questForUserRetrieveUtils)
       resBuilder.setStaticDataStuffProto(sdp)
-    }
   }
   
   def setAchievementStuff(resBuilder:Builder, user:User, userId:String, now:Date):Future[Unit]= {
@@ -1038,14 +1036,17 @@ class StartupService extends LazyLogging{
         for (achievementId <- ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS) {
         	if (!achievementsIdToUserAchievements.containsKey(achievementId)) {
         		calculateMiniEvent = false
+                logger.info(s"not retrieving MiniEvent1, user does not have achievementId $achievementId");
         	} else {
         		val afu = achievementsIdToUserAchievements.get(achievementId)
         		if (!afu.isRedeemed()) {
         			calculateMiniEvent = false
+                    logger.info(s"not retrieving MiniEvent1, achievement not redeemed $afu");
         		}
             }
         }
       
+        logger.info(s"calculateMiniEvent=$calculateMiniEvent");
         if (calculateMiniEvent) {
 			//calculate only if user finished all clan achievements
         	setMiniEventForUser(resBuilder, user, userId, now)
