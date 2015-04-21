@@ -23,7 +23,7 @@ message ClanGiftProto {
 //------------------------------------------------------------------------------------------
 
 message UserClanGiftProto {
-	optional string userClanGiftId = 1;
+	optional MinimumUserProto userClanGiftId = 1;
 	optional string receiverUserId = 2;
 	optional string gifterUserId = 3;
 	optional ClanGiftProto clanGift = 4;
