@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.SalesPackage;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.properties.Globals;
 import com.lvl6.utils.DBConnection;
 
 @Component
@@ -151,40 +152,41 @@ public class SalesPackageRetrieveUtils {
 			log.error("last_purchase_time null...?", e);
 		}
 
-//		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
-//		int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);
-//
-//        productId =  Globals.APPLE_BUNDLE_ID() + "."
-//                + productId;
-//
-//        String str;
-//        String name = "";
-//        String animatingIcon = "";
-//        String slamIcon = "";
-//        String titleColor = "";
-//
-//
-//        str = rs.getString(DBConstants.SALES_PACKAGE__NAME);
-//        if(!rs.wasNull()) {
-//        	name = str;
-//        }
-//
-//        str = rs.getString(DBConstants.SALES_PACKAGE__ANIMATING_ICON);
-//        if(!rs.wasNull()) {
-//        	animatingIcon = str;
-//        }
-//
-//        str = rs.getString(DBConstants.SALES_PACKAGE__SLAM_ICON);
-//        if(!rs.wasNull()) {
-//            slamIcon = str;
-//        }
-//
-//        str = rs.getString(DBConstants.SALES_PACKAGE__TITLE_COLOR);
-//        if(!rs.wasNull()) {
-//            titleColor = str;
-//        }
+		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
+		int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);
 
-		SalesPackage salesPackage = new SalesPackage();
+        productId =  Globals.APPLE_BUNDLE_ID() + "."
+                + productId;
+
+        String str;
+        String name = "";
+        String animatingIcon = "";
+        String slamIcon = "";
+        String titleColor = "";
+
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__NAME);
+        if(!rs.wasNull()) {
+        	name = str;
+        }
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__ANIMATING_ICON);
+        if(!rs.wasNull()) {
+        	animatingIcon = str;
+        }
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__SLAM_ICON);
+        if(!rs.wasNull()) {
+            slamIcon = str;
+        }
+
+        str = rs.getString(DBConstants.SALES_PACKAGE__TITLE_COLOR);
+        if(!rs.wasNull()) {
+            titleColor = str;
+        }
+
+		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid, 
+				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon, titleColor);
 		return salesPackage;
 	}
 }
