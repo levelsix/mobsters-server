@@ -1,6 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -12,11 +14,13 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveMiniEventRequestEvent;
 import com.lvl6.events.response.RetrieveMiniEventResponseEvent;
+import com.lvl6.info.Reward;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
 import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
@@ -27,6 +31,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -48,7 +53,7 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
@@ -60,22 +65,25 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-	
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtil;
+
 	@Autowired
 	protected TimeUtils timeUtil;
 
@@ -139,13 +147,22 @@ public class RetrieveMiniEventController extends EventController {
 					insertUtil, deleteUtil, miniEventGoalRetrieveUtils,
 					miniEventForPlayerLvlRetrieveUtils, miniEventRetrieveUtils,
 					miniEventTierRewardRetrieveUtils,
-					miniEventLeaderboardRewardRetrieveUtils, timeUtil);
+					miniEventLeaderboardRewardRetrieveUtils, rewardRetrieveUtil,
+					timeUtil);
 
 			rmea.execute(resBuilder);
 
 			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 					null != rmea.getCurActiveMiniEvent())
 			{
+				Map<Integer, Reward> rIdToReward = rmea.getrIdToRewardConfig();
+				Map<Integer, RewardProto> rIdToRewardProto = new HashMap<Integer, RewardProto>();
+				for (int rId : rIdToReward.keySet())
+				{
+					Reward r = rIdToReward.get(rId);
+					RewardProto rp = createInfoProtoUtils.createRewardProto(r);
+					rIdToRewardProto.put(rId, rp);
+				}
 				//get UserMiniEvent info and create the proto to set into resBuilder
 				//TODO: Consider protofying MiniEvent stuff
 				UserMiniEventProto umep = createInfoProtoUtils
@@ -153,7 +170,8 @@ public class RetrieveMiniEventController extends EventController {
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 								rmea.getMegfus(),
 								rmea.getLvlEntered(), rmea.getRewards(),
-								rmea.getGoals(), rmea.getLeaderboardRewards());
+								rmea.getGoals(), rmea.getLeaderboardRewards(),
+								rIdToReward, rIdToRewardProto);
 				resBuilder.setUserMiniEvent(umep);
 			}
 
@@ -226,6 +244,76 @@ public class RetrieveMiniEventController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public AchievementForUserRetrieveUtil getAchievementForUserRetrieveUtil() {
+		return achievementForUserRetrieveUtil;
+	}
+
+	public void setAchievementForUserRetrieveUtil(
+			AchievementForUserRetrieveUtil achievementForUserRetrieveUtil) {
+		this.achievementForUserRetrieveUtil = achievementForUserRetrieveUtil;
+	}
+
+	public MiniEventGoalRetrieveUtils getMiniEventGoalRetrieveUtils() {
+		return miniEventGoalRetrieveUtils;
+	}
+
+	public void setMiniEventGoalRetrieveUtils(
+			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils) {
+		this.miniEventGoalRetrieveUtils = miniEventGoalRetrieveUtils;
+	}
+
+	public MiniEventForPlayerLvlRetrieveUtils getMiniEventForPlayerLvlRetrieveUtils() {
+		return miniEventForPlayerLvlRetrieveUtils;
+	}
+
+	public void setMiniEventForPlayerLvlRetrieveUtils(
+			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils) {
+		this.miniEventForPlayerLvlRetrieveUtils = miniEventForPlayerLvlRetrieveUtils;
+	}
+
+	public MiniEventRetrieveUtils getMiniEventRetrieveUtils() {
+		return miniEventRetrieveUtils;
+	}
+
+	public void setMiniEventRetrieveUtils(
+			MiniEventRetrieveUtils miniEventRetrieveUtils) {
+		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
+	}
+
+	public MiniEventTierRewardRetrieveUtils getMiniEventTierRewardRetrieveUtils() {
+		return miniEventTierRewardRetrieveUtils;
+	}
+
+	public void setMiniEventTierRewardRetrieveUtils(
+			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils) {
+		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
+	}
+
+	public MiniEventLeaderboardRewardRetrieveUtils getMiniEventLeaderboardRewardRetrieveUtils() {
+		return miniEventLeaderboardRewardRetrieveUtils;
+	}
+
+	public void setMiniEventLeaderboardRewardRetrieveUtils(
+			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils) {
+		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
+	}
+
+	public RewardRetrieveUtils getRewardRetrieveUtil() {
+		return rewardRetrieveUtil;
+	}
+
+	public void setRewardRetrieveUtil(RewardRetrieveUtils rewardRetrieveUtil) {
+		this.rewardRetrieveUtil = rewardRetrieveUtil;
+	}
+
+	public TimeUtils getTimeUtil() {
+		return timeUtil;
+	}
+
+	public void setTimeUtil(TimeUtils timeUtil) {
+		this.timeUtil = timeUtil;
 	}
 
 }

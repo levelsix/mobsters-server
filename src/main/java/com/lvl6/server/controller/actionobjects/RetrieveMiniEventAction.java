@@ -17,6 +17,7 @@ import com.lvl6.info.MiniEventGoal;
 import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
+import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
@@ -30,6 +31,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -52,6 +54,7 @@ public class RetrieveMiniEventAction {
 	private MiniEventRetrieveUtils miniEventRetrieveUtils;
 	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
 	private MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtil;
 	private TimeUtils timeUtil;
 
 	public RetrieveMiniEventAction(String userId, Date now,
@@ -66,6 +69,7 @@ public class RetrieveMiniEventAction {
 			MiniEventRetrieveUtils miniEventRetrieveUtils,
 			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
 			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils,
+			RewardRetrieveUtils rewardRetrieveUtil,
 			TimeUtils timeUtil)
 	{
 		super();
@@ -82,6 +86,7 @@ public class RetrieveMiniEventAction {
 		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
 		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
 		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
+		this.rewardRetrieveUtil = rewardRetrieveUtil;
 		this.timeUtil = timeUtil;
 	}
 
@@ -108,6 +113,7 @@ public class RetrieveMiniEventAction {
 	private Collection<MiniEventTierReward> rewards;
 	private Collection<MiniEventGoal> goals;
 	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
+	private Map<Integer, Reward> rIdToRewardConfig;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
@@ -203,7 +209,6 @@ public class RetrieveMiniEventAction {
 
 		//prove that he didn't complete the clan achievements
 		Integer[] clanAchievementIds = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS;
-		@SuppressWarnings("unchecked")
 		List<Integer> caIdList = java.util.Arrays.asList(clanAchievementIds);
 
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = achievementForUserRetrieveUtil
@@ -371,7 +376,29 @@ public class RetrieveMiniEventAction {
 			log.warn("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
 		}
 
+		aggregateRewardConfig();
+
 		return true;
+	}
+
+	private void aggregateRewardConfig()
+	{
+		rIdToRewardConfig = new HashMap<Integer, Reward>();
+		for (MiniEventTierReward metr : rewards) {
+			int rewardId = metr.getRewardId();
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			rIdToRewardConfig.put(rewardId, r);
+		}
+
+		if (null == leaderboardRewards) {
+			return;
+		}
+
+		for (MiniEventLeaderboardReward melr : leaderboardRewards) {
+			int rewardId = melr.getRewardId();
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			rIdToRewardConfig.put(rewardId, r);
+		}
 	}
 
 	private boolean insertUpdateUserMiniEvent(int meId, int userLvl)
@@ -534,6 +561,14 @@ public class RetrieveMiniEventAction {
 	public void setLeaderboardRewards(
 			Collection<MiniEventLeaderboardReward> leaderboardRewards) {
 		this.leaderboardRewards = leaderboardRewards;
+	}
+
+	public Map<Integer, Reward> getrIdToRewardConfig() {
+		return rIdToRewardConfig;
+	}
+
+	public void setrIdToRewardConfig(Map<Integer, Reward> rIdToRewardConfig) {
+		this.rIdToRewardConfig = rIdToRewardConfig;
 	}
 
 }

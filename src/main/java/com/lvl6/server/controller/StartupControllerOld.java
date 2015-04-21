@@ -57,6 +57,7 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.ResearchForUser;
+import com.lvl6.info.Reward;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
@@ -102,6 +103,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
@@ -166,6 +168,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -419,6 +422,9 @@ public class StartupControllerOld extends EventController {
 
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtil;
 
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
@@ -1592,9 +1598,10 @@ public class StartupControllerOld extends EventController {
 				miniEventRetrieveUtils,
 				miniEventTierRewardRetrieveUtils,
 				miniEventLeaderboardRewardRetrieveUtils,
+				rewardRetrieveUtil,
 				timeUtils);
 
-		
+
 		rmea.execute(rmeaResBuilder);
 //		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
 //				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
@@ -1603,13 +1610,22 @@ public class StartupControllerOld extends EventController {
 		if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
 				null != rmea.getCurActiveMiniEvent())
 		{
+			Map<Integer, Reward> rIdToReward = rmea.getrIdToRewardConfig();
+			Map<Integer, RewardProto> rIdToRewardProto = new HashMap<Integer, RewardProto>();
+			for (int rId : rIdToReward.keySet())
+			{
+				Reward r = rIdToReward.get(rId);
+				RewardProto rp = createInfoProtoUtils.createRewardProto(r);
+				rIdToRewardProto.put(rId, rp);
+			}
 			//get UserMiniEvent info and create the proto to set into resBuilder
 			UserMiniEventProto umep = createInfoProtoUtils
 					.createUserMiniEventProto(
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 							rmea.getMegfus(),
 							rmea.getLvlEntered(), rmea.getRewards(),
-							rmea.getGoals(), rmea.getLeaderboardRewards());
+							rmea.getGoals(), rmea.getLeaderboardRewards(),
+							rIdToReward, rIdToRewardProto);
 			resBuilder.setUserMiniEvent(umep);
 		}
 
@@ -1722,7 +1738,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 	}
-	
+
 	//TODO: Get rid of this copy pasted code
 	public void setBuilderPackForUser(Builder resBuilder, User user, Set<Integer> userItemIds) {
 		boolean hasExtraBuilder = false;
@@ -1850,9 +1866,9 @@ public class StartupControllerOld extends EventController {
 	}
 
 	public int priceForSalesPackToBeShown(int userSalesValue) {
-		
+
 		int newMinPrice = 0;
-		
+
 		if(userSalesValue == 0) {
 			newMinPrice = 5;
 		}
@@ -1868,7 +1884,7 @@ public class StartupControllerOld extends EventController {
 		else if(userSalesValue > 3) {
 			newMinPrice = 100;
 		}
-		
+
 		return newMinPrice;
 	}
 

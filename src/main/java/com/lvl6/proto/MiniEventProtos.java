@@ -4704,13 +4704,17 @@ public final class MiniEventProtos {
     int getMefplId();
 
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasRewardId();
+    boolean hasReward();
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    int getRewardId();
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
 
     /**
      * <code>optional int32 tierLvl = 4;</code>
@@ -4791,9 +4795,17 @@ public final class MiniEventProtos {
               mefplId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              rewardId_ = input.readInt32();
               break;
             }
             case 32: {
@@ -4871,19 +4883,25 @@ public final class MiniEventProtos {
       return mefplId_;
     }
 
-    public static final int REWARDID_FIELD_NUMBER = 3;
-    private int rewardId_;
+    public static final int REWARD_FIELD_NUMBER = 3;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public boolean hasRewardId() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public int getRewardId() {
-      return rewardId_;
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     public static final int TIERLVL_FIELD_NUMBER = 4;
@@ -4912,7 +4930,7 @@ public final class MiniEventProtos {
     private void initFields() {
       metrId_ = 0;
       mefplId_ = 0;
-      rewardId_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       tierLvl_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -4935,7 +4953,7 @@ public final class MiniEventProtos {
         output.writeInt32(2, mefplId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, rewardId_);
+        output.writeMessage(3, reward_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, tierLvl_);
@@ -4959,7 +4977,7 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, rewardId_);
+          .computeMessageSize(3, reward_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -5074,6 +5092,7 @@ public final class MiniEventProtos {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5086,7 +5105,11 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         mefplId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        rewardId_ = 0;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
         tierLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -5129,7 +5152,11 @@ public final class MiniEventProtos {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.rewardId_ = rewardId_;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -5156,8 +5183,8 @@ public final class MiniEventProtos {
         if (other.hasMefplId()) {
           setMefplId(other.getMefplId());
         }
-        if (other.hasRewardId()) {
-          setRewardId(other.getRewardId());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         if (other.hasTierLvl()) {
           setTierLvl(other.getTierLvl());
@@ -5253,36 +5280,120 @@ public final class MiniEventProtos {
         return this;
       }
 
-      private int rewardId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public boolean hasRewardId() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public int getRewardId() {
-        return rewardId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setRewardId(int value) {
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000004;
-        rewardId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder clearRewardId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        rewardId_ = 0;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       private int tierLvl_ ;
@@ -5367,13 +5478,17 @@ public final class MiniEventProtos {
     int getMiniEventId();
 
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    boolean hasRewardId();
+    boolean hasReward();
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    int getRewardId();
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
 
     /**
      * <code>optional int32 leaderboardMinPos = 4;</code>
@@ -5454,9 +5569,17 @@ public final class MiniEventProtos {
               miniEventId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              rewardId_ = input.readInt32();
               break;
             }
             case 32: {
@@ -5534,19 +5657,25 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
-    public static final int REWARDID_FIELD_NUMBER = 3;
-    private int rewardId_;
+    public static final int REWARD_FIELD_NUMBER = 3;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public boolean hasRewardId() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 rewardId = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
-    public int getRewardId() {
-      return rewardId_;
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     public static final int LEADERBOARDMINPOS_FIELD_NUMBER = 4;
@@ -5575,7 +5704,7 @@ public final class MiniEventProtos {
     private void initFields() {
       melrId_ = 0;
       miniEventId_ = 0;
-      rewardId_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       leaderboardMinPos_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -5598,7 +5727,7 @@ public final class MiniEventProtos {
         output.writeInt32(2, miniEventId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, rewardId_);
+        output.writeMessage(3, reward_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, leaderboardMinPos_);
@@ -5622,7 +5751,7 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, rewardId_);
+          .computeMessageSize(3, reward_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -5737,6 +5866,7 @@ public final class MiniEventProtos {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5749,7 +5879,11 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         miniEventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        rewardId_ = 0;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
         leaderboardMinPos_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -5792,7 +5926,11 @@ public final class MiniEventProtos {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.rewardId_ = rewardId_;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -5819,8 +5957,8 @@ public final class MiniEventProtos {
         if (other.hasMiniEventId()) {
           setMiniEventId(other.getMiniEventId());
         }
-        if (other.hasRewardId()) {
-          setRewardId(other.getRewardId());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         if (other.hasLeaderboardMinPos()) {
           setLeaderboardMinPos(other.getLeaderboardMinPos());
@@ -5916,36 +6054,120 @@ public final class MiniEventProtos {
         return this;
       }
 
-      private int rewardId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public boolean hasRewardId() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public int getRewardId() {
-        return rewardId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder setRewardId(int value) {
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000004;
-        rewardId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 rewardId = 3;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
        */
-      public Builder clearRewardId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        rewardId_ = 0;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       private int leaderboardMinPos_ ;
@@ -8130,54 +8352,56 @@ public final class MiniEventProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017MiniEvent.proto\022\016com.lvl6.proto\"\324\002\n\016Mi" +
-      "niEventProto\022\023\n\013miniEventId\030\001 \001(\005\022\032\n\022min" +
-      "iEventStartTime\030\002 \001(\003\022\030\n\020miniEventEndTim" +
-      "e\030\003 \001(\003\022@\n\nlvlEntered\030\004 \001(\0132,.com.lvl6.p" +
-      "roto.MiniEventForPlayerLevelProto\0221\n\005goa" +
-      "ls\030\005 \003(\0132\".com.lvl6.proto.MiniEventGoalP" +
-      "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
-      "vl6.proto.MiniEventLeaderboardRewardProt" +
-      "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
-      "(\t\022\014\n\004icon\030\n \001(\t\"\276\005\n\022MiniEventGoalProto\022",
-      "\027\n\017miniEventGoalId\030\001 \001(\005\022\023\n\013miniEventId\030" +
-      "\002 \001(\005\022O\n\010goalType\030\003 \001(\01624.com.lvl6.proto" +
-      ".MiniEventGoalProto.MiniEventGoalType:\007N" +
-      "O_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(" +
-      "\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n\021actionDescrip" +
-      "tion\030\007 \001(\t\"\324\003\n\021MiniEventGoalType\022\013\n\007NO_G" +
-      "OAL\020\001\022\032\n\026GAIN_BUILDING_STRENGTH\020\002\022\032\n\026GAI" +
-      "N_RESEARCH_STRENGTH\020\003\022\023\n\017SPIN_BASIC_GRAB" +
-      "\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005\022\022\n\016ENHANCE_CO" +
-      "MMON\020\006\022\020\n\014ENHANCE_RARE\020\007\022\021\n\rENHANCE_SUPE",
-      "R\020\010\022\021\n\rENHANCE_ULTRA\020\t\022\020\n\014ENHANCE_EPIC\020\n" +
-      "\022\r\n\tCLAN_HELP\020\013\022\017\n\013CLAN_DONATE\020\014\022\031\n\025BATT" +
-      "LE_AVENGE_REQUEST\020\r\022\025\n\021BATTLE_AVENGE_WIN" +
-      "\020\016\022\026\n\022BATTLE_REVENGE_WIN\020\017\022\016\n\nSTEAL_CASH" +
-      "\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP_CATCH_COMMON\020\022\022" +
-      "\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017PVP_CATCH_SUPER\020\024" +
-      "\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n\016PVP_CATCH_EPIC\020" +
-      "\026\"\362\001\n\034MiniEventForPlayerLevelProto\022\017\n\007me" +
-      "fplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014play" +
-      "erLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025\n\r",
-      "tierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006 \001" +
-      "(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewards\030\010" +
-      " \003(\0132(.com.lvl6.proto.MiniEventTierRewar" +
-      "dProto\"^\n\030MiniEventTierRewardProto\022\016\n\006me" +
-      "trId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewardId\030" +
-      "\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEventLeade" +
-      "rboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013min" +
-      "iEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n\021lead" +
-      "erboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEventPro" +
-      "to\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(",
-      "\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeemed\030\004 " +
-      "\001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tierThre" +
-      "eRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132\036.com" +
-      ".lvl6.proto.MiniEventProto\0225\n\005goals\030\010 \003(" +
-      "\0132&.com.lvl6.proto.UserMiniEventGoalProt" +
-      "o\"U\n\026UserMiniEventGoalProto\022\020\n\010userUuid\030" +
-      "\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010progre" +
-      "ss\030\003 \001(\005B\021B\017MiniEventProtos"
+      "\n\017MiniEvent.proto\022\016com.lvl6.proto\032\014Rewar" +
+      "d.proto\"\324\002\n\016MiniEventProto\022\023\n\013miniEventI" +
+      "d\030\001 \001(\005\022\032\n\022miniEventStartTime\030\002 \001(\003\022\030\n\020m" +
+      "iniEventEndTime\030\003 \001(\003\022@\n\nlvlEntered\030\004 \001(" +
+      "\0132,.com.lvl6.proto.MiniEventForPlayerLev" +
+      "elProto\0221\n\005goals\030\005 \003(\0132\".com.lvl6.proto." +
+      "MiniEventGoalProto\022K\n\022leaderboardRewards" +
+      "\030\006 \003(\0132/.com.lvl6.proto.MiniEventLeaderb" +
+      "oardRewardProto\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 " +
+      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\276\005\n\022MiniE",
+      "ventGoalProto\022\027\n\017miniEventGoalId\030\001 \001(\005\022\023" +
+      "\n\013miniEventId\030\002 \001(\005\022O\n\010goalType\030\003 \001(\01624." +
+      "com.lvl6.proto.MiniEventGoalProto.MiniEv" +
+      "entGoalType:\007NO_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n" +
+      "\010goalDesc\030\005 \001(\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n" +
+      "\021actionDescription\030\007 \001(\t\"\324\003\n\021MiniEventGo" +
+      "alType\022\013\n\007NO_GOAL\020\001\022\032\n\026GAIN_BUILDING_STR" +
+      "ENGTH\020\002\022\032\n\026GAIN_RESEARCH_STRENGTH\020\003\022\023\n\017S" +
+      "PIN_BASIC_GRAB\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005" +
+      "\022\022\n\016ENHANCE_COMMON\020\006\022\020\n\014ENHANCE_RARE\020\007\022\021",
+      "\n\rENHANCE_SUPER\020\010\022\021\n\rENHANCE_ULTRA\020\t\022\020\n\014" +
+      "ENHANCE_EPIC\020\n\022\r\n\tCLAN_HELP\020\013\022\017\n\013CLAN_DO" +
+      "NATE\020\014\022\031\n\025BATTLE_AVENGE_REQUEST\020\r\022\025\n\021BAT" +
+      "TLE_AVENGE_WIN\020\016\022\026\n\022BATTLE_REVENGE_WIN\020\017" +
+      "\022\016\n\nSTEAL_CASH\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP_C" +
+      "ATCH_COMMON\020\022\022\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017PVP" +
+      "_CATCH_SUPER\020\024\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n\016P" +
+      "VP_CATCH_EPIC\020\026\"\362\001\n\034MiniEventForPlayerLe" +
+      "velProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEventId" +
+      "\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014playerLv",
+      "lMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtie" +
+      "rTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(" +
+      "\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.proto.Mini" +
+      "EventTierRewardProto\"y\n\030MiniEventTierRew" +
+      "ardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(" +
+      "\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.proto.Rewar" +
+      "dProto\022\017\n\007tierLvl\030\004 \001(\005\"\216\001\n\037MiniEventLea" +
+      "derboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013m" +
+      "iniEventId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.l" +
+      "vl6.proto.RewardProto\022\031\n\021leaderboardMinP",
+      "os\030\004 \001(\005\"\203\002\n\022UserMiniEventProto\022\023\n\013miniE" +
+      "ventId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\017\n\007userLv" +
+      "l\030\003 \001(\005\022\027\n\017tierOneRedeemed\030\004 \001(\010\022\027\n\017tier" +
+      "TwoRedeemed\030\005 \001(\010\022\031\n\021tierThreeRedeemed\030\006" +
+      " \001(\010\0221\n\tminiEvent\030\007 \001(\0132\036.com.lvl6.proto" +
+      ".MiniEventProto\0225\n\005goals\030\010 \003(\0132&.com.lvl" +
+      "6.proto.UserMiniEventGoalProto\"U\n\026UserMi" +
+      "niEventGoalProto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017mi" +
+      "niEventGoalId\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021B" +
+      "\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8190,6 +8414,7 @@ public final class MiniEventProtos {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.RewardsProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_MiniEventProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -8214,13 +8439,13 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_MiniEventTierRewardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor,
-        new java.lang.String[] { "MetrId", "MefplId", "RewardId", "TierLvl", });
+        new java.lang.String[] { "MetrId", "MefplId", "Reward", "TierLvl", });
     internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor,
-        new java.lang.String[] { "MelrId", "MiniEventId", "RewardId", "LeaderboardMinPos", });
+        new java.lang.String[] { "MelrId", "MiniEventId", "Reward", "LeaderboardMinPos", });
     internal_static_com_lvl6_proto_UserMiniEventProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable = new
@@ -8233,6 +8458,7 @@ public final class MiniEventProtos {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor,
         new java.lang.String[] { "UserUuid", "MiniEventGoalId", "Progress", });
+    com.lvl6.proto.RewardsProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
