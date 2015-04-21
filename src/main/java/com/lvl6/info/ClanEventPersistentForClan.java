@@ -17,7 +17,6 @@ public class ClanEventPersistentForClan implements Serializable {
 
 	public ClanEventPersistentForClan() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ClanEventPersistentForClan(String clanId, int clanEventPersistentId,

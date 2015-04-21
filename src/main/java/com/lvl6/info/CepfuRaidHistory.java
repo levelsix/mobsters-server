@@ -21,7 +21,6 @@ public class CepfuRaidHistory implements Serializable {
 
 	public CepfuRaidHistory() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CepfuRaidHistory(String userId, Date timeOfEntry, String clanId,

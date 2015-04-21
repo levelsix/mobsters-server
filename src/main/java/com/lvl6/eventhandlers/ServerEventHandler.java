@@ -22,7 +22,6 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.ServerMessage;
 
 public class ServerEventHandler implements MessageListener<ServerMessage>,
@@ -55,18 +54,6 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 
 	public void setTopic(ITopic<ServerMessage> topic) {
 		this.topic = topic;
-	}
-
-	@Resource
-	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils;
-
-	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtils() {
-		return monsterForPvpRetrieveUtils;
-	}
-
-	public void setMonsterForPvpRetrieveUtils(
-			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils) {
-		this.monsterForPvpRetrieveUtils = monsterForPvpRetrieveUtils;
 	}
 
 	@Autowired
@@ -110,17 +97,12 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 		if (msg.getMessageObject().equals(ServerMessage.RELOAD_STATIC_DATA)) {
 			log.info("Reloading all static data");
 			reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
-			reloadStaticData();
 			reloadRecommendedClans();
 			getStaticDataReloadDone().publish(
 					ServerMessage.DONE_RELOADING_STATIC_DATA);
 		}
 	}
 
-	//TODO: FIGURE OUT CLEANER WAY TO DO THIS SETTING STATIC DATA
-	public void reloadStaticData() {
-		getMonsterForPvpRetrieveUtils().reload();
-	}
 
 	public void reloadRecommendedClans() {
 		log.info("recalculating recommended clans");
@@ -158,7 +140,6 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 
 			log.info("finished calculating recommended clans");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error("failed to calculate recommended clans", e);
 		}
 

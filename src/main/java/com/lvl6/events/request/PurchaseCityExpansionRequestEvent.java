@@ -49,3 +49,4 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
 	}
 
 }
+//TODO: CONSIDER DELETE
