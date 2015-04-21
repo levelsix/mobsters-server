@@ -71,7 +71,7 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-
+	
 	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
 
