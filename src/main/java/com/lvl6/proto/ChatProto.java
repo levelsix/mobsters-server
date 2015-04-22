@@ -105,25 +105,25 @@ public final class ChatProto {
   public enum TranslateLanguages
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>ARABIC = 1;</code>
+     * <code>ENGLISH = 1;</code>
      */
-    ARABIC(0, 1),
+    ENGLISH(0, 1),
     /**
-     * <code>ENGLISH = 2;</code>
+     * <code>FRENCH = 2;</code>
      */
-    ENGLISH(1, 2),
+    FRENCH(1, 2),
     /**
-     * <code>FRENCH = 3;</code>
+     * <code>GERMAN = 3;</code>
      */
-    FRENCH(2, 3),
+    GERMAN(2, 3),
     /**
-     * <code>GERMAN = 4;</code>
+     * <code>SPANISH = 4;</code>
      */
-    GERMAN(3, 4),
+    SPANISH(3, 4),
     /**
-     * <code>SPANISH = 5;</code>
+     * <code>ARABIC = 5;</code>
      */
-    SPANISH(4, 5),
+    ARABIC(4, 5),
     /**
      * <code>RUSSIAN = 6;</code>
      */
@@ -135,25 +135,25 @@ public final class ChatProto {
     ;
 
     /**
-     * <code>ARABIC = 1;</code>
+     * <code>ENGLISH = 1;</code>
      */
-    public static final int ARABIC_VALUE = 1;
+    public static final int ENGLISH_VALUE = 1;
     /**
-     * <code>ENGLISH = 2;</code>
+     * <code>FRENCH = 2;</code>
      */
-    public static final int ENGLISH_VALUE = 2;
+    public static final int FRENCH_VALUE = 2;
     /**
-     * <code>FRENCH = 3;</code>
+     * <code>GERMAN = 3;</code>
      */
-    public static final int FRENCH_VALUE = 3;
+    public static final int GERMAN_VALUE = 3;
     /**
-     * <code>GERMAN = 4;</code>
+     * <code>SPANISH = 4;</code>
      */
-    public static final int GERMAN_VALUE = 4;
+    public static final int SPANISH_VALUE = 4;
     /**
-     * <code>SPANISH = 5;</code>
+     * <code>ARABIC = 5;</code>
      */
-    public static final int SPANISH_VALUE = 5;
+    public static final int ARABIC_VALUE = 5;
     /**
      * <code>RUSSIAN = 6;</code>
      */
@@ -168,11 +168,11 @@ public final class ChatProto {
 
     public static TranslateLanguages valueOf(int value) {
       switch (value) {
-        case 1: return ARABIC;
-        case 2: return ENGLISH;
-        case 3: return FRENCH;
-        case 4: return GERMAN;
-        case 5: return SPANISH;
+        case 1: return ENGLISH;
+        case 2: return FRENCH;
+        case 3: return GERMAN;
+        case 4: return SPANISH;
+        case 5: return ARABIC;
         case 6: return RUSSIAN;
         case 7: return NO_TRANSLATION;
         default: return null;
@@ -680,7 +680,7 @@ public final class ChatProto {
       recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       timeOfPost_ = 0L;
       content_ = "";
-      originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       translatedContent_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -892,7 +892,7 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         content_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000020);
         if (translatedContentBuilder_ == null) {
           translatedContent_ = java.util.Collections.emptyList();
@@ -1476,7 +1476,7 @@ public final class ChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages originalContentLanguage = 7;</code>
        */
@@ -1506,7 +1506,7 @@ public final class ChatProto {
        */
       public Builder clearOriginalContentLanguage() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -2764,7 +2764,7 @@ public final class ChatProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       timeOfChat_ = 0L;
-      contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       content_ = "";
       translatedContent_ = java.util.Collections.emptyList();
       isAdmin_ = false;
@@ -2968,7 +2968,7 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         timeOfChat_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000004);
         content_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -3286,7 +3286,7 @@ public final class ChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
        *
@@ -3332,7 +3332,7 @@ public final class ChatProto {
        */
       public Builder clearContentLanguage() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -3966,7 +3966,7 @@ public final class ChatProto {
     }
 
     private void initFields() {
-      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       text_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -4122,7 +4122,7 @@ public final class ChatProto {
 
       public Builder clear() {
         super.clear();
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000001);
         text_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -4213,7 +4213,7 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages language = 1;</code>
        */
@@ -4243,7 +4243,7 @@ public final class ChatProto {
        */
       public Builder clearLanguage() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -4566,7 +4566,7 @@ public final class ChatProto {
     }
 
     private void initFields() {
-      globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       privateDefaultLanguage_ = java.util.Collections.emptyList();
       globalTranslateOn_ = false;
     }
@@ -4731,7 +4731,7 @@ public final class ChatProto {
 
       public Builder clear() {
         super.clear();
-        globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000001);
         if (privateDefaultLanguageBuilder_ == null) {
           privateDefaultLanguage_ = java.util.Collections.emptyList();
@@ -4861,7 +4861,7 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages globalDefaultLanguage = 1;</code>
        */
@@ -4891,7 +4891,7 @@ public final class ChatProto {
        */
       public Builder clearGlobalDefaultLanguage() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -5466,7 +5466,7 @@ public final class ChatProto {
     private void initFields() {
       recipientUserId_ = "";
       senderUserId_ = "";
-      defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       translateOn_ = false;
     }
     private byte memoizedIsInitialized = -1;
@@ -5640,7 +5640,7 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         senderUserId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000004);
         translateOn_ = false;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -5899,7 +5899,7 @@ public final class ChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages defaultLanguage = 3;</code>
        */
@@ -5929,7 +5929,7 @@ public final class ChatProto {
        */
       public Builder clearDefaultLanguage() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -6047,8 +6047,8 @@ public final class ChatProto {
       "\001(\0162\".com.lvl6.proto.TranslateLanguages\022" +
       "\023\n\013translateOn\030\004 \001(\010*.\n\tChatScope\022\n\n\006GLO",
       "BAL\020\001\022\010\n\004CLAN\020\002\022\013\n\007PRIVATE\020\003*s\n\022Translat" +
-      "eLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022\n\n\006F" +
-      "RENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RUSS" +
+      "eLanguages\022\013\n\007ENGLISH\020\001\022\n\n\006FRENCH\020\002\022\n\n\006G" +
+      "ERMAN\020\003\022\013\n\007SPANISH\020\004\022\n\n\006ARABIC\020\005\022\013\n\007RUSS" +
       "IAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

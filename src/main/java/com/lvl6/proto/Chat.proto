@@ -49,11 +49,11 @@ enum ChatScope {
 //-------------------------------------------------------------------------------------
 
 enum TranslateLanguages {
-	ARABIC = 1;
-	ENGLISH = 2;
-	FRENCH = 3;
-	GERMAN = 4;
-	SPANISH = 5;
+	ENGLISH = 1;
+	FRENCH = 2;
+	GERMAN = 3;
+	SPANISH = 4;
+	ARABIC = 5;
 	RUSSIAN = 6;
 	NO_TRANSLATION = 7;
 }

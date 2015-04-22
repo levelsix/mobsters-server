@@ -1780,7 +1780,7 @@ public final class EventChatProto {
       scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       chatMessage_ = "";
       clientTime_ = 0L;
-      globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1969,7 +1969,7 @@ public final class EventChatProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -2342,7 +2342,7 @@ public final class EventChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages globalLanguage = 5;</code>
        */
@@ -2372,7 +2372,7 @@ public final class EventChatProto {
        */
       public Builder clearGlobalLanguage() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        globalLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -6587,7 +6587,7 @@ public final class EventChatProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       otherUserUuid_ = "";
       beforePrivateChatId_ = 0;
-      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6767,7 +6767,7 @@ public final class EventChatProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         beforePrivateChatId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -7122,7 +7122,7 @@ public final class EventChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
        */
@@ -7152,7 +7152,7 @@ public final class EventChatProto {
        */
       public Builder clearLanguage() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
@@ -8874,7 +8874,7 @@ public final class EventChatProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       chatType_ = com.lvl6.proto.ChatProto.ChatScope.GLOBAL;
       otherUserUuid_ = "";
-      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       messagesToBeTranslated_ = java.util.Collections.emptyList();
       translateOn_ = false;
     }
@@ -9071,7 +9071,7 @@ public final class EventChatProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         otherUserUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         bitField0_ = (bitField0_ & ~0x00000008);
         if (messagesToBeTranslatedBuilder_ == null) {
           messagesToBeTranslated_ = java.util.Collections.emptyList();
@@ -9491,7 +9491,7 @@ public final class EventChatProto {
         return this;
       }
 
-      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+      private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages language = 4;</code>
        */
@@ -9521,7 +9521,7 @@ public final class EventChatProto {
        */
       public Builder clearLanguage() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
+        language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
         onChanged();
         return this;
       }
