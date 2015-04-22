@@ -140,13 +140,14 @@ public class CollectClanGiftsController extends EventController {
 			CollectClanGiftsResponseEvent resEvent = new CollectClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
+			resBuilder.setReward(uusa.getUrp());
+
 			resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				
 				log.info("reward proto for collect: " + uusa.getUrp());
-				resBuilder.setReward(uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
