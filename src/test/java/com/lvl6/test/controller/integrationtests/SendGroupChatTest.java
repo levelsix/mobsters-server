@@ -21,7 +21,7 @@ import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.ChatProto.GroupChatScope;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -154,7 +154,7 @@ public class SendGroupChatTest {
 				.newBuilder();
 
 		sgcrpb.setSender(mup);
-		sgcrpb.setScope(GroupChatScope.GLOBAL);
+		sgcrpb.setScope(ChatScope.GLOBAL);
 		sgcrpb.setChatMessage("this is a test");
 		sgcrpb.setClientTime(new Date().getTime());
 		sgcrpb.setGlobalLanguage(TranslateLanguages.ENGLISH);

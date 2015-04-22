@@ -16,8 +16,8 @@ import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendAdminMessageResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.GroupChatScope;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -106,12 +106,12 @@ public class MessagingUtil {
 				samrp.getSenderUuid());
 		ev.setSendAdminMessageResponseProto(samrp.build());
 		eventWriter.processGlobalChatResponseEvent(ev);
-		//send regular global chat
+		//send regular global˙ chat
 		log.info("Sending admin message global chat");
 		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 				.newBuilder();
 		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
-		final GroupChatScope scope = GroupChatScope.GLOBAL;
+		final ChatScope scope = ChatScope.GLOBAL;
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
 		chatProto.setChatMessage(message);
 		chatProto.setSender(senderProto);
