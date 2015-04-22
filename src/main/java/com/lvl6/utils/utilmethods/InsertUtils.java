@@ -902,17 +902,9 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, translateOn);
 
 		//this is for the case when there is already an existing row
-		absoluteUpdates.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
-				receiverId);
-		absoluteUpdates.put(
-				DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID,
-				senderId);
 		absoluteUpdates.put(
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE,
 				language);
-		absoluteUpdates.put(
-				DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE,
-				chatType);
 		absoluteUpdates.put(
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
 				translateOn);
@@ -920,7 +912,7 @@ public class InsertUtils implements InsertUtil {
 		int numChanged = DBConnection.get().insertOnDuplicateKeyUpdate(tableName, insertParams,
 				relativeUpdates, absoluteUpdates);
 		
-		if (numChanged != 1) {
+		if (numChanged != 1 || numChanged != 2) {
 			return false;
 		}
 		return true;
