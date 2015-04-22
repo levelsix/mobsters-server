@@ -40,8 +40,8 @@ message GroupChatMessageProto {
 //-------------------------------------------------------------------------------------
 
 enum ChatScope {
-	CLAN = 1;
-	GLOBAL = 2;
+	GLOBAL = 1;
+	CLAN = 2;
 	PRIVATE = 3;
 }
 

@@ -8872,7 +8872,7 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
+      chatType_ = com.lvl6.proto.ChatProto.ChatScope.GLOBAL;
       otherUserUuid_ = "";
       language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ARABIC;
       messagesToBeTranslated_ = java.util.Collections.emptyList();
@@ -9067,7 +9067,7 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
+        chatType_ = com.lvl6.proto.ChatProto.ChatScope.GLOBAL;
         bitField0_ = (bitField0_ & ~0x00000002);
         otherUserUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -9380,7 +9380,7 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ChatProto.ChatScope chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
+      private com.lvl6.proto.ChatProto.ChatScope chatType_ = com.lvl6.proto.ChatProto.ChatScope.GLOBAL;
       /**
        * <code>optional .com.lvl6.proto.ChatScope chatType = 2;</code>
        */
@@ -9410,7 +9410,7 @@ public final class EventChatProto {
        */
       public Builder clearChatType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        chatType_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
+        chatType_ = com.lvl6.proto.ChatProto.ChatScope.GLOBAL;
         onChanged();
         return this;
       }

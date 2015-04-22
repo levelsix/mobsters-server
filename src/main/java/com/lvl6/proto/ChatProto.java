@@ -14,13 +14,13 @@ public final class ChatProto {
   public enum ChatScope
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>CLAN = 1;</code>
+     * <code>GLOBAL = 1;</code>
      */
-    CLAN(0, 1),
+    GLOBAL(0, 1),
     /**
-     * <code>GLOBAL = 2;</code>
+     * <code>CLAN = 2;</code>
      */
-    GLOBAL(1, 2),
+    CLAN(1, 2),
     /**
      * <code>PRIVATE = 3;</code>
      */
@@ -28,13 +28,13 @@ public final class ChatProto {
     ;
 
     /**
-     * <code>CLAN = 1;</code>
+     * <code>GLOBAL = 1;</code>
      */
-    public static final int CLAN_VALUE = 1;
+    public static final int GLOBAL_VALUE = 1;
     /**
-     * <code>GLOBAL = 2;</code>
+     * <code>CLAN = 2;</code>
      */
-    public static final int GLOBAL_VALUE = 2;
+    public static final int CLAN_VALUE = 2;
     /**
      * <code>PRIVATE = 3;</code>
      */
@@ -45,8 +45,8 @@ public final class ChatProto {
 
     public static ChatScope valueOf(int value) {
       switch (value) {
-        case 1: return CLAN;
-        case 2: return GLOBAL;
+        case 1: return GLOBAL;
+        case 2: return CLAN;
         case 3: return PRIVATE;
         default: return null;
       }
@@ -6045,8 +6045,8 @@ public final class ChatProto {
       "nguageProto\022\027\n\017recipientUserId\030\001 \001(\t\022\024\n\014" +
       "senderUserId\030\002 \001(\t\022;\n\017defaultLanguage\030\003 " +
       "\001(\0162\".com.lvl6.proto.TranslateLanguages\022" +
-      "\023\n\013translateOn\030\004 \001(\010*.\n\tChatScope\022\010\n\004CLA",
-      "N\020\001\022\n\n\006GLOBAL\020\002\022\013\n\007PRIVATE\020\003*s\n\022Translat" +
+      "\023\n\013translateOn\030\004 \001(\010*.\n\tChatScope\022\n\n\006GLO",
+      "BAL\020\001\022\010\n\004CLAN\020\002\022\013\n\007PRIVATE\020\003*s\n\022Translat" +
       "eLanguages\022\n\n\006ARABIC\020\001\022\013\n\007ENGLISH\020\002\022\n\n\006F" +
       "RENCH\020\003\022\n\n\006GERMAN\020\004\022\013\n\007SPANISH\020\005\022\013\n\007RUSS" +
       "IAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
