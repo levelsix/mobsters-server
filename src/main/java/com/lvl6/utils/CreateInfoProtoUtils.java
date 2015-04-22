@@ -5272,6 +5272,8 @@ public class CreateInfoProtoUtils {
 		Reward r = rewardRetrieveUtils.getRewardById(ucg.getRewardId());
 		b.setReward(createRewardProto(r));
 
+		b.setHasBeenCollected(ucg.isHasBeenCollected());
+		
 		return b.build();
 	}
 

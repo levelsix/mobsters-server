@@ -971,6 +971,15 @@ public final class ClanGiftsProto {
      * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
      */
     com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
+
+    /**
+     * <code>optional bool hasBeenCollected = 7;</code>
+     */
+    boolean hasHasBeenCollected();
+    /**
+     * <code>optional bool hasBeenCollected = 7;</code>
+     */
+    boolean getHasBeenCollected();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserClanGiftProto}
@@ -1078,6 +1087,11 @@ public final class ClanGiftsProto {
                 reward_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              hasBeenCollected_ = input.readBool();
               break;
             }
           }
@@ -1290,6 +1304,21 @@ public final class ClanGiftsProto {
       return reward_;
     }
 
+    public static final int HASBEENCOLLECTED_FIELD_NUMBER = 7;
+    private boolean hasBeenCollected_;
+    /**
+     * <code>optional bool hasBeenCollected = 7;</code>
+     */
+    public boolean hasHasBeenCollected() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional bool hasBeenCollected = 7;</code>
+     */
+    public boolean getHasBeenCollected() {
+      return hasBeenCollected_;
+    }
+
     private void initFields() {
       userClanGiftId_ = "";
       receiverUserId_ = "";
@@ -1297,6 +1326,7 @@ public final class ClanGiftsProto {
       clanGift_ = com.lvl6.proto.ClanGiftsProto.ClanGiftProto.getDefaultInstance();
       timeReceived_ = 0L;
       reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      hasBeenCollected_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1328,6 +1358,9 @@ public final class ClanGiftsProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(6, reward_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBool(7, hasBeenCollected_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1361,6 +1394,10 @@ public final class ClanGiftsProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, reward_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, hasBeenCollected_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1506,6 +1543,8 @@ public final class ClanGiftsProto {
           rewardBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
+        hasBeenCollected_ = false;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -1570,6 +1609,10 @@ public final class ClanGiftsProto {
         } else {
           result.reward_ = rewardBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.hasBeenCollected_ = hasBeenCollected_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1607,6 +1650,9 @@ public final class ClanGiftsProto {
         }
         if (other.hasReward()) {
           mergeReward(other.getReward());
+        }
+        if (other.hasHasBeenCollected()) {
+          setHasBeenCollected(other.getHasBeenCollected());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2183,6 +2229,38 @@ public final class ClanGiftsProto {
         return rewardBuilder_;
       }
 
+      private boolean hasBeenCollected_ ;
+      /**
+       * <code>optional bool hasBeenCollected = 7;</code>
+       */
+      public boolean hasHasBeenCollected() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional bool hasBeenCollected = 7;</code>
+       */
+      public boolean getHasBeenCollected() {
+        return hasBeenCollected_;
+      }
+      /**
+       * <code>optional bool hasBeenCollected = 7;</code>
+       */
+      public Builder setHasBeenCollected(boolean value) {
+        bitField0_ |= 0x00000040;
+        hasBeenCollected_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool hasBeenCollected = 7;</code>
+       */
+      public Builder clearHasBeenCollected() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        hasBeenCollected_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserClanGiftProto)
     }
 
@@ -2218,14 +2296,14 @@ public final class ClanGiftsProto {
       "oto\"\214\001\n\rClanGiftProto\022\022\n\nclanGiftId\030\001 \001(" +
       "\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030" +
       "\003 \001(\005\022\021\n\timageName\030\004 \001(\t\022(\n\007quality\030\005 \001(" +
-      "\0162\027.com.lvl6.proto.Quality\"\355\001\n\021UserClanG" +
+      "\0162\027.com.lvl6.proto.Quality\"\207\002\n\021UserClanG" +
       "iftProto\022\026\n\016userClanGiftId\030\001 \001(\t\022\026\n\016rece" +
       "iverUserId\030\002 \001(\t\0224\n\ngifterUser\030\003 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022/\n\010clanGi" +
       "ft\030\004 \001(\0132\035.com.lvl6.proto.ClanGiftProto\022",
       "\024\n\014timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033." +
-      "com.lvl6.proto.RewardProtoB\020B\016ClanGiftsP" +
-      "roto"
+      "com.lvl6.proto.RewardProto\022\030\n\020hasBeenCol" +
+      "lected\030\007 \001(\010B\020B\016ClanGiftsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2253,7 +2331,7 @@ public final class ClanGiftsProto {
     internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
-        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUser", "ClanGift", "TimeReceived", "Reward", });
+        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUser", "ClanGift", "TimeReceived", "Reward", "HasBeenCollected", });
     com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();

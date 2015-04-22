@@ -30,4 +30,5 @@ message UserClanGiftProto {
 	optional ClanGiftProto clanGift = 4;
 	optional int64 timeReceived = 5; //when the gift gets sent out to everyone
 	optional RewardProto reward = 6;
+	optional bool hasBeenCollected = 7;
 }
