@@ -9,18 +9,15 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -46,9 +43,8 @@ import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
-import com.lvl6.properties.IAPValues;
+import com.lvl6.properties.IAPValues
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
-import com.lvl6.proto.ChatProto.ChatType
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto
 import com.lvl6.proto.ChatProto.GroupChatMessageProto
 import com.lvl6.proto.ClanProto.ClanDataProto
@@ -62,7 +58,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
-import com.lvl6.proto.SalesProto.SalesPackageProto;
+import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
@@ -149,8 +145,8 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
+import com.lvl6.proto.ChatProto.ChatScope
 
 case class StartupData(
       resBuilder:Builder, 
@@ -504,7 +500,7 @@ class StartupService extends LazyLogging{
               playerId, 
               null,
               ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
-              ChatType.GLOBAL_CHAT.toString(),
+              ChatScope.GLOBAL.toString(),
               ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
           tsfuListIsNull = true;
         }
