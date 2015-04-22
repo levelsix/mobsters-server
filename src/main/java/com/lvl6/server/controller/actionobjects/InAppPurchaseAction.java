@@ -134,7 +134,7 @@ public class InAppPurchaseAction {
 			gemChange = IAPValues.getDiamondsForPackageName(packageName);
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
-					user, realLifeCashCost)) {
+					user, realLifeCashCost, null)) {
 				log.error(
 						"problem with logging in-app purchase history for receipt:{} and user {}",
 						receiptFromApple.toString(4), user);

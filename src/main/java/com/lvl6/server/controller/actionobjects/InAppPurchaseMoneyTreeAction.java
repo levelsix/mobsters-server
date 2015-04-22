@@ -208,7 +208,7 @@ public class InAppPurchaseMoneyTreeAction {
 			gemChange = 0;
 
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
-					user, realLifeCashCost)) {
+					user, realLifeCashCost, null)) {
 				log.error(
 						"problem with logging in-app purchase history for receipt:{} and user {}",
 						receiptFromApple.toString(4), user);

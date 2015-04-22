@@ -85,7 +85,7 @@ public interface InsertUtil {
 			Timestamp timeOfPurchase, boolean isComplete);
 
 	public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
-			int gemChange, User user, double cashCost);
+			int gemChange, User user, double cashCost, String salesUuid);
 
 	//	public abstract boolean insertMarketplaceItem(int posterId,
 	//			MarketplacePostType postType, int postedEquipId, int diamondCost,

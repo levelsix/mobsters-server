@@ -380,6 +380,7 @@ public class DBConstants {
 	public static final String IAP_HISTORY__BVRS = "bvrs";
 	public static final String IAP_HISTORY__APP_ITEM_ID = "app_item_id";
 	public static final String IAP_HISTORY__FB_ID = "fb_id";
+	public static final String IAP_HISTORY__SALES_UUID = "sales_uuid";
 
 	/*ITEM FOR USER TABLE*/
 	public static final String ITEM_FOR_USER__USER_ID = GENERIC__USER_ID;

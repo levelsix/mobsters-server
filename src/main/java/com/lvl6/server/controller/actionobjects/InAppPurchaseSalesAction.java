@@ -242,8 +242,8 @@ public class InAppPurchaseSalesAction {
 			processSalesPackagePurchase(resBuilder);
 			updateIfBeginnerPack();
 
-			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, ara.getGemsGained(),
-					user, salesPackagePrice)) {
+			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, 0,
+					user, salesPackagePrice, salesPackage.getUuid())) {
 				log.error(
 						"problem with logging in-app purchase history for receipt:{} and user {}",
 						receiptFromApple.toString(4), user);
