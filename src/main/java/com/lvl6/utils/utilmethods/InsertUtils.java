@@ -913,6 +913,7 @@ public class InsertUtils implements InsertUtil {
 				relativeUpdates, absoluteUpdates);
 		
 		if (numChanged != 1 || numChanged != 2) {
+			log.error("failure to insert translate setting, numChanged = {}", numChanged);
 			return false;
 		}
 		return true;
