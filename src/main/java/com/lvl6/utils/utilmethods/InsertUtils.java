@@ -912,7 +912,7 @@ public class InsertUtils implements InsertUtil {
 		int numChanged = DBConnection.get().insertOnDuplicateKeyUpdate(tableName, insertParams,
 				relativeUpdates, absoluteUpdates);
 		
-		if (numChanged != 1 || numChanged != 2) {
+		if (numChanged != 1 && numChanged != 2) {
 			log.error("failure to insert translate setting, numChanged = {}", numChanged);
 			return false;
 		}
