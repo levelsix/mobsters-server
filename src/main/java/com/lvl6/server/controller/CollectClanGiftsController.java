@@ -145,6 +145,7 @@ public class CollectClanGiftsController extends EventController {
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				
+				log.info("reward proto for collect: " + uusa.getUrp());
 				resBuilder.setReward(uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead

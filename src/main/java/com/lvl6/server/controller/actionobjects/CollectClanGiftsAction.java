@@ -139,6 +139,14 @@ public class CollectClanGiftsAction {
 
 		ara.execute();
 		
+		log.info("nu or updated items " + ara.getNuOrUpdatedItems());
+		log.info("nu or updated monsters " + ara.getNuOrUpdatedMonsters());
+		log.info("gems " + ara.getGemsGained());
+		log.info("cash " + ara.getCashGained());
+		log.info("oil " + ara.getOilGained());
+
+		
+		
 		urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(), 
 				ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
 				ara.getOilGained());
