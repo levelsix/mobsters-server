@@ -18,7 +18,7 @@ import com.lvl6.events.response.TranslateSelectMessagesResponseEvent;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.TranslatedText;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
@@ -53,7 +53,7 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -62,7 +62,7 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-	
+
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
@@ -71,7 +71,7 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 
@@ -97,20 +97,20 @@ public class TranslateSelectMessagesController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String recipientUserId = senderProto.getUserUuid();
-		//this guy sent the msgs 
+		//this guy sent the msgs
 		String senderUserId = reqProto.getOtherUserUuid();
 		boolean translateOn = reqProto.getTranslateOn();
-		
-		ChatType ct = reqProto.getChatType();
-		
+
+		ChatScope ct = reqProto.getChatType();
+
 		TranslateLanguages language = reqProto.getLanguage();
 		List<PrivateChatPostProto> listOfPrivateChatProtos = reqProto.getMessagesToBeTranslatedList();
 		List<PrivateChatPost> listOfPrivateChatPosts = new ArrayList<PrivateChatPost>();
-		
+
 		if(listOfPrivateChatProtos != null && !listOfPrivateChatProtos.isEmpty()) {
 			listOfPrivateChatPosts = convertFromProtos(listOfPrivateChatProtos);
 		}
-		
+
 
 		//values to send to client
 		TranslateSelectMessagesResponseProto.Builder resBuilder = TranslateSelectMessagesResponseProto
@@ -123,11 +123,11 @@ public class TranslateSelectMessagesController extends EventController {
 		boolean invalidUuids = true;
 		try {
 			recipientUserUuid = UUID.fromString(recipientUserId);
-			
+
 			if(senderUserId != null && !senderUserId.isEmpty()) {
 				senderUserUuid = UUID.fromString(senderUserId);
 			}
-			
+
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format("UUID error. incorrect recipientUserId=%s or senderUserId=%s",
@@ -150,16 +150,16 @@ public class TranslateSelectMessagesController extends EventController {
 		locker.lockPlayer(recipientUserUuid, this.getClass().getSimpleName());
 		try {
 
-			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId, 
-					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil, 
+			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId,
+					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil,
 					translateOn, insertUtil, updateUtil, miscMethods, chatTranslationsRetrieveUtils);
 
 			tsma.execute(resBuilder);
 
 			Map<String, PrivateChatPost> privateChatPostMap;
-			if (TranslateSelectMessagesStatus.SUCCESS.equals(resBuilder.getStatus()) && ct.equals(ChatType.PRIVATE_CHAT)) {
+			if (TranslateSelectMessagesStatus.SUCCESS.equals(resBuilder.getStatus()) && ct.equals(ChatScope.PRIVATE)) {
 				privateChatPostMap = tsma.getPrivateChatPostMap();
-				
+
 				if (null != privateChatPostMap) {
 					resBuilder.addAllMessagesTranslated(createNewPrivateChatPostProtoWithTranslations(
 							listOfPrivateChatProtos, privateChatPostMap));
@@ -205,10 +205,10 @@ public class TranslateSelectMessagesController extends EventController {
 		}
 		return returnList;
 	}
-	
+
 	private List<PrivateChatPostProto> createNewPrivateChatPostProtoWithTranslations(
 			List<PrivateChatPostProto> list, Map<String, PrivateChatPost> privateChatPostMap) {
-		
+
 		List<PrivateChatPostProto> returnList = new ArrayList<PrivateChatPostProto>();
 		for(PrivateChatPostProto pcpp : list) {
 			PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
@@ -227,7 +227,7 @@ public class TranslateSelectMessagesController extends EventController {
 		}
 		return returnList;
 	}
-	
+
 
 	public Locker getLocker() {
 		return locker;

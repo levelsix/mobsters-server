@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ChatTranslations;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.utils.DBConnection;
 
@@ -27,7 +27,7 @@ public class ChatTranslationsRetrieveUtils {
 	}.getClass().getEnclosingClass());
 
 	private static Map<String, ChatTranslations> chatTranslationsIdsToChatTranslationss;
-	
+
 	private static Map<String, List<ChatTranslations>> chatIdsToChatTranslations;
 	//key:booster pack id --> value:(key: booster item id --> value: booster item)
 
@@ -48,28 +48,28 @@ public class ChatTranslationsRetrieveUtils {
 		}
 		return chatTranslationsIdsToChatTranslationss.get(chatTranslationsId);
 	}
-	
+
 	public Map<String, List<ChatTranslations>> getChatTranslationsForSpecificChatIds(List<String> chatIds) {
 		log.debug("retrieve chatTranslations data for chat Ids " + chatIds);
 		if (chatIdsToChatTranslations == null) {
 			setStaticChatTranslationsIdsToChatTranslationss();
 		}
 		Map<String, List<ChatTranslations>> chatTranslationsMap = new HashMap<String, List<ChatTranslations>>();
-		
+
 		for(String chatId : chatIds) {
 			if(chatIdsToChatTranslations.containsKey(chatId)) {
 				chatTranslationsMap.put(chatId, chatIdsToChatTranslations.get(chatId));
 			}
-			
+
 		}
 		return chatTranslationsMap;
 	}
-	
+
 	public void addChatTranslationToMap(ChatTranslations ct) {
 		if (chatTranslationsIdsToChatTranslationss == null) {
 			setStaticChatTranslationsIdsToChatTranslationss();
 		}
-		
+
 		chatTranslationsIdsToChatTranslationss.put(ct.getId(), ct);
 		if(chatIdsToChatTranslations.containsKey(ct.getChatId())) {
 			List<ChatTranslations> list = chatIdsToChatTranslations.get(ct.getChatId());
@@ -140,13 +140,13 @@ public class ChatTranslationsRetrieveUtils {
 			throws SQLException {
 		String id = rs.getString(DBConstants.CHAT_TRANSLATIONS__ID);
 		String chatTypeString = rs.getString(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE);
-		ChatType ct = ChatType.valueOf(chatTypeString);
-		
+		ChatScope ct = ChatScope.valueOf(chatTypeString);
+
 		String chatId = rs.getString(DBConstants.CHAT_TRANSLATIONS__CHAT_ID);
 
 		String language = rs.getString(DBConstants.CHAT_TRANSLATIONS__LANGUAGE);
 		TranslateLanguages tl = TranslateLanguages.valueOf(language);
-		
+
 		String text = rs.getString(DBConstants.CHAT_TRANSLATIONS__TEXT);
 
 		ChatTranslations chatTranslations = new ChatTranslations(id, ct, chatId, tl, text);

@@ -51,7 +51,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
@@ -67,7 +67,7 @@ public class InsertUtils implements InsertUtil {
 		return (InsertUtil) AppContext.getApplicationContext().getBean(
 				"insertUtils");
 	}
-	
+
 	private JdbcTemplate jdbcTemplate;
 
 	private String randomUUID() {
@@ -851,7 +851,7 @@ public class InsertUtils implements InsertUtil {
 	}
 
 	@Override
-	public String insertIntoChatTranslations(ChatType chatType, String chatId,
+	public String insertIntoChatTranslations(ChatScope chatType, String chatId,
 			TranslateLanguages language, String message, ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -908,7 +908,7 @@ public class InsertUtils implements InsertUtil {
 		return true;
 
 	}
-	
+
 	@Override
 	public boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats) {
 		String tablename = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
@@ -928,10 +928,10 @@ public class InsertUtils implements InsertUtil {
 			posterIds.add(posterId);
 			recipientIds.add(pairsOfChats.get(posterId));
 			language.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
-			chatType.add(ChatType.PRIVATE_CHAT.toString());
+			chatType.add(ChatScope.PRIVATE.toString());
 			translationsOn.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
 		}
-		
+
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID,
 				ids);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
@@ -951,7 +951,7 @@ public class InsertUtils implements InsertUtil {
 		if(numInserted == numRows)
 			return true;
 		else return false;
-		
+
 	}
 
 
@@ -2688,7 +2688,7 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts, 
+			List<PrivateChatPost> listOfPrivateChatPosts,
 			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
 		if(listOfPrivateChatPosts == null) {
 			log.error("map containing ids to translations is null");
@@ -2709,7 +2709,7 @@ public class InsertUtils implements InsertUtil {
 				String id = randomUUID();
 				String chatId = pcp.getId();
 				idList.add(id);
-				chatTypeList.add(ChatType.PRIVATE_CHAT.toString());
+				chatTypeList.add(ChatScope.PRIVATE.toString());
 				chatIdList.add(chatId);
 				languageList.add(pcp.getTranslatedText().getLanguage());
 				textList.add(pcp.getTranslatedText().getText());
@@ -2718,7 +2718,7 @@ public class InsertUtils implements InsertUtil {
 				ChatTranslations ct = new ChatTranslations();
 				ct.setId(id);
 				ct.setChatId(chatId);
-				ct.setChatType(ChatType.PRIVATE_CHAT);
+				ct.setChatType(ChatScope.PRIVATE);
 				ct.setTranslateLanguage(TranslateLanguages.
 						valueOf(pcp.getTranslatedText().getLanguage()));
 				ct.setText(pcp.getTranslatedText().getText());

@@ -12,7 +12,7 @@ import com.lvl6.info.TranslatedText;
 import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
@@ -30,7 +30,7 @@ public class TranslateSelectMessagesAction {
 	private String senderUserId;
 	private TranslateLanguages languageEnum;
 	private List<PrivateChatPost> listOfPrivateChatPosts;
-	private ChatType chatType;
+	private ChatScope chatType;
 	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 	private boolean translateOn;
 	protected InsertUtil insertUtil;
@@ -41,7 +41,7 @@ public class TranslateSelectMessagesAction {
 
 	public TranslateSelectMessagesAction(String recipientUserId,
 			String senderUserId, TranslateLanguages languageEnum,
-			List<PrivateChatPost> listOfPrivateChatPosts, ChatType chatType,
+			List<PrivateChatPost> listOfPrivateChatPosts, ChatScope chatType,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
 			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil,
 			MiscMethods miscMethods,
@@ -103,12 +103,12 @@ public class TranslateSelectMessagesAction {
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean successfulUpdate = false;
-		if(chatType.equals(ChatType.PRIVATE_CHAT)) {
+		if(chatType.equals(ChatScope.PRIVATE)) {
 
 			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId,
 					languageEnum.toString(), translateOn);
 		}
-		else if(chatType.equals(ChatType.GLOBAL_CHAT)) {
+		else if(chatType.equals(ChatScope.GLOBAL)) {
 			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
 					getUserTranslationSettingsForUserGlobal(recipientUserId);
 			if(tsfuList.isEmpty()) {

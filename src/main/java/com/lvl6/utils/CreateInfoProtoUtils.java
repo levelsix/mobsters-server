@@ -42,7 +42,7 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
@@ -1427,7 +1427,7 @@ public class CreateInfoProtoUtils {
 		List<PrivateChatDefaultLanguageProto> pcdlpList = new ArrayList<PrivateChatDefaultLanguageProto>();
 
 		for(TranslationSettingsForUser tsfu : tsfuList) {
-			if(tsfu.getChatType().equalsIgnoreCase(ChatType.PRIVATE_CHAT.toString())) {
+			if(tsfu.getChatType().equalsIgnoreCase(ChatScope.PRIVATE.toString())) {
 				PrivateChatDefaultLanguageProto.Builder pcdlpb = PrivateChatDefaultLanguageProto.newBuilder();
 				pcdlpb.setDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
 				pcdlpb.setRecipientUserId(tsfu.getReceiverUserId());
@@ -1437,7 +1437,7 @@ public class CreateInfoProtoUtils {
 				PrivateChatDefaultLanguageProto lala = pcdlpb.build();
 				pcdlpList.add(lala);
 			}
-			else if(tsfu.getChatType().equalsIgnoreCase(ChatType.GLOBAL_CHAT.toString())) {
+			else if(tsfu.getChatType().equalsIgnoreCase(ChatScope.GLOBAL.toString())) {
 				dlpb.setGlobalDefaultLanguage(TranslateLanguages.valueOf(tsfu.getLanguage()));
 				dlpb.setGlobalTranslateOn(tsfu.isTranslationsOn());
 				log.info("global translateon: " + tsfu.isTranslationsOn());

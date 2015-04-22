@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 
 @Component
 @DependsOn("gameServer")
@@ -161,7 +161,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 	}
 
 	public TranslationSettingsForUser getSpecificUserGlobalTranslationSettings(String recipientUserId,
-			ChatType chatType) {
+			ChatScope chatType) {
 		log.debug(
 				"retrieving translation settings with recipientUserId={}, chatType={}",
 				recipientUserId, chatType);

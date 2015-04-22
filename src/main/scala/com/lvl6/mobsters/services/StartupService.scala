@@ -48,7 +48,7 @@ import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
-import com.lvl6.proto.ChatProto.ChatType
+import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto
 import com.lvl6.proto.ChatProto.GroupChatMessageProto
 import com.lvl6.proto.ClanProto.ClanDataProto
@@ -504,7 +504,7 @@ class StartupService extends LazyLogging{
               playerId, 
               null,
               ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
-              ChatType.GLOBAL_CHAT.toString(),
+              ChatScope.GLOBAL.toString(),
               ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
           tsfuListIsNull = true;
         }
