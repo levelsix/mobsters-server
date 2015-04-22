@@ -53523,14 +53523,26 @@ public final class EventClanProto {
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     *
+     * <pre>
+     *person who gave out the gift to everyone
+     * </pre>
      */
     boolean hasSender();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     *
+     * <pre>
+     *person who gave out the gift to everyone
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     *
+     * <pre>
+     *person who gave out the gift to everyone
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
@@ -53698,18 +53710,30 @@ public final class EventClanProto {
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     *
+     * <pre>
+     *person who gave out the gift to everyone
+     * </pre>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     *
+     * <pre>
+     *person who gave out the gift to everyone
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     *
+     * <pre>
+     *person who gave out the gift to everyone
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
@@ -54075,12 +54099,20 @@ public final class EventClanProto {
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
@@ -54091,6 +54123,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
@@ -54107,6 +54143,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
@@ -54121,6 +54161,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
@@ -54140,6 +54184,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
@@ -54153,6 +54201,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
@@ -54161,6 +54213,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
@@ -54171,6 +54227,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       *
+       * <pre>
+       *person who gave out the gift to everyone
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 

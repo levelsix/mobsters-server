@@ -157,8 +157,10 @@ public class ClanGiftForUserRetrieveUtils {
 			int rewardId = rs.getInt(DBConstants.CLAN_GIFT_FOR_USER__REWARD_ID);
 			Date timeReceived = new Date(rs.getTimestamp(DBConstants.CLAN_GIFT_FOR_USER__TIME_RECEIVED).getTime());
 			String reasonForGift = rs.getString(DBConstants.CLAN_GIFT_FOR_USER__REASON_FOR_GIFT);
+			boolean hasBeenCollected = rs.getBoolean(DBConstants.CLAN_GIFT_FOR_USER__HAS_BEEN_COLLECTED);
 
-			return new ClanGiftForUser(id, receiverUserId, gifterUserId, clanGiftId, rewardId, timeReceived, reasonForGift);
+			return new ClanGiftForUser(id, receiverUserId, gifterUserId, clanGiftId, rewardId, timeReceived,
+					reasonForGift, hasBeenCollected);
 		}
 
 		public static List<String> getColumnsSelected() {

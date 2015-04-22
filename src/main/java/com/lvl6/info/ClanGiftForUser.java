@@ -11,6 +11,7 @@ public class ClanGiftForUser {
 	private int rewardId;
 	private Date timeReceived;
 	private String reasonForGift;
+	private boolean hasBeenCollected;
 
 	public ClanGiftForUser() {
 		super();
@@ -19,7 +20,8 @@ public class ClanGiftForUser {
 
 	public ClanGiftForUser(String id, String receiverUserId,
 			String gifterUserId, int clanGiftId, int rewardId,
-			Date timeReceived, String reasonForGift) {
+			Date timeReceived, String reasonForGift,
+			boolean hasBeenCollected) {
 		super();
 		this.id = id;
 		this.receiverUserId = receiverUserId;
@@ -28,6 +30,7 @@ public class ClanGiftForUser {
 		this.rewardId = rewardId;
 		this.timeReceived = timeReceived;
 		this.reasonForGift = reasonForGift;
+		this.hasBeenCollected = hasBeenCollected;
 	}
 
 
@@ -90,6 +93,16 @@ public class ClanGiftForUser {
 	public void setTimeReceived(Date timeReceived) {
 		this.timeReceived = timeReceived;
 	}
+	
+	
+
+	public boolean isHasBeenCollected() {
+		return hasBeenCollected;
+	}
+
+	public void setHasBeenCollected(boolean hasBeenCollected) {
+		this.hasBeenCollected = hasBeenCollected;
+	}
 
 	@Override
 	public String toString() {
@@ -97,7 +110,8 @@ public class ClanGiftForUser {
 				+ receiverUserId + ", gifterUserId=" + gifterUserId
 				+ ", clanGiftId=" + clanGiftId + ", rewardId=" + rewardId
 				+ ", timeReceived=" + timeReceived + ", reasonForGift="
-				+ reasonForGift + "]";
+				+ reasonForGift + ", hasBeenCollected=" + hasBeenCollected
+				+ "]";
 	}
 
 

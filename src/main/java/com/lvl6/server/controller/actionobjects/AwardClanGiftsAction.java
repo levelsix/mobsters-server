@@ -132,6 +132,7 @@ public class AwardClanGiftsAction {
 				cgfu.setReceiverUserId(receiverUserId);
 				cgfu.setRewardId(rewardId);
 				cgfu.setTimeReceived(new Date());
+				cgfu.setHasBeenCollected(false);
 				UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
 				chatProto.addUserClanGifts(ucgp);
 			}

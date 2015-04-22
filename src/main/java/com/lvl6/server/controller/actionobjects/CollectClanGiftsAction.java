@@ -15,12 +15,14 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -41,6 +43,7 @@ public class CollectClanGiftsAction {
 	private UpdateUtil updateUtil;
 	private DeleteUtil deleteUtil;
 	private List<ClanGiftForUser> listOfClanGifts;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public CollectClanGiftsAction() {
 		super();
@@ -56,7 +59,8 @@ public class CollectClanGiftsAction {
 			MonsterStuffUtils monsterStuffUtils,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
-			DeleteUtil deleteUtil, List<ClanGiftForUser> listOfClanGifts) {
+			DeleteUtil deleteUtil, List<ClanGiftForUser> listOfClanGifts,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.userId = userId;
 		this.userRetrieveUtils = userRetrieveUtils;
@@ -69,12 +73,14 @@ public class CollectClanGiftsAction {
 		this.updateUtil = updateUtil;
 		this.deleteUtil = deleteUtil;
 		this.listOfClanGifts = listOfClanGifts;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	private List<ClanGiftRewards> rewardsForClanGift;
 	private List<UserClan> clanMembers;
 	private User user;
 	private Map<Integer, Reward> rewardIdsToRewards;
+	private UserRewardProto urp;
 
 	public void execute(Builder resBuilder) {
 
@@ -132,9 +138,13 @@ public class CollectClanGiftsAction {
 				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils);
 
 		ara.execute();
+		
+		urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(), 
+				ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
+				ara.getOilGained());
 
 		//delete the rows in clan gifts for user
-		boolean success = deleteUtil.deleteFromClanGiftForUser(listOfClanGifts);
+		boolean success = updateUtil.updateUserClanGiftHasBeenCollected(userId, listOfClanGifts);
 		return success;
 	}
 
@@ -259,6 +269,36 @@ public class CollectClanGiftsAction {
 
 	public void setRewardIdsToRewards(Map<Integer, Reward> rewardIdsToRewards) {
 		this.rewardIdsToRewards = rewardIdsToRewards;
+	}
+
+
+	public List<ClanGiftForUser> getListOfClanGifts() {
+		return listOfClanGifts;
+	}
+
+
+	public void setListOfClanGifts(List<ClanGiftForUser> listOfClanGifts) {
+		this.listOfClanGifts = listOfClanGifts;
+	}
+
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+
+	public UserRewardProto getUrp() {
+		return urp;
+	}
+
+
+	public void setUrp(UserRewardProto urp) {
+		this.urp = urp;
 	}
 
 

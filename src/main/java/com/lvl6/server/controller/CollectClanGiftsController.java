@@ -133,7 +133,7 @@ public class CollectClanGiftsController extends EventController {
 			CollectClanGiftsAction uusa = new CollectClanGiftsAction(userId, userRetrieveUtils,
 					clanGiftForUserRetrieveUtils, rewardRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, monsterLevelInfoRetrieveUtils, insertUtil, updateUtil,
-					deleteUtil, listOfClanGIfts);
+					deleteUtil, listOfClanGIfts, createInfoProtoUtils);
 
 			uusa.execute(resBuilder);
 
@@ -144,6 +144,8 @@ public class CollectClanGiftsController extends EventController {
 			server.writeEvent(resEvent);
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				
+				resBuilder.setReward(uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
