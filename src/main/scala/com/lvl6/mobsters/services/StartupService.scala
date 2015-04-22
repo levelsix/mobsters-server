@@ -1197,7 +1197,7 @@ class StartupService extends LazyLogging{
   }
   //TODO: Get rid of this copy pasted code
   def setBuilderPackForUser(resBuilder: Builder, user:User, userItemIds:java.util.Set[Integer])= {
-      timed("StartupService.setStarterPackForUser"){
+      timed("StartupService.setBuilderPackForUser"){
           var hasExtraBuilder = false
           userItemIds.foreach { itemId =>
               //TODO: Make a constant out of this number for builder's id
@@ -1209,7 +1209,7 @@ class StartupService extends LazyLogging{
           if(!hasExtraBuilder) {
               val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages() 
               idsToSalesPackages.values().foreach{ sp:SalesPackage =>
-                if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
+                if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
                     val spProto = inAppPurchaseUtil.createSalesPackageProto(
                             sp,
                             salesItemRetrieveUtil,
