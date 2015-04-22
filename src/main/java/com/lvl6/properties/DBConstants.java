@@ -329,6 +329,7 @@ public class DBConstants {
 	public static final String CLAN_GIFT_FOR_USER__REWARD_ID = "reward_id";
 	public static final String CLAN_GIFT_FOR_USER__TIME_RECEIVED = "time_received";
 	public static final String CLAN_GIFT_FOR_USER__REASON_FOR_GIFT = "reason_for_gift";
+	public static final String CLAN_GIFT_FOR_USER__HAS_BEEN_COLLECTED = "has_been_collected";
 
 	/*CLAN HELP*/
 	public static final String CLAN_HELP__ID = GENERIC__ID;
