@@ -65,15 +65,15 @@ public class RetrieveCurrencyFromNormStructureAction {
 
 	//	//encapsulates the return value from this Action Object
 	//	static class RetrieveCurrencyFromNormStructureResource {
-	//		
-	//		
+	//
+	//
 	//		public RetrieveCurrencyFromNormStructureResource() {
-	//			
+	//
 	//		}
 	//	}
 	//
 	//	public RetrieveCurrencyFromNormStructureResource execute() {
-	//		
+	//
 	//	}
 
 	//derived state
@@ -374,8 +374,8 @@ public class RetrieveCurrencyFromNormStructureAction {
 			Date d = sr.getTimeOfRetrieval();
 			int amount = sr.getAmountCollected();
 
-			String detail = String.format("({},{},{})", new Object[] { sfuId,
-					d, amount });
+			String detail = String.format("(%s,%s,%s)", sfuId,
+					d, amount );
 
 			if (sfuIdToMoneyTree.containsKey(sfuId)) {
 				gemsDetailSb.append(detail);
