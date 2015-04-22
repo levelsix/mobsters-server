@@ -1,21 +1,24 @@
 package com.lvl6.info;
 
+import java.io.Serializable;
+
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 
-public class ChatTranslations {
-	
-	public ChatTranslations() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+public class ChatTranslations implements Serializable {
+
+	private static final long serialVersionUID = -4978138161949882111L;
+
 	private String id;
 	private ChatScope chatType;
 	private String chatId;
 	private TranslateLanguages translateLanguage;
 	private String text;
-	
-	
+
+	public ChatTranslations() {
+		super();
+	}
+
 	public ChatTranslations(String id, ChatScope chatType, String chatId,
 			TranslateLanguages translateLanguage, String text) {
 		super();
@@ -25,15 +28,7 @@ public class ChatTranslations {
 		this.translateLanguage = translateLanguage;
 		this.text = text;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "ChatTranslations [id=" + id + ", chatType=" + chatType
-				+ ", chatId=" + chatId + ", translateLanguage="
-				+ translateLanguage + ", text=" + text + "]";
-	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -63,6 +58,13 @@ public class ChatTranslations {
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	@Override
+	public String toString() {
+		return "ChatTranslations [id=" + id + ", chatType=" + chatType
+				+ ", chatId=" + chatId + ", translateLanguage="
+				+ translateLanguage + ", text=" + text + "]";
 	}
 
 }

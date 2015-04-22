@@ -28,8 +28,8 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.GroupChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
@@ -117,7 +117,7 @@ public class SendGroupChatController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		final GroupChatScope scope = reqProto.getScope();
+		final ChatScope scope = reqProto.getScope();
 		String chatMessage = reqProto.getChatMessage();
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
 		TranslateLanguages globalLanguage = reqProto.getGlobalLanguage();
@@ -199,7 +199,7 @@ public class SendGroupChatController extends EventController {
 				log.info("receive group chat response proto : {}", rgcrp);
 
 				sendChatMessage(userId, chatProto, event.getTag(),
-						scope == GroupChatScope.CLAN, user.getClanId(),
+						scope == ChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
 						censoredChatMessage, rgcrp, globalLanguage);
 
@@ -280,7 +280,7 @@ public class SendGroupChatController extends EventController {
 	 * try { server.writeEvent(ce); } catch (Exception e) { log.error(e); } } }
 	 */
 
-	private void writeChangesToDB(User user, GroupChatScope scope,
+	private void writeChangesToDB(User user, ChatScope scope,
 			String content, Timestamp timeOfPost) {
 		// if (!user.updateRelativeNumGroupChatsRemainingAndDiamonds(-1, 0)) {
 		// log.error("problem with decrementing a global chat");
@@ -288,7 +288,7 @@ public class SendGroupChatController extends EventController {
 
 		Map<TranslateLanguages, String> translatedTextMap;
 
-		if (scope == GroupChatScope.CLAN) {
+		if (scope == ChatScope.CLAN) {
 			String clanId = user.getClanId();
 
 //			translatedTextMap = MiscMethods.translate(null, content);
@@ -329,7 +329,7 @@ public class SendGroupChatController extends EventController {
 	}
 
 	private boolean checkLegitSend(Builder resBuilder, User user,
-			GroupChatScope scope, String chatMessage) {
+			ChatScope scope, String chatMessage) {
 		if (user == null || scope == null || chatMessage == null
 				|| chatMessage.length() == 0) {
 			resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);

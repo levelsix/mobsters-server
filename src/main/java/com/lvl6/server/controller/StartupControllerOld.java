@@ -72,7 +72,7 @@ import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
@@ -790,7 +790,7 @@ public class StartupControllerOld extends EventController {
 			if(tsfuList == null || tsfuList.isEmpty()) {
 				insertUtil.insertTranslateSettings(playerId, null,
 						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
-						ChatType.GLOBAL_CHAT.toString(),
+						ChatScope.GLOBAL.toString(),
 						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
 				tsfuListIsNull = true;
 			}
@@ -1594,7 +1594,7 @@ public class StartupControllerOld extends EventController {
 				miniEventLeaderboardRewardRetrieveUtils,
 				timeUtils);
 
-		
+
 		rmea.execute(rmeaResBuilder);
 //		log.info("{}, {}", MiniEventRetrieveUtils.getAllIdsToMiniEvents(),
 //				MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now));
@@ -1722,7 +1722,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 	}
-	
+
 	//TODO: Get rid of this copy pasted code
 	public void setBuilderPackForUser(Builder resBuilder, User user, Set<Integer> userItemIds) {
 		boolean hasExtraBuilder = false;
@@ -1850,9 +1850,9 @@ public class StartupControllerOld extends EventController {
 	}
 
 	public int priceForSalesPackToBeShown(int userSalesValue) {
-		
+
 		int newMinPrice = 0;
-		
+
 		if(userSalesValue == 0) {
 			newMinPrice = 5;
 		}
@@ -1868,7 +1868,7 @@ public class StartupControllerOld extends EventController {
 		else if(userSalesValue > 3) {
 			newMinPrice = 100;
 		}
-		
+
 		return newMinPrice;
 	}
 

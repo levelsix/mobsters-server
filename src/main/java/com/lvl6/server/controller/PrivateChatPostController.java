@@ -27,7 +27,7 @@ import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -194,7 +194,7 @@ public class PrivateChatPostController extends EventController {
 
 					if(settingForPoster == null) {
 						insertUtils.insertTranslateSettings(posterId, recipientId, contentLanguage.toString(),
-								ChatType.PRIVATE_CHAT.toString(), true);
+								ChatScope.PRIVATE.toString(), true);
 					}
 					else {
 						posterLanguage = Language.valueOf(settingForPoster.getLanguage());
@@ -203,15 +203,15 @@ public class PrivateChatPostController extends EventController {
 					//get recipient's language setting
 					if(settingForRecipient == null) {
 						TranslationSettingsForUser globalChatSettingsForRecipient = translationSettingsForUserRetrieveUtil.
-								getSpecificUserGlobalTranslationSettings(recipientId, ChatType.GLOBAL_CHAT);
+								getSpecificUserGlobalTranslationSettings(recipientId, ChatScope.GLOBAL);
 						if(globalChatSettingsForRecipient != null) {
 							insertUtils.insertTranslateSettings(recipientId, posterId, globalChatSettingsForRecipient.getLanguage(),
-									ChatType.PRIVATE_CHAT.toString(), true);
+									ChatScope.PRIVATE.toString(), true);
 							recipientLanguageString = globalChatSettingsForRecipient.getLanguage();
 						}
 						else {
 							insertUtils.insertTranslateSettings(recipientId, posterId, TranslateLanguages.ENGLISH.toString(),
-									ChatType.PRIVATE_CHAT.toString(), true);
+									ChatScope.PRIVATE.toString(), true);
 							recipientLanguageString = TranslateLanguages.ENGLISH.toString();
 						}
 					}
@@ -233,7 +233,7 @@ public class PrivateChatPostController extends EventController {
 						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
 
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
-							ChatType chatType = ChatType.PRIVATE_CHAT;
+							ChatScope chatType = ChatScope.PRIVATE;
 							insertUtils.insertIntoChatTranslations(chatType, privateChatPostId, tl, translatedMessage.get(tl),
 									chatTranslationsRetrieveUtils);
 							tt.setLanguage(recipientLanguage.toString());

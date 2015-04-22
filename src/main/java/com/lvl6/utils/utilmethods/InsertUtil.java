@@ -37,7 +37,7 @@ import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.ChatProto.ChatType;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
@@ -161,7 +161,7 @@ public interface InsertUtil {
 			List<String> posterIds, List<String> recipientIds,
 			List<String> contents, List<Date> timeOfPosts);
 
-	public abstract String insertIntoChatTranslations(ChatType chatType, String chatId,
+	public abstract String insertIntoChatTranslations(ChatScope chatType, String chatId,
 			TranslateLanguages language, String message, ChatTranslationsRetrieveUtils
 			chatTranslationsRetrieveUtils);
 

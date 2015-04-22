@@ -45,6 +45,7 @@ import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
 import com.lvl6.properties.IAPValues
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
+import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto
 import com.lvl6.proto.ChatProto.GroupChatMessageProto
 import com.lvl6.proto.ClanProto.ClanDataProto
