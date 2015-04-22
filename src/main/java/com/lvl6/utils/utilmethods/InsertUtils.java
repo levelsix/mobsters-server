@@ -886,6 +886,8 @@ public class InsertUtils implements InsertUtil {
 			String language, String chatType, boolean translateOn) {
 		String tableName = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 		Map<String, Object> insertParams = new HashMap<String, Object>();
+		Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+		Map<String, Object> absoluteUpdates = null;//new HashMap<String, Object>();
 
 		String id = randomUUID();
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID, id);
@@ -897,11 +899,27 @@ public class InsertUtils implements InsertUtil {
 
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE, language);
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE, chatType);
-
 		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON, translateOn);
 
-		int numChanged = DBConnection.get().insertIntoTableBasic(
-				tableName, insertParams);
+		//this is for the case when there is already an existing row
+		relativeUpdates.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
+				receiverId);
+		relativeUpdates.put(
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID,
+				senderId);
+		relativeUpdates.put(
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE,
+				language);
+		relativeUpdates.put(
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE,
+				chatType);
+		relativeUpdates.put(
+				DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
+				translateOn);
+		
+		int numChanged = DBConnection.get().insertOnDuplicateKeyUpdate(tableName, insertParams,
+				relativeUpdates, absoluteUpdates);
+		
 		if (numChanged != 1) {
 			return false;
 		}

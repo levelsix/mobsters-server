@@ -104,9 +104,9 @@ public class TranslateSelectMessagesAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 		boolean successfulUpdate = false;
 		if(chatType.equals(ChatScope.PRIVATE)) {
-
-			successfulUpdate = updateUtil.updateUserTranslationSetting(recipientUserId, senderUserId,
-					languageEnum.toString(), translateOn);
+			
+			successfulUpdate = insertUtil.insertTranslateSettings(recipientUserId, senderUserId,
+					languageEnum.toString(), ChatScope.PRIVATE.toString(), translateOn);
 		}
 		else if(chatType.equals(ChatScope.GLOBAL)) {
 			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
