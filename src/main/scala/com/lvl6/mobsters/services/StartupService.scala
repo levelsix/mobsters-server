@@ -705,7 +705,7 @@ class StartupService extends LazyLogging{
       userMonsters <- setUserMonsters(resBuilder,userId)
       userMonstersInHealing <- setUserMonstersInHealing(resBuilder,userId)
       userMonstersEnhancing <- setUserMonstersEnhancing(resBuilder,userId)
-      userMonstersEvolving <- setUserMonsters(resBuilder,userId)
+      userMonstersEvolving <- setUserMonstersEvolving(resBuilder,userId)
     } yield Unit
   }
   
