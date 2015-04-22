@@ -42,7 +42,7 @@ public class TranslationSettingsForUserRetrieveUtil {
 		log.debug(String.format("retrieving user translation settings for global userId %s",
 				userId));
 
-		Object[] values = { userId, "GLOBAL_CHAT"};
+		Object[] values = { userId, ChatScope.GLOBAL.toString()};
 		String query = String.format("select * from %s where %s=? and %s=?", TABLE_NAME,
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE);
