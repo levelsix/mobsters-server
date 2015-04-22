@@ -587,7 +587,7 @@ class StartupService extends LazyLogging{
              playerId,
              clanGiftForUserRetrieveUtil,
              createInfoProtoUtils);
-     
+        scga.setUp(fillMe);
         
         //Now since all the ids of resources are known, get them from db
         fillMe.fetch();
