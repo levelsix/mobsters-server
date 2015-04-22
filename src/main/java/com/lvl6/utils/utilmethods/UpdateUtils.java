@@ -2087,7 +2087,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 
 		sb.append(questionMarks);
-		sb.append(" on duplicate key update %s = values(%s)");
+		sb.append(" on duplicate key update %s = %s");
 
 		log.info(sb.toString());
 		log.info(""+ values);
