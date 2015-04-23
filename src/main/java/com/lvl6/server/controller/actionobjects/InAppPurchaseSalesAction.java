@@ -192,6 +192,10 @@ public class InAppPurchaseSalesAction {
 			builderCheck();
 		}
 
+		if(!saleIsWithinTimeConstraints()) {
+			log.error("sales package being bought when outside of start/end times. userId = {} , salespackageId = {}", userId, salesPackage.getId());
+		}
+		
 		if (duplicateReceipt) {
 			log.error("user should be buying more expensive sales package! {}",
 					 user);
@@ -219,22 +223,22 @@ public class InAppPurchaseSalesAction {
 		}
 	}
 
-//	//when start and end time both null, it's for starter/builder packs, they dont expire
-//	public boolean saleIsWithinTimeConstraints() {
-//		Date saleStartTime = salesPackage.getTimeStart();
-//		Date saleEndTime = salesPackage.getTimeEnd();
-//
-//		if(saleStartTime == null && saleEndTime == null) {
-//			return true;
-//		}
-//
-//		if((now.getTime() - saleStartTime.getTime() > 0) && (saleEndTime.getTime() - now.getTime() > 0)) {
-//			return true;
-//		}
-//		log.error("sale didn't begin or is over, sale start time is {}, end time is {}",
-//				new Timestamp(saleStartTime.getTime()), new Timestamp(saleEndTime.getTime()) );
-//		return false;
-//	}
+	//when start and end time both null, it's for starter/builder packs, they dont expire
+	public boolean saleIsWithinTimeConstraints() {
+		Date saleStartTime = salesPackage.getTimeStart();
+		Date saleEndTime = salesPackage.getTimeEnd();
+
+		if(saleStartTime == null && saleEndTime == null) {
+			return true;
+		}
+
+		if((now.getTime() - saleStartTime.getTime() > 0) && (saleEndTime.getTime() - now.getTime() > 0)) {
+			return true;
+		}
+		log.error("sale didn't begin or is over, sale start time is {}, end time is {}",
+				new Timestamp(saleStartTime.getTime()), new Timestamp(saleEndTime.getTime()) );
+		return false;
+	}
 
 	public boolean writeChangesToDB(Builder resBuilder) {
 		boolean success = true;
