@@ -242,6 +242,13 @@ public class InAppPurchaseSalesAction {
 			processSalesPackagePurchase(resBuilder);
 			updateIfBeginnerPack();
 
+			if(!salesPackageLessThanUserSalesValue()) {
+				updateUserSalesValueAndLastPurchaseTime();
+			}
+			else {
+				success = updateUtil.updateUserSalesValue(userId, 0, now);
+			}
+			
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, 0,
 					user, salesPackagePrice, salesPackage.getUuid())) {
 				log.error(
@@ -250,12 +257,6 @@ public class InAppPurchaseSalesAction {
 				success = false;
 			}
 
-			if(!salesPackageLessThanUserSalesValue()) {
-				updateUserSalesValueAndLastPurchaseTime();
-			}
-			else {
-				success = updateUtil.updateUserSalesValue(userId, 0, now);
-			}
 		} catch (Exception e) {
 			log.error(
 					String.format(
