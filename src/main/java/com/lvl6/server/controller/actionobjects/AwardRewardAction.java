@@ -93,6 +93,7 @@ public class AwardRewardAction {
 	private int gemsGained = 0;
 	private int cashGained = 0;
 	private int oilGained = 0;
+	private int gachaCreditsGained = 0;
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
 	private Map<String, Integer> curCurrencies;
@@ -153,7 +154,7 @@ public class AwardRewardAction {
 		int gemsGainedTemp = 0;
 		int cashGainedTemp = 0;
 		int oilGainedTemp = 0;
-
+		int gachaCreditsGainedTemp = 0;
 
 		Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt =
 				new HashMap<String, Map<Integer,Integer>>();
@@ -181,6 +182,9 @@ public class AwardRewardAction {
 			} else if (RewardType.OIL.name().equals(type)) {
 				oilGainedTemp += amt;
 
+			} else if (RewardType.GACHA_CREDITS.name().equals(type)) {
+				gachaCreditsGainedTemp += amt;
+				
 			} else if (RewardType.MONSTER.name().equals(type)) {
 
 				aggregateMonsters(r, staticDataId, amt, monsterIdToQuantity,
@@ -193,7 +197,8 @@ public class AwardRewardAction {
 			//following logic is for currency history purposes
 			if (RewardType.GEMS.name().equals(type) ||
 				RewardType.CASH.name().equals(type) ||
-				RewardType.OIL.name().equals(type))
+				RewardType.OIL.name().equals(type) ||
+				RewardType.GACHA_CREDITS.name().equals(type))
 			{
 				String currencyType = null;
 				if (type.equalsIgnoreCase(MiscMethods.gems)) {
@@ -202,6 +207,8 @@ public class AwardRewardAction {
 					currencyType = MiscMethods.cash;
 				} else if (type.equalsIgnoreCase(MiscMethods.oil)) {
 					currencyType = MiscMethods.oil;
+				} else if (type.equalsIgnoreCase(MiscMethods.gachaCredits)) {
+					currencyType = MiscMethods.gachaCredits;
 				}
 
 				if (!resourceTypeToRewardIdToAmt.containsKey(type)) {
@@ -226,7 +233,7 @@ public class AwardRewardAction {
 			return false;
 		}
 		success = awardCurrency(gemsGainedTemp, cashGainedTemp, oilGainedTemp,
-				resourceTypeToRewardIdToAmt);
+				gachaCreditsGainedTemp, resourceTypeToRewardIdToAmt);
 		if (!success) {
 			return false;
 		}
@@ -337,13 +344,14 @@ public class AwardRewardAction {
 	}
 
 	private boolean awardCurrency(int gemsGainedTemp, int cashGainedTemp,
-			int oilGainedTemp,
+			int oilGainedTemp, int gachaCreditsGainedTemp,
 			Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt)
 	{
 		boolean awardGems = gemsGainedTemp > 0;
 		boolean awardCash = cashGainedTemp > 0;
 		boolean awardOil = oilGainedTemp > 0;
-		awardResources = awardGems || awardCash || awardOil;
+		boolean awardGachaCredits = gachaCreditsGainedTemp > 0;
+		awardResources = awardGems || awardCash || awardOil || awardGachaCredits;
 
 		if ( awardResources ) {
 			prevCurrencies = new HashMap<String, Integer>();
@@ -355,6 +363,10 @@ public class AwardRewardAction {
 		if ( awardGems ) {
 			prevCurrencies.put(MiscMethods.gems, u.getGems());
 			gemsGained = gemsGainedTemp;
+		}
+		if( awardGachaCredits) {
+			prevCurrencies.put(MiscMethods.gachaCredits, u.getGachaCredits());
+			gachaCreditsGained = gachaCreditsGainedTemp;
 		}
 		if ( awardCash ) {
 			int curCash = u.getCash();
@@ -375,7 +387,7 @@ public class AwardRewardAction {
 			return true;
 		}
 
-		if (u.updateRelativeCashAndOilAndGems(cashGained, oilGained, gemsGained) <= 0)
+		if (u.updateRelativeCashAndOilAndGems(cashGained, oilGained, gemsGained, gachaCreditsGained) <= 0)
 		{
 			log.error("won't continue processing. unable to award cash={}, oil={}, gems={}",
 					new Object[] { cashGained, oilGained, gemsGained } );
@@ -395,6 +407,7 @@ public class AwardRewardAction {
 		String gems = MiscMethods.gems;
 		String cash = MiscMethods.cash;
 		String oil = MiscMethods.oil;
+		String gachaCredits = MiscMethods.gachaCredits;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
@@ -404,6 +417,12 @@ public class AwardRewardAction {
 			curCurrencies.put(gems, u.getGems());
 			reasonsForChanges
 					.put(gems, awardReason);
+		}
+		if (0 != gachaCreditsGained) {
+			currencyDeltas.put(gachaCredits, gachaCreditsGained);
+			curCurrencies.put(gachaCredits, u.getGachaCredits());
+			reasonsForChanges
+					.put(gachaCredits, awardReason);
 		}
 		if (0 != cashGained) {
 			currencyDeltas.put(cash, cashGained);
