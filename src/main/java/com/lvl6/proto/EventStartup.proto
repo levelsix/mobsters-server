@@ -8,7 +8,6 @@ import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
-import "ClanGifts.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
 import "MiniEvent.proto";
@@ -20,6 +19,7 @@ import "Research.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
+import "Reward.proto";
 import "Task.proto";
 import "User.proto";
 
