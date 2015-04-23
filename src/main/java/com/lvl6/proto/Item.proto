@@ -51,6 +51,7 @@ enum ItemType {
 	//entity allowing user to build multiple structures
 	BUILDER = 5;
 	REFRESH_MINI_JOB = 6;
+	GACHA_MULTI_SPIN = 7;
 }
 
 //------------------------------------------------------------------------------------------

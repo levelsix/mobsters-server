@@ -47,6 +47,10 @@ public final class ItemsProto {
      * <code>REFRESH_MINI_JOB = 6;</code>
      */
     REFRESH_MINI_JOB(5, 6),
+    /**
+     * <code>GACHA_MULTI_SPIN = 7;</code>
+     */
+    GACHA_MULTI_SPIN(6, 7),
     ;
 
     /**
@@ -83,6 +87,10 @@ public final class ItemsProto {
      * <code>REFRESH_MINI_JOB = 6;</code>
      */
     public static final int REFRESH_MINI_JOB_VALUE = 6;
+    /**
+     * <code>GACHA_MULTI_SPIN = 7;</code>
+     */
+    public static final int GACHA_MULTI_SPIN_VALUE = 7;
 
 
     public final int getNumber() { return value; }
@@ -95,6 +103,7 @@ public final class ItemsProto {
         case 4: return SPEED_UP;
         case 5: return BUILDER;
         case 6: return REFRESH_MINI_JOB;
+        case 7: return GACHA_MULTI_SPIN;
         default: return null;
       }
     }
@@ -4790,10 +4799,10 @@ public final class ItemsProto {
       "rUuid\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022" +
       "\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003\"5\n\021I" +
       "temGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022\020\n\010gemP",
-      "rice\030\002 \001(\005*j\n\010ItemType\022\020\n\014BOOSTER_PACK\020\001" +
-      "\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_U" +
-      "P\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006B\014" +
-      "B\nItemsProto"
+      "rice\030\002 \001(\005*\200\001\n\010ItemType\022\020\n\014BOOSTER_PACK\020" +
+      "\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_" +
+      "UP\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006\022" +
+      "\024\n\020GACHA_MULTI_SPIN\020\007B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
