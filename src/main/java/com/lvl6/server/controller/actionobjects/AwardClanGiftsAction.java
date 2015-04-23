@@ -13,9 +13,9 @@ import com.lvl6.info.ClanGiftRewards;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ChatProto.GroupChatScope;
-import com.lvl6.proto.ClanGiftsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProto;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
@@ -31,7 +31,6 @@ public class AwardClanGiftsAction {
 	private User gifterUser;
 	private String clanId;
 	private int clanGiftId;
-	private UserClanStatus userClanStatus;
 	private String reasonForGift;
 	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
@@ -46,12 +45,11 @@ public class AwardClanGiftsAction {
 	public AwardClanGiftsAction(String gifterUserId, User gifterUser, int clanGiftId, 
 			String reasonForGift, ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils, InsertUtil insertUtil,
-			UserClanStatus userClanStatus, CreateInfoProtoUtils createInfoProtoUtils) {
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.gifterUserId = gifterUserId;
 		this.gifterUser = gifterUser;
 		this.clanGiftId = clanGiftId;
-		this.userClanStatus = userClanStatus;
 		this.reasonForGift = reasonForGift;
 		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
@@ -63,6 +61,7 @@ public class AwardClanGiftsAction {
 	private List<UserClan> clanMembers;
 	private ReceivedClanGiftResponseProto.Builder chatProto;
 	private MinimumUserProto mup; //this is the dude who sent the gifts
+	private ClanGiftForUser giftersClanGift;
 	
 	public boolean execute() {
 
@@ -135,6 +134,10 @@ public class AwardClanGiftsAction {
 				cgfu.setHasBeenCollected(false);
 				UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
 				chatProto.addUserClanGifts(ucgp);
+				
+				if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
+					giftersClanGift = cgfu;
+				}
 			}
 		}
 
@@ -197,13 +200,6 @@ public class AwardClanGiftsAction {
 		this.clanGiftId = clanGiftId;
 	}
 
-	public UserClanStatus getUserClanStatus() {
-		return userClanStatus;
-	}
-
-	public void setUserClanStatus(UserClanStatus userClanStatus) {
-		this.userClanStatus = userClanStatus;
-	}
 
 	public String getReasonForGift() {
 		return reasonForGift;
@@ -253,6 +249,46 @@ public class AwardClanGiftsAction {
 
 	public void setClanMembers(List<UserClan> clanMembers) {
 		this.clanMembers = clanMembers;
+	}
+
+	public User getGifterUser() {
+		return gifterUser;
+	}
+
+	public void setGifterUser(User gifterUser) {
+		this.gifterUser = gifterUser;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public ReceivedClanGiftResponseProto.Builder getChatProto() {
+		return chatProto;
+	}
+
+	public void setChatProto(ReceivedClanGiftResponseProto.Builder chatProto) {
+		this.chatProto = chatProto;
+	}
+
+	public MinimumUserProto getMup() {
+		return mup;
+	}
+
+	public void setMup(MinimumUserProto mup) {
+		this.mup = mup;
+	}
+
+	public ClanGiftForUser getGiftersClanGift() {
+		return giftersClanGift;
+	}
+
+	public void setGiftersClanGift(ClanGiftForUser giftersClanGift) {
+		this.giftersClanGift = giftersClanGift;
 	}
 
 

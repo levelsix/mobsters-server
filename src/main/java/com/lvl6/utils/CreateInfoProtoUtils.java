@@ -49,8 +49,6 @@ import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
-import com.lvl6.proto.ClanGiftsProto.ClanGiftProto;
-import com.lvl6.proto.ClanGiftsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
@@ -118,8 +116,10 @@ import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.RewardsProto.ClanGiftProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
@@ -3551,7 +3551,7 @@ public class CreateInfoProtoUtils {
 	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
-			int gems, int cash, int oil)
+			int gems, int cash, int oil, UserClanGiftProto ucgp)
 	{
 		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
 
@@ -3567,6 +3567,10 @@ public class CreateInfoProtoUtils {
 		urp.setGems(gems);
 		urp.setCash(cash);
 		urp.setOil(oil);
+		
+		if(ucgp != null) {
+			urp.setClanGift(ucgp);
+		}
 
 		return urp.build();
 	}

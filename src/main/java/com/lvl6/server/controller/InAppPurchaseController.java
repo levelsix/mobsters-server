@@ -23,6 +23,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
@@ -33,6 +34,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -473,8 +475,12 @@ public class InAppPurchaseController extends EventController {
         int oilGained = iapsa.getAra().getOilGained();
 
         //TODO: protofy the rewards
+        ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
+        MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
+        UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
+        
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, ucgp);
         log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
 
