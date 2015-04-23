@@ -132,6 +132,7 @@ public class MiscMethods {
 	public static final String cash = "cash";
 	public static final String gems = "gems";
 	public static final String oil = "oil";
+	public static final String gachaCredits = "gachaCredits";
 	public static final String boosterPackId = "boosterPackId";
 
 	private static String pClientId = "ToonSquad";

@@ -528,13 +528,16 @@ public class User implements Serializable {
 	}
 
 	public int updateRelativeCashAndOilAndGems(int cashDelta, int oilDelta,
-			int gemsDelta) {
+			int gemsDelta, int gachaCreditsDelta) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
 		if (gemsDelta != 0) {
 			relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
+		}
+		if (gachaCreditsDelta != 0) {
+			relativeParams.put(DBConstants.USER__GACHA_CREDITS, gachaCreditsDelta);
 		}
 		if (oilDelta != 0) {
 			relativeParams.put(DBConstants.USER__OIL, oilDelta);
