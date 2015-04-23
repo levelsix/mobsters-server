@@ -161,13 +161,13 @@ public class InAppPurchaseStarterPackAction {
 			List<BoosterItem> itemsUserReceives = getItemsUserReceives();
 			gemChange = BoosterItemUtils.determineGemReward(itemsUserReceives);
 
-			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
-					user, realLifeCashCost)) {
-				log.error(
-						"problem with logging in-app purchase history for receipt:{} and user {}",
-						receiptFromApple.toString(4), user);
-				success = false;
-			}
+//			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
+//					user, realLifeCashCost)) {
+//				log.error(
+//						"problem with logging in-app purchase history for receipt:{} and user {}",
+//						receiptFromApple.toString(4), user);
+//				success = false;
+//			}
 			processStarterPackPurchase(resBuilder, itemsUserReceives);
 
 		} catch (Exception e) {
