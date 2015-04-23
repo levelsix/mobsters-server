@@ -16,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -182,8 +184,8 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	public static float clientVersionNumber;
 
 	public static void main(String args[]) {
-//				ApplicationContext context = new FileSystemXmlApplicationContext(
-//						"target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
+				ApplicationContext context = new FileSystemXmlApplicationContext(
+						"target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
 	}
 
 	public GameServer(String serverIP, int portNum) {
