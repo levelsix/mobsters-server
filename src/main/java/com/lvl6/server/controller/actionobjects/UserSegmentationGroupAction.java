@@ -3,6 +3,8 @@ package com.lvl6.server.controller.actionobjects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.User;
+
 public class UserSegmentationGroupAction {
 
 
@@ -12,13 +14,15 @@ public class UserSegmentationGroupAction {
 	private Object[] arrayOfObjects;
 	private Float[] arrayOfFloats;
 	private String userId;
+	private User user;
 
 	public UserSegmentationGroupAction(Object[] arrayOfObjects, Float[] arrayOfFloats,
-			String userId) {
+			String userId, User user) {
 		super();
 		this.arrayOfObjects = arrayOfObjects;
 		this.arrayOfFloats = arrayOfFloats;
 		this.userId = userId;
+		this.user = user;
 	}
 
 
@@ -34,9 +38,12 @@ public class UserSegmentationGroupAction {
 	private int[] arrayOfInts;
 
 	public void convertUserIdIntoInt() {
-		String lastFourString = userId.substring(userId.length()-4);
-		int num = Integer.parseInt(lastFourString, 16);
-		segmentationGroup = num%100 + 1;
+		if(user.getSegmentationGroup() == 0) {
+			String lastFourString = userId.substring(userId.length()-4);
+			int num = Integer.parseInt(lastFourString, 16);
+			segmentationGroup = num%100 + 1;
+		}
+		else segmentationGroup = user.getSegmentationGroup();
 	}
 
 

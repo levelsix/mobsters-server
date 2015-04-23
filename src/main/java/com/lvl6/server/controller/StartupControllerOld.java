@@ -1681,7 +1681,7 @@ public class StartupControllerOld extends EventController {
 		floatArray[0] = (float)0.5;
 		floatArray[1] = (float)0.5;
 
-		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
+		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
 
 		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
 			log.info("sending starterbuilderpack");
