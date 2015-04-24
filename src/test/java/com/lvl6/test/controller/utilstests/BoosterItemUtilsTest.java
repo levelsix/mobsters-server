@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ItemForUser;
@@ -32,6 +33,7 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.StartupControllerOld;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
@@ -41,6 +43,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 public class BoosterItemUtilsTest {
 
 	private static Logger log = LoggerFactory.getLogger(StartupControllerOld.class);
+	
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	private static User mockedUser;
 	private static UpdateUtil mockedUpdateUtil;
@@ -107,10 +112,10 @@ public class BoosterItemUtilsTest {
 		boosterItemsUserReceives.add(bi);
 		boosterItemsUserReceives.add(bi2);
 
-		assertTrue(BoosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils));
+		assertTrue(BoosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils, rewardRetrieveUtils));
 
 		boosterItemsUserReceives.add(bi3);
-		assertFalse(BoosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils));
+		assertFalse(BoosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils, rewardRetrieveUtils));
 	}
 
 	@Test
