@@ -16,6 +16,11 @@ public class BoosterDisplayItem implements Serializable {
 	private int itemId;
 	private int itemQuantity;
 	private int rewardId;
+	
+	public BoosterDisplayItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public BoosterDisplayItem(int id, int boosterPackId, boolean isMonster,
 			boolean isComplete, String monsterQuality, int gemReward,
@@ -122,5 +127,7 @@ public class BoosterDisplayItem implements Serializable {
 				+ ", itemId=" + itemId + ", itemQuantity=" + itemQuantity
 				+ ", rewardId=" + rewardId + "]";
 	}
+
+	
 
 }
