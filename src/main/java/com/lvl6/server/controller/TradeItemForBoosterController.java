@@ -184,7 +184,7 @@ public class TradeItemForBoosterController extends EventController {
 						.determineBoosterItemsUserReceives(
 								numBoosterItemsUserWants, idsToBoosterItems);
 
-				legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils);
+				legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils, rewardRetrieveUtils);
 			}
 
 			int gemReward = 0;

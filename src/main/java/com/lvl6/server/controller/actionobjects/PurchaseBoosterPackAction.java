@@ -261,7 +261,8 @@ public class PurchaseBoosterPackAction {
 
 		selectBoosterItems();
 
-		boolean legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils);
+		boolean legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
+				rewardRetrieveUtils);
 
 		if (!legit) {
 			log.error("illegal to verify booster items, {}", itemsUserReceives);
@@ -301,12 +302,12 @@ public class PurchaseBoosterPackAction {
 				monsterLevelInfoRetrieveUtils);
 
 		ara.execute();
-
+		
 	}
 
 	//TODO: allow multiple free packs?
 	private void updateUserCurrency() {
-		gemReward = BoosterItemUtils.determineGemReward(itemsUserReceives);
+		gemReward = ara.getGemsGained();
 
 		gemChange = -1 * gemPrice;
 		if (freeBoosterPack) {

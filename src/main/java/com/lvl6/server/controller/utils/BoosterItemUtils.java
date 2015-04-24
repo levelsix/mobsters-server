@@ -14,10 +14,13 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.Reward;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -29,21 +32,21 @@ public class BoosterItemUtils {
 
 	public static boolean checkIfMonstersExist(
 			List<BoosterItem> itemsUserReceives,
-			MonsterRetrieveUtils monsterRetrieveUtils) {
+			MonsterRetrieveUtils monsterRetrieveUtils, 
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		boolean monstersExist = true;
 
 		Map<Integer, Monster> monsterIdsToMonsters = monsterRetrieveUtils
 				.getMonsterIdsToMonsters();
 		for (BoosterItem bi : itemsUserReceives) {
-			int monsterId = bi.getMonsterId();
-
-			if (0 == monsterId) {
-				//this booster item does not contain a monster reward
-				continue;
-			} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
-				log.error("This booster item contains nonexistent monsterId. item="
-						+ bi);
-				monstersExist = false;
+			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+			if(r.getType().equalsIgnoreCase(RewardType.MONSTER.name())) {
+				int monsterId = r.getStaticDataId();
+				if (!monsterIdsToMonsters.containsKey(monsterId)) {
+					log.error("This booster item contains nonexistent monsterId. item="
+							+ bi);
+					monstersExist = false;
+				}
 			}
 		}
 		return monstersExist;
