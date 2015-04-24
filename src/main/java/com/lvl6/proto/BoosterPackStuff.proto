@@ -59,6 +59,7 @@ message BoosterItemProto {
 	optional float chanceToAppear = 9;
 	optional int32 itemId = 10;
 	optional int32 itemQuantity = 11;
+
 }
 
 //------------------------------------------------------------------------------------------
