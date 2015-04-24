@@ -44,6 +44,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -95,6 +96,9 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
+	
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 
 	@Override
@@ -199,7 +203,7 @@ public class TradeItemForBoosterController extends EventController {
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
 					BoosterItemProto bip = createInfoProtoUtils
-							.createBoosterItemProto(bi);
+							.createBoosterItemProto(bi, rewardRetrieveUtils);
 					resBuilder.setPrize(bip);
 				}
 				resBuilder.setStatus(TradeItemForBoosterStatus.SUCCESS);
@@ -464,20 +468,20 @@ public class TradeItemForBoosterController extends EventController {
 	private void writeToBoosterPackPurchaseHistory(String userId,
 			int boosterPackId, List<BoosterItem> itemsUserReceives,
 			List<FullUserMonsterProto> fumpList, Timestamp timeOfPurchase) {
-		//just assuming there is one Booster Item
-		if (itemsUserReceives.isEmpty()) {
-			return;
-		}
-		BoosterItem bi = itemsUserReceives.get(0);
-
-		List<String> userMonsterIds = monsterStuffUtils
-				.getUserMonsterIds(fumpList);
-
-		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
-				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
-
-		log.info("wrote to booster pack history!!!! \t numInserted=" + num
-				+ "\t boosterItem=" + itemsUserReceives);
+//		//just assuming there is one Booster Item
+//		if (itemsUserReceives.isEmpty()) {
+//			return;
+//		}
+//		BoosterItem bi = itemsUserReceives.get(0);
+//
+//		List<String> userMonsterIds = monsterStuffUtils
+//				.getUserMonsterIds(fumpList);
+//
+//		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
+//				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
+//
+//		log.info("wrote to booster pack history!!!! \t numInserted=" + num
+//				+ "\t boosterItem=" + itemsUserReceives);
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtils() {

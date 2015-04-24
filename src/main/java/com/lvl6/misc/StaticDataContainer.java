@@ -526,7 +526,7 @@ public class StaticDataContainer {
 			}
 
 			BoosterPackProto bpProto = createInfoProtoUtils
-					.createBoosterPackProto(bp, items, displayItems);
+					.createBoosterPackProto(bp, items, displayItems, rewardRetrieveUtils);
 			//do not put the starterPack into the BoosterPacks
 			if (bpackId == starterPackId) {
 				sdpb.setStarterPack(bpProto);

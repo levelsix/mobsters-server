@@ -169,32 +169,17 @@ public class BoosterDisplayItemRetrieveUtils {
 		int id = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ID);
 		int boosterPackId = rs
 				.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID);
-		boolean isMonster = rs
-				.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_MONSTER);
-		boolean isComplete = rs
-				.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_COMPLETE);
-		String monsterQuality = rs
-				.getString(DBConstants.BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY);
+		int rewardId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__REWARD_ID);
+		boolean isMonster = rs.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_MONSTER);
+		boolean isComplete = rs.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_COMPLETE);
+		String monsterQuality = rs.getString(DBConstants.BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY);
 		int gemReward = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__GEM_REWARD);
 		int quantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__QUANTITY);
 		int itemId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ITEM_ID);
-		int itemQuantity = rs
-				.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ITEM_QUANTITY);
+		int itemQuantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ITEM_QUANTITY);
 
-		if (null != monsterQuality) {
-			String newMonsterQuality = monsterQuality.trim().toUpperCase();
-			if (!monsterQuality.equals(newMonsterQuality)) {
-				log.error(String.format("monsterQuality incorrect: %s, id=%s",
-						monsterQuality, id));
-				monsterQuality = newMonsterQuality;
-			}
-		}
-
-		int rewardId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__REWARD_ID);
-
-		BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(id,
-				boosterPackId, isMonster, isComplete, monsterQuality,
-				gemReward, quantity, itemId, itemQuantity, rewardId);
+		BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(rewardId, boosterPackId, 
+				isMonster, isComplete, monsterQuality, gemReward, quantity, itemId, itemQuantity, rewardId);
 		return boosterDisplayItem;
 	}
 }

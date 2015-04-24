@@ -241,7 +241,7 @@ public class PurchaseBoosterPackController extends EventController {
 		List<BoosterItemProto> bipList = new ArrayList<BoosterItemProto>();
 		
 		for(BoosterItem bi : itemsUserReceives) {
-			BoosterItemProto bip = createInfoProtoUtils.createBoosterItemProto(bi);
+			BoosterItemProto bip = createInfoProtoUtils.createBoosterItemProto(bi, rewardRetrieveUtils);
 			bipList.add(bip);
 		}
 		return bipList;
@@ -307,12 +307,12 @@ public class PurchaseBoosterPackController extends EventController {
 		List<String> userMonsterIds = monsterStuffUtils
 				.getUserMonsterIds(fumpList);
 
-		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
-				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
-
-		log.info(
-				"wrote to booster pack history!!!! \t numInserted={}\t boosterItem={}",
-				num, itemsUserReceives);
+//		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
+//				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
+//
+//		log.info(
+//				"wrote to booster pack history!!!! \t numInserted={}\t boosterItem={}",
+//				num, itemsUserReceives);
 	}
 
 	public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
