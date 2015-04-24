@@ -1143,7 +1143,7 @@ class StartupService extends LazyLogging{
           val objArray: Array[Object] = Array("COOPER", "ALEX")
           val floatArray: Array[java.lang.Float] = Array(0.5F, 0.5F)
           
-          val usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
+          val usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
           if(usga.returnAppropriateObjectGroup().equals("COOPER")){
               logger.info("sending starterbuilderpack");
         	  return true;
