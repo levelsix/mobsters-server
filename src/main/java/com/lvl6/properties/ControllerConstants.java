@@ -177,10 +177,14 @@ public class ControllerConstants {
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
 			10000, 100000, 1000000, 2000000000 };
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 1, 10,
+		100, 1000, 10000, 100000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
 			720, 1440000 };
+
+	
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
-			ResourceType.CASH.name(), ResourceType.OIL.name() };
+			ResourceType.CASH.name(), ResourceType.OIL.name(), ResourceType.GACHA_CREDITS.name() };
 
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
