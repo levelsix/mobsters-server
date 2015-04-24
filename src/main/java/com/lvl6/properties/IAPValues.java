@@ -223,6 +223,9 @@ public class IAPValues {
 
                 return InAppPurchasePackageType.SALE;
             }
+        if(packageName.equals(MONEYTREE) || packageName.equals(MONEYTREENOSALE)) {
+            return InAppPurchasePackageType.MONEY_TREE;
+        }
 		if (packageName.equals(STARTERPACK)) {
 			return InAppPurchasePackageType.STARTER_PACK;
 		}
