@@ -27,9 +27,10 @@ public class UserSegmentationGroupAction {
 
 
 
-	public UserSegmentationGroupAction(String userId) {
+	public UserSegmentationGroupAction(String userId, User user) {
 		super();
 		this.userId = userId;
+		this.user = user;
 	}
 
 

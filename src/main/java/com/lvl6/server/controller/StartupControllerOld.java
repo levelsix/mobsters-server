@@ -522,7 +522,7 @@ public class StartupControllerOld extends EventController {
 					log.info("No major update... getting user info");
 
 					if(user.getSegmentationGroup() == 0) {
-						UserSegmentationGroupAction usga = new UserSegmentationGroupAction(playerId);
+						UserSegmentationGroupAction usga = new UserSegmentationGroupAction(playerId, user);
 						usga.convertUserIdIntoInt();
 						int segmentationGroup = usga.getSegmentationGroup();
 						if(!user.updateUserSegmentationGroup(segmentationGroup)) {

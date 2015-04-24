@@ -642,7 +642,7 @@ class StartupService extends LazyLogging{
   def setUserSegmentationGroup(resBuilder:Builder, user:User, userId:String)= {
       timed("StartupService.setUserSegmentationGroup"){
         if(user.getSegmentationGroup() == 0) {
-        	val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId)
+        	val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId, user)
             usga.convertUserIdIntoInt();
             val segmentationGroup: Int = usga.getSegmentationGroup();
             if(!user.updateUserSegmentationGroup(segmentationGroup)) {
