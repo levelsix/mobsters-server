@@ -742,7 +742,11 @@ public class MiscMethods {
 			//list of protos
 			for (int index = 0; index < i; index++) {
 				int numGems = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS[index];
-				int resourceAmt = ControllerConstants.RESOURCE_CONVERSION__RESOURCE_AMOUNT[index];
+				int resourceAmt = 0;
+				if(type.equalsIgnoreCase(ResourceType.GACHA_CREDITS.name())) {
+					resourceAmt = ControllerConstants.RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT[index];
+				}
+				else resourceAmt = ControllerConstants.RESOURCE_CONVERSION__RESOURCE_AMOUNT[index];
 
 				ResourceConversionConstantProto.Builder rccpb = ResourceConversionConstantProto
 						.newBuilder();
