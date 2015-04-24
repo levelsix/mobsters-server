@@ -151,9 +151,9 @@ public interface InsertUtil {
 	public abstract int insertIntoFirstTimeUsers(String openUdid, String udid,
 			String mac, String advertiserId, Timestamp now);
 
-	public abstract int insertIntoBoosterPackPurchaseHistory(String userId,
-			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
-			List<String> userMonsterIds);
+//	public abstract int insertIntoBoosterPackPurchaseHistory(String userId,
+//			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
+//			List<String> userMonsterIds);
 
 	public abstract String insertIntoPrivateChatPosts(String posterId,
 			String recipientId, String content, Timestamp timeOfPost, String contentLanguage);
