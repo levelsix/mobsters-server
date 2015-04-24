@@ -3497,33 +3497,6 @@ public final class BoosterPackStuffProto {
     int getBoosterPackId();
 
     /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    boolean hasMonsterId();
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    int getMonsterId();
-
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    boolean hasNumPieces();
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    int getNumPieces();
-
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    boolean hasIsComplete();
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    boolean getIsComplete();
-
-    /**
      * <code>optional bool isSpecial = 6;</code>
      */
     boolean hasIsSpecial();
@@ -3531,32 +3504,6 @@ public final class BoosterPackStuffProto {
      * <code>optional bool isSpecial = 6;</code>
      */
     boolean getIsSpecial();
-
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    int getGemReward();
-
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    boolean hasCashReward();
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    int getCashReward();
 
     /**
      * <code>optional float chanceToAppear = 9;</code>
@@ -3568,22 +3515,17 @@ public final class BoosterPackStuffProto {
     float getChanceToAppear();
 
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    boolean hasItemId();
+    boolean hasReward();
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    int getItemId();
-
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
     /**
-     * <code>optional int32 itemQuantity = 11;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    boolean hasItemQuantity();
-    /**
-     * <code>optional int32 itemQuantity = 11;</code>
-     */
-    int getItemQuantity();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoosterItemProto}
@@ -3647,49 +3589,27 @@ public final class BoosterPackStuffProto {
               boosterPackId_ = input.readInt32();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              monsterId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              numPieces_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              isComplete_ = input.readBool();
-              break;
-            }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000004;
               isSpecial_ = input.readBool();
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              gemReward_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              cashReward_ = input.readInt32();
-              break;
-            }
             case 77: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000008;
               chanceToAppear_ = input.readFloat();
               break;
             }
-            case 80: {
-              bitField0_ |= 0x00000200;
-              itemId_ = input.readInt32();
-              break;
-            }
-            case 88: {
-              bitField0_ |= 0x00000400;
-              itemQuantity_ = input.readInt32();
+            case 82: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
               break;
             }
           }
@@ -3762,58 +3682,13 @@ public final class BoosterPackStuffProto {
       return boosterPackId_;
     }
 
-    public static final int MONSTERID_FIELD_NUMBER = 3;
-    private int monsterId_;
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    public boolean hasMonsterId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    public int getMonsterId() {
-      return monsterId_;
-    }
-
-    public static final int NUMPIECES_FIELD_NUMBER = 4;
-    private int numPieces_;
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    public boolean hasNumPieces() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    public int getNumPieces() {
-      return numPieces_;
-    }
-
-    public static final int ISCOMPLETE_FIELD_NUMBER = 5;
-    private boolean isComplete_;
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    public boolean getIsComplete() {
-      return isComplete_;
-    }
-
     public static final int ISSPECIAL_FIELD_NUMBER = 6;
     private boolean isSpecial_;
     /**
      * <code>optional bool isSpecial = 6;</code>
      */
     public boolean hasIsSpecial() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional bool isSpecial = 6;</code>
@@ -3822,51 +3697,13 @@ public final class BoosterPackStuffProto {
       return isSpecial_;
     }
 
-    public static final int GEMREWARD_FIELD_NUMBER = 7;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
-    }
-
-    public static final int CASHREWARD_FIELD_NUMBER = 8;
-    private int cashReward_;
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    public boolean hasCashReward() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    public int getCashReward() {
-      return cashReward_;
-    }
-
     public static final int CHANCETOAPPEAR_FIELD_NUMBER = 9;
     private float chanceToAppear_;
     /**
      * <code>optional float chanceToAppear = 9;</code>
      */
     public boolean hasChanceToAppear() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional float chanceToAppear = 9;</code>
@@ -3875,48 +3712,33 @@ public final class BoosterPackStuffProto {
       return chanceToAppear_;
     }
 
-    public static final int ITEMID_FIELD_NUMBER = 10;
-    private int itemId_;
+    public static final int REWARD_FIELD_NUMBER = 10;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+    public boolean hasReward() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    public static final int ITEMQUANTITY_FIELD_NUMBER = 11;
-    private int itemQuantity_;
-    /**
-     * <code>optional int32 itemQuantity = 11;</code>
-     */
-    public boolean hasItemQuantity() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional int32 itemQuantity = 11;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    public int getItemQuantity() {
-      return itemQuantity_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     private void initFields() {
       boosterItemId_ = 0;
       boosterPackId_ = 0;
-      monsterId_ = 0;
-      numPieces_ = 0;
-      isComplete_ = false;
       isSpecial_ = false;
-      gemReward_ = 0;
-      cashReward_ = 0;
       chanceToAppear_ = 0F;
-      itemId_ = 0;
-      itemQuantity_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3938,31 +3760,13 @@ public final class BoosterPackStuffProto {
         output.writeInt32(2, boosterPackId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, monsterId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, numPieces_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, isComplete_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(6, isSpecial_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, gemReward_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, cashReward_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeFloat(9, chanceToAppear_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, itemId_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, itemQuantity_);
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(10, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3983,39 +3787,15 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, monsterId_);
+          .computeBoolSize(6, isSpecial_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, numPieces_);
+          .computeFloatSize(9, chanceToAppear_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isComplete_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, isSpecial_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, gemReward_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, cashReward_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(9, chanceToAppear_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, itemId_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, itemQuantity_);
+          .computeMessageSize(10, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4126,6 +3906,7 @@ public final class BoosterPackStuffProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4138,24 +3919,16 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         boosterPackId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        monsterId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        numPieces_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        isComplete_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
         isSpecial_ = false;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        cashReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000004);
         chanceToAppear_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
-        itemQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -4195,39 +3968,19 @@ public final class BoosterPackStuffProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.monsterId_ = monsterId_;
+        result.isSpecial_ = isSpecial_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.numPieces_ = numPieces_;
+        result.chanceToAppear_ = chanceToAppear_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.isComplete_ = isComplete_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
         }
-        result.isSpecial_ = isSpecial_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.cashReward_ = cashReward_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.chanceToAppear_ = chanceToAppear_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.itemId_ = itemId_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.itemQuantity_ = itemQuantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4250,32 +4003,14 @@ public final class BoosterPackStuffProto {
         if (other.hasBoosterPackId()) {
           setBoosterPackId(other.getBoosterPackId());
         }
-        if (other.hasMonsterId()) {
-          setMonsterId(other.getMonsterId());
-        }
-        if (other.hasNumPieces()) {
-          setNumPieces(other.getNumPieces());
-        }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
-        }
         if (other.hasIsSpecial()) {
           setIsSpecial(other.getIsSpecial());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasCashReward()) {
-          setCashReward(other.getCashReward());
         }
         if (other.hasChanceToAppear()) {
           setChanceToAppear(other.getChanceToAppear());
         }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        if (other.hasItemQuantity()) {
-          setItemQuantity(other.getItemQuantity());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4368,108 +4103,12 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      private int monsterId_ ;
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public boolean hasMonsterId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public int getMonsterId() {
-        return monsterId_;
-      }
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public Builder setMonsterId(int value) {
-        bitField0_ |= 0x00000004;
-        monsterId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public Builder clearMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        monsterId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int numPieces_ ;
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public boolean hasNumPieces() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public int getNumPieces() {
-        return numPieces_;
-      }
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public Builder setNumPieces(int value) {
-        bitField0_ |= 0x00000008;
-        numPieces_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public Builder clearNumPieces() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        numPieces_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private boolean isComplete_ ;
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public boolean getIsComplete() {
-        return isComplete_;
-      }
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000010;
-        isComplete_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        isComplete_ = false;
-        onChanged();
-        return this;
-      }
-
       private boolean isSpecial_ ;
       /**
        * <code>optional bool isSpecial = 6;</code>
        */
       public boolean hasIsSpecial() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional bool isSpecial = 6;</code>
@@ -4481,7 +4120,7 @@ public final class BoosterPackStuffProto {
        * <code>optional bool isSpecial = 6;</code>
        */
       public Builder setIsSpecial(boolean value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000004;
         isSpecial_ = value;
         onChanged();
         return this;
@@ -4490,88 +4129,8 @@ public final class BoosterPackStuffProto {
        * <code>optional bool isSpecial = 6;</code>
        */
       public Builder clearIsSpecial() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000004);
         isSpecial_ = false;
-        onChanged();
-        return this;
-      }
-
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000040;
-        gemReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int cashReward_ ;
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public boolean hasCashReward() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public int getCashReward() {
-        return cashReward_;
-      }
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public Builder setCashReward(int value) {
-        bitField0_ |= 0x00000080;
-        cashReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public Builder clearCashReward() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        cashReward_ = 0;
         onChanged();
         return this;
       }
@@ -4581,7 +4140,7 @@ public final class BoosterPackStuffProto {
        * <code>optional float chanceToAppear = 9;</code>
        */
       public boolean hasChanceToAppear() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional float chanceToAppear = 9;</code>
@@ -4593,7 +4152,7 @@ public final class BoosterPackStuffProto {
        * <code>optional float chanceToAppear = 9;</code>
        */
       public Builder setChanceToAppear(float value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000008;
         chanceToAppear_ = value;
         onChanged();
         return this;
@@ -4602,74 +4161,126 @@ public final class BoosterPackStuffProto {
        * <code>optional float chanceToAppear = 9;</code>
        */
       public Builder clearChanceToAppear() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000008);
         chanceToAppear_ = 0F;
         onChanged();
         return this;
       }
 
-      private int itemId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+      public boolean hasReward() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public int getItemId() {
-        return itemId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000200;
-        itemId_ = value;
-        onChanged();
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        itemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemQuantity_ ;
-      /**
-       * <code>optional int32 itemQuantity = 11;</code>
-       */
-      public boolean hasItemQuantity() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional int32 itemQuantity = 11;</code>
-       */
-      public int getItemQuantity() {
-        return itemQuantity_;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 11;</code>
-       */
-      public Builder setItemQuantity(int value) {
-        bitField0_ |= 0x00000400;
-        itemQuantity_ = value;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <code>optional int32 itemQuantity = 11;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public Builder clearItemQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        itemQuantity_ = 0;
-        onChanged();
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterItemProto)
@@ -4705,75 +4316,17 @@ public final class BoosterPackStuffProto {
     int getBoosterPackId();
 
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    boolean hasIsMonster();
+    boolean hasReward();
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    boolean getIsMonster();
-
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
     /**
-     * <code>optional bool isComplete = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    boolean hasIsComplete();
-    /**
-     * <code>optional bool isComplete = 3;</code>
-     */
-    boolean getIsComplete();
-
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    boolean hasQuality();
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
-
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    int getGemReward();
-
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    boolean hasQuantity();
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    int getQuantity();
-
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    boolean hasItemId();
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    int getItemId();
-
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    boolean hasItemQuantity();
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    int getItemQuantity();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoosterDisplayItemProto}
@@ -4832,45 +4385,17 @@ public final class BoosterPackStuffProto {
               boosterPackId_ = input.readInt32();
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              isMonster_ = input.readBool();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              isComplete_ = input.readBool();
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                quality_ = value;
+            case 18: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = reward_.toBuilder();
               }
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              gemReward_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              quantity_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              itemId_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              itemQuantity_ = input.readInt32();
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -4936,128 +4461,30 @@ public final class BoosterPackStuffProto {
       return boosterPackId_;
     }
 
-    public static final int ISMONSTER_FIELD_NUMBER = 2;
-    private boolean isMonster_;
+    public static final int REWARD_FIELD_NUMBER = 2;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    public boolean hasIsMonster() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    public boolean getIsMonster() {
-      return isMonster_;
-    }
-
-    public static final int ISCOMPLETE_FIELD_NUMBER = 3;
-    private boolean isComplete_;
-    /**
-     * <code>optional bool isComplete = 3;</code>
-     */
-    public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional bool isComplete = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    public boolean getIsComplete() {
-      return isComplete_;
-    }
-
-    public static final int QUALITY_FIELD_NUMBER = 4;
-    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    public boolean hasQuality() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-      return quality_;
-    }
-
-    public static final int GEMREWARD_FIELD_NUMBER = 5;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
-    }
-
-    public static final int QUANTITY_FIELD_NUMBER = 6;
-    private int quantity_;
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    public boolean hasQuantity() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    public int getQuantity() {
-      return quantity_;
-    }
-
-    public static final int ITEMID_FIELD_NUMBER = 7;
-    private int itemId_;
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    public static final int ITEMQUANTITY_FIELD_NUMBER = 8;
-    private int itemQuantity_;
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    public boolean hasItemQuantity() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    public int getItemQuantity() {
-      return itemQuantity_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     private void initFields() {
       boosterPackId_ = 0;
-      isMonster_ = false;
-      isComplete_ = false;
-      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      gemReward_ = 0;
-      quantity_ = 0;
-      itemId_ = 0;
-      itemQuantity_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5076,25 +4503,7 @@ public final class BoosterPackStuffProto {
         output.writeInt32(1, boosterPackId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBool(2, isMonster_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBool(3, isComplete_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, gemReward_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, quantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, itemId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, itemQuantity_);
+        output.writeMessage(2, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5111,31 +4520,7 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, isMonster_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, isComplete_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, gemReward_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, quantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, itemId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, itemQuantity_);
+          .computeMessageSize(2, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5246,6 +4631,7 @@ public final class BoosterPackStuffProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5256,20 +4642,12 @@ public final class BoosterPackStuffProto {
         super.clear();
         boosterPackId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        isMonster_ = false;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        isComplete_ = false;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        quantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        itemQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -5305,31 +4683,11 @@ public final class BoosterPackStuffProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.isMonster_ = isMonster_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
         }
-        result.isComplete_ = isComplete_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.quality_ = quality_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.quantity_ = quantity_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.itemId_ = itemId_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.itemQuantity_ = itemQuantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5349,26 +4707,8 @@ public final class BoosterPackStuffProto {
         if (other.hasBoosterPackId()) {
           setBoosterPackId(other.getBoosterPackId());
         }
-        if (other.hasIsMonster()) {
-          setIsMonster(other.getIsMonster());
-        }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
-        }
-        if (other.hasQuality()) {
-          setQuality(other.getQuality());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasQuantity()) {
-          setQuantity(other.getQuantity());
-        }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        if (other.hasItemQuantity()) {
-          setItemQuantity(other.getItemQuantity());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5445,247 +4785,120 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      private boolean isMonster_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public boolean hasIsMonster() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public boolean getIsMonster() {
-        return isMonster_;
-      }
-      /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
-       */
-      public Builder setIsMonster(boolean value) {
-        bitField0_ |= 0x00000002;
-        isMonster_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
-       */
-      public Builder clearIsMonster() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        isMonster_ = false;
-        onChanged();
-        return this;
-      }
-
-      private boolean isComplete_ ;
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public boolean getIsComplete() {
-        return isComplete_;
-      }
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000004;
-        isComplete_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        isComplete_ = false;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-       */
-      public boolean hasQuality() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-       */
-      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-        return quality_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-       */
-      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
         }
-        bitField0_ |= 0x00000008;
-        quality_ = value;
-        onChanged();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
+       */
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        onChanged();
-        return this;
-      }
-
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 5;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 gemReward = 5;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 5;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000010;
-        gemReward_ = value;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional int32 gemReward = 5;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int quantity_ ;
-      /**
-       * <code>optional int32 quantity = 6;</code>
-       */
-      public boolean hasQuantity() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 quantity = 6;</code>
-       */
-      public int getQuantity() {
-        return quantity_;
-      }
-      /**
-       * <code>optional int32 quantity = 6;</code>
-       */
-      public Builder setQuantity(int value) {
-        bitField0_ |= 0x00000020;
-        quantity_ = value;
-        onChanged();
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional int32 quantity = 6;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        quantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemId_ ;
-      /**
-       * <code>optional int32 itemId = 7;</code>
-       */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 itemId = 7;</code>
-       */
-      public int getItemId() {
-        return itemId_;
-      }
-      /**
-       * <code>optional int32 itemId = 7;</code>
-       */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000040;
-        itemId_ = value;
-        onChanged();
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional int32 itemId = 7;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        itemId_ = 0;
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000002;
         onChanged();
-        return this;
-      }
-
-      private int itemQuantity_ ;
-      /**
-       * <code>optional int32 itemQuantity = 8;</code>
-       */
-      public boolean hasItemQuantity() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return getRewardFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional int32 itemQuantity = 8;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public int getItemQuantity() {
-        return itemQuantity_;
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
       }
       /**
-       * <code>optional int32 itemQuantity = 8;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder setItemQuantity(int value) {
-        bitField0_ |= 0x00000080;
-        itemQuantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 8;</code>
-       */
-      public Builder clearItemQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        itemQuantity_ = 0;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterDisplayItemProto)
@@ -5729,35 +4942,30 @@ public final class BoosterPackStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026BoosterPackStuff.proto\022\016com.lvl6.proto" +
-      "\032\026SharedEnumConfig.proto\032\nUser.proto\"\250\001\n" +
-      "\030RareBoosterPurchaseProto\022.\n\004user\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\0221\n\007boo" +
-      "ster\030\002 \001(\0132 .com.lvl6.proto.BoosterPackP" +
-      "roto\022\026\n\016timeOfPurchase\030\003 \001(\004\022\021\n\tmonsterI" +
-      "d\030\004 \001(\005\"\346\003\n\020BoosterPackProto\022\025\n\rboosterP" +
-      "ackId\030\001 \001(\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010" +
-      "gemPrice\030\003 \001(\005\0226\n\014specialItems\030\004 \003(\0132 .c" +
-      "om.lvl6.proto.BoosterItemProto\022\035\n\025listBa",
-      "ckgroundImgName\030\005 \001(\t\022\027\n\017listDescription" +
-      "\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTitl" +
-      "eImgName\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022=" +
-      "\n\014displayItems\030\n \003(\0132\'.com.lvl6.proto.Bo" +
-      "osterDisplayItemProto\022G\n\004type\030\013 \001(\01620.co" +
-      "m.lvl6.proto.BoosterPackProto.BoosterPac" +
-      "kType:\007NO_TYPE\"P\n\017BoosterPackType\022\013\n\007NO_" +
-      "TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010ULTIMATE\020\003\022\013\n\007START" +
-      "ER\020\004\022\n\n\006RIGGED\020\005\"\362\001\n\020BoosterItemProto\022\025\n" +
-      "\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPackId\030\002 ",
-      "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001(" +
-      "\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(\010" +
-      "\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005\022" +
-      "\026\n\016chanceToAppear\030\t \001(\002\022\016\n\006itemId\030\n \001(\005\022" +
-      "\024\n\014itemQuantity\030\013 \001(\005\"\330\001\n\027BoosterDisplay" +
-      "ItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n\tisMo" +
-      "nster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\0224\n\007quali" +
-      "ty\030\004 \001(\0162\027.com.lvl6.proto.Quality:\nNO_QU" +
-      "ALITY\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010quantity\030\006 \001" +
-      "(\005\022\016\n\006itemId\030\007 \001(\005\022\024\n\014itemQuantity\030\010 \001(\005",
+      "\032\014Reward.proto\032\026SharedEnumConfig.proto\032\n" +
+      "User.proto\"\250\001\n\030RareBoosterPurchaseProto\022" +
+      ".\n\004user\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0221\n\007booster\030\002 \001(\0132 .com.lvl6.prot" +
+      "o.BoosterPackProto\022\026\n\016timeOfPurchase\030\003 \001" +
+      "(\004\022\021\n\tmonsterId\030\004 \001(\005\"\346\003\n\020BoosterPackPro" +
+      "to\022\025\n\rboosterPackId\030\001 \001(\005\022\027\n\017boosterPack" +
+      "Name\030\002 \001(\t\022\020\n\010gemPrice\030\003 \001(\005\0226\n\014specialI" +
+      "tems\030\004 \003(\0132 .com.lvl6.proto.BoosterItemP",
+      "roto\022\035\n\025listBackgroundImgName\030\005 \001(\t\022\027\n\017l" +
+      "istDescription\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 " +
+      "\001(\t\022\027\n\017navTitleImgName\030\010 \001(\t\022\026\n\016machineI" +
+      "mgName\030\t \001(\t\022=\n\014displayItems\030\n \003(\0132\'.com" +
+      ".lvl6.proto.BoosterDisplayItemProto\022G\n\004t" +
+      "ype\030\013 \001(\01620.com.lvl6.proto.BoosterPackPr" +
+      "oto.BoosterPackType:\007NO_TYPE\"P\n\017BoosterP" +
+      "ackType\022\013\n\007NO_TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010ULTIM" +
+      "ATE\020\003\022\013\n\007STARTER\020\004\022\n\n\006RIGGED\020\005\"\230\001\n\020Boost" +
+      "erItemProto\022\025\n\rboosterItemId\030\001 \001(\005\022\025\n\rbo",
+      "osterPackId\030\002 \001(\005\022\021\n\tisSpecial\030\006 \001(\010\022\026\n\016" +
+      "chanceToAppear\030\t \001(\002\022+\n\006reward\030\n \001(\0132\033.c" +
+      "om.lvl6.proto.RewardProto\"]\n\027BoosterDisp" +
+      "layItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022+\n\006r" +
+      "eward\030\002 \001(\0132\033.com.lvl6.proto.RewardProto" +
       "B\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -5771,6 +4979,7 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -5791,13 +5000,14 @@ public final class BoosterPackStuffProto {
     internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoosterItemProto_descriptor,
-        new java.lang.String[] { "BoosterItemId", "BoosterPackId", "MonsterId", "NumPieces", "IsComplete", "IsSpecial", "GemReward", "CashReward", "ChanceToAppear", "ItemId", "ItemQuantity", });
+        new java.lang.String[] { "BoosterItemId", "BoosterPackId", "IsSpecial", "ChanceToAppear", "Reward", });
     internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor,
-        new java.lang.String[] { "BoosterPackId", "IsMonster", "IsComplete", "Quality", "GemReward", "Quantity", "ItemId", "ItemQuantity", });
+        new java.lang.String[] { "BoosterPackId", "Reward", });
+    com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

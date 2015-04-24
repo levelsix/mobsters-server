@@ -1101,7 +1101,8 @@ public class CreateInfoProtoUtils {
 
 	public BoosterPackProto createBoosterPackProto(BoosterPack bp,
 			Collection<BoosterItem> biList,
-			Collection<BoosterDisplayItem> bdiList) {
+			Collection<BoosterDisplayItem> bdiList,
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterPackProto.Builder b = BoosterPackProto.newBuilder();
 		b.setBoosterPackId(bp.getId());
 
@@ -1152,7 +1153,8 @@ public class CreateInfoProtoUtils {
 			for (BoosterItem bi : biList) {
 				//only want special booster items
 				if (bi.isSpecial()) {
-					BoosterItemProto bip = createBoosterItemProto(bi);
+					BoosterItemProto bip = createBoosterItemProto(bi, 
+							rewardRetrieveUtils);
 					b.addSpecialItems(bip);
 				}
 			}
@@ -1160,7 +1162,8 @@ public class CreateInfoProtoUtils {
 
 		if (null != bdiList) {
 			for (BoosterDisplayItem bdi : bdiList) {
-				BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi);
+				BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi, 
+						rewardRetrieveUtils);
 				b.addDisplayItems(bdip);
 			}
 		}
@@ -1168,48 +1171,27 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public BoosterItemProto createBoosterItemProto(BoosterItem bi) {
+	public BoosterItemProto createBoosterItemProto(BoosterItem bi, 
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterItemProto.Builder b = BoosterItemProto.newBuilder();
 		b.setBoosterItemId(bi.getId());
 		b.setBoosterPackId(bi.getBoosterPackId());
-		b.setMonsterId(bi.getMonsterId());
-		b.setNumPieces(bi.getNumPieces());
-		b.setIsComplete(bi.isComplete());
-		b.setIsSpecial(bi.isSpecial());
-		b.setGemReward(bi.getGemReward());
-		b.setCashReward(bi.getCashReward());
-		b.setChanceToAppear(bi.getChanceToAppear());
-		b.setItemId(bi.getItemId());
-		b.setItemQuantity(bi.getItemQuantity());
+		
+		Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+		b.setReward(createRewardProto(r));
 
 		return b.build();
 	}
 
 	public BoosterDisplayItemProto createBoosterDisplayItemProto(
-			BoosterDisplayItem bdi) {
+			BoosterDisplayItem bdi, RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto
 				.newBuilder();
 
 		b.setBoosterPackId(bdi.getBoosterPackId());
-		b.setIsMonster(bdi.isMonster());
-		b.setIsComplete(bdi.isComplete());
-
-		String monsterQuality = bdi.getMonsterQuality();
-		if (null != monsterQuality) {
-			try {
-				Quality mq = Quality.valueOf(monsterQuality);
-				b.setQuality(mq);
-			} catch (Exception e) {
-				log.error(String.format(
-						"invalid monster quality. boosterDisplayItem=%s", bdi),
-						e);
-			}
-		}
-
-		b.setGemReward(bdi.getGemReward());
-		b.setQuantity(bdi.getQuantity());
-		b.setItemId(bdi.getItemId());
-		b.setItemQuantity(bdi.getItemQuantity());
+		
+		Reward r = rewardRetrieveUtils.getRewardById(bdi.getRewardId());
+		b.setReward(createRewardProto(r));
 
 		return b.build();
 	}

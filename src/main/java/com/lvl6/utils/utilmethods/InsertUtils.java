@@ -736,65 +736,65 @@ public class InsertUtils implements InsertUtil {
 		return numInserted;
 	}
 
-	@Override
-	public int insertIntoBoosterPackPurchaseHistory(String userId,
-			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
-			List<String> userMonsterIds) {
-		String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
-
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-		int boosterItemId = bi.getId();
-		int monsterId = bi.getMonsterId();
-		int numPieces = bi.getNumPieces();
-		boolean isComplete = bi.isComplete();
-		boolean isSpecial = bi.isSpecial();
-		int gemReward = bi.getGemReward();
-		float chanceToAppear = bi.getChanceToAppear();
-
-		insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID,
-				userId);
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID,
-				boosterPackId);
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE,
-				timeOfPurchase);
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID,
-				boosterItemId);
-		//monster prize and gem prize are mutually exclusive
-		if (monsterId > 0) {
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID,
-					monsterId);
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES,
-					numPieces);
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE,
-					isComplete);
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL,
-					isSpecial);
-
-			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
-			insertParams
-			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
-					userMonsterIdsStr);
-		} else if (gemReward > 0) {
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
-					gemReward);
-		}
-
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR,
-				chanceToAppear);
-
-		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
-				insertParams);
-		return numInserted;
-	}
+//	@Override
+//	public int insertIntoBoosterPackPurchaseHistory(String userId,
+//			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
+//			List<String> userMonsterIds) {
+//		String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
+//
+//		Map<String, Object> insertParams = new HashMap<String, Object>();
+//		int boosterItemId = bi.getId();
+//		int monsterId = bi.getMonsterId();
+//		int numPieces = bi.getNumPieces();
+//		boolean isComplete = bi.isComplete();
+//		boolean isSpecial = bi.isSpecial();
+//		int gemReward = bi.getGemReward();
+//		float chanceToAppear = bi.getChanceToAppear();
+//
+//		insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID,
+//				userId);
+//		insertParams.put(
+//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID,
+//				boosterPackId);
+//		insertParams.put(
+//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE,
+//				timeOfPurchase);
+//		insertParams.put(
+//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID,
+//				boosterItemId);
+//		//monster prize and gem prize are mutually exclusive
+//		if (monsterId > 0) {
+//			insertParams.put(
+//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID,
+//					monsterId);
+//			insertParams.put(
+//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES,
+//					numPieces);
+//			insertParams.put(
+//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE,
+//					isComplete);
+//			insertParams.put(
+//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL,
+//					isSpecial);
+//
+//			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
+//			insertParams
+//			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
+//					userMonsterIdsStr);
+//		} else if (gemReward > 0) {
+//			insertParams.put(
+//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
+//					gemReward);
+//		}
+//
+//		insertParams.put(
+//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR,
+//				chanceToAppear);
+//
+//		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
+//				insertParams);
+//		return numInserted;
+//	}
 
 	@Override
 	public String insertIntoPrivateChatPosts(String posterId,
