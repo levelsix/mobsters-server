@@ -81,4 +81,9 @@ public class BoosterItem implements Serializable {
 				+ chanceToAppear + ", rewardId=" + rewardId + "]";
 	}
 
+
+
+
+
+
 }

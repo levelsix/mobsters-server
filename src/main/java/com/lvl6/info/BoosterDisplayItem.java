@@ -51,6 +51,4 @@ public class BoosterDisplayItem implements Serializable {
 				+ boosterPackId + ", rewardId=" + rewardId + "]";
 	}
 
-	
-
 }

@@ -463,7 +463,7 @@ public class TradeItemForBoosterController extends EventController {
 //		List<String> userMonsterIds = monsterStuffUtils
 //				.getUserMonsterIds(fumpList);
 //
-//		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(
+//		int num = insertUtil.insertIntoBoosterPackPurchaseHistory(
 //				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
 //
 //		log.info("wrote to booster pack history!!!! \t numInserted=" + num

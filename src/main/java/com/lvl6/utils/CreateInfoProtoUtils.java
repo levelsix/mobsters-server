@@ -1191,7 +1191,6 @@ public class CreateInfoProtoUtils {
 				.newBuilder();
 
 		b.setBoosterPackId(bdi.getBoosterPackId());
-
 		Reward r = rewardRetrieveUtils.getRewardById(bdi.getRewardId());
 		b.setReward(createRewardProto(r));
 
@@ -2273,7 +2272,7 @@ public class CreateInfoProtoUtils {
 
 	public List<ItemGemPriceProto> createItemGemPriceProto(
 			Map<Integer, MiniJobRefreshItem> idToMjriMap)
-			{
+	{
 		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
 
 		for (Integer id : idToMjriMap.keySet())
@@ -2284,7 +2283,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		return igppList;
-			}
+	}
 
 	public ItemGemPriceProto createItemGemPriceProto(MiniJobRefreshItem mjri)
 	{
@@ -2416,7 +2415,7 @@ public class CreateInfoProtoUtils {
 
 	public Collection<MiniEventTierRewardProto> createMiniEventTierRewardProto(
 			Collection<MiniEventTierReward> metrs)
-			{
+	{
 		Collection<MiniEventTierRewardProto> rewardProtos =
 				new ArrayList<MiniEventTierRewardProto>();
 
@@ -2426,7 +2425,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		return rewardProtos;
-			}
+	}
 
 	private MiniEventTierRewardProto createMiniEventTierRewardProto(
 			MiniEventTierReward metr)
@@ -2444,7 +2443,7 @@ public class CreateInfoProtoUtils {
 
 	private Collection<MiniEventGoalProto> createMiniEventGoalProto(
 			Collection<MiniEventGoal> goals)
-			{
+	{
 		Collection<MiniEventGoalProto> goalProtos = new ArrayList<MiniEventGoalProto>();
 		for (MiniEventGoal meg : goals)
 		{
@@ -2454,7 +2453,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		return goalProtos;
-			}
+	}
 
 	private MiniEventGoalProto createMiniEventGoalProto(MiniEventGoal meg) {
 		MiniEventGoalProto.Builder megpb = MiniEventGoalProto.newBuilder();
@@ -2470,7 +2469,7 @@ public class CreateInfoProtoUtils {
 				log.error(
 						String.format("invalid MiniEventGoalType. MiniEventGoal=%s",
 								meg),
-								e);
+				e);
 			}
 		}
 		megpb.setGoalAmt(meg.getAmt());
@@ -2491,7 +2490,7 @@ public class CreateInfoProtoUtils {
 
 	private Collection<MiniEventLeaderboardRewardProto> createMiniEventLeaderboardRewardProto(
 			Collection<MiniEventLeaderboardReward> rewards)
-			{
+	{
 		Collection<MiniEventLeaderboardRewardProto> rewardProtos =
 				new ArrayList<MiniEventLeaderboardRewardProto>();
 
@@ -2503,7 +2502,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		return rewardProtos;
-			}
+	}
 
 	private MiniEventLeaderboardRewardProto createMiniEventLeaderboardRewardProto(
 			MiniEventLeaderboardReward melr)
@@ -2520,7 +2519,7 @@ public class CreateInfoProtoUtils {
 
 	private Collection<UserMiniEventGoalProto> createUserMiniEventGoalProto(
 			Collection<MiniEventGoalForUser> megfus)
-			{
+	{
 		Collection<UserMiniEventGoalProto> goalProtos =
 				new ArrayList<UserMiniEventGoalProto>();
 		if (null == megfus || megfus.isEmpty())
@@ -2534,7 +2533,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		return goalProtos;
-			}
+	}
 
 	private UserMiniEventGoalProto createUserMiniEventGoalProto(
 			MiniEventGoalForUser megfu)
@@ -5205,7 +5204,7 @@ public class CreateInfoProtoUtils {
 				.setImageName(aso.getImgName())
 				.setOffSet(
 						createCoordinateProtoFromCoordinatePair(aso.getOffSet()))
-						.build();
+				.build();
 	}
 
 	public void createMinimumUserProtosFromClannedAndClanlessUsers(
