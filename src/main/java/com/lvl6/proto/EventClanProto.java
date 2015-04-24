@@ -53547,13 +53547,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
     boolean hasScope();
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
-    com.lvl6.proto.ChatProto.GroupChatScope getScope();
+    com.lvl6.proto.ChatProto.ChatScope getScope();
 
     /**
      * <code>repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 3;</code>
@@ -53646,7 +53646,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.ChatProto.GroupChatScope value = com.lvl6.proto.ChatProto.GroupChatScope.valueOf(rawValue);
+              com.lvl6.proto.ChatProto.ChatScope value = com.lvl6.proto.ChatProto.ChatScope.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -53740,17 +53740,17 @@ public final class EventClanProto {
     }
 
     public static final int SCOPE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.ChatProto.GroupChatScope scope_;
+    private com.lvl6.proto.ChatProto.ChatScope scope_;
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
     public boolean hasScope() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+     * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
-    public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
+    public com.lvl6.proto.ChatProto.ChatScope getScope() {
       return scope_;
     }
 
@@ -53791,7 +53791,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+      scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       userClanGifts_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -53962,7 +53962,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+        scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (userClanGiftsBuilder_ == null) {
           userClanGifts_ = java.util.Collections.emptyList();
@@ -54246,23 +54246,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ChatProto.GroupChatScope scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+      private com.lvl6.proto.ChatProto.ChatScope scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
       public boolean hasScope() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatScope getScope() {
+      public com.lvl6.proto.ChatProto.ChatScope getScope() {
         return scope_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
-      public Builder setScope(com.lvl6.proto.ChatProto.GroupChatScope value) {
+      public Builder setScope(com.lvl6.proto.ChatProto.ChatScope value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -54272,11 +54272,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GroupChatScope scope = 2 [default = CLAN];</code>
+       * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
        */
       public Builder clearScope() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        scope_ = com.lvl6.proto.ChatProto.GroupChatScope.CLAN;
+        scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
         onChanged();
         return this;
       }
@@ -55176,12 +55176,12 @@ public final class EventClanProto {
       ".com.lvl6.proto.ClearExpiredClanGiftsRes" +
       "ponseProto.ClearExpiredClanGiftsStatus\":" +
       "\n\033ClearExpiredClanGiftsStatus\022\013\n\007SUCCESS",
-      "\020\001\022\016\n\nFAIL_OTHER\020\002\"\300\001\n\035ReceivedClanGiftR" +
+      "\020\001\022\016\n\nFAIL_OTHER\020\002\"\273\001\n\035ReceivedClanGiftR" +
       "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\0223\n\005scope\030\002 \001(\0162\036." +
-      "com.lvl6.proto.GroupChatScope:\004CLAN\0228\n\ru" +
-      "serClanGifts\030\003 \003(\0132!.com.lvl6.proto.User" +
-      "ClanGiftProtoB\020B\016EventClanProto"
+      "proto.MinimumUserProto\022.\n\005scope\030\002 \001(\0162\031." +
+      "com.lvl6.proto.ChatScope:\004CLAN\0228\n\ruserCl" +
+      "anGifts\030\003 \003(\0132!.com.lvl6.proto.UserClanG" +
+      "iftProtoB\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

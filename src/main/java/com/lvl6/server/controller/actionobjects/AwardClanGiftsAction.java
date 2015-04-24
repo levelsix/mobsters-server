@@ -12,7 +12,7 @@ import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ClanGiftRewards;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
-import com.lvl6.proto.ChatProto.GroupChatScope;
+import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProto;
 import com.lvl6.proto.RewardsProto.UserClanGiftProto;
@@ -94,7 +94,7 @@ public class AwardClanGiftsAction {
 		mup = createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(gifterUser, null);
 		
 		chatProto.setSender(mup);
-		chatProto.setScope(GroupChatScope.CLAN);
+		chatProto.setScope(ChatScope.CLAN);
 	}
 
 	private boolean verifySemantics() {

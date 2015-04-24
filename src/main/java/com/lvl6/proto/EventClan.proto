@@ -701,7 +701,7 @@ message ClearExpiredClanGiftsResponseProto {
 
 message ReceivedClanGiftResponseProto {
 	optional MinimumUserProto sender = 1;  //person who gave out the gift to everyone
-	optional GroupChatScope scope = 2 [default = CLAN];
+	optional ChatScope scope = 2 [default = CLAN];
 	repeated UserClanGiftProto userClanGifts = 3;
 }
 
