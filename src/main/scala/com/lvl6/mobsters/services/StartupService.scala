@@ -126,6 +126,7 @@ import com.lvl6.server.Locker
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
+import com.lvl6.server.controller.actionobjects.SetClanGiftsAction
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction
@@ -148,6 +149,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
 import com.lvl6.proto.ChatProto.ChatScope
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
+import com.lvl6.info.ClanGiftForUser
 
 case class StartupData(
       resBuilder:Builder, 
@@ -178,7 +181,8 @@ class StartupService extends LazyLogging{
 	@Autowired var  clanEventPersistentForClanRetrieveUtils : ClanEventPersistentForClanRetrieveUtils2  = null
 	@Autowired var  clanEventPersistentForUserRetrieveUtils : ClanEventPersistentForUserRetrieveUtils2  = null
 	@Autowired var  clanEventPersistentUserRewardRetrieveUtils : ClanEventPersistentUserRewardRetrieveUtils2  = null
-	@Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
+	@Autowired var  clanGiftForUserRetrieveUtil : ClanGiftForUserRetrieveUtils = null
+  @Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
 	@Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
 	@Autowired var  clanRetrieveUtils : ClanRetrieveUtils2  = null
 	@Autowired var  eventPersistentForUserRetrieveUtils : EventPersistentForUserRetrieveUtils2  = null
@@ -576,6 +580,16 @@ class StartupService extends LazyLogging{
             monsterSnapshotForUserRetrieveUtil,
             createInfoProtoUtils);
         scmtda.setUp(fillMe);
+        
+        //SETTING CLAN GIFTS, it adds protos straight to resbuilder
+        val scga = new SetClanGiftsAction(
+             resBuilder,
+             user,
+             playerId,
+             clanGiftForUserRetrieveUtil,
+             createInfoProtoUtils);
+        scga.setUp(fillMe);
+        
         //Now since all the ids of resources are known, get them from db
         fillMe.fetch();
         spcma.execute(fillMe);
@@ -587,6 +601,7 @@ class StartupService extends LazyLogging{
         scha.execute(fillMe);
         scra.execute(fillMe);
         scmtda.execute(fillMe);
+        scga.execute(fillMe);
         resBuilder.setClanData(cdpb.build());
         //TODO: DELETE IN FUTURE. This is for legacy client
         resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -1413,6 +1428,7 @@ class StartupService extends LazyLogging{
     }
   }
   
+  
   def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
     timed("StartupService.setClanRaidHistoryStuff"){
       //the raid stage and reward history for past 7 days
@@ -1433,7 +1449,6 @@ class StartupService extends LazyLogging{
       }
     }
   }
-  
   
   
   def sendOfferChartInstall(installTime:Date , advertiserId:String):Future[Unit] ={
@@ -1517,7 +1532,7 @@ class StartupService extends LazyLogging{
     if (user != null) {
       val userId = user.getId()
       logger.info(s"Updating leaderboard for user $userId");
-      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn)
+      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn);
     }
   }
 }

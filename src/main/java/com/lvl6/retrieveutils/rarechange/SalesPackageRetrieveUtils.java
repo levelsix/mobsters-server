@@ -39,19 +39,19 @@ public class SalesPackageRetrieveUtils {
 		return salesPackageIdsToSalesPackages;
 	}
 
-	//  public static Map<Integer, SalesPackage> getSalesPackagesForSalesPackageIds(
-	//      List<Integer> salesPackageIds) {
-	//    if (salesPackageIdsToSalesPackages == null) {
-	//      setStaticSalesPackageIdsToSalesPackages();
-	//    }
-	//    Map<Integer, SalesPackage> returnValue = new HashMap<Integer, SalesPackage>();
-	//    for (int id : salesPackageIds) {
-	//      SalesPackage aPack = salesPackageIdsToSalesPackages.get(id);
-	//      returnValue.put(id, aPack);
-	//    }
-	//
-	//    return returnValue;
-	//  }
+	  public Map<Integer, SalesPackage> getSalesPackagesForSalesPackageIds(
+	      List<Integer> salesPackageIds) {
+	    if (salesPackageIdsToSalesPackages == null) {
+	      setStaticSalesPackageIdsToSalesPackages();
+	    }
+	    Map<Integer, SalesPackage> returnValue = new HashMap<Integer, SalesPackage>();
+	    for (int id : salesPackageIds) {
+	      SalesPackage aPack = salesPackageIdsToSalesPackages.get(id);
+	      returnValue.put(id, aPack);
+	    }
+
+	    return returnValue;
+	  }
 
 	public Map<String, List<SalesPackage>> getSalesPackageProductIdToSalesPackages() {
 		log.debug("retrieving all sales packs data map");
@@ -185,7 +185,7 @@ public class SalesPackageRetrieveUtils {
             titleColor = str;
         }
 
-		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid,
+		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid, 
 				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon, titleColor);
 		return salesPackage;
 	}

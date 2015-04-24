@@ -41,6 +41,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
@@ -75,6 +76,7 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -122,6 +124,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -169,12 +172,14 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetClanGiftsAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
@@ -253,6 +258,9 @@ public class StartupControllerOld extends EventController {
 	protected UpdateUtil updateUtil;
 
 	@Autowired
+	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
+	
+	@Autowired
 	protected InAppPurchaseUtils inAppPurchaseUtils;
 
 	@Autowired
@@ -302,6 +310,9 @@ public class StartupControllerOld extends EventController {
 
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+
+	@Autowired
+	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtil;
 
 	@Autowired
 	protected BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
@@ -766,6 +777,9 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setBattleItemQueueForUser", stopWatch.getTime());
 			setSalesForUser(resBuilder, user);
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
+			setMiniEventForUser(resBuilder, user, playerId, nowDate);
+			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
+			
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -845,6 +859,11 @@ public class StartupControllerOld extends EventController {
 					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
+			
+			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId, 
+					clanGiftForUserRetrieveUtils, createInfoProtoUtils);
+			scga.setUp(fillMe);
+			
 
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -871,7 +890,9 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			scmtda.execute(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-
+			scga.execute(fillMe);
+			log.info("{}ms at setClanGifts", stopWatch.getTime());
+			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
 			resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -892,6 +913,7 @@ public class StartupControllerOld extends EventController {
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
+			
 
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);
@@ -1830,7 +1852,7 @@ public class StartupControllerOld extends EventController {
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
 
-//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
+		//		boolean salesJumpTwoTiers = updateUserSalesJumpTwoTiers(user);
 		int userSalesValue = user.getSalesValue();
 		int newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 		Date now = new Date();
@@ -1840,7 +1862,7 @@ public class StartupControllerOld extends EventController {
 					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK) &&
 					!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
 				if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+						timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
 							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 					resBuilder.addSalesPackages(spProto);
@@ -3160,14 +3182,14 @@ public class StartupControllerOld extends EventController {
 		this.updateUtil = updateUtil;
 	}
 
-	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
-		return salesPackageRetrieveUtils;
-	}
-
-	public void setSalesPackageRetrieveUtils(
-			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
-		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
-	}
+//	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+//		return salesPackageRetrieveUtils;
+//	}
+//
+//	public void setSalesPackageRetrieveUtils(
+//			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+//		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+//	}
 
 	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
 		return salesItemRetrieveUtils;

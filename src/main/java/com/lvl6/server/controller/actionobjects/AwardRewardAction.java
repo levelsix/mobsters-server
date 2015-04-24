@@ -17,9 +17,12 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -40,6 +43,9 @@ public class AwardRewardAction {
 	private UpdateUtil updateUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement
 	public AwardRewardAction(String userId, User u, int maxCash,
@@ -91,6 +97,7 @@ public class AwardRewardAction {
 	private Map<String, Integer> curCurrencies;
 	private Map<String, String> reasonsForChanges;
 	private Map<String, String> details;
+	private AwardClanGiftsAction acga;
 
 	public boolean execute() {
 
@@ -153,9 +160,14 @@ public class AwardRewardAction {
 			int id = r.getId();
 			String type = r.getType();
 			int staticDataId = r.getStaticDataId();
-			int amt = r.getAmt();
+			int amt = r.getAmt();  //amount means nothing for clan gifts
 
-			if (RewardType.ITEM.name().equals(type)) {
+			if(RewardType.CLAN_GIFT.name().equals(type)) {
+				acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift", 
+						clanGiftRewardsRetrieveUtils, userClanRetrieveUtils, 
+						insertUtil, createInfoProtoUtils);
+				
+			} else if (RewardType.ITEM.name().equals(type)) {
 				aggregateItems(itemIdToQuantity, staticDataId, amt);
 
 			} else if (RewardType.GEMS.name().equals(type)) {
@@ -501,4 +513,13 @@ public class AwardRewardAction {
 	public Map<String, String> getDetails() {
 		return details;
 	}
+
+	public AwardClanGiftsAction getAcga() {
+		return acga;
+	}
+
+	public void setAcga(AwardClanGiftsAction acga) {
+		this.acga = acga;
+	}
+	
 }

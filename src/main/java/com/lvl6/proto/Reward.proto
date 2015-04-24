@@ -1,8 +1,11 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
-import "MonsterStuff.proto";
 import "Item.proto";
+import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
+import "User.proto";
+
 
 package com.lvl6.proto;
 
@@ -31,6 +34,7 @@ message RewardProto {
 		CASH = 4;
 		OIL = 5;
 		MONSTER = 6;
+		CLAN_GIFT = 7;
 	}
 	
 }
@@ -43,4 +47,27 @@ message UserRewardProto {
 	optional int32 gems = 3; //amounts gained
 	optional int32 cash = 4;
 	optional int32 oil = 5;
+	optional UserClanGiftProto clanGift = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ClanGiftProto {
+	optional int32 clanGiftId = 1;
+	optional string name = 2;
+	optional int32 hoursUntilExpiration = 3;	
+	optional string imageName = 4;
+	optional Quality quality = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message UserClanGiftProto {
+	optional string userClanGiftId = 1;
+	optional string receiverUserId = 2;
+	optional MinimumUserProto gifterUser = 3;
+	optional ClanGiftProto clanGift = 4;
+	optional int64 timeReceived = 5; //when the gift gets sent out to everyone
+	optional RewardProto reward = 6;
+	optional bool hasBeenCollected = 7;
 }
