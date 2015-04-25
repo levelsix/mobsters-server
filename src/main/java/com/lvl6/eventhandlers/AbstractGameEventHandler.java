@@ -18,7 +18,7 @@ import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.Attachment;
 import com.lvl6.utils.MessagingUtil;
 
-public abstract class AbstractGameEventHandler implements MessageHandler {
+public abstract class AbstractGameEventHandler implements MessageHandler{
 
 	protected static Logger log = LoggerFactory
 			.getLogger(AbstractGameEventHandler.class);
@@ -69,9 +69,7 @@ public abstract class AbstractGameEventHandler implements MessageHandler {
 		while (attachment.eventReady()) {
 			RequestEvent event = getEvent(attachment);
 			log.debug("Recieved event from client: " + event.getPlayerId());
-			delegateEvent(payload, event,
-					(String) msg.getHeaders().get("ip_connection_id"),
-					attachment.eventType);
+			delegateEvent(event,attachment.eventType);
 			attachment.reset();
 
 		}
@@ -100,7 +98,6 @@ public abstract class AbstractGameEventHandler implements MessageHandler {
 		return event;
 	}
 
-	protected abstract void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType);
+	protected abstract void delegateEvent(RequestEvent event, EventProtocolRequest eventType);
 
 }

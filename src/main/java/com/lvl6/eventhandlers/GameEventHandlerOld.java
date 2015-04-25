@@ -16,11 +16,11 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.ConnectedPlayer;
 
-public class GameEventHandler extends AbstractGameEventHandler {
+public class GameEventHandlerOld extends AbstractGameEventHandler {
 	private static final int DEFAULT_TTL = 9;
 
 	private static final Logger log = LoggerFactory
-			.getLogger(GameEventHandler.class);
+			.getLogger(GameEventHandlerOld.class);
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
@@ -53,8 +53,7 @@ public class GameEventHandler extends AbstractGameEventHandler {
 	 * @throws FileNotFoundException
 	 */
 	@Override
-	protected void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType) {
+	protected void delegateEvent(RequestEvent event, EventProtocolRequest eventType) {
 		if (event != null && eventType.getNumber() < 0) {
 			log.error("the event type is < 0");
 			return;
@@ -64,7 +63,7 @@ public class GameEventHandler extends AbstractGameEventHandler {
 			log.error("No EventController for eventType: " + eventType);
 			return;
 		}
-		updatePlayerToServerMaps(event, ip_connection_id);
+		updatePlayerToServerMaps(event, "");
 		ec.handleEvent(event);
 	}
 

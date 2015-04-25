@@ -25,10 +25,9 @@ public class GameEventSaveHandler extends AbstractGameEventHandler {
 	}
 
 	@Override
-	protected void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType) {
+	protected void delegateEvent(RequestEvent event,EventProtocolRequest eventType) {
 		log.info("Persisting event for load testing");
-		recorder.persistEvent(event.getPlayerId(), eventType.getNumber(), bytes);
+		//recorder.persistEvent(event.getPlayerId(), eventType.getNumber(), event.);
 	}
 
 }
