@@ -19,7 +19,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.properties.DBConstants;
 

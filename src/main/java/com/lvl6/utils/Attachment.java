@@ -49,6 +49,9 @@ public class Attachment {
 
 	/** temporary storage of the payload before it is read into an event */
 	public byte payload[];
+	
+	/** Event info */
+	public EventProto ep;
 
 	protected ByteOrder getByteOrder() {
 		return ByteOrder.BIG_ENDIAN;
@@ -103,8 +106,7 @@ public class Attachment {
 
 		if (gotHeader && readBuff.remaining() >= eventSize) {
 			try {
-				EventProto ep = EventProto
-						.parseFrom(ByteString.copyFrom(readBuff, eventSize));
+				ep = EventProto.parseFrom(ByteString.copyFrom(readBuff, eventSize));
 
 				tag = ep.getTagNum();
 				eventType = EventProtocolRequest.valueOf(ep.getEventType());

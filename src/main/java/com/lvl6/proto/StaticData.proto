@@ -97,5 +97,8 @@ message StaticDataProto {
 	
 	repeated RewardProto reward = 45;	
 	
+	repeated ClanGiftProto clanGifts = 46;
+	
+	
 }
 	

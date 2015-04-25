@@ -16,6 +16,8 @@ import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -50,6 +52,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -105,6 +108,12 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 
 	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
@@ -192,15 +201,15 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
+	
+	@Autowired
+	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-
-    @Autowired
-    protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
-
-    @Autowired
-    protected RewardRetrieveUtils rewardRetrieveUtils;
+	
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
@@ -305,6 +314,8 @@ public class ReloadAllRareChangeStaticData {
 		//		CityRetrieveUtils.reload();
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
+		clanGiftRetrieveUtils.reload();
+		clanGiftRewardsRetrieveUtils.reload();
 		clanIconRetrieveUtils.reload();
 		clanEventPersistentRetrieveUtils.reload();
 		clanRaidRetrieveUtils.reload();
@@ -344,7 +355,7 @@ public class ReloadAllRareChangeStaticData {
 		skillSideEffectRetrieveUtils.reload();
 		salesDisplayItemRetrieveUtils.reload();
 		salesItemRetrieveUtils.reload();
-		salesPackageRetrieveUtils.reload();
+//		salesPackageRetrieveUtils.reload();
 		startupStuffRetrieveUtils.reload();
 		staticUserLevelInfoRetrieveUtils.reload();
 		structureBattleItemFactoryRetrieveUtils.reload();

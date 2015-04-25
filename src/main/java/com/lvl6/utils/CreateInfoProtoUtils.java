@@ -116,8 +116,10 @@ import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
+import com.lvl6.proto.RewardsProto.ClanGiftProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
@@ -183,6 +185,7 @@ import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
@@ -191,6 +194,7 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -201,6 +205,9 @@ public class CreateInfoProtoUtils {
 
 	@Autowired
 	protected MiscMethods miscMethods;
+
+	@Autowired
+	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
 
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
@@ -234,6 +241,9 @@ public class CreateInfoProtoUtils {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
@@ -3541,7 +3551,7 @@ public class CreateInfoProtoUtils {
 	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
-			int gems, int cash, int oil)
+			int gems, int cash, int oil, UserClanGiftProto ucgp)
 	{
 		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
 
@@ -3557,6 +3567,10 @@ public class CreateInfoProtoUtils {
 		urp.setGems(gems);
 		urp.setCash(cash);
 		urp.setOil(oil);
+		
+		if(ucgp != null) {
+			urp.setClanGift(ucgp);
+		}
 
 		return urp.build();
 	}
@@ -5223,9 +5237,50 @@ public class CreateInfoProtoUtils {
 		cmpb.setIsJiggle(cm.isJiggle());
 		cmpb.setImageName(cm.getImageName());
 		return cmpb.build();
-	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
-
 	}
+
+
+
+
+	///////////////////////////////CLAN GIFTS PROTOS/////////////////////////////////////////////
+
+	public ClanGiftProto createClanGiftProto(ClanGift cg) {
+		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
+		b.setClanGiftId(cg.getId());
+		if(cg.getName() != null) {
+			b.setName(cg.getName());
+		}
+
+		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
+		b.setImageName(cg.getImageName());
+		b.setQuality(Quality.valueOf(cg.getQuality()));
+
+		return b.build();
+	}
+
+	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg, MinimumUserProto mup) {
+		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();
+		b.setUserClanGiftId(ucg.getId());
+		b.setReceiverUserId(ucg.getReceiverUserId());
+
+		if(mup != null) {
+			b.setGifterUser(mup);	
+		}
+		
+		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
+
+		b.setClanGift(createClanGiftProto(cg));
+		b.setTimeReceived(ucg.getTimeReceived().getTime());
+
+		Reward r = rewardRetrieveUtils.getRewardById(ucg.getRewardId());
+		b.setReward(createRewardProto(r));
+
+		b.setHasBeenCollected(ucg.isHasBeenCollected());
+		
+		return b.build();
+	}
+
+
 
 
 

@@ -19,6 +19,7 @@ import "Research.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
+import "Reward.proto";
 import "Task.proto";
 import "User.proto";
 
@@ -146,6 +147,8 @@ message StartupResponseProto {
 	optional UserMiniEventProto userMiniEvent = 52;
 
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
+	
+	repeated UserClanGiftProto userClanGifts = 500; 
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
