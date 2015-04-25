@@ -37,6 +37,10 @@ message MiniJobProto {
      //optional int32 secondItemIdReward = 19;
      //optional int32 secondItemRewardQuantity = 20;
      
+     optional int32 rewardIdOne = 21;
+     optional int32 rewardIdTwo = 22;
+     optional int32 rewardIdThree = 23;
+     
 }
 
 //------------------------------------------------------------------------------------------

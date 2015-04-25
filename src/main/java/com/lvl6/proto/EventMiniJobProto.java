@@ -6296,6 +6296,19 @@ public final class EventMiniJobProto {
      * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
      */
     com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus getStatus();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+     */
+    boolean hasRewards();
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserRewardProto getRewards();
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RedeemMiniJobResponseProto}
@@ -6388,6 +6401,19 @@ public final class EventMiniJobProto {
                 bitField0_ |= 0x00000004;
                 status_ = value;
               }
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.RewardsProto.UserRewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = rewards_.toBuilder();
+              }
+              rewards_ = input.readMessage(com.lvl6.proto.RewardsProto.UserRewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rewards_);
+                rewards_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
               break;
             }
           }
@@ -6599,10 +6625,32 @@ public final class EventMiniJobProto {
       return status_;
     }
 
+    public static final int REWARDS_FIELD_NUMBER = 4;
+    private com.lvl6.proto.RewardsProto.UserRewardProto rewards_;
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+     */
+    public boolean hasRewards() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserRewardProto getRewards() {
+      return rewards_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder() {
+      return rewards_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
+      rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6626,6 +6674,9 @@ public final class EventMiniJobProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, status_.getNumber());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, rewards_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -6646,6 +6697,10 @@ public final class EventMiniJobProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, status_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, rewards_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6762,6 +6817,7 @@ public final class EventMiniJobProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getFumpFieldBuilder();
+          getRewardsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6784,6 +6840,12 @@ public final class EventMiniJobProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (rewardsBuilder_ == null) {
+          rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+        } else {
+          rewardsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -6832,6 +6894,14 @@ public final class EventMiniJobProto {
           to_bitField0_ |= 0x00000004;
         }
         result.status_ = status_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (rewardsBuilder_ == null) {
+          result.rewards_ = rewards_;
+        } else {
+          result.rewards_ = rewardsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6856,6 +6926,9 @@ public final class EventMiniJobProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
+        }
+        if (other.hasRewards()) {
+          mergeRewards(other.getRewards());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7185,6 +7258,122 @@ public final class EventMiniJobProto {
         status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.RewardsProto.UserRewardProto rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> rewardsBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public boolean hasRewards() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProto getRewards() {
+        if (rewardsBuilder_ == null) {
+          return rewards_;
+        } else {
+          return rewardsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public Builder setRewards(com.lvl6.proto.RewardsProto.UserRewardProto value) {
+        if (rewardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rewards_ = value;
+          onChanged();
+        } else {
+          rewardsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public Builder setRewards(
+          com.lvl6.proto.RewardsProto.UserRewardProto.Builder builderForValue) {
+        if (rewardsBuilder_ == null) {
+          rewards_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public Builder mergeRewards(com.lvl6.proto.RewardsProto.UserRewardProto value) {
+        if (rewardsBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              rewards_ != com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance()) {
+            rewards_ =
+              com.lvl6.proto.RewardsProto.UserRewardProto.newBuilder(rewards_).mergeFrom(value).buildPartial();
+          } else {
+            rewards_ = value;
+          }
+          onChanged();
+        } else {
+          rewardsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public Builder clearRewards() {
+        if (rewardsBuilder_ == null) {
+          rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProto.Builder getRewardsBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getRewardsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder() {
+        if (rewardsBuilder_ != null) {
+          return rewardsBuilder_.getMessageOrBuilder();
+        } else {
+          return rewards_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> 
+          getRewardsFieldBuilder() {
+        if (rewardsBuilder_ == null) {
+          rewardsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder>(
+                  getRewards(),
+                  getParentForChildren(),
+                  isClean());
+          rewards_ = null;
+        }
+        return rewardsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RedeemMiniJobResponseProto)
@@ -9545,68 +9734,69 @@ public final class EventMiniJobProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\022EventMiniJob.proto\022\016com.lvl6.proto\032\023Mi" +
-      "niJobConfig.proto\032\022MonsterStuff.proto\032\026S" +
-      "haredEnumConfig.proto\032\nUser.proto\"\206\001\n\030Sp" +
-      "awnMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\022\n\nclie" +
-      "ntTime\030\002 \001(\003\022\022\n\nnumToSpawn\030\003 \001(\005\022\020\n\010stru" +
-      "ctId\030\004 \001(\005\"\202\002\n\031SpawnMiniJobResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6." +
-      "proto.UserMiniJobProto\022L\n\006status\030\003 \001(\0162<",
-      ".com.lvl6.proto.SpawnMiniJobResponseProt" +
-      "o.SpawnMiniJobStatus\"1\n\022SpawnMiniJobStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\223\001\n\030Begi" +
-      "nMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\022\n\nclient" +
-      "Time\030\002 \001(\003\022\030\n\020userMonsterUuids\030\003 \003(\t\022\027\n\017" +
-      "userMiniJobUuid\030\004 \001(\t\"\353\001\n\031BeginMiniJobRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022L\n\006status\030\002 \001(\0162<." +
-      "com.lvl6.proto.BeginMiniJobResponseProto",
-      ".BeginMiniJobStatus\"N\n\022BeginMiniJobStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_N" +
-      "O_MINI_JOB_EXISTS\020\003\"\240\001\n\033CompleteMiniJobR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\022\n\nclientTime\030\002 \001(" +
-      "\003\022\027\n\017userMiniJobUuid\030\003 \001(\t\022\021\n\tisSpeedUp\030" +
-      "\004 \001(\010\022\017\n\007gemCost\030\005 \001(\005\"\223\002\n\034CompleteMiniJ" +
-      "obResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022R\n\006status\030\002 \001(" +
-      "\0162B.com.lvl6.proto.CompleteMiniJobRespon",
-      "seProto.CompleteMiniJobStatus\"m\n\025Complet" +
-      "eMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
-      "R\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022\033\n\027FAIL_" +
-      "NO_MINI_JOB_EXISTS\020\004\"\310\001\n\031RedeemMiniJobRe" +
-      "questProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
-      "oto.MinimumUserProtoWithMaxResources\022\022\n\n" +
-      "clientTime\030\002 \001(\003\022\027\n\017userMiniJobUuid\030\003 \001(" +
-      "\t\022<\n\005umchp\030\006 \003(\0132-.com.lvl6.proto.UserMo" +
-      "nsterCurrentHealthProto\"\321\002\n\032RedeemMiniJo" +
-      "bResponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl",
-      "6.proto.MinimumUserProtoWithMaxResources" +
-      "\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto.FullUser" +
-      "MonsterProto\022N\n\006status\030\003 \001(\0162>.com.lvl6." +
-      "proto.RedeemMiniJobResponseProto.RedeemM" +
-      "iniJobStatus\"m\n\023RedeemMiniJobStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_NO_MINI" +
-      "_JOB_EXISTS\020\003\022\034\n\030FAIL_MINI_JOB_INCOMPLET" +
-      "E\020\004\"\375\001\n\032RefreshMiniJobRequestProto\0220\n\006se" +
+      "niJobConfig.proto\032\022MonsterStuff.proto\032\014R" +
+      "eward.proto\032\026SharedEnumConfig.proto\032\nUse" +
+      "r.proto\"\206\001\n\030SpawnMiniJobRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\022\n\nclientTime\030\002 \001(\003\022\022\n\nnumToSpawn" +
+      "\030\003 \001(\005\022\020\n\010structId\030\004 \001(\005\"\202\002\n\031SpawnMiniJo" +
+      "bResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\0222\n\010miniJobs\030\002 \003" +
+      "(\0132 .com.lvl6.proto.UserMiniJobProto\022L\n\006",
+      "status\030\003 \001(\0162<.com.lvl6.proto.SpawnMiniJ" +
+      "obResponseProto.SpawnMiniJobStatus\"1\n\022Sp" +
+      "awnMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
+      "HER\020\002\"\223\001\n\030BeginMiniJobRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\034\n\024deleteUserMiniJobIds\030\002 \003(\t\022\016\n\006it",
-      "emId\030\003 \001(\005\022\022\n\nnumToSpawn\030\004 \001(\005\022\021\n\tgemsSp" +
-      "ent\030\005 \001(\005\0222\n\021minQualitySpawned\030\006 \001(\0162\027.c" +
-      "om.lvl6.proto.Quality\022\022\n\nclientTime\030\007 \001(" +
-      "\003\022\020\n\010structId\030\010 \001(\005\"\303\002\n\033RefreshMiniJobRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\0222\n\010miniJobs\030\002 \003(\0132" +
-      " .com.lvl6.proto.UserMiniJobProto\022P\n\006sta" +
-      "tus\030\003 \001(\0162@.com.lvl6.proto.RefreshMiniJo" +
-      "bResponseProto.RefreshMiniJobStatus\"l\n\024R" +
-      "efreshMiniJobStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL",
-      "_INSUFFICIENT_GEMS\020\002\022\033\n\027FAIL_INSUFFICIEN" +
-      "T_ITEMS\020\003\022\016\n\nFAIL_OTHER\020\004B\023B\021EventMiniJo" +
-      "bProto"
+      "roto\022\022\n\nclientTime\030\002 \001(\003\022\030\n\020userMonsterU" +
+      "uids\030\003 \003(\t\022\027\n\017userMiniJobUuid\030\004 \001(\t\"\353\001\n\031" +
+      "BeginMiniJobResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022L\n\006s" +
+      "tatus\030\002 \001(\0162<.com.lvl6.proto.BeginMiniJo",
+      "bResponseProto.BeginMiniJobStatus\"N\n\022Beg" +
+      "inMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
+      "ER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\003\"\240\001\n\033Co" +
+      "mpleteMiniJobRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\022\n\nc" +
+      "lientTime\030\002 \001(\003\022\027\n\017userMiniJobUuid\030\003 \001(\t" +
+      "\022\021\n\tisSpeedUp\030\004 \001(\010\022\017\n\007gemCost\030\005 \001(\005\"\223\002\n" +
+      "\034CompleteMiniJobResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Complet",
+      "eMiniJobResponseProto.CompleteMiniJobSta" +
+      "tus\"m\n\025CompleteMiniJobStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_G" +
+      "EMS\020\003\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\004\"\310\001\n\031R" +
+      "edeemMiniJobRequestProto\022@\n\006sender\030\001 \001(\013" +
+      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
+      "xResources\022\022\n\nclientTime\030\002 \001(\003\022\027\n\017userMi" +
+      "niJobUuid\030\003 \001(\t\022<\n\005umchp\030\006 \003(\0132-.com.lvl" +
+      "6.proto.UserMonsterCurrentHealthProto\"\203\003" +
+      "\n\032RedeemMiniJobResponseProto\022@\n\006sender\030\001",
+      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
+      "thMaxResources\0222\n\004fump\030\002 \001(\0132$.com.lvl6." +
+      "proto.FullUserMonsterProto\022N\n\006status\030\003 \001" +
+      "(\0162>.com.lvl6.proto.RedeemMiniJobRespons" +
+      "eProto.RedeemMiniJobStatus\0220\n\007rewards\030\004 " +
+      "\001(\0132\037.com.lvl6.proto.UserRewardProto\"m\n\023" +
+      "RedeemMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL" +
+      "_OTHER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\003\022\034\n" +
+      "\030FAIL_MINI_JOB_INCOMPLETE\020\004\"\375\001\n\032RefreshM" +
+      "iniJobRequestProto\0220\n\006sender\030\001 \001(\0132 .com",
+      ".lvl6.proto.MinimumUserProto\022\034\n\024deleteUs" +
+      "erMiniJobIds\030\002 \003(\t\022\016\n\006itemId\030\003 \001(\005\022\022\n\nnu" +
+      "mToSpawn\030\004 \001(\005\022\021\n\tgemsSpent\030\005 \001(\005\0222\n\021min" +
+      "QualitySpawned\030\006 \001(\0162\027.com.lvl6.proto.Qu" +
+      "ality\022\022\n\nclientTime\030\007 \001(\003\022\020\n\010structId\030\010 " +
+      "\001(\005\"\303\002\n\033RefreshMiniJobResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6.proto" +
+      ".UserMiniJobProto\022P\n\006status\030\003 \001(\0162@.com." +
+      "lvl6.proto.RefreshMiniJobResponseProto.R",
+      "efreshMiniJobStatus\"l\n\024RefreshMiniJobSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GE" +
+      "MS\020\002\022\033\n\027FAIL_INSUFFICIENT_ITEMS\020\003\022\016\n\nFAI" +
+      "L_OTHER\020\004B\023B\021EventMiniJobProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9621,6 +9811,7 @@ public final class EventMiniJobProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MiniJobConfigProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -9671,7 +9862,7 @@ public final class EventMiniJobProto {
     internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RedeemMiniJobResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Fump", "Status", });
+        new java.lang.String[] { "Sender", "Fump", "Status", "Rewards", });
     internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_com_lvl6_proto_RefreshMiniJobRequestProto_fieldAccessorTable = new
@@ -9686,6 +9877,7 @@ public final class EventMiniJobProto {
         new java.lang.String[] { "Sender", "MiniJobs", "Status", });
     com.lvl6.proto.MiniJobConfigProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
