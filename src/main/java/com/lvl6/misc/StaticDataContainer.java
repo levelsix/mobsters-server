@@ -21,6 +21,7 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanGift;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.EventPersistent;
@@ -69,6 +70,7 @@ import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
+import com.lvl6.proto.RewardsProto.ClanGiftProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
@@ -105,6 +107,8 @@ import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -132,7 +136,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -199,6 +203,12 @@ public class StaticDataContainer {
 
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 
 	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
@@ -287,8 +297,8 @@ public class StaticDataContainer {
 	@Autowired
 	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
 
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+//	@Autowired
+//	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
 
 	@Autowired
 	protected SkillRetrieveUtils skillRetrieveUtils;
@@ -409,6 +419,8 @@ public class StaticDataContainer {
 		setResearch(sdpb);
 		setBattleItem(sdpb);
 		setRewards(sdpb);
+//		setSales(sdpb);
+		setClanGifts(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -1094,33 +1106,40 @@ public class StaticDataContainer {
 //	private void setSales(Builder sdpb) {
 //		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils
 //				.getSalesPackageIdsToSalesPackages();
+//		Map<Integer, List<SalesItem>> salesPackageIdToItemIdsToSalesItems = salesItemRetrieveUtils
+//				.getSalesItemIdsToSalesItemsForSalesPackIds();
+//		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems =
+//				salesDisplayItemRetrieveUtils.
+//				getSalesDisplayItemIdsToSalesDisplayItemsForSalesPackIds();
 //
 //		for (Integer salesPackageId : idsToSalesPackages.keySet()) {
 //			SalesPackage sp = idsToSalesPackages.get(salesPackageId);
 //
-//			SalesPackageProto spProto = inAppPurchaseUtils
-//					.createSalesPackageProto(sp, salesItemRetrieveUtils,
-//							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
-//			sdpb.addSalesPackage(spProto);
+//			//get the sales items associated with this booster pack
+//			List<SalesItem> salesItemList = salesPackageIdToItemIdsToSalesItems
+//					.get(salesPackageId);
+//
+//			//get the booster display items for this booster pack
+//			Map<Integer, SalesDisplayItem> displayIdsToDisplayItems =
+//					salesPackageIdToDisplayIdsToDisplayItems.get(salesPackageId);
+//			Collection<SalesDisplayItem> displayItems = null;
+//			if (null != displayIdsToDisplayItems) {
+//				ArrayList<Integer> displayItemIds = new ArrayList<Integer>();
+//				displayItemIds.addAll(displayIdsToDisplayItems.keySet());
+//				Collections.sort(displayItemIds);
+//
+//				displayItems = new ArrayList<SalesDisplayItem>();
+//
+//				for (Integer displayItemId : displayItemIds) {
+//					displayItems.add(displayIdsToDisplayItems
+//							.get(displayItemId));
+//				}
+//			}
+//
+//			SalesPackageProto spProto = createInfoProtoUtils
+//					.createSalesPackageProto(sp, salesItemList, displayItems);
 //		}
 //	}
-
-	private void setCustomMenu(Builder sdpb) {
-//		Map<Integer, List<CustomMenu>> idsToCustomMenus = customMenuRetrieveUtils.getIdsToCustomMenus();
-//
-//		if (null == idsToCustomMenus || idsToCustomMenus.isEmpty()) {
-//			log.warn("setCustomMenu() no settings");
-//			return;
-//		}
-//
-//		for(Integer customMenuId : idsToCustomMenus.keySet()) {
-//			CustomMenu cm = idsToCustomMenus.get(customMenuId);
-//
-//			CustomMenuProto cmp = createInfoProtoUtils.createCustomMenuProto(cm);
-//			sdpb.addCustomMenu(cmp);
-//		}
-
-	}
 
 
 	private void setRewards(Builder sdpb) {
@@ -1142,7 +1161,20 @@ public class StaticDataContainer {
 		}
 	}
 
+	private void setClanGifts(Builder sdpb) {
+		Map<Integer, ClanGift> idsToClanGift = clanGiftRetrieveUtils.getClanGiftIdsToClanGifts();
 
+		if(null == idsToClanGift || idsToClanGift.isEmpty()) {
+			log.warn("setClanGifts no clan gifts");
+			return;
+		}
+
+		for(Integer clanGiftId : idsToClanGift.keySet()) {
+			ClanGift cg = idsToClanGift.get(clanGiftId);
+			ClanGiftProto cgp = createInfoProtoUtils.createClanGiftProto(cg);
+			sdpb.addClanGifts(cgp);
+		}
+	}
 
 
 }
