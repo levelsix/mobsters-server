@@ -3,6 +3,7 @@
 
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
+import "Reward.proto";
 import "SharedEnumConfig.proto";
 import "User.proto";
 
@@ -99,6 +100,7 @@ message RedeemMiniJobResponseProto {
      
      optional RedeemMiniJobStatus status = 3;    
      
+     optional UserRewardProto rewards = 4;
      
      enum RedeemMiniJobStatus {
           SUCCESS = 1;
