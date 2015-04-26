@@ -48,7 +48,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    LoadCityRequestProto reqProto = ((LoadCityRequestEvent)event).getLoadCityRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();

@@ -70,7 +70,7 @@ public class UpgradeNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent) event)
 				.getUpgradeNormStructureRequestProto();
 

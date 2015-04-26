@@ -459,7 +459,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event)

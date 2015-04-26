@@ -64,7 +64,7 @@ public class SolicitTeamDonationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		SolicitTeamDonationRequestProto reqProto = ((SolicitTeamDonationRequestEvent) event)
 				.getSolicitTeamDonationRequestProto();
 

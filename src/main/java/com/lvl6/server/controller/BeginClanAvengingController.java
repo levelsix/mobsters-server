@@ -63,7 +63,7 @@ public class BeginClanAvengingController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		BeginClanAvengingRequestProto reqProto = ((BeginClanAvengingRequestEvent) event)
 				.getBeginClanAvengingRequestProto();
 

@@ -106,7 +106,7 @@ public class BeginClanRaidController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent) event)
 				.getBeginClanRaidRequestProto();
 

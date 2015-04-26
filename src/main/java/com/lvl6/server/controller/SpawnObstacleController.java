@@ -67,7 +67,7 @@ public class SpawnObstacleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		SpawnObstacleRequestProto reqProto = ((SpawnObstacleRequestEvent) event)
 				.getSpawnObstacleRequestProto();
 		log.info("reqProto=" + reqProto);

@@ -125,7 +125,7 @@ public class EndPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		EndPvpBattleRequestProto reqProto = ((EndPvpBattleRequestEvent) event)
 				.getEndPvpBattleRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

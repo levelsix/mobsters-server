@@ -52,7 +52,7 @@ public class RestrictUserMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RestrictUserMonsterRequestProto reqProto = ((RestrictUserMonsterRequestEvent) event)
 				.getRestrictUserMonsterRequestProto();
 

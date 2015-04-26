@@ -102,7 +102,7 @@ public class PrivateChatPostController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		PrivateChatPostRequestProto reqProto = ((PrivateChatPostRequestEvent) event)
 				.getPrivateChatPostRequestProto();
 

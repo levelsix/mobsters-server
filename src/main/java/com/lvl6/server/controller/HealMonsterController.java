@@ -90,7 +90,7 @@ public class HealMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent) event)
 				.getHealMonsterRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

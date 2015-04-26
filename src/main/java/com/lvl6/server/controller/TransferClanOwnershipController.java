@@ -69,7 +69,7 @@ public class TransferClanOwnershipController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		TransferClanOwnershipRequestProto reqProto = ((TransferClanOwnershipRequestEvent) event)
 				.getTransferClanOwnershipRequestProto();
 		log.info("reqProto=" + reqProto);

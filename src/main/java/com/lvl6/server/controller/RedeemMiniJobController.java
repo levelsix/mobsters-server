@@ -99,7 +99,7 @@ public class RedeemMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RedeemMiniJobRequestProto reqProto = ((RedeemMiniJobRequestEvent) event)
 				.getRedeemMiniJobRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

@@ -97,7 +97,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent) event)
 				.getRetrieveUserMonsterTeamRequestProto();
 

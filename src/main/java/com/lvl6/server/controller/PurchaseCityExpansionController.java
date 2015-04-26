@@ -72,7 +72,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event) throws Exception {
+//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //		PurchaseCityExpansionRequestProto reqProto = ((PurchaseCityExpansionRequestEvent)event).getPurchaseCityExpansionRequestProto();
 //
 //		//variables client sent

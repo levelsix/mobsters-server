@@ -71,7 +71,7 @@ public class PurchaseNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		PurchaseNormStructureRequestProto reqProto = ((PurchaseNormStructureRequestEvent) event)
 				.getPurchaseNormStructureRequestProto();
 		log.info("reqProto={}", reqProto);

@@ -91,7 +91,7 @@ public class EvolveMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		EvolveMonsterRequestProto reqProto = ((EvolveMonsterRequestEvent) event)
 				.getEvolveMonsterRequestProto();
 

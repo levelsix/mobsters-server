@@ -90,7 +90,7 @@ public class RetrieveMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		//should really be renamed to something like UpdateToCurrentMiniEvent or something
 		RetrieveMiniEventRequestProto reqProto = ((RetrieveMiniEventRequestEvent) event)
 				.getRetrieveMiniEventRequestProto();

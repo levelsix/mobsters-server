@@ -183,7 +183,7 @@ public abstract class EventController extends Wrap {
 	public abstract EventProtocolRequest getEventType();
 
 	@Async
-	protected abstract void processRequestEvent(RequestEvent event)
+	protected abstract void processRequestEvent(RequestEvent event, ToClientEvents responses)
 			throws Exception;
 
 	protected int numAllocatedThreads = 0;

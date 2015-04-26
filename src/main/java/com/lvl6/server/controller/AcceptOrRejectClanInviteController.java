@@ -104,7 +104,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		AcceptOrRejectClanInviteRequestProto reqProto = ((AcceptOrRejectClanInviteRequestEvent) event)
 				.getAcceptOrRejectClanInviteRequestProto();
 

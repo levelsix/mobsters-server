@@ -77,7 +77,7 @@ public class BootPlayerFromClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		BootPlayerFromClanRequestProto reqProto = ((BootPlayerFromClanRequestEvent) event)
 				.getBootPlayerFromClanRequestProto();
 

@@ -162,7 +162,7 @@ public class InAppPurchaseController extends EventController {
      */
     // @SuppressWarnings("deprecation")
     @Override
-    protected void processRequestEvent(RequestEvent event) throws Exception {
+    protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
         InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
                 .getInAppPurchaseRequestProto();
 

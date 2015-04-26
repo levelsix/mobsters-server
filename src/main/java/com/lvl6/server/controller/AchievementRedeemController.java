@@ -71,7 +71,7 @@ public class AchievementRedeemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		AchievementRedeemRequestProto reqProto = ((AchievementRedeemRequestEvent) event)
 				.getAchievementRedeemRequestProto();
 

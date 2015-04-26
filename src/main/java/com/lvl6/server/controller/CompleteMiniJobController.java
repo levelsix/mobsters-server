@@ -69,7 +69,7 @@ public class CompleteMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent) event)
 				.getCompleteMiniJobRequestProto();
 

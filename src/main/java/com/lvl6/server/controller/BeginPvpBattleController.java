@@ -71,7 +71,7 @@ public class BeginPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent) event)
 				.getBeginPvpBattleRequestProto();
 		log.info("reqProto={}", reqProto);

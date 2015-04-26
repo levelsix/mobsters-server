@@ -82,7 +82,7 @@ public class CompleteBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		CompleteBattleItemRequestProto reqProto = ((CompleteBattleItemRequestEvent) event)
 				.getCompleteBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);

@@ -139,7 +139,7 @@ public class RequestJoinClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RequestJoinClanRequestProto reqProto = ((RequestJoinClanRequestEvent) event)
 				.getRequestJoinClanRequestProto();
 

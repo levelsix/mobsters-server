@@ -60,7 +60,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    RecordClanRaidStatsRequestProto reqProto = ((RecordClanRaidStatsRequestEvent)event)
 //    		.getRecordClanRaidStatsRequestProto();
 //    final long startTime = System.nanoTime();

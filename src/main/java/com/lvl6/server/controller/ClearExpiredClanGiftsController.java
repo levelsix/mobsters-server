@@ -88,7 +88,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		ClearExpiredClanGiftsRequestProto reqProto = ((ClearExpiredClanGiftsRequestEvent) event)
 				.getClearExpiredClanGiftsRequestProto();
 

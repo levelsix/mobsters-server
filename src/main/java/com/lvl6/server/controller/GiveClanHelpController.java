@@ -68,7 +68,7 @@ public class GiveClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent) event)
 				.getGiveClanHelpRequestProto();
 

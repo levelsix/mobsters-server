@@ -75,7 +75,7 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent) event)
 				.getRedeemSecretGiftRequestProto();
 

@@ -52,7 +52,7 @@ public class SetDefendingMsgController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent) event)
 				.getSetDefendingMsgRequestProto();
 

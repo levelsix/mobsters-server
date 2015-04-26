@@ -59,7 +59,7 @@ public class UpdateMonsterHealthController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent) event)
 				.getUpdateMonsterHealthRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

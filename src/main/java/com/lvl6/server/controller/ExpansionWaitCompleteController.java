@@ -56,7 +56,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event) throws Exception {
+//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
 //
 //		MinimumUserProto senderProto = reqProto.getSender();

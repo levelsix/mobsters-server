@@ -86,7 +86,7 @@ public class RefreshMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RefreshMiniJobRequestProto reqProto = ((RefreshMiniJobRequestEvent) event)
 				.getRefreshMiniJobRequestProto();
 		log.info("reqProto={}", reqProto);

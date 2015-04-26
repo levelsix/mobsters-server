@@ -69,7 +69,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    QuestProgressRequestProto reqProto = ((QuestProgressRequestEvent)event).getQuestProgressRequestProto();
 //    
 //    log.info("reqProto=" + reqProto);

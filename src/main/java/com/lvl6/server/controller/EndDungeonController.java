@@ -119,7 +119,7 @@ public class EndDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent) event)
 				.getEndDungeonRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

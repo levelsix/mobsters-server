@@ -50,7 +50,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RemoveMonsterFromBattleTeamRequestProto reqProto = ((RemoveMonsterFromBattleTeamRequestEvent) event)
 				.getRemoveMonsterFromBattleTeamRequestProto();
 

@@ -69,7 +69,7 @@ public class AvengeClanMateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		AvengeClanMateRequestProto reqProto = ((AvengeClanMateRequestEvent) event)
 				.getAvengeClanMateRequestProto();
 

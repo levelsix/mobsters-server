@@ -15,6 +15,7 @@ import com.lvl6.utils.MessagingUtil
 import scala.concurrent.Future
 import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.mobsters.services.PlayersOnlineService
+import com.lvl6.mobsters.services.ClientResponseCacheService
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -24,6 +25,7 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var messagingUtil:MessagingUtil = null
   @Autowired var userRetrieveUtils:UserRetrieveUtils2 = null
   @Autowired var playersOnlineService:PlayersOnlineService = null
+  @Autowired var responseCacheService:ClientResponseCacheService = null
 
   
   def processEvent(eventBytes:Array[Byte])={
@@ -33,7 +35,11 @@ trait GameEventHandler extends LazyLogging  {
         handleMaintenanceMode(parsedEvent)    
       }else{
         updatePlayerToServerMaps(parsedEvent)
-        parsedEvent.eventController.handleEvent(parsedEvent.event)
+        if(responseCacheService.isResponseCached(parsedEvent.eventProto.getEventUuid)){
+          
+        }else{
+          parsedEvent.eventController.handleEvent(parsedEvent.event)
+        }
       }
     }catch{
       case t:Throwable => logger.error("Error processing amqp message", t)

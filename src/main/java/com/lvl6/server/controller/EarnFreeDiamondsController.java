@@ -77,7 +77,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    EarnFreeDiamondsRequestProto reqProto = ((EarnFreeDiamondsRequestEvent)event).getEarnFreeDiamondsRequestProto();
 //    MinimumUserProto senderProto = reqProto.getSender();
 //    String userId = senderProto.getUserUuid();

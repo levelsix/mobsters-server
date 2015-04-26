@@ -91,7 +91,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		IncreaseMonsterInventorySlotRequestProto reqProto = ((IncreaseMonsterInventorySlotRequestEvent) event)
 				.getIncreaseMonsterInventorySlotRequestProto();
 

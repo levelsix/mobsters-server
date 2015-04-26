@@ -52,7 +52,7 @@ public class UpdateMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		UpdateMiniEventRequestProto reqProto = ((UpdateMiniEventRequestEvent) event)
 				.getUpdateMiniEventRequestProto();
 

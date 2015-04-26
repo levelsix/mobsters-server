@@ -105,7 +105,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent) event)
 				.getApproveOrRejectRequestToJoinClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

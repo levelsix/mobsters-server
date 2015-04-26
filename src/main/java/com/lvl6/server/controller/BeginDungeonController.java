@@ -107,7 +107,7 @@ public class BeginDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent) event)
 				.getBeginDungeonRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

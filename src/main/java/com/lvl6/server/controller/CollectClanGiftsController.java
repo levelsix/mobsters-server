@@ -88,7 +88,7 @@ public class CollectClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		CollectClanGiftsRequestProto reqProto = ((CollectClanGiftsRequestEvent) event)
 				.getCollectClanGiftsRequestProto();
 

@@ -80,7 +80,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent) event)
 				.getRetrieveCurrencyFromNormStructureRequestProto();
 		log.info("reqProto={}", reqProto);

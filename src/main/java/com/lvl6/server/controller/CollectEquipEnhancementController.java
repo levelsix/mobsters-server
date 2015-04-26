@@ -53,7 +53,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    CollectEquipEnhancementRequestProto reqProto = ((CollectEquipEnhancementRequestEvent)event)
 //        .getCollectEquipEnhancementRequestProto();
 //

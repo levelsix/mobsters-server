@@ -101,7 +101,7 @@ public class RetrieveClanInfoController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 

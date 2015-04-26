@@ -49,7 +49,7 @@ public class SetAvatarMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		SetAvatarMonsterRequestProto reqProto = ((SetAvatarMonsterRequestEvent) event)
 				.getSetAvatarMonsterRequestProto();
 

@@ -60,7 +60,7 @@ public class BeginObstacleRemovalController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent) event)
 				.getBeginObstacleRemovalRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

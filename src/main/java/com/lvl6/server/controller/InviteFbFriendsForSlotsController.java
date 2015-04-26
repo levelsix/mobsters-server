@@ -71,7 +71,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent) event)
 				.getInviteFbFriendsForSlotsRequestProto();
 

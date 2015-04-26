@@ -49,7 +49,7 @@ public class SetGameCenterIdController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		SetGameCenterIdRequestProto reqProto = ((SetGameCenterIdRequestEvent) event)
 				.getSetGameCenterIdRequestProto();
 

@@ -73,7 +73,7 @@ public class DevController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		DevRequestProto reqProto = ((DevRequestEvent) event)
 				.getDevRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

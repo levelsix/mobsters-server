@@ -61,7 +61,7 @@ public class SetFacebookIdController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		SetFacebookIdRequestProto reqProto = ((SetFacebookIdRequestEvent) event)
 				.getSetFacebookIdRequestProto();
 

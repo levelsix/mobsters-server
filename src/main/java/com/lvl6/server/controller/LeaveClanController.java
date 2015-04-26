@@ -79,7 +79,7 @@ public class LeaveClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		LeaveClanRequestProto reqProto = ((LeaveClanRequestEvent) event)
 				.getLeaveClanRequestProto();
 

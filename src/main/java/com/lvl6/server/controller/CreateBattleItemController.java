@@ -77,7 +77,7 @@ public class CreateBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		CreateBattleItemRequestProto reqProto = ((CreateBattleItemRequestEvent) event)
 				.getCreateBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);

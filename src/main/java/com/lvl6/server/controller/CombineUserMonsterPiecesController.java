@@ -68,7 +68,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		CombineUserMonsterPiecesRequestProto reqProto = ((CombineUserMonsterPiecesRequestEvent) event)
 				.getCombineUserMonsterPiecesRequestProto();
 

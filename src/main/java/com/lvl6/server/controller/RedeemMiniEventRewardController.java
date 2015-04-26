@@ -90,7 +90,7 @@ public class RedeemMiniEventRewardController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		RedeemMiniEventRewardRequestProto reqProto = ((RedeemMiniEventRewardRequestEvent) event)
 				.getRedeemMiniEventRewardRequestProto();
 

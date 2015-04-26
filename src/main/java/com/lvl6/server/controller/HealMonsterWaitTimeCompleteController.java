@@ -52,7 +52,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    HealMonsterWaitTimeCompleteRequestProto reqProto = ((HealMonsterWaitTimeCompleteRequestEvent)event).getHealMonsterWaitTimeCompleteRequestProto();
 //
 //    //get values sent from the client (the request proto)

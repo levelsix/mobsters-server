@@ -63,7 +63,7 @@ public class DiscardBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		DiscardBattleItemRequestProto reqProto = ((DiscardBattleItemRequestEvent) event)
 				.getDiscardBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);

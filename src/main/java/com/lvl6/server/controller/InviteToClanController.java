@@ -47,7 +47,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event) throws Exception {
+//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //		InviteToClanRequestProto reqProto = ((InviteToClanRequestEvent)event).getInviteToClanRequestProto();
 //		log.info(String.format("reqProto=%s", reqProto));
 //

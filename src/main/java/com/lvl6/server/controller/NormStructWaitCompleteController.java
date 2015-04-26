@@ -69,7 +69,7 @@ public class NormStructWaitCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		NormStructWaitCompleteRequestProto reqProto = ((NormStructWaitCompleteRequestEvent) event)
 				.getNormStructWaitCompleteRequestProto();
 

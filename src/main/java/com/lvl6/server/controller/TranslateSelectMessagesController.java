@@ -90,7 +90,7 @@ public class TranslateSelectMessagesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		TranslateSelectMessagesRequestProto reqProto = ((TranslateSelectMessagesRequestEvent) event)
 				.getTranslateSelectMessagesRequestProto();
 		log.info("reqProto={}", reqProto);

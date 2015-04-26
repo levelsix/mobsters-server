@@ -44,7 +44,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    EndPersistentEventCoolDownTimerRequestProto reqProto = ((EndPersistentEventCoolDownTimerRequestEvent)event).getEndPersistentEventCoolDownTimerRequestProto();
 //
 //    //get values sent from the client (the request proto)

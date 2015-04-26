@@ -55,7 +55,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 //    RetrieveTournamentRankingsRequestProto reqProto = ((RetrieveTournamentRankingsRequestEvent) event)
 //        .getRetrieveTournamentRankingsRequestProto();
 //

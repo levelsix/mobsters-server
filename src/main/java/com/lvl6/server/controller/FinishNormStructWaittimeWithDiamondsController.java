@@ -70,7 +70,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 
 		FinishNormStructWaittimeWithDiamondsRequestProto reqProto = ((FinishNormStructWaittimeWithDiamondsRequestEvent) event)
 				.getFinishNormStructWaittimeWithDiamondsRequestProto();

@@ -67,7 +67,7 @@ public class AchievementProgressController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent) event)
 				.getAchievementProgressRequestProto();
 

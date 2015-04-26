@@ -51,7 +51,7 @@ public class UpdateClientTaskStateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		UpdateClientTaskStateRequestProto reqProto = ((UpdateClientTaskStateRequestEvent) event)
 				.getUpdateClientTaskStateRequestProto();
 

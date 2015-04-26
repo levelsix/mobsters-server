@@ -130,7 +130,7 @@ public class QueueUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		QueueUpRequestProto reqProto = ((QueueUpRequestEvent) event)
 				.getQueueUpRequestProto();
 

@@ -67,7 +67,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 	 */
 	// @SuppressWarnings("deprecation")
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		DestroyMoneyTreeStructureRequestProto reqProto = ((DestroyMoneyTreeStructureRequestEvent) event)
 				.getDestroyMoneyTreeStructureRequestProto();
 

@@ -97,7 +97,7 @@ public class UserCreateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
 		UserCreateRequestProto reqProto = ((UserCreateRequestEvent) event)
 				.getUserCreateRequestProto();
 		String udid = reqProto.getUdid();
