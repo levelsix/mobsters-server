@@ -241,7 +241,7 @@ class StartupService extends LazyLogging{
   @Autowired var  timeUtils : TimeUtils  = null
   @Autowired var  miscMethods: MiscMethods = null
   @Autowired var  locker :  Locker = null
-  @Autowired var  eventWriter:EventWriter = null
+  @Autowired var  eventWriter:EventWriterOld = null
   
   @Autowired var globals:Globals = null
   @Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null

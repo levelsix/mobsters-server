@@ -22,7 +22,7 @@ import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
-import com.lvl6.server.EventWriter;
+import com.lvl6.server.EventWriterOld;
 
 @Component
 public class MessagingUtil {
@@ -30,16 +30,16 @@ public class MessagingUtil {
 			.getLogger(MessagingUtil.class);
 
 	@Autowired
-	EventWriter eventWriter;
+	EventWriterOld eventWriter;
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public EventWriter getEventWriter() {
+	public EventWriterOld getEventWriter() {
 		return eventWriter;
 	}
 
-	public void setEventWriter(EventWriter eventWriter) {
+	public void setEventWriter(EventWriterOld eventWriter) {
 		this.eventWriter = eventWriter;
 	}
 

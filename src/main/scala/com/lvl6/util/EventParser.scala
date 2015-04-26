@@ -9,6 +9,8 @@ import com.lvl6.server.controller.EventController
 import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Autowired
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import com.lvl6.events.ResponseEvent
+import com.google.protobuf.GeneratedMessage
 
 case class ParsedEvent(eventProto:EventProto, event:RequestEvent, eventType:EventProtocolRequest, eventController:EventController){
   def requestEventBytes =  eventProto.getEventBytes.toByteArray()
@@ -52,4 +54,17 @@ class EventParser extends LazyLogging{
     }
     eventControllerMap.get(eventType)
   }
+  
+  def getResponseBytes[T <: GeneratedMessage](event:ResponseEvent[T]):Array[Byte]={
+    //create event proto
+    val ep = EventProto.newBuilder()
+    ep.setEventType(event.getEventType.getNumber)
+    ep.setTagNum(event.getTag)
+    ep.setEventBytes(event.getByteString())
+    val bytes = ep.build().toByteArray()
+    ByteBuffer.allocate(Integer.BYTES).order(ByteOrder.LITTLE_ENDIAN).putInt(bytes.length).array() ++ bytes
+  }
+  
+  
+  
 }

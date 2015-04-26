@@ -122,9 +122,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	}
 
 	@Autowired
-	private EventWriter eventWriter;
+	private EventWriterOld eventWriter;
 
-	public void setEventWriter(EventWriter eventWriter) {
+	public void setEventWriter(EventWriterOld eventWriter) {
 		this.eventWriter = eventWriter;
 	}
 

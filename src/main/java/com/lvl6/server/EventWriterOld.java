@@ -7,11 +7,11 @@ import com.lvl6.events.GameEvent;
 import com.lvl6.events.ResponseEvent;
 import com.lvl6.utils.Wrap;
 
-public abstract class EventWriter extends Wrap {
+public abstract class EventWriterOld extends Wrap {
 
-	private static Logger log = LoggerFactory.getLogger(EventWriter.class);
+	private static Logger log = LoggerFactory.getLogger(EventWriterOld.class);
 
-	public EventWriter() {
+	public EventWriterOld() {
 		super();
 	}
 

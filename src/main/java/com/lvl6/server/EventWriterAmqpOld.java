@@ -20,7 +20,7 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.NIOUtils;
 
 @Component
-public class EventWriterAmqp extends EventWriter {
+public class EventWriterAmqpOld extends EventWriterOld {
 
 	@Resource(name = "chatMessagesTemplate")
 	RabbitTemplate chatTemplate;
@@ -57,7 +57,7 @@ public class EventWriterAmqp extends EventWriter {
 	}
 
 	private static org.slf4j.Logger log = LoggerFactory
-			.getLogger(EventWriterAmqp.class);
+			.getLogger(EventWriterAmqpOld.class);
 
 	@Override
 	protected void processEvent(GameEvent event) {

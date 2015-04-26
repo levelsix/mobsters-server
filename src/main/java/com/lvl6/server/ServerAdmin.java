@@ -84,7 +84,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	protected ITopic<ServerMessage> staticDataReloadDone;
 
 	@Resource(name = "eventWriter")
-	protected EventWriter writer;
+	protected EventWriterOld writer;
 
 	@Autowired
 	protected HazelcastInstance hazel;
@@ -122,11 +122,11 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		this.serverEvents = serverEvents;
 	}
 
-	public EventWriter getWriter() {
+	public EventWriterOld getWriter() {
 		return writer;
 	}
 
-	public void setWriter(EventWriter writer) {
+	public void setWriter(EventWriterOld writer) {
 		this.writer = writer;
 	}
 

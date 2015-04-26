@@ -45,7 +45,7 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
-import com.lvl6.server.EventWriter;
+import com.lvl6.server.EventWriterOld;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -64,7 +64,7 @@ public class SendGroupChatController extends EventController {
 	protected IList<GroupChatMessageProto> chatMessages;
 
 	@Resource
-	protected EventWriter eventWriter;
+	protected EventWriterOld eventWriter;
 
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -367,12 +367,12 @@ public class SendGroupChatController extends EventController {
 	}
 
 	@Override
-	public EventWriter getEventWriter() {
+	public EventWriterOld getEventWriter() {
 		return eventWriter;
 	}
 
 	@Override
-	public void setEventWriter(EventWriter eventWriter) {
+	public void setEventWriter(EventWriterOld eventWriter) {
 		this.eventWriter = eventWriter;
 	}
 
