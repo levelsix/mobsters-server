@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus;
+import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.Builder;
+import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
-public class ClearExpiredClanGiftsAction {
+public class DeleteClanGiftsAction {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
@@ -22,13 +22,13 @@ public class ClearExpiredClanGiftsAction {
 	private DeleteUtil deleteUtil;
 	private List<ClanGiftForUser> listOfClanGifts;
 
-	public ClearExpiredClanGiftsAction() {
+	public DeleteClanGiftsAction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public ClearExpiredClanGiftsAction(String userId, UserRetrieveUtils2 userRetrieveUtils,
+	public DeleteClanGiftsAction(String userId, UserRetrieveUtils2 userRetrieveUtils,
 			DeleteUtil deleteUtil, List<ClanGiftForUser> listOfClanGifts) {
 		super();
 		this.userId = userId;
@@ -47,7 +47,7 @@ public class ClearExpiredClanGiftsAction {
 		//		if (!valid) {
 		//			return;
 		//		}
-		resBuilder.setStatus(ClearExpiredClanGiftsStatus.FAIL_OTHER);
+		resBuilder.setStatus(DeleteClanGiftsStatus.FAIL_OTHER);
 
 		boolean valid = verifySemantics();
 
@@ -59,7 +59,7 @@ public class ClearExpiredClanGiftsAction {
 		if (!success) {
 			return;
 		}
-		resBuilder.setStatus(ClearExpiredClanGiftsStatus.SUCCESS);
+		resBuilder.setStatus(DeleteClanGiftsStatus.SUCCESS);
 
 		return;
 	}
@@ -86,7 +86,7 @@ public class ClearExpiredClanGiftsAction {
 	}
 
 	public static void setLog(Logger log) {
-		ClearExpiredClanGiftsAction.log = log;
+		DeleteClanGiftsAction.log = log;
 	}
 
 
