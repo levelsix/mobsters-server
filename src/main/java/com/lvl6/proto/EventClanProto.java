@@ -55166,24 +55166,6 @@ public final class EventClanProto {
       "rdProto\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto" +
       ".CollectClanGiftsResponseProto.CollectCl" +
       "anGiftsStatus\"5\n\026CollectClanGiftsStatus\022",
-<<<<<<< HEAD
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\216\001\n!ClearEx" +
-      "piredClanGiftsRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\0227\n\014" +
-      "expiredGifts\030\002 \003(\0132!.com.lvl6.proto.User" +
-      "ClanGiftProto\"\362\001\n\"ClearExpiredClanGiftsR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022^\n\006status\030\002 \001(\0162N" +
-      ".com.lvl6.proto.ClearExpiredClanGiftsRes" +
-      "ponseProto.ClearExpiredClanGiftsStatus\":" +
-      "\n\033ClearExpiredClanGiftsStatus\022\013\n\007SUCCESS",
-      "\020\001\022\016\n\nFAIL_OTHER\020\002\"\273\001\n\035ReceivedClanGiftR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022.\n\005scope\030\002 \001(\0162\031." +
-      "com.lvl6.proto.ChatScope:\004CLAN\0228\n\ruserCl" +
-      "anGifts\030\003 \003(\0132!.com.lvl6.proto.UserClanG" +
-      "iftProtoB\020B\016EventClanProto"
-=======
       "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\210\001\n\033DeleteC" +
       "lanGiftsRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\0227\n\014expire" +
@@ -55193,14 +55175,12 @@ public final class EventClanProto {
       "mUserProto\022R\n\006status\030\002 \001(\0162B.com.lvl6.pr" +
       "oto.DeleteClanGiftsResponseProto.DeleteC" +
       "lanGiftsStatus\"4\n\025DeleteClanGiftsStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\300\001\n\035Receive",
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\273\001\n\035Receive",
       "dClanGiftResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\0223\n\005scop" +
-      "e\030\002 \001(\0162\036.com.lvl6.proto.GroupChatScope:" +
-      "\004CLAN\0228\n\ruserClanGifts\030\003 \003(\0132!.com.lvl6." +
-      "proto.UserClanGiftProtoB\020B\016EventClanProt" +
-      "o"
->>>>>>> 67dd35c... changed name to delete clan gifts
+      ".com.lvl6.proto.MinimumUserProto\022.\n\005scop" +
+      "e\030\002 \001(\0162\031.com.lvl6.proto.ChatScope:\004CLAN" +
+      "\0228\n\ruserClanGifts\030\003 \003(\0132!.com.lvl6.proto" +
+      ".UserClanGiftProtoB\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
