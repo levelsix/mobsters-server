@@ -8,10 +8,10 @@ public final class EventBoosterPackProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface PurchaseBoosterPackRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseBoosterPackRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PurchaseBoosterPackRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      *
@@ -37,6 +37,7 @@ public final class EventBoosterPackProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional int32 boosterPackId = 2;
     /**
      * <code>optional int32 boosterPackId = 2;</code>
      */
@@ -46,6 +47,7 @@ public final class EventBoosterPackProto {
      */
     int getBoosterPackId();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -55,6 +57,7 @@ public final class EventBoosterPackProto {
      */
     long getClientTime();
 
+    // optional bool dailyFreeBoosterPack = 4;
     /**
      * <code>optional bool dailyFreeBoosterPack = 4;</code>
      *
@@ -78,9 +81,8 @@ public final class EventBoosterPackProto {
    * Protobuf type {@code com.lvl6.proto.PurchaseBoosterPackRequestProto}
    */
   public static final class PurchaseBoosterPackRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseBoosterPackRequestProto)
-      PurchaseBoosterPackRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PurchaseBoosterPackRequestProtoOrBuilder {
     // Use PurchaseBoosterPackRequestProto.newBuilder() to construct.
     private PurchaseBoosterPackRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -194,6 +196,7 @@ public final class EventBoosterPackProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -227,6 +230,7 @@ public final class EventBoosterPackProto {
       return sender_;
     }
 
+    // optional int32 boosterPackId = 2;
     public static final int BOOSTERPACKID_FIELD_NUMBER = 2;
     private int boosterPackId_;
     /**
@@ -242,6 +246,7 @@ public final class EventBoosterPackProto {
       return boosterPackId_;
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -257,6 +262,7 @@ public final class EventBoosterPackProto {
       return clientTime_;
     }
 
+    // optional bool dailyFreeBoosterPack = 4;
     public static final int DAILYFREEBOOSTERPACK_FIELD_NUMBER = 4;
     private boolean dailyFreeBoosterPack_;
     /**
@@ -291,8 +297,7 @@ public final class EventBoosterPackProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -420,9 +425,8 @@ public final class EventBoosterPackProto {
      * Protobuf type {@code com.lvl6.proto.PurchaseBoosterPackRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseBoosterPackRequestProto)
-        com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBoosterPackProto.internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor;
@@ -571,6 +575,7 @@ public final class EventBoosterPackProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -715,7 +720,7 @@ public final class EventBoosterPackProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -723,6 +728,7 @@ public final class EventBoosterPackProto {
         return senderBuilder_;
       }
 
+      // optional int32 boosterPackId = 2;
       private int boosterPackId_ ;
       /**
        * <code>optional int32 boosterPackId = 2;</code>
@@ -755,6 +761,7 @@ public final class EventBoosterPackProto {
         return this;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -787,6 +794,7 @@ public final class EventBoosterPackProto {
         return this;
       }
 
+      // optional bool dailyFreeBoosterPack = 4;
       private boolean dailyFreeBoosterPack_ ;
       /**
        * <code>optional bool dailyFreeBoosterPack = 4;</code>
@@ -850,10 +858,10 @@ public final class EventBoosterPackProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseBoosterPackRequestProto)
   }
 
-  public interface PurchaseBoosterPackResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseBoosterPackResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PurchaseBoosterPackResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -867,6 +875,7 @@ public final class EventBoosterPackProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
      */
@@ -876,6 +885,7 @@ public final class EventBoosterPackProto {
      */
     com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus getStatus();
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;</code>
      *
@@ -935,6 +945,7 @@ public final class EventBoosterPackProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.BoosterItemProto prize = 4;
     /**
      * <code>optional .com.lvl6.proto.BoosterItemProto prize = 4;</code>
      */
@@ -948,6 +959,7 @@ public final class EventBoosterPackProto {
      */
     com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getPrizeOrBuilder();
 
+    // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;</code>
      */
@@ -976,9 +988,8 @@ public final class EventBoosterPackProto {
    * Protobuf type {@code com.lvl6.proto.PurchaseBoosterPackResponseProto}
    */
   public static final class PurchaseBoosterPackResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseBoosterPackResponseProto)
-      PurchaseBoosterPackResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PurchaseBoosterPackResponseProtoOrBuilder {
     // Use PurchaseBoosterPackResponseProto.newBuilder() to construct.
     private PurchaseBoosterPackResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1214,6 +1225,7 @@ public final class EventBoosterPackProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1235,6 +1247,7 @@ public final class EventBoosterPackProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status_;
     /**
@@ -1250,6 +1263,7 @@ public final class EventBoosterPackProto {
       return status_;
     }
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
     public static final int UPDATEDORNEW_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
     /**
@@ -1320,6 +1334,7 @@ public final class EventBoosterPackProto {
       return updatedOrNew_.get(index);
     }
 
+    // optional .com.lvl6.proto.BoosterItemProto prize = 4;
     public static final int PRIZE_FIELD_NUMBER = 4;
     private com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto prize_;
     /**
@@ -1341,6 +1356,7 @@ public final class EventBoosterPackProto {
       return prize_;
     }
 
+    // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;
     public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_;
     /**
@@ -1386,8 +1402,7 @@ public final class EventBoosterPackProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1522,9 +1537,8 @@ public final class EventBoosterPackProto {
      * Protobuf type {@code com.lvl6.proto.PurchaseBoosterPackResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseBoosterPackResponseProto)
-        com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBoosterPackProto.internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor;
@@ -1757,6 +1771,7 @@ public final class EventBoosterPackProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1865,7 +1880,7 @@ public final class EventBoosterPackProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1873,6 +1888,7 @@ public final class EventBoosterPackProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;
       private com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
@@ -1908,6 +1924,7 @@ public final class EventBoosterPackProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedOrNewIsMutable() {
@@ -2119,8 +2136,7 @@ public final class EventBoosterPackProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (updatedOrNewBuilder_ == null) {
           ensureUpdatedOrNewIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedOrNew_);
+          super.addAll(values, updatedOrNew_);
           onChanged();
         } else {
           updatedOrNewBuilder_.addAllMessages(values);
@@ -2274,6 +2290,7 @@ public final class EventBoosterPackProto {
         return updatedOrNewBuilder_;
       }
 
+      // optional .com.lvl6.proto.BoosterItemProto prize = 4;
       private com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> prizeBuilder_;
@@ -2382,7 +2399,7 @@ public final class EventBoosterPackProto {
         if (prizeBuilder_ == null) {
           prizeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder>(
-                  getPrize(),
+                  prize_,
                   getParentForChildren(),
                   isClean());
           prize_ = null;
@@ -2390,6 +2407,7 @@ public final class EventBoosterPackProto {
         return prizeBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 5;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedUserItemsIsMutable() {
@@ -2531,8 +2549,7 @@ public final class EventBoosterPackProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
         if (updatedUserItemsBuilder_ == null) {
           ensureUpdatedUserItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedUserItems_);
+          super.addAll(values, updatedUserItems_);
           onChanged();
         } else {
           updatedUserItemsBuilder_.addAllMessages(values);
@@ -2641,10 +2658,10 @@ public final class EventBoosterPackProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseBoosterPackResponseProto)
   }
 
-  public interface ReceivedRareBoosterPurchaseResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ReceivedRareBoosterPurchaseResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ReceivedRareBoosterPurchaseResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchase = 1;
     /**
      * <code>optional .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchase = 1;</code>
      */
@@ -2662,9 +2679,8 @@ public final class EventBoosterPackProto {
    * Protobuf type {@code com.lvl6.proto.ReceivedRareBoosterPurchaseResponseProto}
    */
   public static final class ReceivedRareBoosterPurchaseResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ReceivedRareBoosterPurchaseResponseProto)
-      ReceivedRareBoosterPurchaseResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ReceivedRareBoosterPurchaseResponseProtoOrBuilder {
     // Use ReceivedRareBoosterPurchaseResponseProto.newBuilder() to construct.
     private ReceivedRareBoosterPurchaseResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2763,6 +2779,7 @@ public final class EventBoosterPackProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchase = 1;
     public static final int RAREBOOSTERPURCHASE_FIELD_NUMBER = 1;
     private com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto rareBoosterPurchase_;
     /**
@@ -2790,8 +2807,7 @@ public final class EventBoosterPackProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2898,9 +2914,8 @@ public final class EventBoosterPackProto {
      * Protobuf type {@code com.lvl6.proto.ReceivedRareBoosterPurchaseResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ReceivedRareBoosterPurchaseResponseProto)
-        com.lvl6.proto.EventBoosterPackProto.ReceivedRareBoosterPurchaseResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBoosterPackProto.ReceivedRareBoosterPurchaseResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBoosterPackProto.internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor;
@@ -3022,6 +3037,7 @@ public final class EventBoosterPackProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchase = 1;
       private com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto rareBoosterPurchase_ = com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.Builder, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder> rareBoosterPurchaseBuilder_;
@@ -3130,7 +3146,7 @@ public final class EventBoosterPackProto {
         if (rareBoosterPurchaseBuilder_ == null) {
           rareBoosterPurchaseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.Builder, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder>(
-                  getRareBoosterPurchase(),
+                  rareBoosterPurchase_,
                   getParentForChildren(),
                   isClean());
           rareBoosterPurchase_ = null;
@@ -3149,17 +3165,17 @@ public final class EventBoosterPackProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReceivedRareBoosterPurchaseResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3196,13 +3212,31 @@ public final class EventBoosterPackProto {
       "PurchaseProtoB\027B\025EventBoosterPackProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", });
+          internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", "UpdatedUserItems", });
+          internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor,
+              new java.lang.String[] { "RareBoosterPurchase", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -3211,28 +3245,6 @@ public final class EventBoosterPackProto {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", });
-    internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", "UpdatedUserItems", });
-    internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "RareBoosterPurchase", });
-    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
-    com.lvl6.proto.ItemsProto.getDescriptor();
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

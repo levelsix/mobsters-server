@@ -36,6 +36,7 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -78,7 +79,7 @@ public class CollectMonsterEnhancementController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CollectMonsterEnhancementRequestProto reqProto = ((CollectMonsterEnhancementRequestEvent) event)
 				.getCollectMonsterEnhancementRequestProto();
 
@@ -124,7 +125,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -169,7 +170,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				writeChangesToHistory(userId, umcep, mfu, inEnhancing, mefu,
@@ -181,7 +182,7 @@ public class CollectMonsterEnhancementController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 		} catch (Exception e) {
 			log.error(
@@ -196,7 +197,7 @@ public class CollectMonsterEnhancementController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setCollectMonsterEnhancementResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CollectMonsterEnhancementController processEvent",

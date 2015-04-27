@@ -58,6 +58,8 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -125,7 +127,6 @@ public class RequestJoinClanController extends EventController {
 
 
 	public RequestJoinClanController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -139,7 +140,7 @@ public class RequestJoinClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RequestJoinClanRequestProto reqProto = ((RequestJoinClanRequestEvent) event)
 				.getRequestJoinClanRequestProto();
 
@@ -183,7 +184,7 @@ public class RequestJoinClanController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRequestJoinClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -256,9 +257,9 @@ public class RequestJoinClanController extends EventController {
 			 
 			//in case user is not online write an apns
 			server.writeAPNSNotificationOrEvent(resEvent);
-			//server.writeEvent(resEvent);
+			//responses.normalResponseEvents().add(resEvent);
 			 */
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				List<String> userIds = new ArrayList<String>();
@@ -274,7 +275,7 @@ public class RequestJoinClanController extends EventController {
 				resBuilder.clearEventDetails(); //could just get rid of this line
 				resBuilder.clearClanUsersDetails(); //could just get rid of this line
 				resEvent.setRequestJoinClanResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clan.getId());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId()));
 
 				if (!requestToJoinRequired) {
 					//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -282,10 +283,10 @@ public class RequestJoinClanController extends EventController {
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									user, null, clan);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdate);
+					responses.normalResponseEvents().add(resEventUpdate);
 
 					//this is so user gets all up to date clan information
-					sendClanData(event, senderProto, userId, cdp);
+					sendClanData(event, senderProto, userId, cdp, responses);
 				}
 
 				// handled by client
@@ -299,7 +300,7 @@ public class RequestJoinClanController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRequestJoinClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RequestJoinClan processEvent", e);
 			}
@@ -573,8 +574,7 @@ public class RequestJoinClanController extends EventController {
 		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
 	}
 
-	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,
-			String userId, ClanDataProto cdp) {
+	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,	String userId, ClanDataProto cdp, ToClientEvents responses) {
 		if (null == cdp) {
 			return;
 		}
@@ -587,7 +587,7 @@ public class RequestJoinClanController extends EventController {
 		rcdrpb.setClanData(cdp);
 
 		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		server.writeEvent(rcdre);
+		responses.normalResponseEvents().add(rcdre);
 	}
 
 	public Locker getLocker() {

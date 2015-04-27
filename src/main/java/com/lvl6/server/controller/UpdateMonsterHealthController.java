@@ -26,6 +26,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -59,7 +60,7 @@ public class UpdateMonsterHealthController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent) event)
 				.getUpdateMonsterHealthRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -126,7 +127,7 @@ public class UpdateMonsterHealthController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -153,7 +154,7 @@ public class UpdateMonsterHealthController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -166,7 +167,7 @@ public class UpdateMonsterHealthController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateMonsterHealthController processEvent",

@@ -29,6 +29,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -63,7 +64,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EnhancementWaitTimeCompleteRequestProto reqProto = ((EnhancementWaitTimeCompleteRequestEvent) event)
 				.getEnhancementWaitTimeCompleteRequestProto();
 
@@ -108,7 +109,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -149,7 +150,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//tell the client to update user because user's funds most likely changed
@@ -158,7 +159,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				//				writeChangesToHistory(userId, inEnhancing, userMonsterIdsThatFinished);
 				//				writeToUserCurrencyHistory(aUser, curTime, umcep.getUserMonsterId(), money, previousGems);
@@ -178,7 +179,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in EnhancementWaitTimeCompleteController processEvent",

@@ -27,6 +27,7 @@ import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -60,7 +61,7 @@ public class BeginObstacleRemovalController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent) event)
 				.getBeginObstacleRemovalRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -97,7 +98,7 @@ public class BeginObstacleRemovalController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -126,7 +127,7 @@ public class BeginObstacleRemovalController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -134,7 +135,7 @@ public class BeginObstacleRemovalController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(userId, user, clientTime,
 						currencyChange, previousCurrency, ofu, rt);
@@ -152,7 +153,7 @@ public class BeginObstacleRemovalController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setBeginObstacleRemovalResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in BeginObstacleRemovalController processEvent",

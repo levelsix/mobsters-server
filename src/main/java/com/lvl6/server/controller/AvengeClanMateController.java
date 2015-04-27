@@ -27,6 +27,7 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AvengeClanMateAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
@@ -69,7 +70,7 @@ public class AvengeClanMateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AvengeClanMateRequestProto reqProto = ((AvengeClanMateRequestEvent) event)
 				.getAvengeClanMateRequestProto();
 
@@ -122,7 +123,7 @@ public class AvengeClanMateController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAvengeClanMateResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -183,7 +184,7 @@ public class AvengeClanMateController extends EventController {
 				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
 
 			}
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in AvengeClanMate processEvent", e);
@@ -193,7 +194,7 @@ public class AvengeClanMateController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in AvengeClanMate processEvent", e);
 			}
@@ -244,7 +245,7 @@ public class AvengeClanMateController extends EventController {
 	//		  rcdrpb.setClanData(cdp);
 	//		  
 	//		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-	//		  server.writeEvent(rcdre);
+	//		  responses.normalResponseEvents().add(rcdre);
 	//	  }
 
 	public Locker getLocker() {

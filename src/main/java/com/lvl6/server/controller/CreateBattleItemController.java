@@ -30,6 +30,7 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateBattleItemAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -77,7 +78,7 @@ public class CreateBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CreateBattleItemRequestProto reqProto = ((CreateBattleItemRequestEvent) event)
 				.getCreateBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -136,7 +137,7 @@ public class CreateBattleItemController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -155,7 +156,7 @@ public class CreateBattleItemController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
@@ -164,7 +165,7 @@ public class CreateBattleItemController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				Date d = new Date();
 				Timestamp ts = new Timestamp(d.getTime());
@@ -179,7 +180,7 @@ public class CreateBattleItemController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCreateBattleItemResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CreateBattleItemController processEvent",

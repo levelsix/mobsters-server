@@ -31,6 +31,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -68,7 +69,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CombineUserMonsterPiecesRequestProto reqProto = ((CombineUserMonsterPiecesRequestEvent) event)
 				.getCombineUserMonsterPiecesRequestProto();
 
@@ -106,7 +107,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -139,7 +140,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful && gemCost > 0) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -147,7 +148,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, money, curTime, previousGems,
 						userMonsterIds);
@@ -164,7 +165,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CombineUserMonsterPiecesController processEvent",

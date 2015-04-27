@@ -24,6 +24,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.TradeItemForSpeedUpsAction;
 import com.lvl6.server.controller.utils.ItemUtil;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -56,7 +57,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForSpeedUpsRequestProto reqProto = ((TradeItemForSpeedUpsRequestEvent) event)
 				.getTradeItemForSpeedUpsRequestProto();
 
@@ -91,7 +92,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -129,7 +130,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForSpeedUpsResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -142,7 +143,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in TradeItemForSpeedUpsController processEvent",

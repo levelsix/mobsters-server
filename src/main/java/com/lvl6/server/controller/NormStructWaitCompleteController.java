@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -69,7 +70,7 @@ public class NormStructWaitCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		NormStructWaitCompleteRequestProto reqProto = ((NormStructWaitCompleteRequestEvent) event)
 				.getNormStructWaitCompleteRequestProto();
 
@@ -113,7 +114,7 @@ public class NormStructWaitCompleteController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -150,7 +151,7 @@ public class NormStructWaitCompleteController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -164,7 +165,7 @@ public class NormStructWaitCompleteController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setNormStructWaitCompleteResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in NormStructWaitCompleteController processEvent",

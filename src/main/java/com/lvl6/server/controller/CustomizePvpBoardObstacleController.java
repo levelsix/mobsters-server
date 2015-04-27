@@ -23,6 +23,7 @@ import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.CustomizePvpBoardObstacleAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -57,7 +58,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CustomizePvpBoardObstacleRequestProto reqProto = ((CustomizePvpBoardObstacleRequestEvent) event)
 				.getCustomizePvpBoardObstacleRequestProto();
 
@@ -93,7 +94,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -111,7 +112,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -125,7 +126,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CustomizePvpBoardObstacleController processEvent",

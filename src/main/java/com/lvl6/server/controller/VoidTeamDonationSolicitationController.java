@@ -28,6 +28,8 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.VoidTeamDonationSolicitationAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component
@@ -58,7 +60,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		VoidTeamDonationSolicitationRequestProto reqProto = ((VoidTeamDonationSolicitationRequestEvent) event)
 				.getVoidTeamDonationSolicitationRequestProto();
 
@@ -129,7 +131,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -163,18 +165,18 @@ public class VoidTeamDonationSolicitationController extends EventController {
 					VoidTeamDonationSolicitationStatus.SUCCESS)) {
 				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				resBuilder.addAllClanTeamDonateUuid(donationIdsToSnapshots
 						.keySet());
 				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 				//write to the clans of the solicitations if success
 				for (String clanId : clanIds) {
-					server.writeClanEvent(resEvent, clanId);
+					responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 				}
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -192,7 +194,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in VoidTeamDonationSolicitation processEvent",

@@ -48,7 +48,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    LoadCityRequestProto reqProto = ((LoadCityRequestEvent)event).getLoadCityRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();
@@ -90,7 +90,7 @@
 //      LoadCityResponseEvent resEvent = new LoadCityResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
 //      resEvent.setLoadCityResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //
 //    } catch (Exception e) {
 //      log.error("exception in LoadCity processEvent", e);

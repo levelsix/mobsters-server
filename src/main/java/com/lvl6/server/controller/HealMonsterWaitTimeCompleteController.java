@@ -52,7 +52,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    HealMonsterWaitTimeCompleteRequestProto reqProto = ((HealMonsterWaitTimeCompleteRequestEvent)event).getHealMonsterWaitTimeCompleteRequestProto();
 //
 //    //get values sent from the client (the request proto)
@@ -96,14 +96,14 @@
 //      HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
 //      resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      if (successful) {
 //      	//since user's money most likely changed, tell client to update user
 //      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 //      	resEventUpdate.setTag(event.getTag());
-//      	server.writeEvent(resEventUpdate);
+//      	responses.normalResponseEvents().add(resEventUpdate);
 //      	
 //      	//TODO: WRITE TO HISTORY
 //      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems);
@@ -116,7 +116,7 @@
 //    	  HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
 //    	  resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in HealMonsterWaitTimeCompleteController processEvent", e);
 //      }

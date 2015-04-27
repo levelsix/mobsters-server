@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.utils.ItemUtil;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -65,7 +66,7 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForResourcesRequestProto reqProto = ((TradeItemForResourcesRequestEvent) event)
 				.getTradeItemForResourcesRequestProto();
 
@@ -105,7 +106,7 @@ public class TradeItemForResourcesController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForResourcesResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -129,7 +130,7 @@ public class TradeItemForResourcesController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForResourcesResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder
 					.getStatus())) {
@@ -138,7 +139,7 @@ public class TradeItemForResourcesController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToCurrencyHistory(userId, date, tifsua);
 			}
@@ -154,7 +155,7 @@ public class TradeItemForResourcesController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setTradeItemForResourcesResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in TradeItemForResourcesController processEvent",

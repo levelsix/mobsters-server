@@ -69,7 +69,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestProgressRequestProto reqProto = ((QuestProgressRequestEvent)event).getQuestProgressRequestProto();
 //    
 //    log.info("reqProto=" + reqProto);
@@ -136,7 +136,7 @@
 //    	QuestProgressResponseEvent resEvent = new QuestProgressResponseEvent(senderProto.getUserUuid());
 //    	resEvent.setTag(event.getTag());
 //    	resEvent.setQuestProgressResponseProto(resBuilder.build());  
-//    	server.writeEvent(resEvent);
+//    	responses.normalResponseEvents().add(resEvent);
 //
 //    	if (success) {
 //    		//TODO: RECORD THAT THE USER DELETED THESE MONSERS AND THE REASON

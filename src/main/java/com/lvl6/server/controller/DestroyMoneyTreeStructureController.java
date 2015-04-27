@@ -23,6 +23,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DestroyMoneyTreeStructureAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component
@@ -67,7 +68,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 	 */
 	// @SuppressWarnings("deprecation")
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DestroyMoneyTreeStructureRequestProto reqProto = ((DestroyMoneyTreeStructureRequestEvent) event)
 				.getDestroyMoneyTreeStructureRequestProto();
 
@@ -98,7 +99,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setDestroyMoneyTreeStructureResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -120,7 +121,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setDestroyMoneyTreeStructureResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(

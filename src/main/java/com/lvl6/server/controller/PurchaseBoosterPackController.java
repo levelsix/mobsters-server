@@ -42,6 +42,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -109,7 +110,7 @@ public class PurchaseBoosterPackController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PurchaseBoosterPackRequestProto reqProto = ((PurchaseBoosterPackRequestEvent) event)
 				.getPurchaseBoosterPackRequestProto();
 
@@ -146,7 +147,7 @@ public class PurchaseBoosterPackController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -190,7 +191,7 @@ public class PurchaseBoosterPackController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPurchaseBoosterPackResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (PurchaseBoosterPackStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
@@ -200,7 +201,7 @@ public class PurchaseBoosterPackController extends EventController {
 								pbpa.getUser(), null, null);
 
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
 
@@ -221,7 +222,7 @@ public class PurchaseBoosterPackController extends EventController {
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SellUserMonsterController processEvent",

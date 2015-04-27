@@ -43,6 +43,7 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -102,7 +103,7 @@ public class PrivateChatPostController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PrivateChatPostRequestProto reqProto = ((PrivateChatPostRequestEvent) event)
 				.getPrivateChatPostRequestProto();
 
@@ -144,7 +145,7 @@ public class PrivateChatPostController extends EventController {
 					posterId);
 			resEvent.setTag(event.getTag());
 			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -319,7 +320,7 @@ public class PrivateChatPostController extends EventController {
 			}
 			// send to sender of the private chat post
 			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			// if (legitPost && recipientId != posterId) {
 			// User wallOwner = users.get(recipientId);
@@ -338,7 +339,7 @@ public class PrivateChatPostController extends EventController {
 						posterId);
 				resEvent.setTag(event.getTag());
 				resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in PrivateChatPostController processEvent",

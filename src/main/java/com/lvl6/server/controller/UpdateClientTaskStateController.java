@@ -21,6 +21,7 @@ import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateCl
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -51,7 +52,7 @@ public class UpdateClientTaskStateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateClientTaskStateRequestProto reqProto = ((UpdateClientTaskStateRequestEvent) event)
 				.getUpdateClientTaskStateRequestProto();
 
@@ -88,7 +89,7 @@ public class UpdateClientTaskStateController extends EventController {
 			resEvent = new UpdateClientTaskStateResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -106,7 +107,7 @@ public class UpdateClientTaskStateController extends EventController {
 
 			resBuilder.setStatus(UpdateClientTaskStateStatus.SUCCESS);
 			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -119,7 +120,7 @@ public class UpdateClientTaskStateController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setUpdateClientTaskStateResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateClientTaskStateController processEvent",

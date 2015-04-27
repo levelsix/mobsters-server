@@ -8,10 +8,10 @@ public final class MiniJobConfigProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface MiniJobProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniJobProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MiniJobProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 miniJobId = 1;
     /**
      * <code>optional int32 miniJobId = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class MiniJobConfigProto {
      */
     int getMiniJobId();
 
+    // optional int32 requiredStructId = 2;
     /**
      * <code>optional int32 requiredStructId = 2;</code>
      */
@@ -30,6 +31,7 @@ public final class MiniJobConfigProto {
      */
     int getRequiredStructId();
 
+    // optional string name = 3;
     /**
      * <code>optional string name = 3;</code>
      */
@@ -44,6 +46,7 @@ public final class MiniJobConfigProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional int32 cashReward = 4;
     /**
      * <code>optional int32 cashReward = 4;</code>
      */
@@ -53,6 +56,7 @@ public final class MiniJobConfigProto {
      */
     int getCashReward();
 
+    // optional int32 oilReward = 5;
     /**
      * <code>optional int32 oilReward = 5;</code>
      */
@@ -62,6 +66,7 @@ public final class MiniJobConfigProto {
      */
     int getOilReward();
 
+    // optional int32 gemReward = 6;
     /**
      * <code>optional int32 gemReward = 6;</code>
      */
@@ -71,6 +76,7 @@ public final class MiniJobConfigProto {
      */
     int getGemReward();
 
+    // optional int32 monsterIdReward = 7;
     /**
      * <code>optional int32 monsterIdReward = 7;</code>
      */
@@ -80,6 +86,7 @@ public final class MiniJobConfigProto {
      */
     int getMonsterIdReward();
 
+    // optional int32 itemIdReward = 17;
     /**
      * <code>optional int32 itemIdReward = 17;</code>
      */
@@ -89,6 +96,7 @@ public final class MiniJobConfigProto {
      */
     int getItemIdReward();
 
+    // optional int32 itemRewardQuantity = 18;
     /**
      * <code>optional int32 itemRewardQuantity = 18;</code>
      */
@@ -98,6 +106,7 @@ public final class MiniJobConfigProto {
      */
     int getItemRewardQuantity();
 
+    // optional int32 secondItemIdReward = 19;
     /**
      * <code>optional int32 secondItemIdReward = 19;</code>
      */
@@ -107,6 +116,7 @@ public final class MiniJobConfigProto {
      */
     int getSecondItemIdReward();
 
+    // optional int32 secondItemRewardQuantity = 20;
     /**
      * <code>optional int32 secondItemRewardQuantity = 20;</code>
      */
@@ -116,6 +126,7 @@ public final class MiniJobConfigProto {
      */
     int getSecondItemRewardQuantity();
 
+    // optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
      */
@@ -125,6 +136,7 @@ public final class MiniJobConfigProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
 
+    // optional int32 maxNumMonstersAllowed = 9;
     /**
      * <code>optional int32 maxNumMonstersAllowed = 9;</code>
      */
@@ -134,6 +146,7 @@ public final class MiniJobConfigProto {
      */
     int getMaxNumMonstersAllowed();
 
+    // optional float chanceToAppear = 10;
     /**
      * <code>optional float chanceToAppear = 10;</code>
      */
@@ -143,6 +156,7 @@ public final class MiniJobConfigProto {
      */
     float getChanceToAppear();
 
+    // optional int32 hpRequired = 11;
     /**
      * <code>optional int32 hpRequired = 11;</code>
      */
@@ -152,6 +166,7 @@ public final class MiniJobConfigProto {
      */
     int getHpRequired();
 
+    // optional int32 atkRequired = 12;
     /**
      * <code>optional int32 atkRequired = 12;</code>
      */
@@ -161,6 +176,7 @@ public final class MiniJobConfigProto {
      */
     int getAtkRequired();
 
+    // optional int32 minDmgDealt = 13;
     /**
      * <code>optional int32 minDmgDealt = 13;</code>
      */
@@ -170,6 +186,7 @@ public final class MiniJobConfigProto {
      */
     int getMinDmgDealt();
 
+    // optional int32 maxDmgDealt = 14;
     /**
      * <code>optional int32 maxDmgDealt = 14;</code>
      */
@@ -179,6 +196,7 @@ public final class MiniJobConfigProto {
      */
     int getMaxDmgDealt();
 
+    // optional int32 durationMinMinutes = 15;
     /**
      * <code>optional int32 durationMinMinutes = 15;</code>
      */
@@ -188,6 +206,7 @@ public final class MiniJobConfigProto {
      */
     int getDurationMinMinutes();
 
+    // optional int32 durationMaxMinutes = 16;
     /**
      * <code>optional int32 durationMaxMinutes = 16;</code>
      */
@@ -201,9 +220,8 @@ public final class MiniJobConfigProto {
    * Protobuf type {@code com.lvl6.proto.MiniJobProto}
    */
   public static final class MiniJobProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniJobProto)
-      MiniJobProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MiniJobProtoOrBuilder {
     // Use MiniJobProto.newBuilder() to construct.
     private MiniJobProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -260,9 +278,8 @@ public final class MiniJobConfigProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 32: {
@@ -396,6 +413,7 @@ public final class MiniJobConfigProto {
     }
 
     private int bitField0_;
+    // optional int32 miniJobId = 1;
     public static final int MINIJOBID_FIELD_NUMBER = 1;
     private int miniJobId_;
     /**
@@ -411,6 +429,7 @@ public final class MiniJobConfigProto {
       return miniJobId_;
     }
 
+    // optional int32 requiredStructId = 2;
     public static final int REQUIREDSTRUCTID_FIELD_NUMBER = 2;
     private int requiredStructId_;
     /**
@@ -426,6 +445,7 @@ public final class MiniJobConfigProto {
       return requiredStructId_;
     }
 
+    // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
     private java.lang.Object name_;
     /**
@@ -468,6 +488,7 @@ public final class MiniJobConfigProto {
       }
     }
 
+    // optional int32 cashReward = 4;
     public static final int CASHREWARD_FIELD_NUMBER = 4;
     private int cashReward_;
     /**
@@ -483,6 +504,7 @@ public final class MiniJobConfigProto {
       return cashReward_;
     }
 
+    // optional int32 oilReward = 5;
     public static final int OILREWARD_FIELD_NUMBER = 5;
     private int oilReward_;
     /**
@@ -498,6 +520,7 @@ public final class MiniJobConfigProto {
       return oilReward_;
     }
 
+    // optional int32 gemReward = 6;
     public static final int GEMREWARD_FIELD_NUMBER = 6;
     private int gemReward_;
     /**
@@ -513,6 +536,7 @@ public final class MiniJobConfigProto {
       return gemReward_;
     }
 
+    // optional int32 monsterIdReward = 7;
     public static final int MONSTERIDREWARD_FIELD_NUMBER = 7;
     private int monsterIdReward_;
     /**
@@ -528,6 +552,7 @@ public final class MiniJobConfigProto {
       return monsterIdReward_;
     }
 
+    // optional int32 itemIdReward = 17;
     public static final int ITEMIDREWARD_FIELD_NUMBER = 17;
     private int itemIdReward_;
     /**
@@ -543,6 +568,7 @@ public final class MiniJobConfigProto {
       return itemIdReward_;
     }
 
+    // optional int32 itemRewardQuantity = 18;
     public static final int ITEMREWARDQUANTITY_FIELD_NUMBER = 18;
     private int itemRewardQuantity_;
     /**
@@ -558,6 +584,7 @@ public final class MiniJobConfigProto {
       return itemRewardQuantity_;
     }
 
+    // optional int32 secondItemIdReward = 19;
     public static final int SECONDITEMIDREWARD_FIELD_NUMBER = 19;
     private int secondItemIdReward_;
     /**
@@ -573,6 +600,7 @@ public final class MiniJobConfigProto {
       return secondItemIdReward_;
     }
 
+    // optional int32 secondItemRewardQuantity = 20;
     public static final int SECONDITEMREWARDQUANTITY_FIELD_NUMBER = 20;
     private int secondItemRewardQuantity_;
     /**
@@ -588,6 +616,7 @@ public final class MiniJobConfigProto {
       return secondItemRewardQuantity_;
     }
 
+    // optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];
     public static final int QUALITY_FIELD_NUMBER = 8;
     private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     /**
@@ -603,6 +632,7 @@ public final class MiniJobConfigProto {
       return quality_;
     }
 
+    // optional int32 maxNumMonstersAllowed = 9;
     public static final int MAXNUMMONSTERSALLOWED_FIELD_NUMBER = 9;
     private int maxNumMonstersAllowed_;
     /**
@@ -618,6 +648,7 @@ public final class MiniJobConfigProto {
       return maxNumMonstersAllowed_;
     }
 
+    // optional float chanceToAppear = 10;
     public static final int CHANCETOAPPEAR_FIELD_NUMBER = 10;
     private float chanceToAppear_;
     /**
@@ -633,6 +664,7 @@ public final class MiniJobConfigProto {
       return chanceToAppear_;
     }
 
+    // optional int32 hpRequired = 11;
     public static final int HPREQUIRED_FIELD_NUMBER = 11;
     private int hpRequired_;
     /**
@@ -648,6 +680,7 @@ public final class MiniJobConfigProto {
       return hpRequired_;
     }
 
+    // optional int32 atkRequired = 12;
     public static final int ATKREQUIRED_FIELD_NUMBER = 12;
     private int atkRequired_;
     /**
@@ -663,6 +696,7 @@ public final class MiniJobConfigProto {
       return atkRequired_;
     }
 
+    // optional int32 minDmgDealt = 13;
     public static final int MINDMGDEALT_FIELD_NUMBER = 13;
     private int minDmgDealt_;
     /**
@@ -678,6 +712,7 @@ public final class MiniJobConfigProto {
       return minDmgDealt_;
     }
 
+    // optional int32 maxDmgDealt = 14;
     public static final int MAXDMGDEALT_FIELD_NUMBER = 14;
     private int maxDmgDealt_;
     /**
@@ -693,6 +728,7 @@ public final class MiniJobConfigProto {
       return maxDmgDealt_;
     }
 
+    // optional int32 durationMinMinutes = 15;
     public static final int DURATIONMINMINUTES_FIELD_NUMBER = 15;
     private int durationMinMinutes_;
     /**
@@ -708,6 +744,7 @@ public final class MiniJobConfigProto {
       return durationMinMinutes_;
     }
 
+    // optional int32 durationMaxMinutes = 16;
     public static final int DURATIONMAXMINUTES_FIELD_NUMBER = 16;
     private int durationMaxMinutes_;
     /**
@@ -748,8 +785,7 @@ public final class MiniJobConfigProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -989,9 +1025,8 @@ public final class MiniJobConfigProto {
      * Protobuf type {@code com.lvl6.proto.MiniJobProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniJobProto)
-        com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
@@ -1277,6 +1312,7 @@ public final class MiniJobConfigProto {
       }
       private int bitField0_;
 
+      // optional int32 miniJobId = 1;
       private int miniJobId_ ;
       /**
        * <code>optional int32 miniJobId = 1;</code>
@@ -1309,6 +1345,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 requiredStructId = 2;
       private int requiredStructId_ ;
       /**
        * <code>optional int32 requiredStructId = 2;</code>
@@ -1341,6 +1378,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional string name = 3;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 3;</code>
@@ -1354,12 +1392,9 @@ public final class MiniJobConfigProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1417,6 +1452,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 cashReward = 4;
       private int cashReward_ ;
       /**
        * <code>optional int32 cashReward = 4;</code>
@@ -1449,6 +1485,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 oilReward = 5;
       private int oilReward_ ;
       /**
        * <code>optional int32 oilReward = 5;</code>
@@ -1481,6 +1518,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 gemReward = 6;
       private int gemReward_ ;
       /**
        * <code>optional int32 gemReward = 6;</code>
@@ -1513,6 +1551,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 monsterIdReward = 7;
       private int monsterIdReward_ ;
       /**
        * <code>optional int32 monsterIdReward = 7;</code>
@@ -1545,6 +1584,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 itemIdReward = 17;
       private int itemIdReward_ ;
       /**
        * <code>optional int32 itemIdReward = 17;</code>
@@ -1577,6 +1617,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 itemRewardQuantity = 18;
       private int itemRewardQuantity_ ;
       /**
        * <code>optional int32 itemRewardQuantity = 18;</code>
@@ -1609,6 +1650,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 secondItemIdReward = 19;
       private int secondItemIdReward_ ;
       /**
        * <code>optional int32 secondItemIdReward = 19;</code>
@@ -1641,6 +1683,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 secondItemRewardQuantity = 20;
       private int secondItemRewardQuantity_ ;
       /**
        * <code>optional int32 secondItemRewardQuantity = 20;</code>
@@ -1673,6 +1716,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];
       private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
@@ -1708,6 +1752,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 maxNumMonstersAllowed = 9;
       private int maxNumMonstersAllowed_ ;
       /**
        * <code>optional int32 maxNumMonstersAllowed = 9;</code>
@@ -1740,6 +1785,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional float chanceToAppear = 10;
       private float chanceToAppear_ ;
       /**
        * <code>optional float chanceToAppear = 10;</code>
@@ -1772,6 +1818,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 hpRequired = 11;
       private int hpRequired_ ;
       /**
        * <code>optional int32 hpRequired = 11;</code>
@@ -1804,6 +1851,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 atkRequired = 12;
       private int atkRequired_ ;
       /**
        * <code>optional int32 atkRequired = 12;</code>
@@ -1836,6 +1884,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 minDmgDealt = 13;
       private int minDmgDealt_ ;
       /**
        * <code>optional int32 minDmgDealt = 13;</code>
@@ -1868,6 +1917,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 maxDmgDealt = 14;
       private int maxDmgDealt_ ;
       /**
        * <code>optional int32 maxDmgDealt = 14;</code>
@@ -1900,6 +1950,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 durationMinMinutes = 15;
       private int durationMinMinutes_ ;
       /**
        * <code>optional int32 durationMinMinutes = 15;</code>
@@ -1932,6 +1983,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 durationMaxMinutes = 16;
       private int durationMaxMinutes_ ;
       /**
        * <code>optional int32 durationMaxMinutes = 16;</code>
@@ -1975,10 +2027,10 @@ public final class MiniJobConfigProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniJobProto)
   }
 
-  public interface UserMiniJobProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniJobProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserMiniJobProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userMiniJobUuid = 1;
     /**
      * <code>optional string userMiniJobUuid = 1;</code>
      */
@@ -1993,6 +2045,7 @@ public final class MiniJobConfigProto {
     com.google.protobuf.ByteString
         getUserMiniJobUuidBytes();
 
+    // optional int32 baseDmgReceived = 2;
     /**
      * <code>optional int32 baseDmgReceived = 2;</code>
      */
@@ -2002,6 +2055,7 @@ public final class MiniJobConfigProto {
      */
     int getBaseDmgReceived();
 
+    // optional int64 timeStarted = 3;
     /**
      * <code>optional int64 timeStarted = 3;</code>
      */
@@ -2011,11 +2065,12 @@ public final class MiniJobConfigProto {
      */
     long getTimeStarted();
 
+    // repeated string userMonsterUuids = 4;
     /**
      * <code>repeated string userMonsterUuids = 4;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getUserMonsterUuidsList();
+    java.util.List<java.lang.String>
+    getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 4;</code>
      */
@@ -2030,6 +2085,7 @@ public final class MiniJobConfigProto {
     com.google.protobuf.ByteString
         getUserMonsterUuidsBytes(int index);
 
+    // optional int64 timeCompleted = 5;
     /**
      * <code>optional int64 timeCompleted = 5;</code>
      */
@@ -2039,6 +2095,7 @@ public final class MiniJobConfigProto {
      */
     long getTimeCompleted();
 
+    // optional int32 durationMinutes = 7;
     /**
      * <code>optional int32 durationMinutes = 7;</code>
      */
@@ -2048,6 +2105,7 @@ public final class MiniJobConfigProto {
      */
     int getDurationMinutes();
 
+    // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
      */
@@ -2061,6 +2119,7 @@ public final class MiniJobConfigProto {
      */
     com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
 
+    // optional int32 durationSeconds = 8;
     /**
      * <code>optional int32 durationSeconds = 8;</code>
      *
@@ -2087,9 +2146,8 @@ public final class MiniJobConfigProto {
    * </pre>
    */
   public static final class UserMiniJobProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniJobProto)
-      UserMiniJobProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserMiniJobProtoOrBuilder {
     // Use UserMiniJobProto.newBuilder() to construct.
     private UserMiniJobProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2136,9 +2194,8 @@ public final class MiniJobConfigProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMiniJobUuid_ = bs;
+              userMiniJobUuid_ = input.readBytes();
               break;
             }
             case 16: {
@@ -2152,12 +2209,11 @@ public final class MiniJobConfigProto {
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000008;
               }
-              userMonsterUuids_.add(bs);
+              userMonsterUuids_.add(input.readBytes());
               break;
             }
             case 40: {
@@ -2197,7 +2253,7 @@ public final class MiniJobConfigProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
+          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2231,6 +2287,7 @@ public final class MiniJobConfigProto {
     }
 
     private int bitField0_;
+    // optional string userMiniJobUuid = 1;
     public static final int USERMINIJOBUUID_FIELD_NUMBER = 1;
     private java.lang.Object userMiniJobUuid_;
     /**
@@ -2273,6 +2330,7 @@ public final class MiniJobConfigProto {
       }
     }
 
+    // optional int32 baseDmgReceived = 2;
     public static final int BASEDMGRECEIVED_FIELD_NUMBER = 2;
     private int baseDmgReceived_;
     /**
@@ -2288,6 +2346,7 @@ public final class MiniJobConfigProto {
       return baseDmgReceived_;
     }
 
+    // optional int64 timeStarted = 3;
     public static final int TIMESTARTED_FIELD_NUMBER = 3;
     private long timeStarted_;
     /**
@@ -2303,12 +2362,13 @@ public final class MiniJobConfigProto {
       return timeStarted_;
     }
 
+    // repeated string userMonsterUuids = 4;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 4;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
      * <code>repeated string userMonsterUuids = 4;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -2332,6 +2392,7 @@ public final class MiniJobConfigProto {
       return userMonsterUuids_.getByteString(index);
     }
 
+    // optional int64 timeCompleted = 5;
     public static final int TIMECOMPLETED_FIELD_NUMBER = 5;
     private long timeCompleted_;
     /**
@@ -2347,6 +2408,7 @@ public final class MiniJobConfigProto {
       return timeCompleted_;
     }
 
+    // optional int32 durationMinutes = 7;
     public static final int DURATIONMINUTES_FIELD_NUMBER = 7;
     private int durationMinutes_;
     /**
@@ -2362,6 +2424,7 @@ public final class MiniJobConfigProto {
       return durationMinutes_;
     }
 
+    // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
     public static final int MINIJOB_FIELD_NUMBER = 6;
     private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_;
     /**
@@ -2383,6 +2446,7 @@ public final class MiniJobConfigProto {
       return miniJob_;
     }
 
+    // optional int32 durationSeconds = 8;
     public static final int DURATIONSECONDS_FIELD_NUMBER = 8;
     private int durationSeconds_;
     /**
@@ -2419,8 +2483,7 @@ public final class MiniJobConfigProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2586,9 +2649,8 @@ public final class MiniJobConfigProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniJobProto)
-        com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
@@ -2683,7 +2745,8 @@ public final class MiniJobConfigProto {
         }
         result.timeStarted_ = timeStarted_;
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
+          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              userMonsterUuids_);
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -2783,6 +2846,7 @@ public final class MiniJobConfigProto {
       }
       private int bitField0_;
 
+      // optional string userMiniJobUuid = 1;
       private java.lang.Object userMiniJobUuid_ = "";
       /**
        * <code>optional string userMiniJobUuid = 1;</code>
@@ -2796,12 +2860,9 @@ public final class MiniJobConfigProto {
       public java.lang.String getUserMiniJobUuid() {
         java.lang.Object ref = userMiniJobUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userMiniJobUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userMiniJobUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2859,6 +2920,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 baseDmgReceived = 2;
       private int baseDmgReceived_ ;
       /**
        * <code>optional int32 baseDmgReceived = 2;</code>
@@ -2891,6 +2953,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int64 timeStarted = 3;
       private long timeStarted_ ;
       /**
        * <code>optional int64 timeStarted = 3;</code>
@@ -2923,6 +2986,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // repeated string userMonsterUuids = 4;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
@@ -2933,9 +2997,9 @@ public final class MiniJobConfigProto {
       /**
        * <code>repeated string userMonsterUuids = 4;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getUserMonsterUuidsList() {
-        return userMonsterUuids_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(userMonsterUuids_);
       }
       /**
        * <code>repeated string userMonsterUuids = 4;</code>
@@ -2988,8 +3052,7 @@ public final class MiniJobConfigProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterUuids_);
+        super.addAll(values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -3016,6 +3079,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int64 timeCompleted = 5;
       private long timeCompleted_ ;
       /**
        * <code>optional int64 timeCompleted = 5;</code>
@@ -3048,6 +3112,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional int32 durationMinutes = 7;
       private int durationMinutes_ ;
       /**
        * <code>optional int32 durationMinutes = 7;</code>
@@ -3080,6 +3145,7 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
       private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> miniJobBuilder_;
@@ -3188,7 +3254,7 @@ public final class MiniJobConfigProto {
         if (miniJobBuilder_ == null) {
           miniJobBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder>(
-                  getMiniJob(),
+                  miniJob_,
                   getParentForChildren(),
                   isClean());
           miniJob_ = null;
@@ -3196,6 +3262,7 @@ public final class MiniJobConfigProto {
         return miniJobBuilder_;
       }
 
+      // optional int32 durationSeconds = 8;
       private int durationSeconds_ ;
       /**
        * <code>optional int32 durationSeconds = 8;</code>
@@ -3255,12 +3322,12 @@ public final class MiniJobConfigProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniJobProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniJobProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3298,13 +3365,25 @@ public final class MiniJobConfigProto {
       "onSeconds\030\010 \001(\005B\024B\022MiniJobConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_MiniJobProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MiniJobProto_descriptor,
+              new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", });
+          internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
+              new java.lang.String[] { "UserMiniJobUuid", "BaseDmgReceived", "TimeStarted", "UserMonsterUuids", "TimeCompleted", "DurationMinutes", "MiniJob", "DurationSeconds", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -3312,21 +3391,6 @@ public final class MiniJobConfigProto {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_MiniJobProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniJobProto_descriptor,
-        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", });
-    internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
-        new java.lang.String[] { "UserMiniJobUuid", "BaseDmgReceived", "TimeStarted", "UserMonsterUuids", "TimeCompleted", "DurationMinutes", "MiniJob", "DurationSeconds", });
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

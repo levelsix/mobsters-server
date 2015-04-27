@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -70,7 +71,7 @@ public class UpgradeNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent) event)
 				.getUpgradeNormStructureRequestProto();
 
@@ -108,7 +109,7 @@ public class UpgradeNormStructureController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -137,7 +138,7 @@ public class UpgradeNormStructureController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (legitUpgrade) {
 				previousCash = user.getCash();
@@ -152,7 +153,7 @@ public class UpgradeNormStructureController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(user, userStruct, currentStruct,
 						nextLevelStruct, timeOfUpgrade, money, previousCash,
@@ -167,7 +168,7 @@ public class UpgradeNormStructureController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setUpgradeNormStructureResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in UpgradeNormStructure processEvent", e2);
 			}

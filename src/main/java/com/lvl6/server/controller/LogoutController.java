@@ -23,6 +23,7 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -72,7 +73,7 @@ public class LogoutController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LogoutRequestProto reqProto = ((LogoutRequestEvent) event)
 				.getLogoutRequestProto();
 

@@ -29,6 +29,8 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -72,7 +74,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PromoteDemoteClanMemberRequestProto reqProto = ((PromoteDemoteClanMemberRequestEvent) event)
 				.getPromoteDemoteClanMemberRequestProto();
 
@@ -119,7 +121,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -159,7 +161,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 			if (!success) {
 				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//TODO: Is clan needed here?
@@ -174,7 +176,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
 						.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 			}
 
 		} catch (Exception e) {
@@ -186,7 +188,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in PromoteDemoteClanMember processEvent",
 						e);

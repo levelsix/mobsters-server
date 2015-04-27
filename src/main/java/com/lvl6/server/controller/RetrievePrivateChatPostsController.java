@@ -35,6 +35,7 @@ import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.memetix.mst.language.Language;
 
@@ -81,7 +82,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrievePrivateChatPostsRequestProto reqProto = ((RetrievePrivateChatPostsRequestEvent) event)
 				.getRetrievePrivateChatPostsRequestProto();
 
@@ -121,7 +122,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrievePrivateChatPostsResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -240,7 +241,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrievePrivateChatPostsResponseProto(resProto);
 
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 		} catch (Exception e) {
 			log.error(
 					"exception in RetrievePrivateChatPostsController processEvent",
@@ -253,7 +254,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setRetrievePrivateChatPostsResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrievePrivateChatPostsController processEvent",

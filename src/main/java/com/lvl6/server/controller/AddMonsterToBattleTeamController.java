@@ -23,6 +23,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -53,7 +54,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AddMonsterToBattleTeamRequestProto reqProto = ((AddMonsterToBattleTeamRequestEvent) event)
 				.getAddMonsterToBattleTeamRequestProto();
 
@@ -87,7 +88,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -121,12 +122,12 @@ public class AddMonsterToBattleTeamController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			//
 			// UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 			// .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 			// resEventUpdate.setTag(event.getTag());
-			// server.writeEvent(resEventUpdate);
+			// responses.normalResponseEvents().add(resEventUpdate);
 		} catch (Exception e) {
 			log.error(
 					"exception in AddMonsterToBattleTeamController processEvent",
@@ -139,7 +140,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in AddMonsterToBattleTeamController processEvent",

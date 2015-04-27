@@ -29,6 +29,8 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -69,7 +71,7 @@ public class TransferClanOwnershipController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TransferClanOwnershipRequestProto reqProto = ((TransferClanOwnershipRequestEvent) event)
 				.getTransferClanOwnershipRequestProto();
 		log.info("reqProto=" + reqProto);
@@ -117,7 +119,7 @@ public class TransferClanOwnershipController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -153,7 +155,7 @@ public class TransferClanOwnershipController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setTransferClanOwnershipResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			}
 
 			if (legitTransfer) {
@@ -162,7 +164,7 @@ public class TransferClanOwnershipController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setTransferClanOwnershipResponseProto(resBuilder
 						.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 
 			}
 
@@ -175,7 +177,7 @@ public class TransferClanOwnershipController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setTransferClanOwnershipResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in TransferClanOwnership processEvent", e);
 			}

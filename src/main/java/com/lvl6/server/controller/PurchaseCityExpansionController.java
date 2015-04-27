@@ -72,7 +72,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		PurchaseCityExpansionRequestProto reqProto = ((PurchaseCityExpansionRequestEvent)event).getPurchaseCityExpansionRequestProto();
 //
 //		//variables client sent
@@ -107,7 +107,7 @@
 //			PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(senderProto.getUserUuid());
 //			resEvent.setTag(event.getTag());
 //			resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+//			responses.normalResponseEvents().add(resEvent);
 //
 //			if (legitExpansion) {
 //				//update database tables
@@ -130,7 +130,7 @@
 //				resBuilder.setUcedp(CreateInfoProtoUtils
 //						.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
 //				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+//				responses.normalResponseEvents().add(resEventUpdate);
 //
 //				writeToUserCurrencyHistory(user, timeOfPurchase, xPosition,
 //						yPosition, previousCash, currencyChange);
@@ -142,7 +142,7 @@
 //    	  PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
 //    	  resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in BeginDungeonController processEvent", e);
 //      }

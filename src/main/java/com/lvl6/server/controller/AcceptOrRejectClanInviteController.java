@@ -41,6 +41,8 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AcceptOrRejectClanInviteAction;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -90,7 +92,6 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 
 	public AcceptOrRejectClanInviteController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AcceptOrRejectClanInviteRequestProto reqProto = ((AcceptOrRejectClanInviteRequestEvent) event)
 				.getAcceptOrRejectClanInviteRequestProto();
 
@@ -150,7 +151,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -189,7 +190,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)
 					&& null != accepted) {
 				//only write to clan if user accepted and success
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 
 				User user = aorcia.getProspectiveMember();
 				Clan clan = aorcia.getProspectiveClan();
@@ -214,7 +215,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 			} else {
 				//only write to user if just reject or fail
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			}
 
 		} catch (Exception e) {
@@ -226,7 +227,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in AcceptOrRejectClanInvite processEvent",
@@ -285,7 +286,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		rcdrpb.setClanData(cdp);
 
 		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		server.writeEvent(rcdre);
+		responses.normalResponseEvents().add(rcdre);
 	}
 
 	private void updateClanCache(String clanId, int clanSize,

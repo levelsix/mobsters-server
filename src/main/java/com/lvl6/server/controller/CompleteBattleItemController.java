@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CompleteBattleItemAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -82,7 +83,7 @@ public class CompleteBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CompleteBattleItemRequestProto reqProto = ((CompleteBattleItemRequestEvent) event)
 				.getCompleteBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -126,7 +127,7 @@ public class CompleteBattleItemController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -155,7 +156,7 @@ public class CompleteBattleItemController extends EventController {
 
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -163,7 +164,7 @@ public class CompleteBattleItemController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				Date d = new Date();
 				Timestamp ts = new Timestamp(d.getTime());
@@ -179,7 +180,7 @@ public class CompleteBattleItemController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CompleteBattleItemController processEvent",

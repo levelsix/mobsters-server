@@ -25,6 +25,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.BeginPvpBattleAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -71,7 +72,7 @@ public class BeginPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent) event)
 				.getBeginPvpBattleRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -136,14 +137,14 @@ public class BeginPvpBattleController extends EventController {
 			bpa.execute(resBuilder);
 
 			resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in BeginPvpBattleController processEvent", e);
 			//don't let the client hang
 			try {
 				resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in BeginPvpBattleController processEvent",

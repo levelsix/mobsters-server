@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -91,7 +92,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		IncreaseMonsterInventorySlotRequestProto reqProto = ((IncreaseMonsterInventorySlotRequestEvent) event)
 				.getIncreaseMonsterInventorySlotRequestProto();
 
@@ -142,7 +143,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -181,7 +182,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -189,7 +190,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				if (increaseType == IncreaseSlotType.PURCHASE) {
 					writeToUserCurrencyHistory(aUser, sfu, increaseType,
@@ -211,7 +212,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in IncreaseMonsterInventorySlotController processEvent",

@@ -33,6 +33,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -97,7 +98,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent) event)
 				.getRetrieveUserMonsterTeamRequestProto();
 
@@ -143,7 +144,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -189,7 +190,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveUserMonsterTeamResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -202,7 +203,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveUserMonsterTeamController processEvent",

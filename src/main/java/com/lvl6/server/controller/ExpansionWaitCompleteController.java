@@ -56,7 +56,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
 //
 //		MinimumUserProto senderProto = reqProto.getSender();
@@ -100,7 +100,7 @@
 //			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserUuid());
 //			resEvent.setTag(event.getTag());
 //			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+//			responses.normalResponseEvents().add(resEvent);
 //			
 //			if (success) {
 //				writeToUserCurrencyHistory(userId, user, xPosition, yPosition,
@@ -118,7 +118,7 @@
 //      	ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(userId);
 //      	resEvent.setTag(event.getTag());
 //      	resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());
-//      	server.writeEvent(resEvent);
+//      	responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //      	log.error("exception2 in ExpansionWaitCompleteController processEvent", e);
 //      }

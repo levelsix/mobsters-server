@@ -17,12 +17,12 @@ import com.lvl6.events.request.ClearExpiredClanGiftsRequestEvent;
 import com.lvl6.events.response.ClearExpiredClanGiftsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ClanGiftForUser;
-import com.lvl6.proto.RewardsProto.ClanGiftProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto;
 import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto;
 import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.ClanGiftProto;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -32,6 +32,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.ClearExpiredClanGiftsAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -88,7 +89,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ClearExpiredClanGiftsRequestProto reqProto = ((ClearExpiredClanGiftsRequestEvent) event)
 				.getClearExpiredClanGiftsRequestProto();
 
@@ -124,7 +125,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setClearExpiredClanGiftsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -139,7 +140,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setClearExpiredClanGiftsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (ClearExpiredClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
@@ -148,7 +149,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								uusa.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 			}
 
@@ -162,7 +163,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setClearExpiredClanGiftsResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ClearExpiredClanGiftsController processEvent",

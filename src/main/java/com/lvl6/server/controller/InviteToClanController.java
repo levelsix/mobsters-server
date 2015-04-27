@@ -47,7 +47,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		InviteToClanRequestProto reqProto = ((InviteToClanRequestEvent)event).getInviteToClanRequestProto();
 //		log.info(String.format("reqProto=%s", reqProto));
 //
@@ -87,10 +87,10 @@
 //			
 //			//only write to user if failed
 //			if (resBuilder.getStatus().equals(InviteToClanStatus.FAIL_OTHER)) {
-//				server.writeEvent(resEvent);
+//				responses.normalResponseEvents().add(resEvent);
 //
 //			} else {
-//				server.writeClanEvent(resEvent, clanId);
+//				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 //			}
 //		} catch (Exception e) {
 //			log.error("exception in InviteToClan processEvent", e);
@@ -99,7 +99,7 @@
 //				InviteToClanResponseEvent resEvent = new InviteToClanResponseEvent(inviterId);
 //				resEvent.setTag(event.getTag());
 //				resEvent.setInviteToClanResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+//				responses.normalResponseEvents().add(resEvent);
 //			} catch (Exception e2) {
 //				log.error("exception2 in InviteToClan processEvent", e);
 //			}

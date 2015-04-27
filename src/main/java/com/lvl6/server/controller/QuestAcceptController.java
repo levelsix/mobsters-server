@@ -61,7 +61,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestAcceptRequestProto reqProto = ((QuestAcceptRequestEvent)event).getQuestAcceptRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();
@@ -93,7 +93,7 @@
 //      QuestAcceptResponseEvent resEvent = new QuestAcceptResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
 //      resEvent.setQuestAcceptResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //
 //
 //    } catch (Exception e) {

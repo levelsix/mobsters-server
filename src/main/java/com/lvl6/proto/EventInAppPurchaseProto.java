@@ -8,10 +8,10 @@ public final class EventInAppPurchaseProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface InAppPurchaseRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InAppPurchaseRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface InAppPurchaseRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,6 +25,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string receipt = 2;
     /**
      * <code>optional string receipt = 2;</code>
      */
@@ -39,6 +40,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getReceiptBytes();
 
+    // optional string localcents = 3;
     /**
      * <code>optional string localcents = 3;</code>
      */
@@ -53,6 +55,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getLocalcentsBytes();
 
+    // optional string localcurrency = 4;
     /**
      * <code>optional string localcurrency = 4;</code>
      */
@@ -67,6 +70,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getLocalcurrencyBytes();
 
+    // optional string locale = 5;
     /**
      * <code>optional string locale = 5;</code>
      */
@@ -81,6 +85,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getLocaleBytes();
 
+    // optional string ipaddr = 6;
     /**
      * <code>optional string ipaddr = 6;</code>
      */
@@ -95,6 +100,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getIpaddrBytes();
 
+    // optional string uuid = 7;
     /**
      * <code>optional string uuid = 7;</code>
      *
@@ -125,9 +131,8 @@ public final class EventInAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseRequestProto}
    */
   public static final class InAppPurchaseRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InAppPurchaseRequestProto)
-      InAppPurchaseRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements InAppPurchaseRequestProtoOrBuilder {
     // Use InAppPurchaseRequestProto.newBuilder() to construct.
     private InAppPurchaseRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -187,39 +192,33 @@ public final class EventInAppPurchaseProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              receipt_ = bs;
+              receipt_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              localcents_ = bs;
+              localcents_ = input.readBytes();
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              localcurrency_ = bs;
+              localcurrency_ = input.readBytes();
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              locale_ = bs;
+              locale_ = input.readBytes();
               break;
             }
             case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              ipaddr_ = bs;
+              ipaddr_ = input.readBytes();
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              uuid_ = bs;
+              uuid_ = input.readBytes();
               break;
             }
           }
@@ -262,6 +261,7 @@ public final class EventInAppPurchaseProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -283,6 +283,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
 
+    // optional string receipt = 2;
     public static final int RECEIPT_FIELD_NUMBER = 2;
     private java.lang.Object receipt_;
     /**
@@ -325,6 +326,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // optional string localcents = 3;
     public static final int LOCALCENTS_FIELD_NUMBER = 3;
     private java.lang.Object localcents_;
     /**
@@ -367,6 +369,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // optional string localcurrency = 4;
     public static final int LOCALCURRENCY_FIELD_NUMBER = 4;
     private java.lang.Object localcurrency_;
     /**
@@ -409,6 +412,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // optional string locale = 5;
     public static final int LOCALE_FIELD_NUMBER = 5;
     private java.lang.Object locale_;
     /**
@@ -451,6 +455,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // optional string ipaddr = 6;
     public static final int IPADDR_FIELD_NUMBER = 6;
     private java.lang.Object ipaddr_;
     /**
@@ -493,6 +498,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // optional string uuid = 7;
     public static final int UUID_FIELD_NUMBER = 7;
     private java.lang.Object uuid_;
     /**
@@ -559,8 +565,7 @@ public final class EventInAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -709,9 +714,8 @@ public final class EventInAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.InAppPurchaseRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InAppPurchaseRequestProto)
-        com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor;
@@ -899,6 +903,7 @@ public final class EventInAppPurchaseProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1007,7 +1012,7 @@ public final class EventInAppPurchaseProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1015,6 +1020,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
+      // optional string receipt = 2;
       private java.lang.Object receipt_ = "";
       /**
        * <code>optional string receipt = 2;</code>
@@ -1028,12 +1034,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getReceipt() {
         java.lang.Object ref = receipt_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            receipt_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          receipt_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1091,6 +1094,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string localcents = 3;
       private java.lang.Object localcents_ = "";
       /**
        * <code>optional string localcents = 3;</code>
@@ -1104,12 +1108,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getLocalcents() {
         java.lang.Object ref = localcents_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            localcents_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          localcents_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1167,6 +1168,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string localcurrency = 4;
       private java.lang.Object localcurrency_ = "";
       /**
        * <code>optional string localcurrency = 4;</code>
@@ -1180,12 +1182,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getLocalcurrency() {
         java.lang.Object ref = localcurrency_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            localcurrency_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          localcurrency_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1243,6 +1242,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string locale = 5;
       private java.lang.Object locale_ = "";
       /**
        * <code>optional string locale = 5;</code>
@@ -1256,12 +1256,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getLocale() {
         java.lang.Object ref = locale_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            locale_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          locale_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1319,6 +1316,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string ipaddr = 6;
       private java.lang.Object ipaddr_ = "";
       /**
        * <code>optional string ipaddr = 6;</code>
@@ -1332,12 +1330,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getIpaddr() {
         java.lang.Object ref = ipaddr_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            ipaddr_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          ipaddr_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1395,6 +1390,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string uuid = 7;
       private java.lang.Object uuid_ = "";
       /**
        * <code>optional string uuid = 7;</code>
@@ -1416,12 +1412,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getUuid() {
         java.lang.Object ref = uuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            uuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          uuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1506,10 +1499,10 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InAppPurchaseRequestProto)
   }
 
-  public interface InAppPurchaseResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InAppPurchaseResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface InAppPurchaseResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1523,6 +1516,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
      */
@@ -1532,6 +1526,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus getStatus();
 
+    // optional int32 diamondsGained = 3;
     /**
      * <code>optional int32 diamondsGained = 3;</code>
      *
@@ -1549,6 +1544,7 @@ public final class EventInAppPurchaseProto {
      */
     int getDiamondsGained();
 
+    // optional int32 coinsGained = 4 [deprecated = true];
     /**
      * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
      */
@@ -1558,6 +1554,7 @@ public final class EventInAppPurchaseProto {
      */
     @java.lang.Deprecated int getCoinsGained();
 
+    // optional string packageName = 5;
     /**
      * <code>optional string packageName = 5;</code>
      */
@@ -1572,6 +1569,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackageNameBytes();
 
+    // optional double packagePrice = 6;
     /**
      * <code>optional double packagePrice = 6;</code>
      */
@@ -1581,6 +1579,7 @@ public final class EventInAppPurchaseProto {
      */
     double getPackagePrice();
 
+    // optional string receipt = 7;
     /**
      * <code>optional string receipt = 7;</code>
      */
@@ -1595,6 +1594,7 @@ public final class EventInAppPurchaseProto {
     com.google.protobuf.ByteString
         getReceiptBytes();
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;</code>
      *
@@ -1654,6 +1654,7 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;</code>
      */
@@ -1678,6 +1679,7 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;
     /**
      * <code>repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;</code>
      */
@@ -1702,6 +1704,7 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUpdatedMoneyTreeOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;
     /**
      * <code>optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;</code>
      */
@@ -1715,6 +1718,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSuccessorSalesPackageOrBuilder();
 
+    // optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;
     /**
      * <code>optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;</code>
      */
@@ -1728,6 +1732,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getPurchasedSalesPackageOrBuilder();
 
+    // optional .com.lvl6.proto.UserRewardProto rewards = 13;
     /**
      * <code>optional .com.lvl6.proto.UserRewardProto rewards = 13;</code>
      */
@@ -1749,9 +1754,8 @@ public final class EventInAppPurchaseProto {
    * </pre>
    */
   public static final class InAppPurchaseResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InAppPurchaseResponseProto)
-      InAppPurchaseResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements InAppPurchaseResponseProtoOrBuilder {
     // Use InAppPurchaseResponseProto.newBuilder() to construct.
     private InAppPurchaseResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1832,9 +1836,8 @@ public final class EventInAppPurchaseProto {
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              packageName_ = bs;
+              packageName_ = input.readBytes();
               break;
             }
             case 49: {
@@ -1843,9 +1846,8 @@ public final class EventInAppPurchaseProto {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              receipt_ = bs;
+              receipt_ = input.readBytes();
               break;
             }
             case 66: {
@@ -2051,6 +2053,7 @@ public final class EventInAppPurchaseProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2072,6 +2075,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus status_;
     /**
@@ -2087,6 +2091,7 @@ public final class EventInAppPurchaseProto {
       return status_;
     }
 
+    // optional int32 diamondsGained = 3;
     public static final int DIAMONDSGAINED_FIELD_NUMBER = 3;
     private int diamondsGained_;
     /**
@@ -2110,6 +2115,7 @@ public final class EventInAppPurchaseProto {
       return diamondsGained_;
     }
 
+    // optional int32 coinsGained = 4 [deprecated = true];
     public static final int COINSGAINED_FIELD_NUMBER = 4;
     private int coinsGained_;
     /**
@@ -2125,6 +2131,7 @@ public final class EventInAppPurchaseProto {
       return coinsGained_;
     }
 
+    // optional string packageName = 5;
     public static final int PACKAGENAME_FIELD_NUMBER = 5;
     private java.lang.Object packageName_;
     /**
@@ -2167,6 +2174,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // optional double packagePrice = 6;
     public static final int PACKAGEPRICE_FIELD_NUMBER = 6;
     private double packagePrice_;
     /**
@@ -2182,6 +2190,7 @@ public final class EventInAppPurchaseProto {
       return packagePrice_;
     }
 
+    // optional string receipt = 7;
     public static final int RECEIPT_FIELD_NUMBER = 7;
     private java.lang.Object receipt_;
     /**
@@ -2224,6 +2233,7 @@ public final class EventInAppPurchaseProto {
       }
     }
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;
     public static final int UPDATEDORNEW_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
     /**
@@ -2294,6 +2304,7 @@ public final class EventInAppPurchaseProto {
       return updatedOrNew_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;
     public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 9;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_;
     /**
@@ -2329,6 +2340,7 @@ public final class EventInAppPurchaseProto {
       return updatedUserItems_.get(index);
     }
 
+    // repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;
     public static final int UPDATEDMONEYTREE_FIELD_NUMBER = 10;
     private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> updatedMoneyTree_;
     /**
@@ -2364,6 +2376,7 @@ public final class EventInAppPurchaseProto {
       return updatedMoneyTree_.get(index);
     }
 
+    // optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;
     public static final int SUCCESSORSALESPACKAGE_FIELD_NUMBER = 11;
     private com.lvl6.proto.SalesProto.SalesPackageProto successorSalesPackage_;
     /**
@@ -2385,6 +2398,7 @@ public final class EventInAppPurchaseProto {
       return successorSalesPackage_;
     }
 
+    // optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;
     public static final int PURCHASEDSALESPACKAGE_FIELD_NUMBER = 12;
     private com.lvl6.proto.SalesProto.SalesPackageProto purchasedSalesPackage_;
     /**
@@ -2406,6 +2420,7 @@ public final class EventInAppPurchaseProto {
       return purchasedSalesPackage_;
     }
 
+    // optional .com.lvl6.proto.UserRewardProto rewards = 13;
     public static final int REWARDS_FIELD_NUMBER = 13;
     private com.lvl6.proto.RewardsProto.UserRewardProto rewards_;
     /**
@@ -2445,8 +2460,7 @@ public final class EventInAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2641,9 +2655,8 @@ public final class EventInAppPurchaseProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InAppPurchaseResponseProto)
-        com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor;
@@ -3003,6 +3016,7 @@ public final class EventInAppPurchaseProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3111,7 +3125,7 @@ public final class EventInAppPurchaseProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3119,6 +3133,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;
       private com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
@@ -3154,6 +3169,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional int32 diamondsGained = 3;
       private int diamondsGained_ ;
       /**
        * <code>optional int32 diamondsGained = 3;</code>
@@ -3202,6 +3218,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional int32 coinsGained = 4 [deprecated = true];
       private int coinsGained_ ;
       /**
        * <code>optional int32 coinsGained = 4 [deprecated = true];</code>
@@ -3234,6 +3251,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string packageName = 5;
       private java.lang.Object packageName_ = "";
       /**
        * <code>optional string packageName = 5;</code>
@@ -3247,12 +3265,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getPackageName() {
         java.lang.Object ref = packageName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            packageName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          packageName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3310,6 +3325,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional double packagePrice = 6;
       private double packagePrice_ ;
       /**
        * <code>optional double packagePrice = 6;</code>
@@ -3342,6 +3358,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional string receipt = 7;
       private java.lang.Object receipt_ = "";
       /**
        * <code>optional string receipt = 7;</code>
@@ -3355,12 +3372,9 @@ public final class EventInAppPurchaseProto {
       public java.lang.String getReceipt() {
         java.lang.Object ref = receipt_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            receipt_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          receipt_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3418,6 +3432,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 8;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedOrNewIsMutable() {
@@ -3629,8 +3644,7 @@ public final class EventInAppPurchaseProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (updatedOrNewBuilder_ == null) {
           ensureUpdatedOrNewIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedOrNew_);
+          super.addAll(values, updatedOrNew_);
           onChanged();
         } else {
           updatedOrNewBuilder_.addAllMessages(values);
@@ -3784,6 +3798,7 @@ public final class EventInAppPurchaseProto {
         return updatedOrNewBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 9;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedUserItemsIsMutable() {
@@ -3925,8 +3940,7 @@ public final class EventInAppPurchaseProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
         if (updatedUserItemsBuilder_ == null) {
           ensureUpdatedUserItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedUserItems_);
+          super.addAll(values, updatedUserItems_);
           onChanged();
         } else {
           updatedUserItemsBuilder_.addAllMessages(values);
@@ -4024,6 +4038,7 @@ public final class EventInAppPurchaseProto {
         return updatedUserItemsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.FullUserStructureProto updatedMoneyTree = 10;
       private java.util.List<com.lvl6.proto.StructureProto.FullUserStructureProto> updatedMoneyTree_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedMoneyTreeIsMutable() {
@@ -4165,8 +4180,7 @@ public final class EventInAppPurchaseProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullUserStructureProto> values) {
         if (updatedMoneyTreeBuilder_ == null) {
           ensureUpdatedMoneyTreeIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedMoneyTree_);
+          super.addAll(values, updatedMoneyTree_);
           onChanged();
         } else {
           updatedMoneyTreeBuilder_.addAllMessages(values);
@@ -4264,6 +4278,7 @@ public final class EventInAppPurchaseProto {
         return updatedMoneyTreeBuilder_;
       }
 
+      // optional .com.lvl6.proto.SalesPackageProto successorSalesPackage = 11;
       private com.lvl6.proto.SalesProto.SalesPackageProto successorSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> successorSalesPackageBuilder_;
@@ -4372,7 +4387,7 @@ public final class EventInAppPurchaseProto {
         if (successorSalesPackageBuilder_ == null) {
           successorSalesPackageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
-                  getSuccessorSalesPackage(),
+                  successorSalesPackage_,
                   getParentForChildren(),
                   isClean());
           successorSalesPackage_ = null;
@@ -4380,6 +4395,7 @@ public final class EventInAppPurchaseProto {
         return successorSalesPackageBuilder_;
       }
 
+      // optional .com.lvl6.proto.SalesPackageProto purchasedSalesPackage = 12;
       private com.lvl6.proto.SalesProto.SalesPackageProto purchasedSalesPackage_ = com.lvl6.proto.SalesProto.SalesPackageProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder> purchasedSalesPackageBuilder_;
@@ -4488,7 +4504,7 @@ public final class EventInAppPurchaseProto {
         if (purchasedSalesPackageBuilder_ == null) {
           purchasedSalesPackageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.SalesProto.SalesPackageProto, com.lvl6.proto.SalesProto.SalesPackageProto.Builder, com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder>(
-                  getPurchasedSalesPackage(),
+                  purchasedSalesPackage_,
                   getParentForChildren(),
                   isClean());
           purchasedSalesPackage_ = null;
@@ -4496,6 +4512,7 @@ public final class EventInAppPurchaseProto {
         return purchasedSalesPackageBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserRewardProto rewards = 13;
       private com.lvl6.proto.RewardsProto.UserRewardProto rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> rewardsBuilder_;
@@ -4604,7 +4621,7 @@ public final class EventInAppPurchaseProto {
         if (rewardsBuilder_ == null) {
           rewardsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder>(
-                  getRewards(),
+                  rewards_,
                   getParentForChildren(),
                   isClean());
           rewards_ = null;
@@ -4623,10 +4640,10 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InAppPurchaseResponseProto)
   }
 
-  public interface EarnFreeDiamondsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EarnFreeDiamondsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EarnFreeDiamondsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4640,6 +4657,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
     /**
      * <code>optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];</code>
      */
@@ -4649,6 +4667,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType getFreeDiamondsType();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -4662,9 +4681,8 @@ public final class EventInAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.EarnFreeDiamondsRequestProto}
    */
   public static final class EarnFreeDiamondsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EarnFreeDiamondsRequestProto)
-      EarnFreeDiamondsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EarnFreeDiamondsRequestProtoOrBuilder {
     // Use EarnFreeDiamondsRequestProto.newBuilder() to construct.
     private EarnFreeDiamondsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4779,6 +4797,7 @@ public final class EventInAppPurchaseProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4800,6 +4819,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
     public static final int FREEDIAMONDSTYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_;
     /**
@@ -4815,6 +4835,7 @@ public final class EventInAppPurchaseProto {
       return freeDiamondsType_;
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -4838,8 +4859,7 @@ public final class EventInAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4960,9 +4980,8 @@ public final class EventInAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.EarnFreeDiamondsRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EarnFreeDiamondsRequestProto)
-        com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor;
@@ -5102,6 +5121,7 @@ public final class EventInAppPurchaseProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5210,7 +5230,7 @@ public final class EventInAppPurchaseProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5218,6 +5238,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
       private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_ = com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType.FB_CONNECT;
       /**
        * <code>optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];</code>
@@ -5253,6 +5274,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -5296,10 +5318,10 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EarnFreeDiamondsRequestProto)
   }
 
-  public interface EarnFreeDiamondsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EarnFreeDiamondsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EarnFreeDiamondsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -5313,6 +5335,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
      */
@@ -5322,6 +5345,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus getStatus();
 
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
     /**
      * <code>optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];</code>
      */
@@ -5335,9 +5359,8 @@ public final class EventInAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.EarnFreeDiamondsResponseProto}
    */
   public static final class EarnFreeDiamondsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EarnFreeDiamondsResponseProto)
-      EarnFreeDiamondsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EarnFreeDiamondsResponseProtoOrBuilder {
     // Use EarnFreeDiamondsResponseProto.newBuilder() to construct.
     private EarnFreeDiamondsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5558,6 +5581,7 @@ public final class EventInAppPurchaseProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5579,6 +5603,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status_;
     /**
@@ -5594,6 +5619,7 @@ public final class EventInAppPurchaseProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
     public static final int FREEDIAMONDSTYPE_FIELD_NUMBER = 3;
     private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_;
     /**
@@ -5617,8 +5643,7 @@ public final class EventInAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5739,9 +5764,8 @@ public final class EventInAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.EarnFreeDiamondsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EarnFreeDiamondsResponseProto)
-        com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_descriptor;
@@ -5881,6 +5905,7 @@ public final class EventInAppPurchaseProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5989,7 +6014,7 @@ public final class EventInAppPurchaseProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5997,6 +6022,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;
       private com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
@@ -6032,6 +6058,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
       private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_ = com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType.FB_CONNECT;
       /**
        * <code>optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];</code>
@@ -6078,10 +6105,10 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EarnFreeDiamondsResponseProto)
   }
 
-  public interface ExchangeGemsForResourcesRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ExchangeGemsForResourcesRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ExchangeGemsForResourcesRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -6095,6 +6122,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
+    // optional int32 numGems = 2;
     /**
      * <code>optional int32 numGems = 2;</code>
      *
@@ -6112,6 +6140,7 @@ public final class EventInAppPurchaseProto {
      */
     int getNumGems();
 
+    // optional int32 numResources = 3;
     /**
      * <code>optional int32 numResources = 3;</code>
      */
@@ -6121,6 +6150,7 @@ public final class EventInAppPurchaseProto {
      */
     int getNumResources();
 
+    // optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
      */
@@ -6130,6 +6160,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
+    // optional int64 clientTime = 5;
     /**
      * <code>optional int64 clientTime = 5;</code>
      *
@@ -6151,9 +6182,8 @@ public final class EventInAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.ExchangeGemsForResourcesRequestProto}
    */
   public static final class ExchangeGemsForResourcesRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ExchangeGemsForResourcesRequestProto)
-      ExchangeGemsForResourcesRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ExchangeGemsForResourcesRequestProtoOrBuilder {
     // Use ExchangeGemsForResourcesRequestProto.newBuilder() to construct.
     private ExchangeGemsForResourcesRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6278,6 +6308,7 @@ public final class EventInAppPurchaseProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -6299,6 +6330,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
 
+    // optional int32 numGems = 2;
     public static final int NUMGEMS_FIELD_NUMBER = 2;
     private int numGems_;
     /**
@@ -6322,6 +6354,7 @@ public final class EventInAppPurchaseProto {
       return numGems_;
     }
 
+    // optional int32 numResources = 3;
     public static final int NUMRESOURCES_FIELD_NUMBER = 3;
     private int numResources_;
     /**
@@ -6337,6 +6370,7 @@ public final class EventInAppPurchaseProto {
       return numResources_;
     }
 
+    // optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];
     public static final int RESOURCETYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -6352,6 +6386,7 @@ public final class EventInAppPurchaseProto {
       return resourceType_;
     }
 
+    // optional int64 clientTime = 5;
     public static final int CLIENTTIME_FIELD_NUMBER = 5;
     private long clientTime_;
     /**
@@ -6385,8 +6420,7 @@ public final class EventInAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6521,9 +6555,8 @@ public final class EventInAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.ExchangeGemsForResourcesRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ExchangeGemsForResourcesRequestProto)
-        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor;
@@ -6681,6 +6714,7 @@ public final class EventInAppPurchaseProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -6789,7 +6823,7 @@ public final class EventInAppPurchaseProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -6797,6 +6831,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
+      // optional int32 numGems = 2;
       private int numGems_ ;
       /**
        * <code>optional int32 numGems = 2;</code>
@@ -6845,6 +6880,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional int32 numResources = 3;
       private int numResources_ ;
       /**
        * <code>optional int32 numResources = 3;</code>
@@ -6877,6 +6913,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
@@ -6912,6 +6949,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
+      // optional int64 clientTime = 5;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 5;</code>
@@ -6971,10 +7009,10 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExchangeGemsForResourcesRequestProto)
   }
 
-  public interface ExchangeGemsForResourcesResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ExchangeGemsForResourcesResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ExchangeGemsForResourcesResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -6988,6 +7026,7 @@ public final class EventInAppPurchaseProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
      */
@@ -7001,9 +7040,8 @@ public final class EventInAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.ExchangeGemsForResourcesResponseProto}
    */
   public static final class ExchangeGemsForResourcesResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ExchangeGemsForResourcesResponseProto)
-      ExchangeGemsForResourcesResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ExchangeGemsForResourcesResponseProtoOrBuilder {
     // Use ExchangeGemsForResourcesResponseProto.newBuilder() to construct.
     private ExchangeGemsForResourcesResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7204,6 +7242,7 @@ public final class EventInAppPurchaseProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -7225,6 +7264,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status_;
     /**
@@ -7247,8 +7287,7 @@ public final class EventInAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7362,9 +7401,8 @@ public final class EventInAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.ExchangeGemsForResourcesResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ExchangeGemsForResourcesResponseProto)
-        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor;
@@ -7495,6 +7533,7 @@ public final class EventInAppPurchaseProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -7603,7 +7642,7 @@ public final class EventInAppPurchaseProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7611,6 +7650,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
       private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
@@ -7657,32 +7697,32 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExchangeGemsForResourcesResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InAppPurchaseRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -7752,13 +7792,49 @@ public final class EventInAppPurchaseProto {
       "InAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_InAppPurchaseRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", "Uuid", });
+          internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", "SuccessorSalesPackage", "PurchasedSalesPackage", "Rewards", });
+          internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "FreeDiamondsType", "ClientTime", });
+          internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "FreeDiamondsType", });
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "NumGems", "NumResources", "ResourceType", "ClientTime", });
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -7770,49 +7846,6 @@ public final class EventInAppPurchaseProto {
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_InAppPurchaseRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", "Uuid", });
-    internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "DiamondsGained", "CoinsGained", "PackageName", "PackagePrice", "Receipt", "UpdatedOrNew", "UpdatedUserItems", "UpdatedMoneyTree", "SuccessorSalesPackage", "PurchasedSalesPackage", "Rewards", });
-    internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EarnFreeDiamondsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "FreeDiamondsType", "ClientTime", });
-    internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "FreeDiamondsType", });
-    internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "NumGems", "NumResources", "ResourceType", "ClientTime", });
-    internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    com.lvl6.proto.InAppPurchaseProto.getDescriptor();
-    com.lvl6.proto.ItemsProto.getDescriptor();
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.RewardsProto.getDescriptor();
-    com.lvl6.proto.SalesProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

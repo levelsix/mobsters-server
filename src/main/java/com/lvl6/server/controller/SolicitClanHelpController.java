@@ -30,6 +30,8 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -70,7 +72,7 @@ public class SolicitClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SolicitClanHelpRequestProto reqProto = ((SolicitClanHelpRequestEvent) event)
 				.getSolicitClanHelpRequestProto();
 
@@ -113,7 +115,7 @@ public class SolicitClanHelpController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -148,7 +150,7 @@ public class SolicitClanHelpController extends EventController {
 			//only write to user if failed
 			if (!success) {
 				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
@@ -161,7 +163,7 @@ public class SolicitClanHelpController extends EventController {
 
 				resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
 				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -174,7 +176,7 @@ public class SolicitClanHelpController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SolicitClanHelp processEvent", e);
 			}

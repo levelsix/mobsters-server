@@ -32,6 +32,8 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.ExitClanAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -77,7 +79,7 @@ public class BootPlayerFromClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BootPlayerFromClanRequestProto reqProto = ((BootPlayerFromClanRequestEvent) event)
 				.getBootPlayerFromClanRequestProto();
 
@@ -120,7 +122,7 @@ public class BootPlayerFromClanController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -160,10 +162,10 @@ public class BootPlayerFromClanController extends EventController {
 
 			if (success) {
 				//if successful write to clan
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 			} else {
 				//write to user if fail
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			}
 		} catch (Exception e) {
 			log.error("exception in BootPlayerFromClan processEvent", e);
@@ -173,7 +175,7 @@ public class BootPlayerFromClanController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BootPlayerFromClan processEvent", e);
 			}

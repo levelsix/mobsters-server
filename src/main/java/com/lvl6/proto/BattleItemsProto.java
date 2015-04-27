@@ -226,10 +226,10 @@ public final class BattleItemsProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleItemCategory)
   }
 
-  public interface UserBattleItemProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserBattleItemProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserBattleItemProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userBattleItemId = 1;
     /**
      * <code>optional string userBattleItemId = 1;</code>
      */
@@ -244,6 +244,7 @@ public final class BattleItemsProto {
     com.google.protobuf.ByteString
         getUserBattleItemIdBytes();
 
+    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -258,6 +259,7 @@ public final class BattleItemsProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional int32 battleItemId = 3;
     /**
      * <code>optional int32 battleItemId = 3;</code>
      */
@@ -267,6 +269,7 @@ public final class BattleItemsProto {
      */
     int getBattleItemId();
 
+    // optional int32 quantity = 4;
     /**
      * <code>optional int32 quantity = 4;</code>
      */
@@ -280,9 +283,8 @@ public final class BattleItemsProto {
    * Protobuf type {@code com.lvl6.proto.UserBattleItemProto}
    */
   public static final class UserBattleItemProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserBattleItemProto)
-      UserBattleItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserBattleItemProtoOrBuilder {
     // Use UserBattleItemProto.newBuilder() to construct.
     private UserBattleItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -329,15 +331,13 @@ public final class BattleItemsProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userBattleItemId_ = bs;
+              userBattleItemId_ = input.readBytes();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -390,6 +390,7 @@ public final class BattleItemsProto {
     }
 
     private int bitField0_;
+    // optional string userBattleItemId = 1;
     public static final int USERBATTLEITEMID_FIELD_NUMBER = 1;
     private java.lang.Object userBattleItemId_;
     /**
@@ -432,6 +433,7 @@ public final class BattleItemsProto {
       }
     }
 
+    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -474,6 +476,7 @@ public final class BattleItemsProto {
       }
     }
 
+    // optional int32 battleItemId = 3;
     public static final int BATTLEITEMID_FIELD_NUMBER = 3;
     private int battleItemId_;
     /**
@@ -489,6 +492,7 @@ public final class BattleItemsProto {
       return battleItemId_;
     }
 
+    // optional int32 quantity = 4;
     public static final int QUANTITY_FIELD_NUMBER = 4;
     private int quantity_;
     /**
@@ -513,8 +517,7 @@ public final class BattleItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -642,9 +645,8 @@ public final class BattleItemsProto {
      * Protobuf type {@code com.lvl6.proto.UserBattleItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserBattleItemProto)
-        com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
@@ -788,6 +790,7 @@ public final class BattleItemsProto {
       }
       private int bitField0_;
 
+      // optional string userBattleItemId = 1;
       private java.lang.Object userBattleItemId_ = "";
       /**
        * <code>optional string userBattleItemId = 1;</code>
@@ -801,12 +804,9 @@ public final class BattleItemsProto {
       public java.lang.String getUserBattleItemId() {
         java.lang.Object ref = userBattleItemId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userBattleItemId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userBattleItemId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -864,6 +864,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -877,12 +878,9 @@ public final class BattleItemsProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -940,6 +938,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 battleItemId = 3;
       private int battleItemId_ ;
       /**
        * <code>optional int32 battleItemId = 3;</code>
@@ -972,6 +971,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 quantity = 4;
       private int quantity_ ;
       /**
        * <code>optional int32 quantity = 4;</code>
@@ -1015,10 +1015,10 @@ public final class BattleItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserBattleItemProto)
   }
 
-  public interface BattleItemProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BattleItemProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 battleItemId = 1;
     /**
      * <code>optional int32 battleItemId = 1;</code>
      */
@@ -1028,6 +1028,7 @@ public final class BattleItemsProto {
      */
     int getBattleItemId();
 
+    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -1042,6 +1043,7 @@ public final class BattleItemsProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional string imgName = 3;
     /**
      * <code>optional string imgName = 3;</code>
      */
@@ -1056,6 +1058,7 @@ public final class BattleItemsProto {
     com.google.protobuf.ByteString
         getImgNameBytes();
 
+    // optional .com.lvl6.proto.BattleItemType battleItemType = 4;
     /**
      * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
      */
@@ -1065,6 +1068,7 @@ public final class BattleItemsProto {
      */
     com.lvl6.proto.BattleItemsProto.BattleItemType getBattleItemType();
 
+    // optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;
     /**
      * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
      */
@@ -1074,6 +1078,7 @@ public final class BattleItemsProto {
      */
     com.lvl6.proto.BattleItemsProto.BattleItemCategory getBattleItemCategory();
 
+    // optional .com.lvl6.proto.ResourceType createResourceType = 6;
     /**
      * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
@@ -1083,6 +1088,7 @@ public final class BattleItemsProto {
      */
     com.lvl6.proto.StructureProto.ResourceType getCreateResourceType();
 
+    // optional int32 createCost = 7;
     /**
      * <code>optional int32 createCost = 7;</code>
      */
@@ -1092,6 +1098,7 @@ public final class BattleItemsProto {
      */
     int getCreateCost();
 
+    // optional string description = 8;
     /**
      * <code>optional string description = 8;</code>
      */
@@ -1106,6 +1113,7 @@ public final class BattleItemsProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
+    // optional int32 powerAmount = 9;
     /**
      * <code>optional int32 powerAmount = 9;</code>
      */
@@ -1115,6 +1123,7 @@ public final class BattleItemsProto {
      */
     int getPowerAmount();
 
+    // optional int32 priority = 11;
     /**
      * <code>optional int32 priority = 11;</code>
      */
@@ -1124,6 +1133,7 @@ public final class BattleItemsProto {
      */
     int getPriority();
 
+    // optional int32 minutesToCreate = 12;
     /**
      * <code>optional int32 minutesToCreate = 12;</code>
      */
@@ -1133,6 +1143,7 @@ public final class BattleItemsProto {
      */
     int getMinutesToCreate();
 
+    // optional int32 inBattleGemCost = 13;
     /**
      * <code>optional int32 inBattleGemCost = 13;</code>
      */
@@ -1142,6 +1153,7 @@ public final class BattleItemsProto {
      */
     int getInBattleGemCost();
 
+    // optional int32 amount = 14;
     /**
      * <code>optional int32 amount = 14;</code>
      */
@@ -1155,9 +1167,8 @@ public final class BattleItemsProto {
    * Protobuf type {@code com.lvl6.proto.BattleItemProto}
    */
   public static final class BattleItemProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemProto)
-      BattleItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BattleItemProtoOrBuilder {
     // Use BattleItemProto.newBuilder() to construct.
     private BattleItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1209,15 +1220,13 @@ public final class BattleItemsProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              imgName_ = bs;
+              imgName_ = input.readBytes();
               break;
             }
             case 32: {
@@ -1259,9 +1268,8 @@ public final class BattleItemsProto {
               break;
             }
             case 66: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              description_ = bs;
+              description_ = input.readBytes();
               break;
             }
             case 72: {
@@ -1329,6 +1337,7 @@ public final class BattleItemsProto {
     }
 
     private int bitField0_;
+    // optional int32 battleItemId = 1;
     public static final int BATTLEITEMID_FIELD_NUMBER = 1;
     private int battleItemId_;
     /**
@@ -1344,6 +1353,7 @@ public final class BattleItemsProto {
       return battleItemId_;
     }
 
+    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -1386,6 +1396,7 @@ public final class BattleItemsProto {
       }
     }
 
+    // optional string imgName = 3;
     public static final int IMGNAME_FIELD_NUMBER = 3;
     private java.lang.Object imgName_;
     /**
@@ -1428,6 +1439,7 @@ public final class BattleItemsProto {
       }
     }
 
+    // optional .com.lvl6.proto.BattleItemType battleItemType = 4;
     public static final int BATTLEITEMTYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_;
     /**
@@ -1443,6 +1455,7 @@ public final class BattleItemsProto {
       return battleItemType_;
     }
 
+    // optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;
     public static final int BATTLEITEMCATEGORY_FIELD_NUMBER = 5;
     private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_;
     /**
@@ -1458,6 +1471,7 @@ public final class BattleItemsProto {
       return battleItemCategory_;
     }
 
+    // optional .com.lvl6.proto.ResourceType createResourceType = 6;
     public static final int CREATERESOURCETYPE_FIELD_NUMBER = 6;
     private com.lvl6.proto.StructureProto.ResourceType createResourceType_;
     /**
@@ -1473,6 +1487,7 @@ public final class BattleItemsProto {
       return createResourceType_;
     }
 
+    // optional int32 createCost = 7;
     public static final int CREATECOST_FIELD_NUMBER = 7;
     private int createCost_;
     /**
@@ -1488,6 +1503,7 @@ public final class BattleItemsProto {
       return createCost_;
     }
 
+    // optional string description = 8;
     public static final int DESCRIPTION_FIELD_NUMBER = 8;
     private java.lang.Object description_;
     /**
@@ -1530,6 +1546,7 @@ public final class BattleItemsProto {
       }
     }
 
+    // optional int32 powerAmount = 9;
     public static final int POWERAMOUNT_FIELD_NUMBER = 9;
     private int powerAmount_;
     /**
@@ -1545,6 +1562,7 @@ public final class BattleItemsProto {
       return powerAmount_;
     }
 
+    // optional int32 priority = 11;
     public static final int PRIORITY_FIELD_NUMBER = 11;
     private int priority_;
     /**
@@ -1560,6 +1578,7 @@ public final class BattleItemsProto {
       return priority_;
     }
 
+    // optional int32 minutesToCreate = 12;
     public static final int MINUTESTOCREATE_FIELD_NUMBER = 12;
     private int minutesToCreate_;
     /**
@@ -1575,6 +1594,7 @@ public final class BattleItemsProto {
       return minutesToCreate_;
     }
 
+    // optional int32 inBattleGemCost = 13;
     public static final int INBATTLEGEMCOST_FIELD_NUMBER = 13;
     private int inBattleGemCost_;
     /**
@@ -1590,6 +1610,7 @@ public final class BattleItemsProto {
       return inBattleGemCost_;
     }
 
+    // optional int32 amount = 14;
     public static final int AMOUNT_FIELD_NUMBER = 14;
     private int amount_;
     /**
@@ -1623,8 +1644,7 @@ public final class BattleItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1815,9 +1835,8 @@ public final class BattleItemsProto {
      * Protobuf type {@code com.lvl6.proto.BattleItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemProto)
-        com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleItemsProto.BattleItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemProto_descriptor;
@@ -2044,6 +2063,7 @@ public final class BattleItemsProto {
       }
       private int bitField0_;
 
+      // optional int32 battleItemId = 1;
       private int battleItemId_ ;
       /**
        * <code>optional int32 battleItemId = 1;</code>
@@ -2076,6 +2096,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -2089,12 +2110,9 @@ public final class BattleItemsProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2152,6 +2170,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional string imgName = 3;
       private java.lang.Object imgName_ = "";
       /**
        * <code>optional string imgName = 3;</code>
@@ -2165,12 +2184,9 @@ public final class BattleItemsProto {
       public java.lang.String getImgName() {
         java.lang.Object ref = imgName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imgName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          imgName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2228,6 +2244,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.BattleItemType battleItemType = 4;
       private com.lvl6.proto.BattleItemsProto.BattleItemType battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.HEALING_POTION;
       /**
        * <code>optional .com.lvl6.proto.BattleItemType battleItemType = 4;</code>
@@ -2263,6 +2280,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;
       private com.lvl6.proto.BattleItemsProto.BattleItemCategory battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
       /**
        * <code>optional .com.lvl6.proto.BattleItemCategory battleItemCategory = 5;</code>
@@ -2298,6 +2316,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ResourceType createResourceType = 6;
       private com.lvl6.proto.StructureProto.ResourceType createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
@@ -2333,6 +2352,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 createCost = 7;
       private int createCost_ ;
       /**
        * <code>optional int32 createCost = 7;</code>
@@ -2365,6 +2385,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional string description = 8;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 8;</code>
@@ -2378,12 +2399,9 @@ public final class BattleItemsProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          description_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2441,6 +2459,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 powerAmount = 9;
       private int powerAmount_ ;
       /**
        * <code>optional int32 powerAmount = 9;</code>
@@ -2473,6 +2492,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 priority = 11;
       private int priority_ ;
       /**
        * <code>optional int32 priority = 11;</code>
@@ -2505,6 +2525,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 minutesToCreate = 12;
       private int minutesToCreate_ ;
       /**
        * <code>optional int32 minutesToCreate = 12;</code>
@@ -2537,6 +2558,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 inBattleGemCost = 13;
       private int inBattleGemCost_ ;
       /**
        * <code>optional int32 inBattleGemCost = 13;</code>
@@ -2569,6 +2591,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 amount = 14;
       private int amount_ ;
       /**
        * <code>optional int32 amount = 14;</code>
@@ -2612,10 +2635,10 @@ public final class BattleItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemProto)
   }
 
-  public interface BattleItemQueueForUserProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BattleItemQueueForUserProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BattleItemQueueForUserProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 priority = 1;
     /**
      * <code>optional int32 priority = 1;</code>
      */
@@ -2625,6 +2648,7 @@ public final class BattleItemsProto {
      */
     int getPriority();
 
+    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -2639,6 +2663,7 @@ public final class BattleItemsProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional int32 battleItemId = 3;
     /**
      * <code>optional int32 battleItemId = 3;</code>
      */
@@ -2648,6 +2673,7 @@ public final class BattleItemsProto {
      */
     int getBattleItemId();
 
+    // optional int64 expectedStartTime = 4;
     /**
      * <code>optional int64 expectedStartTime = 4;</code>
      */
@@ -2657,6 +2683,7 @@ public final class BattleItemsProto {
      */
     long getExpectedStartTime();
 
+    // optional float elapsedTime = 5;
     /**
      * <code>optional float elapsedTime = 5;</code>
      */
@@ -2670,9 +2697,8 @@ public final class BattleItemsProto {
    * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
    */
   public static final class BattleItemQueueForUserProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BattleItemQueueForUserProto)
-      BattleItemQueueForUserProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BattleItemQueueForUserProtoOrBuilder {
     // Use BattleItemQueueForUserProto.newBuilder() to construct.
     private BattleItemQueueForUserProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2724,9 +2750,8 @@ public final class BattleItemsProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -2784,6 +2809,7 @@ public final class BattleItemsProto {
     }
 
     private int bitField0_;
+    // optional int32 priority = 1;
     public static final int PRIORITY_FIELD_NUMBER = 1;
     private int priority_;
     /**
@@ -2799,6 +2825,7 @@ public final class BattleItemsProto {
       return priority_;
     }
 
+    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -2841,6 +2868,7 @@ public final class BattleItemsProto {
       }
     }
 
+    // optional int32 battleItemId = 3;
     public static final int BATTLEITEMID_FIELD_NUMBER = 3;
     private int battleItemId_;
     /**
@@ -2856,6 +2884,7 @@ public final class BattleItemsProto {
       return battleItemId_;
     }
 
+    // optional int64 expectedStartTime = 4;
     public static final int EXPECTEDSTARTTIME_FIELD_NUMBER = 4;
     private long expectedStartTime_;
     /**
@@ -2871,6 +2900,7 @@ public final class BattleItemsProto {
       return expectedStartTime_;
     }
 
+    // optional float elapsedTime = 5;
     public static final int ELAPSEDTIME_FIELD_NUMBER = 5;
     private float elapsedTime_;
     /**
@@ -2896,8 +2926,7 @@ public final class BattleItemsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3032,9 +3061,8 @@ public final class BattleItemsProto {
      * Protobuf type {@code com.lvl6.proto.BattleItemQueueForUserProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BattleItemQueueForUserProto)
-        com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BattleItemsProto.internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
@@ -3185,6 +3213,7 @@ public final class BattleItemsProto {
       }
       private int bitField0_;
 
+      // optional int32 priority = 1;
       private int priority_ ;
       /**
        * <code>optional int32 priority = 1;</code>
@@ -3217,6 +3246,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -3230,12 +3260,9 @@ public final class BattleItemsProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3293,6 +3320,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int32 battleItemId = 3;
       private int battleItemId_ ;
       /**
        * <code>optional int32 battleItemId = 3;</code>
@@ -3325,6 +3353,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional int64 expectedStartTime = 4;
       private long expectedStartTime_ ;
       /**
        * <code>optional int64 expectedStartTime = 4;</code>
@@ -3357,6 +3386,7 @@ public final class BattleItemsProto {
         return this;
       }
 
+      // optional float elapsedTime = 5;
       private float elapsedTime_ ;
       /**
        * <code>optional float elapsedTime = 5;</code>
@@ -3400,17 +3430,17 @@ public final class BattleItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BattleItemQueueForUserProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserBattleItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BattleItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3449,37 +3479,36 @@ public final class BattleItemsProto {
       "\n\006PUZZLE\020\002B\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_UserBattleItemProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserBattleItemProto_descriptor,
+              new java.lang.String[] { "UserBattleItemId", "UserUuid", "BattleItemId", "Quantity", });
+          internal_static_com_lvl6_proto_BattleItemProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BattleItemProto_descriptor,
+              new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", "Priority", "MinutesToCreate", "InBattleGemCost", "Amount", });
+          internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
+              new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", "ElapsedTime", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_UserBattleItemProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_UserBattleItemProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserBattleItemProto_descriptor,
-        new java.lang.String[] { "UserBattleItemId", "UserUuid", "BattleItemId", "Quantity", });
-    internal_static_com_lvl6_proto_BattleItemProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_BattleItemProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BattleItemProto_descriptor,
-        new java.lang.String[] { "BattleItemId", "Name", "ImgName", "BattleItemType", "BattleItemCategory", "CreateResourceType", "CreateCost", "Description", "PowerAmount", "Priority", "MinutesToCreate", "InBattleGemCost", "Amount", });
-    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_BattleItemQueueForUserProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
-        new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", "ElapsedTime", });
-    com.lvl6.proto.StructureProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

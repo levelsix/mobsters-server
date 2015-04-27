@@ -22,6 +22,7 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -52,7 +53,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		MoveOrRotateNormStructureRequestProto reqProto = ((MoveOrRotateNormStructureRequestEvent) event)
 				.getMoveOrRotateNormStructureRequestProto();
 
@@ -96,7 +97,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -153,7 +154,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in MoveOrRotateNormStructure processEvent", e);
@@ -166,7 +167,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in MoveOrRotateNormStructure processEvent",

@@ -27,6 +27,8 @@ import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -68,7 +70,7 @@ public class GiveClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent) event)
 				.getGiveClanHelpRequestProto();
 
@@ -115,7 +117,7 @@ public class GiveClanHelpController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -147,7 +149,7 @@ public class GiveClanHelpController extends EventController {
 			resEvent.setTag(event.getTag());
 			if (!success) {
 				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
@@ -156,7 +158,7 @@ public class GiveClanHelpController extends EventController {
 				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
 				resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
 				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 			}
 
 		} catch (Exception e) {
@@ -167,7 +169,7 @@ public class GiveClanHelpController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in GiveClanHelp processEvent", e);
 			}

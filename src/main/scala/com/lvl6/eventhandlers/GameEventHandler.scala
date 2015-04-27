@@ -16,6 +16,7 @@ import scala.concurrent.Future
 import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.mobsters.services.PlayersOnlineService
 import com.lvl6.mobsters.services.ClientResponseCacheService
+import com.lvl6.server.eventsender.ToClientEvents
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -38,7 +39,13 @@ trait GameEventHandler extends LazyLogging  {
         if(responseCacheService.isResponseCached(parsedEvent.eventProto.getEventUuid)){
           
         }else{
-          parsedEvent.eventController.handleEvent(parsedEvent.event)
+          parsedEvent.eventController.processEvent(parsedEvent.event) match{
+            case Some(events)=>{
+              sendResponses(events)
+              cacheResponses(events)
+            }
+            case None =>
+          }
         }
       }
     }catch{
@@ -46,6 +53,15 @@ trait GameEventHandler extends LazyLogging  {
     }
   }
   
+  
+  def sendResponses(responses:ToClientEvents)={
+    
+  }
+  
+  def cacheResponses(responses:ToClientEvents)={
+    
+  }
+    
   
   
   def handleMaintenanceMode(parsedEvent:ParsedEvent)={

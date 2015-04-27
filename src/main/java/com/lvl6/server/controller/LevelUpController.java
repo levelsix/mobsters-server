@@ -21,6 +21,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
 public class LevelUpController extends EventController {
@@ -52,7 +53,7 @@ public class LevelUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LevelUpRequestProto reqProto = ((LevelUpRequestEvent) event)
 				.getLevelUpRequestProto();
 

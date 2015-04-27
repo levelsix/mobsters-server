@@ -46,6 +46,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -108,7 +109,7 @@ public class TradeItemForBoosterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForBoosterRequestProto reqProto = ((TradeItemForBoosterRequestEvent) event)
 				.getTradeItemForBoosterRequestProto();
 
@@ -141,7 +142,7 @@ public class TradeItemForBoosterController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForBoosterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -210,7 +211,7 @@ public class TradeItemForBoosterController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForBoosterResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -218,7 +219,7 @@ public class TradeItemForBoosterController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, boosterPackId, nowTimestamp,
 						previousGems, itemsUserReceives, gemReward);
@@ -238,7 +239,7 @@ public class TradeItemForBoosterController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setTradeItemForBoosterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in TradeItemForBoosterController processEvent",

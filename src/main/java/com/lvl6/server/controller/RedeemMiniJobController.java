@@ -45,6 +45,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -99,7 +100,7 @@ public class RedeemMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemMiniJobRequestProto reqProto = ((RedeemMiniJobRequestEvent) event)
 				.getRedeemMiniJobRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -143,7 +144,7 @@ public class RedeemMiniJobController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -179,7 +180,7 @@ public class RedeemMiniJobController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -187,7 +188,7 @@ public class RedeemMiniJobController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				//TODO: track the MiniJobForUser history
 				writeToUserCurrencyHistory(user, userMiniJobId, currencyChange,
@@ -203,7 +204,7 @@ public class RedeemMiniJobController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RedeemMiniJobController processEvent",
 						e);

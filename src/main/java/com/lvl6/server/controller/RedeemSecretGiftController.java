@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -75,7 +76,7 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent) event)
 				.getRedeemSecretGiftRequestProto();
 
@@ -112,7 +113,7 @@ public class RedeemSecretGiftController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -141,7 +142,7 @@ public class RedeemSecretGiftController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemSecretGiftResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
@@ -151,7 +152,7 @@ public class RedeemSecretGiftController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								u, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -162,7 +163,7 @@ public class RedeemSecretGiftController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RedeemSecretGiftController processEvent",

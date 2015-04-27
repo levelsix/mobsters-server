@@ -60,7 +60,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    RecordClanRaidStatsRequestProto reqProto = ((RecordClanRaidStatsRequestEvent)event)
 //    		.getRecordClanRaidStatsRequestProto();
 //    final long startTime = System.nanoTime();
@@ -114,12 +114,12 @@
 //      endTimeAfterWriteChangesToDb = System.nanoTime();
 //      if (success) {
 //      }
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //      endTimeAfterWriteEvent = System.nanoTime();
 //      
 //      if (legitRequest) {
 //      	//only write to the user if the request was valid
-//      	server.writeClanEvent(resEvent, clanId);
+//      	responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 //      }
 //      endTimeAfterWriteClanEvent = System.nanoTime();
 //      
@@ -136,7 +136,7 @@
 //    	  RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
 //    	  resEvent.setRecordClanRaidStatsResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //      	log.error("exception in RecordClanRaidStats processEvent", e);
 //      }

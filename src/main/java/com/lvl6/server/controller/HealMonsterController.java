@@ -43,6 +43,7 @@ import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -90,7 +91,7 @@ public class HealMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent) event)
 				.getHealMonsterRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -211,7 +212,7 @@ public class HealMonsterController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setHealMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -219,7 +220,7 @@ public class HealMonsterController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				//TODO: WRITE TO monster healing HISTORY
 				writeToUserCurrencyHistory(aUser, changeMap, money, curTime,
 						previousCash, previousGems, deleteMap, updateMap,
@@ -234,7 +235,7 @@ public class HealMonsterController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setHealMonsterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in HealMonsterController processEvent", e);
 			}

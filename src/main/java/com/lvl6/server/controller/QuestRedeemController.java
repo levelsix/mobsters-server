@@ -60,7 +60,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestRedeemRequestProto reqProto = ((QuestRedeemRequestEvent)event).getQuestRedeemRequestProto();
 //
 //    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
@@ -97,7 +97,7 @@
 //      QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
 //      resEvent.setQuestRedeemResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      if (legitRedeem) {
 //        User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
@@ -110,7 +110,7 @@
 //        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
 //        resEventUpdate.setTag(event.getTag());
-//        server.writeEvent(resEventUpdate);
+//        responses.normalResponseEvents().add(resEventUpdate);
 //        
 //        writeToUserCurrencyHistory(user, userId, questId, currencyChange,
 //        		previousCurrency, now);
@@ -123,7 +123,7 @@
 //    	  QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
 //    	  resEvent.setQuestRedeemResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in QuestRedeem processEvent", e);
 //      }

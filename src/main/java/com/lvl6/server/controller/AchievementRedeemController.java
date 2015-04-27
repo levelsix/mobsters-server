@@ -32,6 +32,7 @@ import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -71,7 +72,7 @@ public class AchievementRedeemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AchievementRedeemRequestProto reqProto = ((AchievementRedeemRequestEvent) event)
 				.getAchievementRedeemRequestProto();
 
@@ -102,7 +103,7 @@ public class AchievementRedeemController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementRedeemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -137,7 +138,7 @@ public class AchievementRedeemController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementRedeemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -145,7 +146,7 @@ public class AchievementRedeemController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				Map<String, Integer> previousCurrency = Collections
 						.singletonMap(miscMethods.gems, previousGems);
@@ -162,7 +163,7 @@ public class AchievementRedeemController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setAchievementRedeemResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in AchievementRedeem processEvent", e);
 			}

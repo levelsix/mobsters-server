@@ -27,6 +27,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PerformResearchAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -76,7 +77,7 @@ public class PerformResearchController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PerformResearchRequestProto reqProto = ((PerformResearchRequestEvent) event)
 				.getPerformResearchRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -136,7 +137,7 @@ public class PerformResearchController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPerformResearchResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -162,7 +163,7 @@ public class PerformResearchController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPerformResearchResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -170,7 +171,7 @@ public class PerformResearchController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								pra.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				
 				writeToUserCurrencyHistory(userId, nowTimestamp, pra);
 			}
@@ -184,7 +185,7 @@ public class PerformResearchController extends EventController {
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setPerformResearchResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SellUserMonsterController processEvent",

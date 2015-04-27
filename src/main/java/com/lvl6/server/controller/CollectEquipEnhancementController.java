@@ -53,7 +53,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    CollectEquipEnhancementRequestProto reqProto = ((CollectEquipEnhancementRequestEvent)event)
 //        .getCollectEquipEnhancementRequestProto();
 //
@@ -102,12 +102,12 @@
 //      CollectEquipEnhancementResponseEvent resEvent = new CollectEquipEnhancementResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
 //      resEvent.setCollectEquipEnhancementResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //      
 //      if (successful) {
 //        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 //        resEventUpdate.setTag(event.getTag());
-//        server.writeEvent(resEventUpdate);
+//        responses.normalResponseEvents().add(resEventUpdate);
 //
 //        writeIntoEquipEnhancementHistory(equipUnderEnhancement, userEquipBuilder, speedUp, clientTime);
 //        writeIntoEquipEnhancementFeederHistory(equipEnhancementId, feedersForEnhancement);

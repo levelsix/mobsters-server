@@ -43,6 +43,8 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -105,7 +107,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent) event)
 				.getApproveOrRejectRequestToJoinClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -154,7 +156,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			resEvent.setTag(event.getTag());
 			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -235,10 +237,10 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 			//if fail only to sender
 			if (!success) {
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} else {
 				//if success to clan and the requester
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 				// Send message to the new guy
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						requesterId);
@@ -247,7 +249,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 								.build());
 				//in case user is not online write an apns
 				server.writeAPNSNotificationOrEvent(resEvent2);
-				//server.writeEvent(resEvent2);
+				//responses.normalResponseEvents().add(resEvent2);
 
 				sendClanData(event, requestMup, accept, requesterId, cdp);
 			}
@@ -263,7 +265,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 				resEvent.setTag(event.getTag());
 				resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ApproveOrRejectRequestToJoinClan processEvent",
@@ -507,7 +509,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		rcdrpb.setClanData(cdp);
 
 		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		server.writeEvent(rcdre);
+		responses.normalResponseEvents().add(rcdre);
 	}
 
 	public Locker getLocker() {

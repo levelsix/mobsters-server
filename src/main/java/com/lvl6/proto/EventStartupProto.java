@@ -8,10 +8,10 @@ public final class EventStartupProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface StartupRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface StartupRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string udid = 1;
     /**
      * <code>optional string udid = 1;</code>
      */
@@ -26,6 +26,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getUdidBytes();
 
+    // optional float versionNum = 2 [deprecated = true];
     /**
      * <code>optional float versionNum = 2 [deprecated = true];</code>
      *
@@ -43,6 +44,7 @@ public final class EventStartupProto {
      */
     @java.lang.Deprecated float getVersionNum();
 
+    // optional string apsalarId = 3;
     /**
      * <code>optional string apsalarId = 3;</code>
      */
@@ -57,6 +59,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getApsalarIdBytes();
 
+    // optional string macAddress = 4;
     /**
      * <code>optional string macAddress = 4;</code>
      *
@@ -83,6 +86,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getMacAddressBytes();
 
+    // optional string advertiserId = 5;
     /**
      * <code>optional string advertiserId = 5;</code>
      */
@@ -97,6 +101,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getAdvertiserIdBytes();
 
+    // optional bool isForceTutorial = 6;
     /**
      * <code>optional bool isForceTutorial = 6;</code>
      *
@@ -114,6 +119,7 @@ public final class EventStartupProto {
      */
     boolean getIsForceTutorial();
 
+    // optional string fbId = 7;
     /**
      * <code>optional string fbId = 7;</code>
      *
@@ -146,6 +152,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getFbIdBytes();
 
+    // optional bool isFreshRestart = 8;
     /**
      * <code>optional bool isFreshRestart = 8;</code>
      *
@@ -163,6 +170,7 @@ public final class EventStartupProto {
      */
     boolean getIsFreshRestart();
 
+    // optional .com.lvl6.proto.StartupRequestProto.VersionNumberProto versionNumberProto = 9;
     /**
      * <code>optional .com.lvl6.proto.StartupRequestProto.VersionNumberProto versionNumberProto = 9;</code>
      */
@@ -184,9 +192,8 @@ public final class EventStartupProto {
    * </pre>
    */
   public static final class StartupRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupRequestProto)
-      StartupRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements StartupRequestProtoOrBuilder {
     // Use StartupRequestProto.newBuilder() to construct.
     private StartupRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -233,9 +240,8 @@ public final class EventStartupProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              udid_ = bs;
+              udid_ = input.readBytes();
               break;
             }
             case 21: {
@@ -244,21 +250,18 @@ public final class EventStartupProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              apsalarId_ = bs;
+              apsalarId_ = input.readBytes();
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              macAddress_ = bs;
+              macAddress_ = input.readBytes();
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              advertiserId_ = bs;
+              advertiserId_ = input.readBytes();
               break;
             }
             case 48: {
@@ -267,9 +270,8 @@ public final class EventStartupProto {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              fbId_ = bs;
+              fbId_ = input.readBytes();
               break;
             }
             case 64: {
@@ -329,10 +331,10 @@ public final class EventStartupProto {
       return PARSER;
     }
 
-    public interface VersionNumberProtoOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupRequestProto.VersionNumberProto)
-        com.google.protobuf.MessageOrBuilder {
+    public interface VersionNumberProtoOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
 
+      // optional int32 superNum = 1;
       /**
        * <code>optional int32 superNum = 1;</code>
        */
@@ -342,6 +344,7 @@ public final class EventStartupProto {
        */
       int getSuperNum();
 
+      // optional int32 majorNum = 2;
       /**
        * <code>optional int32 majorNum = 2;</code>
        */
@@ -351,6 +354,7 @@ public final class EventStartupProto {
        */
       int getMajorNum();
 
+      // optional int32 minorNum = 3;
       /**
        * <code>optional int32 minorNum = 3;</code>
        */
@@ -364,9 +368,8 @@ public final class EventStartupProto {
      * Protobuf type {@code com.lvl6.proto.StartupRequestProto.VersionNumberProto}
      */
     public static final class VersionNumberProto extends
-        com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupRequestProto.VersionNumberProto)
-        VersionNumberProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage
+        implements VersionNumberProtoOrBuilder {
       // Use VersionNumberProto.newBuilder() to construct.
       private VersionNumberProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -467,6 +470,7 @@ public final class EventStartupProto {
       }
 
       private int bitField0_;
+      // optional int32 superNum = 1;
       public static final int SUPERNUM_FIELD_NUMBER = 1;
       private int superNum_;
       /**
@@ -482,6 +486,7 @@ public final class EventStartupProto {
         return superNum_;
       }
 
+      // optional int32 majorNum = 2;
       public static final int MAJORNUM_FIELD_NUMBER = 2;
       private int majorNum_;
       /**
@@ -497,6 +502,7 @@ public final class EventStartupProto {
         return majorNum_;
       }
 
+      // optional int32 minorNum = 3;
       public static final int MINORNUM_FIELD_NUMBER = 3;
       private int minorNum_;
       /**
@@ -520,8 +526,7 @@ public final class EventStartupProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         memoizedIsInitialized = 1;
         return true;
@@ -642,9 +647,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupRequestProto.VersionNumberProto}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupRequestProto.VersionNumberProto)
-          com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProtoOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_descriptor;
@@ -775,6 +779,7 @@ public final class EventStartupProto {
         }
         private int bitField0_;
 
+        // optional int32 superNum = 1;
         private int superNum_ ;
         /**
          * <code>optional int32 superNum = 1;</code>
@@ -807,6 +812,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 majorNum = 2;
         private int majorNum_ ;
         /**
          * <code>optional int32 majorNum = 2;</code>
@@ -839,6 +845,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 minorNum = 3;
         private int minorNum_ ;
         /**
          * <code>optional int32 minorNum = 3;</code>
@@ -883,6 +890,7 @@ public final class EventStartupProto {
     }
 
     private int bitField0_;
+    // optional string udid = 1;
     public static final int UDID_FIELD_NUMBER = 1;
     private java.lang.Object udid_;
     /**
@@ -925,6 +933,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional float versionNum = 2 [deprecated = true];
     public static final int VERSIONNUM_FIELD_NUMBER = 2;
     private float versionNum_;
     /**
@@ -948,6 +957,7 @@ public final class EventStartupProto {
       return versionNum_;
     }
 
+    // optional string apsalarId = 3;
     public static final int APSALARID_FIELD_NUMBER = 3;
     private java.lang.Object apsalarId_;
     /**
@@ -990,6 +1000,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional string macAddress = 4;
     public static final int MACADDRESS_FIELD_NUMBER = 4;
     private java.lang.Object macAddress_;
     /**
@@ -1044,6 +1055,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional string advertiserId = 5;
     public static final int ADVERTISERID_FIELD_NUMBER = 5;
     private java.lang.Object advertiserId_;
     /**
@@ -1086,6 +1098,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional bool isForceTutorial = 6;
     public static final int ISFORCETUTORIAL_FIELD_NUMBER = 6;
     private boolean isForceTutorial_;
     /**
@@ -1109,6 +1122,7 @@ public final class EventStartupProto {
       return isForceTutorial_;
     }
 
+    // optional string fbId = 7;
     public static final int FBID_FIELD_NUMBER = 7;
     private java.lang.Object fbId_;
     /**
@@ -1169,6 +1183,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional bool isFreshRestart = 8;
     public static final int ISFRESHRESTART_FIELD_NUMBER = 8;
     private boolean isFreshRestart_;
     /**
@@ -1192,6 +1207,7 @@ public final class EventStartupProto {
       return isFreshRestart_;
     }
 
+    // optional .com.lvl6.proto.StartupRequestProto.VersionNumberProto versionNumberProto = 9;
     public static final int VERSIONNUMBERPROTO_FIELD_NUMBER = 9;
     private com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto versionNumberProto_;
     /**
@@ -1227,8 +1243,7 @@ public final class EventStartupProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1395,9 +1410,8 @@ public final class EventStartupProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupRequestProto)
-        com.lvl6.proto.EventStartupProto.StartupRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStartupProto.StartupRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupRequestProto_descriptor;
@@ -1601,6 +1615,7 @@ public final class EventStartupProto {
       }
       private int bitField0_;
 
+      // optional string udid = 1;
       private java.lang.Object udid_ = "";
       /**
        * <code>optional string udid = 1;</code>
@@ -1614,12 +1629,9 @@ public final class EventStartupProto {
       public java.lang.String getUdid() {
         java.lang.Object ref = udid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            udid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          udid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1677,6 +1689,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional float versionNum = 2 [deprecated = true];
       private float versionNum_ ;
       /**
        * <code>optional float versionNum = 2 [deprecated = true];</code>
@@ -1725,6 +1738,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string apsalarId = 3;
       private java.lang.Object apsalarId_ = "";
       /**
        * <code>optional string apsalarId = 3;</code>
@@ -1738,12 +1752,9 @@ public final class EventStartupProto {
       public java.lang.String getApsalarId() {
         java.lang.Object ref = apsalarId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            apsalarId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          apsalarId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1801,6 +1812,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string macAddress = 4;
       private java.lang.Object macAddress_ = "";
       /**
        * <code>optional string macAddress = 4;</code>
@@ -1822,12 +1834,9 @@ public final class EventStartupProto {
       public java.lang.String getMacAddress() {
         java.lang.Object ref = macAddress_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            macAddress_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          macAddress_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1901,6 +1910,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string advertiserId = 5;
       private java.lang.Object advertiserId_ = "";
       /**
        * <code>optional string advertiserId = 5;</code>
@@ -1914,12 +1924,9 @@ public final class EventStartupProto {
       public java.lang.String getAdvertiserId() {
         java.lang.Object ref = advertiserId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            advertiserId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          advertiserId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1977,6 +1984,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional bool isForceTutorial = 6;
       private boolean isForceTutorial_ ;
       /**
        * <code>optional bool isForceTutorial = 6;</code>
@@ -2025,6 +2033,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string fbId = 7;
       private java.lang.Object fbId_ = "";
       /**
        * <code>optional string fbId = 7;</code>
@@ -2050,12 +2059,9 @@ public final class EventStartupProto {
       public java.lang.String getFbId() {
         java.lang.Object ref = fbId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            fbId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          fbId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2137,6 +2143,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional bool isFreshRestart = 8;
       private boolean isFreshRestart_ ;
       /**
        * <code>optional bool isFreshRestart = 8;</code>
@@ -2185,6 +2192,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.StartupRequestProto.VersionNumberProto versionNumberProto = 9;
       private com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto versionNumberProto_ = com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto, com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto.Builder, com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProtoOrBuilder> versionNumberProtoBuilder_;
@@ -2293,7 +2301,7 @@ public final class EventStartupProto {
         if (versionNumberProtoBuilder_ == null) {
           versionNumberProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto, com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto.Builder, com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProtoOrBuilder>(
-                  getVersionNumberProto(),
+                  versionNumberProto_,
                   getParentForChildren(),
                   isClean());
           versionNumberProto_ = null;
@@ -2312,10 +2320,10 @@ public final class EventStartupProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupRequestProto)
   }
 
-  public interface StartupResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface StartupResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int64 serverTimeMillis = 1;
     /**
      * <code>optional int64 serverTimeMillis = 1;</code>
      */
@@ -2325,6 +2333,7 @@ public final class EventStartupProto {
      */
     long getServerTimeMillis();
 
+    // optional .com.lvl6.proto.FullUserProto sender = 2;
     /**
      * <code>optional .com.lvl6.proto.FullUserProto sender = 2;</code>
      */
@@ -2338,6 +2347,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.UserProto.FullUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.StartupResponseProto.StartupStatus startupStatus = 3;
     /**
      * <code>optional .com.lvl6.proto.StartupResponseProto.StartupStatus startupStatus = 3;</code>
      */
@@ -2347,6 +2357,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus getStartupStatus();
 
+    // optional .com.lvl6.proto.StartupResponseProto.UpdateStatus updateStatus = 4;
     /**
      * <code>optional .com.lvl6.proto.StartupResponseProto.UpdateStatus updateStatus = 4;</code>
      */
@@ -2356,6 +2367,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus getUpdateStatus();
 
+    // optional .com.lvl6.proto.StartupResponseProto.StartupConstants startupConstants = 5;
     /**
      * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants startupConstants = 5;</code>
      */
@@ -2369,6 +2381,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstantsOrBuilder getStartupConstantsOrBuilder();
 
+    // optional .com.lvl6.proto.StartupResponseProto.TutorialConstants tutorialConstants = 34;
     /**
      * <code>optional .com.lvl6.proto.StartupResponseProto.TutorialConstants tutorialConstants = 34;</code>
      */
@@ -2382,6 +2395,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstantsOrBuilder getTutorialConstantsOrBuilder();
 
+    // repeated .com.lvl6.proto.FullUserQuestProto userQuests = 6;
     /**
      * <code>repeated .com.lvl6.proto.FullUserQuestProto userQuests = 6;</code>
      *
@@ -2426,6 +2440,7 @@ public final class EventStartupProto {
     com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder getUserQuestsOrBuilder(
         int index);
 
+    // repeated int32 redeemedQuestIds = 27;
     /**
      * <code>repeated int32 redeemedQuestIds = 27;</code>
      */
@@ -2439,6 +2454,7 @@ public final class EventStartupProto {
      */
     int getRedeemedQuestIds(int index);
 
+    // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 7;
     /**
      * <code>repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 7;</code>
      */
@@ -2463,6 +2479,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ClanProto.FullUserClanProtoOrBuilder getUserClanInfoOrBuilder(
         int index);
 
+    // repeated int32 completedTaskIds = 8 [deprecated = true];
     /**
      * <code>repeated int32 completedTaskIds = 8 [deprecated = true];</code>
      */
@@ -2476,6 +2493,7 @@ public final class EventStartupProto {
      */
     @java.lang.Deprecated int getCompletedTaskIds(int index);
 
+    // repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;
     /**
      * <code>repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;</code>
      */
@@ -2500,6 +2518,7 @@ public final class EventStartupProto {
     com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder getCompletedTasksOrBuilder(
         int index);
 
+    // optional string appStoreURL = 9;
     /**
      * <code>optional string appStoreURL = 9;</code>
      */
@@ -2514,6 +2533,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getAppStoreURLBytes();
 
+    // optional string reviewPageURL = 10;
     /**
      * <code>optional string reviewPageURL = 10;</code>
      */
@@ -2528,6 +2548,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getReviewPageURLBytes();
 
+    // optional string reviewPageConfirmationMessage = 11;
     /**
      * <code>optional string reviewPageConfirmationMessage = 11;</code>
      */
@@ -2542,6 +2563,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getReviewPageConfirmationMessageBytes();
 
+    // optional bool playerHasBoughtInAppPurchase = 12;
     /**
      * <code>optional bool playerHasBoughtInAppPurchase = 12;</code>
      */
@@ -2551,6 +2573,7 @@ public final class EventStartupProto {
      */
     boolean getPlayerHasBoughtInAppPurchase();
 
+    // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 13;
     /**
      * <code>repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 13;</code>
      */
@@ -2575,6 +2598,7 @@ public final class EventStartupProto {
     com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProtoOrBuilder getAttackNotificationsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 14;
     /**
      * <code>repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 14;</code>
      */
@@ -2599,11 +2623,12 @@ public final class EventStartupProto {
     com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProtoOrBuilder getReferralNotificationsOrBuilder(
         int index);
 
+    // repeated string noticesToPlayers = 15;
     /**
      * <code>repeated string noticesToPlayers = 15;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getNoticesToPlayersList();
+    java.util.List<java.lang.String>
+    getNoticesToPlayersList();
     /**
      * <code>repeated string noticesToPlayers = 15;</code>
      */
@@ -2618,6 +2643,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getNoticesToPlayersBytes(int index);
 
+    // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 16;
     /**
      * <code>repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 16;</code>
      */
@@ -2642,6 +2668,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getGlobalChatsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];
     /**
      * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
@@ -2666,6 +2693,7 @@ public final class EventStartupProto {
     @java.lang.Deprecated com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 18;
     /**
      * <code>repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 18;</code>
      *
@@ -2710,6 +2738,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getPcppOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 19;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 19;</code>
      */
@@ -2734,6 +2763,7 @@ public final class EventStartupProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUsersMonstersOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 20;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 20;</code>
      */
@@ -2758,6 +2788,7 @@ public final class EventStartupProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getMonstersHealingOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;
     /**
      * <code>optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;</code>
      */
@@ -2771,6 +2802,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getEnhancementsOrBuilder();
 
+    // optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;
     /**
      * <code>optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;</code>
      */
@@ -2784,6 +2816,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProtoOrBuilder getEvolutionOrBuilder();
 
+    // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 22;
     /**
      * <code>repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 22;</code>
      */
@@ -2808,6 +2841,7 @@ public final class EventStartupProto {
     com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder getRareBoosterPurchasesOrBuilder(
         int index);
 
+    // optional string kabamNaid = 23;
     /**
      * <code>optional string kabamNaid = 23;</code>
      */
@@ -2822,6 +2856,7 @@ public final class EventStartupProto {
     com.google.protobuf.ByteString
         getKabamNaidBytes();
 
+    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesToMeForSlots = 24;
     /**
      * <code>repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesToMeForSlots = 24;</code>
      *
@@ -2871,6 +2906,7 @@ public final class EventStartupProto {
     com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder getInvitesToMeForSlotsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;
     /**
      * <code>repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;</code>
      *
@@ -2920,6 +2956,7 @@ public final class EventStartupProto {
     com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder getInvitesFromMeForSlotsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;
     /**
      * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;</code>
      */
@@ -2933,6 +2970,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder getStaticDataStuffProtoOrBuilder();
 
+    // repeated int32 taskIdForCurrentCityBoss = 28;
     /**
      * <code>repeated int32 taskIdForCurrentCityBoss = 28;</code>
      *
@@ -2961,6 +2999,7 @@ public final class EventStartupProto {
      */
     int getTaskIdForCurrentCityBoss(int index);
 
+    // repeated .com.lvl6.proto.UserPersistentEventProto userEvents = 30;
     /**
      * <code>repeated .com.lvl6.proto.UserPersistentEventProto userEvents = 30;</code>
      *
@@ -3005,6 +3044,7 @@ public final class EventStartupProto {
     com.lvl6.proto.TaskProto.UserPersistentEventProtoOrBuilder getUserEventsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;</code>
      *
@@ -3030,6 +3070,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getCurRaidClanInfoOrBuilder();
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
     /**
      * <code>repeated .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;</code>
      */
@@ -3054,6 +3095,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder getCurRaidClanUserInfoOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
     /**
      * <code>repeated .com.lvl6.proto.PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;</code>
      */
@@ -3078,6 +3120,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProtoOrBuilder getRaidStageHistoryOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 35;
     /**
      * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 35;</code>
      *
@@ -3122,6 +3165,7 @@ public final class EventStartupProto {
     com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getRecentNBattlesOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.MinimumUserTaskProto curTask = 36;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserTaskProto curTask = 36;</code>
      *
@@ -3147,6 +3191,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.TaskProto.MinimumUserTaskProtoOrBuilder getCurTaskOrBuilder();
 
+    // repeated .com.lvl6.proto.TaskStageProto curTaskStages = 37;
     /**
      * <code>repeated .com.lvl6.proto.TaskStageProto curTaskStages = 37;</code>
      */
@@ -3171,6 +3216,7 @@ public final class EventStartupProto {
     com.lvl6.proto.TaskProto.TaskStageProtoOrBuilder getCurTaskStagesOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserAchievementProto userAchievements = 38;
     /**
      * <code>repeated .com.lvl6.proto.UserAchievementProto userAchievements = 38;</code>
      */
@@ -3195,6 +3241,7 @@ public final class EventStartupProto {
     com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder getUserAchievementsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserMiniJobProto userMiniJobProtos = 39;
     /**
      * <code>repeated .com.lvl6.proto.UserMiniJobProto userMiniJobProtos = 39;</code>
      */
@@ -3219,6 +3266,7 @@ public final class EventStartupProto {
     com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder getUserMiniJobProtosOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserItemProto userItems = 40;
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto userItems = 40;</code>
      */
@@ -3243,6 +3291,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUserItemsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];
     /**
      * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
@@ -3267,6 +3316,7 @@ public final class EventStartupProto {
     @java.lang.Deprecated com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.ClanInviteProto clanInvites = 42;
     /**
      * <code>repeated .com.lvl6.proto.ClanInviteProto clanInvites = 42;</code>
      */
@@ -3291,6 +3341,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder getClanInvitesOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.ClanDataProto clanData = 43;
     /**
      * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
      */
@@ -3304,6 +3355,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder getClanDataOrBuilder();
 
+    // repeated .com.lvl6.proto.UserItemUsageProto itemsInUse = 44;
     /**
      * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsInUse = 44;</code>
      */
@@ -3328,6 +3380,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsInUseOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserItemSecretGiftProto gifts = 45;
     /**
      * <code>repeated .com.lvl6.proto.UserItemSecretGiftProto gifts = 45;</code>
      */
@@ -3352,6 +3405,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ItemsProto.UserItemSecretGiftProtoOrBuilder getGiftsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserPvpBoardObstacleProto userPvpBoardObstacles = 47;
     /**
      * <code>repeated .com.lvl6.proto.UserPvpBoardObstacleProto userPvpBoardObstacles = 47;</code>
      */
@@ -3376,6 +3430,7 @@ public final class EventStartupProto {
     com.lvl6.proto.StructureProto.UserPvpBoardObstacleProtoOrBuilder getUserPvpBoardObstaclesOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto battleItemQueue = 48;
     /**
      * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto battleItemQueue = 48;</code>
      */
@@ -3400,6 +3455,7 @@ public final class EventStartupProto {
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getBattleItemQueueOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserBattleItemProto battleItem = 49;
     /**
      * <code>repeated .com.lvl6.proto.UserBattleItemProto battleItem = 49;</code>
      */
@@ -3424,6 +3480,7 @@ public final class EventStartupProto {
     com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder getBattleItemOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserResearchProto userResearchs = 50;
     /**
      * <code>repeated .com.lvl6.proto.UserResearchProto userResearchs = 50;</code>
      */
@@ -3448,6 +3505,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.SalesPackageProto salesPackages = 51;
     /**
      * <code>repeated .com.lvl6.proto.SalesPackageProto salesPackages = 51;</code>
      */
@@ -3472,6 +3530,7 @@ public final class EventStartupProto {
     com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder getSalesPackagesOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 52;
     /**
      * <code>optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 52;</code>
      */
@@ -3485,6 +3544,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUserMiniEventOrBuilder();
 
+    // optional .com.lvl6.proto.DefaultLanguagesProto userDefaultLanguages = 53;
     /**
      * <code>optional .com.lvl6.proto.DefaultLanguagesProto userDefaultLanguages = 53;</code>
      */
@@ -3498,6 +3558,7 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.ChatProto.DefaultLanguagesProtoOrBuilder getUserDefaultLanguagesOrBuilder();
 
+    // repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 500;
     /**
      * <code>repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 500;</code>
      */
@@ -3530,9 +3591,8 @@ public final class EventStartupProto {
    * </pre>
    */
   public static final class StartupResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto)
-      StartupResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements StartupResponseProtoOrBuilder {
     // Use StartupResponseProto.newBuilder() to construct.
     private StartupResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3670,21 +3730,18 @@ public final class EventStartupProto {
               break;
             }
             case 74: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              appStoreURL_ = bs;
+              appStoreURL_ = input.readBytes();
               break;
             }
             case 82: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              reviewPageURL_ = bs;
+              reviewPageURL_ = input.readBytes();
               break;
             }
             case 90: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              reviewPageConfirmationMessage_ = bs;
+              reviewPageConfirmationMessage_ = input.readBytes();
               break;
             }
             case 96: {
@@ -3709,12 +3766,11 @@ public final class EventStartupProto {
               break;
             }
             case 122: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
                 noticesToPlayers_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00020000;
               }
-              noticesToPlayers_.add(bs);
+              noticesToPlayers_.add(input.readBytes());
               break;
             }
             case 130: {
@@ -3779,9 +3835,8 @@ public final class EventStartupProto {
               break;
             }
             case 186: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00001000;
-              kabamNaid_ = bs;
+              kabamNaid_ = input.readBytes();
               break;
             }
             case 194: {
@@ -4122,7 +4177,7 @@ public final class EventStartupProto {
           referralNotifications_ = java.util.Collections.unmodifiableList(referralNotifications_);
         }
         if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
-          noticesToPlayers_ = noticesToPlayers_.getUnmodifiableView();
+          noticesToPlayers_ = new com.google.protobuf.UnmodifiableLazyStringList(noticesToPlayers_);
         }
         if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
           globalChats_ = java.util.Collections.unmodifiableList(globalChats_);
@@ -4440,10 +4495,10 @@ public final class EventStartupProto {
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.StartupResponseProto.StartupStatus)
     }
 
-    public interface AttackedNotificationProtoOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.AttackedNotificationProto)
-        com.google.protobuf.MessageOrBuilder {
+    public interface AttackedNotificationProtoOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
 
+      // optional .com.lvl6.proto.MinimumUserProto attacker = 1;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 1;</code>
        */
@@ -4457,6 +4512,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder();
 
+      // optional int64 battleCompleteTime = 2;
       /**
        * <code>optional int64 battleCompleteTime = 2;</code>
        */
@@ -4466,6 +4522,7 @@ public final class EventStartupProto {
        */
       long getBattleCompleteTime();
 
+      // optional int32 coinsStolen = 3;
       /**
        * <code>optional int32 coinsStolen = 3;</code>
        */
@@ -4479,9 +4536,8 @@ public final class EventStartupProto {
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.AttackedNotificationProto}
      */
     public static final class AttackedNotificationProto extends
-        com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.AttackedNotificationProto)
-        AttackedNotificationProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage
+        implements AttackedNotificationProtoOrBuilder {
       // Use AttackedNotificationProto.newBuilder() to construct.
       private AttackedNotificationProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -4590,6 +4646,7 @@ public final class EventStartupProto {
       }
 
       private int bitField0_;
+      // optional .com.lvl6.proto.MinimumUserProto attacker = 1;
       public static final int ATTACKER_FIELD_NUMBER = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto attacker_;
       /**
@@ -4611,6 +4668,7 @@ public final class EventStartupProto {
         return attacker_;
       }
 
+      // optional int64 battleCompleteTime = 2;
       public static final int BATTLECOMPLETETIME_FIELD_NUMBER = 2;
       private long battleCompleteTime_;
       /**
@@ -4626,6 +4684,7 @@ public final class EventStartupProto {
         return battleCompleteTime_;
       }
 
+      // optional int32 coinsStolen = 3;
       public static final int COINSSTOLEN_FIELD_NUMBER = 3;
       private int coinsStolen_;
       /**
@@ -4649,8 +4708,7 @@ public final class EventStartupProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         memoizedIsInitialized = 1;
         return true;
@@ -4771,9 +4829,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.AttackedNotificationProto}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.AttackedNotificationProto)
-          com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProtoOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor;
@@ -4913,6 +4970,7 @@ public final class EventStartupProto {
         }
         private int bitField0_;
 
+        // optional .com.lvl6.proto.MinimumUserProto attacker = 1;
         private com.lvl6.proto.UserProto.MinimumUserProto attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> attackerBuilder_;
@@ -5021,7 +5079,7 @@ public final class EventStartupProto {
           if (attackerBuilder_ == null) {
             attackerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                    getAttacker(),
+                    attacker_,
                     getParentForChildren(),
                     isClean());
             attacker_ = null;
@@ -5029,6 +5087,7 @@ public final class EventStartupProto {
           return attackerBuilder_;
         }
 
+        // optional int64 battleCompleteTime = 2;
         private long battleCompleteTime_ ;
         /**
          * <code>optional int64 battleCompleteTime = 2;</code>
@@ -5061,6 +5120,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 coinsStolen = 3;
         private int coinsStolen_ ;
         /**
          * <code>optional int32 coinsStolen = 3;</code>
@@ -5104,10 +5164,10 @@ public final class EventStartupProto {
       // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.AttackedNotificationProto)
     }
 
-    public interface ReferralNotificationProtoOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.ReferralNotificationProto)
-        com.google.protobuf.MessageOrBuilder {
+    public interface ReferralNotificationProtoOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
 
+      // optional .com.lvl6.proto.MinimumUserProto referred = 1;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto referred = 1;</code>
        */
@@ -5121,6 +5181,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getReferredOrBuilder();
 
+      // optional int64 recruitTime = 2;
       /**
        * <code>optional int64 recruitTime = 2;</code>
        */
@@ -5130,6 +5191,7 @@ public final class EventStartupProto {
        */
       long getRecruitTime();
 
+      // optional int32 coinsGivenToReferrer = 3;
       /**
        * <code>optional int32 coinsGivenToReferrer = 3;</code>
        */
@@ -5143,9 +5205,8 @@ public final class EventStartupProto {
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.ReferralNotificationProto}
      */
     public static final class ReferralNotificationProto extends
-        com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.ReferralNotificationProto)
-        ReferralNotificationProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage
+        implements ReferralNotificationProtoOrBuilder {
       // Use ReferralNotificationProto.newBuilder() to construct.
       private ReferralNotificationProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -5254,6 +5315,7 @@ public final class EventStartupProto {
       }
 
       private int bitField0_;
+      // optional .com.lvl6.proto.MinimumUserProto referred = 1;
       public static final int REFERRED_FIELD_NUMBER = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto referred_;
       /**
@@ -5275,6 +5337,7 @@ public final class EventStartupProto {
         return referred_;
       }
 
+      // optional int64 recruitTime = 2;
       public static final int RECRUITTIME_FIELD_NUMBER = 2;
       private long recruitTime_;
       /**
@@ -5290,6 +5353,7 @@ public final class EventStartupProto {
         return recruitTime_;
       }
 
+      // optional int32 coinsGivenToReferrer = 3;
       public static final int COINSGIVENTOREFERRER_FIELD_NUMBER = 3;
       private int coinsGivenToReferrer_;
       /**
@@ -5313,8 +5377,7 @@ public final class EventStartupProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         memoizedIsInitialized = 1;
         return true;
@@ -5435,9 +5498,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.ReferralNotificationProto}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.ReferralNotificationProto)
-          com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProtoOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_descriptor;
@@ -5577,6 +5639,7 @@ public final class EventStartupProto {
         }
         private int bitField0_;
 
+        // optional .com.lvl6.proto.MinimumUserProto referred = 1;
         private com.lvl6.proto.UserProto.MinimumUserProto referred_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> referredBuilder_;
@@ -5685,7 +5748,7 @@ public final class EventStartupProto {
           if (referredBuilder_ == null) {
             referredBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                    getReferred(),
+                    referred_,
                     getParentForChildren(),
                     isClean());
             referred_ = null;
@@ -5693,6 +5756,7 @@ public final class EventStartupProto {
           return referredBuilder_;
         }
 
+        // optional int64 recruitTime = 2;
         private long recruitTime_ ;
         /**
          * <code>optional int64 recruitTime = 2;</code>
@@ -5725,6 +5789,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 coinsGivenToReferrer = 3;
         private int coinsGivenToReferrer_ ;
         /**
          * <code>optional int32 coinsGivenToReferrer = 3;</code>
@@ -5768,10 +5833,10 @@ public final class EventStartupProto {
       // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.ReferralNotificationProto)
     }
 
-    public interface StartupConstantsOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants)
-        com.google.protobuf.MessageOrBuilder {
+    public interface StartupConstantsOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
 
+      // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
       /**
        * <code>repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;</code>
        */
@@ -5796,6 +5861,7 @@ public final class EventStartupProto {
       com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
           int index);
 
+      // optional int32 maxLevelForUser = 2;
       /**
        * <code>optional int32 maxLevelForUser = 2;</code>
        */
@@ -5805,6 +5871,7 @@ public final class EventStartupProto {
        */
       int getMaxLevelForUser();
 
+      // optional int32 maxNumOfSingleStruct = 3;
       /**
        * <code>optional int32 maxNumOfSingleStruct = 3;</code>
        */
@@ -5814,6 +5881,7 @@ public final class EventStartupProto {
        */
       int getMaxNumOfSingleStruct();
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
       /**
        * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;</code>
        */
@@ -5838,6 +5906,7 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder getAnimatedSpriteOffsetsOrBuilder(
           int index);
 
+      // optional int32 minNameLength = 5;
       /**
        * <code>optional int32 minNameLength = 5;</code>
        */
@@ -5847,6 +5916,7 @@ public final class EventStartupProto {
        */
       int getMinNameLength();
 
+      // optional int32 maxNameLength = 6;
       /**
        * <code>optional int32 maxNameLength = 6;</code>
        */
@@ -5856,6 +5926,7 @@ public final class EventStartupProto {
        */
       int getMaxNameLength();
 
+      // optional int32 maxLengthOfChatString = 7;
       /**
        * <code>optional int32 maxLengthOfChatString = 7;</code>
        */
@@ -5865,6 +5936,7 @@ public final class EventStartupProto {
        */
       int getMaxLengthOfChatString();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;</code>
        */
@@ -5878,6 +5950,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder getClanConstantsOrBuilder();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;</code>
        */
@@ -5891,6 +5964,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder getDownloadableNibConstantsOrBuilder();
 
+      // optional int32 numHoursBeforeReshowingGoldSale = 10;
       /**
        * <code>optional int32 numHoursBeforeReshowingGoldSale = 10;</code>
        */
@@ -5900,6 +5974,7 @@ public final class EventStartupProto {
        */
       int getNumHoursBeforeReshowingGoldSale();
 
+      // optional int32 levelToShowRateUsPopup = 11;
       /**
        * <code>optional int32 levelToShowRateUsPopup = 11;</code>
        */
@@ -5909,6 +5984,7 @@ public final class EventStartupProto {
        */
       int getLevelToShowRateUsPopup();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;</code>
        */
@@ -5922,6 +5998,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder getTouramentConstantsOrBuilder();
 
+      // optional int32 fbConnectRewardDiamonds = 13;
       /**
        * <code>optional int32 fbConnectRewardDiamonds = 13;</code>
        */
@@ -5931,6 +6008,7 @@ public final class EventStartupProto {
        */
       int getFbConnectRewardDiamonds();
 
+      // optional string faqFileName = 14;
       /**
        * <code>optional string faqFileName = 14;</code>
        */
@@ -5945,6 +6023,7 @@ public final class EventStartupProto {
       com.google.protobuf.ByteString
           getFaqFileNameBytes();
 
+      // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;</code>
        */
@@ -5958,6 +6037,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAdminChatUserProtoOrBuilder();
 
+      // optional int32 numBeginnerSalesAllowed = 16;
       /**
        * <code>optional int32 numBeginnerSalesAllowed = 16;</code>
        */
@@ -5967,6 +6047,7 @@ public final class EventStartupProto {
        */
       int getNumBeginnerSalesAllowed();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;</code>
        */
@@ -5980,6 +6061,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder getUserMonsterConstantsOrBuilder();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;</code>
        */
@@ -5993,6 +6075,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder();
 
+      // optional float minutesPerGem = 19;
       /**
        * <code>optional float minutesPerGem = 19;</code>
        *
@@ -6010,6 +6093,7 @@ public final class EventStartupProto {
        */
       float getMinutesPerGem();
 
+      // optional float gemsPerResource = 21;
       /**
        * <code>optional float gemsPerResource = 21;</code>
        *
@@ -6027,6 +6111,7 @@ public final class EventStartupProto {
        */
       float getGemsPerResource();
 
+      // optional int32 pvpRequiredMinLvl = 20 [deprecated = true];
       /**
        * <code>optional int32 pvpRequiredMinLvl = 20 [deprecated = true];</code>
        *
@@ -6044,6 +6129,7 @@ public final class EventStartupProto {
        */
       @java.lang.Deprecated int getPvpRequiredMinLvl();
 
+      // optional float monsterDmgMultiplier = 31 [deprecated = true];
       /**
        * <code>optional float monsterDmgMultiplier = 31 [deprecated = true];</code>
        *
@@ -6061,6 +6147,7 @@ public final class EventStartupProto {
        */
       @java.lang.Deprecated float getMonsterDmgMultiplier();
 
+      // optional float continueBattleGemCostMultiplier = 22;
       /**
        * <code>optional float continueBattleGemCostMultiplier = 22;</code>
        *
@@ -6078,6 +6165,7 @@ public final class EventStartupProto {
        */
       float getContinueBattleGemCostMultiplier();
 
+      // optional float battleRunAwayBasePercent = 28;
       /**
        * <code>optional float battleRunAwayBasePercent = 28;</code>
        */
@@ -6087,6 +6175,7 @@ public final class EventStartupProto {
        */
       float getBattleRunAwayBasePercent();
 
+      // optional float battleRunAwayIncrement = 29;
       /**
        * <code>optional float battleRunAwayIncrement = 29;</code>
        */
@@ -6096,6 +6185,7 @@ public final class EventStartupProto {
        */
       float getBattleRunAwayIncrement();
 
+      // optional bool addAllFbFriends = 23;
       /**
        * <code>optional bool addAllFbFriends = 23;</code>
        */
@@ -6105,6 +6195,7 @@ public final class EventStartupProto {
        */
       boolean getAddAllFbFriends();
 
+      // optional bool facebookPopUp = 36;
       /**
        * <code>optional bool facebookPopUp = 36;</code>
        */
@@ -6114,6 +6205,7 @@ public final class EventStartupProto {
        */
       boolean getFacebookPopUp();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;</code>
        */
@@ -6127,6 +6219,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder getMiniTutsOrBuilder();
 
+      // optional int32 maxObstacles = 25;
       /**
        * <code>optional int32 maxObstacles = 25;</code>
        */
@@ -6136,6 +6229,7 @@ public final class EventStartupProto {
        */
       int getMaxObstacles();
 
+      // optional int32 minutesPerObstacle = 26;
       /**
        * <code>optional int32 minutesPerObstacle = 26;</code>
        *
@@ -6153,6 +6247,7 @@ public final class EventStartupProto {
        */
       int getMinutesPerObstacle();
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;</code>
        */
@@ -6166,6 +6261,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder getTaskMapConstantsOrBuilder();
 
+      // optional int32 maxMinutesForFreeSpeedUp = 30;
       /**
        * <code>optional int32 maxMinutesForFreeSpeedUp = 30;</code>
        *
@@ -6185,6 +6281,7 @@ public final class EventStartupProto {
        */
       int getMaxMinutesForFreeSpeedUp();
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;
       /**
        * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
        */
@@ -6209,6 +6306,7 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder getClanHelpConstantsOrBuilder(
           int index);
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants pvpConstant = 33;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants pvpConstant = 33;</code>
        */
@@ -6222,6 +6320,7 @@ public final class EventStartupProto {
        */
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstantsOrBuilder getPvpConstantOrBuilder();
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto sucp = 34;
       /**
        * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto sucp = 34;</code>
        */
@@ -6246,6 +6345,7 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProtoOrBuilder getSucpOrBuilder(
           int index);
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto rccp = 35;
       /**
        * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto rccp = 35;</code>
        */
@@ -6270,6 +6370,7 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProtoOrBuilder getRccpOrBuilder(
           int index);
 
+      // optional bool displayRarity = 37;
       /**
        * <code>optional bool displayRarity = 37;</code>
        *
@@ -6289,6 +6390,7 @@ public final class EventStartupProto {
        */
       boolean getDisplayRarity();
 
+      // optional int32 taskIdOfFirstSkill = 38;
       /**
        * <code>optional int32 taskIdOfFirstSkill = 38;</code>
        */
@@ -6298,6 +6400,7 @@ public final class EventStartupProto {
        */
       int getTaskIdOfFirstSkill();
 
+      // optional int32 minsToResolicitTeamDonation = 39;
       /**
        * <code>optional int32 minsToResolicitTeamDonation = 39;</code>
        */
@@ -6307,6 +6410,7 @@ public final class EventStartupProto {
        */
       int getMinsToResolicitTeamDonation();
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;
       /**
        * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;</code>
        */
@@ -6331,6 +6435,7 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder getFileDownloadProtoOrBuilder(
           int index);
 
+      // optional int32 taskIdForUpgradeTutorial = 41;
       /**
        * <code>optional int32 taskIdForUpgradeTutorial = 41;</code>
        */
@@ -6344,9 +6449,8 @@ public final class EventStartupProto {
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants}
      */
     public static final class StartupConstants extends
-        com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants)
-        StartupConstantsOrBuilder {
+        com.google.protobuf.GeneratedMessage
+        implements StartupConstantsOrBuilder {
       // Use StartupConstants.newBuilder() to construct.
       private StartupConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -6489,9 +6593,8 @@ public final class EventStartupProto {
                 break;
               }
               case 114: {
-                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000800;
-                faqFileName_ = bs;
+                faqFileName_ = input.readBytes();
                 break;
               }
               case 122: {
@@ -6746,10 +6849,10 @@ public final class EventStartupProto {
         return PARSER;
       }
 
-      public interface AnimatedSpriteOffsetProtoOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
-          com.google.protobuf.MessageOrBuilder {
+      public interface AnimatedSpriteOffsetProtoOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional string imageName = 1;
         /**
          * <code>optional string imageName = 1;</code>
          */
@@ -6764,6 +6867,7 @@ public final class EventStartupProto {
         com.google.protobuf.ByteString
             getImageNameBytes();
 
+        // optional .com.lvl6.proto.CoordinateProto offSet = 2;
         /**
          * <code>optional .com.lvl6.proto.CoordinateProto offSet = 2;</code>
          */
@@ -6781,9 +6885,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto}
        */
       public static final class AnimatedSpriteOffsetProto extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
-          AnimatedSpriteOffsetProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements AnimatedSpriteOffsetProtoOrBuilder {
         // Use AnimatedSpriteOffsetProto.newBuilder() to construct.
         private AnimatedSpriteOffsetProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -6830,9 +6933,8 @@ public final class EventStartupProto {
                   break;
                 }
                 case 10: {
-                  com.google.protobuf.ByteString bs = input.readBytes();
                   bitField0_ |= 0x00000001;
-                  imageName_ = bs;
+                  imageName_ = input.readBytes();
                   break;
                 }
                 case 18: {
@@ -6888,6 +6990,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional string imageName = 1;
         public static final int IMAGENAME_FIELD_NUMBER = 1;
         private java.lang.Object imageName_;
         /**
@@ -6930,6 +7033,7 @@ public final class EventStartupProto {
           }
         }
 
+        // optional .com.lvl6.proto.CoordinateProto offSet = 2;
         public static final int OFFSET_FIELD_NUMBER = 2;
         private com.lvl6.proto.StructureProto.CoordinateProto offSet_;
         /**
@@ -6958,8 +7062,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -7073,9 +7176,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
@@ -7208,6 +7310,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional string imageName = 1;
           private java.lang.Object imageName_ = "";
           /**
            * <code>optional string imageName = 1;</code>
@@ -7221,12 +7324,9 @@ public final class EventStartupProto {
           public java.lang.String getImageName() {
             java.lang.Object ref = imageName_;
             if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              if (bs.isValidUtf8()) {
-                imageName_ = s;
-              }
+              java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                  .toStringUtf8();
+              imageName_ = s;
               return s;
             } else {
               return (java.lang.String) ref;
@@ -7284,6 +7384,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional .com.lvl6.proto.CoordinateProto offSet = 2;
           private com.lvl6.proto.StructureProto.CoordinateProto offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
           private com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> offSetBuilder_;
@@ -7392,7 +7493,7 @@ public final class EventStartupProto {
             if (offSetBuilder_ == null) {
               offSetBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                   com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                      getOffSet(),
+                      offSet_,
                       getParentForChildren(),
                       isClean());
               offSet_ = null;
@@ -7411,10 +7512,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
       }
 
-      public interface ClanConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface ClanConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 coinPriceToCreateClan = 1;
         /**
          * <code>optional int32 coinPriceToCreateClan = 1;</code>
          */
@@ -7424,6 +7525,7 @@ public final class EventStartupProto {
          */
         int getCoinPriceToCreateClan();
 
+        // optional int32 maxCharLengthForClanName = 2;
         /**
          * <code>optional int32 maxCharLengthForClanName = 2;</code>
          */
@@ -7433,6 +7535,7 @@ public final class EventStartupProto {
          */
         int getMaxCharLengthForClanName();
 
+        // optional int32 maxCharLengthForClanDescription = 3;
         /**
          * <code>optional int32 maxCharLengthForClanDescription = 3;</code>
          */
@@ -7442,6 +7545,7 @@ public final class EventStartupProto {
          */
         int getMaxCharLengthForClanDescription();
 
+        // optional int32 maxCharLengthForClanTag = 4;
         /**
          * <code>optional int32 maxCharLengthForClanTag = 4;</code>
          */
@@ -7451,6 +7555,7 @@ public final class EventStartupProto {
          */
         int getMaxCharLengthForClanTag();
 
+        // optional int32 maxClanSize = 5;
         /**
          * <code>optional int32 maxClanSize = 5;</code>
          */
@@ -7460,6 +7565,7 @@ public final class EventStartupProto {
          */
         int getMaxClanSize();
 
+        // repeated int32 achievementIdsForClanRewards = 6;
         /**
          * <code>repeated int32 achievementIdsForClanRewards = 6;</code>
          */
@@ -7477,9 +7583,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants}
        */
       public static final class ClanConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
-          ClanConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements ClanConstantsOrBuilder {
         // Use ClanConstants.newBuilder() to construct.
         private ClanConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -7614,6 +7719,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 coinPriceToCreateClan = 1;
         public static final int COINPRICETOCREATECLAN_FIELD_NUMBER = 1;
         private int coinPriceToCreateClan_;
         /**
@@ -7629,6 +7735,7 @@ public final class EventStartupProto {
           return coinPriceToCreateClan_;
         }
 
+        // optional int32 maxCharLengthForClanName = 2;
         public static final int MAXCHARLENGTHFORCLANNAME_FIELD_NUMBER = 2;
         private int maxCharLengthForClanName_;
         /**
@@ -7644,6 +7751,7 @@ public final class EventStartupProto {
           return maxCharLengthForClanName_;
         }
 
+        // optional int32 maxCharLengthForClanDescription = 3;
         public static final int MAXCHARLENGTHFORCLANDESCRIPTION_FIELD_NUMBER = 3;
         private int maxCharLengthForClanDescription_;
         /**
@@ -7659,6 +7767,7 @@ public final class EventStartupProto {
           return maxCharLengthForClanDescription_;
         }
 
+        // optional int32 maxCharLengthForClanTag = 4;
         public static final int MAXCHARLENGTHFORCLANTAG_FIELD_NUMBER = 4;
         private int maxCharLengthForClanTag_;
         /**
@@ -7674,6 +7783,7 @@ public final class EventStartupProto {
           return maxCharLengthForClanTag_;
         }
 
+        // optional int32 maxClanSize = 5;
         public static final int MAXCLANSIZE_FIELD_NUMBER = 5;
         private int maxClanSize_;
         /**
@@ -7689,6 +7799,7 @@ public final class EventStartupProto {
           return maxClanSize_;
         }
 
+        // repeated int32 achievementIdsForClanRewards = 6;
         public static final int ACHIEVEMENTIDSFORCLANREWARDS_FIELD_NUMBER = 6;
         private java.util.List<java.lang.Integer> achievementIdsForClanRewards_;
         /**
@@ -7722,8 +7833,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -7870,9 +7980,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
@@ -8038,6 +8147,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 coinPriceToCreateClan = 1;
           private int coinPriceToCreateClan_ ;
           /**
            * <code>optional int32 coinPriceToCreateClan = 1;</code>
@@ -8070,6 +8180,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 maxCharLengthForClanName = 2;
           private int maxCharLengthForClanName_ ;
           /**
            * <code>optional int32 maxCharLengthForClanName = 2;</code>
@@ -8102,6 +8213,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 maxCharLengthForClanDescription = 3;
           private int maxCharLengthForClanDescription_ ;
           /**
            * <code>optional int32 maxCharLengthForClanDescription = 3;</code>
@@ -8134,6 +8246,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 maxCharLengthForClanTag = 4;
           private int maxCharLengthForClanTag_ ;
           /**
            * <code>optional int32 maxCharLengthForClanTag = 4;</code>
@@ -8166,6 +8279,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 maxClanSize = 5;
           private int maxClanSize_ ;
           /**
            * <code>optional int32 maxClanSize = 5;</code>
@@ -8198,6 +8312,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // repeated int32 achievementIdsForClanRewards = 6;
           private java.util.List<java.lang.Integer> achievementIdsForClanRewards_ = java.util.Collections.emptyList();
           private void ensureAchievementIdsForClanRewardsIsMutable() {
             if (!((bitField0_ & 0x00000020) == 0x00000020)) {
@@ -8249,8 +8364,7 @@ public final class EventStartupProto {
           public Builder addAllAchievementIdsForClanRewards(
               java.lang.Iterable<? extends java.lang.Integer> values) {
             ensureAchievementIdsForClanRewardsIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, achievementIdsForClanRewards_);
+            super.addAll(values, achievementIdsForClanRewards_);
             onChanged();
             return this;
           }
@@ -8275,10 +8389,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
       }
 
-      public interface DownloadableNibConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface DownloadableNibConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional string mapNibName = 1;
         /**
          * <code>optional string mapNibName = 1;</code>
          */
@@ -8293,6 +8407,7 @@ public final class EventStartupProto {
         com.google.protobuf.ByteString
             getMapNibNameBytes();
 
+        // optional string expansionNibName = 2;
         /**
          * <code>optional string expansionNibName = 2;</code>
          */
@@ -8307,6 +8422,7 @@ public final class EventStartupProto {
         com.google.protobuf.ByteString
             getExpansionNibNameBytes();
 
+        // optional string goldShoppeNibName = 3;
         /**
          * <code>optional string goldShoppeNibName = 3;</code>
          */
@@ -8325,9 +8441,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants}
        */
       public static final class DownloadableNibConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
-          DownloadableNibConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements DownloadableNibConstantsOrBuilder {
         // Use DownloadableNibConstants.newBuilder() to construct.
         private DownloadableNibConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -8374,21 +8489,18 @@ public final class EventStartupProto {
                   break;
                 }
                 case 10: {
-                  com.google.protobuf.ByteString bs = input.readBytes();
                   bitField0_ |= 0x00000001;
-                  mapNibName_ = bs;
+                  mapNibName_ = input.readBytes();
                   break;
                 }
                 case 18: {
-                  com.google.protobuf.ByteString bs = input.readBytes();
                   bitField0_ |= 0x00000002;
-                  expansionNibName_ = bs;
+                  expansionNibName_ = input.readBytes();
                   break;
                 }
                 case 26: {
-                  com.google.protobuf.ByteString bs = input.readBytes();
                   bitField0_ |= 0x00000004;
-                  goldShoppeNibName_ = bs;
+                  goldShoppeNibName_ = input.readBytes();
                   break;
                 }
               }
@@ -8431,6 +8543,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional string mapNibName = 1;
         public static final int MAPNIBNAME_FIELD_NUMBER = 1;
         private java.lang.Object mapNibName_;
         /**
@@ -8473,6 +8586,7 @@ public final class EventStartupProto {
           }
         }
 
+        // optional string expansionNibName = 2;
         public static final int EXPANSIONNIBNAME_FIELD_NUMBER = 2;
         private java.lang.Object expansionNibName_;
         /**
@@ -8515,6 +8629,7 @@ public final class EventStartupProto {
           }
         }
 
+        // optional string goldShoppeNibName = 3;
         public static final int GOLDSHOPPENIBNAME_FIELD_NUMBER = 3;
         private java.lang.Object goldShoppeNibName_;
         /**
@@ -8565,8 +8680,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -8687,9 +8801,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
@@ -8826,6 +8939,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional string mapNibName = 1;
           private java.lang.Object mapNibName_ = "";
           /**
            * <code>optional string mapNibName = 1;</code>
@@ -8839,12 +8953,9 @@ public final class EventStartupProto {
           public java.lang.String getMapNibName() {
             java.lang.Object ref = mapNibName_;
             if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              if (bs.isValidUtf8()) {
-                mapNibName_ = s;
-              }
+              java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                  .toStringUtf8();
+              mapNibName_ = s;
               return s;
             } else {
               return (java.lang.String) ref;
@@ -8902,6 +9013,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional string expansionNibName = 2;
           private java.lang.Object expansionNibName_ = "";
           /**
            * <code>optional string expansionNibName = 2;</code>
@@ -8915,12 +9027,9 @@ public final class EventStartupProto {
           public java.lang.String getExpansionNibName() {
             java.lang.Object ref = expansionNibName_;
             if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              if (bs.isValidUtf8()) {
-                expansionNibName_ = s;
-              }
+              java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                  .toStringUtf8();
+              expansionNibName_ = s;
               return s;
             } else {
               return (java.lang.String) ref;
@@ -8978,6 +9087,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional string goldShoppeNibName = 3;
           private java.lang.Object goldShoppeNibName_ = "";
           /**
            * <code>optional string goldShoppeNibName = 3;</code>
@@ -8991,12 +9101,9 @@ public final class EventStartupProto {
           public java.lang.String getGoldShoppeNibName() {
             java.lang.Object ref = goldShoppeNibName_;
             if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              if (bs.isValidUtf8()) {
-                goldShoppeNibName_ = s;
-              }
+              java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                  .toStringUtf8();
+              goldShoppeNibName_ = s;
               return s;
             } else {
               return (java.lang.String) ref;
@@ -9065,10 +9172,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
       }
 
-      public interface TournamentConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface TournamentConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 winsWeight = 1;
         /**
          * <code>optional int32 winsWeight = 1;</code>
          */
@@ -9078,6 +9185,7 @@ public final class EventStartupProto {
          */
         int getWinsWeight();
 
+        // optional int32 lossesWeight = 2;
         /**
          * <code>optional int32 lossesWeight = 2;</code>
          */
@@ -9087,6 +9195,7 @@ public final class EventStartupProto {
          */
         int getLossesWeight();
 
+        // optional int32 fleesWeight = 3;
         /**
          * <code>optional int32 fleesWeight = 3;</code>
          */
@@ -9096,6 +9205,7 @@ public final class EventStartupProto {
          */
         int getFleesWeight();
 
+        // optional int32 numHoursToShowAfterEventEnd = 4;
         /**
          * <code>optional int32 numHoursToShowAfterEventEnd = 4;</code>
          */
@@ -9109,9 +9219,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants}
        */
       public static final class TournamentConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
-          TournamentConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements TournamentConstantsOrBuilder {
         // Use TournamentConstants.newBuilder() to construct.
         private TournamentConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -9217,6 +9326,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 winsWeight = 1;
         public static final int WINSWEIGHT_FIELD_NUMBER = 1;
         private int winsWeight_;
         /**
@@ -9232,6 +9342,7 @@ public final class EventStartupProto {
           return winsWeight_;
         }
 
+        // optional int32 lossesWeight = 2;
         public static final int LOSSESWEIGHT_FIELD_NUMBER = 2;
         private int lossesWeight_;
         /**
@@ -9247,6 +9358,7 @@ public final class EventStartupProto {
           return lossesWeight_;
         }
 
+        // optional int32 fleesWeight = 3;
         public static final int FLEESWEIGHT_FIELD_NUMBER = 3;
         private int fleesWeight_;
         /**
@@ -9262,6 +9374,7 @@ public final class EventStartupProto {
           return fleesWeight_;
         }
 
+        // optional int32 numHoursToShowAfterEventEnd = 4;
         public static final int NUMHOURSTOSHOWAFTEREVENTEND_FIELD_NUMBER = 4;
         private int numHoursToShowAfterEventEnd_;
         /**
@@ -9286,8 +9399,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -9415,9 +9527,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
@@ -9557,6 +9668,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 winsWeight = 1;
           private int winsWeight_ ;
           /**
            * <code>optional int32 winsWeight = 1;</code>
@@ -9589,6 +9701,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 lossesWeight = 2;
           private int lossesWeight_ ;
           /**
            * <code>optional int32 lossesWeight = 2;</code>
@@ -9621,6 +9734,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 fleesWeight = 3;
           private int fleesWeight_ ;
           /**
            * <code>optional int32 fleesWeight = 3;</code>
@@ -9653,6 +9767,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 numHoursToShowAfterEventEnd = 4;
           private int numHoursToShowAfterEventEnd_ ;
           /**
            * <code>optional int32 numHoursToShowAfterEventEnd = 4;</code>
@@ -9696,10 +9811,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
       }
 
-      public interface UserMonsterConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface UserMonsterConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 maxNumTeamSlots = 1;
         /**
          * <code>optional int32 maxNumTeamSlots = 1;</code>
          */
@@ -9709,6 +9824,7 @@ public final class EventStartupProto {
          */
         int getMaxNumTeamSlots();
 
+        // optional int32 initialMaxNumMonsterLimit = 2;
         /**
          * <code>optional int32 initialMaxNumMonsterLimit = 2;</code>
          */
@@ -9722,9 +9838,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants}
        */
       public static final class UserMonsterConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
-          UserMonsterConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements UserMonsterConstantsOrBuilder {
         // Use UserMonsterConstants.newBuilder() to construct.
         private UserMonsterConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -9820,6 +9935,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 maxNumTeamSlots = 1;
         public static final int MAXNUMTEAMSLOTS_FIELD_NUMBER = 1;
         private int maxNumTeamSlots_;
         /**
@@ -9835,6 +9951,7 @@ public final class EventStartupProto {
           return maxNumTeamSlots_;
         }
 
+        // optional int32 initialMaxNumMonsterLimit = 2;
         public static final int INITIALMAXNUMMONSTERLIMIT_FIELD_NUMBER = 2;
         private int initialMaxNumMonsterLimit_;
         /**
@@ -9857,8 +9974,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -9972,9 +10088,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor;
@@ -10096,6 +10211,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 maxNumTeamSlots = 1;
           private int maxNumTeamSlots_ ;
           /**
            * <code>optional int32 maxNumTeamSlots = 1;</code>
@@ -10128,6 +10244,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 initialMaxNumMonsterLimit = 2;
           private int initialMaxNumMonsterLimit_ ;
           /**
            * <code>optional int32 initialMaxNumMonsterLimit = 2;</code>
@@ -10171,10 +10288,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
       }
 
-      public interface MonsterConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface MonsterConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional float cashPerHealthPoint = 1;
         /**
          * <code>optional float cashPerHealthPoint = 1;</code>
          */
@@ -10184,6 +10301,7 @@ public final class EventStartupProto {
          */
         float getCashPerHealthPoint();
 
+        // optional float secondsToHealPerHealthPoint = 2;
         /**
          * <code>optional float secondsToHealPerHealthPoint = 2;</code>
          */
@@ -10193,6 +10311,7 @@ public final class EventStartupProto {
          */
         float getSecondsToHealPerHealthPoint();
 
+        // optional float elementalStrength = 3;
         /**
          * <code>optional float elementalStrength = 3;</code>
          */
@@ -10202,6 +10321,7 @@ public final class EventStartupProto {
          */
         float getElementalStrength();
 
+        // optional float elementalWeakness = 4;
         /**
          * <code>optional float elementalWeakness = 4;</code>
          */
@@ -10211,6 +10331,7 @@ public final class EventStartupProto {
          */
         float getElementalWeakness();
 
+        // optional float oilPerMonsterLevel = 5;
         /**
          * <code>optional float oilPerMonsterLevel = 5;</code>
          */
@@ -10224,9 +10345,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants}
        */
       public static final class MonsterConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
-          MonsterConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements MonsterConstantsOrBuilder {
         // Use MonsterConstants.newBuilder() to construct.
         private MonsterConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -10337,6 +10457,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional float cashPerHealthPoint = 1;
         public static final int CASHPERHEALTHPOINT_FIELD_NUMBER = 1;
         private float cashPerHealthPoint_;
         /**
@@ -10352,6 +10473,7 @@ public final class EventStartupProto {
           return cashPerHealthPoint_;
         }
 
+        // optional float secondsToHealPerHealthPoint = 2;
         public static final int SECONDSTOHEALPERHEALTHPOINT_FIELD_NUMBER = 2;
         private float secondsToHealPerHealthPoint_;
         /**
@@ -10367,6 +10489,7 @@ public final class EventStartupProto {
           return secondsToHealPerHealthPoint_;
         }
 
+        // optional float elementalStrength = 3;
         public static final int ELEMENTALSTRENGTH_FIELD_NUMBER = 3;
         private float elementalStrength_;
         /**
@@ -10382,6 +10505,7 @@ public final class EventStartupProto {
           return elementalStrength_;
         }
 
+        // optional float elementalWeakness = 4;
         public static final int ELEMENTALWEAKNESS_FIELD_NUMBER = 4;
         private float elementalWeakness_;
         /**
@@ -10397,6 +10521,7 @@ public final class EventStartupProto {
           return elementalWeakness_;
         }
 
+        // optional float oilPerMonsterLevel = 5;
         public static final int OILPERMONSTERLEVEL_FIELD_NUMBER = 5;
         private float oilPerMonsterLevel_;
         /**
@@ -10422,8 +10547,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -10558,9 +10682,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor;
@@ -10709,6 +10832,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional float cashPerHealthPoint = 1;
           private float cashPerHealthPoint_ ;
           /**
            * <code>optional float cashPerHealthPoint = 1;</code>
@@ -10741,6 +10865,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float secondsToHealPerHealthPoint = 2;
           private float secondsToHealPerHealthPoint_ ;
           /**
            * <code>optional float secondsToHealPerHealthPoint = 2;</code>
@@ -10773,6 +10898,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float elementalStrength = 3;
           private float elementalStrength_ ;
           /**
            * <code>optional float elementalStrength = 3;</code>
@@ -10805,6 +10931,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float elementalWeakness = 4;
           private float elementalWeakness_ ;
           /**
            * <code>optional float elementalWeakness = 4;</code>
@@ -10837,6 +10964,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float oilPerMonsterLevel = 5;
           private float oilPerMonsterLevel_ ;
           /**
            * <code>optional float oilPerMonsterLevel = 5;</code>
@@ -10880,10 +11008,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
       }
 
-      public interface TaskMapConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface TaskMapConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional string mapSectionImagePrefix = 1;
         /**
          * <code>optional string mapSectionImagePrefix = 1;</code>
          */
@@ -10898,6 +11026,7 @@ public final class EventStartupProto {
         com.google.protobuf.ByteString
             getMapSectionImagePrefixBytes();
 
+        // optional int32 mapNumberOfSections = 2;
         /**
          * <code>optional int32 mapNumberOfSections = 2;</code>
          */
@@ -10907,6 +11036,7 @@ public final class EventStartupProto {
          */
         int getMapNumberOfSections();
 
+        // optional float mapSectionHeight = 3;
         /**
          * <code>optional float mapSectionHeight = 3;</code>
          */
@@ -10916,6 +11046,7 @@ public final class EventStartupProto {
          */
         float getMapSectionHeight();
 
+        // optional float mapTotalWidth = 4;
         /**
          * <code>optional float mapTotalWidth = 4;</code>
          */
@@ -10925,6 +11056,7 @@ public final class EventStartupProto {
          */
         float getMapTotalWidth();
 
+        // optional float mapTotalHeight = 5;
         /**
          * <code>optional float mapTotalHeight = 5;</code>
          */
@@ -10938,9 +11070,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants}
        */
       public static final class TaskMapConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants)
-          TaskMapConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements TaskMapConstantsOrBuilder {
         // Use TaskMapConstants.newBuilder() to construct.
         private TaskMapConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -10987,9 +11118,8 @@ public final class EventStartupProto {
                   break;
                 }
                 case 10: {
-                  com.google.protobuf.ByteString bs = input.readBytes();
                   bitField0_ |= 0x00000001;
-                  mapSectionImagePrefix_ = bs;
+                  mapSectionImagePrefix_ = input.readBytes();
                   break;
                 }
                 case 16: {
@@ -11052,6 +11182,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional string mapSectionImagePrefix = 1;
         public static final int MAPSECTIONIMAGEPREFIX_FIELD_NUMBER = 1;
         private java.lang.Object mapSectionImagePrefix_;
         /**
@@ -11094,6 +11225,7 @@ public final class EventStartupProto {
           }
         }
 
+        // optional int32 mapNumberOfSections = 2;
         public static final int MAPNUMBEROFSECTIONS_FIELD_NUMBER = 2;
         private int mapNumberOfSections_;
         /**
@@ -11109,6 +11241,7 @@ public final class EventStartupProto {
           return mapNumberOfSections_;
         }
 
+        // optional float mapSectionHeight = 3;
         public static final int MAPSECTIONHEIGHT_FIELD_NUMBER = 3;
         private float mapSectionHeight_;
         /**
@@ -11124,6 +11257,7 @@ public final class EventStartupProto {
           return mapSectionHeight_;
         }
 
+        // optional float mapTotalWidth = 4;
         public static final int MAPTOTALWIDTH_FIELD_NUMBER = 4;
         private float mapTotalWidth_;
         /**
@@ -11139,6 +11273,7 @@ public final class EventStartupProto {
           return mapTotalWidth_;
         }
 
+        // optional float mapTotalHeight = 5;
         public static final int MAPTOTALHEIGHT_FIELD_NUMBER = 5;
         private float mapTotalHeight_;
         /**
@@ -11164,8 +11299,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -11300,9 +11434,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor;
@@ -11453,6 +11586,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional string mapSectionImagePrefix = 1;
           private java.lang.Object mapSectionImagePrefix_ = "";
           /**
            * <code>optional string mapSectionImagePrefix = 1;</code>
@@ -11466,12 +11600,9 @@ public final class EventStartupProto {
           public java.lang.String getMapSectionImagePrefix() {
             java.lang.Object ref = mapSectionImagePrefix_;
             if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              if (bs.isValidUtf8()) {
-                mapSectionImagePrefix_ = s;
-              }
+              java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                  .toStringUtf8();
+              mapSectionImagePrefix_ = s;
               return s;
             } else {
               return (java.lang.String) ref;
@@ -11529,6 +11660,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 mapNumberOfSections = 2;
           private int mapNumberOfSections_ ;
           /**
            * <code>optional int32 mapNumberOfSections = 2;</code>
@@ -11561,6 +11693,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float mapSectionHeight = 3;
           private float mapSectionHeight_ ;
           /**
            * <code>optional float mapSectionHeight = 3;</code>
@@ -11593,6 +11726,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float mapTotalWidth = 4;
           private float mapTotalWidth_ ;
           /**
            * <code>optional float mapTotalWidth = 4;</code>
@@ -11625,6 +11759,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float mapTotalHeight = 5;
           private float mapTotalHeight_ ;
           /**
            * <code>optional float mapTotalHeight = 5;</code>
@@ -11668,10 +11803,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants)
       }
 
-      public interface MiniTutorialConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface MiniTutorialConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 miniTutorialTaskId = 1;
         /**
          * <code>optional int32 miniTutorialTaskId = 1;</code>
          */
@@ -11681,6 +11816,7 @@ public final class EventStartupProto {
          */
         int getMiniTutorialTaskId();
 
+        // optional int32 guideMonsterId = 2;
         /**
          * <code>optional int32 guideMonsterId = 2;</code>
          */
@@ -11690,6 +11826,7 @@ public final class EventStartupProto {
          */
         int getGuideMonsterId();
 
+        // optional int32 enhanceGuideMonsterId = 3;
         /**
          * <code>optional int32 enhanceGuideMonsterId = 3;</code>
          */
@@ -11703,9 +11840,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants}
        */
       public static final class MiniTutorialConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
-          MiniTutorialConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements MiniTutorialConstantsOrBuilder {
         // Use MiniTutorialConstants.newBuilder() to construct.
         private MiniTutorialConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -11806,6 +11942,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 miniTutorialTaskId = 1;
         public static final int MINITUTORIALTASKID_FIELD_NUMBER = 1;
         private int miniTutorialTaskId_;
         /**
@@ -11821,6 +11958,7 @@ public final class EventStartupProto {
           return miniTutorialTaskId_;
         }
 
+        // optional int32 guideMonsterId = 2;
         public static final int GUIDEMONSTERID_FIELD_NUMBER = 2;
         private int guideMonsterId_;
         /**
@@ -11836,6 +11974,7 @@ public final class EventStartupProto {
           return guideMonsterId_;
         }
 
+        // optional int32 enhanceGuideMonsterId = 3;
         public static final int ENHANCEGUIDEMONSTERID_FIELD_NUMBER = 3;
         private int enhanceGuideMonsterId_;
         /**
@@ -11859,8 +11998,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -11981,9 +12119,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor;
@@ -12114,6 +12251,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 miniTutorialTaskId = 1;
           private int miniTutorialTaskId_ ;
           /**
            * <code>optional int32 miniTutorialTaskId = 1;</code>
@@ -12146,6 +12284,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 guideMonsterId = 2;
           private int guideMonsterId_ ;
           /**
            * <code>optional int32 guideMonsterId = 2;</code>
@@ -12178,6 +12317,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 enhanceGuideMonsterId = 3;
           private int enhanceGuideMonsterId_ ;
           /**
            * <code>optional int32 enhanceGuideMonsterId = 3;</code>
@@ -12221,10 +12361,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
       }
 
-      public interface ClanHelpConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface ClanHelpConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];
         /**
          * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
          */
@@ -12234,6 +12374,7 @@ public final class EventStartupProto {
          */
         com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType();
 
+        // optional int32 amountRemovedPerHelp = 2;
         /**
          * <code>optional int32 amountRemovedPerHelp = 2;</code>
          *
@@ -12263,6 +12404,7 @@ public final class EventStartupProto {
          */
         int getAmountRemovedPerHelp();
 
+        // optional float percentRemovedPerHelp = 3;
         /**
          * <code>optional float percentRemovedPerHelp = 3;</code>
          */
@@ -12276,9 +12418,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants}
        */
       public static final class ClanHelpConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
-          ClanHelpConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements ClanHelpConstantsOrBuilder {
         // Use ClanHelpConstants.newBuilder() to construct.
         private ClanHelpConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -12385,6 +12526,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];
         public static final int HELPTYPE_FIELD_NUMBER = 1;
         private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_;
         /**
@@ -12400,6 +12542,7 @@ public final class EventStartupProto {
           return helpType_;
         }
 
+        // optional int32 amountRemovedPerHelp = 2;
         public static final int AMOUNTREMOVEDPERHELP_FIELD_NUMBER = 2;
         private int amountRemovedPerHelp_;
         /**
@@ -12435,6 +12578,7 @@ public final class EventStartupProto {
           return amountRemovedPerHelp_;
         }
 
+        // optional float percentRemovedPerHelp = 3;
         public static final int PERCENTREMOVEDPERHELP_FIELD_NUMBER = 3;
         private float percentRemovedPerHelp_;
         /**
@@ -12458,8 +12602,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -12580,9 +12723,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor;
@@ -12713,6 +12855,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];
           private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
           /**
            * <code>optional .com.lvl6.proto.GameActionType helpType = 1 [default = NO_HELP];</code>
@@ -12748,6 +12891,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 amountRemovedPerHelp = 2;
           private int amountRemovedPerHelp_ ;
           /**
            * <code>optional int32 amountRemovedPerHelp = 2;</code>
@@ -12820,6 +12964,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float percentRemovedPerHelp = 3;
           private float percentRemovedPerHelp_ ;
           /**
            * <code>optional float percentRemovedPerHelp = 3;</code>
@@ -12863,10 +13008,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
       }
 
-      public interface PvpConstantsOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants)
-          com.google.protobuf.MessageOrBuilder {
+      public interface PvpConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 pvpDmgsWindowSize = 1;
         /**
          * <code>optional int32 pvpDmgsWindowSize = 1;</code>
          *
@@ -12884,6 +13029,7 @@ public final class EventStartupProto {
          */
         int getPvpDmgsWindowSize();
 
+        // optional float minPvpDmgDelta = 2;
         /**
          * <code>optional float minPvpDmgDelta = 2;</code>
          *
@@ -12901,6 +13047,7 @@ public final class EventStartupProto {
          */
         float getMinPvpDmgDelta();
 
+        // optional float maxPvpDmgDelta = 3;
         /**
          * <code>optional float maxPvpDmgDelta = 3;</code>
          *
@@ -12918,6 +13065,7 @@ public final class EventStartupProto {
          */
         float getMaxPvpDmgDelta();
 
+        // optional int32 pvpRequiredMinLvl = 4;
         /**
          * <code>optional int32 pvpRequiredMinLvl = 4;</code>
          */
@@ -12927,6 +13075,7 @@ public final class EventStartupProto {
          */
         int getPvpRequiredMinLvl();
 
+        // optional int32 defendingMsgCharLimit = 5;
         /**
          * <code>optional int32 defendingMsgCharLimit = 5;</code>
          */
@@ -12936,6 +13085,7 @@ public final class EventStartupProto {
          */
         int getDefendingMsgCharLimit();
 
+        // optional int32 beginAvengingTimeLimitMins = 6;
         /**
          * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
          *
@@ -12953,6 +13103,7 @@ public final class EventStartupProto {
          */
         int getBeginAvengingTimeLimitMins();
 
+        // optional int32 requestClanToAvengeTimeLimitMins = 7;
         /**
          * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
          *
@@ -12974,9 +13125,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants}
        */
       public static final class PvpConstants extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants)
-          PvpConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements PvpConstantsOrBuilder {
         // Use PvpConstants.newBuilder() to construct.
         private PvpConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -13097,6 +13247,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 pvpDmgsWindowSize = 1;
         public static final int PVPDMGSWINDOWSIZE_FIELD_NUMBER = 1;
         private int pvpDmgsWindowSize_;
         /**
@@ -13120,6 +13271,7 @@ public final class EventStartupProto {
           return pvpDmgsWindowSize_;
         }
 
+        // optional float minPvpDmgDelta = 2;
         public static final int MINPVPDMGDELTA_FIELD_NUMBER = 2;
         private float minPvpDmgDelta_;
         /**
@@ -13143,6 +13295,7 @@ public final class EventStartupProto {
           return minPvpDmgDelta_;
         }
 
+        // optional float maxPvpDmgDelta = 3;
         public static final int MAXPVPDMGDELTA_FIELD_NUMBER = 3;
         private float maxPvpDmgDelta_;
         /**
@@ -13166,6 +13319,7 @@ public final class EventStartupProto {
           return maxPvpDmgDelta_;
         }
 
+        // optional int32 pvpRequiredMinLvl = 4;
         public static final int PVPREQUIREDMINLVL_FIELD_NUMBER = 4;
         private int pvpRequiredMinLvl_;
         /**
@@ -13181,6 +13335,7 @@ public final class EventStartupProto {
           return pvpRequiredMinLvl_;
         }
 
+        // optional int32 defendingMsgCharLimit = 5;
         public static final int DEFENDINGMSGCHARLIMIT_FIELD_NUMBER = 5;
         private int defendingMsgCharLimit_;
         /**
@@ -13196,6 +13351,7 @@ public final class EventStartupProto {
           return defendingMsgCharLimit_;
         }
 
+        // optional int32 beginAvengingTimeLimitMins = 6;
         public static final int BEGINAVENGINGTIMELIMITMINS_FIELD_NUMBER = 6;
         private int beginAvengingTimeLimitMins_;
         /**
@@ -13219,6 +13375,7 @@ public final class EventStartupProto {
           return beginAvengingTimeLimitMins_;
         }
 
+        // optional int32 requestClanToAvengeTimeLimitMins = 7;
         public static final int REQUESTCLANTOAVENGETIMELIMITMINS_FIELD_NUMBER = 7;
         private int requestClanToAvengeTimeLimitMins_;
         /**
@@ -13254,8 +13411,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -13404,9 +13560,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstantsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor;
@@ -13573,6 +13728,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 pvpDmgsWindowSize = 1;
           private int pvpDmgsWindowSize_ ;
           /**
            * <code>optional int32 pvpDmgsWindowSize = 1;</code>
@@ -13621,6 +13777,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float minPvpDmgDelta = 2;
           private float minPvpDmgDelta_ ;
           /**
            * <code>optional float minPvpDmgDelta = 2;</code>
@@ -13669,6 +13826,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional float maxPvpDmgDelta = 3;
           private float maxPvpDmgDelta_ ;
           /**
            * <code>optional float maxPvpDmgDelta = 3;</code>
@@ -13717,6 +13875,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 pvpRequiredMinLvl = 4;
           private int pvpRequiredMinLvl_ ;
           /**
            * <code>optional int32 pvpRequiredMinLvl = 4;</code>
@@ -13749,6 +13908,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 defendingMsgCharLimit = 5;
           private int defendingMsgCharLimit_ ;
           /**
            * <code>optional int32 defendingMsgCharLimit = 5;</code>
@@ -13781,6 +13941,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 beginAvengingTimeLimitMins = 6;
           private int beginAvengingTimeLimitMins_ ;
           /**
            * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
@@ -13829,6 +13990,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 requestClanToAvengeTimeLimitMins = 7;
           private int requestClanToAvengeTimeLimitMins_ ;
           /**
            * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
@@ -13888,10 +14050,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants)
       }
 
-      public interface SpeedUpConstantProtoOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto)
-          com.google.protobuf.MessageOrBuilder {
+      public interface SpeedUpConstantProtoOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 seconds = 1;
         /**
          * <code>optional int32 seconds = 1;</code>
          */
@@ -13901,6 +14063,7 @@ public final class EventStartupProto {
          */
         int getSeconds();
 
+        // optional int32 numGems = 2;
         /**
          * <code>optional int32 numGems = 2;</code>
          */
@@ -13914,9 +14077,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto}
        */
       public static final class SpeedUpConstantProto extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto)
-          SpeedUpConstantProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements SpeedUpConstantProtoOrBuilder {
         // Use SpeedUpConstantProto.newBuilder() to construct.
         private SpeedUpConstantProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -14012,6 +14174,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 seconds = 1;
         public static final int SECONDS_FIELD_NUMBER = 1;
         private int seconds_;
         /**
@@ -14027,6 +14190,7 @@ public final class EventStartupProto {
           return seconds_;
         }
 
+        // optional int32 numGems = 2;
         public static final int NUMGEMS_FIELD_NUMBER = 2;
         private int numGems_;
         /**
@@ -14049,8 +14213,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -14164,9 +14327,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProtoOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProtoOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor;
@@ -14288,6 +14450,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 seconds = 1;
           private int seconds_ ;
           /**
            * <code>optional int32 seconds = 1;</code>
@@ -14320,6 +14483,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 numGems = 2;
           private int numGems_ ;
           /**
            * <code>optional int32 numGems = 2;</code>
@@ -14363,10 +14527,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto)
       }
 
-      public interface ResourceConversionConstantProtoOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto)
-          com.google.protobuf.MessageOrBuilder {
+      public interface ResourceConversionConstantProtoOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];
         /**
          * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
@@ -14376,6 +14540,7 @@ public final class EventStartupProto {
          */
         com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
+        // optional int32 resourceAmt = 2;
         /**
          * <code>optional int32 resourceAmt = 2;</code>
          */
@@ -14385,6 +14550,7 @@ public final class EventStartupProto {
          */
         int getResourceAmt();
 
+        // optional int32 numGems = 3;
         /**
          * <code>optional int32 numGems = 3;</code>
          */
@@ -14398,9 +14564,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto}
        */
       public static final class ResourceConversionConstantProto extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto)
-          ResourceConversionConstantProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements ResourceConversionConstantProtoOrBuilder {
         // Use ResourceConversionConstantProto.newBuilder() to construct.
         private ResourceConversionConstantProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -14507,6 +14672,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];
         public static final int RESOURCETYPE_FIELD_NUMBER = 1;
         private com.lvl6.proto.StructureProto.ResourceType resourceType_;
         /**
@@ -14522,6 +14688,7 @@ public final class EventStartupProto {
           return resourceType_;
         }
 
+        // optional int32 resourceAmt = 2;
         public static final int RESOURCEAMT_FIELD_NUMBER = 2;
         private int resourceAmt_;
         /**
@@ -14537,6 +14704,7 @@ public final class EventStartupProto {
           return resourceAmt_;
         }
 
+        // optional int32 numGems = 3;
         public static final int NUMGEMS_FIELD_NUMBER = 3;
         private int numGems_;
         /**
@@ -14560,8 +14728,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -14682,9 +14849,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProtoOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProtoOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_descriptor;
@@ -14815,6 +14981,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];
           private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
           /**
            * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
@@ -14850,6 +15017,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 resourceAmt = 2;
           private int resourceAmt_ ;
           /**
            * <code>optional int32 resourceAmt = 2;</code>
@@ -14882,6 +15050,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 numGems = 3;
           private int numGems_ ;
           /**
            * <code>optional int32 numGems = 3;</code>
@@ -14925,10 +15094,10 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto)
       }
 
-      public interface FileDownloadConstantProtoOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto)
-          com.google.protobuf.MessageOrBuilder {
+      public interface FileDownloadConstantProtoOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
 
+        // optional int32 fileDownloadId = 1;
         /**
          * <code>optional int32 fileDownloadId = 1;</code>
          */
@@ -14938,6 +15107,7 @@ public final class EventStartupProto {
          */
         int getFileDownloadId();
 
+        // optional string fileName = 2;
         /**
          * <code>optional string fileName = 2;</code>
          */
@@ -14952,6 +15122,7 @@ public final class EventStartupProto {
         com.google.protobuf.ByteString
             getFileNameBytes();
 
+        // optional int32 priority = 3;
         /**
          * <code>optional int32 priority = 3;</code>
          */
@@ -14961,6 +15132,7 @@ public final class EventStartupProto {
          */
         int getPriority();
 
+        // optional bool downloadOnlyOverWifi = 4;
         /**
          * <code>optional bool downloadOnlyOverWifi = 4;</code>
          */
@@ -14970,6 +15142,7 @@ public final class EventStartupProto {
          */
         boolean getDownloadOnlyOverWifi();
 
+        // optional bool useIphone6Prefix = 5;
         /**
          * <code>optional bool useIphone6Prefix = 5;</code>
          */
@@ -14983,9 +15156,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto}
        */
       public static final class FileDownloadConstantProto extends
-          com.google.protobuf.GeneratedMessage implements
-          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto)
-          FileDownloadConstantProtoOrBuilder {
+          com.google.protobuf.GeneratedMessage
+          implements FileDownloadConstantProtoOrBuilder {
         // Use FileDownloadConstantProto.newBuilder() to construct.
         private FileDownloadConstantProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
           super(builder);
@@ -15037,9 +15209,8 @@ public final class EventStartupProto {
                   break;
                 }
                 case 18: {
-                  com.google.protobuf.ByteString bs = input.readBytes();
                   bitField0_ |= 0x00000002;
-                  fileName_ = bs;
+                  fileName_ = input.readBytes();
                   break;
                 }
                 case 24: {
@@ -15097,6 +15268,7 @@ public final class EventStartupProto {
         }
 
         private int bitField0_;
+        // optional int32 fileDownloadId = 1;
         public static final int FILEDOWNLOADID_FIELD_NUMBER = 1;
         private int fileDownloadId_;
         /**
@@ -15112,6 +15284,7 @@ public final class EventStartupProto {
           return fileDownloadId_;
         }
 
+        // optional string fileName = 2;
         public static final int FILENAME_FIELD_NUMBER = 2;
         private java.lang.Object fileName_;
         /**
@@ -15154,6 +15327,7 @@ public final class EventStartupProto {
           }
         }
 
+        // optional int32 priority = 3;
         public static final int PRIORITY_FIELD_NUMBER = 3;
         private int priority_;
         /**
@@ -15169,6 +15343,7 @@ public final class EventStartupProto {
           return priority_;
         }
 
+        // optional bool downloadOnlyOverWifi = 4;
         public static final int DOWNLOADONLYOVERWIFI_FIELD_NUMBER = 4;
         private boolean downloadOnlyOverWifi_;
         /**
@@ -15184,6 +15359,7 @@ public final class EventStartupProto {
           return downloadOnlyOverWifi_;
         }
 
+        // optional bool useIphone6Prefix = 5;
         public static final int USEIPHONE6PREFIX_FIELD_NUMBER = 5;
         private boolean useIphone6Prefix_;
         /**
@@ -15209,8 +15385,7 @@ public final class EventStartupProto {
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
+          if (isInitialized != -1) return isInitialized == 1;
 
           memoizedIsInitialized = 1;
           return true;
@@ -15345,9 +15520,8 @@ public final class EventStartupProto {
          * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto}
          */
         public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto)
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProtoOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor;
@@ -15498,6 +15672,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
+          // optional int32 fileDownloadId = 1;
           private int fileDownloadId_ ;
           /**
            * <code>optional int32 fileDownloadId = 1;</code>
@@ -15530,6 +15705,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional string fileName = 2;
           private java.lang.Object fileName_ = "";
           /**
            * <code>optional string fileName = 2;</code>
@@ -15543,12 +15719,9 @@ public final class EventStartupProto {
           public java.lang.String getFileName() {
             java.lang.Object ref = fileName_;
             if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              if (bs.isValidUtf8()) {
-                fileName_ = s;
-              }
+              java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                  .toStringUtf8();
+              fileName_ = s;
               return s;
             } else {
               return (java.lang.String) ref;
@@ -15606,6 +15779,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional int32 priority = 3;
           private int priority_ ;
           /**
            * <code>optional int32 priority = 3;</code>
@@ -15638,6 +15812,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional bool downloadOnlyOverWifi = 4;
           private boolean downloadOnlyOverWifi_ ;
           /**
            * <code>optional bool downloadOnlyOverWifi = 4;</code>
@@ -15670,6 +15845,7 @@ public final class EventStartupProto {
             return this;
           }
 
+          // optional bool useIphone6Prefix = 5;
           private boolean useIphone6Prefix_ ;
           /**
            * <code>optional bool useIphone6Prefix = 5;</code>
@@ -15715,6 +15891,7 @@ public final class EventStartupProto {
 
       private int bitField0_;
       private int bitField1_;
+      // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
       private java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> inAppPurchasePackages_;
       /**
@@ -15750,6 +15927,7 @@ public final class EventStartupProto {
         return inAppPurchasePackages_.get(index);
       }
 
+      // optional int32 maxLevelForUser = 2;
       public static final int MAXLEVELFORUSER_FIELD_NUMBER = 2;
       private int maxLevelForUser_;
       /**
@@ -15765,6 +15943,7 @@ public final class EventStartupProto {
         return maxLevelForUser_;
       }
 
+      // optional int32 maxNumOfSingleStruct = 3;
       public static final int MAXNUMOFSINGLESTRUCT_FIELD_NUMBER = 3;
       private int maxNumOfSingleStruct_;
       /**
@@ -15780,6 +15959,7 @@ public final class EventStartupProto {
         return maxNumOfSingleStruct_;
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
       public static final int ANIMATEDSPRITEOFFSETS_FIELD_NUMBER = 4;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> animatedSpriteOffsets_;
       /**
@@ -15815,6 +15995,7 @@ public final class EventStartupProto {
         return animatedSpriteOffsets_.get(index);
       }
 
+      // optional int32 minNameLength = 5;
       public static final int MINNAMELENGTH_FIELD_NUMBER = 5;
       private int minNameLength_;
       /**
@@ -15830,6 +16011,7 @@ public final class EventStartupProto {
         return minNameLength_;
       }
 
+      // optional int32 maxNameLength = 6;
       public static final int MAXNAMELENGTH_FIELD_NUMBER = 6;
       private int maxNameLength_;
       /**
@@ -15845,6 +16027,7 @@ public final class EventStartupProto {
         return maxNameLength_;
       }
 
+      // optional int32 maxLengthOfChatString = 7;
       public static final int MAXLENGTHOFCHATSTRING_FIELD_NUMBER = 7;
       private int maxLengthOfChatString_;
       /**
@@ -15860,6 +16043,7 @@ public final class EventStartupProto {
         return maxLengthOfChatString_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;
       public static final int CLANCONSTANTS_FIELD_NUMBER = 8;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants clanConstants_;
       /**
@@ -15881,6 +16065,7 @@ public final class EventStartupProto {
         return clanConstants_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;
       public static final int DOWNLOADABLENIBCONSTANTS_FIELD_NUMBER = 9;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants_;
       /**
@@ -15902,6 +16087,7 @@ public final class EventStartupProto {
         return downloadableNibConstants_;
       }
 
+      // optional int32 numHoursBeforeReshowingGoldSale = 10;
       public static final int NUMHOURSBEFORERESHOWINGGOLDSALE_FIELD_NUMBER = 10;
       private int numHoursBeforeReshowingGoldSale_;
       /**
@@ -15917,6 +16103,7 @@ public final class EventStartupProto {
         return numHoursBeforeReshowingGoldSale_;
       }
 
+      // optional int32 levelToShowRateUsPopup = 11;
       public static final int LEVELTOSHOWRATEUSPOPUP_FIELD_NUMBER = 11;
       private int levelToShowRateUsPopup_;
       /**
@@ -15932,6 +16119,7 @@ public final class EventStartupProto {
         return levelToShowRateUsPopup_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;
       public static final int TOURAMENTCONSTANTS_FIELD_NUMBER = 12;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants_;
       /**
@@ -15953,6 +16141,7 @@ public final class EventStartupProto {
         return touramentConstants_;
       }
 
+      // optional int32 fbConnectRewardDiamonds = 13;
       public static final int FBCONNECTREWARDDIAMONDS_FIELD_NUMBER = 13;
       private int fbConnectRewardDiamonds_;
       /**
@@ -15968,6 +16157,7 @@ public final class EventStartupProto {
         return fbConnectRewardDiamonds_;
       }
 
+      // optional string faqFileName = 14;
       public static final int FAQFILENAME_FIELD_NUMBER = 14;
       private java.lang.Object faqFileName_;
       /**
@@ -16010,6 +16200,7 @@ public final class EventStartupProto {
         }
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;
       public static final int ADMINCHATUSERPROTO_FIELD_NUMBER = 15;
       private com.lvl6.proto.UserProto.MinimumUserProto adminChatUserProto_;
       /**
@@ -16031,6 +16222,7 @@ public final class EventStartupProto {
         return adminChatUserProto_;
       }
 
+      // optional int32 numBeginnerSalesAllowed = 16;
       public static final int NUMBEGINNERSALESALLOWED_FIELD_NUMBER = 16;
       private int numBeginnerSalesAllowed_;
       /**
@@ -16046,6 +16238,7 @@ public final class EventStartupProto {
         return numBeginnerSalesAllowed_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;
       public static final int USERMONSTERCONSTANTS_FIELD_NUMBER = 17;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants_;
       /**
@@ -16067,6 +16260,7 @@ public final class EventStartupProto {
         return userMonsterConstants_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;
       public static final int MONSTERCONSTANTS_FIELD_NUMBER = 18;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants_;
       /**
@@ -16088,6 +16282,7 @@ public final class EventStartupProto {
         return monsterConstants_;
       }
 
+      // optional float minutesPerGem = 19;
       public static final int MINUTESPERGEM_FIELD_NUMBER = 19;
       private float minutesPerGem_;
       /**
@@ -16111,6 +16306,7 @@ public final class EventStartupProto {
         return minutesPerGem_;
       }
 
+      // optional float gemsPerResource = 21;
       public static final int GEMSPERRESOURCE_FIELD_NUMBER = 21;
       private float gemsPerResource_;
       /**
@@ -16134,6 +16330,7 @@ public final class EventStartupProto {
         return gemsPerResource_;
       }
 
+      // optional int32 pvpRequiredMinLvl = 20 [deprecated = true];
       public static final int PVPREQUIREDMINLVL_FIELD_NUMBER = 20;
       private int pvpRequiredMinLvl_;
       /**
@@ -16157,6 +16354,7 @@ public final class EventStartupProto {
         return pvpRequiredMinLvl_;
       }
 
+      // optional float monsterDmgMultiplier = 31 [deprecated = true];
       public static final int MONSTERDMGMULTIPLIER_FIELD_NUMBER = 31;
       private float monsterDmgMultiplier_;
       /**
@@ -16180,6 +16378,7 @@ public final class EventStartupProto {
         return monsterDmgMultiplier_;
       }
 
+      // optional float continueBattleGemCostMultiplier = 22;
       public static final int CONTINUEBATTLEGEMCOSTMULTIPLIER_FIELD_NUMBER = 22;
       private float continueBattleGemCostMultiplier_;
       /**
@@ -16203,6 +16402,7 @@ public final class EventStartupProto {
         return continueBattleGemCostMultiplier_;
       }
 
+      // optional float battleRunAwayBasePercent = 28;
       public static final int BATTLERUNAWAYBASEPERCENT_FIELD_NUMBER = 28;
       private float battleRunAwayBasePercent_;
       /**
@@ -16218,6 +16418,7 @@ public final class EventStartupProto {
         return battleRunAwayBasePercent_;
       }
 
+      // optional float battleRunAwayIncrement = 29;
       public static final int BATTLERUNAWAYINCREMENT_FIELD_NUMBER = 29;
       private float battleRunAwayIncrement_;
       /**
@@ -16233,6 +16434,7 @@ public final class EventStartupProto {
         return battleRunAwayIncrement_;
       }
 
+      // optional bool addAllFbFriends = 23;
       public static final int ADDALLFBFRIENDS_FIELD_NUMBER = 23;
       private boolean addAllFbFriends_;
       /**
@@ -16248,6 +16450,7 @@ public final class EventStartupProto {
         return addAllFbFriends_;
       }
 
+      // optional bool facebookPopUp = 36;
       public static final int FACEBOOKPOPUP_FIELD_NUMBER = 36;
       private boolean facebookPopUp_;
       /**
@@ -16263,6 +16466,7 @@ public final class EventStartupProto {
         return facebookPopUp_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;
       public static final int MINITUTS_FIELD_NUMBER = 24;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts_;
       /**
@@ -16284,6 +16488,7 @@ public final class EventStartupProto {
         return miniTuts_;
       }
 
+      // optional int32 maxObstacles = 25;
       public static final int MAXOBSTACLES_FIELD_NUMBER = 25;
       private int maxObstacles_;
       /**
@@ -16299,6 +16504,7 @@ public final class EventStartupProto {
         return maxObstacles_;
       }
 
+      // optional int32 minutesPerObstacle = 26;
       public static final int MINUTESPEROBSTACLE_FIELD_NUMBER = 26;
       private int minutesPerObstacle_;
       /**
@@ -16322,6 +16528,7 @@ public final class EventStartupProto {
         return minutesPerObstacle_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;
       public static final int TASKMAPCONSTANTS_FIELD_NUMBER = 27;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants_;
       /**
@@ -16343,6 +16550,7 @@ public final class EventStartupProto {
         return taskMapConstants_;
       }
 
+      // optional int32 maxMinutesForFreeSpeedUp = 30;
       public static final int MAXMINUTESFORFREESPEEDUP_FIELD_NUMBER = 30;
       private int maxMinutesForFreeSpeedUp_;
       /**
@@ -16368,6 +16576,7 @@ public final class EventStartupProto {
         return maxMinutesForFreeSpeedUp_;
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;
       public static final int CLANHELPCONSTANTS_FIELD_NUMBER = 32;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> clanHelpConstants_;
       /**
@@ -16403,6 +16612,7 @@ public final class EventStartupProto {
         return clanHelpConstants_.get(index);
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants pvpConstant = 33;
       public static final int PVPCONSTANT_FIELD_NUMBER = 33;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants pvpConstant_;
       /**
@@ -16424,6 +16634,7 @@ public final class EventStartupProto {
         return pvpConstant_;
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto sucp = 34;
       public static final int SUCP_FIELD_NUMBER = 34;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProto> sucp_;
       /**
@@ -16459,6 +16670,7 @@ public final class EventStartupProto {
         return sucp_.get(index);
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto rccp = 35;
       public static final int RCCP_FIELD_NUMBER = 35;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto> rccp_;
       /**
@@ -16494,6 +16706,7 @@ public final class EventStartupProto {
         return rccp_.get(index);
       }
 
+      // optional bool displayRarity = 37;
       public static final int DISPLAYRARITY_FIELD_NUMBER = 37;
       private boolean displayRarity_;
       /**
@@ -16519,6 +16732,7 @@ public final class EventStartupProto {
         return displayRarity_;
       }
 
+      // optional int32 taskIdOfFirstSkill = 38;
       public static final int TASKIDOFFIRSTSKILL_FIELD_NUMBER = 38;
       private int taskIdOfFirstSkill_;
       /**
@@ -16534,6 +16748,7 @@ public final class EventStartupProto {
         return taskIdOfFirstSkill_;
       }
 
+      // optional int32 minsToResolicitTeamDonation = 39;
       public static final int MINSTORESOLICITTEAMDONATION_FIELD_NUMBER = 39;
       private int minsToResolicitTeamDonation_;
       /**
@@ -16549,6 +16764,7 @@ public final class EventStartupProto {
         return minsToResolicitTeamDonation_;
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;
       public static final int FILEDOWNLOADPROTO_FIELD_NUMBER = 40;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> fileDownloadProto_;
       /**
@@ -16584,6 +16800,7 @@ public final class EventStartupProto {
         return fileDownloadProto_.get(index);
       }
 
+      // optional int32 taskIdForUpgradeTutorial = 41;
       public static final int TASKIDFORUPGRADETUTORIAL_FIELD_NUMBER = 41;
       private int taskIdForUpgradeTutorial_;
       /**
@@ -16645,8 +16862,7 @@ public final class EventStartupProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         memoizedIsInitialized = 1;
         return true;
@@ -17033,9 +17249,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants)
-          com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstantsOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor;
@@ -17793,6 +18008,7 @@ public final class EventStartupProto {
         private int bitField0_;
         private int bitField1_;
 
+        // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
         private java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> inAppPurchasePackages_ =
           java.util.Collections.emptyList();
         private void ensureInAppPurchasePackagesIsMutable() {
@@ -17934,8 +18150,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> values) {
           if (inAppPurchasePackagesBuilder_ == null) {
             ensureInAppPurchasePackagesIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, inAppPurchasePackages_);
+            super.addAll(values, inAppPurchasePackages_);
             onChanged();
           } else {
             inAppPurchasePackagesBuilder_.addAllMessages(values);
@@ -18033,6 +18248,7 @@ public final class EventStartupProto {
           return inAppPurchasePackagesBuilder_;
         }
 
+        // optional int32 maxLevelForUser = 2;
         private int maxLevelForUser_ ;
         /**
          * <code>optional int32 maxLevelForUser = 2;</code>
@@ -18065,6 +18281,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 maxNumOfSingleStruct = 3;
         private int maxNumOfSingleStruct_ ;
         /**
          * <code>optional int32 maxNumOfSingleStruct = 3;</code>
@@ -18097,6 +18314,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
         private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> animatedSpriteOffsets_ =
           java.util.Collections.emptyList();
         private void ensureAnimatedSpriteOffsetsIsMutable() {
@@ -18238,8 +18456,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> values) {
           if (animatedSpriteOffsetsBuilder_ == null) {
             ensureAnimatedSpriteOffsetsIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, animatedSpriteOffsets_);
+            super.addAll(values, animatedSpriteOffsets_);
             onChanged();
           } else {
             animatedSpriteOffsetsBuilder_.addAllMessages(values);
@@ -18337,6 +18554,7 @@ public final class EventStartupProto {
           return animatedSpriteOffsetsBuilder_;
         }
 
+        // optional int32 minNameLength = 5;
         private int minNameLength_ ;
         /**
          * <code>optional int32 minNameLength = 5;</code>
@@ -18369,6 +18587,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 maxNameLength = 6;
         private int maxNameLength_ ;
         /**
          * <code>optional int32 maxNameLength = 6;</code>
@@ -18401,6 +18620,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 maxLengthOfChatString = 7;
         private int maxLengthOfChatString_ ;
         /**
          * <code>optional int32 maxLengthOfChatString = 7;</code>
@@ -18433,6 +18653,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants clanConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder> clanConstantsBuilder_;
@@ -18541,7 +18762,7 @@ public final class EventStartupProto {
           if (clanConstantsBuilder_ == null) {
             clanConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder>(
-                    getClanConstants(),
+                    clanConstants_,
                     getParentForChildren(),
                     isClean());
             clanConstants_ = null;
@@ -18549,6 +18770,7 @@ public final class EventStartupProto {
           return clanConstantsBuilder_;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder> downloadableNibConstantsBuilder_;
@@ -18657,7 +18879,7 @@ public final class EventStartupProto {
           if (downloadableNibConstantsBuilder_ == null) {
             downloadableNibConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder>(
-                    getDownloadableNibConstants(),
+                    downloadableNibConstants_,
                     getParentForChildren(),
                     isClean());
             downloadableNibConstants_ = null;
@@ -18665,6 +18887,7 @@ public final class EventStartupProto {
           return downloadableNibConstantsBuilder_;
         }
 
+        // optional int32 numHoursBeforeReshowingGoldSale = 10;
         private int numHoursBeforeReshowingGoldSale_ ;
         /**
          * <code>optional int32 numHoursBeforeReshowingGoldSale = 10;</code>
@@ -18697,6 +18920,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 levelToShowRateUsPopup = 11;
         private int levelToShowRateUsPopup_ ;
         /**
          * <code>optional int32 levelToShowRateUsPopup = 11;</code>
@@ -18729,6 +18953,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder> touramentConstantsBuilder_;
@@ -18837,7 +19062,7 @@ public final class EventStartupProto {
           if (touramentConstantsBuilder_ == null) {
             touramentConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder>(
-                    getTouramentConstants(),
+                    touramentConstants_,
                     getParentForChildren(),
                     isClean());
             touramentConstants_ = null;
@@ -18845,6 +19070,7 @@ public final class EventStartupProto {
           return touramentConstantsBuilder_;
         }
 
+        // optional int32 fbConnectRewardDiamonds = 13;
         private int fbConnectRewardDiamonds_ ;
         /**
          * <code>optional int32 fbConnectRewardDiamonds = 13;</code>
@@ -18877,6 +19103,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional string faqFileName = 14;
         private java.lang.Object faqFileName_ = "";
         /**
          * <code>optional string faqFileName = 14;</code>
@@ -18890,12 +19117,9 @@ public final class EventStartupProto {
         public java.lang.String getFaqFileName() {
           java.lang.Object ref = faqFileName_;
           if (!(ref instanceof java.lang.String)) {
-            com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            if (bs.isValidUtf8()) {
-              faqFileName_ = s;
-            }
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            faqFileName_ = s;
             return s;
           } else {
             return (java.lang.String) ref;
@@ -18953,6 +19177,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;
         private com.lvl6.proto.UserProto.MinimumUserProto adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> adminChatUserProtoBuilder_;
@@ -19061,7 +19286,7 @@ public final class EventStartupProto {
           if (adminChatUserProtoBuilder_ == null) {
             adminChatUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                    getAdminChatUserProto(),
+                    adminChatUserProto_,
                     getParentForChildren(),
                     isClean());
             adminChatUserProto_ = null;
@@ -19069,6 +19294,7 @@ public final class EventStartupProto {
           return adminChatUserProtoBuilder_;
         }
 
+        // optional int32 numBeginnerSalesAllowed = 16;
         private int numBeginnerSalesAllowed_ ;
         /**
          * <code>optional int32 numBeginnerSalesAllowed = 16;</code>
@@ -19101,6 +19327,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder> userMonsterConstantsBuilder_;
@@ -19209,7 +19436,7 @@ public final class EventStartupProto {
           if (userMonsterConstantsBuilder_ == null) {
             userMonsterConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder>(
-                    getUserMonsterConstants(),
+                    userMonsterConstants_,
                     getParentForChildren(),
                     isClean());
             userMonsterConstants_ = null;
@@ -19217,6 +19444,7 @@ public final class EventStartupProto {
           return userMonsterConstantsBuilder_;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder> monsterConstantsBuilder_;
@@ -19325,7 +19553,7 @@ public final class EventStartupProto {
           if (monsterConstantsBuilder_ == null) {
             monsterConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder>(
-                    getMonsterConstants(),
+                    monsterConstants_,
                     getParentForChildren(),
                     isClean());
             monsterConstants_ = null;
@@ -19333,6 +19561,7 @@ public final class EventStartupProto {
           return monsterConstantsBuilder_;
         }
 
+        // optional float minutesPerGem = 19;
         private float minutesPerGem_ ;
         /**
          * <code>optional float minutesPerGem = 19;</code>
@@ -19381,6 +19610,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional float gemsPerResource = 21;
         private float gemsPerResource_ ;
         /**
          * <code>optional float gemsPerResource = 21;</code>
@@ -19429,6 +19659,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 pvpRequiredMinLvl = 20 [deprecated = true];
         private int pvpRequiredMinLvl_ ;
         /**
          * <code>optional int32 pvpRequiredMinLvl = 20 [deprecated = true];</code>
@@ -19477,6 +19708,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional float monsterDmgMultiplier = 31 [deprecated = true];
         private float monsterDmgMultiplier_ ;
         /**
          * <code>optional float monsterDmgMultiplier = 31 [deprecated = true];</code>
@@ -19525,6 +19757,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional float continueBattleGemCostMultiplier = 22;
         private float continueBattleGemCostMultiplier_ ;
         /**
          * <code>optional float continueBattleGemCostMultiplier = 22;</code>
@@ -19573,6 +19806,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional float battleRunAwayBasePercent = 28;
         private float battleRunAwayBasePercent_ ;
         /**
          * <code>optional float battleRunAwayBasePercent = 28;</code>
@@ -19605,6 +19839,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional float battleRunAwayIncrement = 29;
         private float battleRunAwayIncrement_ ;
         /**
          * <code>optional float battleRunAwayIncrement = 29;</code>
@@ -19637,6 +19872,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional bool addAllFbFriends = 23;
         private boolean addAllFbFriends_ ;
         /**
          * <code>optional bool addAllFbFriends = 23;</code>
@@ -19669,6 +19905,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional bool facebookPopUp = 36;
         private boolean facebookPopUp_ ;
         /**
          * <code>optional bool facebookPopUp = 36;</code>
@@ -19701,6 +19938,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder> miniTutsBuilder_;
@@ -19809,7 +20047,7 @@ public final class EventStartupProto {
           if (miniTutsBuilder_ == null) {
             miniTutsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder>(
-                    getMiniTuts(),
+                    miniTuts_,
                     getParentForChildren(),
                     isClean());
             miniTuts_ = null;
@@ -19817,6 +20055,7 @@ public final class EventStartupProto {
           return miniTutsBuilder_;
         }
 
+        // optional int32 maxObstacles = 25;
         private int maxObstacles_ ;
         /**
          * <code>optional int32 maxObstacles = 25;</code>
@@ -19849,6 +20088,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 minutesPerObstacle = 26;
         private int minutesPerObstacle_ ;
         /**
          * <code>optional int32 minutesPerObstacle = 26;</code>
@@ -19897,6 +20137,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder> taskMapConstantsBuilder_;
@@ -20005,7 +20246,7 @@ public final class EventStartupProto {
           if (taskMapConstantsBuilder_ == null) {
             taskMapConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder>(
-                    getTaskMapConstants(),
+                    taskMapConstants_,
                     getParentForChildren(),
                     isClean());
             taskMapConstants_ = null;
@@ -20013,6 +20254,7 @@ public final class EventStartupProto {
           return taskMapConstantsBuilder_;
         }
 
+        // optional int32 maxMinutesForFreeSpeedUp = 30;
         private int maxMinutesForFreeSpeedUp_ ;
         /**
          * <code>optional int32 maxMinutesForFreeSpeedUp = 30;</code>
@@ -20065,6 +20307,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;
         private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> clanHelpConstants_ =
           java.util.Collections.emptyList();
         private void ensureClanHelpConstantsIsMutable() {
@@ -20206,8 +20449,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> values) {
           if (clanHelpConstantsBuilder_ == null) {
             ensureClanHelpConstantsIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, clanHelpConstants_);
+            super.addAll(values, clanHelpConstants_);
             onChanged();
           } else {
             clanHelpConstantsBuilder_.addAllMessages(values);
@@ -20305,6 +20547,7 @@ public final class EventStartupProto {
           return clanHelpConstantsBuilder_;
         }
 
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants pvpConstant = 33;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants pvpConstant_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstantsOrBuilder> pvpConstantBuilder_;
@@ -20413,7 +20656,7 @@ public final class EventStartupProto {
           if (pvpConstantBuilder_ == null) {
             pvpConstantBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstantsOrBuilder>(
-                    getPvpConstant(),
+                    pvpConstant_,
                     getParentForChildren(),
                     isClean());
             pvpConstant_ = null;
@@ -20421,6 +20664,7 @@ public final class EventStartupProto {
           return pvpConstantBuilder_;
         }
 
+        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.SpeedUpConstantProto sucp = 34;
         private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProto> sucp_ =
           java.util.Collections.emptyList();
         private void ensureSucpIsMutable() {
@@ -20562,8 +20806,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProto> values) {
           if (sucpBuilder_ == null) {
             ensureSucpIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, sucp_);
+            super.addAll(values, sucp_);
             onChanged();
           } else {
             sucpBuilder_.addAllMessages(values);
@@ -20661,6 +20904,7 @@ public final class EventStartupProto {
           return sucpBuilder_;
         }
 
+        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto rccp = 35;
         private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto> rccp_ =
           java.util.Collections.emptyList();
         private void ensureRccpIsMutable() {
@@ -20802,8 +21046,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto> values) {
           if (rccpBuilder_ == null) {
             ensureRccpIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, rccp_);
+            super.addAll(values, rccp_);
             onChanged();
           } else {
             rccpBuilder_.addAllMessages(values);
@@ -20901,6 +21144,7 @@ public final class EventStartupProto {
           return rccpBuilder_;
         }
 
+        // optional bool displayRarity = 37;
         private boolean displayRarity_ ;
         /**
          * <code>optional bool displayRarity = 37;</code>
@@ -20953,6 +21197,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 taskIdOfFirstSkill = 38;
         private int taskIdOfFirstSkill_ ;
         /**
          * <code>optional int32 taskIdOfFirstSkill = 38;</code>
@@ -20985,6 +21230,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 minsToResolicitTeamDonation = 39;
         private int minsToResolicitTeamDonation_ ;
         /**
          * <code>optional int32 minsToResolicitTeamDonation = 39;</code>
@@ -21017,6 +21263,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto fileDownloadProto = 40;
         private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> fileDownloadProto_ =
           java.util.Collections.emptyList();
         private void ensureFileDownloadProtoIsMutable() {
@@ -21158,8 +21405,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto> values) {
           if (fileDownloadProtoBuilder_ == null) {
             ensureFileDownloadProtoIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, fileDownloadProto_);
+            super.addAll(values, fileDownloadProto_);
             onChanged();
           } else {
             fileDownloadProtoBuilder_.addAllMessages(values);
@@ -21257,6 +21503,7 @@ public final class EventStartupProto {
           return fileDownloadProtoBuilder_;
         }
 
+        // optional int32 taskIdForUpgradeTutorial = 41;
         private int taskIdForUpgradeTutorial_ ;
         /**
          * <code>optional int32 taskIdForUpgradeTutorial = 41;</code>
@@ -21300,10 +21547,10 @@ public final class EventStartupProto {
       // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
     }
 
-    public interface TutorialConstantsOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.TutorialConstants)
-        com.google.protobuf.MessageOrBuilder {
+    public interface TutorialConstantsOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
 
+      // optional int32 startingMonsterId = 1;
       /**
        * <code>optional int32 startingMonsterId = 1;</code>
        */
@@ -21313,6 +21560,7 @@ public final class EventStartupProto {
        */
       int getStartingMonsterId();
 
+      // optional int32 guideMonsterId = 16;
       /**
        * <code>optional int32 guideMonsterId = 16;</code>
        */
@@ -21322,6 +21570,7 @@ public final class EventStartupProto {
        */
       int getGuideMonsterId();
 
+      // optional int32 enemyMonsterId = 2;
       /**
        * <code>optional int32 enemyMonsterId = 2;</code>
        */
@@ -21331,6 +21580,7 @@ public final class EventStartupProto {
        */
       int getEnemyMonsterId();
 
+      // optional int32 enemyMonsterIdTwo = 15;
       /**
        * <code>optional int32 enemyMonsterIdTwo = 15;</code>
        */
@@ -21340,6 +21590,7 @@ public final class EventStartupProto {
        */
       int getEnemyMonsterIdTwo();
 
+      // optional int32 enemyBossMonsterId = 9;
       /**
        * <code>optional int32 enemyBossMonsterId = 9;</code>
        */
@@ -21349,6 +21600,7 @@ public final class EventStartupProto {
        */
       int getEnemyBossMonsterId();
 
+      // optional int32 markZMonsterId = 10;
       /**
        * <code>optional int32 markZMonsterId = 10;</code>
        */
@@ -21358,6 +21610,7 @@ public final class EventStartupProto {
        */
       int getMarkZMonsterId();
 
+      // repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;
       /**
        * <code>repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;</code>
        */
@@ -21382,6 +21635,7 @@ public final class EventStartupProto {
       com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder getTutorialStructuresOrBuilder(
           int index);
 
+      // repeated int32 structureIdsToBeBuillt = 4;
       /**
        * <code>repeated int32 structureIdsToBeBuillt = 4;</code>
        *
@@ -21407,6 +21661,7 @@ public final class EventStartupProto {
        */
       int getStructureIdsToBeBuillt(int index);
 
+      // optional int32 cityId = 5;
       /**
        * <code>optional int32 cityId = 5;</code>
        */
@@ -21416,6 +21671,7 @@ public final class EventStartupProto {
        */
       int getCityId();
 
+      // repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;
       /**
        * <code>repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;</code>
        *
@@ -21460,6 +21716,7 @@ public final class EventStartupProto {
       com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneElementsOrBuilder(
           int index);
 
+      // optional int32 cityElementIdForFirstDungeon = 7;
       /**
        * <code>optional int32 cityElementIdForFirstDungeon = 7;</code>
        */
@@ -21469,6 +21726,7 @@ public final class EventStartupProto {
        */
       int getCityElementIdForFirstDungeon();
 
+      // optional int32 cityElementIdForSecondDungeon = 8;
       /**
        * <code>optional int32 cityElementIdForSecondDungeon = 8;</code>
        */
@@ -21478,6 +21736,7 @@ public final class EventStartupProto {
        */
       int getCityElementIdForSecondDungeon();
 
+      // optional int32 cashInit = 11;
       /**
        * <code>optional int32 cashInit = 11;</code>
        */
@@ -21487,6 +21746,7 @@ public final class EventStartupProto {
        */
       int getCashInit();
 
+      // optional int32 oilInit = 12;
       /**
        * <code>optional int32 oilInit = 12;</code>
        */
@@ -21496,6 +21756,7 @@ public final class EventStartupProto {
        */
       int getOilInit();
 
+      // optional int32 gemsInit = 13;
       /**
        * <code>optional int32 gemsInit = 13;</code>
        */
@@ -21505,6 +21766,7 @@ public final class EventStartupProto {
        */
       int getGemsInit();
 
+      // repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;
       /**
        * <code>repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;</code>
        *
@@ -21558,9 +21820,8 @@ public final class EventStartupProto {
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.TutorialConstants}
      */
     public static final class TutorialConstants extends
-        com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.TutorialConstants)
-        TutorialConstantsOrBuilder {
+        com.google.protobuf.GeneratedMessage
+        implements TutorialConstantsOrBuilder {
       // Use TutorialConstants.newBuilder() to construct.
       private TutorialConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
@@ -21763,6 +22024,7 @@ public final class EventStartupProto {
       }
 
       private int bitField0_;
+      // optional int32 startingMonsterId = 1;
       public static final int STARTINGMONSTERID_FIELD_NUMBER = 1;
       private int startingMonsterId_;
       /**
@@ -21778,6 +22040,7 @@ public final class EventStartupProto {
         return startingMonsterId_;
       }
 
+      // optional int32 guideMonsterId = 16;
       public static final int GUIDEMONSTERID_FIELD_NUMBER = 16;
       private int guideMonsterId_;
       /**
@@ -21793,6 +22056,7 @@ public final class EventStartupProto {
         return guideMonsterId_;
       }
 
+      // optional int32 enemyMonsterId = 2;
       public static final int ENEMYMONSTERID_FIELD_NUMBER = 2;
       private int enemyMonsterId_;
       /**
@@ -21808,6 +22072,7 @@ public final class EventStartupProto {
         return enemyMonsterId_;
       }
 
+      // optional int32 enemyMonsterIdTwo = 15;
       public static final int ENEMYMONSTERIDTWO_FIELD_NUMBER = 15;
       private int enemyMonsterIdTwo_;
       /**
@@ -21823,6 +22088,7 @@ public final class EventStartupProto {
         return enemyMonsterIdTwo_;
       }
 
+      // optional int32 enemyBossMonsterId = 9;
       public static final int ENEMYBOSSMONSTERID_FIELD_NUMBER = 9;
       private int enemyBossMonsterId_;
       /**
@@ -21838,6 +22104,7 @@ public final class EventStartupProto {
         return enemyBossMonsterId_;
       }
 
+      // optional int32 markZMonsterId = 10;
       public static final int MARKZMONSTERID_FIELD_NUMBER = 10;
       private int markZMonsterId_;
       /**
@@ -21853,6 +22120,7 @@ public final class EventStartupProto {
         return markZMonsterId_;
       }
 
+      // repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;
       public static final int TUTORIALSTRUCTURES_FIELD_NUMBER = 3;
       private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> tutorialStructures_;
       /**
@@ -21888,6 +22156,7 @@ public final class EventStartupProto {
         return tutorialStructures_.get(index);
       }
 
+      // repeated int32 structureIdsToBeBuillt = 4;
       public static final int STRUCTUREIDSTOBEBUILLT_FIELD_NUMBER = 4;
       private java.util.List<java.lang.Integer> structureIdsToBeBuillt_;
       /**
@@ -21922,6 +22191,7 @@ public final class EventStartupProto {
         return structureIdsToBeBuillt_.get(index);
       }
 
+      // optional int32 cityId = 5;
       public static final int CITYID_FIELD_NUMBER = 5;
       private int cityId_;
       /**
@@ -21937,6 +22207,7 @@ public final class EventStartupProto {
         return cityId_;
       }
 
+      // repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;
       public static final int CITYONEELEMENTS_FIELD_NUMBER = 6;
       private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOneElements_;
       /**
@@ -21992,6 +22263,7 @@ public final class EventStartupProto {
         return cityOneElements_.get(index);
       }
 
+      // optional int32 cityElementIdForFirstDungeon = 7;
       public static final int CITYELEMENTIDFORFIRSTDUNGEON_FIELD_NUMBER = 7;
       private int cityElementIdForFirstDungeon_;
       /**
@@ -22007,6 +22279,7 @@ public final class EventStartupProto {
         return cityElementIdForFirstDungeon_;
       }
 
+      // optional int32 cityElementIdForSecondDungeon = 8;
       public static final int CITYELEMENTIDFORSECONDDUNGEON_FIELD_NUMBER = 8;
       private int cityElementIdForSecondDungeon_;
       /**
@@ -22022,6 +22295,7 @@ public final class EventStartupProto {
         return cityElementIdForSecondDungeon_;
       }
 
+      // optional int32 cashInit = 11;
       public static final int CASHINIT_FIELD_NUMBER = 11;
       private int cashInit_;
       /**
@@ -22037,6 +22311,7 @@ public final class EventStartupProto {
         return cashInit_;
       }
 
+      // optional int32 oilInit = 12;
       public static final int OILINIT_FIELD_NUMBER = 12;
       private int oilInit_;
       /**
@@ -22052,6 +22327,7 @@ public final class EventStartupProto {
         return oilInit_;
       }
 
+      // optional int32 gemsInit = 13;
       public static final int GEMSINIT_FIELD_NUMBER = 13;
       private int gemsInit_;
       /**
@@ -22067,6 +22343,7 @@ public final class EventStartupProto {
         return gemsInit_;
       }
 
+      // repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;
       public static final int TUTORIALOBSTACLES_FIELD_NUMBER = 14;
       private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_;
       /**
@@ -22148,8 +22425,7 @@ public final class EventStartupProto {
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         memoizedIsInitialized = 1;
         return true;
@@ -22366,9 +22642,8 @@ public final class EventStartupProto {
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.TutorialConstants}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.TutorialConstants)
-          com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstantsOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstantsOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor;
@@ -22723,6 +22998,7 @@ public final class EventStartupProto {
         }
         private int bitField0_;
 
+        // optional int32 startingMonsterId = 1;
         private int startingMonsterId_ ;
         /**
          * <code>optional int32 startingMonsterId = 1;</code>
@@ -22755,6 +23031,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 guideMonsterId = 16;
         private int guideMonsterId_ ;
         /**
          * <code>optional int32 guideMonsterId = 16;</code>
@@ -22787,6 +23064,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 enemyMonsterId = 2;
         private int enemyMonsterId_ ;
         /**
          * <code>optional int32 enemyMonsterId = 2;</code>
@@ -22819,6 +23097,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 enemyMonsterIdTwo = 15;
         private int enemyMonsterIdTwo_ ;
         /**
          * <code>optional int32 enemyMonsterIdTwo = 15;</code>
@@ -22851,6 +23130,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 enemyBossMonsterId = 9;
         private int enemyBossMonsterId_ ;
         /**
          * <code>optional int32 enemyBossMonsterId = 9;</code>
@@ -22883,6 +23163,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 markZMonsterId = 10;
         private int markZMonsterId_ ;
         /**
          * <code>optional int32 markZMonsterId = 10;</code>
@@ -22915,6 +23196,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;
         private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> tutorialStructures_ =
           java.util.Collections.emptyList();
         private void ensureTutorialStructuresIsMutable() {
@@ -23056,8 +23338,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.StructureProto.TutorialStructProto> values) {
           if (tutorialStructuresBuilder_ == null) {
             ensureTutorialStructuresIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, tutorialStructures_);
+            super.addAll(values, tutorialStructures_);
             onChanged();
           } else {
             tutorialStructuresBuilder_.addAllMessages(values);
@@ -23155,6 +23436,7 @@ public final class EventStartupProto {
           return tutorialStructuresBuilder_;
         }
 
+        // repeated int32 structureIdsToBeBuillt = 4;
         private java.util.List<java.lang.Integer> structureIdsToBeBuillt_ = java.util.Collections.emptyList();
         private void ensureStructureIdsToBeBuilltIsMutable() {
           if (!((bitField0_ & 0x00000080) == 0x00000080)) {
@@ -23230,8 +23512,7 @@ public final class EventStartupProto {
         public Builder addAllStructureIdsToBeBuillt(
             java.lang.Iterable<? extends java.lang.Integer> values) {
           ensureStructureIdsToBeBuilltIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, structureIdsToBeBuillt_);
+          super.addAll(values, structureIdsToBeBuillt_);
           onChanged();
           return this;
         }
@@ -23249,6 +23530,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 cityId = 5;
         private int cityId_ ;
         /**
          * <code>optional int32 cityId = 5;</code>
@@ -23281,6 +23563,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;
         private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOneElements_ =
           java.util.Collections.emptyList();
         private void ensureCityOneElementsIsMutable() {
@@ -23462,8 +23745,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.CityProto.CityElementProto> values) {
           if (cityOneElementsBuilder_ == null) {
             ensureCityOneElementsIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, cityOneElements_);
+            super.addAll(values, cityOneElements_);
             onChanged();
           } else {
             cityOneElementsBuilder_.addAllMessages(values);
@@ -23593,6 +23875,7 @@ public final class EventStartupProto {
           return cityOneElementsBuilder_;
         }
 
+        // optional int32 cityElementIdForFirstDungeon = 7;
         private int cityElementIdForFirstDungeon_ ;
         /**
          * <code>optional int32 cityElementIdForFirstDungeon = 7;</code>
@@ -23625,6 +23908,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 cityElementIdForSecondDungeon = 8;
         private int cityElementIdForSecondDungeon_ ;
         /**
          * <code>optional int32 cityElementIdForSecondDungeon = 8;</code>
@@ -23657,6 +23941,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 cashInit = 11;
         private int cashInit_ ;
         /**
          * <code>optional int32 cashInit = 11;</code>
@@ -23689,6 +23974,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 oilInit = 12;
         private int oilInit_ ;
         /**
          * <code>optional int32 oilInit = 12;</code>
@@ -23721,6 +24007,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // optional int32 gemsInit = 13;
         private int gemsInit_ ;
         /**
          * <code>optional int32 gemsInit = 13;</code>
@@ -23753,6 +24040,7 @@ public final class EventStartupProto {
           return this;
         }
 
+        // repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;
         private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_ =
           java.util.Collections.emptyList();
         private void ensureTutorialObstaclesIsMutable() {
@@ -23944,8 +24232,7 @@ public final class EventStartupProto {
             java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MinimumObstacleProto> values) {
           if (tutorialObstaclesBuilder_ == null) {
             ensureTutorialObstaclesIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, tutorialObstacles_);
+            super.addAll(values, tutorialObstacles_);
             onChanged();
           } else {
             tutorialObstaclesBuilder_.addAllMessages(values);
@@ -24095,6 +24382,7 @@ public final class EventStartupProto {
     }
 
     private int bitField0_;
+    // optional int64 serverTimeMillis = 1;
     public static final int SERVERTIMEMILLIS_FIELD_NUMBER = 1;
     private long serverTimeMillis_;
     /**
@@ -24110,6 +24398,7 @@ public final class EventStartupProto {
       return serverTimeMillis_;
     }
 
+    // optional .com.lvl6.proto.FullUserProto sender = 2;
     public static final int SENDER_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.FullUserProto sender_;
     /**
@@ -24131,6 +24420,7 @@ public final class EventStartupProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.StartupResponseProto.StartupStatus startupStatus = 3;
     public static final int STARTUPSTATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus startupStatus_;
     /**
@@ -24146,6 +24436,7 @@ public final class EventStartupProto {
       return startupStatus_;
     }
 
+    // optional .com.lvl6.proto.StartupResponseProto.UpdateStatus updateStatus = 4;
     public static final int UPDATESTATUS_FIELD_NUMBER = 4;
     private com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus updateStatus_;
     /**
@@ -24161,6 +24452,7 @@ public final class EventStartupProto {
       return updateStatus_;
     }
 
+    // optional .com.lvl6.proto.StartupResponseProto.StartupConstants startupConstants = 5;
     public static final int STARTUPCONSTANTS_FIELD_NUMBER = 5;
     private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants startupConstants_;
     /**
@@ -24182,6 +24474,7 @@ public final class EventStartupProto {
       return startupConstants_;
     }
 
+    // optional .com.lvl6.proto.StartupResponseProto.TutorialConstants tutorialConstants = 34;
     public static final int TUTORIALCONSTANTS_FIELD_NUMBER = 34;
     private com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants tutorialConstants_;
     /**
@@ -24203,6 +24496,7 @@ public final class EventStartupProto {
       return tutorialConstants_;
     }
 
+    // repeated .com.lvl6.proto.FullUserQuestProto userQuests = 6;
     public static final int USERQUESTS_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> userQuests_;
     /**
@@ -24258,6 +24552,7 @@ public final class EventStartupProto {
       return userQuests_.get(index);
     }
 
+    // repeated int32 redeemedQuestIds = 27;
     public static final int REDEEMEDQUESTIDS_FIELD_NUMBER = 27;
     private java.util.List<java.lang.Integer> redeemedQuestIds_;
     /**
@@ -24280,6 +24575,7 @@ public final class EventStartupProto {
       return redeemedQuestIds_.get(index);
     }
 
+    // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 7;
     public static final int USERCLANINFO_FIELD_NUMBER = 7;
     private java.util.List<com.lvl6.proto.ClanProto.FullUserClanProto> userClanInfo_;
     /**
@@ -24315,6 +24611,7 @@ public final class EventStartupProto {
       return userClanInfo_.get(index);
     }
 
+    // repeated int32 completedTaskIds = 8 [deprecated = true];
     public static final int COMPLETEDTASKIDS_FIELD_NUMBER = 8;
     private java.util.List<java.lang.Integer> completedTaskIds_;
     /**
@@ -24337,6 +24634,7 @@ public final class EventStartupProto {
       return completedTaskIds_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;
     public static final int COMPLETEDTASKS_FIELD_NUMBER = 46;
     private java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> completedTasks_;
     /**
@@ -24372,6 +24670,7 @@ public final class EventStartupProto {
       return completedTasks_.get(index);
     }
 
+    // optional string appStoreURL = 9;
     public static final int APPSTOREURL_FIELD_NUMBER = 9;
     private java.lang.Object appStoreURL_;
     /**
@@ -24414,6 +24713,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional string reviewPageURL = 10;
     public static final int REVIEWPAGEURL_FIELD_NUMBER = 10;
     private java.lang.Object reviewPageURL_;
     /**
@@ -24456,6 +24756,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional string reviewPageConfirmationMessage = 11;
     public static final int REVIEWPAGECONFIRMATIONMESSAGE_FIELD_NUMBER = 11;
     private java.lang.Object reviewPageConfirmationMessage_;
     /**
@@ -24498,6 +24799,7 @@ public final class EventStartupProto {
       }
     }
 
+    // optional bool playerHasBoughtInAppPurchase = 12;
     public static final int PLAYERHASBOUGHTINAPPPURCHASE_FIELD_NUMBER = 12;
     private boolean playerHasBoughtInAppPurchase_;
     /**
@@ -24513,6 +24815,7 @@ public final class EventStartupProto {
       return playerHasBoughtInAppPurchase_;
     }
 
+    // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 13;
     public static final int ATTACKNOTIFICATIONS_FIELD_NUMBER = 13;
     private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> attackNotifications_;
     /**
@@ -24548,6 +24851,7 @@ public final class EventStartupProto {
       return attackNotifications_.get(index);
     }
 
+    // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 14;
     public static final int REFERRALNOTIFICATIONS_FIELD_NUMBER = 14;
     private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> referralNotifications_;
     /**
@@ -24583,12 +24887,13 @@ public final class EventStartupProto {
       return referralNotifications_.get(index);
     }
 
+    // repeated string noticesToPlayers = 15;
     public static final int NOTICESTOPLAYERS_FIELD_NUMBER = 15;
     private com.google.protobuf.LazyStringList noticesToPlayers_;
     /**
      * <code>repeated string noticesToPlayers = 15;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getNoticesToPlayersList() {
       return noticesToPlayers_;
     }
@@ -24612,6 +24917,7 @@ public final class EventStartupProto {
       return noticesToPlayers_.getByteString(index);
     }
 
+    // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 16;
     public static final int GLOBALCHATS_FIELD_NUMBER = 16;
     private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> globalChats_;
     /**
@@ -24647,6 +24953,7 @@ public final class EventStartupProto {
       return globalChats_.get(index);
     }
 
+    // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];
     public static final int CLANCHATS_FIELD_NUMBER = 17;
     private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> clanChats_;
     /**
@@ -24682,6 +24989,7 @@ public final class EventStartupProto {
       return clanChats_.get(index);
     }
 
+    // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 18;
     public static final int PCPP_FIELD_NUMBER = 18;
     private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> pcpp_;
     /**
@@ -24737,6 +25045,7 @@ public final class EventStartupProto {
       return pcpp_.get(index);
     }
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 19;
     public static final int USERSMONSTERS_FIELD_NUMBER = 19;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> usersMonsters_;
     /**
@@ -24772,6 +25081,7 @@ public final class EventStartupProto {
       return usersMonsters_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 20;
     public static final int MONSTERSHEALING_FIELD_NUMBER = 20;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> monstersHealing_;
     /**
@@ -24807,6 +25117,7 @@ public final class EventStartupProto {
       return monstersHealing_.get(index);
     }
 
+    // optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;
     public static final int ENHANCEMENTS_FIELD_NUMBER = 21;
     private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto enhancements_;
     /**
@@ -24828,6 +25139,7 @@ public final class EventStartupProto {
       return enhancements_;
     }
 
+    // optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;
     public static final int EVOLUTION_FIELD_NUMBER = 29;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto evolution_;
     /**
@@ -24849,6 +25161,7 @@ public final class EventStartupProto {
       return evolution_;
     }
 
+    // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 22;
     public static final int RAREBOOSTERPURCHASES_FIELD_NUMBER = 22;
     private java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> rareBoosterPurchases_;
     /**
@@ -24884,6 +25197,7 @@ public final class EventStartupProto {
       return rareBoosterPurchases_.get(index);
     }
 
+    // optional string kabamNaid = 23;
     public static final int KABAMNAID_FIELD_NUMBER = 23;
     private java.lang.Object kabamNaid_;
     /**
@@ -24926,6 +25240,7 @@ public final class EventStartupProto {
       }
     }
 
+    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesToMeForSlots = 24;
     public static final int INVITESTOMEFORSLOTS_FIELD_NUMBER = 24;
     private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesToMeForSlots_;
     /**
@@ -24986,6 +25301,7 @@ public final class EventStartupProto {
       return invitesToMeForSlots_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;
     public static final int INVITESFROMMEFORSLOTS_FIELD_NUMBER = 25;
     private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesFromMeForSlots_;
     /**
@@ -25046,6 +25362,7 @@ public final class EventStartupProto {
       return invitesFromMeForSlots_.get(index);
     }
 
+    // optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;
     public static final int STATICDATASTUFFPROTO_FIELD_NUMBER = 26;
     private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuffProto_;
     /**
@@ -25067,6 +25384,7 @@ public final class EventStartupProto {
       return staticDataStuffProto_;
     }
 
+    // repeated int32 taskIdForCurrentCityBoss = 28;
     public static final int TASKIDFORCURRENTCITYBOSS_FIELD_NUMBER = 28;
     private java.util.List<java.lang.Integer> taskIdForCurrentCityBoss_;
     /**
@@ -25104,6 +25422,7 @@ public final class EventStartupProto {
       return taskIdForCurrentCityBoss_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserPersistentEventProto userEvents = 30;
     public static final int USEREVENTS_FIELD_NUMBER = 30;
     private java.util.List<com.lvl6.proto.TaskProto.UserPersistentEventProto> userEvents_;
     /**
@@ -25159,6 +25478,7 @@ public final class EventStartupProto {
       return userEvents_.get(index);
     }
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;
     public static final int CURRAIDCLANINFO_FIELD_NUMBER = 31;
     private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto curRaidClanInfo_;
     /**
@@ -25192,6 +25512,7 @@ public final class EventStartupProto {
       return curRaidClanInfo_;
     }
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
     public static final int CURRAIDCLANUSERINFO_FIELD_NUMBER = 32;
     private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> curRaidClanUserInfo_;
     /**
@@ -25227,6 +25548,7 @@ public final class EventStartupProto {
       return curRaidClanUserInfo_.get(index);
     }
 
+    // repeated .com.lvl6.proto.PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
     public static final int RAIDSTAGEHISTORY_FIELD_NUMBER = 33;
     private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto> raidStageHistory_;
     /**
@@ -25262,6 +25584,7 @@ public final class EventStartupProto {
       return raidStageHistory_.get(index);
     }
 
+    // repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 35;
     public static final int RECENTNBATTLES_FIELD_NUMBER = 35;
     private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_;
     /**
@@ -25317,6 +25640,7 @@ public final class EventStartupProto {
       return recentNBattles_.get(index);
     }
 
+    // optional .com.lvl6.proto.MinimumUserTaskProto curTask = 36;
     public static final int CURTASK_FIELD_NUMBER = 36;
     private com.lvl6.proto.TaskProto.MinimumUserTaskProto curTask_;
     /**
@@ -25350,6 +25674,7 @@ public final class EventStartupProto {
       return curTask_;
     }
 
+    // repeated .com.lvl6.proto.TaskStageProto curTaskStages = 37;
     public static final int CURTASKSTAGES_FIELD_NUMBER = 37;
     private java.util.List<com.lvl6.proto.TaskProto.TaskStageProto> curTaskStages_;
     /**
@@ -25385,6 +25710,7 @@ public final class EventStartupProto {
       return curTaskStages_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserAchievementProto userAchievements = 38;
     public static final int USERACHIEVEMENTS_FIELD_NUMBER = 38;
     private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> userAchievements_;
     /**
@@ -25420,6 +25746,7 @@ public final class EventStartupProto {
       return userAchievements_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserMiniJobProto userMiniJobProtos = 39;
     public static final int USERMINIJOBPROTOS_FIELD_NUMBER = 39;
     private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> userMiniJobProtos_;
     /**
@@ -25455,6 +25782,7 @@ public final class EventStartupProto {
       return userMiniJobProtos_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserItemProto userItems = 40;
     public static final int USERITEMS_FIELD_NUMBER = 40;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> userItems_;
     /**
@@ -25490,6 +25818,7 @@ public final class EventStartupProto {
       return userItems_.get(index);
     }
 
+    // repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];
     public static final int CLANHELPINGS_FIELD_NUMBER = 41;
     private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelpings_;
     /**
@@ -25525,6 +25854,7 @@ public final class EventStartupProto {
       return clanHelpings_.get(index);
     }
 
+    // repeated .com.lvl6.proto.ClanInviteProto clanInvites = 42;
     public static final int CLANINVITES_FIELD_NUMBER = 42;
     private java.util.List<com.lvl6.proto.ClanProto.ClanInviteProto> clanInvites_;
     /**
@@ -25560,6 +25890,7 @@ public final class EventStartupProto {
       return clanInvites_.get(index);
     }
 
+    // optional .com.lvl6.proto.ClanDataProto clanData = 43;
     public static final int CLANDATA_FIELD_NUMBER = 43;
     private com.lvl6.proto.ClanProto.ClanDataProto clanData_;
     /**
@@ -25581,6 +25912,7 @@ public final class EventStartupProto {
       return clanData_;
     }
 
+    // repeated .com.lvl6.proto.UserItemUsageProto itemsInUse = 44;
     public static final int ITEMSINUSE_FIELD_NUMBER = 44;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsInUse_;
     /**
@@ -25616,6 +25948,7 @@ public final class EventStartupProto {
       return itemsInUse_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserItemSecretGiftProto gifts = 45;
     public static final int GIFTS_FIELD_NUMBER = 45;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> gifts_;
     /**
@@ -25651,6 +25984,7 @@ public final class EventStartupProto {
       return gifts_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserPvpBoardObstacleProto userPvpBoardObstacles = 47;
     public static final int USERPVPBOARDOBSTACLES_FIELD_NUMBER = 47;
     private java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> userPvpBoardObstacles_;
     /**
@@ -25686,6 +26020,7 @@ public final class EventStartupProto {
       return userPvpBoardObstacles_.get(index);
     }
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto battleItemQueue = 48;
     public static final int BATTLEITEMQUEUE_FIELD_NUMBER = 48;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> battleItemQueue_;
     /**
@@ -25721,6 +26056,7 @@ public final class EventStartupProto {
       return battleItemQueue_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserBattleItemProto battleItem = 49;
     public static final int BATTLEITEM_FIELD_NUMBER = 49;
     private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> battleItem_;
     /**
@@ -25756,6 +26092,7 @@ public final class EventStartupProto {
       return battleItem_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserResearchProto userResearchs = 50;
     public static final int USERRESEARCHS_FIELD_NUMBER = 50;
     private java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> userResearchs_;
     /**
@@ -25791,6 +26128,7 @@ public final class EventStartupProto {
       return userResearchs_.get(index);
     }
 
+    // repeated .com.lvl6.proto.SalesPackageProto salesPackages = 51;
     public static final int SALESPACKAGES_FIELD_NUMBER = 51;
     private java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> salesPackages_;
     /**
@@ -25826,6 +26164,7 @@ public final class EventStartupProto {
       return salesPackages_.get(index);
     }
 
+    // optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 52;
     public static final int USERMINIEVENT_FIELD_NUMBER = 52;
     private com.lvl6.proto.MiniEventProtos.UserMiniEventProto userMiniEvent_;
     /**
@@ -25847,6 +26186,7 @@ public final class EventStartupProto {
       return userMiniEvent_;
     }
 
+    // optional .com.lvl6.proto.DefaultLanguagesProto userDefaultLanguages = 53;
     public static final int USERDEFAULTLANGUAGES_FIELD_NUMBER = 53;
     private com.lvl6.proto.ChatProto.DefaultLanguagesProto userDefaultLanguages_;
     /**
@@ -25868,6 +26208,7 @@ public final class EventStartupProto {
       return userDefaultLanguages_;
     }
 
+    // repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 500;
     public static final int USERCLANGIFTS_FIELD_NUMBER = 500;
     private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> userClanGifts_;
     /**
@@ -25962,8 +26303,7 @@ public final class EventStartupProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -26465,9 +26805,8 @@ public final class EventStartupProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto)
-        com.lvl6.proto.EventStartupProto.StartupResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStartupProto.StartupResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_descriptor;
@@ -26955,7 +27294,8 @@ public final class EventStartupProto {
           result.referralNotifications_ = referralNotificationsBuilder_.build();
         }
         if (((bitField0_ & 0x00020000) == 0x00020000)) {
-          noticesToPlayers_ = noticesToPlayers_.getUnmodifiableView();
+          noticesToPlayers_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              noticesToPlayers_);
           bitField0_ = (bitField0_ & ~0x00020000);
         }
         result.noticesToPlayers_ = noticesToPlayers_;
@@ -28221,6 +28561,7 @@ public final class EventStartupProto {
       private int bitField0_;
       private int bitField1_;
 
+      // optional int64 serverTimeMillis = 1;
       private long serverTimeMillis_ ;
       /**
        * <code>optional int64 serverTimeMillis = 1;</code>
@@ -28253,6 +28594,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.FullUserProto sender = 2;
       private com.lvl6.proto.UserProto.FullUserProto sender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder> senderBuilder_;
@@ -28361,7 +28703,7 @@ public final class EventStartupProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -28369,6 +28711,7 @@ public final class EventStartupProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupStatus startupStatus = 3;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus startupStatus_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus.USER_IN_DB;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.StartupStatus startupStatus = 3;</code>
@@ -28404,6 +28747,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.UpdateStatus updateStatus = 4;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus updateStatus_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus.NO_UPDATE;
       /**
        * <code>optional .com.lvl6.proto.StartupResponseProto.UpdateStatus updateStatus = 4;</code>
@@ -28439,6 +28783,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants startupConstants = 5;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants startupConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstantsOrBuilder> startupConstantsBuilder_;
@@ -28547,7 +28892,7 @@ public final class EventStartupProto {
         if (startupConstantsBuilder_ == null) {
           startupConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstantsOrBuilder>(
-                  getStartupConstants(),
+                  startupConstants_,
                   getParentForChildren(),
                   isClean());
           startupConstants_ = null;
@@ -28555,6 +28900,7 @@ public final class EventStartupProto {
         return startupConstantsBuilder_;
       }
 
+      // optional .com.lvl6.proto.StartupResponseProto.TutorialConstants tutorialConstants = 34;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants tutorialConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstantsOrBuilder> tutorialConstantsBuilder_;
@@ -28663,7 +29009,7 @@ public final class EventStartupProto {
         if (tutorialConstantsBuilder_ == null) {
           tutorialConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstantsOrBuilder>(
-                  getTutorialConstants(),
+                  tutorialConstants_,
                   getParentForChildren(),
                   isClean());
           tutorialConstants_ = null;
@@ -28671,6 +29017,7 @@ public final class EventStartupProto {
         return tutorialConstantsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.FullUserQuestProto userQuests = 6;
       private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> userQuests_ =
         java.util.Collections.emptyList();
       private void ensureUserQuestsIsMutable() {
@@ -28852,8 +29199,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullUserQuestProto> values) {
         if (userQuestsBuilder_ == null) {
           ensureUserQuestsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userQuests_);
+          super.addAll(values, userQuests_);
           onChanged();
         } else {
           userQuestsBuilder_.addAllMessages(values);
@@ -28983,6 +29329,7 @@ public final class EventStartupProto {
         return userQuestsBuilder_;
       }
 
+      // repeated int32 redeemedQuestIds = 27;
       private java.util.List<java.lang.Integer> redeemedQuestIds_ = java.util.Collections.emptyList();
       private void ensureRedeemedQuestIdsIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
@@ -29034,8 +29381,7 @@ public final class EventStartupProto {
       public Builder addAllRedeemedQuestIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureRedeemedQuestIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, redeemedQuestIds_);
+        super.addAll(values, redeemedQuestIds_);
         onChanged();
         return this;
       }
@@ -29049,6 +29395,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 7;
       private java.util.List<com.lvl6.proto.ClanProto.FullUserClanProto> userClanInfo_ =
         java.util.Collections.emptyList();
       private void ensureUserClanInfoIsMutable() {
@@ -29190,8 +29537,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.FullUserClanProto> values) {
         if (userClanInfoBuilder_ == null) {
           ensureUserClanInfoIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userClanInfo_);
+          super.addAll(values, userClanInfo_);
           onChanged();
         } else {
           userClanInfoBuilder_.addAllMessages(values);
@@ -29289,6 +29635,7 @@ public final class EventStartupProto {
         return userClanInfoBuilder_;
       }
 
+      // repeated int32 completedTaskIds = 8 [deprecated = true];
       private java.util.List<java.lang.Integer> completedTaskIds_ = java.util.Collections.emptyList();
       private void ensureCompletedTaskIdsIsMutable() {
         if (!((bitField0_ & 0x00000200) == 0x00000200)) {
@@ -29340,8 +29687,7 @@ public final class EventStartupProto {
       @java.lang.Deprecated public Builder addAllCompletedTaskIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureCompletedTaskIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, completedTaskIds_);
+        super.addAll(values, completedTaskIds_);
         onChanged();
         return this;
       }
@@ -29355,6 +29701,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserTaskCompletedProto completedTasks = 46;
       private java.util.List<com.lvl6.proto.TaskProto.UserTaskCompletedProto> completedTasks_ =
         java.util.Collections.emptyList();
       private void ensureCompletedTasksIsMutable() {
@@ -29496,8 +29843,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.UserTaskCompletedProto> values) {
         if (completedTasksBuilder_ == null) {
           ensureCompletedTasksIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, completedTasks_);
+          super.addAll(values, completedTasks_);
           onChanged();
         } else {
           completedTasksBuilder_.addAllMessages(values);
@@ -29595,6 +29941,7 @@ public final class EventStartupProto {
         return completedTasksBuilder_;
       }
 
+      // optional string appStoreURL = 9;
       private java.lang.Object appStoreURL_ = "";
       /**
        * <code>optional string appStoreURL = 9;</code>
@@ -29608,12 +29955,9 @@ public final class EventStartupProto {
       public java.lang.String getAppStoreURL() {
         java.lang.Object ref = appStoreURL_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            appStoreURL_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          appStoreURL_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -29671,6 +30015,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string reviewPageURL = 10;
       private java.lang.Object reviewPageURL_ = "";
       /**
        * <code>optional string reviewPageURL = 10;</code>
@@ -29684,12 +30029,9 @@ public final class EventStartupProto {
       public java.lang.String getReviewPageURL() {
         java.lang.Object ref = reviewPageURL_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            reviewPageURL_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          reviewPageURL_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -29747,6 +30089,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string reviewPageConfirmationMessage = 11;
       private java.lang.Object reviewPageConfirmationMessage_ = "";
       /**
        * <code>optional string reviewPageConfirmationMessage = 11;</code>
@@ -29760,12 +30103,9 @@ public final class EventStartupProto {
       public java.lang.String getReviewPageConfirmationMessage() {
         java.lang.Object ref = reviewPageConfirmationMessage_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            reviewPageConfirmationMessage_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          reviewPageConfirmationMessage_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -29823,6 +30163,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional bool playerHasBoughtInAppPurchase = 12;
       private boolean playerHasBoughtInAppPurchase_ ;
       /**
        * <code>optional bool playerHasBoughtInAppPurchase = 12;</code>
@@ -29855,6 +30196,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 13;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> attackNotifications_ =
         java.util.Collections.emptyList();
       private void ensureAttackNotificationsIsMutable() {
@@ -29996,8 +30338,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> values) {
         if (attackNotificationsBuilder_ == null) {
           ensureAttackNotificationsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, attackNotifications_);
+          super.addAll(values, attackNotifications_);
           onChanged();
         } else {
           attackNotificationsBuilder_.addAllMessages(values);
@@ -30095,6 +30436,7 @@ public final class EventStartupProto {
         return attackNotificationsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 14;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> referralNotifications_ =
         java.util.Collections.emptyList();
       private void ensureReferralNotificationsIsMutable() {
@@ -30236,8 +30578,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> values) {
         if (referralNotificationsBuilder_ == null) {
           ensureReferralNotificationsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, referralNotifications_);
+          super.addAll(values, referralNotifications_);
           onChanged();
         } else {
           referralNotificationsBuilder_.addAllMessages(values);
@@ -30335,6 +30676,7 @@ public final class EventStartupProto {
         return referralNotificationsBuilder_;
       }
 
+      // repeated string noticesToPlayers = 15;
       private com.google.protobuf.LazyStringList noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureNoticesToPlayersIsMutable() {
         if (!((bitField0_ & 0x00020000) == 0x00020000)) {
@@ -30345,9 +30687,9 @@ public final class EventStartupProto {
       /**
        * <code>repeated string noticesToPlayers = 15;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getNoticesToPlayersList() {
-        return noticesToPlayers_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(noticesToPlayers_);
       }
       /**
        * <code>repeated string noticesToPlayers = 15;</code>
@@ -30400,8 +30742,7 @@ public final class EventStartupProto {
       public Builder addAllNoticesToPlayers(
           java.lang.Iterable<java.lang.String> values) {
         ensureNoticesToPlayersIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, noticesToPlayers_);
+        super.addAll(values, noticesToPlayers_);
         onChanged();
         return this;
       }
@@ -30428,6 +30769,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 16;
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> globalChats_ =
         java.util.Collections.emptyList();
       private void ensureGlobalChatsIsMutable() {
@@ -30569,8 +30911,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.GroupChatMessageProto> values) {
         if (globalChatsBuilder_ == null) {
           ensureGlobalChatsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, globalChats_);
+          super.addAll(values, globalChats_);
           onChanged();
         } else {
           globalChatsBuilder_.addAllMessages(values);
@@ -30668,6 +31009,7 @@ public final class EventStartupProto {
         return globalChatsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> clanChats_ =
         java.util.Collections.emptyList();
       private void ensureClanChatsIsMutable() {
@@ -30809,8 +31151,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.GroupChatMessageProto> values) {
         if (clanChatsBuilder_ == null) {
           ensureClanChatsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanChats_);
+          super.addAll(values, clanChats_);
           onChanged();
         } else {
           clanChatsBuilder_.addAllMessages(values);
@@ -30908,6 +31249,7 @@ public final class EventStartupProto {
         return clanChatsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 18;
       private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> pcpp_ =
         java.util.Collections.emptyList();
       private void ensurePcppIsMutable() {
@@ -31089,8 +31431,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.PrivateChatPostProto> values) {
         if (pcppBuilder_ == null) {
           ensurePcppIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, pcpp_);
+          super.addAll(values, pcpp_);
           onChanged();
         } else {
           pcppBuilder_.addAllMessages(values);
@@ -31220,6 +31561,7 @@ public final class EventStartupProto {
         return pcppBuilder_;
       }
 
+      // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 19;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> usersMonsters_ =
         java.util.Collections.emptyList();
       private void ensureUsersMonstersIsMutable() {
@@ -31361,8 +31703,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (usersMonstersBuilder_ == null) {
           ensureUsersMonstersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, usersMonsters_);
+          super.addAll(values, usersMonsters_);
           onChanged();
         } else {
           usersMonstersBuilder_.addAllMessages(values);
@@ -31460,6 +31801,7 @@ public final class EventStartupProto {
         return usersMonstersBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 20;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> monstersHealing_ =
         java.util.Collections.emptyList();
       private void ensureMonstersHealingIsMutable() {
@@ -31601,8 +31943,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> values) {
         if (monstersHealingBuilder_ == null) {
           ensureMonstersHealingIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, monstersHealing_);
+          super.addAll(values, monstersHealing_);
           onChanged();
         } else {
           monstersHealingBuilder_.addAllMessages(values);
@@ -31700,6 +32041,7 @@ public final class EventStartupProto {
         return monstersHealingBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserEnhancementProto enhancements = 21;
       private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto enhancements_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserEnhancementProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder> enhancementsBuilder_;
@@ -31808,7 +32150,7 @@ public final class EventStartupProto {
         if (enhancementsBuilder_ == null) {
           enhancementsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder>(
-                  getEnhancements(),
+                  enhancements_,
                   getParentForChildren(),
                   isClean());
           enhancements_ = null;
@@ -31816,6 +32158,7 @@ public final class EventStartupProto {
         return enhancementsBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserMonsterEvolutionProto evolution = 29;
       private com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto evolution_ = com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProtoOrBuilder> evolutionBuilder_;
@@ -31924,7 +32267,7 @@ public final class EventStartupProto {
         if (evolutionBuilder_ == null) {
           evolutionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProtoOrBuilder>(
-                  getEvolution(),
+                  evolution_,
                   getParentForChildren(),
                   isClean());
           evolution_ = null;
@@ -31932,6 +32275,7 @@ public final class EventStartupProto {
         return evolutionBuilder_;
       }
 
+      // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 22;
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> rareBoosterPurchases_ =
         java.util.Collections.emptyList();
       private void ensureRareBoosterPurchasesIsMutable() {
@@ -32073,8 +32417,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> values) {
         if (rareBoosterPurchasesBuilder_ == null) {
           ensureRareBoosterPurchasesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, rareBoosterPurchases_);
+          super.addAll(values, rareBoosterPurchases_);
           onChanged();
         } else {
           rareBoosterPurchasesBuilder_.addAllMessages(values);
@@ -32172,6 +32515,7 @@ public final class EventStartupProto {
         return rareBoosterPurchasesBuilder_;
       }
 
+      // optional string kabamNaid = 23;
       private java.lang.Object kabamNaid_ = "";
       /**
        * <code>optional string kabamNaid = 23;</code>
@@ -32185,12 +32529,9 @@ public final class EventStartupProto {
       public java.lang.String getKabamNaid() {
         java.lang.Object ref = kabamNaid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            kabamNaid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          kabamNaid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -32248,6 +32589,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesToMeForSlots = 24;
       private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesToMeForSlots_ =
         java.util.Collections.emptyList();
       private void ensureInvitesToMeForSlotsIsMutable() {
@@ -32439,8 +32781,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> values) {
         if (invitesToMeForSlotsBuilder_ == null) {
           ensureInvitesToMeForSlotsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, invitesToMeForSlots_);
+          super.addAll(values, invitesToMeForSlots_);
           onChanged();
         } else {
           invitesToMeForSlotsBuilder_.addAllMessages(values);
@@ -32578,6 +32919,7 @@ public final class EventStartupProto {
         return invitesToMeForSlotsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;
       private java.util.List<com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> invitesFromMeForSlots_ =
         java.util.Collections.emptyList();
       private void ensureInvitesFromMeForSlotsIsMutable() {
@@ -32769,8 +33111,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto> values) {
         if (invitesFromMeForSlotsBuilder_ == null) {
           ensureInvitesFromMeForSlotsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, invitesFromMeForSlots_);
+          super.addAll(values, invitesFromMeForSlots_);
           onChanged();
         } else {
           invitesFromMeForSlotsBuilder_.addAllMessages(values);
@@ -32908,6 +33249,7 @@ public final class EventStartupProto {
         return invitesFromMeForSlotsBuilder_;
       }
 
+      // optional .com.lvl6.proto.StaticDataProto staticDataStuffProto = 26;
       private com.lvl6.proto.StaticDataStuffProto.StaticDataProto staticDataStuffProto_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder> staticDataStuffProtoBuilder_;
@@ -33016,7 +33358,7 @@ public final class EventStartupProto {
         if (staticDataStuffProtoBuilder_ == null) {
           staticDataStuffProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder, com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder>(
-                  getStaticDataStuffProto(),
+                  staticDataStuffProto_,
                   getParentForChildren(),
                   isClean());
           staticDataStuffProto_ = null;
@@ -33024,6 +33366,7 @@ public final class EventStartupProto {
         return staticDataStuffProtoBuilder_;
       }
 
+      // repeated int32 taskIdForCurrentCityBoss = 28;
       private java.util.List<java.lang.Integer> taskIdForCurrentCityBoss_ = java.util.Collections.emptyList();
       private void ensureTaskIdForCurrentCityBossIsMutable() {
         if (!((bitField0_ & 0x40000000) == 0x40000000)) {
@@ -33105,8 +33448,7 @@ public final class EventStartupProto {
       public Builder addAllTaskIdForCurrentCityBoss(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureTaskIdForCurrentCityBossIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, taskIdForCurrentCityBoss_);
+        super.addAll(values, taskIdForCurrentCityBoss_);
         onChanged();
         return this;
       }
@@ -33125,6 +33467,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserPersistentEventProto userEvents = 30;
       private java.util.List<com.lvl6.proto.TaskProto.UserPersistentEventProto> userEvents_ =
         java.util.Collections.emptyList();
       private void ensureUserEventsIsMutable() {
@@ -33306,8 +33649,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.UserPersistentEventProto> values) {
         if (userEventsBuilder_ == null) {
           ensureUserEventsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userEvents_);
+          super.addAll(values, userEvents_);
           onChanged();
         } else {
           userEventsBuilder_.addAllMessages(values);
@@ -33437,6 +33779,7 @@ public final class EventStartupProto {
         return userEventsBuilder_;
       }
 
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;
       private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto curRaidClanInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> curRaidClanInfoBuilder_;
@@ -33581,7 +33924,7 @@ public final class EventStartupProto {
         if (curRaidClanInfoBuilder_ == null) {
           curRaidClanInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
-                  getCurRaidClanInfo(),
+                  curRaidClanInfo_,
                   getParentForChildren(),
                   isClean());
           curRaidClanInfo_ = null;
@@ -33589,6 +33932,7 @@ public final class EventStartupProto {
         return curRaidClanInfoBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> curRaidClanUserInfo_ =
         java.util.Collections.emptyList();
       private void ensureCurRaidClanUserInfoIsMutable() {
@@ -33730,8 +34074,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> values) {
         if (curRaidClanUserInfoBuilder_ == null) {
           ensureCurRaidClanUserInfoIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, curRaidClanUserInfo_);
+          super.addAll(values, curRaidClanUserInfo_);
           onChanged();
         } else {
           curRaidClanUserInfoBuilder_.addAllMessages(values);
@@ -33829,6 +34172,7 @@ public final class EventStartupProto {
         return curRaidClanUserInfoBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto> raidStageHistory_ =
         java.util.Collections.emptyList();
       private void ensureRaidStageHistoryIsMutable() {
@@ -33970,8 +34314,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto> values) {
         if (raidStageHistoryBuilder_ == null) {
           ensureRaidStageHistoryIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, raidStageHistory_);
+          super.addAll(values, raidStageHistory_);
           onChanged();
         } else {
           raidStageHistoryBuilder_.addAllMessages(values);
@@ -34069,6 +34412,7 @@ public final class EventStartupProto {
         return raidStageHistoryBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 35;
       private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_ =
         java.util.Collections.emptyList();
       private void ensureRecentNBattlesIsMutable() {
@@ -34250,8 +34594,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpHistoryProto> values) {
         if (recentNBattlesBuilder_ == null) {
           ensureRecentNBattlesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, recentNBattles_);
+          super.addAll(values, recentNBattles_);
           onChanged();
         } else {
           recentNBattlesBuilder_.addAllMessages(values);
@@ -34381,6 +34724,7 @@ public final class EventStartupProto {
         return recentNBattlesBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumUserTaskProto curTask = 36;
       private com.lvl6.proto.TaskProto.MinimumUserTaskProto curTask_ = com.lvl6.proto.TaskProto.MinimumUserTaskProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.TaskProto.MinimumUserTaskProto, com.lvl6.proto.TaskProto.MinimumUserTaskProto.Builder, com.lvl6.proto.TaskProto.MinimumUserTaskProtoOrBuilder> curTaskBuilder_;
@@ -34525,7 +34869,7 @@ public final class EventStartupProto {
         if (curTaskBuilder_ == null) {
           curTaskBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.TaskProto.MinimumUserTaskProto, com.lvl6.proto.TaskProto.MinimumUserTaskProto.Builder, com.lvl6.proto.TaskProto.MinimumUserTaskProtoOrBuilder>(
-                  getCurTask(),
+                  curTask_,
                   getParentForChildren(),
                   isClean());
           curTask_ = null;
@@ -34533,6 +34877,7 @@ public final class EventStartupProto {
         return curTaskBuilder_;
       }
 
+      // repeated .com.lvl6.proto.TaskStageProto curTaskStages = 37;
       private java.util.List<com.lvl6.proto.TaskProto.TaskStageProto> curTaskStages_ =
         java.util.Collections.emptyList();
       private void ensureCurTaskStagesIsMutable() {
@@ -34674,8 +35019,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.TaskStageProto> values) {
         if (curTaskStagesBuilder_ == null) {
           ensureCurTaskStagesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, curTaskStages_);
+          super.addAll(values, curTaskStages_);
           onChanged();
         } else {
           curTaskStagesBuilder_.addAllMessages(values);
@@ -34773,6 +35117,7 @@ public final class EventStartupProto {
         return curTaskStagesBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserAchievementProto userAchievements = 38;
       private java.util.List<com.lvl6.proto.AchievementStuffProto.UserAchievementProto> userAchievements_ =
         java.util.Collections.emptyList();
       private void ensureUserAchievementsIsMutable() {
@@ -34914,8 +35259,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.AchievementStuffProto.UserAchievementProto> values) {
         if (userAchievementsBuilder_ == null) {
           ensureUserAchievementsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userAchievements_);
+          super.addAll(values, userAchievements_);
           onChanged();
         } else {
           userAchievementsBuilder_.addAllMessages(values);
@@ -35013,6 +35357,7 @@ public final class EventStartupProto {
         return userAchievementsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserMiniJobProto userMiniJobProtos = 39;
       private java.util.List<com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> userMiniJobProtos_ =
         java.util.Collections.emptyList();
       private void ensureUserMiniJobProtosIsMutable() {
@@ -35154,8 +35499,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto> values) {
         if (userMiniJobProtosBuilder_ == null) {
           ensureUserMiniJobProtosIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userMiniJobProtos_);
+          super.addAll(values, userMiniJobProtos_);
           onChanged();
         } else {
           userMiniJobProtosBuilder_.addAllMessages(values);
@@ -35253,6 +35597,7 @@ public final class EventStartupProto {
         return userMiniJobProtosBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemProto userItems = 40;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> userItems_ =
         java.util.Collections.emptyList();
       private void ensureUserItemsIsMutable() {
@@ -35394,8 +35739,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
         if (userItemsBuilder_ == null) {
           ensureUserItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userItems_);
+          super.addAll(values, userItems_);
           onChanged();
         } else {
           userItemsBuilder_.addAllMessages(values);
@@ -35493,6 +35837,7 @@ public final class EventStartupProto {
         return userItemsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];
       private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelpings_ =
         java.util.Collections.emptyList();
       private void ensureClanHelpingsIsMutable() {
@@ -35634,8 +35979,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpProto> values) {
         if (clanHelpingsBuilder_ == null) {
           ensureClanHelpingsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanHelpings_);
+          super.addAll(values, clanHelpings_);
           onChanged();
         } else {
           clanHelpingsBuilder_.addAllMessages(values);
@@ -35733,6 +36077,7 @@ public final class EventStartupProto {
         return clanHelpingsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanInviteProto clanInvites = 42;
       private java.util.List<com.lvl6.proto.ClanProto.ClanInviteProto> clanInvites_ =
         java.util.Collections.emptyList();
       private void ensureClanInvitesIsMutable() {
@@ -35874,8 +36219,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanInviteProto> values) {
         if (clanInvitesBuilder_ == null) {
           ensureClanInvitesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanInvites_);
+          super.addAll(values, clanInvites_);
           onChanged();
         } else {
           clanInvitesBuilder_.addAllMessages(values);
@@ -35973,6 +36317,7 @@ public final class EventStartupProto {
         return clanInvitesBuilder_;
       }
 
+      // optional .com.lvl6.proto.ClanDataProto clanData = 43;
       private com.lvl6.proto.ClanProto.ClanDataProto clanData_ = com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder> clanDataBuilder_;
@@ -36081,7 +36426,7 @@ public final class EventStartupProto {
         if (clanDataBuilder_ == null) {
           clanDataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder>(
-                  getClanData(),
+                  clanData_,
                   getParentForChildren(),
                   isClean());
           clanData_ = null;
@@ -36089,6 +36434,7 @@ public final class EventStartupProto {
         return clanDataBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemUsageProto itemsInUse = 44;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsInUse_ =
         java.util.Collections.emptyList();
       private void ensureItemsInUseIsMutable() {
@@ -36230,8 +36576,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemUsageProto> values) {
         if (itemsInUseBuilder_ == null) {
           ensureItemsInUseIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, itemsInUse_);
+          super.addAll(values, itemsInUse_);
           onChanged();
         } else {
           itemsInUseBuilder_.addAllMessages(values);
@@ -36329,6 +36674,7 @@ public final class EventStartupProto {
         return itemsInUseBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemSecretGiftProto gifts = 45;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> gifts_ =
         java.util.Collections.emptyList();
       private void ensureGiftsIsMutable() {
@@ -36470,8 +36816,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemSecretGiftProto> values) {
         if (giftsBuilder_ == null) {
           ensureGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, gifts_);
+          super.addAll(values, gifts_);
           onChanged();
         } else {
           giftsBuilder_.addAllMessages(values);
@@ -36569,6 +36914,7 @@ public final class EventStartupProto {
         return giftsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserPvpBoardObstacleProto userPvpBoardObstacles = 47;
       private java.util.List<com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> userPvpBoardObstacles_ =
         java.util.Collections.emptyList();
       private void ensureUserPvpBoardObstaclesIsMutable() {
@@ -36710,8 +37056,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto> values) {
         if (userPvpBoardObstaclesBuilder_ == null) {
           ensureUserPvpBoardObstaclesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userPvpBoardObstacles_);
+          super.addAll(values, userPvpBoardObstacles_);
           onChanged();
         } else {
           userPvpBoardObstaclesBuilder_.addAllMessages(values);
@@ -36809,6 +37154,7 @@ public final class EventStartupProto {
         return userPvpBoardObstaclesBuilder_;
       }
 
+      // repeated .com.lvl6.proto.BattleItemQueueForUserProto battleItemQueue = 48;
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> battleItemQueue_ =
         java.util.Collections.emptyList();
       private void ensureBattleItemQueueIsMutable() {
@@ -36950,8 +37296,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> values) {
         if (battleItemQueueBuilder_ == null) {
           ensureBattleItemQueueIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, battleItemQueue_);
+          super.addAll(values, battleItemQueue_);
           onChanged();
         } else {
           battleItemQueueBuilder_.addAllMessages(values);
@@ -37049,6 +37394,7 @@ public final class EventStartupProto {
         return battleItemQueueBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserBattleItemProto battleItem = 49;
       private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> battleItem_ =
         java.util.Collections.emptyList();
       private void ensureBattleItemIsMutable() {
@@ -37190,8 +37536,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProto> values) {
         if (battleItemBuilder_ == null) {
           ensureBattleItemIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, battleItem_);
+          super.addAll(values, battleItem_);
           onChanged();
         } else {
           battleItemBuilder_.addAllMessages(values);
@@ -37289,6 +37634,7 @@ public final class EventStartupProto {
         return battleItemBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserResearchProto userResearchs = 50;
       private java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> userResearchs_ =
         java.util.Collections.emptyList();
       private void ensureUserResearchsIsMutable() {
@@ -37430,8 +37776,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.UserResearchProto> values) {
         if (userResearchsBuilder_ == null) {
           ensureUserResearchsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userResearchs_);
+          super.addAll(values, userResearchs_);
           onChanged();
         } else {
           userResearchsBuilder_.addAllMessages(values);
@@ -37529,6 +37874,7 @@ public final class EventStartupProto {
         return userResearchsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.SalesPackageProto salesPackages = 51;
       private java.util.List<com.lvl6.proto.SalesProto.SalesPackageProto> salesPackages_ =
         java.util.Collections.emptyList();
       private void ensureSalesPackagesIsMutable() {
@@ -37670,8 +38016,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.SalesProto.SalesPackageProto> values) {
         if (salesPackagesBuilder_ == null) {
           ensureSalesPackagesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, salesPackages_);
+          super.addAll(values, salesPackages_);
           onChanged();
         } else {
           salesPackagesBuilder_.addAllMessages(values);
@@ -37769,6 +38114,7 @@ public final class EventStartupProto {
         return salesPackagesBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 52;
       private com.lvl6.proto.MiniEventProtos.UserMiniEventProto userMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder> userMiniEventBuilder_;
@@ -37877,7 +38223,7 @@ public final class EventStartupProto {
         if (userMiniEventBuilder_ == null) {
           userMiniEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder>(
-                  getUserMiniEvent(),
+                  userMiniEvent_,
                   getParentForChildren(),
                   isClean());
           userMiniEvent_ = null;
@@ -37885,6 +38231,7 @@ public final class EventStartupProto {
         return userMiniEventBuilder_;
       }
 
+      // optional .com.lvl6.proto.DefaultLanguagesProto userDefaultLanguages = 53;
       private com.lvl6.proto.ChatProto.DefaultLanguagesProto userDefaultLanguages_ = com.lvl6.proto.ChatProto.DefaultLanguagesProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ChatProto.DefaultLanguagesProto, com.lvl6.proto.ChatProto.DefaultLanguagesProto.Builder, com.lvl6.proto.ChatProto.DefaultLanguagesProtoOrBuilder> userDefaultLanguagesBuilder_;
@@ -37993,7 +38340,7 @@ public final class EventStartupProto {
         if (userDefaultLanguagesBuilder_ == null) {
           userDefaultLanguagesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ChatProto.DefaultLanguagesProto, com.lvl6.proto.ChatProto.DefaultLanguagesProto.Builder, com.lvl6.proto.ChatProto.DefaultLanguagesProtoOrBuilder>(
-                  getUserDefaultLanguages(),
+                  userDefaultLanguages_,
                   getParentForChildren(),
                   isClean());
           userDefaultLanguages_ = null;
@@ -38001,6 +38348,7 @@ public final class EventStartupProto {
         return userDefaultLanguagesBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 500;
       private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> userClanGifts_ =
         java.util.Collections.emptyList();
       private void ensureUserClanGiftsIsMutable() {
@@ -38142,8 +38490,7 @@ public final class EventStartupProto {
           java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.UserClanGiftProto> values) {
         if (userClanGiftsBuilder_ == null) {
           ensureUserClanGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userClanGifts_);
+          super.addAll(values, userClanGifts_);
           onChanged();
         } else {
           userClanGiftsBuilder_.addAllMessages(values);
@@ -38252,10 +38599,10 @@ public final class EventStartupProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto)
   }
 
-  public interface ForceLogoutResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ForceLogoutResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ForceLogoutResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int64 previousLoginTime = 1;
     /**
      * <code>optional int64 previousLoginTime = 1;</code>
      *
@@ -38273,6 +38620,7 @@ public final class EventStartupProto {
      */
     long getPreviousLoginTime();
 
+    // optional string udid = 2;
     /**
      * <code>optional string udid = 2;</code>
      *
@@ -38309,9 +38657,8 @@ public final class EventStartupProto {
    * </pre>
    */
   public static final class ForceLogoutResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ForceLogoutResponseProto)
-      ForceLogoutResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ForceLogoutResponseProtoOrBuilder {
     // Use ForceLogoutResponseProto.newBuilder() to construct.
     private ForceLogoutResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -38363,9 +38710,8 @@ public final class EventStartupProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              udid_ = bs;
+              udid_ = input.readBytes();
               break;
             }
           }
@@ -38408,6 +38754,7 @@ public final class EventStartupProto {
     }
 
     private int bitField0_;
+    // optional int64 previousLoginTime = 1;
     public static final int PREVIOUSLOGINTIME_FIELD_NUMBER = 1;
     private long previousLoginTime_;
     /**
@@ -38431,6 +38778,7 @@ public final class EventStartupProto {
       return previousLoginTime_;
     }
 
+    // optional string udid = 2;
     public static final int UDID_FIELD_NUMBER = 2;
     private java.lang.Object udid_;
     /**
@@ -38492,8 +38840,7 @@ public final class EventStartupProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -38613,9 +38960,8 @@ public final class EventStartupProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ForceLogoutResponseProto)
-        com.lvl6.proto.EventStartupProto.ForceLogoutResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStartupProto.ForceLogoutResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor;
@@ -38739,6 +39085,7 @@ public final class EventStartupProto {
       }
       private int bitField0_;
 
+      // optional int64 previousLoginTime = 1;
       private long previousLoginTime_ ;
       /**
        * <code>optional int64 previousLoginTime = 1;</code>
@@ -38787,6 +39134,7 @@ public final class EventStartupProto {
         return this;
       }
 
+      // optional string udid = 2;
       private java.lang.Object udid_ = "";
       /**
        * <code>optional string udid = 2;</code>
@@ -38808,12 +39156,9 @@ public final class EventStartupProto {
       public java.lang.String getUdid() {
         java.lang.Object ref = udid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            udid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          udid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -38898,107 +39243,107 @@ public final class EventStartupProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ForceLogoutResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -39238,13 +39583,139 @@ public final class EventStartupProto {
       "tupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_StartupRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_StartupRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupRequestProto_descriptor,
+              new java.lang.String[] { "Udid", "VersionNum", "ApsalarId", "MacAddress", "AdvertiserId", "IsForceTutorial", "FbId", "IsFreshRestart", "VersionNumberProto", });
+          internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_descriptor =
+            internal_static_com_lvl6_proto_StartupRequestProto_descriptor.getNestedTypes().get(0);
+          internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_descriptor,
+              new java.lang.String[] { "SuperNum", "MajorNum", "MinorNum", });
+          internal_static_com_lvl6_proto_StartupResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
+              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "CompletedTasks", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", "ClanInvites", "ClanData", "ItemsInUse", "Gifts", "UserPvpBoardObstacles", "BattleItemQueue", "BattleItem", "UserResearchs", "SalesPackages", "UserMiniEvent", "UserDefaultLanguages", "UserClanGifts", });
+          internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(0);
+          internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor,
+              new java.lang.String[] { "Attacker", "BattleCompleteTime", "CoinsStolen", });
+          internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(1);
+          internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_descriptor,
+              new java.lang.String[] { "Referred", "RecruitTime", "CoinsGivenToReferrer", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(2);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", "TaskIdOfFirstSkill", "MinsToResolicitTeamDonation", "FileDownloadProto", "TaskIdForUpgradeTutorial", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor,
+              new java.lang.String[] { "ImageName", "OffSet", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(1);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor,
+              new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", "MaxClanSize", "AchievementIdsForClanRewards", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(2);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor,
+              new java.lang.String[] { "MapNibName", "ExpansionNibName", "GoldShoppeNibName", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(3);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor,
+              new java.lang.String[] { "WinsWeight", "LossesWeight", "FleesWeight", "NumHoursToShowAfterEventEnd", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(4);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor,
+              new java.lang.String[] { "MaxNumTeamSlots", "InitialMaxNumMonsterLimit", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(5);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,
+              new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", "ElementalStrength", "ElementalWeakness", "OilPerMonsterLevel", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(6);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor,
+              new java.lang.String[] { "MapSectionImagePrefix", "MapNumberOfSections", "MapSectionHeight", "MapTotalWidth", "MapTotalHeight", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(7);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
+              new java.lang.String[] { "MiniTutorialTaskId", "GuideMonsterId", "EnhanceGuideMonsterId", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(8);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor,
+              new java.lang.String[] { "HelpType", "AmountRemovedPerHelp", "PercentRemovedPerHelp", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(9);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor,
+              new java.lang.String[] { "PvpDmgsWindowSize", "MinPvpDmgDelta", "MaxPvpDmgDelta", "PvpRequiredMinLvl", "DefendingMsgCharLimit", "BeginAvengingTimeLimitMins", "RequestClanToAvengeTimeLimitMins", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(10);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor,
+              new java.lang.String[] { "Seconds", "NumGems", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(11);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_descriptor,
+              new java.lang.String[] { "ResourceType", "ResourceAmt", "NumGems", });
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(12);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor,
+              new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", "UseIphone6Prefix", });
+          internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(3);
+          internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
+              new java.lang.String[] { "StartingMonsterId", "GuideMonsterId", "EnemyMonsterId", "EnemyMonsterIdTwo", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "TutorialObstacles", });
+          internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_ForceLogoutResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor,
+              new java.lang.String[] { "PreviousLoginTime", "Udid", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -39270,153 +39741,6 @@ public final class EventStartupProto {
           com.lvl6.proto.TaskProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_StartupRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_StartupRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupRequestProto_descriptor,
-        new java.lang.String[] { "Udid", "VersionNum", "ApsalarId", "MacAddress", "AdvertiserId", "IsForceTutorial", "FbId", "IsFreshRestart", "VersionNumberProto", });
-    internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_descriptor =
-      internal_static_com_lvl6_proto_StartupRequestProto_descriptor.getNestedTypes().get(0);
-    internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupRequestProto_VersionNumberProto_descriptor,
-        new java.lang.String[] { "SuperNum", "MajorNum", "MinorNum", });
-    internal_static_com_lvl6_proto_StartupResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-        new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "CompletedTasks", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", "ClanInvites", "ClanData", "ItemsInUse", "Gifts", "UserPvpBoardObstacles", "BattleItemQueue", "BattleItem", "UserResearchs", "SalesPackages", "UserMiniEvent", "UserDefaultLanguages", "UserClanGifts", });
-    internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(0);
-    internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor,
-        new java.lang.String[] { "Attacker", "BattleCompleteTime", "CoinsStolen", });
-    internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(1);
-    internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_ReferralNotificationProto_descriptor,
-        new java.lang.String[] { "Referred", "RecruitTime", "CoinsGivenToReferrer", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(2);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "FacebookPopUp", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", "PvpConstant", "Sucp", "Rccp", "DisplayRarity", "TaskIdOfFirstSkill", "MinsToResolicitTeamDonation", "FileDownloadProto", "TaskIdForUpgradeTutorial", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor,
-        new java.lang.String[] { "ImageName", "OffSet", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(1);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor,
-        new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", "MaxClanSize", "AchievementIdsForClanRewards", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(2);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor,
-        new java.lang.String[] { "MapNibName", "ExpansionNibName", "GoldShoppeNibName", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(3);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor,
-        new java.lang.String[] { "WinsWeight", "LossesWeight", "FleesWeight", "NumHoursToShowAfterEventEnd", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(4);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor,
-        new java.lang.String[] { "MaxNumTeamSlots", "InitialMaxNumMonsterLimit", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(5);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,
-        new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", "ElementalStrength", "ElementalWeakness", "OilPerMonsterLevel", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(6);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor,
-        new java.lang.String[] { "MapSectionImagePrefix", "MapNumberOfSections", "MapSectionHeight", "MapTotalWidth", "MapTotalHeight", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(7);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
-        new java.lang.String[] { "MiniTutorialTaskId", "GuideMonsterId", "EnhanceGuideMonsterId", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(8);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor,
-        new java.lang.String[] { "HelpType", "AmountRemovedPerHelp", "PercentRemovedPerHelp", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(9);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor,
-        new java.lang.String[] { "PvpDmgsWindowSize", "MinPvpDmgDelta", "MaxPvpDmgDelta", "PvpRequiredMinLvl", "DefendingMsgCharLimit", "BeginAvengingTimeLimitMins", "RequestClanToAvengeTimeLimitMins", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(10);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor,
-        new java.lang.String[] { "Seconds", "NumGems", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(11);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ResourceConversionConstantProto_descriptor,
-        new java.lang.String[] { "ResourceType", "ResourceAmt", "NumGems", });
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(12);
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor,
-        new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", "UseIphone6Prefix", });
-    internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =
-      internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(3);
-    internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-        new java.lang.String[] { "StartingMonsterId", "GuideMonsterId", "EnemyMonsterId", "EnemyMonsterIdTwo", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "TutorialObstacles", });
-    internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_ForceLogoutResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor,
-        new java.lang.String[] { "PreviousLoginTime", "Udid", });
-    com.lvl6.proto.AchievementStuffProto.getDescriptor();
-    com.lvl6.proto.BattleProto.getDescriptor();
-    com.lvl6.proto.BattleItemsProto.getDescriptor();
-    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
-    com.lvl6.proto.ChatProto.getDescriptor();
-    com.lvl6.proto.CityProto.getDescriptor();
-    com.lvl6.proto.ClanProto.getDescriptor();
-    com.lvl6.proto.InAppPurchaseProto.getDescriptor();
-    com.lvl6.proto.ItemsProto.getDescriptor();
-    com.lvl6.proto.MiniEventProtos.getDescriptor();
-    com.lvl6.proto.MiniJobConfigProto.getDescriptor();
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.QuestProto.getDescriptor();
-    com.lvl6.proto.SalesProto.getDescriptor();
-    com.lvl6.proto.ResearchsProto.getDescriptor();
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.StaticDataStuffProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
-    com.lvl6.proto.RewardsProto.getDescriptor();
-    com.lvl6.proto.TaskProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

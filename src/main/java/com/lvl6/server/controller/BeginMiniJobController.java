@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -68,7 +69,7 @@ public class BeginMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginMiniJobRequestProto reqProto = ((BeginMiniJobRequestEvent) event)
 				.getBeginMiniJobRequestProto();
 
@@ -104,7 +105,7 @@ public class BeginMiniJobController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -130,7 +131,7 @@ public class BeginMiniJobController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in BeginMiniJobController processEvent", e);
@@ -141,7 +142,7 @@ public class BeginMiniJobController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setBeginMiniJobResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginMiniJobController processEvent",
 						e);

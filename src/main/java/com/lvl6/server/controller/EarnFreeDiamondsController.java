@@ -77,7 +77,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EarnFreeDiamondsRequestProto reqProto = ((EarnFreeDiamondsRequestEvent)event).getEarnFreeDiamondsRequestProto();
 //    MinimumUserProto senderProto = reqProto.getSender();
 //    String userId = senderProto.getUserUuid();
@@ -114,7 +114,7 @@
 //    	EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
 //        resEvent.setTag(event.getTag());
 //        resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
-//    	server.writeEvent(resEvent);
+//    	responses.normalResponseEvents().add(resEvent);
 //    	return;
 //    }
 //    
@@ -152,7 +152,7 @@
 //      EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
 //      resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      if (legitFreeDiamondsEarn) {
 //        previousGems = user.getGems();
@@ -166,7 +166,7 @@
 //        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
 //        resEventUpdate.setTag(event.getTag());
-//        server.writeEvent(resEventUpdate);
+//        responses.normalResponseEvents().add(resEventUpdate);
 //
 ////        writeToDBHistory(user, freeDiamondsType, clientTime, kiipConfirmationReceipt, adColonyDigest, adColonyRewardType, adColonyAmountEarned);
 //        writeToUserCurrencyHistory(user, clientTime, money, keys,

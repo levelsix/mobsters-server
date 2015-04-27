@@ -31,6 +31,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -73,7 +74,7 @@ public class CreateClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -111,7 +112,7 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+//			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -143,14 +144,14 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+//			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+//				responses.normalResponseEvents().add(resEventUpdate);
 
 				sendGeneralNotification(user.getName(), clanName);
 
@@ -164,7 +165,7 @@ public class CreateClanController extends EventController {
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCreateClanResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+//				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateClan processEvent", e);
 			}

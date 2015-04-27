@@ -28,6 +28,7 @@ import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -70,7 +71,7 @@ public class LoadPlayerCityController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent) event)
 				.getLoadPlayerCityRequestProto();
 
@@ -106,7 +107,7 @@ public class LoadPlayerCityController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -149,7 +150,7 @@ public class LoadPlayerCityController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in LoadPlayerCity processEvent", e);
@@ -159,7 +160,7 @@ public class LoadPlayerCityController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SubmitMonsterEnhancementController processEvent",

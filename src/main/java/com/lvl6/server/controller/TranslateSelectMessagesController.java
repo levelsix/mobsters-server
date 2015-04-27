@@ -35,6 +35,7 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TranslateSelectMessagesAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -90,7 +91,7 @@ public class TranslateSelectMessagesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TranslateSelectMessagesRequestProto reqProto = ((TranslateSelectMessagesRequestEvent) event)
 				.getTranslateSelectMessagesRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -143,7 +144,7 @@ public class TranslateSelectMessagesController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTranslateSelectMessagesResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -170,7 +171,7 @@ public class TranslateSelectMessagesController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTranslateSelectMessagesResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in TranslateSelectMessagesController processEvent", e);
@@ -181,7 +182,7 @@ public class TranslateSelectMessagesController extends EventController {
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setTranslateSelectMessagesResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SellUserMonsterController processEvent",

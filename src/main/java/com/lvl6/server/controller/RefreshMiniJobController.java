@@ -33,6 +33,7 @@ import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RefreshMiniJobAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -86,7 +87,7 @@ public class RefreshMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RefreshMiniJobRequestProto reqProto = ((RefreshMiniJobRequestEvent) event)
 				.getRefreshMiniJobRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -133,7 +134,7 @@ public class RefreshMiniJobController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRefreshMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -167,7 +168,7 @@ public class RefreshMiniJobController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRefreshMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (RefreshMiniJobStatus.SUCCESS.equals(resBuilder.getStatus()) &&
 					rmja.isUsedGems())
@@ -177,7 +178,7 @@ public class RefreshMiniJobController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								rmja.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(userId, clientTime, rmja);
 			}
@@ -191,7 +192,7 @@ public class RefreshMiniJobController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRefreshMiniJobResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RefreshMiniJobController processEvent",
 						e);

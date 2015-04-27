@@ -20,6 +20,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
 @DependsOn("gameServer")
@@ -52,7 +53,7 @@ public class SetDefendingMsgController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent) event)
 				.getSetDefendingMsgRequestProto();
 
@@ -86,7 +87,7 @@ public class SetDefendingMsgController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -104,7 +105,7 @@ public class SetDefendingMsgController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSetDefendingMsgResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in SetDefendingMsgController processEvent", e);
@@ -114,7 +115,7 @@ public class SetDefendingMsgController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SetDefendingMsgController processEvent",

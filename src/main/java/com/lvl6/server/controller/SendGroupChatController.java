@@ -111,7 +111,7 @@ public class SendGroupChatController extends EventController {
 
 	@Override
 	protected void processRequestEvent(final RequestEvent event)
-			throws Exception {
+			 {
 		final SendGroupChatRequestProto reqProto = ((SendGroupChatRequestEvent) event)
 				.getSendGroupChatRequestProto();
 
@@ -146,7 +146,7 @@ public class SendGroupChatController extends EventController {
 		if (invalidUuids) {
 			resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
 			resEvent.setSendGroupChatResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -159,7 +159,7 @@ public class SendGroupChatController extends EventController {
 					chatMessage);
 
 			resEvent.setSendGroupChatResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (legitSend) {
 				log.info("Group chat message is legit... sending to group");
@@ -172,7 +172,7 @@ public class SendGroupChatController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 
@@ -219,7 +219,7 @@ public class SendGroupChatController extends EventController {
 			try {
 				resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
 				resEvent.setSendGroupChatResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SendGroupChat processEvent", e);
 			}
@@ -277,7 +277,7 @@ public class SendGroupChatController extends EventController {
 	 * ReceivedGroupChatResponseEvent ce = new
 	 * ReceivedGroupChatResponseEvent(player.getPlayerId());
 	 * ce.setReceivedGroupChatResponseProto(chatProto.build()); ce.setTag(tag);
-	 * try { server.writeEvent(ce); } catch (Exception e) { log.error(e); } } }
+	 * try { responses.normalResponseEvents().add(ce); } catch (Exception e) { log.error(e); } } }
 	 */
 
 	private void writeChangesToDB(User user, ChatScope scope,

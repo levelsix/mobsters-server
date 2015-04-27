@@ -120,7 +120,6 @@ import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
-import com.lvl6.server.EventWriter
 import com.lvl6.server.GameServer
 import com.lvl6.server.Locker
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
@@ -151,6 +150,7 @@ import javax.annotation.Resource
 import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.info.ClanGiftForUser
+import com.lvl6.server.EventWriterOld
 
 case class StartupData(
       resBuilder:Builder, 

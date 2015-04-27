@@ -29,6 +29,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -90,7 +91,7 @@ public class RetrieveMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		//should really be renamed to something like UpdateToCurrentMiniEvent or something
 		RetrieveMiniEventRequestProto reqProto = ((RetrieveMiniEventRequestEvent) event)
 				.getRetrieveMiniEventRequestProto();
@@ -125,7 +126,7 @@ public class RetrieveMiniEventController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveMiniEventResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -163,7 +164,7 @@ public class RetrieveMiniEventController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveMiniEventResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in RetrieveMiniEventController processEvent",
@@ -174,7 +175,7 @@ public class RetrieveMiniEventController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRetrieveMiniEventResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveMiniEventController processEvent",

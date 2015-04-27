@@ -47,6 +47,7 @@ import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -107,7 +108,7 @@ public class BeginDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent) event)
 				.getBeginDungeonRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -160,7 +161,7 @@ public class BeginDungeonController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -200,7 +201,7 @@ public class BeginDungeonController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful && 0 != gemsSpent) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -208,7 +209,7 @@ public class BeginDungeonController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(userId, aUser, eventId, taskId,
 						curTime, currencyChange, previousCurrency);
@@ -222,7 +223,7 @@ public class BeginDungeonController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setBeginDungeonResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginDungeonController processEvent",
 						e);

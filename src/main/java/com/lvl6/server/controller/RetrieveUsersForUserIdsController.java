@@ -32,6 +32,7 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -72,7 +73,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveUsersForUserIdsRequestProto reqProto = ((RetrieveUsersForUserIdsRequestEvent) event)
 				.getRetrieveUsersForUserIdsRequestProto();
 
@@ -159,7 +160,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 				senderProto.getUserUuid());
 		resEvent.setTag(event.getTag());
 		resEvent.setRetrieveUsersForUserIdsResponseProto(resProto);
-		server.writeEvent(resEvent);
+		responses.normalResponseEvents().add(resEvent);
 	}
 
 	private List<UserCurrentMonsterTeamProto> constructTeamsForUsers(

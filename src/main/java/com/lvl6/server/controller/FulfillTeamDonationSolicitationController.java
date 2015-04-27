@@ -26,6 +26,8 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.FulfillTeamDonationSolicitationAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -67,7 +69,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		FulfillTeamDonationSolicitationRequestProto reqProto = ((FulfillTeamDonationSolicitationRequestEvent) event)
 				.getFulfillTeamDonationSolicitationRequestProto();
 
@@ -127,7 +129,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -163,7 +165,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 					FulfillTeamDonationSolicitationStatus.SUCCESS)) {
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
@@ -177,7 +179,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -187,7 +189,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdate);
+					responses.normalResponseEvents().add(resEventUpdate);
 
 					writeToCurrencyHistory(userId, clientTime, stda);
 				}*/
@@ -205,7 +207,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in FulfillTeamDonationSolicitation processEvent",

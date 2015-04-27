@@ -46,6 +46,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -101,7 +102,7 @@ public class RetrieveClanInfoController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 
@@ -147,7 +148,7 @@ public class RetrieveClanInfoController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -164,7 +165,7 @@ public class RetrieveClanInfoController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 		} catch (Exception e) {
 			log.error("exception in RetrieveClanInfo processEvent", e);
 			try {
@@ -173,7 +174,7 @@ public class RetrieveClanInfoController extends EventController {
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
 				resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RetrieveClanInfo processEvent", e);
 			}

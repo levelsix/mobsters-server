@@ -8,10 +8,10 @@ public final class CustomMenuesProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface CustomMenuProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CustomMenuProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CustomMenuProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 customMenuId = 1;
     /**
      * <code>optional int32 customMenuId = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class CustomMenuesProto {
      */
     int getCustomMenuId();
 
+    // optional int32 positionX = 2;
     /**
      * <code>optional int32 positionX = 2;</code>
      */
@@ -30,6 +31,7 @@ public final class CustomMenuesProto {
      */
     int getPositionX();
 
+    // optional int32 positionY = 3;
     /**
      * <code>optional int32 positionY = 3;</code>
      */
@@ -39,6 +41,7 @@ public final class CustomMenuesProto {
      */
     int getPositionY();
 
+    // optional int32 positionZ = 4;
     /**
      * <code>optional int32 positionZ = 4;</code>
      */
@@ -48,6 +51,7 @@ public final class CustomMenuesProto {
      */
     int getPositionZ();
 
+    // optional bool isJiggle = 5;
     /**
      * <code>optional bool isJiggle = 5;</code>
      */
@@ -57,6 +61,7 @@ public final class CustomMenuesProto {
      */
     boolean getIsJiggle();
 
+    // optional string imageName = 6;
     /**
      * <code>optional string imageName = 6;</code>
      */
@@ -75,9 +80,8 @@ public final class CustomMenuesProto {
    * Protobuf type {@code com.lvl6.proto.CustomMenuProto}
    */
   public static final class CustomMenuProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CustomMenuProto)
-      CustomMenuProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CustomMenuProtoOrBuilder {
     // Use CustomMenuProto.newBuilder() to construct.
     private CustomMenuProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -149,9 +153,8 @@ public final class CustomMenuesProto {
               break;
             }
             case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              imageName_ = bs;
+              imageName_ = input.readBytes();
               break;
             }
           }
@@ -194,6 +197,7 @@ public final class CustomMenuesProto {
     }
 
     private int bitField0_;
+    // optional int32 customMenuId = 1;
     public static final int CUSTOMMENUID_FIELD_NUMBER = 1;
     private int customMenuId_;
     /**
@@ -209,6 +213,7 @@ public final class CustomMenuesProto {
       return customMenuId_;
     }
 
+    // optional int32 positionX = 2;
     public static final int POSITIONX_FIELD_NUMBER = 2;
     private int positionX_;
     /**
@@ -224,6 +229,7 @@ public final class CustomMenuesProto {
       return positionX_;
     }
 
+    // optional int32 positionY = 3;
     public static final int POSITIONY_FIELD_NUMBER = 3;
     private int positionY_;
     /**
@@ -239,6 +245,7 @@ public final class CustomMenuesProto {
       return positionY_;
     }
 
+    // optional int32 positionZ = 4;
     public static final int POSITIONZ_FIELD_NUMBER = 4;
     private int positionZ_;
     /**
@@ -254,6 +261,7 @@ public final class CustomMenuesProto {
       return positionZ_;
     }
 
+    // optional bool isJiggle = 5;
     public static final int ISJIGGLE_FIELD_NUMBER = 5;
     private boolean isJiggle_;
     /**
@@ -269,6 +277,7 @@ public final class CustomMenuesProto {
       return isJiggle_;
     }
 
+    // optional string imageName = 6;
     public static final int IMAGENAME_FIELD_NUMBER = 6;
     private java.lang.Object imageName_;
     /**
@@ -322,8 +331,7 @@ public final class CustomMenuesProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -465,9 +473,8 @@ public final class CustomMenuesProto {
      * Protobuf type {@code com.lvl6.proto.CustomMenuProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CustomMenuProto)
-        com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.CustomMenuesProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
@@ -627,6 +634,7 @@ public final class CustomMenuesProto {
       }
       private int bitField0_;
 
+      // optional int32 customMenuId = 1;
       private int customMenuId_ ;
       /**
        * <code>optional int32 customMenuId = 1;</code>
@@ -659,6 +667,7 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      // optional int32 positionX = 2;
       private int positionX_ ;
       /**
        * <code>optional int32 positionX = 2;</code>
@@ -691,6 +700,7 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      // optional int32 positionY = 3;
       private int positionY_ ;
       /**
        * <code>optional int32 positionY = 3;</code>
@@ -723,6 +733,7 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      // optional int32 positionZ = 4;
       private int positionZ_ ;
       /**
        * <code>optional int32 positionZ = 4;</code>
@@ -755,6 +766,7 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      // optional bool isJiggle = 5;
       private boolean isJiggle_ ;
       /**
        * <code>optional bool isJiggle = 5;</code>
@@ -787,6 +799,7 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      // optional string imageName = 6;
       private java.lang.Object imageName_ = "";
       /**
        * <code>optional string imageName = 6;</code>
@@ -800,12 +813,9 @@ public final class CustomMenuesProto {
       public java.lang.String getImageName() {
         java.lang.Object ref = imageName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imageName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          imageName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -874,7 +884,7 @@ public final class CustomMenuesProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CustomMenuProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -895,23 +905,23 @@ public final class CustomMenuesProto {
       "Name\030\006 \001(\tB\023B\021CustomMenuesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_CustomMenuProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CustomMenuProto_descriptor,
+              new java.lang.String[] { "CustomMenuId", "PositionX", "PositionY", "PositionZ", "IsJiggle", "ImageName", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_com_lvl6_proto_CustomMenuProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CustomMenuProto_descriptor,
-        new java.lang.String[] { "CustomMenuId", "PositionX", "PositionY", "PositionZ", "IsJiggle", "ImageName", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

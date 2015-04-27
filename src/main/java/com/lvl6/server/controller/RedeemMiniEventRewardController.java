@@ -35,6 +35,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -90,7 +91,7 @@ public class RedeemMiniEventRewardController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemMiniEventRewardRequestProto reqProto = ((RedeemMiniEventRewardRequestEvent) event)
 				.getRedeemMiniEventRewardRequestProto();
 
@@ -129,7 +130,7 @@ public class RedeemMiniEventRewardController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemMiniEventRewardResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -164,7 +165,7 @@ public class RedeemMiniEventRewardController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemMiniEventRewardResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success && rmera.isAwardedResources()) {
 				User u = rmera.getUser();
@@ -174,7 +175,7 @@ public class RedeemMiniEventRewardController extends EventController {
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									u, null, null);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdate);
+					responses.normalResponseEvents().add(resEventUpdate);
 
 					writeToCurrencyHistory(userId, clientTime, rmera);
 				} else {
@@ -191,7 +192,7 @@ public class RedeemMiniEventRewardController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRedeemMiniEventRewardResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RedeemMiniEventRewardController processEvent",

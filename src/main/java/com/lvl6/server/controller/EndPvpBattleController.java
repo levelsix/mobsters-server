@@ -52,6 +52,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -125,7 +126,7 @@ public class EndPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndPvpBattleRequestProto reqProto = ((EndPvpBattleRequestEvent) event)
 				.getEndPvpBattleRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -197,7 +198,7 @@ public class EndPvpBattleController extends EventController {
 			resEvent = new EndPvpBattleResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -291,7 +292,7 @@ public class EndPvpBattleController extends EventController {
 
 			//respond to the attacker
 			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//respond to the defender
@@ -308,14 +309,14 @@ public class EndPvpBattleController extends EventController {
 					resEvent.setTag(0);
 					resEventDefender.setEndPvpBattleResponseProto(resBuilder
 							.build());
-					server.writeEvent(resEventDefender);
+					responses.normalResponseEvents().add(resEventDefender);
 				}
 				//regardless of whether the attacker won, his elo will change
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								attacker, attackerPlfu, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				//defender's elo and resources changed only if attacker won, and defender is real
 				if (attackerWon && null != defender) {
@@ -323,7 +324,7 @@ public class EndPvpBattleController extends EventController {
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									defender, defenderPlfu, null);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdateDefender);
+					responses.normalResponseEvents().add(resEventUpdateDefender);
 				}
 
 				if (attackerWon) {
@@ -339,7 +340,7 @@ public class EndPvpBattleController extends EventController {
 			//don't let the client hang
 			try {
 				resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndPvpBattleController processEvent",
 						e);

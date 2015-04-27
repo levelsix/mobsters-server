@@ -46,6 +46,7 @@ import com.lvl6.server.controller.actionobjects.QueueUpAction;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -130,7 +131,7 @@ public class QueueUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		QueueUpRequestProto reqProto = ((QueueUpRequestEvent) event)
 				.getQueueUpRequestProto();
 
@@ -175,7 +176,7 @@ public class QueueUpController extends EventController {
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setQueueUpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -196,7 +197,7 @@ public class QueueUpController extends EventController {
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setQueueUpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//no need to update client since no currency or elo update
@@ -206,7 +207,7 @@ public class QueueUpController extends EventController {
 				//					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 				//						attacker, plfu, null);
 				//				resEventUpdate.setTag(event.getTag());
-				//				server.writeEvent(resEventUpdate);
+				//				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -215,7 +216,7 @@ public class QueueUpController extends EventController {
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setQueueUpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 		}
 	}
 

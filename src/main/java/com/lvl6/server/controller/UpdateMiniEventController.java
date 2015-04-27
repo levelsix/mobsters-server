@@ -22,6 +22,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.UpdateMiniEventAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -52,7 +53,7 @@ public class UpdateMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMiniEventRequestProto reqProto = ((UpdateMiniEventRequestEvent) event)
 				.getUpdateMiniEventRequestProto();
 
@@ -90,7 +91,7 @@ public class UpdateMiniEventController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateMiniEventResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -108,7 +109,7 @@ public class UpdateMiniEventController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateMiniEventResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in UpdateMiniEventController processEvent",
@@ -119,7 +120,7 @@ public class UpdateMiniEventController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setUpdateMiniEventResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateMiniEventController processEvent",

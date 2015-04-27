@@ -8,10 +8,10 @@ public final class EventBattleItemProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface CreateBattleItemRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CreateBattleItemRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CreateBattleItemRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -25,6 +25,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuDelete = 2;
     /**
      * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuDelete = 2;</code>
      *
@@ -69,6 +70,7 @@ public final class EventBattleItemProto {
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getBiqfuDeleteOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuUpdate = 3;
     /**
      * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuUpdate = 3;</code>
      *
@@ -118,6 +120,7 @@ public final class EventBattleItemProto {
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getBiqfuUpdateOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuNew = 4;
     /**
      * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuNew = 4;</code>
      *
@@ -162,6 +165,7 @@ public final class EventBattleItemProto {
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getBiqfuNewOrBuilder(
         int index);
 
+    // optional sint32 cashChange = 5;
     /**
      * <code>optional sint32 cashChange = 5;</code>
      *
@@ -185,6 +189,7 @@ public final class EventBattleItemProto {
      */
     int getCashChange();
 
+    // optional sint32 oilChange = 6;
     /**
      * <code>optional sint32 oilChange = 6;</code>
      */
@@ -194,6 +199,7 @@ public final class EventBattleItemProto {
      */
     int getOilChange();
 
+    // optional int32 gemCostForCreating = 7;
     /**
      * <code>optional int32 gemCostForCreating = 7;</code>
      *
@@ -215,9 +221,8 @@ public final class EventBattleItemProto {
    * Protobuf type {@code com.lvl6.proto.CreateBattleItemRequestProto}
    */
   public static final class CreateBattleItemRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CreateBattleItemRequestProto)
-      CreateBattleItemRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CreateBattleItemRequestProtoOrBuilder {
     // Use CreateBattleItemRequestProto.newBuilder() to construct.
     private CreateBattleItemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -364,6 +369,7 @@ public final class EventBattleItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -385,6 +391,7 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuDelete = 2;
     public static final int BIQFUDELETE_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuDelete_;
     /**
@@ -440,6 +447,7 @@ public final class EventBattleItemProto {
       return biqfuDelete_.get(index);
     }
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuUpdate = 3;
     public static final int BIQFUUPDATE_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuUpdate_;
     /**
@@ -500,6 +508,7 @@ public final class EventBattleItemProto {
       return biqfuUpdate_.get(index);
     }
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuNew = 4;
     public static final int BIQFUNEW_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuNew_;
     /**
@@ -555,6 +564,7 @@ public final class EventBattleItemProto {
       return biqfuNew_.get(index);
     }
 
+    // optional sint32 cashChange = 5;
     public static final int CASHCHANGE_FIELD_NUMBER = 5;
     private int cashChange_;
     /**
@@ -584,6 +594,7 @@ public final class EventBattleItemProto {
       return cashChange_;
     }
 
+    // optional sint32 oilChange = 6;
     public static final int OILCHANGE_FIELD_NUMBER = 6;
     private int oilChange_;
     /**
@@ -599,6 +610,7 @@ public final class EventBattleItemProto {
       return oilChange_;
     }
 
+    // optional int32 gemCostForCreating = 7;
     public static final int GEMCOSTFORCREATING_FIELD_NUMBER = 7;
     private int gemCostForCreating_;
     /**
@@ -634,8 +646,7 @@ public final class EventBattleItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -784,9 +795,8 @@ public final class EventBattleItemProto {
      * Protobuf type {@code com.lvl6.proto.CreateBattleItemRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CreateBattleItemRequestProto)
-        com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBattleItemProto.internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor;
@@ -1061,6 +1071,7 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -1169,7 +1180,7 @@ public final class EventBattleItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1177,6 +1188,7 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuDelete = 2;
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuDelete_ =
         java.util.Collections.emptyList();
       private void ensureBiqfuDeleteIsMutable() {
@@ -1358,8 +1370,7 @@ public final class EventBattleItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> values) {
         if (biqfuDeleteBuilder_ == null) {
           ensureBiqfuDeleteIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, biqfuDelete_);
+          super.addAll(values, biqfuDelete_);
           onChanged();
         } else {
           biqfuDeleteBuilder_.addAllMessages(values);
@@ -1489,6 +1500,7 @@ public final class EventBattleItemProto {
         return biqfuDeleteBuilder_;
       }
 
+      // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuUpdate = 3;
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuUpdate_ =
         java.util.Collections.emptyList();
       private void ensureBiqfuUpdateIsMutable() {
@@ -1680,8 +1692,7 @@ public final class EventBattleItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> values) {
         if (biqfuUpdateBuilder_ == null) {
           ensureBiqfuUpdateIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, biqfuUpdate_);
+          super.addAll(values, biqfuUpdate_);
           onChanged();
         } else {
           biqfuUpdateBuilder_.addAllMessages(values);
@@ -1819,6 +1830,7 @@ public final class EventBattleItemProto {
         return biqfuUpdateBuilder_;
       }
 
+      // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuNew = 4;
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuNew_ =
         java.util.Collections.emptyList();
       private void ensureBiqfuNewIsMutable() {
@@ -2000,8 +2012,7 @@ public final class EventBattleItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> values) {
         if (biqfuNewBuilder_ == null) {
           ensureBiqfuNewIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, biqfuNew_);
+          super.addAll(values, biqfuNew_);
           onChanged();
         } else {
           biqfuNewBuilder_.addAllMessages(values);
@@ -2131,6 +2142,7 @@ public final class EventBattleItemProto {
         return biqfuNewBuilder_;
       }
 
+      // optional sint32 cashChange = 5;
       private int cashChange_ ;
       /**
        * <code>optional sint32 cashChange = 5;</code>
@@ -2191,6 +2203,7 @@ public final class EventBattleItemProto {
         return this;
       }
 
+      // optional sint32 oilChange = 6;
       private int oilChange_ ;
       /**
        * <code>optional sint32 oilChange = 6;</code>
@@ -2223,6 +2236,7 @@ public final class EventBattleItemProto {
         return this;
       }
 
+      // optional int32 gemCostForCreating = 7;
       private int gemCostForCreating_ ;
       /**
        * <code>optional int32 gemCostForCreating = 7;</code>
@@ -2282,10 +2296,10 @@ public final class EventBattleItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CreateBattleItemRequestProto)
   }
 
-  public interface CreateBattleItemResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CreateBattleItemResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CreateBattleItemResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2299,6 +2313,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.UserBattleItemProto userBattleItems = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserBattleItemProto userBattleItems = 2;</code>
      */
@@ -2323,6 +2338,7 @@ public final class EventBattleItemProto {
     com.lvl6.proto.BattleItemsProto.UserBattleItemProtoOrBuilder getUserBattleItemsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
      */
@@ -2336,9 +2352,8 @@ public final class EventBattleItemProto {
    * Protobuf type {@code com.lvl6.proto.CreateBattleItemResponseProto}
    */
   public static final class CreateBattleItemResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CreateBattleItemResponseProto)
-      CreateBattleItemResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CreateBattleItemResponseProtoOrBuilder {
     // Use CreateBattleItemResponseProto.newBuilder() to construct.
     private CreateBattleItemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2550,6 +2565,7 @@ public final class EventBattleItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2571,6 +2587,7 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.UserBattleItemProto userBattleItems = 2;
     public static final int USERBATTLEITEMS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> userBattleItems_;
     /**
@@ -2606,6 +2623,7 @@ public final class EventBattleItemProto {
       return userBattleItems_.get(index);
     }
 
+    // optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus status_;
     /**
@@ -2629,8 +2647,7 @@ public final class EventBattleItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2751,9 +2768,8 @@ public final class EventBattleItemProto {
      * Protobuf type {@code com.lvl6.proto.CreateBattleItemResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CreateBattleItemResponseProto)
-        com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBattleItemProto.internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor;
@@ -2926,6 +2942,7 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3034,7 +3051,7 @@ public final class EventBattleItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3042,6 +3059,7 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserBattleItemProto userBattleItems = 2;
       private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> userBattleItems_ =
         java.util.Collections.emptyList();
       private void ensureUserBattleItemsIsMutable() {
@@ -3183,8 +3201,7 @@ public final class EventBattleItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProto> values) {
         if (userBattleItemsBuilder_ == null) {
           ensureUserBattleItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userBattleItems_);
+          super.addAll(values, userBattleItems_);
           onChanged();
         } else {
           userBattleItemsBuilder_.addAllMessages(values);
@@ -3282,6 +3299,7 @@ public final class EventBattleItemProto {
         return userBattleItemsBuilder_;
       }
 
+      // optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;
       private com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus status_ = com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
@@ -3328,10 +3346,10 @@ public final class EventBattleItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CreateBattleItemResponseProto)
   }
 
-  public interface CompleteBattleItemRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CompleteBattleItemRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CompleteBattleItemRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3345,6 +3363,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional bool isSpeedup = 2;
     /**
      * <code>optional bool isSpeedup = 2;</code>
      */
@@ -3354,6 +3373,7 @@ public final class EventBattleItemProto {
      */
     boolean getIsSpeedup();
 
+    // optional int32 gemsForSpeedup = 3;
     /**
      * <code>optional int32 gemsForSpeedup = 3;</code>
      *
@@ -3371,6 +3391,7 @@ public final class EventBattleItemProto {
      */
     int getGemsForSpeedup();
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuCompleted = 4;
     /**
      * <code>repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuCompleted = 4;</code>
      *
@@ -3419,9 +3440,8 @@ public final class EventBattleItemProto {
    * Protobuf type {@code com.lvl6.proto.CompleteBattleItemRequestProto}
    */
   public static final class CompleteBattleItemRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CompleteBattleItemRequestProto)
-      CompleteBattleItemRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CompleteBattleItemRequestProtoOrBuilder {
     // Use CompleteBattleItemRequestProto.newBuilder() to construct.
     private CompleteBattleItemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3541,6 +3561,7 @@ public final class EventBattleItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3562,6 +3583,7 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
+    // optional bool isSpeedup = 2;
     public static final int ISSPEEDUP_FIELD_NUMBER = 2;
     private boolean isSpeedup_;
     /**
@@ -3577,6 +3599,7 @@ public final class EventBattleItemProto {
       return isSpeedup_;
     }
 
+    // optional int32 gemsForSpeedup = 3;
     public static final int GEMSFORSPEEDUP_FIELD_NUMBER = 3;
     private int gemsForSpeedup_;
     /**
@@ -3600,6 +3623,7 @@ public final class EventBattleItemProto {
       return gemsForSpeedup_;
     }
 
+    // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuCompleted = 4;
     public static final int BIQFUCOMPLETED_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuCompleted_;
     /**
@@ -3664,8 +3688,7 @@ public final class EventBattleItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3793,9 +3816,8 @@ public final class EventBattleItemProto {
      * Protobuf type {@code com.lvl6.proto.CompleteBattleItemRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CompleteBattleItemRequestProto)
-        com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBattleItemProto.internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor;
@@ -3977,6 +3999,7 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4085,7 +4108,7 @@ public final class EventBattleItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4093,6 +4116,7 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
+      // optional bool isSpeedup = 2;
       private boolean isSpeedup_ ;
       /**
        * <code>optional bool isSpeedup = 2;</code>
@@ -4125,6 +4149,7 @@ public final class EventBattleItemProto {
         return this;
       }
 
+      // optional int32 gemsForSpeedup = 3;
       private int gemsForSpeedup_ ;
       /**
        * <code>optional int32 gemsForSpeedup = 3;</code>
@@ -4173,6 +4198,7 @@ public final class EventBattleItemProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.BattleItemQueueForUserProto biqfuCompleted = 4;
       private java.util.List<com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> biqfuCompleted_ =
         java.util.Collections.emptyList();
       private void ensureBiqfuCompletedIsMutable() {
@@ -4354,8 +4380,7 @@ public final class EventBattleItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto> values) {
         if (biqfuCompletedBuilder_ == null) {
           ensureBiqfuCompletedIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, biqfuCompleted_);
+          super.addAll(values, biqfuCompleted_);
           onChanged();
         } else {
           biqfuCompletedBuilder_.addAllMessages(values);
@@ -4496,10 +4521,10 @@ public final class EventBattleItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CompleteBattleItemRequestProto)
   }
 
-  public interface CompleteBattleItemResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CompleteBattleItemResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CompleteBattleItemResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4513,6 +4538,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
      */
@@ -4522,6 +4548,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus getStatus();
 
+    // repeated .com.lvl6.proto.UserBattleItemProto ubiUpdated = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserBattleItemProto ubiUpdated = 3;</code>
      *
@@ -4570,9 +4597,8 @@ public final class EventBattleItemProto {
    * Protobuf type {@code com.lvl6.proto.CompleteBattleItemResponseProto}
    */
   public static final class CompleteBattleItemResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CompleteBattleItemResponseProto)
-      CompleteBattleItemResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CompleteBattleItemResponseProtoOrBuilder {
     // Use CompleteBattleItemResponseProto.newBuilder() to construct.
     private CompleteBattleItemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4793,6 +4819,7 @@ public final class EventBattleItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4814,6 +4841,7 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status_;
     /**
@@ -4829,6 +4857,7 @@ public final class EventBattleItemProto {
       return status_;
     }
 
+    // repeated .com.lvl6.proto.UserBattleItemProto ubiUpdated = 3;
     public static final int UBIUPDATED_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> ubiUpdated_;
     /**
@@ -4892,8 +4921,7 @@ public final class EventBattleItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5014,9 +5042,8 @@ public final class EventBattleItemProto {
      * Protobuf type {@code com.lvl6.proto.CompleteBattleItemResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CompleteBattleItemResponseProto)
-        com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBattleItemProto.internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor;
@@ -5189,6 +5216,7 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5297,7 +5325,7 @@ public final class EventBattleItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5305,6 +5333,7 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;
       private com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status_ = com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
@@ -5340,6 +5369,7 @@ public final class EventBattleItemProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserBattleItemProto ubiUpdated = 3;
       private java.util.List<com.lvl6.proto.BattleItemsProto.UserBattleItemProto> ubiUpdated_ =
         java.util.Collections.emptyList();
       private void ensureUbiUpdatedIsMutable() {
@@ -5521,8 +5551,7 @@ public final class EventBattleItemProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleItemsProto.UserBattleItemProto> values) {
         if (ubiUpdatedBuilder_ == null) {
           ensureUbiUpdatedIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, ubiUpdated_);
+          super.addAll(values, ubiUpdated_);
           onChanged();
         } else {
           ubiUpdatedBuilder_.addAllMessages(values);
@@ -5663,10 +5692,10 @@ public final class EventBattleItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CompleteBattleItemResponseProto)
   }
 
-  public interface DiscardBattleItemRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DiscardBattleItemRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface DiscardBattleItemRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -5680,6 +5709,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated int32 discardedBattleItemIds = 2;
     /**
      * <code>repeated int32 discardedBattleItemIds = 2;</code>
      *
@@ -5712,9 +5742,8 @@ public final class EventBattleItemProto {
    * Protobuf type {@code com.lvl6.proto.DiscardBattleItemRequestProto}
    */
   public static final class DiscardBattleItemRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DiscardBattleItemRequestProto)
-      DiscardBattleItemRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements DiscardBattleItemRequestProtoOrBuilder {
     // Use DiscardBattleItemRequestProto.newBuilder() to construct.
     private DiscardBattleItemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5837,6 +5866,7 @@ public final class EventBattleItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -5858,6 +5888,7 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
+    // repeated int32 discardedBattleItemIds = 2;
     public static final int DISCARDEDBATTLEITEMIDS_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Integer> discardedBattleItemIds_;
     /**
@@ -5902,8 +5933,7 @@ public final class EventBattleItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6022,9 +6052,8 @@ public final class EventBattleItemProto {
      * Protobuf type {@code com.lvl6.proto.DiscardBattleItemRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DiscardBattleItemRequestProto)
-        com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBattleItemProto.internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor;
@@ -6163,6 +6192,7 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -6271,7 +6301,7 @@ public final class EventBattleItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -6279,6 +6309,7 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
+      // repeated int32 discardedBattleItemIds = 2;
       private java.util.List<java.lang.Integer> discardedBattleItemIds_ = java.util.Collections.emptyList();
       private void ensureDiscardedBattleItemIdsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -6360,8 +6391,7 @@ public final class EventBattleItemProto {
       public Builder addAllDiscardedBattleItemIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureDiscardedBattleItemIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, discardedBattleItemIds_);
+        super.addAll(values, discardedBattleItemIds_);
         onChanged();
         return this;
       }
@@ -6391,10 +6421,10 @@ public final class EventBattleItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.DiscardBattleItemRequestProto)
   }
 
-  public interface DiscardBattleItemResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DiscardBattleItemResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface DiscardBattleItemResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -6408,6 +6438,7 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
      */
@@ -6421,9 +6452,8 @@ public final class EventBattleItemProto {
    * Protobuf type {@code com.lvl6.proto.DiscardBattleItemResponseProto}
    */
   public static final class DiscardBattleItemResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DiscardBattleItemResponseProto)
-      DiscardBattleItemResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements DiscardBattleItemResponseProtoOrBuilder {
     // Use DiscardBattleItemResponseProto.newBuilder() to construct.
     private DiscardBattleItemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6624,6 +6654,7 @@ public final class EventBattleItemProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -6645,6 +6676,7 @@ public final class EventBattleItemProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status_;
     /**
@@ -6667,8 +6699,7 @@ public final class EventBattleItemProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6782,9 +6813,8 @@ public final class EventBattleItemProto {
      * Protobuf type {@code com.lvl6.proto.DiscardBattleItemResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DiscardBattleItemResponseProto)
-        com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventBattleItemProto.internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor;
@@ -6915,6 +6945,7 @@ public final class EventBattleItemProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7023,7 +7054,7 @@ public final class EventBattleItemProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7031,6 +7062,7 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;
       private com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status_ = com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
@@ -7077,32 +7109,32 @@ public final class EventBattleItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.DiscardBattleItemResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CreateBattleItemRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CreateBattleItemResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -7161,57 +7193,55 @@ public final class EventBattleItemProto {
       "BattleItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_CreateBattleItemRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "BiqfuDelete", "BiqfuUpdate", "BiqfuNew", "CashChange", "OilChange", "GemCostForCreating", });
+          internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_CreateBattleItemResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "UserBattleItems", "Status", });
+          internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "BiqfuCompleted", });
+          internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "UbiUpdated", });
+          internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "DiscardedBattleItemIds", });
+          internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleItemsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_CreateBattleItemRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "BiqfuDelete", "BiqfuUpdate", "BiqfuNew", "CashChange", "OilChange", "GemCostForCreating", });
-    internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_CreateBattleItemResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "UserBattleItems", "Status", });
-    internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "BiqfuCompleted", });
-    internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UbiUpdated", });
-    internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DiscardedBattleItemIds", });
-    internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    com.lvl6.proto.BattleItemsProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

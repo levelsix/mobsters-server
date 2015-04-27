@@ -33,6 +33,7 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -71,7 +72,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent) event)
 				.getInviteFbFriendsForSlotsRequestProto();
 
@@ -114,7 +115,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -176,7 +177,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			//send this to all the recipients in fbIdsOfFriends that have a user id
 			//if want to send to the new ones only use newFacebookIdsToInvite
@@ -194,7 +195,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 					newResEvent.setTag(0);
 					newResEvent
 							.setInviteFbFriendsForSlotsResponseProto(responseProto);
-					server.writeEvent(newResEvent);
+					responses.normalResponseEvents().add(newResEvent);
 				}
 			}
 		} catch (Exception e) {
@@ -209,7 +210,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in InviteFbFriendsForSlotsController processEvent",

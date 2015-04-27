@@ -28,7 +28,7 @@ class EventParser extends LazyLogging{
     val eventController = getEventController(eventType)
     eventController match{
       case Some(ec) => {
-        val requestEvent = ec.createRequestEvent()
+        val requestEvent = ec.createRequestEvent
         requestEvent.setTag(eventProto.getTagNum)
         requestEvent.read(ByteBuffer.wrap(eventProto.getEventBytes.toByteArray()))
         ParsedEvent(eventProto, requestEvent, eventType, ec)        

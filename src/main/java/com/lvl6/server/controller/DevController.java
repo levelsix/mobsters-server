@@ -32,6 +32,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -73,7 +74,7 @@ public class DevController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DevRequestProto reqProto = ((DevRequestEvent) event)
 				.getDevRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -105,7 +106,7 @@ public class DevController extends EventController {
 			DevResponseEvent resEvent = new DevResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDevResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -134,13 +135,13 @@ public class DevController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setDevResponseProto(resProto);
 			resEvent.setTag(event.getTag());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			UpdateClientUserResponseEvent resEventUpdate = miscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 							aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
-			server.writeEvent(resEventUpdate);
+			responses.normalResponseEvents().add(resEventUpdate);
 
 		} catch (Exception e) {
 			log.error("exception in DevController processEvent", e);
@@ -149,7 +150,7 @@ public class DevController extends EventController {
 				DevResponseEvent resEvent = new DevResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setDevResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in DevController processEvent", e);
 			}

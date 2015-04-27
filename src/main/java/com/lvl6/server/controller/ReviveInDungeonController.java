@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -70,7 +71,7 @@ public class ReviveInDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ReviveInDungeonRequestProto reqProto = ((ReviveInDungeonRequestEvent) event)
 				.getReviveInDungeonRequestProto();
 
@@ -112,7 +113,7 @@ public class ReviveInDungeonController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setReviveInDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -146,7 +147,7 @@ public class ReviveInDungeonController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setReviveInDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -154,7 +155,7 @@ public class ReviveInDungeonController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				writeToUserCurrencyHistory(userId, aUser, userTaskId, curTime,
 						previousGems, currencyChange);
 			}
@@ -167,7 +168,7 @@ public class ReviveInDungeonController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setReviveInDungeonResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ReviveInDungeonController processEvent",

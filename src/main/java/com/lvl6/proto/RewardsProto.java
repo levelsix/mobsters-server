@@ -8,10 +8,10 @@ public final class RewardsProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface RewardProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RewardProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RewardProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 rewardId = 1;
     /**
      * <code>optional int32 rewardId = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class RewardsProto {
      */
     int getRewardId();
 
+    // optional int32 staticDataId = 2;
     /**
      * <code>optional int32 staticDataId = 2;</code>
      *
@@ -38,6 +39,7 @@ public final class RewardsProto {
      */
     int getStaticDataId();
 
+    // optional .com.lvl6.proto.RewardProto.RewardType typ = 3;
     /**
      * <code>optional .com.lvl6.proto.RewardProto.RewardType typ = 3;</code>
      */
@@ -47,6 +49,7 @@ public final class RewardsProto {
      */
     com.lvl6.proto.RewardsProto.RewardProto.RewardType getTyp();
 
+    // optional int32 amt = 4;
     /**
      * <code>optional int32 amt = 4;</code>
      */
@@ -60,9 +63,8 @@ public final class RewardsProto {
    * Protobuf type {@code com.lvl6.proto.RewardProto}
    */
   public static final class RewardProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RewardProto)
-      RewardProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RewardProtoOrBuilder {
     // Use RewardProto.newBuilder() to construct.
     private RewardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -301,6 +303,7 @@ public final class RewardsProto {
     }
 
     private int bitField0_;
+    // optional int32 rewardId = 1;
     public static final int REWARDID_FIELD_NUMBER = 1;
     private int rewardId_;
     /**
@@ -316,6 +319,7 @@ public final class RewardsProto {
       return rewardId_;
     }
 
+    // optional int32 staticDataId = 2;
     public static final int STATICDATAID_FIELD_NUMBER = 2;
     private int staticDataId_;
     /**
@@ -339,6 +343,7 @@ public final class RewardsProto {
       return staticDataId_;
     }
 
+    // optional .com.lvl6.proto.RewardProto.RewardType typ = 3;
     public static final int TYP_FIELD_NUMBER = 3;
     private com.lvl6.proto.RewardsProto.RewardProto.RewardType typ_;
     /**
@@ -354,6 +359,7 @@ public final class RewardsProto {
       return typ_;
     }
 
+    // optional int32 amt = 4;
     public static final int AMT_FIELD_NUMBER = 4;
     private int amt_;
     /**
@@ -378,8 +384,7 @@ public final class RewardsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -507,9 +512,8 @@ public final class RewardsProto {
      * Protobuf type {@code com.lvl6.proto.RewardProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RewardProto)
-        com.lvl6.proto.RewardsProto.RewardProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.RewardsProto.RewardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_RewardProto_descriptor;
@@ -649,6 +653,7 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
+      // optional int32 rewardId = 1;
       private int rewardId_ ;
       /**
        * <code>optional int32 rewardId = 1;</code>
@@ -681,6 +686,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional int32 staticDataId = 2;
       private int staticDataId_ ;
       /**
        * <code>optional int32 staticDataId = 2;</code>
@@ -729,6 +735,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.RewardProto.RewardType typ = 3;
       private com.lvl6.proto.RewardsProto.RewardProto.RewardType typ_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
       /**
        * <code>optional .com.lvl6.proto.RewardProto.RewardType typ = 3;</code>
@@ -764,6 +771,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional int32 amt = 4;
       private int amt_ ;
       /**
        * <code>optional int32 amt = 4;</code>
@@ -807,10 +815,10 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RewardProto)
   }
 
-  public interface UserRewardProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserRewardProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserRewardProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;</code>
      */
@@ -835,6 +843,7 @@ public final class RewardsProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewMonstersOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;</code>
      */
@@ -859,6 +868,7 @@ public final class RewardsProto {
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
         int index);
 
+    // optional int32 gems = 3;
     /**
      * <code>optional int32 gems = 3;</code>
      *
@@ -876,6 +886,7 @@ public final class RewardsProto {
      */
     int getGems();
 
+    // optional int32 cash = 4;
     /**
      * <code>optional int32 cash = 4;</code>
      */
@@ -885,6 +896,7 @@ public final class RewardsProto {
      */
     int getCash();
 
+    // optional int32 oil = 5;
     /**
      * <code>optional int32 oil = 5;</code>
      */
@@ -894,6 +906,7 @@ public final class RewardsProto {
      */
     int getOil();
 
+    // optional .com.lvl6.proto.UserClanGiftProto clanGift = 6;
     /**
      * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 6;</code>
      */
@@ -916,9 +929,8 @@ public final class RewardsProto {
    * </pre>
    */
   public static final class UserRewardProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserRewardProto)
-      UserRewardProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserRewardProtoOrBuilder {
     // Use UserRewardProto.newBuilder() to construct.
     private UserRewardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1054,6 +1066,7 @@ public final class RewardsProto {
     }
 
     private int bitField0_;
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;
     public static final int UPDATEDORNEWMONSTERS_FIELD_NUMBER = 1;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNewMonsters_;
     /**
@@ -1089,6 +1102,7 @@ public final class RewardsProto {
       return updatedOrNewMonsters_.get(index);
     }
 
+    // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;
     public static final int UPDATEDUSERITEMS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_;
     /**
@@ -1124,6 +1138,7 @@ public final class RewardsProto {
       return updatedUserItems_.get(index);
     }
 
+    // optional int32 gems = 3;
     public static final int GEMS_FIELD_NUMBER = 3;
     private int gems_;
     /**
@@ -1147,6 +1162,7 @@ public final class RewardsProto {
       return gems_;
     }
 
+    // optional int32 cash = 4;
     public static final int CASH_FIELD_NUMBER = 4;
     private int cash_;
     /**
@@ -1162,6 +1178,7 @@ public final class RewardsProto {
       return cash_;
     }
 
+    // optional int32 oil = 5;
     public static final int OIL_FIELD_NUMBER = 5;
     private int oil_;
     /**
@@ -1177,6 +1194,7 @@ public final class RewardsProto {
       return oil_;
     }
 
+    // optional .com.lvl6.proto.UserClanGiftProto clanGift = 6;
     public static final int CLANGIFT_FIELD_NUMBER = 6;
     private com.lvl6.proto.RewardsProto.UserClanGiftProto clanGift_;
     /**
@@ -1209,8 +1227,7 @@ public final class RewardsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1357,9 +1374,8 @@ public final class RewardsProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserRewardProto)
-        com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserRewardProto_descriptor;
@@ -1592,6 +1608,7 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
+      // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNewMonsters = 1;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNewMonsters_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedOrNewMonstersIsMutable() {
@@ -1733,8 +1750,7 @@ public final class RewardsProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (updatedOrNewMonstersBuilder_ == null) {
           ensureUpdatedOrNewMonstersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedOrNewMonsters_);
+          super.addAll(values, updatedOrNewMonsters_);
           onChanged();
         } else {
           updatedOrNewMonstersBuilder_.addAllMessages(values);
@@ -1832,6 +1848,7 @@ public final class RewardsProto {
         return updatedOrNewMonstersBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserItemProto updatedUserItems = 2;
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> updatedUserItems_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedUserItemsIsMutable() {
@@ -1973,8 +1990,7 @@ public final class RewardsProto {
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
         if (updatedUserItemsBuilder_ == null) {
           ensureUpdatedUserItemsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, updatedUserItems_);
+          super.addAll(values, updatedUserItems_);
           onChanged();
         } else {
           updatedUserItemsBuilder_.addAllMessages(values);
@@ -2072,6 +2088,7 @@ public final class RewardsProto {
         return updatedUserItemsBuilder_;
       }
 
+      // optional int32 gems = 3;
       private int gems_ ;
       /**
        * <code>optional int32 gems = 3;</code>
@@ -2120,6 +2137,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional int32 cash = 4;
       private int cash_ ;
       /**
        * <code>optional int32 cash = 4;</code>
@@ -2152,6 +2170,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional int32 oil = 5;
       private int oil_ ;
       /**
        * <code>optional int32 oil = 5;</code>
@@ -2184,6 +2203,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.UserClanGiftProto clanGift = 6;
       private com.lvl6.proto.RewardsProto.UserClanGiftProto clanGift_ = com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.UserClanGiftProto, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder, com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder> clanGiftBuilder_;
@@ -2292,7 +2312,7 @@ public final class RewardsProto {
         if (clanGiftBuilder_ == null) {
           clanGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.UserClanGiftProto, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder, com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder>(
-                  getClanGift(),
+                  clanGift_,
                   getParentForChildren(),
                   isClean());
           clanGift_ = null;
@@ -2311,10 +2331,10 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserRewardProto)
   }
 
-  public interface ClanGiftProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanGiftProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ClanGiftProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 clanGiftId = 1;
     /**
      * <code>optional int32 clanGiftId = 1;</code>
      */
@@ -2324,6 +2344,7 @@ public final class RewardsProto {
      */
     int getClanGiftId();
 
+    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -2338,6 +2359,7 @@ public final class RewardsProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional int32 hoursUntilExpiration = 3;
     /**
      * <code>optional int32 hoursUntilExpiration = 3;</code>
      */
@@ -2347,6 +2369,7 @@ public final class RewardsProto {
      */
     int getHoursUntilExpiration();
 
+    // optional string imageName = 4;
     /**
      * <code>optional string imageName = 4;</code>
      */
@@ -2361,6 +2384,7 @@ public final class RewardsProto {
     com.google.protobuf.ByteString
         getImageNameBytes();
 
+    // optional .com.lvl6.proto.Quality quality = 5;
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
      */
@@ -2374,9 +2398,8 @@ public final class RewardsProto {
    * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
    */
   public static final class ClanGiftProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanGiftProto)
-      ClanGiftProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ClanGiftProtoOrBuilder {
     // Use ClanGiftProto.newBuilder() to construct.
     private ClanGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2428,9 +2451,8 @@ public final class RewardsProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 24: {
@@ -2439,9 +2461,8 @@ public final class RewardsProto {
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              imageName_ = bs;
+              imageName_ = input.readBytes();
               break;
             }
             case 40: {
@@ -2495,6 +2516,7 @@ public final class RewardsProto {
     }
 
     private int bitField0_;
+    // optional int32 clanGiftId = 1;
     public static final int CLANGIFTID_FIELD_NUMBER = 1;
     private int clanGiftId_;
     /**
@@ -2510,6 +2532,7 @@ public final class RewardsProto {
       return clanGiftId_;
     }
 
+    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -2552,6 +2575,7 @@ public final class RewardsProto {
       }
     }
 
+    // optional int32 hoursUntilExpiration = 3;
     public static final int HOURSUNTILEXPIRATION_FIELD_NUMBER = 3;
     private int hoursUntilExpiration_;
     /**
@@ -2567,6 +2591,7 @@ public final class RewardsProto {
       return hoursUntilExpiration_;
     }
 
+    // optional string imageName = 4;
     public static final int IMAGENAME_FIELD_NUMBER = 4;
     private java.lang.Object imageName_;
     /**
@@ -2609,6 +2634,7 @@ public final class RewardsProto {
       }
     }
 
+    // optional .com.lvl6.proto.Quality quality = 5;
     public static final int QUALITY_FIELD_NUMBER = 5;
     private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     /**
@@ -2634,8 +2660,7 @@ public final class RewardsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2770,9 +2795,8 @@ public final class RewardsProto {
      * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanGiftProto)
-        com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_ClanGiftProto_descriptor;
@@ -2925,6 +2949,7 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
+      // optional int32 clanGiftId = 1;
       private int clanGiftId_ ;
       /**
        * <code>optional int32 clanGiftId = 1;</code>
@@ -2957,6 +2982,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -2970,12 +2996,9 @@ public final class RewardsProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3033,6 +3056,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional int32 hoursUntilExpiration = 3;
       private int hoursUntilExpiration_ ;
       /**
        * <code>optional int32 hoursUntilExpiration = 3;</code>
@@ -3065,6 +3089,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional string imageName = 4;
       private java.lang.Object imageName_ = "";
       /**
        * <code>optional string imageName = 4;</code>
@@ -3078,12 +3103,9 @@ public final class RewardsProto {
       public java.lang.String getImageName() {
         java.lang.Object ref = imageName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imageName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          imageName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3141,6 +3163,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.Quality quality = 5;
       private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 5;</code>
@@ -3187,10 +3210,10 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanGiftProto)
   }
 
-  public interface UserClanGiftProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserClanGiftProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserClanGiftProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userClanGiftId = 1;
     /**
      * <code>optional string userClanGiftId = 1;</code>
      */
@@ -3205,6 +3228,7 @@ public final class RewardsProto {
     com.google.protobuf.ByteString
         getUserClanGiftIdBytes();
 
+    // optional string receiverUserId = 2;
     /**
      * <code>optional string receiverUserId = 2;</code>
      */
@@ -3219,6 +3243,7 @@ public final class RewardsProto {
     com.google.protobuf.ByteString
         getReceiverUserIdBytes();
 
+    // optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
      */
@@ -3232,6 +3257,7 @@ public final class RewardsProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder();
 
+    // optional .com.lvl6.proto.ClanGiftProto clanGift = 4;
     /**
      * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
      */
@@ -3245,6 +3271,7 @@ public final class RewardsProto {
      */
     com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder();
 
+    // optional int64 timeReceived = 5;
     /**
      * <code>optional int64 timeReceived = 5;</code>
      *
@@ -3262,6 +3289,7 @@ public final class RewardsProto {
      */
     long getTimeReceived();
 
+    // optional .com.lvl6.proto.RewardProto reward = 6;
     /**
      * <code>optional .com.lvl6.proto.RewardProto reward = 6;</code>
      */
@@ -3275,6 +3303,7 @@ public final class RewardsProto {
      */
     com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
 
+    // optional bool hasBeenCollected = 7;
     /**
      * <code>optional bool hasBeenCollected = 7;</code>
      */
@@ -3288,9 +3317,8 @@ public final class RewardsProto {
    * Protobuf type {@code com.lvl6.proto.UserClanGiftProto}
    */
   public static final class UserClanGiftProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserClanGiftProto)
-      UserClanGiftProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserClanGiftProtoOrBuilder {
     // Use UserClanGiftProto.newBuilder() to construct.
     private UserClanGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3337,15 +3365,13 @@ public final class RewardsProto {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userClanGiftId_ = bs;
+              userClanGiftId_ = input.readBytes();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              receiverUserId_ = bs;
+              receiverUserId_ = input.readBytes();
               break;
             }
             case 26: {
@@ -3437,6 +3463,7 @@ public final class RewardsProto {
     }
 
     private int bitField0_;
+    // optional string userClanGiftId = 1;
     public static final int USERCLANGIFTID_FIELD_NUMBER = 1;
     private java.lang.Object userClanGiftId_;
     /**
@@ -3479,6 +3506,7 @@ public final class RewardsProto {
       }
     }
 
+    // optional string receiverUserId = 2;
     public static final int RECEIVERUSERID_FIELD_NUMBER = 2;
     private java.lang.Object receiverUserId_;
     /**
@@ -3521,6 +3549,7 @@ public final class RewardsProto {
       }
     }
 
+    // optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;
     public static final int GIFTERUSER_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumUserProto gifterUser_;
     /**
@@ -3542,6 +3571,7 @@ public final class RewardsProto {
       return gifterUser_;
     }
 
+    // optional .com.lvl6.proto.ClanGiftProto clanGift = 4;
     public static final int CLANGIFT_FIELD_NUMBER = 4;
     private com.lvl6.proto.RewardsProto.ClanGiftProto clanGift_;
     /**
@@ -3563,6 +3593,7 @@ public final class RewardsProto {
       return clanGift_;
     }
 
+    // optional int64 timeReceived = 5;
     public static final int TIMERECEIVED_FIELD_NUMBER = 5;
     private long timeReceived_;
     /**
@@ -3586,6 +3617,7 @@ public final class RewardsProto {
       return timeReceived_;
     }
 
+    // optional .com.lvl6.proto.RewardProto reward = 6;
     public static final int REWARD_FIELD_NUMBER = 6;
     private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
@@ -3607,6 +3639,7 @@ public final class RewardsProto {
       return reward_;
     }
 
+    // optional bool hasBeenCollected = 7;
     public static final int HASBEENCOLLECTED_FIELD_NUMBER = 7;
     private boolean hasBeenCollected_;
     /**
@@ -3634,8 +3667,7 @@ public final class RewardsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3784,9 +3816,8 @@ public final class RewardsProto {
      * Protobuf type {@code com.lvl6.proto.UserClanGiftProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserClanGiftProto)
-        com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
@@ -3984,6 +4015,7 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
+      // optional string userClanGiftId = 1;
       private java.lang.Object userClanGiftId_ = "";
       /**
        * <code>optional string userClanGiftId = 1;</code>
@@ -3997,12 +4029,9 @@ public final class RewardsProto {
       public java.lang.String getUserClanGiftId() {
         java.lang.Object ref = userClanGiftId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userClanGiftId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userClanGiftId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4060,6 +4089,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional string receiverUserId = 2;
       private java.lang.Object receiverUserId_ = "";
       /**
        * <code>optional string receiverUserId = 2;</code>
@@ -4073,12 +4103,9 @@ public final class RewardsProto {
       public java.lang.String getReceiverUserId() {
         java.lang.Object ref = receiverUserId_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            receiverUserId_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          receiverUserId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4136,6 +4163,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;
       private com.lvl6.proto.UserProto.MinimumUserProto gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> gifterUserBuilder_;
@@ -4244,7 +4272,7 @@ public final class RewardsProto {
         if (gifterUserBuilder_ == null) {
           gifterUserBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getGifterUser(),
+                  gifterUser_,
                   getParentForChildren(),
                   isClean());
           gifterUser_ = null;
@@ -4252,6 +4280,7 @@ public final class RewardsProto {
         return gifterUserBuilder_;
       }
 
+      // optional .com.lvl6.proto.ClanGiftProto clanGift = 4;
       private com.lvl6.proto.RewardsProto.ClanGiftProto clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder> clanGiftBuilder_;
@@ -4360,7 +4389,7 @@ public final class RewardsProto {
         if (clanGiftBuilder_ == null) {
           clanGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder>(
-                  getClanGift(),
+                  clanGift_,
                   getParentForChildren(),
                   isClean());
           clanGift_ = null;
@@ -4368,6 +4397,7 @@ public final class RewardsProto {
         return clanGiftBuilder_;
       }
 
+      // optional int64 timeReceived = 5;
       private long timeReceived_ ;
       /**
        * <code>optional int64 timeReceived = 5;</code>
@@ -4416,6 +4446,7 @@ public final class RewardsProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.RewardProto reward = 6;
       private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
@@ -4524,7 +4555,7 @@ public final class RewardsProto {
         if (rewardBuilder_ == null) {
           rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getReward(),
+                  reward_,
                   getParentForChildren(),
                   isClean());
           reward_ = null;
@@ -4532,6 +4563,7 @@ public final class RewardsProto {
         return rewardBuilder_;
       }
 
+      // optional bool hasBeenCollected = 7;
       private boolean hasBeenCollected_ ;
       /**
        * <code>optional bool hasBeenCollected = 7;</code>
@@ -4575,22 +4607,22 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserClanGiftProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RewardProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserRewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ClanGiftProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -4631,13 +4663,37 @@ public final class RewardsProto {
       " \001(\010B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_RewardProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_RewardProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RewardProto_descriptor,
+              new java.lang.String[] { "RewardId", "StaticDataId", "Typ", "Amt", });
+          internal_static_com_lvl6_proto_UserRewardProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserRewardProto_descriptor,
+              new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", "ClanGift", });
+          internal_static_com_lvl6_proto_ClanGiftProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClanGiftProto_descriptor,
+              new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ImageName", "Quality", });
+          internal_static_com_lvl6_proto_UserClanGiftProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
+              new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUser", "ClanGift", "TimeReceived", "Reward", "HasBeenCollected", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -4646,34 +4702,6 @@ public final class RewardsProto {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_RewardProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_RewardProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RewardProto_descriptor,
-        new java.lang.String[] { "RewardId", "StaticDataId", "Typ", "Amt", });
-    internal_static_com_lvl6_proto_UserRewardProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserRewardProto_descriptor,
-        new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", "ClanGift", });
-    internal_static_com_lvl6_proto_ClanGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClanGiftProto_descriptor,
-        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ImageName", "Quality", });
-    internal_static_com_lvl6_proto_UserClanGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
-        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUser", "ClanGift", "TimeReceived", "Reward", "HasBeenCollected", });
-    com.lvl6.proto.ItemsProto.getDescriptor();
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

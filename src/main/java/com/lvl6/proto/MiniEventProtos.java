@@ -8,10 +8,10 @@ public final class MiniEventProtos {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface MiniEventProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniEventProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MiniEventProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 miniEventId = 1;
     /**
      * <code>optional int32 miniEventId = 1;</code>
      */
@@ -21,6 +21,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventId();
 
+    // optional int64 miniEventStartTime = 2;
     /**
      * <code>optional int64 miniEventStartTime = 2;</code>
      */
@@ -30,6 +31,7 @@ public final class MiniEventProtos {
      */
     long getMiniEventStartTime();
 
+    // optional int64 miniEventEndTime = 3;
     /**
      * <code>optional int64 miniEventEndTime = 3;</code>
      */
@@ -39,6 +41,7 @@ public final class MiniEventProtos {
      */
     long getMiniEventEndTime();
 
+    // optional .com.lvl6.proto.MiniEventForPlayerLevelProto lvlEntered = 4;
     /**
      * <code>optional .com.lvl6.proto.MiniEventForPlayerLevelProto lvlEntered = 4;</code>
      */
@@ -52,6 +55,7 @@ public final class MiniEventProtos {
      */
     com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProtoOrBuilder getLvlEnteredOrBuilder();
 
+    // repeated .com.lvl6.proto.MiniEventGoalProto goals = 5;
     /**
      * <code>repeated .com.lvl6.proto.MiniEventGoalProto goals = 5;</code>
      */
@@ -76,6 +80,7 @@ public final class MiniEventProtos {
     com.lvl6.proto.MiniEventProtos.MiniEventGoalProtoOrBuilder getGoalsOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.MiniEventLeaderboardRewardProto leaderboardRewards = 6;
     /**
      * <code>repeated .com.lvl6.proto.MiniEventLeaderboardRewardProto leaderboardRewards = 6;</code>
      */
@@ -100,6 +105,7 @@ public final class MiniEventProtos {
     com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProtoOrBuilder getLeaderboardRewardsOrBuilder(
         int index);
 
+    // optional string name = 7;
     /**
      * <code>optional string name = 7;</code>
      */
@@ -114,6 +120,7 @@ public final class MiniEventProtos {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional string desc = 8;
     /**
      * <code>optional string desc = 8;</code>
      */
@@ -128,6 +135,7 @@ public final class MiniEventProtos {
     com.google.protobuf.ByteString
         getDescBytes();
 
+    // optional string img = 9;
     /**
      * <code>optional string img = 9;</code>
      */
@@ -142,6 +150,7 @@ public final class MiniEventProtos {
     com.google.protobuf.ByteString
         getImgBytes();
 
+    // optional string icon = 10;
     /**
      * <code>optional string icon = 10;</code>
      */
@@ -160,9 +169,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.MiniEventProto}
    */
   public static final class MiniEventProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniEventProto)
-      MiniEventProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MiniEventProtoOrBuilder {
     // Use MiniEventProto.newBuilder() to construct.
     private MiniEventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -253,27 +261,23 @@ public final class MiniEventProtos {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 66: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              desc_ = bs;
+              desc_ = input.readBytes();
               break;
             }
             case 74: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              img_ = bs;
+              img_ = input.readBytes();
               break;
             }
             case 82: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              icon_ = bs;
+              icon_ = input.readBytes();
               break;
             }
           }
@@ -322,6 +326,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional int32 miniEventId = 1;
     public static final int MINIEVENTID_FIELD_NUMBER = 1;
     private int miniEventId_;
     /**
@@ -337,6 +342,7 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
+    // optional int64 miniEventStartTime = 2;
     public static final int MINIEVENTSTARTTIME_FIELD_NUMBER = 2;
     private long miniEventStartTime_;
     /**
@@ -352,6 +358,7 @@ public final class MiniEventProtos {
       return miniEventStartTime_;
     }
 
+    // optional int64 miniEventEndTime = 3;
     public static final int MINIEVENTENDTIME_FIELD_NUMBER = 3;
     private long miniEventEndTime_;
     /**
@@ -367,6 +374,7 @@ public final class MiniEventProtos {
       return miniEventEndTime_;
     }
 
+    // optional .com.lvl6.proto.MiniEventForPlayerLevelProto lvlEntered = 4;
     public static final int LVLENTERED_FIELD_NUMBER = 4;
     private com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto lvlEntered_;
     /**
@@ -388,6 +396,7 @@ public final class MiniEventProtos {
       return lvlEntered_;
     }
 
+    // repeated .com.lvl6.proto.MiniEventGoalProto goals = 5;
     public static final int GOALS_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.MiniEventProtos.MiniEventGoalProto> goals_;
     /**
@@ -423,6 +432,7 @@ public final class MiniEventProtos {
       return goals_.get(index);
     }
 
+    // repeated .com.lvl6.proto.MiniEventLeaderboardRewardProto leaderboardRewards = 6;
     public static final int LEADERBOARDREWARDS_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProto> leaderboardRewards_;
     /**
@@ -458,6 +468,7 @@ public final class MiniEventProtos {
       return leaderboardRewards_.get(index);
     }
 
+    // optional string name = 7;
     public static final int NAME_FIELD_NUMBER = 7;
     private java.lang.Object name_;
     /**
@@ -500,6 +511,7 @@ public final class MiniEventProtos {
       }
     }
 
+    // optional string desc = 8;
     public static final int DESC_FIELD_NUMBER = 8;
     private java.lang.Object desc_;
     /**
@@ -542,6 +554,7 @@ public final class MiniEventProtos {
       }
     }
 
+    // optional string img = 9;
     public static final int IMG_FIELD_NUMBER = 9;
     private java.lang.Object img_;
     /**
@@ -584,6 +597,7 @@ public final class MiniEventProtos {
       }
     }
 
+    // optional string icon = 10;
     public static final int ICON_FIELD_NUMBER = 10;
     private java.lang.Object icon_;
     /**
@@ -641,8 +655,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -812,9 +825,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.MiniEventProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniEventProto)
-        com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_MiniEventProto_descriptor;
@@ -1091,6 +1103,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional int32 miniEventId = 1;
       private int miniEventId_ ;
       /**
        * <code>optional int32 miniEventId = 1;</code>
@@ -1123,6 +1136,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int64 miniEventStartTime = 2;
       private long miniEventStartTime_ ;
       /**
        * <code>optional int64 miniEventStartTime = 2;</code>
@@ -1155,6 +1169,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int64 miniEventEndTime = 3;
       private long miniEventEndTime_ ;
       /**
        * <code>optional int64 miniEventEndTime = 3;</code>
@@ -1187,6 +1202,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional .com.lvl6.proto.MiniEventForPlayerLevelProto lvlEntered = 4;
       private com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto lvlEntered_ = com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto, com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto.Builder, com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProtoOrBuilder> lvlEnteredBuilder_;
@@ -1295,7 +1311,7 @@ public final class MiniEventProtos {
         if (lvlEnteredBuilder_ == null) {
           lvlEnteredBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto, com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto.Builder, com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProtoOrBuilder>(
-                  getLvlEntered(),
+                  lvlEntered_,
                   getParentForChildren(),
                   isClean());
           lvlEntered_ = null;
@@ -1303,6 +1319,7 @@ public final class MiniEventProtos {
         return lvlEnteredBuilder_;
       }
 
+      // repeated .com.lvl6.proto.MiniEventGoalProto goals = 5;
       private java.util.List<com.lvl6.proto.MiniEventProtos.MiniEventGoalProto> goals_ =
         java.util.Collections.emptyList();
       private void ensureGoalsIsMutable() {
@@ -1444,8 +1461,7 @@ public final class MiniEventProtos {
           java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.MiniEventGoalProto> values) {
         if (goalsBuilder_ == null) {
           ensureGoalsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, goals_);
+          super.addAll(values, goals_);
           onChanged();
         } else {
           goalsBuilder_.addAllMessages(values);
@@ -1543,6 +1559,7 @@ public final class MiniEventProtos {
         return goalsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.MiniEventLeaderboardRewardProto leaderboardRewards = 6;
       private java.util.List<com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProto> leaderboardRewards_ =
         java.util.Collections.emptyList();
       private void ensureLeaderboardRewardsIsMutable() {
@@ -1684,8 +1701,7 @@ public final class MiniEventProtos {
           java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProto> values) {
         if (leaderboardRewardsBuilder_ == null) {
           ensureLeaderboardRewardsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, leaderboardRewards_);
+          super.addAll(values, leaderboardRewards_);
           onChanged();
         } else {
           leaderboardRewardsBuilder_.addAllMessages(values);
@@ -1783,6 +1799,7 @@ public final class MiniEventProtos {
         return leaderboardRewardsBuilder_;
       }
 
+      // optional string name = 7;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 7;</code>
@@ -1796,12 +1813,9 @@ public final class MiniEventProtos {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1859,6 +1873,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional string desc = 8;
       private java.lang.Object desc_ = "";
       /**
        * <code>optional string desc = 8;</code>
@@ -1872,12 +1887,9 @@ public final class MiniEventProtos {
       public java.lang.String getDesc() {
         java.lang.Object ref = desc_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            desc_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          desc_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1935,6 +1947,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional string img = 9;
       private java.lang.Object img_ = "";
       /**
        * <code>optional string img = 9;</code>
@@ -1948,12 +1961,9 @@ public final class MiniEventProtos {
       public java.lang.String getImg() {
         java.lang.Object ref = img_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            img_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          img_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2011,6 +2021,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional string icon = 10;
       private java.lang.Object icon_ = "";
       /**
        * <code>optional string icon = 10;</code>
@@ -2024,12 +2035,9 @@ public final class MiniEventProtos {
       public java.lang.String getIcon() {
         java.lang.Object ref = icon_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            icon_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          icon_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2098,10 +2106,10 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniEventProto)
   }
 
-  public interface MiniEventGoalProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniEventGoalProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MiniEventGoalProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 miniEventGoalId = 1;
     /**
      * <code>optional int32 miniEventGoalId = 1;</code>
      */
@@ -2111,6 +2119,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventGoalId();
 
+    // optional int32 miniEventId = 2;
     /**
      * <code>optional int32 miniEventId = 2;</code>
      */
@@ -2120,6 +2129,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventId();
 
+    // optional .com.lvl6.proto.MiniEventGoalProto.MiniEventGoalType goalType = 3 [default = NO_GOAL];
     /**
      * <code>optional .com.lvl6.proto.MiniEventGoalProto.MiniEventGoalType goalType = 3 [default = NO_GOAL];</code>
      */
@@ -2129,6 +2139,7 @@ public final class MiniEventProtos {
      */
     com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType getGoalType();
 
+    // optional int32 goalAmt = 4;
     /**
      * <code>optional int32 goalAmt = 4;</code>
      */
@@ -2138,6 +2149,7 @@ public final class MiniEventProtos {
      */
     int getGoalAmt();
 
+    // optional string goalDesc = 5;
     /**
      * <code>optional string goalDesc = 5;</code>
      */
@@ -2152,6 +2164,7 @@ public final class MiniEventProtos {
     com.google.protobuf.ByteString
         getGoalDescBytes();
 
+    // optional int32 pointsGained = 6;
     /**
      * <code>optional int32 pointsGained = 6;</code>
      */
@@ -2161,6 +2174,7 @@ public final class MiniEventProtos {
      */
     int getPointsGained();
 
+    // optional string actionDescription = 7;
     /**
      * <code>optional string actionDescription = 7;</code>
      */
@@ -2179,9 +2193,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.MiniEventGoalProto}
    */
   public static final class MiniEventGoalProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniEventGoalProto)
-      MiniEventGoalProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MiniEventGoalProtoOrBuilder {
     // Use MiniEventGoalProto.newBuilder() to construct.
     private MiniEventGoalProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2254,9 +2267,8 @@ public final class MiniEventProtos {
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              goalDesc_ = bs;
+              goalDesc_ = input.readBytes();
               break;
             }
             case 48: {
@@ -2265,9 +2277,8 @@ public final class MiniEventProtos {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              actionDescription_ = bs;
+              actionDescription_ = input.readBytes();
               break;
             }
           }
@@ -2572,6 +2583,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional int32 miniEventGoalId = 1;
     public static final int MINIEVENTGOALID_FIELD_NUMBER = 1;
     private int miniEventGoalId_;
     /**
@@ -2587,6 +2599,7 @@ public final class MiniEventProtos {
       return miniEventGoalId_;
     }
 
+    // optional int32 miniEventId = 2;
     public static final int MINIEVENTID_FIELD_NUMBER = 2;
     private int miniEventId_;
     /**
@@ -2602,6 +2615,7 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
+    // optional .com.lvl6.proto.MiniEventGoalProto.MiniEventGoalType goalType = 3 [default = NO_GOAL];
     public static final int GOALTYPE_FIELD_NUMBER = 3;
     private com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType goalType_;
     /**
@@ -2617,6 +2631,7 @@ public final class MiniEventProtos {
       return goalType_;
     }
 
+    // optional int32 goalAmt = 4;
     public static final int GOALAMT_FIELD_NUMBER = 4;
     private int goalAmt_;
     /**
@@ -2632,6 +2647,7 @@ public final class MiniEventProtos {
       return goalAmt_;
     }
 
+    // optional string goalDesc = 5;
     public static final int GOALDESC_FIELD_NUMBER = 5;
     private java.lang.Object goalDesc_;
     /**
@@ -2674,6 +2690,7 @@ public final class MiniEventProtos {
       }
     }
 
+    // optional int32 pointsGained = 6;
     public static final int POINTSGAINED_FIELD_NUMBER = 6;
     private int pointsGained_;
     /**
@@ -2689,6 +2706,7 @@ public final class MiniEventProtos {
       return pointsGained_;
     }
 
+    // optional string actionDescription = 7;
     public static final int ACTIONDESCRIPTION_FIELD_NUMBER = 7;
     private java.lang.Object actionDescription_;
     /**
@@ -2743,8 +2761,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2893,9 +2910,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.MiniEventGoalProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniEventGoalProto)
-        com.lvl6.proto.MiniEventProtos.MiniEventGoalProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.MiniEventGoalProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor;
@@ -3066,6 +3082,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional int32 miniEventGoalId = 1;
       private int miniEventGoalId_ ;
       /**
        * <code>optional int32 miniEventGoalId = 1;</code>
@@ -3098,6 +3115,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 miniEventId = 2;
       private int miniEventId_ ;
       /**
        * <code>optional int32 miniEventId = 2;</code>
@@ -3130,6 +3148,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional .com.lvl6.proto.MiniEventGoalProto.MiniEventGoalType goalType = 3 [default = NO_GOAL];
       private com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType goalType_ = com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType.NO_GOAL;
       /**
        * <code>optional .com.lvl6.proto.MiniEventGoalProto.MiniEventGoalType goalType = 3 [default = NO_GOAL];</code>
@@ -3165,6 +3184,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 goalAmt = 4;
       private int goalAmt_ ;
       /**
        * <code>optional int32 goalAmt = 4;</code>
@@ -3197,6 +3217,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional string goalDesc = 5;
       private java.lang.Object goalDesc_ = "";
       /**
        * <code>optional string goalDesc = 5;</code>
@@ -3210,12 +3231,9 @@ public final class MiniEventProtos {
       public java.lang.String getGoalDesc() {
         java.lang.Object ref = goalDesc_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            goalDesc_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          goalDesc_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3273,6 +3291,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 pointsGained = 6;
       private int pointsGained_ ;
       /**
        * <code>optional int32 pointsGained = 6;</code>
@@ -3305,6 +3324,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional string actionDescription = 7;
       private java.lang.Object actionDescription_ = "";
       /**
        * <code>optional string actionDescription = 7;</code>
@@ -3318,12 +3338,9 @@ public final class MiniEventProtos {
       public java.lang.String getActionDescription() {
         java.lang.Object ref = actionDescription_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            actionDescription_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          actionDescription_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3392,10 +3409,10 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniEventGoalProto)
   }
 
-  public interface MiniEventForPlayerLevelProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniEventForPlayerLevelProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MiniEventForPlayerLevelProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 mefplId = 1;
     /**
      * <code>optional int32 mefplId = 1;</code>
      */
@@ -3405,6 +3422,7 @@ public final class MiniEventProtos {
      */
     int getMefplId();
 
+    // optional int32 miniEventId = 2;
     /**
      * <code>optional int32 miniEventId = 2;</code>
      */
@@ -3414,6 +3432,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventId();
 
+    // optional int32 playerLvlMin = 3;
     /**
      * <code>optional int32 playerLvlMin = 3;</code>
      *
@@ -3431,6 +3450,7 @@ public final class MiniEventProtos {
      */
     int getPlayerLvlMin();
 
+    // optional int32 playerLvlMax = 4;
     /**
      * <code>optional int32 playerLvlMax = 4;</code>
      *
@@ -3448,6 +3468,7 @@ public final class MiniEventProtos {
      */
     int getPlayerLvlMax();
 
+    // optional int32 tierOneMinPts = 5;
     /**
      * <code>optional int32 tierOneMinPts = 5;</code>
      */
@@ -3457,6 +3478,7 @@ public final class MiniEventProtos {
      */
     int getTierOneMinPts();
 
+    // optional int32 tierTwoMinPts = 6;
     /**
      * <code>optional int32 tierTwoMinPts = 6;</code>
      */
@@ -3466,6 +3488,7 @@ public final class MiniEventProtos {
      */
     int getTierTwoMinPts();
 
+    // optional int32 tierThreeMinPts = 7;
     /**
      * <code>optional int32 tierThreeMinPts = 7;</code>
      */
@@ -3475,6 +3498,7 @@ public final class MiniEventProtos {
      */
     int getTierThreeMinPts();
 
+    // repeated .com.lvl6.proto.MiniEventTierRewardProto rewards = 8;
     /**
      * <code>repeated .com.lvl6.proto.MiniEventTierRewardProto rewards = 8;</code>
      */
@@ -3503,9 +3527,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.MiniEventForPlayerLevelProto}
    */
   public static final class MiniEventForPlayerLevelProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniEventForPlayerLevelProto)
-      MiniEventForPlayerLevelProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MiniEventForPlayerLevelProtoOrBuilder {
     // Use MiniEventForPlayerLevelProto.newBuilder() to construct.
     private MiniEventForPlayerLevelProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3637,6 +3660,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional int32 mefplId = 1;
     public static final int MEFPLID_FIELD_NUMBER = 1;
     private int mefplId_;
     /**
@@ -3652,6 +3676,7 @@ public final class MiniEventProtos {
       return mefplId_;
     }
 
+    // optional int32 miniEventId = 2;
     public static final int MINIEVENTID_FIELD_NUMBER = 2;
     private int miniEventId_;
     /**
@@ -3667,6 +3692,7 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
+    // optional int32 playerLvlMin = 3;
     public static final int PLAYERLVLMIN_FIELD_NUMBER = 3;
     private int playerLvlMin_;
     /**
@@ -3690,6 +3716,7 @@ public final class MiniEventProtos {
       return playerLvlMin_;
     }
 
+    // optional int32 playerLvlMax = 4;
     public static final int PLAYERLVLMAX_FIELD_NUMBER = 4;
     private int playerLvlMax_;
     /**
@@ -3713,6 +3740,7 @@ public final class MiniEventProtos {
       return playerLvlMax_;
     }
 
+    // optional int32 tierOneMinPts = 5;
     public static final int TIERONEMINPTS_FIELD_NUMBER = 5;
     private int tierOneMinPts_;
     /**
@@ -3728,6 +3756,7 @@ public final class MiniEventProtos {
       return tierOneMinPts_;
     }
 
+    // optional int32 tierTwoMinPts = 6;
     public static final int TIERTWOMINPTS_FIELD_NUMBER = 6;
     private int tierTwoMinPts_;
     /**
@@ -3743,6 +3772,7 @@ public final class MiniEventProtos {
       return tierTwoMinPts_;
     }
 
+    // optional int32 tierThreeMinPts = 7;
     public static final int TIERTHREEMINPTS_FIELD_NUMBER = 7;
     private int tierThreeMinPts_;
     /**
@@ -3758,6 +3788,7 @@ public final class MiniEventProtos {
       return tierThreeMinPts_;
     }
 
+    // repeated .com.lvl6.proto.MiniEventTierRewardProto rewards = 8;
     public static final int REWARDS_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProto> rewards_;
     /**
@@ -3806,8 +3837,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3963,9 +3993,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.MiniEventForPlayerLevelProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniEventForPlayerLevelProto)
-        com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor;
@@ -4174,6 +4203,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional int32 mefplId = 1;
       private int mefplId_ ;
       /**
        * <code>optional int32 mefplId = 1;</code>
@@ -4206,6 +4236,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 miniEventId = 2;
       private int miniEventId_ ;
       /**
        * <code>optional int32 miniEventId = 2;</code>
@@ -4238,6 +4269,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 playerLvlMin = 3;
       private int playerLvlMin_ ;
       /**
        * <code>optional int32 playerLvlMin = 3;</code>
@@ -4286,6 +4318,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 playerLvlMax = 4;
       private int playerLvlMax_ ;
       /**
        * <code>optional int32 playerLvlMax = 4;</code>
@@ -4334,6 +4367,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 tierOneMinPts = 5;
       private int tierOneMinPts_ ;
       /**
        * <code>optional int32 tierOneMinPts = 5;</code>
@@ -4366,6 +4400,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 tierTwoMinPts = 6;
       private int tierTwoMinPts_ ;
       /**
        * <code>optional int32 tierTwoMinPts = 6;</code>
@@ -4398,6 +4433,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 tierThreeMinPts = 7;
       private int tierThreeMinPts_ ;
       /**
        * <code>optional int32 tierThreeMinPts = 7;</code>
@@ -4430,6 +4466,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // repeated .com.lvl6.proto.MiniEventTierRewardProto rewards = 8;
       private java.util.List<com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProto> rewards_ =
         java.util.Collections.emptyList();
       private void ensureRewardsIsMutable() {
@@ -4571,8 +4608,7 @@ public final class MiniEventProtos {
           java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProto> values) {
         if (rewardsBuilder_ == null) {
           ensureRewardsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, rewards_);
+          super.addAll(values, rewards_);
           onChanged();
         } else {
           rewardsBuilder_.addAllMessages(values);
@@ -4681,10 +4717,10 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniEventForPlayerLevelProto)
   }
 
-  public interface MiniEventTierRewardProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniEventTierRewardProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MiniEventTierRewardProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 metrId = 1;
     /**
      * <code>optional int32 metrId = 1;</code>
      */
@@ -4694,6 +4730,7 @@ public final class MiniEventProtos {
      */
     int getMetrId();
 
+    // optional int32 mefplId = 2;
     /**
      * <code>optional int32 mefplId = 2;</code>
      */
@@ -4703,6 +4740,7 @@ public final class MiniEventProtos {
      */
     int getMefplId();
 
+    // optional int32 rewardId = 3;
     /**
      * <code>optional int32 rewardId = 3;</code>
      */
@@ -4712,6 +4750,7 @@ public final class MiniEventProtos {
      */
     int getRewardId();
 
+    // optional int32 tierLvl = 4;
     /**
      * <code>optional int32 tierLvl = 4;</code>
      *
@@ -4733,9 +4772,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.MiniEventTierRewardProto}
    */
   public static final class MiniEventTierRewardProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniEventTierRewardProto)
-      MiniEventTierRewardProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MiniEventTierRewardProtoOrBuilder {
     // Use MiniEventTierRewardProto.newBuilder() to construct.
     private MiniEventTierRewardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4841,6 +4879,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional int32 metrId = 1;
     public static final int METRID_FIELD_NUMBER = 1;
     private int metrId_;
     /**
@@ -4856,6 +4895,7 @@ public final class MiniEventProtos {
       return metrId_;
     }
 
+    // optional int32 mefplId = 2;
     public static final int MEFPLID_FIELD_NUMBER = 2;
     private int mefplId_;
     /**
@@ -4871,6 +4911,7 @@ public final class MiniEventProtos {
       return mefplId_;
     }
 
+    // optional int32 rewardId = 3;
     public static final int REWARDID_FIELD_NUMBER = 3;
     private int rewardId_;
     /**
@@ -4886,6 +4927,7 @@ public final class MiniEventProtos {
       return rewardId_;
     }
 
+    // optional int32 tierLvl = 4;
     public static final int TIERLVL_FIELD_NUMBER = 4;
     private int tierLvl_;
     /**
@@ -4918,8 +4960,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5047,9 +5088,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.MiniEventTierRewardProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniEventTierRewardProto)
-        com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.MiniEventTierRewardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor;
@@ -5189,6 +5229,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional int32 metrId = 1;
       private int metrId_ ;
       /**
        * <code>optional int32 metrId = 1;</code>
@@ -5221,6 +5262,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 mefplId = 2;
       private int mefplId_ ;
       /**
        * <code>optional int32 mefplId = 2;</code>
@@ -5253,6 +5295,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 rewardId = 3;
       private int rewardId_ ;
       /**
        * <code>optional int32 rewardId = 3;</code>
@@ -5285,6 +5328,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 tierLvl = 4;
       private int tierLvl_ ;
       /**
        * <code>optional int32 tierLvl = 4;</code>
@@ -5344,10 +5388,10 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniEventTierRewardProto)
   }
 
-  public interface MiniEventLeaderboardRewardProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniEventLeaderboardRewardProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface MiniEventLeaderboardRewardProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 melrId = 1;
     /**
      * <code>optional int32 melrId = 1;</code>
      */
@@ -5357,6 +5401,7 @@ public final class MiniEventProtos {
      */
     int getMelrId();
 
+    // optional int32 miniEventId = 2;
     /**
      * <code>optional int32 miniEventId = 2;</code>
      */
@@ -5366,6 +5411,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventId();
 
+    // optional int32 rewardId = 3;
     /**
      * <code>optional int32 rewardId = 3;</code>
      */
@@ -5375,6 +5421,7 @@ public final class MiniEventProtos {
      */
     int getRewardId();
 
+    // optional int32 leaderboardMinPos = 4;
     /**
      * <code>optional int32 leaderboardMinPos = 4;</code>
      *
@@ -5396,9 +5443,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.MiniEventLeaderboardRewardProto}
    */
   public static final class MiniEventLeaderboardRewardProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniEventLeaderboardRewardProto)
-      MiniEventLeaderboardRewardProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements MiniEventLeaderboardRewardProtoOrBuilder {
     // Use MiniEventLeaderboardRewardProto.newBuilder() to construct.
     private MiniEventLeaderboardRewardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5504,6 +5550,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional int32 melrId = 1;
     public static final int MELRID_FIELD_NUMBER = 1;
     private int melrId_;
     /**
@@ -5519,6 +5566,7 @@ public final class MiniEventProtos {
       return melrId_;
     }
 
+    // optional int32 miniEventId = 2;
     public static final int MINIEVENTID_FIELD_NUMBER = 2;
     private int miniEventId_;
     /**
@@ -5534,6 +5582,7 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
+    // optional int32 rewardId = 3;
     public static final int REWARDID_FIELD_NUMBER = 3;
     private int rewardId_;
     /**
@@ -5549,6 +5598,7 @@ public final class MiniEventProtos {
       return rewardId_;
     }
 
+    // optional int32 leaderboardMinPos = 4;
     public static final int LEADERBOARDMINPOS_FIELD_NUMBER = 4;
     private int leaderboardMinPos_;
     /**
@@ -5581,8 +5631,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5710,9 +5759,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.MiniEventLeaderboardRewardProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniEventLeaderboardRewardProto)
-        com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.MiniEventLeaderboardRewardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor;
@@ -5852,6 +5900,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional int32 melrId = 1;
       private int melrId_ ;
       /**
        * <code>optional int32 melrId = 1;</code>
@@ -5884,6 +5933,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 miniEventId = 2;
       private int miniEventId_ ;
       /**
        * <code>optional int32 miniEventId = 2;</code>
@@ -5916,6 +5966,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 rewardId = 3;
       private int rewardId_ ;
       /**
        * <code>optional int32 rewardId = 3;</code>
@@ -5948,6 +5999,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 leaderboardMinPos = 4;
       private int leaderboardMinPos_ ;
       /**
        * <code>optional int32 leaderboardMinPos = 4;</code>
@@ -6007,10 +6059,10 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniEventLeaderboardRewardProto)
   }
 
-  public interface UserMiniEventProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniEventProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserMiniEventProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 miniEventId = 1;
     /**
      * <code>optional int32 miniEventId = 1;</code>
      */
@@ -6020,6 +6072,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventId();
 
+    // optional string userUuid = 2;
     /**
      * <code>optional string userUuid = 2;</code>
      */
@@ -6034,6 +6087,7 @@ public final class MiniEventProtos {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional int32 userLvl = 3;
     /**
      * <code>optional int32 userLvl = 3;</code>
      *
@@ -6051,6 +6105,7 @@ public final class MiniEventProtos {
      */
     int getUserLvl();
 
+    // optional bool tierOneRedeemed = 4;
     /**
      * <code>optional bool tierOneRedeemed = 4;</code>
      */
@@ -6060,6 +6115,7 @@ public final class MiniEventProtos {
      */
     boolean getTierOneRedeemed();
 
+    // optional bool tierTwoRedeemed = 5;
     /**
      * <code>optional bool tierTwoRedeemed = 5;</code>
      */
@@ -6069,6 +6125,7 @@ public final class MiniEventProtos {
      */
     boolean getTierTwoRedeemed();
 
+    // optional bool tierThreeRedeemed = 6;
     /**
      * <code>optional bool tierThreeRedeemed = 6;</code>
      */
@@ -6078,6 +6135,7 @@ public final class MiniEventProtos {
      */
     boolean getTierThreeRedeemed();
 
+    // optional .com.lvl6.proto.MiniEventProto miniEvent = 7;
     /**
      * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
@@ -6091,6 +6149,7 @@ public final class MiniEventProtos {
      */
     com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder getMiniEventOrBuilder();
 
+    // repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;
     /**
      * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;</code>
      */
@@ -6119,9 +6178,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.UserMiniEventProto}
    */
   public static final class UserMiniEventProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniEventProto)
-      UserMiniEventProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserMiniEventProtoOrBuilder {
     // Use UserMiniEventProto.newBuilder() to construct.
     private UserMiniEventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6173,9 +6231,8 @@ public final class MiniEventProtos {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -6262,6 +6319,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional int32 miniEventId = 1;
     public static final int MINIEVENTID_FIELD_NUMBER = 1;
     private int miniEventId_;
     /**
@@ -6277,6 +6335,7 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
+    // optional string userUuid = 2;
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
@@ -6319,6 +6378,7 @@ public final class MiniEventProtos {
       }
     }
 
+    // optional int32 userLvl = 3;
     public static final int USERLVL_FIELD_NUMBER = 3;
     private int userLvl_;
     /**
@@ -6342,6 +6402,7 @@ public final class MiniEventProtos {
       return userLvl_;
     }
 
+    // optional bool tierOneRedeemed = 4;
     public static final int TIERONEREDEEMED_FIELD_NUMBER = 4;
     private boolean tierOneRedeemed_;
     /**
@@ -6357,6 +6418,7 @@ public final class MiniEventProtos {
       return tierOneRedeemed_;
     }
 
+    // optional bool tierTwoRedeemed = 5;
     public static final int TIERTWOREDEEMED_FIELD_NUMBER = 5;
     private boolean tierTwoRedeemed_;
     /**
@@ -6372,6 +6434,7 @@ public final class MiniEventProtos {
       return tierTwoRedeemed_;
     }
 
+    // optional bool tierThreeRedeemed = 6;
     public static final int TIERTHREEREDEEMED_FIELD_NUMBER = 6;
     private boolean tierThreeRedeemed_;
     /**
@@ -6387,6 +6450,7 @@ public final class MiniEventProtos {
       return tierThreeRedeemed_;
     }
 
+    // optional .com.lvl6.proto.MiniEventProto miniEvent = 7;
     public static final int MINIEVENT_FIELD_NUMBER = 7;
     private com.lvl6.proto.MiniEventProtos.MiniEventProto miniEvent_;
     /**
@@ -6408,6 +6472,7 @@ public final class MiniEventProtos {
       return miniEvent_;
     }
 
+    // repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;
     public static final int GOALS_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> goals_;
     /**
@@ -6456,8 +6521,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6613,9 +6677,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.UserMiniEventProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniEventProto)
-        com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventProto_descriptor;
@@ -6835,6 +6898,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional int32 miniEventId = 1;
       private int miniEventId_ ;
       /**
        * <code>optional int32 miniEventId = 1;</code>
@@ -6867,6 +6931,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional string userUuid = 2;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
@@ -6880,12 +6945,9 @@ public final class MiniEventProtos {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6943,6 +7005,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 userLvl = 3;
       private int userLvl_ ;
       /**
        * <code>optional int32 userLvl = 3;</code>
@@ -6991,6 +7054,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional bool tierOneRedeemed = 4;
       private boolean tierOneRedeemed_ ;
       /**
        * <code>optional bool tierOneRedeemed = 4;</code>
@@ -7023,6 +7087,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional bool tierTwoRedeemed = 5;
       private boolean tierTwoRedeemed_ ;
       /**
        * <code>optional bool tierTwoRedeemed = 5;</code>
@@ -7055,6 +7120,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional bool tierThreeRedeemed = 6;
       private boolean tierThreeRedeemed_ ;
       /**
        * <code>optional bool tierThreeRedeemed = 6;</code>
@@ -7087,6 +7153,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional .com.lvl6.proto.MiniEventProto miniEvent = 7;
       private com.lvl6.proto.MiniEventProtos.MiniEventProto miniEvent_ = com.lvl6.proto.MiniEventProtos.MiniEventProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniEventProtos.MiniEventProto, com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder> miniEventBuilder_;
@@ -7195,7 +7262,7 @@ public final class MiniEventProtos {
         if (miniEventBuilder_ == null) {
           miniEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MiniEventProtos.MiniEventProto, com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.MiniEventProtoOrBuilder>(
-                  getMiniEvent(),
+                  miniEvent_,
                   getParentForChildren(),
                   isClean());
           miniEvent_ = null;
@@ -7203,6 +7270,7 @@ public final class MiniEventProtos {
         return miniEventBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserMiniEventGoalProto goals = 8;
       private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> goals_ =
         java.util.Collections.emptyList();
       private void ensureGoalsIsMutable() {
@@ -7344,8 +7412,7 @@ public final class MiniEventProtos {
           java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> values) {
         if (goalsBuilder_ == null) {
           ensureGoalsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, goals_);
+          super.addAll(values, goals_);
           onChanged();
         } else {
           goalsBuilder_.addAllMessages(values);
@@ -7454,10 +7521,10 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniEventProto)
   }
 
-  public interface UserMiniEventGoalProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniEventGoalProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface UserMiniEventGoalProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -7472,6 +7539,7 @@ public final class MiniEventProtos {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
+    // optional int32 miniEventGoalId = 2;
     /**
      * <code>optional int32 miniEventGoalId = 2;</code>
      */
@@ -7481,6 +7549,7 @@ public final class MiniEventProtos {
      */
     int getMiniEventGoalId();
 
+    // optional int32 progress = 3;
     /**
      * <code>optional int32 progress = 3;</code>
      */
@@ -7494,9 +7563,8 @@ public final class MiniEventProtos {
    * Protobuf type {@code com.lvl6.proto.UserMiniEventGoalProto}
    */
   public static final class UserMiniEventGoalProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniEventGoalProto)
-      UserMiniEventGoalProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements UserMiniEventGoalProtoOrBuilder {
     // Use UserMiniEventGoalProto.newBuilder() to construct.
     private UserMiniEventGoalProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7543,9 +7611,8 @@ public final class MiniEventProtos {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = bs;
+              userUuid_ = input.readBytes();
               break;
             }
             case 16: {
@@ -7598,6 +7665,7 @@ public final class MiniEventProtos {
     }
 
     private int bitField0_;
+    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -7640,6 +7708,7 @@ public final class MiniEventProtos {
       }
     }
 
+    // optional int32 miniEventGoalId = 2;
     public static final int MINIEVENTGOALID_FIELD_NUMBER = 2;
     private int miniEventGoalId_;
     /**
@@ -7655,6 +7724,7 @@ public final class MiniEventProtos {
       return miniEventGoalId_;
     }
 
+    // optional int32 progress = 3;
     public static final int PROGRESS_FIELD_NUMBER = 3;
     private int progress_;
     /**
@@ -7678,8 +7748,7 @@ public final class MiniEventProtos {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7800,9 +7869,8 @@ public final class MiniEventProtos {
      * Protobuf type {@code com.lvl6.proto.UserMiniEventGoalProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniEventGoalProto)
-        com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniEventProtos.internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor;
@@ -7935,6 +8003,7 @@ public final class MiniEventProtos {
       }
       private int bitField0_;
 
+      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -7948,12 +8017,9 @@ public final class MiniEventProtos {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8011,6 +8077,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 miniEventGoalId = 2;
       private int miniEventGoalId_ ;
       /**
        * <code>optional int32 miniEventGoalId = 2;</code>
@@ -8043,6 +8110,7 @@ public final class MiniEventProtos {
         return this;
       }
 
+      // optional int32 progress = 3;
       private int progress_ ;
       /**
        * <code>optional int32 progress = 3;</code>
@@ -8086,37 +8154,37 @@ public final class MiniEventProtos {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniEventGoalProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniEventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniEventProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniEventTierRewardProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserMiniEventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8180,59 +8248,59 @@ public final class MiniEventProtos {
       "ss\030\003 \001(\005B\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_MiniEventProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_MiniEventProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MiniEventProto_descriptor,
+              new java.lang.String[] { "MiniEventId", "MiniEventStartTime", "MiniEventEndTime", "LvlEntered", "Goals", "LeaderboardRewards", "Name", "Desc", "Img", "Icon", });
+          internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor,
+              new java.lang.String[] { "MiniEventGoalId", "MiniEventId", "GoalType", "GoalAmt", "GoalDesc", "PointsGained", "ActionDescription", });
+          internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor,
+              new java.lang.String[] { "MefplId", "MiniEventId", "PlayerLvlMin", "PlayerLvlMax", "TierOneMinPts", "TierTwoMinPts", "TierThreeMinPts", "Rewards", });
+          internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_MiniEventTierRewardProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor,
+              new java.lang.String[] { "MetrId", "MefplId", "RewardId", "TierLvl", });
+          internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor,
+              new java.lang.String[] { "MelrId", "MiniEventId", "RewardId", "LeaderboardMinPos", });
+          internal_static_com_lvl6_proto_UserMiniEventProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserMiniEventProto_descriptor,
+              new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", "Goals", });
+          internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor,
+              new java.lang.String[] { "UserUuid", "MiniEventGoalId", "Progress", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_com_lvl6_proto_MiniEventProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_MiniEventProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "MiniEventStartTime", "MiniEventEndTime", "LvlEntered", "Goals", "LeaderboardRewards", "Name", "Desc", "Img", "Icon", });
-    internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor,
-        new java.lang.String[] { "MiniEventGoalId", "MiniEventId", "GoalType", "GoalAmt", "GoalDesc", "PointsGained", "ActionDescription", });
-    internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor,
-        new java.lang.String[] { "MefplId", "MiniEventId", "PlayerLvlMin", "PlayerLvlMax", "TierOneMinPts", "TierTwoMinPts", "TierThreeMinPts", "Rewards", });
-    internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_MiniEventTierRewardProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniEventTierRewardProto_descriptor,
-        new java.lang.String[] { "MetrId", "MefplId", "RewardId", "TierLvl", });
-    internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MiniEventLeaderboardRewardProto_descriptor,
-        new java.lang.String[] { "MelrId", "MiniEventId", "RewardId", "LeaderboardMinPos", });
-    internal_static_com_lvl6_proto_UserMiniEventProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserMiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", "Goals", });
-    internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor,
-        new java.lang.String[] { "UserUuid", "MiniEventGoalId", "Progress", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

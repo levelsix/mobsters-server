@@ -25,6 +25,8 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component
@@ -47,7 +49,6 @@ public class RetractRequestJoinClanController extends EventController {
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public RetractRequestJoinClanController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class RetractRequestJoinClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetractRequestJoinClanRequestProto reqProto = ((RetractRequestJoinClanRequestEvent) event)
 				.getRetractRequestJoinClanRequestProto();
 
@@ -97,7 +98,7 @@ public class RetractRequestJoinClanController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -126,10 +127,10 @@ public class RetractRequestJoinClanController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
-				server.writeClanEvent(resEvent, clan.getId());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId()));
 			}
 
 		} catch (Exception e) {
@@ -141,7 +142,7 @@ public class RetractRequestJoinClanController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setRetractRequestJoinClanResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RetractRequestJoinClan processEvent",
 						e);

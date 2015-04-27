@@ -14,6 +14,7 @@ import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto;
 import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
 
 @Component
@@ -38,7 +39,7 @@ public class EnableAPNSController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EnableAPNSRequestProto reqProto = ((EnableAPNSRequestEvent) event)
 				.getEnableAPNSRequestProto();
 
@@ -65,7 +66,7 @@ public class EnableAPNSController extends EventController {
 			EnableAPNSResponseEvent resEvent = new EnableAPNSResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setEnableAPNSResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			boolean isDifferent = checkIfNewTokenDifferent(
 					user.getDeviceToken(), deviceToken);

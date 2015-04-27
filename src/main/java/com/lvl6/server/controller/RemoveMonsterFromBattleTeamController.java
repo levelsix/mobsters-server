@@ -20,6 +20,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -50,7 +51,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RemoveMonsterFromBattleTeamRequestProto reqProto = ((RemoveMonsterFromBattleTeamRequestEvent) event)
 				.getRemoveMonsterFromBattleTeamRequestProto();
 
@@ -88,7 +89,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -116,12 +117,12 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			//
 			//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 			//          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 			//      resEventUpdate.setTag(event.getTag());
-			//      server.writeEvent(resEventUpdate);
+			//      responses.normalResponseEvents().add(resEventUpdate);
 		} catch (Exception e) {
 			log.error(
 					"exception in RemoveMonsterFromBattleTeamController processEvent",
@@ -135,7 +136,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RemoveMonsterFromBattleTeamController processEvent",

@@ -55,7 +55,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    RetrieveTournamentRankingsRequestProto reqProto = ((RetrieveTournamentRankingsRequestEvent) event)
 //        .getRetrieveTournamentRankingsRequestProto();
 //
@@ -104,7 +104,7 @@
 //      resEvent.setTag(event.getTag());
 //      resEvent.setRetrieveTournamentRankingsResponseProto(resProto);
 //
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //    } catch (Exception e) {
 //      log.error(
 //          "exception in RetrieveTournamentController processEvent",

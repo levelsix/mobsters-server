@@ -20,6 +20,7 @@ import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMons
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
 @DependsOn("gameServer")
@@ -49,7 +50,7 @@ public class SetAvatarMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetAvatarMonsterRequestProto reqProto = ((SetAvatarMonsterRequestEvent) event)
 				.getSetAvatarMonsterRequestProto();
 
@@ -80,7 +81,7 @@ public class SetAvatarMonsterController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -110,7 +111,7 @@ public class SetAvatarMonsterController extends EventController {
 			SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setSetAvatarMonsterResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//game center id might have changed
@@ -119,7 +120,7 @@ public class SetAvatarMonsterController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -131,7 +132,7 @@ public class SetAvatarMonsterController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SetAvatarMonsterController processEvent",

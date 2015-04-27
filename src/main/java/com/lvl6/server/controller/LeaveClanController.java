@@ -33,6 +33,8 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.ExitClanAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -79,7 +81,7 @@ public class LeaveClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LeaveClanRequestProto reqProto = ((LeaveClanRequestEvent) event)
 				.getLeaveClanRequestProto();
 
@@ -117,7 +119,7 @@ public class LeaveClanController extends EventController {
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setLeaveClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -151,13 +153,13 @@ public class LeaveClanController extends EventController {
 			//only write to user if failed
 			if (!success) {
 				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
 				resBuilder.setStatus(LeaveClanStatus.SUCCESS);
 				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -170,7 +172,7 @@ public class LeaveClanController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in LeaveClan processEvent", e);
 			}

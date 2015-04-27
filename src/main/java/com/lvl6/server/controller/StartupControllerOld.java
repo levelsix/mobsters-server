@@ -41,7 +41,6 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
-import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
@@ -76,7 +75,6 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -193,6 +191,7 @@ import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -459,7 +458,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event)

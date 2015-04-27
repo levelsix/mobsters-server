@@ -28,6 +28,7 @@ import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.AchievementStuffUtil;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -67,7 +68,7 @@ public class AchievementProgressController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent) event)
 				.getAchievementProgressRequestProto();
 
@@ -106,7 +107,7 @@ public class AchievementProgressController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementProgressResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -132,7 +133,7 @@ public class AchievementProgressController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementProgressResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in AchievementProgress processEvent", e);
@@ -141,7 +142,7 @@ public class AchievementProgressController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementProgressResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}

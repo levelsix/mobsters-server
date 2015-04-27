@@ -58,6 +58,7 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -162,7 +163,7 @@ public class InAppPurchaseController extends EventController {
      */
     // @SuppressWarnings("deprecation")
     @Override
-    protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+    protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
         InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
                 .getInAppPurchaseRequestProto();
 
@@ -202,7 +203,7 @@ public class InAppPurchaseController extends EventController {
                     userId);
             resEvent.setTag(event.getTag());
             resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-            server.writeEvent(resEvent);
+            responses.normalResponseEvents().add(resEvent);
             return;
         }
 
@@ -283,7 +284,7 @@ public class InAppPurchaseController extends EventController {
                     senderProto.getUserUuid());
             resEvent.setTag(event.getTag());
             resEvent.setInAppPurchaseResponseProto(resProto);
-            server.writeEvent(resEvent);
+            responses.normalResponseEvents().add(resEvent);
 
             /*if (Globals.KABAM_ENABLED()) {
 			if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
@@ -298,7 +299,7 @@ public class InAppPurchaseController extends EventController {
                     .createUpdateClientUserResponseEventAndUpdateLeaderboard(
                             user, null, null);
             resEventUpdate.setTag(event.getTag());
-            server.writeEvent(resEventUpdate);
+            responses.normalResponseEvents().add(resEventUpdate);
 
             //      //in case user has a mentor, check if user completed mentor's quest
             //      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
@@ -314,7 +315,7 @@ public class InAppPurchaseController extends EventController {
                         userId);
                 resEvent.setTag(event.getTag());
                 resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-                server.writeEvent(resEvent);
+                responses.normalResponseEvents().add(resEvent);
             } catch (Exception e2) {
                 log.error("exception2 in InAppPurchaseController processEvent",
                         e);

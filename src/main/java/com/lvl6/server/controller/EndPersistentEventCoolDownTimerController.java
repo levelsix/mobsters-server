@@ -44,7 +44,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EndPersistentEventCoolDownTimerRequestProto reqProto = ((EndPersistentEventCoolDownTimerRequestEvent)event).getEndPersistentEventCoolDownTimerRequestProto();
 //
 //    //get values sent from the client (the request proto)
@@ -78,12 +78,12 @@
 //      EndPersistentEventCoolDownTimerResponseEvent resEvent = new EndPersistentEventCoolDownTimerResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
 //      resEvent.setEndPersistentEventCoolDownTimerResponseProto(resBuilder.build());
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 //      resEventUpdate.setTag(event.getTag());
-//      server.writeEvent(resEventUpdate);
+//      responses.normalResponseEvents().add(resEventUpdate);
 //    } catch (Exception e) {
 //      log.error("exception in EndPersistentEventCoolDownTimerController processEvent", e);
 //      //don't let the client hang
@@ -92,7 +92,7 @@
 //    	  EndPersistentEventCoolDownTimerResponseEvent resEvent = new EndPersistentEventCoolDownTimerResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
 //    	  resEvent.setEndPersistentEventCoolDownTimerResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in EndPersistentEventCoolDownTimerController processEvent", e);
 //      }

@@ -8,10 +8,10 @@ public final class EventClanProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface CreateClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CreateClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CreateClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,6 +25,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -39,6 +40,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional string tag = 3;
     /**
      * <code>optional string tag = 3;</code>
      */
@@ -53,6 +55,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getTagBytes();
 
+    // optional bool requestToJoinClanRequired = 4;
     /**
      * <code>optional bool requestToJoinClanRequired = 4;</code>
      */
@@ -62,6 +65,7 @@ public final class EventClanProto {
      */
     boolean getRequestToJoinClanRequired();
 
+    // optional string description = 5;
     /**
      * <code>optional string description = 5;</code>
      */
@@ -76,6 +80,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
+    // optional int32 clanIconId = 6;
     /**
      * <code>optional int32 clanIconId = 6;</code>
      */
@@ -85,6 +90,7 @@ public final class EventClanProto {
      */
     int getClanIconId();
 
+    // optional int32 gemsSpent = 7;
     /**
      * <code>optional int32 gemsSpent = 7;</code>
      *
@@ -104,6 +110,7 @@ public final class EventClanProto {
      */
     int getGemsSpent();
 
+    // optional sint32 cashChange = 8;
     /**
      * <code>optional sint32 cashChange = 8;</code>
      *
@@ -125,9 +132,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.CreateClanRequestProto}
    */
   public static final class CreateClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CreateClanRequestProto)
-      CreateClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CreateClanRequestProtoOrBuilder {
     // Use CreateClanRequestProto.newBuilder() to construct.
     private CreateClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -187,15 +193,13 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = bs;
+              name_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              tag_ = bs;
+              tag_ = input.readBytes();
               break;
             }
             case 32: {
@@ -204,9 +208,8 @@ public final class EventClanProto {
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              description_ = bs;
+              description_ = input.readBytes();
               break;
             }
             case 48: {
@@ -264,6 +267,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -285,6 +289,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -327,6 +332,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional string tag = 3;
     public static final int TAG_FIELD_NUMBER = 3;
     private java.lang.Object tag_;
     /**
@@ -369,6 +375,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional bool requestToJoinClanRequired = 4;
     public static final int REQUESTTOJOINCLANREQUIRED_FIELD_NUMBER = 4;
     private boolean requestToJoinClanRequired_;
     /**
@@ -384,6 +391,7 @@ public final class EventClanProto {
       return requestToJoinClanRequired_;
     }
 
+    // optional string description = 5;
     public static final int DESCRIPTION_FIELD_NUMBER = 5;
     private java.lang.Object description_;
     /**
@@ -426,6 +434,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional int32 clanIconId = 6;
     public static final int CLANICONID_FIELD_NUMBER = 6;
     private int clanIconId_;
     /**
@@ -441,6 +450,7 @@ public final class EventClanProto {
       return clanIconId_;
     }
 
+    // optional int32 gemsSpent = 7;
     public static final int GEMSSPENT_FIELD_NUMBER = 7;
     private int gemsSpent_;
     /**
@@ -466,6 +476,7 @@ public final class EventClanProto {
       return gemsSpent_;
     }
 
+    // optional sint32 cashChange = 8;
     public static final int CASHCHANGE_FIELD_NUMBER = 8;
     private int cashChange_;
     /**
@@ -502,8 +513,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -659,9 +669,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.CreateClanRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CreateClanRequestProto)
-        com.lvl6.proto.EventClanProto.CreateClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.CreateClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor;
@@ -852,6 +861,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -960,7 +970,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -968,6 +978,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -981,12 +992,9 @@ public final class EventClanProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1044,6 +1052,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string tag = 3;
       private java.lang.Object tag_ = "";
       /**
        * <code>optional string tag = 3;</code>
@@ -1057,12 +1066,9 @@ public final class EventClanProto {
       public java.lang.String getTag() {
         java.lang.Object ref = tag_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            tag_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          tag_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1120,6 +1126,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool requestToJoinClanRequired = 4;
       private boolean requestToJoinClanRequired_ ;
       /**
        * <code>optional bool requestToJoinClanRequired = 4;</code>
@@ -1152,6 +1159,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string description = 5;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 5;</code>
@@ -1165,12 +1173,9 @@ public final class EventClanProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          description_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1228,6 +1233,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 clanIconId = 6;
       private int clanIconId_ ;
       /**
        * <code>optional int32 clanIconId = 6;</code>
@@ -1260,6 +1266,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 gemsSpent = 7;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 7;</code>
@@ -1312,6 +1319,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional sint32 cashChange = 8;
       private int cashChange_ ;
       /**
        * <code>optional sint32 cashChange = 8;</code>
@@ -1371,10 +1379,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CreateClanRequestProto)
   }
 
-  public interface CreateClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CreateClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CreateClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1388,6 +1396,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
      */
@@ -1397,6 +1406,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus getStatus();
 
+    // optional .com.lvl6.proto.MinimumClanProto clanInfo = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto clanInfo = 3;</code>
      */
@@ -1414,9 +1424,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.CreateClanResponseProto}
    */
   public static final class CreateClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CreateClanResponseProto)
-      CreateClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CreateClanResponseProtoOrBuilder {
     // Use CreateClanResponseProto.newBuilder() to construct.
     private CreateClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1675,6 +1684,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1696,6 +1706,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus status_;
     /**
@@ -1711,6 +1722,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.MinimumClanProto clanInfo = 3;
     public static final int CLANINFO_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumClanProto clanInfo_;
     /**
@@ -1740,8 +1752,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1862,9 +1873,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.CreateClanResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CreateClanResponseProto)
-        com.lvl6.proto.EventClanProto.CreateClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.CreateClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_CreateClanResponseProto_descriptor;
@@ -2013,6 +2023,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2121,7 +2132,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2129,6 +2140,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;
       private com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus status_ = com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
@@ -2164,6 +2176,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumClanProto clanInfo = 3;
       private com.lvl6.proto.UserProto.MinimumClanProto clanInfo_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> clanInfoBuilder_;
@@ -2272,7 +2285,7 @@ public final class EventClanProto {
         if (clanInfoBuilder_ == null) {
           clanInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  getClanInfo(),
+                  clanInfo_,
                   getParentForChildren(),
                   isClean());
           clanInfo_ = null;
@@ -2291,10 +2304,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CreateClanResponseProto)
   }
 
-  public interface LeaveClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LeaveClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface LeaveClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2316,9 +2329,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class LeaveClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LeaveClanRequestProto)
-      LeaveClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements LeaveClanRequestProtoOrBuilder {
     // Use LeaveClanRequestProto.newBuilder() to construct.
     private LeaveClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2417,6 +2429,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2444,8 +2457,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2556,9 +2568,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LeaveClanRequestProto)
-        com.lvl6.proto.EventClanProto.LeaveClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.LeaveClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_LeaveClanRequestProto_descriptor;
@@ -2680,6 +2691,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2788,7 +2800,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2807,10 +2819,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LeaveClanRequestProto)
   }
 
-  public interface LeaveClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LeaveClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface LeaveClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2824,6 +2836,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
      */
@@ -2837,9 +2850,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.LeaveClanResponseProto}
    */
   public static final class LeaveClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LeaveClanResponseProto)
-      LeaveClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements LeaveClanResponseProtoOrBuilder {
     // Use LeaveClanResponseProto.newBuilder() to construct.
     private LeaveClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3049,6 +3061,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3070,6 +3083,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus status_;
     /**
@@ -3092,8 +3106,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3207,9 +3220,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.LeaveClanResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LeaveClanResponseProto)
-        com.lvl6.proto.EventClanProto.LeaveClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.LeaveClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_LeaveClanResponseProto_descriptor;
@@ -3340,6 +3352,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3448,7 +3461,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3456,6 +3469,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;
       private com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus status_ = com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
@@ -3502,10 +3516,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.LeaveClanResponseProto)
   }
 
-  public interface RequestJoinClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RequestJoinClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RequestJoinClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3519,6 +3533,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string clanUuid = 2;
     /**
      * <code>optional string clanUuid = 2;</code>
      */
@@ -3533,6 +3548,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -3546,9 +3562,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.RequestJoinClanRequestProto}
    */
   public static final class RequestJoinClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RequestJoinClanRequestProto)
-      RequestJoinClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RequestJoinClanRequestProtoOrBuilder {
     // Use RequestJoinClanRequestProto.newBuilder() to construct.
     private RequestJoinClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3608,9 +3623,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -3658,6 +3672,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3679,6 +3694,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string clanUuid = 2;
     public static final int CLANUUID_FIELD_NUMBER = 2;
     private java.lang.Object clanUuid_;
     /**
@@ -3721,6 +3737,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -3744,8 +3761,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3866,9 +3882,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.RequestJoinClanRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RequestJoinClanRequestProto)
-        com.lvl6.proto.EventClanProto.RequestJoinClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RequestJoinClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RequestJoinClanRequestProto_descriptor;
@@ -4010,6 +4025,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4118,7 +4134,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4126,6 +4142,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string clanUuid = 2;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 2;</code>
@@ -4139,12 +4156,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4202,6 +4216,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -4245,10 +4260,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RequestJoinClanRequestProto)
   }
 
-  public interface RequestJoinClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RequestJoinClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RequestJoinClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -4262,6 +4277,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
      */
@@ -4271,6 +4287,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus getStatus();
 
+    // optional string clanUuid = 3;
     /**
      * <code>optional string clanUuid = 3;</code>
      */
@@ -4285,6 +4302,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
+    // optional .com.lvl6.proto.MinimumUserProtoForClans requester = 4;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoForClans requester = 4;</code>
      */
@@ -4298,6 +4316,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getRequesterOrBuilder();
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 5;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto minClan = 5;</code>
      */
@@ -4311,6 +4330,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getMinClanOrBuilder();
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;
     /**
      * <code>optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;</code>
      */
@@ -4324,6 +4344,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder getFullClanOrBuilder();
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 7;
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 7;</code>
      *
@@ -4349,6 +4370,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 8;
     /**
      * <code>repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 8;</code>
      */
@@ -4373,6 +4395,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder getClanUsersDetailsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.UserCurrentMonsterTeamProto requesterMonsters = 9;
     /**
      * <code>optional .com.lvl6.proto.UserCurrentMonsterTeamProto requesterMonsters = 9;</code>
      */
@@ -4386,6 +4409,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getRequesterMonstersOrBuilder();
 
+    // optional int64 clientTime = 10;
     /**
      * <code>optional int64 clientTime = 10;</code>
      */
@@ -4404,9 +4428,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class RequestJoinClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RequestJoinClanResponseProto)
-      RequestJoinClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RequestJoinClanResponseProtoOrBuilder {
     // Use RequestJoinClanResponseProto.newBuilder() to construct.
     private RequestJoinClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4477,9 +4500,8 @@ public final class EventClanProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
             case 34: {
@@ -4721,6 +4743,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4742,6 +4765,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus status_;
     /**
@@ -4757,6 +4781,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional string clanUuid = 3;
     public static final int CLANUUID_FIELD_NUMBER = 3;
     private java.lang.Object clanUuid_;
     /**
@@ -4799,6 +4824,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional .com.lvl6.proto.MinimumUserProtoForClans requester = 4;
     public static final int REQUESTER_FIELD_NUMBER = 4;
     private com.lvl6.proto.ClanProto.MinimumUserProtoForClans requester_;
     /**
@@ -4820,6 +4846,7 @@ public final class EventClanProto {
       return requester_;
     }
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 5;
     public static final int MINCLAN_FIELD_NUMBER = 5;
     private com.lvl6.proto.UserProto.MinimumClanProto minClan_;
     /**
@@ -4841,6 +4868,7 @@ public final class EventClanProto {
       return minClan_;
     }
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;
     public static final int FULLCLAN_FIELD_NUMBER = 6;
     private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_;
     /**
@@ -4862,6 +4890,7 @@ public final class EventClanProto {
       return fullClan_;
     }
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 7;
     public static final int EVENTDETAILS_FIELD_NUMBER = 7;
     private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
     /**
@@ -4895,6 +4924,7 @@ public final class EventClanProto {
       return eventDetails_;
     }
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 8;
     public static final int CLANUSERSDETAILS_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> clanUsersDetails_;
     /**
@@ -4930,6 +4960,7 @@ public final class EventClanProto {
       return clanUsersDetails_.get(index);
     }
 
+    // optional .com.lvl6.proto.UserCurrentMonsterTeamProto requesterMonsters = 9;
     public static final int REQUESTERMONSTERS_FIELD_NUMBER = 9;
     private com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto requesterMonsters_;
     /**
@@ -4951,6 +4982,7 @@ public final class EventClanProto {
       return requesterMonsters_;
     }
 
+    // optional int64 clientTime = 10;
     public static final int CLIENTTIME_FIELD_NUMBER = 10;
     private long clientTime_;
     /**
@@ -4981,8 +5013,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5157,9 +5188,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RequestJoinClanResponseProto)
-        com.lvl6.proto.EventClanProto.RequestJoinClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RequestJoinClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RequestJoinClanResponseProto_descriptor;
@@ -5442,6 +5472,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -5550,7 +5581,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5558,6 +5589,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;
       private com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus status_ = com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus.SUCCESS_REQUEST;
       /**
        * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
@@ -5593,6 +5625,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string clanUuid = 3;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 3;</code>
@@ -5606,12 +5639,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -5669,6 +5699,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProtoForClans requester = 4;
       private com.lvl6.proto.ClanProto.MinimumUserProtoForClans requester_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder> requesterBuilder_;
@@ -5777,7 +5808,7 @@ public final class EventClanProto {
         if (requesterBuilder_ == null) {
           requesterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder>(
-                  getRequester(),
+                  requester_,
                   getParentForChildren(),
                   isClean());
           requester_ = null;
@@ -5785,6 +5816,7 @@ public final class EventClanProto {
         return requesterBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumClanProto minClan = 5;
       private com.lvl6.proto.UserProto.MinimumClanProto minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> minClanBuilder_;
@@ -5893,7 +5925,7 @@ public final class EventClanProto {
         if (minClanBuilder_ == null) {
           minClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  getMinClan(),
+                  minClan_,
                   getParentForChildren(),
                   isClean());
           minClan_ = null;
@@ -5901,6 +5933,7 @@ public final class EventClanProto {
         return minClanBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;
       private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder> fullClanBuilder_;
@@ -6009,7 +6042,7 @@ public final class EventClanProto {
         if (fullClanBuilder_ == null) {
           fullClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder>(
-                  getFullClan(),
+                  fullClan_,
                   getParentForChildren(),
                   isClean());
           fullClan_ = null;
@@ -6017,6 +6050,7 @@ public final class EventClanProto {
         return fullClanBuilder_;
       }
 
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 7;
       private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
@@ -6161,7 +6195,7 @@ public final class EventClanProto {
         if (eventDetailsBuilder_ == null) {
           eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
-                  getEventDetails(),
+                  eventDetails_,
                   getParentForChildren(),
                   isClean());
           eventDetails_ = null;
@@ -6169,6 +6203,7 @@ public final class EventClanProto {
         return eventDetailsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 8;
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> clanUsersDetails_ =
         java.util.Collections.emptyList();
       private void ensureClanUsersDetailsIsMutable() {
@@ -6310,8 +6345,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> values) {
         if (clanUsersDetailsBuilder_ == null) {
           ensureClanUsersDetailsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanUsersDetails_);
+          super.addAll(values, clanUsersDetails_);
           onChanged();
         } else {
           clanUsersDetailsBuilder_.addAllMessages(values);
@@ -6409,6 +6443,7 @@ public final class EventClanProto {
         return clanUsersDetailsBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserCurrentMonsterTeamProto requesterMonsters = 9;
       private com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto requesterMonsters_ = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> requesterMonstersBuilder_;
@@ -6517,7 +6552,7 @@ public final class EventClanProto {
         if (requesterMonstersBuilder_ == null) {
           requesterMonstersBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder>(
-                  getRequesterMonsters(),
+                  requesterMonsters_,
                   getParentForChildren(),
                   isClean());
           requesterMonsters_ = null;
@@ -6525,6 +6560,7 @@ public final class EventClanProto {
         return requesterMonstersBuilder_;
       }
 
+      // optional int64 clientTime = 10;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 10;</code>
@@ -6568,10 +6604,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RequestJoinClanResponseProto)
   }
 
-  public interface RetractRequestJoinClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetractRequestJoinClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetractRequestJoinClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -6585,6 +6621,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string clanUuid = 2;
     /**
      * <code>optional string clanUuid = 2;</code>
      */
@@ -6603,9 +6640,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.RetractRequestJoinClanRequestProto}
    */
   public static final class RetractRequestJoinClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetractRequestJoinClanRequestProto)
-      RetractRequestJoinClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetractRequestJoinClanRequestProtoOrBuilder {
     // Use RetractRequestJoinClanRequestProto.newBuilder() to construct.
     private RetractRequestJoinClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6665,9 +6701,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
           }
@@ -6710,6 +6745,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -6731,6 +6767,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string clanUuid = 2;
     public static final int CLANUUID_FIELD_NUMBER = 2;
     private java.lang.Object clanUuid_;
     /**
@@ -6780,8 +6817,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6895,9 +6931,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.RetractRequestJoinClanRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetractRequestJoinClanRequestProto)
-        com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_descriptor;
@@ -7030,6 +7065,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7138,7 +7174,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7146,6 +7182,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string clanUuid = 2;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 2;</code>
@@ -7159,12 +7196,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7233,10 +7267,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetractRequestJoinClanRequestProto)
   }
 
-  public interface RetractRequestJoinClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetractRequestJoinClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetractRequestJoinClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -7250,6 +7284,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
      */
@@ -7259,6 +7294,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus getStatus();
 
+    // optional string clanUuid = 3;
     /**
      * <code>optional string clanUuid = 3;</code>
      */
@@ -7277,9 +7313,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.RetractRequestJoinClanResponseProto}
    */
   public static final class RetractRequestJoinClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetractRequestJoinClanResponseProto)
-      RetractRequestJoinClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetractRequestJoinClanResponseProtoOrBuilder {
     // Use RetractRequestJoinClanResponseProto.newBuilder() to construct.
     private RetractRequestJoinClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7350,9 +7385,8 @@ public final class EventClanProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
           }
@@ -7495,6 +7529,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -7516,6 +7551,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status_;
     /**
@@ -7531,6 +7567,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional string clanUuid = 3;
     public static final int CLANUUID_FIELD_NUMBER = 3;
     private java.lang.Object clanUuid_;
     /**
@@ -7581,8 +7618,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7703,9 +7739,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.RetractRequestJoinClanResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetractRequestJoinClanResponseProto)
-        com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_descriptor;
@@ -7847,6 +7882,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7955,7 +7991,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7963,6 +7999,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;
       private com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status_ = com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
@@ -7998,6 +8035,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string clanUuid = 3;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 3;</code>
@@ -8011,12 +8049,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8085,10 +8120,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetractRequestJoinClanResponseProto)
   }
 
-  public interface ApproveOrRejectRequestToJoinClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ApproveOrRejectRequestToJoinClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ApproveOrRejectRequestToJoinClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -8102,6 +8137,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string requesterUuid = 2;
     /**
      * <code>optional string requesterUuid = 2;</code>
      */
@@ -8116,6 +8152,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getRequesterUuidBytes();
 
+    // optional bool accept = 3;
     /**
      * <code>optional bool accept = 3;</code>
      */
@@ -8133,9 +8170,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class ApproveOrRejectRequestToJoinClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ApproveOrRejectRequestToJoinClanRequestProto)
-      ApproveOrRejectRequestToJoinClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ApproveOrRejectRequestToJoinClanRequestProtoOrBuilder {
     // Use ApproveOrRejectRequestToJoinClanRequestProto.newBuilder() to construct.
     private ApproveOrRejectRequestToJoinClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8195,9 +8231,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              requesterUuid_ = bs;
+              requesterUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -8245,6 +8280,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -8266,6 +8302,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string requesterUuid = 2;
     public static final int REQUESTERUUID_FIELD_NUMBER = 2;
     private java.lang.Object requesterUuid_;
     /**
@@ -8308,6 +8345,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional bool accept = 3;
     public static final int ACCEPT_FIELD_NUMBER = 3;
     private boolean accept_;
     /**
@@ -8331,8 +8369,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8457,9 +8494,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ApproveOrRejectRequestToJoinClanRequestProto)
-        com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_descriptor;
@@ -8601,6 +8637,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -8709,7 +8746,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8717,6 +8754,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string requesterUuid = 2;
       private java.lang.Object requesterUuid_ = "";
       /**
        * <code>optional string requesterUuid = 2;</code>
@@ -8730,12 +8768,9 @@ public final class EventClanProto {
       public java.lang.String getRequesterUuid() {
         java.lang.Object ref = requesterUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            requesterUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          requesterUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8793,6 +8828,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool accept = 3;
       private boolean accept_ ;
       /**
        * <code>optional bool accept = 3;</code>
@@ -8836,10 +8872,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ApproveOrRejectRequestToJoinClanRequestProto)
   }
 
-  public interface ApproveOrRejectRequestToJoinClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ApproveOrRejectRequestToJoinClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -8853,6 +8889,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
      */
@@ -8862,6 +8899,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus getStatus();
 
+    // optional .com.lvl6.proto.MinimumUserProto requester = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto requester = 3;</code>
      */
@@ -8875,6 +8913,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getRequesterOrBuilder();
 
+    // optional bool accept = 4;
     /**
      * <code>optional bool accept = 4;</code>
      */
@@ -8884,6 +8923,7 @@ public final class EventClanProto {
      */
     boolean getAccept();
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 5;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto minClan = 5;</code>
      */
@@ -8897,6 +8937,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getMinClanOrBuilder();
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;
     /**
      * <code>optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;</code>
      */
@@ -8914,9 +8955,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto}
    */
   public static final class ApproveOrRejectRequestToJoinClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto)
-      ApproveOrRejectRequestToJoinClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ApproveOrRejectRequestToJoinClanResponseProtoOrBuilder {
     // Use ApproveOrRejectRequestToJoinClanResponseProto.newBuilder() to construct.
     private ApproveOrRejectRequestToJoinClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -9188,6 +9228,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -9209,6 +9250,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status_;
     /**
@@ -9224,6 +9266,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.MinimumUserProto requester = 3;
     public static final int REQUESTER_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumUserProto requester_;
     /**
@@ -9245,6 +9288,7 @@ public final class EventClanProto {
       return requester_;
     }
 
+    // optional bool accept = 4;
     public static final int ACCEPT_FIELD_NUMBER = 4;
     private boolean accept_;
     /**
@@ -9260,6 +9304,7 @@ public final class EventClanProto {
       return accept_;
     }
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 5;
     public static final int MINCLAN_FIELD_NUMBER = 5;
     private com.lvl6.proto.UserProto.MinimumClanProto minClan_;
     /**
@@ -9281,6 +9326,7 @@ public final class EventClanProto {
       return minClan_;
     }
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;
     public static final int FULLCLAN_FIELD_NUMBER = 6;
     private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_;
     /**
@@ -9313,8 +9359,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -9456,9 +9501,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto)
-        com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_descriptor;
@@ -9652,6 +9696,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -9760,7 +9805,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -9768,6 +9813,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;
       private com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status_ = com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
@@ -9803,6 +9849,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto requester = 3;
       private com.lvl6.proto.UserProto.MinimumUserProto requester_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> requesterBuilder_;
@@ -9911,7 +9958,7 @@ public final class EventClanProto {
         if (requesterBuilder_ == null) {
           requesterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getRequester(),
+                  requester_,
                   getParentForChildren(),
                   isClean());
           requester_ = null;
@@ -9919,6 +9966,7 @@ public final class EventClanProto {
         return requesterBuilder_;
       }
 
+      // optional bool accept = 4;
       private boolean accept_ ;
       /**
        * <code>optional bool accept = 4;</code>
@@ -9951,6 +9999,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumClanProto minClan = 5;
       private com.lvl6.proto.UserProto.MinimumClanProto minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> minClanBuilder_;
@@ -10059,7 +10108,7 @@ public final class EventClanProto {
         if (minClanBuilder_ == null) {
           minClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  getMinClan(),
+                  minClan_,
                   getParentForChildren(),
                   isClean());
           minClan_ = null;
@@ -10067,6 +10116,7 @@ public final class EventClanProto {
         return minClanBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 6;
       private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder> fullClanBuilder_;
@@ -10175,7 +10225,7 @@ public final class EventClanProto {
         if (fullClanBuilder_ == null) {
           fullClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder>(
-                  getFullClan(),
+                  fullClan_,
                   getParentForChildren(),
                   isClean());
           fullClan_ = null;
@@ -10194,10 +10244,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto)
   }
 
-  public interface RetrieveClanInfoRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveClanInfoRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveClanInfoRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -10211,6 +10261,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string clanUuid = 2;
     /**
      * <code>optional string clanUuid = 2;</code>
      */
@@ -10225,6 +10276,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
+    // optional string clanName = 3;
     /**
      * <code>optional string clanName = 3;</code>
      */
@@ -10239,6 +10291,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanNameBytes();
 
+    // optional .com.lvl6.proto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType = 4;
     /**
      * <code>optional .com.lvl6.proto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType = 4;</code>
      */
@@ -10248,6 +10301,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType getGrabType();
 
+    // optional int32 beforeThisClanId = 5 [deprecated = true];
     /**
      * <code>optional int32 beforeThisClanId = 5 [deprecated = true];</code>
      *
@@ -10265,6 +10319,7 @@ public final class EventClanProto {
      */
     @java.lang.Deprecated int getBeforeThisClanId();
 
+    // optional bool isForBrowsingList = 6;
     /**
      * <code>optional bool isForBrowsingList = 6;</code>
      */
@@ -10278,9 +10333,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.RetrieveClanInfoRequestProto}
    */
   public static final class RetrieveClanInfoRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveClanInfoRequestProto)
-      RetrieveClanInfoRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetrieveClanInfoRequestProtoOrBuilder {
     // Use RetrieveClanInfoRequestProto.newBuilder() to construct.
     private RetrieveClanInfoRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10340,15 +10394,13 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              clanName_ = bs;
+              clanName_ = input.readBytes();
               break;
             }
             case 32: {
@@ -10503,6 +10555,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -10524,6 +10577,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string clanUuid = 2;
     public static final int CLANUUID_FIELD_NUMBER = 2;
     private java.lang.Object clanUuid_;
     /**
@@ -10566,6 +10620,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional string clanName = 3;
     public static final int CLANNAME_FIELD_NUMBER = 3;
     private java.lang.Object clanName_;
     /**
@@ -10608,6 +10663,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional .com.lvl6.proto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType = 4;
     public static final int GRABTYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType_;
     /**
@@ -10623,6 +10679,7 @@ public final class EventClanProto {
       return grabType_;
     }
 
+    // optional int32 beforeThisClanId = 5 [deprecated = true];
     public static final int BEFORETHISCLANID_FIELD_NUMBER = 5;
     private int beforeThisClanId_;
     /**
@@ -10646,6 +10703,7 @@ public final class EventClanProto {
       return beforeThisClanId_;
     }
 
+    // optional bool isForBrowsingList = 6;
     public static final int ISFORBROWSINGLIST_FIELD_NUMBER = 6;
     private boolean isForBrowsingList_;
     /**
@@ -10672,8 +10730,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -10815,9 +10872,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.RetrieveClanInfoRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveClanInfoRequestProto)
-        com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_descriptor;
@@ -10988,6 +11044,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -11096,7 +11153,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -11104,6 +11161,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string clanUuid = 2;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 2;</code>
@@ -11117,12 +11175,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -11180,6 +11235,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string clanName = 3;
       private java.lang.Object clanName_ = "";
       /**
        * <code>optional string clanName = 3;</code>
@@ -11193,12 +11249,9 @@ public final class EventClanProto {
       public java.lang.String getClanName() {
         java.lang.Object ref = clanName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -11256,6 +11309,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType = 4;
       private com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType_ = com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType.ALL;
       /**
        * <code>optional .com.lvl6.proto.RetrieveClanInfoRequestProto.ClanInfoGrabType grabType = 4;</code>
@@ -11291,6 +11345,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 beforeThisClanId = 5 [deprecated = true];
       private int beforeThisClanId_ ;
       /**
        * <code>optional int32 beforeThisClanId = 5 [deprecated = true];</code>
@@ -11339,6 +11394,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool isForBrowsingList = 6;
       private boolean isForBrowsingList_ ;
       /**
        * <code>optional bool isForBrowsingList = 6;</code>
@@ -11382,10 +11438,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveClanInfoRequestProto)
   }
 
-  public interface RetrieveClanInfoResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveClanInfoResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveClanInfoResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -11399,6 +11455,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.MinimumUserProtoForClans members = 2;
     /**
      * <code>repeated .com.lvl6.proto.MinimumUserProtoForClans members = 2;</code>
      */
@@ -11423,6 +11480,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getMembersOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.FullClanProtoWithClanSize clanInfo = 3;
     /**
      * <code>repeated .com.lvl6.proto.FullClanProtoWithClanSize clanInfo = 3;</code>
      */
@@ -11447,6 +11505,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder getClanInfoOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;
     /**
      * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
      */
@@ -11456,6 +11515,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus getStatus();
 
+    // optional bool isForSearch = 5;
     /**
      * <code>optional bool isForSearch = 5;</code>
      */
@@ -11465,6 +11525,7 @@ public final class EventClanProto {
      */
     boolean getIsForSearch();
 
+    // optional bool isForBrowsingList = 6;
     /**
      * <code>optional bool isForBrowsingList = 6;</code>
      */
@@ -11474,6 +11535,7 @@ public final class EventClanProto {
      */
     boolean getIsForBrowsingList();
 
+    // optional string clanUuid = 7;
     /**
      * <code>optional string clanUuid = 7;</code>
      */
@@ -11488,6 +11550,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
+    // optional string clanName = 8;
     /**
      * <code>optional string clanName = 8;</code>
      */
@@ -11502,6 +11565,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanNameBytes();
 
+    // optional int32 beforeThisClanId = 9 [deprecated = true];
     /**
      * <code>optional int32 beforeThisClanId = 9 [deprecated = true];</code>
      */
@@ -11511,6 +11575,7 @@ public final class EventClanProto {
      */
     @java.lang.Deprecated int getBeforeThisClanId();
 
+    // repeated .com.lvl6.proto.UserCurrentMonsterTeamProto monsterTeams = 10;
     /**
      * <code>repeated .com.lvl6.proto.UserCurrentMonsterTeamProto monsterTeams = 10;</code>
      */
@@ -11539,9 +11604,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.RetrieveClanInfoResponseProto}
    */
   public static final class RetrieveClanInfoResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveClanInfoResponseProto)
-      RetrieveClanInfoResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetrieveClanInfoResponseProtoOrBuilder {
     // Use RetrieveClanInfoResponseProto.newBuilder() to construct.
     private RetrieveClanInfoResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -11638,15 +11702,13 @@ public final class EventClanProto {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
             case 66: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              clanName_ = bs;
+              clanName_ = input.readBytes();
               break;
             }
             case 72: {
@@ -11793,6 +11855,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -11814,6 +11877,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.MinimumUserProtoForClans members = 2;
     public static final int MEMBERS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ClanProto.MinimumUserProtoForClans> members_;
     /**
@@ -11849,6 +11913,7 @@ public final class EventClanProto {
       return members_.get(index);
     }
 
+    // repeated .com.lvl6.proto.FullClanProtoWithClanSize clanInfo = 3;
     public static final int CLANINFO_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.ClanProto.FullClanProtoWithClanSize> clanInfo_;
     /**
@@ -11884,6 +11949,7 @@ public final class EventClanProto {
       return clanInfo_.get(index);
     }
 
+    // optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;
     public static final int STATUS_FIELD_NUMBER = 4;
     private com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status_;
     /**
@@ -11899,6 +11965,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional bool isForSearch = 5;
     public static final int ISFORSEARCH_FIELD_NUMBER = 5;
     private boolean isForSearch_;
     /**
@@ -11914,6 +11981,7 @@ public final class EventClanProto {
       return isForSearch_;
     }
 
+    // optional bool isForBrowsingList = 6;
     public static final int ISFORBROWSINGLIST_FIELD_NUMBER = 6;
     private boolean isForBrowsingList_;
     /**
@@ -11929,6 +11997,7 @@ public final class EventClanProto {
       return isForBrowsingList_;
     }
 
+    // optional string clanUuid = 7;
     public static final int CLANUUID_FIELD_NUMBER = 7;
     private java.lang.Object clanUuid_;
     /**
@@ -11971,6 +12040,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional string clanName = 8;
     public static final int CLANNAME_FIELD_NUMBER = 8;
     private java.lang.Object clanName_;
     /**
@@ -12013,6 +12083,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional int32 beforeThisClanId = 9 [deprecated = true];
     public static final int BEFORETHISCLANID_FIELD_NUMBER = 9;
     private int beforeThisClanId_;
     /**
@@ -12028,6 +12099,7 @@ public final class EventClanProto {
       return beforeThisClanId_;
     }
 
+    // repeated .com.lvl6.proto.UserCurrentMonsterTeamProto monsterTeams = 10;
     public static final int MONSTERTEAMS_FIELD_NUMBER = 10;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> monsterTeams_;
     /**
@@ -12078,8 +12150,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -12249,9 +12320,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.RetrieveClanInfoResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveClanInfoResponseProto)
-        com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_descriptor;
@@ -12557,6 +12627,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -12665,7 +12736,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -12673,6 +12744,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.MinimumUserProtoForClans members = 2;
       private java.util.List<com.lvl6.proto.ClanProto.MinimumUserProtoForClans> members_ =
         java.util.Collections.emptyList();
       private void ensureMembersIsMutable() {
@@ -12814,8 +12886,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.MinimumUserProtoForClans> values) {
         if (membersBuilder_ == null) {
           ensureMembersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, members_);
+          super.addAll(values, members_);
           onChanged();
         } else {
           membersBuilder_.addAllMessages(values);
@@ -12913,6 +12984,7 @@ public final class EventClanProto {
         return membersBuilder_;
       }
 
+      // repeated .com.lvl6.proto.FullClanProtoWithClanSize clanInfo = 3;
       private java.util.List<com.lvl6.proto.ClanProto.FullClanProtoWithClanSize> clanInfo_ =
         java.util.Collections.emptyList();
       private void ensureClanInfoIsMutable() {
@@ -13054,8 +13126,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.FullClanProtoWithClanSize> values) {
         if (clanInfoBuilder_ == null) {
           ensureClanInfoIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanInfo_);
+          super.addAll(values, clanInfo_);
           onChanged();
         } else {
           clanInfoBuilder_.addAllMessages(values);
@@ -13153,6 +13224,7 @@ public final class EventClanProto {
         return clanInfoBuilder_;
       }
 
+      // optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;
       private com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status_ = com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
@@ -13188,6 +13260,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool isForSearch = 5;
       private boolean isForSearch_ ;
       /**
        * <code>optional bool isForSearch = 5;</code>
@@ -13220,6 +13293,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool isForBrowsingList = 6;
       private boolean isForBrowsingList_ ;
       /**
        * <code>optional bool isForBrowsingList = 6;</code>
@@ -13252,6 +13326,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string clanUuid = 7;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 7;</code>
@@ -13265,12 +13340,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13328,6 +13400,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string clanName = 8;
       private java.lang.Object clanName_ = "";
       /**
        * <code>optional string clanName = 8;</code>
@@ -13341,12 +13414,9 @@ public final class EventClanProto {
       public java.lang.String getClanName() {
         java.lang.Object ref = clanName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -13404,6 +13474,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 beforeThisClanId = 9 [deprecated = true];
       private int beforeThisClanId_ ;
       /**
        * <code>optional int32 beforeThisClanId = 9 [deprecated = true];</code>
@@ -13436,6 +13507,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserCurrentMonsterTeamProto monsterTeams = 10;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> monsterTeams_ =
         java.util.Collections.emptyList();
       private void ensureMonsterTeamsIsMutable() {
@@ -13577,8 +13649,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> values) {
         if (monsterTeamsBuilder_ == null) {
           ensureMonsterTeamsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, monsterTeams_);
+          super.addAll(values, monsterTeams_);
           onChanged();
         } else {
           monsterTeamsBuilder_.addAllMessages(values);
@@ -13687,10 +13758,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveClanInfoResponseProto)
   }
 
-  public interface TransferClanOwnershipRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TransferClanOwnershipRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TransferClanOwnershipRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -13704,6 +13775,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string clanOwnerUuidNew = 2;
     /**
      * <code>optional string clanOwnerUuidNew = 2;</code>
      */
@@ -13722,9 +13794,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.TransferClanOwnershipRequestProto}
    */
   public static final class TransferClanOwnershipRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TransferClanOwnershipRequestProto)
-      TransferClanOwnershipRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TransferClanOwnershipRequestProtoOrBuilder {
     // Use TransferClanOwnershipRequestProto.newBuilder() to construct.
     private TransferClanOwnershipRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -13784,9 +13855,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              clanOwnerUuidNew_ = bs;
+              clanOwnerUuidNew_ = input.readBytes();
               break;
             }
           }
@@ -13829,6 +13899,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -13850,6 +13921,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string clanOwnerUuidNew = 2;
     public static final int CLANOWNERUUIDNEW_FIELD_NUMBER = 2;
     private java.lang.Object clanOwnerUuidNew_;
     /**
@@ -13899,8 +13971,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -14014,9 +14085,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.TransferClanOwnershipRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TransferClanOwnershipRequestProto)
-        com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_descriptor;
@@ -14149,6 +14219,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -14257,7 +14328,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -14265,6 +14336,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string clanOwnerUuidNew = 2;
       private java.lang.Object clanOwnerUuidNew_ = "";
       /**
        * <code>optional string clanOwnerUuidNew = 2;</code>
@@ -14278,12 +14350,9 @@ public final class EventClanProto {
       public java.lang.String getClanOwnerUuidNew() {
         java.lang.Object ref = clanOwnerUuidNew_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanOwnerUuidNew_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanOwnerUuidNew_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -14352,10 +14421,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TransferClanOwnershipRequestProto)
   }
 
-  public interface TransferClanOwnershipResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TransferClanOwnershipResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TransferClanOwnershipResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -14369,6 +14438,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
      */
@@ -14378,6 +14448,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus getStatus();
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto minClan = 3;</code>
      */
@@ -14391,6 +14462,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getMinClanOrBuilder();
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;
     /**
      * <code>optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;</code>
      */
@@ -14404,6 +14476,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder getFullClanOrBuilder();
 
+    // optional .com.lvl6.proto.MinimumUserProto clanOwnerNew = 5;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto clanOwnerNew = 5;</code>
      */
@@ -14421,9 +14494,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.TransferClanOwnershipResponseProto}
    */
   public static final class TransferClanOwnershipResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TransferClanOwnershipResponseProto)
-      TransferClanOwnershipResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements TransferClanOwnershipResponseProtoOrBuilder {
     // Use TransferClanOwnershipResponseProto.newBuilder() to construct.
     private TransferClanOwnershipResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -14672,6 +14744,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -14693,6 +14766,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status_;
     /**
@@ -14708,6 +14782,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 3;
     public static final int MINCLAN_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumClanProto minClan_;
     /**
@@ -14729,6 +14804,7 @@ public final class EventClanProto {
       return minClan_;
     }
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;
     public static final int FULLCLAN_FIELD_NUMBER = 4;
     private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_;
     /**
@@ -14750,6 +14826,7 @@ public final class EventClanProto {
       return fullClan_;
     }
 
+    // optional .com.lvl6.proto.MinimumUserProto clanOwnerNew = 5;
     public static final int CLANOWNERNEW_FIELD_NUMBER = 5;
     private com.lvl6.proto.UserProto.MinimumUserProto clanOwnerNew_;
     /**
@@ -14781,8 +14858,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -14917,9 +14993,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.TransferClanOwnershipResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TransferClanOwnershipResponseProto)
-        com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_descriptor;
@@ -15104,6 +15179,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -15212,7 +15288,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -15220,6 +15296,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;
       private com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status_ = com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
@@ -15255,6 +15332,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumClanProto minClan = 3;
       private com.lvl6.proto.UserProto.MinimumClanProto minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> minClanBuilder_;
@@ -15363,7 +15441,7 @@ public final class EventClanProto {
         if (minClanBuilder_ == null) {
           minClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  getMinClan(),
+                  minClan_,
                   getParentForChildren(),
                   isClean());
           minClan_ = null;
@@ -15371,6 +15449,7 @@ public final class EventClanProto {
         return minClanBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;
       private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder> fullClanBuilder_;
@@ -15479,7 +15558,7 @@ public final class EventClanProto {
         if (fullClanBuilder_ == null) {
           fullClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder>(
-                  getFullClan(),
+                  fullClan_,
                   getParentForChildren(),
                   isClean());
           fullClan_ = null;
@@ -15487,6 +15566,7 @@ public final class EventClanProto {
         return fullClanBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto clanOwnerNew = 5;
       private com.lvl6.proto.UserProto.MinimumUserProto clanOwnerNew_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> clanOwnerNewBuilder_;
@@ -15595,7 +15675,7 @@ public final class EventClanProto {
         if (clanOwnerNewBuilder_ == null) {
           clanOwnerNewBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getClanOwnerNew(),
+                  clanOwnerNew_,
                   getParentForChildren(),
                   isClean());
           clanOwnerNew_ = null;
@@ -15614,10 +15694,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TransferClanOwnershipResponseProto)
   }
 
-  public interface BootPlayerFromClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BootPlayerFromClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BootPlayerFromClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -15631,6 +15711,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string playerToBootUuid = 2;
     /**
      * <code>optional string playerToBootUuid = 2;</code>
      */
@@ -15649,9 +15730,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.BootPlayerFromClanRequestProto}
    */
   public static final class BootPlayerFromClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BootPlayerFromClanRequestProto)
-      BootPlayerFromClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BootPlayerFromClanRequestProtoOrBuilder {
     // Use BootPlayerFromClanRequestProto.newBuilder() to construct.
     private BootPlayerFromClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -15711,9 +15791,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              playerToBootUuid_ = bs;
+              playerToBootUuid_ = input.readBytes();
               break;
             }
           }
@@ -15756,6 +15835,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -15777,6 +15857,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string playerToBootUuid = 2;
     public static final int PLAYERTOBOOTUUID_FIELD_NUMBER = 2;
     private java.lang.Object playerToBootUuid_;
     /**
@@ -15826,8 +15907,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -15941,9 +16021,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.BootPlayerFromClanRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BootPlayerFromClanRequestProto)
-        com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_descriptor;
@@ -16076,6 +16155,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -16184,7 +16264,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -16192,6 +16272,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string playerToBootUuid = 2;
       private java.lang.Object playerToBootUuid_ = "";
       /**
        * <code>optional string playerToBootUuid = 2;</code>
@@ -16205,12 +16286,9 @@ public final class EventClanProto {
       public java.lang.String getPlayerToBootUuid() {
         java.lang.Object ref = playerToBootUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            playerToBootUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          playerToBootUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -16279,10 +16357,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BootPlayerFromClanRequestProto)
   }
 
-  public interface BootPlayerFromClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BootPlayerFromClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BootPlayerFromClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -16296,6 +16374,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.MinimumUserProto playerToBoot = 2;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto playerToBoot = 2;</code>
      */
@@ -16309,6 +16388,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getPlayerToBootOrBuilder();
 
+    // optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
      */
@@ -16322,9 +16402,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.BootPlayerFromClanResponseProto}
    */
   public static final class BootPlayerFromClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BootPlayerFromClanResponseProto)
-      BootPlayerFromClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BootPlayerFromClanResponseProtoOrBuilder {
     // Use BootPlayerFromClanResponseProto.newBuilder() to construct.
     private BootPlayerFromClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -16547,6 +16626,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -16568,6 +16648,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.MinimumUserProto playerToBoot = 2;
     public static final int PLAYERTOBOOT_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProto playerToBoot_;
     /**
@@ -16589,6 +16670,7 @@ public final class EventClanProto {
       return playerToBoot_;
     }
 
+    // optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status_;
     /**
@@ -16612,8 +16694,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -16734,9 +16815,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.BootPlayerFromClanResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BootPlayerFromClanResponseProto)
-        com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_descriptor;
@@ -16885,6 +16965,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -16993,7 +17074,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -17001,6 +17082,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto playerToBoot = 2;
       private com.lvl6.proto.UserProto.MinimumUserProto playerToBoot_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> playerToBootBuilder_;
@@ -17109,7 +17191,7 @@ public final class EventClanProto {
         if (playerToBootBuilder_ == null) {
           playerToBootBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getPlayerToBoot(),
+                  playerToBoot_,
                   getParentForChildren(),
                   isClean());
           playerToBoot_ = null;
@@ -17117,6 +17199,7 @@ public final class EventClanProto {
         return playerToBootBuilder_;
       }
 
+      // optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;
       private com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status_ = com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
@@ -17163,10 +17246,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BootPlayerFromClanResponseProto)
   }
 
-  public interface ChangeClanSettingsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ChangeClanSettingsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ChangeClanSettingsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -17180,6 +17263,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional bool isChangeDescription = 2;
     /**
      * <code>optional bool isChangeDescription = 2;</code>
      */
@@ -17189,6 +17273,7 @@ public final class EventClanProto {
      */
     boolean getIsChangeDescription();
 
+    // optional string descriptionNow = 3;
     /**
      * <code>optional string descriptionNow = 3;</code>
      */
@@ -17203,6 +17288,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getDescriptionNowBytes();
 
+    // optional bool isChangeJoinType = 4;
     /**
      * <code>optional bool isChangeJoinType = 4;</code>
      *
@@ -17220,6 +17306,7 @@ public final class EventClanProto {
      */
     boolean getIsChangeJoinType();
 
+    // optional bool requestToJoinRequired = 5;
     /**
      * <code>optional bool requestToJoinRequired = 5;</code>
      */
@@ -17229,6 +17316,7 @@ public final class EventClanProto {
      */
     boolean getRequestToJoinRequired();
 
+    // optional bool isChangeIcon = 6;
     /**
      * <code>optional bool isChangeIcon = 6;</code>
      */
@@ -17238,6 +17326,7 @@ public final class EventClanProto {
      */
     boolean getIsChangeIcon();
 
+    // optional int32 iconId = 7;
     /**
      * <code>optional int32 iconId = 7;</code>
      */
@@ -17256,9 +17345,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class ChangeClanSettingsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ChangeClanSettingsRequestProto)
-      ChangeClanSettingsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ChangeClanSettingsRequestProtoOrBuilder {
     // Use ChangeClanSettingsRequestProto.newBuilder() to construct.
     private ChangeClanSettingsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -17323,9 +17411,8 @@ public final class EventClanProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              descriptionNow_ = bs;
+              descriptionNow_ = input.readBytes();
               break;
             }
             case 32: {
@@ -17388,6 +17475,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -17409,6 +17497,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional bool isChangeDescription = 2;
     public static final int ISCHANGEDESCRIPTION_FIELD_NUMBER = 2;
     private boolean isChangeDescription_;
     /**
@@ -17424,6 +17513,7 @@ public final class EventClanProto {
       return isChangeDescription_;
     }
 
+    // optional string descriptionNow = 3;
     public static final int DESCRIPTIONNOW_FIELD_NUMBER = 3;
     private java.lang.Object descriptionNow_;
     /**
@@ -17466,6 +17556,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional bool isChangeJoinType = 4;
     public static final int ISCHANGEJOINTYPE_FIELD_NUMBER = 4;
     private boolean isChangeJoinType_;
     /**
@@ -17489,6 +17580,7 @@ public final class EventClanProto {
       return isChangeJoinType_;
     }
 
+    // optional bool requestToJoinRequired = 5;
     public static final int REQUESTTOJOINREQUIRED_FIELD_NUMBER = 5;
     private boolean requestToJoinRequired_;
     /**
@@ -17504,6 +17596,7 @@ public final class EventClanProto {
       return requestToJoinRequired_;
     }
 
+    // optional bool isChangeIcon = 6;
     public static final int ISCHANGEICON_FIELD_NUMBER = 6;
     private boolean isChangeIcon_;
     /**
@@ -17519,6 +17612,7 @@ public final class EventClanProto {
       return isChangeIcon_;
     }
 
+    // optional int32 iconId = 7;
     public static final int ICONID_FIELD_NUMBER = 7;
     private int iconId_;
     /**
@@ -17546,8 +17640,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -17701,9 +17794,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ChangeClanSettingsRequestProto)
-        com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_descriptor;
@@ -17881,6 +17973,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -17989,7 +18082,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -17997,6 +18090,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional bool isChangeDescription = 2;
       private boolean isChangeDescription_ ;
       /**
        * <code>optional bool isChangeDescription = 2;</code>
@@ -18029,6 +18123,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional string descriptionNow = 3;
       private java.lang.Object descriptionNow_ = "";
       /**
        * <code>optional string descriptionNow = 3;</code>
@@ -18042,12 +18137,9 @@ public final class EventClanProto {
       public java.lang.String getDescriptionNow() {
         java.lang.Object ref = descriptionNow_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            descriptionNow_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          descriptionNow_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -18105,6 +18197,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool isChangeJoinType = 4;
       private boolean isChangeJoinType_ ;
       /**
        * <code>optional bool isChangeJoinType = 4;</code>
@@ -18153,6 +18246,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool requestToJoinRequired = 5;
       private boolean requestToJoinRequired_ ;
       /**
        * <code>optional bool requestToJoinRequired = 5;</code>
@@ -18185,6 +18279,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool isChangeIcon = 6;
       private boolean isChangeIcon_ ;
       /**
        * <code>optional bool isChangeIcon = 6;</code>
@@ -18217,6 +18312,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 iconId = 7;
       private int iconId_ ;
       /**
        * <code>optional int32 iconId = 7;</code>
@@ -18260,10 +18356,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ChangeClanSettingsRequestProto)
   }
 
-  public interface ChangeClanSettingsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ChangeClanSettingsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ChangeClanSettingsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -18277,6 +18373,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
      */
@@ -18286,6 +18383,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus getStatus();
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto minClan = 3;</code>
      */
@@ -18299,6 +18397,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getMinClanOrBuilder();
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;
     /**
      * <code>optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;</code>
      */
@@ -18316,9 +18415,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.ChangeClanSettingsResponseProto}
    */
   public static final class ChangeClanSettingsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ChangeClanSettingsResponseProto)
-      ChangeClanSettingsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ChangeClanSettingsResponseProtoOrBuilder {
     // Use ChangeClanSettingsResponseProto.newBuilder() to construct.
     private ChangeClanSettingsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -18570,6 +18668,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -18591,6 +18690,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status_;
     /**
@@ -18606,6 +18706,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.MinimumClanProto minClan = 3;
     public static final int MINCLAN_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumClanProto minClan_;
     /**
@@ -18627,6 +18728,7 @@ public final class EventClanProto {
       return minClan_;
     }
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;
     public static final int FULLCLAN_FIELD_NUMBER = 4;
     private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_;
     /**
@@ -18657,8 +18759,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -18786,9 +18887,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.ChangeClanSettingsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ChangeClanSettingsResponseProto)
-        com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_descriptor;
@@ -18955,6 +19055,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -19063,7 +19164,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -19071,6 +19172,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;
       private com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status_ = com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
@@ -19106,6 +19208,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumClanProto minClan = 3;
       private com.lvl6.proto.UserProto.MinimumClanProto minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> minClanBuilder_;
@@ -19214,7 +19317,7 @@ public final class EventClanProto {
         if (minClanBuilder_ == null) {
           minClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  getMinClan(),
+                  minClan_,
                   getParentForChildren(),
                   isClean());
           minClan_ = null;
@@ -19222,6 +19325,7 @@ public final class EventClanProto {
         return minClanBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 4;
       private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder> fullClanBuilder_;
@@ -19330,7 +19434,7 @@ public final class EventClanProto {
         if (fullClanBuilder_ == null) {
           fullClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder>(
-                  getFullClan(),
+                  fullClan_,
                   getParentForChildren(),
                   isClean());
           fullClan_ = null;
@@ -19349,10 +19453,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ChangeClanSettingsResponseProto)
   }
 
-  public interface BeginClanRaidRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginClanRaidRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BeginClanRaidRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -19366,6 +19470,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional int64 curTime = 2;
     /**
      * <code>optional int64 curTime = 2;</code>
      */
@@ -19375,6 +19480,7 @@ public final class EventClanProto {
      */
     long getCurTime();
 
+    // optional int32 raidId = 3;
     /**
      * <code>optional int32 raidId = 3;</code>
      *
@@ -19392,6 +19498,7 @@ public final class EventClanProto {
      */
     int getRaidId();
 
+    // optional int32 clanEventId = 7;
     /**
      * <code>optional int32 clanEventId = 7;</code>
      */
@@ -19401,6 +19508,7 @@ public final class EventClanProto {
      */
     int getClanEventId();
 
+    // optional bool setMonsterTeamForRaid = 4;
     /**
      * <code>optional bool setMonsterTeamForRaid = 4;</code>
      *
@@ -19418,6 +19526,7 @@ public final class EventClanProto {
      */
     boolean getSetMonsterTeamForRaid();
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 5;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 5;</code>
      */
@@ -19442,6 +19551,7 @@ public final class EventClanProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonstersOrBuilder(
         int index);
 
+    // optional bool isFirstStage = 6;
     /**
      * <code>optional bool isFirstStage = 6;</code>
      */
@@ -19461,9 +19571,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class BeginClanRaidRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginClanRaidRequestProto)
-      BeginClanRaidRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BeginClanRaidRequestProtoOrBuilder {
     // Use BeginClanRaidRequestProto.newBuilder() to construct.
     private BeginClanRaidRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -19598,6 +19707,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -19619,6 +19729,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional int64 curTime = 2;
     public static final int CURTIME_FIELD_NUMBER = 2;
     private long curTime_;
     /**
@@ -19634,6 +19745,7 @@ public final class EventClanProto {
       return curTime_;
     }
 
+    // optional int32 raidId = 3;
     public static final int RAIDID_FIELD_NUMBER = 3;
     private int raidId_;
     /**
@@ -19657,6 +19769,7 @@ public final class EventClanProto {
       return raidId_;
     }
 
+    // optional int32 clanEventId = 7;
     public static final int CLANEVENTID_FIELD_NUMBER = 7;
     private int clanEventId_;
     /**
@@ -19672,6 +19785,7 @@ public final class EventClanProto {
       return clanEventId_;
     }
 
+    // optional bool setMonsterTeamForRaid = 4;
     public static final int SETMONSTERTEAMFORRAID_FIELD_NUMBER = 4;
     private boolean setMonsterTeamForRaid_;
     /**
@@ -19695,6 +19809,7 @@ public final class EventClanProto {
       return setMonsterTeamForRaid_;
     }
 
+    // repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 5;
     public static final int USERMONSTERS_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> userMonsters_;
     /**
@@ -19730,6 +19845,7 @@ public final class EventClanProto {
       return userMonsters_.get(index);
     }
 
+    // optional bool isFirstStage = 6;
     public static final int ISFIRSTSTAGE_FIELD_NUMBER = 6;
     private boolean isFirstStage_;
     /**
@@ -19757,8 +19873,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -19913,9 +20028,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginClanRaidRequestProto)
-        com.lvl6.proto.EventClanProto.BeginClanRaidRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.BeginClanRaidRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor;
@@ -20124,6 +20238,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -20232,7 +20347,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -20240,6 +20355,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional int64 curTime = 2;
       private long curTime_ ;
       /**
        * <code>optional int64 curTime = 2;</code>
@@ -20272,6 +20388,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 raidId = 3;
       private int raidId_ ;
       /**
        * <code>optional int32 raidId = 3;</code>
@@ -20320,6 +20437,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 clanEventId = 7;
       private int clanEventId_ ;
       /**
        * <code>optional int32 clanEventId = 7;</code>
@@ -20352,6 +20470,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional bool setMonsterTeamForRaid = 4;
       private boolean setMonsterTeamForRaid_ ;
       /**
        * <code>optional bool setMonsterTeamForRaid = 4;</code>
@@ -20400,6 +20519,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 5;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> userMonsters_ =
         java.util.Collections.emptyList();
       private void ensureUserMonstersIsMutable() {
@@ -20541,8 +20661,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (userMonstersBuilder_ == null) {
           ensureUserMonstersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userMonsters_);
+          super.addAll(values, userMonsters_);
           onChanged();
         } else {
           userMonstersBuilder_.addAllMessages(values);
@@ -20640,6 +20759,7 @@ public final class EventClanProto {
         return userMonstersBuilder_;
       }
 
+      // optional bool isFirstStage = 6;
       private boolean isFirstStage_ ;
       /**
        * <code>optional bool isFirstStage = 6;</code>
@@ -20683,10 +20803,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanRaidRequestProto)
   }
 
-  public interface BeginClanRaidResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginClanRaidResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BeginClanRaidResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -20700,6 +20820,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;</code>
      *
@@ -20728,6 +20849,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
 
+    // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
      */
@@ -20737,6 +20859,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus();
 
+    // optional .com.lvl6.proto.PersistentClanEventUserInfoProto userDetails = 4;
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventUserInfoProto userDetails = 4;</code>
      */
@@ -20758,9 +20881,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class BeginClanRaidResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginClanRaidResponseProto)
-      BeginClanRaidResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BeginClanRaidResponseProtoOrBuilder {
     // Use BeginClanRaidResponseProto.newBuilder() to construct.
     private BeginClanRaidResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -21030,6 +21152,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -21051,6 +21174,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
     public static final int EVENTDETAILS_FIELD_NUMBER = 2;
     private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
     /**
@@ -21087,6 +21211,7 @@ public final class EventClanProto {
       return eventDetails_;
     }
 
+    // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_;
     /**
@@ -21102,6 +21227,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.PersistentClanEventUserInfoProto userDetails = 4;
     public static final int USERDETAILS_FIELD_NUMBER = 4;
     private com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto userDetails_;
     /**
@@ -21132,8 +21258,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -21265,9 +21390,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginClanRaidResponseProto)
-        com.lvl6.proto.EventClanProto.BeginClanRaidResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.BeginClanRaidResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor;
@@ -21434,6 +21558,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -21542,7 +21667,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -21550,6 +21675,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
       private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
@@ -21703,7 +21829,7 @@ public final class EventClanProto {
         if (eventDetailsBuilder_ == null) {
           eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
-                  getEventDetails(),
+                  eventDetails_,
                   getParentForChildren(),
                   isClean());
           eventDetails_ = null;
@@ -21711,6 +21837,7 @@ public final class EventClanProto {
         return eventDetailsBuilder_;
       }
 
+      // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
       private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
@@ -21746,6 +21873,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.PersistentClanEventUserInfoProto userDetails = 4;
       private com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto userDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder> userDetailsBuilder_;
@@ -21854,7 +21982,7 @@ public final class EventClanProto {
         if (userDetailsBuilder_ == null) {
           userDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder>(
-                  getUserDetails(),
+                  userDetails_,
                   getParentForChildren(),
                   isClean());
           userDetails_ = null;
@@ -21873,10 +22001,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanRaidResponseProto)
   }
 
-  public interface AttackClanRaidMonsterRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AttackClanRaidMonsterRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AttackClanRaidMonsterRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -21890,6 +22018,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;</code>
      *
@@ -21918,6 +22047,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -21927,6 +22057,7 @@ public final class EventClanProto {
      */
     long getClientTime();
 
+    // optional int32 damageDealt = 4;
     /**
      * <code>optional int32 damageDealt = 4;</code>
      *
@@ -21944,6 +22075,7 @@ public final class EventClanProto {
      */
     int getDamageDealt();
 
+    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 5;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 5;</code>
      *
@@ -21988,6 +22120,7 @@ public final class EventClanProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getMonsterHealthsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 9;
     /**
      * <code>optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 9;</code>
      */
@@ -22001,6 +22134,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonsterThatAttackedOrBuilder();
 
+    // optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsterTeam = 10;
     /**
      * <code>optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsterTeam = 10;</code>
      *
@@ -22040,9 +22174,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class AttackClanRaidMonsterRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AttackClanRaidMonsterRequestProto)
-      AttackClanRaidMonsterRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AttackClanRaidMonsterRequestProtoOrBuilder {
     // Use AttackClanRaidMonsterRequestProto.newBuilder() to construct.
     private AttackClanRaidMonsterRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -22201,6 +22334,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -22222,6 +22356,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
     public static final int EVENTDETAILS_FIELD_NUMBER = 2;
     private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
     /**
@@ -22258,6 +22393,7 @@ public final class EventClanProto {
       return eventDetails_;
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -22273,6 +22409,7 @@ public final class EventClanProto {
       return clientTime_;
     }
 
+    // optional int32 damageDealt = 4;
     public static final int DAMAGEDEALT_FIELD_NUMBER = 4;
     private int damageDealt_;
     /**
@@ -22296,6 +22433,7 @@ public final class EventClanProto {
       return damageDealt_;
     }
 
+    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 5;
     public static final int MONSTERHEALTHS_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> monsterHealths_;
     /**
@@ -22351,6 +22489,7 @@ public final class EventClanProto {
       return monsterHealths_.get(index);
     }
 
+    // optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 9;
     public static final int USERMONSTERTHATATTACKED_FIELD_NUMBER = 9;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto userMonsterThatAttacked_;
     /**
@@ -22372,6 +22511,7 @@ public final class EventClanProto {
       return userMonsterThatAttacked_;
     }
 
+    // optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsterTeam = 10;
     public static final int USERMONSTERTEAM_FIELD_NUMBER = 10;
     private com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto userMonsterTeam_;
     /**
@@ -22420,8 +22560,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -22577,9 +22716,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AttackClanRaidMonsterRequestProto)
-        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor;
@@ -22815,6 +22953,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -22923,7 +23062,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -22931,6 +23070,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
       private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
@@ -23084,7 +23224,7 @@ public final class EventClanProto {
         if (eventDetailsBuilder_ == null) {
           eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
-                  getEventDetails(),
+                  eventDetails_,
                   getParentForChildren(),
                   isClean());
           eventDetails_ = null;
@@ -23092,6 +23232,7 @@ public final class EventClanProto {
         return eventDetailsBuilder_;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -23124,6 +23265,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 damageDealt = 4;
       private int damageDealt_ ;
       /**
        * <code>optional int32 damageDealt = 4;</code>
@@ -23172,6 +23314,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 5;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> monsterHealths_ =
         java.util.Collections.emptyList();
       private void ensureMonsterHealthsIsMutable() {
@@ -23353,8 +23496,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
         if (monsterHealthsBuilder_ == null) {
           ensureMonsterHealthsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, monsterHealths_);
+          super.addAll(values, monsterHealths_);
           onChanged();
         } else {
           monsterHealthsBuilder_.addAllMessages(values);
@@ -23484,6 +23626,7 @@ public final class EventClanProto {
         return monsterHealthsBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 9;
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto userMonsterThatAttacked_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> userMonsterThatAttackedBuilder_;
@@ -23592,7 +23735,7 @@ public final class EventClanProto {
         if (userMonsterThatAttackedBuilder_ == null) {
           userMonsterThatAttackedBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  getUserMonsterThatAttacked(),
+                  userMonsterThatAttacked_,
                   getParentForChildren(),
                   isClean());
           userMonsterThatAttacked_ = null;
@@ -23600,6 +23743,7 @@ public final class EventClanProto {
         return userMonsterThatAttackedBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsterTeam = 10;
       private com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto userMonsterTeam_ = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> userMonsterTeamBuilder_;
@@ -23753,7 +23897,7 @@ public final class EventClanProto {
         if (userMonsterTeamBuilder_ == null) {
           userMonsterTeamBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder>(
-                  getUserMonsterTeam(),
+                  userMonsterTeam_,
                   getParentForChildren(),
                   isClean());
           userMonsterTeam_ = null;
@@ -23772,10 +23916,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AttackClanRaidMonsterRequestProto)
   }
 
-  public interface AttackClanRaidMonsterResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AttackClanRaidMonsterResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -23789,6 +23933,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional int32 dmgDealt = 2;
     /**
      * <code>optional int32 dmgDealt = 2;</code>
      */
@@ -23798,6 +23943,7 @@ public final class EventClanProto {
      */
     int getDmgDealt();
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 3;
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 3;</code>
      *
@@ -23826,6 +23972,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 4;
     /**
      * <code>repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 4;</code>
      *
@@ -23875,6 +24022,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder getClanUsersDetailsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 5;
     /**
      * <code>optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 5;</code>
      */
@@ -23888,6 +24036,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonsterThatAttackedOrBuilder();
 
+    // optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;
     /**
      * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
      */
@@ -23905,9 +24054,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class AttackClanRaidMonsterResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
-      AttackClanRaidMonsterResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AttackClanRaidMonsterResponseProtoOrBuilder {
     // Use AttackClanRaidMonsterResponseProto.newBuilder() to construct.
     private AttackClanRaidMonsterResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -24177,6 +24325,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -24198,6 +24347,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional int32 dmgDealt = 2;
     public static final int DMGDEALT_FIELD_NUMBER = 2;
     private int dmgDealt_;
     /**
@@ -24213,6 +24363,7 @@ public final class EventClanProto {
       return dmgDealt_;
     }
 
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 3;
     public static final int EVENTDETAILS_FIELD_NUMBER = 3;
     private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
     /**
@@ -24249,6 +24400,7 @@ public final class EventClanProto {
       return eventDetails_;
     }
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 4;
     public static final int CLANUSERSDETAILS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> clanUsersDetails_;
     /**
@@ -24309,6 +24461,7 @@ public final class EventClanProto {
       return clanUsersDetails_.get(index);
     }
 
+    // optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 5;
     public static final int USERMONSTERTHATATTACKED_FIELD_NUMBER = 5;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto userMonsterThatAttacked_;
     /**
@@ -24330,6 +24483,7 @@ public final class EventClanProto {
       return userMonsterThatAttacked_;
     }
 
+    // optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;
     public static final int STATUS_FIELD_NUMBER = 6;
     private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status_;
     /**
@@ -24356,8 +24510,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -24503,9 +24656,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
-        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor;
@@ -24723,6 +24875,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -24831,7 +24984,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -24839,6 +24992,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional int32 dmgDealt = 2;
       private int dmgDealt_ ;
       /**
        * <code>optional int32 dmgDealt = 2;</code>
@@ -24871,6 +25025,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 3;
       private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
@@ -25024,7 +25179,7 @@ public final class EventClanProto {
         if (eventDetailsBuilder_ == null) {
           eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
-                  getEventDetails(),
+                  eventDetails_,
                   getParentForChildren(),
                   isClean());
           eventDetails_ = null;
@@ -25032,6 +25187,7 @@ public final class EventClanProto {
         return eventDetailsBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PersistentClanEventUserInfoProto clanUsersDetails = 4;
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> clanUsersDetails_ =
         java.util.Collections.emptyList();
       private void ensureClanUsersDetailsIsMutable() {
@@ -25223,8 +25379,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto> values) {
         if (clanUsersDetailsBuilder_ == null) {
           ensureClanUsersDetailsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanUsersDetails_);
+          super.addAll(values, clanUsersDetails_);
           onChanged();
         } else {
           clanUsersDetailsBuilder_.addAllMessages(values);
@@ -25362,6 +25517,7 @@ public final class EventClanProto {
         return clanUsersDetailsBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullUserMonsterProto userMonsterThatAttacked = 5;
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto userMonsterThatAttacked_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> userMonsterThatAttackedBuilder_;
@@ -25470,7 +25626,7 @@ public final class EventClanProto {
         if (userMonsterThatAttackedBuilder_ == null) {
           userMonsterThatAttackedBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  getUserMonsterThatAttacked(),
+                  userMonsterThatAttacked_,
                   getParentForChildren(),
                   isClean());
           userMonsterThatAttacked_ = null;
@@ -25478,6 +25634,7 @@ public final class EventClanProto {
         return userMonsterThatAttackedBuilder_;
       }
 
+      // optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;
       private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
@@ -25524,10 +25681,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
   }
 
-  public interface AwardClanRaidStageRewardResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AwardClanRaidStageRewardResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AwardClanRaidStageRewardResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 crsId = 1;
     /**
      * <code>optional int32 crsId = 1;</code>
      *
@@ -25545,6 +25702,7 @@ public final class EventClanProto {
      */
     int getCrsId();
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;
     /**
      * <code>repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;</code>
      */
@@ -25573,9 +25731,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.AwardClanRaidStageRewardResponseProto}
    */
   public static final class AwardClanRaidStageRewardResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AwardClanRaidStageRewardResponseProto)
-      AwardClanRaidStageRewardResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AwardClanRaidStageRewardResponseProtoOrBuilder {
     // Use AwardClanRaidStageRewardResponseProto.newBuilder() to construct.
     private AwardClanRaidStageRewardResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -25677,6 +25834,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional int32 crsId = 1;
     public static final int CRSID_FIELD_NUMBER = 1;
     private int crsId_;
     /**
@@ -25700,6 +25858,7 @@ public final class EventClanProto {
       return crsId_;
     }
 
+    // repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;
     public static final int ALLREWARDS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> allRewards_;
     /**
@@ -25742,8 +25901,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -25857,9 +26015,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.AwardClanRaidStageRewardResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AwardClanRaidStageRewardResponseProto)
-        com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor;
@@ -26014,6 +26171,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional int32 crsId = 1;
       private int crsId_ ;
       /**
        * <code>optional int32 crsId = 1;</code>
@@ -26062,6 +26220,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> allRewards_ =
         java.util.Collections.emptyList();
       private void ensureAllRewardsIsMutable() {
@@ -26203,8 +26362,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> values) {
         if (allRewardsBuilder_ == null) {
           ensureAllRewardsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, allRewards_);
+          super.addAll(values, allRewards_);
           onChanged();
         } else {
           allRewardsBuilder_.addAllMessages(values);
@@ -26313,10 +26471,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AwardClanRaidStageRewardResponseProto)
   }
 
-  public interface RecordClanRaidStatsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RecordClanRaidStatsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RecordClanRaidStatsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -26330,6 +26488,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string clanUuid = 2;
     /**
      * <code>optional string clanUuid = 2;</code>
      */
@@ -26344,6 +26503,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -26364,9 +26524,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class RecordClanRaidStatsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RecordClanRaidStatsRequestProto)
-      RecordClanRaidStatsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RecordClanRaidStatsRequestProtoOrBuilder {
     // Use RecordClanRaidStatsRequestProto.newBuilder() to construct.
     private RecordClanRaidStatsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -26426,9 +26585,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              clanUuid_ = bs;
+              clanUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -26476,6 +26634,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -26497,6 +26656,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string clanUuid = 2;
     public static final int CLANUUID_FIELD_NUMBER = 2;
     private java.lang.Object clanUuid_;
     /**
@@ -26539,6 +26699,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -26562,8 +26723,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -26691,9 +26851,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RecordClanRaidStatsRequestProto)
-        com.lvl6.proto.EventClanProto.RecordClanRaidStatsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RecordClanRaidStatsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor;
@@ -26835,6 +26994,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -26943,7 +27103,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -26951,6 +27111,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string clanUuid = 2;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 2;</code>
@@ -26964,12 +27125,9 @@ public final class EventClanProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clanUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          clanUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -27027,6 +27185,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -27070,10 +27229,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RecordClanRaidStatsRequestProto)
   }
 
-  public interface RecordClanRaidStatsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RecordClanRaidStatsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RecordClanRaidStatsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -27087,6 +27246,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
      */
@@ -27100,9 +27260,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.RecordClanRaidStatsResponseProto}
    */
   public static final class RecordClanRaidStatsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RecordClanRaidStatsResponseProto)
-      RecordClanRaidStatsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RecordClanRaidStatsResponseProtoOrBuilder {
     // Use RecordClanRaidStatsResponseProto.newBuilder() to construct.
     private RecordClanRaidStatsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -27311,6 +27470,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -27332,6 +27492,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status_;
     /**
@@ -27354,8 +27515,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -27469,9 +27629,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.RecordClanRaidStatsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RecordClanRaidStatsResponseProto)
-        com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor;
@@ -27602,6 +27761,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -27710,7 +27870,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -27718,6 +27878,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;
       private com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status_ = com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
@@ -27764,10 +27925,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RecordClanRaidStatsResponseProto)
   }
 
-  public interface PromoteDemoteClanMemberRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PromoteDemoteClanMemberRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PromoteDemoteClanMemberRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -27781,6 +27942,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string victimUuid = 2;
     /**
      * <code>optional string victimUuid = 2;</code>
      */
@@ -27795,6 +27957,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getVictimUuidBytes();
 
+    // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
     /**
      * <code>optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];</code>
      */
@@ -27808,9 +27971,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.PromoteDemoteClanMemberRequestProto}
    */
   public static final class PromoteDemoteClanMemberRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PromoteDemoteClanMemberRequestProto)
-      PromoteDemoteClanMemberRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PromoteDemoteClanMemberRequestProtoOrBuilder {
     // Use PromoteDemoteClanMemberRequestProto.newBuilder() to construct.
     private PromoteDemoteClanMemberRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -27870,9 +28032,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              victimUuid_ = bs;
+              victimUuid_ = input.readBytes();
               break;
             }
             case 24: {
@@ -27926,6 +28087,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -27947,6 +28109,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string victimUuid = 2;
     public static final int VICTIMUUID_FIELD_NUMBER = 2;
     private java.lang.Object victimUuid_;
     /**
@@ -27989,6 +28152,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
     public static final int USERCLANSTATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.ClanProto.UserClanStatus userClanStatus_;
     /**
@@ -28012,8 +28176,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -28134,9 +28297,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.PromoteDemoteClanMemberRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PromoteDemoteClanMemberRequestProto)
-        com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_descriptor;
@@ -28278,6 +28440,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -28386,7 +28549,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -28394,6 +28557,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string victimUuid = 2;
       private java.lang.Object victimUuid_ = "";
       /**
        * <code>optional string victimUuid = 2;</code>
@@ -28407,12 +28571,9 @@ public final class EventClanProto {
       public java.lang.String getVictimUuid() {
         java.lang.Object ref = victimUuid_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            victimUuid_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          victimUuid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -28470,6 +28631,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
       private com.lvl6.proto.ClanProto.UserClanStatus userClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
       /**
        * <code>optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];</code>
@@ -28516,10 +28678,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PromoteDemoteClanMemberRequestProto)
   }
 
-  public interface PromoteDemoteClanMemberResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PromoteDemoteClanMemberResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PromoteDemoteClanMemberResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -28533,6 +28695,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.MinimumUserProto victim = 2;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto victim = 2;</code>
      */
@@ -28546,6 +28709,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getVictimOrBuilder();
 
+    // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
     /**
      * <code>optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];</code>
      */
@@ -28555,6 +28719,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.UserClanStatus getUserClanStatus();
 
+    // optional .com.lvl6.proto.UserClanStatus prevUserClanStatus = 5 [default = MEMBER];
     /**
      * <code>optional .com.lvl6.proto.UserClanStatus prevUserClanStatus = 5 [default = MEMBER];</code>
      */
@@ -28564,6 +28729,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.UserClanStatus getPrevUserClanStatus();
 
+    // optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;
     /**
      * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
      */
@@ -28577,9 +28743,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.PromoteDemoteClanMemberResponseProto}
    */
   public static final class PromoteDemoteClanMemberResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PromoteDemoteClanMemberResponseProto)
-      PromoteDemoteClanMemberResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements PromoteDemoteClanMemberResponseProtoOrBuilder {
     // Use PromoteDemoteClanMemberResponseProto.newBuilder() to construct.
     private PromoteDemoteClanMemberResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -28824,6 +28989,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -28845,6 +29011,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.MinimumUserProto victim = 2;
     public static final int VICTIM_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProto victim_;
     /**
@@ -28866,6 +29033,7 @@ public final class EventClanProto {
       return victim_;
     }
 
+    // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
     public static final int USERCLANSTATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.ClanProto.UserClanStatus userClanStatus_;
     /**
@@ -28881,6 +29049,7 @@ public final class EventClanProto {
       return userClanStatus_;
     }
 
+    // optional .com.lvl6.proto.UserClanStatus prevUserClanStatus = 5 [default = MEMBER];
     public static final int PREVUSERCLANSTATUS_FIELD_NUMBER = 5;
     private com.lvl6.proto.ClanProto.UserClanStatus prevUserClanStatus_;
     /**
@@ -28896,6 +29065,7 @@ public final class EventClanProto {
       return prevUserClanStatus_;
     }
 
+    // optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;
     public static final int STATUS_FIELD_NUMBER = 4;
     private com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status_;
     /**
@@ -28921,8 +29091,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -29057,9 +29226,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.PromoteDemoteClanMemberResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PromoteDemoteClanMemberResponseProto)
-        com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor;
@@ -29226,6 +29394,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -29334,7 +29503,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -29342,6 +29511,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProto victim = 2;
       private com.lvl6.proto.UserProto.MinimumUserProto victim_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> victimBuilder_;
@@ -29450,7 +29620,7 @@ public final class EventClanProto {
         if (victimBuilder_ == null) {
           victimBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getVictim(),
+                  victim_,
                   getParentForChildren(),
                   isClean());
           victim_ = null;
@@ -29458,6 +29628,7 @@ public final class EventClanProto {
         return victimBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
       private com.lvl6.proto.ClanProto.UserClanStatus userClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
       /**
        * <code>optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];</code>
@@ -29493,6 +29664,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.UserClanStatus prevUserClanStatus = 5 [default = MEMBER];
       private com.lvl6.proto.ClanProto.UserClanStatus prevUserClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
       /**
        * <code>optional .com.lvl6.proto.UserClanStatus prevUserClanStatus = 5 [default = MEMBER];</code>
@@ -29528,6 +29700,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;
       private com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status_ = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
@@ -29574,10 +29747,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PromoteDemoteClanMemberResponseProto)
   }
 
-  public interface SolicitClanHelpRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SolicitClanHelpRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SolicitClanHelpRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -29591,6 +29764,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;
     /**
      * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
      */
@@ -29615,6 +29789,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder(
         int index);
 
+    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -29624,6 +29799,7 @@ public final class EventClanProto {
      */
     long getClientTime();
 
+    // optional int32 maxHelpers = 5;
     /**
      * <code>optional int32 maxHelpers = 5;</code>
      */
@@ -29637,9 +29813,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.SolicitClanHelpRequestProto}
    */
   public static final class SolicitClanHelpRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SolicitClanHelpRequestProto)
-      SolicitClanHelpRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements SolicitClanHelpRequestProtoOrBuilder {
     // Use SolicitClanHelpRequestProto.newBuilder() to construct.
     private SolicitClanHelpRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -29759,6 +29934,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -29780,6 +29956,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;
     public static final int NOTICE_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> notice_;
     /**
@@ -29815,6 +29992,7 @@ public final class EventClanProto {
       return notice_.get(index);
     }
 
+    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -29830,6 +30008,7 @@ public final class EventClanProto {
       return clientTime_;
     }
 
+    // optional int32 maxHelpers = 5;
     public static final int MAXHELPERS_FIELD_NUMBER = 5;
     private int maxHelpers_;
     /**
@@ -29854,8 +30033,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -29983,9 +30161,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.SolicitClanHelpRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SolicitClanHelpRequestProto)
-        com.lvl6.proto.EventClanProto.SolicitClanHelpRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.SolicitClanHelpRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_descriptor;
@@ -30167,6 +30344,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -30275,7 +30453,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -30283,6 +30461,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;
       private java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> notice_ =
         java.util.Collections.emptyList();
       private void ensureNoticeIsMutable() {
@@ -30424,8 +30603,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpNoticeProto> values) {
         if (noticeBuilder_ == null) {
           ensureNoticeIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, notice_);
+          super.addAll(values, notice_);
           onChanged();
         } else {
           noticeBuilder_.addAllMessages(values);
@@ -30523,6 +30701,7 @@ public final class EventClanProto {
         return noticeBuilder_;
       }
 
+      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -30555,6 +30734,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 maxHelpers = 5;
       private int maxHelpers_ ;
       /**
        * <code>optional int32 maxHelpers = 5;</code>
@@ -30598,10 +30778,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SolicitClanHelpRequestProto)
   }
 
-  public interface SolicitClanHelpResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SolicitClanHelpResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SolicitClanHelpResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -30615,6 +30795,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;
     /**
      * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
      */
@@ -30639,6 +30820,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
      */
@@ -30652,9 +30834,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.SolicitClanHelpResponseProto}
    */
   public static final class SolicitClanHelpResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SolicitClanHelpResponseProto)
-      SolicitClanHelpResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements SolicitClanHelpResponseProtoOrBuilder {
     // Use SolicitClanHelpResponseProto.newBuilder() to construct.
     private SolicitClanHelpResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -30866,6 +31047,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -30887,6 +31069,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;
     public static final int HELPPROTO_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> helpProto_;
     /**
@@ -30922,6 +31105,7 @@ public final class EventClanProto {
       return helpProto_.get(index);
     }
 
+    // optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status_;
     /**
@@ -30945,8 +31129,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -31067,9 +31250,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.SolicitClanHelpResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SolicitClanHelpResponseProto)
-        com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_descriptor;
@@ -31242,6 +31424,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -31350,7 +31533,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -31358,6 +31541,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;
       private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> helpProto_ =
         java.util.Collections.emptyList();
       private void ensureHelpProtoIsMutable() {
@@ -31499,8 +31683,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpProto> values) {
         if (helpProtoBuilder_ == null) {
           ensureHelpProtoIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, helpProto_);
+          super.addAll(values, helpProto_);
           onChanged();
         } else {
           helpProtoBuilder_.addAllMessages(values);
@@ -31598,6 +31781,7 @@ public final class EventClanProto {
         return helpProtoBuilder_;
       }
 
+      // optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;
       private com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
@@ -31644,10 +31828,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SolicitClanHelpResponseProto)
   }
 
-  public interface GiveClanHelpRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GiveClanHelpRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface GiveClanHelpRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -31661,11 +31845,12 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated string clanHelpUuids = 2;
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getClanHelpUuidsList();
+    java.util.List<java.lang.String>
+    getClanHelpUuidsList();
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
@@ -31684,9 +31869,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.GiveClanHelpRequestProto}
    */
   public static final class GiveClanHelpRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GiveClanHelpRequestProto)
-      GiveClanHelpRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements GiveClanHelpRequestProtoOrBuilder {
     // Use GiveClanHelpRequestProto.newBuilder() to construct.
     private GiveClanHelpRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -31746,12 +31930,11 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 clanHelpUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              clanHelpUuids_.add(bs);
+              clanHelpUuids_.add(input.readBytes());
               break;
             }
           }
@@ -31763,7 +31946,7 @@ public final class EventClanProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          clanHelpUuids_ = clanHelpUuids_.getUnmodifiableView();
+          clanHelpUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(clanHelpUuids_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -31797,6 +31980,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -31818,12 +32002,13 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated string clanHelpUuids = 2;
     public static final int CLANHELPUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList clanHelpUuids_;
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getClanHelpUuidsList() {
       return clanHelpUuids_;
     }
@@ -31854,8 +32039,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -31974,9 +32158,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.GiveClanHelpRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GiveClanHelpRequestProto)
-        com.lvl6.proto.EventClanProto.GiveClanHelpRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.GiveClanHelpRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_GiveClanHelpRequestProto_descriptor;
@@ -32055,7 +32238,8 @@ public final class EventClanProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          clanHelpUuids_ = clanHelpUuids_.getUnmodifiableView();
+          clanHelpUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              clanHelpUuids_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.clanHelpUuids_ = clanHelpUuids_;
@@ -32115,6 +32299,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -32223,7 +32408,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -32231,6 +32416,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated string clanHelpUuids = 2;
       private com.google.protobuf.LazyStringList clanHelpUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureClanHelpUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -32241,9 +32427,9 @@ public final class EventClanProto {
       /**
        * <code>repeated string clanHelpUuids = 2;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getClanHelpUuidsList() {
-        return clanHelpUuids_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(clanHelpUuids_);
       }
       /**
        * <code>repeated string clanHelpUuids = 2;</code>
@@ -32296,8 +32482,7 @@ public final class EventClanProto {
       public Builder addAllClanHelpUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureClanHelpUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, clanHelpUuids_);
+        super.addAll(values, clanHelpUuids_);
         onChanged();
         return this;
       }
@@ -32335,10 +32520,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GiveClanHelpRequestProto)
   }
 
-  public interface GiveClanHelpResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GiveClanHelpResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface GiveClanHelpResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -32352,6 +32537,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.ClanHelpProto clanHelps = 2;
     /**
      * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelps = 2;</code>
      */
@@ -32376,6 +32562,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
      */
@@ -32389,9 +32576,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.GiveClanHelpResponseProto}
    */
   public static final class GiveClanHelpResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GiveClanHelpResponseProto)
-      GiveClanHelpResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements GiveClanHelpResponseProtoOrBuilder {
     // Use GiveClanHelpResponseProto.newBuilder() to construct.
     private GiveClanHelpResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -32594,6 +32780,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -32615,6 +32802,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.ClanHelpProto clanHelps = 2;
     public static final int CLANHELPS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelps_;
     /**
@@ -32650,6 +32838,7 @@ public final class EventClanProto {
       return clanHelps_.get(index);
     }
 
+    // optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus status_;
     /**
@@ -32673,8 +32862,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -32795,9 +32983,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.GiveClanHelpResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GiveClanHelpResponseProto)
-        com.lvl6.proto.EventClanProto.GiveClanHelpResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.GiveClanHelpResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_GiveClanHelpResponseProto_descriptor;
@@ -32970,6 +33157,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -33078,7 +33266,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -33086,6 +33274,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanHelpProto clanHelps = 2;
       private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelps_ =
         java.util.Collections.emptyList();
       private void ensureClanHelpsIsMutable() {
@@ -33227,8 +33416,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpProto> values) {
         if (clanHelpsBuilder_ == null) {
           ensureClanHelpsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanHelps_);
+          super.addAll(values, clanHelps_);
           onChanged();
         } else {
           clanHelpsBuilder_.addAllMessages(values);
@@ -33326,6 +33514,7 @@ public final class EventClanProto {
         return clanHelpsBuilder_;
       }
 
+      // optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;
       private com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus status_ = com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
@@ -33372,10 +33561,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GiveClanHelpResponseProto)
   }
 
-  public interface EndClanHelpRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndClanHelpRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EndClanHelpRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -33389,11 +33578,12 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated string clanHelpUuids = 2;
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getClanHelpUuidsList();
+    java.util.List<java.lang.String>
+    getClanHelpUuidsList();
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
@@ -33412,9 +33602,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.EndClanHelpRequestProto}
    */
   public static final class EndClanHelpRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndClanHelpRequestProto)
-      EndClanHelpRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EndClanHelpRequestProtoOrBuilder {
     // Use EndClanHelpRequestProto.newBuilder() to construct.
     private EndClanHelpRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -33474,12 +33663,11 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 clanHelpUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              clanHelpUuids_.add(bs);
+              clanHelpUuids_.add(input.readBytes());
               break;
             }
           }
@@ -33491,7 +33679,7 @@ public final class EventClanProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          clanHelpUuids_ = clanHelpUuids_.getUnmodifiableView();
+          clanHelpUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(clanHelpUuids_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -33525,6 +33713,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -33546,12 +33735,13 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated string clanHelpUuids = 2;
     public static final int CLANHELPUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList clanHelpUuids_;
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getClanHelpUuidsList() {
       return clanHelpUuids_;
     }
@@ -33582,8 +33772,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -33702,9 +33891,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.EndClanHelpRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndClanHelpRequestProto)
-        com.lvl6.proto.EventClanProto.EndClanHelpRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.EndClanHelpRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanHelpRequestProto_descriptor;
@@ -33783,7 +33971,8 @@ public final class EventClanProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          clanHelpUuids_ = clanHelpUuids_.getUnmodifiableView();
+          clanHelpUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              clanHelpUuids_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.clanHelpUuids_ = clanHelpUuids_;
@@ -33843,6 +34032,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -33951,7 +34141,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -33959,6 +34149,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated string clanHelpUuids = 2;
       private com.google.protobuf.LazyStringList clanHelpUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureClanHelpUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -33969,9 +34160,9 @@ public final class EventClanProto {
       /**
        * <code>repeated string clanHelpUuids = 2;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getClanHelpUuidsList() {
-        return clanHelpUuids_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(clanHelpUuids_);
       }
       /**
        * <code>repeated string clanHelpUuids = 2;</code>
@@ -34024,8 +34215,7 @@ public final class EventClanProto {
       public Builder addAllClanHelpUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureClanHelpUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, clanHelpUuids_);
+        super.addAll(values, clanHelpUuids_);
         onChanged();
         return this;
       }
@@ -34063,10 +34253,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndClanHelpRequestProto)
   }
 
-  public interface EndClanHelpResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndClanHelpResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EndClanHelpResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -34080,11 +34270,12 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated string clanHelpUuids = 2;
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getClanHelpUuidsList();
+    java.util.List<java.lang.String>
+    getClanHelpUuidsList();
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
@@ -34099,6 +34290,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanHelpUuidsBytes(int index);
 
+    // optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
      *
@@ -34120,9 +34312,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.EndClanHelpResponseProto}
    */
   public static final class EndClanHelpResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndClanHelpResponseProto)
-      EndClanHelpResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EndClanHelpResponseProtoOrBuilder {
     // Use EndClanHelpResponseProto.newBuilder() to construct.
     private EndClanHelpResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -34182,12 +34373,11 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 clanHelpUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              clanHelpUuids_.add(bs);
+              clanHelpUuids_.add(input.readBytes());
               break;
             }
             case 24: {
@@ -34210,7 +34400,7 @@ public final class EventClanProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          clanHelpUuids_ = clanHelpUuids_.getUnmodifiableView();
+          clanHelpUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(clanHelpUuids_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -34326,6 +34516,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -34347,12 +34538,13 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated string clanHelpUuids = 2;
     public static final int CLANHELPUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList clanHelpUuids_;
     /**
      * <code>repeated string clanHelpUuids = 2;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getClanHelpUuidsList() {
       return clanHelpUuids_;
     }
@@ -34376,6 +34568,7 @@ public final class EventClanProto {
       return clanHelpUuids_.getByteString(index);
     }
 
+    // optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus status_;
     /**
@@ -34407,8 +34600,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -34534,9 +34726,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.EndClanHelpResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndClanHelpResponseProto)
-        com.lvl6.proto.EventClanProto.EndClanHelpResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.EndClanHelpResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor;
@@ -34617,7 +34808,8 @@ public final class EventClanProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          clanHelpUuids_ = clanHelpUuids_.getUnmodifiableView();
+          clanHelpUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              clanHelpUuids_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.clanHelpUuids_ = clanHelpUuids_;
@@ -34684,6 +34876,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -34792,7 +34985,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -34800,6 +34993,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated string clanHelpUuids = 2;
       private com.google.protobuf.LazyStringList clanHelpUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureClanHelpUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -34810,9 +35004,9 @@ public final class EventClanProto {
       /**
        * <code>repeated string clanHelpUuids = 2;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getClanHelpUuidsList() {
-        return clanHelpUuids_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(clanHelpUuids_);
       }
       /**
        * <code>repeated string clanHelpUuids = 2;</code>
@@ -34865,8 +35059,7 @@ public final class EventClanProto {
       public Builder addAllClanHelpUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureClanHelpUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, clanHelpUuids_);
+        super.addAll(values, clanHelpUuids_);
         onChanged();
         return this;
       }
@@ -34893,6 +35086,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;
       private com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus status_ = com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
@@ -34955,10 +35149,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndClanHelpResponseProto)
   }
 
-  public interface InviteToClanRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InviteToClanRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface InviteToClanRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -34972,6 +35166,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string prospectiveMember = 2;
     /**
      * <code>optional string prospectiveMember = 2;</code>
      */
@@ -34986,6 +35181,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getProspectiveMemberBytes();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -35003,9 +35199,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class InviteToClanRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InviteToClanRequestProto)
-      InviteToClanRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements InviteToClanRequestProtoOrBuilder {
     // Use InviteToClanRequestProto.newBuilder() to construct.
     private InviteToClanRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -35065,9 +35260,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              prospectiveMember_ = bs;
+              prospectiveMember_ = input.readBytes();
               break;
             }
             case 24: {
@@ -35115,6 +35309,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -35136,6 +35331,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string prospectiveMember = 2;
     public static final int PROSPECTIVEMEMBER_FIELD_NUMBER = 2;
     private java.lang.Object prospectiveMember_;
     /**
@@ -35178,6 +35374,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -35201,8 +35398,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -35327,9 +35523,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InviteToClanRequestProto)
-        com.lvl6.proto.EventClanProto.InviteToClanRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.InviteToClanRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_InviteToClanRequestProto_descriptor;
@@ -35471,6 +35666,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -35579,7 +35775,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -35587,6 +35783,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string prospectiveMember = 2;
       private java.lang.Object prospectiveMember_ = "";
       /**
        * <code>optional string prospectiveMember = 2;</code>
@@ -35600,12 +35797,9 @@ public final class EventClanProto {
       public java.lang.String getProspectiveMember() {
         java.lang.Object ref = prospectiveMember_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            prospectiveMember_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          prospectiveMember_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -35663,6 +35857,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -35706,10 +35901,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InviteToClanRequestProto)
   }
 
-  public interface InviteToClanResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InviteToClanResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface InviteToClanResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -35723,6 +35918,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
      */
@@ -35732,6 +35928,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus getStatus();
 
+    // optional .com.lvl6.proto.ClanInviteProto invite = 3;
     /**
      * <code>optional .com.lvl6.proto.ClanInviteProto invite = 3;</code>
      */
@@ -35749,9 +35946,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.InviteToClanResponseProto}
    */
   public static final class InviteToClanResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InviteToClanResponseProto)
-      InviteToClanResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements InviteToClanResponseProtoOrBuilder {
     // Use InviteToClanResponseProto.newBuilder() to construct.
     private InviteToClanResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -35965,6 +36161,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -35986,6 +36183,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus status_;
     /**
@@ -36001,6 +36199,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.ClanInviteProto invite = 3;
     public static final int INVITE_FIELD_NUMBER = 3;
     private com.lvl6.proto.ClanProto.ClanInviteProto invite_;
     /**
@@ -36030,8 +36229,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -36152,9 +36350,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.InviteToClanResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InviteToClanResponseProto)
-        com.lvl6.proto.EventClanProto.InviteToClanResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.InviteToClanResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_InviteToClanResponseProto_descriptor;
@@ -36303,6 +36500,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -36411,7 +36609,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -36419,6 +36617,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;
       private com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus status_ = com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
@@ -36454,6 +36653,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ClanInviteProto invite = 3;
       private com.lvl6.proto.ClanProto.ClanInviteProto invite_ = com.lvl6.proto.ClanProto.ClanInviteProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.ClanInviteProto, com.lvl6.proto.ClanProto.ClanInviteProto.Builder, com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder> inviteBuilder_;
@@ -36562,7 +36762,7 @@ public final class EventClanProto {
         if (inviteBuilder_ == null) {
           inviteBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.ClanInviteProto, com.lvl6.proto.ClanProto.ClanInviteProto.Builder, com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder>(
-                  getInvite(),
+                  invite_,
                   getParentForChildren(),
                   isClean());
           invite_ = null;
@@ -36581,10 +36781,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InviteToClanResponseProto)
   }
 
-  public interface AcceptOrRejectClanInviteRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AcceptOrRejectClanInviteRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AcceptOrRejectClanInviteRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -36598,6 +36798,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.ClanInviteProto accepted = 2;
     /**
      * <code>optional .com.lvl6.proto.ClanInviteProto accepted = 2;</code>
      *
@@ -36623,6 +36824,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder getAcceptedOrBuilder();
 
+    // repeated .com.lvl6.proto.ClanInviteProto rejected = 3;
     /**
      * <code>repeated .com.lvl6.proto.ClanInviteProto rejected = 3;</code>
      */
@@ -36647,6 +36849,7 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder getRejectedOrBuilder(
         int index);
 
+    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -36660,9 +36863,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.AcceptOrRejectClanInviteRequestProto}
    */
   public static final class AcceptOrRejectClanInviteRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AcceptOrRejectClanInviteRequestProto)
-      AcceptOrRejectClanInviteRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AcceptOrRejectClanInviteRequestProtoOrBuilder {
     // Use AcceptOrRejectClanInviteRequestProto.newBuilder() to construct.
     private AcceptOrRejectClanInviteRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -36790,6 +36992,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -36811,6 +37014,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.ClanInviteProto accepted = 2;
     public static final int ACCEPTED_FIELD_NUMBER = 2;
     private com.lvl6.proto.ClanProto.ClanInviteProto accepted_;
     /**
@@ -36844,6 +37048,7 @@ public final class EventClanProto {
       return accepted_;
     }
 
+    // repeated .com.lvl6.proto.ClanInviteProto rejected = 3;
     public static final int REJECTED_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.ClanProto.ClanInviteProto> rejected_;
     /**
@@ -36879,6 +37084,7 @@ public final class EventClanProto {
       return rejected_.get(index);
     }
 
+    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -36903,8 +37109,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -37032,9 +37237,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.AcceptOrRejectClanInviteRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AcceptOrRejectClanInviteRequestProto)
-        com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor;
@@ -37225,6 +37429,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -37333,7 +37538,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -37341,6 +37546,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.ClanInviteProto accepted = 2;
       private com.lvl6.proto.ClanProto.ClanInviteProto accepted_ = com.lvl6.proto.ClanProto.ClanInviteProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.ClanInviteProto, com.lvl6.proto.ClanProto.ClanInviteProto.Builder, com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder> acceptedBuilder_;
@@ -37485,7 +37691,7 @@ public final class EventClanProto {
         if (acceptedBuilder_ == null) {
           acceptedBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.ClanInviteProto, com.lvl6.proto.ClanProto.ClanInviteProto.Builder, com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder>(
-                  getAccepted(),
+                  accepted_,
                   getParentForChildren(),
                   isClean());
           accepted_ = null;
@@ -37493,6 +37699,7 @@ public final class EventClanProto {
         return acceptedBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanInviteProto rejected = 3;
       private java.util.List<com.lvl6.proto.ClanProto.ClanInviteProto> rejected_ =
         java.util.Collections.emptyList();
       private void ensureRejectedIsMutable() {
@@ -37634,8 +37841,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanInviteProto> values) {
         if (rejectedBuilder_ == null) {
           ensureRejectedIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, rejected_);
+          super.addAll(values, rejected_);
           onChanged();
         } else {
           rejectedBuilder_.addAllMessages(values);
@@ -37733,6 +37939,7 @@ public final class EventClanProto {
         return rejectedBuilder_;
       }
 
+      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -37776,10 +37983,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AcceptOrRejectClanInviteRequestProto)
   }
 
-  public interface AcceptOrRejectClanInviteResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AcceptOrRejectClanInviteResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AcceptOrRejectClanInviteResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -37793,6 +38000,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
      */
@@ -37802,6 +38010,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus getStatus();
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 3;
     /**
      * <code>optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 3;</code>
      */
@@ -37819,9 +38028,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.AcceptOrRejectClanInviteResponseProto}
    */
   public static final class AcceptOrRejectClanInviteResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AcceptOrRejectClanInviteResponseProto)
-      AcceptOrRejectClanInviteResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AcceptOrRejectClanInviteResponseProtoOrBuilder {
     // Use AcceptOrRejectClanInviteResponseProto.newBuilder() to construct.
     private AcceptOrRejectClanInviteResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -38035,6 +38243,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -38056,6 +38265,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status_;
     /**
@@ -38071,6 +38281,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 3;
     public static final int FULLCLAN_FIELD_NUMBER = 3;
     private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_;
     /**
@@ -38100,8 +38311,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -38222,9 +38432,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.AcceptOrRejectClanInviteResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AcceptOrRejectClanInviteResponseProto)
-        com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor;
@@ -38373,6 +38582,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -38481,7 +38691,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -38489,6 +38699,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;
       private com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status_ = com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
@@ -38524,6 +38735,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 3;
       private com.lvl6.proto.ClanProto.FullClanProtoWithClanSize fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder> fullClanBuilder_;
@@ -38632,7 +38844,7 @@ public final class EventClanProto {
         if (fullClanBuilder_ == null) {
           fullClanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.FullClanProtoWithClanSize, com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.Builder, com.lvl6.proto.ClanProto.FullClanProtoWithClanSizeOrBuilder>(
-                  getFullClan(),
+                  fullClan_,
                   getParentForChildren(),
                   isClean());
           fullClan_ = null;
@@ -38651,10 +38863,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AcceptOrRejectClanInviteResponseProto)
   }
 
-  public interface RetrieveClanDataResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveClanDataResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveClanDataResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto mup = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
      *
@@ -38680,6 +38892,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder();
 
+    // optional .com.lvl6.proto.ClanDataProto clanData = 2;
     /**
      * <code>optional .com.lvl6.proto.ClanDataProto clanData = 2;</code>
      */
@@ -38701,9 +38914,8 @@ public final class EventClanProto {
    * </pre>
    */
   public static final class RetrieveClanDataResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveClanDataResponseProto)
-      RetrieveClanDataResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetrieveClanDataResponseProtoOrBuilder {
     // Use RetrieveClanDataResponseProto.newBuilder() to construct.
     private RetrieveClanDataResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -38815,6 +39027,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto mup = 1;
     public static final int MUP_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto mup_;
     /**
@@ -38848,6 +39061,7 @@ public final class EventClanProto {
       return mup_;
     }
 
+    // optional .com.lvl6.proto.ClanDataProto clanData = 2;
     public static final int CLANDATA_FIELD_NUMBER = 2;
     private com.lvl6.proto.ClanProto.ClanDataProto clanData_;
     /**
@@ -38876,8 +39090,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -38995,9 +39208,8 @@ public final class EventClanProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveClanDataResponseProto)
-        com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor;
@@ -39137,6 +39349,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto mup = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> mupBuilder_;
@@ -39281,7 +39494,7 @@ public final class EventClanProto {
         if (mupBuilder_ == null) {
           mupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getMup(),
+                  mup_,
                   getParentForChildren(),
                   isClean());
           mup_ = null;
@@ -39289,6 +39502,7 @@ public final class EventClanProto {
         return mupBuilder_;
       }
 
+      // optional .com.lvl6.proto.ClanDataProto clanData = 2;
       private com.lvl6.proto.ClanProto.ClanDataProto clanData_ = com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder> clanDataBuilder_;
@@ -39397,7 +39611,7 @@ public final class EventClanProto {
         if (clanDataBuilder_ == null) {
           clanDataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder>(
-                  getClanData(),
+                  clanData_,
                   getParentForChildren(),
                   isClean());
           clanData_ = null;
@@ -39416,10 +39630,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveClanDataResponseProto)
   }
 
-  public interface BeginClanAvengingRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginClanAvengingRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BeginClanAvengingRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -39433,6 +39647,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;
     /**
      * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
      */
@@ -39457,6 +39672,7 @@ public final class EventClanProto {
     com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getRecentNBattlesOrBuilder(
         int index);
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -39470,9 +39686,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.BeginClanAvengingRequestProto}
    */
   public static final class BeginClanAvengingRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginClanAvengingRequestProto)
-      BeginClanAvengingRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BeginClanAvengingRequestProtoOrBuilder {
     // Use BeginClanAvengingRequestProto.newBuilder() to construct.
     private BeginClanAvengingRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -39587,6 +39802,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -39608,6 +39824,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;
     public static final int RECENTNBATTLES_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_;
     /**
@@ -39643,6 +39860,7 @@ public final class EventClanProto {
       return recentNBattles_.get(index);
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -39666,8 +39884,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -39788,9 +40005,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.BeginClanAvengingRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginClanAvengingRequestProto)
-        com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor;
@@ -39963,6 +40179,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -40071,7 +40288,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -40079,6 +40296,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;
       private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_ =
         java.util.Collections.emptyList();
       private void ensureRecentNBattlesIsMutable() {
@@ -40220,8 +40438,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpHistoryProto> values) {
         if (recentNBattlesBuilder_ == null) {
           ensureRecentNBattlesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, recentNBattles_);
+          super.addAll(values, recentNBattles_);
           onChanged();
         } else {
           recentNBattlesBuilder_.addAllMessages(values);
@@ -40319,6 +40536,7 @@ public final class EventClanProto {
         return recentNBattlesBuilder_;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -40362,10 +40580,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanAvengingRequestProto)
   }
 
-  public interface BeginClanAvengingResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginClanAvengingResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface BeginClanAvengingResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -40379,6 +40597,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;
     /**
      * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
      */
@@ -40403,6 +40622,7 @@ public final class EventClanProto {
     com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
         int index);
 
+    // optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
      */
@@ -40416,9 +40636,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.BeginClanAvengingResponseProto}
    */
   public static final class BeginClanAvengingResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginClanAvengingResponseProto)
-      BeginClanAvengingResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements BeginClanAvengingResponseProtoOrBuilder {
     // Use BeginClanAvengingResponseProto.newBuilder() to construct.
     private BeginClanAvengingResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -40621,6 +40840,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -40642,6 +40862,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;
     public static final int CLANAVENGINGS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> clanAvengings_;
     /**
@@ -40677,6 +40898,7 @@ public final class EventClanProto {
       return clanAvengings_.get(index);
     }
 
+    // optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status_;
     /**
@@ -40700,8 +40922,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -40822,9 +41043,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.BeginClanAvengingResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginClanAvengingResponseProto)
-        com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor;
@@ -40997,6 +41217,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -41105,7 +41326,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -41113,6 +41334,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;
       private java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> clanAvengings_ =
         java.util.Collections.emptyList();
       private void ensureClanAvengingsIsMutable() {
@@ -41254,8 +41476,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProto> values) {
         if (clanAvengingsBuilder_ == null) {
           ensureClanAvengingsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, clanAvengings_);
+          super.addAll(values, clanAvengings_);
           onChanged();
         } else {
           clanAvengingsBuilder_.addAllMessages(values);
@@ -41353,6 +41574,7 @@ public final class EventClanProto {
         return clanAvengingsBuilder_;
       }
 
+      // optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;
       private com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
@@ -41399,10 +41621,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanAvengingResponseProto)
   }
 
-  public interface EndClanAvengingRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndClanAvengingRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EndClanAvengingRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -41416,6 +41638,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated string clanAvengeUuids = 2;
     /**
      * <code>repeated string clanAvengeUuids = 2;</code>
      *
@@ -41423,8 +41646,8 @@ public final class EventClanProto {
      *primary key in clan_avenge table
      * </pre>
      */
-    com.google.protobuf.ProtocolStringList
-        getClanAvengeUuidsList();
+    java.util.List<java.lang.String>
+    getClanAvengeUuidsList();
     /**
      * <code>repeated string clanAvengeUuids = 2;</code>
      *
@@ -41455,9 +41678,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.EndClanAvengingRequestProto}
    */
   public static final class EndClanAvengingRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndClanAvengingRequestProto)
-      EndClanAvengingRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EndClanAvengingRequestProtoOrBuilder {
     // Use EndClanAvengingRequestProto.newBuilder() to construct.
     private EndClanAvengingRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -41517,12 +41739,11 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 clanAvengeUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              clanAvengeUuids_.add(bs);
+              clanAvengeUuids_.add(input.readBytes());
               break;
             }
           }
@@ -41534,7 +41755,7 @@ public final class EventClanProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+          clanAvengeUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(clanAvengeUuids_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -41568,6 +41789,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -41589,6 +41811,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated string clanAvengeUuids = 2;
     public static final int CLANAVENGEUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList clanAvengeUuids_;
     /**
@@ -41598,7 +41821,7 @@ public final class EventClanProto {
      *primary key in clan_avenge table
      * </pre>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getClanAvengeUuidsList() {
       return clanAvengeUuids_;
     }
@@ -41641,8 +41864,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -41761,9 +41983,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.EndClanAvengingRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndClanAvengingRequestProto)
-        com.lvl6.proto.EventClanProto.EndClanAvengingRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.EndClanAvengingRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor;
@@ -41842,7 +42063,8 @@ public final class EventClanProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+          clanAvengeUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              clanAvengeUuids_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.clanAvengeUuids_ = clanAvengeUuids_;
@@ -41902,6 +42124,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -42010,7 +42233,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -42018,6 +42241,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated string clanAvengeUuids = 2;
       private com.google.protobuf.LazyStringList clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureClanAvengeUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -42032,9 +42256,9 @@ public final class EventClanProto {
        *primary key in clan_avenge table
        * </pre>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getClanAvengeUuidsList() {
-        return clanAvengeUuids_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(clanAvengeUuids_);
       }
       /**
        * <code>repeated string clanAvengeUuids = 2;</code>
@@ -42111,8 +42335,7 @@ public final class EventClanProto {
       public Builder addAllClanAvengeUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureClanAvengeUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, clanAvengeUuids_);
+        super.addAll(values, clanAvengeUuids_);
         onChanged();
         return this;
       }
@@ -42158,10 +42381,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndClanAvengingRequestProto)
   }
 
-  public interface EndClanAvengingResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndClanAvengingResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface EndClanAvengingResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -42175,11 +42398,12 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated string clanAvengeUuids = 2;
     /**
      * <code>repeated string clanAvengeUuids = 2;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getClanAvengeUuidsList();
+    java.util.List<java.lang.String>
+    getClanAvengeUuidsList();
     /**
      * <code>repeated string clanAvengeUuids = 2;</code>
      */
@@ -42194,6 +42418,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getClanAvengeUuidsBytes(int index);
 
+    // optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
      */
@@ -42207,9 +42432,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.EndClanAvengingResponseProto}
    */
   public static final class EndClanAvengingResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndClanAvengingResponseProto)
-      EndClanAvengingResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements EndClanAvengingResponseProtoOrBuilder {
     // Use EndClanAvengingResponseProto.newBuilder() to construct.
     private EndClanAvengingResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -42269,12 +42493,11 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 clanAvengeUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              clanAvengeUuids_.add(bs);
+              clanAvengeUuids_.add(input.readBytes());
               break;
             }
             case 24: {
@@ -42297,7 +42520,7 @@ public final class EventClanProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+          clanAvengeUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(clanAvengeUuids_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -42413,6 +42636,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -42434,12 +42658,13 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated string clanAvengeUuids = 2;
     public static final int CLANAVENGEUUIDS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList clanAvengeUuids_;
     /**
      * <code>repeated string clanAvengeUuids = 2;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getClanAvengeUuidsList() {
       return clanAvengeUuids_;
     }
@@ -42463,6 +42688,7 @@ public final class EventClanProto {
       return clanAvengeUuids_.getByteString(index);
     }
 
+    // optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus status_;
     /**
@@ -42486,8 +42712,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -42613,9 +42838,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.EndClanAvengingResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndClanAvengingResponseProto)
-        com.lvl6.proto.EventClanProto.EndClanAvengingResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.EndClanAvengingResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor;
@@ -42696,7 +42920,8 @@ public final class EventClanProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+          clanAvengeUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              clanAvengeUuids_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.clanAvengeUuids_ = clanAvengeUuids_;
@@ -42763,6 +42988,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -42871,7 +43097,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -42879,6 +43105,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated string clanAvengeUuids = 2;
       private com.google.protobuf.LazyStringList clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureClanAvengeUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -42889,9 +43116,9 @@ public final class EventClanProto {
       /**
        * <code>repeated string clanAvengeUuids = 2;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getClanAvengeUuidsList() {
-        return clanAvengeUuids_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(clanAvengeUuids_);
       }
       /**
        * <code>repeated string clanAvengeUuids = 2;</code>
@@ -42944,8 +43171,7 @@ public final class EventClanProto {
       public Builder addAllClanAvengeUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureClanAvengeUuidsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, clanAvengeUuids_);
+        super.addAll(values, clanAvengeUuids_);
         onChanged();
         return this;
       }
@@ -42972,6 +43198,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;
       private com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
@@ -43018,10 +43245,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndClanAvengingResponseProto)
   }
 
-  public interface AvengeClanMateRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AvengeClanMateRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AvengeClanMateRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -43035,6 +43262,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
      *
@@ -43060,6 +43288,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengeOrBuilder();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -43073,9 +43302,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.AvengeClanMateRequestProto}
    */
   public static final class AvengeClanMateRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AvengeClanMateRequestProto)
-      AvengeClanMateRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AvengeClanMateRequestProtoOrBuilder {
     // Use AvengeClanMateRequestProto.newBuilder() to construct.
     private AvengeClanMateRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -43192,6 +43420,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -43213,6 +43442,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;
     public static final int CLANAVENGE_FIELD_NUMBER = 2;
     private com.lvl6.proto.BattleProto.PvpClanAvengeProto clanAvenge_;
     /**
@@ -43246,6 +43476,7 @@ public final class EventClanProto {
       return clanAvenge_;
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -43269,8 +43500,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -43391,9 +43621,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.AvengeClanMateRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AvengeClanMateRequestProto)
-        com.lvl6.proto.EventClanProto.AvengeClanMateRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AvengeClanMateRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AvengeClanMateRequestProto_descriptor;
@@ -43542,6 +43771,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -43650,7 +43880,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -43658,6 +43888,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;
       private com.lvl6.proto.BattleProto.PvpClanAvengeProto clanAvenge_ = com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> clanAvengeBuilder_;
@@ -43802,7 +44033,7 @@ public final class EventClanProto {
         if (clanAvengeBuilder_ == null) {
           clanAvengeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder>(
-                  getClanAvenge(),
+                  clanAvenge_,
                   getParentForChildren(),
                   isClean());
           clanAvenge_ = null;
@@ -43810,6 +44041,7 @@ public final class EventClanProto {
         return clanAvengeBuilder_;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -43853,10 +44085,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AvengeClanMateRequestProto)
   }
 
-  public interface AvengeClanMateResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AvengeClanMateResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AvengeClanMateResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -43870,6 +44102,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.PvpProto victim = 2 [deprecated = true];
     /**
      * <code>optional .com.lvl6.proto.PvpProto victim = 2 [deprecated = true];</code>
      *
@@ -43895,6 +44128,7 @@ public final class EventClanProto {
      */
     @java.lang.Deprecated com.lvl6.proto.BattleProto.PvpProtoOrBuilder getVictimOrBuilder();
 
+    // optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
      */
@@ -43908,9 +44142,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.AvengeClanMateResponseProto}
    */
   public static final class AvengeClanMateResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AvengeClanMateResponseProto)
-      AvengeClanMateResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements AvengeClanMateResponseProtoOrBuilder {
     // Use AvengeClanMateResponseProto.newBuilder() to construct.
     private AvengeClanMateResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -44115,6 +44348,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -44136,6 +44370,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.PvpProto victim = 2 [deprecated = true];
     public static final int VICTIM_FIELD_NUMBER = 2;
     private com.lvl6.proto.BattleProto.PvpProto victim_;
     /**
@@ -44169,6 +44404,7 @@ public final class EventClanProto {
       return victim_;
     }
 
+    // optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus status_;
     /**
@@ -44192,8 +44428,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -44314,9 +44549,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.AvengeClanMateResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AvengeClanMateResponseProto)
-        com.lvl6.proto.EventClanProto.AvengeClanMateResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AvengeClanMateResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor;
@@ -44465,6 +44699,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -44573,7 +44808,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -44581,6 +44816,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.PvpProto victim = 2 [deprecated = true];
       private com.lvl6.proto.BattleProto.PvpProto victim_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder> victimBuilder_;
@@ -44725,7 +44961,7 @@ public final class EventClanProto {
         if (victimBuilder_ == null) {
           victimBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder>(
-                  getVictim(),
+                  victim_,
                   getParentForChildren(),
                   isClean());
           victim_ = null;
@@ -44733,6 +44969,7 @@ public final class EventClanProto {
         return victimBuilder_;
       }
 
+      // optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;
       private com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
@@ -44779,10 +45016,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AvengeClanMateResponseProto)
   }
 
-  public interface SolicitTeamDonationRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SolicitTeamDonationRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SolicitTeamDonationRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -44796,6 +45033,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional string msg = 2;
     /**
      * <code>optional string msg = 2;</code>
      */
@@ -44810,6 +45048,7 @@ public final class EventClanProto {
     com.google.protobuf.ByteString
         getMsgBytes();
 
+    // optional int32 powerLimit = 3;
     /**
      * <code>optional int32 powerLimit = 3;</code>
      */
@@ -44819,6 +45058,7 @@ public final class EventClanProto {
      */
     int getPowerLimit();
 
+    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -44828,6 +45068,7 @@ public final class EventClanProto {
      */
     long getClientTime();
 
+    // optional int32 gemsSpent = 5;
     /**
      * <code>optional int32 gemsSpent = 5;</code>
      *
@@ -44851,9 +45092,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.SolicitTeamDonationRequestProto}
    */
   public static final class SolicitTeamDonationRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SolicitTeamDonationRequestProto)
-      SolicitTeamDonationRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements SolicitTeamDonationRequestProtoOrBuilder {
     // Use SolicitTeamDonationRequestProto.newBuilder() to construct.
     private SolicitTeamDonationRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -44913,9 +45153,8 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              msg_ = bs;
+              msg_ = input.readBytes();
               break;
             }
             case 24: {
@@ -44973,6 +45212,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -44994,6 +45234,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional string msg = 2;
     public static final int MSG_FIELD_NUMBER = 2;
     private java.lang.Object msg_;
     /**
@@ -45036,6 +45277,7 @@ public final class EventClanProto {
       }
     }
 
+    // optional int32 powerLimit = 3;
     public static final int POWERLIMIT_FIELD_NUMBER = 3;
     private int powerLimit_;
     /**
@@ -45051,6 +45293,7 @@ public final class EventClanProto {
       return powerLimit_;
     }
 
+    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -45066,6 +45309,7 @@ public final class EventClanProto {
       return clientTime_;
     }
 
+    // optional int32 gemsSpent = 5;
     public static final int GEMSSPENT_FIELD_NUMBER = 5;
     private int gemsSpent_;
     /**
@@ -45101,8 +45345,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -45237,9 +45480,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.SolicitTeamDonationRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SolicitTeamDonationRequestProto)
-        com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor;
@@ -45399,6 +45641,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -45507,7 +45750,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -45515,6 +45758,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional string msg = 2;
       private java.lang.Object msg_ = "";
       /**
        * <code>optional string msg = 2;</code>
@@ -45528,12 +45772,9 @@ public final class EventClanProto {
       public java.lang.String getMsg() {
         java.lang.Object ref = msg_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            msg_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          msg_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -45591,6 +45832,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 powerLimit = 3;
       private int powerLimit_ ;
       /**
        * <code>optional int32 powerLimit = 3;</code>
@@ -45623,6 +45865,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -45655,6 +45898,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional int32 gemsSpent = 5;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 5;</code>
@@ -45718,10 +45962,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SolicitTeamDonationRequestProto)
   }
 
-  public interface SolicitTeamDonationResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SolicitTeamDonationResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SolicitTeamDonationResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -45735,6 +45979,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
      */
@@ -45744,6 +45989,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus getStatus();
 
+    // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
@@ -45761,9 +46007,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.SolicitTeamDonationResponseProto}
    */
   public static final class SolicitTeamDonationResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SolicitTeamDonationResponseProto)
-      SolicitTeamDonationResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements SolicitTeamDonationResponseProtoOrBuilder {
     // Use SolicitTeamDonationResponseProto.newBuilder() to construct.
     private SolicitTeamDonationResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -45986,6 +46231,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -46007,6 +46253,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status_;
     /**
@@ -46022,6 +46269,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;
     public static final int SOLICITATION_FIELD_NUMBER = 3;
     private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_;
     /**
@@ -46051,8 +46299,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -46173,9 +46420,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.SolicitTeamDonationResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SolicitTeamDonationResponseProto)
-        com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_descriptor;
@@ -46324,6 +46570,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -46432,7 +46679,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -46440,6 +46687,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;
       private com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
@@ -46475,6 +46723,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;
       private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
@@ -46583,7 +46832,7 @@ public final class EventClanProto {
         if (solicitationBuilder_ == null) {
           solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
-                  getSolicitation(),
+                  solicitation_,
                   getParentForChildren(),
                   isClean());
           solicitation_ = null;
@@ -46602,10 +46851,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SolicitTeamDonationResponseProto)
   }
 
-  public interface FulfillTeamDonationSolicitationRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface FulfillTeamDonationSolicitationRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -46619,6 +46868,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.FullUserMonsterProto fump = 2;
     /**
      * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
      */
@@ -46632,6 +46882,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
 
+    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      */
@@ -46641,6 +46892,7 @@ public final class EventClanProto {
      */
     long getClientTime();
 
+    // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;</code>
      *
@@ -46670,9 +46922,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto}
    */
   public static final class FulfillTeamDonationSolicitationRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto)
-      FulfillTeamDonationSolicitationRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements FulfillTeamDonationSolicitationRequestProtoOrBuilder {
     // Use FulfillTeamDonationSolicitationRequestProto.newBuilder() to construct.
     private FulfillTeamDonationSolicitationRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -46802,6 +47053,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -46823,6 +47075,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.FullUserMonsterProto fump = 2;
     public static final int FUMP_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_;
     /**
@@ -46844,6 +47097,7 @@ public final class EventClanProto {
       return fump_;
     }
 
+    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -46859,6 +47113,7 @@ public final class EventClanProto {
       return clientTime_;
     }
 
+    // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;
     public static final int SOLICITATION_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_;
     /**
@@ -46901,8 +47156,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -47030,9 +47284,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto)
-        com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor;
@@ -47199,6 +47452,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -47307,7 +47561,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -47315,6 +47569,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.FullUserMonsterProto fump = 2;
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpBuilder_;
@@ -47423,7 +47678,7 @@ public final class EventClanProto {
         if (fumpBuilder_ == null) {
           fumpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  getFump(),
+                  fump_,
                   getParentForChildren(),
                   isClean());
           fump_ = null;
@@ -47431,6 +47686,7 @@ public final class EventClanProto {
         return fumpBuilder_;
       }
 
+      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -47463,6 +47719,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 4;
       private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
@@ -47607,7 +47864,7 @@ public final class EventClanProto {
         if (solicitationBuilder_ == null) {
           solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
-                  getSolicitation(),
+                  solicitation_,
                   getParentForChildren(),
                   isClean());
           solicitation_ = null;
@@ -47626,10 +47883,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FulfillTeamDonationSolicitationRequestProto)
   }
 
-  public interface FulfillTeamDonationSolicitationResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface FulfillTeamDonationSolicitationResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -47643,6 +47900,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
      */
@@ -47652,6 +47910,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus();
 
+    // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
      */
@@ -47669,9 +47928,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto}
    */
   public static final class FulfillTeamDonationSolicitationResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto)
-      FulfillTeamDonationSolicitationResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements FulfillTeamDonationSolicitationResponseProtoOrBuilder {
     // Use FulfillTeamDonationSolicitationResponseProto.newBuilder() to construct.
     private FulfillTeamDonationSolicitationResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -47894,6 +48152,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -47915,6 +48174,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status_;
     /**
@@ -47930,6 +48190,7 @@ public final class EventClanProto {
       return status_;
     }
 
+    // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;
     public static final int SOLICITATION_FIELD_NUMBER = 3;
     private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_;
     /**
@@ -47959,8 +48220,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -48081,9 +48341,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto)
-        com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor;
@@ -48232,6 +48491,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -48340,7 +48600,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -48348,6 +48608,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;
       private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
@@ -48383,6 +48644,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;
       private com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder> solicitationBuilder_;
@@ -48491,7 +48753,7 @@ public final class EventClanProto {
         if (solicitationBuilder_ == null) {
           solicitationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.Builder, com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProtoOrBuilder>(
-                  getSolicitation(),
+                  solicitation_,
                   getParentForChildren(),
                   isClean());
           solicitation_ = null;
@@ -48510,10 +48772,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto)
   }
 
-  public interface VoidTeamDonationSolicitationRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.VoidTeamDonationSolicitationRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface VoidTeamDonationSolicitationRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -48527,6 +48789,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;
     /**
      * <code>repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;</code>
      */
@@ -48555,9 +48818,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.VoidTeamDonationSolicitationRequestProto}
    */
   public static final class VoidTeamDonationSolicitationRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.VoidTeamDonationSolicitationRequestProto)
-      VoidTeamDonationSolicitationRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements VoidTeamDonationSolicitationRequestProtoOrBuilder {
     // Use VoidTeamDonationSolicitationRequestProto.newBuilder() to construct.
     private VoidTeamDonationSolicitationRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -48667,6 +48929,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -48688,6 +48951,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;
     public static final int SOLICITATIONS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> solicitations_;
     /**
@@ -48730,8 +48994,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -48845,9 +49108,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.VoidTeamDonationSolicitationRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.VoidTeamDonationSolicitationRequestProto)
-        com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_descriptor;
@@ -49011,6 +49273,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -49119,7 +49382,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -49127,6 +49390,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.ClanMemberTeamDonationProto solicitations = 2;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> solicitations_ =
         java.util.Collections.emptyList();
       private void ensureSolicitationsIsMutable() {
@@ -49268,8 +49532,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto> values) {
         if (solicitationsBuilder_ == null) {
           ensureSolicitationsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, solicitations_);
+          super.addAll(values, solicitations_);
           onChanged();
         } else {
           solicitationsBuilder_.addAllMessages(values);
@@ -49378,10 +49641,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.VoidTeamDonationSolicitationRequestProto)
   }
 
-  public interface VoidTeamDonationSolicitationResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.VoidTeamDonationSolicitationResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface VoidTeamDonationSolicitationResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -49395,6 +49658,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
      */
@@ -49404,11 +49668,12 @@ public final class EventClanProto {
      */
     com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus getStatus();
 
+    // repeated string clanTeamDonateUuid = 3;
     /**
      * <code>repeated string clanTeamDonateUuid = 3;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getClanTeamDonateUuidList();
+    java.util.List<java.lang.String>
+    getClanTeamDonateUuidList();
     /**
      * <code>repeated string clanTeamDonateUuid = 3;</code>
      */
@@ -49427,9 +49692,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.VoidTeamDonationSolicitationResponseProto}
    */
   public static final class VoidTeamDonationSolicitationResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.VoidTeamDonationSolicitationResponseProto)
-      VoidTeamDonationSolicitationResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements VoidTeamDonationSolicitationResponseProtoOrBuilder {
     // Use VoidTeamDonationSolicitationResponseProto.newBuilder() to construct.
     private VoidTeamDonationSolicitationResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -49500,12 +49764,11 @@ public final class EventClanProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 clanTeamDonateUuid_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              clanTeamDonateUuid_.add(bs);
+              clanTeamDonateUuid_.add(input.readBytes());
               break;
             }
           }
@@ -49517,7 +49780,7 @@ public final class EventClanProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          clanTeamDonateUuid_ = clanTeamDonateUuid_.getUnmodifiableView();
+          clanTeamDonateUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(clanTeamDonateUuid_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -49633,6 +49896,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -49654,6 +49918,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status_;
     /**
@@ -49669,12 +49934,13 @@ public final class EventClanProto {
       return status_;
     }
 
+    // repeated string clanTeamDonateUuid = 3;
     public static final int CLANTEAMDONATEUUID_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList clanTeamDonateUuid_;
     /**
      * <code>repeated string clanTeamDonateUuid = 3;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.String>
         getClanTeamDonateUuidList() {
       return clanTeamDonateUuid_;
     }
@@ -49706,8 +49972,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -49833,9 +50098,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.VoidTeamDonationSolicitationResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.VoidTeamDonationSolicitationResponseProto)
-        com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_descriptor;
@@ -49920,7 +50184,8 @@ public final class EventClanProto {
         }
         result.status_ = status_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          clanTeamDonateUuid_ = clanTeamDonateUuid_.getUnmodifiableView();
+          clanTeamDonateUuid_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              clanTeamDonateUuid_);
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.clanTeamDonateUuid_ = clanTeamDonateUuid_;
@@ -49983,6 +50248,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -50091,7 +50357,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -50099,6 +50365,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;
       private com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status_ = com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
@@ -50134,6 +50401,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // repeated string clanTeamDonateUuid = 3;
       private com.google.protobuf.LazyStringList clanTeamDonateUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureClanTeamDonateUuidIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
@@ -50144,9 +50412,9 @@ public final class EventClanProto {
       /**
        * <code>repeated string clanTeamDonateUuid = 3;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.String>
           getClanTeamDonateUuidList() {
-        return clanTeamDonateUuid_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(clanTeamDonateUuid_);
       }
       /**
        * <code>repeated string clanTeamDonateUuid = 3;</code>
@@ -50199,8 +50467,7 @@ public final class EventClanProto {
       public Builder addAllClanTeamDonateUuid(
           java.lang.Iterable<java.lang.String> values) {
         ensureClanTeamDonateUuidIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, clanTeamDonateUuid_);
+        super.addAll(values, clanTeamDonateUuid_);
         onChanged();
         return this;
       }
@@ -50238,10 +50505,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.VoidTeamDonationSolicitationResponseProto)
   }
 
-  public interface CollectClanGiftsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CollectClanGiftsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CollectClanGiftsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -50255,6 +50522,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.UserClanGiftProto userClanGift = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserClanGiftProto userClanGift = 2;</code>
      */
@@ -50283,9 +50551,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.CollectClanGiftsRequestProto}
    */
   public static final class CollectClanGiftsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CollectClanGiftsRequestProto)
-      CollectClanGiftsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CollectClanGiftsRequestProtoOrBuilder {
     // Use CollectClanGiftsRequestProto.newBuilder() to construct.
     private CollectClanGiftsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -50395,6 +50662,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -50416,6 +50684,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.UserClanGiftProto userClanGift = 2;
     public static final int USERCLANGIFT_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> userClanGift_;
     /**
@@ -50458,8 +50727,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -50573,9 +50841,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.CollectClanGiftsRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CollectClanGiftsRequestProto)
-        com.lvl6.proto.EventClanProto.CollectClanGiftsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.CollectClanGiftsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor;
@@ -50739,6 +51006,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -50847,7 +51115,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -50855,6 +51123,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserClanGiftProto userClanGift = 2;
       private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> userClanGift_ =
         java.util.Collections.emptyList();
       private void ensureUserClanGiftIsMutable() {
@@ -50996,8 +51265,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.UserClanGiftProto> values) {
         if (userClanGiftBuilder_ == null) {
           ensureUserClanGiftIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userClanGift_);
+          super.addAll(values, userClanGift_);
           onChanged();
         } else {
           userClanGiftBuilder_.addAllMessages(values);
@@ -51106,10 +51374,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectClanGiftsRequestProto)
   }
 
-  public interface CollectClanGiftsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CollectClanGiftsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface CollectClanGiftsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -51123,6 +51391,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.UserRewardProto reward = 2;
     /**
      * <code>optional .com.lvl6.proto.UserRewardProto reward = 2;</code>
      */
@@ -51136,6 +51405,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardOrBuilder();
 
+    // optional .com.lvl6.proto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status = 3;</code>
      */
@@ -51149,9 +51419,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.CollectClanGiftsResponseProto}
    */
   public static final class CollectClanGiftsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CollectClanGiftsResponseProto)
-      CollectClanGiftsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements CollectClanGiftsResponseProtoOrBuilder {
     // Use CollectClanGiftsResponseProto.newBuilder() to construct.
     private CollectClanGiftsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -51356,6 +51625,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -51377,6 +51647,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.UserRewardProto reward = 2;
     public static final int REWARD_FIELD_NUMBER = 2;
     private com.lvl6.proto.RewardsProto.UserRewardProto reward_;
     /**
@@ -51398,6 +51669,7 @@ public final class EventClanProto {
       return reward_;
     }
 
+    // optional .com.lvl6.proto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status_;
     /**
@@ -51421,8 +51693,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -51543,9 +51814,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.CollectClanGiftsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CollectClanGiftsResponseProto)
-        com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor;
@@ -51694,6 +51964,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -51802,7 +52073,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -51810,6 +52081,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.UserRewardProto reward = 2;
       private com.lvl6.proto.RewardsProto.UserRewardProto reward_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> rewardBuilder_;
@@ -51918,7 +52190,7 @@ public final class EventClanProto {
         if (rewardBuilder_ == null) {
           rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder>(
-                  getReward(),
+                  reward_,
                   getParentForChildren(),
                   isClean());
           reward_ = null;
@@ -51926,6 +52198,7 @@ public final class EventClanProto {
         return rewardBuilder_;
       }
 
+      // optional .com.lvl6.proto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status = 3;
       private com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status_ = com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.CollectClanGiftsResponseProto.CollectClanGiftsStatus status = 3;</code>
@@ -51972,10 +52245,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectClanGiftsResponseProto)
   }
 
-  public interface ClearExpiredClanGiftsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ClearExpiredClanGiftsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -51989,6 +52262,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
      */
@@ -52017,9 +52291,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsRequestProto}
    */
   public static final class ClearExpiredClanGiftsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-      ClearExpiredClanGiftsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ClearExpiredClanGiftsRequestProtoOrBuilder {
     // Use ClearExpiredClanGiftsRequestProto.newBuilder() to construct.
     private ClearExpiredClanGiftsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -52129,6 +52402,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -52150,6 +52424,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;
     public static final int EXPIREDGIFTS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> expiredGifts_;
     /**
@@ -52192,8 +52467,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -52307,9 +52581,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
@@ -52473,6 +52746,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -52581,7 +52855,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -52589,6 +52863,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;
       private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> expiredGifts_ =
         java.util.Collections.emptyList();
       private void ensureExpiredGiftsIsMutable() {
@@ -52730,8 +53005,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.UserClanGiftProto> values) {
         if (expiredGiftsBuilder_ == null) {
           ensureExpiredGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, expiredGifts_);
+          super.addAll(values, expiredGifts_);
           onChanged();
         } else {
           expiredGiftsBuilder_.addAllMessages(values);
@@ -52840,10 +53114,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
   }
 
-  public interface ClearExpiredClanGiftsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ClearExpiredClanGiftsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -52857,6 +53131,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
      */
@@ -52870,9 +53145,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto}
    */
   public static final class ClearExpiredClanGiftsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-      ClearExpiredClanGiftsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ClearExpiredClanGiftsResponseProtoOrBuilder {
     // Use ClearExpiredClanGiftsResponseProto.newBuilder() to construct.
     private ClearExpiredClanGiftsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -53064,6 +53338,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -53085,6 +53360,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status_;
     /**
@@ -53107,8 +53383,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -53222,9 +53497,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
@@ -53355,6 +53629,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -53463,7 +53738,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -53471,6 +53746,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;
       private com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
@@ -53517,10 +53793,10 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
   }
 
-  public interface ReceivedClanGiftResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ReceivedClanGiftResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface ReceivedClanGiftResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      *
@@ -53546,6 +53822,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];
     /**
      * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
      */
@@ -53555,6 +53832,7 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ChatProto.ChatScope getScope();
 
+    // repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 3;
     /**
      * <code>repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 3;</code>
      */
@@ -53583,9 +53861,8 @@ public final class EventClanProto {
    * Protobuf type {@code com.lvl6.proto.ReceivedClanGiftResponseProto}
    */
   public static final class ReceivedClanGiftResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ReceivedClanGiftResponseProto)
-      ReceivedClanGiftResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements ReceivedClanGiftResponseProtoOrBuilder {
     // Use ReceivedClanGiftResponseProto.newBuilder() to construct.
     private ReceivedClanGiftResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -53706,6 +53983,7 @@ public final class EventClanProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -53739,6 +54017,7 @@ public final class EventClanProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];
     public static final int SCOPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.ChatProto.ChatScope scope_;
     /**
@@ -53754,6 +54033,7 @@ public final class EventClanProto {
       return scope_;
     }
 
+    // repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 3;
     public static final int USERCLANGIFTS_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> userClanGifts_;
     /**
@@ -53797,8 +54077,7 @@ public final class EventClanProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -53919,9 +54198,8 @@ public final class EventClanProto {
      * Protobuf type {@code com.lvl6.proto.ReceivedClanGiftResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ReceivedClanGiftResponseProto)
-        com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor;
@@ -54094,6 +54372,7 @@ public final class EventClanProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -54238,7 +54517,7 @@ public final class EventClanProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -54246,6 +54525,7 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];
       private com.lvl6.proto.ChatProto.ChatScope scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       /**
        * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
@@ -54281,6 +54561,7 @@ public final class EventClanProto {
         return this;
       }
 
+      // repeated .com.lvl6.proto.UserClanGiftProto userClanGifts = 3;
       private java.util.List<com.lvl6.proto.RewardsProto.UserClanGiftProto> userClanGifts_ =
         java.util.Collections.emptyList();
       private void ensureUserClanGiftsIsMutable() {
@@ -54422,8 +54703,7 @@ public final class EventClanProto {
           java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.UserClanGiftProto> values) {
         if (userClanGiftsBuilder_ == null) {
           ensureUserClanGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userClanGifts_);
+          super.addAll(values, userClanGifts_);
           onChanged();
         } else {
           userClanGiftsBuilder_.addAllMessages(values);
@@ -54532,277 +54812,277 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReceivedClanGiftResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CreateClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CreateClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CreateClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LeaveClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_LeaveClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LeaveClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_LeaveClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RequestJoinClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RequestJoinClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RequestJoinClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RequestJoinClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginClanRaidRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginClanRaidResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_GiveClanHelpRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GiveClanHelpRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_GiveClanHelpResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GiveClanHelpResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndClanHelpRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndClanHelpRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndClanHelpResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InviteToClanRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InviteToClanRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InviteToClanResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InviteToClanResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AvengeClanMateRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AvengeClanMateRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AvengeClanMateResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -55184,13 +55464,343 @@ public final class EventClanProto {
       "iftProtoB\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_CreateClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Name", "Tag", "RequestToJoinClanRequired", "Description", "ClanIconId", "GemsSpent", "CashChange", });
+          internal_static_com_lvl6_proto_CreateClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_CreateClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CreateClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "ClanInfo", });
+          internal_static_com_lvl6_proto_LeaveClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_LeaveClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_LeaveClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", });
+          internal_static_com_lvl6_proto_LeaveClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_LeaveClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_LeaveClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          internal_static_com_lvl6_proto_RequestJoinClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_RequestJoinClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RequestJoinClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanUuid", "ClientTime", });
+          internal_static_com_lvl6_proto_RequestJoinClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_RequestJoinClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RequestJoinClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "ClanUuid", "Requester", "MinClan", "FullClan", "EventDetails", "ClanUsersDetails", "RequesterMonsters", "ClientTime", });
+          internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanUuid", });
+          internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "ClanUuid", });
+          internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+          internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "RequesterUuid", "Accept", });
+          internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "Requester", "Accept", "MinClan", "FullClan", });
+          internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+          internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanUuid", "ClanName", "GrabType", "BeforeThisClanId", "IsForBrowsingList", });
+          internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Members", "ClanInfo", "Status", "IsForSearch", "IsForBrowsingList", "ClanUuid", "ClanName", "BeforeThisClanId", "MonsterTeams", });
+          internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanOwnerUuidNew", });
+          internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "MinClan", "FullClan", "ClanOwnerNew", });
+          internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "PlayerToBootUuid", });
+          internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "PlayerToBoot", "Status", });
+          internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(16);
+          internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "IsChangeDescription", "DescriptionNow", "IsChangeJoinType", "RequestToJoinRequired", "IsChangeIcon", "IconId", });
+          internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(17);
+          internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "MinClan", "FullClan", });
+          internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(18);
+          internal_static_com_lvl6_proto_BeginClanRaidRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "CurTime", "RaidId", "ClanEventId", "SetMonsterTeamForRaid", "UserMonsters", "IsFirstStage", });
+          internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(19);
+          internal_static_com_lvl6_proto_BeginClanRaidResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "EventDetails", "Status", "UserDetails", });
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(20);
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "EventDetails", "ClientTime", "DamageDealt", "MonsterHealths", "UserMonsterThatAttacked", "UserMonsterTeam", });
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(21);
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "DmgDealt", "EventDetails", "ClanUsersDetails", "UserMonsterThatAttacked", "Status", });
+          internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(22);
+          internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor,
+              new java.lang.String[] { "CrsId", "AllRewards", });
+          internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(23);
+          internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanUuid", "ClientTime", });
+          internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(24);
+          internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(25);
+          internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "VictimUuid", "UserClanStatus", });
+          internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(26);
+          internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Victim", "UserClanStatus", "PrevUserClanStatus", "Status", });
+          internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(27);
+          internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Notice", "ClientTime", "MaxHelpers", });
+          internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(28);
+          internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "HelpProto", "Status", });
+          internal_static_com_lvl6_proto_GiveClanHelpRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(29);
+          internal_static_com_lvl6_proto_GiveClanHelpRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_GiveClanHelpRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanHelpUuids", });
+          internal_static_com_lvl6_proto_GiveClanHelpResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(30);
+          internal_static_com_lvl6_proto_GiveClanHelpResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_GiveClanHelpResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanHelps", "Status", });
+          internal_static_com_lvl6_proto_EndClanHelpRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(31);
+          internal_static_com_lvl6_proto_EndClanHelpRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EndClanHelpRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanHelpUuids", });
+          internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(32);
+          internal_static_com_lvl6_proto_EndClanHelpResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanHelpUuids", "Status", });
+          internal_static_com_lvl6_proto_InviteToClanRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(33);
+          internal_static_com_lvl6_proto_InviteToClanRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_InviteToClanRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ProspectiveMember", "ClientTime", });
+          internal_static_com_lvl6_proto_InviteToClanResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(34);
+          internal_static_com_lvl6_proto_InviteToClanResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_InviteToClanResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "Invite", });
+          internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(35);
+          internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Accepted", "Rejected", "ClientTime", });
+          internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(36);
+          internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "FullClan", });
+          internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(37);
+          internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor,
+              new java.lang.String[] { "Mup", "ClanData", });
+          internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(38);
+          internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "RecentNBattles", "ClientTime", });
+          internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(39);
+          internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanAvengings", "Status", });
+          internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(40);
+          internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanAvengeUuids", });
+          internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(41);
+          internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanAvengeUuids", "Status", });
+          internal_static_com_lvl6_proto_AvengeClanMateRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(42);
+          internal_static_com_lvl6_proto_AvengeClanMateRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AvengeClanMateRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ClanAvenge", "ClientTime", });
+          internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(43);
+          internal_static_com_lvl6_proto_AvengeClanMateResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Victim", "Status", });
+          internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(44);
+          internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Msg", "PowerLimit", "ClientTime", "GemsSpent", });
+          internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(45);
+          internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "Solicitation", });
+          internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(46);
+          internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Fump", "ClientTime", "Solicitation", });
+          internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(47);
+          internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "Solicitation", });
+          internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(48);
+          internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "Solicitations", });
+          internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(49);
+          internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "ClanTeamDonateUuid", });
+          internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(50);
+          internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "UserClanGift", });
+          internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(51);
+          internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Reward", "Status", });
+          internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(52);
+          internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ExpiredGifts", });
+          internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(53);
+          internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", });
+          internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(54);
+          internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Scope", "UserClanGifts", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -55201,342 +55811,6 @@ public final class EventClanProto {
           com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_CreateClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Name", "Tag", "RequestToJoinClanRequired", "Description", "ClanIconId", "GemsSpent", "CashChange", });
-    internal_static_com_lvl6_proto_CreateClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_CreateClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CreateClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "ClanInfo", });
-    internal_static_com_lvl6_proto_LeaveClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_LeaveClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_LeaveClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", });
-    internal_static_com_lvl6_proto_LeaveClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_LeaveClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_LeaveClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    internal_static_com_lvl6_proto_RequestJoinClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_lvl6_proto_RequestJoinClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RequestJoinClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanUuid", "ClientTime", });
-    internal_static_com_lvl6_proto_RequestJoinClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_lvl6_proto_RequestJoinClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RequestJoinClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "ClanUuid", "Requester", "MinClan", "FullClan", "EventDetails", "ClanUsersDetails", "RequesterMonsters", "ClientTime", });
-    internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetractRequestJoinClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanUuid", });
-    internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetractRequestJoinClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "ClanUuid", });
-    internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "RequesterUuid", "Accept", });
-    internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(9);
-    internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ApproveOrRejectRequestToJoinClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "Requester", "Accept", "MinClan", "FullClan", });
-    internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetrieveClanInfoRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanUuid", "ClanName", "GrabType", "BeforeThisClanId", "IsForBrowsingList", });
-    internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(11);
-    internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetrieveClanInfoResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Members", "ClanInfo", "Status", "IsForSearch", "IsForBrowsingList", "ClanUuid", "ClanName", "BeforeThisClanId", "MonsterTeams", });
-    internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(12);
-    internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TransferClanOwnershipRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanOwnerUuidNew", });
-    internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TransferClanOwnershipResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "MinClan", "FullClan", "ClanOwnerNew", });
-    internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(14);
-    internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BootPlayerFromClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "PlayerToBootUuid", });
-    internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(15);
-    internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BootPlayerFromClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "PlayerToBoot", "Status", });
-    internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(16);
-    internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ChangeClanSettingsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IsChangeDescription", "DescriptionNow", "IsChangeJoinType", "RequestToJoinRequired", "IsChangeIcon", "IconId", });
-    internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(17);
-    internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ChangeClanSettingsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "MinClan", "FullClan", });
-    internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(18);
-    internal_static_com_lvl6_proto_BeginClanRaidRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "CurTime", "RaidId", "ClanEventId", "SetMonsterTeamForRaid", "UserMonsters", "IsFirstStage", });
-    internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(19);
-    internal_static_com_lvl6_proto_BeginClanRaidResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "EventDetails", "Status", "UserDetails", });
-    internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(20);
-    internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "EventDetails", "ClientTime", "DamageDealt", "MonsterHealths", "UserMonsterThatAttacked", "UserMonsterTeam", });
-    internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(21);
-    internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "DmgDealt", "EventDetails", "ClanUsersDetails", "UserMonsterThatAttacked", "Status", });
-    internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(22);
-    internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor,
-        new java.lang.String[] { "CrsId", "AllRewards", });
-    internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(23);
-    internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanUuid", "ClientTime", });
-    internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(24);
-    internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(25);
-    internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PromoteDemoteClanMemberRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "VictimUuid", "UserClanStatus", });
-    internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(26);
-    internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Victim", "UserClanStatus", "PrevUserClanStatus", "Status", });
-    internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(27);
-    internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_SolicitClanHelpRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Notice", "ClientTime", "MaxHelpers", });
-    internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(28);
-    internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_SolicitClanHelpResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "HelpProto", "Status", });
-    internal_static_com_lvl6_proto_GiveClanHelpRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(29);
-    internal_static_com_lvl6_proto_GiveClanHelpRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_GiveClanHelpRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanHelpUuids", });
-    internal_static_com_lvl6_proto_GiveClanHelpResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(30);
-    internal_static_com_lvl6_proto_GiveClanHelpResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_GiveClanHelpResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanHelps", "Status", });
-    internal_static_com_lvl6_proto_EndClanHelpRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(31);
-    internal_static_com_lvl6_proto_EndClanHelpRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EndClanHelpRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanHelpUuids", });
-    internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(32);
-    internal_static_com_lvl6_proto_EndClanHelpResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanHelpUuids", "Status", });
-    internal_static_com_lvl6_proto_InviteToClanRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(33);
-    internal_static_com_lvl6_proto_InviteToClanRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_InviteToClanRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ProspectiveMember", "ClientTime", });
-    internal_static_com_lvl6_proto_InviteToClanResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(34);
-    internal_static_com_lvl6_proto_InviteToClanResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_InviteToClanResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "Invite", });
-    internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(35);
-    internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Accepted", "Rejected", "ClientTime", });
-    internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(36);
-    internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "FullClan", });
-    internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(37);
-    internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor,
-        new java.lang.String[] { "Mup", "ClanData", });
-    internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(38);
-    internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "RecentNBattles", "ClientTime", });
-    internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(39);
-    internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanAvengings", "Status", });
-    internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(40);
-    internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanAvengeUuids", });
-    internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(41);
-    internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanAvengeUuids", "Status", });
-    internal_static_com_lvl6_proto_AvengeClanMateRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(42);
-    internal_static_com_lvl6_proto_AvengeClanMateRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AvengeClanMateRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClanAvenge", "ClientTime", });
-    internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(43);
-    internal_static_com_lvl6_proto_AvengeClanMateResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_AvengeClanMateResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Victim", "Status", });
-    internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(44);
-    internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_SolicitTeamDonationRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Msg", "PowerLimit", "ClientTime", "GemsSpent", });
-    internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(45);
-    internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_SolicitTeamDonationResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "Solicitation", });
-    internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(46);
-    internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Fump", "ClientTime", "Solicitation", });
-    internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(47);
-    internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_FulfillTeamDonationSolicitationResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "Solicitation", });
-    internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(48);
-    internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_VoidTeamDonationSolicitationRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Solicitations", });
-    internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(49);
-    internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_VoidTeamDonationSolicitationResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "ClanTeamDonateUuid", });
-    internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(50);
-    internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserClanGift", });
-    internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(51);
-    internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Reward", "Status", });
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(52);
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpiredGifts", });
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(53);
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
-    internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(54);
-    internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Scope", "UserClanGifts", });
-    com.lvl6.proto.BattleProto.getDescriptor();
-    com.lvl6.proto.ChatProto.getDescriptor();
-    com.lvl6.proto.ClanProto.getDescriptor();
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
-    com.lvl6.proto.RewardsProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

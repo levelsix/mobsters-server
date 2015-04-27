@@ -19,6 +19,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.RemoveUserItemUsedAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -47,7 +48,7 @@ public class RemoveUserItemUsedController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RemoveUserItemUsedRequestProto reqProto = ((RemoveUserItemUsedRequestEvent) event)
 				.getRemoveUserItemUsedRequestProto();
 
@@ -83,7 +84,7 @@ public class RemoveUserItemUsedController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -101,7 +102,7 @@ public class RemoveUserItemUsedController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRemoveUserItemUsedResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in RemoveUserItemUsedController processEvent",
@@ -112,7 +113,7 @@ public class RemoveUserItemUsedController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RemoveUserItemUsedController processEvent",

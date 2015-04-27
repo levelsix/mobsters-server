@@ -41,6 +41,7 @@ import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -97,7 +98,7 @@ public class UserCreateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UserCreateRequestProto reqProto = ((UserCreateRequestEvent) event)
 				.getUserCreateRequestProto();
 		String udid = reqProto.getUdid();
@@ -192,7 +193,7 @@ public class UserCreateController extends EventController {
 						udid);
 				resEvent.setTag(event.getTag());
 				resEvent.setUserCreateResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in UserCreateController processEvent", e);
 			}

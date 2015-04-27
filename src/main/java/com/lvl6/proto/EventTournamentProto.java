@@ -8,10 +8,10 @@ public final class EventTournamentProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface RetrieveTournamentRankingsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveTournamentRankingsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveTournamentRankingsRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,6 +25,7 @@ public final class EventTournamentProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional int32 eventId = 2;
     /**
      * <code>optional int32 eventId = 2;</code>
      */
@@ -34,6 +35,7 @@ public final class EventTournamentProto {
      */
     int getEventId();
 
+    // optional int32 afterThisRank = 3;
     /**
      * <code>optional int32 afterThisRank = 3;</code>
      */
@@ -47,9 +49,8 @@ public final class EventTournamentProto {
    * Protobuf type {@code com.lvl6.proto.RetrieveTournamentRankingsRequestProto}
    */
   public static final class RetrieveTournamentRankingsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveTournamentRankingsRequestProto)
-      RetrieveTournamentRankingsRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetrieveTournamentRankingsRequestProtoOrBuilder {
     // Use RetrieveTournamentRankingsRequestProto.newBuilder() to construct.
     private RetrieveTournamentRankingsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -158,6 +159,7 @@ public final class EventTournamentProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -179,6 +181,7 @@ public final class EventTournamentProto {
       return sender_;
     }
 
+    // optional int32 eventId = 2;
     public static final int EVENTID_FIELD_NUMBER = 2;
     private int eventId_;
     /**
@@ -194,6 +197,7 @@ public final class EventTournamentProto {
       return eventId_;
     }
 
+    // optional int32 afterThisRank = 3;
     public static final int AFTERTHISRANK_FIELD_NUMBER = 3;
     private int afterThisRank_;
     /**
@@ -217,8 +221,7 @@ public final class EventTournamentProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -339,9 +342,8 @@ public final class EventTournamentProto {
      * Protobuf type {@code com.lvl6.proto.RetrieveTournamentRankingsRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveTournamentRankingsRequestProto)
-        com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventTournamentProto.internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_descriptor;
@@ -481,6 +483,7 @@ public final class EventTournamentProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -589,7 +592,7 @@ public final class EventTournamentProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -597,6 +600,7 @@ public final class EventTournamentProto {
         return senderBuilder_;
       }
 
+      // optional int32 eventId = 2;
       private int eventId_ ;
       /**
        * <code>optional int32 eventId = 2;</code>
@@ -629,6 +633,7 @@ public final class EventTournamentProto {
         return this;
       }
 
+      // optional int32 afterThisRank = 3;
       private int afterThisRank_ ;
       /**
        * <code>optional int32 afterThisRank = 3;</code>
@@ -672,10 +677,10 @@ public final class EventTournamentProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveTournamentRankingsRequestProto)
   }
 
-  public interface RetrieveTournamentRankingsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveTournamentRankingsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveTournamentRankingsResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -689,6 +694,7 @@ public final class EventTournamentProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
+    // optional .com.lvl6.proto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status = 2;</code>
      */
@@ -698,6 +704,7 @@ public final class EventTournamentProto {
      */
     com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus getStatus();
 
+    // optional int32 eventId = 3;
     /**
      * <code>optional int32 eventId = 3;</code>
      */
@@ -707,6 +714,7 @@ public final class EventTournamentProto {
      */
     int getEventId();
 
+    // optional int32 afterThisRank = 4;
     /**
      * <code>optional int32 afterThisRank = 4;</code>
      */
@@ -716,6 +724,7 @@ public final class EventTournamentProto {
      */
     int getAfterThisRank();
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevelForTournament retriever = 5;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevelForTournament retriever = 5;</code>
      */
@@ -729,6 +738,7 @@ public final class EventTournamentProto {
      */
     com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder getRetrieverOrBuilder();
 
+    // repeated .com.lvl6.proto.MinimumUserProtoWithLevelForTournament resultPlayers = 6;
     /**
      * <code>repeated .com.lvl6.proto.MinimumUserProtoWithLevelForTournament resultPlayers = 6;</code>
      */
@@ -753,6 +763,7 @@ public final class EventTournamentProto {
     com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder getResultPlayersOrBuilder(
         int index);
 
+    // repeated .com.lvl6.proto.FullUserProto fullUsers = 7;
     /**
      * <code>repeated .com.lvl6.proto.FullUserProto fullUsers = 7;</code>
      */
@@ -781,9 +792,8 @@ public final class EventTournamentProto {
    * Protobuf type {@code com.lvl6.proto.RetrieveTournamentRankingsResponseProto}
    */
   public static final class RetrieveTournamentRankingsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveTournamentRankingsResponseProto)
-      RetrieveTournamentRankingsResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage
+      implements RetrieveTournamentRankingsResponseProtoOrBuilder {
     // Use RetrieveTournamentRankingsResponseProto.newBuilder() to construct.
     private RetrieveTournamentRankingsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1020,6 +1030,7 @@ public final class EventTournamentProto {
     }
 
     private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1041,6 +1052,7 @@ public final class EventTournamentProto {
       return sender_;
     }
 
+    // optional .com.lvl6.proto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status_;
     /**
@@ -1056,6 +1068,7 @@ public final class EventTournamentProto {
       return status_;
     }
 
+    // optional int32 eventId = 3;
     public static final int EVENTID_FIELD_NUMBER = 3;
     private int eventId_;
     /**
@@ -1071,6 +1084,7 @@ public final class EventTournamentProto {
       return eventId_;
     }
 
+    // optional int32 afterThisRank = 4;
     public static final int AFTERTHISRANK_FIELD_NUMBER = 4;
     private int afterThisRank_;
     /**
@@ -1086,6 +1100,7 @@ public final class EventTournamentProto {
       return afterThisRank_;
     }
 
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevelForTournament retriever = 5;
     public static final int RETRIEVER_FIELD_NUMBER = 5;
     private com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament retriever_;
     /**
@@ -1107,6 +1122,7 @@ public final class EventTournamentProto {
       return retriever_;
     }
 
+    // repeated .com.lvl6.proto.MinimumUserProtoWithLevelForTournament resultPlayers = 6;
     public static final int RESULTPLAYERS_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament> resultPlayers_;
     /**
@@ -1142,6 +1158,7 @@ public final class EventTournamentProto {
       return resultPlayers_.get(index);
     }
 
+    // repeated .com.lvl6.proto.FullUserProto fullUsers = 7;
     public static final int FULLUSERS_FIELD_NUMBER = 7;
     private java.util.List<com.lvl6.proto.UserProto.FullUserProto> fullUsers_;
     /**
@@ -1189,8 +1206,7 @@ public final class EventTournamentProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1339,9 +1355,8 @@ public final class EventTournamentProto {
      * Protobuf type {@code com.lvl6.proto.RetrieveTournamentRankingsResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveTournamentRankingsResponseProto)
-        com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventTournamentProto.internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_descriptor;
@@ -1592,6 +1607,7 @@ public final class EventTournamentProto {
       }
       private int bitField0_;
 
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1700,7 +1716,7 @@ public final class EventTournamentProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
+                  sender_,
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1708,6 +1724,7 @@ public final class EventTournamentProto {
         return senderBuilder_;
       }
 
+      // optional .com.lvl6.proto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status = 2;
       private com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status_ = com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus status = 2;</code>
@@ -1743,6 +1760,7 @@ public final class EventTournamentProto {
         return this;
       }
 
+      // optional int32 eventId = 3;
       private int eventId_ ;
       /**
        * <code>optional int32 eventId = 3;</code>
@@ -1775,6 +1793,7 @@ public final class EventTournamentProto {
         return this;
       }
 
+      // optional int32 afterThisRank = 4;
       private int afterThisRank_ ;
       /**
        * <code>optional int32 afterThisRank = 4;</code>
@@ -1807,6 +1826,7 @@ public final class EventTournamentProto {
         return this;
       }
 
+      // optional .com.lvl6.proto.MinimumUserProtoWithLevelForTournament retriever = 5;
       private com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament retriever_ = com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament, com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.Builder, com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder> retrieverBuilder_;
@@ -1915,7 +1935,7 @@ public final class EventTournamentProto {
         if (retrieverBuilder_ == null) {
           retrieverBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament, com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.Builder, com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder>(
-                  getRetriever(),
+                  retriever_,
                   getParentForChildren(),
                   isClean());
           retriever_ = null;
@@ -1923,6 +1943,7 @@ public final class EventTournamentProto {
         return retrieverBuilder_;
       }
 
+      // repeated .com.lvl6.proto.MinimumUserProtoWithLevelForTournament resultPlayers = 6;
       private java.util.List<com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament> resultPlayers_ =
         java.util.Collections.emptyList();
       private void ensureResultPlayersIsMutable() {
@@ -2064,8 +2085,7 @@ public final class EventTournamentProto {
           java.lang.Iterable<? extends com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament> values) {
         if (resultPlayersBuilder_ == null) {
           ensureResultPlayersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, resultPlayers_);
+          super.addAll(values, resultPlayers_);
           onChanged();
         } else {
           resultPlayersBuilder_.addAllMessages(values);
@@ -2163,6 +2183,7 @@ public final class EventTournamentProto {
         return resultPlayersBuilder_;
       }
 
+      // repeated .com.lvl6.proto.FullUserProto fullUsers = 7;
       private java.util.List<com.lvl6.proto.UserProto.FullUserProto> fullUsers_ =
         java.util.Collections.emptyList();
       private void ensureFullUsersIsMutable() {
@@ -2304,8 +2325,7 @@ public final class EventTournamentProto {
           java.lang.Iterable<? extends com.lvl6.proto.UserProto.FullUserProto> values) {
         if (fullUsersBuilder_ == null) {
           ensureFullUsersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, fullUsers_);
+          super.addAll(values, fullUsers_);
           onChanged();
         } else {
           fullUsersBuilder_.addAllMessages(values);
@@ -2414,12 +2434,12 @@ public final class EventTournamentProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveTournamentRankingsResponseProto)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2454,33 +2474,31 @@ public final class EventTournamentProto {
       "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "EventId", "AfterThisRank", });
+          internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", "EventId", "AfterThisRank", "Retriever", "ResultPlayers", "FullUsers", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.TournamentStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetrieveTournamentRankingsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "EventId", "AfterThisRank", });
-    internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_RetrieveTournamentRankingsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "EventId", "AfterThisRank", "Retriever", "ResultPlayers", "FullUsers", });
-    com.lvl6.proto.TournamentStuffProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

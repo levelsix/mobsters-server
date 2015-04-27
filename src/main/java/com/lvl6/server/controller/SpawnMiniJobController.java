@@ -31,6 +31,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -73,7 +74,7 @@ public class SpawnMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses) throws Exception {
+	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SpawnMiniJobRequestProto reqProto = ((SpawnMiniJobRequestEvent) event)
 				.getSpawnMiniJobRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -110,7 +111,7 @@ public class SpawnMiniJobController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -149,7 +150,7 @@ public class SpawnMiniJobController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//modified the user, the last obstacle removed time
@@ -158,7 +159,7 @@ public class SpawnMiniJobController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 			}
 
@@ -171,7 +172,7 @@ public class SpawnMiniJobController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SpawnMiniJobController processEvent",
 						e);
