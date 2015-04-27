@@ -231,10 +231,16 @@ public class AwardRewardAction {
 			return false;
 		}
 		success = awardMonsters(monsterIdToQuantity, monsterIdToLvlToQuantity);
-
+		if(!success) {
+			log.error("error awarding monsters for userId {}", userId);
+		}
+		
 		//save to reward history
-		insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), rewards, awardReason);
-
+		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), rewards, awardReason);
+		if(!success) {
+			log.error("error saving to user reward history for userId {}", userId);
+		}
+		
 		return true;
 	}
 
