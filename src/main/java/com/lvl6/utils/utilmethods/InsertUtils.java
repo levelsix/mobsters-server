@@ -45,6 +45,7 @@ import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
+import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -338,7 +339,7 @@ public class InsertUtils implements InsertUtil {
 			if(salesUuid != null) {
 				insertParams.put(DBConstants.IAP_HISTORY__SALES_UUID, salesUuid);
 			}
-			
+
 			insertParams.put(DBConstants.IAP_HISTORY__PRODUCT_ID,
 					appleReceipt.getString(IAPValues.PRODUCT_ID));
 			insertParams.put(DBConstants.IAP_HISTORY__QUANTITY,
@@ -735,65 +736,65 @@ public class InsertUtils implements InsertUtil {
 		return numInserted;
 	}
 
-//	@Override
-//	public int insertIntoBoosterPackPurchaseHistory(String userId,
-//			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
-//			List<String> userMonsterIds) {
-//		String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
-//
-//		Map<String, Object> insertParams = new HashMap<String, Object>();
-//		int boosterItemId = bi.getId();
-//		int monsterId = bi.getMonsterId();
-//		int numPieces = bi.getNumPieces();
-//		boolean isComplete = bi.isComplete();
-//		boolean isSpecial = bi.isSpecial();
-//		int gemReward = bi.getGemReward();
-//		float chanceToAppear = bi.getChanceToAppear();
-//
-//		insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID,
-//				userId);
-//		insertParams.put(
-//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID,
-//				boosterPackId);
-//		insertParams.put(
-//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE,
-//				timeOfPurchase);
-//		insertParams.put(
-//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID,
-//				boosterItemId);
-//		//monster prize and gem prize are mutually exclusive
-//		if (monsterId > 0) {
-//			insertParams.put(
-//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID,
-//					monsterId);
-//			insertParams.put(
-//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES,
-//					numPieces);
-//			insertParams.put(
-//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE,
-//					isComplete);
-//			insertParams.put(
-//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL,
-//					isSpecial);
-//
-//			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
-//			insertParams
-//			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
-//					userMonsterIdsStr);
-//		} else if (gemReward > 0) {
-//			insertParams.put(
-//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
-//					gemReward);
-//		}
-//
-//		insertParams.put(
-//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR,
-//				chanceToAppear);
-//
-//		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
-//				insertParams);
-//		return numInserted;
-//	}
+	//	@Override
+	//	public int insertIntoBoosterPackPurchaseHistory(String userId,
+	//			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
+	//			List<String> userMonsterIds) {
+	//		String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
+	//
+	//		Map<String, Object> insertParams = new HashMap<String, Object>();
+	//		int boosterItemId = bi.getId();
+	//		int monsterId = bi.getMonsterId();
+	//		int numPieces = bi.getNumPieces();
+	//		boolean isComplete = bi.isComplete();
+	//		boolean isSpecial = bi.isSpecial();
+	//		int gemReward = bi.getGemReward();
+	//		float chanceToAppear = bi.getChanceToAppear();
+	//
+	//		insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID,
+	//				userId);
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID,
+	//				boosterPackId);
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE,
+	//				timeOfPurchase);
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID,
+	//				boosterItemId);
+	//		//monster prize and gem prize are mutually exclusive
+	//		if (monsterId > 0) {
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID,
+	//					monsterId);
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES,
+	//					numPieces);
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE,
+	//					isComplete);
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL,
+	//					isSpecial);
+	//
+	//			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
+	//			insertParams
+	//			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
+	//					userMonsterIdsStr);
+	//		} else if (gemReward > 0) {
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
+	//					gemReward);
+	//		}
+	//
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR,
+	//				chanceToAppear);
+	//
+	//		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
+	//				insertParams);
+	//		return numInserted;
+	//	}
 
 	@Override
 	public String insertIntoPrivateChatPosts(String posterId,
@@ -911,10 +912,10 @@ public class InsertUtils implements InsertUtil {
 		absoluteUpdates.put(
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
 				translateOn);
-		
+
 		int numChanged = DBConnection.get().insertOnDuplicateKeyUpdate(tableName, insertParams,
 				relativeUpdates, absoluteUpdates);
-		
+
 		if (numChanged != 1 && numChanged != 2) {
 			log.error("failure to insert translate setting, numChanged = {}", numChanged);
 			return false;
@@ -2833,6 +2834,54 @@ public class InsertUtils implements InsertUtil {
 			log.error("numUpdated={}", numUpdated);
 			return false;
 		}
+	}
+
+	@Override
+	public boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
+			Collection<Reward> listOfRewards, String reasonForReward) {
+		if(listOfRewards == null) {
+			log.error("list containing rewards is null");
+		}
+
+		String tableName = DBConstants.TABLE_USER_REWARD_HISTORY;
+		int size = listOfRewards.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+		List<String> idList = new ArrayList<String>();
+		List<String> userIdList = new ArrayList<String>();
+		List<Timestamp> timestampList = new ArrayList<Timestamp>();
+		List<Integer> rewardIdList = new ArrayList<Integer>();
+		List<String> reasonForRewardList = new ArrayList<String>();
+
+		try {
+			for(Reward r : listOfRewards) {
+				String id = randomUUID();
+				int rewardId = r.getId();
+				idList.add(id);
+				userIdList.add(userId);
+				timestampList.add(ts);
+				rewardIdList.add(rewardId);
+				reasonForRewardList.add(reasonForReward);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error("error converting language to string");
+			e.printStackTrace();
+		}
+
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__ID, idList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__USER_ID, userIdList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__DATE, timestampList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__REWARD_ID, rewardIdList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__REASON_FOR_REWARD, reasonForRewardList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		} else
+			return false;
 	}
 
 }

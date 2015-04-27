@@ -32,6 +32,10 @@ public class MiniJob implements Serializable {
 	private Random rand;
 	private int durationMinSeconds;
 	private int durationMaxSeconds;
+	
+	private int rewardIdOne;
+	private int rewardIdTwo;
+	private int rewardIdThree;
 
 	public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward,
@@ -39,7 +43,8 @@ public class MiniJob implements Serializable {
 			int secondItemRewardQuantity, String quality,
 			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
 			int atkRequired, int minDmgDealt, int maxDmgDealt,
-			int durationMinMinutes, int durationMaxMinutes, int expReward) {
+			int durationMinMinutes, int durationMaxMinutes, int expReward,
+			int rewardIdOne, int rewardIdTwo, int rewardIdThree) {
 		super();
 		this.id = id;
 		this.requiredStructId = requiredStructId;
@@ -66,6 +71,10 @@ public class MiniJob implements Serializable {
 		this.durationMaxSeconds = durationMaxMinutes * 60;
 
 		this.expReward = expReward;
+		
+		this.rewardIdOne = rewardIdTwo;
+		this.rewardIdTwo = rewardIdTwo;
+		this.rewardIdThree = rewardIdThree;
 	}
 
 	//covenience methods--------------------------------------------------------
@@ -288,6 +297,30 @@ public class MiniJob implements Serializable {
 		this.expReward = expReward;
 	}
 
+	public int getRewardIdOne() {
+		return rewardIdOne;
+	}
+
+	public void setRewardIdOne(int rewardIdOne) {
+		this.rewardIdOne = rewardIdOne;
+	}
+
+	public int getRewardIdTwo() {
+		return rewardIdTwo;
+	}
+
+	public void setRewardIdTwo(int rewardIdTwo) {
+		this.rewardIdTwo = rewardIdTwo;
+	}
+
+	public int getRewardIdThree() {
+		return rewardIdThree;
+	}
+
+	public void setRewardIdThree(int rewardIdThree) {
+		this.rewardIdThree = rewardIdThree;
+	}
+
 	@Override
 	public String toString() {
 		return "MiniJob [id=" + id + ", requiredStructId=" + requiredStructId
@@ -303,7 +336,11 @@ public class MiniJob implements Serializable {
 				+ ", minDmgDealt=" + minDmgDealt + ", maxDmgDealt="
 				+ maxDmgDealt + ", durationMinMinutes=" + durationMinMinutes
 				+ ", durationMaxMinutes=" + durationMaxMinutes + ", expReward="
-				+ expReward + "]";
+				+ expReward + ", rand=" + rand + ", durationMinSeconds="
+				+ durationMinSeconds + ", durationMaxSeconds="
+				+ durationMaxSeconds + ", rewardIdOne=" + rewardIdOne
+				+ ", rewardIdTwo=" + rewardIdTwo + ", rewardIdThree="
+				+ rewardIdThree + "]";
 	}
 
 }
