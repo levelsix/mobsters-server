@@ -355,7 +355,7 @@ public class ReloadAllRareChangeStaticData {
 		skillSideEffectRetrieveUtils.reload();
 		salesDisplayItemRetrieveUtils.reload();
 		salesItemRetrieveUtils.reload();
-//		salesPackageRetrieveUtils.reload();
+		salesPackageRetrieveUtils.reload();
 		startupStuffRetrieveUtils.reload();
 		staticUserLevelInfoRetrieveUtils.reload();
 		structureBattleItemFactoryRetrieveUtils.reload();
