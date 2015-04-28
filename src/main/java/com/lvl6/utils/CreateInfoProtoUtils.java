@@ -49,8 +49,6 @@ import com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
-import com.lvl6.proto.ClanGiftsProto.ClanGiftProto;
-import com.lvl6.proto.ClanGiftsProto.ClanGiftRewardsProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
@@ -5174,7 +5172,7 @@ public class CreateInfoProtoUtils {
 
 	///////////////////////////////SALES PROTOS/////////////////////////////////////////////
 
-	public SalesPackageProto createSalesPackageProto(SalesPackage sp,
+	public static SalesPackageProto createSalesPackageProto(SalesPackage sp,
 			Collection<SalesItem> siList,
 			Collection<SalesDisplayItem> sdiList) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
@@ -5209,7 +5207,7 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
+	public static SalesItemProto createSalesItemProtoFromSalesItem(SalesItem si) {
 		SalesItemProto.Builder sipb = SalesItemProto.newBuilder();
 		sipb.setSalesItemId(si.getId());
 		sipb.setSalesPackageId(si.getSalesPackageId());
@@ -5221,7 +5219,7 @@ public class CreateInfoProtoUtils {
 		return sipb.build();
 	}
 
-	public SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
+	public static SalesDisplayItemProto createSalesDisplayItemProtoFromSalesDisplayItem(SalesDisplayItem sdi) {
 		SalesDisplayItemProto.Builder sdipb = SalesDisplayItemProto.newBuilder();
 		sdipb.setSalesItemId(sdi.getId());
 		sdipb.setSalesPackageId(sdi.getSalesPackageId());
@@ -5232,36 +5230,6 @@ public class CreateInfoProtoUtils {
 
 		return sdipb.build();
 	}
-
-	///////////////////////////////CLAN GIFTS PROTOS/////////////////////////////////////////////
-
-	public ClanGiftProto createClanGiftProto(ClanGift cg, Collection<ClanGiftRewards> cgrList) {
-		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
-		b.setClanGiftId(cg.getId());
-		b.setName(cg.getName());
-		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
-
-		if(cgrList != null) {
-			for(ClanGiftRewards cgr : cgrList) {
-				ClanGiftRewardsProto cgrp = createClanGiftRewardProtoFromClanGiftReward(cgr);
-				b.addClanGifts(cgrp);
-			}
-		}
-		return b.build();
-	}
-
-	public ClanGiftRewardsProto createClanGiftRewardProtoFromClanGiftReward(ClanGiftRewards cgr) {
-		ClanGiftRewardsProto.Builder cgrpb = ClanGiftRewardsProto.newBuilder();
-		cgrpb.setClanGiftRewardId(cgr.getId());
-		cgrpb.setClanGiftId(cgr.getClanGiftId());
-		cgrpb.setRewardId(cgr.getRewardId());
-		cgrpb.setChanceOfDrop(cgr.getChanceOfDrop());
-
-		return cgrpb.build();
-	}
-
-
-
 
 
 

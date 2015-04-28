@@ -1700,7 +1700,7 @@ public class StartupController extends EventController {
 					}
 				}
 
-				SalesPackageProto spProto = createInfoProtoUtils
+				SalesPackageProto spProto = CreateInfoProtoUtils
 						.createSalesPackageProto(sp, salesItemsList, displayItems);
 				resBuilder.addSalesPackages(spProto);
 			}

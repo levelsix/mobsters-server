@@ -8,7 +8,6 @@ import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
-import "ClanGifts.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
 import "MiniEvent.proto";
@@ -147,8 +146,6 @@ message StartupResponseProto {
 	optional UserMiniEventProto userMiniEvent = 52;
 
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
-	
-	repeated UserClanGiftProto userClanGifts = 54;
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

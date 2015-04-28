@@ -8,7 +8,6 @@ import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
-import "ClanGifts.proto";
 import "Dev.proto";
 import "EventAchievement.proto";
 import "EventApns.proto";
@@ -192,8 +191,6 @@ enum EventProtocolRequest {
 	C_TRANSLATE_SELECT_MESSAGES_EVENT = 210;
 	C_UPDATE_USER_STRENGTH_EVENT = 211;
 	
-	C_COLLECT_CLAN_GIFTS = 212;
-	
 }
 
 enum EventProtocolResponse {
@@ -344,7 +341,6 @@ enum EventProtocolResponse {
 	S_TRANSLATE_SELECT_MESSAGES_EVENT = 210;
 	S_UPDATE_USER_STRENGTH_EVENT = 211;
 	
-	S_COLLECT_CLAN_GIFTS = 213;
 	
 	
 }
