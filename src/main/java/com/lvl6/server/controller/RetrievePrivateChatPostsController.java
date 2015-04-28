@@ -156,7 +156,6 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 						//convert private chat post to group chat message proto
 						for (PrivateChatPost pwp : recentPrivateChatPosts) {
-							log.info("private chat post id: " + pwp.getId());
 							String posterId = pwp.getPosterId();
 
 							long time = pwp.getTimeOfPost().getTime();
