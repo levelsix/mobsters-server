@@ -232,6 +232,9 @@ public class StartupController extends EventController {
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
 	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
 
 	@Autowired
@@ -1215,19 +1218,24 @@ public class StartupController extends EventController {
 			invalidUuids = true;
 		}
 
+				invalidUuids = false;
+			} catch (Exception e) {
+				log.error(String.format("UUID error. incorrect defenderId=%s",
+						defenderId), e);
+				invalidUuids = true;
+			}
 
+			//UUID checks
+			if (invalidUuids) {
+				return;
+			}
 
-		//UUID checks
-		if (invalidUuids) {
-			return;
+			//only lock real users
+			if (null != defenderUuid) {
+				getLocker().lockPlayer(defenderUuid,
+						this.getClass().getSimpleName());
+			}
 		}
-
-		//only lock real users
-		if (null != defenderUuid) {
-			getLocker().lockPlayer(defenderUuid,
-					this.getClass().getSimpleName());
-		}
-
 		try {
 			int attackerEloBefore = attackerPlfu.getElo();
 			int defenderEloBefore = 0;
