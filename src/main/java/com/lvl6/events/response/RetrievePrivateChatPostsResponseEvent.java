@@ -34,5 +34,9 @@ public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent {
 			RetrievePrivateChatPostsResponseProto retrievePrivateChatPostsResponseProto) {
 		this.retrievePrivateChatPostsResponseProto = retrievePrivateChatPostsResponseProto;
 	}
+	
+	public int eventSize() {
+		return retrievePrivateChatPostsResponseProto.getSerializedSize();
+	}
 
 }

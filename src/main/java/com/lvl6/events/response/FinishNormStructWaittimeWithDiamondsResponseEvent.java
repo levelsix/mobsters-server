@@ -36,5 +36,9 @@ public class FinishNormStructWaittimeWithDiamondsResponseEvent extends
 			FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto) {
 		this.finishNormStructWaittimeWithDiamondsResponseProto = finishNormStructWaittimeWithDiamondsResponseProto;
 	}
+	
+	public int eventSize() {
+		return finishNormStructWaittimeWithDiamondsResponseProto.getSerializedSize();
+	}
 
 }

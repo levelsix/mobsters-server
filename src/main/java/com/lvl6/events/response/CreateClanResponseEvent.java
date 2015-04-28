@@ -27,5 +27,9 @@ public class CreateClanResponseEvent extends NormalResponseEvent {
 			CreateClanResponseProto createClanResponseProto) {
 		this.createClanResponseProto = createClanResponseProto;
 	}
+	
+	public int eventSize() {
+		return createClanResponseProto.getSerializedSize();
+	}
 
 }

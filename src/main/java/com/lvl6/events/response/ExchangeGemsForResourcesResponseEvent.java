@@ -27,5 +27,9 @@ public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent {
 			ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto) {
 		this.exchangeGemsForResourcesResponseProto = exchangeGemsForResourcesResponseProto;
 	}
+	
+	public int eventSize() {
+		return exchangeGemsForResourcesResponseProto.getSerializedSize();
+	}
 
 }

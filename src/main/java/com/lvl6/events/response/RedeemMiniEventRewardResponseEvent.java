@@ -27,5 +27,9 @@ public class RedeemMiniEventRewardResponseEvent extends NormalResponseEvent {
 			RedeemMiniEventRewardResponseProto redeemMiniEventRewardResponseProto) {
 		this.redeemMiniEventRewardResponseProto = redeemMiniEventRewardResponseProto;
 	}
+	
+	public int eventSize() {
+		return redeemMiniEventRewardResponseProto.getSerializedSize();
+	}
 
 }

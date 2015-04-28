@@ -28,4 +28,7 @@ public class PerformResearchResponseEvent extends NormalResponseEvent {
 		this.performResearchResponseProto = performResearchResponseProto;
 	}
 
+	public int eventSize() {
+		return performResearchResponseProto.getSerializedSize();
+	}
 }

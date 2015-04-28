@@ -27,5 +27,9 @@ public class EvolveMonsterResponseEvent extends NormalResponseEvent {
 			EvolveMonsterResponseProto evolveMonsterResponseProto) {
 		this.evolveMonsterResponseProto = evolveMonsterResponseProto;
 	}
+	
+	public int eventSize() {
+		return evolveMonsterResponseProto.getSerializedSize();
+	}
 
 }

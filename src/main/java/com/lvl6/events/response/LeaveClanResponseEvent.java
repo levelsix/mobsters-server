@@ -27,5 +27,9 @@ public class LeaveClanResponseEvent extends NormalResponseEvent {
 			LeaveClanResponseProto leaveClanResponseProto) {
 		this.leaveClanResponseProto = leaveClanResponseProto;
 	}
+	
+	public int eventSize() {
+		return leaveClanResponseProto.getSerializedSize();
+	}
 
 }

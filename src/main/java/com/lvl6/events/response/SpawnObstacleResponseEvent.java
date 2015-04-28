@@ -27,5 +27,9 @@ public class SpawnObstacleResponseEvent extends NormalResponseEvent {
 			SpawnObstacleResponseProto spawnObstacleResponseProto) {
 		this.spawnObstacleResponseProto = spawnObstacleResponseProto;
 	}
+	
+	public int eventSize() {
+		return spawnObstacleResponseProto.getSerializedSize();
+	}
 
 }

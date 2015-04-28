@@ -27,5 +27,9 @@ public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent 
 			CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto) {
 		this.collectMonsterEnhancementResponseProto = collectMonsterEnhancementResponseProto;
 	}
+	
+	public int eventSize() {
+		return collectMonsterEnhancementResponseProto.getSerializedSize();
+	}
 
 }

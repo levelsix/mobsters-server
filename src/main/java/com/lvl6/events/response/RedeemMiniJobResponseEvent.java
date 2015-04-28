@@ -27,5 +27,9 @@ public class RedeemMiniJobResponseEvent extends NormalResponseEvent {
 			RedeemMiniJobResponseProto redeemMiniJobResponseProto) {
 		this.redeemMiniJobResponseProto = redeemMiniJobResponseProto;
 	}
+	
+	public int eventSize() {
+		return redeemMiniJobResponseProto.getSerializedSize();
+	}
 
 }
