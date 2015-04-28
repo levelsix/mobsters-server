@@ -26,7 +26,7 @@ public class StaticUserLevelInfoRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STATIC_LEVEL_INFO_CONFIG;
 
-	public Map<Integer, StaticUserLevelInfo> getAllStaticUserLevelInfo() {
+	public static Map<Integer, StaticUserLevelInfo> getAllStaticUserLevelInfo() {
 		log.debug("retrieving all static level info");
 		if (levelToStaticLevelInfo == null) {
 			setStaticLevelInfo();
@@ -34,7 +34,7 @@ public class StaticUserLevelInfoRetrieveUtils {
 		return levelToStaticLevelInfo;
 	}
 
-	public StaticUserLevelInfo getStaticLevelInfoForLevel(int level) {
+	public static StaticUserLevelInfo getStaticLevelInfoForLevel(int level) {
 		log.debug("retrieving static level info for a level. level=" + level);
 		if (levelToStaticLevelInfo == null) {
 			setStaticLevelInfo();
@@ -42,7 +42,7 @@ public class StaticUserLevelInfoRetrieveUtils {
 		return levelToStaticLevelInfo.get(level);
 	}
 
-	private void setStaticLevelInfo() {
+	private static void setStaticLevelInfo() {
 		log.debug("setting static set of static level info");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -76,14 +76,14 @@ public class StaticUserLevelInfoRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticLevelInfo();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StaticUserLevelInfo convertRSRowToStaticLevelInfo(
+	private static StaticUserLevelInfo convertRSRowToStaticLevelInfo(
 			ResultSet rs) throws SQLException {
 		int lvl = rs.getInt(DBConstants.STATIC_LEVEL_INFO__LEVEL_ID);
 		int requiredExp = rs

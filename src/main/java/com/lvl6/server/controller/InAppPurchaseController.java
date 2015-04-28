@@ -21,7 +21,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.SalesPackage;
+import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.IAPValues;
@@ -34,19 +34,9 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
-import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
-import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
-import com.lvl6.server.controller.actionobjects.InAppPurchaseStarterPackAction;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -62,12 +52,6 @@ public class InAppPurchaseController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-
-	@Autowired
-	protected MiscMethods miscMethods;
-
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -90,28 +74,6 @@ public class InAppPurchaseController extends EventController {
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 
-	@Autowired
-	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-
-	@Autowired
-	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-
-	@Autowired
-	protected SalesItemRetrieveUtils salesItemRetrieveUtils;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
-
-	@Autowired
-	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
-
-
 	public InAppPurchaseController() {
 		numAllocatedThreads = 2;
 	}
@@ -125,11 +87,6 @@ public class InAppPurchaseController extends EventController {
 	public EventProtocolRequest getEventType() {
 		return EventProtocolRequest.C_IN_APP_PURCHASE_EVENT;
 	}
-
-	private SalesPackage salesPackage;
-	private boolean isStarterPack = false;
-	private boolean isMoneyTree = false;
-	private boolean isSalesPack = false;
 
 	/*
 	 * db stuff done before sending event to eventwriter/client because the
@@ -146,12 +103,6 @@ public class InAppPurchaseController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String receipt = reqProto.getReceipt();
-		boolean hasUuid = reqProto.hasUuid();
-		String uuid = null;
-
-		if(hasUuid) {
-			uuid = reqProto.getUuid();
-		}
 
 		InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto
 				.newBuilder();
@@ -237,7 +188,7 @@ public class InAppPurchaseController extends EventController {
 			JSONObject receiptFromApple = null;
 			if (response.getInt(IAPValues.STATUS) == 0) {
 				receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-				writeChangesToDb(userId, resBuilder, user, receiptFromApple, uuid);
+				writeChangesToDb(userId, resBuilder, user, receiptFromApple);
 			} else {
 				log.error(
 						"problem with in-app purchase that client sent, with receipt {}",
@@ -268,7 +219,7 @@ public class InAppPurchaseController extends EventController {
 			}*/
 
 			//null PvpLeagueFromUser means will pull from hazelcast instead
-			UpdateClientUserResponseEvent resEventUpdate = miscMethods
+			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 							user, null, null);
 			resEventUpdate.setTag(event.getTag());
@@ -301,7 +252,7 @@ public class InAppPurchaseController extends EventController {
 
 	private void writeChangesToDb(String userId,
 			InAppPurchaseResponseProto.Builder resBuilder, User user,
-			JSONObject receiptFromApple, String uuid) {
+			JSONObject receiptFromApple) {
 		try {
 			String packageName = receiptFromApple
 					.getString(IAPValues.PRODUCT_ID);
@@ -309,71 +260,12 @@ public class InAppPurchaseController extends EventController {
 					.getCashSpentForPackageName(packageName);
 
 			Date now = new Date();
+			InAppPurchaseAction iapa = new InAppPurchaseAction(userId, user,
+					receiptFromApple, packageName, now, iapHistoryRetrieveUtil,
+					itemForUserRetrieveUtil, structureForUserRetrieveUtils2,
+					insertUtil, updateUtil);
 
-			InAppPurchaseAction iapa = null;
-			InAppPurchaseSalesAction iapsa = null;
-			InAppPurchaseStarterPackAction iapspa = null;
-			InAppPurchaseMoneyTreeAction iapmta = null;
-
-			if(IAPValues.packageIsStarterPack(packageName)) {
-//				isStarterPack = true;
-//				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-//						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-//						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-//						boosterItemRetrieveUtils, monsterRetrieveUtils,
-//						monsterLevelInfoRetrieveUtils);
-//
-//				iapspa.execute(resBuilder);
-
-				//for testing
-				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
-
-				for(String name : salesPackageNamesToSalesPackages.keySet()) {
-					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
-					if(sp.getUuid().equals(uuid)) {
-						salesPackage = sp;
-						log.info("found sales pack");
-					}
-				}
-
-				isSalesPack = true;
-				iapsa = new InAppPurchaseSalesAction(userId,
-						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-						salesPackage);
-
-				iapsa.execute(resBuilder);
-			}
-			else if(IAPValues.packageIsMoneyTree(packageName)) {
-				isMoneyTree = true;
-				iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
-						iapHistoryRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
-						createInfoProtoUtils, miscMethods, structureMoneyTreeRetrieveUtils,
-						structureForUserRetrieveUtils);
-
-				iapmta.execute(resBuilder);
-			}
-			else if(packageIsSalesPackage(packageName, uuid)) {
-				isSalesPack = true;
-				iapsa = new InAppPurchaseSalesAction(userId,
-						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-						salesPackage);
-
-				iapsa.execute(resBuilder);
-			}
-			else {
-				iapa = new InAppPurchaseAction(userId, user, receiptFromApple, now,
-						uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
-						miscMethods);
-
-				iapa.execute(resBuilder);
-			}
+			iapa.execute(resBuilder);
 
 			if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS)) {
 				resBuilder.setPackageName(packageName);
@@ -384,74 +276,27 @@ public class InAppPurchaseController extends EventController {
 						userId, packageName);
 
 				Timestamp date = new Timestamp(now.getTime());
-				if(isStarterPack) {
-					writeToUserCurrencyHistory(userId, date, null, iapspa, null, null);
-				}
-				else if(isMoneyTree) {
-					writeToUserCurrencyHistory(userId, date, null, null, iapmta, null);
-				}
-				else if(isSalesPack) {
-					writeToUserCurrencyHistory(userId, date, null, null, null, iapsa);
-				}
-				else {
-					writeToUserCurrencyHistory(userId, date, iapa, null, null, null);
-				}
+				writeToUserCurrencyHistory(userId, date, iapa);
 			}
 		} catch (Exception e) {
 			log.error("problem with in app purchase flow", e);
 		}
 	}
 
-	public boolean packageIsSalesPackage(String packageName, String uuid) {
-		Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-				salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
+	private StructureMoneyTree getStructureMoneyTreeForIAPProductId(
+			String iapProductId) {
+		Map<Integer, StructureMoneyTree> structIdsToMoneyTrees = StructureMoneyTreeRetrieveUtils
+				.getStructIdsToMoneyTrees();
+		log.info(structIdsToMoneyTrees.toString());
 
-		for(String name : salesPackageNamesToSalesPackages.keySet()) {
-			SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
-			if(name.equalsIgnoreCase(packageName) && sp.getUuid().equals(uuid)) {
-				salesPackage = sp;
-				return true;
+		for (Integer i : structIdsToMoneyTrees.keySet()) {
+			StructureMoneyTree smt = structIdsToMoneyTrees.get(i);
+			if (smt.getIapProductId().equals(iapProductId)) {
+				return smt;
 			}
 		}
-		log.info("packagename {} does not exist in table of sales packages",
-				packageName);
-		return false;
+		return null;
 	}
-
-	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-			InAppPurchaseAction iapa, InAppPurchaseStarterPackAction iapspa,
-			InAppPurchaseMoneyTreeAction iapmta, InAppPurchaseSalesAction iapsa) {
-
-		if(iapa != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
-					iapa.getCurrentCurrencies(), iapa.getReasons(),
-					iapa.getDetails());
-		}
-
-		if(iapspa != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapspa.getCurrencyDeltas(), iapspa.getPrevCurrencies(),
-					iapspa.getCurCurrencies(), iapspa.getReasonsForChanges(),
-					iapspa.getDetails());
-		}
-
-		if(iapmta != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapmta.getCurrencyDeltas(), iapmta.getPrevCurrencies(),
-					iapmta.getCurCurrencies(), iapmta.getReasonsForChanges(),
-					iapmta.getDetails());
-		}
-
-		if(iapsa != null) {
-			miscMethods.writeToUserCurrencyOneUser(userId, date,
-					iapsa.getCurrencyDeltas(), iapsa.getPrevCurrencies(),
-					iapsa.getCurCurrencies(), iapsa.getReasonsForChanges(),
-					iapsa.getDetails());
-		}
-
-	}
-
 
 	/*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
 	log.info("Posting to Kabam");
@@ -533,7 +378,14 @@ public class InAppPurchaseController extends EventController {
 	//		return sb.toString();
 	//	}
 
+	private void writeToUserCurrencyHistory(String userId, Timestamp date,
+			InAppPurchaseAction iapa) {
 
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+				iapa.getCurrencyDeltas(), iapa.getPreviousCurrencies(),
+				iapa.getCurrentCurrencies(), iapa.getReasons(),
+				iapa.getDetails());
+	}
 
 	public Locker getLocker() {
 		return locker;

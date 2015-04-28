@@ -31,9 +31,6 @@ public class MessagingUtil {
 
 	@Autowired
 	EventWriter eventWriter;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public EventWriter getEventWriter() {
 		return eventWriter;
@@ -57,14 +54,14 @@ public class MessagingUtil {
 	public MinimumUserProto getAlexUserProto() {
 		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
 				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(alex,
+		return CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(alex,
 				null);
 	}
 
 	public MinimumUserProtoWithLevel getAlexUserProtoWithLvl() {
 		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
 				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return createInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null,
+		return CreateInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null,
 				null);
 	}
 
@@ -128,7 +125,7 @@ public class MessagingUtil {
 		ce.setTag(tag);
 		log.info("Sending global chat ");
 		//add new message to front of list
-		chatMessages.add(0, createInfoProtoUtils.createGroupChatMessageProto(
+		chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(
 				time, chatProto.getSender(), chatProto.getChatMessage(), true,
 				null, null, null));
 		eventWriter.processGlobalChatResponseEvent(ce);

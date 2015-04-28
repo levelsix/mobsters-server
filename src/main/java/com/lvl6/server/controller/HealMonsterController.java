@@ -55,9 +55,6 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
@@ -71,9 +68,6 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
 
 	public HealMonsterController() {
 		numAllocatedThreads = 4;
@@ -111,18 +105,18 @@ public class HealMonsterController extends EventController {
 		int gemsForSpeedup = reqProto.getGemsForSpeedup();
 		List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 		Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
-		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
+		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
 				umchpList, userMonsterIdToExpectedHealth);
 
 		int gemCost = gemCostForHealing + gemsForSpeedup;//reqProto.getTotalGemCost();
 		Timestamp curTime = new Timestamp((new Date()).getTime());
 		int maxCash = senderResourcesProto.getMaxCash();
 
-		Map<String, UserMonsterHealingProto> deleteMap = monsterStuffUtils
+		Map<String, UserMonsterHealingProto> deleteMap = MonsterStuffUtils
 				.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
-		Map<String, UserMonsterHealingProto> updateMap = monsterStuffUtils
+		Map<String, UserMonsterHealingProto> updateMap = MonsterStuffUtils
 				.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
-		Map<String, UserMonsterHealingProto> newMap = monsterStuffUtils
+		Map<String, UserMonsterHealingProto> newMap = MonsterStuffUtils
 				.convertIntoUserMonsterIdToUmhpProtoMap(umhNew);
 
 		log.info(String
@@ -215,7 +209,7 @@ public class HealMonsterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -312,32 +306,32 @@ public class HealMonsterController extends EventController {
 		boolean keepThingsInDomain = true;
 		boolean keepThingsNotInDomain = false;
 		Set<String> alreadyHealingIds = alreadyHealing.keySet();
-		monsterStuffUtils.retainValidMonsters(alreadyHealingIds, deleteMap,
+		MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, deleteMap,
 				keepThingsInDomain, keepThingsNotInDomain);
-		monsterStuffUtils.retainValidMonsters(alreadyHealingIds, updateMap,
+		MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, updateMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//retain only the userMonsters, the client sent, that are in the db
 		Set<String> existingIds = existingUserMonsters.keySet();
-		monsterStuffUtils.retainValidMonsters(existingIds, newMap,
+		MonsterStuffUtils.retainValidMonsters(existingIds, newMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//retain only the userMonsters, the client sent, that are not in enhancing
 		keepThingsInDomain = false;
 		keepThingsNotInDomain = true;
 		Set<String> alreadyEnhancingIds = alreadyEnhancing.keySet();
-		monsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap,
+		MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//retain only the userMonsters, the client sent, that are not in evolutions
-		Set<String> idsInEvolutions = monsterStuffUtils
+		Set<String> idsInEvolutions = MonsterStuffUtils
 				.getUserMonsterIdsUsedInEvolution(evolution, null);
-		monsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap,
+		MonsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap,
 				keepThingsInDomain, keepThingsNotInDomain);
 
 		//FROM HealMonsterWaitTimeComplete CONTROLLER
 		//modify healedUp to contain only those that exist
-		monsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
+		MonsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
 
 		return true;
 	}
@@ -408,17 +402,17 @@ public class HealMonsterController extends EventController {
 			} else {
 				//things went ok
 				if (0 != cashChange) {
-					moneyForHealing.put(miscMethods.cash, cashChange);
-					changeMap.put(miscMethods.cash, cashChange);
+					moneyForHealing.put(MiscMethods.cash, cashChange);
+					changeMap.put(MiscMethods.cash, cashChange);
 				}
 				if (0 != gemCostForHealing) {
-					moneyForHealing.put(miscMethods.gems, gemCostForHealing);
+					moneyForHealing.put(MiscMethods.gems, gemCostForHealing);
 				}
 				if (0 != gemsForSpeedup) {
-					moneyForSpeedup.put(miscMethods.gems, gemsForSpeedup);
+					moneyForSpeedup.put(MiscMethods.gems, gemsForSpeedup);
 				}
 				if (0 != gemCost) {
-					changeMap.put(miscMethods.gems, gemChange);
+					changeMap.put(MiscMethods.gems, gemChange);
 				}
 
 			}
@@ -437,9 +431,9 @@ public class HealMonsterController extends EventController {
 		}
 
 		//convert protos to java counterparts
-		List<MonsterHealingForUser> updateList = monsterStuffUtils
+		List<MonsterHealingForUser> updateList = MonsterStuffUtils
 				.convertToMonsterHealingForUser(uId, protoUpdateMap);
-		List<MonsterHealingForUser> newList = monsterStuffUtils
+		List<MonsterHealingForUser> newList = MonsterStuffUtils
 				.convertToMonsterHealingForUser(uId, protoNewMap);
 
 		List<MonsterHealingForUser> updateAndNew = new ArrayList<MonsterHealingForUser>();
@@ -508,8 +502,8 @@ public class HealMonsterController extends EventController {
 		StringBuilder reasonForChange = new StringBuilder();
 		reasonForChange
 				.append(ControllerConstants.UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING);
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
 
 		StringBuilder detailSb = new StringBuilder();
 		if (!moneyForHealing.isEmpty()) {
@@ -560,7 +554,7 @@ public class HealMonsterController extends EventController {
 		details.put(gems, detailSb.toString());
 		details.put(cash, detailSb.toString());
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				details);
 

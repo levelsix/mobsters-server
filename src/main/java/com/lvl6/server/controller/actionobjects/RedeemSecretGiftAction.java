@@ -3,13 +3,17 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.User;
@@ -19,7 +23,7 @@ import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretG
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.controller.utils.SecretGiftUtils;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -34,7 +38,6 @@ public class RedeemSecretGiftAction {
 	private ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private SecretGiftUtils secretGiftUtils;
 	private DeleteUtil deleteUtil;
 	private UpdateUtil updateUtil;
 	private InsertUtil insertUtil;
@@ -46,7 +49,6 @@ public class RedeemSecretGiftAction {
 			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			SecretGiftUtils secretGiftUtils,
 			DeleteUtil deleteUtil, UpdateUtil updateUtil, InsertUtil insertUtil) {
 		super();
 		this.userId = userId;
@@ -55,7 +57,6 @@ public class RedeemSecretGiftAction {
 		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-		this.secretGiftUtils = secretGiftUtils;
 		this.deleteUtil = deleteUtil;
 		this.updateUtil = updateUtil;
 		this.insertUtil = insertUtil;
@@ -89,7 +90,55 @@ public class RedeemSecretGiftAction {
 	//	private Map<String, String> details;
 
 	//select items at random to gift to the user
-	
+	public static List<ItemSecretGiftForUser> calculateGiftsForUser(
+			String userId, int numGifts, long now) {
+		List<ItemSecretGiftForUser> gifts = new ArrayList<ItemSecretGiftForUser>();
+
+		//random to select an item
+		Random rand = ControllerConstants.RAND;
+
+		//chi random to calculate seconds till collection
+		ChiSquaredDistribution randChi = ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__RANDOM;
+
+		//(round((chisq(df = 4)^3) * 6.5)+329)
+		for (int giftI = 0; giftI < numGifts; giftI++) {
+			float randFloat = rand.nextFloat();
+			Item secretGift = ItemRetrieveUtils.nextItem(randFloat);
+
+			ItemSecretGiftForUser isgfu = new ItemSecretGiftForUser();
+			isgfu.setUserId(userId);
+			isgfu.setItemId(secretGift.getId());
+
+			//so the client knows which item came first
+			Date newTime = new Date(now + giftI * 1000);
+			isgfu.setCreateTime(newTime);
+
+			double randDoub = randChi.sample();
+			log.info(String.format("randDoub=%s", randDoub));
+
+			randDoub = Math.pow(randDoub, 3D);
+			log.info(String.format("(randDoub ^ 3)=%s", randDoub));
+
+			double waitTimeSecs = randDoub * 6.5 + 329;
+			log.info(String.format("uncapped waitTimeSecs=%s", waitTimeSecs));
+
+			//(round((chisq(df = 4)^3) * 6.5)+329)
+			waitTimeSecs = Math
+					.min(waitTimeSecs,
+							ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME);
+			//			waitTimeSecs = Math.max(waitTimeSecs, ControllerConstants
+			//				.ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME);
+			log.info(String.format("capped waitTimeSecs=%s", waitTimeSecs));
+
+			isgfu.setSecsTillCollection((int) Math.round(waitTimeSecs));
+
+			log.info(String.format("gift=%s", isgfu));
+
+			gifts.add(isgfu);
+		}
+
+		return gifts;
+	}
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
@@ -181,7 +230,7 @@ public class RedeemSecretGiftAction {
 				numUpdated, itemIdToUserItem));
 
 		//create new SecretGifts
-		gifts = secretGiftUtils.calculateGiftsForUser(userId,
+		gifts = calculateGiftsForUser(userId,
 				ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
 				clientTime.getTime());
 

@@ -41,9 +41,6 @@ public class TransferClanOwnershipController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
@@ -261,14 +258,14 @@ public class TransferClanOwnershipController extends EventController {
 		Map<String, Integer> clanIdToSize = getUserClanRetrieveUtils()
 				.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
 
-		resBuilder.setMinClan(createInfoProtoUtils
+		resBuilder.setMinClan(CreateInfoProtoUtils
 				.createMinimumClanProtoFromClan(clan));
 
 		int size = clanIdToSize.get(clanId);
-		resBuilder.setFullClan(createInfoProtoUtils
+		resBuilder.setFullClan(CreateInfoProtoUtils
 				.createFullClanProtoWithClanSize(clan, size));
 
-		MinimumUserProto mup = createInfoProtoUtils
+		MinimumUserProto mup = CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(newClanOwner, clan);
 		resBuilder.setClanOwnerNew(mup);
 	}

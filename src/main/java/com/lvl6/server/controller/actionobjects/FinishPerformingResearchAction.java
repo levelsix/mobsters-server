@@ -28,13 +28,11 @@ public class FinishPerformingResearchAction {
 	private Date now;
 	protected UpdateUtil updateUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-	private MiscMethods miscMethods;
 
 	public FinishPerformingResearchAction(String userId, User user,
 			String userResearchUuid, int gemsCost, Date now,
 			UpdateUtil updateUtil,
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
-			MiscMethods miscMethods) {
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -43,7 +41,6 @@ public class FinishPerformingResearchAction {
 		this.now = now;
 		this.updateUtil = updateUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
-		this.miscMethods = miscMethods;
 	}
 
 	private Map<String, Integer> currencyDeltas;
@@ -137,7 +134,7 @@ public class FinishPerformingResearchAction {
 		}
 
 		if (gemsCost > 0) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
+			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			updateUserCurrency();
 			prepCurrencyHistory();
 		}
@@ -155,7 +152,7 @@ public class FinishPerformingResearchAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

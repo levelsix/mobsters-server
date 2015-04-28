@@ -26,7 +26,7 @@ public class BoosterPackRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_PACK_CONFIG;
 
-	public Map<Integer, BoosterPack> getBoosterPackIdsToBoosterPacks() {
+	public static Map<Integer, BoosterPack> getBoosterPackIdsToBoosterPacks() {
 		log.debug("retrieving all booster packs data map");
 		if (boosterPackIdsToBoosterPacks == null) {
 			setStaticBoosterPackIdsToBoosterPacks();
@@ -48,7 +48,7 @@ public class BoosterPackRetrieveUtils {
 	//    return returnValue;
 	//  }
 
-	public BoosterPack getBoosterPackForBoosterPackId(int boosterPackId) {
+	public static BoosterPack getBoosterPackForBoosterPackId(int boosterPackId) {
 		log.debug("retrieve booster pack data for booster pack "
 				+ boosterPackId);
 		if (boosterPackIdsToBoosterPacks == null) {
@@ -57,7 +57,7 @@ public class BoosterPackRetrieveUtils {
 		return boosterPackIdsToBoosterPacks.get(boosterPackId);
 	}
 
-	private void setStaticBoosterPackIdsToBoosterPacks() {
+	private static void setStaticBoosterPackIdsToBoosterPacks() {
 		log.debug("setting static map of boosterPackIds to boosterPacks");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -91,14 +91,14 @@ public class BoosterPackRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticBoosterPackIdsToBoosterPacks();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private BoosterPack convertRSRowToBoosterPack(ResultSet rs)
+	private static BoosterPack convertRSRowToBoosterPack(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.BOOSTER_PACK__ID);
 		String name = rs.getString(DBConstants.BOOSTER_PACK__NAME);

@@ -864,7 +864,6 @@ public final class ItemsProto {
     boolean getAlwaysDisplayToUser();
 
     /**
-<<<<<<< HEAD
      * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
      */
     boolean hasActionGameType();
@@ -872,15 +871,6 @@ public final class ItemsProto {
      * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
      */
     com.lvl6.proto.SharedEnumConfigProto.GameType getActionGameType();
-=======
-     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-     */
-    boolean hasGameActionType();
-    /**
-     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-     */
-    com.lvl6.proto.SharedEnumConfigProto.GameActionType getGameActionType();
->>>>>>> master_with_mini_events_for_testing
 
     /**
      * <code>optional string shortName = 10;</code>
@@ -998,16 +988,12 @@ public final class ItemsProto {
             }
             case 72: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.GameActionType value = com.lvl6.proto.SharedEnumConfigProto.GameActionType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.GameType value = com.lvl6.proto.SharedEnumConfigProto.GameType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(9, rawValue);
               } else {
                 bitField0_ |= 0x00000100;
-<<<<<<< HEAD
                 actionGameType_ = value;
-=======
-                gameActionType_ = value;
->>>>>>> master_with_mini_events_for_testing
               }
               break;
             }
@@ -1239,7 +1225,6 @@ public final class ItemsProto {
       return alwaysDisplayToUser_;
     }
 
-<<<<<<< HEAD
     public static final int ACTIONGAMETYPE_FIELD_NUMBER = 9;
     private com.lvl6.proto.SharedEnumConfigProto.GameType actionGameType_;
     /**
@@ -1253,21 +1238,6 @@ public final class ItemsProto {
      */
     public com.lvl6.proto.SharedEnumConfigProto.GameType getActionGameType() {
       return actionGameType_;
-=======
-    public static final int GAMEACTIONTYPE_FIELD_NUMBER = 9;
-    private com.lvl6.proto.SharedEnumConfigProto.GameActionType gameActionType_;
-    /**
-     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-     */
-    public boolean hasGameActionType() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-     */
-    public com.lvl6.proto.SharedEnumConfigProto.GameActionType getGameActionType() {
-      return gameActionType_;
->>>>>>> master_with_mini_events_for_testing
     }
 
     public static final int SHORTNAME_FIELD_NUMBER = 10;
@@ -1321,11 +1291,7 @@ public final class ItemsProto {
       amount_ = 0;
       secretGiftChance_ = 0F;
       alwaysDisplayToUser_ = false;
-<<<<<<< HEAD
       actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
-=======
-      gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
->>>>>>> master_with_mini_events_for_testing
       shortName_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -1366,11 +1332,7 @@ public final class ItemsProto {
         output.writeBool(8, alwaysDisplayToUser_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-<<<<<<< HEAD
         output.writeEnum(9, actionGameType_.getNumber());
-=======
-        output.writeEnum(9, gameActionType_.getNumber());
->>>>>>> master_with_mini_events_for_testing
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(10, getShortNameBytes());
@@ -1418,11 +1380,7 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-<<<<<<< HEAD
           .computeEnumSize(9, actionGameType_.getNumber());
-=======
-          .computeEnumSize(9, gameActionType_.getNumber());
->>>>>>> master_with_mini_events_for_testing
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1561,11 +1519,7 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         alwaysDisplayToUser_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
-<<<<<<< HEAD
         actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
-=======
-        gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
->>>>>>> master_with_mini_events_for_testing
         bitField0_ = (bitField0_ & ~0x00000100);
         shortName_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
@@ -1632,11 +1586,7 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-<<<<<<< HEAD
         result.actionGameType_ = actionGameType_;
-=======
-        result.gameActionType_ = gameActionType_;
->>>>>>> master_with_mini_events_for_testing
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
@@ -1685,13 +1635,8 @@ public final class ItemsProto {
         if (other.hasAlwaysDisplayToUser()) {
           setAlwaysDisplayToUser(other.getAlwaysDisplayToUser());
         }
-<<<<<<< HEAD
         if (other.hasActionGameType()) {
           setActionGameType(other.getActionGameType());
-=======
-        if (other.hasGameActionType()) {
-          setGameActionType(other.getGameActionType());
->>>>>>> master_with_mini_events_for_testing
         }
         if (other.hasShortName()) {
           bitField0_ |= 0x00000200;
@@ -2088,7 +2033,6 @@ public final class ItemsProto {
         return this;
       }
 
-<<<<<<< HEAD
       private com.lvl6.proto.SharedEnumConfigProto.GameType actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
       /**
        * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
@@ -2106,51 +2050,20 @@ public final class ItemsProto {
        * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
        */
       public Builder setActionGameType(com.lvl6.proto.SharedEnumConfigProto.GameType value) {
-=======
-      private com.lvl6.proto.SharedEnumConfigProto.GameActionType gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
-      /**
-       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-       */
-      public boolean hasGameActionType() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-       */
-      public com.lvl6.proto.SharedEnumConfigProto.GameActionType getGameActionType() {
-        return gameActionType_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-       */
-      public Builder setGameActionType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
->>>>>>> master_with_mini_events_for_testing
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000100;
-<<<<<<< HEAD
         actionGameType_ = value;
-=======
-        gameActionType_ = value;
->>>>>>> master_with_mini_events_for_testing
         onChanged();
         return this;
       }
       /**
-<<<<<<< HEAD
        * <code>optional .com.lvl6.proto.GameType actionGameType = 9;</code>
        */
       public Builder clearActionGameType() {
         bitField0_ = (bitField0_ & ~0x00000100);
         actionGameType_ = com.lvl6.proto.SharedEnumConfigProto.GameType.NO_TYPE;
-=======
-       * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
-       */
-      public Builder clearGameActionType() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
->>>>>>> master_with_mini_events_for_testing
         onChanged();
         return this;
       }
@@ -4244,16 +4157,11 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
-<<<<<<< HEAD
       "\005\"\210\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
-=======
-      "\005\"\216\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
->>>>>>> master_with_mini_events_for_testing
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
       "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
       "ance\030\007 \001(\002\022\033\n\023alwaysDisplayToUser\030\010 \001(\010\022" +
-<<<<<<< HEAD
       "0\n\016actionGameType\030\t \001(\0162\030.com.lvl6.proto" +
       ".GameType\022\021\n\tshortName\030\n \001(\t\"\261\001\n\022UserIte",
       "mUsageProto\022\021\n\tusageUuid\030\001 \001(\t\022\020\n\010userUu" +
@@ -4266,21 +4174,6 @@ public final class ItemsProto {
       "reateTime\030\005 \001(\003*T\n\010ItemType\022\020\n\014BOOSTER_P" +
       "ACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SP" +
       "EED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\nItemsProto"
-=======
-      "6\n\016gameActionType\030\t \001(\0162\036.com.lvl6.proto" +
-      ".GameActionType\022\021\n\tshortName\030\n \001(\t\"\261\001\n\022U",
-      "serItemUsageProto\022\021\n\tusageUuid\030\001 \001(\t\022\020\n\010" +
-      "userUuid\030\002 \001(\t\022\016\n\006itemId\030\003 \001(\005\022\023\n\013timeOf" +
-      "Entry\030\004 \001(\003\022\024\n\014userDataUuid\030\005 \001(\t\022;\n\nact" +
-      "ionType\030\006 \001(\0162\036.com.lvl6.proto.GameActio" +
-      "nType:\007NO_HELP\"}\n\027UserItemSecretGiftProt" +
-      "o\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n" +
-      "\022secsTillCollection\030\003 \001(\005\022\016\n\006itemId\030\004 \001(" +
-      "\005\022\022\n\ncreateTime\030\005 \001(\003*T\n\010ItemType\022\020\n\014BOO" +
-      "STER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003" +
-      "\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005B\014B\nItemsProt",
-      "o"
->>>>>>> master_with_mini_events_for_testing
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4306,11 +4199,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-<<<<<<< HEAD
         new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "ActionGameType", "ShortName", });
-=======
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "GameActionType", "ShortName", });
->>>>>>> master_with_mini_events_for_testing
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new

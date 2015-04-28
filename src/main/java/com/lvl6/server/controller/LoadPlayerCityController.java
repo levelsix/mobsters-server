@@ -39,9 +39,6 @@ public class LoadPlayerCityController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
@@ -141,7 +138,7 @@ public class LoadPlayerCityController extends EventController {
 				if (clanId != null) {
 					clan = getClanRetrieveUtils().getClanWithId(clanId);
 				}
-				resBuilder.setCityOwner(createInfoProtoUtils
+				resBuilder.setCityOwner(CreateInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(owner, clan));
 			}
 
@@ -175,7 +172,7 @@ public class LoadPlayerCityController extends EventController {
 		if (userStructs != null) {
 			for (StructureForUser userStruct : userStructs) {
 				resBuilder
-						.addOwnerNormStructs(createInfoProtoUtils
+						.addOwnerNormStructs(CreateInfoProtoUtils
 								.createFullUserStructureProtoFromUserstruct(userStruct));
 			}
 		} else {
@@ -193,7 +190,7 @@ public class LoadPlayerCityController extends EventController {
 		}
 
 		for (ObstacleForUser ofu : ofuList) {
-			UserObstacleProto uop = createInfoProtoUtils
+			UserObstacleProto uop = CreateInfoProtoUtils
 					.createUserObstacleProto(ofu);
 			resBuilder.addObstacles(uop);
 		}

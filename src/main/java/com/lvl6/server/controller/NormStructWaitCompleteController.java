@@ -41,18 +41,12 @@ public class NormStructWaitCompleteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public NormStructWaitCompleteController() {
 		numAllocatedThreads = 5;
@@ -141,7 +135,7 @@ public class NormStructWaitCompleteController extends EventController {
 								userStructIds);
 				for (StructureForUser userStruct : newUserStructs) {
 					resBuilder
-							.addUserStruct(createInfoProtoUtils
+							.addUserStruct(CreateInfoProtoUtils
 									.createFullUserStructureProtoFromUserstruct(userStruct));
 				}
 			}
@@ -221,7 +215,7 @@ public class NormStructWaitCompleteController extends EventController {
 			List<String> validUserStructIds,
 			List<StructureForUser> validUserStructs) {
 		List<Timestamp> timesBuildsFinished = new ArrayList<Timestamp>();
-		Map<Integer, Structure> structures = structureRetrieveUtils
+		Map<Integer, Structure> structures = StructureRetrieveUtils
 				.getStructIdsToStructs();
 
 		for (StructureForUser us : userStructs) {
@@ -279,7 +273,7 @@ public class NormStructWaitCompleteController extends EventController {
 		int expReward = 0;
 		for (StructureForUser sfu : buildsDone) {
 			int structId = sfu.getStructId();
-			Structure s = structureRetrieveUtils.getStructForStructId(structId);
+			Structure s = StructureRetrieveUtils.getStructForStructId(structId);
 			expReward += s.getExpReward();
 		}
 

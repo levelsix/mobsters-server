@@ -32,7 +32,7 @@ public class MiniJobRetrieveUtils {
 	//CONTROLLER LOGIC******************************************************************
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Integer, MiniJob> getMiniJobIdsToMiniJobs() {
+	public static Map<Integer, MiniJob> getMiniJobIdsToMiniJobs() {
 		log.debug("retrieving all miniJob data");
 		if (null == miniJobIdsToMiniJobs) {
 			setStaticMiniJobIdsToMiniJobs();
@@ -40,7 +40,7 @@ public class MiniJobRetrieveUtils {
 		return miniJobIdsToMiniJobs;
 	}
 
-	public MiniJob getMiniJobForMiniJobId(int miniJobId) {
+	public static MiniJob getMiniJobForMiniJobId(int miniJobId) {
 		log.debug("retrieving miniJob with miniJobId " + miniJobId);
 		if (null == miniJobIdsToMiniJobs) {
 			setStaticMiniJobIdsToMiniJobs();
@@ -52,7 +52,7 @@ public class MiniJobRetrieveUtils {
 		return miniJobIdsToMiniJobs.get(miniJobId);
 	}
 
-	public Map<Integer, MiniJob> getMiniJobForStructId(int structId) {
+	public static Map<Integer, MiniJob> getMiniJobForStructId(int structId) {
 		log.debug("retrieving miniJob with structId " + structId);
 		if (null == structureIdToMiniJobIdToMiniJob) {
 			setStaticMiniJobIdsToMiniJobs();
@@ -69,7 +69,7 @@ public class MiniJobRetrieveUtils {
 		return miniJobIdToMiniJobs;
 	}
 
-	public float getMiniJobProbabilitySumForStructId(int structId) {
+	public static float getMiniJobProbabilitySumForStructId(int structId) {
 		log.debug("retrieving MiniJob probability sum for structId=" + structId);
 		if (null == structureIdToSumMiniJobProbability) {
 			setStaticMiniJobIdsToMiniJobs();
@@ -91,7 +91,7 @@ public class MiniJobRetrieveUtils {
 		return probabilitySum;
 	}
 
-	private void setStaticMiniJobIdsToMiniJobs() {
+	private static void setStaticMiniJobIdsToMiniJobs() {
 		log.debug("setting static map of miniJobIds to miniJobs");
 
 		Random rand = new Random();
@@ -153,14 +153,14 @@ public class MiniJobRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticMiniJobIdsToMiniJobs();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private MiniJob convertRSRowToMiniJob(ResultSet rs, Random rand)
+	private static MiniJob convertRSRowToMiniJob(ResultSet rs, Random rand)
 			throws SQLException {
 
 		int id = rs.getInt(DBConstants.MINI_JOB__ID);

@@ -16,16 +16,13 @@ public class SetDefendingMsgAction {
 	private String userId;
 	private String msg;
 	private UserRetrieveUtils2 userRetrieveUtil;
-	private MiscMethods miscMethods;
 
 	public SetDefendingMsgAction(String userId, String msg,
-			UserRetrieveUtils2 userRetrieveUtil,
-			MiscMethods miscMethods) {
+			UserRetrieveUtils2 userRetrieveUtil) {
 		super();
 		this.userId = userId;
 		this.msg = msg;
 		this.userRetrieveUtil = userRetrieveUtil;
-		this.miscMethods = miscMethods;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -109,7 +106,7 @@ public class SetDefendingMsgAction {
 		//		}
 		//		
 
-		String censoredMsg = miscMethods.censorUserInput(msg);
+		String censoredMsg = MiscMethods.censorUserInput(msg);
 		log.info("old msg={} \t censoredMsg={},", msg, censoredMsg);
 
 		//update the user saying he got the gifts

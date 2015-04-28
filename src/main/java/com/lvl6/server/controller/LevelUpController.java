@@ -33,9 +33,6 @@ public class LevelUpController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	public LevelUpController() {
 		numAllocatedThreads = 2;
@@ -110,7 +107,7 @@ public class LevelUpController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());

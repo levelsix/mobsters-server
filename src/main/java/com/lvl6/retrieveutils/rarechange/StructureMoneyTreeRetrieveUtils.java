@@ -27,7 +27,7 @@ public class StructureMoneyTreeRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_MONEY_TREE_CONFIG;
 
-	public Map<Integer, StructureMoneyTree> getStructIdsToMoneyTrees() {
+	public static Map<Integer, StructureMoneyTree> getStructIdsToMoneyTrees() {
 		log.debug("retrieving all structs data");
 		if (structIdsToMoneyTrees == null) {
 			setStaticStructIdsToMoneyTrees();
@@ -35,7 +35,7 @@ public class StructureMoneyTreeRetrieveUtils {
 		return structIdsToMoneyTrees;
 	}
 
-	public StructureMoneyTree getMoneyTreeForStructId(int structId) {
+	public static StructureMoneyTree getMoneyTreeForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToMoneyTrees == null) {
 			setStaticStructIdsToMoneyTrees();
@@ -43,7 +43,7 @@ public class StructureMoneyTreeRetrieveUtils {
 		return structIdsToMoneyTrees.get(structId);
 	}
 
-	private void setStaticStructIdsToMoneyTrees() {
+	private static void setStaticStructIdsToMoneyTrees() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -77,14 +77,14 @@ public class StructureMoneyTreeRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToMoneyTrees();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureMoneyTree convertRSRowToMoneyTree(ResultSet rs)
+	private static StructureMoneyTree convertRSRowToMoneyTree(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_MONEY_TREE__STRUCT_ID);
 		float productionRate = rs

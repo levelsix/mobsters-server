@@ -34,12 +34,12 @@ public class PvpLeagueRetrieveUtils {
 	//in case user's elo is higher than highest league then user is in highest league
 	private static PvpLeague highestLeague;
 
-	private final PvpLeagueComparator comparator = new PvpLeagueComparator();
+	private static final PvpLeagueComparator comparator = new PvpLeagueComparator();
 
 	private static final String TABLE_NAME = DBConstants.TABLE_PVP_LEAGUE_CONFIG;
 
 	//CONTROLLER LOGIC******************************************************************
-	public int getLeagueIdForElo(int elo, int curPvpLeagueId) {
+	public static int getLeagueIdForElo(int elo, int curPvpLeagueId) {
 		PvpLeague cur = null;
 		if (pvpLeagueIdsToPvpLeagues.containsKey(curPvpLeagueId)) {
 			cur = pvpLeagueIdsToPvpLeagues.get(curPvpLeagueId);
@@ -98,7 +98,7 @@ public class PvpLeagueRetrieveUtils {
 		return resultId;
 	}
 
-	public PvpLeague getMinLeagueForElo(int elo) {
+	public static PvpLeague getMinLeagueForElo(int elo) {
 		List<PvpLeague> leagues = getLeaguesForElo(elo);
 
 		if (leagues.isEmpty()) {
@@ -117,7 +117,7 @@ public class PvpLeagueRetrieveUtils {
 	 * @return List of PvpLeague objects that satisfy condition
 	 *         PvpLeague.getMinElo() <= elo <= PvpLeague.getMaxElo()
 	 */
-	public List<PvpLeague> getLeaguesForElo(int elo) {
+	public static List<PvpLeague> getLeaguesForElo(int elo) {
 		elo = Math.max(0, elo);
 
 		List<PvpLeague> leagues = new ArrayList<PvpLeague>();
@@ -145,7 +145,7 @@ public class PvpLeagueRetrieveUtils {
 	 *         min_elo))) * num_ranks Where num_ranks is the number of slots in
 	 *         a league.
 	 */
-	public int getRankForElo(int elo, int pvpLeagueId) {
+	public static int getRankForElo(int elo, int pvpLeagueId) {
 		log.info("getRankForElo(), elo=" + elo + "\t pvpLeagueId="
 				+ pvpLeagueId);
 		elo = Math.max(0, elo);
@@ -197,14 +197,14 @@ public class PvpLeagueRetrieveUtils {
 	}
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Integer, PvpLeague> getPvpLeagueIdsToPvpLeagues() {
+	public static Map<Integer, PvpLeague> getPvpLeagueIdsToPvpLeagues() {
 		if (null == pvpLeagueIdsToPvpLeagues) {
 			setStaticPvpLeagueIdsToPvpLeagues();
 		}
 		return pvpLeagueIdsToPvpLeagues;
 	}
 
-	public PvpLeague getPvpLeagueForLeagueId(int pvpLeagueId) {
+	public static PvpLeague getPvpLeagueForLeagueId(int pvpLeagueId) {
 		if (null == pvpLeagueIdsToPvpLeagues) {
 			setStaticPvpLeagueIdsToPvpLeagues();
 		}
@@ -218,7 +218,7 @@ public class PvpLeagueRetrieveUtils {
 		return pl;
 	}
 
-	public Map<Integer, PvpLeague> getPvpLeaguesForIds(
+	public static Map<Integer, PvpLeague> getPvpLeaguesForIds(
 			Collection<Integer> ids) {
 		if (null == pvpLeagueIdsToPvpLeagues) {
 			setStaticPvpLeagueIdsToPvpLeagues();
@@ -235,7 +235,7 @@ public class PvpLeagueRetrieveUtils {
 		return returnMap;
 	}
 
-	private void setStaticPvpLeagueIdsToPvpLeagues() {
+	private static void setStaticPvpLeagueIdsToPvpLeagues() {
 		log.debug("setting static map of pvpLeague ids to pvpLeagues");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -296,14 +296,14 @@ public class PvpLeagueRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticPvpLeagueIdsToPvpLeagues();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private PvpLeague convertRSRowToPvpLeague(ResultSet rs, Random rand)
+	private static PvpLeague convertRSRowToPvpLeague(ResultSet rs, Random rand)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.PVP_LEAGUE__ID);
 		String leagueName = rs.getString(DBConstants.PVP_LEAGUE__LEAGUE_NAME);
@@ -328,7 +328,7 @@ public class PvpLeagueRetrieveUtils {
 		return pvpLeague;
 	}
 
-	private final class PvpLeagueComparator implements
+	private static final class PvpLeagueComparator implements
 			Comparator<PvpLeague> {
 		@Override
 		public int compare(PvpLeague o1, PvpLeague o2) {

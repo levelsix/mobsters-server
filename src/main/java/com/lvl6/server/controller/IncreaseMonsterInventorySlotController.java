@@ -63,18 +63,9 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 	@Autowired
 	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
-	
-	@Autowired
-	protected StructureResidenceRetrieveUtils structureResidenceRetrieveUtils;
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public IncreaseMonsterInventorySlotController() {
 		numAllocatedThreads = 4;
@@ -185,7 +176,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -282,7 +273,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 			//check if user struct is already at its max fb invite lvl, 
 			int structId = sfu.getStructId();
-			Structure struct = structureRetrieveUtils
+			Structure struct = StructureRetrieveUtils
 					.getStructForStructId(structId);
 			int structLvl = struct.getLevel();
 			int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
@@ -425,7 +416,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		//they are one and the same
 		//e.g. userStructFbInviteLvl = 1, also means 1 = structure level
 		//get the structure with the struct lvl= userStructFbInviteLvl
-		Structure structForFbInviteLvl = structureRetrieveUtils
+		Structure structForFbInviteLvl = StructureRetrieveUtils
 				.getPredecessorStructForStructIdAndLvl(structId,
 						userStructFbInviteLvl);
 		String structType = structForFbInviteLvl.getStructType();
@@ -440,7 +431,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		//at the moment, invites are only for residences
 		if (StructType.valueOf(structType) == StructType.RESIDENCE) {
 			int structIdForUserStructFbInviteLvl = structForFbInviteLvl.getId();
-			StructureResidence residence = structureResidenceRetrieveUtils
+			StructureResidence residence = StructureResidenceRetrieveUtils
 					.getResidenceForStructId(structIdForUserStructFbInviteLvl);
 			minNumInvites = residence.getNumAcceptedFbInvites();
 		} else {
@@ -456,14 +447,14 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	private int getGemPriceFromStruct(StructureForUser sfu) {
 		//get the structure
 		int structId = sfu.getStructId();
-		Structure struct = structureRetrieveUtils
+		Structure struct = StructureRetrieveUtils
 				.getStructForStructId(structId);
 		String structType = struct.getStructType();
 
 		int gemPrice = Integer.MAX_VALUE;
 		//at the moment, invites are only for residences
 		if (StructType.valueOf(structType) == StructType.RESIDENCE) {
-			StructureResidence residence = structureResidenceRetrieveUtils
+			StructureResidence residence = StructureResidenceRetrieveUtils
 					.getResidenceForStructId(structId);
 			gemPrice = residence.getNumGemsRequired();
 		}
@@ -533,7 +524,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 				return false;
 			}
 			if (success && 0 != cost) {
-				changeMap.put(miscMethods.gems, cost);
+				changeMap.put(MiscMethods.gems, cost);
 			}
 
 			nuFbInviteLevel = sfu.getFbInviteStructLvl() + 1;
@@ -646,7 +637,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
 		Map<String, String> changeReasonsMap = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__INCREASE_MONSTER_INVENTORY;
 
 		StringBuilder sb = new StringBuilder();
@@ -661,7 +652,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		changeReasonsMap.put(gems, reasonForChange);
 		detailsMap.put(gems, details);
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 

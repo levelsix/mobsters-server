@@ -27,7 +27,7 @@ public class QuestJobMonsterItemRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_MONSTER_ITEM_CONFIG;
 
-	public Map<Integer, Map<Integer, QuestJobMonsterItem>> getQuestJobIdsToMonsterIdsToItems() {
+	public static Map<Integer, Map<Integer, QuestJobMonsterItem>> getQuestJobIdsToMonsterIdsToItems() {
 		log.debug("retrieving all quest job monster item data map");
 		if (questJobIdsToMonsterIdsToItems == null) {
 			setStaticQuestJobIdsToMonsterIdsToItems();
@@ -35,7 +35,7 @@ public class QuestJobMonsterItemRetrieveUtils {
 		return questJobIdsToMonsterIdsToItems;
 	}
 
-	public QuestJobMonsterItem getItemForQuestJobAndMonsterId(
+	public static QuestJobMonsterItem getItemForQuestJobAndMonsterId(
 			int questJobId, int monsterId) {
 		if (questJobIdsToMonsterIdsToItems == null) {
 			setStaticQuestJobIdsToMonsterIdsToItems();
@@ -60,7 +60,7 @@ public class QuestJobMonsterItemRetrieveUtils {
 
 	}
 
-	private void setStaticQuestJobIdsToMonsterIdsToItems() {
+	private static void setStaticQuestJobIdsToMonsterIdsToItems() {
 		log.debug("setting static map of quest job ids to monster ids to items");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -80,7 +80,7 @@ public class QuestJobMonsterItemRetrieveUtils {
 		}
 	}
 
-	private void setStaticQuestJobIdsToMonsterIdsToItemsHelper(
+	private static void setStaticQuestJobIdsToMonsterIdsToItemsHelper(
 			Connection conn, ResultSet rs) {
 		Random rand = new Random();
 		try {
@@ -118,14 +118,14 @@ public class QuestJobMonsterItemRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticQuestJobIdsToMonsterIdsToItems();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private QuestJobMonsterItem convertRSRowToQuestMonsterItem(
+	private static QuestJobMonsterItem convertRSRowToQuestMonsterItem(
 			ResultSet rs) throws SQLException {
 		int questJobId = rs
 				.getInt(DBConstants.QUEST_JOB_MONSTER_ITEM__QUEST_JOB_ID);

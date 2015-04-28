@@ -26,7 +26,7 @@ public class ClanRaidRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_CONFIG;
 
-	public ClanRaid getClanRaidForClanRaidId(int clanRaidId) {
+	public static ClanRaid getClanRaidForClanRaidId(int clanRaidId) {
 		log.debug("retrieving data for clanRaid with clanRaid id " + clanRaidId);
 		if (clanRaidIdToClanRaid == null) {
 			setStaticClanRaidIdsToClanRaid();
@@ -39,7 +39,7 @@ public class ClanRaidRetrieveUtils {
 		return null;
 	}
 
-	public Map<Integer, ClanRaid> getClanRaidIdsToClanRaids() {
+	public static Map<Integer, ClanRaid> getClanRaidIdsToClanRaids() {
 		log.debug("retrieving all clan raid data");
 		if (clanRaidIdToClanRaid == null) {
 			setStaticClanRaidIdsToClanRaid();
@@ -47,7 +47,7 @@ public class ClanRaidRetrieveUtils {
 		return clanRaidIdToClanRaid;
 	}
 
-	private void setStaticClanRaidIdsToClanRaid() {
+	private static void setStaticClanRaidIdsToClanRaid() {
 		log.debug("setting static map of clanRaidIds to clanRaid");
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
@@ -77,14 +77,14 @@ public class ClanRaidRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticClanRaidIdsToClanRaid();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private ClanRaid convertRSRowToClanRaid(ResultSet rs)
+	private static ClanRaid convertRSRowToClanRaid(ResultSet rs)
 			throws SQLException {
 		int i = 1;
 		int id = rs.getInt(i++);

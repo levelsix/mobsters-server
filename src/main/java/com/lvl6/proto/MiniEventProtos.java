@@ -2160,20 +2160,6 @@ public final class MiniEventProtos {
      * <code>optional int32 pointsGained = 6;</code>
      */
     int getPointsGained();
-
-    /**
-     * <code>optional string actionDescription = 7;</code>
-     */
-    boolean hasActionDescription();
-    /**
-     * <code>optional string actionDescription = 7;</code>
-     */
-    java.lang.String getActionDescription();
-    /**
-     * <code>optional string actionDescription = 7;</code>
-     */
-    com.google.protobuf.ByteString
-        getActionDescriptionBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniEventGoalProto}
@@ -2262,12 +2248,6 @@ public final class MiniEventProtos {
             case 48: {
               bitField0_ |= 0x00000020;
               pointsGained_ = input.readInt32();
-              break;
-            }
-            case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
-              actionDescription_ = bs;
               break;
             }
           }
@@ -2545,48 +2525,6 @@ public final class MiniEventProtos {
       return pointsGained_;
     }
 
-    public static final int ACTIONDESCRIPTION_FIELD_NUMBER = 7;
-    private java.lang.Object actionDescription_;
-    /**
-     * <code>optional string actionDescription = 7;</code>
-     */
-    public boolean hasActionDescription() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string actionDescription = 7;</code>
-     */
-    public java.lang.String getActionDescription() {
-      java.lang.Object ref = actionDescription_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          actionDescription_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string actionDescription = 7;</code>
-     */
-    public com.google.protobuf.ByteString
-        getActionDescriptionBytes() {
-      java.lang.Object ref = actionDescription_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        actionDescription_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private void initFields() {
       miniEventGoalId_ = 0;
       miniEventId_ = 0;
@@ -2594,7 +2532,6 @@ public final class MiniEventProtos {
       goalAmt_ = 0;
       goalDesc_ = "";
       pointsGained_ = 0;
-      actionDescription_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2626,9 +2563,6 @@ public final class MiniEventProtos {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, pointsGained_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(7, getActionDescriptionBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2662,10 +2596,6 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, pointsGained_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getActionDescriptionBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2796,8 +2726,6 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000010);
         pointsGained_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        actionDescription_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2850,10 +2778,6 @@ public final class MiniEventProtos {
           to_bitField0_ |= 0x00000020;
         }
         result.pointsGained_ = pointsGained_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.actionDescription_ = actionDescription_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2889,11 +2813,6 @@ public final class MiniEventProtos {
         }
         if (other.hasPointsGained()) {
           setPointsGained(other.getPointsGained());
-        }
-        if (other.hasActionDescription()) {
-          bitField0_ |= 0x00000040;
-          actionDescription_ = other.actionDescription_;
-          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3157,82 +3076,6 @@ public final class MiniEventProtos {
       public Builder clearPointsGained() {
         bitField0_ = (bitField0_ & ~0x00000020);
         pointsGained_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object actionDescription_ = "";
-      /**
-       * <code>optional string actionDescription = 7;</code>
-       */
-      public boolean hasActionDescription() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string actionDescription = 7;</code>
-       */
-      public java.lang.String getActionDescription() {
-        java.lang.Object ref = actionDescription_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            actionDescription_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string actionDescription = 7;</code>
-       */
-      public com.google.protobuf.ByteString
-          getActionDescriptionBytes() {
-        java.lang.Object ref = actionDescription_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          actionDescription_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string actionDescription = 7;</code>
-       */
-      public Builder setActionDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        actionDescription_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string actionDescription = 7;</code>
-       */
-      public Builder clearActionDescription() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        actionDescription_ = getDefaultInstance().getActionDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string actionDescription = 7;</code>
-       */
-      public Builder setActionDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        actionDescription_ = value;
         onChanged();
         return this;
       }
@@ -7995,37 +7838,37 @@ public final class MiniEventProtos {
       "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
       "vl6.proto.MiniEventLeaderboardRewardProt" +
       "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
-      "(\t\022\014\n\004icon\030\n \001(\t\"\204\003\n\022MiniEventGoalProto\022",
+      "(\t\022\014\n\004icon\030\n \001(\t\"\351\002\n\022MiniEventGoalProto\022",
       "\027\n\017miniEventGoalId\030\001 \001(\005\022\023\n\013miniEventId\030" +
       "\002 \001(\005\022O\n\010goalType\030\003 \001(\01624.com.lvl6.proto" +
       ".MiniEventGoalProto.MiniEventGoalType:\007N" +
       "O_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(" +
-      "\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n\021actionDescrip" +
-      "tion\030\007 \001(\t\"\232\001\n\021MiniEventGoalType\022\013\n\007NO_G" +
-      "OAL\020\001\022\013\n\007HEAL_HP\020\002\022\023\n\017ENHANCE_TOON_XP\020\003\022" +
-      "\037\n\033USE_CASH_UPGRADING_BUILDING\020\004\022\036\n\032USE_" +
-      "OIL_UPGRADING_BUILDING\020\005\022\025\n\021CAPTURE_SCIE" +
-      "NTIST\020\006\"\362\001\n\034MiniEventForPlayerLevelProto",
-      "\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024" +
-      "\n\014playerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001" +
-      "(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinP" +
-      "ts\030\006 \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rew" +
-      "ards\030\010 \003(\0132(.com.lvl6.proto.MiniEventTie" +
-      "rRewardProto\"^\n\030MiniEventTierRewardProto" +
-      "\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rew" +
-      "ardId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEven" +
-      "tLeaderboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022" +
-      "\023\n\013miniEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031",
-      "\n\021leaderboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEv" +
-      "entProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUui" +
-      "d\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedee" +
-      "med\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021ti" +
-      "erThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\013" +
-      "2\036.com.lvl6.proto.MiniEventProto\0225\n\005goal" +
-      "s\030\010 \003(\0132&.com.lvl6.proto.UserMiniEventGo" +
-      "alProto\"U\n\026UserMiniEventGoalProto\022\020\n\010use" +
-      "rUuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010" +
-      "progress\030\003 \001(\005B\021B\017MiniEventProtos"
+      "\t\022\024\n\014pointsGained\030\006 \001(\005\"\232\001\n\021MiniEventGoa" +
+      "lType\022\013\n\007NO_GOAL\020\001\022\013\n\007HEAL_HP\020\002\022\023\n\017ENHAN" +
+      "CE_TOON_XP\020\003\022\037\n\033USE_CASH_UPGRADING_BUILD" +
+      "ING\020\004\022\036\n\032USE_OIL_UPGRADING_BUILDING\020\005\022\025\n" +
+      "\021CAPTURE_SCIENTIST\020\006\"\362\001\n\034MiniEventForPla" +
+      "yerLevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEv",
+      "entId\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014pla" +
+      "yerLvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025" +
+      "\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPts" +
+      "\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.proto" +
+      ".MiniEventTierRewardProto\"^\n\030MiniEventTi" +
+      "erRewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId" +
+      "\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(" +
+      "\005\"s\n\037MiniEventLeaderboardRewardProto\022\016\n\006" +
+      "melrId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\020\n\010rew" +
+      "ardId\030\003 \001(\005\022\031\n\021leaderboardMinPos\030\004 \001(\005\"\203",
+      "\002\n\022UserMiniEventProto\022\023\n\013miniEventId\030\001 \001" +
+      "(\005\022\020\n\010userUuid\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n" +
+      "\017tierOneRedeemed\030\004 \001(\010\022\027\n\017tierTwoRedeeme" +
+      "d\030\005 \001(\010\022\031\n\021tierThreeRedeemed\030\006 \001(\010\0221\n\tmi" +
+      "niEvent\030\007 \001(\0132\036.com.lvl6.proto.MiniEvent" +
+      "Proto\0225\n\005goals\030\010 \003(\0132&.com.lvl6.proto.Us" +
+      "erMiniEventGoalProto\"U\n\026UserMiniEventGoa" +
+      "lProto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017miniEventGoa" +
+      "lId\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021B\017MiniEvent" +
+      "Protos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8050,7 +7893,7 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_MiniEventGoalProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniEventGoalProto_descriptor,
-        new java.lang.String[] { "MiniEventGoalId", "MiniEventId", "GoalType", "GoalAmt", "GoalDesc", "PointsGained", "ActionDescription", });
+        new java.lang.String[] { "MiniEventGoalId", "MiniEventId", "GoalType", "GoalAmt", "GoalDesc", "PointsGained", });
     internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_MiniEventForPlayerLevelProto_fieldAccessorTable = new

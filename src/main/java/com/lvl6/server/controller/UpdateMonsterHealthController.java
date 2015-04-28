@@ -40,9 +40,6 @@ public class UpdateMonsterHealthController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
 
 	public UpdateMonsterHealthController() {
 		numAllocatedThreads = 4;
@@ -198,7 +195,7 @@ public class UpdateMonsterHealthController extends EventController {
 
 		if (!isUmchpListEmpty) {
 			//extract the ids so it's easier to get userMonsters from db
-			List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
+			List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
 					umchpList, userMonsterIdToExpectedHealth);
 			Map<String, MonsterForUser> userMonsters = getMonsterForUserRetrieveUtils()
 					.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);

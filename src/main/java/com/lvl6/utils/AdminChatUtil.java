@@ -43,12 +43,6 @@ public class AdminChatUtil {
 
 	@Autowired
 	protected InsertUtil insertUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	public void setInsertUtils(InsertUtil insertUtils) {
 		this.insertUtils = insertUtils;
@@ -161,7 +155,7 @@ public class AdminChatUtil {
 				+ msg.getContent());
 		String posterId = msg.getPosterId();
 		String recipientId = msg.getRecipientId();
-		String censoredContent = miscMethods.censorUserInput(msg.getContent());
+		String censoredContent = MiscMethods.censorUserInput(msg.getContent());
 		String privateChatPostId = insertUtils.insertIntoPrivateChatPosts(
 				posterId, recipientId, censoredContent, new Timestamp(msg
 						.getTimeOfPost().getTime()), ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
@@ -193,7 +187,7 @@ public class AdminChatUtil {
 				recipientId, timeOfPost, censoredContent, null, ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
 		User poster = users.get(posterId);
 		User recipient = users.get(recipientId);
-		PrivateChatPostProto pcpp = createInfoProtoUtils
+		PrivateChatPostProto pcpp = CreateInfoProtoUtils
 				.createPrivateChatPostProtoFromPrivateChatPost(pwp, poster,
 						null, recipient, null, null, null);
 		resBuilder.setPost(pcpp);

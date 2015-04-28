@@ -50,9 +50,6 @@ public class CollectMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
@@ -177,7 +174,7 @@ public class CollectMonsterEnhancementController extends EventController {
 
 				writeToMonsterDeleteHistory(enhancedAndDeletedMonsterForUsers);
 				log.info("added deleted monsters to monster delete table");
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());

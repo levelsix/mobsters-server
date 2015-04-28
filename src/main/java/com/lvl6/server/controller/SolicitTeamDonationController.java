@@ -39,15 +39,9 @@ public class SolicitTeamDonationController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SolicitTeamDonationController() {
 		numAllocatedThreads = 4;
@@ -129,7 +123,7 @@ public class SolicitTeamDonationController extends EventController {
 			SolicitTeamDonationAction stda = new SolicitTeamDonationAction(
 					userId, clanId, msg, powerLimit, clientTime, gemsSpent,
 					userRetrieveUtil, clanMemberTeamDonationRetrieveUtil,
-					InsertUtils.get(), UpdateUtils.get(), miscMethods);
+					InsertUtils.get(), UpdateUtils.get());
 
 			stda.execute(resBuilder);
 
@@ -147,7 +141,7 @@ public class SolicitTeamDonationController extends EventController {
 			} else {
 				//only write to clan if success
 				ClanMemberTeamDonation solicitation = stda.getSolicitation();
-				ClanMemberTeamDonationProto cmtdp = createInfoProtoUtils
+				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
 						.createClanMemberTeamDonationProto(solicitation, null,
 								senderProto, null);
 				resBuilder.setSolicitation(cmtdp);
@@ -159,7 +153,7 @@ public class SolicitTeamDonationController extends EventController {
 				//notifyClan(user, clan);
 				if (gemsSpent > 0) {
 					User user = stda.getUser();
-					UpdateClientUserResponseEvent resEventUpdate = miscMethods
+					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									user, null, null);
 					resEventUpdate.setTag(event.getTag());
@@ -192,7 +186,7 @@ public class SolicitTeamDonationController extends EventController {
 
 	private void writeToCurrencyHistory(String userId, Date date,
 			SolicitTeamDonationAction stda) {
-		miscMethods.writeToUserCurrencyOneUser(userId,
+		MiscMethods.writeToUserCurrencyOneUser(userId,
 				new Timestamp(date.getTime()), stda.getCurrencyDeltas(),
 				stda.getPreviousCurrencies(), stda.getCurrentCurrencies(),
 				stda.getReasons(), stda.getDetails());

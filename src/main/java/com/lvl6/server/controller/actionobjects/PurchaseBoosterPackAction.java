@@ -25,9 +25,6 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -45,25 +42,14 @@ public class PurchaseBoosterPackAction {
 	private boolean freeBoosterPack;
 	private TimeUtils timeUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
-	private BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private MonsterStuffUtils monsterStuffUtils;
 	private UpdateUtil updateUtil;
-	private MiscMethods miscMethods;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private MonsterRetrieveUtils monsterRetrieveUtils;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
 			TimeUtils timeUtil, UserRetrieveUtils2 userRetrieveUtil,
-			BoosterPackRetrieveUtils boosterPackRetrieveUtils,
-			BoosterItemRetrieveUtils boosterItemRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			MonsterStuffUtils monsterStuffUtils,
-			UpdateUtil updateUtil, MiscMethods miscMethods,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			MonsterRetrieveUtils monsterRetrieveUtils) {
+			UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -72,27 +58,21 @@ public class PurchaseBoosterPackAction {
 		this.freeBoosterPack = freeBoosterPack;
 		this.timeUtil = timeUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
-		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
-		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-		this.monsterStuffUtils = monsterStuffUtils;
 		this.updateUtil = updateUtil;
-		this.miscMethods = miscMethods;
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
-		this.monsterRetrieveUtils = monsterRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
 	//	static class PurchaseBoosterPackResource {
-	//
-	//
+	//		
+	//		
 	//		public PurchaseBoosterPackResource() {
-	//
+	//			
 	//		}
 	//	}
 	//
 	//	public PurchaseBoosterPackResource execute() {
-	//
+	//		
 	//	}
 
 	//derived state
@@ -181,7 +161,7 @@ public class PurchaseBoosterPackAction {
 			return false;
 		}
 
-		boosterItemIdsToBoosterItems = boosterItemRetrieveUtils
+		boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackIdPurchased);
 
 		if (null == boosterItemIdsToBoosterItems
@@ -211,7 +191,7 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean verifyBoosterPack(Builder resBuilder, int bpId) {
-		aPack = boosterPackRetrieveUtils.getBoosterPackForBoosterPackId(bpId);
+		aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(bpId);
 
 		if (null == aPack) {
 			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
@@ -238,7 +218,7 @@ public class PurchaseBoosterPackAction {
 
 		} else if (Math.abs(timeUtil.numDaysDifference(lastFreeDate, now)) == 0) {
 			// lastFreeDate is earlier than now but
-			// lastFreeDate is on same day as now
+			// lastFreeDate is on same day as now 
 
 			log.error(String
 					.format("client already received free booster pack today. lastFreeBoosterPackDate=%s, now=%s",
@@ -252,14 +232,14 @@ public class PurchaseBoosterPackAction {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (!freeBoosterPack) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
+			prevCurrencies.put(MiscMethods.gems, user.getGems());
 		}
 
 		int numBoosterItemsUserWants = 1;
-		itemsUserReceives = miscMethods.determineBoosterItemsUserReceives(
+		itemsUserReceives = MiscMethods.determineBoosterItemsUserReceives(
 				numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
 
-		boolean legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils);
+		boolean legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
 
 		if (!legit) {
 			log.error("illegal to verify booster items, {}", itemsUserReceives);
@@ -282,10 +262,9 @@ public class PurchaseBoosterPackAction {
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
-		String mfusop = BoosterItemUtils.createUpdateUserMonsterArguments(userId,
+		String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId,
 				boosterPackIdPurchased, itemsUserReceives,
-				monsterIdToNumPieces, completeUserMonsters, now, monsterLevelInfoRetrieveUtils,
-				monsterRetrieveUtils, monsterStuffUtils);
+				monsterIdToNumPieces, completeUserMonsters, now);
 
 		log.info("!!!!!!!!!mfusop={}", mfusop);
 
@@ -295,7 +274,7 @@ public class PurchaseBoosterPackAction {
 			List<String> monsterForUserIds = InsertUtils.get()
 					.insertIntoMonsterForUserReturnIds(userId,
 							completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = miscMethods
+			List<FullUserMonsterProto> newOrUpdated = MiscMethods
 					.createFullUserMonsterProtos(monsterForUserIds,
 							completeUserMonsters);
 
@@ -310,9 +289,9 @@ public class PurchaseBoosterPackAction {
 		//this is if the user did not buy a complete monster, UPDATE DB
 		if (!monsterIdToNumPieces.isEmpty()) {
 			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now, monsterLevelInfoRetrieveUtils);
+							mfusop, now);
 
 			preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
 			log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",
@@ -322,13 +301,13 @@ public class PurchaseBoosterPackAction {
 			resBuilder.addAllUpdatedOrNew(newOrUpdated);
 		}
 
-		ifuList = BoosterItemUtils.awardBoosterItemItemRewards(userId, itemsUserReceives,
+		ifuList = awardBoosterItemItemRewards(userId, itemsUserReceives,
 				itemForUserRetrieveUtil, updateUtil);
 		return true;
 	}
 
 	private void updateUserCurrency() {
-		gemReward = BoosterItemUtils.determineGemReward(itemsUserReceives);
+		gemReward = MiscMethods.determineGemReward(itemsUserReceives);
 
 		gemChange = -1 * gemPrice;
 		if (freeBoosterPack) {
@@ -343,8 +322,83 @@ public class PurchaseBoosterPackAction {
 		log.info("updated, user bought boosterPack? {}", updated);
 	}
 
+	public static List<ItemForUser> awardBoosterItemItemRewards(String userId,
+			List<BoosterItem> itemsUserReceives,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			UpdateUtil updateUtil) {
+		List<ItemForUser> ifuList = PurchaseBoosterPackAction
+				.calculateBoosterItemItemRewards(userId, itemsUserReceives,
+						itemForUserRetrieveUtil);
+
+		log.info("ifuList={}", ifuList);
+		if (null != ifuList && !ifuList.isEmpty()) {
+			int numUpdated = updateUtil.updateItemForUser(ifuList);
+			log.info("items numUpdated={}", numUpdated);
+			return ifuList;
+		} else {
+			return null;
+		}
+
+	}
+
+	public static List<ItemForUser> calculateBoosterItemItemRewards(
+			String userId, List<BoosterItem> itemsUserReceives,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+
+		for (BoosterItem bi : itemsUserReceives) {
+			int itemId = bi.getItemId();
+			int itemQuantity = bi.getItemQuantity();
+
+			if (itemId <= 0 || itemQuantity <= 0) {
+				continue;
+			}
+
+			//user could have gotten multiple of the same BoosterItem
+			int newQuantity = itemQuantity;
+			if (itemIdToQuantity.containsKey(itemId)) {
+				newQuantity += itemIdToQuantity.get(itemId);
+			}
+			itemIdToQuantity.put(itemId, newQuantity);
+		}
+
+		return calculateItemRewards(userId, itemForUserRetrieveUtil,
+				itemIdToQuantity);
+	}
+
+	public static List<ItemForUser> calculateItemRewards(String userId,
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+			Map<Integer, Integer> itemIdToQuantity) {
+		List<ItemForUser> ifuList = null;
+		if (!itemIdToQuantity.isEmpty()) {
+			//aggregate rewarded items with user's current items
+			Map<Integer, ItemForUser> itemIdToIfu = itemForUserRetrieveUtil
+					.getSpecificOrAllItemForUserMap(userId,
+							itemIdToQuantity.keySet());
+
+			for (Integer itemId : itemIdToQuantity.keySet()) {
+				int newQuantity = itemIdToQuantity.get(itemId);
+
+				ItemForUser ifu = null;
+				if (itemIdToIfu.containsKey(itemId)) {
+					ifu = itemIdToIfu.get(itemId);
+				} else {
+					//user might not have the item
+					ifu = new ItemForUser(userId, itemId, 0);
+					itemIdToIfu.put(itemId, ifu);
+				}
+
+				newQuantity += ifu.getQuantity();
+				ifu.setQuantity(newQuantity);
+			}
+
+			ifuList = new ArrayList<ItemForUser>(itemIdToIfu.values());
+		}
+		return ifuList;
+	}
+
 	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

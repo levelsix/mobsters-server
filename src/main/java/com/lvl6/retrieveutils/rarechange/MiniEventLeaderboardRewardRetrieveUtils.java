@@ -29,7 +29,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 	private static Map<Integer, MiniEventLeaderboardReward> idToReward;
 	private static Map<Integer, Collection<MiniEventLeaderboardReward>> miniEventIdToRewards;
 
-	public Map<Integer, MiniEventLeaderboardReward> getAllIdsToMiniEventLeaderboardRewards() {
+	public static Map<Integer, MiniEventLeaderboardReward> getAllIdsToMiniEventLeaderboardRewards() {
 		if (null == idToReward) {
 			setStaticIdsToMiniEventLeaderboardRewards();
 		}
@@ -37,7 +37,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		return idToReward;
 	}
 
-	public MiniEventLeaderboardReward getMiniEventLeaderboardRewardById(int id) {
+	public static MiniEventLeaderboardReward getMiniEventLeaderboardRewardById(int id) {
 		if (null == idToReward) {
 			setStaticIdsToMiniEventLeaderboardRewards();
 		}
@@ -48,7 +48,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		return ep;
 	}
 
-	public Collection<MiniEventLeaderboardReward> getRewardsForMiniEventId(
+	public static Collection<MiniEventLeaderboardReward> getRewardsForMiniEventId(
 			int miniEventId)
 	{
 		if (null == miniEventIdToRewards) {
@@ -63,11 +63,11 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		return miniEventIdToRewards.get(miniEventId);
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToMiniEventLeaderboardRewards();
 	}
 
-	private void setStaticIdsToMiniEventLeaderboardRewards() {
+	private static void setStaticIdsToMiniEventLeaderboardRewards() {
 		log.debug("setting static map of id to MiniEventLeaderboardReward");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -122,7 +122,7 @@ public class MiniEventLeaderboardRewardRetrieveUtils {
 		}
 	}
 
-	private MiniEventLeaderboardReward convertRSRowToMiniEventLeaderboardReward(ResultSet rs)
+	private static MiniEventLeaderboardReward convertRSRowToMiniEventLeaderboardReward(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MINI_EVENT_LEADERBOARD_REWARD__ID);
 		int miniEventId = rs.getInt(DBConstants.MINI_EVENT_LEADERBOARD_REWARD__MINI_EVENT_ID);

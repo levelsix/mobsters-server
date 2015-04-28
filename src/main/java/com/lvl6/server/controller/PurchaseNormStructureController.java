@@ -45,16 +45,10 @@ public class PurchaseNormStructureController extends EventController {
 	protected Locker locker;
 
 	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
 	protected InsertUtil insertUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public PurchaseNormStructureController() {
 		numAllocatedThreads = 3;
@@ -124,7 +118,7 @@ public class PurchaseNormStructureController extends EventController {
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
 			log.info("user={}", user);
-			Structure struct = structureRetrieveUtils
+			Structure struct = StructureRetrieveUtils
 					.getStructForStructId(structId);
 
 			//currency history purposes
@@ -163,7 +157,7 @@ public class PurchaseNormStructureController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -309,13 +303,13 @@ public class PurchaseNormStructureController extends EventController {
 			return false;
 		} else {//things went ok
 			if (0 != gemChange) {
-				money.put(miscMethods.gems, gemChange);
+				money.put(MiscMethods.gems, gemChange);
 			}
 			if (0 != cashChange) {
-				money.put(miscMethods.cash, cashChange);
+				money.put(MiscMethods.cash, cashChange);
 			}
 			if (0 != oilChange) {
-				money.put(miscMethods.oil, oilChange);
+				money.put(MiscMethods.oil, oilChange);
 			}
 		}
 
@@ -331,9 +325,9 @@ public class PurchaseNormStructureController extends EventController {
 		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> details = new HashMap<String, String>();
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
-		String oil = miscMethods.oil;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
+		String oil = MiscMethods.oil;
 		String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT;
 		StringBuilder detailSb = new StringBuilder();
 		detailSb.append("structId=");
@@ -355,7 +349,7 @@ public class PurchaseNormStructureController extends EventController {
 		details.put(cash, detail);
 		details.put(oil, detail);
 
-		miscMethods.writeToUserCurrencyOneUser(userId, date, money,
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, money,
 				previousCurencyMap, currentCurrencyMap, reasonsForChanges,
 				details);
 

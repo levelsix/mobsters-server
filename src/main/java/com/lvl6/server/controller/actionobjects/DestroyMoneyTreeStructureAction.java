@@ -23,20 +23,17 @@ public class DestroyMoneyTreeStructureAction {
 	private List<String> userStructIdsList;
 	private Date now;
 	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
-	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 	protected DeleteUtil deleteUtil;
 
 	public DestroyMoneyTreeStructureAction(String userId,
 			List<String> userStructIdsList, Date now,
 			StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2,
-			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils,
 			DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.userStructIdsList = userStructIdsList;
 		this.now = now;
 		this.structureForUserRetrieveUtils2 = structureForUserRetrieveUtils2;
-		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
 		this.deleteUtil = deleteUtil;
 	}
 
@@ -86,7 +83,7 @@ public class DestroyMoneyTreeStructureAction {
 				.getSpecificOrAllUserStructsForUser(userId, userStructIdsList);
 
 		for (StructureForUser sfu : sfuList) {
-			StructureMoneyTree smt = structureMoneyTreeRetrieveUtils
+			StructureMoneyTree smt = StructureMoneyTreeRetrieveUtils
 					.getMoneyTreeForStructId(sfu.getStructId());
 
 			int millisecondsConvertingToOneDayConstant = 1000 * 60 * 60 * 24;

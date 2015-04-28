@@ -62,32 +62,29 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 				return -1;
 			} else if (lvlMin1 > lvlMin2) {
 				return 1;
-			} else if (o1.getId() != 0 && o2.getId() != 0) {
-			    if (o1.getId() < o2.getId()) {
-			        return -1;
-	            } else if (o1.getId() > o2.getId()) {
-	                return 1;
-	            } 
+			} else if (o1.getId() < o2.getId()) {
+				return -1;
+			} else if (o1.getId() > o2.getId()) {
+				return 1;
+			} else {
+				return 0;
 			}
-            return 0;
 
 		}
 
 	}
 
-	public Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
+	public static Map<Integer, MiniEventForPlayerLvl> getAllIdsToMiniEventForPlayerLvls() {
 		if (null == idToMiniEventForPlayerLvl) {
 			setStaticIdsToMiniEventForPlayerLvls();
-	        setOrderedMiniEventForPlayerLvls();
 		}
 
 		return idToMiniEventForPlayerLvl;
 	}
 
-	public MiniEventForPlayerLvl getMiniEventForPlayerLvlById(int id) {
+	public static MiniEventForPlayerLvl getMiniEventForPlayerLvlById(int id) {
 		if (null == idToMiniEventForPlayerLvl) {
 			setStaticIdsToMiniEventForPlayerLvls();
-	        setOrderedMiniEventForPlayerLvls();
 		}
 		MiniEventForPlayerLvl ep = idToMiniEventForPlayerLvl.get(id);
 		if (null == ep) {
@@ -96,13 +93,12 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		return ep;
 	}
 
-	public MiniEventForPlayerLvl getMiniEventForPlayerLvl(
+	public static MiniEventForPlayerLvl getMiniEventForPlayerLvl(
 			int miniEventId, int playerLvl)
 	{
 		if (null == miniEventIdToOrderedMefpl) {
 			log.warn("no ordered MiniEventForPlayerLvl, reloading");
 			setStaticIdsToMiniEventForPlayerLvls();
-	        setOrderedMiniEventForPlayerLvls();
 		}
 
 		if (null == miniEventIdToOrderedMefpl) {
@@ -133,12 +129,12 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		return mefpl;
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToMiniEventForPlayerLvls();
 		setOrderedMiniEventForPlayerLvls();
 	}
 
-	private void setStaticIdsToMiniEventForPlayerLvls() {
+	private static void setStaticIdsToMiniEventForPlayerLvls() {
 		log.debug("setting static map of id to MiniEventForPlayerLvl");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -171,7 +167,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 		}
 	}
 
-	private void setOrderedMiniEventForPlayerLvls()
+	private static void setOrderedMiniEventForPlayerLvls()
 	{
 		if (null == idToMiniEventForPlayerLvl)
 		{
@@ -204,7 +200,7 @@ public class MiniEventForPlayerLvlRetrieveUtils {
 
 	}
 
-	private MiniEventForPlayerLvl convertRSRowToMiniEventForPlayerLvl(ResultSet rs)
+	private static MiniEventForPlayerLvl convertRSRowToMiniEventForPlayerLvl(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MINI_EVENT_FOR_PLAYER_LVL__ID);
 		int miniEventId = rs.getInt(DBConstants.MINI_EVENT_FOR_PLAYER_LVL__MINI_EVENT_ID);

@@ -94,32 +94,6 @@ public final class EventInAppPurchaseProto {
      */
     com.google.protobuf.ByteString
         getIpaddrBytes();
-
-    /**
-     * <code>optional string uuid = 7;</code>
-     *
-     * <pre>
-     *uuid for sales packages
-     * </pre>
-     */
-    boolean hasUuid();
-    /**
-     * <code>optional string uuid = 7;</code>
-     *
-     * <pre>
-     *uuid for sales packages
-     * </pre>
-     */
-    java.lang.String getUuid();
-    /**
-     * <code>optional string uuid = 7;</code>
-     *
-     * <pre>
-     *uuid for sales packages
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.InAppPurchaseRequestProto}
@@ -214,12 +188,6 @@ public final class EventInAppPurchaseProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
               ipaddr_ = bs;
-              break;
-            }
-            case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
-              uuid_ = bs;
               break;
             }
           }
@@ -493,60 +461,6 @@ public final class EventInAppPurchaseProto {
       }
     }
 
-    public static final int UUID_FIELD_NUMBER = 7;
-    private java.lang.Object uuid_;
-    /**
-     * <code>optional string uuid = 7;</code>
-     *
-     * <pre>
-     *uuid for sales packages
-     * </pre>
-     */
-    public boolean hasUuid() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string uuid = 7;</code>
-     *
-     * <pre>
-     *uuid for sales packages
-     * </pre>
-     */
-    public java.lang.String getUuid() {
-      java.lang.Object ref = uuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          uuid_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string uuid = 7;</code>
-     *
-     * <pre>
-     *uuid for sales packages
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getUuidBytes() {
-      java.lang.Object ref = uuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        uuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       receipt_ = "";
@@ -554,7 +468,6 @@ public final class EventInAppPurchaseProto {
       localcurrency_ = "";
       locale_ = "";
       ipaddr_ = "";
-      uuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -586,9 +499,6 @@ public final class EventInAppPurchaseProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getIpaddrBytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(7, getUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -622,10 +532,6 @@ public final class EventInAppPurchaseProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getIpaddrBytes());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -761,8 +667,6 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         ipaddr_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        uuid_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -819,10 +723,6 @@ public final class EventInAppPurchaseProto {
           to_bitField0_ |= 0x00000020;
         }
         result.ipaddr_ = ipaddr_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.uuid_ = uuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -865,11 +765,6 @@ public final class EventInAppPurchaseProto {
         if (other.hasIpaddr()) {
           bitField0_ |= 0x00000020;
           ipaddr_ = other.ipaddr_;
-          onChanged();
-        }
-        if (other.hasUuid()) {
-          bitField0_ |= 0x00000040;
-          uuid_ = other.uuid_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -1391,106 +1286,6 @@ public final class EventInAppPurchaseProto {
   }
   bitField0_ |= 0x00000020;
         ipaddr_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object uuid_ = "";
-      /**
-       * <code>optional string uuid = 7;</code>
-       *
-       * <pre>
-       *uuid for sales packages
-       * </pre>
-       */
-      public boolean hasUuid() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string uuid = 7;</code>
-       *
-       * <pre>
-       *uuid for sales packages
-       * </pre>
-       */
-      public java.lang.String getUuid() {
-        java.lang.Object ref = uuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            uuid_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string uuid = 7;</code>
-       *
-       * <pre>
-       *uuid for sales packages
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getUuidBytes() {
-        java.lang.Object ref = uuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          uuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string uuid = 7;</code>
-       *
-       * <pre>
-       *uuid for sales packages
-       * </pre>
-       */
-      public Builder setUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        uuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string uuid = 7;</code>
-       *
-       * <pre>
-       *uuid for sales packages
-       * </pre>
-       */
-      public Builder clearUuid() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        uuid_ = getDefaultInstance().getUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string uuid = 7;</code>
-       *
-       * <pre>
-       *uuid for sales packages
-       * </pre>
-       */
-      public Builder setUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        uuid_ = value;
         onChanged();
         return this;
       }
@@ -7132,52 +6927,51 @@ public final class EventInAppPurchaseProto {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
       "to\032\023InAppPurchase.proto\032\nItem.proto\032\022Mon" +
       "sterStuff.proto\032\017Structure.proto\032\nUser.p" +
-      "roto\"\267\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
+      "roto\"\251\001\n\031InAppPurchaseRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(" +
       "\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t" +
-      "\022\016\n\006ipaddr\030\006 \001(\t\022\014\n\004uuid\030\007 \001(\t\"\207\004\n\032InApp" +
-      "PurchaseResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022N\n\006statu",
-      "s\030\002 \001(\0162>.com.lvl6.proto.InAppPurchaseRe" +
-      "sponseProto.InAppPurchaseStatus\022\026\n\016diamo" +
-      "ndsGained\030\003 \001(\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001" +
-      "\022\023\n\013packageName\030\005 \001(\t\022\024\n\014packagePrice\030\006 " +
-      "\001(\001\022\017\n\007receipt\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003" +
-      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
-      "\0227\n\020updatedUserItems\030\t \003(\0132\035.com.lvl6.pr" +
-      "oto.UserItemProto\022@\n\020updatedMoneyTree\030\n " +
-      "\003(\0132&.com.lvl6.proto.FullUserStructurePr" +
-      "oto\"C\n\023InAppPurchaseStatus\022\013\n\007SUCCESS\020\001\022",
-      "\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034Ear" +
-      "nFreeDiamondsRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022J\n\020f" +
-      "reeDiamondsType\030\002 \001(\0162$.com.lvl6.proto.E" +
-      "arnFreeDiamondsType:\nFB_CONNECT\022\022\n\nclien" +
-      "tTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022T\n\006status\030\002 \001(\0162D.com.lv" +
-      "l6.proto.EarnFreeDiamondsResponseProto.E" +
-      "arnFreeDiamondsStatus\022J\n\020freeDiamondsTyp",
-      "e\030\003 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
-      "sType:\nFB_CONNECT\"v\n\026EarnFreeDiamondsSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_APART_FRO" +
-      "M_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020" +
-      "\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGemsForRes" +
-      "ourcesRequestProto\022@\n\006sender\030\001 \001(\01320.com" +
-      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
-      "rces\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResources\030\003 " +
-      "\001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.lvl6.pro" +
-      "to.ResourceType:\004CASH\022\022\n\nclientTime\030\005 \001(",
-      "\003\"\252\002\n%ExchangeGemsForResourcesResponsePr" +
-      "oto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Min" +
-      "imumUserProtoWithMaxResources\022d\n\006status\030" +
-      "\002 \001(\0162T.com.lvl6.proto.ExchangeGemsForRe" +
-      "sourcesResponseProto.ExchangeGemsForReso" +
-      "urcesStatus\"Y\n\036ExchangeGemsForResourcesS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FA" +
-      "IL_INSUFFICIENT_GEMS\020\003B\031B\027EventInAppPurc" +
-      "haseProto"
+      "\022\016\n\006ipaddr\030\006 \001(\t\"\207\004\n\032InAppPurchaseRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com.",
+      "lvl6.proto.InAppPurchaseResponseProto.In" +
+      "AppPurchaseStatus\022\026\n\016diamondsGained\030\003 \001(" +
+      "\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001\022\023\n\013packageNam" +
+      "e\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receipt" +
+      "\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6." +
+      "proto.FullUserMonsterProto\0227\n\020updatedUse" +
+      "rItems\030\t \003(\0132\035.com.lvl6.proto.UserItemPr" +
+      "oto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl6" +
+      ".proto.FullUserStructureProto\"C\n\023InAppPu" +
+      "rchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021D",
+      "UPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamondsR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022J\n\020freeDiamondsTyp" +
+      "e\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDiamond" +
+      "sType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(\003\"\353\002" +
+      "\n\035EarnFreeDiamondsResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.EarnF" +
+      "reeDiamondsResponseProto.EarnFreeDiamond" +
+      "sStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$.com.",
+      "lvl6.proto.EarnFreeDiamondsType:\nFB_CONN" +
+      "ECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUCCESS" +
+      "\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020" +
+      "\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER_FAI" +
+      "L\020\004\"\335\001\n$ExchangeGemsForResourcesRequestP" +
+      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
+      "nimumUserProtoWithMaxResources\022\017\n\007numGem" +
+      "s\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014resourc" +
+      "eType\030\004 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
+      "e:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\252\002\n%Exchange",
+      "GemsForResourcesResponseProto\022@\n\006sender\030" +
+      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
+      "ithMaxResources\022d\n\006status\030\002 \001(\0162T.com.lv" +
+      "l6.proto.ExchangeGemsForResourcesRespons" +
+      "eProto.ExchangeGemsForResourcesStatus\"Y\n" +
+      "\036ExchangeGemsForResourcesStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
+      "T_GEMS\020\003B\031B\027EventInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7201,7 +6995,7 @@ public final class EventInAppPurchaseProto {
     internal_static_com_lvl6_proto_InAppPurchaseRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", "Uuid", });
+        new java.lang.String[] { "Sender", "Receipt", "Localcents", "Localcurrency", "Locale", "Ipaddr", });
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_InAppPurchaseResponseProto_fieldAccessorTable = new

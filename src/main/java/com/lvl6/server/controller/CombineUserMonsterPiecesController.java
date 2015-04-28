@@ -43,15 +43,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
 
 	public CombineUserMonsterPiecesController() {
 		numAllocatedThreads = 4;
@@ -143,7 +137,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 			if (successful && gemCost > 0) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -215,7 +209,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			userMonsterIds.addAll(idsToUserMonsters.keySet());
 		}
 
-		List<String> wholeUserMonsterIds = monsterStuffUtils
+		List<String> wholeUserMonsterIds = MonsterStuffUtils
 				.getWholeButNotCombinedUserMonsters(idsToUserMonsters);
 		if (wholeUserMonsterIds.size() != userMonsterIds.size()) {
 			log.warn("client trying to combine already combined or incomplete monsters."
@@ -278,7 +272,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 								gemChange, userMonsterIds));
 				return false;
 			} else {
-				money.put(miscMethods.gems, gemChange);
+				money.put(MiscMethods.gems, gemChange);
 			}
 		}
 
@@ -299,7 +293,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			return;
 		}
 		String userId = aUser.getId();
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_COMBINING_MONSTER;
 
 		Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
@@ -311,7 +305,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 		currentCurrencies.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reasonForChange);
 		detailsList.put(gems, "userMonsterIds=" + userMonsterIds);
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				detailsList);
 

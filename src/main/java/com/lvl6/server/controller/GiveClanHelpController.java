@@ -46,9 +46,6 @@ public class GiveClanHelpController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected TimeUtils timeUtil;
@@ -230,7 +227,7 @@ public class GiveClanHelpController extends EventController {
 					.setUserUuid(aid.getUserId()).build();
 
 			//only need name not clan
-			ClanHelpProto chp = createInfoProtoUtils
+			ClanHelpProto chp = CreateInfoProtoUtils
 					.createClanHelpProtoFromClanHelp(aid, solicitor, null, mup2);
 
 			resBuilder.addClanHelps(chp);

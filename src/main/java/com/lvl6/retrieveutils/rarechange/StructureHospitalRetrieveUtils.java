@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +22,12 @@ public class StructureHospitalRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureHospital> structIdsToHospitals;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_HOSPITAL_CONFIG;
 
-	public Map<Integer, StructureHospital> getStructIdsToHospitals() {
+	public static Map<Integer, StructureHospital> getStructIdsToHospitals() {
 		log.debug("retrieving all structs data");
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
@@ -39,7 +35,7 @@ public class StructureHospitalRetrieveUtils {
 		return structIdsToHospitals;
 	}
 
-	public StructureHospital getHospitalForStructId(int structId) {
+	public static StructureHospital getHospitalForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
@@ -47,12 +43,12 @@ public class StructureHospitalRetrieveUtils {
 		return structIdsToHospitals.get(structId);
 	}
 
-	public StructureHospital getUpgradedHospitalForStructId(int structId) {
+	public static StructureHospital getUpgradedHospitalForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -63,13 +59,13 @@ public class StructureHospitalRetrieveUtils {
 		return null;
 	}
 
-	public StructureHospital getPredecessorHospitalForStructId(
+	public static StructureHospital getPredecessorHospitalForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToHospitals == null) {
 			setStaticStructIdsToHospitals();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -80,7 +76,7 @@ public class StructureHospitalRetrieveUtils {
 		return null;
 	}
 
-	private void setStaticStructIdsToHospitals() {
+	private static void setStaticStructIdsToHospitals() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -114,14 +110,14 @@ public class StructureHospitalRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToHospitals();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureHospital convertRSRowToHospital(ResultSet rs)
+	private static StructureHospital convertRSRowToHospital(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__STRUCT_ID);
 		int queueSize = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__QUEUE_SIZE);

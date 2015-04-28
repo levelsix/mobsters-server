@@ -45,15 +45,6 @@ public class SpawnMiniJobController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
-	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	//	@Autowired
 	//	protected Locker locker;
@@ -118,7 +109,7 @@ public class SpawnMiniJobController extends EventController {
 		//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			User user = getUserRetrieveUtils().getUserById(userId);
-			Map<Integer, MiniJob> miniJobIdToMiniJob = miniJobRetrieveUtils
+			Map<Integer, MiniJob> miniJobIdToMiniJob = MiniJobRetrieveUtils
 					.getMiniJobForStructId(structId);
 
 			boolean legit = checkLegitRequest(resBuilder, userId, user,
@@ -139,7 +130,7 @@ public class SpawnMiniJobController extends EventController {
 
 			if (success) {
 				resBuilder.setStatus(SpawnMiniJobStatus.SUCCESS);
-				List<UserMiniJobProto> userMiniJobProtos = createInfoProtoUtils
+				List<UserMiniJobProto> userMiniJobProtos = CreateInfoProtoUtils
 						.createUserMiniJobProtos(spawnedUserMiniJobs,
 								miniJobIdToMiniJob);
 				resBuilder.addAllMiniJobs(userMiniJobProtos);
@@ -154,7 +145,7 @@ public class SpawnMiniJobController extends EventController {
 			if (success) {
 				//modified the user, the last obstacle removed time
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -212,7 +203,7 @@ public class SpawnMiniJobController extends EventController {
 			return spawnedMiniJobs;
 		}
 
-		float probabilitySum = miniJobRetrieveUtils
+		float probabilitySum = MiniJobRetrieveUtils
 				.getMiniJobProbabilitySumForStructId(structId);
 		Random rand = new Random();
 		log.info("probabilitySum=" + probabilitySum);

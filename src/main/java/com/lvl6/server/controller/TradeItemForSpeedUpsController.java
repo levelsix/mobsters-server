@@ -40,9 +40,6 @@ public class TradeItemForSpeedUpsController extends EventController {
 	}
 
 	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
-	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Override
@@ -119,7 +116,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 					TradeItemForSpeedUpsStatus.SUCCESS)) {
 				List<ItemForUserUsage> itemsUsedWithIds = tifsua
 						.getItemForUserUsages();
-				List<UserItemUsageProto> uiupList = createInfoProtoUtils
+				List<UserItemUsageProto> uiupList = CreateInfoProtoUtils
 						.createUserItemUsageProto(itemsUsedWithIds);
 				resBuilder.addAllItemsUsed(uiupList);
 			}

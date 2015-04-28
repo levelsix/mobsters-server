@@ -26,7 +26,7 @@ public class SkillRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_CONFIG;
 
-	public Map<Integer, Skill> getIdsToSkills() {
+	public static Map<Integer, Skill> getIdsToSkills() {
 		log.debug("retrieving all Skills data map");
 		if (null == idsToSkills) {
 			setStaticIdsToSkills();
@@ -34,7 +34,7 @@ public class SkillRetrieveUtils {
 		return idsToSkills;
 	}
 
-	public Skill getSkillForId(int skillId) {
+	public static Skill getSkillForId(int skillId) {
 		log.debug(String.format("retrieve skill data for skill=%s", skillId));
 		if (null == idsToSkills) {
 			setStaticIdsToSkills();
@@ -42,7 +42,7 @@ public class SkillRetrieveUtils {
 		return idsToSkills.get(skillId);
 	}
 
-	private void setStaticIdsToSkills() {
+	private static void setStaticIdsToSkills() {
 		log.debug("setting static map of skillIds to skills");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -81,14 +81,14 @@ public class SkillRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToSkills();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private Skill convertRSRowToSkill(ResultSet rs) throws SQLException {
+	private static Skill convertRSRowToSkill(ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.SKILL__ID);
 		String name = rs.getString(DBConstants.SKILL__NAME);
 		int orbCost = rs.getInt(DBConstants.SKILL__ORB_COST);

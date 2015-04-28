@@ -43,12 +43,6 @@ public class AchievementRedeemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
-	AchievementRetrieveUtils achievementRetrieveUtils;
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
@@ -141,14 +135,14 @@ public class AchievementRedeemController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
 				Map<String, Integer> previousCurrency = Collections
-						.singletonMap(miscMethods.gems, previousGems);
+						.singletonMap(MiscMethods.gems, previousGems);
 				writeToUserCurrencyHistory(user, userId, achievementId,
 						currencyChange, previousCurrency, now);
 			}
@@ -211,7 +205,7 @@ public class AchievementRedeemController extends EventController {
 				"user achievements redeemed. numUpdated=%s, achievementId=%s",
 				numUpdated, achievementId));
 
-		Achievement achievement = achievementRetrieveUtils
+		Achievement achievement = AchievementRetrieveUtils
 				.getAchievementForAchievementId(achievementId);
 		int gemReward = achievement.getGemReward();
 		int gemsGained = Math.max(0, gemReward);
@@ -230,7 +224,7 @@ public class AchievementRedeemController extends EventController {
 		} else {
 			//things worked
 			if (0 != gemsGained) {
-				currencyChange.put(miscMethods.gems, gemsGained);
+				currencyChange.put(MiscMethods.gems, gemsGained);
 			}
 		}
 		return true;
@@ -243,7 +237,7 @@ public class AchievementRedeemController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 
 		String reason = ControllerConstants.UCHRFC__QUEST_REDEEM;
 		StringBuilder detailsSb = new StringBuilder();
@@ -255,7 +249,7 @@ public class AchievementRedeemController extends EventController {
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, details);
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

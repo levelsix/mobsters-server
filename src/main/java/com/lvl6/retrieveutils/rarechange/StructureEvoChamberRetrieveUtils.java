@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +22,12 @@ public class StructureEvoChamberRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureEvoChamber> structIdsToEvoChambers;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_EVO_CHAMBER_CONFIG;
 
-	public Map<Integer, StructureEvoChamber> getStructIdsToEvoChambers() {
+	public static Map<Integer, StructureEvoChamber> getStructIdsToEvoChambers() {
 		log.debug("retrieving all structs data");
 		if (structIdsToEvoChambers == null) {
 			setStaticStructIdsToEvoChambers();
@@ -39,7 +35,7 @@ public class StructureEvoChamberRetrieveUtils {
 		return structIdsToEvoChambers;
 	}
 
-	public StructureEvoChamber getEvoChamberForStructId(int structId) {
+	public static StructureEvoChamber getEvoChamberForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToEvoChambers == null) {
 			setStaticStructIdsToEvoChambers();
@@ -47,13 +43,13 @@ public class StructureEvoChamberRetrieveUtils {
 		return structIdsToEvoChambers.get(structId);
 	}
 
-	public StructureEvoChamber getUpgradedEvoChamberForStructId(
+	public static StructureEvoChamber getUpgradedEvoChamberForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToEvoChambers == null) {
 			setStaticStructIdsToEvoChambers();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -64,13 +60,13 @@ public class StructureEvoChamberRetrieveUtils {
 		return null;
 	}
 
-	public StructureEvoChamber getPredecessorEvoChamberForStructId(
+	public static StructureEvoChamber getPredecessorEvoChamberForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToEvoChambers == null) {
 			setStaticStructIdsToEvoChambers();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -81,7 +77,7 @@ public class StructureEvoChamberRetrieveUtils {
 		return null;
 	}
 
-	private void setStaticStructIdsToEvoChambers() {
+	private static void setStaticStructIdsToEvoChambers() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -115,14 +111,14 @@ public class StructureEvoChamberRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToEvoChambers();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureEvoChamber convertRSRowToEvoChamber(ResultSet rs)
+	private static StructureEvoChamber convertRSRowToEvoChamber(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_EVO__STRUCT_ID);
 		String qualityUnlocked = rs

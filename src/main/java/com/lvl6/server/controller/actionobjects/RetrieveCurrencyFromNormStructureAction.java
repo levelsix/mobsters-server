@@ -36,19 +36,14 @@ public class RetrieveCurrencyFromNormStructureAction {
 	private Map<String, StructureRetrieval> userStructIdsToStructRetrievals;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private StructureForUserRetrieveUtils2 userStructRetrieveUtil;
-	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	private StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
 	private UpdateUtil updateUtil;
-	private MiscMethods miscMethods;
 
 	public RetrieveCurrencyFromNormStructureAction(String userId, int maxCash,
 			int maxOil, List<String> duplicates,
 			Map<String, StructureRetrieval> userStructIdsToStructRetrievals,
 			UserRetrieveUtils2 userRetrieveUtil,
 			StructureForUserRetrieveUtils2 userStructRetrieveUtil,
-			StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils,
-			StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils,
-			UpdateUtil updateUtil, MiscMethods miscMethods) {
+			UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
 		this.maxCash = maxCash;
@@ -57,10 +52,7 @@ public class RetrieveCurrencyFromNormStructureAction {
 		this.userStructIdsToStructRetrievals = userStructIdsToStructRetrievals;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.userStructRetrieveUtil = userStructRetrieveUtil;
-		this.structureMoneyTreeRetrieveUtils = structureMoneyTreeRetrieveUtils;
-		this.structureResourceGeneratorRetrieveUtils = structureResourceGeneratorRetrieveUtils;
 		this.updateUtil = updateUtil;
-		this.miscMethods = miscMethods;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -264,7 +256,7 @@ public class RetrieveCurrencyFromNormStructureAction {
 			int structId = us.getStructId();
 			String userStructId = us.getId();
 
-			StructureMoneyTree s = structureMoneyTreeRetrieveUtils
+			StructureMoneyTree s = StructureMoneyTreeRetrieveUtils
 					.getMoneyTreeForStructId(structId);
 			if (null != s) {
 				sfuIdToMoneyTree.put(userStructId, s);
@@ -280,7 +272,7 @@ public class RetrieveCurrencyFromNormStructureAction {
 			int structId = us.getStructId();
 			String userStructId = us.getId();
 
-			StructureResourceGenerator s = structureResourceGeneratorRetrieveUtils
+			StructureResourceGenerator s = StructureResourceGeneratorRetrieveUtils
 					.getResourceGeneratorForStructId(structId);
 			if (null != s) {
 				sfuIdToResourceGenerator.put(userStructId, s);
@@ -293,13 +285,13 @@ public class RetrieveCurrencyFromNormStructureAction {
 		prevCurrencies = new HashMap<String, Integer>();
 
 		if (0 != gemsGained) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
+			prevCurrencies.put(MiscMethods.gems, user.getGems());
 		}
 		if (0 != cashGained) {
-			prevCurrencies.put(miscMethods.cash, user.getCash());
+			prevCurrencies.put(MiscMethods.cash, user.getCash());
 		}
 		if (0 != oilGained) {
-			prevCurrencies.put(miscMethods.oil, user.getOil());
+			prevCurrencies.put(MiscMethods.oil, user.getOil());
 		}
 
 		//give user the resources
@@ -328,9 +320,9 @@ public class RetrieveCurrencyFromNormStructureAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
-		String oil = miscMethods.oil;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
+		String oil = MiscMethods.oil;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

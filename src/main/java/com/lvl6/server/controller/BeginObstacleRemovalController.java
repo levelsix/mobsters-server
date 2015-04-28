@@ -38,9 +38,6 @@ public class BeginObstacleRemovalController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
@@ -130,7 +127,7 @@ public class BeginObstacleRemovalController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -254,17 +251,17 @@ public class BeginObstacleRemovalController extends EventController {
 		int oilChange = 0;
 
 		if (0 != gemsChange) {
-			previousCurrency.put(miscMethods.gems, user.getGems());
+			previousCurrency.put(MiscMethods.gems, user.getGems());
 		}
 		if (ResourceType.CASH.equals(rt)) {
 			log.info("user spent cash.");
 			cashChange = resourceChange;
-			previousCurrency.put(miscMethods.cash, user.getCash());
+			previousCurrency.put(MiscMethods.cash, user.getCash());
 		}
 		if (ResourceType.OIL.equals(rt)) {
 			log.info("user spent cash.");
 			oilChange = resourceChange;
-			previousCurrency.put(miscMethods.oil, user.getOil());
+			previousCurrency.put(MiscMethods.oil, user.getOil());
 		}
 
 		if (!updateUser(user, gemsChange, cashChange, oilChange)) {
@@ -274,13 +271,13 @@ public class BeginObstacleRemovalController extends EventController {
 			return false;
 		} else {
 			if (0 != gemsChange) {
-				currencyChange.put(miscMethods.gems, gemsChange);
+				currencyChange.put(MiscMethods.gems, gemsChange);
 			}
 			if (0 != cashChange) {
-				currencyChange.put(miscMethods.cash, cashChange);
+				currencyChange.put(MiscMethods.cash, cashChange);
 			}
 			if (0 != oilChange) {
-				currencyChange.put(miscMethods.oil, oilChange);
+				currencyChange.put(MiscMethods.oil, oilChange);
 			}
 		}
 
@@ -328,9 +325,9 @@ public class BeginObstacleRemovalController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
-		String oil = miscMethods.oil;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
+		String oil = MiscMethods.oil;
 
 		if (currencyChange.containsKey(gems)) {
 			currentCurrency.put(gems, user.getGems());
@@ -348,7 +345,7 @@ public class BeginObstacleRemovalController extends EventController {
 			detailsMap.put(oil, details);
 		}
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

@@ -30,7 +30,7 @@ public class BoosterDisplayItemRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_DISPLAY_ITEM_CONFIG;
 
-	public Map<Integer, BoosterDisplayItem> getBoosterDisplayItemIdsToBoosterDisplayItems() {
+	public static Map<Integer, BoosterDisplayItem> getBoosterDisplayItemIdsToBoosterDisplayItems() {
 		log.debug("retrieving all BoosterDisplayItems data map");
 		if (boosterDisplayItemIdsToBoosterDisplayItems == null) {
 			setStaticBoosterDisplayItemIdsToBoosterDisplayItems();
@@ -38,14 +38,14 @@ public class BoosterDisplayItemRetrieveUtils {
 		return boosterDisplayItemIdsToBoosterDisplayItems;
 	}
 
-	public Map<Integer, Map<Integer, BoosterDisplayItem>> getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds() {
+	public static Map<Integer, Map<Integer, BoosterDisplayItem>> getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds() {
 		if (null == boosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds) {
 			setStaticBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
 		}
 		return boosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds;
 	}
 
-	public Map<Integer, BoosterDisplayItem> getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackId(
+	public static Map<Integer, BoosterDisplayItem> getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackId(
 			int boosterPackId) {
 		try {
 			log.debug("retrieve boosterPack data for boosterPack "
@@ -80,7 +80,7 @@ public class BoosterDisplayItemRetrieveUtils {
 		return null;
 	}
 
-	public BoosterDisplayItem getBoosterDisplayItemForBoosterDisplayItemId(
+	public static BoosterDisplayItem getBoosterDisplayItemForBoosterDisplayItemId(
 			int boosterDisplayItemId) {
 		log.debug("retrieve boosterDisplayItem data for boosterDisplayItem "
 				+ boosterDisplayItemId);
@@ -91,7 +91,7 @@ public class BoosterDisplayItemRetrieveUtils {
 				.get(boosterDisplayItemId);
 	}
 
-	public void setStaticBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds() {
+	public static void setStaticBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds() {
 		try {
 			log.debug("setting static map of boosterPackId to (boosterDisplayItemIds to boosterDisplayItems) ");
 			if (boosterDisplayItemIdsToBoosterDisplayItems == null) {
@@ -121,7 +121,7 @@ public class BoosterDisplayItemRetrieveUtils {
 		}
 	}
 
-	private void setStaticBoosterDisplayItemIdsToBoosterDisplayItems() {
+	private static void setStaticBoosterDisplayItemIdsToBoosterDisplayItems() {
 		log.debug("setting static map of boosterDisplayItemIds to boosterDisplayItems");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -156,7 +156,7 @@ public class BoosterDisplayItemRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticBoosterDisplayItemIdsToBoosterDisplayItems();
 		setStaticBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
 	}
@@ -164,7 +164,7 @@ public class BoosterDisplayItemRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private BoosterDisplayItem convertRSRowToBoosterDisplayItem(
+	private static BoosterDisplayItem convertRSRowToBoosterDisplayItem(
 			ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ID);
 		int boosterPackId = rs

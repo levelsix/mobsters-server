@@ -28,14 +28,14 @@ public class ObstacleRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_OBSTACLE_CONFIG;
 
-	public Map<Integer, Obstacle> getObstacleIdsToObstacles() {
+	public static Map<Integer, Obstacle> getObstacleIdsToObstacles() {
 		if (null == obstacleIdsToObstacles) {
 			setStaticObstacleIdsToObstacles();
 		}
 		return obstacleIdsToObstacles;
 	}
 
-	public Obstacle getObstacleForId(int obstacleId) {
+	public static Obstacle getObstacleForId(int obstacleId) {
 		if (null == obstacleIdsToObstacles) {
 			setStaticObstacleIdsToObstacles();
 		}
@@ -48,7 +48,7 @@ public class ObstacleRetrieveUtils {
 		return obstacleIdsToObstacles.get(obstacleId);
 	}
 
-	public Map<Integer, Obstacle> getObstaclesForIds(
+	public static Map<Integer, Obstacle> getObstaclesForIds(
 			Collection<Integer> ids) {
 		if (null == obstacleIdsToObstacles) {
 			setStaticObstacleIdsToObstacles();
@@ -62,7 +62,7 @@ public class ObstacleRetrieveUtils {
 		return returnMap;
 	}
 
-	private void setStaticObstacleIdsToObstacles() {
+	private static void setStaticObstacleIdsToObstacles() {
 		log.debug("setting static map of obstacle ids to obstacles");
 
 		Random rand = new Random();
@@ -101,14 +101,14 @@ public class ObstacleRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticObstacleIdsToObstacles();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private Obstacle convertRSRowToObstacle(ResultSet rs, Random rand)
+	private static Obstacle convertRSRowToObstacle(ResultSet rs, Random rand)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.OBSTACLE__ID);
 		String name = rs.getString(DBConstants.OBSTACLE__NAME);

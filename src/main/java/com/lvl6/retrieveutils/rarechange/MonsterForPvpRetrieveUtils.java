@@ -31,7 +31,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 	private Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private static Map<Integer, MonsterForPvp> idsToMonsterForPvps;
+	private Map<Integer, MonsterForPvp> idsToMonsterForPvps;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_FOR_PVP_CONFIG;
 

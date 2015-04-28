@@ -95,7 +95,7 @@ public class SetDefendingMsgController extends EventController {
 		try {
 			//
 			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
-					userRetrieveUtil, miscMethods);
+					userRetrieveUtil);
 
 			rsga.execute(resBuilder);
 

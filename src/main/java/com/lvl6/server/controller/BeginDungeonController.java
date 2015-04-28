@@ -61,36 +61,12 @@ public class BeginDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
-	@Autowired
-	CreateInfoProtoUtils createInfoProtoUtils;
-	
 	@Autowired
 	protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
 
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-	
-	@Autowired
-	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
-	
-	@Autowired
-	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
-	
-	@Autowired
-	protected QuestJobRetrieveUtils questJobRetrieveUtils;
-	
-	@Autowired
-	protected TaskRetrieveUtils taskRetrieveUtils;
-	
-	@Autowired
-	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
 
 	public BeginDungeonController() {
 		numAllocatedThreads = 8;
@@ -167,7 +143,7 @@ public class BeginDungeonController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-			Task aTask = taskRetrieveUtils.getTaskForTaskId(taskId);
+			Task aTask = TaskRetrieveUtils.getTaskForTaskId(taskId);
 
 			Map<Integer, TaskStage> tsMap = new HashMap<Integer, TaskStage>();
 			boolean legit = checkLegit(resBuilder, aUser, userId, aTask,
@@ -204,7 +180,7 @@ public class BeginDungeonController extends EventController {
 
 			if (successful && 0 != gemsSpent) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -245,7 +221,7 @@ public class BeginDungeonController extends EventController {
 			return false;
 		}
 
-		Map<Integer, TaskStage> ts = taskStageRetrieveUtils
+		Map<Integer, TaskStage> ts = TaskStageRetrieveUtils
 				.getTaskStagesForTaskId(taskId);
 		if (null == ts) {
 			log.error(String.format("task has no taskStages. task=%s" + aTask));
@@ -351,7 +327,7 @@ public class BeginDungeonController extends EventController {
 			monsterPieceDropped.add(dropped);
 			itemIdDropped.add(tsfu.getItemIdDropped());
 
-			TaskStageMonster tsm = taskStageMonsterRetrieveUtils
+			TaskStageMonster tsm = TaskStageMonsterRetrieveUtils
 					.getTaskStageMonsterForId(tsmId);
 			monsterIdDrops.add(tsm.getMonsterIdDrop());
 			monsterDropLvls.add(tsm.getMonsterDropLvl());
@@ -395,7 +371,7 @@ public class BeginDungeonController extends EventController {
 		int oilGained = oilList.get(0);
 
 		//record into user_task table	  
-		int tsId = taskStageRetrieveUtils.getFirstTaskStageIdForTaskId(tId);
+		int tsId = TaskStageRetrieveUtils.getFirstTaskStageIdForTaskId(tId);
 		String userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId,
 				tId, expGained, cashGained, oilGained, clientTime, tsId);
 
@@ -416,7 +392,7 @@ public class BeginDungeonController extends EventController {
 			log.info(String
 					.format("started cool down timer for (eventId, userId): (%s,%s), numInserted=%s",
 							uId, eventId, numInserted));
-			previousCurrency.put(miscMethods.gems, u.getGems());
+			previousCurrency.put(MiscMethods.gems, u.getGems());
 			if (0 != gemsSpent) {
 				int gemChange = -1 * gemsSpent;
 				success = updateUser(u, gemChange);
@@ -425,7 +401,7 @@ public class BeginDungeonController extends EventController {
 								success));
 			}
 			if (success) {
-				currencyChange.put(miscMethods.gems, u.getGems());
+				currencyChange.put(MiscMethods.gems, u.getGems());
 			}
 		}
 
@@ -454,7 +430,7 @@ public class BeginDungeonController extends EventController {
 
 		Random rand = ControllerConstants.RAND;
 		//quest monster items are dropped based on QUEST JOB IDS not quest ids
-		List<Integer> questJobIds = questJobRetrieveUtils
+		List<Integer> questJobIds = QuestJobRetrieveUtils
 				.getQuestJobIdsForQuestIds(questIds);
 
 		//for each stage, calculate the monster(s) the user will face and
@@ -494,7 +470,7 @@ public class BeginDungeonController extends EventController {
 			List<TaskStageMonster> spawnedTaskStageMonsters) {
 
 		//select one monster, at random. This is the ONE monster for this stage
-		List<TaskStageMonster> possibleMonsters = taskStageMonsterRetrieveUtils
+		List<TaskStageMonster> possibleMonsters = TaskStageMonsterRetrieveUtils
 				.getMonstersForTaskStageId(tsId);
 		List<TaskStageMonster> copyTaskStageMonsters = new ArrayList<TaskStageMonster>(
 				possibleMonsters);
@@ -502,7 +478,7 @@ public class BeginDungeonController extends EventController {
 		int size = copyTaskStageMonsters.size();
 		int quantityWanted = quantity;
 		//sum up chance to appear, and need to normalize all the probabilities
-		float sumOfProbabilities = monsterStuffUtils
+		float sumOfProbabilities = MonsterStuffUtils
 				.sumProbabilities(copyTaskStageMonsters);
 
 		for (int i = 0; i < size; i++) {
@@ -668,7 +644,7 @@ public class BeginDungeonController extends EventController {
 		//create the proto
 		for (Integer stageNum : stageNumList) {
 			List<TaskStageForUser> tsfu = stageNumToStages.get(stageNum);
-			TaskStageProto tsp = createInfoProtoUtils.createTaskStageProto(
+			TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
 					taskId, stageNum, tsfu);
 
 			//return to sender
@@ -686,7 +662,7 @@ public class BeginDungeonController extends EventController {
 		int monsterId = tsm.getMonsterId();
 		for (int questJobId : questJobIds) {
 
-			QuestJobMonsterItem qjmi = questJobMonsterItemRetrieveUtils
+			QuestJobMonsterItem qjmi = QuestJobMonsterItemRetrieveUtils
 					.getItemForQuestJobAndMonsterId(questJobId, monsterId);
 			log.info(String.format("QuestJobMonsterItem=%s", qjmi));
 
@@ -755,7 +731,7 @@ public class BeginDungeonController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 
 		//	  if (currencyChange.containsKey(gems)) {
 		currentCurrency.put(gems, user.getGems());
@@ -763,7 +739,7 @@ public class BeginDungeonController extends EventController {
 		detailsMap.put(gems, details);
 		//	  }
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

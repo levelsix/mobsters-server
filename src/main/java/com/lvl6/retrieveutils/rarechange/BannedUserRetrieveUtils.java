@@ -25,7 +25,7 @@ public class BannedUserRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BANNED_USER;
 
-	public Set<Integer> getAllBannedUsers() {
+	public static Set<Integer> getAllBannedUsers() {
 		log.debug("retrieving all banned users placed in a set");
 		if (userIds == null) {
 			setStaticBannedUsers();
@@ -33,7 +33,7 @@ public class BannedUserRetrieveUtils {
 		return userIds;
 	}
 
-	private void setStaticBannedUsers() {
+	private static void setStaticBannedUsers() {
 		log.debug("setting static set of banned users");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -65,14 +65,14 @@ public class BannedUserRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticBannedUsers();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private Integer convertRSRowToBannedUser(ResultSet rs)
+	private static Integer convertRSRowToBannedUser(ResultSet rs)
 			throws SQLException {
 		Integer profanityTerm = rs.getInt(DBConstants.BANNED_USER__USER_ID);
 

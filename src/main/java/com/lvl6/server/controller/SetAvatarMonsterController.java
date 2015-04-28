@@ -30,9 +30,6 @@ public class SetAvatarMonsterController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	public SetAvatarMonsterController() {
 		numAllocatedThreads = 1;
@@ -115,7 +112,7 @@ public class SetAvatarMonsterController extends EventController {
 			if (successful) {
 				//game center id might have changed
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());

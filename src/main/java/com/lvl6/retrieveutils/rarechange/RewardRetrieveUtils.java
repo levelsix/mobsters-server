@@ -26,7 +26,7 @@ public class RewardRetrieveUtils {
 
 	private static Map<Integer, Reward> idToReward;
 
-	public Map<Integer, Reward> getRewardIdsToRewards() {
+	public static Map<Integer, Reward> getRewardIdsToRewards() {
 		if (null == idToReward) {
 			setStaticIdsToRewards();
 		}
@@ -34,7 +34,7 @@ public class RewardRetrieveUtils {
 		return idToReward;
 	}
 
-	public Reward getRewardById(int id) {
+	public static Reward getRewardById(int id) {
 		if (null == idToReward) {
 			setStaticIdsToRewards();
 		}
@@ -45,11 +45,11 @@ public class RewardRetrieveUtils {
 		return ep;
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToRewards();
 	}
 
-	private void setStaticIdsToRewards() {
+	private static void setStaticIdsToRewards() {
 		log.debug("setting static map of id to Reward");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -88,7 +88,7 @@ public class RewardRetrieveUtils {
 		}
 	}
 
-	private Reward convertRSRowToReward(ResultSet rs)
+	private static Reward convertRSRowToReward(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.REWARD__ID);
 		int staticDataId = rs.getInt(DBConstants.REWARD__STATIC_DATA_ID);

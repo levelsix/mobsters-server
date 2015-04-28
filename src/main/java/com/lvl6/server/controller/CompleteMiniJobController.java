@@ -41,9 +41,6 @@ public class CompleteMiniJobController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -145,7 +142,7 @@ public class CompleteMiniJobController extends EventController {
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -234,7 +231,7 @@ public class CompleteMiniJobController extends EventController {
 			return false;
 		} else {
 			if (0 != gemsChange) {
-				currencyChange.put(miscMethods.gems, gemsChange);
+				currencyChange.put(MiscMethods.gems, gemsChange);
 			}
 		}
 
@@ -274,14 +271,14 @@ public class CompleteMiniJobController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 
 		previousCurrency.put(gems, previousGems);
 		currentCurrency.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, detailsSb.toString());
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

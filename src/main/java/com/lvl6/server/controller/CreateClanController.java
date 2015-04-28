@@ -46,12 +46,6 @@ public class CreateClanController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
@@ -112,7 +106,7 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -129,14 +123,14 @@ public class CreateClanController extends EventController {
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			Clan createdClan = new Clan();
 			if (legitCreate) {
-				previousCurrency.put(miscMethods.gems, user.getGems());
-				previousCurrency.put(miscMethods.cash, user.getCash());
+				previousCurrency.put(MiscMethods.gems, user.getGems());
+				previousCurrency.put(MiscMethods.cash, user.getCash());
 				success = writeChangesToDB(user, clanName, tag, requestToJoinRequired, description,
 						clanIconId, createTime, createdClan, gemsSpent, cashChange, currencyChange);
 			}
 
 			if (success) {
-				resBuilder.setClanInfo(createInfoProtoUtils.createMinimumClanProtoFromClan(createdClan));
+				resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(createdClan));
 				resBuilder.setStatus(CreateClanStatus.SUCCESS);
 				updateClanCache(createdClan);
 			}
@@ -144,14 +138,14 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				server.writeEvent(resEventUpdate);
 
 				sendGeneralNotification(user.getName(), clanName);
 
@@ -165,7 +159,7 @@ public class CreateClanController extends EventController {
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCreateClanResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateClan processEvent", e);
 			}
@@ -209,7 +203,7 @@ public class CreateClanController extends EventController {
 		Notification createClanNotification = new Notification();
 		createClanNotification.setAsClanCreated(userName, clanName);
 
-		miscMethods.writeGlobalNotification(createClanNotification, server);
+		MiscMethods.writeGlobalNotification(createClanNotification, server);
 	}
 
 	private boolean writeChangesToDB(User user, String name, String tag,
@@ -240,10 +234,10 @@ public class CreateClanController extends EventController {
 							gemChange, cashChange));
 		} else {
 			if (0 != gemsSpent) {
-				money.put(miscMethods.gems, gemsSpent);
+				money.put(MiscMethods.gems, gemsSpent);
 			}
 			if (0 != cashChange) {
-				money.put(miscMethods.cash, cashChange);
+				money.put(MiscMethods.cash, cashChange);
 			}
 		}
 
@@ -299,8 +293,8 @@ public class CreateClanController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
 
 		currentCurrency.put(gems, aUser.getGems());
 		currentCurrency.put(cash, aUser.getCash());
@@ -309,7 +303,7 @@ public class CreateClanController extends EventController {
 		detailsMap.put(gems, details);
 		detailsMap.put(cash, details);
 
-		miscMethods.writeToUserCurrencyOneUser(userId, createTime,
+		MiscMethods.writeToUserCurrencyOneUser(userId, createTime,
 				currencyChange, previousCurrency, currentCurrency,
 				reasonsForChanges, detailsMap);
 

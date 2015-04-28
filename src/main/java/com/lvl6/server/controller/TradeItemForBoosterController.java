@@ -42,9 +42,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.server.controller.utils.BoosterItemUtils;
+import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -64,38 +62,13 @@ public class TradeItemForBoosterController extends EventController {
 	}
 
 	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
-	@Autowired
-	protected MiscMethods miscMethods;
-
-	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
-	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-
-	@Autowired
-	protected ItemRetrieveUtils itemRetrieveUtils;
-
-	@Autowired
-	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-
-	@Autowired
 	protected UpdateUtil updateUtil;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
-
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -150,7 +123,7 @@ public class TradeItemForBoosterController extends EventController {
 		try {
 			User aUser = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
-			Item itm = itemRetrieveUtils.getItemForId(itemId);
+			Item itm = ItemRetrieveUtils.getItemForId(itemId);
 			//TODO: Consider writing currency history and other history
 
 			List<ItemForUser> ifuContainer = new ArrayList<ItemForUser>();
@@ -169,25 +142,25 @@ public class TradeItemForBoosterController extends EventController {
 				boosterPackId = boosterPackIdContainer.get(0);
 
 				ifu = ifuContainer.get(0);
-				Map<Integer, BoosterItem> idsToBoosterItems = boosterItemRetrieveUtils
+				Map<Integer, BoosterItem> idsToBoosterItems = BoosterItemRetrieveUtils
 						.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
 				previousGems = aUser.getGems();
 
 				int numBoosterItemsUserWants = 1;
 				log.info("determining the booster items the user receives.");
-				itemsUserReceives = miscMethods
+				itemsUserReceives = MiscMethods
 						.determineBoosterItemsUserReceives(
 								numBoosterItemsUserWants, idsToBoosterItems);
 
-				legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils);
+				legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
 			}
 
 			int gemReward = 0;
 			boolean successful = false;
 			if (legit) {
 				boolean rigged = riggedContainer.get(0);
-				gemReward = BoosterItemUtils.determineGemReward(itemsUserReceives);
+				gemReward = MiscMethods.determineGemReward(itemsUserReceives);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu,
 						itemId, boosterPackId, itemsUserReceives, now,
@@ -198,7 +171,7 @@ public class TradeItemForBoosterController extends EventController {
 				//assume user only receives 1 item. NEED TO LET CLIENT KNOW THE PRIZE
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
-					BoosterItemProto bip = createInfoProtoUtils
+					BoosterItemProto bip = CreateInfoProtoUtils
 							.createBoosterItemProto(bi);
 					resBuilder.setPrize(bip);
 				}
@@ -214,7 +187,7 @@ public class TradeItemForBoosterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -246,7 +219,7 @@ public class TradeItemForBoosterController extends EventController {
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 
@@ -269,7 +242,7 @@ public class TradeItemForBoosterController extends EventController {
 			return false;
 		}
 		int boosterPackId = itm.getStaticDataId();
-		BoosterPack aPack = boosterPackRetrieveUtils
+		BoosterPack aPack = BoosterPackRetrieveUtils
 				.getBoosterPackForBoosterPackId(boosterPackId);
 		if (null == aPack) {
 			log.error("no BoosterPack for id={}", boosterPackId);
@@ -290,7 +263,7 @@ public class TradeItemForBoosterController extends EventController {
 			riggedContainer.add(false);
 		}
 
-		Map<Integer, BoosterItem> idsToBoosterItems = boosterItemRetrieveUtils
+		Map<Integer, BoosterItem> idsToBoosterItems = BoosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
 		if (null == idsToBoosterItems || idsToBoosterItems.isEmpty()) {
@@ -356,10 +329,9 @@ public class TradeItemForBoosterController extends EventController {
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
 		//sop = source of pieces
-		String mfusop = BoosterItemUtils.createUpdateUserMonsterArguments(userId,
+		String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId,
 				bPackId, itemsUserReceives, monsterIdToNumPieces,
-				completeUserMonsters, now, monsterLevelInfoRetrieveUtils,
-				monsterRetrieveUtils, monsterStuffUtils);
+				completeUserMonsters, now);
 		mfusop = String.format("%s=%s, %s",
 				ControllerConstants.MFUSOP__REDEEM_ITEM, itemId, mfusop);
 
@@ -370,7 +342,7 @@ public class TradeItemForBoosterController extends EventController {
 			List<String> monsterForUserIds = InsertUtils.get()
 					.insertIntoMonsterForUserReturnIds(userId,
 							completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = miscMethods
+			List<FullUserMonsterProto> newOrUpdated = MiscMethods
 					.createFullUserMonsterProtos(monsterForUserIds,
 							completeUserMonsters);
 
@@ -383,9 +355,9 @@ public class TradeItemForBoosterController extends EventController {
 		//this is if the user did not buy a complete monster, UPDATE DB
 		if (!monsterIdToNumPieces.isEmpty()) {
 			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
+			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
 					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now, monsterLevelInfoRetrieveUtils);
+							mfusop, now);
 
 			log.info("YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)! monster(s)= newOrUpdated"
 					+ newOrUpdated + "\t bpackId=" + bPackId);
@@ -401,14 +373,14 @@ public class TradeItemForBoosterController extends EventController {
 		//	      return false;
 		//	    }
 		//item reward
-		List<ItemForUser> ifuList = BoosterItemUtils
+		List<ItemForUser> ifuList = PurchaseBoosterPackAction
 				.calculateBoosterItemItemRewards(userId, itemsUserReceives,
 						itemForUserRetrieveUtil);
 		log.info("ifuList={}", ifuList);
 		if (null != ifuList && !ifuList.isEmpty()) {
 			numUpdated = updateUtil.updateItemForUser(ifuList);
 			log.info("items numUpdated={}", numUpdated);
-			List<UserItemProto> uipList = createInfoProtoUtils
+			List<UserItemProto> uipList = CreateInfoProtoUtils
 					.createUserItemProtosFromUserItems(ifuList);
 			resBuilder.addAllUpdatedUserItems(uipList);
 		}
@@ -439,7 +411,7 @@ public class TradeItemForBoosterController extends EventController {
 			detailSb.append(" gemReward=");
 			detailSb.append(gemReward);
 		}
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK;
 
 		Map<String, Integer> money = new HashMap<String, Integer>();
@@ -456,7 +428,7 @@ public class TradeItemForBoosterController extends EventController {
 		details.put(gems, detailSb.toString());
 
 		log.info("DETAILS=" + detailSb.toString());
-		miscMethods.writeToUserCurrencyOneUser(userId, date, money,
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				details);
 	}
@@ -470,7 +442,7 @@ public class TradeItemForBoosterController extends EventController {
 		}
 		BoosterItem bi = itemsUserReceives.get(0);
 
-		List<String> userMonsterIds = monsterStuffUtils
+		List<String> userMonsterIds = MonsterStuffUtils
 				.getUserMonsterIds(fumpList);
 
 		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(

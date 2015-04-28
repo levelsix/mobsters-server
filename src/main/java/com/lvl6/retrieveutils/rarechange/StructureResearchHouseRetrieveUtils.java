@@ -26,7 +26,7 @@ public class StructureResearchHouseRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESEARCH_HOUSE_CONFIG;
 
-	public Map<Integer, StructureResearchHouse> getStructIdsToResearchHouses() {
+	public static Map<Integer, StructureResearchHouse> getStructIdsToResearchHouses() {
 		log.debug("retrieving all structs data");
 		if (structIdsToResearchHouses == null) {
 			setStaticStructIdsToResearchHouses();
@@ -34,7 +34,7 @@ public class StructureResearchHouseRetrieveUtils {
 		return structIdsToResearchHouses;
 	}
 
-	public StructureResearchHouse getResearchHouseForStructId(
+	public static StructureResearchHouse getResearchHouseForStructId(
 			int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToResearchHouses == null) {
@@ -43,7 +43,7 @@ public class StructureResearchHouseRetrieveUtils {
 		return structIdsToResearchHouses.get(structId);
 	}
 
-	private void setStaticStructIdsToResearchHouses() {
+	private static void setStaticStructIdsToResearchHouses() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -78,14 +78,14 @@ public class StructureResearchHouseRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToResearchHouses();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureResearchHouse convertRSRowToResearchHouse(
+	private static StructureResearchHouse convertRSRowToResearchHouse(
 			ResultSet rs) throws SQLException {
 		int structId = rs
 				.getInt(DBConstants.STRUCTURE_RESEARCH_HOUSE__STRUCT_ID);

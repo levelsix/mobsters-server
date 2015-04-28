@@ -29,7 +29,7 @@ public class AchievementRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT_CONFIG;
 
 	//CONTROLLER LOGIC******************************************************************
-	public Set<Integer> getAchievementIds() {
+	public static Set<Integer> getAchievementIds() {
 		Map<Integer, Achievement> achievementIdsToAchievements = getAchievementIdsToAchievements();
 
 		if (null == achievementIdsToAchievements) {
@@ -39,7 +39,7 @@ public class AchievementRetrieveUtils {
 	}
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Integer, Achievement> getAchievementIdsToAchievements() {
+	public static Map<Integer, Achievement> getAchievementIdsToAchievements() {
 		log.debug("retrieving all achievement data");
 		if (achievementIdsToAchievements == null) {
 			setStaticAchievementIdsToAchievements();
@@ -47,7 +47,7 @@ public class AchievementRetrieveUtils {
 		return achievementIdsToAchievements;
 	}
 
-	public Achievement getAchievementForAchievementId(int achievementId) {
+	public static Achievement getAchievementForAchievementId(int achievementId) {
 		log.debug("retrieving achievement with achievementId " + achievementId);
 		if (null == achievementIdsToAchievements) {
 			setStaticAchievementIdsToAchievements();
@@ -55,7 +55,7 @@ public class AchievementRetrieveUtils {
 		return achievementIdsToAchievements.get(achievementId);
 	}
 
-	private void setStaticAchievementIdsToAchievements() {
+	private static void setStaticAchievementIdsToAchievements() {
 		log.debug("setting static map of achievementIds to achievements");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -88,14 +88,14 @@ public class AchievementRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticAchievementIdsToAchievements();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private Achievement convertRSRowToAchievement(ResultSet rs)
+	private static Achievement convertRSRowToAchievement(ResultSet rs)
 			throws SQLException {
 
 		int id = rs.getInt(DBConstants.ACHIEVEMENT__ID);

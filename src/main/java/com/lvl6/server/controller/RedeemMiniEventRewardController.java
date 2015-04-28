@@ -17,6 +17,7 @@ import com.lvl6.events.response.RedeemMiniEventRewardResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto;
@@ -29,12 +30,8 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -57,27 +54,12 @@ public class RedeemMiniEventRewardController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
-	@Autowired
-	protected  MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	
-	@Autowired
-	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;;
-	
-	@Autowired
-	protected RewardRetrieveUtils rewardRetrieveUtils;
-	
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -139,8 +121,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
 					userId, null, maxCash, maxOil, mefplId, rt, clientTime,
 					userRetrieveUtil, mefuRetrieveUtil, itemForUserRetrieveUtil,
-					insertUtil, updateUtil, monsterStuffUtils, miniEventForPlayerLvlRetrieveUtils,
-					miniEventTierRewardRetrieveUtils, rewardRetrieveUtils, monsterLevelInfoRetrieveUtils);
+					insertUtil, updateUtil);
 
 			rmera.execute(resBuilder);
 
@@ -154,7 +135,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 
 				//TODO: protofy the rewards
-				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
+				UserRewardProto urp = CreateInfoProtoUtils.createUserRewardProto(
 						nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
 				resBuilder.setRewards(urp);
 			}
@@ -170,7 +151,7 @@ public class RedeemMiniEventRewardController extends EventController {
 				User u = rmera.getUser();
 
 				if (null != u) {
-					UpdateClientUserResponseEvent resEventUpdate = miscMethods
+					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									u, null, null);
 					resEventUpdate.setTag(event.getTag());
@@ -207,7 +188,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			RedeemMiniEventRewardAction rmera)
 	{
 		Timestamp timestamp = new Timestamp(date.getTime());
-		miscMethods.writeToUserCurrencyOneUser(userId, timestamp,
+		MiscMethods.writeToUserCurrencyOneUser(userId, timestamp,
 				rmera.getCurrencyDeltas(), rmera.getPreviousCurrencies(),
 				rmera.getCurrentCurrencies(), rmera.getReasons(),
 				rmera.getDetails());

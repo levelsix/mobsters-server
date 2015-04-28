@@ -26,7 +26,7 @@ public class BoardRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BOARD_CONFIG;
 
-	public Map<Integer, Board> getIdsToBoards() {
+	public static Map<Integer, Board> getIdsToBoards() {
 		log.debug("retrieving all Boards data map");
 		if (null == idsToBoards) {
 			setStaticIdsToBoards();
@@ -34,7 +34,7 @@ public class BoardRetrieveUtils {
 		return idsToBoards;
 	}
 
-	public Board getBoardForId(int boardId) {
+	public static Board getBoardForId(int boardId) {
 		log.debug(String.format("retrieve board data for board=%s", boardId));
 		if (null == idsToBoards) {
 			setStaticIdsToBoards();
@@ -42,7 +42,7 @@ public class BoardRetrieveUtils {
 		return idsToBoards.get(boardId);
 	}
 
-	private void setStaticIdsToBoards() {
+	private static void setStaticIdsToBoards() {
 		log.debug("setting static map of boardIds to boards");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -81,14 +81,14 @@ public class BoardRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToBoards();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private Board convertRSRowToBoard(ResultSet rs) throws SQLException {
+	private static Board convertRSRowToBoard(ResultSet rs) throws SQLException {
 		int id = rs.getInt(DBConstants.BOARD__ID);
 		int width = rs.getInt(DBConstants.BOARD__WIDTH);
 		int height = rs.getInt(DBConstants.BOARD__HEIGHT);

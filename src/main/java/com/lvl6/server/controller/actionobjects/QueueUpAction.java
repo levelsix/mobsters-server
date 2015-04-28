@@ -36,14 +36,13 @@ public class QueueUpAction {
 	private HazelcastPvpUtil hazelcastPvpUtil;
 	private MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
 	private TimeUtils timeUtil;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public QueueUpAction(String attackerId, Set<String> userIdBlackList,
 			Date clientDate,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			HazelcastPvpUtil hazelcastPvpUtil,
 			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil,
-			TimeUtils timeUtil, ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
+			TimeUtils timeUtil) {
 		super();
 		this.attackerId = attackerId;
 		this.userIdBlackList = userIdBlackList;
@@ -52,7 +51,6 @@ public class QueueUpAction {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.monsterForPvpRetrieveUtil = monsterForPvpRetrieveUtil;
 		this.timeUtil = timeUtil;
-		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -157,7 +155,7 @@ public class QueueUpAction {
 				.getMinAndMaxElo(attackerElo);
 
 		boolean attackerBelowSomeElo = attackerElo < ControllerConstants.PVP__MAX_ELO_TO_DISPLAY_ONLY_BOTS;
-		boolean showBotsBelowSomeElo = serverToggleRetrieveUtils
+		boolean showBotsBelowSomeElo = ServerToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO);
 		boolean pvpBotsOnly = showBotsBelowSomeElo && attackerBelowSomeElo;
 
@@ -177,11 +175,10 @@ public class QueueUpAction {
 
 		//choose users either randomly or all of them
 		queuedOpponentIdsList = new ArrayList<String>();
-
+		
 		for(PvpUser pUser : prospectiveDefenders) {
 			queuedOpponentIdsList.add(pUser.getUserId());
 		}
-		
 //		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
 //				queuedOpponentIdsList);//, userIdToPvpUser);
 

@@ -24,17 +24,14 @@ public class SetClanHelpingsAction implements StartUpAction {
 	private final User user;
 	private final String userId;
 	private final ClanHelpRetrieveUtil clanHelpRetrieveUtil;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetClanHelpingsAction(ClanDataProto.Builder cdpBuilder, User user,
-			String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+			String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil) {
 		super();
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -79,7 +76,7 @@ public class SetClanHelpingsAction implements StartUpAction {
 				c = clanIdsToClans.get(clanId);
 			}
 
-			MinimumUserProto mup = createInfoProtoUtils
+			MinimumUserProto mup = CreateInfoProtoUtils
 					.createMinimumUserProtoFromUserAndClan(moocher, c);
 			mupSolicitors.put(solicitorId, mup);
 		}
@@ -93,7 +90,7 @@ public class SetClanHelpingsAction implements StartUpAction {
 			for (ClanHelp aid : solicitations) {
 
 				//null for clan since mup exists and mup has clan in it
-				ClanHelpProto chp = createInfoProtoUtils
+				ClanHelpProto chp = CreateInfoProtoUtils
 						.createClanHelpProtoFromClanHelp(aid, solicitor, null,
 								mup);
 

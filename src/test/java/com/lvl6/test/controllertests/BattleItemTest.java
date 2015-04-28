@@ -1,4 +1,4 @@
-package com.lvl6.test.controller.integrationtests;
+package com.lvl6.test.controllertests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -80,9 +80,6 @@ public class BattleItemTest {
 	@Autowired
 	DiscardBattleItemController discardBattleItemController;
 
-	@Autowired
-	CreateInfoProtoUtils createInfoProtoUtils;
-
 	@Resource
 	public void setDataSource(DataSource dataSource) {
 		log.info("Setting datasource and creating jdbcTemplate");
@@ -117,7 +114,7 @@ public class BattleItemTest {
 			throw new RuntimeException("no user was created!");
 		}
 
-		mup = createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user,
+		mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user,
 				null);
 
 	}
@@ -149,7 +146,7 @@ public class BattleItemTest {
 		int userGems1 = user1.getGems();
 		CreateBattleItemRequestProto.Builder cbirpb = CreateBattleItemRequestProto
 				.newBuilder();
-		MinimumUserProtoWithMaxResources mupwmr = createInfoProtoUtils
+		MinimumUserProtoWithMaxResources mupwmr = CreateInfoProtoUtils
 				.createMinimumUserProtoWithMaxResources(mup, 1000000, 1000000);
 		cbirpb.setSender(mupwmr);
 
@@ -161,7 +158,7 @@ public class BattleItemTest {
 		Date now = new Date();
 		biqfu.setExpectedStartTime(new Timestamp(now.getTime()));
 		biqfu.setUserId(user1.getId());
-		BattleItemQueueForUserProto biqfup = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu);
 		newList.add(biqfup);
 
@@ -188,7 +185,7 @@ public class BattleItemTest {
 		int userGems2 = user2.getGems();
 		CreateBattleItemRequestProto.Builder cbirpb2 = CreateBattleItemRequestProto
 				.newBuilder();
-		MinimumUserProtoWithMaxResources mupwmr2 = createInfoProtoUtils
+		MinimumUserProtoWithMaxResources mupwmr2 = CreateInfoProtoUtils
 				.createMinimumUserProtoWithMaxResources(mup, 1000000, 1000000);
 		cbirpb2.setSender(mupwmr2);
 
@@ -200,7 +197,7 @@ public class BattleItemTest {
 		Date now2 = new Date();
 		biqfu2.setExpectedStartTime(new Timestamp(now2.getTime()));
 		biqfu2.setUserId(userId);
-		BattleItemQueueForUserProto biqfup2 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup2 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu2);
 		deletedList2.add(biqfup2);
 
@@ -212,7 +209,7 @@ public class BattleItemTest {
 		Date now3 = new Date();
 		biqfu3.setExpectedStartTime(new Timestamp(now3.getTime() + 1000));
 		biqfu3.setUserId(userId);
-		BattleItemQueueForUserProto biqfup3 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup3 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu3);
 
 		BattleItemQueueForUser biqfu4 = new BattleItemQueueForUser();
@@ -221,7 +218,7 @@ public class BattleItemTest {
 		Date now4 = new Date();
 		biqfu4.setExpectedStartTime(new Timestamp(now4.getTime() + 1000));
 		biqfu4.setUserId(userId);
-		BattleItemQueueForUserProto biqfup4 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup4 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu4);
 
 		BattleItemQueueForUser biqfu5 = new BattleItemQueueForUser();
@@ -230,7 +227,7 @@ public class BattleItemTest {
 		Date now5 = new Date();
 		biqfu5.setExpectedStartTime(new Timestamp(now5.getTime() + 1000));
 		biqfu5.setUserId(userId);
-		BattleItemQueueForUserProto biqfup5 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup5 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu5);
 
 		newList2.add(biqfup3);
@@ -263,7 +260,7 @@ public class BattleItemTest {
 		int userGems3 = user3.getGems();
 		CreateBattleItemRequestProto.Builder cbirpb3 = CreateBattleItemRequestProto
 				.newBuilder();
-		MinimumUserProtoWithMaxResources mupwmr3 = createInfoProtoUtils
+		MinimumUserProtoWithMaxResources mupwmr3 = CreateInfoProtoUtils
 				.createMinimumUserProtoWithMaxResources(mup, 1000000, 1000000);
 		cbirpb3.setSender(mupwmr3);
 
@@ -275,7 +272,7 @@ public class BattleItemTest {
 		Date now6 = new Date();
 		biqfu6.setExpectedStartTime(new Timestamp(now6.getTime()));
 		biqfu6.setUserId(userId);
-		BattleItemQueueForUserProto biqfup6 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup6 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu6);
 		removedList3.add(biqfup6);
 
@@ -287,7 +284,7 @@ public class BattleItemTest {
 		Date now7 = new Date();
 		biqfu7.setExpectedStartTime(new Timestamp(now7.getTime() + 2000));
 		biqfu7.setUserId(userId);
-		BattleItemQueueForUserProto biqfup7 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup7 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu7);
 
 		BattleItemQueueForUser biqfu8 = new BattleItemQueueForUser();
@@ -296,7 +293,7 @@ public class BattleItemTest {
 		Date now8 = new Date();
 		biqfu8.setExpectedStartTime(new Timestamp(now8.getTime() + 2000));
 		biqfu8.setUserId(userId);
-		BattleItemQueueForUserProto biqfup8 = createInfoProtoUtils
+		BattleItemQueueForUserProto biqfup8 = CreateInfoProtoUtils
 				.createBattleItemQueueForUserProto(biqfu8);
 		updatedList3.add(biqfup7);
 		updatedList3.add(biqfup8);
@@ -325,7 +322,7 @@ public class BattleItemTest {
 
 		CompleteBattleItemRequestProto.Builder cobirpb = CompleteBattleItemRequestProto
 				.newBuilder();
-		cobirpb.setSender(createInfoProtoUtils
+		cobirpb.setSender(CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user4, null));
 		cobirpb.setGemsForSpeedup(100);
 		cobirpb.setIsSpeedup(true);
@@ -349,15 +346,15 @@ public class BattleItemTest {
 		/////////////////////////DISCARD BATTLE ITEM/////////////////////////////////////////////
 		DiscardBattleItemRequestProto.Builder dbirpb = DiscardBattleItemRequestProto
 				.newBuilder();
-		dbirpb.setSender(createInfoProtoUtils
+		dbirpb.setSender(CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user5, null));
 
 		List<Integer> listOfBattleItems = new ArrayList<Integer>();
 		listOfBattleItems.add(2);
 		listOfBattleItems.add(3);
-
+		
 		dbirpb.addAllDiscardedBattleItemIds(listOfBattleItems);
-
+		
 		DiscardBattleItemRequestEvent dbire = new DiscardBattleItemRequestEvent();
 		dbire.setTag(1);
 		dbire.setDiscardBattleItemRequestProto(dbirpb.build());

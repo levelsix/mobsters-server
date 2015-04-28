@@ -30,7 +30,7 @@ public class BoosterItemRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_ITEM_CONFIG;
 
-	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
+	public static Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
 		log.debug("retrieving all BoosterItems data map");
 		if (boosterItemIdsToBoosterItems == null) {
 			setStaticBoosterItemIdsToBoosterItems();
@@ -38,14 +38,14 @@ public class BoosterItemRetrieveUtils {
 		return boosterItemIdsToBoosterItems;
 	}
 
-	public Map<Integer, Map<Integer, BoosterItem>> getBoosterItemIdsToBoosterItemsForBoosterPackIds() {
+	public static Map<Integer, Map<Integer, BoosterItem>> getBoosterItemIdsToBoosterItemsForBoosterPackIds() {
 		if (null == boosterItemIdsToBoosterItemsForBoosterPackIds) {
 			setStaticBoosterItemIdsToBoosterItemsForBoosterPackIds();
 		}
 		return boosterItemIdsToBoosterItemsForBoosterPackIds;
 	}
 
-	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItemsForBoosterPackId(
+	public static Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItemsForBoosterPackId(
 			int boosterPackId) {
 		try {
 			log.debug("retrieve boosterPack data for boosterPack "
@@ -68,7 +68,7 @@ public class BoosterItemRetrieveUtils {
 		return null;
 	}
 
-	public BoosterItem getBoosterItemForBoosterItemId(int boosterItemId) {
+	public static BoosterItem getBoosterItemForBoosterItemId(int boosterItemId) {
 		log.debug("retrieve boosterItem data for boosterItem " + boosterItemId);
 		if (boosterItemIdsToBoosterItems == null) {
 			setStaticBoosterItemIdsToBoosterItems();
@@ -76,7 +76,7 @@ public class BoosterItemRetrieveUtils {
 		return boosterItemIdsToBoosterItems.get(boosterItemId);
 	}
 
-	public void setStaticBoosterItemIdsToBoosterItemsForBoosterPackIds() {
+	public static void setStaticBoosterItemIdsToBoosterItemsForBoosterPackIds() {
 		try {
 			log.debug("setting static map of boosterPackId to (boosterItemIds to boosterItems) ");
 			if (boosterItemIdsToBoosterItems == null) {
@@ -106,7 +106,7 @@ public class BoosterItemRetrieveUtils {
 		}
 	}
 
-	private void setStaticBoosterItemIdsToBoosterItems() {
+	private static void setStaticBoosterItemIdsToBoosterItems() {
 		log.debug("setting static map of boosterItemIds to boosterItems");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -140,7 +140,7 @@ public class BoosterItemRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticBoosterItemIdsToBoosterItems();
 		setStaticBoosterItemIdsToBoosterItemsForBoosterPackIds();
 	}
@@ -148,7 +148,7 @@ public class BoosterItemRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private BoosterItem convertRSRowToBoosterItem(ResultSet rs)
+	private static BoosterItem convertRSRowToBoosterItem(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.BOOSTER_ITEM__ID);
 		int boosterPackId = rs

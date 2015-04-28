@@ -37,13 +37,6 @@ public class Monster implements Serializable {
 	private int baseOffensiveSkillId;
 	private int baseDefensiveSkillId;
 	private int pvpMonsterDropId;
-	
-	
-
-	public Monster() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	public Monster(int id, String evolutionGroup, String monsterGroup,
 			String quality, int evolutionLevel, String displayName,

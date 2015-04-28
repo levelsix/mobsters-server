@@ -29,7 +29,7 @@ public class MiniEventGoalRetrieveUtils {
 	private static Map<Integer, MiniEventGoal> idToMiniEventGoal;
 	private static Map<Integer, Collection<MiniEventGoal>> miniEventIdToGoals;
 
-	public Map<Integer, MiniEventGoal> getAllIdsToMiniEventGoals() {
+	public static Map<Integer, MiniEventGoal> getAllIdsToMiniEventGoals() {
 		if (null == idToMiniEventGoal) {
 			setStaticIdsToMiniEventGoals();
 		}
@@ -37,7 +37,7 @@ public class MiniEventGoalRetrieveUtils {
 		return idToMiniEventGoal;
 	}
 
-	public MiniEventGoal getMiniEventGoalById(int id) {
+	public static MiniEventGoal getMiniEventGoalById(int id) {
 		if (null == idToMiniEventGoal) {
 			setStaticIdsToMiniEventGoals();
 		}
@@ -48,7 +48,7 @@ public class MiniEventGoalRetrieveUtils {
 		return ep;
 	}
 
-	public Collection<MiniEventGoal> getGoalsForMiniEventId(
+	public static Collection<MiniEventGoal> getGoalsForMiniEventId(
 			int miniEventId)
 	{
 		if (null == miniEventIdToGoals) {
@@ -63,11 +63,11 @@ public class MiniEventGoalRetrieveUtils {
 		return miniEventIdToGoals.get(miniEventId);
 	}
 	
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToMiniEventGoals();
 	}
 
-	private void setStaticIdsToMiniEventGoals() {
+	private static void setStaticIdsToMiniEventGoals() {
 		log.debug("setting static map of id to MiniEventGoal");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -122,7 +122,7 @@ public class MiniEventGoalRetrieveUtils {
 		}
 	}
 
-	private MiniEventGoal convertRSRowToMiniEventGoal(ResultSet rs)
+	private static MiniEventGoal convertRSRowToMiniEventGoal(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.MINI_EVENT__ID);
 		int miniEventId = rs.getInt(DBConstants.MINI_EVENT_GOAL__MINI_EVENT_ID);
@@ -140,10 +140,9 @@ public class MiniEventGoalRetrieveUtils {
 		int amt = rs.getInt(DBConstants.MINI_EVENT_GOAL__AMT);
 		String desc = rs.getString(DBConstants.MINI_EVENT_GOAL__DESCRIPTION);
 		int ptsReward = rs.getInt(DBConstants.MINI_EVENT_GOAL__PTS_REWARD);
-		String actionDescription = rs.getString(DBConstants.MINI_EVENT_GOAL__ACTION_DESCRIPTION);
 
 		MiniEventGoal me = new MiniEventGoal(
-				id, miniEventId, type, amt, desc, ptsReward, actionDescription);
+				id, miniEventId, type, amt, desc, ptsReward);
 		return me;
 	}
 }

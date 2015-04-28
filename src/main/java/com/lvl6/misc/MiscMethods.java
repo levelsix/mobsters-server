@@ -22,7 +22,6 @@ import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -34,11 +33,11 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.FileDownload;
+import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
-import com.lvl6.info.SalesItem;
 import com.lvl6.info.User;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
@@ -74,12 +73,68 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BattleItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoardObstacleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoardPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.PrerequisiteRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureBattleItemFactoryRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructurePvpBoardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResearchHouseRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureTeamCenterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.spring.AppContext;
@@ -87,45 +142,13 @@ import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 import com.memetix.mst.detect.Detect;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
 @Component
 public class MiscMethods {
-
-	@Autowired
-	protected AchievementRetrieveUtils achievementRetrieveUtils;
-
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
-	@Autowired
-	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
-
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected ProfanityRetrieveUtils profanityRetrieveUtils;
-
-	@Autowired
-	protected QuestRetrieveUtils questRetrieveUtils;
-
-	@Autowired
-	protected QuestUtils questUtils;
-
-	@Autowired
-	protected StartupStuffRetrieveUtils startupStuffRetrieveUtils;
-
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-
-	@Autowired
-	protected StaticDataContainer staticDataContainer;
 
 	private static final Logger log = LoggerFactory
 			.getLogger(MiscMethods.class);
@@ -142,7 +165,7 @@ public class MiscMethods {
 	public static final String MONSTER = "MONSTER";
 
 	//METHODS FOR CAPPING USER RESOURCE
-	public int capResourceGain(int currentAmt, int delta, int maxAmt) {
+	public static int capResourceGain(int currentAmt, int delta, int maxAmt) {
 		currentAmt = Math.min(currentAmt, maxAmt); //in case user resource is more than max
 		int maxResourceUserCanGain = maxAmt - currentAmt;
 		return Math.min(delta, maxResourceUserCanGain);
@@ -151,7 +174,7 @@ public class MiscMethods {
 	//METHODS FOR PICKING A BOOSTER PACK
 
 	//no arguments are modified
-	public List<BoosterItem> determineBoosterItemsUserReceives(
+	public static List<BoosterItem> determineBoosterItemsUserReceives(
 			int amountUserWantsToPurchase,
 			Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
 		//return value
@@ -175,7 +198,7 @@ public class MiscMethods {
 		return itemsUserReceives;
 	}
 
-	private float sumProbabilities(Collection<BoosterItem> boosterItems) {
+	private static float sumProbabilities(Collection<BoosterItem> boosterItems) {
 		float sumOfProbabilities = 0.0f;
 		for (BoosterItem bi : boosterItems) {
 			sumOfProbabilities += bi.getChanceToAppear();
@@ -183,13 +206,13 @@ public class MiscMethods {
 		return sumOfProbabilities;
 	}
 
-	private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
+	private static BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
 			float sumOfProbabilities) {
 		Random rand = new Random();
 		float unnormalizedProbabilitySoFar = 0f;
 		float randFloat = rand.nextFloat();
 
-		boolean logBoosterItemDetails = serverToggleRetrieveUtils
+		boolean logBoosterItemDetails = ServerToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS);
 		if (logBoosterItemDetails) {
 			log.info(
@@ -224,18 +247,86 @@ public class MiscMethods {
 
 	//purpose of this method is to discover if the booster items that contain
 	//monsters as rewards, if the monster ids are valid
+	public static boolean checkIfMonstersExist(
+			List<BoosterItem> itemsUserReceives) {
+		boolean monstersExist = true;
 
-	public static int determineGemRewardForSale(List<SalesItem> saleItems) {
+		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils
+				.getMonsterIdsToMonsters();
+		for (BoosterItem bi : itemsUserReceives) {
+			int monsterId = bi.getMonsterId();
+
+			if (0 == monsterId) {
+				//this booster item does not contain a monster reward
+				continue;
+			} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
+				log.error("This booster item contains nonexistent monsterId. item="
+						+ bi);
+				monstersExist = false;
+			}
+		}
+		return monstersExist;
+	}
+
+	public static int determineGemReward(List<BoosterItem> boosterItems) {
 		int gemReward = 0;
-		for (SalesItem si : saleItems) {
-			gemReward += si.getGemReward();
+		for (BoosterItem bi : boosterItems) {
+			gemReward += bi.getGemReward();
 		}
 
 		return gemReward;
 	}
 
-	//TODO: move to createInfoProtoUtils
-	public List<FullUserMonsterProto> createFullUserMonsterProtos(
+	//monsterIdsToNumPieces or completeUserMonsters will be populated
+	public static String createUpdateUserMonsterArguments(String userId,
+			int boosterPackId, List<BoosterItem> boosterItems,
+			Map<Integer, Integer> monsterIdsToNumPieces,
+			List<MonsterForUser> completeUserMonsters, Date now) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
+		sb.append(" ");
+		sb.append(boosterPackId);
+		sb.append(" boosterItemIds ");
+
+		List<Integer> boosterItemIds = new ArrayList<Integer>();
+		for (BoosterItem item : boosterItems) {
+			Integer id = item.getId();
+			Integer monsterId = item.getMonsterId();
+
+			//only keep track of the booster item ids that are a monster reward
+			if (monsterId <= 0) {
+				continue;
+			}
+			if (item.isComplete()) {
+				//create a "complete" user monster
+				boolean hasAllPieces = true;
+				boolean isComplete = true;
+				Monster monzter = MonsterRetrieveUtils
+						.getMonsterForMonsterId(monsterId);
+				MonsterForUser newUserMonster = MonsterStuffUtils
+						.createNewUserMonster(userId,
+								monzter.getNumPuzzlePieces(), monzter, now,
+								hasAllPieces, isComplete);
+
+				//return this monster in the argument list completeUserMonsters, so caller
+				//can use it
+				completeUserMonsters.add(newUserMonster);
+
+			} else {
+				monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
+			}
+			boosterItemIds.add(id);
+		}
+		if (!boosterItemIds.isEmpty()) {
+			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
+			sb.append(boosterItemIdsStr);
+		}
+
+		return sb.toString();
+	}
+
+	//TODO: move to CreateInfoProtoUtils
+	public static List<FullUserMonsterProto> createFullUserMonsterProtos(
 			List<String> userMonsterIds, List<MonsterForUser> mfuList) {
 		List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
 
@@ -243,7 +334,7 @@ public class MiscMethods {
 			String mfuId = userMonsterIds.get(i);
 			MonsterForUser mfu = mfuList.get(i);
 			mfu.setId(mfuId);
-			FullUserMonsterProto fump = createInfoProtoUtils
+			FullUserMonsterProto fump = CreateInfoProtoUtils
 					.createFullUserMonsterProtoFromUserMonster(mfu);
 			protos.add(fump);
 		}
@@ -251,7 +342,7 @@ public class MiscMethods {
 		return protos;
 	}
 
-	public Dialogue createDialogue(String dialogueBlob) {
+	public static Dialogue createDialogue(String dialogueBlob) {
 		if (dialogueBlob != null && dialogueBlob.length() > 0) {
 			StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
@@ -298,7 +389,7 @@ public class MiscMethods {
 		return null;
 	}
 
-	public void explodeIntoInts(String stringToExplode,
+	public static void explodeIntoInts(String stringToExplode,
 			String delimiter, List<Integer> returnValue) {
 		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
 		while (st.hasMoreTokens()) {
@@ -310,7 +401,7 @@ public class MiscMethods {
 		}
 	}
 
-	public String getIPOfPlayer(GameServer server, String playerId,
+	public static String getIPOfPlayer(GameServer server, String playerId,
 			String udid) {
 		ConnectedPlayer player = null;
 		if (playerId != null && !playerId.isEmpty()) {
@@ -328,13 +419,13 @@ public class MiscMethods {
 		return null;
 	}
 
-	public void purgeMDCProperties() {
+	public static void purgeMDCProperties() {
 		MDC.remove(MDCKeys.UDID);
 		MDC.remove(MDCKeys.PLAYER_ID);
 		MDC.remove(MDCKeys.IP);
 	}
 
-	public void setMDCProperties(String udid, String playerId, String ip) {
+	public static void setMDCProperties(String udid, String playerId, String ip) {
 		purgeMDCProperties();
 		if (udid != null)
 			MDC.put(MDCKeys.UDID, udid);
@@ -344,14 +435,14 @@ public class MiscMethods {
 			MDC.put(MDCKeys.PLAYER_ID, playerId);
 	}
 
-	public int calculateCoinsGivenToReferrer(User referrer) {
+	public static int calculateCoinsGivenToReferrer(User referrer) {
 		return Math
 				.min(ControllerConstants.USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER,
 						(int) (Math.ceil((referrer.getCash())
 								* ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
 	}
 
-	public boolean checkClientTimeAroundApproximateNow(
+	public static boolean checkClientTimeAroundApproximateNow(
 			Timestamp clientTime) {
 		if (clientTime.getTime() < new Date().getTime()
 				+ Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME * 60000
@@ -363,7 +454,7 @@ public class MiscMethods {
 		return false;
 	}
 
-	//	public List<City> getCitiesAvailableForUserLevel(int userLevel) {
+	//	public static List<City> getCitiesAvailableForUserLevel(int userLevel) {
 	//		List<City> availCities = new ArrayList<City>();
 	//		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
 	//		for (Integer cityId : cities.keySet()) {
@@ -373,7 +464,7 @@ public class MiscMethods {
 	//		return availCities;
 	//	}
 
-	public UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
+	public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
 			User user, PvpLeagueForUser plfu, Clan clan) {
 		try {
 			if (!user.isFake()) {
@@ -400,14 +491,14 @@ public class MiscMethods {
 		UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto
 				.newBuilder()
 				.setSender(
-						createInfoProtoUtils.createFullUserProtoFromUser(user,
+						CreateInfoProtoUtils.createFullUserProtoFromUser(user,
 								plfu, clan))
 				.setTimeOfUserUpdate(new Date().getTime()).build();
 		resEvent.setUpdateClientUserResponseProto(resProto);
 		return resEvent;
 	}
 
-	public int getRowCount(ResultSet set) {
+	public static int getRowCount(ResultSet set) {
 		int rowCount;
 		int currentRow;
 		try {
@@ -425,7 +516,7 @@ public class MiscMethods {
 
 	}
 
-	public TutorialConstants createTutorialConstantsProto() {
+	public static TutorialConstants createTutorialConstantsProto() {
 		TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
 
 		tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
@@ -441,7 +532,7 @@ public class MiscMethods {
 			float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
 			float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
 
-			TutorialStructProto tsp = createInfoProtoUtils
+			TutorialStructProto tsp = CreateInfoProtoUtils
 					.createTutorialStructProto(structId, posX, posY);
 			tcb.addTutorialStructures(tsp);
 		}
@@ -454,7 +545,7 @@ public class MiscMethods {
 		//		tcb.setCityId(cityId);
 		//		List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
 		//		for (CityElement ce : cityElements) {
-		//			CityElementProto cep = createInfoProtoUtils
+		//			CityElementProto cep = CreateInfoProtoUtils
 		//				.createCityElementProtoFromCityElement(ce);
 		//			tcb.addCityOneElements(cep);
 		//		}
@@ -476,7 +567,7 @@ public class MiscMethods {
 			float posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
 			float posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
 
-			MinimumObstacleProto mopb = createInfoProtoUtils
+			MinimumObstacleProto mopb = CreateInfoProtoUtils
 					.createMinimumObstacleProto(obstacleId, posX, posY,
 							orientation);
 			tcb.addTutorialObstacles(mopb);
@@ -486,7 +577,7 @@ public class MiscMethods {
 		return tcb.build();
 	}
 
-	public StartupConstants createStartupConstantsProto(Globals globals) {
+	public static StartupConstants createStartupConstantsProto(Globals globals) {
 		StartupConstants.Builder cb = StartupConstants.newBuilder();
 
 		for (String id : IAPValues.iapPackageNames) {
@@ -520,7 +611,7 @@ public class MiscMethods {
 		if (ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS != null) {
 			for (int i = 0; i < ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS.length; i++) {
 				AnimatedSpriteOffset aso = ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS[i];
-				cb.addAnimatedSpriteOffsets(createInfoProtoUtils
+				cb.addAnimatedSpriteOffsets(CreateInfoProtoUtils
 						.createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(aso));
 			}
 		}
@@ -567,9 +658,9 @@ public class MiscMethods {
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
 
-		User adminChatUser = startupStuffRetrieveUtils.getAdminChatUser();
+		User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
 		if (null != adminChatUser) {
-			MinimumUserProto adminChatUserProto = createInfoProtoUtils
+			MinimumUserProto adminChatUserProto = CreateInfoProtoUtils
 					.createMinimumUserProtoFromUserAndClan(adminChatUser, null);
 			cb.setAdminChatUserProto(adminChatUserProto);
 		} else {
@@ -660,14 +751,14 @@ public class MiscMethods {
 		pcb.setRequestClanToAvengeTimeLimitMins(ControllerConstants.PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS);
 		cb.setPvpConstant(pcb.build());
 
-		boolean displayQuality = serverToggleRetrieveUtils
+		boolean displayQuality = ServerToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TASK_DISPLAY_RARITY);
 		cb.setDisplayRarity(displayQuality);
 
 		cb.setTaskIdOfFirstSkill(ControllerConstants.SKILL_FIRST_TASK_ID);
 		cb.setMinsToResolicitTeamDonation(ControllerConstants.CLAN__MINS_TO_RESOLICIT_TEAM_DONATION);
 
-		Map<Integer, FileDownload> fileDownloadMap = fileDownloadRetrieveUtils
+		Map<Integer, FileDownload> fileDownloadMap = FileDownloadRetrieveUtils
 				.getIdsToFileDownloads();
 
 		if (fileDownloadMap == null) {
@@ -684,7 +775,7 @@ public class MiscMethods {
 			});
 
 			for (FileDownload fd : fileDownloadList) {
-				cb.addFileDownloadProto(createInfoProtoUtils
+				cb.addFileDownloadProto(CreateInfoProtoUtils
 						.createFileDownloadProtoFromFileDownload(fd));
 			}
 
@@ -774,7 +865,7 @@ public class MiscMethods {
 		return cb.build();
 	}
 
-	private void createSpeedUpConstantsProto(StartupConstants.Builder cb) {
+	private static void createSpeedUpConstantsProto(StartupConstants.Builder cb) {
 		int len = ControllerConstants.SPEED_UP__SECONDS.length;
 		for (int index = 0; index < len; index++) {
 			int sec = ControllerConstants.SPEED_UP__SECONDS[index];
@@ -789,7 +880,7 @@ public class MiscMethods {
 		}
 	}
 
-	private void createResourceConversionConstantsProto(
+	private static void createResourceConversionConstantsProto(
 			StartupConstants.Builder cb) {
 		//create list of protos for each resource type: oil, cash
 		for (String type : ControllerConstants.RESOURCE_CONVERSION__TYPE) {
@@ -818,7 +909,7 @@ public class MiscMethods {
 		}
 	}
 
-	public MiniTutorialConstants createMiniTutorialConstantsProto() {
+	public static MiniTutorialConstants createMiniTutorialConstantsProto() {
 		MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
 		mtcb.setMiniTutorialTaskId(ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID);
 		mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
@@ -827,7 +918,7 @@ public class MiscMethods {
 		return mtcb.build();
 	}
 
-	//	public List<TournamentEventProto> currentTournamentEventProtos() {
+	//	public static List<TournamentEventProto> currentTournamentEventProtos() {
 	//		Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
 	//		long curTime = (new Date()).getTime();
 	//		List<Integer> activeEventIds = new ArrayList<Integer>();
@@ -851,15 +942,91 @@ public class MiscMethods {
 	//			TournamentEvent e = idsToEvents.get(i);
 	//			List<TournamentEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
 	//
-	//			protos.add(createInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
+	//			protos.add(CreateInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
 	//		}
 	//		return protos;
 	//	}
 
+	public static void reloadAllRareChangeStaticData() {
+		log.info("Reloading rare change static data");
+		AchievementRetrieveUtils.reload();
+		BannedUserRetrieveUtils.reload();
+		BattleItemRetrieveUtils.reload();
+		BoardRetrieveUtils.reload();
+		BoardObstacleRetrieveUtils.reload();
+		BoardPropertyRetrieveUtils.reload();
+		BoosterDisplayItemRetrieveUtils.reload();
+		BoosterItemRetrieveUtils.reload();
+		BoosterPackRetrieveUtils.reload();
+		//    CityBossRetrieveUtils.reload();
+		//		CityElementsRetrieveUtils.reload();
+		//		CityRetrieveUtils.reload();
+		//    ClanBossRetrieveUtils.reload();
+		//    ClanBossRewardRetrieveUtils.reload();
+		ClanIconRetrieveUtils.reload();
+		ClanEventPersistentRetrieveUtils.reload();
+		ClanRaidRetrieveUtils.reload();
+		ClanRaidStageRetrieveUtils.reload();
+		ClanRaidStageMonsterRetrieveUtils.reload();
+		ClanRaidStageRewardRetrieveUtils.reload();
+		EventPersistentRetrieveUtils.reload();
+		FileDownloadRetrieveUtils.reload();
+		//		ExpansionCostRetrieveUtils.reload();
+		GoldSaleRetrieveUtils.reload();
+		ItemRetrieveUtils.reload();
+		//		LockBoxEventRetrieveUtils.reload();
+		//    MonsterForPvpRetrieveUtils.staticReload();
+		MiniEventRetrieveUtils.reload();
+		MiniEventForPlayerLvlRetrieveUtils.reload();
+		MiniEventGoalRetrieveUtils.reload();
+		MiniEventLeaderboardRewardRetrieveUtils.reload();
+		MiniEventTierRewardRetrieveUtils.reload();
+		MiniJobRetrieveUtils.reload();
+		MonsterBattleDialogueRetrieveUtils.reload();
+		MonsterLevelInfoRetrieveUtils.reload();
+		MonsterRetrieveUtils.reload();
+		ObstacleRetrieveUtils.reload();
+		PrerequisiteRetrieveUtils.reload();
+		ProfanityRetrieveUtils.reload();
+		PvpLeagueRetrieveUtils.reload();
+		QuestJobRetrieveUtils.reload();
+		QuestJobMonsterItemRetrieveUtils.reload();
+		QuestRetrieveUtils.reload();
+		ResearchRetrieveUtils.reload();
+		ResearchPropertyRetrieveUtils.reload();
+		RewardRetrieveUtils.reload();
+		SkillRetrieveUtils.reload();
+		SkillPropertyRetrieveUtils.reload();
+		SkillSideEffectRetrieveUtils.reload();
+		StartupStuffRetrieveUtils.reload();
+		StaticUserLevelInfoRetrieveUtils.reload();
+		StructureBattleItemFactoryRetrieveUtils.reload();
+		StructureClanHouseRetrieveUtils.reload();
+		StructureEvoChamberRetrieveUtils.reload();
+		StructureHospitalRetrieveUtils.reload();
+		StructureLabRetrieveUtils.reload();
+		StructureMiniJobRetrieveUtils.reload();
+		StructureMoneyTreeRetrieveUtils.reload();
+		StructurePvpBoardRetrieveUtils.reload();
+		StructureResearchHouseRetrieveUtils.reload();
+		StructureResidenceRetrieveUtils.reload();
+		StructureResourceGeneratorRetrieveUtils.reload();
+		StructureResourceStorageRetrieveUtils.reload();
+		StructureRetrieveUtils.reload();
+		StructureTeamCenterRetrieveUtils.reload();
+		StructureTownHallRetrieveUtils.reload();
+		TaskMapElementRetrieveUtils.reload();
+		TaskRetrieveUtils.reload();
+		TaskStageMonsterRetrieveUtils.reload();
+		TaskStageRetrieveUtils.reload();
+		//		TournamentEventRetrieveUtils.reload();
+		//		TournamentEventRewardRetrieveUtils.reload();
 
+		StaticDataContainer.reload();
+	}
 
 	//  //returns the clan towers that changed
-	//  public void sendClanTowerWarNotEnoughMembersNotification(
+	//  public static void sendClanTowerWarNotEnoughMembersNotification(
 	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
 	//      List<Integer> towersOwned, Clan aClan, TaskExecutor executor,
 	//      Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
@@ -886,7 +1053,7 @@ public class MiscMethods {
 	//    return;
 	//  }
 
-	//  private void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds,
+	//  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds,
 	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
 	//      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
 	//
@@ -911,7 +1078,7 @@ public class MiscMethods {
 	//    }
 	//  }
 
-	public void writeGlobalNotification(Notification n, GameServer server) {
+	public static void writeGlobalNotification(Notification n, GameServer server) {
 		GeneralNotificationResponseProto.Builder notificationProto = n
 				.generateNotificationBuilder();
 
@@ -922,7 +1089,7 @@ public class MiscMethods {
 		server.writeGlobalEvent(aNotification);
 	}
 
-	public void writeClanApnsNotification(Notification n,
+	public static void writeClanApnsNotification(Notification n,
 			GameServer server, String clanId) {
 		GeneralNotificationResponseProto.Builder notificationProto = n
 				.generateNotificationBuilder();
@@ -934,7 +1101,7 @@ public class MiscMethods {
 		server.writeApnsClanEvent(aNotification, clanId);
 	}
 
-	public void writeNotificationToUser(Notification aNote,
+	public static void writeNotificationToUser(Notification aNote,
 			GameServer server, String userId) {
 		GeneralNotificationResponseProto.Builder notificationProto = aNote
 				.generateNotificationBuilder();
@@ -950,9 +1117,9 @@ public class MiscMethods {
 	//a blacklist then that word is replaced by a number of asterisks
 	//equal to the word's length, e.g. fuck => ****
 	//Not sure whether to use String or StringBuilder, so going with latter.
-	public String censorUserInput(String userContent) {
+	public static String censorUserInput(String userContent) {
 		StringBuilder toReturn = new StringBuilder(userContent.length());
-		Set<String> blackList = profanityRetrieveUtils.getAllProfanity();
+		Set<String> blackList = ProfanityRetrieveUtils.getAllProfanity();
 
 		String[] words = userContent.split(" ");
 		String space = " "; //split by space, need to add them back in
@@ -981,7 +1148,7 @@ public class MiscMethods {
 
 	//average length of word is 4 characters. So based on this, not using
 	//StringBuilder
-	public String asteriskify(String wordToAskerify) {
+	public static String asteriskify(String wordToAskerify) {
 		int len = wordToAskerify.length();
 		String s = "";
 
@@ -991,7 +1158,7 @@ public class MiscMethods {
 		return s;
 	}
 
-	public void writeToUserCurrencyUsers(List<String> userIds,
+	public static void writeToUserCurrencyUsers(List<String> userIds,
 			Timestamp thyme, Map<String, Map<String, Integer>> changeMap,
 			Map<String, Map<String, Integer>> previousCurrencyMap,
 			Map<String, Map<String, Integer>> currentCurrencyMap,
@@ -1072,7 +1239,7 @@ public class MiscMethods {
 		}
 	}
 
-	protected void writeToUserCurrencyUsersHelper(String userId,
+	protected static void writeToUserCurrencyUsersHelper(String userId,
 			Timestamp thyme, Map<String, Integer> changeMap,
 			Map<String, Integer> previousCurrencyMap,
 			Map<String, Integer> currentCurrencyMap,
@@ -1128,7 +1295,7 @@ public class MiscMethods {
 	//currencyChange should represent how much user's currency increased or decreased and
 	//this should be called after the user is updated
 	//arguments are modified!!!
-	public void writeToUserCurrencyOneUser(String userId,
+	public static void writeToUserCurrencyOneUser(String userId,
 			Timestamp thyme, Map<String, Integer> changeMap,
 			Map<String, Integer> previousCurrencyMap,
 			Map<String, Integer> currentCurrencyMap,
@@ -1184,7 +1351,7 @@ public class MiscMethods {
 		}
 	}
 
-	public <T> List<T> getValsInOrder(List<String> keys,
+	public static <T> List<T> getValsInOrder(List<String> keys,
 			Map<String, T> keysToVals) {
 		List<T> valsInOrder = new ArrayList<T>();
 		for (String key : keys) {
@@ -1194,7 +1361,7 @@ public class MiscMethods {
 		return valsInOrder;
 	}
 
-	//  public boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
+	//  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
 	//    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
 	//    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL
 	//        * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
@@ -1202,7 +1369,7 @@ public class MiscMethods {
 	//    return currentEnhancementLevel >= maxEnhancementLevel;
 	//  }
 
-	public int pointsGainedForClanTowerUserBattle(User winner, User loser) {
+	public static int pointsGainedForClanTowerUserBattle(User winner, User loser) {
 		int d = winner.getLevel() - loser.getLevel();
 		int pts;
 		if (d > 10) {
@@ -1216,14 +1383,14 @@ public class MiscMethods {
 		return Math.min(100, Math.max(1, pts));
 	}
 
-	//  public int dateDifferenceInDays(Date start, Date end) {
+	//  public static int dateDifferenceInDays(Date start, Date end) {
 	//    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
 	//    DateMidnight current = (new DateTime(end)).toDateMidnight();
 	//    int days = Days.daysBetween(previous, current).getDays();
 	//    return days;
 	//  }
 
-	//  private List<Integer> getRaritiesCollected(
+	//  private static List<Integer> getRaritiesCollected(
 	//      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {
 	//    List<Integer> raritiesCollected = new ArrayList<Integer>();
 	//
@@ -1261,7 +1428,7 @@ public class MiscMethods {
 	//    return raritiesCollected;
 	//  }
 	//
-	//  private boolean isRarityOne(Rarity equipRarity) {
+	//  private static boolean isRarityOne(Rarity equipRarity) {
 	//    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
 	//      return true;
 	//    } else {
@@ -1269,7 +1436,7 @@ public class MiscMethods {
 	//    }
 	//  }
 	//
-	//  private boolean isRarityTwo(Rarity equipRarity) {
+	//  private static boolean isRarityTwo(Rarity equipRarity) {
 	//    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
 	//      return true;
 	//    } else {
@@ -1277,7 +1444,7 @@ public class MiscMethods {
 	//    }
 	//  }
 	//
-	//  private boolean isRarityThree(Rarity equipRarity) {
+	//  private static boolean isRarityThree(Rarity equipRarity) {
 	//    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
 	//      return true;
 	//    } else {
@@ -1286,7 +1453,7 @@ public class MiscMethods {
 	//  }
 	//
 	//csi: comma separated ints
-	public List<Integer> unCsvStringIntoIntList(String csi) {
+	public static List<Integer> unCsvStringIntoIntList(String csi) {
 		List<Integer> ints = new ArrayList<Integer>();
 		if (null != csi) {
 			StringTokenizer st = new StringTokenizer(csi, ", ");
@@ -1297,7 +1464,7 @@ public class MiscMethods {
 		return ints;
 	}
 
-	public int getRandomIntFromList(List<Integer> numList) {
+	public static int getRandomIntFromList(List<Integer> numList) {
 		int upperBound = numList.size();
 		Random rand = new Random();
 		int randInt = rand.nextInt(upperBound);
@@ -1306,7 +1473,7 @@ public class MiscMethods {
 		return returnValue;
 	}
 
-	public Map<Integer, Integer> getRandomValues(List<Integer> domain,
+	public static Map<Integer, Integer> getRandomValues(List<Integer> domain,
 			int quantity) {
 		Map<Integer, Integer> domainValuesToQuantities = new HashMap<Integer, Integer>();
 		int upperBound = domain.size();
@@ -1329,7 +1496,7 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//populates ids, quantitiesInStock; determines the remaining booster items the user can get
-	//  private int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems,
+	//  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems,
 	//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet,
 	//      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
 	//    //max number randon number can go
@@ -1370,7 +1537,7 @@ public class MiscMethods {
 
 	//  /*cut out from purchase booster pack controller*/
 	//  //no arguments are modified
-	//  private List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
+	//  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
 	//      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
 	//      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
 	//    //return value
@@ -1417,7 +1584,7 @@ public class MiscMethods {
 
 	/*cut out from purchase booster pack controller*/
 	//no arguments are modified
-	//	private List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
+	//	private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet,
 	//		List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
 	//		Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
 	//		//return value
@@ -1466,7 +1633,7 @@ public class MiscMethods {
 	//		return itemsUserReceives;
 	//	}
 	//  /*cut out from purchase booster pack controller*/
-	//  public List<Long> insertNewUserEquips(int userId,
+	//  public static List<Long> insertNewUserEquips(int userId,
 	//      List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
 	//    int amount = itemsUserReceives.size();
 	//    int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
@@ -1484,7 +1651,7 @@ public class MiscMethods {
 	//        enhancement, now, reason);
 	//  }
 	/*cut out from purchase booster pack controller*/
-	//  public boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives,
+	//  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives,
 	//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected,
 	//      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
 	//
@@ -1538,7 +1705,7 @@ public class MiscMethods {
 	/*cut out from purchase booster pack controller*/
 	//if the user has bought out the whole deck, then for the booster items
 	//the user did not get, record in the db that the user has 0 of them collected
-	//	private void recordBoosterItemsThatReset(Map<Integer, Integer> changedBoosterItemIdsToNumCollected,
+	//	private static void recordBoosterItemsThatReset(Map<Integer, Integer> changedBoosterItemIdsToNumCollected,
 	//		Map<Integer, Integer> newBoosterItemIdsToNumCollected, boolean refilled) {
 	//		if (refilled) {
 	//			for (int boosterItemId : newBoosterItemIdsToNumCollected.keySet()) {
@@ -1550,7 +1717,7 @@ public class MiscMethods {
 	//		}
 	//	}
 
-	/* public Set<Long> getEquippedEquips(User aUser) {
+	/* public static Set<Long> getEquippedEquips(User aUser) {
 	Set<Long> equippedUserEquipIds = new HashSet<Long>();
 	equippedUserEquipIds.add(aUser.getAmuletEquippedUserEquipId());
 	equippedUserEquipIds.add(aUser.getAmuletTwoEquippedUserEquipId());
@@ -1565,7 +1732,7 @@ public class MiscMethods {
 	}*/
 
 	//arguments don't take into account the 1 forge slot the user has by default
-	//  public int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
+	//  public static int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
 	//      int currentNumAdditionalForgeSlots) {
 	//    int goalNumForgeSlots = goalNumAdditionalForgeSlots + ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS;
 	//    log.info("goalNumForgeSlots=" + goalNumForgeSlots);
@@ -1579,7 +1746,7 @@ public class MiscMethods {
 	//    }
 	//  }
 
-	public int sumMapValues(Map<?, Integer> idToNum) {
+	public static int sumMapValues(Map<?, Integer> idToNum) {
 		int sumSoFar = 0;
 
 		for (int value : idToNum.values()) {
@@ -1588,7 +1755,7 @@ public class MiscMethods {
 		return sumSoFar;
 	}
 
-	public int sumListsInMap(Map<Integer, List<Integer>> aMap) {
+	public static int sumListsInMap(Map<Integer, List<Integer>> aMap) {
 		int sum = 0;
 		for (int i : aMap.keySet()) {
 
@@ -1599,7 +1766,7 @@ public class MiscMethods {
 		return sum;
 	}
 
-	public void calculateEloChangeAfterBattle(PvpLeagueForUser attacker,
+	public static void calculateEloChangeAfterBattle(PvpLeagueForUser attacker,
 			PvpLeagueForUser defender, boolean attackerWon) {
 		double probabilityOfAttackerWin = 1 / (1 + Math.pow(10,
 				(defender.getElo() - attacker.getElo()) / 400));
@@ -1631,7 +1798,7 @@ public class MiscMethods {
 
 	}
 
-	public int speedupCostOverTime(int cost, long startTimeMillis,
+	public static int speedupCostOverTime(int cost, long startTimeMillis,
 			long durationInSeconds, long curTimeMillis) {
 
 		long timePassedSeconds = (curTimeMillis = startTimeMillis) / 1000;
@@ -1644,12 +1811,12 @@ public class MiscMethods {
 		return newCost;
 	}
 
-	public StaticDataProto getAllStaticData(String userId,
+	public static StaticDataProto getAllStaticData(String userId,
 			boolean userIdSet, QuestForUserRetrieveUtils2 qfuRetrieveUtils) {
 
 		StaticDataProto.Builder sdpb = null;
 
-		StaticDataProto staticData = staticDataContainer.getStaticData();
+		StaticDataProto staticData = StaticDataContainer.getStaticData();
 		if (null == staticData) {
 			log.error("NO STATIC DATA!!! Only going to try setting Quests");
 			sdpb = StaticDataProto.newBuilder();
@@ -1665,7 +1832,7 @@ public class MiscMethods {
 		return sdpb.build();
 	}
 
-	private void setInProgressAndAvailableQuests(Builder sdpb,
+	private static void setInProgressAndAvailableQuests(Builder sdpb,
 			String userId, boolean userIdSet,
 			QuestForUserRetrieveUtils2 questForUserRetrieveUtils) {
 		if (!userIdSet) {
@@ -1677,7 +1844,7 @@ public class MiscMethods {
 		List<Integer> inProgressQuestIds = new ArrayList<Integer>();
 		List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
-		Map<Integer, Quest> questIdToQuests = questRetrieveUtils
+		Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils
 				.getQuestIdsToQuests();
 		for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
 
@@ -1686,9 +1853,9 @@ public class MiscMethods {
 
 			} else {
 				//unredeemed quest section
-				Quest quest = questRetrieveUtils.getQuestForQuestId(uq
+				Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq
 						.getQuestId());
-				FullQuestProto questProto = createInfoProtoUtils
+				FullQuestProto questProto = CreateInfoProtoUtils
 						.createFullQuestProtoFromQuest(quest);
 
 				inProgressQuestIds.add(uq.getQuestId());
@@ -1702,7 +1869,7 @@ public class MiscMethods {
 			}
 		}
 
-		List<Integer> availableQuestIds = questUtils.getAvailableQuestsForUser(
+		List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(
 				redeemedQuestIds, inProgressQuestIds);
 		if (availableQuestIds == null) {
 			return;
@@ -1710,13 +1877,13 @@ public class MiscMethods {
 
 		//from the available quest ids generate the available quest protos
 		for (Integer questId : availableQuestIds) {
-			FullQuestProto fqp = createInfoProtoUtils
+			FullQuestProto fqp = CreateInfoProtoUtils
 					.createFullQuestProtoFromQuest(questIdToQuests.get(questId));
 			sdpb.addAvailableQuests(fqp);
 		}
 	}
 	//
-	//	private void setStaticData(StaticDataProto.Builder sdpb) {
+	//	private static void setStaticData(StaticDataProto.Builder sdpb) {
 	//		StaticDataProto staticData = StaticDataContainer.getStaticData();
 	//
 	//		if (null == staticData) {
@@ -1742,13 +1909,13 @@ public class MiscMethods {
 	//		sdpb.addAllResearch(staticData.getResearchList());
 	//	}
 	//
-	//	private void setTasks( StaticDataProto.Builder sdpb, StaticDataProto staticData )
+	//	private static void setTasks( StaticDataProto.Builder sdpb, StaticDataProto staticData )
 	//	{
 	//		sdpb.addAllAllTasks(staticData.getAllTasksList());
 	//		sdpb.addAllAllTaskMapElements(staticData.getAllTaskMapElementsList());
 	//	}
 	//
-	//	private void setStructures( StaticDataProto.Builder sdpb, StaticDataProto staticData )
+	//	private static void setStructures( StaticDataProto.Builder sdpb, StaticDataProto staticData )
 	//	{
 	//		sdpb.addAllAllGenerators(staticData.getAllGeneratorsList());
 	//		sdpb.addAllAllStorages(staticData.getAllStoragesList());
@@ -1762,7 +1929,7 @@ public class MiscMethods {
 	//		sdpb.addAllAllClanHouses(staticData.getAllClanHousesList());
 	//	}
 	//
-	//	private void setClanRaidStuff(
+	//	private static void setClanRaidStuff(
 	//		StaticDataProto.Builder sdpb,
 	//		StaticDataProto staticData )
 	//	{
@@ -1770,7 +1937,7 @@ public class MiscMethods {
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
 
-	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
+	public static Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
@@ -1812,7 +1979,7 @@ public class MiscMethods {
 		return returnMap;
 	}
 
-	private TranslateLanguages convertFromLanguageToEnum(Language language) {
+	private static TranslateLanguages convertFromLanguageToEnum(Language language) {
 		TranslateLanguages tl = null;
 		try {
 			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
@@ -1844,7 +2011,7 @@ public class MiscMethods {
 
 	}
 
-	public Language convertFromEnumToLanguage(TranslateLanguages tl) {
+	public static Language convertFromEnumToLanguage(TranslateLanguages tl) {
 		if(tl.toString().equalsIgnoreCase("ARABIC")) {
 			return Language.ARABIC;
 		}
@@ -1866,7 +2033,7 @@ public class MiscMethods {
 		else return null;
 	}
 
-	public Language detectedLanguage(String text) {
+	public static Language detectedLanguage(String text) {
 		Detect.setClientId(pClientId);
         Detect.setClientSecret(secretId);
         Language detectedLanguage = null;

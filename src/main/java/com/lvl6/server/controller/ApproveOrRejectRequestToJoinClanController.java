@@ -56,9 +56,6 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -209,8 +206,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 							clanAvengeRetrieveUtil, clanAvengeUserRetrieveUtil,
 							clanChatPostRetrieveUtils,
 							clanMemberTeamDonationRetrieveUtil,
-							monsterSnapshotForUserRetrieveUtil,
-							createInfoProtoUtils);
+							monsterSnapshotForUserRetrieveUtil);
 					cdp = scdpa.execute();
 
 					//update clan cache
@@ -222,7 +218,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 					setResponseBuilderStuff(resBuilder, clan, clanSizeList);
 				}
 
-				requestMup = createInfoProtoUtils
+				requestMup = CreateInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(requester, clan);
 				resBuilder.setRequester(requestMup);
 			}
@@ -482,11 +478,11 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
 			List<Integer> clanSizeList) {
 
-		resBuilder.setMinClan(createInfoProtoUtils
+		resBuilder.setMinClan(CreateInfoProtoUtils
 				.createMinimumClanProtoFromClan(clan));
 
 		int size = clanSizeList.get(0);
-		resBuilder.setFullClan(createInfoProtoUtils
+		resBuilder.setFullClan(CreateInfoProtoUtils
 				.createFullClanProtoWithClanSize(clan, size));
 	}
 

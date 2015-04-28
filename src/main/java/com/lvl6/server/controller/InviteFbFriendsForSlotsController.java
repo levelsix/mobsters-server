@@ -46,9 +46,6 @@ public class InviteFbFriendsForSlotsController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -163,7 +160,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 					for (String id : newIdsToInvites.keySet()) {
 						UserFacebookInviteForSlot invite = newIdsToInvites
 								.get(id);
-						UserFacebookInviteForSlotProto inviteProto = createInfoProtoUtils
+						UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
 								.createUserFacebookInviteForSlotProtoFromInvite(
 										invite, aUser, inviterClan, senderProto);
 						resBuilder.addInvitesNew(inviteProto);

@@ -51,12 +51,6 @@ public class SellUserMonsterController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -87,7 +81,7 @@ public class SellUserMonsterController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<MinimumUserMonsterSellProto> userMonsters = reqProto
 				.getSalesList();
-		Map<String, Integer> userMonsterIdsToCashAmounts = monsterStuffUtils
+		Map<String, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
 				.convertToMonsterForUserIdToCashAmount(userMonsters);
 		Set<String> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
 		List<String> userMonsterIds = new ArrayList<String>(userMonsterIdsSet);
@@ -165,7 +159,7 @@ public class SellUserMonsterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -245,7 +239,7 @@ public class SellUserMonsterController extends EventController {
 		boolean success = true;
 
 		// sum up the monies and give it to the user
-		int sum = miscMethods.sumMapValues(userMonsterIdsToCashAmounts);
+		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
 		int curCash = Math.min(aUser.getCash(), maxCash); //in case user's cash is more than maxCash
 		int maxCashUserCanGain = maxCash - curCash;
 		sum = Math.min(sum, maxCashUserCanGain);
@@ -258,7 +252,7 @@ public class SellUserMonsterController extends EventController {
 								sum, userMonsterIdsToCashAmounts));
 				return false;
 			} else {
-				currencyChange.put(miscMethods.cash, sum);
+				currencyChange.put(MiscMethods.cash, sum);
 			}
 		}
 
@@ -329,14 +323,14 @@ public class SellUserMonsterController extends EventController {
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reason = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS;
-		String cash = miscMethods.cash;
+		String cash = MiscMethods.cash;
 
 		previousCurrency.put(cash, previousCash);
 		currentCurrency.put(cash, aUser.getCash());
 		reasonsForChanges.put(cash, reason);
 		detailsMap.put(cash, detailsSb.toString());
 
-		miscMethods.writeToUserCurrencyOneUser(userId, aDate, currencyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, aDate, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 	}

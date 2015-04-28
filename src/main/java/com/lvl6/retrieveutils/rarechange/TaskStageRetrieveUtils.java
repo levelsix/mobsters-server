@@ -33,7 +33,7 @@ public class TaskStageRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_CONFIG;
 
-	public  Map<Integer, Map<Integer, TaskStage>> gettaskIdsToTaskStageIdsToTaskStages() {
+	public static Map<Integer, Map<Integer, TaskStage>> gettaskIdsToTaskStageIdsToTaskStages() {
 		log.debug("retrieving all task stage data map");
 		if (null == taskIdsToTaskStageIdsToTaskStages) {
 			setStatictaskIdsToTaskStageIdsToTaskStages();
@@ -42,7 +42,7 @@ public class TaskStageRetrieveUtils {
 	}
 
 	//TODO: consider making another static map to hold this type of data
-	public TaskStage getTaskStageForTaskStageId(int taskId,
+	public static TaskStage getTaskStageForTaskStageId(int taskId,
 			int taskStageNum) {
 		if (null == taskIdsToTaskStageIdsToTaskStages) {
 			setStatictaskIdsToTaskStageIdsToTaskStages();
@@ -59,7 +59,7 @@ public class TaskStageRetrieveUtils {
 		return null;
 	}
 
-	public TaskStage getTaskStageForTaskStageId(int taskStageId) {
+	public static TaskStage getTaskStageForTaskStageId(int taskStageId) {
 		if (null == taskStageIdsToTaskStages) {
 			setStatictaskIdsToTaskStageIdsToTaskStages();
 		}
@@ -70,7 +70,7 @@ public class TaskStageRetrieveUtils {
 		return taskStageIdsToTaskStages.get(taskStageId);
 	}
 
-	public Map<Integer, TaskStage> getTaskStagesForTaskId(int taskId) {
+	public static Map<Integer, TaskStage> getTaskStagesForTaskId(int taskId) {
 		log.debug("getTaskStagesForTaskId {}", taskId);
 		if (null == taskIdsToTaskStageIdsToTaskStages) {
 			setStatictaskIdsToTaskStageIdsToTaskStages();
@@ -78,7 +78,7 @@ public class TaskStageRetrieveUtils {
 		return taskIdsToTaskStageIdsToTaskStages.get(taskId);
 	}
 
-	public Set<Integer> getTaskStageIdsForTaskId(int taskId) {
+	public static Set<Integer> getTaskStageIdsForTaskId(int taskId) {
 		log.debug("getTaskStageIdsForTaskId {}", taskId);
 		if (null == taskIdsToTaskStageIdsToTaskStages) {
 			setStatictaskIdsToTaskStageIdsToTaskStages();
@@ -94,7 +94,7 @@ public class TaskStageRetrieveUtils {
 		return taskStages.keySet();
 	}
 
-	public int getFirstTaskStageIdForTaskId(int taskId) {
+	public static int getFirstTaskStageIdForTaskId(int taskId) {
 		log.debug("retrieving the first task stage for taskId {}", taskId);
 		if (null == taskIdsToFirstTaskStageIds) {
 			setStatictaskIdsToTaskStageIdsToTaskStages();
@@ -107,7 +107,7 @@ public class TaskStageRetrieveUtils {
 		return taskIdsToFirstTaskStageIds.get(taskId);
 	}
 
-	private void setStatictaskIdsToTaskStageIdsToTaskStages() {
+	private static void setStatictaskIdsToTaskStageIdsToTaskStages() {
 		log.debug("setting static map of taskIds to monsters");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -168,7 +168,7 @@ public class TaskStageRetrieveUtils {
 		}
 	}
 
-	private void setTaskIdsToFirstTaskStageIds(Set<Integer> taskIds) {
+	private static void setTaskIdsToFirstTaskStageIds(Set<Integer> taskIds) {
 		taskIdsToFirstTaskStageIds = new HashMap<Integer, Integer>();
 		for (Integer taskId : taskIds) {
 			int taskStageId = computeFirstTaskStageIdForTaskId(taskId);
@@ -177,7 +177,7 @@ public class TaskStageRetrieveUtils {
 
 	}
 
-	private int computeFirstTaskStageIdForTaskId(int taskId) {
+	private static int computeFirstTaskStageIdForTaskId(int taskId) {
 		Map<Integer, TaskStage> taskStageIdsToTaskStages = taskIdsToTaskStageIdsToTaskStages
 				.get(taskId);
 
@@ -201,14 +201,14 @@ public class TaskStageRetrieveUtils {
 		return 0;
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStatictaskIdsToTaskStageIdsToTaskStages();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private TaskStage convertRSRowToTaskStage(ResultSet rs)
+	private static TaskStage convertRSRowToTaskStage(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.TASK_STAGE__ID);
 		int taskId = rs.getInt(DBConstants.TASK_STAGE__TASK_ID);

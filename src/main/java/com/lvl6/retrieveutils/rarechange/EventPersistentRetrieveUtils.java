@@ -26,7 +26,7 @@ public class EventPersistentRetrieveUtils {
 
 	private static Map<Integer, EventPersistent> eventIdToEvent;
 
-	public Map<Integer, EventPersistent> getAllEventIdsToEvents() {
+	public static Map<Integer, EventPersistent> getAllEventIdsToEvents() {
 		if (null == eventIdToEvent) {
 			setStaticEventIdsToEvents();
 		}
@@ -34,7 +34,7 @@ public class EventPersistentRetrieveUtils {
 		return eventIdToEvent;
 	}
 
-	public EventPersistent getEventById(int id) {
+	public static EventPersistent getEventById(int id) {
 		if (null == eventIdToEvent) {
 			setStaticEventIdsToEvents();
 		}
@@ -45,11 +45,11 @@ public class EventPersistentRetrieveUtils {
 		return ep;
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticEventIdsToEvents();
 	}
 
-	private void setStaticEventIdsToEvents() {
+	private static void setStaticEventIdsToEvents() {
 		log.debug("setting static map of id to EventPersistent");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -82,7 +82,7 @@ public class EventPersistentRetrieveUtils {
 		}
 	}
 
-	private EventPersistent convertRSRowToEventPersistent(ResultSet rs)
+	private static EventPersistent convertRSRowToEventPersistent(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.EVENT_PERSISTENT__ID);
 		String dayOfWeek = rs

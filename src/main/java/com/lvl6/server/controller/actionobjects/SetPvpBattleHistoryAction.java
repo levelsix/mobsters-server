@@ -23,8 +23,6 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -39,21 +37,13 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	private final ClanRetrieveUtils2 clanRetrieveUtils;
 	private final HazelcastPvpUtil hazelcastPvpUtil;
-	private final MonsterStuffUtils monsterStuffUtils;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
-	private final ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-	private final MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
 			PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil,
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
 			ClanRetrieveUtils2 clanRetrieveUtils,
-			HazelcastPvpUtil hazelcastPvpUtil,
-			MonsterStuffUtils monsterStuffUtils,
-			CreateInfoProtoUtils createInfoProtoUtils,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			HazelcastPvpUtil hazelcastPvpUtil) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
@@ -61,10 +51,6 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 		this.clanRetrieveUtils = clanRetrieveUtils;
-		this.monsterStuffUtils = monsterStuffUtils;
-		this.createInfoProtoUtils = createInfoProtoUtils;
-		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	//derived state
@@ -167,8 +153,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//		log.info(String.format(
 		//			"history monster teams=%s", userIdsToUserMonsters));
 
-		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtils);
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = MonsterStuffUtils
+				.calculatePvpDrops(userIdsToUserMonsters);
 
 		attackerIdsToProspectiveCashWinnings = new HashMap<String, Integer>();
 		attackerIdsToProspectiveOilWinnings = new HashMap<String, Integer>();
@@ -181,7 +167,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 				.getUserIdsToClans(attackerIds);
 
 		//create PvpHistory for battles where this user got attacked
-		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
 				.createGotAttackedPvpHistoryProto(gotAttackedHistoryList,
 						idsToAttackers, attackerIdsToClans,
 						userIdsToUserMonsters,
@@ -272,8 +258,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
 
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
-					attackerElo, defender, defenderPu.getElo(),
-					serverToggleRetrieveUtil);
+					attackerElo, defenderPu.getElo(), defender);
 
 			userIdToCashStolen.put(defenderId,
 					potentialResult.getUnsignedCashAttackerWins());
@@ -298,12 +283,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		Map<String, User> idsToUsers = useMe.getUserIdsToUsers(userIds);
 
 		//create PvpHistory for battles where this user attacked others
-		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
 				.createAttackedOthersPvpHistoryProto(userId, idsToUsers,
 						attackedOthersHistoryList);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);
 
 	}
-
 }

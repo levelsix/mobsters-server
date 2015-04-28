@@ -44,7 +44,6 @@ import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.QueueUpAction;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -87,22 +86,6 @@ public class QueueUpController extends EventController {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
-
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-
 
 	//	@Autowired
 	//	protected PvpUtil pvpUtil;
@@ -186,7 +169,7 @@ public class QueueUpController extends EventController {
 
 			QueueUpAction qua = new QueueUpAction(attackerId, uniqSeenUserIds,
 					clientDate, pvpLeagueForUserRetrieveUtil, hazelcastPvpUtil,
-					monsterForPvpRetrieveUtil, timeUtil, serverToggleRetrieveUtil);
+					monsterForPvpRetrieveUtil, timeUtil);
 
 			//update the user, and his shield
 			qua.execute(resBuilder);
@@ -287,9 +270,7 @@ public class QueueUpController extends EventController {
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil,
-					researchForUserRetrieveUtil,
-					monsterStuffUtils, serverToggleRetrieveUtil,
-					monsterLevelInfoRetrieveUtils);
+					researchForUserRetrieveUtil);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();
@@ -297,7 +278,7 @@ public class QueueUpController extends EventController {
 
 			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
 					.getStatus())) {
-				List<PvpProto> ppList = createInfoProtoUtils
+				List<PvpProto> ppList = CreateInfoProtoUtils
 						.createPvpProtos(
 								rumta.getAllUsersExceptRetriever(),
 								rumta.getUserIdToClan(),
@@ -507,9 +488,9 @@ public class QueueUpController extends EventController {
 			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
-		boolean setElo = serverToggleRetrieveUtil
+		boolean setElo = ServerToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SET_ELO);
-		boolean displayBotElo = serverToggleRetrieveUtil
+		boolean displayBotElo = ServerToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOT_SHOW_ELO);
 
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
@@ -552,7 +533,7 @@ public class QueueUpController extends EventController {
 
 		//it's important that monsterIdsDropped be in the same order
 		//as mfpList
-		PvpProto fakeUser = createInfoProtoUtils.createFakePvpProto(userId,
+		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId,
 				randomName, lvl, avgElo, prospectiveCashWinnings,
 				prospectiveOilWinnings, mfpList, monsterIdsDropped, setElo);
 		return fakeUser;
@@ -586,12 +567,12 @@ public class QueueUpController extends EventController {
 			int monsterId = mfp.getMonsterId();
 			int monserLvl = mfp.getMonsterLvl();
 
-			boolean monsterDropped = monsterLevelInfoRetrieveUtils
+			boolean monsterDropped = MonsterLevelInfoRetrieveUtils
 					.didPvpMonsterDrop(monsterId, monserLvl);
 
 			int monsterDropId = ControllerConstants.NOT_SET;
 
-			Monster mon = monsterRetrieveUtils
+			Monster mon = MonsterRetrieveUtils
 					.getMonsterForMonsterId(monsterId);
 			if (monsterDropped) {
 				monsterDropId = mon.getPvpMonsterDropId();
@@ -689,57 +670,6 @@ public class QueueUpController extends EventController {
 	public void setPvpBoardObstacleForUserRetrieveUtil(
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
-	}
-
-	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {
-		return researchForUserRetrieveUtil;
-	}
-
-	public void setResearchForUserRetrieveUtil(
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
-		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
-	}
-
-	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
-		return monsterLevelInfoRetrieveUtils;
-	}
-
-	public void setMonsterLevelInfoRetrieveUtils(
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
-	}
-
-	public MonsterStuffUtils getMonsterStuffUtils() {
-		return monsterStuffUtils;
-	}
-
-	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
-		this.monsterStuffUtils = monsterStuffUtils;
-	}
-
-	public MonsterRetrieveUtils getMonsterRetrieveUtils() {
-		return monsterRetrieveUtils;
-	}
-
-	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
-		this.monsterRetrieveUtils = monsterRetrieveUtils;
-	}
-
-	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
-		return createInfoProtoUtils;
-	}
-
-	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
-		this.createInfoProtoUtils = createInfoProtoUtils;
-	}
-
-	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
-		return serverToggleRetrieveUtil;
-	}
-
-	public void setServerToggleRetrieveUtil(
-			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
-		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 	}
 
 }

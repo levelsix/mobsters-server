@@ -17,7 +17,7 @@ import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.misc.ReloadAllRareChangeStaticData;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
@@ -36,9 +36,6 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 
 	@Resource(name = "staticDataReloadDone")
 	protected ITopic<ServerMessage> staticDataReloadDone;
-	
-	@Autowired
-	protected ReloadAllRareChangeStaticData reloadAllRareChangeStaticData;
 
 	public ITopic<ServerMessage> getStaticDataReloadDone() {
 		return staticDataReloadDone;
@@ -109,7 +106,7 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 		log.info("Handling serverEvent of type: " + msg.getMessageObject());
 		if (msg.getMessageObject().equals(ServerMessage.RELOAD_STATIC_DATA)) {
 			log.info("Reloading all static data");
-			reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
+			MiscMethods.reloadAllRareChangeStaticData();
 			reloadStaticData();
 			reloadRecommendedClans();
 			getStaticDataReloadDone().publish(

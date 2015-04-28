@@ -36,10 +36,6 @@ public class PurchaseBoosterPackRequestEvent extends RequestEvent {
 		return purchaseBoosterPackRequestProto;
 	}
 
-	public void setPurchaseBoosterPackRequestProto(PurchaseBoosterPackRequestProto pbprp) {
-		this.purchaseBoosterPackRequestProto = pbprp;
-	}
-
 	@Override
 	public String toString() {
 		return "PurchaseBoosterPackRequestEvent [purchaseBoosterPackRequestProto="

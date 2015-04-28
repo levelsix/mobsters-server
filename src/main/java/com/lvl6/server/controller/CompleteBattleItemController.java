@@ -45,12 +45,6 @@ public class CompleteBattleItemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -135,8 +129,7 @@ public class CompleteBattleItemController extends EventController {
 
 			CompleteBattleItemAction cbia = new CompleteBattleItemAction(
 					userId, completedList, gemsForSpeedUp, userRetrieveUtil,
-					battleItemForUserRetrieveUtil, insertUtil, deleteUtil, 
-					miscMethods);
+					battleItemForUserRetrieveUtil, insertUtil, deleteUtil);
 
 			cbia.execute(resBuilder);
 
@@ -148,7 +141,7 @@ public class CompleteBattleItemController extends EventController {
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<BattleItemForUser> bifuCompletedList = cbia
 						.getBifuCompletedList();
-				List<UserBattleItemProto> ubipCompletedList = createInfoProtoUtils
+				List<UserBattleItemProto> ubipCompletedList = CreateInfoProtoUtils
 						.convertBattleItemForUserListToBattleItemForUserProtoList(bifuCompletedList);
 				resBuilder.addAllUbiUpdated(ubipCompletedList);
 			}
@@ -159,7 +152,7 @@ public class CompleteBattleItemController extends EventController {
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -226,7 +219,7 @@ public class CompleteBattleItemController extends EventController {
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
 			CompleteBattleItemAction cbia) {
-		miscMethods.writeToUserCurrencyOneUser(userId, date,
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
 				cbia.getCurrencyDeltas(), cbia.getPreviousCurrencies(),
 				cbia.getCurrentCurrencies(), cbia.getReasons(),
 				cbia.getDetails());

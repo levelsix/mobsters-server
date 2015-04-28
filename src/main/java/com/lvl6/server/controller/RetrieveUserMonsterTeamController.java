@@ -29,10 +29,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -68,19 +65,6 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-
-	@Autowired
-	private MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
 
 	public RetrieveUserMonsterTeamController() {
 		numAllocatedThreads = 4;
@@ -156,15 +140,13 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					clanMemberTeamDonationRetrieveUtil,
 					monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 					pvpLeagueForUserRetrieveUtil,
-					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-					monsterStuffUtils, serverToggleRetrieveUtil,
-					monsterLevelInfoRetrieveUtils);
+					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(
 					RetrieveUserMonsterTeamStatus.SUCCESS)) {
 				//TODO: replace QueueUp and Avenge controller logic with this
-				List<PvpProto> ppList = createInfoProtoUtils
+				List<PvpProto> ppList = CreateInfoProtoUtils
 						.createPvpProtos(
 								rumta.getAllUsersExceptRetriever(),
 								rumta.getUserIdToClan(),
@@ -281,49 +263,6 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	public void setPvpBoardObstacleForUserRetrieveUtil(
 			PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil) {
 		this.pvpBoardObstacleForUserRetrieveUtil = pvpBoardObstacleForUserRetrieveUtil;
-	}
-
-	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {
-		return researchForUserRetrieveUtil;
-	}
-
-	public void setResearchForUserRetrieveUtil(
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
-		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
-	}
-
-	public MonsterStuffUtils getMonsterStuffUtils() {
-		return monsterStuffUtils;
-	}
-
-	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
-		this.monsterStuffUtils = monsterStuffUtils;
-	}
-
-	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
-		return createInfoProtoUtils;
-	}
-
-	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
-		this.createInfoProtoUtils = createInfoProtoUtils;
-	}
-
-	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
-		return serverToggleRetrieveUtil;
-	}
-
-	public void setServerToggleRetrieveUtil(
-			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
-		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
-	}
-
-	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
-		return monsterLevelInfoRetrieveUtils;
-	}
-
-	public void setMonsterLevelInfoRetrieveUtils(
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 }

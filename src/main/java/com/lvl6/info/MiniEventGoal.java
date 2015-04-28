@@ -12,10 +12,10 @@ public class MiniEventGoal implements Serializable {
 	private int amt;
 	private String desc;
 	private int ptsReward;
-	private String actionDescription;
 
 	public MiniEventGoal(int id, int miniEventId, String type, int amt,
-			String desc, int ptsReward, String actionDescription) {
+			String desc, int ptsReward)
+	{
 		super();
 		this.id = id;
 		this.miniEventId = miniEventId;
@@ -23,20 +23,8 @@ public class MiniEventGoal implements Serializable {
 		this.amt = amt;
 		this.desc = desc;
 		this.ptsReward = ptsReward;
-		this.actionDescription = actionDescription;
 	}
-
 	
-	public String getActionDescription() {
-		return actionDescription;
-	}
-
-
-	public void setActionDescription(String actionDescription) {
-		this.actionDescription = actionDescription;
-	}
-
-
 	public int getId() {
 		return id;
 	}
@@ -89,8 +77,7 @@ public class MiniEventGoal implements Serializable {
 	public String toString() {
 		return "MiniEventGoal [id=" + id + ", miniEventId=" + miniEventId
 				+ ", type=" + type + ", amt=" + amt + ", desc=" + desc
-				+ ", ptsReward=" + ptsReward + ", actionDescription="
-				+ actionDescription + "]";
+				+ ", ptsReward=" + ptsReward + "]";
 	}
 
 }

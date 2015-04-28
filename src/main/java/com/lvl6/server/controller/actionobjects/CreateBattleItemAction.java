@@ -38,7 +38,6 @@ public class CreateBattleItemAction {
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	protected DeleteUtil deleteUtil;
-	private MiscMethods miscMethods;
 
 	public CreateBattleItemAction(
 			String userId,
@@ -48,8 +47,7 @@ public class CreateBattleItemAction {
 			int oilChange, int maxOil, int gemCostForCreating,
 			UserRetrieveUtils2 userRetrieveUtil,
 			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil, DeleteUtil deleteUtil,
-			MiscMethods miscMethods) {
+			InsertUtil insertUtil, UpdateUtil updateUtil, DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.deletedList = deletedList;
@@ -65,7 +63,6 @@ public class CreateBattleItemAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.deleteUtil = deleteUtil;
-		this.miscMethods = miscMethods;
 	}
 
 	private boolean emptyDeletedList;
@@ -201,14 +198,14 @@ public class CreateBattleItemAction {
 
 		//update currency
 		if (gemCostForCreating > 0) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
+			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			gemsChange = -1 * (gemCostForCreating);
 		}
 		if (cashChange != 0) {
-			prevCurrencies.put(miscMethods.cash, user.getCash());
+			prevCurrencies.put(MiscMethods.cash, user.getCash());
 		}
 		if (oilChange != 0) {
-			prevCurrencies.put(miscMethods.oil, user.getOil());
+			prevCurrencies.put(MiscMethods.oil, user.getOil());
 		}
 
 		updateUserCurrency();
@@ -284,9 +281,9 @@ public class CreateBattleItemAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
-		String oil = miscMethods.oil;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
+		String oil = MiscMethods.oil;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

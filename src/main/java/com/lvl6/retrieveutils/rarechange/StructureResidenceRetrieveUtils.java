@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +22,12 @@ public class StructureResidenceRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureResidence> structIdsToResidences;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESIDENCE_CONFIG;
 
-	public Map<Integer, StructureResidence> getStructIdsToResidences() {
+	public static Map<Integer, StructureResidence> getStructIdsToResidences() {
 		log.debug("retrieving all structs data");
 		if (structIdsToResidences == null) {
 			setStaticStructIdsToResidences();
@@ -39,7 +35,7 @@ public class StructureResidenceRetrieveUtils {
 		return structIdsToResidences;
 	}
 
-	public StructureResidence getResidenceForStructId(int structId) {
+	public static StructureResidence getResidenceForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToResidences == null) {
 			setStaticStructIdsToResidences();
@@ -47,13 +43,13 @@ public class StructureResidenceRetrieveUtils {
 		return structIdsToResidences.get(structId);
 	}
 
-	public StructureResidence getUpgradedResidenceForStructId(
+	public static StructureResidence getUpgradedResidenceForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToResidences == null) {
 			setStaticStructIdsToResidences();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -64,13 +60,13 @@ public class StructureResidenceRetrieveUtils {
 		return null;
 	}
 
-	public StructureResidence getPredecessorResidenceForStructId(
+	public static StructureResidence getPredecessorResidenceForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToResidences == null) {
 			setStaticStructIdsToResidences();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -81,7 +77,7 @@ public class StructureResidenceRetrieveUtils {
 		return null;
 	}
 
-	private void setStaticStructIdsToResidences() {
+	private static void setStaticStructIdsToResidences() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -115,14 +111,14 @@ public class StructureResidenceRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToResidences();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureResidence convertRSRowToResidence(ResultSet rs)
+	private static StructureResidence convertRSRowToResidence(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__STRUCT_ID);
 		int numMonsterSlots = rs

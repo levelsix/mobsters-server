@@ -8,8 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -24,16 +22,12 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-@Component
 public class ClanStuffUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public ClanEventPersistentForClan createClanEventPersistentForClan(
+	public static ClanEventPersistentForClan createClanEventPersistentForClan(
 			PersistentClanEventClanInfoProto pceip) {
 		log.info("creating ClanEventPersistentForClan");
 
@@ -58,7 +52,7 @@ public class ClanStuffUtils {
 				crId, crsId, stageStartTime, crsmId, stageMonsterStartTime);
 	}
 
-	public boolean firstUserClanStatusAboveSecond(UserClanStatus first,
+	public static boolean firstUserClanStatusAboveSecond(UserClanStatus first,
 			UserClanStatus second) {
 
 		if (first.equals(second)) {
@@ -79,7 +73,7 @@ public class ClanStuffUtils {
 
 	}
 
-	public List<ClanAvenge> javafyPvpHistoryProto(String defenderUuid,
+	public static List<ClanAvenge> javafyPvpHistoryProto(String defenderUuid,
 			String clanUuid, List<PvpHistoryProto> phpList, Date clientTime) {
 		List<ClanAvenge> caList = new ArrayList<ClanAvenge>();
 
@@ -105,14 +99,14 @@ public class ClanStuffUtils {
 		return caList;
 	}
 
-	public Map<String, MinimumUserProtoWithLevel> extractAttackerFullUserProto(
+	public static Map<String, MinimumUserProtoWithLevel> extractAttackerFullUserProto(
 			List<PvpHistoryProto> phpList) {
 		Map<String, MinimumUserProtoWithLevel> idToMupWl = new HashMap<String, MinimumUserProtoWithLevel>();
 
 		for (PvpHistoryProto php : phpList) {
 			FullUserProto attacker = php.getAttacker();
 			String attackerId = attacker.getUserUuid();
-			MinimumUserProtoWithLevel mupwl = createInfoProtoUtils
+			MinimumUserProtoWithLevel mupwl = CreateInfoProtoUtils
 					.createMinimumUserProto(attacker);
 
 			idToMupWl.put(attackerId, mupwl);
@@ -120,7 +114,7 @@ public class ClanStuffUtils {
 		return idToMupWl;
 	}
 
-	public List<ClanAvengeUser> extractClanAvengeUser(
+	public static List<ClanAvengeUser> extractClanAvengeUser(
 			List<PvpUserClanAvengeProto> pucapList) {
 		List<ClanAvengeUser> cauList = new ArrayList<ClanAvengeUser>();
 
@@ -143,7 +137,7 @@ public class ClanStuffUtils {
 		return cauList;
 	}
 
-	public ClanMemberTeamDonation javafyClanMemberTeamDonationProto(
+	public static ClanMemberTeamDonation javafyClanMemberTeamDonationProto(
 			ClanMemberTeamDonationProto cmtdp) {
 		ClanMemberTeamDonation cmtd = new ClanMemberTeamDonation();
 

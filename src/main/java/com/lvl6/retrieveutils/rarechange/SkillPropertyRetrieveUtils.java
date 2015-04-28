@@ -27,7 +27,7 @@ public class SkillPropertyRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_PROPERTY_CONFIG;
 
-	public Map<Integer, Map<Integer, SkillProperty>> getSkillIdsToIdsToSkillPropertys() {
+	public static Map<Integer, Map<Integer, SkillProperty>> getSkillIdsToIdsToSkillPropertys() {
 		log.debug("retrieving all skillIds to SkillProperty data map");
 		if (null == skillIdsToIdsToSkillPropertys) {
 			setStaticSkillIdsToIdsToSkillPropertys();
@@ -35,7 +35,7 @@ public class SkillPropertyRetrieveUtils {
 		return skillIdsToIdsToSkillPropertys;
 	}
 
-	public SkillProperty getSkillPropertyForSkillPropertyId(
+	public static SkillProperty getSkillPropertyForSkillPropertyId(
 			int skillPropertyId) {
 		if (null == skillPropertyIdsToSkillPropertys) {
 			setStaticSkillIdsToIdsToSkillPropertys();
@@ -48,7 +48,7 @@ public class SkillPropertyRetrieveUtils {
 		return skillPropertyIdsToSkillPropertys.get(skillPropertyId);
 	}
 
-	public Map<Integer, SkillProperty> getSkillPropertysForSkillId(
+	public static Map<Integer, SkillProperty> getSkillPropertysForSkillId(
 			int skillId) {
 		log.debug(String.format("retrieve skill data for skill=%s", skillId));
 		if (null == skillIdsToIdsToSkillPropertys) {
@@ -57,7 +57,7 @@ public class SkillPropertyRetrieveUtils {
 		return skillIdsToIdsToSkillPropertys.get(skillId);
 	}
 
-	private void setStaticSkillIdsToIdsToSkillPropertys() {
+	private static void setStaticSkillIdsToIdsToSkillPropertys() {
 		log.debug("setting static map of skillIds to skillProperties");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -115,14 +115,14 @@ public class SkillPropertyRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticSkillIdsToIdsToSkillPropertys();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private SkillProperty convertRSRowToSkillProperty(ResultSet rs)
+	private static SkillProperty convertRSRowToSkillProperty(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.SKILL_PROPERTY__ID);
 		String name = rs.getString(DBConstants.SKILL_PROPERTY__NAME);

@@ -41,7 +41,6 @@ public class AcceptOrRejectClanInviteAction {
 	private DeleteUtil deleteUtil;
 	private ClanRetrieveUtils2 clanRetrieveUtil;
 	private ClanInviteRetrieveUtil clanInviteRetrieveUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public AcceptOrRejectClanInviteAction(String acceptedInviteId,
 			String prospectiveMemberId, String inviterId, String clanId,
@@ -50,8 +49,7 @@ public class AcceptOrRejectClanInviteAction {
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			InsertUtil insertUtil, DeleteUtil deleteUtil,
 			ClanRetrieveUtils2 clanRetrieveUtil,
-			ClanInviteRetrieveUtil clanInviteRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+			ClanInviteRetrieveUtil clanInviteRetrieveUtil) {
 		super();
 		this.acceptedInviteId = acceptedInviteId;
 		this.prospectiveMemberId = prospectiveMemberId;
@@ -63,7 +61,6 @@ public class AcceptOrRejectClanInviteAction {
 		this.insertUtil = insertUtil;
 		this.deleteUtil = deleteUtil;
 		this.clanInviteRetrieveUtil = clanInviteRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -109,7 +106,7 @@ public class AcceptOrRejectClanInviteAction {
 		resBuilder.setStatus(AcceptOrRejectClanInviteStatus.SUCCESS);
 		if (!rejectOnly) {
 			//meaning user accepted an invite
-			FullClanProtoWithClanSize fcpwcs = createInfoProtoUtils
+			FullClanProtoWithClanSize fcpwcs = CreateInfoProtoUtils
 					.createFullClanProtoWithClanSize(prospectiveClan, clanSize);
 
 			resBuilder.setFullClan(fcpwcs);

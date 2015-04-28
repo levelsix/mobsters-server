@@ -34,10 +34,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -59,34 +55,13 @@ public class PurchaseBoosterPackController extends EventController {
 	protected Locker locker;
 
 	@Autowired
-	protected MiscMethods miscMethods;
-
-	@Autowired
 	protected TimeUtils timeUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
-	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-
-	@Autowired
-	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-
-	@Autowired
-	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
@@ -154,10 +129,8 @@ public class PurchaseBoosterPackController extends EventController {
 		try {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
-					timeUtils, userRetrieveUtils, boosterPackRetrieveUtils,
-					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
-					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
-					monsterRetrieveUtils);
+					timeUtils, userRetrieveUtils, itemForUserRetrieveUtil,
+					updateUtil);
 
 			pbpa.execute(resBuilder);
 
@@ -168,7 +141,7 @@ public class PurchaseBoosterPackController extends EventController {
 						.getItemsUserReceives();
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
-					BoosterItemProto bip = createInfoProtoUtils
+					BoosterItemProto bip = CreateInfoProtoUtils
 							.createBoosterItemProto(bi);
 					resBuilder.setPrize(bip);
 				}
@@ -178,7 +151,7 @@ public class PurchaseBoosterPackController extends EventController {
 				if (null != ifuList && !ifuList.isEmpty()) {
 					int numUpdated = updateUtil.updateItemForUser(ifuList);
 					log.info("items numUpdated={}", numUpdated);
-					List<UserItemProto> uipList = createInfoProtoUtils
+					List<UserItemProto> uipList = CreateInfoProtoUtils
 							.createUserItemProtosFromUserItems(ifuList);
 					resBuilder.addAllUpdatedUserItems(uipList);
 				}
@@ -195,7 +168,7 @@ public class PurchaseBoosterPackController extends EventController {
 			if (PurchaseBoosterPackStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								pbpa.getUser(), null, null);
 
@@ -240,7 +213,7 @@ public class PurchaseBoosterPackController extends EventController {
 		//      Monster eq = equipMap.get(bi.getEquipId());
 		//      if (eq.getRarity().compareTo(Rarity.SUPERRARE) >= 0) {
 		//        RareBoosterPurchaseProto r = CreateInfoProtoUtils.createRareBoosterPurchaseProto(aPack, user, eq, d);
-		//
+		//        
 		//        goodEquipsRecievedFromBoosterPacks.add(0, r);
 		//        //remove older messages
 		//        try {
@@ -250,7 +223,7 @@ public class PurchaseBoosterPackController extends EventController {
 		//        } catch(Exception e) {
 		//          log.error("Error adding rare booster purchase.", e);
 		//        }
-		//
+		//        
 		//        ReceivedRareBoosterPurchaseResponseProto p = ReceivedRareBoosterPurchaseResponseProto.newBuilder().setRareBoosterPurchase(r).build();
 		//        ReceivedRareBoosterPurchaseResponseEvent e = new ReceivedRareBoosterPurchaseResponseEvent(user.getId());
 		//        e.setReceivedRareBoosterPurchaseResponseProto(p);
@@ -259,7 +232,7 @@ public class PurchaseBoosterPackController extends EventController {
 		//    }
 	}
 
-	//  private int getNumEquipsPurchasedToday(int userId, int boosterPackId,
+	//  private int getNumEquipsPurchasedToday(int userId, int boosterPackId, 
 	//      DateTime startOfDayInLA) {
 	//    //get the time at the start of the day in UTC
 	//    DateTimeZone utcTZ = DateTimeZone.UTC;
@@ -268,13 +241,13 @@ public class PurchaseBoosterPackController extends EventController {
 	//
 	//    int numPurchased = UserBoosterPackRetrieveUtils
 	//        .getNumPacksPurchasedAfterDateForUserAndPackId(userId, boosterPackId, startTime);
-	//
+	//    
 	//    return numPurchased;
 	//  }
 
 	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 			PurchaseBoosterPackAction pbpa) {
-		miscMethods.writeToUserCurrencyOneUser(userId, date,
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
 				pbpa.getCurrencyDeltas(), pbpa.getPreviousCurrencies(),
 				pbpa.getCurrentCurrencies(), pbpa.getReasons(),
 				pbpa.getDetails());
@@ -289,7 +262,7 @@ public class PurchaseBoosterPackController extends EventController {
 		}
 		BoosterItem bi = itemsUserReceives.get(0);
 
-		List<String> userMonsterIds = monsterStuffUtils
+		List<String> userMonsterIds = MonsterStuffUtils
 				.getUserMonsterIds(fumpList);
 
 		int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(

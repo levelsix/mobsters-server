@@ -1,6 +1,6 @@
-package com.lvl6.test.controller.integrationtests;
+package com.lvl6.test.controllertests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -71,10 +71,6 @@ public class MoneyTreeTest {
 	@Autowired
 	DestroyMoneyTreeStructureController destroyMoneyTreeStructureController;
 
-	@Autowired
-	CreateInfoProtoUtils createInfoProtoUtils;
-
-
 	@Resource
 	public void setDataSource(DataSource dataSource) {
 		log.info("Setting datasource and creating jdbcTemplate");
@@ -138,7 +134,7 @@ public class MoneyTreeTest {
 	public void testBuyingMoneyTree() {
 		InAppPurchaseRequestProto.Builder iaprpb = InAppPurchaseRequestProto
 				.newBuilder();
-		iaprpb.setSender(createInfoProtoUtils
+		iaprpb.setSender(CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user, null));
 		String receipt1 = "ewoJInNpZ25hdHVyZSIgPSAiQXJCRkpXdkttVytTMHlRNlU5cmh5azVnWE93ajgwZCtnNm"
 				+ "NDRjdxOFNnbjU4OEhZY2VVR3h1aE9QKzV3NERKVDAvdjBwQ3VTbFArV3JvOWV0YmRRZFZOcE1YdWVDc"
@@ -241,7 +237,7 @@ public class MoneyTreeTest {
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 		InAppPurchaseRequestProto.Builder iaprpb2 = InAppPurchaseRequestProto
 				.newBuilder();
-		iaprpb2.setSender(createInfoProtoUtils
+		iaprpb2.setSender(CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user2, null));
 
 		iaprpb2.setReceipt(receipt2);
@@ -267,7 +263,7 @@ public class MoneyTreeTest {
 		User user3 = userRetrieveUtil.getUserById(user.getId());
 		DestroyMoneyTreeStructureRequestProto.Builder dmtsrpb = DestroyMoneyTreeStructureRequestProto
 				.newBuilder();
-		dmtsrpb.setSender(createInfoProtoUtils
+		dmtsrpb.setSender(CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(user3, null));
 
 		dmtsrpb.addUserStructUuid(userStructId);
@@ -297,7 +293,7 @@ public class MoneyTreeTest {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		int totalDeleted = 0;
 
-		conditionParams.put(DBConstants.IAP_HISTORY__USER_ID,
+		conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
 				userId);
 		int numDeleted = DBConnection.get().deleteRows(tableName,
 				conditionParams, condDelim);

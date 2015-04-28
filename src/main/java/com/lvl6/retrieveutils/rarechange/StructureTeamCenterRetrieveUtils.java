@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +22,12 @@ public class StructureTeamCenterRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
-	@Autowired
-	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureTeamCenter> structIdsToTeamCenters;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TEAM_CENTER_CONFIG;
 
-	public Map<Integer, StructureTeamCenter> getStructIdsToTeamCenters() {
+	public static Map<Integer, StructureTeamCenter> getStructIdsToTeamCenters() {
 		log.debug("retrieving all structs data");
 		if (structIdsToTeamCenters == null) {
 			setStaticStructIdsToTeamCenters();
@@ -39,7 +35,7 @@ public class StructureTeamCenterRetrieveUtils {
 		return structIdsToTeamCenters;
 	}
 
-	public StructureTeamCenter getTeamCenterForStructId(int structId) {
+	public static StructureTeamCenter getTeamCenterForStructId(int structId) {
 		log.debug("retrieve struct data for structId " + structId);
 		if (structIdsToTeamCenters == null) {
 			setStaticStructIdsToTeamCenters();
@@ -47,13 +43,13 @@ public class StructureTeamCenterRetrieveUtils {
 		return structIdsToTeamCenters.get(structId);
 	}
 
-	public StructureTeamCenter getUpgradedTeamCenterForStructId(
+	public static StructureTeamCenter getUpgradedTeamCenterForStructId(
 			int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToTeamCenters == null) {
 			setStaticStructIdsToTeamCenters();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -64,13 +60,13 @@ public class StructureTeamCenterRetrieveUtils {
 		return null;
 	}
 
-	public StructureTeamCenter getPredecessorTeamCenterForStructId(
+	public static StructureTeamCenter getPredecessorTeamCenterForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToTeamCenters == null) {
 			setStaticStructIdsToTeamCenters();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -81,7 +77,7 @@ public class StructureTeamCenterRetrieveUtils {
 		return null;
 	}
 
-	private void setStaticStructIdsToTeamCenters() {
+	private static void setStaticStructIdsToTeamCenters() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -115,14 +111,14 @@ public class StructureTeamCenterRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToTeamCenters();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureTeamCenter convertRSRowToTeamCenter(ResultSet rs)
+	private static StructureTeamCenter convertRSRowToTeamCenter(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__STRUCT_ID);
 		int teamCostLimit = rs

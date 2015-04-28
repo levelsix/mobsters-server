@@ -39,9 +39,6 @@ public class AchievementProgressController extends EventController {
 
 	@Autowired
 	protected AchievementStuffUtil achievementStuffUtil;
-	
-	@Autowired
-	AchievementRetrieveUtils achievementRetrieveUtils;
 
 	@Autowired
 	protected Locker locker;
@@ -172,7 +169,7 @@ public class AchievementProgressController extends EventController {
 				achievementIdsToUap.keySet());
 
 		//filter out the invalid achievements
-		Set<Integer> validAchievementIds = achievementRetrieveUtils
+		Set<Integer> validAchievementIds = AchievementRetrieveUtils
 				.getAchievementIds();
 
 		for (Integer achievementId : achievementIds) {

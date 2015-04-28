@@ -33,7 +33,7 @@ public class MonsterLevelInfoRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO_CONFIG;
 
 	/************************ CONTROLLER LOGIC *************************/
-	public boolean didPvpMonsterDrop(int monsterId, int lvl) {
+	public static boolean didPvpMonsterDrop(int monsterId, int lvl) {
 		Map<Integer, MonsterLevelInfo> lvlToMli = enumeratedPartialMonsterLevelInfo
 				.get(monsterId);
 
@@ -58,7 +58,7 @@ public class MonsterLevelInfoRetrieveUtils {
 	}
 
 	/****************************************************************/
-	public Map<Integer, Map<Integer, MonsterLevelInfo>> getMonsterIdToLevelToInfo() {
+	public static Map<Integer, Map<Integer, MonsterLevelInfo>> getMonsterIdToLevelToInfo() {
 		log.debug("retrieving all monster lvl info data");
 		if (monsterIdToLevelToInfo == null) {
 			setStaticMonsterIdToLevelToInfo();
@@ -68,7 +68,7 @@ public class MonsterLevelInfoRetrieveUtils {
 
 	//TODO: return enumeratedCompleteMonsterLevelInfo for a monster,
 	//similar to getAllPartialMonsterLevelInfo() but complete data
-	public Map<Integer, MonsterLevelInfo> getMonsterLevelInfoForMonsterId(
+	public static Map<Integer, MonsterLevelInfo> getMonsterLevelInfoForMonsterId(
 			int id) {
 		log.debug(String.format(
 				"retrieving MonsterLevelInfo for monster id=%s", id));
@@ -83,7 +83,7 @@ public class MonsterLevelInfoRetrieveUtils {
 		return monsterIdToLevelToInfo.get(id);
 	}
 
-	public Map<Integer, MonsterLevelInfo> getAllPartialMonsterLevelInfo(
+	public static Map<Integer, MonsterLevelInfo> getAllPartialMonsterLevelInfo(
 			int id) {
 		log.debug(String.format(
 				"retrieving MonsterLevelInfo for monster id=%s", id));
@@ -98,7 +98,7 @@ public class MonsterLevelInfoRetrieveUtils {
 		return enumeratedPartialMonsterLevelInfo.get(id);
 	}
 
-	private void setStaticMonsterIdToLevelToInfo() {
+	private static void setStaticMonsterIdToLevelToInfo() {
 		log.debug("setting static map of monster id to level to info");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -151,7 +151,7 @@ public class MonsterLevelInfoRetrieveUtils {
 
 	//since only given first and last monsterLevelInfo, need to compute
 	//inbetween values
-	private void computePartials() {
+	private static void computePartials() {
 
 		Map<Integer, Map<Integer, MonsterLevelInfo>> allPartialMonsterLevelInfo = new HashMap<Integer, Map<Integer, MonsterLevelInfo>>();
 
@@ -221,7 +221,7 @@ public class MonsterLevelInfoRetrieveUtils {
 		enumeratedPartialMonsterLevelInfo = allPartialMonsterLevelInfo;
 	}
 
-	private int calculateHp(MonsterLevelInfo min, MonsterLevelInfo max,
+	private static int calculateHp(MonsterLevelInfo min, MonsterLevelInfo max,
 			int currentLvl) {
 
 		double base = ((double) (currentLvl - 1))
@@ -236,7 +236,7 @@ public class MonsterLevelInfoRetrieveUtils {
 		return (min.getHp() + hpOffset);
 	}
 
-	private int calculateExp(MonsterLevelInfo max, int currentLvl) {
+	private static int calculateExp(MonsterLevelInfo max, int currentLvl) {
 		double base = ((double) (currentLvl - 1))
 				/ ((double) (max.getExpLvlDivisor() - 1));
 		double multiplicand = Math.pow(base, max.getExpLvlExponent());
@@ -248,7 +248,7 @@ public class MonsterLevelInfoRetrieveUtils {
 		return (int) Math.ceil(multiplicand * max.getCurLvlRequiredExp());
 	}
 
-	private float calculatePvpDropRate(MonsterLevelInfo minLvlInfo,
+	private static float calculatePvpDropRate(MonsterLevelInfo minLvlInfo,
 			MonsterLevelInfo maxLvlInfo, int currentLvl) {
 		//min.rate + (max.rate-min.rate)*(curLvl - minLvl) / (maxLvl - minLvl)
 		float minRate = minLvlInfo.getPvpDropRate();
@@ -268,14 +268,14 @@ public class MonsterLevelInfoRetrieveUtils {
 		return dropRate;
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticMonsterIdToLevelToInfo();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private MonsterLevelInfo convertRSRowToMonsterLevelInfo(ResultSet rs)
+	private static MonsterLevelInfo convertRSRowToMonsterLevelInfo(ResultSet rs)
 			throws SQLException {
 		int monsterId = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__MONSTER_ID);
 		int level = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__LEVEL);

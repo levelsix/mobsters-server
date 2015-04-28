@@ -41,9 +41,6 @@ public class ObstacleRemovalCompleteController extends EventController {
 	protected Locker locker;
 
 	@Autowired
-	protected MiscMethods miscMethods;
-	
-	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 
 	@Autowired
@@ -136,7 +133,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 
 			if (success && (speedUp || atMaxObstacles)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -229,7 +226,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 		} else {
 			//everything went ok
 			if (0 != gemChange) {
-				money.put(miscMethods.gems, gemChange);
+				money.put(MiscMethods.gems, gemChange);
 			}
 		}
 
@@ -255,14 +252,14 @@ public class ObstacleRemovalCompleteController extends EventController {
 		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 
 		previousCurrency.put(gems, previousGems);
 		currentCurrency.put(gems, user.getGems());
 		reasonsForChanges.put(gems, reason);
 		detailsMap.put(gems, details);
 
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
 

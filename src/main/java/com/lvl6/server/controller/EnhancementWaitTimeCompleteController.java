@@ -41,9 +41,6 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -154,7 +151,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			if (successful) {
 				//tell the client to update user because user's funds most likely changed
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -296,7 +293,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 				return false;
 			} else {
 				if (0 != gemCost) {
-					money.put(miscMethods.gems, gemCost);
+					money.put(MiscMethods.gems, gemCost);
 				}
 			}
 		}
@@ -351,7 +348,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 		if (money.isEmpty()) {
 			return;
 		}
-		String gems = miscMethods.gems;
+		String gems = MiscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
 
 		String userId = aUser.getId();
@@ -364,7 +361,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 		currentCurrencies.put(gems, aUser.getGems());
 		reasonsForChanges.put(gems, reasonForChange);
 		detailsMap.put(gems, " userMonsterId=" + userMonsterId);
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
+		MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
 				previousCurrencies, currentCurrencies, reasonsForChanges,
 				detailsMap);
 

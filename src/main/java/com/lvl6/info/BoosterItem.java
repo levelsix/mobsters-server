@@ -18,11 +18,6 @@ public class BoosterItem implements Serializable {
 	private int itemId;
 	private int itemQuantity;
 
-	public BoosterItem() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public BoosterItem(int id, int boosterPackId, int monsterId, int numPieces,
 			boolean isComplete, boolean isSpecial, int gemReward,
 			int cashReward, float chanceToAppear, int itemId, int itemQuantity) {

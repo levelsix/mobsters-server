@@ -19,18 +19,15 @@ public class UpdateMiniEventAction {
 	private String userId;
 	private List<MiniEventGoalForUser> megfuList;
 	private InsertUtil insertUtil;
-	private MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
 
 	public UpdateMiniEventAction(String userId,
 			List<MiniEventGoalForUser> megfuList,
-			InsertUtil insertUtil,
-			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils)
+			InsertUtil insertUtil)
 	{
 		super();
 		this.userId = userId;
 		this.megfuList = megfuList;
 		this.insertUtil = insertUtil;
-		this.miniEventGoalRetrieveUtils = miniEventGoalRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -88,7 +85,7 @@ public class UpdateMiniEventAction {
 		for(MiniEventGoalForUser megfu : megfuList) {
 			int miniEventGoalId = megfu.getMiniEventGoalId();
 
-			MiniEventGoal meg = miniEventGoalRetrieveUtils
+			MiniEventGoal meg = MiniEventGoalRetrieveUtils
 					.getMiniEventGoalById(miniEventGoalId);
 			if (null == meg) {
 				log.error("nonexistent MiniEventGoalForUser: {}, ", megfu);

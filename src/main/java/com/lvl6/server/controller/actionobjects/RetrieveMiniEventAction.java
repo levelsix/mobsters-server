@@ -40,22 +40,12 @@ public class RetrieveMiniEventAction {
 	private MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private DeleteUtil deleteUtil;
-	private MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	private MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	private MiniEventRetrieveUtils miniEventRetrieveUtils;
-	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	private MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
 
 	public RetrieveMiniEventAction(String userId, Date now,
 			UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil,
 			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil,
-			InsertUtil insertUtil, DeleteUtil deleteUtil,
-			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils,
-			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils,
-			MiniEventRetrieveUtils miniEventRetrieveUtils,
-			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
-			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils) {
+			InsertUtil insertUtil, DeleteUtil deleteUtil) {
 		super();
 		this.userId = userId;
 		this.now = now;
@@ -64,11 +54,6 @@ public class RetrieveMiniEventAction {
 		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.deleteUtil = deleteUtil;
-		this.miniEventGoalRetrieveUtils = miniEventGoalRetrieveUtils;
-		this.miniEventForPlayerLvlRetrieveUtils = miniEventForPlayerLvlRetrieveUtils;
-		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
-		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
-		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -142,7 +127,7 @@ public class RetrieveMiniEventAction {
 		}
 
 		int miniEventId = mefu.getMiniEventId();
-		Collection<MiniEventGoal> goals = miniEventGoalRetrieveUtils
+		Collection<MiniEventGoal> goals = MiniEventGoalRetrieveUtils
 				.getGoalsForMiniEventId(miniEventId);
 		if (null == goals || goals.isEmpty()) {
 			log.error("MiniEvent with id has no goals. UserMiniEvent={}", mefu);
@@ -165,7 +150,7 @@ public class RetrieveMiniEventAction {
 		int miniEventId = mefu.getMiniEventId();
 		int curLvl = u.getLevel();
 
-		MiniEventForPlayerLvl mefpl = miniEventForPlayerLvlRetrieveUtils
+		MiniEventForPlayerLvl mefpl = MiniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvl(miniEventId, curLvl);
 
 		int curPts = calculateCurrentPts(goals);
@@ -236,7 +221,7 @@ public class RetrieveMiniEventAction {
 
 	private boolean processNonexistentUserMiniEvent()
 	{
-		curActiveMiniEvent = miniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+		curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
 		if (null == curActiveMiniEvent) {
 			log.info("no currently active MiniEvent");
 			return true;
@@ -263,7 +248,7 @@ public class RetrieveMiniEventAction {
 
 	private boolean retrieveMiniEventRelatedData(int meId, int userLvl)
 	{
-		lvlEntered = miniEventForPlayerLvlRetrieveUtils
+		lvlEntered = MiniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvl(meId, userLvl);
 
 		if (null == lvlEntered) {
@@ -272,7 +257,7 @@ public class RetrieveMiniEventAction {
 			return false;
 		}
 
-		rewards = miniEventTierRewardRetrieveUtils
+		rewards = MiniEventTierRewardRetrieveUtils
 				.getMiniEventTierReward(lvlEntered.getId());
 		if (null == rewards || rewards.isEmpty()) {
 			log.error("MiniEventForPlayerLvl has no rewards. MiniEventForPlayerLvl={}",
@@ -280,14 +265,14 @@ public class RetrieveMiniEventAction {
 			return false;
 		}
 
-		goals = miniEventGoalRetrieveUtils.getGoalsForMiniEventId(meId);
+		goals = MiniEventGoalRetrieveUtils.getGoalsForMiniEventId(meId);
 		if (null == goals || goals.isEmpty()) {
 			log.error("MiniEvent has no goals. MiniEvent={}", curActiveMiniEvent);
 			return false;
 		}
 
 		leaderboardRewards =
-				miniEventLeaderboardRewardRetrieveUtils
+				MiniEventLeaderboardRewardRetrieveUtils
 				.getRewardsForMiniEventId(meId);
 		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
 //			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
@@ -333,7 +318,7 @@ public class RetrieveMiniEventAction {
 	private boolean retrieveCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
-		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(meId);
+		curActiveMiniEvent = MiniEventRetrieveUtils.getMiniEventById(meId);
 
 		if (null == curActiveMiniEvent) {
 			//uncommon case because someone would have to delete the MiniEvent
@@ -358,7 +343,7 @@ public class RetrieveMiniEventAction {
 	private boolean replaceCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
-		curActiveMiniEvent = miniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+		curActiveMiniEvent = MiniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
 
 		if (null == curActiveMiniEvent) {
 			//NOTE: reaching here means, user has collected all the rewards he can

@@ -60,9 +60,6 @@ public class EvolveMonsterController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
@@ -208,7 +205,7 @@ public class EvolveMonsterController extends EventController {
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -371,10 +368,10 @@ public class EvolveMonsterController extends EventController {
 		} else {
 			//everything went well
 			if (0 != oilChange) {
-				money.put(miscMethods.oil, oilChange);
+				money.put(MiscMethods.oil, oilChange);
 			}
 			if (0 != gemsSpent) {
-				money.put(miscMethods.gems, gemChange);
+				money.put(MiscMethods.gems, gemChange);
 			}
 		}
 
@@ -395,8 +392,8 @@ public class EvolveMonsterController extends EventController {
 		if (moneyChange.isEmpty()) {
 			return;
 		}
-		String oil = miscMethods.oil;
-		String gems = miscMethods.gems;
+		String oil = MiscMethods.oil;
+		String gems = MiscMethods.gems;
 
 		String reasonForChange = ControllerConstants.UCHRFC__EVOLVING;
 		StringBuilder detailSb = new StringBuilder();
@@ -429,7 +426,7 @@ public class EvolveMonsterController extends EventController {
 		detailsMap.put(oil, detailSb.toString());
 		detailsMap.put(gems, detailSb.toString());
 
-		miscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 	}

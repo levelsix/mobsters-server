@@ -42,15 +42,6 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-	
-	@Autowired
-	protected ClanStuffUtils clanStuffUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public FulfillTeamDonationSolicitationController() {
 		numAllocatedThreads = 4;
@@ -80,10 +71,10 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		ClanMemberTeamDonationProto solicitationProto = reqProto
 				.getSolicitation();
 
-		MonsterSnapshotForUser msfu = monsterStuffUtils
+		MonsterSnapshotForUser msfu = MonsterStuffUtils
 				.javafyFullUserMonsterProto(fump);
 		String solicitorId = null;
-		ClanMemberTeamDonation cmtd = clanStuffUtils
+		ClanMemberTeamDonation cmtd = ClanStuffUtils
 				.javafyClanMemberTeamDonationProto(solicitationProto);
 
 		FulfillTeamDonationSolicitationResponseProto.Builder resBuilder = FulfillTeamDonationSolicitationResponseProto
@@ -169,7 +160,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 				//only write to clan if success
 				ClanMemberTeamDonation solicitation = ftdsa.getSolicitation();
 				MonsterSnapshotForUser msfuNew = ftdsa.getMsfuNew();
-				ClanMemberTeamDonationProto cmtdp = createInfoProtoUtils
+				ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
 						.createClanMemberTeamDonationProto(solicitation,
 								msfuNew, solicitationProto.getSolicitor(),
 								senderProto);

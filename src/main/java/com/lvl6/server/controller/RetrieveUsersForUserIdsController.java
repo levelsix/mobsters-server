@@ -52,10 +52,6 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
 
 	public RetrieveUsersForUserIdsController() {
 		numAllocatedThreads = 4;
@@ -137,7 +133,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 					clan = clanIdToClan.get(user.getClanId());
 				}
 
-				resBuilder.addRequestedUsers(createInfoProtoUtils
+				resBuilder.addRequestedUsers(CreateInfoProtoUtils
 						.createFullUserProtoFromUser(user, plfu, clan));
 
 			}
@@ -172,7 +168,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 		for (String userId : userIdsToCurrentTeam.keySet()) {
 			List<MonsterForUser> currentTeam = userIdsToCurrentTeam.get(userId);
 
-			List<FullUserMonsterProto> currentTeamProto = createInfoProtoUtils
+			List<FullUserMonsterProto> currentTeamProto = CreateInfoProtoUtils
 					.createFullUserMonsterProtoList(currentTeam);
 
 			//create the proto via the builder

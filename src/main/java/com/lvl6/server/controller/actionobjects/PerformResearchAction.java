@@ -36,17 +36,13 @@ public class PerformResearchAction {
 	protected InsertUtil insertUtil;
 	protected UpdateUtil updateUtil;
 	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-	private ResearchRetrieveUtils researchRetrieveUtils;
-	private MiscMethods miscMethods;
 
 	public PerformResearchAction(String userId,
 			UserRetrieveUtils2 userRetrieveUtils, int researchId,
 			String userResearchUuid, int gemsCost, int resourceCost,
 			ResourceType resourceType, Date now, InsertUtil insertUtil,
 			UpdateUtil updateUtil,
-			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
-			ResearchRetrieveUtils researchRetrieveUtils,
-			MiscMethods miscMethods) {
+			ResearchForUserRetrieveUtils researchForUserRetrieveUtil) {
 		super();
 		this.userId = userId;
 		this.userRetrieveUtils = userRetrieveUtils;
@@ -59,8 +55,6 @@ public class PerformResearchAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.researchForUserRetrieveUtil = researchForUserRetrieveUtil;
-		this.researchRetrieveUtils = researchRetrieveUtils;
-		this.miscMethods = miscMethods;
 	}
 
 	private User user;
@@ -127,7 +121,7 @@ public class PerformResearchAction {
 	}
 
 	private boolean verifyResearch(Builder resBuilder) {
-		research = researchRetrieveUtils.getResearchForId(researchId);
+		research = ResearchRetrieveUtils.getResearchForId(researchId);
 		if (null == research) {
 			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
 			log.error("no research for id: " + researchId);
@@ -218,15 +212,15 @@ public class PerformResearchAction {
 		int expChange = 0;
 
 		if (gemsCost > 0) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
+			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			gemsChange = -1 * gemsCost;
 		}
 
 		if (resourceType == ResourceType.CASH) {
-			prevCurrencies.put(miscMethods.cash, user.getCash());
+			prevCurrencies.put(MiscMethods.cash, user.getCash());
 			cashChange = -1 * resourceCost;
 		} else if (resourceType == ResourceType.OIL) {
-			prevCurrencies.put(miscMethods.oil, user.getOil());
+			prevCurrencies.put(MiscMethods.oil, user.getOil());
 			oilChange = -1 * resourceCost;
 		}
 
@@ -249,9 +243,9 @@ public class PerformResearchAction {
 	}
 
 	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
-		String oil = miscMethods.oil;
+		String gems = MiscMethods.gems;
+		String cash = MiscMethods.cash;
+		String oil = MiscMethods.oil;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();

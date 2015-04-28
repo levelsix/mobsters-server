@@ -71,9 +71,6 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
-	@Autowired
-	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
@@ -116,13 +113,6 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-	
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
 
 	public RequestJoinClanController() {
 		numAllocatedThreads = 4;
@@ -209,14 +199,14 @@ public class RequestJoinClanController extends EventController {
 				//setting minimum user proto for clans based on clan join type
 				if (requestToJoinRequired) {
 					//clan raid contribution stuff
-					MinimumUserProtoForClans mupfc = createInfoProtoUtils
+					MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
 							.createMinimumUserProtoForClans(user, null,
 									UserClanStatus.REQUESTING, 0F, battlesWon,
 									null);
 					resBuilder.setRequester(mupfc);
 				} else {
 					//clan raid contribution stuff
-					MinimumUserProtoForClans mupfc = createInfoProtoUtils
+					MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
 							.createMinimumUserProtoForClans(user, clan,
 									UserClanStatus.MEMBER, 0F, battlesWon, null);
 					resBuilder.setRequester(mupfc);
@@ -241,7 +231,7 @@ public class RequestJoinClanController extends EventController {
 						fillMe, clanHelpRetrieveUtil, clanAvengeRetrieveUtil,
 						clanAvengeUserRetrieveUtil, clanChatPostRetrieveUtils,
 						clanMemberTeamDonationRetrieveUtil,
-						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
+						monsterSnapshotForUserRetrieveUtil);
 				cdp = scdpa.execute();
 
 				//update clan cache
@@ -266,7 +256,7 @@ public class RequestJoinClanController extends EventController {
 				//get user's current monster team
 				Map<String, List<MonsterForUser>> userIdToTeam = getMonsterForUserRetrieveUtils()
 						.getUserIdsToMonsterTeamForUserIds(userIds);
-				UserCurrentMonsterTeamProto curTeamProto = createInfoProtoUtils
+				UserCurrentMonsterTeamProto curTeamProto = CreateInfoProtoUtils
 						.createUserCurrentMonsterTeamProto(userId,
 								userIdToTeam.get(userId));
 				resBuilder.setRequesterMonsters(curTeamProto);
@@ -278,7 +268,7 @@ public class RequestJoinClanController extends EventController {
 
 				if (!requestToJoinRequired) {
 					//null PvpLeagueFromUser means will pull from hazelcast instead
-					UpdateClientUserResponseEvent resEventUpdate = miscMethods
+					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									user, null, clan);
 					resEventUpdate.setTag(event.getTag());
@@ -473,7 +463,7 @@ public class RequestJoinClanController extends EventController {
 			//TODO: Maybe exclude the guy who joined from receiving the notification?
 			aNote.setAsUserJoinedClan(level, requester);
 		}
-		miscMethods.writeNotificationToUser(aNote, server, clanOwnerId);
+		MiscMethods.writeNotificationToUser(aNote, server, clanOwnerId);
 
 		//    GeneralNotificationResponseProto.Builder notificationProto =
 		//        aNote.generateNotificationBuilder();
@@ -487,10 +477,10 @@ public class RequestJoinClanController extends EventController {
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
 			List<Integer> clanSizeList) {
 
-		resBuilder.setMinClan(createInfoProtoUtils
+		resBuilder.setMinClan(CreateInfoProtoUtils
 				.createMinimumClanProtoFromClan(clan));
 		int size = clanSizeList.get(0);
-		resBuilder.setFullClan(createInfoProtoUtils
+		resBuilder.setFullClan(CreateInfoProtoUtils
 				.createFullClanProtoWithClanSize(clan, size));
 	}
 
@@ -505,7 +495,7 @@ public class RequestJoinClanController extends EventController {
 
 		//send to the user the current clan raid details for the clan
 		if (null != cepfc) {
-			PersistentClanEventClanInfoProto updatedEventDetails = createInfoProtoUtils
+			PersistentClanEventClanInfoProto updatedEventDetails = CreateInfoProtoUtils
 					.createPersistentClanEventClanInfoProto(cepfc);
 			resBuilder.setEventDetails(updatedEventDetails);
 		}
@@ -516,14 +506,14 @@ public class RequestJoinClanController extends EventController {
 		//send to the user the current clan raid details for all the users
 		if (!userIdToCepfu.isEmpty()) {
 			//whenever server has this information send it to the clients
-			List<String> userMonsterIds = monsterStuffUtils
+			List<String> userMonsterIds = MonsterStuffUtils
 					.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 			Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
 					.getSpecificUserMonsters(userMonsterIds);
 
 			for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-				PersistentClanEventUserInfoProto pceuip = createInfoProtoUtils
+				PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
 						.createPersistentClanEventUserInfoProto(cepfu,
 								idsToUserMonsters, null);
 				resBuilder.addClanUsersDetails(pceuip);

@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +22,12 @@ public class StructureTownHallRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
-	@Autowired
-	StructureRetrieveUtils structureRetrieveUtils;
 
 	private static Map<Integer, StructureTownHall> structIdsToTownHalls;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TOWN_HALL_CONFIG;
 
-	public Map<Integer, StructureTownHall> getStructIdsToTownHalls() {
+	public static Map<Integer, StructureTownHall> getStructIdsToTownHalls() {
 		log.debug("retrieving all structs data");
 		if (structIdsToTownHalls == null) {
 			setStaticStructIdsToTownHalls();
@@ -47,12 +43,12 @@ public class StructureTownHallRetrieveUtils {
 	//    return structIdsToTownHalls.get(structId);
 	//  }
 
-	public StructureTownHall getUpgradedTownHallForStructId(int structId) {
+	public static StructureTownHall getUpgradedTownHallForStructId(int structId) {
 		log.debug("retrieve upgraded struct data for structId " + structId);
 		if (structIdsToTownHalls == null) {
 			setStaticStructIdsToTownHalls();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int successorStructId = curStruct.getId();
@@ -63,13 +59,13 @@ public class StructureTownHallRetrieveUtils {
 		return null;
 	}
 
-	public StructureTownHall getPredecessorTownHallForStructId(
+	public static StructureTownHall getPredecessorTownHallForStructId(
 			int structId) {
 		log.debug("retrieve predecessor struct data for structId " + structId);
 		if (structIdsToTownHalls == null) {
 			setStaticStructIdsToTownHalls();
 		}
-		Structure curStruct = structureRetrieveUtils
+		Structure curStruct = StructureRetrieveUtils
 				.getUpgradedStructForStructId(structId);
 		if (null != curStruct) {
 			int predecessorStructId = curStruct.getId();
@@ -80,7 +76,7 @@ public class StructureTownHallRetrieveUtils {
 		return null;
 	}
 
-	private void setStaticStructIdsToTownHalls() {
+	private static void setStaticStructIdsToTownHalls() {
 		log.debug("setting static map of structIds to structs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -114,14 +110,14 @@ public class StructureTownHallRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticStructIdsToTownHalls();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private StructureTownHall convertRSRowToTownHall(ResultSet rs)
+	private static StructureTownHall convertRSRowToTownHall(ResultSet rs)
 			throws SQLException {
 		int structId = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__STRUCT_ID);
 		int numResourceOneGenerators = rs

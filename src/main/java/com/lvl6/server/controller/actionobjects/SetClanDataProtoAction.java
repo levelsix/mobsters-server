@@ -15,7 +15,6 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
-import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class SetClanDataProtoAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -33,7 +32,6 @@ public class SetClanDataProtoAction {
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
 	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetClanDataProtoAction(
 			String clanId,
@@ -47,8 +45,7 @@ public class SetClanDataProtoAction {
 			ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils,
 			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil) {
 		super();
 		this.clanId = clanId;
 		this.clan = clan;
@@ -62,7 +59,6 @@ public class SetClanDataProtoAction {
 		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
 		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	public ClanDataProto execute() {
@@ -70,18 +66,18 @@ public class SetClanDataProtoAction {
 		ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 
 		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
-				user, clanChatPostRetrieveUtils, createInfoProtoUtils);
+				user, clanChatPostRetrieveUtils);
 		sccma.setUp(fillMe);
 		SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user,
-				userId, clanHelpRetrieveUtil, createInfoProtoUtils);
+				userId, clanHelpRetrieveUtil);
 		scha.setUp(fillMe);
 		SetClanRetaliationsAction scra = new SetClanRetaliationsAction(cdpb,
 				user, userId, clanAvengeRetrieveUtil,
-				clanAvengeUserRetrieveUtil, createInfoProtoUtils);
+				clanAvengeUserRetrieveUtil);
 		scra.setUp(fillMe);
 		SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
 				cdpb, user, userId, clanMemberTeamDonationRetrieveUtil,
-				monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
+				monsterSnapshotForUserRetrieveUtil);
 		scmtda.setUp(fillMe);
 
 		fillMe.fetchUsersOnly();

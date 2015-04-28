@@ -29,7 +29,7 @@ public class BoardPropertyRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BOARD_PROPERTY_CONFIG;
 
-	public Map<Integer, BoardProperty> getIdsToBoardProperties() {
+	public static Map<Integer, BoardProperty> getIdsToBoardProperties() {
 		log.debug("retrieving all BoardProperties data map");
 		if (null == idsToBoardProperties) {
 			setStaticIdsToBoardProperties();
@@ -37,7 +37,7 @@ public class BoardPropertyRetrieveUtils {
 		return idsToBoardProperties;
 	}
 
-	public Map<Integer, Collection<BoardProperty>> getBoardIdsToProperties() {
+	public static Map<Integer, Collection<BoardProperty>> getBoardIdsToProperties() {
 		log.debug("retrieving all boardIdsToBoardProperties data map");
 		if (null == boardIdsToProperties) {
 			setStaticIdsToBoardProperties();
@@ -45,7 +45,7 @@ public class BoardPropertyRetrieveUtils {
 		return boardIdsToProperties;
 	}
 
-	public BoardProperty getBoardPropertyForId(int boardPropertyId) {
+	public static BoardProperty getBoardPropertyForId(int boardPropertyId) {
 		log.debug(String.format(
 				"retrieve boardProperty data for boardProperty=%s",
 				boardPropertyId));
@@ -59,7 +59,7 @@ public class BoardPropertyRetrieveUtils {
 		return idsToBoardProperties.get(boardPropertyId);
 	}
 
-	public Collection<BoardProperty> getPropertiesForBoardId(int boardId) {
+	public static Collection<BoardProperty> getPropertiesForBoardId(int boardId) {
 		log.debug(String.format("retrieve boardProperty data for boardId=%s",
 				boardId));
 
@@ -74,7 +74,7 @@ public class BoardPropertyRetrieveUtils {
 		return boardIdsToProperties.get(boardId);
 	}
 
-	private void setStaticIdsToBoardProperties() {
+	private static void setStaticIdsToBoardProperties() {
 		log.debug("setting static map of boardPropertyIds to boardProperties");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -130,14 +130,14 @@ public class BoardPropertyRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToBoardProperties();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private BoardProperty convertRSRowToBoardProperty(ResultSet rs)
+	private static BoardProperty convertRSRowToBoardProperty(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.BOARD_PROPERTY__ID);
 		int boardId = rs.getInt(DBConstants.BOARD_PROPERTY__BOARD_ID);

@@ -26,14 +26,14 @@ public class BattleItemRetrieveUtils {
 	private static Map<Integer, BattleItem> idsToBattleItems;
 	private static final String TABLE_NAME = DBConstants.TABLE_BATTLE_ITEM_CONFIG;
 
-	public Map<Integer, BattleItem> getBattleItemIdsToBattleItems() {
+	public static Map<Integer, BattleItem> getBattleItemIdsToBattleItems() {
 		if (null == idsToBattleItems) {
 			setStaticIdsToBattleItems();
 		}
 		return idsToBattleItems;
 	}
 
-	public BattleItem getBattleItemForId(int id) {
+	public static BattleItem getBattleItemForId(int id) {
 		if (null == idsToBattleItems) {
 			setStaticIdsToBattleItems();
 		}
@@ -45,7 +45,7 @@ public class BattleItemRetrieveUtils {
 		return idsToBattleItems.get(id);
 	}
 
-	public Map<Integer, BattleItem> getBattleItemsForIds(
+	public static Map<Integer, BattleItem> getBattleItemsForIds(
 			Collection<Integer> ids) {
 		if (null == idsToBattleItems) {
 			setStaticIdsToBattleItems();
@@ -59,7 +59,7 @@ public class BattleItemRetrieveUtils {
 		return returnMap;
 	}
 
-	private void setStaticIdsToBattleItems() {
+	private static void setStaticIdsToBattleItems() {
 		log.debug("setting static map of ids to battle items");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -92,14 +92,14 @@ public class BattleItemRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticIdsToBattleItems();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private BattleItem convertRSRowToBattleItem(ResultSet rs)
+	private static BattleItem convertRSRowToBattleItem(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.BATTLE_ITEM__ID);
 		String type = rs.getString(DBConstants.BATTLE_ITEM__TYPE);

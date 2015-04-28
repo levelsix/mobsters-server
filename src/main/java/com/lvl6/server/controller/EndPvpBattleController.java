@@ -46,9 +46,7 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -90,25 +88,6 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-
-	@Autowired
-	protected CreateInfoProtoUtils createInfoProtoUtils;
-
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil;
-
-	@Autowired
-	protected MiscMethods miscMethods;
-
 
 	public EndPvpBattleController() {
 		numAllocatedThreads = 7;
@@ -248,7 +227,7 @@ public class EndPvpBattleController extends EventController {
 				//it is possible that the defender has a shield, most likely via
 				//buying it, and less likely locks didn't work, regardless, the
 				//user can have a shield
-				resBuilder.setStatsBefore(createInfoProtoUtils
+				resBuilder.setStatsBefore(CreateInfoProtoUtils
 						.createUserPvpLeagueProto(attackerId, attackerPlfu,
 								null, false));
 				//attackerPlfu is modified
@@ -258,7 +237,7 @@ public class EndPvpBattleController extends EventController {
 						attackerAttacked, attackerWon, nuPvpDmgMultiplier,
 						attackerMaxOil, attackerMaxCash, changeMap,
 						previousCurrencyMap, monsterDropIds, resBuilder);
-				resBuilder.setStatsAfter(createInfoProtoUtils
+				resBuilder.setStatsAfter(CreateInfoProtoUtils
 						.createUserPvpLeagueProto(attackerId, attackerPlfu,
 								null, false));
 			}
@@ -273,7 +252,7 @@ public class EndPvpBattleController extends EventController {
 				List<PvpHistoryProto> historyProtoList = null;
 				if (null != battleJustEnded) {
 					//Note: no protos for fake defenders are created
-					historyProtoList = createInfoProtoUtils
+					historyProtoList = CreateInfoProtoUtils
 							.createAttackedOthersPvpHistoryProto(attackerId,
 									users,
 									Collections.singletonList(battleJustEnded));
@@ -311,7 +290,7 @@ public class EndPvpBattleController extends EventController {
 					server.writeEvent(resEventDefender);
 				}
 				//regardless of whether the attacker won, his elo will change
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								attacker, attackerPlfu, null);
 				resEventUpdate.setTag(event.getTag());
@@ -319,7 +298,7 @@ public class EndPvpBattleController extends EventController {
 
 				//defender's elo and resources changed only if attacker won, and defender is real
 				if (attackerWon && null != defender) {
-					UpdateClientUserResponseEvent resEventUpdateDefender = miscMethods
+					UpdateClientUserResponseEvent resEventUpdateDefender = MiscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									defender, defenderPlfu, null);
 					resEventUpdate.setTag(event.getTag());
@@ -503,9 +482,9 @@ public class EndPvpBattleController extends EventController {
 
 		String mfusop = ControllerConstants.MFUSOP__PVP;
 
-		List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
+		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils
 				.updateUserMonsters(userId, monsterIdToNumPieces, null, mfusop,
-						currentDate, monsterLevelInfoRetrieveUtil);
+						currentDate);
 
 		resBuilder.addAllUpdatedOrNew(newOrUpdated);
 	}
@@ -789,9 +768,9 @@ public class EndPvpBattleController extends EventController {
 		}
 
 		int curElo = prevElo + attackerEloChange;
-		int attackerCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
+		int attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
 				curElo, attackerPrevLeague);
-		int attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(curElo,
+		int attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(curElo,
 				attackerCurLeague);
 
 		//don't update his shields and elo
@@ -847,7 +826,7 @@ public class EndPvpBattleController extends EventController {
 				defender.getOil(), oilStolen, defenderWon);
 		boolean displayToDefender = true;
 
-		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and
+		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
 		//the history for this battle should have the display_to_defender set to false;
 		Date shieldEndTime = defenderPlfu.getShieldEndTime();
 		//	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
@@ -937,9 +916,9 @@ public class EndPvpBattleController extends EventController {
 		Date inBattleShieldEndTime = defenderShieldEndTime;
 
 		int curElo = prevElo + defenderEloChange;
-		int curPvpLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(curElo,
+		int curPvpLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(curElo,
 				prevPvpLeague);
-		int curRank = pvpLeagueRetrieveUtils
+		int curRank = PvpLeagueRetrieveUtils
 				.getRankForElo(curElo, curPvpLeague);
 
 		//update pvp stuff: elo most likely changed, shields might have if attackerWon
@@ -973,7 +952,7 @@ public class EndPvpBattleController extends EventController {
 				defenderPlfu));
 	}
 
-	//new method created so as to reduce clutter in calling method
+	//new method created so as to reduce clutter in calling method 
 	private void writePvpBattleHistory(String attackerId,
 			int attackerEloBefore, String defenderId, int defenderEloBefore,
 			int attackerPrevLeague, int attackerCurLeague,
@@ -1134,7 +1113,7 @@ public class EndPvpBattleController extends EventController {
 			userIds.add(defenderId);
 		}
 
-		miscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
+		MiscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
 				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 				detailsMap);
 
@@ -1185,12 +1164,12 @@ public class EndPvpBattleController extends EventController {
 		Map<String, List<MonsterForUser>> userIdsToUserMonsters = calculateAttackerMonsters(attackerId);
 
 		//need the drop rates
-		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtil);
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = MonsterStuffUtils
+				.calculatePvpDrops(userIdsToUserMonsters);
 
 		//need to calculate the resources defender can steal
 		PvpBattleOutcome potentialResult = new PvpBattleOutcome(defender,
-				defenderElo, attacker, attackerElo, serverToggleRetrieveUtil);
+				defenderElo, attackerElo, attacker);
 
 		Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
 				.singletonMap(attackerId,
@@ -1201,7 +1180,7 @@ public class EndPvpBattleController extends EventController {
 
 		//this PvpHistoryProto contains information for a person who
 		//is going to attack
-		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
+		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
 				.createGotAttackedPvpHistoryProto(gotAttackedHistoryList,
 						idsToAttackers, attackerIdsToClans,
 						userIdsToUserMonsters,
@@ -1394,57 +1373,6 @@ public class EndPvpBattleController extends EventController {
 	public void setMonsterForUserRetrieveUtil(
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil) {
 		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
-	}
-
-	public ServerToggleRetrieveUtils getServerToggleRetrieveUtil() {
-		return serverToggleRetrieveUtil;
-	}
-
-	public void setServerToggleRetrieveUtil(
-			ServerToggleRetrieveUtils serverToggleRetrieveUtil) {
-		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
-	}
-
-	public MonsterStuffUtils getMonsterStuffUtils() {
-		return monsterStuffUtils;
-	}
-
-	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
-		this.monsterStuffUtils = monsterStuffUtils;
-	}
-
-	public PvpLeagueRetrieveUtils getPvpLeagueRetrieveUtils() {
-		return pvpLeagueRetrieveUtils;
-	}
-
-	public void setPvpLeagueRetrieveUtils(
-			PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils) {
-		this.pvpLeagueRetrieveUtils = pvpLeagueRetrieveUtils;
-	}
-
-	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
-		return createInfoProtoUtils;
-	}
-
-	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
-		this.createInfoProtoUtils = createInfoProtoUtils;
-	}
-
-	public MiscMethods getMiscMethods() {
-		return miscMethods;
-	}
-
-	public void setMiscMethods(MiscMethods miscMethods) {
-		this.miscMethods = miscMethods;
-	}
-
-	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtil() {
-		return monsterLevelInfoRetrieveUtil;
-	}
-
-	public void setMonsterLevelInfoRetrieveUtil(
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil) {
-		this.monsterLevelInfoRetrieveUtil = monsterLevelInfoRetrieveUtil;
 	}
 
 }

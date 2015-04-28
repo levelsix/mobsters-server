@@ -31,7 +31,7 @@ public class ClanRaidStageMonsterRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG;
 
-	public Map<Integer, ClanRaidStageMonster> getMonsterNumsToMonstersForStageId(
+	public static Map<Integer, ClanRaidStageMonster> getMonsterNumsToMonstersForStageId(
 			int crsId) {
 		log.debug("retrieving all monster num to clan raid stage monster data map");
 		if (clanRaidStageIdsToIdsToMonsters == null) {
@@ -44,7 +44,7 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		return crsIdsToMonsterNumsToMonsters.get(crsId);
 	}
 
-	public Map<Integer, Map<Integer, ClanRaidStageMonster>> getClanRaidStageIdsToIdsToMonsters() {
+	public static Map<Integer, Map<Integer, ClanRaidStageMonster>> getClanRaidStageIdsToIdsToMonsters() {
 		log.debug("retrieving all clan raid stage monster data map");
 		if (clanRaidStageIdsToIdsToMonsters == null) {
 			setStaticClanRaidStageIdsToIdsToMonsters();
@@ -52,14 +52,14 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		return clanRaidStageIdsToIdsToMonsters;
 	}
 
-	public Map<Integer, ClanRaidStageMonster> getIdsToClanRaidStageMonsters() {
+	public static Map<Integer, ClanRaidStageMonster> getIdsToClanRaidStageMonsters() {
 		if (null == idsToMonsters) {
 			setStaticClanRaidStageIdsToIdsToMonsters();
 		}
 		return idsToMonsters;
 	}
 
-	public ClanRaidStageMonster getClanRaidStageMonsterForClanRaidStageMonsterId(
+	public static ClanRaidStageMonster getClanRaidStageMonsterForClanRaidStageMonsterId(
 			int clanRaidStageMonsterId) {
 		if (idsToMonsters == null) {
 			setStaticClanRaidStageIdsToIdsToMonsters();
@@ -74,7 +74,7 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		}
 	}
 
-	public Map<Integer, ClanRaidStageMonster> getClanRaidStageMonstersForClanRaidStageId(
+	public static Map<Integer, ClanRaidStageMonster> getClanRaidStageMonstersForClanRaidStageId(
 			int clanRaidStageId) {
 		log.debug("retrieve clan raid stage monster data for clan raid stage id "
 				+ clanRaidStageId);
@@ -91,7 +91,7 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		}
 	}
 
-	public ClanRaidStageMonster getFirstMonsterForClanRaidStage(int crsId) {
+	public static ClanRaidStageMonster getFirstMonsterForClanRaidStage(int crsId) {
 		log.debug("retrieving the first clan raid stage monster for crsId="
 				+ crsId);
 		if (null == clanRaidStageIdsToIdsToMonsters) {
@@ -119,7 +119,7 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		return crsm;
 	}
 
-	public ClanRaidStageMonster getNextMonsterForClanRaidStageMonsterId(
+	public static ClanRaidStageMonster getNextMonsterForClanRaidStageMonsterId(
 			int crsmId, int crsId) {
 		log.debug("retrieve clan raid stage monster after clan raid stage id "
 				+ crsId);
@@ -150,7 +150,7 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		return monsterNumToCrsm.get(monsterNumOfNextMonster);
 	}
 
-	private void setStaticClanRaidStageIdsToIdsToMonsters() {
+	private static void setStaticClanRaidStageIdsToIdsToMonsters() {
 		log.debug("setting static map of clanRaidStageIds to monsters");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -226,14 +226,14 @@ public class ClanRaidStageMonsterRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticClanRaidStageIdsToIdsToMonsters();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private ClanRaidStageMonster convertRSRowToClanRaidStageMonster(
+	private static ClanRaidStageMonster convertRSRowToClanRaidStageMonster(
 			ResultSet rs) throws SQLException {
 		int i = 1;
 		int id = rs.getInt(i++);

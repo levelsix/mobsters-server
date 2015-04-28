@@ -28,7 +28,7 @@ public class ClanRaidStageRewardRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_REWARD_CONFIG;
 
-	public Map<Integer, Map<Integer, ClanRaidStageReward>> getClanRaidStageIdsToIdsToRewards() {
+	public static Map<Integer, Map<Integer, ClanRaidStageReward>> getClanRaidStageIdsToIdsToRewards() {
 		log.debug("retrieving all clan raid stage reward data map");
 		if (clanRaidStageIdsToIdsToRewards == null) {
 			setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards();
@@ -36,14 +36,14 @@ public class ClanRaidStageRewardRetrieveUtils {
 		return clanRaidStageIdsToIdsToRewards;
 	}
 
-	public Map<Integer, ClanRaidStageReward> getClanRaidStageRewardIdsToRewards() {
+	public static Map<Integer, ClanRaidStageReward> getClanRaidStageRewardIdsToRewards() {
 		if (null == idsToRewards) {
 			setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards();
 		}
 		return idsToRewards;
 	}
 
-	public ClanRaidStageReward getClanRaidStageRewardForClanRaidStageRewardId(
+	public static ClanRaidStageReward getClanRaidStageRewardForClanRaidStageRewardId(
 			int clanRaidStageRewardId) {
 		if (idsToRewards == null) {
 			setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards();
@@ -58,7 +58,7 @@ public class ClanRaidStageRewardRetrieveUtils {
 		}
 	}
 
-	public Map<Integer, ClanRaidStageReward> getClanRaidStageRewardsForClanRaidStageId(
+	public static Map<Integer, ClanRaidStageReward> getClanRaidStageRewardsForClanRaidStageId(
 			int clanRaidStageId) {
 		log.debug("retrieve clan raid stage reward data for clanRaidStageId="
 				+ clanRaidStageId);
@@ -75,7 +75,7 @@ public class ClanRaidStageRewardRetrieveUtils {
 		}
 	}
 
-	private void setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards() {
+	private static void setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards() {
 		log.debug("setting static map of clan raid stage ids to rewards");
 		Random rand = new Random();
 
@@ -139,14 +139,14 @@ public class ClanRaidStageRewardRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private ClanRaidStageReward convertRSRowToClanRaidStageReward(
+	private static ClanRaidStageReward convertRSRowToClanRaidStageReward(
 			ResultSet rs) throws SQLException {
 		int i = 1;
 		int id = rs.getInt(i++);

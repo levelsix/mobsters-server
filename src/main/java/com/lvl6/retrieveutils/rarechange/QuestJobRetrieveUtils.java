@@ -31,7 +31,7 @@ public class QuestJobRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_CONFIG;
 
 	//CONTROLLER LOGIC******************************************************************
-	public List<Integer> getQuestJobIdsForQuestIds(
+	public static List<Integer> getQuestJobIdsForQuestIds(
 			List<Integer> questIdList) {
 		List<Integer> questJobIds = new ArrayList<Integer>();
 
@@ -49,7 +49,7 @@ public class QuestJobRetrieveUtils {
 	}
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Integer, QuestJob> getQuestJobIdsToQuestJobs() {
+	public static Map<Integer, QuestJob> getQuestJobIdsToQuestJobs() {
 		log.debug("retrieving all quest job data");
 		if (null == questJobIdsToQuestJobs) {
 			setStaticQuestJobIdsToQuestJobs();
@@ -57,7 +57,7 @@ public class QuestJobRetrieveUtils {
 		return questJobIdsToQuestJobs;
 	}
 
-	public QuestJob getQuestJobForQuestJobId(int questJobId) {
+	public static QuestJob getQuestJobForQuestJobId(int questJobId) {
 		log.debug("retrieving quest job with questJobId " + questJobId);
 		if (null == questJobIdsToQuestJobs) {
 			setStaticQuestJobIdsToQuestJobs();
@@ -71,7 +71,7 @@ public class QuestJobRetrieveUtils {
 		return questJobIdsToQuestJobs.get(questJobId);
 	}
 
-	public Map<Integer, QuestJob> getQuestJobsForQuestId(int questId) {
+	public static Map<Integer, QuestJob> getQuestJobsForQuestId(int questId) {
 		log.debug("retrieving quest jobs with questId " + questId);
 		if (null == questIdsToQuestJobIdsToJobs) {
 			setStaticQuestJobIdsToQuestJobs();
@@ -85,7 +85,7 @@ public class QuestJobRetrieveUtils {
 		return questIdsToQuestJobIdsToJobs.get(questId);
 	}
 
-	public Map<Integer, QuestJob> getQuestJobsForCityId(int cityId) {
+	public static Map<Integer, QuestJob> getQuestJobsForCityId(int cityId) {
 		log.debug("retrieving quest jobs with cityId " + cityId);
 		if (null == cityIdToQuestJobIdToQuestJobs) {
 			setStaticQuestJobIdsToQuestJobs();
@@ -99,7 +99,7 @@ public class QuestJobRetrieveUtils {
 		return cityIdToQuestJobIdToQuestJobs.get(cityId);
 	}
 
-	private void setStaticQuestJobIdsToQuestJobs() {
+	private static void setStaticQuestJobIdsToQuestJobs() {
 		log.debug("setting static map of questJobIds to questJobs");
 
 		Connection conn = DBConnection.get().getConnection();
@@ -120,7 +120,7 @@ public class QuestJobRetrieveUtils {
 		}
 	}
 
-	private void setStaticQuestJobIdsToQuestJobsHelper(Connection conn,
+	private static void setStaticQuestJobIdsToQuestJobsHelper(Connection conn,
 			ResultSet rs) {
 
 		try {
@@ -175,14 +175,14 @@ public class QuestJobRetrieveUtils {
 		}
 	}
 
-	public void reload() {
+	public static void reload() {
 		setStaticQuestJobIdsToQuestJobs();
 	}
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private QuestJob convertRSRowToQuestJob(ResultSet rs)
+	private static QuestJob convertRSRowToQuestJob(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.QUEST_JOB__ID);
 		int questId = rs.getInt(DBConstants.QUEST_JOB__QUEST_ID);

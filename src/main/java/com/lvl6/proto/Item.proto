@@ -28,7 +28,7 @@ message ItemProto {
 	optional int32 amount = 6;
 	optional float secretGiftChance = 7;
 	optional bool alwaysDisplayToUser = 8;
-	optional GameActionType gameActionType = 9;
+	optional GameType actionGameType = 9;
 	optional string shortName = 10;
 }
 
@@ -70,4 +70,6 @@ message UserItemSecretGiftProto {
 	optional int32 itemId = 4;
 	optional int64 createTime = 5;
 }
+
+
 
