@@ -995,6 +995,7 @@ public class MiscMethods {
 		ResearchRetrieveUtils.reload();
 		ResearchPropertyRetrieveUtils.reload();
 		RewardRetrieveUtils.reload();
+		ServerToggleRetrieveUtils.reload();
 		SkillRetrieveUtils.reload();
 		SkillPropertyRetrieveUtils.reload();
 		SkillSideEffectRetrieveUtils.reload();
