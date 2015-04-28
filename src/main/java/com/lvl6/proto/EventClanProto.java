@@ -50254,6 +50254,15 @@ public final class EventClanProto {
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CollectClanGiftsRequestProto}
@@ -50320,6 +50329,11 @@ public final class EventClanProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -50381,8 +50395,24 @@ public final class EventClanProto {
       return sender_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 2;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -50400,6 +50430,9 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -50412,6 +50445,10 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -50537,6 +50574,8 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -50573,6 +50612,10 @@ public final class EventClanProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -50591,6 +50634,9 @@ public final class EventClanProto {
         if (other == com.lvl6.proto.EventClanProto.CollectClanGiftsRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -50733,6 +50779,38 @@ public final class EventClanProto {
           sender_ = null;
         }
         return senderBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000002;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CollectClanGiftsRequestProto)
@@ -51612,1551 +51690,6 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectClanGiftsResponseProto)
   }
 
-  public interface ClearExpiredClanGiftsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    boolean hasSender();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    java.util.List<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto> 
-        getExpiredGiftsList();
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    com.lvl6.proto.ClanGiftsProto.UserClanGiftProto getExpiredGifts(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    int getExpiredGiftsCount();
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder> 
-        getExpiredGiftsOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder getExpiredGiftsOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsRequestProto}
-   */
-  public static final class ClearExpiredClanGiftsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-      ClearExpiredClanGiftsRequestProtoOrBuilder {
-    // Use ClearExpiredClanGiftsRequestProto.newBuilder() to construct.
-    private ClearExpiredClanGiftsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private ClearExpiredClanGiftsRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ClearExpiredClanGiftsRequestProto defaultInstance;
-    public static ClearExpiredClanGiftsRequestProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public ClearExpiredClanGiftsRequestProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ClearExpiredClanGiftsRequestProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = sender_.toBuilder();
-              }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(sender_);
-                sender_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                expiredGifts_ = new java.util.ArrayList<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              expiredGifts_.add(input.readMessage(com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.PARSER, extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          expiredGifts_ = java.util.Collections.unmodifiableList(expiredGifts_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<ClearExpiredClanGiftsRequestProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClearExpiredClanGiftsRequestProto>() {
-      public ClearExpiredClanGiftsRequestProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClearExpiredClanGiftsRequestProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ClearExpiredClanGiftsRequestProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public boolean hasSender() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-      return sender_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-      return sender_;
-    }
-
-    public static final int EXPIREDGIFTS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto> expiredGifts_;
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    public java.util.List<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto> getExpiredGiftsList() {
-      return expiredGifts_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder> 
-        getExpiredGiftsOrBuilderList() {
-      return expiredGifts_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    public int getExpiredGiftsCount() {
-      return expiredGifts_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    public com.lvl6.proto.ClanGiftsProto.UserClanGiftProto getExpiredGifts(int index) {
-      return expiredGifts_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-     */
-    public com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder getExpiredGiftsOrBuilder(
-        int index) {
-      return expiredGifts_.get(index);
-    }
-
-    private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      expiredGifts_ = java.util.Collections.emptyList();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, sender_);
-      }
-      for (int i = 0; i < expiredGifts_.size(); i++) {
-        output.writeMessage(2, expiredGifts_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, sender_);
-      }
-      for (int i = 0; i < expiredGifts_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, expiredGifts_.get(i));
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsRequestProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSenderFieldBuilder();
-          getExpiredGiftsFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (expiredGiftsBuilder_ == null) {
-          expiredGifts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          expiredGiftsBuilder_.clear();
-        }
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
-      }
-
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto build() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto buildPartial() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto result = new com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (senderBuilder_ == null) {
-          result.sender_ = sender_;
-        } else {
-          result.sender_ = senderBuilder_.build();
-        }
-        if (expiredGiftsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            expiredGifts_ = java.util.Collections.unmodifiableList(expiredGifts_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.expiredGifts_ = expiredGifts_;
-        } else {
-          result.expiredGifts_ = expiredGiftsBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto other) {
-        if (other == com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.getDefaultInstance()) return this;
-        if (other.hasSender()) {
-          mergeSender(other.getSender());
-        }
-        if (expiredGiftsBuilder_ == null) {
-          if (!other.expiredGifts_.isEmpty()) {
-            if (expiredGifts_.isEmpty()) {
-              expiredGifts_ = other.expiredGifts_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureExpiredGiftsIsMutable();
-              expiredGifts_.addAll(other.expiredGifts_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.expiredGifts_.isEmpty()) {
-            if (expiredGiftsBuilder_.isEmpty()) {
-              expiredGiftsBuilder_.dispose();
-              expiredGiftsBuilder_ = null;
-              expiredGifts_ = other.expiredGifts_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              expiredGiftsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getExpiredGiftsFieldBuilder() : null;
-            } else {
-              expiredGiftsBuilder_.addAllMessages(other.expiredGifts_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public boolean hasSender() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-        if (senderBuilder_ == null) {
-          return sender_;
-        } else {
-          return senderBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          sender_ = value;
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (senderBuilder_ == null) {
-          sender_ = builderForValue.build();
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
-          } else {
-            sender_ = value;
-          }
-          onChanged();
-        } else {
-          senderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder clearSender() {
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getSenderFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-        if (senderBuilder_ != null) {
-          return senderBuilder_.getMessageOrBuilder();
-        } else {
-          return sender_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getSenderFieldBuilder() {
-        if (senderBuilder_ == null) {
-          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
-                  getParentForChildren(),
-                  isClean());
-          sender_ = null;
-        }
-        return senderBuilder_;
-      }
-
-      private java.util.List<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto> expiredGifts_ =
-        java.util.Collections.emptyList();
-      private void ensureExpiredGiftsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          expiredGifts_ = new java.util.ArrayList<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto>(expiredGifts_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanGiftsProto.UserClanGiftProto, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder, com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder> expiredGiftsBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public java.util.List<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto> getExpiredGiftsList() {
-        if (expiredGiftsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(expiredGifts_);
-        } else {
-          return expiredGiftsBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public int getExpiredGiftsCount() {
-        if (expiredGiftsBuilder_ == null) {
-          return expiredGifts_.size();
-        } else {
-          return expiredGiftsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.UserClanGiftProto getExpiredGifts(int index) {
-        if (expiredGiftsBuilder_ == null) {
-          return expiredGifts_.get(index);
-        } else {
-          return expiredGiftsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder setExpiredGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto value) {
-        if (expiredGiftsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.set(index, value);
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder setExpiredGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder builderForValue) {
-        if (expiredGiftsBuilder_ == null) {
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder addExpiredGifts(com.lvl6.proto.ClanGiftsProto.UserClanGiftProto value) {
-        if (expiredGiftsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.add(value);
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder addExpiredGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto value) {
-        if (expiredGiftsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.add(index, value);
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder addExpiredGifts(
-          com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder builderForValue) {
-        if (expiredGiftsBuilder_ == null) {
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.add(builderForValue.build());
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder addExpiredGifts(
-          int index, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder builderForValue) {
-        if (expiredGiftsBuilder_ == null) {
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder addAllExpiredGifts(
-          java.lang.Iterable<? extends com.lvl6.proto.ClanGiftsProto.UserClanGiftProto> values) {
-        if (expiredGiftsBuilder_ == null) {
-          ensureExpiredGiftsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, expiredGifts_);
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder clearExpiredGifts() {
-        if (expiredGiftsBuilder_ == null) {
-          expiredGifts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public Builder removeExpiredGifts(int index) {
-        if (expiredGiftsBuilder_ == null) {
-          ensureExpiredGiftsIsMutable();
-          expiredGifts_.remove(index);
-          onChanged();
-        } else {
-          expiredGiftsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder getExpiredGiftsBuilder(
-          int index) {
-        return getExpiredGiftsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder getExpiredGiftsOrBuilder(
-          int index) {
-        if (expiredGiftsBuilder_ == null) {
-          return expiredGifts_.get(index);  } else {
-          return expiredGiftsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder> 
-           getExpiredGiftsOrBuilderList() {
-        if (expiredGiftsBuilder_ != null) {
-          return expiredGiftsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(expiredGifts_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder addExpiredGiftsBuilder() {
-        return getExpiredGiftsFieldBuilder().addBuilder(
-            com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder addExpiredGiftsBuilder(
-          int index) {
-        return getExpiredGiftsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserClanGiftProto expiredGifts = 2;</code>
-       */
-      public java.util.List<com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder> 
-           getExpiredGiftsBuilderList() {
-        return getExpiredGiftsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ClanGiftsProto.UserClanGiftProto, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder, com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder> 
-          getExpiredGiftsFieldBuilder() {
-        if (expiredGiftsBuilder_ == null) {
-          expiredGiftsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ClanGiftsProto.UserClanGiftProto, com.lvl6.proto.ClanGiftsProto.UserClanGiftProto.Builder, com.lvl6.proto.ClanGiftsProto.UserClanGiftProtoOrBuilder>(
-                  expiredGifts_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          expiredGifts_ = null;
-        }
-        return expiredGiftsBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-    }
-
-    static {
-      defaultInstance = new ClearExpiredClanGiftsRequestProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-  }
-
-  public interface ClearExpiredClanGiftsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    boolean hasSender();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-    /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-     */
-    boolean hasStatus();
-    /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-     */
-    com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus getStatus();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto}
-   */
-  public static final class ClearExpiredClanGiftsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-      ClearExpiredClanGiftsResponseProtoOrBuilder {
-    // Use ClearExpiredClanGiftsResponseProto.newBuilder() to construct.
-    private ClearExpiredClanGiftsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private ClearExpiredClanGiftsResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ClearExpiredClanGiftsResponseProto defaultInstance;
-    public static ClearExpiredClanGiftsResponseProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public ClearExpiredClanGiftsResponseProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ClearExpiredClanGiftsResponseProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = sender_.toBuilder();
-              }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(sender_);
-                sender_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus value = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                status_ = value;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<ClearExpiredClanGiftsResponseProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClearExpiredClanGiftsResponseProto>() {
-      public ClearExpiredClanGiftsResponseProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClearExpiredClanGiftsResponseProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ClearExpiredClanGiftsResponseProto> getParserForType() {
-      return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus}
-     */
-    public enum ClearExpiredClanGiftsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static ClearExpiredClanGiftsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ClearExpiredClanGiftsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<ClearExpiredClanGiftsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ClearExpiredClanGiftsStatus>() {
-              public ClearExpiredClanGiftsStatus findValueByNumber(int number) {
-                return ClearExpiredClanGiftsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final ClearExpiredClanGiftsStatus[] VALUES = values();
-
-      public static ClearExpiredClanGiftsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private ClearExpiredClanGiftsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus)
-    }
-
-    private int bitField0_;
-    public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public boolean hasSender() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-      return sender_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-      return sender_;
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status_;
-    /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-     */
-    public boolean hasStatus() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-     */
-    public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus getStatus() {
-      return status_;
-    }
-
-    private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, status_.getNumber());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, status_.getNumber());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSenderFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
-      }
-
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto build() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto buildPartial() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto result = new com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (senderBuilder_ == null) {
-          result.sender_ = sender_;
-        } else {
-          result.sender_ = senderBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.status_ = status_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto other) {
-        if (other == com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.getDefaultInstance()) return this;
-        if (other.hasSender()) {
-          mergeSender(other.getSender());
-        }
-        if (other.hasStatus()) {
-          setStatus(other.getStatus());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public boolean hasSender() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-        if (senderBuilder_ == null) {
-          return sender_;
-        } else {
-          return senderBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          sender_ = value;
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (senderBuilder_ == null) {
-          sender_ = builderForValue.build();
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
-          } else {
-            sender_ = value;
-          }
-          onChanged();
-        } else {
-          senderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder clearSender() {
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getSenderFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-        if (senderBuilder_ != null) {
-          return senderBuilder_.getMessageOrBuilder();
-        } else {
-          return sender_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getSenderFieldBuilder() {
-        if (senderBuilder_ == null) {
-          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
-                  getParentForChildren(),
-                  isClean());
-          sender_ = null;
-        }
-        return senderBuilder_;
-      }
-
-      private com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
-      /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-       */
-      public boolean hasStatus() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-       */
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus getStatus() {
-        return status_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-       */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        status_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
-       */
-      public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-    }
-
-    static {
-      defaultInstance = new ClearExpiredClanGiftsResponseProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-  }
-
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor;
   private static
@@ -53417,16 +51950,6 @@ public final class EventClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -53437,365 +51960,355 @@ public final class EventClanProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventClan.proto\022\016com.lvl6.proto\032\014Battl" +
-      "e.proto\032\nClan.proto\032\017ClanGifts.proto\032\022Mo" +
-      "nsterStuff.proto\032\014Reward.proto\032\nUser.pro" +
-      "to\"\330\001\n\026CreateClanRequestProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\014\n\004name\030\002 \001(\t\022\013\n\003tag\030\003 \001(\t\022!\n\031requestToJ" +
-      "oinClanRequired\030\004 \001(\010\022\023\n\013description\030\005 \001" +
-      "(\t\022\022\n\nclanIconId\030\006 \001(\005\022\021\n\tgemsSpent\030\007 \001(" +
-      "\005\022\022\n\ncashChange\030\010 \001(\021\"\222\003\n\027CreateClanResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
-      "to.MinimumUserProto\022H\n\006status\030\002 \001(\01628.co" +
-      "m.lvl6.proto.CreateClanResponseProto.Cre" +
-      "ateClanStatus\0222\n\010clanInfo\030\003 \001(\0132 .com.lv" +
-      "l6.proto.MinimumClanProto\"\306\001\n\020CreateClan" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024F" +
-      "AIL_NOT_ENOUGH_CASH\020\003\022\023\n\017FAIL_NAME_TAKEN" +
-      "\020\004\022\030\n\024FAIL_ALREADY_IN_CLAN\020\005\022\033\n\027FAIL_INV" +
-      "ALID_TAG_LENGTH\020\006\022\022\n\016FAIL_TAG_TAKEN\020\007\022\033\n" +
-      "\027FAIL_INSUFFICIENT_FUNDS\020\010\"I\n\025LeaveClanR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p",
-      "roto.MinimumUserProto\"\205\002\n\026LeaveClanRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022F\n\006status\030\002 \001(\01626.com" +
-      ".lvl6.proto.LeaveClanResponseProto.Leave" +
-      "ClanStatus\"q\n\017LeaveClanStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\016\n\nFAIL_OTHER\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003" +
-      "\022+\n\'FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL" +
-      "_IN\020\004\"u\n\033RequestJoinClanRequestProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\020\n\010clanUuid\030\002 \001(\t\022\022\n\nclientTime\030\003",
-      " \001(\003\"\365\005\n\034RequestJoinClanResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto" +
-      ".RequestJoinClanResponseProto.RequestJoi" +
-      "nClanStatus\022\020\n\010clanUuid\030\003 \001(\t\022;\n\trequest" +
-      "er\030\004 \001(\0132(.com.lvl6.proto.MinimumUserPro" +
-      "toForClans\0221\n\007minClan\030\005 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumClanProto\022;\n\010fullClan\030\006 \001(\0132" +
-      ").com.lvl6.proto.FullClanProtoWithClanSi" +
-      "ze\022F\n\014eventDetails\030\007 \001(\01320.com.lvl6.prot",
-      "o.PersistentClanEventClanInfoProto\022J\n\020cl" +
-      "anUsersDetails\030\010 \003(\01320.com.lvl6.proto.Pe" +
-      "rsistentClanEventUserInfoProto\022F\n\021reques" +
-      "terMonsters\030\t \001(\0132+.com.lvl6.proto.UserC" +
-      "urrentMonsterTeamProto\022\022\n\nclientTime\030\n \001" +
-      "(\003\"\237\001\n\025RequestJoinClanStatus\022\023\n\017SUCCESS_" +
-      "REQUEST\020\001\022\020\n\014SUCCESS_JOIN\020\002\022\030\n\024FAIL_ALRE" +
-      "ADY_IN_CLAN\020\003\022\036\n\032FAIL_REQUEST_ALREADY_FI" +
-      "LED\020\004\022\025\n\021FAIL_CLAN_IS_FULL\020\005\022\016\n\nFAIL_OTH" +
-      "ER\020\006\"h\n\"RetractRequestJoinClanRequestPro",
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\020\n\010clanUuid\030\002 \001(\t\"\274\002\n#Retra" +
-      "ctRequestJoinClanResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto.Retrac" +
-      "tRequestJoinClanResponseProto.RetractReq" +
-      "uestJoinClanStatus\022\020\n\010clanUuid\030\003 \001(\t\"o\n\034" +
-      "RetractRequestJoinClanStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024FAIL_ALREADY_IN_CLA" +
-      "N\020\003\022\030\n\024FAIL_DID_NOT_REQUEST\020\004\"\207\001\n,Approv",
-      "eOrRejectRequestToJoinClanRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\025\n\rrequesterUuid\030\002 \001(\t\022\016\n\006accep" +
-      "t\030\003 \001(\010\"\272\004\n-ApproveOrRejectRequestToJoin" +
-      "ClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022t\n\006status\030\002 " +
-      "\001(\0162d.com.lvl6.proto.ApproveOrRejectRequ" +
-      "estToJoinClanResponseProto.ApproveOrReje" +
-      "ctRequestToJoinClanStatus\0223\n\trequester\030\003" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\016",
-      "\n\006accept\030\004 \001(\010\0221\n\007minClan\030\005 \001(\0132 .com.lv" +
-      "l6.proto.MinimumClanProto\022;\n\010fullClan\030\006 " +
-      "\001(\0132).com.lvl6.proto.FullClanProtoWithCl" +
-      "anSize\"\253\001\n&ApproveOrRejectRequestToJoinC" +
-      "lanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027" +
-      "\n\023FAIL_NOT_AUTHORIZED\020\003\022\030\n\024FAIL_NOT_A_RE" +
-      "QUESTER\020\004\022\032\n\026FAIL_ALREADY_IN_A_CLAN\020\005\022\025\n" +
-      "\021FAIL_CLAN_IS_FULL\020\006\"\267\002\n\034RetrieveClanInf" +
-      "oRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\020\n\010clanUuid\030\002 \001(",
-      "\t\022\020\n\010clanName\030\003 \001(\t\022O\n\010grabType\030\004 \001(\0162=." +
-      "com.lvl6.proto.RetrieveClanInfoRequestPr" +
-      "oto.ClanInfoGrabType\022\034\n\020beforeThisClanId" +
-      "\030\005 \001(\005B\002\030\001\022\031\n\021isForBrowsingList\030\006 \001(\010\"7\n" +
-      "\020ClanInfoGrabType\022\007\n\003ALL\020\001\022\r\n\tCLAN_INFO\020" +
-      "\002\022\013\n\007MEMBERS\020\003\"\213\004\n\035RetrieveClanInfoRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\0229\n\007members\030\002 \003(\0132(.co" +
-      "m.lvl6.proto.MinimumUserProtoForClans\022;\n" +
-      "\010clanInfo\030\003 \003(\0132).com.lvl6.proto.FullCla",
-      "nProtoWithClanSize\022T\n\006status\030\004 \001(\0162D.com" +
-      ".lvl6.proto.RetrieveClanInfoResponseProt" +
-      "o.RetrieveClanInfoStatus\022\023\n\013isForSearch\030" +
-      "\005 \001(\010\022\031\n\021isForBrowsingList\030\006 \001(\010\022\020\n\010clan" +
-      "Uuid\030\007 \001(\t\022\020\n\010clanName\030\010 \001(\t\022\034\n\020beforeTh" +
-      "isClanId\030\t \001(\005B\002\030\001\022A\n\014monsterTeams\030\n \003(\013" +
-      "2+.com.lvl6.proto.UserCurrentMonsterTeam" +
-      "Proto\"5\n\026RetrieveClanInfoStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nOTHER_FAIL\020\002\"o\n!TransferClanOwne" +
-      "rshipRequestProto\0220\n\006sender\030\001 \001(\0132 .com.",
-      "lvl6.proto.MinimumUserProto\022\030\n\020clanOwner" +
-      "UuidNew\030\002 \001(\t\"\323\003\n\"TransferClanOwnershipR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022^\n\006status\030\002 \001(\0162N" +
-      ".com.lvl6.proto.TransferClanOwnershipRes" +
-      "ponseProto.TransferClanOwnershipStatus\0221" +
-      "\n\007minClan\030\003 \001(\0132 .com.lvl6.proto.Minimum" +
-      "ClanProto\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.p" +
-      "roto.FullClanProtoWithClanSize\0226\n\014clanOw" +
-      "nerNew\030\005 \001(\0132 .com.lvl6.proto.MinimumUse",
-      "rProto\"s\n\033TransferClanOwnershipStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_NOT_A" +
-      "UTHORIZED\020\003\022\036\n\032FAIL_NEW_OWNER_NOT_IN_CLA" +
-      "N\020\004\"l\n\036BootPlayerFromClanRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\030\n\020playerToBootUuid\030\002 \001(\t\"\324\002\n\037Bo" +
-      "otPlayerFromClanResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "6\n\014playerToBoot\030\002 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022X\n\006status\030\003 \001(\0162H.com.lv",
-      "l6.proto.BootPlayerFromClanResponseProto" +
-      ".BootPlayerFromClanStatus\"m\n\030BootPlayerF" +
-      "romClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
-      "\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\033\n\027FAIL_BOOT" +
-      "ED_NOT_IN_CLAN\020\004\"\346\001\n\036ChangeClanSettingsR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\033\n\023isChangeDescrip" +
-      "tion\030\002 \001(\010\022\026\n\016descriptionNow\030\003 \001(\t\022\030\n\020is" +
-      "ChangeJoinType\030\004 \001(\010\022\035\n\025requestToJoinReq" +
-      "uired\030\005 \001(\010\022\024\n\014isChangeIcon\030\006 \001(\010\022\016\n\006ico",
-      "nId\030\007 \001(\005\"\205\003\n\037ChangeClanSettingsResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022X\n\006status\030\002 \001(\0162H.com.lv" +
-      "l6.proto.ChangeClanSettingsResponseProto" +
-      ".ChangeClanSettingsStatus\0221\n\007minClan\030\003 \001" +
-      "(\0132 .com.lvl6.proto.MinimumClanProto\022;\n\010" +
-      "fullClan\030\004 \001(\0132).com.lvl6.proto.FullClan" +
-      "ProtoWithClanSize\"f\n\030ChangeClanSettingsS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\027\n\023FAIL_NOT_AUTHORIZE" +
-      "D\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\022\016\n\nFAIL_OTHER\020",
-      "\004\"\364\001\n\031BeginClanRaidRequestProto\0220\n\006sende" +
+      "e.proto\032\nClan.proto\032\022MonsterStuff.proto\032" +
+      "\014Reward.proto\032\nUser.proto\"\330\001\n\026CreateClan" +
+      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022\014\n\004name\030\002 \001(\t\022\013\n\003" +
+      "tag\030\003 \001(\t\022!\n\031requestToJoinClanRequired\030\004" +
+      " \001(\010\022\023\n\013description\030\005 \001(\t\022\022\n\nclanIconId\030" +
+      "\006 \001(\005\022\021\n\tgemsSpent\030\007 \001(\005\022\022\n\ncashChange\030\010" +
+      " \001(\021\"\222\003\n\027CreateClanResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
+      "to\022H\n\006status\030\002 \001(\01628.com.lvl6.proto.Crea" +
+      "teClanResponseProto.CreateClanStatus\0222\n\010" +
+      "clanInfo\030\003 \001(\0132 .com.lvl6.proto.MinimumC" +
+      "lanProto\"\306\001\n\020CreateClanStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024FAIL_NOT_ENOUGH_CA" +
+      "SH\020\003\022\023\n\017FAIL_NAME_TAKEN\020\004\022\030\n\024FAIL_ALREAD" +
+      "Y_IN_CLAN\020\005\022\033\n\027FAIL_INVALID_TAG_LENGTH\020\006" +
+      "\022\022\n\016FAIL_TAG_TAKEN\020\007\022\033\n\027FAIL_INSUFFICIEN" +
+      "T_FUNDS\020\010\"I\n\025LeaveClanRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
+      "roto\"\205\002\n\026LeaveClanResponseProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 \001(\005\022\023\n\013cl" +
-      "anEventId\030\007 \001(\005\022\035\n\025setMonsterTeamForRaid" +
-      "\030\004 \001(\010\022:\n\014userMonsters\030\005 \003(\0132$.com.lvl6." +
-      "proto.FullUserMonsterProto\022\024\n\014isFirstSta" +
-      "ge\030\006 \001(\010\"\316\003\n\032BeginClanRaidResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022F\n\014eventDetails\030\002 \001(\01320.com.lv" +
-      "l6.proto.PersistentClanEventClanInfoProt",
-      "o\022N\n\006status\030\003 \001(\0162>.com.lvl6.proto.Begin" +
-      "ClanRaidResponseProto.BeginClanRaidStatu" +
-      "s\022E\n\013userDetails\030\004 \001(\01320.com.lvl6.proto." +
-      "PersistentClanEventUserInfoProto\"\236\001\n\023Beg" +
-      "inClanRaidStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_AL" +
-      "READY_STARTED\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003" +
-      "\022\034\n\030FAIL_NO_ACTIVE_CLAN_RAID\020\004\022\031\n\025FAIL_N" +
-      "O_MONSTERS_SENT\020\005\022\016\n\nFAIL_OTHER\020\006\"\232\003\n!At" +
-      "tackClanRaidMonsterRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
-      "o\022F\n\014eventDetails\030\002 \001(\01320.com.lvl6.proto" +
-      ".PersistentClanEventClanInfoProto\022\022\n\ncli" +
-      "entTime\030\003 \001(\003\022\023\n\013damageDealt\030\004 \001(\005\022E\n\016mo" +
-      "nsterHealths\030\005 \003(\0132-.com.lvl6.proto.User" +
-      "MonsterCurrentHealthProto\022E\n\027userMonster" +
-      "ThatAttacked\030\t \001(\0132$.com.lvl6.proto.Full" +
-      "UserMonsterProto\022D\n\017userMonsterTeam\030\n \001(" +
-      "\0132+.com.lvl6.proto.UserCurrentMonsterTea" +
-      "mProto\"\335\004\n\"AttackClanRaidMonsterResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
-      "inimumUserProto\022\020\n\010dmgDealt\030\002 \001(\005\022F\n\014eve" +
-      "ntDetails\030\003 \001(\01320.com.lvl6.proto.Persist" +
-      "entClanEventClanInfoProto\022J\n\020clanUsersDe" +
-      "tails\030\004 \003(\01320.com.lvl6.proto.PersistentC" +
-      "lanEventUserInfoProto\022E\n\027userMonsterThat" +
-      "Attacked\030\005 \001(\0132$.com.lvl6.proto.FullUser" +
-      "MonsterProto\022^\n\006status\030\006 \001(\0162N.com.lvl6." +
-      "proto.AttackClanRaidMonsterResponseProto" +
-      ".AttackClanRaidMonsterStatus\"\267\001\n\033AttackC" +
-      "lanRaidMonsterStatus\022\013\n\007SUCCESS\020\001\022\035\n\031SUC",
-      "CESS_MONSTER_JUST_DIED\020\002\022\031\n\025FAIL_USER_NO" +
-      "T_IN_CLAN\020\003\022\"\n\036FAIL_NO_STAGE_RAID_IN_PRO" +
-      "GRESS\020\004\022\035\n\031FAIL_MONSTER_ALREADY_DEAD\020\005\022\016" +
-      "\n\nFAIL_OTHER\020\006\"~\n%AwardClanRaidStageRewa" +
-      "rdResponseProto\022\r\n\005crsId\030\001 \001(\005\022F\n\nallRew" +
-      "ards\030\002 \003(\01322.com.lvl6.proto.PersistentCl" +
-      "anEventUserRewardProto\"y\n\037RecordClanRaid" +
-      "StatsRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022\020\n\010clanUuid\030" +
-      "\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\211\002\n RecordClan",
-      "RaidStatsResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022Z\n\006stat" +
-      "us\030\002 \001(\0162J.com.lvl6.proto.RecordClanRaid" +
-      "StatsResponseProto.RecordClanRaidStatsSt" +
-      "atus\"W\n\031RecordClanRaidStatsStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\035\n\031FAIL_MONSTER_ALREADY_DEAD\020\002\022\016\n" +
-      "\nFAIL_OTHER\020\003\"\253\001\n#PromoteDemoteClanMembe" +
-      "rRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\022\n\nvictimUuid\030\002 " +
-      "\001(\t\022>\n\016userClanStatus\030\003 \001(\0162\036.com.lvl6.p",
-      "roto.UserClanStatus:\006MEMBER\"\337\003\n$PromoteD" +
-      "emoteClanMemberResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0220" +
-      "\n\006victim\030\002 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022>\n\016userClanStatus\030\003 \001(\0162\036.com.l" +
-      "vl6.proto.UserClanStatus:\006MEMBER\022B\n\022prev" +
-      "UserClanStatus\030\005 \001(\0162\036.com.lvl6.proto.Us" +
-      "erClanStatus:\006MEMBER\022b\n\006status\030\004 \001(\0162R.c" +
-      "om.lvl6.proto.PromoteDemoteClanMemberRes" +
-      "ponseProto.PromoteDemoteClanMemberStatus",
-      "\"k\n\035PromoteDemoteClanMemberStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\024\n\020FAIL_NOT_IN_CLAN\020\002\022\027\n\023FAIL_NOT" +
-      "_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004\"\254\001\n\033Solici" +
-      "tClanHelpRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\0223\n\006notic" +
-      "e\030\002 \003(\0132#.com.lvl6.proto.ClanHelpNoticeP" +
-      "roto\022\022\n\nclientTime\030\004 \001(\003\022\022\n\nmaxHelpers\030\005" +
-      " \001(\005\"\242\002\n\034SolicitClanHelpResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\0220\n\thelpProto\030\002 \003(\0132\035.com.lvl6.pr",
-      "oto.ClanHelpProto\022R\n\006status\030\003 \001(\0162B.com." +
-      "lvl6.proto.SolicitClanHelpResponseProto." +
-      "SolicitClanHelpStatus\"J\n\025SolicitClanHelp" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\024\n\020F" +
-      "AIL_NOT_IN_CLAN\020\003\"c\n\030GiveClanHelpRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\025\n\rclanHelpUuids\030\002 \003(\t\"\200" +
-      "\002\n\031GiveClanHelpResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0220" +
-      "\n\tclanHelps\030\002 \003(\0132\035.com.lvl6.proto.ClanH",
-      "elpProto\022L\n\006status\030\003 \001(\0162<.com.lvl6.prot" +
-      "o.GiveClanHelpResponseProto.GiveClanHelp" +
-      "Status\"1\n\022GiveClanHelpStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\"b\n\027EndClanHelpRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\025\n\rclanHelpUuids\030\002 \003(\t\"\341\001" +
-      "\n\030EndClanHelpResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n\r" +
-      "clanHelpUuids\030\002 \003(\t\022J\n\006status\030\003 \001(\0162:.co" +
-      "m.lvl6.proto.EndClanHelpResponseProto.En",
-      "dClanHelpStatus\"0\n\021EndClanHelpStatus\022\013\n\007" +
-      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"{\n\030InviteToCla" +
-      "nRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\031\n\021prospectiveMe" +
-      "mber\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\230\002\n\031Invit" +
-      "eToClanResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022L\n\006status" +
-      "\030\002 \001(\0162<.com.lvl6.proto.InviteToClanResp" +
-      "onseProto.InviteToClanStatus\022/\n\006invite\030\003" +
-      " \001(\0132\037.com.lvl6.proto.ClanInviteProto\"J\n",
-      "\022InviteToClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL" +
-      "_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\"\322\001\n$Ac" +
-      "ceptOrRejectClanInviteRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\0221\n\010accepted\030\002 \001(\0132\037.com.lvl6.proto." +
-      "ClanInviteProto\0221\n\010rejected\030\003 \003(\0132\037.com." +
-      "lvl6.proto.ClanInviteProto\022\022\n\nclientTime" +
-      "\030\004 \001(\003\"\322\002\n%AcceptOrRejectClanInviteRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022d\n\006status\030\002 \001(\0162T.com",
-      ".lvl6.proto.AcceptOrRejectClanInviteResp" +
-      "onseProto.AcceptOrRejectClanInviteStatus" +
-      "\022;\n\010fullClan\030\003 \001(\0132).com.lvl6.proto.Full" +
-      "ClanProtoWithClanSize\"T\n\036AcceptOrRejectC" +
-      "lanInviteStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
-      "ER\020\002\022\025\n\021FAIL_CLAN_IS_FULL\020\003\"\177\n\035RetrieveC" +
-      "lanDataResponseProto\022-\n\003mup\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022/\n\010clanData\030" +
-      "\002 \001(\0132\035.com.lvl6.proto.ClanDataProto\"\236\001\n" +
-      "\035BeginClanAvengingRequestProto\0220\n\006sender",
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\0227\n\016recentNBattles\030\002 \003(\0132\037.com.lvl6.prot" +
-      "o.PvpHistoryProto\022\022\n\nclientTime\030\003 \001(\003\"\235\002" +
-      "\n\036BeginClanAvengingResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\0229\n\rclanAvengings\030\002 \003(\0132\".com.lvl6.pro" +
-      "to.PvpClanAvengeProto\022V\n\006status\030\003 \001(\0162F." +
-      "com.lvl6.proto.BeginClanAvengingResponse" +
-      "Proto.BeginClanAvengingStatus\"6\n\027BeginCl" +
-      "anAvengingStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT",
-      "HER\020\002\"h\n\033EndClanAvengingRequestProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\027\n\017clanAvengeUuids\030\002 \003(\t\"\363\001\n\034EndC" +
-      "lanAvengingResponseProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\027\n\017cl" +
-      "anAvengeUuids\030\002 \003(\t\022R\n\006status\030\003 \001(\0162B.co" +
-      "m.lvl6.proto.EndClanAvengingResponseProt" +
-      "o.EndClanAvengingStatus\"4\n\025EndClanAvengi" +
-      "ngStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\232\001" +
-      "\n\032AvengeClanMateRequestProto\0220\n\006sender\030\001",
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0226" +
-      "\n\nclanAvenge\030\002 \001(\0132\".com.lvl6.proto.PvpC" +
-      "lanAvengeProto\022\022\n\nclientTime\030\003 \001(\003\"\204\002\n\033A" +
-      "vengeClanMateResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022,\n\006" +
-      "victim\030\002 \001(\0132\030.com.lvl6.proto.PvpProtoB\002" +
-      "\030\001\022P\n\006status\030\003 \001(\0162@.com.lvl6.proto.Aven" +
-      "geClanMateResponseProto.AvengeClanMateSt" +
-      "atus\"3\n\024AvengeClanMateStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\"\233\001\n\037SolicitTeamDonatio",
-      "nRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\013\n\003msg\030\002 \001(\t\022\022\n\n" +
-      "powerLimit\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\022\021\n\t" +
-      "gemsSpent\030\005 \001(\005\"\354\002\n SolicitTeamDonationR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J" +
-      ".com.lvl6.proto.SolicitTeamDonationRespo" +
-      "nseProto.SolicitTeamDonationStatus\022A\n\014so" +
-      "licitation\030\003 \001(\0132+.com.lvl6.proto.ClanMe" +
-      "mberTeamDonationProto\"w\n\031SolicitTeamDona",
-      "tionStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022" +
-      "\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022!\n\035FAIL_FULF" +
-      "ILLED_REQUEST_EXISTS\020\004\"\352\001\n+FulfillTeamDo" +
-      "nationSolicitationRequestProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto.FullUser" +
-      "MonsterProto\022\022\n\nclientTime\030\003 \001(\003\022A\n\014soli" +
-      "citation\030\004 \001(\0132+.com.lvl6.proto.ClanMemb" +
-      "erTeamDonationProto\"\235\003\n,FulfillTeamDonat" +
-      "ionSolicitationResponseProto\0220\n\006sender\030\001",
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022r" +
-      "\n\006status\030\002 \001(\0162b.com.lvl6.proto.FulfillT" +
-      "eamDonationSolicitationResponseProto.Ful" +
-      "fillTeamDonationSolicitationStatus\022A\n\014so" +
-      "licitation\030\003 \001(\0132+.com.lvl6.proto.ClanMe" +
-      "mberTeamDonationProto\"\203\001\n%FulfillTeamDon" +
-      "ationSolicitationStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\022!\n\035FAIL_NONEXISTENT_SOLICIT" +
-      "ATION\020\003\022\032\n\026FAIL_ALREADY_FULFILLED\020\004\"\240\001\n(" +
-      "VoidTeamDonationSolicitationRequestProto",
+      "o\022F\n\006status\030\002 \001(\01626.com.lvl6.proto.Leave" +
+      "ClanResponseProto.LeaveClanStatus\"q\n\017Lea" +
+      "veClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020" +
+      "\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\022+\n\'FAIL_OWNER_OF" +
+      "_CLAN_WITH_OTHERS_STILL_IN\020\004\"u\n\033RequestJ" +
+      "oinClanRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\020\n\010clanUui" +
+      "d\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\365\005\n\034RequestJ",
+      "oinClanResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022R\n\006status" +
+      "\030\002 \001(\0162B.com.lvl6.proto.RequestJoinClanR" +
+      "esponseProto.RequestJoinClanStatus\022\020\n\010cl" +
+      "anUuid\030\003 \001(\t\022;\n\trequester\030\004 \001(\0132(.com.lv" +
+      "l6.proto.MinimumUserProtoForClans\0221\n\007min" +
+      "Clan\030\005 \001(\0132 .com.lvl6.proto.MinimumClanP" +
+      "roto\022;\n\010fullClan\030\006 \001(\0132).com.lvl6.proto." +
+      "FullClanProtoWithClanSize\022F\n\014eventDetail" +
+      "s\030\007 \001(\01320.com.lvl6.proto.PersistentClanE",
+      "ventClanInfoProto\022J\n\020clanUsersDetails\030\010 " +
+      "\003(\01320.com.lvl6.proto.PersistentClanEvent" +
+      "UserInfoProto\022F\n\021requesterMonsters\030\t \001(\013" +
+      "2+.com.lvl6.proto.UserCurrentMonsterTeam" +
+      "Proto\022\022\n\nclientTime\030\n \001(\003\"\237\001\n\025RequestJoi" +
+      "nClanStatus\022\023\n\017SUCCESS_REQUEST\020\001\022\020\n\014SUCC" +
+      "ESS_JOIN\020\002\022\030\n\024FAIL_ALREADY_IN_CLAN\020\003\022\036\n\032" +
+      "FAIL_REQUEST_ALREADY_FILED\020\004\022\025\n\021FAIL_CLA" +
+      "N_IS_FULL\020\005\022\016\n\nFAIL_OTHER\020\006\"h\n\"RetractRe" +
+      "questJoinClanRequestProto\0220\n\006sender\030\001 \001(",
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\020\n\010c" +
+      "lanUuid\030\002 \001(\t\"\274\002\n#RetractRequestJoinClan" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022`\n\006status\030\002 \001(\0162" +
+      "P.com.lvl6.proto.RetractRequestJoinClanR" +
+      "esponseProto.RetractRequestJoinClanStatu" +
+      "s\022\020\n\010clanUuid\030\003 \001(\t\"o\n\034RetractRequestJoi" +
+      "nClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "\022\030\n\024FAIL_ALREADY_IN_CLAN\020\003\022\030\n\024FAIL_DID_N" +
+      "OT_REQUEST\020\004\"\207\001\n,ApproveOrRejectRequestT",
+      "oJoinClanRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\025\n\rreque" +
+      "sterUuid\030\002 \001(\t\022\016\n\006accept\030\003 \001(\010\"\272\004\n-Appro" +
+      "veOrRejectRequestToJoinClanResponseProto" +
       "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022B\n\rsolicitations\030\002 \003(\0132+.com." +
-      "lvl6.proto.ClanMemberTeamDonationProto\"\252" +
-      "\002\n)VoidTeamDonationSolicitationResponseP" +
+      "mUserProto\022t\n\006status\030\002 \001(\0162d.com.lvl6.pr" +
+      "oto.ApproveOrRejectRequestToJoinClanResp" +
+      "onseProto.ApproveOrRejectRequestToJoinCl" +
+      "anStatus\0223\n\trequester\030\003 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\016\n\006accept\030\004 \001(\010\0221\n",
+      "\007minClan\030\005 \001(\0132 .com.lvl6.proto.MinimumC" +
+      "lanProto\022;\n\010fullClan\030\006 \001(\0132).com.lvl6.pr" +
+      "oto.FullClanProtoWithClanSize\"\253\001\n&Approv" +
+      "eOrRejectRequestToJoinClanStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHOR" +
+      "IZED\020\003\022\030\n\024FAIL_NOT_A_REQUESTER\020\004\022\032\n\026FAIL" +
+      "_ALREADY_IN_A_CLAN\020\005\022\025\n\021FAIL_CLAN_IS_FUL" +
+      "L\020\006\"\267\002\n\034RetrieveClanInfoRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\020\n\010clanUuid\030\002 \001(\t\022\020\n\010clanName\030\003 \001",
+      "(\t\022O\n\010grabType\030\004 \001(\0162=.com.lvl6.proto.Re" +
+      "trieveClanInfoRequestProto.ClanInfoGrabT" +
+      "ype\022\034\n\020beforeThisClanId\030\005 \001(\005B\002\030\001\022\031\n\021isF" +
+      "orBrowsingList\030\006 \001(\010\"7\n\020ClanInfoGrabType" +
+      "\022\007\n\003ALL\020\001\022\r\n\tCLAN_INFO\020\002\022\013\n\007MEMBERS\020\003\"\213\004" +
+      "\n\035RetrieveClanInfoResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\0229\n\007members\030\002 \003(\0132(.com.lvl6.proto.Mini" +
+      "mumUserProtoForClans\022;\n\010clanInfo\030\003 \003(\0132)" +
+      ".com.lvl6.proto.FullClanProtoWithClanSiz",
+      "e\022T\n\006status\030\004 \001(\0162D.com.lvl6.proto.Retri" +
+      "eveClanInfoResponseProto.RetrieveClanInf" +
+      "oStatus\022\023\n\013isForSearch\030\005 \001(\010\022\031\n\021isForBro" +
+      "wsingList\030\006 \001(\010\022\020\n\010clanUuid\030\007 \001(\t\022\020\n\010cla" +
+      "nName\030\010 \001(\t\022\034\n\020beforeThisClanId\030\t \001(\005B\002\030" +
+      "\001\022A\n\014monsterTeams\030\n \003(\0132+.com.lvl6.proto" +
+      ".UserCurrentMonsterTeamProto\"5\n\026Retrieve" +
+      "ClanInfoStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAI" +
+      "L\020\002\"o\n!TransferClanOwnershipRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu",
+      "mUserProto\022\030\n\020clanOwnerUuidNew\030\002 \001(\t\"\323\003\n" +
+      "\"TransferClanOwnershipResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto.T" +
+      "ransferClanOwnershipResponseProto.Transf" +
+      "erClanOwnershipStatus\0221\n\007minClan\030\003 \001(\0132 " +
+      ".com.lvl6.proto.MinimumClanProto\022;\n\010full" +
+      "Clan\030\004 \001(\0132).com.lvl6.proto.FullClanProt" +
+      "oWithClanSize\0226\n\014clanOwnerNew\030\005 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\"s\n\033Transfe",
+      "rClanOwnershipStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
+      "L_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\036\n\032FA" +
+      "IL_NEW_OWNER_NOT_IN_CLAN\020\004\"l\n\036BootPlayer" +
+      "FromClanRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\030\n\020player" +
+      "ToBootUuid\030\002 \001(\t\"\324\002\n\037BootPlayerFromClanR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\0226\n\014playerToBoot\030\002" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022X" +
+      "\n\006status\030\003 \001(\0162H.com.lvl6.proto.BootPlay",
+      "erFromClanResponseProto.BootPlayerFromCl" +
+      "anStatus\"m\n\030BootPlayerFromClanStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_NOT_AU" +
+      "THORIZED\020\003\022\033\n\027FAIL_BOOTED_NOT_IN_CLAN\020\004\"" +
+      "\346\001\n\036ChangeClanSettingsRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\033\n\023isChangeDescription\030\002 \001(\010\022\026\n\016des" +
+      "criptionNow\030\003 \001(\t\022\030\n\020isChangeJoinType\030\004 " +
+      "\001(\010\022\035\n\025requestToJoinRequired\030\005 \001(\010\022\024\n\014is" +
+      "ChangeIcon\030\006 \001(\010\022\016\n\006iconId\030\007 \001(\005\"\205\003\n\037Cha",
+      "ngeClanSettingsResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022X" +
+      "\n\006status\030\002 \001(\0162H.com.lvl6.proto.ChangeCl" +
+      "anSettingsResponseProto.ChangeClanSettin" +
+      "gsStatus\0221\n\007minClan\030\003 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumClanProto\022;\n\010fullClan\030\004 \001(\0132)." +
+      "com.lvl6.proto.FullClanProtoWithClanSize" +
+      "\"f\n\030ChangeClanSettingsStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\027\n\023FAIL_NOT_AUTHORIZED\020\002\022\024\n\020FAIL_NOT_I" +
+      "N_CLAN\020\003\022\016\n\nFAIL_OTHER\020\004\"\364\001\n\031BeginClanRa",
+      "idRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\017\n\007curTime\030\002 \001(" +
+      "\003\022\016\n\006raidId\030\003 \001(\005\022\023\n\013clanEventId\030\007 \001(\005\022\035" +
+      "\n\025setMonsterTeamForRaid\030\004 \001(\010\022:\n\014userMon" +
+      "sters\030\005 \003(\0132$.com.lvl6.proto.FullUserMon" +
+      "sterProto\022\024\n\014isFirstStage\030\006 \001(\010\"\316\003\n\032Begi" +
+      "nClanRaidResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022F\n\014even" +
+      "tDetails\030\002 \001(\01320.com.lvl6.proto.Persiste" +
+      "ntClanEventClanInfoProto\022N\n\006status\030\003 \001(\016",
+      "2>.com.lvl6.proto.BeginClanRaidResponseP" +
+      "roto.BeginClanRaidStatus\022E\n\013userDetails\030" +
+      "\004 \001(\01320.com.lvl6.proto.PersistentClanEve" +
+      "ntUserInfoProto\"\236\001\n\023BeginClanRaidStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\030\n\024FAIL_ALREADY_STARTED\020\002\022\027" +
+      "\n\023FAIL_NOT_AUTHORIZED\020\003\022\034\n\030FAIL_NO_ACTIV" +
+      "E_CLAN_RAID\020\004\022\031\n\025FAIL_NO_MONSTERS_SENT\020\005" +
+      "\022\016\n\nFAIL_OTHER\020\006\"\232\003\n!AttackClanRaidMonst" +
+      "erRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022F\n\014eventDetails",
+      "\030\002 \001(\01320.com.lvl6.proto.PersistentClanEv" +
+      "entClanInfoProto\022\022\n\nclientTime\030\003 \001(\003\022\023\n\013" +
+      "damageDealt\030\004 \001(\005\022E\n\016monsterHealths\030\005 \003(" +
+      "\0132-.com.lvl6.proto.UserMonsterCurrentHea" +
+      "lthProto\022E\n\027userMonsterThatAttacked\030\t \001(" +
+      "\0132$.com.lvl6.proto.FullUserMonsterProto\022" +
+      "D\n\017userMonsterTeam\030\n \001(\0132+.com.lvl6.prot" +
+      "o.UserCurrentMonsterTeamProto\"\335\004\n\"Attack" +
+      "ClanRaidMonsterResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\020",
+      "\n\010dmgDealt\030\002 \001(\005\022F\n\014eventDetails\030\003 \001(\01320" +
+      ".com.lvl6.proto.PersistentClanEventClanI" +
+      "nfoProto\022J\n\020clanUsersDetails\030\004 \003(\01320.com" +
+      ".lvl6.proto.PersistentClanEventUserInfoP" +
+      "roto\022E\n\027userMonsterThatAttacked\030\005 \001(\0132$." +
+      "com.lvl6.proto.FullUserMonsterProto\022^\n\006s" +
+      "tatus\030\006 \001(\0162N.com.lvl6.proto.AttackClanR" +
+      "aidMonsterResponseProto.AttackClanRaidMo" +
+      "nsterStatus\"\267\001\n\033AttackClanRaidMonsterSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\035\n\031SUCCESS_MONSTER_JUST",
+      "_DIED\020\002\022\031\n\025FAIL_USER_NOT_IN_CLAN\020\003\022\"\n\036FA" +
+      "IL_NO_STAGE_RAID_IN_PROGRESS\020\004\022\035\n\031FAIL_M" +
+      "ONSTER_ALREADY_DEAD\020\005\022\016\n\nFAIL_OTHER\020\006\"~\n" +
+      "%AwardClanRaidStageRewardResponseProto\022\r" +
+      "\n\005crsId\030\001 \001(\005\022F\n\nallRewards\030\002 \003(\01322.com." +
+      "lvl6.proto.PersistentClanEventUserReward" +
+      "Proto\"y\n\037RecordClanRaidStatsRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\020\n\010clanUuid\030\002 \001(\t\022\022\n\nclientTi" +
+      "me\030\003 \001(\003\"\211\002\n RecordClanRaidStatsResponse",
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022Z\n\006status\030\002 \001(\0162J.com.lv" +
+      "l6.proto.RecordClanRaidStatsResponseProt" +
+      "o.RecordClanRaidStatsStatus\"W\n\031RecordCla" +
+      "nRaidStatsStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_MO" +
+      "NSTER_ALREADY_DEAD\020\002\022\016\n\nFAIL_OTHER\020\003\"\253\001\n" +
+      "#PromoteDemoteClanMemberRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\022\n\nvictimUuid\030\002 \001(\t\022>\n\016userClanSt" +
+      "atus\030\003 \001(\0162\036.com.lvl6.proto.UserClanStat",
+      "us:\006MEMBER\"\337\003\n$PromoteDemoteClanMemberRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\0220\n\006victim\030\002 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022>\n\016userC" +
+      "lanStatus\030\003 \001(\0162\036.com.lvl6.proto.UserCla" +
+      "nStatus:\006MEMBER\022B\n\022prevUserClanStatus\030\005 " +
+      "\001(\0162\036.com.lvl6.proto.UserClanStatus:\006MEM" +
+      "BER\022b\n\006status\030\004 \001(\0162R.com.lvl6.proto.Pro" +
+      "moteDemoteClanMemberResponseProto.Promot" +
+      "eDemoteClanMemberStatus\"k\n\035PromoteDemote",
+      "ClanMemberStatus\022\013\n\007SUCCESS\020\001\022\024\n\020FAIL_NO" +
+      "T_IN_CLAN\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\016\n\n" +
+      "FAIL_OTHER\020\004\"\254\001\n\033SolicitClanHelpRequestP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022l\n\006status\030\002 \001(\0162\\.com.lvl" +
-      "6.proto.VoidTeamDonationSolicitationResp" +
-      "onseProto.VoidTeamDonationSolicitationSt" +
-      "atus\022\032\n\022clanTeamDonateUuid\030\003 \003(\t\"A\n\"Void" +
-      "TeamDonationSolicitationStatus\022\013\n\007SUCCES",
-      "S\020\001\022\016\n\nFAIL_OTHER\020\002\"P\n\034CollectClanGiftsR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\"\217\002\n\035CollectClanGif" +
-      "tsResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022/\n\006reward\030\002 \001(" +
-      "\0132\037.com.lvl6.proto.UserRewardProto\022T\n\006st" +
-      "atus\030\003 \001(\0162D.com.lvl6.proto.CollectClanG" +
-      "iftsResponseProto.CollectClanGiftsStatus" +
-      "\"5\n\026CollectClanGiftsStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\016\n\nFAIL_OTHER\020\002\"\216\001\n!ClearExpiredClanGift",
-      "sRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\0227\n\014expiredGifts\030" +
-      "\002 \003(\0132!.com.lvl6.proto.UserClanGiftProto" +
-      "\"\362\001\n\"ClearExpiredClanGiftsResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.pro" +
-      "to.ClearExpiredClanGiftsResponseProto.Cl" +
-      "earExpiredClanGiftsStatus\":\n\033ClearExpire" +
-      "dClanGiftsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
-      "HER\020\002B\020B\016EventClanProto"
+      "nimumUserProto\0223\n\006notice\030\002 \003(\0132#.com.lvl" +
+      "6.proto.ClanHelpNoticeProto\022\022\n\nclientTim" +
+      "e\030\004 \001(\003\022\022\n\nmaxHelpers\030\005 \001(\005\"\242\002\n\034SolicitC" +
+      "lanHelpResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\0220\n\thelpPr" +
+      "oto\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpProto",
+      "\022R\n\006status\030\003 \001(\0162B.com.lvl6.proto.Solici" +
+      "tClanHelpResponseProto.SolicitClanHelpSt" +
+      "atus\"J\n\025SolicitClanHelpStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\016\n\nFAIL_OTHER\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003" +
+      "\"c\n\030GiveClanHelpRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\025" +
+      "\n\rclanHelpUuids\030\002 \003(\t\"\200\002\n\031GiveClanHelpRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\0220\n\tclanHelps\030\002 \003(\013" +
+      "2\035.com.lvl6.proto.ClanHelpProto\022L\n\006statu",
+      "s\030\003 \001(\0162<.com.lvl6.proto.GiveClanHelpRes" +
+      "ponseProto.GiveClanHelpStatus\"1\n\022GiveCla" +
+      "nHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "\"b\n\027EndClanHelpRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n" +
+      "\rclanHelpUuids\030\002 \003(\t\"\341\001\n\030EndClanHelpResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\025\n\rclanHelpUuids\030\002 \003" +
+      "(\t\022J\n\006status\030\003 \001(\0162:.com.lvl6.proto.EndC" +
+      "lanHelpResponseProto.EndClanHelpStatus\"0",
+      "\n\021EndClanHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL" +
+      "_OTHER\020\002\"{\n\030InviteToClanRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\031\n\021prospectiveMember\030\002 \001(\t\022\022\n\ncli" +
+      "entTime\030\003 \001(\003\"\230\002\n\031InviteToClanResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022L\n\006status\030\002 \001(\0162<.com.lvl6" +
+      ".proto.InviteToClanResponseProto.InviteT" +
+      "oClanStatus\022/\n\006invite\030\003 \001(\0132\037.com.lvl6.p" +
+      "roto.ClanInviteProto\"J\n\022InviteToClanStat",
+      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_" +
+      "NOT_AUTHORIZED\020\003\"\322\001\n$AcceptOrRejectClanI" +
+      "nviteRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\0221\n\010accepted\030" +
+      "\002 \001(\0132\037.com.lvl6.proto.ClanInviteProto\0221" +
+      "\n\010rejected\030\003 \003(\0132\037.com.lvl6.proto.ClanIn" +
+      "viteProto\022\022\n\nclientTime\030\004 \001(\003\"\322\002\n%Accept" +
+      "OrRejectClanInviteResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Accep",
+      "tOrRejectClanInviteResponseProto.AcceptO" +
+      "rRejectClanInviteStatus\022;\n\010fullClan\030\003 \001(" +
+      "\0132).com.lvl6.proto.FullClanProtoWithClan" +
+      "Size\"T\n\036AcceptOrRejectClanInviteStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021FAIL_CLAN" +
+      "_IS_FULL\020\003\"\177\n\035RetrieveClanDataResponsePr" +
+      "oto\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022/\n\010clanData\030\002 \001(\0132\035.com.lvl6." +
+      "proto.ClanDataProto\"\236\001\n\035BeginClanAvengin" +
+      "gRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6",
+      ".proto.MinimumUserProto\0227\n\016recentNBattle" +
+      "s\030\002 \003(\0132\037.com.lvl6.proto.PvpHistoryProto" +
+      "\022\022\n\nclientTime\030\003 \001(\003\"\235\002\n\036BeginClanAvengi" +
+      "ngResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\0229\n\rclanAvengin" +
+      "gs\030\002 \003(\0132\".com.lvl6.proto.PvpClanAvengeP" +
+      "roto\022V\n\006status\030\003 \001(\0162F.com.lvl6.proto.Be" +
+      "ginClanAvengingResponseProto.BeginClanAv" +
+      "engingStatus\"6\n\027BeginClanAvengingStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"h\n\033EndClanA",
+      "vengingRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\027\n\017clanAve" +
+      "ngeUuids\030\002 \003(\t\"\363\001\n\034EndClanAvengingRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\027\n\017clanAvengeUuids\030\002 \003" +
+      "(\t\022R\n\006status\030\003 \001(\0162B.com.lvl6.proto.EndC" +
+      "lanAvengingResponseProto.EndClanAvenging" +
+      "Status\"4\n\025EndClanAvengingStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\"\232\001\n\032AvengeClanMateR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p",
+      "roto.MinimumUserProto\0226\n\nclanAvenge\030\002 \001(" +
+      "\0132\".com.lvl6.proto.PvpClanAvengeProto\022\022\n" +
+      "\nclientTime\030\003 \001(\003\"\204\002\n\033AvengeClanMateResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022,\n\006victim\030\002 \001(\0132\030.co" +
+      "m.lvl6.proto.PvpProtoB\002\030\001\022P\n\006status\030\003 \001(" +
+      "\0162@.com.lvl6.proto.AvengeClanMateRespons" +
+      "eProto.AvengeClanMateStatus\"3\n\024AvengeCla" +
+      "nMateStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "\"\233\001\n\037SolicitTeamDonationRequestProto\0220\n\006",
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\013\n\003msg\030\002 \001(\t\022\022\n\npowerLimit\030\003 \001(\005\022" +
+      "\022\n\nclientTime\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\"\354" +
+      "\002\n SolicitTeamDonationResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.S" +
+      "olicitTeamDonationResponseProto.SolicitT" +
+      "eamDonationStatus\022A\n\014solicitation\030\003 \001(\0132" +
+      "+.com.lvl6.proto.ClanMemberTeamDonationP" +
+      "roto\"w\n\031SolicitTeamDonationStatus\022\013\n\007SUC",
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICI" +
+      "ENT_GEMS\020\003\022!\n\035FAIL_FULFILLED_REQUEST_EXI" +
+      "STS\020\004\"\352\001\n+FulfillTeamDonationSolicitatio" +
+      "nRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\0222\n\004fump\030\002 \001(\0132$." +
+      "com.lvl6.proto.FullUserMonsterProto\022\022\n\nc" +
+      "lientTime\030\003 \001(\003\022A\n\014solicitation\030\004 \001(\0132+." +
+      "com.lvl6.proto.ClanMemberTeamDonationPro" +
+      "to\"\235\003\n,FulfillTeamDonationSolicitationRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p",
+      "roto.MinimumUserProto\022r\n\006status\030\002 \001(\0162b." +
+      "com.lvl6.proto.FulfillTeamDonationSolici" +
+      "tationResponseProto.FulfillTeamDonationS" +
+      "olicitationStatus\022A\n\014solicitation\030\003 \001(\0132" +
+      "+.com.lvl6.proto.ClanMemberTeamDonationP" +
+      "roto\"\203\001\n%FulfillTeamDonationSolicitation" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022!\n\035F" +
+      "AIL_NONEXISTENT_SOLICITATION\020\003\022\032\n\026FAIL_A" +
+      "LREADY_FULFILLED\020\004\"\240\001\n(VoidTeamDonationS" +
+      "olicitationRequestProto\0220\n\006sender\030\001 \001(\0132",
+      " .com.lvl6.proto.MinimumUserProto\022B\n\rsol" +
+      "icitations\030\002 \003(\0132+.com.lvl6.proto.ClanMe" +
+      "mberTeamDonationProto\"\252\002\n)VoidTeamDonati" +
+      "onSolicitationResponseProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022l\n" +
+      "\006status\030\002 \001(\0162\\.com.lvl6.proto.VoidTeamD" +
+      "onationSolicitationResponseProto.VoidTea" +
+      "mDonationSolicitationStatus\022\032\n\022clanTeamD" +
+      "onateUuid\030\003 \003(\t\"A\n\"VoidTeamDonationSolic" +
+      "itationStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER",
+      "\020\002\"d\n\034CollectClanGiftsRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\022\n\nclientTime\030\002 \001(\003\"\217\002\n\035CollectClan" +
+      "GiftsResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022/\n\006reward\030\002" +
+      " \001(\0132\037.com.lvl6.proto.UserRewardProto\022T\n" +
+      "\006status\030\003 \001(\0162D.com.lvl6.proto.CollectCl" +
+      "anGiftsResponseProto.CollectClanGiftsSta" +
+      "tus\"5\n\026CollectClanGiftsStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -53810,7 +52323,6 @@ public final class EventClanProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
-          com.lvl6.proto.ClanGiftsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
@@ -54120,28 +52632,15 @@ public final class EventClanProto {
     internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CollectClanGiftsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", });
+        new java.lang.String[] { "Sender", "ClientTime", });
     internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(51);
     internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Reward", "Status", });
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(52);
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpiredGifts", });
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(53);
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ClanProto.getDescriptor();
-    com.lvl6.proto.ClanGiftsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();

@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import com.lvl6.info.BattleItemQueueForUser;
-import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 
 public interface DeleteUtil {
@@ -97,8 +96,5 @@ public interface DeleteUtil {
 			List<BattleItemQueueForUser> biqfuList);
 
 	public abstract int deleteMiniEventGoalForUser(String userId);
-
-	public abstract boolean deleteFromClanGiftForUser(List<ClanGiftForUser> cgfuList);
-
 
 }

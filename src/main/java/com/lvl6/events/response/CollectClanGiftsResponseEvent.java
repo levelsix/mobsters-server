@@ -13,7 +13,7 @@ public class CollectClanGiftsResponseEvent extends NormalResponseEvent {
 
 	public CollectClanGiftsResponseEvent(String playerId) {
 		super(playerId);
-		eventType = EventProtocolResponse.S_COLLECT_CLAN_GIFTS_EVENT;
+		eventType = EventProtocolResponse.S_COLLECT_CLAN_GIFTS;
 	}
 
 	@Override

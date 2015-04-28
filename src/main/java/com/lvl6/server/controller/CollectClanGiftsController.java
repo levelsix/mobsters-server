@@ -18,16 +18,8 @@ import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.CollectClanGiftsAction;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.utilmethods.DeleteUtil;
-import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -44,27 +36,6 @@ public class CollectClanGiftsController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
-	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
-
-	@Autowired
-	protected RewardRetrieveUtils rewardRetrieveUtils;
-
-	@Autowired
-	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-
-	@Autowired
-	protected MonsterStuffUtils monsterStuffUtils;
-
-	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
-	@Autowired
-	protected InsertUtil insertUtil;
-
-	@Autowired
-	protected DeleteUtil deleteUtil;
-
-	@Autowired
 	protected UpdateUtil updateUtil;
 
 	public CollectClanGiftsController() {
@@ -78,7 +49,7 @@ public class CollectClanGiftsController extends EventController {
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_COLLECT_CLAN_GIFTS_EVENT;
+		return EventProtocolRequest.C_UPDATE_USER_STRENGTH_EVENT;
 	}
 
 	@Override
@@ -91,6 +62,7 @@ public class CollectClanGiftsController extends EventController {
 		String userId = senderProto.getUserUuid();
 
 		//all positive numbers, server will change to negative
+		long updatedStrength = reqProto.getUpdatedStrength();
 
 		//set some values to send to the client (the response proto)
 		CollectClanGiftsResponseProto.Builder resBuilder = CollectClanGiftsResponseProto
@@ -122,10 +94,7 @@ public class CollectClanGiftsController extends EventController {
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			CollectClanGiftsAction uusa = new CollectClanGiftsAction(userId, userRetrieveUtils,
-					clanGiftForUserRetrieveUtils, rewardRetrieveUtils, itemForUserRetrieveUtil,
-					monsterStuffUtils, monsterLevelInfoRetrieveUtils, insertUtil, updateUtil,
-					deleteUtil);
+			CollectClanGiftsAction uusa = new CollectClanGiftsAction(userId, updatedStrength, userRetrieveUtils, updateUtil);
 
 			uusa.execute(resBuilder);
 

@@ -2,7 +2,6 @@
 
 import "Battle.proto";
 import "Clan.proto";
-import "ClanGifts.proto";
 import "MonsterStuff.proto";
 import "Reward.proto";
 //import "SharedEnumConfig.proto";
@@ -666,6 +665,7 @@ message VoidTeamDonationSolicitationResponseProto {
 
 message CollectClanGiftsRequestProto {
 	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
 }
 
 message CollectClanGiftsResponseProto {
@@ -679,20 +679,5 @@ message CollectClanGiftsResponseProto {
 	}
 }
 
-//------------------------------------------------------------------------------------------
 
-message ClearExpiredClanGiftsRequestProto {
-	optional MinimumUserProto sender = 1;
-	repeated UserClanGiftProto expiredGifts = 2;
-}
-
-message ClearExpiredClanGiftsResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional ClearExpiredClanGiftsStatus status = 2;
-	
-	enum ClearExpiredClanGiftsStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
-}
 
