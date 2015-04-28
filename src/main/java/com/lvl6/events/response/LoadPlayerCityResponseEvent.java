@@ -34,5 +34,9 @@ public class LoadPlayerCityResponseEvent extends NormalResponseEvent {
 			LoadPlayerCityResponseProto loadPlayerCityResponseProto) {
 		this.loadPlayerCityResponseProto = loadPlayerCityResponseProto;
 	}
+	
+	public int eventSize() {
+		return loadPlayerCityResponseProto.getSerializedSize();
+	}
 
 }

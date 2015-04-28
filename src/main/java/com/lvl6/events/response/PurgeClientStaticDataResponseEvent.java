@@ -27,5 +27,9 @@ public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent {
 			PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto) {
 		this.purgeClientStaticDataResponseProto = purgeClientStaticDataResponseProto;
 	}
+	
+	public int eventSize() {
+		return purgeClientStaticDataResponseProto.getSerializedSize();
+	}
 
 }

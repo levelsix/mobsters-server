@@ -28,4 +28,7 @@ public class PurchaseNormStructureResponseEvent extends NormalResponseEvent {
 		this.purchaseNormStructureResponseProto = purchaseNormStructureResponseProto;
 	}
 
+	public int eventSize() {
+		return purchaseNormStructureResponseProto.getSerializedSize();
+	}
 }

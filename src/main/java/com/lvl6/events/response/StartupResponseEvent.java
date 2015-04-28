@@ -34,5 +34,9 @@ public class StartupResponseEvent extends PreDatabaseResponseEvent {
 			StartupResponseProto StartupResponseProto) {
 		this.startupResponseProto = StartupResponseProto;
 	}
+	
+	public int eventSize() {
+		return startupResponseProto.getSerializedSize();
+	}
 
 }

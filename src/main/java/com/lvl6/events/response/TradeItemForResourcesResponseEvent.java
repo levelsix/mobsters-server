@@ -27,5 +27,9 @@ public class TradeItemForResourcesResponseEvent extends NormalResponseEvent {
 			TradeItemForResourcesResponseProto tradeItemForResourcesResponseProto) {
 		this.tradeItemForResourcesResponseProto = tradeItemForResourcesResponseProto;
 	}
+	
+	public int eventSize() {
+		return tradeItemForResourcesResponseProto.getSerializedSize();
+	}
 
 }

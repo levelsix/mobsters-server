@@ -28,5 +28,10 @@ public class ReceivedRareBoosterPurchaseResponseEvent extends
 			ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto) {
 		this.receivedRareBoosterPurchaseResponseProto = receivedRareBoosterPurchaseResponseProto;
 	}
+	
+	public int eventSize() {
+		return receivedRareBoosterPurchaseResponseProto.getSerializedSize();
+	}
+
 
 }

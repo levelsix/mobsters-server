@@ -27,5 +27,10 @@ public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent {
 			ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto) {
 		this.obstacleRemovalCompleteResponseProto = obstacleRemovalCompleteResponseProto;
 	}
+	
+	public int eventSize() {
+		return obstacleRemovalCompleteResponseProto.getSerializedSize();
+	}
+
 
 }

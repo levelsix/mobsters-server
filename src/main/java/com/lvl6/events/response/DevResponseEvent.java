@@ -27,4 +27,7 @@ public class DevResponseEvent extends NormalResponseEvent {
 		this.devResponseProto = devResponseProto;
 	}
 
+	public int eventSize() {
+		return devResponseProto.getSerializedSize();
+	}
 }

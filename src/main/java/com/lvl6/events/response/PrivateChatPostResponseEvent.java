@@ -31,5 +31,9 @@ public class PrivateChatPostResponseEvent extends NormalResponseEvent {
 	public PrivateChatPostResponseProto getPrivateChatPostResponseProto() { //required for APNS
 		return privateChatPostResponseProto;
 	}
+	
+	public int eventSize() {
+		return privateChatPostResponseProto.getSerializedSize();
+	}
 
 }

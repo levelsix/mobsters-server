@@ -27,5 +27,9 @@ public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent {
 			RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto) {
 		this.retrieveUserMonsterTeamResponseProto = retrieveUserMonsterTeamResponseProto;
 	}
+	
+	public int eventSize() {
+		return retrieveUserMonsterTeamResponseProto.getSerializedSize();
+	}
 
 }

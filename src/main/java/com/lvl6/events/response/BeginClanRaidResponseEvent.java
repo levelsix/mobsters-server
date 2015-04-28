@@ -27,5 +27,9 @@ public class BeginClanRaidResponseEvent extends NormalResponseEvent {
 			BeginClanRaidResponseProto beginClanRaidResponseProto) {
 		this.beginClanRaidResponseProto = beginClanRaidResponseProto;
 	}
+	
+	public int eventSize() {
+		return beginClanRaidResponseProto.getSerializedSize();
+	}
 
 }
