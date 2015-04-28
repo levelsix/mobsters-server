@@ -151,9 +151,6 @@ public class Globals {
 
 	public static final int NET_BUFFER_SIZE = 16384 * 128;
 
-	/** maximum event size in bytes */
-	public static final int MAX_EVENT_SIZE = 16384 * 128;
-
 	/** interval to sleep between attempts to write to a channel. */
 	public static final long CHANNEL_WRITE_SLEEP = 10L;
 

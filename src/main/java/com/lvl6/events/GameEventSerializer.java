@@ -41,7 +41,7 @@ public class GameEventSerializer extends AbstractByteArraySerializer {
 
 	@Override
 	public byte[] deserialize(InputStream inputStream) throws IOException {
-		int maxMessageSize = Globals.MAX_EVENT_SIZE + Attachment.HEADER_SIZE;
+		int maxMessageSize = Globals.NET_BUFFER_SIZE + Attachment.HEADER_SIZE;
 		List<Byte> bytes = new ArrayList<Byte>();
 		int n = 0;
 		int bite;
