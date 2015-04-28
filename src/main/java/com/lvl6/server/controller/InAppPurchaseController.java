@@ -316,36 +316,36 @@ public class InAppPurchaseController extends EventController {
 			InAppPurchaseMoneyTreeAction iapmta = null;
 
 			if(IAPValues.packageIsStarterPack(packageName)) {
-				isStarterPack = true;
-				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
-						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
-						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
-						boosterItemRetrieveUtils, monsterRetrieveUtils,
-						monsterLevelInfoRetrieveUtils);
+//				isStarterPack = true;
+//				iapspa = new InAppPurchaseStarterPackAction(userId, user, receiptFromApple, now,
+//						uuid, iapHistoryRetrieveUtil, itemForUserRetrieveUtil, monsterStuffUtils,
+//						insertUtil, updateUtil, createInfoProtoUtils, miscMethods,
+//						boosterItemRetrieveUtils, monsterRetrieveUtils,
+//						monsterLevelInfoRetrieveUtils);
+//
+//				iapspa.execute(resBuilder);
 
-				iapspa.execute(resBuilder);
+				//for testing
+				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
+						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
 
-//				//for testing
-//				Map<String, SalesPackage> salesPackageNamesToSalesPackages =
-//						salesPackageRetrieveUtils.getSalesPackageNamesToSalesPackages();
-//
-//				for(String name : salesPackageNamesToSalesPackages.keySet()) {
-//					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
-//					if(sp.getUuid().equals(uuid)) {
-//						salesPackage = sp;
-//						log.info("found sales pack");
-//					}
-//				}
-//
-//				isSalesPack = true;
-//				iapsa = new InAppPurchaseSalesAction(userId,
-//						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-//						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
-//						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
-//						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-//						salesPackage);
-//
-//				iapsa.execute(resBuilder);
+				for(String name : salesPackageNamesToSalesPackages.keySet()) {
+					SalesPackage sp = salesPackageNamesToSalesPackages.get(name);
+					if(sp.getUuid().equals(uuid)) {
+						salesPackage = sp;
+						log.info("found sales pack");
+					}
+				}
+
+				isSalesPack = true;
+				iapsa = new InAppPurchaseSalesAction(userId,
+						user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+						itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
+						createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
+						salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
+						salesPackage);
+
+				iapsa.execute(resBuilder);
 			}
 			else if(IAPValues.packageIsMoneyTree(packageName)) {
 				isMoneyTree = true;
