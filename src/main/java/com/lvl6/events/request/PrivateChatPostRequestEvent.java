@@ -35,10 +35,6 @@ public class PrivateChatPostRequestEvent extends RequestEvent {
 		return privateChatPostRequestProto;
 	}
 
-	public void setPrivateChatPostRequestProto(PrivateChatPostRequestProto pcprp) {
-		this.privateChatPostRequestProto = pcprp;
-	}
-
 	@Override
 	public String toString() {
 		return "PrivateChatPostRequestEvent [privateChatPostRequestProto="

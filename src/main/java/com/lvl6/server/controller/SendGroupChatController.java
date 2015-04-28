@@ -49,7 +49,6 @@ import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -96,8 +95,6 @@ public class SendGroupChatController extends EventController {
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
 	}
-
-	private ReceivedGroupChatResponseProto rgcrp;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -176,8 +173,7 @@ public class SendGroupChatController extends EventController {
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 
-				Language contentLanguage = miscMethods.convertFromEnumToLanguage(globalLanguage);
-				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(contentLanguage, censoredChatMessage);
+				Map<TranslateLanguages, String> translateMap = miscMethods.translate(null, null, censoredChatMessage);
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
@@ -191,17 +187,18 @@ public class SendGroupChatController extends EventController {
 
 				chatProto.setMessage(gcmp);
 
+				//legacy implementation
+				chatProto.setChatMessage(censoredChatMessage);
+
                 //legacy implementation
                 chatProto.setChatMessage(censoredChatMessage);
 
-				rgcrp = chatProto.build();
-
-				log.info("receive group chat response proto : {}", rgcrp);
+				ReceivedGroupChatResponseProto rgcr = chatProto.build();
 
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == GroupChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcrp, globalLanguage);
+						censoredChatMessage, rgcr, globalLanguage);
 
 				// send messages in background so sending player can unlock
 				/*
@@ -416,15 +413,5 @@ public class SendGroupChatController extends EventController {
 	public void setClanSearch(ClanSearch clanSearch) {
 		this.clanSearch = clanSearch;
 	}
-
-	public ReceivedGroupChatResponseProto getRgcrp() {
-		return rgcrp;
-	}
-
-	public void setRgcrp(ReceivedGroupChatResponseProto rgcrp) {
-		this.rgcrp = rgcrp;
-	}
-
-
 
 }
