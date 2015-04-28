@@ -184,12 +184,12 @@ public class AdminChatUtil {
 		//		} else {
 
 		PrivateChatPost pwp = new PrivateChatPost(privateChatPostId, posterId,
-				recipientId, timeOfPost, censoredContent, null, ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
+				recipientId, timeOfPost, censoredContent);
 		User poster = users.get(posterId);
 		User recipient = users.get(recipientId);
 		PrivateChatPostProto pcpp = CreateInfoProtoUtils
 				.createPrivateChatPostProtoFromPrivateChatPost(pwp, poster,
-						null, recipient, null, null, null);
+						null, recipient, null);
 		resBuilder.setPost(pcpp);
 
 		// send to recipient of the private chat post

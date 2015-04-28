@@ -1203,8 +1203,7 @@ public class CreateInfoProtoUtils {
 	/** Chat.proto *****************************************************/
 	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPost(
 			PrivateChatPost p, User poster, Clan posterClan, User recipient,
-			Clan recipientClan, Map<TranslateLanguages, String> translatedMessage,
-			TranslateLanguages contentLanguage) {
+			Clan recipientClan) {
 		MinimumUserProtoWithLevel mupwlPoster = createMinimumUserProtoWithLevel(
 				poster, posterClan, null);
 		MinimumUserProtoWithLevel mupwlRecipient = createMinimumUserProtoWithLevel(
@@ -1221,27 +1220,13 @@ public class CreateInfoProtoUtils {
 		pcppb.setTimeOfPost(time);
 		pcppb.setContent(p.getContent());
 
-		if(contentLanguage != null) {
-			pcppb.setOriginalContentLanguage(contentLanguage);
-		}
-
-		if(translatedMessage != null) {
-			for(TranslateLanguages tl : translatedMessage.keySet()) {
-				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-				ttpb.setLanguage(tl);
-				ttpb.setText(translatedMessage.get(tl));
-				pcppb.addTranslatedContent(ttpb.build());
-			}
-		}
-
 		return pcppb.build();
 	}
 
 
 	public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
 			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
-			MinimumUserProtoWithLevel mupwlRecipient,
-			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
+			MinimumUserProtoWithLevel mupwlRecipient) {
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
 
 		pcppb.setPrivateChatPostUuid(p.getId());
@@ -1250,33 +1235,6 @@ public class CreateInfoProtoUtils {
 		pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
 		pcppb.setContent(p.getContent());
 
-		if(p.getContentLanguage() != null) {
-			pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(p.getContentLanguage()));
-		}
-		else {
-			List<TranslationSettingsForUser> tsfu = translationSettingsForUserRetrieveUtil.
-					getUserTranslationSettingsForUserGlobal(p.getPosterId());
-			if(tsfu == null || tsfu.isEmpty()) {
-				pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE));
-			}
-			else pcppb.setOriginalContentLanguage(TranslateLanguages.valueOf(tsfu.get(0).getLanguage()));
-		}
-
-		List<String> chatIds = new ArrayList<String>();
-		chatIds.add(p.getId());
-		Map<String, List<ChatTranslations>> chatTranslationMap = ChatTranslationsRetrieveUtils.
-				getChatTranslationsForSpecificChatIds(chatIds);
-
-		TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-
-		for(String chatId : chatTranslationMap.keySet()) {
-			List<ChatTranslations> list = chatTranslationMap.get(chatId);
-			for(ChatTranslations ct : list) {
-				ttpb.setLanguage(ct.getTranslateLanguage());
-				ttpb.setText(ct.getText());
-				pcppb.addTranslatedContent(ttpb.build());
-			}
-		}
 		return pcppb.build();
 	}
 
@@ -1293,7 +1251,7 @@ public class CreateInfoProtoUtils {
 					.getRecipientId());
 
 			PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-					pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
+					pcp, mupwlPoster, mupwlRecipient);
 
 			pcppList.add(pcpp);
 		}
@@ -1311,8 +1269,7 @@ public class CreateInfoProtoUtils {
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			Map<String, User> userIdsToUsers, List<String> clanlessUserIds,
 			List<String> privateChatPostIds,
-			Map<String, PrivateChatPost> postIdsToPrivateChatPosts,
-			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
+			Map<String, PrivateChatPost> postIdsToPrivateChatPosts) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel = new HashMap<String, MinimumUserProtoWithLevel>();
@@ -1336,7 +1293,7 @@ public class CreateInfoProtoUtils {
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
+						pcp, mupwlPoster, mupwlRecipient);
 				pcppList.add(pcpp);
 			}
 		} else {
@@ -1349,7 +1306,7 @@ public class CreateInfoProtoUtils {
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
+						pcp, mupwlPoster, mupwlRecipient);
 				pcppList.add(pcpp);
 			}
 		}
@@ -1385,8 +1342,7 @@ public class CreateInfoProtoUtils {
 
 	public static GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
-			String chatId, Map<TranslateLanguages, String> translatedMap,
-			TranslateLanguages contentLanguage) {
+			String chatId) {
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
@@ -1395,27 +1351,11 @@ public class CreateInfoProtoUtils {
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
 
-		if(contentLanguage != null) {
-			gcmpb.setContentLanguage(contentLanguage);
-		}
-
-		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
-
-		if(!turnOffTranslation || contentLanguage.toString().equalsIgnoreCase("NO_TRANSLATION")) {
-			if(translatedMap == null) {
-				translatedMap = MiscMethods.translate(null, null, content);
-			}
-			for(TranslateLanguages tl : translatedMap.keySet()) {
-				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-				ttpb.setLanguage(tl);
-				ttpb.setText(translatedMap.get(tl));
-				gcmpb.addTranslatedContent(ttpb.build());
-			}
-		}
-
 		if (chatId != null) {
 			gcmpb.setChatUuid(chatId);
 		}
+		
+		gcmpb.setIsAdmin(isAdmin);
 
 		return gcmpb.build();
 	}

@@ -123,33 +123,33 @@ public class TranslateSelectMessagesAction {
 			return false;
 		}
 
-		if(!languageEnum.toString().equalsIgnoreCase("NO_TRANSLATION")) {
-			if(!listOfPrivateChatPosts.isEmpty()) {
-				privateChatPostMap = new HashMap<String, PrivateChatPost>();
-				Map<String, String> chatIdsToTranslations = new HashMap<String, String>();
-				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
-					String message = pcp.getContent();
-					chatIdsToTranslations.put(pcp.getId(), message);
-					Map<TranslateLanguages, String> translatedMessage = miscMethods.translate(null, language, message);
+//		if(!languageEnum.toString().equalsIgnoreCase("NO_TRANSLATION")) {
+//			if(!listOfPrivateChatPosts.isEmpty()) {
+//				privateChatPostMap = new HashMap<String, PrivateChatPost>();
+//				Map<String, String> chatIdsToTranslations = new HashMap<String, String>();
+//				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
+//					String message = pcp.getContent();
+//					chatIdsToTranslations.put(pcp.getId(), message);
+//					Map<TranslateLanguages, String> translatedMessage = miscMethods.translate(null, language, message);
+//
+//					for(TranslateLanguages tl : translatedMessage.keySet()) {
+//						TranslatedText tt = new TranslatedText();
+//						tt.setLanguage(tl.toString());
+//						tt.setText(translatedMessage.get(tl));
+//						pcp.setTranslatedText(tt);
+//					}
+//					privateChatPostMap.put(pcp.getId(), pcp);
+//				}
 
-					for(TranslateLanguages tl : translatedMessage.keySet()) {
-						TranslatedText tt = new TranslatedText();
-						tt.setLanguage(tl.toString());
-						tt.setText(translatedMessage.get(tl));
-						pcp.setTranslatedText(tt);
-					}
-					privateChatPostMap.put(pcp.getId(), pcp);
-				}
-
-				boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
-						listOfPrivateChatPosts, chatTranslationsRetrieveUtils);
-
-				if(successfulTranslationInsertion) {
-					return true;
-				}
-				else return false;
-			}
-		}
+//				boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
+//						listOfPrivateChatPosts, chatTranslationsRetrieveUtils);
+//
+//				if(successfulTranslationInsertion) {
+//					return true;
+//				}
+//				else return false;
+//			}
+//		}
 
 		return successfulUpdate;
 	}

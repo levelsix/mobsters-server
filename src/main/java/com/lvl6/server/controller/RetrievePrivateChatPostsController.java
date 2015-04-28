@@ -153,77 +153,24 @@ public class RetrievePrivateChatPostsController extends EventController {
 							chatIds.add(pcp.getId());
 						}
 
-						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
-						Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();
-
-						if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
-							chatIdsToTranslations = 
-									ChatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
-
-							//this map holds the correct translation based on language sent
-							List<String> chatIdsToBeTranslated = new ArrayList<String>();
-
-							log.info("{}", chatIdsToTranslations);
-
-							for(String chatId : chatIdsToTranslations.keySet()) {
-								List<ChatTranslations> chatTranslationsList = chatIdsToTranslations.get(chatId);
-								for(ChatTranslations ct : chatTranslationsList) {
-									//maybe can do ==? idk this seems safer just in case
-									if(ct.getTranslateLanguage().toString().equalsIgnoreCase(translateLanguage.toString())) {
-										returnMap.put(chatId, ct);
-									}
-								}
-								//if we did not already have a translation
-								if(!returnMap.containsKey(chatId)) {
-									chatIdsToBeTranslated.add(chatId);
-								}
-							}
-						}
 
 						//convert private chat post to group chat message proto
 						for (PrivateChatPost pwp : recentPrivateChatPosts) {
 							log.info("private chat post id: " + pwp.getId());
 							String posterId = pwp.getPosterId();
-							String contentLanguage = pwp.getContentLanguage();
-
-							if(contentLanguage == null || contentLanguage.isEmpty()) {
-								List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-										getUserTranslationSettingsForUserGlobal(posterId);
-								if(tsfuList == null || tsfuList.isEmpty()) {
-									contentLanguage = ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE;
-								}
-								else contentLanguage = tsfuList.get(0).getLanguage();
-							}
 
 							long time = pwp.getTimeOfPost().getTime();
 							MinimumUserProtoWithLevel user = userIdsToMups
 									.get(posterId);
 							String content = pwp.getContent();
 							boolean isAdmin = false;
-							Map<TranslateLanguages, String> translateMap = new HashMap<TranslateLanguages, String>();
 
 							String chatId = pwp.getId();
-							if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
-								if(returnMap.containsKey(chatId)) {
-									translateMap.put(returnMap.get(chatId).getTranslateLanguage(), returnMap.get(chatId).getText());
-								}
-								else {
-									Language language = MiscMethods.convertFromEnumToLanguage(translateLanguage);
-									translateMap = MiscMethods.translate(null, language, pwp.getContent());
-								}
 
-								log.info("private chat post content language: " + contentLanguage);
-								GroupChatMessageProto gcmp = createInfoProtoUtils
-										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
-								resBuilder.addPosts(gcmp);
-							} else {
-								GroupChatMessageProto gcmp = CreateInfoProtoUtils
-										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
-								resBuilder.addPosts(gcmp);
-							}
-
+							GroupChatMessageProto gcmp = CreateInfoProtoUtils
+									.createGroupChatMessageProto(time, user,
+											content, isAdmin, chatId);
+							resBuilder.addPosts(gcmp);
 						}
 					}
 				}

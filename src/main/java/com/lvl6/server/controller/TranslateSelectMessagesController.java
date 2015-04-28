@@ -210,11 +210,7 @@ public class TranslateSelectMessagesController extends EventController {
 			pcppb.setRecipient(pcpp.getRecipient());
 			pcppb.setTimeOfPost(pcpp.getTimeOfPost());
 			pcppb.setContent(pcpp.getContent());
-			TranslatedText tt = privateChatPostMap.get(id).getTranslatedText();
-			TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-			ttpb.setLanguage(TranslateLanguages.valueOf(tt.getLanguage()));
-			ttpb.setText(tt.getText());
-			pcppb.addTranslatedContent(ttpb.build());
+			
 			returnList.add(pcppb.build());
 		}
 		return returnList;

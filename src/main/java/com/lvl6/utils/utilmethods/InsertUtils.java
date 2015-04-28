@@ -806,9 +806,10 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, content);
 		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
 				timeOfPost);
-		insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE,
-				contentLanguage);
-
+		if(contentLanguage != null) {
+			insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE,
+					contentLanguage);
+		}
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				DBConstants.TABLE_USER_PRIVATE_CHAT_POST, insertParams);
 		if (numChanged != 1) {
@@ -906,51 +907,6 @@ public class InsertUtils implements InsertUtil {
 			return false;
 		}
 		return true;
-
-	}
-
-	@Override
-	public boolean insertMultipleDefaultTranslateSettings(Map<String, String> pairsOfChats) {
-		String tablename = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
-
-		//did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
-		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-		int numRows = pairsOfChats.size();
-		List<String> ids = new ArrayList<String>();
-		List<String> posterIds = new ArrayList<String>();
-		List<String> recipientIds = new ArrayList<String>();
-		List<String> language = new ArrayList<String>();
-		List<String> chatType = new ArrayList<String>();
-		List<Boolean> translationsOn = new ArrayList<Boolean>();
-
-		for(String posterId : pairsOfChats.keySet()) {
-			ids.add(randomUUID());
-			posterIds.add(posterId);
-			recipientIds.add(pairsOfChats.get(posterId));
-			language.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
-			chatType.add(ChatType.PRIVATE_CHAT.toString());
-			translationsOn.add(ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
-		}
-
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__ID,
-				ids);
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID,
-				recipientIds);
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__SENDER_USER_ID,
-				posterIds);
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__LANGUAGE,
-				language);
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE,
-				chatType);
-		insertParams.put(DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
-				translationsOn);
-
-		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-				tablename, insertParams, numRows);
-
-		if(numInserted == numRows)
-			return true;
-		else return false;
 
 	}
 
@@ -2686,64 +2642,6 @@ public class InsertUtils implements InsertUtil {
 
 	}
 
-	@Override
-	public boolean insertMultipleTranslationsForPrivateChat(
-			List<PrivateChatPost> listOfPrivateChatPosts,
-			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
-		if(listOfPrivateChatPosts == null) {
-			log.error("map containing ids to translations is null");
-		}
-
-		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
-		int size = listOfPrivateChatPosts.size();
-		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-
-		List<String> idList = new ArrayList<String>();
-		List<String> chatTypeList = new ArrayList<String>();
-		List<String> chatIdList = new ArrayList<String>();
-		List<String> languageList = new ArrayList<String>();
-		List<String> textList = new ArrayList<String>();
-
-		try {
-			for(PrivateChatPost pcp : listOfPrivateChatPosts) {
-				String id = randomUUID();
-				String chatId = pcp.getId();
-				idList.add(id);
-				chatTypeList.add(ChatType.PRIVATE_CHAT.toString());
-				chatIdList.add(chatId);
-				languageList.add(pcp.getTranslatedText().getLanguage());
-				textList.add(pcp.getTranslatedText().getText());
-
-				//adding to the cached table
-				ChatTranslations ct = new ChatTranslations();
-				ct.setId(id);
-				ct.setChatId(chatId);
-				ct.setChatType(ChatType.PRIVATE_CHAT);
-				ct.setTranslateLanguage(TranslateLanguages.
-						valueOf(pcp.getTranslatedText().getLanguage()));
-				ct.setText(pcp.getTranslatedText().getText());
-				ChatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error("error converting language to string");
-			e.printStackTrace();
-		}
-
-		insertParams.put(DBConstants.CHAT_TRANSLATIONS__ID, idList);
-		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_TYPE, chatTypeList);
-		insertParams.put(DBConstants.CHAT_TRANSLATIONS__CHAT_ID, chatIdList);
-		insertParams.put(DBConstants.CHAT_TRANSLATIONS__LANGUAGE, languageList);
-		insertParams.put(DBConstants.CHAT_TRANSLATIONS__TEXT, textList);
-
-		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-				tableName, insertParams, size);
-
-		if (numInserted == size) {
-			return true;
-		} else
-			return false;
-	}
 
 
 

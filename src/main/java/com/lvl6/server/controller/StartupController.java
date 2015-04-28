@@ -692,26 +692,12 @@ public class StartupController extends EventController {
 			fillMe.addUserId(user.getId());
 
 			//get translationsettingforuser list of the player to check for defaults
-			List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-					getUserTranslationSettingsForUser(playerId);
-			boolean tsfuListIsNull = false;
-
-			if(tsfuList == null || tsfuList.isEmpty()) {
-				insertUtil.insertTranslateSettings(playerId, null,
-						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
-						ChatType.GLOBAL_CHAT.toString(),
-						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
-				tsfuListIsNull = true;
-			}
-
-			List<TranslationSettingsForUser> updatedTsfuList = translationSettingsForUserRetrieveUtil.
-					getUserTranslationSettingsForUser(playerId);
 
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 					resBuilder, user, playerId,
-					getPrivateChatPostRetrieveUtils(), tsfuListIsNull, insertUtil,
-					createInfoProtoUtils, translationSettingsForUserRetrieveUtil,
-					updatedTsfuList);
+					getPrivateChatPostRetrieveUtils(), insertUtil,
+					createInfoProtoUtils
+					);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 
@@ -758,10 +744,6 @@ public class StartupController extends EventController {
 
 			spcma.execute(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
-
-			//set this proto after executing privatechatprotos
-			setDefaultLanguagesForUser(resBuilder, playerId);
-			log.info("{}ms at setDefaultLanguagesForUser", stopWatch.getTime());
 
 
 			sfesa.execute(fillMe);
@@ -1623,29 +1605,6 @@ public class StartupController extends EventController {
 					.convertBattleItemForUserListToBattleItemForUserProtoList(bifuList);
 
 			resBuilder.addAllBattleItem(biqfupList);
-		}
-	}
-
-
-	private void setDefaultLanguagesForUser(Builder resBuilder, String userId) {
-
-		//		TranslationSettingsForUser tsfu = translationSettingsForUserRetrieveUtil.
-		//				getSpecificUserGlobalTranslationSettings(userId, ChatType.GLOBAL_CHAT);
-
-		List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-				getUserTranslationSettingsForUser(userId);
-
-		log.info("tsfuList: " + tsfuList);
-
-		DefaultLanguagesProto dlp = null;
-
-		if(tsfuList != null && !tsfuList.isEmpty()) {
-			dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
-		}
-
-		//if there's no default languages, they havent ever been set
-		if (null != dlp) {
-			resBuilder.setUserDefaultLanguages(dlp);
 		}
 	}
 

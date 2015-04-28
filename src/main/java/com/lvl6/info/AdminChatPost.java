@@ -10,15 +10,13 @@ public class AdminChatPost extends PrivateChatPost {
 
 	public AdminChatPost(String id, String posterId, String recipientId,
 			Date timeOfPost, String content) {
-		super(id, posterId, recipientId, timeOfPost, content, null, 
-				ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
+		super(id, posterId, recipientId, timeOfPost, content);
 		//setUsername(username);
 	}
 
 	public AdminChatPost(String id, String posterId, String recipientId,
 			Date timeOfPost, String content, String username) {
-		super(id, posterId, recipientId, timeOfPost, content, null, 
-				ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
+		super(id, posterId, recipientId, timeOfPost, content);
 		setUsername(username);
 	}
 
