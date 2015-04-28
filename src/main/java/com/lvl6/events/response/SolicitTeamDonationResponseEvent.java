@@ -27,5 +27,9 @@ public class SolicitTeamDonationResponseEvent extends NormalResponseEvent {
 			SolicitTeamDonationResponseProto solicitTeamDonationResponseProto) {
 		this.solicitTeamDonationResponseProto = solicitTeamDonationResponseProto;
 	}
+	
+	public int eventSize() {
+		return solicitTeamDonationResponseProto.getSerializedSize();
+	}
 
 }

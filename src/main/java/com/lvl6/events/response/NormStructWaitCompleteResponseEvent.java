@@ -27,5 +27,9 @@ public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent {
 			NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto) {
 		this.normStructWaitCompleteResponseProto = normStructWaitCompleteResponseProto;
 	}
+	
+	public int eventSize() {
+		return normStructWaitCompleteResponseProto.getSerializedSize();
+	}
 
 }

@@ -27,5 +27,9 @@ public class SolicitClanHelpResponseEvent extends NormalResponseEvent {
 			SolicitClanHelpResponseProto solicitClanHelpResponseProto) {
 		this.solicitClanHelpResponseProto = solicitClanHelpResponseProto;
 	}
+	
+	public int eventSize() {
+		return solicitClanHelpResponseProto.getSerializedSize();
+	}
 
 }

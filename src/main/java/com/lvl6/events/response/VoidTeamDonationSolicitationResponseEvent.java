@@ -28,5 +28,9 @@ public class VoidTeamDonationSolicitationResponseEvent extends
 			VoidTeamDonationSolicitationResponseProto voidTeamDonationSolicitationResponseProto) {
 		this.voidTeamDonationSolicitationResponseProto = voidTeamDonationSolicitationResponseProto;
 	}
+	
+	public int eventSize() {
+		return voidTeamDonationSolicitationResponseProto.getSerializedSize();
+	}
 
 }

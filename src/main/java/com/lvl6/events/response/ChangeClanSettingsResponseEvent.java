@@ -28,4 +28,7 @@ public class ChangeClanSettingsResponseEvent extends NormalResponseEvent {
 		this.changeClanSettingsResponseProto = changeClanSettingsResponseProto;
 	}
 
+	public int eventSize() {
+		return changeClanSettingsResponseProto.getSerializedSize();
+	}
 }

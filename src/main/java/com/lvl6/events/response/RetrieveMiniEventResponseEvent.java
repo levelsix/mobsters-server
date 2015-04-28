@@ -27,5 +27,9 @@ public class RetrieveMiniEventResponseEvent extends NormalResponseEvent {
 			RetrieveMiniEventResponseProto retrieveMiniEventResponseProto) {
 		this.retrieveMiniEventResponseProto = retrieveMiniEventResponseProto;
 	}
+	
+	public int eventSize() {
+		return retrieveMiniEventResponseProto.getSerializedSize();
+	}
 
 }

@@ -27,5 +27,9 @@ public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent {
 			AwardClanRaidStageRewardResponseProto awardClanRaidStageRewardResponseProto) {
 		this.awardClanRaidStageRewardResponseProto = awardClanRaidStageRewardResponseProto;
 	}
+	
+	public int eventSize() {
+		return awardClanRaidStageRewardResponseProto.getSerializedSize();
+	}
 
 }

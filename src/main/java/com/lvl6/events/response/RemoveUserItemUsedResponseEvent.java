@@ -27,5 +27,9 @@ public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent {
 			RemoveUserItemUsedResponseProto removeUserItemUsedResponseProto) {
 		this.removeUserItemUsedResponseProto = removeUserItemUsedResponseProto;
 	}
+	
+	public int eventSize() {
+		return removeUserItemUsedResponseProto.getSerializedSize();
+	}
 
 }

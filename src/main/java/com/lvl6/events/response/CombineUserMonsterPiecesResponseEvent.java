@@ -31,5 +31,9 @@ public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent {
 	public CombineUserMonsterPiecesResponseProto getCombineUserMonsterPiecesResponseProto() {   //because APNS required
 		return combineMonsterPiecesResponseProto;
 	}
+	
+	public int eventSize() {
+		return combineMonsterPiecesResponseProto.getSerializedSize();
+	}
 
 }

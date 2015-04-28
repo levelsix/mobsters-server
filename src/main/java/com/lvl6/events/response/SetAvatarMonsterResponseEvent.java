@@ -27,5 +27,9 @@ public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
 			SetAvatarMonsterResponseProto setAvatarMonsterResponseProto) {
 		this.setAvatarMonsterResponseProto = setAvatarMonsterResponseProto;
 	}
+	
+	public int eventSize() {
+		return setAvatarMonsterResponseProto.getSerializedSize();
+	}
 
 }

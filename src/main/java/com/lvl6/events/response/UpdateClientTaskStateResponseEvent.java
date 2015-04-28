@@ -31,5 +31,8 @@ public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent {
 	public UpdateClientTaskStateResponseProto getUpdateClientTaskStateResponseProto() {   //because APNS required
 		return updateClientTaskStateResponseProto;
 	}
+	public int eventSize() {
+		return updateClientTaskStateResponseProto.getSerializedSize();
+	}
 
 }

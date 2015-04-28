@@ -27,5 +27,9 @@ public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent {
 			PromoteDemoteClanMemberResponseProto promoteDemoteClanMemberResponseProto) {
 		this.promoteDemoteClanMemberResponseProto = promoteDemoteClanMemberResponseProto;
 	}
+	
+	public int eventSize() {
+		return promoteDemoteClanMemberResponseProto.getSerializedSize();
+	}
 
 }
