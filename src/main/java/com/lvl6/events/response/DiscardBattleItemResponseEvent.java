@@ -27,5 +27,9 @@ public class DiscardBattleItemResponseEvent extends NormalResponseEvent {
 			DiscardBattleItemResponseProto discardBattleItemResponseProto) {
 		this.discardBattleItemResponseProto = discardBattleItemResponseProto;
 	}
+	
+	public int eventSize() {
+		return discardBattleItemResponseProto.getSerializedSize();
+	}
 
 }

@@ -31,5 +31,9 @@ public class EndDungeonResponseEvent extends NormalResponseEvent {
 	public EndDungeonResponseProto getEndDungeonResponseProto() {   //because APNS required
 		return endDungeonResponseProto;
 	}
+	
+	public int eventSize() {
+		return endDungeonResponseProto.getSerializedSize();
+	}
 
 }

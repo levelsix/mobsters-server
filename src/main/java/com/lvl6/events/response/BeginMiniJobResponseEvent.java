@@ -27,5 +27,9 @@ public class BeginMiniJobResponseEvent extends NormalResponseEvent {
 			BeginMiniJobResponseProto beginMiniJobResponseProto) {
 		this.beginMiniJobResponseProto = beginMiniJobResponseProto;
 	}
+	
+	public int eventSize() {
+		return beginMiniJobResponseProto.getSerializedSize();
+	}
 
 }

@@ -27,5 +27,9 @@ public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent {
 			TranslateSelectMessagesResponseProto translateSelectMessagesResponseProto) {
 		this.translateSelectMessagesResponseProto = translateSelectMessagesResponseProto;
 	}
+	
+	public int eventSize() {
+		return translateSelectMessagesResponseProto.getSerializedSize();
+	}
 
 }

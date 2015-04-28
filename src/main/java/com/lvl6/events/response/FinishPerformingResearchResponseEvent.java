@@ -27,5 +27,9 @@ public class FinishPerformingResearchResponseEvent extends NormalResponseEvent {
 			FinishPerformingResearchResponseProto finishPerformingResearchResponseProto) {
 		this.finishPerformingResearchResponseProto = finishPerformingResearchResponseProto;
 	}
+	
+	public int eventSize() {
+		return finishPerformingResearchResponseProto.getSerializedSize();
+	}
 
 }

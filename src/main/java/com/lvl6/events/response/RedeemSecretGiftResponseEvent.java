@@ -27,5 +27,9 @@ public class RedeemSecretGiftResponseEvent extends NormalResponseEvent {
 			RedeemSecretGiftResponseProto redeemSecretGiftResponseProto) {
 		this.redeemSecretGiftResponseProto = redeemSecretGiftResponseProto;
 	}
+	
+	public int eventSize() {
+		return redeemSecretGiftResponseProto.getSerializedSize();
+	}
 
 }

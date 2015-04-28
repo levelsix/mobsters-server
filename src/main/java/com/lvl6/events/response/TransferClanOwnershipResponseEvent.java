@@ -34,5 +34,9 @@ public class TransferClanOwnershipResponseEvent extends NormalResponseEvent {
 			TransferClanOwnershipResponseProto transferClanOwnershipResponseProto) {
 		this.transferClanOwnershipResponseProto = transferClanOwnershipResponseProto;
 	}
+	
+	public int eventSize() {
+		return transferClanOwnershipResponseProto.getSerializedSize();
+	}
 
 }

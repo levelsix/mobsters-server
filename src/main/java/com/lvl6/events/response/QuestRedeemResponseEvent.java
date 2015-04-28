@@ -28,4 +28,7 @@ public class QuestRedeemResponseEvent extends NormalResponseEvent {
 		this.questRedeemResponseProto = questRedeemResponseProto;
 	}
 
+	public int eventSize() {
+		return questRedeemResponseProto.getSerializedSize();
+	}
 }

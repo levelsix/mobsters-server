@@ -27,5 +27,9 @@ public class QuestAcceptResponseEvent extends NormalResponseEvent {
 			QuestAcceptResponseProto questAcceptResponseProto) {
 		this.questAcceptResponseProto = questAcceptResponseProto;
 	}
+	
+	public int eventSize() {
+		return questAcceptResponseProto.getSerializedSize();
+	}
 
 }

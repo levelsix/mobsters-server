@@ -28,5 +28,9 @@ public class EnhancementWaitTimeCompleteResponseEvent extends
 			EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto) {
 		this.enhancementWaitTimeCompleteResponseProto = enhancementWaitTimeCompleteResponseProto;
 	}
+	
+	public int eventSize() {
+		return enhancementWaitTimeCompleteResponseProto.getSerializedSize();
+	}
 
 }
