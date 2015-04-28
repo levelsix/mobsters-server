@@ -8,11 +8,14 @@ src/main/resources/KingdomAPNSProdKey.p12
 #java specific
 *.class
 
+
+
 #eclipse
 .project
 .classpath
 .settings/
 .metadata
+.cache
 
 target/
 */target/
