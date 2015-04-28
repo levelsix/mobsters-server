@@ -26,7 +26,7 @@ public class NIOUtils {
 	public static ByteBuffer prepBuffer(ResponseEvent event) {
 
 		ByteBuffer writeBuffer = ByteBuffer
-				.allocateDirect(Globals.MAX_EVENT_SIZE);
+				.allocateDirect(event.eventSize()+Attachment.HEADER_SIZE);
 		
 		// write header
 		writeBuffer.clear();
