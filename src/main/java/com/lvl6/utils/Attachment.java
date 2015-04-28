@@ -54,7 +54,6 @@ public class Attachment {
 	 * constructor. initializes the payload array and the read buffer
 	 */
 	public Attachment() {
-		payload = new byte[Globals.MAX_EVENT_SIZE];
 		readBuff = ByteBuffer.allocateDirect(Globals.NET_BUFFER_SIZE);
 		readBuff.order(getByteOrder());
 	}
@@ -92,15 +91,10 @@ public class Attachment {
 			eventType = EventProtocolRequest.valueOf(readBuff.getInt());
 			tag = readBuff.getInt();
 			payloadSize = readBuff.getInt();
+			payload = new byte[payloadSize];
 			log.debug("Read event type: " + eventType + " and size: "
 					+ payloadSize);
 
-			// check bounds on the payload
-			if (payloadSize > Globals.MAX_EVENT_SIZE)
-				throw new IllegalArgumentException(
-						"Header specifies payload size (" + payloadSize
-								+ ") greater than MAX_EVENT_SIZE("
-								+ Globals.MAX_EVENT_SIZE + ")");
 			gotHeader = true;
 			return true;
 		} else {
