@@ -171,16 +171,21 @@ public class RetrieveMiniEventAction {
 			return true;
 		}
 
-		Collection<MiniEventGoal> goals = miniEventGoalRetrieveUtils
-				.getGoalsForMiniEventId(miniEventId);
-		if (null == goals || goals.isEmpty()) {
-			log.error("MiniEvent with id has no goals. UserMiniEvent={}", mefu);
-			return false;
+		int userLvl = mefu.getUserLvl();
+		boolean valid = retrieveMiniEventRelatedData(miniEventId, userLvl);
+		if (!valid) {
+			//if for whatever reason there is no longer a MiniEventForPlayerLevel
+			//treat as if the user does not have a MiniEvent
+			log.error("WTF...missing MiniEvent data. So, invalid mefu={}",
+					mefu);
+			mefu = null;
+			cleanUp();
+			return true;
 		}
 
 		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(userId);
 
-		boolean allRewardsCollected = verifyRewardsCollected(goals);
+		boolean allRewardsCollected = verifyRewardsCollected();
 		replaceExistingUserMiniEvent = false;
 
 		if (allRewardsCollected) {
@@ -203,7 +208,6 @@ public class RetrieveMiniEventAction {
 
 		//prove that he didn't complete the clan achievements
 		Integer[] clanAchievementIds = ControllerConstants.CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS;
-		@SuppressWarnings("unchecked")
 		List<Integer> caIdList = java.util.Arrays.asList(clanAchievementIds);
 
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = achievementForUserRetrieveUtil
@@ -227,17 +231,13 @@ public class RetrieveMiniEventAction {
 		}
 	}
 
-	private boolean verifyRewardsCollected(Collection<MiniEventGoal> goals) {
-		int miniEventId = mefu.getMiniEventId();
-		int curLvl = u.getLevel();
-
-		MiniEventForPlayerLvl mefpl = miniEventForPlayerLvlRetrieveUtils
-				.getMiniEventForPlayerLvl(miniEventId, curLvl);
+	private boolean verifyRewardsCollected()
+	{
 
 		int curPts = calculateCurrentPts(goals);
-		int tierOne = mefpl.getTierOneMinPts();
-		int tierTwo = mefpl.getTierTwoMinPts();
-		int tierThree = mefpl.getTierThreeMinPts();
+		int tierOne = lvlEntered.getTierOneMinPts();
+		int tierTwo = lvlEntered.getTierTwoMinPts();
+		int tierThree = lvlEntered.getTierThreeMinPts();
 
 		if (curPts < tierOne)
 		{
@@ -325,7 +325,8 @@ public class RetrieveMiniEventAction {
 
 		if (!success) {
 			log.warn("unable to continue processNonexistentUserMiniEvent()");
-			return success;
+			curActiveMiniEvent = null;
+			return true;
 		}
 
 		log.info("processNonexistentUserMiniEvent, newEvent:{}", curActiveMiniEvent);
@@ -339,12 +340,12 @@ public class RetrieveMiniEventAction {
 
 	private boolean retrieveMiniEventRelatedData(int meId, int userLvl)
 	{
+
 		lvlEntered = miniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvl(meId, userLvl);
-
 		if (null == lvlEntered) {
 			log.error("miniEvent doesn't have MiniEventForPlayerLvl. miniEvent={}",
-					 curActiveMiniEvent);
+					curActiveMiniEvent);
 			return false;
 		}
 
@@ -376,15 +377,19 @@ public class RetrieveMiniEventAction {
 
 	private boolean insertUpdateUserMiniEvent(int meId, int userLvl)
 	{
-		//in case the user has remnants from previous MiniEvents
-		int numDeleted = deleteUtil.deleteMiniEventGoalForUser(userId);
-		log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
+		cleanUp();
 
 		//active MiniEvent going on and user doesn't have one so create one
 		mefu = generateNewMiniEvent(meId, userLvl);
 
 		log.info("inserting/updating. mefu={}", mefu);
 		return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
+	}
+
+	private void cleanUp() {
+		//in case the user has remnants from previous MiniEvents
+		int numDeleted = deleteUtil.deleteMiniEventGoalForUser(userId);
+		log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
 	}
 
 	private MiniEventForUser generateNewMiniEvent(int meId, int userLvl) {
