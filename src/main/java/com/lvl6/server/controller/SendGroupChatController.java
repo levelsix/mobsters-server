@@ -177,6 +177,8 @@ public class SendGroupChatController extends EventController {
 								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
 				
 				chatProto.setMessage(gcmp);	
+				
+				chatProto.setChatMessage(censoredChatMessage);
 
 				ReceivedGroupChatResponseProto rgcr = chatProto.build();
 				
