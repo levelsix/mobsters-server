@@ -13,7 +13,7 @@ public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
 
 	public DeleteClanGiftsResponseEvent(String playerId) {
 		super(playerId);
-		eventType = EventProtocolResponse.S_CLEAR_EXPIRED_CLAN_GIFTS_EVENT;
+		eventType = EventProtocolResponse.S_DELETE_CLAN_GIFTS_EVENT;
 	}
 
 	@Override

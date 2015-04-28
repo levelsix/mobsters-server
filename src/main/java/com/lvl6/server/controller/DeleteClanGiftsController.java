@@ -84,7 +84,7 @@ public class DeleteClanGiftsController extends EventController {
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT;
+		return EventProtocolRequest.C_DELETE_CLAN_GIFTS_EVENT;
 	}
 
 	@Override
