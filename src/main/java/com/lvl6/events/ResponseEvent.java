@@ -20,6 +20,8 @@ public abstract class ResponseEvent extends GameEvent {
 	public EventProtocolResponse getEventType() {
 		return eventType;
 	}
+	
+	public abstract int eventSize();
 
 	public abstract int write(ByteBuffer bb);
 
