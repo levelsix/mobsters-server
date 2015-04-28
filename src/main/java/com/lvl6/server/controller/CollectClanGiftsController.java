@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectClanGiftsRequestEvent;
 import com.lvl6.events.response.CollectClanGiftsResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsRequestProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus;
@@ -137,11 +138,11 @@ public class CollectClanGiftsController extends EventController {
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-//				UpdateClientUserResponseEvent resEventUpdate = miscMethods
-//						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-//								uusa.getUser(), null, null);
-//				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								uusa.getUser(), null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
 
 			}
 
