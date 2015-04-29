@@ -180,6 +180,29 @@ public class RetrievePrivateChatPostsController extends EventController {
 							}
 						}
 
+						List<String> allUserIds = new ArrayList<String>();
+						List<String> userIdsWithoutContentLanguage = new ArrayList<String>();
+						
+						for(PrivateChatPost pwp : recentPrivateChatPosts) {
+							String posterId = pwp.getPosterId();
+							allUserIds.add(posterId);
+							String contentLanguage = pwp.getContentLanguage();
+							if(contentLanguage == null || contentLanguage.isEmpty()) {
+								userIdsWithoutContentLanguage.add(posterId);
+							}	
+						}
+						
+						Map<String, TranslationSettingsForUser> tsfuMap = translationSettingsForUserRetrieveUtil.
+								getUserTranslationSettingsMapForUsersGlobal(userIdsWithoutContentLanguage);
+						Map<String, String> userIdsToContentLanguage = new HashMap<String, String>();
+						
+						for(String uId : allUserIds) {
+							if(!tsfuMap.containsKey(uId)) {
+								userIdsToContentLanguage.put(uId, ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
+							}
+							else userIdsToContentLanguage.put(uId, tsfuMap.get(uId).getLanguage()); 
+						}
+						
 						//convert private chat post to group chat message proto
 						for (PrivateChatPost pwp : recentPrivateChatPosts) {
 							log.info("private chat post id: " + pwp.getId());
@@ -187,12 +210,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 							String contentLanguage = pwp.getContentLanguage();
 
 							if(contentLanguage == null || contentLanguage.isEmpty()) {
-								List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-										getUserTranslationSettingsForUserGlobal(posterId);
-								if(tsfuList == null || tsfuList.isEmpty()) {
-									contentLanguage = ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE;
-								}
-								else contentLanguage = tsfuList.get(0).getLanguage();
+								contentLanguage = userIdsToContentLanguage.get(posterId);
 							}
 
 							long time = pwp.getTimeOfPost().getTime();
