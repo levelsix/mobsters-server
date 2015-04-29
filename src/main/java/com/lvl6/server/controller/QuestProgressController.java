@@ -55,7 +55,7 @@
 //  protected UpdateUtil updateUtil;
 //  
 //  public QuestProgressController() {
-//    numAllocatedThreads = 5;
+//    
 //  }
 //  
 //  @Override
@@ -69,7 +69,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestProgressRequestProto reqProto = ((QuestProgressRequestEvent)event).getQuestProgressRequestProto();
 //    
 //    log.info("reqProto=" + reqProto);

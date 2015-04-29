@@ -43,7 +43,7 @@
 //  protected Locker locker;
 //
 //  public EnhanceMonsterController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -57,7 +57,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EnhanceMonsterRequestProto reqProto = ((EnhanceMonsterRequestEvent)event).getEnhanceMonsterRequestProto();
 //
 //    log.info(

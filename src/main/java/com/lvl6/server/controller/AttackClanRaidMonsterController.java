@@ -113,7 +113,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 
 	public AttackClanRaidMonsterController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public class AttackClanRaidMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AttackClanRaidMonsterRequestProto reqProto = ((AttackClanRaidMonsterRequestEvent) event)
 				.getAttackClanRaidMonsterRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -247,10 +247,10 @@ public class AttackClanRaidMonsterController extends EventController {
 					.getStatus())
 					|| AttackClanRaidMonsterStatus.SUCCESS_MONSTER_JUST_DIED
 							.equals(resBuilder.getStatus())) {
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				if (!allRewards.isEmpty()) {
-					setClanEventRewards(allRewards, eventDetails);
+					setClanEventRewards(allRewards, eventDetails, responses);
 				}
 			}
 
@@ -726,7 +726,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 		if (null == nextCrsFirstCrsm) {
 			//WTF???
-			throw new Exception(String.format(
+			throw new RuntimeException(String.format(
 					"WTF!!!! clan raid stage has no monsters! >:( crs=%s",
 					nextStage));
 		}
@@ -962,7 +962,7 @@ public class AttackClanRaidMonsterController extends EventController {
 	//there are rewards
 	private void setClanEventRewards(
 			List<ClanEventPersistentUserReward> allRewards,
-			PersistentClanEventClanInfoProto eventDetails) {
+			PersistentClanEventClanInfoProto eventDetails, ToClientEvents responses) {
 		if (null == allRewards) {
 			return;
 		}
@@ -985,7 +985,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		resEvent.setTag(0);
 		resEvent.setAwardClanRaidStageRewardResponseProto(resBuilder.build());
 
-		responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+		responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 	}
 
 	protected Locker getLocker() {

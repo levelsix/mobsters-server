@@ -34,6 +34,7 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RefreshMiniJobAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -71,9 +72,12 @@ public class RefreshMiniJobController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RefreshMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -87,7 +91,7 @@ public class RefreshMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RefreshMiniJobRequestProto reqProto = ((RefreshMiniJobRequestEvent) event)
 				.getRefreshMiniJobRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -174,7 +178,7 @@ public class RefreshMiniJobController extends EventController {
 					rmja.isUsedGems())
 			{
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								rmja.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -206,7 +210,7 @@ public class RefreshMiniJobController extends EventController {
 	private void writeToUserCurrencyHistory(String userId,
 			Timestamp curTime, RefreshMiniJobAction rmja)
 	{
-		miscMethods.writeToUserCurrencyOneUser(userId, curTime,
+		miscMethods().writeToUserCurrencyOneUser(userId, curTime,
 				rmja.getCurrencyDeltas(), rmja.getPreviousCurrencies(),
 				rmja.getCurrentCurrencies(), rmja.getReasons(),
 				rmja.getDetails());
@@ -220,13 +224,7 @@ public class RefreshMiniJobController extends EventController {
 		this.locker = locker;
 	}
 
-	public MiscMethods getMiscMethods() {
-		return miscMethods;
-	}
 
-	public void setMiscMethods(MiscMethods miscMethods) {
-		this.miscMethods = miscMethods;
-	}
 
 	public MiniJobForUserRetrieveUtil getMiniJobForUserRetrieveUtil() {
 		return miniJobForUserRetrieveUtil;
@@ -292,6 +290,14 @@ public class RefreshMiniJobController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 

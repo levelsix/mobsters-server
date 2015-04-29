@@ -89,7 +89,7 @@ public class PrivateChatPostController extends EventController {
 	private PrivateChatPostResponseProto pcprp;
 
 	public PrivateChatPostController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class PrivateChatPostController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PrivateChatPostRequestProto reqProto = ((PrivateChatPostRequestEvent) event)
 				.getPrivateChatPostRequestProto();
 
@@ -315,7 +315,7 @@ public class PrivateChatPostController extends EventController {
 							recipientId);
 					pcprp = resBuilder.build();
 					resEvent2.setPrivateChatPostResponseProto(pcprp);
-					server.writeAPNSNotificationOrEvent(resEvent2);
+					responses.apnsResponseEvents().add(resEvent2);
 				}
 			}
 			// send to sender of the private chat post

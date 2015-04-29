@@ -112,7 +112,7 @@ public class EndPvpBattleController extends EventController {
 
 
 	public EndPvpBattleController() {
-		numAllocatedThreads = 7;
+		
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class EndPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndPvpBattleRequestProto reqProto = ((EndPvpBattleRequestEvent) event)
 				.getEndPvpBattleRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

@@ -39,7 +39,7 @@ public class UnrestrictUserMonsterController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public UnrestrictUserMonsterController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class UnrestrictUserMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UnrestrictUserMonsterRequestProto reqProto = ((UnrestrictUserMonsterRequestEvent) event)
 				.getUnrestrictUserMonsterRequestProto();
 

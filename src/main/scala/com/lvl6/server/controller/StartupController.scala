@@ -16,7 +16,7 @@ class StartupController extends EventController{
   
   
   def processRequestEvent(event:RequestEvent, responses:ToClientEvents)={
-    startupService.startup(event)
+    startupService.startup(event, responses)
   }
   
   def createRequestEvent:RequestEvent= {

@@ -69,7 +69,7 @@ public class CompleteBattleItemController extends EventController {
 	protected DeleteUtil deleteUtil;
 
 	public CompleteBattleItemController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class CompleteBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CompleteBattleItemRequestProto reqProto = ((CompleteBattleItemRequestEvent) event)
 				.getCompleteBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);

@@ -44,7 +44,7 @@ public class UpdateUserCurrencyController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public UpdateUserCurrencyController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class UpdateUserCurrencyController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateUserCurrencyRequestProto reqProto = ((UpdateUserCurrencyRequestEvent) event)
 				.getUpdateUserCurrencyRequestProto();
 

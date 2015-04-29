@@ -59,7 +59,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 
 	public RetrieveUsersForUserIdsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveUsersForUserIdsRequestProto reqProto = ((RetrieveUsersForUserIdsRequestEvent) event)
 				.getRetrieveUsersForUserIdsRequestProto();
 

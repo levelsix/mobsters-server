@@ -56,7 +56,7 @@ public class GiveClanHelpController extends EventController {
 	protected TimeUtils timeUtil;
 
 	public GiveClanHelpController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class GiveClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent) event)
 				.getGiveClanHelpRequestProto();
 
@@ -132,7 +132,7 @@ public class GiveClanHelpController extends EventController {
 		if (0 != clanId) {
 			lockedClan = getLocker().lockClan(clanId);
 		} else {
-			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			//      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -158,7 +158,7 @@ public class GiveClanHelpController extends EventController {
 				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
 				resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
 				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {
@@ -177,7 +177,7 @@ public class GiveClanHelpController extends EventController {
 			if (0 != clanId && lockedClan) {
 				getLocker().unlockClan(clanId);
 			} else {
-				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

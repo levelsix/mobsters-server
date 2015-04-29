@@ -37,7 +37,7 @@ public class EndClanAvengingController extends EventController {
 	protected Locker locker;
 
 	public EndClanAvengingController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class EndClanAvengingController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndClanAvengingRequestProto reqProto = ((EndClanAvengingRequestEvent) event)
 				.getEndClanAvengingRequestProto();
 
@@ -126,7 +126,7 @@ public class EndClanAvengingController extends EventController {
 
 			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)) {
 				resBuilder.addAllClanAvengeUuids(clanAvengeUuids);
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				//				User user = bcaa.getProspectiveMember();
 				//				Clan clan = bcaa.getProspectiveClan();

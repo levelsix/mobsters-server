@@ -84,7 +84,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 
 	public RetrieveUserMonsterTeamController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent) event)
 				.getRetrieveUserMonsterTeamRequestProto();
 
@@ -148,7 +148,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			return;
 		}
 
-		//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 
 			RetrieveUserMonsterTeamAction rumta = new RetrieveUserMonsterTeamAction(
@@ -211,7 +211,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			}
 
 			//		} finally {
-			//			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			//			      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}
 	}
 

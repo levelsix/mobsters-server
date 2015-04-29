@@ -38,6 +38,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.PurchaseBoosterPackController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -168,7 +169,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
 		pbpre.setTag(1);
 		pbpre.setPurchaseBoosterPackRequestProto(pbprpb.build());
-		purchaseBoosterPackController.handleEvent(pbpre);
+		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEvents());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 

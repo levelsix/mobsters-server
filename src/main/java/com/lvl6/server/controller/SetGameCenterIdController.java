@@ -36,7 +36,7 @@ public class SetGameCenterIdController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public SetGameCenterIdController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class SetGameCenterIdController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetGameCenterIdRequestProto reqProto = ((SetGameCenterIdRequestEvent) event)
 				.getSetGameCenterIdRequestProto();
 
@@ -90,7 +90,7 @@ public class SetGameCenterIdController extends EventController {
 			return;
 		}
 
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
@@ -136,7 +136,7 @@ public class SetGameCenterIdController extends EventController {
 						e);
 			}
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

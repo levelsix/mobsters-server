@@ -21,6 +21,7 @@ import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.UpdateMiniEventAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -33,8 +34,11 @@ public class UpdateMiniEventController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public UpdateMiniEventController() {
-		numAllocatedThreads = 4;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -53,7 +57,7 @@ public class UpdateMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMiniEventRequestProto reqProto = ((UpdateMiniEventRequestEvent) event)
 				.getUpdateMiniEventRequestProto();
 
@@ -95,7 +99,7 @@ public class UpdateMiniEventController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(userId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		try {
 			List<MiniEventGoalForUser> megfuList = javafyUserMiniEventProto(umegpList);
 
@@ -128,7 +132,7 @@ public class UpdateMiniEventController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(userId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -156,6 +160,14 @@ public class UpdateMiniEventController extends EventController {
 
 	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

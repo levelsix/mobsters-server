@@ -202,11 +202,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 //@Component
 @DependsOn("gameServer")
-public class StartupControllerOld extends EventController {
+public class StartupControllerOld {//extends EventController {
 	//  private static String nameRulesFile = "namerulesElven.txt";
 	//  private static int syllablesInName1 = 2;
 	//  private static int syllablesInName2 = 3;
-
+/*
 	private static Logger log = LoggerFactory.getLogger(StartupControllerOld.class);
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
@@ -444,7 +444,7 @@ public class StartupControllerOld extends EventController {
 
 
 	public StartupControllerOld() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -458,7 +458,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event)
@@ -577,12 +577,12 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*
+		
 		if (Globals.KABAM_ENABLED()) {
 		String naid = retrieveKabamNaid(user, udid, reqProto.getMacAddress(),
 		  reqProto.getAdvertiserId());
 		resBuilder.setKabamNaid(naid);
-		}*/
+		}
 
 		//startup time
 		resBuilder.setServerTimeMillis((new Date()).getTime());
@@ -948,7 +948,7 @@ public class StartupControllerOld extends EventController {
 
 	private void setInProgressAndAvailableQuests(Builder resBuilder,
 			String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<QuestForUser> inProgressAndRedeemedUserQuests = getQuestForUserRetrieveUtils()
 				.getUserQuestsForUser(userId);
 
@@ -979,7 +979,7 @@ public class StartupControllerOld extends EventController {
 		}
 
 		// get the QuestJobForUser for ONLY the inProgressQuests
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs = getQuestJobForUserRetrieveUtil()
 				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, inProgressQuestsIds);
 
@@ -995,7 +995,7 @@ public class StartupControllerOld extends EventController {
 
 	private void setUserClanInfos(StartupResponseProto.Builder resBuilder,
 			String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<UserClan> userClans = getUserClanRetrieveUtils()
 				.getUserClansRelatedToUser(userId);
 		for (UserClan uc : userClans) {
@@ -1005,7 +1005,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setNoticesToPlayers(Builder resBuilder) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<String> notices = startupStuffRetrieveUtils.getAllActiveAlerts();
 		if (null != notices) {
 			for (String notice : notices) {
@@ -1016,7 +1016,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setUserMonsterStuff(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<MonsterForUser> userMonsters = monsterForUserRetrieveUtils
 				.getMonstersForUser(userId);
 
@@ -1028,7 +1028,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		//monsters in healing
 		Map<String, MonsterHealingForUser> userMonstersHealing = monsterHealingForUserRetrieveUtils
 				.getMonstersForUser(userId);
@@ -1043,7 +1043,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		//enhancing monsters
 		Map<String, MonsterEnhancingForUser> userMonstersEnhancing = monsterEnhancingForUserRetrieveUtils
 				.getMonstersForUser(userId);
@@ -1090,7 +1090,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		//evolving monsters
 		Map<String, MonsterEvolvingForUser> userMonsterEvolving = getMonsterEvolvingForUserRetrieveUtils()
 				.getCatalystIdsToEvolutionsForUser(userId);
@@ -1147,7 +1147,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setTaskStuff(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<UserTaskCompleted> utcList = taskForUserCompletedRetrieveUtils
 				.getAllCompletedTasksForUser(userId);
 		List<UserTaskCompletedProto> utcpList = createInfoProtoUtils
@@ -1158,7 +1158,7 @@ public class StartupControllerOld extends EventController {
 				.getTaskIds(utcList);
 		resBuilder.addAllCompletedTaskIds(taskIds);
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		TaskForUserOngoing aTaskForUser = getTaskForUserOngoingRetrieveUtils()
 				.getUserTaskForUserId(userId);
 		if (null != aTaskForUser) {
@@ -1179,7 +1179,7 @@ public class StartupControllerOld extends EventController {
 
 			//create protos for stages
 			String userTaskId = aTaskForUser.getId();
-			/*NOTE: DB CALL*/
+			NOTE: DB CALL
 			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
 					.getTaskStagesForUserWithTaskForUserId(userTaskId);
 
@@ -1218,7 +1218,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setEventStuff(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<EventPersistentForUser> events = getEventPersistentForUserRetrieveUtils()
 				.getUserPersistentEventForUserId(userId);
 
@@ -1417,7 +1417,7 @@ public class StartupControllerOld extends EventController {
 		resBuilder.setStaticDataStuffProto(sdp);
 	}
 
-	/*
+	
 	private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
 		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
 
@@ -1553,10 +1553,10 @@ public class StartupControllerOld extends EventController {
 		}
 		return equipped;
 	}
-	*/
+	
 
 	private void setAchievementStuff(Builder resBuilder, String userId, User user, Date nowDate, StopWatch stopWatch) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = getAchievementForUserRetrieveUtil()
 				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
 						null);
@@ -2091,7 +2091,7 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
-	/*private String retrieveKabamNaid(User user, String openUdid, String mac, String advertiserId) {
+	private String retrieveKabamNaid(User user, String openUdid, String mac, String advertiserId) {
 	String host;
 	int port = 443;
 	int clientId;
@@ -2133,7 +2133,7 @@ public class StartupControllerOld extends EventController {
 	  log.error("Error retrieving kabam naid: " + naidResponse.getReturnCode());
 	}
 	return "";
-	}*/
+	}
 
 	protected void updateLeaderboard(String apsalarId, User user,
 			Timestamp now, int newNumConsecutiveDaysLoggedIn) {
@@ -2577,9 +2577,9 @@ public class StartupControllerOld extends EventController {
 
 		if (user.getNumBadges() != 0) {
 			if (user.getDeviceToken() != null) {
-				/*
+				
 				 * handled locally?
-				 */
+				 
 				// ApnsServiceBuilder builder =
 				// APNS.newService().withCert(APNSProperties.PATH_TO_CERT,
 				// APNSProperties.CERT_PASSWORD);
@@ -3207,5 +3207,5 @@ public class StartupControllerOld extends EventController {
 			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils) {
 		this.salesDisplayItemRetrieveUtils = salesDisplayItemRetrieveUtils;
 	}
-
+*/
 }

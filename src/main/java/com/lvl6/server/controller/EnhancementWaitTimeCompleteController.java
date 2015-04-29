@@ -50,7 +50,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	public EnhancementWaitTimeCompleteController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EnhancementWaitTimeCompleteRequestProto reqProto = ((EnhancementWaitTimeCompleteRequestEvent) event)
 				.getEnhancementWaitTimeCompleteRequestProto();
 

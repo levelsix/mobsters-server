@@ -10,8 +10,9 @@ import com.amazonaws.services.dynamodbv2.document.Item
 import com.lvl6.server.dynamodb.tables.TableDefinition
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import org.springframework.stereotype.Component
 
-
+@Component
 class ClientResponseCacheService extends LazyLogging{
   @Autowired var cachedClientResponses:CachedClientResponses = null
   @Autowired var dynamoService:DynamoDBService = null

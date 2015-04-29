@@ -94,7 +94,7 @@ public class BeginDungeonController extends EventController {
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
 
 	public BeginDungeonController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class BeginDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent) event)
 				.getBeginDungeonRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

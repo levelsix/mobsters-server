@@ -57,7 +57,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public FinishNormStructWaittimeWithDiamondsController() {
-		numAllocatedThreads = 2;
+		
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 
 		FinishNormStructWaittimeWithDiamondsRequestProto reqProto = ((FinishNormStructWaittimeWithDiamondsRequestEvent) event)
 				.getFinishNormStructWaittimeWithDiamondsRequestProto();

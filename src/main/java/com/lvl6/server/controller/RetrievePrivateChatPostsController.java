@@ -68,7 +68,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
 
 	public RetrievePrivateChatPostsController() {
-		numAllocatedThreads = 5;
+		
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrievePrivateChatPostsRequestProto reqProto = ((RetrievePrivateChatPostsRequestEvent) event)
 				.getRetrievePrivateChatPostsRequestProto();
 

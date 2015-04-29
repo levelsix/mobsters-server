@@ -58,7 +58,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
 	public InviteFbFriendsForSlotsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent) event)
 				.getInviteFbFriendsForSlotsRequestProto();
 

@@ -106,7 +106,7 @@ public class EndDungeonController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public EndDungeonController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class EndDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent) event)
 				.getEndDungeonRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

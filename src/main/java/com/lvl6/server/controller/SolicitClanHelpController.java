@@ -58,7 +58,7 @@ public class SolicitClanHelpController extends EventController {
 	protected TimeUtils timeUtil;
 
 	public SolicitClanHelpController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class SolicitClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SolicitClanHelpRequestProto reqProto = ((SolicitClanHelpRequestEvent) event)
 				.getSolicitClanHelpRequestProto();
 
@@ -130,7 +130,7 @@ public class SolicitClanHelpController extends EventController {
 		if (0 != clanId) {
 			lockedClan = getLocker().lockClan(clanId);
 		} else {
-			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			User user = getUserRetrieveUtils().getUserById(userId);
@@ -163,7 +163,7 @@ public class SolicitClanHelpController extends EventController {
 
 				resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
 				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -184,7 +184,7 @@ public class SolicitClanHelpController extends EventController {
 			if (0 != clanId && lockedClan) {
 				getLocker().unlockClan(clanId);
 			} else {
-				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

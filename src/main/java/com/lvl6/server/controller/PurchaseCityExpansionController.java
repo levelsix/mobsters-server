@@ -58,7 +58,7 @@
 //	}
 //
 //	public PurchaseCityExpansionController() {
-//		numAllocatedThreads = 1;
+//		
 //	}
 //
 //	@Override
@@ -72,7 +72,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		PurchaseCityExpansionRequestProto reqProto = ((PurchaseCityExpansionRequestEvent)event).getPurchaseCityExpansionRequestProto();
 //
 //		//variables client sent

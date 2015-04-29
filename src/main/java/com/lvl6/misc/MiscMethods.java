@@ -910,7 +910,7 @@ public class MiscMethods {
 	//    }
 	//  }
 
-	public void writeGlobalNotification(Notification n, GameServer server) {
+	public GeneralNotificationResponseEvent getGlobalNotification(Notification n) {
 		GeneralNotificationResponseProto.Builder notificationProto = n
 				.generateNotificationBuilder();
 
@@ -918,7 +918,7 @@ public class MiscMethods {
 				"");
 		aNotification.setGeneralNotificationResponseProto(notificationProto
 				.build());
-		server.writeGlobalEvent(aNotification);
+		return aNotification;
 	}
 
 	public void writeClanApnsNotification(Notification n,
@@ -933,8 +933,7 @@ public class MiscMethods {
 		server.writeApnsClanEvent(aNotification, clanId);
 	}
 
-	public void writeNotificationToUser(Notification aNote,
-			GameServer server, String userId) {
+	public GeneralNotificationResponseEvent writeNotificationToUser(Notification aNote,	String userId) {
 		GeneralNotificationResponseProto.Builder notificationProto = aNote
 				.generateNotificationBuilder();
 		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(
@@ -942,7 +941,7 @@ public class MiscMethods {
 		aNotification.setGeneralNotificationResponseProto(notificationProto
 				.build());
 
-		server.writeAPNSNotificationOrEvent(aNotification);
+		return aNotification;
 	}
 
 	//Simple (inefficient) word by word censor. If a word appears in

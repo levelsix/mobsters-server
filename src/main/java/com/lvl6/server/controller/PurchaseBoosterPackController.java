@@ -96,7 +96,7 @@ public class PurchaseBoosterPackController extends EventController {
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
 
 	public PurchaseBoosterPackController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class PurchaseBoosterPackController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PurchaseBoosterPackRequestProto reqProto = ((PurchaseBoosterPackRequestEvent) event)
 				.getPurchaseBoosterPackRequestProto();
 

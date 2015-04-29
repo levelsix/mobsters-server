@@ -46,7 +46,7 @@
 //
 //
 //  public RecordClanRaidStatsController() {
-//	  numAllocatedThreads = 4;
+//	  
 //  }
 //
 //  @Override
@@ -60,7 +60,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    RecordClanRaidStatsRequestProto reqProto = ((RecordClanRaidStatsRequestEvent)event)
 //    		.getRecordClanRaidStatsRequestProto();
 //    final long startTime = System.nanoTime();
@@ -119,7 +119,7 @@
 //      
 //      if (legitRequest) {
 //      	//only write to the user if the request was valid
-//      	responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+//      	responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 //      }
 //      endTimeAfterWriteClanEvent = System.nanoTime();
 //      

@@ -23,6 +23,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.FulfillTeamDonationSolicitationAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -39,6 +40,10 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
+	
+	@Autowired
+	protected Locker locker;
+	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
@@ -55,7 +60,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public FulfillTeamDonationSolicitationController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -69,7 +74,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		FulfillTeamDonationSolicitationRequestProto reqProto = ((FulfillTeamDonationSolicitationRequestEvent) event)
 				.getFulfillTeamDonationSolicitationRequestProto();
 
@@ -145,7 +150,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
 		}*/
-		server.lockPlayer(solicitorId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(solicitorId), this.getClass().getSimpleName());
 		try {
 			FulfillTeamDonationSolicitationAction ftdsa = new FulfillTeamDonationSolicitationAction(
 					donatorId, clanId, msfu, cmtd, clientTime,
@@ -179,7 +184,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
 						.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -214,7 +219,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 						e);
 			}
 		} finally {
-			server.unlockPlayer(solicitorId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(solicitorId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -247,6 +252,14 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	public void setClanMemberTeamDonationRetrieveUtil(
 			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

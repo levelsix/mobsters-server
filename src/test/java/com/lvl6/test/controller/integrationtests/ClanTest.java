@@ -206,7 +206,7 @@ package com.lvl6.test.controller.integrationtests;
 //		CreateClanRequestEvent ccre = new CreateClanRequestEvent();
 //		ccre.setTag(1);
 //		ccre.setCreateClanRequestProto(ccrpb.build());
-//		createClanController.handleEvent(ccre);
+//		createClanController.processRequestEvent(ccre, EventsUtil.getToClientEvents());
 //
 //		User user2 = userRetrieveUtil.getUserById(userId1);
 //		assertEquals(userGems - 100, user2.getGems());
@@ -241,7 +241,7 @@ package com.lvl6.test.controller.integrationtests;
 //		ChangeClanSettingsRequestEvent ccsre = new ChangeClanSettingsRequestEvent();
 //		ccsre.setTag(1);
 //		ccsre.setChangeClanSettingsRequestProto(ccsrpb.build());
-//		changeClanSettingsController.handleEvent(ccsre);
+//		changeClanSettingsController.processRequestEvent(ccsre, EventsUtil.getToClientEvents());
 //		
 //		List<Clan> clanList = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 //				"test clan", "tes");
@@ -267,7 +267,7 @@ package com.lvl6.test.controller.integrationtests;
 //		RequestJoinClanRequestEvent rjcre = new RequestJoinClanRequestEvent();
 //		rjcre.setTag(1);
 //		rjcre.setRequestJoinClanRequestProto(rjcrpb.build());
-//		requestJoinClanController.handleEvent(rjcre);
+//		requestJoinClanController.processRequestEvent(rjcre, EventsUtil.getToClientEvents());
 //	
 //		List<Clan> clanList = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 //				"test clan", "tes");
@@ -293,7 +293,7 @@ package com.lvl6.test.controller.integrationtests;
 //		ApproveOrRejectRequestToJoinClanRequestEvent aorrtjcre = new ApproveOrRejectRequestToJoinClanRequestEvent();
 //		aorrtjcre.setTag(1);
 //		aorrtjcre.setApproveOrRejectRequestToJoinClanRequestProto(aorrtjcrpb.build());
-//		approveOrRejectRequestToJoinClanController.handleEvent(aorrtjcre);
+//		approveOrRejectRequestToJoinClanController.processRequestEvent(aorrtjcre, EventsUtil.getToClientEvents());
 //		
 //		List<Clan> clanList = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 //				"test clan", "tes");
@@ -317,7 +317,7 @@ package com.lvl6.test.controller.integrationtests;
 //		TransferClanOwnershipRequestEvent tcore = new TransferClanOwnershipRequestEvent();
 //		tcore.setTag(1);
 //		tcore.setTransferClanOwnershipRequestProto(tcorpb.build());
-//		transferClanOwnershipController.handleEvent(tcore);
+//		transferClanOwnershipController.processRequestEvent(tcore, EventsUtil.getToClientEvents());
 //		
 //		UserClan uc = userClanRetrieveUtil.getSpecificUserClan(userId2, clanUuid);
 //		assertTrue(uc.getStatus().equals("LEADER"));
@@ -342,7 +342,7 @@ package com.lvl6.test.controller.integrationtests;
 //		PromoteDemoteClanMemberRequestEvent pdcmre = new PromoteDemoteClanMemberRequestEvent();
 //		pdcmre.setTag(1);
 //		pdcmre.setPromoteDemoteClanMemberRequestProto(pdcmrpb.build());
-//		promoteDemoteClanMemberController.handleEvent(pdcmre);
+//		promoteDemoteClanMemberController.processRequestEvent(pdcmre, EventsUtil.getToClientEvents());
 //		
 //		UserClan uc2 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 //		assertTrue(uc2.getStatus().equals("CAPTAIN"));
@@ -361,7 +361,7 @@ package com.lvl6.test.controller.integrationtests;
 //		PromoteDemoteClanMemberRequestEvent pdcmre2 = new PromoteDemoteClanMemberRequestEvent();
 //		pdcmre2.setTag(1);
 //		pdcmre2.setPromoteDemoteClanMemberRequestProto(pdcmrpb2.build());
-//		promoteDemoteClanMemberController.handleEvent(pdcmre2);
+//		promoteDemoteClanMemberController.processRequestEvent(pdcmre2, EventsUtil.getToClientEvents());
 //		
 //		UserClan uc = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 //		assertTrue(uc.getStatus().equals("MEMBER"));

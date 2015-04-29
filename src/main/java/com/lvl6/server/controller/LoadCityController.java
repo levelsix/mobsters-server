@@ -34,7 +34,7 @@
 //  protected Locker locker;
 //
 //  public LoadCityController() {
-//    numAllocatedThreads = 3;
+//    
 //  }
 //
 //  @Override
@@ -48,7 +48,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    LoadCityRequestProto reqProto = ((LoadCityRequestEvent)event).getLoadCityRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();

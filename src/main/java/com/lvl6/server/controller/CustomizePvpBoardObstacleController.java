@@ -35,7 +35,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public CustomizePvpBoardObstacleController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Autowired
@@ -58,7 +58,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CustomizePvpBoardObstacleRequestProto reqProto = ((CustomizePvpBoardObstacleRequestEvent) event)
 				.getCustomizePvpBoardObstacleRequestProto();
 
@@ -98,7 +98,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			return;
 		}
 
-		//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			Collection<PvpBoardObstacleForUser> newOrUpdatedPbofus = javafyUserPvpBoardObstacleProto(nuOrUpdatedObstacles);
 			CustomizePvpBoardObstacleAction rsga = new CustomizePvpBoardObstacleAction(
@@ -134,7 +134,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			}
 
 		} finally {
-			//			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

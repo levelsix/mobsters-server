@@ -49,7 +49,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 
 	public DestroyMoneyTreeStructureController() {
-		numAllocatedThreads = 2;
+		
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 	 */
 	// @SuppressWarnings("deprecation")
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DestroyMoneyTreeStructureRequestProto reqProto = ((DestroyMoneyTreeStructureRequestEvent) event)
 				.getDestroyMoneyTreeStructureRequestProto();
 

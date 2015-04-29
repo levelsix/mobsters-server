@@ -30,6 +30,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.PrivateChatPostController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -190,7 +191,7 @@ public class PrivateChatPostTest {
 		PrivateChatPostRequestEvent pcpre = new PrivateChatPostRequestEvent();
 		pcpre.setTag(1);
 		pcpre.setPrivateChatPostRequestProto(pcprpb.build());
-		privateChatPostController.handleEvent(pcpre);
+		privateChatPostController.processRequestEvent(pcpre, EventsUtil.getToClientEvents());
 
 		log.info("private chat post responseproto : {}", privateChatPostController.getPcprp());
 	}

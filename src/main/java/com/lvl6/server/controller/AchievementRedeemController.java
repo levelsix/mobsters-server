@@ -58,7 +58,7 @@ public class AchievementRedeemController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	public AchievementRedeemController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class AchievementRedeemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AchievementRedeemRequestProto reqProto = ((AchievementRedeemRequestEvent) event)
 				.getAchievementRedeemRequestProto();
 

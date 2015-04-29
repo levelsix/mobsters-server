@@ -1,16 +1,16 @@
 package com.lvl6.util
 
-import com.lvl6.proto.ProtocolsProto.EventProto
-import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest
-import com.lvl6.events.RequestEvent
-import com.lvl6.server.controller.EventController
-import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Autowired
-import com.typesafe.scalalogging.slf4j.LazyLogging
-import com.lvl6.events.ResponseEvent
+import org.springframework.stereotype.Component
 import com.google.protobuf.GeneratedMessage
+import com.lvl6.events.RequestEvent
+import com.lvl6.events.ResponseEvent
+import com.lvl6.proto.ProtocolsProto.EventProto
+import com.lvl6.proto.ProtocolsProto.EventProtocolRequest
+import com.lvl6.server.controller.EventController
+import com.typesafe.scalalogging.slf4j.LazyLogging
+import java.nio.ByteBuffer
 
 case class ParsedEvent(eventProto:EventProto, event:RequestEvent, eventType:EventProtocolRequest, eventController:EventController){
   def requestEventBytes =  eventProto.getEventBytes.toByteArray()
@@ -22,7 +22,21 @@ class EventParser extends LazyLogging{
   
   @Autowired var eventControllers:List[EventController] = null
   
-  def parseEvent(eventBytes:Array[Byte], byteOrder:ByteOrder=ByteOrder.BIG_ENDIAN):ParsedEvent={
+  def parseEvents(eventBytes:Array[Byte], byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN):Vector[ParsedEvent]={
+    //parse first event from batch
+    var events:Vector[ParsedEvent] = Vector()
+    val sizeOfFirstEvent = ByteBuffer.allocate(Integer.BYTES).order(byteOrder).put(eventBytes.slice(0, Integer.BYTES)).getInt
+    var startOfNextEvent = Integer.BYTES + sizeOfFirstEvent 
+    events = events :+ parseSingleEvent(eventBytes.slice(Integer.BYTES, startOfNextEvent))
+    if(startOfNextEvent < eventBytes.size){
+      //batch has more events so recurse
+      events = events ++ parseEvents(eventBytes.splitAt(startOfNextEvent)._2)
+    }
+    events
+  }
+  
+  
+  protected def parseSingleEvent(eventBytes:Array[Byte]):ParsedEvent={
     val eventProto:EventProto = EventProto.parseFrom(eventBytes.slice(4, eventBytes.length))
     val eventType = EventProtocolRequest.valueOf(eventProto.getEventType)
     val eventController = getEventController(eventType)
@@ -36,7 +50,6 @@ class EventParser extends LazyLogging{
       case None => throw new RuntimeException("Error parsing event.. no event controller for type $eventType")
     }
   }
-  
   
   protected var eventControllerMap:Map[EventProtocolRequest, EventController] = null
   

@@ -51,7 +51,7 @@ public class BeginClanAvengingController extends EventController {
 	protected ClanStuffUtils clanStuffUtils;
 
 	public BeginClanAvengingController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class BeginClanAvengingController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginClanAvengingRequestProto reqProto = ((BeginClanAvengingRequestEvent) event)
 				.getBeginClanAvengingRequestProto();
 
@@ -160,7 +160,7 @@ public class BeginClanAvengingController extends EventController {
 				resBuilder.addAllClanAvengings(retaliationProtos);
 
 				resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				//				User user = bcaa.getProspectiveMember();
 				//				Clan clan = bcaa.getProspectiveClan();

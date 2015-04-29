@@ -9,7 +9,7 @@ import com.lvl6.eventhandlers.AbstractGameEventHandler;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 
-public class GameEventSaveHandler extends AbstractGameEventHandler {
+public class GameEventSaveHandler{// extends AbstractGameEventHandler {
 
 	protected static Logger log = LoggerFactory
 			.getLogger(GameEventSaveHandler.class);
@@ -24,7 +24,6 @@ public class GameEventSaveHandler extends AbstractGameEventHandler {
 		this.recorder = recorder;
 	}
 
-	@Override
 	protected void delegateEvent(RequestEvent event,EventProtocolRequest eventType) {
 		log.info("Persisting event for load testing");
 		//recorder.persistEvent(event.getPlayerId(), eventType.getNumber(), event.);

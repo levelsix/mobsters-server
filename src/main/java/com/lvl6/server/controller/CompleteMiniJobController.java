@@ -56,7 +56,7 @@ public class CompleteMiniJobController extends EventController {
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
 
 	public CompleteMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class CompleteMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent) event)
 				.getCompleteMiniJobRequestProto();
 

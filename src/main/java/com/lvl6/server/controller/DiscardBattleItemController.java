@@ -50,7 +50,7 @@ public class DiscardBattleItemController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	public DiscardBattleItemController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class DiscardBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DiscardBattleItemRequestProto reqProto = ((DiscardBattleItemRequestEvent) event)
 				.getDiscardBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);

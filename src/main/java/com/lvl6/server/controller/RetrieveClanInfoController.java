@@ -88,7 +88,7 @@ public class RetrieveClanInfoController extends EventController {
 
 
 	public RetrieveClanInfoController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class RetrieveClanInfoController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 

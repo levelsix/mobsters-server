@@ -58,7 +58,7 @@ public class BeginPvpBattleController extends EventController {
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	public BeginPvpBattleController() {
-		numAllocatedThreads = 7;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class BeginPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent) event)
 				.getBeginPvpBattleRequestProto();
 		log.info("reqProto={}", reqProto);

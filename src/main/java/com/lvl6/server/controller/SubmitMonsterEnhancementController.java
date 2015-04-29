@@ -76,7 +76,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public SubmitMonsterEnhancementController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SubmitMonsterEnhancementRequestProto reqProto = ((SubmitMonsterEnhancementRequestEvent) event)
 				.getSubmitMonsterEnhancementRequestProto();
 

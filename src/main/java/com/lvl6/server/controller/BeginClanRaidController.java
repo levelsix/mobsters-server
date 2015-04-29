@@ -94,7 +94,7 @@ public class BeginClanRaidController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public BeginClanRaidController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class BeginClanRaidController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent) event)
 				.getBeginClanRaidRequestProto();
 
@@ -218,7 +218,7 @@ public class BeginClanRaidController extends EventController {
 
 			if (success) {
 				//only write to the user if the request was valid
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {

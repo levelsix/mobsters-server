@@ -77,7 +77,7 @@ public class TranslateSelectMessagesController extends EventController {
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 
 	public TranslateSelectMessagesController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class TranslateSelectMessagesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TranslateSelectMessagesRequestProto reqProto = ((TranslateSelectMessagesRequestEvent) event)
 				.getTranslateSelectMessagesRequestProto();
 		log.info("reqProto={}", reqProto);

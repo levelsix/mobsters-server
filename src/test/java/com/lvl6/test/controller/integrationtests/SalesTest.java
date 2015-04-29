@@ -186,7 +186,7 @@ package com.lvl6.test.controller.integrationtests;
 //		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 //		iapre.setTag(1);
 //		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-//		inAppPurchaseController.handleEvent(iapre);
+//		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
 //
 //		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtil.getMonstersForUser(userId);
 //		
@@ -270,7 +270,7 @@ package com.lvl6.test.controller.integrationtests;
 ////		InAppPurchaseRequestEvent iapre2 = new InAppPurchaseRequestEvent();
 ////		iapre2.setTag(1);
 ////		iapre2.setInAppPurchaseRequestProto(iaprpb2.build());
-////		inAppPurchaseController.handleEvent(iapre2);
+////		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEvents());
 ////		String userStructId = "";
 ////
 ////		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2
@@ -296,7 +296,7 @@ package com.lvl6.test.controller.integrationtests;
 ////		DestroySalesStructureRequestEvent dmtsre = new DestroySalesStructureRequestEvent();
 ////		dmtsre.setTag(1);
 ////		dmtsre.setDestroySalesStructureRequestProto(dmtsrpb.build());
-////		destroySalesStructureController.handleEvent(dmtsre);
+////		destroySalesStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEvents());
 ////
 ////		User user4 = userRetrieveUtil.getUserById(user.getId());
 ////		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2

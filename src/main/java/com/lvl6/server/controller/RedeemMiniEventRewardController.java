@@ -33,9 +33,11 @@ import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -47,8 +49,12 @@ public class RedeemMiniEventRewardController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public RedeemMiniEventRewardController() {
-		numAllocatedThreads = 4;
+		
 	}
+	
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -79,6 +85,9 @@ public class RedeemMiniEventRewardController extends EventController {
 	
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -91,7 +100,7 @@ public class RedeemMiniEventRewardController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemMiniEventRewardRequestProto reqProto = ((RedeemMiniEventRewardRequestEvent) event)
 				.getRedeemMiniEventRewardRequestProto();
 
@@ -134,7 +143,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(userId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		try {
 
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
@@ -171,7 +180,7 @@ public class RedeemMiniEventRewardController extends EventController {
 				User u = rmera.getUser();
 
 				if (null != u) {
-					UpdateClientUserResponseEvent resEventUpdate = miscMethods
+					UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									u, null, null);
 					resEventUpdate.setTag(event.getTag());
@@ -200,7 +209,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(userId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -208,7 +217,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			RedeemMiniEventRewardAction rmera)
 	{
 		Timestamp timestamp = new Timestamp(date.getTime());
-		miscMethods.writeToUserCurrencyOneUser(userId, timestamp,
+		miscMethods().writeToUserCurrencyOneUser(userId, timestamp,
 				rmera.getCurrencyDeltas(), rmera.getPreviousCurrencies(),
 				rmera.getCurrentCurrencies(), rmera.getReasons(),
 				rmera.getDetails());
@@ -245,6 +254,22 @@ public class RedeemMiniEventRewardController extends EventController {
 
 	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

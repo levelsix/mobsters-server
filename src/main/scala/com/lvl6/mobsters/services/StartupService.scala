@@ -151,6 +151,8 @@ import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.info.ClanGiftForUser
 import com.lvl6.server.EventWriterOld
+import com.lvl6.server.eventsender.ToClientEvents
+import com.lvl6.server.eventsender._
 
 case class StartupData(
       resBuilder:Builder, 
@@ -243,6 +245,7 @@ class StartupService extends LazyLogging{
   @Autowired var  locker :  Locker = null
   @Autowired var  eventWriter:EventWriterOld = null
   
+  
   @Autowired var globals:Globals = null
   @Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
   @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
@@ -251,7 +254,7 @@ class StartupService extends LazyLogging{
   @Autowired var  server:GameServer = null
   
   
-  def startup(event:RequestEvent)={
+  def startup(event:RequestEvent, responses:ToClientEvents)={
     val reqProto = (event.asInstanceOf[StartupRequestEvent]).getStartupRequestProto();
     logger.info(s"Processing startup request reqProto:$reqProto")
     val udid = reqProto.getUdid();
@@ -299,7 +302,7 @@ class StartupService extends LazyLogging{
     		startupStatus = StartupStatus.USER_IN_DB;
     		logger.info("No major update... getting user info");
     		val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
-    		loginExistingUser(sd);
+    		loginExistingUser(sd, responses);
     	} else {
     		logger.info(s"tutorial player with udid=$udid");
     		goingThroughTutorial = true;
@@ -423,7 +426,7 @@ class StartupService extends LazyLogging{
     }
   }
   
-  def loginExistingUser(sd:StartupData)={
+  def loginExistingUser(sd:StartupData, responses:ToClientEvents)={
 	  val udid:String = sd.udid 
 	  val playerId:String = sd.playerId 
 	  val resBuilder:Builder = sd.resBuilder 
@@ -471,7 +474,7 @@ class StartupService extends LazyLogging{
         case t:Throwable => {
           logger.error("Error running login futures", t)
           loginFinished(playerId)
-          exceptionInStartup(sd)
+          exceptionInStartup(sd, responses)
         }
       }
       
@@ -629,11 +632,12 @@ class StartupService extends LazyLogging{
   
   
   //TODO: figure out when to call this
-  def exceptionInStartup(sd:StartupData)={
+  def exceptionInStartup(sd:StartupData, responses:ToClientEvents)={
     try {
       sd.resBuilder.setStartupStatus(StartupStatus.SERVER_IN_MAINTENANCE); //DO NOT allow user to play
       sd.resEvent.setStartupResponseProto(sd.resBuilder.build());
       eventWriter.processPreDBResponseEvent(sd.resEvent, sd.udid);
+      responses.preDBResponseEvents.add(new PreDBResponseEvent(sd.resEvent, sd.udid))
     } catch{
       case t:Throwable => logger.error("exception2 in StartupController processEvent", t);
     }

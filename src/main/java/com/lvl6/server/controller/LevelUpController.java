@@ -39,7 +39,7 @@ public class LevelUpController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public LevelUpController() {
-		numAllocatedThreads = 2;
+		
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class LevelUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LevelUpRequestProto reqProto = ((LevelUpRequestEvent) event)
 				.getLevelUpRequestProto();
 
@@ -84,7 +84,7 @@ public class LevelUpController extends EventController {
 			LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setLevelUpResponseProto(resBuilder.build());
-			getEventWriter().handleEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -107,7 +107,7 @@ public class LevelUpController extends EventController {
 			resEvent.setTag(event.getTag());
 			LevelUpResponseProto resProto = resBuilder.build();
 			resEvent.setLevelUpResponseProto(resProto);
-			getEventWriter().handleEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -115,7 +115,7 @@ public class LevelUpController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				getEventWriter().handleEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class LevelUpController extends EventController {
 				LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setLevelUpResponseProto(resBuilder.build());
-				getEventWriter().handleEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in LevelUpController processEvent", e);
 			}

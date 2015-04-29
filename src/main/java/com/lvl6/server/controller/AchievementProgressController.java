@@ -54,7 +54,7 @@ public class AchievementProgressController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	public AchievementProgressController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class AchievementProgressController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent) event)
 				.getAchievementProgressRequestProto();
 

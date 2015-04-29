@@ -37,7 +37,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public RemoveMonsterFromBattleTeamController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RemoveMonsterFromBattleTeamRequestProto reqProto = ((RemoveMonsterFromBattleTeamRequestEvent) event)
 				.getRemoveMonsterFromBattleTeamRequestProto();
 

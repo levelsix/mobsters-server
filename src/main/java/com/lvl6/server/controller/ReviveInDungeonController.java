@@ -57,7 +57,7 @@ public class ReviveInDungeonController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public ReviveInDungeonController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class ReviveInDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ReviveInDungeonRequestProto reqProto = ((ReviveInDungeonRequestEvent) event)
 				.getReviveInDungeonRequestProto();
 

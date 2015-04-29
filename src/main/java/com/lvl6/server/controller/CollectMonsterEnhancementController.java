@@ -65,7 +65,7 @@ public class CollectMonsterEnhancementController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	public CollectMonsterEnhancementController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class CollectMonsterEnhancementController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CollectMonsterEnhancementRequestProto reqProto = ((CollectMonsterEnhancementRequestEvent) event)
 				.getCollectMonsterEnhancementRequestProto();
 

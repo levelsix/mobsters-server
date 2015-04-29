@@ -92,19 +92,6 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		this.playersInAction = playersInAction;
 	}
 
-	@Autowired
-	protected List<EventController> eventControllerList;
-
-	public void setEventControllerList(List<EventController> eventControllerList) {
-		this.eventControllerList = eventControllerList;
-	}
-
-	// selector for multiplexing ServerSocketChannels
-	// private Selector selector;
-
-	// whether to keep listening for new sockets
-
-	private Hashtable<EventProtocolRequest, EventController> eventControllers;
 
 	@Resource(name = "playersByPlayerId")
 	Map<String, ConnectedPlayer> playersByPlayerId;
@@ -189,8 +176,6 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	}
 
 	public GameServer(String serverIP, int portNum) {
-		if (eventControllers == null)
-			eventControllers = new Hashtable<EventProtocolRequest, EventController>();
 		//BasicConfigurator.configure();
 	}
 
@@ -204,7 +189,6 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	public void init() {
 		log.info("init : Server initializing");
-		loadEventControllers();
 		reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
 		reloadRecommendedClans();
 	}
@@ -307,42 +291,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		log.info("******** GameServer running ********");
 	}
 
-	/**
-	 * finds the EventController for a given event type
-	 *
-	 * @throws Exception
-	 */
-	public EventController getEventControllerByEventType(
-			EventProtocolRequest eventType) {
-		if (eventType == null) {
-			throw new RuntimeException(
-					"EventProtocolRequest (eventType) is null");
-		}
-		if (eventControllerList.size() > eventControllers.size()) {
-			loadEventControllers();
-		}
-		if (eventControllers.containsKey(eventType)) {
-			EventController ec = eventControllers.get(eventType);
-			if (ec == null) {
-				log.error("no eventcontroller for eventType: " + eventType);
-				throw new RuntimeException("EventController of type: "
-						+ eventType + " not found");
-			}
-			return ec;
-		}
-		throw new RuntimeException("EventController of type: " + eventType
-				+ " not found");
-	}
 
-	/**
-	 * Dynamically loads GameControllers
-	 */
-	private void loadEventControllers() {
-		log.info("Adding event controllers to eventControllers controllerType-->controller map");
-		for (EventController ec : eventControllerList) {
-			eventControllers.put(ec.getEventType(), ec);
-		}
-	}
 
 	/**
 	 * shutdown the GameServer

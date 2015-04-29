@@ -41,7 +41,7 @@ public class UpdateUserStrengthController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	public UpdateUserStrengthController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class UpdateUserStrengthController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateUserStrengthRequestProto reqProto = ((UpdateUserStrengthRequestEvent) event)
 				.getUpdateUserStrengthRequestProto();
 
@@ -109,7 +109,7 @@ public class UpdateUserStrengthController extends EventController {
 			if (UpdateUserStrengthStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								uusa.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());

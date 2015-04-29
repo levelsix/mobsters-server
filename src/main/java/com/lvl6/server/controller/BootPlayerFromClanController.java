@@ -65,7 +65,7 @@ public class BootPlayerFromClanController extends EventController {
 	protected ClanSearch clanSearch;
 
 	public BootPlayerFromClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class BootPlayerFromClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BootPlayerFromClanRequestProto reqProto = ((BootPlayerFromClanRequestEvent) event)
 				.getBootPlayerFromClanRequestProto();
 
@@ -162,7 +162,7 @@ public class BootPlayerFromClanController extends EventController {
 
 			if (success) {
 				//if successful write to clan
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			} else {
 				//write to user if fail
 				responses.normalResponseEvents().add(resEvent);

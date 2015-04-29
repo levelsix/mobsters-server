@@ -38,7 +38,7 @@ public class UpdateClientTaskStateController extends EventController {
 	protected InsertUtil insertUtil;
 
 	public UpdateClientTaskStateController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class UpdateClientTaskStateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateClientTaskStateRequestProto reqProto = ((UpdateClientTaskStateRequestEvent) event)
 				.getUpdateClientTaskStateRequestProto();
 

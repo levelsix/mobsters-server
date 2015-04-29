@@ -30,7 +30,7 @@
 //
 //
 //  public EndPersistentEventCoolDownTimerController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -44,7 +44,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EndPersistentEventCoolDownTimerRequestProto reqProto = ((EndPersistentEventCoolDownTimerRequestEvent)event).getEndPersistentEventCoolDownTimerRequestProto();
 //
 //    //get values sent from the client (the request proto)
@@ -58,7 +58,7 @@
 //    resBuilder.setSender(senderProto);
 //    resBuilder.setStatus(EndPersistentEventCoolDownTimerStatus.FAIL_OTHER); //default
 //
-//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    try {
 //      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 ////      int previousGems = 0;
@@ -97,7 +97,7 @@
 //    	  log.error("exception2 in EndPersistentEventCoolDownTimerController processEvent", e);
 //      }
 //    } finally {
-//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    }
 //  }
 //

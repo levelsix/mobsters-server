@@ -57,7 +57,6 @@ public class LoadPlayerCityController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public LoadPlayerCityController() {
-		numAllocatedThreads = 10;
 	}
 
 	@Override
@@ -71,7 +70,7 @@ public class LoadPlayerCityController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent) event)
 				.getLoadPlayerCityRequestProto();
 

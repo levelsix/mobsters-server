@@ -86,7 +86,7 @@ public class RedeemMiniJobController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public RedeemMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class RedeemMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemMiniJobRequestProto reqProto = ((RedeemMiniJobRequestEvent) event)
 				.getRedeemMiniJobRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

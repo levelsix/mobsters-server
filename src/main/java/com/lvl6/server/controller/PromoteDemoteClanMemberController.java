@@ -60,7 +60,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public PromoteDemoteClanMemberController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PromoteDemoteClanMemberRequestProto reqProto = ((PromoteDemoteClanMemberRequestEvent) event)
 				.getPromoteDemoteClanMemberRequestProto();
 
@@ -176,7 +176,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
 						.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {

@@ -57,7 +57,7 @@ public class TransferClanOwnershipController extends EventController {
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public TransferClanOwnershipController() {
-		numAllocatedThreads = 2;
+		
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class TransferClanOwnershipController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TransferClanOwnershipRequestProto reqProto = ((TransferClanOwnershipRequestEvent) event)
 				.getTransferClanOwnershipRequestProto();
 		log.info("reqProto=" + reqProto);
@@ -164,7 +164,7 @@ public class TransferClanOwnershipController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setTransferClanOwnershipResponseProto(resBuilder
 						.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 			}
 

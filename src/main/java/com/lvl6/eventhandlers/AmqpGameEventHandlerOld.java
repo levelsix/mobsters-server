@@ -23,10 +23,9 @@ import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.Attachment;
 import com.lvl6.utils.ConnectedPlayer;
 
-public class AmqpGameEventHandlerOld extends AbstractGameEventHandler implements
-		MessageListener {
+public class AmqpGameEventHandlerOld {//extends AbstractGameEventHandler implements	MessageListener {
 
-	static Logger log = LoggerFactory.getLogger(GameEventHandlerOld.class);
+/*	static Logger log = LoggerFactory.getLogger(GameEventHandlerOld.class);
 
 	private static final int DEFAULT_TTL = 9;
 
@@ -174,6 +173,6 @@ public class AmqpGameEventHandlerOld extends AbstractGameEventHandler implements
 			log.error(String.format("playerId not set for RequestEvent: %s",
 					event));
 		}
-	}
+	}*/
 
 }

@@ -47,7 +47,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	public ExchangeGemsForResourcesController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ExchangeGemsForResourcesRequestProto reqProto = ((ExchangeGemsForResourcesRequestEvent) event)
 				.getExchangeGemsForResourcesRequestProto();
 

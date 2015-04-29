@@ -85,7 +85,7 @@ public class ChangeClanSettingsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ChangeClanSettingsRequestProto reqProto = ((ChangeClanSettingsRequestEvent) event)
 				.getChangeClanSettingsRequestProto();
 
@@ -165,7 +165,7 @@ public class ChangeClanSettingsController extends EventController {
 
 			} else {
 				//only write to clan if successful 
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId()));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId(), false));
 
 				updateClanCache(clanId, clanSizeContainer, isChangeJoinType,
 						requestToJoinRequired);

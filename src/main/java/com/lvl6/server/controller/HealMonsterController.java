@@ -77,7 +77,7 @@ public class HealMonsterController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public HealMonsterController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class HealMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent) event)
 				.getHealMonsterRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

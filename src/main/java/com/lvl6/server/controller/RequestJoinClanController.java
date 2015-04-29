@@ -140,7 +140,7 @@ public class RequestJoinClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RequestJoinClanRequestProto reqProto = ((RequestJoinClanRequestEvent) event)
 				.getRequestJoinClanRequestProto();
 
@@ -180,8 +180,7 @@ public class RequestJoinClanController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
-			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(
-					userId);
+			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRequestJoinClanResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
@@ -256,7 +255,7 @@ public class RequestJoinClanController extends EventController {
 			/* I think I meant write to the clan leader if leader is not on
 			 
 			//in case user is not online write an apns
-			server.writeAPNSNotificationOrEvent(resEvent);
+			responses.apnsResponseEvents().add((resEvent);
 			//responses.normalResponseEvents().add(resEvent);
 			 */
 			responses.normalResponseEvents().add(resEvent);
@@ -275,7 +274,7 @@ public class RequestJoinClanController extends EventController {
 				resBuilder.clearEventDetails(); //could just get rid of this line
 				resBuilder.clearClanUsersDetails(); //could just get rid of this line
 				resEvent.setRequestJoinClanResponseProto(resBuilder.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId()));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId(), false));
 
 				if (!requestToJoinRequired) {
 					//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -449,8 +448,7 @@ public class RequestJoinClanController extends EventController {
 		return successful;
 	}
 
-	private void notifyClan(User aUser, Clan aClan,
-			boolean requestToJoinRequired) {
+	private void notifyClan(User aUser, Clan aClan, boolean requestToJoinRequired, ToClientEvents responses) {
 		String clanId = aUser.getClanId();
 		List<String> statuses = Collections.singletonList(UserClanStatus.LEADER
 				.name());
@@ -474,7 +472,7 @@ public class RequestJoinClanController extends EventController {
 			//TODO: Maybe exclude the guy who joined from receiving the notification?
 			aNote.setAsUserJoinedClan(level, requester);
 		}
-		miscMethods.writeNotificationToUser(aNote, server, clanOwnerId);
+		responses.normalResponseEvents().add(miscMethods().writeNotificationToUser(aNote, clanOwnerId));
 
 		//    GeneralNotificationResponseProto.Builder notificationProto =
 		//        aNote.generateNotificationBuilder();
@@ -482,7 +480,7 @@ public class RequestJoinClanController extends EventController {
 		//        new GeneralNotificationResponseEvent(clanOwnerId);
 		//    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 		//    
-		//    server.writeAPNSNotificationOrEvent(aNotification);
+		//    responses.apnsResponseEvents().add((aNotification);
 	}
 
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,

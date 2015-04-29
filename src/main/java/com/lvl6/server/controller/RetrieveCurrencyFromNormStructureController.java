@@ -67,7 +67,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 	protected UpdateUtil updateUtil;
 
 	public RetrieveCurrencyFromNormStructureController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent) event)
 				.getRetrieveCurrencyFromNormStructureRequestProto();
 		log.info("reqProto={}", reqProto);

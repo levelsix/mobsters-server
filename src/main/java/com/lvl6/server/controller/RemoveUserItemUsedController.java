@@ -18,6 +18,7 @@ import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserI
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RemoveUserItemUsedAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -31,9 +32,13 @@ public class RemoveUserItemUsedController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public RemoveUserItemUsedController() {
-		numAllocatedThreads = 1;
+		
 	}
 
+
+	@Autowired
+	protected Locker locker;
+	
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -48,7 +53,7 @@ public class RemoveUserItemUsedController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RemoveUserItemUsedRequestProto reqProto = ((RemoveUserItemUsedRequestEvent) event)
 				.getRemoveUserItemUsedRequestProto();
 
@@ -88,7 +93,9 @@ public class RemoveUserItemUsedController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		
+		
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 
@@ -121,9 +128,17 @@ public class RemoveUserItemUsedController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

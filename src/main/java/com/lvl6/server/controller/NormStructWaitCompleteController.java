@@ -56,7 +56,7 @@ public class NormStructWaitCompleteController extends EventController {
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public NormStructWaitCompleteController() {
-		numAllocatedThreads = 5;
+		
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class NormStructWaitCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		NormStructWaitCompleteRequestProto reqProto = ((NormStructWaitCompleteRequestEvent) event)
 				.getNormStructWaitCompleteRequestProto();
 

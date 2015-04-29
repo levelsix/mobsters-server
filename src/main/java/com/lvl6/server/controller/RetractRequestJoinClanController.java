@@ -62,7 +62,7 @@ public class RetractRequestJoinClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetractRequestJoinClanRequestProto reqProto = ((RetractRequestJoinClanRequestEvent) event)
 				.getRetractRequestJoinClanRequestProto();
 
@@ -130,7 +130,7 @@ public class RetractRequestJoinClanController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId()));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId(), false));
 			}
 
 		} catch (Exception e) {

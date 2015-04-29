@@ -82,7 +82,7 @@ public class EvolutionFinishedController extends EventController {
 
 
 	public EvolutionFinishedController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class EvolutionFinishedController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EvolutionFinishedRequestProto reqProto = ((EvolutionFinishedRequestEvent) event)
 				.getEvolutionFinishedRequestProto();
 

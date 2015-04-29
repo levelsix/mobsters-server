@@ -42,7 +42,7 @@
 //	protected Locker locker;
 //
 //	public ExpansionWaitCompleteController() {
-//		numAllocatedThreads = 1;
+//		
 //	}
 //
 //	@Override
@@ -56,7 +56,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
 //
 //		MinimumUserProto senderProto = reqProto.getSender();

@@ -19,6 +19,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 
@@ -30,8 +31,11 @@ public class SetDefendingMsgController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public SetDefendingMsgController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
@@ -53,7 +57,7 @@ public class SetDefendingMsgController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent) event)
 				.getSetDefendingMsgRequestProto();
 
@@ -91,12 +95,12 @@ public class SetDefendingMsgController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 			//
 			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
-					userRetrieveUtil, miscMethods);
+					userRetrieveUtil, miscMethods());
 
 			rsga.execute(resBuilder);
 
@@ -123,7 +127,7 @@ public class SetDefendingMsgController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -134,6 +138,14 @@ public class SetDefendingMsgController extends EventController {
 
 	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

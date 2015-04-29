@@ -27,6 +27,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -44,8 +45,12 @@ public class RedeemSecretGiftController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public RedeemSecretGiftController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
@@ -76,7 +81,7 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent) event)
 				.getRedeemSecretGiftRequestProto();
 
@@ -117,7 +122,7 @@ public class RedeemSecretGiftController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 			//
@@ -171,7 +176,7 @@ public class RedeemSecretGiftController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -200,6 +205,14 @@ public class RedeemSecretGiftController extends EventController {
 	public void setItemForUserRetrieveUtil(
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

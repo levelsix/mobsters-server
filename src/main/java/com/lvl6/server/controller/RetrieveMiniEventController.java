@@ -27,9 +27,11 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -41,9 +43,13 @@ public class RetrieveMiniEventController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public RetrieveMiniEventController() {
-		numAllocatedThreads = 4;
+		
 	}
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
+	@Autowired
+	protected Locker locker;
+	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
@@ -91,7 +97,7 @@ public class RetrieveMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		//should really be renamed to something like UpdateToCurrentMiniEvent or something
 		RetrieveMiniEventRequestProto reqProto = ((RetrieveMiniEventRequestEvent) event)
 				.getRetrieveMiniEventRequestProto();
@@ -130,7 +136,7 @@ public class RetrieveMiniEventController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(userId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		try {
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
@@ -183,7 +189,7 @@ public class RetrieveMiniEventController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(userId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -227,6 +233,22 @@ public class RetrieveMiniEventController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 }

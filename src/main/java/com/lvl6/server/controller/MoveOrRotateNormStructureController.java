@@ -39,7 +39,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
 	public MoveOrRotateNormStructureController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		MoveOrRotateNormStructureRequestProto reqProto = ((MoveOrRotateNormStructureRequestEvent) event)
 				.getMoveOrRotateNormStructureRequestProto();
 

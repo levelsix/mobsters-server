@@ -117,7 +117,7 @@ public class QueueUpController extends EventController {
 	//	}
 
 	public QueueUpController() {
-		numAllocatedThreads = 10;
+		
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class QueueUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		QueueUpRequestProto reqProto = ((QueueUpRequestEvent) event)
 				.getQueueUpRequestProto();
 

@@ -25,7 +25,7 @@ public class EnableAPNSController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public EnableAPNSController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class EnableAPNSController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EnableAPNSRequestProto reqProto = ((EnableAPNSRequestEvent) event)
 				.getEnableAPNSRequestProto();
 
@@ -51,7 +51,7 @@ public class EnableAPNSController extends EventController {
 		EnableAPNSResponseProto.Builder resBuilder = EnableAPNSResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
@@ -80,7 +80,7 @@ public class EnableAPNSController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in EnableAPNSController processEvent", e);
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

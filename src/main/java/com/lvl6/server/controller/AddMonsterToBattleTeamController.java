@@ -40,7 +40,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
 
 	public AddMonsterToBattleTeamController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AddMonsterToBattleTeamRequestProto reqProto = ((AddMonsterToBattleTeamRequestEvent) event)
 				.getAddMonsterToBattleTeamRequestProto();
 

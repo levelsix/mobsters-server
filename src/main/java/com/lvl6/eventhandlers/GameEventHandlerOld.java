@@ -16,8 +16,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.ConnectedPlayer;
 
-public class GameEventHandlerOld extends AbstractGameEventHandler {
-	private static final int DEFAULT_TTL = 9;
+public class GameEventHandlerOld{// extends AbstractGameEventHandler {
+/*	private static final int DEFAULT_TTL = 9;
 
 	private static final Logger log = LoggerFactory
 			.getLogger(GameEventHandlerOld.class);
@@ -46,12 +46,12 @@ public class GameEventHandlerOld extends AbstractGameEventHandler {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
-	/**
+	*//**
 	 * pass off an event to the appropriate GameController based on the GameName
 	 * of the event
 	 * 
 	 * @throws FileNotFoundException
-	 */
+	 *//*
 	@Override
 	protected void delegateEvent(RequestEvent event, EventProtocolRequest eventType) {
 		if (event != null && eventType.getNumber() < 0) {
@@ -106,6 +106,6 @@ public class GameEventHandlerOld extends AbstractGameEventHandler {
 					DEFAULT_TTL, TimeUnit.MINUTES);
 			log.info("New player with UdId: " + newp.getUdid());
 		}
-	}
+	}*/
 
 }

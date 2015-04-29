@@ -24,7 +24,7 @@ import com.amazonaws.services.dynamodbv2.document.Item
 import com.lvl6.server.dynamodb.Converter._
 
 
-//@Component
+@Component
 class DynamoDBService extends LazyLogging {
   
   

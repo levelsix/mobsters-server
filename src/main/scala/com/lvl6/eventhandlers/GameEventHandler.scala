@@ -31,20 +31,22 @@ trait GameEventHandler extends LazyLogging  {
   
   def processEvent(eventBytes:Array[Byte])={
     try{
-      val parsedEvent = parser.parseEvent(eventBytes)
-      if(appMode.isMaintenanceMode()){
-        handleMaintenanceMode(parsedEvent)    
-      }else{
-        updatePlayerToServerMaps(parsedEvent)
-        if(responseCacheService.isResponseCached(parsedEvent.eventProto.getEventUuid)){
-          
+      val parsedEvents = parser.parseEvents(eventBytes)
+      parsedEvents.foreach{ parsedEvent => 
+        if(appMode.isMaintenanceMode()){
+          handleMaintenanceMode(parsedEvent)    
         }else{
-          parsedEvent.eventController.processEvent(parsedEvent.event) match{
-            case Some(events)=>{
-              sendResponses(events)
-              cacheResponses(events)
+          updatePlayerToServerMaps(parsedEvent)
+          if(responseCacheService.isResponseCached(parsedEvent.eventProto.getEventUuid)){
+            
+          }else{
+            parsedEvent.eventController.processEvent(parsedEvent.event) match{
+              case Some(events)=>{
+                sendResponses(events)
+                cacheResponses(events)
+              }
+              case None =>
             }
-            case None =>
           }
         }
       }

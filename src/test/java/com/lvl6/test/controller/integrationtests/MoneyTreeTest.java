@@ -37,6 +37,7 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.DestroyMoneyTreeStructureController;
 import com.lvl6.server.controller.InAppPurchaseController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -187,7 +188,7 @@ public class MoneyTreeTest {
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-		inAppPurchaseController.handleEvent(iapre);
+		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
 
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils2
 				.getUserStructsForUser(user.getId());
@@ -249,7 +250,7 @@ public class MoneyTreeTest {
 		InAppPurchaseRequestEvent iapre2 = new InAppPurchaseRequestEvent();
 		iapre2.setTag(1);
 		iapre2.setInAppPurchaseRequestProto(iaprpb2.build());
-		inAppPurchaseController.handleEvent(iapre2);
+		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEvents());
 		String userStructId = "";
 
 		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2
@@ -275,7 +276,7 @@ public class MoneyTreeTest {
 		DestroyMoneyTreeStructureRequestEvent dmtsre = new DestroyMoneyTreeStructureRequestEvent();
 		dmtsre.setTag(1);
 		dmtsre.setDestroyMoneyTreeStructureRequestProto(dmtsrpb.build());
-		destroyMoneyTreeStructureController.handleEvent(dmtsre);
+		destroyMoneyTreeStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEvents());
 
 		User user4 = userRetrieveUtil.getUserById(user.getId());
 		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2

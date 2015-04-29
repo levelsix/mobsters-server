@@ -54,7 +54,7 @@ public class SpawnObstacleController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public SpawnObstacleController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class SpawnObstacleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SpawnObstacleRequestProto reqProto = ((SpawnObstacleRequestEvent) event)
 				.getSpawnObstacleRequestProto();
 		log.info("reqProto=" + reqProto);

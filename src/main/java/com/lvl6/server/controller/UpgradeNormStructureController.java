@@ -57,7 +57,7 @@ public class UpgradeNormStructureController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public UpgradeNormStructureController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class UpgradeNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent) event)
 				.getUpgradeNormStructureRequestProto();
 

@@ -105,7 +105,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AcceptOrRejectClanInviteRequestProto reqProto = ((AcceptOrRejectClanInviteRequestEvent) event)
 				.getAcceptOrRejectClanInviteRequestProto();
 
@@ -190,7 +190,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)
 					&& null != accepted) {
 				//only write to clan if user accepted and success
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				User user = aorcia.getProspectiveMember();
 				Clan clan = aorcia.getProspectiveClan();
@@ -207,7 +207,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 				ClanDataProto cdp = scdpa.execute();
 
-				sendClanData(event, senderProto, userId, cdp);
+				sendClanData(event, senderProto, userId, cdp, responses);
 
 				//update clan cache
 				updateClanCache(clanId, aorcia.getClanSize(),
@@ -273,7 +273,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	//	}
 
 	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,
-			String userId, ClanDataProto cdp) {
+			String userId, ClanDataProto cdp, ToClientEvents responses) {
 		if (null == cdp) {
 			return;
 		}

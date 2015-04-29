@@ -35,7 +35,7 @@ public class LogoutController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public LogoutController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Resource(name = "playersByPlayerId")
@@ -73,7 +73,7 @@ public class LogoutController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LogoutRequestProto reqProto = ((LogoutRequestEvent) event)
 				.getLogoutRequestProto();
 

@@ -47,7 +47,7 @@ public class BeginObstacleRemovalController extends EventController {
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 
 	public BeginObstacleRemovalController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class BeginObstacleRemovalController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent) event)
 				.getBeginObstacleRemovalRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

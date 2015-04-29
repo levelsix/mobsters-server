@@ -67,7 +67,7 @@ public class LeaveClanController extends EventController {
 	protected ClanSearch clanSearch;
 
 	public LeaveClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class LeaveClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LeaveClanRequestProto reqProto = ((LeaveClanRequestEvent) event)
 				.getLeaveClanRequestProto();
 
@@ -129,7 +129,7 @@ public class LeaveClanController extends EventController {
 		if (null != clanId) {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}/* else {
-			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}*/
 		try {
 			User user = getUserRetrieveUtils().getUserById(
@@ -159,7 +159,7 @@ public class LeaveClanController extends EventController {
 				//only write to clan if success
 				resBuilder.setStatus(LeaveClanStatus.SUCCESS);
 				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -180,7 +180,7 @@ public class LeaveClanController extends EventController {
 			if (null != clanUuid && lockedClan) {
 				getLocker().unlockClan(clanUuid);
 			}/* else {
-				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 				}*/
 		}
 	}

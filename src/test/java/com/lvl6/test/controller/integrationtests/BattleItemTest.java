@@ -43,6 +43,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.CompleteBattleItemController;
 import com.lvl6.server.controller.CreateBattleItemController;
 import com.lvl6.server.controller.DiscardBattleItemController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -173,7 +174,7 @@ public class BattleItemTest {
 		CreateBattleItemRequestEvent cbire = new CreateBattleItemRequestEvent();
 		cbire.setTag(1);
 		cbire.setCreateBattleItemRequestProto(cbirpb.build());
-		createBattleItemController.handleEvent(cbire);
+		createBattleItemController.processRequestEvent(cbire, EventsUtil.getToClientEvents());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 
@@ -246,7 +247,7 @@ public class BattleItemTest {
 		CreateBattleItemRequestEvent cbire2 = new CreateBattleItemRequestEvent();
 		cbire2.setTag(1);
 		cbire2.setCreateBattleItemRequestProto(cbirpb2.build());
-		createBattleItemController.handleEvent(cbire2);
+		createBattleItemController.processRequestEvent(cbire2, EventsUtil.getToClientEvents());
 
 		User user3 = userRetrieveUtil.getUserById(userId);
 
@@ -310,7 +311,7 @@ public class BattleItemTest {
 		CreateBattleItemRequestEvent cbire3 = new CreateBattleItemRequestEvent();
 		cbire3.setTag(1);
 		cbire3.setCreateBattleItemRequestProto(cbirpb3.build());
-		createBattleItemController.handleEvent(cbire3);
+		createBattleItemController.processRequestEvent(cbire3, EventsUtil.getToClientEvents());
 
 		User user4 = userRetrieveUtil.getUserById(userId);
 
@@ -334,7 +335,7 @@ public class BattleItemTest {
 		CompleteBattleItemRequestEvent cobire = new CompleteBattleItemRequestEvent();
 		cobire.setTag(1);
 		cobire.setCompleteBattleItemRequestProto(cobirpb.build());
-		completeBattleItemController.handleEvent(cobire);
+		completeBattleItemController.processRequestEvent(cobire, EventsUtil.getToClientEvents());
 
 		User user5 = userRetrieveUtil.getUserById(userId);
 
@@ -361,7 +362,7 @@ public class BattleItemTest {
 		DiscardBattleItemRequestEvent dbire = new DiscardBattleItemRequestEvent();
 		dbire.setTag(1);
 		dbire.setDiscardBattleItemRequestProto(dbirpb.build());
-		discardBattleItemController.handleEvent(dbire);
+		discardBattleItemController.processRequestEvent(dbire, EventsUtil.getToClientEvents());
 
 		List<BattleItemForUser> listOfBattleItems2 = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);

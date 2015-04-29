@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 case class CachedClientResponse(uuid:String, date:Long, eventType:Int, event:Array[Byte])
 
 
-//@Component
+@Component
 class CachedClientResponses extends TableDefinition {
   
   val dateColumn = "date"

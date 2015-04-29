@@ -60,7 +60,7 @@ public class CreateClanController extends EventController {
 	protected ClanSearch clanSearch;
 
 	public CreateClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class CreateClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -153,7 +153,7 @@ public class CreateClanController extends EventController {
 				resEventUpdate.setTag(event.getTag());
 //				responses.normalResponseEvents().add(resEventUpdate);
 
-				sendGeneralNotification(user.getName(), clanName);
+				sendGeneralNotification(user.getName(), clanName, responses);
 
 				writeToUserCurrencyHistory(user, createdClan, createTime,
 						currencyChange, previousCurrency);
@@ -205,11 +205,11 @@ public class CreateClanController extends EventController {
 		return true;
 	}
 
-	private void sendGeneralNotification(String userName, String clanName) {
+	private void sendGeneralNotification(String userName, String clanName, ToClientEvents responses) {
 		Notification createClanNotification = new Notification();
 		createClanNotification.setAsClanCreated(userName, clanName);
 
-		miscMethods.writeGlobalNotification(createClanNotification, server);
+		responses.globalChatResponseEvents().add(miscMethods.getGlobalNotification(createClanNotification));
 	}
 
 	private boolean writeChangesToDB(User user, String name, String tag,

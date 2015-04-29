@@ -39,7 +39,7 @@
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
 //  public CollectEquipEnhancementController() {
-//    numAllocatedThreads = 3;
+//    
 //  }
 //  
 //  @Override
@@ -53,7 +53,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    CollectEquipEnhancementRequestProto reqProto = ((CollectEquipEnhancementRequestEvent)event)
 //        .getCollectEquipEnhancementRequestProto();
 //
@@ -66,7 +66,7 @@
 //    CollectEquipEnhancementResponseProto.Builder resBuilder = CollectEquipEnhancementResponseProto.newBuilder();
 //    resBuilder.setSender(senderProto);
 //
-//    server.lockPlayer(userId, this.getClass().getSimpleName());
+//    locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 //    try {
 //      //The main equip that is being enhanced.
 //      EquipEnhancement equipUnderEnhancement = EquipEnhancementRetrieveUtils
@@ -117,7 +117,7 @@
 //    } catch (Exception e) {
 //      log.error("exception in EnhanceEquip processEvent", e);
 //    } finally {
-//      server.unlockPlayer(userId, this.getClass().getSimpleName());      
+//      locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());      
 //    }
 //  }
 //

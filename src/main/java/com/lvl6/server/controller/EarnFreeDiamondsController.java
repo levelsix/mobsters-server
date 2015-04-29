@@ -63,7 +63,7 @@
 ////  private OAuthService oAuthService = null;
 //
 //  public EarnFreeDiamondsController() {
-//    numAllocatedThreads = 1;
+//    
 //  }
 //
 //  @Override
@@ -77,7 +77,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EarnFreeDiamondsRequestProto reqProto = ((EarnFreeDiamondsRequestEvent)event).getEarnFreeDiamondsRequestProto();
 //    MinimumUserProto senderProto = reqProto.getSender();
 //    String userId = senderProto.getUserUuid();

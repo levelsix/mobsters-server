@@ -74,7 +74,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses){
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		AcceptAndRejectFbInviteForSlotsRequestProto reqProto = ((AcceptAndRejectFbInviteForSlotsRequestEvent) event)
 				.getAcceptAndRejectFbInviteForSlotsRequestProto();
 

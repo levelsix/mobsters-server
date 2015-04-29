@@ -5,7 +5,10 @@ import org.springframework.amqp.core.MessageProperties
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import javax.annotation.Resource
 import org.springframework.amqp.core.Message
+import org.springframework.stereotype.Component
 
+
+@Component
 class AmqpEventWriter extends EventWriter with LazyLogging{
   
   

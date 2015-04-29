@@ -93,7 +93,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 
 	public ApproveOrRejectRequestToJoinClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent) event)
 				.getApproveOrRejectRequestToJoinClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -240,7 +240,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 				responses.normalResponseEvents().add(resEvent);
 			} else {
 				//if success to clan and the requester
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				// Send message to the new guy
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						requesterId);
@@ -248,10 +248,10 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 						.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 								.build());
 				//in case user is not online write an apns
-				server.writeAPNSNotificationOrEvent(resEvent2);
+				responses.apnsResponseEvents().add(resEvent2);
 				//responses.normalResponseEvents().add(resEvent2);
 
-				sendClanData(event, requestMup, accept, requesterId, cdp);
+				sendClanData(event, requestMup, accept, requesterId, cdp, responses);
 			}
 		} catch (Exception e) {
 			log.error(
@@ -494,7 +494,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	private void sendClanData(RequestEvent event,
 			MinimumUserProto requesterMup, boolean accepted,
-			String requesterId, ClanDataProto cdp) {
+			String requesterId, ClanDataProto cdp, ToClientEvents responses) {
 		if (!accepted || null == cdp) {
 			log.warn(String.format("accepted=%s, cdp=%s", accepted, cdp));
 			return;

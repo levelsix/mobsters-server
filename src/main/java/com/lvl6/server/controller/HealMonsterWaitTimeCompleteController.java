@@ -38,7 +38,7 @@
 //
 //
 //  public HealMonsterWaitTimeCompleteController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -52,7 +52,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    HealMonsterWaitTimeCompleteRequestProto reqProto = ((HealMonsterWaitTimeCompleteRequestEvent)event).getHealMonsterWaitTimeCompleteRequestProto();
 //
 //    //get values sent from the client (the request proto)
@@ -73,7 +73,7 @@
 //    resBuilder.setSender(senderProto);
 //    resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER); //default
 //
-//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    try {
 //      int previousGems = 0;
 //    	//get whatever we need from the database
@@ -121,7 +121,7 @@
 //    	  log.error("exception2 in HealMonsterWaitTimeCompleteController processEvent", e);
 //      }
 //    } finally {
-//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    }
 //  }
 //  

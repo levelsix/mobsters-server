@@ -27,6 +27,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -40,8 +41,11 @@ public class TradeItemForResourcesController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public TradeItemForResourcesController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -66,7 +70,7 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForResourcesRequestProto reqProto = ((TradeItemForResourcesRequestEvent) event)
 				.getTradeItemForResourcesRequestProto();
 
@@ -110,7 +114,7 @@ public class TradeItemForResourcesController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 			List<ItemForUser> nuUserItems = null;
@@ -163,7 +167,7 @@ public class TradeItemForResourcesController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -191,6 +195,14 @@ public class TradeItemForResourcesController extends EventController {
 
 	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

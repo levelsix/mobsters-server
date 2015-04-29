@@ -55,7 +55,7 @@ public class BeginMiniJobController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public BeginMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class BeginMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginMiniJobRequestProto reqProto = ((BeginMiniJobRequestEvent) event)
 				.getBeginMiniJobRequestProto();
 

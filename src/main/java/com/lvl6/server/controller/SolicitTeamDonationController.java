@@ -52,7 +52,7 @@ public class SolicitTeamDonationController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SolicitTeamDonationController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class SolicitTeamDonationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SolicitTeamDonationRequestProto reqProto = ((SolicitTeamDonationRequestEvent) event)
 				.getSolicitTeamDonationRequestProto();
 
@@ -125,7 +125,7 @@ public class SolicitTeamDonationController extends EventController {
 		if (0 != clanId) {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			SolicitTeamDonationAction stda = new SolicitTeamDonationAction(
@@ -155,7 +155,7 @@ public class SolicitTeamDonationController extends EventController {
 				resBuilder.setSolicitation(cmtdp);
 
 				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -187,7 +187,7 @@ public class SolicitTeamDonationController extends EventController {
 			if (0 != clanId && lockedClan) {
 			getLocker().unlockClan(clanId);
 			} else {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

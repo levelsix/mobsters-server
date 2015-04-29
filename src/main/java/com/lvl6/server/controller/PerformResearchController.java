@@ -63,7 +63,7 @@ public class PerformResearchController extends EventController {
 	protected ResearchRetrieveUtils researchRetrieveUtils;
 
 	public PerformResearchController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class PerformResearchController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PerformResearchRequestProto reqProto = ((PerformResearchRequestEvent) event)
 				.getPerformResearchRequestProto();
 		log.info("reqProto={}", reqProto);

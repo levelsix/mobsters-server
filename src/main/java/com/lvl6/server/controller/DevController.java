@@ -45,7 +45,7 @@ public class DevController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public DevController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Autowired
@@ -74,7 +74,7 @@ public class DevController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DevRequestProto reqProto = ((DevRequestEvent) event)
 				.getDevRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -110,7 +110,7 @@ public class DevController extends EventController {
 			return;
 		}
 
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
@@ -156,7 +156,7 @@ public class DevController extends EventController {
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

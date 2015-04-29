@@ -58,7 +58,7 @@ public class PurchaseNormStructureController extends EventController {
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public PurchaseNormStructureController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class PurchaseNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PurchaseNormStructureRequestProto reqProto = ((PurchaseNormStructureRequestEvent) event)
 				.getPurchaseNormStructureRequestProto();
 		log.info("reqProto={}", reqProto);

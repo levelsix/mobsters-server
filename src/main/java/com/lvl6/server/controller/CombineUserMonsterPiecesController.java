@@ -55,7 +55,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public CombineUserMonsterPiecesController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CombineUserMonsterPiecesRequestProto reqProto = ((CombineUserMonsterPiecesRequestEvent) event)
 				.getCombineUserMonsterPiecesRequestProto();
 

@@ -75,7 +75,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	public ClearExpiredClanGiftsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ClearExpiredClanGiftsRequestProto reqProto = ((ClearExpiredClanGiftsRequestEvent) event)
 				.getClearExpiredClanGiftsRequestProto();
 
@@ -145,7 +145,7 @@ public class ClearExpiredClanGiftsController extends EventController {
 			if (ClearExpiredClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								uusa.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());

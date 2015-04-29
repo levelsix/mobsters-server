@@ -78,7 +78,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public IncreaseMonsterInventorySlotController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		IncreaseMonsterInventorySlotRequestProto reqProto = ((IncreaseMonsterInventorySlotRequestEvent) event)
 				.getIncreaseMonsterInventorySlotRequestProto();
 

@@ -59,7 +59,7 @@ public class FinishPerformingResearchController extends EventController {
 	protected InsertUtil insertUtil;
 
 	public FinishPerformingResearchController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class FinishPerformingResearchController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		FinishPerformingResearchRequestProto reqProto = ((FinishPerformingResearchRequestEvent) event)
 				.getFinishPerformingResearchRequestProto();
 

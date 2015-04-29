@@ -33,6 +33,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CollectClanGiftsAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -73,9 +74,11 @@ public class CollectClanGiftsController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public CollectClanGiftsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -89,7 +92,7 @@ public class CollectClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CollectClanGiftsRequestProto reqProto = ((CollectClanGiftsRequestEvent) event)
 				.getCollectClanGiftsRequestProto();
 
@@ -151,7 +154,7 @@ public class CollectClanGiftsController extends EventController {
 				log.info("reward proto for collect: " + uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								uusa.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
@@ -216,6 +219,14 @@ public class CollectClanGiftsController extends EventController {
 
 	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
 		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 }

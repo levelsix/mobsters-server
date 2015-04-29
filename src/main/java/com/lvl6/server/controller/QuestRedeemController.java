@@ -46,7 +46,7 @@
 //  protected Locker locker;
 //
 //  public QuestRedeemController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -60,7 +60,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestRedeemRequestProto reqProto = ((QuestRedeemRequestEvent)event).getQuestRedeemRequestProto();
 //
 //    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();

@@ -41,6 +41,7 @@ import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.PreDBResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -84,7 +85,7 @@ public class UserCreateController extends EventController {
 	protected TaskRetrieveUtils taskRetrieveUtils;
 
 	public UserCreateController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -98,7 +99,7 @@ public class UserCreateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UserCreateRequestProto reqProto = ((UserCreateRequestEvent) event)
 				.getUserCreateRequestProto();
 		String udid = reqProto.getUdid();
@@ -149,18 +150,20 @@ public class UserCreateController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setUserCreateResponseProto(resProto);
 			log.info(String.format("Writing event: %s", resEvent));
-			server.writePreDBEvent(resEvent, udid);
+			responses.preDBResponseEvents().add(new PreDBResponseEvent(resEvent, udid));
 
 			if (userId != null) {
 				//recording that player is online I guess
-				ConnectedPlayer player = server.getPlayerByUdId(udid);
+				
+				//TODO: Not sure if this is needed... event processor will do it for you
+				/*ConnectedPlayer player = server.getPlayerByUdId(udid);
 				player.setPlayerId(userId);
 				server.getPlayersByPlayerId().put(userId, player);
-				server.getPlayersPreDatabaseByUDID().remove(udid);
+				server.getPlayersPreDatabaseByUDID().remove(udid);*/
 			}
 
 			if (legitUserCreate && userId != null) {
-				/*server.lockPlayer(userId, this.getClass().getSimpleName());*/
+				/*locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());*/
 				try {
 					//TAKE INTO ACCOUNT THE PROPERTIES SENT IN BY CLIENT
 					log.info("writing user structs");
@@ -182,7 +185,7 @@ public class UserCreateController extends EventController {
 					log.error("exception in UserCreateController processEvent",
 							e);
 				} /*finally {
-					server.unlockPlayer(userId, this.getClass().getSimpleName()); 
+					locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
 					}*/
 			}
 		} catch (Exception e) {
@@ -275,7 +278,7 @@ public class UserCreateController extends EventController {
 				avatarMonsterId, email, fbData);
 
 		if (userId != null) {
-			/*server.lockPlayer(userId, this.getClass().getSimpleName());*//*
+			/*locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());*//*
 																			try {
 																			user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 																			FullUserProto userProto = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
@@ -283,7 +286,7 @@ public class UserCreateController extends EventController {
 																			} catch (Exception e) {
 																			log.error("exception in UserCreateController processEvent", e);
 																			}*//*finally {
-																				server.unlockPlayer(userId, this.getClass().getSimpleName()); 
+																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
 																				}*/
 		} else {
 			resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
@@ -525,7 +528,7 @@ public class UserCreateController extends EventController {
 	//              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null))
 	//              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
 	//          resEvent.setReferralCodeUsedResponseProto(resProto);
-	//          server.writeAPNSNotificationOrEvent(resEvent);
+	//          responses.apnsResponseEvents().add((resEvent);
 	//          
 	//          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);
 	//        }

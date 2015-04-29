@@ -163,7 +163,7 @@ package com.lvl6.test.controller.integrationtests;
 //		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
 //		prre.setTag(1);
 //		prre.setPerformResearchRequestProto(prrpb.build());
-//		performResearchController.handleEvent(prre);
+//		performResearchController.processRequestEvent(prre, EventsUtil.getToClientEvents());
 //
 //		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
 //				.getAllResearchForUser(user1.getId());
@@ -204,7 +204,7 @@ package com.lvl6.test.controller.integrationtests;
 //		PerformResearchRequestEvent prre2 = new PerformResearchRequestEvent();
 //		prre2.setTag(1);
 //		prre2.setPerformResearchRequestProto(prrpb.build());
-//		performResearchController.handleEvent(prre2);
+//		performResearchController.processRequestEvent(prre2, EventsUtil.getToClientEvents());
 //
 //		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
 //				.getAllResearchForUser(user1.getId());
@@ -236,7 +236,7 @@ package com.lvl6.test.controller.integrationtests;
 //		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
 //		fprre.setTag(1);
 //		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
-//		finishPerformingResearchController.handleEvent(fprre);
+//		finishPerformingResearchController.processRequestEvent(fprre, EventsUtil.getToClientEvents());
 //
 //		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
 //				.getAllResearchForUser(user1.getId());

@@ -61,7 +61,7 @@ public class TradeItemForBoosterController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public TradeItemForBoosterController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Autowired
@@ -109,7 +109,7 @@ public class TradeItemForBoosterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForBoosterRequestProto reqProto = ((TradeItemForBoosterRequestEvent) event)
 				.getTradeItemForBoosterRequestProto();
 
@@ -146,7 +146,7 @@ public class TradeItemForBoosterController extends EventController {
 			return;
 		}
 
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		//TODO: Logic similar to PurchaseBoosterPack, see what else can be optimized/shared
 		try {
 			User aUser = getUserRetrieveUtils().getUserById(
@@ -247,7 +247,7 @@ public class TradeItemForBoosterController extends EventController {
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}
 	}
 

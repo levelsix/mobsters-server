@@ -47,6 +47,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.server.EventWriterOld;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.memetix.mst.language.Language;
@@ -94,7 +95,7 @@ public class SendGroupChatController extends EventController {
 	protected ClanSearch clanSearch;
 
 	public SendGroupChatController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	private ReceivedGroupChatResponseProto rgcrp;
@@ -110,7 +111,7 @@ public class SendGroupChatController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(final RequestEvent event)
+	public void processRequestEvent(final RequestEvent event, ToClientEvents responses)
 			 {
 		final SendGroupChatRequestProto reqProto = ((SendGroupChatRequestEvent) event)
 				.getSendGroupChatRequestProto();
@@ -366,15 +367,6 @@ public class SendGroupChatController extends EventController {
 		this.chatMessages = chatMessages;
 	}
 
-	@Override
-	public EventWriterOld getEventWriter() {
-		return eventWriter;
-	}
-
-	@Override
-	public void setEventWriter(EventWriterOld eventWriter) {
-		this.eventWriter = eventWriter;
-	}
 
 	public Locker getLocker() {
 		return locker;

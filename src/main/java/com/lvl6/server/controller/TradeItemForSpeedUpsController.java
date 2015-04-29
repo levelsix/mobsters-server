@@ -22,6 +22,7 @@ import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TradeItemForSpeedUpsAction;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -37,8 +38,11 @@ public class TradeItemForSpeedUpsController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	public TradeItemForSpeedUpsController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
@@ -57,7 +61,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForSpeedUpsRequestProto reqProto = ((TradeItemForSpeedUpsRequestEvent) event)
 				.getTradeItemForSpeedUpsRequestProto();
 
@@ -96,7 +100,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		//TODO: Logic similar to PurchaseSpeedUpsPack, see what else can be optimized/shared
 		try {
@@ -151,7 +155,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -163,6 +167,14 @@ public class TradeItemForSpeedUpsController extends EventController {
 	public void setItemForUserRetrieveUtil(
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

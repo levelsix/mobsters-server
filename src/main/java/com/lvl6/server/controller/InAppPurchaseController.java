@@ -141,7 +141,7 @@ public class InAppPurchaseController extends EventController {
 
 
     public InAppPurchaseController() {
-        numAllocatedThreads = 2;
+        
     }
 
     @Override
@@ -163,7 +163,7 @@ public class InAppPurchaseController extends EventController {
      */
     // @SuppressWarnings("deprecation")
     @Override
-    protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+    public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
         InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
                 .getInAppPurchaseRequestProto();
 

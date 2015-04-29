@@ -46,7 +46,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public VoidTeamDonationSolicitationController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		VoidTeamDonationSolicitationRequestProto reqProto = ((VoidTeamDonationSolicitationRequestEvent) event)
 				.getVoidTeamDonationSolicitationRequestProto();
 
@@ -146,7 +146,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 		if (0 != clanId) {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			VoidTeamDonationSolicitationAction stda = new VoidTeamDonationSolicitationAction(
@@ -176,7 +176,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 
 				//write to the clans of the solicitations if success
 				for (String clanId : clanIds) {
-					responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId));
+					responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				}
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -204,7 +204,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			if (0 != clanId && lockedClan) {
 			getLocker().unlockClan(clanId);
 			} else {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

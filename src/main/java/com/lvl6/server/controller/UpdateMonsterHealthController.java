@@ -46,7 +46,7 @@ public class UpdateMonsterHealthController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public UpdateMonsterHealthController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class UpdateMonsterHealthController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent) event)
 				.getUpdateMonsterHealthRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

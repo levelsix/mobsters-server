@@ -60,7 +60,7 @@ public class SpawnMiniJobController extends EventController {
 	//	protected Locker locker;
 
 	public SpawnMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class SpawnMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SpawnMiniJobRequestProto reqProto = ((SpawnMiniJobRequestEvent) event)
 				.getSpawnMiniJobRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));

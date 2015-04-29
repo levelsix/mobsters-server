@@ -48,7 +48,7 @@ public class SetFacebookIdController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public SetFacebookIdController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class SetFacebookIdController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetFacebookIdRequestProto reqProto = ((SetFacebookIdRequestEvent) event)
 				.getSetFacebookIdRequestProto();
 

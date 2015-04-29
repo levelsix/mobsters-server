@@ -47,7 +47,7 @@
 //
 //  
 //  public QuestAcceptController() {
-//    numAllocatedThreads = 5;
+//    
 //  }
 //  
 //  @Override
@@ -61,7 +61,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestAcceptRequestProto reqProto = ((QuestAcceptRequestEvent)event).getQuestAcceptRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();
