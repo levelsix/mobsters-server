@@ -98,7 +98,7 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 		
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
-			if(playerId != null) {
+			if(playerId != null && !playerId.isEmpty()) {
 				user = userRetrieveUtils.getUserById(playerId);
 			}
 			else if (event instanceof PreDatabaseRequestEvent) {
