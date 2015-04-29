@@ -814,11 +814,6 @@
 				<artifactId>commons-beanutils</artifactId>
 				<version>1.8.3</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>4.2.1</version>
-			</dependency>
 <!--     		<dependency> -->
 <!--         		<groupid>junit</groupId> -->
 <!--         		<artifactid>junit</artifactId> -->

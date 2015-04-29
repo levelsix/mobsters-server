@@ -92,16 +92,26 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 		RequestEvent event = ec.createRequestEvent();
 		event.setTag(attachment.tag);
 		event.read(bb);
+
+		User user = null;
+		String udid = ((PreDatabaseRequestEvent) event).getUdid();
+		String playerId = event.getPlayerId();
+		
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
-			String playerId = event.getPlayerId();
-			User user = userRetrieveUtils.getUserById(playerId);
-			if(user.isAdmin()) {
+			if(playerId != null) {
+				user = userRetrieveUtils.getUserById(playerId);
+			}
+			else {
+				if(udid != null) {
+					user = userRetrieveUtils.getUserByUDIDorFbId(udid, "").get(0);
+				}
+			}
+			if(user != null && user.isAdmin()) {
 				
 			}else {
 				//not an admin so send maintenance message and return
 				if (event instanceof PreDatabaseRequestEvent) {
-					String udid = ((PreDatabaseRequestEvent) event).getUdid();
 					messagingUtil.sendMaintanenceModeMessageUdid(
 							getApplicationMode().getMessageForUsers(), udid);
 				} else {
