@@ -94,15 +94,15 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 		event.read(bb);
 
 		User user = null;
-		String udid = ((PreDatabaseRequestEvent) event).getUdid();
 		String playerId = event.getPlayerId();
 		
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
-			if(playerId != null) {
+			if(playerId != null && !playerId.isEmpty()) {
 				user = userRetrieveUtils.getUserById(playerId);
 			}
-			else {
+			else if (event instanceof PreDatabaseRequestEvent) {
+				String udid = ((PreDatabaseRequestEvent) event).getUdid();
 				if(udid != null) {
 					user = userRetrieveUtils.getUserByUDIDorFbId(udid, "").get(0);
 				}
@@ -112,10 +112,11 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 			}else {
 				//not an admin so send maintenance message and return
 				if (event instanceof PreDatabaseRequestEvent) {
+					String udid = ((PreDatabaseRequestEvent) event).getUdid();
 					messagingUtil.sendMaintanenceModeMessageUdid(
 							getApplicationMode().getMessageForUsers(), udid);
 				} else {
-					messagingUtil.sendMaintanenceModeMessageUdid(
+					messagingUtil.sendMaintanenceModeMessage(
 							getApplicationMode().getMessageForUsers(), playerId);
 				}
 				return;
