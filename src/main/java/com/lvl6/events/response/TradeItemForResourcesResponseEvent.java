@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TradeItemForResourcesResponseEvent extends NormalResponseEvent {
+public class TradeItemForResourcesResponseEvent extends NormalResponseEvent<TradeItemForResourcesResponseProto> {
 
 	private TradeItemForResourcesResponseProto tradeItemForResourcesResponseProto;
 

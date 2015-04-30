@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class QuestProgressResponseEvent extends NormalResponseEvent {
+public class QuestProgressResponseEvent extends NormalResponseEvent<QuestProgressResponseProto> {
 
 	private QuestProgressResponseProto questProgressResponseProto;
 

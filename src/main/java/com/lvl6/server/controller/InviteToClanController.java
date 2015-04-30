@@ -22,7 +22,7 @@
 //import com.lvl6.utils.RetrieveUtils;
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //
-//@Component @DependsOn("gameServer") public class InviteToClanController extends EventController {
+//@Component  public class InviteToClanController extends EventController {
 //
 //	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

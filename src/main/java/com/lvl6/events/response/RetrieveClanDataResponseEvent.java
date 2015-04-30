@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveClanDataResponseEvent extends NormalResponseEvent {
+public class RetrieveClanDataResponseEvent extends NormalResponseEvent<RetrieveClanDataResponseProto> {
 
 	private RetrieveClanDataResponseProto retrieveClanDataResponseProto;
 

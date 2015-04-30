@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent {
+public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent<AwardClanRaidStageRewardResponseProto> {
 
 	private AwardClanRaidStageRewardResponseProto awardClanRaidStageRewardResponseProto;
 

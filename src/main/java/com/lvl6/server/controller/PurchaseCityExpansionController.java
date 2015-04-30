@@ -39,7 +39,7 @@
 // * NOT READY/BEING USED YET
 // */
 //
-//@Component @DependsOn("gameServer") public class PurchaseCityExpansionController extends EventController {
+//@Component  public class PurchaseCityExpansionController extends EventController {
 //
 //	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

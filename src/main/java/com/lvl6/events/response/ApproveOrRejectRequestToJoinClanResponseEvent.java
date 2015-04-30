@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ApproveOrRejectRequestToJoinClanResponseEvent extends
-		NormalResponseEvent {
+public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalResponseEvent<ApproveOrRejectRequestToJoinClanResponseProto> {
 
 	private ApproveOrRejectRequestToJoinClanResponseProto approveOrRejectRequestToJoinClanResponseProto;
 

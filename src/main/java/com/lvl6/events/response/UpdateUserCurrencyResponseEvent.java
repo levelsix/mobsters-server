@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent {
+public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateUserCurrencyResponseProto> {
 
 	private UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto;
 

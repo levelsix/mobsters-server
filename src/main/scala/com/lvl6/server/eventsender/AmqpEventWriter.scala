@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component
 class AmqpEventWriter extends EventWriter with LazyLogging{
   
   
-  @Resource(name="chatMessageTemplate") var chatTemplate:RabbitTemplate = null
-  @Resource(name="clientMessageTemplate") var clientTemplate:RabbitTemplate = null
+  @Resource(name="chatMessagesTemplate") var chatTemplate:RabbitTemplate = null
+  @Resource(name="clientMessagesTemplate") var clientTemplate:RabbitTemplate = null
   
   def preDBFaceBookRoutingKey(facebookId:String) = "client_facebookid_"+facebookId
   def preDBRoutingKey(udid:String) = "client_udid_"+udid

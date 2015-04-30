@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent {
+public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<TranslateSelectMessagesResponseProto> {
 
 	private TranslateSelectMessagesResponseProto translateSelectMessagesResponseProto;
 

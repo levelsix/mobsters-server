@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent {
+public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<ExchangeGemsForResourcesResponseProto> {
 
 	private ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto;
 

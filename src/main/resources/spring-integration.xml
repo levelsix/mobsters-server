@@ -63,7 +63,7 @@
 	</int:service-activator>
 
 
-	<bean id="gameEventHandler" class="com.lvl6.eventhandlers.GameEventHandler" />
+	<bean id="gameEventHandler" class="com.lvl6.eventhandlers.AmqpGameEventHandler" />
 
 
 

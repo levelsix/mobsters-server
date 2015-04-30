@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent {
+public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent<RetrieveUsersForUserIdsResponseProto> {
 
 	private RetrieveUsersForUserIdsResponseProto retrieveUsersForUserIdsResponseProto;
 

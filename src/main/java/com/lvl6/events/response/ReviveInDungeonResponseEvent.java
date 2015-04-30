@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ReviveInDungeonResponseEvent extends NormalResponseEvent {
+public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDungeonResponseProto> {
 
 	private ReviveInDungeonResponseProto reviveInDungeonResponseProto;
 

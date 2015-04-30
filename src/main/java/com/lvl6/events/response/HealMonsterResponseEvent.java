@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class HealMonsterResponseEvent extends NormalResponseEvent {
+public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterResponseProto> {
 
 	private HealMonsterResponseProto healMonsterResponseProto;
 

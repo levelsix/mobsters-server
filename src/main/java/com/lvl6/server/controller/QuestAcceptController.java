@@ -31,7 +31,7 @@
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //import com.lvl6.utils.utilmethods.QuestUtils;
 //
-//  @Component @DependsOn("gameServer") public class QuestAcceptController extends EventController {
+//  @Component  public class QuestAcceptController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

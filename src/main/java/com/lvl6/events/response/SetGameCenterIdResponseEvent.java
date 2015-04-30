@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetGameCenterIdResponseEvent extends NormalResponseEvent {
+public class SetGameCenterIdResponseEvent extends NormalResponseEvent<SetGameCenterIdResponseProto> {
 
 	private SetGameCenterIdResponseProto setGameCenterIdResponseProto;
 

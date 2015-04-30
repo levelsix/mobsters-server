@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventProto.CollectEquipEnhancementResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class CollectEquipEnhancementResponseEvent extends NormalResponseEvent {
+//public class CollectEquipEnhancementResponseEvent extends NormalResponseEvent<CollectEquipEnhancementResponseProto> {
 //
 //  private CollectEquipEnhancementResponseProto collectEquipEnhanceResponseProto;
 //  

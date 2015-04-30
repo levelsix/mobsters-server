@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EnhancementWaitTimeCompleteResponseEvent extends
-		NormalResponseEvent {
+public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEvent<EnhancementWaitTimeCompleteResponseProto> {
 
 	private EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto;
 

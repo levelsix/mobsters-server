@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class InAppPurchaseResponseEvent extends NormalResponseEvent {
+public class InAppPurchaseResponseEvent extends NormalResponseEvent<InAppPurchaseResponseProto> {
 
 	private InAppPurchaseResponseProto inAppPurchaseResponseProto;
 

@@ -59,17 +59,6 @@ public class HealthCheckImpl implements HealthCheck {
 		this.serverConnectionFactory = serverConnectionFactory;
 	}
 
-	@Resource
-	protected ServerInstance server;
-
-	public ServerInstance getServer() {
-		return server;
-	}
-
-	public void setServer(ServerInstance server) {
-		this.server = server;
-	}
-
 	public LoadTestEventGenerator getGen() {
 		return gen;
 	}

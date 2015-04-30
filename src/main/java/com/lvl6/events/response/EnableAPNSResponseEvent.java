@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EnableAPNSResponseEvent extends NormalResponseEvent {
+public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSResponseProto> {
 
 	private EnableAPNSResponseProto enableAPNSResponseProto;
 

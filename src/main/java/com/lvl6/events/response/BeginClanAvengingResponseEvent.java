@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BeginClanAvengingResponseEvent extends NormalResponseEvent {
+public class BeginClanAvengingResponseEvent extends NormalResponseEvent<BeginClanAvengingResponseProto> {
 
 	private BeginClanAvengingResponseProto beginClanAvengingResponseProto;
 

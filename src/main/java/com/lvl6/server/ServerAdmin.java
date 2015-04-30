@@ -25,6 +25,8 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
+import com.lvl6.server.eventsender.EventWriter;
+import com.lvl6.util.EventParser;
 import com.lvl6.utils.ConnectedPlayer;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {
@@ -83,8 +85,8 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	@Resource(name = "staticDataReloadDone")
 	protected ITopic<ServerMessage> staticDataReloadDone;
 
-	@Resource(name = "eventWriter")
-	protected EventWriterOld writer;
+	@Autowired
+	protected EventWriter writer;
 
 	@Autowired
 	protected HazelcastInstance hazel;
@@ -122,11 +124,11 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		this.serverEvents = serverEvents;
 	}
 
-	public EventWriterOld getWriter() {
+	public EventWriter getWriter() {
 		return writer;
 	}
 
-	public void setWriter(EventWriterOld writer) {
+	public void setWriter(EventWriter writer) {
 		this.writer = writer;
 	}
 
@@ -221,7 +223,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 				purgeProto.setStaticDataStuff(sdp);
 
 				pcsd.setPurgeClientStaticDataResponseProto(purgeProto.build());
-				writer.handleEvent(pcsd);
+				writer.sendToSinglePlayer(playa, EventParser.getResponseBytes("", pcsd));//handleEvent(pcsd);
 			}
 		}
 	}

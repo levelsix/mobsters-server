@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent {
+public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent<NormStructWaitCompleteResponseProto> {
 
 	private NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto;
 

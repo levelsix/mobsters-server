@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SpawnObstacleResponseEvent extends NormalResponseEvent {
+public class SpawnObstacleResponseEvent extends NormalResponseEvent<SpawnObstacleResponseProto> {
 
 	private SpawnObstacleResponseProto spawnObstacleResponseProto;
 

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AcceptOrRejectClanInviteResponseEvent extends NormalResponseEvent {
+public class AcceptOrRejectClanInviteResponseEvent extends NormalResponseEvent<AcceptOrRejectClanInviteResponseProto> {
 
 	private AcceptOrRejectClanInviteResponseProto acceptOrRejectClanInviteResponseProto;
 

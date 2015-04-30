@@ -41,7 +41,7 @@
 //import com.lvl6.utils.utilmethods.QuestUtils;
 //import com.lvl6.utils.utilmethods.UpdateUtil;
 //
-//  @Component @DependsOn("gameServer") public class QuestProgressController extends EventController {
+//  @Component  public class QuestProgressController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

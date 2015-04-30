@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class ReferralCodeUsedResponseEvent extends NormalResponseEvent{
+//public class ReferralCodeUsedResponseEvent extends NormalResponseEvent<ReferralCodeUsedResponseProto>{
 //
 //  private ReferralCodeUsedResponseProto referralCodeUsedResponseProto;
 //  

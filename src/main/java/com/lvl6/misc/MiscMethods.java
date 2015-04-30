@@ -79,10 +79,8 @@ import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
-import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.spring.AppContext;
-import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
@@ -309,9 +307,8 @@ public class MiscMethods {
 		}
 	}
 
-	public String getIPOfPlayer(GameServer server, String playerId,
-			String udid) {
-		ConnectedPlayer player = null;
+	public String getIPOfPlayer(String playerId,	String udid) {
+/*		ConnectedPlayer player = null;
 		if (playerId != null && !playerId.isEmpty()) {
 			player = server.getPlayerById(playerId);
 			if (player != null) {
@@ -323,8 +320,8 @@ public class MiscMethods {
 			if (player != null) {
 				return player.getIp_connection_id();
 			}
-		}
-		return null;
+		}*/
+		return "amqp";
 	}
 
 	public void purgeMDCProperties() {
@@ -921,17 +918,13 @@ public class MiscMethods {
 		return aNotification;
 	}
 
-	public void writeClanApnsNotification(Notification n,
-			GameServer server, String clanId) {
-		GeneralNotificationResponseProto.Builder notificationProto = n
-				.generateNotificationBuilder();
+/*	public void writeClanApnsNotification(Notification n,	GameServer server, String clanId) {
+		GeneralNotificationResponseProto.Builder notificationProto = n.generateNotificationBuilder();
 
-		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(
-				"");
-		aNotification.setGeneralNotificationResponseProto(notificationProto
-				.build());
+		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent("");
+		aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 		server.writeApnsClanEvent(aNotification, clanId);
-	}
+	}*/
 
 	public GeneralNotificationResponseEvent writeNotificationToUser(Notification aNote,	String userId) {
 		GeneralNotificationResponseProto.Builder notificationProto = aNote

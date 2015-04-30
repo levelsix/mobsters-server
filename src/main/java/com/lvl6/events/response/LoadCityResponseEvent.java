@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventCityProto.LoadCityResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class LoadCityResponseEvent extends NormalResponseEvent{
+//public class LoadCityResponseEvent extends NormalResponseEvent<LoadCityResponseProto>{
 //
 //  private LoadCityResponseProto loadCityResponseProto;
 //  

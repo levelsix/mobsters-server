@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class GeneralNotificationResponseEvent extends NormalResponseEvent {
+public class GeneralNotificationResponseEvent extends NormalResponseEvent<GeneralNotificationResponseProto> {
 
 	private GeneralNotificationResponseProto generalNotificationResponseProto;
 

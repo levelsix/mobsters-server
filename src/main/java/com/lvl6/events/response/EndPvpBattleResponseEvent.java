@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EndPvpBattleResponseEvent extends NormalResponseEvent {
+public class EndPvpBattleResponseEvent extends NormalResponseEvent<EndPvpBattleResponseProto> {
 
 	private EndPvpBattleResponseProto endPvpBattleResponseProto;
 

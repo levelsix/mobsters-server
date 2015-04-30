@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TradeItemForBoosterResponseEvent extends NormalResponseEvent {
+public class TradeItemForBoosterResponseEvent extends NormalResponseEvent<TradeItemForBoosterResponseProto> {
 
 	private TradeItemForBoosterResponseProto tradeItemForBoosterResponseProto;
 

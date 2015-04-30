@@ -35,7 +35,7 @@
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //
 //@Component
-//@DependsOn("gameServer")
+//
 //public class EarnFreeDiamondsController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());

@@ -32,7 +32,7 @@
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //import com.lvl6.utils.utilmethods.UpdateUtils;
 //
-//@Component @DependsOn("gameServer") public class HealMonsterWaitTimeCompleteController extends EventController {
+//@Component  public class HealMonsterWaitTimeCompleteController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

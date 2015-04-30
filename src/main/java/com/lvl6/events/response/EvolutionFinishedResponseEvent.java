@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EvolutionFinishedResponseEvent extends NormalResponseEvent {
+public class EvolutionFinishedResponseEvent extends NormalResponseEvent<EvolutionFinishedResponseProto> {
 
 	private EvolutionFinishedResponseProto evolutionFinishedResponseProto;
 

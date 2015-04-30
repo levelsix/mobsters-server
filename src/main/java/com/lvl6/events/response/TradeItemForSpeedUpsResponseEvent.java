@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent {
+public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<TradeItemForSpeedUpsResponseProto> {
 
 	private TradeItemForSpeedUpsResponseProto tradeItemForSpeedUpsResponseProto;
 

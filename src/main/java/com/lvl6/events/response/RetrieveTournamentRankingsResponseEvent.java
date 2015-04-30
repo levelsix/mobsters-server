@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class RetrieveTournamentRankingsResponseEvent extends NormalResponseEvent {
+//public class RetrieveTournamentRankingsResponseEvent extends NormalResponseEvent<RetrieveTournamentRankingsResponseProto> {
 //
 //  private RetrieveTournamentRankingsResponseProto retrieveTournamentRankingsResponseProto;
 //  

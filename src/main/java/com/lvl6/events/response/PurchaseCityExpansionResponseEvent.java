@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class PurchaseCityExpansionResponseEvent extends NormalResponseEvent {
+//public class PurchaseCityExpansionResponseEvent extends NormalResponseEvent<PurchaseCityExpansionResponseProto> {
 //
 //  private PurchaseCityExpansionResponseProto purchaseCityExpansionResponseProto;
 //  

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AchievementProgressResponseEvent extends NormalResponseEvent {
+public class AchievementProgressResponseEvent extends NormalResponseEvent<AchievementProgressResponseProto> {
 
 	private AchievementProgressResponseProto achievementProgressResponseProto;
 

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ClearExpiredClanGiftsResponseEvent extends NormalResponseEvent {
+public class ClearExpiredClanGiftsResponseEvent extends NormalResponseEvent<ClearExpiredClanGiftsResponseProto> {
 
 	private ClearExpiredClanGiftsResponseProto clearExpiredClanGiftsResponseProto;
 

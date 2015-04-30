@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent {
+public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent<ObstacleRemovalCompleteResponseProto> {
 
 	private ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto;
 

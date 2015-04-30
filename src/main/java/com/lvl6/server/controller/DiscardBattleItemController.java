@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -31,7 +30,7 @@ import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class DiscardBattleItemController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {

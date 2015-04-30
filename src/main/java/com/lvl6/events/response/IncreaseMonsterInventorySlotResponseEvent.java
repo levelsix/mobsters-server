@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class IncreaseMonsterInventorySlotResponseEvent extends
-		NormalResponseEvent {
+public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEvent<IncreaseMonsterInventorySlotResponseProto> {
 
 	private IncreaseMonsterInventorySlotResponseProto increaseMonsterInventorySlotResponseProto;
 

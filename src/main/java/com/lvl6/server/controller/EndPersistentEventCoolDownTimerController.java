@@ -24,7 +24,7 @@
 //import com.lvl6.utils.RetrieveUtils;
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //
-//@Component @DependsOn("gameServer") public class EndPersistentEventCoolDownTimerController extends EventController {
+//@Component  public class EndPersistentEventCoolDownTimerController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

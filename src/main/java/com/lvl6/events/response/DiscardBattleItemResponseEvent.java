@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class DiscardBattleItemResponseEvent extends NormalResponseEvent {
+public class DiscardBattleItemResponseEvent extends NormalResponseEvent<DiscardBattleItemResponseProto> {
 
 	private DiscardBattleItemResponseProto discardBattleItemResponseProto;
 

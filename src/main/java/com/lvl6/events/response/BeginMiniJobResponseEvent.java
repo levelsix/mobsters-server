@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BeginMiniJobResponseEvent extends NormalResponseEvent {
+public class BeginMiniJobResponseEvent extends NormalResponseEvent<BeginMiniJobResponseProto> {
 
 	private BeginMiniJobResponseProto beginMiniJobResponseProto;
 

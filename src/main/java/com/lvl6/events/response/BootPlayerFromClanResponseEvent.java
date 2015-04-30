@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BootPlayerFromClanResponseEvent extends NormalResponseEvent {
+public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPlayerFromClanResponseProto> {
 
 	private BootPlayerFromClanResponseProto bootPlayerFromClanResponseProto;
 

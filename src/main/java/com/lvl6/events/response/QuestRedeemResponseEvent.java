@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class QuestRedeemResponseEvent extends NormalResponseEvent {
+public class QuestRedeemResponseEvent extends NormalResponseEvent<QuestRedeemResponseProto> {
 
 	private QuestRedeemResponseProto questRedeemResponseProto;
 

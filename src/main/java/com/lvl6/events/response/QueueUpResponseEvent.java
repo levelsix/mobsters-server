@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class QueueUpResponseEvent extends NormalResponseEvent {
+public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponseProto> {
 
 	private QueueUpResponseProto QueueUpResponseProto;
 

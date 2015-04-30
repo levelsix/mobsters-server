@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CreateBattleItemResponseEvent extends NormalResponseEvent {
+public class CreateBattleItemResponseEvent extends NormalResponseEvent<CreateBattleItemResponseProto> {
 
 	private CreateBattleItemResponseProto createBattleItemResponseProto;
 

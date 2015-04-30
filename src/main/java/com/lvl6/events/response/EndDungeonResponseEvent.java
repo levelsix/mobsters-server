@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EndDungeonResponseEvent extends NormalResponseEvent {
+public class EndDungeonResponseEvent extends NormalResponseEvent<EndDungeonResponseProto> {
 
 	private EndDungeonResponseProto endDungeonResponseProto;
 

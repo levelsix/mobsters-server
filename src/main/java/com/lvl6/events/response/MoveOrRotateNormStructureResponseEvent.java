@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent {
+public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<MoveOrRotateNormStructureResponseProto> {
 
 	private MoveOrRotateNormStructureResponseProto moveOrRotateNormStructureResponseProto;
 

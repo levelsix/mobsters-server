@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class VoidTeamDonationSolicitationResponseEvent extends
-		NormalResponseEvent {
+public class VoidTeamDonationSolicitationResponseEvent extends	NormalResponseEvent<VoidTeamDonationSolicitationResponseProto> {
 
 	private VoidTeamDonationSolicitationResponseProto voidTeamDonationSolicitationResponseProto;
 

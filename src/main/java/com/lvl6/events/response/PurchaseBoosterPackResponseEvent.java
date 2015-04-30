@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent {
+public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<PurchaseBoosterPackResponseProto> {
 
 	private PurchaseBoosterPackResponseProto purchaseBoosterPackResponseProto;
 

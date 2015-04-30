@@ -34,7 +34,7 @@
 //import com.lvl6.utils.utilmethods.UpdateUtils;
 //
 //
-//@Component @DependsOn("gameServer") public class ExpansionWaitCompleteController extends EventController{
+//@Component  public class ExpansionWaitCompleteController extends EventController{
 //
 //	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

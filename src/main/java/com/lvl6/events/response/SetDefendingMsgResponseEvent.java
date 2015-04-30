@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetDefendingMsgResponseEvent extends NormalResponseEvent {
+public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendingMsgResponseProto> {
 
 	private SetDefendingMsgResponseProto setDefendingMsgResponseProto;
 

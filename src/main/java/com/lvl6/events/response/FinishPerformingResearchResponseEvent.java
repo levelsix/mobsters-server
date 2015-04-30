@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class FinishPerformingResearchResponseEvent extends NormalResponseEvent {
+public class FinishPerformingResearchResponseEvent extends NormalResponseEvent<FinishPerformingResearchResponseProto> {
 
 	private FinishPerformingResearchResponseProto finishPerformingResearchResponseProto;
 

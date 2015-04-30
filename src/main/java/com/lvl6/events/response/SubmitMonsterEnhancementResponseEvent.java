@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SubmitMonsterEnhancementResponseEvent extends NormalResponseEvent {
+public class SubmitMonsterEnhancementResponseEvent extends NormalResponseEvent<SubmitMonsterEnhancementResponseProto> {
 
 	private SubmitMonsterEnhancementResponseProto submitMonsterEnhanceResponseProto;
 

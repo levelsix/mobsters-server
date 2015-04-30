@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class LoadPlayerCityResponseEvent extends NormalResponseEvent {
+public class LoadPlayerCityResponseEvent extends NormalResponseEvent<LoadPlayerCityResponseProto> {
 
 	private LoadPlayerCityResponseProto loadPlayerCityResponseProto;
 

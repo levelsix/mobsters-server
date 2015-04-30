@@ -1,27 +1,5 @@
 package com.lvl6.eventhandlers;
 
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hazelcast.core.IMap;
-import com.lvl6.events.PreDatabaseRequestEvent;
-import com.lvl6.events.RequestEvent;
-import com.lvl6.info.User;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.controller.EventController;
-import com.lvl6.utils.Attachment;
-import com.lvl6.utils.ConnectedPlayer;
 
 public class AmqpGameEventHandlerOld {//extends AbstractGameEventHandler implements	MessageListener {
 

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BeginDungeonResponseEvent extends NormalResponseEvent {
+public class BeginDungeonResponseEvent extends NormalResponseEvent<BeginDungeonResponseProto> {
 
 	private BeginDungeonResponseProto beginDungeonResponseProto;
 

@@ -66,8 +66,6 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 	@Resource(name = "playersByPlayerId")
 	protected Map<String, ConnectedPlayer> playersByPlayerId;
 
-	@Autowired
-	private GameServer server;
 
 	private static Logger log = LoggerFactory.getLogger(APNSWriter.class);
 
@@ -111,11 +109,12 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 	 */
 	protected void processResponseEvent(NormalResponseEvent event) {
 		String playerId = event.getPlayerId();
-		ConnectedPlayer connectedPlayer = server.getPlayerById(playerId);
+		//TODO:fix sending to connected player
+		ConnectedPlayer connectedPlayer = null;//server.getPlayerById(playerId);
 		if (connectedPlayer != null) {
 			log.info("wrote a response event to connected player with id "
 					+ playerId + " instead of sending APNS message");
-			server.writeEvent(event);
+			
 		} else {
 			log.info("received APNS notification to send to player with id "
 					+ playerId);

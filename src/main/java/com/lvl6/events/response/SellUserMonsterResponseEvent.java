@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SellUserMonsterResponseEvent extends NormalResponseEvent {
+public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMonsterResponseProto> {
 
 	private SellUserMonsterResponseProto sellUserMonsterResponseProto;
 

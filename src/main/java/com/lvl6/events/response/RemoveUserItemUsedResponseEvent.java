@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent {
+public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent<RemoveUserItemUsedResponseProto> {
 
 	private RemoveUserItemUsedResponseProto removeUserItemUsedResponseProto;
 

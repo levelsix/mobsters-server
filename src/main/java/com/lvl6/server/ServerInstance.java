@@ -20,10 +20,9 @@ import com.hazelcast.core.HazelcastInstanceAware;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.MessageListener;
 
-public class ServerInstance implements InitializingBean,
-		MessageListener<Message<?>>, HazelcastInstanceAware {
+public class ServerInstance{// implements InitializingBean,MessageListener<Message<?>>, HazelcastInstanceAware {
 
-	private static final Logger log = LoggerFactory
+	/*private static final Logger log = LoggerFactory
 			.getLogger(ServerInstance.class);
 	protected static String outboundMessagesTopicPostFix = "OutboundMessages";
 
@@ -52,13 +51,13 @@ public class ServerInstance implements InitializingBean,
 	@Autowired
 	protected MessageChannel outboundMessageChannel;
 
-	/**
+	*//**
 	 * Create a HazelCast queue to listen for messages to players that are
 	 * connected to this machine instance Also create a spring integration
 	 * channel adapter to process these events
 	 * 
 	 * @throws FileNotFoundException
-	 */
+	 *//*
 	public void setup() throws FileNotFoundException {
 		serverInstanceOutboundEventTopic = hazel
 				.getTopic(getOutboundMessageTopicForServer(serverId()));
@@ -88,7 +87,7 @@ public class ServerInstance implements InitializingBean,
 				log.error("Could not read /etc/hostname", e);
 			}
 		} else {
-			/*try {
+			try {
 			    Runtime rt = Runtime.getRuntime();
 			    Process pr = rt.exec("hostname");
 			    BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
@@ -105,7 +104,7 @@ public class ServerInstance implements InitializingBean,
 			} catch(Exception e) {
 			    log.error(e);
 			    
-			}*/
+			}
 			log.error("Setting serverId to random UUID");
 			hostName = UUID.randomUUID().toString();
 		}
@@ -151,6 +150,6 @@ public class ServerInstance implements InitializingBean,
 	@Autowired
 	public void setHazelcastInstance(HazelcastInstance instance) {
 		hazel = instance;
-	}
+	}*/
 
 }

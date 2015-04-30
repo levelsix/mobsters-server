@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class FinishNormStructWaittimeWithDiamondsResponseEvent extends
-		NormalResponseEvent {
+public class FinishNormStructWaittimeWithDiamondsResponseEvent extends	NormalResponseEvent<FinishNormStructWaittimeWithDiamondsResponseProto> {
 
 	private FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto;
 

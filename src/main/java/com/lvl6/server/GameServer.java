@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,10 +28,8 @@ import com.lvl6.misc.ReloadAllRareChangeStaticData;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
-import com.lvl6.server.controller.EventController;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.PlayerInAction;
 import com.lvl6.utils.PlayerSet;
@@ -44,19 +41,10 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
-	@Autowired
-	protected ServerInstance serverInstance;
 
 	@Autowired
 	protected ReloadAllRareChangeStaticData reloadAllRareChangeStaticData;
 
-	public ServerInstance getServerInstance() {
-		return serverInstance;
-	}
-
-	public void setServerInstance(ServerInstance serverInstance) {
-		this.serverInstance = serverInstance;
-	}
 
 	@Resource(name = "playersPreDatabaseByUDID")
 	Map<String, ConnectedPlayer> playersPreDatabaseByUDID;
@@ -264,9 +252,6 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		eventWriter.handleClanEvent(e, clanId);
 	}
 
-	public String serverId() {
-		return getServerInstance().serverId();
-	}
 
 	/**
 	 * pass the event on to the EventWriter

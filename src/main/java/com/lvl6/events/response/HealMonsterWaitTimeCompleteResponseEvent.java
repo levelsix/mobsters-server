@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class HealMonsterWaitTimeCompleteResponseEvent extends NormalResponseEvent {
+//public class HealMonsterWaitTimeCompleteResponseEvent extends NormalResponseEvent<HealMonsterWaitTimeCompleteResponseProto> {
 //
 //  private HealMonsterWaitTimeCompleteResponseProto healMonsterResponseProto;
 //  

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent {
+public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<AddMonsterToBattleTeamResponseProto> {
 
 	private AddMonsterToBattleTeamResponseProto addMonsterToBattleTeamResponseProto;
 

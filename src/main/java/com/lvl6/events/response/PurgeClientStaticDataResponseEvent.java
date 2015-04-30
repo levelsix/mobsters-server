@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent {
+public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent<PurgeClientStaticDataResponseProto>{
 
 	private PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto;
 

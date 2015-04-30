@@ -1,20 +1,5 @@
 package com.lvl6.eventhandlers;
 
-import java.io.FileNotFoundException;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.hazelcast.core.IMap;
-import com.lvl6.events.PreDatabaseRequestEvent;
-import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.server.controller.EventController;
-import com.lvl6.utils.ConnectedPlayer;
 
 public class GameEventHandlerOld{// extends AbstractGameEventHandler {
 /*	private static final int DEFAULT_TTL = 9;

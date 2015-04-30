@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponseEvent {
+public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponseEvent<AcceptAndRejectFbInviteForSlotsResponseProto> {
 
 	private AcceptAndRejectFbInviteForSlotsResponseProto acceptAndRejectFbInviteForSlotsResponseProto;
 

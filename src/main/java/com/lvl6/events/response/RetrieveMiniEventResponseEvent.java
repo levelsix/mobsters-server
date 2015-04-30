@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveMiniEventResponseEvent extends NormalResponseEvent {
+public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<RetrieveMiniEventResponseProto> {
 
 	private RetrieveMiniEventResponseProto retrieveMiniEventResponseProto;
 

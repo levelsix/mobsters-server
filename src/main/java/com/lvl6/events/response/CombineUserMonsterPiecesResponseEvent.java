@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent {
+public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent<CombineUserMonsterPiecesResponseProto> {
 
 	private CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto;
 

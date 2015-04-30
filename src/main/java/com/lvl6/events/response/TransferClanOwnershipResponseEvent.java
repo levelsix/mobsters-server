@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TransferClanOwnershipResponseEvent extends NormalResponseEvent {
+public class TransferClanOwnershipResponseEvent extends NormalResponseEvent<TransferClanOwnershipResponseProto> {
 
 	private TransferClanOwnershipResponseProto transferClanOwnershipResponseProto;
 

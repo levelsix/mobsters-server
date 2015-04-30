@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ChangeClanSettingsResponseEvent extends NormalResponseEvent {
+public class ChangeClanSettingsResponseEvent extends NormalResponseEvent<ChangeClanSettingsResponseProto> {
 
 	private ChangeClanSettingsResponseProto changeClanSettingsResponseProto;
 

@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class EarnFreeDiamondsResponseEvent extends NormalResponseEvent {
+//public class EarnFreeDiamondsResponseEvent extends NormalResponseEvent<EarnFreeDiamondsResponseProto> {
 //
 //  private EarnFreeDiamondsResponseProto earnFreeDiamondsResponseProto;
 //  

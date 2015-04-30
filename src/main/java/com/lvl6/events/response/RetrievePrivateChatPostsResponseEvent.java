@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent {
+public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent<RetrievePrivateChatPostsResponseProto> {
 
 	private RetrievePrivateChatPostsResponseProto retrievePrivateChatPostsResponseProto;
 

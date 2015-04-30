@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent {
+public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent<UpdateClientTaskStateResponseProto> {
 
 	private UpdateClientTaskStateResponseProto updateClientTaskStateResponseProto;
 

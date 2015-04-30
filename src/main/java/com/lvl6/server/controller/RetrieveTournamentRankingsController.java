@@ -28,7 +28,7 @@
 //import com.lvl6.server.Locker;
 //
 //@Component
-//@DependsOn("gameServer")
+//
 //public class RetrieveTournamentRankingsController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() {

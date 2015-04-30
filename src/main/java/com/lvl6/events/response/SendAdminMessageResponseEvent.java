@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SendAdminMessageResponseEvent extends NormalResponseEvent {
+public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdminMessageResponseProto> {
 
 	private SendAdminMessageResponseProto sendAdminMessageResponseProto;
 

@@ -7,7 +7,7 @@
 //import com.lvl6.proto.EventDungeonProto.EndPersistentEventCoolDownTimerResponseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class EndPersistentEventCoolDownTimerResponseEvent extends NormalResponseEvent {
+//public class EndPersistentEventCoolDownTimerResponseEvent extends NormalResponseEvent<EndPersistentEventCoolDownTimerResponseProto> {
 //
 //  private EndPersistentEventCoolDownTimerResponseProto endPersistentEventCoolDownTimerResponseProto;
 //  

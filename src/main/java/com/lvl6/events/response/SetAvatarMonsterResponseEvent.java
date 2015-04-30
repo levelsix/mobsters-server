@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
+public class SetAvatarMonsterResponseEvent extends NormalResponseEvent<SetAvatarMonsterResponseProto> {
 
 	private SetAvatarMonsterResponseProto setAvatarMonsterResponseProto;
 

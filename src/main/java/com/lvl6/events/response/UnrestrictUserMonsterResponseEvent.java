@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UnrestrictUserMonsterResponseEvent extends NormalResponseEvent {
+public class UnrestrictUserMonsterResponseEvent extends NormalResponseEvent<UnrestrictUserMonsterResponseProto> {
 
 	private UnrestrictUserMonsterResponseProto unrestrictUserMonsterResponseProto;
 

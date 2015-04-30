@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent {
+public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent<RetrieveUserMonsterTeamResponseProto> {
 
 	private RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto;
 

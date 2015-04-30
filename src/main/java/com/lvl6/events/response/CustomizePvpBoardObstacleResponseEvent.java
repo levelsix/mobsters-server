@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent {
+public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<CustomizePvpBoardObstacleResponseProto> {
 
 	private CustomizePvpBoardObstacleResponseProto customizePvpBoardObstacleResponseProto;
 

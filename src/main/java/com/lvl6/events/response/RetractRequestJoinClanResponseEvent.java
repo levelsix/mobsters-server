@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent {
+public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent<RetractRequestJoinClanResponseProto> {
 
 	private RetractRequestJoinClanResponseProto retractRequestJoinClanResponseProto;
 

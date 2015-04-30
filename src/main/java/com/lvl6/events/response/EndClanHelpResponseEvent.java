@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.EndClanHelpResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EndClanHelpResponseEvent extends NormalResponseEvent {
+public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpResponseProto> {
 
 	private EndClanHelpResponseProto endClanHelpResponseProto;
 

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class LevelUpResponseEvent extends NormalResponseEvent {
+public class LevelUpResponseEvent extends NormalResponseEvent<LevelUpResponseProto> {
 
 	private LevelUpResponseProto levelUpResponseProto;
 

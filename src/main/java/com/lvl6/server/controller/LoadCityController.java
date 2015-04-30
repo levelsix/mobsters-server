@@ -26,7 +26,7 @@
 //import com.lvl6.utils.CreateInfoProtoUtils;
 //import com.lvl6.utils.RetrieveUtils;
 //
-//  @Component @DependsOn("gameServer") public class LoadCityController extends EventController {
+//  @Component  public class LoadCityController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //

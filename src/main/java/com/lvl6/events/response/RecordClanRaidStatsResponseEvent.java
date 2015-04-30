@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent {
+public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent<RecordClanRaidStatsResponseProto> {
 
 	private RecordClanRaidStatsResponseProto recordClanRaidStatsResponseProto;
 

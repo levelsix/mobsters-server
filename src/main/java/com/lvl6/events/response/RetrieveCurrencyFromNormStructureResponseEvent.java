@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveCurrencyFromNormStructureResponseEvent extends
-		NormalResponseEvent {
+public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalResponseEvent<RetrieveCurrencyFromNormStructureResponseProto> {
 
 	private RetrieveCurrencyFromNormStructureResponseProto retrieveCurrencyFromNormStructureResponseProto;
 

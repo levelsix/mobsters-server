@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SendGroupChatResponseEvent extends NormalResponseEvent {
+public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupChatResponseProto> {
 
 	private SendGroupChatResponseProto sendGroupChatResponseProto;
 

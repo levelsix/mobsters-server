@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent {
+public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<UpdateMonsterHealthResponseProto> {
 
 	private UpdateMonsterHealthResponseProto updateMonsterHealthResponseProto;
 

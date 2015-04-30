@@ -17,7 +17,6 @@ import com.lvl6.events.response.RefreshMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto;

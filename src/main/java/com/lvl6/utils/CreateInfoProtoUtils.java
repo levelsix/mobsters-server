@@ -3560,7 +3560,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		if (null != newOrUpdatedIfu && !newOrUpdatedIfu.isEmpty()) {
-			Collection<UserItemProto> userItems = createUserItemProtosFromUserItems((List)newOrUpdatedIfu);
+			Collection<UserItemProto> userItems = createUserItemProtosFromUserItems((List<ItemForUser>)newOrUpdatedIfu);
 			urp.addAllUpdatedUserItems(userItems);
 		}
 

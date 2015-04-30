@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CollectClanGiftsResponseEvent extends NormalResponseEvent {
+public class CollectClanGiftsResponseEvent extends NormalResponseEvent<CollectClanGiftsResponseProto> {
 
 	private CollectClanGiftsResponseProto collectClanGiftsResponseProto;
 

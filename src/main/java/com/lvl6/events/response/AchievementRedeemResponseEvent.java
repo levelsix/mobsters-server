@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AchievementRedeemResponseEvent extends NormalResponseEvent {
+public class AchievementRedeemResponseEvent extends NormalResponseEvent<AchievementRedeemResponseProto> {
 
 	private AchievementRedeemResponseProto achievementRedeemResponseProto;
 

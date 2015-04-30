@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetFacebookIdResponseEvent extends NormalResponseEvent {
+public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookIdResponseProto> {
 
 	private SetFacebookIdResponseProto setFacebookIdResponseProto;
 
