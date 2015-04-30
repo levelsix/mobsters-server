@@ -160,7 +160,6 @@ public class RetrievePrivateChatPostsController extends EventController {
 						//CHECK IF USER EVEN wants translations
 						if(translateLanguage == null || translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
 							for (PrivateChatPost pwp : recentPrivateChatPosts) {
-								log.info("private chat post id: " + pwp.getId());
 								String posterId = pwp.getPosterId();
 								String contentLanguage = pwp.getContentLanguage();
 								TranslateLanguages tl = null;
@@ -284,7 +283,6 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 							//convert private chat post to group chat message proto
 							for (PrivateChatPost pwp : recentPrivateChatPosts) {
-								log.info("private chat post id: " + pwp.getId());
 								String posterId = pwp.getPosterId();
 								String contentLanguage = pwp.getContentLanguage();
 								TranslateLanguages tl = null;
