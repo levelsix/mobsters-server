@@ -11,6 +11,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest
 import com.lvl6.server.controller.EventController
 import com.typesafe.scalalogging.slf4j.LazyLogging
 import java.nio.ByteBuffer
+import scala.collection.JavaConversions._
 
 case class ParsedEventProto(eventProto:EventProto, eventType:EventProtocolRequest){
   def requestEventBytes =  eventProto.getEventBytes.toByteArray()
@@ -75,7 +76,7 @@ object EventParser extends LazyLogging{
 @Component
 class EventParser extends LazyLogging{
   
-  @Autowired var eventControllers:List[EventController] = null
+  @Autowired var eventControllers:java.util.List[EventController] = null
   
   def parseEvents(eventBytes:Array[Byte], byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN):Vector[ParsedEvent]={
     val parsedProtos = EventParser.parseEventProtos(eventBytes)
