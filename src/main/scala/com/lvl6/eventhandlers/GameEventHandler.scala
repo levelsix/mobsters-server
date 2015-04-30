@@ -17,6 +17,14 @@ import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.mobsters.services.PlayersOnlineService
 import com.lvl6.mobsters.services.ClientResponseCacheService
 import com.lvl6.server.eventsender.ToClientEvents
+import com.lvl6.server.eventsender.EventWriter
+import com.google.protobuf.GeneratedMessage
+import com.lvl6.events.ResponseEvent
+import scala.collection.JavaConversions._
+import com.lvl6.events.BroadcastResponseEvent
+import com.lvl6.server.APNSWriter
+import com.lvl6.server.dynamodb.tables.CachedClientResponse
+import java.util.Date
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -27,25 +35,35 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var userRetrieveUtils:UserRetrieveUtils2 = null
   @Autowired var playersOnlineService:PlayersOnlineService = null
   @Autowired var responseCacheService:ClientResponseCacheService = null
-
+  @Autowired var eventWriter:EventWriter = null
+  @Autowired var apnsWriter:APNSWriter = null
   
   def processEvent(eventBytes:Array[Byte])={
     try{
       val parsedEvents = parser.parseEvents(eventBytes)
       parsedEvents.foreach{ parsedEvent => 
         if(appMode.isMaintenanceMode()){
-          handleMaintenanceMode(parsedEvent)    
+          handleMaintenanceMode(parsedEvent)                
         }else{
           updatePlayerToServerMaps(parsedEvent)
-          if(responseCacheService.isResponseCached(parsedEvent.eventProto.getEventUuid)){
-            
+          val eventUuid = parsedEvent.eventProto.getEventUuid
+          val playerId = parsedEvent.event.getPlayerId
+          if(responseCacheService.isResponseCached(eventUuid)) {
+            logger.info(s"Event $eventUuid was already cached.. sending cached responses")
+            val cachedResponses = responseCacheService.getCachedResponses(eventUuid)
+            val toClientEvents = new ToClientEvents()
+            cachedResponses match {
+              case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(playerId, cr.event)}
+              case None =>
+            }
+            //toClientEvents.normalResponseEvents.addAll(cacheResponses)
           }else{
             parsedEvent.eventController.processEvent(parsedEvent.event) match{
               case Some(events)=>{
-                sendResponses(events)
-                cacheResponses(events)
+                sendResponses(eventUuid, playerId, events)
+                cacheResponses(eventUuid, playerId, events)
               }
-              case None =>
+              case None => logger.error("No events returned from parseEvent")
             }
           }
         }
@@ -56,12 +74,31 @@ trait GameEventHandler extends LazyLogging  {
   }
   
   
-  def sendResponses(responses:ToClientEvents)={
-    
+  def sendResponses(uuid:String, playerId:String, responses:ToClientEvents)={
+    responses.normalResponseEvents.foreach{ revent =>
+        eventWriter.sendToSinglePlayer(playerId, EventParser.getResponseBytes(uuid, revent))
+    }
+    responses.preDBResponseEvents.foreach{ revent =>
+      eventWriter.sendPreDBResponseEvent(revent.udid, EventParser.getResponseBytes(uuid, revent.event))
+    }
+    responses.preDBFacebookEvents.foreach{ revent =>
+      eventWriter.sendPreDBFacebookEvent(revent.fbid, EventParser.getResponseBytes(uuid, revent.event))  
+    }
+    responses.clanResponseEvents.foreach{ revent =>
+      eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(uuid, revent.event))  
+    }
+    responses.globalChatResponseEvents.foreach{ revent =>
+      eventWriter.sendGlobalChat(EventParser.getResponseBytes(uuid, revent))
+    }
+    responses.apnsResponseEvents.foreach{ revent =>
+      apnsWriter.handleEvent(revent)
+    }
   }
   
-  def cacheResponses(responses:ToClientEvents)={
-    
+  def cacheResponses(request_uuid:String, playerId:String, responses:ToClientEvents)={
+    responses.normalResponseEvents.foreach{ response =>
+      responseCacheService.cacheResponse(new CachedClientResponse(request_uuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(request_uuid, response)))
+    }
   }
     
   

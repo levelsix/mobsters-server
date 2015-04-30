@@ -59,11 +59,12 @@ object EventParser extends LazyLogging{
     ParsedEventProto(eventProto, eventType)        
   }
   
-  def getResponseBytes[T <: GeneratedMessage](event:ResponseEvent[T]):Array[Byte]={
+  def getResponseBytes[T <: GeneratedMessage](uuid:String, event:ResponseEvent[T]):Array[Byte]={
     //create event proto
     val ep = EventProto.newBuilder()
     ep.setEventType(event.getEventType.getNumber)
     ep.setTagNum(event.getTag)
+    ep.setEventUuid(uuid)
     ep.setEventBytes(event.getByteString())
     val bytes = ep.build().toByteArray()
     intToBytes(bytes.length) ++ bytes

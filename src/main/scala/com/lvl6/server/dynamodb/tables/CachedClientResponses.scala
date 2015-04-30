@@ -10,7 +10,7 @@ import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
 import java.util.concurrent.TimeUnit
 
 
-case class CachedClientResponse(uuid:String, date:Long, eventType:Int, event:Array[Byte])
+case class CachedClientResponse(request_uuid:String, date:Long, eventType:Int, event:Array[Byte])
 
 
 @Component
@@ -19,8 +19,8 @@ class CachedClientResponses extends TableDefinition {
   val dateColumn = "date"
   val eventColumn = "event"
   val eventTypeColumn = "eventType"
-  def hashKeyName = "uuid"
-  def rangeKeyName:Option[String] = None
+  def hashKeyName = "request_uuid"
+  def rangeKeyName:Option[String] = Some("response_uuid")
   def tableName = "CachedClientResponses"
   def attributes = List(
       AttributeDef(hashKeyName, ScalarAttributeType.S), 
