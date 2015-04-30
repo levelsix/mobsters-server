@@ -292,6 +292,9 @@
 				<configuration>
 					<includes>
 						<include>**/test/*.java</include>
+						<include>**/test/controller/integrationtests/*.java</include>
+						<include>**/test/controller/unittests/*.java</include>
+						<include>**/test/controller/utilstests/*.java</include>
 					</includes>
 				</configuration>
 			</plugin>

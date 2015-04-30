@@ -116,7 +116,7 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 					messagingUtil.sendMaintanenceModeMessageUdid(
 							getApplicationMode().getMessageForUsers(), udid);
 				} else {
-					messagingUtil.sendMaintanenceModeMessageUdid(
+					messagingUtil.sendMaintanenceModeMessage(
 							getApplicationMode().getMessageForUsers(), playerId);
 				}
 				return;
