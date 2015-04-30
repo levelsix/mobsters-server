@@ -163,7 +163,7 @@ public class PurchaseBoosterPackTest {
 		pbprpb.setSender(mup);
 		pbprpb.setBoosterPackId(1000);
 		pbprpb.setClientTime(new Date().getTime());
-		pbprpb.setDailyFreeBoosterPack(true);
+		pbprpb.setDailyFreeBoosterPack(false);
 
 		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
 		pbpre.setTag(1);
