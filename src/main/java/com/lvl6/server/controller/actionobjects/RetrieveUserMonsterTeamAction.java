@@ -2,6 +2,8 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -380,6 +382,25 @@ public class RetrieveUserMonsterTeamAction {
 		//			//only get three monsters
 		//			defenderMonsters = defenderMonsters.subList(0, 3);
 		//		}
+
+		//order by team slot num
+		Collections.sort(defenderMonsters, new Comparator<MonsterForUser>() {
+			@Override
+			public int compare(MonsterForUser o1, MonsterForUser o2) {
+				int o1TeamSlotNum = o1.getTeamSlotNum();
+				int o2TeamSlotNum = o2.getTeamSlotNum();
+				if (o1TeamSlotNum < o2TeamSlotNum) {
+					return -1;
+				} else if (o1TeamSlotNum > o2TeamSlotNum) {
+					return 1;
+				} else if (o1.getMonsterId() < o2.getMonsterId()) {
+					return -1;
+				} else if (o1.getMonsterId() > o2.getMonsterId()) {
+					return 1;
+				}
+				return 0;
+			}
+		});
 
 		return defenderMonsters;
 	}
