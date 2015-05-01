@@ -127,6 +127,7 @@ public class BoosterItemRetrieveUtils {
 										boosterItem.getId(), boosterItem);
 						}
 						boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItemsTemp;
+						log.info("boosteritemidstoboosteritems: " + boosterItemIdsToBoosterItems);
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
@@ -170,7 +171,7 @@ public class BoosterItemRetrieveUtils {
 
 		int rewardId = rs.getInt(DBConstants.BOOSTER_ITEM__REWARD_ID);
 
-		BoosterItem boosterItem = new BoosterItem(rewardId, boosterPackId, monsterId, 
+		BoosterItem boosterItem = new BoosterItem(id, boosterPackId, monsterId, 
 				numPieces, isComplete, isSpecial, gemReward, cashReward, chanceToAppear, 
 				itemId, itemQuantity, rewardId);
 		return boosterItem;
