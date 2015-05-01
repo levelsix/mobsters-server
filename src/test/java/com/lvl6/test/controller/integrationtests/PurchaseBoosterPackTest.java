@@ -166,7 +166,7 @@ public class PurchaseBoosterPackTest {
 		List<MonsterForUser> mfuList3 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
 
 		assertTrue(mfuList3.size() == mfuList2.size() + 11);
-		assertTrue(userGems1 - 400 == user2.getGems());
+		assertTrue(user2.getGems() - 400 == user3.getGems());
 
 		
 		
