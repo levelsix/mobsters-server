@@ -206,6 +206,10 @@ public final class RewardsProto {
        * <code>MONSTER = 6;</code>
        */
       MONSTER(6, 6),
+      /**
+       * <code>CLAN_GIFT = 8;</code>
+       */
+      CLAN_GIFT(7, 8),
       ;
 
       /**
@@ -236,6 +240,10 @@ public final class RewardsProto {
        * <code>MONSTER = 6;</code>
        */
       public static final int MONSTER_VALUE = 6;
+      /**
+       * <code>CLAN_GIFT = 8;</code>
+       */
+      public static final int CLAN_GIFT_VALUE = 8;
 
 
       public final int getNumber() { return value; }
@@ -249,6 +257,7 @@ public final class RewardsProto {
           case 5: return OIL;
           case 7: return GACHA_CREDITS;
           case 6: return MONSTER;
+          case 8: return CLAN_GIFT;
           default: return null;
         }
       }
@@ -2220,18 +2229,19 @@ public final class RewardsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Reward.proto\022\016com.lvl6.proto\032\022MonsterS" +
-      "tuff.proto\032\nItem.proto\"\333\001\n\013RewardProto\022\020" +
+      "tuff.proto\032\nItem.proto\"\352\001\n\013RewardProto\022\020" +
       "\n\010rewardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223" +
       "\n\003typ\030\003 \001(\0162&.com.lvl6.proto.RewardProto" +
-      ".RewardType\022\013\n\003amt\030\004 \001(\005\"b\n\nRewardType\022\r" +
+      ".RewardType\022\013\n\003amt\030\004 \001(\005\"q\n\nRewardType\022\r" +
       "\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003\022\010\n\004CAS" +
       "H\020\004\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013\n\007MONST" +
-      "ER\020\006\"\315\001\n\017UserRewardProto\022B\n\024updatedOrNew" +
-      "Monsters\030\001 \003(\0132$.com.lvl6.proto.FullUser" +
-      "MonsterProto\0227\n\020updatedUserItems\030\002 \003(\0132\035",
-      ".com.lvl6.proto.UserItemProto\022\014\n\004gems\030\003 " +
-      "\001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 \001(\005\022\024\n\014gachaC" +
-      "redits\030\006 \001(\005B\016B\014RewardsProto"
+      "ER\020\006\022\r\n\tCLAN_GIFT\020\010\"\315\001\n\017UserRewardProto\022" +
+      "B\n\024updatedOrNewMonsters\030\001 \003(\0132$.com.lvl6" +
+      ".proto.FullUserMonsterProto\0227\n\020updatedUs",
+      "erItems\030\002 \003(\0132\035.com.lvl6.proto.UserItemP" +
+      "roto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030" +
+      "\005 \001(\005\022\024\n\014gachaCredits\030\006 \001(\005B\016B\014RewardsPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

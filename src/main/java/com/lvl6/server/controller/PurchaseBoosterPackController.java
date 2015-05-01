@@ -23,7 +23,6 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
@@ -40,13 +39,14 @@ import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
+import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -99,6 +99,12 @@ public class PurchaseBoosterPackController extends EventController {
 	
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected BoosterItemUtils boosterItemUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
@@ -130,6 +136,8 @@ public class PurchaseBoosterPackController extends EventController {
 		boolean buyingInBulk = reqProto.getBuyingInBulk();
 
 		boolean freeBoosterPack = reqProto.getDailyFreeBoosterPack();
+		
+		log.info("reqProto: " + reqProto);
 
 		//values to send to client
 		PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto
@@ -167,7 +175,8 @@ public class PurchaseBoosterPackController extends EventController {
 					timeUtils, userRetrieveUtils, boosterPackRetrieveUtils,
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
-					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil);
+					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil,
+					serverToggleRetrieveUtils, boosterItemUtils);
 
 			pbpa.execute(resBuilder);
 

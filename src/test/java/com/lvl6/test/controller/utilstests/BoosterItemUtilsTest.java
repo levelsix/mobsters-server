@@ -46,6 +46,9 @@ public class BoosterItemUtilsTest {
 	
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
+	
+	@Autowired
+	protected BoosterItemUtils boosterItemUtils;
 
 	private static User mockedUser;
 	private static UpdateUtil mockedUpdateUtil;
@@ -112,10 +115,10 @@ public class BoosterItemUtilsTest {
 		boosterItemsUserReceives.add(bi);
 		boosterItemsUserReceives.add(bi2);
 
-		assertTrue(BoosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils, rewardRetrieveUtils));
+		assertTrue(boosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils, rewardRetrieveUtils));
 
 		boosterItemsUserReceives.add(bi3);
-		assertFalse(BoosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils, rewardRetrieveUtils));
+		assertFalse(boosterItemUtils.checkIfMonstersExist(boosterItemsUserReceives, mockedMonsterRetrieveUtils, rewardRetrieveUtils));
 	}
 
 	@Test
@@ -131,13 +134,13 @@ public class BoosterItemUtilsTest {
 		bi3.setGemReward(0);
 
 		boosterItemsUserReceives.add(bi);
-		assertEquals(100, BoosterItemUtils.determineGemReward(boosterItemsUserReceives));
+		assertEquals(100, boosterItemUtils.determineGemReward(boosterItemsUserReceives));
 
 		boosterItemsUserReceives.add(bi3);
-		assertEquals(100, BoosterItemUtils.determineGemReward(boosterItemsUserReceives));
+		assertEquals(100, boosterItemUtils.determineGemReward(boosterItemsUserReceives));
 
 		boosterItemsUserReceives.add(bi2);
-		assertEquals(200, BoosterItemUtils.determineGemReward(boosterItemsUserReceives));
+		assertEquals(200, boosterItemUtils.determineGemReward(boosterItemsUserReceives));
 	}
 
 	@Test
@@ -179,7 +182,7 @@ public class BoosterItemUtilsTest {
 
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
-		BoosterItemUtils.createUpdateUserMonsterArguments(mockedUser.getId(), 1, boosterItemList,
+		boosterItemUtils.createUpdateUserMonsterArguments(mockedUser.getId(), 1, boosterItemList,
 				monsterIdToNumPieces, completeUserMonsters, new Date(), mockedMonsterLevelInfoRetrieveUtils,
 				mockedMonsterRetrieveUtils, mockedMonsterStuffUtils);
 

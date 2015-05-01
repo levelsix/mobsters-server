@@ -32,6 +32,7 @@ message RewardProto {
 		OIL = 5;
 		GACHA_CREDITS = 7;
 		MONSTER = 6;
+		CLAN_GIFT = 8;
 	}
 	
 }

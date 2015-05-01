@@ -1,10 +1,12 @@
 package com.lvl6.server.controller.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -30,7 +33,7 @@ public class BoosterItemUtils {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	public static boolean checkIfMonstersExist(
+	public boolean checkIfMonstersExist(
 			List<BoosterItem> itemsUserReceives,
 			MonsterRetrieveUtils monsterRetrieveUtils, 
 			RewardRetrieveUtils rewardRetrieveUtils) {
@@ -52,7 +55,7 @@ public class BoosterItemUtils {
 		return monstersExist;
 	}
 
-	public static int determineGemReward(List<BoosterItem> boosterItems) {
+	public int determineGemReward(List<BoosterItem> boosterItems) {
 		int gemReward = 0;
 		for (BoosterItem bi : boosterItems) {
 			gemReward += bi.getGemReward();
@@ -62,7 +65,7 @@ public class BoosterItemUtils {
 	}
 
 	//monsterIdsToNumPieces or completeUserMonsters will be populated
-	public static String createUpdateUserMonsterArguments(String userId,
+	public String createUpdateUserMonsterArguments(String userId,
 			int boosterPackId, List<BoosterItem> boosterItems,
 			Map<Integer, Integer> monsterIdsToNumPieces,
 			List<MonsterForUser> completeUserMonsters, Date now,
@@ -113,12 +116,11 @@ public class BoosterItemUtils {
 		return sb.toString();
 	}
 
-	public static List<ItemForUser> awardBoosterItemItemRewards(String userId,
+	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
 			List<BoosterItem> itemsUserReceives,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			UpdateUtil updateUtil) {
-		List<ItemForUser> ifuList = BoosterItemUtils
-				.calculateBoosterItemItemRewards(userId, itemsUserReceives,
+		List<ItemForUser> ifuList = calculateBoosterItemItemRewards(userId, itemsUserReceives,
 						itemForUserRetrieveUtil);
 
 		log.info("ifuList={}", ifuList);
@@ -132,7 +134,7 @@ public class BoosterItemUtils {
 
 	}
 
-	public static List<ItemForUser> calculateBoosterItemItemRewards(
+	public List<ItemForUser> calculateBoosterItemItemRewards(
 			String userId, List<BoosterItem> itemsUserReceives,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
@@ -157,7 +159,7 @@ public class BoosterItemUtils {
 				itemIdToQuantity);
 	}
 
-	public static List<ItemForUser> calculateItemRewards(String userId,
+	public List<ItemForUser> calculateItemRewards(String userId,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			Map<Integer, Integer> itemIdToQuantity) {
 		List<ItemForUser> ifuList = null;
@@ -188,5 +190,79 @@ public class BoosterItemUtils {
 		return ifuList;
 	}
 
+	//no arguments are modified
+	public List<BoosterItem> determineBoosterItemsUserReceives(
+			int amountUserWantsToPurchase,
+			Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
+		//return value
+		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
+
+		Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId
+				.values();
+		List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
+		float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId
+				.values());
+
+		//selecting items at random with replacement
+		for (int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
+			BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities,
+					serverToggleRetrieveUtils);
+			if (null == bi) {
+				continue;
+			}
+			itemsUserReceives.add(bi);
+		}
+
+		return itemsUserReceives;
+	}
+	
+	private float sumProbabilities(Collection<BoosterItem> boosterItems) {
+		float sumOfProbabilities = 0.0f;
+		for (BoosterItem bi : boosterItems) {
+			sumOfProbabilities += bi.getChanceToAppear();
+		}
+		return sumOfProbabilities;
+	}
+
+	private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
+			float sumOfProbabilities, 
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
+		Random rand = new Random();
+		float unnormalizedProbabilitySoFar = 0f;
+		float randFloat = rand.nextFloat();
+
+		boolean logBoosterItemDetails = serverToggleRetrieveUtils
+				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS);
+		if (logBoosterItemDetails) {
+			log.info(
+					"selecting booster item. sumOfProbabilities={} \t randFloat={}",
+					sumOfProbabilities, randFloat);
+		}
+
+		int size = itemsList.size();
+		//for each item, normalize before seeing if it is selected
+		for (int i = 0; i < size; i++) {
+			BoosterItem item = itemsList.get(i);
+
+			//normalize probability
+			unnormalizedProbabilitySoFar += item.getChanceToAppear();
+			float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar
+					/ sumOfProbabilities;
+
+			if (logBoosterItemDetails) {
+				log.info("boosterItem={} \t normalizedProbabilitySoFar={}",
+						item, normalizedProbabilitySoFar);
+			}
+
+			if (randFloat < normalizedProbabilitySoFar) {
+				//we have a winner! current boosterItem is what the user gets
+				return item;
+			}
+		}
+
+		log.error("maybe no boosterItems exist. boosterItems={}", itemsList);
+		return null;
+	}
 
 }
