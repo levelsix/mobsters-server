@@ -75,6 +75,10 @@
 		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
 
 
+		<dynamodb.table.prefix>local</dynamodb.table.prefix>
+		<dynamodb.isLocal>true</dynamodb.isLocal>
+		<dynamodb.response.caching.enabled>true</dynamodb.response.caching.enabled>
+
 		<hazelcast.ec2.security.group></hazelcast.ec2.security.group>
 		<hazelcast.ec2.region></hazelcast.ec2.region>
 		<hazelcast.ec2.awsId></hazelcast.ec2.awsId>

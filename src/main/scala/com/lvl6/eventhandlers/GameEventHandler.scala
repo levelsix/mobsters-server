@@ -37,6 +37,7 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var responseCacheService:ClientResponseCacheService = null
   @Autowired var eventWriter:EventWriter = null
   @Autowired var apnsWriter:APNSWriter = null
+  var responseCachingEnabled = true
   
   def processEvent(eventBytes:Array[Byte])={
     try{
@@ -48,7 +49,7 @@ trait GameEventHandler extends LazyLogging  {
           updatePlayerToServerMaps(parsedEvent)
           val eventUuid = parsedEvent.eventProto.getEventUuid
           val playerId = parsedEvent.event.getPlayerId
-          if(responseCacheService.isResponseCached(eventUuid)) {
+          if(responseCachingEnabled && responseCacheService.isResponseCached(eventUuid)) {
             logger.info(s"Event $eventUuid was already cached.. sending cached responses")
             val cachedResponses = responseCacheService.getCachedResponses(eventUuid)
             val toClientEvents = new ToClientEvents()
@@ -96,8 +97,10 @@ trait GameEventHandler extends LazyLogging  {
   }
   
   def cacheResponses(request_uuid:String, playerId:String, responses:ToClientEvents)={
-    responses.normalResponseEvents.foreach{ response =>
-      responseCacheService.cacheResponse(new CachedClientResponse(request_uuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(request_uuid, response)))
+    if(responseCachingEnabled){
+      responses.normalResponseEvents.foreach{ response =>
+        responseCacheService.cacheResponse(new CachedClientResponse(request_uuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(request_uuid, response)))
+      }
     }
   }
     

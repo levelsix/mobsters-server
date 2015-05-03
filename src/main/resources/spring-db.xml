@@ -12,55 +12,10 @@
         http://www.springframework.org/schema/tx 
      	http://www.springframework.org/schema/tx/spring-tx.xsd
 		">
-
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" -->
-	<!-- destroy-method="close" depends-on="contextApplicationContextProvider"> -->
-	<!-- <property name="driverClass" value="${jdbc.driverClassName}" /> -->
-	<!-- <property name="jdbcUrl" value="${jdbc.url}" /> -->
-	<!-- <property name="user" value="${jdbc.username}" /> -->
-	<!-- <property name="password" value="${jdbc.password}" /> -->
-	<!-- <property name="minPoolSize" value="5" /> -->
-	<!-- <property name="maxPoolSize" value="20" /> -->
-	<!-- <property name="maxStatements" value="50" /> -->
-	<!-- <property name="idleConnectionTestPeriod" value="3000" /> -->
-	<!-- <property name="loginTimeout" value="300" /> -->
-	<!-- </bean> -->
 	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-
-	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${jdbc.driverClassName}" />
-		<property name="jdbcUrl">
-			<value><![CDATA[${jdbc.url}]]></value>
-		</property>
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="idleConnectionTestPeriodInMinutes" value="${jdbc.idleConnectionTestPeriodInMinutes}" />
-		<property name="idleMaxAgeInMinutes" value="${jdbc.idleMaxAgeInMinutes}" />
-		<property name="maxConnectionsPerPartition" value="${jdbc.maxConnectionsPerPartition}" />
-		<property name="minConnectionsPerPartition" value="${jdbc.minConnectionsPerPartition}" />
-		<property name="partitionCount" value="${jdbc.partitionCount}" />
-		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
-		<property name="statementsCacheSize" value="${jdbc.statementsCacheSize}" />
-		<property name="releaseHelperThreads" value="${jdbc.releaseHelperThreads}" />
-	</bean>
-
-	<bean id="dbConnection" class="com.lvl6.utils.DBConnection" scope="singleton"
-		depends-on="dataSource">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-
-	<bean id="insertUtils" class="com.lvl6.utils.utilmethods.InsertUtils" />
-	<bean id="updateUtils" class="com.lvl6.utils.utilmethods.UpdateUtils" />
-	<bean id="deleteUtils" class="com.lvl6.utils.utilmethods.DeleteUtils" />
-
-	<bean id="applicationUtils" class="com.lvl6.utils.ApplicationUtils" />
-
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+	<bean id="dynamoDBService" class="com.lvl6.server.dynamodb.DynamoDBService">
+		<property name="tablePrefix" value="${dynamodb.table.prefix}" />
+		<property name="isLocal" value="${dynamodb.isLocal}" />
 	</bean>
 
 </beans>
