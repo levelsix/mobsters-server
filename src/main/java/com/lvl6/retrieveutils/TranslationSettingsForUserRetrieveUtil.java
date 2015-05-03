@@ -3,6 +3,7 @@ package com.lvl6.retrieveutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +18,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.TranslationSettingsForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -59,6 +62,56 @@ public class TranslationSettingsForUserRetrieveUtil {
 		}
 		return userTranslationSettingss;
 	}
+	
+	public Map<String, TranslationSettingsForUser> getUserTranslationSettingsMapForUsersGlobal(List<String> userIds) {
+		StringBuilder querySb = new StringBuilder();
+		querySb.append("SELECT * FROM ");
+		querySb.append(TABLE_NAME);
+		querySb.append(" WHERE ");
+		querySb.append(DBConstants.TRANSLATION_SETTINGS_FOR_USER__CHAT_TYPE);
+		querySb.append("=?");
+		List<Object> values = new ArrayList<Object>();
+		values.add(ChatScope.GLOBAL.toString());
+		
+		if (userIds != null && !userIds.isEmpty()) {
+			log.debug("retrieving usertranslationsettings with userIds {}",
+					userIds);
+			querySb.append(" AND ");
+			querySb.append(DBConstants.TRANSLATION_SETTINGS_FOR_USER__RECEIVER_USER_ID);
+			querySb.append(" IN (");
+
+			int amount = userIds.size();
+			List<String> questions = Collections.nCopies(amount, "?");
+			String questionMarkStr = StringUtils.csvList(questions);
+
+			querySb.append(questionMarkStr);
+			querySb.append(");");
+			values.addAll(userIds);
+		}
+		
+		String query = querySb.toString();
+		log.info("query={}, values={}", query, values);
+
+		List<TranslationSettingsForUser> tsfuList = null;
+		Map<String, TranslationSettingsForUser> userIdsToTranslationSettings =
+				new HashMap<String, TranslationSettingsForUser>();
+		try {
+			tsfuList = this.jdbcTemplate.query(query, values.toArray(),
+					rowMapper);
+
+		} catch (Exception e) {
+			log.error("structure for user retrieve db error.", e);
+			tsfuList = new ArrayList<TranslationSettingsForUser>();
+		}
+		
+		for(TranslationSettingsForUser tsfu : tsfuList) {
+			String userId = tsfu.getReceiverUserId();
+			userIdsToTranslationSettings.put(userId, tsfu);
+		}
+
+		return userIdsToTranslationSettings;
+	}
+	
 
 	public List<TranslationSettingsForUser> getUserTranslationSettingsForUser(String recipientUserId) {
 		log.debug(String.format("retrieving user translation settings for userId %s",

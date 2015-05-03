@@ -51972,8 +51972,8 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectClanGiftsResponseProto)
   }
 
-  public interface ClearExpiredClanGiftsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
+  public interface DeleteClanGiftsRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DeleteClanGiftsRequestProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -52014,25 +52014,25 @@ public final class EventClanProto {
         int index);
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsRequestProto}
+   * Protobuf type {@code com.lvl6.proto.DeleteClanGiftsRequestProto}
    */
-  public static final class ClearExpiredClanGiftsRequestProto extends
+  public static final class DeleteClanGiftsRequestProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-      ClearExpiredClanGiftsRequestProtoOrBuilder {
-    // Use ClearExpiredClanGiftsRequestProto.newBuilder() to construct.
-    private ClearExpiredClanGiftsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DeleteClanGiftsRequestProto)
+      DeleteClanGiftsRequestProtoOrBuilder {
+    // Use DeleteClanGiftsRequestProto.newBuilder() to construct.
+    private DeleteClanGiftsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private ClearExpiredClanGiftsRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private DeleteClanGiftsRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final ClearExpiredClanGiftsRequestProto defaultInstance;
-    public static ClearExpiredClanGiftsRequestProto getDefaultInstance() {
+    private static final DeleteClanGiftsRequestProto defaultInstance;
+    public static DeleteClanGiftsRequestProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public ClearExpiredClanGiftsRequestProto getDefaultInstanceForType() {
+    public DeleteClanGiftsRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -52042,7 +52042,7 @@ public final class EventClanProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private ClearExpiredClanGiftsRequestProto(
+    private DeleteClanGiftsRequestProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -52103,28 +52103,28 @@ public final class EventClanProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.Builder.class);
+              com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.class, com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ClearExpiredClanGiftsRequestProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClearExpiredClanGiftsRequestProto>() {
-      public ClearExpiredClanGiftsRequestProto parsePartialFrom(
+    public static com.google.protobuf.Parser<DeleteClanGiftsRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<DeleteClanGiftsRequestProto>() {
+      public DeleteClanGiftsRequestProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClearExpiredClanGiftsRequestProto(input, extensionRegistry);
+        return new DeleteClanGiftsRequestProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ClearExpiredClanGiftsRequestProto> getParserForType() {
+    public com.google.protobuf.Parser<DeleteClanGiftsRequestProto> getParserForType() {
       return PARSER;
     }
 
@@ -52237,53 +52237,53 @@ public final class EventClanProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -52292,7 +52292,7 @@ public final class EventClanProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -52304,25 +52304,25 @@ public final class EventClanProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsRequestProto}
+     * Protobuf type {@code com.lvl6.proto.DeleteClanGiftsRequestProto}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DeleteClanGiftsRequestProto)
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.Builder.class);
+                com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.class, com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.newBuilder()
+      // Construct using com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -52365,23 +52365,23 @@ public final class EventClanProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_descriptor;
       }
 
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.getDefaultInstance();
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto build() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto result = buildPartial();
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto build() {
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto buildPartial() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto result = new com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto(this);
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto buildPartial() {
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto result = new com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -52407,16 +52407,16 @@ public final class EventClanProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto)other);
+        if (other instanceof com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto other) {
-        if (other == com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto other) {
+        if (other == com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -52458,11 +52458,11 @@ public final class EventClanProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto parsedMessage = null;
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -52829,19 +52829,19 @@ public final class EventClanProto {
         return expiredGiftsBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.DeleteClanGiftsRequestProto)
     }
 
     static {
-      defaultInstance = new ClearExpiredClanGiftsRequestProto(true);
+      defaultInstance = new DeleteClanGiftsRequestProto(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClearExpiredClanGiftsRequestProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.DeleteClanGiftsRequestProto)
   }
 
-  public interface ClearExpiredClanGiftsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
+  public interface DeleteClanGiftsResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DeleteClanGiftsResponseProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -52858,34 +52858,34 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus getStatus();
+    com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus getStatus();
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto}
+   * Protobuf type {@code com.lvl6.proto.DeleteClanGiftsResponseProto}
    */
-  public static final class ClearExpiredClanGiftsResponseProto extends
+  public static final class DeleteClanGiftsResponseProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-      ClearExpiredClanGiftsResponseProtoOrBuilder {
-    // Use ClearExpiredClanGiftsResponseProto.newBuilder() to construct.
-    private ClearExpiredClanGiftsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DeleteClanGiftsResponseProto)
+      DeleteClanGiftsResponseProtoOrBuilder {
+    // Use DeleteClanGiftsResponseProto.newBuilder() to construct.
+    private DeleteClanGiftsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private ClearExpiredClanGiftsResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private DeleteClanGiftsResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final ClearExpiredClanGiftsResponseProto defaultInstance;
-    public static ClearExpiredClanGiftsResponseProto getDefaultInstance() {
+    private static final DeleteClanGiftsResponseProto defaultInstance;
+    public static DeleteClanGiftsResponseProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public ClearExpiredClanGiftsResponseProto getDefaultInstanceForType() {
+    public DeleteClanGiftsResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -52895,7 +52895,7 @@ public final class EventClanProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private ClearExpiredClanGiftsResponseProto(
+    private DeleteClanGiftsResponseProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -52933,7 +52933,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus value = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.valueOf(rawValue);
+              com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus value = com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -52956,35 +52956,35 @@ public final class EventClanProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.Builder.class);
+              com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.class, com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ClearExpiredClanGiftsResponseProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClearExpiredClanGiftsResponseProto>() {
-      public ClearExpiredClanGiftsResponseProto parsePartialFrom(
+    public static com.google.protobuf.Parser<DeleteClanGiftsResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<DeleteClanGiftsResponseProto>() {
+      public DeleteClanGiftsResponseProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClearExpiredClanGiftsResponseProto(input, extensionRegistry);
+        return new DeleteClanGiftsResponseProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ClearExpiredClanGiftsResponseProto> getParserForType() {
+    public com.google.protobuf.Parser<DeleteClanGiftsResponseProto> getParserForType() {
       return PARSER;
     }
 
     /**
-     * Protobuf enum {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus}
+     * Protobuf enum {@code com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus}
      */
-    public enum ClearExpiredClanGiftsStatus
+    public enum DeleteClanGiftsStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
        * <code>SUCCESS = 1;</code>
@@ -53008,7 +53008,7 @@ public final class EventClanProto {
 
       public final int getNumber() { return value; }
 
-      public static ClearExpiredClanGiftsStatus valueOf(int value) {
+      public static DeleteClanGiftsStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
@@ -53016,15 +53016,15 @@ public final class EventClanProto {
         }
       }
 
-      public static com.google.protobuf.Internal.EnumLiteMap<ClearExpiredClanGiftsStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<DeleteClanGiftsStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<ClearExpiredClanGiftsStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<DeleteClanGiftsStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ClearExpiredClanGiftsStatus>() {
-              public ClearExpiredClanGiftsStatus findValueByNumber(int number) {
-                return ClearExpiredClanGiftsStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<DeleteClanGiftsStatus>() {
+              public DeleteClanGiftsStatus findValueByNumber(int number) {
+                return DeleteClanGiftsStatus.valueOf(number);
               }
             };
 
@@ -53038,12 +53038,12 @@ public final class EventClanProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.getDescriptor().getEnumTypes().get(0);
+        return com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final ClearExpiredClanGiftsStatus[] VALUES = values();
+      private static final DeleteClanGiftsStatus[] VALUES = values();
 
-      public static ClearExpiredClanGiftsStatus valueOf(
+      public static DeleteClanGiftsStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -53055,12 +53055,12 @@ public final class EventClanProto {
       private final int index;
       private final int value;
 
-      private ClearExpiredClanGiftsStatus(int index, int value) {
+      private DeleteClanGiftsStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus)
     }
 
     private int bitField0_;
@@ -53086,23 +53086,23 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status_;
+    private com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus getStatus() {
+    public com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -53152,53 +53152,53 @@ public final class EventClanProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parseFrom(
+    public static com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -53207,7 +53207,7 @@ public final class EventClanProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -53219,25 +53219,25 @@ public final class EventClanProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.ClearExpiredClanGiftsResponseProto}
+     * Protobuf type {@code com.lvl6.proto.DeleteClanGiftsResponseProto}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DeleteClanGiftsResponseProto)
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.class, com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.Builder.class);
+                com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.class, com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.newBuilder()
+      // Construct using com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -53264,7 +53264,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -53275,23 +53275,23 @@ public final class EventClanProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_descriptor;
       }
 
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.getDefaultInstance();
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto build() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto result = buildPartial();
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto build() {
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto buildPartial() {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto result = new com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto(this);
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto buildPartial() {
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto result = new com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -53312,16 +53312,16 @@ public final class EventClanProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto)other);
+        if (other instanceof com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto other) {
-        if (other == com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto other) {
+        if (other == com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -53340,11 +53340,11 @@ public final class EventClanProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto parsedMessage = null;
+        com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -53471,23 +53471,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
+      private com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status_ = com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus getStatus() {
+      public com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -53497,24 +53497,24 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus.SUCCESS;
         onChanged();
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.DeleteClanGiftsResponseProto)
     }
 
     static {
-      defaultInstance = new ClearExpiredClanGiftsResponseProto(true);
+      defaultInstance = new DeleteClanGiftsResponseProto(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClearExpiredClanGiftsResponseProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.DeleteClanGiftsResponseProto)
   }
 
   public interface ReceivedClanGiftResponseProtoOrBuilder extends
@@ -54793,15 +54793,15 @@ public final class EventClanProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor;
+    internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor;
+    internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor;
   private static
@@ -55166,22 +55166,21 @@ public final class EventClanProto {
       "rdProto\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto" +
       ".CollectClanGiftsResponseProto.CollectCl" +
       "anGiftsStatus\"5\n\026CollectClanGiftsStatus\022",
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\216\001\n!ClearEx" +
-      "piredClanGiftsRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\0227\n\014" +
-      "expiredGifts\030\002 \003(\0132!.com.lvl6.proto.User" +
-      "ClanGiftProto\"\362\001\n\"ClearExpiredClanGiftsR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022^\n\006status\030\002 \001(\0162N" +
-      ".com.lvl6.proto.ClearExpiredClanGiftsRes" +
-      "ponseProto.ClearExpiredClanGiftsStatus\":" +
-      "\n\033ClearExpiredClanGiftsStatus\022\013\n\007SUCCESS",
-      "\020\001\022\016\n\nFAIL_OTHER\020\002\"\273\001\n\035ReceivedClanGiftR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022.\n\005scope\030\002 \001(\0162\031." +
-      "com.lvl6.proto.ChatScope:\004CLAN\0228\n\ruserCl" +
-      "anGifts\030\003 \003(\0132!.com.lvl6.proto.UserClanG" +
-      "iftProtoB\020B\016EventClanProto"
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\210\001\n\033DeleteC" +
+      "lanGiftsRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\0227\n\014expire" +
+      "dGifts\030\002 \003(\0132!.com.lvl6.proto.UserClanGi" +
+      "ftProto\"\332\001\n\034DeleteClanGiftsResponseProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022R\n\006status\030\002 \001(\0162B.com.lvl6.pr" +
+      "oto.DeleteClanGiftsResponseProto.DeleteC" +
+      "lanGiftsStatus\"4\n\025DeleteClanGiftsStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\273\001\n\035Receive",
+      "dClanGiftResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022.\n\005scop" +
+      "e\030\002 \001(\0162\031.com.lvl6.proto.ChatScope:\004CLAN" +
+      "\0228\n\ruserClanGifts\030\003 \003(\0132!.com.lvl6.proto" +
+      ".UserClanGiftProtoB\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -55513,17 +55512,17 @@ public final class EventClanProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CollectClanGiftsResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Reward", "Status", });
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor =
+    internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(52);
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_fieldAccessorTable = new
+    internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClearExpiredClanGiftsRequestProto_descriptor,
+        internal_static_com_lvl6_proto_DeleteClanGiftsRequestProto_descriptor,
         new java.lang.String[] { "Sender", "ExpiredGifts", });
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor =
+    internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(53);
-    internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_fieldAccessorTable = new
+    internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClearExpiredClanGiftsResponseProto_descriptor,
+        internal_static_com_lvl6_proto_DeleteClanGiftsResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_ReceivedClanGiftResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(54);

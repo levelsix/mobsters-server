@@ -76,6 +76,8 @@ public class MiniEventRetrieveUtils {
 		me.setStartTime(now);
 //		MiniEvent active = miniEventTree.ceiling(me);
 		MiniEvent active = miniEventTree.floor(me);
+		
+		log.info("found active={}", active);
 
 		//found the MiniEvent with a startTime before $now
 		//need to make sure MiniEvent endTime is after $now
@@ -83,6 +85,7 @@ public class MiniEventRetrieveUtils {
 			Date activeEndTime = active.getEndTime();
 			if (timeUtil.isFirstEarlierThanSecond(activeEndTime, now))
 			{
+				log.info ("end time invalid. invalidating active.");
 				active = null;
 			}
 			

@@ -1773,6 +1773,21 @@ public class MiscMethods {
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
 
+	public String[] translateInBulk(String[] text, Language recipientLanguage) {
+		Translate.setClientId(pClientId);
+		Translate.setClientSecret(secretId);
+		String[] returnArray = null;
+		
+		try {
+			returnArray = Translate.execute(text, recipientLanguage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnArray;
+	}
+	
+	
 	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
@@ -1788,7 +1803,7 @@ public class MiscMethods {
 		listOfLanguages.add(Language.GERMAN);
 		listOfLanguages.add(Language.SPANISH);
 		listOfLanguages.add(Language.RUSSIAN);
-
+		
 		try {
 			if(recipientLanguage != null) {
 				if(sourceLanguage == null) {
@@ -1822,6 +1837,8 @@ public class MiscMethods {
 		}
 		return returnMap;
 	}
+	
+	
 
 	public Map<TranslateLanguages, String> translateForGlobal(Language sourceLanguage, String text) {
 		Translate.setClientId(pClientId);

@@ -108,8 +108,9 @@ public class CreateBattleItemAction {
 		emptyUpdatedList = (null == updatedList || updatedList.isEmpty());
 		emptyNewList = (null == newList || newList.isEmpty());
 		if (emptyDeletedList && emptyUpdatedList && emptyNewList) {
-			log.error("no BattleItems sent");
-			return false;
+			log.info("no BattleItems sent");
+			// Commented out because if someone adds and then subtracts battle items they may have a change
+			//return false;
 		}
 
 		return true;

@@ -45,10 +45,10 @@ public class CreateClanController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -111,7 +111,7 @@ public class CreateClanController extends EventController {
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCreateClanResponseProto(resBuilder.build());
-//			server.writeEvent(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -142,8 +142,8 @@ public class CreateClanController extends EventController {
 
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCreateClanResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+			resEvent.setCreateClanResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -164,7 +164,7 @@ public class CreateClanController extends EventController {
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCreateClanResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateClan processEvent", e);
 			}
@@ -320,7 +320,7 @@ public class CreateClanController extends EventController {
 				tag == null || tag.isEmpty()) {
 			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
 			log.error("user is null");
-			return false;      
+			return false;
 		}
 		//    if (user.getCash() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
 		//      resBuilder.setStatus(CreateClanStatus.FAIL_NOT_ENOUGH_CASH);

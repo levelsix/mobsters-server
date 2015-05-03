@@ -1394,6 +1394,42 @@ public class CreateInfoProtoUtils {
 //		gcmpb.setContent(p.getContent());
 		return gcmpb.build();
 	}
+	
+	public GroupChatMessageProto createGroupChatMessageProto(long time,
+			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
+			String chatId, TranslateLanguages contentLanguage, TranslateLanguages translatedLanguage,
+			String translatedContent) {
+		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
+				.newBuilder();
+
+		gcmpb.setSender(user);
+		gcmpb.setTimeOfChat(time);
+		gcmpb.setContent(content);
+
+		if(contentLanguage != null) {
+			gcmpb.setContentLanguage(contentLanguage);
+		}
+
+		TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+
+		if(translatedLanguage != null && translatedContent != null) {
+			ttpb.setLanguage(translatedLanguage);
+			ttpb.setText(translatedContent);
+		}
+		else {
+			ttpb.setLanguage(contentLanguage);
+			ttpb.setText(content);
+		}
+		
+		gcmpb.addTranslatedContent(ttpb.build());
+
+
+		if (chatId != null) {
+			gcmpb.setChatUuid(chatId);
+		}
+
+		return gcmpb.build();
+	}
 
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
