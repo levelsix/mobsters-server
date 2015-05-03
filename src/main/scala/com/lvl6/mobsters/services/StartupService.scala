@@ -1184,7 +1184,6 @@ class StartupService extends LazyLogging{
                             salesItemRetrieveUtil,
                             salesDisplayItemRetrieveUtil,
                             customMenuRetrieveUtil);
-                    logger.info(s"spProto: $spProto");
                     resBuilder.addSalesPackages(spProto);
                 }
               }
@@ -1204,7 +1203,6 @@ class StartupService extends LazyLogging{
                             salesItemRetrieveUtil,
                             salesDisplayItemRetrieveUtil,
                             customMenuRetrieveUtil);
-                    logger.info(s"spProto: $spProto");
 
                     resBuilder.addSalesPackages(spProto);
                 }
@@ -1232,7 +1230,6 @@ class StartupService extends LazyLogging{
                             salesItemRetrieveUtil,
                             salesDisplayItemRetrieveUtil,
                             customMenuRetrieveUtil);
-                    logger.info(s"spProto: $spProto");
 
                     resBuilder.addSalesPackages(spProto);
                 }
@@ -1355,7 +1352,6 @@ class StartupService extends LazyLogging{
               }
           }
           
-          logger.info(s"list of sales packages protos $resBuilder.getSalesPackagesList")
       }
     }
   }

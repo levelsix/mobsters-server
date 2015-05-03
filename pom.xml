@@ -61,7 +61,7 @@
 	</repositories>
 	<properties>
 		<!-- <jdbc.url><![CDATA[jdbc:mysql://kingdom-dev-1.cv5kxrel3z7x.us-east-1.rds.amazonaws.com/kingdom?useLegacyDatetimeCode=false]]></jdbc.url> -->
-		<jdbc.url><![CDATA[jdbc:mysql://localhost/mobsters?useLegacyDatetimeCode=false]]></jdbc.url>
+		<jdbc.url><![CDATA[jdbc:mysql://54.148.68.13:3306/mobsters?useLegacyDatetimeCode=true]]></jdbc.url>
 		<jdbc.username>lvl6admin</jdbc.username>
 		<jdbc.password>robashen123</jdbc.password>
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
@@ -292,6 +292,9 @@
 				<configuration>
 					<includes>
 						<include>**/test/*.java</include>
+						<include>**/test/controller/integrationtests/*.java</include>
+						<include>**/test/controller/unittests/*.java</include>
+						<include>**/test/controller/utilstests/*.java</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -813,11 +816,6 @@
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
 				<version>1.8.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>4.2.1</version>
 			</dependency>
 <!--     		<dependency> -->
 <!--         		<groupid>junit</groupId> -->

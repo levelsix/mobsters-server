@@ -158,10 +158,10 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	// current client version to see if it is still playable
 	public static float clientVersionNumber;
 
-	public static void main(String args[]) {
-				ApplicationContext context = new FileSystemXmlApplicationContext(
-						"target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
-	}
+//	public static void main(String args[]) {
+//				ApplicationContext context = new FileSystemXmlApplicationContext(
+//						"target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
+//	}
 
 	public GameServer(String serverIP, int portNum) {
 		//BasicConfigurator.configure();

@@ -682,16 +682,16 @@ message CollectClanGiftsResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message ClearExpiredClanGiftsRequestProto {
+message DeleteClanGiftsRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserClanGiftProto expiredGifts = 2;
 }
 
-message ClearExpiredClanGiftsResponseProto {
+message DeleteClanGiftsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ClearExpiredClanGiftsStatus status = 2;
+	optional DeleteClanGiftsStatus status = 2;
 	
-	enum ClearExpiredClanGiftsStatus {
+	enum DeleteClanGiftsStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}

@@ -153,78 +153,159 @@ public class RetrievePrivateChatPostsController extends EventController {
 							chatIds.add(pcp.getId());
 						}
 
-						Map<String, ChatTranslations> returnMap = new HashMap<String, ChatTranslations>();
+						Map<String, String> returnMap = new HashMap<String, String>();
 						Map<String, List<ChatTranslations>> chatIdsToTranslations = new HashMap<String, List<ChatTranslations>>();
+						List<String> chatIdsToBeTranslated = new ArrayList<String>();
 
-						if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
-							chatIdsToTranslations =
-									chatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
+						//CHECK IF USER EVEN wants translations
+						if(translateLanguage == null || translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
+							for (PrivateChatPost pwp : recentPrivateChatPosts) {
+								String posterId = pwp.getPosterId();
+								String contentLanguage = pwp.getContentLanguage();
+								TranslateLanguages tl = null;
 
-							//this map holds the correct translation based on language sent
-							List<String> chatIdsToBeTranslated = new ArrayList<String>();
-
-							log.info("{}", chatIdsToTranslations);
-
-							for(String chatId : chatIdsToTranslations.keySet()) {
-								List<ChatTranslations> chatTranslationsList = chatIdsToTranslations.get(chatId);
-								for(ChatTranslations ct : chatTranslationsList) {
-									//maybe can do ==? idk this seems safer just in case
-									if(ct.getTranslateLanguage().toString().equalsIgnoreCase(translateLanguage.toString())) {
-										returnMap.put(chatId, ct);
-									}
+								if(contentLanguage != null) {
+									tl = TranslateLanguages.valueOf(contentLanguage);
 								}
-								//if we did not already have a translation
-								if(!returnMap.containsKey(chatId)) {
-									chatIdsToBeTranslated.add(chatId);
-								}
+
+								long time = pwp.getTimeOfPost().getTime();
+								MinimumUserProtoWithLevel user = userIdsToMups
+										.get(posterId);
+								String content = pwp.getContent();
+								boolean isAdmin = false;
+
+								String chatId = pwp.getId();
+
+								GroupChatMessageProto gcmp = createInfoProtoUtils
+										.createGroupChatMessageProto(time, user, content, 
+												isAdmin, chatId, tl, null, null);
+								resBuilder.addPosts(gcmp);
 							}
 						}
+						else {
 
-						//convert private chat post to group chat message proto
-						for (PrivateChatPost pwp : recentPrivateChatPosts) {
-							log.info("private chat post id: " + pwp.getId());
-							String posterId = pwp.getPosterId();
-							String contentLanguage = pwp.getContentLanguage();
-
-							if(contentLanguage == null || contentLanguage.isEmpty()) {
-								List<TranslationSettingsForUser> tsfuList = translationSettingsForUserRetrieveUtil.
-										getUserTranslationSettingsForUserGlobal(posterId);
-								if(tsfuList == null || tsfuList.isEmpty()) {
-									contentLanguage = ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE;
+							//CHECK IF the contentLanguage of the private chat matches translateLanguage						
+							for(PrivateChatPost pcp3 : recentPrivateChatPosts) {
+								if(pcp3.getContentLanguage() != null) {
+									if(pcp3.getContentLanguage().toString().equalsIgnoreCase(translateLanguage.toString())) {
+										returnMap.put(pcp3.getId(), pcp3.getContent());
+									}
 								}
-								else contentLanguage = tsfuList.get(0).getLanguage();
 							}
 
-							long time = pwp.getTimeOfPost().getTime();
-							MinimumUserProtoWithLevel user = userIdsToMups
-									.get(posterId);
-							String content = pwp.getContent();
-							boolean isAdmin = false;
-							Map<TranslateLanguages, String> translateMap = new HashMap<TranslateLanguages, String>();
-
-							String chatId = pwp.getId();
+							//CHECK DB if we've translated before, if so grab save that into returnMap
 							if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
-								if(returnMap.containsKey(chatId)) {
-									translateMap.put(returnMap.get(chatId).getTranslateLanguage(), returnMap.get(chatId).getText());
+								chatIdsToTranslations =
+										chatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
+								log.info("{}", chatIdsToTranslations);
+
+								for(String chatId : chatIdsToTranslations.keySet()) {
+									if(!returnMap.containsKey(chatId)) {
+										List<ChatTranslations> chatTranslationsList = chatIdsToTranslations.get(chatId);
+										for(ChatTranslations ct : chatTranslationsList) {
+											if(ct.getTranslateLanguage().toString().equalsIgnoreCase(translateLanguage.toString())) {
+												returnMap.put(chatId, ct.getText());
+											}
+										}
+										//if we did not already have a translation
+										if(!returnMap.containsKey(chatId)) {
+											chatIdsToBeTranslated.add(chatId);
+										}
+									}
 								}
-								else {
-									Language language = miscMethods.convertFromEnumToLanguage(translateLanguage);
-									translateMap = miscMethods.translate(null, language, pwp.getContent());
+							}
+
+							List<String> allUserIds = new ArrayList<String>();
+							List<String> userIdsWithoutContentLanguage = new ArrayList<String>();
+							Map<String, String> userIdsToContentLanguage = new HashMap<String, String>();
+
+							//at this point, if a privatechatpost isn't in returnMap yet, it either has a null content language or has a
+							//content language that doesn't match translateLanguage/what we want and hasnt been translated before
+							for(PrivateChatPost pwp : recentPrivateChatPosts) {
+								if(!returnMap.containsKey(pwp.getId())) {
+									String posterId = pwp.getPosterId();
+									allUserIds.add(posterId);
+									String contentLanguage = pwp.getContentLanguage();
+									if(contentLanguage == null || contentLanguage.isEmpty()) {
+										userIdsWithoutContentLanguage.add(posterId);
+									}	
+								}
+							}
+
+							Map<String, TranslationSettingsForUser> tsfuMap = translationSettingsForUserRetrieveUtil.
+									getUserTranslationSettingsMapForUsersGlobal(userIdsWithoutContentLanguage);
+
+							//grab the content language from tsfu's, if there isn't a tsfu for a user, he has no global, give him default lang
+							for(String uId : allUserIds) {
+								if(!tsfuMap.containsKey(uId)) {
+									userIdsToContentLanguage.put(uId, ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
+								}
+								else userIdsToContentLanguage.put(uId, tsfuMap.get(uId).getLanguage()); 
+							}
+
+							//now check the private chat posts with null content language, if the user's global language setting matches 
+							//translateLanguage, we'll use the text
+							for(PrivateChatPost pcp2 : recentPrivateChatPosts) {
+								if(!returnMap.containsKey(pcp2.getId())) {
+									if(pcp2.getContentLanguage() == null) {
+										String posterId = pcp2.getPosterId();
+										String posterGlobalLanguage = userIdsToContentLanguage.get(posterId);
+										if(posterGlobalLanguage.equalsIgnoreCase(translateLanguage.toString())) {
+											returnMap.put(pcp2.getId(), pcp2.getContent());
+										}	
+									}
+								}
+							}
+
+							List<String> chatIdsToBeTranslated2 = new ArrayList<String>();
+							Map<String, PrivateChatPost> chatIdToPcP = new HashMap<String, PrivateChatPost>();
+
+							//at this point, any privatechatpost not in returnMap needs to be translated
+							for(PrivateChatPost pcp4 : recentPrivateChatPosts) {
+								if(!returnMap.containsKey(pcp4.getId())) {
+									chatIdsToBeTranslated2.add(pcp4.getId());
+									chatIdToPcP.put(pcp4.getId(), pcp4);
+								}
+							}
+
+							String[] chatIdsArray = chatIdsToBeTranslated2.toArray(new String[chatIdsToBeTranslated2.size()]);
+							String[] textArray = new String[chatIdsArray.length];
+							for(int i=0; i<chatIdsArray.length; i++) {
+								textArray[i] = chatIdToPcP.get(chatIdsArray[i]).getContent();
+							}
+
+							String[] translatedTextArray = miscMethods.translateInBulk(textArray, miscMethods.convertFromEnumToLanguage(translateLanguage));
+
+							//add results to returnMap
+							for(int i=0; i<chatIdsArray.length; i++) {
+								returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+							}
+
+							//convert private chat post to group chat message proto
+							for (PrivateChatPost pwp : recentPrivateChatPosts) {
+								String posterId = pwp.getPosterId();
+								String contentLanguage = pwp.getContentLanguage();
+								TranslateLanguages tl = null;
+
+								if(contentLanguage != null) {
+									tl = TranslateLanguages.valueOf(contentLanguage);
 								}
 
-								log.info("private chat post content language: " + contentLanguage);
-								GroupChatMessageProto gcmp = createInfoProtoUtils
-										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
-								resBuilder.addPosts(gcmp);
-							}
-							else {
-								GroupChatMessageProto gcmp = createInfoProtoUtils
-										.createGroupChatMessageProto(time, user,
-												content, isAdmin, pwp.getId(), translateMap, TranslateLanguages.valueOf(contentLanguage));
-								resBuilder.addPosts(gcmp);
-							}
+								long time = pwp.getTimeOfPost().getTime();
+								MinimumUserProtoWithLevel user = userIdsToMups
+										.get(posterId);
+								String content = pwp.getContent();
+								boolean isAdmin = false;
 
+								String chatId = pwp.getId();
+
+								GroupChatMessageProto gcmp = createInfoProtoUtils
+										.createGroupChatMessageProto(time, user, content, 
+												isAdmin, chatId, tl, translateLanguage,
+												returnMap.get(chatId));
+								resBuilder.addPosts(gcmp);
+
+							}
 						}
 					}
 				}

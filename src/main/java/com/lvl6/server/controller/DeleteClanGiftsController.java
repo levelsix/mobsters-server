@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.ClearExpiredClanGiftsRequestEvent;
-import com.lvl6.events.response.ClearExpiredClanGiftsResponseEvent;
+import com.lvl6.events.request.DeleteClanGiftsRequestEvent;
+import com.lvl6.events.response.DeleteClanGiftsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ClanGiftForUser;
-import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsRequestProto;
-import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto;
-import com.lvl6.proto.EventClanProto.ClearExpiredClanGiftsResponseProto.ClearExpiredClanGiftsStatus;
+import com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto;
+import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto;
+import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.ClanGiftProto;
 import com.lvl6.proto.RewardsProto.UserClanGiftProto;
@@ -29,7 +29,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.ClearExpiredClanGiftsAction;
+import com.lvl6.server.controller.actionobjects.DeleteClanGiftsAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -37,11 +37,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
+public class DeleteClanGiftsController extends EventController {
 
-public class ClearExpiredClanGiftsController extends EventController {
-
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DeleteClanGiftsController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -73,24 +71,23 @@ public class ClearExpiredClanGiftsController extends EventController {
 	@Autowired
 	protected UpdateUtil updateUtil;
 
-	public ClearExpiredClanGiftsController() {
-		
+
+	public DeleteClanGiftsController() {
 	}
 
 	@Override
 	public RequestEvent createRequestEvent() {
-		return new ClearExpiredClanGiftsRequestEvent();
+		return new DeleteClanGiftsRequestEvent();
 	}
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_CLEAR_EXPIRED_CLAN_GIFTS_EVENT;
+		return EventProtocolRequest.C_DELETE_CLAN_GIFTS_EVENT;
 	}
 
 	@Override
-	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
-		ClearExpiredClanGiftsRequestProto reqProto = ((ClearExpiredClanGiftsRequestEvent) event)
-				.getClearExpiredClanGiftsRequestProto();
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses) {
+		DeleteClanGiftsRequestProto reqProto = ((DeleteClanGiftsRequestEvent) event).getDeleteClanGiftsRequestProto();
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -101,10 +98,9 @@ public class ClearExpiredClanGiftsController extends EventController {
 		//all positive numbers, server will change to negative
 
 		//set some values to send to the client (the response proto)
-		ClearExpiredClanGiftsResponseProto.Builder resBuilder = ClearExpiredClanGiftsResponseProto
-				.newBuilder();
+		DeleteClanGiftsResponseProto.Builder resBuilder = DeleteClanGiftsResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(ClearExpiredClanGiftsStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(DeleteClanGiftsStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -119,29 +115,29 @@ public class ClearExpiredClanGiftsController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(ClearExpiredClanGiftsStatus.FAIL_OTHER);
-			ClearExpiredClanGiftsResponseEvent resEvent = new ClearExpiredClanGiftsResponseEvent(
+			resBuilder.setStatus(DeleteClanGiftsStatus.FAIL_OTHER);
+			DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setClearExpiredClanGiftsResponseProto(resBuilder.build());
+			resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			ClearExpiredClanGiftsAction uusa = new ClearExpiredClanGiftsAction(userId, userRetrieveUtils,
+			DeleteClanGiftsAction uusa = new DeleteClanGiftsAction(userId, userRetrieveUtils,
 					deleteUtil, listOfClanGifts);
 
 			uusa.execute(resBuilder);
 
-			ClearExpiredClanGiftsResponseEvent resEvent = new ClearExpiredClanGiftsResponseEvent(
+			DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setClearExpiredClanGiftsResponseProto(resBuilder.build());
+			resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (ClearExpiredClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (DeleteClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
@@ -153,19 +149,19 @@ public class ClearExpiredClanGiftsController extends EventController {
 			}
 
 		} catch (Exception e) {
-			log.error("exception in ClearExpiredClanGiftsController processEvent",
+			log.error("exception in DeleteClanGiftsController processEvent",
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(ClearExpiredClanGiftsStatus.FAIL_OTHER);
-				ClearExpiredClanGiftsResponseEvent resEvent = new ClearExpiredClanGiftsResponseEvent(
+				resBuilder.setStatus(DeleteClanGiftsStatus.FAIL_OTHER);
+				DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setClearExpiredClanGiftsResponseProto(resBuilder.build());
+				resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
-						"exception2 in ClearExpiredClanGiftsController processEvent",
+						"exception2 in DeleteClanGiftsController processEvent",
 						e);
 			}
 		} finally {
