@@ -155,7 +155,6 @@ public class ChangeClanSettingsAction {
 				log.warn("description is {}, and length of that is {}, max size is {}", 
 						new Object[] {description, description.length(), ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION});
 			}
-			return false;
 		} else {
 			clan.setDescription(description);
 		}

@@ -1683,7 +1683,9 @@ public class CreateInfoProtoUtils {
 
 		mupfcb.setClanStatus(userClanStatus);
 		mupfcb.setRaidContribution(clanRaidContribution);
-		mupfcb.setBattlesWon(battlesWon);
+		if(battlesWon != -1) {
+			mupfcb.setBattlesWon(battlesWon);
+		}
 		if (null != uchc) {
 			mupfcb.setNumClanHelpsSolicited(uchc.getNumSolicited());
 			mupfcb.setNumClanHelpsGiven(uchc.getNumGiven());
