@@ -81,7 +81,7 @@ public class RetrieveClanInfoController extends EventController {
 
 	@Autowired
 	protected ClanHelpCountForUserRetrieveUtil clanHelpCountForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -246,9 +246,9 @@ public class RetrieveClanInfoController extends EventController {
 			log.info("user clans related to clanId: {} \t {}", clanId,
 					userClans);
 			Set<String> userIds = new HashSet<String>();
-			//this is because clan with 1k+ users overflows buffer when sending to client and need to 
+			//this is because clan with 1k+ users overflows buffer when sending to client and need to
 			//include clan owner
-			//UPDATE: well, the user clan status now specifies whether a person is a leader, so 
+			//UPDATE: well, the user clan status now specifies whether a person is a leader, so
 			//owner id in clan is not needed
 			//            Clan c = ClanRetrieveUtils.getClanWithId(clanId);
 			//            int ownerId = c.getOwnerId();
@@ -299,7 +299,7 @@ public class RetrieveClanInfoController extends EventController {
 				}
 
 				//might be better if just got all user's battle wons from db
-				//instead of one by one from hazelcast 
+				//instead of one by one from hazelcast
 				int battlesWon = getBattlesWonForUser(userId);
 				MinimumUserProtoForClans minUser = createInfoProtoUtils
 						.createMinimumUserProtoForClans(u, c, uc.getStatus(),
@@ -361,15 +361,20 @@ public class RetrieveClanInfoController extends EventController {
 
 		for (Clan c : clanList) {
 			String clanId = c.getId();
-			int size = clanIdsToSizes.get(clanId);
-			resBuilder.addClanInfo(createInfoProtoUtils
-					.createFullClanProtoWithClanSize(c, size));
+
+			if (clanIdsToSizes.containsKey(clanId)) {
+				int size = clanIdsToSizes.get(clanId);
+				resBuilder.addClanInfo(createInfoProtoUtils
+						.createFullClanProtoWithClanSize(c, size));
+			} else {
+				log.error("clan with no active members! {}", c);
+			}
 		}
 	}
 
 	//clan raid contribution is calculated through summing all the clanCrDmg
 	//summing all of a user's crDmg, and taking dividing
-	//sumUserCrDmg by sumClanCrDmg 
+	//sumUserCrDmg by sumClanCrDmg
 	private Map<String, Float> calculateRaidContribution(
 			Map<Date, Map<String, CepfuRaidHistory>> timesToUserIdToRaidHistory) {
 		log.info("calculating clan raid contribution.");
