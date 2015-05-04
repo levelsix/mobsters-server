@@ -120,9 +120,8 @@ public class ChangeClanSettingsAction {
 
 		if (user == null || clan == null) {
 			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-			log.error(String.format(
-					"userId is %s, user is %s, clanId is %s, clan is %s",
-					userId, user, clan.getId(), clan));
+			log.error("userId is {}, user is {}, clanId is {}, clan is {}",
+					new Object[] {userId, user, clan.getId(), clan});
 			return false;
 		}
 		return true;
@@ -142,9 +141,7 @@ public class ChangeClanSettingsAction {
 
 		if (!uniqUserIds.contains(userId)) {
 			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_AUTHORIZED);
-			log.error(String
-					.format("clan member can't change clan description member=%s",
-							user));
+			log.error("clan member can't change clan description member= {}", user);
 			return false;
 		}
 		resBuilder.setStatus(ChangeClanSettingsStatus.SUCCESS);
@@ -155,15 +152,12 @@ public class ChangeClanSettingsAction {
 		if (isChangeDescription) {
 			if (description.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION) {
 				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-				log.warn(String
-						.format("description is %s, and length of that is %s, max size is %s",
-								description,
-								description.length(),
-								ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION));
-				return false;
-			} else {
-				clan.setDescription(description);
+				log.warn("description is {}, and length of that is {}, max size is {}", 
+						new Object[] {description, description.length(), ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION});
 			}
+			return false;
+		} else {
+			clan.setDescription(description);
 		}
 
 		if (isChangeJoinType) {
@@ -174,7 +168,7 @@ public class ChangeClanSettingsAction {
 			ClanIcon ci = clanIconRetrieveUtils.getClanIconForId(iconId);
 			if (null == ci) {
 				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-				log.warn(String.format("no clan icon with id=%s", iconId));
+				log.warn("no clan icon with id={}", iconId);
 			} else {
 				clan.setClanIconId(iconId);
 			}
@@ -185,11 +179,11 @@ public class ChangeClanSettingsAction {
 				isChangeDescription, description, isChangeJoinType,
 				requestToJoinRequired, isChangeIcon, iconId);
 
-		log.info(String.format("numUpdated (should be 1)=%s", numUpdated));
+		log.info("numUpdated (should be 1)={}", numUpdated);
 		return true;
 	}
 
-	
+
 
 	public User getUser() {
 		return user;
@@ -238,7 +232,7 @@ public class ChangeClanSettingsAction {
 	public void setMiscMethods(MiscMethods miscMethods) {
 		this.miscMethods = miscMethods;
 	}
-	
+
 	public boolean isRequestToJoinRequired() {
 		return requestToJoinRequired;
 	}
