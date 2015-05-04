@@ -120,7 +120,7 @@ public class CreateClanAction {
 					tag, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG));
 			return false;
 		}
-		return true;	
+		return true;
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
@@ -205,7 +205,7 @@ public class CreateClanAction {
 		if (null == description || description.isEmpty()) {
 			description = String.format("Welcome to %s!", clanName);
 		}
-		
+
 		createdClan = new Clan();
 		createTime = new Timestamp(new Date().getTime());
 		clanId = insertUtil.insertClan(clanName, createTime,
@@ -215,25 +215,24 @@ public class CreateClanAction {
 		} else {
 			setClan(createdClan, clanId, clanName, createTime, description, tag,
 					requestToJoinRequired, clanIconId);
-			log.info(String.format("clan=%s", createdClan));
+			log.info("clan={}", createdClan);
 		}
 
 		if (!insertUtil.insertUserClan(user.getId(), clanId,
 				UserClanStatus.LEADER.name(), createTime)) {
-			log.error(String
-					.format("problem with inserting user clan data for user %s, and clan id %s",
-							user, clanId));
+			log.error("problem with inserting user clan data for user {}, and clan id {}",
+							user, clanId);
 		}
 		deleteUtil.deleteUserClansForUserExceptSpecificClan(
 				user.getId(), clanId);
-		
+
 		updateUserCurrency();
 
 		prepCurrencyHistory();
 
 		return true;
 	}
-	
+
 	private void setClan(Clan createdClan, String clanId, String name,
 			Timestamp createTime, String description, String tag,
 			boolean requestToJoinRequired, int clanIconId) {
@@ -249,9 +248,8 @@ public class CreateClanAction {
 	private void updateUserCurrency() {
 		boolean updated = user.updateGemsCashClan(gemsChange, cashChange, clanId);
 		if(!updated) {
-			log.error(String
-					.format("problem decreasing user gems, cash for creating clan. gemChange=%s, cashChange=%s",
-							gemsChange, cashChange));
+			log.error("can't decrease user gems/cash for creating clan. gemChange={}, cashChange={}, user={}",
+					new Object[] { gemsChange, cashChange, user } );
 		}
 	}
 
@@ -489,7 +487,7 @@ public class CreateClanAction {
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
-	
-	
+
+
 
 }
