@@ -110,7 +110,7 @@ public class SpawnMiniJobController extends EventController {
 			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -149,7 +149,7 @@ public class SpawnMiniJobController extends EventController {
 			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -171,7 +171,7 @@ public class SpawnMiniJobController extends EventController {
 				SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SpawnMiniJobController processEvent",

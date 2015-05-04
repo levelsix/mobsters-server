@@ -119,7 +119,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 			RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrievePrivateChatPostsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -319,7 +319,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 			RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrievePrivateChatPostsResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 
 			responses.normalResponseEvents().add(resEvent);
 		} catch (Exception e) {
@@ -332,7 +332,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 				RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrievePrivateChatPostsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

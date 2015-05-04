@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AvengeClanMateResponseEvent extends NormalResponseEvent<AvengeClanMateResponseProto> {
 
-	private AvengeClanMateResponseProto avengeClanMateResponseProto;
+	private AvengeClanMateResponseProto responseProto;
 
 	public AvengeClanMateResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class AvengeClanMateResponseEvent extends NormalResponseEvent<AvengeClanM
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = avengeClanMateResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAvengeClanMateResponseProto(
-			AvengeClanMateResponseProto avengeClanMateResponseProto) {
-		this.avengeClanMateResponseProto = avengeClanMateResponseProto;
+			AvengeClanMateResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

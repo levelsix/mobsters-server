@@ -142,7 +142,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -188,7 +188,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveUserMonsterTeamResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -200,7 +200,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 				RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

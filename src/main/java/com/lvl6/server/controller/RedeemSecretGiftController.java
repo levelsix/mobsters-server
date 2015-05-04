@@ -116,7 +116,7 @@ public class RedeemSecretGiftController extends EventController {
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -145,7 +145,7 @@ public class RedeemSecretGiftController extends EventController {
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemSecretGiftResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -166,7 +166,7 @@ public class RedeemSecretGiftController extends EventController {
 				RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

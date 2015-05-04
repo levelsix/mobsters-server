@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<RestrictUserMonsterResponseProto> {
 
-	private RestrictUserMonsterResponseProto restrictUserMonsterResponseProto;
+	private RestrictUserMonsterResponseProto responseProto;
 
 	public RestrictUserMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<Restri
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = restrictUserMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRestrictUserMonsterResponseProto(
-			RestrictUserMonsterResponseProto restrictUserMonsterResponseProto) {
-		this.restrictUserMonsterResponseProto = restrictUserMonsterResponseProto;
+			RestrictUserMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public RestrictUserMonsterResponseProto getRestrictUserMonsterResponseProto() {   //because APNS required
-		return restrictUserMonsterResponseProto;
+		return responseProto;
 	}
 
 }

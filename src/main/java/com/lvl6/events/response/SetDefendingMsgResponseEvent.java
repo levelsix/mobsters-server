@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendingMsgResponseProto> {
 
-	private SetDefendingMsgResponseProto setDefendingMsgResponseProto;
+	private SetDefendingMsgResponseProto responseProto;
 
 	public SetDefendingMsgResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendi
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = setDefendingMsgResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSetDefendingMsgResponseProto(
-			SetDefendingMsgResponseProto setDefendingMsgResponseProto) {
-		this.setDefendingMsgResponseProto = setDefendingMsgResponseProto;
+			SetDefendingMsgResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

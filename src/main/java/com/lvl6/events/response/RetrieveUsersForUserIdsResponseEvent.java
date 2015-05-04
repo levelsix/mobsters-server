@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent<RetrieveUsersForUserIdsResponseProto> {
 
-	private RetrieveUsersForUserIdsResponseProto retrieveUsersForUserIdsResponseProto;
+	private RetrieveUsersForUserIdsResponseProto responseProto;
 
 	public RetrieveUsersForUserIdsResponseEvent(String playerId) {
 		super(playerId);
@@ -25,14 +25,14 @@ public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent<Re
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = retrieveUsersForUserIdsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setRetrieveUsersForUserIdsResponseProto(
-			RetrieveUsersForUserIdsResponseProto retrieveUsersForUserIdsResponseProto) {
-		this.retrieveUsersForUserIdsResponseProto = retrieveUsersForUserIdsResponseProto;
+			RetrieveUsersForUserIdsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

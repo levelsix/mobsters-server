@@ -159,7 +159,7 @@ public class BeginDungeonController extends EventController {
 			BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginDungeonResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -199,7 +199,7 @@ public class BeginDungeonController extends EventController {
 			BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginDungeonResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful && 0 != gemsSpent) {
@@ -221,7 +221,7 @@ public class BeginDungeonController extends EventController {
 				BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginDungeonResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginDungeonController processEvent",

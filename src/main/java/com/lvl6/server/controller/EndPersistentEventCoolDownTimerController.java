@@ -77,7 +77,7 @@
 //      
 //      EndPersistentEventCoolDownTimerResponseEvent resEvent = new EndPersistentEventCoolDownTimerResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
-//      resEvent.setEndPersistentEventCoolDownTimerResponseProto(resBuilder.build());
+//      resEvent.setResponseProto(resBuilder.build());
 //      responses.normalResponseEvents().add(resEvent);
 //
 //      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -91,7 +91,7 @@
 //    	  resBuilder.setStatus(EndPersistentEventCoolDownTimerStatus.FAIL_OTHER);
 //    	  EndPersistentEventCoolDownTimerResponseEvent resEvent = new EndPersistentEventCoolDownTimerResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setEndPersistentEventCoolDownTimerResponseProto(resBuilder.build());
+//    	  resEvent.setResponseProto(resBuilder.build());
 //    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in EndPersistentEventCoolDownTimerController processEvent", e);

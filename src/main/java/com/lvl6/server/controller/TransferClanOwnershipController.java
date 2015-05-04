@@ -117,7 +117,7 @@ public class TransferClanOwnershipController extends EventController {
 			TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -152,7 +152,7 @@ public class TransferClanOwnershipController extends EventController {
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTransferClanOwnershipResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			}
@@ -161,7 +161,7 @@ public class TransferClanOwnershipController extends EventController {
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setTransferClanOwnershipResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
@@ -174,7 +174,7 @@ public class TransferClanOwnershipController extends EventController {
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTransferClanOwnershipResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

@@ -110,7 +110,7 @@ public class FinishPerformingResearchController extends EventController {
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishPerformingResearchResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -130,7 +130,7 @@ public class FinishPerformingResearchController extends EventController {
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishPerformingResearchResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
@@ -155,7 +155,7 @@ public class FinishPerformingResearchController extends EventController {
 				FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setFinishPerformingResearchResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

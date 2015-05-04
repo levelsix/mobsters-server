@@ -143,7 +143,7 @@ public class RedeemMiniJobController extends EventController {
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -179,7 +179,7 @@ public class RedeemMiniJobController extends EventController {
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -203,7 +203,7 @@ public class RedeemMiniJobController extends EventController {
 				RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RedeemMiniJobController processEvent",

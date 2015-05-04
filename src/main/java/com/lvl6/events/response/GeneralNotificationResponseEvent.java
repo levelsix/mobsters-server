@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class GeneralNotificationResponseEvent extends NormalResponseEvent<GeneralNotificationResponseProto> {
 
-	private GeneralNotificationResponseProto generalNotificationResponseProto;
+	private GeneralNotificationResponseProto responseProto;
 
 	//The input argument is not used.
 	public GeneralNotificationResponseEvent(String playerId) {
@@ -19,17 +19,17 @@ public class GeneralNotificationResponseEvent extends NormalResponseEvent<Genera
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = generalNotificationResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setGeneralNotificationResponseProto(
-			GeneralNotificationResponseProto generalNotificationResponseProto) {
-		this.generalNotificationResponseProto = generalNotificationResponseProto;
+			GeneralNotificationResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public GeneralNotificationResponseProto getGeneralNotificationResponseProto() {
-		return generalNotificationResponseProto;
+		return responseProto;
 	}
 }

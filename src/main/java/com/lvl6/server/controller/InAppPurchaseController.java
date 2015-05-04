@@ -201,7 +201,7 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     userId);
             resEvent.setTag(event.getTag());
-            resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+            resEvent.setResponseProto(resBuilder.build());
             responses.normalResponseEvents().add(resEvent);
             return;
         }
@@ -282,7 +282,7 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     senderProto.getUserUuid());
             resEvent.setTag(event.getTag());
-            resEvent.setInAppPurchaseResponseProto(resProto);
+            resEvent.setResponseProto(resProto);
             responses.normalResponseEvents().add(resEvent);
 
             /*if (Globals.KABAM_ENABLED()) {
@@ -313,7 +313,7 @@ public class InAppPurchaseController extends EventController {
                 InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                         userId);
                 resEvent.setTag(event.getTag());
-                resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+                resEvent.setResponseProto(resBuilder.build());
                 responses.normalResponseEvents().add(resEvent);
             } catch (Exception e2) {
                 log.error("exception2 in InAppPurchaseController processEvent",

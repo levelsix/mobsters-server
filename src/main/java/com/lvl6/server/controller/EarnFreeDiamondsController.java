@@ -113,7 +113,7 @@
 //    	resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
 //    	EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
 //        resEvent.setTag(event.getTag());
-//        resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
+//        resEvent.setResponseProto(resBuilder.build());  
 //    	responses.normalResponseEvents().add(resEvent);
 //    	return;
 //    }
@@ -151,7 +151,7 @@
 //
 //      EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
+//      resEvent.setResponseProto(resBuilder.build());  
 //      responses.normalResponseEvents().add(resEvent);
 //
 //      if (legitFreeDiamondsEarn) {

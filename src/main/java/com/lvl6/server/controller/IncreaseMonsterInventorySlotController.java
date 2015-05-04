@@ -140,7 +140,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -179,7 +179,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -209,7 +209,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 				IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

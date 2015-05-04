@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
 //public class ExpansionWaitCompleteResponseEvent extends NormalResponseEvent<ExpansionWaitCompleteResponseProto> {
 //
-//  private ExpansionWaitCompleteResponseProto expansionWaitCompleteResponseProto;
+//  private ExpansionWaitCompleteResponseProto responseProto;
 //  
 //  public ExpansionWaitCompleteResponseEvent(String playerId){
 //    super(playerId);
@@ -18,13 +18,13 @@
 //  
 //  @Override
 //  public int write(ByteBuffer bb) {
-//    ByteString b = expansionWaitCompleteResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(bb);
 //    return b.size();
 //  }
 //
-//  public void setExpansionWaitCompleteResponseProto(ExpansionWaitCompleteResponseProto expansionWaitCompleteResponseProto) {
-//    this.expansionWaitCompleteResponseProto = expansionWaitCompleteResponseProto;
+//  public void setExpansionWaitCompleteResponseProto(ExpansionWaitCompleteResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //
 //}

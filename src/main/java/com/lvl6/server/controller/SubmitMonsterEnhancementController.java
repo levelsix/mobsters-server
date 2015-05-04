@@ -144,7 +144,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -195,7 +195,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -220,7 +220,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 				SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

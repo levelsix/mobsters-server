@@ -108,7 +108,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 			FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -149,7 +149,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 			FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -173,7 +173,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 				FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

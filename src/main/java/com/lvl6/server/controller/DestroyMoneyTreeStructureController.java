@@ -96,7 +96,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDestroyMoneyTreeStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -119,7 +119,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setDestroyMoneyTreeStructureResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {

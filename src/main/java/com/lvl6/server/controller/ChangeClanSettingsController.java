@@ -129,7 +129,7 @@ public class ChangeClanSettingsController extends EventController {
 			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -155,7 +155,7 @@ public class ChangeClanSettingsController extends EventController {
 			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			//if not successful only write to user
 			if (!ChangeClanSettingsStatus.SUCCESS
@@ -177,7 +177,7 @@ public class ChangeClanSettingsController extends EventController {
 				ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in ChangeClanSettings processEvent", e);

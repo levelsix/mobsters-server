@@ -128,7 +128,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -156,20 +156,20 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
 					VoidTeamDonationSolicitationStatus.SUCCESS)) {
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				resBuilder.addAllClanTeamDonateUuid(donationIdsToSnapshots
 						.keySet());
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 
@@ -191,7 +191,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 				VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

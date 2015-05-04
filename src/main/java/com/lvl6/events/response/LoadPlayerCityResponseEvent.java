@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LoadPlayerCityResponseEvent extends NormalResponseEvent<LoadPlayerCityResponseProto> {
 
-	private LoadPlayerCityResponseProto loadPlayerCityResponseProto;
+	private LoadPlayerCityResponseProto responseProto;
 
 	public LoadPlayerCityResponseEvent(String playerId) {
 		super(playerId);
@@ -25,14 +25,14 @@ public class LoadPlayerCityResponseEvent extends NormalResponseEvent<LoadPlayerC
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = loadPlayerCityResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setLoadPlayerCityResponseProto(
-			LoadPlayerCityResponseProto loadPlayerCityResponseProto) {
-		this.loadPlayerCityResponseProto = loadPlayerCityResponseProto;
+			LoadPlayerCityResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

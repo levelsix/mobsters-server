@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpgradeNormStructureResponseEvent extends NormalResponseEvent<UpgradeNormStructureResponseProto> {
 
-	private UpgradeNormStructureResponseProto upgradeNormStructureResponseProto;
+	private UpgradeNormStructureResponseProto responseProto;
 
 	public UpgradeNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class UpgradeNormStructureResponseEvent extends NormalResponseEvent<Upgra
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = upgradeNormStructureResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setUpgradeNormStructureResponseProto(
-			UpgradeNormStructureResponseProto upgradeNormStructureResponseProto) {
-		this.upgradeNormStructureResponseProto = upgradeNormStructureResponseProto;
+			UpgradeNormStructureResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

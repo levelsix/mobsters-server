@@ -115,7 +115,7 @@ public class GiveClanHelpController extends EventController {
 			GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -147,7 +147,7 @@ public class GiveClanHelpController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			if (!success) {
-				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
@@ -156,7 +156,7 @@ public class GiveClanHelpController extends EventController {
 				//NOTE: Sending most up to date ClanHelps incurs a db read
 				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
 				resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
-				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
@@ -167,7 +167,7 @@ public class GiveClanHelpController extends EventController {
 				GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in GiveClanHelp processEvent", e);

@@ -106,7 +106,7 @@
 //			//write to the client
 //			PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(senderProto.getUserUuid());
 //			resEvent.setTag(event.getTag());
-//			resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());  
+//			resEvent.setResponseProto(resBuilder.build());  
 //			responses.normalResponseEvents().add(resEvent);
 //
 //			if (legitExpansion) {
@@ -141,7 +141,7 @@
 //    	  resBuilder.setStatus(PurchaseCityExpansionStatus.OTHER_FAIL);
 //    	  PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());
+//    	  resEvent.setResponseProto(resBuilder.build());
 //    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in BeginDungeonController processEvent", e);

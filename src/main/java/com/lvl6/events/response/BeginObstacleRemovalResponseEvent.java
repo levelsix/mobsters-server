@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginObstacleRemovalResponseEvent extends NormalResponseEvent<BeginObstacleRemovalResponseProto> {
 
-	private BeginObstacleRemovalResponseProto beginObstacleRemovalResponseProto;
+	private BeginObstacleRemovalResponseProto responseProto;
 
 	public BeginObstacleRemovalResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class BeginObstacleRemovalResponseEvent extends NormalResponseEvent<Begin
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = beginObstacleRemovalResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setBeginObstacleRemovalResponseProto(
-			BeginObstacleRemovalResponseProto beginObstacleRemovalResponseProto) {
-		this.beginObstacleRemovalResponseProto = beginObstacleRemovalResponseProto;
+			BeginObstacleRemovalResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

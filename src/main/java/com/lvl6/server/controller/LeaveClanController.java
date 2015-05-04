@@ -117,7 +117,7 @@ public class LeaveClanController extends EventController {
 			resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLeaveClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -151,13 +151,13 @@ public class LeaveClanController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
-				resEvent.setLeaveClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
 				resBuilder.setStatus(LeaveClanStatus.SUCCESS);
-				resEvent.setLeaveClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -170,7 +170,7 @@ public class LeaveClanController extends EventController {
 				LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setLeaveClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in LeaveClan processEvent", e);

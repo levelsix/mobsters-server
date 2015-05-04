@@ -112,7 +112,7 @@ public class NormStructWaitCompleteController extends EventController {
 			NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -149,7 +149,7 @@ public class NormStructWaitCompleteController extends EventController {
 			NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -162,7 +162,7 @@ public class NormStructWaitCompleteController extends EventController {
 				NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setNormStructWaitCompleteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

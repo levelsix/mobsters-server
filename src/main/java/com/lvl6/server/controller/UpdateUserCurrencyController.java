@@ -97,7 +97,7 @@ public class UpdateUserCurrencyController extends EventController {
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -129,7 +129,7 @@ public class UpdateUserCurrencyController extends EventController {
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -163,7 +163,7 @@ public class UpdateUserCurrencyController extends EventController {
 				UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

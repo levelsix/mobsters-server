@@ -9,15 +9,15 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdminMessageResponseProto> {
 
-	private SendAdminMessageResponseProto sendAdminMessageResponseProto;
+	private SendAdminMessageResponseProto responseProto;
 
 	public SendAdminMessageResponseProto getSendAdminMessageResponseProto() {
-		return sendAdminMessageResponseProto;
+		return responseProto;
 	}
 
 	public void setSendAdminMessageResponseProto(
-			SendAdminMessageResponseProto sendAdminMessageResponseProto) {
-		this.sendAdminMessageResponseProto = sendAdminMessageResponseProto;
+			SendAdminMessageResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public SendAdminMessageResponseEvent(String playerId) {
@@ -27,7 +27,7 @@ public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdmin
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = sendAdminMessageResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}

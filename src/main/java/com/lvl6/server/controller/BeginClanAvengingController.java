@@ -125,7 +125,7 @@ public class BeginClanAvengingController extends EventController {
 			BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -146,7 +146,7 @@ public class BeginClanAvengingController extends EventController {
 			BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (resBuilder.getStatus().equals(BeginClanAvengingStatus.SUCCESS)) {
 				//only write to clan if success
@@ -158,7 +158,7 @@ public class BeginClanAvengingController extends EventController {
 
 				resBuilder.addAllClanAvengings(retaliationProtos);
 
-				resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				//				User user = bcaa.getProspectiveMember();
@@ -178,7 +178,7 @@ public class BeginClanAvengingController extends EventController {
 				BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginClanAvenging processEvent", e);

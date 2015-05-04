@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QuestAcceptResponseEvent extends NormalResponseEvent<QuestAcceptResponseProto> {
 
-	private QuestAcceptResponseProto questAcceptResponseProto;
+	private QuestAcceptResponseProto responseProto;
 
 	public QuestAcceptResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class QuestAcceptResponseEvent extends NormalResponseEvent<QuestAcceptRes
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = questAcceptResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setQuestAcceptResponseProto(
-			QuestAcceptResponseProto questAcceptResponseProto) {
-		this.questAcceptResponseProto = questAcceptResponseProto;
+			QuestAcceptResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

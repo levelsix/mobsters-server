@@ -99,7 +99,7 @@ public class DiscardBattleItemController extends EventController {
 			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -116,7 +116,7 @@ public class DiscardBattleItemController extends EventController {
 			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -128,7 +128,7 @@ public class DiscardBattleItemController extends EventController {
 				DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setDiscardBattleItemResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

@@ -87,7 +87,7 @@ public class UpdateClientTaskStateController extends EventController {
 			resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
 			resEvent = new UpdateClientTaskStateResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -105,7 +105,7 @@ public class UpdateClientTaskStateController extends EventController {
 			log.info("numInserted TaskForUserClientState: {}", numUpdated);
 
 			resBuilder.setStatus(UpdateClientTaskStateStatus.SUCCESS);
-			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -117,7 +117,7 @@ public class UpdateClientTaskStateController extends EventController {
 				resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
 				resEvent = new UpdateClientTaskStateResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateClientTaskStateResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

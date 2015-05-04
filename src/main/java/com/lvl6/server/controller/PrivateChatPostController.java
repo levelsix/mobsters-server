@@ -143,7 +143,7 @@ public class PrivateChatPostController extends EventController {
 			PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(
 					posterId);
 			resEvent.setTag(event.getTag());
-			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -318,7 +318,7 @@ public class PrivateChatPostController extends EventController {
 				}
 			}
 			// send to sender of the private chat post
-			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			// if (legitPost && recipientId != posterId) {
@@ -337,7 +337,7 @@ public class PrivateChatPostController extends EventController {
 				PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(
 						posterId);
 				resEvent.setTag(event.getTag());
-				resEvent.setPrivateChatPostResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

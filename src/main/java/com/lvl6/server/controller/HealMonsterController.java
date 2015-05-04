@@ -210,7 +210,7 @@ public class HealMonsterController extends EventController {
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setHealMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -233,7 +233,7 @@ public class HealMonsterController extends EventController {
 				HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setHealMonsterResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in HealMonsterController processEvent", e);

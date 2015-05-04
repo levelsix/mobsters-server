@@ -181,7 +181,7 @@ public class RequestJoinClanController extends EventController {
 			resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
 			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -250,7 +250,7 @@ public class RequestJoinClanController extends EventController {
 			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			/* I think I meant write to the clan leader if leader is not on
 			 
 			//in case user is not online write an apns
@@ -272,7 +272,7 @@ public class RequestJoinClanController extends EventController {
 
 				resBuilder.clearEventDetails(); //could just get rid of this line
 				resBuilder.clearClanUsersDetails(); //could just get rid of this line
-				resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId(), false));
 
 				if (!requestToJoinRequired) {
@@ -297,7 +297,7 @@ public class RequestJoinClanController extends EventController {
 				RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RequestJoinClan processEvent", e);

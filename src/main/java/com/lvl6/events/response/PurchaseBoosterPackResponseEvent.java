@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<PurchaseBoosterPackResponseProto> {
 
-	private PurchaseBoosterPackResponseProto purchaseBoosterPackResponseProto;
+	private PurchaseBoosterPackResponseProto responseProto;
 
 	public PurchaseBoosterPackResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<Purcha
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = purchaseBoosterPackResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPurchaseBoosterPackResponseProto(
-			PurchaseBoosterPackResponseProto purchaseBoosterPackResponseProto) {
-		this.purchaseBoosterPackResponseProto = purchaseBoosterPackResponseProto;
+			PurchaseBoosterPackResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

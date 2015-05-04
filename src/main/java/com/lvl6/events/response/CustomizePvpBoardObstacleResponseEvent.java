@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<CustomizePvpBoardObstacleResponseProto> {
 
-	private CustomizePvpBoardObstacleResponseProto customizePvpBoardObstacleResponseProto;
+	private CustomizePvpBoardObstacleResponseProto responseProto;
 
 	public CustomizePvpBoardObstacleResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = customizePvpBoardObstacleResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setCustomizePvpBoardObstacleResponseProto(
-			CustomizePvpBoardObstacleResponseProto customizePvpBoardObstacleResponseProto) {
-		this.customizePvpBoardObstacleResponseProto = customizePvpBoardObstacleResponseProto;
+			CustomizePvpBoardObstacleResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

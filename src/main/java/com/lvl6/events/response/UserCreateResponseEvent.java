@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UserCreateResponseEvent extends PreDatabaseResponseEvent {
 
-	private UserCreateResponseProto userCreateResponseProto;
+	private UserCreateResponseProto responseProto;
 
 	public UserCreateResponseEvent(String udid) {
 		super(udid);
@@ -25,14 +25,14 @@ public class UserCreateResponseEvent extends PreDatabaseResponseEvent {
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = userCreateResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setUserCreateResponseProto(
-			UserCreateResponseProto UserCreateResponseProto) {
-		this.userCreateResponseProto = UserCreateResponseProto;
+			UserCreateResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

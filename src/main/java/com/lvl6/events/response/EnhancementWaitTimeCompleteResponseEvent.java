@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEvent<EnhancementWaitTimeCompleteResponseProto> {
 
-	private EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto;
+	private EnhancementWaitTimeCompleteResponseProto responseProto;
 
 	public EnhancementWaitTimeCompleteResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEven
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = enhancementWaitTimeCompleteResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEnhancementWaitTimeCompleteResponseProto(
-			EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto) {
-		this.enhancementWaitTimeCompleteResponseProto = enhancementWaitTimeCompleteResponseProto;
+			EnhancementWaitTimeCompleteResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

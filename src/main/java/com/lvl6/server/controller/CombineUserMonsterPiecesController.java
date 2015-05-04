@@ -104,7 +104,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -137,7 +137,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -162,7 +162,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 				CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

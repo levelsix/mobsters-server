@@ -145,7 +145,7 @@ public class PurchaseBoosterPackController extends EventController {
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -189,7 +189,7 @@ public class PurchaseBoosterPackController extends EventController {
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPurchaseBoosterPackResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (PurchaseBoosterPackStatus.SUCCESS
@@ -220,7 +220,7 @@ public class PurchaseBoosterPackController extends EventController {
 				PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

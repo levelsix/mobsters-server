@@ -130,7 +130,7 @@ public class RetrieveMiniEventController extends EventController {
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveMiniEventResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -168,7 +168,7 @@ public class RetrieveMiniEventController extends EventController {
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveMiniEventResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -179,7 +179,7 @@ public class RetrieveMiniEventController extends EventController {
 				RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveMiniEventResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

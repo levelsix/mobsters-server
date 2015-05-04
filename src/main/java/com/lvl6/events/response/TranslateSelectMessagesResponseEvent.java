@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<TranslateSelectMessagesResponseProto> {
 
-	private TranslateSelectMessagesResponseProto translateSelectMessagesResponseProto;
+	private TranslateSelectMessagesResponseProto responseProto;
 
 	public TranslateSelectMessagesResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<Tr
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = translateSelectMessagesResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setTranslateSelectMessagesResponseProto(
-			TranslateSelectMessagesResponseProto translateSelectMessagesResponseProto) {
-		this.translateSelectMessagesResponseProto = translateSelectMessagesResponseProto;
+			TranslateSelectMessagesResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

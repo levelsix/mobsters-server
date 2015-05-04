@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEvent<IncreaseMonsterInventorySlotResponseProto> {
 
-	private IncreaseMonsterInventorySlotResponseProto increaseMonsterInventorySlotResponseProto;
+	private IncreaseMonsterInventorySlotResponseProto responseProto;
 
 	public IncreaseMonsterInventorySlotResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEve
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = increaseMonsterInventorySlotResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setIncreaseMonsterInventorySlotResponseProto(
-			IncreaseMonsterInventorySlotResponseProto increaseMonsterInventorySlotResponseProto) {
-		this.increaseMonsterInventorySlotResponseProto = increaseMonsterInventorySlotResponseProto;
+			IncreaseMonsterInventorySlotResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public IncreaseMonsterInventorySlotResponseProto getIncreaseMonsterInventorySlotResponseProto() {   //because APNS required
-		return increaseMonsterInventorySlotResponseProto;
+		return responseProto;
 	}
 
 }

@@ -96,7 +96,7 @@ public class RetractRequestJoinClanController extends EventController {
 			RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -125,7 +125,7 @@ public class RetractRequestJoinClanController extends EventController {
 			RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -139,7 +139,7 @@ public class RetractRequestJoinClanController extends EventController {
 				RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetractRequestJoinClanResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

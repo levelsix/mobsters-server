@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent<RetrievePrivateChatPostsResponseProto> {
 
-	private RetrievePrivateChatPostsResponseProto retrievePrivateChatPostsResponseProto;
+	private RetrievePrivateChatPostsResponseProto responseProto;
 
 	public RetrievePrivateChatPostsResponseEvent(String playerId) {
 		super(playerId);
@@ -25,14 +25,14 @@ public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent<R
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = retrievePrivateChatPostsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setRetrievePrivateChatPostsResponseProto(
-			RetrievePrivateChatPostsResponseProto retrievePrivateChatPostsResponseProto) {
-		this.retrievePrivateChatPostsResponseProto = retrievePrivateChatPostsResponseProto;
+			RetrievePrivateChatPostsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

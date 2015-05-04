@@ -123,7 +123,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 			AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -181,7 +181,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 			AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -215,7 +215,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 				AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

@@ -101,7 +101,7 @@ public class AchievementRedeemController extends EventController {
 			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementRedeemResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -136,7 +136,7 @@ public class AchievementRedeemController extends EventController {
 			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementRedeemResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -161,7 +161,7 @@ public class AchievementRedeemController extends EventController {
 				AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAchievementRedeemResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in AchievementRedeem processEvent", e);

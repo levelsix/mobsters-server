@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalResponseEvent<ApproveOrRejectRequestToJoinClanResponseProto> {
 
-	private ApproveOrRejectRequestToJoinClanResponseProto approveOrRejectRequestToJoinClanResponseProto;
+	private ApproveOrRejectRequestToJoinClanResponseProto responseProto;
 
 	public ApproveOrRejectRequestToJoinClanResponseEvent(String playerId) {
 		super(playerId);
@@ -18,15 +18,15 @@ public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalRespons
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = approveOrRejectRequestToJoinClanResponseProto
+		ByteString b =  responseProto
 				.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setApproveOrRejectRequestToJoinClanResponseProto(
-			ApproveOrRejectRequestToJoinClanResponseProto approveOrRejectRequestToJoinClanResponseProto) {
-		this.approveOrRejectRequestToJoinClanResponseProto = approveOrRejectRequestToJoinClanResponseProto;
+			ApproveOrRejectRequestToJoinClanResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

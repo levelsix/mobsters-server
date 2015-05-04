@@ -94,7 +94,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 			MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -151,7 +151,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 			MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -164,7 +164,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 				MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

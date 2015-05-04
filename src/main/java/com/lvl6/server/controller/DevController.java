@@ -104,7 +104,7 @@ public class DevController extends EventController {
 			resBuilder.setStatus(DevStatus.FAIL_OTHER);
 			DevResponseEvent resEvent = new DevResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDevResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -132,7 +132,7 @@ public class DevController extends EventController {
 			DevResponseProto resProto = resBuilder.build();
 			DevResponseEvent resEvent = new DevResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setDevResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -148,7 +148,7 @@ public class DevController extends EventController {
 				resBuilder.setStatus(DevStatus.FAIL_OTHER);
 				DevResponseEvent resEvent = new DevResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setDevResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in DevController processEvent", e);

@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventDungeonProto.EndPersistentEventCoolDownTimerResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
 //public class EndPersistentEventCoolDownTimerResponseEvent extends NormalResponseEvent<EndPersistentEventCoolDownTimerResponseProto> {
 //
-//  private EndPersistentEventCoolDownTimerResponseProto endPersistentEventCoolDownTimerResponseProto;
+//  private EndPersistentEventCoolDownTimerResponseProto responseProto;
 //  
 //  public EndPersistentEventCoolDownTimerResponseEvent(int playerId){
 //    super(playerId);
@@ -18,17 +18,17 @@
 //  
 //  @Override
 //  public int write(ByteBuffer bb) {
-//    ByteString b = endPersistentEventCoolDownTimerResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(bb);
 //    return b.size();
 //  }
 //
-//  public void setEndPersistentEventCoolDownTimerResponseProto(EndPersistentEventCoolDownTimerResponseProto endPersistentEventCoolDownTimerResponseProto) {
-//    this.endPersistentEventCoolDownTimerResponseProto = endPersistentEventCoolDownTimerResponseProto;
+//  public void setEndPersistentEventCoolDownTimerResponseProto(EndPersistentEventCoolDownTimerResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //
 //  public EndPersistentEventCoolDownTimerResponseProto getEndPersistentEventCoolDownTimerResponseProto() {   //because APNS required
-//    return endPersistentEventCoolDownTimerResponseProto;
+//    return responseProto;
 //  }
 //  
 //}

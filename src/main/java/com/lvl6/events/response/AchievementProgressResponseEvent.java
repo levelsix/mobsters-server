@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AchievementProgressResponseEvent extends NormalResponseEvent<AchievementProgressResponseProto> {
 
-	private AchievementProgressResponseProto achievementProgressResponseProto;
+	private AchievementProgressResponseProto responseProto;
 
 	public AchievementProgressResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class AchievementProgressResponseEvent extends NormalResponseEvent<Achiev
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = achievementProgressResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAchievementProgressResponseProto(
-			AchievementProgressResponseProto achievementProgressResponseProto) {
-		this.achievementProgressResponseProto = achievementProgressResponseProto;
+			AchievementProgressResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

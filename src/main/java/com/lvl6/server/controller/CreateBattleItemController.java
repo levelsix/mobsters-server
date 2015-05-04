@@ -135,7 +135,7 @@ public class CreateBattleItemController extends EventController {
 			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCreateBattleItemResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -154,7 +154,7 @@ public class CreateBattleItemController extends EventController {
 			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCreateBattleItemResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -178,7 +178,7 @@ public class CreateBattleItemController extends EventController {
 				CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCreateBattleItemResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

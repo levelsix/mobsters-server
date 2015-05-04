@@ -131,7 +131,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 					donatorId);
 			resEvent.setTag(event.getTag());
-			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -161,13 +161,13 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 					donatorId);
 			resEvent.setTag(event.getTag());
-			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
 					FulfillTeamDonationSolicitationStatus.SUCCESS)) {
-				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 
@@ -181,7 +181,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 								senderProto);
 				resBuilder.setSolicitation(cmtdp);
 
-				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
@@ -209,7 +209,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 				FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 						donatorId);
 				resEvent.setTag(event.getTag());
-				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

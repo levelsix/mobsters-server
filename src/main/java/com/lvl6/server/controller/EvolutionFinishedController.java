@@ -131,7 +131,7 @@ public class EvolutionFinishedController extends EventController {
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -188,7 +188,7 @@ public class EvolutionFinishedController extends EventController {
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -209,7 +209,7 @@ public class EvolutionFinishedController extends EventController {
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());

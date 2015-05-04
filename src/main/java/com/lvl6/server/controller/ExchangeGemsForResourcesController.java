@@ -96,7 +96,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setExchangeGemsForResourcesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -126,7 +126,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseProto resProto = resBuilder.build();
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
-			resEvent.setExchangeGemsForResourcesResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -150,7 +150,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setExchangeGemsForResourcesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {

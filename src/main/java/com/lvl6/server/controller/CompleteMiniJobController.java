@@ -109,7 +109,7 @@ public class CompleteMiniJobController extends EventController {
 			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -141,7 +141,7 @@ public class CompleteMiniJobController extends EventController {
 			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -164,7 +164,7 @@ public class CompleteMiniJobController extends EventController {
 				CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

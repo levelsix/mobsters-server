@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent<NormStructWaitCompleteResponseProto> {
 
-	private NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto;
+	private NormStructWaitCompleteResponseProto responseProto;
 
 	public NormStructWaitCompleteResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent<Nor
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = normStructWaitCompleteResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setNormStructWaitCompleteResponseProto(
-			NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto) {
-		this.normStructWaitCompleteResponseProto = normStructWaitCompleteResponseProto;
+			NormStructWaitCompleteResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

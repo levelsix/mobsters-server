@@ -88,7 +88,7 @@ public class UpdateUserStrengthController extends EventController {
 			UpdateUserStrengthResponseEvent resEvent = new UpdateUserStrengthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateUserStrengthResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -102,7 +102,7 @@ public class UpdateUserStrengthController extends EventController {
 			UpdateUserStrengthResponseEvent resEvent = new UpdateUserStrengthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateUserStrengthResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (UpdateUserStrengthStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -125,7 +125,7 @@ public class UpdateUserStrengthController extends EventController {
 				UpdateUserStrengthResponseEvent resEvent = new UpdateUserStrengthResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateUserStrengthResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

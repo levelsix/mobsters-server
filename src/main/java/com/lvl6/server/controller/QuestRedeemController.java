@@ -96,7 +96,7 @@
 //      
 //      QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setQuestRedeemResponseProto(resBuilder.build());  
+//      resEvent.setResponseProto(resBuilder.build());  
 //      responses.normalResponseEvents().add(resEvent);
 //
 //      if (legitRedeem) {
@@ -122,7 +122,7 @@
 //    	  resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
 //    	  QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setQuestRedeemResponseProto(resBuilder.build());
+//    	  resEvent.setResponseProto(resBuilder.build());
 //    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in QuestRedeem processEvent", e);

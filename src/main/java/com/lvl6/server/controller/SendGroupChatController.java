@@ -145,7 +145,7 @@ public class SendGroupChatController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
-			resEvent.setSendGroupChatResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -158,7 +158,7 @@ public class SendGroupChatController extends EventController {
 			boolean legitSend = checkLegitSend(resBuilder, user, scope,
 					chatMessage);
 
-			resEvent.setSendGroupChatResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (legitSend) {
@@ -218,7 +218,7 @@ public class SendGroupChatController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
-				resEvent.setSendGroupChatResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SendGroupChat processEvent", e);

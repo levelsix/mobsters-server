@@ -137,7 +137,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -158,7 +158,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -185,7 +185,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 				RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

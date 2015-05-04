@@ -64,7 +64,7 @@ public class EnableAPNSController extends EventController {
 			EnableAPNSResponseProto resProto = resBuilder.build();
 			EnableAPNSResponseEvent resEvent = new EnableAPNSResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setEnableAPNSResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			boolean isDifferent = checkIfNewTokenDifferent(

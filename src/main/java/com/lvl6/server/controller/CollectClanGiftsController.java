@@ -126,7 +126,7 @@ public class CollectClanGiftsController extends EventController {
 			CollectClanGiftsResponseEvent resEvent = new CollectClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -145,7 +145,7 @@ public class CollectClanGiftsController extends EventController {
 			resEvent.setTag(event.getTag());
 			resBuilder.setReward(uusa.getUrp());
 
-			resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -170,7 +170,7 @@ public class CollectClanGiftsController extends EventController {
 				CollectClanGiftsResponseEvent resEvent = new CollectClanGiftsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

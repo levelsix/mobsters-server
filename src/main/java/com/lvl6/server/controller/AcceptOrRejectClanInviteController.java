@@ -148,7 +148,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -183,7 +183,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)
@@ -224,7 +224,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 				AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

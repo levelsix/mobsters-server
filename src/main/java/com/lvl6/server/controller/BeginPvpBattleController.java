@@ -135,14 +135,14 @@ public class BeginPvpBattleController extends EventController {
 
 			bpa.execute(resBuilder);
 
-			resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in BeginPvpBattleController processEvent", e);
 			//don't let the client hang
 			try {
-				resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

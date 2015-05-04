@@ -135,7 +135,7 @@ public class PerformResearchController extends EventController {
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPerformResearchResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -161,7 +161,7 @@ public class PerformResearchController extends EventController {
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPerformResearchResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -183,7 +183,7 @@ public class PerformResearchController extends EventController {
 				PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setPerformResearchResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

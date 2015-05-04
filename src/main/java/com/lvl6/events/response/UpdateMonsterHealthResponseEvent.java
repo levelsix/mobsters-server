@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<UpdateMonsterHealthResponseProto> {
 
-	private UpdateMonsterHealthResponseProto updateMonsterHealthResponseProto;
+	private UpdateMonsterHealthResponseProto responseProto;
 
 	public UpdateMonsterHealthResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<Update
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = updateMonsterHealthResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setUpdateMonsterHealthResponseProto(
-			UpdateMonsterHealthResponseProto updateMonsterHealthResponseProto) {
-		this.updateMonsterHealthResponseProto = updateMonsterHealthResponseProto;
+			UpdateMonsterHealthResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public UpdateMonsterHealthResponseProto getUpdateMonsterHealthResponseProto() {   //because APNS required
-		return updateMonsterHealthResponseProto;
+		return responseProto;
 	}
 
 }

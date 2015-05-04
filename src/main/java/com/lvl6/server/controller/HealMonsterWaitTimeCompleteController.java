@@ -95,7 +95,7 @@
 //      
 //      HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
-//      resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
+//      resEvent.setResponseProto(resBuilder.build());
 //      responses.normalResponseEvents().add(resEvent);
 //
 //      if (successful) {
@@ -115,7 +115,7 @@
 //    	  resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER);
 //    	  HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
+//    	  resEvent.setResponseProto(resBuilder.build());
 //    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in HealMonsterWaitTimeCompleteController processEvent", e);

@@ -113,7 +113,7 @@ public class SolicitClanHelpController extends EventController {
 			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -148,7 +148,7 @@ public class SolicitClanHelpController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
-				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
@@ -161,7 +161,7 @@ public class SolicitClanHelpController extends EventController {
 				}
 
 				resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
-				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -174,7 +174,7 @@ public class SolicitClanHelpController extends EventController {
 				SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SolicitClanHelp processEvent", e);

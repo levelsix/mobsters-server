@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPlayerFromClanResponseProto> {
 
-	private BootPlayerFromClanResponseProto bootPlayerFromClanResponseProto;
+	private BootPlayerFromClanResponseProto responseProto;
 
 	public BootPlayerFromClanResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPla
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = bootPlayerFromClanResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setBootPlayerFromClanResponseProto(
-			BootPlayerFromClanResponseProto bootPlayerFromClanResponseProto) {
-		this.bootPlayerFromClanResponseProto = bootPlayerFromClanResponseProto;
+			BootPlayerFromClanResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

@@ -108,7 +108,7 @@ public class SolicitTeamDonationController extends EventController {
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -137,12 +137,12 @@ public class SolicitTeamDonationController extends EventController {
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
 					SolicitTeamDonationStatus.SUCCESS)) {
-				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
@@ -153,7 +153,7 @@ public class SolicitTeamDonationController extends EventController {
 								senderProto, null);
 				resBuilder.setSolicitation(cmtdp);
 
-				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -177,7 +177,7 @@ public class SolicitTeamDonationController extends EventController {
 				SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SolicitTeamDonation processEvent", e);

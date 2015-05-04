@@ -91,7 +91,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -109,7 +109,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -123,7 +123,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 				CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

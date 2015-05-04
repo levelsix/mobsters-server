@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterResponseProto> {
 
-	private HealMonsterResponseProto healMonsterResponseProto;
+	private HealMonsterResponseProto responseProto;
 
 	public HealMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterRes
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = healMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setHealMonsterResponseProto(
-			HealMonsterResponseProto healMonsterResponseProto) {
-		this.healMonsterResponseProto = healMonsterResponseProto;
+			HealMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

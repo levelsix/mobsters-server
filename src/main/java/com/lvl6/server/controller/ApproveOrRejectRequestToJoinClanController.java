@@ -153,7 +153,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -231,7 +231,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			//if fail only to sender
@@ -262,7 +262,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

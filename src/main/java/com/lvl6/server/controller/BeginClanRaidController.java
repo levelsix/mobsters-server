@@ -162,7 +162,7 @@ public class BeginClanRaidController extends EventController {
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanRaidResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -211,7 +211,7 @@ public class BeginClanRaidController extends EventController {
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanRaidResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			log.info("resBuilder=" + resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -227,7 +227,7 @@ public class BeginClanRaidController extends EventController {
 				BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginClanRaidResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginClanRaid processEvent", e);

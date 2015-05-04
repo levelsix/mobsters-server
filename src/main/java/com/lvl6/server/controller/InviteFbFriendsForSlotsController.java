@@ -113,7 +113,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -175,7 +175,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			//send this to all the recipients in fbIdsOfFriends that have a user id
@@ -207,7 +207,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 				InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

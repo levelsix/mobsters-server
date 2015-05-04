@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponseProto> {
 
-	private QueueUpResponseProto QueueUpResponseProto;
+	private QueueUpResponseProto responseProto;
 
 	public QueueUpResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponsePro
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = QueueUpResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setQueueUpResponseProto(
-			QueueUpResponseProto QueueUpResponseProto) {
-		this.QueueUpResponseProto = QueueUpResponseProto;
+			QueueUpResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public QueueUpResponseProto getQueueUpResponseProto() {   //because APNS required
-		return QueueUpResponseProto;
+		return responseProto;
 	}
 
 }

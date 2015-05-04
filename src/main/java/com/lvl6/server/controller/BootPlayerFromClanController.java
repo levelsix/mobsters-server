@@ -120,7 +120,7 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -157,7 +157,7 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (success) {
 				//if successful write to clan
@@ -173,7 +173,7 @@ public class BootPlayerFromClanController extends EventController {
 				BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BootPlayerFromClan processEvent", e);

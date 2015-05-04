@@ -93,7 +93,7 @@ public class UnrestrictUserMonsterController extends EventController {
 			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUnrestrictUserMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -122,7 +122,7 @@ public class UnrestrictUserMonsterController extends EventController {
 			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUnrestrictUserMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			//
 			//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -139,7 +139,7 @@ public class UnrestrictUserMonsterController extends EventController {
 				UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUnrestrictUserMonsterResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

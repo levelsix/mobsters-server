@@ -128,7 +128,7 @@ public class SellUserMonsterController extends EventController {
 			SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSellUserMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -160,7 +160,7 @@ public class SellUserMonsterController extends EventController {
 			SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSellUserMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -187,7 +187,7 @@ public class SellUserMonsterController extends EventController {
 				SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSellUserMonsterResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

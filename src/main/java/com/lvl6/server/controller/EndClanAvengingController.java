@@ -106,7 +106,7 @@ public class EndClanAvengingController extends EventController {
 			EndClanAvengingResponseEvent resEvent = new EndClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndClanAvengingResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -121,7 +121,7 @@ public class EndClanAvengingController extends EventController {
 			EndClanAvengingResponseEvent resEvent = new EndClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndClanAvengingResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)) {
 				resBuilder.addAllClanAvengeUuids(clanAvengeUuids);
@@ -144,7 +144,7 @@ public class EndClanAvengingController extends EventController {
 				EndClanAvengingResponseEvent resEvent = new EndClanAvengingResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setEndClanAvengingResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndClanAvenging processEvent", e);

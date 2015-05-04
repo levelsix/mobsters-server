@@ -102,7 +102,7 @@ public class SpawnObstacleController extends EventController {
 			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSpawnObstacleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -134,7 +134,7 @@ public class SpawnObstacleController extends EventController {
 			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSpawnObstacleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -156,7 +156,7 @@ public class SpawnObstacleController extends EventController {
 				SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSpawnObstacleResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SpawnObstacleController processEvent",

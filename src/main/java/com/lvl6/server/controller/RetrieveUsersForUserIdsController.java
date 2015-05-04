@@ -158,7 +158,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 		RetrieveUsersForUserIdsResponseEvent resEvent = new RetrieveUsersForUserIdsResponseEvent(
 				senderProto.getUserUuid());
 		resEvent.setTag(event.getTag());
-		resEvent.setRetrieveUsersForUserIdsResponseProto(resProto);
+		resEvent.setResponseProto(resProto);
 		responses.normalResponseEvents().add(resEvent);
 	}
 

@@ -104,7 +104,7 @@
 //
 //      RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
-//      resEvent.setRecordClanRaidStatsResponseProto(resBuilder.build()); 
+//      resEvent.setResponseProto(resBuilder.build()); 
 //
 //      boolean success = false;
 //      if (legitRequest) { 
@@ -135,7 +135,7 @@
 //    	  resBuilder.setStatus(RecordClanRaidStatsStatus.FAIL_OTHER);
 //    	  RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setRecordClanRaidStatsResponseProto(resBuilder.build());
+//    	  resEvent.setResponseProto(resBuilder.build());
 //    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //      	log.error("exception in RecordClanRaidStats processEvent", e);

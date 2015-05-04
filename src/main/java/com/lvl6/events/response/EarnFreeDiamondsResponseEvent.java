@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
 //public class EarnFreeDiamondsResponseEvent extends NormalResponseEvent<EarnFreeDiamondsResponseProto> {
 //
-//  private EarnFreeDiamondsResponseProto earnFreeDiamondsResponseProto;
+//  private EarnFreeDiamondsResponseProto responseProto;
 //  
 //  public EarnFreeDiamondsResponseEvent(int playerId){
 //    super(playerId);
@@ -18,13 +18,13 @@
 //  
 //  @Override
 //  public int write(ByteBuffer bb) {
-//    ByteString b = earnFreeDiamondsResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(bb);
 //    return b.size();
 //  }
 //
-//  public void setEarnFreeDiamondsResponseProto(EarnFreeDiamondsResponseProto earnFreeDiamondsResponseProto) {
-//    this.earnFreeDiamondsResponseProto = earnFreeDiamondsResponseProto;
+//  public void setEarnFreeDiamondsResponseProto(EarnFreeDiamondsResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //
 //}

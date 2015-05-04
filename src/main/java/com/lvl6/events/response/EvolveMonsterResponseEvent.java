@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EvolveMonsterResponseEvent extends NormalResponseEvent<EvolveMonsterResponseProto> {
 
-	private EvolveMonsterResponseProto evolveMonsterResponseProto;
+	private EvolveMonsterResponseProto responseProto;
 
 	public EvolveMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class EvolveMonsterResponseEvent extends NormalResponseEvent<EvolveMonste
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = evolveMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEvolveMonsterResponseProto(
-			EvolveMonsterResponseProto evolveMonsterResponseProto) {
-		this.evolveMonsterResponseProto = evolveMonsterResponseProto;
+			EvolveMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

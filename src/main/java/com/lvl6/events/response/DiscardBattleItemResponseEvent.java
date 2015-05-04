@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DiscardBattleItemResponseEvent extends NormalResponseEvent<DiscardBattleItemResponseProto> {
 
-	private DiscardBattleItemResponseProto discardBattleItemResponseProto;
+	private DiscardBattleItemResponseProto responseProto;
 
 	public DiscardBattleItemResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class DiscardBattleItemResponseEvent extends NormalResponseEvent<DiscardB
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = discardBattleItemResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setDiscardBattleItemResponseProto(
-			DiscardBattleItemResponseProto discardBattleItemResponseProto) {
-		this.discardBattleItemResponseProto = discardBattleItemResponseProto;
+			DiscardBattleItemResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

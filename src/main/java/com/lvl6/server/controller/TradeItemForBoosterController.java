@@ -140,7 +140,7 @@ public class TradeItemForBoosterController extends EventController {
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForBoosterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -209,7 +209,7 @@ public class TradeItemForBoosterController extends EventController {
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForBoosterResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -237,7 +237,7 @@ public class TradeItemForBoosterController extends EventController {
 				TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForBoosterResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

@@ -41,7 +41,7 @@
 
 	<rabbit:admin id="rabbitAdmin" connection-factory="amqpConnectionFactory" />
 
-	<rabbit:direct-exchange name="${amqp.exchange}"
+	<rabbit:direct-exchange id="${amqp.exchange}" name="${amqp.exchange}"
 		auto-delete="false" durable="true">
 		<rabbit:bindings>
 			${amqp.client.messages.bindings}

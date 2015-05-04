@@ -174,7 +174,7 @@ public class QueueUpController extends EventController {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -195,7 +195,7 @@ public class QueueUpController extends EventController {
 			//write event to the client
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -214,7 +214,7 @@ public class QueueUpController extends EventController {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		}
 	}

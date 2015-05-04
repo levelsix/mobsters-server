@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TradeItemForResourcesResponseEvent extends NormalResponseEvent<TradeItemForResourcesResponseProto> {
 
-	private TradeItemForResourcesResponseProto tradeItemForResourcesResponseProto;
+	private TradeItemForResourcesResponseProto responseProto;
 
 	public TradeItemForResourcesResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class TradeItemForResourcesResponseEvent extends NormalResponseEvent<Trad
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = tradeItemForResourcesResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setTradeItemForResourcesResponseProto(
-			TradeItemForResourcesResponseProto tradeItemForResourcesResponseProto) {
-		this.tradeItemForResourcesResponseProto = tradeItemForResourcesResponseProto;
+			TradeItemForResourcesResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

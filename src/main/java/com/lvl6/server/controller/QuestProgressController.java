@@ -135,7 +135,7 @@
 //
 //    	QuestProgressResponseEvent resEvent = new QuestProgressResponseEvent(senderProto.getUserUuid());
 //    	resEvent.setTag(event.getTag());
-//    	resEvent.setQuestProgressResponseProto(resBuilder.build());  
+//    	resEvent.setResponseProto(resBuilder.build());  
 //    	responses.normalResponseEvents().add(resEvent);
 //
 //    	if (success) {

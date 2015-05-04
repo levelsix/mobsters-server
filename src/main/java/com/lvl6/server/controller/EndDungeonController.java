@@ -166,7 +166,7 @@ public class EndDungeonController extends EventController {
 			EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndDungeonResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -252,7 +252,7 @@ public class EndDungeonController extends EventController {
 			EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndDungeonResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -276,7 +276,7 @@ public class EndDungeonController extends EventController {
 				EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setEndDungeonResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndDungeonController processEvent", e);

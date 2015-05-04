@@ -108,7 +108,7 @@ public class SetFacebookIdController extends EventController {
 			SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetFacebookIdResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -135,7 +135,7 @@ public class SetFacebookIdController extends EventController {
 			SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSetFacebookIdResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (SetFacebookIdStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -154,7 +154,7 @@ public class SetFacebookIdController extends EventController {
 				SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetFacebookIdResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SetFacebookIdController processEvent",

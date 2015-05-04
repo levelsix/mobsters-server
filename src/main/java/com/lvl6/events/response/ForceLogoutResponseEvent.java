@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ForceLogoutResponseEvent extends NormalResponseEvent<ForceLogoutResponseProto> {
 
-	private ForceLogoutResponseProto forceLogoutResponseProto;
+	private ForceLogoutResponseProto responseProto;
 
 	public ForceLogoutResponseEvent(String playerId) {
 		super(playerId);
@@ -25,14 +25,14 @@ public class ForceLogoutResponseEvent extends NormalResponseEvent<ForceLogoutRes
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = forceLogoutResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setForceLogoutResponseProto(
-			ForceLogoutResponseProto forceLogoutResponseProto) {
-		this.forceLogoutResponseProto = forceLogoutResponseProto;
+			ForceLogoutResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

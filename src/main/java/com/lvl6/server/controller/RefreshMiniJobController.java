@@ -136,7 +136,7 @@ public class RefreshMiniJobController extends EventController {
 			RefreshMiniJobResponseEvent resEvent = new RefreshMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRefreshMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -170,7 +170,7 @@ public class RefreshMiniJobController extends EventController {
 			RefreshMiniJobResponseEvent resEvent = new RefreshMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRefreshMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (RefreshMiniJobStatus.SUCCESS.equals(resBuilder.getStatus()) &&
@@ -194,7 +194,7 @@ public class RefreshMiniJobController extends EventController {
 				RefreshMiniJobResponseEvent resEvent = new RefreshMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRefreshMiniJobResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RefreshMiniJobController processEvent",

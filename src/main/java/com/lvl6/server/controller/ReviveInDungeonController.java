@@ -111,7 +111,7 @@ public class ReviveInDungeonController extends EventController {
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setReviveInDungeonResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -145,7 +145,7 @@ public class ReviveInDungeonController extends EventController {
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setReviveInDungeonResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -166,7 +166,7 @@ public class ReviveInDungeonController extends EventController {
 				ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setReviveInDungeonResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

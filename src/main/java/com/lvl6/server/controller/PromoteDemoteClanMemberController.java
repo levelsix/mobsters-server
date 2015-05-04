@@ -119,7 +119,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 			PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -158,7 +158,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
-				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 
@@ -173,7 +173,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 								victimClan);
 				resBuilder.setVictim(mup);
 
-				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
@@ -185,7 +185,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 				PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

@@ -122,7 +122,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -167,7 +167,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -194,7 +194,7 @@ public class CollectMonsterEnhancementController extends EventController {
 				CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCollectMonsterEnhancementResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

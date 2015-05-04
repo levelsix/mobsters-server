@@ -83,7 +83,7 @@ public class LevelUpController extends EventController {
 			resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
 			LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLevelUpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -106,7 +106,7 @@ public class LevelUpController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			LevelUpResponseProto resProto = resBuilder.build();
-			resEvent.setLevelUpResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -125,7 +125,7 @@ public class LevelUpController extends EventController {
 				resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
 				LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setLevelUpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in LevelUpController processEvent", e);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent<PurgeClientStaticDataResponseProto>{
 
-	private PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto;
+	private PurgeClientStaticDataResponseProto responseProto;
 
 	public PurgeClientStaticDataResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent<Purg
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = purgeClientStaticDataResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPurgeClientStaticDataResponseProto(
-			PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto) {
-		this.purgeClientStaticDataResponseProto = purgeClientStaticDataResponseProto;
+			PurgeClientStaticDataResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

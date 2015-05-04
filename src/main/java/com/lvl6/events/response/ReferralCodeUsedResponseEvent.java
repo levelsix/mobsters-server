@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
 //public class ReferralCodeUsedResponseEvent extends NormalResponseEvent<ReferralCodeUsedResponseProto>{
 //
-//  private ReferralCodeUsedResponseProto referralCodeUsedResponseProto;
+//  private ReferralCodeUsedResponseProto responseProto;
 //  
 //  public ReferralCodeUsedResponseEvent(String playerId) {
 //    super(playerId);
@@ -24,17 +24,17 @@
 //   * versions on the client and use old-style socket input/output streams
 //   */
 //  public int write(ByteBuffer buff) {
-//    ByteString b = referralCodeUsedResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(buff);
 //    return b.size();
 //  }
 //
-//  public void setReferralCodeUsedResponseProto(ReferralCodeUsedResponseProto referralCodeUsedResponseProto) {
-//    this.referralCodeUsedResponseProto = referralCodeUsedResponseProto;
+//  public void setReferralCodeUsedResponseProto(ReferralCodeUsedResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //
 //  public ReferralCodeUsedResponseProto getReferralCodeUsedResponseProto() {
-//    return referralCodeUsedResponseProto;
+//    return responseProto;
 //  }
 //  
 //}

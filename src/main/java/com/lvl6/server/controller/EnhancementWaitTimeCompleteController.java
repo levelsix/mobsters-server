@@ -106,7 +106,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -147,7 +147,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -176,7 +176,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 				EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

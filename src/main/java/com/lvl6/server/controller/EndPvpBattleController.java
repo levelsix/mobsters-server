@@ -196,7 +196,7 @@ public class EndPvpBattleController extends EventController {
 			resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
 			resEvent = new EndPvpBattleResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -290,7 +290,7 @@ public class EndPvpBattleController extends EventController {
 			}
 
 			//respond to the attacker
-			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -338,7 +338,7 @@ public class EndPvpBattleController extends EventController {
 			log.error("exception in EndPvpBattleController processEvent", e);
 			//don't let the client hang
 			try {
-				resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndPvpBattleController processEvent",

@@ -84,7 +84,7 @@ public class SetGameCenterIdController extends EventController {
 			SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetGameCenterIdResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -106,7 +106,7 @@ public class SetGameCenterIdController extends EventController {
 			SetGameCenterIdResponseProto resProto = resBuilder.build();
 			SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setSetGameCenterIdResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (legit) {
@@ -127,7 +127,7 @@ public class SetGameCenterIdController extends EventController {
 				SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetGameCenterIdResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

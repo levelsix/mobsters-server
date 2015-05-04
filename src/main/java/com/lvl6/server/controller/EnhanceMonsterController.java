@@ -105,7 +105,7 @@
 //
 //    	EnhanceMonsterResponseEvent resEvent = new EnhanceMonsterResponseEvent(userId);
 //    	resEvent.setTag(event.getTag());
-//    	resEvent.setEnhanceMonsterResponseProto(resBuilder.build());
+//    	resEvent.setResponseProto(resBuilder.build());
 //    	responses.normalResponseEvents().add(resEvent);
 //
 //    	/*
@@ -127,7 +127,7 @@
 //    		resBuilder.setStatus(EnhanceMonsterStatus.FAIL_OTHER);
 //    		EnhanceMonsterResponseEvent resEvent = new EnhanceMonsterResponseEvent(userId);
 //    		resEvent.setTag(event.getTag());
-//    		resEvent.setEnhanceMonsterResponseProto(resBuilder.build());
+//    		resEvent.setResponseProto(resBuilder.build());
 //    		responses.normalResponseEvents().add(resEvent);
 //    	} catch (Exception e2) {
 //    		log.error("exception2 in EnhanceMonsterController processEvent", e);

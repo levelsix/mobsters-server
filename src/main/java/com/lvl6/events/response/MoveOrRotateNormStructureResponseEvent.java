@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<MoveOrRotateNormStructureResponseProto> {
 
-	private MoveOrRotateNormStructureResponseProto moveOrRotateNormStructureResponseProto;
+	private MoveOrRotateNormStructureResponseProto responseProto;
 
 	public MoveOrRotateNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = moveOrRotateNormStructureResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setMoveOrRotateNormStructureResponseProto(
-			MoveOrRotateNormStructureResponseProto moveOrRotateNormStructureResponseProto) {
-		this.moveOrRotateNormStructureResponseProto = moveOrRotateNormStructureResponseProto;
+			MoveOrRotateNormStructureResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

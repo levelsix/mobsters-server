@@ -146,7 +146,7 @@ public class UserCreateController extends EventController {
 			UserCreateResponseProto resProto = resBuilder.build();
 			UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
 			resEvent.setTag(event.getTag());
-			resEvent.setUserCreateResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			log.info(String.format("Writing event: %s", resEvent));
 			responses.preDBResponseEvents().add(new PreDBResponseEvent(resEvent, udid));
 
@@ -193,7 +193,7 @@ public class UserCreateController extends EventController {
 				UserCreateResponseEvent resEvent = new UserCreateResponseEvent(
 						udid);
 				resEvent.setTag(event.getTag());
-				resEvent.setUserCreateResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in UserCreateController processEvent", e);
@@ -525,7 +525,7 @@ public class UserCreateController extends EventController {
 	//              .setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(referrer, null))
 	//              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null))
 	//              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
-	//          resEvent.setReferralCodeUsedResponseProto(resProto);
+	//          resEvent.setResponseProto(resProto);
 	//          responses.apnsResponseEvents().add((resEvent);
 	//          
 	//          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);

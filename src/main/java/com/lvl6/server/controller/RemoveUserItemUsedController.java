@@ -87,7 +87,7 @@ public class RemoveUserItemUsedController extends EventController {
 			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -107,7 +107,7 @@ public class RemoveUserItemUsedController extends EventController {
 			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRemoveUserItemUsedResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -118,7 +118,7 @@ public class RemoveUserItemUsedController extends EventController {
 				RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

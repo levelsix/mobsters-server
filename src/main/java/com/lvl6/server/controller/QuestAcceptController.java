@@ -92,7 +92,7 @@
 //      
 //      QuestAcceptResponseEvent resEvent = new QuestAcceptResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setQuestAcceptResponseProto(resBuilder.build());  
+//      resEvent.setResponseProto(resBuilder.build());  
 //      responses.normalResponseEvents().add(resEvent);
 //
 //

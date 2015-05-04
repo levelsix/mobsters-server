@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSResponseProto> {
 
-	private EnableAPNSResponseProto enableAPNSResponseProto;
+	private EnableAPNSResponseProto responseProto;
 
 	public EnableAPNSResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSRespo
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = enableAPNSResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEnableAPNSResponseProto(
-			EnableAPNSResponseProto enableAPNSResponseProto) {
-		this.enableAPNSResponseProto = enableAPNSResponseProto;
+			EnableAPNSResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

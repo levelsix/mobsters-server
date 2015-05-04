@@ -372,7 +372,7 @@ public class StartupControllerOld {//extends EventController {
 						.setStartupStatus(StartupStatus.SERVER_IN_MAINTENANCE); //DO NOT allow user to play
 				//				resEvent = new StartupResponseEvent(udid);
 				//				resEvent.setTag(event.getTag());
-				resEvent.setStartupResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				getEventWriter().processPreDBResponseEvent(resEvent, udid);
 			} catch (Exception e2) {
 				log.error("exception2 in StartupController processEvent", e);
@@ -391,7 +391,7 @@ public class StartupControllerOld {//extends EventController {
 		//		resEvent = new StartupResponseEvent(udid);
 		//		resEvent.setTag(event.getTag());
 
-		resEvent.setStartupResponseProto(resBuilder.build());
+		resEvent.setResponseProto(resBuilder.build());
 
 		log.debug("Writing event response: " + resEvent);
 		server.writePreDBEvent(resEvent, udid);

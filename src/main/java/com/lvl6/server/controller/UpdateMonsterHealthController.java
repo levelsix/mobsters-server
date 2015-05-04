@@ -125,7 +125,7 @@ public class UpdateMonsterHealthController extends EventController {
 			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -152,7 +152,7 @@ public class UpdateMonsterHealthController extends EventController {
 			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -165,7 +165,7 @@ public class UpdateMonsterHealthController extends EventController {
 				UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

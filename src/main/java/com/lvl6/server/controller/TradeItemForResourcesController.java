@@ -108,7 +108,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForResourcesResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -132,7 +132,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForResourcesResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder
@@ -156,7 +156,7 @@ public class TradeItemForResourcesController extends EventController {
 				TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForResourcesResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

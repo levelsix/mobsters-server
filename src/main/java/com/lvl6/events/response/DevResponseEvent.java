@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DevResponseEvent extends NormalResponseEvent<DevResponseProto> {
 
-	private DevResponseProto devResponseProto;
+	private DevResponseProto responseProto;
 
 	public DevResponseEvent(String playerId) {
 		super(playerId);
@@ -18,13 +18,13 @@ public class DevResponseEvent extends NormalResponseEvent<DevResponseProto> {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = devResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
-	public void setDevResponseProto(DevResponseProto devResponseProto) {
-		this.devResponseProto = devResponseProto;
+	public void setDevResponseProto(DevResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

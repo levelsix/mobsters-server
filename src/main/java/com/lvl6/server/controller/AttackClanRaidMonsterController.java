@@ -200,7 +200,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAttackClanRaidMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -238,7 +238,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAttackClanRaidMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			//tell whole clan on a successful attack
@@ -261,7 +261,7 @@ public class AttackClanRaidMonsterController extends EventController {
 				AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAttackClanRaidMonsterResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
@@ -982,7 +982,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		AwardClanRaidStageRewardResponseEvent resEvent = new AwardClanRaidStageRewardResponseEvent(
 				clanId);
 		resEvent.setTag(0);
-		resEvent.setAwardClanRaidStageRewardResponseProto(resBuilder.build());
+		resEvent.setResponseProto(resBuilder.build());
 
 		responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 	}

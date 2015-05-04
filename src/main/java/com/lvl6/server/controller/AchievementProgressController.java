@@ -105,7 +105,7 @@ public class AchievementProgressController extends EventController {
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -131,7 +131,7 @@ public class AchievementProgressController extends EventController {
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -140,7 +140,7 @@ public class AchievementProgressController extends EventController {
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());

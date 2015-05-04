@@ -104,7 +104,7 @@ public class BeginMiniJobController extends EventController {
 			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -130,7 +130,7 @@ public class BeginMiniJobController extends EventController {
 			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginMiniJobResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -141,7 +141,7 @@ public class BeginMiniJobController extends EventController {
 				BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginMiniJobResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginMiniJobController processEvent",

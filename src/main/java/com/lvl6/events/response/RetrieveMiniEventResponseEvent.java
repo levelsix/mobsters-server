@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<RetrieveMiniEventResponseProto> {
 
-	private RetrieveMiniEventResponseProto retrieveMiniEventResponseProto;
+	private RetrieveMiniEventResponseProto responseProto;
 
 	public RetrieveMiniEventResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<Retrieve
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = retrieveMiniEventResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRetrieveMiniEventResponseProto(
-			RetrieveMiniEventResponseProto retrieveMiniEventResponseProto) {
-		this.retrieveMiniEventResponseProto = retrieveMiniEventResponseProto;
+			RetrieveMiniEventResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

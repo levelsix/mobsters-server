@@ -104,7 +104,7 @@ public class LoadPlayerCityController extends EventController {
 			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -147,7 +147,7 @@ public class LoadPlayerCityController extends EventController {
 			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -157,7 +157,7 @@ public class LoadPlayerCityController extends EventController {
 				LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

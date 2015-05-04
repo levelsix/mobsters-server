@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
 
-	private DeleteClanGiftsResponseProto deleteClanGiftsResponseProto;
+	private DeleteClanGiftsResponseProto responseProto;
 
 	public DeleteClanGiftsResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = deleteClanGiftsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setDeleteClanGiftsResponseProto(
-			DeleteClanGiftsResponseProto deleteClanGiftsResponseProto) {
-		this.deleteClanGiftsResponseProto = deleteClanGiftsResponseProto;
+			DeleteClanGiftsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

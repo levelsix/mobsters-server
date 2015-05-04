@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class FinishNormStructWaittimeWithDiamondsResponseEvent extends	NormalResponseEvent<FinishNormStructWaittimeWithDiamondsResponseProto> {
 
-	private FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto;
+	private FinishNormStructWaittimeWithDiamondsResponseProto responseProto;
 
 	public FinishNormStructWaittimeWithDiamondsResponseEvent(String playerId) {
 		super(playerId);
@@ -25,15 +25,15 @@ public class FinishNormStructWaittimeWithDiamondsResponseEvent extends	NormalRes
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = finishNormStructWaittimeWithDiamondsResponseProto
+		ByteString b =  responseProto
 				.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setFinishNormStructWaittimeWithDiamondsResponseProto(
-			FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto) {
-		this.finishNormStructWaittimeWithDiamondsResponseProto = finishNormStructWaittimeWithDiamondsResponseProto;
+			FinishNormStructWaittimeWithDiamondsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

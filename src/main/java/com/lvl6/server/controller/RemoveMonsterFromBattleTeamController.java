@@ -86,7 +86,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -114,7 +114,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 			//
@@ -133,7 +133,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 				RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

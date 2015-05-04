@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndDungeonResponseEvent extends NormalResponseEvent<EndDungeonResponseProto> {
 
-	private EndDungeonResponseProto endDungeonResponseProto;
+	private EndDungeonResponseProto responseProto;
 
 	public EndDungeonResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class EndDungeonResponseEvent extends NormalResponseEvent<EndDungeonRespo
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = endDungeonResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEndDungeonResponseProto(
-			EndDungeonResponseProto endDungeonResponseProto) {
-		this.endDungeonResponseProto = endDungeonResponseProto;
+			EndDungeonResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public EndDungeonResponseProto getEndDungeonResponseProto() {   //because APNS required
-		return endDungeonResponseProto;
+		return responseProto;
 	}
 
 }

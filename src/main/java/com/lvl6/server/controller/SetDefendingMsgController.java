@@ -89,7 +89,7 @@ public class SetDefendingMsgController extends EventController {
 			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -107,7 +107,7 @@ public class SetDefendingMsgController extends EventController {
 			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSetDefendingMsgResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -117,7 +117,7 @@ public class SetDefendingMsgController extends EventController {
 				SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

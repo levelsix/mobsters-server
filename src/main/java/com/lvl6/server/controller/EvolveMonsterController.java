@@ -145,7 +145,7 @@ public class EvolveMonsterController extends EventController {
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEvolveMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -203,7 +203,7 @@ public class EvolveMonsterController extends EventController {
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setEvolveMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -234,7 +234,7 @@ public class EvolveMonsterController extends EventController {
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEvolveMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());

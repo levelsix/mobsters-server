@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<AddMonsterToBattleTeamResponseProto> {
 
-	private AddMonsterToBattleTeamResponseProto addMonsterToBattleTeamResponseProto;
+	private AddMonsterToBattleTeamResponseProto responseProto;
 
 	public AddMonsterToBattleTeamResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<Add
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = addMonsterToBattleTeamResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAddMonsterToBattleTeamResponseProto(
-			AddMonsterToBattleTeamResponseProto addMonsterToBattleTeamResponseProto) {
-		this.addMonsterToBattleTeamResponseProto = addMonsterToBattleTeamResponseProto;
+			AddMonsterToBattleTeamResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public AddMonsterToBattleTeamResponseProto getAddMonsterToBattleTeamResponseProto() {   //because APNS required
-		return addMonsterToBattleTeamResponseProto;
+		return responseProto;
 	}
 
 }

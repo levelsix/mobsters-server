@@ -83,7 +83,7 @@
 //			
 //			InviteToClanResponseEvent resEvent = new InviteToClanResponseEvent(inviterId);
 //			resEvent.setTag(event.getTag());
-//			resEvent.setInviteToClanResponseProto(resBuilder.build());
+//			resEvent.setResponseProto(resBuilder.build());
 //			
 //			//only write to user if failed
 //			if (resBuilder.getStatus().equals(InviteToClanStatus.FAIL_OTHER)) {
@@ -98,7 +98,7 @@
 //				resBuilder.setStatus(InviteToClanStatus.FAIL_OTHER);
 //				InviteToClanResponseEvent resEvent = new InviteToClanResponseEvent(inviterId);
 //				resEvent.setTag(event.getTag());
-//				resEvent.setInviteToClanResponseProto(resBuilder.build());
+//				resEvent.setResponseProto(resBuilder.build());
 //				responses.normalResponseEvents().add(resEvent);
 //			} catch (Exception e2) {
 //				log.error("exception2 in InviteToClan processEvent", e);

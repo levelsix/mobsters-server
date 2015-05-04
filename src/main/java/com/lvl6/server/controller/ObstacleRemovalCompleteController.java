@@ -104,7 +104,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -131,7 +131,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success && (speedUp || atMaxObstacles)) {
@@ -156,7 +156,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 				ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setObstacleRemovalCompleteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

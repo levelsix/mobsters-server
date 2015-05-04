@@ -99,7 +99,7 @@
 //			
 //			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserUuid());
 //			resEvent.setTag(event.getTag());
-//			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
+//			resEvent.setResponseProto(resBuilder.build());  
 //			responses.normalResponseEvents().add(resEvent);
 //			
 //			if (success) {
@@ -117,7 +117,7 @@
 //      	resBuilder.setStatus(ExpansionWaitCompleteStatus.FAIL_OTHER);
 //      	ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(userId);
 //      	resEvent.setTag(event.getTag());
-//      	resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());
+//      	resEvent.setResponseProto(resBuilder.build());
 //      	responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //      	log.error("exception2 in ExpansionWaitCompleteController processEvent", e);

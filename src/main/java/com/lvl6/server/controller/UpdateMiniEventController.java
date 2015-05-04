@@ -93,7 +93,7 @@ public class UpdateMiniEventController extends EventController {
 			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMiniEventResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -111,7 +111,7 @@ public class UpdateMiniEventController extends EventController {
 			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMiniEventResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -122,7 +122,7 @@ public class UpdateMiniEventController extends EventController {
 				UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateMiniEventResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

@@ -89,7 +89,7 @@
 //
 //      LoadCityResponseEvent resEvent = new LoadCityResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setLoadCityResponseProto(resBuilder.build());  
+//      resEvent.setResponseProto(resBuilder.build());  
 //      responses.normalResponseEvents().add(resEvent);
 //
 //    } catch (Exception e) {

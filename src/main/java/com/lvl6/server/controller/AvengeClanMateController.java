@@ -121,7 +121,7 @@ public class AvengeClanMateController extends EventController {
 			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -155,7 +155,7 @@ public class AvengeClanMateController extends EventController {
 			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (resBuilder.getStatus().equals(AvengeClanMateStatus.SUCCESS)) {
 				//				User defender = acma.getVictim();
@@ -180,7 +180,7 @@ public class AvengeClanMateController extends EventController {
 				//					cmtdId, msfu, msfuMonsterIdDropped);
 
 				//				resBuilder.setVictim(pp);
-				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 
 			}
 			responses.normalResponseEvents().add(resEvent);
@@ -192,7 +192,7 @@ public class AvengeClanMateController extends EventController {
 				AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in AvengeClanMate processEvent", e);

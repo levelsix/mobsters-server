@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginMiniJobResponseEvent extends NormalResponseEvent<BeginMiniJobResponseProto> {
 
-	private BeginMiniJobResponseProto beginMiniJobResponseProto;
+	private BeginMiniJobResponseProto responseProto;
 
 	public BeginMiniJobResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class BeginMiniJobResponseEvent extends NormalResponseEvent<BeginMiniJobR
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = beginMiniJobResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setBeginMiniJobResponseProto(
-			BeginMiniJobResponseProto beginMiniJobResponseProto) {
-		this.beginMiniJobResponseProto = beginMiniJobResponseProto;
+			BeginMiniJobResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

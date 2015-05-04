@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PerformResearchResponseEvent extends NormalResponseEvent<PerformResearchResponseProto> {
 
-	private PerformResearchResponseProto performResearchResponseProto;
+	private PerformResearchResponseProto responseProto;
 
 	public PerformResearchResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class PerformResearchResponseEvent extends NormalResponseEvent<PerformRes
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = performResearchResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPerformResearchResponseProto(
-			PerformResearchResponseProto performResearchResponseProto) {
-		this.performResearchResponseProto = performResearchResponseProto;
+			PerformResearchResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

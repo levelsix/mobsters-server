@@ -107,7 +107,7 @@ public class UpgradeNormStructureController extends EventController {
 			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -136,7 +136,7 @@ public class UpgradeNormStructureController extends EventController {
 			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (legitUpgrade) {
@@ -165,7 +165,7 @@ public class UpgradeNormStructureController extends EventController {
 				UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpgradeNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

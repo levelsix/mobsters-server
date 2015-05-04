@@ -92,7 +92,7 @@ public class EndClanHelpController extends EventController {
 			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndClanHelpResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -111,14 +111,14 @@ public class EndClanHelpController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
-				resEvent.setEndClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
 
 				resBuilder.setStatus(EndClanHelpStatus.SUCCESS);
-				resEvent.setEndClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -131,7 +131,7 @@ public class EndClanHelpController extends EventController {
 				EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setEndClanHelpResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndClanHelp processEvent", e);

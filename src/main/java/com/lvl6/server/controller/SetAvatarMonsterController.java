@@ -79,7 +79,7 @@ public class SetAvatarMonsterController extends EventController {
 			SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -109,7 +109,7 @@ public class SetAvatarMonsterController extends EventController {
 			SetAvatarMonsterResponseProto resProto = resBuilder.build();
 			SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setSetAvatarMonsterResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
@@ -130,7 +130,7 @@ public class SetAvatarMonsterController extends EventController {
 				SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

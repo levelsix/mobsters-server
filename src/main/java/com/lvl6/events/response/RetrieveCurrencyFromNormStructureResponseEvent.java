@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalResponseEvent<RetrieveCurrencyFromNormStructureResponseProto> {
 
-	private RetrieveCurrencyFromNormStructureResponseProto retrieveCurrencyFromNormStructureResponseProto;
+	private RetrieveCurrencyFromNormStructureResponseProto responseProto;
 
 	public RetrieveCurrencyFromNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -25,15 +25,15 @@ public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalRespon
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = retrieveCurrencyFromNormStructureResponseProto
+		ByteString b =  responseProto
 				.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setRetrieveCurrencyFromNormStructureResponseProto(
-			RetrieveCurrencyFromNormStructureResponseProto retrieveCurrencyFromNormStructureResponseProto) {
-		this.retrieveCurrencyFromNormStructureResponseProto = retrieveCurrencyFromNormStructureResponseProto;
+			RetrieveCurrencyFromNormStructureResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

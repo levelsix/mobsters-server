@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ReceivedGroupChatResponseEvent extends NormalResponseEvent<ReceivedGroupChatResponseProto> {
 
-	private ReceivedGroupChatResponseProto receivedGroupChatResponseProto;
+	private ReceivedGroupChatResponseProto responseProto;
 
 	public ReceivedGroupChatResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class ReceivedGroupChatResponseEvent extends NormalResponseEvent<Received
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = receivedGroupChatResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setReceivedGroupChatResponseProto(
-			ReceivedGroupChatResponseProto receivedGroupChatResponseProto) {
-		this.receivedGroupChatResponseProto = receivedGroupChatResponseProto;
+			ReceivedGroupChatResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

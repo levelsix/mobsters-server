@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<ExchangeGemsForResourcesResponseProto> {
 
-	private ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto;
+	private ExchangeGemsForResourcesResponseProto responseProto;
 
 	public ExchangeGemsForResourcesResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<E
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = exchangeGemsForResourcesResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setExchangeGemsForResourcesResponseProto(
-			ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto) {
-		this.exchangeGemsForResourcesResponseProto = exchangeGemsForResourcesResponseProto;
+			ExchangeGemsForResourcesResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TransferClanOwnershipResponseEvent extends NormalResponseEvent<TransferClanOwnershipResponseProto> {
 
-	private TransferClanOwnershipResponseProto transferClanOwnershipResponseProto;
+	private TransferClanOwnershipResponseProto responseProto;
 
 	public TransferClanOwnershipResponseEvent(String playerId) {
 		super(playerId);
@@ -25,14 +25,14 @@ public class TransferClanOwnershipResponseEvent extends NormalResponseEvent<Tran
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = transferClanOwnershipResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setTransferClanOwnershipResponseProto(
-			TransferClanOwnershipResponseProto transferClanOwnershipResponseProto) {
-		this.transferClanOwnershipResponseProto = transferClanOwnershipResponseProto;
+			TransferClanOwnershipResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

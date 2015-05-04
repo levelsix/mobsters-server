@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class GiveClanHelpResponseEvent extends NormalResponseEvent<GiveClanHelpResponseProto> {
 
-	private GiveClanHelpResponseProto giveClanHelpResponseProto;
+	private GiveClanHelpResponseProto responseProto;
 
 	public GiveClanHelpResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class GiveClanHelpResponseEvent extends NormalResponseEvent<GiveClanHelpR
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = giveClanHelpResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setGiveClanHelpResponseProto(
-			GiveClanHelpResponseProto giveClanHelpResponseProto) {
-		this.giveClanHelpResponseProto = giveClanHelpResponseProto;
+			GiveClanHelpResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

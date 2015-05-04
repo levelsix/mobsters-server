@@ -102,7 +102,7 @@
 //      RetrieveTournamentRankingsResponseProto resProto = resBuilder.build();
 //      RetrieveTournamentRankingsResponseEvent resEvent = new RetrieveTournamentRankingsResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setRetrieveTournamentRankingsResponseProto(resProto);
+//      resEvent.setResponseProto(resProto);
 //
 //      responses.normalResponseEvents().add(resEvent);
 //    } catch (Exception e) {

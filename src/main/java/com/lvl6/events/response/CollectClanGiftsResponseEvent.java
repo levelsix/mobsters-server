@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CollectClanGiftsResponseEvent extends NormalResponseEvent<CollectClanGiftsResponseProto> {
 
-	private CollectClanGiftsResponseProto collectClanGiftsResponseProto;
+	private CollectClanGiftsResponseProto responseProto;
 
 	public CollectClanGiftsResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class CollectClanGiftsResponseEvent extends NormalResponseEvent<CollectCl
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = collectClanGiftsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setCollectClanGiftsResponseProto(
-			CollectClanGiftsResponseProto collectClanGiftsResponseProto) {
-		this.collectClanGiftsResponseProto = collectClanGiftsResponseProto;
+			CollectClanGiftsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public CollectClanGiftsResponseProto getCollectClanGiftsResponseProto() {   //because APNS required
-		return collectClanGiftsResponseProto;
+		return responseProto;
 	}
 
 }

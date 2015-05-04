@@ -94,7 +94,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -132,7 +132,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForSpeedUpsResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -144,7 +144,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 				TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

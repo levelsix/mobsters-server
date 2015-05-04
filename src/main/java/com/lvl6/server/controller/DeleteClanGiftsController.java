@@ -119,7 +119,7 @@ public class DeleteClanGiftsController extends EventController {
 			DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -134,7 +134,7 @@ public class DeleteClanGiftsController extends EventController {
 			DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (DeleteClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -157,7 +157,7 @@ public class DeleteClanGiftsController extends EventController {
 				DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

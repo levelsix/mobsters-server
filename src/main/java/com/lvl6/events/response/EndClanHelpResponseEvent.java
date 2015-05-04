@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpResponseProto> {
 
-	private EndClanHelpResponseProto endClanHelpResponseProto;
+	private EndClanHelpResponseProto responseProto;
 
 	public EndClanHelpResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpRes
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = endClanHelpResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEndClanHelpResponseProto(
-			EndClanHelpResponseProto endClanHelpResponseProto) {
-		this.endClanHelpResponseProto = endClanHelpResponseProto;
+			EndClanHelpResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

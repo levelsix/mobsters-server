@@ -137,7 +137,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			RedeemMiniEventRewardResponseEvent resEvent = new RedeemMiniEventRewardResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemMiniEventRewardResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -172,7 +172,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			RedeemMiniEventRewardResponseEvent resEvent = new RedeemMiniEventRewardResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemMiniEventRewardResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success && rmera.isAwardedResources()) {
@@ -199,7 +199,7 @@ public class RedeemMiniEventRewardController extends EventController {
 				RedeemMiniEventRewardResponseEvent resEvent = new RedeemMiniEventRewardResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRedeemMiniEventRewardResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

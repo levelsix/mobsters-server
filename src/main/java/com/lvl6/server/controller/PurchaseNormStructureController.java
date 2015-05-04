@@ -113,7 +113,7 @@ public class PurchaseNormStructureController extends EventController {
 			PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -158,7 +158,7 @@ public class PurchaseNormStructureController extends EventController {
 			PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -181,7 +181,7 @@ public class PurchaseNormStructureController extends EventController {
 				PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setPurchaseNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

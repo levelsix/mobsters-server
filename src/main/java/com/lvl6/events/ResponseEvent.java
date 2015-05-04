@@ -14,6 +14,16 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
  */
 
 public abstract class ResponseEvent<T extends GeneratedMessage> extends GameEvent {
+	
+	protected T responseProto;
+	
+	public T getResponseProto() {
+		return responseProto;
+	}
+
+	public void setResponseProto(T responseProto) {
+		this.responseProto = responseProto;
+	}
 
 	/** event type */
 	protected EventProtocolResponse eventType;
@@ -33,26 +43,15 @@ public abstract class ResponseEvent<T extends GeneratedMessage> extends GameEven
 		this.tag = tag;
 	}
 	
-	protected T proto;
-	
-	public T getProto(){
-		return proto;
-	}
-	
-	public void setProto(T proto){
-		this.proto = proto;
-	}
+
 	
 	public byte[] getBytes(){
-		return getProto().toByteArray();
+		return getResponseProto().toByteArray();
 	}
 	
 	public ByteString getByteString(){
-		return getProto().toByteString();
+		return getResponseProto().toByteString();
 	}
 
-	//	@Override
-	//	public String toString() {
-	//		return ReflectionToStringBuilder.toString(this);
-	//	}
-}// GameEvent
+
+}

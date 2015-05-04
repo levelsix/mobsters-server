@@ -97,7 +97,7 @@ public class BeginObstacleRemovalController extends EventController {
 			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -126,7 +126,7 @@ public class BeginObstacleRemovalController extends EventController {
 			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -151,7 +151,7 @@ public class BeginObstacleRemovalController extends EventController {
 				BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginObstacleRemovalResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

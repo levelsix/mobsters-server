@@ -142,7 +142,7 @@ public class TranslateSelectMessagesController extends EventController {
 			TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTranslateSelectMessagesResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -169,7 +169,7 @@ public class TranslateSelectMessagesController extends EventController {
 			TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTranslateSelectMessagesResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -180,7 +180,7 @@ public class TranslateSelectMessagesController extends EventController {
 				TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setTranslateSelectMessagesResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

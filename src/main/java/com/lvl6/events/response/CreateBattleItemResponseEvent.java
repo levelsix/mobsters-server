@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CreateBattleItemResponseEvent extends NormalResponseEvent<CreateBattleItemResponseProto> {
 
-	private CreateBattleItemResponseProto createBattleItemResponseProto;
+	private CreateBattleItemResponseProto responseProto;
 
 	public CreateBattleItemResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class CreateBattleItemResponseEvent extends NormalResponseEvent<CreateBat
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = createBattleItemResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setCreateBattleItemResponseProto(
-			CreateBattleItemResponseProto createBattleItemResponseProto) {
-		this.createBattleItemResponseProto = createBattleItemResponseProto;
+			CreateBattleItemResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

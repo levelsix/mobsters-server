@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SpawnObstacleResponseEvent extends NormalResponseEvent<SpawnObstacleResponseProto> {
 
-	private SpawnObstacleResponseProto spawnObstacleResponseProto;
+	private SpawnObstacleResponseProto responseProto;
 
 	public SpawnObstacleResponseEvent(String playerId) {
 		super(playerId);
@@ -18,14 +18,14 @@ public class SpawnObstacleResponseEvent extends NormalResponseEvent<SpawnObstacl
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = spawnObstacleResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSpawnObstacleResponseProto(
-			SpawnObstacleResponseProto spawnObstacleResponseProto) {
-		this.spawnObstacleResponseProto = spawnObstacleResponseProto;
+			SpawnObstacleResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }

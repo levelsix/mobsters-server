@@ -146,7 +146,7 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -163,7 +163,7 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} catch (Exception e) {
 			log.error("exception in RetrieveClanInfo processEvent", e);
@@ -172,7 +172,7 @@ public class RetrieveClanInfoController extends EventController {
 				RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RetrieveClanInfo processEvent", e);

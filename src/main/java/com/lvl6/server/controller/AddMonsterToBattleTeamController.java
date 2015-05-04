@@ -86,7 +86,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 			AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -120,7 +120,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 			AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			//
 			// UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -137,7 +137,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 				AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAddMonsterToBattleTeamResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

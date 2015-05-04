@@ -101,7 +101,7 @@
 //      
 //      CollectEquipEnhancementResponseEvent resEvent = new CollectEquipEnhancementResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setCollectEquipEnhancementResponseProto(resBuilder.build());  
+//      resEvent.setResponseProto(resBuilder.build());  
 //      responses.normalResponseEvents().add(resEvent);
 //      
 //      if (successful) {

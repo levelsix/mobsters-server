@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class FulfillTeamDonationSolicitationResponseEvent extends	NormalResponseEvent<FulfillTeamDonationSolicitationResponseProto> {
 
-	private FulfillTeamDonationSolicitationResponseProto fulfillTeamDonationSolicitationResponseProto;
+	private FulfillTeamDonationSolicitationResponseProto responseProto;
 
 	public FulfillTeamDonationSolicitationResponseEvent(String playerId) {
 		super(playerId);
@@ -18,15 +18,15 @@ public class FulfillTeamDonationSolicitationResponseEvent extends	NormalResponse
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = fulfillTeamDonationSolicitationResponseProto
+		ByteString b =  responseProto
 				.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setFulfillTeamDonationSolicitationResponseProto(
-			FulfillTeamDonationSolicitationResponseProto fulfillTeamDonationSolicitationResponseProto) {
-		this.fulfillTeamDonationSolicitationResponseProto = fulfillTeamDonationSolicitationResponseProto;
+			FulfillTeamDonationSolicitationResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 }
