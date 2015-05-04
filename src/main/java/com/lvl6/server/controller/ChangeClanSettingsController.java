@@ -107,7 +107,6 @@ public class ChangeClanSettingsController extends EventController {
 		if (senderProto.hasClan() && null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
 		}
-
 		UUID userUuid = null;
 		UUID clanUuid = null;
 
@@ -134,12 +133,14 @@ public class ChangeClanSettingsController extends EventController {
 			server.writeEvent(resEvent);
 			return;
 		}
+
 		boolean lockedClan = getLocker().lockClan(clanUuid);
 
 		try {
 			User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
 			Clan clan = clanRetrieveUtil.getClanWithId(user.getClanId());
 
+			log.info("about to check legit");
 			boolean legitChange = checkLegitChange(resBuilder, lockedClan,
 					userId, user, clanId, clan);
 
@@ -265,6 +266,7 @@ public class ChangeClanSettingsController extends EventController {
 			}
 		}
 
+		log.info("about to update");
 		int numUpdated = UpdateUtils.get().updateClan(clanId,
 				isChangeDescription, description, isChangeJoinType,
 				requestToJoinRequired, isChangeIcon, iconId);
