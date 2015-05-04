@@ -45,7 +45,7 @@ public class SetClanHelpingsAction implements StartUpAction {
 	public void setUp(StartUpResource fillMe) {
 		allSolicitations = clanHelpRetrieveUtil.getUserIdToClanHelp(
 				user.getClanId(), userId);
-		log.info(String.format("allSolicitations=%s", allSolicitations));
+//		log.info("allSolicitations={}", allSolicitations);
 
 		if (null == allSolicitations || allSolicitations.isEmpty()) {
 			return;

@@ -173,7 +173,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 					.createClanMemberTeamDonationProto(cmtd, msfu, solicitor,
 							donatorProto);
 
-			log.info("cmtdp={}", cmtdp);
+//			log.info("cmtdp={}", cmtdp);
 			cdpBuilder.addClanDonationSolicitations(cmtdp);
 		}
 	}
