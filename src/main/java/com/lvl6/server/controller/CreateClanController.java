@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -17,14 +16,11 @@ import com.lvl6.events.request.CreateClanRequestEvent;
 import com.lvl6.events.response.CreateClanResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
-import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto;
-import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -33,8 +29,8 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 @DependsOn("gameServer")
@@ -62,10 +58,10 @@ public class CreateClanController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
-	protected InsertUtils insertUtil;
+	protected InsertUtil insertUtil;
 	
 	@Autowired
-	protected DeleteUtils deleteUtil;
+	protected DeleteUtil deleteUtil;
 	
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
