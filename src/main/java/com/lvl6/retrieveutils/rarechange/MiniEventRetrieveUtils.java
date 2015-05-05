@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.google.common.collect.Sets;
 import com.lvl6.info.MiniEvent;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -30,14 +32,16 @@ public class MiniEventRetrieveUtils {
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_CONFIG;
 
-	private static Map<Integer, MiniEvent> idToMiniEvent;
-	private static TreeSet<MiniEvent> miniEventTree;
-	private static final MiniEventComparator comparator = new MiniEventComparator();
+	private Map<Integer, MiniEvent> idToMiniEvent;
+	private TreeSet<MiniEvent> meStartTimeTree;
+	private TreeSet<MiniEvent> meEndTimeTree;
+	private static final MeStartTimeComparator stComparator = new MeStartTimeComparator();
+	private static final MeEndTimeComparator etComparator = new MeEndTimeComparator();
 
 	@Autowired
 	protected TimeUtils timeUtil;
-	
-	private static final class MiniEventComparator implements Comparator<MiniEvent>
+
+	private static final class MeStartTimeComparator implements Comparator<MiniEvent>
 	{
 		@Override
 		public int compare(MiniEvent o1, MiniEvent o2) {
@@ -52,48 +56,64 @@ public class MiniEventRetrieveUtils {
 			} else if (o1.getId() > o2.getId()) {
 				return 1;
 			} else {
-				return 0; 
+				return 0;
 			}
 
 		}
 	}
 
-	public MiniEvent getCurrentlyActiveMiniEvent( Date now )
+	private static final class MeEndTimeComparator implements Comparator<MiniEvent>
 	{
-		if (null == miniEventTree) {
-			log.warn("no MiniEvent tree created");
+		@Override
+		public int compare(MiniEvent o1, MiniEvent o2) {
+			long o1Time = o1.getStartTime().getTime();
+			long o2Time = o2.getStartTime().getTime();
+			if ( o1Time < o2Time ) {
+				return -1;
+			} else if ( o1Time > o2Time ) {
+				return 1;
+			} else if (o1.getId() < o2.getId()) {
+				return -1;
+			} else if (o1.getId() > o2.getId()) {
+				return 1;
+			} else {
+				return 0;
+			}
+
+		}
+	}
+
+	public MiniEvent getCurrentlyActiveMiniEvent( Date now ) {
+		if ( null == meStartTimeTree || null == meEndTimeTree ) {
+			log.warn("no MiniEvent trees created");
 			reload();
 		}
 
-		if (null == miniEventTree) {
+		if (null == meStartTimeTree || null == meEndTimeTree) {
 			log.warn("no miniEvents are currently active");
 			return null;
 		}
 
 		MiniEvent me = new MiniEvent();
 		me.setId(0);
-//		me.setEndTime(now);
+		me.setEndTime(now);
 		me.setStartTime(now);
-//		MiniEvent active = miniEventTree.ceiling(me);
-		MiniEvent active = miniEventTree.floor(me);
-		
-		log.info("found active={}", active);
+		//contains the MiniEvents that have StartTime before $now
+		SortedSet<MiniEvent> started = meStartTimeTree.headSet(me, true);
+		//contains the MiniEvents that have EndTime after $now
+		SortedSet<MiniEvent> notYetEnded = meEndTimeTree.tailSet(me, true);
 
-		//found the MiniEvent with a startTime before $now
-		//need to make sure MiniEvent endTime is after $now
-		if (null != me) {
-			Date activeEndTime = active.getEndTime();
-			if (timeUtil.isFirstEarlierThanSecond(activeEndTime, now))
-			{
-				log.info ("end time invalid. invalidating active.");
-				active = null;
-			}
-			
+		Sets.SetView<MiniEvent> ongoing = Sets.intersection(started, notYetEnded);
+		if (ongoing.isEmpty()) {
+			log.info("no active MiniEvents. started:{}, notYetEnded:{}",
+					started, notYetEnded);
+			return null;
+		} else {
+			MiniEvent active = ongoing.iterator().next();
+			log.info("selected MiniEvent {}, allOngoing:{}",
+					active, ongoing);
+			return active;
 		}
-		log.info("for given time={}, selected {}",
-				now, active);
-		
-		return active;
 	}
 
 	public Map<Integer, MiniEvent> getAllIdsToMiniEvents() {
@@ -159,18 +179,24 @@ public class MiniEventRetrieveUtils {
 			return;
 		}
 
-		TreeSet<MiniEvent> miniEventTreeTemp = new TreeSet<MiniEvent>(comparator);
-
+		TreeSet<MiniEvent> meStartTimeTreeTemp = new TreeSet<MiniEvent>(stComparator);
+		TreeSet<MiniEvent> meEndTimeTreeTemp = new TreeSet<MiniEvent>(etComparator);
 		for (MiniEvent me : idToMiniEvent.values()) {
-			boolean added = miniEventTreeTemp.add(me);
+			boolean added = meStartTimeTreeTemp.add(me);
 			if (!added) {
 				log.error("(shouldn't happen...) can't add MiniEvent={} to treeSet={}",
-						me, miniEventTreeTemp);
+						me, meStartTimeTreeTemp);
+			}
+
+			added = meEndTimeTreeTemp.add(me);
+			if (!added) {
+				log.error("(shouldn't happen...) didn't add MiniEvent={} to treeSet={}",
+						me, meEndTimeTreeTemp);
 			}
 		}
 
-		miniEventTree = miniEventTreeTemp;
-
+		meStartTimeTree = meStartTimeTreeTemp;
+		meEndTimeTree = meEndTimeTreeTemp;
 	}
 
 	private MiniEvent convertRSRowToMiniEvent(ResultSet rs)
@@ -197,4 +223,21 @@ public class MiniEventRetrieveUtils {
 				name, desc, img, icon);
 		return me;
 	}
+
+	public TreeSet<MiniEvent> getMeStartTimeTree() {
+		return meStartTimeTree;
+	}
+
+	public void setMeStartTimeTree(TreeSet<MiniEvent> meStartTimeTree) {
+		this.meStartTimeTree = meStartTimeTree;
+	}
+
+	public TreeSet<MiniEvent> getMeEndTimeTree() {
+		return meEndTimeTree;
+	}
+
+	public void setMeEndTimeTree(TreeSet<MiniEvent> meEndTimeTree) {
+		this.meEndTimeTree = meEndTimeTree;
+	}
+
 }
