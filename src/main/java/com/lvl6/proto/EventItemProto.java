@@ -825,6 +825,19 @@ public final class EventItemProto {
      */
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUpdatedUserItemsOrBuilder(
         int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+     */
+    boolean hasRewards();
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserRewardProto getRewards();
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForBoosterResponseProto}
@@ -933,6 +946,19 @@ public final class EventItemProto {
                 mutable_bitField0_ |= 0x00000010;
               }
               updatedUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 50: {
+              com.lvl6.proto.RewardsProto.UserRewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = rewards_.toBuilder();
+              }
+              rewards_ = input.readMessage(com.lvl6.proto.RewardsProto.UserRewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rewards_);
+                rewards_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
               break;
             }
           }
@@ -1234,12 +1260,34 @@ public final class EventItemProto {
       return updatedUserItems_.get(index);
     }
 
+    public static final int REWARDS_FIELD_NUMBER = 6;
+    private com.lvl6.proto.RewardsProto.UserRewardProto rewards_;
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+     */
+    public boolean hasRewards() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserRewardProto getRewards() {
+      return rewards_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder() {
+      return rewards_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
       prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
       updatedUserItems_ = java.util.Collections.emptyList();
+      rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1269,6 +1317,9 @@ public final class EventItemProto {
       for (int i = 0; i < updatedUserItems_.size(); i++) {
         output.writeMessage(5, updatedUserItems_.get(i));
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(6, rewards_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1297,6 +1348,10 @@ public final class EventItemProto {
       for (int i = 0; i < updatedUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, updatedUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, rewards_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1415,6 +1470,7 @@ public final class EventItemProto {
           getUpdatedOrNewFieldBuilder();
           getPrizeFieldBuilder();
           getUpdatedUserItemsFieldBuilder();
+          getRewardsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1449,6 +1505,12 @@ public final class EventItemProto {
         } else {
           updatedUserItemsBuilder_.clear();
         }
+        if (rewardsBuilder_ == null) {
+          rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+        } else {
+          rewardsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -1514,6 +1576,14 @@ public final class EventItemProto {
           result.updatedUserItems_ = updatedUserItems_;
         } else {
           result.updatedUserItems_ = updatedUserItemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (rewardsBuilder_ == null) {
+          result.rewards_ = rewards_;
+        } else {
+          result.rewards_ = rewardsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1591,6 +1661,9 @@ public final class EventItemProto {
               updatedUserItemsBuilder_.addAllMessages(other.updatedUserItems_);
             }
           }
+        }
+        if (other.hasRewards()) {
+          mergeRewards(other.getRewards());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2490,6 +2563,122 @@ public final class EventItemProto {
           updatedUserItems_ = null;
         }
         return updatedUserItemsBuilder_;
+      }
+
+      private com.lvl6.proto.RewardsProto.UserRewardProto rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> rewardsBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public boolean hasRewards() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProto getRewards() {
+        if (rewardsBuilder_ == null) {
+          return rewards_;
+        } else {
+          return rewardsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public Builder setRewards(com.lvl6.proto.RewardsProto.UserRewardProto value) {
+        if (rewardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rewards_ = value;
+          onChanged();
+        } else {
+          rewardsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public Builder setRewards(
+          com.lvl6.proto.RewardsProto.UserRewardProto.Builder builderForValue) {
+        if (rewardsBuilder_ == null) {
+          rewards_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public Builder mergeRewards(com.lvl6.proto.RewardsProto.UserRewardProto value) {
+        if (rewardsBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              rewards_ != com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance()) {
+            rewards_ =
+              com.lvl6.proto.RewardsProto.UserRewardProto.newBuilder(rewards_).mergeFrom(value).buildPartial();
+          } else {
+            rewards_ = value;
+          }
+          onChanged();
+        } else {
+          rewardsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public Builder clearRewards() {
+        if (rewardsBuilder_ == null) {
+          rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProto.Builder getRewardsBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getRewardsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardsOrBuilder() {
+        if (rewardsBuilder_ != null) {
+          return rewardsBuilder_.getMessageOrBuilder();
+        } else {
+          return rewards_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserRewardProto rewards = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> 
+          getRewardsFieldBuilder() {
+        if (rewardsBuilder_ == null) {
+          rewardsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder>(
+                  getRewards(),
+                  getParentForChildren(),
+                  isClean());
+          rewards_ = null;
+        }
+        return rewardsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForBoosterResponseProto)
@@ -10564,64 +10753,66 @@ public final class EventItemProto {
     java.lang.String[] descriptorData = {
       "\n\017EventItem.proto\022\016com.lvl6.proto\032\026Boost" +
       "erPackStuff.proto\032\nItem.proto\032\022MonsterSt" +
-      "uff.proto\032\nUser.proto\"w\n\037TradeItemForBoo" +
-      "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\016\n\006itemId\030\002 \001" +
-      "(\005\022\022\n\nclientTime\030\003 \001(\003\"\254\003\n TradeItemForB" +
-      "oosterResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022Z\n\006status\030" +
-      "\002 \001(\0162J.com.lvl6.proto.TradeItemForBoost" +
-      "erResponseProto.TradeItemForBoosterStatu",
-      "s\022:\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto" +
-      ".FullUserMonsterProto\022/\n\005prize\030\004 \001(\0132 .c" +
-      "om.lvl6.proto.BoosterItemProto\0227\n\020update" +
-      "dUserItems\030\005 \003(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\"T\n\031TradeItemForBoosterStatus\022\013\n\007" +
-      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFF" +
-      "ICIENT_ITEM\020\003\"\277\001\n TradeItemForSpeedUpsRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\0225\n\titemsUsed\030\002 \003(\0132" +
-      "\".com.lvl6.proto.UserItemUsageProto\0222\n\013n",
+      "uff.proto\032\014Reward.proto\032\nUser.proto\"w\n\037T" +
+      "radeItemForBoosterRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\016\n\006itemId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\336\003\n" +
+      " TradeItemForBoosterResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Tra" +
+      "deItemForBoosterResponseProto.TradeItemF",
+      "orBoosterStatus\022:\n\014updatedOrNew\030\003 \003(\0132$." +
+      "com.lvl6.proto.FullUserMonsterProto\022/\n\005p" +
+      "rize\030\004 \001(\0132 .com.lvl6.proto.BoosterItemP" +
+      "roto\0227\n\020updatedUserItems\030\005 \003(\0132\035.com.lvl" +
+      "6.proto.UserItemProto\0220\n\007rewards\030\006 \001(\0132\037" +
+      ".com.lvl6.proto.UserRewardProto\"T\n\031Trade" +
+      "ItemForBoosterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
+      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\277\001" +
+      "\n TradeItemForSpeedUpsRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
+      "roto\0225\n\titemsUsed\030\002 \003(\0132\".com.lvl6.proto" +
+      ".UserItemUsageProto\0222\n\013nuUserItems\030\003 \003(\013" +
+      "2\035.com.lvl6.proto.UserItemProto\"\245\002\n!Trad" +
+      "eItemForSpeedUpsResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\\\n\006status\030\002 \001(\0162L.com.lvl6.proto.TradeIt" +
+      "emForSpeedUpsResponseProto.TradeItemForS" +
+      "peedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.l" +
+      "vl6.proto.UserItemUsageProto\"9\n\032TradeIte" +
+      "mForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_",
+      "OTHER\020\002\"l\n\036RemoveUserItemUsedRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001" +
+      "\n\037RemoveUserItemUsedResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Rem" +
+      "oveUserItemUsedResponseProto.RemoveUserI" +
+      "temUsedStatus\"7\n\030RemoveUserItemUsedStatu" +
+      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\302\001\n!Trade" +
+      "ItemForResourcesRequestProto\022@\n\006sender\030\001",
+      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
+      "thMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013n" +
       "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\"\245\002\n!TradeItemForSpeedUpsResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\\\n\006status\030\002 \001(\0162L.com.lv" +
-      "l6.proto.TradeItemForSpeedUpsResponsePro" +
-      "to.TradeItemForSpeedUpsStatus\0225\n\titemsUs" +
-      "ed\030\003 \003(\0132\".com.lvl6.proto.UserItemUsageP" +
-      "roto\"9\n\032TradeItemForSpeedUpsStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"l\n\036RemoveUserIte" +
-      "mUsedRequestProto\0220\n\006sender\030\001 \001(\0132 .com.",
-      "lvl6.proto.MinimumUserProto\022\030\n\020userItemU" +
-      "sedUuid\030\002 \003(\t\"\346\001\n\037RemoveUserItemUsedResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022X\n\006status\030\002 \001(\0162H.co" +
-      "m.lvl6.proto.RemoveUserItemUsedResponseP" +
-      "roto.RemoveUserItemUsedStatus\"7\n\030RemoveU" +
-      "serItemUsedStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002\"\302\001\n!TradeItemForResourcesRequestP" +
-      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
-      "nimumUserProtoWithMaxResources\022\023\n\013itemId",
-      "sUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132\035.com.l" +
-      "vl6.proto.UserItemProto\022\022\n\nclientTime\030\004 " +
-      "\001(\003\"\202\002\n\"TradeItemForResourcesResponsePro" +
-      "to\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mini" +
-      "mumUserProtoWithMaxResources\022^\n\006status\030\002" +
-      " \001(\0162N.com.lvl6.proto.TradeItemForResour" +
-      "cesResponseProto.TradeItemForResourcesSt" +
-      "atus\":\n\033TradeItemForResourcesStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecret" +
-      "GiftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l",
-      "vl6.proto.MinimumUserProto\022\022\n\nclientTime" +
-      "\030\002 \001(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\261\002\n\035RedeemSecre" +
-      "tGiftResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\0228\n\007nuGifts\030\002 \003" +
-      "(\0132\'.com.lvl6.proto.UserItemSecretGiftPr" +
-      "oto\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Red" +
-      "eemSecretGiftResponseProto.RedeemSecretG" +
-      "iftStatus\"Q\n\026RedeemSecretGiftStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n\n" +
-      "FAIL_OTHER\020\003B\020B\016EventItemProto"
+      "emProto\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\"TradeIte" +
+      "mForResourcesResponseProto\022@\n\006sender\030\001 \001" +
+      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
+      "MaxResources\022^\n\006status\030\002 \001(\0162N.com.lvl6." +
+      "proto.TradeItemForResourcesResponseProto" +
+      ".TradeItemForResourcesStatus\":\n\033TradeIte" +
+      "mForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL",
+      "_OTHER\020\002\"v\n\034RedeemSecretGiftRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUu" +
+      "id\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponsePro" +
+      "to\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.pr" +
+      "oto.UserItemSecretGiftProto\022T\n\006status\030\003 " +
+      "\001(\0162D.com.lvl6.proto.RedeemSecretGiftRes" +
+      "ponseProto.RedeemSecretGiftStatus\"Q\n\026Red" +
+      "eemSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL",
+      "_ITEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016" +
+      "EventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10637,6 +10828,7 @@ public final class EventItemProto {
           com.lvl6.proto.BoosterPackStuffProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor =
@@ -10650,7 +10842,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", "UpdatedUserItems", });
+        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", "UpdatedUserItems", "Rewards", });
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable = new
@@ -10702,6 +10894,7 @@ public final class EventItemProto {
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 
