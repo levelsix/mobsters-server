@@ -170,16 +170,12 @@ public class BoosterDisplayItemRetrieveUtils {
 		int boosterPackId = rs
 				.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID);
 		int rewardId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__REWARD_ID);
-		boolean isMonster = rs.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_MONSTER);
-		boolean isComplete = rs.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_COMPLETE);
-		String monsterQuality = rs.getString(DBConstants.BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY);
-		int gemReward = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__GEM_REWARD);
-		int quantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__QUANTITY);
-		int itemId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ITEM_ID);
-		int itemQuantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ITEM_QUANTITY);
 
-		BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(rewardId, boosterPackId, 
-				isMonster, isComplete, monsterQuality, gemReward, quantity, itemId, itemQuantity, rewardId);
+		BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem();
+		boosterDisplayItem.setId(id);
+		boosterDisplayItem.setBoosterPackId(boosterPackId);
+		boosterDisplayItem.setRewardId(rewardId);
+		
 		return boosterDisplayItem;
 	}
 }
