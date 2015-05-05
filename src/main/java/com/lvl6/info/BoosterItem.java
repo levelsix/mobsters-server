@@ -66,14 +66,6 @@ public class BoosterItem implements Serializable {
 		this.rewardId = rewardId;
 	}
 
-	public int getRewardId() {
-		return rewardId;
-	}
-
-	public void setRewardId(int rewardId) {
-		this.rewardId = rewardId;
-	}
-
 	@Override
 	public String toString() {
 		return "BoosterItem [id=" + id + ", boosterPackId=" + boosterPackId
