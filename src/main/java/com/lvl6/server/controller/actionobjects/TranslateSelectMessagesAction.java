@@ -127,6 +127,7 @@ public class TranslateSelectMessagesAction {
 			return false;
 		}
 
+		log.info(languageEnum.toString());
 		if(!languageEnum.toString().equalsIgnoreCase("NO_TRANSLATION")) {
 			if(!listOfPrivateChatPosts.isEmpty()) {
 				privateChatPostMap = new HashMap<String, PrivateChatPost>();
