@@ -35,12 +35,13 @@ public class ApproveOrRejectRequestToJoinAction {
 
 
 	public ApproveOrRejectRequestToJoinAction(String userId, String requesterId,
-			boolean lockedClan, UserRetrieveUtils2 userRetrieveUtils, 
+			boolean accept, boolean lockedClan, UserRetrieveUtils2 userRetrieveUtils, 
 			UpdateUtil updateUtil, DeleteUtil deleteUtil, 
 			UserClanRetrieveUtils2 userClanRetrieveUtils) {
 		super();
 		this.userId = userId;
 		this.requesterId = requesterId;
+		this.accept = accept;
 		this.lockedClan = lockedClan;
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.updateUtil = updateUtil;
@@ -107,6 +108,7 @@ public class ApproveOrRejectRequestToJoinAction {
 					requester));
 			return false;
 		}
+		log.info("got here");
 		return true;
 	}
 
@@ -141,7 +143,6 @@ public class ApproveOrRejectRequestToJoinAction {
 			log.error("requester has not requested for clan with id {}", clanId);
 			return false;
 		}
-
 		//check out the size of the clan
 		int size = calculateClanSize(userIdsToStatuses);
 		int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
