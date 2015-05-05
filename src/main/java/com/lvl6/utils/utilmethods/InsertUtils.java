@@ -2708,6 +2708,8 @@ public class InsertUtils implements InsertUtil {
 			log.error("map containing ids to translations is null");
 		}
 
+		log.info("list of private chat posts:" + listOfPrivateChatPosts);
+		
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();

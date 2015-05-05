@@ -159,10 +159,13 @@ public class TranslateSelectMessagesController extends EventController {
 			Map<String, PrivateChatPost> privateChatPostMap;
 			if (TranslateSelectMessagesStatus.SUCCESS.equals(resBuilder.getStatus()) && ct.equals(ChatScope.PRIVATE)) {
 				privateChatPostMap = tsma.getPrivateChatPostMap();
+				log.info("PRIVATE CHAT POST MAP: " + privateChatPostMap);
 
 				if (null != privateChatPostMap) {
-					resBuilder.addAllMessagesTranslated(createNewPrivateChatPostProtoWithTranslations(
-							listOfPrivateChatProtos, privateChatPostMap));
+					List<PrivateChatPostProto> pcppList = createNewPrivateChatPostProtoWithTranslations(
+							listOfPrivateChatProtos, privateChatPostMap);
+					log.info("pcppList" + pcppList);
+					resBuilder.addAllMessagesTranslated(pcppList);
 				}
 			}
 			TranslateSelectMessagesResponseProto resProto = resBuilder.build();
