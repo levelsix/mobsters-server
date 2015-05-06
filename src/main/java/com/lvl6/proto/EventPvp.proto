@@ -106,6 +106,8 @@ message EndPvpBattleRequestProto {
 	
 	//TODO: ?figure out safer way for client to tell server what monsters dropped?
 	repeated int32 monsterDropIds = 9;
+	
+	optional bytes replay = 10;
 }
 
 message EndPvpBattleResponseProto {

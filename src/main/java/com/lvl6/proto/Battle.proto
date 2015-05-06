@@ -97,6 +97,7 @@ message PvpHistoryProto {
 	optional int32 attackerOilChange = 16;
 	
 	optional bool clanAvenged = 17;
+	optional BattleReplayProto replay = 18;
 }
 
 //------------------------------------------------------------------------------------------
@@ -140,13 +141,11 @@ message PvpUserClanAvengeProto {
 	optional int64 avengeTime = 4;
 }
 
+message BattleReplayProto {
+	optional string replayUuid = 1;
+	optional string creatorUuid = 2;
+	optional bytes replay = 3;
+	optional int32 createTime = 4;
+}
+
 ///atm, this file is used by EventPvp.proto
-
-
-	
-
-
-
-
-
-

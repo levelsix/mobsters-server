@@ -3920,6 +3920,15 @@ public final class EventPvpProto {
      * </pre>
      */
     int getMonsterDropIds(int index);
+
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    boolean hasReplay();
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    com.google.protobuf.ByteString getReplay();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleRequestProto}
@@ -4041,6 +4050,11 @@ public final class EventPvpProto {
                 monsterDropIds_.add(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000100;
+              replay_ = input.readBytes();
               break;
             }
           }
@@ -4325,6 +4339,21 @@ public final class EventPvpProto {
       return monsterDropIds_.get(index);
     }
 
+    public static final int REPLAY_FIELD_NUMBER = 10;
+    private com.google.protobuf.ByteString replay_;
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    public boolean hasReplay() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    public com.google.protobuf.ByteString getReplay() {
+      return replay_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       defenderUuid_ = "";
@@ -4335,6 +4364,7 @@ public final class EventPvpProto {
       cashChange_ = 0;
       nuPvpDmgMultiplier_ = 0F;
       monsterDropIds_ = java.util.Collections.emptyList();
+      replay_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4375,6 +4405,9 @@ public final class EventPvpProto {
       }
       for (int i = 0; i < monsterDropIds_.size(); i++) {
         output.writeInt32(9, monsterDropIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(10, replay_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4425,6 +4458,10 @@ public final class EventPvpProto {
         }
         size += dataSize;
         size += 1 * getMonsterDropIdsList().size();
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, replay_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4566,6 +4603,8 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         monsterDropIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000100);
+        replay_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -4635,6 +4674,10 @@ public final class EventPvpProto {
           bitField0_ = (bitField0_ & ~0x00000100);
         }
         result.monsterDropIds_ = monsterDropIds_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.replay_ = replay_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4686,6 +4729,9 @@ public final class EventPvpProto {
             monsterDropIds_.addAll(other.monsterDropIds_);
           }
           onChanged();
+        }
+        if (other.hasReplay()) {
+          setReplay(other.getReplay());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5292,6 +5338,41 @@ public final class EventPvpProto {
       public Builder clearMonsterDropIds() {
         monsterDropIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString replay_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public boolean hasReplay() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public com.google.protobuf.ByteString getReplay() {
+        return replay_;
+      }
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public Builder setReplay(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        replay_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public Builder clearReplay() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        replay_ = getDefaultInstance().getReplay();
         onChanged();
         return this;
       }
@@ -10605,47 +10686,47 @@ public final class EventPvpProto {
       "proto.BeginPvpBattleResponseProto.BeginP" +
       "vpBattleStatus\"O\n\024BeginPvpBattleStatus\022\013" +
       "\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAILABLE\020\002\022" +
-      "\016\n\nFAIL_OTHER\020\003\"\210\002\n\030EndPvpBattleRequestP" +
+      "\016\n\nFAIL_OTHER\020\003\"\230\002\n\030EndPvpBattleRequestP" +
       "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
       "nimumUserProtoWithMaxResources\022\024\n\014defend" +
       "erUuid\030\002 \001(\t\022\024\n\014userAttacked\030\003 \001(\010\022\017\n\007us" +
       "erWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\toilCh" +
       "ange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022nuPvpD",
       "mgMultiplier\030\010 \001(\002\022\026\n\016monsterDropIds\030\t \003" +
-      "(\005\"\255\004\n\031EndPvpBattleResponseProto\022@\n\006send" +
-      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
-      "toWithMaxResources\022\024\n\014defenderUuid\030\002 \001(\t" +
-      "\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attackerWo" +
-      "n\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto" +
-      ".EndPvpBattleResponseProto.EndPvpBattleS" +
-      "tatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.lvl6.p" +
-      "roto.FullUserMonsterProto\022<\n\023battleThatJ" +
-      "ustEnded\030\013 \001(\0132\037.com.lvl6.proto.PvpHisto",
-      "ryProto\0227\n\013statsBefore\030\014 \001(\0132\".com.lvl6." +
-      "proto.UserPvpLeagueProto\0226\n\nstatsAfter\030\r" +
+      "(\005\022\016\n\006replay\030\n \001(\014\"\255\004\n\031EndPvpBattleRespo" +
+      "nseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.prot" +
+      "o.MinimumUserProtoWithMaxResources\022\024\n\014de" +
+      "fenderUuid\030\002 \001(\t\022\030\n\020attackerAttacked\030\003 \001" +
+      "(\010\022\023\n\013attackerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162" +
+      "<.com.lvl6.proto.EndPvpBattleResponsePro" +
+      "to.EndPvpBattleStatus\022:\n\014updatedOrNew\030\n " +
+      "\003(\0132$.com.lvl6.proto.FullUserMonsterProt" +
+      "o\022<\n\023battleThatJustEnded\030\013 \001(\0132\037.com.lvl",
+      "6.proto.PvpHistoryProto\0227\n\013statsBefore\030\014" +
       " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
-      "\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG" +
-      "\020\003\"\\\n\033SetDefendingMsgRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendingMsgResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.co",
-      "m.lvl6.proto.SetDefendingMsgResponseProt" +
-      "o.SetDefendingMsgStatus\"4\n\025SetDefendingM" +
-      "sgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\271\001" +
-      "\n%CustomizePvpBoardObstacleRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022G\n\024nuOrUpdatedObstacles\030\002 \003(\0132" +
-      ").com.lvl6.proto.UserPvpBoardObstaclePro" +
-      "to\022\025\n\rremoveUpboIds\030\003 \003(\005\"\202\002\n&CustomizeP" +
-      "vpBoardObstacleResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022f",
-      "\n\006status\030\002 \001(\0162V.com.lvl6.proto.Customiz" +
-      "ePvpBoardObstacleResponseProto.Customize" +
-      "PvpBoardObstacleStatus\">\n\037CustomizePvpBo" +
-      "ardObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\017B\rEventPvpProto"
+      "\0226\n\nstatsAfter\030\r \001(\0132\".com.lvl6.proto.Us" +
+      "erPvpLeagueProto\"P\n\022EndPvpBattleStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATT" +
+      "LE_TOOK_TOO_LONG\020\003\"\\\n\033SetDefendingMsgReq" +
+      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034Set" +
+      "DefendingMsgResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022R\n\006s",
+      "tatus\030\002 \001(\0162B.com.lvl6.proto.SetDefendin" +
+      "gMsgResponseProto.SetDefendingMsgStatus\"" +
+      "4\n\025SetDefendingMsgStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"\271\001\n%CustomizePvpBoardObsta" +
+      "cleRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022G\n\024nuOrUpdated" +
+      "Obstacles\030\002 \003(\0132).com.lvl6.proto.UserPvp" +
+      "BoardObstacleProto\022\025\n\rremoveUpboIds\030\003 \003(" +
+      "\005\"\202\002\n&CustomizePvpBoardObstacleResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi",
+      "nimumUserProto\022f\n\006status\030\002 \001(\0162V.com.lvl" +
+      "6.proto.CustomizePvpBoardObstacleRespons" +
+      "eProto.CustomizePvpBoardObstacleStatus\">" +
+      "\n\037CustomizePvpBoardObstacleStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10692,7 +10773,7 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", "MonsterDropIds", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", "MonsterDropIds", "Replay", });
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new
