@@ -82,12 +82,12 @@ public class TimeUtils {
 		//	  return interim.getDays();
 
 		/* http://stackoverflow.com/questions/3802893/number-of-days-between-two-dates-in-joda-time
-		 	
+
 		 	Annoyingly, the withTimeAtStartOfDay answer is wrong, but only occasionally. You want:
 
 		Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays()
 		It turns out that "midnight/start of day" sometimes means 1am (daylight savings happen this way in some places), which Days.daysBetween doesn't handle properly.
-		
+
 		// 5am on the 20th to 1pm on the 21st, October 2013, Brazil
 		DateTimeZone BRAZIL = DateTimeZone.forID("America/Sao_Paulo");
 		DateTime start = new DateTime(2013, 10, 20, 5, 0, 0, BRAZIL);
@@ -96,7 +96,7 @@ public class TimeUtils {
 		// prints 0
 		System.out.println(daysBetween(start.toLocalDate(), end.toLocalDate()).getDays());
 		// prints 1
-		 
+
 		 */
 		Days days = Days.daysBetween((new DateTime(d1)).toLocalDate(),
 				(new DateTime(d2)).toLocalDate());
@@ -164,7 +164,7 @@ public class TimeUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param curDate
 	 * @param minutesAddend Can be negative.
 	 * @return
@@ -183,7 +183,7 @@ public class TimeUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param curDate
 	 * @param daysAddend Can be negative.
 	 * @return
@@ -199,7 +199,7 @@ public class TimeUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param curDate
 	 * @param hoursAddend Can be negative.
 	 * @return
@@ -215,7 +215,7 @@ public class TimeUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param curDate
 	 * @param minutesAddend Can be negative.
 	 * @return
@@ -224,7 +224,7 @@ public class TimeUtils {
 		DateTime dt = new DateTime(curDate);
 
 		MutableDateTime mdt = dt.toMutableDateTime();
-		mdt.addHours(minutesAddend);
+		mdt.addMinutes(minutesAddend);
 		Date createdDate = mdt.toDate();
 
 		return createdDate;
