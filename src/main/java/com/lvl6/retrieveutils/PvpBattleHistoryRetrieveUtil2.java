@@ -112,6 +112,8 @@ public class PvpBattleHistoryRetrieveUtil2 {
 					.getBoolean(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON));
 			history.setExactedRevenge(rs
 					.getBoolean(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE));
+			history.setPvpDmgMultiplier(rs
+					.getFloat(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER));
 			history.setClanAvenged(rs
 					.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
 			return history;
@@ -153,6 +155,10 @@ public class PvpBattleHistoryRetrieveUtil2 {
 						.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON);
 				columnsSelected
 						.add(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER);
+				columnsSelected
+						.add(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED);
 			}
 			return columnsSelected;
 		}
@@ -200,14 +206,14 @@ public class PvpBattleHistoryRetrieveUtil2 {
 	//		List<PvpBattleHistory> recentNBattles = null;
 	//		try {
 	//			List<String> columnsToSelect = PvpBattleHistoryForClientMapper.getColumnsSelected();
-	//			
+	//
 	//			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 	//			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
 	//			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
 	//			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, true);
 	//			String conditionDelimiter = getQueryConstructionUtil().getAnd();
 	//
-	//			//query db, "values" is not used 
+	//			//query db, "values" is not used
 	//			//(its purpose is to hold the values that were supposed to be put
 	//			// into a prepared statement)
 	//			List<Object> values = new ArrayList<Object>();
@@ -225,7 +231,7 @@ public class PvpBattleHistoryRetrieveUtil2 {
 	//				querySb.append(" desc limit ");
 	//				querySb.append(n);
 	//
-	//				query = querySb.toString(); 
+	//				query = querySb.toString();
 	//			}
 	//			log.info("query=" + query);
 	//

@@ -6,7 +6,7 @@ import java.util.Date;
 //look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 
-	private static final long serialVersionUID = -1874624222040221274L;
+	private static final long serialVersionUID = -1201654110806196425L;
 
 	private String attackerId;
 	private String defenderId;
@@ -39,6 +39,7 @@ public class PvpBattleHistory implements Serializable {
 	private boolean cancelled;
 	private boolean exactedRevenge;
 
+	private float pvpDmgMultiplier;
 	private boolean clanAvenged;
 
 	public PvpBattleHistory() {
@@ -55,7 +56,8 @@ public class PvpBattleHistory implements Serializable {
 			int defenderCurRank, int attackerCashChange,
 			int defenderCashChange, int attackerOilChange,
 			int defenderOilChange, boolean attackerWon, boolean cancelled,
-			boolean exactedRevenge, boolean clanAvenged) {
+			boolean exactedRevenge, float pvpDmgMultiplier, boolean clanAvenged)
+	{
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -82,6 +84,7 @@ public class PvpBattleHistory implements Serializable {
 		this.attackerWon = attackerWon;
 		this.cancelled = cancelled;
 		this.exactedRevenge = exactedRevenge;
+		this.pvpDmgMultiplier = pvpDmgMultiplier;
 		this.clanAvenged = clanAvenged;
 	}
 
@@ -285,6 +288,14 @@ public class PvpBattleHistory implements Serializable {
 		this.exactedRevenge = exactedRevenge;
 	}
 
+	public float getPvpDmgMultiplier() {
+		return pvpDmgMultiplier;
+	}
+
+	public void setPvpDmgMultiplier(float pvpDmgMultiplier) {
+		this.pvpDmgMultiplier = pvpDmgMultiplier;
+	}
+
 	public boolean isClanAvenged() {
 		return clanAvenged;
 	}
@@ -317,8 +328,8 @@ public class PvpBattleHistory implements Serializable {
 				+ ", attackerOilChange=" + attackerOilChange
 				+ ", defenderOilChange=" + defenderOilChange + ", attackerWon="
 				+ attackerWon + ", cancelled=" + cancelled
-				+ ", exactedRevenge=" + exactedRevenge + ", clanAvenged="
-				+ clanAvenged + "]";
+				+ ", exactedRevenge=" + exactedRevenge + ", pvpDmgMultiplier="
+				+ pvpDmgMultiplier + ", clanAvenged=" + clanAvenged + "]";
 	}
 
 }

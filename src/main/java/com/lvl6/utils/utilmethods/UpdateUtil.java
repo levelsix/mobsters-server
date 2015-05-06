@@ -235,24 +235,24 @@ public interface UpdateUtil {
 
 	public abstract boolean updateUserResearchCompleteStatus(
 			String userResearchUuid);
-	
+
 	public abstract boolean updateUserSalesValue(String userId, int newSalesValue, Date now);
-	
+
 	public abstract boolean updateUserSalesJumpTwoTiers(String userId, boolean jumpTwoTiers);
-	
+
 	public abstract boolean updateUserBattleItems(String userId,
 			List<BattleItemForUser> updateList);
-	
-	public abstract boolean updateUserTranslationSetting(String recipientId, 
+
+	public abstract boolean updateUserTranslationSetting(String recipientId,
 			String senderId, String newLanguage, boolean translateOn);
-	
-	public abstract boolean updateUserTranslationSettingGlobalLanguage(String recipientId, 
+
+	public abstract boolean updateUserTranslationSettingGlobalLanguage(String recipientId,
 			String chatType, String language, boolean translateOn);
-	
+
 	public abstract boolean updateUserStrength(String userId, long updatedStrength);
-	
+
 	public abstract boolean updateUserSalesLastPurchaseTime(String userId, Timestamp ts);
-	
+
 	public abstract boolean updateUserClanGiftHasBeenCollected(String userId, List<ClanGiftForUser> cgfuList);
 
 
