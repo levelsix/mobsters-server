@@ -116,6 +116,7 @@ public class EndPvpBattleAction {
 		this.monsterLevelInfoRetrieveUtil = monsterLevelInfoRetrieveUtil;
 		this.miscMethods = miscMethods;
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
+		this.timeUtil = timeUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
