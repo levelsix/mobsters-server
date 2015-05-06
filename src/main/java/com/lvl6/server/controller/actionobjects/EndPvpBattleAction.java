@@ -637,6 +637,7 @@ public class EndPvpBattleAction {
 			defenderDefensesWonDelta = 1;
 			defenderDefensesLostDelta = 0;
 			defenderPlfu.setDefensesWon(defenderDefensesWonDelta + defenderPlfu.getDefensesWon());
+			defenderShieldEndTime = defenderPlfu.getInBattleShieldEndTime();
 		} else {
 			defenderDefensesWonDelta = 0;
 			defenderDefensesLostDelta = 1;
