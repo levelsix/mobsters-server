@@ -110,23 +110,7 @@ public class RetractRequestJoinClanController extends EventController {
 		if (clanUuid != null) {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
-		try {
-//			User user = getUserRetrieveUtils().getUserById(
-//					senderProto.getUserUuid());
-//			Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
-//
-//			boolean legitRetract = checkLegitRequest(resBuilder, lockedClan,
-//					user, clan);
-//
-//			boolean success = false;
-//			if (legitRetract) {
-//				success = writeChangesToDB(user, clanId);
-//			}
-//
-//			if (success) {
-//				resBuilder.setStatus(RetractRequestJoinClanStatus.SUCCESS);
-//			}
-			
+		try {			
 			RetractRequestJoinClanAction rrjca = new RetractRequestJoinClanAction(userId, clanId,
 					lockedClan, userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils, 
 					userClanRetrieveUtils);

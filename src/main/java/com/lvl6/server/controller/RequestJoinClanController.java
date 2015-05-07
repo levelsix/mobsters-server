@@ -204,18 +204,6 @@ public class RequestJoinClanController extends EventController {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
 		try {
-//			User user = getUserRetrieveUtils().getUserById(userId);
-//			Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
-//			boolean requestToJoinRequired = false; //to be set if request is legit
-//
-//			List<Integer> clanSizeList = new ArrayList<Integer>();
-//			boolean legitRequest = checkLegitRequest(resBuilder, lockedClan,
-//					user, clan, clanSizeList);
-//
-//			boolean successful = false;
-//			if (legitRequest) {
-//				requestToJoinRequired = clan.isRequestToJoinRequired();
-
 			RequestJoinClanAction rjca = new RequestJoinClanAction(userId, clanId,
 					clientTime, lockedClan, userRetrieveUtil, insertUtil, deleteUtil,
 					clanRetrieveUtils, userClanRetrieveUtils);
@@ -237,9 +225,6 @@ public class RequestJoinClanController extends EventController {
 								UserClanStatus.MEMBER, 0F, -1, null);
 				resBuilder.setRequester(mupfc);
 			}
-//				successful = writeChangesToDB(resBuilder, user, clan,
-//						clientTime);
-//			}
 
 			// Only need to set clan data if it's a successful join.
 			ClanDataProto cdp = null;

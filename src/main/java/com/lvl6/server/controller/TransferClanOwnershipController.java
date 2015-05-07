@@ -133,24 +133,6 @@ public class TransferClanOwnershipController extends EventController {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
 		try {
-//			Map<String, User> users = getUserRetrieveUtils().getUsersByIds(
-//					userIds);
-//			Map<String, UserClan> userClans = getUserClanRetrieveUtils()
-//					.getUserClanForUsers(clanId, userIds);
-//
-//			User user = users.get(userId);
-//			User newClanOwner = users.get(newClanOwnerId);
-//
-//			boolean legitTransfer = checkLegitTransfer(resBuilder, lockedClan,
-//					userId, user, newClanOwnerId, newClanOwner, userClans);
-//
-//			if (legitTransfer) {
-//				List<UserClanStatus> statuses = new ArrayList<UserClanStatus>();
-//				//order matters
-//				statuses.add(UserClanStatus.JUNIOR_LEADER);
-//				statuses.add(UserClanStatus.LEADER);
-//				writeChangesToDB(clanId, userIds, statuses);
-//			}
 			TransferClanOwnershipAction tcoa = new TransferClanOwnershipAction(userId,
 					newClanOwnerId, lockedClan, userRetrieveUtils, updateUtil,
 					deleteUtil, userClanRetrieveUtils);

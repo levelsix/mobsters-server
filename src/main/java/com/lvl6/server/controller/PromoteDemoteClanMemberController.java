@@ -138,31 +138,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 		if (clanUuid != null) {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
-		try {
-//			Map<String, User> users = getUserRetrieveUtils().getUsersByIds(
-//					userIds);
-//			Map<String, UserClan> userClans = getUserClanRetrieveUtils()
-//					.getUserClanForUsers(clanId, userIds);
-//
-//			boolean legitRequest = checkLegitRequest(resBuilder, lockedClan,
-//					userId, victimId, newUserClanStatus, users, userClans);
-//
-//			boolean success = false;
-//			if (legitRequest) {
-//				User victim = users.get(victimId);
-//				UserClan oldInfo = userClans.get(victimId);
-//				try {
-//					UserClanStatus ucs = UserClanStatus.valueOf(oldInfo
-//							.getStatus());
-//					resBuilder.setPrevUserClanStatus(ucs);
-//				} catch (Exception e) {
-//					log.error("incorrect user clan status. userClan=" + oldInfo);
-//				}
-//
-//				success = writeChangesToDB(victim, victimId, clanId, oldInfo,
-//						newUserClanStatus);
-//			}
-			
+		try {			
 			PromoteDemoteClanMemberAction pdcma = new PromoteDemoteClanMemberAction(userId, victimId,
 					newUserClanStatus, lockedClan, userRetrieveUtils, updateUtil, deleteUtil, 
 					userClanRetrieveUtils, clanStuffUtils);

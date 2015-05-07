@@ -17,6 +17,7 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponsePro
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.Builder;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -32,12 +33,14 @@ public class ApproveOrRejectRequestToJoinAction {
 	protected UpdateUtil updateUtil;
 	protected DeleteUtil deleteUtil;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	private ClanStuffUtils clanStuffUtils;
 
 
 	public ApproveOrRejectRequestToJoinAction(String userId, String requesterId,
 			boolean accept, boolean lockedClan, UserRetrieveUtils2 userRetrieveUtils, 
 			UpdateUtil updateUtil, DeleteUtil deleteUtil, 
-			UserClanRetrieveUtils2 userClanRetrieveUtils) {
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			ClanStuffUtils clanStuffUtils) {
 		super();
 		this.userId = userId;
 		this.requesterId = requesterId;
@@ -47,6 +50,7 @@ public class ApproveOrRejectRequestToJoinAction {
 		this.updateUtil = updateUtil;
 		this.deleteUtil = deleteUtil;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
+		this.clanStuffUtils = clanStuffUtils;
 	}
 
 	private User user;
@@ -113,7 +117,22 @@ public class ApproveOrRejectRequestToJoinAction {
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
-		Set<String> uniqUserIds = getAuthorizedClanMembers();
+		String clanId = user.getClanId();
+		String leaderStatus = UserClanStatus.LEADER.name();
+		String jrLeaderStatus = UserClanStatus.JUNIOR_LEADER.name();
+		String memberStatus = UserClanStatus.MEMBER.name();
+		String requestingStatus = UserClanStatus.REQUESTING.name();
+
+		List<String> statuses = new ArrayList<String>();
+		statuses.add(leaderStatus);
+		statuses.add(jrLeaderStatus);
+		statuses.add(UserClanStatus.CAPTAIN.name());
+		statuses.add(memberStatus);
+		statuses.add(requestingStatus);
+		Map<String, String> userIdsToStatuses = userClanRetrieveUtils
+				.getUserIdsToStatuses(clanId, statuses);
+		Set<String> uniqUserIds = clanStuffUtils.getAuthorizedClanMembers(user, userClanRetrieveUtils,
+				userIdsToStatuses, leaderStatus, jrLeaderStatus);
 
 		String userId = user.getId();
 		if (!uniqUserIds.contains(userId)) {
@@ -157,37 +176,6 @@ public class ApproveOrRejectRequestToJoinAction {
 		clanSizeList = new ArrayList<Integer>();
 		clanSizeList.add(size);
 		return true;
-	}
-
-	private Set<String> getAuthorizedClanMembers() {
-		clanId = user.getClanId();
-		leaderStatus = UserClanStatus.LEADER.name();
-		jrLeaderStatus = UserClanStatus.JUNIOR_LEADER.name();
-		memberStatus = UserClanStatus.MEMBER.name();
-		requestingStatus = UserClanStatus.REQUESTING.name();
-
-		List<String> statuses = new ArrayList<String>();
-		statuses.add(leaderStatus);
-		statuses.add(jrLeaderStatus);
-		statuses.add(UserClanStatus.CAPTAIN.name());
-		statuses.add(memberStatus);
-		statuses.add(requestingStatus);
-		userIdsToStatuses = userClanRetrieveUtils
-				.getUserIdsToStatuses(clanId, statuses);
-
-		Set<String> uniqUserIds = new HashSet<String>();
-		if (null != userIdsToStatuses && !userIdsToStatuses.isEmpty()) {
-
-			//gather up only the leader or jr leader userIds
-			for (String userId : userIdsToStatuses.keySet()) {
-				String status = userIdsToStatuses.get(userId);
-				if (leaderStatus.equals(status)
-						|| jrLeaderStatus.equals(status)) {
-					uniqUserIds.add(userId);
-				}
-			}
-		}
-		return uniqUserIds;
 	}
 
 	private String getRequesterStatus(User requester, String memberStatus,

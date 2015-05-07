@@ -152,21 +152,6 @@ public class ChangeClanSettingsController extends EventController {
 		boolean lockedClan = getLocker().lockClan(clanUuid);
 
 		try {
-//			User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
-//			Clan clan = clanRetrieveUtil.getClanWithId(user.getClanId());
-//
-//			log.info("about to check legit");
-//			boolean legitChange = checkLegitChange(resBuilder, lockedClan,
-//					userId, user, clanId, clan);
-//
-//			if (legitChange) {
-//				//clan will be modified
-//				writeChangesToDB(resBuilder, clanId, clan, isChangeDescription,
-//						description, isChangeJoinType, requestToJoinRequired,
-//						isChangeIcon, iconId);
-//				
-//			}
-			
 			ChangeClanSettingsAction ccsa = new ChangeClanSettingsAction(userId, isChangeDescription,
 					description, isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId, lockedClan,
 					userRetrieveUtils, updateUtil, miscMethods, clanRetrieveUtils, userClanRetrieveUtils,
