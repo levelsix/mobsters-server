@@ -164,14 +164,11 @@ public class QueueUpAction {
 		
 		if (!pvpBotsOnly) {
 			//get the users that the attacker will fight
-			log.info("im here1");
 			getQueuedOpponentIds(numNeeded, listOfEloPairs);
 		}
 		else {
 			//get half bots and half real players
-			log.info("im here2");
 			getQueuedOpponentIds(numNeeded/2, createListOfEloPairs());
-			log.info("how many real users i got: ", queuedOpponentIdsList.size());
 		}
 	}
 	
@@ -188,7 +185,6 @@ public class QueueUpAction {
 	private void getQueuedOpponentIds(int numNeeded, List<EloPair> eloPairList) {
 		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil.retrievePvpUsers(
 				eloPairList, clientDate, numNeeded, userIdBlackList);
-		log.info("PROSPECTIVE DEFENDERS: {}", prospectiveDefenders.size());
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
@@ -197,7 +193,6 @@ public class QueueUpAction {
 		queuedOpponentIdsList = new ArrayList<String>();
 
 		for(PvpUser pUser : prospectiveDefenders) {
-			log.info("PUSER ID: " + pUser.getUserId());
 			queuedOpponentIdsList.add(pUser.getUserId());
 		}
 		

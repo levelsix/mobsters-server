@@ -278,7 +278,6 @@ public class QueueUpController extends EventController {
 
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 		List<String> queuedOpponentIdsList = qua.getQueuedOpponentIdsList();
-		Collections.shuffle(queuedOpponentIdsList);
 		if (null != queuedOpponentIdsList && !queuedOpponentIdsList.isEmpty()) {
 			log.info("there are people to attack!");
 
