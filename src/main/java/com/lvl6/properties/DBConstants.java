@@ -9,6 +9,7 @@ public class DBConstants {
 	public static final String TABLE_BATTLE_ITEM_CONFIG = "battle_item_config";
 	public static final String TABLE_BATTLE_ITEM_FOR_USER = "battle_item_for_user";
 	public static final String TABLE_BATTLE_ITEM_QUEUE_FOR_USER = "battle_item_queue_for_user";
+	public static final String TABLE_BATTLE_REPLAY_FOR_USER = "battle_replay_for_user";
 	public static final String TABLE_BOARD_CONFIG = "board_config";
 	public static final String TABLE_BOARD_OBSTACLE_CONFIG = "board_obstacle_config";
 	public static final String TABLE_BOARD_PROPERTY_CONFIG = "board_property_config";
@@ -185,6 +186,12 @@ public class DBConstants {
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME = "elapsed_time";
+
+	/*BATTLE ITEM FOR USER*/
+	public static final String BATTLE_REPLAY_FOR_USER__ID = GENERIC__ID;
+	public static final String BATTLE_REPLAY_FOR_USER__CREATOR_ID = "user_id";
+	public static final String BATTLE_REPLAY_FOR_USER__REPLAY = "replay";
+	public static final String BATTLE_REPLAY_FOR_USER__CREATE_TIME = "create_time";
 
 	/*BOOSTER PACK PURCHASE HISTORY*/
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
