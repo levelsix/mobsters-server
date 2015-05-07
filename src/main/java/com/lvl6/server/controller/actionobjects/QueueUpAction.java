@@ -188,6 +188,7 @@ public class QueueUpAction {
 	private void getQueuedOpponentIds(int numNeeded, List<EloPair> eloPairList) {
 		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil.retrievePvpUsers(
 				eloPairList, clientDate, numNeeded, userIdBlackList);
+		log.info("PROSPECTIVE DEFENDERS: {}", prospectiveDefenders.size());
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
