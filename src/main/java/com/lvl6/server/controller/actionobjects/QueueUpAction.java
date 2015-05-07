@@ -197,6 +197,7 @@ public class QueueUpAction {
 		queuedOpponentIdsList = new ArrayList<String>();
 
 		for(PvpUser pUser : prospectiveDefenders) {
+			log.info("PUSER ID: " + pUser.getUserId());
 			queuedOpponentIdsList.add(pUser.getUserId());
 		}
 		
