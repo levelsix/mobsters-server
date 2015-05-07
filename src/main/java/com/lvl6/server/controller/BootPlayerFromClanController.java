@@ -186,7 +186,7 @@ public class BootPlayerFromClanController extends EventController {
 
 	private boolean checkLegitBoot(Builder resBuilder, boolean lockedClan,
 			User user, User playerToBoot, List<Integer> clanSizeContainer) {
-
+log.info("here");
 		if (!lockedClan) {
 			log.error("couldn't obtain clan lock");
 			return false;
@@ -213,7 +213,7 @@ public class BootPlayerFromClanController extends EventController {
 
 		Set<String> uniqUserIds = getAuthorizedClanMembers(leaderStatus,
 				jrLeaderStatus, userIdsToStatuses);
-
+		log.info("here1");
 		String userId = user.getId();
 		if (!uniqUserIds.contains(userId)) {
 			resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_NOT_AUTHORIZED);
@@ -233,7 +233,7 @@ public class BootPlayerFromClanController extends EventController {
 							playerToBootClanId, user.getClanId()));
 			return false;
 		}
-
+		log.info("here2");
 		clanSizeContainer.add(userIdsToStatuses.size());
 		resBuilder.setStatus(BootPlayerFromClanStatus.SUCCESS);
 		return true;
@@ -260,6 +260,7 @@ public class BootPlayerFromClanController extends EventController {
 	private boolean writeChangesToDB(User user, User playerToBoot, int clanSize) {
 		String userId = playerToBoot.getId();
 		String clanId = playerToBoot.getClanId();
+		log.info("here3");
 		if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
 			log.error(
 					"can't delete user clan info for playerToBoot with id={} \t and clanId={}",
@@ -267,13 +268,14 @@ public class BootPlayerFromClanController extends EventController {
 
 			return false;
 		}
+		log.info("here4");
 		if (!playerToBoot.updateRelativeCoinsAbsoluteClan(0, null)) {
 			log.error("can't change playerToBoot={} clan id to nothing",
 					playerToBoot);
 
 			return false;
 		}
-
+		log.info("here5");
 		Date lastChatPost = clanChatPostRetrieveUtil.getLastChatPost(clanId);
 
 		if (null == lastChatPost) {

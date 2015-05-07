@@ -34,6 +34,10 @@ public class BootPlayerFromClanRequestEvent extends RequestEvent {
 	public BootPlayerFromClanRequestProto getBootPlayerFromClanRequestProto() {
 		return bootPlayerFromClanRequestProto;
 	}
+	
+	public void setBootPlayerFromClanRequestProto(BootPlayerFromClanRequestProto bpfcrp) {
+		this.bootPlayerFromClanRequestProto = bpfcrp;
+	}
 
 	@Override
 	public String toString() {

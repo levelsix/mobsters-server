@@ -23,7 +23,7 @@
 //import com.lvl6.properties.ControllerConstants;
 //import com.lvl6.pvp.HazelcastPvpUtil;
 //
-//public class LeaderBoardUtilImpl implements LeaderBoardUtil {
+//public class LeaderBoardUtilImpl implements h {
 //
 //	Logger log = LoggerFactory.getLogger(getClass());
 //

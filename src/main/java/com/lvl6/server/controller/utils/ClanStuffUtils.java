@@ -11,10 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanMemberTeamDonation;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
@@ -22,6 +25,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
