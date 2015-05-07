@@ -3,8 +3,10 @@ package com.lvl6.server.controller.utils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanMemberTeamDonation;
+import com.lvl6.info.User;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
@@ -22,6 +25,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -163,6 +167,25 @@ public class ClanStuffUtils {
 			cmtd.setTimeOfSolicitation(new Date(cmtdp.getTimeOfSolicitation()));
 		}
 		return cmtd;
+	}
+	
+	public Set<String> getAuthorizedClanMembers(User user, 
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			Map<String, String> userIdsToStatuses,
+			String leaderStatus, String jrLeaderStatus) {
+		Set<String> uniqUserIds = new HashSet<String>();
+		if (null != userIdsToStatuses && !userIdsToStatuses.isEmpty()) {
+
+			//gather up only the leader or jr leader userIds
+			for (String userId : userIdsToStatuses.keySet()) {
+				String status = userIdsToStatuses.get(userId);
+				if (leaderStatus.equals(status)
+						|| jrLeaderStatus.equals(status)) {
+					uniqUserIds.add(userId);
+				}
+			}
+		}
+		return uniqUserIds;
 	}
 
 }

@@ -34,6 +34,10 @@ public class LeaveClanRequestEvent extends RequestEvent {
 	public LeaveClanRequestProto getLeaveClanRequestProto() {
 		return leaveClanRequestProto;
 	}
+	
+	public void setLeaveClanRequestProto(LeaveClanRequestProto lcrp) {
+		this.leaveClanRequestProto = lcrp;
+	}
 
 	@Override
 	public String toString() {

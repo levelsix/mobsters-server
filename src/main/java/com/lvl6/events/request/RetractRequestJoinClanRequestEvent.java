@@ -35,6 +35,10 @@ public class RetractRequestJoinClanRequestEvent extends RequestEvent {
 	public RetractRequestJoinClanRequestProto getRetractRequestJoinClanRequestProto() {
 		return retractRequestJoinClanRequestProto;
 	}
+	
+	public void setRetractRequestJoinClanRequestProto(RetractRequestJoinClanRequestProto rrjcrp) {
+		this.retractRequestJoinClanRequestProto = rrjcrp;
+	}
 
 	@Override
 	public String toString() {

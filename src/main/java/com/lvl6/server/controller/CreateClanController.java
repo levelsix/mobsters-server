@@ -177,18 +177,6 @@ public class CreateClanController extends EventController {
 		miscMethods.writeGlobalNotification(createClanNotification, server);
 	}
 
-	private void setClan(Clan createdClan, String clanId, String name,
-			Timestamp createTime, String description, String tag,
-			boolean requestToJoinRequired, int clanIconId) {
-		createdClan.setId(clanId);
-		createdClan.setName(name);
-		createdClan.setCreateTime(createTime);
-		createdClan.setDescription(description);
-		createdClan.setTag(tag);
-		createdClan.setRequestToJoinRequired(requestToJoinRequired);
-		createdClan.setClanIconId(clanIconId);
-	}
-
 	private void updateClanCache(Clan clan) {
 		String clanId = clan.getId();
 		//need to account for this user creating clan
