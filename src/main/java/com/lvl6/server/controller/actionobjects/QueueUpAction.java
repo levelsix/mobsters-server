@@ -177,11 +177,11 @@ public class QueueUpAction {
 	
 	private List<EloPair> createListOfEloPairs() {
 		List<EloPair> eloPairList = new ArrayList<EloPair>();
-		eloPairList.add(new EloPair(1100, 1200));
-		eloPairList.add(new EloPair(1100, 1200));
-		eloPairList.add(new EloPair(1100, 1200));
-		eloPairList.add(new EloPair(1100, 1200));
-		eloPairList.add(new EloPair(1100, 1200));
+		eloPairList.add(new EloPair(1100, 1120));
+		eloPairList.add(new EloPair(1120, 1140));
+		eloPairList.add(new EloPair(1140, 1160));
+		eloPairList.add(new EloPair(1160, 1180));
+		eloPairList.add(new EloPair(1180, 1200));
 		return eloPairList;
 	}
 
