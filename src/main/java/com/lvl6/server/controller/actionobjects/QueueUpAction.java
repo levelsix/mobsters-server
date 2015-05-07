@@ -160,17 +160,31 @@ public class QueueUpAction {
 		boolean showBotsBelowSomeElo = serverToggleRetrieveUtils
 				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__PVP_BOTS_ONLY_BELOW_SOME_ELO);
 		boolean pvpBotsOnly = showBotsBelowSomeElo && attackerBelowSomeElo;
-
+		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
+		
 		if (!pvpBotsOnly) {
 			//get the users that the attacker will fight
-			getQueuedOpponentIds();
+			getQueuedOpponentIds(numNeeded, listOfEloPairs);
+		}
+		else {
+			//get half bots and half real players
+			getQueuedOpponentIds(numNeeded/2, createListOfEloPairs());
 		}
 	}
+	
+	private List<EloPair> createListOfEloPairs() {
+		List<EloPair> eloPairList = new ArrayList<EloPair>();
+		eloPairList.add(new EloPair(1100, 1200));
+		eloPairList.add(new EloPair(1100, 1200));
+		eloPairList.add(new EloPair(1100, 1200));
+		eloPairList.add(new EloPair(1100, 1200));
+		eloPairList.add(new EloPair(1100, 1200));
+		return eloPairList;
+	}
 
-	private void getQueuedOpponentIds() {
-		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
+	private void getQueuedOpponentIds(int numNeeded, List<EloPair> eloPairList) {
 		Set<PvpUser> prospectiveDefenders = hazelcastPvpUtil.retrievePvpUsers(
-				listOfEloPairs, clientDate, numNeeded, userIdBlackList);
+				eloPairList, clientDate, numNeeded, userIdBlackList);
 
 		int numDefenders = prospectiveDefenders.size();
 		//		log.info("users returned from hazelcast pvp util. users={}", prospectiveDefenders);
