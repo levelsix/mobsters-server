@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -277,6 +278,7 @@ public class QueueUpController extends EventController {
 
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 		List<String> queuedOpponentIdsList = qua.getQueuedOpponentIdsList();
+		Collections.shuffle(queuedOpponentIdsList);
 		if (null != queuedOpponentIdsList && !queuedOpponentIdsList.isEmpty()) {
 			log.info("there are people to attack!");
 
