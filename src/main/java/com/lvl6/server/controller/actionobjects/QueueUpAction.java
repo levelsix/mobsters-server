@@ -164,11 +164,14 @@ public class QueueUpAction {
 		
 		if (!pvpBotsOnly) {
 			//get the users that the attacker will fight
+			log.info("im here1");
 			getQueuedOpponentIds(numNeeded, listOfEloPairs);
 		}
 		else {
 			//get half bots and half real players
+			log.info("im here2");
 			getQueuedOpponentIds(numNeeded/2, createListOfEloPairs());
+			log.info("how many real users i got: ", queuedOpponentIdsList.size());
 		}
 	}
 	
