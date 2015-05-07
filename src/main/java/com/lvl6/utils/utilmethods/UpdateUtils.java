@@ -2069,6 +2069,7 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	@Override
 	public boolean updateUserClanGiftHasBeenCollected(String userId, List<ClanGiftForUser> cgfuList) {
 		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
 
@@ -2110,12 +2111,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return true;
 
-		
-		
+
+
 	}
-
-
-
-
 
 }

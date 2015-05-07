@@ -79,7 +79,6 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
 	private Map<String, Integer> attackerIdsToProspectiveOilWinnings;
 
-	//Extracted from Startup
 	@Override
 	public void setUp(StartUpResource fillMe) {
 		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
