@@ -104,9 +104,6 @@ public class PurchaseBoosterPackController extends EventController {
 	protected UpdateUtil updateUtil;
 	
 	@Autowired
-	protected BoosterItemUtils boosterItemUtils;
-	
-	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")

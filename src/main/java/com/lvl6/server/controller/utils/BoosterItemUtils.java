@@ -81,19 +81,20 @@ public class BoosterItemUtils {
 		return gachaCreditsReward;
 	}
 
-	//monsterIdsToNumPieces or completeUserMonsters will be populated
-	public static String createUpdateUserMonsterArguments(String userId,
-			int boosterPackId, List<BoosterItem> boosterItems,
-			Map<Integer, Integer> monsterIdsToNumPieces,
-			List<MonsterForUser> completeUserMonsters, Date now,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			MonsterRetrieveUtils monsterRetrieveUtils,
-			MonsterStuffUtils monsterStuffUtils) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
-		sb.append(" ");
-		sb.append(boosterPackId);
-		sb.append(" boosterItemIds ");
+//	//monsterIdsToNumPieces or completeUserMonsters will be populated
+//	public static String createUpdateUserMonsterArguments(String userId,
+//			int boosterPackId, List<BoosterItem> boosterItems,
+//			Map<Integer, Integer> monsterIdsToNumPieces,
+//			List<MonsterForUser> completeUserMonsters, Date now,
+//			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+//			MonsterRetrieveUtils monsterRetrieveUtils,
+//			MonsterStuffUtils monsterStuffUtils) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
+//		sb.append(" ");
+//		sb.append(boosterPackId);
+//		sb.append(" boosterItemIds ");
+//		
 
 //	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
 //			List<BoosterItem> itemsUserReceives,
