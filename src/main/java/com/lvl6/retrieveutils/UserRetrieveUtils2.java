@@ -188,7 +188,7 @@ public class UserRetrieveUtils2 {
 	}
 
 	public Map<String, User> getUsersByIds(Collection<String> userIds) {
-		log.debug("retrieving users with userIds " + userIds);
+		log.debug("retrieving users with userIds {}", userIds);
 
 		if (userIds == null || userIds.size() <= 0) {
 			return new HashMap<String, User>();

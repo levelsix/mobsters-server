@@ -12,7 +12,7 @@
 	<appender name="file"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>DEBUG</level>
+			<level>INFO</level>
 		</filter>
 		<file>${lvl6.server.log.location}.log</file>
 		<Append>true</Append>

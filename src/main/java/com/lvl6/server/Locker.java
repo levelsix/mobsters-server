@@ -313,6 +313,7 @@ public class Locker {
 				}
 			} catch (Exception e) {
 				log.error("Error removing stale lock for clan " + key, e);
+				log.error("error removing stale lock for clan: lockmap {}", lockMap);
 			}
 		}
 	}

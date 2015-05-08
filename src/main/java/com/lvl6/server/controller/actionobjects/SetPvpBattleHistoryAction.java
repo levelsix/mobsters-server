@@ -79,7 +79,6 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
 	private Map<String, Integer> attackerIdsToProspectiveOilWinnings;
 
-	//Extracted from Startup
 	@Override
 	public void setUp(StartUpResource fillMe) {
 		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
@@ -87,15 +86,15 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
 		historyList = pvpBattleHistoryRetrieveUtil.getRecentNBattlesForUserId(
 				userId, n);
-		log.info(String.format("historyList=%s", historyList));
+//		log.info("historyList={}", historyList);
 
 		userIds = pvpBattleHistoryRetrieveUtil
 				.getUserIdsFromHistory(historyList);
-		log.info(String.format("attacker and defender ids=%s", userIds));
+//		log.info("attacker and defender ids={}", userIds);
 
 		attackerIds = pvpBattleHistoryRetrieveUtil
 				.getAttackerIdsFromHistory(historyList);
-		log.info(String.format("attacker ids=%s", attackerIds));
+//		log.info("attacker ids={}", attackerIds);
 
 		if (null == historyList || historyList.isEmpty()) {
 			log.info("no valid {} pvp battles for user. ", n);
