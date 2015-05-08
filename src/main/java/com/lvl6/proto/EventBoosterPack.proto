@@ -26,6 +26,9 @@ message PurchaseBoosterPackRequestProto {
 	optional bool dailyFreeBoosterPack = 4;
 	
 	optional bool buyingInBulk = 5; //cant be true when getting rigged pack
+	
+	optional int32 gemsSpent = 6;
+	optional int32 gachaCreditsChange = 7;
 }
 
 message PurchaseBoosterPackResponseProto {
