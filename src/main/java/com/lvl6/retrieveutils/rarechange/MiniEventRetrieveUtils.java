@@ -66,8 +66,8 @@ public class MiniEventRetrieveUtils {
 	{
 		@Override
 		public int compare(MiniEvent o1, MiniEvent o2) {
-			long o1Time = o1.getStartTime().getTime();
-			long o2Time = o2.getStartTime().getTime();
+			long o1Time = o1.getEndTime().getTime();
+			long o2Time = o2.getEndTime().getTime();
 			if ( o1Time < o2Time ) {
 				return -1;
 			} else if ( o1Time > o2Time ) {
@@ -197,6 +197,8 @@ public class MiniEventRetrieveUtils {
 
 		meStartTimeTree = meStartTimeTreeTemp;
 		meEndTimeTree = meEndTimeTreeTemp;
+
+//		MiniEvent me = getCurrentlyActiveMiniEvent(new Date());
 	}
 
 	private MiniEvent convertRSRowToMiniEvent(ResultSet rs)
