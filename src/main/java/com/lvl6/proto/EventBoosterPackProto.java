@@ -90,6 +90,24 @@ public final class EventBoosterPackProto {
      * </pre>
      */
     boolean getBuyingInBulk();
+
+    /**
+     * <code>optional int32 gemsSpent = 6;</code>
+     */
+    boolean hasGemsSpent();
+    /**
+     * <code>optional int32 gemsSpent = 6;</code>
+     */
+    int getGemsSpent();
+
+    /**
+     * <code>optional int32 gachaCreditsChange = 7;</code>
+     */
+    boolean hasGachaCreditsChange();
+    /**
+     * <code>optional int32 gachaCreditsChange = 7;</code>
+     */
+    int getGachaCreditsChange();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PurchaseBoosterPackRequestProto}
@@ -174,6 +192,16 @@ public final class EventBoosterPackProto {
             case 40: {
               bitField0_ |= 0x00000010;
               buyingInBulk_ = input.readBool();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              gachaCreditsChange_ = input.readInt32();
               break;
             }
           }
@@ -327,12 +355,44 @@ public final class EventBoosterPackProto {
       return buyingInBulk_;
     }
 
+    public static final int GEMSSPENT_FIELD_NUMBER = 6;
+    private int gemsSpent_;
+    /**
+     * <code>optional int32 gemsSpent = 6;</code>
+     */
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 gemsSpent = 6;</code>
+     */
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+
+    public static final int GACHACREDITSCHANGE_FIELD_NUMBER = 7;
+    private int gachaCreditsChange_;
+    /**
+     * <code>optional int32 gachaCreditsChange = 7;</code>
+     */
+    public boolean hasGachaCreditsChange() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 gachaCreditsChange = 7;</code>
+     */
+    public int getGachaCreditsChange() {
+      return gachaCreditsChange_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       boosterPackId_ = 0;
       clientTime_ = 0L;
       dailyFreeBoosterPack_ = false;
       buyingInBulk_ = false;
+      gemsSpent_ = 0;
+      gachaCreditsChange_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -362,6 +422,12 @@ public final class EventBoosterPackProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBool(5, buyingInBulk_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, gachaCreditsChange_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -390,6 +456,14 @@ public final class EventBoosterPackProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, buyingInBulk_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, gachaCreditsChange_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -523,6 +597,10 @@ public final class EventBoosterPackProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         buyingInBulk_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        gachaCreditsChange_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -575,6 +653,14 @@ public final class EventBoosterPackProto {
           to_bitField0_ |= 0x00000010;
         }
         result.buyingInBulk_ = buyingInBulk_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.gachaCreditsChange_ = gachaCreditsChange_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -605,6 +691,12 @@ public final class EventBoosterPackProto {
         }
         if (other.hasBuyingInBulk()) {
           setBuyingInBulk(other.getBuyingInBulk());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasGachaCreditsChange()) {
+          setGachaCreditsChange(other.getGachaCreditsChange());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -945,6 +1037,70 @@ public final class EventBoosterPackProto {
       public Builder clearBuyingInBulk() {
         bitField0_ = (bitField0_ & ~0x00000010);
         buyingInBulk_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int gemsSpent_ ;
+      /**
+       * <code>optional int32 gemsSpent = 6;</code>
+       */
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 gemsSpent = 6;</code>
+       */
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 6;</code>
+       */
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000020;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 6;</code>
+       */
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gachaCreditsChange_ ;
+      /**
+       * <code>optional int32 gachaCreditsChange = 7;</code>
+       */
+      public boolean hasGachaCreditsChange() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 gachaCreditsChange = 7;</code>
+       */
+      public int getGachaCreditsChange() {
+        return gachaCreditsChange_;
+      }
+      /**
+       * <code>optional int32 gachaCreditsChange = 7;</code>
+       */
+      public Builder setGachaCreditsChange(int value) {
+        bitField0_ |= 0x00000040;
+        gachaCreditsChange_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gachaCreditsChange = 7;</code>
+       */
+      public Builder clearGachaCreditsChange() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        gachaCreditsChange_ = 0;
         onChanged();
         return this;
       }
@@ -2730,24 +2886,25 @@ public final class EventBoosterPackProto {
       "\n\026EventBoosterPack.proto\022\016com.lvl6.proto" +
       "\032\026BoosterPackStuff.proto\032\nItem.proto\032\022Mo" +
       "nsterStuff.proto\032\014Reward.proto\032\nUser.pro" +
-      "to\"\262\001\n\037PurchaseBoosterPackRequestProto\0220" +
+      "to\"\341\001\n\037PurchaseBoosterPackRequestProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
       "serProto\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nclien" +
       "tTime\030\003 \001(\003\022\034\n\024dailyFreeBoosterPack\030\004 \001(" +
-      "\010\022\024\n\014buyingInBulk\030\005 \001(\010\"\361\002\n PurchaseBoos" +
-      "terPackResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022Z\n\006status",
-      "\030\002 \001(\0162J.com.lvl6.proto.PurchaseBoosterP" +
-      "ackResponseProto.PurchaseBoosterPackStat" +
-      "us\022/\n\005prize\030\004 \003(\0132 .com.lvl6.proto.Boost" +
-      "erItemProto\022/\n\006reward\030\006 \001(\0132\037.com.lvl6.p" +
-      "roto.UserRewardProto\"]\n\031PurchaseBoosterP" +
-      "ackStatus\022\013\n\007SUCCESS\020\001\022#\n\037FAIL_INSUFFICI" +
-      "ENT_GACHA_CREDITS\020\002\022\016\n\nFAIL_OTHER\020\003\"q\n(R" +
-      "eceivedRareBoosterPurchaseResponseProto\022" +
-      "E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.lvl6." +
-      "proto.RareBoosterPurchaseProtoB\027B\025EventB",
-      "oosterPackProto"
+      "\010\022\024\n\014buyingInBulk\030\005 \001(\010\022\021\n\tgemsSpent\030\006 \001" +
+      "(\005\022\032\n\022gachaCreditsChange\030\007 \001(\005\"\361\002\n Purch" +
+      "aseBoosterPackResponseProto\0220\n\006sender\030\001 ",
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022Z\n" +
+      "\006status\030\002 \001(\0162J.com.lvl6.proto.PurchaseB" +
+      "oosterPackResponseProto.PurchaseBoosterP" +
+      "ackStatus\022/\n\005prize\030\004 \003(\0132 .com.lvl6.prot" +
+      "o.BoosterItemProto\022/\n\006reward\030\006 \001(\0132\037.com" +
+      ".lvl6.proto.UserRewardProto\"]\n\031PurchaseB" +
+      "oosterPackStatus\022\013\n\007SUCCESS\020\001\022#\n\037FAIL_IN" +
+      "SUFFICIENT_GACHA_CREDITS\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003\"q\n(ReceivedRareBoosterPurchaseRespons" +
+      "eProto\022E\n\023rareBoosterPurchase\030\001 \001(\0132(.co",
+      "m.lvl6.proto.RareBoosterPurchaseProtoB\027B" +
+      "\025EventBoosterPackProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2771,7 +2928,7 @@ public final class EventBoosterPackProto {
     internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", "BuyingInBulk", });
+        new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", "BuyingInBulk", "GemsSpent", "GachaCreditsChange", });
     internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable = new
