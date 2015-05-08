@@ -559,8 +559,8 @@ class StartupService extends LazyLogging{
 						monsterStuffUtil,
 						createInfoProtoUtils,
 						serverToggleRetrieveUtil,
-            monsterLevelInfoRetrieveUtil,
-            battleReplayForUserRetrieveUtil);
+            			monsterLevelInfoRetrieveUtil,
+			            battleReplayForUserRetrieveUtil);
 				spbha.setUp(fillMe);
 
 				//CLAN DATA
@@ -803,7 +803,7 @@ class StartupService extends LazyLogging{
 								logger.info(s"numDeleted enhancements: $numDeleted")
     						}
     					}catch{
-              case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
+              				case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
     					}
     				}else {
     					val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
