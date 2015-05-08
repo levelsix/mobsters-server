@@ -134,6 +134,8 @@ public class PurchaseBoosterPackController extends EventController {
 		Date now = new Date(reqProto.getClientTime());
 		Timestamp nowTimestamp = new Timestamp(now.getTime());
 		boolean buyingInBulk = reqProto.getBuyingInBulk();
+		int gemsSpent = reqProto.getGemsSpent();
+		int gachaCreditsChange = reqProto.getGachaCreditsChange();
 
 		boolean freeBoosterPack = reqProto.getDailyFreeBoosterPack();
 		
@@ -176,7 +178,7 @@ public class PurchaseBoosterPackController extends EventController {
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
 					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil,
-					serverToggleRetrieveUtils, boosterItemUtils);
+					serverToggleRetrieveUtils, boosterItemUtils, gemsSpent, gachaCreditsChange);
 
 			pbpa.execute(resBuilder);
 

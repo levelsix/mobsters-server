@@ -48,6 +48,7 @@ message PurchaseBoosterPackResponseProto {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_GACHA_CREDITS = 2;
 		FAIL_OTHER = 3;
+		FAIL_INSUFFICIENT_GEMS  = 4;
 	}
 }
 
