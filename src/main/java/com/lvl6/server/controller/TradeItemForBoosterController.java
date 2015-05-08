@@ -402,7 +402,7 @@ public class TradeItemForBoosterController extends EventController {
 
         //TODO: protofy the rewards
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
+                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, 0);
         log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
     }
