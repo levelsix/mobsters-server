@@ -246,7 +246,6 @@ public class PurchaseBoosterPackAction {
 		if(buyingInBulk) {
 			gachaCreditsPrice = gachaCreditsPrice * ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE;
 		}
-
 		return true;
 	}
 
@@ -276,7 +275,6 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-
 		selectBoosterItems();
 
 		boolean legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
