@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
-
 @Component
 @DependsOn("gameServer")
 public class BattleReplayForUserRetrieveUtil {
@@ -41,6 +41,7 @@ public class BattleReplayForUserRetrieveUtil {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	/*
 	public List<BattleReplayForUser> getUserBattleReplaysForUser(String userId) {
 		log.debug(String.format("retrieving user battle items for userId %s",
 				userId));
@@ -163,6 +164,55 @@ public class BattleReplayForUserRetrieveUtil {
 		}
 
 		return userBattleReplays;
+	}
+	*/
+
+	public List<BattleReplayForUser> getUserBattleReplays(
+			Collection<String> replayIds)
+	{
+		log.debug("retrieving user battle items for ids {}", replayIds);
+		int amount = replayIds.size();
+		List<String> questions = Collections.nCopies(amount, "?");
+		String questionMarkStr = StringUtils.csvList(questions);
+
+		String query = String.format("select * from %s where %s in (%s)", TABLE_NAME,
+				DBConstants.BATTLE_REPLAY_FOR_USER__ID, questionMarkStr);
+
+		List<BattleReplayForUser> userBattleReplays = null;
+		try {
+			userBattleReplays = this.jdbcTemplate.query(query, replayIds.toArray(), rowMapper);
+
+		} catch (Exception e) {
+			log.error("battle item for user retrieve db error.", e);
+			userBattleReplays = new ArrayList<BattleReplayForUser>();
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return userBattleReplays;
+	}
+
+	public Map<String, BattleReplayForUser> getBattleReplayIdsToReplays(
+			Collection<String> replayIds) {
+		log.debug("retrieving map of battle item id to userbattleReplays for ids {}",
+				replayIds);
+
+		Map<String, BattleReplayForUser> battleReplayIdToBattleReplayForUser = new HashMap<String, BattleReplayForUser>();
+		try {
+
+			List<BattleReplayForUser> bifuList = getUserBattleReplays(replayIds);
+
+			for (BattleReplayForUser bifu : bifuList) {
+				String battleReplayId = bifu.getId();
+				battleReplayIdToBattleReplayForUser.put(battleReplayId, bifu);
+			}
+		} catch (Exception e) {
+			log.error(
+					String.format(
+							"battle item for user retrieve db error. ids=%s",
+							replayIds), e);
+		}
+
+		return battleReplayIdToBattleReplayForUser;
 	}
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data

@@ -115,6 +115,7 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
 import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
@@ -459,6 +460,9 @@ public class StartupControllerOld extends EventController {
     @Autowired
     protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
 
+    @Autowired
+    protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
+
 	public StartupControllerOld() {
 		numAllocatedThreads = 3;
 	}
@@ -479,8 +483,8 @@ public class StartupControllerOld extends EventController {
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event)
 				.getStartupRequestProto();
-		log.info(String.format("Processing startup request reqProto:%s",
-				reqProto));
+		log.info("Processing startup request reqProto:{}",
+				reqProto);
 		UpdateStatus updateStatus;
 		String udid = reqProto.getUdid();
 		String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId()
@@ -846,7 +850,8 @@ public class StartupControllerOld extends EventController {
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					monsterForUserRetrieveUtils, clanRetrieveUtils,
 					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
-					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils);
+					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils,
+					battleReplayForUserRetrieveUtil);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 

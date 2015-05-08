@@ -644,6 +644,7 @@ public class DBConstants {
 	public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
 	//public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 	public static final String PVP_BATTLE_HISTORY__CLAN_AVENGED = "clan_avenged";
+	public static final String PVP_BATTLE_HISTORY__REPLAY_ID = "replay_id";
 
 	/*PVP_BOARD_OBSTACLE_FOR_USER*/
 	public static final String PVP_BOARD_OBSTACLE_FOR_USER__ID = GENERIC__ID;

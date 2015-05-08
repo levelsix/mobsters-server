@@ -159,6 +159,8 @@ public class PvpBattleHistoryRetrieveUtil2 {
 						.add(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER);
 				columnsSelected
 						.add(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED);
+				columnsSelected
+				.add(DBConstants.PVP_BATTLE_HISTORY__REPLAY_ID);
 			}
 			return columnsSelected;
 		}

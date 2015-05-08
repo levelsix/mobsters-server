@@ -16,10 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.google.protobuf.ByteString;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
@@ -152,6 +154,7 @@ public class EndPvpBattleController extends EventController {
 		int attackerMaxCash = senderProtoMaxResources.getMaxCash();
 		Timestamp curTime = new Timestamp(reqProto.getClientTime());
 		Date curDate = new Date(curTime.getTime());
+		ByteString replay = reqProto.getReplay();
 
 		if (!attackerWon && oilStolen != 0) {
 			log.error("oilStolen should be 0 since attacker lost!\t client sent {}",
@@ -218,7 +221,7 @@ public class EndPvpBattleController extends EventController {
 					defenderId, attackerAttacked, attackerWon, oilStolen,
 					cashStolen, nuPvpDmgMultiplier, monsterDropIds,
 					attackerMaxOil, attackerMaxCash, reqProto.getClientTime(),
-					curDate, curTime, resourceUtil, userRetrieveUtil,
+					curDate, curTime, replay, resourceUtil, userRetrieveUtil,
 					pvpBattleForUserRetrieveUtil,
 					pvpLeagueForUserRetrieveUtil, clanRetrieveUtil,
 					monsterForUserRetrieveUtil, monsterStuffUtils,
@@ -232,6 +235,8 @@ public class EndPvpBattleController extends EventController {
 			Map<String, Map<String, Integer>> previousCurrencyMap = new HashMap<String, Map<String, Integer>>();
 
 			PvpBattleHistory battleJustEnded = epba.getPbh();
+			Map<String, BattleReplayForUser> replayIdToReplay = epba
+					.getReplayIdToReplay();
 			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<PvpHistoryProto> historyProtoList = null;
 				if (null != battleJustEnded) {
@@ -239,7 +244,8 @@ public class EndPvpBattleController extends EventController {
 					historyProtoList = createInfoProtoUtils
 							.createAttackedOthersPvpHistoryProto(attackerId,
 									epba.getIdToUser(),
-									Collections.singletonList(battleJustEnded));
+									Collections.singletonList(battleJustEnded),
+									replayIdToReplay);
 				}
 				if (null != historyProtoList && !historyProtoList.isEmpty()) {
 					PvpHistoryProto attackedOtherHistory = historyProtoList
@@ -261,7 +267,7 @@ public class EndPvpBattleController extends EventController {
 				if (null != epba.getDefender()) {
 					if (null != battleJustEnded) {
 						PvpHistoryProto php = createPvpProto(attacker,
-								defender, curDate, battleJustEnded);
+								defender, curDate, battleJustEnded, replayIdToReplay);
 						log.info("gotAttackedHistory {}", php);
 						resBuilder.setBattleThatJustEnded(php);
 					}
@@ -408,7 +414,8 @@ public class EndPvpBattleController extends EventController {
 
 	//TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
 	private PvpHistoryProto createPvpProto(User attacker, User defender,
-			Date curDate, PvpBattleHistory gotAttackedHistory) {
+			Date curDate, PvpBattleHistory gotAttackedHistory,
+			Map<String, BattleReplayForUser> replayIdToReplay) {
 		if (null == defender) {
 			return null;
 		}
@@ -473,7 +480,8 @@ public class EndPvpBattleController extends EventController {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings);
+						attackerIdsToProspectiveOilWinnings,
+						replayIdToReplay);
 
 		if (null != historyProtoList && !historyProtoList.isEmpty()) {
 			PvpHistoryProto pp = historyProtoList.get(0);
