@@ -48,6 +48,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.EndPvpBattleAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -68,6 +69,9 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtil;
+
+	@Autowired
+	protected ResourceUtil resourceUtil;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -214,7 +218,7 @@ public class EndPvpBattleController extends EventController {
 					defenderId, attackerAttacked, attackerWon, oilStolen,
 					cashStolen, nuPvpDmgMultiplier, monsterDropIds,
 					attackerMaxOil, attackerMaxCash, reqProto.getClientTime(),
-					curDate, curTime, userRetrieveUtil,
+					curDate, curTime, resourceUtil, userRetrieveUtil,
 					pvpBattleForUserRetrieveUtil,
 					pvpLeagueForUserRetrieveUtil, clanRetrieveUtil,
 					monsterForUserRetrieveUtil, monsterStuffUtils,

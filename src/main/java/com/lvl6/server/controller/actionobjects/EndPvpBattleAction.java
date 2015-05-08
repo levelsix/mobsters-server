@@ -24,13 +24,13 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -54,6 +54,7 @@ public class EndPvpBattleAction {
 	private long clientTime;
 	private Date curDateTime;
 	private Timestamp curTime;
+	private ResourceUtil resourceUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil;
 	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
@@ -76,7 +77,8 @@ public class EndPvpBattleAction {
 			int cashStolen, float nuPvpDmgMultiplier,
 			List<Integer> monsterDropIds, int attackerMaxOil,
 			int attackerMaxCash, long clientTime, Date curDateTime,
-			Timestamp curTime, UserRetrieveUtils2 userRetrieveUtil,
+			Timestamp curTime, ResourceUtil resourceUtil,
+			UserRetrieveUtils2 userRetrieveUtil,
 			PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			ClanRetrieveUtils2 clanRetrieveUtil,
@@ -104,6 +106,7 @@ public class EndPvpBattleAction {
 		this.clientTime = clientTime;
 		this.curDateTime = curDateTime;
 		this.curTime = curTime;
+		this.resourceUtil = resourceUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.pvpBattleForUserRetrieveUtil = pvpBattleForUserRetrieveUtil;
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
@@ -453,16 +456,17 @@ public class EndPvpBattleAction {
 		attackerEloBefore = attackerPlfu.getElo();
 		attackerPrevLeague = attackerPlfu.getPvpLeagueId();
 		attackerPrevRank = attackerPlfu.getRank();
+		int minResource = 0;
 
 		attackerEloAfter = attackerEloBefore + attackerEloChange;
 		attackerCurLeague = pvpLeagueRetrieveUtils.getLeagueIdForElo(
 				attackerEloAfter, attackerPrevLeague);
 		attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(attackerEloAfter,
 				attackerCurLeague);
-		attackerCashChange = calculateMaxResourceChange(attacker,
-				attackerMaxCash, cashStolen, attackerWon, MiscMethods.cash);
-		attackerOilChange = calculateMaxResourceChange(attacker,
-				attackerMaxOil, oilStolen, attackerWon, MiscMethods.oil);
+		attackerCashChange = resourceUtil.calculateMaxResourceChange(attacker,
+				attackerMaxCash, minResource, cashStolen, attackerWon, MiscMethods.cash);
+		attackerOilChange = resourceUtil.calculateMaxResourceChange(attacker,
+				attackerMaxOil, minResource, oilStolen, attackerWon, MiscMethods.oil);
 
 		if (attackerWon) {
 			attackerAttacksWonDelta = 1;
@@ -478,85 +482,6 @@ public class EndPvpBattleAction {
 		prevCurrencies.put(MiscMethods.cash, attacker.getCash());
 		prevCurrencies.put(MiscMethods.oil, attacker.getOil());
 		prevCurrenciesMap.put(attackerId, prevCurrencies);
-	}
-
-	private int calculateMaxResourceChange(User user, int maxResource,
-			int resourceChange, boolean userWon, String resourceStr)
-	{
-		if (null == user) {
-			log.info("calculateMaxResourceChange user is null! resourceChange=0 {}",
-					resourceStr);
-			//this is for fake user
-			return 0;
-		}
-		//if user somehow has more than max cash, first treat user as having max cash,
-		//figure out the amount he gains and then subtract the extra cash he had
-		int resource;
-		if (resourceStr.equalsIgnoreCase(MiscMethods.cash)) {
-			resource = user.getCash();
-		} else {
-			resource = user.getOil();
-		}
-		int amountOverMax = calculateAmountOverMaxResource(user, resource,
-				maxResource, resourceStr);
-		if (amountOverMax > 0) {
-			log.info("calculateMaxResourceChange amount over max={}",
-					amountOverMax);
-		}
-
-		if (userWon) {
-			return calculateMaxResourceGained(user, maxResource,
-					resourceChange, resourceStr, resource, amountOverMax);
-		} else {
-			return calculateMaxResourceLost(user, maxResource, resourceChange,
-					resource, amountOverMax);
-		}
-	}
-
-	private int calculateAmountOverMaxResource(User u, int userResource,
-			int maxResource, String resource) {
-//		log.info("calculateAmountOverMaxResource resource={}",
-//				resource);
-		int resourceLoss = 0;
-		if (userResource > maxResource) {
-			log.info("wtf!!!!! user has more than max {}! user={}\t cutting him down to maxResource={}",
-					new Object[] { resource, u, maxResource } );
-			resourceLoss = userResource - maxResource;
-		}
-		return resourceLoss;
-	}
-
-	private int calculateMaxResourceGained(User user, int maxResource,
-			int resourceChange, String resourceStr, int resource,
-			int amountOverMax) {
-		log.info("calculateMaxResourceChange userWon!");
-		int curResource = Math.min(resource, maxResource); //in case user's cash is more than maxOil.
-		log.info("calculateMaxResourceChange curResource={}", curResource);
-		int maxResourceUserCanGain = maxResource - curResource;
-		log.info("calculateMaxResourceChange  maxResourceUserCanGain={}",
-				maxResourceUserCanGain);
-		int maxResourceChange = Math.min(resourceChange, maxResourceUserCanGain);
-		log.info("calculateMaxResourceChange maxResourceChange={}",
-				maxResourceChange);
-
-		//IF USER IS ABOVE maxResource, need to drag him down to maxResource
-		int actualResourceChange = maxResourceChange - amountOverMax;
-		log.info( "calculateMaxResourceChange  actualResourceChange={}",
-				actualResourceChange );
-		return actualResourceChange;
-	}
-
-	private int calculateMaxResourceLost(User user, int maxResource,
-			int resourceChange, int resource, int amountOverMax) {
-		log.info("calculateMaxResourceChange userLost!.");
-		int maxResourceUserCanLose = Math.min(resource, maxResource);
-		//always non negative number
-		int maxResourceChange = Math.min(resourceChange, maxResourceUserCanLose);
-
-		int actualResourceChange = -1 * (amountOverMax + maxResourceChange);
-		log.info( "calculateMaxResourceChange  actualResourceChange={}",
-				actualResourceChange );
-		return actualResourceChange;
 	}
 
 	private void updateAttacker() {
@@ -627,10 +552,11 @@ public class EndPvpBattleAction {
 		boolean defenderWon = !attackerWon;
 		int defenderCash = defender.getCash();
 		int defenderOil = defender.getOil();
-		defenderCashChange = calculateMaxResourceChange(defender, defenderCash,
-				cashStolen, defenderWon, MiscMethods.cash);
-		defenderOilChange = calculateMaxResourceChange(defender, defenderOil,
-				oilStolen, defenderWon, MiscMethods.oil);
+		int minResource = 0;
+		defenderCashChange = resourceUtil.calculateMaxResourceChange(defender,
+				defenderCash, minResource, cashStolen, defenderWon, MiscMethods.cash);
+		defenderOilChange = resourceUtil.calculateMaxResourceChange(defender,
+				defenderOil, minResource, oilStolen, defenderWon, MiscMethods.oil);
 		displayToDefender = true;
 
 		if (defenderWon) {
