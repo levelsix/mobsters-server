@@ -57,6 +57,8 @@ public class PurchaseBoosterPackAction {
 	private InsertUtil insertUtil;
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 	private BoosterItemUtils boosterItemUtils;
+	private int gemsSpent;
+	private int gachaCreditsChange;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
@@ -71,7 +73,7 @@ public class PurchaseBoosterPackAction {
 			boolean buyingInBulk, RewardRetrieveUtils rewardRetrieveUtils,
 			InsertUtil insertUtil,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtils, 
-			BoosterItemUtils boosterItemUtils) {
+			BoosterItemUtils boosterItemUtils, int gemsSpent, int gachaCreditsChange) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -93,6 +95,8 @@ public class PurchaseBoosterPackAction {
 		this.insertUtil = insertUtil;
 		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 		this.boosterItemUtils = boosterItemUtils;
+		this.gemsSpent = gemsSpent;
+		this.gachaCreditsChange = gachaCreditsChange;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -123,7 +127,6 @@ public class PurchaseBoosterPackAction {
 
 	private int gemReward;
 	private int gachaCreditsReward;
-	private int gachaCreditsChange;
 	
 
 	public void execute(Builder resBuilder) {
@@ -172,7 +175,6 @@ public class PurchaseBoosterPackAction {
 		if (!legitPack) {
 			return false;
 		}
-
 		return true;
 	}
 
@@ -207,10 +209,12 @@ public class PurchaseBoosterPackAction {
 
 		//check if user can afford to buy however many more user wants to buy
 		if (!freeBoosterPack) {
-			if (userGachaCredits < gachaCreditsPrice) {
-				resBuilder
-						.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
-				return false;
+			if(gemsSpent == 0) {
+				if (userGachaCredits < gachaCreditsPrice) {
+					resBuilder
+					.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
+					return false;
+				}
 			}
 		} else {
 			boolean legitFree = verifyFreeBoosterPack(resBuilder);
@@ -218,7 +222,14 @@ public class PurchaseBoosterPackAction {
 				return false;
 			}
 		}
-
+		
+		if(gemsSpent != 0) {
+			int userGems = user.getGems();
+			if(userGems < gemsSpent) {
+				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -236,7 +247,6 @@ public class PurchaseBoosterPackAction {
 		if(buyingInBulk) {
 			gachaCreditsPrice = gachaCreditsPrice * ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE;
 		}
-
 		return true;
 	}
 
@@ -266,7 +276,6 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-
 		selectBoosterItems();
 
 		boolean legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
@@ -320,15 +329,16 @@ public class PurchaseBoosterPackAction {
 		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
 		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
 
-		gachaCreditsChange = -1 * gachaCreditsPrice;
 		if (freeBoosterPack) {
 			gachaCreditsChange = 0;
 		}
 		gachaCreditsChange += gachaCreditsReward;
 
+		int gemChange = (-1 * gemsSpent) + gemReward; 
+		
 		//update user's flag concerning whether or not he's bought a rigged pack
 		//update user's last free booster pack time
-		boolean updated = user.updateBoughtBoosterPack(gemReward, gachaCreditsChange, now,
+		boolean updated = user.updateBoughtBoosterPack(gemChange, gachaCreditsChange, now,
 				freeBoosterPack, riggedPack);
 		log.info("updated, user bought boosterPack? {}", updated);
 	}
