@@ -2893,7 +2893,6 @@ public final class EventBoosterPackProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026EventBoosterPack.proto\022\016com.lvl6.proto" +
-<<<<<<< HEAD
       "\032\026BoosterPackStuff.proto\032\014Reward.proto\032\n" +
       "User.proto\"\341\001\n\037PurchaseBoosterPackReques" +
       "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
@@ -2915,28 +2914,6 @@ public final class EventBoosterPackProto {
       "to\022E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.lv",
       "l6.proto.RareBoosterPurchaseProtoB\027B\025Eve" +
       "ntBoosterPackProto"
-=======
-      "\032\026BoosterPackStuff.proto\032\nItem.proto\032\022Mo" +
-      "nsterStuff.proto\032\014Reward.proto\032\nUser.pro" +
-      "to\"\262\001\n\037PurchaseBoosterPackRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nclien" +
-      "tTime\030\003 \001(\003\022\034\n\024dailyFreeBoosterPack\030\004 \001(" +
-      "\010\022\024\n\014buyingInBulk\030\005 \001(\010\"\361\002\n PurchaseBoos" +
-      "terPackResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022Z\n\006status",
-      "\030\002 \001(\0162J.com.lvl6.proto.PurchaseBoosterP" +
-      "ackResponseProto.PurchaseBoosterPackStat" +
-      "us\022/\n\005prize\030\004 \003(\0132 .com.lvl6.proto.Boost" +
-      "erItemProto\022/\n\006reward\030\006 \001(\0132\037.com.lvl6.p" +
-      "roto.UserRewardProto\"]\n\031PurchaseBoosterP" +
-      "ackStatus\022\013\n\007SUCCESS\020\001\022#\n\037FAIL_INSUFFICI" +
-      "ENT_GACHA_CREDITS\020\002\022\016\n\nFAIL_OTHER\020\003\"q\n(R" +
-      "eceivedRareBoosterPurchaseResponseProto\022" +
-      "E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.lvl6." +
-      "proto.RareBoosterPurchaseProtoB\027B\025EventB",
-      "oosterPackProto"
->>>>>>> rebase
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
