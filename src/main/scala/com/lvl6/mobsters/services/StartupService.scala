@@ -1172,7 +1172,7 @@ class StartupService extends LazyLogging{
 		timed("StartupService.setSalePack"){
 				setStarterBuilderPackForUser(resBuilder, user);
 			}
-	}
+		}
 
 	def serviceCombinedStarterAndBuilderPack(user:User):Boolean= {
 		timed("StartupService.serviceCombinedStarterAndBuilderPack"){

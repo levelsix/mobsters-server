@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
+
 @Component
 @DependsOn("gameServer")
 public class BattleReplayForUserRetrieveUtil {
