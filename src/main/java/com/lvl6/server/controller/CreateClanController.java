@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
@@ -28,6 +27,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -65,6 +65,9 @@ public class CreateClanController extends EventController {
 	
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected ResourceUtil resourceUtil;
 	
 	
 	public CreateClanController() {
@@ -129,7 +132,7 @@ public class CreateClanController extends EventController {
 			
 			CreateClanAction cca = new CreateClanAction(userId, cashChange, gemsSpent, userRetrieveUtil,
 					insertUtil, deleteUtil, miscMethods, clanName, tag, requestToJoinRequired, 
-					description, clanIconId, clanRetrieveUtils);
+					description, clanIconId, clanRetrieveUtils, resourceUtil);
 			
 			cca.execute(resBuilder);
 

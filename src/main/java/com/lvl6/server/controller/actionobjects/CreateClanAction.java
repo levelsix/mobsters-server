@@ -17,9 +17,9 @@ import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class CreateClanAction {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -38,6 +38,7 @@ public class CreateClanAction {
 	private String description;
 	private int clanIconId;
 	private ClanRetrieveUtils2 clanRetrieveUtils;
+	private ResourceUtil resourceUtil;
 
 	public CreateClanAction(
 			String userId,
@@ -45,7 +46,8 @@ public class CreateClanAction {
 			InsertUtil insertUtil, DeleteUtil deleteUtil,
 			MiscMethods miscMethods, String clanName, String tag,
 			boolean requestToJoinRequired, String description, int clanIconId,
-			ClanRetrieveUtils2 clanRetrieveUtils) {
+			ClanRetrieveUtils2 clanRetrieveUtils,
+			ResourceUtil resourceUtil) {
 		super();
 		this.userId = userId;
 		this.cashChange = cashChange;
@@ -60,6 +62,7 @@ public class CreateClanAction {
 		this.description = description;
 		this.clanIconId = clanIconId;
 		this.clanRetrieveUtils = clanRetrieveUtils;
+		this.resourceUtil = resourceUtil;
 	}
 
 	private User user;
@@ -146,46 +149,18 @@ public class CreateClanAction {
 
 		//CHECK MONEY
 		if (0 == gemsSpent) {
-			if (!hasEnoughCash(resBuilder)) {
-				return false;
-			}
-		}
-
-		if (!hasEnoughGems(resBuilder)) {
-			return false;
-		}
-
-		resBuilder.setStatus(CreateClanStatus.SUCCESS);
-		return true;
-	}
-
-	private boolean hasEnoughCash(Builder resBuilder) {
-		//if user's aggregate cash is < cost, don't allow transaction
-		int userCash = user.getCash();
-
-		//since negative resourceChange means charge, then negative of that is
-		//the cost. If resourceChange is positive, meaning refund, user will always
-		//have more than a negative amount
-		int cashRequired = -1 * cashChange;
-		if (userCash < cashRequired) {
-			log.error("user error: user does not have enough cash. userCash="
-					+ userCash + "\t cashSpent=" + cashChange);
-			resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
-			return false;
-		}
-
-		return true;
-	}
-
-	private boolean hasEnoughGems(Builder resBuilder) {
-		if (gemsSpent > 0) {
-			int userGems = user.getGems();
-			//check if user can afford to buy however many more user wants to buy
-			if (userGems < gemsSpent) {
+			if (!resourceUtil.hasEnoughCash(user, cashChange)) {
 				resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}
+
+		if (!resourceUtil.hasEnoughGems(user, gemsSpent)) {
+			resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
+			return false;
+		}
+
+		resBuilder.setStatus(CreateClanStatus.SUCCESS);
 		return true;
 	}
 

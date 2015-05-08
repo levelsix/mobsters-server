@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
+import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 
 @Component
 public class ResourceUtil {
@@ -110,4 +112,50 @@ public class ResourceUtil {
 				actualResourceChange );
 		return actualResourceChange;
 	}
+	
+	public boolean hasEnoughCash(User user, int cashChange) {
+		//if user's aggregate cash is < cost, don't allow transaction
+		int userCash = user.getCash();
+
+		//since negative resourceChange means charge, then negative of that is
+		//the cost. If resourceChange is positive, meaning refund, user will always
+		//have more than a negative amount
+		int cashRequired = -1 * cashChange;
+		if (userCash < cashRequired) {
+			log.error("user error: user does not have enough cash. userCash="
+					+ userCash + "\t cashSpent=" + cashChange);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean hasEnoughOil(User user, int oilChange) {
+		//if user's aggregate cash is < cost, don't allow transaction
+		int userCash = user.getCash();
+
+		//since negative resourceChange means charge, then negative of that is
+		//the cost. If resourceChange is positive, meaning refund, user will always
+		//have more than a negative amount
+		int oilRequired = -1 * oilChange;
+		if (userCash < oilRequired) {
+			log.error("user error: user does not have enough cash. userCash="
+					+ userCash + "\t cashSpent=" + oilChange);
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean hasEnoughGems(User user, int gemsSpent) {
+		if (gemsSpent > 0) {
+			int userGems = user.getGems();
+			//check if user can afford to buy however many more user wants to buy
+			if (userGems < gemsSpent) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	
 }
