@@ -129,7 +129,7 @@
 		<application.release.name>Mobsters</application.release.name>
 		<wicket.mode>development</wicket.mode>
 
-		<lvl6.jedis.host>locahost</lvl6.jedis.host>
+		<lvl6.jedis.host>localhost</lvl6.jedis.host>
 		<lvl6.jedis.auth></lvl6.jedis.auth>
 		<lvl6.jedis.database>1</lvl6.jedis.database>
 
@@ -490,13 +490,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>redis.clients</groupId>
-				<artifactId>jedis</artifactId>
-				<version>2.7.2</version>
-				<type>jar</type>
-				<scope>compile</scope>
-			</dependency>
 			<dependency>
 				<groupId>com.typesafe.scala-logging</groupId>
 				<artifactId>scala-logging-slf4j_2.11</artifactId>
@@ -879,7 +872,6 @@
 		<dependency>
 			<groupId>com.typesafe.scala-logging</groupId>
 			<artifactId>scala-logging-slf4j_2.11</artifactId>
-			<version>2.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.opencsv</groupId>
@@ -1026,19 +1018,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>me.prettyprint</groupId> <artifactId>hector-core</artifactId> 
-			</dependency> -->
-		<!-- <dependency> <groupId>org.hectorclient</groupId> <artifactId>hector-core</artifactId> 
-			<exclusions> <exclusion> <artifactId>log4j</artifactId> <groupId>log4j</groupId> 
-			</exclusion> <exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
-			</exclusion> </exclusions> <exclusions> <exclusion> <artifactId>slf4j-log4j12</artifactId> 
-			<groupId>org.slf4j</groupId> </exclusion> <exclusion> <artifactId>log4j</artifactId> 
-			<groupId>log4j</groupId> </exclusion> <exclusion> <artifactId>servlet-api</artifactId> 
-			<groupId>org.mortbay.jetty</groupId> </exclusion> </exclusions> </dependency> -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
-			</dependency> -->
-		<!-- <dependency> <groupId>redis.clients</groupId> <artifactId>jedis</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>com.jayway.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
@@ -1047,14 +1026,12 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.elasticsearch</groupId> <artifactId>elasticsearch</artifactId> 
-			</dependency> -->
+
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-datetime</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-support</artifactId> 
-			</dependency> -->
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -1099,17 +1076,6 @@
 		<dependency>
 			<groupId>org.influxdb</groupId>
 			<artifactId>influxdb-java</artifactId>
-		</dependency>
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
-			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 
-			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 
-			</dependency> -->
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-http</artifactId> 
-			</dependency> -->
-
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
