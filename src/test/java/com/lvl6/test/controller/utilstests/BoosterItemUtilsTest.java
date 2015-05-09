@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ItemForUser;
@@ -36,6 +37,7 @@ import com.lvl6.server.controller.StartupControllerOld;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class BoosterItemUtilsTest {
@@ -50,6 +52,9 @@ public class BoosterItemUtilsTest {
 	private static MonsterRetrieveUtils mockedMonsterRetrieveUtils;
 	private static MonsterStuffUtils mockedMonsterStuffUtils;
 	private static InAppPurchaseSalesAction iapa;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	@BeforeClass
 	public static void setUp() {
@@ -86,6 +91,7 @@ public class BoosterItemUtilsTest {
 
 	@Test
 	public void testCheckIfMonstersExist() {
+		timeUtils.createDateAddDays(new Date(), 10);
 		Map<Integer, Monster> idsToMonsters = new HashMap<Integer, Monster>();
 		idsToMonsters.put(1, new Monster());
 		idsToMonsters.put(2, new Monster());

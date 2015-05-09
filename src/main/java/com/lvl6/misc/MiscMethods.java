@@ -1801,7 +1801,9 @@ public class MiscMethods {
 				if(sourceLanguage == null) {
 					translatedText = Translate.execute(text, recipientLanguage);
 				}
-				else translatedText = Translate.execute(text, sourceLanguage, recipientLanguage);
+				else {
+					translatedText = Translate.execute(text, sourceLanguage, recipientLanguage);
+				}
 				TranslateLanguages tl2 = convertFromLanguageToEnum(recipientLanguage);
 				returnMap.put(tl2, translatedText);
 			}

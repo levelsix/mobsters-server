@@ -133,8 +133,8 @@
 		<application.release.name>Mobsters</application.release.name>
 		<wicket.mode>development</wicket.mode>
 
-		<lvl6.jedis.host>robot.lvl6.com</lvl6.jedis.host>
-		<lvl6.jedis.auth>L3v3lS!x_K!ngd0m$</lvl6.jedis.auth>
+		<lvl6.jedis.host>localhost</lvl6.jedis.host>
+		<lvl6.jedis.auth></lvl6.jedis.auth>
 		<lvl6.jedis.database>1</lvl6.jedis.database>
 
 		<ec2.instance.size>m1.small</ec2.instance.size>
@@ -159,10 +159,9 @@
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
 		<amqp.client.messages.queue>clientMessages1.5</amqp.client.messages.queue>
-		<!-- <amqp.client.messages.bindings><![CDATA[
-		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers" />
-		<rabbit:binding queue="clientMessages1.1"	key="messagesFromPlayers1.1" />
-		]]></amqp.client.messages.bindings> -->
+		<!-- <amqp.client.messages.bindings><![CDATA[ <rabbit:binding queue="clientMessages1.1" 
+			key="messagesFromPlayers" /> <rabbit:binding queue="clientMessages1.1" key="messagesFromPlayers1.1" 
+			/> ]]></amqp.client.messages.bindings> -->
 		<amqp.client.messages.bindings><![CDATA[
 		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers" />
 		<rabbit:binding queue="clientMessages1.5"	key="messagesFromPlayers1.1" />
@@ -278,18 +277,18 @@
 					</execution>
 				</executions>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-compiler-plugin</artifactId> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<phase>compile</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>compile</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-compiler-plugin</artifactId> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <phase>compile</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>compile</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -821,37 +820,37 @@
 				<artifactId>commons-beanutils</artifactId>
 				<version>1.8.3</version>
 			</dependency>
-<!--     		<dependency> -->
-<!--         		<groupid>junit</groupId> -->
-<!--         		<artifactid>junit</artifactId> -->
-<!--         		<version>4.11</version> -->
-<!--         		<scope>test</scope> -->
-<!--         		<type>jar</type> -->
-<!--     		</dependency> -->
-    		<dependency>
-        		<groupId>org.mockito</groupId>
-        		<artifactId>mockito-core</artifactId>
-        		<version>2.0.3-beta</version>
-        		<scope>test</scope>
-    		</dependency>
-    		<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-module-junit4</artifactId>
-        		<version>1.5.4</version>
-        		<scope>test</scope>
-    		</dependency>
-    		<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-api-mockito</artifactId>
-        		<version>1.5.4</version>
-        		<scope>test</scope>
-    		</dependency>
-    		<!-- Required for PowerMockRule -->
-    		<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-module-junit4-rule-agent</artifactId>
-        		<version>1.5.4</version>
-        		<scope>test</scope>
+			<!-- <dependency> -->
+			<!-- <groupid>junit</groupId> -->
+			<!-- <artifactid>junit</artifactId> -->
+			<!-- <version>4.11</version> -->
+			<!-- <scope>test</scope> -->
+			<!-- <type>jar</type> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>2.0.3-beta</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>1.5.4</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>1.5.4</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Required for PowerMockRule -->
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4-rule-agent</artifactId>
+				<version>1.5.4</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.powermock</groupId>
@@ -859,10 +858,10 @@
 				<version>1.6.2</version>
 			</dependency>
 			<dependency>
-        		<groupId>org.powermock</groupId>
-        		<artifactId>powermock-classloading-xstream</artifactId>
-        		<version>1.5.4</version>
-        		<scope>test</scope>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-classloading-xstream</artifactId>
+				<version>1.5.4</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.memetix</groupId>
@@ -877,7 +876,6 @@
 		<dependency>
 			<groupId>com.typesafe.scala-logging</groupId>
 			<artifactId>scala-logging-slf4j_2.11</artifactId>
-			<version>2.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.opencsv</groupId>
@@ -996,10 +994,10 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.httpcomponents</groupId> -->
-<!-- 			<artifactId>httpclient</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.httpcomponents</groupId> -->
+		<!-- <artifactId>httpclient</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.scribe</groupId>
 			<artifactId>scribe</artifactId>
@@ -1024,19 +1022,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>me.prettyprint</groupId> <artifactId>hector-core</artifactId> 
-			</dependency> -->
-		<!-- <dependency> <groupId>org.hectorclient</groupId> <artifactId>hector-core</artifactId> 
-			<exclusions> <exclusion> <artifactId>log4j</artifactId> <groupId>log4j</groupId> 
-			</exclusion> <exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
-			</exclusion> </exclusions> <exclusions> <exclusion> <artifactId>slf4j-log4j12</artifactId> 
-			<groupId>org.slf4j</groupId> </exclusion> <exclusion> <artifactId>log4j</artifactId> 
-			<groupId>log4j</groupId> </exclusion> <exclusion> <artifactId>servlet-api</artifactId> 
-			<groupId>org.mortbay.jetty</groupId> </exclusion> </exclusions> </dependency> -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
-			</dependency> -->
-		<!-- <dependency> <groupId>redis.clients</groupId> <artifactId>jedis</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>com.jayway.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
@@ -1045,14 +1030,12 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.elasticsearch</groupId> <artifactId>elasticsearch</artifactId> 
-			</dependency> -->
+
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-datetime</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-support</artifactId> 
-			</dependency> -->
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -1098,38 +1081,25 @@
 			<groupId>org.influxdb</groupId>
 			<artifactId>influxdb-java</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
-			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 
-			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 
-			</dependency> -->
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-http</artifactId> 
-			</dependency> -->
-
-
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.9.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
-			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
-			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4-rule-agent</artifactId>
-			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-classloading-xstream</artifactId>
-			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
@@ -1138,7 +1108,6 @@
 		<dependency>
 			<groupId>com.memetix</groupId>
 			<artifactId>microsoft-translator-java-api</artifactId>
-			<version>0.6.2</version>
 		</dependency>
 	</dependencies>
 

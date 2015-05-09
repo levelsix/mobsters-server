@@ -32,6 +32,7 @@ import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
@@ -274,6 +275,8 @@ public interface InsertUtil {
 			int defenderCashChange, float nuPvpDmgMultiplier,
 			boolean attackerWon, boolean cancelled, boolean gotRevenge,
 			boolean displayToDefender);
+
+	public abstract int insertIntoPvpBattleHistory(PvpBattleHistory pbh);
 
 	public abstract List<String> insertIntoObstaclesForUserGetIds(
 			String userId, List<ObstacleForUser> ofuList);

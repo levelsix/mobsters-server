@@ -10,13 +10,8 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetractRequestJoinClanRequestEvent;
 import com.lvl6.events.response.RetractRequestJoinClanResponseEvent;
-import com.lvl6.info.Clan;
-import com.lvl6.info.User;
-import com.lvl6.info.UserClan;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto;
-import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -24,9 +19,11 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.RetractRequestJoinClanAction;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
-import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 
@@ -36,11 +33,17 @@ public class RetractRequestJoinClanController extends EventController {
 	}.getClass().getEnclosingClass());
 
 	@Autowired
-	protected Locker locker;
+	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected InsertUtil insertUtil;
 
 	@Autowired
-	protected ClanRetrieveUtils2 clanRetrieveUtils;
-
+	protected Locker locker;
+	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
@@ -105,22 +108,11 @@ public class RetractRequestJoinClanController extends EventController {
 		if (clanUuid != null) {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
-		try {
-			User user = getUserRetrieveUtils().getUserById(
-					senderProto.getUserUuid());
-			Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
-
-			boolean legitRetract = checkLegitRequest(resBuilder, lockedClan,
-					user, clan);
-
-			boolean success = false;
-			if (legitRetract) {
-				success = writeChangesToDB(user, clanId);
-			}
-
-			if (success) {
-				resBuilder.setStatus(RetractRequestJoinClanStatus.SUCCESS);
-			}
+		try {			
+			RetractRequestJoinClanAction rrjca = new RetractRequestJoinClanAction(userId, clanId,
+					lockedClan, userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils, 
+					userClanRetrieveUtils);
+			rrjca.execute(resBuilder);
 
 			RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(
 					senderProto.getUserUuid());
@@ -128,8 +120,9 @@ public class RetractRequestJoinClanController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (success) {
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clan.getId(), false));
+
+			if (RetractRequestJoinClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {
@@ -151,45 +144,6 @@ public class RetractRequestJoinClanController extends EventController {
 				getLocker().unlockClan(clanUuid);
 			}
 		}
-	}
-
-	private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
-			User user, Clan clan) {
-
-		if (!lockedClan) {
-			log.error("couldn't obtain clan lock");
-			return false;
-		}
-		if (user == null || clan == null) {
-			resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
-			log.error("user is " + user + ", clan is " + clan);
-			return false;
-		}
-		if (user.getClanId() != null) {
-			resBuilder
-					.setStatus(RetractRequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
-			log.error("user is already in clan with id " + user.getClanId());
-			return false;
-		}
-		UserClan uc = getUserClanRetrieveUtils().getSpecificUserClan(
-				user.getId(), clan.getId());
-		if (uc == null
-				|| !UserClanStatus.REQUESTING.name().equals(uc.getStatus())) {
-			resBuilder
-					.setStatus(RetractRequestJoinClanStatus.FAIL_DID_NOT_REQUEST);
-			log.error("user clan request has not been filed");
-			return false;
-		}
-		return true;
-	}
-
-	private boolean writeChangesToDB(User user, String clanId) {
-		if (!DeleteUtils.get().deleteUserClan(user.getId(), clanId)) {
-			log.error("problem with deleting user clan data for user " + user
-					+ ", and clan id " + clanId);
-			return false;
-		}
-		return true;
 	}
 
 	public Locker getLocker() {

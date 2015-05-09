@@ -104,6 +104,7 @@ public class BeginPvpBattleController extends EventController {
 		resEvent.setTag(event.getTag());
 
 		UUID enemyUserUuid = null;
+		boolean invalidUuids = true;
 		try {
 			UUID.fromString(attackerId);
 
@@ -113,9 +114,19 @@ public class BeginPvpBattleController extends EventController {
 				enemyUserUuid = UUID.fromString(enemyUserId);
 			}
 
+			invalidUuids = false;
 		} catch (Exception e1) {
 			log.error(String.format("UUID error. incorrect enemyUserId=%s",
 					enemyUserId), e1);
+			invalidUuids = true;
+		}
+
+		if (invalidUuids) {
+			resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER);
+			resEvent.setTag(event.getTag());
+			resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		//lock the user that client is going to attack, in order to prevent others from

@@ -43,6 +43,7 @@ import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.TaskForUserClientState;
@@ -338,7 +339,7 @@ public class InsertUtils implements InsertUtil {
 			if(salesUuid != null) {
 				insertParams.put(DBConstants.IAP_HISTORY__SALES_UUID, salesUuid);
 			}
-			
+
 			insertParams.put(DBConstants.IAP_HISTORY__PRODUCT_ID,
 					appleReceipt.getString(IAPValues.PRODUCT_ID));
 			insertParams.put(DBConstants.IAP_HISTORY__QUANTITY,
@@ -911,10 +912,10 @@ public class InsertUtils implements InsertUtil {
 		absoluteUpdates.put(
 				DBConstants.TRANSLATION_SETTINGS_FOR_USER__TRANSLATIONS_ON,
 				translateOn);
-		
+
 		int numChanged = DBConnection.get().insertOnDuplicateKeyUpdate(tableName, insertParams,
 				relativeUpdates, absoluteUpdates);
-		
+
 		if (numChanged != 1 && numChanged != 2) {
 			log.error("failure to insert translate setting, numChanged = {}", numChanged);
 			return false;
@@ -2005,6 +2006,79 @@ public class InsertUtils implements InsertUtil {
 	}
 
 	@Override
+	public int insertIntoPvpBattleHistory(PvpBattleHistory pbh)
+	{
+		String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID,
+				pbh.getAttackerId());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID,
+				pbh.getDefenderId());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME,
+				new Timestamp(
+						pbh.getBattleEndTime().getTime()));
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME,
+				new Timestamp(
+						pbh.getBattleStartTime().getTime()));
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE,
+				pbh.getAttackerEloChange());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_BEFORE,
+				pbh.getAttackerEloBefore());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_AFTER,
+				pbh.getAttackerEloAfter());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE,
+				pbh.getDefenderEloChange());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_BEFORE,
+				pbh.getDefenderEloBefore());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_AFTER,
+				pbh.getDefenderEloAfter());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE,
+				pbh.getAttackerPrevLeague());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE,
+				pbh.getAttackerCurLeague());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE,
+				pbh.getDefenderPrevLeague());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE,
+				pbh.getDefenderCurLeague());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK,
+				pbh.getAttackerPrevRank());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK,
+				pbh.getAttackerCurRank());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK,
+				pbh.getDefenderPrevRank());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK,
+				pbh.getDefenderCurRank());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE,
+				pbh.getAttackerCashChange());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE,
+				pbh.getDefenderCashChange());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE,
+				pbh.getAttackerOilChange());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE,
+				pbh.getDefenderOilChange());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER,
+				pbh.getPvpDmgMultiplier());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON,
+				pbh.isAttackerWon());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED,
+				pbh.isCancelled());
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE,
+				pbh.isExactedRevenge());
+		//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName,
+				insertParams);
+		return numUpdated;
+	}
+
+	@Override
 	public List<String> insertIntoObstaclesForUserGetIds(String userId,
 			List<ObstacleForUser> ofuList) {
 		String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;
@@ -2708,6 +2782,8 @@ public class InsertUtils implements InsertUtil {
 			log.error("map containing ids to translations is null");
 		}
 
+		log.info("list of private chat posts:" + listOfPrivateChatPosts);
+		
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();

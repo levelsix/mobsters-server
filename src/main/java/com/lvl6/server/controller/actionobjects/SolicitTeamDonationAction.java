@@ -186,7 +186,8 @@ public class SolicitTeamDonationAction {
 			solicitation.setClanId(clanId);
 			solicitation.setFulfilled(false);
 		}
-		solicitation.setMsg(msg);
+		String censoredMsg = miscMethods.censorUserInput(msg);
+		solicitation.setMsg(censoredMsg);
 		solicitation.setPowerLimit(powerLimit);
 		solicitation.setTimeOfSolicitation(clientTime);
 

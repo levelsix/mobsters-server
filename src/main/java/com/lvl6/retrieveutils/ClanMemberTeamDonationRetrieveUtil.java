@@ -59,7 +59,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();
@@ -74,7 +74,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 					query, values);
 			clanMemberTeamDonations = this.jdbcTemplate.query(query,
 					values.toArray(), rowMapper);
-			log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
+//			log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
 
 		} catch (Exception e) {
 			log.error(String.format(
@@ -98,7 +98,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 
 			String conditionDelim = getQueryConstructionUtil().getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();
@@ -139,7 +139,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();
@@ -184,7 +184,7 @@ public class ClanMemberTeamDonationRetrieveUtil {
 
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();

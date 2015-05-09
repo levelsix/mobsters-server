@@ -16,7 +16,6 @@ import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
-import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
@@ -28,10 +27,12 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.TransferClanOwnershipAction;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
 
@@ -54,6 +55,12 @@ public class TransferClanOwnershipController extends EventController {
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	
+	@Autowired
+	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected DeleteUtil deleteUtil;
 
 	public TransferClanOwnershipController() {
 		
@@ -127,27 +134,13 @@ public class TransferClanOwnershipController extends EventController {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
 		try {
-			Map<String, User> users = getUserRetrieveUtils().getUsersByIds(
-					userIds);
-			Map<String, UserClan> userClans = getUserClanRetrieveUtils()
-					.getUserClanForUsers(clanId, userIds);
+			TransferClanOwnershipAction tcoa = new TransferClanOwnershipAction(userId,
+					newClanOwnerId, lockedClan, userRetrieveUtils, updateUtil,
+					deleteUtil, userClanRetrieveUtils);
+			tcoa.execute(resBuilder);
+			setResponseBuilderStuff(resBuilder, clanId, tcoa.getNewClanOwner());
 
-			User user = users.get(userId);
-			User newClanOwner = users.get(newClanOwnerId);
-
-			boolean legitTransfer = checkLegitTransfer(resBuilder, lockedClan,
-					userId, user, newClanOwnerId, newClanOwner, userClans);
-
-			if (legitTransfer) {
-				List<UserClanStatus> statuses = new ArrayList<UserClanStatus>();
-				//order matters
-				statuses.add(UserClanStatus.JUNIOR_LEADER);
-				statuses.add(UserClanStatus.LEADER);
-				writeChangesToDB(clanId, userIds, statuses);
-				setResponseBuilderStuff(resBuilder, clanId, newClanOwner);
-			}
-
-			if (!legitTransfer) {
+			if (!TransferClanOwnershipStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//if not successful write to guy
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						userId);
@@ -157,7 +150,7 @@ public class TransferClanOwnershipController extends EventController {
 				responses.normalResponseEvents().add(resEvent);
 			}
 
-			if (legitTransfer) {
+			if (TransferClanOwnershipStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
@@ -185,68 +178,6 @@ public class TransferClanOwnershipController extends EventController {
 				getLocker().unlockClan(clanUuid);
 			}
 		}
-	}
-
-	private boolean checkLegitTransfer(Builder resBuilder, boolean lockedClan,
-			String userId, User user, String newClanOwnerId, User newClanOwner,
-			Map<String, UserClan> userClans) {
-
-		if (!lockedClan) {
-			log.error("couldn't obtain clan lock");
-			return false;
-		}
-
-		if (user == null || newClanOwner == null) {
-			resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
-			log.error("user is " + user + ", new clan owner is " + newClanOwner);
-			return false;
-		}
-		if (user.getClanId() == null) {
-			resBuilder
-					.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
-			log.error("user not in clan. user=" + user);
-			return false;
-		}
-
-		if (!newClanOwner.getClanId().equals(user.getClanId())) {
-			resBuilder
-					.setStatus(TransferClanOwnershipStatus.FAIL_NEW_OWNER_NOT_IN_CLAN);
-			log.error("new owner not in same clan as user. new owner= "
-					+ newClanOwner + ", user is " + user);
-			return false;
-		}
-
-		if (!userClans.containsKey(userId)
-				|| !userClans.containsKey(newClanOwnerId)) {
-			log.error("a UserClan does not exist userId=" + userId
-					+ ", newClanOwner=" + newClanOwnerId + "\t userClans="
-					+ userClans);
-			return false;
-		}
-		UserClan userClan = userClans.get(user.getId());
-
-		String leaderStatusName = UserClanStatus.LEADER.name();
-
-		if (!leaderStatusName.equals(userClan.getStatus())) {
-			resBuilder
-					.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
-			log.error("user is " + user + ", and user isn't owner. user is:"
-					+ userClan);
-			return false;
-		}
-		resBuilder.setStatus(TransferClanOwnershipStatus.SUCCESS);
-		return true;
-	}
-
-	private void writeChangesToDB(String clanId, List<String> userIdList,
-			List<UserClanStatus> statuses) {
-		//update clan for user table
-
-		int numUpdated = UpdateUtils.get().updateUserClanStatuses(clanId,
-				userIdList, statuses);
-		log.info(String.format(
-				"num clan_for_user updated=%s, userIdList=%s, statuses=%s",
-				numUpdated, userIdList, statuses));
 	}
 
 	private void setResponseBuilderStuff(Builder resBuilder, String clanId,
