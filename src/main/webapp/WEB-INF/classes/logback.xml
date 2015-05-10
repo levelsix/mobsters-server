@@ -70,8 +70,8 @@
 
 	<!-- <logger name="com.lvl6.scheduledtasks" level="DEBUG" additivity="false"> 
 		<appender-ref ref="file" /> </logger> -->
-	<logger name="com.hazelcast" level="all" additivity="true" />
-	<logger name="org.hazelcast" level="all" additivity="true" />
+	<logger name="com.hazelcast" level="info" additivity="true" />
+	<logger name="org.hazelcast" level="info" additivity="true" />
 
 	<root level="info">
 		<appender-ref ref="console" />
