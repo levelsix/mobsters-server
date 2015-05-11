@@ -13,4 +13,5 @@ enum DevRequest {
 	F_B_GET_GEMS = 5;
 	F_B_GET_CASH_OIL_GEMS = 6;
 	GET_ITEM = 7;
+	GET_GACHA_CREDITS = 8; 
 }

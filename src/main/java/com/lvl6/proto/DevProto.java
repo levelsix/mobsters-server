@@ -41,6 +41,10 @@ public final class DevProto {
      * <code>GET_ITEM = 7;</code>
      */
     GET_ITEM(6, 7),
+    /**
+     * <code>GET_GACHA_CREDITS = 8;</code>
+     */
+    GET_GACHA_CREDITS(7, 8),
     ;
 
     /**
@@ -71,6 +75,10 @@ public final class DevProto {
      * <code>GET_ITEM = 7;</code>
      */
     public static final int GET_ITEM_VALUE = 7;
+    /**
+     * <code>GET_GACHA_CREDITS = 8;</code>
+     */
+    public static final int GET_GACHA_CREDITS_VALUE = 8;
 
 
     public final int getNumber() { return value; }
@@ -84,6 +92,7 @@ public final class DevProto {
         case 5: return F_B_GET_GEMS;
         case 6: return F_B_GET_CASH_OIL_GEMS;
         case 7: return GET_ITEM;
+        case 8: return GET_GACHA_CREDITS;
         default: return null;
       }
     }
@@ -144,11 +153,12 @@ public final class DevProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tDev.proto\022\016com.lvl6.proto*\216\001\n\nDevReque" +
+      "\n\tDev.proto\022\016com.lvl6.proto*\245\001\n\nDevReque" +
       "st\022\021\n\rRESET_ACCOUNT\020\001\022\017\n\013GET_MONZTER\020\002\022\020" +
       "\n\014F_B_GET_CASH\020\003\022\017\n\013F_B_GET_OIL\020\004\022\020\n\014F_B" +
       "_GET_GEMS\020\005\022\031\n\025F_B_GET_CASH_OIL_GEMS\020\006\022\014" +
-      "\n\010GET_ITEM\020\007B\nB\010DevProto"
+      "\n\010GET_ITEM\020\007\022\025\n\021GET_GACHA_CREDITS\020\010B\nB\010D" +
+      "evProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
