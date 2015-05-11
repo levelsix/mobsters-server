@@ -189,7 +189,7 @@ public class DBConstants {
 
 	/*BATTLE ITEM FOR USER*/
 	public static final String BATTLE_REPLAY_FOR_USER__ID = GENERIC__ID;
-	public static final String BATTLE_REPLAY_FOR_USER__CREATOR_ID = "user_id";
+	public static final String BATTLE_REPLAY_FOR_USER__CREATOR_ID = "creator_id";
 	public static final String BATTLE_REPLAY_FOR_USER__REPLAY = "replay";
 	public static final String BATTLE_REPLAY_FOR_USER__CREATE_TIME = "create_time";
 
