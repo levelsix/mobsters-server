@@ -1,8 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "BoosterPackStuff.proto";
-import "Item.proto";
-import "MonsterStuff.proto";
 import "Reward.proto";
 import "User.proto";
 
