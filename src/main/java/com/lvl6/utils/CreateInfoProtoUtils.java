@@ -1112,6 +1112,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		b.setGemPrice(bp.getGemPrice());
+		b.setGachaCreditsPrice(bp.getGachaCreditsPrice());
 
 		str = bp.getListBackgroundImgName();
 		if (null != str && !str.isEmpty()) {
@@ -1153,7 +1154,7 @@ public class CreateInfoProtoUtils {
 			for (BoosterItem bi : biList) {
 				//only want special booster items
 				if (bi.isSpecial()) {
-					BoosterItemProto bip = createBoosterItemProto(bi, 
+					BoosterItemProto bip = createBoosterItemProto(bi,
 							rewardRetrieveUtils);
 					b.addSpecialItems(bip);
 				}
@@ -1162,7 +1163,7 @@ public class CreateInfoProtoUtils {
 
 		if (null != bdiList) {
 			for (BoosterDisplayItem bdi : bdiList) {
-				BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi, 
+				BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi,
 						rewardRetrieveUtils);
 				b.addDisplayItems(bdip);
 			}
@@ -1171,12 +1172,12 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public BoosterItemProto createBoosterItemProto(BoosterItem bi, 
+	public BoosterItemProto createBoosterItemProto(BoosterItem bi,
 			RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterItemProto.Builder b = BoosterItemProto.newBuilder();
 		b.setBoosterItemId(bi.getId());
 		b.setBoosterPackId(bi.getBoosterPackId());
-		
+
 		Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
 		b.setReward(createRewardProto(r));
 
@@ -1190,7 +1191,7 @@ public class CreateInfoProtoUtils {
 				.newBuilder();
 
 		b.setBoosterPackId(bdi.getBoosterPackId());
-		
+
 		Reward r = rewardRetrieveUtils.getRewardById(bdi.getRewardId());
 		b.setReward(createRewardProto(r));
 
@@ -5133,7 +5134,7 @@ public class CreateInfoProtoUtils {
 
 		int segmentationGroup = u.getSegmentationGroup();
 		builder.setSegmentationGroup(segmentationGroup);
-		
+
 		int gachaCredits = u.getGachaCredits();
 		builder.setGachaCredits(gachaCredits);
 
