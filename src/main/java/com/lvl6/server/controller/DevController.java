@@ -49,16 +49,16 @@ public class DevController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
@@ -76,7 +76,7 @@ public class DevController extends EventController {
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		DevRequestProto reqProto = ((DevRequestEvent) event)
 				.getDevRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -88,11 +88,10 @@ public class DevController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(DevStatus.SUCCESS);
 
-		UUID userUuid = null;
 		boolean invalidUuids = true;
 
 		try {
-			userUuid = UUID.fromString(userId);
+			UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format("UUID error. incorrect userId=%s", userId),
@@ -115,17 +114,17 @@ public class DevController extends EventController {
 					senderProto.getUserUuid());
 			//TODO: Consider writing currency history and other history
 
-			log.info(String.format("CHEATER DETECTED!!!! %s", aUser));
+			log.info("CHEATER DETECTED!!!! {}", aUser);
 
 			if (DevRequest.RESET_ACCOUNT.equals(request)) {
-				log.info(String.format("resetting user=%s", aUser));
+				log.info("resetting user={}", aUser);
 				aUser.updateResetAccount();
 			} else if (Globals.ALLOW_CHEATS()) {
 				cheat(userId, request, staticDataId, quantity, resBuilder,
 						aUser);
 			} else {
-				log.error(String.format("azzhole tried cheating: user=%s",
-						aUser));
+				log.error("azzhole tried cheating: user={}",
+						aUser);
 				resBuilder.setStatus(DevStatus.FAIL_OTHER);
 			}
 
@@ -155,7 +154,7 @@ public class DevController extends EventController {
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 
@@ -169,8 +168,8 @@ public class DevController extends EventController {
 			break;
 
 		case GET_MONZTER:
-			log.info(String.format("giving user=%s monsterId=%d, quantity=%s",
-					aUser, staticDataId, quantity));
+			log.info("giving user={} monsterId={}, quantity={}",
+					new Object[] { aUser, staticDataId, quantity });
 			//				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(num);
 			//				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 			//				monsterIdToNumPieces.put(num, monzter.getNumPuzzlePieces());
@@ -187,36 +186,34 @@ public class DevController extends EventController {
 			break;
 
 		case F_B_GET_CASH:
-			log.info(String.format("giving user=%s cash=%d", aUser,
-					staticDataId));
+			log.info("giving user={} cash={}",
+					aUser, staticDataId);
 			aUser.updateRelativeCashAndOilAndGems(quantity, 0, 0, 0);
 			break;
 
 		case F_B_GET_OIL:
-			log.info(String
-					.format("giving user=%s oil=%d", aUser, staticDataId));
+			log.info("giving user={} oil={}", aUser, staticDataId);
 			aUser.updateRelativeCashAndOilAndGems(0, quantity, 0, 0);
 			break;
 
 		case F_B_GET_GEMS:
-			log.info(String.format("giving user=%s gems=%d", aUser,
-					staticDataId));
+			log.info("giving user={} gems={}",
+					aUser, staticDataId);
 			aUser.updateRelativeCashAndOilAndGems(0, 0, quantity, 0);
 			break;
 
 		case F_B_GET_CASH_OIL_GEMS:
-			log.info(String.format("giving user=%s cash, gems, oil=%d", aUser,
-					staticDataId));
+			log.info("giving user={} cash, gems, oil={}", aUser,
+					staticDataId);
 			aUser.updateRelativeCashAndOilAndGems(quantity, quantity, quantity, 0);
 			break;
 		case GET_ITEM:
-			log.info(String.format("giving user=%s, itemId=%s, quantity=%s",
-					aUser, staticDataId, quantity));
+			log.info("giving user={}, itemId={}, quantity={}",
+					new Object[] { aUser, staticDataId, quantity });
 
 			int numInserted = InsertUtils.get().insertIntoUpdateUserItem(
 					userId, staticDataId, quantity);
-			log.info(String
-					.format("num rows inserted/updated, %s", numInserted));
+			log.info("num rows inserted/updated,{}", numInserted);
 
 			ItemForUser ifu = (itemForUserRetrieveUtil
 					.getSpecificOrAllItemForUser(userId,
@@ -224,6 +221,11 @@ public class DevController extends EventController {
 			UserItemProto uip = createInfoProtoUtils
 					.createUserItemProtoFromUserItem(ifu);
 			resBuilder.setUip(uip);
+			break;
+		case GET_GACHA_CREDITS:
+			log.info("giving user={} gacha_credits={}",
+					aUser, staticDataId);
+			aUser.updateRelativeCashAndOilAndGems(0, 0, 0, quantity);
 			break;
 		default:
 			break;
