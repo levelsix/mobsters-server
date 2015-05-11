@@ -906,6 +906,15 @@ public final class BoosterPackStuffProto {
     int getGemPrice();
 
     /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    boolean hasGachaCreditsPrice();
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    int getGachaCreditsPrice();
+
+    /**
      * <code>repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;</code>
      *
      * <pre>
@@ -1153,47 +1162,47 @@ public final class BoosterPackStuffProto {
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 specialItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               specialItems_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.PARSER, extensionRegistry));
               break;
             }
             case 42: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               listBackgroundImgName_ = bs;
               break;
             }
             case 50: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               listDescription_ = bs;
               break;
             }
             case 58: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               navBarImgName_ = bs;
               break;
             }
             case 66: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               navTitleImgName_ = bs;
               break;
             }
             case 74: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               machineImgName_ = bs;
               break;
             }
             case 82: {
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
                 displayItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto>();
-                mutable_bitField0_ |= 0x00000200;
+                mutable_bitField0_ |= 0x00000400;
               }
               displayItems_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.PARSER, extensionRegistry));
               break;
@@ -1204,9 +1213,14 @@ public final class BoosterPackStuffProto {
               if (value == null) {
                 unknownFields.mergeVarintField(11, rawValue);
               } else {
-                bitField0_ |= 0x00000100;
+                bitField0_ |= 0x00000200;
                 type_ = value;
               }
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000008;
+              gachaCreditsPrice_ = input.readInt32();
               break;
             }
           }
@@ -1217,10 +1231,10 @@ public final class BoosterPackStuffProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           specialItems_ = java.util.Collections.unmodifiableList(specialItems_);
         }
-        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           displayItems_ = java.util.Collections.unmodifiableList(displayItems_);
         }
         this.unknownFields = unknownFields.build();
@@ -1436,6 +1450,21 @@ public final class BoosterPackStuffProto {
       return gemPrice_;
     }
 
+    public static final int GACHACREDITSPRICE_FIELD_NUMBER = 12;
+    private int gachaCreditsPrice_;
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    public boolean hasGachaCreditsPrice() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    public int getGachaCreditsPrice() {
+      return gachaCreditsPrice_;
+    }
+
     public static final int SPECIALITEMS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> specialItems_;
     /**
@@ -1501,7 +1530,7 @@ public final class BoosterPackStuffProto {
      * </pre>
      */
     public boolean hasListBackgroundImgName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
@@ -1551,7 +1580,7 @@ public final class BoosterPackStuffProto {
      * <code>optional string listDescription = 6;</code>
      */
     public boolean hasListDescription() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional string listDescription = 6;</code>
@@ -1593,7 +1622,7 @@ public final class BoosterPackStuffProto {
      * <code>optional string navBarImgName = 7;</code>
      */
     public boolean hasNavBarImgName() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string navBarImgName = 7;</code>
@@ -1635,7 +1664,7 @@ public final class BoosterPackStuffProto {
      * <code>optional string navTitleImgName = 8;</code>
      */
     public boolean hasNavTitleImgName() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional string navTitleImgName = 8;</code>
@@ -1677,7 +1706,7 @@ public final class BoosterPackStuffProto {
      * <code>optional string machineImgName = 9;</code>
      */
     public boolean hasMachineImgName() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string machineImgName = 9;</code>
@@ -1774,7 +1803,7 @@ public final class BoosterPackStuffProto {
      * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
      */
     public boolean hasType() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
@@ -1787,6 +1816,7 @@ public final class BoosterPackStuffProto {
       boosterPackId_ = 0;
       boosterPackName_ = "";
       gemPrice_ = 0;
+      gachaCreditsPrice_ = 0;
       specialItems_ = java.util.Collections.emptyList();
       listBackgroundImgName_ = "";
       listDescription_ = "";
@@ -1821,26 +1851,29 @@ public final class BoosterPackStuffProto {
       for (int i = 0; i < specialItems_.size(); i++) {
         output.writeMessage(4, specialItems_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getListBackgroundImgNameBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getListDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(7, getNavBarImgNameBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(8, getNavTitleImgNameBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(9, getMachineImgNameBytes());
       }
       for (int i = 0; i < displayItems_.size(); i++) {
         output.writeMessage(10, displayItems_.get(i));
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeEnum(11, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(12, gachaCreditsPrice_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1867,23 +1900,23 @@ public final class BoosterPackStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, specialItems_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getListBackgroundImgNameBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getListDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getNavBarImgNameBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(8, getNavTitleImgNameBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getMachineImgNameBytes());
       }
@@ -1891,9 +1924,13 @@ public final class BoosterPackStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, displayItems_.get(i));
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(11, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, gachaCreditsPrice_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2020,30 +2057,32 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         gemPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        gachaCreditsPrice_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (specialItemsBuilder_ == null) {
           specialItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           specialItemsBuilder_.clear();
         }
         listBackgroundImgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
-        listDescription_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        navBarImgName_ = "";
+        listDescription_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        navTitleImgName_ = "";
+        navBarImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        machineImgName_ = "";
+        navTitleImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        machineImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         if (displayItemsBuilder_ == null) {
           displayItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000400);
         } else {
           displayItemsBuilder_.clear();
         }
         type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -2084,46 +2123,50 @@ public final class BoosterPackStuffProto {
           to_bitField0_ |= 0x00000004;
         }
         result.gemPrice_ = gemPrice_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gachaCreditsPrice_ = gachaCreditsPrice_;
         if (specialItemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             specialItems_ = java.util.Collections.unmodifiableList(specialItems_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.specialItems_ = specialItems_;
         } else {
           result.specialItems_ = specialItemsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.listBackgroundImgName_ = listBackgroundImgName_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.listDescription_ = listDescription_;
+        result.listBackgroundImgName_ = listBackgroundImgName_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.navBarImgName_ = navBarImgName_;
+        result.listDescription_ = listDescription_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.navTitleImgName_ = navTitleImgName_;
+        result.navBarImgName_ = navBarImgName_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000080;
         }
+        result.navTitleImgName_ = navTitleImgName_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
         result.machineImgName_ = machineImgName_;
         if (displayItemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
             displayItems_ = java.util.Collections.unmodifiableList(displayItems_);
-            bitField0_ = (bitField0_ & ~0x00000200);
+            bitField0_ = (bitField0_ & ~0x00000400);
           }
           result.displayItems_ = displayItems_;
         } else {
           result.displayItems_ = displayItemsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000100;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000200;
         }
         result.type_ = type_;
         result.bitField0_ = to_bitField0_;
@@ -2153,11 +2196,14 @@ public final class BoosterPackStuffProto {
         if (other.hasGemPrice()) {
           setGemPrice(other.getGemPrice());
         }
+        if (other.hasGachaCreditsPrice()) {
+          setGachaCreditsPrice(other.getGachaCreditsPrice());
+        }
         if (specialItemsBuilder_ == null) {
           if (!other.specialItems_.isEmpty()) {
             if (specialItems_.isEmpty()) {
               specialItems_ = other.specialItems_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureSpecialItemsIsMutable();
               specialItems_.addAll(other.specialItems_);
@@ -2170,7 +2216,7 @@ public final class BoosterPackStuffProto {
               specialItemsBuilder_.dispose();
               specialItemsBuilder_ = null;
               specialItems_ = other.specialItems_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               specialItemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSpecialItemsFieldBuilder() : null;
@@ -2180,27 +2226,27 @@ public final class BoosterPackStuffProto {
           }
         }
         if (other.hasListBackgroundImgName()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
           listBackgroundImgName_ = other.listBackgroundImgName_;
           onChanged();
         }
         if (other.hasListDescription()) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
           listDescription_ = other.listDescription_;
           onChanged();
         }
         if (other.hasNavBarImgName()) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
           navBarImgName_ = other.navBarImgName_;
           onChanged();
         }
         if (other.hasNavTitleImgName()) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
           navTitleImgName_ = other.navTitleImgName_;
           onChanged();
         }
         if (other.hasMachineImgName()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
           machineImgName_ = other.machineImgName_;
           onChanged();
         }
@@ -2208,7 +2254,7 @@ public final class BoosterPackStuffProto {
           if (!other.displayItems_.isEmpty()) {
             if (displayItems_.isEmpty()) {
               displayItems_ = other.displayItems_;
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000400);
             } else {
               ensureDisplayItemsIsMutable();
               displayItems_.addAll(other.displayItems_);
@@ -2221,7 +2267,7 @@ public final class BoosterPackStuffProto {
               displayItemsBuilder_.dispose();
               displayItemsBuilder_ = null;
               displayItems_ = other.displayItems_;
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000400);
               displayItemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getDisplayItemsFieldBuilder() : null;
@@ -2400,12 +2446,44 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
+      private int gachaCreditsPrice_ ;
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public boolean hasGachaCreditsPrice() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public int getGachaCreditsPrice() {
+        return gachaCreditsPrice_;
+      }
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public Builder setGachaCreditsPrice(int value) {
+        bitField0_ |= 0x00000008;
+        gachaCreditsPrice_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public Builder clearGachaCreditsPrice() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gachaCreditsPrice_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> specialItems_ =
         java.util.Collections.emptyList();
       private void ensureSpecialItemsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           specialItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto>(specialItems_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -2599,7 +2677,7 @@ public final class BoosterPackStuffProto {
       public Builder clearSpecialItems() {
         if (specialItemsBuilder_ == null) {
           specialItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           specialItemsBuilder_.clear();
@@ -2704,7 +2782,7 @@ public final class BoosterPackStuffProto {
           specialItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder>(
                   specialItems_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           specialItems_ = null;
@@ -2721,7 +2799,7 @@ public final class BoosterPackStuffProto {
        * </pre>
        */
       public boolean hasListBackgroundImgName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
@@ -2776,7 +2854,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         listBackgroundImgName_ = value;
         onChanged();
         return this;
@@ -2789,7 +2867,7 @@ public final class BoosterPackStuffProto {
        * </pre>
        */
       public Builder clearListBackgroundImgName() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         listBackgroundImgName_ = getDefaultInstance().getListBackgroundImgName();
         onChanged();
         return this;
@@ -2806,7 +2884,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         listBackgroundImgName_ = value;
         onChanged();
         return this;
@@ -2817,7 +2895,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string listDescription = 6;</code>
        */
       public boolean hasListDescription() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional string listDescription = 6;</code>
@@ -2860,7 +2938,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         listDescription_ = value;
         onChanged();
         return this;
@@ -2869,7 +2947,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string listDescription = 6;</code>
        */
       public Builder clearListDescription() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         listDescription_ = getDefaultInstance().getListDescription();
         onChanged();
         return this;
@@ -2882,7 +2960,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         listDescription_ = value;
         onChanged();
         return this;
@@ -2893,7 +2971,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string navBarImgName = 7;</code>
        */
       public boolean hasNavBarImgName() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string navBarImgName = 7;</code>
@@ -2936,7 +3014,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         navBarImgName_ = value;
         onChanged();
         return this;
@@ -2945,7 +3023,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string navBarImgName = 7;</code>
        */
       public Builder clearNavBarImgName() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         navBarImgName_ = getDefaultInstance().getNavBarImgName();
         onChanged();
         return this;
@@ -2958,7 +3036,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         navBarImgName_ = value;
         onChanged();
         return this;
@@ -2969,7 +3047,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string navTitleImgName = 8;</code>
        */
       public boolean hasNavTitleImgName() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string navTitleImgName = 8;</code>
@@ -3012,7 +3090,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         navTitleImgName_ = value;
         onChanged();
         return this;
@@ -3021,7 +3099,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string navTitleImgName = 8;</code>
        */
       public Builder clearNavTitleImgName() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         navTitleImgName_ = getDefaultInstance().getNavTitleImgName();
         onChanged();
         return this;
@@ -3034,7 +3112,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         navTitleImgName_ = value;
         onChanged();
         return this;
@@ -3045,7 +3123,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string machineImgName = 9;</code>
        */
       public boolean hasMachineImgName() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string machineImgName = 9;</code>
@@ -3088,7 +3166,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         machineImgName_ = value;
         onChanged();
         return this;
@@ -3097,7 +3175,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string machineImgName = 9;</code>
        */
       public Builder clearMachineImgName() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         machineImgName_ = getDefaultInstance().getMachineImgName();
         onChanged();
         return this;
@@ -3110,7 +3188,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         machineImgName_ = value;
         onChanged();
         return this;
@@ -3119,9 +3197,9 @@ public final class BoosterPackStuffProto {
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> displayItems_ =
         java.util.Collections.emptyList();
       private void ensureDisplayItemsIsMutable() {
-        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           displayItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto>(displayItems_);
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000400;
          }
       }
 
@@ -3315,7 +3393,7 @@ public final class BoosterPackStuffProto {
       public Builder clearDisplayItems() {
         if (displayItemsBuilder_ == null) {
           displayItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000400);
           onChanged();
         } else {
           displayItemsBuilder_.clear();
@@ -3420,7 +3498,7 @@ public final class BoosterPackStuffProto {
           displayItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder>(
                   displayItems_,
-                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           displayItems_ = null;
@@ -3433,7 +3511,7 @@ public final class BoosterPackStuffProto {
        * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
        */
       public boolean hasType() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
@@ -3448,7 +3526,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         type_ = value;
         onChanged();
         return this;
@@ -3457,7 +3535,7 @@ public final class BoosterPackStuffProto {
        * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
         onChanged();
         return this;
@@ -4942,31 +5020,31 @@ public final class BoosterPackStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026BoosterPackStuff.proto\022\016com.lvl6.proto" +
-      "\032\014Reward.proto\032\026SharedEnumConfig.proto\032\n" +
-      "User.proto\"\250\001\n\030RareBoosterPurchaseProto\022" +
-      ".\n\004user\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\0221\n\007booster\030\002 \001(\0132 .com.lvl6.prot" +
-      "o.BoosterPackProto\022\026\n\016timeOfPurchase\030\003 \001" +
-      "(\004\022\021\n\tmonsterId\030\004 \001(\005\"\346\003\n\020BoosterPackPro" +
-      "to\022\025\n\rboosterPackId\030\001 \001(\005\022\027\n\017boosterPack" +
-      "Name\030\002 \001(\t\022\020\n\010gemPrice\030\003 \001(\005\0226\n\014specialI" +
-      "tems\030\004 \003(\0132 .com.lvl6.proto.BoosterItemP",
-      "roto\022\035\n\025listBackgroundImgName\030\005 \001(\t\022\027\n\017l" +
-      "istDescription\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 " +
-      "\001(\t\022\027\n\017navTitleImgName\030\010 \001(\t\022\026\n\016machineI" +
-      "mgName\030\t \001(\t\022=\n\014displayItems\030\n \003(\0132\'.com" +
-      ".lvl6.proto.BoosterDisplayItemProto\022G\n\004t" +
-      "ype\030\013 \001(\01620.com.lvl6.proto.BoosterPackPr" +
-      "oto.BoosterPackType:\007NO_TYPE\"P\n\017BoosterP" +
-      "ackType\022\013\n\007NO_TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010ULTIM" +
-      "ATE\020\003\022\013\n\007STARTER\020\004\022\n\n\006RIGGED\020\005\"\230\001\n\020Boost" +
-      "erItemProto\022\025\n\rboosterItemId\030\001 \001(\005\022\025\n\rbo",
-      "osterPackId\030\002 \001(\005\022\021\n\tisSpecial\030\006 \001(\010\022\026\n\016" +
-      "chanceToAppear\030\t \001(\002\022+\n\006reward\030\n \001(\0132\033.c" +
-      "om.lvl6.proto.RewardProto\"]\n\027BoosterDisp" +
-      "layItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022+\n\006r" +
-      "eward\030\002 \001(\0132\033.com.lvl6.proto.RewardProto" +
-      "B\027B\025BoosterPackStuffProto"
+      "\032\014Reward.proto\032\nUser.proto\"\250\001\n\030RareBoost" +
+      "erPurchaseProto\022.\n\004user\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\0221\n\007booster\030\002 \001(\013" +
+      "2 .com.lvl6.proto.BoosterPackProto\022\026\n\016ti" +
+      "meOfPurchase\030\003 \001(\004\022\021\n\tmonsterId\030\004 \001(\005\"\201\004" +
+      "\n\020BoosterPackProto\022\025\n\rboosterPackId\030\001 \001(" +
+      "\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010gemPrice\030\003" +
+      " \001(\005\022\031\n\021gachaCreditsPrice\030\014 \001(\005\0226\n\014speci" +
+      "alItems\030\004 \003(\0132 .com.lvl6.proto.BoosterIt",
+      "emProto\022\035\n\025listBackgroundImgName\030\005 \001(\t\022\027" +
+      "\n\017listDescription\030\006 \001(\t\022\025\n\rnavBarImgName" +
+      "\030\007 \001(\t\022\027\n\017navTitleImgName\030\010 \001(\t\022\026\n\016machi" +
+      "neImgName\030\t \001(\t\022=\n\014displayItems\030\n \003(\0132\'." +
+      "com.lvl6.proto.BoosterDisplayItemProto\022G" +
+      "\n\004type\030\013 \001(\01620.com.lvl6.proto.BoosterPac" +
+      "kProto.BoosterPackType:\007NO_TYPE\"P\n\017Boost" +
+      "erPackType\022\013\n\007NO_TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010UL" +
+      "TIMATE\020\003\022\013\n\007STARTER\020\004\022\n\n\006RIGGED\020\005\"\230\001\n\020Bo" +
+      "osterItemProto\022\025\n\rboosterItemId\030\001 \001(\005\022\025\n",
+      "\rboosterPackId\030\002 \001(\005\022\021\n\tisSpecial\030\006 \001(\010\022" +
+      "\026\n\016chanceToAppear\030\t \001(\002\022+\n\006reward\030\n \001(\0132" +
+      "\033.com.lvl6.proto.RewardProto\"]\n\027BoosterD" +
+      "isplayItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022+" +
+      "\n\006reward\030\002 \001(\0132\033.com.lvl6.proto.RewardPr" +
+      "otoB\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4980,7 +5058,6 @@ public final class BoosterPackStuffProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.RewardsProto.getDescriptor(),
-          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor =
@@ -4994,7 +5071,7 @@ public final class BoosterPackStuffProto {
     internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BoosterPackProto_descriptor,
-        new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", "Type", });
+        new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "GachaCreditsPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", "Type", });
     internal_static_com_lvl6_proto_BoosterItemProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new
@@ -5008,7 +5085,6 @@ public final class BoosterPackStuffProto {
         internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor,
         new java.lang.String[] { "BoosterPackId", "Reward", });
     com.lvl6.proto.RewardsProto.getDescriptor();
-    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 
