@@ -186,3 +186,20 @@ message CustomizePvpBoardObstacleResponseProto {
 	}  
 }
 
+//------------------------------------------------------------------------------------------
+
+message RetrieveBattleReplayRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string replayId = 2;
+}
+
+message RetrieveBattleReplayResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional BattleReplayProto brp = 2;
+	optional RetrieveBattleReplayStatus status = 3;
+	
+	enum RetrieveBattleReplayStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
