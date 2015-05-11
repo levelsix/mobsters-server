@@ -227,6 +227,11 @@ public class DevController extends EventController {
 					aUser, staticDataId);
 			aUser.updateRelativeCashAndOilAndGems(0, 0, 0, quantity);
 			break;
+		case GET_GACHA_CREDITS:
+			log.info("giving user={} gacha_credits={}",
+					aUser, staticDataId);
+			aUser.updateRelativeCashAndOilAndGems(0, 0, 0, quantity);
+			break;
 		default:
 			break;
 		}
