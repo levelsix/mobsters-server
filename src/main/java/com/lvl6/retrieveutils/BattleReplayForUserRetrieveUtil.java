@@ -168,10 +168,33 @@ public class BattleReplayForUserRetrieveUtil {
 	}
 */
 
+	public BattleReplayForUser getUserBattleReplay( String replayId )
+	{
+		log.debug("retrieving UserBattleReplay for id {}", replayId);
+		Object[] val = new Object[] { replayId };
+		String query = String.format("select * from %s where %s=?", TABLE_NAME,
+				DBConstants.BATTLE_REPLAY_FOR_USER__ID);
+
+		BattleReplayForUser brfu = null;
+		try {
+			List<BattleReplayForUser> userBattleReplays =
+					this.jdbcTemplate.query(query, val, rowMapper);
+
+			if (null != userBattleReplays && !userBattleReplays.isEmpty()) {
+				brfu = userBattleReplays.get(0);
+			}
+		} catch (Exception e) {
+			log.error("UserBattleReplay retrieve db error.", e);
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return brfu;
+	}
+
 	public List<BattleReplayForUser> getUserBattleReplays(
 			Collection<String> replayIds)
 	{
-		log.debug("retrieving user battle items for ids {}", replayIds);
+		log.debug("retrieving UserBattleReplay for ids {}", replayIds);
 		int amount = replayIds.size();
 		List<String> questions = Collections.nCopies(amount, "?");
 		String questionMarkStr = StringUtils.csvList(questions);
@@ -194,7 +217,7 @@ public class BattleReplayForUserRetrieveUtil {
 
 	public Map<String, BattleReplayForUser> getBattleReplayIdsToReplays(
 			Collection<String> replayIds) {
-		log.debug("retrieving map of battle item id to userbattleReplays for ids {}",
+		log.debug("retrieving map of UserBattleReplay id to UserbattleReplays for ids {}",
 				replayIds);
 
 		Map<String, BattleReplayForUser> battleReplayIdToBattleReplayForUser = new HashMap<String, BattleReplayForUser>();
