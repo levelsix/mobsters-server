@@ -443,27 +443,31 @@ public class InAppPurchaseController extends EventController {
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		log.info("prespp: " + preSpp);
 
-		Object[] objArray = new Object[2];
-		objArray[0] = "COOPER";
-		objArray[1] = "ALEX";
+//		Object[] objArray = new Object[2];
+//		objArray[0] = "COOPER";
+//		objArray[1] = "ALEX";
+//
+//		Float[] floatArray = new Float[2];
+//		floatArray[0] = (float)0.5;
+//		floatArray[1] = (float)0.5;
+//
+//		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
+//
+//		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
+//			if(!iapsa.isStarterPack()) {
+//				resBuilder.setSuccessorSalesPackage(preSpp);
+//			}
+//		}
+//		else {
+//			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
+//				resBuilder.setSuccessorSalesPackage(preSpp);
+//			}
+//		}
 
-		Float[] floatArray = new Float[2];
-		floatArray[0] = (float)0.5;
-		floatArray[1] = (float)0.5;
+		//commented out above code bc beginner sales also have succ id now
+		resBuilder.setSuccessorSalesPackage(preSpp);
 
-		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
-
-		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
-			if(!iapsa.isStarterPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
-		}
-		else {
-			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
-		}
-
+		
 	}
 
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
