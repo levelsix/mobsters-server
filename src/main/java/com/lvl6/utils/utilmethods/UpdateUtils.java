@@ -1890,8 +1890,10 @@ public class UpdateUtils implements UpdateUtil {
 			absoluteParams.put(DBConstants.USER__SALES_VALUE, newSalesValue);
 		}
 
-		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
-
+		if(now != null) {
+			absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
+		}
+		
 		int numUpdated = DBConnection.get().updateTableRows(
 				DBConstants.TABLE_USER, null, absoluteParams,
 				conditionParams, "and");
