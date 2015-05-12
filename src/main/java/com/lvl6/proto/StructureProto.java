@@ -225,6 +225,10 @@ public final class StructureProto {
      * <code>HOLE = 3;</code>
      */
     HOLE(2, 3),
+    /**
+     * <code>VINE = 4;</code>
+     */
+    VINE(3, 4),
     ;
 
     /**
@@ -239,6 +243,10 @@ public final class StructureProto {
      * <code>HOLE = 3;</code>
      */
     public static final int HOLE_VALUE = 3;
+    /**
+     * <code>VINE = 4;</code>
+     */
+    public static final int VINE_VALUE = 4;
 
 
     public final int getNumber() { return value; }
@@ -248,6 +256,7 @@ public final class StructureProto {
         case 1: return CLOUD;
         case 2: return LOCK;
         case 3: return HOLE;
+        case 4: return VINE;
         default: return null;
       }
     }
@@ -22320,9 +22329,9 @@ public final class StructureProto {
       "\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022" +
       "\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020" +
       "\024*G\n\021StructOrientation\022\022\n\016NO_ORIENTATION",
-      "\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*2\n\021Bo" +
+      "\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*<\n\021Bo" +
       "ardObstacleType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004" +
-      "HOLE\020\003B\020B\016StructureProto"
+      "HOLE\020\003\022\010\n\004VINE\020\004B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
