@@ -50,6 +50,8 @@ public class DBConstants {
 	public static final String TABLE_EXPANSION_COST_CONFIG = "expansion_cost_config";				//TODO: delete
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";	//TODO: delete
 	public static final String TABLE_FILE_DOWNLOAD_CONFIG = "file_download_config";
+	public static final String TABLE_GIFT_FOR_TANGO_USER = "gift_for_tango_user";
+	public static final String TABLE_GIFT_FOR_USER = "gift_for_user";
 	public static final String TABLE_GOLD_SALE_CONFIG = "gold_sale_config";							//TODO: delete
 	public static final String TABLE_IAP_HISTORY = "iap_history";
 	public static final String TABLE_ITEM_CONFIG = "item_config";
@@ -129,6 +131,8 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_TEAM_CENTER_CONFIG = "structure_team_center_config";
 	public static final String TABLE_STRUCTURE_TOWN_HALL_CONFIG = "structure_town_hall_config";
 	public static final String TABLE_STRUCTURE_MONEY_TREE_CONFIG = "structure_money_tree_config";
+	public static final String TABLE_TANGO_GIFT_CONFIG = "tango_gift_config";
+	public static final String TABLE_TANGO_GIFT_REWARD_CONFIG = "tango_gift_reward_config";
 	public static final String TABLE_TASK_CONFIG = "task_config";
 	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
@@ -378,6 +382,24 @@ public class DBConstants {
 	public static final String EXPANSION_PURCHASE_FOR_USER__Y_POSITION = "y_position";
 	public static final String EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING = "is_expanding";
 	public static final String EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME = "expand_start_time";
+
+	/*GIFT FOR TANGO USER*/
+	public static final String GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID = "gift_for_user_id";
+	public static final String GIFT_FOR_TANGO_USER__GIFTER_USER_ID = "gifter_user_id";
+	public static final String GIFT_FOR_TANGO_USER__GIFTER_TANGO_USER_ID = "gifter_tango_user_id";
+
+	/*GIFT FOR USER*/
+	public static final String GIFT_FOR_USER__ID = GENERIC__ID;
+	public static final String GIFT_FOR_USER__GIFTER_USER_ID = "gifter_user_id";
+	public static final String GIFT_FOR_USER__RECEIVER_USER_ID = "receiver_user_id";
+	public static final String GIFT_FOR_USER__GIFT_TYPE = "gift_type";
+	public static final String GIFT_FOR_USER__STATIC_DATA_ID = "static_data_id";
+	public static final String GIFT_FOR_USER__TIME_OF_ENTRY = "time_of_entry";
+	public static final String GIFT_FOR_USER__REWARD_ID = "reward_id";
+	public static final String GIFT_FOR_USER__COLLECTED = "collected";
+	public static final String GIFT_FOR_USER__MINUTES_TILL_EXPIRATION = "minutes_till_expiration";
+	public static final String GIFT_FOR_USER__REASON_FOR_GIFT = "reason_for_gift";
+
 
 	/*IAP TABLE*/
 	public static final String IAP_HISTORY__ID = GENERIC__ID;
@@ -827,6 +849,7 @@ public class DBConstants {
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
 	public static final String USER__SEGMENTATION_GROUP = "segmentation_group";
 	public static final String USER__GACHA_CREDITS = "gacha_credits";
+	public static final String USER__LAST_TANGO_GIFT_SENT_TIME = "last_tango_gift_sent_time";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -1429,6 +1452,16 @@ public class DBConstants {
 	public static final String STRUCTURE_TOWN_HALL__PVP_QUEUE_CASH_COST = "pvp_queue_cash_cost";
 	public static final String STRUCTURE_TOWN_HALL__RESOURCE_CAPACITY = "resource_capacity";
 	public static final String STRUCTURE_TOWN_HALL__NUM_EVO_CHAMBERS = "num_evo_chambers";
+
+	public static final String TANGO_GIFT__ID = GENERIC__ID;
+	public static final String TANGO_GIFT__NAME = "name";
+	public static final String TANGO_GIFT__HOURS_UNTIL_EXPIRATION = "hours_until_expiration";
+	public static final String TANGO_GIFT__IMAGE_NAME = "image_name";
+
+	public static final String TANGO_GIFT_REWARD__ID = GENERIC__ID;
+	public static final String TANGO_GIFT_REWARD__TANGO_GIFT_ID = "tango_gift_id";
+	public static final String TANGO_GIFT_REWARD__REWARD_ID = "reward_id";
+	public static final String TANGO_GIFT_REWARD__CHANCE_OF_DROP = "chance_of_drop";
 
 	public static final String TASK__ID = "id";
 	public static final String TASK__GOOD_NAME = "good_name";

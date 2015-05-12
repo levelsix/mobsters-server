@@ -16,10 +16,10 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 
+	private static final long serialVersionUID = -4195802667305844074L;
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-
-	private static final long serialVersionUID = -1551162148806486099L;
 
 	private String id;
 	private String name;
@@ -68,7 +68,7 @@ public class User implements Serializable {
 	private long totalStrength;
 	private int segmentationGroup;
 	private int gachaCredits;
-
+	private Date lastTangoGiftSentTime;
 
 	public User() {
 		super();
@@ -90,8 +90,9 @@ public class User implements Serializable {
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
 			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
-			long totalStrength, int segmentationGroup, int gachaCredits) {
-
+			long totalStrength, int segmentationGroup, int gachaCredits,
+			Date lastTangoGiftSentTime)
+	{
 		super();
 		this.id = id;
 		this.name = name;
@@ -140,9 +141,8 @@ public class User implements Serializable {
 		this.totalStrength = totalStrength;
 		this.segmentationGroup = segmentationGroup;
 		this.gachaCredits = gachaCredits;
+		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
 	}
-
-
 
 	public boolean updateSetdevicetoken(String deviceToken) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -965,6 +965,7 @@ public class User implements Serializable {
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.gems += gemChange;
+			this.gachaCredits += gachaCreditsChange;
 
 			if (freeBoosterPack) {
 				this.lastFreeBoosterPackTime = now;
@@ -1531,6 +1532,10 @@ public class User implements Serializable {
 		return gachaCredits;
 	}
 
+	public Date getLastTangoGiftSentTime() {
+		return lastTangoGiftSentTime;
+	}
+
 	public void setGachaCredits(int gachaCredits) {
 		this.gachaCredits = gachaCredits;
 	}
@@ -1569,8 +1574,8 @@ public class User implements Serializable {
 				+ ", lastPurchaseTime=" + lastPurchaseTime
 				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
 				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
-				+ segmentationGroup + ", gachaCredits=" + gachaCredits + "]";
+				+ segmentationGroup + ", gachaCredits=" + gachaCredits
+				+ ", lastTangoGiftSentTime=" + lastTangoGiftSentTime + "]";
 	}
-
 
 }
