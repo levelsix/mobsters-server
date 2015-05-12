@@ -1328,7 +1328,7 @@ case class StartupData(
 			def setSalesForUser(resBuilder:Builder ,  user:User):Future[Unit]= {
 					Future{
 						timed("StartupService.setSalesForUser"){
-							val userSalesValue = user.getSalesValue()
+							var userSalesValue = user.getSalesValue()
 									val salesLastPurchaseTime = user.getLastPurchaseTime();
 							val now = new Date
               logger.info("setting regular sales for user");
@@ -1342,7 +1342,7 @@ case class StartupData(
 											if(Math.abs(timeUtils.numDaysDifference(salesLastPurchaseTime, now)) > 5) {
 												logger.info("updating user sales value, been longer than 5 days");
 												updateUtil.updateUserSalesValue(user.getId(), 1, now);
-												val userSalesValue = 1;
+												userSalesValue = 1;
 											}
 										}
 									}
