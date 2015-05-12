@@ -1336,6 +1336,8 @@ case class StartupData(
 									else {
 										if(userSalesValue == 0) {
                       logger.info("checking if longer than 5 days");
+                      logger.info("now is {}", now);
+                      logger.info("saleslastpurchasetime is {}", salesLastPurchaseTime);
 											if(timeUtils.numDaysDifference(now, salesLastPurchaseTime) > 5) {
 												logger.info("updating user sales value, been longer than 5 days");
 												updateUtil.updateUserSalesValue(user.getId(), 1, now);
