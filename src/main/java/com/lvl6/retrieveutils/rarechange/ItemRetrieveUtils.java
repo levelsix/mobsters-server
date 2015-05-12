@@ -159,7 +159,6 @@ public class ItemRetrieveUtils {
 		}
 		//using a TreeSet to hold the items, so that it is easier
 		//to select an Item at random to reward a user.
-
 		TreeSet<Item> christmasTreeTemp = new TreeSet<Item>(comparator);
 
 		//sort item ids, not sure if necessary, but whatevs
@@ -182,9 +181,8 @@ public class ItemRetrieveUtils {
 
 			boolean added = christmasTreeTemp.add(item);
 			if (!added) {
-				log.error(String
-						.format("(shouldn't happen...) can't add item=%s to treeSet=%s",
-								item, christmasTreeTemp));
+				log.error("(shouldn't happen...) can't add item={} to treeSet={}",
+						item, christmasTreeTemp);
 			}
 		}
 
