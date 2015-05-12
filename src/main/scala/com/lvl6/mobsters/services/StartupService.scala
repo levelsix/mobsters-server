@@ -1339,7 +1339,7 @@ case class StartupData(
 									else {
 										if(userSalesValue == 0) {
                       logger.info("checking if longer than 5 days");
-											if(timeUtils.numDaysDifference(salesLastPurchaseTime, now) > 5) {
+											if(Math.abs(timeUtils.numDaysDifference(salesLastPurchaseTime, now)) > 5) {
 												logger.info("updating user sales value, been longer than 5 days");
 												updateUtil.updateUserSalesValue(user.getId(), 1, now);
 												val userSalesValue = 1;
