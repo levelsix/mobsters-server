@@ -557,7 +557,7 @@ public class User implements Serializable {
 			this.gems += gemsDelta;
 			this.oil += oilDelta;
 			this.cash += cashDelta;
-			this.gachaCredits += gachaCredits;
+			this.gachaCredits += gachaCreditsDelta;
 		}
 		return numUpdated;
 	}
