@@ -416,7 +416,7 @@ public class InAppPurchaseController extends EventController {
     public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
             InAppPurchaseSalesAction iapsa, User user) {
 
-        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
+//        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
 
         if(salesPackage.getSuccId() == 0) {
@@ -426,12 +426,12 @@ public class InAppPurchaseController extends EventController {
             successorSalesPackage = salesPackageRetrieveUtils.
                     getSalesPackageForSalesPackageId(salesPackage.getSuccId());
 
-            if(jumpTwoTiers) {
-                if(successorSalesPackage.getSuccId() != 0) {
-                    successorSalesPackage = salesPackageRetrieveUtils.
-                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
-                }
-            }
+//            if(jumpTwoTiers) {
+//                if(successorSalesPackage.getSuccId() != 0) {
+//                    successorSalesPackage = salesPackageRetrieveUtils.
+//                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
+//                }
+//            }
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
