@@ -442,6 +442,15 @@ public class InAppPurchaseController extends EventController {
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		log.info("prespp: " + preSpp);
+		
+		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
+		}
+		else {
+			resBuilder.setSuccessorSalesPackage(preSpp);
+		}
+		
+		//commented out below code bc beginner sales also have succ id now
 
 //		Object[] objArray = new Object[2];
 //		objArray[0] = "COOPER";
@@ -464,10 +473,6 @@ public class InAppPurchaseController extends EventController {
 //			}
 //		}
 
-		//commented out above code bc beginner sales also have succ id now
-		resBuilder.setSuccessorSalesPackage(preSpp);
-
-		
 	}
 
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
