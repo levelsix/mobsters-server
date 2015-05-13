@@ -1,0 +1,34 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "User.proto";
+
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventLeaderBoardProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message RetrieveStrengthLeaderBoardRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//if you want the highest strength up to the 50th highest 
+	//strength, minRank is 0, maxRank is 50
+	optional int32 minRank = 2;
+	optional int32 maxRank = 3;
+}
+
+message RetrieveStrengthLeaderBoardResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated StrengthLeaderBoardProto slbp = 2;
+	optional RetrieveStrengthLeaderBoardStatus status = 3;
+	
+	enum RetrieveStrengthLeaderBoardStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+    }
+
+}
