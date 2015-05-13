@@ -440,27 +440,19 @@ public class InAppPurchaseController extends EventController {
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		log.info("prespp: " + preSpp);
+		
+		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
+		}
+		else {
+			resBuilder.setSuccessorSalesPackage(preSpp);
+		}
+		
+		//commented out below code bc beginner sales also have succ id now
 
 		Object[] objArray = new Object[2];
 		objArray[0] = "COOPER";
 		objArray[1] = "ALEX";
-
-		Float[] floatArray = new Float[2];
-		floatArray[0] = (float)0.5;
-		floatArray[1] = (float)0.5;
-
-		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
-
-		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
-			if(!iapsa.isStarterPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
-		}
-		else {
-			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
-		}
 
 	}
 
