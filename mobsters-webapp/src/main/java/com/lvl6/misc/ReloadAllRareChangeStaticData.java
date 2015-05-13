@@ -158,7 +158,7 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-
+	
 	@Autowired
 	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
 
@@ -215,13 +215,13 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-
+	
 	@Autowired
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-
+	
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
 
@@ -233,7 +233,7 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-
+	
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 

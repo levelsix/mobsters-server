@@ -5388,6 +5388,16 @@ public class CreateInfoProtoUtils {
 			builder.setTangoId(tangoId);
 		}
 
+		Date lastTangoGiftSentTime = u.getLastTangoGiftSentTime();
+		if (null != lastTangoGiftSentTime) {
+			builder.setLastTangoGiftSentTime(lastTangoGiftSentTime.getTime());
+		}
+
+		String tangoId = u.getTangoId();
+		if (null != tangoId && !tangoId.isEmpty()) {
+			builder.setTangoId(tangoId);
+		}
+
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
