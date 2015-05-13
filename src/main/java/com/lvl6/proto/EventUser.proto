@@ -230,3 +230,22 @@ message UpdateUserStrengthResponseProto {
 	}
 }
 	
+//------------------------------------------------------------------------------------------
+
+message SetTangoIdRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string tangoId = 2;
+}
+
+message SetTangoIdResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional string tangoId = 2;
+	
+	optional SetTangoIdStatus status = 3;
+	
+	enum SetTangoIdStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+	

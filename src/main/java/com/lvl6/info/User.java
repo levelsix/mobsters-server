@@ -16,7 +16,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = -4195802667305844074L;
+	private static final long serialVersionUID = -858952596036387308L;
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
@@ -69,6 +69,7 @@ public class User implements Serializable {
 	private int segmentationGroup;
 	private int gachaCredits;
 	private Date lastTangoGiftSentTime;
+	private String tangoId;
 
 	public User() {
 		super();
@@ -91,7 +92,7 @@ public class User implements Serializable {
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
 			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
 			long totalStrength, int segmentationGroup, int gachaCredits,
-			Date lastTangoGiftSentTime)
+			Date lastTangoGiftSentTime, String tangoId)
 	{
 		super();
 		this.id = id;
@@ -142,6 +143,7 @@ public class User implements Serializable {
 		this.segmentationGroup = segmentationGroup;
 		this.gachaCredits = gachaCredits;
 		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
+		this.tangoId = tangoId;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1158,6 +1160,24 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateTangoId(String tangoId) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__TANGO_ID, tangoId);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, null, absoluteParams, conditionParams,
+				"and");
+		if (numUpdated == 1) {
+			this.tangoId = tangoId;
+			return true;
+		}
+		return false;
+	}
+
+
 	public String getId() {
 		return id;
 	}
@@ -1532,12 +1552,24 @@ public class User implements Serializable {
 		return gachaCredits;
 	}
 
+	public void setGachaCredits(int gachaCredits) {
+		this.gachaCredits = gachaCredits;
+	}
+
 	public Date getLastTangoGiftSentTime() {
 		return lastTangoGiftSentTime;
 	}
 
-	public void setGachaCredits(int gachaCredits) {
-		this.gachaCredits = gachaCredits;
+	public void setLastTangoGiftSentTime(Date lastTangoGiftSentTime) {
+		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
+	}
+
+	public String getTangoId() {
+		return tangoId;
+	}
+
+	public void setTangoId(String tangoId) {
+		this.tangoId = tangoId;
 	}
 
 	@Override
@@ -1575,7 +1607,8 @@ public class User implements Serializable {
 				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
 				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
 				+ segmentationGroup + ", gachaCredits=" + gachaCredits
-				+ ", lastTangoGiftSentTime=" + lastTangoGiftSentTime + "]";
+				+ ", lastTangoGiftSentTime=" + lastTangoGiftSentTime
+				+ ", tangoId=" + tangoId + "]";
 	}
 
 }

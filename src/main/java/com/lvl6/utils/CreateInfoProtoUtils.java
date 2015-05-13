@@ -1379,7 +1379,7 @@ public class CreateInfoProtoUtils {
 //		gcmpb.setContent(p.getContent());
 		return gcmpb.build();
 	}
-	
+
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, TranslateLanguages contentLanguage, TranslateLanguages translatedLanguage,
@@ -1405,7 +1405,7 @@ public class CreateInfoProtoUtils {
 			ttpb.setLanguage(contentLanguage);
 			ttpb.setText(content);
 		}
-		
+
 		gcmpb.addTranslatedContent(ttpb.build());
 
 
@@ -3590,7 +3590,7 @@ public class CreateInfoProtoUtils {
 		urp.setGems(gems);
 		urp.setCash(cash);
 		urp.setOil(oil);
-		
+
 		if(ucgp != null) {
 			urp.setClanGift(ucgp);
 		}
@@ -5137,6 +5137,16 @@ public class CreateInfoProtoUtils {
 		int gachaCredits = u.getGachaCredits();
 		builder.setGachaCredits(gachaCredits);
 
+		Date lastTangoGiftSentTime = u.getLastTangoGiftSentTime();
+		if (null != lastTangoGiftSentTime) {
+			builder.setLastTangoGiftSentTime(lastTangoGiftSentTime.getTime());
+		}
+
+		String tangoId = u.getTangoId();
+		if (null != tangoId && !tangoId.isEmpty()) {
+			builder.setTangoId(tangoId);
+		}
+
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
@@ -5291,9 +5301,9 @@ public class CreateInfoProtoUtils {
 		b.setReceiverUserId(ucg.getReceiverUserId());
 
 		if(mup != null) {
-			b.setGifterUser(mup);	
+			b.setGifterUser(mup);
 		}
-		
+
 		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
 
 		b.setClanGift(createClanGiftProto(cg));
@@ -5303,7 +5313,7 @@ public class CreateInfoProtoUtils {
 		b.setReward(createRewardProto(r));
 
 		b.setHasBeenCollected(ucg.isHasBeenCollected());
-		
+
 		return b.build();
 	}
 
@@ -5324,7 +5334,6 @@ public class CreateInfoProtoUtils {
 		}
 		return slbpList;
 	}
-
 
 
 }

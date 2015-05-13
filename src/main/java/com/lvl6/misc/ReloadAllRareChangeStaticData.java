@@ -74,6 +74,8 @@ import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTeamCenterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -148,7 +150,7 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
 
@@ -202,13 +204,13 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
 
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
 
@@ -220,7 +222,7 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
@@ -283,6 +285,12 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected StructureTownHallRetrieveUtils structureTownHallRetrieveUtils;
+
+	@Autowired
+	protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
+
+	@Autowired
+	protected TangoGiftRewardRetrieveUtils tangoGiftRewardRetrieveUtil;
 
 	@Autowired
 	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
@@ -378,6 +386,8 @@ public class ReloadAllRareChangeStaticData {
 		structureRetrieveUtils.reload();
 		structureTeamCenterRetrieveUtils.reload();
 		structureTownHallRetrieveUtils.reload();
+		tangoGiftRetrieveUtil.reload();
+		tangoGiftRewardRetrieveUtil.reload();
 		taskMapElementRetrieveUtils.reload();
 		taskRetrieveUtils.reload();
 		taskStageMonsterRetrieveUtils.reload();
