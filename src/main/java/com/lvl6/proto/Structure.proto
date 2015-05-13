@@ -316,6 +316,7 @@ enum BoardObstacleType {
 	CLOUD = 1;
 	LOCK = 2;
 	HOLE = 3;
+	VINE = 4;
 }
 
 
