@@ -850,6 +850,7 @@ public class DBConstants {
 	public static final String USER__SEGMENTATION_GROUP = "segmentation_group";
 	public static final String USER__GACHA_CREDITS = "gacha_credits";
 	public static final String USER__LAST_TANGO_GIFT_SENT_TIME = "last_tango_gift_sent_time";
+	public static final String USER__TANGO_ID = "tango_id";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

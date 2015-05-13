@@ -5845,6 +5845,20 @@ public final class UserProto {
     long getLastTangoGiftSentTime();
 
     /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    boolean hasTangoId();
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    java.lang.String getTangoId();
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    com.google.protobuf.ByteString
+        getTangoIdBytes();
+
+    /**
      * <code>optional int32 segmentationGroup = 500;</code>
      */
     boolean hasSegmentationGroup();
@@ -6291,8 +6305,14 @@ public final class UserProto {
               lastTangoGiftSentTime_ = input.readInt64();
               break;
             }
-            case 4000: {
+            case 498: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField1_ |= 0x00000008;
+              tangoId_ = bs;
+              break;
+            }
+            case 4000: {
+              bitField1_ |= 0x00000010;
               segmentationGroup_ = input.readInt32();
               break;
             }
@@ -7139,13 +7159,55 @@ public final class UserProto {
       return lastTangoGiftSentTime_;
     }
 
+    public static final int TANGOID_FIELD_NUMBER = 62;
+    private java.lang.Object tangoId_;
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    public boolean hasTangoId() {
+      return ((bitField1_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    public java.lang.String getTangoId() {
+      java.lang.Object ref = tangoId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tangoId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTangoIdBytes() {
+      java.lang.Object ref = tangoId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tangoId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int SEGMENTATIONGROUP_FIELD_NUMBER = 500;
     private int segmentationGroup_;
     /**
      * <code>optional int32 segmentationGroup = 500;</code>
      */
     public boolean hasSegmentationGroup() {
-      return ((bitField1_ & 0x00000008) == 0x00000008);
+      return ((bitField1_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int32 segmentationGroup = 500;</code>
@@ -7478,6 +7540,7 @@ public final class UserProto {
       salesLastPurchaseTime_ = 0L;
       totalStrength_ = 0L;
       lastTangoGiftSentTime_ = 0L;
+      tangoId_ = "";
       segmentationGroup_ = 0;
       gachaCredits_ = 0;
       udidForHistory_ = "";
@@ -7640,6 +7703,9 @@ public final class UserProto {
         output.writeInt64(61, lastTangoGiftSentTime_);
       }
       if (((bitField1_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(62, getTangoIdBytes());
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(500, segmentationGroup_);
       }
       if (((bitField1_ & 0x00000010) == 0x00000010)) {
@@ -7835,6 +7901,10 @@ public final class UserProto {
           .computeInt64Size(61, lastTangoGiftSentTime_);
       }
       if (((bitField1_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(62, getTangoIdBytes());
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(500, segmentationGroup_);
       }
@@ -8039,9 +8109,13 @@ public final class UserProto {
         bitField1_ = (bitField1_ & ~0x00000002);
         lastTangoGiftSentTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000004);
-        segmentationGroup_ = 0;
+        tangoId_ = "";
         bitField1_ = (bitField1_ & ~0x00000008);
+<<<<<<< HEAD
         gachaCredits_ = 0;
+=======
+        segmentationGroup_ = 0;
+>>>>>>> event to set newly created tangoId property in user
         bitField1_ = (bitField1_ & ~0x00000010);
         udidForHistory_ = "";
         bitField1_ = (bitField1_ & ~0x00000020);
@@ -8244,11 +8318,15 @@ public final class UserProto {
         if (((from_bitField1_ & 0x00000008) == 0x00000008)) {
           to_bitField1_ |= 0x00000008;
         }
-        result.segmentationGroup_ = segmentationGroup_;
+        result.tangoId_ = tangoId_;
         if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
           to_bitField1_ |= 0x00000010;
         }
+<<<<<<< HEAD
         result.gachaCredits_ = gachaCredits_;
+=======
+        result.segmentationGroup_ = segmentationGroup_;
+>>>>>>> event to set newly created tangoId property in user
         if (((from_bitField1_ & 0x00000020) == 0x00000020)) {
           to_bitField1_ |= 0x00000020;
         }
@@ -8422,6 +8500,11 @@ public final class UserProto {
         }
         if (other.hasLastTangoGiftSentTime()) {
           setLastTangoGiftSentTime(other.getLastTangoGiftSentTime());
+        }
+        if (other.hasTangoId()) {
+          bitField1_ |= 0x00000008;
+          tangoId_ = other.tangoId_;
+          onChanged();
         }
         if (other.hasSegmentationGroup()) {
           setSegmentationGroup(other.getSegmentationGroup());
@@ -10255,12 +10338,88 @@ public final class UserProto {
         return this;
       }
 
+      private java.lang.Object tangoId_ = "";
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public boolean hasTangoId() {
+        return ((bitField1_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public java.lang.String getTangoId() {
+        java.lang.Object ref = tangoId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tangoId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTangoIdBytes() {
+        java.lang.Object ref = tangoId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tangoId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public Builder setTangoId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField1_ |= 0x00000008;
+        tangoId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public Builder clearTangoId() {
+        bitField1_ = (bitField1_ & ~0x00000008);
+        tangoId_ = getDefaultInstance().getTangoId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public Builder setTangoIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField1_ |= 0x00000008;
+        tangoId_ = value;
+        onChanged();
+        return this;
+      }
+
       private int segmentationGroup_ ;
       /**
        * <code>optional int32 segmentationGroup = 500;</code>
        */
       public boolean hasSegmentationGroup() {
-        return ((bitField1_ & 0x00000008) == 0x00000008);
+        return ((bitField1_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int32 segmentationGroup = 500;</code>
@@ -10272,7 +10431,7 @@ public final class UserProto {
        * <code>optional int32 segmentationGroup = 500;</code>
        */
       public Builder setSegmentationGroup(int value) {
-        bitField1_ |= 0x00000008;
+        bitField1_ |= 0x00000010;
         segmentationGroup_ = value;
         onChanged();
         return this;
@@ -10281,7 +10440,7 @@ public final class UserProto {
        * <code>optional int32 segmentationGroup = 500;</code>
        */
       public Builder clearSegmentationGroup() {
-        bitField1_ = (bitField1_ & ~0x00000008);
+        bitField1_ = (bitField1_ & ~0x00000010);
         segmentationGroup_ = 0;
         onChanged();
         return this;
@@ -12501,7 +12660,11 @@ public final class UserProto {
       "bookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014t",
       "imeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022" +
       "\026\n\016userStructUuid\030\006 \001(\t\022\023\n\013structFbLvl\030\007" +
+<<<<<<< HEAD
       " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\313\t\n\rFullUserP" +
+=======
+      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\305\t\n\rFullUserP" +
+>>>>>>> event to set newly created tangoId property in user
       "roto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005" +
       "level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022" +
       "\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016task" +
@@ -12525,6 +12688,7 @@ public final class UserProto {
       "ationSolicitation\0309 \001(\003\022\022\n\nsalesValue\030: " +
       "\001(\002\022\035\n\025salesLastPurchaseTime\030; \001(\003\022\025\n\rto" +
       "talStrength\030< \001(\003\022\035\n\025lastTangoGiftSentTi" +
+<<<<<<< HEAD
       "me\030= \001(\003\022\032\n\021segmentationGroup\030\364\003 \001(\005\022\025\n\014" +
       "gachaCredits\030\365\003 \001(\005\022\026\n\016udidForHistory\030. " +
       "\001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\021\n\tnumBadges\030\022 " +
@@ -12539,6 +12703,22 @@ public final class UserProto {
       "\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013bat" +
       "tlesLost\030\006 \001(\005\022\025\n\rshieldEndTime\030\007 \001(\003\022\034\n" +
       "\024monsterDmgMultiplier\030\010 \001(\002B\013B\tUserProto"
+=======
+      "me\030= \001(\003\022\017\n\007tangoId\030> \001(\t\022\032\n\021segmentatio" +
+      "nGroup\030\364\003 \001(\005\022\026\n\016udidForHistory\030. \001(\t\022\023\n" +
+      "\013deviceToken\030\020 \001(\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n" +
+      "\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030",
+      "numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWa" +
+      "llPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNai" +
+      "d\030\033 \001(\t\022\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004" +
+      "udid\030\r \001(\t\"E\n\030StaticUserLevelInfoProto\022\r" +
+      "\n\005level\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(" +
+      "\005\"\261\001\n\022UserPvpLeagueProto\022\020\n\010userUuid\030\001 \001" +
+      "(\t\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003el" +
+      "o\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013battlesLo" +
+      "st\030\006 \001(\005\022\025\n\rshieldEndTime\030\007 \001(\003\022\034\n\024monst" +
+      "erDmgMultiplier\030\010 \001(\002B\013B\tUserProto"
+>>>>>>> event to set newly created tangoId property in user
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12593,7 +12773,11 @@ public final class UserProto {
     internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserProto_descriptor,
+<<<<<<< HEAD
         new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "SalesValue", "SalesLastPurchaseTime", "TotalStrength", "LastTangoGiftSentTime", "SegmentationGroup", "GachaCredits", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
+=======
+        new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "SalesValue", "SalesLastPurchaseTime", "TotalStrength", "LastTangoGiftSentTime", "TangoId", "SegmentationGroup", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
+>>>>>>> event to set newly created tangoId property in user
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new
