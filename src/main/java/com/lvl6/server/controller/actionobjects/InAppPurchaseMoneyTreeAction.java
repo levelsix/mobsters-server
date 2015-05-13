@@ -223,6 +223,7 @@ public class InAppPurchaseMoneyTreeAction {
 							receiptFromApple), e);
 			success = false;
 		}
+		updateUserSalesValue();
 		return success;
 	}
 
@@ -276,6 +277,13 @@ public class InAppPurchaseMoneyTreeAction {
 		}
 	}
 
+	public void updateUserSalesValue() {
+		int salesValue = user.getSalesValue();
+		if(salesValue == 0) {
+			updateUtil.updateUserSalesValue(userId, 1, now);
+		}
+	}
+	
 	public void prepCurrencyHistory() {
 		String gems = miscMethods.gems;
 
