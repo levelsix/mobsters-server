@@ -3,13 +3,13 @@
 
 package com.lvl6.proto;
 
-public final class LeaderboardProto {
-  private LeaderboardProto() {}
+public final class LeaderBoardProto {
+  private LeaderBoardProto() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface LeaderBoardProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.LeaderBoardProto)
+  public interface StrengthLeaderBoardProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StrengthLeaderBoardProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -44,25 +44,25 @@ public final class LeaderboardProto {
     long getStrength();
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.LeaderBoardProto}
+   * Protobuf type {@code com.lvl6.proto.StrengthLeaderBoardProto}
    */
-  public static final class LeaderBoardProto extends
+  public static final class StrengthLeaderBoardProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.LeaderBoardProto)
-      LeaderBoardProtoOrBuilder {
-    // Use LeaderBoardProto.newBuilder() to construct.
-    private LeaderBoardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.StrengthLeaderBoardProto)
+      StrengthLeaderBoardProtoOrBuilder {
+    // Use StrengthLeaderBoardProto.newBuilder() to construct.
+    private StrengthLeaderBoardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private LeaderBoardProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private StrengthLeaderBoardProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final LeaderBoardProto defaultInstance;
-    public static LeaderBoardProto getDefaultInstance() {
+    private static final StrengthLeaderBoardProto defaultInstance;
+    public static StrengthLeaderBoardProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public LeaderBoardProto getDefaultInstanceForType() {
+    public StrengthLeaderBoardProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -72,7 +72,7 @@ public final class LeaderboardProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private LeaderBoardProto(
+    private StrengthLeaderBoardProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -132,102 +132,29 @@ public final class LeaderboardProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.LeaderboardProto.internal_static_com_lvl6_proto_LeaderBoardProto_descriptor;
+      return com.lvl6.proto.LeaderBoardProto.internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.LeaderboardProto.internal_static_com_lvl6_proto_LeaderBoardProto_fieldAccessorTable
+      return com.lvl6.proto.LeaderBoardProto.internal_static_com_lvl6_proto_StrengthLeaderBoardProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.LeaderboardProto.LeaderBoardProto.class, com.lvl6.proto.LeaderboardProto.LeaderBoardProto.Builder.class);
+              com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.class, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<LeaderBoardProto> PARSER =
-        new com.google.protobuf.AbstractParser<LeaderBoardProto>() {
-      public LeaderBoardProto parsePartialFrom(
+    public static com.google.protobuf.Parser<StrengthLeaderBoardProto> PARSER =
+        new com.google.protobuf.AbstractParser<StrengthLeaderBoardProto>() {
+      public StrengthLeaderBoardProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LeaderBoardProto(input, extensionRegistry);
+        return new StrengthLeaderBoardProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LeaderBoardProto> getParserForType() {
+    public com.google.protobuf.Parser<StrengthLeaderBoardProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.LeaderBoardProto.LeaderBoardType}
-     */
-    public enum LeaderBoardType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>STRENGTH = 1;</code>
-       */
-      STRENGTH(0, 1),
-      ;
-
-      /**
-       * <code>STRENGTH = 1;</code>
-       */
-      public static final int STRENGTH_VALUE = 1;
-
-
-      public final int getNumber() { return value; }
-
-      public static LeaderBoardType valueOf(int value) {
-        switch (value) {
-          case 1: return STRENGTH;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<LeaderBoardType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<LeaderBoardType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<LeaderBoardType>() {
-              public LeaderBoardType findValueByNumber(int number) {
-                return LeaderBoardType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.LeaderboardProto.LeaderBoardProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final LeaderBoardType[] VALUES = values();
-
-      public static LeaderBoardType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private LeaderBoardType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.LeaderBoardProto.LeaderBoardType)
     }
 
     private int bitField0_;
@@ -342,53 +269,53 @@ public final class LeaderboardProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(byte[] data)
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseDelimitedFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.LeaderboardProto.LeaderBoardProto parseFrom(
+    public static com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -397,7 +324,7 @@ public final class LeaderboardProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.LeaderboardProto.LeaderBoardProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -409,25 +336,25 @@ public final class LeaderboardProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.LeaderBoardProto}
+     * Protobuf type {@code com.lvl6.proto.StrengthLeaderBoardProto}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.LeaderBoardProto)
-        com.lvl6.proto.LeaderboardProto.LeaderBoardProtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StrengthLeaderBoardProto)
+        com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.LeaderboardProto.internal_static_com_lvl6_proto_LeaderBoardProto_descriptor;
+        return com.lvl6.proto.LeaderBoardProto.internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.LeaderboardProto.internal_static_com_lvl6_proto_LeaderBoardProto_fieldAccessorTable
+        return com.lvl6.proto.LeaderBoardProto.internal_static_com_lvl6_proto_StrengthLeaderBoardProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.LeaderboardProto.LeaderBoardProto.class, com.lvl6.proto.LeaderboardProto.LeaderBoardProto.Builder.class);
+                com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.class, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.LeaderboardProto.LeaderBoardProto.newBuilder()
+      // Construct using com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -467,23 +394,23 @@ public final class LeaderboardProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.LeaderboardProto.internal_static_com_lvl6_proto_LeaderBoardProto_descriptor;
+        return com.lvl6.proto.LeaderBoardProto.internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor;
       }
 
-      public com.lvl6.proto.LeaderboardProto.LeaderBoardProto getDefaultInstanceForType() {
-        return com.lvl6.proto.LeaderboardProto.LeaderBoardProto.getDefaultInstance();
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getDefaultInstanceForType() {
+        return com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.LeaderboardProto.LeaderBoardProto build() {
-        com.lvl6.proto.LeaderboardProto.LeaderBoardProto result = buildPartial();
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto build() {
+        com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.LeaderboardProto.LeaderBoardProto buildPartial() {
-        com.lvl6.proto.LeaderboardProto.LeaderBoardProto result = new com.lvl6.proto.LeaderboardProto.LeaderBoardProto(this);
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto buildPartial() {
+        com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto result = new com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -508,16 +435,16 @@ public final class LeaderboardProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.LeaderboardProto.LeaderBoardProto) {
-          return mergeFrom((com.lvl6.proto.LeaderboardProto.LeaderBoardProto)other);
+        if (other instanceof com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto) {
+          return mergeFrom((com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.LeaderboardProto.LeaderBoardProto other) {
-        if (other == com.lvl6.proto.LeaderboardProto.LeaderBoardProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto other) {
+        if (other == com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance()) return this;
         if (other.hasRank()) {
           setRank(other.getRank());
         }
@@ -539,11 +466,11 @@ public final class LeaderboardProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.LeaderboardProto.LeaderBoardProto parsedMessage = null;
+        com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.LeaderboardProto.LeaderBoardProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -734,22 +661,22 @@ public final class LeaderboardProto {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LeaderBoardProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StrengthLeaderBoardProto)
     }
 
     static {
-      defaultInstance = new LeaderBoardProto(true);
+      defaultInstance = new StrengthLeaderBoardProto(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.LeaderBoardProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.StrengthLeaderBoardProto)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_LeaderBoardProto_descriptor;
+    internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_LeaderBoardProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StrengthLeaderBoardProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -760,10 +687,10 @@ public final class LeaderboardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021LeaderBoard.proto\022\016com.lvl6.proto\032\nUse" +
-      "r.proto\"\202\001\n\020LeaderBoardProto\022\014\n\004rank\030\001 \001" +
-      "(\005\022-\n\003mup\030\002 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\020\n\010strength\030\003 \001(\003\"\037\n\017LeaderBoa" +
-      "rdType\022\014\n\010STRENGTH\020\001B\022B\020LeaderboardProto"
+      "r.proto\"i\n\030StrengthLeaderBoardProto\022\014\n\004r" +
+      "ank\030\001 \001(\005\022-\n\003mup\030\002 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\020\n\010strength\030\003 \001(\003B\022B\020Le" +
+      "aderBoardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -778,11 +705,11 @@ public final class LeaderboardProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
-    internal_static_com_lvl6_proto_LeaderBoardProto_descriptor =
+    internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_lvl6_proto_LeaderBoardProto_fieldAccessorTable = new
+    internal_static_com_lvl6_proto_StrengthLeaderBoardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_LeaderBoardProto_descriptor,
+        internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor,
         new java.lang.String[] { "Rank", "Mup", "Strength", });
     com.lvl6.proto.UserProto.getDescriptor();
   }

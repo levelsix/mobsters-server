@@ -77,6 +77,7 @@ import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
+import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType;
@@ -184,6 +185,7 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -5318,7 +5320,23 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-
+	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtos(List<StrengthLeaderBoard> slbList,
+			UserRetrieveUtils2 userRetrieveUtils) {
+		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
+		List<String> userIds = new ArrayList<String>();
+		for(StrengthLeaderBoard slb : slbList) {
+			userIds.add(slb.getUserId());
+		}
+		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
+		for(StrengthLeaderBoard slb : slbList) {
+			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
+			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(slb.getUserId()), null));
+			b.setRank(slb.getRank());
+			b.setStrength(slb.getStrength());
+			slbpList.add(b.build());
+		}
+		return slbpList;
+	}
 
 
 

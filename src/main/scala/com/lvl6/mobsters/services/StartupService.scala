@@ -151,6 +151,7 @@ import javax.annotation.Resource
 import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.info.ClanGiftForUser
+import com.lvl6.leaderboards.LeaderBoardImpl
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -242,6 +243,7 @@ case class StartupData(
 			@Autowired var  miscMethods: MiscMethods = null
 			@Autowired var  locker :  Locker = null
 			@Autowired var  eventWriter:EventWriter = null
+      @Autowired var  leaderBoard:LeaderBoardImpl = null
 
 			@Autowired var globals:Globals = null
 			@Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
@@ -461,6 +463,7 @@ case class StartupData(
 								ssfu  <-   setSalesForUser(resBuilder, user)
 								scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
 								plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
+                sttslb<-   setTopThreeStrengthLeaderBoard(resBuilder)
 							} yield plfu
 
 							userInfo onSuccess {
@@ -1403,7 +1406,17 @@ case class StartupData(
 						}
 					}
 			}
-
+      
+      def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
+        Future{
+          timed("StartupServer.setTopThreeStrengthLeaderBoard") {
+            val leaderBoardList = leaderBoard.getTopNStrengths(3);
+            resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
+                createStrengthLeaderBoardProtos(leaderBoardList, userRetrieveUtils));
+          }
+        }
+      }
+      
 			def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
 					Future{
 						timed("StartupService.setClanRaidStuff"){
