@@ -90,7 +90,7 @@ public class UpdateUserStrengthAction {
 		boolean success = updateUtil.updateUserStrength(userId, updatedStrength);
 		log.info("successful update of user strength: {}", success );
 		user.setTotalStrength(updatedStrength);
-		leaderBoardImpl.addToLeaderboard(userId, updatedStrength);
+//		leaderBoardImpl.addToLeaderboard(userId, updatedStrength);
 		return success;
 	}
 	
