@@ -236,9 +236,7 @@ message StartupResponseProto {
 		repeated FileDownloadConstantProto fileDownloadProto = 40;
 		
 		optional int32 taskIdForUpgradeTutorial = 41;
-		
-		optional int32 BoosterPackConstants = 500;
-		
+				
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -348,7 +346,8 @@ message StartupResponseProto {
 			optional bool useIphone6Prefix = 5;
 		}
 		
-		message BoosterPackConstants { //the two constants for gacha buy 10 get 11 stuff
+		//the two constants for gacha buy 10 get 11 stuff
+		message BoosterPackConstantsProto { 
 			optional int32 purchaseAmountRequired = 1;
 			optional int32 numberOfPacksGiven = 2;
 		}

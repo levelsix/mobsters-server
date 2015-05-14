@@ -67,6 +67,7 @@ public class User implements Serializable {
 	private boolean salesJumpTwoTiers;
 	private long totalStrength;
 	private int segmentationGroup;
+	private int gachaCredits;
 
 
 	public User() {
@@ -89,7 +90,7 @@ public class User implements Serializable {
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
 			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
-			long totalStrength, int segmentationGroup) {
+			long totalStrength, int segmentationGroup, int gachaCredits) {
 
 		super();
 		this.id = id;
@@ -138,7 +139,7 @@ public class User implements Serializable {
 		this.salesJumpTwoTiers = salesJumpTwoTiers;
 		this.totalStrength = totalStrength;
 		this.segmentationGroup = segmentationGroup;
-
+		this.gachaCredits = gachaCredits;
 	}
 
 
@@ -1478,45 +1479,6 @@ public class User implements Serializable {
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level
-				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
-				+ ", experience=" + experience + ", tasksCompleted="
-				+ tasksCompleted + ", referralCode=" + referralCode
-				+ ", numReferrals=" + numReferrals + ", udidForHistory="
-				+ udidForHistory + ", lastLogin=" + lastLogin + ", lastLogout="
-				+ lastLogout + ", deviceToken=" + deviceToken + ", numBadges="
-				+ numBadges + ", isFake=" + isFake + ", createTime="
-				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId="
-				+ apsalarId + ", numCoinsRetrievedFromStructs="
-				+ numCoinsRetrievedFromStructs
-				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
-				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
-				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
-				+ lastWallPostNotificationTime + ", hasReceivedfbReward="
-				+ hasReceivedfbReward + ", numBeginnerSalesPurchased="
-				+ numBeginnerSalesPurchased + ", facebookId=" + facebookId
-				+ ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
-				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
-				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime
-				+ ", numObstaclesRemoved=" + numObstaclesRemoved
-				+ ", lastMiniJobGeneratedTime=" + lastMiniJobGeneratedTime
-				+ ", avatarMonsterId=" + avatarMonsterId
-				+ ", lastFreeBoosterPackTime=" + lastFreeBoosterPackTime
-				+ ", clanHelps=" + clanHelps + ", lastSecretGiftCollectTime="
-				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
-				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
-				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
-				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
-				+ ", lastPurchaseTime=" + lastPurchaseTime
-				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
-				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
-				+ segmentationGroup + "]";
-	}
-
 	public int getSalesValue() {
 		return salesValue;
 	}
@@ -1556,6 +1518,51 @@ public class User implements Serializable {
 
 	public void setSegmentationGroup(int segmentationGroup) {
 		this.segmentationGroup = segmentationGroup;
+	}
+
+	public int getGachaCredits() {
+		return gachaCredits;
+	}
+
+	public void setGachaCredits(int gachaCredits) {
+		this.gachaCredits = gachaCredits;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", level=" + level
+				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
+				+ ", experience=" + experience + ", tasksCompleted="
+				+ tasksCompleted + ", referralCode=" + referralCode
+				+ ", numReferrals=" + numReferrals + ", udidForHistory="
+				+ udidForHistory + ", lastLogin=" + lastLogin + ", lastLogout="
+				+ lastLogout + ", deviceToken=" + deviceToken + ", numBadges="
+				+ numBadges + ", isFake=" + isFake + ", createTime="
+				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId="
+				+ apsalarId + ", numCoinsRetrievedFromStructs="
+				+ numCoinsRetrievedFromStructs
+				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
+				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
+				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
+				+ lastWallPostNotificationTime + ", hasReceivedfbReward="
+				+ hasReceivedfbReward + ", numBeginnerSalesPurchased="
+				+ numBeginnerSalesPurchased + ", facebookId=" + facebookId
+				+ ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
+				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
+				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime
+				+ ", numObstaclesRemoved=" + numObstaclesRemoved
+				+ ", lastMiniJobGeneratedTime=" + lastMiniJobGeneratedTime
+				+ ", avatarMonsterId=" + avatarMonsterId
+				+ ", lastFreeBoosterPackTime=" + lastFreeBoosterPackTime
+				+ ", clanHelps=" + clanHelps + ", lastSecretGiftCollectTime="
+				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
+				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
+				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
+				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
+				+ ", lastPurchaseTime=" + lastPurchaseTime
+				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
+				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
+				+ segmentationGroup + ", gachaCredits=" + gachaCredits + "]";
 	}
 
 
