@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -230,6 +231,9 @@ public class AwardRewardAction {
 			return false;
 		}
 		success = awardMonsters(monsterIdToQuantity, monsterIdToLvlToQuantity);
+
+		//save to reward history
+		insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), rewards, awardReason);
 
 		return true;
 	}

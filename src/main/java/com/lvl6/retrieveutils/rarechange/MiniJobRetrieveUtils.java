@@ -570,13 +570,19 @@ public class MiniJobRetrieveUtils {
 							chanceToAppear, id));
 			chanceToAppear = Math.max(0F, chanceToAppear);
 		}
+		
+		int rewardIdOne = rs.getInt(DBConstants.MINI_JOB__REWARD_ID_ONE);
+		int rewardIdTwo = rs.getInt(DBConstants.MINI_JOB__REWARD_ID_TWO);
+		int rewardIdThree = rs.getInt(DBConstants.MINI_JOB__REWARD_ID_THREE);
+
 
 		MiniJob miniJob = new MiniJob(id, requiredStructId, miniJobName,
 				cashReward, oilReward, gemReward, monsterIdReward,
 				itemIdReward, itemRewardQuantity, secondItemIdReward,
 				secondItemRewardQuantity, quality, maxNumMonstersAllowed,
 				chanceToAppear, hpRequired, atkRequired, minDmgDealt,
-				maxDmgDealt, durationMinMinutes, durationMaxMinutes, expReward);
+				maxDmgDealt, durationMinMinutes, durationMaxMinutes, expReward,
+				rewardIdOne, rewardIdTwo, rewardIdThree);
 
 		if (maxDmgDealt < minDmgDealt
 				|| durationMaxMinutes < durationMinMinutes) {
