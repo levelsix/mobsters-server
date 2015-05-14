@@ -26,6 +26,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -54,6 +55,8 @@ public class PurchaseBoosterPackAction {
 	private boolean buyingInBulk;
 	private RewardRetrieveUtils rewardRetrieveUtils;
 	private InsertUtil insertUtil;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private BoosterItemUtils boosterItemUtils;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
@@ -66,7 +69,9 @@ public class PurchaseBoosterPackAction {
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
 			MonsterRetrieveUtils monsterRetrieveUtils,
 			boolean buyingInBulk, RewardRetrieveUtils rewardRetrieveUtils,
-			InsertUtil insertUtil) {
+			InsertUtil insertUtil,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils, 
+			BoosterItemUtils boosterItemUtils) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -86,6 +91,8 @@ public class PurchaseBoosterPackAction {
 		this.buyingInBulk = buyingInBulk;
 		this.rewardRetrieveUtils = rewardRetrieveUtils;
 		this.insertUtil = insertUtil;
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
+		this.boosterItemUtils = boosterItemUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -145,22 +152,30 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
-
-		return true;
-	}
-
-	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
 			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
+
 		boolean legitPack = verifyBoosterPack(resBuilder, boosterPackId);
 		if (!legitPack) {
 			return false;
 		}
+		
+		if (boosterPackIdPurchased > 0) {
+			legitPack = verifyBoosterPack(resBuilder, boosterPackIdPurchased);
+		}
 
+		if (!legitPack) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean verifySemantics(Builder resBuilder) {
 		boosterPackIdPurchased = 0;
 		String type = aPack.getType();
 
@@ -175,14 +190,6 @@ public class PurchaseBoosterPackAction {
 		} else {
 			riggedPack = false;
 			boosterPackIdPurchased = boosterPackId;
-		}
-
-		if (boosterPackIdPurchased > 0) {
-			legitPack = verifyBoosterPack(resBuilder, boosterPackIdPurchased);
-		}
-
-		if (!legitPack) {
-			return false;
 		}
 
 		boosterItemIdsToBoosterItems = boosterItemRetrieveUtils
@@ -261,7 +268,7 @@ public class PurchaseBoosterPackAction {
 
 		selectBoosterItems();
 
-		boolean legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
+		boolean legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
 				rewardRetrieveUtils);
 
 		if (!legit) {
@@ -282,8 +289,9 @@ public class PurchaseBoosterPackAction {
 			numBoosterItemsUserWants = ControllerConstants.BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE;
 		}
 
-		itemsUserReceives = miscMethods.determineBoosterItemsUserReceives(
-				numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
+		log.info("numBoosterItemsUserWants: " + numBoosterItemsUserWants);
+		itemsUserReceives = boosterItemUtils.determineBoosterItemsUserReceives(
+				numBoosterItemsUserWants, boosterItemIdsToBoosterItems, serverToggleRetrieveUtils);
 
 	}
 
@@ -295,6 +303,7 @@ public class PurchaseBoosterPackAction {
 		for(BoosterItem bi : itemsUserReceives) {
 			Reward r = idsToRewards.get(bi.getRewardId());
 			listOfRewards.add(r);
+			log.info("size of listofrewards: " + listOfRewards.size());
 		}
 
 		ara = new AwardRewardAction(userId, user, 0, 0, now, "booster packs", listOfRewards,
