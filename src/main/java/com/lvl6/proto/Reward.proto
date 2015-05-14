@@ -49,7 +49,7 @@ message UserRewardProto {
 	optional int32 cash = 4;
 	optional int32 oil = 5;
 	optional int32 gachaCredits = 6;
-	optional UserClanGiftProto clanGift = 6;
+	optional UserClanGiftProto clanGift = 7;
 }
 
 //------------------------------------------------------------------------------------------
