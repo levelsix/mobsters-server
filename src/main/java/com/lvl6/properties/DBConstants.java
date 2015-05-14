@@ -400,7 +400,6 @@ public class DBConstants {
 	public static final String GIFT_FOR_USER__MINUTES_TILL_EXPIRATION = "minutes_till_expiration";
 	public static final String GIFT_FOR_USER__REASON_FOR_GIFT = "reason_for_gift";
 
-
 	/*IAP TABLE*/
 	public static final String IAP_HISTORY__ID = GENERIC__ID;
 	public static final String IAP_HISTORY__USER_ID = GENERIC__USER_ID;

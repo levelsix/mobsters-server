@@ -31,6 +31,8 @@ import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.GiftForTangoUser;
+import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
@@ -2784,7 +2786,7 @@ public class InsertUtils implements InsertUtil {
 		}
 
 		log.info("list of private chat posts:" + listOfPrivateChatPosts);
-		
+
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
@@ -2882,7 +2884,6 @@ public class InsertUtils implements InsertUtil {
 	public boolean insertIntoUpdateMiniEventGoalForUser(
 			Collection<MiniEventGoalForUser> megfuList)
 	{
-
 		String tableName = DBConstants.TABLE_MINI_EVENT_GOAL_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
@@ -3019,5 +3020,87 @@ public class InsertUtils implements InsertUtil {
 		else return false;
 	}
 
+	@Override
+	public boolean insertGiftForUser(Collection<GiftForUser> giftForUsers) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
+		int size = giftForUsers.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 
+		List<String> idList = new ArrayList<String>();
+		List<String> gifterUserIdList = new ArrayList<String>();
+		List<String> receiverUserIdList = new ArrayList<String>();
+		List<String> giftTypeList = new ArrayList<String>();
+		List<Integer> staticDataIdList = new ArrayList<Integer>();
+		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
+		List<Integer> rewardIdList = new ArrayList<Integer>();
+		List<Integer> minutesTillExpirationList = new ArrayList<Integer>();
+		List<String> reasonForGiftList = new ArrayList<String>();
+
+
+		for(GiftForUser gfu : giftForUsers) {
+			String id = randomUUID();
+			gfu.setId(id);
+			idList.add(id);
+			gifterUserIdList.add(gfu.getGifterUserId());
+			receiverUserIdList.add(gfu.getReceiverUserId());
+			giftTypeList.add(gfu.getGiftType());
+			staticDataIdList.add(gfu.getStaticDataId());
+			Timestamp ts = new Timestamp(gfu.getTimeOfEntry().getTime());
+			timeReceivedList.add(ts);
+			rewardIdList.add(gfu.getRewardId());
+			minutesTillExpirationList.add(gfu.getMinutesTillExpiration());
+			reasonForGiftList.add(gfu.getReasonForGift());
+		}
+
+		insertParams.put(DBConstants.GIFT_FOR_USER__ID, idList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__GIFT_TYPE, giftTypeList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__STATIC_DATA_ID, staticDataIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__TIME_OF_ENTRY, timeReceivedList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__REWARD_ID, rewardIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__MINUTES_TILL_EXPIRATION, minutesTillExpirationList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__REASON_FOR_GIFT, reasonForGiftList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		}
+		else return false;
+	}
+
+
+	@Override
+	public boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_TANGO_USER;
+		int size = giftForTangoUsers.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+		List<String> giftForUserIdList = new ArrayList<String>();
+		List<String> gifterUserIdList = new ArrayList<String>();
+		List<String> gifterTangoUserIdList = new ArrayList<String>();
+
+		for(GiftForTangoUser gftu : giftForTangoUsers) {
+			String id = randomUUID();
+			gftu.setGiftForUserId(id);
+			giftForUserIdList.add(id);
+			gifterUserIdList.add(gftu.getGifterUserId());
+			gifterTangoUserIdList.add(gftu.getGifterTangoUserId());
+		}
+
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID, giftForUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_USER_ID, gifterUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_TANGO_USER_ID, gifterTangoUserIdList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		}
+		else return false;
+	}
 }
+

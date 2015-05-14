@@ -1160,6 +1160,25 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateLastTangoGiftSentTime(Date time) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		Timestamp ts = new Timestamp(time.getTime());
+		absoluteParams.put(DBConstants.USER__LAST_TANGO_GIFT_SENT_TIME, ts);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, null, absoluteParams, conditionParams,
+				"and");
+		if (numUpdated == 1) {
+			this.lastTangoGiftSentTime = time;
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean updateTangoId(String tangoId) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);

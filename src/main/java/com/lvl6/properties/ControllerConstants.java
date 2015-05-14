@@ -189,6 +189,9 @@ public class ControllerConstants {
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
+	//REWARDS
+	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
+
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";

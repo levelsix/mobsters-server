@@ -120,8 +120,11 @@ import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.RewardsProto.ClanGiftProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
+import com.lvl6.proto.RewardsProto.TangoGiftProto;
 import com.lvl6.proto.RewardsProto.UserClanGiftProto;
+import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
+import com.lvl6.proto.RewardsProto.UserTangoGiftProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -3602,6 +3605,83 @@ public class CreateInfoProtoUtils {
 		return urp.build();
 	}
 
+	public UserGiftProto createUserGiftProto(GiftForUser gfu,
+			MinimumUserProto gifterMup, Reward r, ClanGift cg,
+			GiftForTangoUser gftu, TangoGift tg)
+	{
+		UserGiftProto.Builder ugpb = UserGiftProto.newBuilder();
+		ugpb.setUgId(gfu.getId());
+		ugpb.setReceiverUserId(gfu.getReceiverUserId());
+		ugpb.setGifterUser(gifterMup);
+
+		String gt = gfu.getGiftType();
+		if (null != gt && !gt.isEmpty()) {
+			try {
+				RewardType rt = RewardType.valueOf(gt);
+				ugpb.setGiftType(rt);
+
+				switch (rt) {
+				case CLAN_GIFT:
+					ugpb.setClanGift(createClanGiftProto(cg));
+					break;
+				case TANGO_GIFT:
+					ugpb.setTangoGift(createUserTangoGiftProto(gftu, tg));
+				default:
+					break;
+				}
+
+			} catch(Exception e) {
+				log.error(
+						String.format("incorrect enum RewardType. GiftForUser=%s.", gfu),
+						e);
+			}
+		}
+
+		Date timeOfEntry = gfu.getTimeOfEntry();
+		ugpb.setTimeReceived(timeOfEntry.getTime());
+		ugpb.setRp(createRewardProto(r));
+		ugpb.setHasBeenCollected(gfu.isCollected());
+		ugpb.setMinutesTillExpiration(gfu.getMinutesTillExpiration());
+
+		return ugpb.build();
+	}
+
+	public ClanGiftProto createClanGiftProto(ClanGift cg) {
+		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
+		b.setClanGiftId(cg.getId());
+		if(cg.getName() != null) {
+			b.setName(cg.getName());
+		}
+
+		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
+		b.setImageName(cg.getImageName());
+//		b.setQuality(Quality.valueOf(cg.getQuality()));
+
+		return b.build();
+	}
+
+	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUser gftu,
+			TangoGift tg)
+	{
+		UserTangoGiftProto.Builder utgpb = UserTangoGiftProto.newBuilder();
+		utgpb.setUserGiftId(gftu.getGifterUserId());
+		utgpb.setGifterTangoUserId(gftu.getGifterTangoUserId());
+
+		TangoGiftProto tgp = createTangoGiftProto(tg);
+		utgpb.setTangoGift(tgp);
+
+		return utgpb.build();
+	}
+
+	public TangoGiftProto createTangoGiftProto(TangoGift tg) {
+		TangoGiftProto.Builder tgpb = TangoGiftProto.newBuilder();
+		tgpb.setTangoGiftId(tg.getId());
+		tgpb.setName(tg.getName());
+		tgpb.setHoursUntilExpiration(tg.getHoursUntilExpiration());
+		tgpb.setImageName(tg.getImageName());
+		return tgpb.build();
+	}
+
 	/** Skill.proto ***************************************************/
 	public SkillProto createSkillProtoFromSkill(Skill s,
 			Map<Integer, SkillProperty> skillPropertyIdToProperty) {
@@ -5285,20 +5365,6 @@ public class CreateInfoProtoUtils {
 
 
 	///////////////////////////////CLAN GIFTS PROTOS/////////////////////////////////////////////
-
-	public ClanGiftProto createClanGiftProto(ClanGift cg) {
-		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
-		b.setClanGiftId(cg.getId());
-		if(cg.getName() != null) {
-			b.setName(cg.getName());
-		}
-
-		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
-		b.setImageName(cg.getImageName());
-		b.setQuality(Quality.valueOf(cg.getQuality()));
-
-		return b.build();
-	}
 
 	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg, MinimumUserProto mup) {
 		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();

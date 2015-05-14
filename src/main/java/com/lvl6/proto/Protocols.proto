@@ -25,8 +25,9 @@ import "EventMiniJob.proto";
 import "EventMonster.proto";
 import "EventPvp.proto";
 import "EventQuest.proto";
-import "EventResearch.proto";
 import "EventReferral.proto";
+import "EventResearch.proto";
+import "EventReward.proto";
 import "EventStartup.proto";
 import "EventStaticData.proto";
 import "EventStructure.proto";
@@ -192,6 +193,7 @@ enum EventProtocolRequest {
 	C_UPDATE_USER_STRENGTH_EVENT = 211;
 	C_REFRESH_MINI_JOB_EVENT = 212;
 	C_SET_TANGO_ID_EVENT = 213;
+	C_SEND_TANGO_GIFT_EVENT = 214;
 	
 	C_COLLECT_CLAN_GIFTS_EVENT = 500;
 	C_DELETE_CLAN_GIFTS_EVENT = 501;
@@ -332,6 +334,7 @@ enum EventProtocolResponse {
 	S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT = 108;
 	S_FORCE_LOGOUT_EVENT = 109;
 	S_RETRIEVE_CLAN_DATA_EVENT = 110;
+	S_RECEIVED_GIFT_EVENT = 111;
 	
 	
 	S_DEV_EVENT = 200;
@@ -349,6 +352,7 @@ enum EventProtocolResponse {
 	S_UPDATE_USER_STRENGTH_EVENT = 211;
 	S_REFRESH_MINI_JOB_EVENT = 212;	
 	S_SET_TANGO_ID_EVENT = 213;
+	S_SEND_TANGO_GIFT_EVENT = 214;
 	
 	S_COLLECT_CLAN_GIFTS_EVENT = 500;
 	S_DELETE_CLAN_GIFTS_EVENT = 501;
