@@ -929,8 +929,8 @@ public class User implements Serializable {
 
 	}
 
-	public boolean updateBoughtBoosterPack(int gemChange, Date now,
-			boolean freeBoosterPack, boolean riggedBoosterPack) {
+	public boolean updateBoughtBoosterPack(int gemChange, int gachaCreditsChange, 
+			Date now, boolean freeBoosterPack, boolean riggedBoosterPack) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -938,6 +938,9 @@ public class User implements Serializable {
 
 		if (gemChange != 0) {
 			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+		if (gachaCreditsChange != 0) {
+			relativeParams.put(DBConstants.USER__GACHA_CREDITS, gachaCreditsChange);
 		}
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();

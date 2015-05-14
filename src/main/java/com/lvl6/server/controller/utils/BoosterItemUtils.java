@@ -60,65 +60,40 @@ public class BoosterItemUtils {
 		int gemReward = 0;
 		for (BoosterItem bi : boosterItems) {
 			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
-			if(r.getType().equals(RewardType.GEMS.name())) {
+			if(r.getType().equalsIgnoreCase(RewardType.GEMS.name())) {
 				gemReward += r.getAmt();
 			}
 		}
 
 		return gemReward;
 	}
+	
+	public int determineGachaCreditsReward(List<BoosterItem> boosterItems, 
+			RewardRetrieveUtils rewardRetrieveUtils) {
+		int gachaCreditsReward = 0;
+		for (BoosterItem bi : boosterItems) {
+			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+			if(r.getType().equalsIgnoreCase(RewardType.GACHA_CREDITS.name())) {
+				gachaCreditsReward += r.getAmt();
+			}
+		}
 
-//	//monsterIdsToNumPieces or completeUserMonsters will be populated
-//	public String createUpdateUserMonsterArguments(String userId,
-//			int boosterPackId, List<BoosterItem> boosterItems,
-//			Map<Integer, Integer> monsterIdsToNumPieces,
-//			List<MonsterForUser> completeUserMonsters, Date now,
-//			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-//			MonsterRetrieveUtils monsterRetrieveUtils,
-//			MonsterStuffUtils monsterStuffUtils) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
-//		sb.append(" ");
-//		sb.append(boosterPackId);
-//		sb.append(" boosterItemIds ");
-//
-//		List<Integer> boosterItemIds = new ArrayList<Integer>();
-//		for (BoosterItem item : boosterItems) {
-//			Integer id = item.getId();
-//			Integer monsterId = item.getMonsterId();
-//
-//			//only keep track of the booster item ids that are a monster reward
-//			if (monsterId <= 0) {
-//				continue;
-//			}
-//			if (item.isComplete()) {
-//				//create a "complete" user monster
-//				boolean hasAllPieces = true;
-//				boolean isComplete = true;
-//				Monster monzter = monsterRetrieveUtils
-//						.getMonsterForMonsterId(monsterId);
-//				MonsterForUser newUserMonster = monsterStuffUtils
-//						.createNewUserMonster(userId,
-//								monzter.getNumPuzzlePieces(), monzter, now,
-//								hasAllPieces, isComplete, monsterLevelInfoRetrieveUtils);
-//
-//				//return this monster in the argument list completeUserMonsters, so caller
-//				//can use it
-//				completeUserMonsters.add(newUserMonster);
-//
-//			} else {
-//				monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
-//			}
-//			boosterItemIds.add(id);
-//		}
-//		if (!boosterItemIds.isEmpty()) {
-//			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
-//			sb.append(boosterItemIdsStr);
-//		}
-//
-//		log.info(sb.toString());
-//		return sb.toString();
-//	}
+		return gachaCreditsReward;
+	}
+
+	//monsterIdsToNumPieces or completeUserMonsters will be populated
+	public static String createUpdateUserMonsterArguments(String userId,
+			int boosterPackId, List<BoosterItem> boosterItems,
+			Map<Integer, Integer> monsterIdsToNumPieces,
+			List<MonsterForUser> completeUserMonsters, Date now,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			MonsterRetrieveUtils monsterRetrieveUtils,
+			MonsterStuffUtils monsterStuffUtils) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
+		sb.append(" ");
+		sb.append(boosterPackId);
+		sb.append(" boosterItemIds ");
 
 //	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
 //			List<BoosterItem> itemsUserReceives,

@@ -551,4 +551,14 @@ public class AwardRewardAction {
 		this.acga = acga;
 	}
 	
+
+	public int getGachaCreditsGained() {
+		return gachaCreditsGained;
+	}
+
+	public void setGachaCreditsGained(int gachaCreditsGained) {
+		this.gachaCreditsGained = gachaCreditsGained;
+	}
+	
+	
 }

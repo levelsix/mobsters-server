@@ -1762,12 +1762,8 @@ public class MiscMethods {
 						}
 					}
 					else {
-						if(sourceLanguage == null) {
-							translatedText = Translate.execute(text, language2);
-						}
-						else translatedText = Translate.execute(text, sourceLanguage, language2);
-						TranslateLanguages tl = convertFromLanguageToEnum(language2);
-						returnMap.put(tl, translatedText);
+						translatedText = Translate.execute(text, language2);
+
 					}
 				}
 			}
