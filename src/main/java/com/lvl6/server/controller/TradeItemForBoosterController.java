@@ -399,10 +399,11 @@ public class TradeItemForBoosterController extends EventController {
         int gemsGained = ara.getGemsGained();
         int cashGained = ara.getCashGained();
         int oilGained = ara.getOilGained();
+        int gachaGained = ara.getGachaCreditsGained();
 
         //TODO: protofy the rewards
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, 0);
+                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, gachaGained, null);
         log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
     }

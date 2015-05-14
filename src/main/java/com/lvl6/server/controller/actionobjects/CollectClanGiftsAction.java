@@ -141,7 +141,7 @@ public class CollectClanGiftsAction {
 		
 		urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(), 
 				ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
-				ara.getOilGained(), null);
+				ara.getOilGained(), ara.getGachaCreditsGained(), null);
 
 		//delete the rows in clan gifts for user
 		boolean success = updateUtil.updateUserClanGiftHasBeenCollected(userId, listOfClanGifts);
