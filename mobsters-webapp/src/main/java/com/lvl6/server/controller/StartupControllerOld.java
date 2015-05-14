@@ -61,7 +61,7 @@ public class StartupControllerOld {//extends EventController {
 
 	@Autowired
 	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
-
+	
 	@Autowired
 	protected InAppPurchaseUtils inAppPurchaseUtils;
 
@@ -595,7 +595,7 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
-
+			
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -676,8 +676,8 @@ public class StartupControllerOld {//extends EventController {
 					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-
-			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId,
+			
+			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId, 
 					clanGiftForUserRetrieveUtils, createInfoProtoUtils);
 			scga.setUp(fillMe);
 			log.info("{}ms at SetClanGiftsAction", stopWatch.getTime());
@@ -688,7 +688,7 @@ public class StartupControllerOld {//extends EventController {
 					tangoGiftRetrieveUtil, rewardRetrieveUtil, createInfoProtoUtils);
 			sga.setUp(fillMe);
 			log.info("{}ms at SetGiftsAction", stopWatch.getTime());
-
+			
 
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -719,7 +719,7 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setClanGifts", stopWatch.getTime());
 			sga.execute(fillMe);;
 			log.info("{}ms at setGifts", stopWatch.getTime());
-
+			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
 			resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -740,7 +740,7 @@ public class StartupControllerOld {//extends EventController {
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
-
+			
 
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);

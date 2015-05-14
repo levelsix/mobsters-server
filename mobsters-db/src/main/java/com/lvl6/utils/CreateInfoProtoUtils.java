@@ -428,7 +428,7 @@ public class CreateInfoProtoUtils {
 			Collection<UserResearchProto> urpList = createUserResearchProto(rfuList);
 			ppb.addAllUserResearch(urpList);
 		}
-		
+
 		if (null != sfuList && !sfuList.isEmpty()) {
 			List<FullUserStructureProto> uspList = new ArrayList<FullUserStructureProto>();
 			for(StructureForUserPojo sfu : sfuList) {
@@ -602,7 +602,7 @@ public class CreateInfoProtoUtils {
 			if(userIdToOilReward.containsKey(userId)) {
 				prospectiveOilWinnings = userIdToOilReward.get(userId);;
 			}
-			
+
 			Clan clan = null;
 			if (userIdToClan.containsKey(userId)) {
 				clan = userIdToClan.get(userId);
@@ -634,7 +634,7 @@ public class CreateInfoProtoUtils {
 			if (userIdToRfuList.containsKey(userId)) {
 				rfuList = userIdToRfuList.get(userId);
 			}
-			
+
 			List<StructureForUserPojo> sfuList = null;
 			if (userIdToSfuList.containsKey(userId)) {
 				sfuList = userIdToSfuList.get(userId);
@@ -4312,7 +4312,7 @@ public class CreateInfoProtoUtils {
 		//    }
 		return builder.build();
 	}
-	
+
 	public FullUserStructureProto createFullUserStructureProtoFromUserStructPojo(
 			StructureForUserPojo userStructPojo) {
 		FullUserStructureProto.Builder builder = FullUserStructureProto
@@ -5388,21 +5388,11 @@ public class CreateInfoProtoUtils {
 			builder.setTangoId(tangoId);
 		}
 
-		Date lastTangoGiftSentTime = u.getLastTangoGiftSentTime();
-		if (null != lastTangoGiftSentTime) {
-			builder.setLastTangoGiftSentTime(lastTangoGiftSentTime.getTime());
-		}
-
-		String tangoId = u.getTangoId();
-		if (null != tangoId && !tangoId.isEmpty()) {
-			builder.setTangoId(tangoId);
-		}
-
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
 	}
-
+	
 	//using user pojo
 	public FullUserProto createFullUserProtoFromUser(
 			UserPojo u,
@@ -5431,13 +5421,13 @@ public class CreateInfoProtoUtils {
 			builder.setIsFake(false);
 		}
 		else builder.setIsFake(true);
-
+		
 		builder.setCreateTime(u.getCreateTime().getTime());
 		if (u.getIsAdmin().compareTo((byte)0) == 0) {
 			builder.setIsAdmin(false);
 		}
 		else builder.setIsAdmin(true);
-
+		
 		builder.setNumCoinsRetrievedFromStructs(u
 				.getNumCoinsRetrievedFromStructs());
 		builder.setNumOilRetrievedFromStructs(u.getNumOilRetrievedFromStructs());
@@ -5672,7 +5662,7 @@ public class CreateInfoProtoUtils {
 		for(StrengthLeaderBoard slb : slbList) {
 			userIds.add(slb.getUserId());
 		}
-
+		
 		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
 		for(StrengthLeaderBoard slb : slbList) {
 			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
@@ -5680,12 +5670,12 @@ public class CreateInfoProtoUtils {
 			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
 			b.setRank(slb.getRank());
 			b.setStrength(slb.getStrength());
-
+			
 			slbpList.add(b.build());
 		}
 		return slbpList;
 	}
-
+	
 	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtos(List<StrengthLeaderBoard> slbList,
 			UserRetrieveUtils2 userRetrieveUtils) {
 		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
@@ -5707,7 +5697,7 @@ public class CreateInfoProtoUtils {
 		}
 		return slbpList;
 	}
-
+	
 	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfigPojo> mjricList) {
 		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
 		for(MiniJobRefreshItemConfigPojo mjric : mjricList) {

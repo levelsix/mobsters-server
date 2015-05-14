@@ -150,7 +150,7 @@ message StartupResponseProto {
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
 	
 	repeated UserGiftProto userGifts = 54;
-	repeated UserClanGiftProto userClanGifts = 500;
+	repeated UserClanGiftProto userClanGifts = 500; 
 	repeated StrengthLeaderBoardProto topStrengthLeaderBoards = 501; 
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
@@ -245,7 +245,7 @@ message StartupResponseProto {
 		optional int32 tangoMinGemReward = 43;
 		
 		//optional string creditsFileName = 44; defined above
-				
+		
 		optional BoosterPackConstantsProto boosterPackConstantProto = 500;
 		
 		message AnimatedSpriteOffsetProto {
@@ -361,8 +361,8 @@ message StartupResponseProto {
 		message BoosterPackConstantsProto { 
 			optional int32 purchaseAmountRequired = 1;
 			optional int32 numberOfPacksGiven = 2;
-		}
-		
+	}
+	
 	}
 	
 	message TutorialConstants {
