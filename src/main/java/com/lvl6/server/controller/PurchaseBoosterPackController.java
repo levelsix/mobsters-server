@@ -194,7 +194,7 @@ public class PurchaseBoosterPackController extends EventController {
 				
 				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(pbpa.getAra().getNuOrUpdatedItems(), 
 						pbpa.getAra().getNuOrUpdatedMonsters(), pbpa.getAra().getGemsGained(), 
-						pbpa.getAra().getCashGained(), pbpa.getAra().getOilGained(), pbpa.getGachaCreditsReward());
+						pbpa.getAra().getCashGained(), pbpa.getAra().getOilGained(), pbpa.getGachaCreditsReward(), null);
 				
 				resBuilder.setReward(urp);
 				

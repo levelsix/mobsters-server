@@ -490,7 +490,7 @@ public class EndPvpBattleAction {
 			log.info( "attacker before currency update: {}",
 					attacker);
 			int numUpdated = attacker.updateRelativeCashAndOilAndGems(
-					attackerCashChange, attackerOilChange, 0);
+					attackerCashChange, attackerOilChange, 0, 0);
 			log.info( "attacker after currency update: {}",
 					attacker );
 			log.info( "num updated when changing attacker's currency={}",
@@ -594,7 +594,7 @@ public class EndPvpBattleAction {
 		if (attackerWon && resourceChanged) {
 			log.info("defender before currency update:{}", defender);
 			int numUpdated = defender.updateRelativeCashAndOilAndGems(
-					defenderCashChange, defenderOilChange, 0);
+					defenderCashChange, defenderOilChange, 0, 0);
 			log.info("num updated when changing defender's currency={}",
 					numUpdated);
 			log.info("defender after currency update: {}",

@@ -3575,7 +3575,7 @@ public class CreateInfoProtoUtils {
 	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
-			int gems, int cash, int oil, UserClanGiftProto ucgp, int gachaCredits)
+			int gems, int cash, int oil, int gachaCredits, UserClanGiftProto ucgp)
 	{
 		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
 

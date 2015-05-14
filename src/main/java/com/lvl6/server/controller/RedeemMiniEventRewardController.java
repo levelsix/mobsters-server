@@ -155,7 +155,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 				//TODO: protofy the rewards
 				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-						nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, 0);
+						nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, 0, null);
 				resBuilder.setRewards(urp);
 			}
 
