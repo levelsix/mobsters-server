@@ -1172,9 +1172,9 @@ public final class EventBoosterPackProto {
        */
       SUCCESS(0, 1),
       /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
+       * <code>FAIL_INSUFFICIENT_GACHA_CREDITS = 2;</code>
        */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
+      FAIL_INSUFFICIENT_GACHA_CREDITS(1, 2),
       /**
        * <code>FAIL_OTHER = 3;</code>
        */
@@ -1186,9 +1186,9 @@ public final class EventBoosterPackProto {
        */
       public static final int SUCCESS_VALUE = 1;
       /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
+       * <code>FAIL_INSUFFICIENT_GACHA_CREDITS = 2;</code>
        */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
+      public static final int FAIL_INSUFFICIENT_GACHA_CREDITS_VALUE = 2;
       /**
        * <code>FAIL_OTHER = 3;</code>
        */
@@ -1200,7 +1200,7 @@ public final class EventBoosterPackProto {
       public static PurchaseBoosterPackStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
+          case 2: return FAIL_INSUFFICIENT_GACHA_CREDITS;
           case 3: return FAIL_OTHER;
           default: return null;
         }
@@ -2734,20 +2734,20 @@ public final class EventBoosterPackProto {
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
       "serProto\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nclien" +
       "tTime\030\003 \001(\003\022\034\n\024dailyFreeBoosterPack\030\004 \001(" +
-      "\010\022\024\n\014buyingInBulk\030\005 \001(\010\"\350\002\n PurchaseBoos" +
+      "\010\022\024\n\014buyingInBulk\030\005 \001(\010\"\361\002\n PurchaseBoos" +
       "terPackResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022Z\n\006status",
       "\030\002 \001(\0162J.com.lvl6.proto.PurchaseBoosterP" +
       "ackResponseProto.PurchaseBoosterPackStat" +
       "us\022/\n\005prize\030\004 \003(\0132 .com.lvl6.proto.Boost" +
       "erItemProto\022/\n\006reward\030\006 \001(\0132\037.com.lvl6.p" +
-      "roto.UserRewardProto\"T\n\031PurchaseBoosterP" +
-      "ackStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICI" +
-      "ENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"q\n(ReceivedRa" +
-      "reBoosterPurchaseResponseProto\022E\n\023rareBo" +
-      "osterPurchase\030\001 \001(\0132(.com.lvl6.proto.Rar" +
-      "eBoosterPurchaseProtoB\027B\025EventBoosterPac",
-      "kProto"
+      "roto.UserRewardProto\"]\n\031PurchaseBoosterP" +
+      "ackStatus\022\013\n\007SUCCESS\020\001\022#\n\037FAIL_INSUFFICI" +
+      "ENT_GACHA_CREDITS\020\002\022\016\n\nFAIL_OTHER\020\003\"q\n(R" +
+      "eceivedRareBoosterPurchaseResponseProto\022" +
+      "E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.lvl6." +
+      "proto.RareBoosterPurchaseProtoB\027B\025EventB",
+      "oosterPackProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

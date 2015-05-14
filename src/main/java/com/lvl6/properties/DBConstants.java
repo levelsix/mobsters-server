@@ -977,6 +977,7 @@ public class DBConstants {
 	public static final String BOOSTER_PACK__DISPLAY_TO_USER = "display_to_user";
 	public static final String BOOSTER_PACK__RIGGED_ID = "rigged_id";
 	public static final String BOOSTER_PACK__TYPE = "type";
+	public static final String BOOSTER_PACK__GACHA_CREDITS_PRICE = "gacha_credits_price";
 
 	public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";

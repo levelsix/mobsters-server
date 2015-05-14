@@ -207,14 +207,16 @@ public class TradeItemForBoosterController extends EventController {
 			}
 
 			int gemReward = 0;
+			int gachaCreditsReward = 0;
 			boolean successful = false;
 			if (legit) {
 				boolean rigged = riggedContainer.get(0);
 				gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
+				gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu,
 						itemId, boosterPackId, itemsUserReceives, now,
-						gemReward, rigged);
+						gemReward, gachaCreditsReward, rigged);
 			}
 
 			if (successful) {
@@ -351,7 +353,7 @@ public class TradeItemForBoosterController extends EventController {
 	private boolean writeChangesToDB(Builder resBuilder, User user,
 			String userId, ItemForUser ifu, int itemId, int bPackId,
 			List<BoosterItem> itemsUserReceives, Date now, int gemReward,
-			boolean rigged) {
+			int gachaCreditsReward, boolean rigged) {
 
 		//update user items, user, and user_monsters
 		//    int numUpdated = UpdateUtils.get().updateItemForUser(userId, itemId, -1);
@@ -372,7 +374,7 @@ public class TradeItemForBoosterController extends EventController {
 		//				"could not change user's money. gemReward=%s", gemReward));
 		//			return false;
 		//		}
-		boolean updated = user.updateBoughtBoosterPack(gemReward, now, false,
+		boolean updated = user.updateBoughtBoosterPack(gemReward, gachaCreditsReward, now, false,
 				rigged);
 		log.info("updated, user bought boosterPack? {}", updated);
 		
