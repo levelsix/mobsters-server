@@ -3573,7 +3573,7 @@ public class CreateInfoProtoUtils {
 	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
-			int gems, int cash, int oil, UserClanGiftProto ucgp)
+			int gems, int cash, int oil, UserClanGiftProto ucgp, int gachaCredits)
 	{
 		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
 
@@ -3593,6 +3593,7 @@ public class CreateInfoProtoUtils {
 		if(ucgp != null) {
 			urp.setClanGift(ucgp);
 		}
+		urp.setGachaCredits(gachaCredits);
 
 		return urp.build();
 	}

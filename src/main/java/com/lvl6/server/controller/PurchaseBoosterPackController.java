@@ -62,6 +62,9 @@ public class PurchaseBoosterPackController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected BoosterItemUtils boosterItemUtils;
+	
+	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
@@ -192,7 +195,7 @@ public class PurchaseBoosterPackController extends EventController {
 				
 				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(pbpa.getAra().getNuOrUpdatedItems(), 
 						pbpa.getAra().getNuOrUpdatedMonsters(), pbpa.getAra().getGemsGained(), 
-						pbpa.getAra().getCashGained(), pbpa.getAra().getOilGained());
+						pbpa.getAra().getCashGained(), pbpa.getAra().getOilGained(), pbpa.getGachaCreditsReward());
 				
 				resBuilder.setReward(urp);
 				

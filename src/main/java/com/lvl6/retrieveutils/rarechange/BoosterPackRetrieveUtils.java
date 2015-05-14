@@ -134,7 +134,9 @@ public class BoosterPackRetrieveUtils {
 			}
 		}
 
-		BoosterPack boosterPack = new BoosterPack(id, name, gemPrice,
+		int gachaCreditsPrice = rs.getInt(DBConstants.BOOSTER_PACK__GACHA_CREDITS_PRICE);
+		
+		BoosterPack boosterPack = new BoosterPack(id, name, gemPrice, gachaCreditsPrice,
 				listBackgroundImgName, listDescription, navBarImgName,
 				navTitleImgName, machineImgName, expPerItem, displayToUser,
 				riggedId, boosterPackType);

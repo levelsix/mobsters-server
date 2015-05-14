@@ -9,6 +9,7 @@ public class BoosterPack implements Serializable {
 	private int id;
 	private String name;
 	private int gemPrice;//prices for all booster packs should be same
+	private int gachaCreditsPrice;
 	private String listBackgroundImgName;
 	private String listDescription;
 	private String navBarImgName;
@@ -19,7 +20,7 @@ public class BoosterPack implements Serializable {
 	private int riggedId; //if pack is/isn't rigged then this is/isn't set
 	private String type;
 
-	public BoosterPack(int id, String name, int gemPrice,
+	public BoosterPack(int id, String name, int gemPrice, int gachaCreditsPrice,
 			String listBackgroundImgName, String listDescription,
 			String navBarImgName, String navTitleImgName,
 			String machineImgName, int expPerItem, boolean displayToUser,
@@ -28,6 +29,7 @@ public class BoosterPack implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.gemPrice = gemPrice;
+		this.gachaCreditsPrice = gachaCreditsPrice;
 		this.listBackgroundImgName = listBackgroundImgName;
 		this.listDescription = listDescription;
 		this.navBarImgName = navBarImgName;
@@ -135,10 +137,19 @@ public class BoosterPack implements Serializable {
 		this.type = type;
 	}
 
+	public int getGachaCreditsPrice() {
+		return gachaCreditsPrice;
+	}
+
+	public void setGachaCreditsPrice(int gachaCreditsPrice) {
+		this.gachaCreditsPrice = gachaCreditsPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "BoosterPack [id=" + id + ", name=" + name + ", gemPrice="
-				+ gemPrice + ", listBackgroundImgName=" + listBackgroundImgName
+				+ gemPrice + ", gachaCreditsPrice=" + gachaCreditsPrice
+				+ ", listBackgroundImgName=" + listBackgroundImgName
 				+ ", listDescription=" + listDescription + ", navBarImgName="
 				+ navBarImgName + ", navTitleImgName=" + navTitleImgName
 				+ ", machineImgName=" + machineImgName + ", expPerItem="

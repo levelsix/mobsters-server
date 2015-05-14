@@ -485,6 +485,7 @@ public class InAppPurchaseController extends EventController {
         int gemsGained = iapsa.getAra().getGemsGained();
         int cashGained = iapsa.getAra().getCashGained();
         int oilGained = iapsa.getAra().getOilGained();
+        int gachaCreditsGained = iapsa.getAra().getGachaCreditsGained();
 
         //TODO: protofy the rewards
         ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
@@ -492,7 +493,8 @@ public class InAppPurchaseController extends EventController {
         UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
         
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, ucgp);
+                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
+                gachaCreditsGained, ucgp);
         log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
 

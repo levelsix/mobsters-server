@@ -113,17 +113,18 @@ public class PurchaseBoosterPackAction {
 	private BoosterPack aPack;
 	private boolean riggedPack;
 	private int boosterPackIdPurchased;
-	private int gemPrice;
+	private int gachaCreditsPrice;
 	private Map<Integer, BoosterItem> boosterItemIdsToBoosterItems;
-	private int userGems;
+	private int userGachaCredits;
 	private List<BoosterItem> itemsUserReceives;
 	private List<Reward> listOfRewards;
 	private List<ItemForUser> ifuList;
 	private AwardRewardAction ara;
 
 	private int gemReward;
-	private int gemChange;
-
+	private int gachaCreditsReward;
+	private int gachaCreditsChange;
+	
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
@@ -202,13 +203,13 @@ public class PurchaseBoosterPackAction {
 			return false;
 		}
 
-		userGems = user.getGems();
+		userGachaCredits = user.getGachaCredits();
 
 		//check if user can afford to buy however many more user wants to buy
 		if (!freeBoosterPack) {
-			if (userGems < gemPrice) {
+			if (userGachaCredits < gachaCreditsPrice) {
 				resBuilder
-						.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GEMS);
+						.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
 				return false;
 			}
 		} else {
@@ -230,10 +231,10 @@ public class PurchaseBoosterPackAction {
 			return false;
 		}
 
-		gemPrice = aPack.getGemPrice();
+		gachaCreditsPrice = aPack.getGachaCreditsPrice();
 
 		if(buyingInBulk) {
-			gemPrice = gemPrice * ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE;
+			gachaCreditsPrice = gachaCreditsPrice * ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE;
 		}
 
 		return true;
@@ -306,7 +307,7 @@ public class PurchaseBoosterPackAction {
 			log.info("size of listofrewards: " + listOfRewards.size());
 		}
 
-		ara = new AwardRewardAction(userId, user, 0, 0, now, "booster packs", listOfRewards,
+		ara = new AwardRewardAction(userId, user, 0, 0, now, "booster packs id " + aPack.getId(), listOfRewards,
 				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils);
 
@@ -316,17 +317,18 @@ public class PurchaseBoosterPackAction {
 
 	//TODO: allow multiple free packs?
 	private void updateUserCurrency() {
-		gemReward = ara.getGemsGained();
+		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
+		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
 
-		gemChange = -1 * gemPrice;
+		gachaCreditsChange = -1 * gachaCreditsPrice;
 		if (freeBoosterPack) {
-			gemChange = 0;
+			gachaCreditsChange = 0;
 		}
-		gemChange += gemReward;
+		gachaCreditsChange += gachaCreditsReward;
 
 		//update user's flag concerning whether or not he's bought a rigged pack
 		//update user's last free booster pack time
-		boolean updated = user.updateBoughtBoosterPack(gemChange, now,
+		boolean updated = user.updateBoughtBoosterPack(gemReward, gachaCreditsChange, now,
 				freeBoosterPack, riggedPack);
 		log.info("updated, user bought boosterPack? {}", updated);
 	}
@@ -516,14 +518,6 @@ public class PurchaseBoosterPackAction {
 		this.boosterPackIdPurchased = boosterPackIdPurchased;
 	}
 
-	public int getGemPrice() {
-		return gemPrice;
-	}
-
-	public void setGemPrice(int gemPrice) {
-		this.gemPrice = gemPrice;
-	}
-
 	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
 		return boosterItemIdsToBoosterItems;
 	}
@@ -531,14 +525,6 @@ public class PurchaseBoosterPackAction {
 	public void setBoosterItemIdsToBoosterItems(
 			Map<Integer, BoosterItem> boosterItemIdsToBoosterItems) {
 		this.boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItems;
-	}
-
-	public int getUserGems() {
-		return userGems;
-	}
-
-	public void setUserGems(int userGems) {
-		this.userGems = userGems;
 	}
 
 	public List<Reward> getListOfRewards() {
@@ -565,14 +551,6 @@ public class PurchaseBoosterPackAction {
 		this.gemReward = gemReward;
 	}
 
-	public int getGemChange() {
-		return gemChange;
-	}
-
-	public void setGemChange(int gemChange) {
-		this.gemChange = gemChange;
-	}
-
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -583,6 +561,22 @@ public class PurchaseBoosterPackAction {
 
 	public void setIfuList(List<ItemForUser> ifuList) {
 		this.ifuList = ifuList;
+	}
+
+	public int getGachaCreditsChange() {
+		return gachaCreditsChange;
+	}
+
+	public void setGachaCreditsChange(int gachaCreditsChange) {
+		this.gachaCreditsChange = gachaCreditsChange;
+	}
+
+	public int getGachaCreditsReward() {
+		return gachaCreditsReward;
+	}
+
+	public void setGachaCreditsReward(int gachaCreditsReward) {
+		this.gachaCreditsReward = gachaCreditsReward;
 	}
 
 
