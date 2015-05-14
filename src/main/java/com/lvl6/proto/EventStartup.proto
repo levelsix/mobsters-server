@@ -17,10 +17,10 @@ import "MonsterStuff.proto";
 import "Quest.proto";
 import "Sales.proto";
 import "Research.proto";
+import "Reward.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
-import "Reward.proto";
 import "Task.proto";
 import "User.proto";
 
@@ -149,6 +149,7 @@ message StartupResponseProto {
 
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
 	
+	repeated UserGiftProto userGifts = 54;
 	repeated UserClanGiftProto userClanGifts = 500;
 	repeated StrengthLeaderBoardProto topStrengthLeaderBoards = 501; 
 	
