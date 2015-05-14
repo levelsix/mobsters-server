@@ -250,6 +250,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_CASH = 2500;
 	public static final int TUTORIAL__INIT_OIL = 2500;
 	public static final int TUTORIAL__INIT_GEMS = 50;
+	public static final int TUTORIAL__GACHA_CREDITS = 100000;  //TODO: this value needs to be set
 	public static final int TUTORIAL__INIT_RANK = 100;
 	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2, 2, 2, 2, 2,
 			2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };

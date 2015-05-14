@@ -376,6 +376,7 @@ message StartupResponseProto {
 		optional int32 cashInit = 11;
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
+		optional int32 gachaCreditsInit = 17;
 		
 		repeated MinimumObstacleProto tutorialObstacles = 14;
 		//optional int32 enemyMonsterIdTwo = 15; defined above 
