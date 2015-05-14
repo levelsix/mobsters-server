@@ -150,77 +150,7 @@ public class MiscMethods {
 
 	//METHODS FOR PICKING A BOOSTER PACK
 
-	//no arguments are modified
-	public List<BoosterItem> determineBoosterItemsUserReceives(
-			int amountUserWantsToPurchase,
-			Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
-		//return value
-		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 
-		Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId
-				.values();
-		List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
-		float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId
-				.values());
-
-		//selecting items at random with replacement
-		for (int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-			BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
-			if (null == bi) {
-				continue;
-			}
-			itemsUserReceives.add(bi);
-		}
-
-		return itemsUserReceives;
-	}
-
-	private float sumProbabilities(Collection<BoosterItem> boosterItems) {
-		float sumOfProbabilities = 0.0f;
-		for (BoosterItem bi : boosterItems) {
-			sumOfProbabilities += bi.getChanceToAppear();
-		}
-		return sumOfProbabilities;
-	}
-
-	private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
-			float sumOfProbabilities) {
-		Random rand = new Random();
-		float unnormalizedProbabilitySoFar = 0f;
-		float randFloat = rand.nextFloat();
-
-		boolean logBoosterItemDetails = serverToggleRetrieveUtils
-				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS);
-		if (logBoosterItemDetails) {
-			log.info(
-					"selecting booster item. sumOfProbabilities={} \t randFloat={}",
-					sumOfProbabilities, randFloat);
-		}
-
-		int size = itemsList.size();
-		//for each item, normalize before seeing if it is selected
-		for (int i = 0; i < size; i++) {
-			BoosterItem item = itemsList.get(i);
-
-			//normalize probability
-			unnormalizedProbabilitySoFar += item.getChanceToAppear();
-			float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar
-					/ sumOfProbabilities;
-
-			if (logBoosterItemDetails) {
-				log.info("boosterItem={} \t normalizedProbabilitySoFar={}",
-						item, normalizedProbabilitySoFar);
-			}
-
-			if (randFloat < normalizedProbabilitySoFar) {
-				//we have a winner! current boosterItem is what the user gets
-				return item;
-			}
-		}
-
-		log.error("maybe no boosterItems exist. boosterItems={}", itemsList);
-		return null;
-	}
 
 	//purpose of this method is to discover if the booster items that contain
 	//monsters as rewards, if the monster ids are valid
