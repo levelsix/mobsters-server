@@ -25,13 +25,13 @@ public class TangoGiftRetrieveUtils {
 	private static Map<Integer, TangoGift> tangoGiftIdsToTangoGifts;
 	private static final String TABLE_NAME = DBConstants.TABLE_TANGO_GIFT_CONFIG;
 
-//	public Map<Integer, TangoGift> getTangoGiftIdsToTangoGifts() {
-//		log.debug("retrieving all tango gifts data map");
-//		if (tangoGiftIdsToTangoGifts == null) {
-//			setStaticTangoGiftIdsToTangoGifts();
-//		}
-//		return tangoGiftIdsToTangoGifts;
-//	}
+	public Map<Integer, TangoGift> getTangoGiftIdsToTangoGifts() {
+		log.debug("retrieving all tango gifts data map");
+		if (tangoGiftIdsToTangoGifts == null) {
+			setStaticTangoGiftIdsToTangoGifts();
+		}
+		return tangoGiftIdsToTangoGifts;
+	}
 
 	public TangoGift getTangoGiftForTangoGiftId(int tangoGiftId) {
 		log.debug("retrieve tango gift data for tango gift "

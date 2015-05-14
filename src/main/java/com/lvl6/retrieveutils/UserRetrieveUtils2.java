@@ -42,6 +42,47 @@ public class UserRetrieveUtils2 {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+
+	public Map<String, User> getUsersForTangoIdsMap(Collection<String> tangoIds) {
+		log.debug("retrieving users with tangoIds {}", tangoIds);
+
+		List<User> usersList = getUsersForTangoIds(tangoIds);
+		Map<String, User> userIdToUserMap = new HashMap<String, User>();
+		for (User user : usersList) {
+			userIdToUserMap.put(user.getId(), user);
+		}
+
+		return userIdToUserMap;
+	}
+	public List<User> getUsersForTangoIds(Collection<String> tangoIds) {
+		if (null == tangoIds || tangoIds.isEmpty()) {
+			return new ArrayList<User>();
+		}
+
+		int amount = tangoIds.size();
+		List<String> questions = Collections.nCopies(amount, "?");
+		String qStr = StringUtils.csvList(questions);
+
+		String query = String.format("select * from %s where %s in (%s)",
+				TABLE_NAME, DBConstants.USER__TANGO_ID, qStr);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(tangoIds);
+
+		List<User> usersList = null;
+		try {
+			 usersList = this.jdbcTemplate.query(query,
+					values.toArray(), rowMapper);
+
+		} catch (Exception e) {
+			log.error("user retrieve db error.", e);
+			usersList = new ArrayList<User>();
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return usersList;
+	}
+
 	public List<String> getUserIdsForFacebookIds(List<String> facebookIds) {
 		int amount = facebookIds.size();
 		List<String> questionMarkList = Collections.nCopies(amount, "?");
@@ -142,13 +183,14 @@ public class UserRetrieveUtils2 {
 				"select count(*) from %s where %s like concat(?, \"%%\");",
 				TABLE_NAME, DBConstants.USER__UDID_FOR_HISTORY, udid);
 		try {
-			return this.jdbcTemplate.queryForInt(query, udid);
+			return this.jdbcTemplate.queryForObject(
+					query, new Object[] { udid }, Integer.class);
+//			return this.jdbcTemplate.queryForInt(query, udid);
 
 		} catch (Exception e) {
 			log.error("numAccountsForUDID error", e);
 		}
-		log.warn(String.format(
-				"No accounts found when counting accounts for udid=%s", udid));
+		log.warn( "No accounts found when counting accounts for udid={}", udid );
 		return 0;
 	}
 
@@ -157,13 +199,14 @@ public class UserRetrieveUtils2 {
 				TABLE_NAME, DBConstants.USER__IS_FAKE);
 
 		try {
-			return this.jdbcTemplate.queryForInt(query, isFake);
+			return this.jdbcTemplate.queryForObject(
+					query, new Object[] { isFake }, Integer.class);
+//			return this.jdbcTemplate.queryForInt(query, isFake);
 
 		} catch (Exception e) {
 			log.error("countUsers error", e);
 		}
-		log.warn(String.format(
-				"No users found when counting users for isFake=%s", isFake));
+		log.warn( "No users found when counting users for isFake={}", isFake );
 		return 0;
 	}
 

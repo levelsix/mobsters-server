@@ -36,6 +36,7 @@ message RewardProto {
 		GACHA_CREDITS = 7;
 		MONSTER = 6;
 		CLAN_GIFT = 8;
+		TANGO_GIFT = 9;
 	}
 	
 }
@@ -80,7 +81,7 @@ message UserGiftProto {
     optional string ugId = 1;
     optional string receiverUserId = 2;
     optional MinimumUserProto gifterUser = 3;
-    optional GiftType giftType = 4;
+    optional RewardProto.RewardType giftType = 4;
     optional int64 timeReceived = 5;
     optional RewardProto rp = 6;
     optional bool hasBeenCollected = 7;
@@ -92,11 +93,6 @@ message UserGiftProto {
     optional ClanGiftProto clanGift = 9;
     optional UserTangoGiftProto tangoGift = 10;
     
-    enum GiftType {
-        GENERIC_GIFT = 1;
-        CLAN_GIFT = 2;
-        TANGO_GIFT = 3;
-    }
 }
 
 message UserTangoGiftProto {

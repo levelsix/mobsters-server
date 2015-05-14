@@ -19,6 +19,8 @@ import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.GiftForTangoUser;
+import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
@@ -349,4 +351,8 @@ public interface InsertUtil {
 
 	public abstract boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
 			String gifterUserId, int clanGiftId, String reasonForGift);
+
+	public abstract boolean insertGiftForUser(Collection<GiftForUser> giftForUsers);
+
+	public abstract boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers);
 }

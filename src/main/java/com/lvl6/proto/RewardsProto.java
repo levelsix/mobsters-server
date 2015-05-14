@@ -210,6 +210,10 @@ public final class RewardsProto {
        * <code>CLAN_GIFT = 8;</code>
        */
       CLAN_GIFT(7, 8),
+      /**
+       * <code>TANGO_GIFT = 9;</code>
+       */
+      TANGO_GIFT(8, 9),
       ;
 
       /**
@@ -244,6 +248,10 @@ public final class RewardsProto {
        * <code>CLAN_GIFT = 8;</code>
        */
       public static final int CLAN_GIFT_VALUE = 8;
+      /**
+       * <code>TANGO_GIFT = 9;</code>
+       */
+      public static final int TANGO_GIFT_VALUE = 9;
 
 
       public final int getNumber() { return value; }
@@ -258,6 +266,7 @@ public final class RewardsProto {
           case 7: return GACHA_CREDITS;
           case 6: return MONSTER;
           case 8: return CLAN_GIFT;
+          case 9: return TANGO_GIFT;
           default: return null;
         }
       }
@@ -4708,13 +4717,13 @@ public final class RewardsProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
      */
     boolean hasGiftType();
     /**
-     * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
      */
-    com.lvl6.proto.RewardsProto.UserGiftProto.GiftType getGiftType();
+    com.lvl6.proto.RewardsProto.RewardProto.RewardType getGiftType();
 
     /**
      * <code>optional int64 timeReceived = 5;</code>
@@ -4881,7 +4890,7 @@ public final class RewardsProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.RewardsProto.UserGiftProto.GiftType value = com.lvl6.proto.RewardsProto.UserGiftProto.GiftType.valueOf(rawValue);
+              com.lvl6.proto.RewardsProto.RewardProto.RewardType value = com.lvl6.proto.RewardsProto.RewardProto.RewardType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -4981,97 +4990,6 @@ public final class RewardsProto {
     @java.lang.Override
     public com.google.protobuf.Parser<UserGiftProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UserGiftProto.GiftType}
-     */
-    public enum GiftType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>GENERIC_GIFT = 1;</code>
-       */
-      GENERIC_GIFT(0, 1),
-      /**
-       * <code>CLAN_GIFT = 2;</code>
-       */
-      CLAN_GIFT(1, 2),
-      /**
-       * <code>TANGO_GIFT = 3;</code>
-       */
-      TANGO_GIFT(2, 3),
-      ;
-
-      /**
-       * <code>GENERIC_GIFT = 1;</code>
-       */
-      public static final int GENERIC_GIFT_VALUE = 1;
-      /**
-       * <code>CLAN_GIFT = 2;</code>
-       */
-      public static final int CLAN_GIFT_VALUE = 2;
-      /**
-       * <code>TANGO_GIFT = 3;</code>
-       */
-      public static final int TANGO_GIFT_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static GiftType valueOf(int value) {
-        switch (value) {
-          case 1: return GENERIC_GIFT;
-          case 2: return CLAN_GIFT;
-          case 3: return TANGO_GIFT;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<GiftType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<GiftType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<GiftType>() {
-              public GiftType findValueByNumber(int number) {
-                return GiftType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.RewardsProto.UserGiftProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final GiftType[] VALUES = values();
-
-      public static GiftType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private GiftType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UserGiftProto.GiftType)
     }
 
     private int bitField0_;
@@ -5181,17 +5099,17 @@ public final class RewardsProto {
     }
 
     public static final int GIFTTYPE_FIELD_NUMBER = 4;
-    private com.lvl6.proto.RewardsProto.UserGiftProto.GiftType giftType_;
+    private com.lvl6.proto.RewardsProto.RewardProto.RewardType giftType_;
     /**
-     * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
      */
     public boolean hasGiftType() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
      */
-    public com.lvl6.proto.RewardsProto.UserGiftProto.GiftType getGiftType() {
+    public com.lvl6.proto.RewardsProto.RewardProto.RewardType getGiftType() {
       return giftType_;
     }
 
@@ -5327,7 +5245,7 @@ public final class RewardsProto {
       ugId_ = "";
       receiverUserId_ = "";
       gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      giftType_ = com.lvl6.proto.RewardsProto.UserGiftProto.GiftType.GENERIC_GIFT;
+      giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
       timeReceived_ = 0L;
       rp_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       hasBeenCollected_ = false;
@@ -5558,7 +5476,7 @@ public final class RewardsProto {
           gifterUserBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
-        giftType_ = com.lvl6.proto.RewardsProto.UserGiftProto.GiftType.GENERIC_GIFT;
+        giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
         bitField0_ = (bitField0_ & ~0x00000008);
         timeReceived_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -6013,23 +5931,23 @@ public final class RewardsProto {
         return gifterUserBuilder_;
       }
 
-      private com.lvl6.proto.RewardsProto.UserGiftProto.GiftType giftType_ = com.lvl6.proto.RewardsProto.UserGiftProto.GiftType.GENERIC_GIFT;
+      private com.lvl6.proto.RewardsProto.RewardProto.RewardType giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
       /**
-       * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
        */
       public boolean hasGiftType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
        */
-      public com.lvl6.proto.RewardsProto.UserGiftProto.GiftType getGiftType() {
+      public com.lvl6.proto.RewardsProto.RewardProto.RewardType getGiftType() {
         return giftType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
        */
-      public Builder setGiftType(com.lvl6.proto.RewardsProto.UserGiftProto.GiftType value) {
+      public Builder setGiftType(com.lvl6.proto.RewardsProto.RewardProto.RewardType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6039,11 +5957,11 @@ public final class RewardsProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserGiftProto.GiftType giftType = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
        */
       public Builder clearGiftType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        giftType_ = com.lvl6.proto.RewardsProto.UserGiftProto.GiftType.GENERIC_GIFT;
+        giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
         onChanged();
         return this;
       }
@@ -8268,47 +8186,46 @@ public final class RewardsProto {
     java.lang.String[] descriptorData = {
       "\n\014Reward.proto\022\016com.lvl6.proto\032\nItem.pro" +
       "to\032\022MonsterStuff.proto\032\026SharedEnumConfig" +
-      ".proto\032\nUser.proto\"\352\001\n\013RewardProto\022\020\n\010re" +
+      ".proto\032\nUser.proto\"\373\001\n\013RewardProto\022\020\n\010re" +
       "wardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223\n\003ty" +
       "p\030\003 \001(\0162&.com.lvl6.proto.RewardProto.Rew" +
-      "ardType\022\013\n\003amt\030\004 \001(\005\"q\n\nRewardType\022\r\n\tNO" +
-      "_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003\022\010\n\004CASH\020\004\022" +
-      "\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013\n\007MONSTER\020\006" +
-      "\022\r\n\tCLAN_GIFT\020\010\"\202\002\n\017UserRewardProto\022B\n\024u" +
-      "pdatedOrNewMonsters\030\001 \003(\0132$.com.lvl6.pro",
-      "to.FullUserMonsterProto\0227\n\020updatedUserIt" +
-      "ems\030\002 \003(\0132\035.com.lvl6.proto.UserItemProto" +
-      "\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 \001(" +
-      "\005\022\024\n\014gachaCredits\030\006 \001(\005\0223\n\010clanGift\030\007 \001(" +
-      "\0132!.com.lvl6.proto.UserClanGiftProto\"\220\001\n" +
-      "\rClanGiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004na" +
-      "me\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021" +
-      "\n\timageName\030\004 \001(\t\022,\n\007quality\030\005 \001(\0162\027.com" +
-      ".lvl6.proto.QualityB\002\030\001\"\207\002\n\021UserClanGift" +
-      "Proto\022\026\n\016userClanGiftId\030\001 \001(\t\022\026\n\016receive",
-      "rUserId\030\002 \001(\t\0224\n\ngifterUser\030\003 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022/\n\010clanGift\030" +
-      "\004 \001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014" +
-      "timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com" +
-      ".lvl6.proto.RewardProto\022\030\n\020hasBeenCollec" +
-      "ted\030\007 \001(\010\"\302\003\n\rUserGiftProto\022\014\n\004ugId\030\001 \001(" +
-      "\t\022\026\n\016receiverUserId\030\002 \001(\t\0224\n\ngifterUser\030" +
-      "\003 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "8\n\010giftType\030\004 \001(\0162&.com.lvl6.proto.UserG" +
-      "iftProto.GiftType\022\024\n\014timeReceived\030\005 \001(\003\022",
-      "\'\n\002rp\030\006 \001(\0132\033.com.lvl6.proto.RewardProto" +
-      "\022\030\n\020hasBeenCollected\030\007 \001(\010\022\035\n\025minutesTil" +
-      "lExpiration\030\010 \001(\005\022/\n\010clanGift\030\t \001(\0132\035.co" +
-      "m.lvl6.proto.ClanGiftProto\0225\n\ttangoGift\030" +
-      "\n \001(\0132\".com.lvl6.proto.UserTangoGiftProt" +
-      "o\";\n\010GiftType\022\020\n\014GENERIC_GIFT\020\001\022\r\n\tCLAN_" +
-      "GIFT\020\002\022\016\n\nTANGO_GIFT\020\003\"v\n\022UserTangoGiftP" +
-      "roto\022\022\n\nuserGiftId\030\001 \001(\t\022\031\n\021gifterTangoU" +
-      "serId\030\002 \001(\t\0221\n\ttangoGift\030\003 \001(\0132\036.com.lvl" +
-      "6.proto.TangoGiftProto\"d\n\016TangoGiftProto",
-      "\022\023\n\013tangoGiftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024h" +
-      "oursUntilExpiration\030\003 \001(\005\022\021\n\timageName\030\004" +
-      " \001(\tB\016B\014RewardsProto"
+      "ardType\022\013\n\003amt\030\004 \001(\005\"\201\001\n\nRewardType\022\r\n\tN" +
+      "O_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003\022\010\n\004CASH\020\004" +
+      "\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013\n\007MONSTER\020" +
+      "\006\022\r\n\tCLAN_GIFT\020\010\022\016\n\nTANGO_GIFT\020\t\"\202\002\n\017Use" +
+      "rRewardProto\022B\n\024updatedOrNewMonsters\030\001 \003",
+      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
+      "\0227\n\020updatedUserItems\030\002 \003(\0132\035.com.lvl6.pr" +
+      "oto.UserItemProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030" +
+      "\004 \001(\005\022\013\n\003oil\030\005 \001(\005\022\024\n\014gachaCredits\030\006 \001(\005" +
+      "\0223\n\010clanGift\030\007 \001(\0132!.com.lvl6.proto.User" +
+      "ClanGiftProto\"\220\001\n\rClanGiftProto\022\022\n\nclanG" +
+      "iftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilE" +
+      "xpiration\030\003 \001(\005\022\021\n\timageName\030\004 \001(\t\022,\n\007qu" +
+      "ality\030\005 \001(\0162\027.com.lvl6.proto.QualityB\002\030\001" +
+      "\"\207\002\n\021UserClanGiftProto\022\026\n\016userClanGiftId",
+      "\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001(\t\0224\n\ngifter" +
+      "User\030\003 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022/\n\010clanGift\030\004 \001(\0132\035.com.lvl6.proto." +
+      "ClanGiftProto\022\024\n\014timeReceived\030\005 \001(\003\022+\n\006r" +
+      "eward\030\006 \001(\0132\033.com.lvl6.proto.RewardProto" +
+      "\022\030\n\020hasBeenCollected\030\007 \001(\010\"\205\003\n\rUserGiftP" +
+      "roto\022\014\n\004ugId\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001" +
+      "(\t\0224\n\ngifterUser\030\003 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\0228\n\010giftType\030\004 \001(\0162&.com" +
+      ".lvl6.proto.RewardProto.RewardType\022\024\n\014ti",
+      "meReceived\030\005 \001(\003\022\'\n\002rp\030\006 \001(\0132\033.com.lvl6." +
+      "proto.RewardProto\022\030\n\020hasBeenCollected\030\007 " +
+      "\001(\010\022\035\n\025minutesTillExpiration\030\010 \001(\005\022/\n\010cl" +
+      "anGift\030\t \001(\0132\035.com.lvl6.proto.ClanGiftPr" +
+      "oto\0225\n\ttangoGift\030\n \001(\0132\".com.lvl6.proto." +
+      "UserTangoGiftProto\"v\n\022UserTangoGiftProto" +
+      "\022\022\n\nuserGiftId\030\001 \001(\t\022\031\n\021gifterTangoUserI" +
+      "d\030\002 \001(\t\0221\n\ttangoGift\030\003 \001(\0132\036.com.lvl6.pr" +
+      "oto.TangoGiftProto\"d\n\016TangoGiftProto\022\023\n\013" +
+      "tangoGiftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hours",
+      "UntilExpiration\030\003 \001(\005\022\021\n\timageName\030\004 \001(\t" +
+      "B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
