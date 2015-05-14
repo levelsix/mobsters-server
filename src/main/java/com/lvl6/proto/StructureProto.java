@@ -22335,13 +22335,31 @@ public final class StructureProto {
       "posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026BattleItemFa" +
       "ctoryProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
       "6.proto.StructureInfoProto\022\022\n\npowerLimit" +
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      "\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022" +
+      "\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020" +
+      "\024*G\n\021StructOrientation\022\022\n\016NO_ORIENTATION",
+      "\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002*<\n\021Bo" +
+      "ardObstacleType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004" +
+      "HOLE\020\003\022\010\n\004VINE\020\004B\020B\016StructureProto"
+=======
+>>>>>>> rebase
       "\030\002 \001(\005*\\\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022" +
       "\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\021\n\rGACHA_CR" +
       "EDITS\020\005\022\013\n\007MONSTER\020\024*G\n\021StructOrientatio",
       "n\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n" +
+<<<<<<< HEAD
       "\nPOSITION_2\020\002*<\n\021BoardObstacleType\022\t\n\005CL" +
       "OUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003\022\010\n\004VINE\020\004B\020B\016S" +
       "tructureProto"
+=======
+      "\nPOSITION_2\020\002*2\n\021BoardObstacleType\022\t\n\005CL" +
+      "OUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003B\020B\016StructurePr" +
+      "oto"
+>>>>>>> rebase with refactoring booster pack
+>>>>>>> rebase
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

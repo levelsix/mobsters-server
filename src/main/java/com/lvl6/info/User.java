@@ -965,6 +965,7 @@ public class User implements Serializable {
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.gems += gemChange;
+			this.gachaCredits += gachaCreditsChange;
 
 			if (freeBoosterPack) {
 				this.lastFreeBoosterPackTime = now;

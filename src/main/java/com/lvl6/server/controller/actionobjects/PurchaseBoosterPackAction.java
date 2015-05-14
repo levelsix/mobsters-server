@@ -126,8 +126,7 @@ public class PurchaseBoosterPackAction {
 	private AwardRewardAction ara;
 
 	private int gemReward;
-	private int gachaCreditsReward;
-	
+	private int gachaCreditsReward;	
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
@@ -529,14 +528,6 @@ public class PurchaseBoosterPackAction {
 		this.boosterPackIdPurchased = boosterPackIdPurchased;
 	}
 
-	public int getGemPrice() {
-		return gemPrice;
-	}
-
-	public void setGemPrice(int gemPrice) {
-		this.gemPrice = gemPrice;
-	}
-
 	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
 		return boosterItemIdsToBoosterItems;
 	}
@@ -544,14 +535,6 @@ public class PurchaseBoosterPackAction {
 	public void setBoosterItemIdsToBoosterItems(
 			Map<Integer, BoosterItem> boosterItemIdsToBoosterItems) {
 		this.boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItems;
-	}
-
-	public int getUserGems() {
-		return userGems;
-	}
-
-	public void setUserGems(int userGems) {
-		this.userGems = userGems;
 	}
 
 	public List<Reward> getListOfRewards() {
@@ -576,14 +559,6 @@ public class PurchaseBoosterPackAction {
 
 	public void setGemReward(int gemReward) {
 		this.gemReward = gemReward;
-	}
-
-	public int getGemChange() {
-		return gemChange;
-	}
-
-	public void setGemChange(int gemChange) {
-		this.gemChange = gemChange;
 	}
 
 	public void setUser(User user) {

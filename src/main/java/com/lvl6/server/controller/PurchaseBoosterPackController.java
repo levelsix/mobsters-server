@@ -377,4 +377,3 @@ public class PurchaseBoosterPackController extends EventController {
 	}
 
 }
-s
