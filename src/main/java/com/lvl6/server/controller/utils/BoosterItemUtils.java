@@ -55,109 +55,113 @@ public class BoosterItemUtils {
 		return monstersExist;
 	}
 
-	public int determineGemReward(List<BoosterItem> boosterItems) {
+	public int determineGemReward(List<BoosterItem> boosterItems, 
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		int gemReward = 0;
 		for (BoosterItem bi : boosterItems) {
-			gemReward += bi.getGemReward();
+			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+			if(r.getType().equals(RewardType.GEMS.name())) {
+				gemReward += r.getAmt();
+			}
 		}
 
 		return gemReward;
 	}
 
-	//monsterIdsToNumPieces or completeUserMonsters will be populated
-	public String createUpdateUserMonsterArguments(String userId,
-			int boosterPackId, List<BoosterItem> boosterItems,
-			Map<Integer, Integer> monsterIdsToNumPieces,
-			List<MonsterForUser> completeUserMonsters, Date now,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			MonsterRetrieveUtils monsterRetrieveUtils,
-			MonsterStuffUtils monsterStuffUtils) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
-		sb.append(" ");
-		sb.append(boosterPackId);
-		sb.append(" boosterItemIds ");
+//	//monsterIdsToNumPieces or completeUserMonsters will be populated
+//	public String createUpdateUserMonsterArguments(String userId,
+//			int boosterPackId, List<BoosterItem> boosterItems,
+//			Map<Integer, Integer> monsterIdsToNumPieces,
+//			List<MonsterForUser> completeUserMonsters, Date now,
+//			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+//			MonsterRetrieveUtils monsterRetrieveUtils,
+//			MonsterStuffUtils monsterStuffUtils) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
+//		sb.append(" ");
+//		sb.append(boosterPackId);
+//		sb.append(" boosterItemIds ");
+//
+//		List<Integer> boosterItemIds = new ArrayList<Integer>();
+//		for (BoosterItem item : boosterItems) {
+//			Integer id = item.getId();
+//			Integer monsterId = item.getMonsterId();
+//
+//			//only keep track of the booster item ids that are a monster reward
+//			if (monsterId <= 0) {
+//				continue;
+//			}
+//			if (item.isComplete()) {
+//				//create a "complete" user monster
+//				boolean hasAllPieces = true;
+//				boolean isComplete = true;
+//				Monster monzter = monsterRetrieveUtils
+//						.getMonsterForMonsterId(monsterId);
+//				MonsterForUser newUserMonster = monsterStuffUtils
+//						.createNewUserMonster(userId,
+//								monzter.getNumPuzzlePieces(), monzter, now,
+//								hasAllPieces, isComplete, monsterLevelInfoRetrieveUtils);
+//
+//				//return this monster in the argument list completeUserMonsters, so caller
+//				//can use it
+//				completeUserMonsters.add(newUserMonster);
+//
+//			} else {
+//				monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
+//			}
+//			boosterItemIds.add(id);
+//		}
+//		if (!boosterItemIds.isEmpty()) {
+//			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
+//			sb.append(boosterItemIdsStr);
+//		}
+//
+//		log.info(sb.toString());
+//		return sb.toString();
+//	}
 
-		List<Integer> boosterItemIds = new ArrayList<Integer>();
-		for (BoosterItem item : boosterItems) {
-			Integer id = item.getId();
-			Integer monsterId = item.getMonsterId();
+//	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
+//			List<BoosterItem> itemsUserReceives,
+//			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
+//			UpdateUtil updateUtil) {
+//		List<ItemForUser> ifuList = calculateBoosterItemItemRewards(userId, itemsUserReceives,
+//						itemForUserRetrieveUtil);
+//
+//		log.info("ifuList={}", ifuList);
+//		if (null != ifuList && !ifuList.isEmpty()) {
+//			int numUpdated = updateUtil.updateItemForUser(ifuList);
+//			log.info("items numUpdated={}", numUpdated);
+//			return ifuList;
+//		} else {
+//			return null;
+//		}
+//
+//	}
 
-			//only keep track of the booster item ids that are a monster reward
-			if (monsterId <= 0) {
-				continue;
-			}
-			if (item.isComplete()) {
-				//create a "complete" user monster
-				boolean hasAllPieces = true;
-				boolean isComplete = true;
-				Monster monzter = monsterRetrieveUtils
-						.getMonsterForMonsterId(monsterId);
-				MonsterForUser newUserMonster = monsterStuffUtils
-						.createNewUserMonster(userId,
-								monzter.getNumPuzzlePieces(), monzter, now,
-								hasAllPieces, isComplete, monsterLevelInfoRetrieveUtils);
-
-				//return this monster in the argument list completeUserMonsters, so caller
-				//can use it
-				completeUserMonsters.add(newUserMonster);
-
-			} else {
-				monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
-			}
-			boosterItemIds.add(id);
-		}
-		if (!boosterItemIds.isEmpty()) {
-			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
-			sb.append(boosterItemIdsStr);
-		}
-
-		log.info(sb.toString());
-		return sb.toString();
-	}
-
-	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
-			List<BoosterItem> itemsUserReceives,
-			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			UpdateUtil updateUtil) {
-		List<ItemForUser> ifuList = calculateBoosterItemItemRewards(userId, itemsUserReceives,
-						itemForUserRetrieveUtil);
-
-		log.info("ifuList={}", ifuList);
-		if (null != ifuList && !ifuList.isEmpty()) {
-			int numUpdated = updateUtil.updateItemForUser(ifuList);
-			log.info("items numUpdated={}", numUpdated);
-			return ifuList;
-		} else {
-			return null;
-		}
-
-	}
-
-	public List<ItemForUser> calculateBoosterItemItemRewards(
-			String userId, List<BoosterItem> itemsUserReceives,
-			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
-		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-
-		for (BoosterItem bi : itemsUserReceives) {
-			int itemId = bi.getItemId();
-			int itemQuantity = bi.getItemQuantity();
-
-			if (itemId <= 0 || itemQuantity <= 0) {
-				continue;
-			}
-
-			//user could have gotten multiple of the same BoosterItem
-			int newQuantity = itemQuantity;
-			if (itemIdToQuantity.containsKey(itemId)) {
-				newQuantity += itemIdToQuantity.get(itemId);
-			}
-			itemIdToQuantity.put(itemId, newQuantity);
-		}
-
-		return calculateItemRewards(userId, itemForUserRetrieveUtil,
-				itemIdToQuantity);
-	}
+//	public List<ItemForUser> calculateBoosterItemItemRewards(
+//			String userId, List<BoosterItem> itemsUserReceives,
+//			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+//		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+//
+//		for (BoosterItem bi : itemsUserReceives) {
+//			int itemId = bi.getItemId();
+//			int itemQuantity = bi.getItemQuantity();
+//
+//			if (itemId <= 0 || itemQuantity <= 0) {
+//				continue;
+//			}
+//
+//			//user could have gotten multiple of the same BoosterItem
+//			int newQuantity = itemQuantity;
+//			if (itemIdToQuantity.containsKey(itemId)) {
+//				newQuantity += itemIdToQuantity.get(itemId);
+//			}
+//			itemIdToQuantity.put(itemId, newQuantity);
+//		}
+//
+//		return calculateItemRewards(userId, itemForUserRetrieveUtil,
+//				itemIdToQuantity);
+//	}
 
 	public List<ItemForUser> calculateItemRewards(String userId,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
