@@ -4,9 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -44,33 +47,50 @@ public class GiftForTangoUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 
 	//RETRIEVE QUERIES*********************************************************************
-//	public GiftForTangoUser getGiftForTangoUser(String userId) {
-//		Object[] values = { userId };
-//		List<String> questions = Collections.nCopies(1, "?");
-//		String questionMarks = StringUtils.implode(questions, ",");
-//
-//		String query = String.format("select * from %s where %s in (%s)",
-//				TABLE_NAME, DBConstants.GIFT_FOR_TANGO_USER__USER_ID,
-//				questionMarks);
-//
-//		GiftForTangoUser tfucs = null;
-//		log.info("getSpecificOrAllItemIdToItemForUserId() query={}", query);
-//		try {
-//			List<GiftForTangoUser> tfucsList = this.jdbcTemplate.query(
-//					query, values, rowMapper);
-//
-//			if (null != tfucsList && !tfucsList.isEmpty()) {
-//				tfucs = tfucsList.get(0);
-//			}
-//
-//		} catch (Exception e) {
-//			log.error(String.format(
-//					"could not retrieve GiftForTangoUser for userId=%s",
-//					userId), e);
-//		}
-//
-//		return tfucs;
-//	}
+	public Map<String, GiftForTangoUser> getGftuForGfuIdsMap(Collection<String> gfuIds)
+	{
+		if (null == gfuIds || gfuIds.isEmpty()) {
+			return new HashMap<String, GiftForTangoUser>();
+		}
+
+		Map<String, GiftForTangoUser> gfuIdToGftu = new HashMap<String, GiftForTangoUser>();
+		List<GiftForTangoUser> gftus = getGftuForGfuIds(gfuIds);
+		for (GiftForTangoUser gftu : gftus) {
+			String gfuId = gftu.getGiftForUserId();
+			gfuIdToGftu.put(gfuId, gftu);
+		}
+
+		return gfuIdToGftu;
+	}
+
+	public List<GiftForTangoUser> getGftuForGfuIds(Collection<String> gfuIds) {
+		if (null == gfuIds || gfuIds.isEmpty()) {
+			return new ArrayList<GiftForTangoUser>();
+		}
+
+		int amt = gfuIds.size();
+		List<String> questions = Collections.nCopies(amt, "?");
+		String questionMarks = StringUtils.implode(questions, ",");
+
+		String query = String.format("select * from %s where %s in (%s)",
+				TABLE_NAME, DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID,
+				questionMarks);
+
+		List<GiftForTangoUser> gftuList = null;
+		log.info("getGftuForGfuIds() query={} values={}", query, gfuIds);
+		try {
+			gftuList = this.jdbcTemplate.query(
+					query, gfuIds.toArray(), rowMapper);
+
+		} catch (Exception e) {
+			log.error(String.format(
+					"could not retrieve GiftForTangoUser for gfuIds=%s",
+					gfuIds), e);
+			gftuList = new ArrayList<GiftForTangoUser>();
+		}
+
+		return gftuList;
+	}
 
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;

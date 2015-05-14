@@ -12,7 +12,6 @@ import java.util.UUID
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
-import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
@@ -26,6 +25,7 @@ import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.info.AchievementForUser
 import com.lvl6.info.Clan
 import com.lvl6.info.ClanEventPersistentUserReward
+import com.lvl6.info.ClanGiftForUser
 import com.lvl6.info.ItemForUser
 import com.lvl6.info.ItemSecretGiftForUser
 import com.lvl6.info.MiniJobForUser
@@ -40,6 +40,7 @@ import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
+import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
@@ -59,7 +60,6 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
-import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
@@ -72,11 +72,14 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
 import com.lvl6.retrieveutils.ClanRetrieveUtils2
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils
+import com.lvl6.retrieveutils.GiftForTangoUserRetrieveUtil
+import com.lvl6.retrieveutils.GiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
@@ -123,7 +126,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.server.EventWriter
 import com.lvl6.server.GameServer
 import com.lvl6.server.Locker
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
+import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetClanGiftsAction
@@ -131,11 +134,11 @@ import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction
+import com.lvl6.server.controller.actionobjects.SetGiftsAction
 import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
 import com.lvl6.server.controller.actionobjects.StartUpResource
-import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
 import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
 import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
@@ -148,9 +151,8 @@ import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
-import com.lvl6.proto.ChatProto.ChatScope
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
-import com.lvl6.info.ClanGiftForUser
+import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -168,8 +170,8 @@ case class StartupData(
 		apsalarId:String,
 		newNumConsecutiveDaysLoggedIn:Int,
 		freshRestart:Boolean)
-		@Component
-		class StartupService extends LazyLogging{
+@Component
+class StartupService extends LazyLogging{
 
 	@Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
 	@Autowired var  battleItemQueueForUserRetrieveUtil : BattleItemQueueForUserRetrieveUtil = null
@@ -186,6 +188,8 @@ case class StartupData(
 	@Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
 	@Autowired var  clanRetrieveUtils : ClanRetrieveUtils2  = null
 	@Autowired var  eventPersistentForUserRetrieveUtils : EventPersistentForUserRetrieveUtils2  = null
+    @Autowired var  giftForUserRetrieveUtil : GiftForUserRetrieveUtils  = null
+    @Autowired var  giftForTangoUserRetrieveUtil : GiftForTangoUserRetrieveUtil = null;
 	@Autowired var  itemForUserRetrieveUtil : ItemForUserRetrieveUtil  = null
 	@Autowired var  itemForUserUsageRetrieveUtil : ItemForUserUsageRetrieveUtil  = null
 	@Autowired var  iapHistoryRetrieveUtils : IAPHistoryRetrieveUtils  = null
@@ -225,31 +229,33 @@ case class StartupData(
 	@Autowired var  monsterLevelInfoRetrieveUtil : MonsterLevelInfoRetrieveUtils = null
 	@Autowired var  pvpLeagueRetrieveUtil : PvpLeagueRetrieveUtils  = null
 	@Autowired var  questRetrieveUtil : QuestRetrieveUtils  = null
+    @Autowired var  rewardRetrieveUtil : RewardRetrieveUtils = null
 	@Autowired var  salesDisplayItemRetrieveUtil : SalesDisplayItemRetrieveUtils = null
 	@Autowired var  salesItemRetrieveUtil : SalesItemRetrieveUtils = null
 	@Autowired var  salesPackageRetrieveUtil : SalesPackageRetrieveUtils = null
 	@Autowired var  serverToggleRetrieveUtil : ServerToggleRetrieveUtils = null
 	@Autowired var  startupStuffRetrieveUtil : StartupStuffRetrieveUtils = null
+    @Autowired var  tangoGiftRetrieveUtil : TangoGiftRetrieveUtils = null;
 
-			@Autowired var  createInfoProtoUtils : CreateInfoProtoUtils = null
-			@Autowired var  deleteUtil : DeleteUtil = null
-			@Autowired var  insertUtil : InsertUtil = null
-			@Autowired var  updateUtil : UpdateUtil = null
-			@Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
-			@Autowired var  monsterStuffUtil : MonsterStuffUtils = null
-			@Autowired var  secretGiftUtil : SecretGiftUtils = null
-			@Autowired var  timeUtils : TimeUtils  = null
-			@Autowired var  miscMethods: MiscMethods = null
-			@Autowired var  locker :  Locker = null
-			@Autowired var  eventWriter:EventWriter = null
+	@Autowired var  createInfoProtoUtils : CreateInfoProtoUtils = null
+	@Autowired var  deleteUtil : DeleteUtil = null
+	@Autowired var  insertUtil : InsertUtil = null
+	@Autowired var  updateUtil : UpdateUtil = null
+	@Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
+	@Autowired var  monsterStuffUtil : MonsterStuffUtils = null
+	@Autowired var  secretGiftUtil : SecretGiftUtils = null
+	@Autowired var  timeUtils : TimeUtils  = null
+	@Autowired var  miscMethods: MiscMethods = null
+	@Autowired var  locker :  Locker = null
+	@Autowired var  eventWriter:EventWriter = null
+    @Autowired var  leaderBoard:LeaderBoardImpl = null
 
 	@Autowired var globals:Globals = null
 	@Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null 
 
-	//TODO: Refactor GameServer class
-	@Autowired var  server:GameServer = null
-
+    //TODO: Refactor GameServer class
+    @Autowired var  server:GameServer = null
 
 	def startup(event:RequestEvent)={
 		val reqProto = (event.asInstanceOf[StartupRequestEvent]).getStartupRequestProto();
@@ -306,7 +312,7 @@ case class StartupData(
 				userIdSet = false;
 				tutorialUserAccounting(reqProto, udid, now);
 				val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
-						finishStartup(sd)
+				finishStartup(sd)
 			}
 		} else {
             resBuilder.setServerTimeMillis((new Date()).getTime())
@@ -368,18 +374,18 @@ case class StartupData(
 
 		} else {
 			val tempClientVersionNum : Float = clientVersionNum * 10F;
-			val tempLatestVersionNum : Float = GameServer.clientVersionNumber * 10F;
-			// Check version number
-			if (tempClientVersionNum.asInstanceOf[Int] < tempLatestVersionNum.asInstanceOf[Int]) {
-				updateStatus = UpdateStatus.MAJOR_UPDATE;
-				logger.info("player has been notified of forced update");
-			} else if (tempClientVersionNum < tempLatestVersionNum) {
-				updateStatus = UpdateStatus.MINOR_UPDATE;
-			} else {
-				updateStatus = UpdateStatus.NO_UPDATE;
-			}
+        	val tempLatestVersionNum : Float = GameServer.clientVersionNumber * 10F;
+        	// Check version number
+        	if (tempClientVersionNum.asInstanceOf[Int] < tempLatestVersionNum.asInstanceOf[Int]) {
+        		updateStatus = UpdateStatus.MAJOR_UPDATE;
+        		logger.info("player has been notified of forced update");
+        	} else if (tempClientVersionNum < tempLatestVersionNum) {
+        		updateStatus = UpdateStatus.MINOR_UPDATE;
+        	} else {
+        		updateStatus = UpdateStatus.NO_UPDATE;
+        	}
 		}
-		return updateStatus
+	    return updateStatus
 	}
 
 
@@ -475,16 +481,16 @@ case class StartupData(
 			}
 
 			userInfo onFailure {
-				case t:Throwable => {
-					logger.error("Error running login futures", t)
-					loginFinished(playerId)
-					exceptionInStartup(sd)
-				}
+    			case t:Throwable => {
+    				logger.error("Error running login futures", t)
+    				loginFinished(playerId)
+    				exceptionInStartup(sd)
+    			}
 			}
 
-		}catch{
-			case t:Throwable => logger.error(s"", t)
-					loginFinished(playerId)
+		} catch{
+    		case t:Throwable => logger.error(s"", t)
+    			loginFinished(playerId)
 		}
 	}
 
@@ -596,6 +602,17 @@ case class StartupData(
 						clanGiftForUserRetrieveUtil,
 						createInfoProtoUtils);
 				scga.setUp(fillMe);
+                
+                val sga = new SetGiftsAction(
+                        resBuilder,
+                        user,
+                        playerId,
+                        giftForUserRetrieveUtil,
+                        giftForTangoUserRetrieveUtil,
+                        tangoGiftRetrieveUtil,
+                        rewardRetrieveUtil,
+                        createInfoProtoUtils)
+                sga.setUp(fillMe);
 
 				//Now since all the ids of resources are known, get them from db
 				fillMe.fetch();
@@ -609,6 +626,7 @@ case class StartupData(
 				scra.execute(fillMe);
 				scmtda.execute(fillMe);
 				scga.execute(fillMe);
+                sga.execute(fillMe);
 				resBuilder.setClanData(cdpb.build());
 				//TODO: DELETE IN FUTURE. This is for legacy client
 				resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -665,11 +683,11 @@ case class StartupData(
 		timed("StartupService.setUserSegmentationGroup"){
 			if(user.getSegmentationGroup() == 0) {
 				val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId, user)
-				usga.convertUserIdIntoInt();
-				val segmentationGroup: Int = usga.getSegmentationGroup();
-				if(!user.updateUserSegmentationGroup(segmentationGroup)) {
-					logger.error(s"something wrong with updating user's segmentation group value:$segmentationGroup");
-				}
+			    usga.convertUserIdIntoInt();
+			    val segmentationGroup: Int = usga.getSegmentationGroup();
+			    if(!user.updateUserSegmentationGroup(segmentationGroup)) {
+				    logger.error(s"something wrong with updating user's segmentation group value:$segmentationGroup");
+			    }
 			}
 		}
 	}
@@ -684,13 +702,13 @@ case class StartupData(
 					val redeemedQuestIds = new ArrayList[Integer]()
 					val questIdtoQuests = questRetrieveUtil.getQuestIdsToQuests
 					inProgressAndredeemedUserQuests.foreach{ uq:QuestForUser  =>
-						if(!uq.isRedeemed()) {
-							inProgressQuests.add(uq)
-							inProgressQuestsIds.add(uq.getQuestId)
-						}else {
-							redeemedQuestIds.add(uq.getQuestId)
-						}
-					}
+    					if(!uq.isRedeemed()) {
+    						inProgressQuests.add(uq)
+    						inProgressQuestsIds.add(uq.getQuestId)
+    					}else {
+    						redeemedQuestIds.add(uq.getQuestId)
+    					}
+				    }
 					val questIdtoUserQuestJobs = questJobForUserRetrieveUtil.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, inProgressQuestsIds)
 					val currentUserQuests = createInfoProtoUtils.createFullUserQuestDataLarges(inProgressQuests, questIdtoQuests, questIdtoUserQuestJobs)
 					resBuilder.addAllUserQuests(currentUserQuests)
@@ -706,7 +724,7 @@ case class StartupData(
 			timed("StartupService.setUserClanInfos"){
 				userClanRetrieveUtils.getUserClansRelatedToUser(userId).foreach{ uc:UserClan =>
 				    resBuilder.addUserClanInfo(createInfoProtoUtils.createFullUserClanProtoFromUserClan(uc))
-			    }
+				}
 			}
 		}
 	}
@@ -748,7 +766,7 @@ case class StartupData(
 				val userMonstersHealing = monsterHealingForUserRetrieveUtils.getMonstersForUser(userId)
 				if(userMonstersHealing != null) {
 					userMonstersHealing.values.foreach{ mhfu:MonsterHealingForUser =>
-			            resBuilder.addMonstersHealing(createInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu))
+					    resBuilder.addMonstersHealing(createInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu))
 					}
 				}
 			}
@@ -761,32 +779,32 @@ case class StartupData(
 				val userMonstersEnhancing = monsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId)
 				if(userMonstersEnhancing != null && !userMonstersEnhancing.isEmpty()) {
 					var baseMonster:UserEnhancementItemProto = null;
-					val feederUserMonsterIds = new ArrayList[String]();
-					val feederProtos = new ArrayList[UserEnhancementItemProto]();
-					userMonstersEnhancing.values().foreach{mefu =>
-						val ueip = createInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu)
-						val startTime = mefu.getExpectedStartTime;
-						if(startTime == null) {
-							baseMonster = ueip
-						}else {
-							feederProtos.add(ueip)
-							feederUserMonsterIds.add(mefu.getMonsterForUserId)
-						}
-				    }
-					if(baseMonster == null ) {
-						logger.error(s"no base monster enhancement. deleting inEnhancing=$userMonstersEnhancing.values()")
-						try {
-							if(!feederUserMonsterIds.isEmpty()) {
-								val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(userId, feederUserMonsterIds)
+    				val feederUserMonsterIds = new ArrayList[String]();
+    				val feederProtos = new ArrayList[UserEnhancementItemProto]();
+    				userMonstersEnhancing.values().foreach{mefu =>
+        				val ueip = createInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu)
+        				val startTime = mefu.getExpectedStartTime;
+        				if(startTime == null) {
+        					baseMonster = ueip
+        				}else {
+        					feederProtos.add(ueip)
+        					feederUserMonsterIds.add(mefu.getMonsterForUserId)
+        				}
+    				}
+    				if(baseMonster == null ) {
+    					logger.error(s"no base monster enhancement. deleting inEnhancing=$userMonstersEnhancing.values()")
+    					try {
+    						if(!feederUserMonsterIds.isEmpty()) {
+    							val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(userId, feederUserMonsterIds)
 								logger.info(s"numDeleted enhancements: $numDeleted")
-							}
-						}catch{
-						    case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
-						}
-					}else {
-						val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
+    						}
+    					}catch{
+    					    case t:Throwable => logger.error("unable to delete orphaned enhancements", t)
+    					}
+    				}else {
+    					val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
 						resBuilder.setEnhancements(uep)
-					}
+    				}
 				}
 			}
 		}
@@ -856,18 +874,18 @@ case class StartupData(
 			val taskStages = taskStageForUserRetrieveUtils.getTaskStagesForUserWithTaskForUserId(userTaskId)
 			val stageNumToTsfu = new HashMap[Integer, java.util.List[TaskStageForUser]]()
 			taskStages.foreach{ tsfu  =>
-				val stageNum = tsfu.getStageNum
-				var tsfuList = stageNumToTsfu.get(stageNum)
-				if(tsfuList == null) {
-					tsfuList = new ArrayList[TaskStageForUser]()
+    			val stageNum = tsfu.getStageNum
+    			var tsfuList = stageNumToTsfu.get(stageNum)
+    			if(tsfuList == null) {
+    				tsfuList = new ArrayList[TaskStageForUser]()
 					stageNumToTsfu.put(stageNum, tsfuList)
-				}
-				tsfuList.add(tsfu)
+    			}
+    			tsfuList.add(tsfu)
 			}
 			val taskId = aTaskForUser.getTaskId
 			stageNumToTsfu.keySet.foreach{ stageNum =>
-				val tsp = createInfoProtoUtils.createTaskStageProto(taskId, stageNum, stageNumToTsfu.get(stageNum))
-				resBuilder.addCurTaskStages(tsp)
+    			val tsp = createInfoProtoUtils.createTaskStageProto(taskId, stageNum, stageNumToTsfu.get(stageNum))
+    			resBuilder.addCurTaskStages(tsp)
 			}
 		}catch{
 		    case t:Throwable => logger.error(s"could not create existing task, letting it get deleted when user starts another task", t)
@@ -1063,8 +1081,6 @@ case class StartupData(
 						logger.info(s"not retrieving MiniEvent1, achievement not redeemed $afu");
 					}
 				}
-			}
-
 			logger.info(s"calculateMiniEvent=$calculateMiniEvent");
 			if (calculateMiniEvent) {
 				//calculate only if user finished all clan achievements
@@ -1072,7 +1088,6 @@ case class StartupData(
 			}
 		}
 	}
-
 	def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date):Future[Unit]={
 		Future{
 			timed("StartupService.setMiniEventForUser"){
@@ -1106,7 +1121,6 @@ case class StartupData(
 						rmea.getLeaderboardRewards());
 					resBuilder.setUserMiniEvent(umep);
 				}
-			}
 		}
 	}
 
@@ -1121,7 +1135,6 @@ case class StartupData(
 			}
 		}
 	}
-
 	def setUserItems(resBuilder:Builder, user:User, userId:String):Future[Unit]= {
 		Future{
 			var userItemIds: java.util.Set[Integer] = null
@@ -1131,7 +1144,6 @@ case class StartupData(
 					val uipList = createInfoProtoUtils.createUserItemProtosFromUserItems(new ArrayList[ItemForUser](itemIdToUserItems.values()));
 					resBuilder.addAllUserItems(uipList);
 				}
-
 			    //TODO: could be run in parallel with above code
 				val itemsUsed = itemForUserUsageRetrieveUtil.getItemForUserUsage(userId, null);
 				itemsUsed.foreach{ ifuu =>
@@ -1139,8 +1151,6 @@ case class StartupData(
 					resBuilder.addItemsInUse(uiup);
 				}
 				userItemIds = itemIdToUserItems.keySet()
-			}
-
 			if (userItemIds != null) {
 				setSalePack(resBuilder, user, userItemIds);
 			}
@@ -1190,7 +1200,6 @@ case class StartupData(
 							salesDisplayItemRetrieveUtil,
 							customMenuRetrieveUtil);
 						resBuilder.addSalesPackages(spProto);
-					}
 				}
 			}
 		}
@@ -1208,7 +1217,6 @@ case class StartupData(
 						salesItemRetrieveUtil,
 						salesDisplayItemRetrieveUtil,
 						customMenuRetrieveUtil);
-
 						resBuilder.addSalesPackages(spProto);
 					}
 			    }
@@ -1235,7 +1243,6 @@ case class StartupData(
 							salesItemRetrieveUtil,
 							salesDisplayItemRetrieveUtil,
 							customMenuRetrieveUtil);
-
 						resBuilder.addSalesPackages(spProto);
 				    }
 				}
@@ -1369,11 +1376,7 @@ case class StartupData(
 								salesDisplayItemRetrieveUtil,
 								customMenuRetrieveUtil);
 							resBuilder.addSalesPackages(spProto);
-						}
-					}
 				}
-
-			}
 		}
 	}
 
@@ -1393,7 +1396,6 @@ case class StartupData(
 		}
 		return newMinPrice
 	}
-
 	def setDefaultLanguagesForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
 		Future{
 			timed("StartupService.setDefaultLanguagesForUser"){
@@ -1517,7 +1519,7 @@ case class StartupData(
 				var responseString = Stream.continually(rd.readLine()).takeWhile(_ != null).mkString("\n")
 				logger.info(s"Received response: $responseString");
 			} catch {
-			case t:Throwable => logger.error("failed to make offer chart call", t);
+				case t:Throwable => logger.error("failed to make offer chart call", t);
 			}
 		}
 	}

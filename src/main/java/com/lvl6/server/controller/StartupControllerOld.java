@@ -41,7 +41,6 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
-import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
@@ -76,7 +75,6 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
@@ -130,6 +128,8 @@ import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
+import com.lvl6.retrieveutils.GiftForTangoUserRetrieveUtil;
+import com.lvl6.retrieveutils.GiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
@@ -169,12 +169,15 @@ import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
@@ -184,6 +187,7 @@ import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
+import com.lvl6.server.controller.actionobjects.SetGiftsAction;
 import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
@@ -259,7 +263,7 @@ public class StartupControllerOld extends EventController {
 
 	@Autowired
 	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected InAppPurchaseUtils inAppPurchaseUtils;
 
@@ -408,6 +412,12 @@ public class StartupControllerOld extends EventController {
 	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
 
 	@Autowired
+	protected GiftForUserRetrieveUtils giftForUserRetrieveUtil;
+
+	@Autowired
+	protected GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil;
+
+	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	@Autowired
@@ -443,6 +453,11 @@ public class StartupControllerOld extends EventController {
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
+    @Autowired
+    protected RewardRetrieveUtils rewardRetrieveUtil;
+
+    @Autowired
+    protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
 
 	public StartupControllerOld() {
 		numAllocatedThreads = 3;
@@ -779,7 +794,7 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
-			
+
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -859,11 +874,19 @@ public class StartupControllerOld extends EventController {
 					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-			
-			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId, 
+
+			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId,
 					clanGiftForUserRetrieveUtils, createInfoProtoUtils);
 			scga.setUp(fillMe);
-			
+			log.info("{}ms at SetClanGiftsAction", stopWatch.getTime());
+
+			//not sure if need clan so putting here for now
+			SetGiftsAction sga = new SetGiftsAction(resBuilder, user, playerId,
+					giftForUserRetrieveUtil, giftForTangoUserRetrieveUtil,
+					tangoGiftRetrieveUtil, rewardRetrieveUtil, createInfoProtoUtils);
+			sga.setUp(fillMe);
+			log.info("{}ms at SetGiftsAction", stopWatch.getTime());
+
 
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -892,7 +915,9 @@ public class StartupControllerOld extends EventController {
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 			scga.execute(fillMe);
 			log.info("{}ms at setClanGifts", stopWatch.getTime());
-			
+			sga.execute(fillMe);;
+			log.info("{}ms at setGifts", stopWatch.getTime());
+
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
 			resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -913,7 +938,7 @@ public class StartupControllerOld extends EventController {
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
-			
+
 
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);
