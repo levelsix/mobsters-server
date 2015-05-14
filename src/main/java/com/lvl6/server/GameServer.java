@@ -49,8 +49,8 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	@Autowired
 	protected ReloadAllRareChangeStaticData reloadAllRareChangeStaticData;
 	
-	@Autowired
-	protected LeaderBoardImpl leaderBoardImpl;
+//	@Autowired
+//	protected LeaderBoardImpl leaderBoardImpl;
 
 	public ServerInstance getServerInstance() {
 		return serverInstance;
@@ -209,7 +209,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		loadEventControllers();
 		reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
 		reloadRecommendedClans();
-		leaderBoardImpl.reload();
+//		leaderBoardImpl.reload();
 	}
 
 	public void reloadRecommendedClans() {

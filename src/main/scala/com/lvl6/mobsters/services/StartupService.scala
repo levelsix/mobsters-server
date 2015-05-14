@@ -463,7 +463,7 @@ case class StartupData(
 								ssfu  <-   setSalesForUser(resBuilder, user)
 								scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
 								plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
-                sttslb<-   setTopThreeStrengthLeaderBoard(resBuilder)
+//                sttslb<-   setTopThreeStrengthLeaderBoard(resBuilder)
 							} yield plfu
 
 							userInfo onSuccess {
@@ -1407,15 +1407,15 @@ case class StartupData(
 					}
 			}
       
-      def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
-        Future{
-          timed("StartupServer.setTopThreeStrengthLeaderBoard") {
-            val leaderBoardList = leaderBoard.getTopNStrengths(3);
-            resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
-                createStrengthLeaderBoardProtos(leaderBoardList, userRetrieveUtils));
-          }
-        }
-      }
+//      def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
+//        Future{
+//          timed("StartupServer.setTopThreeStrengthLeaderBoard") {
+//            val leaderBoardList = leaderBoard.getTopNStrengths(3);
+//            resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
+//                createStrengthLeaderBoardProtos(leaderBoardList, userRetrieveUtils));
+//          }
+//        }
+//      }
       
 			def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
 					Future{
