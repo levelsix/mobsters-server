@@ -459,12 +459,13 @@ public class InAppPurchaseController extends EventController {
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
             InAppPurchaseSalesAction iapsa) {
         Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+        log.info("LIST OF ITEMS: {}", nuOrUpdatedItems);
         Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
         int gemsGained = iapsa.getAra().getGemsGained();
         int cashGained = iapsa.getAra().getCashGained();
         int oilGained = iapsa.getAra().getOilGained();
 
-        //TODO: protofy the rewards
+        
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
                 nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
         log.info("proto for reward: " + urp);
