@@ -239,7 +239,7 @@ public class TradeItemForResourcesAction {
 
 		//give user the resources
 		log.info(String.format("user before: %s \t\t", user));
-		user.updateRelativeCashAndOilAndGems(cashGained, oilGained, 0);
+		user.updateRelativeCashAndOilAndGems(cashGained, oilGained, 0, 0);
 		log.info(String.format("user after: %s", user));
 
 		prepCurrencyHistory();

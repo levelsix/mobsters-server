@@ -301,7 +301,7 @@ public class PurchaseNormStructureController extends EventController {
 		}
 
 		int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange,
-				gemChange);
+				gemChange, 0);
 		if (1 != num) {
 			log.error(String
 					.format("can't update user currency. gemChange=%s, cashChange=%s, numRowsUpdated=%s",

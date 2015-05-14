@@ -223,7 +223,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 		log.info(String.format("user before: %s", user));
 		int numUpdated = user.updateRelativeCashAndOilAndGems(cashChange,
-				oilChange, gemChange);
+				oilChange, gemChange, 0);
 		if (2 != numUpdated && 1 != numUpdated) {
 			log.error(String.format("did not increase user's %s by %s",
 					resourceType, numResources));

@@ -418,7 +418,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 			//			log.info("oilChange=" + oilChange + "\t gemChange=" + gemChange);
 			int numChange = user.updateRelativeCashAndOilAndGems(cashChange,
-					oilChange, gemChange);
+					oilChange, gemChange, 0);
 			if (1 != numChange) {
 				log.warn(String
 						.format("problem with updating user stats: gemChange=%s, oilChange=%s, user=%s",
