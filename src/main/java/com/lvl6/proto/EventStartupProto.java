@@ -15748,6 +15748,489 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto)
       }
 
+      public interface BoosterPackConstantsProtoOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto)
+          com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>optional int32 purchaseAmountRequired = 1;</code>
+         */
+        boolean hasPurchaseAmountRequired();
+        /**
+         * <code>optional int32 purchaseAmountRequired = 1;</code>
+         */
+        int getPurchaseAmountRequired();
+
+        /**
+         * <code>optional int32 numberOfPacksGiven = 2;</code>
+         */
+        boolean hasNumberOfPacksGiven();
+        /**
+         * <code>optional int32 numberOfPacksGiven = 2;</code>
+         */
+        int getNumberOfPacksGiven();
+      }
+      /**
+       * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto}
+       *
+       * <pre>
+       *the two constants for gacha buy 10 get 11 stuff
+       * </pre>
+       */
+      public static final class BoosterPackConstantsProto extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto)
+          BoosterPackConstantsProtoOrBuilder {
+        // Use BoosterPackConstantsProto.newBuilder() to construct.
+        private BoosterPackConstantsProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+          super(builder);
+          this.unknownFields = builder.getUnknownFields();
+        }
+        private BoosterPackConstantsProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+        private static final BoosterPackConstantsProto defaultInstance;
+        public static BoosterPackConstantsProto getDefaultInstance() {
+          return defaultInstance;
+        }
+
+        public BoosterPackConstantsProto getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+
+        private final com.google.protobuf.UnknownFieldSet unknownFields;
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+            getUnknownFields() {
+          return this.unknownFields;
+        }
+        private BoosterPackConstantsProto(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          initFields();
+          int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  purchaseAmountRequired_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  numberOfPacksGiven_ = input.readInt32();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+          } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.class, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.Builder.class);
+        }
+
+        public static com.google.protobuf.Parser<BoosterPackConstantsProto> PARSER =
+            new com.google.protobuf.AbstractParser<BoosterPackConstantsProto>() {
+          public BoosterPackConstantsProto parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new BoosterPackConstantsProto(input, extensionRegistry);
+          }
+        };
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<BoosterPackConstantsProto> getParserForType() {
+          return PARSER;
+        }
+
+        private int bitField0_;
+        public static final int PURCHASEAMOUNTREQUIRED_FIELD_NUMBER = 1;
+        private int purchaseAmountRequired_;
+        /**
+         * <code>optional int32 purchaseAmountRequired = 1;</code>
+         */
+        public boolean hasPurchaseAmountRequired() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional int32 purchaseAmountRequired = 1;</code>
+         */
+        public int getPurchaseAmountRequired() {
+          return purchaseAmountRequired_;
+        }
+
+        public static final int NUMBEROFPACKSGIVEN_FIELD_NUMBER = 2;
+        private int numberOfPacksGiven_;
+        /**
+         * <code>optional int32 numberOfPacksGiven = 2;</code>
+         */
+        public boolean hasNumberOfPacksGiven() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int32 numberOfPacksGiven = 2;</code>
+         */
+        public int getNumberOfPacksGiven() {
+          return numberOfPacksGiven_;
+        }
+
+        private void initFields() {
+          purchaseAmountRequired_ = 0;
+          numberOfPacksGiven_ = 0;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, purchaseAmountRequired_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, numberOfPacksGiven_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, purchaseAmountRequired_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, numberOfPacksGiven_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto}
+         *
+         * <pre>
+         *the two constants for gacha buy 10 get 11 stuff
+         * </pre>
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto)
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProtoOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor;
+          }
+
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.class, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.Builder.class);
+          }
+
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+
+          public Builder clear() {
+            super.clear();
+            purchaseAmountRequired_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            numberOfPacksGiven_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor;
+          }
+
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.getDefaultInstance();
+          }
+
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.purchaseAmountRequired_ = purchaseAmountRequired_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.numberOfPacksGiven_ = numberOfPacksGiven_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto.getDefaultInstance()) return this;
+            if (other.hasPurchaseAmountRequired()) {
+              setPurchaseAmountRequired(other.getPurchaseAmountRequired());
+            }
+            if (other.hasNumberOfPacksGiven()) {
+              setNumberOfPacksGiven(other.getNumberOfPacksGiven());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto) e.getUnfinishedMessage();
+              throw e;
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          private int bitField0_;
+
+          private int purchaseAmountRequired_ ;
+          /**
+           * <code>optional int32 purchaseAmountRequired = 1;</code>
+           */
+          public boolean hasPurchaseAmountRequired() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          /**
+           * <code>optional int32 purchaseAmountRequired = 1;</code>
+           */
+          public int getPurchaseAmountRequired() {
+            return purchaseAmountRequired_;
+          }
+          /**
+           * <code>optional int32 purchaseAmountRequired = 1;</code>
+           */
+          public Builder setPurchaseAmountRequired(int value) {
+            bitField0_ |= 0x00000001;
+            purchaseAmountRequired_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 purchaseAmountRequired = 1;</code>
+           */
+          public Builder clearPurchaseAmountRequired() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            purchaseAmountRequired_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private int numberOfPacksGiven_ ;
+          /**
+           * <code>optional int32 numberOfPacksGiven = 2;</code>
+           */
+          public boolean hasNumberOfPacksGiven() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          /**
+           * <code>optional int32 numberOfPacksGiven = 2;</code>
+           */
+          public int getNumberOfPacksGiven() {
+            return numberOfPacksGiven_;
+          }
+          /**
+           * <code>optional int32 numberOfPacksGiven = 2;</code>
+           */
+          public Builder setNumberOfPacksGiven(int value) {
+            bitField0_ |= 0x00000002;
+            numberOfPacksGiven_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 numberOfPacksGiven = 2;</code>
+           */
+          public Builder clearNumberOfPacksGiven() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            numberOfPacksGiven_ = 0;
+            onChanged();
+            return this;
+          }
+
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto)
+        }
+
+        static {
+          defaultInstance = new BoosterPackConstantsProto(true);
+          defaultInstance.initFields();
+        }
+
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto)
+      }
+
       private int bitField0_;
       private int bitField1_;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
@@ -39354,6 +39837,11 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -39376,6 +39864,7 @@ public final class EventStartupProto {
       "hievementStuff.proto\032\014Battle.proto\032\020Batt" +
       "leItem.proto\032\026BoosterPackStuff.proto\032\nCh" +
       "at.proto\032\nCity.proto\032\nClan.proto\032\023InAppP" +
+<<<<<<< HEAD
       "urchase.proto\032\nItem.proto\032\021LeaderBoard.p" +
       "roto\032\017MiniEvent.proto\032\023MiniJobConfig.pro" +
       "to\032\022MonsterStuff.proto\032\013Quest.proto\032\013Sal" +
@@ -39598,6 +40087,228 @@ public final class EventStartupProto {
       "MAINTENANCE\020\003\"C\n\030ForceLogoutResponseProt" +
       "o\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001" +
       "(\tB\023B\021EventStartupProto"
+=======
+      "urchase.proto\032\nItem.proto\032\017MiniEvent.pro" +
+      "to\032\023MiniJobConfig.proto\032\022MonsterStuff.pr" +
+      "oto\032\013Quest.proto\032\013Sales.proto\032\016Research." +
+      "proto\032\026SharedEnumConfig.proto\032\020StaticDat" +
+      "a.proto\032\017Structure.proto\032\nTask.proto\032\nUs" +
+      "er.proto\"\327\002\n\023StartupRequestProto\022\014\n\004udid",
+      "\030\001 \001(\t\022\026\n\nversionNum\030\002 \001(\002B\002\030\001\022\021\n\tapsala" +
+      "rId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014adverti" +
+      "serId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004" +
+      "fbId\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\022R\n\022ve" +
+      "rsionNumberProto\030\t \001(\01326.com.lvl6.proto." +
+      "StartupRequestProto.VersionNumberProto\032J" +
+      "\n\022VersionNumberProto\022\020\n\010superNum\030\001 \001(\005\022\020" +
+      "\n\010majorNum\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\311?\n\024S" +
+      "tartupResponseProto\022\030\n\020serverTimeMillis\030" +
+      "\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.F",
+      "ullUserProto\022I\n\rstartupStatus\030\003 \001(\01622.co" +
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pStatus\022G\n\014updateStatus\030\004 \001(\01621.com.lvl6" +
+      ".proto.StartupResponseProto.UpdateStatus" +
+      "\022O\n\020startupConstants\030\005 \001(\01325.com.lvl6.pr" +
+      "oto.StartupResponseProto.StartupConstant" +
+      "s\022Q\n\021tutorialConstants\030\" \001(\01326.com.lvl6." +
+      "proto.StartupResponseProto.TutorialConst" +
+      "ants\0226\n\nuserQuests\030\006 \003(\0132\".com.lvl6.prot" +
+      "o.FullUserQuestProto\022\030\n\020redeemedQuestIds",
+      "\030\033 \003(\005\0227\n\014userClanInfo\030\007 \003(\0132!.com.lvl6." +
+      "proto.FullUserClanProto\022\034\n\020completedTask" +
+      "Ids\030\010 \003(\005B\002\030\001\022>\n\016completedTasks\030. \003(\0132&." +
+      "com.lvl6.proto.UserTaskCompletedProto\022\023\n" +
+      "\013appStoreURL\030\t \001(\t\022\025\n\rreviewPageURL\030\n \001(" +
+      "\t\022%\n\035reviewPageConfirmationMessage\030\013 \001(\t" +
+      "\022$\n\034playerHasBoughtInAppPurchase\030\014 \001(\010\022[" +
+      "\n\023attackNotifications\030\r \003(\0132>.com.lvl6.p" +
+      "roto.StartupResponseProto.AttackedNotifi" +
+      "cationProto\022]\n\025referralNotifications\030\016 \003",
+      "(\0132>.com.lvl6.proto.StartupResponseProto" +
+      ".ReferralNotificationProto\022\030\n\020noticesToP" +
+      "layers\030\017 \003(\t\022:\n\013globalChats\030\020 \003(\0132%.com." +
+      "lvl6.proto.GroupChatMessageProto\022<\n\tclan" +
+      "Chats\030\021 \003(\0132%.com.lvl6.proto.GroupChatMe" +
+      "ssageProtoB\002\030\001\0222\n\004pcpp\030\022 \003(\0132$.com.lvl6." +
+      "proto.PrivateChatPostProto\022;\n\rusersMonst" +
+      "ers\030\023 \003(\0132$.com.lvl6.proto.FullUserMonst" +
+      "erProto\022@\n\017monstersHealing\030\024 \003(\0132\'.com.l" +
+      "vl6.proto.UserMonsterHealingProto\022:\n\014enh",
+      "ancements\030\025 \001(\0132$.com.lvl6.proto.UserEnh" +
+      "ancementProto\022<\n\tevolution\030\035 \001(\0132).com.l" +
+      "vl6.proto.UserMonsterEvolutionProto\022F\n\024r" +
+      "areBoosterPurchases\030\026 \003(\0132(.com.lvl6.pro" +
+      "to.RareBoosterPurchaseProto\022\021\n\tkabamNaid" +
+      "\030\027 \001(\t\022K\n\023invitesToMeForSlots\030\030 \003(\0132..co" +
+      "m.lvl6.proto.UserFacebookInviteForSlotPr" +
+      "oto\022M\n\025invitesFromMeForSlots\030\031 \003(\0132..com" +
+      ".lvl6.proto.UserFacebookInviteForSlotPro" +
+      "to\022=\n\024staticDataStuffProto\030\032 \001(\0132\037.com.l",
+      "vl6.proto.StaticDataProto\022 \n\030taskIdForCu" +
+      "rrentCityBoss\030\034 \003(\005\022<\n\nuserEvents\030\036 \003(\0132" +
+      "(.com.lvl6.proto.UserPersistentEventProt" +
+      "o\022I\n\017curRaidClanInfo\030\037 \001(\01320.com.lvl6.pr" +
+      "oto.PersistentClanEventClanInfoProto\022M\n\023" +
+      "curRaidClanUserInfo\030  \003(\01320.com.lvl6.pro" +
+      "to.PersistentClanEventUserInfoProto\022R\n\020r" +
+      "aidStageHistory\030! \003(\01328.com.lvl6.proto.P" +
+      "ersistentClanEventRaidStageHistoryProto\022" +
+      "7\n\016recentNBattles\030# \003(\0132\037.com.lvl6.proto",
+      ".PvpHistoryProto\0225\n\007curTask\030$ \001(\0132$.com." +
+      "lvl6.proto.MinimumUserTaskProto\0225\n\rcurTa" +
+      "skStages\030% \003(\0132\036.com.lvl6.proto.TaskStag" +
+      "eProto\022>\n\020userAchievements\030& \003(\0132$.com.l" +
+      "vl6.proto.UserAchievementProto\022;\n\021userMi" +
+      "niJobProtos\030\' \003(\0132 .com.lvl6.proto.UserM" +
+      "iniJobProto\0220\n\tuserItems\030( \003(\0132\035.com.lvl" +
+      "6.proto.UserItemProto\0227\n\014clanHelpings\030) " +
+      "\003(\0132\035.com.lvl6.proto.ClanHelpProtoB\002\030\001\0224" +
+      "\n\013clanInvites\030* \003(\0132\037.com.lvl6.proto.Cla",
+      "nInviteProto\022/\n\010clanData\030+ \001(\0132\035.com.lvl" +
+      "6.proto.ClanDataProto\0226\n\nitemsInUse\030, \003(" +
+      "\0132\".com.lvl6.proto.UserItemUsageProto\0226\n" +
+      "\005gifts\030- \003(\0132\'.com.lvl6.proto.UserItemSe" +
+      "cretGiftProto\022H\n\025userPvpBoardObstacles\030/" +
+      " \003(\0132).com.lvl6.proto.UserPvpBoardObstac" +
+      "leProto\022D\n\017battleItemQueue\0300 \003(\0132+.com.l" +
+      "vl6.proto.BattleItemQueueForUserProto\0227\n" +
+      "\nbattleItem\0301 \003(\0132#.com.lvl6.proto.UserB" +
+      "attleItemProto\0228\n\ruserResearchs\0302 \003(\0132!.",
+      "com.lvl6.proto.UserResearchProto\0228\n\rsale" +
+      "sPackages\0303 \003(\0132!.com.lvl6.proto.SalesPa" +
+      "ckageProto\0229\n\ruserMiniEvent\0304 \001(\0132\".com." +
+      "lvl6.proto.UserMiniEventProto\022C\n\024userDef" +
+      "aultLanguages\0305 \001(\0132%.com.lvl6.proto.Def" +
+      "aultLanguagesProto\032\200\001\n\031AttackedNotificat" +
+      "ionProto\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\022\032\n\022battleCompleteTi" +
+      "me\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031Referr" +
+      "alNotificationProto\0222\n\010referred\030\001 \001(\0132 .",
+      "com.lvl6.proto.MinimumUserProto\022\023\n\013recru" +
+      "itTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001" +
+      "(\005\032\357\037\n\020StartupConstants\022H\n\025inAppPurchase" +
+      "Packages\030\001 \003(\0132).com.lvl6.proto.InAppPur" +
+      "chasePackageProto\022\027\n\017maxLevelForUser\030\002 \001" +
+      "(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025anim" +
+      "atedSpriteOffsets\030\004 \003(\0132O.com.lvl6.proto" +
+      ".StartupResponseProto.StartupConstants.A" +
+      "nimatedSpriteOffsetProto\022\025\n\rminNameLengt" +
+      "h\030\005 \001(\005\022\025\n\rmaxNameLength\030\006 \001(\005\022\035\n\025maxLen",
+      "gthOfChatString\030\007 \001(\005\022Z\n\rclanConstants\030\010" +
+      " \001(\0132C.com.lvl6.proto.StartupResponsePro" +
+      "to.StartupConstants.ClanConstants\022p\n\030dow" +
+      "nloadableNibConstants\030\t \001(\0132N.com.lvl6.p" +
+      "roto.StartupResponseProto.StartupConstan" +
+      "ts.DownloadableNibConstants\022\'\n\037numHoursB" +
+      "eforeReshowingGoldSale\030\n \001(\005\022\036\n\026levelToS" +
+      "howRateUsPopup\030\013 \001(\005\022e\n\022touramentConstan" +
+      "ts\030\014 \001(\0132I.com.lvl6.proto.StartupRespons" +
+      "eProto.StartupConstants.TournamentConsta",
+      "nts\022\037\n\027fbConnectRewardDiamonds\030\r \001(\005\022\023\n\013" +
+      "faqFileName\030\016 \001(\t\022<\n\022adminChatUserProto\030" +
+      "\017 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\037\n\027numBeginnerSalesAllowed\030\020 \001(\005\022h\n\024user" +
+      "MonsterConstants\030\021 \001(\0132J.com.lvl6.proto." +
+      "StartupResponseProto.StartupConstants.Us" +
+      "erMonsterConstants\022`\n\020monsterConstants\030\022" +
+      " \001(\0132F.com.lvl6.proto.StartupResponsePro" +
+      "to.StartupConstants.MonsterConstants\022\025\n\r" +
+      "minutesPerGem\030\023 \001(\002\022\027\n\017gemsPerResource\030\025",
+      " \001(\002\022\035\n\021pvpRequiredMinLvl\030\024 \001(\005B\002\030\001\022 \n\024m" +
+      "onsterDmgMultiplier\030\037 \001(\002B\002\030\001\022\'\n\037continu" +
+      "eBattleGemCostMultiplier\030\026 \001(\002\022 \n\030battle" +
+      "RunAwayBasePercent\030\034 \001(\002\022\036\n\026battleRunAwa" +
+      "yIncrement\030\035 \001(\002\022\027\n\017addAllFbFriends\030\027 \001(" +
+      "\010\022\025\n\rfacebookPopUp\030$ \001(\010\022]\n\010miniTuts\030\030 \001" +
+      "(\0132K.com.lvl6.proto.StartupResponseProto" +
+      ".StartupConstants.MiniTutorialConstants\022" +
+      "\024\n\014maxObstacles\030\031 \001(\005\022\032\n\022minutesPerObsta" +
+      "cle\030\032 \001(\005\022`\n\020taskMapConstants\030\033 \001(\0132F.co",
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pConstants.TaskMapConstants\022 \n\030maxMinute" +
+      "sForFreeSpeedUp\030\036 \001(\005\022b\n\021clanHelpConstan" +
+      "ts\030  \003(\0132G.com.lvl6.proto.StartupRespons" +
+      "eProto.StartupConstants.ClanHelpConstant" +
+      "s\022W\n\013pvpConstant\030! \001(\0132B.com.lvl6.proto." +
+      "StartupResponseProto.StartupConstants.Pv" +
+      "pConstants\022X\n\004sucp\030\" \003(\0132J.com.lvl6.prot" +
+      "o.StartupResponseProto.StartupConstants." +
+      "SpeedUpConstantProto\022c\n\004rccp\030# \003(\0132U.com",
+      ".lvl6.proto.StartupResponseProto.Startup" +
+      "Constants.ResourceConversionConstantProt" +
+      "o\022\025\n\rdisplayRarity\030% \001(\010\022\032\n\022taskIdOfFirs" +
+      "tSkill\030& \001(\005\022#\n\033minsToResolicitTeamDonat" +
+      "ion\030\' \001(\005\022j\n\021fileDownloadProto\030( \003(\0132O.c" +
+      "om.lvl6.proto.StartupResponseProto.Start" +
+      "upConstants.FileDownloadConstantProto\022 \n" +
+      "\030taskIdForUpgradeTutorial\030) \001(\005\032_\n\031Anima" +
+      "tedSpriteOffsetProto\022\021\n\timageName\030\001 \001(\t\022" +
+      "/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordin",
+      "ateProto\032\325\001\n\rClanConstants\022\035\n\025coinPriceT" +
+      "oCreateClan\030\001 \001(\005\022 \n\030maxCharLengthForCla" +
+      "nName\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescr" +
+      "iption\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030" +
+      "\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034achievemen" +
+      "tIdsForClanRewards\030\006 \003(\005\032c\n\030Downloadable" +
+      "NibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expa" +
+      "nsionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030" +
+      "\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwinsWeig" +
+      "ht\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesW",
+      "eight\030\003 \001(\005\022#\n\033numHoursToShowAfterEventE" +
+      "nd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxN" +
+      "umTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonste" +
+      "rLimit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cas" +
+      "hPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHealPe" +
+      "rHealthPoint\030\002 \001(\002\022\031\n\021elementalStrength\030" +
+      "\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilP" +
+      "erMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstant" +
+      "s\022\035\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023mapN" +
+      "umberOfSections\030\002 \001(\005\022\030\n\020mapSectionHeigh",
+      "t\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTot" +
+      "alHeight\030\005 \001(\002\032j\n\025MiniTutorialConstants\022" +
+      "\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016guideMons" +
+      "terId\030\002 \001(\005\022\035\n\025enhanceGuideMonsterId\030\003 \001" +
+      "(\005\032\213\001\n\021ClanHelpConstants\0229\n\010helpType\030\001 \001" +
+      "(\0162\036.com.lvl6.proto.GameActionType:\007NO_H" +
+      "ELP\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n\025per" +
+      "centRemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstant" +
+      "s\022\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDm" +
+      "gDelta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021",
+      "pvpRequiredMinLvl\030\004 \001(\005\022\035\n\025defendingMsgC" +
+      "harLimit\030\005 \001(\005\022\"\n\032beginAvengingTimeLimit" +
+      "Mins\030\006 \001(\005\022(\n requestClanToAvengeTimeLim" +
+      "itMins\030\007 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007" +
+      "seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032\210\001\n\037Resou" +
+      "rceConversionConstantProto\022?\n\014resourceTy" +
+      "pe\030\001 \001(\0162\034.com.lvl6.proto.ResourceType:\013" +
+      "NO_RESOURCE\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numG" +
+      "ems\030\003 \001(\005\032\217\001\n\031FileDownloadConstantProto\022" +
+      "\026\n\016fileDownloadId\030\001 \001(\005\022\020\n\010fileName\030\002 \001(",
+      "\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024downloadOnlyOverW" +
+      "ifi\030\004 \001(\010\022\030\n\020useIphone6Prefix\030\005 \001(\010\032W\n\031B" +
+      "oosterPackConstantsProto\022\036\n\026purchaseAmou" +
+      "ntRequired\030\001 \001(\005\022\032\n\022numberOfPacksGiven\030\002" +
+      " \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021startingMo" +
+      "nsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n" +
+      "\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdT" +
+      "wo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016" +
+      "markZMonsterId\030\n \001(\005\022?\n\022tutorialStructur" +
+      "es\030\003 \003(\0132#.com.lvl6.proto.TutorialStruct",
+      "Proto\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n" +
+      "\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 " +
+      ".com.lvl6.proto.CityElementProto\022$\n\034city" +
+      "ElementIdForFirstDungeon\030\007 \001(\005\022%\n\035cityEl" +
+      "ementIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashIni" +
+      "t\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001" +
+      "(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.com.lvl6" +
+      ".proto.MinimumObstacleProto\"A\n\014UpdateSta" +
+      "tus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014" +
+      "MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_",
+      "IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN" +
+      "_MAINTENANCE\020\003\"C\n\030ForceLogoutResponsePro" +
+      "to\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 " +
+      "\001(\tB\023B\021EventStartupProto"
+>>>>>>> added gacha credits to protos
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -39747,6 +40458,12 @@ public final class EventStartupProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor,
         new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", "UseIphone6Prefix", });
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor =
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(13);
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor,
+        new java.lang.String[] { "PurchaseAmountRequired", "NumberOfPacksGiven", });
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(3);
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new

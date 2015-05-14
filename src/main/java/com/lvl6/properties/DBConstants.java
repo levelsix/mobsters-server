@@ -825,6 +825,7 @@ public class DBConstants {
 	public static final String USER__SALES_JUMP_TWO_TIERS = "sales_jump_two_tiers";
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
 	public static final String USER__SEGMENTATION_GROUP = "segmentation_group";
+	public static final String USER__GACHA_CREDITS = "gacha_credits";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

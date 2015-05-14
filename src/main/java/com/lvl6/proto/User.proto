@@ -129,6 +129,7 @@ message FullUserProto {
 	optional int64 salesLastPurchaseTime = 59;
 	
 	optional int32 segmentationGroup = 500;
+	optional int32 gachaCredits = 501;
 	
 	
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
