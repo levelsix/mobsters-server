@@ -178,7 +178,6 @@ case class StartupData(
 			@Autowired var  clanEventPersistentForClanRetrieveUtils : ClanEventPersistentForClanRetrieveUtils2  = null
 			@Autowired var  clanEventPersistentForUserRetrieveUtils : ClanEventPersistentForUserRetrieveUtils2  = null
 			@Autowired var  clanEventPersistentUserRewardRetrieveUtils : ClanEventPersistentUserRewardRetrieveUtils2  = null
-			@Autowired var  clanGiftForUserRetrieveUtil : ClanGiftForUserRetrieveUtils = null
 			@Autowired var  clanHelpRetrieveUtil : ClanHelpRetrieveUtil  = null
 			@Autowired var  clanMemberTeamDonationRetrieveUtil : ClanMemberTeamDonationRetrieveUtil  = null
 			@Autowired var  clanRetrieveUtils : ClanRetrieveUtils2  = null
@@ -578,15 +577,6 @@ case class StartupData(
 								createInfoProtoUtils);
 						scmtda.setUp(fillMe);
 
-						//SETTING CLAN GIFTS, it adds protos straight to resbuilder
-						val scga = new SetClanGiftsAction(
-								resBuilder,
-								user,
-								playerId,
-								clanGiftForUserRetrieveUtil,
-								createInfoProtoUtils);
-						scga.setUp(fillMe);
-
 						//Now since all the ids of resources are known, get them from db
 						fillMe.fetch();
 						spcma.execute(fillMe);
@@ -598,7 +588,6 @@ case class StartupData(
 						scha.execute(fillMe);
 						scra.execute(fillMe);
 						scmtda.execute(fillMe);
-						scga.execute(fillMe);
 						resBuilder.setClanData(cdpb.build());
 						//TODO: DELETE IN FUTURE. This is for legacy client
 						resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -654,7 +643,7 @@ case class StartupData(
 			def setUserSegmentationGroup(resBuilder:Builder, user:User, userId:String)= {
 				timed("StartupService.setUserSegmentationGroup"){
 					if(user.getSegmentationGroup() == 0) {
-						val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId, user)
+						val usga: UserSegmentationGroupAction = new UserSegmentationGroupAction(userId)
 					usga.convertUserIdIntoInt();
 					val segmentationGroup: Int = usga.getSegmentationGroup();
 					if(!user.updateUserSegmentationGroup(segmentationGroup)) {
@@ -1155,7 +1144,7 @@ case class StartupData(
 					val objArray: Array[Object] = Array("COOPER", "ALEX")
 							val floatArray: Array[java.lang.Float] = Array(0.5F, 0.5F)
 
-							val usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
+							val usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
 					if(usga.returnAppropriateObjectGroup().equals("COOPER")){
 						logger.info("sending starterbuilderpack");
 						return true;
