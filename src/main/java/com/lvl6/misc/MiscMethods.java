@@ -398,6 +398,7 @@ public class MiscMethods {
 		tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
 		tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
 		tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+		tcb.setGachaCreditsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
 
 		//    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
 

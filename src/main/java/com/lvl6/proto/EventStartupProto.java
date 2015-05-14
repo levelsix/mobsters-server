@@ -22213,6 +22213,15 @@ public final class EventStartupProto {
       int getGemsInit();
 
       /**
+       * <code>optional int32 gachaCreditsInit = 17;</code>
+       */
+      boolean hasGachaCreditsInit();
+      /**
+       * <code>optional int32 gachaCreditsInit = 17;</code>
+       */
+      int getGachaCreditsInit();
+
+      /**
        * <code>repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;</code>
        *
        * <pre>
@@ -22401,9 +22410,9 @@ public final class EventStartupProto {
                 break;
               }
               case 114: {
-                if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+                if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
                   tutorialObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MinimumObstacleProto>();
-                  mutable_bitField0_ |= 0x00008000;
+                  mutable_bitField0_ |= 0x00010000;
                 }
                 tutorialObstacles_.add(input.readMessage(com.lvl6.proto.StructureProto.MinimumObstacleProto.PARSER, extensionRegistry));
                 break;
@@ -22416,6 +22425,11 @@ public final class EventStartupProto {
               case 128: {
                 bitField0_ |= 0x00000002;
                 guideMonsterId_ = input.readInt32();
+                break;
+              }
+              case 136: {
+                bitField0_ |= 0x00001000;
+                gachaCreditsInit_ = input.readInt32();
                 break;
               }
             }
@@ -22435,7 +22449,7 @@ public final class EventStartupProto {
           if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
             cityOneElements_ = java.util.Collections.unmodifiableList(cityOneElements_);
           }
-          if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+          if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
             tutorialObstacles_ = java.util.Collections.unmodifiableList(tutorialObstacles_);
           }
           this.unknownFields = unknownFields.build();
@@ -22774,6 +22788,21 @@ public final class EventStartupProto {
         return gemsInit_;
       }
 
+      public static final int GACHACREDITSINIT_FIELD_NUMBER = 17;
+      private int gachaCreditsInit_;
+      /**
+       * <code>optional int32 gachaCreditsInit = 17;</code>
+       */
+      public boolean hasGachaCreditsInit() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional int32 gachaCreditsInit = 17;</code>
+       */
+      public int getGachaCreditsInit() {
+        return gachaCreditsInit_;
+      }
+
       public static final int TUTORIALOBSTACLES_FIELD_NUMBER = 14;
       private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_;
       /**
@@ -22850,6 +22879,7 @@ public final class EventStartupProto {
         cashInit_ = 0;
         oilInit_ = 0;
         gemsInit_ = 0;
+        gachaCreditsInit_ = 0;
         tutorialObstacles_ = java.util.Collections.emptyList();
       }
       private byte memoizedIsInitialized = -1;
@@ -22912,6 +22942,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           output.writeInt32(16, guideMonsterId_);
+        }
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          output.writeInt32(17, gachaCreditsInit_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -22990,6 +23023,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(16, guideMonsterId_);
+        }
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(17, gachaCreditsInit_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -23149,9 +23186,11 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00002000);
           gemsInit_ = 0;
           bitField0_ = (bitField0_ & ~0x00004000);
+          gachaCreditsInit_ = 0;
+          bitField0_ = (bitField0_ & ~0x00008000);
           if (tutorialObstaclesBuilder_ == null) {
             tutorialObstacles_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           } else {
             tutorialObstaclesBuilder_.clear();
           }
@@ -23254,10 +23293,14 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000800;
           }
           result.gemsInit_ = gemsInit_;
+          if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+            to_bitField0_ |= 0x00001000;
+          }
+          result.gachaCreditsInit_ = gachaCreditsInit_;
           if (tutorialObstaclesBuilder_ == null) {
-            if (((bitField0_ & 0x00008000) == 0x00008000)) {
+            if (((bitField0_ & 0x00010000) == 0x00010000)) {
               tutorialObstacles_ = java.util.Collections.unmodifiableList(tutorialObstacles_);
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
             }
             result.tutorialObstacles_ = tutorialObstacles_;
           } else {
@@ -23377,11 +23420,14 @@ public final class EventStartupProto {
           if (other.hasGemsInit()) {
             setGemsInit(other.getGemsInit());
           }
+          if (other.hasGachaCreditsInit()) {
+            setGachaCreditsInit(other.getGachaCreditsInit());
+          }
           if (tutorialObstaclesBuilder_ == null) {
             if (!other.tutorialObstacles_.isEmpty()) {
               if (tutorialObstacles_.isEmpty()) {
                 tutorialObstacles_ = other.tutorialObstacles_;
-                bitField0_ = (bitField0_ & ~0x00008000);
+                bitField0_ = (bitField0_ & ~0x00010000);
               } else {
                 ensureTutorialObstaclesIsMutable();
                 tutorialObstacles_.addAll(other.tutorialObstacles_);
@@ -23394,7 +23440,7 @@ public final class EventStartupProto {
                 tutorialObstaclesBuilder_.dispose();
                 tutorialObstaclesBuilder_ = null;
                 tutorialObstacles_ = other.tutorialObstacles_;
-                bitField0_ = (bitField0_ & ~0x00008000);
+                bitField0_ = (bitField0_ & ~0x00010000);
                 tutorialObstaclesBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getTutorialObstaclesFieldBuilder() : null;
@@ -24460,12 +24506,44 @@ public final class EventStartupProto {
           return this;
         }
 
+        private int gachaCreditsInit_ ;
+        /**
+         * <code>optional int32 gachaCreditsInit = 17;</code>
+         */
+        public boolean hasGachaCreditsInit() {
+          return ((bitField0_ & 0x00008000) == 0x00008000);
+        }
+        /**
+         * <code>optional int32 gachaCreditsInit = 17;</code>
+         */
+        public int getGachaCreditsInit() {
+          return gachaCreditsInit_;
+        }
+        /**
+         * <code>optional int32 gachaCreditsInit = 17;</code>
+         */
+        public Builder setGachaCreditsInit(int value) {
+          bitField0_ |= 0x00008000;
+          gachaCreditsInit_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 gachaCreditsInit = 17;</code>
+         */
+        public Builder clearGachaCreditsInit() {
+          bitField0_ = (bitField0_ & ~0x00008000);
+          gachaCreditsInit_ = 0;
+          onChanged();
+          return this;
+        }
+
         private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_ =
           java.util.Collections.emptyList();
         private void ensureTutorialObstaclesIsMutable() {
-          if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+          if (!((bitField0_ & 0x00010000) == 0x00010000)) {
             tutorialObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MinimumObstacleProto>(tutorialObstacles_);
-            bitField0_ |= 0x00008000;
+            bitField0_ |= 0x00010000;
            }
         }
 
@@ -24670,7 +24748,7 @@ public final class EventStartupProto {
         public Builder clearTutorialObstacles() {
           if (tutorialObstaclesBuilder_ == null) {
             tutorialObstacles_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
             onChanged();
           } else {
             tutorialObstaclesBuilder_.clear();
@@ -24782,7 +24860,7 @@ public final class EventStartupProto {
             tutorialObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder>(
                     tutorialObstacles_,
-                    ((bitField0_ & 0x00008000) == 0x00008000),
+                    ((bitField0_ & 0x00010000) == 0x00010000),
                     getParentForChildren(),
                     isClean());
             tutorialObstacles_ = null;
@@ -40290,7 +40368,7 @@ public final class EventStartupProto {
       "rsionNumberProto\030\t \001(\01326.com.lvl6.proto." +
       "StartupRequestProto.VersionNumberProto\032J" +
       "\n\022VersionNumberProto\022\020\n\010superNum\030\001 \001(\005\022\020" +
-      "\n\010majorNum\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\275@\n\024S" +
+      "\n\010majorNum\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\327@\n\024S" +
       "tartupResponseProto\022\030\n\020serverTimeMillis\030" +
       "\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.F",
       "ullUserProto\022I\n\rstartupStatus\030\003 \001(\01622.co" +
@@ -40550,7 +40628,7 @@ public final class EventStartupProto {
       "\004 \001(\010\022\030\n\020useIphone6Prefix\030\005 \001(\010\032W\n\031Boost" +
       "erPackConstantsProto\022\036\n\026purchaseAmountRe" +
       "quired\030\001 \001(\005\022\032\n\022numberOfPacksGiven\030\002 \001(\005" +
-      "\032\234\004\n\021TutorialConstants\022\031\n\021startingMonste" +
+      "\032\266\004\n\021TutorialConstants\022\031\n\021startingMonste" +
       "rId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016ene" +
       "myMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017",
       " \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016mark" +
@@ -40561,6 +40639,7 @@ public final class EventStartupProto {
       ".lvl6.proto.CityElementProto\022$\n\034cityElem" +
       "entIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElemen" +
       "tIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 " +
+<<<<<<< HEAD
       "\001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?" +
       "\n\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.pro",
       "to.MinimumObstacleProto\"A\n\014UpdateStatus\022" +
@@ -40571,6 +40650,18 @@ public final class EventStartupProto {
       "\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB" +
       "\023B\021EventStartupProto"
 >>>>>>> added booster pack constants to startup
+=======
+      "\001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022\030" +
+      "\n\020gachaCreditsInit\030\021 \001(\005\022?\n\021tutorialObst",
+      "acles\030\016 \003(\0132$.com.lvl6.proto.MinimumObst" +
+      "acleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001" +
+      "\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\r" +
+      "StartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NO" +
+      "T_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030" +
+      "ForceLogoutResponseProto\022\031\n\021previousLogi" +
+      "nTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartu" +
+      "pProto"
+>>>>>>> added gacha credits to tutorial constants
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -40731,7 +40822,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-        new java.lang.String[] { "StartingMonsterId", "GuideMonsterId", "EnemyMonsterId", "EnemyMonsterIdTwo", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "TutorialObstacles", });
+        new java.lang.String[] { "StartingMonsterId", "GuideMonsterId", "EnemyMonsterId", "EnemyMonsterIdTwo", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "GachaCreditsInit", "TutorialObstacles", });
     internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_ForceLogoutResponseProto_fieldAccessorTable = new
