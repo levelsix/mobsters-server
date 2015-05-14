@@ -47,6 +47,7 @@ import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
@@ -688,7 +689,13 @@ public class MiscMethods {
 			}
 
 		}
-
+		
+		BoosterPackConstantsProto.Builder bpcpb = BoosterPackConstantsProto.newBuilder();
+		bpcpb.setPurchaseAmountRequired(ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE);
+		bpcpb.setNumberOfPacksGiven(ControllerConstants.BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE);
+		
+		cb.setBoosterPackConstantProto(bpcpb.build());
+		
 		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
 		//set more properties above
