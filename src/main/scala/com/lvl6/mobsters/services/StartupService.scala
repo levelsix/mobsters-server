@@ -1329,14 +1329,13 @@ case class StartupData(
 							val userSalesValue = user.getSalesValue()
 									val salesLastPurchaseTime = user.getLastPurchaseTime();
 							val now = new Date
-              logger.info("setting regular sales for user");
+
 									if(salesLastPurchaseTime == null) {
 										val ts = new Timestamp(now.getTime());
 										updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
 									}
 									else {
 										if(userSalesValue == 0) {
-                      logger.info("checking if longer than 5 days");
 											if(timeUtils.numDaysDifference(now, salesLastPurchaseTime) > 5) {
 												logger.info("updating user sales value, been longer than 5 days");
 												updateUtil.updateUserSalesValue(user.getId(), 1, now);
