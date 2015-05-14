@@ -23,6 +23,7 @@ message SendTangoGiftResponseProto {
      optional MinimumUserProto sender = 1;
      optional SendTangoGiftStatus status = 2;
      repeated string tangoUserIdsNotInToonSquad = 3;
+     repeated string tangoUserIdsInToonSquad = 4;
      
      //ReceivedGiftResponseProto is sent to the users tied to tangoUserIds
      

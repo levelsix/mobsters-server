@@ -121,6 +121,10 @@ public class SendTangoGiftController extends EventController {
 				Collection<String> tangoIdsNotInToonSquad = stga
 						.getNonToonSquadTangoUserIds();
 				resBuilder.addAllTangoUserIdsNotInToonSquad(tangoIdsNotInToonSquad);
+
+				Collection<String> tangoIdsInToonSquad = stga
+						.getToonSquadTangoUserIds();
+				resBuilder.addAllTangoUserIdsInToonSquad(tangoIdsInToonSquad);
 			}
 
 			SendTangoGiftResponseProto resProto = resBuilder.build();
