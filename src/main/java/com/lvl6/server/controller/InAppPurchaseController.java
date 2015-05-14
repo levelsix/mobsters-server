@@ -384,7 +384,9 @@ public class InAppPurchaseController extends EventController {
 					writeToUserCurrencyHistory(userId, date, null, iapmta, null);
 				}
 				else if(isSalesPack) {
+					log.info("got here1");
 					setNewAndPurchasedSalesPackage(resBuilder, iapsa, iapsa.getUser());
+					log.info("got here2");
 					createRewardProto(resBuilder, iapsa);
 					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
@@ -478,6 +480,7 @@ public class InAppPurchaseController extends EventController {
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
             InAppPurchaseSalesAction iapsa) {
         Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+        log.info("LIST OF ITEMS: ", nuOrUpdatedItems);
         Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
         int gemsGained = iapsa.getAra().getGemsGained();
         int cashGained = iapsa.getAra().getCashGained();

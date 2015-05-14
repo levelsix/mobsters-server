@@ -212,7 +212,7 @@ public class InAppPurchaseSalesTest {
 
 
 		iaprpb.setReceipt(receipt1);
-		iaprpb.setUuid("12581D5C-D488-4E2B-B8B4-642D012855C6");
+		iaprpb.setUuid("6552136A-1AF1-4A98-966C-FC030DE1F032");
 
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
