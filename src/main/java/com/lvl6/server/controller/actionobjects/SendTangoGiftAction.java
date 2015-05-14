@@ -74,6 +74,7 @@ public class SendTangoGiftAction {
 	protected User gifter;
 	protected Map<String, User> userIdToReceiver;
 	protected Collection<String> nonToonSquadTangoUserIds;
+	protected Collection<String> toonSquadTangoUserIds;
 	protected List<GiftForUser> receiverGifts;
 	protected Map<String, GiftForTangoUser> giftForUserIdToGiftForTangoUser;
 	protected Random rand;
@@ -142,11 +143,14 @@ public class SendTangoGiftAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 
 		nonToonSquadTangoUserIds = new HashSet<String>(tangoUserIds);
+		toonSquadTangoUserIds = new HashSet<String>();
 		receiverGifts = new ArrayList<GiftForUser>();
+		//filter out those tango ids in and not in toon squad
 		for (User receiver : userIdToReceiver.values())
 		{
 			String tangoId = receiver.getTangoId();
 			nonToonSquadTangoUserIds.remove(tangoId);
+			toonSquadTangoUserIds.add(tangoId);
 
 			GiftForUser gfu = createGiftForUser(receiver);
 			receiverGifts.add(gfu);
@@ -235,6 +239,14 @@ public class SendTangoGiftAction {
 	public void setNonToonSquadTangoUserIds(
 			Collection<String> nonToonSquadTangoUserIds) {
 		this.nonToonSquadTangoUserIds = nonToonSquadTangoUserIds;
+	}
+
+	public Collection<String> getToonSquadTangoUserIds() {
+		return toonSquadTangoUserIds;
+	}
+
+	public void setToonSquadTangoUserIds(Collection<String> toonSquadTangoUserIds) {
+		this.toonSquadTangoUserIds = toonSquadTangoUserIds;
 	}
 
 	public TangoGift getTangoGift() {

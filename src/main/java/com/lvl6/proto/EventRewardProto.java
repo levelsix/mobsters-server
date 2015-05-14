@@ -978,6 +978,25 @@ public final class EventRewardProto {
      */
     com.google.protobuf.ByteString
         getTangoUserIdsNotInToonSquadBytes(int index);
+
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    com.google.protobuf.ProtocolStringList
+        getTangoUserIdsInToonSquadList();
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    int getTangoUserIdsInToonSquadCount();
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    java.lang.String getTangoUserIdsInToonSquad(int index);
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getTangoUserIdsInToonSquadBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SendTangoGiftResponseProto}
@@ -1068,6 +1087,15 @@ public final class EventRewardProto {
               tangoUserIdsNotInToonSquad_.add(bs);
               break;
             }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                tangoUserIdsInToonSquad_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              tangoUserIdsInToonSquad_.add(bs);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1078,6 +1106,9 @@ public final class EventRewardProto {
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           tangoUserIdsNotInToonSquad_ = tangoUserIdsNotInToonSquad_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          tangoUserIdsInToonSquad_ = tangoUserIdsInToonSquad_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1258,10 +1289,40 @@ public final class EventRewardProto {
       return tangoUserIdsNotInToonSquad_.getByteString(index);
     }
 
+    public static final int TANGOUSERIDSINTOONSQUAD_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList tangoUserIdsInToonSquad_;
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getTangoUserIdsInToonSquadList() {
+      return tangoUserIdsInToonSquad_;
+    }
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    public int getTangoUserIdsInToonSquadCount() {
+      return tangoUserIdsInToonSquad_.size();
+    }
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    public java.lang.String getTangoUserIdsInToonSquad(int index) {
+      return tangoUserIdsInToonSquad_.get(index);
+    }
+    /**
+     * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTangoUserIdsInToonSquadBytes(int index) {
+      return tangoUserIdsInToonSquad_.getByteString(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus.SUCCESS;
       tangoUserIdsNotInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      tangoUserIdsInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1284,6 +1345,9 @@ public final class EventRewardProto {
       }
       for (int i = 0; i < tangoUserIdsNotInToonSquad_.size(); i++) {
         output.writeBytes(3, tangoUserIdsNotInToonSquad_.getByteString(i));
+      }
+      for (int i = 0; i < tangoUserIdsInToonSquad_.size(); i++) {
+        output.writeBytes(4, tangoUserIdsInToonSquad_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1310,6 +1374,15 @@ public final class EventRewardProto {
         }
         size += dataSize;
         size += 1 * getTangoUserIdsNotInToonSquadList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < tangoUserIdsInToonSquad_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(tangoUserIdsInToonSquad_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getTangoUserIdsInToonSquadList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1443,6 +1516,8 @@ public final class EventRewardProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         tangoUserIdsNotInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        tangoUserIdsInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -1488,6 +1563,11 @@ public final class EventRewardProto {
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.tangoUserIdsNotInToonSquad_ = tangoUserIdsNotInToonSquad_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          tangoUserIdsInToonSquad_ = tangoUserIdsInToonSquad_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.tangoUserIdsInToonSquad_ = tangoUserIdsInToonSquad_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1517,6 +1597,16 @@ public final class EventRewardProto {
           } else {
             ensureTangoUserIdsNotInToonSquadIsMutable();
             tangoUserIdsNotInToonSquad_.addAll(other.tangoUserIdsNotInToonSquad_);
+          }
+          onChanged();
+        }
+        if (!other.tangoUserIdsInToonSquad_.isEmpty()) {
+          if (tangoUserIdsInToonSquad_.isEmpty()) {
+            tangoUserIdsInToonSquad_ = other.tangoUserIdsInToonSquad_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureTangoUserIdsInToonSquadIsMutable();
+            tangoUserIdsInToonSquad_.addAll(other.tangoUserIdsInToonSquad_);
           }
           onChanged();
         }
@@ -1787,6 +1877,99 @@ public final class EventRewardProto {
   }
   ensureTangoUserIdsNotInToonSquadIsMutable();
         tangoUserIdsNotInToonSquad_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList tangoUserIdsInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureTangoUserIdsInToonSquadIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          tangoUserIdsInToonSquad_ = new com.google.protobuf.LazyStringArrayList(tangoUserIdsInToonSquad_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getTangoUserIdsInToonSquadList() {
+        return tangoUserIdsInToonSquad_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public int getTangoUserIdsInToonSquadCount() {
+        return tangoUserIdsInToonSquad_.size();
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public java.lang.String getTangoUserIdsInToonSquad(int index) {
+        return tangoUserIdsInToonSquad_.get(index);
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTangoUserIdsInToonSquadBytes(int index) {
+        return tangoUserIdsInToonSquad_.getByteString(index);
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public Builder setTangoUserIdsInToonSquad(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTangoUserIdsInToonSquadIsMutable();
+        tangoUserIdsInToonSquad_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public Builder addTangoUserIdsInToonSquad(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTangoUserIdsInToonSquadIsMutable();
+        tangoUserIdsInToonSquad_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public Builder addAllTangoUserIdsInToonSquad(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureTangoUserIdsInToonSquadIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, tangoUserIdsInToonSquad_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public Builder clearTangoUserIdsInToonSquad() {
+        tangoUserIdsInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string tangoUserIdsInToonSquad = 4;</code>
+       */
+      public Builder addTangoUserIdsInToonSquadBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTangoUserIdsInToonSquadIsMutable();
+        tangoUserIdsInToonSquad_.add(value);
         onChanged();
         return this;
       }
@@ -2846,18 +3029,19 @@ public final class EventRewardProto {
       "ndTangoGiftRequestProto\0220\n\006sender\030\001 \001(\0132" +
       " .com.lvl6.proto.MinimumUserProto\022\022\n\ncli" +
       "entTime\030\002 \001(\003\022\024\n\014tangoUserIds\030\003 \003(\t\022\031\n\021s" +
-      "enderTangoUserId\030\004 \001(\t\"\366\001\n\032SendTangoGift" +
+      "enderTangoUserId\030\004 \001(\t\"\227\002\n\032SendTangoGift" +
       "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
       ".proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162" +
       ">.com.lvl6.proto.SendTangoGiftResponsePr" +
       "oto.SendTangoGiftStatus\022\"\n\032tangoUserIdsN",
-      "otInToonSquad\030\003 \003(\t\"2\n\023SendTangoGiftStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\262\001\n\031Rece" +
-      "ivedGiftResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\0221\n\005scope" +
-      "\030\002 \001(\0162\031.com.lvl6.proto.ChatScope:\007PRIVA" +
-      "TE\0220\n\tuserGifts\030\003 \003(\0132\035.com.lvl6.proto.U" +
-      "serGiftProtoB\022B\020EventRewardProto"
+      "otInToonSquad\030\003 \003(\t\022\037\n\027tangoUserIdsInToo" +
+      "nSquad\030\004 \003(\t\"2\n\023SendTangoGiftStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\262\001\n\031ReceivedGif" +
+      "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\0221\n\005scope\030\002 \001(\0162" +
+      "\031.com.lvl6.proto.ChatScope:\007PRIVATE\0220\n\tu" +
+      "serGifts\030\003 \003(\0132\035.com.lvl6.proto.UserGift" +
+      "ProtoB\022B\020EventRewardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2885,7 +3069,7 @@ public final class EventRewardProto {
     internal_static_com_lvl6_proto_SendTangoGiftResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SendTangoGiftResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "TangoUserIdsNotInToonSquad", });
+        new java.lang.String[] { "Sender", "Status", "TangoUserIdsNotInToonSquad", "TangoUserIdsInToonSquad", });
     internal_static_com_lvl6_proto_ReceivedGiftResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_ReceivedGiftResponseProto_fieldAccessorTable = new
