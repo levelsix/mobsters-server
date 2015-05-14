@@ -104,7 +104,7 @@
 
 		<lvl6.application.version.superNumber>1</lvl6.application.version.superNumber>
 		<lvl6.application.version.majorNumber>5</lvl6.application.version.majorNumber>
-		<lvl6.application.version.minorNumber>2</lvl6.application.version.minorNumber>
+		<lvl6.application.version.minorNumber>5</lvl6.application.version.minorNumber>
 		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
@@ -287,6 +287,9 @@
 				<configuration>
 					<includes>
 						<include>**/test/*.java</include>
+						<include>**/test/controller/integrationtests/*.java</include>
+						<include>**/test/controller/unittests/*.java</include>
+						<include>**/test/controller/utilstests/*.java</include>
 					</includes>
 				</configuration>
 			</plugin>
