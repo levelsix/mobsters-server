@@ -160,7 +160,7 @@ public class InAppPurchaseAction {
 		if (gemChange != 0) {
 			prevCurrencies.put(MiscMethods.gems, user.getGems());
 			resBuilder.setDiamondsGained(gemChange);
-			user.updateRelativeCashAndOilAndGems(0, 0, gemChange);
+			user.updateRelativeCashAndOilAndGems(0, 0, gemChange, 0);
 		}
 
 		prepCurrencyHistory();

@@ -189,25 +189,25 @@ public class DevController extends EventController {
 		case F_B_GET_CASH:
 			log.info(String.format("giving user=%s cash=%d", aUser,
 					staticDataId));
-			aUser.updateRelativeCashAndOilAndGems(quantity, 0, 0);
+			aUser.updateRelativeCashAndOilAndGems(quantity, 0, 0, 0);
 			break;
 
 		case F_B_GET_OIL:
 			log.info(String
 					.format("giving user=%s oil=%d", aUser, staticDataId));
-			aUser.updateRelativeCashAndOilAndGems(0, quantity, 0);
+			aUser.updateRelativeCashAndOilAndGems(0, quantity, 0, 0);
 			break;
 
 		case F_B_GET_GEMS:
 			log.info(String.format("giving user=%s gems=%d", aUser,
 					staticDataId));
-			aUser.updateRelativeCashAndOilAndGems(0, 0, quantity);
+			aUser.updateRelativeCashAndOilAndGems(0, 0, quantity, 0);
 			break;
 
 		case F_B_GET_CASH_OIL_GEMS:
 			log.info(String.format("giving user=%s cash, gems, oil=%d", aUser,
 					staticDataId));
-			aUser.updateRelativeCashAndOilAndGems(quantity, quantity, quantity);
+			aUser.updateRelativeCashAndOilAndGems(quantity, quantity, quantity, 0);
 			break;
 		case GET_ITEM:
 			log.info(String.format("giving user=%s, itemId=%s, quantity=%s",
