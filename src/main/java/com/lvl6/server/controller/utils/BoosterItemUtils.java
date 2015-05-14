@@ -75,12 +75,7 @@ public class BoosterItemUtils {
 			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
 			if(r.getType().equalsIgnoreCase(RewardType.GACHA_CREDITS.name())) {
 				gachaCreditsReward += r.getAmt();
-			}
-		}
-
 		return gachaCreditsReward;
-	}
-
 //	//monsterIdsToNumPieces or completeUserMonsters will be populated
 //	public static String createUpdateUserMonsterArguments(String userId,
 //			int boosterPackId, List<BoosterItem> boosterItems,
@@ -96,7 +91,6 @@ public class BoosterItemUtils {
 //		sb.append(" boosterItemIds ");
 //	}
 		
-
 //	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
 //			List<BoosterItem> itemsUserReceives,
 //			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -115,30 +109,6 @@ public class BoosterItemUtils {
 //
 //	}
 
-//	public List<ItemForUser> calculateBoosterItemItemRewards(
-//			String userId, List<BoosterItem> itemsUserReceives,
-//			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
-//		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-//
-//		for (BoosterItem bi : itemsUserReceives) {
-//			int itemId = bi.getItemId();
-//			int itemQuantity = bi.getItemQuantity();
-//
-//			if (itemId <= 0 || itemQuantity <= 0) {
-//				continue;
-//			}
-//
-//			//user could have gotten multiple of the same BoosterItem
-//			int newQuantity = itemQuantity;
-//			if (itemIdToQuantity.containsKey(itemId)) {
-//				newQuantity += itemIdToQuantity.get(itemId);
-//			}
-//			itemIdToQuantity.put(itemId, newQuantity);
-//		}
-//
-//		return calculateItemRewards(userId, itemForUserRetrieveUtil,
-//				itemIdToQuantity);
-//	}
 
 	public List<ItemForUser> calculateItemRewards(String userId,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,

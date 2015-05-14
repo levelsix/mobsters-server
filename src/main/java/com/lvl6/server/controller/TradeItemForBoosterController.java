@@ -458,41 +458,8 @@ public class TradeItemForBoosterController extends EventController {
 //		if (itemsUserReceives.isEmpty()) {
 //			return;
 //		}
-//		BoosterItem bi = itemsUserReceives.get(0);
 //
-//		List<String> userMonsterIds = monsterStuffUtils
-//				.getUserMonsterIds(fumpList);
 //
 //		int num = insertUtil.insertIntoBoosterPackPurchaseHistory(
 //				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
 //
-//		log.info("wrote to booster pack history!!!! \t numInserted=" + num
-//				+ "\t boosterItem=" + itemsUserReceives);
-	}
-
-	public UserRetrieveUtils2 getUserRetrieveUtils() {
-		return userRetrieveUtils;
-	}
-
-	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
-		this.userRetrieveUtils = userRetrieveUtils;
-	}
-
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
-		return itemForUserRetrieveUtil;
-	}
-
-	public void setItemForUserRetrieveUtil(
-			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
-		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-	}
-
-	public UpdateUtil getUpdateUtil() {
-		return updateUtil;
-	}
-
-	public void setUpdateUtil(UpdateUtil updateUtil) {
-		this.updateUtil = updateUtil;
-	}
-
-}
