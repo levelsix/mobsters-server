@@ -1317,25 +1317,11 @@ class StartupService extends LazyLogging{
     Future{
       timed("StartupService.setSalesForUser"){
           val userSalesValue = user.getSalesValue()
-          val salesLastPurchaseTime = user.getLastPurchaseTime();
+          val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
           val now = new Date
           
-          if(salesLastPurchaseTime == null) {
-            val ts = new Timestamp(now.getTime());
-            updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
-          }
-          else {
-            if(userSalesValue == 0) {
-              if(timeUtils.numDaysDifference(now, salesLastPurchaseTime) > 5) {
-                updateUtil.updateUserSalesValue(user.getId(), 1, now);
-                val userSalesValue = 1;
-              }
-            }
-          }
-          val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
-
           val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
-        		  idsToSalesPackages.values().foreach { sp:SalesPackage =>
+          idsToSalesPackages.values().foreach { sp:SalesPackage =>
               if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
                  && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
                  && !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
