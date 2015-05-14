@@ -5149,6 +5149,9 @@ public class CreateInfoProtoUtils {
 
 		int segmentationGroup = u.getSegmentationGroup();
 		builder.setSegmentationGroup(segmentationGroup);
+		
+		int gachaCredits = u.getGachaCredits();
+		builder.setGachaCredits(gachaCredits);
 
 		//don't add setting new columns/properties here, add up above
 
