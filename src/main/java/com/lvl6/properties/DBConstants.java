@@ -149,6 +149,7 @@ public class DBConstants {
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
 	public static final String TABLE_USER_FACEBOOK_INVITE_FOR_SLOT = "user_facebook_invite_for_slot";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
+	public static final String TABLE_USER_REWARD_HISTORY = "user_reward_history";
 	public static final String TABLE_USER_SESSION = "user_session";
 
 	/*COLUMNNAMES*/
@@ -863,6 +864,14 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
+	
+	/*USER REWARD HISTORY*/
+	public static final String USER_REWARD_HISTORY__ID = GENERIC__ID;
+	public static final String USER_REWARD_HISTORY__USER_ID = "user_id";
+	public static final String USER_REWARD_HISTORY__DATE = "date";
+	public static final String USER_REWARD_HISTORY__REWARD_ID = "reward_id";
+	public static final String USER_REWARD_HISTORY__REASON_FOR_REWARD = "reason_for_reward";
+	public static final String USER_REWARD_HISTORY__DETAILS = "details";
 
 	/*USER SESSIONS*/
 	public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
@@ -1079,6 +1088,9 @@ public class DBConstants {
 	public static final String MINI_JOB__DURATION_MIN_MINUTES = "duration_min_minutes";
 	public static final String MINI_JOB__DURATION_MAX_MINUTES = "duration_max_minutes";
 	public static final String MINI_JOB__EXP_REWARD = "exp_reward";
+	public static final String MINI_JOB__REWARD_ID_ONE = "reward_id_one";
+	public static final String MINI_JOB__REWARD_ID_TWO = "reward_id_two";
+	public static final String MINI_JOB__REWARD_ID_THREE = "reward_id_three";
 
 	public static final String MINI_JOB_REFRESH_ITEM__STRUCT_ID = "struct_id";
 	public static final String MINI_JOB_REFRESH_ITEM__ITEM_ID = "item_id";
