@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.GiftForUser;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -35,6 +40,52 @@ public class GiftForUserRetrieveUtils {
 	public void setDataSource(DataSource dataSource) {
 		log.info("Setting datasource and creating jdbcTemplate");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	public Map<String, GiftForUser> getUserGiftsForUserMap(Collection<String> gfuIds)
+	{
+		log.debug("retrieving GiftForUser map for ids {}",
+				gfuIds);
+		if (null == gfuIds || gfuIds.isEmpty()) {
+			return new HashMap<String, GiftForUser>();
+		}
+
+		Map<String, GiftForUser> idToGfu =
+				new HashMap<String, GiftForUser>();
+		List<GiftForUser> gfuList = getUserGiftsForUser(gfuIds);
+		for (GiftForUser gfu : gfuList) {
+			String id = gfu.getId();
+			idToGfu.put(id, gfu);
+		}
+
+		return idToGfu;
+	}
+
+	public List<GiftForUser> getUserGiftsForUser(Collection<String> gfuIds)
+	{
+		if (null == gfuIds || gfuIds.isEmpty()) {
+			return new ArrayList<GiftForUser>();
+		}
+
+		log.debug("retrieving GiftForUser for ids {}",
+				gfuIds);
+		List<GiftForUser> gfuList = null;
+		try {
+			int amount = gfuIds.size();
+			List<String> questions = Collections.nCopies(amount, "?");
+			String questionMarkStr = StringUtils.csvList(questions);
+			String query = String.format("select * from %s where %s in (%s)",
+					TABLE_NAME, DBConstants.GIFT_FOR_USER__ID, questionMarkStr);
+
+			gfuList = this.jdbcTemplate.query(query, gfuIds.toArray(), rowMapper);
+
+		} catch (Exception e) {
+			log.error(String.format(
+					"GiftForUser retrieve db error, ids=%s", gfuIds), e);
+			gfuList = new ArrayList<GiftForUser>();
+		}
+
+		return gfuList;
 	}
 
 	public List<GiftForUser> getUserGiftsForUser(String userId) {

@@ -191,6 +191,7 @@ public class ControllerConstants {
 
 	//REWARDS
 	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
+	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
