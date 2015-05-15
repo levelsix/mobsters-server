@@ -304,6 +304,11 @@ class StartupService extends LazyLogging{
     		val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
     		finishStartup(sd)
     	}
+    } else {
+            resBuilder.setServerTimeMillis((new Date()).getTime())
+            resEvent.setStartupResponseProto(resBuilder.build())
+            logger.debug(s"Update available. Writing event response: $resEvent")
+            server.writePreDBEvent(resEvent, udid)
     }
   }
   
