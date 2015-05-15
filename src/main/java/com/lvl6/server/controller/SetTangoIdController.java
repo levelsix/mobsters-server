@@ -62,6 +62,7 @@ public class SetTangoIdController extends EventController {
 		SetTangoIdResponseProto.Builder resBuilder = SetTangoIdResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
+		resBuilder.setStatus(SetTangoIdStatus.FAIL_OTHER);
 		if (null != tangoId) {
 			resBuilder.setTangoId(tangoId);
 		}

@@ -19,8 +19,8 @@ import com.lvl6.info.TangoGift;
 import com.lvl6.info.TangoGiftReward;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus;
+import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.Builder;
+import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
@@ -80,7 +80,7 @@ public class SendTangoGiftAction {
 	protected Random rand;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
+		resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -100,7 +100,7 @@ public class SendTangoGiftAction {
 			return;
 		}
 
-		resBuilder.setStatus(RemoveUserItemUsedStatus.SUCCESS);
+		resBuilder.setStatus(SendTangoGiftStatus.SUCCESS);
 
 	}
 
