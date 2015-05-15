@@ -117,7 +117,8 @@ public class SendTangoGiftController extends EventController {
 			Set<String> uniqTangoIds = new HashSet<String>(tangoIds);
 			SendTangoGiftAction stga = new SendTangoGiftAction(
 					userId, senderTangoUserId, clientTime, uniqTangoIds,
-					userRetrieveUtil, tangoGiftRetrieveUtil, tangoGiftRewardRetrieveUtil);
+					userRetrieveUtil, tangoGiftRetrieveUtil,
+					tangoGiftRewardRetrieveUtil, insertUtil);
 			stga.execute(resBuilder);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {

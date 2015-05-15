@@ -44,7 +44,9 @@ public class SendTangoGiftAction {
 			Date clientTime, Set<String> tangoIds,
 			UserRetrieveUtils2 userRetrieveUtil,
 			TangoGiftRetrieveUtils tangoGiftRetrieveUtil,
-			TangoGiftRewardRetrieveUtils tangoGiftRewardRetrieveUtil) {
+			TangoGiftRewardRetrieveUtils tangoGiftRewardRetrieveUtil,
+			InsertUtil insertUtil)
+	{
 		super();
 		this.gifterUserId = userId;
 		this.gifterTangoUserId = senderTangoUserId;
@@ -53,6 +55,7 @@ public class SendTangoGiftAction {
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.tangoGiftRetrieveUtil = tangoGiftRetrieveUtil;
 		this.tangoGiftRewardRetrieveUtil = tangoGiftRewardRetrieveUtil;
+		this.insertUtil = insertUtil;
 	}
 
 	//	//encapsulates the return value from this Action Object
