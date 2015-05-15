@@ -91,6 +91,7 @@ public class SetTangoIdController extends EventController {
 		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			SetTangoIdAction stia = new SetTangoIdAction(userId, tangoId, userRetrieveUtil);
+			stia.execute(resBuilder);
 
 			SetTangoIdResponseProto resProto = resBuilder.build();
 			SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
