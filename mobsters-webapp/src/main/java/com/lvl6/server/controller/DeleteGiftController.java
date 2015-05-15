@@ -80,6 +80,7 @@ public class DeleteGiftController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		DeleteGiftRequestProto reqProto = ((DeleteGiftRequestEvent) event)
 				.getDeleteGiftRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
