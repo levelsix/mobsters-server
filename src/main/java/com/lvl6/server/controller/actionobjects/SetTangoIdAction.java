@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.User;
-import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus;
+import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.Builder;
+import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
 public class SetTangoIdAction {
@@ -41,7 +41,7 @@ public class SetTangoIdAction {
 	protected User user;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
+		resBuilder.setStatus(SetTangoIdStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -61,7 +61,7 @@ public class SetTangoIdAction {
 			return;
 		}
 
-		resBuilder.setStatus(RemoveUserItemUsedStatus.SUCCESS);
+		resBuilder.setStatus(SetTangoIdStatus.SUCCESS);
 
 	}
 
