@@ -128,7 +128,8 @@ public class SendTangoGiftAction {
 				.getUsersForTangoIdsMap(tangoUserIds);
 		if (!tangoUsers.containsKey(gifterUserId))
 		{
-			log.error("no user with id={}", gifterUserId);
+			log.error("no user with id={}, tangoUsers={}",
+					gifterUserId, tangoUsers);
 			return false;
 		}
 
