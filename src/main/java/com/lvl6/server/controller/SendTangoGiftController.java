@@ -87,6 +87,7 @@ public class SendTangoGiftController extends EventController {
 		SendTangoGiftResponseProto.Builder resBuilder = SendTangoGiftResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
+		resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -116,6 +117,7 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftAction stga = new SendTangoGiftAction(
 					userId, senderTangoUserId, clientTime, uniqTangoIds,
 					userRetrieveUtil, tangoGiftRetrieveUtil, tangoGiftRewardRetrieveUtil);
+			stga.execute(resBuilder);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 				Collection<String> tangoIdsNotInToonSquad = stga
