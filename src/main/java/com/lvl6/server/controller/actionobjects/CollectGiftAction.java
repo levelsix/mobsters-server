@@ -168,7 +168,7 @@ public class CollectGiftAction {
 		if (awardedRewards) {
 			urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(),
 					ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
-					ara.getOilGained(), null);
+					ara.getOilGained(), ara.getGachaCreditsGained(), null);
 		} else {
 			log.error("unable to award rewards! {}", gfuIdToGiftForUser);
 			return false;
