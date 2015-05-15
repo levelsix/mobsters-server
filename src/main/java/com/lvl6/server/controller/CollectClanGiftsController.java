@@ -91,6 +91,7 @@ public class CollectClanGiftsController extends EventController {
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		CollectClanGiftsRequestProto reqProto = ((CollectClanGiftsRequestEvent) event)
 				.getCollectClanGiftsRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -146,7 +147,7 @@ public class CollectClanGiftsController extends EventController {
 			server.writeEvent(resEvent);
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				
+
 				log.info("reward proto for collect: " + uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead

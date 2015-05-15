@@ -77,6 +77,7 @@ public class SendTangoGiftController extends EventController {
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		SendTangoGiftRequestProto reqProto = ((SendTangoGiftRequestEvent) event)
 				.getSendTangoGiftRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();

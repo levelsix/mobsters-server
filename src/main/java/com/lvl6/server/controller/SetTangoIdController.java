@@ -52,6 +52,7 @@ public class SetTangoIdController extends EventController {
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		SetTangoIdRequestProto reqProto = ((SetTangoIdRequestEvent) event)
 				.getSetTangoIdRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
