@@ -102,5 +102,8 @@ public interface DeleteUtil {
 
 	public abstract boolean deleteFromClanGiftForUser(List<ClanGiftForUser> cgfuList);
 
+	public abstract int deleteGiftForUser(Collection<String> gfuIds);
+
+	public abstract int deleteGiftForTangoUser(Collection<String> gfuIds);
 
 }

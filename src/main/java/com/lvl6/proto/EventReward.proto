@@ -42,27 +42,41 @@ message ReceivedGiftResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//MiniJobForUser is deleted here and user monsters' healths are decremented here
-/*message RedeemMiniJobRequestProto {                         
+
+message DeleteGiftRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserGiftProto expiredGifts = 2;
+}
+
+message DeleteGiftResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional DeleteGiftStatus status = 2;
+	
+	enum DeleteGiftStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+/*
+message CollectGiftRequestProto {                         
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional int64 clientTime = 2;
-     optional string userMiniJobUuid = 3;
      
-	repeated UserMonsterCurrentHealthProto umchp = 6;
+     //id in UserGiftProto
+     repeated string ugIds = 3;
 }
 
 																						//DONE
-message RedeemMiniJobResponseProto {
+message CollectGiftResponseProto {
      optional MinimumUserProtoWithMaxResources sender = 1;
-     optional FullUserMonsterProto fump = 2; //this is if the mini job gives monster
+     optional UserRewardProto reward = 2;
      
-     optional RedeemMiniJobStatus status = 3;    
+     optional CollectGiftStatus status = 3;    
      
-     
-     enum RedeemMiniJobStatus {
+     enum CollectGiftStatus {
           SUCCESS = 1;
           FAIL_OTHER = 2;
-          FAIL_NO_MINI_JOB_EXISTS = 3;
-          FAIL_MINI_JOB_INCOMPLETE = 4;
      }
 }*/
