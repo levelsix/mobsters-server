@@ -151,7 +151,6 @@ import javax.annotation.Resource
 import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.info.ClanGiftForUser
-import com.lvl6.leaderboards.LeaderBoardImpl
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -243,7 +242,6 @@ case class StartupData(
 			@Autowired var  miscMethods: MiscMethods = null
 			@Autowired var  locker :  Locker = null
 			@Autowired var  eventWriter:EventWriter = null
-      @Autowired var  leaderBoard:LeaderBoardImpl = null
 
 			@Autowired var globals:Globals = null
 			@Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null

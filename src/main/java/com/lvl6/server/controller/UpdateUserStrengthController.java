@@ -13,7 +13,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateUserStrengthRequestEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpdateUserStrengthResponseEvent;
-import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus;
@@ -40,8 +39,8 @@ public class UpdateUserStrengthController extends EventController {
 	@Autowired
 	protected UpdateUtil updateUtil;
 	
-	@Autowired
-	protected LeaderBoardImpl leaderBoardImpl;
+//	@Autowired
+//	protected LeaderBoardImpl leaderBoardImpl;
 
 	public UpdateUserStrengthController() {
 		numAllocatedThreads = 4;
@@ -100,7 +99,7 @@ public class UpdateUserStrengthController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength, 
-					userRetrieveUtils, updateUtil, leaderBoardImpl);
+					userRetrieveUtils, updateUtil);
 
 			uusa.execute(resBuilder);
 
