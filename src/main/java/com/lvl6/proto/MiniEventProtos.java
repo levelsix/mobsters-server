@@ -2335,73 +2335,77 @@ public final class MiniEventProtos {
        */
       SPIN_ULTIMATE_GRAB(4, 5),
       /**
+       * <code>SPIN_MULTI = 23;</code>
+       */
+      SPIN_MULTI(5, 23),
+      /**
        * <code>ENHANCE_COMMON = 6;</code>
        */
-      ENHANCE_COMMON(5, 6),
+      ENHANCE_COMMON(6, 6),
       /**
        * <code>ENHANCE_RARE = 7;</code>
        */
-      ENHANCE_RARE(6, 7),
+      ENHANCE_RARE(7, 7),
       /**
        * <code>ENHANCE_SUPER = 8;</code>
        */
-      ENHANCE_SUPER(7, 8),
+      ENHANCE_SUPER(8, 8),
       /**
        * <code>ENHANCE_ULTRA = 9;</code>
        */
-      ENHANCE_ULTRA(8, 9),
+      ENHANCE_ULTRA(9, 9),
       /**
        * <code>ENHANCE_EPIC = 10;</code>
        */
-      ENHANCE_EPIC(9, 10),
+      ENHANCE_EPIC(10, 10),
       /**
        * <code>CLAN_HELP = 11;</code>
        */
-      CLAN_HELP(10, 11),
+      CLAN_HELP(11, 11),
       /**
        * <code>CLAN_DONATE = 12;</code>
        */
-      CLAN_DONATE(11, 12),
+      CLAN_DONATE(12, 12),
       /**
        * <code>BATTLE_AVENGE_REQUEST = 13;</code>
        */
-      BATTLE_AVENGE_REQUEST(12, 13),
+      BATTLE_AVENGE_REQUEST(13, 13),
       /**
        * <code>BATTLE_AVENGE_WIN = 14;</code>
        */
-      BATTLE_AVENGE_WIN(13, 14),
+      BATTLE_AVENGE_WIN(14, 14),
       /**
        * <code>BATTLE_REVENGE_WIN = 15;</code>
        */
-      BATTLE_REVENGE_WIN(14, 15),
+      BATTLE_REVENGE_WIN(15, 15),
       /**
        * <code>STEAL_CASH = 16;</code>
        */
-      STEAL_CASH(15, 16),
+      STEAL_CASH(16, 16),
       /**
        * <code>STEAL_OIL = 17;</code>
        */
-      STEAL_OIL(16, 17),
+      STEAL_OIL(17, 17),
       /**
        * <code>PVP_CATCH_COMMON = 18;</code>
        */
-      PVP_CATCH_COMMON(17, 18),
+      PVP_CATCH_COMMON(18, 18),
       /**
        * <code>PVP_CATCH_RARE = 19;</code>
        */
-      PVP_CATCH_RARE(18, 19),
+      PVP_CATCH_RARE(19, 19),
       /**
        * <code>PVP_CATCH_SUPER = 20;</code>
        */
-      PVP_CATCH_SUPER(19, 20),
+      PVP_CATCH_SUPER(20, 20),
       /**
        * <code>PVP_CATCH_ULTRA = 21;</code>
        */
-      PVP_CATCH_ULTRA(20, 21),
+      PVP_CATCH_ULTRA(21, 21),
       /**
        * <code>PVP_CATCH_EPIC = 22;</code>
        */
-      PVP_CATCH_EPIC(21, 22),
+      PVP_CATCH_EPIC(22, 22),
       ;
 
       /**
@@ -2424,6 +2428,10 @@ public final class MiniEventProtos {
        * <code>SPIN_ULTIMATE_GRAB = 5;</code>
        */
       public static final int SPIN_ULTIMATE_GRAB_VALUE = 5;
+      /**
+       * <code>SPIN_MULTI = 23;</code>
+       */
+      public static final int SPIN_MULTI_VALUE = 23;
       /**
        * <code>ENHANCE_COMMON = 6;</code>
        */
@@ -2503,6 +2511,7 @@ public final class MiniEventProtos {
           case 3: return GAIN_RESEARCH_STRENGTH;
           case 4: return SPIN_BASIC_GRAB;
           case 5: return SPIN_ULTIMATE_GRAB;
+          case 23: return SPIN_MULTI;
           case 6: return ENHANCE_COMMON;
           case 7: return ENHANCE_RARE;
           case 8: return ENHANCE_SUPER;
@@ -8139,45 +8148,46 @@ public final class MiniEventProtos {
       "roto\022K\n\022leaderboardRewards\030\006 \003(\0132/.com.l" +
       "vl6.proto.MiniEventLeaderboardRewardProt" +
       "o\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 \001(\t\022\013\n\003img\030\t \001" +
-      "(\t\022\014\n\004icon\030\n \001(\t\"\276\005\n\022MiniEventGoalProto\022",
+      "(\t\022\014\n\004icon\030\n \001(\t\"\316\005\n\022MiniEventGoalProto\022",
       "\027\n\017miniEventGoalId\030\001 \001(\005\022\023\n\013miniEventId\030" +
       "\002 \001(\005\022O\n\010goalType\030\003 \001(\01624.com.lvl6.proto" +
       ".MiniEventGoalProto.MiniEventGoalType:\007N" +
       "O_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n\010goalDesc\030\005 \001(" +
       "\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n\021actionDescrip" +
-      "tion\030\007 \001(\t\"\324\003\n\021MiniEventGoalType\022\013\n\007NO_G" +
+      "tion\030\007 \001(\t\"\344\003\n\021MiniEventGoalType\022\013\n\007NO_G" +
       "OAL\020\001\022\032\n\026GAIN_BUILDING_STRENGTH\020\002\022\032\n\026GAI" +
       "N_RESEARCH_STRENGTH\020\003\022\023\n\017SPIN_BASIC_GRAB" +
-      "\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005\022\022\n\016ENHANCE_CO" +
-      "MMON\020\006\022\020\n\014ENHANCE_RARE\020\007\022\021\n\rENHANCE_SUPE",
-      "R\020\010\022\021\n\rENHANCE_ULTRA\020\t\022\020\n\014ENHANCE_EPIC\020\n" +
-      "\022\r\n\tCLAN_HELP\020\013\022\017\n\013CLAN_DONATE\020\014\022\031\n\025BATT" +
-      "LE_AVENGE_REQUEST\020\r\022\025\n\021BATTLE_AVENGE_WIN" +
-      "\020\016\022\026\n\022BATTLE_REVENGE_WIN\020\017\022\016\n\nSTEAL_CASH" +
-      "\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP_CATCH_COMMON\020\022\022" +
-      "\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017PVP_CATCH_SUPER\020\024" +
-      "\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n\016PVP_CATCH_EPIC\020" +
-      "\026\"\362\001\n\034MiniEventForPlayerLevelProto\022\017\n\007me" +
-      "fplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014play" +
-      "erLvlMin\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025\n\r",
-      "tierOneMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006 \001" +
-      "(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229\n\007rewards\030\010" +
-      " \003(\0132(.com.lvl6.proto.MiniEventTierRewar" +
-      "dProto\"^\n\030MiniEventTierRewardProto\022\016\n\006me" +
-      "trId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\022\020\n\010rewardId\030" +
-      "\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s\n\037MiniEventLeade" +
-      "rboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013min" +
-      "iEventId\030\002 \001(\005\022\020\n\010rewardId\030\003 \001(\005\022\031\n\021lead" +
-      "erboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEventPro" +
-      "to\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(",
-      "\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeemed\030\004 " +
-      "\001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tierThre" +
-      "eRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132\036.com" +
-      ".lvl6.proto.MiniEventProto\0225\n\005goals\030\010 \003(" +
-      "\0132&.com.lvl6.proto.UserMiniEventGoalProt" +
-      "o\"U\n\026UserMiniEventGoalProto\022\020\n\010userUuid\030" +
-      "\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010progre" +
-      "ss\030\003 \001(\005B\021B\017MiniEventProtos"
+      "\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005\022\016\n\nSPIN_MULTI" +
+      "\020\027\022\022\n\016ENHANCE_COMMON\020\006\022\020\n\014ENHANCE_RARE\020\007",
+      "\022\021\n\rENHANCE_SUPER\020\010\022\021\n\rENHANCE_ULTRA\020\t\022\020" +
+      "\n\014ENHANCE_EPIC\020\n\022\r\n\tCLAN_HELP\020\013\022\017\n\013CLAN_" +
+      "DONATE\020\014\022\031\n\025BATTLE_AVENGE_REQUEST\020\r\022\025\n\021B" +
+      "ATTLE_AVENGE_WIN\020\016\022\026\n\022BATTLE_REVENGE_WIN" +
+      "\020\017\022\016\n\nSTEAL_CASH\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP" +
+      "_CATCH_COMMON\020\022\022\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017P" +
+      "VP_CATCH_SUPER\020\024\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n" +
+      "\016PVP_CATCH_EPIC\020\026\"\362\001\n\034MiniEventForPlayer" +
+      "LevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEvent" +
+      "Id\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014player",
+      "LvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rt" +
+      "ierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPts\030\007 " +
+      "\001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.proto.Mi" +
+      "niEventTierRewardProto\"^\n\030MiniEventTierR" +
+      "ewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 " +
+      "\001(\005\022\020\n\010rewardId\030\003 \001(\005\022\017\n\007tierLvl\030\004 \001(\005\"s" +
+      "\n\037MiniEventLeaderboardRewardProto\022\016\n\006mel" +
+      "rId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\020\n\010reward" +
+      "Id\030\003 \001(\005\022\031\n\021leaderboardMinPos\030\004 \001(\005\"\203\002\n\022" +
+      "UserMiniEventProto\022\023\n\013miniEventId\030\001 \001(\005\022",
+      "\020\n\010userUuid\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017ti" +
+      "erOneRedeemed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005" +
+      " \001(\010\022\031\n\021tierThreeRedeemed\030\006 \001(\010\0221\n\tminiE" +
+      "vent\030\007 \001(\0132\036.com.lvl6.proto.MiniEventPro" +
+      "to\0225\n\005goals\030\010 \003(\0132&.com.lvl6.proto.UserM" +
+      "iniEventGoalProto\"U\n\026UserMiniEventGoalPr" +
+      "oto\022\020\n\010userUuid\030\001 \001(\t\022\027\n\017miniEventGoalId" +
+      "\030\002 \001(\005\022\020\n\010progress\030\003 \001(\005B\021B\017MiniEventPro" +
+      "tos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

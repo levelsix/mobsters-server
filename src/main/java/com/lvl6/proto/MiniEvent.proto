@@ -41,6 +41,7 @@ message MiniEventGoalProto {
 
 		SPIN_BASIC_GRAB = 4;
 		SPIN_ULTIMATE_GRAB = 5;
+		SPIN_MULTI = 23;
 
 		ENHANCE_COMMON = 6;
 		ENHANCE_RARE = 7;
@@ -63,6 +64,8 @@ message MiniEventGoalProto {
 		PVP_CATCH_SUPER = 20;
 		PVP_CATCH_ULTRA = 21;
 		PVP_CATCH_EPIC = 22;
+		
+		//SPIN_MULTI = 23;
 	} 
 }
 
