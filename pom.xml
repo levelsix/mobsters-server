@@ -220,6 +220,71 @@
 				<hazelcast.dev.ips>192.168.105.119, 192.168.1.7, 10.0.1.18</hazelcast.dev.ips>
 			</properties>
 		</profile>
+		<profile>
+			<id>jooq</id>
+			<build>
+				<plugins>
+					<plugin>
+						<!-- Specify the maven code generator plugin -->
+						<groupId>org.jooq</groupId>
+						<artifactId>jooq-codegen-maven</artifactId>
+						<version>3.6.1</version>
+
+						<!-- The plugin should hook into the generate goal -->
+						<executions>
+							<execution>
+								<id>generate-jooq</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+
+						<!-- Manage the plugin's dependency. In this example, we'll use a PostgreSQL 
+							database -->
+
+
+						<!-- Specify the plugin configuration. The configuration format is 
+							the same as for the standalone code generator -->
+						<configuration>
+
+							<!-- JDBC connection parameters -->
+							<jdbc>
+								<driver>${jdbc.driverClassName}</driver>
+								<url>${jdbc.url}</url>
+								<user>${jdbc.username}</user>
+								<password>${jdbc.password}</password>
+							</jdbc>
+
+							<!-- Generator parameters -->
+							<generator>
+								<name>org.jooq.util.DefaultGenerator</name>
+								<database>
+									<name>org.jooq.util.mysql.MySQLDatabase</name>
+									<includes>.*</includes>
+									<excludes></excludes>
+									<inputSchema>mobsters</inputSchema>
+								</database>
+								<generate>
+									<records>true</records>
+									<immutablePojos>false</immutablePojos>
+									<interfaces>true</interfaces>
+									<daos>true</daos>
+									<jpaAnnotations>true</jpaAnnotations>
+									<validationAnnotations>true</validationAnnotations>
+									<fluentSetters>true</fluentSetters>
+								</generate>
+								<target>
+									<packageName>com.lvl6.mobsters.db.jooq.generated</packageName>
+									<directory>src/main/java</directory>
+								</target>
+							</generator>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 
@@ -241,6 +306,36 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.3</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jooq</groupId>
+										<artifactId>
+											jooq-codegen-maven
+										</artifactId>
+										<versionRange>
+											[3.6.1,)
+										</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -323,6 +418,7 @@
 					</webResources>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>br.com.ingenieux</groupId>
 				<artifactId>beanstalk-maven-plugin</artifactId>
@@ -487,7 +583,6 @@
 
 
 
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -500,6 +595,11 @@
 				<artifactId>javax.servlet-api</artifactId>
 				<version>3.1.0</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>1.0.0.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>com.amazonaws</groupId>
@@ -595,6 +695,21 @@
 				<groupId>com.jolbox</groupId>
 				<artifactId>bonecp</artifactId>
 				<version>0.8.0.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq</artifactId>
+				<version>3.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-meta</artifactId>
+				<version>3.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen</artifactId>
+				<version>3.6.1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.notnoop.apns</groupId>
@@ -864,6 +979,11 @@
 				<artifactId>microsoft-translator-java-api</artifactId>
 				<version>0.6.2</version>
 			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.1.0.Final</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -880,6 +1000,26 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq-meta</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq-codegen</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
