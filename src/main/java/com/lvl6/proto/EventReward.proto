@@ -59,13 +59,13 @@ message DeleteGiftResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-/*
+
 message CollectGiftRequestProto {                         
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional int64 clientTime = 2;
      
      //id in UserGiftProto
-     repeated string ugIds = 3;
+     repeated string ugUuids = 3;
 }
 
 																						//DONE
@@ -79,4 +79,4 @@ message CollectGiftResponseProto {
           SUCCESS = 1;
           FAIL_OTHER = 2;
      }
-}*/
+}
