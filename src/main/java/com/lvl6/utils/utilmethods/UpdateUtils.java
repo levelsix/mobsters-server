@@ -1894,7 +1894,7 @@ public class UpdateUtils implements UpdateUtil {
 		if(now != null) {
 			absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
 		}
-		
+
 		int numUpdated = DBConnection.get().updateTableRows(
 				DBConstants.TABLE_USER, null, absoluteParams,
 				conditionParams, "and");
@@ -2136,7 +2136,7 @@ public class UpdateUtils implements UpdateUtil {
 		log.info("updateQuery={}, values={}", sb.toString(), values);
 
 		String query = String.format(sb.toString(), tableName,
-				DBConstants.GIFT_FOR_USER__ID, DBConstants.CLAN_GIFT_FOR_USER__HAS_BEEN_COLLECTED,
+				DBConstants.GIFT_FOR_USER__ID, DBConstants.GIFT_FOR_USER__COLLECTED,
 				true);
 
 		log.info(query);
