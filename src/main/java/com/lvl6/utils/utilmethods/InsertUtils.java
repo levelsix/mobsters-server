@@ -3082,10 +3082,8 @@ public class InsertUtils implements InsertUtil {
 		List<String> gifterUserIdList = new ArrayList<String>();
 		List<String> gifterTangoUserIdList = new ArrayList<String>();
 
-		for(GiftForTangoUser gftu : giftForTangoUsers) {
-			String id = randomUUID();
-			gftu.setGiftForUserId(id);
-			giftForUserIdList.add(id);
+		for(GiftForTangoUser gftu : giftForTangoUsers) {;
+			giftForUserIdList.add(gftu.getGiftForUserId());
 			gifterUserIdList.add(gftu.getGifterUserId());
 			gifterTangoUserIdList.add(gftu.getGifterTangoUserId());
 		}
