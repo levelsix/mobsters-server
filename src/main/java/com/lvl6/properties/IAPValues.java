@@ -34,7 +34,7 @@ public class IAPValues {
 	public static final String MONEYTREE = Globals.APPLE_BUNDLE_ID()
 			+ ".moneytree1";
 	public static final String MONEYTREENOSALE = Globals.APPLE_BUNDLE_ID()
-			+ ".moneytreenosale";
+			+ ".moneytreenosale1";
 	public static final String SALE5 = Globals.APPLE_BUNDLE_ID()
 			+ ".sale5";
 	public static final String SALE10 = Globals.APPLE_BUNDLE_ID()
