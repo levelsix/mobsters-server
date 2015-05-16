@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -18,10 +19,12 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SendTangoGiftRequestEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.SendTangoGiftResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.GiftForTangoUser;
 import com.lvl6.info.GiftForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.TangoGift;
+import com.lvl6.info.User;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
@@ -34,6 +37,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
+import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.actionobjects.SendTangoGiftAction;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -84,6 +88,7 @@ public class SendTangoGiftController extends EventController {
 		Date clientTime = new Date(reqProto.getClientTime());
 		List<String> tangoIds = reqProto.getTangoUserIdsList();
 		String senderTangoUserId = reqProto.getSenderTangoUserId();
+		int gemReward = reqProto.getGemReward();
 
 		SendTangoGiftResponseProto.Builder resBuilder = SendTangoGiftResponseProto
 				.newBuilder();
@@ -116,7 +121,7 @@ public class SendTangoGiftController extends EventController {
 		try {
 			Set<String> uniqTangoIds = new HashSet<String>(tangoIds);
 			SendTangoGiftAction stga = new SendTangoGiftAction(
-					userId, senderTangoUserId, clientTime, uniqTangoIds,
+					userId, senderTangoUserId, gemReward, clientTime, uniqTangoIds,
 					userRetrieveUtil, tangoGiftRetrieveUtil,
 					tangoGiftRewardRetrieveUtil, insertUtil);
 			stga.execute(resBuilder);
@@ -157,6 +162,16 @@ public class SendTangoGiftController extends EventController {
 
 					server.writeEvent(rgre);
 				}
+
+				User gifter = stga.getGifter();
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								gifter, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+				writeToCurrencyHistory(userId, clientTime, stga);
+
 			}
 
 		} catch (Exception e) {
@@ -192,6 +207,16 @@ public class SendTangoGiftController extends EventController {
 		UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
 				gfu, senderProto, r, null, gftu, tg);
 		return ugp;
+	}
+
+	private void writeToCurrencyHistory(String userId, Date date,
+			SendTangoGiftAction stga)
+	{
+		Timestamp timestamp = new Timestamp(date.getTime());
+		miscMethods.writeToUserCurrencyOneUser(userId, timestamp,
+				stga.getCurrencyDeltas(), stga.getPreviousCurrencies(),
+				stga.getCurrentCurrencies(), stga.getReasons(),
+				stga.getDetails());
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil() {

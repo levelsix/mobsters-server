@@ -630,6 +630,9 @@ public class MiscMethods {
 		
 		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
+		cb.setTangoMaxGemReward(ControllerConstants.TANGO__INVITE_TANGO_FRIENDS_MAX_GEM_REWARD);
+		cb.setTangoMinGemReward(ControllerConstants.TANGO__INVITE_TANGO_FRIENDS_MIN_GEM_REWARD);
+
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
 		//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -1720,7 +1723,7 @@ public class MiscMethods {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
 		String[] returnArray = null;
-		
+
 		try {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
@@ -1729,8 +1732,8 @@ public class MiscMethods {
 		}
 		return returnArray;
 	}
-	
-	
+
+
 	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
@@ -1746,7 +1749,7 @@ public class MiscMethods {
 		listOfLanguages.add(Language.GERMAN);
 		listOfLanguages.add(Language.SPANISH);
 		listOfLanguages.add(Language.RUSSIAN);
-		
+
 		try {
 			if(recipientLanguage != null) {
 				if(sourceLanguage == null) {
@@ -1778,8 +1781,8 @@ public class MiscMethods {
 		}
 		return returnMap;
 	}
-	
-	
+
+
 
 	public Map<TranslateLanguages, String> translateForGlobal(Language sourceLanguage, String text) {
 		Translate.setClientId(pClientId);

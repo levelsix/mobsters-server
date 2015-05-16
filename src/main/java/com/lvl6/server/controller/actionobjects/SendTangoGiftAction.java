@@ -18,6 +18,7 @@ import com.lvl6.info.GiftForUser;
 import com.lvl6.info.TangoGift;
 import com.lvl6.info.TangoGiftReward;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.Builder;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus;
@@ -33,6 +34,7 @@ public class SendTangoGiftAction {
 
 	private String gifterUserId;
 	private String gifterTangoUserId;
+	private int gemReward;
 	private Date clientTime;
 	private Set<String> tangoUserIds;
 	private UserRetrieveUtils2 userRetrieveUtil;
@@ -41,7 +43,7 @@ public class SendTangoGiftAction {
 	private InsertUtil insertUtil;
 
 	public SendTangoGiftAction(String userId, String senderTangoUserId,
-			Date clientTime, Set<String> tangoIds,
+			int gemReward, Date clientTime, Set<String> tangoIds,
 			UserRetrieveUtils2 userRetrieveUtil,
 			TangoGiftRetrieveUtils tangoGiftRetrieveUtil,
 			TangoGiftRewardRetrieveUtils tangoGiftRewardRetrieveUtil,
@@ -49,6 +51,7 @@ public class SendTangoGiftAction {
 	{
 		super();
 		this.gifterUserId = userId;
+		this.gemReward = gemReward;
 		this.gifterTangoUserId = senderTangoUserId;
 		this.clientTime = clientTime;
 		this.tangoUserIds = tangoIds;
@@ -72,6 +75,7 @@ public class SendTangoGiftAction {
 	//	}
 
 	//derived state
+	protected boolean emptyTangoUsers;
 	protected int tangoGiftId;
 	protected TangoGift tangoGift;
 	protected User gifter;
@@ -81,6 +85,12 @@ public class SendTangoGiftAction {
 	protected List<GiftForUser> receiverGifts;
 	protected Map<String, GiftForTangoUser> giftForUserIdToGiftForTangoUser;
 	protected Random rand;
+
+	private Map<String, Integer> currencyDeltas;
+	private Map<String, Integer> prevCurrencies;
+	private Map<String, Integer> curCurrencies;
+	private Map<String, String> reasonsForChanges;
+	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
@@ -125,6 +135,13 @@ public class SendTangoGiftAction {
 			tangoGift = tangoGifts.get(id);
 		}
 
+		if (null == tangoUserIds || tangoUserIds.isEmpty()) {
+			log.info("no tango users sent, but awarding user gems");
+			emptyTangoUsers = true;
+			gifter = userRetrieveUtil.getUserById(gifterUserId);
+			return true;
+		}
+
 		//to get rid of another db call just to get gifter...
 		tangoUserIds.add(gifterTangoUserId);
 		Map<String, User> tangoUsers = userRetrieveUtil
@@ -145,7 +162,28 @@ public class SendTangoGiftAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
+		prevCurrencies = new HashMap<String, Integer>();
+		prevCurrencies.put(MiscMethods.gems, gifter.getGems());
 
+		//update the user's last_tango_gift_sent_time
+		if (!gifter.updateLastTangoGiftSentTime(clientTime, gemReward)) {
+			log.error("unable to update lastTangoGiftSentTime to {}, gems={}",
+					clientTime, gemReward);
+			return false;
+		}
+
+		prepCurrencyHistory();
+
+		if (emptyTangoUsers) {
+			log.info("only updating the tango_gift_time and gems");
+			return true;
+		}
+
+		boolean success = processTangoUsersInToonSquad();
+		return success;
+	}
+
+	private boolean processTangoUsersInToonSquad() {
 		nonToonSquadTangoUserIds = new HashSet<String>(tangoUserIds);
 		toonSquadTangoUserIds = new HashSet<String>();
 		receiverGifts = new ArrayList<GiftForUser>();
@@ -159,13 +197,6 @@ public class SendTangoGiftAction {
 			GiftForUser gfu = createGiftForUser(receiver);
 			receiverGifts.add(gfu);
 
-		}
-
-		//update the user's last_tango_gift_sent_time
-		if (!gifter.updateLastTangoGiftSentTime(clientTime)) {
-			log.error("unable to update lastTangoGiftSentTime to {}",
-					clientTime);
-			return false;
 		}
 
 		boolean success = insertUtil.insertGiftForUser(receiverGifts);
@@ -197,7 +228,6 @@ public class SendTangoGiftAction {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -228,12 +258,26 @@ public class SendTangoGiftAction {
 		return tgr.getRewardId();
 	}
 
-	public User getUser() {
-		return gifter;
+	private void prepCurrencyHistory() {
+		String gems = MiscMethods.gems;
+
+		currencyDeltas = new HashMap<String, Integer>();
+		currencyDeltas.put(gems, gemReward);
+
+		curCurrencies = new HashMap<String, Integer>();
+		curCurrencies.put(gems, gifter.getGems());
+
+		reasonsForChanges = new HashMap<String, String>();
+		reasonsForChanges.put(gems,
+				ControllerConstants.UCHRFC__TANGO_GIFT);
+
+
+		details = new HashMap<String, String>();
+		details.put(gems, "");
 	}
 
-	public void setUser(User user) {
-		this.gifter = user;
+	public User getGifter() {
+		return gifter;
 	}
 
 	public Collection<String> getNonToonSquadTangoUserIds() {
@@ -276,6 +320,26 @@ public class SendTangoGiftAction {
 	public void setGiftForUserIdToGiftForTangoUser(
 			Map<String, GiftForTangoUser> giftForUserIdToGiftForTangoUser) {
 		this.giftForUserIdToGiftForTangoUser = giftForUserIdToGiftForTangoUser;
+	}
+
+	public Map<String, Integer> getCurrencyDeltas() {
+		return currencyDeltas;
+	}
+
+	public Map<String, Integer> getPreviousCurrencies() {
+		return prevCurrencies;
+	}
+
+	public Map<String, Integer> getCurrentCurrencies() {
+		return curCurrencies;
+	}
+
+	public Map<String, String> getReasons() {
+		return reasonsForChanges;
+	}
+
+	public Map<String, String> getDetails() {
+		return details;
 	}
 
 }

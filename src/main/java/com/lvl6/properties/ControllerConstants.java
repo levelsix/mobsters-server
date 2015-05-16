@@ -222,6 +222,9 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
 
+	public static final int TANGO__INVITE_TANGO_FRIENDS_MAX_GEM_REWARD = 3;
+	public static final int TANGO__INVITE_TANGO_FRIENDS_MIN_GEM_REWARD = 1;
+
 	public static final String TRANSLATION_SETTINGS__DEFAULT_LANGUAGE = "ENGLISH";
 	public static final boolean TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON = false;
 
@@ -300,6 +303,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
+	public static final String UCHRFC__TANGO_GIFT = "tango gift";
 	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
 
