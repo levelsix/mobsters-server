@@ -87,7 +87,7 @@ public class CollectGiftController extends EventController {
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_REDEEM_SECRET_GIFT_EVENT;
+		return EventProtocolRequest.C_COLLECT_GIFT_EVENT;
 	}
 
 	@Override
