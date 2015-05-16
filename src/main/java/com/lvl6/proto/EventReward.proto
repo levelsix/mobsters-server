@@ -17,6 +17,8 @@ message SendTangoGiftRequestProto {
 	repeated string tangoUserIds = 3;
 	
 	optional string senderTangoUserId = 4; 	
+	optional int32 gemReward = 5;
+	
 }
 																						//DONE
 message SendTangoGiftResponseProto {

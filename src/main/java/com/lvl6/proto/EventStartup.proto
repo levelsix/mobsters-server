@@ -240,6 +240,10 @@ message StartupResponseProto {
 				
 		optional BoosterPackConstantsProto boosterPackConstantProto = 500;
 		
+		//when inviting tango friends, every friend deleted, subtract one from tangoMaxGemReward, min is tangoMinGemReward
+		optional int32 tangoMaxGemReward = 42;
+		optional int32 tangoMinGemReward = 43;
+		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
 			optional CoordinateProto offSet = 2;

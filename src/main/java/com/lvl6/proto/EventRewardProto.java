@@ -66,6 +66,15 @@ public final class EventRewardProto {
      */
     com.google.protobuf.ByteString
         getSenderTangoUserIdBytes();
+
+    /**
+     * <code>optional int32 gemReward = 5;</code>
+     */
+    boolean hasGemReward();
+    /**
+     * <code>optional int32 gemReward = 5;</code>
+     */
+    int getGemReward();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SendTangoGiftRequestProto}
@@ -150,6 +159,11 @@ public final class EventRewardProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
               senderTangoUserId_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              gemReward_ = input.readInt32();
               break;
             }
           }
@@ -302,11 +316,27 @@ public final class EventRewardProto {
       }
     }
 
+    public static final int GEMREWARD_FIELD_NUMBER = 5;
+    private int gemReward_;
+    /**
+     * <code>optional int32 gemReward = 5;</code>
+     */
+    public boolean hasGemReward() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 gemReward = 5;</code>
+     */
+    public int getGemReward() {
+      return gemReward_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clientTime_ = 0L;
       tangoUserIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       senderTangoUserId_ = "";
+      gemReward_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -332,6 +362,9 @@ public final class EventRewardProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(4, getSenderTangoUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, gemReward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -362,6 +395,10 @@ public final class EventRewardProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getSenderTangoUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemReward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -493,6 +530,8 @@ public final class EventRewardProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         senderTangoUserId_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        gemReward_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -542,6 +581,10 @@ public final class EventRewardProto {
           to_bitField0_ |= 0x00000004;
         }
         result.senderTangoUserId_ = senderTangoUserId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gemReward_ = gemReward_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -578,6 +621,9 @@ public final class EventRewardProto {
           bitField0_ |= 0x00000008;
           senderTangoUserId_ = other.senderTangoUserId_;
           onChanged();
+        }
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -919,6 +965,38 @@ public final class EventRewardProto {
   }
   bitField0_ |= 0x00000008;
         senderTangoUserId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int gemReward_ ;
+      /**
+       * <code>optional int32 gemReward = 5;</code>
+       */
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 gemReward = 5;</code>
+       */
+      public int getGemReward() {
+        return gemReward_;
+      }
+      /**
+       * <code>optional int32 gemReward = 5;</code>
+       */
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00000010;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemReward = 5;</code>
+       */
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemReward_ = 0;
         onChanged();
         return this;
       }
@@ -6301,41 +6379,42 @@ public final class EventRewardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021EventReward.proto\022\016com.lvl6.proto\032\nCha" +
-      "t.proto\032\014Reward.proto\032\nUser.proto\"\222\001\n\031Se" +
+      "t.proto\032\014Reward.proto\032\nUser.proto\"\245\001\n\031Se" +
       "ndTangoGiftRequestProto\0220\n\006sender\030\001 \001(\0132" +
       " .com.lvl6.proto.MinimumUserProto\022\022\n\ncli" +
       "entTime\030\002 \001(\003\022\024\n\014tangoUserIds\030\003 \003(\t\022\031\n\021s" +
-      "enderTangoUserId\030\004 \001(\t\"\227\002\n\032SendTangoGift" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162" +
-      ">.com.lvl6.proto.SendTangoGiftResponsePr" +
-      "oto.SendTangoGiftStatus\022\"\n\032tangoUserIdsN",
-      "otInToonSquad\030\003 \003(\t\022\037\n\027tangoUserIdsInToo" +
-      "nSquad\030\004 \003(\t\"2\n\023SendTangoGiftStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\262\001\n\031ReceivedGif" +
-      "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\0221\n\005scope\030\002 \001(\0162" +
-      "\031.com.lvl6.proto.ChatScope:\007PRIVATE\0220\n\tu" +
-      "serGifts\030\003 \003(\0132\035.com.lvl6.proto.UserGift" +
-      "Proto\"\177\n\026DeleteGiftRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\0223\n\014expiredGifts\030\002 \003(\0132\035.com.lvl6.proto",
-      ".UserGiftProto\"\306\001\n\027DeleteGiftResponsePro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022H\n\006status\030\002 \001(\01628.com.lvl6." +
-      "proto.DeleteGiftResponseProto.DeleteGift" +
-      "Status\"/\n\020DeleteGiftStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\016\n\nFAIL_OTHER\020\002\"\200\001\n\027CollectGiftRequestPr" +
-      "oto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Min" +
-      "imumUserProtoWithMaxResources\022\022\n\nclientT" +
-      "ime\030\002 \001(\003\022\017\n\007ugUuids\030\003 \003(\t\"\213\002\n\030CollectGi" +
-      "ftResponseProto\022@\n\006sender\030\001 \001(\01320.com.lv",
-      "l6.proto.MinimumUserProtoWithMaxResource" +
-      "s\022/\n\006reward\030\002 \001(\0132\037.com.lvl6.proto.UserR" +
-      "ewardProto\022J\n\006status\030\003 \001(\0162:.com.lvl6.pr" +
-      "oto.CollectGiftResponseProto.CollectGift" +
-      "Status\"0\n\021CollectGiftStatus\022\013\n\007SUCCESS\020\001" +
-      "\022\016\n\nFAIL_OTHER\020\002B\022B\020EventRewardProto"
+      "enderTangoUserId\030\004 \001(\t\022\021\n\tgemReward\030\005 \001(" +
+      "\005\"\227\002\n\032SendTangoGiftResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022N\n\006status\030\002 \001(\0162>.com.lvl6.proto.Send" +
+      "TangoGiftResponseProto.SendTangoGiftStat",
+      "us\022\"\n\032tangoUserIdsNotInToonSquad\030\003 \003(\t\022\037" +
+      "\n\027tangoUserIdsInToonSquad\030\004 \003(\t\"2\n\023SendT" +
+      "angoGiftStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
+      "R\020\002\"\262\001\n\031ReceivedGiftResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\0221\n\005scope\030\002 \001(\0162\031.com.lvl6.proto.Chat" +
+      "Scope:\007PRIVATE\0220\n\tuserGifts\030\003 \003(\0132\035.com." +
+      "lvl6.proto.UserGiftProto\"\177\n\026DeleteGiftRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\0223\n\014expiredGifts\030\002 \003",
+      "(\0132\035.com.lvl6.proto.UserGiftProto\"\306\001\n\027De" +
+      "leteGiftResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022H\n\006statu" +
+      "s\030\002 \001(\01628.com.lvl6.proto.DeleteGiftRespo" +
+      "nseProto.DeleteGiftStatus\"/\n\020DeleteGiftS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\200\001\n\027C" +
+      "ollectGiftRequestProto\022@\n\006sender\030\001 \001(\01320" +
+      ".com.lvl6.proto.MinimumUserProtoWithMaxR" +
+      "esources\022\022\n\nclientTime\030\002 \001(\003\022\017\n\007ugUuids\030" +
+      "\003 \003(\t\"\213\002\n\030CollectGiftResponseProto\022@\n\006se",
+      "nder\030\001 \001(\01320.com.lvl6.proto.MinimumUserP" +
+      "rotoWithMaxResources\022/\n\006reward\030\002 \001(\0132\037.c" +
+      "om.lvl6.proto.UserRewardProto\022J\n\006status\030" +
+      "\003 \001(\0162:.com.lvl6.proto.CollectGiftRespon" +
+      "seProto.CollectGiftStatus\"0\n\021CollectGift" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\022B\020E" +
+      "ventRewardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6357,7 +6436,7 @@ public final class EventRewardProto {
     internal_static_com_lvl6_proto_SendTangoGiftRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SendTangoGiftRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ClientTime", "TangoUserIds", "SenderTangoUserId", });
+        new java.lang.String[] { "Sender", "ClientTime", "TangoUserIds", "SenderTangoUserId", "GemReward", });
     internal_static_com_lvl6_proto_SendTangoGiftResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SendTangoGiftResponseProto_fieldAccessorTable = new
