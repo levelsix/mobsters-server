@@ -416,7 +416,7 @@ public class InAppPurchaseController extends EventController {
     public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
             InAppPurchaseSalesAction iapsa, User user) {
 
-        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
+//        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
 
         if(salesPackage.getSuccId() == 0) {
@@ -426,12 +426,12 @@ public class InAppPurchaseController extends EventController {
             successorSalesPackage = salesPackageRetrieveUtils.
                     getSalesPackageForSalesPackageId(salesPackage.getSuccId());
 
-            if(jumpTwoTiers) {
-                if(successorSalesPackage.getSuccId() != 0) {
-                    successorSalesPackage = salesPackageRetrieveUtils.
-                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
-                }
-            }
+//            if(jumpTwoTiers) {
+//                if(successorSalesPackage.getSuccId() != 0) {
+//                    successorSalesPackage = salesPackageRetrieveUtils.
+//                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
+//                }
+//            }
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
@@ -440,39 +440,39 @@ public class InAppPurchaseController extends EventController {
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		log.info("prespp: " + preSpp);
+		
+		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
+		}
+		else {
+			resBuilder.setSuccessorSalesPackage(preSpp);
+		}
+		
+		//commented out below code bc beginner sales also have succ id now
 
 		Object[] objArray = new Object[2];
 		objArray[0] = "COOPER";
 		objArray[1] = "ALEX";
-
-		Float[] floatArray = new Float[2];
-		floatArray[0] = (float)0.5;
-		floatArray[1] = (float)0.5;
-
-		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId());
-
-		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
-			if(!iapsa.isStarterPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
-		}
-		else {
-			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
-		}
 
 	}
 
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
             InAppPurchaseSalesAction iapsa) {
         Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+        log.info("LIST OF ITEMS: {}", nuOrUpdatedItems);
         Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
         int gemsGained = iapsa.getAra().getGemsGained();
         int cashGained = iapsa.getAra().getCashGained();
         int oilGained = iapsa.getAra().getOilGained();
 
         //TODO: protofy the rewards
+        UserClanGiftProto ucgp = null;
+        if(iapsa.getAra().getAcga() != null) {
+        	ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
+            MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
+            ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);	
+        }
+        
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
                 nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained);
         log.info("proto for reward: " + urp);

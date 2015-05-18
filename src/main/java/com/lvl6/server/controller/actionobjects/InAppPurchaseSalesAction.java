@@ -304,7 +304,7 @@ public class InAppPurchaseSalesAction {
 				return true;
 		}
 		else if(salesValue == 1) {
-			if(salesPackagePrice < 10) {
+			if(salesPackagePrice < 10 || isBuilderPack) {
 				return true;
 			}
 		}

@@ -12,7 +12,6 @@ import java.util.UUID
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
-import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
@@ -34,7 +33,6 @@ import com.lvl6.info.MonsterHealingForUser
 import com.lvl6.info.PvpBattleForUser
 import com.lvl6.info.PvpLeagueForUser
 import com.lvl6.info.QuestForUser
-import com.lvl6.info.SalesPackage
 import com.lvl6.info.TaskForUserClientState
 import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
@@ -43,8 +41,8 @@ import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
-import com.lvl6.properties.IAPValues
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto
+import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.proto.ChatProto.ChatScope
 import com.lvl6.proto.ChatProto.DefaultLanguagesProto
 import com.lvl6.proto.ChatProto.GroupChatMessageProto
@@ -59,7 +57,6 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
-import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
@@ -123,7 +120,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.server.EventWriter
 import com.lvl6.server.GameServer
 import com.lvl6.server.Locker
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
+import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
@@ -147,7 +144,8 @@ import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
-import com.lvl6.proto.ChatProto.ChatScope
+import com.lvl6.info.SalesPackage
+import com.lvl6.properties.IAPValues
 
 case class StartupData(
       resBuilder:Builder, 
