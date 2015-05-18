@@ -1,3 +1,4 @@
+
 package com.lvl6.server.controller.actionobjects;
 
 import java.sql.Timestamp;
@@ -113,6 +114,7 @@ public class InAppPurchaseSalesAction {
 	private boolean isBuilderPack;
 	private String packageName;
 	private int salesValue;
+	private double realLifeCashCost;
 
 
 	public void execute(Builder resBuilder) {
@@ -246,6 +248,7 @@ public class InAppPurchaseSalesAction {
 			processSalesPackagePurchase(resBuilder);
 			updateIfBeginnerPack();
 
+			realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
 			if(!salesPackageLessThanUserSalesValue()) {
 				updateUserSalesValueAndLastPurchaseTime();
 			}
@@ -254,7 +257,7 @@ public class InAppPurchaseSalesAction {
 			}
 			
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, 0,
-					user, salesPackagePrice, salesPackage.getUuid())) {
+					user, realLifeCashCost, salesPackage.getUuid())) {
 				log.error(
 						"problem with logging in-app purchase history for receipt:{} and user {}",
 						receiptFromApple.toString(4), user);
