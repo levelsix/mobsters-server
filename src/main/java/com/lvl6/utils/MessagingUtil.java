@@ -69,7 +69,7 @@ public class MessagingUtil {
 	}
 
 	public void sendMaintanenceModeMessageUdid(String message, String udid) {
-		log.info("Sending maintenance mode message: \"{}\" to player {}",
+		log.info("Sending maintenance mode message: \"{}\" to player with uuid {}",
 				message, udid);
 		//send admin message
 		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
