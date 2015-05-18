@@ -20,6 +20,7 @@ import "EventDev.proto";
 import "EventDungeon.proto";
 import "EventInAppPurchase.proto";
 import "EventItem.proto";
+import "EventLeaderBoard.proto";
 import "EventMiniEvent.proto";
 import "EventMiniJob.proto";
 import "EventMonster.proto";
@@ -34,6 +35,7 @@ import "EventTournament.proto";
 import "EventUser.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
+import "LeaderBoard.proto";
 import "MiniEvent.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
@@ -195,7 +197,7 @@ enum EventProtocolRequest {
 	C_COLLECT_CLAN_GIFTS_EVENT = 500;
 	C_DELETE_CLAN_GIFTS_EVENT = 501;
 	C_RECEIVED_CLAN_GIFTS_EVENT = 502;
-	
+	C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;
 	
 }
 
@@ -351,6 +353,7 @@ enum EventProtocolResponse {
 	S_COLLECT_CLAN_GIFTS_EVENT = 500;
 	S_DELETE_CLAN_GIFTS_EVENT = 501;
 	S_RECEIVED_CLAN_GIFTS_EVENT = 502;
+	S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;
 	
 	
 }

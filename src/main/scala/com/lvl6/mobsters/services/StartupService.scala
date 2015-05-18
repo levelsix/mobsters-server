@@ -9,15 +9,17 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
+
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
-import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -40,6 +42,7 @@ import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
+import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
@@ -59,7 +62,6 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
-import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
@@ -72,6 +74,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
 import com.lvl6.retrieveutils.ClanRetrieveUtils2
@@ -123,7 +126,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.server.EventWriter
 import com.lvl6.server.GameServer
 import com.lvl6.server.Locker
-import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
+import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetClanGiftsAction
@@ -136,22 +139,18 @@ import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
 import com.lvl6.server.controller.actionobjects.StartUpResource
 import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
-import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
 import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
 import com.lvl6.server.controller.utils.SecretGiftUtils
 import com.lvl6.server.controller.utils.TimeUtils
-import com.lvl6.server.metrics.Metrics._
+import com.lvl6.server.metrics.Metrics.timed
 import com.lvl6.utils.CreateInfoProtoUtils
 import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import javax.annotation.Resource
-import com.lvl6.proto.ChatProto.ChatScope
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
-import com.lvl6.info.ClanGiftForUser
-import com.lvl6.leaderboards.LeaderBoardImpl
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -243,7 +242,7 @@ case class StartupData(
 			@Autowired var  miscMethods: MiscMethods = null
 			@Autowired var  locker :  Locker = null
 			@Autowired var  eventWriter:EventWriter = null
-      @Autowired var  leaderBoard:LeaderBoardImpl = null
+      @Autowired var  leaderBoard: LeaderBoardImpl = null
 
 			@Autowired var globals:Globals = null
 			@Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
@@ -463,7 +462,7 @@ case class StartupData(
 								ssfu  <-   setSalesForUser(resBuilder, user)
 								scrs  <-   setClanRaidStuff(resBuilder, user, userId, now)
 								plfu  <-   pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
-//                sttslb<-   setTopThreeStrengthLeaderBoard(resBuilder)
+                sttslb<-   setTopThreeStrengthLeaderBoard(resBuilder)
 							} yield plfu
 
 							userInfo onSuccess {
@@ -1407,15 +1406,15 @@ case class StartupData(
 					}
 			}
       
-//      def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
-//        Future{
-//          timed("StartupServer.setTopThreeStrengthLeaderBoard") {
-//            val leaderBoardList = leaderBoard.getTopNStrengths(3);
-//            resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
-//                createStrengthLeaderBoardProtos(leaderBoardList, userRetrieveUtils));
-//          }
-//        }
-//      }
+      def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
+        Future{
+          timed("StartupServer.setTopThreeStrengthLeaderBoard") {
+            val leaderBoardList = leaderBoard.getTopNStrengths(2);
+            resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
+                createStrengthLeaderBoardProtosWithMonsterId(leaderBoardList, userRetrieveUtils, monsterForUserRetrieveUtils));
+          }
+        }
+      }
       
 			def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
 					Future{

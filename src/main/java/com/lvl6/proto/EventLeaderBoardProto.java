@@ -30,7 +30,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 50
+     *strength, minRank is 0, maxRank is 49
      * </pre>
      */
     boolean hasMinRank();
@@ -39,7 +39,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 50
+     *strength, minRank is 0, maxRank is 49
      * </pre>
      */
     int getMinRank();
@@ -196,7 +196,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 50
+     *strength, minRank is 0, maxRank is 49
      * </pre>
      */
     public boolean hasMinRank() {
@@ -207,7 +207,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 50
+     *strength, minRank is 0, maxRank is 49
      * </pre>
      */
     public int getMinRank() {
@@ -623,7 +623,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 50
+       *strength, minRank is 0, maxRank is 49
        * </pre>
        */
       public boolean hasMinRank() {
@@ -634,7 +634,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 50
+       *strength, minRank is 0, maxRank is 49
        * </pre>
        */
       public int getMinRank() {
@@ -645,7 +645,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 50
+       *strength, minRank is 0, maxRank is 49
        * </pre>
        */
       public Builder setMinRank(int value) {
@@ -659,7 +659,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 50
+       *strength, minRank is 0, maxRank is 49
        * </pre>
        */
       public Builder clearMinRank() {
@@ -730,35 +730,48 @@ public final class EventLeaderBoardProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+     * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+     */
+    boolean hasSenderLeaderBoardInfo();
+    /**
+     * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+     */
+    com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getSenderLeaderBoardInfo();
+    /**
+     * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+     */
+    com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getSenderLeaderBoardInfoOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
      */
     java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> 
-        getSlbpList();
+        getLeaderBoardInfoList();
     /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
      */
-    com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getSlbp(int index);
+    com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getLeaderBoardInfo(int index);
     /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
      */
-    int getSlbpCount();
+    int getLeaderBoardInfoCount();
     /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
      */
     java.util.List<? extends com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> 
-        getSlbpOrBuilderList();
+        getLeaderBoardInfoOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
      */
-    com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getSlbpOrBuilder(
+    com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getLeaderBoardInfoOrBuilder(
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
      */
     com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus getStatus();
   }
@@ -828,20 +841,33 @@ public final class EventLeaderBoardProto {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                slbp_ = new java.util.ArrayList<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto>();
-                mutable_bitField0_ |= 0x00000002;
+              com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = senderLeaderBoardInfo_.toBuilder();
               }
-              slbp_.add(input.readMessage(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.PARSER, extensionRegistry));
+              senderLeaderBoardInfo_ = input.readMessage(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(senderLeaderBoardInfo_);
+                senderLeaderBoardInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
-            case 24: {
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                leaderBoardInfo_ = new java.util.ArrayList<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              leaderBoardInfo_.add(input.readMessage(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
               int rawValue = input.readEnum();
               com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus value = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000002;
+                bitField0_ |= 0x00000004;
                 status_ = value;
               }
               break;
@@ -854,8 +880,8 @@ public final class EventLeaderBoardProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          slbp_ = java.util.Collections.unmodifiableList(slbp_);
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          leaderBoardInfo_ = java.util.Collections.unmodifiableList(leaderBoardInfo_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -901,6 +927,10 @@ public final class EventLeaderBoardProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       FAIL_OTHER(1, 2),
+      /**
+       * <code>FAIL_NO_RESULTS = 3;</code>
+       */
+      FAIL_NO_RESULTS(2, 3),
       ;
 
       /**
@@ -911,6 +941,10 @@ public final class EventLeaderBoardProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       public static final int FAIL_OTHER_VALUE = 2;
+      /**
+       * <code>FAIL_NO_RESULTS = 3;</code>
+       */
+      public static final int FAIL_NO_RESULTS_VALUE = 3;
 
 
       public final int getNumber() { return value; }
@@ -919,6 +953,7 @@ public final class EventLeaderBoardProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
+          case 3: return FAIL_NO_RESULTS;
           default: return null;
         }
       }
@@ -992,51 +1027,72 @@ public final class EventLeaderBoardProto {
       return sender_;
     }
 
-    public static final int SLBP_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> slbp_;
+    public static final int SENDERLEADERBOARDINFO_FIELD_NUMBER = 2;
+    private com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto senderLeaderBoardInfo_;
     /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+     * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
      */
-    public java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> getSlbpList() {
-      return slbp_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> 
-        getSlbpOrBuilderList() {
-      return slbp_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
-     */
-    public int getSlbpCount() {
-      return slbp_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
-     */
-    public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getSlbp(int index) {
-      return slbp_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
-     */
-    public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getSlbpOrBuilder(
-        int index) {
-      return slbp_.get(index);
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status_;
-    /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
-     */
-    public boolean hasStatus() {
+    public boolean hasSenderLeaderBoardInfo() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+     */
+    public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getSenderLeaderBoardInfo() {
+      return senderLeaderBoardInfo_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+     */
+    public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getSenderLeaderBoardInfoOrBuilder() {
+      return senderLeaderBoardInfo_;
+    }
+
+    public static final int LEADERBOARDINFO_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> leaderBoardInfo_;
+    /**
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
+     */
+    public java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> getLeaderBoardInfoList() {
+      return leaderBoardInfo_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> 
+        getLeaderBoardInfoOrBuilderList() {
+      return leaderBoardInfo_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
+     */
+    public int getLeaderBoardInfoCount() {
+      return leaderBoardInfo_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
+     */
+    public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getLeaderBoardInfo(int index) {
+      return leaderBoardInfo_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
+     */
+    public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getLeaderBoardInfoOrBuilder(
+        int index) {
+      return leaderBoardInfo_.get(index);
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 4;
+    private com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
      */
     public com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus getStatus() {
       return status_;
@@ -1044,7 +1100,8 @@ public final class EventLeaderBoardProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      slbp_ = java.util.Collections.emptyList();
+      senderLeaderBoardInfo_ = com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance();
+      leaderBoardInfo_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -1063,11 +1120,14 @@ public final class EventLeaderBoardProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < slbp_.size(); i++) {
-        output.writeMessage(2, slbp_.get(i));
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(3, status_.getNumber());
+        output.writeMessage(2, senderLeaderBoardInfo_);
+      }
+      for (int i = 0; i < leaderBoardInfo_.size(); i++) {
+        output.writeMessage(3, leaderBoardInfo_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(4, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1082,13 +1142,17 @@ public final class EventLeaderBoardProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      for (int i = 0; i < slbp_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, slbp_.get(i));
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, status_.getNumber());
+          .computeMessageSize(2, senderLeaderBoardInfo_);
+      }
+      for (int i = 0; i < leaderBoardInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, leaderBoardInfo_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1200,7 +1264,8 @@ public final class EventLeaderBoardProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getSlbpFieldBuilder();
+          getSenderLeaderBoardInfoFieldBuilder();
+          getLeaderBoardInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1215,14 +1280,20 @@ public final class EventLeaderBoardProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (slbpBuilder_ == null) {
-          slbp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          senderLeaderBoardInfo_ = com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance();
         } else {
-          slbpBuilder_.clear();
+          senderLeaderBoardInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (leaderBoardInfoBuilder_ == null) {
+          leaderBoardInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          leaderBoardInfoBuilder_.clear();
         }
         status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -1259,17 +1330,25 @@ public final class EventLeaderBoardProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (slbpBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            slbp_ = java.util.Collections.unmodifiableList(slbp_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.slbp_ = slbp_;
-        } else {
-          result.slbp_ = slbpBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
+        }
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          result.senderLeaderBoardInfo_ = senderLeaderBoardInfo_;
+        } else {
+          result.senderLeaderBoardInfo_ = senderLeaderBoardInfoBuilder_.build();
+        }
+        if (leaderBoardInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            leaderBoardInfo_ = java.util.Collections.unmodifiableList(leaderBoardInfo_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.leaderBoardInfo_ = leaderBoardInfo_;
+        } else {
+          result.leaderBoardInfo_ = leaderBoardInfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
         }
         result.status_ = status_;
         result.bitField0_ = to_bitField0_;
@@ -1291,29 +1370,32 @@ public final class EventLeaderBoardProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (slbpBuilder_ == null) {
-          if (!other.slbp_.isEmpty()) {
-            if (slbp_.isEmpty()) {
-              slbp_ = other.slbp_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+        if (other.hasSenderLeaderBoardInfo()) {
+          mergeSenderLeaderBoardInfo(other.getSenderLeaderBoardInfo());
+        }
+        if (leaderBoardInfoBuilder_ == null) {
+          if (!other.leaderBoardInfo_.isEmpty()) {
+            if (leaderBoardInfo_.isEmpty()) {
+              leaderBoardInfo_ = other.leaderBoardInfo_;
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
-              ensureSlbpIsMutable();
-              slbp_.addAll(other.slbp_);
+              ensureLeaderBoardInfoIsMutable();
+              leaderBoardInfo_.addAll(other.leaderBoardInfo_);
             }
             onChanged();
           }
         } else {
-          if (!other.slbp_.isEmpty()) {
-            if (slbpBuilder_.isEmpty()) {
-              slbpBuilder_.dispose();
-              slbpBuilder_ = null;
-              slbp_ = other.slbp_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              slbpBuilder_ = 
+          if (!other.leaderBoardInfo_.isEmpty()) {
+            if (leaderBoardInfoBuilder_.isEmpty()) {
+              leaderBoardInfoBuilder_.dispose();
+              leaderBoardInfoBuilder_ = null;
+              leaderBoardInfo_ = other.leaderBoardInfo_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              leaderBoardInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getSlbpFieldBuilder() : null;
+                   getLeaderBoardInfoFieldBuilder() : null;
             } else {
-              slbpBuilder_.addAllMessages(other.slbp_);
+              leaderBoardInfoBuilder_.addAllMessages(other.leaderBoardInfo_);
             }
           }
         }
@@ -1463,276 +1545,392 @@ public final class EventLeaderBoardProto {
         return senderBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> slbp_ =
+      private com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto senderLeaderBoardInfo_ = com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> senderLeaderBoardInfoBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public boolean hasSenderLeaderBoardInfo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getSenderLeaderBoardInfo() {
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          return senderLeaderBoardInfo_;
+        } else {
+          return senderLeaderBoardInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public Builder setSenderLeaderBoardInfo(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto value) {
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          senderLeaderBoardInfo_ = value;
+          onChanged();
+        } else {
+          senderLeaderBoardInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public Builder setSenderLeaderBoardInfo(
+          com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder builderForValue) {
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          senderLeaderBoardInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderLeaderBoardInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public Builder mergeSenderLeaderBoardInfo(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto value) {
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              senderLeaderBoardInfo_ != com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance()) {
+            senderLeaderBoardInfo_ =
+              com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.newBuilder(senderLeaderBoardInfo_).mergeFrom(value).buildPartial();
+          } else {
+            senderLeaderBoardInfo_ = value;
+          }
+          onChanged();
+        } else {
+          senderLeaderBoardInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public Builder clearSenderLeaderBoardInfo() {
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          senderLeaderBoardInfo_ = com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderLeaderBoardInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder getSenderLeaderBoardInfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getSenderLeaderBoardInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getSenderLeaderBoardInfoOrBuilder() {
+        if (senderLeaderBoardInfoBuilder_ != null) {
+          return senderLeaderBoardInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return senderLeaderBoardInfo_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.StrengthLeaderBoardProto senderLeaderBoardInfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> 
+          getSenderLeaderBoardInfoFieldBuilder() {
+        if (senderLeaderBoardInfoBuilder_ == null) {
+          senderLeaderBoardInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder>(
+                  getSenderLeaderBoardInfo(),
+                  getParentForChildren(),
+                  isClean());
+          senderLeaderBoardInfo_ = null;
+        }
+        return senderLeaderBoardInfoBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> leaderBoardInfo_ =
         java.util.Collections.emptyList();
-      private void ensureSlbpIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          slbp_ = new java.util.ArrayList<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto>(slbp_);
-          bitField0_ |= 0x00000002;
+      private void ensureLeaderBoardInfoIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          leaderBoardInfo_ = new java.util.ArrayList<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto>(leaderBoardInfo_);
+          bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> slbpBuilder_;
+          com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> leaderBoardInfoBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> getSlbpList() {
-        if (slbpBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(slbp_);
+      public java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> getLeaderBoardInfoList() {
+        if (leaderBoardInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(leaderBoardInfo_);
         } else {
-          return slbpBuilder_.getMessageList();
+          return leaderBoardInfoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public int getSlbpCount() {
-        if (slbpBuilder_ == null) {
-          return slbp_.size();
+      public int getLeaderBoardInfoCount() {
+        if (leaderBoardInfoBuilder_ == null) {
+          return leaderBoardInfo_.size();
         } else {
-          return slbpBuilder_.getCount();
+          return leaderBoardInfoBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getSlbp(int index) {
-        if (slbpBuilder_ == null) {
-          return slbp_.get(index);
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto getLeaderBoardInfo(int index) {
+        if (leaderBoardInfoBuilder_ == null) {
+          return leaderBoardInfo_.get(index);
         } else {
-          return slbpBuilder_.getMessage(index);
+          return leaderBoardInfoBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder setSlbp(
+      public Builder setLeaderBoardInfo(
           int index, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto value) {
-        if (slbpBuilder_ == null) {
+        if (leaderBoardInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSlbpIsMutable();
-          slbp_.set(index, value);
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.set(index, value);
           onChanged();
         } else {
-          slbpBuilder_.setMessage(index, value);
+          leaderBoardInfoBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder setSlbp(
+      public Builder setLeaderBoardInfo(
           int index, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder builderForValue) {
-        if (slbpBuilder_ == null) {
-          ensureSlbpIsMutable();
-          slbp_.set(index, builderForValue.build());
+        if (leaderBoardInfoBuilder_ == null) {
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.set(index, builderForValue.build());
           onChanged();
         } else {
-          slbpBuilder_.setMessage(index, builderForValue.build());
+          leaderBoardInfoBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder addSlbp(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto value) {
-        if (slbpBuilder_ == null) {
+      public Builder addLeaderBoardInfo(com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto value) {
+        if (leaderBoardInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSlbpIsMutable();
-          slbp_.add(value);
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.add(value);
           onChanged();
         } else {
-          slbpBuilder_.addMessage(value);
+          leaderBoardInfoBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder addSlbp(
+      public Builder addLeaderBoardInfo(
           int index, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto value) {
-        if (slbpBuilder_ == null) {
+        if (leaderBoardInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSlbpIsMutable();
-          slbp_.add(index, value);
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.add(index, value);
           onChanged();
         } else {
-          slbpBuilder_.addMessage(index, value);
+          leaderBoardInfoBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder addSlbp(
+      public Builder addLeaderBoardInfo(
           com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder builderForValue) {
-        if (slbpBuilder_ == null) {
-          ensureSlbpIsMutable();
-          slbp_.add(builderForValue.build());
+        if (leaderBoardInfoBuilder_ == null) {
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.add(builderForValue.build());
           onChanged();
         } else {
-          slbpBuilder_.addMessage(builderForValue.build());
+          leaderBoardInfoBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder addSlbp(
+      public Builder addLeaderBoardInfo(
           int index, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder builderForValue) {
-        if (slbpBuilder_ == null) {
-          ensureSlbpIsMutable();
-          slbp_.add(index, builderForValue.build());
+        if (leaderBoardInfoBuilder_ == null) {
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.add(index, builderForValue.build());
           onChanged();
         } else {
-          slbpBuilder_.addMessage(index, builderForValue.build());
+          leaderBoardInfoBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder addAllSlbp(
+      public Builder addAllLeaderBoardInfo(
           java.lang.Iterable<? extends com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto> values) {
-        if (slbpBuilder_ == null) {
-          ensureSlbpIsMutable();
+        if (leaderBoardInfoBuilder_ == null) {
+          ensureLeaderBoardInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, slbp_);
+              values, leaderBoardInfo_);
           onChanged();
         } else {
-          slbpBuilder_.addAllMessages(values);
+          leaderBoardInfoBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder clearSlbp() {
-        if (slbpBuilder_ == null) {
-          slbp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearLeaderBoardInfo() {
+        if (leaderBoardInfoBuilder_ == null) {
+          leaderBoardInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
-          slbpBuilder_.clear();
+          leaderBoardInfoBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public Builder removeSlbp(int index) {
-        if (slbpBuilder_ == null) {
-          ensureSlbpIsMutable();
-          slbp_.remove(index);
+      public Builder removeLeaderBoardInfo(int index) {
+        if (leaderBoardInfoBuilder_ == null) {
+          ensureLeaderBoardInfoIsMutable();
+          leaderBoardInfo_.remove(index);
           onChanged();
         } else {
-          slbpBuilder_.remove(index);
+          leaderBoardInfoBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder getSlbpBuilder(
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder getLeaderBoardInfoBuilder(
           int index) {
-        return getSlbpFieldBuilder().getBuilder(index);
+        return getLeaderBoardInfoFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getSlbpOrBuilder(
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder getLeaderBoardInfoOrBuilder(
           int index) {
-        if (slbpBuilder_ == null) {
-          return slbp_.get(index);  } else {
-          return slbpBuilder_.getMessageOrBuilder(index);
+        if (leaderBoardInfoBuilder_ == null) {
+          return leaderBoardInfo_.get(index);  } else {
+          return leaderBoardInfoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
       public java.util.List<? extends com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> 
-           getSlbpOrBuilderList() {
-        if (slbpBuilder_ != null) {
-          return slbpBuilder_.getMessageOrBuilderList();
+           getLeaderBoardInfoOrBuilderList() {
+        if (leaderBoardInfoBuilder_ != null) {
+          return leaderBoardInfoBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(slbp_);
+          return java.util.Collections.unmodifiableList(leaderBoardInfo_);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder addSlbpBuilder() {
-        return getSlbpFieldBuilder().addBuilder(
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder addLeaderBoardInfoBuilder() {
+        return getLeaderBoardInfoFieldBuilder().addBuilder(
             com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
-      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder addSlbpBuilder(
+      public com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder addLeaderBoardInfoBuilder(
           int index) {
-        return getSlbpFieldBuilder().addBuilder(
+        return getLeaderBoardInfoFieldBuilder().addBuilder(
             index, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto slbp = 2;</code>
+       * <code>repeated .com.lvl6.proto.StrengthLeaderBoardProto leaderBoardInfo = 3;</code>
        */
       public java.util.List<com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder> 
-           getSlbpBuilderList() {
-        return getSlbpFieldBuilder().getBuilderList();
+           getLeaderBoardInfoBuilderList() {
+        return getLeaderBoardInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder> 
-          getSlbpFieldBuilder() {
-        if (slbpBuilder_ == null) {
-          slbpBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getLeaderBoardInfoFieldBuilder() {
+        if (leaderBoardInfoBuilder_ == null) {
+          leaderBoardInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.Builder, com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProtoOrBuilder>(
-                  slbp_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  leaderBoardInfo_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
-          slbp_ = null;
+          leaderBoardInfo_ = null;
         }
-        return slbpBuilder_;
+        return leaderBoardInfoBuilder_;
       }
 
       private com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
        */
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
        */
       public com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
        */
       public Builder setStatus(com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         status_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
        */
       public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
         onChanged();
         return this;
@@ -1772,16 +1970,19 @@ public final class EventLeaderBoardProto {
       "\032\021LeaderBoard.proto\032\nUser.proto\"}\n\'Retri" +
       "eveStrengthLeaderBoardRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\017\n\007minRank\030\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005\"\302" +
-      "\002\n(RetrieveStrengthLeaderBoardResponsePr" +
+      "roto\022\017\n\007minRank\030\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005\"\253" +
+      "\003\n(RetrieveStrengthLeaderBoardResponsePr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\0226\n\004slbp\030\002 \003(\0132(.com.lvl6.p" +
-      "roto.StrengthLeaderBoardProto\022j\n\006status\030" +
-      "\003 \001(\0162Z.com.lvl6.proto.RetrieveStrengthL",
-      "eaderBoardResponseProto.RetrieveStrength" +
-      "LeaderBoardStatus\"@\n!RetrieveStrengthLea" +
-      "derBoardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
-      "R\020\002B\027B\025EventLeaderBoardProto"
+      "imumUserProto\022G\n\025senderLeaderBoardInfo\030\002" +
+      " \001(\0132(.com.lvl6.proto.StrengthLeaderBoar" +
+      "dProto\022A\n\017leaderBoardInfo\030\003 \003(\0132(.com.lv",
+      "l6.proto.StrengthLeaderBoardProto\022j\n\006sta" +
+      "tus\030\004 \001(\0162Z.com.lvl6.proto.RetrieveStren" +
+      "gthLeaderBoardResponseProto.RetrieveStre" +
+      "ngthLeaderBoardStatus\"U\n!RetrieveStrengt" +
+      "hLeaderBoardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
+      "OTHER\020\002\022\023\n\017FAIL_NO_RESULTS\020\003B\027B\025EventLea" +
+      "derBoardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1808,7 +2009,7 @@ public final class EventLeaderBoardProto {
     internal_static_com_lvl6_proto_RetrieveStrengthLeaderBoardResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrieveStrengthLeaderBoardResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Slbp", "Status", });
+        new java.lang.String[] { "Sender", "SenderLeaderBoardInfo", "LeaderBoardInfo", "Status", });
     com.lvl6.proto.LeaderBoardProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

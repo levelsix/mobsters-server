@@ -40,6 +40,7 @@ public class LeaderBoardImpl {
 		return dataSource;
 	}
 
+	@Resource
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		jdbc = new JdbcTemplate(dataSource);
@@ -52,6 +53,8 @@ public class LeaderBoardImpl {
 	public HazelcastInstance getHazelcastInstance() {
 		return hazelcastInstance;
 	}
+	
+	@Autowired
 	public void setHazelcastInstance(HazelcastInstance hazelcastInstance) {
 		this.hazelcastInstance = hazelcastInstance;
 		strLeaderboard = new DistributedZSetHazelcast("strength leaderboard", 
@@ -90,6 +93,10 @@ public class LeaderBoardImpl {
 	
 	public int getUserRank(String userId) {
 		return strLeaderboard.get(userId).getRank();
+	}
+	
+	public int getSize() {
+		return strLeaderboard.size();
 	}
 	
 	public void reload() {

@@ -17,19 +17,21 @@ message RetrieveStrengthLeaderBoardRequestProto {
 	optional MinimumUserProto sender = 1;
 	
 	//if you want the highest strength up to the 50th highest 
-	//strength, minRank is 0, maxRank is 50
+	//strength, minRank is 0, maxRank is 49
 	optional int32 minRank = 2;
 	optional int32 maxRank = 3;
 }
 
 message RetrieveStrengthLeaderBoardResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated StrengthLeaderBoardProto slbp = 2;
-	optional RetrieveStrengthLeaderBoardStatus status = 3;
+	optional StrengthLeaderBoardProto senderLeaderBoardInfo = 2;
+	repeated StrengthLeaderBoardProto leaderBoardInfo = 3;
+	optional RetrieveStrengthLeaderBoardStatus status = 4;
 	
 	enum RetrieveStrengthLeaderBoardStatus {
      	SUCCESS = 1;
      	FAIL_OTHER = 2;
+     	FAIL_NO_RESULTS = 3;
     }
 
 }

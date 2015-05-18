@@ -183,6 +183,7 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -5320,6 +5321,33 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
+	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtosWithMonsterId(List<StrengthLeaderBoard> slbList,
+			UserRetrieveUtils2 userRetrieveUtils, MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
+		List<String> userIds = new ArrayList<String>();
+		for(StrengthLeaderBoard slb : slbList) {
+			userIds.add(slb.getUserId());
+		}
+		Map<String, List<MonsterForUser>> userIdsToMonsters = 
+				monsterForUserRetrieveUtils.getUserIdsToMonsterTeamForUserIds(userIds);
+		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
+		for(StrengthLeaderBoard slb : slbList) {
+			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
+			String userId = slb.getUserId();
+			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
+			b.setRank(slb.getRank());
+			b.setStrength(slb.getStrength());
+			List<MonsterForUser> mfuList = userIdsToMonsters.get(userId);
+			for(MonsterForUser mfu: mfuList) {
+				if(mfu.getTeamSlotNum() == 1) {
+					b.setMonsterId(mfu.getMonsterId());
+				}
+			}
+			slbpList.add(b.build());
+		}
+		return slbpList;
+	}
+	
 	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtos(List<StrengthLeaderBoard> slbList,
 			UserRetrieveUtils2 userRetrieveUtils) {
 		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
@@ -5330,7 +5358,8 @@ public class CreateInfoProtoUtils {
 		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
 		for(StrengthLeaderBoard slb : slbList) {
 			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
-			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(slb.getUserId()), null));
+			String userId = slb.getUserId();
+			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
 			b.setRank(slb.getRank());
 			b.setStrength(slb.getStrength());
 			slbpList.add(b.build());
