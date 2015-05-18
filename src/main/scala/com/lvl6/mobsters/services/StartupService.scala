@@ -1319,9 +1319,23 @@ class StartupService extends LazyLogging{
   def setSalesForUser(resBuilder:Builder ,  user:User):Future[Unit]= {
     Future{
       timed("StartupService.setSalesForUser"){
-          val userSalesValue = user.getSalesValue()
-          val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
+          var userSalesValue = user.getSalesValue()
+          val salesLastPurchaseTime = user.getLastPurchaseTime();
           val now = new Date
+          if(salesLastPurchaseTime == null) {
+            val ts = new Timestamp(now.getTime());
+            updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
+          }
+          else {
+            if(userSalesValue == 0) {
+              if(Math.abs(timeUtils.numDaysDifference(salesLastPurchaseTime, now)) > 5) {
+                logger.info("updating user sales value, been longer than 5 days");
+                updateUtil.updateUserSalesValue(user.getId(), 1, null);
+                userSalesValue = 1;
+              }
+            }
+          }
+          val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
           
           val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
           idsToSalesPackages.values().foreach { sp:SalesPackage =>
