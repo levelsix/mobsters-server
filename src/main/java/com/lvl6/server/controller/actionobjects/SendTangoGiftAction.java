@@ -281,6 +281,9 @@ public class SendTangoGiftAction {
 	}
 
 	public Collection<String> getNonToonSquadTangoUserIds() {
+		if (null == nonToonSquadTangoUserIds) {
+			nonToonSquadTangoUserIds = new HashSet<String>();
+		}
 		return nonToonSquadTangoUserIds;
 	}
 
@@ -290,6 +293,9 @@ public class SendTangoGiftAction {
 	}
 
 	public Collection<String> getToonSquadTangoUserIds() {
+		if (null == toonSquadTangoUserIds) {
+			toonSquadTangoUserIds = new HashSet<String>();
+		}
 		return toonSquadTangoUserIds;
 	}
 
