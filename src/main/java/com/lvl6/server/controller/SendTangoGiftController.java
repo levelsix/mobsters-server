@@ -144,25 +144,27 @@ public class SendTangoGiftController extends EventController {
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 
-				//notify users who did get gifts
 				List<GiftForUser> receiverGifts = stga.getReceiverGifts();
-				Map<String, GiftForTangoUser> gfuIdToGftu = stga.getGiftForUserIdToGiftForTangoUser();
-				TangoGift tg = stga.getTangoGift();
+				if (null != receiverGifts && !receiverGifts.isEmpty()) {
+					//notify users who did get gifts
+					Map<String, GiftForTangoUser> gfuIdToGftu = stga
+							.getGiftForUserIdToGiftForTangoUser();
+					TangoGift tg = stga.getTangoGift();
+					for (GiftForUser gfu : receiverGifts) {
+						String receiverUserId = gfu.getReceiverUserId();
+						ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(
+								receiverUserId);
+						ReceivedGiftResponseProto.Builder rgrp = ReceivedGiftResponseProto
+								.newBuilder();
+						UserGiftProto ugp = createUserGiftProto(senderProto,
+								gfuIdToGftu, tg, gfu, rgrp);
+						rgrp.addUserGifts(ugp);
 
-				for (GiftForUser gfu : receiverGifts)
-				{
-					String receiverUserId = gfu.getReceiverUserId();
-					ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(receiverUserId);
-					ReceivedGiftResponseProto.Builder rgrp = ReceivedGiftResponseProto.newBuilder();
-					UserGiftProto ugp = createUserGiftProto(senderProto,
-							gfuIdToGftu, tg, gfu, rgrp);
-					rgrp.addUserGifts(ugp);
+						rgre.setReceivedGiftResponseProto(rgrp.build());
 
-					rgre.setReceivedGiftResponseProto(rgrp.build());
-
-					server.writeEvent(rgre);
+						server.writeEvent(rgre);
+					}
 				}
-
 				User gifter = stga.getGifter();
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
