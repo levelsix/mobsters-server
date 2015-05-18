@@ -1178,8 +1178,10 @@ public class CreateInfoProtoUtils {
 		b.setBoosterItemId(bi.getId());
 		b.setBoosterPackId(bi.getBoosterPackId());
 
-		Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
-		b.setReward(createRewardProto(r));
+		if (bi.getRewardId() > 0) {
+			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+			b.setReward(createRewardProto(r));
+		}
 
 
 		return b.build();
@@ -1192,8 +1194,10 @@ public class CreateInfoProtoUtils {
 
 		b.setBoosterPackId(bdi.getBoosterPackId());
 
-		Reward r = rewardRetrieveUtils.getRewardById(bdi.getRewardId());
-		b.setReward(createRewardProto(r));
+		if (bdi.getRewardId() > 0) {
+			Reward r = rewardRetrieveUtils.getRewardById(bdi.getRewardId());
+			b.setReward(createRewardProto(r));
+		}
 
 		return b.build();
 	}
