@@ -66,7 +66,7 @@ public class SalesPackage implements Serializable {
 		this.productId = productId;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
