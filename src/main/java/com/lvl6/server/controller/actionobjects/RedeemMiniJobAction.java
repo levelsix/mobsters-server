@@ -233,11 +233,7 @@ public class RedeemMiniJobAction {
 	
 	private boolean writeChangesToDB(Builder resBuilder) {
 
-<<<<<<< HEAD
 		ara = new AwardRewardAction(userId, user, 0, 0, clientTime, "userminijob with id " + userMiniJobId,
-=======
-		ara = new AwardRewardAction(userId, user, 0, 0, clientTime, "userminijob with id" + userMiniJobId,
->>>>>>> still rebaseing
 				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
 				monsterStuffUtils, monsterLevelInfoRetrieveUtils);
 		
