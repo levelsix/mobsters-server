@@ -451,7 +451,7 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
-		log.info("prespp: " + preSpp);
+//		log.info("prespp: " + preSpp);
 
 		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
 			//do nothing
@@ -506,7 +506,7 @@ public class InAppPurchaseController extends EventController {
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
                 nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
                 gachaCreditsGained, ucgp);
-        log.info("proto for reward: " + urp);
+//        log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
 
     }
