@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterLevelInfoConfig extends TableImpl<MonsterLevelInfoConfigRecord> {
 
-	private static final long serialVersionUID = 693350186;
+	private static final long serialVersionUID = 699766349;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_level_info_config</code>
@@ -107,7 +106,7 @@ public class MonsterLevelInfoConfig extends TableImpl<MonsterLevelInfoConfigReco
 	/**
 	 * The column <code>mobsters.monster_level_info_config.speed</code>.
 	 */
-	public final TableField<MonsterLevelInfoConfigRecord, UByte> SPEED = createField("speed", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<MonsterLevelInfoConfigRecord, Byte> SPEED = createField("speed", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_level_info_config.hp_exponent_base</code>. how later levels scale

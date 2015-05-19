@@ -15,7 +15,6 @@ import javax.annotation.Generated;
 import org.jooq.Configuration;
 import org.jooq.Record2;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -84,7 +83,7 @@ public class MonsterHealingForUserDao extends DAOImpl<MonsterHealingForUserRecor
 	/**
 	 * Fetch records that have <code>priority IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterHealingForUser> fetchByPriority(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterHealingForUser> fetchByPriority(Integer... values) {
 		return fetch(MonsterHealingForUser.MONSTER_HEALING_FOR_USER.PRIORITY, values);
 	}
 

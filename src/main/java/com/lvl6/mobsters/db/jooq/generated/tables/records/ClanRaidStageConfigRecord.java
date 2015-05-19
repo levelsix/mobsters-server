@@ -21,8 +21,6 @@ import org.jooq.Record5;
 import org.jooq.Row;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -38,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "clan_raid_stage_config", schema = "mobsters")
-public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStageConfigRecord> implements Record5<Integer, Integer, UInteger, UByte, String>, IClanRaidStageConfig {
+public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStageConfigRecord> implements Record5<Integer, Integer, Integer, Byte, String>, IClanRaidStageConfig {
 
-	private static final long serialVersionUID = -598061635;
+	private static final long serialVersionUID = 1035806885;
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_config.id</code>.
@@ -84,7 +82,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * Setter for <code>mobsters.clan_raid_stage_config.duration_minutes</code>.
 	 */
 	@Override
-	public ClanRaidStageConfigRecord setDurationMinutes(UInteger value) {
+	public ClanRaidStageConfigRecord setDurationMinutes(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -94,15 +92,15 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 */
 	@Column(name = "duration_minutes", precision = 10)
 	@Override
-	public UInteger getDurationMinutes() {
-		return (UInteger) getValue(2);
+	public Integer getDurationMinutes() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_config.stage_num</code>.
 	 */
 	@Override
-	public ClanRaidStageConfigRecord setStageNum(UByte value) {
+	public ClanRaidStageConfigRecord setStageNum(Byte value) {
 		setValue(3, value);
 		return this;
 	}
@@ -112,8 +110,8 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 */
 	@Column(name = "stage_num", precision = 3)
 	@Override
-	public UByte getStageNum() {
-		return (UByte) getValue(3);
+	public Byte getStageNum() {
+		return (Byte) getValue(3);
 	}
 
 	/**
@@ -155,7 +153,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<Integer, Integer, UInteger, UByte, String> fieldsRow() {
+	public Row5<Integer, Integer, Integer, Byte, String> fieldsRow() {
 		return (Row5) super.fieldsRow();
 	}
 
@@ -163,7 +161,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<Integer, Integer, UInteger, UByte, String> valuesRow() {
+	public Row5<Integer, Integer, Integer, Byte, String> valuesRow() {
 		return (Row5) super.valuesRow();
 	}
 
@@ -187,7 +185,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return ClanRaidStageConfig.CLAN_RAID_STAGE_CONFIG.DURATION_MINUTES;
 	}
 
@@ -195,7 +193,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field4() {
+	public Field<Byte> field4() {
 		return ClanRaidStageConfig.CLAN_RAID_STAGE_CONFIG.STAGE_NUM;
 	}
 
@@ -227,7 +225,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getDurationMinutes();
 	}
 
@@ -235,7 +233,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value4() {
+	public Byte value4() {
 		return getStageNum();
 	}
 
@@ -269,7 +267,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageConfigRecord value3(UInteger value) {
+	public ClanRaidStageConfigRecord value3(Integer value) {
 		setDurationMinutes(value);
 		return this;
 	}
@@ -278,7 +276,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageConfigRecord value4(UByte value) {
+	public ClanRaidStageConfigRecord value4(Byte value) {
 		setStageNum(value);
 		return this;
 	}
@@ -296,7 +294,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageConfigRecord values(Integer value1, Integer value2, UInteger value3, UByte value4, String value5) {
+	public ClanRaidStageConfigRecord values(Integer value1, Integer value2, Integer value3, Byte value4, String value5) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -344,7 +342,7 @@ public class ClanRaidStageConfigRecord extends UpdatableRecordImpl<ClanRaidStage
 	/**
 	 * Create a detached, initialised ClanRaidStageConfigRecord
 	 */
-	public ClanRaidStageConfigRecord(Integer id, Integer clanRaidId, UInteger durationMinutes, UByte stageNum, String name) {
+	public ClanRaidStageConfigRecord(Integer id, Integer clanRaidId, Integer durationMinutes, Byte stageNum, String name) {
 		super(ClanRaidStageConfig.CLAN_RAID_STAGE_CONFIG);
 
 		setValue(0, id);

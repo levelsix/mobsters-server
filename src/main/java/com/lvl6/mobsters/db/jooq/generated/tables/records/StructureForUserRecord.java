@@ -23,8 +23,6 @@ import org.jooq.Record10;
 import org.jooq.Row;
 import org.jooq.Row10;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -40,9 +38,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_for_user", schema = "mobsters")
-public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUserRecord> implements Record10<String, String, UInteger, Timestamp, Integer, Integer, Timestamp, Byte, String, UByte>, IStructureForUser {
+public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUserRecord> implements Record10<String, String, Integer, Timestamp, Integer, Integer, Timestamp, Byte, String, Byte>, IStructureForUser {
 
-	private static final long serialVersionUID = 915293332;
+	private static final long serialVersionUID = -833417328;
 
 	/**
 	 * Setter for <code>mobsters.structure_for_user.id</code>.
@@ -89,7 +87,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * Setter for <code>mobsters.structure_for_user.struct_id</code>.
 	 */
 	@Override
-	public StructureForUserRecord setStructId(UInteger value) {
+	public StructureForUserRecord setStructId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -100,8 +98,8 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	@Column(name = "struct_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getStructId() {
-		return (UInteger) getValue(2);
+	public Integer getStructId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
@@ -219,7 +217,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * Setter for <code>mobsters.structure_for_user.fb_invite_struct_lvl</code>.
 	 */
 	@Override
-	public StructureForUserRecord setFbInviteStructLvl(UByte value) {
+	public StructureForUserRecord setFbInviteStructLvl(Byte value) {
 		setValue(9, value);
 		return this;
 	}
@@ -230,8 +228,8 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	@Column(name = "fb_invite_struct_lvl", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getFbInviteStructLvl() {
-		return (UByte) getValue(9);
+	public Byte getFbInviteStructLvl() {
+		return (Byte) getValue(9);
 	}
 
 	// -------------------------------------------------------------------------
@@ -254,7 +252,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<String, String, UInteger, Timestamp, Integer, Integer, Timestamp, Byte, String, UByte> fieldsRow() {
+	public Row10<String, String, Integer, Timestamp, Integer, Integer, Timestamp, Byte, String, Byte> fieldsRow() {
 		return (Row10) super.fieldsRow();
 	}
 
@@ -262,7 +260,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<String, String, UInteger, Timestamp, Integer, Integer, Timestamp, Byte, String, UByte> valuesRow() {
+	public Row10<String, String, Integer, Timestamp, Integer, Integer, Timestamp, Byte, String, Byte> valuesRow() {
 		return (Row10) super.valuesRow();
 	}
 
@@ -286,7 +284,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return StructureForUser.STRUCTURE_FOR_USER.STRUCT_ID;
 	}
 
@@ -342,7 +340,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field10() {
+	public Field<Byte> field10() {
 		return StructureForUser.STRUCTURE_FOR_USER.FB_INVITE_STRUCT_LVL;
 	}
 
@@ -366,7 +364,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getStructId();
 	}
 
@@ -422,7 +420,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value10() {
+	public Byte value10() {
 		return getFbInviteStructLvl();
 	}
 
@@ -448,7 +446,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureForUserRecord value3(UInteger value) {
+	public StructureForUserRecord value3(Integer value) {
 		setStructId(value);
 		return this;
 	}
@@ -511,7 +509,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureForUserRecord value10(UByte value) {
+	public StructureForUserRecord value10(Byte value) {
 		setFbInviteStructLvl(value);
 		return this;
 	}
@@ -520,7 +518,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureForUserRecord values(String value1, String value2, UInteger value3, Timestamp value4, Integer value5, Integer value6, Timestamp value7, Byte value8, String value9, UByte value10) {
+	public StructureForUserRecord values(String value1, String value2, Integer value3, Timestamp value4, Integer value5, Integer value6, Timestamp value7, Byte value8, String value9, Byte value10) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -578,7 +576,7 @@ public class StructureForUserRecord extends UpdatableRecordImpl<StructureForUser
 	/**
 	 * Create a detached, initialised StructureForUserRecord
 	 */
-	public StructureForUserRecord(String id, String userId, UInteger structId, Timestamp lastRetrieved, Integer xcoord, Integer ycoord, Timestamp purchaseTime, Byte isComplete, String orientation, UByte fbInviteStructLvl) {
+	public StructureForUserRecord(String id, String userId, Integer structId, Timestamp lastRetrieved, Integer xcoord, Integer ycoord, Timestamp purchaseTime, Byte isComplete, String orientation, Byte fbInviteStructLvl) {
 		super(StructureForUser.STRUCTURE_FOR_USER);
 
 		setValue(0, id);

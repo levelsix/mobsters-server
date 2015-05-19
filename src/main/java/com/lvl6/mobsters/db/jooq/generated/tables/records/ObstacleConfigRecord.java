@@ -21,8 +21,6 @@ import org.jooq.Record14;
 import org.jooq.Row;
 import org.jooq.Row14;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -38,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "obstacle_config", schema = "mobsters")
-public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigRecord> implements Record14<Integer, String, String, UInteger, UInteger, UByte, UByte, String, Double, String, Double, String, Double, Double>, IObstacleConfig {
+public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigRecord> implements Record14<Integer, String, String, Integer, Integer, Byte, Byte, String, Double, String, Double, String, Double, Double>, IObstacleConfig {
 
-	private static final long serialVersionUID = -2116191236;
+	private static final long serialVersionUID = 810564728;
 
 	/**
 	 * Setter for <code>mobsters.obstacle_config.id</code>.
@@ -104,7 +102,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * Setter for <code>mobsters.obstacle_config.cost</code>.
 	 */
 	@Override
-	public ObstacleConfigRecord setCost(UInteger value) {
+	public ObstacleConfigRecord setCost(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -114,15 +112,15 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 */
 	@Column(name = "cost", precision = 7)
 	@Override
-	public UInteger getCost() {
-		return (UInteger) getValue(3);
+	public Integer getCost() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.obstacle_config.seconds_to_remove</code>.
 	 */
 	@Override
-	public ObstacleConfigRecord setSecondsToRemove(UInteger value) {
+	public ObstacleConfigRecord setSecondsToRemove(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -132,15 +130,15 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 */
 	@Column(name = "seconds_to_remove", precision = 7)
 	@Override
-	public UInteger getSecondsToRemove() {
-		return (UInteger) getValue(4);
+	public Integer getSecondsToRemove() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.obstacle_config.width</code>.
 	 */
 	@Override
-	public ObstacleConfigRecord setWidth(UByte value) {
+	public ObstacleConfigRecord setWidth(Byte value) {
 		setValue(5, value);
 		return this;
 	}
@@ -150,15 +148,15 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 */
 	@Column(name = "width", precision = 3)
 	@Override
-	public UByte getWidth() {
-		return (UByte) getValue(5);
+	public Byte getWidth() {
+		return (Byte) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.obstacle_config.height</code>.
 	 */
 	@Override
-	public ObstacleConfigRecord setHeight(UByte value) {
+	public ObstacleConfigRecord setHeight(Byte value) {
 		setValue(6, value);
 		return this;
 	}
@@ -168,8 +166,8 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 */
 	@Column(name = "height", precision = 3)
 	@Override
-	public UByte getHeight() {
-		return (UByte) getValue(6);
+	public Byte getHeight() {
+		return (Byte) getValue(6);
 	}
 
 	/**
@@ -321,7 +319,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row14<Integer, String, String, UInteger, UInteger, UByte, UByte, String, Double, String, Double, String, Double, Double> fieldsRow() {
+	public Row14<Integer, String, String, Integer, Integer, Byte, Byte, String, Double, String, Double, String, Double, Double> fieldsRow() {
 		return (Row14) super.fieldsRow();
 	}
 
@@ -329,7 +327,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row14<Integer, String, String, UInteger, UInteger, UByte, UByte, String, Double, String, Double, String, Double, Double> valuesRow() {
+	public Row14<Integer, String, String, Integer, Integer, Byte, Byte, String, Double, String, Double, String, Double, Double> valuesRow() {
 		return (Row14) super.valuesRow();
 	}
 
@@ -361,7 +359,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return ObstacleConfig.OBSTACLE_CONFIG.COST;
 	}
 
@@ -369,7 +367,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return ObstacleConfig.OBSTACLE_CONFIG.SECONDS_TO_REMOVE;
 	}
 
@@ -377,7 +375,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field6() {
+	public Field<Byte> field6() {
 		return ObstacleConfig.OBSTACLE_CONFIG.WIDTH;
 	}
 
@@ -385,7 +383,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field7() {
+	public Field<Byte> field7() {
 		return ObstacleConfig.OBSTACLE_CONFIG.HEIGHT;
 	}
 
@@ -473,7 +471,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getCost();
 	}
 
@@ -481,7 +479,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getSecondsToRemove();
 	}
 
@@ -489,7 +487,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value6() {
+	public Byte value6() {
 		return getWidth();
 	}
 
@@ -497,7 +495,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value7() {
+	public Byte value7() {
 		return getHeight();
 	}
 
@@ -588,7 +586,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ObstacleConfigRecord value4(UInteger value) {
+	public ObstacleConfigRecord value4(Integer value) {
 		setCost(value);
 		return this;
 	}
@@ -597,7 +595,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ObstacleConfigRecord value5(UInteger value) {
+	public ObstacleConfigRecord value5(Integer value) {
 		setSecondsToRemove(value);
 		return this;
 	}
@@ -606,7 +604,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ObstacleConfigRecord value6(UByte value) {
+	public ObstacleConfigRecord value6(Byte value) {
 		setWidth(value);
 		return this;
 	}
@@ -615,7 +613,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ObstacleConfigRecord value7(UByte value) {
+	public ObstacleConfigRecord value7(Byte value) {
 		setHeight(value);
 		return this;
 	}
@@ -687,7 +685,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ObstacleConfigRecord values(Integer value1, String value2, String value3, UInteger value4, UInteger value5, UByte value6, UByte value7, String value8, Double value9, String value10, Double value11, String value12, Double value13, Double value14) {
+	public ObstacleConfigRecord values(Integer value1, String value2, String value3, Integer value4, Integer value5, Byte value6, Byte value7, String value8, Double value9, String value10, Double value11, String value12, Double value13, Double value14) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -753,7 +751,7 @@ public class ObstacleConfigRecord extends UpdatableRecordImpl<ObstacleConfigReco
 	/**
 	 * Create a detached, initialised ObstacleConfigRecord
 	 */
-	public ObstacleConfigRecord(Integer id, String name, String removalCostType, UInteger cost, UInteger secondsToRemove, UByte width, UByte height, String imgName, Double imgVerticalPixelOffset, String description, Double chanceToAppear, String shadowImgName, Double shadowVerticalOffset, Double shadowHorizontalOffset) {
+	public ObstacleConfigRecord(Integer id, String name, String removalCostType, Integer cost, Integer secondsToRemove, Byte width, Byte height, String imgName, Double imgVerticalPixelOffset, String description, Double chanceToAppear, String shadowImgName, Double shadowVerticalOffset, Double shadowHorizontalOffset) {
 		super(ObstacleConfig.OBSTACLE_CONFIG);
 
 		setValue(0, id);

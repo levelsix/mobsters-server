@@ -21,7 +21,6 @@ import org.jooq.Record17;
 import org.jooq.Row;
 import org.jooq.Row17;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,15 +36,15 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "quest_config", schema = "mobsters")
-public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> implements Record17<UInteger, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Boolean, String, String, String, Integer, String, String>, IQuestConfig {
+public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> implements Record17<Integer, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Boolean, String, String, String, Integer, String, String>, IQuestConfig {
 
-	private static final long serialVersionUID = 581202355;
+	private static final long serialVersionUID = -58182786;
 
 	/**
 	 * Setter for <code>mobsters.quest_config.id</code>.
 	 */
 	@Override
-	public QuestConfigRecord setId(UInteger value) {
+	public QuestConfigRecord setId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -57,8 +56,8 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	@Column(name = "id", unique = true, nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getId() {
-		return (UInteger) getValue(0);
+	public Integer getId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
@@ -371,7 +370,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record1<UInteger> key() {
+	public Record1<Integer> key() {
 		return (Record1) super.key();
 	}
 
@@ -383,7 +382,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row17<UInteger, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Boolean, String, String, String, Integer, String, String> fieldsRow() {
+	public Row17<Integer, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Boolean, String, String, String, Integer, String, String> fieldsRow() {
 		return (Row17) super.fieldsRow();
 	}
 
@@ -391,7 +390,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row17<UInteger, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Boolean, String, String, String, Integer, String, String> valuesRow() {
+	public Row17<Integer, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Boolean, String, String, String, Integer, String, String> valuesRow() {
 		return (Row17) super.valuesRow();
 	}
 
@@ -399,7 +398,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return QuestConfig.QUEST_CONFIG.ID;
 	}
 
@@ -535,7 +534,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getId();
 	}
 
@@ -671,7 +670,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestConfigRecord value1(UInteger value) {
+	public QuestConfigRecord value1(Integer value) {
 		setId(value);
 		return this;
 	}
@@ -824,7 +823,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestConfigRecord values(UInteger value1, String value2, String value3, String value4, String value5, Integer value6, Integer value7, Integer value8, Integer value9, Integer value10, Boolean value11, String value12, String value13, String value14, Integer value15, String value16, String value17) {
+	public QuestConfigRecord values(Integer value1, String value2, String value3, String value4, String value5, Integer value6, Integer value7, Integer value8, Integer value9, Integer value10, Boolean value11, String value12, String value13, String value14, Integer value15, String value16, String value17) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -896,7 +895,7 @@ public class QuestConfigRecord extends UpdatableRecordImpl<QuestConfigRecord> im
 	/**
 	 * Create a detached, initialised QuestConfigRecord
 	 */
-	public QuestConfigRecord(UInteger id, String questName, String description, String doneResponse, String acceptDialogue, Integer cashReward, Integer oilReward, Integer gemReward, Integer expReward, Integer monsterIdReward, Boolean isCompleteMonster, String questsRequiredForThis, String questGiverName, String questGiverImagePrefix, Integer priority, String carrotId, String monsterElement) {
+	public QuestConfigRecord(Integer id, String questName, String description, String doneResponse, String acceptDialogue, Integer cashReward, Integer oilReward, Integer gemReward, Integer expReward, Integer monsterIdReward, Boolean isCompleteMonster, String questsRequiredForThis, String questGiverName, String questGiverImagePrefix, Integer priority, String carrotId, String monsterElement) {
 		super(QuestConfig.QUEST_CONFIG);
 
 		setValue(0, id);

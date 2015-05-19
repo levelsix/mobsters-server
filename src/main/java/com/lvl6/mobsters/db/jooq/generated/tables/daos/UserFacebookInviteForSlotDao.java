@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -104,7 +103,7 @@ public class UserFacebookInviteForSlotDao extends DAOImpl<UserFacebookInviteForS
 	/**
 	 * Fetch records that have <code>user_struct_fb_lvl IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserFacebookInviteForSlot> fetchByUserStructFbLvl(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserFacebookInviteForSlot> fetchByUserStructFbLvl(Byte... values) {
 		return fetch(UserFacebookInviteForSlot.USER_FACEBOOK_INVITE_FOR_SLOT.USER_STRUCT_FB_LVL, values);
 	}
 

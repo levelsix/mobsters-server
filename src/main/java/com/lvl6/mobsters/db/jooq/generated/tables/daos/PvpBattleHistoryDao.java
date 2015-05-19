@@ -247,4 +247,11 @@ public class PvpBattleHistoryDao extends DAOImpl<PvpBattleHistoryRecord, com.lvl
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByClanAvenged(Boolean... values) {
 		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.CLAN_AVENGED, values);
 	}
+
+	/**
+	 * Fetch records that have <code>replay_id IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByReplayId(String... values) {
+		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.REPLAY_ID, values);
+	}
 }

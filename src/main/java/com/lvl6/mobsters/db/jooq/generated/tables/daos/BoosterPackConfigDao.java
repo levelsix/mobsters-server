@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -75,7 +74,7 @@ public class BoosterPackConfigDao extends DAOImpl<BoosterPackConfigRecord, com.l
 	/**
 	 * Fetch records that have <code>gem_price IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackConfig> fetchByGemPrice(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackConfig> fetchByGemPrice(Integer... values) {
 		return fetch(BoosterPackConfig.BOOSTER_PACK_CONFIG.GEM_PRICE, values);
 	}
 

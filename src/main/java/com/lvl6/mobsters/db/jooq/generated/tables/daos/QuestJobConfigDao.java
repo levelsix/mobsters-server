@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -110,14 +109,14 @@ public class QuestJobConfigDao extends DAOImpl<QuestJobConfigRecord, com.lvl6.mo
 	/**
 	 * Fetch records that have <code>city_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.QuestJobConfig> fetchByCityId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.QuestJobConfig> fetchByCityId(Integer... values) {
 		return fetch(QuestJobConfig.QUEST_JOB_CONFIG.CITY_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>city_asset_num IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.QuestJobConfig> fetchByCityAssetNum(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.QuestJobConfig> fetchByCityAssetNum(Integer... values) {
 		return fetch(QuestJobConfig.QUEST_JOB_CONFIG.CITY_ASSET_NUM, values);
 	}
 }

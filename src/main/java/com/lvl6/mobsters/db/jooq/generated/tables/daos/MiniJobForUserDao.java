@@ -15,7 +15,6 @@ import javax.annotation.Generated;
 import org.jooq.Configuration;
 import org.jooq.Record2;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -77,7 +76,7 @@ public class MiniJobForUserDao extends DAOImpl<MiniJobForUserRecord, com.lvl6.mo
 	/**
 	 * Fetch records that have <code>base_dmg_received IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobForUser> fetchByBaseDmgReceived(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobForUser> fetchByBaseDmgReceived(Integer... values) {
 		return fetch(MiniJobForUser.MINI_JOB_FOR_USER.BASE_DMG_RECEIVED, values);
 	}
 

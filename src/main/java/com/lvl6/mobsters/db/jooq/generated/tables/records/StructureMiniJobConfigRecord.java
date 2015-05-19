@@ -20,7 +20,6 @@ import org.jooq.Record3;
 import org.jooq.Row;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,9 +35,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_mini_job_config", schema = "mobsters")
-public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureMiniJobConfigRecord> implements Record3<Integer, UInteger, UInteger>, IStructureMiniJobConfig {
+public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureMiniJobConfigRecord> implements Record3<Integer, Integer, Integer>, IStructureMiniJobConfig {
 
-	private static final long serialVersionUID = -848656040;
+	private static final long serialVersionUID = -328149575;
 
 	/**
 	 * Setter for <code>mobsters.structure_mini_job_config.struct_id</code>.
@@ -64,7 +63,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * Setter for <code>mobsters.structure_mini_job_config.generated_job_limit</code>.
 	 */
 	@Override
-	public StructureMiniJobConfigRecord setGeneratedJobLimit(UInteger value) {
+	public StructureMiniJobConfigRecord setGeneratedJobLimit(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -74,15 +73,15 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 */
 	@Column(name = "generated_job_limit", precision = 7)
 	@Override
-	public UInteger getGeneratedJobLimit() {
-		return (UInteger) getValue(1);
+	public Integer getGeneratedJobLimit() {
+		return (Integer) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_mini_job_config.hours_between_job_generation</code>.
 	 */
 	@Override
-	public StructureMiniJobConfigRecord setHoursBetweenJobGeneration(UInteger value) {
+	public StructureMiniJobConfigRecord setHoursBetweenJobGeneration(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -92,8 +91,8 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 */
 	@Column(name = "hours_between_job_generation", precision = 7)
 	@Override
-	public UInteger getHoursBetweenJobGeneration() {
-		return (UInteger) getValue(2);
+	public Integer getHoursBetweenJobGeneration() {
+		return (Integer) getValue(2);
 	}
 
 	// -------------------------------------------------------------------------
@@ -116,7 +115,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, UInteger, UInteger> fieldsRow() {
+	public Row3<Integer, Integer, Integer> fieldsRow() {
 		return (Row3) super.fieldsRow();
 	}
 
@@ -124,7 +123,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, UInteger, UInteger> valuesRow() {
+	public Row3<Integer, Integer, Integer> valuesRow() {
 		return (Row3) super.valuesRow();
 	}
 
@@ -140,7 +139,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return StructureMiniJobConfig.STRUCTURE_MINI_JOB_CONFIG.GENERATED_JOB_LIMIT;
 	}
 
@@ -148,7 +147,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return StructureMiniJobConfig.STRUCTURE_MINI_JOB_CONFIG.HOURS_BETWEEN_JOB_GENERATION;
 	}
 
@@ -164,7 +163,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getGeneratedJobLimit();
 	}
 
@@ -172,7 +171,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getHoursBetweenJobGeneration();
 	}
 
@@ -189,7 +188,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureMiniJobConfigRecord value2(UInteger value) {
+	public StructureMiniJobConfigRecord value2(Integer value) {
 		setGeneratedJobLimit(value);
 		return this;
 	}
@@ -198,7 +197,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureMiniJobConfigRecord value3(UInteger value) {
+	public StructureMiniJobConfigRecord value3(Integer value) {
 		setHoursBetweenJobGeneration(value);
 		return this;
 	}
@@ -207,7 +206,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureMiniJobConfigRecord values(Integer value1, UInteger value2, UInteger value3) {
+	public StructureMiniJobConfigRecord values(Integer value1, Integer value2, Integer value3) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -251,7 +250,7 @@ public class StructureMiniJobConfigRecord extends UpdatableRecordImpl<StructureM
 	/**
 	 * Create a detached, initialised StructureMiniJobConfigRecord
 	 */
-	public StructureMiniJobConfigRecord(Integer structId, UInteger generatedJobLimit, UInteger hoursBetweenJobGeneration) {
+	public StructureMiniJobConfigRecord(Integer structId, Integer generatedJobLimit, Integer hoursBetweenJobGeneration) {
 		super(StructureMiniJobConfig.STRUCTURE_MINI_JOB_CONFIG);
 
 		setValue(0, structId);

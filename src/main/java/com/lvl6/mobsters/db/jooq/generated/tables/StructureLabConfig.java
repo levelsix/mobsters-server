@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureLabConfig extends TableImpl<StructureLabConfigRecord> {
 
-	private static final long serialVersionUID = 11388573;
+	private static final long serialVersionUID = -2129728250;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_lab_config</code>
@@ -57,7 +56,7 @@ public class StructureLabConfig extends TableImpl<StructureLabConfigRecord> {
 	/**
 	 * The column <code>mobsters.structure_lab_config.queue_size</code>.
 	 */
-	public final TableField<StructureLabConfigRecord, UByte> QUEUE_SIZE = createField("queue_size", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureLabConfigRecord, Byte> QUEUE_SIZE = createField("queue_size", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_lab_config.points_multiplier</code>.

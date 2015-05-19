@@ -38,7 +38,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 })
 public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistoryRecord> implements IPvpBattleHistory {
 
-	private static final long serialVersionUID = 1265912107;
+	private static final long serialVersionUID = 385726312;
 
 	/**
 	 * Setter for <code>mobsters.pvp_battle_history.attacker_id</code>.
@@ -549,6 +549,25 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 		return (Boolean) getValue(27);
 	}
 
+	/**
+	 * Setter for <code>mobsters.pvp_battle_history.replay_id</code>.
+	 */
+	@Override
+	public PvpBattleHistoryRecord setReplayId(String value) {
+		setValue(28, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.pvp_battle_history.replay_id</code>.
+	 */
+	@Column(name = "replay_id", length = 36)
+	@Size(max = 36)
+	@Override
+	public String getReplayId() {
+		return (String) getValue(28);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -598,6 +617,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 		setDisplayToDefender(from.getDisplayToDefender());
 		setPvpDmgMultiplier(from.getPvpDmgMultiplier());
 		setClanAvenged(from.getClanAvenged());
+		setReplayId(from.getReplayId());
 	}
 
 	/**
@@ -623,7 +643,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	/**
 	 * Create a detached, initialised PvpBattleHistoryRecord
 	 */
-	public PvpBattleHistoryRecord(String attackerId, String defenderId, Timestamp battleEndTime, Timestamp battleStartTime, Integer attackerEloChange, Integer attackerEloBefore, Integer attackerEloAfter, Integer defenderEloChange, Integer defenderEloBefore, Integer defenderEloAfter, Integer attackerPrevLeague, Integer attackerCurLeague, Integer defenderPrevLeague, Integer defenderCurLeague, Integer attackerPrevRank, Integer attackerCurRank, Integer defenderPrevRank, Integer defenderCurRank, Integer attackerCashChange, Integer defenderCashChange, Integer attackerOilChange, Integer defenderOilChange, Boolean attackerWon, Boolean cancelled, Boolean exactedRevenge, Boolean displayToDefender, Double pvpDmgMultiplier, Boolean clanAvenged) {
+	public PvpBattleHistoryRecord(String attackerId, String defenderId, Timestamp battleEndTime, Timestamp battleStartTime, Integer attackerEloChange, Integer attackerEloBefore, Integer attackerEloAfter, Integer defenderEloChange, Integer defenderEloBefore, Integer defenderEloAfter, Integer attackerPrevLeague, Integer attackerCurLeague, Integer defenderPrevLeague, Integer defenderCurLeague, Integer attackerPrevRank, Integer attackerCurRank, Integer defenderPrevRank, Integer defenderCurRank, Integer attackerCashChange, Integer defenderCashChange, Integer attackerOilChange, Integer defenderOilChange, Boolean attackerWon, Boolean cancelled, Boolean exactedRevenge, Boolean displayToDefender, Double pvpDmgMultiplier, Boolean clanAvenged, String replayId) {
 		super(PvpBattleHistory.PVP_BATTLE_HISTORY);
 
 		setValue(0, attackerId);
@@ -654,5 +674,6 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 		setValue(25, displayToDefender);
 		setValue(26, pvpDmgMultiplier);
 		setValue(27, clanAvenged);
+		setValue(28, replayId);
 	}
 }

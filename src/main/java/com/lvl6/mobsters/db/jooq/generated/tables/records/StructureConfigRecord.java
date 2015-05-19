@@ -21,8 +21,6 @@ import org.jooq.Record22;
 import org.jooq.Row;
 import org.jooq.Row22;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -38,15 +36,15 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_config", schema = "mobsters")
-public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRecord> implements Record22<UInteger, String, UByte, String, String, UInteger, UInteger, UInteger, UInteger, UInteger, UInteger, String, Double, Double, String, String, String, Double, Double, Double, Integer, Integer>, IStructureConfig {
+public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRecord> implements Record22<Integer, String, Byte, String, String, Integer, Integer, Integer, Integer, Integer, Integer, String, Double, Double, String, String, String, Double, Double, Double, Integer, Integer>, IStructureConfig {
 
-	private static final long serialVersionUID = -1867259646;
+	private static final long serialVersionUID = 820615025;
 
 	/**
 	 * Setter for <code>mobsters.structure_config.id</code>.
 	 */
 	@Override
-	public StructureConfigRecord setId(UInteger value) {
+	public StructureConfigRecord setId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -58,8 +56,8 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	@Column(name = "id", unique = true, nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getId() {
-		return (UInteger) getValue(0);
+	public Integer getId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
@@ -86,7 +84,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * Setter for <code>mobsters.structure_config.level</code>.
 	 */
 	@Override
-	public StructureConfigRecord setLevel(UByte value) {
+	public StructureConfigRecord setLevel(Byte value) {
 		setValue(2, value);
 		return this;
 	}
@@ -97,8 +95,8 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	@Column(name = "level", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getLevel() {
-		return (UByte) getValue(2);
+	public Byte getLevel() {
+		return (Byte) getValue(2);
 	}
 
 	/**
@@ -145,7 +143,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * Setter for <code>mobsters.structure_config.build_cost</code>.
 	 */
 	@Override
-	public StructureConfigRecord setBuildCost(UInteger value) {
+	public StructureConfigRecord setBuildCost(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -156,15 +154,15 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	@Column(name = "build_cost", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getBuildCost() {
-		return (UInteger) getValue(5);
+	public Integer getBuildCost() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_config.minutes_to_build</code>.
 	 */
 	@Override
-	public StructureConfigRecord setMinutesToBuild(UInteger value) {
+	public StructureConfigRecord setMinutesToBuild(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -175,15 +173,15 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	@Column(name = "minutes_to_build", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMinutesToBuild() {
-		return (UInteger) getValue(6);
+	public Integer getMinutesToBuild() {
+		return (Integer) getValue(6);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_config.width</code>.
 	 */
 	@Override
-	public StructureConfigRecord setWidth(UInteger value) {
+	public StructureConfigRecord setWidth(Integer value) {
 		setValue(7, value);
 		return this;
 	}
@@ -194,15 +192,15 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	@Column(name = "width", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getWidth() {
-		return (UInteger) getValue(7);
+	public Integer getWidth() {
+		return (Integer) getValue(7);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_config.height</code>.
 	 */
 	@Override
-	public StructureConfigRecord setHeight(UInteger value) {
+	public StructureConfigRecord setHeight(Integer value) {
 		setValue(8, value);
 		return this;
 	}
@@ -213,15 +211,15 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	@Column(name = "height", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getHeight() {
-		return (UInteger) getValue(8);
+	public Integer getHeight() {
+		return (Integer) getValue(8);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_config.predecessor_struct_id</code>. id in in this table
 	 */
 	@Override
-	public StructureConfigRecord setPredecessorStructId(UInteger value) {
+	public StructureConfigRecord setPredecessorStructId(Integer value) {
 		setValue(9, value);
 		return this;
 	}
@@ -231,15 +229,15 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 */
 	@Column(name = "predecessor_struct_id", precision = 10)
 	@Override
-	public UInteger getPredecessorStructId() {
-		return (UInteger) getValue(9);
+	public Integer getPredecessorStructId() {
+		return (Integer) getValue(9);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_config.successor_struct_id</code>. id in in this table
 	 */
 	@Override
-	public StructureConfigRecord setSuccessorStructId(UInteger value) {
+	public StructureConfigRecord setSuccessorStructId(Integer value) {
 		setValue(10, value);
 		return this;
 	}
@@ -249,8 +247,8 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 */
 	@Column(name = "successor_struct_id", precision = 10)
 	@Override
-	public UInteger getSuccessorStructId() {
-		return (UInteger) getValue(10);
+	public Integer getSuccessorStructId() {
+		return (Integer) getValue(10);
 	}
 
 	/**
@@ -463,7 +461,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record1<UInteger> key() {
+	public Record1<Integer> key() {
 		return (Record1) super.key();
 	}
 
@@ -475,7 +473,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row22<UInteger, String, UByte, String, String, UInteger, UInteger, UInteger, UInteger, UInteger, UInteger, String, Double, Double, String, String, String, Double, Double, Double, Integer, Integer> fieldsRow() {
+	public Row22<Integer, String, Byte, String, String, Integer, Integer, Integer, Integer, Integer, Integer, String, Double, Double, String, String, String, Double, Double, Double, Integer, Integer> fieldsRow() {
 		return (Row22) super.fieldsRow();
 	}
 
@@ -483,7 +481,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row22<UInteger, String, UByte, String, String, UInteger, UInteger, UInteger, UInteger, UInteger, UInteger, String, Double, Double, String, String, String, Double, Double, Double, Integer, Integer> valuesRow() {
+	public Row22<Integer, String, Byte, String, String, Integer, Integer, Integer, Integer, Integer, Integer, String, Double, Double, String, String, String, Double, Double, Double, Integer, Integer> valuesRow() {
 		return (Row22) super.valuesRow();
 	}
 
@@ -491,7 +489,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return StructureConfig.STRUCTURE_CONFIG.ID;
 	}
 
@@ -507,7 +505,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field3() {
+	public Field<Byte> field3() {
 		return StructureConfig.STRUCTURE_CONFIG.LEVEL;
 	}
 
@@ -531,7 +529,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return StructureConfig.STRUCTURE_CONFIG.BUILD_COST;
 	}
 
@@ -539,7 +537,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field7() {
+	public Field<Integer> field7() {
 		return StructureConfig.STRUCTURE_CONFIG.MINUTES_TO_BUILD;
 	}
 
@@ -547,7 +545,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field8() {
+	public Field<Integer> field8() {
 		return StructureConfig.STRUCTURE_CONFIG.WIDTH;
 	}
 
@@ -555,7 +553,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field9() {
+	public Field<Integer> field9() {
 		return StructureConfig.STRUCTURE_CONFIG.HEIGHT;
 	}
 
@@ -563,7 +561,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field10() {
+	public Field<Integer> field10() {
 		return StructureConfig.STRUCTURE_CONFIG.PREDECESSOR_STRUCT_ID;
 	}
 
@@ -571,7 +569,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field11() {
+	public Field<Integer> field11() {
 		return StructureConfig.STRUCTURE_CONFIG.SUCCESSOR_STRUCT_ID;
 	}
 
@@ -667,7 +665,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getId();
 	}
 
@@ -683,7 +681,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value3() {
+	public Byte value3() {
 		return getLevel();
 	}
 
@@ -707,7 +705,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getBuildCost();
 	}
 
@@ -715,7 +713,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value7() {
+	public Integer value7() {
 		return getMinutesToBuild();
 	}
 
@@ -723,7 +721,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value8() {
+	public Integer value8() {
 		return getWidth();
 	}
 
@@ -731,7 +729,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value9() {
+	public Integer value9() {
 		return getHeight();
 	}
 
@@ -739,7 +737,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value10() {
+	public Integer value10() {
 		return getPredecessorStructId();
 	}
 
@@ -747,7 +745,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value11() {
+	public Integer value11() {
 		return getSuccessorStructId();
 	}
 
@@ -843,7 +841,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value1(UInteger value) {
+	public StructureConfigRecord value1(Integer value) {
 		setId(value);
 		return this;
 	}
@@ -861,7 +859,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value3(UByte value) {
+	public StructureConfigRecord value3(Byte value) {
 		setLevel(value);
 		return this;
 	}
@@ -888,7 +886,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value6(UInteger value) {
+	public StructureConfigRecord value6(Integer value) {
 		setBuildCost(value);
 		return this;
 	}
@@ -897,7 +895,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value7(UInteger value) {
+	public StructureConfigRecord value7(Integer value) {
 		setMinutesToBuild(value);
 		return this;
 	}
@@ -906,7 +904,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value8(UInteger value) {
+	public StructureConfigRecord value8(Integer value) {
 		setWidth(value);
 		return this;
 	}
@@ -915,7 +913,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value9(UInteger value) {
+	public StructureConfigRecord value9(Integer value) {
 		setHeight(value);
 		return this;
 	}
@@ -924,7 +922,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value10(UInteger value) {
+	public StructureConfigRecord value10(Integer value) {
 		setPredecessorStructId(value);
 		return this;
 	}
@@ -933,7 +931,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord value11(UInteger value) {
+	public StructureConfigRecord value11(Integer value) {
 		setSuccessorStructId(value);
 		return this;
 	}
@@ -1041,7 +1039,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureConfigRecord values(UInteger value1, String value2, UByte value3, String value4, String value5, UInteger value6, UInteger value7, UInteger value8, UInteger value9, UInteger value10, UInteger value11, String value12, Double value13, Double value14, String value15, String value16, String value17, Double value18, Double value19, Double value20, Integer value21, Integer value22) {
+	public StructureConfigRecord values(Integer value1, String value2, Byte value3, String value4, String value5, Integer value6, Integer value7, Integer value8, Integer value9, Integer value10, Integer value11, String value12, Double value13, Double value14, String value15, String value16, String value17, Double value18, Double value19, Double value20, Integer value21, Integer value22) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -1123,7 +1121,7 @@ public class StructureConfigRecord extends UpdatableRecordImpl<StructureConfigRe
 	/**
 	 * Create a detached, initialised StructureConfigRecord
 	 */
-	public StructureConfigRecord(UInteger id, String name, UByte level, String structType, String buildResourceType, UInteger buildCost, UInteger minutesToBuild, UInteger width, UInteger height, UInteger predecessorStructId, UInteger successorStructId, String imgName, Double imgVerticalPixelOffset, Double imgHorizontalPixelOffset, String description, String shortDescription, String shadowImgName, Double shadowVerticalOffset, Double shadowHorizontalOffset, Double shadowScale, Integer expReward, Integer strength) {
+	public StructureConfigRecord(Integer id, String name, Byte level, String structType, String buildResourceType, Integer buildCost, Integer minutesToBuild, Integer width, Integer height, Integer predecessorStructId, Integer successorStructId, String imgName, Double imgVerticalPixelOffset, Double imgHorizontalPixelOffset, String description, String shortDescription, String shadowImgName, Double shadowVerticalOffset, Double shadowHorizontalOffset, Double shadowScale, Integer expReward, Integer strength) {
 		super(StructureConfig.STRUCTURE_CONFIG);
 
 		setValue(0, id);

@@ -20,7 +20,6 @@ import org.jooq.Record4;
 import org.jooq.Row;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -36,9 +35,9 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_hospital_config", schema = "mobsters")
-public class StructureHospitalConfigRecord extends UpdatableRecordImpl<StructureHospitalConfigRecord> implements Record4<Integer, UByte, Double, Double>, IStructureHospitalConfig {
+public class StructureHospitalConfigRecord extends UpdatableRecordImpl<StructureHospitalConfigRecord> implements Record4<Integer, Byte, Double, Double>, IStructureHospitalConfig {
 
-	private static final long serialVersionUID = 790300690;
+	private static final long serialVersionUID = 115169246;
 
 	/**
 	 * Setter for <code>mobsters.structure_hospital_config.struct_id</code>.
@@ -64,7 +63,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * Setter for <code>mobsters.structure_hospital_config.queue_size</code>.
 	 */
 	@Override
-	public StructureHospitalConfigRecord setQueueSize(UByte value) {
+	public StructureHospitalConfigRecord setQueueSize(Byte value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,8 +74,8 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "queue_size", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getQueueSize() {
-		return (UByte) getValue(1);
+	public Byte getQueueSize() {
+		return (Byte) getValue(1);
 	}
 
 	/**
@@ -136,7 +135,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<Integer, UByte, Double, Double> fieldsRow() {
+	public Row4<Integer, Byte, Double, Double> fieldsRow() {
 		return (Row4) super.fieldsRow();
 	}
 
@@ -144,7 +143,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<Integer, UByte, Double, Double> valuesRow() {
+	public Row4<Integer, Byte, Double, Double> valuesRow() {
 		return (Row4) super.valuesRow();
 	}
 
@@ -160,7 +159,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field2() {
+	public Field<Byte> field2() {
 		return StructureHospitalConfig.STRUCTURE_HOSPITAL_CONFIG.QUEUE_SIZE;
 	}
 
@@ -192,7 +191,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value2() {
+	public Byte value2() {
 		return getQueueSize();
 	}
 
@@ -225,7 +224,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureHospitalConfigRecord value2(UByte value) {
+	public StructureHospitalConfigRecord value2(Byte value) {
 		setQueueSize(value);
 		return this;
 	}
@@ -252,7 +251,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureHospitalConfigRecord values(Integer value1, UByte value2, Double value3, Double value4) {
+	public StructureHospitalConfigRecord values(Integer value1, Byte value2, Double value3, Double value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -298,7 +297,7 @@ public class StructureHospitalConfigRecord extends UpdatableRecordImpl<Structure
 	/**
 	 * Create a detached, initialised StructureHospitalConfigRecord
 	 */
-	public StructureHospitalConfigRecord(Integer structId, UByte queueSize, Double healthPerSecond, Double secsToFullyHealMultiplier) {
+	public StructureHospitalConfigRecord(Integer structId, Byte queueSize, Double healthPerSecond, Double secsToFullyHealMultiplier) {
 		super(StructureHospitalConfig.STRUCTURE_HOSPITAL_CONFIG);
 
 		setValue(0, structId);

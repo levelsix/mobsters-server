@@ -10,6 +10,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.AlertOnStartup;
 import com.lvl6.mobsters.db.jooq.generated.tables.BattleItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.BattleItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.BattleItemQueueForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.BattleReplayForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.BoardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.BoardObstacleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.BoardPropertyConfig;
@@ -55,13 +56,14 @@ import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionPurchaseForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.FileDownloadConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftForTangoUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.GoldSaleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -136,6 +138,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceGeneratorConf
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceStorageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTeamCenterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserClientState;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserCompleted;
@@ -207,6 +211,11 @@ public class Tables {
 	 * The table mobsters.battle_item_queue_for_user
 	 */
 	public static final BattleItemQueueForUser BATTLE_ITEM_QUEUE_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.BattleItemQueueForUser.BATTLE_ITEM_QUEUE_FOR_USER;
+
+	/**
+	 * The table mobsters.battle_replay_for_user
+	 */
+	public static final BattleReplayForUser BATTLE_REPLAY_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.BattleReplayForUser.BATTLE_REPLAY_FOR_USER;
 
 	/**
 	 * The table mobsters.board_config
@@ -434,6 +443,16 @@ public class Tables {
 	public static final FileDownloadConfig FILE_DOWNLOAD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.FileDownloadConfig.FILE_DOWNLOAD_CONFIG;
 
 	/**
+	 * The table mobsters.gift_for_tango_user
+	 */
+	public static final GiftForTangoUser GIFT_FOR_TANGO_USER = com.lvl6.mobsters.db.jooq.generated.tables.GiftForTangoUser.GIFT_FOR_TANGO_USER;
+
+	/**
+	 * The table mobsters.gift_for_user
+	 */
+	public static final GiftForUser GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.GiftForUser.GIFT_FOR_USER;
+
+	/**
 	 * The table mobsters.gold_sale_config
 	 */
 	public static final GoldSaleConfig GOLD_SALE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.GoldSaleConfig.GOLD_SALE_CONFIG;
@@ -462,11 +481,6 @@ public class Tables {
 	 * The table mobsters.item_secret_gift_for_user
 	 */
 	public static final ItemSecretGiftForUser ITEM_SECRET_GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER;
-
-	/**
-	 * VIEW
-	 */
-	public static final LbCurHist LB_CUR_HIST = com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist.LB_CUR_HIST;
 
 	/**
 	 * The table mobsters.load_testing_events
@@ -837,6 +851,16 @@ public class Tables {
 	 * The table mobsters.structure_town_hall_config
 	 */
 	public static final StructureTownHallConfig STRUCTURE_TOWN_HALL_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG;
+
+	/**
+	 * The table mobsters.tango_gift_config
+	 */
+	public static final TangoGiftConfig TANGO_GIFT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig.TANGO_GIFT_CONFIG;
+
+	/**
+	 * The table mobsters.tango_gift_reward_config
+	 */
+	public static final TangoGiftRewardConfig TANGO_GIFT_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig.TANGO_GIFT_REWARD_CONFIG;
 
 	/**
 	 * The table mobsters.task_config

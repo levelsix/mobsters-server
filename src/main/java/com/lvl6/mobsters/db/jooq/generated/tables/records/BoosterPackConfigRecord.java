@@ -21,7 +21,6 @@ import org.jooq.Record13;
 import org.jooq.Row;
 import org.jooq.Row13;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "booster_pack_config", schema = "mobsters")
-public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConfigRecord> implements Record13<Integer, String, UInteger, Integer, String, String, String, String, String, Integer, Boolean, Integer, String>, IBoosterPackConfig {
+public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConfigRecord> implements Record13<Integer, String, Integer, Integer, String, String, String, String, String, Integer, Boolean, Integer, String>, IBoosterPackConfig {
 
-	private static final long serialVersionUID = 1343767307;
+	private static final long serialVersionUID = 139810053;
 
 	/**
 	 * Setter for <code>mobsters.booster_pack_config.id</code>.
@@ -84,7 +83,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * Setter for <code>mobsters.booster_pack_config.gem_price</code>.
 	 */
 	@Override
-	public BoosterPackConfigRecord setGemPrice(UInteger value) {
+	public BoosterPackConfigRecord setGemPrice(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -94,8 +93,8 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 */
 	@Column(name = "gem_price", precision = 7)
 	@Override
-	public UInteger getGemPrice() {
-		return (UInteger) getValue(2);
+	public Integer getGemPrice() {
+		return (Integer) getValue(2);
 	}
 
 	/**
@@ -304,7 +303,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row13<Integer, String, UInteger, Integer, String, String, String, String, String, Integer, Boolean, Integer, String> fieldsRow() {
+	public Row13<Integer, String, Integer, Integer, String, String, String, String, String, Integer, Boolean, Integer, String> fieldsRow() {
 		return (Row13) super.fieldsRow();
 	}
 
@@ -312,7 +311,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row13<Integer, String, UInteger, Integer, String, String, String, String, String, Integer, Boolean, Integer, String> valuesRow() {
+	public Row13<Integer, String, Integer, Integer, String, String, String, String, String, Integer, Boolean, Integer, String> valuesRow() {
 		return (Row13) super.valuesRow();
 	}
 
@@ -336,7 +335,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return BoosterPackConfig.BOOSTER_PACK_CONFIG.GEM_PRICE;
 	}
 
@@ -440,7 +439,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getGemPrice();
 	}
 
@@ -546,7 +545,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackConfigRecord value3(UInteger value) {
+	public BoosterPackConfigRecord value3(Integer value) {
 		setGemPrice(value);
 		return this;
 	}
@@ -645,7 +644,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackConfigRecord values(Integer value1, String value2, UInteger value3, Integer value4, String value5, String value6, String value7, String value8, String value9, Integer value10, Boolean value11, Integer value12, String value13) {
+	public BoosterPackConfigRecord values(Integer value1, String value2, Integer value3, Integer value4, String value5, String value6, String value7, String value8, String value9, Integer value10, Boolean value11, Integer value12, String value13) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -709,7 +708,7 @@ public class BoosterPackConfigRecord extends UpdatableRecordImpl<BoosterPackConf
 	/**
 	 * Create a detached, initialised BoosterPackConfigRecord
 	 */
-	public BoosterPackConfigRecord(Integer id, String name, UInteger gemPrice, Integer gachaCreditsPrice, String listBackgroundImgName, String listDescription, String navBarImgName, String navTitleImgName, String machineImgName, Integer expPerItem, Boolean displayToUser, Integer riggedId, String type) {
+	public BoosterPackConfigRecord(Integer id, String name, Integer gemPrice, Integer gachaCreditsPrice, String listBackgroundImgName, String listDescription, String navBarImgName, String navTitleImgName, String machineImgName, Integer expPerItem, Boolean displayToUser, Integer riggedId, String type) {
 		super(BoosterPackConfig.BOOSTER_PACK_CONFIG);
 
 		setValue(0, id);

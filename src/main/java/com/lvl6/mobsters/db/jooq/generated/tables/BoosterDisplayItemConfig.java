@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoosterDisplayItemConfig extends TableImpl<BoosterDisplayItemConfigRecord> {
 
-	private static final long serialVersionUID = 1679935029;
+	private static final long serialVersionUID = -884637740;
 
 	/**
 	 * The reference instance of <code>mobsters.booster_display_item_config</code>
@@ -58,7 +57,7 @@ public class BoosterDisplayItemConfig extends TableImpl<BoosterDisplayItemConfig
 	/**
 	 * The column <code>mobsters.booster_display_item_config.booster_pack_id</code>.
 	 */
-	public final TableField<BoosterDisplayItemConfigRecord, UInteger> BOOSTER_PACK_ID = createField("booster_pack_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterDisplayItemConfigRecord, Integer> BOOSTER_PACK_ID = createField("booster_pack_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_display_item_config.is_monster</code>.
@@ -78,12 +77,12 @@ public class BoosterDisplayItemConfig extends TableImpl<BoosterDisplayItemConfig
 	/**
 	 * The column <code>mobsters.booster_display_item_config.gem_reward</code>.
 	 */
-	public final TableField<BoosterDisplayItemConfigRecord, UInteger> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterDisplayItemConfigRecord, Integer> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_display_item_config.quantity</code>. how many times this booster_item appears in the spinner
 	 */
-	public final TableField<BoosterDisplayItemConfigRecord, UInteger> QUANTITY = createField("quantity", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "how many times this booster_item appears in the spinner");
+	public final TableField<BoosterDisplayItemConfigRecord, Integer> QUANTITY = createField("quantity", org.jooq.impl.SQLDataType.INTEGER, this, "how many times this booster_item appears in the spinner");
 
 	/**
 	 * The column <code>mobsters.booster_display_item_config.item_id</code>.

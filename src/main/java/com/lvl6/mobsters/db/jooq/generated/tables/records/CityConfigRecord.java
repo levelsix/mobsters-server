@@ -21,7 +21,6 @@ import org.jooq.Record10;
 import org.jooq.Row;
 import org.jooq.Row10;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,15 +36,15 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "city_config", schema = "mobsters")
-public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> implements Record10<UInteger, String, String, Double, Double, String, String, Double, Double, String>, ICityConfig {
+public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> implements Record10<Integer, String, String, Double, Double, String, String, Double, Double, String>, ICityConfig {
 
-	private static final long serialVersionUID = 103961137;
+	private static final long serialVersionUID = -1678592744;
 
 	/**
 	 * Setter for <code>mobsters.city_config.id</code>.
 	 */
 	@Override
-	public CityConfigRecord setId(UInteger value) {
+	public CityConfigRecord setId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -57,8 +56,8 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	@Column(name = "id", unique = true, nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getId() {
-		return (UInteger) getValue(0);
+	public Integer getId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
@@ -240,7 +239,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record1<UInteger> key() {
+	public Record1<Integer> key() {
 		return (Record1) super.key();
 	}
 
@@ -252,7 +251,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<UInteger, String, String, Double, Double, String, String, Double, Double, String> fieldsRow() {
+	public Row10<Integer, String, String, Double, Double, String, String, Double, Double, String> fieldsRow() {
 		return (Row10) super.fieldsRow();
 	}
 
@@ -260,7 +259,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<UInteger, String, String, Double, Double, String, String, Double, Double, String> valuesRow() {
+	public Row10<Integer, String, String, Double, Double, String, String, Double, Double, String> valuesRow() {
 		return (Row10) super.valuesRow();
 	}
 
@@ -268,7 +267,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return CityConfig.CITY_CONFIG.ID;
 	}
 
@@ -348,7 +347,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getId();
 	}
 
@@ -428,7 +427,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityConfigRecord value1(UInteger value) {
+	public CityConfigRecord value1(Integer value) {
 		setId(value);
 		return this;
 	}
@@ -518,7 +517,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityConfigRecord values(UInteger value1, String value2, String value3, Double value4, Double value5, String value6, String value7, Double value8, Double value9, String value10) {
+	public CityConfigRecord values(Integer value1, String value2, String value3, Double value4, Double value5, String value6, String value7, Double value8, Double value9, String value10) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -576,7 +575,7 @@ public class CityConfigRecord extends UpdatableRecordImpl<CityConfigRecord> impl
 	/**
 	 * Create a detached, initialised CityConfigRecord
 	 */
-	public CityConfigRecord(UInteger id, String name, String mapImgName, Double centerXcoord, Double centerYcoord, String roadImgName, String mapTmxName, Double roadImgPosX, Double roadImgPosY, String attackMapLabelImgName) {
+	public CityConfigRecord(Integer id, String name, String mapImgName, Double centerXcoord, Double centerYcoord, String roadImgName, String mapTmxName, Double roadImgPosX, Double roadImgPosY, String attackMapLabelImgName) {
 		super(CityConfig.CITY_CONFIG);
 
 		setValue(0, id);

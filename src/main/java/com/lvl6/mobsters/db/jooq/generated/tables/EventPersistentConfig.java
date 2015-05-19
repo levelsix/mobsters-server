@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EventPersistentConfig extends TableImpl<EventPersistentConfigRecord> {
 
-	private static final long serialVersionUID = 49188742;
+	private static final long serialVersionUID = -1335720424;
 
 	/**
 	 * The reference instance of <code>mobsters.event_persistent_config</code>
@@ -64,22 +62,22 @@ public class EventPersistentConfig extends TableImpl<EventPersistentConfigRecord
 	/**
 	 * The column <code>mobsters.event_persistent_config.start_hour</code>.
 	 */
-	public final TableField<EventPersistentConfigRecord, UByte> START_HOUR = createField("start_hour", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<EventPersistentConfigRecord, Byte> START_HOUR = createField("start_hour", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.event_persistent_config.event_duration_minutes</code>.
 	 */
-	public final TableField<EventPersistentConfigRecord, UInteger> EVENT_DURATION_MINUTES = createField("event_duration_minutes", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<EventPersistentConfigRecord, Integer> EVENT_DURATION_MINUTES = createField("event_duration_minutes", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.event_persistent_config.task_id</code>. Refers to a task in task table
 	 */
-	public final TableField<EventPersistentConfigRecord, UInteger> TASK_ID = createField("task_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "Refers to a task in task table");
+	public final TableField<EventPersistentConfigRecord, Integer> TASK_ID = createField("task_id", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "Refers to a task in task table");
 
 	/**
 	 * The column <code>mobsters.event_persistent_config.cooldown_minutes</code>.
 	 */
-	public final TableField<EventPersistentConfigRecord, UInteger> COOLDOWN_MINUTES = createField("cooldown_minutes", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<EventPersistentConfigRecord, Integer> COOLDOWN_MINUTES = createField("cooldown_minutes", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.event_persistent_config.event_type</code>. what kind of event this is.

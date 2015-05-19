@@ -19,7 +19,6 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Record1;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,7 +36,7 @@ import org.jooq.types.UInteger;
 @Table(name = "user", schema = "mobsters")
 public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser {
 
-	private static final long serialVersionUID = 461876446;
+	private static final long serialVersionUID = 2114283124;
 
 	/**
 	 * Setter for <code>mobsters.user.id</code>.
@@ -83,7 +82,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 * Setter for <code>mobsters.user.level</code>.
 	 */
 	@Override
-	public UserRecord setLevel(UInteger value) {
+	public UserRecord setLevel(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -94,15 +93,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "level", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getLevel() {
-		return (UInteger) getValue(2);
+	public Integer getLevel() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.gems</code>.
 	 */
 	@Override
-	public UserRecord setGems(UInteger value) {
+	public UserRecord setGems(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -113,15 +112,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "gems", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getGems() {
-		return (UInteger) getValue(3);
+	public Integer getGems() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.cash</code>. soft currency
 	 */
 	@Override
-	public UserRecord setCash(UInteger value) {
+	public UserRecord setCash(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -132,15 +131,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "cash", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getCash() {
-		return (UInteger) getValue(4);
+	public Integer getCash() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.oil</code>. soft currency
 	 */
 	@Override
-	public UserRecord setOil(UInteger value) {
+	public UserRecord setOil(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -151,15 +150,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "oil", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getOil() {
-		return (UInteger) getValue(5);
+	public Integer getOil() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.experience</code>.
 	 */
 	@Override
-	public UserRecord setExperience(UInteger value) {
+	public UserRecord setExperience(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -170,15 +169,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "experience", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getExperience() {
-		return (UInteger) getValue(6);
+	public Integer getExperience() {
+		return (Integer) getValue(6);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.tasks_completed</code>.
 	 */
 	@Override
-	public UserRecord setTasksCompleted(UInteger value) {
+	public UserRecord setTasksCompleted(Integer value) {
 		setValue(7, value);
 		return this;
 	}
@@ -188,8 +187,8 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 */
 	@Column(name = "tasks_completed", precision = 10)
 	@Override
-	public UInteger getTasksCompleted() {
-		return (UInteger) getValue(7);
+	public Integer getTasksCompleted() {
+		return (Integer) getValue(7);
 	}
 
 	/**
@@ -215,7 +214,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 * Setter for <code>mobsters.user.num_referrals</code>.
 	 */
 	@Override
-	public UserRecord setNumReferrals(UInteger value) {
+	public UserRecord setNumReferrals(Integer value) {
 		setValue(9, value);
 		return this;
 	}
@@ -225,8 +224,8 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 */
 	@Column(name = "num_referrals", precision = 10)
 	@Override
-	public UInteger getNumReferrals() {
-		return (UInteger) getValue(9);
+	public Integer getNumReferrals() {
+		return (Integer) getValue(9);
 	}
 
 	/**
@@ -309,7 +308,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 * Setter for <code>mobsters.user.num_badges</code>.
 	 */
 	@Override
-	public UserRecord setNumBadges(UInteger value) {
+	public UserRecord setNumBadges(Integer value) {
 		setValue(14, value);
 		return this;
 	}
@@ -319,8 +318,8 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 */
 	@Column(name = "num_badges", precision = 10)
 	@Override
-	public UInteger getNumBadges() {
-		return (UInteger) getValue(14);
+	public Integer getNumBadges() {
+		return (Integer) getValue(14);
 	}
 
 	/**
@@ -402,7 +401,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 * Setter for <code>mobsters.user.num_coins_retrieved_from_structs</code>.
 	 */
 	@Override
-	public UserRecord setNumCoinsRetrievedFromStructs(UInteger value) {
+	public UserRecord setNumCoinsRetrievedFromStructs(Integer value) {
 		setValue(19, value);
 		return this;
 	}
@@ -413,15 +412,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "num_coins_retrieved_from_structs", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getNumCoinsRetrievedFromStructs() {
-		return (UInteger) getValue(19);
+	public Integer getNumCoinsRetrievedFromStructs() {
+		return (Integer) getValue(19);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.num_oil_retrieved_from_structs</code>.
 	 */
 	@Override
-	public UserRecord setNumOilRetrievedFromStructs(UInteger value) {
+	public UserRecord setNumOilRetrievedFromStructs(Integer value) {
 		setValue(20, value);
 		return this;
 	}
@@ -432,15 +431,15 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Column(name = "num_oil_retrieved_from_structs", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getNumOilRetrievedFromStructs() {
-		return (UInteger) getValue(20);
+	public Integer getNumOilRetrievedFromStructs() {
+		return (Integer) getValue(20);
 	}
 
 	/**
 	 * Setter for <code>mobsters.user.num_consecutive_days_played</code>.
 	 */
 	@Override
-	public UserRecord setNumConsecutiveDaysPlayed(UInteger value) {
+	public UserRecord setNumConsecutiveDaysPlayed(Integer value) {
 		setValue(21, value);
 		return this;
 	}
@@ -450,8 +449,8 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 */
 	@Column(name = "num_consecutive_days_played", precision = 10)
 	@Override
-	public UInteger getNumConsecutiveDaysPlayed() {
-		return (UInteger) getValue(21);
+	public Integer getNumConsecutiveDaysPlayed() {
+		return (Integer) getValue(21);
 	}
 
 	/**
@@ -908,7 +907,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	 * Setter for <code>mobsters.user.total_strength</code>.
 	 */
 	@Override
-	public UserRecord setTotalStrength(Long value) {
+	public UserRecord setTotalStrength(Integer value) {
 		setValue(46, value);
 		return this;
 	}
@@ -916,10 +915,10 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	/**
 	 * Getter for <code>mobsters.user.total_strength</code>.
 	 */
-	@Column(name = "total_strength", precision = 19)
+	@Column(name = "total_strength", precision = 10)
 	@Override
-	public Long getTotalStrength() {
-		return (Long) getValue(46);
+	public Integer getTotalStrength() {
+		return (Integer) getValue(46);
 	}
 
 	/**
@@ -960,6 +959,43 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	@Override
 	public Integer getGachaCredits() {
 		return (Integer) getValue(48);
+	}
+
+	/**
+	 * Setter for <code>mobsters.user.last_tango_gift_sent_time</code>.
+	 */
+	@Override
+	public UserRecord setLastTangoGiftSentTime(Timestamp value) {
+		setValue(49, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user.last_tango_gift_sent_time</code>.
+	 */
+	@Column(name = "last_tango_gift_sent_time")
+	@Override
+	public Timestamp getLastTangoGiftSentTime() {
+		return (Timestamp) getValue(49);
+	}
+
+	/**
+	 * Setter for <code>mobsters.user.tango_id</code>.
+	 */
+	@Override
+	public UserRecord setTangoId(String value) {
+		setValue(50, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user.tango_id</code>.
+	 */
+	@Column(name = "tango_id", length = 100)
+	@Size(max = 100)
+	@Override
+	public String getTangoId() {
+		return (String) getValue(50);
 	}
 
 	// -------------------------------------------------------------------------
@@ -1032,6 +1068,8 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 		setTotalStrength(from.getTotalStrength());
 		setSegmentationGroup(from.getSegmentationGroup());
 		setGachaCredits(from.getGachaCredits());
+		setLastTangoGiftSentTime(from.getLastTangoGiftSentTime());
+		setTangoId(from.getTangoId());
 	}
 
 	/**
@@ -1057,7 +1095,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	/**
 	 * Create a detached, initialised UserRecord
 	 */
-	public UserRecord(String id, String name, UInteger level, UInteger gems, UInteger cash, UInteger oil, UInteger experience, UInteger tasksCompleted, String referralCode, UInteger numReferrals, String udidForHistory, Timestamp lastLogin, Timestamp lastLogout, String deviceToken, UInteger numBadges, Byte isFake, Timestamp createTime, Byte isAdmin, String apsalarId, UInteger numCoinsRetrievedFromStructs, UInteger numOilRetrievedFromStructs, UInteger numConsecutiveDaysPlayed, String clanId, Timestamp lastWallPostNotificationTime, Integer kabamNaid, Byte hasReceivedFbReward, Integer numBeginnerSalesPurchased, String facebookId, Boolean fbIdSetOnUserCreate, String gameCenterId, String udid, Timestamp lastObstacleSpawnedTime, Integer numObstaclesRemoved, Timestamp lastMiniJobGeneratedTime, Integer avatarMonsterId, String email, String fbData, Timestamp lastFreeBoosterPackTime, Integer clanHelps, Timestamp lastSecretGiftCollectTime, String pvpDefendingMessage, Timestamp lastTeamDonateSolicitation, Boolean boughtRiggedBoosterPack, Integer salesValue, Timestamp salesLastPurchaseTime, Boolean salesJumpTwoTiers, Long totalStrength, Integer segmentationGroup, Integer gachaCredits) {
+	public UserRecord(String id, String name, Integer level, Integer gems, Integer cash, Integer oil, Integer experience, Integer tasksCompleted, String referralCode, Integer numReferrals, String udidForHistory, Timestamp lastLogin, Timestamp lastLogout, String deviceToken, Integer numBadges, Byte isFake, Timestamp createTime, Byte isAdmin, String apsalarId, Integer numCoinsRetrievedFromStructs, Integer numOilRetrievedFromStructs, Integer numConsecutiveDaysPlayed, String clanId, Timestamp lastWallPostNotificationTime, Integer kabamNaid, Byte hasReceivedFbReward, Integer numBeginnerSalesPurchased, String facebookId, Boolean fbIdSetOnUserCreate, String gameCenterId, String udid, Timestamp lastObstacleSpawnedTime, Integer numObstaclesRemoved, Timestamp lastMiniJobGeneratedTime, Integer avatarMonsterId, String email, String fbData, Timestamp lastFreeBoosterPackTime, Integer clanHelps, Timestamp lastSecretGiftCollectTime, String pvpDefendingMessage, Timestamp lastTeamDonateSolicitation, Boolean boughtRiggedBoosterPack, Integer salesValue, Timestamp salesLastPurchaseTime, Boolean salesJumpTwoTiers, Integer totalStrength, Integer segmentationGroup, Integer gachaCredits, Timestamp lastTangoGiftSentTime, String tangoId) {
 		super(User.USER);
 
 		setValue(0, id);
@@ -1109,5 +1147,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 		setValue(46, totalStrength);
 		setValue(47, segmentationGroup);
 		setValue(48, gachaCredits);
+		setValue(49, lastTangoGiftSentTime);
+		setValue(50, tangoId);
 	}
 }

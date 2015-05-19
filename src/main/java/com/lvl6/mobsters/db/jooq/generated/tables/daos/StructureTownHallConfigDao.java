@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -69,77 +67,77 @@ public class StructureTownHallConfigDao extends DAOImpl<StructureTownHallConfigR
 	/**
 	 * Fetch records that have <code>num_resource_one_generators IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceOneGenerators(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceOneGenerators(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_ONE_GENERATORS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_resource_one_storages IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceOneStorages(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceOneStorages(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_ONE_STORAGES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_resource_two_generators IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceTwoGenerators(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceTwoGenerators(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_TWO_GENERATORS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_resource_two_storages IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceTwoStorages(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResourceTwoStorages(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_TWO_STORAGES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_hospitals IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumHospitals(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumHospitals(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_HOSPITALS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_residences IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResidences(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumResidences(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESIDENCES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_monster_slots IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumMonsterSlots(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumMonsterSlots(Integer... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_MONSTER_SLOTS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_labs IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumLabs(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumLabs(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_LABS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>pvp_queue_cash_cost IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByPvpQueueCashCost(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByPvpQueueCashCost(Integer... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.PVP_QUEUE_CASH_COST, values);
 	}
 
 	/**
 	 * Fetch records that have <code>resource_capacity IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByResourceCapacity(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByResourceCapacity(Integer... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.RESOURCE_CAPACITY, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_evo_chambers IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumEvoChambers(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureTownHallConfig> fetchByNumEvoChambers(Byte... values) {
 		return fetch(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_EVO_CHAMBERS, values);
 	}
 }

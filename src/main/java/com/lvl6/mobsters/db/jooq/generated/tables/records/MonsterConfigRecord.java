@@ -17,8 +17,6 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Record1;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @Table(name = "monster_config", schema = "mobsters")
 public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord> implements IMonsterConfig {
 
-	private static final long serialVersionUID = -94033406;
+	private static final long serialVersionUID = -535735150;
 
 	/**
 	 * Setter for <code>mobsters.monster_config.id</code>.
@@ -119,7 +117,7 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 * Setter for <code>mobsters.monster_config.evolution_level</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setEvolutionLevel(UByte value) {
+	public MonsterConfigRecord setEvolutionLevel(Byte value) {
 		setValue(4, value);
 		return this;
 	}
@@ -129,8 +127,8 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "evolution_level", precision = 3)
 	@Override
-	public UByte getEvolutionLevel() {
-		return (UByte) getValue(4);
+	public Byte getEvolutionLevel() {
+		return (Byte) getValue(4);
 	}
 
 	/**
@@ -194,7 +192,7 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 * Setter for <code>mobsters.monster_config.num_puzzle_pieces</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setNumPuzzlePieces(UByte value) {
+	public MonsterConfigRecord setNumPuzzlePieces(Byte value) {
 		setValue(8, value);
 		return this;
 	}
@@ -204,15 +202,15 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "num_puzzle_pieces", precision = 3)
 	@Override
-	public UByte getNumPuzzlePieces() {
-		return (UByte) getValue(8);
+	public Byte getNumPuzzlePieces() {
+		return (Byte) getValue(8);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_config.minutes_to_combine_pieces</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setMinutesToCombinePieces(UInteger value) {
+	public MonsterConfigRecord setMinutesToCombinePieces(Integer value) {
 		setValue(9, value);
 		return this;
 	}
@@ -222,15 +220,15 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "minutes_to_combine_pieces", precision = 7)
 	@Override
-	public UInteger getMinutesToCombinePieces() {
-		return (UInteger) getValue(9);
+	public Integer getMinutesToCombinePieces() {
+		return (Integer) getValue(9);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_config.max_level</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setMaxLevel(UByte value) {
+	public MonsterConfigRecord setMaxLevel(Byte value) {
 		setValue(10, value);
 		return this;
 	}
@@ -240,8 +238,8 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "max_level", precision = 3)
 	@Override
-	public UByte getMaxLevel() {
-		return (UByte) getValue(10);
+	public Byte getMaxLevel() {
+		return (Byte) getValue(10);
 	}
 
 	/**
@@ -266,7 +264,7 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 * Setter for <code>mobsters.monster_config.evolution_catalyst_monster_id</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setEvolutionCatalystMonsterId(UInteger value) {
+	public MonsterConfigRecord setEvolutionCatalystMonsterId(Integer value) {
 		setValue(12, value);
 		return this;
 	}
@@ -276,15 +274,15 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "evolution_catalyst_monster_id", precision = 10)
 	@Override
-	public UInteger getEvolutionCatalystMonsterId() {
-		return (UInteger) getValue(12);
+	public Integer getEvolutionCatalystMonsterId() {
+		return (Integer) getValue(12);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_config.minutes_to_evolve</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setMinutesToEvolve(UInteger value) {
+	public MonsterConfigRecord setMinutesToEvolve(Integer value) {
 		setValue(13, value);
 		return this;
 	}
@@ -294,15 +292,15 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "minutes_to_evolve", precision = 7)
 	@Override
-	public UInteger getMinutesToEvolve() {
-		return (UInteger) getValue(13);
+	public Integer getMinutesToEvolve() {
+		return (Integer) getValue(13);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_config.num_evolution_catalysts</code>. Required amount of evolution_catalyst_monster_ids
 	 */
 	@Override
-	public MonsterConfigRecord setNumEvolutionCatalysts(UByte value) {
+	public MonsterConfigRecord setNumEvolutionCatalysts(Byte value) {
 		setValue(14, value);
 		return this;
 	}
@@ -312,8 +310,8 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 */
 	@Column(name = "num_evolution_catalysts", precision = 3)
 	@Override
-	public UByte getNumEvolutionCatalysts() {
-		return (UByte) getValue(14);
+	public Byte getNumEvolutionCatalysts() {
+		return (Byte) getValue(14);
 	}
 
 	/**
@@ -689,7 +687,7 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	/**
 	 * Create a detached, initialised MonsterConfigRecord
 	 */
-	public MonsterConfigRecord(Integer id, String evolutionGroup, String monsterGroup, String quality, UByte evolutionLevel, String displayName, String element, String imagePrefix, UByte numPuzzlePieces, UInteger minutesToCombinePieces, UByte maxLevel, Integer evolutionMonsterId, UInteger evolutionCatalystMonsterId, UInteger minutesToEvolve, UByte numEvolutionCatalysts, String carrotRecruited, String carrotDefeated, String carrotEvolved, String description, String evolutionCost, String animationType, Integer verticalPixelOffset, String atkSoundFile, Integer atkSoundAnimationFrame, Integer atkAnimationRepeatedFramesStart, Integer atkAnimationRepeatedFramesEnd, String shortName, Double shadowScaleFactor, Integer baseOffensiveSkillId, Integer baseDefensiveSkillId, Integer pvpMonsterDropId) {
+	public MonsterConfigRecord(Integer id, String evolutionGroup, String monsterGroup, String quality, Byte evolutionLevel, String displayName, String element, String imagePrefix, Byte numPuzzlePieces, Integer minutesToCombinePieces, Byte maxLevel, Integer evolutionMonsterId, Integer evolutionCatalystMonsterId, Integer minutesToEvolve, Byte numEvolutionCatalysts, String carrotRecruited, String carrotDefeated, String carrotEvolved, String description, String evolutionCost, String animationType, Integer verticalPixelOffset, String atkSoundFile, Integer atkSoundAnimationFrame, Integer atkAnimationRepeatedFramesStart, Integer atkAnimationRepeatedFramesEnd, String shortName, Double shadowScaleFactor, Integer baseOffensiveSkillId, Integer baseDefensiveSkillId, Integer pvpMonsterDropId) {
 		super(MonsterConfig.MONSTER_CONFIG);
 
 		setValue(0, id);

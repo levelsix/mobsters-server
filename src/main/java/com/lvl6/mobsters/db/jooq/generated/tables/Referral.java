@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Referral extends TableImpl<ReferralRecord> {
 
-	private static final long serialVersionUID = -1423717177;
+	private static final long serialVersionUID = 1429240850;
 
 	/**
 	 * The reference instance of <code>mobsters.referral</code>
@@ -53,12 +52,12 @@ public class Referral extends TableImpl<ReferralRecord> {
 	/**
 	 * The column <code>mobsters.referral.referrer_id</code>.
 	 */
-	public final TableField<ReferralRecord, UInteger> REFERRER_ID = createField("referrer_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<ReferralRecord, Integer> REFERRER_ID = createField("referrer_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.referral.newly_referred_id</code>.
 	 */
-	public final TableField<ReferralRecord, UInteger> NEWLY_REFERRED_ID = createField("newly_referred_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<ReferralRecord, Integer> NEWLY_REFERRED_ID = createField("newly_referred_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.referral.time_of_referral</code>.
@@ -68,7 +67,7 @@ public class Referral extends TableImpl<ReferralRecord> {
 	/**
 	 * The column <code>mobsters.referral.coins_given_to_referrer</code>.
 	 */
-	public final TableField<ReferralRecord, UInteger> COINS_GIVEN_TO_REFERRER = createField("coins_given_to_referrer", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<ReferralRecord, Integer> COINS_GIVEN_TO_REFERRER = createField("coins_given_to_referrer", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.referral</code> table reference

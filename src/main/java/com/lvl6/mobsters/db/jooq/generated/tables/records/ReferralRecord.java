@@ -22,7 +22,6 @@ import org.jooq.Record4;
 import org.jooq.Row;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -40,15 +39,15 @@ import org.jooq.types.UInteger;
 @Table(name = "referral", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"referrer_id", "newly_referred_id"})
 })
-public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implements Record4<UInteger, UInteger, Timestamp, UInteger>, IReferral {
+public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implements Record4<Integer, Integer, Timestamp, Integer>, IReferral {
 
-	private static final long serialVersionUID = 1374786665;
+	private static final long serialVersionUID = 2079711361;
 
 	/**
 	 * Setter for <code>mobsters.referral.referrer_id</code>.
 	 */
 	@Override
-	public ReferralRecord setReferrerId(UInteger value) {
+	public ReferralRecord setReferrerId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -59,15 +58,15 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	@Column(name = "referrer_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getReferrerId() {
-		return (UInteger) getValue(0);
+	public Integer getReferrerId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
 	 * Setter for <code>mobsters.referral.newly_referred_id</code>.
 	 */
 	@Override
-	public ReferralRecord setNewlyReferredId(UInteger value) {
+	public ReferralRecord setNewlyReferredId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -78,8 +77,8 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	@Column(name = "newly_referred_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getNewlyReferredId() {
-		return (UInteger) getValue(1);
+	public Integer getNewlyReferredId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
@@ -104,7 +103,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * Setter for <code>mobsters.referral.coins_given_to_referrer</code>.
 	 */
 	@Override
-	public ReferralRecord setCoinsGivenToReferrer(UInteger value) {
+	public ReferralRecord setCoinsGivenToReferrer(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -114,8 +113,8 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 */
 	@Column(name = "coins_given_to_referrer", precision = 10)
 	@Override
-	public UInteger getCoinsGivenToReferrer() {
-		return (UInteger) getValue(3);
+	public Integer getCoinsGivenToReferrer() {
+		return (Integer) getValue(3);
 	}
 
 	// -------------------------------------------------------------------------
@@ -126,7 +125,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record2<UInteger, UInteger> key() {
+	public Record2<Integer, Integer> key() {
 		return (Record2) super.key();
 	}
 
@@ -138,7 +137,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<UInteger, UInteger, Timestamp, UInteger> fieldsRow() {
+	public Row4<Integer, Integer, Timestamp, Integer> fieldsRow() {
 		return (Row4) super.fieldsRow();
 	}
 
@@ -146,7 +145,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<UInteger, UInteger, Timestamp, UInteger> valuesRow() {
+	public Row4<Integer, Integer, Timestamp, Integer> valuesRow() {
 		return (Row4) super.valuesRow();
 	}
 
@@ -154,7 +153,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return Referral.REFERRAL.REFERRER_ID;
 	}
 
@@ -162,7 +161,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return Referral.REFERRAL.NEWLY_REFERRED_ID;
 	}
 
@@ -178,7 +177,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return Referral.REFERRAL.COINS_GIVEN_TO_REFERRER;
 	}
 
@@ -186,7 +185,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getReferrerId();
 	}
 
@@ -194,7 +193,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getNewlyReferredId();
 	}
 
@@ -210,7 +209,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getCoinsGivenToReferrer();
 	}
 
@@ -218,7 +217,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReferralRecord value1(UInteger value) {
+	public ReferralRecord value1(Integer value) {
 		setReferrerId(value);
 		return this;
 	}
@@ -227,7 +226,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReferralRecord value2(UInteger value) {
+	public ReferralRecord value2(Integer value) {
 		setNewlyReferredId(value);
 		return this;
 	}
@@ -245,7 +244,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReferralRecord value4(UInteger value) {
+	public ReferralRecord value4(Integer value) {
 		setCoinsGivenToReferrer(value);
 		return this;
 	}
@@ -254,7 +253,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReferralRecord values(UInteger value1, UInteger value2, Timestamp value3, UInteger value4) {
+	public ReferralRecord values(Integer value1, Integer value2, Timestamp value3, Integer value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -300,7 +299,7 @@ public class ReferralRecord extends UpdatableRecordImpl<ReferralRecord> implemen
 	/**
 	 * Create a detached, initialised ReferralRecord
 	 */
-	public ReferralRecord(UInteger referrerId, UInteger newlyReferredId, Timestamp timeOfReferral, UInteger coinsGivenToReferrer) {
+	public ReferralRecord(Integer referrerId, Integer newlyReferredId, Timestamp timeOfReferral, Integer coinsGivenToReferrer) {
 		super(Referral.REFERRAL);
 
 		setValue(0, referrerId);

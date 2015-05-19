@@ -21,7 +21,6 @@ import org.jooq.Record15;
 import org.jooq.Row;
 import org.jooq.Row15;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "achievement_config", schema = "mobsters")
-public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConfigRecord> implements Record15<Integer, String, String, Integer, UByte, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Integer>, IAchievementConfig {
+public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConfigRecord> implements Record15<Integer, String, String, Integer, Byte, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Integer>, IAchievementConfig {
 
-	private static final long serialVersionUID = -1173686656;
+	private static final long serialVersionUID = -1446907064;
 
 	/**
 	 * Setter for <code>mobsters.achievement_config.id</code>.
@@ -123,7 +122,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * Setter for <code>mobsters.achievement_config.lvl</code>.
 	 */
 	@Override
-	public AchievementConfigRecord setLvl(UByte value) {
+	public AchievementConfigRecord setLvl(Byte value) {
 		setValue(4, value);
 		return this;
 	}
@@ -134,8 +133,8 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	@Column(name = "lvl", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getLvl() {
-		return (UByte) getValue(4);
+	public Byte getLvl() {
+		return (Byte) getValue(4);
 	}
 
 	/**
@@ -343,7 +342,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row15<Integer, String, String, Integer, UByte, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
+	public Row15<Integer, String, String, Integer, Byte, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
 		return (Row15) super.fieldsRow();
 	}
 
@@ -351,7 +350,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row15<Integer, String, String, Integer, UByte, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Integer> valuesRow() {
+	public Row15<Integer, String, String, Integer, Byte, String, String, String, String, Integer, Integer, Integer, Integer, Integer, Integer> valuesRow() {
 		return (Row15) super.valuesRow();
 	}
 
@@ -391,7 +390,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field5() {
+	public Field<Byte> field5() {
 		return AchievementConfig.ACHIEVEMENT_CONFIG.LVL;
 	}
 
@@ -511,7 +510,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value5() {
+	public Byte value5() {
 		return getLvl();
 	}
 
@@ -635,7 +634,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AchievementConfigRecord value5(UByte value) {
+	public AchievementConfigRecord value5(Byte value) {
 		setLvl(value);
 		return this;
 	}
@@ -734,7 +733,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AchievementConfigRecord values(Integer value1, String value2, String value3, Integer value4, UByte value5, String value6, String value7, String value8, String value9, Integer value10, Integer value11, Integer value12, Integer value13, Integer value14, Integer value15) {
+	public AchievementConfigRecord values(Integer value1, String value2, String value3, Integer value4, Byte value5, String value6, String value7, String value8, String value9, Integer value10, Integer value11, Integer value12, Integer value13, Integer value14, Integer value15) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -802,7 +801,7 @@ public class AchievementConfigRecord extends UpdatableRecordImpl<AchievementConf
 	/**
 	 * Create a detached, initialised AchievementConfigRecord
 	 */
-	public AchievementConfigRecord(Integer id, String name, String description, Integer gemReward, UByte lvl, String achievementType, String resourceType, String monsterElement, String monsterQuality, Integer staticDataId, Integer quantity, Integer priority, Integer prerequisiteId, Integer successorId, Integer expReward) {
+	public AchievementConfigRecord(Integer id, String name, String description, Integer gemReward, Byte lvl, String achievementType, String resourceType, String monsterElement, String monsterQuality, Integer staticDataId, Integer quantity, Integer priority, Integer prerequisiteId, Integer successorId, Integer expReward) {
 		super(AchievementConfig.ACHIEVEMENT_CONFIG);
 
 		setValue(0, id);

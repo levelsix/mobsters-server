@@ -21,8 +21,6 @@ import org.jooq.Record4;
 import org.jooq.Row;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -40,9 +38,9 @@ import org.jooq.types.UInteger;
 @Table(name = "quest_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_id", "quest_id"})
 })
-public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> implements Record4<String, UInteger, Byte, UByte>, IQuestForUser {
+public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> implements Record4<String, Integer, Byte, Byte>, IQuestForUser {
 
-	private static final long serialVersionUID = 1262475383;
+	private static final long serialVersionUID = -134119574;
 
 	/**
 	 * Setter for <code>mobsters.quest_for_user.user_id</code>.
@@ -68,7 +66,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * Setter for <code>mobsters.quest_for_user.quest_id</code>.
 	 */
 	@Override
-	public QuestForUserRecord setQuestId(UInteger value) {
+	public QuestForUserRecord setQuestId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -79,8 +77,8 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	@Column(name = "quest_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getQuestId() {
-		return (UInteger) getValue(1);
+	public Integer getQuestId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
@@ -105,7 +103,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * Setter for <code>mobsters.quest_for_user.is_complete</code>.
 	 */
 	@Override
-	public QuestForUserRecord setIsComplete(UByte value) {
+	public QuestForUserRecord setIsComplete(Byte value) {
 		setValue(3, value);
 		return this;
 	}
@@ -116,8 +114,8 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	@Column(name = "is_complete", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getIsComplete() {
-		return (UByte) getValue(3);
+	public Byte getIsComplete() {
+		return (Byte) getValue(3);
 	}
 
 	// -------------------------------------------------------------------------
@@ -128,7 +126,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record2<String, UInteger> key() {
+	public Record2<String, Integer> key() {
 		return (Record2) super.key();
 	}
 
@@ -140,7 +138,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<String, UInteger, Byte, UByte> fieldsRow() {
+	public Row4<String, Integer, Byte, Byte> fieldsRow() {
 		return (Row4) super.fieldsRow();
 	}
 
@@ -148,7 +146,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<String, UInteger, Byte, UByte> valuesRow() {
+	public Row4<String, Integer, Byte, Byte> valuesRow() {
 		return (Row4) super.valuesRow();
 	}
 
@@ -164,7 +162,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return QuestForUser.QUEST_FOR_USER.QUEST_ID;
 	}
 
@@ -180,7 +178,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field4() {
+	public Field<Byte> field4() {
 		return QuestForUser.QUEST_FOR_USER.IS_COMPLETE;
 	}
 
@@ -196,7 +194,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getQuestId();
 	}
 
@@ -212,7 +210,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value4() {
+	public Byte value4() {
 		return getIsComplete();
 	}
 
@@ -229,7 +227,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestForUserRecord value2(UInteger value) {
+	public QuestForUserRecord value2(Integer value) {
 		setQuestId(value);
 		return this;
 	}
@@ -247,7 +245,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestForUserRecord value4(UByte value) {
+	public QuestForUserRecord value4(Byte value) {
 		setIsComplete(value);
 		return this;
 	}
@@ -256,7 +254,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestForUserRecord values(String value1, UInteger value2, Byte value3, UByte value4) {
+	public QuestForUserRecord values(String value1, Integer value2, Byte value3, Byte value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -302,7 +300,7 @@ public class QuestForUserRecord extends UpdatableRecordImpl<QuestForUserRecord> 
 	/**
 	 * Create a detached, initialised QuestForUserRecord
 	 */
-	public QuestForUserRecord(String userId, UInteger questId, Byte isRedeemed, UByte isComplete) {
+	public QuestForUserRecord(String userId, Integer questId, Byte isRedeemed, Byte isComplete) {
 		super(QuestForUser.QUEST_FOR_USER);
 
 		setValue(0, userId);

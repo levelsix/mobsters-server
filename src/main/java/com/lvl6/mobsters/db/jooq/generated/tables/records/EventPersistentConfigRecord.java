@@ -21,8 +21,6 @@ import org.jooq.Record8;
 import org.jooq.Row;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -38,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "event_persistent_config", schema = "mobsters")
-public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersistentConfigRecord> implements Record8<Integer, String, UByte, UInteger, UInteger, UInteger, String, String>, IEventPersistentConfig {
+public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersistentConfigRecord> implements Record8<Integer, String, Byte, Integer, Integer, Integer, String, String>, IEventPersistentConfig {
 
-	private static final long serialVersionUID = -1839504470;
+	private static final long serialVersionUID = 416164036;
 
 	/**
 	 * Setter for <code>mobsters.event_persistent_config.id</code>.
@@ -85,7 +83,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * Setter for <code>mobsters.event_persistent_config.start_hour</code>.
 	 */
 	@Override
-	public EventPersistentConfigRecord setStartHour(UByte value) {
+	public EventPersistentConfigRecord setStartHour(Byte value) {
 		setValue(2, value);
 		return this;
 	}
@@ -95,15 +93,15 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 */
 	@Column(name = "start_hour", precision = 3)
 	@Override
-	public UByte getStartHour() {
-		return (UByte) getValue(2);
+	public Byte getStartHour() {
+		return (Byte) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.event_persistent_config.event_duration_minutes</code>.
 	 */
 	@Override
-	public EventPersistentConfigRecord setEventDurationMinutes(UInteger value) {
+	public EventPersistentConfigRecord setEventDurationMinutes(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -113,15 +111,15 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 */
 	@Column(name = "event_duration_minutes", precision = 7)
 	@Override
-	public UInteger getEventDurationMinutes() {
-		return (UInteger) getValue(3);
+	public Integer getEventDurationMinutes() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.event_persistent_config.task_id</code>. Refers to a task in task table
 	 */
 	@Override
-	public EventPersistentConfigRecord setTaskId(UInteger value) {
+	public EventPersistentConfigRecord setTaskId(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -131,15 +129,15 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 */
 	@Column(name = "task_id", precision = 10)
 	@Override
-	public UInteger getTaskId() {
-		return (UInteger) getValue(4);
+	public Integer getTaskId() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.event_persistent_config.cooldown_minutes</code>.
 	 */
 	@Override
-	public EventPersistentConfigRecord setCooldownMinutes(UInteger value) {
+	public EventPersistentConfigRecord setCooldownMinutes(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -149,8 +147,8 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 */
 	@Column(name = "cooldown_minutes", precision = 7)
 	@Override
-	public UInteger getCooldownMinutes() {
-		return (UInteger) getValue(5);
+	public Integer getCooldownMinutes() {
+		return (Integer) getValue(5);
 	}
 
 	/**
@@ -211,7 +209,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, String, UByte, UInteger, UInteger, UInteger, String, String> fieldsRow() {
+	public Row8<Integer, String, Byte, Integer, Integer, Integer, String, String> fieldsRow() {
 		return (Row8) super.fieldsRow();
 	}
 
@@ -219,7 +217,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, String, UByte, UInteger, UInteger, UInteger, String, String> valuesRow() {
+	public Row8<Integer, String, Byte, Integer, Integer, Integer, String, String> valuesRow() {
 		return (Row8) super.valuesRow();
 	}
 
@@ -243,7 +241,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field3() {
+	public Field<Byte> field3() {
 		return EventPersistentConfig.EVENT_PERSISTENT_CONFIG.START_HOUR;
 	}
 
@@ -251,7 +249,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return EventPersistentConfig.EVENT_PERSISTENT_CONFIG.EVENT_DURATION_MINUTES;
 	}
 
@@ -259,7 +257,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return EventPersistentConfig.EVENT_PERSISTENT_CONFIG.TASK_ID;
 	}
 
@@ -267,7 +265,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return EventPersistentConfig.EVENT_PERSISTENT_CONFIG.COOLDOWN_MINUTES;
 	}
 
@@ -307,7 +305,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value3() {
+	public Byte value3() {
 		return getStartHour();
 	}
 
@@ -315,7 +313,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getEventDurationMinutes();
 	}
 
@@ -323,7 +321,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getTaskId();
 	}
 
@@ -331,7 +329,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getCooldownMinutes();
 	}
 
@@ -373,7 +371,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EventPersistentConfigRecord value3(UByte value) {
+	public EventPersistentConfigRecord value3(Byte value) {
 		setStartHour(value);
 		return this;
 	}
@@ -382,7 +380,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EventPersistentConfigRecord value4(UInteger value) {
+	public EventPersistentConfigRecord value4(Integer value) {
 		setEventDurationMinutes(value);
 		return this;
 	}
@@ -391,7 +389,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EventPersistentConfigRecord value5(UInteger value) {
+	public EventPersistentConfigRecord value5(Integer value) {
 		setTaskId(value);
 		return this;
 	}
@@ -400,7 +398,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EventPersistentConfigRecord value6(UInteger value) {
+	public EventPersistentConfigRecord value6(Integer value) {
 		setCooldownMinutes(value);
 		return this;
 	}
@@ -427,7 +425,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EventPersistentConfigRecord values(Integer value1, String value2, UByte value3, UInteger value4, UInteger value5, UInteger value6, String value7, String value8) {
+	public EventPersistentConfigRecord values(Integer value1, String value2, Byte value3, Integer value4, Integer value5, Integer value6, String value7, String value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -481,7 +479,7 @@ public class EventPersistentConfigRecord extends UpdatableRecordImpl<EventPersis
 	/**
 	 * Create a detached, initialised EventPersistentConfigRecord
 	 */
-	public EventPersistentConfigRecord(Integer id, String dayOfWeek, UByte startHour, UInteger eventDurationMinutes, UInteger taskId, UInteger cooldownMinutes, String eventType, String monsterElement) {
+	public EventPersistentConfigRecord(Integer id, String dayOfWeek, Byte startHour, Integer eventDurationMinutes, Integer taskId, Integer cooldownMinutes, String eventType, String monsterElement) {
 		super(EventPersistentConfig.EVENT_PERSISTENT_CONFIG);
 
 		setValue(0, id);

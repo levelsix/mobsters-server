@@ -18,8 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureTownHallConfig extends TableImpl<StructureTownHallConfigRecord> {
 
-	private static final long serialVersionUID = -2112114526;
+	private static final long serialVersionUID = -1912497144;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_town_hall_config</code>
@@ -58,57 +56,57 @@ public class StructureTownHallConfig extends TableImpl<StructureTownHallConfigRe
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_resource_one_generators</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_RESOURCE_ONE_GENERATORS = createField("num_resource_one_generators", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_RESOURCE_ONE_GENERATORS = createField("num_resource_one_generators", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_resource_one_storages</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_RESOURCE_ONE_STORAGES = createField("num_resource_one_storages", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_RESOURCE_ONE_STORAGES = createField("num_resource_one_storages", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_resource_two_generators</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_RESOURCE_TWO_GENERATORS = createField("num_resource_two_generators", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_RESOURCE_TWO_GENERATORS = createField("num_resource_two_generators", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_resource_two_storages</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_RESOURCE_TWO_STORAGES = createField("num_resource_two_storages", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_RESOURCE_TWO_STORAGES = createField("num_resource_two_storages", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_hospitals</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_HOSPITALS = createField("num_hospitals", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_HOSPITALS = createField("num_hospitals", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_residences</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_RESIDENCES = createField("num_residences", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_RESIDENCES = createField("num_residences", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_monster_slots</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UInteger> NUM_MONSTER_SLOTS = createField("num_monster_slots", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Integer> NUM_MONSTER_SLOTS = createField("num_monster_slots", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_labs</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_LABS = createField("num_labs", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_LABS = createField("num_labs", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.pvp_queue_cash_cost</code>. Cost for seeing one possible enemy to attack for pvp battles.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UInteger> PVP_QUEUE_CASH_COST = createField("pvp_queue_cash_cost", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "Cost for seeing one possible enemy to attack for pvp battles.");
+	public final TableField<StructureTownHallConfigRecord, Integer> PVP_QUEUE_CASH_COST = createField("pvp_queue_cash_cost", org.jooq.impl.SQLDataType.INTEGER, this, "Cost for seeing one possible enemy to attack for pvp battles.");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.resource_capacity</code>. applies to cash, oil, not gems
 	 */
-	public final TableField<StructureTownHallConfigRecord, UInteger> RESOURCE_CAPACITY = createField("resource_capacity", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "applies to cash, oil, not gems");
+	public final TableField<StructureTownHallConfigRecord, Integer> RESOURCE_CAPACITY = createField("resource_capacity", org.jooq.impl.SQLDataType.INTEGER, this, "applies to cash, oil, not gems");
 
 	/**
 	 * The column <code>mobsters.structure_town_hall_config.num_evo_chambers</code>.
 	 */
-	public final TableField<StructureTownHallConfigRecord, UByte> NUM_EVO_CHAMBERS = createField("num_evo_chambers", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<StructureTownHallConfigRecord, Byte> NUM_EVO_CHAMBERS = createField("num_evo_chambers", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.structure_town_hall_config</code> table reference

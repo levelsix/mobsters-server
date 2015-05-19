@@ -20,8 +20,6 @@ import org.jooq.Record8;
 import org.jooq.Row;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +35,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "city_boss", schema = "mobsters")
-public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implements Record8<Integer, UInteger, Integer, UInteger, UInteger, UInteger, Double, UByte>, ICityBoss {
+public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implements Record8<Integer, Integer, Integer, Integer, Integer, Integer, Double, Byte>, ICityBoss {
 
-	private static final long serialVersionUID = 408996788;
+	private static final long serialVersionUID = 677716443;
 
 	/**
 	 * Setter for <code>mobsters.city_boss.id</code>.
@@ -65,7 +63,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * Setter for <code>mobsters.city_boss.city_id</code>.
 	 */
 	@Override
-	public CityBossRecord setCityId(UInteger value) {
+	public CityBossRecord setCityId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,8 +73,8 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 */
 	@Column(name = "city_id", precision = 7)
 	@Override
-	public UInteger getCityId() {
-		return (UInteger) getValue(1);
+	public Integer getCityId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
@@ -101,7 +99,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * Setter for <code>mobsters.city_boss.exp_reward</code>. Not really needed, but
 	 */
 	@Override
-	public CityBossRecord setExpReward(UInteger value) {
+	public CityBossRecord setExpReward(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -111,15 +109,15 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 */
 	@Column(name = "exp_reward", precision = 10)
 	@Override
-	public UInteger getExpReward() {
-		return (UInteger) getValue(3);
+	public Integer getExpReward() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.city_boss.min_cash_drop</code>.
 	 */
 	@Override
-	public CityBossRecord setMinCashDrop(UInteger value) {
+	public CityBossRecord setMinCashDrop(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -129,15 +127,15 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 */
 	@Column(name = "min_cash_drop", precision = 7)
 	@Override
-	public UInteger getMinCashDrop() {
-		return (UInteger) getValue(4);
+	public Integer getMinCashDrop() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.city_boss.max_cash_drop</code>.
 	 */
 	@Override
-	public CityBossRecord setMaxCashDrop(UInteger value) {
+	public CityBossRecord setMaxCashDrop(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -147,8 +145,8 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 */
 	@Column(name = "max_cash_drop", precision = 10)
 	@Override
-	public UInteger getMaxCashDrop() {
-		return (UInteger) getValue(5);
+	public Integer getMaxCashDrop() {
+		return (Integer) getValue(5);
 	}
 
 	/**
@@ -173,7 +171,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * Setter for <code>mobsters.city_boss.level</code>.
 	 */
 	@Override
-	public CityBossRecord setLevel(UByte value) {
+	public CityBossRecord setLevel(Byte value) {
 		setValue(7, value);
 		return this;
 	}
@@ -183,8 +181,8 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 */
 	@Column(name = "level", precision = 3)
 	@Override
-	public UByte getLevel() {
-		return (UByte) getValue(7);
+	public Byte getLevel() {
+		return (Byte) getValue(7);
 	}
 
 	// -------------------------------------------------------------------------
@@ -207,7 +205,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, UInteger, Integer, UInteger, UInteger, UInteger, Double, UByte> fieldsRow() {
+	public Row8<Integer, Integer, Integer, Integer, Integer, Integer, Double, Byte> fieldsRow() {
 		return (Row8) super.fieldsRow();
 	}
 
@@ -215,7 +213,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, UInteger, Integer, UInteger, UInteger, UInteger, Double, UByte> valuesRow() {
+	public Row8<Integer, Integer, Integer, Integer, Integer, Integer, Double, Byte> valuesRow() {
 		return (Row8) super.valuesRow();
 	}
 
@@ -231,7 +229,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return CityBoss.CITY_BOSS.CITY_ID;
 	}
 
@@ -247,7 +245,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return CityBoss.CITY_BOSS.EXP_REWARD;
 	}
 
@@ -255,7 +253,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return CityBoss.CITY_BOSS.MIN_CASH_DROP;
 	}
 
@@ -263,7 +261,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return CityBoss.CITY_BOSS.MAX_CASH_DROP;
 	}
 
@@ -279,7 +277,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field8() {
+	public Field<Byte> field8() {
 		return CityBoss.CITY_BOSS.LEVEL;
 	}
 
@@ -295,7 +293,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getCityId();
 	}
 
@@ -311,7 +309,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getExpReward();
 	}
 
@@ -319,7 +317,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getMinCashDrop();
 	}
 
@@ -327,7 +325,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getMaxCashDrop();
 	}
 
@@ -343,7 +341,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value8() {
+	public Byte value8() {
 		return getLevel();
 	}
 
@@ -360,7 +358,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossRecord value2(UInteger value) {
+	public CityBossRecord value2(Integer value) {
 		setCityId(value);
 		return this;
 	}
@@ -378,7 +376,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossRecord value4(UInteger value) {
+	public CityBossRecord value4(Integer value) {
 		setExpReward(value);
 		return this;
 	}
@@ -387,7 +385,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossRecord value5(UInteger value) {
+	public CityBossRecord value5(Integer value) {
 		setMinCashDrop(value);
 		return this;
 	}
@@ -396,7 +394,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossRecord value6(UInteger value) {
+	public CityBossRecord value6(Integer value) {
 		setMaxCashDrop(value);
 		return this;
 	}
@@ -414,7 +412,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossRecord value8(UByte value) {
+	public CityBossRecord value8(Byte value) {
 		setLevel(value);
 		return this;
 	}
@@ -423,7 +421,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossRecord values(Integer value1, UInteger value2, Integer value3, UInteger value4, UInteger value5, UInteger value6, Double value7, UByte value8) {
+	public CityBossRecord values(Integer value1, Integer value2, Integer value3, Integer value4, Integer value5, Integer value6, Double value7, Byte value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -477,7 +475,7 @@ public class CityBossRecord extends UpdatableRecordImpl<CityBossRecord> implemen
 	/**
 	 * Create a detached, initialised CityBossRecord
 	 */
-	public CityBossRecord(Integer id, UInteger cityId, Integer monsterId, UInteger expReward, UInteger minCashDrop, UInteger maxCashDrop, Double puzzlePieceDropRate, UByte level) {
+	public CityBossRecord(Integer id, Integer cityId, Integer monsterId, Integer expReward, Integer minCashDrop, Integer maxCashDrop, Double puzzlePieceDropRate, Byte level) {
 		super(CityBoss.CITY_BOSS);
 
 		setValue(0, id);

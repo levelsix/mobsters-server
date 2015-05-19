@@ -23,7 +23,6 @@ import org.jooq.Record8;
 import org.jooq.Row;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -39,9 +38,9 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "user_facebook_invite_for_slot", schema = "mobsters")
-public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFacebookInviteForSlotRecord> implements Record8<String, String, String, Timestamp, Timestamp, String, UByte, Timestamp>, IUserFacebookInviteForSlot {
+public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFacebookInviteForSlotRecord> implements Record8<String, String, String, Timestamp, Timestamp, String, Byte, Timestamp>, IUserFacebookInviteForSlot {
 
-	private static final long serialVersionUID = -520538413;
+	private static final long serialVersionUID = 467564967;
 
 	/**
 	 * Setter for <code>mobsters.user_facebook_invite_for_slot.id</code>.
@@ -161,7 +160,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * Setter for <code>mobsters.user_facebook_invite_for_slot.user_struct_fb_lvl</code>.
 	 */
 	@Override
-	public UserFacebookInviteForSlotRecord setUserStructFbLvl(UByte value) {
+	public UserFacebookInviteForSlotRecord setUserStructFbLvl(Byte value) {
 		setValue(6, value);
 		return this;
 	}
@@ -171,8 +170,8 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 */
 	@Column(name = "user_struct_fb_lvl", precision = 3)
 	@Override
-	public UByte getUserStructFbLvl() {
-		return (UByte) getValue(6);
+	public Byte getUserStructFbLvl() {
+		return (Byte) getValue(6);
 	}
 
 	/**
@@ -213,7 +212,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<String, String, String, Timestamp, Timestamp, String, UByte, Timestamp> fieldsRow() {
+	public Row8<String, String, String, Timestamp, Timestamp, String, Byte, Timestamp> fieldsRow() {
 		return (Row8) super.fieldsRow();
 	}
 
@@ -221,7 +220,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<String, String, String, Timestamp, Timestamp, String, UByte, Timestamp> valuesRow() {
+	public Row8<String, String, String, Timestamp, Timestamp, String, Byte, Timestamp> valuesRow() {
 		return (Row8) super.valuesRow();
 	}
 
@@ -277,7 +276,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field7() {
+	public Field<Byte> field7() {
 		return UserFacebookInviteForSlot.USER_FACEBOOK_INVITE_FOR_SLOT.USER_STRUCT_FB_LVL;
 	}
 
@@ -341,7 +340,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value7() {
+	public Byte value7() {
 		return getUserStructFbLvl();
 	}
 
@@ -411,7 +410,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserFacebookInviteForSlotRecord value7(UByte value) {
+	public UserFacebookInviteForSlotRecord value7(Byte value) {
 		setUserStructFbLvl(value);
 		return this;
 	}
@@ -429,7 +428,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserFacebookInviteForSlotRecord values(String value1, String value2, String value3, Timestamp value4, Timestamp value5, String value6, UByte value7, Timestamp value8) {
+	public UserFacebookInviteForSlotRecord values(String value1, String value2, String value3, Timestamp value4, Timestamp value5, String value6, Byte value7, Timestamp value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -483,7 +482,7 @@ public class UserFacebookInviteForSlotRecord extends UpdatableRecordImpl<UserFac
 	/**
 	 * Create a detached, initialised UserFacebookInviteForSlotRecord
 	 */
-	public UserFacebookInviteForSlotRecord(String id, String inviterUserId, String recipientFacebookId, Timestamp timeOfInvite, Timestamp timeAccepted, String userStructId, UByte userStructFbLvl, Timestamp timeRedeemed) {
+	public UserFacebookInviteForSlotRecord(String id, String inviterUserId, String recipientFacebookId, Timestamp timeOfInvite, Timestamp timeAccepted, String userStructId, Byte userStructFbLvl, Timestamp timeRedeemed) {
 		super(UserFacebookInviteForSlot.USER_FACEBOOK_INVITE_FOR_SLOT);
 
 		setValue(0, id);

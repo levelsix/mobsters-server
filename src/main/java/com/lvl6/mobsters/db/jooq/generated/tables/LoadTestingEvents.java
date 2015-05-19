@@ -20,7 +20,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +35,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LoadTestingEvents extends TableImpl<LoadTestingEventsRecord> {
 
-	private static final long serialVersionUID = -2072071610;
+	private static final long serialVersionUID = -1002425764;
 
 	/**
 	 * The reference instance of <code>mobsters.load_testing_events</code>
@@ -54,7 +53,7 @@ public class LoadTestingEvents extends TableImpl<LoadTestingEventsRecord> {
 	/**
 	 * The column <code>mobsters.load_testing_events.id</code>.
 	 */
-	public final TableField<LoadTestingEventsRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<LoadTestingEventsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.load_testing_events.user_id</code>.
@@ -69,7 +68,7 @@ public class LoadTestingEvents extends TableImpl<LoadTestingEventsRecord> {
 	/**
 	 * The column <code>mobsters.load_testing_events.event_type</code>.
 	 */
-	public final TableField<LoadTestingEventsRecord, UInteger> EVENT_TYPE = createField("event_type", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<LoadTestingEventsRecord, Integer> EVENT_TYPE = createField("event_type", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.load_testing_events.event_bytes</code>.
@@ -102,7 +101,7 @@ public class LoadTestingEvents extends TableImpl<LoadTestingEventsRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Identity<LoadTestingEventsRecord, UInteger> getIdentity() {
+	public Identity<LoadTestingEventsRecord, Integer> getIdentity() {
 		return Keys.IDENTITY_LOAD_TESTING_EVENTS;
 	}
 

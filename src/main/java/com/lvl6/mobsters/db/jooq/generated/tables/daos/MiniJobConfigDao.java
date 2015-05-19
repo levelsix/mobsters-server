@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -83,28 +81,28 @@ public class MiniJobConfigDao extends DAOImpl<MiniJobConfigRecord, com.lvl6.mobs
 	/**
 	 * Fetch records that have <code>cash_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByCashReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByCashReward(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.CASH_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>oil_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByOilReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByOilReward(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.OIL_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>gem_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByGemReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByGemReward(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.GEM_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>monster_id_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMonsterIdReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMonsterIdReward(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.MONSTER_ID_REWARD, values);
 	}
 
@@ -146,7 +144,7 @@ public class MiniJobConfigDao extends DAOImpl<MiniJobConfigRecord, com.lvl6.mobs
 	/**
 	 * Fetch records that have <code>max_num_monsters_allowed IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMaxNumMonstersAllowed(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMaxNumMonstersAllowed(Byte... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.MAX_NUM_MONSTERS_ALLOWED, values);
 	}
 
@@ -167,35 +165,35 @@ public class MiniJobConfigDao extends DAOImpl<MiniJobConfigRecord, com.lvl6.mobs
 	/**
 	 * Fetch records that have <code>atk_required IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByAtkRequired(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByAtkRequired(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.ATK_REQUIRED, values);
 	}
 
 	/**
 	 * Fetch records that have <code>min_dmg IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMinDmg(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMinDmg(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.MIN_DMG, values);
 	}
 
 	/**
 	 * Fetch records that have <code>max_dmg IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMaxDmg(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByMaxDmg(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.MAX_DMG, values);
 	}
 
 	/**
 	 * Fetch records that have <code>duration_min_minutes IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByDurationMinMinutes(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByDurationMinMinutes(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.DURATION_MIN_MINUTES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>duration_max_minutes IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByDurationMaxMinutes(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobConfig> fetchByDurationMaxMinutes(Integer... values) {
 		return fetch(MiniJobConfig.MINI_JOB_CONFIG.DURATION_MAX_MINUTES, values);
 	}
 

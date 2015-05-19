@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -68,7 +67,7 @@ public class StructureHospitalConfigDao extends DAOImpl<StructureHospitalConfigR
 	/**
 	 * Fetch records that have <code>queue_size IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureHospitalConfig> fetchByQueueSize(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureHospitalConfig> fetchByQueueSize(Byte... values) {
 		return fetch(StructureHospitalConfig.STRUCTURE_HOSPITAL_CONFIG.QUEUE_SIZE, values);
 	}
 

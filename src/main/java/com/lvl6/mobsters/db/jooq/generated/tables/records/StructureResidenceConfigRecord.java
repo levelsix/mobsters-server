@@ -21,7 +21,6 @@ import org.jooq.Record7;
 import org.jooq.Row;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_residence_config", schema = "mobsters")
-public class StructureResidenceConfigRecord extends UpdatableRecordImpl<StructureResidenceConfigRecord> implements Record7<Integer, UInteger, UInteger, UInteger, UInteger, String, String>, IStructureResidenceConfig {
+public class StructureResidenceConfigRecord extends UpdatableRecordImpl<StructureResidenceConfigRecord> implements Record7<Integer, Integer, Integer, Integer, Integer, String, String>, IStructureResidenceConfig {
 
-	private static final long serialVersionUID = -1203969596;
+	private static final long serialVersionUID = -984350005;
 
 	/**
 	 * Setter for <code>mobsters.structure_residence_config.struct_id</code>.
@@ -65,7 +64,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * Setter for <code>mobsters.structure_residence_config.num_monster_slots</code>.
 	 */
 	@Override
-	public StructureResidenceConfigRecord setNumMonsterSlots(UInteger value) {
+	public StructureResidenceConfigRecord setNumMonsterSlots(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -76,15 +75,15 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	@Column(name = "num_monster_slots", nullable = false, precision = 7)
 	@NotNull
 	@Override
-	public UInteger getNumMonsterSlots() {
-		return (UInteger) getValue(1);
+	public Integer getNumMonsterSlots() {
+		return (Integer) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_residence_config.num_bonus_monster_slots</code>.
 	 */
 	@Override
-	public StructureResidenceConfigRecord setNumBonusMonsterSlots(UInteger value) {
+	public StructureResidenceConfigRecord setNumBonusMonsterSlots(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -95,15 +94,15 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	@Column(name = "num_bonus_monster_slots", nullable = false, precision = 7)
 	@NotNull
 	@Override
-	public UInteger getNumBonusMonsterSlots() {
-		return (UInteger) getValue(2);
+	public Integer getNumBonusMonsterSlots() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_residence_config.num_gems_required</code>.
 	 */
 	@Override
-	public StructureResidenceConfigRecord setNumGemsRequired(UInteger value) {
+	public StructureResidenceConfigRecord setNumGemsRequired(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -114,15 +113,15 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	@Column(name = "num_gems_required", nullable = false, precision = 7)
 	@NotNull
 	@Override
-	public UInteger getNumGemsRequired() {
-		return (UInteger) getValue(3);
+	public Integer getNumGemsRequired() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_residence_config.num_accepeted_fb_invites</code>.
 	 */
 	@Override
-	public StructureResidenceConfigRecord setNumAccepetedFbInvites(UInteger value) {
+	public StructureResidenceConfigRecord setNumAccepetedFbInvites(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -133,8 +132,8 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	@Column(name = "num_accepeted_fb_invites", nullable = false, precision = 7)
 	@NotNull
 	@Override
-	public UInteger getNumAccepetedFbInvites() {
-		return (UInteger) getValue(4);
+	public Integer getNumAccepetedFbInvites() {
+		return (Integer) getValue(4);
 	}
 
 	/**
@@ -195,7 +194,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row7<Integer, UInteger, UInteger, UInteger, UInteger, String, String> fieldsRow() {
+	public Row7<Integer, Integer, Integer, Integer, Integer, String, String> fieldsRow() {
 		return (Row7) super.fieldsRow();
 	}
 
@@ -203,7 +202,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row7<Integer, UInteger, UInteger, UInteger, UInteger, String, String> valuesRow() {
+	public Row7<Integer, Integer, Integer, Integer, Integer, String, String> valuesRow() {
 		return (Row7) super.valuesRow();
 	}
 
@@ -219,7 +218,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_MONSTER_SLOTS;
 	}
 
@@ -227,7 +226,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_BONUS_MONSTER_SLOTS;
 	}
 
@@ -235,7 +234,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_GEMS_REQUIRED;
 	}
 
@@ -243,7 +242,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_ACCEPETED_FB_INVITES;
 	}
 
@@ -275,7 +274,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getNumMonsterSlots();
 	}
 
@@ -283,7 +282,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getNumBonusMonsterSlots();
 	}
 
@@ -291,7 +290,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getNumGemsRequired();
 	}
 
@@ -299,7 +298,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getNumAccepetedFbInvites();
 	}
 
@@ -332,7 +331,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResidenceConfigRecord value2(UInteger value) {
+	public StructureResidenceConfigRecord value2(Integer value) {
 		setNumMonsterSlots(value);
 		return this;
 	}
@@ -341,7 +340,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResidenceConfigRecord value3(UInteger value) {
+	public StructureResidenceConfigRecord value3(Integer value) {
 		setNumBonusMonsterSlots(value);
 		return this;
 	}
@@ -350,7 +349,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResidenceConfigRecord value4(UInteger value) {
+	public StructureResidenceConfigRecord value4(Integer value) {
 		setNumGemsRequired(value);
 		return this;
 	}
@@ -359,7 +358,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResidenceConfigRecord value5(UInteger value) {
+	public StructureResidenceConfigRecord value5(Integer value) {
 		setNumAccepetedFbInvites(value);
 		return this;
 	}
@@ -386,7 +385,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResidenceConfigRecord values(Integer value1, UInteger value2, UInteger value3, UInteger value4, UInteger value5, String value6, String value7) {
+	public StructureResidenceConfigRecord values(Integer value1, Integer value2, Integer value3, Integer value4, Integer value5, String value6, String value7) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -438,7 +437,7 @@ public class StructureResidenceConfigRecord extends UpdatableRecordImpl<Structur
 	/**
 	 * Create a detached, initialised StructureResidenceConfigRecord
 	 */
-	public StructureResidenceConfigRecord(Integer structId, UInteger numMonsterSlots, UInteger numBonusMonsterSlots, UInteger numGemsRequired, UInteger numAccepetedFbInvites, String occupationName, String imgSuffix) {
+	public StructureResidenceConfigRecord(Integer structId, Integer numMonsterSlots, Integer numBonusMonsterSlots, Integer numGemsRequired, Integer numAccepetedFbInvites, String occupationName, String imgSuffix) {
 		super(StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG);
 
 		setValue(0, structId);

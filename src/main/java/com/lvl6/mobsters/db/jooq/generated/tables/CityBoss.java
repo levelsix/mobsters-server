@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CityBoss extends TableImpl<CityBossRecord> {
 
-	private static final long serialVersionUID = -1307872729;
+	private static final long serialVersionUID = -759081937;
 
 	/**
 	 * The reference instance of <code>mobsters.city_boss</code>
@@ -59,7 +57,7 @@ public class CityBoss extends TableImpl<CityBossRecord> {
 	/**
 	 * The column <code>mobsters.city_boss.city_id</code>.
 	 */
-	public final TableField<CityBossRecord, UInteger> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<CityBossRecord, Integer> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.city_boss.monster_id</code>.
@@ -69,17 +67,17 @@ public class CityBoss extends TableImpl<CityBossRecord> {
 	/**
 	 * The column <code>mobsters.city_boss.exp_reward</code>. Not really needed, but
 	 */
-	public final TableField<CityBossRecord, UInteger> EXP_REWARD = createField("exp_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "Not really needed, but");
+	public final TableField<CityBossRecord, Integer> EXP_REWARD = createField("exp_reward", org.jooq.impl.SQLDataType.INTEGER, this, "Not really needed, but");
 
 	/**
 	 * The column <code>mobsters.city_boss.min_cash_drop</code>.
 	 */
-	public final TableField<CityBossRecord, UInteger> MIN_CASH_DROP = createField("min_cash_drop", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<CityBossRecord, Integer> MIN_CASH_DROP = createField("min_cash_drop", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.city_boss.max_cash_drop</code>.
 	 */
-	public final TableField<CityBossRecord, UInteger> MAX_CASH_DROP = createField("max_cash_drop", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<CityBossRecord, Integer> MAX_CASH_DROP = createField("max_cash_drop", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.city_boss.puzzle_piece_drop_rate</code>.
@@ -89,7 +87,7 @@ public class CityBoss extends TableImpl<CityBossRecord> {
 	/**
 	 * The column <code>mobsters.city_boss.level</code>.
 	 */
-	public final TableField<CityBossRecord, UByte> LEVEL = createField("level", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<CityBossRecord, Byte> LEVEL = createField("level", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * Create a <code>mobsters.city_boss</code> table reference

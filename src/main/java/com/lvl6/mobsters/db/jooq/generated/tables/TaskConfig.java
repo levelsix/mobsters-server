@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskConfig extends TableImpl<TaskConfigRecord> {
 
-	private static final long serialVersionUID = -796951085;
+	private static final long serialVersionUID = -807857592;
 
 	/**
 	 * The reference instance of <code>mobsters.task_config</code>
@@ -52,7 +51,7 @@ public class TaskConfig extends TableImpl<TaskConfigRecord> {
 	/**
 	 * The column <code>mobsters.task_config.id</code>.
 	 */
-	public final TableField<TaskConfigRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<TaskConfigRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.task_config.good_name</code>.
@@ -77,12 +76,12 @@ public class TaskConfig extends TableImpl<TaskConfigRecord> {
 	/**
 	 * The column <code>mobsters.task_config.prerequisite_task_id</code>. id in this table. Specifies the task the user should have completed before doing this one.
 	 */
-	public final TableField<TaskConfigRecord, UInteger> PREREQUISITE_TASK_ID = createField("prerequisite_task_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "id in this table. Specifies the task the user should have completed before doing this one.");
+	public final TableField<TaskConfigRecord, Integer> PREREQUISITE_TASK_ID = createField("prerequisite_task_id", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "id in this table. Specifies the task the user should have completed before doing this one.");
 
 	/**
 	 * The column <code>mobsters.task_config.prerequisite_quest_id</code>.
 	 */
-	public final TableField<TaskConfigRecord, UInteger> PREREQUISITE_QUEST_ID = createField("prerequisite_quest_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<TaskConfigRecord, Integer> PREREQUISITE_QUEST_ID = createField("prerequisite_quest_id", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.task_config.board_width</code>.

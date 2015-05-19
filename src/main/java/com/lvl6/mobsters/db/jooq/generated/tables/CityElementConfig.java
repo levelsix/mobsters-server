@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CityElementConfig extends TableImpl<CityElementConfigRecord> {
 
-	private static final long serialVersionUID = -968665403;
+	private static final long serialVersionUID = -16877578;
 
 	/**
 	 * The reference instance of <code>mobsters.city_element_config</code>
@@ -52,12 +51,12 @@ public class CityElementConfig extends TableImpl<CityElementConfigRecord> {
 	/**
 	 * The column <code>mobsters.city_element_config.city_id</code>.
 	 */
-	public final TableField<CityElementConfigRecord, UInteger> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<CityElementConfigRecord, Integer> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.city_element_config.asset_id</code>.
 	 */
-	public final TableField<CityElementConfigRecord, UInteger> ASSET_ID = createField("asset_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<CityElementConfigRecord, Integer> ASSET_ID = createField("asset_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.city_element_config.elem_type</code>.

@@ -21,8 +21,6 @@ import org.jooq.Record8;
 import org.jooq.Row;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -38,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "board_property_config", schema = "mobsters")
-public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardPropertyConfigRecord> implements Record8<Integer, Integer, String, UByte, UByte, String, UInteger, Integer>, IBoardPropertyConfig {
+public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardPropertyConfigRecord> implements Record8<Integer, Integer, String, Byte, Byte, String, Integer, Integer>, IBoardPropertyConfig {
 
-	private static final long serialVersionUID = 238106645;
+	private static final long serialVersionUID = -1315327120;
 
 	/**
 	 * Setter for <code>mobsters.board_property_config.id</code>.
@@ -103,7 +101,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * Setter for <code>mobsters.board_property_config.pos_x</code>.
 	 */
 	@Override
-	public BoardPropertyConfigRecord setPosX(UByte value) {
+	public BoardPropertyConfigRecord setPosX(Byte value) {
 		setValue(3, value);
 		return this;
 	}
@@ -113,15 +111,15 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 */
 	@Column(name = "pos_x", precision = 3)
 	@Override
-	public UByte getPosX() {
-		return (UByte) getValue(3);
+	public Byte getPosX() {
+		return (Byte) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.board_property_config.pos_y</code>.
 	 */
 	@Override
-	public BoardPropertyConfigRecord setPosY(UByte value) {
+	public BoardPropertyConfigRecord setPosY(Byte value) {
 		setValue(4, value);
 		return this;
 	}
@@ -131,8 +129,8 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 */
 	@Column(name = "pos_y", precision = 3)
 	@Override
-	public UByte getPosY() {
-		return (UByte) getValue(4);
+	public Byte getPosY() {
+		return (Byte) getValue(4);
 	}
 
 	/**
@@ -158,7 +156,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * Setter for <code>mobsters.board_property_config.value</code>.
 	 */
 	@Override
-	public BoardPropertyConfigRecord setValue(UInteger value) {
+	public BoardPropertyConfigRecord setValue(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -168,8 +166,8 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 */
 	@Column(name = "value", precision = 10)
 	@Override
-	public UInteger getValue() {
-		return (UInteger) getValue(6);
+	public Integer getValue() {
+		return (Integer) getValue(6);
 	}
 
 	/**
@@ -210,7 +208,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, Integer, String, UByte, UByte, String, UInteger, Integer> fieldsRow() {
+	public Row8<Integer, Integer, String, Byte, Byte, String, Integer, Integer> fieldsRow() {
 		return (Row8) super.fieldsRow();
 	}
 
@@ -218,7 +216,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, Integer, String, UByte, UByte, String, UInteger, Integer> valuesRow() {
+	public Row8<Integer, Integer, String, Byte, Byte, String, Integer, Integer> valuesRow() {
 		return (Row8) super.valuesRow();
 	}
 
@@ -250,7 +248,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field4() {
+	public Field<Byte> field4() {
 		return BoardPropertyConfig.BOARD_PROPERTY_CONFIG.POS_X;
 	}
 
@@ -258,7 +256,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field5() {
+	public Field<Byte> field5() {
 		return BoardPropertyConfig.BOARD_PROPERTY_CONFIG.POS_Y;
 	}
 
@@ -274,7 +272,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field7() {
+	public Field<Integer> field7() {
 		return BoardPropertyConfig.BOARD_PROPERTY_CONFIG.VALUE;
 	}
 
@@ -314,7 +312,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value4() {
+	public Byte value4() {
 		return getPosX();
 	}
 
@@ -322,7 +320,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value5() {
+	public Byte value5() {
 		return getPosY();
 	}
 
@@ -338,7 +336,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value7() {
+	public Integer value7() {
 		return getValue();
 	}
 
@@ -381,7 +379,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardPropertyConfigRecord value4(UByte value) {
+	public BoardPropertyConfigRecord value4(Byte value) {
 		setPosX(value);
 		return this;
 	}
@@ -390,7 +388,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardPropertyConfigRecord value5(UByte value) {
+	public BoardPropertyConfigRecord value5(Byte value) {
 		setPosY(value);
 		return this;
 	}
@@ -408,7 +406,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardPropertyConfigRecord value7(UInteger value) {
+	public BoardPropertyConfigRecord value7(Integer value) {
 		setValue(value);
 		return this;
 	}
@@ -426,7 +424,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardPropertyConfigRecord values(Integer value1, Integer value2, String value3, UByte value4, UByte value5, String value6, UInteger value7, Integer value8) {
+	public BoardPropertyConfigRecord values(Integer value1, Integer value2, String value3, Byte value4, Byte value5, String value6, Integer value7, Integer value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -480,7 +478,7 @@ public class BoardPropertyConfigRecord extends UpdatableRecordImpl<BoardProperty
 	/**
 	 * Create a detached, initialised BoardPropertyConfigRecord
 	 */
-	public BoardPropertyConfigRecord(Integer id, Integer boardId, String name, UByte posX, UByte posY, String element, UInteger value, Integer quantity) {
+	public BoardPropertyConfigRecord(Integer id, Integer boardId, String name, Byte posX, Byte posY, String element, Integer value, Integer quantity) {
 		super(BoardPropertyConfig.BOARD_PROPERTY_CONFIG);
 
 		setValue(0, id);

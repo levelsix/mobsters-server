@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 import org.jooq.Configuration;
 import org.jooq.Record2;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -132,7 +131,7 @@ public class MonsterLevelInfoConfigDao extends DAOImpl<MonsterLevelInfoConfigRec
 	/**
 	 * Fetch records that have <code>speed IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterLevelInfoConfig> fetchBySpeed(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterLevelInfoConfig> fetchBySpeed(Byte... values) {
 		return fetch(MonsterLevelInfoConfig.MONSTER_LEVEL_INFO_CONFIG.SPEED, values);
 	}
 

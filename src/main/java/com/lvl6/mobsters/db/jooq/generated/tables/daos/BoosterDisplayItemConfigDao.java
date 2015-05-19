@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -68,7 +67,7 @@ public class BoosterDisplayItemConfigDao extends DAOImpl<BoosterDisplayItemConfi
 	/**
 	 * Fetch records that have <code>booster_pack_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterDisplayItemConfig> fetchByBoosterPackId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterDisplayItemConfig> fetchByBoosterPackId(Integer... values) {
 		return fetch(BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG.BOOSTER_PACK_ID, values);
 	}
 
@@ -96,14 +95,14 @@ public class BoosterDisplayItemConfigDao extends DAOImpl<BoosterDisplayItemConfi
 	/**
 	 * Fetch records that have <code>gem_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterDisplayItemConfig> fetchByGemReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterDisplayItemConfig> fetchByGemReward(Integer... values) {
 		return fetch(BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG.GEM_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>quantity IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterDisplayItemConfig> fetchByQuantity(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterDisplayItemConfig> fetchByQuantity(Integer... values) {
 		return fetch(BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG.QUANTITY, values);
 	}
 

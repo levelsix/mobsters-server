@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PvpLeagueForUser extends TableImpl<PvpLeagueForUserRecord> {
 
-	private static final long serialVersionUID = 2116825226;
+	private static final long serialVersionUID = 148746861;
 
 	/**
 	 * The reference instance of <code>mobsters.pvp_league_for_user</code>
@@ -58,12 +57,12 @@ public class PvpLeagueForUser extends TableImpl<PvpLeagueForUserRecord> {
 	/**
 	 * The column <code>mobsters.pvp_league_for_user.league_id</code>.
 	 */
-	public final TableField<PvpLeagueForUserRecord, UInteger> LEAGUE_ID = createField("league_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<PvpLeagueForUserRecord, Integer> LEAGUE_ID = createField("league_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.pvp_league_for_user.rank</code>.
 	 */
-	public final TableField<PvpLeagueForUserRecord, UInteger> RANK = createField("rank", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<PvpLeagueForUserRecord, Integer> RANK = createField("rank", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.pvp_league_for_user.elo</code>. if lower than lowest league in pvp league table, then user is in lowest league. if higher than highest league, then user is in highest league

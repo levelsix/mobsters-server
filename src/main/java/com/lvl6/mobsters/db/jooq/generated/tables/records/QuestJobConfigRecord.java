@@ -21,7 +21,6 @@ import org.jooq.Record9;
 import org.jooq.Row;
 import org.jooq.Row9;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "quest_job_config", schema = "mobsters")
-public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigRecord> implements Record9<Integer, Integer, String, String, Integer, Integer, Integer, UInteger, UInteger>, IQuestJobConfig {
+public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigRecord> implements Record9<Integer, Integer, String, String, Integer, Integer, Integer, Integer, Integer>, IQuestJobConfig {
 
-	private static final long serialVersionUID = 1123133031;
+	private static final long serialVersionUID = -931419594;
 
 	/**
 	 * Setter for <code>mobsters.quest_job_config.id</code>.
@@ -175,7 +174,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * Setter for <code>mobsters.quest_job_config.city_id</code>.
 	 */
 	@Override
-	public QuestJobConfigRecord setCityId(UInteger value) {
+	public QuestJobConfigRecord setCityId(Integer value) {
 		setValue(7, value);
 		return this;
 	}
@@ -185,15 +184,15 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 */
 	@Column(name = "city_id", precision = 7)
 	@Override
-	public UInteger getCityId() {
-		return (UInteger) getValue(7);
+	public Integer getCityId() {
+		return (Integer) getValue(7);
 	}
 
 	/**
 	 * Setter for <code>mobsters.quest_job_config.city_asset_num</code>. when user clicks go button, the camera will be focused on this city_asset (look in city_element)
 	 */
 	@Override
-	public QuestJobConfigRecord setCityAssetNum(UInteger value) {
+	public QuestJobConfigRecord setCityAssetNum(Integer value) {
 		setValue(8, value);
 		return this;
 	}
@@ -203,8 +202,8 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 */
 	@Column(name = "city_asset_num", precision = 7)
 	@Override
-	public UInteger getCityAssetNum() {
-		return (UInteger) getValue(8);
+	public Integer getCityAssetNum() {
+		return (Integer) getValue(8);
 	}
 
 	// -------------------------------------------------------------------------
@@ -227,7 +226,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<Integer, Integer, String, String, Integer, Integer, Integer, UInteger, UInteger> fieldsRow() {
+	public Row9<Integer, Integer, String, String, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
 		return (Row9) super.fieldsRow();
 	}
 
@@ -235,7 +234,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<Integer, Integer, String, String, Integer, Integer, Integer, UInteger, UInteger> valuesRow() {
+	public Row9<Integer, Integer, String, String, Integer, Integer, Integer, Integer, Integer> valuesRow() {
 		return (Row9) super.valuesRow();
 	}
 
@@ -299,7 +298,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field8() {
+	public Field<Integer> field8() {
 		return QuestJobConfig.QUEST_JOB_CONFIG.CITY_ID;
 	}
 
@@ -307,7 +306,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field9() {
+	public Field<Integer> field9() {
 		return QuestJobConfig.QUEST_JOB_CONFIG.CITY_ASSET_NUM;
 	}
 
@@ -371,7 +370,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value8() {
+	public Integer value8() {
 		return getCityId();
 	}
 
@@ -379,7 +378,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value9() {
+	public Integer value9() {
 		return getCityAssetNum();
 	}
 
@@ -450,7 +449,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestJobConfigRecord value8(UInteger value) {
+	public QuestJobConfigRecord value8(Integer value) {
 		setCityId(value);
 		return this;
 	}
@@ -459,7 +458,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestJobConfigRecord value9(UInteger value) {
+	public QuestJobConfigRecord value9(Integer value) {
 		setCityAssetNum(value);
 		return this;
 	}
@@ -468,7 +467,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestJobConfigRecord values(Integer value1, Integer value2, String value3, String value4, Integer value5, Integer value6, Integer value7, UInteger value8, UInteger value9) {
+	public QuestJobConfigRecord values(Integer value1, Integer value2, String value3, String value4, Integer value5, Integer value6, Integer value7, Integer value8, Integer value9) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -524,7 +523,7 @@ public class QuestJobConfigRecord extends UpdatableRecordImpl<QuestJobConfigReco
 	/**
 	 * Create a detached, initialised QuestJobConfigRecord
 	 */
-	public QuestJobConfigRecord(Integer id, Integer questId, String questJobType, String description, Integer staticDataId, Integer quantity, Integer priority, UInteger cityId, UInteger cityAssetNum) {
+	public QuestJobConfigRecord(Integer id, Integer questId, String questJobType, String description, Integer staticDataId, Integer quantity, Integer priority, Integer cityId, Integer cityAssetNum) {
 		super(QuestJobConfig.QUEST_JOB_CONFIG);
 
 		setValue(0, id);

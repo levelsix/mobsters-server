@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureMiniJobConfig extends TableImpl<StructureMiniJobConfigRecord> {
 
-	private static final long serialVersionUID = -996938520;
+	private static final long serialVersionUID = -833583617;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_mini_job_config</code>
@@ -57,12 +56,12 @@ public class StructureMiniJobConfig extends TableImpl<StructureMiniJobConfigReco
 	/**
 	 * The column <code>mobsters.structure_mini_job_config.generated_job_limit</code>.
 	 */
-	public final TableField<StructureMiniJobConfigRecord, UInteger> GENERATED_JOB_LIMIT = createField("generated_job_limit", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<StructureMiniJobConfigRecord, Integer> GENERATED_JOB_LIMIT = createField("generated_job_limit", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.structure_mini_job_config.hours_between_job_generation</code>.
 	 */
-	public final TableField<StructureMiniJobConfigRecord, UInteger> HOURS_BETWEEN_JOB_GENERATION = createField("hours_between_job_generation", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<StructureMiniJobConfigRecord, Integer> HOURS_BETWEEN_JOB_GENERATION = createField("hours_between_job_generation", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>mobsters.structure_mini_job_config</code> table reference

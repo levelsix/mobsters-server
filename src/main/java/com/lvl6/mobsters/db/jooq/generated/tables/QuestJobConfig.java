@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class QuestJobConfig extends TableImpl<QuestJobConfigRecord> {
 
-	private static final long serialVersionUID = -2144138455;
+	private static final long serialVersionUID = 1487522434;
 
 	/**
 	 * The reference instance of <code>mobsters.quest_job_config</code>
@@ -88,12 +87,12 @@ public class QuestJobConfig extends TableImpl<QuestJobConfigRecord> {
 	/**
 	 * The column <code>mobsters.quest_job_config.city_id</code>.
 	 */
-	public final TableField<QuestJobConfigRecord, UInteger> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<QuestJobConfigRecord, Integer> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.quest_job_config.city_asset_num</code>. when user clicks go button, the camera will be focused on this city_asset (look in city_element)
 	 */
-	public final TableField<QuestJobConfigRecord, UInteger> CITY_ASSET_NUM = createField("city_asset_num", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "when user clicks go button, the camera will be focused on this city_asset (look in city_element)");
+	public final TableField<QuestJobConfigRecord, Integer> CITY_ASSET_NUM = createField("city_asset_num", org.jooq.impl.SQLDataType.INTEGER, this, "when user clicks go button, the camera will be focused on this city_asset (look in city_element)");
 
 	/**
 	 * Create a <code>mobsters.quest_job_config</code> table reference

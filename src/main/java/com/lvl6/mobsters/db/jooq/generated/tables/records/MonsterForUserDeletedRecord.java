@@ -23,8 +23,6 @@ import org.jooq.Record14;
 import org.jooq.Row;
 import org.jooq.Row14;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -40,9 +38,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "monster_for_user_deleted", schema = "mobsters")
-public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForUserDeletedRecord> implements Record14<String, String, UInteger, UInteger, UByte, UInteger, UByte, Boolean, Timestamp, UByte, String, String, String, Timestamp>, IMonsterForUserDeleted {
+public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForUserDeletedRecord> implements Record14<String, String, Integer, Integer, Byte, Integer, Byte, Boolean, Timestamp, Byte, String, String, String, Timestamp>, IMonsterForUserDeleted {
 
-	private static final long serialVersionUID = 1569500233;
+	private static final long serialVersionUID = -1374959755;
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user_deleted.monster_for_user_id</code>.
@@ -88,7 +86,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * Setter for <code>mobsters.monster_for_user_deleted.monster_id</code>.
 	 */
 	@Override
-	public MonsterForUserDeletedRecord setMonsterId(UInteger value) {
+	public MonsterForUserDeletedRecord setMonsterId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -98,15 +96,15 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 */
 	@Column(name = "monster_id", precision = 10)
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(2);
+	public Integer getMonsterId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user_deleted.current_experience</code>.
 	 */
 	@Override
-	public MonsterForUserDeletedRecord setCurrentExperience(UInteger value) {
+	public MonsterForUserDeletedRecord setCurrentExperience(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -116,15 +114,15 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 */
 	@Column(name = "current_experience", precision = 10)
 	@Override
-	public UInteger getCurrentExperience() {
-		return (UInteger) getValue(3);
+	public Integer getCurrentExperience() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user_deleted.current_level</code>.
 	 */
 	@Override
-	public MonsterForUserDeletedRecord setCurrentLevel(UByte value) {
+	public MonsterForUserDeletedRecord setCurrentLevel(Byte value) {
 		setValue(4, value);
 		return this;
 	}
@@ -134,15 +132,15 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 */
 	@Column(name = "current_level", precision = 3)
 	@Override
-	public UByte getCurrentLevel() {
-		return (UByte) getValue(4);
+	public Byte getCurrentLevel() {
+		return (Byte) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user_deleted.current_health</code>.
 	 */
 	@Override
-	public MonsterForUserDeletedRecord setCurrentHealth(UInteger value) {
+	public MonsterForUserDeletedRecord setCurrentHealth(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -152,15 +150,15 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 */
 	@Column(name = "current_health", precision = 10)
 	@Override
-	public UInteger getCurrentHealth() {
-		return (UInteger) getValue(5);
+	public Integer getCurrentHealth() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user_deleted.num_pieces</code>.
 	 */
 	@Override
-	public MonsterForUserDeletedRecord setNumPieces(UByte value) {
+	public MonsterForUserDeletedRecord setNumPieces(Byte value) {
 		setValue(6, value);
 		return this;
 	}
@@ -170,8 +168,8 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 */
 	@Column(name = "num_pieces", precision = 3)
 	@Override
-	public UByte getNumPieces() {
-		return (UByte) getValue(6);
+	public Byte getNumPieces() {
+		return (Byte) getValue(6);
 	}
 
 	/**
@@ -214,7 +212,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * Setter for <code>mobsters.monster_for_user_deleted.team_slot_num</code>.
 	 */
 	@Override
-	public MonsterForUserDeletedRecord setTeamSlotNum(UByte value) {
+	public MonsterForUserDeletedRecord setTeamSlotNum(Byte value) {
 		setValue(9, value);
 		return this;
 	}
@@ -224,8 +222,8 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 */
 	@Column(name = "team_slot_num", precision = 3)
 	@Override
-	public UByte getTeamSlotNum() {
-		return (UByte) getValue(9);
+	public Byte getTeamSlotNum() {
+		return (Byte) getValue(9);
 	}
 
 	/**
@@ -323,7 +321,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row14<String, String, UInteger, UInteger, UByte, UInteger, UByte, Boolean, Timestamp, UByte, String, String, String, Timestamp> fieldsRow() {
+	public Row14<String, String, Integer, Integer, Byte, Integer, Byte, Boolean, Timestamp, Byte, String, String, String, Timestamp> fieldsRow() {
 		return (Row14) super.fieldsRow();
 	}
 
@@ -331,7 +329,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row14<String, String, UInteger, UInteger, UByte, UInteger, UByte, Boolean, Timestamp, UByte, String, String, String, Timestamp> valuesRow() {
+	public Row14<String, String, Integer, Integer, Byte, Integer, Byte, Boolean, Timestamp, Byte, String, String, String, Timestamp> valuesRow() {
 		return (Row14) super.valuesRow();
 	}
 
@@ -355,7 +353,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.MONSTER_ID;
 	}
 
@@ -363,7 +361,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.CURRENT_EXPERIENCE;
 	}
 
@@ -371,7 +369,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field5() {
+	public Field<Byte> field5() {
 		return MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.CURRENT_LEVEL;
 	}
 
@@ -379,7 +377,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.CURRENT_HEALTH;
 	}
 
@@ -387,7 +385,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field7() {
+	public Field<Byte> field7() {
 		return MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.NUM_PIECES;
 	}
 
@@ -411,7 +409,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field10() {
+	public Field<Byte> field10() {
 		return MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.TEAM_SLOT_NUM;
 	}
 
@@ -467,7 +465,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getMonsterId();
 	}
 
@@ -475,7 +473,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getCurrentExperience();
 	}
 
@@ -483,7 +481,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value5() {
+	public Byte value5() {
 		return getCurrentLevel();
 	}
 
@@ -491,7 +489,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getCurrentHealth();
 	}
 
@@ -499,7 +497,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value7() {
+	public Byte value7() {
 		return getNumPieces();
 	}
 
@@ -523,7 +521,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value10() {
+	public Byte value10() {
 		return getTeamSlotNum();
 	}
 
@@ -581,7 +579,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord value3(UInteger value) {
+	public MonsterForUserDeletedRecord value3(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -590,7 +588,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord value4(UInteger value) {
+	public MonsterForUserDeletedRecord value4(Integer value) {
 		setCurrentExperience(value);
 		return this;
 	}
@@ -599,7 +597,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord value5(UByte value) {
+	public MonsterForUserDeletedRecord value5(Byte value) {
 		setCurrentLevel(value);
 		return this;
 	}
@@ -608,7 +606,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord value6(UInteger value) {
+	public MonsterForUserDeletedRecord value6(Integer value) {
 		setCurrentHealth(value);
 		return this;
 	}
@@ -617,7 +615,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord value7(UByte value) {
+	public MonsterForUserDeletedRecord value7(Byte value) {
 		setNumPieces(value);
 		return this;
 	}
@@ -644,7 +642,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord value10(UByte value) {
+	public MonsterForUserDeletedRecord value10(Byte value) {
 		setTeamSlotNum(value);
 		return this;
 	}
@@ -689,7 +687,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserDeletedRecord values(String value1, String value2, UInteger value3, UInteger value4, UByte value5, UInteger value6, UByte value7, Boolean value8, Timestamp value9, UByte value10, String value11, String value12, String value13, Timestamp value14) {
+	public MonsterForUserDeletedRecord values(String value1, String value2, Integer value3, Integer value4, Byte value5, Integer value6, Byte value7, Boolean value8, Timestamp value9, Byte value10, String value11, String value12, String value13, Timestamp value14) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -755,7 +753,7 @@ public class MonsterForUserDeletedRecord extends UpdatableRecordImpl<MonsterForU
 	/**
 	 * Create a detached, initialised MonsterForUserDeletedRecord
 	 */
-	public MonsterForUserDeletedRecord(String monsterForUserId, String userId, UInteger monsterId, UInteger currentExperience, UByte currentLevel, UInteger currentHealth, UByte numPieces, Boolean isComplete, Timestamp combineStartTime, UByte teamSlotNum, String sourceOfPieces, String deletedReason, String details, Timestamp deletedTime) {
+	public MonsterForUserDeletedRecord(String monsterForUserId, String userId, Integer monsterId, Integer currentExperience, Byte currentLevel, Integer currentHealth, Byte numPieces, Boolean isComplete, Timestamp combineStartTime, Byte teamSlotNum, String sourceOfPieces, String deletedReason, String details, Timestamp deletedTime) {
 		super(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED);
 
 		setValue(0, monsterForUserId);

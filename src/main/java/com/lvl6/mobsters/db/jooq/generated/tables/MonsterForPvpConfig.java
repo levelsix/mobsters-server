@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterForPvpConfig extends TableImpl<MonsterForPvpConfigRecord> {
 
-	private static final long serialVersionUID = 438089325;
+	private static final long serialVersionUID = -507604216;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_for_pvp_config</code>
@@ -63,7 +62,7 @@ public class MonsterForPvpConfig extends TableImpl<MonsterForPvpConfigRecord> {
 	/**
 	 * The column <code>mobsters.monster_for_pvp_config.monster_lvl</code>.
 	 */
-	public final TableField<MonsterForPvpConfigRecord, UByte> MONSTER_LVL = createField("monster_lvl", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<MonsterForPvpConfigRecord, Byte> MONSTER_LVL = createField("monster_lvl", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_pvp_config.elo</code>.

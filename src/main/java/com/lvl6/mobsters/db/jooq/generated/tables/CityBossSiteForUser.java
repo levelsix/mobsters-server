@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CityBossSiteForUser extends TableImpl<CityBossSiteForUserRecord> {
 
-	private static final long serialVersionUID = -1458791806;
+	private static final long serialVersionUID = -1953269049;
 
 	/**
 	 * The reference instance of <code>mobsters.city_boss_site_for_user</code>
@@ -53,7 +52,7 @@ public class CityBossSiteForUser extends TableImpl<CityBossSiteForUserRecord> {
 	/**
 	 * The column <code>mobsters.city_boss_site_for_user.city_id</code>.
 	 */
-	public final TableField<CityBossSiteForUserRecord, UInteger> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<CityBossSiteForUserRecord, Integer> CITY_ID = createField("city_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.city_boss_site_for_user.user_id</code>.
@@ -63,12 +62,12 @@ public class CityBossSiteForUser extends TableImpl<CityBossSiteForUserRecord> {
 	/**
 	 * The column <code>mobsters.city_boss_site_for_user.task_id</code>.
 	 */
-	public final TableField<CityBossSiteForUserRecord, UInteger> TASK_ID = createField("task_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<CityBossSiteForUserRecord, Integer> TASK_ID = createField("task_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.city_boss_site_for_user.boss_id</code>.
 	 */
-	public final TableField<CityBossSiteForUserRecord, UInteger> BOSS_ID = createField("boss_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<CityBossSiteForUserRecord, Integer> BOSS_ID = createField("boss_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.city_boss_site_for_user.time_of_entry</code>.

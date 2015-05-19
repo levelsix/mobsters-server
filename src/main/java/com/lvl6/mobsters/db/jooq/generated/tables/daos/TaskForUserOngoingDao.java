@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -76,7 +75,7 @@ public class TaskForUserOngoingDao extends DAOImpl<TaskForUserOngoingRecord, com
 	/**
 	 * Fetch records that have <code>task_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskForUserOngoing> fetchByTaskId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskForUserOngoing> fetchByTaskId(Integer... values) {
 		return fetch(TaskForUserOngoing.TASK_FOR_USER_ONGOING.TASK_ID, values);
 	}
 

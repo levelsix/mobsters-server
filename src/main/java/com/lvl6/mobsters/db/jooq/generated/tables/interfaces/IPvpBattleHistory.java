@@ -346,6 +346,18 @@ public interface IPvpBattleHistory extends Serializable {
 	@Column(name = "clan_avenged", precision = 1)
 	public Boolean getClanAvenged();
 
+	/**
+	 * Setter for <code>mobsters.pvp_battle_history.replay_id</code>.
+	 */
+	public IPvpBattleHistory setReplayId(String value);
+
+	/**
+	 * Getter for <code>mobsters.pvp_battle_history.replay_id</code>.
+	 */
+	@Column(name = "replay_id", length = 36)
+	@Size(max = 36)
+	public String getReplayId();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

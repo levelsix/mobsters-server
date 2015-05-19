@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoardPropertyConfig extends TableImpl<BoardPropertyConfigRecord> {
 
-	private static final long serialVersionUID = -1809970526;
+	private static final long serialVersionUID = -753610608;
 
 	/**
 	 * The reference instance of <code>mobsters.board_property_config</code>
@@ -69,12 +67,12 @@ public class BoardPropertyConfig extends TableImpl<BoardPropertyConfigRecord> {
 	/**
 	 * The column <code>mobsters.board_property_config.pos_x</code>.
 	 */
-	public final TableField<BoardPropertyConfigRecord, UByte> POS_X = createField("pos_x", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<BoardPropertyConfigRecord, Byte> POS_X = createField("pos_x", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.board_property_config.pos_y</code>.
 	 */
-	public final TableField<BoardPropertyConfigRecord, UByte> POS_Y = createField("pos_y", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<BoardPropertyConfigRecord, Byte> POS_Y = createField("pos_y", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.board_property_config.element</code>.
@@ -84,7 +82,7 @@ public class BoardPropertyConfig extends TableImpl<BoardPropertyConfigRecord> {
 	/**
 	 * The column <code>mobsters.board_property_config.value</code>.
 	 */
-	public final TableField<BoardPropertyConfigRecord, UInteger> VALUE = createField("value", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoardPropertyConfigRecord, Integer> VALUE = createField("value", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.board_property_config.quantity</code>. Mostly used for jelly, as in break jelly twice kind of thing.

@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterHealingForUser extends TableImpl<MonsterHealingForUserRecord> {
 
-	private static final long serialVersionUID = -1286963059;
+	private static final long serialVersionUID = -770272560;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_healing_for_user</code>
@@ -73,7 +72,7 @@ public class MonsterHealingForUser extends TableImpl<MonsterHealingForUserRecord
 	/**
 	 * The column <code>mobsters.monster_healing_for_user.priority</code>.
 	 */
-	public final TableField<MonsterHealingForUserRecord, UInteger> PRIORITY = createField("priority", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<MonsterHealingForUserRecord, Integer> PRIORITY = createField("priority", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_healing_for_user.elapsed_seconds</code>.

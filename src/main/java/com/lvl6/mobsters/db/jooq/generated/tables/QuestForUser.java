@@ -18,8 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class QuestForUser extends TableImpl<QuestForUserRecord> {
 
-	private static final long serialVersionUID = -839295112;
+	private static final long serialVersionUID = -1623055638;
 
 	/**
 	 * The reference instance of <code>mobsters.quest_for_user</code>
@@ -58,7 +56,7 @@ public class QuestForUser extends TableImpl<QuestForUserRecord> {
 	/**
 	 * The column <code>mobsters.quest_for_user.quest_id</code>.
 	 */
-	public final TableField<QuestForUserRecord, UInteger> QUEST_ID = createField("quest_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<QuestForUserRecord, Integer> QUEST_ID = createField("quest_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.quest_for_user.is_redeemed</code>.
@@ -68,7 +66,7 @@ public class QuestForUser extends TableImpl<QuestForUserRecord> {
 	/**
 	 * The column <code>mobsters.quest_for_user.is_complete</code>.
 	 */
-	public final TableField<QuestForUserRecord, UByte> IS_COMPLETE = createField("is_complete", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<QuestForUserRecord, Byte> IS_COMPLETE = createField("is_complete", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.quest_for_user</code> table reference

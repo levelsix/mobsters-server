@@ -21,7 +21,6 @@ import org.jooq.Record4;
 import org.jooq.Row;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "board_config", schema = "mobsters")
-public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> implements Record4<Integer, UByte, UByte, String>, IBoardConfig {
+public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> implements Record4<Integer, Byte, Byte, String>, IBoardConfig {
 
-	private static final long serialVersionUID = -1495768591;
+	private static final long serialVersionUID = 818817224;
 
 	/**
 	 * Setter for <code>mobsters.board_config.id</code>.
@@ -65,7 +64,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * Setter for <code>mobsters.board_config.width</code>.
 	 */
 	@Override
-	public BoardConfigRecord setWidth(UByte value) {
+	public BoardConfigRecord setWidth(Byte value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,15 +74,15 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 */
 	@Column(name = "width", precision = 3)
 	@Override
-	public UByte getWidth() {
-		return (UByte) getValue(1);
+	public Byte getWidth() {
+		return (Byte) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.board_config.height</code>.
 	 */
 	@Override
-	public BoardConfigRecord setHeight(UByte value) {
+	public BoardConfigRecord setHeight(Byte value) {
 		setValue(2, value);
 		return this;
 	}
@@ -93,8 +92,8 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 */
 	@Column(name = "height", precision = 3)
 	@Override
-	public UByte getHeight() {
-		return (UByte) getValue(2);
+	public Byte getHeight() {
+		return (Byte) getValue(2);
 	}
 
 	/**
@@ -136,7 +135,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<Integer, UByte, UByte, String> fieldsRow() {
+	public Row4<Integer, Byte, Byte, String> fieldsRow() {
 		return (Row4) super.fieldsRow();
 	}
 
@@ -144,7 +143,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<Integer, UByte, UByte, String> valuesRow() {
+	public Row4<Integer, Byte, Byte, String> valuesRow() {
 		return (Row4) super.valuesRow();
 	}
 
@@ -160,7 +159,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field2() {
+	public Field<Byte> field2() {
 		return BoardConfig.BOARD_CONFIG.WIDTH;
 	}
 
@@ -168,7 +167,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field3() {
+	public Field<Byte> field3() {
 		return BoardConfig.BOARD_CONFIG.HEIGHT;
 	}
 
@@ -192,7 +191,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value2() {
+	public Byte value2() {
 		return getWidth();
 	}
 
@@ -200,7 +199,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value3() {
+	public Byte value3() {
 		return getHeight();
 	}
 
@@ -225,7 +224,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardConfigRecord value2(UByte value) {
+	public BoardConfigRecord value2(Byte value) {
 		setWidth(value);
 		return this;
 	}
@@ -234,7 +233,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardConfigRecord value3(UByte value) {
+	public BoardConfigRecord value3(Byte value) {
 		setHeight(value);
 		return this;
 	}
@@ -252,7 +251,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoardConfigRecord values(Integer value1, UByte value2, UByte value3, String value4) {
+	public BoardConfigRecord values(Integer value1, Byte value2, Byte value3, String value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -298,7 +297,7 @@ public class BoardConfigRecord extends UpdatableRecordImpl<BoardConfigRecord> im
 	/**
 	 * Create a detached, initialised BoardConfigRecord
 	 */
-	public BoardConfigRecord(Integer id, UByte width, UByte height, String orbElements) {
+	public BoardConfigRecord(Integer id, Byte width, Byte height, String orbElements) {
 		super(BoardConfig.BOARD_CONFIG);
 
 		setValue(0, id);

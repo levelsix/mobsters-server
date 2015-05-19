@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClanRaidStageMonsterConfig extends TableImpl<ClanRaidStageMonsterConfigRecord> {
 
-	private static final long serialVersionUID = -474487921;
+	private static final long serialVersionUID = -1725956762;
 
 	/**
 	 * The reference instance of <code>mobsters.clan_raid_stage_monster_config</code>
@@ -57,12 +56,12 @@ public class ClanRaidStageMonsterConfig extends TableImpl<ClanRaidStageMonsterCo
 	/**
 	 * The column <code>mobsters.clan_raid_stage_monster_config.clan_raid_stage_id</code>. multiple clan_raid_stage_monsters can point to a clan_raid_stage (all will spawn)
 	 */
-	public final TableField<ClanRaidStageMonsterConfigRecord, UInteger> CLAN_RAID_STAGE_ID = createField("clan_raid_stage_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "multiple clan_raid_stage_monsters can point to a clan_raid_stage (all will spawn)");
+	public final TableField<ClanRaidStageMonsterConfigRecord, Integer> CLAN_RAID_STAGE_ID = createField("clan_raid_stage_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "multiple clan_raid_stage_monsters can point to a clan_raid_stage (all will spawn)");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_monster_config.monster_id</code>.
 	 */
-	public final TableField<ClanRaidStageMonsterConfigRecord, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<ClanRaidStageMonsterConfigRecord, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_monster_config.monster_hp</code>. instead of specifying monster level info, specify hp here

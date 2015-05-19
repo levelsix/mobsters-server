@@ -10,6 +10,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.AlertOnStartup;
 import com.lvl6.mobsters.db.jooq.generated.tables.BattleItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.BattleItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.BattleItemQueueForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.BattleReplayForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.BoardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.BoardObstacleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.BoardPropertyConfig;
@@ -55,6 +56,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionPurchaseForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.FileDownloadConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftForTangoUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.GoldSaleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
@@ -135,6 +138,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceGeneratorConf
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceStorageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTeamCenterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserClientState;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserCompleted;
@@ -164,6 +169,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.records.AlertOnStartupRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.BattleItemConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.BattleItemForUserRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.BattleItemQueueForUserRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.BattleReplayForUserRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.BoardConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.BoardObstacleConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.BoardPropertyConfigRecord;
@@ -209,6 +215,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentForUser
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionCostConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionPurchaseForUserRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.FileDownloadConfigRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.GiftForTangoUserRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.GiftForUserRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.GoldSaleConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.IapHistoryRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ItemConfigRecord;
@@ -289,6 +297,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.records.StructureResourceGener
 import com.lvl6.mobsters.db.jooq.generated.tables.records.StructureResourceStorageConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.StructureTeamCenterConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.StructureTownHallConfigRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.TangoGiftConfigRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.TangoGiftRewardConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.TaskConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserClientStateRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserCompletedRecord;
@@ -318,7 +328,6 @@ import javax.annotation.Generated;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -353,7 +362,7 @@ public class Keys {
 	public static final Identity<ExpansionCostConfigRecord, Integer> IDENTITY_EXPANSION_COST_CONFIG = Identities0.IDENTITY_EXPANSION_COST_CONFIG;
 	public static final Identity<FileDownloadConfigRecord, Integer> IDENTITY_FILE_DOWNLOAD_CONFIG = Identities0.IDENTITY_FILE_DOWNLOAD_CONFIG;
 	public static final Identity<GoldSaleConfigRecord, Integer> IDENTITY_GOLD_SALE_CONFIG = Identities0.IDENTITY_GOLD_SALE_CONFIG;
-	public static final Identity<LoadTestingEventsRecord, UInteger> IDENTITY_LOAD_TESTING_EVENTS = Identities0.IDENTITY_LOAD_TESTING_EVENTS;
+	public static final Identity<LoadTestingEventsRecord, Integer> IDENTITY_LOAD_TESTING_EVENTS = Identities0.IDENTITY_LOAD_TESTING_EVENTS;
 	public static final Identity<LockBoxEventConfigRecord, Integer> IDENTITY_LOCK_BOX_EVENT_CONFIG = Identities0.IDENTITY_LOCK_BOX_EVENT_CONFIG;
 	public static final Identity<LockBoxItemConfigRecord, Integer> IDENTITY_LOCK_BOX_ITEM_CONFIG = Identities0.IDENTITY_LOCK_BOX_ITEM_CONFIG;
 	public static final Identity<MiniEventConfigRecord, Integer> IDENTITY_MINI_EVENT_CONFIG = Identities0.IDENTITY_MINI_EVENT_CONFIG;
@@ -372,7 +381,7 @@ public class Keys {
 	public static final Identity<ServerToggleConfigRecord, Integer> IDENTITY_SERVER_TOGGLE_CONFIG = Identities0.IDENTITY_SERVER_TOGGLE_CONFIG;
 	public static final Identity<SkillConfigRecord, Integer> IDENTITY_SKILL_CONFIG = Identities0.IDENTITY_SKILL_CONFIG;
 	public static final Identity<SkillPropertyConfigRecord, Integer> IDENTITY_SKILL_PROPERTY_CONFIG = Identities0.IDENTITY_SKILL_PROPERTY_CONFIG;
-	public static final Identity<StructureConfigRecord, UInteger> IDENTITY_STRUCTURE_CONFIG = Identities0.IDENTITY_STRUCTURE_CONFIG;
+	public static final Identity<StructureConfigRecord, Integer> IDENTITY_STRUCTURE_CONFIG = Identities0.IDENTITY_STRUCTURE_CONFIG;
 	public static final Identity<TaskStageConfigRecord, Integer> IDENTITY_TASK_STAGE_CONFIG = Identities0.IDENTITY_TASK_STAGE_CONFIG;
 	public static final Identity<TaskStageMonsterConfigRecord, Integer> IDENTITY_TASK_STAGE_MONSTER_CONFIG = Identities0.IDENTITY_TASK_STAGE_MONSTER_CONFIG;
 	public static final Identity<TournamentEventConfigRecord, Integer> IDENTITY_TOURNAMENT_EVENT_CONFIG = Identities0.IDENTITY_TOURNAMENT_EVENT_CONFIG;
@@ -387,6 +396,7 @@ public class Keys {
 	public static final UniqueKey<BattleItemConfigRecord> KEY_BATTLE_ITEM_CONFIG_PRIMARY = UniqueKeys0.KEY_BATTLE_ITEM_CONFIG_PRIMARY;
 	public static final UniqueKey<BattleItemForUserRecord> KEY_BATTLE_ITEM_FOR_USER_PRIMARY = UniqueKeys0.KEY_BATTLE_ITEM_FOR_USER_PRIMARY;
 	public static final UniqueKey<BattleItemQueueForUserRecord> KEY_BATTLE_ITEM_QUEUE_FOR_USER_PRIMARY = UniqueKeys0.KEY_BATTLE_ITEM_QUEUE_FOR_USER_PRIMARY;
+	public static final UniqueKey<BattleReplayForUserRecord> KEY_BATTLE_REPLAY_FOR_USER_PRIMARY = UniqueKeys0.KEY_BATTLE_REPLAY_FOR_USER_PRIMARY;
 	public static final UniqueKey<BoardConfigRecord> KEY_BOARD_CONFIG_PRIMARY = UniqueKeys0.KEY_BOARD_CONFIG_PRIMARY;
 	public static final UniqueKey<BoardObstacleConfigRecord> KEY_BOARD_OBSTACLE_CONFIG_PRIMARY = UniqueKeys0.KEY_BOARD_OBSTACLE_CONFIG_PRIMARY;
 	public static final UniqueKey<BoardPropertyConfigRecord> KEY_BOARD_PROPERTY_CONFIG_PRIMARY = UniqueKeys0.KEY_BOARD_PROPERTY_CONFIG_PRIMARY;
@@ -437,6 +447,8 @@ public class Keys {
 	public static final UniqueKey<ExpansionCostConfigRecord> KEY_EXPANSION_COST_CONFIG_PRIMARY = UniqueKeys0.KEY_EXPANSION_COST_CONFIG_PRIMARY;
 	public static final UniqueKey<ExpansionPurchaseForUserRecord> KEY_EXPANSION_PURCHASE_FOR_USER_PRIMARY = UniqueKeys0.KEY_EXPANSION_PURCHASE_FOR_USER_PRIMARY;
 	public static final UniqueKey<FileDownloadConfigRecord> KEY_FILE_DOWNLOAD_CONFIG_PRIMARY = UniqueKeys0.KEY_FILE_DOWNLOAD_CONFIG_PRIMARY;
+	public static final UniqueKey<GiftForTangoUserRecord> KEY_GIFT_FOR_TANGO_USER_PRIMARY = UniqueKeys0.KEY_GIFT_FOR_TANGO_USER_PRIMARY;
+	public static final UniqueKey<GiftForUserRecord> KEY_GIFT_FOR_USER_PRIMARY = UniqueKeys0.KEY_GIFT_FOR_USER_PRIMARY;
 	public static final UniqueKey<GoldSaleConfigRecord> KEY_GOLD_SALE_CONFIG_PRIMARY = UniqueKeys0.KEY_GOLD_SALE_CONFIG_PRIMARY;
 	public static final UniqueKey<IapHistoryRecord> KEY_IAP_HISTORY_PRIMARY = UniqueKeys0.KEY_IAP_HISTORY_PRIMARY;
 	public static final UniqueKey<IapHistoryRecord> KEY_IAP_HISTORY_TRANSACTION_ID_UNIQUE = UniqueKeys0.KEY_IAP_HISTORY_TRANSACTION_ID_UNIQUE;
@@ -523,6 +535,8 @@ public class Keys {
 	public static final UniqueKey<StructureResourceStorageConfigRecord> KEY_STRUCTURE_RESOURCE_STORAGE_CONFIG_PRIMARY = UniqueKeys0.KEY_STRUCTURE_RESOURCE_STORAGE_CONFIG_PRIMARY;
 	public static final UniqueKey<StructureTeamCenterConfigRecord> KEY_STRUCTURE_TEAM_CENTER_CONFIG_PRIMARY = UniqueKeys0.KEY_STRUCTURE_TEAM_CENTER_CONFIG_PRIMARY;
 	public static final UniqueKey<StructureTownHallConfigRecord> KEY_STRUCTURE_TOWN_HALL_CONFIG_PRIMARY = UniqueKeys0.KEY_STRUCTURE_TOWN_HALL_CONFIG_PRIMARY;
+	public static final UniqueKey<TangoGiftConfigRecord> KEY_TANGO_GIFT_CONFIG_PRIMARY = UniqueKeys0.KEY_TANGO_GIFT_CONFIG_PRIMARY;
+	public static final UniqueKey<TangoGiftRewardConfigRecord> KEY_TANGO_GIFT_REWARD_CONFIG_PRIMARY = UniqueKeys0.KEY_TANGO_GIFT_REWARD_CONFIG_PRIMARY;
 	public static final UniqueKey<TaskConfigRecord> KEY_TASK_CONFIG_PRIMARY = UniqueKeys0.KEY_TASK_CONFIG_PRIMARY;
 	public static final UniqueKey<TaskForUserClientStateRecord> KEY_TASK_FOR_USER_CLIENT_STATE_PRIMARY = UniqueKeys0.KEY_TASK_FOR_USER_CLIENT_STATE_PRIMARY;
 	public static final UniqueKey<TaskForUserCompletedRecord> KEY_TASK_FOR_USER_COMPLETED_PRIMARY = UniqueKeys0.KEY_TASK_FOR_USER_COMPLETED_PRIMARY;
@@ -575,7 +589,7 @@ public class Keys {
 		public static Identity<ExpansionCostConfigRecord, Integer> IDENTITY_EXPANSION_COST_CONFIG = createIdentity(ExpansionCostConfig.EXPANSION_COST_CONFIG, ExpansionCostConfig.EXPANSION_COST_CONFIG.ID);
 		public static Identity<FileDownloadConfigRecord, Integer> IDENTITY_FILE_DOWNLOAD_CONFIG = createIdentity(FileDownloadConfig.FILE_DOWNLOAD_CONFIG, FileDownloadConfig.FILE_DOWNLOAD_CONFIG.ID);
 		public static Identity<GoldSaleConfigRecord, Integer> IDENTITY_GOLD_SALE_CONFIG = createIdentity(GoldSaleConfig.GOLD_SALE_CONFIG, GoldSaleConfig.GOLD_SALE_CONFIG.ID);
-		public static Identity<LoadTestingEventsRecord, UInteger> IDENTITY_LOAD_TESTING_EVENTS = createIdentity(LoadTestingEvents.LOAD_TESTING_EVENTS, LoadTestingEvents.LOAD_TESTING_EVENTS.ID);
+		public static Identity<LoadTestingEventsRecord, Integer> IDENTITY_LOAD_TESTING_EVENTS = createIdentity(LoadTestingEvents.LOAD_TESTING_EVENTS, LoadTestingEvents.LOAD_TESTING_EVENTS.ID);
 		public static Identity<LockBoxEventConfigRecord, Integer> IDENTITY_LOCK_BOX_EVENT_CONFIG = createIdentity(LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG, LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG.ID);
 		public static Identity<LockBoxItemConfigRecord, Integer> IDENTITY_LOCK_BOX_ITEM_CONFIG = createIdentity(LockBoxItemConfig.LOCK_BOX_ITEM_CONFIG, LockBoxItemConfig.LOCK_BOX_ITEM_CONFIG.ID);
 		public static Identity<MiniEventConfigRecord, Integer> IDENTITY_MINI_EVENT_CONFIG = createIdentity(MiniEventConfig.MINI_EVENT_CONFIG, MiniEventConfig.MINI_EVENT_CONFIG.ID);
@@ -594,7 +608,7 @@ public class Keys {
 		public static Identity<ServerToggleConfigRecord, Integer> IDENTITY_SERVER_TOGGLE_CONFIG = createIdentity(ServerToggleConfig.SERVER_TOGGLE_CONFIG, ServerToggleConfig.SERVER_TOGGLE_CONFIG.ID);
 		public static Identity<SkillConfigRecord, Integer> IDENTITY_SKILL_CONFIG = createIdentity(SkillConfig.SKILL_CONFIG, SkillConfig.SKILL_CONFIG.ID);
 		public static Identity<SkillPropertyConfigRecord, Integer> IDENTITY_SKILL_PROPERTY_CONFIG = createIdentity(SkillPropertyConfig.SKILL_PROPERTY_CONFIG, SkillPropertyConfig.SKILL_PROPERTY_CONFIG.ID);
-		public static Identity<StructureConfigRecord, UInteger> IDENTITY_STRUCTURE_CONFIG = createIdentity(StructureConfig.STRUCTURE_CONFIG, StructureConfig.STRUCTURE_CONFIG.ID);
+		public static Identity<StructureConfigRecord, Integer> IDENTITY_STRUCTURE_CONFIG = createIdentity(StructureConfig.STRUCTURE_CONFIG, StructureConfig.STRUCTURE_CONFIG.ID);
 		public static Identity<TaskStageConfigRecord, Integer> IDENTITY_TASK_STAGE_CONFIG = createIdentity(TaskStageConfig.TASK_STAGE_CONFIG, TaskStageConfig.TASK_STAGE_CONFIG.ID);
 		public static Identity<TaskStageMonsterConfigRecord, Integer> IDENTITY_TASK_STAGE_MONSTER_CONFIG = createIdentity(TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG, TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG.ID);
 		public static Identity<TournamentEventConfigRecord, Integer> IDENTITY_TOURNAMENT_EVENT_CONFIG = createIdentity(TournamentEventConfig.TOURNAMENT_EVENT_CONFIG, TournamentEventConfig.TOURNAMENT_EVENT_CONFIG.ID);
@@ -607,6 +621,7 @@ public class Keys {
 		public static final UniqueKey<BattleItemConfigRecord> KEY_BATTLE_ITEM_CONFIG_PRIMARY = createUniqueKey(BattleItemConfig.BATTLE_ITEM_CONFIG, BattleItemConfig.BATTLE_ITEM_CONFIG.ID);
 		public static final UniqueKey<BattleItemForUserRecord> KEY_BATTLE_ITEM_FOR_USER_PRIMARY = createUniqueKey(BattleItemForUser.BATTLE_ITEM_FOR_USER, BattleItemForUser.BATTLE_ITEM_FOR_USER.ID, BattleItemForUser.BATTLE_ITEM_FOR_USER.USER_ID);
 		public static final UniqueKey<BattleItemQueueForUserRecord> KEY_BATTLE_ITEM_QUEUE_FOR_USER_PRIMARY = createUniqueKey(BattleItemQueueForUser.BATTLE_ITEM_QUEUE_FOR_USER, BattleItemQueueForUser.BATTLE_ITEM_QUEUE_FOR_USER.USER_ID, BattleItemQueueForUser.BATTLE_ITEM_QUEUE_FOR_USER.PRIORITY);
+		public static final UniqueKey<BattleReplayForUserRecord> KEY_BATTLE_REPLAY_FOR_USER_PRIMARY = createUniqueKey(BattleReplayForUser.BATTLE_REPLAY_FOR_USER, BattleReplayForUser.BATTLE_REPLAY_FOR_USER.ID);
 		public static final UniqueKey<BoardConfigRecord> KEY_BOARD_CONFIG_PRIMARY = createUniqueKey(BoardConfig.BOARD_CONFIG, BoardConfig.BOARD_CONFIG.ID);
 		public static final UniqueKey<BoardObstacleConfigRecord> KEY_BOARD_OBSTACLE_CONFIG_PRIMARY = createUniqueKey(BoardObstacleConfig.BOARD_OBSTACLE_CONFIG, BoardObstacleConfig.BOARD_OBSTACLE_CONFIG.ID);
 		public static final UniqueKey<BoardPropertyConfigRecord> KEY_BOARD_PROPERTY_CONFIG_PRIMARY = createUniqueKey(BoardPropertyConfig.BOARD_PROPERTY_CONFIG, BoardPropertyConfig.BOARD_PROPERTY_CONFIG.ID);
@@ -657,6 +672,8 @@ public class Keys {
 		public static final UniqueKey<ExpansionCostConfigRecord> KEY_EXPANSION_COST_CONFIG_PRIMARY = createUniqueKey(ExpansionCostConfig.EXPANSION_COST_CONFIG, ExpansionCostConfig.EXPANSION_COST_CONFIG.ID);
 		public static final UniqueKey<ExpansionPurchaseForUserRecord> KEY_EXPANSION_PURCHASE_FOR_USER_PRIMARY = createUniqueKey(ExpansionPurchaseForUser.EXPANSION_PURCHASE_FOR_USER, ExpansionPurchaseForUser.EXPANSION_PURCHASE_FOR_USER.USER_ID, ExpansionPurchaseForUser.EXPANSION_PURCHASE_FOR_USER.X_POSITION, ExpansionPurchaseForUser.EXPANSION_PURCHASE_FOR_USER.Y_POSITION);
 		public static final UniqueKey<FileDownloadConfigRecord> KEY_FILE_DOWNLOAD_CONFIG_PRIMARY = createUniqueKey(FileDownloadConfig.FILE_DOWNLOAD_CONFIG, FileDownloadConfig.FILE_DOWNLOAD_CONFIG.ID);
+		public static final UniqueKey<GiftForTangoUserRecord> KEY_GIFT_FOR_TANGO_USER_PRIMARY = createUniqueKey(GiftForTangoUser.GIFT_FOR_TANGO_USER, GiftForTangoUser.GIFT_FOR_TANGO_USER.GIFT_FOR_USER_ID);
+		public static final UniqueKey<GiftForUserRecord> KEY_GIFT_FOR_USER_PRIMARY = createUniqueKey(GiftForUser.GIFT_FOR_USER, GiftForUser.GIFT_FOR_USER.ID);
 		public static final UniqueKey<GoldSaleConfigRecord> KEY_GOLD_SALE_CONFIG_PRIMARY = createUniqueKey(GoldSaleConfig.GOLD_SALE_CONFIG, GoldSaleConfig.GOLD_SALE_CONFIG.ID);
 		public static final UniqueKey<IapHistoryRecord> KEY_IAP_HISTORY_PRIMARY = createUniqueKey(IapHistory.IAP_HISTORY, IapHistory.IAP_HISTORY.ID);
 		public static final UniqueKey<IapHistoryRecord> KEY_IAP_HISTORY_TRANSACTION_ID_UNIQUE = createUniqueKey(IapHistory.IAP_HISTORY, IapHistory.IAP_HISTORY.TRANSACTION_ID);
@@ -743,6 +760,8 @@ public class Keys {
 		public static final UniqueKey<StructureResourceStorageConfigRecord> KEY_STRUCTURE_RESOURCE_STORAGE_CONFIG_PRIMARY = createUniqueKey(StructureResourceStorageConfig.STRUCTURE_RESOURCE_STORAGE_CONFIG, StructureResourceStorageConfig.STRUCTURE_RESOURCE_STORAGE_CONFIG.STRUCT_ID);
 		public static final UniqueKey<StructureTeamCenterConfigRecord> KEY_STRUCTURE_TEAM_CENTER_CONFIG_PRIMARY = createUniqueKey(StructureTeamCenterConfig.STRUCTURE_TEAM_CENTER_CONFIG, StructureTeamCenterConfig.STRUCTURE_TEAM_CENTER_CONFIG.STRUCT_ID);
 		public static final UniqueKey<StructureTownHallConfigRecord> KEY_STRUCTURE_TOWN_HALL_CONFIG_PRIMARY = createUniqueKey(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG, StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.STRUCT_ID);
+		public static final UniqueKey<TangoGiftConfigRecord> KEY_TANGO_GIFT_CONFIG_PRIMARY = createUniqueKey(TangoGiftConfig.TANGO_GIFT_CONFIG, TangoGiftConfig.TANGO_GIFT_CONFIG.ID);
+		public static final UniqueKey<TangoGiftRewardConfigRecord> KEY_TANGO_GIFT_REWARD_CONFIG_PRIMARY = createUniqueKey(TangoGiftRewardConfig.TANGO_GIFT_REWARD_CONFIG, TangoGiftRewardConfig.TANGO_GIFT_REWARD_CONFIG.ID);
 		public static final UniqueKey<TaskConfigRecord> KEY_TASK_CONFIG_PRIMARY = createUniqueKey(TaskConfig.TASK_CONFIG, TaskConfig.TASK_CONFIG.ID);
 		public static final UniqueKey<TaskForUserClientStateRecord> KEY_TASK_FOR_USER_CLIENT_STATE_PRIMARY = createUniqueKey(TaskForUserClientState.TASK_FOR_USER_CLIENT_STATE, TaskForUserClientState.TASK_FOR_USER_CLIENT_STATE.USER_ID);
 		public static final UniqueKey<TaskForUserCompletedRecord> KEY_TASK_FOR_USER_COMPLETED_PRIMARY = createUniqueKey(TaskForUserCompleted.TASK_FOR_USER_COMPLETED, TaskForUserCompleted.TASK_FOR_USER_COMPLETED.USER_ID, TaskForUserCompleted.TASK_FOR_USER_COMPLETED.TASK_ID);

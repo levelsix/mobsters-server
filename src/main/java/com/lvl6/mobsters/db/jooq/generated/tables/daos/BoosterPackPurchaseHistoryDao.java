@@ -15,8 +15,6 @@ import javax.annotation.Generated;
 import org.jooq.Configuration;
 import org.jooq.Record3;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -78,21 +76,21 @@ public class BoosterPackPurchaseHistoryDao extends DAOImpl<BoosterPackPurchaseHi
 	/**
 	 * Fetch records that have <code>booster_item_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByBoosterItemId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByBoosterItemId(Integer... values) {
 		return fetch(BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.BOOSTER_ITEM_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>monster_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByMonsterId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByMonsterId(Integer... values) {
 		return fetch(BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.MONSTER_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_pieces IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByNumPieces(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByNumPieces(Byte... values) {
 		return fetch(BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.NUM_PIECES, values);
 	}
 
@@ -113,14 +111,14 @@ public class BoosterPackPurchaseHistoryDao extends DAOImpl<BoosterPackPurchaseHi
 	/**
 	 * Fetch records that have <code>gem_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByGemReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByGemReward(Integer... values) {
 		return fetch(BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.GEM_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>cash_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByCashReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterPackPurchaseHistory> fetchByCashReward(Integer... values) {
 		return fetch(BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.CASH_REWARD, values);
 	}
 

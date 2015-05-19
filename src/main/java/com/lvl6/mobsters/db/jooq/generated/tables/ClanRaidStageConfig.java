@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClanRaidStageConfig extends TableImpl<ClanRaidStageConfigRecord> {
 
-	private static final long serialVersionUID = -1055153037;
+	private static final long serialVersionUID = -776852935;
 
 	/**
 	 * The reference instance of <code>mobsters.clan_raid_stage_config</code>
@@ -64,12 +62,12 @@ public class ClanRaidStageConfig extends TableImpl<ClanRaidStageConfigRecord> {
 	/**
 	 * The column <code>mobsters.clan_raid_stage_config.duration_minutes</code>.
 	 */
-	public final TableField<ClanRaidStageConfigRecord, UInteger> DURATION_MINUTES = createField("duration_minutes", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<ClanRaidStageConfigRecord, Integer> DURATION_MINUTES = createField("duration_minutes", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_config.stage_num</code>.
 	 */
-	public final TableField<ClanRaidStageConfigRecord, UByte> STAGE_NUM = createField("stage_num", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<ClanRaidStageConfigRecord, Byte> STAGE_NUM = createField("stage_num", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_config.name</code>.

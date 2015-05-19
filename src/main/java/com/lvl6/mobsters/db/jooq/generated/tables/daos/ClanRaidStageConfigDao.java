@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -76,14 +74,14 @@ public class ClanRaidStageConfigDao extends DAOImpl<ClanRaidStageConfigRecord, c
 	/**
 	 * Fetch records that have <code>duration_minutes IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageConfig> fetchByDurationMinutes(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageConfig> fetchByDurationMinutes(Integer... values) {
 		return fetch(ClanRaidStageConfig.CLAN_RAID_STAGE_CONFIG.DURATION_MINUTES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>stage_num IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageConfig> fetchByStageNum(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageConfig> fetchByStageNum(Byte... values) {
 		return fetch(ClanRaidStageConfig.CLAN_RAID_STAGE_CONFIG.STAGE_NUM, values);
 	}
 

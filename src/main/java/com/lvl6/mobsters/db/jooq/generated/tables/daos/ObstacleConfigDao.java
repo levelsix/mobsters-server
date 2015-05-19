@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -83,28 +81,28 @@ public class ObstacleConfigDao extends DAOImpl<ObstacleConfigRecord, com.lvl6.mo
 	/**
 	 * Fetch records that have <code>cost IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchByCost(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchByCost(Integer... values) {
 		return fetch(ObstacleConfig.OBSTACLE_CONFIG.COST, values);
 	}
 
 	/**
 	 * Fetch records that have <code>seconds_to_remove IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchBySecondsToRemove(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchBySecondsToRemove(Integer... values) {
 		return fetch(ObstacleConfig.OBSTACLE_CONFIG.SECONDS_TO_REMOVE, values);
 	}
 
 	/**
 	 * Fetch records that have <code>width IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchByWidth(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchByWidth(Byte... values) {
 		return fetch(ObstacleConfig.OBSTACLE_CONFIG.WIDTH, values);
 	}
 
 	/**
 	 * Fetch records that have <code>height IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchByHeight(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ObstacleConfig> fetchByHeight(Byte... values) {
 		return fetch(ObstacleConfig.OBSTACLE_CONFIG.HEIGHT, values);
 	}
 

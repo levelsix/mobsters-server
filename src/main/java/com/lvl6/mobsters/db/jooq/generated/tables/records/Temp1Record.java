@@ -17,7 +17,6 @@ import org.jooq.Record2;
 import org.jooq.Row;
 import org.jooq.Row2;
 import org.jooq.impl.TableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -33,9 +32,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "temp1", schema = "mobsters")
-public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2<Long, UInteger>, ITemp1 {
+public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2<Long, Integer>, ITemp1 {
 
-	private static final long serialVersionUID = 1885360181;
+	private static final long serialVersionUID = -713279025;
 
 	/**
 	 * Setter for <code>mobsters.temp1.id</code>.
@@ -59,7 +58,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * Setter for <code>mobsters.temp1.monster_id</code>.
 	 */
 	@Override
-	public Temp1Record setMonsterId(UInteger value) {
+	public Temp1Record setMonsterId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -69,8 +68,8 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 */
 	@Column(name = "monster_id", precision = 10)
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(1);
+	public Integer getMonsterId() {
+		return (Integer) getValue(1);
 	}
 
 	// -------------------------------------------------------------------------
@@ -81,7 +80,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row2<Long, UInteger> fieldsRow() {
+	public Row2<Long, Integer> fieldsRow() {
 		return (Row2) super.fieldsRow();
 	}
 
@@ -89,7 +88,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row2<Long, UInteger> valuesRow() {
+	public Row2<Long, Integer> valuesRow() {
 		return (Row2) super.valuesRow();
 	}
 
@@ -105,7 +104,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return Temp1.TEMP1.MONSTER_ID;
 	}
 
@@ -121,7 +120,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getMonsterId();
 	}
 
@@ -138,7 +137,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Temp1Record value2(UInteger value) {
+	public Temp1Record value2(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -147,7 +146,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Temp1Record values(Long value1, UInteger value2) {
+	public Temp1Record values(Long value1, Integer value2) {
 		value1(value1);
 		value2(value2);
 		return this;
@@ -189,7 +188,7 @@ public class Temp1Record extends TableRecordImpl<Temp1Record> implements Record2
 	/**
 	 * Create a detached, initialised Temp1Record
 	 */
-	public Temp1Record(Long id, UInteger monsterId) {
+	public Temp1Record(Long id, Integer monsterId) {
 		super(Temp1.TEMP1);
 
 		setValue(0, id);

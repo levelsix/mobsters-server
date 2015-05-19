@@ -17,7 +17,6 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Record2;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -37,7 +36,7 @@ import org.jooq.types.UByte;
 })
 public class MonsterLevelInfoConfigRecord extends UpdatableRecordImpl<MonsterLevelInfoConfigRecord> implements IMonsterLevelInfoConfig {
 
-	private static final long serialVersionUID = 2127785996;
+	private static final long serialVersionUID = -1101671681;
 
 	/**
 	 * Setter for <code>mobsters.monster_level_info_config.monster_id</code>.
@@ -243,7 +242,7 @@ public class MonsterLevelInfoConfigRecord extends UpdatableRecordImpl<MonsterLev
 	 * Setter for <code>mobsters.monster_level_info_config.speed</code>.
 	 */
 	@Override
-	public MonsterLevelInfoConfigRecord setSpeed(UByte value) {
+	public MonsterLevelInfoConfigRecord setSpeed(Byte value) {
 		setValue(11, value);
 		return this;
 	}
@@ -253,8 +252,8 @@ public class MonsterLevelInfoConfigRecord extends UpdatableRecordImpl<MonsterLev
 	 */
 	@Column(name = "speed", precision = 3)
 	@Override
-	public UByte getSpeed() {
-		return (UByte) getValue(11);
+	public Byte getSpeed() {
+		return (Byte) getValue(11);
 	}
 
 	/**
@@ -640,7 +639,7 @@ public class MonsterLevelInfoConfigRecord extends UpdatableRecordImpl<MonsterLev
 	/**
 	 * Create a detached, initialised MonsterLevelInfoConfigRecord
 	 */
-	public MonsterLevelInfoConfigRecord(Integer monsterId, Integer level, Integer hp, Integer curLvlRequiredExp, Integer feederExp, Integer fireDmg, Integer grassDmg, Integer waterDmg, Integer lightningDmg, Integer darknessDmg, Integer rockDmg, UByte speed, Double hpExponentBase, Double dmgExponentBase, Double expLvlDivisor, Double expLvlExponent, Integer sellAmount, Integer teamCost, Integer costToFullyHeal, String costToFullyHealExponent, Integer secsToFullyHeal, String secsToFullyHealExponent, Integer enhanceCostPerFeeder, Double enhanceCostExponent, Integer secondsToEnhancePerFeeder, Double secondsToEnhancePerFeederExponent, Double pvpDropRate, Integer strength, Double strengthExponent) {
+	public MonsterLevelInfoConfigRecord(Integer monsterId, Integer level, Integer hp, Integer curLvlRequiredExp, Integer feederExp, Integer fireDmg, Integer grassDmg, Integer waterDmg, Integer lightningDmg, Integer darknessDmg, Integer rockDmg, Byte speed, Double hpExponentBase, Double dmgExponentBase, Double expLvlDivisor, Double expLvlExponent, Integer sellAmount, Integer teamCost, Integer costToFullyHeal, String costToFullyHealExponent, Integer secsToFullyHeal, String secsToFullyHealExponent, Integer enhanceCostPerFeeder, Double enhanceCostExponent, Integer secondsToEnhancePerFeeder, Double secondsToEnhancePerFeederExponent, Double pvpDropRate, Integer strength, Double strengthExponent) {
 		super(MonsterLevelInfoConfig.MONSTER_LEVEL_INFO_CONFIG);
 
 		setValue(0, monsterId);

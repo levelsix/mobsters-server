@@ -20,8 +20,6 @@ import org.jooq.Record8;
 import org.jooq.Row;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +35,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "clan_raid_stage_reward_config", schema = "mobsters")
-public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRaidStageRewardConfigRecord> implements Record8<Integer, UInteger, UInteger, UInteger, UInteger, UInteger, UInteger, UByte>, IClanRaidStageRewardConfig {
+public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRaidStageRewardConfigRecord> implements Record8<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Byte>, IClanRaidStageRewardConfig {
 
-	private static final long serialVersionUID = -1958992113;
+	private static final long serialVersionUID = -197638288;
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.id</code>.
@@ -65,7 +63,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.clan_raid_stage_id</code>.
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setClanRaidStageId(UInteger value) {
+	public ClanRaidStageRewardConfigRecord setClanRaidStageId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -76,15 +74,15 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "clan_raid_stage_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getClanRaidStageId() {
-		return (UInteger) getValue(1);
+	public Integer getClanRaidStageId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.min_oil_reward</code>.
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setMinOilReward(UInteger value) {
+	public ClanRaidStageRewardConfigRecord setMinOilReward(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -95,15 +93,15 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "min_oil_reward", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMinOilReward() {
-		return (UInteger) getValue(2);
+	public Integer getMinOilReward() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.max_oil_reward</code>. This along with the other columns can be set. Rewards are not mutually exclusive.
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setMaxOilReward(UInteger value) {
+	public ClanRaidStageRewardConfigRecord setMaxOilReward(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -114,15 +112,15 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "max_oil_reward", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMaxOilReward() {
-		return (UInteger) getValue(3);
+	public Integer getMaxOilReward() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.min_cash_reward</code>.
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setMinCashReward(UInteger value) {
+	public ClanRaidStageRewardConfigRecord setMinCashReward(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -133,15 +131,15 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "min_cash_reward", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMinCashReward() {
-		return (UInteger) getValue(4);
+	public Integer getMinCashReward() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.max_cash_reward</code>. This along with the other columns can be set. Rewards are not mutually exclusive.
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setMaxCashReward(UInteger value) {
+	public ClanRaidStageRewardConfigRecord setMaxCashReward(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -152,15 +150,15 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "max_cash_reward", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMaxCashReward() {
-		return (UInteger) getValue(5);
+	public Integer getMaxCashReward() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.monster_id</code>. This along with the other columns can be set. Rewards are not mutually exclusive.
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setMonsterId(UInteger value) {
+	public ClanRaidStageRewardConfigRecord setMonsterId(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -171,15 +169,15 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "monster_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(6);
+	public Integer getMonsterId() {
+		return (Integer) getValue(6);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_reward_config.expected_monster_reward_quantity</code>. more of a drop rate multiplier
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord setExpectedMonsterRewardQuantity(UByte value) {
+	public ClanRaidStageRewardConfigRecord setExpectedMonsterRewardQuantity(Byte value) {
 		setValue(7, value);
 		return this;
 	}
@@ -190,8 +188,8 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	@Column(name = "expected_monster_reward_quantity", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getExpectedMonsterRewardQuantity() {
-		return (UByte) getValue(7);
+	public Byte getExpectedMonsterRewardQuantity() {
+		return (Byte) getValue(7);
 	}
 
 	// -------------------------------------------------------------------------
@@ -214,7 +212,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, UInteger, UInteger, UInteger, UInteger, UInteger, UInteger, UByte> fieldsRow() {
+	public Row8<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Byte> fieldsRow() {
 		return (Row8) super.fieldsRow();
 	}
 
@@ -222,7 +220,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, UInteger, UInteger, UInteger, UInteger, UInteger, UInteger, UByte> valuesRow() {
+	public Row8<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Byte> valuesRow() {
 		return (Row8) super.valuesRow();
 	}
 
@@ -238,7 +236,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.CLAN_RAID_STAGE_ID;
 	}
 
@@ -246,7 +244,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MIN_OIL_REWARD;
 	}
 
@@ -254,7 +252,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MAX_OIL_REWARD;
 	}
 
@@ -262,7 +260,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MIN_CASH_REWARD;
 	}
 
@@ -270,7 +268,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MAX_CASH_REWARD;
 	}
 
@@ -278,7 +276,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field7() {
+	public Field<Integer> field7() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MONSTER_ID;
 	}
 
@@ -286,7 +284,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field8() {
+	public Field<Byte> field8() {
 		return ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.EXPECTED_MONSTER_REWARD_QUANTITY;
 	}
 
@@ -302,7 +300,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getClanRaidStageId();
 	}
 
@@ -310,7 +308,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getMinOilReward();
 	}
 
@@ -318,7 +316,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getMaxOilReward();
 	}
 
@@ -326,7 +324,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getMinCashReward();
 	}
 
@@ -334,7 +332,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getMaxCashReward();
 	}
 
@@ -342,7 +340,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value7() {
+	public Integer value7() {
 		return getMonsterId();
 	}
 
@@ -350,7 +348,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value8() {
+	public Byte value8() {
 		return getExpectedMonsterRewardQuantity();
 	}
 
@@ -367,7 +365,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value2(UInteger value) {
+	public ClanRaidStageRewardConfigRecord value2(Integer value) {
 		setClanRaidStageId(value);
 		return this;
 	}
@@ -376,7 +374,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value3(UInteger value) {
+	public ClanRaidStageRewardConfigRecord value3(Integer value) {
 		setMinOilReward(value);
 		return this;
 	}
@@ -385,7 +383,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value4(UInteger value) {
+	public ClanRaidStageRewardConfigRecord value4(Integer value) {
 		setMaxOilReward(value);
 		return this;
 	}
@@ -394,7 +392,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value5(UInteger value) {
+	public ClanRaidStageRewardConfigRecord value5(Integer value) {
 		setMinCashReward(value);
 		return this;
 	}
@@ -403,7 +401,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value6(UInteger value) {
+	public ClanRaidStageRewardConfigRecord value6(Integer value) {
 		setMaxCashReward(value);
 		return this;
 	}
@@ -412,7 +410,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value7(UInteger value) {
+	public ClanRaidStageRewardConfigRecord value7(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -421,7 +419,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord value8(UByte value) {
+	public ClanRaidStageRewardConfigRecord value8(Byte value) {
 		setExpectedMonsterRewardQuantity(value);
 		return this;
 	}
@@ -430,7 +428,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageRewardConfigRecord values(Integer value1, UInteger value2, UInteger value3, UInteger value4, UInteger value5, UInteger value6, UInteger value7, UByte value8) {
+	public ClanRaidStageRewardConfigRecord values(Integer value1, Integer value2, Integer value3, Integer value4, Integer value5, Integer value6, Integer value7, Byte value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -484,7 +482,7 @@ public class ClanRaidStageRewardConfigRecord extends UpdatableRecordImpl<ClanRai
 	/**
 	 * Create a detached, initialised ClanRaidStageRewardConfigRecord
 	 */
-	public ClanRaidStageRewardConfigRecord(Integer id, UInteger clanRaidStageId, UInteger minOilReward, UInteger maxOilReward, UInteger minCashReward, UInteger maxCashReward, UInteger monsterId, UByte expectedMonsterRewardQuantity) {
+	public ClanRaidStageRewardConfigRecord(Integer id, Integer clanRaidStageId, Integer minOilReward, Integer maxOilReward, Integer minCashReward, Integer maxCashReward, Integer monsterId, Byte expectedMonsterRewardQuantity) {
 		super(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG);
 
 		setValue(0, id);

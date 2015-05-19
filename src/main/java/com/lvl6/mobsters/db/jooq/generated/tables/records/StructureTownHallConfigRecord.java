@@ -20,8 +20,6 @@ import org.jooq.Record12;
 import org.jooq.Row;
 import org.jooq.Row12;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +35,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_town_hall_config", schema = "mobsters")
-public class StructureTownHallConfigRecord extends UpdatableRecordImpl<StructureTownHallConfigRecord> implements Record12<Integer, UByte, UByte, UByte, UByte, UByte, UByte, UInteger, UByte, UInteger, UInteger, UByte>, IStructureTownHallConfig {
+public class StructureTownHallConfigRecord extends UpdatableRecordImpl<StructureTownHallConfigRecord> implements Record12<Integer, Byte, Byte, Byte, Byte, Byte, Byte, Integer, Byte, Integer, Integer, Byte>, IStructureTownHallConfig {
 
-	private static final long serialVersionUID = -1569290907;
+	private static final long serialVersionUID = -436885516;
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.struct_id</code>.
@@ -65,7 +63,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * Setter for <code>mobsters.structure_town_hall_config.num_resource_one_generators</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumResourceOneGenerators(UByte value) {
+	public StructureTownHallConfigRecord setNumResourceOneGenerators(Byte value) {
 		setValue(1, value);
 		return this;
 	}
@@ -76,15 +74,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_resource_one_generators", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumResourceOneGenerators() {
-		return (UByte) getValue(1);
+	public Byte getNumResourceOneGenerators() {
+		return (Byte) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_resource_one_storages</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumResourceOneStorages(UByte value) {
+	public StructureTownHallConfigRecord setNumResourceOneStorages(Byte value) {
 		setValue(2, value);
 		return this;
 	}
@@ -95,15 +93,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_resource_one_storages", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumResourceOneStorages() {
-		return (UByte) getValue(2);
+	public Byte getNumResourceOneStorages() {
+		return (Byte) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_resource_two_generators</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumResourceTwoGenerators(UByte value) {
+	public StructureTownHallConfigRecord setNumResourceTwoGenerators(Byte value) {
 		setValue(3, value);
 		return this;
 	}
@@ -114,15 +112,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_resource_two_generators", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumResourceTwoGenerators() {
-		return (UByte) getValue(3);
+	public Byte getNumResourceTwoGenerators() {
+		return (Byte) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_resource_two_storages</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumResourceTwoStorages(UByte value) {
+	public StructureTownHallConfigRecord setNumResourceTwoStorages(Byte value) {
 		setValue(4, value);
 		return this;
 	}
@@ -133,15 +131,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_resource_two_storages", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumResourceTwoStorages() {
-		return (UByte) getValue(4);
+	public Byte getNumResourceTwoStorages() {
+		return (Byte) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_hospitals</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumHospitals(UByte value) {
+	public StructureTownHallConfigRecord setNumHospitals(Byte value) {
 		setValue(5, value);
 		return this;
 	}
@@ -152,15 +150,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_hospitals", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumHospitals() {
-		return (UByte) getValue(5);
+	public Byte getNumHospitals() {
+		return (Byte) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_residences</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumResidences(UByte value) {
+	public StructureTownHallConfigRecord setNumResidences(Byte value) {
 		setValue(6, value);
 		return this;
 	}
@@ -171,15 +169,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_residences", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumResidences() {
-		return (UByte) getValue(6);
+	public Byte getNumResidences() {
+		return (Byte) getValue(6);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_monster_slots</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumMonsterSlots(UInteger value) {
+	public StructureTownHallConfigRecord setNumMonsterSlots(Integer value) {
 		setValue(7, value);
 		return this;
 	}
@@ -190,15 +188,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_monster_slots", nullable = false, precision = 7)
 	@NotNull
 	@Override
-	public UInteger getNumMonsterSlots() {
-		return (UInteger) getValue(7);
+	public Integer getNumMonsterSlots() {
+		return (Integer) getValue(7);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_labs</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumLabs(UByte value) {
+	public StructureTownHallConfigRecord setNumLabs(Byte value) {
 		setValue(8, value);
 		return this;
 	}
@@ -209,15 +207,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	@Column(name = "num_labs", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getNumLabs() {
-		return (UByte) getValue(8);
+	public Byte getNumLabs() {
+		return (Byte) getValue(8);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.pvp_queue_cash_cost</code>. Cost for seeing one possible enemy to attack for pvp battles.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setPvpQueueCashCost(UInteger value) {
+	public StructureTownHallConfigRecord setPvpQueueCashCost(Integer value) {
 		setValue(9, value);
 		return this;
 	}
@@ -227,15 +225,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 */
 	@Column(name = "pvp_queue_cash_cost", precision = 10)
 	@Override
-	public UInteger getPvpQueueCashCost() {
-		return (UInteger) getValue(9);
+	public Integer getPvpQueueCashCost() {
+		return (Integer) getValue(9);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.resource_capacity</code>. applies to cash, oil, not gems
 	 */
 	@Override
-	public StructureTownHallConfigRecord setResourceCapacity(UInteger value) {
+	public StructureTownHallConfigRecord setResourceCapacity(Integer value) {
 		setValue(10, value);
 		return this;
 	}
@@ -245,15 +243,15 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 */
 	@Column(name = "resource_capacity", precision = 10)
 	@Override
-	public UInteger getResourceCapacity() {
-		return (UInteger) getValue(10);
+	public Integer getResourceCapacity() {
+		return (Integer) getValue(10);
 	}
 
 	/**
 	 * Setter for <code>mobsters.structure_town_hall_config.num_evo_chambers</code>.
 	 */
 	@Override
-	public StructureTownHallConfigRecord setNumEvoChambers(UByte value) {
+	public StructureTownHallConfigRecord setNumEvoChambers(Byte value) {
 		setValue(11, value);
 		return this;
 	}
@@ -263,8 +261,8 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 */
 	@Column(name = "num_evo_chambers", precision = 3)
 	@Override
-	public UByte getNumEvoChambers() {
-		return (UByte) getValue(11);
+	public Byte getNumEvoChambers() {
+		return (Byte) getValue(11);
 	}
 
 	// -------------------------------------------------------------------------
@@ -287,7 +285,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<Integer, UByte, UByte, UByte, UByte, UByte, UByte, UInteger, UByte, UInteger, UInteger, UByte> fieldsRow() {
+	public Row12<Integer, Byte, Byte, Byte, Byte, Byte, Byte, Integer, Byte, Integer, Integer, Byte> fieldsRow() {
 		return (Row12) super.fieldsRow();
 	}
 
@@ -295,7 +293,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<Integer, UByte, UByte, UByte, UByte, UByte, UByte, UInteger, UByte, UInteger, UInteger, UByte> valuesRow() {
+	public Row12<Integer, Byte, Byte, Byte, Byte, Byte, Byte, Integer, Byte, Integer, Integer, Byte> valuesRow() {
 		return (Row12) super.valuesRow();
 	}
 
@@ -311,7 +309,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field2() {
+	public Field<Byte> field2() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_ONE_GENERATORS;
 	}
 
@@ -319,7 +317,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field3() {
+	public Field<Byte> field3() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_ONE_STORAGES;
 	}
 
@@ -327,7 +325,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field4() {
+	public Field<Byte> field4() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_TWO_GENERATORS;
 	}
 
@@ -335,7 +333,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field5() {
+	public Field<Byte> field5() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESOURCE_TWO_STORAGES;
 	}
 
@@ -343,7 +341,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field6() {
+	public Field<Byte> field6() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_HOSPITALS;
 	}
 
@@ -351,7 +349,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field7() {
+	public Field<Byte> field7() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_RESIDENCES;
 	}
 
@@ -359,7 +357,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field8() {
+	public Field<Integer> field8() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_MONSTER_SLOTS;
 	}
 
@@ -367,7 +365,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field9() {
+	public Field<Byte> field9() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_LABS;
 	}
 
@@ -375,7 +373,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field10() {
+	public Field<Integer> field10() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.PVP_QUEUE_CASH_COST;
 	}
 
@@ -383,7 +381,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field11() {
+	public Field<Integer> field11() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.RESOURCE_CAPACITY;
 	}
 
@@ -391,7 +389,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field12() {
+	public Field<Byte> field12() {
 		return StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG.NUM_EVO_CHAMBERS;
 	}
 
@@ -407,7 +405,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value2() {
+	public Byte value2() {
 		return getNumResourceOneGenerators();
 	}
 
@@ -415,7 +413,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value3() {
+	public Byte value3() {
 		return getNumResourceOneStorages();
 	}
 
@@ -423,7 +421,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value4() {
+	public Byte value4() {
 		return getNumResourceTwoGenerators();
 	}
 
@@ -431,7 +429,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value5() {
+	public Byte value5() {
 		return getNumResourceTwoStorages();
 	}
 
@@ -439,7 +437,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value6() {
+	public Byte value6() {
 		return getNumHospitals();
 	}
 
@@ -447,7 +445,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value7() {
+	public Byte value7() {
 		return getNumResidences();
 	}
 
@@ -455,7 +453,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value8() {
+	public Integer value8() {
 		return getNumMonsterSlots();
 	}
 
@@ -463,7 +461,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value9() {
+	public Byte value9() {
 		return getNumLabs();
 	}
 
@@ -471,7 +469,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value10() {
+	public Integer value10() {
 		return getPvpQueueCashCost();
 	}
 
@@ -479,7 +477,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value11() {
+	public Integer value11() {
 		return getResourceCapacity();
 	}
 
@@ -487,7 +485,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value12() {
+	public Byte value12() {
 		return getNumEvoChambers();
 	}
 
@@ -504,7 +502,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value2(UByte value) {
+	public StructureTownHallConfigRecord value2(Byte value) {
 		setNumResourceOneGenerators(value);
 		return this;
 	}
@@ -513,7 +511,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value3(UByte value) {
+	public StructureTownHallConfigRecord value3(Byte value) {
 		setNumResourceOneStorages(value);
 		return this;
 	}
@@ -522,7 +520,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value4(UByte value) {
+	public StructureTownHallConfigRecord value4(Byte value) {
 		setNumResourceTwoGenerators(value);
 		return this;
 	}
@@ -531,7 +529,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value5(UByte value) {
+	public StructureTownHallConfigRecord value5(Byte value) {
 		setNumResourceTwoStorages(value);
 		return this;
 	}
@@ -540,7 +538,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value6(UByte value) {
+	public StructureTownHallConfigRecord value6(Byte value) {
 		setNumHospitals(value);
 		return this;
 	}
@@ -549,7 +547,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value7(UByte value) {
+	public StructureTownHallConfigRecord value7(Byte value) {
 		setNumResidences(value);
 		return this;
 	}
@@ -558,7 +556,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value8(UInteger value) {
+	public StructureTownHallConfigRecord value8(Integer value) {
 		setNumMonsterSlots(value);
 		return this;
 	}
@@ -567,7 +565,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value9(UByte value) {
+	public StructureTownHallConfigRecord value9(Byte value) {
 		setNumLabs(value);
 		return this;
 	}
@@ -576,7 +574,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value10(UInteger value) {
+	public StructureTownHallConfigRecord value10(Integer value) {
 		setPvpQueueCashCost(value);
 		return this;
 	}
@@ -585,7 +583,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value11(UInteger value) {
+	public StructureTownHallConfigRecord value11(Integer value) {
 		setResourceCapacity(value);
 		return this;
 	}
@@ -594,7 +592,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord value12(UByte value) {
+	public StructureTownHallConfigRecord value12(Byte value) {
 		setNumEvoChambers(value);
 		return this;
 	}
@@ -603,7 +601,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureTownHallConfigRecord values(Integer value1, UByte value2, UByte value3, UByte value4, UByte value5, UByte value6, UByte value7, UInteger value8, UByte value9, UInteger value10, UInteger value11, UByte value12) {
+	public StructureTownHallConfigRecord values(Integer value1, Byte value2, Byte value3, Byte value4, Byte value5, Byte value6, Byte value7, Integer value8, Byte value9, Integer value10, Integer value11, Byte value12) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -665,7 +663,7 @@ public class StructureTownHallConfigRecord extends UpdatableRecordImpl<Structure
 	/**
 	 * Create a detached, initialised StructureTownHallConfigRecord
 	 */
-	public StructureTownHallConfigRecord(Integer structId, UByte numResourceOneGenerators, UByte numResourceOneStorages, UByte numResourceTwoGenerators, UByte numResourceTwoStorages, UByte numHospitals, UByte numResidences, UInteger numMonsterSlots, UByte numLabs, UInteger pvpQueueCashCost, UInteger resourceCapacity, UByte numEvoChambers) {
+	public StructureTownHallConfigRecord(Integer structId, Byte numResourceOneGenerators, Byte numResourceOneStorages, Byte numResourceTwoGenerators, Byte numResourceTwoStorages, Byte numHospitals, Byte numResidences, Integer numMonsterSlots, Byte numLabs, Integer pvpQueueCashCost, Integer resourceCapacity, Byte numEvoChambers) {
 		super(StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG);
 
 		setValue(0, structId);

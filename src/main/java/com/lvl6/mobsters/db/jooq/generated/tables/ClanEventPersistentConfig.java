@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClanEventPersistentConfig extends TableImpl<ClanEventPersistentConfigRecord> {
 
-	private static final long serialVersionUID = 1372769827;
+	private static final long serialVersionUID = -1101167452;
 
 	/**
 	 * The reference instance of <code>mobsters.clan_event_persistent_config</code>
@@ -67,12 +66,12 @@ public class ClanEventPersistentConfig extends TableImpl<ClanEventPersistentConf
 	/**
 	 * The column <code>mobsters.clan_event_persistent_config.event_duration_minutes</code>.
 	 */
-	public final TableField<ClanEventPersistentConfigRecord, UInteger> EVENT_DURATION_MINUTES = createField("event_duration_minutes", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<ClanEventPersistentConfigRecord, Integer> EVENT_DURATION_MINUTES = createField("event_duration_minutes", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.clan_event_persistent_config.clan_raid_id</code>.
 	 */
-	public final TableField<ClanEventPersistentConfigRecord, UInteger> CLAN_RAID_ID = createField("clan_raid_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<ClanEventPersistentConfigRecord, Integer> CLAN_RAID_ID = createField("clan_raid_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>mobsters.clan_event_persistent_config</code> table reference

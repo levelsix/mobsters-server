@@ -23,7 +23,6 @@ import org.jooq.Record9;
 import org.jooq.Row;
 import org.jooq.Row9;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -39,9 +38,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "task_for_user_ongoing", schema = "mobsters")
-public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOngoingRecord> implements Record9<String, String, UInteger, Integer, Integer, Integer, Integer, Timestamp, Integer>, ITaskForUserOngoing {
+public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOngoingRecord> implements Record9<String, String, Integer, Integer, Integer, Integer, Integer, Timestamp, Integer>, ITaskForUserOngoing {
 
-	private static final long serialVersionUID = 206201602;
+	private static final long serialVersionUID = -509926958;
 
 	/**
 	 * Setter for <code>mobsters.task_for_user_ongoing.id</code>.
@@ -88,7 +87,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * Setter for <code>mobsters.task_for_user_ongoing.task_id</code>.
 	 */
 	@Override
-	public TaskForUserOngoingRecord setTaskId(UInteger value) {
+	public TaskForUserOngoingRecord setTaskId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -99,8 +98,8 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	@Column(name = "task_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getTaskId() {
-		return (UInteger) getValue(2);
+	public Integer getTaskId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
@@ -231,7 +230,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<String, String, UInteger, Integer, Integer, Integer, Integer, Timestamp, Integer> fieldsRow() {
+	public Row9<String, String, Integer, Integer, Integer, Integer, Integer, Timestamp, Integer> fieldsRow() {
 		return (Row9) super.fieldsRow();
 	}
 
@@ -239,7 +238,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<String, String, UInteger, Integer, Integer, Integer, Integer, Timestamp, Integer> valuesRow() {
+	public Row9<String, String, Integer, Integer, Integer, Integer, Integer, Timestamp, Integer> valuesRow() {
 		return (Row9) super.valuesRow();
 	}
 
@@ -263,7 +262,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return TaskForUserOngoing.TASK_FOR_USER_ONGOING.TASK_ID;
 	}
 
@@ -335,7 +334,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getTaskId();
 	}
 
@@ -409,7 +408,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskForUserOngoingRecord value3(UInteger value) {
+	public TaskForUserOngoingRecord value3(Integer value) {
 		setTaskId(value);
 		return this;
 	}
@@ -472,7 +471,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskForUserOngoingRecord values(String value1, String value2, UInteger value3, Integer value4, Integer value5, Integer value6, Integer value7, Timestamp value8, Integer value9) {
+	public TaskForUserOngoingRecord values(String value1, String value2, Integer value3, Integer value4, Integer value5, Integer value6, Integer value7, Timestamp value8, Integer value9) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -528,7 +527,7 @@ public class TaskForUserOngoingRecord extends UpdatableRecordImpl<TaskForUserOng
 	/**
 	 * Create a detached, initialised TaskForUserOngoingRecord
 	 */
-	public TaskForUserOngoingRecord(String id, String userId, UInteger taskId, Integer expGained, Integer cashGained, Integer oilGained, Integer numRevives, Timestamp startTime, Integer taskStageId) {
+	public TaskForUserOngoingRecord(String id, String userId, Integer taskId, Integer expGained, Integer cashGained, Integer oilGained, Integer numRevives, Timestamp startTime, Integer taskStageId) {
 		super(TaskForUserOngoing.TASK_FOR_USER_ONGOING);
 
 		setValue(0, id);

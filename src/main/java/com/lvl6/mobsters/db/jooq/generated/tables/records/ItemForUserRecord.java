@@ -21,7 +21,6 @@ import org.jooq.Record3;
 import org.jooq.Row;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -39,9 +38,9 @@ import org.jooq.types.UInteger;
 @Table(name = "item_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_id", "item_id"})
 })
-public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> implements Record3<String, Integer, UInteger>, IItemForUser {
+public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> implements Record3<String, Integer, Integer>, IItemForUser {
 
-	private static final long serialVersionUID = -1686994237;
+	private static final long serialVersionUID = 314631059;
 
 	/**
 	 * Setter for <code>mobsters.item_for_user.user_id</code>.
@@ -86,7 +85,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * Setter for <code>mobsters.item_for_user.quantity</code>.
 	 */
 	@Override
-	public ItemForUserRecord setQuantity(UInteger value) {
+	public ItemForUserRecord setQuantity(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -96,8 +95,8 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 */
 	@Column(name = "quantity", precision = 10)
 	@Override
-	public UInteger getQuantity() {
-		return (UInteger) getValue(2);
+	public Integer getQuantity() {
+		return (Integer) getValue(2);
 	}
 
 	// -------------------------------------------------------------------------
@@ -120,7 +119,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<String, Integer, UInteger> fieldsRow() {
+	public Row3<String, Integer, Integer> fieldsRow() {
 		return (Row3) super.fieldsRow();
 	}
 
@@ -128,7 +127,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<String, Integer, UInteger> valuesRow() {
+	public Row3<String, Integer, Integer> valuesRow() {
 		return (Row3) super.valuesRow();
 	}
 
@@ -152,7 +151,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return ItemForUser.ITEM_FOR_USER.QUANTITY;
 	}
 
@@ -176,7 +175,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getQuantity();
 	}
 
@@ -202,7 +201,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemForUserRecord value3(UInteger value) {
+	public ItemForUserRecord value3(Integer value) {
 		setQuantity(value);
 		return this;
 	}
@@ -211,7 +210,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemForUserRecord values(String value1, Integer value2, UInteger value3) {
+	public ItemForUserRecord values(String value1, Integer value2, Integer value3) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -255,7 +254,7 @@ public class ItemForUserRecord extends UpdatableRecordImpl<ItemForUserRecord> im
 	/**
 	 * Create a detached, initialised ItemForUserRecord
 	 */
-	public ItemForUserRecord(String userId, Integer itemId, UInteger quantity) {
+	public ItemForUserRecord(String userId, Integer itemId, Integer quantity) {
 		super(ItemForUser.ITEM_FOR_USER);
 
 		setValue(0, userId);

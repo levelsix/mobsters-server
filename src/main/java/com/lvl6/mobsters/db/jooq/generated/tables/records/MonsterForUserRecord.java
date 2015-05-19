@@ -23,8 +23,6 @@ import org.jooq.Record15;
 import org.jooq.Row;
 import org.jooq.Row15;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -40,9 +38,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "monster_for_user", schema = "mobsters")
-public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserRecord> implements Record15<String, String, UInteger, UInteger, UByte, Integer, UByte, Boolean, Timestamp, UByte, String, Boolean, Boolean, Integer, Integer>, IMonsterForUser {
+public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserRecord> implements Record15<String, String, Integer, Integer, Byte, Integer, Byte, Boolean, Timestamp, Byte, String, Boolean, Boolean, Integer, Integer>, IMonsterForUser {
 
-	private static final long serialVersionUID = 1734758601;
+	private static final long serialVersionUID = -892441578;
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user.id</code>.
@@ -88,7 +86,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * Setter for <code>mobsters.monster_for_user.monster_id</code>.
 	 */
 	@Override
-	public MonsterForUserRecord setMonsterId(UInteger value) {
+	public MonsterForUserRecord setMonsterId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -98,15 +96,15 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 */
 	@Column(name = "monster_id", precision = 10)
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(2);
+	public Integer getMonsterId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user.current_experience</code>.
 	 */
 	@Override
-	public MonsterForUserRecord setCurrentExperience(UInteger value) {
+	public MonsterForUserRecord setCurrentExperience(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -116,15 +114,15 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 */
 	@Column(name = "current_experience", precision = 10)
 	@Override
-	public UInteger getCurrentExperience() {
-		return (UInteger) getValue(3);
+	public Integer getCurrentExperience() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.monster_for_user.current_level</code>.
 	 */
 	@Override
-	public MonsterForUserRecord setCurrentLevel(UByte value) {
+	public MonsterForUserRecord setCurrentLevel(Byte value) {
 		setValue(4, value);
 		return this;
 	}
@@ -134,8 +132,8 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 */
 	@Column(name = "current_level", precision = 3)
 	@Override
-	public UByte getCurrentLevel() {
-		return (UByte) getValue(4);
+	public Byte getCurrentLevel() {
+		return (Byte) getValue(4);
 	}
 
 	/**
@@ -160,7 +158,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * Setter for <code>mobsters.monster_for_user.num_pieces</code>.
 	 */
 	@Override
-	public MonsterForUserRecord setNumPieces(UByte value) {
+	public MonsterForUserRecord setNumPieces(Byte value) {
 		setValue(6, value);
 		return this;
 	}
@@ -170,8 +168,8 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 */
 	@Column(name = "num_pieces", precision = 3)
 	@Override
-	public UByte getNumPieces() {
-		return (UByte) getValue(6);
+	public Byte getNumPieces() {
+		return (Byte) getValue(6);
 	}
 
 	/**
@@ -214,7 +212,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * Setter for <code>mobsters.monster_for_user.team_slot_num</code>.
 	 */
 	@Override
-	public MonsterForUserRecord setTeamSlotNum(UByte value) {
+	public MonsterForUserRecord setTeamSlotNum(Byte value) {
 		setValue(9, value);
 		return this;
 	}
@@ -224,8 +222,8 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 */
 	@Column(name = "team_slot_num", precision = 3)
 	@Override
-	public UByte getTeamSlotNum() {
-		return (UByte) getValue(9);
+	public Byte getTeamSlotNum() {
+		return (Byte) getValue(9);
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row15<String, String, UInteger, UInteger, UByte, Integer, UByte, Boolean, Timestamp, UByte, String, Boolean, Boolean, Integer, Integer> fieldsRow() {
+	public Row15<String, String, Integer, Integer, Byte, Integer, Byte, Boolean, Timestamp, Byte, String, Boolean, Boolean, Integer, Integer> fieldsRow() {
 		return (Row15) super.fieldsRow();
 	}
 
@@ -347,7 +345,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row15<String, String, UInteger, UInteger, UByte, Integer, UByte, Boolean, Timestamp, UByte, String, Boolean, Boolean, Integer, Integer> valuesRow() {
+	public Row15<String, String, Integer, Integer, Byte, Integer, Byte, Boolean, Timestamp, Byte, String, Boolean, Boolean, Integer, Integer> valuesRow() {
 		return (Row15) super.valuesRow();
 	}
 
@@ -371,7 +369,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return MonsterForUser.MONSTER_FOR_USER.MONSTER_ID;
 	}
 
@@ -379,7 +377,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return MonsterForUser.MONSTER_FOR_USER.CURRENT_EXPERIENCE;
 	}
 
@@ -387,7 +385,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field5() {
+	public Field<Byte> field5() {
 		return MonsterForUser.MONSTER_FOR_USER.CURRENT_LEVEL;
 	}
 
@@ -403,7 +401,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field7() {
+	public Field<Byte> field7() {
 		return MonsterForUser.MONSTER_FOR_USER.NUM_PIECES;
 	}
 
@@ -427,7 +425,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field10() {
+	public Field<Byte> field10() {
 		return MonsterForUser.MONSTER_FOR_USER.TEAM_SLOT_NUM;
 	}
 
@@ -491,7 +489,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getMonsterId();
 	}
 
@@ -499,7 +497,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getCurrentExperience();
 	}
 
@@ -507,7 +505,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value5() {
+	public Byte value5() {
 		return getCurrentLevel();
 	}
 
@@ -523,7 +521,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value7() {
+	public Byte value7() {
 		return getNumPieces();
 	}
 
@@ -547,7 +545,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value10() {
+	public Byte value10() {
 		return getTeamSlotNum();
 	}
 
@@ -613,7 +611,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserRecord value3(UInteger value) {
+	public MonsterForUserRecord value3(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -622,7 +620,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserRecord value4(UInteger value) {
+	public MonsterForUserRecord value4(Integer value) {
 		setCurrentExperience(value);
 		return this;
 	}
@@ -631,7 +629,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserRecord value5(UByte value) {
+	public MonsterForUserRecord value5(Byte value) {
 		setCurrentLevel(value);
 		return this;
 	}
@@ -649,7 +647,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserRecord value7(UByte value) {
+	public MonsterForUserRecord value7(Byte value) {
 		setNumPieces(value);
 		return this;
 	}
@@ -676,7 +674,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserRecord value10(UByte value) {
+	public MonsterForUserRecord value10(Byte value) {
 		setTeamSlotNum(value);
 		return this;
 	}
@@ -730,7 +728,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForUserRecord values(String value1, String value2, UInteger value3, UInteger value4, UByte value5, Integer value6, UByte value7, Boolean value8, Timestamp value9, UByte value10, String value11, Boolean value12, Boolean value13, Integer value14, Integer value15) {
+	public MonsterForUserRecord values(String value1, String value2, Integer value3, Integer value4, Byte value5, Integer value6, Byte value7, Boolean value8, Timestamp value9, Byte value10, String value11, Boolean value12, Boolean value13, Integer value14, Integer value15) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -798,7 +796,7 @@ public class MonsterForUserRecord extends UpdatableRecordImpl<MonsterForUserReco
 	/**
 	 * Create a detached, initialised MonsterForUserRecord
 	 */
-	public MonsterForUserRecord(String id, String userId, UInteger monsterId, UInteger currentExperience, UByte currentLevel, Integer currentHealth, UByte numPieces, Boolean isComplete, Timestamp combineStartTime, UByte teamSlotNum, String sourceOfPieces, Boolean hasAllPieces, Boolean restricted, Integer offensiveSkillId, Integer defensiveSkillId) {
+	public MonsterForUserRecord(String id, String userId, Integer monsterId, Integer currentExperience, Byte currentLevel, Integer currentHealth, Byte numPieces, Boolean isComplete, Timestamp combineStartTime, Byte teamSlotNum, String sourceOfPieces, Boolean hasAllPieces, Boolean restricted, Integer offensiveSkillId, Integer defensiveSkillId) {
 		super(MonsterForUser.MONSTER_FOR_USER);
 
 		setValue(0, id);

@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = -1166393251;
+	private static final long serialVersionUID = 1863727104;
 
 	/**
 	 * The reference instance of <code>mobsters.user</code>
@@ -63,32 +62,32 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>mobsters.user.level</code>.
 	 */
-	public final TableField<UserRecord, UInteger> LEVEL = createField("level", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<UserRecord, Integer> LEVEL = createField("level", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.user.gems</code>.
 	 */
-	public final TableField<UserRecord, UInteger> GEMS = createField("gems", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<UserRecord, Integer> GEMS = createField("gems", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.user.cash</code>. soft currency
 	 */
-	public final TableField<UserRecord, UInteger> CASH = createField("cash", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "soft currency");
+	public final TableField<UserRecord, Integer> CASH = createField("cash", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "soft currency");
 
 	/**
 	 * The column <code>mobsters.user.oil</code>. soft currency
 	 */
-	public final TableField<UserRecord, UInteger> OIL = createField("oil", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "soft currency");
+	public final TableField<UserRecord, Integer> OIL = createField("oil", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "soft currency");
 
 	/**
 	 * The column <code>mobsters.user.experience</code>.
 	 */
-	public final TableField<UserRecord, UInteger> EXPERIENCE = createField("experience", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> EXPERIENCE = createField("experience", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.tasks_completed</code>.
 	 */
-	public final TableField<UserRecord, UInteger> TASKS_COMPLETED = createField("tasks_completed", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> TASKS_COMPLETED = createField("tasks_completed", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.referral_code</code>.
@@ -98,7 +97,7 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>mobsters.user.num_referrals</code>.
 	 */
-	public final TableField<UserRecord, UInteger> NUM_REFERRALS = createField("num_referrals", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> NUM_REFERRALS = createField("num_referrals", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.udid_for_history</code>.
@@ -123,7 +122,7 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>mobsters.user.num_badges</code>.
 	 */
-	public final TableField<UserRecord, UInteger> NUM_BADGES = createField("num_badges", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> NUM_BADGES = createField("num_badges", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.is_fake</code>.
@@ -148,17 +147,17 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>mobsters.user.num_coins_retrieved_from_structs</code>.
 	 */
-	public final TableField<UserRecord, UInteger> NUM_COINS_RETRIEVED_FROM_STRUCTS = createField("num_coins_retrieved_from_structs", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> NUM_COINS_RETRIEVED_FROM_STRUCTS = createField("num_coins_retrieved_from_structs", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.num_oil_retrieved_from_structs</code>.
 	 */
-	public final TableField<UserRecord, UInteger> NUM_OIL_RETRIEVED_FROM_STRUCTS = createField("num_oil_retrieved_from_structs", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> NUM_OIL_RETRIEVED_FROM_STRUCTS = createField("num_oil_retrieved_from_structs", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.num_consecutive_days_played</code>.
 	 */
-	public final TableField<UserRecord, UInteger> NUM_CONSECUTIVE_DAYS_PLAYED = createField("num_consecutive_days_played", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> NUM_CONSECUTIVE_DAYS_PLAYED = createField("num_consecutive_days_played", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.clan_id</code>.
@@ -288,7 +287,7 @@ public class User extends TableImpl<UserRecord> {
 	/**
 	 * The column <code>mobsters.user.total_strength</code>.
 	 */
-	public final TableField<UserRecord, Long> TOTAL_STRENGTH = createField("total_strength", org.jooq.impl.SQLDataType.BIGINT.defaulted(true), this, "");
+	public final TableField<UserRecord, Integer> TOTAL_STRENGTH = createField("total_strength", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.user.segmentation_group</code>. starter/builder pack: alex/arin/ashwin/byron vs cooper
@@ -301,6 +300,16 @@ public class User extends TableImpl<UserRecord> {
 	 * The column <code>mobsters.user.gacha_credits</code>.
 	 */
 	public final TableField<UserRecord, Integer> GACHA_CREDITS = createField("gacha_credits", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
+
+	/**
+	 * The column <code>mobsters.user.last_tango_gift_sent_time</code>.
+	 */
+	public final TableField<UserRecord, Timestamp> LAST_TANGO_GIFT_SENT_TIME = createField("last_tango_gift_sent_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+
+	/**
+	 * The column <code>mobsters.user.tango_id</code>.
+	 */
+	public final TableField<UserRecord, String> TANGO_ID = createField("tango_id", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
 	/**
 	 * Create a <code>mobsters.user</code> table reference

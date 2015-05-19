@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserFacebookInviteForSlot extends TableImpl<UserFacebookInviteForSlotRecord> {
 
-	private static final long serialVersionUID = 1486175484;
+	private static final long serialVersionUID = -1746842681;
 
 	/**
 	 * The reference instance of <code>mobsters.user_facebook_invite_for_slot</code>
@@ -83,7 +82,7 @@ public class UserFacebookInviteForSlot extends TableImpl<UserFacebookInviteForSl
 	/**
 	 * The column <code>mobsters.user_facebook_invite_for_slot.user_struct_fb_lvl</code>.
 	 */
-	public final TableField<UserFacebookInviteForSlotRecord, UByte> USER_STRUCT_FB_LVL = createField("user_struct_fb_lvl", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<UserFacebookInviteForSlotRecord, Byte> USER_STRUCT_FB_LVL = createField("user_struct_fb_lvl", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.user_facebook_invite_for_slot.time_redeemed</code>.

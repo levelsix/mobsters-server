@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureForUser extends TableImpl<StructureForUserRecord> {
 
-	private static final long serialVersionUID = 855278043;
+	private static final long serialVersionUID = -796732061;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_for_user</code>
@@ -64,7 +62,7 @@ public class StructureForUser extends TableImpl<StructureForUserRecord> {
 	/**
 	 * The column <code>mobsters.structure_for_user.struct_id</code>.
 	 */
-	public final TableField<StructureForUserRecord, UInteger> STRUCT_ID = createField("struct_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<StructureForUserRecord, Integer> STRUCT_ID = createField("struct_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_for_user.last_retrieved</code>.
@@ -99,7 +97,7 @@ public class StructureForUser extends TableImpl<StructureForUserRecord> {
 	/**
 	 * The column <code>mobsters.structure_for_user.fb_invite_struct_lvl</code>.
 	 */
-	public final TableField<StructureForUserRecord, UByte> FB_INVITE_STRUCT_LVL = createField("fb_invite_struct_lvl", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureForUserRecord, Byte> FB_INVITE_STRUCT_LVL = createField("fb_invite_struct_lvl", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.structure_for_user</code> table reference

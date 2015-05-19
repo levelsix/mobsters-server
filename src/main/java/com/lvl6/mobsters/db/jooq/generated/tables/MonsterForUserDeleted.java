@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterForUserDeleted extends TableImpl<MonsterForUserDeletedRecord> {
 
-	private static final long serialVersionUID = -1694296190;
+	private static final long serialVersionUID = -298848232;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_for_user_deleted</code>
@@ -64,27 +62,27 @@ public class MonsterForUserDeleted extends TableImpl<MonsterForUserDeletedRecord
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.monster_id</code>.
 	 */
-	public final TableField<MonsterForUserDeletedRecord, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<MonsterForUserDeletedRecord, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.current_experience</code>.
 	 */
-	public final TableField<MonsterForUserDeletedRecord, UInteger> CURRENT_EXPERIENCE = createField("current_experience", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<MonsterForUserDeletedRecord, Integer> CURRENT_EXPERIENCE = createField("current_experience", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.current_level</code>.
 	 */
-	public final TableField<MonsterForUserDeletedRecord, UByte> CURRENT_LEVEL = createField("current_level", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<MonsterForUserDeletedRecord, Byte> CURRENT_LEVEL = createField("current_level", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.current_health</code>.
 	 */
-	public final TableField<MonsterForUserDeletedRecord, UInteger> CURRENT_HEALTH = createField("current_health", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<MonsterForUserDeletedRecord, Integer> CURRENT_HEALTH = createField("current_health", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.num_pieces</code>.
 	 */
-	public final TableField<MonsterForUserDeletedRecord, UByte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<MonsterForUserDeletedRecord, Byte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.is_complete</code>.
@@ -99,7 +97,7 @@ public class MonsterForUserDeleted extends TableImpl<MonsterForUserDeletedRecord
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.team_slot_num</code>.
 	 */
-	public final TableField<MonsterForUserDeletedRecord, UByte> TEAM_SLOT_NUM = createField("team_slot_num", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<MonsterForUserDeletedRecord, Byte> TEAM_SLOT_NUM = createField("team_slot_num", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user_deleted.source_of_pieces</code>.

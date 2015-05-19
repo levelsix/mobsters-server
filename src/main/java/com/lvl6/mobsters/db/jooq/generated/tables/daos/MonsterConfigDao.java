@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -90,7 +88,7 @@ public class MonsterConfigDao extends DAOImpl<MonsterConfigRecord, com.lvl6.mobs
 	/**
 	 * Fetch records that have <code>evolution_level IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByEvolutionLevel(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByEvolutionLevel(Byte... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.EVOLUTION_LEVEL, values);
 	}
 
@@ -118,21 +116,21 @@ public class MonsterConfigDao extends DAOImpl<MonsterConfigRecord, com.lvl6.mobs
 	/**
 	 * Fetch records that have <code>num_puzzle_pieces IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByNumPuzzlePieces(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByNumPuzzlePieces(Byte... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.NUM_PUZZLE_PIECES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>minutes_to_combine_pieces IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByMinutesToCombinePieces(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByMinutesToCombinePieces(Integer... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.MINUTES_TO_COMBINE_PIECES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>max_level IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByMaxLevel(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByMaxLevel(Byte... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.MAX_LEVEL, values);
 	}
 
@@ -146,21 +144,21 @@ public class MonsterConfigDao extends DAOImpl<MonsterConfigRecord, com.lvl6.mobs
 	/**
 	 * Fetch records that have <code>evolution_catalyst_monster_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByEvolutionCatalystMonsterId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByEvolutionCatalystMonsterId(Integer... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.EVOLUTION_CATALYST_MONSTER_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>minutes_to_evolve IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByMinutesToEvolve(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByMinutesToEvolve(Integer... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.MINUTES_TO_EVOLVE, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_evolution_catalysts IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByNumEvolutionCatalysts(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterConfig> fetchByNumEvolutionCatalysts(Byte... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.NUM_EVOLUTION_CATALYSTS, values);
 	}
 

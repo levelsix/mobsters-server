@@ -21,7 +21,6 @@ import org.jooq.Record5;
 import org.jooq.Row;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "clan_event_persistent_config", schema = "mobsters")
-public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEventPersistentConfigRecord> implements Record5<Integer, String, Byte, UInteger, UInteger>, IClanEventPersistentConfig {
+public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEventPersistentConfigRecord> implements Record5<Integer, String, Byte, Integer, Integer>, IClanEventPersistentConfig {
 
-	private static final long serialVersionUID = -617083417;
+	private static final long serialVersionUID = 873511422;
 
 	/**
 	 * Setter for <code>mobsters.clan_event_persistent_config.id</code>.
@@ -102,7 +101,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * Setter for <code>mobsters.clan_event_persistent_config.event_duration_minutes</code>.
 	 */
 	@Override
-	public ClanEventPersistentConfigRecord setEventDurationMinutes(UInteger value) {
+	public ClanEventPersistentConfigRecord setEventDurationMinutes(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -112,15 +111,15 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 */
 	@Column(name = "event_duration_minutes", precision = 7)
 	@Override
-	public UInteger getEventDurationMinutes() {
-		return (UInteger) getValue(3);
+	public Integer getEventDurationMinutes() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_event_persistent_config.clan_raid_id</code>.
 	 */
 	@Override
-	public ClanEventPersistentConfigRecord setClanRaidId(UInteger value) {
+	public ClanEventPersistentConfigRecord setClanRaidId(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -130,8 +129,8 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 */
 	@Column(name = "clan_raid_id", precision = 10)
 	@Override
-	public UInteger getClanRaidId() {
-		return (UInteger) getValue(4);
+	public Integer getClanRaidId() {
+		return (Integer) getValue(4);
 	}
 
 	// -------------------------------------------------------------------------
@@ -154,7 +153,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<Integer, String, Byte, UInteger, UInteger> fieldsRow() {
+	public Row5<Integer, String, Byte, Integer, Integer> fieldsRow() {
 		return (Row5) super.fieldsRow();
 	}
 
@@ -162,7 +161,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<Integer, String, Byte, UInteger, UInteger> valuesRow() {
+	public Row5<Integer, String, Byte, Integer, Integer> valuesRow() {
 		return (Row5) super.valuesRow();
 	}
 
@@ -194,7 +193,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG.EVENT_DURATION_MINUTES;
 	}
 
@@ -202,7 +201,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG.CLAN_RAID_ID;
 	}
 
@@ -234,7 +233,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getEventDurationMinutes();
 	}
 
@@ -242,7 +241,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getClanRaidId();
 	}
 
@@ -277,7 +276,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanEventPersistentConfigRecord value4(UInteger value) {
+	public ClanEventPersistentConfigRecord value4(Integer value) {
 		setEventDurationMinutes(value);
 		return this;
 	}
@@ -286,7 +285,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanEventPersistentConfigRecord value5(UInteger value) {
+	public ClanEventPersistentConfigRecord value5(Integer value) {
 		setClanRaidId(value);
 		return this;
 	}
@@ -295,7 +294,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanEventPersistentConfigRecord values(Integer value1, String value2, Byte value3, UInteger value4, UInteger value5) {
+	public ClanEventPersistentConfigRecord values(Integer value1, String value2, Byte value3, Integer value4, Integer value5) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -343,7 +342,7 @@ public class ClanEventPersistentConfigRecord extends UpdatableRecordImpl<ClanEve
 	/**
 	 * Create a detached, initialised ClanEventPersistentConfigRecord
 	 */
-	public ClanEventPersistentConfigRecord(Integer id, String dayOfWeek, Byte startHour, UInteger eventDurationMinutes, UInteger clanRaidId) {
+	public ClanEventPersistentConfigRecord(Integer id, String dayOfWeek, Byte startHour, Integer eventDurationMinutes, Integer clanRaidId) {
 		super(ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG);
 
 		setValue(0, id);

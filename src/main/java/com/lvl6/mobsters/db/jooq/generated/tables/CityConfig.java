@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CityConfig extends TableImpl<CityConfigRecord> {
 
-	private static final long serialVersionUID = -1679188371;
+	private static final long serialVersionUID = -139295226;
 
 	/**
 	 * The reference instance of <code>mobsters.city_config</code>
@@ -52,7 +51,7 @@ public class CityConfig extends TableImpl<CityConfigRecord> {
 	/**
 	 * The column <code>mobsters.city_config.id</code>.
 	 */
-	public final TableField<CityConfigRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<CityConfigRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.city_config.name</code>.

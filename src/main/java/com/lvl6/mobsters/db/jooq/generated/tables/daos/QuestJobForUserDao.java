@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 import org.jooq.Configuration;
 import org.jooq.Record3;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -83,7 +82,7 @@ public class QuestJobForUserDao extends DAOImpl<QuestJobForUserRecord, com.lvl6.
 	/**
 	 * Fetch records that have <code>progress IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.QuestJobForUser> fetchByProgress(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.QuestJobForUser> fetchByProgress(Integer... values) {
 		return fetch(QuestJobForUser.QUEST_JOB_FOR_USER.PROGRESS, values);
 	}
 }

@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -82,14 +81,14 @@ public class ClanEventPersistentConfigDao extends DAOImpl<ClanEventPersistentCon
 	/**
 	 * Fetch records that have <code>event_duration_minutes IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanEventPersistentConfig> fetchByEventDurationMinutes(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanEventPersistentConfig> fetchByEventDurationMinutes(Integer... values) {
 		return fetch(ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG.EVENT_DURATION_MINUTES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>clan_raid_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanEventPersistentConfig> fetchByClanRaidId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanEventPersistentConfig> fetchByClanRaidId(Integer... values) {
 		return fetch(ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG.CLAN_RAID_ID, values);
 	}
 }

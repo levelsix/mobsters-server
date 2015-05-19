@@ -21,7 +21,6 @@ import org.jooq.Record4;
 import org.jooq.Row;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_resource_generator_config", schema = "mobsters")
-public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<StructureResourceGeneratorConfigRecord> implements Record4<Integer, String, Double, UInteger>, IStructureResourceGeneratorConfig {
+public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<StructureResourceGeneratorConfigRecord> implements Record4<Integer, String, Double, Integer>, IStructureResourceGeneratorConfig {
 
-	private static final long serialVersionUID = -984869415;
+	private static final long serialVersionUID = -2048757291;
 
 	/**
 	 * Setter for <code>mobsters.structure_resource_generator_config.struct_id</code>. Id in structure table
@@ -104,7 +103,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * Setter for <code>mobsters.structure_resource_generator_config.capacity</code>.
 	 */
 	@Override
-	public StructureResourceGeneratorConfigRecord setCapacity(UInteger value) {
+	public StructureResourceGeneratorConfigRecord setCapacity(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -115,8 +114,8 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	@Column(name = "capacity", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getCapacity() {
-		return (UInteger) getValue(3);
+	public Integer getCapacity() {
+		return (Integer) getValue(3);
 	}
 
 	// -------------------------------------------------------------------------
@@ -139,7 +138,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<Integer, String, Double, UInteger> fieldsRow() {
+	public Row4<Integer, String, Double, Integer> fieldsRow() {
 		return (Row4) super.fieldsRow();
 	}
 
@@ -147,7 +146,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<Integer, String, Double, UInteger> valuesRow() {
+	public Row4<Integer, String, Double, Integer> valuesRow() {
 		return (Row4) super.valuesRow();
 	}
 
@@ -179,7 +178,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return StructureResourceGeneratorConfig.STRUCTURE_RESOURCE_GENERATOR_CONFIG.CAPACITY;
 	}
 
@@ -211,7 +210,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getCapacity();
 	}
 
@@ -246,7 +245,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResourceGeneratorConfigRecord value4(UInteger value) {
+	public StructureResourceGeneratorConfigRecord value4(Integer value) {
 		setCapacity(value);
 		return this;
 	}
@@ -255,7 +254,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResourceGeneratorConfigRecord values(Integer value1, String value2, Double value3, UInteger value4) {
+	public StructureResourceGeneratorConfigRecord values(Integer value1, String value2, Double value3, Integer value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -301,7 +300,7 @@ public class StructureResourceGeneratorConfigRecord extends UpdatableRecordImpl<
 	/**
 	 * Create a detached, initialised StructureResourceGeneratorConfigRecord
 	 */
-	public StructureResourceGeneratorConfigRecord(Integer structId, String resourceTypeGenerated, Double productionRate, UInteger capacity) {
+	public StructureResourceGeneratorConfigRecord(Integer structId, String resourceTypeGenerated, Double productionRate, Integer capacity) {
 		super(StructureResourceGeneratorConfig.STRUCTURE_RESOURCE_GENERATOR_CONFIG);
 
 		setValue(0, structId);

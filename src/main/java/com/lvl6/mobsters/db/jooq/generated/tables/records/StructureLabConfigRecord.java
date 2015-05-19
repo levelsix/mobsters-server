@@ -20,7 +20,6 @@ import org.jooq.Record3;
 import org.jooq.Row;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -36,9 +35,9 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_lab_config", schema = "mobsters")
-public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabConfigRecord> implements Record3<Integer, UByte, Double>, IStructureLabConfig {
+public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabConfigRecord> implements Record3<Integer, Byte, Double>, IStructureLabConfig {
 
-	private static final long serialVersionUID = 1408945823;
+	private static final long serialVersionUID = 1252529967;
 
 	/**
 	 * Setter for <code>mobsters.structure_lab_config.struct_id</code>.
@@ -64,7 +63,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * Setter for <code>mobsters.structure_lab_config.queue_size</code>.
 	 */
 	@Override
-	public StructureLabConfigRecord setQueueSize(UByte value) {
+	public StructureLabConfigRecord setQueueSize(Byte value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,8 +74,8 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	@Column(name = "queue_size", nullable = false, precision = 3)
 	@NotNull
 	@Override
-	public UByte getQueueSize() {
-		return (UByte) getValue(1);
+	public Byte getQueueSize() {
+		return (Byte) getValue(1);
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, UByte, Double> fieldsRow() {
+	public Row3<Integer, Byte, Double> fieldsRow() {
 		return (Row3) super.fieldsRow();
 	}
 
@@ -125,7 +124,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, UByte, Double> valuesRow() {
+	public Row3<Integer, Byte, Double> valuesRow() {
 		return (Row3) super.valuesRow();
 	}
 
@@ -141,7 +140,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field2() {
+	public Field<Byte> field2() {
 		return StructureLabConfig.STRUCTURE_LAB_CONFIG.QUEUE_SIZE;
 	}
 
@@ -165,7 +164,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value2() {
+	public Byte value2() {
 		return getQueueSize();
 	}
 
@@ -190,7 +189,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureLabConfigRecord value2(UByte value) {
+	public StructureLabConfigRecord value2(Byte value) {
 		setQueueSize(value);
 		return this;
 	}
@@ -208,7 +207,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureLabConfigRecord values(Integer value1, UByte value2, Double value3) {
+	public StructureLabConfigRecord values(Integer value1, Byte value2, Double value3) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -252,7 +251,7 @@ public class StructureLabConfigRecord extends UpdatableRecordImpl<StructureLabCo
 	/**
 	 * Create a detached, initialised StructureLabConfigRecord
 	 */
-	public StructureLabConfigRecord(Integer structId, UByte queueSize, Double pointsMultiplier) {
+	public StructureLabConfigRecord(Integer structId, Byte queueSize, Double pointsMultiplier) {
 		super(StructureLabConfig.STRUCTURE_LAB_CONFIG);
 
 		setValue(0, structId);

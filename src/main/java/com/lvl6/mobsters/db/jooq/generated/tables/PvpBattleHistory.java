@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PvpBattleHistory extends TableImpl<PvpBattleHistoryRecord> {
 
-	private static final long serialVersionUID = 611043487;
+	private static final long serialVersionUID = -1569342554;
 
 	/**
 	 * The reference instance of <code>mobsters.pvp_battle_history</code>
@@ -188,6 +188,11 @@ public class PvpBattleHistory extends TableImpl<PvpBattleHistoryRecord> {
 	 * The column <code>mobsters.pvp_battle_history.clan_avenged</code>.
 	 */
 	public final TableField<PvpBattleHistoryRecord, Boolean> CLAN_AVENGED = createField("clan_avenged", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>mobsters.pvp_battle_history.replay_id</code>.
+	 */
+	public final TableField<PvpBattleHistoryRecord, String> REPLAY_ID = createField("replay_id", org.jooq.impl.SQLDataType.CHAR.length(36), this, "");
 
 	/**
 	 * Create a <code>mobsters.pvp_battle_history</code> table reference

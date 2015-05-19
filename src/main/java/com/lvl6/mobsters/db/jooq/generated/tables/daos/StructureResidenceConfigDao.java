@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -68,28 +67,28 @@ public class StructureResidenceConfigDao extends DAOImpl<StructureResidenceConfi
 	/**
 	 * Fetch records that have <code>num_monster_slots IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumMonsterSlots(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumMonsterSlots(Integer... values) {
 		return fetch(StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_MONSTER_SLOTS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_bonus_monster_slots IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumBonusMonsterSlots(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumBonusMonsterSlots(Integer... values) {
 		return fetch(StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_BONUS_MONSTER_SLOTS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_gems_required IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumGemsRequired(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumGemsRequired(Integer... values) {
 		return fetch(StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_GEMS_REQUIRED, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_accepeted_fb_invites IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumAccepetedFbInvites(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResidenceConfig> fetchByNumAccepetedFbInvites(Integer... values) {
 		return fetch(StructureResidenceConfig.STRUCTURE_RESIDENCE_CONFIG.NUM_ACCEPETED_FB_INVITES, values);
 	}
 

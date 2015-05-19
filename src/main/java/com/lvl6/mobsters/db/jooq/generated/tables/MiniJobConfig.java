@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniJobConfig extends TableImpl<MiniJobConfigRecord> {
 
-	private static final long serialVersionUID = 1765984755;
+	private static final long serialVersionUID = -347550219;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_job_config</code>
@@ -69,22 +67,22 @@ public class MiniJobConfig extends TableImpl<MiniJobConfigRecord> {
 	/**
 	 * The column <code>mobsters.mini_job_config.cash_reward</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> CASH_REWARD = createField("cash_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> CASH_REWARD = createField("cash_reward", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.oil_reward</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> OIL_REWARD = createField("oil_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> OIL_REWARD = createField("oil_reward", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.gem_reward</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.monster_id_reward</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> MONSTER_ID_REWARD = createField("monster_id_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> MONSTER_ID_REWARD = createField("monster_id_reward", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.item_id_reward</code>.
@@ -114,7 +112,7 @@ public class MiniJobConfig extends TableImpl<MiniJobConfigRecord> {
 	/**
 	 * The column <code>mobsters.mini_job_config.max_num_monsters_allowed</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UByte> MAX_NUM_MONSTERS_ALLOWED = createField("max_num_monsters_allowed", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Byte> MAX_NUM_MONSTERS_ALLOWED = createField("max_num_monsters_allowed", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.chance_to_appear</code>.
@@ -129,27 +127,27 @@ public class MiniJobConfig extends TableImpl<MiniJobConfigRecord> {
 	/**
 	 * The column <code>mobsters.mini_job_config.atk_required</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> ATK_REQUIRED = createField("atk_required", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> ATK_REQUIRED = createField("atk_required", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.min_dmg</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> MIN_DMG = createField("min_dmg", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> MIN_DMG = createField("min_dmg", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.max_dmg</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> MAX_DMG = createField("max_dmg", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> MAX_DMG = createField("max_dmg", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.duration_min_minutes</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> DURATION_MIN_MINUTES = createField("duration_min_minutes", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> DURATION_MIN_MINUTES = createField("duration_min_minutes", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.duration_max_minutes</code>.
 	 */
-	public final TableField<MiniJobConfigRecord, UInteger> DURATION_MAX_MINUTES = createField("duration_max_minutes", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MiniJobConfigRecord, Integer> DURATION_MAX_MINUTES = createField("duration_max_minutes", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_config.is_valid</code>.

@@ -21,7 +21,6 @@ import org.jooq.Record10;
 import org.jooq.Row;
 import org.jooq.Row10;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "booster_display_item_config", schema = "mobsters")
-public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterDisplayItemConfigRecord> implements Record10<Integer, UInteger, Boolean, Boolean, String, UInteger, UInteger, Integer, Integer, Integer>, IBoosterDisplayItemConfig {
+public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterDisplayItemConfigRecord> implements Record10<Integer, Integer, Boolean, Boolean, String, Integer, Integer, Integer, Integer, Integer>, IBoosterDisplayItemConfig {
 
-	private static final long serialVersionUID = -461318986;
+	private static final long serialVersionUID = 111161294;
 
 	/**
 	 * Setter for <code>mobsters.booster_display_item_config.id</code>.
@@ -65,7 +64,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * Setter for <code>mobsters.booster_display_item_config.booster_pack_id</code>.
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord setBoosterPackId(UInteger value) {
+	public BoosterDisplayItemConfigRecord setBoosterPackId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,8 +74,8 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 */
 	@Column(name = "booster_pack_id", precision = 10)
 	@Override
-	public UInteger getBoosterPackId() {
-		return (UInteger) getValue(1);
+	public Integer getBoosterPackId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
@@ -138,7 +137,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * Setter for <code>mobsters.booster_display_item_config.gem_reward</code>.
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord setGemReward(UInteger value) {
+	public BoosterDisplayItemConfigRecord setGemReward(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -148,15 +147,15 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 */
 	@Column(name = "gem_reward", precision = 7)
 	@Override
-	public UInteger getGemReward() {
-		return (UInteger) getValue(5);
+	public Integer getGemReward() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_display_item_config.quantity</code>. how many times this booster_item appears in the spinner
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord setQuantity(UInteger value) {
+	public BoosterDisplayItemConfigRecord setQuantity(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -166,8 +165,8 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 */
 	@Column(name = "quantity", precision = 7)
 	@Override
-	public UInteger getQuantity() {
-		return (UInteger) getValue(6);
+	public Integer getQuantity() {
+		return (Integer) getValue(6);
 	}
 
 	/**
@@ -244,7 +243,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<Integer, UInteger, Boolean, Boolean, String, UInteger, UInteger, Integer, Integer, Integer> fieldsRow() {
+	public Row10<Integer, Integer, Boolean, Boolean, String, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
 		return (Row10) super.fieldsRow();
 	}
 
@@ -252,7 +251,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<Integer, UInteger, Boolean, Boolean, String, UInteger, UInteger, Integer, Integer, Integer> valuesRow() {
+	public Row10<Integer, Integer, Boolean, Boolean, String, Integer, Integer, Integer, Integer, Integer> valuesRow() {
 		return (Row10) super.valuesRow();
 	}
 
@@ -268,7 +267,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG.BOOSTER_PACK_ID;
 	}
 
@@ -300,7 +299,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG.GEM_REWARD;
 	}
 
@@ -308,7 +307,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field7() {
+	public Field<Integer> field7() {
 		return BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG.QUANTITY;
 	}
 
@@ -348,7 +347,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getBoosterPackId();
 	}
 
@@ -380,7 +379,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getGemReward();
 	}
 
@@ -388,7 +387,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value7() {
+	public Integer value7() {
 		return getQuantity();
 	}
 
@@ -429,7 +428,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord value2(UInteger value) {
+	public BoosterDisplayItemConfigRecord value2(Integer value) {
 		setBoosterPackId(value);
 		return this;
 	}
@@ -465,7 +464,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord value6(UInteger value) {
+	public BoosterDisplayItemConfigRecord value6(Integer value) {
 		setGemReward(value);
 		return this;
 	}
@@ -474,7 +473,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord value7(UInteger value) {
+	public BoosterDisplayItemConfigRecord value7(Integer value) {
 		setQuantity(value);
 		return this;
 	}
@@ -510,7 +509,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterDisplayItemConfigRecord values(Integer value1, UInteger value2, Boolean value3, Boolean value4, String value5, UInteger value6, UInteger value7, Integer value8, Integer value9, Integer value10) {
+	public BoosterDisplayItemConfigRecord values(Integer value1, Integer value2, Boolean value3, Boolean value4, String value5, Integer value6, Integer value7, Integer value8, Integer value9, Integer value10) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -568,7 +567,7 @@ public class BoosterDisplayItemConfigRecord extends UpdatableRecordImpl<BoosterD
 	/**
 	 * Create a detached, initialised BoosterDisplayItemConfigRecord
 	 */
-	public BoosterDisplayItemConfigRecord(Integer id, UInteger boosterPackId, Boolean isMonster, Boolean isComplete, String monsterQuality, UInteger gemReward, UInteger quantity, Integer itemId, Integer itemQuantity, Integer rewardId) {
+	public BoosterDisplayItemConfigRecord(Integer id, Integer boosterPackId, Boolean isMonster, Boolean isComplete, String monsterQuality, Integer gemReward, Integer quantity, Integer itemId, Integer itemQuantity, Integer rewardId) {
 		super(BoosterDisplayItemConfig.BOOSTER_DISPLAY_ITEM_CONFIG);
 
 		setValue(0, id);

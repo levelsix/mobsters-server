@@ -23,7 +23,6 @@ import org.jooq.Record11;
 import org.jooq.Row;
 import org.jooq.Row11;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -39,9 +38,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "pvp_league_for_user", schema = "mobsters")
-public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUserRecord> implements Record11<String, UInteger, UInteger, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double>, IPvpLeagueForUser {
+public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUserRecord> implements Record11<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double>, IPvpLeagueForUser {
 
-	private static final long serialVersionUID = 1638545429;
+	private static final long serialVersionUID = 1929098810;
 
 	/**
 	 * Setter for <code>mobsters.pvp_league_for_user.user_id</code>.
@@ -68,7 +67,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * Setter for <code>mobsters.pvp_league_for_user.league_id</code>.
 	 */
 	@Override
-	public PvpLeagueForUserRecord setLeagueId(UInteger value) {
+	public PvpLeagueForUserRecord setLeagueId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -78,15 +77,15 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 */
 	@Column(name = "league_id", precision = 10)
 	@Override
-	public UInteger getLeagueId() {
-		return (UInteger) getValue(1);
+	public Integer getLeagueId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.pvp_league_for_user.rank</code>.
 	 */
 	@Override
-	public PvpLeagueForUserRecord setRank(UInteger value) {
+	public PvpLeagueForUserRecord setRank(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -96,8 +95,8 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 */
 	@Column(name = "rank", precision = 7)
 	@Override
-	public UInteger getRank() {
-		return (UInteger) getValue(2);
+	public Integer getRank() {
+		return (Integer) getValue(2);
 	}
 
 	/**
@@ -266,7 +265,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<String, UInteger, UInteger, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double> fieldsRow() {
+	public Row11<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double> fieldsRow() {
 		return (Row11) super.fieldsRow();
 	}
 
@@ -274,7 +273,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<String, UInteger, UInteger, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double> valuesRow() {
+	public Row11<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double> valuesRow() {
 		return (Row11) super.valuesRow();
 	}
 
@@ -290,7 +289,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return PvpLeagueForUser.PVP_LEAGUE_FOR_USER.LEAGUE_ID;
 	}
 
@@ -298,7 +297,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return PvpLeagueForUser.PVP_LEAGUE_FOR_USER.RANK;
 	}
 
@@ -378,7 +377,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getLeagueId();
 	}
 
@@ -386,7 +385,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getRank();
 	}
 
@@ -467,7 +466,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public PvpLeagueForUserRecord value2(UInteger value) {
+	public PvpLeagueForUserRecord value2(Integer value) {
 		setLeagueId(value);
 		return this;
 	}
@@ -476,7 +475,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public PvpLeagueForUserRecord value3(UInteger value) {
+	public PvpLeagueForUserRecord value3(Integer value) {
 		setRank(value);
 		return this;
 	}
@@ -557,7 +556,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public PvpLeagueForUserRecord values(String value1, UInteger value2, UInteger value3, Integer value4, Timestamp value5, Timestamp value6, Integer value7, Integer value8, Integer value9, Integer value10, Double value11) {
+	public PvpLeagueForUserRecord values(String value1, Integer value2, Integer value3, Integer value4, Timestamp value5, Timestamp value6, Integer value7, Integer value8, Integer value9, Integer value10, Double value11) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -617,7 +616,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	/**
 	 * Create a detached, initialised PvpLeagueForUserRecord
 	 */
-	public PvpLeagueForUserRecord(String userId, UInteger leagueId, UInteger rank, Integer elo, Timestamp shieldEndTime, Timestamp battleEndTime, Integer attacksWon, Integer defensesWon, Integer attacksLost, Integer defensesLost, Double monsterDmgMultiplier) {
+	public PvpLeagueForUserRecord(String userId, Integer leagueId, Integer rank, Integer elo, Timestamp shieldEndTime, Timestamp battleEndTime, Integer attacksWon, Integer defensesWon, Integer attacksLost, Integer defensesLost, Double monsterDmgMultiplier) {
 		super(PvpLeagueForUser.PVP_LEAGUE_FOR_USER);
 
 		setValue(0, userId);

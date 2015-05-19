@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class QuestJobForUser extends TableImpl<QuestJobForUserRecord> {
 
-	private static final long serialVersionUID = -939622383;
+	private static final long serialVersionUID = -1294678634;
 
 	/**
 	 * The reference instance of <code>mobsters.quest_job_for_user</code>
@@ -72,7 +71,7 @@ public class QuestJobForUser extends TableImpl<QuestJobForUserRecord> {
 	/**
 	 * The column <code>mobsters.quest_job_for_user.progress</code>.
 	 */
-	public final TableField<QuestJobForUserRecord, UInteger> PROGRESS = createField("progress", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<QuestJobForUserRecord, Integer> PROGRESS = createField("progress", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.quest_job_for_user</code> table reference

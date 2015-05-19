@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureResidenceConfig extends TableImpl<StructureResidenceConfigRecord> {
 
-	private static final long serialVersionUID = 783481287;
+	private static final long serialVersionUID = 398052702;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_residence_config</code>
@@ -57,22 +56,22 @@ public class StructureResidenceConfig extends TableImpl<StructureResidenceConfig
 	/**
 	 * The column <code>mobsters.structure_residence_config.num_monster_slots</code>.
 	 */
-	public final TableField<StructureResidenceConfigRecord, UInteger> NUM_MONSTER_SLOTS = createField("num_monster_slots", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureResidenceConfigRecord, Integer> NUM_MONSTER_SLOTS = createField("num_monster_slots", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_residence_config.num_bonus_monster_slots</code>.
 	 */
-	public final TableField<StructureResidenceConfigRecord, UInteger> NUM_BONUS_MONSTER_SLOTS = createField("num_bonus_monster_slots", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureResidenceConfigRecord, Integer> NUM_BONUS_MONSTER_SLOTS = createField("num_bonus_monster_slots", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_residence_config.num_gems_required</code>.
 	 */
-	public final TableField<StructureResidenceConfigRecord, UInteger> NUM_GEMS_REQUIRED = createField("num_gems_required", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureResidenceConfigRecord, Integer> NUM_GEMS_REQUIRED = createField("num_gems_required", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_residence_config.num_accepeted_fb_invites</code>.
 	 */
-	public final TableField<StructureResidenceConfigRecord, UInteger> NUM_ACCEPETED_FB_INVITES = createField("num_accepeted_fb_invites", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureResidenceConfigRecord, Integer> NUM_ACCEPETED_FB_INVITES = createField("num_accepeted_fb_invites", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_residence_config.occupation_name</code>. This is flavor text, for which position the user invites his friends to do, in the journey for more slots.

@@ -21,7 +21,6 @@ import org.jooq.Record13;
 import org.jooq.Row;
 import org.jooq.Row13;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,15 +36,15 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "task_config", schema = "mobsters")
-public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> implements Record13<UInteger, String, String, Integer, Integer, UInteger, UInteger, Integer, Integer, String, String, Integer, Integer>, ITaskConfig {
+public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> implements Record13<Integer, String, String, Integer, Integer, Integer, Integer, Integer, Integer, String, String, Integer, Integer>, ITaskConfig {
 
-	private static final long serialVersionUID = -548222282;
+	private static final long serialVersionUID = -521646547;
 
 	/**
 	 * Setter for <code>mobsters.task_config.id</code>.
 	 */
 	@Override
-	public TaskConfigRecord setId(UInteger value) {
+	public TaskConfigRecord setId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -57,8 +56,8 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	@Column(name = "id", unique = true, nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getId() {
-		return (UInteger) getValue(0);
+	public Integer getId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
@@ -141,7 +140,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * Setter for <code>mobsters.task_config.prerequisite_task_id</code>. id in this table. Specifies the task the user should have completed before doing this one.
 	 */
 	@Override
-	public TaskConfigRecord setPrerequisiteTaskId(UInteger value) {
+	public TaskConfigRecord setPrerequisiteTaskId(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -151,15 +150,15 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 */
 	@Column(name = "prerequisite_task_id", precision = 10)
 	@Override
-	public UInteger getPrerequisiteTaskId() {
-		return (UInteger) getValue(5);
+	public Integer getPrerequisiteTaskId() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.task_config.prerequisite_quest_id</code>.
 	 */
 	@Override
-	public TaskConfigRecord setPrerequisiteQuestId(UInteger value) {
+	public TaskConfigRecord setPrerequisiteQuestId(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -169,8 +168,8 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 */
 	@Column(name = "prerequisite_quest_id", precision = 10)
 	@Override
-	public UInteger getPrerequisiteQuestId() {
-		return (UInteger) getValue(6);
+	public Integer getPrerequisiteQuestId() {
+		return (Integer) getValue(6);
 	}
 
 	/**
@@ -291,7 +290,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record1<UInteger> key() {
+	public Record1<Integer> key() {
 		return (Record1) super.key();
 	}
 
@@ -303,7 +302,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row13<UInteger, String, String, Integer, Integer, UInteger, UInteger, Integer, Integer, String, String, Integer, Integer> fieldsRow() {
+	public Row13<Integer, String, String, Integer, Integer, Integer, Integer, Integer, Integer, String, String, Integer, Integer> fieldsRow() {
 		return (Row13) super.fieldsRow();
 	}
 
@@ -311,7 +310,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row13<UInteger, String, String, Integer, Integer, UInteger, UInteger, Integer, Integer, String, String, Integer, Integer> valuesRow() {
+	public Row13<Integer, String, String, Integer, Integer, Integer, Integer, Integer, Integer, String, String, Integer, Integer> valuesRow() {
 		return (Row13) super.valuesRow();
 	}
 
@@ -319,7 +318,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return TaskConfig.TASK_CONFIG.ID;
 	}
 
@@ -359,7 +358,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field6() {
+	public Field<Integer> field6() {
 		return TaskConfig.TASK_CONFIG.PREREQUISITE_TASK_ID;
 	}
 
@@ -367,7 +366,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field7() {
+	public Field<Integer> field7() {
 		return TaskConfig.TASK_CONFIG.PREREQUISITE_QUEST_ID;
 	}
 
@@ -423,7 +422,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getId();
 	}
 
@@ -463,7 +462,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value6() {
+	public Integer value6() {
 		return getPrerequisiteTaskId();
 	}
 
@@ -471,7 +470,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value7() {
+	public Integer value7() {
 		return getPrerequisiteQuestId();
 	}
 
@@ -527,7 +526,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskConfigRecord value1(UInteger value) {
+	public TaskConfigRecord value1(Integer value) {
 		setId(value);
 		return this;
 	}
@@ -572,7 +571,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskConfigRecord value6(UInteger value) {
+	public TaskConfigRecord value6(Integer value) {
 		setPrerequisiteTaskId(value);
 		return this;
 	}
@@ -581,7 +580,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskConfigRecord value7(UInteger value) {
+	public TaskConfigRecord value7(Integer value) {
 		setPrerequisiteQuestId(value);
 		return this;
 	}
@@ -644,7 +643,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskConfigRecord values(UInteger value1, String value2, String value3, Integer value4, Integer value5, UInteger value6, UInteger value7, Integer value8, Integer value9, String value10, String value11, Integer value12, Integer value13) {
+	public TaskConfigRecord values(Integer value1, String value2, String value3, Integer value4, Integer value5, Integer value6, Integer value7, Integer value8, Integer value9, String value10, String value11, Integer value12, Integer value13) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -708,7 +707,7 @@ public class TaskConfigRecord extends UpdatableRecordImpl<TaskConfigRecord> impl
 	/**
 	 * Create a detached, initialised TaskConfigRecord
 	 */
-	public TaskConfigRecord(UInteger id, String goodName, String description, Integer cityId, Integer assetNumWithinCity, UInteger prerequisiteTaskId, UInteger prerequisiteQuestId, Integer boardWidth, Integer boardHeight, String groundImgPrefix, String initDefeatedDialogue, Integer expReward, Integer boardId) {
+	public TaskConfigRecord(Integer id, String goodName, String description, Integer cityId, Integer assetNumWithinCity, Integer prerequisiteTaskId, Integer prerequisiteQuestId, Integer boardWidth, Integer boardHeight, String groundImgPrefix, String initDefeatedDialogue, Integer expReward, Integer boardId) {
 		super(TaskConfig.TASK_CONFIG);
 
 		setValue(0, id);

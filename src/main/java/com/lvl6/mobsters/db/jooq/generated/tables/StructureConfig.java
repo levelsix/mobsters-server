@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureConfig extends TableImpl<StructureConfigRecord> {
 
-	private static final long serialVersionUID = 714654456;
+	private static final long serialVersionUID = 1733746231;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_config</code>
@@ -54,7 +52,7 @@ public class StructureConfig extends TableImpl<StructureConfigRecord> {
 	/**
 	 * The column <code>mobsters.structure_config.id</code>.
 	 */
-	public final TableField<StructureConfigRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<StructureConfigRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_config.name</code>.
@@ -64,7 +62,7 @@ public class StructureConfig extends TableImpl<StructureConfigRecord> {
 	/**
 	 * The column <code>mobsters.structure_config.level</code>.
 	 */
-	public final TableField<StructureConfigRecord, UByte> LEVEL = createField("level", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false), this, "");
+	public final TableField<StructureConfigRecord, Byte> LEVEL = createField("level", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_config.struct_type</code>. resource generator/storage, hospital, town hall,...
@@ -79,32 +77,32 @@ public class StructureConfig extends TableImpl<StructureConfigRecord> {
 	/**
 	 * The column <code>mobsters.structure_config.build_cost</code>.
 	 */
-	public final TableField<StructureConfigRecord, UInteger> BUILD_COST = createField("build_cost", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureConfigRecord, Integer> BUILD_COST = createField("build_cost", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_config.minutes_to_build</code>.
 	 */
-	public final TableField<StructureConfigRecord, UInteger> MINUTES_TO_BUILD = createField("minutes_to_build", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureConfigRecord, Integer> MINUTES_TO_BUILD = createField("minutes_to_build", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_config.width</code>.
 	 */
-	public final TableField<StructureConfigRecord, UInteger> WIDTH = createField("width", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureConfigRecord, Integer> WIDTH = createField("width", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_config.height</code>.
 	 */
-	public final TableField<StructureConfigRecord, UInteger> HEIGHT = createField("height", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureConfigRecord, Integer> HEIGHT = createField("height", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_config.predecessor_struct_id</code>. id in in this table
 	 */
-	public final TableField<StructureConfigRecord, UInteger> PREDECESSOR_STRUCT_ID = createField("predecessor_struct_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "id in in this table");
+	public final TableField<StructureConfigRecord, Integer> PREDECESSOR_STRUCT_ID = createField("predecessor_struct_id", org.jooq.impl.SQLDataType.INTEGER, this, "id in in this table");
 
 	/**
 	 * The column <code>mobsters.structure_config.successor_struct_id</code>. id in in this table
 	 */
-	public final TableField<StructureConfigRecord, UInteger> SUCCESSOR_STRUCT_ID = createField("successor_struct_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "id in in this table");
+	public final TableField<StructureConfigRecord, Integer> SUCCESSOR_STRUCT_ID = createField("successor_struct_id", org.jooq.impl.SQLDataType.INTEGER, this, "id in in this table");
 
 	/**
 	 * The column <code>mobsters.structure_config.img_name</code>.
@@ -187,7 +185,7 @@ public class StructureConfig extends TableImpl<StructureConfigRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Identity<StructureConfigRecord, UInteger> getIdentity() {
+	public Identity<StructureConfigRecord, Integer> getIdentity() {
 		return Keys.IDENTITY_STRUCTURE_CONFIG;
 	}
 

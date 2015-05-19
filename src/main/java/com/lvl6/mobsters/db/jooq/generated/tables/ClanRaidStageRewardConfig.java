@@ -18,8 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClanRaidStageRewardConfig extends TableImpl<ClanRaidStageRewardConfigRecord> {
 
-	private static final long serialVersionUID = -856797391;
+	private static final long serialVersionUID = 1139349773;
 
 	/**
 	 * The reference instance of <code>mobsters.clan_raid_stage_reward_config</code>
@@ -58,37 +56,37 @@ public class ClanRaidStageRewardConfig extends TableImpl<ClanRaidStageRewardConf
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.clan_raid_stage_id</code>.
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UInteger> CLAN_RAID_STAGE_ID = createField("clan_raid_stage_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<ClanRaidStageRewardConfigRecord, Integer> CLAN_RAID_STAGE_ID = createField("clan_raid_stage_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.min_oil_reward</code>.
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UInteger> MIN_OIL_REWARD = createField("min_oil_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<ClanRaidStageRewardConfigRecord, Integer> MIN_OIL_REWARD = createField("min_oil_reward", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.max_oil_reward</code>. This along with the other columns can be set. Rewards are not mutually exclusive.
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UInteger> MAX_OIL_REWARD = createField("max_oil_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "This along with the other columns can be set. Rewards are not mutually exclusive.");
+	public final TableField<ClanRaidStageRewardConfigRecord, Integer> MAX_OIL_REWARD = createField("max_oil_reward", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "This along with the other columns can be set. Rewards are not mutually exclusive.");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.min_cash_reward</code>.
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UInteger> MIN_CASH_REWARD = createField("min_cash_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<ClanRaidStageRewardConfigRecord, Integer> MIN_CASH_REWARD = createField("min_cash_reward", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.max_cash_reward</code>. This along with the other columns can be set. Rewards are not mutually exclusive.
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UInteger> MAX_CASH_REWARD = createField("max_cash_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "This along with the other columns can be set. Rewards are not mutually exclusive.");
+	public final TableField<ClanRaidStageRewardConfigRecord, Integer> MAX_CASH_REWARD = createField("max_cash_reward", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "This along with the other columns can be set. Rewards are not mutually exclusive.");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.monster_id</code>. This along with the other columns can be set. Rewards are not mutually exclusive.
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "This along with the other columns can be set. Rewards are not mutually exclusive.");
+	public final TableField<ClanRaidStageRewardConfigRecord, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "This along with the other columns can be set. Rewards are not mutually exclusive.");
 
 	/**
 	 * The column <code>mobsters.clan_raid_stage_reward_config.expected_monster_reward_quantity</code>. more of a drop rate multiplier
 	 */
-	public final TableField<ClanRaidStageRewardConfigRecord, UByte> EXPECTED_MONSTER_REWARD_QUANTITY = createField("expected_monster_reward_quantity", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "more of a drop rate multiplier");
+	public final TableField<ClanRaidStageRewardConfigRecord, Byte> EXPECTED_MONSTER_REWARD_QUANTITY = createField("expected_monster_reward_quantity", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "more of a drop rate multiplier");
 
 	/**
 	 * Create a <code>mobsters.clan_raid_stage_reward_config</code> table reference

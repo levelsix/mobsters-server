@@ -20,8 +20,6 @@ import org.jooq.Record12;
 import org.jooq.Row;
 import org.jooq.Row12;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +35,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "booster_item_config", schema = "mobsters")
-public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConfigRecord> implements Record12<Integer, UInteger, UInteger, UByte, Boolean, Boolean, UInteger, UInteger, Double, Integer, Integer, Integer>, IBoosterItemConfig {
+public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConfigRecord> implements Record12<Integer, Integer, Integer, Byte, Boolean, Boolean, Integer, Integer, Double, Integer, Integer, Integer>, IBoosterItemConfig {
 
-	private static final long serialVersionUID = -591898140;
+	private static final long serialVersionUID = -141762629;
 
 	/**
 	 * Setter for <code>mobsters.booster_item_config.id</code>.
@@ -65,7 +63,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * Setter for <code>mobsters.booster_item_config.booster_pack_id</code>.
 	 */
 	@Override
-	public BoosterItemConfigRecord setBoosterPackId(UInteger value) {
+	public BoosterItemConfigRecord setBoosterPackId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,15 +73,15 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 */
 	@Column(name = "booster_pack_id", precision = 10)
 	@Override
-	public UInteger getBoosterPackId() {
-		return (UInteger) getValue(1);
+	public Integer getBoosterPackId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_item_config.monster_id</code>.
 	 */
 	@Override
-	public BoosterItemConfigRecord setMonsterId(UInteger value) {
+	public BoosterItemConfigRecord setMonsterId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -93,15 +91,15 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 */
 	@Column(name = "monster_id", precision = 7)
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(2);
+	public Integer getMonsterId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_item_config.num_pieces</code>.
 	 */
 	@Override
-	public BoosterItemConfigRecord setNumPieces(UByte value) {
+	public BoosterItemConfigRecord setNumPieces(Byte value) {
 		setValue(3, value);
 		return this;
 	}
@@ -111,8 +109,8 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 */
 	@Column(name = "num_pieces", precision = 3)
 	@Override
-	public UByte getNumPieces() {
-		return (UByte) getValue(3);
+	public Byte getNumPieces() {
+		return (Byte) getValue(3);
 	}
 
 	/**
@@ -156,7 +154,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * Setter for <code>mobsters.booster_item_config.gem_reward</code>.
 	 */
 	@Override
-	public BoosterItemConfigRecord setGemReward(UInteger value) {
+	public BoosterItemConfigRecord setGemReward(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -166,15 +164,15 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 */
 	@Column(name = "gem_reward", precision = 7)
 	@Override
-	public UInteger getGemReward() {
-		return (UInteger) getValue(6);
+	public Integer getGemReward() {
+		return (Integer) getValue(6);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_item_config.cash_reward</code>.
 	 */
 	@Override
-	public BoosterItemConfigRecord setCashReward(UInteger value) {
+	public BoosterItemConfigRecord setCashReward(Integer value) {
 		setValue(7, value);
 		return this;
 	}
@@ -184,8 +182,8 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 */
 	@Column(name = "cash_reward", precision = 10)
 	@Override
-	public UInteger getCashReward() {
-		return (UInteger) getValue(7);
+	public Integer getCashReward() {
+		return (Integer) getValue(7);
 	}
 
 	/**
@@ -280,7 +278,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<Integer, UInteger, UInteger, UByte, Boolean, Boolean, UInteger, UInteger, Double, Integer, Integer, Integer> fieldsRow() {
+	public Row12<Integer, Integer, Integer, Byte, Boolean, Boolean, Integer, Integer, Double, Integer, Integer, Integer> fieldsRow() {
 		return (Row12) super.fieldsRow();
 	}
 
@@ -288,7 +286,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<Integer, UInteger, UInteger, UByte, Boolean, Boolean, UInteger, UInteger, Double, Integer, Integer, Integer> valuesRow() {
+	public Row12<Integer, Integer, Integer, Byte, Boolean, Boolean, Integer, Integer, Double, Integer, Integer, Integer> valuesRow() {
 		return (Row12) super.valuesRow();
 	}
 
@@ -304,7 +302,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return BoosterItemConfig.BOOSTER_ITEM_CONFIG.BOOSTER_PACK_ID;
 	}
 
@@ -312,7 +310,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return BoosterItemConfig.BOOSTER_ITEM_CONFIG.MONSTER_ID;
 	}
 
@@ -320,7 +318,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field4() {
+	public Field<Byte> field4() {
 		return BoosterItemConfig.BOOSTER_ITEM_CONFIG.NUM_PIECES;
 	}
 
@@ -344,7 +342,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field7() {
+	public Field<Integer> field7() {
 		return BoosterItemConfig.BOOSTER_ITEM_CONFIG.GEM_REWARD;
 	}
 
@@ -352,7 +350,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field8() {
+	public Field<Integer> field8() {
 		return BoosterItemConfig.BOOSTER_ITEM_CONFIG.CASH_REWARD;
 	}
 
@@ -400,7 +398,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getBoosterPackId();
 	}
 
@@ -408,7 +406,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getMonsterId();
 	}
 
@@ -416,7 +414,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value4() {
+	public Byte value4() {
 		return getNumPieces();
 	}
 
@@ -440,7 +438,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value7() {
+	public Integer value7() {
 		return getGemReward();
 	}
 
@@ -448,7 +446,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value8() {
+	public Integer value8() {
 		return getCashReward();
 	}
 
@@ -497,7 +495,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterItemConfigRecord value2(UInteger value) {
+	public BoosterItemConfigRecord value2(Integer value) {
 		setBoosterPackId(value);
 		return this;
 	}
@@ -506,7 +504,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterItemConfigRecord value3(UInteger value) {
+	public BoosterItemConfigRecord value3(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -515,7 +513,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterItemConfigRecord value4(UByte value) {
+	public BoosterItemConfigRecord value4(Byte value) {
 		setNumPieces(value);
 		return this;
 	}
@@ -542,7 +540,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterItemConfigRecord value7(UInteger value) {
+	public BoosterItemConfigRecord value7(Integer value) {
 		setGemReward(value);
 		return this;
 	}
@@ -551,7 +549,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterItemConfigRecord value8(UInteger value) {
+	public BoosterItemConfigRecord value8(Integer value) {
 		setCashReward(value);
 		return this;
 	}
@@ -596,7 +594,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterItemConfigRecord values(Integer value1, UInteger value2, UInteger value3, UByte value4, Boolean value5, Boolean value6, UInteger value7, UInteger value8, Double value9, Integer value10, Integer value11, Integer value12) {
+	public BoosterItemConfigRecord values(Integer value1, Integer value2, Integer value3, Byte value4, Boolean value5, Boolean value6, Integer value7, Integer value8, Double value9, Integer value10, Integer value11, Integer value12) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -658,7 +656,7 @@ public class BoosterItemConfigRecord extends UpdatableRecordImpl<BoosterItemConf
 	/**
 	 * Create a detached, initialised BoosterItemConfigRecord
 	 */
-	public BoosterItemConfigRecord(Integer id, UInteger boosterPackId, UInteger monsterId, UByte numPieces, Boolean isComplete, Boolean isSpecial, UInteger gemReward, UInteger cashReward, Double chanceToAppear, Integer itemId, Integer itemQuantity, Integer rewardId) {
+	public BoosterItemConfigRecord(Integer id, Integer boosterPackId, Integer monsterId, Byte numPieces, Boolean isComplete, Boolean isSpecial, Integer gemReward, Integer cashReward, Double chanceToAppear, Integer itemId, Integer itemQuantity, Integer rewardId) {
 		super(BoosterItemConfig.BOOSTER_ITEM_CONFIG);
 
 		setValue(0, id);

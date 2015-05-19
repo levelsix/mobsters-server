@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterForUser extends TableImpl<MonsterForUserRecord> {
 
-	private static final long serialVersionUID = -302873013;
+	private static final long serialVersionUID = -1388714649;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_for_user</code>
@@ -64,17 +62,17 @@ public class MonsterForUser extends TableImpl<MonsterForUserRecord> {
 	/**
 	 * The column <code>mobsters.monster_for_user.monster_id</code>.
 	 */
-	public final TableField<MonsterForUserRecord, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<MonsterForUserRecord, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user.current_experience</code>.
 	 */
-	public final TableField<MonsterForUserRecord, UInteger> CURRENT_EXPERIENCE = createField("current_experience", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterForUserRecord, Integer> CURRENT_EXPERIENCE = createField("current_experience", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user.current_level</code>.
 	 */
-	public final TableField<MonsterForUserRecord, UByte> CURRENT_LEVEL = createField("current_level", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterForUserRecord, Byte> CURRENT_LEVEL = createField("current_level", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user.current_health</code>.
@@ -84,7 +82,7 @@ public class MonsterForUser extends TableImpl<MonsterForUserRecord> {
 	/**
 	 * The column <code>mobsters.monster_for_user.num_pieces</code>.
 	 */
-	public final TableField<MonsterForUserRecord, UByte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterForUserRecord, Byte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user.is_complete</code>.
@@ -99,7 +97,7 @@ public class MonsterForUser extends TableImpl<MonsterForUserRecord> {
 	/**
 	 * The column <code>mobsters.monster_for_user.team_slot_num</code>.
 	 */
-	public final TableField<MonsterForUserRecord, UByte> TEAM_SLOT_NUM = createField("team_slot_num", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterForUserRecord, Byte> TEAM_SLOT_NUM = createField("team_slot_num", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_for_user.source_of_pieces</code>.

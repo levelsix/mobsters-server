@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -75,7 +74,7 @@ public class MonsterForPvpConfigDao extends DAOImpl<MonsterForPvpConfigRecord, c
 	/**
 	 * Fetch records that have <code>monster_lvl IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForPvpConfig> fetchByMonsterLvl(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForPvpConfig> fetchByMonsterLvl(Byte... values) {
 		return fetch(MonsterForPvpConfig.MONSTER_FOR_PVP_CONFIG.MONSTER_LVL, values);
 	}
 

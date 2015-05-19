@@ -13,7 +13,6 @@ import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -29,7 +28,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Temp1 extends TableImpl<Temp1Record> {
 
-	private static final long serialVersionUID = 1601596811;
+	private static final long serialVersionUID = 620616188;
 
 	/**
 	 * The reference instance of <code>mobsters.temp1</code>
@@ -52,7 +51,7 @@ public class Temp1 extends TableImpl<Temp1Record> {
 	/**
 	 * The column <code>mobsters.temp1.monster_id</code>.
 	 */
-	public final TableField<Temp1Record, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<Temp1Record, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>mobsters.temp1</code> table reference

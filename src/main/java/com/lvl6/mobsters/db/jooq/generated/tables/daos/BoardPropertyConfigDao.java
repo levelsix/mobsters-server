@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -83,14 +81,14 @@ public class BoardPropertyConfigDao extends DAOImpl<BoardPropertyConfigRecord, c
 	/**
 	 * Fetch records that have <code>pos_x IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardPropertyConfig> fetchByPosX(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardPropertyConfig> fetchByPosX(Byte... values) {
 		return fetch(BoardPropertyConfig.BOARD_PROPERTY_CONFIG.POS_X, values);
 	}
 
 	/**
 	 * Fetch records that have <code>pos_y IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardPropertyConfig> fetchByPosY(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardPropertyConfig> fetchByPosY(Byte... values) {
 		return fetch(BoardPropertyConfig.BOARD_PROPERTY_CONFIG.POS_Y, values);
 	}
 
@@ -104,7 +102,7 @@ public class BoardPropertyConfigDao extends DAOImpl<BoardPropertyConfigRecord, c
 	/**
 	 * Fetch records that have <code>value IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardPropertyConfig> fetchByValue(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardPropertyConfig> fetchByValue(Integer... values) {
 		return fetch(BoardPropertyConfig.BOARD_PROPERTY_CONFIG.VALUE, values);
 	}
 

@@ -14,8 +14,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -77,35 +75,35 @@ public class MonsterForUserDeletedDao extends DAOImpl<MonsterForUserDeletedRecor
 	/**
 	 * Fetch records that have <code>monster_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByMonsterId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByMonsterId(Integer... values) {
 		return fetch(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.MONSTER_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>current_experience IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByCurrentExperience(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByCurrentExperience(Integer... values) {
 		return fetch(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.CURRENT_EXPERIENCE, values);
 	}
 
 	/**
 	 * Fetch records that have <code>current_level IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByCurrentLevel(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByCurrentLevel(Byte... values) {
 		return fetch(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.CURRENT_LEVEL, values);
 	}
 
 	/**
 	 * Fetch records that have <code>current_health IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByCurrentHealth(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByCurrentHealth(Integer... values) {
 		return fetch(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.CURRENT_HEALTH, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_pieces IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByNumPieces(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByNumPieces(Byte... values) {
 		return fetch(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.NUM_PIECES, values);
 	}
 
@@ -126,7 +124,7 @@ public class MonsterForUserDeletedDao extends DAOImpl<MonsterForUserDeletedRecor
 	/**
 	 * Fetch records that have <code>team_slot_num IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByTeamSlotNum(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.MonsterForUserDeleted> fetchByTeamSlotNum(Byte... values) {
 		return fetch(MonsterForUserDeleted.MONSTER_FOR_USER_DELETED.TEAM_SLOT_NUM, values);
 	}
 

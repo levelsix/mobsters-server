@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -89,7 +88,7 @@ public class AchievementConfigDao extends DAOImpl<AchievementConfigRecord, com.l
 	/**
 	 * Fetch records that have <code>lvl IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.AchievementConfig> fetchByLvl(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.AchievementConfig> fetchByLvl(Byte... values) {
 		return fetch(AchievementConfig.ACHIEVEMENT_CONFIG.LVL, values);
 	}
 

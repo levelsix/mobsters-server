@@ -23,7 +23,6 @@ import org.jooq.Record5;
 import org.jooq.Row;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -39,15 +38,15 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "load_testing_events", schema = "mobsters")
-public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEventsRecord> implements Record5<UInteger, String, Timestamp, UInteger, byte[]>, ILoadTestingEvents {
+public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEventsRecord> implements Record5<Integer, String, Timestamp, Integer, byte[]>, ILoadTestingEvents {
 
-	private static final long serialVersionUID = -675946573;
+	private static final long serialVersionUID = 867694237;
 
 	/**
 	 * Setter for <code>mobsters.load_testing_events.id</code>.
 	 */
 	@Override
-	public LoadTestingEventsRecord setId(UInteger value) {
+	public LoadTestingEventsRecord setId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -59,8 +58,8 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	@Column(name = "id", unique = true, nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getId() {
-		return (UInteger) getValue(0);
+	public Integer getId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * Setter for <code>mobsters.load_testing_events.event_type</code>.
 	 */
 	@Override
-	public LoadTestingEventsRecord setEventType(UInteger value) {
+	public LoadTestingEventsRecord setEventType(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -117,8 +116,8 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	@Column(name = "event_type", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getEventType() {
-		return (UInteger) getValue(3);
+	public Integer getEventType() {
+		return (Integer) getValue(3);
 	}
 
 	/**
@@ -148,7 +147,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record1<UInteger> key() {
+	public Record1<Integer> key() {
 		return (Record1) super.key();
 	}
 
@@ -160,7 +159,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<UInteger, String, Timestamp, UInteger, byte[]> fieldsRow() {
+	public Row5<Integer, String, Timestamp, Integer, byte[]> fieldsRow() {
 		return (Row5) super.fieldsRow();
 	}
 
@@ -168,7 +167,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<UInteger, String, Timestamp, UInteger, byte[]> valuesRow() {
+	public Row5<Integer, String, Timestamp, Integer, byte[]> valuesRow() {
 		return (Row5) super.valuesRow();
 	}
 
@@ -176,7 +175,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return LoadTestingEvents.LOAD_TESTING_EVENTS.ID;
 	}
 
@@ -200,7 +199,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return LoadTestingEvents.LOAD_TESTING_EVENTS.EVENT_TYPE;
 	}
 
@@ -216,7 +215,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getId();
 	}
 
@@ -240,7 +239,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getEventType();
 	}
 
@@ -256,7 +255,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public LoadTestingEventsRecord value1(UInteger value) {
+	public LoadTestingEventsRecord value1(Integer value) {
 		setId(value);
 		return this;
 	}
@@ -283,7 +282,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public LoadTestingEventsRecord value4(UInteger value) {
+	public LoadTestingEventsRecord value4(Integer value) {
 		setEventType(value);
 		return this;
 	}
@@ -301,7 +300,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	 * {@inheritDoc}
 	 */
 	@Override
-	public LoadTestingEventsRecord values(UInteger value1, String value2, Timestamp value3, UInteger value4, byte[] value5) {
+	public LoadTestingEventsRecord values(Integer value1, String value2, Timestamp value3, Integer value4, byte[] value5) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -349,7 +348,7 @@ public class LoadTestingEventsRecord extends UpdatableRecordImpl<LoadTestingEven
 	/**
 	 * Create a detached, initialised LoadTestingEventsRecord
 	 */
-	public LoadTestingEventsRecord(UInteger id, String userId, Timestamp logTime, UInteger eventType, byte[] eventBytes) {
+	public LoadTestingEventsRecord(Integer id, String userId, Timestamp logTime, Integer eventType, byte[] eventBytes) {
 		super(LoadTestingEvents.LOAD_TESTING_EVENTS);
 
 		setValue(0, id);

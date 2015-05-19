@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureHospitalConfig extends TableImpl<StructureHospitalConfigRecord> {
 
-	private static final long serialVersionUID = -1208274076;
+	private static final long serialVersionUID = -590007333;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_hospital_config</code>
@@ -57,7 +56,7 @@ public class StructureHospitalConfig extends TableImpl<StructureHospitalConfigRe
 	/**
 	 * The column <code>mobsters.structure_hospital_config.queue_size</code>.
 	 */
-	public final TableField<StructureHospitalConfigRecord, UByte> QUEUE_SIZE = createField("queue_size", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureHospitalConfigRecord, Byte> QUEUE_SIZE = createField("queue_size", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.structure_hospital_config.health_per_second</code>.

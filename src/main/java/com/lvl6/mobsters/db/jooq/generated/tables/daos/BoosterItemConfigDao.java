@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -69,21 +67,21 @@ public class BoosterItemConfigDao extends DAOImpl<BoosterItemConfigRecord, com.l
 	/**
 	 * Fetch records that have <code>booster_pack_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByBoosterPackId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByBoosterPackId(Integer... values) {
 		return fetch(BoosterItemConfig.BOOSTER_ITEM_CONFIG.BOOSTER_PACK_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>monster_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByMonsterId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByMonsterId(Integer... values) {
 		return fetch(BoosterItemConfig.BOOSTER_ITEM_CONFIG.MONSTER_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_pieces IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByNumPieces(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByNumPieces(Byte... values) {
 		return fetch(BoosterItemConfig.BOOSTER_ITEM_CONFIG.NUM_PIECES, values);
 	}
 
@@ -104,14 +102,14 @@ public class BoosterItemConfigDao extends DAOImpl<BoosterItemConfigRecord, com.l
 	/**
 	 * Fetch records that have <code>gem_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByGemReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByGemReward(Integer... values) {
 		return fetch(BoosterItemConfig.BOOSTER_ITEM_CONFIG.GEM_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>cash_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByCashReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoosterItemConfig> fetchByCashReward(Integer... values) {
 		return fetch(BoosterItemConfig.BOOSTER_ITEM_CONFIG.CASH_REWARD, values);
 	}
 

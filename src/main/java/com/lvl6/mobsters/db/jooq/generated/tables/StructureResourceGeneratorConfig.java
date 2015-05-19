@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StructureResourceGeneratorConfig extends TableImpl<StructureResourceGeneratorConfigRecord> {
 
-	private static final long serialVersionUID = -1737551134;
+	private static final long serialVersionUID = -384322501;
 
 	/**
 	 * The reference instance of <code>mobsters.structure_resource_generator_config</code>
@@ -67,7 +66,7 @@ public class StructureResourceGeneratorConfig extends TableImpl<StructureResourc
 	/**
 	 * The column <code>mobsters.structure_resource_generator_config.capacity</code>.
 	 */
-	public final TableField<StructureResourceGeneratorConfigRecord, UInteger> CAPACITY = createField("capacity", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<StructureResourceGeneratorConfigRecord, Integer> CAPACITY = createField("capacity", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.structure_resource_generator_config</code> table reference

@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -68,14 +67,14 @@ public class BoardConfigDao extends DAOImpl<BoardConfigRecord, com.lvl6.mobsters
 	/**
 	 * Fetch records that have <code>width IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardConfig> fetchByWidth(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardConfig> fetchByWidth(Byte... values) {
 		return fetch(BoardConfig.BOARD_CONFIG.WIDTH, values);
 	}
 
 	/**
 	 * Fetch records that have <code>height IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardConfig> fetchByHeight(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.BoardConfig> fetchByHeight(Byte... values) {
 		return fetch(BoardConfig.BOARD_CONFIG.HEIGHT, values);
 	}
 

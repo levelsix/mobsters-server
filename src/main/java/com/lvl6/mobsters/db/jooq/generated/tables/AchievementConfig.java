@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class AchievementConfig extends TableImpl<AchievementConfigRecord> {
 
-	private static final long serialVersionUID = 1335720612;
+	private static final long serialVersionUID = 1540757087;
 
 	/**
 	 * The reference instance of <code>mobsters.achievement_config</code>
@@ -73,7 +72,7 @@ public class AchievementConfig extends TableImpl<AchievementConfigRecord> {
 	/**
 	 * The column <code>mobsters.achievement_config.lvl</code>.
 	 */
-	public final TableField<AchievementConfigRecord, UByte> LVL = createField("lvl", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.nullable(false).defaulted(true), this, "");
+	public final TableField<AchievementConfigRecord, Byte> LVL = createField("lvl", org.jooq.impl.SQLDataType.TINYINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.achievement_config.achievement_type</code>.

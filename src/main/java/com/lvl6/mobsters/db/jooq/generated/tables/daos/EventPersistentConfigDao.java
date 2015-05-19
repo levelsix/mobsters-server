@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -76,28 +74,28 @@ public class EventPersistentConfigDao extends DAOImpl<EventPersistentConfigRecor
 	/**
 	 * Fetch records that have <code>start_hour IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByStartHour(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByStartHour(Byte... values) {
 		return fetch(EventPersistentConfig.EVENT_PERSISTENT_CONFIG.START_HOUR, values);
 	}
 
 	/**
 	 * Fetch records that have <code>event_duration_minutes IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByEventDurationMinutes(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByEventDurationMinutes(Integer... values) {
 		return fetch(EventPersistentConfig.EVENT_PERSISTENT_CONFIG.EVENT_DURATION_MINUTES, values);
 	}
 
 	/**
 	 * Fetch records that have <code>task_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByTaskId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByTaskId(Integer... values) {
 		return fetch(EventPersistentConfig.EVENT_PERSISTENT_CONFIG.TASK_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>cooldown_minutes IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByCooldownMinutes(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.EventPersistentConfig> fetchByCooldownMinutes(Integer... values) {
 		return fetch(EventPersistentConfig.EVENT_PERSISTENT_CONFIG.COOLDOWN_MINUTES, values);
 	}
 

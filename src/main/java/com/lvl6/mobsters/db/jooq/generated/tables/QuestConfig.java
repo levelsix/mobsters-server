@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class QuestConfig extends TableImpl<QuestConfigRecord> {
 
-	private static final long serialVersionUID = 344784901;
+	private static final long serialVersionUID = -44475214;
 
 	/**
 	 * The reference instance of <code>mobsters.quest_config</code>
@@ -52,7 +51,7 @@ public class QuestConfig extends TableImpl<QuestConfigRecord> {
 	/**
 	 * The column <code>mobsters.quest_config.id</code>.
 	 */
-	public final TableField<QuestConfigRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<QuestConfigRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.quest_config.quest_name</code>.

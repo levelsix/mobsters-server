@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -69,7 +67,7 @@ public class CityBossDao extends DAOImpl<CityBossRecord, com.lvl6.mobsters.db.jo
 	/**
 	 * Fetch records that have <code>city_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByCityId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByCityId(Integer... values) {
 		return fetch(CityBoss.CITY_BOSS.CITY_ID, values);
 	}
 
@@ -83,21 +81,21 @@ public class CityBossDao extends DAOImpl<CityBossRecord, com.lvl6.mobsters.db.jo
 	/**
 	 * Fetch records that have <code>exp_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByExpReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByExpReward(Integer... values) {
 		return fetch(CityBoss.CITY_BOSS.EXP_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>min_cash_drop IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByMinCashDrop(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByMinCashDrop(Integer... values) {
 		return fetch(CityBoss.CITY_BOSS.MIN_CASH_DROP, values);
 	}
 
 	/**
 	 * Fetch records that have <code>max_cash_drop IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByMaxCashDrop(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByMaxCashDrop(Integer... values) {
 		return fetch(CityBoss.CITY_BOSS.MAX_CASH_DROP, values);
 	}
 
@@ -111,7 +109,7 @@ public class CityBossDao extends DAOImpl<CityBossRecord, com.lvl6.mobsters.db.jo
 	/**
 	 * Fetch records that have <code>level IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByLevel(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CityBoss> fetchByLevel(Byte... values) {
 		return fetch(CityBoss.CITY_BOSS.LEVEL, values);
 	}
 }

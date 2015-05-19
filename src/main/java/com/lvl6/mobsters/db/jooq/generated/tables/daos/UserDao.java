@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -76,42 +75,42 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	/**
 	 * Fetch records that have <code>level IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByLevel(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByLevel(Integer... values) {
 		return fetch(User.USER.LEVEL, values);
 	}
 
 	/**
 	 * Fetch records that have <code>gems IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByGems(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByGems(Integer... values) {
 		return fetch(User.USER.GEMS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>cash IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByCash(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByCash(Integer... values) {
 		return fetch(User.USER.CASH, values);
 	}
 
 	/**
 	 * Fetch records that have <code>oil IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByOil(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByOil(Integer... values) {
 		return fetch(User.USER.OIL, values);
 	}
 
 	/**
 	 * Fetch records that have <code>experience IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByExperience(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByExperience(Integer... values) {
 		return fetch(User.USER.EXPERIENCE, values);
 	}
 
 	/**
 	 * Fetch records that have <code>tasks_completed IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByTasksCompleted(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByTasksCompleted(Integer... values) {
 		return fetch(User.USER.TASKS_COMPLETED, values);
 	}
 
@@ -132,7 +131,7 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	/**
 	 * Fetch records that have <code>num_referrals IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumReferrals(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumReferrals(Integer... values) {
 		return fetch(User.USER.NUM_REFERRALS, values);
 	}
 
@@ -167,7 +166,7 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	/**
 	 * Fetch records that have <code>num_badges IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumBadges(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumBadges(Integer... values) {
 		return fetch(User.USER.NUM_BADGES, values);
 	}
 
@@ -202,21 +201,21 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	/**
 	 * Fetch records that have <code>num_coins_retrieved_from_structs IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumCoinsRetrievedFromStructs(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumCoinsRetrievedFromStructs(Integer... values) {
 		return fetch(User.USER.NUM_COINS_RETRIEVED_FROM_STRUCTS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_oil_retrieved_from_structs IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumOilRetrievedFromStructs(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumOilRetrievedFromStructs(Integer... values) {
 		return fetch(User.USER.NUM_OIL_RETRIEVED_FROM_STRUCTS, values);
 	}
 
 	/**
 	 * Fetch records that have <code>num_consecutive_days_played IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumConsecutiveDaysPlayed(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByNumConsecutiveDaysPlayed(Integer... values) {
 		return fetch(User.USER.NUM_CONSECUTIVE_DAYS_PLAYED, values);
 	}
 
@@ -391,7 +390,7 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	/**
 	 * Fetch records that have <code>total_strength IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByTotalStrength(Long... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByTotalStrength(Integer... values) {
 		return fetch(User.USER.TOTAL_STRENGTH, values);
 	}
 
@@ -407,5 +406,19 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	 */
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByGachaCredits(Integer... values) {
 		return fetch(User.USER.GACHA_CREDITS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>last_tango_gift_sent_time IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByLastTangoGiftSentTime(Timestamp... values) {
+		return fetch(User.USER.LAST_TANGO_GIFT_SENT_TIME, values);
+	}
+
+	/**
+	 * Fetch records that have <code>tango_id IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByTangoId(String... values) {
+		return fetch(User.USER.TANGO_ID, values);
 	}
 }

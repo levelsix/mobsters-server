@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoosterPackPurchaseHistory extends TableImpl<BoosterPackPurchaseHistoryRecord> {
 
-	private static final long serialVersionUID = 1667589818;
+	private static final long serialVersionUID = -555029756;
 
 	/**
 	 * The reference instance of <code>mobsters.booster_pack_purchase_history</code>
@@ -69,17 +67,17 @@ public class BoosterPackPurchaseHistory extends TableImpl<BoosterPackPurchaseHis
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.booster_item_id</code>.
 	 */
-	public final TableField<BoosterPackPurchaseHistoryRecord, UInteger> BOOSTER_ITEM_ID = createField("booster_item_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterPackPurchaseHistoryRecord, Integer> BOOSTER_ITEM_ID = createField("booster_item_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.monster_id</code>.
 	 */
-	public final TableField<BoosterPackPurchaseHistoryRecord, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterPackPurchaseHistoryRecord, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.num_pieces</code>. How many pieces of the monster the user gets if a monster is rewarded.
 	 */
-	public final TableField<BoosterPackPurchaseHistoryRecord, UByte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "How many pieces of the monster the user gets if a monster is rewarded.");
+	public final TableField<BoosterPackPurchaseHistoryRecord, Byte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINT, this, "How many pieces of the monster the user gets if a monster is rewarded.");
 
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.is_complete</code>. specifies if user can skip combine wait time and use monster after purchasing
@@ -94,12 +92,12 @@ public class BoosterPackPurchaseHistory extends TableImpl<BoosterPackPurchaseHis
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.gem_reward</code>.
 	 */
-	public final TableField<BoosterPackPurchaseHistoryRecord, UInteger> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterPackPurchaseHistoryRecord, Integer> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.cash_reward</code>. At the moment, unused
 	 */
-	public final TableField<BoosterPackPurchaseHistoryRecord, UInteger> CASH_REWARD = createField("cash_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "At the moment, unused");
+	public final TableField<BoosterPackPurchaseHistoryRecord, Integer> CASH_REWARD = createField("cash_reward", org.jooq.impl.SQLDataType.INTEGER, this, "At the moment, unused");
 
 	/**
 	 * The column <code>mobsters.booster_pack_purchase_history.chance_to_appear</code>.

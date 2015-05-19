@@ -20,7 +20,6 @@ import org.jooq.Record7;
 import org.jooq.Row;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,9 +35,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "clan_raid_stage_monster_config", schema = "mobsters")
-public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRaidStageMonsterConfigRecord> implements Record7<Integer, UInteger, UInteger, Integer, Integer, Integer, Integer>, IClanRaidStageMonsterConfig {
+public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRaidStageMonsterConfigRecord> implements Record7<Integer, Integer, Integer, Integer, Integer, Integer, Integer>, IClanRaidStageMonsterConfig {
 
-	private static final long serialVersionUID = 1695478945;
+	private static final long serialVersionUID = -1104026296;
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_monster_config.id</code>.
@@ -64,7 +63,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * Setter for <code>mobsters.clan_raid_stage_monster_config.clan_raid_stage_id</code>. multiple clan_raid_stage_monsters can point to a clan_raid_stage (all will spawn)
 	 */
 	@Override
-	public ClanRaidStageMonsterConfigRecord setClanRaidStageId(UInteger value) {
+	public ClanRaidStageMonsterConfigRecord setClanRaidStageId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -75,15 +74,15 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	@Column(name = "clan_raid_stage_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getClanRaidStageId() {
-		return (UInteger) getValue(1);
+	public Integer getClanRaidStageId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
 	 * Setter for <code>mobsters.clan_raid_stage_monster_config.monster_id</code>.
 	 */
 	@Override
-	public ClanRaidStageMonsterConfigRecord setMonsterId(UInteger value) {
+	public ClanRaidStageMonsterConfigRecord setMonsterId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -94,8 +93,8 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	@Column(name = "monster_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(2);
+	public Integer getMonsterId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
@@ -190,7 +189,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row7<Integer, UInteger, UInteger, Integer, Integer, Integer, Integer> fieldsRow() {
+	public Row7<Integer, Integer, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
 		return (Row7) super.fieldsRow();
 	}
 
@@ -198,7 +197,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row7<Integer, UInteger, UInteger, Integer, Integer, Integer, Integer> valuesRow() {
+	public Row7<Integer, Integer, Integer, Integer, Integer, Integer, Integer> valuesRow() {
 		return (Row7) super.valuesRow();
 	}
 
@@ -214,7 +213,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG.CLAN_RAID_STAGE_ID;
 	}
 
@@ -222,7 +221,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG.MONSTER_ID;
 	}
 
@@ -270,7 +269,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getClanRaidStageId();
 	}
 
@@ -278,7 +277,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getMonsterId();
 	}
 
@@ -327,7 +326,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageMonsterConfigRecord value2(UInteger value) {
+	public ClanRaidStageMonsterConfigRecord value2(Integer value) {
 		setClanRaidStageId(value);
 		return this;
 	}
@@ -336,7 +335,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageMonsterConfigRecord value3(UInteger value) {
+	public ClanRaidStageMonsterConfigRecord value3(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -381,7 +380,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ClanRaidStageMonsterConfigRecord values(Integer value1, UInteger value2, UInteger value3, Integer value4, Integer value5, Integer value6, Integer value7) {
+	public ClanRaidStageMonsterConfigRecord values(Integer value1, Integer value2, Integer value3, Integer value4, Integer value5, Integer value6, Integer value7) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -433,7 +432,7 @@ public class ClanRaidStageMonsterConfigRecord extends UpdatableRecordImpl<ClanRa
 	/**
 	 * Create a detached, initialised ClanRaidStageMonsterConfigRecord
 	 */
-	public ClanRaidStageMonsterConfigRecord(Integer id, UInteger clanRaidStageId, UInteger monsterId, Integer monsterHp, Integer minDmg, Integer maxDmg, Integer monsterNum) {
+	public ClanRaidStageMonsterConfigRecord(Integer id, Integer clanRaidStageId, Integer monsterId, Integer monsterHp, Integer minDmg, Integer maxDmg, Integer monsterNum) {
 		super(ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG);
 
 		setValue(0, id);

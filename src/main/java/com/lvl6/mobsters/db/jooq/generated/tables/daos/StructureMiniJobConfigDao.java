@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -68,14 +67,14 @@ public class StructureMiniJobConfigDao extends DAOImpl<StructureMiniJobConfigRec
 	/**
 	 * Fetch records that have <code>generated_job_limit IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureMiniJobConfig> fetchByGeneratedJobLimit(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureMiniJobConfig> fetchByGeneratedJobLimit(Integer... values) {
 		return fetch(StructureMiniJobConfig.STRUCTURE_MINI_JOB_CONFIG.GENERATED_JOB_LIMIT, values);
 	}
 
 	/**
 	 * Fetch records that have <code>hours_between_job_generation IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureMiniJobConfig> fetchByHoursBetweenJobGeneration(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureMiniJobConfig> fetchByHoursBetweenJobGeneration(Integer... values) {
 		return fetch(StructureMiniJobConfig.STRUCTURE_MINI_JOB_CONFIG.HOURS_BETWEEN_JOB_GENERATION, values);
 	}
 }

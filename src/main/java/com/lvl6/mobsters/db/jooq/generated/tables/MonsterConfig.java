@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterConfig extends TableImpl<MonsterConfigRecord> {
 
-	private static final long serialVersionUID = 2038537751;
+	private static final long serialVersionUID = -98142399;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_config</code>
@@ -74,7 +72,7 @@ public class MonsterConfig extends TableImpl<MonsterConfigRecord> {
 	/**
 	 * The column <code>mobsters.monster_config.evolution_level</code>.
 	 */
-	public final TableField<MonsterConfigRecord, UByte> EVOLUTION_LEVEL = createField("evolution_level", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterConfigRecord, Byte> EVOLUTION_LEVEL = createField("evolution_level", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.display_name</code>.
@@ -94,17 +92,17 @@ public class MonsterConfig extends TableImpl<MonsterConfigRecord> {
 	/**
 	 * The column <code>mobsters.monster_config.num_puzzle_pieces</code>.
 	 */
-	public final TableField<MonsterConfigRecord, UByte> NUM_PUZZLE_PIECES = createField("num_puzzle_pieces", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterConfigRecord, Byte> NUM_PUZZLE_PIECES = createField("num_puzzle_pieces", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.minutes_to_combine_pieces</code>.
 	 */
-	public final TableField<MonsterConfigRecord, UInteger> MINUTES_TO_COMBINE_PIECES = createField("minutes_to_combine_pieces", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterConfigRecord, Integer> MINUTES_TO_COMBINE_PIECES = createField("minutes_to_combine_pieces", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.max_level</code>.
 	 */
-	public final TableField<MonsterConfigRecord, UByte> MAX_LEVEL = createField("max_level", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterConfigRecord, Byte> MAX_LEVEL = createField("max_level", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.evolution_monster_id</code>.
@@ -114,17 +112,17 @@ public class MonsterConfig extends TableImpl<MonsterConfigRecord> {
 	/**
 	 * The column <code>mobsters.monster_config.evolution_catalyst_monster_id</code>.
 	 */
-	public final TableField<MonsterConfigRecord, UInteger> EVOLUTION_CATALYST_MONSTER_ID = createField("evolution_catalyst_monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<MonsterConfigRecord, Integer> EVOLUTION_CATALYST_MONSTER_ID = createField("evolution_catalyst_monster_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.minutes_to_evolve</code>.
 	 */
-	public final TableField<MonsterConfigRecord, UInteger> MINUTES_TO_EVOLVE = createField("minutes_to_evolve", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<MonsterConfigRecord, Integer> MINUTES_TO_EVOLVE = createField("minutes_to_evolve", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.num_evolution_catalysts</code>. Required amount of evolution_catalyst_monster_ids
 	 */
-	public final TableField<MonsterConfigRecord, UByte> NUM_EVOLUTION_CATALYSTS = createField("num_evolution_catalysts", org.jooq.impl.SQLDataType.TINYINTUNSIGNED.defaulted(true), this, "Required amount of evolution_catalyst_monster_ids");
+	public final TableField<MonsterConfigRecord, Byte> NUM_EVOLUTION_CATALYSTS = createField("num_evolution_catalysts", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "Required amount of evolution_catalyst_monster_ids");
 
 	/**
 	 * The column <code>mobsters.monster_config.carrot_recruited</code>.

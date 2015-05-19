@@ -23,7 +23,6 @@ import org.jooq.Record9;
 import org.jooq.Row;
 import org.jooq.Row9;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -41,9 +40,9 @@ import org.jooq.types.UInteger;
 @Table(name = "mini_job_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"id", "user_id"})
 })
-public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserRecord> implements Record9<String, String, Integer, UInteger, Integer, Timestamp, String, Timestamp, Integer>, IMiniJobForUser {
+public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserRecord> implements Record9<String, String, Integer, Integer, Integer, Timestamp, String, Timestamp, Integer>, IMiniJobForUser {
 
-	private static final long serialVersionUID = -1708532020;
+	private static final long serialVersionUID = -1667137870;
 
 	/**
 	 * Setter for <code>mobsters.mini_job_for_user.id</code>.
@@ -107,7 +106,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * Setter for <code>mobsters.mini_job_for_user.base_dmg_received</code>. amount of damage user's monsters will take
 	 */
 	@Override
-	public MiniJobForUserRecord setBaseDmgReceived(UInteger value) {
+	public MiniJobForUserRecord setBaseDmgReceived(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -117,8 +116,8 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 */
 	@Column(name = "base_dmg_received", precision = 10)
 	@Override
-	public UInteger getBaseDmgReceived() {
-		return (UInteger) getValue(3);
+	public Integer getBaseDmgReceived() {
+		return (Integer) getValue(3);
 	}
 
 	/**
@@ -232,7 +231,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<String, String, Integer, UInteger, Integer, Timestamp, String, Timestamp, Integer> fieldsRow() {
+	public Row9<String, String, Integer, Integer, Integer, Timestamp, String, Timestamp, Integer> fieldsRow() {
 		return (Row9) super.fieldsRow();
 	}
 
@@ -240,7 +239,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<String, String, Integer, UInteger, Integer, Timestamp, String, Timestamp, Integer> valuesRow() {
+	public Row9<String, String, Integer, Integer, Integer, Timestamp, String, Timestamp, Integer> valuesRow() {
 		return (Row9) super.valuesRow();
 	}
 
@@ -272,7 +271,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return MiniJobForUser.MINI_JOB_FOR_USER.BASE_DMG_RECEIVED;
 	}
 
@@ -344,7 +343,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getBaseDmgReceived();
 	}
 
@@ -419,7 +418,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniJobForUserRecord value4(UInteger value) {
+	public MiniJobForUserRecord value4(Integer value) {
 		setBaseDmgReceived(value);
 		return this;
 	}
@@ -473,7 +472,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniJobForUserRecord values(String value1, String value2, Integer value3, UInteger value4, Integer value5, Timestamp value6, String value7, Timestamp value8, Integer value9) {
+	public MiniJobForUserRecord values(String value1, String value2, Integer value3, Integer value4, Integer value5, Timestamp value6, String value7, Timestamp value8, Integer value9) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -529,7 +528,7 @@ public class MiniJobForUserRecord extends UpdatableRecordImpl<MiniJobForUserReco
 	/**
 	 * Create a detached, initialised MiniJobForUserRecord
 	 */
-	public MiniJobForUserRecord(String id, String userId, Integer miniJobId, UInteger baseDmgReceived, Integer durationMinutes, Timestamp timeStarted, String userMonsterIds, Timestamp timeCompleted, Integer durationSeconds) {
+	public MiniJobForUserRecord(String id, String userId, Integer miniJobId, Integer baseDmgReceived, Integer durationMinutes, Timestamp timeStarted, String userMonsterIds, Timestamp timeCompleted, Integer durationSeconds) {
 		super(MiniJobForUser.MINI_JOB_FOR_USER);
 
 		setValue(0, id);

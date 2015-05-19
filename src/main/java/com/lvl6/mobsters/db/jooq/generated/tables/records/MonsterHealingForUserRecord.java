@@ -23,7 +23,6 @@ import org.jooq.Record7;
 import org.jooq.Row;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -41,9 +40,9 @@ import org.jooq.types.UInteger;
 @Table(name = "monster_healing_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_id", "monster_for_user_id"})
 })
-public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHealingForUserRecord> implements Record7<String, String, Timestamp, Double, UInteger, Double, String>, IMonsterHealingForUser {
+public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHealingForUserRecord> implements Record7<String, String, Timestamp, Double, Integer, Double, String>, IMonsterHealingForUser {
 
-	private static final long serialVersionUID = 1838039790;
+	private static final long serialVersionUID = -2045844854;
 
 	/**
 	 * Setter for <code>mobsters.monster_healing_for_user.user_id</code>.
@@ -125,7 +124,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * Setter for <code>mobsters.monster_healing_for_user.priority</code>.
 	 */
 	@Override
-	public MonsterHealingForUserRecord setPriority(UInteger value) {
+	public MonsterHealingForUserRecord setPriority(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -135,8 +134,8 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 */
 	@Column(name = "priority", precision = 10)
 	@Override
-	public UInteger getPriority() {
-		return (UInteger) getValue(4);
+	public Integer getPriority() {
+		return (Integer) getValue(4);
 	}
 
 	/**
@@ -196,7 +195,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row7<String, String, Timestamp, Double, UInteger, Double, String> fieldsRow() {
+	public Row7<String, String, Timestamp, Double, Integer, Double, String> fieldsRow() {
 		return (Row7) super.fieldsRow();
 	}
 
@@ -204,7 +203,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row7<String, String, Timestamp, Double, UInteger, Double, String> valuesRow() {
+	public Row7<String, String, Timestamp, Double, Integer, Double, String> valuesRow() {
 		return (Row7) super.valuesRow();
 	}
 
@@ -244,7 +243,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return MonsterHealingForUser.MONSTER_HEALING_FOR_USER.PRIORITY;
 	}
 
@@ -300,7 +299,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getPriority();
 	}
 
@@ -360,7 +359,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterHealingForUserRecord value5(UInteger value) {
+	public MonsterHealingForUserRecord value5(Integer value) {
 		setPriority(value);
 		return this;
 	}
@@ -387,7 +386,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterHealingForUserRecord values(String value1, String value2, Timestamp value3, Double value4, UInteger value5, Double value6, String value7) {
+	public MonsterHealingForUserRecord values(String value1, String value2, Timestamp value3, Double value4, Integer value5, Double value6, String value7) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -439,7 +438,7 @@ public class MonsterHealingForUserRecord extends UpdatableRecordImpl<MonsterHeal
 	/**
 	 * Create a detached, initialised MonsterHealingForUserRecord
 	 */
-	public MonsterHealingForUserRecord(String userId, String monsterForUserId, Timestamp queuedTime, Double healthProgress, UInteger priority, Double elapsedSeconds, String userStructHospitalId) {
+	public MonsterHealingForUserRecord(String userId, String monsterForUserId, Timestamp queuedTime, Double healthProgress, Integer priority, Double elapsedSeconds, String userStructHospitalId) {
 		super(MonsterHealingForUser.MONSTER_HEALING_FOR_USER);
 
 		setValue(0, userId);

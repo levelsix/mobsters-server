@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class PvpBattleHistory implements IPvpBattleHistory {
 
-	private static final long serialVersionUID = -520378093;
+	private static final long serialVersionUID = 1396582806;
 
 	private String    attackerId;
 	private String    defenderId;
@@ -64,6 +64,7 @@ public class PvpBattleHistory implements IPvpBattleHistory {
 	private Boolean   displayToDefender;
 	private Double    pvpDmgMultiplier;
 	private Boolean   clanAvenged;
+	private String    replayId;
 
 	public PvpBattleHistory() {}
 
@@ -96,6 +97,7 @@ public class PvpBattleHistory implements IPvpBattleHistory {
 		this.displayToDefender = value.displayToDefender;
 		this.pvpDmgMultiplier = value.pvpDmgMultiplier;
 		this.clanAvenged = value.clanAvenged;
+		this.replayId = value.replayId;
 	}
 
 	public PvpBattleHistory(
@@ -126,7 +128,8 @@ public class PvpBattleHistory implements IPvpBattleHistory {
 		Boolean   exactedRevenge,
 		Boolean   displayToDefender,
 		Double    pvpDmgMultiplier,
-		Boolean   clanAvenged
+		Boolean   clanAvenged,
+		String    replayId
 	) {
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -156,6 +159,7 @@ public class PvpBattleHistory implements IPvpBattleHistory {
 		this.displayToDefender = displayToDefender;
 		this.pvpDmgMultiplier = pvpDmgMultiplier;
 		this.clanAvenged = clanAvenged;
+		this.replayId = replayId;
 	}
 
 	@Column(name = "attacker_id", nullable = false, length = 36)
@@ -499,6 +503,19 @@ public class PvpBattleHistory implements IPvpBattleHistory {
 		return this;
 	}
 
+	@Column(name = "replay_id", length = 36)
+	@Size(max = 36)
+	@Override
+	public String getReplayId() {
+		return this.replayId;
+	}
+
+	@Override
+	public PvpBattleHistory setReplayId(String replayId) {
+		this.replayId = replayId;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -536,6 +553,7 @@ public class PvpBattleHistory implements IPvpBattleHistory {
 		setDisplayToDefender(from.getDisplayToDefender());
 		setPvpDmgMultiplier(from.getPvpDmgMultiplier());
 		setClanAvenged(from.getClanAvenged());
+		setReplayId(from.getReplayId());
 	}
 
 	/**

@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -68,14 +67,14 @@ public class ClanRaidStageMonsterConfigDao extends DAOImpl<ClanRaidStageMonsterC
 	/**
 	 * Fetch records that have <code>clan_raid_stage_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageMonsterConfig> fetchByClanRaidStageId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageMonsterConfig> fetchByClanRaidStageId(Integer... values) {
 		return fetch(ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG.CLAN_RAID_STAGE_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>monster_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageMonsterConfig> fetchByMonsterId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageMonsterConfig> fetchByMonsterId(Integer... values) {
 		return fetch(ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG.MONSTER_ID, values);
 	}
 

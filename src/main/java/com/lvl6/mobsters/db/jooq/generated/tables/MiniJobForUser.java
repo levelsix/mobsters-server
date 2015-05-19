@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniJobForUser extends TableImpl<MiniJobForUserRecord> {
 
-	private static final long serialVersionUID = -1464663865;
+	private static final long serialVersionUID = 1053505784;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_job_for_user</code>
@@ -68,7 +67,7 @@ public class MiniJobForUser extends TableImpl<MiniJobForUserRecord> {
 	/**
 	 * The column <code>mobsters.mini_job_for_user.base_dmg_received</code>. amount of damage user's monsters will take
 	 */
-	public final TableField<MiniJobForUserRecord, UInteger> BASE_DMG_RECEIVED = createField("base_dmg_received", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "amount of damage user's monsters will take");
+	public final TableField<MiniJobForUserRecord, Integer> BASE_DMG_RECEIVED = createField("base_dmg_received", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "amount of damage user's monsters will take");
 
 	/**
 	 * The column <code>mobsters.mini_job_for_user.duration_minutes</code>.

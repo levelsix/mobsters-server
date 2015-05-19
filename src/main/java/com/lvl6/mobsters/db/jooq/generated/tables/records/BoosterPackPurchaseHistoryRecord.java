@@ -23,8 +23,6 @@ import org.jooq.Record3;
 import org.jooq.Row;
 import org.jooq.Row12;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -42,9 +40,9 @@ import org.jooq.types.UInteger;
 @Table(name = "booster_pack_purchase_history", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_id", "booster_pack_id", "time_of_purchase"})
 })
-public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<BoosterPackPurchaseHistoryRecord> implements Record12<String, Integer, Timestamp, UInteger, UInteger, UByte, Boolean, Boolean, UInteger, UInteger, Double, String>, IBoosterPackPurchaseHistory {
+public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<BoosterPackPurchaseHistoryRecord> implements Record12<String, Integer, Timestamp, Integer, Integer, Byte, Boolean, Boolean, Integer, Integer, Double, String>, IBoosterPackPurchaseHistory {
 
-	private static final long serialVersionUID = 609517953;
+	private static final long serialVersionUID = -2072071748;
 
 	/**
 	 * Setter for <code>mobsters.booster_pack_purchase_history.user_id</code>.
@@ -108,7 +106,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * Setter for <code>mobsters.booster_pack_purchase_history.booster_item_id</code>.
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord setBoosterItemId(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord setBoosterItemId(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -118,15 +116,15 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 */
 	@Column(name = "booster_item_id", precision = 10)
 	@Override
-	public UInteger getBoosterItemId() {
-		return (UInteger) getValue(3);
+	public Integer getBoosterItemId() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_pack_purchase_history.monster_id</code>.
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord setMonsterId(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord setMonsterId(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -136,15 +134,15 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 */
 	@Column(name = "monster_id", precision = 7)
 	@Override
-	public UInteger getMonsterId() {
-		return (UInteger) getValue(4);
+	public Integer getMonsterId() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_pack_purchase_history.num_pieces</code>. How many pieces of the monster the user gets if a monster is rewarded.
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord setNumPieces(UByte value) {
+	public BoosterPackPurchaseHistoryRecord setNumPieces(Byte value) {
 		setValue(5, value);
 		return this;
 	}
@@ -154,8 +152,8 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 */
 	@Column(name = "num_pieces", precision = 3)
 	@Override
-	public UByte getNumPieces() {
-		return (UByte) getValue(5);
+	public Byte getNumPieces() {
+		return (Byte) getValue(5);
 	}
 
 	/**
@@ -198,7 +196,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * Setter for <code>mobsters.booster_pack_purchase_history.gem_reward</code>.
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord setGemReward(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord setGemReward(Integer value) {
 		setValue(8, value);
 		return this;
 	}
@@ -208,15 +206,15 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 */
 	@Column(name = "gem_reward", precision = 7)
 	@Override
-	public UInteger getGemReward() {
-		return (UInteger) getValue(8);
+	public Integer getGemReward() {
+		return (Integer) getValue(8);
 	}
 
 	/**
 	 * Setter for <code>mobsters.booster_pack_purchase_history.cash_reward</code>. At the moment, unused
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord setCashReward(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord setCashReward(Integer value) {
 		setValue(9, value);
 		return this;
 	}
@@ -226,8 +224,8 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 */
 	@Column(name = "cash_reward", precision = 7)
 	@Override
-	public UInteger getCashReward() {
-		return (UInteger) getValue(9);
+	public Integer getCashReward() {
+		return (Integer) getValue(9);
 	}
 
 	/**
@@ -287,7 +285,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<String, Integer, Timestamp, UInteger, UInteger, UByte, Boolean, Boolean, UInteger, UInteger, Double, String> fieldsRow() {
+	public Row12<String, Integer, Timestamp, Integer, Integer, Byte, Boolean, Boolean, Integer, Integer, Double, String> fieldsRow() {
 		return (Row12) super.fieldsRow();
 	}
 
@@ -295,7 +293,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<String, Integer, Timestamp, UInteger, UInteger, UByte, Boolean, Boolean, UInteger, UInteger, Double, String> valuesRow() {
+	public Row12<String, Integer, Timestamp, Integer, Integer, Byte, Boolean, Boolean, Integer, Integer, Double, String> valuesRow() {
 		return (Row12) super.valuesRow();
 	}
 
@@ -327,7 +325,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.BOOSTER_ITEM_ID;
 	}
 
@@ -335,7 +333,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.MONSTER_ID;
 	}
 
@@ -343,7 +341,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field6() {
+	public Field<Byte> field6() {
 		return BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.NUM_PIECES;
 	}
 
@@ -367,7 +365,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field9() {
+	public Field<Integer> field9() {
 		return BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.GEM_REWARD;
 	}
 
@@ -375,7 +373,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field10() {
+	public Field<Integer> field10() {
 		return BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY.CASH_REWARD;
 	}
 
@@ -423,7 +421,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getBoosterItemId();
 	}
 
@@ -431,7 +429,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getMonsterId();
 	}
 
@@ -439,7 +437,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value6() {
+	public Byte value6() {
 		return getNumPieces();
 	}
 
@@ -463,7 +461,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value9() {
+	public Integer value9() {
 		return getGemReward();
 	}
 
@@ -471,7 +469,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value10() {
+	public Integer value10() {
 		return getCashReward();
 	}
 
@@ -522,7 +520,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord value4(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord value4(Integer value) {
 		setBoosterItemId(value);
 		return this;
 	}
@@ -531,7 +529,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord value5(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord value5(Integer value) {
 		setMonsterId(value);
 		return this;
 	}
@@ -540,7 +538,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord value6(UByte value) {
+	public BoosterPackPurchaseHistoryRecord value6(Byte value) {
 		setNumPieces(value);
 		return this;
 	}
@@ -567,7 +565,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord value9(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord value9(Integer value) {
 		setGemReward(value);
 		return this;
 	}
@@ -576,7 +574,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord value10(UInteger value) {
+	public BoosterPackPurchaseHistoryRecord value10(Integer value) {
 		setCashReward(value);
 		return this;
 	}
@@ -603,7 +601,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BoosterPackPurchaseHistoryRecord values(String value1, Integer value2, Timestamp value3, UInteger value4, UInteger value5, UByte value6, Boolean value7, Boolean value8, UInteger value9, UInteger value10, Double value11, String value12) {
+	public BoosterPackPurchaseHistoryRecord values(String value1, Integer value2, Timestamp value3, Integer value4, Integer value5, Byte value6, Boolean value7, Boolean value8, Integer value9, Integer value10, Double value11, String value12) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -665,7 +663,7 @@ public class BoosterPackPurchaseHistoryRecord extends UpdatableRecordImpl<Booste
 	/**
 	 * Create a detached, initialised BoosterPackPurchaseHistoryRecord
 	 */
-	public BoosterPackPurchaseHistoryRecord(String userId, Integer boosterPackId, Timestamp timeOfPurchase, UInteger boosterItemId, UInteger monsterId, UByte numPieces, Boolean isComplete, Boolean isSpecial, UInteger gemReward, UInteger cashReward, Double chanceToAppear, String changedMonsterForUserIds) {
+	public BoosterPackPurchaseHistoryRecord(String userId, Integer boosterPackId, Timestamp timeOfPurchase, Integer boosterItemId, Integer monsterId, Byte numPieces, Boolean isComplete, Boolean isSpecial, Integer gemReward, Integer cashReward, Double chanceToAppear, String changedMonsterForUserIds) {
 		super(BoosterPackPurchaseHistory.BOOSTER_PACK_PURCHASE_HISTORY);
 
 		setValue(0, userId);

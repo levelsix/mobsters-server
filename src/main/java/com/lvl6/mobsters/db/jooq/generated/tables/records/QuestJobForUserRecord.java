@@ -21,7 +21,6 @@ import org.jooq.Record5;
 import org.jooq.Row;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -39,9 +38,9 @@ import org.jooq.types.UInteger;
 @Table(name = "quest_job_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_id", "quest_id", "quest_job_id"})
 })
-public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRecord> implements Record5<String, Integer, Integer, Boolean, UInteger>, IQuestJobForUser {
+public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRecord> implements Record5<String, Integer, Integer, Boolean, Integer>, IQuestJobForUser {
 
-	private static final long serialVersionUID = -1568998264;
+	private static final long serialVersionUID = -1548559268;
 
 	/**
 	 * Setter for <code>mobsters.quest_job_for_user.user_id</code>.
@@ -123,7 +122,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * Setter for <code>mobsters.quest_job_for_user.progress</code>.
 	 */
 	@Override
-	public QuestJobForUserRecord setProgress(UInteger value) {
+	public QuestJobForUserRecord setProgress(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -133,8 +132,8 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 */
 	@Column(name = "progress", precision = 7)
 	@Override
-	public UInteger getProgress() {
-		return (UInteger) getValue(4);
+	public Integer getProgress() {
+		return (Integer) getValue(4);
 	}
 
 	// -------------------------------------------------------------------------
@@ -157,7 +156,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<String, Integer, Integer, Boolean, UInteger> fieldsRow() {
+	public Row5<String, Integer, Integer, Boolean, Integer> fieldsRow() {
 		return (Row5) super.fieldsRow();
 	}
 
@@ -165,7 +164,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<String, Integer, Integer, Boolean, UInteger> valuesRow() {
+	public Row5<String, Integer, Integer, Boolean, Integer> valuesRow() {
 		return (Row5) super.valuesRow();
 	}
 
@@ -205,7 +204,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field5() {
+	public Field<Integer> field5() {
 		return QuestJobForUser.QUEST_JOB_FOR_USER.PROGRESS;
 	}
 
@@ -245,7 +244,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value5() {
+	public Integer value5() {
 		return getProgress();
 	}
 
@@ -289,7 +288,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestJobForUserRecord value5(UInteger value) {
+	public QuestJobForUserRecord value5(Integer value) {
 		setProgress(value);
 		return this;
 	}
@@ -298,7 +297,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public QuestJobForUserRecord values(String value1, Integer value2, Integer value3, Boolean value4, UInteger value5) {
+	public QuestJobForUserRecord values(String value1, Integer value2, Integer value3, Boolean value4, Integer value5) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -346,7 +345,7 @@ public class QuestJobForUserRecord extends UpdatableRecordImpl<QuestJobForUserRe
 	/**
 	 * Create a detached, initialised QuestJobForUserRecord
 	 */
-	public QuestJobForUserRecord(String userId, Integer questId, Integer questJobId, Boolean isComplete, UInteger progress) {
+	public QuestJobForUserRecord(String userId, Integer questId, Integer questJobId, Boolean isComplete, Integer progress) {
 		super(QuestJobForUser.QUEST_JOB_FOR_USER);
 
 		setValue(0, userId);

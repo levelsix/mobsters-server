@@ -14,8 +14,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -77,7 +75,7 @@ public class StructureForUserDao extends DAOImpl<StructureForUserRecord, com.lvl
 	/**
 	 * Fetch records that have <code>struct_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> fetchByStructId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> fetchByStructId(Integer... values) {
 		return fetch(StructureForUser.STRUCTURE_FOR_USER.STRUCT_ID, values);
 	}
 
@@ -126,7 +124,7 @@ public class StructureForUserDao extends DAOImpl<StructureForUserRecord, com.lvl
 	/**
 	 * Fetch records that have <code>fb_invite_struct_lvl IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> fetchByFbInviteStructLvl(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> fetchByFbInviteStructLvl(Byte... values) {
 		return fetch(StructureForUser.STRUCTURE_FOR_USER.FB_INVITE_STRUCT_LVL, values);
 	}
 }

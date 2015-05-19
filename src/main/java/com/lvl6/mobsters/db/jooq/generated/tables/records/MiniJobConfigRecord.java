@@ -17,8 +17,6 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Record1;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @Table(name = "mini_job_config", schema = "mobsters")
 public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord> implements IMiniJobConfig {
 
-	private static final long serialVersionUID = 1143838259;
+	private static final long serialVersionUID = -118154583;
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.id</code>.
@@ -99,7 +97,7 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 * Setter for <code>mobsters.mini_job_config.cash_reward</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setCashReward(UInteger value) {
+	public MiniJobConfigRecord setCashReward(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -109,15 +107,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "cash_reward", precision = 10)
 	@Override
-	public UInteger getCashReward() {
-		return (UInteger) getValue(3);
+	public Integer getCashReward() {
+		return (Integer) getValue(3);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.oil_reward</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setOilReward(UInteger value) {
+	public MiniJobConfigRecord setOilReward(Integer value) {
 		setValue(4, value);
 		return this;
 	}
@@ -127,15 +125,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "oil_reward", precision = 10)
 	@Override
-	public UInteger getOilReward() {
-		return (UInteger) getValue(4);
+	public Integer getOilReward() {
+		return (Integer) getValue(4);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.gem_reward</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setGemReward(UInteger value) {
+	public MiniJobConfigRecord setGemReward(Integer value) {
 		setValue(5, value);
 		return this;
 	}
@@ -145,15 +143,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "gem_reward", precision = 10)
 	@Override
-	public UInteger getGemReward() {
-		return (UInteger) getValue(5);
+	public Integer getGemReward() {
+		return (Integer) getValue(5);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.monster_id_reward</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setMonsterIdReward(UInteger value) {
+	public MiniJobConfigRecord setMonsterIdReward(Integer value) {
 		setValue(6, value);
 		return this;
 	}
@@ -163,8 +161,8 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "monster_id_reward", precision = 10)
 	@Override
-	public UInteger getMonsterIdReward() {
-		return (UInteger) getValue(6);
+	public Integer getMonsterIdReward() {
+		return (Integer) getValue(6);
 	}
 
 	/**
@@ -262,7 +260,7 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 * Setter for <code>mobsters.mini_job_config.max_num_monsters_allowed</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setMaxNumMonstersAllowed(UByte value) {
+	public MiniJobConfigRecord setMaxNumMonstersAllowed(Byte value) {
 		setValue(12, value);
 		return this;
 	}
@@ -272,8 +270,8 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "max_num_monsters_allowed", precision = 3)
 	@Override
-	public UByte getMaxNumMonstersAllowed() {
-		return (UByte) getValue(12);
+	public Byte getMaxNumMonstersAllowed() {
+		return (Byte) getValue(12);
 	}
 
 	/**
@@ -316,7 +314,7 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 * Setter for <code>mobsters.mini_job_config.atk_required</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setAtkRequired(UInteger value) {
+	public MiniJobConfigRecord setAtkRequired(Integer value) {
 		setValue(15, value);
 		return this;
 	}
@@ -326,15 +324,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "atk_required", precision = 10)
 	@Override
-	public UInteger getAtkRequired() {
-		return (UInteger) getValue(15);
+	public Integer getAtkRequired() {
+		return (Integer) getValue(15);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.min_dmg</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setMinDmg(UInteger value) {
+	public MiniJobConfigRecord setMinDmg(Integer value) {
 		setValue(16, value);
 		return this;
 	}
@@ -344,15 +342,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "min_dmg", precision = 7)
 	@Override
-	public UInteger getMinDmg() {
-		return (UInteger) getValue(16);
+	public Integer getMinDmg() {
+		return (Integer) getValue(16);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.max_dmg</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setMaxDmg(UInteger value) {
+	public MiniJobConfigRecord setMaxDmg(Integer value) {
 		setValue(17, value);
 		return this;
 	}
@@ -362,15 +360,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "max_dmg", precision = 10)
 	@Override
-	public UInteger getMaxDmg() {
-		return (UInteger) getValue(17);
+	public Integer getMaxDmg() {
+		return (Integer) getValue(17);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.duration_min_minutes</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setDurationMinMinutes(UInteger value) {
+	public MiniJobConfigRecord setDurationMinMinutes(Integer value) {
 		setValue(18, value);
 		return this;
 	}
@@ -380,15 +378,15 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "duration_min_minutes", precision = 7)
 	@Override
-	public UInteger getDurationMinMinutes() {
-		return (UInteger) getValue(18);
+	public Integer getDurationMinMinutes() {
+		return (Integer) getValue(18);
 	}
 
 	/**
 	 * Setter for <code>mobsters.mini_job_config.duration_max_minutes</code>.
 	 */
 	@Override
-	public MiniJobConfigRecord setDurationMaxMinutes(UInteger value) {
+	public MiniJobConfigRecord setDurationMaxMinutes(Integer value) {
 		setValue(19, value);
 		return this;
 	}
@@ -398,8 +396,8 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	 */
 	@Column(name = "duration_max_minutes", precision = 10)
 	@Override
-	public UInteger getDurationMaxMinutes() {
-		return (UInteger) getValue(19);
+	public Integer getDurationMaxMinutes() {
+		return (Integer) getValue(19);
 	}
 
 	/**
@@ -563,7 +561,7 @@ public class MiniJobConfigRecord extends UpdatableRecordImpl<MiniJobConfigRecord
 	/**
 	 * Create a detached, initialised MiniJobConfigRecord
 	 */
-	public MiniJobConfigRecord(Integer id, Integer requiredStructId, String name, UInteger cashReward, UInteger oilReward, UInteger gemReward, UInteger monsterIdReward, Integer itemIdReward, Integer itemRewardQuantity, Integer secondItemIdReward, Integer secondItemRewardQuantity, String quality, UByte maxNumMonstersAllowed, Double chanceToAppear, Integer hpRequired, UInteger atkRequired, UInteger minDmg, UInteger maxDmg, UInteger durationMinMinutes, UInteger durationMaxMinutes, Boolean isValid, Integer expReward, Integer rewardIdOne, Integer rewardIdTwo, Integer rewardIdThree) {
+	public MiniJobConfigRecord(Integer id, Integer requiredStructId, String name, Integer cashReward, Integer oilReward, Integer gemReward, Integer monsterIdReward, Integer itemIdReward, Integer itemRewardQuantity, Integer secondItemIdReward, Integer secondItemRewardQuantity, String quality, Byte maxNumMonstersAllowed, Double chanceToAppear, Integer hpRequired, Integer atkRequired, Integer minDmg, Integer maxDmg, Integer durationMinMinutes, Integer durationMaxMinutes, Boolean isValid, Integer expReward, Integer rewardIdOne, Integer rewardIdTwo, Integer rewardIdThree) {
 		super(MiniJobConfig.MINI_JOB_CONFIG);
 
 		setValue(0, id);

@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoosterItemConfig extends TableImpl<BoosterItemConfigRecord> {
 
-	private static final long serialVersionUID = -1686925191;
+	private static final long serialVersionUID = -952176007;
 
 	/**
 	 * The reference instance of <code>mobsters.booster_item_config</code>
@@ -59,17 +57,17 @@ public class BoosterItemConfig extends TableImpl<BoosterItemConfigRecord> {
 	/**
 	 * The column <code>mobsters.booster_item_config.booster_pack_id</code>.
 	 */
-	public final TableField<BoosterItemConfigRecord, UInteger> BOOSTER_PACK_ID = createField("booster_pack_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterItemConfigRecord, Integer> BOOSTER_PACK_ID = createField("booster_pack_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_item_config.monster_id</code>.
 	 */
-	public final TableField<BoosterItemConfigRecord, UInteger> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.defaulted(true), this, "");
+	public final TableField<BoosterItemConfigRecord, Integer> MONSTER_ID = createField("monster_id", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.booster_item_config.num_pieces</code>.
 	 */
-	public final TableField<BoosterItemConfigRecord, UByte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<BoosterItemConfigRecord, Byte> NUM_PIECES = createField("num_pieces", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_item_config.is_complete</code>.
@@ -84,12 +82,12 @@ public class BoosterItemConfig extends TableImpl<BoosterItemConfigRecord> {
 	/**
 	 * The column <code>mobsters.booster_item_config.gem_reward</code>.
 	 */
-	public final TableField<BoosterItemConfigRecord, UInteger> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterItemConfigRecord, Integer> GEM_REWARD = createField("gem_reward", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_item_config.cash_reward</code>.
 	 */
-	public final TableField<BoosterItemConfigRecord, UInteger> CASH_REWARD = createField("cash_reward", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterItemConfigRecord, Integer> CASH_REWARD = createField("cash_reward", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_item_config.chance_to_appear</code>.

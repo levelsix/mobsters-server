@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 import org.jooq.Configuration;
 import org.jooq.Record2;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -69,7 +68,7 @@ public class ItemForUserDao extends DAOImpl<ItemForUserRecord, com.lvl6.mobsters
 	/**
 	 * Fetch records that have <code>quantity IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemForUser> fetchByQuantity(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemForUser> fetchByQuantity(Integer... values) {
 		return fetch(ItemForUser.ITEM_FOR_USER.QUANTITY, values);
 	}
 }

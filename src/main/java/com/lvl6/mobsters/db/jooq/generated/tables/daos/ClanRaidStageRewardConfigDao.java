@@ -13,8 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -69,49 +67,49 @@ public class ClanRaidStageRewardConfigDao extends DAOImpl<ClanRaidStageRewardCon
 	/**
 	 * Fetch records that have <code>clan_raid_stage_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByClanRaidStageId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByClanRaidStageId(Integer... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.CLAN_RAID_STAGE_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>min_oil_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMinOilReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMinOilReward(Integer... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MIN_OIL_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>max_oil_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMaxOilReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMaxOilReward(Integer... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MAX_OIL_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>min_cash_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMinCashReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMinCashReward(Integer... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MIN_CASH_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>max_cash_reward IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMaxCashReward(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMaxCashReward(Integer... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MAX_CASH_REWARD, values);
 	}
 
 	/**
 	 * Fetch records that have <code>monster_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMonsterId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByMonsterId(Integer... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.MONSTER_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>expected_monster_reward_quantity IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByExpectedMonsterRewardQuantity(UByte... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanRaidStageRewardConfig> fetchByExpectedMonsterRewardQuantity(Byte... values) {
 		return fetch(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.EXPECTED_MONSTER_REWARD_QUANTITY, values);
 	}
 }

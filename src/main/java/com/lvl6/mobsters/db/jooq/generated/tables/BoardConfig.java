@@ -18,7 +18,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -34,7 +33,7 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoardConfig extends TableImpl<BoardConfigRecord> {
 
-	private static final long serialVersionUID = -1323460527;
+	private static final long serialVersionUID = 1822590430;
 
 	/**
 	 * The reference instance of <code>mobsters.board_config</code>
@@ -57,12 +56,12 @@ public class BoardConfig extends TableImpl<BoardConfigRecord> {
 	/**
 	 * The column <code>mobsters.board_config.width</code>.
 	 */
-	public final TableField<BoardConfigRecord, UByte> WIDTH = createField("width", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<BoardConfigRecord, Byte> WIDTH = createField("width", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.board_config.height</code>.
 	 */
-	public final TableField<BoardConfigRecord, UByte> HEIGHT = createField("height", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<BoardConfigRecord, Byte> HEIGHT = createField("height", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.board_config.orb_elements</code>. bit representation of what elements are active. Example 100001, only two elements are active

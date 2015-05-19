@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskForUserOngoing extends TableImpl<TaskForUserOngoingRecord> {
 
-	private static final long serialVersionUID = 436935638;
+	private static final long serialVersionUID = -731843225;
 
 	/**
 	 * The reference instance of <code>mobsters.task_for_user_ongoing</code>
@@ -63,7 +62,7 @@ public class TaskForUserOngoing extends TableImpl<TaskForUserOngoingRecord> {
 	/**
 	 * The column <code>mobsters.task_for_user_ongoing.task_id</code>.
 	 */
-	public final TableField<TaskForUserOngoingRecord, UInteger> TASK_ID = createField("task_id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
+	public final TableField<TaskForUserOngoingRecord, Integer> TASK_ID = createField("task_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.task_for_user_ongoing.exp_gained</code>. Experience gained from all the stages, if the user beats the dungeon.

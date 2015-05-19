@@ -19,8 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UByte;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -36,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ObstacleConfig extends TableImpl<ObstacleConfigRecord> {
 
-	private static final long serialVersionUID = -1877059967;
+	private static final long serialVersionUID = -1460972449;
 
 	/**
 	 * The reference instance of <code>mobsters.obstacle_config</code>
@@ -69,22 +67,22 @@ public class ObstacleConfig extends TableImpl<ObstacleConfigRecord> {
 	/**
 	 * The column <code>mobsters.obstacle_config.cost</code>.
 	 */
-	public final TableField<ObstacleConfigRecord, UInteger> COST = createField("cost", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<ObstacleConfigRecord, Integer> COST = createField("cost", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.obstacle_config.seconds_to_remove</code>.
 	 */
-	public final TableField<ObstacleConfigRecord, UInteger> SECONDS_TO_REMOVE = createField("seconds_to_remove", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<ObstacleConfigRecord, Integer> SECONDS_TO_REMOVE = createField("seconds_to_remove", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.obstacle_config.width</code>.
 	 */
-	public final TableField<ObstacleConfigRecord, UByte> WIDTH = createField("width", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<ObstacleConfigRecord, Byte> WIDTH = createField("width", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.obstacle_config.height</code>.
 	 */
-	public final TableField<ObstacleConfigRecord, UByte> HEIGHT = createField("height", org.jooq.impl.SQLDataType.TINYINTUNSIGNED, this, "");
+	public final TableField<ObstacleConfigRecord, Byte> HEIGHT = createField("height", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
 	/**
 	 * The column <code>mobsters.obstacle_config.img_name</code>.

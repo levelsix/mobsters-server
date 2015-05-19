@@ -19,7 +19,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -35,7 +34,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoosterPackConfig extends TableImpl<BoosterPackConfigRecord> {
 
-	private static final long serialVersionUID = 1816475735;
+	private static final long serialVersionUID = 1804118848;
 
 	/**
 	 * The reference instance of <code>mobsters.booster_pack_config</code>
@@ -63,7 +62,7 @@ public class BoosterPackConfig extends TableImpl<BoosterPackConfigRecord> {
 	/**
 	 * The column <code>mobsters.booster_pack_config.gem_price</code>.
 	 */
-	public final TableField<BoosterPackConfigRecord, UInteger> GEM_PRICE = createField("gem_price", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
+	public final TableField<BoosterPackConfigRecord, Integer> GEM_PRICE = createField("gem_price", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.booster_pack_config.gacha_credits_price</code>.

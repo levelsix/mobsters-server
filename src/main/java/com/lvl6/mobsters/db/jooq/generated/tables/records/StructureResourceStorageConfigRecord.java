@@ -21,7 +21,6 @@ import org.jooq.Record3;
 import org.jooq.Row;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "structure_resource_storage_config", schema = "mobsters")
-public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<StructureResourceStorageConfigRecord> implements Record3<Integer, String, UInteger>, IStructureResourceStorageConfig {
+public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<StructureResourceStorageConfigRecord> implements Record3<Integer, String, Integer>, IStructureResourceStorageConfig {
 
-	private static final long serialVersionUID = 118191110;
+	private static final long serialVersionUID = -85718150;
 
 	/**
 	 * Setter for <code>mobsters.structure_resource_storage_config.struct_id</code>.
@@ -85,7 +84,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * Setter for <code>mobsters.structure_resource_storage_config.capacity</code>.
 	 */
 	@Override
-	public StructureResourceStorageConfigRecord setCapacity(UInteger value) {
+	public StructureResourceStorageConfigRecord setCapacity(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -96,8 +95,8 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	@Column(name = "capacity", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getCapacity() {
-		return (UInteger) getValue(2);
+	public Integer getCapacity() {
+		return (Integer) getValue(2);
 	}
 
 	// -------------------------------------------------------------------------
@@ -120,7 +119,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, String, UInteger> fieldsRow() {
+	public Row3<Integer, String, Integer> fieldsRow() {
 		return (Row3) super.fieldsRow();
 	}
 
@@ -128,7 +127,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, String, UInteger> valuesRow() {
+	public Row3<Integer, String, Integer> valuesRow() {
 		return (Row3) super.valuesRow();
 	}
 
@@ -152,7 +151,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return StructureResourceStorageConfig.STRUCTURE_RESOURCE_STORAGE_CONFIG.CAPACITY;
 	}
 
@@ -176,7 +175,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getCapacity();
 	}
 
@@ -202,7 +201,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResourceStorageConfigRecord value3(UInteger value) {
+	public StructureResourceStorageConfigRecord value3(Integer value) {
 		setCapacity(value);
 		return this;
 	}
@@ -211,7 +210,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StructureResourceStorageConfigRecord values(Integer value1, String value2, UInteger value3) {
+	public StructureResourceStorageConfigRecord values(Integer value1, String value2, Integer value3) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -255,7 +254,7 @@ public class StructureResourceStorageConfigRecord extends UpdatableRecordImpl<St
 	/**
 	 * Create a detached, initialised StructureResourceStorageConfigRecord
 	 */
-	public StructureResourceStorageConfigRecord(Integer structId, String resourceTypeStored, UInteger capacity) {
+	public StructureResourceStorageConfigRecord(Integer structId, String resourceTypeStored, Integer capacity) {
 		super(StructureResourceStorageConfig.STRUCTURE_RESOURCE_STORAGE_CONFIG);
 
 		setValue(0, structId);

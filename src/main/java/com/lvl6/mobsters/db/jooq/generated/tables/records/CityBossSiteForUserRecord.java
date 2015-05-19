@@ -23,7 +23,6 @@ import org.jooq.Record5;
 import org.jooq.Row;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -41,15 +40,15 @@ import org.jooq.types.UInteger;
 @Table(name = "city_boss_site_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"city_id", "user_id"})
 })
-public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteForUserRecord> implements Record5<UInteger, String, UInteger, UInteger, Timestamp>, ICityBossSiteForUser {
+public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteForUserRecord> implements Record5<Integer, String, Integer, Integer, Timestamp>, ICityBossSiteForUser {
 
-	private static final long serialVersionUID = 281397249;
+	private static final long serialVersionUID = 1858624492;
 
 	/**
 	 * Setter for <code>mobsters.city_boss_site_for_user.city_id</code>.
 	 */
 	@Override
-	public CityBossSiteForUserRecord setCityId(UInteger value) {
+	public CityBossSiteForUserRecord setCityId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -60,8 +59,8 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	@Column(name = "city_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getCityId() {
-		return (UInteger) getValue(0);
+	public Integer getCityId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
@@ -88,7 +87,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * Setter for <code>mobsters.city_boss_site_for_user.task_id</code>.
 	 */
 	@Override
-	public CityBossSiteForUserRecord setTaskId(UInteger value) {
+	public CityBossSiteForUserRecord setTaskId(Integer value) {
 		setValue(2, value);
 		return this;
 	}
@@ -98,15 +97,15 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 */
 	@Column(name = "task_id", unique = true, precision = 10)
 	@Override
-	public UInteger getTaskId() {
-		return (UInteger) getValue(2);
+	public Integer getTaskId() {
+		return (Integer) getValue(2);
 	}
 
 	/**
 	 * Setter for <code>mobsters.city_boss_site_for_user.boss_id</code>.
 	 */
 	@Override
-	public CityBossSiteForUserRecord setBossId(UInteger value) {
+	public CityBossSiteForUserRecord setBossId(Integer value) {
 		setValue(3, value);
 		return this;
 	}
@@ -116,8 +115,8 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 */
 	@Column(name = "boss_id", precision = 10)
 	@Override
-	public UInteger getBossId() {
-		return (UInteger) getValue(3);
+	public Integer getBossId() {
+		return (Integer) getValue(3);
 	}
 
 	/**
@@ -146,7 +145,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record2<UInteger, String> key() {
+	public Record2<Integer, String> key() {
 		return (Record2) super.key();
 	}
 
@@ -158,7 +157,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<UInteger, String, UInteger, UInteger, Timestamp> fieldsRow() {
+	public Row5<Integer, String, Integer, Integer, Timestamp> fieldsRow() {
 		return (Row5) super.fieldsRow();
 	}
 
@@ -166,7 +165,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<UInteger, String, UInteger, UInteger, Timestamp> valuesRow() {
+	public Row5<Integer, String, Integer, Integer, Timestamp> valuesRow() {
 		return (Row5) super.valuesRow();
 	}
 
@@ -174,7 +173,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return CityBossSiteForUser.CITY_BOSS_SITE_FOR_USER.CITY_ID;
 	}
 
@@ -190,7 +189,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field3() {
+	public Field<Integer> field3() {
 		return CityBossSiteForUser.CITY_BOSS_SITE_FOR_USER.TASK_ID;
 	}
 
@@ -198,7 +197,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field4() {
+	public Field<Integer> field4() {
 		return CityBossSiteForUser.CITY_BOSS_SITE_FOR_USER.BOSS_ID;
 	}
 
@@ -214,7 +213,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getCityId();
 	}
 
@@ -230,7 +229,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value3() {
+	public Integer value3() {
 		return getTaskId();
 	}
 
@@ -238,7 +237,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value4() {
+	public Integer value4() {
 		return getBossId();
 	}
 
@@ -254,7 +253,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossSiteForUserRecord value1(UInteger value) {
+	public CityBossSiteForUserRecord value1(Integer value) {
 		setCityId(value);
 		return this;
 	}
@@ -272,7 +271,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossSiteForUserRecord value3(UInteger value) {
+	public CityBossSiteForUserRecord value3(Integer value) {
 		setTaskId(value);
 		return this;
 	}
@@ -281,7 +280,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossSiteForUserRecord value4(UInteger value) {
+	public CityBossSiteForUserRecord value4(Integer value) {
 		setBossId(value);
 		return this;
 	}
@@ -299,7 +298,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityBossSiteForUserRecord values(UInteger value1, String value2, UInteger value3, UInteger value4, Timestamp value5) {
+	public CityBossSiteForUserRecord values(Integer value1, String value2, Integer value3, Integer value4, Timestamp value5) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -347,7 +346,7 @@ public class CityBossSiteForUserRecord extends UpdatableRecordImpl<CityBossSiteF
 	/**
 	 * Create a detached, initialised CityBossSiteForUserRecord
 	 */
-	public CityBossSiteForUserRecord(UInteger cityId, String userId, UInteger taskId, UInteger bossId, Timestamp timeOfEntry) {
+	public CityBossSiteForUserRecord(Integer cityId, String userId, Integer taskId, Integer bossId, Timestamp timeOfEntry) {
 		super(CityBossSiteForUser.CITY_BOSS_SITE_FOR_USER);
 
 		setValue(0, cityId);

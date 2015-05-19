@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -82,7 +81,7 @@ public class StructureResourceGeneratorConfigDao extends DAOImpl<StructureResour
 	/**
 	 * Fetch records that have <code>capacity IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResourceGeneratorConfig> fetchByCapacity(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureResourceGeneratorConfig> fetchByCapacity(Integer... values) {
 		return fetch(StructureResourceGeneratorConfig.STRUCTURE_RESOURCE_GENERATOR_CONFIG.CAPACITY, values);
 	}
 }

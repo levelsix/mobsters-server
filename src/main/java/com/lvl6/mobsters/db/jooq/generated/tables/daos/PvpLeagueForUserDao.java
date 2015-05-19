@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -69,14 +68,14 @@ public class PvpLeagueForUserDao extends DAOImpl<PvpLeagueForUserRecord, com.lvl
 	/**
 	 * Fetch records that have <code>league_id IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser> fetchByLeagueId(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser> fetchByLeagueId(Integer... values) {
 		return fetch(PvpLeagueForUser.PVP_LEAGUE_FOR_USER.LEAGUE_ID, values);
 	}
 
 	/**
 	 * Fetch records that have <code>rank IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser> fetchByRank(UInteger... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser> fetchByRank(Integer... values) {
 		return fetch(PvpLeagueForUser.PVP_LEAGUE_FOR_USER.RANK, values);
 	}
 

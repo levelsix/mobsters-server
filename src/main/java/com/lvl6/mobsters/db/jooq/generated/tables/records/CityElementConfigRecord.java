@@ -21,7 +21,6 @@ import org.jooq.Record2;
 import org.jooq.Row;
 import org.jooq.Row11;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -39,15 +38,15 @@ import org.jooq.types.UInteger;
 @Table(name = "city_element_config", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"city_id", "asset_id"})
 })
-public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConfigRecord> implements Record11<UInteger, UInteger, String, Double, Double, Double, Double, String, String, Double, Double>, ICityElementConfig {
+public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConfigRecord> implements Record11<Integer, Integer, String, Double, Double, Double, Double, String, String, Double, Double>, ICityElementConfig {
 
-	private static final long serialVersionUID = -1562843913;
+	private static final long serialVersionUID = 1934346068;
 
 	/**
 	 * Setter for <code>mobsters.city_element_config.city_id</code>.
 	 */
 	@Override
-	public CityElementConfigRecord setCityId(UInteger value) {
+	public CityElementConfigRecord setCityId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
@@ -58,15 +57,15 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	@Column(name = "city_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getCityId() {
-		return (UInteger) getValue(0);
+	public Integer getCityId() {
+		return (Integer) getValue(0);
 	}
 
 	/**
 	 * Setter for <code>mobsters.city_element_config.asset_id</code>.
 	 */
 	@Override
-	public CityElementConfigRecord setAssetId(UInteger value) {
+	public CityElementConfigRecord setAssetId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -77,8 +76,8 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	@Column(name = "asset_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public UInteger getAssetId() {
-		return (UInteger) getValue(1);
+	public Integer getAssetId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
@@ -258,7 +257,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record2<UInteger, UInteger> key() {
+	public Record2<Integer, Integer> key() {
 		return (Record2) super.key();
 	}
 
@@ -270,7 +269,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<UInteger, UInteger, String, Double, Double, Double, Double, String, String, Double, Double> fieldsRow() {
+	public Row11<Integer, Integer, String, Double, Double, Double, Double, String, String, Double, Double> fieldsRow() {
 		return (Row11) super.fieldsRow();
 	}
 
@@ -278,7 +277,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<UInteger, UInteger, String, Double, Double, Double, Double, String, String, Double, Double> valuesRow() {
+	public Row11<Integer, Integer, String, Double, Double, Double, Double, String, String, Double, Double> valuesRow() {
 		return (Row11) super.valuesRow();
 	}
 
@@ -286,7 +285,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field1() {
+	public Field<Integer> field1() {
 		return CityElementConfig.CITY_ELEMENT_CONFIG.CITY_ID;
 	}
 
@@ -294,7 +293,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UInteger> field2() {
+	public Field<Integer> field2() {
 		return CityElementConfig.CITY_ELEMENT_CONFIG.ASSET_ID;
 	}
 
@@ -374,7 +373,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value1() {
+	public Integer value1() {
 		return getCityId();
 	}
 
@@ -382,7 +381,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UInteger value2() {
+	public Integer value2() {
 		return getAssetId();
 	}
 
@@ -462,7 +461,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityElementConfigRecord value1(UInteger value) {
+	public CityElementConfigRecord value1(Integer value) {
 		setCityId(value);
 		return this;
 	}
@@ -471,7 +470,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityElementConfigRecord value2(UInteger value) {
+	public CityElementConfigRecord value2(Integer value) {
 		setAssetId(value);
 		return this;
 	}
@@ -561,7 +560,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CityElementConfigRecord values(UInteger value1, UInteger value2, String value3, Double value4, Double value5, Double value6, Double value7, String value8, String value9, Double value10, Double value11) {
+	public CityElementConfigRecord values(Integer value1, Integer value2, String value3, Double value4, Double value5, Double value6, Double value7, String value8, String value9, Double value10, Double value11) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -621,7 +620,7 @@ public class CityElementConfigRecord extends UpdatableRecordImpl<CityElementConf
 	/**
 	 * Create a detached, initialised CityElementConfigRecord
 	 */
-	public CityElementConfigRecord(UInteger cityId, UInteger assetId, String elemType, Double xCoordinate, Double yCoordinate, Double xLength, Double yLength, String imgIdGood, String orientation, Double spriteLandingCoordinateX, Double spriteLandingCoordinateY) {
+	public CityElementConfigRecord(Integer cityId, Integer assetId, String elemType, Double xCoordinate, Double yCoordinate, Double xLength, Double yLength, String imgIdGood, String orientation, Double spriteLandingCoordinateX, Double spriteLandingCoordinateY) {
 		super(CityElementConfig.CITY_ELEMENT_CONFIG);
 
 		setValue(0, cityId);

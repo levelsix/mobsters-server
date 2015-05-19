@@ -20,7 +20,6 @@ import org.jooq.Record8;
 import org.jooq.Row;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
-import org.jooq.types.UByte;
 
 
 /**
@@ -36,9 +35,9 @@ import org.jooq.types.UByte;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "monster_for_pvp_config", schema = "mobsters")
-public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvpConfigRecord> implements Record8<Integer, Integer, UByte, Integer, Integer, Integer, Integer, Integer>, IMonsterForPvpConfig {
+public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvpConfigRecord> implements Record8<Integer, Integer, Byte, Integer, Integer, Integer, Integer, Integer>, IMonsterForPvpConfig {
 
-	private static final long serialVersionUID = 748826643;
+	private static final long serialVersionUID = 1814789791;
 
 	/**
 	 * Setter for <code>mobsters.monster_for_pvp_config.id</code>.
@@ -82,7 +81,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * Setter for <code>mobsters.monster_for_pvp_config.monster_lvl</code>.
 	 */
 	@Override
-	public MonsterForPvpConfigRecord setMonsterLvl(UByte value) {
+	public MonsterForPvpConfigRecord setMonsterLvl(Byte value) {
 		setValue(2, value);
 		return this;
 	}
@@ -92,8 +91,8 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 */
 	@Column(name = "monster_lvl", precision = 3)
 	@Override
-	public UByte getMonsterLvl() {
-		return (UByte) getValue(2);
+	public Byte getMonsterLvl() {
+		return (Byte) getValue(2);
 	}
 
 	/**
@@ -206,7 +205,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, Integer, UByte, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
+	public Row8<Integer, Integer, Byte, Integer, Integer, Integer, Integer, Integer> fieldsRow() {
 		return (Row8) super.fieldsRow();
 	}
 
@@ -214,7 +213,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row8<Integer, Integer, UByte, Integer, Integer, Integer, Integer, Integer> valuesRow() {
+	public Row8<Integer, Integer, Byte, Integer, Integer, Integer, Integer, Integer> valuesRow() {
 		return (Row8) super.valuesRow();
 	}
 
@@ -238,7 +237,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<UByte> field3() {
+	public Field<Byte> field3() {
 		return MonsterForPvpConfig.MONSTER_FOR_PVP_CONFIG.MONSTER_LVL;
 	}
 
@@ -302,7 +301,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UByte value3() {
+	public Byte value3() {
 		return getMonsterLvl();
 	}
 
@@ -368,7 +367,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForPvpConfigRecord value3(UByte value) {
+	public MonsterForPvpConfigRecord value3(Byte value) {
 		setMonsterLvl(value);
 		return this;
 	}
@@ -422,7 +421,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MonsterForPvpConfigRecord values(Integer value1, Integer value2, UByte value3, Integer value4, Integer value5, Integer value6, Integer value7, Integer value8) {
+	public MonsterForPvpConfigRecord values(Integer value1, Integer value2, Byte value3, Integer value4, Integer value5, Integer value6, Integer value7, Integer value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -476,7 +475,7 @@ public class MonsterForPvpConfigRecord extends UpdatableRecordImpl<MonsterForPvp
 	/**
 	 * Create a detached, initialised MonsterForPvpConfigRecord
 	 */
-	public MonsterForPvpConfigRecord(Integer id, Integer monsterId, UByte monsterLvl, Integer elo, Integer minCashReward, Integer maxCashReward, Integer minOilReward, Integer maxOilReward) {
+	public MonsterForPvpConfigRecord(Integer id, Integer monsterId, Byte monsterLvl, Integer elo, Integer minCashReward, Integer maxCashReward, Integer minOilReward, Integer maxOilReward) {
 		super(MonsterForPvpConfig.MONSTER_FOR_PVP_CONFIG);
 
 		setValue(0, id);
