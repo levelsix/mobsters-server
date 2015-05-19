@@ -2,6 +2,7 @@
 
 //import "MonsterStuff.proto";
 import "Reward.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
