@@ -327,7 +327,7 @@ public class PurchaseBoosterPackAction {
 
 	//TODO: allow multiple free packs?
 	private void updateUserCurrency() {
-		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
+		gemReward = ara.getGemsGained();
 		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
 
 		if (freeBoosterPack) {
