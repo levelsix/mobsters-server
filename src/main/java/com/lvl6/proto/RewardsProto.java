@@ -55,6 +55,37 @@ public final class RewardsProto {
      * <code>optional int32 amt = 4;</code>
      */
     int getAmt();
+
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+     *
+     * <pre>
+     * This outer reward proto just specifies quantity.
+     * The inner reward specifies the actual reward.
+     * Only used for monster because amt is used to specify level.
+     * </pre>
+     */
+    boolean hasActualReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+     *
+     * <pre>
+     * This outer reward proto just specifies quantity.
+     * The inner reward specifies the actual reward.
+     * Only used for monster because amt is used to specify level.
+     * </pre>
+     */
+    com.lvl6.proto.RewardsProto.RewardProto getActualReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+     *
+     * <pre>
+     * This outer reward proto just specifies quantity.
+     * The inner reward specifies the actual reward.
+     * Only used for monster because amt is used to specify level.
+     * </pre>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getActualRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RewardProto}
@@ -132,6 +163,19 @@ public final class RewardsProto {
             case 32: {
               bitField0_ |= 0x00000008;
               amt_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = actualReward_.toBuilder();
+              }
+              actualReward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(actualReward_);
+                actualReward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
               break;
             }
           }
@@ -214,6 +258,10 @@ public final class RewardsProto {
        * <code>TANGO_GIFT = 9;</code>
        */
       TANGO_GIFT(8, 9),
+      /**
+       * <code>REWARD = 100;</code>
+       */
+      REWARD(9, 100),
       ;
 
       /**
@@ -252,6 +300,10 @@ public final class RewardsProto {
        * <code>TANGO_GIFT = 9;</code>
        */
       public static final int TANGO_GIFT_VALUE = 9;
+      /**
+       * <code>REWARD = 100;</code>
+       */
+      public static final int REWARD_VALUE = 100;
 
 
       public final int getNumber() { return value; }
@@ -267,6 +319,7 @@ public final class RewardsProto {
           case 6: return MONSTER;
           case 8: return CLAN_GIFT;
           case 9: return TANGO_GIFT;
+          case 100: return REWARD;
           default: return null;
         }
       }
@@ -387,11 +440,51 @@ public final class RewardsProto {
       return amt_;
     }
 
+    public static final int ACTUALREWARD_FIELD_NUMBER = 5;
+    private com.lvl6.proto.RewardsProto.RewardProto actualReward_;
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+     *
+     * <pre>
+     * This outer reward proto just specifies quantity.
+     * The inner reward specifies the actual reward.
+     * Only used for monster because amt is used to specify level.
+     * </pre>
+     */
+    public boolean hasActualReward() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+     *
+     * <pre>
+     * This outer reward proto just specifies quantity.
+     * The inner reward specifies the actual reward.
+     * Only used for monster because amt is used to specify level.
+     * </pre>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getActualReward() {
+      return actualReward_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+     *
+     * <pre>
+     * This outer reward proto just specifies quantity.
+     * The inner reward specifies the actual reward.
+     * Only used for monster because amt is used to specify level.
+     * </pre>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getActualRewardOrBuilder() {
+      return actualReward_;
+    }
+
     private void initFields() {
       rewardId_ = 0;
       staticDataId_ = 0;
       typ_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
       amt_ = 0;
+      actualReward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -418,6 +511,9 @@ public final class RewardsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, amt_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, actualReward_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -442,6 +538,10 @@ public final class RewardsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, amt_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, actualReward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -552,6 +652,7 @@ public final class RewardsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getActualRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -568,6 +669,12 @@ public final class RewardsProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         amt_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        if (actualRewardBuilder_ == null) {
+          actualReward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          actualRewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -612,6 +719,14 @@ public final class RewardsProto {
           to_bitField0_ |= 0x00000008;
         }
         result.amt_ = amt_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (actualRewardBuilder_ == null) {
+          result.actualReward_ = actualReward_;
+        } else {
+          result.actualReward_ = actualRewardBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -639,6 +754,9 @@ public final class RewardsProto {
         }
         if (other.hasAmt()) {
           setAmt(other.getAmt());
+        }
+        if (other.hasActualReward()) {
+          mergeActualReward(other.getActualReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -812,6 +930,176 @@ public final class RewardsProto {
         amt_ = 0;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.RewardsProto.RewardProto actualReward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> actualRewardBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public boolean hasActualReward() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getActualReward() {
+        if (actualRewardBuilder_ == null) {
+          return actualReward_;
+        } else {
+          return actualRewardBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public Builder setActualReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (actualRewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          actualReward_ = value;
+          onChanged();
+        } else {
+          actualRewardBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public Builder setActualReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (actualRewardBuilder_ == null) {
+          actualReward_ = builderForValue.build();
+          onChanged();
+        } else {
+          actualRewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public Builder mergeActualReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (actualRewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              actualReward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            actualReward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(actualReward_).mergeFrom(value).buildPartial();
+          } else {
+            actualReward_ = value;
+          }
+          onChanged();
+        } else {
+          actualRewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public Builder clearActualReward() {
+        if (actualRewardBuilder_ == null) {
+          actualReward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          actualRewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getActualRewardBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getActualRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getActualRewardOrBuilder() {
+        if (actualRewardBuilder_ != null) {
+          return actualRewardBuilder_.getMessageOrBuilder();
+        } else {
+          return actualReward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto actualReward = 5;</code>
+       *
+       * <pre>
+       * This outer reward proto just specifies quantity.
+       * The inner reward specifies the actual reward.
+       * Only used for monster because amt is used to specify level.
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getActualRewardFieldBuilder() {
+        if (actualRewardBuilder_ == null) {
+          actualRewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getActualReward(),
+                  getParentForChildren(),
+                  isClean());
+          actualReward_ = null;
+        }
+        return actualRewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RewardProto)
@@ -8186,46 +8474,47 @@ public final class RewardsProto {
     java.lang.String[] descriptorData = {
       "\n\014Reward.proto\022\016com.lvl6.proto\032\nItem.pro" +
       "to\032\022MonsterStuff.proto\032\026SharedEnumConfig" +
-      ".proto\032\nUser.proto\"\373\001\n\013RewardProto\022\020\n\010re" +
+      ".proto\032\nUser.proto\"\272\002\n\013RewardProto\022\020\n\010re" +
       "wardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223\n\003ty" +
       "p\030\003 \001(\0162&.com.lvl6.proto.RewardProto.Rew" +
-      "ardType\022\013\n\003amt\030\004 \001(\005\"\201\001\n\nRewardType\022\r\n\tN" +
-      "O_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003\022\010\n\004CASH\020\004" +
-      "\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013\n\007MONSTER\020" +
-      "\006\022\r\n\tCLAN_GIFT\020\010\022\016\n\nTANGO_GIFT\020\t\"\202\002\n\017Use" +
-      "rRewardProto\022B\n\024updatedOrNewMonsters\030\001 \003",
-      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
-      "\0227\n\020updatedUserItems\030\002 \003(\0132\035.com.lvl6.pr" +
-      "oto.UserItemProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030" +
-      "\004 \001(\005\022\013\n\003oil\030\005 \001(\005\022\024\n\014gachaCredits\030\006 \001(\005" +
-      "\0223\n\010clanGift\030\007 \001(\0132!.com.lvl6.proto.User" +
-      "ClanGiftProto\"\220\001\n\rClanGiftProto\022\022\n\nclanG" +
-      "iftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilE" +
-      "xpiration\030\003 \001(\005\022\021\n\timageName\030\004 \001(\t\022,\n\007qu" +
-      "ality\030\005 \001(\0162\027.com.lvl6.proto.QualityB\002\030\001" +
-      "\"\207\002\n\021UserClanGiftProto\022\026\n\016userClanGiftId",
-      "\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001(\t\0224\n\ngifter" +
-      "User\030\003 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022/\n\010clanGift\030\004 \001(\0132\035.com.lvl6.proto." +
-      "ClanGiftProto\022\024\n\014timeReceived\030\005 \001(\003\022+\n\006r" +
-      "eward\030\006 \001(\0132\033.com.lvl6.proto.RewardProto" +
-      "\022\030\n\020hasBeenCollected\030\007 \001(\010\"\205\003\n\rUserGiftP" +
-      "roto\022\014\n\004ugId\030\001 \001(\t\022\026\n\016receiverUserId\030\002 \001" +
-      "(\t\0224\n\ngifterUser\030\003 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\0228\n\010giftType\030\004 \001(\0162&.com" +
-      ".lvl6.proto.RewardProto.RewardType\022\024\n\014ti",
-      "meReceived\030\005 \001(\003\022\'\n\002rp\030\006 \001(\0132\033.com.lvl6." +
-      "proto.RewardProto\022\030\n\020hasBeenCollected\030\007 " +
-      "\001(\010\022\035\n\025minutesTillExpiration\030\010 \001(\005\022/\n\010cl" +
-      "anGift\030\t \001(\0132\035.com.lvl6.proto.ClanGiftPr" +
-      "oto\0225\n\ttangoGift\030\n \001(\0132\".com.lvl6.proto." +
-      "UserTangoGiftProto\"v\n\022UserTangoGiftProto" +
-      "\022\022\n\nuserGiftId\030\001 \001(\t\022\031\n\021gifterTangoUserI" +
-      "d\030\002 \001(\t\0221\n\ttangoGift\030\003 \001(\0132\036.com.lvl6.pr" +
-      "oto.TangoGiftProto\"d\n\016TangoGiftProto\022\023\n\013" +
-      "tangoGiftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\024hours",
-      "UntilExpiration\030\003 \001(\005\022\021\n\timageName\030\004 \001(\t" +
-      "B\016B\014RewardsProto"
+      "ardType\022\013\n\003amt\030\004 \001(\005\0221\n\014actualReward\030\005 \001" +
+      "(\0132\033.com.lvl6.proto.RewardProto\"\215\001\n\nRewa" +
+      "rdType\022\r\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020" +
+      "\003\022\010\n\004CASH\020\004\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022" +
+      "\013\n\007MONSTER\020\006\022\r\n\tCLAN_GIFT\020\010\022\016\n\nTANGO_GIF",
+      "T\020\t\022\n\n\006REWARD\020d\"\202\002\n\017UserRewardProto\022B\n\024u" +
+      "pdatedOrNewMonsters\030\001 \003(\0132$.com.lvl6.pro" +
+      "to.FullUserMonsterProto\0227\n\020updatedUserIt" +
+      "ems\030\002 \003(\0132\035.com.lvl6.proto.UserItemProto" +
+      "\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 \001(" +
+      "\005\022\024\n\014gachaCredits\030\006 \001(\005\0223\n\010clanGift\030\007 \001(" +
+      "\0132!.com.lvl6.proto.UserClanGiftProto\"\220\001\n" +
+      "\rClanGiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004na" +
+      "me\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021" +
+      "\n\timageName\030\004 \001(\t\022,\n\007quality\030\005 \001(\0162\027.com",
+      ".lvl6.proto.QualityB\002\030\001\"\207\002\n\021UserClanGift" +
+      "Proto\022\026\n\016userClanGiftId\030\001 \001(\t\022\026\n\016receive" +
+      "rUserId\030\002 \001(\t\0224\n\ngifterUser\030\003 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022/\n\010clanGift\030" +
+      "\004 \001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014" +
+      "timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com" +
+      ".lvl6.proto.RewardProto\022\030\n\020hasBeenCollec" +
+      "ted\030\007 \001(\010\"\205\003\n\rUserGiftProto\022\014\n\004ugId\030\001 \001(" +
+      "\t\022\026\n\016receiverUserId\030\002 \001(\t\0224\n\ngifterUser\030" +
+      "\003 \001(\0132 .com.lvl6.proto.MinimumUserProto\022",
+      "8\n\010giftType\030\004 \001(\0162&.com.lvl6.proto.Rewar" +
+      "dProto.RewardType\022\024\n\014timeReceived\030\005 \001(\003\022" +
+      "\'\n\002rp\030\006 \001(\0132\033.com.lvl6.proto.RewardProto" +
+      "\022\030\n\020hasBeenCollected\030\007 \001(\010\022\035\n\025minutesTil" +
+      "lExpiration\030\010 \001(\005\022/\n\010clanGift\030\t \001(\0132\035.co" +
+      "m.lvl6.proto.ClanGiftProto\0225\n\ttangoGift\030" +
+      "\n \001(\0132\".com.lvl6.proto.UserTangoGiftProt" +
+      "o\"v\n\022UserTangoGiftProto\022\022\n\nuserGiftId\030\001 " +
+      "\001(\t\022\031\n\021gifterTangoUserId\030\002 \001(\t\0221\n\ttangoG" +
+      "ift\030\003 \001(\0132\036.com.lvl6.proto.TangoGiftProt",
+      "o\"d\n\016TangoGiftProto\022\023\n\013tangoGiftId\030\001 \001(\005" +
+      "\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003" +
+      " \001(\005\022\021\n\timageName\030\004 \001(\tB\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8248,7 +8537,7 @@ public final class RewardsProto {
     internal_static_com_lvl6_proto_RewardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RewardProto_descriptor,
-        new java.lang.String[] { "RewardId", "StaticDataId", "Typ", "Amt", });
+        new java.lang.String[] { "RewardId", "StaticDataId", "Typ", "Amt", "ActualReward", });
     internal_static_com_lvl6_proto_UserRewardProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new

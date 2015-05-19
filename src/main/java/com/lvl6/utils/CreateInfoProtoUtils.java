@@ -3575,7 +3575,11 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Reward.proto ***************************************************/
-	public RewardProto createRewardProto(Reward r)
+	public RewardProto createRewardProto(Reward r) {
+		return createRewardProto(r, 1);
+	}
+	
+	public RewardProto createRewardProto(Reward r, int currentDepth)
 	{
 		RewardProto.Builder rpb = RewardProto.newBuilder();
 
@@ -3587,6 +3591,15 @@ public class CreateInfoProtoUtils {
 			try {
 				RewardType rt = RewardType.valueOf(str);
 				rpb.setTyp(rt);
+				
+				if (rt == RewardType.REWARD) {
+					if (currentDepth <= 3) {
+						Reward rr = rewardRetrieveUtils.getRewardById(r.getStaticDataId());
+						rpb.setActualReward(createRewardProto(rr));
+					} else {
+						log.error("reward {} reached depth={}", r, currentDepth);
+					}
+				}
 			} catch (Exception e) {
 				log.error(String.format("invalid RewardType. Reward=%s",
 						r), e);
