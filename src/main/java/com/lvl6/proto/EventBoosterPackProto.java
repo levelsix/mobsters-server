@@ -91,6 +91,9 @@ public final class EventBoosterPackProto {
      */
     boolean getBuyingInBulk();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
 
     /**
      * <code>optional int32 gemsSpent = 6;</code>
@@ -109,8 +112,11 @@ public final class EventBoosterPackProto {
      * <code>optional int32 gachaCreditsChange = 7;</code>
      */
     int getGachaCreditsChange();
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PurchaseBoosterPackRequestProto}
@@ -198,6 +204,9 @@ public final class EventBoosterPackProto {
               break;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
             case 48: {
               bitField0_ |= 0x00000020;
               gemsSpent_ = input.readInt32();
@@ -208,8 +217,11 @@ public final class EventBoosterPackProto {
               gachaCreditsChange_ = input.readInt32();
               break;
             }
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -362,6 +374,9 @@ public final class EventBoosterPackProto {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
     public static final int GEMSSPENT_FIELD_NUMBER = 6;
     private int gemsSpent_;
     /**
@@ -392,8 +407,11 @@ public final class EventBoosterPackProto {
       return gachaCreditsChange_;
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       boosterPackId_ = 0;
@@ -401,10 +419,15 @@ public final class EventBoosterPackProto {
       dailyFreeBoosterPack_ = false;
       buyingInBulk_ = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
       gemsSpent_ = 0;
       gachaCreditsChange_ = 0;
 =======
 >>>>>>> resolving merges in rebase
+=======
+      gemsSpent_ = 0;
+      gachaCreditsChange_ = 0;
+>>>>>>> change to purchase boosterpack proto
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -435,14 +458,20 @@ public final class EventBoosterPackProto {
         output.writeBool(5, buyingInBulk_);
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, gemsSpent_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, gachaCreditsChange_);
       }
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
       getUnknownFields().writeTo(output);
     }
 
@@ -473,6 +502,9 @@ public final class EventBoosterPackProto {
           .computeBoolSize(5, buyingInBulk_);
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, gemsSpent_);
@@ -481,8 +513,11 @@ public final class EventBoosterPackProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, gachaCreditsChange_);
       }
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -616,12 +651,18 @@ public final class EventBoosterPackProto {
         buyingInBulk_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
         gemsSpent_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
         gachaCreditsChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
         return this;
       }
 
@@ -675,6 +716,9 @@ public final class EventBoosterPackProto {
         }
         result.buyingInBulk_ = buyingInBulk_;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
@@ -683,8 +727,11 @@ public final class EventBoosterPackProto {
           to_bitField0_ |= 0x00000040;
         }
         result.gachaCreditsChange_ = gachaCreditsChange_;
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -717,14 +764,20 @@ public final class EventBoosterPackProto {
           setBuyingInBulk(other.getBuyingInBulk());
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
         if (other.hasGemsSpent()) {
           setGemsSpent(other.getGemsSpent());
         }
         if (other.hasGachaCreditsChange()) {
           setGachaCreditsChange(other.getGachaCreditsChange());
         }
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1069,6 +1122,9 @@ public final class EventBoosterPackProto {
       }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> change to purchase boosterpack proto
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 6;</code>
@@ -1133,8 +1189,11 @@ public final class EventBoosterPackProto {
         return this;
       }
 
+<<<<<<< HEAD
 =======
 >>>>>>> resolving merges in rebase
+=======
+>>>>>>> change to purchase boosterpack proto
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurchaseBoosterPackRequestProto)
     }
 
@@ -2960,10 +3019,11 @@ public final class EventBoosterPackProto {
 =======
       "\032\026BoosterPackStuff.proto\032\nItem.proto\032\022Mo" +
       "nsterStuff.proto\032\014Reward.proto\032\nUser.pro" +
-      "to\"\262\001\n\037PurchaseBoosterPackRequestProto\0220" +
+      "to\"\341\001\n\037PurchaseBoosterPackRequestProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
       "serProto\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nclien" +
       "tTime\030\003 \001(\003\022\034\n\024dailyFreeBoosterPack\030\004 \001(" +
+<<<<<<< HEAD
       "\010\022\024\n\014buyingInBulk\030\005 \001(\010\"\361\002\n PurchaseBoos" +
       "terPackResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022Z\n\006status",
@@ -2989,6 +3049,23 @@ public final class EventBoosterPackProto {
       "proto.RareBoosterPurchaseProtoB\027B\025EventB",
       "oosterPackProto"
 >>>>>>> rebase
+=======
+      "\010\022\024\n\014buyingInBulk\030\005 \001(\010\022\021\n\tgemsSpent\030\006 \001" +
+      "(\005\022\032\n\022gachaCreditsChange\030\007 \001(\005\"\361\002\n Purch" +
+      "aseBoosterPackResponseProto\0220\n\006sender\030\001 ",
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022Z\n" +
+      "\006status\030\002 \001(\0162J.com.lvl6.proto.PurchaseB" +
+      "oosterPackResponseProto.PurchaseBoosterP" +
+      "ackStatus\022/\n\005prize\030\004 \003(\0132 .com.lvl6.prot" +
+      "o.BoosterItemProto\022/\n\006reward\030\006 \001(\0132\037.com" +
+      ".lvl6.proto.UserRewardProto\"]\n\031PurchaseB" +
+      "oosterPackStatus\022\013\n\007SUCCESS\020\001\022#\n\037FAIL_IN" +
+      "SUFFICIENT_GACHA_CREDITS\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003\"q\n(ReceivedRareBoosterPurchaseRespons" +
+      "eProto\022E\n\023rareBoosterPurchase\030\001 \001(\0132(.co",
+      "m.lvl6.proto.RareBoosterPurchaseProtoB\027B" +
+      "\025EventBoosterPackProto"
+>>>>>>> change to purchase boosterpack proto
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3016,10 +3093,14 @@ public final class EventBoosterPackProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor,
 <<<<<<< HEAD
+<<<<<<< HEAD
         new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", "BuyingInBulk", "GemsSpent", "GachaCreditsChange", });
 =======
         new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", "BuyingInBulk", });
 >>>>>>> resolving merges in rebase
+=======
+        new java.lang.String[] { "Sender", "BoosterPackId", "ClientTime", "DailyFreeBoosterPack", "BuyingInBulk", "GemsSpent", "GachaCreditsChange", });
+>>>>>>> change to purchase boosterpack proto
     internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable = new
