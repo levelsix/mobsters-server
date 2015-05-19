@@ -3,6 +3,7 @@ package com.lvl6.server.controller.actionobjects;
 import org.jooq.Configuration;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,6 +93,12 @@ public class InAppPurchaseMultiSpinAction {
 		if(userPojo == null) {
 			log.error("user is null with userId {}", userId);
 			return false;
+		}
+		try {
+			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return true;
 	}
