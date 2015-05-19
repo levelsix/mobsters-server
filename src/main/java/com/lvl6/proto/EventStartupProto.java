@@ -40289,6 +40289,7 @@ public final class EventStartupProto {
       " \003(\0132O.com.lvl6.proto.StartupResponsePro",
       "to.StartupConstants.FileDownloadConstant" +
 <<<<<<< HEAD
+<<<<<<< HEAD
       "Proto\022 \n\030taskIdForUpgradeTutorial\030) \001(\005\022" +
       "r\n\030boosterPackConstantProto\030\364\003 \001(\0132O.com" +
       ".lvl6.proto.StartupResponseProto.Startup" +
@@ -40735,6 +40736,79 @@ public final class EventStartupProto {
       "pProto"
 >>>>>>> added gacha credits to tutorial constants
 >>>>>>> rebase
+=======
+      "Proto\022 \n\030taskIdForUpgradeTutorial\030) \001(\005\022" +
+      "r\n\030boosterPackConstantProto\030\364\003 \001(\0132O.com" +
+      ".lvl6.proto.StartupResponseProto.Startup" +
+      "Constants.BoosterPackConstantsProto\032_\n\031A" +
+      "nimatedSpriteOffsetProto\022\021\n\timageName\030\001 " +
+      "\001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\032\325\001\n\rClanConstants\022\035\n\025coinPr" +
+      "iceToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthFo" +
+      "rClanName\030\002 \001(\005\022\'\n\037maxCharLengthForClanD",
+      "escription\030\003 \001(\005\022\037\n\027maxCharLengthForClan" +
+      "Tag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034achiev" +
+      "ementIdsForClanRewards\030\006 \003(\005\032c\n\030Download" +
+      "ableNibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020" +
+      "expansionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibN" +
+      "ame\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwins" +
+      "Weight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fl" +
+      "eesWeight\030\003 \001(\005\022#\n\033numHoursToShowAfterEv" +
+      "entEnd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017" +
+      "maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMo",
+      "nsterLimit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n" +
+      "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
+      "alPerHealthPoint\030\002 \001(\002\022\031\n\021elementalStren" +
+      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022" +
+      "oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapCons" +
+      "tants\022\035\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023" +
+      "mapNumberOfSections\030\002 \001(\005\022\030\n\020mapSectionH" +
+      "eight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016ma" +
+      "pTotalHeight\030\005 \001(\002\032j\n\025MiniTutorialConsta" +
+      "nts\022\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016guide",
+      "MonsterId\030\002 \001(\005\022\035\n\025enhanceGuideMonsterId" +
+      "\030\003 \001(\005\032\213\001\n\021ClanHelpConstants\0229\n\010helpType" +
+      "\030\001 \001(\0162\036.com.lvl6.proto.GameActionType:\007" +
+      "NO_HELP\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n" +
+      "\025percentRemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpCons" +
+      "tants\022\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minP" +
+      "vpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002" +
+      "\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\022\035\n\025defending" +
+      "MsgCharLimit\030\005 \001(\005\022\"\n\032beginAvengingTimeL" +
+      "imitMins\030\006 \001(\005\022(\n requestClanToAvengeTim",
+      "eLimitMins\030\007 \001(\005\0328\n\024SpeedUpConstantProto" +
+      "\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032\210\001\n\037R" +
+      "esourceConversionConstantProto\022?\n\014resour" +
+      "ceType\030\001 \001(\0162\034.com.lvl6.proto.ResourceTy" +
+      "pe:\013NO_RESOURCE\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007" +
+      "numGems\030\003 \001(\005\032\217\001\n\031FileDownloadConstantPr" +
+      "oto\022\026\n\016fileDownloadId\030\001 \001(\005\022\020\n\010fileName\030" +
+      "\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024downloadOnlyO" +
+      "verWifi\030\004 \001(\010\022\030\n\020useIphone6Prefix\030\005 \001(\010\032" +
+      "W\n\031BoosterPackConstantsProto\022\036\n\026purchase",
+      "AmountRequired\030\001 \001(\005\022\032\n\022numberOfPacksGiv" +
+      "en\030\002 \001(\005\032\266\004\n\021TutorialConstants\022\031\n\021starti" +
+      "ngMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(" +
+      "\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMonste" +
+      "rIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005" +
+      "\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialStru" +
+      "ctures\030\003 \003(\0132#.com.lvl6.proto.TutorialSt" +
+      "ructProto\022\036\n\026structureIdsToBeBuillt\030\004 \003(" +
+      "\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003" +
+      "(\0132 .com.lvl6.proto.CityElementProto\022$\n\034",
+      "cityElementIdForFirstDungeon\030\007 \001(\005\022%\n\035ci" +
+      "tyElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010cas" +
+      "hInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit" +
+      "\030\r \001(\005\022\030\n\020gachaCreditsInit\030\021 \001(\005\022?\n\021tuto" +
+      "rialObstacles\030\016 \003(\0132$.com.lvl6.proto.Min" +
+      "imumObstacleProto\"A\n\014UpdateStatus\022\r\n\tNO_" +
+      "UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDA" +
+      "TE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n" +
+      "\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENAN" +
+      "CE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n\021prev",
+      "iousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021Eve" +
+      "ntStartupProto"
+>>>>>>> cleaning up rebase
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

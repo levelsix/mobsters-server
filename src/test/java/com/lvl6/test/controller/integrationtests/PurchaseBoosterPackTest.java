@@ -1,6 +1,5 @@
 package com.lvl6.test.controller.integrationtests;
 
-<<<<<<< HEAD
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -31,27 +30,20 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lvl6.events.request.PurchaseBoosterPackRequestEvent;
-<<<<<<< HEAD
 import com.lvl6.info.ItemForUser;
-=======
->>>>>>> added tests for purchasing booster packs, not done yet
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-<<<<<<< HEAD
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-=======
->>>>>>> added tests for purchasing booster packs, not done yet
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.PurchaseBoosterPackController;
 import com.lvl6.utils.CreateInfoProtoUtils;
-<<<<<<< HEAD
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -73,7 +65,6 @@ public class PurchaseBoosterPackTest {
 	UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
-<<<<<<< HEAD
 	BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
 
 	@Autowired
@@ -121,11 +112,7 @@ public class PurchaseBoosterPackTest {
 		String email = null;
 		String fbData = null;
 
-<<<<<<< HEAD
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
-=======
-		userId = insertUtils.insertUser(name, udid, lvl, playerExp, cash, oil,
->>>>>>> added tests for purchasing booster packs, not done yet
 				gems, false, deviceToken, createTime, facebookId,
 				avatarMonsterId, email, fbData);
 
@@ -147,11 +134,8 @@ public class PurchaseBoosterPackTest {
 			return;
 		}
 
-<<<<<<< HEAD
 		//deleteSalesPurchase(userId);
 
-=======
->>>>>>> added tests for purchasing booster packs, not done yet
 		String query2 = String.format("DELETE FROM %s where %s=?",
 				DBConstants.TABLE_USER, DBConstants.USER__ID);
 		Object[] values2 = new Object[] { user.getId() };
@@ -164,7 +148,6 @@ public class PurchaseBoosterPackTest {
 
 	}
 
-<<<<<<< HEAD
 	private int deleteSalesPurchase(String userId) {
 		String tableName = DBConstants.TABLE_IAP_HISTORY;
 		String condDelim = "and";
