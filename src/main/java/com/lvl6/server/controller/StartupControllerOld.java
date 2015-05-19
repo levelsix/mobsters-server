@@ -1673,7 +1673,7 @@ public class StartupControllerOld extends EventController {
 		List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
 				miniJobIdToUserMiniJobs.values());
 		List<UserMiniJobProto> umjpList = createInfoProtoUtils
-				.createUserMiniJobProtos(mjfuList, null);
+				.createUserMiniJobProtos(mjfuList, null, rewardRetrieveUtil);
 
 		resBuilder.addAllUserMiniJobProtos(umjpList);
 	}

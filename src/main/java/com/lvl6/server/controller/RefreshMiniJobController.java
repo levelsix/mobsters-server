@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RefreshMiniJobAction;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -58,6 +59,9 @@ public class RefreshMiniJobController extends EventController {
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtil;
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtil;
 
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtil;
@@ -159,7 +163,8 @@ public class RefreshMiniJobController extends EventController {
 				List<MiniJobForUser> userMiniJobs = rmja.getUserMiniJobs();
 				Map<Integer, MiniJob> mjIdToMj = rmja.getMiniJobIdToMj();
 				List<UserMiniJobProto> userMiniJobProtos = createInfoProtoUtils
-						.createUserMiniJobProtos(userMiniJobs, mjIdToMj);
+						.createUserMiniJobProtos(userMiniJobs, mjIdToMj,
+								rewardRetrieveUtil);
 				resBuilder.addAllMiniJobs(userMiniJobProtos);
 			}
 

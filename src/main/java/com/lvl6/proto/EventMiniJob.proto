@@ -96,7 +96,7 @@ message RedeemMiniJobRequestProto {
 																						//DONE
 message RedeemMiniJobResponseProto {
      optional MinimumUserProtoWithMaxResources sender = 1;
-     optional FullUserMonsterProto fump = 2; //this is if the mini job gives monster
+     optional FullUserMonsterProto fump = 2 [deprecated = true]; //this is if the mini job gives monster
      
      optional RedeemMiniJobStatus status = 3;    
      

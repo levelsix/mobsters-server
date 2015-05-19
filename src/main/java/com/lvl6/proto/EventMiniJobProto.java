@@ -6264,29 +6264,29 @@ public final class EventMiniJobProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
      *
      * <pre>
      *this is if the mini job gives monster
      * </pre>
      */
-    boolean hasFump();
+    @java.lang.Deprecated boolean hasFump();
     /**
-     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
      *
      * <pre>
      *this is if the mini job gives monster
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump();
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump();
     /**
-     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
      *
      * <pre>
      *this is if the mini job gives monster
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
@@ -6580,33 +6580,33 @@ public final class EventMiniJobProto {
     public static final int FUMP_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_;
     /**
-     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
      *
      * <pre>
      *this is if the mini job gives monster
      * </pre>
      */
-    public boolean hasFump() {
+    @java.lang.Deprecated public boolean hasFump() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
      *
      * <pre>
      *this is if the mini job gives monster
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
       return fump_;
     }
     /**
-     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
      *
      * <pre>
      *this is if the mini job gives monster
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
       return fump_;
     }
 
@@ -7077,23 +7077,23 @@ public final class EventMiniJobProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public boolean hasFump() {
+      @java.lang.Deprecated public boolean hasFump() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
         if (fumpBuilder_ == null) {
           return fump_;
         } else {
@@ -7101,13 +7101,13 @@ public final class EventMiniJobProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public Builder setFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+      @java.lang.Deprecated public Builder setFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fumpBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7121,13 +7121,13 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public Builder setFump(
+      @java.lang.Deprecated public Builder setFump(
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fumpBuilder_ == null) {
           fump_ = builderForValue.build();
@@ -7139,13 +7139,13 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public Builder mergeFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+      @java.lang.Deprecated public Builder mergeFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fumpBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
               fump_ != com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance()) {
@@ -7162,13 +7162,13 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public Builder clearFump() {
+      @java.lang.Deprecated public Builder clearFump() {
         if (fumpBuilder_ == null) {
           fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
           onChanged();
@@ -7179,25 +7179,25 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFumpBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFumpBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getFumpFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
         if (fumpBuilder_ != null) {
           return fumpBuilder_.getMessageOrBuilder();
         } else {
@@ -7205,7 +7205,7 @@ public final class EventMiniJobProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2;</code>
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 2 [deprecated = true];</code>
        *
        * <pre>
        *this is if the mini job gives monster
@@ -9771,32 +9771,32 @@ public final class EventMiniJobProto {
       "20.com.lvl6.proto.MinimumUserProtoWithMa" +
       "xResources\022\022\n\nclientTime\030\002 \001(\003\022\027\n\017userMi" +
       "niJobUuid\030\003 \001(\t\022<\n\005umchp\030\006 \003(\0132-.com.lvl" +
-      "6.proto.UserMonsterCurrentHealthProto\"\203\003" +
+      "6.proto.UserMonsterCurrentHealthProto\"\207\003" +
       "\n\032RedeemMiniJobResponseProto\022@\n\006sender\030\001",
       " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\0222\n\004fump\030\002 \001(\0132$.com.lvl6." +
-      "proto.FullUserMonsterProto\022N\n\006status\030\003 \001" +
-      "(\0162>.com.lvl6.proto.RedeemMiniJobRespons" +
-      "eProto.RedeemMiniJobStatus\0220\n\007rewards\030\004 " +
-      "\001(\0132\037.com.lvl6.proto.UserRewardProto\"m\n\023" +
-      "RedeemMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL" +
-      "_OTHER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\003\022\034\n" +
-      "\030FAIL_MINI_JOB_INCOMPLETE\020\004\"\375\001\n\032RefreshM" +
-      "iniJobRequestProto\0220\n\006sender\030\001 \001(\0132 .com",
-      ".lvl6.proto.MinimumUserProto\022\034\n\024deleteUs" +
-      "erMiniJobIds\030\002 \003(\t\022\016\n\006itemId\030\003 \001(\005\022\022\n\nnu" +
-      "mToSpawn\030\004 \001(\005\022\021\n\tgemsSpent\030\005 \001(\005\0222\n\021min" +
-      "QualitySpawned\030\006 \001(\0162\027.com.lvl6.proto.Qu" +
-      "ality\022\022\n\nclientTime\030\007 \001(\003\022\020\n\010structId\030\010 " +
-      "\001(\005\"\303\002\n\033RefreshMiniJobResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6.proto" +
-      ".UserMiniJobProto\022P\n\006status\030\003 \001(\0162@.com." +
-      "lvl6.proto.RefreshMiniJobResponseProto.R",
-      "efreshMiniJobStatus\"l\n\024RefreshMiniJobSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GE" +
-      "MS\020\002\022\033\n\027FAIL_INSUFFICIENT_ITEMS\020\003\022\016\n\nFAI" +
-      "L_OTHER\020\004B\023B\021EventMiniJobProto"
+      "thMaxResources\0226\n\004fump\030\002 \001(\0132$.com.lvl6." +
+      "proto.FullUserMonsterProtoB\002\030\001\022N\n\006status" +
+      "\030\003 \001(\0162>.com.lvl6.proto.RedeemMiniJobRes" +
+      "ponseProto.RedeemMiniJobStatus\0220\n\007reward" +
+      "s\030\004 \001(\0132\037.com.lvl6.proto.UserRewardProto" +
+      "\"m\n\023RedeemMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
+      "FAIL_OTHER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020" +
+      "\003\022\034\n\030FAIL_MINI_JOB_INCOMPLETE\020\004\"\375\001\n\032Refr" +
+      "eshMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 ",
+      ".com.lvl6.proto.MinimumUserProto\022\034\n\024dele" +
+      "teUserMiniJobIds\030\002 \003(\t\022\016\n\006itemId\030\003 \001(\005\022\022" +
+      "\n\nnumToSpawn\030\004 \001(\005\022\021\n\tgemsSpent\030\005 \001(\005\0222\n" +
+      "\021minQualitySpawned\030\006 \001(\0162\027.com.lvl6.prot" +
+      "o.Quality\022\022\n\nclientTime\030\007 \001(\003\022\020\n\010structI" +
+      "d\030\010 \001(\005\"\303\002\n\033RefreshMiniJobResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6.p" +
+      "roto.UserMiniJobProto\022P\n\006status\030\003 \001(\0162@." +
+      "com.lvl6.proto.RefreshMiniJobResponsePro",
+      "to.RefreshMiniJobStatus\"l\n\024RefreshMiniJo" +
+      "bStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIEN" +
+      "T_GEMS\020\002\022\033\n\027FAIL_INSUFFICIENT_ITEMS\020\003\022\016\n" +
+      "\nFAIL_OTHER\020\004B\023B\021EventMiniJobProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

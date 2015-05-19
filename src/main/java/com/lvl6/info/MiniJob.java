@@ -32,7 +32,7 @@ public class MiniJob implements Serializable {
 	private Random rand;
 	private int durationMinSeconds;
 	private int durationMaxSeconds;
-	
+
 	private int rewardIdOne;
 	private int rewardIdTwo;
 	private int rewardIdThree;
@@ -71,8 +71,8 @@ public class MiniJob implements Serializable {
 		this.durationMaxSeconds = durationMaxMinutes * 60;
 
 		this.expReward = expReward;
-		
-		this.rewardIdOne = rewardIdTwo;
+
+		this.rewardIdOne = rewardIdOne;
 		this.rewardIdTwo = rewardIdTwo;
 		this.rewardIdThree = rewardIdThree;
 	}

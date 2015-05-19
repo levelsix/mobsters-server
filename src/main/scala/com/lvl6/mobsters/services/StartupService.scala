@@ -1132,7 +1132,9 @@ class StartupService extends LazyLogging{
 				val miniJobIdtoUserMiniJobs = miniJobForUserRetrieveUtil.getSpecificOrAllIdToMiniJobForUser(userId, null)
 				if(!miniJobIdtoUserMiniJobs.isEmpty()) {
 					val mjfuList = new ArrayList[MiniJobForUser](miniJobIdtoUserMiniJobs.values)
-					resBuilder.addAllUserMiniJobProtos(createInfoProtoUtils.createUserMiniJobProtos(mjfuList, null))
+					resBuilder.addAllUserMiniJobProtos(
+                            createInfoProtoUtils.createUserMiniJobProtos(
+                                    mjfuList, null, rewardRetrieveUtil))
 				}
 			}
 		}

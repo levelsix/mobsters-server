@@ -2553,7 +2553,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** MiniJobConfig.proto ********************************************/
-	public MiniJobProto createMiniJobProto(MiniJob mj) {
+	public MiniJobProto createMiniJobProto(MiniJob mj, RewardRetrieveUtils rewardRetrieveUtil) {
 		MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();
 
 		mjpb.setMiniJobId(mj.getId());
@@ -2592,11 +2592,30 @@ public class CreateInfoProtoUtils {
 		mjpb.setDurationMaxMinutes(mj.getDurationMaxMinutes());
 		mjpb.setDurationMinMinutes(mj.getDurationMinMinutes());
 
+		int rewardId = mj.getRewardIdOne();
+		if (rewardId > 0) {
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			RewardProto rp = createRewardProto(r);
+			mjpb.setRewardIdOne(rp);
+		}
+		rewardId = mj.getRewardIdTwo();
+		if (rewardId > 0) {
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			RewardProto rp = createRewardProto(r);
+			mjpb.setRewardIdTwo(rp);
+		}
+		rewardId = mj.getRewardIdThree();
+		if (rewardId > 0) {
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			RewardProto rp = createRewardProto(r);
+			mjpb.setRewardIdThree(rp);
+		}
+
 		return mjpb.build();
 	}
 
 	public UserMiniJobProto createUserMiniJobProto(MiniJobForUser mjfu,
-			MiniJob mj) {
+			MiniJob mj, RewardRetrieveUtils rewardRetrieveUtil) {
 		UserMiniJobProto.Builder umjpb = UserMiniJobProto.newBuilder();
 
 		umjpb.setUserMiniJobUuid(mjfu.getId());
@@ -2619,7 +2638,7 @@ public class CreateInfoProtoUtils {
 			umjpb.setTimeCompleted(time.getTime());
 		}
 
-		MiniJobProto mjp = createMiniJobProto(mj);
+		MiniJobProto mjp = createMiniJobProto(mj, rewardRetrieveUtil);
 		umjpb.setMiniJob(mjp);
 
 		return umjpb.build();
@@ -2627,7 +2646,8 @@ public class CreateInfoProtoUtils {
 
 	public List<UserMiniJobProto> createUserMiniJobProtos(
 			List<MiniJobForUser> mjfuList,
-			Map<Integer, MiniJob> miniJobIdToMiniJob) {
+			Map<Integer, MiniJob> miniJobIdToMiniJob,
+			RewardRetrieveUtils rewardRetrieveUtil) {
 		List<UserMiniJobProto> umjpList = new ArrayList<UserMiniJobProto>();
 
 		for (MiniJobForUser mjfu : mjfuList) {
@@ -2641,7 +2661,7 @@ public class CreateInfoProtoUtils {
 				mj = miniJobIdToMiniJob.get(miniJobId);
 			}
 
-			UserMiniJobProto umjp = createUserMiniJobProto(mjfu, mj);
+			UserMiniJobProto umjp = createUserMiniJobProto(mjfu, mj, rewardRetrieveUtil);
 			umjpList.add(umjp);
 		}
 

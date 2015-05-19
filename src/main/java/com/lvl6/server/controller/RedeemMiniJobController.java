@@ -1,13 +1,10 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -19,20 +16,15 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniJobRequestEvent;
 import com.lvl6.events.response.RedeemMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.MiniJob;
-import com.lvl6.info.MiniJobForUser;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto;
-import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus;
-import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -44,10 +36,8 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemMiniJobAction;
-import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
-import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -77,16 +67,16 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
 
@@ -167,8 +157,16 @@ public class RedeemMiniJobController extends EventController {
 					deleteUtil, updateUtil, insertUtil, miniJobForUserRetrieveUtil,
 					miniJobRetrieveUtils, monsterStuffUtils, monsterForUserRetrieveUtils, umchpList,
 					monsterLevelInfoRetrieveUtils, rewardRetrieveUtils);
-			
+
 			rmja.execute(resBuilder);
+
+			if (RedeemMiniJobStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(rmja.getAra().getNuOrUpdatedItems(),
+						rmja.getAra().getNuOrUpdatedMonsters(), rmja.getAra().getGemsGained(),
+						rmja.getAra().getCashGained(), rmja.getAra().getOilGained(), rmja.getAra().getGachaCreditsGained(), null);
+				resBuilder.setRewards(urp);
+				log.info("rewards: {}", urp);
+			}
 
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 					senderProto.getUserUuid());
@@ -183,7 +181,7 @@ public class RedeemMiniJobController extends EventController {
 								rmja.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
-				
+
 				writeToUserCurrencyHistory(rmja.getUser(), userMiniJobId, rmja.getAra().getCurrencyDeltas(),
 						clientTime, rmja.getAra().getPreviousCurrencies());
 			}

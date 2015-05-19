@@ -30,6 +30,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -45,13 +46,16 @@ public class SpawnMiniJobController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
-	
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtil;
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -141,7 +145,7 @@ public class SpawnMiniJobController extends EventController {
 				resBuilder.setStatus(SpawnMiniJobStatus.SUCCESS);
 				List<UserMiniJobProto> userMiniJobProtos = createInfoProtoUtils
 						.createUserMiniJobProtos(spawnedUserMiniJobs,
-								miniJobIdToMiniJob);
+								miniJobIdToMiniJob, rewardRetrieveUtil);
 				resBuilder.addAllMiniJobs(userMiniJobProtos);
 			}
 
@@ -177,7 +181,7 @@ public class SpawnMiniJobController extends EventController {
 						e);
 			}
 			//		} finally {
-			//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+			//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 
