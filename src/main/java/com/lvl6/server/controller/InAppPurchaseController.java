@@ -56,6 +56,7 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
+import com.lvl6.server.controller.actionobjects.InAppPurchaseMultiSpinAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
@@ -344,9 +345,11 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseAction iapa = null;
             InAppPurchaseSalesAction iapsa = null;
             InAppPurchaseMoneyTreeAction iapmta = null;
+            InAppPurchaseMultiSpinAction iapmsa = null;
             boolean isMoneyTree = false;
             boolean isSalesPack = false;
             boolean isGachaMultiSpin = false;
+            boolean isBuyingGems = false;
             
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
@@ -372,9 +375,11 @@ public class InAppPurchaseController extends EventController {
             }
             else if(IAPValues.packageIsGachaMultiSpin(packageName)) {
             	isGachaMultiSpin = true;
-            	
+            	iapmsa = new InAppPurchaseMultiSpinAction(userId, receiptFromApple, insertUtil);
+            	iapmsa.execute(resBuilder);
             }
             else {
+            	isBuyingGems = true;
                 iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,
                         uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
                         miscMethods, inAppPurchaseUtils);
@@ -403,7 +408,7 @@ public class InAppPurchaseController extends EventController {
 					createRewardProto(resBuilder, iapsa);
 					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
-				else {
+				else if(isBuyingGems){
 					writeToUserCurrencyHistory(userId, date, iapa, null, null);
 				}
 			}

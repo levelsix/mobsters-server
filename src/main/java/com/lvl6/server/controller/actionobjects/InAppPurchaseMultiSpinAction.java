@@ -1,7 +1,5 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.util.Date;
-
 import org.jooq.Configuration;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
@@ -10,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemConfigDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
@@ -20,6 +19,7 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 
 public class InAppPurchaseMultiSpinAction {
@@ -29,7 +29,7 @@ public class InAppPurchaseMultiSpinAction {
 
 	private String userId;
 	private JSONObject receiptFromApple;
-	private Date now;
+	protected InsertUtil insertUtil;
 	
 	public InAppPurchaseMultiSpinAction() {
 		super();
@@ -37,11 +37,11 @@ public class InAppPurchaseMultiSpinAction {
 	}
 
 	public InAppPurchaseMultiSpinAction(String userId, JSONObject receiptFromApple,
-			Date now) {
+			InsertUtil insertUtil) {
 		super();
 		this.userId = userId;
 		this.receiptFromApple = receiptFromApple;
-		this.now = now;
+		this.insertUtil = insertUtil;
 	}
 
 	//derived state
@@ -51,13 +51,10 @@ public class InAppPurchaseMultiSpinAction {
 	private User userPojo;
 	private ItemConfigDao itemConfigDao;
 	private ItemForUserDao itemForUserDao;
-
+	private IapHistoryDao iapHistoryDao;
 
 	public void execute(Builder resBuilder) {
-		Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
-		userDao = new UserDao(config);
-		itemConfigDao = new ItemConfigDao(config);
-		itemForUserDao = new ItemForUserDao(config);
+		setUpDaos();
 		resBuilder.setStatus(InAppPurchaseStatus.FAIL);
 
 		//check out inputs before db interaction
@@ -80,6 +77,14 @@ public class InAppPurchaseMultiSpinAction {
 
 		resBuilder.setStatus(InAppPurchaseStatus.SUCCESS);
 
+	}
+	
+	public void setUpDaos() {
+		Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
+		userDao = new UserDao(config);
+		itemConfigDao = new ItemConfigDao(config);
+		itemForUserDao = new ItemForUserDao(config);
+		iapHistoryDao = new IapHistoryDao(config);
 	}
 
 	public boolean verifySyntax(Builder resBuilder) {
@@ -113,34 +118,20 @@ public class InAppPurchaseMultiSpinAction {
 		try {
 			double realLifeCashCost;
 			realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
+			int gemChange = 0;
+			
+			iapHistoryDao.insertIAPHistoryElem(receiptFromApple, gemChange,
+					userPojo, realLifeCashCost, null);					
+			ItemForUser ifuPojo = new ItemForUser(userId, gachaMultiSpinItemId, 1);
+			itemForUserDao.insert(ifuPojo);
 
-			gemChange = 0;
-
-			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, gemChange,
-					user, realLifeCashCost, null)) {
-				log.error(
-						"problem with logging in-app purchase history for receipt:{} and user {}",
-						receiptFromApple.toString(4), user);
-				success = false;
-			}
-			processMoneyTreePurchase(resBuilder);
-
+			updateUserSalesValue();
+			return success;
 		} catch (Exception e) {
-			log.error(
-					String.format(
-							"error verifying InAppPurchase request. receiptFromApple=%s",
-							receiptFromApple), e);
+			log.error("error verifying InAppPurchase request. receiptFromApple={}, exception={}",
+					receiptFromApple, e);
 			success = false;
 		}
-		
-		
-		
-		
-		ItemForUser ifuPojo = new ItemForUser
-		itemForUserDao
-		
-		
-		updateUserSalesValue();
 		return success;
 	}
 
@@ -148,8 +139,4 @@ public class InAppPurchaseMultiSpinAction {
 		userPojo.setSalesValue(4); //make them max sales value, this fool's a straight baller
 		userDao.update(userPojo);
 	}
-	
-
-
-
 }
