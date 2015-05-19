@@ -221,11 +221,6 @@ public class DevController extends EventController {
 			UserItemProto uip = createInfoProtoUtils
 					.createUserItemProtoFromUserItem(ifu);
 			resBuilder.setUip(uip);
-			break;s
-		case GET_GACHA_CREDITS:
-			log.info("giving user={} gacha_credits={}",
-					aUser, staticDataId);
-			aUser.updateRelativeCashAndOilAndGems(0, 0, 0, quantity);
 			break;
 		case GET_GACHA_CREDITS:
 			log.info("giving user={} gacha_credits={}",

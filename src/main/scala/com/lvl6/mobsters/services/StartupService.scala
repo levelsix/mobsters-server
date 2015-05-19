@@ -40,7 +40,7 @@ import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
-import com.lvl6.leaderboards.LeaderBoardImpl
+//import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
@@ -248,7 +248,7 @@ class StartupService extends LazyLogging{
 	@Autowired var  miscMethods: MiscMethods = null
 	@Autowired var  locker :  Locker = null
 	@Autowired var  eventWriter:EventWriter = null
-    @Autowired var  leaderBoard:LeaderBoardImpl = null
+//    @Autowired var  leaderBoard:LeaderBoardImpl = null
 
 	@Autowired var globals:Globals = null
 	@Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
@@ -1081,6 +1081,7 @@ class StartupService extends LazyLogging{
 						logger.info(s"not retrieving MiniEvent1, achievement not redeemed $afu");
 					}
 				}
+            }
 			logger.info(s"calculateMiniEvent=$calculateMiniEvent");
 			if (calculateMiniEvent) {
 				//calculate only if user finished all clan achievements
@@ -1121,6 +1122,7 @@ class StartupService extends LazyLogging{
 						rmea.getLeaderboardRewards());
 					resBuilder.setUserMiniEvent(umep);
 				}
+            }
 		}
 	}
 
@@ -1151,10 +1153,10 @@ class StartupService extends LazyLogging{
 					resBuilder.addItemsInUse(uiup);
 				}
 				userItemIds = itemIdToUserItems.keySet()
-			if (userItemIds != null) {
-				setSalePack(resBuilder, user, userItemIds);
-			}
-
+    			if (userItemIds != null) {
+    				setSalePack(resBuilder, user, userItemIds);
+    			}
+            }
 		}
 	}
 
@@ -1200,6 +1202,7 @@ class StartupService extends LazyLogging{
 							salesDisplayItemRetrieveUtil,
 							customMenuRetrieveUtil);
 						resBuilder.addSalesPackages(spProto);
+                    }
 				}
 			}
 		}
@@ -1376,7 +1379,10 @@ class StartupService extends LazyLogging{
 								salesDisplayItemRetrieveUtil,
 								customMenuRetrieveUtil);
 							resBuilder.addSalesPackages(spProto);
+                        }
+                    }
 				}
+            }
 		}
 	}
 

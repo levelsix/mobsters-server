@@ -72,7 +72,7 @@ public class PurchaseBoosterPackAction {
 			MonsterRetrieveUtils monsterRetrieveUtils,
 			boolean buyingInBulk, RewardRetrieveUtils rewardRetrieveUtils,
 			InsertUtil insertUtil,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtils, 
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
 			BoosterItemUtils boosterItemUtils, int gemsSpent, int gachaCreditsChange) {
 		super();
 		this.userId = userId;
@@ -126,7 +126,7 @@ public class PurchaseBoosterPackAction {
 	private AwardRewardAction ara;
 
 	private int gemReward;
-	private int gachaCreditsReward;	
+	private int gachaCreditsReward;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
@@ -166,7 +166,7 @@ public class PurchaseBoosterPackAction {
 		if (!legitPack) {
 			return false;
 		}
-		
+
 		if (boosterPackIdPurchased > 0) {
 			legitPack = verifyBoosterPack(resBuilder, boosterPackIdPurchased);
 		}
@@ -221,7 +221,7 @@ public class PurchaseBoosterPackAction {
 				return false;
 			}
 		}
-		
+
 		if(gemsSpent != 0) {
 			int userGems = user.getGems();
 			if(userGems < gemsSpent) {
@@ -319,7 +319,7 @@ public class PurchaseBoosterPackAction {
 				monsterLevelInfoRetrieveUtils);
 
 		ara.execute();
-		
+
 	}
 
 	//TODO: allow multiple free packs?
@@ -332,8 +332,8 @@ public class PurchaseBoosterPackAction {
 		}
 		gachaCreditsChange += gachaCreditsReward;
 
-		int gemChange = (-1 * gemsSpent) + gemReward; 
-		
+		int gemChange = (-1 * gemsSpent) + gemReward;
+
 		//update user's flag concerning whether or not he's bought a rigged pack
 		//update user's last free booster pack time
 		boolean updated = user.updateBoughtBoosterPack(gemChange, gachaCreditsChange, now,
@@ -573,6 +573,8 @@ public class PurchaseBoosterPackAction {
 
 	public int getGachaCreditsChange() {
 		return gachaCreditsChange;
+	}
+
 	public void setGachaCreditsChange(int gachaCreditsChange) {
 		this.gachaCreditsChange = gachaCreditsChange;
 	}

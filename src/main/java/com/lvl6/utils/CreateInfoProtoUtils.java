@@ -5219,9 +5219,6 @@ public class CreateInfoProtoUtils {
 		int gachaCredits = u.getGachaCredits();
 		builder.setGachaCredits(gachaCredits);
 
-		int gachaCredits = u.getGachaCredits();
-		builder.setGachaCredits(gachaCredits);
-
 		Date lastTangoGiftSentTime = u.getLastTangoGiftSentTime();
 		if (null != lastTangoGiftSentTime) {
 			builder.setLastTangoGiftSentTime(lastTangoGiftSentTime.getTime());

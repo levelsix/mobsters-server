@@ -2,8 +2,6 @@ package com.lvl6.server.controller.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -15,17 +13,13 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Monster;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.utils.utilmethods.StringUtils;
-import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
 public class BoosterItemUtils {
@@ -35,7 +29,7 @@ public class BoosterItemUtils {
 
 	public boolean checkIfMonstersExist(
 			List<BoosterItem> itemsUserReceives,
-			MonsterRetrieveUtils monsterRetrieveUtils, 
+			MonsterRetrieveUtils monsterRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtils) {
 		boolean monstersExist = true;
 
@@ -55,7 +49,7 @@ public class BoosterItemUtils {
 		return monstersExist;
 	}
 
-	public int determineGemReward(List<BoosterItem> boosterItems, 
+	public int determineGemReward(List<BoosterItem> boosterItems,
 			RewardRetrieveUtils rewardRetrieveUtils) {
 		int gemReward = 0;
 		for (BoosterItem bi : boosterItems) {
@@ -67,15 +61,18 @@ public class BoosterItemUtils {
 
 		return gemReward;
 	}
-	
-	public int determineGachaCreditsReward(List<BoosterItem> boosterItems, 
+
+	public int determineGachaCreditsReward(List<BoosterItem> boosterItems,
 			RewardRetrieveUtils rewardRetrieveUtils) {
 		int gachaCreditsReward = 0;
 		for (BoosterItem bi : boosterItems) {
 			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
 			if(r.getType().equalsIgnoreCase(RewardType.GACHA_CREDITS.name())) {
 				gachaCreditsReward += r.getAmt();
+			}
+		}
 		return gachaCreditsReward;
+	}
 //	//monsterIdsToNumPieces or completeUserMonsters will be populated
 //	public static String createUpdateUserMonsterArguments(String userId,
 //			int boosterPackId, List<BoosterItem> boosterItems,
@@ -90,7 +87,7 @@ public class BoosterItemUtils {
 //		sb.append(boosterPackId);
 //		sb.append(" boosterItemIds ");
 //	}
-		
+
 //	public List<ItemForUser> awardBoosterItemItemRewards(String userId,
 //			List<BoosterItem> itemsUserReceives,
 //			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -167,7 +164,7 @@ public class BoosterItemUtils {
 
 		return itemsUserReceives;
 	}
-	
+
 	private float sumProbabilities(Collection<BoosterItem> boosterItems) {
 		float sumOfProbabilities = 0.0f;
 		for (BoosterItem bi : boosterItems) {
@@ -177,7 +174,7 @@ public class BoosterItemUtils {
 	}
 
 	private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
-			float sumOfProbabilities, 
+			float sumOfProbabilities,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
 		Random rand = new Random();
 		float unnormalizedProbabilitySoFar = 0f;

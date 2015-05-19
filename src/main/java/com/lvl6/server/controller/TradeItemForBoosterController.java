@@ -24,19 +24,16 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
-import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
-import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
@@ -51,12 +48,10 @@ import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
-import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -92,7 +87,7 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
 
@@ -107,13 +102,13 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
-	
+
 	@Autowired
 	protected BoosterItemUtils boosterItemUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
@@ -169,7 +164,7 @@ public class TradeItemForBoosterController extends EventController {
 		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		//TODO: Logic similar to PurchaseBoosterPack, see what else can be optimized/shared
 		try {
-			User aUser = getUserRetrieveUtils().getUserById(
+			User aUser = userRetrieveUtils.getUserById(
 					senderProto.getUserUuid());
 			Item itm = itemRetrieveUtils.getItemForId(itemId);
 			//TODO: Consider writing currency history and other history
@@ -199,10 +194,10 @@ public class TradeItemForBoosterController extends EventController {
 				log.info("determining the booster items the user receives.");
 				itemsUserReceives = boosterItemUtils
 						.determineBoosterItemsUserReceives(
-								numBoosterItemsUserWants, idsToBoosterItems, 
+								numBoosterItemsUserWants, idsToBoosterItems,
 								serverToggleRetrieveUtils);
 
-				legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives, 
+				legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives,
 						monsterRetrieveUtils, rewardRetrieveUtils);
 			}
 
@@ -377,14 +372,14 @@ public class TradeItemForBoosterController extends EventController {
 		boolean updated = user.updateBoughtBoosterPack(gemReward, gachaCreditsReward, now, false,
 				rigged);
 		log.info("updated, user bought boosterPack? {}", updated);
-		
+
 		List<Reward> listOfRewards = new ArrayList<Reward>();
 		for(BoosterItem bi : itemsUserReceives) {
 			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
 			listOfRewards.add(r);
 		}
-		
-		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, now, 
+
+		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, now,
 				"trade item for booster", listOfRewards, userRetrieveUtils, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils);
 		ara.execute();
@@ -407,7 +402,7 @@ public class TradeItemForBoosterController extends EventController {
         log.info("proto for reward: " + urp);
         resBuilder.setRewards(urp);
     }
-    
+
 	private void writeToUserCurrencyHistory(User aUser, int packId,
 			Timestamp date, int previousGems, List<BoosterItem> items,
 			int gemReward) {
@@ -463,3 +458,6 @@ public class TradeItemForBoosterController extends EventController {
 //		int num = insertUtil.insertIntoBoosterPackPurchaseHistory(
 //				userId, boosterPackId, timeOfPurchase, bi, userMonsterIds);
 //
+	}
+
+}
