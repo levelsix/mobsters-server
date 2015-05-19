@@ -186,6 +186,8 @@ message StartupResponseProto {
 		optional TournamentConstants touramentConstants = 12;
 		optional int32 fbConnectRewardDiamonds = 13;
 		optional string faqFileName = 14;
+		optional string creditsFileName = 44;
+		
 		optional MinimumUserProto adminChatUserProto = 15;
 		optional int32 numBeginnerSalesAllowed = 16;
 		
@@ -237,12 +239,14 @@ message StartupResponseProto {
 		repeated FileDownloadConstantProto fileDownloadProto = 40;
 		
 		optional int32 taskIdForUpgradeTutorial = 41;
-				
-		optional BoosterPackConstantsProto boosterPackConstantProto = 500;
 		
 		//when inviting tango friends, every friend deleted, subtract one from tangoMaxGemReward, min is tangoMinGemReward
 		optional int32 tangoMaxGemReward = 42;
 		optional int32 tangoMinGemReward = 43;
+		
+		//optional string creditsFileName = 44; defined above
+				
+		optional BoosterPackConstantsProto boosterPackConstantProto = 500;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;

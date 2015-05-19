@@ -497,6 +497,7 @@ public class MiscMethods {
 		//SET TOURNAMENT CONSTANTS HERE
 
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
+		cb.setFaqFileName(ControllerConstants.STARTUP__CREDITS_FILE_NAME);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
 
 		User adminChatUser = startupStuffRetrieveUtils.getAdminChatUser();
@@ -621,13 +622,13 @@ public class MiscMethods {
 			}
 
 		}
-		
+
 		BoosterPackConstantsProto.Builder bpcpb = BoosterPackConstantsProto.newBuilder();
 		bpcpb.setPurchaseAmountRequired(ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE);
 		bpcpb.setNumberOfPacksGiven(ControllerConstants.BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE);
-		
+
 		cb.setBoosterPackConstantProto(bpcpb.build());
-		
+
 		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
 
 		cb.setTangoMaxGemReward(ControllerConstants.TANGO__INVITE_TANGO_FRIENDS_MAX_GEM_REWARD);
