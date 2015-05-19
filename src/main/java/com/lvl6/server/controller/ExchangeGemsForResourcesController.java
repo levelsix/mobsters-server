@@ -64,6 +64,8 @@ public class ExchangeGemsForResourcesController extends EventController {
 		ExchangeGemsForResourcesRequestProto reqProto = ((ExchangeGemsForResourcesRequestEvent) event)
 				.getExchangeGemsForResourcesRequestProto();
 
+		log.info("reqProto: ", reqProto);
+		
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
 				.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
