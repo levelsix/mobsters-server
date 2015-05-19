@@ -182,7 +182,7 @@ public class ControllerConstants {
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
 			720, 1440000 };
 
-	
+
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
 			ResourceType.CASH.name(), ResourceType.OIL.name(), ResourceType.GACHA_CREDITS.name() };
 
@@ -605,6 +605,7 @@ public class ControllerConstants {
 	"Happy birthday AoC! Buildings will make silver twice as fast all week long!" };
 
 	public static final int STARTUP__QUEST_ID_FOR_FIRST_LOSS_TUTORIAL = 326;
+	public static final String STARTUP__CREDITS_FILE_NAME = "FAQ.3.txt";
 	public static final String STARTUP__FAQ_FILE_NAME = "FAQ.3.txt";
 
 	public static final String NIB_NAME__LOCK_BOX = "LockBox.4";
