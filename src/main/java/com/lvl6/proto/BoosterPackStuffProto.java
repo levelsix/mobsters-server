@@ -5020,34 +5020,6 @@ public final class BoosterPackStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026BoosterPackStuff.proto\022\016com.lvl6.proto" +
-<<<<<<< HEAD
-      "\032\014Reward.proto\032\026SharedEnumConfig.proto\032\n" +
-      "User.proto\"\250\001\n\030RareBoosterPurchaseProto\022" +
-      ".\n\004user\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\0221\n\007booster\030\002 \001(\0132 .com.lvl6.prot" +
-      "o.BoosterPackProto\022\026\n\016timeOfPurchase\030\003 \001" +
-      "(\004\022\021\n\tmonsterId\030\004 \001(\005\"\201\004\n\020BoosterPackPro" +
-      "to\022\025\n\rboosterPackId\030\001 \001(\005\022\027\n\017boosterPack" +
-      "Name\030\002 \001(\t\022\020\n\010gemPrice\030\003 \001(\005\022\031\n\021gachaCre" +
-      "ditsPrice\030\014 \001(\005\0226\n\014specialItems\030\004 \003(\0132 .",
-      "com.lvl6.proto.BoosterItemProto\022\035\n\025listB" +
-      "ackgroundImgName\030\005 \001(\t\022\027\n\017listDescriptio" +
-      "n\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTit" +
-      "leImgName\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022" +
-      "=\n\014displayItems\030\n \003(\0132\'.com.lvl6.proto.B" +
-      "oosterDisplayItemProto\022G\n\004type\030\013 \001(\01620.c" +
-      "om.lvl6.proto.BoosterPackProto.BoosterPa" +
-      "ckType:\007NO_TYPE\"P\n\017BoosterPackType\022\013\n\007NO" +
-      "_TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010ULTIMATE\020\003\022\013\n\007STAR" +
-      "TER\020\004\022\n\n\006RIGGED\020\005\"\230\001\n\020BoosterItemProto\022\025",
-      "\n\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPackId\030\002" +
-      " \001(\005\022\021\n\tisSpecial\030\006 \001(\010\022\026\n\016chanceToAppea" +
-      "r\030\t \001(\002\022+\n\006reward\030\n \001(\0132\033.com.lvl6.proto" +
-      ".RewardProto\"]\n\027BoosterDisplayItemProto\022" +
-      "\025\n\rboosterPackId\030\001 \001(\005\022+\n\006reward\030\002 \001(\0132\033" +
-      ".com.lvl6.proto.RewardProtoB\027B\025BoosterPa" +
-      "ckStuffProto"
-=======
       "\032\014Reward.proto\032\nUser.proto\"\250\001\n\030RareBoost" +
       "erPurchaseProto\022.\n\004user\030\001 \001(\0132 .com.lvl6" +
       ".proto.MinimumUserProto\0221\n\007booster\030\002 \001(\013" +
@@ -5073,7 +5045,6 @@ public final class BoosterPackStuffProto {
       "isplayItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022+" +
       "\n\006reward\030\002 \001(\0132\033.com.lvl6.proto.RewardPr" +
       "otoB\027B\025BoosterPackStuffProto"
->>>>>>> adding in gacha credits price to BoosterPackProto
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

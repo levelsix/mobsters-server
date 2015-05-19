@@ -5142,8 +5142,6 @@ public class CreateInfoProtoUtils {
 		int gachaCredits = u.getGachaCredits();
 		builder.setGachaCredits(gachaCredits);
 
-		int gachaCredits = u.getGachaCredits();
-		builder.setGachaCredits(gachaCredits);
 
 		//don't add setting new columns/properties here, add up above
 
