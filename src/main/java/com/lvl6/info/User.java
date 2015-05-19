@@ -930,7 +930,7 @@ public class User implements Serializable {
 
 	}
 
-	public boolean updateBoughtBoosterPack(int gemChange, int gachaCreditsChange, 
+	public boolean updateBoughtBoosterPack(int gemChange, int gachaCreditsChange,
 			Date now, boolean freeBoosterPack, boolean riggedBoosterPack) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
