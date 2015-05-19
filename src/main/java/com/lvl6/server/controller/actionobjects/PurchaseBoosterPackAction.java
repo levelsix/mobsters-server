@@ -129,6 +129,7 @@ public class PurchaseBoosterPackAction {
 	private int gachaCreditsReward;
 	
 
+
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
