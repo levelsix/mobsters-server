@@ -170,26 +170,28 @@ public class AwardRewardAction {
 				new HashMap<String, Map<Integer,Integer>>();
 		for (Reward r : rewards) {
 			int id = r.getId();
-			int staticDataId = r.getStaticDataId();
 			String type = r.getType();
+			int staticDataId = r.getStaticDataId();
 			int amt = r.getAmt();  //amount means nothing for clan gifts
 
 			if (RewardType.REWARD.name().equals(type)) {
 				log.info("recursive reward: old={}", r);
-				r = rewardRetrieveUtil.getRewardById(staticDataId);
-				id = r.getId();
-				staticDataId = r.getStaticDataId();
-				type = r.getType();
-				amt = amt * r.getAmt();
 
-				log.info("recursive reward: new={}", r);
+				Reward actualReward = rewardRetrieveUtil.getRewardById(staticDataId);
+				id = actualReward.getId();
+				type = actualReward.getType();
+				staticDataId = actualReward.getStaticDataId();
+				amt = actualReward.getAmt();
+				for (int i = 0; i < amt; i++) {
+					processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
+							itemIdToQuantity, resourceTypeToRewardIdToAmt, actualReward,
+							id, type, staticDataId, amt);
+				}
+			} else {
+				processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
+						itemIdToQuantity, resourceTypeToRewardIdToAmt, r, id, type,
+						staticDataId, amt);
 			}
-			log.info("awarding {} \t id={}, staticDataId={}, type={}, amt={}",
-					new Object[] { r, id, staticDataId, type, amt } );
-			processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
-					itemIdToQuantity, resourceTypeToRewardIdToAmt, r, id, type,
-					staticDataId, amt);
-
 		}
 
 		boolean success = awardItems(itemIdToQuantity);
