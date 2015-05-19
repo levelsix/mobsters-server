@@ -378,7 +378,7 @@ public class InAppPurchaseController extends EventController {
                         "successful in-app purchase from user {} for package {}",
                         userId, packageName);
 
-                log.info("isSalesPack: ", isSalesPack);
+                log.info("isSalesPack: {}", isSalesPack);
 				Timestamp date = new Timestamp(now.getTime());
 
 				if(isMoneyTree) {
