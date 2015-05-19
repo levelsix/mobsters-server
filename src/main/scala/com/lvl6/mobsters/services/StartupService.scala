@@ -12,7 +12,6 @@ import java.util.UUID
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
-import com.lvl6.server.concurrent.FutureThreadPool.ec
 import scala.concurrent.Future
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
@@ -26,6 +25,7 @@ import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.info.AchievementForUser
 import com.lvl6.info.Clan
 import com.lvl6.info.ClanEventPersistentUserReward
+import com.lvl6.info.ClanGiftForUser
 import com.lvl6.info.ItemForUser
 import com.lvl6.info.ItemSecretGiftForUser
 import com.lvl6.info.MiniJobForUser
@@ -72,6 +72,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2
+import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
 import com.lvl6.retrieveutils.ClanRetrieveUtils2
@@ -123,6 +124,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.server.EventWriter
 import com.lvl6.server.GameServer
 import com.lvl6.server.Locker
+import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
@@ -148,9 +150,6 @@ import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
-import com.lvl6.proto.ChatProto.ChatScope
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
-import com.lvl6.info.ClanGiftForUser
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -168,8 +167,8 @@ case class StartupData(
 		apsalarId:String,
 		newNumConsecutiveDaysLoggedIn:Int,
 		freshRestart:Boolean)
-		@Component
-		class StartupService extends LazyLogging{
+@Component
+class StartupService extends LazyLogging{
 
 	@Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
 	@Autowired var  battleItemQueueForUserRetrieveUtil : BattleItemQueueForUserRetrieveUtil = null
@@ -231,17 +230,17 @@ case class StartupData(
 	@Autowired var  serverToggleRetrieveUtil : ServerToggleRetrieveUtils = null
 	@Autowired var  startupStuffRetrieveUtil : StartupStuffRetrieveUtils = null
 
-			@Autowired var  createInfoProtoUtils : CreateInfoProtoUtils = null
-			@Autowired var  deleteUtil : DeleteUtil = null
-			@Autowired var  insertUtil : InsertUtil = null
-			@Autowired var  updateUtil : UpdateUtil = null
-			@Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
-			@Autowired var  monsterStuffUtil : MonsterStuffUtils = null
-			@Autowired var  secretGiftUtil : SecretGiftUtils = null
-			@Autowired var  timeUtils : TimeUtils  = null
-			@Autowired var  miscMethods: MiscMethods = null
-			@Autowired var  locker :  Locker = null
-			@Autowired var  eventWriter:EventWriter = null
+	@Autowired var  createInfoProtoUtils : CreateInfoProtoUtils = null
+	@Autowired var  deleteUtil : DeleteUtil = null
+	@Autowired var  insertUtil : InsertUtil = null
+	@Autowired var  updateUtil : UpdateUtil = null
+	@Autowired var  hazelcastPvpUtil : HazelcastPvpUtil  = null
+	@Autowired var  monsterStuffUtil : MonsterStuffUtils = null
+	@Autowired var  secretGiftUtil : SecretGiftUtils = null
+	@Autowired var  timeUtils : TimeUtils  = null
+	@Autowired var  miscMethods: MiscMethods = null
+	@Autowired var  locker :  Locker = null
+	@Autowired var  eventWriter:EventWriter = null
 
 	@Autowired var globals:Globals = null
 	@Resource(name = "globalChat") var chatMessages : IList[GroupChatMessageProto] = null
@@ -249,7 +248,6 @@ case class StartupData(
 
 	//TODO: Refactor GameServer class
 	@Autowired var  server:GameServer = null
-
 
 	def startup(event:RequestEvent)={
 		val reqProto = (event.asInstanceOf[StartupRequestEvent]).getStartupRequestProto();
@@ -347,8 +345,8 @@ case class StartupData(
 			val clientMajorEqual = majorNum == serverMajorNum;
 			val clientMinorGreater = minorNum > serverMinorNum;
 			if (clientSuperGreater
-					|| (clientSuperEqual && clientMajorGreater)
-					|| (clientSuperEqual && clientMajorEqual && clientMinorGreater))
+				|| (clientSuperEqual && clientMajorGreater)
+				|| (clientSuperEqual && clientMajorEqual && clientMinorGreater))
             {
 				val preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
 				logger.error(s"$preface clientVersion=$superNum.$majorNum.$minorNum \t serverVersion=$serverSuperNum.$serverMajorNum.$serverMinorNum")
@@ -383,25 +381,25 @@ case class StartupData(
 	}
 
 
-	def selectUser(users:java.util.List[User], udid: String , fbId: String ):User = {
-		var numUsers = users.size();
-		if (numUsers > 2)   logger.error(s"more than 2 users with same udid, fbId. udid=$udid, fbId=$fbId, users=$users")
-		if (1 == numUsers) return users.get(0)
-				var udidUser:User = null;
-		users.foreach{ u =>
-		val userFbId = u.getFacebookId();
-		val userUdid = u.getUdid();
-		if (fbId != null && fbId.equals(userFbId)) {
-			return u;
-		} else if (null == udidUser && udid != null  && udid.equals(userUdid)) {
-			//so this is the first user with specified udid, don't change reference
-			//to this user once set
-			udidUser = u;
-		}
-		}
-		//didn't find user with specified fbId
-		return udidUser;
-	}
+    def selectUser(users:java.util.List[User], udid: String , fbId: String ):User = {
+    	var numUsers = users.size();
+    	if (numUsers > 2)   logger.error(s"more than 2 users with same udid, fbId. udid=$udid, fbId=$fbId, users=$users")
+    	if (1 == numUsers) return users.get(0)
+    	var udidUser:User = null;
+        users.foreach{ u =>
+        	val userFbId = u.getFacebookId();
+        	val userUdid = u.getUdid();
+        	if (fbId != null && fbId.equals(userFbId)) {
+        		return u;
+        	} else if (null == udidUser && udid != null  && udid.equals(userUdid)) {
+        		//so this is the first user with specified udid, don't change reference
+                //to this user once set
+        		udidUser = u;
+        	}
+        }
+    	//didn't find user with specified fbId
+    	return udidUser;
+    }
 
 	def tutorialUserAccounting(reqProto:StartupRequestProto , udid:String , now:Timestamp )= {
 		timed("StartupService.tutorialUserAccounting"){
@@ -441,7 +439,7 @@ case class StartupData(
 		try {
 			//force other devices on this account to logout
 			forceLogoutOthers(udid, playerId, user, fbId)
-			logger.info(s"no major update... getting user info")
+			logger.info("no major update... getting user info")
 			val userId = playerId;
 
 			//NOTE: will only ever be executed once for each user
@@ -484,7 +482,7 @@ case class StartupData(
 
 		}catch{
 			case t:Throwable => logger.error(s"", t)
-					loginFinished(playerId)
+			loginFinished(playerId)
 		}
 	}
 
@@ -509,92 +507,92 @@ case class StartupData(
 
 				if(tsfuList == null || tsfuList.isEmpty()) {
 					insertUtil.insertTranslateSettings(
-							playerId, 
-							null,
-							ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
-							ChatScope.GLOBAL.toString(),
-							ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
+						playerId, 
+						null,
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE,
+						ChatScope.GLOBAL.toString(),
+						ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON);
 					tsfuListIsNull = true;
 				}
 
 				val updatedTsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(playerId);
 
 				val spcma = new SetPrivateChatMessageAction(
-						resBuilder, 
-						user, 
-						playerId,
-						privateChatPostRetrieveUtils, 
-						tsfuListIsNull, 
-						insertUtil,
-						createInfoProtoUtils, 
-						translationSettingsForUserRetrieveUtil,
-						updatedTsfuList);
+					resBuilder, 
+					user, 
+					playerId,
+					privateChatPostRetrieveUtils, 
+					tsfuListIsNull, 
+					insertUtil,
+					createInfoProtoUtils, 
+					translationSettingsForUserRetrieveUtil,
+					updatedTsfuList);
 				spcma.setUp(fillMe);
 
 				val sfesa = new SetFacebookExtraSlotsAction(
-						resBuilder, 
-						user, 
-						playerId,
-						userFacebookInviteForSlotRetrieveUtils,
-						createInfoProtoUtils);
+					resBuilder, 
+					user, 
+					playerId,
+					userFacebookInviteForSlotRetrieveUtils,
+					createInfoProtoUtils);
 				sfesa.setUp(fillMe);
 
 				val spbha = new SetPvpBattleHistoryAction(
-						resBuilder, 
-						user, 
-						playerId, 
-						pvpBattleHistoryRetrieveUtil,
-						monsterForUserRetrieveUtils, 
-						clanRetrieveUtils,
-						hazelcastPvpUtil,
-						monsterStuffUtil,
-						createInfoProtoUtils,
-						serverToggleRetrieveUtil,
-						monsterLevelInfoRetrieveUtil);
+					resBuilder, 
+					user, 
+					playerId, 
+					pvpBattleHistoryRetrieveUtil,
+					monsterForUserRetrieveUtils, 
+					clanRetrieveUtils,
+					hazelcastPvpUtil,
+					monsterStuffUtil,
+					createInfoProtoUtils,
+					serverToggleRetrieveUtil,
+					monsterLevelInfoRetrieveUtil);
 				spbha.setUp(fillMe);
 
 				//CLAN DATA
 				val cdpb = ClanDataProto.newBuilder();
 				val sccma = new SetClanChatMessageAction(
-						cdpb,
-						user,
-						clanChatPostRetrieveUtils,
-						createInfoProtoUtils);
+					cdpb,
+					user,
+					clanChatPostRetrieveUtils,
+					createInfoProtoUtils);
 				sccma.setUp(fillMe);
 
 				val scha = new SetClanHelpingsAction(
-						cdpb,
-						user,
-						playerId,
-						clanHelpRetrieveUtil,
-						createInfoProtoUtils);
+					cdpb,
+					user,
+					playerId,
+					clanHelpRetrieveUtil,
+					createInfoProtoUtils);
 				scha.setUp(fillMe);
 
 				val scra = new SetClanRetaliationsAction(
-						cdpb,
-						user,
-						playerId,
-						clanAvengeRetrieveUtil,
-						clanAvengeUserRetrieveUtil,
-						createInfoProtoUtils);
+					cdpb,
+					user,
+					playerId,
+					clanAvengeRetrieveUtil,
+					clanAvengeUserRetrieveUtil,
+					createInfoProtoUtils);
 				scra.setUp(fillMe);
 
 				val scmtda = new SetClanMemberTeamDonationAction(
-						cdpb, 
-						user, 
-						playerId, 
-						clanMemberTeamDonationRetrieveUtil,
-						monsterSnapshotForUserRetrieveUtil,
-						createInfoProtoUtils);
+					cdpb, 
+					user, 
+					playerId, 
+					clanMemberTeamDonationRetrieveUtil,
+					monsterSnapshotForUserRetrieveUtil,
+					createInfoProtoUtils);
 				scmtda.setUp(fillMe);
 
 				//SETTING CLAN GIFTS, it adds protos straight to resbuilder
 				val scga = new SetClanGiftsAction(
-						resBuilder,
-						user,
-						playerId,
-						clanGiftForUserRetrieveUtil,
-						createInfoProtoUtils);
+					resBuilder,
+					user,
+					playerId,
+					clanGiftForUserRetrieveUtil,
+					createInfoProtoUtils);
 				scga.setUp(fillMe);
 
 				//Now since all the ids of resources are known, get them from db
@@ -627,7 +625,7 @@ case class StartupData(
 				resBuilder.setSender(fup);
 				finishStartup(sd)
 			}catch{
-			    case t:Throwable => logger.error("Error finishing login for user: $playerId", t)
+			    case t:Throwable => logger.error(s"Error finishing login for user: $playerId", t)
 			}finally {
 				loginFinished(playerId)
 			}
@@ -781,7 +779,7 @@ case class StartupData(
 								logger.info(s"numDeleted enhancements: $numDeleted")
 							}
 						}catch{
-						    case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
+						    case t:Throwable => logger.error("unable to delete orphaned enhancements", t)
 						}
 					}else {
 						val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
@@ -870,7 +868,7 @@ case class StartupData(
 				resBuilder.addCurTaskStages(tsp)
 			}
 		}catch{
-		    case t:Throwable => logger.error(s"could not create existing task, letting it get deleted when user starts another task", t)
+		    case t:Throwable => logger.error("could not create existing task, letting it get deleted when user starts another task", t)
 		}
 	}
 
@@ -957,81 +955,81 @@ case class StartupData(
 			    invalidUuids = true
 			}
 		    if (invalidUuids) return
-				//only lock real users
-				if (null != defenderUuid)  locker.lockPlayer(defenderUuid, this.getClass().getSimpleName())
-				try {
-					var attackerEloBefore = attackerPlfu.getElo();
-					var defenderEloBefore = 0;
-					var attackerPrevLeague = attackerPlfu.getPvpLeagueId();
-					var attackerCurLeague = 0;
-					var defenderPrevLeague = 0;
-					var defenderCurLeague = 0;
-					var attackerPrevRank = attackerPlfu.getRank();
-					var attackerCurRank = 0;
-					var defenderPrevRank = 0;
-					var defenderCurRank = 0;
+			//only lock real users
+			if (null != defenderUuid)  locker.lockPlayer(defenderUuid, this.getClass().getSimpleName())
+			try {
+				var attackerEloBefore = attackerPlfu.getElo();
+				var defenderEloBefore = 0;
+				var attackerPrevLeague = attackerPlfu.getPvpLeagueId();
+				var attackerCurLeague = 0;
+				var defenderPrevLeague = 0;
+				var defenderCurLeague = 0;
+				var attackerPrevRank = attackerPlfu.getRank();
+				var attackerCurRank = 0;
+				var defenderPrevRank = 0;
+				var defenderCurRank = 0;
 
-					var attackerCurElo = attackerPlfu.getElo + eloAttackerLoses
-							attackerCurLeague = pvpLeagueRetrieveUtil.getLeagueIdForElo(attackerCurElo, attackerPrevLeague)
-							attackerCurRank = pvpLeagueRetrieveUtil.getRankForElo(attackerCurElo, attackerCurLeague);
-					var attacksLost = attackerPlfu.getAttacksLost+1
+				var attackerCurElo = attackerPlfu.getElo + eloAttackerLoses
+				attackerCurLeague = pvpLeagueRetrieveUtil.getLeagueIdForElo(attackerCurElo, attackerPrevLeague)
+				attackerCurRank = pvpLeagueRetrieveUtil.getRankForElo(attackerCurElo, attackerCurLeague);
+				var attacksLost = attackerPlfu.getAttacksLost+1
 
-					var numUpdated = updateUtil.updatePvpLeagueForUser(userId,
-							attackerCurLeague, attackerCurRank, eloAttackerLoses, null, null, 0, 0, 1, 0, -1);
-					logger.info(s"num updated when changing attackers elo because of reset=$numUpdated")
+				var numUpdated = updateUtil.updatePvpLeagueForUser(userId,
+				attackerCurLeague, attackerCurRank, eloAttackerLoses, null, null, 0, 0, 1, 0, -1);
+				logger.info(s"num updated when changing attackers elo because of reset=$numUpdated")
 
-					attackerPlfu.setElo(attackerCurElo);
-					attackerPlfu.setPvpLeagueId(attackerCurLeague);
-					attackerPlfu.setRank(attackerCurRank);
-					attackerPlfu.setAttacksLost(attacksLost);
-					val attackerPu = new PvpUser(attackerPlfu);
-					hazelcastPvpUtil.replacePvpUser(attackerPu, userId);
+				attackerPlfu.setElo(attackerCurElo);
+				attackerPlfu.setPvpLeagueId(attackerCurLeague);
+				attackerPlfu.setRank(attackerCurRank);
+				attackerPlfu.setAttacksLost(attacksLost);
+				val attackerPu = new PvpUser(attackerPlfu);
+				hazelcastPvpUtil.replacePvpUser(attackerPu, userId);
 
-					if(defenderId != null) {
-						val defenderPlfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(defenderId);
+				if(defenderId != null) {
+					val defenderPlfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(defenderId);
 
-						defenderEloBefore = defenderPlfu.getElo();
-						defenderPrevLeague = defenderPlfu.getPvpLeagueId();
-						defenderPrevRank = defenderPlfu.getRank();
-						//update hazelcast map and ready arguments for pvp battle history
-						var defenderCurElo = defenderEloBefore + eloDefenderWins;
-						defenderCurLeague = pvpLeagueRetrieveUtil.getLeagueIdForElo(defenderCurElo, defenderPrevLeague);
-						defenderCurRank = pvpLeagueRetrieveUtil.getRankForElo(defenderCurElo, defenderCurLeague);
+					defenderEloBefore = defenderPlfu.getElo();
+					defenderPrevLeague = defenderPlfu.getPvpLeagueId();
+					defenderPrevRank = defenderPlfu.getRank();
+					//update hazelcast map and ready arguments for pvp battle history
+					var defenderCurElo = defenderEloBefore + eloDefenderWins;
+					defenderCurLeague = pvpLeagueRetrieveUtil.getLeagueIdForElo(defenderCurElo, defenderPrevLeague);
+					defenderCurRank = pvpLeagueRetrieveUtil.getRankForElo(defenderCurElo, defenderCurLeague);
 
-						var defensesWon = defenderPlfu.getDefensesWon() + 1;
+					var defensesWon = defenderPlfu.getDefensesWon() + 1;
 
-						numUpdated = updateUtil.updatePvpLeagueForUser(defenderId, defenderCurLeague, defenderCurRank, eloDefenderWins, null, null, 0, 1, 0, 0, -1);
-						logger.info(s"num updated when changing defender's elo because of reset=$numUpdated");
+					numUpdated = updateUtil.updatePvpLeagueForUser(defenderId, defenderCurLeague, defenderCurRank, eloDefenderWins, null, null, 0, 1, 0, 0, -1);
+					logger.info(s"num updated when changing defender's elo because of reset=$numUpdated");
 
-						defenderPlfu.setElo(defenderCurElo);
-						defenderPlfu.setPvpLeagueId(defenderCurLeague);
-						defenderPlfu.setRank(defenderCurRank);
-						defenderPlfu.setDefensesWon(defensesWon);
-						var defenderPu = new PvpUser(defenderPlfu);
-						hazelcastPvpUtil.replacePvpUser(defenderPu, defenderId);
-					}
-					var attackerWon = false;
-					var cancelled = false;
-					var defenderGotRevenge = false;
-					var displayToDefender = true;
-					var numInserted = insertUtil.insertIntoPvpBattleHistory(
-						userId, defenderId, battleEndTime, battleStartTime,
-						eloAttackerLoses, attackerEloBefore, eloDefenderWins,
-						defenderEloBefore, attackerPrevLeague, attackerCurLeague,
-						defenderPrevLeague, defenderCurLeague, attackerPrevRank,
-						attackerCurRank, defenderPrevRank, defenderCurRank, 0, 0,
-						0, 0, -1, attackerWon, cancelled, defenderGotRevenge,
-						displayToDefender);
-
-					logger.info(s"numInserted into battle history=$numInserted");
-					//delete that this battle occurred
-					val numDeleted = deleteUtil.deletePvpBattleForUser(userId);
-					logger.info(s"successfully penalized, rewarded attacker and defender respectively. battle=$battle, numDeleted=$numDeleted");
-				}catch{
-				    case t:Throwable => logger.error(s"tried to penalize, reward attacker and defender respectively. battle=$battle", t);
-				} finally {
-					if (null != defenderUuid) locker.unlockPlayer(defenderUuid, this.getClass().getSimpleName())
+					defenderPlfu.setElo(defenderCurElo);
+					defenderPlfu.setPvpLeagueId(defenderCurLeague);
+					defenderPlfu.setRank(defenderCurRank);
+					defenderPlfu.setDefensesWon(defensesWon);
+					var defenderPu = new PvpUser(defenderPlfu);
+					hazelcastPvpUtil.replacePvpUser(defenderPu, defenderId);
 				}
+				var attackerWon = false;
+				var cancelled = false;
+				var defenderGotRevenge = false;
+				var displayToDefender = true;
+				var numInserted = insertUtil.insertIntoPvpBattleHistory(
+					userId, defenderId, battleEndTime, battleStartTime,
+					eloAttackerLoses, attackerEloBefore, eloDefenderWins,
+					defenderEloBefore, attackerPrevLeague, attackerCurLeague,
+					defenderPrevLeague, defenderCurLeague, attackerPrevRank,
+					attackerCurRank, defenderPrevRank, defenderCurRank, 0, 0,
+					0, 0, -1, attackerWon, cancelled, defenderGotRevenge,
+					displayToDefender);
+
+				logger.info(s"numInserted into battle history=$numInserted");
+				//delete that this battle occurred
+				val numDeleted = deleteUtil.deletePvpBattleForUser(userId);
+				logger.info(s"successfully penalized, rewarded attacker and defender respectively. battle=$battle, numDeleted=$numDeleted");
+			}catch{
+			    case t:Throwable => logger.error(s"tried to penalize, reward attacker and defender respectively. battle=$battle", t);
+			} finally {
+				if (null != defenderUuid) locker.unlockPlayer(defenderUuid, this.getClass().getSimpleName())
+			}
 	    }
 	}
 
@@ -1424,38 +1422,38 @@ case class StartupData(
 		def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
 			Future{
 				timed("StartupService.setClanRaidStuff"){
-				val nowDate = new Date(now.getTime());
-				val clanId = user.getClanId();
-				if (clanId != null) {
-					//get the clan raid information for the clan
-					val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
-					if (null != cepfc) {
-						val pcecip = createInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
-						resBuilder.setCurRaidClanInfo(pcecip);
-						//get the clan raid information for all the clan users
-						//shouldn't be null (per the retrieveUtils)
-						val userIdToCepfu = clanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
-						logger.info(s"the users involved in clan raid:$userIdToCepfu");
-						if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
-							logger.info(s"no users involved in clan raid. clanRaid=$cepfc");
-						}else {
-							val userMonsterIds = monsterStuffUtil.getUserMonsterIdsInClanRaid(userIdToCepfu);
-							//TODO: when retrieving clan info, and user's current teams, maybe query for
-							//these monsters as well
-							val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
-							userIdToCepfu.values.foreach { cepfu =>
-								val pceuip = createInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
-								resBuilder.addCurRaidClanUserInfo(pceuip);
-							}
-							setClanRaidHistoryStuff(resBuilder, userId, nowDate);
-						}
-					}else {
-						logger.info(s"no clan raid stuff existing for clan=$clanId, user=$user");
-					}
-				}
-			}
-		}
-	}
+    				val nowDate = new Date(now.getTime());
+    				val clanId = user.getClanId();
+    				if (clanId != null) {
+    					//get the clan raid information for the clan
+    					val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
+    					if (null != cepfc) {
+    						val pcecip = createInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
+    						resBuilder.setCurRaidClanInfo(pcecip);
+    						//get the clan raid information for all the clan users
+    						//shouldn't be null (per the retrieveUtils)
+    						val userIdToCepfu = clanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+    						logger.info(s"the users involved in clan raid:$userIdToCepfu");
+    						if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+    							logger.info(s"no users involved in clan raid. clanRaid=$cepfc");
+    						}else {
+    							val userMonsterIds = monsterStuffUtil.getUserMonsterIdsInClanRaid(userIdToCepfu);
+    							//TODO: when retrieving clan info, and user's current teams, maybe query for
+    							//these monsters as well
+    							val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
+    							userIdToCepfu.values.foreach { cepfu =>
+    								val pceuip = createInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+    								resBuilder.addCurRaidClanUserInfo(pceuip);
+    							}
+    							setClanRaidHistoryStuff(resBuilder, userId, nowDate);
+    						}
+    					}else {
+    						logger.info(s"no clan raid stuff existing for clan=$clanId, user=$user");
+    					}
+    				}
+    			}
+    		}
+    	}
 
 
 	def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
@@ -1517,7 +1515,7 @@ case class StartupData(
 				var responseString = Stream.continually(rd.readLine()).takeWhile(_ != null).mkString("\n")
 				logger.info(s"Received response: $responseString");
 			} catch {
-			case t:Throwable => logger.error("failed to make offer chart call", t);
+			    case t:Throwable => logger.error("failed to make offer chart call", t);
 			}
 		}
 	}
@@ -1543,8 +1541,8 @@ case class StartupData(
 					+ newNumConsecutiveDaysLoggedIn);
 		}
 		if (!insertUtil.insertLastLoginLastLogoutToUserSessions(user.getId(), loginTime, null)) {
-			logger.error("problem with inserting last login time for user " + user
-					+ ", loginTime=" + loginTime);
+			logger.error("problem with inserting last login time for user {}, loginTime={}",
+                    user, loginTime);
 		}
 	}
 
