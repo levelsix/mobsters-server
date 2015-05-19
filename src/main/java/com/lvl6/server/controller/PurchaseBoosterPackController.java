@@ -23,7 +23,6 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
