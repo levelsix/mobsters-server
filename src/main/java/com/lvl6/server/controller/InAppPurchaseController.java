@@ -346,7 +346,8 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseMoneyTreeAction iapmta = null;
             boolean isMoneyTree = false;
             boolean isSalesPack = false;
-
+            boolean isGachaMultiSpin = false;
+            
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
                 iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
@@ -368,6 +369,10 @@ public class InAppPurchaseController extends EventController {
                         userClanRetrieveUtil, userRetrieveUtil);
 
                 iapsa.execute(resBuilder);
+            }
+            else if(IAPValues.packageIsGachaMultiSpin(packageName)) {
+            	isGachaMultiSpin = true;
+            	
             }
             else {
                 iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,

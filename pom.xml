@@ -275,6 +275,7 @@
 									<jpaAnnotations>true</jpaAnnotations>
 									<validationAnnotations>true</validationAnnotations>
 									<fluentSetters>true</fluentSetters>
+									<unsignedTypes>false</unsignedTypes>
 								</generate>
 								<target>
 									<packageName>com.lvl6.mobsters.db.jooq.generated</packageName>
