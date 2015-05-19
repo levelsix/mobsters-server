@@ -30,7 +30,9 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -54,10 +56,16 @@ public class RedeemMiniJobController extends EventController {
 	protected MiscMethods miscMethods;
 
 	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	@Autowired
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
+
+	@Autowired
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -153,10 +161,12 @@ public class RedeemMiniJobController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			RedeemMiniJobAction rmja = new RedeemMiniJobAction(userId, userMiniJobId, clientTime,
+					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtils, itemForUserRetrieveUtil,
 					deleteUtil, updateUtil, insertUtil, miniJobForUserRetrieveUtil,
 					miniJobRetrieveUtils, monsterStuffUtils, monsterForUserRetrieveUtils, umchpList,
-					monsterLevelInfoRetrieveUtils, rewardRetrieveUtils);
+					monsterLevelInfoRetrieveUtils, rewardRetrieveUtils,
+					createInfoProtoUtils);
 
 			rmja.execute(resBuilder);
 

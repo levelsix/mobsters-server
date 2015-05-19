@@ -20,9 +20,11 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -30,6 +32,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -43,6 +46,8 @@ public class PurchaseBoosterPackAction {
 	private Timestamp clientTime;
 	private boolean freeBoosterPack;
 	private TimeUtils timeUtil;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private BoosterPackRetrieveUtils boosterPackRetrieveUtils;
 	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
@@ -57,12 +62,16 @@ public class PurchaseBoosterPackAction {
 	private InsertUtil insertUtil;
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 	private BoosterItemUtils boosterItemUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 	private int gemsSpent;
 	private int gachaCreditsChange;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
-			TimeUtils timeUtil, UserRetrieveUtils2 userRetrieveUtil,
+			TimeUtils timeUtil,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			UserRetrieveUtils2 userRetrieveUtil,
 			BoosterPackRetrieveUtils boosterPackRetrieveUtils,
 			BoosterItemRetrieveUtils boosterItemRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -73,7 +82,8 @@ public class PurchaseBoosterPackAction {
 			boolean buyingInBulk, RewardRetrieveUtils rewardRetrieveUtils,
 			InsertUtil insertUtil,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
-			BoosterItemUtils boosterItemUtils, int gemsSpent, int gachaCreditsChange) {
+			BoosterItemUtils boosterItemUtils, int gemsSpent,
+			int gachaCreditsChange, CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -81,6 +91,8 @@ public class PurchaseBoosterPackAction {
 		this.now = now;
 		this.freeBoosterPack = freeBoosterPack;
 		this.timeUtil = timeUtil;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
 		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
@@ -97,6 +109,7 @@ public class PurchaseBoosterPackAction {
 		this.boosterItemUtils = boosterItemUtils;
 		this.gemsSpent = gemsSpent;
 		this.gachaCreditsChange = gachaCreditsChange;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -314,9 +327,12 @@ public class PurchaseBoosterPackAction {
 			listOfRewards.add(r);
 		}
 
-		ara = new AwardRewardAction(userId, user, 0, 0, now, "booster packs id " + aPack.getId(), listOfRewards,
-				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
-				monsterLevelInfoRetrieveUtils);
+		ara = new AwardRewardAction(userId, user, 0, 0, now,
+				"booster packs id " + aPack.getId(), listOfRewards,
+				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil,
+				updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				userClanRetrieveUtils, createInfoProtoUtils);
 
 		ara.execute();
 

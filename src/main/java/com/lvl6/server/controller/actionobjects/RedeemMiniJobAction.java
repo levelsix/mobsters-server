@@ -23,11 +23,14 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -40,6 +43,8 @@ public class RedeemMiniJobAction {
 	private String userId;
 	private String userMiniJobId;
 	private Timestamp clientTime;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private DeleteUtil deleteUtil;
@@ -52,12 +57,14 @@ public class RedeemMiniJobAction {
 	private List<UserMonsterCurrentHealthProto> umchpList;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private RewardRetrieveUtils rewardRetrieveUtils;
-	
+	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RedeemMiniJobAction(
 			String userId,
 			String userMiniJobId,
 			Timestamp clientTime,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			DeleteUtil deleteUtil, UpdateUtil updateUtil, InsertUtil insertUtil,
@@ -67,11 +74,15 @@ public class RedeemMiniJobAction {
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
 			List<UserMonsterCurrentHealthProto> umchpList,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			RewardRetrieveUtils rewardRetrieveUtils) {
+			RewardRetrieveUtils rewardRetrieveUtils,
+			CreateInfoProtoUtils createInfoProtoUtils)
+	{
 		super();
 		this.userId = userId;
 		this.userMiniJobId = userMiniJobId;
 		this.clientTime = clientTime;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.deleteUtil = deleteUtil;
@@ -84,6 +95,7 @@ public class RedeemMiniJobAction {
 		this.umchpList = umchpList;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
@@ -95,7 +107,7 @@ public class RedeemMiniJobAction {
 	private MiniJob mj;
 	private AwardRewardAction ara;
 	private List<Reward> listOfRewards;
-	
+
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
@@ -125,14 +137,14 @@ public class RedeemMiniJobAction {
 	private boolean verifySyntax(Builder resBuilder) {
 
 		user = userRetrieveUtil.getUserById(userId);
-		
+
 		if(user == null) {
 			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
 			log.error("user is null, userId = {}", userId);
 			return false;
 		}
-		
-		
+
+
 		userMiniJobIds = Collections
 				.singleton(userMiniJobId);
 		idToUserMiniJob = miniJobForUserRetrieveUtil
@@ -151,7 +163,7 @@ public class RedeemMiniJobAction {
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
-		
+
 		mjfu = idToUserMiniJob.get(userMiniJobId);
 		if (null == mjfu.getTimeCompleted()) {
 			//sanity check
@@ -168,20 +180,20 @@ public class RedeemMiniJobAction {
 			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
 			return false;
 		}
-		
+
 		if(!verifyListOfRewards()) {
 			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
 			return false;
 		}
-		
+
 		userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
-		
+
 		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
 				umchpList, userMonsterIdToExpectedHealth);
 
 		Map<String, MonsterForUser> mfuIdsToUserMonsters = monsterForUserRetrieveUtils
 				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
-		
+
 		//keep only valid userMonsterIds another sanity check
 		if (userMonsterIds.size() != mfuIdsToUserMonsters.size()) {
 			log.warn("some userMonsterIds client sent are invalid."
@@ -193,14 +205,14 @@ public class RedeemMiniJobAction {
 			Set<String> existing = mfuIdsToUserMonsters.keySet();
 			userMonsterIdToExpectedHealth.keySet().retainAll(existing);
 		}
-		
+
 		if (userMonsterIds.isEmpty()) {
 			log.error("no valid user monster ids sent by client");
 			return false;
 		}
 		return true;
 	}
-	
+
 	public boolean verifyListOfRewards() {
 		listOfRewards = new ArrayList<Reward>();
 
@@ -230,15 +242,19 @@ public class RedeemMiniJobAction {
 		}
 		return true;
 	}
-	
+
 	private boolean writeChangesToDB(Builder resBuilder) {
 
-		ara = new AwardRewardAction(userId, user, 0, 0, clientTime, "userminijob with id " + userMiniJobId,
-				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil,
-				monsterStuffUtils, monsterLevelInfoRetrieveUtils);
-		
+		ara = new AwardRewardAction(userId, user, 0, 0, clientTime,
+				"userminijob with id " + userMiniJobId,
+				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
+				insertUtil, updateUtil,
+				monsterStuffUtils, monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				userClanRetrieveUtils, createInfoProtoUtils);
+
 		ara.execute();
-		
+
 		//delete the user mini job
 		int numDeleted = DeleteUtils.get().deleteMiniJobForUser(userMiniJobId);
 		log.info("userMiniJob numDeleted=" + numDeleted);
@@ -448,5 +464,5 @@ public class RedeemMiniJobAction {
 		this.listOfRewards = listOfRewards;
 	}
 
-	
+
 }

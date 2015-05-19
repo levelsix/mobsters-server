@@ -161,7 +161,9 @@ public class CollectGiftAction {
 		String awardReason = ControllerConstants.REWARD_REASON__COLLECT_GIFT;
 		ara = new AwardRewardAction(userId, user, maxCash, maxOil, clientTime,
 				awardReason, rewards, userRetrieveUtil, itemForUserRetrieveUtil,
-				insertUtil, updateUtil, monsterStuffUtil, monsterLevelInfoRetrieveUtils);
+				insertUtil, updateUtil, monsterStuffUtil, monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtil, userClanRetrieveUtils,
+				createInfoProtoUtils);
 
 		boolean awardedRewards = ara.execute();
 

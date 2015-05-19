@@ -39,9 +39,11 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -74,19 +76,37 @@ public class TradeItemForBoosterController extends EventController {
 	protected MiscMethods miscMethods;
 
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-
-	@Autowired
-	protected UserRetrieveUtils2 userRetrieveUtils;
-
-	@Autowired
 	protected BoosterItemRetrieveUtils boosterItemRetrieveUtils;
+
+	@Autowired
+	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+	@Autowired
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
 
 	@Autowired
-	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
+	@Autowired
+	protected MonsterRetrieveUtils monsterRetrieveUtils;
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtil;
+
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+
+	@Autowired
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -98,19 +118,7 @@ public class TradeItemForBoosterController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	@Autowired
-	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-
-	@Autowired
-	protected MonsterRetrieveUtils monsterRetrieveUtils;
-
-	@Autowired
-	protected RewardRetrieveUtils rewardRetrieveUtils;
-
-	@Autowired
 	protected BoosterItemUtils boosterItemUtils;
-
-	@Autowired
-	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 
 	@Override
@@ -198,7 +206,7 @@ public class TradeItemForBoosterController extends EventController {
 								serverToggleRetrieveUtils);
 
 				legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives,
-						monsterRetrieveUtils, rewardRetrieveUtils);
+						monsterRetrieveUtils, rewardRetrieveUtil);
 			}
 
 			int gemReward = 0;
@@ -206,8 +214,8 @@ public class TradeItemForBoosterController extends EventController {
 			boolean successful = false;
 			if (legit) {
 				boolean rigged = riggedContainer.get(0);
-				gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
-				gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
+				gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtil);
+				gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtil);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu,
 						itemId, boosterPackId, itemsUserReceives, now,
@@ -219,7 +227,7 @@ public class TradeItemForBoosterController extends EventController {
 				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
 					BoosterItem bi = itemsUserReceives.get(0);
 					BoosterItemProto bip = createInfoProtoUtils
-							.createBoosterItemProto(bi, rewardRetrieveUtils);
+							.createBoosterItemProto(bi, rewardRetrieveUtil);
 					resBuilder.setPrize(bip);
 				}
 				resBuilder.setStatus(TradeItemForBoosterStatus.SUCCESS);
@@ -375,13 +383,15 @@ public class TradeItemForBoosterController extends EventController {
 
 		List<Reward> listOfRewards = new ArrayList<Reward>();
 		for(BoosterItem bi : itemsUserReceives) {
-			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+			Reward r = rewardRetrieveUtil.getRewardById(bi.getRewardId());
 			listOfRewards.add(r);
 		}
 
 		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, now,
-				"trade item for booster", listOfRewards, userRetrieveUtils, itemForUserRetrieveUtil,
-				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils);
+				"trade item for booster", listOfRewards, userRetrieveUtils,
+				itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
+				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
+				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils);
 		ara.execute();
 		createRewardProto(resBuilder, ara);
 		return true;

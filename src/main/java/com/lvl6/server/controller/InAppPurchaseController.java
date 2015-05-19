@@ -43,6 +43,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -89,6 +90,9 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected UpdateUtil updateUtil;
+
+    @Autowired
+    protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 
     @Autowired
     protected UserRetrieveUtils2 userRetrieveUtil;
@@ -355,6 +359,7 @@ public class InAppPurchaseController extends EventController {
                 isSalesPack = true;
                 iapsa = new InAppPurchaseSalesAction(userId,
                         user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+                        clanGiftRewardsRetrieveUtils,
                         itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
                         createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
                         salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
@@ -445,14 +450,14 @@ public class InAppPurchaseController extends EventController {
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		log.info("prespp: " + preSpp);
-		
+
 		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
 			//do nothing
 		}
 		else {
 			resBuilder.setSuccessorSalesPackage(preSpp);
 		}
-		
+
 		//commented out below code bc beginner sales also have succ id now
 
 //		Object[] objArray = new Object[2];
@@ -493,9 +498,9 @@ public class InAppPurchaseController extends EventController {
         if(iapsa.getAra().getAcga() != null) {
         	ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
             MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
-            ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);	
+            ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
         }
-        
+
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
                 nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
                 gachaCreditsGained, ucgp);

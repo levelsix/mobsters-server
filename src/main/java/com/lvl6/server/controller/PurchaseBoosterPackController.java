@@ -33,9 +33,11 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -63,12 +65,18 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected BoosterItemUtils boosterItemUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected TimeUtils timeUtils;
+
+	@Autowired
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+	@Autowired
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -93,16 +101,16 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
@@ -138,7 +146,7 @@ public class PurchaseBoosterPackController extends EventController {
 		int gachaCreditsChange = reqProto.getGachaCreditsChange();
 
 		boolean freeBoosterPack = reqProto.getDailyFreeBoosterPack();
-		
+
 		log.info("reqProto: {}", reqProto);
 
 		//values to send to client
@@ -174,30 +182,33 @@ public class PurchaseBoosterPackController extends EventController {
 		try {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
-					timeUtils, userRetrieveUtils, boosterPackRetrieveUtils,
+					timeUtils, clanGiftRewardsRetrieveUtils,
+					userClanRetrieveUtils,
+					userRetrieveUtils, boosterPackRetrieveUtils,
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
 					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil,
-					serverToggleRetrieveUtils, boosterItemUtils, gemsSpent, gachaCreditsChange);
+					serverToggleRetrieveUtils, boosterItemUtils, gemsSpent, gachaCreditsChange,
+					createInfoProtoUtils);
 
 			pbpa.execute(resBuilder);
 
 			List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
-			
+
 			if (PurchaseBoosterPackStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				//assume user only purchases 1 item. NEED TO LET CLIENT KNOW THE PRIZE
 				itemsUserReceives = pbpa
 						.getItemsUserReceives();
-				
+
 				resBuilder.addAllPrize(convertBoosterItemIntoProtos(itemsUserReceives));
-				
-				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(pbpa.getAra().getNuOrUpdatedItems(), 
-						pbpa.getAra().getNuOrUpdatedMonsters(), pbpa.getAra().getGemsGained(), 
+
+				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(pbpa.getAra().getNuOrUpdatedItems(),
+						pbpa.getAra().getNuOrUpdatedMonsters(), pbpa.getAra().getGemsGained(),
 						pbpa.getAra().getCashGained(), pbpa.getAra().getOilGained(), pbpa.getGachaCreditsReward(), null);
-				
+
 				resBuilder.setReward(urp);
-				
+
 			}
 
 			//check if setting the items the user won
@@ -247,10 +258,10 @@ public class PurchaseBoosterPackController extends EventController {
 			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
-	
+
 	public List<BoosterItemProto> convertBoosterItemIntoProtos(List<BoosterItem> itemsUserReceives) {
 		List<BoosterItemProto> bipList = new ArrayList<BoosterItemProto>();
-		
+
 		for(BoosterItem bi : itemsUserReceives) {
 			BoosterItemProto bip = createInfoProtoUtils.createBoosterItemProto(bi, rewardRetrieveUtils);
 			bipList.add(bip);

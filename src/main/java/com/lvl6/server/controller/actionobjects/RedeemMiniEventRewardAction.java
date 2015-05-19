@@ -22,12 +22,15 @@ import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.Red
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -42,6 +45,8 @@ public class RedeemMiniEventRewardAction {
 	private int mefplId;
 	private RewardTier rt;
 	private Date clientTime;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private MiniEventForUserRetrieveUtil mefuRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -52,10 +57,13 @@ public class RedeemMiniEventRewardAction {
 	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
 	private RewardRetrieveUtils rewardRetrieveUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
-			Date clientTime, UserRetrieveUtils2 userRetrieveUtil,
+			Date clientTime, ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
@@ -63,7 +71,9 @@ public class RedeemMiniEventRewardAction {
 			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils,
 			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtils,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			CreateInfoProtoUtils createInfoProtoUtils)
+	{
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -72,6 +82,8 @@ public class RedeemMiniEventRewardAction {
 		this.mefplId = mefplId;
 		this.rt = rt;
 		this.clientTime = clientTime;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.mefuRetrieveUtil = mefuRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
@@ -82,6 +94,7 @@ public class RedeemMiniEventRewardAction {
 		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
 		this.rewardRetrieveUtils = rewardRetrieveUtils;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -224,7 +237,9 @@ public class RedeemMiniEventRewardAction {
 				clientTime, sb.toString(), rewards,
 				userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
-				monsterLevelInfoRetrieveUtils);
+				monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				userClanRetrieveUtils, createInfoProtoUtils);
 
 		boolean awardedRewards = ara.execute();
 
