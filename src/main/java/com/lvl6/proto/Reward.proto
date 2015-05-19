@@ -25,7 +25,12 @@ message RewardProto {
 	
 	//NOTE: if RewardType is MONSTER, then amt is repurposed to:
 	//amt = 0 means only one piece is given
-	//amt > 0 means one monster with a lvl equal to 'amt' is given  
+	//amt > 0 means one monster with a lvl equal to 'amt' is given
+	
+	// This outer reward proto just specifies quantity.
+	// The inner reward specifies the actual reward.
+	// Only used for monster because amt is used to specify level.
+	optional RewardProto actualReward = 5;
 	
 	enum RewardType {
 		NO_REWARD = 1;
@@ -37,6 +42,8 @@ message RewardProto {
 		MONSTER = 6;
 		CLAN_GIFT = 8;
 		TANGO_GIFT = 9;
+		
+		REWARD = 100;
 	}
 	
 }
