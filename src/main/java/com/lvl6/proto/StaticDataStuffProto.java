@@ -1159,30 +1159,6 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    java.util.List<com.lvl6.proto.RewardsProto.RewardProto> 
-        getRewardList();
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    com.lvl6.proto.RewardsProto.RewardProto getReward(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    int getRewardCount();
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-        getRewardOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
-        int index);
-
-    /**
      * <code>repeated .com.lvl6.proto.ClanGiftProto clanGifts = 46;</code>
      */
     java.util.List<com.lvl6.proto.RewardsProto.ClanGiftProto> 
@@ -1605,18 +1581,10 @@ public final class StaticDataStuffProto {
               battleItem_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemProto.PARSER, extensionRegistry));
               break;
             }
-            case 362: {
-              if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
-                reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>();
-                mutable_bitField1_ |= 0x00000400;
-              }
-              reward_.add(input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry));
-              break;
-            }
             case 370: {
-              if (!((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
+              if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
                 clanGifts_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.ClanGiftProto>();
-                mutable_bitField1_ |= 0x00000800;
+                mutable_bitField1_ |= 0x00000400;
               }
               clanGifts_.add(input.readMessage(com.lvl6.proto.RewardsProto.ClanGiftProto.PARSER, extensionRegistry));
               break;
@@ -1750,9 +1718,6 @@ public final class StaticDataStuffProto {
           battleItem_ = java.util.Collections.unmodifiableList(battleItem_);
         }
         if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
-          reward_ = java.util.Collections.unmodifiableList(reward_);
-        }
-        if (((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
           clanGifts_ = java.util.Collections.unmodifiableList(clanGifts_);
         }
         this.unknownFields = unknownFields.build();
@@ -3389,41 +3354,6 @@ public final class StaticDataStuffProto {
       return pvpBoardObstacleProtos_.get(index);
     }
 
-    public static final int REWARD_FIELD_NUMBER = 45;
-    private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_;
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    public java.util.List<com.lvl6.proto.RewardsProto.RewardProto> getRewardList() {
-      return reward_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-        getRewardOrBuilderList() {
-      return reward_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    public int getRewardCount() {
-      return reward_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProto getReward(int index) {
-      return reward_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
-        int index) {
-      return reward_.get(index);
-    }
-
     public static final int CLANGIFTS_FIELD_NUMBER = 46;
     private java.util.List<com.lvl6.proto.RewardsProto.ClanGiftProto> clanGifts_;
     /**
@@ -3502,7 +3432,6 @@ public final class StaticDataStuffProto {
       research_ = java.util.Collections.emptyList();
       battleItem_ = java.util.Collections.emptyList();
       pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
-      reward_ = java.util.Collections.emptyList();
       clanGifts_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -3643,9 +3572,6 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < battleItem_.size(); i++) {
         output.writeMessage(43, battleItem_.get(i));
-      }
-      for (int i = 0; i < reward_.size(); i++) {
-        output.writeMessage(45, reward_.get(i));
       }
       for (int i = 0; i < clanGifts_.size(); i++) {
         output.writeMessage(46, clanGifts_.get(i));
@@ -3827,10 +3753,6 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(43, battleItem_.get(i));
       }
-      for (int i = 0; i < reward_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(45, reward_.get(i));
-      }
       for (int i = 0; i < clanGifts_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(46, clanGifts_.get(i));
@@ -3986,7 +3908,6 @@ public final class StaticDataStuffProto {
           getResearchFieldBuilder();
           getBattleItemFieldBuilder();
           getPvpBoardObstacleProtosFieldBuilder();
-          getRewardFieldBuilder();
           getClanGiftsFieldBuilder();
         }
       }
@@ -4248,15 +4169,9 @@ public final class StaticDataStuffProto {
         } else {
           pvpBoardObstacleProtosBuilder_.clear();
         }
-        if (rewardBuilder_ == null) {
-          reward_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000400);
-        } else {
-          rewardBuilder_.clear();
-        }
         if (clanGiftsBuilder_ == null) {
           clanGifts_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000800);
+          bitField1_ = (bitField1_ & ~0x00000400);
         } else {
           clanGiftsBuilder_.clear();
         }
@@ -4665,19 +4580,10 @@ public final class StaticDataStuffProto {
         } else {
           result.pvpBoardObstacleProtos_ = pvpBoardObstacleProtosBuilder_.build();
         }
-        if (rewardBuilder_ == null) {
-          if (((bitField1_ & 0x00000400) == 0x00000400)) {
-            reward_ = java.util.Collections.unmodifiableList(reward_);
-            bitField1_ = (bitField1_ & ~0x00000400);
-          }
-          result.reward_ = reward_;
-        } else {
-          result.reward_ = rewardBuilder_.build();
-        }
         if (clanGiftsBuilder_ == null) {
-          if (((bitField1_ & 0x00000800) == 0x00000800)) {
+          if (((bitField1_ & 0x00000400) == 0x00000400)) {
             clanGifts_ = java.util.Collections.unmodifiableList(clanGifts_);
-            bitField1_ = (bitField1_ & ~0x00000800);
+            bitField1_ = (bitField1_ & ~0x00000400);
           }
           result.clanGifts_ = clanGifts_;
         } else {
@@ -5745,37 +5651,11 @@ public final class StaticDataStuffProto {
             }
           }
         }
-        if (rewardBuilder_ == null) {
-          if (!other.reward_.isEmpty()) {
-            if (reward_.isEmpty()) {
-              reward_ = other.reward_;
-              bitField1_ = (bitField1_ & ~0x00000400);
-            } else {
-              ensureRewardIsMutable();
-              reward_.addAll(other.reward_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.reward_.isEmpty()) {
-            if (rewardBuilder_.isEmpty()) {
-              rewardBuilder_.dispose();
-              rewardBuilder_ = null;
-              reward_ = other.reward_;
-              bitField1_ = (bitField1_ & ~0x00000400);
-              rewardBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getRewardFieldBuilder() : null;
-            } else {
-              rewardBuilder_.addAllMessages(other.reward_);
-            }
-          }
-        }
         if (clanGiftsBuilder_ == null) {
           if (!other.clanGifts_.isEmpty()) {
             if (clanGifts_.isEmpty()) {
               clanGifts_ = other.clanGifts_;
-              bitField1_ = (bitField1_ & ~0x00000800);
+              bitField1_ = (bitField1_ & ~0x00000400);
             } else {
               ensureClanGiftsIsMutable();
               clanGifts_.addAll(other.clanGifts_);
@@ -5788,7 +5668,7 @@ public final class StaticDataStuffProto {
               clanGiftsBuilder_.dispose();
               clanGiftsBuilder_ = null;
               clanGifts_ = other.clanGifts_;
-              bitField1_ = (bitField1_ & ~0x00000800);
+              bitField1_ = (bitField1_ & ~0x00000400);
               clanGiftsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanGiftsFieldBuilder() : null;
@@ -16233,252 +16113,12 @@ public final class StaticDataStuffProto {
         return pvpBoardObstacleProtosBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.RewardsProto.RewardProto> reward_ =
-        java.util.Collections.emptyList();
-      private void ensureRewardIsMutable() {
-        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
-          reward_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.RewardProto>(reward_);
-          bitField1_ |= 0x00000400;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public java.util.List<com.lvl6.proto.RewardsProto.RewardProto> getRewardList() {
-        if (rewardBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(reward_);
-        } else {
-          return rewardBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public int getRewardCount() {
-        if (rewardBuilder_ == null) {
-          return reward_.size();
-        } else {
-          return rewardBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto getReward(int index) {
-        if (rewardBuilder_ == null) {
-          return reward_.get(index);
-        } else {
-          return rewardBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder setReward(
-          int index, com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRewardIsMutable();
-          reward_.set(index, value);
-          onChanged();
-        } else {
-          rewardBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder setReward(
-          int index, com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rewardBuilder_ == null) {
-          ensureRewardIsMutable();
-          reward_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          rewardBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder addReward(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRewardIsMutable();
-          reward_.add(value);
-          onChanged();
-        } else {
-          rewardBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder addReward(
-          int index, com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRewardIsMutable();
-          reward_.add(index, value);
-          onChanged();
-        } else {
-          rewardBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder addReward(
-          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rewardBuilder_ == null) {
-          ensureRewardIsMutable();
-          reward_.add(builderForValue.build());
-          onChanged();
-        } else {
-          rewardBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder addReward(
-          int index, com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rewardBuilder_ == null) {
-          ensureRewardIsMutable();
-          reward_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          rewardBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder addAllReward(
-          java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.RewardProto> values) {
-        if (rewardBuilder_ == null) {
-          ensureRewardIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, reward_);
-          onChanged();
-        } else {
-          rewardBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder clearReward() {
-        if (rewardBuilder_ == null) {
-          reward_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000400);
-          onChanged();
-        } else {
-          rewardBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public Builder removeReward(int index) {
-        if (rewardBuilder_ == null) {
-          ensureRewardIsMutable();
-          reward_.remove(index);
-          onChanged();
-        } else {
-          rewardBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder(
-          int index) {
-        return getRewardFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder(
-          int index) {
-        if (rewardBuilder_ == null) {
-          return reward_.get(index);  } else {
-          return rewardBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-           getRewardOrBuilderList() {
-        if (rewardBuilder_ != null) {
-          return rewardBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(reward_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder addRewardBuilder() {
-        return getRewardFieldBuilder().addBuilder(
-            com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder addRewardBuilder(
-          int index) {
-        return getRewardFieldBuilder().addBuilder(
-            index, com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.RewardProto reward = 45;</code>
-       */
-      public java.util.List<com.lvl6.proto.RewardsProto.RewardProto.Builder> 
-           getRewardBuilderList() {
-        return getRewardFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-          getRewardFieldBuilder() {
-        if (rewardBuilder_ == null) {
-          rewardBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  reward_,
-                  ((bitField1_ & 0x00000400) == 0x00000400),
-                  getParentForChildren(),
-                  isClean());
-          reward_ = null;
-        }
-        return rewardBuilder_;
-      }
-
       private java.util.List<com.lvl6.proto.RewardsProto.ClanGiftProto> clanGifts_ =
         java.util.Collections.emptyList();
       private void ensureClanGiftsIsMutable() {
-        if (!((bitField1_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
           clanGifts_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.ClanGiftProto>(clanGifts_);
-          bitField1_ |= 0x00000800;
+          bitField1_ |= 0x00000400;
          }
       }
 
@@ -16628,7 +16268,7 @@ public final class StaticDataStuffProto {
       public Builder clearClanGifts() {
         if (clanGiftsBuilder_ == null) {
           clanGifts_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000800);
+          bitField1_ = (bitField1_ & ~0x00000400);
           onChanged();
         } else {
           clanGiftsBuilder_.clear();
@@ -16705,7 +16345,7 @@ public final class StaticDataStuffProto {
           clanGiftsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder>(
                   clanGifts_,
-                  ((bitField1_ & 0x00000800) == 0x00000800),
+                  ((bitField1_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           clanGifts_ = null;
@@ -16746,7 +16386,7 @@ public final class StaticDataStuffProto {
       "o\032\022Prerequisite.proto\032\013Quest.proto\032\016Rese" +
       "arch.proto\032\013Sales.proto\032\014Reward.proto\032\013S" +
       "kill.proto\032\017Structure.proto\032\nTask.proto\032" +
-      "\nUser.proto\"\222\023\n\017StaticDataProto\0220\n\006sende" +
+      "\nUser.proto\"\345\022\n\017StaticDataProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
       "o\022>\n\016expansionCosts\030\002 \003(\0132&.com.lvl6.pro" +
       "to.CityExpansionCostProto\0220\n\tallCities\030\003" +
@@ -16805,10 +16445,9 @@ public final class StaticDataStuffProto {
       "Proto\0223\n\nbattleItem\030+ \003(\0132\037.com.lvl6.pro" +
       "to.BattleItemProto\022E\n\026pvpBoardObstaclePr" +
       "otos\030( \003(\0132%.com.lvl6.proto.PvpBoardObst" +
-      "acleProto\022+\n\006reward\030- \003(\0132\033.com.lvl6.pro" +
-      "to.RewardProto\0220\n\tclanGifts\030. \003(\0132\035.com." +
-      "lvl6.proto.ClanGiftProtoB\026B\024StaticDataSt",
-      "uffProto"
+      "acleProto\0220\n\tclanGifts\030. \003(\0132\035.com.lvl6." +
+      "proto.ClanGiftProtoB\026B\024StaticDataStuffPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16846,7 +16485,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "Reward", "ClanGifts", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "ClanGifts", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();
