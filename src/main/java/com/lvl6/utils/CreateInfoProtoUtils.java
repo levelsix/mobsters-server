@@ -2596,19 +2596,19 @@ public class CreateInfoProtoUtils {
 		if (rewardId > 0) {
 			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 			RewardProto rp = createRewardProto(r);
-			mjpb.setRewardIdOne(rp);
+			mjpb.setRewardOne(rp);
 		}
 		rewardId = mj.getRewardIdTwo();
 		if (rewardId > 0) {
 			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 			RewardProto rp = createRewardProto(r);
-			mjpb.setRewardIdTwo(rp);
+			mjpb.setRewardTwo(rp);
 		}
 		rewardId = mj.getRewardIdThree();
 		if (rewardId > 0) {
 			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 			RewardProto rp = createRewardProto(r);
-			mjpb.setRewardIdThree(rp);
+			mjpb.setRewardThree(rp);
 		}
 
 		return mjpb.build();
@@ -3578,7 +3578,7 @@ public class CreateInfoProtoUtils {
 	public RewardProto createRewardProto(Reward r) {
 		return createRewardProto(r, 1);
 	}
-	
+
 	public RewardProto createRewardProto(Reward r, int currentDepth)
 	{
 		RewardProto.Builder rpb = RewardProto.newBuilder();
@@ -3591,7 +3591,7 @@ public class CreateInfoProtoUtils {
 			try {
 				RewardType rt = RewardType.valueOf(str);
 				rpb.setTyp(rt);
-				
+
 				if (rt == RewardType.REWARD) {
 					if (currentDepth <= 3) {
 						Reward rr = rewardRetrieveUtils.getRewardById(r.getStaticDataId());

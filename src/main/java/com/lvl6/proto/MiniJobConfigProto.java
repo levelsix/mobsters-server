@@ -198,43 +198,43 @@ public final class MiniJobConfigProto {
     int getDurationMaxMinutes();
 
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
      */
-    boolean hasRewardIdOne();
+    boolean hasRewardOne();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProto getRewardIdOne();
+    com.lvl6.proto.RewardsProto.RewardProto getRewardOne();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdOneOrBuilder();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOneOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
      */
-    boolean hasRewardIdTwo();
+    boolean hasRewardTwo();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProto getRewardIdTwo();
+    com.lvl6.proto.RewardsProto.RewardProto getRewardTwo();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdTwoOrBuilder();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardTwoOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
      */
-    boolean hasRewardIdThree();
+    boolean hasRewardThree();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProto getRewardIdThree();
+    com.lvl6.proto.RewardsProto.RewardProto getRewardThree();
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
      */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdThreeOrBuilder();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardThreeOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniJobProto}
@@ -398,12 +398,12 @@ public final class MiniJobConfigProto {
             case 170: {
               com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00100000) == 0x00100000)) {
-                subBuilder = rewardIdOne_.toBuilder();
+                subBuilder = rewardOne_.toBuilder();
               }
-              rewardIdOne_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              rewardOne_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(rewardIdOne_);
-                rewardIdOne_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(rewardOne_);
+                rewardOne_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00100000;
               break;
@@ -411,12 +411,12 @@ public final class MiniJobConfigProto {
             case 178: {
               com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00200000) == 0x00200000)) {
-                subBuilder = rewardIdTwo_.toBuilder();
+                subBuilder = rewardTwo_.toBuilder();
               }
-              rewardIdTwo_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              rewardTwo_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(rewardIdTwo_);
-                rewardIdTwo_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(rewardTwo_);
+                rewardTwo_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00200000;
               break;
@@ -424,12 +424,12 @@ public final class MiniJobConfigProto {
             case 186: {
               com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00400000) == 0x00400000)) {
-                subBuilder = rewardIdThree_.toBuilder();
+                subBuilder = rewardThree_.toBuilder();
               }
-              rewardIdThree_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              rewardThree_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(rewardIdThree_);
-                rewardIdThree_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(rewardThree_);
+                rewardThree_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00400000;
               break;
@@ -801,67 +801,67 @@ public final class MiniJobConfigProto {
       return durationMaxMinutes_;
     }
 
-    public static final int REWARDIDONE_FIELD_NUMBER = 21;
-    private com.lvl6.proto.RewardsProto.RewardProto rewardIdOne_;
+    public static final int REWARDONE_FIELD_NUMBER = 21;
+    private com.lvl6.proto.RewardsProto.RewardProto rewardOne_;
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
      */
-    public boolean hasRewardIdOne() {
+    public boolean hasRewardOne() {
       return ((bitField0_ & 0x00100000) == 0x00100000);
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProto getRewardIdOne() {
-      return rewardIdOne_;
+    public com.lvl6.proto.RewardsProto.RewardProto getRewardOne() {
+      return rewardOne_;
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdOneOrBuilder() {
-      return rewardIdOne_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOneOrBuilder() {
+      return rewardOne_;
     }
 
-    public static final int REWARDIDTWO_FIELD_NUMBER = 22;
-    private com.lvl6.proto.RewardsProto.RewardProto rewardIdTwo_;
+    public static final int REWARDTWO_FIELD_NUMBER = 22;
+    private com.lvl6.proto.RewardsProto.RewardProto rewardTwo_;
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
      */
-    public boolean hasRewardIdTwo() {
+    public boolean hasRewardTwo() {
       return ((bitField0_ & 0x00200000) == 0x00200000);
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProto getRewardIdTwo() {
-      return rewardIdTwo_;
+    public com.lvl6.proto.RewardsProto.RewardProto getRewardTwo() {
+      return rewardTwo_;
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdTwoOrBuilder() {
-      return rewardIdTwo_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardTwoOrBuilder() {
+      return rewardTwo_;
     }
 
-    public static final int REWARDIDTHREE_FIELD_NUMBER = 23;
-    private com.lvl6.proto.RewardsProto.RewardProto rewardIdThree_;
+    public static final int REWARDTHREE_FIELD_NUMBER = 23;
+    private com.lvl6.proto.RewardsProto.RewardProto rewardThree_;
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
      */
-    public boolean hasRewardIdThree() {
+    public boolean hasRewardThree() {
       return ((bitField0_ & 0x00400000) == 0x00400000);
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProto getRewardIdThree() {
-      return rewardIdThree_;
+    public com.lvl6.proto.RewardsProto.RewardProto getRewardThree() {
+      return rewardThree_;
     }
     /**
-     * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
      */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdThreeOrBuilder() {
-      return rewardIdThree_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardThreeOrBuilder() {
+      return rewardThree_;
     }
 
     private void initFields() {
@@ -885,9 +885,9 @@ public final class MiniJobConfigProto {
       maxDmgDealt_ = 0;
       durationMinMinutes_ = 0;
       durationMaxMinutes_ = 0;
-      rewardIdOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-      rewardIdTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-      rewardIdThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -963,13 +963,13 @@ public final class MiniJobConfigProto {
         output.writeInt32(20, secondItemRewardQuantity_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
-        output.writeMessage(21, rewardIdOne_);
+        output.writeMessage(21, rewardOne_);
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
-        output.writeMessage(22, rewardIdTwo_);
+        output.writeMessage(22, rewardTwo_);
       }
       if (((bitField0_ & 0x00400000) == 0x00400000)) {
-        output.writeMessage(23, rewardIdThree_);
+        output.writeMessage(23, rewardThree_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1062,15 +1062,15 @@ public final class MiniJobConfigProto {
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(21, rewardIdOne_);
+          .computeMessageSize(21, rewardOne_);
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(22, rewardIdTwo_);
+          .computeMessageSize(22, rewardTwo_);
       }
       if (((bitField0_ & 0x00400000) == 0x00400000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(23, rewardIdThree_);
+          .computeMessageSize(23, rewardThree_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1181,9 +1181,9 @@ public final class MiniJobConfigProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getRewardIdOneFieldBuilder();
-          getRewardIdTwoFieldBuilder();
-          getRewardIdThreeFieldBuilder();
+          getRewardOneFieldBuilder();
+          getRewardTwoFieldBuilder();
+          getRewardThreeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1232,22 +1232,22 @@ public final class MiniJobConfigProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         durationMaxMinutes_ = 0;
         bitField0_ = (bitField0_ & ~0x00080000);
-        if (rewardIdOneBuilder_ == null) {
-          rewardIdOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        if (rewardOneBuilder_ == null) {
+          rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
         } else {
-          rewardIdOneBuilder_.clear();
+          rewardOneBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00100000);
-        if (rewardIdTwoBuilder_ == null) {
-          rewardIdTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        if (rewardTwoBuilder_ == null) {
+          rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
         } else {
-          rewardIdTwoBuilder_.clear();
+          rewardTwoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00200000);
-        if (rewardIdThreeBuilder_ == null) {
-          rewardIdThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        if (rewardThreeBuilder_ == null) {
+          rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
         } else {
-          rewardIdThreeBuilder_.clear();
+          rewardThreeBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00400000);
         return this;
@@ -1361,26 +1361,26 @@ public final class MiniJobConfigProto {
         if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
           to_bitField0_ |= 0x00100000;
         }
-        if (rewardIdOneBuilder_ == null) {
-          result.rewardIdOne_ = rewardIdOne_;
+        if (rewardOneBuilder_ == null) {
+          result.rewardOne_ = rewardOne_;
         } else {
-          result.rewardIdOne_ = rewardIdOneBuilder_.build();
+          result.rewardOne_ = rewardOneBuilder_.build();
         }
         if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
           to_bitField0_ |= 0x00200000;
         }
-        if (rewardIdTwoBuilder_ == null) {
-          result.rewardIdTwo_ = rewardIdTwo_;
+        if (rewardTwoBuilder_ == null) {
+          result.rewardTwo_ = rewardTwo_;
         } else {
-          result.rewardIdTwo_ = rewardIdTwoBuilder_.build();
+          result.rewardTwo_ = rewardTwoBuilder_.build();
         }
         if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
           to_bitField0_ |= 0x00400000;
         }
-        if (rewardIdThreeBuilder_ == null) {
-          result.rewardIdThree_ = rewardIdThree_;
+        if (rewardThreeBuilder_ == null) {
+          result.rewardThree_ = rewardThree_;
         } else {
-          result.rewardIdThree_ = rewardIdThreeBuilder_.build();
+          result.rewardThree_ = rewardThreeBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1460,14 +1460,14 @@ public final class MiniJobConfigProto {
         if (other.hasDurationMaxMinutes()) {
           setDurationMaxMinutes(other.getDurationMaxMinutes());
         }
-        if (other.hasRewardIdOne()) {
-          mergeRewardIdOne(other.getRewardIdOne());
+        if (other.hasRewardOne()) {
+          mergeRewardOne(other.getRewardOne());
         }
-        if (other.hasRewardIdTwo()) {
-          mergeRewardIdTwo(other.getRewardIdTwo());
+        if (other.hasRewardTwo()) {
+          mergeRewardTwo(other.getRewardTwo());
         }
-        if (other.hasRewardIdThree()) {
-          mergeRewardIdThree(other.getRewardIdThree());
+        if (other.hasRewardThree()) {
+          mergeRewardThree(other.getRewardThree());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2183,352 +2183,352 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      private com.lvl6.proto.RewardsProto.RewardProto rewardIdOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.lvl6.proto.RewardsProto.RewardProto rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardIdOneBuilder_;
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardOneBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public boolean hasRewardIdOne() {
+      public boolean hasRewardOne() {
         return ((bitField0_ & 0x00100000) == 0x00100000);
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto getRewardIdOne() {
-        if (rewardIdOneBuilder_ == null) {
-          return rewardIdOne_;
+      public com.lvl6.proto.RewardsProto.RewardProto getRewardOne() {
+        if (rewardOneBuilder_ == null) {
+          return rewardOne_;
         } else {
-          return rewardIdOneBuilder_.getMessage();
+          return rewardOneBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public Builder setRewardIdOne(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardIdOneBuilder_ == null) {
+      public Builder setRewardOne(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardOneBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          rewardIdOne_ = value;
+          rewardOne_ = value;
           onChanged();
         } else {
-          rewardIdOneBuilder_.setMessage(value);
+          rewardOneBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00100000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public Builder setRewardIdOne(
+      public Builder setRewardOne(
           com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rewardIdOneBuilder_ == null) {
-          rewardIdOne_ = builderForValue.build();
+        if (rewardOneBuilder_ == null) {
+          rewardOne_ = builderForValue.build();
           onChanged();
         } else {
-          rewardIdOneBuilder_.setMessage(builderForValue.build());
+          rewardOneBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00100000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public Builder mergeRewardIdOne(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardIdOneBuilder_ == null) {
+      public Builder mergeRewardOne(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardOneBuilder_ == null) {
           if (((bitField0_ & 0x00100000) == 0x00100000) &&
-              rewardIdOne_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
-            rewardIdOne_ =
-              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardIdOne_).mergeFrom(value).buildPartial();
+              rewardOne_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            rewardOne_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardOne_).mergeFrom(value).buildPartial();
           } else {
-            rewardIdOne_ = value;
+            rewardOne_ = value;
           }
           onChanged();
         } else {
-          rewardIdOneBuilder_.mergeFrom(value);
+          rewardOneBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00100000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public Builder clearRewardIdOne() {
-        if (rewardIdOneBuilder_ == null) {
-          rewardIdOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      public Builder clearRewardOne() {
+        if (rewardOneBuilder_ == null) {
+          rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
           onChanged();
         } else {
-          rewardIdOneBuilder_.clear();
+          rewardOneBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardIdOneBuilder() {
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardOneBuilder() {
         bitField0_ |= 0x00100000;
         onChanged();
-        return getRewardIdOneFieldBuilder().getBuilder();
+        return getRewardOneFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdOneOrBuilder() {
-        if (rewardIdOneBuilder_ != null) {
-          return rewardIdOneBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOneOrBuilder() {
+        if (rewardOneBuilder_ != null) {
+          return rewardOneBuilder_.getMessageOrBuilder();
         } else {
-          return rewardIdOne_;
+          return rewardOne_;
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdOne = 21;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-          getRewardIdOneFieldBuilder() {
-        if (rewardIdOneBuilder_ == null) {
-          rewardIdOneBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getRewardOneFieldBuilder() {
+        if (rewardOneBuilder_ == null) {
+          rewardOneBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getRewardIdOne(),
+                  getRewardOne(),
                   getParentForChildren(),
                   isClean());
-          rewardIdOne_ = null;
+          rewardOne_ = null;
         }
-        return rewardIdOneBuilder_;
+        return rewardOneBuilder_;
       }
 
-      private com.lvl6.proto.RewardsProto.RewardProto rewardIdTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.lvl6.proto.RewardsProto.RewardProto rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardIdTwoBuilder_;
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardTwoBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public boolean hasRewardIdTwo() {
+      public boolean hasRewardTwo() {
         return ((bitField0_ & 0x00200000) == 0x00200000);
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto getRewardIdTwo() {
-        if (rewardIdTwoBuilder_ == null) {
-          return rewardIdTwo_;
+      public com.lvl6.proto.RewardsProto.RewardProto getRewardTwo() {
+        if (rewardTwoBuilder_ == null) {
+          return rewardTwo_;
         } else {
-          return rewardIdTwoBuilder_.getMessage();
+          return rewardTwoBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public Builder setRewardIdTwo(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardIdTwoBuilder_ == null) {
+      public Builder setRewardTwo(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardTwoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          rewardIdTwo_ = value;
+          rewardTwo_ = value;
           onChanged();
         } else {
-          rewardIdTwoBuilder_.setMessage(value);
+          rewardTwoBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00200000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public Builder setRewardIdTwo(
+      public Builder setRewardTwo(
           com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rewardIdTwoBuilder_ == null) {
-          rewardIdTwo_ = builderForValue.build();
+        if (rewardTwoBuilder_ == null) {
+          rewardTwo_ = builderForValue.build();
           onChanged();
         } else {
-          rewardIdTwoBuilder_.setMessage(builderForValue.build());
+          rewardTwoBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00200000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public Builder mergeRewardIdTwo(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardIdTwoBuilder_ == null) {
+      public Builder mergeRewardTwo(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardTwoBuilder_ == null) {
           if (((bitField0_ & 0x00200000) == 0x00200000) &&
-              rewardIdTwo_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
-            rewardIdTwo_ =
-              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardIdTwo_).mergeFrom(value).buildPartial();
+              rewardTwo_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            rewardTwo_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardTwo_).mergeFrom(value).buildPartial();
           } else {
-            rewardIdTwo_ = value;
+            rewardTwo_ = value;
           }
           onChanged();
         } else {
-          rewardIdTwoBuilder_.mergeFrom(value);
+          rewardTwoBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00200000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public Builder clearRewardIdTwo() {
-        if (rewardIdTwoBuilder_ == null) {
-          rewardIdTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      public Builder clearRewardTwo() {
+        if (rewardTwoBuilder_ == null) {
+          rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
           onChanged();
         } else {
-          rewardIdTwoBuilder_.clear();
+          rewardTwoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00200000);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardIdTwoBuilder() {
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardTwoBuilder() {
         bitField0_ |= 0x00200000;
         onChanged();
-        return getRewardIdTwoFieldBuilder().getBuilder();
+        return getRewardTwoFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdTwoOrBuilder() {
-        if (rewardIdTwoBuilder_ != null) {
-          return rewardIdTwoBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardTwoOrBuilder() {
+        if (rewardTwoBuilder_ != null) {
+          return rewardTwoBuilder_.getMessageOrBuilder();
         } else {
-          return rewardIdTwo_;
+          return rewardTwo_;
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdTwo = 22;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-          getRewardIdTwoFieldBuilder() {
-        if (rewardIdTwoBuilder_ == null) {
-          rewardIdTwoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getRewardTwoFieldBuilder() {
+        if (rewardTwoBuilder_ == null) {
+          rewardTwoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getRewardIdTwo(),
+                  getRewardTwo(),
                   getParentForChildren(),
                   isClean());
-          rewardIdTwo_ = null;
+          rewardTwo_ = null;
         }
-        return rewardIdTwoBuilder_;
+        return rewardTwoBuilder_;
       }
 
-      private com.lvl6.proto.RewardsProto.RewardProto rewardIdThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.lvl6.proto.RewardsProto.RewardProto rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardIdThreeBuilder_;
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardThreeBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public boolean hasRewardIdThree() {
+      public boolean hasRewardThree() {
         return ((bitField0_ & 0x00400000) == 0x00400000);
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto getRewardIdThree() {
-        if (rewardIdThreeBuilder_ == null) {
-          return rewardIdThree_;
+      public com.lvl6.proto.RewardsProto.RewardProto getRewardThree() {
+        if (rewardThreeBuilder_ == null) {
+          return rewardThree_;
         } else {
-          return rewardIdThreeBuilder_.getMessage();
+          return rewardThreeBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public Builder setRewardIdThree(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardIdThreeBuilder_ == null) {
+      public Builder setRewardThree(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardThreeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          rewardIdThree_ = value;
+          rewardThree_ = value;
           onChanged();
         } else {
-          rewardIdThreeBuilder_.setMessage(value);
+          rewardThreeBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00400000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public Builder setRewardIdThree(
+      public Builder setRewardThree(
           com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rewardIdThreeBuilder_ == null) {
-          rewardIdThree_ = builderForValue.build();
+        if (rewardThreeBuilder_ == null) {
+          rewardThree_ = builderForValue.build();
           onChanged();
         } else {
-          rewardIdThreeBuilder_.setMessage(builderForValue.build());
+          rewardThreeBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00400000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public Builder mergeRewardIdThree(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rewardIdThreeBuilder_ == null) {
+      public Builder mergeRewardThree(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardThreeBuilder_ == null) {
           if (((bitField0_ & 0x00400000) == 0x00400000) &&
-              rewardIdThree_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
-            rewardIdThree_ =
-              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardIdThree_).mergeFrom(value).buildPartial();
+              rewardThree_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            rewardThree_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardThree_).mergeFrom(value).buildPartial();
           } else {
-            rewardIdThree_ = value;
+            rewardThree_ = value;
           }
           onChanged();
         } else {
-          rewardIdThreeBuilder_.mergeFrom(value);
+          rewardThreeBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00400000;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public Builder clearRewardIdThree() {
-        if (rewardIdThreeBuilder_ == null) {
-          rewardIdThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      public Builder clearRewardThree() {
+        if (rewardThreeBuilder_ == null) {
+          rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
           onChanged();
         } else {
-          rewardIdThreeBuilder_.clear();
+          rewardThreeBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardIdThreeBuilder() {
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardThreeBuilder() {
         bitField0_ |= 0x00400000;
         onChanged();
-        return getRewardIdThreeFieldBuilder().getBuilder();
+        return getRewardThreeFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardIdThreeOrBuilder() {
-        if (rewardIdThreeBuilder_ != null) {
-          return rewardIdThreeBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardThreeOrBuilder() {
+        if (rewardThreeBuilder_ != null) {
+          return rewardThreeBuilder_.getMessageOrBuilder();
         } else {
-          return rewardIdThree_;
+          return rewardThree_;
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.RewardProto rewardIdThree = 23;</code>
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-          getRewardIdThreeFieldBuilder() {
-        if (rewardIdThreeBuilder_ == null) {
-          rewardIdThreeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getRewardThreeFieldBuilder() {
+        if (rewardThreeBuilder_ == null) {
+          rewardThreeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getRewardIdThree(),
+                  getRewardThree(),
                   getParentForChildren(),
                   isClean());
-          rewardIdThree_ = null;
+          rewardThree_ = null;
         }
-        return rewardIdThreeBuilder_;
+        return rewardThreeBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniJobProto)
@@ -3843,7 +3843,7 @@ public final class MiniJobConfigProto {
     java.lang.String[] descriptorData = {
       "\n\023MiniJobConfig.proto\022\016com.lvl6.proto\032\022M" +
       "onsterStuff.proto\032\014Reward.proto\032\026SharedE" +
-      "numConfig.proto\032\017Structure.proto\"\234\005\n\014Min" +
+      "numConfig.proto\032\017Structure.proto\"\226\005\n\014Min" +
       "iJobProto\022\021\n\tminiJobId\030\001 \001(\005\022\030\n\020required" +
       "StructId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\022\n\ncashRewa" +
       "rd\030\004 \001(\005\022\021\n\toilReward\030\005 \001(\005\022\021\n\tgemReward" +
@@ -3856,18 +3856,17 @@ public final class MiniJobConfigProto {
       "Appear\030\n \001(\002\022\022\n\nhpRequired\030\013 \001(\005\022\023\n\013atkR" +
       "equired\030\014 \001(\005\022\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013ma" +
       "xDmgDealt\030\016 \001(\005\022\032\n\022durationMinMinutes\030\017 " +
-      "\001(\005\022\032\n\022durationMaxMinutes\030\020 \001(\005\0220\n\013rewar" +
-      "dIdOne\030\025 \001(\0132\033.com.lvl6.proto.RewardProt" +
-      "o\0220\n\013rewardIdTwo\030\026 \001(\0132\033.com.lvl6.proto." +
-      "RewardProto\0222\n\rrewardIdThree\030\027 \001(\0132\033.com" +
-      ".lvl6.proto.RewardProto\"\353\001\n\020UserMiniJobP",
-      "roto\022\027\n\017userMiniJobUuid\030\001 \001(\t\022\027\n\017baseDmg" +
-      "Received\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\030\n\020u" +
-      "serMonsterUuids\030\004 \003(\t\022\025\n\rtimeCompleted\030\005" +
-      " \001(\003\022\027\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob" +
-      "\030\006 \001(\0132\034.com.lvl6.proto.MiniJobProto\022\027\n\017" +
-      "durationSeconds\030\010 \001(\005B\024B\022MiniJobConfigPr" +
-      "oto"
+      "\001(\005\022\032\n\022durationMaxMinutes\030\020 \001(\005\022.\n\trewar" +
+      "dOne\030\025 \001(\0132\033.com.lvl6.proto.RewardProto\022" +
+      ".\n\trewardTwo\030\026 \001(\0132\033.com.lvl6.proto.Rewa" +
+      "rdProto\0220\n\013rewardThree\030\027 \001(\0132\033.com.lvl6." +
+      "proto.RewardProto\"\353\001\n\020UserMiniJobProto\022\027",
+      "\n\017userMiniJobUuid\030\001 \001(\t\022\027\n\017baseDmgReceiv" +
+      "ed\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\030\n\020userMon" +
+      "sterUuids\030\004 \003(\t\022\025\n\rtimeCompleted\030\005 \001(\003\022\027" +
+      "\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006 \001(\013" +
+      "2\034.com.lvl6.proto.MiniJobProto\022\027\n\017durati" +
+      "onSeconds\030\010 \001(\005B\024B\022MiniJobConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3890,7 +3889,7 @@ public final class MiniJobConfigProto {
     internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniJobProto_descriptor,
-        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", "RewardIdOne", "RewardIdTwo", "RewardIdThree", });
+        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", "RewardOne", "RewardTwo", "RewardThree", });
     internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
