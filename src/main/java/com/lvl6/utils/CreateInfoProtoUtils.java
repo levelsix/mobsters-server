@@ -3595,7 +3595,7 @@ public class CreateInfoProtoUtils {
 				if (rt == RewardType.REWARD) {
 					if (currentDepth <= 3) {
 						Reward rr = rewardRetrieveUtils.getRewardById(r.getStaticDataId());
-						rpb.setActualReward(createRewardProto(rr));
+						rpb.setActualReward(createRewardProto(rr, currentDepth + 1));
 					} else {
 						log.error("reward {} reached depth={}", r, currentDepth);
 					}
