@@ -41,6 +41,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
@@ -98,6 +99,9 @@ public class InAppPurchaseController extends EventController {
     protected UserRetrieveUtils2 userRetrieveUtil;
 
     @Autowired
+    protected UserClanRetrieveUtils2 userClanRetrieveUtil;
+
+    @Autowired
     protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
 
     @Autowired
@@ -138,9 +142,6 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtils;
-
-    @Autowired
-    protected UserRetrieveUtils2 userRetrieveUtils;
 
 
     public InAppPurchaseController() {
@@ -363,7 +364,8 @@ public class InAppPurchaseController extends EventController {
                         itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
                         createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
                         salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-                        salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+                        salesPackage, inAppPurchaseUtils, rewardRetrieveUtils,
+                        userClanRetrieveUtil, userRetrieveUtil);
 
                 iapsa.execute(resBuilder);
             }
