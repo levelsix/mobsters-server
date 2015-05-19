@@ -50,19 +50,11 @@ public final class ItemsProto {
     /**
      * <code>REFRESH_MINI_JOB = 6;</code>
      */
-<<<<<<< HEAD
     REFRESH_MINI_JOB(6, 6),
     /**
      * <code>GACHA_MULTI_SPIN = 7;</code>
      */
     GACHA_MULTI_SPIN(7, 7),
-=======
-    REFRESH_MINI_JOB(5, 6),
-    /**
-     * <code>GACHA_MULTI_SPIN = 7;</code>
-     */
-    GACHA_MULTI_SPIN(6, 7),
->>>>>>> added gacha multi spins to item type
     ;
 
     /**
@@ -4816,18 +4808,11 @@ public final class ItemsProto {
       "rUuid\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022" +
       "\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003\"5\n\021I" +
       "temGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022\020\n\010gemP",
-<<<<<<< HEAD
       "rice\030\002 \001(\005*\227\001\n\010ItemType\022\020\n\014BOOSTER_PACK\020" +
       "\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\025\n\021ITEM_G" +
       "ACHA_CREDIT\020\010\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005" +
       "\022\024\n\020REFRESH_MINI_JOB\020\006\022\024\n\020GACHA_MULTI_SP" +
       "IN\020\007B\014B\nItemsProto"
-=======
-      "rice\030\002 \001(\005*\200\001\n\010ItemType\022\020\n\014BOOSTER_PACK\020" +
-      "\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_" +
-      "UP\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006\022" +
-      "\024\n\020GACHA_MULTI_SPIN\020\007B\014B\nItemsProto"
->>>>>>> added gacha multi spins to item type
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
