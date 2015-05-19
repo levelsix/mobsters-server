@@ -178,14 +178,15 @@ public class AwardRewardAction {
 				log.info("recursive reward: old={}", r);
 
 				Reward actualReward = rewardRetrieveUtil.getRewardById(staticDataId);
-				id = actualReward.getId();
-				type = actualReward.getType();
-				staticDataId = actualReward.getStaticDataId();
-				amt = actualReward.getAmt();
+				int actualRewardId = actualReward.getId();
+				String actualType = actualReward.getType();
+				int actualRewardStaticDataId = actualReward.getStaticDataId();
+				int actualRewardAmt = actualReward.getAmt();
 				for (int i = 0; i < amt; i++) {
 					processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
 							itemIdToQuantity, resourceTypeToRewardIdToAmt, actualReward,
-							id, type, staticDataId, amt);
+							actualRewardId, actualType, actualRewardStaticDataId,
+							actualRewardAmt);
 				}
 			} else {
 				processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
