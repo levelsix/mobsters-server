@@ -5134,7 +5134,7 @@ public class CreateInfoProtoUtils {
 
 		int segmentationGroup = u.getSegmentationGroup();
 		builder.setSegmentationGroup(segmentationGroup);
-		
+
 		int gachaCredits = u.getGachaCredits();
 		builder.setGachaCredits(gachaCredits);
 
