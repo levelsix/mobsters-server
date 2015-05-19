@@ -40441,7 +40441,7 @@ public final class EventStartupProto {
       "rsionNumberProto\030\t \001(\01326.com.lvl6.proto." +
       "StartupRequestProto.VersionNumberProto\032J" +
       "\n\022VersionNumberProto\022\020\n\010superNum\030\001 \001(\005\022\020" +
-      "\n\010majorNum\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\311?\n\024S" +
+      "\n\010majorNum\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\275@\n\024S" +
       "tartupResponseProto\022\030\n\020serverTimeMillis\030" +
       "\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.F",
       "ullUserProto\022I\n\rstartupStatus\030\003 \001(\01622.co" +
@@ -40526,7 +40526,7 @@ public final class EventStartupProto {
       "alNotificationProto\0222\n\010referred\030\001 \001(\0132 .",
       "com.lvl6.proto.MinimumUserProto\022\023\n\013recru" +
       "itTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001" +
-      "(\005\032\357\037\n\020StartupConstants\022H\n\025inAppPurchase" +
+      "(\005\032\343 \n\020StartupConstants\022H\n\025inAppPurchase" +
       "Packages\030\001 \003(\0132).com.lvl6.proto.InAppPur" +
       "chasePackageProto\022\027\n\017maxLevelForUser\030\002 \001" +
       "(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025anim" +
@@ -40581,6 +40581,7 @@ public final class EventStartupProto {
       "ion\030\' \001(\005\022j\n\021fileDownloadProto\030( \003(\0132O.c" +
       "om.lvl6.proto.StartupResponseProto.Start" +
       "upConstants.FileDownloadConstantProto\022 \n" +
+<<<<<<< HEAD
       "\030taskIdForUpgradeTutorial\030) \001(\005\032_\n\031Anima" +
       "tedSpriteOffsetProto\022\021\n\timageName\030\001 \001(\t\022" +
       "/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordin",
@@ -40649,7 +40650,82 @@ public final class EventStartupProto {
       "to\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 " +
       "\001(\tB\023B\021EventStartupProto"
 >>>>>>> added gacha credits to protos
+<<<<<<< HEAD
 >>>>>>> resolving merges in rebase
+=======
+=======
+      "\030taskIdForUpgradeTutorial\030) \001(\005\022r\n\030boost" +
+      "erPackConstantProto\030\364\003 \001(\0132O.com.lvl6.pr" +
+      "oto.StartupResponseProto.StartupConstant",
+      "s.BoosterPackConstantsProto\032_\n\031AnimatedS" +
+      "priteOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006o" +
+      "ffSet\030\002 \001(\0132\037.com.lvl6.proto.CoordinateP" +
+      "roto\032\325\001\n\rClanConstants\022\035\n\025coinPriceToCre" +
+      "ateClan\030\001 \001(\005\022 \n\030maxCharLengthForClanNam" +
+      "e\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescripti" +
+      "on\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(" +
+      "\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034achievementIds" +
+      "ForClanRewards\030\006 \003(\005\032c\n\030DownloadableNibC" +
+      "onstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansio",
+      "nNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(" +
+      "\t\032y\n\023TournamentConstants\022\022\n\nwinsWeight\030\001" +
+      " \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeigh" +
+      "t\030\003 \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004" +
+      " \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxNumTe" +
+      "amSlots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLim" +
+      "it\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cashPer" +
+      "HealthPoint\030\001 \001(\002\022#\n\033secondsToHealPerHea" +
+      "lthPoint\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(" +
+      "\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilPerMo",
+      "nsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstants\022\035\n" +
+      "\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023mapNumbe" +
+      "rOfSections\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003 " +
+      "\001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHe" +
+      "ight\030\005 \001(\002\032j\n\025MiniTutorialConstants\022\032\n\022m" +
+      "iniTutorialTaskId\030\001 \001(\005\022\026\n\016guideMonsterI" +
+      "d\030\002 \001(\005\022\035\n\025enhanceGuideMonsterId\030\003 \001(\005\032\213" +
+      "\001\n\021ClanHelpConstants\0229\n\010helpType\030\001 \001(\0162\036" +
+      ".com.lvl6.proto.GameActionType:\007NO_HELP\022" +
+      "\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n\025percent",
+      "RemovedPerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n" +
+      "\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDel" +
+      "ta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpR" +
+      "equiredMinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharL" +
+      "imit\030\005 \001(\005\022\"\n\032beginAvengingTimeLimitMins" +
+      "\030\006 \001(\005\022(\n requestClanToAvengeTimeLimitMi" +
+      "ns\030\007 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007seco" +
+      "nds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032\210\001\n\037ResourceC" +
+      "onversionConstantProto\022?\n\014resourceType\030\001" +
+      " \001(\0162\034.com.lvl6.proto.ResourceType:\013NO_R",
+      "ESOURCE\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numGems\030" +
+      "\003 \001(\005\032\217\001\n\031FileDownloadConstantProto\022\026\n\016f" +
+      "ileDownloadId\030\001 \001(\005\022\020\n\010fileName\030\002 \001(\t\022\020\n" +
+      "\010priority\030\003 \001(\005\022\034\n\024downloadOnlyOverWifi\030" +
+      "\004 \001(\010\022\030\n\020useIphone6Prefix\030\005 \001(\010\032W\n\031Boost" +
+      "erPackConstantsProto\022\036\n\026purchaseAmountRe" +
+      "quired\030\001 \001(\005\022\032\n\022numberOfPacksGiven\030\002 \001(\005" +
+      "\032\234\004\n\021TutorialConstants\022\031\n\021startingMonste" +
+      "rId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016ene" +
+      "myMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017",
+      " \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016mark" +
+      "ZMonsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003" +
+      " \003(\0132#.com.lvl6.proto.TutorialStructProt" +
+      "o\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cit" +
+      "yId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com" +
+      ".lvl6.proto.CityElementProto\022$\n\034cityElem" +
+      "entIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElemen" +
+      "tIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 " +
+      "\001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?" +
+      "\n\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.pro",
+      "to.MinimumObstacleProto\"A\n\014UpdateStatus\022" +
+      "\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJO" +
+      "R_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_D" +
+      "B\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAI" +
+      "NTENANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031" +
+      "\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB" +
+      "\023B\021EventStartupProto"
+>>>>>>> added booster pack constants to startup
+>>>>>>> rebasing still
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
