@@ -177,8 +177,8 @@ public class ControllerConstants {
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
 			10000, 100000, 1000000, 2000000000 };
-	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 1, 10,
-		100, 1000, 10000, 100000 };
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 2,
+		18, 160, 1440, 2880000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
 			720, 1440000 };
 
