@@ -1656,7 +1656,8 @@ public class StartupControllerOld extends EventController {
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 							rmea.getMegfus(),
 							rmea.getLvlEntered(), rmea.getRewards(),
-							rmea.getGoals(), rmea.getLeaderboardRewards());
+							rmea.getGoals(), rmea.getLeaderboardRewards(),
+							rewardRetrieveUtil);
 			resBuilder.setUserMiniEvent(umep);
 		}
 

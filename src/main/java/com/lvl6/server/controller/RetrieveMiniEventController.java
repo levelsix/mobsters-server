@@ -27,6 +27,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -48,7 +49,7 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
 
@@ -60,22 +61,25 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventRetrieveUtils miniEventRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-	
+
+	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtil;
+
 	@Autowired
 	protected TimeUtils timeUtil;
 
@@ -153,7 +157,8 @@ public class RetrieveMiniEventController extends EventController {
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 								rmea.getMegfus(),
 								rmea.getLvlEntered(), rmea.getRewards(),
-								rmea.getGoals(), rmea.getLeaderboardRewards());
+								rmea.getGoals(), rmea.getLeaderboardRewards(),
+								rewardRetrieveUtil);
 				resBuilder.setUserMiniEvent(umep);
 			}
 

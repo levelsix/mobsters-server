@@ -2305,12 +2305,13 @@ public class CreateInfoProtoUtils {
 			MiniEvent me, Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
-			Collection<MiniEventLeaderboardReward> leaderboardRewards)
+			Collection<MiniEventLeaderboardReward> leaderboardRewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		UserMiniEventProto.Builder umepb = createUserMiniEventProto(mefu);
 
 		MiniEventProto mep = createMiniEventProto(me, mefpl, rewards, goals,
-				leaderboardRewards);
+				leaderboardRewards, rewardRetrieveUtil);
 		umepb.setMiniEvent(mep);
 
 		if (null != megfus && !megfus.isEmpty())
@@ -2340,7 +2341,8 @@ public class CreateInfoProtoUtils {
 	public MiniEventProto createMiniEventProto(MiniEvent me,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
-			Collection<MiniEventLeaderboardReward> leaderboardRewards)
+			Collection<MiniEventLeaderboardReward> leaderboardRewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventProto.Builder mepb = MiniEventProto.newBuilder();
 		mepb.setMiniEventId(me.getId());
@@ -2356,14 +2358,14 @@ public class CreateInfoProtoUtils {
 		}
 
 		MiniEventForPlayerLevelProto mefplp =
-				createMiniEventForPlayerLevelProto(mefpl, rewards);
+				createMiniEventForPlayerLevelProto(mefpl, rewards, rewardRetrieveUtil);
 		mepb.setLvlEntered(mefplp);
 
 		Collection<MiniEventGoalProto> goalProtos = createMiniEventGoalProto(goals);
 		mepb.addAllGoals(goalProtos);
 
 		Collection<MiniEventLeaderboardRewardProto> leaderboardRewardProtos =
-				createMiniEventLeaderboardRewardProto(leaderboardRewards);
+				createMiniEventLeaderboardRewardProto(leaderboardRewards, rewardRetrieveUtil);
 		mepb.addAllLeaderboardRewards(leaderboardRewardProtos);
 
 		String str = me.getName();
@@ -2390,14 +2392,15 @@ public class CreateInfoProtoUtils {
 	}
 
 	public MiniEventForPlayerLevelProto createMiniEventForPlayerLevelProto(
-			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards)
+			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventForPlayerLevelProto.Builder mefplpb =
 				createMiniEventForPlayerLevelProto(mefpl);
 
 		if (null != rewards && !rewards.isEmpty()) {
 			Collection<MiniEventTierRewardProto> rewardProtos =
-					createMiniEventTierRewardProto(rewards);
+					createMiniEventTierRewardProto(rewards, rewardRetrieveUtil);
 			mefplpb.addAllRewards(rewardProtos);
 		}
 
@@ -2420,13 +2423,14 @@ public class CreateInfoProtoUtils {
 	}
 
 	public Collection<MiniEventTierRewardProto> createMiniEventTierRewardProto(
-			Collection<MiniEventTierReward> metrs)
+			Collection<MiniEventTierReward> metrs, RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		Collection<MiniEventTierRewardProto> rewardProtos =
 				new ArrayList<MiniEventTierRewardProto>();
 
 		for (MiniEventTierReward metr : metrs) {
-			MiniEventTierRewardProto metrp = createMiniEventTierRewardProto(metr);
+			MiniEventTierRewardProto metrp = createMiniEventTierRewardProto(
+					metr, rewardRetrieveUtil);
 			rewardProtos.add(metrp);
 		}
 
@@ -2434,14 +2438,15 @@ public class CreateInfoProtoUtils {
 	}
 
 	private MiniEventTierRewardProto createMiniEventTierRewardProto(
-			MiniEventTierReward metr)
+			MiniEventTierReward metr, RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventTierRewardProto.Builder metrpb =
 				MiniEventTierRewardProto.newBuilder();
 
 		metrpb.setMetrId(metr.getId());
 		metrpb.setMefplId(metr.getMiniEventForPlayerLvlId());
-		metrpb.setRewardId(metr.getRewardId());
+		Reward r = rewardRetrieveUtil.getRewardById(metr.getRewardId());
+		metrpb.setRewardProto(createRewardProto(r));
 		metrpb.setTierLvl(metr.getRewardTier());
 
 		return metrpb.build();
@@ -2495,14 +2500,16 @@ public class CreateInfoProtoUtils {
 	}
 
 	private Collection<MiniEventLeaderboardRewardProto> createMiniEventLeaderboardRewardProto(
-			Collection<MiniEventLeaderboardReward> rewards)
+			Collection<MiniEventLeaderboardReward> rewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		Collection<MiniEventLeaderboardRewardProto> rewardProtos =
 				new ArrayList<MiniEventLeaderboardRewardProto>();
 
 		for (MiniEventLeaderboardReward melr : rewards) {
 			MiniEventLeaderboardRewardProto melrp =
-					createMiniEventLeaderboardRewardProto(melr);
+					createMiniEventLeaderboardRewardProto(
+							melr, rewardRetrieveUtil);
 
 			rewardProtos.add(melrp);
 		}
@@ -2511,13 +2518,14 @@ public class CreateInfoProtoUtils {
 	}
 
 	private MiniEventLeaderboardRewardProto createMiniEventLeaderboardRewardProto(
-			MiniEventLeaderboardReward melr)
+			MiniEventLeaderboardReward melr, RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventLeaderboardRewardProto.Builder melrpb =
 				MiniEventLeaderboardRewardProto.newBuilder();
 		melrpb.setMelrId(melr.getId());
 		melrpb.setMiniEventId(melr.getMiniEventId());
-		melrpb.setRewardId(melr.getRewardId());
+		Reward r = rewardRetrieveUtil.getRewardById(melr.getRewardId());
+		melrpb.setRewardProto(createRewardProto(r));
 		melrpb.setLeaderboardMinPos(melr.getLeaderboardPos());
 
 		return melrpb.build();
