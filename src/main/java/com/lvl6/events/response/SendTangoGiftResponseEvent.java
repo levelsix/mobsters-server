@@ -28,4 +28,9 @@ public class SendTangoGiftResponseEvent extends NormalResponseEvent {
 		this.sendTangoGiftResponseProto = sendTangoGiftResponseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return sendTangoGiftResponseProto.getSerializedSize();
+	}
+
 }

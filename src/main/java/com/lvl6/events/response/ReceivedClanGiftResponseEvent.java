@@ -29,4 +29,9 @@ public class ReceivedClanGiftResponseEvent extends
 		this.receivedClanGiftResponseProto = receivedClanGiftResponseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return receivedClanGiftResponseProto.getSerializedSize();
+	}
+
 }

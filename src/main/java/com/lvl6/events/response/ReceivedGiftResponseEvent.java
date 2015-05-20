@@ -29,4 +29,9 @@ public class ReceivedGiftResponseEvent extends
 		this.receivedGiftResponseProto = receivedGiftResponseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return receivedGiftResponseProto.getSerializedSize();
+	}
+
 }
