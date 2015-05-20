@@ -26,13 +26,15 @@ public class RetrieveStrengthLeaderBoardAction {
 	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RetrieveStrengthLeaderBoardAction( String retrieverUserId, 
-			int minRank, int maxRank, LeaderBoardImpl leaderBoard)
+			int minRank, int maxRank, LeaderBoardImpl leaderBoard,
+			CreateInfoProtoUtils createInfoProtoUtils)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
 		this.minRank = minRank;
 		this.maxRank = maxRank;
 		this.leaderBoard = leaderBoard;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
