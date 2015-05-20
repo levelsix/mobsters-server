@@ -102,7 +102,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 		try {
 
 			RetrieveStrengthLeaderBoardAction rslba = new RetrieveStrengthLeaderBoardAction(userId, 
-					minRank, maxRank, leaderBoard, createInfoProtoUtils);
+					minRank, maxRank, leaderBoard, userRetrieveUtil, createInfoProtoUtils);
 			rslba.execute(resBuilder);
 
 			RetrieveStrengthLeaderBoardResponseProto resProto = resBuilder.build();

@@ -27,6 +27,7 @@ public class RetrieveStrengthLeaderBoardAction {
 
 	public RetrieveStrengthLeaderBoardAction( String retrieverUserId, 
 			int minRank, int maxRank, LeaderBoardImpl leaderBoard,
+			UserRetrieveUtils2 userRetrieveUtils,
 			CreateInfoProtoUtils createInfoProtoUtils)
 	{
 		super();
@@ -34,6 +35,7 @@ public class RetrieveStrengthLeaderBoardAction {
 		this.minRank = minRank;
 		this.maxRank = maxRank;
 		this.leaderBoard = leaderBoard;
+		this.userRetrieveUtils = userRetrieveUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
