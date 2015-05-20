@@ -45,6 +45,8 @@ public class IAPValues {
 			+ ".sale50";
 	public static final String SALE100 = Globals.APPLE_BUNDLE_ID()
 			+ ".sale100";
+	public static final String GACHAMULTISPIN = Globals.APPLE_BUNDLE_ID()
+			+ ".gachamultispin";
 
 	public static final String PACKAGE1IMG = "pilegems.png";
 	public static final String PACKAGE2IMG = "baggems.png";
@@ -80,12 +82,13 @@ public class IAPValues {
 	public static final double SALE_20_PRICE = 19.99;
 	public static final double SALE_50_PRICE = 49.99;
 	public static final double SALE_100_PRICE = 99.99;
+	public static final double GACHA_MULTI_SPIN_PRICE = 99.99;
 
 
 	public static final List<String> iapPackageNames = Arrays.asList(PACKAGE1,
 			PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5, STARTERPACK, BUILDERPACK,
 			STARTERBUILDERPACK, MONEYTREE, MONEYTREENOSALE, SALE5, SALE10,
-			SALE20, SALE50, SALE100);
+			SALE20, SALE50, SALE100, GACHAMULTISPIN);
 
 	//    public static final List<String> packageNames =
 	//            Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
@@ -175,6 +178,9 @@ public class IAPValues {
 		if(packageName.equals(SALE100)) {
 			return SALE_100_PRICE;
 		}
+		if(packageName.equals(GACHAMULTISPIN)) {
+			return GACHA_MULTI_SPIN_PRICE;
+		}
 		return 0;
 	}
 
@@ -241,6 +247,9 @@ public class IAPValues {
 		}
 		if(packageName.equals(STARTERBUILDERPACK)) {
 			return InAppPurchasePackageType.STARTER_BUILDER_PACK;
+		}
+		if(packageName.equals(GACHAMULTISPIN)) {
+			return InAppPurchasePackageType.GACHA_MULTI_SPIN;
 		}
 
 		return InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
