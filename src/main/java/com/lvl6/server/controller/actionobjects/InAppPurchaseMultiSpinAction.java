@@ -53,6 +53,7 @@ public class InAppPurchaseMultiSpinAction {
 	private ItemConfigDao itemConfigDao;
 	private ItemForUserDao itemForUserDao;
 	private IapHistoryDao iapHistoryDao;
+	private ItemForUser ifuPojo;
 
 	public void execute(Builder resBuilder) {
 		setUpDaos();
@@ -129,7 +130,7 @@ public class InAppPurchaseMultiSpinAction {
 			
 			iapHistoryDao.insertIAPHistoryElem(receiptFromApple, gemChange,
 					userPojo, realLifeCashCost, null);					
-			ItemForUser ifuPojo = new ItemForUser(userId, gachaMultiSpinItemId, 1);
+			ifuPojo = new ItemForUser(userId, gachaMultiSpinItemId, 1);
 			itemForUserDao.insert(ifuPojo);
 
 			updateUserSalesValue();
@@ -146,4 +147,94 @@ public class InAppPurchaseMultiSpinAction {
 		userPojo.setSalesValue(4); //make them max sales value, this fool's a straight baller
 		userDao.update(userPojo);
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public JSONObject getReceiptFromApple() {
+		return receiptFromApple;
+	}
+
+	public void setReceiptFromApple(JSONObject receiptFromApple) {
+		this.receiptFromApple = receiptFromApple;
+	}
+
+	public InsertUtil getInsertUtil() {
+		return insertUtil;
+	}
+
+	public void setInsertUtil(InsertUtil insertUtil) {
+		this.insertUtil = insertUtil;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	public int getGachaMultiSpinItemId() {
+		return gachaMultiSpinItemId;
+	}
+
+	public void setGachaMultiSpinItemId(int gachaMultiSpinItemId) {
+		this.gachaMultiSpinItemId = gachaMultiSpinItemId;
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public User getUserPojo() {
+		return userPojo;
+	}
+
+	public void setUserPojo(User userPojo) {
+		this.userPojo = userPojo;
+	}
+
+	public ItemConfigDao getItemConfigDao() {
+		return itemConfigDao;
+	}
+
+	public void setItemConfigDao(ItemConfigDao itemConfigDao) {
+		this.itemConfigDao = itemConfigDao;
+	}
+
+	public ItemForUserDao getItemForUserDao() {
+		return itemForUserDao;
+	}
+
+	public void setItemForUserDao(ItemForUserDao itemForUserDao) {
+		this.itemForUserDao = itemForUserDao;
+	}
+
+	public IapHistoryDao getIapHistoryDao() {
+		return iapHistoryDao;
+	}
+
+	public void setIapHistoryDao(IapHistoryDao iapHistoryDao) {
+		this.iapHistoryDao = iapHistoryDao;
+	}
+
+	public ItemForUser getIfuPojo() {
+		return ifuPojo;
+	}
+
+	public void setIfuPojo(ItemForUser ifuPojo) {
+		this.ifuPojo = ifuPojo;
+	}
+	
+	
 }

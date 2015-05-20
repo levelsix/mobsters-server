@@ -411,6 +411,10 @@ public class InAppPurchaseController extends EventController {
 				else if(isBuyingGems){
 					writeToUserCurrencyHistory(userId, date, iapa, null, null);
 				}
+				else {
+					resBuilder.addUpdatedUserItems(createInfoProtoUtils.createUserItemProto(userId,
+							iapmsa.getIfuPojo().getItemId(), iapmsa.getIfuPojo().getQuantity()));
+				}
 			}
 		} catch (Exception e) {
 			log.error("problem with in app purchase flow", e);
