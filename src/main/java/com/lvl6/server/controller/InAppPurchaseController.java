@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +59,6 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMultiSpinAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
-import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -405,15 +405,14 @@ public class InAppPurchaseController extends EventController {
 					log.info("got here1");
 					setNewAndPurchasedSalesPackage(resBuilder, iapsa, iapsa.getUser());
 					log.info("got here2");
-					createRewardProto(resBuilder, iapsa);
+					createRewardProto(resBuilder, iapsa, null);
 					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
 				else if(isBuyingGems){
 					writeToUserCurrencyHistory(userId, date, iapa, null, null);
 				}
 				else {
-					resBuilder.addUpdatedUserItems(createInfoProtoUtils.createUserItemProto(userId,
-							iapmsa.getIfuPojo().getItemId(), iapmsa.getIfuPojo().getQuantity()));
+					createRewardProto(resBuilder, null, iapmsa);
 				}
 			}
 		} catch (Exception e) {
@@ -500,27 +499,40 @@ public class InAppPurchaseController extends EventController {
 	}
 
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
-            InAppPurchaseSalesAction iapsa) {
-        Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
-        log.info("LIST OF ITEMS: {}", nuOrUpdatedItems);
-        Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
-        int gemsGained = iapsa.getAra().getGemsGained();
-        int cashGained = iapsa.getAra().getCashGained();
-        int oilGained = iapsa.getAra().getOilGained();
-        int gachaCreditsGained = iapsa.getAra().getGachaCreditsGained();
+            InAppPurchaseSalesAction iapsa, InAppPurchaseMultiSpinAction iapmsa) {
+    	UserRewardProto urp = null;
+    	if(iapsa != null) {
+    		Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+    		log.info("LIST OF ITEMS: {}", nuOrUpdatedItems);
+    		Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
+    		int gemsGained = iapsa.getAra().getGemsGained();
+    		int cashGained = iapsa.getAra().getCashGained();
+    		int oilGained = iapsa.getAra().getOilGained();
+    		int gachaCreditsGained = iapsa.getAra().getGachaCreditsGained();
 
-        //TODO: protofy the rewards
-        UserClanGiftProto ucgp = null;
-        if(iapsa.getAra().getAcga() != null) {
-        	ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
-            MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
-            ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
-        }
+    		//TODO: protofy the rewards
+    		UserClanGiftProto ucgp = null;
+    		if(iapsa.getAra().getAcga() != null) {
+    			ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
+    			MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
+    			ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
+    		}
 
-        UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
-                gachaCreditsGained, ucgp);
-//        log.info("proto for reward: " + urp);
+    		urp = createInfoProtoUtils.createUserRewardProto(
+    				nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
+    				gachaCreditsGained, ucgp);
+    		//        log.info("proto for reward: " + urp);
+    	}
+    	else if(iapmsa != null) {
+    		ItemForUser ifu = new ItemForUser(); //mixing old objects with new...so gross
+    		ifu.setItemId(iapmsa.getIfuPojo().getItemId());
+    		ifu.setQuantity(iapmsa.getIfuPojo().getQuantity());
+    		ifu.setUserId(iapmsa.getIfuPojo().getUserId());
+    		List<ItemForUser> ifuList = new ArrayList<ItemForUser>();
+    		ifuList.add(ifu);
+    		urp = createInfoProtoUtils.createUserRewardProto(
+    				ifuList, null, 0, 0, 0, 0, null);
+    	}
         resBuilder.setRewards(urp);
 
     }
