@@ -3754,17 +3754,30 @@ public final class BattleProto {
     boolean getClanAvenged();
 
     /**
-     * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+     * <code>optional string replayId = 19;</code>
+     *
+     * <pre>
+     *optional BattleReplayProto replay = 18;
+     * </pre>
      */
-    boolean hasReplay();
+    boolean hasReplayId();
     /**
-     * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+     * <code>optional string replayId = 19;</code>
+     *
+     * <pre>
+     *optional BattleReplayProto replay = 18;
+     * </pre>
      */
-    com.lvl6.proto.BattleProto.BattleReplayProto getReplay();
+    java.lang.String getReplayId();
     /**
-     * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+     * <code>optional string replayId = 19;</code>
+     *
+     * <pre>
+     *optional BattleReplayProto replay = 18;
+     * </pre>
      */
-    com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder getReplayOrBuilder();
+    com.google.protobuf.ByteString
+        getReplayIdBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
@@ -3954,17 +3967,10 @@ public final class BattleProto {
               clanAvenged_ = input.readBool();
               break;
             }
-            case 146: {
-              com.lvl6.proto.BattleProto.BattleReplayProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00010000) == 0x00010000)) {
-                subBuilder = replay_.toBuilder();
-              }
-              replay_ = input.readMessage(com.lvl6.proto.BattleProto.BattleReplayProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(replay_);
-                replay_ = subBuilder.buildPartial();
-              }
+            case 154: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00010000;
+              replayId_ = bs;
               break;
             }
           }
@@ -4445,25 +4451,58 @@ public final class BattleProto {
       return clanAvenged_;
     }
 
-    public static final int REPLAY_FIELD_NUMBER = 18;
-    private com.lvl6.proto.BattleProto.BattleReplayProto replay_;
+    public static final int REPLAYID_FIELD_NUMBER = 19;
+    private java.lang.Object replayId_;
     /**
-     * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+     * <code>optional string replayId = 19;</code>
+     *
+     * <pre>
+     *optional BattleReplayProto replay = 18;
+     * </pre>
      */
-    public boolean hasReplay() {
+    public boolean hasReplayId() {
       return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
-     * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+     * <code>optional string replayId = 19;</code>
+     *
+     * <pre>
+     *optional BattleReplayProto replay = 18;
+     * </pre>
      */
-    public com.lvl6.proto.BattleProto.BattleReplayProto getReplay() {
-      return replay_;
+    public java.lang.String getReplayId() {
+      java.lang.Object ref = replayId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          replayId_ = s;
+        }
+        return s;
+      }
     }
     /**
-     * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+     * <code>optional string replayId = 19;</code>
+     *
+     * <pre>
+     *optional BattleReplayProto replay = 18;
+     * </pre>
      */
-    public com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder getReplayOrBuilder() {
-      return replay_;
+    public com.google.protobuf.ByteString
+        getReplayIdBytes() {
+      java.lang.Object ref = replayId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        replayId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
@@ -4484,7 +4523,7 @@ public final class BattleProto {
       attackerCashChange_ = 0;
       attackerOilChange_ = 0;
       clanAvenged_ = false;
-      replay_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
+      replayId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4551,7 +4590,7 @@ public final class BattleProto {
         output.writeBool(17, clanAvenged_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeMessage(18, replay_);
+        output.writeBytes(19, getReplayIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4632,7 +4671,7 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(18, replay_);
+          .computeBytesSize(19, getReplayIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4750,7 +4789,6 @@ public final class BattleProto {
           getDefenderBeforeFieldBuilder();
           getDefenderAfterFieldBuilder();
           getDefenderFieldBuilder();
-          getReplayFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4821,11 +4859,7 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00008000);
         clanAvenged_ = false;
         bitField0_ = (bitField0_ & ~0x00010000);
-        if (replayBuilder_ == null) {
-          replay_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
-        } else {
-          replayBuilder_.clear();
-        }
+        replayId_ = "";
         bitField0_ = (bitField0_ & ~0x00020000);
         return this;
       }
@@ -4955,11 +4989,7 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00010000;
         }
-        if (replayBuilder_ == null) {
-          result.replay_ = replay_;
-        } else {
-          result.replay_ = replayBuilder_.build();
-        }
+        result.replayId_ = replayId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5050,8 +5080,10 @@ public final class BattleProto {
         if (other.hasClanAvenged()) {
           setClanAvenged(other.getClanAvenged());
         }
-        if (other.hasReplay()) {
-          mergeReplay(other.getReplay());
+        if (other.hasReplayId()) {
+          bitField0_ |= 0x00020000;
+          replayId_ = other.replayId_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6694,120 +6726,104 @@ public final class BattleProto {
         return this;
       }
 
-      private com.lvl6.proto.BattleProto.BattleReplayProto replay_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.BattleReplayProto, com.lvl6.proto.BattleProto.BattleReplayProto.Builder, com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder> replayBuilder_;
+      private java.lang.Object replayId_ = "";
       /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+       * <code>optional string replayId = 19;</code>
+       *
+       * <pre>
+       *optional BattleReplayProto replay = 18;
+       * </pre>
        */
-      public boolean hasReplay() {
+      public boolean hasReplayId() {
         return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+       * <code>optional string replayId = 19;</code>
+       *
+       * <pre>
+       *optional BattleReplayProto replay = 18;
+       * </pre>
        */
-      public com.lvl6.proto.BattleProto.BattleReplayProto getReplay() {
-        if (replayBuilder_ == null) {
-          return replay_;
-        } else {
-          return replayBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
-       */
-      public Builder setReplay(com.lvl6.proto.BattleProto.BattleReplayProto value) {
-        if (replayBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+      public java.lang.String getReplayId() {
+        java.lang.Object ref = replayId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            replayId_ = s;
           }
-          replay_ = value;
-          onChanged();
+          return s;
         } else {
-          replayBuilder_.setMessage(value);
+          return (java.lang.String) ref;
         }
-        bitField0_ |= 0x00020000;
-        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+       * <code>optional string replayId = 19;</code>
+       *
+       * <pre>
+       *optional BattleReplayProto replay = 18;
+       * </pre>
        */
-      public Builder setReplay(
-          com.lvl6.proto.BattleProto.BattleReplayProto.Builder builderForValue) {
-        if (replayBuilder_ == null) {
-          replay_ = builderForValue.build();
-          onChanged();
+      public com.google.protobuf.ByteString
+          getReplayIdBytes() {
+        java.lang.Object ref = replayId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          replayId_ = b;
+          return b;
         } else {
-          replayBuilder_.setMessage(builderForValue.build());
+          return (com.google.protobuf.ByteString) ref;
         }
-        bitField0_ |= 0x00020000;
-        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+       * <code>optional string replayId = 19;</code>
+       *
+       * <pre>
+       *optional BattleReplayProto replay = 18;
+       * </pre>
        */
-      public Builder mergeReplay(com.lvl6.proto.BattleProto.BattleReplayProto value) {
-        if (replayBuilder_ == null) {
-          if (((bitField0_ & 0x00020000) == 0x00020000) &&
-              replay_ != com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance()) {
-            replay_ =
-              com.lvl6.proto.BattleProto.BattleReplayProto.newBuilder(replay_).mergeFrom(value).buildPartial();
-          } else {
-            replay_ = value;
-          }
-          onChanged();
-        } else {
-          replayBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00020000;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
-       */
-      public Builder clearReplay() {
-        if (replayBuilder_ == null) {
-          replay_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
-          onChanged();
-        } else {
-          replayBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00020000);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
-       */
-      public com.lvl6.proto.BattleProto.BattleReplayProto.Builder getReplayBuilder() {
-        bitField0_ |= 0x00020000;
+      public Builder setReplayId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00020000;
+        replayId_ = value;
         onChanged();
-        return getReplayFieldBuilder().getBuilder();
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+       * <code>optional string replayId = 19;</code>
+       *
+       * <pre>
+       *optional BattleReplayProto replay = 18;
+       * </pre>
        */
-      public com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder getReplayOrBuilder() {
-        if (replayBuilder_ != null) {
-          return replayBuilder_.getMessageOrBuilder();
-        } else {
-          return replay_;
-        }
+      public Builder clearReplayId() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        replayId_ = getDefaultInstance().getReplayId();
+        onChanged();
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BattleReplayProto replay = 18;</code>
+       * <code>optional string replayId = 19;</code>
+       *
+       * <pre>
+       *optional BattleReplayProto replay = 18;
+       * </pre>
        */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.BattleReplayProto, com.lvl6.proto.BattleProto.BattleReplayProto.Builder, com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder> 
-          getReplayFieldBuilder() {
-        if (replayBuilder_ == null) {
-          replayBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.BattleProto.BattleReplayProto, com.lvl6.proto.BattleProto.BattleReplayProto.Builder, com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder>(
-                  getReplay(),
-                  getParentForChildren(),
-                  isClean());
-          replay_ = null;
-        }
-        return replayBuilder_;
+      public Builder setReplayIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00020000;
+        replayId_ = value;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpHistoryProto)
@@ -11179,7 +11195,7 @@ public final class BattleProto {
       "vl6.proto.UserResearchProto\"m\n\017PvpMonste" +
       "rProto\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lv" +
       "l6.proto.MinimumUserMonsterProto\022\030\n\020mons" +
-      "terIdDropped\030\002 \001(\005\"\330\005\n\017PvpHistoryProto\022\025" +
+      "terIdDropped\030\002 \001(\005\"\267\005\n\017PvpHistoryProto\022\025" +
       "\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132" +
       "\035.com.lvl6.proto.FullUserProto\022:\n\021attack",
       "ersMonsters\030\002 \003(\0132\037.com.lvl6.proto.PvpMo" +
@@ -11196,25 +11212,25 @@ public final class BattleProto {
       "vpLeagueProto\022/\n\010defender\030\016 \001(\0132\035.com.lv" +
       "l6.proto.FullUserProto\022\032\n\022attackerCashCh" +
       "ange\030\017 \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n" +
-      "\013clanAvenged\030\021 \001(\010\0221\n\006replay\030\022 \001(\0132!.com" +
-      ".lvl6.proto.BattleReplayProto\"^\n\016PvpLeag" +
-      "ueProto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030" +
-      "\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013description\030" +
-      "\005 \001(\t\"\250\002\n\022PvpClanAvengeProto\022\026\n\016clanAven" +
-      "geUuid\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.co",
-      "m.lvl6.proto.PvpUserClanAvengeProto\022;\n\010a" +
-      "ttacker\030\003 \001(\0132).com.lvl6.proto.MinimumUs" +
-      "erProtoWithLevel\0222\n\010defender\030\004 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\025\n\rbattleEn" +
-      "dTime\030\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030" +
-      "\n\020defenderClanUuid\030\007 \001(\t\"h\n\026PvpUserClanA" +
-      "vengeProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid" +
-      "\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\navenge" +
-      "Time\030\004 \001(\003\"`\n\021BattleReplayProto\022\022\n\nrepla" +
-      "yUuid\030\001 \001(\t\022\023\n\013creatorUuid\030\002 \001(\t\022\016\n\006repl",
-      "ay\030\003 \001(\014\022\022\n\ncreateTime\030\004 \001(\005*E\n\014BattleRe" +
-      "sult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002" +
-      "\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
+      "\013clanAvenged\030\021 \001(\010\022\020\n\010replayId\030\023 \001(\t\"^\n\016" +
+      "PvpLeagueProto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleag" +
+      "ueName\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013descr" +
+      "iption\030\005 \001(\t\"\250\002\n\022PvpClanAvengeProto\022\026\n\016c" +
+      "lanAvengeUuid\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003" +
+      "(\0132&.com.lvl6.proto.PvpUserClanAvengePro",
+      "to\022;\n\010attacker\030\003 \001(\0132).com.lvl6.proto.Mi" +
+      "nimumUserProtoWithLevel\0222\n\010defender\030\004 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\025\n\rb" +
+      "attleEndTime\030\005 \001(\003\022\031\n\021avengeRequestTime\030" +
+      "\006 \001(\003\022\030\n\020defenderClanUuid\030\007 \001(\t\"h\n\026PvpUs" +
+      "erClanAvengeProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010c" +
+      "lanUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n" +
+      "\navengeTime\030\004 \001(\003\"`\n\021BattleReplayProto\022\022" +
+      "\n\nreplayUuid\030\001 \001(\t\022\023\n\013creatorUuid\030\002 \001(\t\022" +
+      "\016\n\006replay\030\003 \001(\014\022\022\n\ncreateTime\030\004 \001(\005*E\n\014B",
+      "attleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDE" +
+      "R_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11249,7 +11265,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", "Replay", });
+        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", "ReplayId", });
     internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new

@@ -639,7 +639,8 @@ public class CreateInfoProtoUtils {
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
-			BattleReplayForUser brfu)
+			String replayId)
+			//BattleReplayForUser brfu)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null, c);
@@ -655,9 +656,12 @@ public class CreateInfoProtoUtils {
 
 		modifyPvpHistoryProto(phpb, info);
 
-		if (null != brfu) {
-			BattleReplayProto brp = createBattleReplayProto(brfu);
-			phpb.setReplay(brp);
+//		if (null != brfu) {
+//			BattleReplayProto brp = createBattleReplayProto(brfu);
+//			phpb.setReplay(brp);
+//		}
+		if (null != replayId && !replayId.isEmpty()) {
+			phpb.setReplayId(replayId);
 		}
 		return phpb.build();
 	}
@@ -696,15 +700,16 @@ public class CreateInfoProtoUtils {
 					.get(attackerId);
 
 			String replayId = history.getReplayId();
-			BattleReplayForUser brfu = null;
-			if (replayIdToReplay.containsKey(replayId))
-			{
-				brfu = replayIdToReplay.get(replayId);
-			}
+//			BattleReplayForUser brfu = null;
+//			if (replayIdToReplay.containsKey(replayId))
+//			{
+//				brfu = replayIdToReplay.get(replayId);
+//			}
 
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 					clan, history, attackerMonsters, userMonsterIdToDropped,
-					prospectiveCashWinnings, prospectiveOilWinnings, brfu);
+					prospectiveCashWinnings, prospectiveOilWinnings,
+					replayId);// brfu);
 			phpList.add(php);
 		}
 		return phpList;
@@ -730,14 +735,14 @@ public class CreateInfoProtoUtils {
 			FullUserProto defenderFup = createFullUserProtoFromUser(defender,
 					null, null);
 
-			BattleReplayForUser brfu = null;
+//			BattleReplayForUser brfu = null;
 			String replayId = pbh.getReplayId();
-			if (null != replayId && replayIdToReplay.containsKey(replayId))
-			{
-				brfu = replayIdToReplay.get(replayId);
-			}
+//			if (null != replayId && replayIdToReplay.containsKey(replayId))
+//			{
+//				brfu = replayIdToReplay.get(replayId);
+//			}
 			PvpHistoryProto php = createAttackedOthersPvpHistoryProto(fup,
-					defenderFup, pbh, brfu);
+					defenderFup, pbh, replayId); //brfu);
 
 			phpList.add(php);
 		}
@@ -747,7 +752,7 @@ public class CreateInfoProtoUtils {
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
 			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info,
-			BattleReplayForUser brfu)
+			String replayId) //BattleReplayForUser brfu)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		phpb.setAttacker(fup);
@@ -755,11 +760,16 @@ public class CreateInfoProtoUtils {
 
 		modifyPvpHistoryProto(phpb, info);
 
-		if (null != brfu)
-		{
-			BattleReplayProto brp = createBattleReplayProto(brfu);
-			phpb.setReplay(brp);
+//		if (null != brfu)
+//		{
+//			BattleReplayProto brp = createBattleReplayProto(brfu);
+//			phpb.setReplay(brp);
+//		}
+
+		if (null != replayId) {
+			phpb.setReplayId(replayId);
 		}
+
 		return phpb.build();
 	}
 
