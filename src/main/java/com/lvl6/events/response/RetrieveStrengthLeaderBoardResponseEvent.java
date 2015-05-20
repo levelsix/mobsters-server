@@ -13,7 +13,7 @@ public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEven
 
 	public RetrieveStrengthLeaderBoardResponseEvent(String playerId) {
 		super(playerId);
-		eventType = EventProtocolResponse.S_RETRIEVE_USER_MONSTER_TEAM_EVENT;
+		eventType = EventProtocolResponse.S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT;
 	}
 
 	@Override
