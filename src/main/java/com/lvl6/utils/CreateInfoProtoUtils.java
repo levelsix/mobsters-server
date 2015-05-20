@@ -5355,10 +5355,13 @@ public class CreateInfoProtoUtils {
 		for(StrengthLeaderBoard slb : slbList) {
 			userIds.add(slb.getUserId());
 		}
+		log.info("userIds {}", userIds);
 		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
+		log.info("userMap: {}" + userMap);
 		for(StrengthLeaderBoard slb : slbList) {
 			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
 			String userId = slb.getUserId();
+			log.info("userId {}", userId);
 			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
 			b.setRank(slb.getRank());
 			b.setStrength(slb.getStrength());
