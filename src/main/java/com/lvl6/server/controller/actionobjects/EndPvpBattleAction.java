@@ -384,6 +384,8 @@ public class EndPvpBattleAction {
 
 		pbh.setPvpDmgMultiplier(nuPvpDmgMultiplier);
 		pbh.setClanAvenged(false);
+		
+		pbh.setAttackerWon(attackerWon);
 	}
 
 	private void processOutcome() {
