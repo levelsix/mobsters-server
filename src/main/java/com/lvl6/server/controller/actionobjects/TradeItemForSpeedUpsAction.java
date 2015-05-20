@@ -213,4 +213,111 @@ public class TradeItemForSpeedUpsAction {
 		return itemsUsedWithIds;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public List<ItemForUserUsage> getItemsUsed() {
+		return itemsUsed;
+	}
+
+	public void setItemsUsed(List<ItemForUserUsage> itemsUsed) {
+		this.itemsUsed = itemsUsed;
+	}
+
+	public List<ItemForUser> getNuUserItems() {
+		return nuUserItems;
+	}
+
+	public void setNuUserItems(List<ItemForUser> nuUserItems) {
+		this.nuUserItems = nuUserItems;
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public InsertUtil getInsertUtil() {
+		return insertUtil;
+	}
+
+	public void setInsertUtil(InsertUtil insertUtil) {
+		this.insertUtil = insertUtil;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public int getGemsSpent() {
+		return gemsSpent;
+	}
+
+	public void setGemsSpent(int gemsSpent) {
+		this.gemsSpent = gemsSpent;
+	}
+
+	public Map<Integer, Integer> getItemIdToQuantityUsed() {
+		return itemIdToQuantityUsed;
+	}
+
+	public void setItemIdToQuantityUsed(Map<Integer, Integer> itemIdToQuantityUsed) {
+		this.itemIdToQuantityUsed = itemIdToQuantityUsed;
+	}
+
+	public Map<Integer, Integer> getItemIdToNuQuantity() {
+		return itemIdToNuQuantity;
+	}
+
+	public void setItemIdToNuQuantity(Map<Integer, Integer> itemIdToNuQuantity) {
+		this.itemIdToNuQuantity = itemIdToNuQuantity;
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public User getUserPojo() {
+		return userPojo;
+	}
+
+	public void setUserPojo(User userPojo) {
+		this.userPojo = userPojo;
+	}
+
+	public List<String> getItemForUserUsageIds() {
+		return itemForUserUsageIds;
+	}
+
+	public void setItemForUserUsageIds(List<String> itemForUserUsageIds) {
+		this.itemForUserUsageIds = itemForUserUsageIds;
+	}
+
+	public List<ItemForUserUsage> getItemsUsedWithIds() {
+		return itemsUsedWithIds;
+	}
+
+	public void setItemsUsedWithIds(List<ItemForUserUsage> itemsUsedWithIds) {
+		this.itemsUsedWithIds = itemsUsedWithIds;
+	}
+	
+	
+
 }

@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import com.lvl6.events.response.TradeItemForSpeedUpsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
@@ -23,6 +25,7 @@ import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
 import com.lvl6.server.controller.actionobjects.TradeItemForSpeedUpsAction;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -133,7 +136,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-								user, null, null);
+								tifsua.getUserPojo(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -172,6 +175,15 @@ public class TradeItemForSpeedUpsController extends EventController {
 					.getSimpleName());
 		}
 	}
+	
+	private void writeToCurrencyHistory(String userId, Timestamp date,
+			RetrieveCurrencyFromNormStructureAction rcfnsa) {
+		miscMethods.writeToUserCurrencyOneUser(userId, date,
+				rcfnsa.getCurrencyDeltas(), rcfnsa.getPreviousCurrencies(),
+				rcfnsa.getCurrentCurrencies(), rcfnsa.getReasons(),
+				rcfnsa.getDetails());
+	}
+	
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
