@@ -45,7 +45,7 @@ public class RetrieveBattleReplayController extends EventController {
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_SET_DEFENDING_MSG_EVENT;
+		return EventProtocolRequest.C_RETRIEVE_BATTLE_REPLAY_EVENT;
 	}
 
 	@Override
