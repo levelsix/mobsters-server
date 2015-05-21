@@ -97,6 +97,7 @@ public class InAppPurchaseUtils {
 			b.setTimeEnd(sp.getTimeEnd().getTime());
 		}
 
+		b.setPriority(sp.getPriority());
 		b.setAnimatingIcon(sp.getAnimatingIcon());
 		b.setSlamIcon(sp.getSlamIcon());
 		b.setTitleColor(sp.getTitleColor());
