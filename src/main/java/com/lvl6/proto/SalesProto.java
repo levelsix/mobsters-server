@@ -198,6 +198,15 @@ public final class SalesProto {
      */
     com.google.protobuf.ByteString
         getTitleColorBytes();
+
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    boolean hasPriority();
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    int getPriority();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesPackageProto}
@@ -328,6 +337,11 @@ public final class SalesProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
               titleColor_ = bs;
+              break;
+            }
+            case 112: {
+              bitField0_ |= 0x00000400;
+              priority_ = input.readInt32();
               break;
             }
           }
@@ -769,6 +783,21 @@ public final class SalesProto {
       }
     }
 
+    public static final int PRIORITY_FIELD_NUMBER = 14;
+    private int priority_;
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    public int getPriority() {
+      return priority_;
+    }
+
     private void initFields() {
       salesPackageId_ = 0;
       salesProductId_ = "";
@@ -783,6 +812,7 @@ public final class SalesProto {
       animatingIcon_ = "";
       slamIcon_ = "";
       titleColor_ = "";
+      priority_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -835,6 +865,9 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(13, getTitleColorBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(14, priority_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -896,6 +929,10 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(13, getTitleColorBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(14, priority_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1055,6 +1092,8 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000800);
         titleColor_ = "";
         bitField0_ = (bitField0_ & ~0x00001000);
+        priority_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -1150,6 +1189,10 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000200;
         }
         result.titleColor_ = titleColor_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.priority_ = priority_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1283,6 +1326,9 @@ public final class SalesProto {
           bitField0_ |= 0x00001000;
           titleColor_ = other.titleColor_;
           onChanged();
+        }
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2567,6 +2613,38 @@ public final class SalesProto {
   }
   bitField0_ |= 0x00001000;
         titleColor_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int priority_ ;
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public int getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public Builder setPriority(int value) {
+        bitField0_ |= 0x00002000;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        priority_ = 0;
         onChanged();
         return this;
       }
@@ -3936,7 +4014,7 @@ public final class SalesProto {
     java.lang.String[] descriptorData = {
       "\n\013Sales.proto\022\016com.lvl6.proto\032\nChat.prot" +
       "o\032\020CustomMenu.proto\032\014Reward.proto\032\026Share" +
-      "dEnumConfig.proto\032\nUser.proto\"\341\002\n\021SalesP" +
+      "dEnumConfig.proto\032\nUser.proto\"\363\002\n\021SalesP" +
       "ackageProto\022\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016s" +
       "alesProductId\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uu" +
       "id\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.S" +
@@ -3945,13 +4023,13 @@ public final class SalesProto {
       "\037.com.lvl6.proto.CustomMenuProto\022\016\n\006succ" +
       "Id\030\010 \001(\005\022\021\n\ttimeStart\030\t \001(\003\022\017\n\007timeEnd\030\n",
       " \001(\003\022\025\n\ranimatingIcon\030\013 \001(\t\022\020\n\010slamIcon\030" +
-      "\014 \001(\t\022\022\n\ntitleColor\030\r \001(\t\"j\n\016SalesItemPr" +
-      "oto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackage" +
-      "Id\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.prot" +
-      "o.RewardProto\"q\n\025SalesDisplayItemProto\022\023" +
-      "\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackageId\030\002 " +
-      "\001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.proto.Rew" +
-      "ardProtoB\014B\nSalesProto"
+      "\014 \001(\t\022\022\n\ntitleColor\030\r \001(\t\022\020\n\010priority\030\016 " +
+      "\001(\005\"j\n\016SalesItemProto\022\023\n\013salesItemId\030\001 \001" +
+      "(\005\022\026\n\016salesPackageId\030\002 \001(\005\022+\n\006reward\030\003 \001" +
+      "(\0132\033.com.lvl6.proto.RewardProto\"q\n\025Sales" +
+      "DisplayItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n" +
+      "\016salesPackageId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033." +
+      "com.lvl6.proto.RewardProtoB\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3975,7 +4053,7 @@ public final class SalesProto {
     internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SalesPackageProto_descriptor,
-        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "Cmp", "SuccId", "TimeStart", "TimeEnd", "AnimatingIcon", "SlamIcon", "TitleColor", });
+        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "Cmp", "SuccId", "TimeStart", "TimeEnd", "AnimatingIcon", "SlamIcon", "TitleColor", "Priority", });
     internal_static_com_lvl6_proto_SalesItemProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
