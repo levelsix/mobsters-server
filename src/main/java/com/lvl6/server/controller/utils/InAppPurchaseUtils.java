@@ -3,6 +3,7 @@ package com.lvl6.server.controller.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CustomMenu;
+import com.lvl6.info.FileDownload;
 import com.lvl6.info.Reward;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
@@ -172,6 +174,15 @@ public class InAppPurchaseUtils {
 		sdipb.setReward(createInfoProtoUtils.createRewardProto(r));
 
 		return sdipb.build();
+	}
+	
+	public void sortSalesPackageProtoList(List<SalesPackageProto> sppList) {
+		Collections.sort(sppList, new Comparator<SalesPackageProto>() {
+			@Override
+			public int compare(SalesPackageProto spp1, SalesPackageProto spp2) {
+				return spp1.getPriority() - spp2.getPriority();
+			}
+		});
 	}
 
 

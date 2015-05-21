@@ -40,7 +40,6 @@ import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
-//import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
@@ -153,6 +152,9 @@ import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
+import com.lvl6.proto.SalesProto.SalesPackageProto
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -1362,6 +1364,7 @@ class StartupService extends LazyLogging{
 				}
 				val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 
+        val salesProtoList = new ArrayList[SalesPackageProto]()
 				val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
 				idsToSalesPackages.values().foreach { sp:SalesPackage =>
 					if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
@@ -1370,16 +1373,16 @@ class StartupService extends LazyLogging{
 					{ //make sure it's not starter pack
 						if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
 								timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
-							val spProto = inAppPurchaseUtil.createSalesPackageProto(
-								sp,
-								salesItemRetrieveUtil,
-								salesDisplayItemRetrieveUtil,
-								customMenuRetrieveUtil);
-							resBuilder.addSalesPackages(spProto);
-                        }
-                    }
-				}
+							  val spProto = inAppPurchaseUtil.createSalesPackageProto(
+								  sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
+								  customMenuRetrieveUtil);
+                salesProtoList.add(spProto)
             }
+          }
+				}
+        inAppPurchaseUtil.sortSalesPackageProtoList(salesProtoList);
+        resBuilder.addAllSalesPackages(salesProtoList);
+      }
 		}
 	}
 
