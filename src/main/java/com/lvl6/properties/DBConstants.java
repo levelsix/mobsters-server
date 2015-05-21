@@ -1044,6 +1044,7 @@ public class DBConstants {
 	public static final String FILE_DOWNLOAD__PRIORITY = "priority";
 	public static final String FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI = "download_only_over_wifi";
 	public static final String FILE_DOWNLOAD__USE_IPHONE6_PREFIX = "use_iphone6_prefix";
+	public static final String FILE_DOWNLOAD__USE_IPAD_SUFFIX = "use_ipad_suffix";
 
 	public static final String ITEM__ID = GENERIC__ID;
 	public static final String ITEM__NAME = "name";

@@ -15130,6 +15130,15 @@ public final class EventStartupProto {
          * <code>optional bool useIphone6Prefix = 5;</code>
          */
         boolean getUseIphone6Prefix();
+
+        /**
+         * <code>optional bool useIpadSuffix = 6;</code>
+         */
+        boolean hasUseIpadSuffix();
+        /**
+         * <code>optional bool useIpadSuffix = 6;</code>
+         */
+        boolean getUseIpadSuffix();
       }
       /**
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.FileDownloadConstantProto}
@@ -15207,6 +15216,11 @@ public final class EventStartupProto {
                 case 40: {
                   bitField0_ |= 0x00000010;
                   useIphone6Prefix_ = input.readBool();
+                  break;
+                }
+                case 48: {
+                  bitField0_ |= 0x00000020;
+                  useIpadSuffix_ = input.readBool();
                   break;
                 }
               }
@@ -15351,12 +15365,28 @@ public final class EventStartupProto {
           return useIphone6Prefix_;
         }
 
+        public static final int USEIPADSUFFIX_FIELD_NUMBER = 6;
+        private boolean useIpadSuffix_;
+        /**
+         * <code>optional bool useIpadSuffix = 6;</code>
+         */
+        public boolean hasUseIpadSuffix() {
+          return ((bitField0_ & 0x00000020) == 0x00000020);
+        }
+        /**
+         * <code>optional bool useIpadSuffix = 6;</code>
+         */
+        public boolean getUseIpadSuffix() {
+          return useIpadSuffix_;
+        }
+
         private void initFields() {
           fileDownloadId_ = 0;
           fileName_ = "";
           priority_ = 0;
           downloadOnlyOverWifi_ = false;
           useIphone6Prefix_ = false;
+          useIpadSuffix_ = false;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -15386,6 +15416,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
             output.writeBool(5, useIphone6Prefix_);
           }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            output.writeBool(6, useIpadSuffix_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -15414,6 +15447,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
             size += com.google.protobuf.CodedOutputStream
               .computeBoolSize(5, useIphone6Prefix_);
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBoolSize(6, useIpadSuffix_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -15542,6 +15579,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000008);
             useIphone6Prefix_ = false;
             bitField0_ = (bitField0_ & ~0x00000010);
+            useIpadSuffix_ = false;
+            bitField0_ = (bitField0_ & ~0x00000020);
             return this;
           }
 
@@ -15590,6 +15629,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000010;
             }
             result.useIphone6Prefix_ = useIphone6Prefix_;
+            if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+              to_bitField0_ |= 0x00000020;
+            }
+            result.useIpadSuffix_ = useIpadSuffix_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -15622,6 +15665,9 @@ public final class EventStartupProto {
             }
             if (other.hasUseIphone6Prefix()) {
               setUseIphone6Prefix(other.getUseIphone6Prefix());
+            }
+            if (other.hasUseIpadSuffix()) {
+              setUseIpadSuffix(other.getUseIpadSuffix());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -15850,6 +15896,38 @@ public final class EventStartupProto {
           public Builder clearUseIphone6Prefix() {
             bitField0_ = (bitField0_ & ~0x00000010);
             useIphone6Prefix_ = false;
+            onChanged();
+            return this;
+          }
+
+          private boolean useIpadSuffix_ ;
+          /**
+           * <code>optional bool useIpadSuffix = 6;</code>
+           */
+          public boolean hasUseIpadSuffix() {
+            return ((bitField0_ & 0x00000020) == 0x00000020);
+          }
+          /**
+           * <code>optional bool useIpadSuffix = 6;</code>
+           */
+          public boolean getUseIpadSuffix() {
+            return useIpadSuffix_;
+          }
+          /**
+           * <code>optional bool useIpadSuffix = 6;</code>
+           */
+          public Builder setUseIpadSuffix(boolean value) {
+            bitField0_ |= 0x00000020;
+            useIpadSuffix_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional bool useIpadSuffix = 6;</code>
+           */
+          public Builder clearUseIpadSuffix() {
+            bitField0_ = (bitField0_ & ~0x00000020);
+            useIpadSuffix_ = false;
             onChanged();
             return this;
           }
@@ -40850,7 +40928,7 @@ public final class EventStartupProto {
       "mberProto\030\t \001(\01326.com.lvl6.proto.Startup" +
       "RequestProto.VersionNumberProto\032J\n\022Versi" +
       "onNumberProto\022\020\n\010superNum\030\001 \001(\005\022\020\n\010major" +
-      "Num\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\337B\n\024StartupR" +
+      "Num\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\366B\n\024StartupR" +
       "esponseProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-",
       "\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.FullUser" +
       "Proto\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6." +
@@ -40939,7 +41017,7 @@ public final class EventStartupProto {
       "n\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222\n" +
       "\010referred\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
       "UserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsG" +
-      "ivenToReferrer\030\003 \001(\005\032\262!\n\020StartupConstant" +
+      "ivenToReferrer\030\003 \001(\005\032\311!\n\020StartupConstant" +
       "s\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com.l" +
       "vl6.proto.InAppPurchasePackageProto\022\027\n\017m",
       "axLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleSt" +
@@ -41040,33 +41118,34 @@ public final class EventStartupProto {
       "\001(\005\032\210\001\n\037ResourceConversionConstantProto\022" +
       "?\n\014resourceType\030\001 \001(\0162\034.com.lvl6.proto.R" +
       "esourceType:\013NO_RESOURCE\022\023\n\013resourceAmt\030" +
-      "\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\217\001\n\031FileDownloadC" +
+      "\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\246\001\n\031FileDownloadC" +
       "onstantProto\022\026\n\016fileDownloadId\030\001 \001(\005\022\020\n\010",
       "fileName\030\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024down" +
       "loadOnlyOverWifi\030\004 \001(\010\022\030\n\020useIphone6Pref" +
-      "ix\030\005 \001(\010\032W\n\031BoosterPackConstantsProto\022\036\n" +
-      "\026purchaseAmountRequired\030\001 \001(\005\022\032\n\022numberO" +
-      "fPacksGiven\030\002 \001(\005\032\266\004\n\021TutorialConstants\022" +
-      "\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016guideMonst" +
-      "erId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021en" +
-      "emyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonste" +
-      "rId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tut" +
-      "orialStructures\030\003 \003(\0132#.com.lvl6.proto.T",
-      "utorialStructProto\022\036\n\026structureIdsToBeBu" +
-      "illt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneEle" +
-      "ments\030\006 \003(\0132 .com.lvl6.proto.CityElement" +
-      "Proto\022$\n\034cityElementIdForFirstDungeon\030\007 " +
-      "\001(\005\022%\n\035cityElementIdForSecondDungeon\030\010 \001" +
-      "(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n" +
-      "\010gemsInit\030\r \001(\005\022\030\n\020gachaCreditsInit\030\021 \001(" +
-      "\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.com.lvl6." +
-      "proto.MinimumObstacleProto\"A\n\014UpdateStat" +
-      "us\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014M",
-      "AJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_I" +
-      "N_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_" +
-      "MAINTENANCE\020\003\"C\n\030ForceLogoutResponseProt" +
-      "o\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001" +
-      "(\tB\023B\021EventStartupProto"
+      "ix\030\005 \001(\010\022\025\n\ruseIpadSuffix\030\006 \001(\010\032W\n\031Boost" +
+      "erPackConstantsProto\022\036\n\026purchaseAmountRe" +
+      "quired\030\001 \001(\005\022\032\n\022numberOfPacksGiven\030\002 \001(\005" +
+      "\032\266\004\n\021TutorialConstants\022\031\n\021startingMonste" +
+      "rId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016ene" +
+      "myMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017" +
+      " \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016mark" +
+      "ZMonsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003",
+      " \003(\0132#.com.lvl6.proto.TutorialStructProt" +
+      "o\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cit" +
+      "yId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com" +
+      ".lvl6.proto.CityElementProto\022$\n\034cityElem" +
+      "entIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElemen" +
+      "tIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 " +
+      "\001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022\030" +
+      "\n\020gachaCreditsInit\030\021 \001(\005\022?\n\021tutorialObst" +
+      "acles\030\016 \003(\0132$.com.lvl6.proto.MinimumObst" +
+      "acleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001",
+      "\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\r" +
+      "StartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NO" +
+      "T_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030" +
+      "ForceLogoutResponseProto\022\031\n\021previousLogi" +
+      "nTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartu" +
+      "pProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -41215,7 +41294,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_FileDownloadConstantProto_descriptor,
-        new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", "UseIphone6Prefix", });
+        new java.lang.String[] { "FileDownloadId", "FileName", "Priority", "DownloadOnlyOverWifi", "UseIphone6Prefix", "UseIpadSuffix", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(13);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_BoosterPackConstantsProto_fieldAccessorTable = new

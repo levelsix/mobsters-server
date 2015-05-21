@@ -4912,6 +4912,7 @@ public class CreateInfoProtoUtils {
 		fdpb.setFileName(fd.getFileName());
 		fdpb.setPriority(fd.getPriority());
 		fdpb.setDownloadOnlyOverWifi(fd.isDownloadOnlyOverWifi());
+		fdpb.setUseIpadSuffix(fd.isUseIpadSuffix());
 
 		return fdpb.build();
 	}

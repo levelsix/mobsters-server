@@ -98,9 +98,10 @@ public class FileDownloadRetrieveUtils {
 				.getBoolean(DBConstants.FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI);
 		boolean useIphone6Prefix = rs
 				.getBoolean(DBConstants.FILE_DOWNLOAD__USE_IPHONE6_PREFIX);
+		boolean useIpadSuffix = rs.getBoolean(DBConstants.FILE_DOWNLOAD__USE_IPAD_SUFFIX);
 
 		FileDownload fd = new FileDownload(id, filename, priority,
-				downloadOnlyOverWifi, useIphone6Prefix);
+				downloadOnlyOverWifi, useIphone6Prefix, useIpadSuffix);
 		return fd;
 	}
 
