@@ -70,7 +70,7 @@ public class LeaderBoardImpl {
 	public List<StrengthLeaderBoard> getStrengths(int minRank, int maxRank) {
 		List<StrengthLeaderBoard> returnList = new ArrayList<StrengthLeaderBoard>();
 		for(ZSetMember m : strLeaderboard.range(minRank, maxRank)) {
-			int rank = m.getRank();
+			int rank = m.getRank() + 1;
 			String userId = m.getKey();
 			long strength = m.getScore();
 			StrengthLeaderBoard slb = new StrengthLeaderBoard(rank, userId, strength);
@@ -82,7 +82,7 @@ public class LeaderBoardImpl {
 	public List<StrengthLeaderBoard> getTopNStrengths(int num) {
 		List<StrengthLeaderBoard> returnList = new ArrayList<StrengthLeaderBoard>();
 		for(ZSetMember m : strLeaderboard.range(0, num)) {
-			int rank = m.getRank();
+			int rank = m.getRank() + 1;
 			String userId = m.getKey();
 			long strength = m.getScore();
 			StrengthLeaderBoard slb = new StrengthLeaderBoard(rank, userId, strength);
