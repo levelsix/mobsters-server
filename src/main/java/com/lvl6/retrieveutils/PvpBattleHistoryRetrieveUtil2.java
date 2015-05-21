@@ -116,6 +116,8 @@ public class PvpBattleHistoryRetrieveUtil2 {
 					.getFloat(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER));
 			history.setClanAvenged(rs
 					.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
+			history.setReplayId(rs
+					.getString(DBConstants.PVP_BATTLE_HISTORY__REPLAY_ID));
 			return history;
 		}
 
@@ -159,6 +161,8 @@ public class PvpBattleHistoryRetrieveUtil2 {
 						.add(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER);
 				columnsSelected
 						.add(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED);
+				columnsSelected
+				.add(DBConstants.PVP_BATTLE_HISTORY__REPLAY_ID);
 			}
 			return columnsSelected;
 		}

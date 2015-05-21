@@ -153,6 +153,8 @@ import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -176,6 +178,7 @@ class StartupService extends LazyLogging{
 	@Autowired var  achievementForUserRetrieveUtil : AchievementForUserRetrieveUtil  = null
 	@Autowired var  battleItemQueueForUserRetrieveUtil : BattleItemQueueForUserRetrieveUtil = null
 	@Autowired var  battleItemForUserRetrieveUtil : BattleItemForUserRetrieveUtil = null
+    @Autowired var  battleReplayForUserRetrieveUtil : BattleReplayForUserRetrieveUtil = null 
 	@Autowired var  cepfuRaidStageHistoryRetrieveUtils : CepfuRaidStageHistoryRetrieveUtils2  = null
 	@Autowired var  clanAvengeRetrieveUtil : ClanAvengeRetrieveUtil  = null
 	@Autowired var  clanAvengeUserRetrieveUtil : ClanAvengeUserRetrieveUtil  = null
@@ -556,7 +559,8 @@ class StartupService extends LazyLogging{
 						monsterStuffUtil,
 						createInfoProtoUtils,
 						serverToggleRetrieveUtil,
-						monsterLevelInfoRetrieveUtil);
+            			monsterLevelInfoRetrieveUtil,
+			            battleReplayForUserRetrieveUtil);
 				spbha.setUp(fillMe);
 
 				//CLAN DATA
@@ -799,7 +803,7 @@ class StartupService extends LazyLogging{
 								logger.info(s"numDeleted enhancements: $numDeleted")
     						}
     					}catch{
-    					    case t:Throwable => logger.error("unable to delete orphaned enhancements", t)
+              				case t:Throwable => logger.error(s"unable to delete orphaned enhancements", t)
     					}
     				}else {
     					val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
@@ -1156,12 +1160,13 @@ class StartupService extends LazyLogging{
 					resBuilder.addItemsInUse(uiup);
 				}
 				userItemIds = itemIdToUserItems.keySet()
+        }
+        
     			if (userItemIds != null) {
     				setSalePack(resBuilder, user, userItemIds);
     			}
             }
 		}
-	}
 
 	def setSalePack(resBuilder:Builder, user:User, userItemIds:java.util.Set[Integer])= {
 		timed("StartupService.setSalePack"){
@@ -1399,6 +1404,7 @@ class StartupService extends LazyLogging{
 		}
 		return newMinPrice
 	}
+  
 	def setDefaultLanguagesForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
 		Future{
 			timed("StartupService.setDefaultLanguagesForUser"){

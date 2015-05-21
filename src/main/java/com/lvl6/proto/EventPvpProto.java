@@ -3920,6 +3920,15 @@ public final class EventPvpProto {
      * </pre>
      */
     int getMonsterDropIds(int index);
+
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    boolean hasReplay();
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    com.google.protobuf.ByteString getReplay();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleRequestProto}
@@ -4041,6 +4050,11 @@ public final class EventPvpProto {
                 monsterDropIds_.add(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000100;
+              replay_ = input.readBytes();
               break;
             }
           }
@@ -4325,6 +4339,21 @@ public final class EventPvpProto {
       return monsterDropIds_.get(index);
     }
 
+    public static final int REPLAY_FIELD_NUMBER = 10;
+    private com.google.protobuf.ByteString replay_;
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    public boolean hasReplay() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional bytes replay = 10;</code>
+     */
+    public com.google.protobuf.ByteString getReplay() {
+      return replay_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       defenderUuid_ = "";
@@ -4335,6 +4364,7 @@ public final class EventPvpProto {
       cashChange_ = 0;
       nuPvpDmgMultiplier_ = 0F;
       monsterDropIds_ = java.util.Collections.emptyList();
+      replay_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4375,6 +4405,9 @@ public final class EventPvpProto {
       }
       for (int i = 0; i < monsterDropIds_.size(); i++) {
         output.writeInt32(9, monsterDropIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(10, replay_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4425,6 +4458,10 @@ public final class EventPvpProto {
         }
         size += dataSize;
         size += 1 * getMonsterDropIdsList().size();
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, replay_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4566,6 +4603,8 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         monsterDropIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000100);
+        replay_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -4635,6 +4674,10 @@ public final class EventPvpProto {
           bitField0_ = (bitField0_ & ~0x00000100);
         }
         result.monsterDropIds_ = monsterDropIds_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.replay_ = replay_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4686,6 +4729,9 @@ public final class EventPvpProto {
             monsterDropIds_.addAll(other.monsterDropIds_);
           }
           onChanged();
+        }
+        if (other.hasReplay()) {
+          setReplay(other.getReplay());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5292,6 +5338,41 @@ public final class EventPvpProto {
       public Builder clearMonsterDropIds() {
         monsterDropIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString replay_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public boolean hasReplay() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public com.google.protobuf.ByteString getReplay() {
+        return replay_;
+      }
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public Builder setReplay(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        replay_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes replay = 10;</code>
+       */
+      public Builder clearReplay() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        replay_ = getDefaultInstance().getReplay();
         onChanged();
         return this;
       }
@@ -10522,6 +10603,1537 @@ public final class EventPvpProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CustomizePvpBoardObstacleResponseProto)
   }
 
+  public interface RetrieveBattleReplayRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveBattleReplayRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional string replayId = 2;</code>
+     */
+    boolean hasReplayId();
+    /**
+     * <code>optional string replayId = 2;</code>
+     */
+    java.lang.String getReplayId();
+    /**
+     * <code>optional string replayId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getReplayIdBytes();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.RetrieveBattleReplayRequestProto}
+   */
+  public static final class RetrieveBattleReplayRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveBattleReplayRequestProto)
+      RetrieveBattleReplayRequestProtoOrBuilder {
+    // Use RetrieveBattleReplayRequestProto.newBuilder() to construct.
+    private RetrieveBattleReplayRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RetrieveBattleReplayRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RetrieveBattleReplayRequestProto defaultInstance;
+    public static RetrieveBattleReplayRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RetrieveBattleReplayRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RetrieveBattleReplayRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              replayId_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.class, com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RetrieveBattleReplayRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<RetrieveBattleReplayRequestProto>() {
+      public RetrieveBattleReplayRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RetrieveBattleReplayRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RetrieveBattleReplayRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int REPLAYID_FIELD_NUMBER = 2;
+    private java.lang.Object replayId_;
+    /**
+     * <code>optional string replayId = 2;</code>
+     */
+    public boolean hasReplayId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string replayId = 2;</code>
+     */
+    public java.lang.String getReplayId() {
+      java.lang.Object ref = replayId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          replayId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string replayId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getReplayIdBytes() {
+      java.lang.Object ref = replayId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        replayId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      replayId_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getReplayIdBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getReplayIdBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.RetrieveBattleReplayRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveBattleReplayRequestProto)
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.class, com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        replayId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto build() {
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto buildPartial() {
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto result = new com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.replayId_ = replayId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto other) {
+        if (other == com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasReplayId()) {
+          bitField0_ |= 0x00000002;
+          replayId_ = other.replayId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.lang.Object replayId_ = "";
+      /**
+       * <code>optional string replayId = 2;</code>
+       */
+      public boolean hasReplayId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string replayId = 2;</code>
+       */
+      public java.lang.String getReplayId() {
+        java.lang.Object ref = replayId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            replayId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string replayId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getReplayIdBytes() {
+        java.lang.Object ref = replayId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          replayId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string replayId = 2;</code>
+       */
+      public Builder setReplayId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        replayId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string replayId = 2;</code>
+       */
+      public Builder clearReplayId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        replayId_ = getDefaultInstance().getReplayId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string replayId = 2;</code>
+       */
+      public Builder setReplayIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        replayId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveBattleReplayRequestProto)
+    }
+
+    static {
+      defaultInstance = new RetrieveBattleReplayRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveBattleReplayRequestProto)
+  }
+
+  public interface RetrieveBattleReplayResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveBattleReplayResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+     */
+    boolean hasBrp();
+    /**
+     * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.BattleReplayProto getBrp();
+    /**
+     * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder getBrpOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+     */
+    com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.RetrieveBattleReplayResponseProto}
+   */
+  public static final class RetrieveBattleReplayResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveBattleReplayResponseProto)
+      RetrieveBattleReplayResponseProtoOrBuilder {
+    // Use RetrieveBattleReplayResponseProto.newBuilder() to construct.
+    private RetrieveBattleReplayResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RetrieveBattleReplayResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RetrieveBattleReplayResponseProto defaultInstance;
+    public static RetrieveBattleReplayResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RetrieveBattleReplayResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RetrieveBattleReplayResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.BattleProto.BattleReplayProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = brp_.toBuilder();
+              }
+              brp_ = input.readMessage(com.lvl6.proto.BattleProto.BattleReplayProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(brp_);
+                brp_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus value = com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.class, com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RetrieveBattleReplayResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<RetrieveBattleReplayResponseProto>() {
+      public RetrieveBattleReplayResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RetrieveBattleReplayResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RetrieveBattleReplayResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus}
+     */
+    public enum RetrieveBattleReplayStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static RetrieveBattleReplayStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<RetrieveBattleReplayStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<RetrieveBattleReplayStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<RetrieveBattleReplayStatus>() {
+              public RetrieveBattleReplayStatus findValueByNumber(int number) {
+                return RetrieveBattleReplayStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final RetrieveBattleReplayStatus[] VALUES = values();
+
+      public static RetrieveBattleReplayStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private RetrieveBattleReplayStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int BRP_FIELD_NUMBER = 2;
+    private com.lvl6.proto.BattleProto.BattleReplayProto brp_;
+    /**
+     * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+     */
+    public boolean hasBrp() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.BattleReplayProto getBrp() {
+      return brp_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder getBrpOrBuilder() {
+      return brp_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+     */
+    public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      brp_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, brp_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, brp_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.RetrieveBattleReplayResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveBattleReplayResponseProto)
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.class, com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getBrpFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (brpBuilder_ == null) {
+          brp_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
+        } else {
+          brpBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto build() {
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto buildPartial() {
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto result = new com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (brpBuilder_ == null) {
+          result.brp_ = brp_;
+        } else {
+          result.brp_ = brpBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto other) {
+        if (other == com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasBrp()) {
+          mergeBrp(other.getBrp());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.BattleProto.BattleReplayProto brp_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.BattleReplayProto, com.lvl6.proto.BattleProto.BattleReplayProto.Builder, com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder> brpBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public boolean hasBrp() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.BattleReplayProto getBrp() {
+        if (brpBuilder_ == null) {
+          return brp_;
+        } else {
+          return brpBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public Builder setBrp(com.lvl6.proto.BattleProto.BattleReplayProto value) {
+        if (brpBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          brp_ = value;
+          onChanged();
+        } else {
+          brpBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public Builder setBrp(
+          com.lvl6.proto.BattleProto.BattleReplayProto.Builder builderForValue) {
+        if (brpBuilder_ == null) {
+          brp_ = builderForValue.build();
+          onChanged();
+        } else {
+          brpBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public Builder mergeBrp(com.lvl6.proto.BattleProto.BattleReplayProto value) {
+        if (brpBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              brp_ != com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance()) {
+            brp_ =
+              com.lvl6.proto.BattleProto.BattleReplayProto.newBuilder(brp_).mergeFrom(value).buildPartial();
+          } else {
+            brp_ = value;
+          }
+          onChanged();
+        } else {
+          brpBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public Builder clearBrp() {
+        if (brpBuilder_ == null) {
+          brp_ = com.lvl6.proto.BattleProto.BattleReplayProto.getDefaultInstance();
+          onChanged();
+        } else {
+          brpBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.BattleReplayProto.Builder getBrpBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getBrpFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder getBrpOrBuilder() {
+        if (brpBuilder_ != null) {
+          return brpBuilder_.getMessageOrBuilder();
+        } else {
+          return brp_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BattleReplayProto brp = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.BattleReplayProto, com.lvl6.proto.BattleProto.BattleReplayProto.Builder, com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder> 
+          getBrpFieldBuilder() {
+        if (brpBuilder_ == null) {
+          brpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.BattleReplayProto, com.lvl6.proto.BattleProto.BattleReplayProto.Builder, com.lvl6.proto.BattleProto.BattleReplayProtoOrBuilder>(
+                  getBrp(),
+                  getParentForChildren(),
+                  isClean());
+          brp_ = null;
+        }
+        return brpBuilder_;
+      }
+
+      private com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status_ = com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+       */
+      public com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus status = 3;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveBattleReplayResponseProto)
+    }
+
+    static {
+      defaultInstance = new RetrieveBattleReplayResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveBattleReplayResponseProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor;
   private static
@@ -10572,6 +12184,16 @@ public final class EventPvpProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10605,47 +12227,57 @@ public final class EventPvpProto {
       "proto.BeginPvpBattleResponseProto.BeginP" +
       "vpBattleStatus\"O\n\024BeginPvpBattleStatus\022\013" +
       "\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAILABLE\020\002\022" +
-      "\016\n\nFAIL_OTHER\020\003\"\210\002\n\030EndPvpBattleRequestP" +
+      "\016\n\nFAIL_OTHER\020\003\"\230\002\n\030EndPvpBattleRequestP" +
       "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
       "nimumUserProtoWithMaxResources\022\024\n\014defend" +
       "erUuid\030\002 \001(\t\022\024\n\014userAttacked\030\003 \001(\010\022\017\n\007us" +
       "erWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\toilCh" +
       "ange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022nuPvpD",
       "mgMultiplier\030\010 \001(\002\022\026\n\016monsterDropIds\030\t \003" +
-      "(\005\"\255\004\n\031EndPvpBattleResponseProto\022@\n\006send" +
-      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
-      "toWithMaxResources\022\024\n\014defenderUuid\030\002 \001(\t" +
-      "\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attackerWo" +
-      "n\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto" +
-      ".EndPvpBattleResponseProto.EndPvpBattleS" +
-      "tatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.lvl6.p" +
-      "roto.FullUserMonsterProto\022<\n\023battleThatJ" +
-      "ustEnded\030\013 \001(\0132\037.com.lvl6.proto.PvpHisto",
-      "ryProto\0227\n\013statsBefore\030\014 \001(\0132\".com.lvl6." +
-      "proto.UserPvpLeagueProto\0226\n\nstatsAfter\030\r" +
+      "(\005\022\016\n\006replay\030\n \001(\014\"\255\004\n\031EndPvpBattleRespo" +
+      "nseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.prot" +
+      "o.MinimumUserProtoWithMaxResources\022\024\n\014de" +
+      "fenderUuid\030\002 \001(\t\022\030\n\020attackerAttacked\030\003 \001" +
+      "(\010\022\023\n\013attackerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162" +
+      "<.com.lvl6.proto.EndPvpBattleResponsePro" +
+      "to.EndPvpBattleStatus\022:\n\014updatedOrNew\030\n " +
+      "\003(\0132$.com.lvl6.proto.FullUserMonsterProt" +
+      "o\022<\n\023battleThatJustEnded\030\013 \001(\0132\037.com.lvl",
+      "6.proto.PvpHistoryProto\0227\n\013statsBefore\030\014" +
       " \001(\0132\".com.lvl6.proto.UserPvpLeagueProto" +
-      "\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG" +
-      "\020\003\"\\\n\033SetDefendingMsgRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendingMsgResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.co",
-      "m.lvl6.proto.SetDefendingMsgResponseProt" +
-      "o.SetDefendingMsgStatus\"4\n\025SetDefendingM" +
-      "sgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\271\001" +
-      "\n%CustomizePvpBoardObstacleRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022G\n\024nuOrUpdatedObstacles\030\002 \003(\0132" +
-      ").com.lvl6.proto.UserPvpBoardObstaclePro" +
-      "to\022\025\n\rremoveUpboIds\030\003 \003(\005\"\202\002\n&CustomizeP" +
-      "vpBoardObstacleResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022f",
-      "\n\006status\030\002 \001(\0162V.com.lvl6.proto.Customiz" +
-      "ePvpBoardObstacleResponseProto.Customize" +
-      "PvpBoardObstacleStatus\">\n\037CustomizePvpBo" +
-      "ardObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\017B\rEventPvpProto"
+      "\0226\n\nstatsAfter\030\r \001(\0132\".com.lvl6.proto.Us" +
+      "erPvpLeagueProto\"P\n\022EndPvpBattleStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATT" +
+      "LE_TOOK_TOO_LONG\020\003\"\\\n\033SetDefendingMsgReq" +
+      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034Set" +
+      "DefendingMsgResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022R\n\006s",
+      "tatus\030\002 \001(\0162B.com.lvl6.proto.SetDefendin" +
+      "gMsgResponseProto.SetDefendingMsgStatus\"" +
+      "4\n\025SetDefendingMsgStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"\271\001\n%CustomizePvpBoardObsta" +
+      "cleRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022G\n\024nuOrUpdated" +
+      "Obstacles\030\002 \003(\0132).com.lvl6.proto.UserPvp" +
+      "BoardObstacleProto\022\025\n\rremoveUpboIds\030\003 \003(" +
+      "\005\"\202\002\n&CustomizePvpBoardObstacleResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi",
+      "nimumUserProto\022f\n\006status\030\002 \001(\0162V.com.lvl" +
+      "6.proto.CustomizePvpBoardObstacleRespons" +
+      "eProto.CustomizePvpBoardObstacleStatus\">" +
+      "\n\037CustomizePvpBoardObstacleStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"f\n RetrieveBattle" +
+      "ReplayRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\020\n\010replayId" +
+      "\030\002 \001(\t\"\236\002\n!RetrieveBattleReplayResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022.\n\003brp\030\002 \001(\0132!.com.lvl6.p",
+      "roto.BattleReplayProto\022\\\n\006status\030\003 \001(\0162L" +
+      ".com.lvl6.proto.RetrieveBattleReplayResp" +
+      "onseProto.RetrieveBattleReplayStatus\"9\n\032" +
+      "RetrieveBattleReplayStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\016\n\nFAIL_OTHER\020\002B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10692,7 +12324,7 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", "MonsterDropIds", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", "MonsterDropIds", "Replay", });
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new
@@ -10723,6 +12355,18 @@ public final class EventPvpProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CustomizePvpBoardObstacleResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveBattleReplayRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ReplayId", });
+    internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveBattleReplayResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Brp", "Status", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();

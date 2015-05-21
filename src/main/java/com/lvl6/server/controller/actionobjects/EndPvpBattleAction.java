@@ -2,6 +2,7 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.protobuf.ByteString;
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
@@ -54,6 +57,7 @@ public class EndPvpBattleAction {
 	private long clientTime;
 	private Date curDateTime;
 	private Timestamp curTime;
+	private ByteString replay;
 	private ResourceUtil resourceUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil;
@@ -77,8 +81,8 @@ public class EndPvpBattleAction {
 			int cashStolen, float nuPvpDmgMultiplier,
 			List<Integer> monsterDropIds, int attackerMaxOil,
 			int attackerMaxCash, long clientTime, Date curDateTime,
-			Timestamp curTime, ResourceUtil resourceUtil,
-			UserRetrieveUtils2 userRetrieveUtil,
+			Timestamp curTime, ByteString replay,
+			ResourceUtil resourceUtil, UserRetrieveUtils2 userRetrieveUtil,
 			PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil,
 			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil,
 			ClanRetrieveUtils2 clanRetrieveUtil,
@@ -106,6 +110,7 @@ public class EndPvpBattleAction {
 		this.clientTime = clientTime;
 		this.curDateTime = curDateTime;
 		this.curTime = curTime;
+		this.replay = replay;
 		this.resourceUtil = resourceUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.pvpBattleForUserRetrieveUtil = pvpBattleForUserRetrieveUtil;
@@ -173,6 +178,7 @@ public class EndPvpBattleAction {
 	protected Date defenderShieldEndTime;
 	protected boolean displayToDefender;
 
+	private BattleReplayForUser brfu;
 	private PvpBattleHistory pbh;
 
 	private Map<String, Map<String, Integer>> currencyDeltasMap;
@@ -386,6 +392,10 @@ public class EndPvpBattleAction {
 		pbh.setClanAvenged(false);
 		
 		pbh.setAttackerWon(attackerWon);
+		if (null != brfu)
+		{
+			pbh.setReplayId( brfu.getId() );
+		}
 	}
 
 	private void processOutcome() {
@@ -398,8 +408,10 @@ public class EndPvpBattleAction {
 		defenderOutcomeSetup();
 		updateDefender();
 
+		createReplay();
+		int numInserted = insertUtil.insertBattleReplayForUser(brfu);
 		createHistory();
-		int numInserted = insertUtil.insertIntoPvpBattleHistory(pbh);
+		numInserted = insertUtil.insertIntoPvpBattleHistory(pbh);
 		log.info("num inserted into history={}", numInserted);
 
 	}
@@ -624,6 +636,14 @@ public class EndPvpBattleAction {
 				defenderPlfu );
 	}
 
+	private void createReplay() {
+		brfu = new BattleReplayForUser();
+
+		brfu.setCreatorId(attackerId);
+		brfu.setReplay(replay.toByteArray());
+		brfu.setTimeCreated(clientDateTime);
+	}
+
 	private void awardMonsters(Builder resBuilder)
 	{
 		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
@@ -750,4 +770,13 @@ public class EndPvpBattleAction {
 		this.pbh = pbh;
 	}
 
+	public Map<String, BattleReplayForUser> getReplayIdToReplay()
+	{
+		if (null == replay)
+		{
+			return new HashMap<String, BattleReplayForUser>();
+		}
+		return Collections.singletonMap(brfu.getId(), brfu);
+
+	}
 }
