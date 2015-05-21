@@ -20,6 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.ClanAvenge;
@@ -2074,6 +2075,9 @@ public class InsertUtils implements InsertUtil {
 				pbh.isCancelled());
 		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE,
 				pbh.isExactedRevenge());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__REPLAY_ID,
+				pbh.getReplayId());
 		//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
 
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName,
@@ -2785,8 +2789,6 @@ public class InsertUtils implements InsertUtil {
 			log.error("map containing ids to translations is null");
 		}
 
-		log.info("list of private chat posts:" + listOfPrivateChatPosts);
-
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
@@ -2941,7 +2943,6 @@ public class InsertUtils implements InsertUtil {
 				reasonForRewardList.add(reasonForReward);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error("error converting language to string");
 			e.printStackTrace();
 		}
@@ -3100,5 +3101,29 @@ public class InsertUtils implements InsertUtil {
 		}
 		else return false;
 	}
+
+	@Override
+	public int insertBattleReplayForUser(BattleReplayForUser brfu)
+	{
+		brfu.setId(randomUUID());
+		String tableName = DBConstants.TABLE_BATTLE_REPLAY_FOR_USER;
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(
+				DBConstants.BATTLE_REPLAY_FOR_USER__ID,
+				brfu.getId());
+		insertParams.put(DBConstants.BATTLE_REPLAY_FOR_USER__CREATOR_ID,
+				brfu.getCreatorId());
+		insertParams.put(DBConstants.BATTLE_REPLAY_FOR_USER__REPLAY,
+				brfu.getReplay());
+
+		Timestamp now = new Timestamp(brfu.getTimeCreated().getTime());
+		insertParams.put(DBConstants.BATTLE_REPLAY_FOR_USER__CREATE_TIME,
+				now);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(
+				tableName, insertParams);
+		return numUpdated;
+	}
+
 }
 

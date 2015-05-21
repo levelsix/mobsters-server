@@ -32,6 +32,7 @@ import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
+import com.lvl6.proto.BattleProto.BattleReplayProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -637,7 +638,10 @@ public class CreateInfoProtoUtils {
 			User attacker, Clan c, PvpBattleHistory info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashWinnings, int prospectiveOilWinnings) {
+			int prospectiveCashWinnings, int prospectiveOilWinnings,
+			String replayId)
+			//BattleReplayForUser brfu)
+	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null, c);
 		phpb.setAttacker(fup);
@@ -651,6 +655,14 @@ public class CreateInfoProtoUtils {
 		phpb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
 		modifyPvpHistoryProto(phpb, info);
+
+//		if (null != brfu) {
+//			BattleReplayProto brp = createBattleReplayProto(brfu);
+//			phpb.setReplay(brp);
+//		}
+		if (null != replayId && !replayId.isEmpty()) {
+			phpb.setReplayId(replayId);
+		}
 		return phpb.build();
 	}
 
@@ -661,7 +673,9 @@ public class CreateInfoProtoUtils {
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
-			Map<String, Integer> attackerIdsToProspectiveOilWinnings) {
+			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
+			Map<String, BattleReplayForUser> replayIdToReplay)
+	{
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 
@@ -684,9 +698,18 @@ public class CreateInfoProtoUtils {
 
 			Map<String, Integer> userMonsterIdToDropped = userIdToUserMonsterIdToDropped
 					.get(attackerId);
+
+			String replayId = history.getReplayId();
+//			BattleReplayForUser brfu = null;
+//			if (replayIdToReplay.containsKey(replayId))
+//			{
+//				brfu = replayIdToReplay.get(replayId);
+//			}
+
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 					clan, history, attackerMonsters, userMonsterIdToDropped,
-					prospectiveCashWinnings, prospectiveOilWinnings);
+					prospectiveCashWinnings, prospectiveOilWinnings,
+					replayId);// brfu);
 			phpList.add(php);
 		}
 		return phpList;
@@ -694,7 +717,8 @@ public class CreateInfoProtoUtils {
 
 	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
-			List<PvpBattleHistory> historyList) {
+			List<PvpBattleHistory> historyList,
+			Map<String, BattleReplayForUser> replayIdToReplay) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		fupb.setUserUuid(attackerId);
@@ -710,8 +734,15 @@ public class CreateInfoProtoUtils {
 			User defender = idsToUsers.get(defenderId);
 			FullUserProto defenderFup = createFullUserProtoFromUser(defender,
 					null, null);
+
+//			BattleReplayForUser brfu = null;
+			String replayId = pbh.getReplayId();
+//			if (null != replayId && replayIdToReplay.containsKey(replayId))
+//			{
+//				brfu = replayIdToReplay.get(replayId);
+//			}
 			PvpHistoryProto php = createAttackedOthersPvpHistoryProto(fup,
-					defenderFup, pbh);
+					defenderFup, pbh, replayId); //brfu);
 
 			phpList.add(php);
 		}
@@ -720,12 +751,25 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
-			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info) {
+			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info,
+			String replayId) //BattleReplayForUser brfu)
+	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		phpb.setAttacker(fup);
 		phpb.setDefender(defenderFup);
 
 		modifyPvpHistoryProto(phpb, info);
+
+//		if (null != brfu)
+//		{
+//			BattleReplayProto brp = createBattleReplayProto(brfu);
+//			phpb.setReplay(brp);
+//		}
+
+		if (null != replayId) {
+			phpb.setReplayId(replayId);
+		}
+
 		return phpb.build();
 	}
 
@@ -1016,6 +1060,25 @@ public class CreateInfoProtoUtils {
 			biqfupList.add(biqfupb.build());
 		}
 		return biqfupList;
+	}
+
+	public BattleReplayProto createBattleReplayProto(BattleReplayForUser brfu) {
+		BattleReplayProto.Builder brpb = BattleReplayProto.newBuilder();
+		brpb.setReplayUuid(brfu.getId());
+		brpb.setCreatorUuid(brfu.getCreatorId());
+
+		try {
+			byte[] bites = brfu.getReplay();
+			ByteString bs = ByteString.copyFrom(bites);
+			brpb.setReplay(bs);
+
+		} catch (Exception e) {
+			log.error(String.format(
+					"unable to convert byte[] to google.ByteString, brfu=%s",
+					brfu), e);
+		}
+
+		return brpb.build();
 	}
 
 	/** Board.proto ****************************************/

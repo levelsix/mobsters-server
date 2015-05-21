@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -355,4 +356,6 @@ public interface InsertUtil {
 	public abstract boolean insertGiftForUser(Collection<GiftForUser> giftForUsers);
 
 	public abstract boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers);
+
+	public abstract int insertBattleReplayForUser(BattleReplayForUser brfu);
 }
