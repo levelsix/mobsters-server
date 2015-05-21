@@ -36,7 +36,11 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "user", schema = "mobsters")
 public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser {
 
+<<<<<<< HEAD
 	private static final long serialVersionUID = 2114283124;
+=======
+	private static final long serialVersionUID = 1293501079;
+>>>>>>> regenerated tables
 
 	/**
 	 * Setter for <code>mobsters.user.id</code>.
@@ -1095,7 +1099,11 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	/**
 	 * Create a detached, initialised UserRecord
 	 */
+<<<<<<< HEAD
 	public UserRecord(String id, String name, Integer level, Integer gems, Integer cash, Integer oil, Integer experience, Integer tasksCompleted, String referralCode, Integer numReferrals, String udidForHistory, Timestamp lastLogin, Timestamp lastLogout, String deviceToken, Integer numBadges, Byte isFake, Timestamp createTime, Byte isAdmin, String apsalarId, Integer numCoinsRetrievedFromStructs, Integer numOilRetrievedFromStructs, Integer numConsecutiveDaysPlayed, String clanId, Timestamp lastWallPostNotificationTime, Integer kabamNaid, Byte hasReceivedFbReward, Integer numBeginnerSalesPurchased, String facebookId, Boolean fbIdSetOnUserCreate, String gameCenterId, String udid, Timestamp lastObstacleSpawnedTime, Integer numObstaclesRemoved, Timestamp lastMiniJobGeneratedTime, Integer avatarMonsterId, String email, String fbData, Timestamp lastFreeBoosterPackTime, Integer clanHelps, Timestamp lastSecretGiftCollectTime, String pvpDefendingMessage, Timestamp lastTeamDonateSolicitation, Boolean boughtRiggedBoosterPack, Integer salesValue, Timestamp salesLastPurchaseTime, Boolean salesJumpTwoTiers, Integer totalStrength, Integer segmentationGroup, Integer gachaCredits, Timestamp lastTangoGiftSentTime, String tangoId) {
+=======
+	public UserRecord(String id, String name, Integer level, Integer gems, Integer cash, Integer oil, Integer experience, Integer tasksCompleted, String referralCode, Integer numReferrals, String udidForHistory, Timestamp lastLogin, Timestamp lastLogout, String deviceToken, Integer numBadges, Byte isFake, Timestamp createTime, Byte isAdmin, String apsalarId, Integer numCoinsRetrievedFromStructs, Integer numOilRetrievedFromStructs, Integer numConsecutiveDaysPlayed, String clanId, Timestamp lastWallPostNotificationTime, Integer kabamNaid, Byte hasReceivedFbReward, Integer numBeginnerSalesPurchased, String facebookId, Boolean fbIdSetOnUserCreate, String gameCenterId, String udid, Timestamp lastObstacleSpawnedTime, Integer numObstaclesRemoved, Timestamp lastMiniJobGeneratedTime, Integer avatarMonsterId, String email, String fbData, Timestamp lastFreeBoosterPackTime, Integer clanHelps, Timestamp lastSecretGiftCollectTime, String pvpDefendingMessage, Timestamp lastTeamDonateSolicitation, Boolean boughtRiggedBoosterPack, Integer salesValue, Timestamp salesLastPurchaseTime, Boolean salesJumpTwoTiers, Long totalStrength, Integer segmentationGroup, Integer gachaCredits) {
+>>>>>>> regenerated tables
 		super(User.USER);
 
 		setValue(0, id);
