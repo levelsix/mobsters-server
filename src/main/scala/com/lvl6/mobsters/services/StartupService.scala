@@ -146,6 +146,9 @@ import com.typesafe.scalalogging.slf4j.LazyLogging
 import javax.annotation.Resource
 import com.lvl6.info.SalesPackage
 import com.lvl6.properties.IAPValues
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
+import com.lvl6.proto.SalesProto.SalesPackageProto
+
 
 case class StartupData(
       resBuilder:Builder, 
@@ -1331,25 +1334,24 @@ class StartupService extends LazyLogging{
           }
           val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
           
+          val salesProtoList = new ArrayList[SalesPackageProto]()
           val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
           idsToSalesPackages.values().foreach { sp:SalesPackage =>
-              if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
-                 && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
-                 && !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
-              { //make sure it's not starter pack
-                  if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
-                    val spProto = inAppPurchaseUtil.createSalesPackageProto(
-                            sp,
-                            salesItemRetrieveUtil,
-                            salesDisplayItemRetrieveUtil,
-                            customMenuRetrieveUtil);
-                    resBuilder.addSalesPackages(spProto);
-                  }
+            if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
+                && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
+                && !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
+            { //make sure it's not starter pack
+              if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+                  timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+                  val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                    sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
+                    customMenuRetrieveUtil);
+                  salesProtoList.add(spProto)
               }
+            }
           }
-          
-          logger.info(s"list of sales packages protos $resBuilder.getSalesPackagesList")
+          inAppPurchaseUtil.sortSalesPackageProtoList(salesProtoList);
+          resBuilder.addAllSalesPackages(salesProtoList);
       }
     }
   }
