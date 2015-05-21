@@ -154,7 +154,8 @@ public class SalesPackageRetrieveUtils {
 
 		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
 		int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);
-
+		int priority = rs.getInt(DBConstants.SALES_PACKAGE__PRIORITY);
+		
         productId =  Globals.APPLE_BUNDLE_ID() + "."
                 + productId;
 
@@ -163,7 +164,6 @@ public class SalesPackageRetrieveUtils {
         String animatingIcon = "";
         String slamIcon = "";
         String titleColor = "";
-
 
         str = rs.getString(DBConstants.SALES_PACKAGE__NAME);
         if(!rs.wasNull()) {
@@ -186,7 +186,8 @@ public class SalesPackageRetrieveUtils {
         }
 
 		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid, 
-				timeStart, timeEnd, succId, customMenuId, animatingIcon, slamIcon, titleColor);
+				timeStart, timeEnd, succId, priority, customMenuId, animatingIcon, 
+				slamIcon, titleColor);
 		return salesPackage;
 	}
 }
