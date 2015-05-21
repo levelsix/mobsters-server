@@ -28,4 +28,9 @@ public class RefreshMiniJobResponseEvent extends NormalResponseEvent {
 		this.refreshMiniJobResponseProto = refreshMiniJobResponseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return refreshMiniJobResponseProto.getSerializedSize();
+	}
+
 }

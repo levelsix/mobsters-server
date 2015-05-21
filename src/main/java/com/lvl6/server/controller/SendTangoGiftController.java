@@ -140,6 +140,7 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setSendTangoGiftResponseProto(resProto);
+			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {

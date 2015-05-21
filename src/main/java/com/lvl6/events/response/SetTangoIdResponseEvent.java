@@ -28,4 +28,9 @@ public class SetTangoIdResponseEvent extends NormalResponseEvent {
 		this.setTangoIdResponseProto = setTangoIdResponseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return setTangoIdResponseProto.getSerializedSize();
+	}
+
 }

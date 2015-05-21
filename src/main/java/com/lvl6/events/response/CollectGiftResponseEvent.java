@@ -28,4 +28,8 @@ public class CollectGiftResponseEvent extends NormalResponseEvent {
 		this.collectGiftResponseProto = collectGiftResponseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return collectGiftResponseProto.getSerializedSize();
+	}
 }
