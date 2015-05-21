@@ -16,8 +16,9 @@ option java_outer_classname = "EventLeaderBoardProto";
 message RetrieveStrengthLeaderBoardRequestProto {
 	optional MinimumUserProto sender = 1;
 	
-	//if you want the highest strength up to the 50th highest 
-	//strength, minRank is 0, maxRank is 49
+	//for client: if you want the highest strength up to the 50th highest 
+	//strength, minRank is 1, maxRank is 50
+	//for server: ranks start at 0, offset client values
 	optional int32 minRank = 2;
 	optional int32 maxRank = 3;
 }

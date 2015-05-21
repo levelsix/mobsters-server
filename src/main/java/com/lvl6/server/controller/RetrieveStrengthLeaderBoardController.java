@@ -67,8 +67,8 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		int minRank = reqProto.getMinRank();
-		int maxRank = reqProto.getMaxRank();
+		int minRank = reqProto.getMinRank() - 1;
+		int maxRank = reqProto.getMaxRank() - 1;
 
 		RetrieveStrengthLeaderBoardResponseProto.Builder resBuilder = RetrieveStrengthLeaderBoardResponseProto
 				.newBuilder();

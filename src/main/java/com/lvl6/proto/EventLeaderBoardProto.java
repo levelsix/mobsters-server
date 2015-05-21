@@ -30,7 +30,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 49
+     *strength, minRank is 1, maxRank is 50
      * </pre>
      */
     boolean hasMinRank();
@@ -39,7 +39,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 49
+     *strength, minRank is 1, maxRank is 50
      * </pre>
      */
     int getMinRank();
@@ -196,7 +196,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 49
+     *strength, minRank is 1, maxRank is 50
      * </pre>
      */
     public boolean hasMinRank() {
@@ -207,7 +207,7 @@ public final class EventLeaderBoardProto {
      *
      * <pre>
      *if you want the highest strength up to the 50th highest 
-     *strength, minRank is 0, maxRank is 49
+     *strength, minRank is 1, maxRank is 50
      * </pre>
      */
     public int getMinRank() {
@@ -623,7 +623,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 49
+       *strength, minRank is 1, maxRank is 50
        * </pre>
        */
       public boolean hasMinRank() {
@@ -634,7 +634,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 49
+       *strength, minRank is 1, maxRank is 50
        * </pre>
        */
       public int getMinRank() {
@@ -645,7 +645,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 49
+       *strength, minRank is 1, maxRank is 50
        * </pre>
        */
       public Builder setMinRank(int value) {
@@ -659,7 +659,7 @@ public final class EventLeaderBoardProto {
        *
        * <pre>
        *if you want the highest strength up to the 50th highest 
-       *strength, minRank is 0, maxRank is 49
+       *strength, minRank is 1, maxRank is 50
        * </pre>
        */
       public Builder clearMinRank() {
