@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jooq.Configuration;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +15,7 @@ import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;
@@ -19,6 +23,7 @@ import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class TradeItemForResourcesAction {
@@ -35,14 +40,15 @@ public class TradeItemForResourcesAction {
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
-
+	private int gemsSpent;
+	
 	public TradeItemForResourcesAction(String userId,
 			List<Integer> itemIdsUsed, List<ItemForUser> nuUserItems,
 			int maxCash, int maxOil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			ItemRetrieveUtils itemRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil, UpdateUtil updateUtil,
-			MiscMethods miscMethods) {
+			MiscMethods miscMethods, int gemsSpent) {
 		super();
 		this.userId = userId;
 		this.itemIdsUsed = itemIdsUsed;
@@ -54,6 +60,7 @@ public class TradeItemForResourcesAction {
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.updateUtil = updateUtil;
 		this.miscMethods = miscMethods;
+		this.gemsSpent = gemsSpent;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -104,11 +111,9 @@ public class TradeItemForResourcesAction {
 		if (!success) {
 			return;
 		}
-
 		resBuilder.setStatus(TradeItemForResourcesStatus.SUCCESS);
-
 	}
-
+	
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if (itemIdsUsed.isEmpty() || nuUserItems.isEmpty()) {
@@ -180,32 +185,34 @@ public class TradeItemForResourcesAction {
 				.getSpecificOrAllItemForUserMap(userId,
 						itemIdToQuantityUsed.keySet());
 
-		if (null == inDb || inDb.size() != nuUserItems.size()) {
-			log.info(String.format("inconsistent itemForUser"));
-			return false;
-		}
-
-		for (Integer itemId : inDb.keySet()) {
-			ItemForUser ifu = inDb.get(itemId);
-
-			//safe to access because retrieved by itemIdToQuantityUsed.keySet()
-			int quantitySpent = itemIdToQuantityUsed.get(itemId);
-			int actualQuantity = ifu.getQuantity() - quantitySpent;
-
-			if (actualQuantity < 0) {
-				log.error(String
-						.format("client using more items than has. itemIdsUsed=%s, inDbUserItems=%s",
-								itemIdsUsed, inDb));
+		if(gemsSpent == 0) {
+			if (null == inDb || inDb.size() != nuUserItems.size()) {
+				log.info(String.format("inconsistent itemForUser"));
 				return false;
 			}
 
-			int clientExpectedQuantity = itemIdToNuQuantity.get(itemId);
+			for (Integer itemId : inDb.keySet()) {
+				ItemForUser ifu = inDb.get(itemId);
 
-			if (actualQuantity != clientExpectedQuantity) {
-				log.error(String
-						.format("itemIdsUsed=%s, nuUserItems(userItem quantities)=%s, inDbUserItems=%s",
-								itemIdsUsed, nuUserItems, inDb));
-				return false;
+				//safe to access because retrieved by itemIdToQuantityUsed.keySet()
+				int quantitySpent = itemIdToQuantityUsed.get(itemId);
+				int actualQuantity = ifu.getQuantity() - quantitySpent;
+
+				if (actualQuantity < 0) {
+					log.error(String
+							.format("client using more items than has. itemIdsUsed=%s, inDbUserItems=%s",
+									itemIdsUsed, inDb));
+					return false;
+				}
+
+				int clientExpectedQuantity = itemIdToNuQuantity.get(itemId);
+
+				if (actualQuantity != clientExpectedQuantity) {
+					log.error(String
+							.format("itemIdsUsed=%s, nuUserItems(userItem quantities)=%s, inDbUserItems=%s",
+									itemIdsUsed, nuUserItems, inDb));
+					return false;
+				}
 			}
 		}
 
@@ -214,7 +221,11 @@ public class TradeItemForResourcesAction {
 			log.error(String.format("no user with id=%s", userId));
 			return false;
 		}
-
+		
+		if(user.getGems() < gemsSpent) {
+			log.error("user doesn't have enough gems, userId= {}, gemsSpent={}", userId, gemsSpent);
+			return false;
+		}
 		gemsGained = 0;
 		return true;
 	}
@@ -222,7 +233,7 @@ public class TradeItemForResourcesAction {
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prevCurrencies = new HashMap<String, Integer>();
 
-		if (0 != gemsGained) {
+		if (0 != gemsGained || gemsSpent != 0) {
 			prevCurrencies.put(miscMethods.gems, user.getGems());
 		}
 		if (0 != cashGained) {
@@ -239,7 +250,7 @@ public class TradeItemForResourcesAction {
 
 		//give user the resources
 		log.info(String.format("user before: %s \t\t", user));
-		user.updateRelativeCashAndOilAndGems(cashGained, oilGained, 0, 0);
+		user.updateRelativeCashAndOilAndGems(cashGained, oilGained, -1*gemsSpent, 0);
 		log.info(String.format("user after: %s", user));
 
 		prepCurrencyHistory();
@@ -255,7 +266,7 @@ public class TradeItemForResourcesAction {
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
 		reasonsForChanges = new HashMap<String, String>();
-		if (0 != gemsGained) {
+		if (0 != gemsGained || gemsSpent != 0) {
 			currencyDeltas.put(gems, gemsGained);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,

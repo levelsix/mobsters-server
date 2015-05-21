@@ -78,6 +78,7 @@ public class TradeItemForResourcesController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<Integer> itemIdsUsed = reqProto.getItemIdsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
+		int gemsSpent = reqProto.getGemsSpent();
 
 		Timestamp date = new Timestamp(reqProto.getClientTime());
 
@@ -120,7 +121,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
 					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
-					UpdateUtils.get(), miscMethods);
+					UpdateUtils.get(), miscMethods, gemsSpent);
 
 			tifsua.execute(resBuilder);
 

@@ -142,35 +142,36 @@ public class TradeItemForSpeedUpsAction {
 				.getSpecificOrAllItemForUserMap(userId,
 						itemIdToQuantityUsed.keySet());
 
-		if (null == inDb || inDb.size() != nuUserItems.size()) {
-			log.info(String.format("inconsistent itemForUser"));
-			return false;
-		}
-
-		for (Integer itemId : inDb.keySet()) {
-			ItemForUser ifu = inDb.get(itemId);
-
-			//safe to access because retrieved by itemIdToQuantityUsed.keySet()
-			int quantitySpent = itemIdToQuantityUsed.get(itemId);
-			int actualQuantity = ifu.getQuantity() - quantitySpent;
-
-			if (actualQuantity < 0) {
-				log.error(String
-						.format("client using more items than has. itemsUsed=%s, inDbUserItems=%s",
-								itemsUsed, inDb));
+		if(gemsSpent == 0) {
+			if (null == inDb || inDb.size() != nuUserItems.size()) {
+				log.info(String.format("inconsistent itemForUser"));
 				return false;
 			}
+			for (Integer itemId : inDb.keySet()) {
+				ItemForUser ifu = inDb.get(itemId);
 
-			int clientExpectedQuantity = itemIdToNuQuantity.get(itemId);
+				//safe to access because retrieved by itemIdToQuantityUsed.keySet()
+				int quantitySpent = itemIdToQuantityUsed.get(itemId);
+				int actualQuantity = ifu.getQuantity() - quantitySpent;
 
-			if (actualQuantity != clientExpectedQuantity) {
-				log.error(String
-						.format("itemsUsed=%s, nuUserItems(userItem quantities)=%s, inDbUserItems=%s",
-								itemsUsed, nuUserItems, inDb));
-				return false;
+				if (actualQuantity < 0) {
+					log.error(String
+							.format("client using more items than has. itemsUsed=%s, inDbUserItems=%s",
+									itemsUsed, inDb));
+					return false;
+				}
+
+				int clientExpectedQuantity = itemIdToNuQuantity.get(itemId);
+
+				if (actualQuantity != clientExpectedQuantity) {
+					log.error(String
+							.format("itemsUsed=%s, nuUserItems(userItem quantities)=%s, inDbUserItems=%s",
+									itemsUsed, nuUserItems, inDb));
+					return false;
+				}
 			}
 		}
-
+		
 		//TODO: consider accessing db to get all the ItemForUser that changed,
 		//compare db ItemForUser with the nuUserItems.
 		//calculating the quantity that changed, then making sure 
