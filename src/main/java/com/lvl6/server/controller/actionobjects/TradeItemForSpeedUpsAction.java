@@ -5,14 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jooq.Configuration;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -26,11 +32,13 @@ public class TradeItemForSpeedUpsAction {
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private int gemsSpent;
 
 	public TradeItemForSpeedUpsAction(String userId,
 			List<ItemForUserUsage> itemsUsed, List<ItemForUser> nuUserItems,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			InsertUtil insertUtil, UpdateUtil updateUtil) {
+			InsertUtil insertUtil, UpdateUtil updateUtil,
+			int gemsSpent) {
 		super();
 		this.userId = userId;
 		this.itemsUsed = itemsUsed;
@@ -38,6 +46,7 @@ public class TradeItemForSpeedUpsAction {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.gemsSpent = gemsSpent;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -56,6 +65,8 @@ public class TradeItemForSpeedUpsAction {
 	//derived state
 	private Map<Integer, Integer> itemIdToQuantityUsed;
 	private Map<Integer, Integer> itemIdToNuQuantity;
+	private UserDao userDao;
+	private User userPojo;
 
 	private List<String> itemForUserUsageIds;
 	private List<ItemForUserUsage> itemsUsedWithIds;
@@ -84,16 +95,24 @@ public class TradeItemForSpeedUpsAction {
 		resBuilder.setStatus(TradeItemForSpeedUpsStatus.SUCCESS);
 
 	}
+	
+	public void setUpDaos() {
+		Configuration config = new DefaultConfiguration().set(DBConnection.get()
+				.getConnection()).set(SQLDialect.MYSQL);
+		userDao = new UserDao(config);
+	}
 
 	private boolean verifySyntax(Builder resBuilder) {
-
-		if (itemsUsed.isEmpty() || nuUserItems.isEmpty()) {
-			log.error(String
-					.format("invalid itemsUsed=%s or nuUserItems=%s. At least one is empty.",
-							itemsUsed, nuUserItems));
+		userPojo = userDao.fetchOneById(userId);
+		if(userPojo.getGems() < gemsSpent) {
+			log.error("user doesn't have enough gem! usergems = {}, gemsSpent={}", 
+					userPojo.getGems(), gemsSpent);
 			return false;
 		}
-
+		if ((itemsUsed.isEmpty() || nuUserItems.isEmpty()) && gemsSpent == 0) {
+			log.error("itemsUsed {} and gemsSpent {} are both empty", itemsUsed, gemsSpent);
+			return false;
+		}
 		return true;
 	}
 
@@ -168,7 +187,9 @@ public class TradeItemForSpeedUpsAction {
 		log.info(String.format("the new ids: %s", itemForUserUsageIds));
 		//update items to reflect being used
 		updateUtil.updateItemForUser(nuUserItems);
-
+		userPojo.setGems(userPojo.getGems() - gemsSpent);
+		userDao.update(userPojo);
+		
 		return true;
 	}
 

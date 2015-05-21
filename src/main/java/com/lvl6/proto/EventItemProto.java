@@ -2796,6 +2796,15 @@ public final class EventItemProto {
      */
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
         int index);
+
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    boolean hasGemsSpent();
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    int getGemsSpent();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForSpeedUpsRequestProto}
@@ -2881,6 +2890,11 @@ public final class EventItemProto {
                 mutable_bitField0_ |= 0x00000004;
               }
               nuUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              gemsSpent_ = input.readInt32();
               break;
             }
           }
@@ -3060,10 +3074,26 @@ public final class EventItemProto {
       return nuUserItems_.get(index);
     }
 
+    public static final int GEMSSPENT_FIELD_NUMBER = 4;
+    private int gemsSpent_;
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       itemsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
+      gemsSpent_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3087,6 +3117,9 @@ public final class EventItemProto {
       for (int i = 0; i < nuUserItems_.size(); i++) {
         output.writeMessage(3, nuUserItems_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(4, gemsSpent_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3107,6 +3140,10 @@ public final class EventItemProto {
       for (int i = 0; i < nuUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, nuUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, gemsSpent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3251,6 +3288,8 @@ public final class EventItemProto {
         } else {
           nuUserItemsBuilder_.clear();
         }
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -3305,6 +3344,10 @@ public final class EventItemProto {
         } else {
           result.nuUserItems_ = nuUserItemsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gemsSpent_ = gemsSpent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3375,6 +3418,9 @@ public final class EventItemProto {
               nuUserItemsBuilder_.addAllMessages(other.nuUserItems_);
             }
           }
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4141,6 +4187,38 @@ public final class EventItemProto {
           nuUserItems_ = null;
         }
         return nuUserItemsBuilder_;
+      }
+
+      private int gemsSpent_ ;
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000008;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForSpeedUpsRequestProto)
@@ -6841,6 +6919,15 @@ public final class EventItemProto {
      * <code>optional int64 clientTime = 4;</code>
      */
     long getClientTime();
+
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    boolean hasGemsSpent();
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    int getGemsSpent();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
@@ -6939,6 +7026,11 @@ public final class EventItemProto {
             case 32: {
               bitField0_ |= 0x00000002;
               clientTime_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000004;
+              gemsSpent_ = input.readInt32();
               break;
             }
           }
@@ -7112,11 +7204,27 @@ public final class EventItemProto {
       return clientTime_;
     }
 
+    public static final int GEMSSPENT_FIELD_NUMBER = 5;
+    private int gemsSpent_;
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       itemIdsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
       clientTime_ = 0L;
+      gemsSpent_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7142,6 +7250,9 @@ public final class EventItemProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(4, clientTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(5, gemsSpent_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7172,6 +7283,10 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, clientTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemsSpent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7308,6 +7423,8 @@ public final class EventItemProto {
         }
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -7362,6 +7479,10 @@ public final class EventItemProto {
           to_bitField0_ |= 0x00000002;
         }
         result.clientTime_ = clientTime_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.gemsSpent_ = gemsSpent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7419,6 +7540,9 @@ public final class EventItemProto {
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8005,6 +8129,38 @@ public final class EventItemProto {
       public Builder clearClientTime() {
         bitField0_ = (bitField0_ & ~0x00000008);
         clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int gemsSpent_ ;
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000010;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
         onChanged();
         return this;
       }
@@ -10692,1467 +10848,6 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemSecretGiftResponseProto)
   }
 
-  public interface PurchaseItemsWithGemsRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseItemsWithGemsRequestProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    boolean hasSender();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-
-    /**
-     * <code>optional int32 gemsSpent = 2;</code>
-     */
-    boolean hasGemsSpent();
-    /**
-     * <code>optional int32 gemsSpent = 2;</code>
-     */
-    int getGemsSpent();
-
-    /**
-     * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-     */
-    boolean hasItemBought();
-    /**
-     * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-     */
-    com.lvl6.proto.ItemsProto.ItemProto getItemBought();
-    /**
-     * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-     */
-    com.lvl6.proto.ItemsProto.ItemProtoOrBuilder getItemBoughtOrBuilder();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.PurchaseItemsWithGemsRequestProto}
-   */
-  public static final class PurchaseItemsWithGemsRequestProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseItemsWithGemsRequestProto)
-      PurchaseItemsWithGemsRequestProtoOrBuilder {
-    // Use PurchaseItemsWithGemsRequestProto.newBuilder() to construct.
-    private PurchaseItemsWithGemsRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private PurchaseItemsWithGemsRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final PurchaseItemsWithGemsRequestProto defaultInstance;
-    public static PurchaseItemsWithGemsRequestProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public PurchaseItemsWithGemsRequestProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PurchaseItemsWithGemsRequestProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = sender_.toBuilder();
-              }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(sender_);
-                sender_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              gemsSpent_ = input.readInt32();
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.ItemsProto.ItemProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = itemBought_.toBuilder();
-              }
-              itemBought_ = input.readMessage(com.lvl6.proto.ItemsProto.ItemProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(itemBought_);
-                itemBought_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.class, com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<PurchaseItemsWithGemsRequestProto> PARSER =
-        new com.google.protobuf.AbstractParser<PurchaseItemsWithGemsRequestProto>() {
-      public PurchaseItemsWithGemsRequestProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PurchaseItemsWithGemsRequestProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PurchaseItemsWithGemsRequestProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public boolean hasSender() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-      return sender_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-      return sender_;
-    }
-
-    public static final int GEMSSPENT_FIELD_NUMBER = 2;
-    private int gemsSpent_;
-    /**
-     * <code>optional int32 gemsSpent = 2;</code>
-     */
-    public boolean hasGemsSpent() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 gemsSpent = 2;</code>
-     */
-    public int getGemsSpent() {
-      return gemsSpent_;
-    }
-
-    public static final int ITEMBOUGHT_FIELD_NUMBER = 3;
-    private com.lvl6.proto.ItemsProto.ItemProto itemBought_;
-    /**
-     * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-     */
-    public boolean hasItemBought() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-     */
-    public com.lvl6.proto.ItemsProto.ItemProto getItemBought() {
-      return itemBought_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-     */
-    public com.lvl6.proto.ItemsProto.ItemProtoOrBuilder getItemBoughtOrBuilder() {
-      return itemBought_;
-    }
-
-    private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      gemsSpent_ = 0;
-      itemBought_ = com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, gemsSpent_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, itemBought_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, gemsSpent_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, itemBought_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.PurchaseItemsWithGemsRequestProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseItemsWithGemsRequestProto)
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.class, com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSenderFieldBuilder();
-          getItemBoughtFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        gemsSpent_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        if (itemBoughtBuilder_ == null) {
-          itemBought_ = com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance();
-        } else {
-          itemBoughtBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_descriptor;
-      }
-
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto build() {
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto buildPartial() {
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto result = new com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (senderBuilder_ == null) {
-          result.sender_ = sender_;
-        } else {
-          result.sender_ = senderBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.gemsSpent_ = gemsSpent_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (itemBoughtBuilder_ == null) {
-          result.itemBought_ = itemBought_;
-        } else {
-          result.itemBought_ = itemBoughtBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto other) {
-        if (other == com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto.getDefaultInstance()) return this;
-        if (other.hasSender()) {
-          mergeSender(other.getSender());
-        }
-        if (other.hasGemsSpent()) {
-          setGemsSpent(other.getGemsSpent());
-        }
-        if (other.hasItemBought()) {
-          mergeItemBought(other.getItemBought());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsRequestProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public boolean hasSender() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-        if (senderBuilder_ == null) {
-          return sender_;
-        } else {
-          return senderBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          sender_ = value;
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (senderBuilder_ == null) {
-          sender_ = builderForValue.build();
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
-          } else {
-            sender_ = value;
-          }
-          onChanged();
-        } else {
-          senderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public Builder clearSender() {
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getSenderFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-        if (senderBuilder_ != null) {
-          return senderBuilder_.getMessageOrBuilder();
-        } else {
-          return sender_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getSenderFieldBuilder() {
-        if (senderBuilder_ == null) {
-          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getSender(),
-                  getParentForChildren(),
-                  isClean());
-          sender_ = null;
-        }
-        return senderBuilder_;
-      }
-
-      private int gemsSpent_ ;
-      /**
-       * <code>optional int32 gemsSpent = 2;</code>
-       */
-      public boolean hasGemsSpent() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 gemsSpent = 2;</code>
-       */
-      public int getGemsSpent() {
-        return gemsSpent_;
-      }
-      /**
-       * <code>optional int32 gemsSpent = 2;</code>
-       */
-      public Builder setGemsSpent(int value) {
-        bitField0_ |= 0x00000002;
-        gemsSpent_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 gemsSpent = 2;</code>
-       */
-      public Builder clearGemsSpent() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        gemsSpent_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.ItemsProto.ItemProto itemBought_ = com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ItemsProto.ItemProto, com.lvl6.proto.ItemsProto.ItemProto.Builder, com.lvl6.proto.ItemsProto.ItemProtoOrBuilder> itemBoughtBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public boolean hasItemBought() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemProto getItemBought() {
-        if (itemBoughtBuilder_ == null) {
-          return itemBought_;
-        } else {
-          return itemBoughtBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public Builder setItemBought(com.lvl6.proto.ItemsProto.ItemProto value) {
-        if (itemBoughtBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          itemBought_ = value;
-          onChanged();
-        } else {
-          itemBoughtBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public Builder setItemBought(
-          com.lvl6.proto.ItemsProto.ItemProto.Builder builderForValue) {
-        if (itemBoughtBuilder_ == null) {
-          itemBought_ = builderForValue.build();
-          onChanged();
-        } else {
-          itemBoughtBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public Builder mergeItemBought(com.lvl6.proto.ItemsProto.ItemProto value) {
-        if (itemBoughtBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              itemBought_ != com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance()) {
-            itemBought_ =
-              com.lvl6.proto.ItemsProto.ItemProto.newBuilder(itemBought_).mergeFrom(value).buildPartial();
-          } else {
-            itemBought_ = value;
-          }
-          onChanged();
-        } else {
-          itemBoughtBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public Builder clearItemBought() {
-        if (itemBoughtBuilder_ == null) {
-          itemBought_ = com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance();
-          onChanged();
-        } else {
-          itemBoughtBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemProto.Builder getItemBoughtBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getItemBoughtFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemProtoOrBuilder getItemBoughtOrBuilder() {
-        if (itemBoughtBuilder_ != null) {
-          return itemBoughtBuilder_.getMessageOrBuilder();
-        } else {
-          return itemBought_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ItemProto itemBought = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ItemsProto.ItemProto, com.lvl6.proto.ItemsProto.ItemProto.Builder, com.lvl6.proto.ItemsProto.ItemProtoOrBuilder> 
-          getItemBoughtFieldBuilder() {
-        if (itemBoughtBuilder_ == null) {
-          itemBoughtBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.ItemsProto.ItemProto, com.lvl6.proto.ItemsProto.ItemProto.Builder, com.lvl6.proto.ItemsProto.ItemProtoOrBuilder>(
-                  getItemBought(),
-                  getParentForChildren(),
-                  isClean());
-          itemBought_ = null;
-        }
-        return itemBoughtBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurchaseItemsWithGemsRequestProto)
-    }
-
-    static {
-      defaultInstance = new PurchaseItemsWithGemsRequestProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseItemsWithGemsRequestProto)
-  }
-
-  public interface PurchaseItemsWithGemsResponseProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PurchaseItemsWithGemsResponseProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-     */
-    boolean hasMup();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getMup();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder();
-
-    /**
-     * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-     */
-    boolean hasStatus();
-    /**
-     * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-     */
-    com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus getStatus();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.PurchaseItemsWithGemsResponseProto}
-   */
-  public static final class PurchaseItemsWithGemsResponseProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PurchaseItemsWithGemsResponseProto)
-      PurchaseItemsWithGemsResponseProtoOrBuilder {
-    // Use PurchaseItemsWithGemsResponseProto.newBuilder() to construct.
-    private PurchaseItemsWithGemsResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private PurchaseItemsWithGemsResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final PurchaseItemsWithGemsResponseProto defaultInstance;
-    public static PurchaseItemsWithGemsResponseProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public PurchaseItemsWithGemsResponseProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PurchaseItemsWithGemsResponseProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = mup_.toBuilder();
-              }
-              mup_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(mup_);
-                mup_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus value = com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                status_ = value;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.class, com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<PurchaseItemsWithGemsResponseProto> PARSER =
-        new com.google.protobuf.AbstractParser<PurchaseItemsWithGemsResponseProto>() {
-      public PurchaseItemsWithGemsResponseProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PurchaseItemsWithGemsResponseProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PurchaseItemsWithGemsResponseProto> getParserForType() {
-      return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus}
-     */
-    public enum PurchaseItemsWithGemsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 2;</code>
-       */
-      FAIL_NOT_ENOUGH_GEMS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 2;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static PurchaseItemsWithGemsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_ENOUGH_GEMS;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<PurchaseItemsWithGemsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<PurchaseItemsWithGemsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<PurchaseItemsWithGemsStatus>() {
-              public PurchaseItemsWithGemsStatus findValueByNumber(int number) {
-                return PurchaseItemsWithGemsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final PurchaseItemsWithGemsStatus[] VALUES = values();
-
-      public static PurchaseItemsWithGemsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private PurchaseItemsWithGemsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus)
-    }
-
-    private int bitField0_;
-    public static final int MUP_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto mup_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-     */
-    public boolean hasMup() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
-      return mup_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
-      return mup_;
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status_;
-    /**
-     * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-     */
-    public boolean hasStatus() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-     */
-    public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus getStatus() {
-      return status_;
-    }
-
-    private void initFields() {
-      mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus.SUCCESS;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, mup_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, status_.getNumber());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, mup_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, status_.getNumber());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.PurchaseItemsWithGemsResponseProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PurchaseItemsWithGemsResponseProto)
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.class, com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMupFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (mupBuilder_ == null) {
-          mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          mupBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_descriptor;
-      }
-
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto build() {
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto buildPartial() {
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto result = new com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (mupBuilder_ == null) {
-          result.mup_ = mup_;
-        } else {
-          result.mup_ = mupBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.status_ = status_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto other) {
-        if (other == com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.getDefaultInstance()) return this;
-        if (other.hasMup()) {
-          mergeMup(other.getMup());
-        }
-        if (other.hasStatus()) {
-          setStatus(other.getStatus());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.lvl6.proto.UserProto.MinimumUserProto mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> mupBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public boolean hasMup() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
-        if (mupBuilder_ == null) {
-          return mup_;
-        } else {
-          return mupBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public Builder setMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (mupBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          mup_ = value;
-          onChanged();
-        } else {
-          mupBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public Builder setMup(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (mupBuilder_ == null) {
-          mup_ = builderForValue.build();
-          onChanged();
-        } else {
-          mupBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public Builder mergeMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (mupBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              mup_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            mup_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(mup_).mergeFrom(value).buildPartial();
-          } else {
-            mup_ = value;
-          }
-          onChanged();
-        } else {
-          mupBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public Builder clearMup() {
-        if (mupBuilder_ == null) {
-          mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          mupBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMupBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getMupFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
-        if (mupBuilder_ != null) {
-          return mupBuilder_.getMessageOrBuilder();
-        } else {
-          return mup_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getMupFieldBuilder() {
-        if (mupBuilder_ == null) {
-          mupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getMup(),
-                  getParentForChildren(),
-                  isClean());
-          mup_ = null;
-        }
-        return mupBuilder_;
-      }
-
-      private com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status_ = com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus.SUCCESS;
-      /**
-       * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-       */
-      public boolean hasStatus() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-       */
-      public com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus getStatus() {
-        return status_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-       */
-      public Builder setStatus(com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        status_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus status = 2;</code>
-       */
-      public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventItemProto.PurchaseItemsWithGemsResponseProto.PurchaseItemsWithGemsStatus.SUCCESS;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurchaseItemsWithGemsResponseProto)
-    }
-
-    static {
-      defaultInstance = new PurchaseItemsWithGemsResponseProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PurchaseItemsWithGemsResponseProto)
-  }
-
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor;
   private static
@@ -12203,16 +10898,6 @@ public final class EventItemProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -12224,6 +10909,7 @@ public final class EventItemProto {
     java.lang.String[] descriptorData = {
       "\n\017EventItem.proto\022\016com.lvl6.proto\032\026Boost" +
       "erPackStuff.proto\032\nItem.proto\032\022MonsterSt" +
+<<<<<<< HEAD
       "uff.proto\032\014Reward.proto\032\nUser.proto\"w\n\037T" +
       "radeItemForBoosterRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
@@ -12337,6 +11023,67 @@ public final class EventItemProto {
       "_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Ev",
       "entItemProto"
 >>>>>>> created response request events
+=======
+      "uff.proto\032\nUser.proto\"w\n\037TradeItemForBoo" +
+      "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\016\n\006itemId\030\002 \001" +
+      "(\005\022\022\n\nclientTime\030\003 \001(\003\"\254\003\n TradeItemForB" +
+      "oosterResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022Z\n\006status\030" +
+      "\002 \001(\0162J.com.lvl6.proto.TradeItemForBoost" +
+      "erResponseProto.TradeItemForBoosterStatu",
+      "s\022:\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto" +
+      ".FullUserMonsterProto\022/\n\005prize\030\004 \001(\0132 .c" +
+      "om.lvl6.proto.BoosterItemProto\0227\n\020update" +
+      "dUserItems\030\005 \003(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\"T\n\031TradeItemForBoosterStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFF" +
+      "ICIENT_ITEM\020\003\"\322\001\n TradeItemForSpeedUpsRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\0225\n\titemsUsed\030\002 \003(\0132" +
+      "\".com.lvl6.proto.UserItemUsageProto\0222\n\013n",
+      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\022\021\n\tgemsSpent\030\004 \001(\005\"\245\002\n!TradeItem" +
+      "ForSpeedUpsResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\\\n\006st" +
+      "atus\030\002 \001(\0162L.com.lvl6.proto.TradeItemFor" +
+      "SpeedUpsResponseProto.TradeItemForSpeedU" +
+      "psStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.lvl6.p" +
+      "roto.UserItemUsageProto\"9\n\032TradeItemForS" +
+      "peedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
+      "\020\002\"l\n\036RemoveUserItemUsedRequestProto\0220\n\006",
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001\n\037Rem" +
+      "oveUserItemUsedResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022X" +
+      "\n\006status\030\002 \001(\0162H.com.lvl6.proto.RemoveUs" +
+      "erItemUsedResponseProto.RemoveUserItemUs" +
+      "edStatus\"7\n\030RemoveUserItemUsedStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\325\001\n!TradeItemF" +
+      "orResourcesRequestProto\022@\n\006sender\030\001 \001(\0132" +
+      "0.com.lvl6.proto.MinimumUserProtoWithMax",
+      "Resources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nuUser" +
+      "Items\030\003 \003(\0132\035.com.lvl6.proto.UserItemPro" +
+      "to\022\022\n\nclientTime\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(" +
+      "\005\"\202\002\n\"TradeItemForResourcesResponseProto" +
+      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
+      "mUserProtoWithMaxResources\022^\n\006status\030\002 \001" +
+      "(\0162N.com.lvl6.proto.TradeItemForResource" +
+      "sResponseProto.TradeItemForResourcesStat" +
+      "us\":\n\033TradeItemForResourcesStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecretGi",
+      "ftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\022\n\nclientTime\030\002" +
+      " \001(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\261\002\n\035RedeemSecretG" +
+      "iftResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\0228\n\007nuGifts\030\002 \003(\013" +
+      "2\'.com.lvl6.proto.UserItemSecretGiftProt" +
+      "o\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Redee" +
+      "mSecretGiftResponseProto.RedeemSecretGif" +
+      "tStatus\"Q\n\026RedeemSecretGiftStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n\nFA",
+      "IL_OTHER\020\003B\020B\016EventItemProto"
+>>>>>>> edits to trade item for speedups by adding gemsspent, start refactoring createupdateclientresponseevent
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12372,7 +11119,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", });
+        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", "GemsSpent", });
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_fieldAccessorTable = new
@@ -12396,7 +11143,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", });
+        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", "GemsSpent", });
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new
@@ -12415,18 +11162,6 @@ public final class EventItemProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor,
         new java.lang.String[] { "Mup", "NuGifts", "Status", });
-    internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PurchaseItemsWithGemsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "GemsSpent", "ItemBought", });
-    internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(11);
-    internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_PurchaseItemsWithGemsResponseProto_descriptor,
-        new java.lang.String[] { "Mup", "Status", });
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();

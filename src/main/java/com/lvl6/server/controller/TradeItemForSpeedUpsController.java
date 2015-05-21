@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForSpeedUpsRequestEvent;
 import com.lvl6.events.response.TradeItemForSpeedUpsResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProto;
@@ -66,6 +67,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<UserItemUsageProto> itemsUsedProtos = reqProto.getItemsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
+		int gemsSpent = reqProto.getGemsSpent();
 
 		TradeItemForSpeedUpsResponseProto.Builder resBuilder = TradeItemForSpeedUpsResponseProto
 				.newBuilder();
@@ -111,7 +113,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 
 			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
 					userId, itemsUsed, nuUserItems, itemForUserRetrieveUtil,
-					InsertUtils.get(), UpdateUtils.get());
+					InsertUtils.get(), UpdateUtils.get(), gemsSpent);
 
 			tifsua.execute(resBuilder);
 
@@ -119,9 +121,25 @@ public class TradeItemForSpeedUpsController extends EventController {
 					TradeItemForSpeedUpsStatus.SUCCESS)) {
 				List<ItemForUserUsage> itemsUsedWithIds = tifsua
 						.getItemForUserUsages();
-				List<UserItemUsageProto> uiupList = createInfoProtoUtils
-						.createUserItemUsageProto(itemsUsedWithIds);
-				resBuilder.addAllItemsUsed(uiupList);
+				if(!itemsUsedWithIds.isEmpty()) {
+					List<UserItemUsageProto> uiupList = createInfoProtoUtils
+							.createUserItemUsageProto(itemsUsedWithIds);
+					resBuilder.addAllItemsUsed(uiupList);
+				}
+			}
+			
+			if (resBuilder.getStatus().equals(
+					TradeItemForSpeedUpsStatus.SUCCESS)) {
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+				writeToUserCurrencyHistory(user, previousCurrency,
+						currencyChange, curTime, resourceType, numResources,
+						numGems);
 			}
 
 			TradeItemForSpeedUpsResponseProto resProto = resBuilder.build();

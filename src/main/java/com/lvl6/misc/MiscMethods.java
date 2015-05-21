@@ -334,6 +334,40 @@ public class MiscMethods {
 		resEvent.setUpdateClientUserResponseProto(resProto);
 		return resEvent;
 	}
+	
+	public UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User user, PvpLeagueForUser plfu, Clan clan) {
+		try {
+			if (user.getIsFake().compareTo((byte)0) == 0) {
+				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
+				leaderboard.updateLeaderboardForUser(user, plfu);*/
+			}
+		} catch (Exception e) {
+			log.error("Failed to update leaderboard.");
+		}
+
+		// Retrieve clan if its not set
+		if (clan == null && user.getClanId() != null
+				&& !user.getClanId().isEmpty()) {
+			ClanRetrieveUtils2 clanRetrieveUtils = AppContext
+					.getApplicationContext().getBean(ClanRetrieveUtils2.class);
+			clan = clanRetrieveUtils.getClanWithId(user.getClanId());
+		} else if (clan != null && !clan.getId().equals(user.getClanId())) {
+			log.error("Trying to set clan for user with different clan id.");
+			clan = null;
+		}
+
+		UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(
+				user.getId());
+		UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto
+				.newBuilder()
+				.setSender(
+						createInfoProtoUtils.createFullUserProtoFromUser(user,
+								plfu, clan))
+				.setTimeOfUserUpdate(new Date().getTime()).build();
+		resEvent.setUpdateClientUserResponseProto(resProto);
+		return resEvent;
+	}
 
 	public int getRowCount(ResultSet set) {
 		int rowCount;
