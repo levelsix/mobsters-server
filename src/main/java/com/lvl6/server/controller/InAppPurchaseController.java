@@ -59,6 +59,7 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMultiSpinAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -143,6 +144,9 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtils;
+    
+    @Autowired
+    protected HistoryUtils historyUtils;
 
 
     public InAppPurchaseController() {
@@ -375,7 +379,7 @@ public class InAppPurchaseController extends EventController {
             }
             else if(IAPValues.packageIsGachaMultiSpin(packageName)) {
             	isGachaMultiSpin = true;
-            	iapmsa = new InAppPurchaseMultiSpinAction(userId, receiptFromApple, insertUtil);
+            	iapmsa = new InAppPurchaseMultiSpinAction(userId, receiptFromApple, insertUtil, historyUtils);
             	iapmsa.execute(resBuilder);
             }
             else {

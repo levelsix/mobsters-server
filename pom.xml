@@ -281,6 +281,9 @@
 									<packageName>com.lvl6.mobsters.db.jooq.generated</packageName>
 									<directory>src/main/java</directory>
 								</target>
+<!-- 								<strategy> -->
+<!-- 									<name>com.lvl6.misc.CustomDatabaseStrategy</name> -->
+<!-- 								</strategy> -->
 							</generator>
 						</configuration>
 					</plugin>

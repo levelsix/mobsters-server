@@ -19,6 +19,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -31,6 +32,7 @@ public class InAppPurchaseMultiSpinAction {
 	private String userId;
 	private JSONObject receiptFromApple;
 	protected InsertUtil insertUtil;
+	private HistoryUtils historyUtils;
 	
 	public InAppPurchaseMultiSpinAction() {
 		super();
@@ -38,11 +40,12 @@ public class InAppPurchaseMultiSpinAction {
 	}
 
 	public InAppPurchaseMultiSpinAction(String userId, JSONObject receiptFromApple,
-			InsertUtil insertUtil) {
+			InsertUtil insertUtil, HistoryUtils historyUtils) {
 		super();
 		this.userId = userId;
 		this.receiptFromApple = receiptFromApple;
 		this.insertUtil = insertUtil;
+		this.historyUtils = historyUtils;
 	}
 
 	//derived state
@@ -128,8 +131,8 @@ public class InAppPurchaseMultiSpinAction {
 			realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
 			int gemChange = 0;
 			
-			iapHistoryDao.insertIAPHistoryElem(receiptFromApple, gemChange,
-					userPojo, realLifeCashCost, null);					
+			historyUtils.insertIAPHistoryElem(receiptFromApple, gemChange,
+					userPojo, realLifeCashCost, null, iapHistoryDao);					
 			ifuPojo = new ItemForUser(userId, gachaMultiSpinItemId, 1);
 			itemForUserDao.insert(ifuPojo);
 
