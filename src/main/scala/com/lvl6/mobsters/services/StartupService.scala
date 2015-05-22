@@ -153,8 +153,6 @@ import javax.annotation.Resource
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
 import com.lvl6.proto.SalesProto.SalesPackageProto
-import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
-import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
 
 case class StartupData(
 		resBuilder:Builder, 
