@@ -23,6 +23,7 @@ import com.hazelcast.core.HazelcastInstanceAware;
 import com.hazelcast.core.IMap;
 import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.ResponseEvent;
+import com.lvl6.leaderboards.LeaderBoardImpl;
 //import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.misc.ReloadAllRareChangeStaticData;
 import com.lvl6.properties.ControllerConstants;

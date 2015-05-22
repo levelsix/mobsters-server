@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.User;
+import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -17,15 +18,17 @@ public class UpdateUserStrengthAction {
 	private long updatedStrength;
 	private UserRetrieveUtils2  userRetrieveUtils;
 	private UpdateUtil updateUtil;
+	private LeaderBoardImpl leaderBoardImpl;
 
 	public UpdateUserStrengthAction(String userId,
 			long updatedStrength, UserRetrieveUtils2 userRetrieveUtils,
-			UpdateUtil updateUtil)	{
+			UpdateUtil updateUtil, LeaderBoardImpl leaderBoardImpl)	{
 		super();
 		this.userId = userId;
 		this.updatedStrength = updatedStrength;
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.updateUtil = updateUtil;
+		this.leaderBoardImpl = leaderBoardImpl;
 	}
 
 	//	//encapsulates the return value from this Action Object

@@ -29,8 +29,9 @@ public final class EventLeaderBoardProto {
      * <code>optional int32 minRank = 2;</code>
      *
      * <pre>
-     *if you want the highest strength up to the 50th highest 
+     *for client: if you want the highest strength up to the 50th highest 
      *strength, minRank is 1, maxRank is 50
+     *for server: ranks start at 0, offset client values
      * </pre>
      */
     boolean hasMinRank();
@@ -38,8 +39,9 @@ public final class EventLeaderBoardProto {
      * <code>optional int32 minRank = 2;</code>
      *
      * <pre>
-     *if you want the highest strength up to the 50th highest 
+     *for client: if you want the highest strength up to the 50th highest 
      *strength, minRank is 1, maxRank is 50
+     *for server: ranks start at 0, offset client values
      * </pre>
      */
     int getMinRank();
@@ -195,8 +197,9 @@ public final class EventLeaderBoardProto {
      * <code>optional int32 minRank = 2;</code>
      *
      * <pre>
-     *if you want the highest strength up to the 50th highest 
+     *for client: if you want the highest strength up to the 50th highest 
      *strength, minRank is 1, maxRank is 50
+     *for server: ranks start at 0, offset client values
      * </pre>
      */
     public boolean hasMinRank() {
@@ -206,8 +209,9 @@ public final class EventLeaderBoardProto {
      * <code>optional int32 minRank = 2;</code>
      *
      * <pre>
-     *if you want the highest strength up to the 50th highest 
+     *for client: if you want the highest strength up to the 50th highest 
      *strength, minRank is 1, maxRank is 50
+     *for server: ranks start at 0, offset client values
      * </pre>
      */
     public int getMinRank() {
@@ -622,8 +626,9 @@ public final class EventLeaderBoardProto {
        * <code>optional int32 minRank = 2;</code>
        *
        * <pre>
-       *if you want the highest strength up to the 50th highest 
+       *for client: if you want the highest strength up to the 50th highest 
        *strength, minRank is 1, maxRank is 50
+       *for server: ranks start at 0, offset client values
        * </pre>
        */
       public boolean hasMinRank() {
@@ -633,8 +638,9 @@ public final class EventLeaderBoardProto {
        * <code>optional int32 minRank = 2;</code>
        *
        * <pre>
-       *if you want the highest strength up to the 50th highest 
+       *for client: if you want the highest strength up to the 50th highest 
        *strength, minRank is 1, maxRank is 50
+       *for server: ranks start at 0, offset client values
        * </pre>
        */
       public int getMinRank() {
@@ -644,8 +650,9 @@ public final class EventLeaderBoardProto {
        * <code>optional int32 minRank = 2;</code>
        *
        * <pre>
-       *if you want the highest strength up to the 50th highest 
+       *for client: if you want the highest strength up to the 50th highest 
        *strength, minRank is 1, maxRank is 50
+       *for server: ranks start at 0, offset client values
        * </pre>
        */
       public Builder setMinRank(int value) {
@@ -658,8 +665,9 @@ public final class EventLeaderBoardProto {
        * <code>optional int32 minRank = 2;</code>
        *
        * <pre>
-       *if you want the highest strength up to the 50th highest 
+       *for client: if you want the highest strength up to the 50th highest 
        *strength, minRank is 1, maxRank is 50
+       *for server: ranks start at 0, offset client values
        * </pre>
        */
       public Builder clearMinRank() {

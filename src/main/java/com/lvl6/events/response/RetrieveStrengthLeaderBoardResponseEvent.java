@@ -27,5 +27,9 @@ public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEven
 			RetrieveStrengthLeaderBoardResponseProto retrieveStrengthLeaderBoardResponseProto) {
 		this.retrieveStrengthLeaderBoardResponseProto = retrieveStrengthLeaderBoardResponseProto;
 	}
+	
+	public int eventSize() {
+		return retrieveStrengthLeaderBoardResponseProto.getSerializedSize();
+	}
 
 }

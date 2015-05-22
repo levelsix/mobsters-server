@@ -9,17 +9,14 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.Future
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -153,8 +150,11 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
+import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
+import com.lvl6.proto.SalesProto.SalesPackageProto
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
 
 case class StartupData(
 		resBuilder:Builder, 
@@ -1157,13 +1157,12 @@ class StartupService extends LazyLogging{
 					resBuilder.addItemsInUse(uiup);
 				}
 				userItemIds = itemIdToUserItems.keySet()
-        }
-        
-    			if (userItemIds != null) {
-    				setSalePack(resBuilder, user, userItemIds);
-    			}
-            }
+    		if (userItemIds != null) {
+    			setSalePack(resBuilder, user, userItemIds);
+    		}
+      }
 		}
+  }
 
 	def setSalePack(resBuilder:Builder, user:User, userItemIds:java.util.Set[Integer])= {
 		timed("StartupService.setSalePack"){
@@ -1413,143 +1412,59 @@ class StartupService extends LazyLogging{
 					dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
 				}
 				//if there's no default languages, they havent ever been set
-					if (null != dlp) {
-						resBuilder.setUserDefaultLanguages(dlp);
-					}
+			  if (null != dlp) {
+					resBuilder.setUserDefaultLanguages(dlp);
 				}
 			}
-
-			def setSalesForUser(resBuilder:Builder ,  user:User):Future[Unit]= {
-					Future{
-						timed("StartupService.setSalesForUser"){
-							var userSalesValue = user.getSalesValue()
-									val salesLastPurchaseTime = user.getLastPurchaseTime();
-							val now = new Date
-              logger.info("setting regular sales for user");
-									if(salesLastPurchaseTime == null) {
-										val ts = new Timestamp(now.getTime());
-										updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
-									}
-									else {
-										if(userSalesValue == 0) {
-                      logger.info("checking if longer than 5 days");
-											if(Math.abs(timeUtils.numDaysDifference(salesLastPurchaseTime, now)) > 5) {
-												logger.info("updating user sales value, been longer than 5 days");
-												updateUtil.updateUserSalesValue(user.getId(), 1, null);
-												userSalesValue = 1;
-											}
-										}
-									}
-							val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
-
-							val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
-									idsToSalesPackages.values().foreach { sp:SalesPackage =>
-							if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
-									&& !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
-									&& !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
-							{ //make sure it's not starter pack
-								if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-										timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
-									val spProto = inAppPurchaseUtil.createSalesPackageProto(
-											sp,
-											salesItemRetrieveUtil,
-											salesDisplayItemRetrieveUtil,
-											customMenuRetrieveUtil);
-									resBuilder.addSalesPackages(spProto);
-								}
-							}
-							}
-
-						}
-					}
-			}
-
-			def priceForSalesPackToBeShown(userSalesValue:Int):Int= {
-					//TODO: Possible to rewrite it more succinctly in scala?
-					var newMinPrice = 0;
-					if(userSalesValue == 0) {
-						newMinPrice = 5;
-					} else if(userSalesValue == 1) {
-						newMinPrice = 10;
-					} else if(userSalesValue == 2) {
-						newMinPrice = 20;
-					} else if(userSalesValue == 3) {
-						newMinPrice = 50;
-					} else if(userSalesValue > 3) {
-						newMinPrice = 100;
-					}
-					return newMinPrice
-			}
-
-			def setDefaultLanguagesForUser(resBuilder:Builder , userId:String ):Future[Unit]= {
-					Future{
-						timed("StartupService.setDefaultLanguagesForUser"){
-							val tsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(userId);
-							logger.info(s"tsfuList: $tsfuList");
-							var dlp:DefaultLanguagesProto  = null;
-							if(tsfuList != null && !tsfuList.isEmpty()) {
-								dlp = createInfoProtoUtils.createDefaultLanguagesProto(tsfuList);
-							}
-							//if there's no default languages, they havent ever been set
-							if (null != dlp) {
-								resBuilder.setUserDefaultLanguages(dlp);
-							}
-						}
-					}
-			}
+		}
+  }
       
-      def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
-        Future{
-          timed("StartupServer.setTopThreeStrengthLeaderBoard") {
-            val leaderBoardList = leaderBoard.getTopNStrengths(2);
-            resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
-                createStrengthLeaderBoardProtosWithMonsterId(leaderBoardList, userRetrieveUtils, monsterForUserRetrieveUtils));
-          }
-        }
+  def setTopThreeStrengthLeaderBoard(resBuilder:Builder):Future[Unit]= {
+    Future{
+      timed("StartupServer.setTopThreeStrengthLeaderBoard") {
+        val leaderBoardList = leaderBoard.getTopNStrengths(2);
+        resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
+            createStrengthLeaderBoardProtosWithMonsterId(leaderBoardList, userRetrieveUtils, monsterForUserRetrieveUtils));
       }
+    }
+  }
       
-			def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
-					Future{
-						timed("StartupService.setClanRaidStuff"){
-							val nowDate = new Date(now.getTime());
-							val clanId = user.getClanId();
-							if (clanId != null) {
-								//get the clan raid information for the clan
-								val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
-								if (null != cepfc) {
-									val pcecip = createInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
-									resBuilder.setCurRaidClanInfo(pcecip);
-									//get the clan raid information for all the clan users
-									//shouldn't be null (per the retrieveUtils)
-									val userIdToCepfu = clanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
-									logger.info("the users involved in clan raid:$userIdToCepfu");
-									if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
-										logger.info("no users involved in clan raid. clanRaid=$cepfc");
-									}else {
-										val userMonsterIds = monsterStuffUtil.getUserMonsterIdsInClanRaid(userIdToCepfu);
-										//TODO: when retrieving clan info, and user's current teams, maybe query for
-										//these monsters as well
-										val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
-										userIdToCepfu.values.foreach { cepfu =>
-										val pceuip = createInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
-										resBuilder.addCurRaidClanUserInfo(pceuip);
-										}
-										setClanRaidHistoryStuff(resBuilder, userId, nowDate);
-									}
-								}else {
-									logger.info("no clan raid stuff existing for clan=$clanId, user=$user");
-								}
+	def setClanRaidStuff(resBuilder:Builder, user:User, userId:String, now:Timestamp):Future[Unit] ={
+		Future{
+			timed("StartupService.setClanRaidStuff"){
+				val nowDate = new Date(now.getTime());
+				val clanId = user.getClanId();
+				if (clanId != null) {
+  				//get the clan raid information for the clan
+					val cepfc = clanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
+					if (null != cepfc) {
+						val pcecip = createInfoProtoUtils.createPersistentClanEventClanInfoProto(cepfc);
+						resBuilder.setCurRaidClanInfo(pcecip);
+						//get the clan raid information for all the clan users
+						//shouldn't be null (per the retrieveUtils)
+						val userIdToCepfu = clanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+						logger.info("the users involved in clan raid:$userIdToCepfu");
+						if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+							logger.info("no users involved in clan raid. clanRaid=$cepfc");
+						}else {
+							val userMonsterIds = monsterStuffUtil.getUserMonsterIdsInClanRaid(userIdToCepfu);
+							//TODO: when retrieving clan info, and user's current teams, maybe query for
+							//these monsters as well
+							val idsToUserMonsters = monsterForUserRetrieveUtils.getSpecificUserMonsters(userMonsterIds);
+							userIdToCepfu.values.foreach { cepfu =>
+							val pceuip = createInfoProtoUtils.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+							resBuilder.addCurRaidClanUserInfo(pceuip);
 							}
 							setClanRaidHistoryStuff(resBuilder, userId, nowDate);
 						}
 					}else {
-						logger.info(s"no clan raid stuff existing for clan=$clanId, user=$user");
+						logger.info("no clan raid stuff existing for clan=$clanId, user=$user");
 					}
 				}
+				setClanRaidHistoryStuff(resBuilder, userId, nowDate);
 			}
 		}
 	}
-
 
 	def setClanRaidHistoryStuff(resBuilder:Builder, userId:String, nowDate:Date)= {
 		timed("StartupService.setClanRaidHistoryStuff"){
