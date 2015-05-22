@@ -92,7 +92,7 @@ public class LeaderBoardImpl {
 	}
 	
 	public int getUserRank(String userId) {
-		return strLeaderboard.get(userId).getRank();
+		return strLeaderboard.get(userId).getRank() + 1;
 	}
 	
 	public int getSize() {

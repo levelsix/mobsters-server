@@ -5328,8 +5328,7 @@ public class CreateInfoProtoUtils {
 		for(StrengthLeaderBoard slb : slbList) {
 			userIds.add(slb.getUserId());
 		}
-		Map<String, List<MonsterForUser>> userIdsToMonsters = 
-				monsterForUserRetrieveUtils.getUserIdsToMonsterTeamForUserIds(userIds);
+		
 		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
 		for(StrengthLeaderBoard slb : slbList) {
 			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
@@ -5337,12 +5336,7 @@ public class CreateInfoProtoUtils {
 			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
 			b.setRank(slb.getRank());
 			b.setStrength(slb.getStrength());
-			List<MonsterForUser> mfuList = userIdsToMonsters.get(userId);
-			for(MonsterForUser mfu: mfuList) {
-				if(mfu.getTeamSlotNum() == 1) {
-					b.setMonsterId(mfu.getMonsterId());
-				}
-			}
+			
 			slbpList.add(b.build());
 		}
 		return slbpList;
