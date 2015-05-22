@@ -42,6 +42,15 @@ public final class LeaderBoardProto {
      * <code>optional int64 strength = 3;</code>
      */
     long getStrength();
+
+    /**
+     * <code>optional int32 monsterId = 4;</code>
+     */
+    boolean hasMonsterId();
+    /**
+     * <code>optional int32 monsterId = 4;</code>
+     */
+    int getMonsterId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.StrengthLeaderBoardProto}
@@ -116,6 +125,11 @@ public final class LeaderBoardProto {
             case 24: {
               bitField0_ |= 0x00000004;
               strength_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              monsterId_ = input.readInt32();
               break;
             }
           }
@@ -209,10 +223,26 @@ public final class LeaderBoardProto {
       return strength_;
     }
 
+    public static final int MONSTERID_FIELD_NUMBER = 4;
+    private int monsterId_;
+    /**
+     * <code>optional int32 monsterId = 4;</code>
+     */
+    public boolean hasMonsterId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 monsterId = 4;</code>
+     */
+    public int getMonsterId() {
+      return monsterId_;
+    }
+
     private void initFields() {
       rank_ = 0;
       mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       strength_ = 0L;
+      monsterId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -236,6 +266,9 @@ public final class LeaderBoardProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, strength_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, monsterId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -256,6 +289,10 @@ public final class LeaderBoardProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, strength_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, monsterId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -385,6 +422,8 @@ public final class LeaderBoardProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         strength_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        monsterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -429,6 +468,10 @@ public final class LeaderBoardProto {
           to_bitField0_ |= 0x00000004;
         }
         result.strength_ = strength_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.monsterId_ = monsterId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -453,6 +496,9 @@ public final class LeaderBoardProto {
         }
         if (other.hasStrength()) {
           setStrength(other.getStrength());
+        }
+        if (other.hasMonsterId()) {
+          setMonsterId(other.getMonsterId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -661,6 +707,38 @@ public final class LeaderBoardProto {
         return this;
       }
 
+      private int monsterId_ ;
+      /**
+       * <code>optional int32 monsterId = 4;</code>
+       */
+      public boolean hasMonsterId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 monsterId = 4;</code>
+       */
+      public int getMonsterId() {
+        return monsterId_;
+      }
+      /**
+       * <code>optional int32 monsterId = 4;</code>
+       */
+      public Builder setMonsterId(int value) {
+        bitField0_ |= 0x00000008;
+        monsterId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 monsterId = 4;</code>
+       */
+      public Builder clearMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        monsterId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StrengthLeaderBoardProto)
     }
 
@@ -687,10 +765,10 @@ public final class LeaderBoardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021LeaderBoard.proto\022\016com.lvl6.proto\032\nUse" +
-      "r.proto\"i\n\030StrengthLeaderBoardProto\022\014\n\004r" +
+      "r.proto\"|\n\030StrengthLeaderBoardProto\022\014\n\004r" +
       "ank\030\001 \001(\005\022-\n\003mup\030\002 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\020\n\010strength\030\003 \001(\003B\022B\020Le" +
-      "aderBoardProto"
+      "MinimumUserProto\022\020\n\010strength\030\003 \001(\003\022\021\n\tmo" +
+      "nsterId\030\004 \001(\005B\022B\020LeaderBoardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -710,7 +788,7 @@ public final class LeaderBoardProto {
     internal_static_com_lvl6_proto_StrengthLeaderBoardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StrengthLeaderBoardProto_descriptor,
-        new java.lang.String[] { "Rank", "Mup", "Strength", });
+        new java.lang.String[] { "Rank", "Mup", "Strength", "MonsterId", });
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

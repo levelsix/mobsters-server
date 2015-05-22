@@ -16,5 +16,5 @@ message StrengthLeaderBoardProto {
 	optional int32 rank = 1;
 	optional MinimumUserProto mup = 2;
 	optional int64 strength = 3;
-	
+	optional int32 monsterId = 4;
 }
