@@ -144,6 +144,8 @@ message NormStructWaitCompleteRequestProto {
 	//if the structure is a generator, the uncollected resources will be lost when upgraded
 	//server will compute last retrieved times
 	//this is just for history purposes
+	//newer comment: this curTime now represents the time client has calculated for when
+	//a resource generator completed it's upgrade 
 	optional int64 curTime = 3;
 	
 }
