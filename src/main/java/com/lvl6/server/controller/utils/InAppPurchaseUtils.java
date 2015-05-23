@@ -181,7 +181,7 @@ public class InAppPurchaseUtils {
 		Collections.sort(sppList, new Comparator<SalesPackageProto>() {
 			@Override
 			public int compare(SalesPackageProto spp1, SalesPackageProto spp2) {
-				return spp1.getPriority() - spp2.getPriority();
+				return spp2.getPriority() - spp1.getPriority();
 			}
 		});
 	}
