@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jooq.Configuration;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,6 @@ import com.lvl6.info.Prerequisite;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Research;
 import com.lvl6.info.ResearchProperty;
-import com.lvl6.info.Reward;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.SkillSideEffect;
@@ -57,6 +59,8 @@ import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniJobRefreshItemConfigDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemProto;
@@ -71,7 +75,6 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.RewardsProto.ClanGiftProto;
-import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -163,6 +166,7 @@ import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.DBConnection;
 
 //goal is to not compute proto analog of static data
 //and to provide a consistent view of static data.
@@ -421,6 +425,7 @@ public class StaticDataContainer {
 //		setRewards(sdpb);
 //		setSales(sdpb);
 		setClanGifts(sdpb);
+		setRefreshMiniJobItemPrices(sdpb);
 
 		staticDataBuilder = sdpb;
 	}
@@ -1175,6 +1180,14 @@ public class StaticDataContainer {
 			sdpb.addClanGifts(cgp);
 		}
 	}
-
+	
+	private void setRefreshMiniJobItemPrices(Builder sdpb) {
+		Configuration config = new DefaultConfiguration().set(DBConnection.get()
+				.getConnection()).set(SQLDialect.MYSQL);
+		MiniJobRefreshItemConfigDao miniJobRefreshDao = new MiniJobRefreshItemConfigDao(config);
+		List<MiniJobRefreshItemConfig> mjricList = miniJobRefreshDao.findAll();
+		sdpb.addAllRefreshMiniJobItemPrices(createInfoProtoUtils.
+				createItemGemPriceProtoFromMiniJobs(mjricList));
+	}
 
 }

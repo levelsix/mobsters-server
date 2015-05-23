@@ -10548,30 +10548,6 @@ public final class StructureProto {
      * <code>optional int32 hoursBetweenJobGeneration = 3;</code>
      */
     int getHoursBetweenJobGeneration();
-
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> 
-        getRefreshMiniJobItemPricesList();
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index);
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    int getRefreshMiniJobItemPricesCount();
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-        getRefreshMiniJobItemPricesOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
-        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniJobCenterProto}
@@ -10648,14 +10624,6 @@ public final class StructureProto {
               hoursBetweenJobGeneration_ = input.readInt32();
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                refreshMiniJobItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              refreshMiniJobItemPrices_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemGemPriceProto.PARSER, extensionRegistry));
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -10664,9 +10632,6 @@ public final class StructureProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          refreshMiniJobItemPrices_ = java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -10750,46 +10715,10 @@ public final class StructureProto {
       return hoursBetweenJobGeneration_;
     }
 
-    public static final int REFRESHMINIJOBITEMPRICES_FIELD_NUMBER = 4;
-    private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> refreshMiniJobItemPrices_;
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getRefreshMiniJobItemPricesList() {
-      return refreshMiniJobItemPrices_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-        getRefreshMiniJobItemPricesOrBuilderList() {
-      return refreshMiniJobItemPrices_;
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    public int getRefreshMiniJobItemPricesCount() {
-      return refreshMiniJobItemPrices_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    public com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index) {
-      return refreshMiniJobItemPrices_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-     */
-    public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
-        int index) {
-      return refreshMiniJobItemPrices_.get(index);
-    }
-
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       generatedJobLimit_ = 0;
       hoursBetweenJobGeneration_ = 0;
-      refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10813,9 +10742,6 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, hoursBetweenJobGeneration_);
       }
-      for (int i = 0; i < refreshMiniJobItemPrices_.size(); i++) {
-        output.writeMessage(4, refreshMiniJobItemPrices_.get(i));
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -10836,10 +10762,6 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, hoursBetweenJobGeneration_);
-      }
-      for (int i = 0; i < refreshMiniJobItemPrices_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, refreshMiniJobItemPrices_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10951,7 +10873,6 @@ public final class StructureProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getStructInfoFieldBuilder();
-          getRefreshMiniJobItemPricesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -10970,12 +10891,6 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         hoursBetweenJobGeneration_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        } else {
-          refreshMiniJobItemPricesBuilder_.clear();
-        }
         return this;
       }
 
@@ -11020,15 +10935,6 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000004;
         }
         result.hoursBetweenJobGeneration_ = hoursBetweenJobGeneration_;
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            refreshMiniJobItemPrices_ = java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.refreshMiniJobItemPrices_ = refreshMiniJobItemPrices_;
-        } else {
-          result.refreshMiniJobItemPrices_ = refreshMiniJobItemPricesBuilder_.build();
-        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11053,32 +10959,6 @@ public final class StructureProto {
         }
         if (other.hasHoursBetweenJobGeneration()) {
           setHoursBetweenJobGeneration(other.getHoursBetweenJobGeneration());
-        }
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          if (!other.refreshMiniJobItemPrices_.isEmpty()) {
-            if (refreshMiniJobItemPrices_.isEmpty()) {
-              refreshMiniJobItemPrices_ = other.refreshMiniJobItemPrices_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensureRefreshMiniJobItemPricesIsMutable();
-              refreshMiniJobItemPrices_.addAll(other.refreshMiniJobItemPrices_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.refreshMiniJobItemPrices_.isEmpty()) {
-            if (refreshMiniJobItemPricesBuilder_.isEmpty()) {
-              refreshMiniJobItemPricesBuilder_.dispose();
-              refreshMiniJobItemPricesBuilder_ = null;
-              refreshMiniJobItemPrices_ = other.refreshMiniJobItemPrices_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              refreshMiniJobItemPricesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getRefreshMiniJobItemPricesFieldBuilder() : null;
-            } else {
-              refreshMiniJobItemPricesBuilder_.addAllMessages(other.refreshMiniJobItemPrices_);
-            }
-          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11285,246 +11165,6 @@ public final class StructureProto {
         hoursBetweenJobGeneration_ = 0;
         onChanged();
         return this;
-      }
-
-      private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> refreshMiniJobItemPrices_ =
-        java.util.Collections.emptyList();
-      private void ensureRefreshMiniJobItemPricesIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          refreshMiniJobItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>(refreshMiniJobItemPrices_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> refreshMiniJobItemPricesBuilder_;
-
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getRefreshMiniJobItemPricesList() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
-        } else {
-          return refreshMiniJobItemPricesBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public int getRefreshMiniJobItemPricesCount() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return refreshMiniJobItemPrices_.size();
-        } else {
-          return refreshMiniJobItemPricesBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return refreshMiniJobItemPrices_.get(index);
-        } else {
-          return refreshMiniJobItemPricesBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder setRefreshMiniJobItemPrices(
-          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.set(index, value);
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder setRefreshMiniJobItemPrices(
-          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder addRefreshMiniJobItemPrices(com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(value);
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder addRefreshMiniJobItemPrices(
-          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(index, value);
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder addRefreshMiniJobItemPrices(
-          com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(builderForValue.build());
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder addRefreshMiniJobItemPrices(
-          int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder addAllRefreshMiniJobItemPrices(
-          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProto> values) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, refreshMiniJobItemPrices_);
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder clearRefreshMiniJobItemPrices() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public Builder removeRefreshMiniJobItemPrices(int index) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.remove(index);
-          onChanged();
-        } else {
-          refreshMiniJobItemPricesBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder getRefreshMiniJobItemPricesBuilder(
-          int index) {
-        return getRefreshMiniJobItemPricesFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
-          int index) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return refreshMiniJobItemPrices_.get(index);  } else {
-          return refreshMiniJobItemPricesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-           getRefreshMiniJobItemPricesOrBuilderList() {
-        if (refreshMiniJobItemPricesBuilder_ != null) {
-          return refreshMiniJobItemPricesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addRefreshMiniJobItemPricesBuilder() {
-        return getRefreshMiniJobItemPricesFieldBuilder().addBuilder(
-            com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addRefreshMiniJobItemPricesBuilder(
-          int index) {
-        return getRefreshMiniJobItemPricesFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 4;</code>
-       */
-      public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder> 
-           getRefreshMiniJobItemPricesBuilderList() {
-        return getRefreshMiniJobItemPricesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-          getRefreshMiniJobItemPricesFieldBuilder() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          refreshMiniJobItemPricesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder>(
-                  refreshMiniJobItemPrices_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
-                  getParentForChildren(),
-                  isClean());
-          refreshMiniJobItemPrices_ = null;
-        }
-        return refreshMiniJobItemPricesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniJobCenterProto)
@@ -22278,70 +21918,68 @@ public final class StructureProto {
       "\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterSl" +
       "ots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCa" +
       "shCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026",
-      "\n\016numEvoChambers\030\014 \001(\005\"\317\001\n\022MiniJobCenter" +
+      "\n\016numEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobCenter" +
       "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
       "to.StructureInfoProto\022\031\n\021generatedJobLim" +
       "it\030\002 \001(\005\022!\n\031hoursBetweenJobGeneration\030\003 " +
-      "\001(\005\022C\n\030refreshMiniJobItemPrices\030\004 \003(\0132!." +
-      "com.lvl6.proto.ItemGemPriceProto\"\236\002\n\026Ful" +
-      "lUserStructureProto\022\026\n\016userStructUuid\030\001 " +
-      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022" +
-      "\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005" +
-      " \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030",
-      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
-      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str" +
-      "uctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(" +
-      "\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001" +
-      "(\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 " +
-      "\001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto" +
-      ".CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nob" +
-      "stacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalC" +
-      "ostType\030\003 \001(\0162\034.com.lvl6.proto.ResourceT" +
-      "ype\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001",
-      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img" +
-      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001" +
-      "(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppea" +
-      "r\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadow" +
-      "VerticalOffset\030\r \001(\002\022\037\n\027shadowHorizontal" +
-      "Offfset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022" +
-      "\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037" +
-      ".com.lvl6.proto.CoordinateProto\0226\n\013orien" +
-      "tation\030\005 \001(\0162!.com.lvl6.proto.StructOrie" +
-      "ntation\"\333\001\n\021UserObstacleProto\022\030\n\020userObs",
-      "tacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobs" +
-      "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com" +
-      ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
-      "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
-      "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\234\001\n\017EvoCha" +
-      "mberProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\0228\n\017qualityUnlo" +
-      "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality:\006COM" +
-      "MON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"`\n\017TeamCent" +
-      "erProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p",
-      "roto.StructureInfoProto\022\025\n\rteamCostLimit" +
-      "\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\nstructInfo\030" +
-      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
-      "o\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005\022\036\n\026" +
-      "teamDonationPowerLimit\030\003 \001(\005\"h\n\022PvpBoard" +
-      "HouseProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
-      "6.proto.StructureInfoProto\022\032\n\022pvpBoardPo" +
-      "werLimit\030\002 \001(\005\"\240\001\n\025PvpBoardObstacleProto" +
-      "\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\014ob" +
-      "stacleType\030\003 \001(\0162!.com.lvl6.proto.BoardO",
-      "bstacleType\022\020\n\010powerAmt\030\004 \001(\005\022\032\n\022initial" +
-      "lyAvailable\030\005 \001(\010\"}\n\031UserPvpBoardObstacl" +
-      "eProto\022\036\n\026userPvpBoardObstacleId\030\001 \001(\005\022\020" +
-      "\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleId\030\003 \001(\005\022\014\n\004" +
-      "posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026BattleItemFa" +
-      "ctoryProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
-      "6.proto.StructureInfoProto\022\022\n\npowerLimit" +
-      "\030\002 \001(\005*\\\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022" +
-      "\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\021\n\rGACHA_CR" +
-      "EDITS\020\005\022\013\n\007MONSTER\020\024*G\n\021StructOrientatio",
-      "n\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n" +
-      "\nPOSITION_2\020\002*<\n\021BoardObstacleType\022\t\n\005CL" +
-      "OUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003\022\010\n\004VINE\020\004B\020B\016S" +
-      "tructureProto"
+      "\001(\005\"\236\002\n\026FullUserStructureProto\022\026\n\016userSt" +
+      "ructUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010stru" +
+      "ctId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014pur" +
+      "chaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013c" +
+      "oordinates\030\007 \001(\0132\037.com.lvl6.proto.Coordi" +
+      "nateProto\0226\n\013orientation\030\010 \001(\0162!.com.lvl",
+      "6.proto.StructOrientation\022\031\n\021fbInviteStr" +
+      "uctLvl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001" +
+      "(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010" +
+      "structId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com" +
+      ".lvl6.proto.CoordinateProto\"\342\002\n\rObstacle" +
+      "Proto\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022" +
+      "5\n\017removalCostType\030\003 \001(\0162\034.com.lvl6.prot" +
+      "o.ResourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsT" +
+      "oRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007" +
+      " \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPixe",
+      "lOffset\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016ch" +
+      "anceToAppear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(" +
+      "\t\022\034\n\024shadowVerticalOffset\030\r \001(\002\022\037\n\027shado" +
+      "wHorizontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObst" +
+      "acleProto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordin" +
+      "ate\030\002 \001(\0132\037.com.lvl6.proto.CoordinatePro" +
+      "to\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.proto" +
+      ".StructOrientation\"\333\001\n\021UserObstacleProto" +
+      "\022\030\n\020userObstacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002" +
+      " \001(\t\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030",
+      "\004 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
+      "\n\013orientation\030\005 \001(\0162!.com.lvl6.proto.Str" +
+      "uctOrientation\022\030\n\020removalStartTime\030\006 \001(\003" +
+      "\"\234\001\n\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\013" +
+      "2\".com.lvl6.proto.StructureInfoProto\0228\n\017" +
+      "qualityUnlocked\030\002 \001(\0162\027.com.lvl6.proto.Q" +
+      "uality:\006COMMON\022\027\n\017evoTierUnlocked\030\003 \001(\005\"" +
+      "`\n\017TeamCenterProto\0226\n\nstructInfo\030\001 \001(\0132\"" +
+      ".com.lvl6.proto.StructureInfoProto\022\025\n\rte" +
+      "amCostLimit\030\002 \001(\005\"\213\001\n\016ClanHouseProto\0226\n\n",
+      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct" +
+      "ureInfoProto\022!\n\031maxHelpersPerSolicitatio" +
+      "n\030\002 \001(\005\022\036\n\026teamDonationPowerLimit\030\003 \001(\005\"" +
+      "h\n\022PvpBoardHouseProto\0226\n\nstructInfo\030\001 \001(" +
+      "\0132\".com.lvl6.proto.StructureInfoProto\022\032\n" +
+      "\022pvpBoardPowerLimit\030\002 \001(\005\"\240\001\n\025PvpBoardOb" +
+      "stacleProto\022\022\n\npvpBoardId\030\001 \001(\005\022\014\n\004name\030" +
+      "\002 \001(\t\0227\n\014obstacleType\030\003 \001(\0162!.com.lvl6.p" +
+      "roto.BoardObstacleType\022\020\n\010powerAmt\030\004 \001(\005" +
+      "\022\032\n\022initiallyAvailable\030\005 \001(\010\"}\n\031UserPvpB",
+      "oardObstacleProto\022\036\n\026userPvpBoardObstacl" +
+      "eId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobstacleI" +
+      "d\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026B" +
+      "attleItemFactoryProto\0226\n\nstructInfo\030\001 \001(" +
+      "\0132\".com.lvl6.proto.StructureInfoProto\022\022\n" +
+      "\npowerLimit\030\002 \001(\005*\\\n\014ResourceType\022\017\n\013NO_" +
+      "RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022" +
+      "\021\n\rGACHA_CREDITS\020\005\022\013\n\007MONSTER\020\024*G\n\021Struc" +
+      "tOrientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSI" +
+      "TION_1\020\001\022\016\n\nPOSITION_2\020\002*<\n\021BoardObstacl",
+      "eType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003\022\010\n\004" +
+      "VINE\020\004B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22416,7 +22054,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_MiniJobCenterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MiniJobCenterProto_descriptor,
-        new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", "RefreshMiniJobItemPrices", });
+        new java.lang.String[] { "StructInfo", "GeneratedJobLimit", "HoursBetweenJobGeneration", });
     internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new

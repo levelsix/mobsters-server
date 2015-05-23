@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
@@ -4234,12 +4235,6 @@ public class CreateInfoProtoUtils {
 		smjcpb.setHoursBetweenJobGeneration(miniJobCenter
 				.getHoursBetweenJobGeneration());
 
-		if (null != idToMjriMap && !idToMjriMap.isEmpty())
-		{
-			List<ItemGemPriceProto> igppList = createItemGemPriceProto(idToMjriMap);
-			smjcpb.addAllRefreshMiniJobItemPrices(igppList);
-		}
-
 		return smjcpb.build();
 	}
 
@@ -5655,6 +5650,17 @@ public class CreateInfoProtoUtils {
 			slbpList.add(b.build());
 		}
 		return slbpList;
+	}
+	
+	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfig> mjricList) {
+		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
+		for(MiniJobRefreshItemConfig mjric : mjricList) {
+			ItemGemPriceProto.Builder b = ItemGemPriceProto.newBuilder();
+			b.setItemId(mjric.getItemId());
+			b.setGemPrice(mjric.getGemPrice());
+			igppList.add(b.build());
+		}
+		return igppList;
 	}
 
 
