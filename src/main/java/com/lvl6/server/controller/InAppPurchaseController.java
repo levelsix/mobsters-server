@@ -8,6 +8,8 @@ import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +63,7 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseMultiSpinAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -137,6 +140,9 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+    
+    @Autowired
+    protected TimeUtils timeUtils;
 
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
@@ -443,13 +449,15 @@ public class InAppPurchaseController extends EventController {
 
 //        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
+        Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+        
+        //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
 
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
         }
         else {
-            successorSalesPackage = salesPackageRetrieveUtils.
-                    getSalesPackageForSalesPackageId(salesPackage.getSuccId());
+            successorSalesPackage = salesPackagesMap.get(salesPackage.getSuccId());
 
 //            if(jumpTwoTiers) {
 //                if(successorSalesPackage.getSuccId() != 0) {
@@ -457,6 +465,25 @@ public class InAppPurchaseController extends EventController {
 //                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
 //                }
 //            }
+        }
+        Date now = new Date();
+        
+        if(iapsa.isStarterPack() || iapsa.isBuilderPack()) {
+        	List<SalesPackage> tenDollarPacks = new ArrayList<SalesPackage>();
+        	for(Integer id : salesPackagesMap.keySet()) {
+        		SalesPackage sp = salesPackagesMap.get(id);
+        		if(sp.getPrice() == 10 && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+        			tenDollarPacks.add(sp);
+        		}
+        	}
+        	Collections.sort(tenDollarPacks, new Comparator<SalesPackage>() {
+    			@Override
+    			public int compare(SalesPackage sp1, SalesPackage sp2) {
+    				return sp2.getPriority() - sp1.getPriority();
+    			}
+    		});
+        	successorSalesPackage = tenDollarPacks.get(0);
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
