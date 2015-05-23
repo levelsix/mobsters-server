@@ -3756,10 +3756,10 @@ public class CreateInfoProtoUtils {
 
 		if (GiftType.TANGO_GIFT.name().equalsIgnoreCase(g.getGiftType())) {
 			ugpb.setTangoGift(createUserTangoGiftProto(gftu));
-		}
+				}
 
 		return ugpb.build();
-	}
+			}
 
 	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUserPojo gftu)
 	{
@@ -3812,6 +3812,38 @@ public class CreateInfoProtoUtils {
 
 		Reward r = rewardRetrieveUtils.getRewardById(secretGift.getRewardId());
 		uisgpb.setReward(createRewardProto(r));
+
+
+	public TangoGiftProto createTangoGiftProto(TangoGift tg) {
+		TangoGiftProto.Builder tgpb = TangoGiftProto.newBuilder();
+		tgpb.setTangoGiftId(tg.getId());
+		tgpb.setName(tg.getName());
+		tgpb.setHoursUntilExpiration(tg.getHoursUntilExpiration());
+		tgpb.setImageName(tg.getImageName());
+		return tgpb.build();
+	}
+
+	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
+			Collection<SecretGiftForUser> secretGifts) {
+		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
+		if (null == secretGifts || secretGifts.isEmpty()) {
+			return gifs;
+		}
+
+		for (SecretGiftForUser isgfu : secretGifts) {
+			gifs.add(createUserSecretGiftProto(isgfu));
+		}
+		return gifs;
+	}
+
+	public UserSecretGiftProto createUserSecretGiftProto(
+			SecretGiftForUser secretGift) {
+		UserSecretGiftProto.Builder uisgpb = UserSecretGiftProto
+				.newBuilder();
+		uisgpb.setUisgUuid(secretGift.getId());
+		uisgpb.setUserUuid(secretGift.getUserId());
+		uisgpb.setSecsTillCollection(secretGift.getSecsTillCollection());
+		uisgpb.setRewardId(secretGift.getRewardId());
 
 		Date createTime = secretGift.getCreateTime();
 		uisgpb.setCreateTime(createTime.getTime());
@@ -5673,7 +5705,7 @@ public class CreateInfoProtoUtils {
 			b.setStrength(slb.getStrength());
 
 			slbpList.add(b.build());
-		}
+	}
 		return slbpList;
 	}
 

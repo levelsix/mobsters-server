@@ -898,7 +898,7 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
-
+	
 	/*USER REWARD HISTORY*/
 	public static final String USER_REWARD_HISTORY__ID = GENERIC__ID;
 	public static final String USER_REWARD_HISTORY__USER_ID = "user_id";

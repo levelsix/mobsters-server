@@ -41759,7 +41759,11 @@ public final class EventStartupProto {
       "mberProto\030\t \001(\01326.com.lvl6.proto.Startup" +
       "RequestProto.VersionNumberProto\032J\n\022Versi" +
       "onNumberProto\022\020\n\010superNum\030\001 \001(\005\022\020\n\010major" +
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/EventStartupProto.java
       "Num\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\267B\n\024StartupR" +
+=======
+      "Num\030\002 \001(\005\022\020\n\010minorNum\030\003 \001(\005\"\333B\n\024StartupR" +
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/EventStartupProto.java
       "esponseProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-",
       "\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.FullUser" +
       "Proto\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6." +
@@ -41838,6 +41842,7 @@ public final class EventStartupProto {
       "UserMiniEventProto\022C\n\024userDefaultLanguag" +
       "es\0305 \001(\0132%.com.lvl6.proto.DefaultLanguag" +
       "esProto\0220\n\tuserGifts\0306 \003(\0132\035.com.lvl6.pr" +
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/EventStartupProto.java
       "oto.UserGiftProto\022J\n\027topStrengthLeaderBo" +
       "ards\030\365\003 \003(\0132(.com.lvl6.proto.StrengthLea" +
       "derBoardProto\032\200\001\n\031AttackedNotificationPr",
@@ -41979,6 +41984,146 @@ public final class EventStartupProto {
       "\004udid\030\002 \001(\t\"J\n\026ReconnectResponseProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
       "erProtoB\023B\021EventStartupProto"
+=======
+      "oto.UserGiftProto\0229\n\ruserClanGifts\030\364\003 \003(" +
+      "\0132!.com.lvl6.proto.UserClanGiftProto\022J\n\027" +
+      "topStrengthLeaderBoards\030\365\003 \003(\0132(.com.lvl",
+      "6.proto.StrengthLeaderBoardProto\032\200\001\n\031Att" +
+      "ackedNotificationProto\0222\n\010attacker\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\032\n\022ba" +
+      "ttleCompleteTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 " +
+      "\001(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010ref" +
+      "erred\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGiven" +
+      "ToReferrer\030\003 \001(\005\032\262!\n\020StartupConstants\022H\n" +
+      "\025inAppPurchasePackages\030\001 \003(\0132).com.lvl6." +
+      "proto.InAppPurchasePackageProto\022\027\n\017maxLe",
+      "velForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct" +
+      "\030\003 \001(\005\022n\n\025animatedSpriteOffsets\030\004 \003(\0132O." +
+      "com.lvl6.proto.StartupResponseProto.Star" +
+      "tupConstants.AnimatedSpriteOffsetProto\022\025" +
+      "\n\rminNameLength\030\005 \001(\005\022\025\n\rmaxNameLength\030\006" +
+      " \001(\005\022\035\n\025maxLengthOfChatString\030\007 \001(\005\022Z\n\rc" +
+      "lanConstants\030\010 \001(\0132C.com.lvl6.proto.Star" +
+      "tupResponseProto.StartupConstants.ClanCo" +
+      "nstants\022p\n\030downloadableNibConstants\030\t \001(" +
+      "\0132N.com.lvl6.proto.StartupResponseProto.",
+      "StartupConstants.DownloadableNibConstant" +
+      "s\022\'\n\037numHoursBeforeReshowingGoldSale\030\n \001" +
+      "(\005\022\036\n\026levelToShowRateUsPopup\030\013 \001(\005\022e\n\022to" +
+      "uramentConstants\030\014 \001(\0132I.com.lvl6.proto." +
+      "StartupResponseProto.StartupConstants.To" +
+      "urnamentConstants\022\037\n\027fbConnectRewardDiam" +
+      "onds\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t\022\027\n\017credi" +
+      "tsFileName\030, \001(\t\022<\n\022adminChatUserProto\030\017" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\037" +
+      "\n\027numBeginnerSalesAllowed\030\020 \001(\005\022h\n\024userM",
+      "onsterConstants\030\021 \001(\0132J.com.lvl6.proto.S" +
+      "tartupResponseProto.StartupConstants.Use" +
+      "rMonsterConstants\022`\n\020monsterConstants\030\022 " +
+      "\001(\0132F.com.lvl6.proto.StartupResponseProt" +
+      "o.StartupConstants.MonsterConstants\022\025\n\rm" +
+      "inutesPerGem\030\023 \001(\002\022\027\n\017gemsPerResource\030\025 " +
+      "\001(\002\022\035\n\021pvpRequiredMinLvl\030\024 \001(\005B\002\030\001\022 \n\024mo" +
+      "nsterDmgMultiplier\030\037 \001(\002B\002\030\001\022\'\n\037continue" +
+      "BattleGemCostMultiplier\030\026 \001(\002\022 \n\030battleR" +
+      "unAwayBasePercent\030\034 \001(\002\022\036\n\026battleRunAway",
+      "Increment\030\035 \001(\002\022\027\n\017addAllFbFriends\030\027 \001(\010" +
+      "\022\025\n\rfacebookPopUp\030$ \001(\010\022]\n\010miniTuts\030\030 \001(" +
+      "\0132K.com.lvl6.proto.StartupResponseProto." +
+      "StartupConstants.MiniTutorialConstants\022\024" +
+      "\n\014maxObstacles\030\031 \001(\005\022\032\n\022minutesPerObstac" +
+      "le\030\032 \001(\005\022`\n\020taskMapConstants\030\033 \001(\0132F.com" +
+      ".lvl6.proto.StartupResponseProto.Startup" +
+      "Constants.TaskMapConstants\022 \n\030maxMinutes" +
+      "ForFreeSpeedUp\030\036 \001(\005\022b\n\021clanHelpConstant" +
+      "s\030  \003(\0132G.com.lvl6.proto.StartupResponse",
+      "Proto.StartupConstants.ClanHelpConstants" +
+      "\022W\n\013pvpConstant\030! \001(\0132B.com.lvl6.proto.S" +
+      "tartupResponseProto.StartupConstants.Pvp" +
+      "Constants\022X\n\004sucp\030\" \003(\0132J.com.lvl6.proto" +
+      ".StartupResponseProto.StartupConstants.S" +
+      "peedUpConstantProto\022c\n\004rccp\030# \003(\0132U.com." +
+      "lvl6.proto.StartupResponseProto.StartupC" +
+      "onstants.ResourceConversionConstantProto" +
+      "\022\025\n\rdisplayRarity\030% \001(\010\022\032\n\022taskIdOfFirst" +
+      "Skill\030& \001(\005\022#\n\033minsToResolicitTeamDonati",
+      "on\030\' \001(\005\022j\n\021fileDownloadProto\030( \003(\0132O.co" +
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pConstants.FileDownloadConstantProto\022 \n\030" +
+      "taskIdForUpgradeTutorial\030) \001(\005\022\031\n\021tangoM" +
+      "axGemReward\030* \001(\005\022\031\n\021tangoMinGemReward\030+" +
+      " \001(\005\022r\n\030boosterPackConstantProto\030\364\003 \001(\0132" +
+      "O.com.lvl6.proto.StartupResponseProto.St" +
+      "artupConstants.BoosterPackConstantsProto" +
+      "\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timageNa" +
+      "me\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.prot",
+      "o.CoordinateProto\032\325\001\n\rClanConstants\022\035\n\025c" +
+      "oinPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLen" +
+      "gthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthFor" +
+      "ClanDescription\030\003 \001(\005\022\037\n\027maxCharLengthFo" +
+      "rClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034a" +
+      "chievementIdsForClanRewards\030\006 \003(\005\032c\n\030Dow" +
+      "nloadableNibConstants\022\022\n\nmapNibName\030\001 \001(" +
+      "\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShopp" +
+      "eNibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n" +
+      "\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022",
+      "\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAf" +
+      "terEventEnd\030\004 \001(\005\032R\n\024UserMonsterConstant" +
+      "s\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMax" +
+      "NumMonsterLimit\030\002 \001(\005\032\245\001\n\020MonsterConstan" +
+      "ts\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033second" +
+      "sToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elemental" +
+      "Strength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(" +
+      "\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMa" +
+      "pConstants\022\035\n\025mapSectionImagePrefix\030\001 \001(" +
+      "\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n\020mapSec",
+      "tionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022" +
+      "\026\n\016mapTotalHeight\030\005 \001(\002\032j\n\025MiniTutorialC" +
+      "onstants\022\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016" +
+      "guideMonsterId\030\002 \001(\005\022\035\n\025enhanceGuideMons" +
+      "terId\030\003 \001(\005\032\213\001\n\021ClanHelpConstants\0229\n\010hel" +
+      "pType\030\001 \001(\0162\036.com.lvl6.proto.GameActionT" +
+      "ype:\007NO_HELP\022\034\n\024amountRemovedPerHelp\030\002 \001" +
+      "(\005\022\035\n\025percentRemovedPerHelp\030\003 \001(\002\032\341\001\n\014Pv" +
+      "pConstants\022\031\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n" +
+      "\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030",
+      "\003 \001(\002\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\022\035\n\025defe" +
+      "ndingMsgCharLimit\030\005 \001(\005\022\"\n\032beginAvenging" +
+      "TimeLimitMins\030\006 \001(\005\022(\n requestClanToAven" +
+      "geTimeLimitMins\030\007 \001(\005\0328\n\024SpeedUpConstant" +
+      "Proto\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032" +
+      "\210\001\n\037ResourceConversionConstantProto\022?\n\014r" +
+      "esourceType\030\001 \001(\0162\034.com.lvl6.proto.Resou" +
+      "rceType:\013NO_RESOURCE\022\023\n\013resourceAmt\030\002 \001(" +
+      "\005\022\017\n\007numGems\030\003 \001(\005\032\217\001\n\031FileDownloadConst" +
+      "antProto\022\026\n\016fileDownloadId\030\001 \001(\005\022\020\n\010file",
+      "Name\030\002 \001(\t\022\020\n\010priority\030\003 \001(\005\022\034\n\024download" +
+      "OnlyOverWifi\030\004 \001(\010\022\030\n\020useIphone6Prefix\030\005" +
+      " \001(\010\032W\n\031BoosterPackConstantsProto\022\036\n\026pur" +
+      "chaseAmountRequired\030\001 \001(\005\022\032\n\022numberOfPac" +
+      "ksGiven\030\002 \001(\005\032\266\004\n\021TutorialConstants\022\031\n\021s" +
+      "tartingMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId" +
+      "\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyM" +
+      "onsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030" +
+      "\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutoria" +
+      "lStructures\030\003 \003(\0132#.com.lvl6.proto.Tutor",
+      "ialStructProto\022\036\n\026structureIdsToBeBuillt" +
+      "\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElement" +
+      "s\030\006 \003(\0132 .com.lvl6.proto.CityElementProt" +
+      "o\022$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022" +
+      "%\n\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020" +
+      "\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gem" +
+      "sInit\030\r \001(\005\022\030\n\020gachaCreditsInit\030\021 \001(\005\022?\n" +
+      "\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.prot" +
+      "o.MinimumObstacleProto\"A\n\014UpdateStatus\022\r" +
+      "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR",
+      "_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
+      "\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAIN" +
+      "TENANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n" +
+      "\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023" +
+      "B\021EventStartupProto"
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/EventStartupProto.java
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

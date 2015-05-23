@@ -31,15 +31,12 @@ public class SetDefendingMsgController extends EventController {
 	public SetDefendingMsgController() {
 		
 	}
-	
+
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-
-	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -94,7 +91,7 @@ public class SetDefendingMsgController extends EventController {
 		try {
 			//
 			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
-					userRetrieveUtil, miscMethods());
+					userRetrieveUtil, miscMethods);
 
 			rsga.execute(resBuilder);
 

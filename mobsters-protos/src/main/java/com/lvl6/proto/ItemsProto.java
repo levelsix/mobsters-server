@@ -873,6 +873,7 @@ public final class ItemsProto {
     int getAmount();
 
     /**
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
      * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
      */
     @java.lang.Deprecated boolean hasSecretGiftChance();
@@ -882,11 +883,21 @@ public final class ItemsProto {
     @java.lang.Deprecated float getSecretGiftChance();
 
     /**
+=======
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
      * <code>optional bool alwaysDisplayToUser = 8;</code>
+     *
+     * <pre>
+     *optional float secretGiftChance = 7;
+     * </pre>
      */
     boolean hasAlwaysDisplayToUser();
     /**
      * <code>optional bool alwaysDisplayToUser = 8;</code>
+     *
+     * <pre>
+     *optional float secretGiftChance = 7;
+     * </pre>
      */
     boolean getAlwaysDisplayToUser();
 
@@ -1020,13 +1031,8 @@ public final class ItemsProto {
               amount_ = input.readInt32();
               break;
             }
-            case 61: {
-              bitField0_ |= 0x00000040;
-              secretGiftChance_ = input.readFloat();
-              break;
-            }
             case 64: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000040;
               alwaysDisplayToUser_ = input.readBool();
               break;
             }
@@ -1036,14 +1042,14 @@ public final class ItemsProto {
               if (value == null) {
                 unknownFields.mergeVarintField(9, rawValue);
               } else {
-                bitField0_ |= 0x00000100;
+                bitField0_ |= 0x00000080;
                 gameActionType_ = value;
               }
               break;
             }
             case 82: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000100;
               shortName_ = bs;
               break;
             }
@@ -1053,7 +1059,7 @@ public final class ItemsProto {
               if (value == null) {
                 unknownFields.mergeVarintField(11, rawValue);
               } else {
-                bitField0_ |= 0x00000400;
+                bitField0_ |= 0x00000200;
                 quality_ = value;
               }
               break;
@@ -1250,6 +1256,7 @@ public final class ItemsProto {
       return amount_;
     }
 
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
     public static final int SECRETGIFTCHANCE_FIELD_NUMBER = 7;
     private float secretGiftChance_;
     /**
@@ -1265,16 +1272,26 @@ public final class ItemsProto {
       return secretGiftChance_;
     }
 
+=======
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
     public static final int ALWAYSDISPLAYTOUSER_FIELD_NUMBER = 8;
     private boolean alwaysDisplayToUser_;
     /**
      * <code>optional bool alwaysDisplayToUser = 8;</code>
+     *
+     * <pre>
+     *optional float secretGiftChance = 7;
+     * </pre>
      */
     public boolean hasAlwaysDisplayToUser() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional bool alwaysDisplayToUser = 8;</code>
+     *
+     * <pre>
+     *optional float secretGiftChance = 7;
+     * </pre>
      */
     public boolean getAlwaysDisplayToUser() {
       return alwaysDisplayToUser_;
@@ -1286,7 +1303,7 @@ public final class ItemsProto {
      * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
      */
     public boolean hasGameActionType() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
@@ -1301,7 +1318,7 @@ public final class ItemsProto {
      * <code>optional string shortName = 10;</code>
      */
     public boolean hasShortName() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string shortName = 10;</code>
@@ -1347,7 +1364,7 @@ public final class ItemsProto {
      * </pre>
      */
     public boolean hasQuality() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
@@ -1367,7 +1384,6 @@ public final class ItemsProto {
       itemType_ = com.lvl6.proto.ItemsProto.ItemType.BOOSTER_PACK;
       staticDataId_ = 0;
       amount_ = 0;
-      secretGiftChance_ = 0F;
       alwaysDisplayToUser_ = false;
       gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       shortName_ = "";
@@ -1405,18 +1421,15 @@ public final class ItemsProto {
         output.writeInt32(6, amount_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeFloat(7, secretGiftChance_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBool(8, alwaysDisplayToUser_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeEnum(9, gameActionType_.getNumber());
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(10, getShortNameBytes());
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeEnum(11, quality_.getNumber());
       }
       getUnknownFields().writeTo(output);
@@ -1454,21 +1467,17 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(7, secretGiftChance_);
+          .computeBoolSize(8, alwaysDisplayToUser_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(8, alwaysDisplayToUser_);
+          .computeEnumSize(9, gameActionType_.getNumber());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(9, gameActionType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getShortNameBytes());
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(11, quality_.getNumber());
       }
@@ -1601,16 +1610,14 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         amount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        secretGiftChance_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00000040);
         alwaysDisplayToUser_ = false;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         shortName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -1666,21 +1673,17 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.secretGiftChance_ = secretGiftChance_;
+        result.alwaysDisplayToUser_ = alwaysDisplayToUser_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.alwaysDisplayToUser_ = alwaysDisplayToUser_;
+        result.gameActionType_ = gameActionType_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.gameActionType_ = gameActionType_;
+        result.shortName_ = shortName_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
-        }
-        result.shortName_ = shortName_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
         }
         result.quality_ = quality_;
         result.bitField0_ = to_bitField0_;
@@ -1721,9 +1724,6 @@ public final class ItemsProto {
         if (other.hasAmount()) {
           setAmount(other.getAmount());
         }
-        if (other.hasSecretGiftChance()) {
-          setSecretGiftChance(other.getSecretGiftChance());
-        }
         if (other.hasAlwaysDisplayToUser()) {
           setAlwaysDisplayToUser(other.getAlwaysDisplayToUser());
         }
@@ -1731,7 +1731,7 @@ public final class ItemsProto {
           setGameActionType(other.getGameActionType());
         }
         if (other.hasShortName()) {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           shortName_ = other.shortName_;
           onChanged();
         }
@@ -2064,6 +2064,7 @@ public final class ItemsProto {
         return this;
       }
 
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
       private float secretGiftChance_ ;
       /**
        * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
@@ -2096,33 +2097,51 @@ public final class ItemsProto {
         return this;
       }
 
+=======
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
       private boolean alwaysDisplayToUser_ ;
       /**
        * <code>optional bool alwaysDisplayToUser = 8;</code>
+       *
+       * <pre>
+       *optional float secretGiftChance = 7;
+       * </pre>
        */
       public boolean hasAlwaysDisplayToUser() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional bool alwaysDisplayToUser = 8;</code>
+       *
+       * <pre>
+       *optional float secretGiftChance = 7;
+       * </pre>
        */
       public boolean getAlwaysDisplayToUser() {
         return alwaysDisplayToUser_;
       }
       /**
        * <code>optional bool alwaysDisplayToUser = 8;</code>
+       *
+       * <pre>
+       *optional float secretGiftChance = 7;
+       * </pre>
        */
       public Builder setAlwaysDisplayToUser(boolean value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         alwaysDisplayToUser_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional bool alwaysDisplayToUser = 8;</code>
+       *
+       * <pre>
+       *optional float secretGiftChance = 7;
+       * </pre>
        */
       public Builder clearAlwaysDisplayToUser() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         alwaysDisplayToUser_ = false;
         onChanged();
         return this;
@@ -2133,7 +2152,7 @@ public final class ItemsProto {
        * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
        */
       public boolean hasGameActionType() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
@@ -2148,7 +2167,7 @@ public final class ItemsProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         gameActionType_ = value;
         onChanged();
         return this;
@@ -2157,7 +2176,7 @@ public final class ItemsProto {
        * <code>optional .com.lvl6.proto.GameActionType gameActionType = 9;</code>
        */
       public Builder clearGameActionType() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         gameActionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         onChanged();
         return this;
@@ -2168,7 +2187,7 @@ public final class ItemsProto {
        * <code>optional string shortName = 10;</code>
        */
       public boolean hasShortName() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string shortName = 10;</code>
@@ -2211,7 +2230,7 @@ public final class ItemsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000100;
         shortName_ = value;
         onChanged();
         return this;
@@ -2220,7 +2239,7 @@ public final class ItemsProto {
        * <code>optional string shortName = 10;</code>
        */
       public Builder clearShortName() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         shortName_ = getDefaultInstance().getShortName();
         onChanged();
         return this;
@@ -2233,7 +2252,7 @@ public final class ItemsProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000100;
         shortName_ = value;
         onChanged();
         return this;
@@ -2248,7 +2267,7 @@ public final class ItemsProto {
        * </pre>
        */
       public boolean hasQuality() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 11 [default = NO_QUALITY];</code>
@@ -2271,7 +2290,7 @@ public final class ItemsProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000200;
         quality_ = value;
         onChanged();
         return this;
@@ -2284,7 +2303,7 @@ public final class ItemsProto {
        * </pre>
        */
       public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         onChanged();
         return this;
@@ -3417,6 +3436,7 @@ public final class ItemsProto {
      * <code>optional int32 gemPrice = 2;</code>
      */
     int getGemPrice();
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
 
     /**
      * <code>optional int32 structId = 3;</code>
@@ -3426,6 +3446,8 @@ public final class ItemsProto {
      * <code>optional int32 structId = 3;</code>
      */
     int getStructId();
+=======
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemGemPriceProto}
@@ -3493,11 +3515,14 @@ public final class ItemsProto {
               gemPrice_ = input.readInt32();
               break;
             }
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
             case 24: {
               bitField0_ |= 0x00000004;
               structId_ = input.readInt32();
               break;
             }
+=======
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3989,6 +4014,7 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
       "\005\"\310\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
@@ -4008,6 +4034,26 @@ public final class ItemsProto {
       "ASH\020\003\022\025\n\021ITEM_GACHA_CREDIT\020\010\022\014\n\010SPEED_UP",
       "\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006\022\024\n" +
       "\020GACHA_MULTI_SPIN\020\007B\014B\nItemsProto"
+=======
+      "\005\"\252\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
+      "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
+      "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
+      "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\033\n\023alwaysDispla" +
+      "yToUser\030\010 \001(\010\0226\n\016gameActionType\030\t \001(\0162\036." +
+      "com.lvl6.proto.GameActionType\022\021\n\tshortNa" +
+      "me\030\n \001(\t\0224\n\007quality\030\013 \001(\0162\027.com.lvl6.pro",
+      "to.Quality:\nNO_QUALITY\"\261\001\n\022UserItemUsage" +
+      "Proto\022\021\n\tusageUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001" +
+      "(\t\022\016\n\006itemId\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022" +
+      "\024\n\014userDataUuid\030\005 \001(\t\022;\n\nactionType\030\006 \001(" +
+      "\0162\036.com.lvl6.proto.GameActionType:\007NO_HE" +
+      "LP\"5\n\021ItemGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022" +
+      "\020\n\010gemPrice\030\002 \001(\005*\227\001\n\010ItemType\022\020\n\014BOOSTE" +
+      "R_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\025\n" +
+      "\021ITEM_GACHA_CREDIT\020\010\022\014\n\010SPEED_UP\020\004\022\013\n\007BU" +
+      "ILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006\022\024\n\020GACHA_M",
+      "ULTI_SPIN\020\007B\014B\nItemsProto"
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4033,7 +4079,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", "AlwaysDisplayToUser", "GameActionType", "ShortName", "Quality", });
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "AlwaysDisplayToUser", "GameActionType", "ShortName", "Quality", });
     internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new

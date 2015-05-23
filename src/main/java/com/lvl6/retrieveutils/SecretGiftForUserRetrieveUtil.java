@@ -21,17 +21,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
+import com.lvl6.info.SecretGiftForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
 @Component
-public class ItemSecretGiftForUserRetrieveUtil {
+public class SecretGiftForUserRetrieveUtil {
 	private static Logger log = LoggerFactory
-			.getLogger(ItemSecretGiftForUserRetrieveUtil.class);
+			.getLogger(SecretGiftForUserRetrieveUtil.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SECRET_GIFT_FOR_USER;
-	private static final UserItemSecretGiftForClientMapper rowMapper = new UserItemSecretGiftForClientMapper();
+	private static final UserSecretGiftForClientMapper rowMapper = new UserSecretGiftForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -46,26 +46,26 @@ public class ItemSecretGiftForUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<String, SecretGiftForUserPojo> getSpecificOrAllSecretGiftForUserMap(
+	public Map<String, SecretGiftForUser> getSpecificOrAllSecretGiftForUserMap(
 			String userId, Collection<String> ids) {
-		Map<String, SecretGiftForUserPojo> idToUserItemSecretGifts = new HashMap<String, SecretGiftForUserPojo>();
-		Collection<SecretGiftForUserPojo> secretGifts = getSpecificOrAllSecretGiftForUser(
+		Map<String, SecretGiftForUser> idToUserSecretGifts = new HashMap<String, SecretGiftForUser>();
+		Collection<SecretGiftForUser> secretGifts = getSpecificOrAllSecretGiftForUser(
 				userId, ids);
 
-		for (SecretGiftForUserPojo afu : secretGifts) {
+		for (SecretGiftForUser afu : secretGifts) {
 			String id = afu.getId();
 
-			idToUserItemSecretGifts.put(id, afu);
+			idToUserSecretGifts.put(id, afu);
 		}
 
-		return idToUserItemSecretGifts;
+		return idToUserSecretGifts;
 	}
 
-	public Collection<SecretGiftForUserPojo> getSpecificOrAllSecretGiftForUser(
+	public Collection<SecretGiftForUser> getSpecificOrAllSecretGiftForUser(
 			String userId, Collection<String> ids) {
-		List<SecretGiftForUserPojo> secretGifts = null;
+		List<SecretGiftForUser> secretGifts = null;
 		try {
-			List<String> columnsToSelected = UserItemSecretGiftForClientMapper
+			List<String> columnsToSelected = UserSecretGiftForClientMapper
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
@@ -94,8 +94,8 @@ public class ItemSecretGiftForUserRetrieveUtil {
 							inConditions, inDelim, overallDelim, values,
 							preparedStatement);
 
-			log.info(String.format(
-					"getSpecificOrAllSecretGiftForUserPojo() query=%s", query));
+			log.info( "getSpecificOrAllSecretGiftForUser() query={}",
+					query);
 
 			secretGifts = this.jdbcTemplate.query(query, values.toArray(),
 					rowMapper);
@@ -103,9 +103,9 @@ public class ItemSecretGiftForUserRetrieveUtil {
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"could not retrieve SecretGiftForUserPojo for userId=%s, ids=%s",
+							"could not retrieve SecretGiftForUser for userId=%s, ids=%s",
 							userId, ids), e);
-			secretGifts = new ArrayList<SecretGiftForUserPojo>();
+			secretGifts = new ArrayList<SecretGiftForUser>();
 		}
 
 		return secretGifts;
@@ -131,26 +131,26 @@ public class ItemSecretGiftForUserRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserItemSecretGiftForClientMapper implements
-			RowMapper<SecretGiftForUserPojo> {
+	private static final class UserSecretGiftForClientMapper implements
+			RowMapper<SecretGiftForUser> {
 
 		private static List<String> columnsSelected;
 
 		@Override
-		public SecretGiftForUserPojo mapRow(ResultSet rs, int rowNum)
+		public SecretGiftForUser mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			SecretGiftForUserPojo isgfu = new SecretGiftForUserPojo();
+			SecretGiftForUser isgfu = new SecretGiftForUser();
 			isgfu.setId(rs.getString(DBConstants.SECRET_GIFT_FOR_USER__ID));
 			isgfu.setUserId(rs
 					.getString(DBConstants.SECRET_GIFT_FOR_USER__USER_ID));
 			isgfu.setRewardId(rs
 					.getInt(DBConstants.SECRET_GIFT_FOR_USER__REWARD_ID));
-			isgfu.setSecsUntilCollection(rs
+			isgfu.setSecsTillCollection(rs
 					.getInt(DBConstants.SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION));
 
 			Timestamp ts = rs
 					.getTimestamp(DBConstants.SECRET_GIFT_FOR_USER__CREATE_TIME);
-			isgfu.setCreateTime(ts);
+			isgfu.setCreateTime(new Date(ts.getTime()));
 
 			return isgfu;
 		}

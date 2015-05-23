@@ -64,6 +64,7 @@ public class ItemRetrieveUtils {
 	private void setStaticItemIdsToItems() {
 		log.debug("setting static map of itemIds to Items");
 
+		Map<Integer, Item> itemIdsToItemsTemp = new HashMap<Integer, Item>();
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
 		try {
@@ -74,17 +75,14 @@ public class ItemRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, Item> itemIdsToItemsTemp = new HashMap<Integer, Item>();
 
 						//loop through each row and convert it into a java object
 						while (rs.next()) {
 							Item item = convertRSRowToItem(rs);
 							int itemId = item.getId();
 							itemIdsToItemsTemp.put(itemId, item);
-
 						}
 
-						itemIdsToItems = itemIdsToItemsTemp;
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
@@ -96,6 +94,7 @@ public class ItemRetrieveUtils {
 		} finally {
 			DBConnection.get().close(rs, null, conn);
 		}
+		itemIdsToItems = itemIdsToItemsTemp;
 	}
 
 	public void reload() {
@@ -148,8 +147,8 @@ public class ItemRetrieveUtils {
 		}
 
 
-		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId, amount,
-				alwaysDisplayToUser, actionGameType, quality);
+		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId,
+				amount, alwaysDisplayToUser, actionGameType, quality);
 		return item;
 	}
 }

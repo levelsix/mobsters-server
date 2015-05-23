@@ -44,10 +44,6 @@ public class Item implements Serializable {
 		//this.normalizedSecretGiftProbability = normalizedSecretGiftProbability;
 	}
 
-
-
-
-
 	public String getGameActionType() {
 		return gameActionType;
 	}
@@ -143,7 +139,7 @@ public class Item implements Serializable {
 				+ ", imgName=" + imgName + ", itemType=" + itemType
 				+ ", staticDataId=" + staticDataId + ", amount=" + amount
 				+ ", alwaysDisplayToUser=" + alwaysDisplayToUser
-				+ ", gameActionType=" + gameActionType
+				+ ", gameActionType=" + gameActionType + ", quality=" + quality
 				+ ", normalizedSecretGiftProbability="
 				+ normalizedSecretGiftProbability + "]";
 	}

@@ -110,11 +110,29 @@ message UserTangoGiftProto {
 	optional string gifterTangoName = 2;
 }
 
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/Reward.proto
 //------------------------------------------------------------------------------------------
+=======
+//similar to ClanGiftProto
+message TangoGiftProto {
+    optional int32 tangoGiftId = 1;
+    //name of the gift
+    optional string name = 2;
+    optional int32 hoursUntilExpiration = 3;
+    optional string imageName = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/Reward.proto
 message UserSecretGiftProto {
 	optional string uisgUuid = 1;
 	optional string userUuid = 2;
 	optional int32 secsTillCollection = 3;
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/Reward.proto
 	optional RewardProto reward = 4;
+=======
+	optional int32 rewardId = 4;
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/Reward.proto
 	optional int64 createTime = 5;
 }

@@ -97,7 +97,11 @@ message RedeemSecretGiftResponseProto {
 	repeated UserSecretGiftProto nuGifts = 2; //new gifts after redeeming cur one
 	
 	optional RedeemSecretGiftStatus status = 3;
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/EventReward.proto
 	optional UserRewardProto rewards = 4;
+=======
+	optional UserRewardProto reward = 4;
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/EventReward.proto
 	
 	enum RedeemSecretGiftStatus {
 		SUCCESS = 1;
@@ -106,3 +110,8 @@ message RedeemSecretGiftResponseProto {
 	}
 }
 //------------------------------------------------------------------------------------------
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/EventReward.proto
+=======
+
+
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/EventReward.proto

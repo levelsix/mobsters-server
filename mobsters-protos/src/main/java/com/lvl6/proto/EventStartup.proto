@@ -135,6 +135,10 @@ message StartupResponseProto {
 
 	repeated UserItemUsageProto itemsInUse = 44;
 	repeated UserSecretGiftProto gifts = 45;
+<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/EventStartup.proto
+=======
+		
+>>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/EventStartup.proto
 		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 

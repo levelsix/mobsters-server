@@ -1,6 +1,5 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,7 @@ import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecre
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
@@ -39,30 +38,35 @@ public class RedeemSecretGiftAction {
 	private String userId;
 	private List<String> rewardIdsRedeemed;
 	private Timestamp clientTime;
-	private ItemSecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
+	private SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private MonsterStuffUtils monsterStuffUtil;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtil;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 	private SecretGiftUtils secretGiftUtils;
 	private DeleteUtil deleteUtil;
 	private UpdateUtil updateUtil;
 	private InsertUtil insertUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public RedeemSecretGiftAction(
 			String userId,
 			List<String> itemIdsRedeemed,
 			Timestamp clientTime,
-			ItemSecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil,
+			SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
-			SecretGiftUtils secretGiftUtils,
-			DeleteUtil deleteUtil, UpdateUtil updateUtil, InsertUtil insertUtil) {
+			MonsterStuffUtils monsterStuffUtil,
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			RewardRetrieveUtils rewardRetrieveUtil,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			CreateInfoProtoUtils createInfoProtoUtils,
+			SecretGiftUtils secretGiftUtils, DeleteUtil deleteUtil,
+			UpdateUtil updateUtil, InsertUtil insertUtil) {
 		super();
 		this.userId = userId;
 		this.rewardIdsRedeemed = itemIdsRedeemed;
@@ -70,6 +74,12 @@ public class RedeemSecretGiftAction {
 		this.secretGiftForUserRetrieveUtil = secretGiftForUserRetrieveUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.monsterStuffUtil = monsterStuffUtil;
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.rewardRetrieveUtil = rewardRetrieveUtil;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.secretGiftUtils = secretGiftUtils;
 		this.deleteUtil = deleteUtil;
 		this.updateUtil = updateUtil;
@@ -78,25 +88,24 @@ public class RedeemSecretGiftAction {
 
 	//	//encapsulates the return value from this Action Object
 	//	static class RedeemSecretGiftResource {
-	//
-	//
+	//		
+	//		
 	//		public RedeemSecretGiftResource() {
-	//
+	//			
 	//		}
 	//	}
 	//
 	//	public RedeemSecretGiftResource execute() {
-	//
+	//		
 	//	}
 
 	//derived state
 	private User user;
 	private Map<String, SecretGiftForUserPojo> idToSecretGift;
-
 	private List<Reward> listOfRewards;
+	private List<SecretGiftForUserPojo> nuGifts;
 	private AwardRewardAction ara;
 	private UserRewardProto urp;
-	private List<SecretGiftForUserPojo> gifts;
 
 	//	private Map<String, Integer> currencyDeltas;
 	//	private Map<String, Integer> prevCurrencies;
@@ -105,7 +114,7 @@ public class RedeemSecretGiftAction {
 	//	private Map<String, String> details;
 
 	//select items at random to gift to the user
-
+	
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
@@ -149,7 +158,7 @@ public class RedeemSecretGiftAction {
 
 		if (null == idToSecretGift
 				|| idToSecretGift.size() != rewardIdsRedeemed.size()) {
-			log.info("inconsistent itemSecretGiftForUserPojo in db: {} and what client asked: {}",
+			log.info("inconsistent SecretGiftForUserPojo in db: {} and what client asked: {}",
 					idToSecretGift, rewardIdsRedeemed);
 			return false;
 		}
@@ -165,7 +174,7 @@ public class RedeemSecretGiftAction {
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		//		prevCurrencies = new HashMap<String, Integer>();
-		//
+		//		
 		//		if (0 != gemsGained) {
 		//			prevCurrencies.put(MiscMethods.gems, user.getGems());
 		//		}
@@ -175,7 +184,7 @@ public class RedeemSecretGiftAction {
 		//		if (0 != oilGained) {
 		//			prevCurrencies.put(MiscMethods.oil, user.getOil());
 		//		}
-		//
+		//		
 
 		//delete the SecretGifts
 		deleteUtil.deleteSecretGifts(userId, rewardIdsRedeemed);
@@ -183,50 +192,45 @@ public class RedeemSecretGiftAction {
 		//update the user saying he got the gifts
 		user.updateLastSecretGiftCollectTime(clientTime);
 
+		//award the SecretGifts to the user (aggregate by rewardId)
+		aggregateGifts();
+
+		//update db
+		String awardReason = ControllerConstants.REWARD_REASON__COLLECT_GIFT;
+		//TODO: Use max cash and max oil if resources are given.
+		ara = new AwardRewardAction(userId, user, 0, 0, clientTime,
+				awardReason, rewards, userRetrieveUtil, itemForUserRetrieveUtil,
+				insertUtil, updateUtil, monsterStuffUtil, monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtil, userClanRetrieveUtils,
+				createInfoProtoUtils);
+
+		boolean awardedRewards = ara.execute();
+		if (awardedRewards) {
+			urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(),
+					ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
+					ara.getOilGained(), ara.getGachaCreditsGained(), null);
+		} else {
+			log.error("unable to award gifts! {}", idToSecretGift);
+			return false;
+		}
+
 		//create new SecretGifts
-		gifts = secretGiftUtils.calculateGiftsForUser(userId,
+		nuGifts = secretGiftUtils.calculateGiftsForUser(userId,
 				ControllerConstants.SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
 				clientTime.getTime());
 
 		List<String> ids = null;
-		if (null != gifts && !gifts.isEmpty()) {
+		if (null != nuGifts && !nuGifts.isEmpty()) {
 			//save new SecretGifts
-			ids = insertUtil.insertIntoSecretGiftForUserGetId(gifts);
+			ids = insertUtil.insertIntoSecretGiftForUserGetId(nuGifts);
 		}
 
-		if (null != ids && ids.size() == gifts.size()) {
+		if (null != ids && ids.size() == nuGifts.size()) {
 			setGiftIds(ids);
 		} else {
 			log.error("Error calculating the new SecretGifts. nuGifts={}, ids={}",
-					gifts, ids);
+					nuGifts, ids);
 		}
-
-		//award the SecretGifts to the user (aggregate by rewardId)
-		aggregateGifts();
-		ara = new AwardRewardAction(userId, user, user.getCash(), user.getOil(),
-				clientTime,
-				ControllerConstants.REWARD_REASON__SECRET_GIFT,
-				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
-				insertUtil, updateUtil,
-				monsterStuffUtils, monsterLevelInfoRetrieveUtils,
-				giftRetrieveUtil,
-				giftRewardRetrieveUtils, rewardRetrieveUtils,
-				userClanRetrieveUtils, createInfoProtoUtils, "");
-		boolean awardedRewards = ara.execute();
-		if (awardedRewards) {
-			List<UserGiftProto> gifts = null;
-			if (null != ara.getClanGift()) {
-				gifts = ara.getClanGift().getUserGiftsList();
-			}
-
-			urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(),
-					ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
-					ara.getOilGained(), ara.getGachaCreditsGained(), gifts);
-		} else {
-			log.error("unable to award rewards! {}", listOfRewards);
-			return false;
-		}
-
 
 		//		prepCurrencyHistory();
 
@@ -234,21 +238,21 @@ public class RedeemSecretGiftAction {
 	}
 
 	private void aggregateGifts() {
-		listOfRewards = new ArrayList<Reward>();
+		rewards = new ArrayList<Reward>();
 
-		for (SecretGiftForUserPojo gif : idToSecretGift.values()) {
+		for (SecretGiftForUser gif : idToSecretGift.values()) {
 			int rewardId = gif.getRewardId();
-			Reward r = rewardRetrieveUtils.getRewardById(rewardId);
-			listOfRewards.add(r);
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			rewards.add(r);
 		}
 	}
 
 	private void setGiftIds(List<String> ids) {
 		for (int index = 0; index < ids.size(); index++) {
 			String id = ids.get(index);
-			SecretGiftForUserPojo isgfu = gifts.get(index);
+			SecretGiftForUserPojo sgfu = nuGifts.get(index);
 
-			isgfu.setId(id);
+			ssgfu.setId(id);
 		}
 	}
 
@@ -257,7 +261,7 @@ public class RedeemSecretGiftAction {
 	//		String gems = MiscMethods.gems;
 	//		String cash = MiscMethods.cash;
 	//		String oil = MiscMethods.oil;
-	//
+	//		
 	//		currencyDeltas = new HashMap<String, Integer>();
 	//		curCurrencies = new HashMap<String, Integer>();
 	//		reasonsForChanges = new HashMap<String, String>();
@@ -279,17 +283,21 @@ public class RedeemSecretGiftAction {
 	//			reasonsForChanges.put(oil,
 	//				ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES);
 	//		}
-	//
+	//		
 	//		details = new HashMap<String, String>();
 	//		for (Integer key : itemIdToResourceToQuantities.keySet()) {
-	//			String value = itemIdToResourceToQuantities.get(key).toString();
-	//
+	//			String value = itemIdToResourceToQuantities.get(key).toString(); 
+	//			
 	//			details.put(key.toString(), value);
 	//		}
 	//	}
 
 	public User getUser() {
 		return user;
+	}
+
+	public List<SecretGiftForUser> getGifts() {
+		return nuGifts;
 	}
 
 	public UserRewardProto getUrp() {
@@ -301,13 +309,12 @@ public class RedeemSecretGiftAction {
 	}
 
 	public List<SecretGiftForUserPojo> getGifts() {
-		return gifts;
 	}
 
 	//	public Map<String, Integer> getCurrencyDeltas() {
 	//		return currencyDeltas;
 	//	}
-	//
+	//	
 	//	public Map<String, Integer> getPreviousCurrencies() {
 	//		return prevCurrencies;
 	//	}
@@ -315,11 +322,11 @@ public class RedeemSecretGiftAction {
 	//	public Map<String, Integer> getCurrentCurrencies() {
 	//		return curCurrencies;
 	//	}
-	//
+	//	
 	//	public Map<String, String> getReasons() {
 	//		return reasonsForChanges;
 	//	}
-	//
+	//	
 	//	public Map<String, String> getDetails() {
 	//		return details;
 	//	}
