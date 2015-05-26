@@ -3,6 +3,7 @@ package com.lvl6.eventhandlers;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -32,7 +33,7 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
-	
+
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtils;
 
@@ -95,7 +96,7 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 
 		User user = null;
 		String playerId = event.getPlayerId();
-		
+
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
 			if(playerId != null && !playerId.isEmpty()) {
@@ -103,12 +104,16 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 			}
 			else if (event instanceof PreDatabaseRequestEvent) {
 				String udid = ((PreDatabaseRequestEvent) event).getUdid();
+				List<User> users = null;
 				if(udid != null) {
-					user = userRetrieveUtils.getUserByUDIDorFbId(udid, "").get(0);
+					users = userRetrieveUtils.getUserByUDIDorFbId(udid, "");
+				}
+				if(null != users && !users.isEmpty()) {
+					user = users.get(0);
 				}
 			}
 			if(user != null && user.isAdmin()) {
-				
+
 			}else {
 				//not an admin so send maintenance message and return
 				if (event instanceof PreDatabaseRequestEvent) {
@@ -122,10 +127,10 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 				return;
 			}
 		}
-		
+
 		updatePlayerToServerMaps(event);
 		ec.handleEvent(event);
-		
+
 	}
 
 	@Override
