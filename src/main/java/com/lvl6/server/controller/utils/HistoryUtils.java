@@ -1,6 +1,7 @@
 package com.lvl6.server.controller.utils;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 import org.json.JSONException;
@@ -10,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
 import com.lvl6.properties.IAPValues;
 
 @Component
@@ -64,6 +67,22 @@ public class HistoryUtils {
 	
 	private String randomUUID() {
 		return UUID.randomUUID().toString();
+	}
+	
+	public void insertUserCurrencyHistoryForGacha(String userId, Date now, int currChange,
+			int currBeforeChange, int currAfterChange, String reason, String detail,
+			UserCurrencyHistoryDao uchDao, String resourceType) {
+		UserCurrencyHistory uch = new UserCurrencyHistory();
+		uch.setId(randomUUID());
+		uch.setUserId(userId);
+		uch.setDate(new Timestamp(now.getTime()));
+		uch.setResourceType(resourceType);
+		uch.setCurrencyChange(currChange);
+		uch.setCurrencyBeforeChange(currBeforeChange);
+		uch.setCurrencyAfterChange(currAfterChange);
+		uch.setReasonForChange(reason);
+		uch.setDetails(detail);
+		uchDao.insert(uch);
 	}
 
 	
