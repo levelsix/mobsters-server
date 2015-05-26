@@ -115,6 +115,13 @@ public class SalesPackageConfigDao extends DAOImpl<SalesPackageConfigRecord, com
 	}
 
 	/**
+	 * Fetch records that have <code>priority IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesPackageConfig> fetchByPriority(Integer... values) {
+		return fetch(SalesPackageConfig.SALES_PACKAGE_CONFIG.PRIORITY, values);
+	}
+
+	/**
 	 * Fetch records that have <code>custom_menu_id IN (values)</code>
 	 */
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesPackageConfig> fetchByCustomMenuId(Integer... values) {

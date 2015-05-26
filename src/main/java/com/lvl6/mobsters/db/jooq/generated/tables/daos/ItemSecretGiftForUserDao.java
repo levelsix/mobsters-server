@@ -86,4 +86,11 @@ public class ItemSecretGiftForUserDao extends DAOImpl<ItemSecretGiftForUserRecor
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemSecretGiftForUser> fetchByCreateTime(Timestamp... values) {
 		return fetch(ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER.CREATE_TIME, values);
 	}
+
+	/**
+	 * Fetch records that have <code>reward_id IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemSecretGiftForUser> fetchByRewardId(Integer... values) {
+		return fetch(ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER.REWARD_ID, values);
+	}
 }

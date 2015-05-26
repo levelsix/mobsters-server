@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record12;
+import org.jooq.Record13;
 import org.jooq.Row;
-import org.jooq.Row12;
+import org.jooq.Row13;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -38,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "sales_package_config", schema = "mobsters")
-public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageConfigRecord> implements Record12<Integer, String, String, Integer, String, Timestamp, Timestamp, Integer, Integer, String, String, String>, ISalesPackageConfig {
+public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageConfigRecord> implements Record13<Integer, String, String, Integer, String, Timestamp, Timestamp, Integer, Integer, Integer, String, String, String>, ISalesPackageConfig {
 
-	private static final long serialVersionUID = -947172543;
+	private static final long serialVersionUID = -975187360;
 
 	/**
 	 * Setter for <code>mobsters.sales_package_config.id</code>.
@@ -193,11 +193,30 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	}
 
 	/**
+	 * Setter for <code>mobsters.sales_package_config.priority</code>.
+	 */
+	@Override
+	public SalesPackageConfigRecord setPriority(Integer value) {
+		setValue(8, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.sales_package_config.priority</code>.
+	 */
+	@Column(name = "priority", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getPriority() {
+		return (Integer) getValue(8);
+	}
+
+	/**
 	 * Setter for <code>mobsters.sales_package_config.custom_menu_id</code>.
 	 */
 	@Override
 	public SalesPackageConfigRecord setCustomMenuId(Integer value) {
-		setValue(8, value);
+		setValue(9, value);
 		return this;
 	}
 
@@ -207,7 +226,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	@Column(name = "custom_menu_id", precision = 10)
 	@Override
 	public Integer getCustomMenuId() {
-		return (Integer) getValue(8);
+		return (Integer) getValue(9);
 	}
 
 	/**
@@ -215,7 +234,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 */
 	@Override
 	public SalesPackageConfigRecord setAnimatingIcon(String value) {
-		setValue(9, value);
+		setValue(10, value);
 		return this;
 	}
 
@@ -226,7 +245,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	@Size(max = 45)
 	@Override
 	public String getAnimatingIcon() {
-		return (String) getValue(9);
+		return (String) getValue(10);
 	}
 
 	/**
@@ -234,7 +253,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 */
 	@Override
 	public SalesPackageConfigRecord setSlamIcon(String value) {
-		setValue(10, value);
+		setValue(11, value);
 		return this;
 	}
 
@@ -245,7 +264,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	@Size(max = 45)
 	@Override
 	public String getSlamIcon() {
-		return (String) getValue(10);
+		return (String) getValue(11);
 	}
 
 	/**
@@ -253,7 +272,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 */
 	@Override
 	public SalesPackageConfigRecord setTitleColor(String value) {
-		setValue(11, value);
+		setValue(12, value);
 		return this;
 	}
 
@@ -264,7 +283,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	@Size(max = 45)
 	@Override
 	public String getTitleColor() {
-		return (String) getValue(11);
+		return (String) getValue(12);
 	}
 
 	// -------------------------------------------------------------------------
@@ -280,23 +299,23 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	}
 
 	// -------------------------------------------------------------------------
-	// Record12 type implementation
+	// Record13 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<Integer, String, String, Integer, String, Timestamp, Timestamp, Integer, Integer, String, String, String> fieldsRow() {
-		return (Row12) super.fieldsRow();
+	public Row13<Integer, String, String, Integer, String, Timestamp, Timestamp, Integer, Integer, Integer, String, String, String> fieldsRow() {
+		return (Row13) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<Integer, String, String, Integer, String, Timestamp, Timestamp, Integer, Integer, String, String, String> valuesRow() {
-		return (Row12) super.valuesRow();
+	public Row13<Integer, String, String, Integer, String, Timestamp, Timestamp, Integer, Integer, Integer, String, String, String> valuesRow() {
+		return (Row13) super.valuesRow();
 	}
 
 	/**
@@ -368,6 +387,14 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 */
 	@Override
 	public Field<Integer> field9() {
+		return SalesPackageConfig.SALES_PACKAGE_CONFIG.PRIORITY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Integer> field10() {
 		return SalesPackageConfig.SALES_PACKAGE_CONFIG.CUSTOM_MENU_ID;
 	}
 
@@ -375,7 +402,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field10() {
+	public Field<String> field11() {
 		return SalesPackageConfig.SALES_PACKAGE_CONFIG.ANIMATING_ICON;
 	}
 
@@ -383,7 +410,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field11() {
+	public Field<String> field12() {
 		return SalesPackageConfig.SALES_PACKAGE_CONFIG.SLAM_ICON;
 	}
 
@@ -391,7 +418,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field12() {
+	public Field<String> field13() {
 		return SalesPackageConfig.SALES_PACKAGE_CONFIG.TITLE_COLOR;
 	}
 
@@ -464,6 +491,14 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 */
 	@Override
 	public Integer value9() {
+		return getPriority();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value10() {
 		return getCustomMenuId();
 	}
 
@@ -471,7 +506,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value10() {
+	public String value11() {
 		return getAnimatingIcon();
 	}
 
@@ -479,7 +514,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value11() {
+	public String value12() {
 		return getSlamIcon();
 	}
 
@@ -487,7 +522,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value12() {
+	public String value13() {
 		return getTitleColor();
 	}
 
@@ -568,6 +603,15 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 */
 	@Override
 	public SalesPackageConfigRecord value9(Integer value) {
+		setPriority(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SalesPackageConfigRecord value10(Integer value) {
 		setCustomMenuId(value);
 		return this;
 	}
@@ -576,7 +620,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SalesPackageConfigRecord value10(String value) {
+	public SalesPackageConfigRecord value11(String value) {
 		setAnimatingIcon(value);
 		return this;
 	}
@@ -585,7 +629,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SalesPackageConfigRecord value11(String value) {
+	public SalesPackageConfigRecord value12(String value) {
 		setSlamIcon(value);
 		return this;
 	}
@@ -594,7 +638,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SalesPackageConfigRecord value12(String value) {
+	public SalesPackageConfigRecord value13(String value) {
 		setTitleColor(value);
 		return this;
 	}
@@ -603,7 +647,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SalesPackageConfigRecord values(Integer value1, String value2, String value3, Integer value4, String value5, Timestamp value6, Timestamp value7, Integer value8, Integer value9, String value10, String value11, String value12) {
+	public SalesPackageConfigRecord values(Integer value1, String value2, String value3, Integer value4, String value5, Timestamp value6, Timestamp value7, Integer value8, Integer value9, Integer value10, String value11, String value12, String value13) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -616,6 +660,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 		value10(value10);
 		value11(value11);
 		value12(value12);
+		value13(value13);
 		return this;
 	}
 
@@ -636,6 +681,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 		setTimeStart(from.getTimeStart());
 		setTimeEnd(from.getTimeEnd());
 		setSuccId(from.getSuccId());
+		setPriority(from.getPriority());
 		setCustomMenuId(from.getCustomMenuId());
 		setAnimatingIcon(from.getAnimatingIcon());
 		setSlamIcon(from.getSlamIcon());
@@ -665,7 +711,7 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 	/**
 	 * Create a detached, initialised SalesPackageConfigRecord
 	 */
-	public SalesPackageConfigRecord(Integer id, String productId, String name, Integer price, String uuid, Timestamp timeStart, Timestamp timeEnd, Integer succId, Integer customMenuId, String animatingIcon, String slamIcon, String titleColor) {
+	public SalesPackageConfigRecord(Integer id, String productId, String name, Integer price, String uuid, Timestamp timeStart, Timestamp timeEnd, Integer succId, Integer priority, Integer customMenuId, String animatingIcon, String slamIcon, String titleColor) {
 		super(SalesPackageConfig.SALES_PACKAGE_CONFIG);
 
 		setValue(0, id);
@@ -676,9 +722,10 @@ public class SalesPackageConfigRecord extends UpdatableRecordImpl<SalesPackageCo
 		setValue(5, timeStart);
 		setValue(6, timeEnd);
 		setValue(7, succId);
-		setValue(8, customMenuId);
-		setValue(9, animatingIcon);
-		setValue(10, slamIcon);
-		setValue(11, titleColor);
+		setValue(8, priority);
+		setValue(9, customMenuId);
+		setValue(10, animatingIcon);
+		setValue(11, slamIcon);
+		setValue(12, titleColor);
 	}
 }
