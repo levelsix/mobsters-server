@@ -40,7 +40,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "user_reward_history", schema = "mobsters")
 public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHistoryRecord> implements Record6<String, String, Timestamp, Integer, String, String>, IUserRewardHistory {
 
-	private static final long serialVersionUID = 358107491;
+	private static final long serialVersionUID = -1966041131;
 
 	/**
 	 * Setter for <code>mobsters.user_reward_history.id</code>.
@@ -130,8 +130,8 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	/**
 	 * Getter for <code>mobsters.user_reward_history.reason_for_reward</code>.
 	 */
-	@Column(name = "reason_for_reward", length = 45)
-	@Size(max = 45)
+	@Column(name = "reason_for_reward", length = 100)
+	@Size(max = 100)
 	@Override
 	public String getReasonForReward() {
 		return (String) getValue(4);
@@ -149,8 +149,8 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	/**
 	 * Getter for <code>mobsters.user_reward_history.details</code>.
 	 */
-	@Column(name = "details", length = 45)
-	@Size(max = 45)
+	@Column(name = "details", length = 255)
+	@Size(max = 255)
 	@Override
 	public String getDetails() {
 		return (String) getValue(5);

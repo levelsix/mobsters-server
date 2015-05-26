@@ -3,22 +3,17 @@
  */
 package com.lvl6.mobsters.db.jooq.generated.tables.daos;
 
+
 import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.IapHistoryRecord;
-import com.lvl6.properties.DBConstants;
-import com.lvl6.properties.IAPValues;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 /**
@@ -174,6 +169,4 @@ public class IapHistoryDao extends DAOImpl<IapHistoryRecord, com.lvl6.mobsters.d
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistory> fetchBySalesUuid(String... values) {
 		return fetch(IapHistory.IAP_HISTORY.SALES_UUID, values);
 	}
-	
-
 }

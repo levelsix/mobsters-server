@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemSecretGiftForUser extends TableImpl<ItemSecretGiftForUserRecord> {
 
-	private static final long serialVersionUID = 1389041511;
+	private static final long serialVersionUID = -2130894327;
 
 	/**
 	 * The reference instance of <code>mobsters.item_secret_gift_for_user</code>
@@ -73,6 +73,11 @@ public class ItemSecretGiftForUser extends TableImpl<ItemSecretGiftForUserRecord
 	 * The column <code>mobsters.item_secret_gift_for_user.create_time</code>.
 	 */
 	public final TableField<ItemSecretGiftForUserRecord, Timestamp> CREATE_TIME = createField("create_time", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "");
+
+	/**
+	 * The column <code>mobsters.item_secret_gift_for_user.reward_id</code>.
+	 */
+	public final TableField<ItemSecretGiftForUserRecord, Integer> REWARD_ID = createField("reward_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.item_secret_gift_for_user</code> table reference
