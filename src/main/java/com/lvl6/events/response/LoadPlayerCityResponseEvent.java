@@ -36,7 +36,7 @@ public class LoadPlayerCityResponseEvent extends NormalResponseEvent<LoadPlayerC
 	}
 	
 	public int eventSize() {
-		return loadPlayerCityResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

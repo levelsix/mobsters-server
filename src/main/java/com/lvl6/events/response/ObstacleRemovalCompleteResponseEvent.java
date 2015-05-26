@@ -29,7 +29,7 @@ public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent<Ob
 	}
 	
 	public int eventSize() {
-		return obstacleRemovalCompleteResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 

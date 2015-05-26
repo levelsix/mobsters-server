@@ -29,7 +29,7 @@ public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterRes
 	}
 	
 	public int eventSize() {
-		return healMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

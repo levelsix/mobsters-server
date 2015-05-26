@@ -29,7 +29,7 @@ public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEven
 	}
 	
 	public int eventSize() {
-		return retrieveStrengthLeaderBoardResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

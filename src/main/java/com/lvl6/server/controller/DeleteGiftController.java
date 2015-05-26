@@ -23,6 +23,7 @@ import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DeleteGiftAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component
@@ -63,7 +64,6 @@ public class DeleteGiftController extends EventController {
 //	protected UpdateUtil updateUtil;
 
 	public DeleteGiftController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class DeleteGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		DeleteGiftRequestProto reqProto = ((DeleteGiftRequestEvent) event)
 				.getDeleteGiftRequestProto();
 
@@ -132,7 +132,7 @@ public class DeleteGiftController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDeleteGiftResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -147,7 +147,7 @@ public class DeleteGiftController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setDeleteGiftResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in DeleteGiftController processEvent",
@@ -159,7 +159,7 @@ public class DeleteGiftController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setDeleteGiftResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in DeleteGiftController processEvent",

@@ -29,7 +29,7 @@ public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendi
 	}
 	
 	public int eventSize() {
-		return setDefendingMsgResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

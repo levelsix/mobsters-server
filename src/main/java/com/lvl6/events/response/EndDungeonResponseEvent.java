@@ -33,7 +33,7 @@ public class EndDungeonResponseEvent extends NormalResponseEvent<EndDungeonRespo
 	}
 	
 	public int eventSize() {
-		return endDungeonResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

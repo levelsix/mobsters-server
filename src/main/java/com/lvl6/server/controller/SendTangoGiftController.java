@@ -25,6 +25,7 @@ import com.lvl6.info.GiftForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.TangoGift;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
@@ -37,16 +38,17 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
-import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.actionobjects.SendTangoGiftAction;
+import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
 @DependsOn("gameServer")
 public class SendTangoGiftController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(SendTangoGiftController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -59,12 +61,18 @@ public class SendTangoGiftController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtil;
+	
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	public SendTangoGiftController() {
-		numAllocatedThreads = 1;
 	}
 
 	@Override
@@ -78,7 +86,7 @@ public class SendTangoGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		SendTangoGiftRequestProto reqProto = ((SendTangoGiftRequestEvent) event)
 				.getSendTangoGiftRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -113,7 +121,7 @@ public class SendTangoGiftController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSendTangoGiftResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -141,7 +149,7 @@ public class SendTangoGiftController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setSendTangoGiftResponseProto(resProto);
 			resEvent.setTag(event.getTag());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 
@@ -163,7 +171,7 @@ public class SendTangoGiftController extends EventController {
 
 						rgre.setReceivedGiftResponseProto(rgrp.build());
 
-						server.writeEvent(rgre);
+						responses.normalResponseEvents().add(rgre);
 					}
 				}
 				User gifter = stga.getGifter();
@@ -171,7 +179,7 @@ public class SendTangoGiftController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								gifter, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToCurrencyHistory(userId, clientTime, stga);
 
@@ -186,7 +194,7 @@ public class SendTangoGiftController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSendTangoGiftResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SendTangoGiftController processEvent",
@@ -207,8 +215,7 @@ public class SendTangoGiftController extends EventController {
 		Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 		GiftForTangoUser gftu = gfuIdToGftu.get(gfu.getId());
 
-		UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
-				gfu, senderProto, r, null, gftu, tg);
+		UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(gfu, senderProto, r, null, gftu, tg);
 		return ugp;
 	}
 

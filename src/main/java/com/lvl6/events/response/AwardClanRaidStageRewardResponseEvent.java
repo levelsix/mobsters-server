@@ -29,7 +29,7 @@ public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent<A
 	}
 	
 	public int eventSize() {
-		return awardClanRaidStageRewardResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

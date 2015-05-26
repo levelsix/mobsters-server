@@ -29,6 +29,6 @@ public class CreateBattleItemResponseEvent extends NormalResponseEvent<CreateBat
 	}
 
 	public int eventSize() {
-		return createBattleItemResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

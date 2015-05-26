@@ -29,7 +29,7 @@ public class QuestAcceptResponseEvent extends NormalResponseEvent<QuestAcceptRes
 	}
 	
 	public int eventSize() {
-		return questAcceptResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

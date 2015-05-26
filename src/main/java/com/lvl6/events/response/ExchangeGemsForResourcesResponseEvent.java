@@ -29,7 +29,7 @@ public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<E
 	}
 	
 	public int eventSize() {
-		return exchangeGemsForResourcesResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -30,7 +30,7 @@ public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalRespons
 	}
 	
 	public int eventSize() {
-		return approveOrRejectRequestToJoinClanResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

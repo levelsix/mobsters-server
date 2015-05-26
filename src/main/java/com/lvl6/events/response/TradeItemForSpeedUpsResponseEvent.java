@@ -29,7 +29,7 @@ public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<Trade
 	}
 	
 	public int eventSize() {
-		return tradeItemForSpeedUpsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

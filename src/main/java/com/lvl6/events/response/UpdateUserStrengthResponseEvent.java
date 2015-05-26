@@ -33,7 +33,7 @@ public class UpdateUserStrengthResponseEvent extends NormalResponseEvent<UpdateU
 	}
 	
 	public int eventSize() {
-		return updateUserStrengthResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

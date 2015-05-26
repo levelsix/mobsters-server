@@ -37,7 +37,7 @@ public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalRespon
 	}
 	
 	public int eventSize() {
-		return retrieveCurrencyFromNormStructureResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

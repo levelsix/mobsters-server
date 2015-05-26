@@ -33,7 +33,7 @@ public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<Add
 	}
 	
 	public int eventSize() {
-		return addMonsterToBattleTeamResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,7 +29,7 @@ public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<Retrieve
 	}
 	
 	public int eventSize() {
-		return retrieveMiniEventResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

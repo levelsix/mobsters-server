@@ -29,7 +29,7 @@ public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent<Nor
 	}
 	
 	public int eventSize() {
-		return normStructWaitCompleteResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -33,7 +33,7 @@ public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEve
 	}
 	
 	public int eventSize() {
-		return increaseMonsterInventorySlotResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

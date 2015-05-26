@@ -29,7 +29,7 @@ public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent<Re
 	}
 	
 	public int eventSize() {
-		return retrieveUserMonsterTeamResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,7 +29,7 @@ public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<Tr
 	}
 	
 	public int eventSize() {
-		return translateSelectMessagesResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,6 +29,6 @@ public class UpgradeNormStructureResponseEvent extends NormalResponseEvent<Upgra
 	}
 	
 	public int eventSize() {
-		return upgradeNormStructureResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

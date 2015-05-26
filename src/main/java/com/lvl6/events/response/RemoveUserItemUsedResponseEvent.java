@@ -29,7 +29,7 @@ public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent<RemoveU
 	}
 	
 	public int eventSize() {
-		return removeUserItemUsedResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

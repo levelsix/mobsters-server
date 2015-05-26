@@ -30,7 +30,7 @@ public class FulfillTeamDonationSolicitationResponseEvent extends	NormalResponse
 	}
 	
 	public int eventSize() {
-		return fulfillTeamDonationSolicitationResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

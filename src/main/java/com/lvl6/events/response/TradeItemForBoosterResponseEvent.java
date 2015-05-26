@@ -29,6 +29,6 @@ public class TradeItemForBoosterResponseEvent extends NormalResponseEvent<TradeI
 	}
 
 	public int eventSize() {
-		return tradeItemForBoosterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

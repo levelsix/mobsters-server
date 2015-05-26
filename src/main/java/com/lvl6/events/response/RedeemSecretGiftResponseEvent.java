@@ -29,7 +29,7 @@ public class RedeemSecretGiftResponseEvent extends NormalResponseEvent<RedeemSec
 	}
 	
 	public int eventSize() {
-		return redeemSecretGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

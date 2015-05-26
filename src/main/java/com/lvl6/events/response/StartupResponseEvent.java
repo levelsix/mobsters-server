@@ -36,7 +36,7 @@ public class StartupResponseEvent extends PreDatabaseResponseEvent {
 	}
 	
 	public int eventSize() {
-		return startupResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

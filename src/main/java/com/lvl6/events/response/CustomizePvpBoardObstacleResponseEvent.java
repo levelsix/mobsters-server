@@ -29,7 +29,7 @@ public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<
 	}
 	
 	public int eventSize() {
-		return customizePvpBoardObstacleResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

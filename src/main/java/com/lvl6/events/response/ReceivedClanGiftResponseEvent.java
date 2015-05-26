@@ -30,7 +30,7 @@ public class ReceivedClanGiftResponseEvent extends	NormalResponseEvent<ReceivedC
 
 	@Override
 	public int eventSize() {
-		return receivedClanGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

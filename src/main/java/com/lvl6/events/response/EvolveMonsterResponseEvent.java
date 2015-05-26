@@ -29,7 +29,7 @@ public class EvolveMonsterResponseEvent extends NormalResponseEvent<EvolveMonste
 	}
 	
 	public int eventSize() {
-		return evolveMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -20,13 +20,14 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.SetTangoIdAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
 @DependsOn("gameServer")
 public class SetTangoIdController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(SetTangoIdController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -35,7 +36,6 @@ public class SetTangoIdController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public SetTangoIdController() {
-		numAllocatedThreads = 1;
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class SetTangoIdController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		SetTangoIdRequestProto reqProto = ((SetTangoIdRequestEvent) event)
 				.getSetTangoIdRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -86,7 +86,7 @@ public class SetTangoIdController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setSetTangoIdResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -99,7 +99,7 @@ public class SetTangoIdController extends EventController {
 			SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setSetTangoIdResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if ( SetTangoIdStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 				//game center id might have changed
@@ -108,7 +108,7 @@ public class SetTangoIdController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								stia.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -120,7 +120,7 @@ public class SetTangoIdController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setSetTangoIdResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SetTangoIdController processEvent",

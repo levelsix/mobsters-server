@@ -29,7 +29,7 @@ public class LevelUpResponseEvent extends NormalResponseEvent<LevelUpResponsePro
 	}
 	
 	public int eventSize() {
-		return levelUpResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -30,6 +30,6 @@ public class CollectGiftResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return collectGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

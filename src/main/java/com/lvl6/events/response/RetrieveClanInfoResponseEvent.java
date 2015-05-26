@@ -29,7 +29,7 @@ public class RetrieveClanInfoResponseEvent extends NormalResponseEvent<RetrieveC
 	}
 	
 	public int eventSize() {
-		return retrieveClanInfoResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

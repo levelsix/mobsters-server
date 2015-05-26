@@ -31,7 +31,7 @@ public class ReceivedGiftResponseEvent extends
 
 	@Override
 	public int eventSize() {
-		return receivedGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

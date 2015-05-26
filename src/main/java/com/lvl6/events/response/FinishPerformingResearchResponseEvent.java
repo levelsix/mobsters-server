@@ -29,7 +29,7 @@ public class FinishPerformingResearchResponseEvent extends NormalResponseEvent<F
 	}
 	
 	public int eventSize() {
-		return finishPerformingResearchResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

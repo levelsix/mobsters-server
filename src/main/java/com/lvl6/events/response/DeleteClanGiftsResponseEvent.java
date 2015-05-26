@@ -30,7 +30,7 @@ public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return deleteClanGiftsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

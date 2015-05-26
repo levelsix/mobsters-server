@@ -29,7 +29,7 @@ public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookI
 	}
 	
 	public int eventSize() {
-		return setFacebookIdResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

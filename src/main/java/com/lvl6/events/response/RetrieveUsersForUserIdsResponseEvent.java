@@ -36,7 +36,7 @@ public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent<Re
 	}
 	
 	public int eventSize() {
-		return retrieveUsersForUserIdsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

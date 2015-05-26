@@ -33,7 +33,7 @@ public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateU
 	}
 	
 	public int eventSize() {
-		return updateUserCurrencyResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

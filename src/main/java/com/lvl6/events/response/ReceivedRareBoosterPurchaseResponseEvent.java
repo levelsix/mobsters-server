@@ -29,7 +29,7 @@ public class ReceivedRareBoosterPurchaseResponseEvent extends	NormalResponseEven
 	}
 	
 	public int eventSize() {
-		return receivedRareBoosterPurchaseResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 

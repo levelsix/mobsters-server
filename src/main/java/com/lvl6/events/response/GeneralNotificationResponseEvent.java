@@ -34,6 +34,6 @@ public class GeneralNotificationResponseEvent extends NormalResponseEvent<Genera
 	}
 	
 	public int eventSize() {
-		return generalNotificationResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

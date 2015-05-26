@@ -9,11 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.Assert.*;
-
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -229,7 +224,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
 		pbpre.setTag(1);
 		pbpre.setPurchaseBoosterPackRequestProto(pbprp.build());
-		purchaseBoosterPackController.handleEvent(pbpre);
+		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEvents());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 		
@@ -250,7 +245,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre2 = new PurchaseBoosterPackRequestEvent();
 		pbpre2.setTag(1);
 		pbpre2.setPurchaseBoosterPackRequestProto(pbprp2.build());
-		purchaseBoosterPackController.handleEvent(pbpre2);
+		purchaseBoosterPackController.processRequestEvent(pbpre2, EventsUtil.getToClientEvents());
 
 		User user3 = userRetrieveUtil.getUserById(user.getId());
 

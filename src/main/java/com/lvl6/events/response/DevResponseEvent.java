@@ -28,6 +28,6 @@ public class DevResponseEvent extends NormalResponseEvent<DevResponseProto> {
 	}
 
 	public int eventSize() {
-		return devResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

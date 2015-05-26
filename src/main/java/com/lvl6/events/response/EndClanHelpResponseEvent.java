@@ -30,6 +30,6 @@ public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpRes
 
 
 	public int eventSize() {
-		return endClanHelpResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

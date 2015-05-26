@@ -36,6 +36,6 @@ public class ForceLogoutResponseEvent extends NormalResponseEvent<ForceLogoutRes
 	}
 
 	public int eventSize() {
-		return forceLogoutResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

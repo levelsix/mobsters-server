@@ -33,7 +33,7 @@ public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<Update
 	}
 	
 	public int eventSize() {
-		return updateMonsterHealthResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

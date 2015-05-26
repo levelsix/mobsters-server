@@ -30,7 +30,7 @@ public class DeleteGiftResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return deleteGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

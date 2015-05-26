@@ -29,7 +29,7 @@ public class SpawnMiniJobResponseEvent extends NormalResponseEvent<SpawnMiniJobR
 	}
 	
 	public int eventSize() {
-		return spawnMiniJobResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

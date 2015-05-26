@@ -33,7 +33,7 @@ public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<Restri
 	}
 	
 	public int eventSize() {
-		return restrictUserMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

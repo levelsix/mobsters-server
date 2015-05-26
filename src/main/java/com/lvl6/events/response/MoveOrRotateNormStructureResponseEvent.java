@@ -29,7 +29,7 @@ public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<
 	}
 	
 	public int eventSize() {
-		return moveOrRotateNormStructureResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -22,15 +22,15 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RetrieveStrengthLeaderBoardAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
 @DependsOn("gameServer")
 public class RetrieveStrengthLeaderBoardController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
+	private static final Logger log = LoggerFactory.getLogger(RetrieveStrengthLeaderBoardController.class);
 	@Autowired
 	private UserRetrieveUtils2 userRetrieveUtil;
 
@@ -45,7 +45,6 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 
 
 	public RetrieveStrengthLeaderBoardController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses) {
 		RetrieveStrengthLeaderBoardRequestProto reqProto = ((RetrieveStrengthLeaderBoardRequestEvent) event)
 				.getRetrieveStrengthLeaderBoardRequestProto();
 
@@ -94,7 +93,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveStrengthLeaderBoardResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -110,7 +109,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveStrengthLeaderBoardResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -123,7 +122,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 				resEvent.setTag(event.getTag());
 				resEvent.setRetrieveStrengthLeaderBoardResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveStrengthLeaderBoardController processEvent",

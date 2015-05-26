@@ -33,7 +33,7 @@ public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupCha
 	}
 	
 	public int eventSize() {
-		return sendGroupChatResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

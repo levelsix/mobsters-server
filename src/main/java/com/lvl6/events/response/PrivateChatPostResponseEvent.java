@@ -33,7 +33,7 @@ public class PrivateChatPostResponseEvent extends NormalResponseEvent<PrivateCha
 	}
 	
 	public int eventSize() {
-		return privateChatPostResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

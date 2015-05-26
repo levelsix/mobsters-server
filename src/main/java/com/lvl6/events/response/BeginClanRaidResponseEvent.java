@@ -29,7 +29,7 @@ public class BeginClanRaidResponseEvent extends NormalResponseEvent<BeginClanRai
 	}
 	
 	public int eventSize() {
-		return beginClanRaidResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

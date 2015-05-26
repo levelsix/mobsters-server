@@ -29,7 +29,7 @@ public class ReceivedGroupChatResponseEvent extends NormalResponseEvent<Received
 	}
 	
 	public int eventSize() {
-		return receivedGroupChatResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

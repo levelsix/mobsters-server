@@ -30,7 +30,7 @@ public class RetrieveBattleReplayResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return retrieveBattleReplayResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,7 +29,7 @@ public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent<
 	}
 	
 	public int eventSize() {
-		return collectMonsterEnhancementResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

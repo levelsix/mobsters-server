@@ -36,7 +36,7 @@ public class DestroyMoneyTreeStructureResponseEvent extends NormalResponseEvent<
 	}
 	
 	public int eventSize() {
-		return destroyMoneyTreeStructureResponse.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

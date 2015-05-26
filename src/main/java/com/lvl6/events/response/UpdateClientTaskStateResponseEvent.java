@@ -32,7 +32,7 @@ public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent<Upda
 		return responseProto;
 	}
 	public int eventSize() {
-		return updateClientTaskStateResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

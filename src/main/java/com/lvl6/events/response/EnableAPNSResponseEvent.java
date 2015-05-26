@@ -30,6 +30,6 @@ public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSRespo
 
 	
 	public int eventSize() {
-		return enableAPNSResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

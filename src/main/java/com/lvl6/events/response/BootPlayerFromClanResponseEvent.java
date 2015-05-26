@@ -29,7 +29,7 @@ public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPla
 	}
 	
 	public int eventSize() {
-		return bootPlayerFromClanResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

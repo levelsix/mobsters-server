@@ -34,7 +34,7 @@ public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponsePro
 	
 
 	public int eventSize() {
-		return QueueUpResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,6 +29,6 @@ public class EndClanAvengingResponseEvent extends NormalResponseEvent<EndClanAve
 	}
 
 	public int eventSize() {
-		return endClanAvengingResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

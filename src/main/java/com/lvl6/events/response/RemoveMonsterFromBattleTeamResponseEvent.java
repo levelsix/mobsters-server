@@ -33,7 +33,7 @@ public class RemoveMonsterFromBattleTeamResponseEvent extends	NormalResponseEven
 	}
 	
 	public int eventSize() {
-		return removeMonsterFromBattleTeamResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,6 +29,6 @@ public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<Purcha
 	}
 
 	public int eventSize() {
-		return purchaseBoosterPackResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

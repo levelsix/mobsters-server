@@ -33,7 +33,7 @@ public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDu
 	}
 	
 	public int eventSize() {
-		return reviveInDungeonResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,7 +29,7 @@ public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent<Record
 	}
 	
 	public int eventSize() {
-		return recordClanRaidStatsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

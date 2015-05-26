@@ -29,7 +29,7 @@ public class CompleteBattleItemResponseEvent extends NormalResponseEvent<Complet
 	}
 	
 	public int eventSize() {
-		return completeBattleItemResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

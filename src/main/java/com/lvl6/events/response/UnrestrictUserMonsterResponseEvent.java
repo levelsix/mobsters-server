@@ -33,7 +33,7 @@ public class UnrestrictUserMonsterResponseEvent extends NormalResponseEvent<Unre
 	}
 	
 	public int eventSize() {
-		return unrestrictUserMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -29,7 +29,7 @@ public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent<Pr
 	}
 	
 	public int eventSize() {
-		return promoteDemoteClanMemberResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

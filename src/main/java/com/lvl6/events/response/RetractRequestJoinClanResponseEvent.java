@@ -29,7 +29,7 @@ public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent<Ret
 	}
 	
 	public int eventSize() {
-		return retractRequestJoinClanResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

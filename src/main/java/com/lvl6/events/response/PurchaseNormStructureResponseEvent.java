@@ -29,6 +29,6 @@ public class PurchaseNormStructureResponseEvent extends NormalResponseEvent<Purc
 	}
 
 	public int eventSize() {
-		return purchaseNormStructureResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

@@ -29,7 +29,7 @@ public class AchievementRedeemResponseEvent extends NormalResponseEvent<Achievem
 	}
 	
 	public int eventSize() {
-		return achievementRedeemResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

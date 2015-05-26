@@ -29,7 +29,7 @@ public class RedeemMiniEventRewardResponseEvent extends NormalResponseEvent<Rede
 	}
 	
 	public int eventSize() {
-		return redeemMiniEventRewardResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

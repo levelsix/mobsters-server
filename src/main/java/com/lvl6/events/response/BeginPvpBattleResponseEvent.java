@@ -33,7 +33,7 @@ public class BeginPvpBattleResponseEvent extends NormalResponseEvent<BeginPvpBat
 	}
 	
 	public int eventSize() {
-		return beginPvpBattleResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

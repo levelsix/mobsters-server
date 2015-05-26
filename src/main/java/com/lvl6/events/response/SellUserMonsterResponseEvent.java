@@ -33,7 +33,7 @@ public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMo
 	}
 	
 	public int eventSize() {
-		return sellUserMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

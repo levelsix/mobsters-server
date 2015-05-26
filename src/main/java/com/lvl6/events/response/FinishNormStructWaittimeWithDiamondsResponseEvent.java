@@ -37,7 +37,7 @@ public class FinishNormStructWaittimeWithDiamondsResponseEvent extends	NormalRes
 	}
 	
 	public int eventSize() {
-		return finishNormStructWaittimeWithDiamondsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -33,7 +33,7 @@ public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent<In
 	}
 	
 	public int eventSize() {
-		return inviteFbFriendsForSlotsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -30,7 +30,7 @@ public class SetTangoIdResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return setTangoIdResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

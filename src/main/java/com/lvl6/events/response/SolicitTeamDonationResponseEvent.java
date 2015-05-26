@@ -29,7 +29,7 @@ public class SolicitTeamDonationResponseEvent extends NormalResponseEvent<Solici
 	}
 	
 	public int eventSize() {
-		return solicitTeamDonationResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

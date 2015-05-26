@@ -33,7 +33,7 @@ public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent<C
 	}
 	
 	public int eventSize() {
-		return combineMonsterPiecesResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -17,7 +17,7 @@ public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponse
 	}
 	
 	public int eventSize() {
-		return acceptAndRejectFbInviteForSlotsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 	@Override
