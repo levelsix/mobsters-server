@@ -126,6 +126,18 @@ public interface ISalesPackageConfig extends Serializable {
 	public Integer getSuccId();
 
 	/**
+	 * Setter for <code>mobsters.sales_package_config.priority</code>.
+	 */
+	public ISalesPackageConfig setPriority(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.sales_package_config.priority</code>.
+	 */
+	@Column(name = "priority", nullable = false, precision = 10)
+	@NotNull
+	public Integer getPriority();
+
+	/**
 	 * Setter for <code>mobsters.sales_package_config.custom_menu_id</code>.
 	 */
 	public ISalesPackageConfig setCustomMenuId(Integer value);

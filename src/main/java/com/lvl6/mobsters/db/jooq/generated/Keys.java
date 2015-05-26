@@ -117,6 +117,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
@@ -276,6 +277,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.records.RewardConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.SalesDisplayItemConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.SalesItemConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.SalesPackageConfigRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.SecretGiftConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ServerToggleConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.SkillConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.SkillPropertyConfigRecord;
@@ -378,6 +380,7 @@ public class Keys {
 	public static final Identity<ResearchPropertyConfigRecord, Integer> IDENTITY_RESEARCH_PROPERTY_CONFIG = Identities0.IDENTITY_RESEARCH_PROPERTY_CONFIG;
 	public static final Identity<SalesDisplayItemConfigRecord, Integer> IDENTITY_SALES_DISPLAY_ITEM_CONFIG = Identities0.IDENTITY_SALES_DISPLAY_ITEM_CONFIG;
 	public static final Identity<SalesPackageConfigRecord, Integer> IDENTITY_SALES_PACKAGE_CONFIG = Identities0.IDENTITY_SALES_PACKAGE_CONFIG;
+	public static final Identity<SecretGiftConfigRecord, Integer> IDENTITY_SECRET_GIFT_CONFIG = Identities0.IDENTITY_SECRET_GIFT_CONFIG;
 	public static final Identity<ServerToggleConfigRecord, Integer> IDENTITY_SERVER_TOGGLE_CONFIG = Identities0.IDENTITY_SERVER_TOGGLE_CONFIG;
 	public static final Identity<SkillConfigRecord, Integer> IDENTITY_SKILL_CONFIG = Identities0.IDENTITY_SKILL_CONFIG;
 	public static final Identity<SkillPropertyConfigRecord, Integer> IDENTITY_SKILL_PROPERTY_CONFIG = Identities0.IDENTITY_SKILL_PROPERTY_CONFIG;
@@ -514,6 +517,7 @@ public class Keys {
 	public static final UniqueKey<SalesDisplayItemConfigRecord> KEY_SALES_DISPLAY_ITEM_CONFIG_PRIMARY = UniqueKeys0.KEY_SALES_DISPLAY_ITEM_CONFIG_PRIMARY;
 	public static final UniqueKey<SalesItemConfigRecord> KEY_SALES_ITEM_CONFIG_PRIMARY = UniqueKeys0.KEY_SALES_ITEM_CONFIG_PRIMARY;
 	public static final UniqueKey<SalesPackageConfigRecord> KEY_SALES_PACKAGE_CONFIG_PRIMARY = UniqueKeys0.KEY_SALES_PACKAGE_CONFIG_PRIMARY;
+	public static final UniqueKey<SecretGiftConfigRecord> KEY_SECRET_GIFT_CONFIG_PRIMARY = UniqueKeys0.KEY_SECRET_GIFT_CONFIG_PRIMARY;
 	public static final UniqueKey<ServerToggleConfigRecord> KEY_SERVER_TOGGLE_CONFIG_PRIMARY = UniqueKeys0.KEY_SERVER_TOGGLE_CONFIG_PRIMARY;
 	public static final UniqueKey<SkillConfigRecord> KEY_SKILL_CONFIG_PRIMARY = UniqueKeys0.KEY_SKILL_CONFIG_PRIMARY;
 	public static final UniqueKey<SkillPropertyConfigRecord> KEY_SKILL_PROPERTY_CONFIG_PRIMARY = UniqueKeys0.KEY_SKILL_PROPERTY_CONFIG_PRIMARY;
@@ -605,6 +609,7 @@ public class Keys {
 		public static Identity<ResearchPropertyConfigRecord, Integer> IDENTITY_RESEARCH_PROPERTY_CONFIG = createIdentity(ResearchPropertyConfig.RESEARCH_PROPERTY_CONFIG, ResearchPropertyConfig.RESEARCH_PROPERTY_CONFIG.ID);
 		public static Identity<SalesDisplayItemConfigRecord, Integer> IDENTITY_SALES_DISPLAY_ITEM_CONFIG = createIdentity(SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG, SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG.ID);
 		public static Identity<SalesPackageConfigRecord, Integer> IDENTITY_SALES_PACKAGE_CONFIG = createIdentity(SalesPackageConfig.SALES_PACKAGE_CONFIG, SalesPackageConfig.SALES_PACKAGE_CONFIG.ID);
+		public static Identity<SecretGiftConfigRecord, Integer> IDENTITY_SECRET_GIFT_CONFIG = createIdentity(SecretGiftConfig.SECRET_GIFT_CONFIG, SecretGiftConfig.SECRET_GIFT_CONFIG.ID);
 		public static Identity<ServerToggleConfigRecord, Integer> IDENTITY_SERVER_TOGGLE_CONFIG = createIdentity(ServerToggleConfig.SERVER_TOGGLE_CONFIG, ServerToggleConfig.SERVER_TOGGLE_CONFIG.ID);
 		public static Identity<SkillConfigRecord, Integer> IDENTITY_SKILL_CONFIG = createIdentity(SkillConfig.SKILL_CONFIG, SkillConfig.SKILL_CONFIG.ID);
 		public static Identity<SkillPropertyConfigRecord, Integer> IDENTITY_SKILL_PROPERTY_CONFIG = createIdentity(SkillPropertyConfig.SKILL_PROPERTY_CONFIG, SkillPropertyConfig.SKILL_PROPERTY_CONFIG.ID);
@@ -739,6 +744,7 @@ public class Keys {
 		public static final UniqueKey<SalesDisplayItemConfigRecord> KEY_SALES_DISPLAY_ITEM_CONFIG_PRIMARY = createUniqueKey(SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG, SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG.ID);
 		public static final UniqueKey<SalesItemConfigRecord> KEY_SALES_ITEM_CONFIG_PRIMARY = createUniqueKey(SalesItemConfig.SALES_ITEM_CONFIG, SalesItemConfig.SALES_ITEM_CONFIG.ID);
 		public static final UniqueKey<SalesPackageConfigRecord> KEY_SALES_PACKAGE_CONFIG_PRIMARY = createUniqueKey(SalesPackageConfig.SALES_PACKAGE_CONFIG, SalesPackageConfig.SALES_PACKAGE_CONFIG.ID);
+		public static final UniqueKey<SecretGiftConfigRecord> KEY_SECRET_GIFT_CONFIG_PRIMARY = createUniqueKey(SecretGiftConfig.SECRET_GIFT_CONFIG, SecretGiftConfig.SECRET_GIFT_CONFIG.ID);
 		public static final UniqueKey<ServerToggleConfigRecord> KEY_SERVER_TOGGLE_CONFIG_PRIMARY = createUniqueKey(ServerToggleConfig.SERVER_TOGGLE_CONFIG, ServerToggleConfig.SERVER_TOGGLE_CONFIG.ID);
 		public static final UniqueKey<SkillConfigRecord> KEY_SKILL_CONFIG_PRIMARY = createUniqueKey(SkillConfig.SKILL_CONFIG, SkillConfig.SKILL_CONFIG.ID);
 		public static final UniqueKey<SkillPropertyConfigRecord> KEY_SKILL_PROPERTY_CONFIG_PRIMARY = createUniqueKey(SkillPropertyConfig.SKILL_PROPERTY_CONFIG, SkillPropertyConfig.SKILL_PROPERTY_CONFIG.ID);

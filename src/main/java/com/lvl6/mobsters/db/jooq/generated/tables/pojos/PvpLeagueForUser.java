@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "pvp_league_for_user", schema = "mobsters")
 public class PvpLeagueForUser implements IPvpLeagueForUser {
 
-	private static final long serialVersionUID = -717682760;
+	private static final long serialVersionUID = -364400223;
 
 	private String    userId;
 	private Integer   leagueId;
@@ -45,6 +45,7 @@ public class PvpLeagueForUser implements IPvpLeagueForUser {
 	private Integer   attacksLost;
 	private Integer   defensesLost;
 	private Double    monsterDmgMultiplier;
+	private String    clanId;
 
 	public PvpLeagueForUser() {}
 
@@ -60,6 +61,7 @@ public class PvpLeagueForUser implements IPvpLeagueForUser {
 		this.attacksLost = value.attacksLost;
 		this.defensesLost = value.defensesLost;
 		this.monsterDmgMultiplier = value.monsterDmgMultiplier;
+		this.clanId = value.clanId;
 	}
 
 	public PvpLeagueForUser(
@@ -73,7 +75,8 @@ public class PvpLeagueForUser implements IPvpLeagueForUser {
 		Integer   defensesWon,
 		Integer   attacksLost,
 		Integer   defensesLost,
-		Double    monsterDmgMultiplier
+		Double    monsterDmgMultiplier,
+		String    clanId
 	) {
 		this.userId = userId;
 		this.leagueId = leagueId;
@@ -86,6 +89,7 @@ public class PvpLeagueForUser implements IPvpLeagueForUser {
 		this.attacksLost = attacksLost;
 		this.defensesLost = defensesLost;
 		this.monsterDmgMultiplier = monsterDmgMultiplier;
+		this.clanId = clanId;
 	}
 
 	@Id
@@ -225,6 +229,19 @@ public class PvpLeagueForUser implements IPvpLeagueForUser {
 		return this;
 	}
 
+	@Column(name = "clan_id", length = 45)
+	@Size(max = 45)
+	@Override
+	public String getClanId() {
+		return this.clanId;
+	}
+
+	@Override
+	public PvpLeagueForUser setClanId(String clanId) {
+		this.clanId = clanId;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -245,6 +262,7 @@ public class PvpLeagueForUser implements IPvpLeagueForUser {
 		setAttacksLost(from.getAttacksLost());
 		setDefensesLost(from.getDefensesLost());
 		setMonsterDmgMultiplier(from.getMonsterDmgMultiplier());
+		setClanId(from.getClanId());
 	}
 
 	/**

@@ -87,8 +87,8 @@ public interface IUserRewardHistory extends Serializable {
 	/**
 	 * Getter for <code>mobsters.user_reward_history.reason_for_reward</code>.
 	 */
-	@Column(name = "reason_for_reward", length = 45)
-	@Size(max = 45)
+	@Column(name = "reason_for_reward", length = 100)
+	@Size(max = 100)
 	public String getReasonForReward();
 
 	/**
@@ -99,8 +99,8 @@ public interface IUserRewardHistory extends Serializable {
 	/**
 	 * Getter for <code>mobsters.user_reward_history.details</code>.
 	 */
-	@Column(name = "details", length = 45)
-	@Size(max = 45)
+	@Column(name = "details", length = 255)
+	@Size(max = 255)
 	public String getDetails();
 
 	// -------------------------------------------------------------------------

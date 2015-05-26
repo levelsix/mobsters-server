@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniJobRefreshItemConfig extends TableImpl<MiniJobRefreshItemConfigRecord> {
 
-	private static final long serialVersionUID = 648240165;
+	private static final long serialVersionUID = -986113952;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_job_refresh_item_config</code>
@@ -51,7 +51,7 @@ public class MiniJobRefreshItemConfig extends TableImpl<MiniJobRefreshItemConfig
 	/**
 	 * The column <code>mobsters.mini_job_refresh_item_config.struct_id</code>.
 	 */
-	public final TableField<MiniJobRefreshItemConfigRecord, Integer> STRUCT_ID = createField("struct_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<MiniJobRefreshItemConfigRecord, Integer> STRUCT_ID = createField("struct_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_job_refresh_item_config.item_id</code>.

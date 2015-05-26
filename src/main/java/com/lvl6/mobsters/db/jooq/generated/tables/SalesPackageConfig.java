@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SalesPackageConfig extends TableImpl<SalesPackageConfigRecord> {
 
-	private static final long serialVersionUID = 39734326;
+	private static final long serialVersionUID = -755951155;
 
 	/**
 	 * The reference instance of <code>mobsters.sales_package_config</code>
@@ -89,6 +89,11 @@ public class SalesPackageConfig extends TableImpl<SalesPackageConfigRecord> {
 	 * The column <code>mobsters.sales_package_config.succ_id</code>.
 	 */
 	public final TableField<SalesPackageConfigRecord, Integer> SUCC_ID = createField("succ_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
+	 * The column <code>mobsters.sales_package_config.priority</code>.
+	 */
+	public final TableField<SalesPackageConfigRecord, Integer> PRIORITY = createField("priority", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.sales_package_config.custom_menu_id</code>.

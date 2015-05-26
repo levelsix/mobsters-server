@@ -94,6 +94,18 @@ public interface IItemSecretGiftForUser extends Serializable {
 	@Column(name = "create_time")
 	public Timestamp getCreateTime();
 
+	/**
+	 * Setter for <code>mobsters.item_secret_gift_for_user.reward_id</code>.
+	 */
+	public IItemSecretGiftForUser setRewardId(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.item_secret_gift_for_user.reward_id</code>.
+	 */
+	@Column(name = "reward_id", nullable = false, precision = 10)
+	@NotNull
+	public Integer getRewardId();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
