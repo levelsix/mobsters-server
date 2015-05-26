@@ -153,6 +153,7 @@ public class PurchaseBoosterPackAction {
 	private int gachaCreditsReward;
 
 	public void execute(Builder resBuilder) {
+		setUpDaos();
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
@@ -358,7 +359,7 @@ public class PurchaseBoosterPackAction {
 	private void updateUserCurrency() {
 		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
 		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
-
+		
 		if (freeBoosterPack) {
 			gachaCreditsChange = 0;
 		}
