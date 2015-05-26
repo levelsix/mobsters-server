@@ -152,7 +152,7 @@
 		<tests.fake.client.host>localhost</tests.fake.client.host>
 
 
-		<amqp.host>dev2mobsters.lvl6.com</amqp.host>
+		<amqp.host>localhost</amqp.host>
 		<amqp.user>lvl6server</amqp.user>
 		<amqp.pass>devserver</amqp.pass>
 		<amqp.vhost>devmobsters</amqp.vhost>
