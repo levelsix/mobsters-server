@@ -25,6 +25,7 @@ import com.lvl6.events.BroadcastResponseEvent
 import com.lvl6.server.APNSWriter
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import java.util.Date
+import scala.beans.BeanProperty
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -37,6 +38,8 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var responseCacheService:ClientResponseCacheService = null
   @Autowired var eventWriter:EventWriter = null
   @Autowired var apnsWriter:APNSWriter = null
+  
+  @BeanProperty
   var responseCachingEnabled = true
   
   def processEvent(eventBytes:Array[Byte])={

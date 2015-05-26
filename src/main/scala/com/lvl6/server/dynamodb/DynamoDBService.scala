@@ -22,6 +22,7 @@ import com.amazonaws.services.dynamodbv2.document.DeleteItemOutcome
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.lvl6.server.dynamodb.Converter._
+import scala.beans.BeanProperty
 
 
 @Component
@@ -31,7 +32,10 @@ class DynamoDBService extends LazyLogging {
   protected var client:AmazonDynamoDBClient = null
   protected var dynamoDB:DynamoDB = null
 
+  @BeanProperty
   var tablePrefix:String = ""
+  
+  @BeanProperty
   var isLocal = false//for testing dynamo locally
   
   
