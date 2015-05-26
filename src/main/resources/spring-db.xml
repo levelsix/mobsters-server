@@ -93,4 +93,9 @@
         </property>
         <property name="connectionProvider" ref="connectionProvider" />
     </bean>
+    
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftConfigDao" id="giftConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
 </beans>
