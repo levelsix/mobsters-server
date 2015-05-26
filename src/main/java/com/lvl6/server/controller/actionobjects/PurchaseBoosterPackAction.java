@@ -373,11 +373,11 @@ public class PurchaseBoosterPackAction {
 		log.info("updated, user bought boosterPack? {}", updated);
 		
 		historyUtils.insertUserCurrencyHistoryForGacha(userId, now, gachaCreditsChange, userGachaCredits,
-				userGachaCredits + gachaCreditsChange, "spin gacha", "buying in bulk " + buyingInBulk, 
+				userGachaCredits + gachaCreditsChange, "spin gacha", "buying in bulk ".concat(Boolean.toString(buyingInBulk)), 
 				uchDao, "gachaCredits");
 		if(gemChange != 0) {
 			historyUtils.insertUserCurrencyHistoryForGacha(userId, now, gemChange, userGems, 
-					userGems + gemChange, "spin gacha", "buying in bulk " + buyingInBulk, 
+					userGems + gemChange, "spin gacha", "buying in bulk ".concat(Boolean.toString(buyingInBulk)), 
 					uchDao, "gems");
 		}
 	}
