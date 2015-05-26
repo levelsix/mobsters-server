@@ -46,7 +46,7 @@ public class IAPValues {
 	public static final String SALE100 = Globals.APPLE_BUNDLE_ID()
 			+ ".sale100";
 	public static final String GACHAMULTISPIN = Globals.APPLE_BUNDLE_ID()
-			+ ".gachamultispin";
+			+ ".gachamultispin1";
 
 	public static final String PACKAGE1IMG = "pilegems.png";
 	public static final String PACKAGE2IMG = "baggems.png";
