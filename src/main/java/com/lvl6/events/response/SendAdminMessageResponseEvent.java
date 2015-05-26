@@ -32,4 +32,7 @@ public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdmin
 		return b.size();
 	}
 
+	public int eventSize() {
+		return sendAdminMessageResponseProto.getSerializedSize();
+	}
 }

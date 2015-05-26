@@ -10,16 +10,17 @@ import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
 import "Item.proto";
+import "LeaderBoard.proto";
 import "MiniEvent.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
 import "Sales.proto";
 import "Research.proto";
+import "Reward.proto";
 import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
-import "Reward.proto";
 import "Task.proto";
 import "User.proto";
 
@@ -148,7 +149,9 @@ message StartupResponseProto {
 
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
 	
-	repeated UserClanGiftProto userClanGifts = 500; 
+	repeated UserGiftProto userGifts = 54;
+	repeated UserClanGiftProto userClanGifts = 500;
+	repeated StrengthLeaderBoardProto topStrengthLeaderBoards = 501; 
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
@@ -183,6 +186,8 @@ message StartupResponseProto {
 		optional TournamentConstants touramentConstants = 12;
 		optional int32 fbConnectRewardDiamonds = 13;
 		optional string faqFileName = 14;
+		optional string creditsFileName = 44;
+		
 		optional MinimumUserProto adminChatUserProto = 15;
 		optional int32 numBeginnerSalesAllowed = 16;
 		
@@ -235,6 +240,13 @@ message StartupResponseProto {
 		
 		optional int32 taskIdForUpgradeTutorial = 41;
 		
+		//when inviting tango friends, every friend deleted, subtract one from tangoMaxGemReward, min is tangoMinGemReward
+		optional int32 tangoMaxGemReward = 42;
+		optional int32 tangoMinGemReward = 43;
+		
+		//optional string creditsFileName = 44; defined above
+				
+		optional BoosterPackConstantsProto boosterPackConstantProto = 500;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -342,7 +354,15 @@ message StartupResponseProto {
 			optional int32 priority = 3;
 			optional bool downloadOnlyOverWifi = 4;
 			optional bool useIphone6Prefix = 5;
+			optional bool useIpadSuffix = 6;
 		}
+		
+		//the two constants for gacha buy 10 get 11 stuff
+		message BoosterPackConstantsProto { 
+			optional int32 purchaseAmountRequired = 1;
+			optional int32 numberOfPacksGiven = 2;
+		}
+		
 	}
 	
 	message TutorialConstants {
@@ -366,6 +386,7 @@ message StartupResponseProto {
 		optional int32 cashInit = 11;
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
+		optional int32 gachaCreditsInit = 17;
 		
 		repeated MinimumObstacleProto tutorialObstacles = 14;
 		//optional int32 enemyMonsterIdTwo = 15; defined above 

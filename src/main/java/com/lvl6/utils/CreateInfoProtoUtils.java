@@ -32,6 +32,7 @@ import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
+import com.lvl6.proto.BattleProto.BattleReplayProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -77,6 +78,7 @@ import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
+import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventGoalProto.MiniEventGoalType;
@@ -119,8 +121,11 @@ import com.lvl6.proto.ResearchsProto.UserResearchProto;
 import com.lvl6.proto.RewardsProto.ClanGiftProto;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
+import com.lvl6.proto.RewardsProto.TangoGiftProto;
 import com.lvl6.proto.RewardsProto.UserClanGiftProto;
+import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
+import com.lvl6.proto.RewardsProto.UserTangoGiftProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
@@ -182,8 +187,10 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanHelpCountForUserRetrieveUtil.UserClanHelpCount;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -632,7 +639,10 @@ public class CreateInfoProtoUtils {
 			User attacker, Clan c, PvpBattleHistory info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashWinnings, int prospectiveOilWinnings) {
+			int prospectiveCashWinnings, int prospectiveOilWinnings,
+			String replayId)
+			//BattleReplayForUser brfu)
+	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null, c);
 		phpb.setAttacker(fup);
@@ -646,6 +656,14 @@ public class CreateInfoProtoUtils {
 		phpb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
 		modifyPvpHistoryProto(phpb, info);
+
+//		if (null != brfu) {
+//			BattleReplayProto brp = createBattleReplayProto(brfu);
+//			phpb.setReplay(brp);
+//		}
+		if (null != replayId && !replayId.isEmpty()) {
+			phpb.setReplayId(replayId);
+		}
 		return phpb.build();
 	}
 
@@ -656,7 +674,9 @@ public class CreateInfoProtoUtils {
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
-			Map<String, Integer> attackerIdsToProspectiveOilWinnings) {
+			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
+			Map<String, BattleReplayForUser> replayIdToReplay)
+	{
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 
@@ -679,9 +699,18 @@ public class CreateInfoProtoUtils {
 
 			Map<String, Integer> userMonsterIdToDropped = userIdToUserMonsterIdToDropped
 					.get(attackerId);
+
+			String replayId = history.getReplayId();
+//			BattleReplayForUser brfu = null;
+//			if (replayIdToReplay.containsKey(replayId))
+//			{
+//				brfu = replayIdToReplay.get(replayId);
+//			}
+
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 					clan, history, attackerMonsters, userMonsterIdToDropped,
-					prospectiveCashWinnings, prospectiveOilWinnings);
+					prospectiveCashWinnings, prospectiveOilWinnings,
+					replayId);// brfu);
 			phpList.add(php);
 		}
 		return phpList;
@@ -689,7 +718,8 @@ public class CreateInfoProtoUtils {
 
 	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
-			List<PvpBattleHistory> historyList) {
+			List<PvpBattleHistory> historyList,
+			Map<String, BattleReplayForUser> replayIdToReplay) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		fupb.setUserUuid(attackerId);
@@ -705,8 +735,15 @@ public class CreateInfoProtoUtils {
 			User defender = idsToUsers.get(defenderId);
 			FullUserProto defenderFup = createFullUserProtoFromUser(defender,
 					null, null);
+
+//			BattleReplayForUser brfu = null;
+			String replayId = pbh.getReplayId();
+//			if (null != replayId && replayIdToReplay.containsKey(replayId))
+//			{
+//				brfu = replayIdToReplay.get(replayId);
+//			}
 			PvpHistoryProto php = createAttackedOthersPvpHistoryProto(fup,
-					defenderFup, pbh);
+					defenderFup, pbh, replayId); //brfu);
 
 			phpList.add(php);
 		}
@@ -715,12 +752,25 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
-			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info) {
+			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info,
+			String replayId) //BattleReplayForUser brfu)
+	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		phpb.setAttacker(fup);
 		phpb.setDefender(defenderFup);
 
 		modifyPvpHistoryProto(phpb, info);
+
+//		if (null != brfu)
+//		{
+//			BattleReplayProto brp = createBattleReplayProto(brfu);
+//			phpb.setReplay(brp);
+//		}
+
+		if (null != replayId) {
+			phpb.setReplayId(replayId);
+		}
+
 		return phpb.build();
 	}
 
@@ -1013,6 +1063,25 @@ public class CreateInfoProtoUtils {
 		return biqfupList;
 	}
 
+	public BattleReplayProto createBattleReplayProto(BattleReplayForUser brfu) {
+		BattleReplayProto.Builder brpb = BattleReplayProto.newBuilder();
+		brpb.setReplayUuid(brfu.getId());
+		brpb.setCreatorUuid(brfu.getCreatorId());
+
+		try {
+			byte[] bites = brfu.getReplay();
+			ByteString bs = ByteString.copyFrom(bites);
+			brpb.setReplay(bs);
+
+		} catch (Exception e) {
+			log.error(String.format(
+					"unable to convert byte[] to google.ByteString, brfu=%s",
+					brfu), e);
+		}
+
+		return brpb.build();
+	}
+
 	/** Board.proto ****************************************/
 	public BoardLayoutProto createBoardLayoutProto(Board b,
 			Collection<BoardProperty> boardProperties) {
@@ -1099,7 +1168,8 @@ public class CreateInfoProtoUtils {
 
 	public BoosterPackProto createBoosterPackProto(BoosterPack bp,
 			Collection<BoosterItem> biList,
-			Collection<BoosterDisplayItem> bdiList) {
+			Collection<BoosterDisplayItem> bdiList,
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterPackProto.Builder b = BoosterPackProto.newBuilder();
 		b.setBoosterPackId(bp.getId());
 
@@ -1109,6 +1179,7 @@ public class CreateInfoProtoUtils {
 		}
 
 		b.setGemPrice(bp.getGemPrice());
+		b.setGachaCreditsPrice(bp.getGachaCreditsPrice());
 
 		str = bp.getListBackgroundImgName();
 		if (null != str && !str.isEmpty()) {
@@ -1150,7 +1221,8 @@ public class CreateInfoProtoUtils {
 			for (BoosterItem bi : biList) {
 				//only want special booster items
 				if (bi.isSpecial()) {
-					BoosterItemProto bip = createBoosterItemProto(bi);
+					BoosterItemProto bip = createBoosterItemProto(bi,
+							rewardRetrieveUtils);
 					b.addSpecialItems(bip);
 				}
 			}
@@ -1158,7 +1230,8 @@ public class CreateInfoProtoUtils {
 
 		if (null != bdiList) {
 			for (BoosterDisplayItem bdi : bdiList) {
-				BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi);
+				BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi,
+						rewardRetrieveUtils);
 				b.addDisplayItems(bdip);
 			}
 		}
@@ -1166,48 +1239,30 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public BoosterItemProto createBoosterItemProto(BoosterItem bi) {
+	public BoosterItemProto createBoosterItemProto(BoosterItem bi,
+			RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterItemProto.Builder b = BoosterItemProto.newBuilder();
 		b.setBoosterItemId(bi.getId());
 		b.setBoosterPackId(bi.getBoosterPackId());
-		b.setMonsterId(bi.getMonsterId());
-		b.setNumPieces(bi.getNumPieces());
-		b.setIsComplete(bi.isComplete());
-		b.setIsSpecial(bi.isSpecial());
-		b.setGemReward(bi.getGemReward());
-		b.setCashReward(bi.getCashReward());
-		b.setChanceToAppear(bi.getChanceToAppear());
-		b.setItemId(bi.getItemId());
-		b.setItemQuantity(bi.getItemQuantity());
+
+		if (bi.getRewardId() > 0) {
+			Reward r = rewardRetrieveUtils.getRewardById(bi.getRewardId());
+			b.setReward(createRewardProto(r));
+		}
 
 		return b.build();
 	}
 
 	public BoosterDisplayItemProto createBoosterDisplayItemProto(
-			BoosterDisplayItem bdi) {
+			BoosterDisplayItem bdi, RewardRetrieveUtils rewardRetrieveUtils) {
 		BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto
 				.newBuilder();
 
 		b.setBoosterPackId(bdi.getBoosterPackId());
-		b.setIsMonster(bdi.isMonster());
-		b.setIsComplete(bdi.isComplete());
-
-		String monsterQuality = bdi.getMonsterQuality();
-		if (null != monsterQuality) {
-			try {
-				Quality mq = Quality.valueOf(monsterQuality);
-				b.setQuality(mq);
-			} catch (Exception e) {
-				log.error(String.format(
-						"invalid monster quality. boosterDisplayItem=%s", bdi),
-						e);
-			}
+		if (bdi.getRewardId() > 0) {
+			Reward r = rewardRetrieveUtils.getRewardById(bdi.getRewardId());
+			b.setReward(createRewardProto(r));
 		}
-
-		b.setGemReward(bdi.getGemReward());
-		b.setQuantity(bdi.getQuantity());
-		b.setItemId(bdi.getItemId());
-		b.setItemQuantity(bdi.getItemQuantity());
 
 		return b.build();
 	}
@@ -1376,25 +1431,25 @@ public class CreateInfoProtoUtils {
 		gcmpb.setSender(createMinimumUserProtoWithLevel(user, clan, null));
 		gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
 
-//		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
+		//		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
 
 		gcmpb.setContent(p.getContent());
 
-//		if(!turnOffTranslation) {
-//			Map<TranslateLanguages, String> translatedMap = MiscMethods.translate(null, p.getContent());
-//			for(TranslateLanguages tl : translatedMap.keySet()) {
-//				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
-//				ttpb.setLanguage(tl);
-//				ttpb.setText(translatedMap.get(tl));
-//				gcmpb.addTranslatedContent(ttpb.build());
-//			}
-//		}
+		//		if(!turnOffTranslation) {
+		//			Map<TranslateLanguages, String> translatedMap = MiscMethods.translate(null, p.getContent());
+		//			for(TranslateLanguages tl : translatedMap.keySet()) {
+		//				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
+		//				ttpb.setLanguage(tl);
+		//				ttpb.setText(translatedMap.get(tl));
+		//				gcmpb.addTranslatedContent(ttpb.build());
+		//			}
+		//		}
 
-//		gcmpb.setContent(p.getContent());
+		//		gcmpb.setContent(p.getContent());
 		return gcmpb.build();
 	}
-	
+
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, TranslateLanguages contentLanguage, TranslateLanguages translatedLanguage,
@@ -1420,7 +1475,7 @@ public class CreateInfoProtoUtils {
 			ttpb.setLanguage(contentLanguage);
 			ttpb.setText(content);
 		}
-		
+
 		gcmpb.addTranslatedContent(ttpb.build());
 
 
@@ -2117,7 +2172,7 @@ public class CreateInfoProtoUtils {
 		if (sale.getPackageS5SaleIdentifier() != null)
 			b.setPackageS5SaleIdentifier(sale.getPackageS5SaleIdentifier());
 		b.setGoldShoppeImageName(sale.getGoldShoppeImageName())
-				.setGoldBarImageName(sale.getGoldBarImageName());
+		.setGoldBarImageName(sale.getGoldBarImageName());
 		b.setIsBeginnerSale(sale.isBeginnerSale());
 
 		return b.build();
@@ -2175,13 +2230,13 @@ public class CreateInfoProtoUtils {
 
 		str = item.getQuality();
 		if (null != str) {
-	        try {
-	            Quality iq = Quality.valueOf(str);
-	            ipb.setQuality(iq);
-	        } catch (Exception e) {
-	            log.error(String.format("invalid item quality. item=%s",
-	                    item), e);
-	        }
+			try {
+				Quality iq = Quality.valueOf(str);
+				ipb.setQuality(iq);
+			} catch (Exception e) {
+				log.error(String.format("invalid item quality. item=%s",
+						item), e);
+			}
 		}
 
 		return ipb.build();
@@ -2314,12 +2369,13 @@ public class CreateInfoProtoUtils {
 			MiniEvent me, Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
-			Collection<MiniEventLeaderboardReward> leaderboardRewards)
+			Collection<MiniEventLeaderboardReward> leaderboardRewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		UserMiniEventProto.Builder umepb = createUserMiniEventProto(mefu);
 
 		MiniEventProto mep = createMiniEventProto(me, mefpl, rewards, goals,
-				leaderboardRewards);
+				leaderboardRewards, rewardRetrieveUtil);
 		umepb.setMiniEvent(mep);
 
 		if (null != megfus && !megfus.isEmpty())
@@ -2349,7 +2405,8 @@ public class CreateInfoProtoUtils {
 	public MiniEventProto createMiniEventProto(MiniEvent me,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
-			Collection<MiniEventLeaderboardReward> leaderboardRewards)
+			Collection<MiniEventLeaderboardReward> leaderboardRewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventProto.Builder mepb = MiniEventProto.newBuilder();
 		mepb.setMiniEventId(me.getId());
@@ -2365,14 +2422,14 @@ public class CreateInfoProtoUtils {
 		}
 
 		MiniEventForPlayerLevelProto mefplp =
-				createMiniEventForPlayerLevelProto(mefpl, rewards);
+				createMiniEventForPlayerLevelProto(mefpl, rewards, rewardRetrieveUtil);
 		mepb.setLvlEntered(mefplp);
 
 		Collection<MiniEventGoalProto> goalProtos = createMiniEventGoalProto(goals);
 		mepb.addAllGoals(goalProtos);
 
 		Collection<MiniEventLeaderboardRewardProto> leaderboardRewardProtos =
-				createMiniEventLeaderboardRewardProto(leaderboardRewards);
+				createMiniEventLeaderboardRewardProto(leaderboardRewards, rewardRetrieveUtil);
 		mepb.addAllLeaderboardRewards(leaderboardRewardProtos);
 
 		String str = me.getName();
@@ -2399,14 +2456,15 @@ public class CreateInfoProtoUtils {
 	}
 
 	public MiniEventForPlayerLevelProto createMiniEventForPlayerLevelProto(
-			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards)
+			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventForPlayerLevelProto.Builder mefplpb =
 				createMiniEventForPlayerLevelProto(mefpl);
 
 		if (null != rewards && !rewards.isEmpty()) {
 			Collection<MiniEventTierRewardProto> rewardProtos =
-					createMiniEventTierRewardProto(rewards);
+					createMiniEventTierRewardProto(rewards, rewardRetrieveUtil);
 			mefplpb.addAllRewards(rewardProtos);
 		}
 
@@ -2429,13 +2487,14 @@ public class CreateInfoProtoUtils {
 	}
 
 	public Collection<MiniEventTierRewardProto> createMiniEventTierRewardProto(
-			Collection<MiniEventTierReward> metrs)
+			Collection<MiniEventTierReward> metrs, RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		Collection<MiniEventTierRewardProto> rewardProtos =
 				new ArrayList<MiniEventTierRewardProto>();
 
 		for (MiniEventTierReward metr : metrs) {
-			MiniEventTierRewardProto metrp = createMiniEventTierRewardProto(metr);
+			MiniEventTierRewardProto metrp = createMiniEventTierRewardProto(
+					metr, rewardRetrieveUtil);
 			rewardProtos.add(metrp);
 		}
 
@@ -2443,14 +2502,15 @@ public class CreateInfoProtoUtils {
 	}
 
 	private MiniEventTierRewardProto createMiniEventTierRewardProto(
-			MiniEventTierReward metr)
+			MiniEventTierReward metr, RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventTierRewardProto.Builder metrpb =
 				MiniEventTierRewardProto.newBuilder();
 
 		metrpb.setMetrId(metr.getId());
 		metrpb.setMefplId(metr.getMiniEventForPlayerLvlId());
-		metrpb.setRewardId(metr.getRewardId());
+		Reward r = rewardRetrieveUtil.getRewardById(metr.getRewardId());
+		metrpb.setRewardProto(createRewardProto(r));
 		metrpb.setTierLvl(metr.getRewardTier());
 
 		return metrpb.build();
@@ -2504,14 +2564,16 @@ public class CreateInfoProtoUtils {
 	}
 
 	private Collection<MiniEventLeaderboardRewardProto> createMiniEventLeaderboardRewardProto(
-			Collection<MiniEventLeaderboardReward> rewards)
+			Collection<MiniEventLeaderboardReward> rewards,
+			RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		Collection<MiniEventLeaderboardRewardProto> rewardProtos =
 				new ArrayList<MiniEventLeaderboardRewardProto>();
 
 		for (MiniEventLeaderboardReward melr : rewards) {
 			MiniEventLeaderboardRewardProto melrp =
-					createMiniEventLeaderboardRewardProto(melr);
+					createMiniEventLeaderboardRewardProto(
+							melr, rewardRetrieveUtil);
 
 			rewardProtos.add(melrp);
 		}
@@ -2520,13 +2582,14 @@ public class CreateInfoProtoUtils {
 	}
 
 	private MiniEventLeaderboardRewardProto createMiniEventLeaderboardRewardProto(
-			MiniEventLeaderboardReward melr)
+			MiniEventLeaderboardReward melr, RewardRetrieveUtils rewardRetrieveUtil)
 	{
 		MiniEventLeaderboardRewardProto.Builder melrpb =
 				MiniEventLeaderboardRewardProto.newBuilder();
 		melrpb.setMelrId(melr.getId());
 		melrpb.setMiniEventId(melr.getMiniEventId());
-		melrpb.setRewardId(melr.getRewardId());
+		Reward r = rewardRetrieveUtil.getRewardById(melr.getRewardId());
+		melrpb.setRewardProto(createRewardProto(r));
 		melrpb.setLeaderboardMinPos(melr.getLeaderboardPos());
 
 		return melrpb.build();
@@ -2562,7 +2625,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** MiniJobConfig.proto ********************************************/
-	public MiniJobProto createMiniJobProto(MiniJob mj) {
+	public MiniJobProto createMiniJobProto(MiniJob mj, RewardRetrieveUtils rewardRetrieveUtil) {
 		MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();
 
 		mjpb.setMiniJobId(mj.getId());
@@ -2601,11 +2664,30 @@ public class CreateInfoProtoUtils {
 		mjpb.setDurationMaxMinutes(mj.getDurationMaxMinutes());
 		mjpb.setDurationMinMinutes(mj.getDurationMinMinutes());
 
+		int rewardId = mj.getRewardIdOne();
+		if (rewardId > 0) {
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			RewardProto rp = createRewardProto(r);
+			mjpb.setRewardOne(rp);
+		}
+		rewardId = mj.getRewardIdTwo();
+		if (rewardId > 0) {
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			RewardProto rp = createRewardProto(r);
+			mjpb.setRewardTwo(rp);
+		}
+		rewardId = mj.getRewardIdThree();
+		if (rewardId > 0) {
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			RewardProto rp = createRewardProto(r);
+			mjpb.setRewardThree(rp);
+		}
+
 		return mjpb.build();
 	}
 
 	public UserMiniJobProto createUserMiniJobProto(MiniJobForUser mjfu,
-			MiniJob mj) {
+			MiniJob mj, RewardRetrieveUtils rewardRetrieveUtil) {
 		UserMiniJobProto.Builder umjpb = UserMiniJobProto.newBuilder();
 
 		umjpb.setUserMiniJobUuid(mjfu.getId());
@@ -2628,7 +2710,7 @@ public class CreateInfoProtoUtils {
 			umjpb.setTimeCompleted(time.getTime());
 		}
 
-		MiniJobProto mjp = createMiniJobProto(mj);
+		MiniJobProto mjp = createMiniJobProto(mj, rewardRetrieveUtil);
 		umjpb.setMiniJob(mjp);
 
 		return umjpb.build();
@@ -2636,7 +2718,8 @@ public class CreateInfoProtoUtils {
 
 	public List<UserMiniJobProto> createUserMiniJobProtos(
 			List<MiniJobForUser> mjfuList,
-			Map<Integer, MiniJob> miniJobIdToMiniJob) {
+			Map<Integer, MiniJob> miniJobIdToMiniJob,
+			RewardRetrieveUtils rewardRetrieveUtil) {
 		List<UserMiniJobProto> umjpList = new ArrayList<UserMiniJobProto>();
 
 		for (MiniJobForUser mjfu : mjfuList) {
@@ -2650,7 +2733,7 @@ public class CreateInfoProtoUtils {
 				mj = miniJobIdToMiniJob.get(miniJobId);
 			}
 
-			UserMiniJobProto umjp = createUserMiniJobProto(mjfu, mj);
+			UserMiniJobProto umjp = createUserMiniJobProto(mjfu, mj, rewardRetrieveUtil);
 			umjpList.add(umjp);
 		}
 
@@ -2989,17 +3072,17 @@ public class CreateInfoProtoUtils {
 		return mumpb.build();
 	}
 
-//	public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
-//			Collection<MonsterForUser> userMonsters) {
-//		List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
-//
-//		for (MonsterForUser mfu : userMonsters) {
-//			MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
-//			returnList.add(mump);
-//		}
-//
-//		return returnList;
-//	}
+	//	public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
+	//			Collection<MonsterForUser> userMonsters) {
+	//		List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
+	//
+	//		for (MonsterForUser mfu : userMonsters) {
+	//			MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
+	//			returnList.add(mump);
+	//		}
+	//
+	//		return returnList;
+	//	}
 
 	public List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
 			List<MonsterForPvp> mfpList) {
@@ -3564,7 +3647,11 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Reward.proto ***************************************************/
-	public RewardProto createRewardProto(Reward r)
+	public RewardProto createRewardProto(Reward r) {
+		return createRewardProto(r, 1);
+	}
+
+	public RewardProto createRewardProto(Reward r, int currentDepth)
 	{
 		RewardProto.Builder rpb = RewardProto.newBuilder();
 
@@ -3576,6 +3663,15 @@ public class CreateInfoProtoUtils {
 			try {
 				RewardType rt = RewardType.valueOf(str);
 				rpb.setTyp(rt);
+
+				if (rt == RewardType.REWARD) {
+					if (currentDepth <= 3) {
+						Reward rr = rewardRetrieveUtils.getRewardById(r.getStaticDataId());
+						rpb.setActualReward(createRewardProto(rr, currentDepth + 1));
+					} else {
+						log.error("reward {} reached depth={}", r, currentDepth);
+					}
+				}
 			} catch (Exception e) {
 				log.error(String.format("invalid RewardType. Reward=%s",
 						r), e);
@@ -3589,7 +3685,7 @@ public class CreateInfoProtoUtils {
 	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
-			int gems, int cash, int oil, UserClanGiftProto ucgp)
+			int gems, int cash, int oil, int gachaCredits, UserClanGiftProto ucgp)
 	{
 		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
 
@@ -3605,12 +3701,90 @@ public class CreateInfoProtoUtils {
 		urp.setGems(gems);
 		urp.setCash(cash);
 		urp.setOil(oil);
-		
+
 		if(ucgp != null) {
 			urp.setClanGift(ucgp);
 		}
+		urp.setGachaCredits(gachaCredits);
 
 		return urp.build();
+	}
+
+	public UserGiftProto createUserGiftProto(GiftForUser gfu,
+			MinimumUserProto gifterMup, Reward r, ClanGift cg,
+			GiftForTangoUser gftu, TangoGift tg)
+	{
+		UserGiftProto.Builder ugpb = UserGiftProto.newBuilder();
+		ugpb.setUgId(gfu.getId());
+		ugpb.setReceiverUserId(gfu.getReceiverUserId());
+		ugpb.setGifterUser(gifterMup);
+
+		String gt = gfu.getGiftType();
+		if (null != gt && !gt.isEmpty()) {
+			try {
+				RewardType rt = RewardType.valueOf(gt);
+				ugpb.setGiftType(rt);
+
+				switch (rt) {
+				case CLAN_GIFT:
+					ugpb.setClanGift(createClanGiftProto(cg));
+					break;
+				case TANGO_GIFT:
+					ugpb.setTangoGift(createUserTangoGiftProto(gftu, tg));
+				default:
+					break;
+				}
+
+			} catch(Exception e) {
+				log.error(
+						String.format("incorrect enum RewardType. GiftForUser=%s.", gfu),
+						e);
+			}
+		}
+
+		Date timeOfEntry = gfu.getTimeOfEntry();
+		ugpb.setTimeReceived(timeOfEntry.getTime());
+		ugpb.setRp(createRewardProto(r));
+		ugpb.setHasBeenCollected(gfu.isCollected());
+		ugpb.setMinutesTillExpiration(gfu.getMinutesTillExpiration());
+
+		return ugpb.build();
+	}
+
+	public ClanGiftProto createClanGiftProto(ClanGift cg) {
+		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
+		b.setClanGiftId(cg.getId());
+		if(cg.getName() != null) {
+			b.setName(cg.getName());
+		}
+
+		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
+		b.setImageName(cg.getImageName());
+//		b.setQuality(Quality.valueOf(cg.getQuality()));
+
+		return b.build();
+	}
+
+	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUser gftu,
+			TangoGift tg)
+	{
+		UserTangoGiftProto.Builder utgpb = UserTangoGiftProto.newBuilder();
+		utgpb.setUserGiftId(gftu.getGifterUserId());
+		utgpb.setGifterTangoUserId(gftu.getGifterTangoUserId());
+
+		TangoGiftProto tgp = createTangoGiftProto(tg);
+		utgpb.setTangoGift(tgp);
+
+		return utgpb.build();
+	}
+
+	public TangoGiftProto createTangoGiftProto(TangoGift tg) {
+		TangoGiftProto.Builder tgpb = TangoGiftProto.newBuilder();
+		tgpb.setTangoGiftId(tg.getId());
+		tgpb.setName(tg.getName());
+		tgpb.setHoursUntilExpiration(tg.getHoursUntilExpiration());
+		tgpb.setImageName(tg.getImageName());
+		return tgpb.build();
 	}
 
 	/** Skill.proto ***************************************************/
@@ -4802,6 +4976,7 @@ public class CreateInfoProtoUtils {
 		fdpb.setFileName(fd.getFileName());
 		fdpb.setPriority(fd.getPriority());
 		fdpb.setDownloadOnlyOverWifi(fd.isDownloadOnlyOverWifi());
+		fdpb.setUseIpadSuffix(fd.isUseIpadSuffix());
 
 		return fdpb.build();
 	}
@@ -5147,6 +5322,18 @@ public class CreateInfoProtoUtils {
 
 		int segmentationGroup = u.getSegmentationGroup();
 		builder.setSegmentationGroup(segmentationGroup);
+		int gachaCredits = u.getGachaCredits();
+		builder.setGachaCredits(gachaCredits);
+
+		Date lastTangoGiftSentTime = u.getLastTangoGiftSentTime();
+		if (null != lastTangoGiftSentTime) {
+			builder.setLastTangoGiftSentTime(lastTangoGiftSentTime.getTime());
+		}
+
+		String tangoId = u.getTangoId();
+		if (null != tangoId && !tangoId.isEmpty()) {
+			builder.setTangoId(tangoId);
+		}
 
 		//don't add setting new columns/properties here, add up above
 
@@ -5282,29 +5469,15 @@ public class CreateInfoProtoUtils {
 
 	///////////////////////////////CLAN GIFTS PROTOS/////////////////////////////////////////////
 
-	public ClanGiftProto createClanGiftProto(ClanGift cg) {
-		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
-		b.setClanGiftId(cg.getId());
-		if(cg.getName() != null) {
-			b.setName(cg.getName());
-		}
-
-		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
-		b.setImageName(cg.getImageName());
-		b.setQuality(Quality.valueOf(cg.getQuality()));
-
-		return b.build();
-	}
-
 	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg, MinimumUserProto mup) {
 		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();
 		b.setUserClanGiftId(ucg.getId());
 		b.setReceiverUserId(ucg.getReceiverUserId());
 
 		if(mup != null) {
-			b.setGifterUser(mup);	
+			b.setGifterUser(mup);
 		}
-		
+
 		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
 
 		b.setClanGift(createClanGiftProto(cg));
@@ -5314,12 +5487,52 @@ public class CreateInfoProtoUtils {
 		b.setReward(createRewardProto(r));
 
 		b.setHasBeenCollected(ucg.isHasBeenCollected());
-		
+
 		return b.build();
 	}
 
-
-
+	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtosWithMonsterId(List<StrengthLeaderBoard> slbList,
+			UserRetrieveUtils2 userRetrieveUtils, MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
+		List<String> userIds = new ArrayList<String>();
+		for(StrengthLeaderBoard slb : slbList) {
+			userIds.add(slb.getUserId());
+		}
+		
+		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
+		for(StrengthLeaderBoard slb : slbList) {
+			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
+			String userId = slb.getUserId();
+			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
+			b.setRank(slb.getRank());
+			b.setStrength(slb.getStrength());
+			
+			slbpList.add(b.build());
+		}
+		return slbpList;
+	}
+	
+	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtos(List<StrengthLeaderBoard> slbList,
+			UserRetrieveUtils2 userRetrieveUtils) {
+		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
+		List<String> userIds = new ArrayList<String>();
+		for(StrengthLeaderBoard slb : slbList) {
+			userIds.add(slb.getUserId());
+		}
+		log.info("userIds {}", userIds);
+		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
+		log.info("userMap: {}" + userMap);
+		for(StrengthLeaderBoard slb : slbList) {
+			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
+			String userId = slb.getUserId();
+			log.info("userId {}", userId);
+			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
+			b.setRank(slb.getRank());
+			b.setStrength(slb.getStrength());
+			slbpList.add(b.build());
+		}
+		return slbpList;
+	}
 
 
 }

@@ -27,5 +27,9 @@ public class CompleteBattleItemResponseEvent extends NormalResponseEvent<Complet
 			CompleteBattleItemResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return completeBattleItemResponseProto.getSerializedSize();
+	}
 
 }

@@ -8,10 +8,10 @@ public final class TournamentStuffProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface TournamentEventProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface TournamentEventProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TournamentEventProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 eventId = 1;
     /**
      * <code>optional int32 eventId = 1;</code>
      */
@@ -21,7 +21,6 @@ public final class TournamentStuffProto {
      */
     int getEventId();
 
-    // optional int64 startDate = 2;
     /**
      * <code>optional int64 startDate = 2;</code>
      */
@@ -31,7 +30,6 @@ public final class TournamentStuffProto {
      */
     long getStartDate();
 
-    // optional int64 endDate = 3;
     /**
      * <code>optional int64 endDate = 3;</code>
      */
@@ -41,7 +39,6 @@ public final class TournamentStuffProto {
      */
     long getEndDate();
 
-    // optional string eventName = 4;
     /**
      * <code>optional string eventName = 4;</code>
      */
@@ -56,7 +53,6 @@ public final class TournamentStuffProto {
     com.google.protobuf.ByteString
         getEventNameBytes();
 
-    // repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;
     /**
      * <code>repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;</code>
      */
@@ -81,7 +77,6 @@ public final class TournamentStuffProto {
     com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder getRewardsOrBuilder(
         int index);
 
-    // optional int64 lastShowDate = 6;
     /**
      * <code>optional int64 lastShowDate = 6;</code>
      */
@@ -95,8 +90,9 @@ public final class TournamentStuffProto {
    * Protobuf type {@code com.lvl6.proto.TournamentEventProto}
    */
   public static final class TournamentEventProto extends
-      com.google.protobuf.GeneratedMessage
-      implements TournamentEventProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TournamentEventProto)
+      TournamentEventProtoOrBuilder {
     // Use TournamentEventProto.newBuilder() to construct.
     private TournamentEventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -158,8 +154,9 @@ public final class TournamentStuffProto {
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              eventName_ = input.readBytes();
+              eventName_ = bs;
               break;
             }
             case 42: {
@@ -218,7 +215,6 @@ public final class TournamentStuffProto {
     }
 
     private int bitField0_;
-    // optional int32 eventId = 1;
     public static final int EVENTID_FIELD_NUMBER = 1;
     private int eventId_;
     /**
@@ -234,7 +230,6 @@ public final class TournamentStuffProto {
       return eventId_;
     }
 
-    // optional int64 startDate = 2;
     public static final int STARTDATE_FIELD_NUMBER = 2;
     private long startDate_;
     /**
@@ -250,7 +245,6 @@ public final class TournamentStuffProto {
       return startDate_;
     }
 
-    // optional int64 endDate = 3;
     public static final int ENDDATE_FIELD_NUMBER = 3;
     private long endDate_;
     /**
@@ -266,7 +260,6 @@ public final class TournamentStuffProto {
       return endDate_;
     }
 
-    // optional string eventName = 4;
     public static final int EVENTNAME_FIELD_NUMBER = 4;
     private java.lang.Object eventName_;
     /**
@@ -309,7 +302,6 @@ public final class TournamentStuffProto {
       }
     }
 
-    // repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;
     public static final int REWARDS_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> rewards_;
     /**
@@ -345,7 +337,6 @@ public final class TournamentStuffProto {
       return rewards_.get(index);
     }
 
-    // optional int64 lastShowDate = 6;
     public static final int LASTSHOWDATE_FIELD_NUMBER = 6;
     private long lastShowDate_;
     /**
@@ -372,7 +363,8 @@ public final class TournamentStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -514,8 +506,9 @@ public final class TournamentStuffProto {
      * Protobuf type {@code com.lvl6.proto.TournamentEventProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.TournamentStuffProto.TournamentEventProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TournamentEventProto)
+        com.lvl6.proto.TournamentStuffProto.TournamentEventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventProto_descriptor;
@@ -708,7 +701,6 @@ public final class TournamentStuffProto {
       }
       private int bitField0_;
 
-      // optional int32 eventId = 1;
       private int eventId_ ;
       /**
        * <code>optional int32 eventId = 1;</code>
@@ -741,7 +733,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional int64 startDate = 2;
       private long startDate_ ;
       /**
        * <code>optional int64 startDate = 2;</code>
@@ -774,7 +765,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional int64 endDate = 3;
       private long endDate_ ;
       /**
        * <code>optional int64 endDate = 3;</code>
@@ -807,7 +797,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional string eventName = 4;
       private java.lang.Object eventName_ = "";
       /**
        * <code>optional string eventName = 4;</code>
@@ -821,9 +810,12 @@ public final class TournamentStuffProto {
       public java.lang.String getEventName() {
         java.lang.Object ref = eventName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          eventName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            eventName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -881,7 +873,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;
       private java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> rewards_ =
         java.util.Collections.emptyList();
       private void ensureRewardsIsMutable() {
@@ -1023,7 +1014,8 @@ public final class TournamentStuffProto {
           java.lang.Iterable<? extends com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> values) {
         if (rewardsBuilder_ == null) {
           ensureRewardsIsMutable();
-          super.addAll(values, rewards_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, rewards_);
           onChanged();
         } else {
           rewardsBuilder_.addAllMessages(values);
@@ -1121,7 +1113,6 @@ public final class TournamentStuffProto {
         return rewardsBuilder_;
       }
 
-      // optional int64 lastShowDate = 6;
       private long lastShowDate_ ;
       /**
        * <code>optional int64 lastShowDate = 6;</code>
@@ -1165,10 +1156,10 @@ public final class TournamentStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentEventProto)
   }
 
-  public interface TournamentEventRewardProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface TournamentEventRewardProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TournamentEventRewardProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 tournamentEventId = 1;
     /**
      * <code>optional int32 tournamentEventId = 1;</code>
      */
@@ -1178,7 +1169,6 @@ public final class TournamentStuffProto {
      */
     int getTournamentEventId();
 
-    // optional int32 minRank = 2;
     /**
      * <code>optional int32 minRank = 2;</code>
      */
@@ -1188,7 +1178,6 @@ public final class TournamentStuffProto {
      */
     int getMinRank();
 
-    // optional int32 maxRank = 3;
     /**
      * <code>optional int32 maxRank = 3;</code>
      */
@@ -1198,7 +1187,6 @@ public final class TournamentStuffProto {
      */
     int getMaxRank();
 
-    // optional int32 goldRewarded = 4;
     /**
      * <code>optional int32 goldRewarded = 4;</code>
      */
@@ -1208,7 +1196,6 @@ public final class TournamentStuffProto {
      */
     int getGoldRewarded();
 
-    // optional string backgroundImageName = 5;
     /**
      * <code>optional string backgroundImageName = 5;</code>
      */
@@ -1223,7 +1210,6 @@ public final class TournamentStuffProto {
     com.google.protobuf.ByteString
         getBackgroundImageNameBytes();
 
-    // optional string prizeImageName = 6;
     /**
      * <code>optional string prizeImageName = 6;</code>
      */
@@ -1238,7 +1224,6 @@ public final class TournamentStuffProto {
     com.google.protobuf.ByteString
         getPrizeImageNameBytes();
 
-    // optional .com.lvl6.proto.ColorProto titleColor = 7;
     /**
      * <code>optional .com.lvl6.proto.ColorProto titleColor = 7;</code>
      */
@@ -1256,8 +1241,9 @@ public final class TournamentStuffProto {
    * Protobuf type {@code com.lvl6.proto.TournamentEventRewardProto}
    */
   public static final class TournamentEventRewardProto extends
-      com.google.protobuf.GeneratedMessage
-      implements TournamentEventRewardProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TournamentEventRewardProto)
+      TournamentEventRewardProtoOrBuilder {
     // Use TournamentEventRewardProto.newBuilder() to construct.
     private TournamentEventRewardProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1324,13 +1310,15 @@ public final class TournamentStuffProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              backgroundImageName_ = input.readBytes();
+              backgroundImageName_ = bs;
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              prizeImageName_ = input.readBytes();
+              prizeImageName_ = bs;
               break;
             }
             case 58: {
@@ -1386,7 +1374,6 @@ public final class TournamentStuffProto {
     }
 
     private int bitField0_;
-    // optional int32 tournamentEventId = 1;
     public static final int TOURNAMENTEVENTID_FIELD_NUMBER = 1;
     private int tournamentEventId_;
     /**
@@ -1402,7 +1389,6 @@ public final class TournamentStuffProto {
       return tournamentEventId_;
     }
 
-    // optional int32 minRank = 2;
     public static final int MINRANK_FIELD_NUMBER = 2;
     private int minRank_;
     /**
@@ -1418,7 +1404,6 @@ public final class TournamentStuffProto {
       return minRank_;
     }
 
-    // optional int32 maxRank = 3;
     public static final int MAXRANK_FIELD_NUMBER = 3;
     private int maxRank_;
     /**
@@ -1434,7 +1419,6 @@ public final class TournamentStuffProto {
       return maxRank_;
     }
 
-    // optional int32 goldRewarded = 4;
     public static final int GOLDREWARDED_FIELD_NUMBER = 4;
     private int goldRewarded_;
     /**
@@ -1450,7 +1434,6 @@ public final class TournamentStuffProto {
       return goldRewarded_;
     }
 
-    // optional string backgroundImageName = 5;
     public static final int BACKGROUNDIMAGENAME_FIELD_NUMBER = 5;
     private java.lang.Object backgroundImageName_;
     /**
@@ -1493,7 +1476,6 @@ public final class TournamentStuffProto {
       }
     }
 
-    // optional string prizeImageName = 6;
     public static final int PRIZEIMAGENAME_FIELD_NUMBER = 6;
     private java.lang.Object prizeImageName_;
     /**
@@ -1536,7 +1518,6 @@ public final class TournamentStuffProto {
       }
     }
 
-    // optional .com.lvl6.proto.ColorProto titleColor = 7;
     public static final int TITLECOLOR_FIELD_NUMBER = 7;
     private com.lvl6.proto.ChatProto.ColorProto titleColor_;
     /**
@@ -1570,7 +1551,8 @@ public final class TournamentStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1719,8 +1701,9 @@ public final class TournamentStuffProto {
      * Protobuf type {@code com.lvl6.proto.TournamentEventRewardProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TournamentEventRewardProto)
+        com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor;
@@ -1900,7 +1883,6 @@ public final class TournamentStuffProto {
       }
       private int bitField0_;
 
-      // optional int32 tournamentEventId = 1;
       private int tournamentEventId_ ;
       /**
        * <code>optional int32 tournamentEventId = 1;</code>
@@ -1933,7 +1915,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional int32 minRank = 2;
       private int minRank_ ;
       /**
        * <code>optional int32 minRank = 2;</code>
@@ -1966,7 +1947,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional int32 maxRank = 3;
       private int maxRank_ ;
       /**
        * <code>optional int32 maxRank = 3;</code>
@@ -1999,7 +1979,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional int32 goldRewarded = 4;
       private int goldRewarded_ ;
       /**
        * <code>optional int32 goldRewarded = 4;</code>
@@ -2032,7 +2011,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional string backgroundImageName = 5;
       private java.lang.Object backgroundImageName_ = "";
       /**
        * <code>optional string backgroundImageName = 5;</code>
@@ -2046,9 +2024,12 @@ public final class TournamentStuffProto {
       public java.lang.String getBackgroundImageName() {
         java.lang.Object ref = backgroundImageName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          backgroundImageName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            backgroundImageName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2106,7 +2087,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional string prizeImageName = 6;
       private java.lang.Object prizeImageName_ = "";
       /**
        * <code>optional string prizeImageName = 6;</code>
@@ -2120,9 +2100,12 @@ public final class TournamentStuffProto {
       public java.lang.String getPrizeImageName() {
         java.lang.Object ref = prizeImageName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          prizeImageName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            prizeImageName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2180,7 +2163,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ColorProto titleColor = 7;
       private com.lvl6.proto.ChatProto.ColorProto titleColor_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder> titleColorBuilder_;
@@ -2289,7 +2271,7 @@ public final class TournamentStuffProto {
         if (titleColorBuilder_ == null) {
           titleColorBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder>(
-                  titleColor_,
+                  getTitleColor(),
                   getParentForChildren(),
                   isClean());
           titleColor_ = null;
@@ -2308,10 +2290,10 @@ public final class TournamentStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentEventRewardProto)
   }
 
-  public interface MinimumUserProtoWithLevelForTournamentOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumUserProtoWithLevelForTournamentOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserProtoWithLevelForTournament)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
      */
@@ -2325,7 +2307,6 @@ public final class TournamentStuffProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
 
-    // optional int32 level = 2;
     /**
      * <code>optional int32 level = 2;</code>
      */
@@ -2335,7 +2316,6 @@ public final class TournamentStuffProto {
      */
     int getLevel();
 
-    // optional int32 tournamentRank = 3;
     /**
      * <code>optional int32 tournamentRank = 3;</code>
      */
@@ -2345,7 +2325,6 @@ public final class TournamentStuffProto {
      */
     int getTournamentRank();
 
-    // optional double tournamentScore = 4;
     /**
      * <code>optional double tournamentScore = 4;</code>
      */
@@ -2359,8 +2338,9 @@ public final class TournamentStuffProto {
    * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithLevelForTournament}
    */
   public static final class MinimumUserProtoWithLevelForTournament extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumUserProtoWithLevelForTournamentOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserProtoWithLevelForTournament)
+      MinimumUserProtoWithLevelForTournamentOrBuilder {
     // Use MinimumUserProtoWithLevelForTournament.newBuilder() to construct.
     private MinimumUserProtoWithLevelForTournament(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2474,7 +2454,6 @@ public final class TournamentStuffProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     public static final int MINUSERPROTO_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
     /**
@@ -2496,7 +2475,6 @@ public final class TournamentStuffProto {
       return minUserProto_;
     }
 
-    // optional int32 level = 2;
     public static final int LEVEL_FIELD_NUMBER = 2;
     private int level_;
     /**
@@ -2512,7 +2490,6 @@ public final class TournamentStuffProto {
       return level_;
     }
 
-    // optional int32 tournamentRank = 3;
     public static final int TOURNAMENTRANK_FIELD_NUMBER = 3;
     private int tournamentRank_;
     /**
@@ -2528,7 +2505,6 @@ public final class TournamentStuffProto {
       return tournamentRank_;
     }
 
-    // optional double tournamentScore = 4;
     public static final int TOURNAMENTSCORE_FIELD_NUMBER = 4;
     private double tournamentScore_;
     /**
@@ -2553,7 +2529,8 @@ public final class TournamentStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2681,8 +2658,9 @@ public final class TournamentStuffProto {
      * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithLevelForTournament}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserProtoWithLevelForTournament)
+        com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor;
@@ -2831,7 +2809,6 @@ public final class TournamentStuffProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
@@ -2940,7 +2917,7 @@ public final class TournamentStuffProto {
         if (minUserProtoBuilder_ == null) {
           minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  minUserProto_,
+                  getMinUserProto(),
                   getParentForChildren(),
                   isClean());
           minUserProto_ = null;
@@ -2948,7 +2925,6 @@ public final class TournamentStuffProto {
         return minUserProtoBuilder_;
       }
 
-      // optional int32 level = 2;
       private int level_ ;
       /**
        * <code>optional int32 level = 2;</code>
@@ -2981,7 +2957,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional int32 tournamentRank = 3;
       private int tournamentRank_ ;
       /**
        * <code>optional int32 tournamentRank = 3;</code>
@@ -3014,7 +2989,6 @@ public final class TournamentStuffProto {
         return this;
       }
 
-      // optional double tournamentScore = 4;
       private double tournamentScore_ ;
       /**
        * <code>optional double tournamentScore = 4;</code>
@@ -3058,17 +3032,17 @@ public final class TournamentStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithLevelForTournament)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TournamentEventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3101,37 +3075,39 @@ public final class TournamentStuffProto {
       "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_TournamentEventProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TournamentEventProto_descriptor,
-              new java.lang.String[] { "EventId", "StartDate", "EndDate", "EventName", "Rewards", "LastShowDate", });
-          internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor,
-              new java.lang.String[] { "TournamentEventId", "MinRank", "MaxRank", "GoldRewarded", "BackgroundImageName", "PrizeImageName", "TitleColor", });
-          internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor,
-              new java.lang.String[] { "MinUserProto", "Level", "TournamentRank", "TournamentScore", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_TournamentEventProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TournamentEventProto_descriptor,
+        new java.lang.String[] { "EventId", "StartDate", "EndDate", "EventName", "Rewards", "LastShowDate", });
+    internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor,
+        new java.lang.String[] { "TournamentEventId", "MinRank", "MaxRank", "GoldRewarded", "BackgroundImageName", "PrizeImageName", "TitleColor", });
+    internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor,
+        new java.lang.String[] { "MinUserProto", "Level", "TournamentRank", "TournamentScore", });
+    com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

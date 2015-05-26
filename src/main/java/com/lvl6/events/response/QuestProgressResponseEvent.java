@@ -28,4 +28,8 @@ public class QuestProgressResponseEvent extends NormalResponseEvent<QuestProgres
 		this.responseProto = responseProto;
 	}
 
+	public int eventSize() {
+		return questProgressResponseProto.getSerializedSize();
+	}
+
 }

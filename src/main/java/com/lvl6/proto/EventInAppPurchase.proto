@@ -86,7 +86,7 @@ message ExchangeGemsForResourcesRequestProto {
 	//positive number representing how many gems to be taken away
 	optional int32 numGems = 2;
 	optional int32 numResources = 3;
-	optional ResourceType resourceType = 4 [default = CASH];
+	optional ResourceType resourceType = 4 [default = CASH]; 
 	
 	//just for currency tracking purposes
 	optional int64 clientTime = 5;

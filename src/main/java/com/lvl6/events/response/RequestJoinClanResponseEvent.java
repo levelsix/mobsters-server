@@ -27,5 +27,9 @@ public class RequestJoinClanResponseEvent extends NormalResponseEvent<RequestJoi
 			RequestJoinClanResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return responseProto.getSerializedSize();
+	}
 
 }

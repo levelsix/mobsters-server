@@ -58,13 +58,13 @@ public class MonsterLevelInfoRetrieveUtils {
 	}
 
 	/****************************************************************/
-	public Map<Integer, Map<Integer, MonsterLevelInfo>> getMonsterIdToLevelToInfo() {
+	/*public Map<Integer, Map<Integer, MonsterLevelInfo>> getMonsterIdToLevelToInfo() {
 		log.debug("retrieving all monster lvl info data");
 		if (monsterIdToLevelToInfo == null) {
 			setStaticMonsterIdToLevelToInfo();
 		}
 		return monsterIdToLevelToInfo;
-	}
+	}*/
 
 	//TODO: return enumeratedCompleteMonsterLevelInfo for a monster,
 	//similar to getAllPartialMonsterLevelInfo() but complete data
@@ -223,17 +223,20 @@ public class MonsterLevelInfoRetrieveUtils {
 
 	private int calculateHp(MonsterLevelInfo min, MonsterLevelInfo max,
 			int currentLvl) {
-
+		/* client is capping monster hp
 		double base = ((double) (currentLvl - 1))
 				/ (double) (max.getLevel() - 1);
 		double hpDiff = (max.getHp() - min.getHp());
-		int hpOffset = (int) (hpDiff * Math.pow(base, max.getHpExponentBase()));
+		double hpOffset = hpDiff * Math.pow(base, max.getHpExponentBase());
 		/*if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == min.getMonsterId()) {
 		  log.info(String.format(
 			  "minInfo=%s, maxInfo=%s, curLvl=%s, base=%s, hpDiff=%s, hpOffset=%s, minHp=%s",
 			  min, max, currentLvl, base, hpDiff, hpOffset, min.getHp()));
-		}*/
-		return (min.getHp() + hpOffset);
+		}*//*
+		return (int) Math.round(min.getHp() + hpOffset);
+		*/
+
+		return 10000000;
 	}
 
 	private int calculateExp(MonsterLevelInfo max, int currentLvl) {
@@ -331,7 +334,7 @@ public class MonsterLevelInfoRetrieveUtils {
 			pvpDropRate = Math.min(pvpDropRate, 1);
 			log.error("new pvpDropRate: {}", pvpDropRate);
 		}
-		
+
 		int strength = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__STRENGTH);
 		float strengthExponent = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__STRENGTH_EXPONENT);
 

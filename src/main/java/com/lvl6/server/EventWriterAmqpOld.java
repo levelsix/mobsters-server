@@ -157,16 +157,12 @@ public class EventWriterAmqpOld extends EventWriterOld {
 	}
 
 	protected ByteBuffer getBytes(ResponseEvent event) {
-		ByteBuffer writeBuffer = ByteBuffer
-				.allocateDirect(Globals.MAX_EVENT_SIZE);
-		NIOUtils.prepBuffer(event, writeBuffer);
+		ByteBuffer writeBuffer = NIOUtils.prepBuffer(event);
 		return writeBuffer;
 	}
 
 	protected byte[] getByteArray(ResponseEvent event) {
-		ByteBuffer writeBuffer = ByteBuffer
-				.allocateDirect(Globals.MAX_EVENT_SIZE);
-		NIOUtils.prepBuffer(event, writeBuffer);
+		ByteBuffer writeBuffer = NIOUtils.prepBuffer(event);
 		int remaining = writeBuffer.remaining();
 		//log.info("Got byte[] of size: {}", remaining);
 		byte[] b = new byte[remaining];

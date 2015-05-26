@@ -8,10 +8,10 @@ public final class MiniJobConfigProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface MiniJobProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MiniJobProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MiniJobProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 miniJobId = 1;
     /**
      * <code>optional int32 miniJobId = 1;</code>
      */
@@ -21,7 +21,6 @@ public final class MiniJobConfigProto {
      */
     int getMiniJobId();
 
-    // optional int32 requiredStructId = 2;
     /**
      * <code>optional int32 requiredStructId = 2;</code>
      */
@@ -31,7 +30,6 @@ public final class MiniJobConfigProto {
      */
     int getRequiredStructId();
 
-    // optional string name = 3;
     /**
      * <code>optional string name = 3;</code>
      */
@@ -46,7 +44,6 @@ public final class MiniJobConfigProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 cashReward = 4;
     /**
      * <code>optional int32 cashReward = 4;</code>
      */
@@ -56,7 +53,6 @@ public final class MiniJobConfigProto {
      */
     int getCashReward();
 
-    // optional int32 oilReward = 5;
     /**
      * <code>optional int32 oilReward = 5;</code>
      */
@@ -66,7 +62,6 @@ public final class MiniJobConfigProto {
      */
     int getOilReward();
 
-    // optional int32 gemReward = 6;
     /**
      * <code>optional int32 gemReward = 6;</code>
      */
@@ -76,7 +71,6 @@ public final class MiniJobConfigProto {
      */
     int getGemReward();
 
-    // optional int32 monsterIdReward = 7;
     /**
      * <code>optional int32 monsterIdReward = 7;</code>
      */
@@ -86,7 +80,6 @@ public final class MiniJobConfigProto {
      */
     int getMonsterIdReward();
 
-    // optional int32 itemIdReward = 17;
     /**
      * <code>optional int32 itemIdReward = 17;</code>
      */
@@ -96,7 +89,6 @@ public final class MiniJobConfigProto {
      */
     int getItemIdReward();
 
-    // optional int32 itemRewardQuantity = 18;
     /**
      * <code>optional int32 itemRewardQuantity = 18;</code>
      */
@@ -106,7 +98,6 @@ public final class MiniJobConfigProto {
      */
     int getItemRewardQuantity();
 
-    // optional int32 secondItemIdReward = 19;
     /**
      * <code>optional int32 secondItemIdReward = 19;</code>
      */
@@ -116,7 +107,6 @@ public final class MiniJobConfigProto {
      */
     int getSecondItemIdReward();
 
-    // optional int32 secondItemRewardQuantity = 20;
     /**
      * <code>optional int32 secondItemRewardQuantity = 20;</code>
      */
@@ -126,7 +116,6 @@ public final class MiniJobConfigProto {
      */
     int getSecondItemRewardQuantity();
 
-    // optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];
     /**
      * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
      */
@@ -136,7 +125,6 @@ public final class MiniJobConfigProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
 
-    // optional int32 maxNumMonstersAllowed = 9;
     /**
      * <code>optional int32 maxNumMonstersAllowed = 9;</code>
      */
@@ -146,7 +134,6 @@ public final class MiniJobConfigProto {
      */
     int getMaxNumMonstersAllowed();
 
-    // optional float chanceToAppear = 10;
     /**
      * <code>optional float chanceToAppear = 10;</code>
      */
@@ -156,7 +143,6 @@ public final class MiniJobConfigProto {
      */
     float getChanceToAppear();
 
-    // optional int32 hpRequired = 11;
     /**
      * <code>optional int32 hpRequired = 11;</code>
      */
@@ -166,7 +152,6 @@ public final class MiniJobConfigProto {
      */
     int getHpRequired();
 
-    // optional int32 atkRequired = 12;
     /**
      * <code>optional int32 atkRequired = 12;</code>
      */
@@ -176,7 +161,6 @@ public final class MiniJobConfigProto {
      */
     int getAtkRequired();
 
-    // optional int32 minDmgDealt = 13;
     /**
      * <code>optional int32 minDmgDealt = 13;</code>
      */
@@ -186,7 +170,6 @@ public final class MiniJobConfigProto {
      */
     int getMinDmgDealt();
 
-    // optional int32 maxDmgDealt = 14;
     /**
      * <code>optional int32 maxDmgDealt = 14;</code>
      */
@@ -196,7 +179,6 @@ public final class MiniJobConfigProto {
      */
     int getMaxDmgDealt();
 
-    // optional int32 durationMinMinutes = 15;
     /**
      * <code>optional int32 durationMinMinutes = 15;</code>
      */
@@ -206,7 +188,6 @@ public final class MiniJobConfigProto {
      */
     int getDurationMinMinutes();
 
-    // optional int32 durationMaxMinutes = 16;
     /**
      * <code>optional int32 durationMaxMinutes = 16;</code>
      */
@@ -215,13 +196,53 @@ public final class MiniJobConfigProto {
      * <code>optional int32 durationMaxMinutes = 16;</code>
      */
     int getDurationMaxMinutes();
+
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+     */
+    boolean hasRewardOne();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProto getRewardOne();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOneOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+     */
+    boolean hasRewardTwo();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProto getRewardTwo();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardTwoOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+     */
+    boolean hasRewardThree();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProto getRewardThree();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardThreeOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MiniJobProto}
    */
   public static final class MiniJobProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MiniJobProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MiniJobProto)
+      MiniJobProtoOrBuilder {
     // Use MiniJobProto.newBuilder() to construct.
     private MiniJobProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -278,8 +299,9 @@ public final class MiniJobConfigProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 32: {
@@ -373,6 +395,45 @@ public final class MiniJobConfigProto {
               secondItemRewardQuantity_ = input.readInt32();
               break;
             }
+            case 170: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00100000) == 0x00100000)) {
+                subBuilder = rewardOne_.toBuilder();
+              }
+              rewardOne_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rewardOne_);
+                rewardOne_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00100000;
+              break;
+            }
+            case 178: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00200000) == 0x00200000)) {
+                subBuilder = rewardTwo_.toBuilder();
+              }
+              rewardTwo_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rewardTwo_);
+                rewardTwo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00200000;
+              break;
+            }
+            case 186: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00400000) == 0x00400000)) {
+                subBuilder = rewardThree_.toBuilder();
+              }
+              rewardThree_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rewardThree_);
+                rewardThree_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00400000;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -413,7 +474,6 @@ public final class MiniJobConfigProto {
     }
 
     private int bitField0_;
-    // optional int32 miniJobId = 1;
     public static final int MINIJOBID_FIELD_NUMBER = 1;
     private int miniJobId_;
     /**
@@ -429,7 +489,6 @@ public final class MiniJobConfigProto {
       return miniJobId_;
     }
 
-    // optional int32 requiredStructId = 2;
     public static final int REQUIREDSTRUCTID_FIELD_NUMBER = 2;
     private int requiredStructId_;
     /**
@@ -445,7 +504,6 @@ public final class MiniJobConfigProto {
       return requiredStructId_;
     }
 
-    // optional string name = 3;
     public static final int NAME_FIELD_NUMBER = 3;
     private java.lang.Object name_;
     /**
@@ -488,7 +546,6 @@ public final class MiniJobConfigProto {
       }
     }
 
-    // optional int32 cashReward = 4;
     public static final int CASHREWARD_FIELD_NUMBER = 4;
     private int cashReward_;
     /**
@@ -504,7 +561,6 @@ public final class MiniJobConfigProto {
       return cashReward_;
     }
 
-    // optional int32 oilReward = 5;
     public static final int OILREWARD_FIELD_NUMBER = 5;
     private int oilReward_;
     /**
@@ -520,7 +576,6 @@ public final class MiniJobConfigProto {
       return oilReward_;
     }
 
-    // optional int32 gemReward = 6;
     public static final int GEMREWARD_FIELD_NUMBER = 6;
     private int gemReward_;
     /**
@@ -536,7 +591,6 @@ public final class MiniJobConfigProto {
       return gemReward_;
     }
 
-    // optional int32 monsterIdReward = 7;
     public static final int MONSTERIDREWARD_FIELD_NUMBER = 7;
     private int monsterIdReward_;
     /**
@@ -552,7 +606,6 @@ public final class MiniJobConfigProto {
       return monsterIdReward_;
     }
 
-    // optional int32 itemIdReward = 17;
     public static final int ITEMIDREWARD_FIELD_NUMBER = 17;
     private int itemIdReward_;
     /**
@@ -568,7 +621,6 @@ public final class MiniJobConfigProto {
       return itemIdReward_;
     }
 
-    // optional int32 itemRewardQuantity = 18;
     public static final int ITEMREWARDQUANTITY_FIELD_NUMBER = 18;
     private int itemRewardQuantity_;
     /**
@@ -584,7 +636,6 @@ public final class MiniJobConfigProto {
       return itemRewardQuantity_;
     }
 
-    // optional int32 secondItemIdReward = 19;
     public static final int SECONDITEMIDREWARD_FIELD_NUMBER = 19;
     private int secondItemIdReward_;
     /**
@@ -600,7 +651,6 @@ public final class MiniJobConfigProto {
       return secondItemIdReward_;
     }
 
-    // optional int32 secondItemRewardQuantity = 20;
     public static final int SECONDITEMREWARDQUANTITY_FIELD_NUMBER = 20;
     private int secondItemRewardQuantity_;
     /**
@@ -616,7 +666,6 @@ public final class MiniJobConfigProto {
       return secondItemRewardQuantity_;
     }
 
-    // optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];
     public static final int QUALITY_FIELD_NUMBER = 8;
     private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     /**
@@ -632,7 +681,6 @@ public final class MiniJobConfigProto {
       return quality_;
     }
 
-    // optional int32 maxNumMonstersAllowed = 9;
     public static final int MAXNUMMONSTERSALLOWED_FIELD_NUMBER = 9;
     private int maxNumMonstersAllowed_;
     /**
@@ -648,7 +696,6 @@ public final class MiniJobConfigProto {
       return maxNumMonstersAllowed_;
     }
 
-    // optional float chanceToAppear = 10;
     public static final int CHANCETOAPPEAR_FIELD_NUMBER = 10;
     private float chanceToAppear_;
     /**
@@ -664,7 +711,6 @@ public final class MiniJobConfigProto {
       return chanceToAppear_;
     }
 
-    // optional int32 hpRequired = 11;
     public static final int HPREQUIRED_FIELD_NUMBER = 11;
     private int hpRequired_;
     /**
@@ -680,7 +726,6 @@ public final class MiniJobConfigProto {
       return hpRequired_;
     }
 
-    // optional int32 atkRequired = 12;
     public static final int ATKREQUIRED_FIELD_NUMBER = 12;
     private int atkRequired_;
     /**
@@ -696,7 +741,6 @@ public final class MiniJobConfigProto {
       return atkRequired_;
     }
 
-    // optional int32 minDmgDealt = 13;
     public static final int MINDMGDEALT_FIELD_NUMBER = 13;
     private int minDmgDealt_;
     /**
@@ -712,7 +756,6 @@ public final class MiniJobConfigProto {
       return minDmgDealt_;
     }
 
-    // optional int32 maxDmgDealt = 14;
     public static final int MAXDMGDEALT_FIELD_NUMBER = 14;
     private int maxDmgDealt_;
     /**
@@ -728,7 +771,6 @@ public final class MiniJobConfigProto {
       return maxDmgDealt_;
     }
 
-    // optional int32 durationMinMinutes = 15;
     public static final int DURATIONMINMINUTES_FIELD_NUMBER = 15;
     private int durationMinMinutes_;
     /**
@@ -744,7 +786,6 @@ public final class MiniJobConfigProto {
       return durationMinMinutes_;
     }
 
-    // optional int32 durationMaxMinutes = 16;
     public static final int DURATIONMAXMINUTES_FIELD_NUMBER = 16;
     private int durationMaxMinutes_;
     /**
@@ -758,6 +799,69 @@ public final class MiniJobConfigProto {
      */
     public int getDurationMaxMinutes() {
       return durationMaxMinutes_;
+    }
+
+    public static final int REWARDONE_FIELD_NUMBER = 21;
+    private com.lvl6.proto.RewardsProto.RewardProto rewardOne_;
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+     */
+    public boolean hasRewardOne() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getRewardOne() {
+      return rewardOne_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOneOrBuilder() {
+      return rewardOne_;
+    }
+
+    public static final int REWARDTWO_FIELD_NUMBER = 22;
+    private com.lvl6.proto.RewardsProto.RewardProto rewardTwo_;
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+     */
+    public boolean hasRewardTwo() {
+      return ((bitField0_ & 0x00200000) == 0x00200000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getRewardTwo() {
+      return rewardTwo_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardTwoOrBuilder() {
+      return rewardTwo_;
+    }
+
+    public static final int REWARDTHREE_FIELD_NUMBER = 23;
+    private com.lvl6.proto.RewardsProto.RewardProto rewardThree_;
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+     */
+    public boolean hasRewardThree() {
+      return ((bitField0_ & 0x00400000) == 0x00400000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProto getRewardThree() {
+      return rewardThree_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardThreeOrBuilder() {
+      return rewardThree_;
     }
 
     private void initFields() {
@@ -781,11 +885,15 @@ public final class MiniJobConfigProto {
       maxDmgDealt_ = 0;
       durationMinMinutes_ = 0;
       durationMaxMinutes_ = 0;
+      rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -853,6 +961,15 @@ public final class MiniJobConfigProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(20, secondItemRewardQuantity_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeMessage(21, rewardOne_);
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        output.writeMessage(22, rewardTwo_);
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        output.writeMessage(23, rewardThree_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -943,6 +1060,18 @@ public final class MiniJobConfigProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(20, secondItemRewardQuantity_);
       }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(21, rewardOne_);
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(22, rewardTwo_);
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(23, rewardThree_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1025,8 +1154,9 @@ public final class MiniJobConfigProto {
      * Protobuf type {@code com.lvl6.proto.MiniJobProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MiniJobProto)
+        com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_MiniJobProto_descriptor;
@@ -1051,6 +1181,9 @@ public final class MiniJobConfigProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardOneFieldBuilder();
+          getRewardTwoFieldBuilder();
+          getRewardThreeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1099,6 +1232,24 @@ public final class MiniJobConfigProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         durationMaxMinutes_ = 0;
         bitField0_ = (bitField0_ & ~0x00080000);
+        if (rewardOneBuilder_ == null) {
+          rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardOneBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00100000);
+        if (rewardTwoBuilder_ == null) {
+          rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardTwoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00200000);
+        if (rewardThreeBuilder_ == null) {
+          rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardThreeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
 
@@ -1207,6 +1358,30 @@ public final class MiniJobConfigProto {
           to_bitField0_ |= 0x00080000;
         }
         result.durationMaxMinutes_ = durationMaxMinutes_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        if (rewardOneBuilder_ == null) {
+          result.rewardOne_ = rewardOne_;
+        } else {
+          result.rewardOne_ = rewardOneBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00200000;
+        }
+        if (rewardTwoBuilder_ == null) {
+          result.rewardTwo_ = rewardTwo_;
+        } else {
+          result.rewardTwo_ = rewardTwoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+          to_bitField0_ |= 0x00400000;
+        }
+        if (rewardThreeBuilder_ == null) {
+          result.rewardThree_ = rewardThree_;
+        } else {
+          result.rewardThree_ = rewardThreeBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1285,6 +1460,15 @@ public final class MiniJobConfigProto {
         if (other.hasDurationMaxMinutes()) {
           setDurationMaxMinutes(other.getDurationMaxMinutes());
         }
+        if (other.hasRewardOne()) {
+          mergeRewardOne(other.getRewardOne());
+        }
+        if (other.hasRewardTwo()) {
+          mergeRewardTwo(other.getRewardTwo());
+        }
+        if (other.hasRewardThree()) {
+          mergeRewardThree(other.getRewardThree());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1312,7 +1496,6 @@ public final class MiniJobConfigProto {
       }
       private int bitField0_;
 
-      // optional int32 miniJobId = 1;
       private int miniJobId_ ;
       /**
        * <code>optional int32 miniJobId = 1;</code>
@@ -1345,7 +1528,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 requiredStructId = 2;
       private int requiredStructId_ ;
       /**
        * <code>optional int32 requiredStructId = 2;</code>
@@ -1378,7 +1560,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional string name = 3;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 3;</code>
@@ -1392,9 +1573,12 @@ public final class MiniJobConfigProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1452,7 +1636,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 cashReward = 4;
       private int cashReward_ ;
       /**
        * <code>optional int32 cashReward = 4;</code>
@@ -1485,7 +1668,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 oilReward = 5;
       private int oilReward_ ;
       /**
        * <code>optional int32 oilReward = 5;</code>
@@ -1518,7 +1700,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 gemReward = 6;
       private int gemReward_ ;
       /**
        * <code>optional int32 gemReward = 6;</code>
@@ -1551,7 +1732,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 monsterIdReward = 7;
       private int monsterIdReward_ ;
       /**
        * <code>optional int32 monsterIdReward = 7;</code>
@@ -1584,7 +1764,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 itemIdReward = 17;
       private int itemIdReward_ ;
       /**
        * <code>optional int32 itemIdReward = 17;</code>
@@ -1617,7 +1796,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 itemRewardQuantity = 18;
       private int itemRewardQuantity_ ;
       /**
        * <code>optional int32 itemRewardQuantity = 18;</code>
@@ -1650,7 +1828,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 secondItemIdReward = 19;
       private int secondItemIdReward_ ;
       /**
        * <code>optional int32 secondItemIdReward = 19;</code>
@@ -1683,7 +1860,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 secondItemRewardQuantity = 20;
       private int secondItemRewardQuantity_ ;
       /**
        * <code>optional int32 secondItemRewardQuantity = 20;</code>
@@ -1716,7 +1892,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];
       private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       /**
        * <code>optional .com.lvl6.proto.Quality quality = 8 [default = NO_QUALITY];</code>
@@ -1752,7 +1927,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 maxNumMonstersAllowed = 9;
       private int maxNumMonstersAllowed_ ;
       /**
        * <code>optional int32 maxNumMonstersAllowed = 9;</code>
@@ -1785,7 +1959,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional float chanceToAppear = 10;
       private float chanceToAppear_ ;
       /**
        * <code>optional float chanceToAppear = 10;</code>
@@ -1818,7 +1991,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 hpRequired = 11;
       private int hpRequired_ ;
       /**
        * <code>optional int32 hpRequired = 11;</code>
@@ -1851,7 +2023,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 atkRequired = 12;
       private int atkRequired_ ;
       /**
        * <code>optional int32 atkRequired = 12;</code>
@@ -1884,7 +2055,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 minDmgDealt = 13;
       private int minDmgDealt_ ;
       /**
        * <code>optional int32 minDmgDealt = 13;</code>
@@ -1917,7 +2087,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 maxDmgDealt = 14;
       private int maxDmgDealt_ ;
       /**
        * <code>optional int32 maxDmgDealt = 14;</code>
@@ -1950,7 +2119,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 durationMinMinutes = 15;
       private int durationMinMinutes_ ;
       /**
        * <code>optional int32 durationMinMinutes = 15;</code>
@@ -1983,7 +2151,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 durationMaxMinutes = 16;
       private int durationMaxMinutes_ ;
       /**
        * <code>optional int32 durationMaxMinutes = 16;</code>
@@ -2016,6 +2183,354 @@ public final class MiniJobConfigProto {
         return this;
       }
 
+      private com.lvl6.proto.RewardsProto.RewardProto rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardOneBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public boolean hasRewardOne() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getRewardOne() {
+        if (rewardOneBuilder_ == null) {
+          return rewardOne_;
+        } else {
+          return rewardOneBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public Builder setRewardOne(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardOneBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rewardOne_ = value;
+          onChanged();
+        } else {
+          rewardOneBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00100000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public Builder setRewardOne(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardOneBuilder_ == null) {
+          rewardOne_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardOneBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00100000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public Builder mergeRewardOne(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardOneBuilder_ == null) {
+          if (((bitField0_ & 0x00100000) == 0x00100000) &&
+              rewardOne_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            rewardOne_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardOne_).mergeFrom(value).buildPartial();
+          } else {
+            rewardOne_ = value;
+          }
+          onChanged();
+        } else {
+          rewardOneBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00100000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public Builder clearRewardOne() {
+        if (rewardOneBuilder_ == null) {
+          rewardOne_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardOneBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00100000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardOneBuilder() {
+        bitField0_ |= 0x00100000;
+        onChanged();
+        return getRewardOneFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOneOrBuilder() {
+        if (rewardOneBuilder_ != null) {
+          return rewardOneBuilder_.getMessageOrBuilder();
+        } else {
+          return rewardOne_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardOne = 21;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardOneFieldBuilder() {
+        if (rewardOneBuilder_ == null) {
+          rewardOneBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getRewardOne(),
+                  getParentForChildren(),
+                  isClean());
+          rewardOne_ = null;
+        }
+        return rewardOneBuilder_;
+      }
+
+      private com.lvl6.proto.RewardsProto.RewardProto rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardTwoBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public boolean hasRewardTwo() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getRewardTwo() {
+        if (rewardTwoBuilder_ == null) {
+          return rewardTwo_;
+        } else {
+          return rewardTwoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public Builder setRewardTwo(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardTwoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rewardTwo_ = value;
+          onChanged();
+        } else {
+          rewardTwoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00200000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public Builder setRewardTwo(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardTwoBuilder_ == null) {
+          rewardTwo_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardTwoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00200000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public Builder mergeRewardTwo(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardTwoBuilder_ == null) {
+          if (((bitField0_ & 0x00200000) == 0x00200000) &&
+              rewardTwo_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            rewardTwo_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardTwo_).mergeFrom(value).buildPartial();
+          } else {
+            rewardTwo_ = value;
+          }
+          onChanged();
+        } else {
+          rewardTwoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00200000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public Builder clearRewardTwo() {
+        if (rewardTwoBuilder_ == null) {
+          rewardTwo_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardTwoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00200000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardTwoBuilder() {
+        bitField0_ |= 0x00200000;
+        onChanged();
+        return getRewardTwoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardTwoOrBuilder() {
+        if (rewardTwoBuilder_ != null) {
+          return rewardTwoBuilder_.getMessageOrBuilder();
+        } else {
+          return rewardTwo_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardTwo = 22;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardTwoFieldBuilder() {
+        if (rewardTwoBuilder_ == null) {
+          rewardTwoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getRewardTwo(),
+                  getParentForChildren(),
+                  isClean());
+          rewardTwo_ = null;
+        }
+        return rewardTwoBuilder_;
+      }
+
+      private com.lvl6.proto.RewardsProto.RewardProto rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardThreeBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public boolean hasRewardThree() {
+        return ((bitField0_ & 0x00400000) == 0x00400000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto getRewardThree() {
+        if (rewardThreeBuilder_ == null) {
+          return rewardThree_;
+        } else {
+          return rewardThreeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public Builder setRewardThree(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardThreeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rewardThree_ = value;
+          onChanged();
+        } else {
+          rewardThreeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00400000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public Builder setRewardThree(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardThreeBuilder_ == null) {
+          rewardThree_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardThreeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00400000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public Builder mergeRewardThree(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardThreeBuilder_ == null) {
+          if (((bitField0_ & 0x00400000) == 0x00400000) &&
+              rewardThree_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            rewardThree_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rewardThree_).mergeFrom(value).buildPartial();
+          } else {
+            rewardThree_ = value;
+          }
+          onChanged();
+        } else {
+          rewardThreeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00400000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public Builder clearRewardThree() {
+        if (rewardThreeBuilder_ == null) {
+          rewardThree_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardThreeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00400000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardThreeBuilder() {
+        bitField0_ |= 0x00400000;
+        onChanged();
+        return getRewardThreeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardThreeOrBuilder() {
+        if (rewardThreeBuilder_ != null) {
+          return rewardThreeBuilder_.getMessageOrBuilder();
+        } else {
+          return rewardThree_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto rewardThree = 23;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardThreeFieldBuilder() {
+        if (rewardThreeBuilder_ == null) {
+          rewardThreeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getRewardThree(),
+                  getParentForChildren(),
+                  isClean());
+          rewardThree_ = null;
+        }
+        return rewardThreeBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MiniJobProto)
     }
 
@@ -2027,10 +2542,10 @@ public final class MiniJobConfigProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MiniJobProto)
   }
 
-  public interface UserMiniJobProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserMiniJobProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserMiniJobProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userMiniJobUuid = 1;
     /**
      * <code>optional string userMiniJobUuid = 1;</code>
      */
@@ -2045,7 +2560,6 @@ public final class MiniJobConfigProto {
     com.google.protobuf.ByteString
         getUserMiniJobUuidBytes();
 
-    // optional int32 baseDmgReceived = 2;
     /**
      * <code>optional int32 baseDmgReceived = 2;</code>
      */
@@ -2055,7 +2569,6 @@ public final class MiniJobConfigProto {
      */
     int getBaseDmgReceived();
 
-    // optional int64 timeStarted = 3;
     /**
      * <code>optional int64 timeStarted = 3;</code>
      */
@@ -2065,12 +2578,11 @@ public final class MiniJobConfigProto {
      */
     long getTimeStarted();
 
-    // repeated string userMonsterUuids = 4;
     /**
      * <code>repeated string userMonsterUuids = 4;</code>
      */
-    java.util.List<java.lang.String>
-    getUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
      * <code>repeated string userMonsterUuids = 4;</code>
      */
@@ -2085,7 +2597,6 @@ public final class MiniJobConfigProto {
     com.google.protobuf.ByteString
         getUserMonsterUuidsBytes(int index);
 
-    // optional int64 timeCompleted = 5;
     /**
      * <code>optional int64 timeCompleted = 5;</code>
      */
@@ -2095,7 +2606,6 @@ public final class MiniJobConfigProto {
      */
     long getTimeCompleted();
 
-    // optional int32 durationMinutes = 7;
     /**
      * <code>optional int32 durationMinutes = 7;</code>
      */
@@ -2105,7 +2615,6 @@ public final class MiniJobConfigProto {
      */
     int getDurationMinutes();
 
-    // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
      */
@@ -2119,7 +2628,6 @@ public final class MiniJobConfigProto {
      */
     com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
 
-    // optional int32 durationSeconds = 8;
     /**
      * <code>optional int32 durationSeconds = 8;</code>
      *
@@ -2146,8 +2654,9 @@ public final class MiniJobConfigProto {
    * </pre>
    */
   public static final class UserMiniJobProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserMiniJobProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserMiniJobProto)
+      UserMiniJobProtoOrBuilder {
     // Use UserMiniJobProto.newBuilder() to construct.
     private UserMiniJobProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2194,8 +2703,9 @@ public final class MiniJobConfigProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMiniJobUuid_ = input.readBytes();
+              userMiniJobUuid_ = bs;
               break;
             }
             case 16: {
@@ -2209,11 +2719,12 @@ public final class MiniJobConfigProto {
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000008;
               }
-              userMonsterUuids_.add(input.readBytes());
+              userMonsterUuids_.add(bs);
               break;
             }
             case 40: {
@@ -2253,7 +2764,7 @@ public final class MiniJobConfigProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2287,7 +2798,6 @@ public final class MiniJobConfigProto {
     }
 
     private int bitField0_;
-    // optional string userMiniJobUuid = 1;
     public static final int USERMINIJOBUUID_FIELD_NUMBER = 1;
     private java.lang.Object userMiniJobUuid_;
     /**
@@ -2330,7 +2840,6 @@ public final class MiniJobConfigProto {
       }
     }
 
-    // optional int32 baseDmgReceived = 2;
     public static final int BASEDMGRECEIVED_FIELD_NUMBER = 2;
     private int baseDmgReceived_;
     /**
@@ -2346,7 +2855,6 @@ public final class MiniJobConfigProto {
       return baseDmgReceived_;
     }
 
-    // optional int64 timeStarted = 3;
     public static final int TIMESTARTED_FIELD_NUMBER = 3;
     private long timeStarted_;
     /**
@@ -2362,13 +2870,12 @@ public final class MiniJobConfigProto {
       return timeStarted_;
     }
 
-    // repeated string userMonsterUuids = 4;
     public static final int USERMONSTERUUIDS_FIELD_NUMBER = 4;
     private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
      * <code>repeated string userMonsterUuids = 4;</code>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getUserMonsterUuidsList() {
       return userMonsterUuids_;
     }
@@ -2392,7 +2899,6 @@ public final class MiniJobConfigProto {
       return userMonsterUuids_.getByteString(index);
     }
 
-    // optional int64 timeCompleted = 5;
     public static final int TIMECOMPLETED_FIELD_NUMBER = 5;
     private long timeCompleted_;
     /**
@@ -2408,7 +2914,6 @@ public final class MiniJobConfigProto {
       return timeCompleted_;
     }
 
-    // optional int32 durationMinutes = 7;
     public static final int DURATIONMINUTES_FIELD_NUMBER = 7;
     private int durationMinutes_;
     /**
@@ -2424,7 +2929,6 @@ public final class MiniJobConfigProto {
       return durationMinutes_;
     }
 
-    // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
     public static final int MINIJOB_FIELD_NUMBER = 6;
     private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_;
     /**
@@ -2446,7 +2950,6 @@ public final class MiniJobConfigProto {
       return miniJob_;
     }
 
-    // optional int32 durationSeconds = 8;
     public static final int DURATIONSECONDS_FIELD_NUMBER = 8;
     private int durationSeconds_;
     /**
@@ -2483,7 +2986,8 @@ public final class MiniJobConfigProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2649,8 +3153,9 @@ public final class MiniJobConfigProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserMiniJobProto)
+        com.lvl6.proto.MiniJobConfigProto.UserMiniJobProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.MiniJobConfigProto.internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
@@ -2745,8 +3250,7 @@ public final class MiniJobConfigProto {
         }
         result.timeStarted_ = timeStarted_;
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              userMonsterUuids_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
@@ -2846,7 +3350,6 @@ public final class MiniJobConfigProto {
       }
       private int bitField0_;
 
-      // optional string userMiniJobUuid = 1;
       private java.lang.Object userMiniJobUuid_ = "";
       /**
        * <code>optional string userMiniJobUuid = 1;</code>
@@ -2860,9 +3363,12 @@ public final class MiniJobConfigProto {
       public java.lang.String getUserMiniJobUuid() {
         java.lang.Object ref = userMiniJobUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userMiniJobUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMiniJobUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2920,7 +3426,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 baseDmgReceived = 2;
       private int baseDmgReceived_ ;
       /**
        * <code>optional int32 baseDmgReceived = 2;</code>
@@ -2953,7 +3458,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int64 timeStarted = 3;
       private long timeStarted_ ;
       /**
        * <code>optional int64 timeStarted = 3;</code>
@@ -2986,7 +3490,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // repeated string userMonsterUuids = 4;
       private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
@@ -2997,9 +3500,9 @@ public final class MiniJobConfigProto {
       /**
        * <code>repeated string userMonsterUuids = 4;</code>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(userMonsterUuids_);
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string userMonsterUuids = 4;</code>
@@ -3052,7 +3555,8 @@ public final class MiniJobConfigProto {
       public Builder addAllUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureUserMonsterUuidsIsMutable();
-        super.addAll(values, userMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
@@ -3079,7 +3583,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int64 timeCompleted = 5;
       private long timeCompleted_ ;
       /**
        * <code>optional int64 timeCompleted = 5;</code>
@@ -3112,7 +3615,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional int32 durationMinutes = 7;
       private int durationMinutes_ ;
       /**
        * <code>optional int32 durationMinutes = 7;</code>
@@ -3145,7 +3647,6 @@ public final class MiniJobConfigProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
       private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> miniJobBuilder_;
@@ -3254,7 +3755,7 @@ public final class MiniJobConfigProto {
         if (miniJobBuilder_ == null) {
           miniJobBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder>(
-                  miniJob_,
+                  getMiniJob(),
                   getParentForChildren(),
                   isClean());
           miniJob_ = null;
@@ -3262,7 +3763,6 @@ public final class MiniJobConfigProto {
         return miniJobBuilder_;
       }
 
-      // optional int32 durationSeconds = 8;
       private int durationSeconds_ ;
       /**
        * <code>optional int32 durationSeconds = 8;</code>
@@ -3322,12 +3822,12 @@ public final class MiniJobConfigProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMiniJobProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MiniJobProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserMiniJobProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3342,55 +3842,64 @@ public final class MiniJobConfigProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\023MiniJobConfig.proto\022\016com.lvl6.proto\032\022M" +
-      "onsterStuff.proto\032\026SharedEnumConfig.prot" +
-      "o\032\017Structure.proto\"\204\004\n\014MiniJobProto\022\021\n\tm" +
-      "iniJobId\030\001 \001(\005\022\030\n\020requiredStructId\030\002 \001(\005" +
-      "\022\014\n\004name\030\003 \001(\t\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toi" +
-      "lReward\030\005 \001(\005\022\021\n\tgemReward\030\006 \001(\005\022\027\n\017mons" +
-      "terIdReward\030\007 \001(\005\022\024\n\014itemIdReward\030\021 \001(\005\022" +
-      "\032\n\022itemRewardQuantity\030\022 \001(\005\022\032\n\022secondIte" +
-      "mIdReward\030\023 \001(\005\022 \n\030secondItemRewardQuant" +
-      "ity\030\024 \001(\005\0224\n\007quality\030\010 \001(\0162\027.com.lvl6.pr",
-      "oto.Quality:\nNO_QUALITY\022\035\n\025maxNumMonster" +
-      "sAllowed\030\t \001(\005\022\026\n\016chanceToAppear\030\n \001(\002\022\022" +
-      "\n\nhpRequired\030\013 \001(\005\022\023\n\013atkRequired\030\014 \001(\005\022" +
-      "\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013maxDmgDealt\030\016 \001(" +
-      "\005\022\032\n\022durationMinMinutes\030\017 \001(\005\022\032\n\022duratio" +
-      "nMaxMinutes\030\020 \001(\005\"\353\001\n\020UserMiniJobProto\022\027" +
+      "onsterStuff.proto\032\014Reward.proto\032\026SharedE" +
+      "numConfig.proto\032\017Structure.proto\"\226\005\n\014Min" +
+      "iJobProto\022\021\n\tminiJobId\030\001 \001(\005\022\030\n\020required" +
+      "StructId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\022\n\ncashRewa" +
+      "rd\030\004 \001(\005\022\021\n\toilReward\030\005 \001(\005\022\021\n\tgemReward" +
+      "\030\006 \001(\005\022\027\n\017monsterIdReward\030\007 \001(\005\022\024\n\014itemI" +
+      "dReward\030\021 \001(\005\022\032\n\022itemRewardQuantity\030\022 \001(" +
+      "\005\022\032\n\022secondItemIdReward\030\023 \001(\005\022 \n\030secondI" +
+      "temRewardQuantity\030\024 \001(\005\0224\n\007quality\030\010 \001(\016",
+      "2\027.com.lvl6.proto.Quality:\nNO_QUALITY\022\035\n" +
+      "\025maxNumMonstersAllowed\030\t \001(\005\022\026\n\016chanceTo" +
+      "Appear\030\n \001(\002\022\022\n\nhpRequired\030\013 \001(\005\022\023\n\013atkR" +
+      "equired\030\014 \001(\005\022\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013ma" +
+      "xDmgDealt\030\016 \001(\005\022\032\n\022durationMinMinutes\030\017 " +
+      "\001(\005\022\032\n\022durationMaxMinutes\030\020 \001(\005\022.\n\trewar" +
+      "dOne\030\025 \001(\0132\033.com.lvl6.proto.RewardProto\022" +
+      ".\n\trewardTwo\030\026 \001(\0132\033.com.lvl6.proto.Rewa" +
+      "rdProto\0220\n\013rewardThree\030\027 \001(\0132\033.com.lvl6." +
+      "proto.RewardProto\"\353\001\n\020UserMiniJobProto\022\027",
       "\n\017userMiniJobUuid\030\001 \001(\t\022\027\n\017baseDmgReceiv" +
       "ed\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\030\n\020userMon" +
       "sterUuids\030\004 \003(\t\022\025\n\rtimeCompleted\030\005 \001(\003\022\027" +
-      "\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006 \001(\013",
+      "\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006 \001(\013" +
       "2\034.com.lvl6.proto.MiniJobProto\022\027\n\017durati" +
       "onSeconds\030\010 \001(\005B\024B\022MiniJobConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_MiniJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MiniJobProto_descriptor,
-              new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", });
-          internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
-              new java.lang.String[] { "UserMiniJobUuid", "BaseDmgReceived", "TimeStarted", "UserMonsterUuids", "TimeCompleted", "DurationMinutes", "MiniJob", "DurationSeconds", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_MiniJobProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_MiniJobProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MiniJobProto_descriptor,
+        new java.lang.String[] { "MiniJobId", "RequiredStructId", "Name", "CashReward", "OilReward", "GemReward", "MonsterIdReward", "ItemIdReward", "ItemRewardQuantity", "SecondItemIdReward", "SecondItemRewardQuantity", "Quality", "MaxNumMonstersAllowed", "ChanceToAppear", "HpRequired", "AtkRequired", "MinDmgDealt", "MaxDmgDealt", "DurationMinMinutes", "DurationMaxMinutes", "RewardOne", "RewardTwo", "RewardThree", });
+    internal_static_com_lvl6_proto_UserMiniJobProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
+        new java.lang.String[] { "UserMiniJobUuid", "BaseDmgReceived", "TimeStarted", "UserMonsterUuids", "TimeCompleted", "DurationMinutes", "MiniJob", "DurationSeconds", });
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

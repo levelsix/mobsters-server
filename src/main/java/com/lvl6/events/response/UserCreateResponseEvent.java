@@ -34,5 +34,9 @@ public class UserCreateResponseEvent extends PreDatabaseResponseEvent {
 			UserCreateResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return userCreateResponseProto.getSerializedSize();
+	}
 
 }

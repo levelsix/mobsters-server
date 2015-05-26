@@ -31,5 +31,9 @@ public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDu
 	public ReviveInDungeonResponseProto getReviveInDungeonResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return reviveInDungeonResponseProto.getSerializedSize();
+	}
 
 }

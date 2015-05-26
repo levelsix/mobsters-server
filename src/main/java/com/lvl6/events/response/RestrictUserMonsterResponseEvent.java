@@ -31,5 +31,9 @@ public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<Restri
 	public RestrictUserMonsterResponseProto getRestrictUserMonsterResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return restrictUserMonsterResponseProto.getSerializedSize();
+	}
 
 }

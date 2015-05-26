@@ -35,5 +35,9 @@ public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalRespon
 			RetrieveCurrencyFromNormStructureResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return retrieveCurrencyFromNormStructureResponseProto.getSerializedSize();
+	}
 
 }

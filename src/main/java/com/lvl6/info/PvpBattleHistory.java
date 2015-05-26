@@ -6,7 +6,7 @@ import java.util.Date;
 //look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 
-	private static final long serialVersionUID = -1201654110806196425L;
+	private static final long serialVersionUID = -4897262256343377142L;
 
 	private String attackerId;
 	private String defenderId;
@@ -41,6 +41,7 @@ public class PvpBattleHistory implements Serializable {
 
 	private float pvpDmgMultiplier;
 	private boolean clanAvenged;
+	private String replayId;
 
 	public PvpBattleHistory() {
 		super();
@@ -56,7 +57,8 @@ public class PvpBattleHistory implements Serializable {
 			int defenderCurRank, int attackerCashChange,
 			int defenderCashChange, int attackerOilChange,
 			int defenderOilChange, boolean attackerWon, boolean cancelled,
-			boolean exactedRevenge, float pvpDmgMultiplier, boolean clanAvenged)
+			boolean exactedRevenge, float pvpDmgMultiplier, boolean clanAvenged,
+			String replayId)
 	{
 		super();
 		this.attackerId = attackerId;
@@ -86,6 +88,7 @@ public class PvpBattleHistory implements Serializable {
 		this.exactedRevenge = exactedRevenge;
 		this.pvpDmgMultiplier = pvpDmgMultiplier;
 		this.clanAvenged = clanAvenged;
+		this.replayId = replayId;
 	}
 
 	public String getAttackerId() {
@@ -304,6 +307,14 @@ public class PvpBattleHistory implements Serializable {
 		this.clanAvenged = clanAvenged;
 	}
 
+	public String getReplayId() {
+		return replayId;
+	}
+
+	public void setReplayId(String replayId) {
+		this.replayId = replayId;
+	}
+
 	@Override
 	public String toString() {
 		return "PvpBattleHistory [attackerId=" + attackerId + ", defenderId="
@@ -329,7 +340,8 @@ public class PvpBattleHistory implements Serializable {
 				+ ", defenderOilChange=" + defenderOilChange + ", attackerWon="
 				+ attackerWon + ", cancelled=" + cancelled
 				+ ", exactedRevenge=" + exactedRevenge + ", pvpDmgMultiplier="
-				+ pvpDmgMultiplier + ", clanAvenged=" + clanAvenged + "]";
+				+ pvpDmgMultiplier + ", clanAvenged=" + clanAvenged
+				+ ", replayId=" + replayId + "]";
 	}
 
 }

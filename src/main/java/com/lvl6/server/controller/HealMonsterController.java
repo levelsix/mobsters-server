@@ -397,7 +397,7 @@ public class HealMonsterController extends EventController {
 							u, cashChange, oilChange, gemChange));
 
 			int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange,
-					gemChange);
+					gemChange, 0);
 			log.info(String.format("user after funds change. u=%s", u));
 			if (num != 1) {
 				String preface = "problem with updating user's funds.";

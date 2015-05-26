@@ -27,4 +27,8 @@ public class AcceptOrRejectClanInviteResponseEvent extends NormalResponseEvent<A
 		this.responseProto = responseProto;
 	}
 
+	public int eventSize() {
+		return acceptOrRejectClanInviteResponseProto.getSerializedSize();
+	}
+
 }

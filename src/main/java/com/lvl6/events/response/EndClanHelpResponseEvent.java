@@ -28,4 +28,8 @@ public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpRes
 		this.responseProto = responseProto;
 	}
 
+
+	public int eventSize() {
+		return endClanHelpResponseProto.getSerializedSize();
+	}
 }

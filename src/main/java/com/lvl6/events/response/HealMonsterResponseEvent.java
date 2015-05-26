@@ -27,5 +27,9 @@ public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterRes
 			HealMonsterResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return healMonsterResponseProto.getSerializedSize();
+	}
 
 }

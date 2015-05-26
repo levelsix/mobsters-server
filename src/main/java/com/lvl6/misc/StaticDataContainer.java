@@ -418,7 +418,7 @@ public class StaticDataContainer {
 		setBoards(sdpb);
 		setResearch(sdpb);
 		setBattleItem(sdpb);
-		setRewards(sdpb);
+//		setRewards(sdpb);
 //		setSales(sdpb);
 		setClanGifts(sdpb);
 
@@ -538,7 +538,7 @@ public class StaticDataContainer {
 			}
 
 			BoosterPackProto bpProto = createInfoProtoUtils
-					.createBoosterPackProto(bp, items, displayItems);
+					.createBoosterPackProto(bp, items, displayItems, rewardRetrieveUtils);
 			//do not put the starterPack into the BoosterPacks
 			if (bpackId == starterPackId) {
 				sdpb.setStarterPack(bpProto);
@@ -1141,7 +1141,7 @@ public class StaticDataContainer {
 //		}
 //	}
 
-
+/*
 	private void setRewards(Builder sdpb) {
 		Map<Integer, Reward> idsToReward = rewardRetrieveUtils
 				.getRewardIdsToRewards();
@@ -1160,7 +1160,7 @@ public class StaticDataContainer {
 			sdpb.addReward(rp);
 		}
 	}
-
+*/
 	private void setClanGifts(Builder sdpb) {
 		Map<Integer, ClanGift> idsToClanGift = clanGiftRetrieveUtils.getClanGiftIdsToClanGifts();
 

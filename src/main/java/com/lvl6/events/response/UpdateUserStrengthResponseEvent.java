@@ -31,5 +31,9 @@ public class UpdateUserStrengthResponseEvent extends NormalResponseEvent<UpdateU
 	public UpdateUserStrengthResponseProto getUpdateUserStrengthResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return updateUserStrengthResponseProto.getSerializedSize();
+	}
 
 }

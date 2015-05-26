@@ -14,18 +14,20 @@ public class SalesPackage implements Serializable {
     private Date timeStart;
     private Date timeEnd;
     private int succId;
+    private int priority;
     private int customMenuId;
     private String name;
     private String animatingIcon;
     private String slamIcon;
     private String titleColor;
+    
 
 	public SalesPackage() {
 		super();
 	}
 
 	public SalesPackage(int id, String productId, String name, int price, String uuid,
-			Date timeStart, Date timeEnd, int succId, int customMenuId,
+			Date timeStart, Date timeEnd, int succId, int priority, int customMenuId,
 			String animatingIcon, String slamIcon, String titleColor) {
 		super();
 		this.id = id;
@@ -36,6 +38,7 @@ public class SalesPackage implements Serializable {
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.succId = succId;
+		this.priority = priority;
 		this.customMenuId = customMenuId;
 		this.animatingIcon = animatingIcon;
 		this.slamIcon = slamIcon;
@@ -66,7 +69,7 @@ public class SalesPackage implements Serializable {
 		this.productId = productId;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
@@ -80,14 +83,14 @@ public class SalesPackage implements Serializable {
 	}
 
 	@Override
-    public String toString() {
-        return "SalesPackage [id=" + id + ", productId=" + productId
-                + ", price=" + price + ", uuid=" + uuid + ", timeStart="
-                + timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
-                + ", customMenuId=" + customMenuId + ", name=" + name
-                + ", animatingIcon=" + animatingIcon + ", slamIcon=" + slamIcon
-                + ", titleColor=" + titleColor + "]";
-    }
+	public String toString() {
+		return "SalesPackage [id=" + id + ", productId=" + productId
+				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
+				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+				+ ", priority=" + priority + ", customMenuId=" + customMenuId
+				+ ", name=" + name + ", animatingIcon=" + animatingIcon
+				+ ", slamIcon=" + slamIcon + ", titleColor=" + titleColor + "]";
+	}
 
 	public Date getTimeStart() {
 		return timeStart;
@@ -138,6 +141,14 @@ public class SalesPackage implements Serializable {
 
 	public void setSlamIcon(String slamIcon) {
 		this.slamIcon = slamIcon;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 
 

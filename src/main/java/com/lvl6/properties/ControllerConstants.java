@@ -33,6 +33,8 @@ public class ControllerConstants {
 
 	//BOOSTER_PACK
 	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
+	public static final int BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE = 10;
+	public static final int BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE = 11;
 
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 20
@@ -174,14 +176,26 @@ public class ControllerConstants {
 	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 50;
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
-			10000, 100000, 1000000, 2000000000 };
+			10000, 100000, 1000000, 3000000, 100000000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
-			720, 1440000 };
+			720, 2160, 72000 };
+	
+	// had to increase by 1 because of a bug on the client
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 502, 1001,
+		2501, 5001, 20001, 50001, 100001, 1000001 };
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS = { 1, 251, 450,
+		900, 1500, 5000, 12000, 24000, 240000 };
+
+
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
-			ResourceType.CASH.name(), ResourceType.OIL.name() };
+			ResourceType.CASH.name(), ResourceType.OIL.name(), ResourceType.GACHA_CREDITS.name() };
 
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
+
+	//REWARDS
+	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
+	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
@@ -211,6 +225,9 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
+
+	public static final int TANGO__INVITE_TANGO_FRIENDS_MAX_GEM_REWARD = 3;
+	public static final int TANGO__INVITE_TANGO_FRIENDS_MIN_GEM_REWARD = 1;
 
 	public static final String TRANSLATION_SETTINGS__DEFAULT_LANGUAGE = "ENGLISH";
 	public static final boolean TRANSLATION_SETTINGS__DEFAULT_TRANSLATION_ON = false;
@@ -244,6 +261,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_CASH = 2500;
 	public static final int TUTORIAL__INIT_OIL = 2500;
 	public static final int TUTORIAL__INIT_GEMS = 50;
+	public static final int TUTORIAL__GACHA_CREDITS = 100000;  //TODO: this value needs to be set
 	public static final int TUTORIAL__INIT_RANK = 100;
 	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2, 2, 2, 2, 2,
 			2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
@@ -289,6 +307,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
+	public static final String UCHRFC__TANGO_GIFT = "tango gift";
 	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
 
@@ -590,6 +609,7 @@ public class ControllerConstants {
 	"Happy birthday AoC! Buildings will make silver twice as fast all week long!" };
 
 	public static final int STARTUP__QUEST_ID_FOR_FIRST_LOSS_TUTORIAL = 326;
+	public static final String STARTUP__CREDITS_FILE_NAME = "FAQ.3.txt";
 	public static final String STARTUP__FAQ_FILE_NAME = "FAQ.3.txt";
 
 	public static final String NIB_NAME__LOCK_BOX = "LockBox.4";

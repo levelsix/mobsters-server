@@ -31,5 +31,9 @@ public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent<In
 	public InviteFbFriendsForSlotsResponseProto getInviteFbFriendsForSlotsResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return inviteFbFriendsForSlotsResponseProto.getSerializedSize();
+	}
 
 }

@@ -28,5 +28,9 @@ public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalRespons
 			ApproveOrRejectRequestToJoinClanResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return approveOrRejectRequestToJoinClanResponseProto.getSerializedSize();
+	}
 
 }

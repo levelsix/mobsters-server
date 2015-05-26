@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
-import com.lvl6.info.BoosterItem;
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -20,6 +20,8 @@ import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.GiftForTangoUser;
+import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
@@ -35,6 +37,7 @@ import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
+import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -151,9 +154,9 @@ public interface InsertUtil {
 	public abstract int insertIntoFirstTimeUsers(String openUdid, String udid,
 			String mac, String advertiserId, Timestamp now);
 
-	public abstract int insertIntoBoosterPackPurchaseHistory(String userId,
-			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
-			List<String> userMonsterIds);
+//	public abstract int insertIntoBoosterPackPurchaseHistory(String userId,
+//			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
+//			List<String> userMonsterIds);
 
 	public abstract String insertIntoPrivateChatPosts(String posterId,
 			String recipientId, String content, Timestamp timeOfPost, String contentLanguage);
@@ -342,7 +345,17 @@ public interface InsertUtil {
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
 			List<PrivateChatPost> listOfPrivateChatPosts,
 			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
+	
+	public abstract boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
+			Collection<Reward> listOfRewards, String reasonForReward);
+	
 
 	public abstract boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
 			String gifterUserId, int clanGiftId, String reasonForGift);
+
+	public abstract boolean insertGiftForUser(Collection<GiftForUser> giftForUsers);
+
+	public abstract boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers);
+
+	public abstract int insertBattleReplayForUser(BattleReplayForUser brfu);
 }

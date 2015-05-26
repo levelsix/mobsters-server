@@ -6,7 +6,10 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +43,10 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -53,11 +58,13 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
+import com.lvl6.server.controller.actionobjects.InAppPurchaseMultiSpinAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
-import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -66,8 +73,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class InAppPurchaseController extends EventController {
 
-    private static Logger log = LoggerFactory.getLogger(new Object() {
-    }.getClass().getEnclosingClass());
+    
+	private static final Logger log = LoggerFactory.getLogger(InAppPurchaseController.class);
 
     private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
     private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
@@ -91,7 +98,13 @@ public class InAppPurchaseController extends EventController {
     protected UpdateUtil updateUtil;
 
     @Autowired
+    protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+    @Autowired
     protected UserRetrieveUtils2 userRetrieveUtil;
+
+    @Autowired
+    protected UserClanRetrieveUtils2 userClanRetrieveUtil;
 
     @Autowired
     protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
@@ -128,15 +141,18 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+    
+    @Autowired
+    protected TimeUtils timeUtils;
 
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtils;
-
+    
     @Autowired
-    protected UserRetrieveUtils2 userRetrieveUtils;
+    protected HistoryUtils historyUtils;
 
 
     public InAppPurchaseController() {
@@ -339,9 +355,12 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseAction iapa = null;
             InAppPurchaseSalesAction iapsa = null;
             InAppPurchaseMoneyTreeAction iapmta = null;
+            InAppPurchaseMultiSpinAction iapmsa = null;
             boolean isMoneyTree = false;
             boolean isSalesPack = false;
-
+            boolean isGachaMultiSpin = false;
+            boolean isBuyingGems = false;
+            
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
                 iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
@@ -355,14 +374,22 @@ public class InAppPurchaseController extends EventController {
                 isSalesPack = true;
                 iapsa = new InAppPurchaseSalesAction(userId,
                         user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
+                        clanGiftRewardsRetrieveUtils,
                         itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
                         createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
                         salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
-                        salesPackage, inAppPurchaseUtils, rewardRetrieveUtils, userRetrieveUtils);
+                        salesPackage, inAppPurchaseUtils, rewardRetrieveUtils,
+                        userClanRetrieveUtil, userRetrieveUtil);
 
                 iapsa.execute(resBuilder);
             }
+            else if(IAPValues.packageIsGachaMultiSpin(packageName)) {
+            	isGachaMultiSpin = true;
+            	iapmsa = new InAppPurchaseMultiSpinAction(userId, receiptFromApple, insertUtil, historyUtils);
+            	iapmsa.execute(resBuilder);
+            }
             else {
+            	isBuyingGems = true;
                 iapa = new InAppPurchaseAction(userId, user, receiptFromApple, packageName, now,
                         uuid, iapHistoryRetrieveUtil, insertUtil, updateUtil, createInfoProtoUtils,
                         miscMethods, inAppPurchaseUtils);
@@ -378,18 +405,24 @@ public class InAppPurchaseController extends EventController {
                         "successful in-app purchase from user {} for package {}",
                         userId, packageName);
 
+                log.info("isSalesPack: ", isSalesPack);
 				Timestamp date = new Timestamp(now.getTime());
 
 				if(isMoneyTree) {
 					writeToUserCurrencyHistory(userId, date, null, iapmta, null);
 				}
 				else if(isSalesPack) {
+					log.info("got here1");
 					setNewAndPurchasedSalesPackage(resBuilder, iapsa, iapsa.getUser());
-					createRewardProto(resBuilder, iapsa);
+					log.info("got here2");
+					createRewardProto(resBuilder, iapsa, null);
 					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
-				else {
+				else if(isBuyingGems){
 					writeToUserCurrencyHistory(userId, date, iapa, null, null);
+				}
+				else {
+					createRewardProto(resBuilder, null, iapmsa);
 				}
 			}
 		} catch (Exception e) {
@@ -418,22 +451,43 @@ public class InAppPurchaseController extends EventController {
     public void setNewAndPurchasedSalesPackage(InAppPurchaseResponseProto.Builder resBuilder,
             InAppPurchaseSalesAction iapsa, User user) {
 
-        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
+//        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
+        Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+        
+        //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
 
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
         }
         else {
-            successorSalesPackage = salesPackageRetrieveUtils.
-                    getSalesPackageForSalesPackageId(salesPackage.getSuccId());
+            successorSalesPackage = salesPackagesMap.get(salesPackage.getSuccId());
 
-            if(jumpTwoTiers) {
-                if(successorSalesPackage.getSuccId() != 0) {
-                    successorSalesPackage = salesPackageRetrieveUtils.
-                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
-                }
-            }
+//            if(jumpTwoTiers) {
+//                if(successorSalesPackage.getSuccId() != 0) {
+//                    successorSalesPackage = salesPackageRetrieveUtils.
+//                            getSalesPackageForSalesPackageId(successorSalesPackage.getSuccId());
+//                }
+//            }
+        }
+        Date now = new Date();
+        
+        if(iapsa.isStarterPack() || iapsa.isBuilderPack()) {
+        	List<SalesPackage> tenDollarPacks = new ArrayList<SalesPackage>();
+        	for(Integer id : salesPackagesMap.keySet()) {
+        		SalesPackage sp = salesPackagesMap.get(id);
+        		if(sp.getPrice() == 10 && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+        			tenDollarPacks.add(sp);
+        		}
+        	}
+        	Collections.sort(tenDollarPacks, new Comparator<SalesPackage>() {
+    			@Override
+    			public int compare(SalesPackage sp1, SalesPackage sp2) {
+    				return sp2.getPriority() - sp1.getPriority();
+    			}
+    		});
+        	successorSalesPackage = tenDollarPacks.get(0);
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
@@ -441,47 +495,75 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
-		log.info("prespp: " + preSpp);
+//		log.info("prespp: " + preSpp);
 
-		Object[] objArray = new Object[2];
-		objArray[0] = "COOPER";
-		objArray[1] = "ALEX";
-
-		Float[] floatArray = new Float[2];
-		floatArray[0] = (float)0.5;
-		floatArray[1] = (float)0.5;
-
-		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
-
-		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
-			if(!iapsa.isStarterPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
+		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
 		}
 		else {
-			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
-				resBuilder.setSuccessorSalesPackage(preSpp);
-			}
+			resBuilder.setSuccessorSalesPackage(preSpp);
 		}
+
+		//commented out below code bc beginner sales also have succ id now
+
+//		Object[] objArray = new Object[2];
+//		objArray[0] = "COOPER";
+//		objArray[1] = "ALEX";
+//
+//		Float[] floatArray = new Float[2];
+//		floatArray[0] = (float)0.5;
+//		floatArray[1] = (float)0.5;
+//
+//		UserSegmentationGroupAction usga = new UserSegmentationGroupAction(objArray, floatArray, user.getId(), user);
+//
+//		if(usga.returnAppropriateObjectGroup().equals("COOPER")) {
+//			if(!iapsa.isStarterPack()) {
+//				resBuilder.setSuccessorSalesPackage(preSpp);
+//			}
+//		}
+//		else {
+//			if(!iapsa.isStarterPack() && !iapsa.isBuilderPack()) {
+//				resBuilder.setSuccessorSalesPackage(preSpp);
+//			}
+//		}
 
 	}
 
     public void createRewardProto(InAppPurchaseResponseProto.Builder resBuilder,
-            InAppPurchaseSalesAction iapsa) {
-        Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
-        Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
-        int gemsGained = iapsa.getAra().getGemsGained();
-        int cashGained = iapsa.getAra().getCashGained();
-        int oilGained = iapsa.getAra().getOilGained();
+            InAppPurchaseSalesAction iapsa, InAppPurchaseMultiSpinAction iapmsa) {
+    	UserRewardProto urp = null;
+    	if(iapsa != null) {
+    		Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+    		log.info("LIST OF ITEMS: {}", nuOrUpdatedItems);
+    		Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
+    		int gemsGained = iapsa.getAra().getGemsGained();
+    		int cashGained = iapsa.getAra().getCashGained();
+    		int oilGained = iapsa.getAra().getOilGained();
+    		int gachaCreditsGained = iapsa.getAra().getGachaCreditsGained();
 
-        //TODO: protofy the rewards
-        ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
-        MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
-        UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
-        
-        UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-                nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, ucgp);
-        log.info("proto for reward: " + urp);
+    		//TODO: protofy the rewards
+    		UserClanGiftProto ucgp = null;
+    		if(iapsa.getAra().getAcga() != null) {
+    			ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
+    			MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
+    			ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
+    		}
+
+    		urp = createInfoProtoUtils.createUserRewardProto(
+    				nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
+    				gachaCreditsGained, ucgp);
+    		//        log.info("proto for reward: " + urp);
+    	}
+    	else if(iapmsa != null) {
+    		ItemForUser ifu = new ItemForUser(); //mixing old objects with new...so gross
+    		ifu.setItemId(iapmsa.getIfuPojo().getItemId());
+    		ifu.setQuantity(iapmsa.getIfuPojo().getQuantity());
+    		ifu.setUserId(iapmsa.getIfuPojo().getUserId());
+    		List<ItemForUser> ifuList = new ArrayList<ItemForUser>();
+    		ifuList.add(ifu);
+    		urp = createInfoProtoUtils.createUserRewardProto(
+    				ifuList, null, 0, 0, 0, 0, null);
+    	}
         resBuilder.setRewards(urp);
 
     }

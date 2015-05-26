@@ -3,7 +3,6 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,25 +12,28 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ItemForUser;
-import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
-import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.StringUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class PurchaseBoosterPackAction {
@@ -44,6 +46,8 @@ public class PurchaseBoosterPackAction {
 	private Timestamp clientTime;
 	private boolean freeBoosterPack;
 	private TimeUtils timeUtil;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private BoosterPackRetrieveUtils boosterPackRetrieveUtils;
 	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
@@ -53,17 +57,33 @@ public class PurchaseBoosterPackAction {
 	private MiscMethods miscMethods;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private MonsterRetrieveUtils monsterRetrieveUtils;
+	private boolean buyingInBulk;
+	private RewardRetrieveUtils rewardRetrieveUtils;
+	private InsertUtil insertUtil;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private BoosterItemUtils boosterItemUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
+	private int gemsSpent;
+	private int gachaCreditsChange;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
-			TimeUtils timeUtil, UserRetrieveUtils2 userRetrieveUtil,
+			TimeUtils timeUtil,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			UserRetrieveUtils2 userRetrieveUtil,
 			BoosterPackRetrieveUtils boosterPackRetrieveUtils,
 			BoosterItemRetrieveUtils boosterItemRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			UpdateUtil updateUtil, MiscMethods miscMethods,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			MonsterRetrieveUtils monsterRetrieveUtils) {
+			MonsterRetrieveUtils monsterRetrieveUtils,
+			boolean buyingInBulk, RewardRetrieveUtils rewardRetrieveUtils,
+			InsertUtil insertUtil,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
+			BoosterItemUtils boosterItemUtils, int gemsSpent,
+			int gachaCreditsChange, CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -71,6 +91,8 @@ public class PurchaseBoosterPackAction {
 		this.now = now;
 		this.freeBoosterPack = freeBoosterPack;
 		this.timeUtil = timeUtil;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
 		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
@@ -80,6 +102,14 @@ public class PurchaseBoosterPackAction {
 		this.miscMethods = miscMethods;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 		this.monsterRetrieveUtils = monsterRetrieveUtils;
+		this.buyingInBulk = buyingInBulk;
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.insertUtil = insertUtil;
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
+		this.boosterItemUtils = boosterItemUtils;
+		this.gemsSpent = gemsSpent;
+		this.gachaCreditsChange = gachaCreditsChange;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -100,19 +130,16 @@ public class PurchaseBoosterPackAction {
 	private BoosterPack aPack;
 	private boolean riggedPack;
 	private int boosterPackIdPurchased;
-	private int gemPrice;
+	private int gachaCreditsPrice;
 	private Map<Integer, BoosterItem> boosterItemIdsToBoosterItems;
-	private int userGems;
+	private int userGachaCredits;
 	private List<BoosterItem> itemsUserReceives;
+	private List<Reward> listOfRewards;
 	private List<ItemForUser> ifuList;
+	private AwardRewardAction ara;
 
 	private int gemReward;
-	private int gemChange;
-	private Map<String, Integer> currencyDeltas;
-	private Map<String, Integer> prevCurrencies;
-	private Map<String, Integer> curCurrencies;
-	private Map<String, String> reasonsForChanges;
-	private Map<String, String> details;
+	private int gachaCreditsReward;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
@@ -141,22 +168,29 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
-
-		return true;
-	}
-
-	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
 			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
+
 		boolean legitPack = verifyBoosterPack(resBuilder, boosterPackId);
 		if (!legitPack) {
 			return false;
 		}
 
+		if (boosterPackIdPurchased > 0) {
+			legitPack = verifyBoosterPack(resBuilder, boosterPackIdPurchased);
+		}
+
+		if (!legitPack) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean verifySemantics(Builder resBuilder) {
 		boosterPackIdPurchased = 0;
 		String type = aPack.getType();
 
@@ -173,14 +207,6 @@ public class PurchaseBoosterPackAction {
 			boosterPackIdPurchased = boosterPackId;
 		}
 
-		if (boosterPackIdPurchased > 0) {
-			legitPack = verifyBoosterPack(resBuilder, boosterPackIdPurchased);
-		}
-
-		if (!legitPack) {
-			return false;
-		}
-
 		boosterItemIdsToBoosterItems = boosterItemRetrieveUtils
 				.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackIdPurchased);
 
@@ -191,14 +217,16 @@ public class PurchaseBoosterPackAction {
 			return false;
 		}
 
-		userGems = user.getGems();
+		userGachaCredits = user.getGachaCredits();
 
 		//check if user can afford to buy however many more user wants to buy
 		if (!freeBoosterPack) {
-			if (userGems < gemPrice) {
-				resBuilder
-						.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GEMS);
-				return false;
+			if(gemsSpent == 0) {
+				if (userGachaCredits < gachaCreditsPrice) {
+					resBuilder
+					.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
+					return false;
+				}
 			}
 		} else {
 			boolean legitFree = verifyFreeBoosterPack(resBuilder);
@@ -207,6 +235,13 @@ public class PurchaseBoosterPackAction {
 			}
 		}
 
+		if(gemsSpent != 0) {
+			int userGems = user.getGems();
+			if(userGems < gemsSpent) {
+				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -219,7 +254,11 @@ public class PurchaseBoosterPackAction {
 			return false;
 		}
 
-		gemPrice = aPack.getGemPrice();
+		gachaCreditsPrice = aPack.getGachaCreditsPrice();
+
+		if(buyingInBulk) {
+			gachaCreditsPrice = gachaCreditsPrice * ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE;
+		}
 		return true;
 	}
 
@@ -249,136 +288,75 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		prevCurrencies = new HashMap<String, Integer>();
+		selectBoosterItems();
 
-		if (!freeBoosterPack) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
-		}
-
-		int numBoosterItemsUserWants = 1;
-		itemsUserReceives = miscMethods.determineBoosterItemsUserReceives(
-				numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
-
-		boolean legit = BoosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils);
+		boolean legit = boosterItemUtils.checkIfMonstersExist(itemsUserReceives, monsterRetrieveUtils,
+				rewardRetrieveUtils);
 
 		if (!legit) {
 			log.error("illegal to verify booster items, {}", itemsUserReceives);
 			return false;
 		}
 
+		processBoosterPacksPurchased();
+
 		updateUserCurrency();
 
-		prepCurrencyHistory();
-
-		String preface = "SPENT MONEY(?) ON BOOSTER PACK:";
-		log.info(
-				"{} free={}, bPackId={}, gemPrice={}, gemReward={}, itemsUserReceives={}",
-				new Object[] { preface, freeBoosterPack,
-						boosterPackIdPurchased, gemPrice, gemReward,
-						itemsUserReceives });
-
-		//TODO: Many places have copies of this logic: Consolidate them
-		//award monsters and items
-		Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
-		//sop = source of pieces
-		String mfusop = BoosterItemUtils.createUpdateUserMonsterArguments(userId,
-				boosterPackIdPurchased, itemsUserReceives,
-				monsterIdToNumPieces, completeUserMonsters, now, monsterLevelInfoRetrieveUtils,
-				monsterRetrieveUtils, monsterStuffUtils);
-
-		log.info("!!!!!!!!!mfusop={}", mfusop);
-
-		//TODO: Set the monsters in the Controller
-		//this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
-		if (!completeUserMonsters.isEmpty()) {
-			List<String> monsterForUserIds = InsertUtils.get()
-					.insertIntoMonsterForUserReturnIds(userId,
-							completeUserMonsters, mfusop, now);
-			List<FullUserMonsterProto> newOrUpdated = miscMethods
-					.createFullUserMonsterProtos(monsterForUserIds,
-							completeUserMonsters);
-
-			preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
-			log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",
-					new Object[] { preface, newOrUpdated,
-							boosterPackIdPurchased });
-			//set the builder that will be sent to the client
-			resBuilder.addAllUpdatedOrNew(newOrUpdated);
-		}
-
-		//this is if the user did not buy a complete monster, UPDATE DB
-		if (!monsterIdToNumPieces.isEmpty()) {
-			//assume things just work while updating user monsters
-			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
-					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now, monsterLevelInfoRetrieveUtils);
-
-			preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
-			log.info("{} monster(s) newOrUpdated: {} \t bpackId={}",
-					new Object[] { preface, newOrUpdated,
-							boosterPackIdPurchased });
-			//set the builder that will be sent to the client
-			resBuilder.addAllUpdatedOrNew(newOrUpdated);
-		}
-
-		ifuList = BoosterItemUtils.awardBoosterItemItemRewards(userId, itemsUserReceives,
-				itemForUserRetrieveUtil, updateUtil);
 		return true;
 	}
 
-	private void updateUserCurrency() {
-		gemReward = BoosterItemUtils.determineGemReward(itemsUserReceives);
-
-		gemChange = -1 * gemPrice;
-		if (freeBoosterPack) {
-			gemChange = 0;
+	public void selectBoosterItems() {
+		int numBoosterItemsUserWants = 1;
+		if(buyingInBulk) {
+			numBoosterItemsUserWants = ControllerConstants.BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE;
 		}
-		gemChange += gemReward;
+
+		log.info("numBoosterItemsUserWants: " + numBoosterItemsUserWants);
+		itemsUserReceives = boosterItemUtils.determineBoosterItemsUserReceives(
+				numBoosterItemsUserWants, boosterItemIdsToBoosterItems, serverToggleRetrieveUtils);
+
+	}
+
+	public void processBoosterPacksPurchased() {
+
+		Map<Integer, Reward> idsToRewards = rewardRetrieveUtils.getRewardIdsToRewards();
+
+		listOfRewards = new ArrayList<Reward>();
+		for(BoosterItem bi : itemsUserReceives) {
+			Reward r = idsToRewards.get(bi.getRewardId());
+			listOfRewards.add(r);
+		}
+
+		ara = new AwardRewardAction(userId, user, 0, 0, now,
+				"booster packs id " + aPack.getId(), listOfRewards,
+				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil,
+				updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				userClanRetrieveUtils, createInfoProtoUtils);
+
+		ara.execute();
+
+	}
+
+	//TODO: allow multiple free packs?
+	private void updateUserCurrency() {
+		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
+		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
+
+		if (freeBoosterPack) {
+			gachaCreditsChange = 0;
+		}
+		gachaCreditsChange += gachaCreditsReward;
+
+		int gemChange = (-1 * gemsSpent) + gemReward;
 
 		//update user's flag concerning whether or not he's bought a rigged pack
 		//update user's last free booster pack time
-		boolean updated = user.updateBoughtBoosterPack(gemChange, now,
+		boolean updated = user.updateBoughtBoosterPack(gemChange, gachaCreditsChange, now,
 				freeBoosterPack, riggedPack);
 		log.info("updated, user bought boosterPack? {}", updated);
 	}
 
-	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
-
-		currencyDeltas = new HashMap<String, Integer>();
-		curCurrencies = new HashMap<String, Integer>();
-		reasonsForChanges = new HashMap<String, String>();
-		StringBuilder detailSb = new StringBuilder();
-
-		if (0 != gemChange) {
-			currencyDeltas.put(gems, gemChange);
-			curCurrencies.put(gems, user.getGems());
-			reasonsForChanges.put(gems,
-					ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK);
-			detailSb.append(" gemPrice=");
-			detailSb.append(gemPrice);
-			detailSb.append(" gemReward=");
-			detailSb.append(gemReward);
-		}
-
-		details = new HashMap<String, String>();
-		List<Integer> itemIds = new ArrayList<Integer>();
-		if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
-
-			for (BoosterItem item : itemsUserReceives) {
-				int id = item.getId();
-				itemIds.add(id);
-			}
-
-			detailSb.append(" bItemIds=");
-			String itemIdsCsv = StringUtils.csvList(itemIds);
-			detailSb.append(itemIdsCsv);
-		}
-		if (gemReward > 0) {
-		}
-		details.put(gems, detailSb.toString());
-	}
 
 	public User getUser() {
 		return user;
@@ -392,23 +370,237 @@ public class PurchaseBoosterPackAction {
 		return ifuList;
 	}
 
-	public Map<String, Integer> getCurrencyDeltas() {
-		return currencyDeltas;
+	public String getUserId() {
+		return userId;
 	}
 
-	public Map<String, Integer> getPreviousCurrencies() {
-		return prevCurrencies;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public Map<String, Integer> getCurrentCurrencies() {
-		return curCurrencies;
+	public int getBoosterPackId() {
+		return boosterPackId;
 	}
 
-	public Map<String, String> getReasons() {
-		return reasonsForChanges;
+	public void setBoosterPackId(int boosterPackId) {
+		this.boosterPackId = boosterPackId;
 	}
 
-	public Map<String, String> getDetails() {
-		return details;
+	public Date getNow() {
+		return now;
 	}
+
+	public void setNow(Date now) {
+		this.now = now;
+	}
+
+	public Timestamp getClientTime() {
+		return clientTime;
+	}
+
+	public void setClientTime(Timestamp clientTime) {
+		this.clientTime = clientTime;
+	}
+
+	public boolean isFreeBoosterPack() {
+		return freeBoosterPack;
+	}
+
+	public void setFreeBoosterPack(boolean freeBoosterPack) {
+		this.freeBoosterPack = freeBoosterPack;
+	}
+
+	public TimeUtils getTimeUtil() {
+		return timeUtil;
+	}
+
+	public void setTimeUtil(TimeUtils timeUtil) {
+		this.timeUtil = timeUtil;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public BoosterPackRetrieveUtils getBoosterPackRetrieveUtils() {
+		return boosterPackRetrieveUtils;
+	}
+
+	public void setBoosterPackRetrieveUtils(
+			BoosterPackRetrieveUtils boosterPackRetrieveUtils) {
+		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
+	}
+
+	public BoosterItemRetrieveUtils getBoosterItemRetrieveUtils() {
+		return boosterItemRetrieveUtils;
+	}
+
+	public void setBoosterItemRetrieveUtils(
+			BoosterItemRetrieveUtils boosterItemRetrieveUtils) {
+		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil(
+			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
+	public void setUpdateUtil(UpdateUtil updateUtil) {
+		this.updateUtil = updateUtil;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+	}
+
+	public MonsterRetrieveUtils getMonsterRetrieveUtils() {
+		return monsterRetrieveUtils;
+	}
+
+	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
+		this.monsterRetrieveUtils = monsterRetrieveUtils;
+	}
+
+	public boolean isBuyingInBulk() {
+		return buyingInBulk;
+	}
+
+	public void setBuyingInBulk(boolean buyingInBulk) {
+		this.buyingInBulk = buyingInBulk;
+	}
+
+	public RewardRetrieveUtils getRewardRetrieveUtils() {
+		return rewardRetrieveUtils;
+	}
+
+	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+	}
+
+	public InsertUtil getInsertUtil() {
+		return insertUtil;
+	}
+
+	public void setInsertUtil(InsertUtil insertUtil) {
+		this.insertUtil = insertUtil;
+	}
+
+	public BoosterPack getaPack() {
+		return aPack;
+	}
+
+	public void setaPack(BoosterPack aPack) {
+		this.aPack = aPack;
+	}
+
+	public boolean isRiggedPack() {
+		return riggedPack;
+	}
+
+	public void setRiggedPack(boolean riggedPack) {
+		this.riggedPack = riggedPack;
+	}
+
+	public int getBoosterPackIdPurchased() {
+		return boosterPackIdPurchased;
+	}
+
+	public void setBoosterPackIdPurchased(int boosterPackIdPurchased) {
+		this.boosterPackIdPurchased = boosterPackIdPurchased;
+	}
+
+	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
+		return boosterItemIdsToBoosterItems;
+	}
+
+	public void setBoosterItemIdsToBoosterItems(
+			Map<Integer, BoosterItem> boosterItemIdsToBoosterItems) {
+		this.boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItems;
+	}
+
+	public List<Reward> getListOfRewards() {
+		return listOfRewards;
+	}
+
+	public void setListOfRewards(List<Reward> listOfRewards) {
+		this.listOfRewards = listOfRewards;
+	}
+
+	public AwardRewardAction getAra() {
+		return ara;
+	}
+
+	public void setAra(AwardRewardAction ara) {
+		this.ara = ara;
+	}
+
+	public int getGemReward() {
+		return gemReward;
+	}
+
+	public void setGemReward(int gemReward) {
+		this.gemReward = gemReward;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setItemsUserReceives(List<BoosterItem> itemsUserReceives) {
+		this.itemsUserReceives = itemsUserReceives;
+	}
+
+	public void setIfuList(List<ItemForUser> ifuList) {
+		this.ifuList = ifuList;
+	}
+
+	public int getGachaCreditsChange() {
+		return gachaCreditsChange;
+	}
+
+	public void setGachaCreditsChange(int gachaCreditsChange) {
+		this.gachaCreditsChange = gachaCreditsChange;
+	}
+
+	public int getGachaCreditsReward() {
+		return gachaCreditsReward;
+	}
+
+	public void setGachaCreditsReward(int gachaCreditsReward) {
+		this.gachaCreditsReward = gachaCreditsReward;
+	}
+
 }

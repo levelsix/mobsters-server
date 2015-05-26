@@ -47,6 +47,7 @@ import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
@@ -129,6 +130,7 @@ public class MiscMethods {
 	public static final String cash = "cash";
 	public static final String gems = "gems";
 	public static final String oil = "oil";
+	public static final String gachaCredits = "gachaCredits";
 	public static final String boosterPackId = "boosterPackId";
 
 	private static String pClientId = "ToonSquad";
@@ -147,77 +149,7 @@ public class MiscMethods {
 
 	//METHODS FOR PICKING A BOOSTER PACK
 
-	//no arguments are modified
-	public List<BoosterItem> determineBoosterItemsUserReceives(
-			int amountUserWantsToPurchase,
-			Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
-		//return value
-		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 
-		Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId
-				.values();
-		List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
-		float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId
-				.values());
-
-		//selecting items at random with replacement
-		for (int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-			BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
-			if (null == bi) {
-				continue;
-			}
-			itemsUserReceives.add(bi);
-		}
-
-		return itemsUserReceives;
-	}
-
-	private float sumProbabilities(Collection<BoosterItem> boosterItems) {
-		float sumOfProbabilities = 0.0f;
-		for (BoosterItem bi : boosterItems) {
-			sumOfProbabilities += bi.getChanceToAppear();
-		}
-		return sumOfProbabilities;
-	}
-
-	private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
-			float sumOfProbabilities) {
-		Random rand = new Random();
-		float unnormalizedProbabilitySoFar = 0f;
-		float randFloat = rand.nextFloat();
-
-		boolean logBoosterItemDetails = serverToggleRetrieveUtils
-				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS);
-		if (logBoosterItemDetails) {
-			log.info(
-					"selecting booster item. sumOfProbabilities={} \t randFloat={}",
-					sumOfProbabilities, randFloat);
-		}
-
-		int size = itemsList.size();
-		//for each item, normalize before seeing if it is selected
-		for (int i = 0; i < size; i++) {
-			BoosterItem item = itemsList.get(i);
-
-			//normalize probability
-			unnormalizedProbabilitySoFar += item.getChanceToAppear();
-			float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar
-					/ sumOfProbabilities;
-
-			if (logBoosterItemDetails) {
-				log.info("boosterItem={} \t normalizedProbabilitySoFar={}",
-						item, normalizedProbabilitySoFar);
-			}
-
-			if (randFloat < normalizedProbabilitySoFar) {
-				//we have a winner! current boosterItem is what the user gets
-				return item;
-			}
-		}
-
-		log.error("maybe no boosterItems exist. boosterItems={}", itemsList);
-		return null;
-	}
 
 	//purpose of this method is to discover if the booster items that contain
 	//monsters as rewards, if the monster ids are valid
@@ -463,6 +395,7 @@ public class MiscMethods {
 		tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
 		tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
 		tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+		tcb.setGachaCreditsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
 
 		//    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
 
@@ -561,6 +494,7 @@ public class MiscMethods {
 		//SET TOURNAMENT CONSTANTS HERE
 
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
+		cb.setFaqFileName(ControllerConstants.STARTUP__CREDITS_FILE_NAME);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
 
 		User adminChatUser = startupStuffRetrieveUtils.getAdminChatUser();
@@ -686,7 +620,16 @@ public class MiscMethods {
 
 		}
 
+		BoosterPackConstantsProto.Builder bpcpb = BoosterPackConstantsProto.newBuilder();
+		bpcpb.setPurchaseAmountRequired(ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE);
+		bpcpb.setNumberOfPacksGiven(ControllerConstants.BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE);
+
+		cb.setBoosterPackConstantProto(bpcpb.build());
+
 		cb.setTaskIdForUpgradeTutorial(ControllerConstants.STARTUP__TASK_ID_FOR_UPGRADE_TUTORIAL);
+
+		cb.setTangoMaxGemReward(ControllerConstants.TANGO__INVITE_TANGO_FRIENDS_MAX_GEM_REWARD);
+		cb.setTangoMinGemReward(ControllerConstants.TANGO__INVITE_TANGO_FRIENDS_MIN_GEM_REWARD);
 
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
@@ -800,8 +743,16 @@ public class MiscMethods {
 
 			//list of protos
 			for (int index = 0; index < i; index++) {
-				int numGems = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS[index];
-				int resourceAmt = ControllerConstants.RESOURCE_CONVERSION__RESOURCE_AMOUNT[index];
+				int numGems = 0;
+				int resourceAmt = 0;
+				if (type.equalsIgnoreCase(ResourceType.GACHA_CREDITS.name())) {
+					resourceAmt = ControllerConstants.RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT[index];
+					numGems = ControllerConstants.RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS[index];
+				}
+				else {
+					resourceAmt = ControllerConstants.RESOURCE_CONVERSION__RESOURCE_AMOUNT[index];
+					numGems = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS[index];
+				}
 
 				ResourceConversionConstantProto.Builder rccpb = ResourceConversionConstantProto
 						.newBuilder();
@@ -1769,7 +1720,7 @@ public class MiscMethods {
 		Translate.setClientId(pClientId);
 		Translate.setClientSecret(secretId);
 		String[] returnArray = null;
-		
+
 		try {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
@@ -1778,8 +1729,8 @@ public class MiscMethods {
 		}
 		return returnArray;
 	}
-	
-	
+
+
 	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
 		Translate.setClientId(pClientId);
@@ -1795,7 +1746,7 @@ public class MiscMethods {
 		listOfLanguages.add(Language.GERMAN);
 		listOfLanguages.add(Language.SPANISH);
 		listOfLanguages.add(Language.RUSSIAN);
-		
+
 		try {
 			if(recipientLanguage != null) {
 				if(sourceLanguage == null) {
@@ -1816,12 +1767,8 @@ public class MiscMethods {
 						}
 					}
 					else {
-						if(sourceLanguage == null) {
-							translatedText = Translate.execute(text, language2);
-						}
-						else translatedText = Translate.execute(text, sourceLanguage, language2);
-						TranslateLanguages tl = convertFromLanguageToEnum(language2);
-						returnMap.put(tl, translatedText);
+						translatedText = Translate.execute(text, language2);
+
 					}
 				}
 			}
@@ -1831,8 +1778,8 @@ public class MiscMethods {
 		}
 		return returnMap;
 	}
-	
-	
+
+
 
 	public Map<TranslateLanguages, String> translateForGlobal(Language sourceLanguage, String text) {
 		Translate.setClientId(pClientId);

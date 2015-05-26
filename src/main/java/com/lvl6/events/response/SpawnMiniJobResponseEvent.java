@@ -27,5 +27,9 @@ public class SpawnMiniJobResponseEvent extends NormalResponseEvent<SpawnMiniJobR
 			SpawnMiniJobResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return spawnMiniJobResponseProto.getSerializedSize();
+	}
 
 }

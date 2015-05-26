@@ -1,0 +1,84 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "Chat.proto";
+import "Reward.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventRewardProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+message SendTangoGiftRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
+	repeated string tangoUserIds = 3;
+	
+	optional string senderTangoUserId = 4; 	
+	optional int32 gemReward = 5;
+	
+}
+																						//DONE
+message SendTangoGiftResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional SendTangoGiftStatus status = 2;
+     repeated string tangoUserIdsNotInToonSquad = 3;
+     repeated string tangoUserIdsInToonSquad = 4;
+     
+     //ReceivedGiftResponseProto is sent to the users tied to tangoUserIds
+     
+     enum SendTangoGiftStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+message ReceivedGiftResponseProto {
+	optional MinimumUserProto sender = 1;  //person who gave out the gift to everyone
+	optional ChatScope scope = 2 [default = PRIVATE];
+	repeated UserGiftProto userGifts = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message DeleteGiftRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserGiftProto expiredGifts = 2;
+}
+
+message DeleteGiftResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional DeleteGiftStatus status = 2;
+	
+	enum DeleteGiftStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message CollectGiftRequestProto {                         
+     optional MinimumUserProtoWithMaxResources sender = 1;
+     optional int64 clientTime = 2;
+     
+     //id in UserGiftProto
+     repeated string ugUuids = 3;
+}
+
+																						//DONE
+message CollectGiftResponseProto {
+     optional MinimumUserProtoWithMaxResources sender = 1;
+     optional UserRewardProto reward = 2;
+     
+     optional CollectGiftStatus status = 3;    
+     
+     enum CollectGiftStatus {
+          SUCCESS = 1;
+          FAIL_OTHER = 2;
+     }
+}

@@ -25,7 +25,9 @@ import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
@@ -48,10 +50,16 @@ public class CollectClanGiftsController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+
+	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
 	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
+
+	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
@@ -94,6 +102,7 @@ public class CollectClanGiftsController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CollectClanGiftsRequestProto reqProto = ((CollectClanGiftsRequestEvent) event)
 				.getCollectClanGiftsRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -133,9 +142,13 @@ public class CollectClanGiftsController extends EventController {
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			CollectClanGiftsAction uusa = new CollectClanGiftsAction(userId, userRetrieveUtils,
-					clanGiftForUserRetrieveUtils, rewardRetrieveUtils, itemForUserRetrieveUtil,
-					monsterStuffUtils, monsterLevelInfoRetrieveUtils, insertUtil, updateUtil,
+			CollectClanGiftsAction uusa = new CollectClanGiftsAction(
+					userId, userClanRetrieveUtils, userRetrieveUtils,
+					clanGiftForUserRetrieveUtils,
+					clanGiftRewardsRetrieveUtils,
+					rewardRetrieveUtils, itemForUserRetrieveUtil,
+					monsterStuffUtils, monsterLevelInfoRetrieveUtils,
+					insertUtil, updateUtil,
 					deleteUtil, listOfClanGIfts, createInfoProtoUtils);
 
 			uusa.execute(resBuilder);
@@ -149,7 +162,7 @@ public class CollectClanGiftsController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				
+
 				log.info("reward proto for collect: " + uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead

@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 
 //@Component
 
@@ -60,7 +61,7 @@ public class StartupControllerOld {//extends EventController {
 
 	@Autowired
 	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected InAppPurchaseUtils inAppPurchaseUtils;
 
@@ -209,6 +210,12 @@ public class StartupControllerOld {//extends EventController {
 	protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
 
 	@Autowired
+	protected GiftForUserRetrieveUtils giftForUserRetrieveUtil;
+
+	@Autowired
+	protected GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil;
+
+	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	@Autowired
@@ -244,6 +251,14 @@ public class StartupControllerOld {//extends EventController {
     @Autowired
     protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
 
+    @Autowired
+    protected RewardRetrieveUtils rewardRetrieveUtil;
+
+    @Autowired
+    protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
+
+    @Autowired
+    protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
 
 	public StartupControllerOld() {
 		
@@ -265,8 +280,8 @@ public class StartupControllerOld {//extends EventController {
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event)
 				.getStartupRequestProto();
-		log.info(String.format("Processing startup request reqProto:%s",
-				reqProto));
+		log.info("Processing startup request reqProto:{}",
+				reqProto);
 		UpdateStatus updateStatus;
 		String udid = reqProto.getUdid();
 		String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId()
@@ -580,7 +595,7 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
-			
+
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -632,7 +647,8 @@ public class StartupControllerOld {//extends EventController {
 					resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil,
 					monsterForUserRetrieveUtils, clanRetrieveUtils,
 					hazelcastPvpUtil, monsterStuffUtils, createInfoProtoUtils,
-					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils);
+					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtils,
+					battleReplayForUserRetrieveUtil);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 
@@ -660,11 +676,19 @@ public class StartupControllerOld {//extends EventController {
 					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-			
-			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId, 
+
+			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId,
 					clanGiftForUserRetrieveUtils, createInfoProtoUtils);
 			scga.setUp(fillMe);
-			
+			log.info("{}ms at SetClanGiftsAction", stopWatch.getTime());
+
+			//not sure if need clan so putting here for now
+			SetGiftsAction sga = new SetGiftsAction(resBuilder, user, playerId,
+					giftForUserRetrieveUtil, giftForTangoUserRetrieveUtil,
+					tangoGiftRetrieveUtil, rewardRetrieveUtil, createInfoProtoUtils);
+			sga.setUp(fillMe);
+			log.info("{}ms at SetGiftsAction", stopWatch.getTime());
+
 
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -693,7 +717,9 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 			scga.execute(fillMe);
 			log.info("{}ms at setClanGifts", stopWatch.getTime());
-			
+			sga.execute(fillMe);;
+			log.info("{}ms at setGifts", stopWatch.getTime());
+
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
 			resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -714,7 +740,7 @@ public class StartupControllerOld {//extends EventController {
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
-			
+
 
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);
@@ -1432,7 +1458,8 @@ public class StartupControllerOld {//extends EventController {
 							rmea.getMefu(), rmea.getCurActiveMiniEvent(),
 							rmea.getMegfus(),
 							rmea.getLvlEntered(), rmea.getRewards(),
-							rmea.getGoals(), rmea.getLeaderboardRewards());
+							rmea.getGoals(), rmea.getLeaderboardRewards(),
+							rewardRetrieveUtil);
 			resBuilder.setUserMiniEvent(umep);
 		}
 
@@ -1449,7 +1476,7 @@ public class StartupControllerOld {//extends EventController {
 		List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
 				miniJobIdToUserMiniJobs.values());
 		List<UserMiniJobProto> umjpList = createInfoProtoUtils
-				.createUserMiniJobProtos(mjfuList, null);
+				.createUserMiniJobProtos(mjfuList, null, rewardRetrieveUtil);
 
 		resBuilder.addAllUserMiniJobProtos(umjpList);
 	}

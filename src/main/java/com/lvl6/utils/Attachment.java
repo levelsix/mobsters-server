@@ -66,7 +66,6 @@ public class Attachment {
 	 * constructor. initializes the payload array and the read buffer
 	 */
 	public Attachment() {
-		payload = new byte[Globals.MAX_EVENT_SIZE];
 		readBuff = ByteBuffer.allocateDirect(Globals.NET_BUFFER_SIZE);
 		readBuff.order(getByteOrder());
 	}
@@ -99,7 +98,13 @@ public class Attachment {
 		if (!gotHeader && readBuff.remaining() >= HEADER_SIZE) {
 
 			// read the header info
-			eventSize = readBuff.getInt();
+
+			eventType = EventProtocolRequest.valueOf(readBuff.getInt());
+			tag = readBuff.getInt();
+			payloadSize = readBuff.getInt();
+			payload = new byte[payloadSize];
+			log.debug("Read event type: " + eventType + " and size: "
+					+ payloadSize);
 
 			gotHeader = true;
 		}

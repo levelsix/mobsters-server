@@ -251,7 +251,7 @@ public class CompleteMiniJobController extends EventController {
 	private boolean updateUser(User u, int gemsChange, int cashChange,
 			int oilChange) {
 		int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
-				oilChange, gemsChange);
+				oilChange, gemsChange, 0);
 
 		if (numChange <= 0) {
 			log.error(String

@@ -300,7 +300,7 @@ public class EvolutionFinishedController extends EventController {
 			int cashChange = 0;
 			int gemChange = -1 * gemsSpent;
 			int numChange = user.updateRelativeCashAndOilAndGems(cashChange,
-					oilChange, gemChange);
+					oilChange, gemChange, 0);
 			if (1 != numChange) {
 				log.warn(String
 						.format("problem with updating user stats: gemChange=%s, cashChange=%s, user is %s",

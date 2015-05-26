@@ -8,10 +8,10 @@ public final class EventDungeonProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface BeginDungeonRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BeginDungeonRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginDungeonRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int64 clientTime = 2;
     /**
      * <code>optional int64 clientTime = 2;</code>
      */
@@ -35,7 +34,6 @@ public final class EventDungeonProto {
      */
     long getClientTime();
 
-    // optional int32 taskId = 3;
     /**
      * <code>optional int32 taskId = 3;</code>
      */
@@ -45,7 +43,6 @@ public final class EventDungeonProto {
      */
     int getTaskId();
 
-    // optional bool userBeatAllCityTasks = 4;
     /**
      * <code>optional bool userBeatAllCityTasks = 4;</code>
      *
@@ -65,7 +62,6 @@ public final class EventDungeonProto {
      */
     boolean getUserBeatAllCityTasks();
 
-    // optional bool isEvent = 5;
     /**
      * <code>optional bool isEvent = 5;</code>
      *
@@ -83,7 +79,6 @@ public final class EventDungeonProto {
      */
     boolean getIsEvent();
 
-    // optional int32 persistentEventId = 6;
     /**
      * <code>optional int32 persistentEventId = 6;</code>
      */
@@ -93,7 +88,6 @@ public final class EventDungeonProto {
      */
     int getPersistentEventId();
 
-    // optional int32 gemsSpent = 7;
     /**
      * <code>optional int32 gemsSpent = 7;</code>
      *
@@ -113,7 +107,6 @@ public final class EventDungeonProto {
      */
     int getGemsSpent();
 
-    // repeated int32 questIds = 8;
     /**
      * <code>repeated int32 questIds = 8;</code>
      *
@@ -142,7 +135,6 @@ public final class EventDungeonProto {
      */
     int getQuestIds(int index);
 
-    // optional .com.lvl6.proto.Element elem = 9 [default = NO_ELEMENT];
     /**
      * <code>optional .com.lvl6.proto.Element elem = 9 [default = NO_ELEMENT];</code>
      *
@@ -162,7 +154,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.SharedEnumConfigProto.Element getElem();
 
-    // optional bool forceEnemyElem = 10;
     /**
      * <code>optional bool forceEnemyElem = 10;</code>
      *
@@ -180,7 +171,6 @@ public final class EventDungeonProto {
      */
     boolean getForceEnemyElem();
 
-    // optional bool alreadyCompletedMiniTutorialTask = 11;
     /**
      * <code>optional bool alreadyCompletedMiniTutorialTask = 11;</code>
      *
@@ -216,8 +206,9 @@ public final class EventDungeonProto {
    * Protobuf type {@code com.lvl6.proto.BeginDungeonRequestProto}
    */
   public static final class BeginDungeonRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BeginDungeonRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginDungeonRequestProto)
+      BeginDungeonRequestProtoOrBuilder {
     // Use BeginDungeonRequestProto.newBuilder() to construct.
     private BeginDungeonRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -391,7 +382,6 @@ public final class EventDungeonProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -413,7 +403,6 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    // optional int64 clientTime = 2;
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
     private long clientTime_;
     /**
@@ -429,7 +418,6 @@ public final class EventDungeonProto {
       return clientTime_;
     }
 
-    // optional int32 taskId = 3;
     public static final int TASKID_FIELD_NUMBER = 3;
     private int taskId_;
     /**
@@ -445,7 +433,6 @@ public final class EventDungeonProto {
       return taskId_;
     }
 
-    // optional bool userBeatAllCityTasks = 4;
     public static final int USERBEATALLCITYTASKS_FIELD_NUMBER = 4;
     private boolean userBeatAllCityTasks_;
     /**
@@ -471,7 +458,6 @@ public final class EventDungeonProto {
       return userBeatAllCityTasks_;
     }
 
-    // optional bool isEvent = 5;
     public static final int ISEVENT_FIELD_NUMBER = 5;
     private boolean isEvent_;
     /**
@@ -495,7 +481,6 @@ public final class EventDungeonProto {
       return isEvent_;
     }
 
-    // optional int32 persistentEventId = 6;
     public static final int PERSISTENTEVENTID_FIELD_NUMBER = 6;
     private int persistentEventId_;
     /**
@@ -511,7 +496,6 @@ public final class EventDungeonProto {
       return persistentEventId_;
     }
 
-    // optional int32 gemsSpent = 7;
     public static final int GEMSSPENT_FIELD_NUMBER = 7;
     private int gemsSpent_;
     /**
@@ -537,7 +521,6 @@ public final class EventDungeonProto {
       return gemsSpent_;
     }
 
-    // repeated int32 questIds = 8;
     public static final int QUESTIDS_FIELD_NUMBER = 8;
     private java.util.List<java.lang.Integer> questIds_;
     /**
@@ -575,7 +558,6 @@ public final class EventDungeonProto {
       return questIds_.get(index);
     }
 
-    // optional .com.lvl6.proto.Element elem = 9 [default = NO_ELEMENT];
     public static final int ELEM_FIELD_NUMBER = 9;
     private com.lvl6.proto.SharedEnumConfigProto.Element elem_;
     /**
@@ -601,7 +583,6 @@ public final class EventDungeonProto {
       return elem_;
     }
 
-    // optional bool forceEnemyElem = 10;
     public static final int FORCEENEMYELEM_FIELD_NUMBER = 10;
     private boolean forceEnemyElem_;
     /**
@@ -625,7 +606,6 @@ public final class EventDungeonProto {
       return forceEnemyElem_;
     }
 
-    // optional bool alreadyCompletedMiniTutorialTask = 11;
     public static final int ALREADYCOMPLETEDMINITUTORIALTASK_FIELD_NUMBER = 11;
     private boolean alreadyCompletedMiniTutorialTask_;
     /**
@@ -679,7 +659,8 @@ public final class EventDungeonProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -861,8 +842,9 @@ public final class EventDungeonProto {
      * Protobuf type {@code com.lvl6.proto.BeginDungeonRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginDungeonRequestProto)
+        com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDungeonProto.internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor;
@@ -1082,7 +1064,6 @@ public final class EventDungeonProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1191,7 +1172,7 @@ public final class EventDungeonProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1199,7 +1180,6 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      // optional int64 clientTime = 2;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 2;</code>
@@ -1232,7 +1212,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional int32 taskId = 3;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 3;</code>
@@ -1265,7 +1244,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool userBeatAllCityTasks = 4;
       private boolean userBeatAllCityTasks_ ;
       /**
        * <code>optional bool userBeatAllCityTasks = 4;</code>
@@ -1318,7 +1296,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool isEvent = 5;
       private boolean isEvent_ ;
       /**
        * <code>optional bool isEvent = 5;</code>
@@ -1367,7 +1344,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional int32 persistentEventId = 6;
       private int persistentEventId_ ;
       /**
        * <code>optional int32 persistentEventId = 6;</code>
@@ -1400,7 +1376,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional int32 gemsSpent = 7;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 7;</code>
@@ -1453,7 +1428,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // repeated int32 questIds = 8;
       private java.util.List<java.lang.Integer> questIds_ = java.util.Collections.emptyList();
       private void ensureQuestIdsIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
@@ -1535,7 +1509,8 @@ public final class EventDungeonProto {
       public Builder addAllQuestIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureQuestIdsIsMutable();
-        super.addAll(values, questIds_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, questIds_);
         onChanged();
         return this;
       }
@@ -1554,7 +1529,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.Element elem = 9 [default = NO_ELEMENT];
       private com.lvl6.proto.SharedEnumConfigProto.Element elem_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       /**
        * <code>optional .com.lvl6.proto.Element elem = 9 [default = NO_ELEMENT];</code>
@@ -1610,7 +1584,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool forceEnemyElem = 10;
       private boolean forceEnemyElem_ ;
       /**
        * <code>optional bool forceEnemyElem = 10;</code>
@@ -1659,7 +1632,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool alreadyCompletedMiniTutorialTask = 11;
       private boolean alreadyCompletedMiniTutorialTask_ ;
       /**
        * <code>optional bool alreadyCompletedMiniTutorialTask = 11;</code>
@@ -1747,10 +1719,10 @@ public final class EventDungeonProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginDungeonRequestProto)
   }
 
-  public interface BeginDungeonResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BeginDungeonResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginDungeonResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1764,7 +1736,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.TaskStageProto tsp = 2;
     /**
      * <code>repeated .com.lvl6.proto.TaskStageProto tsp = 2;</code>
      */
@@ -1789,7 +1760,6 @@ public final class EventDungeonProto {
     com.lvl6.proto.TaskProto.TaskStageProtoOrBuilder getTspOrBuilder(
         int index);
 
-    // optional string userTaskUuid = 3;
     /**
      * <code>optional string userTaskUuid = 3;</code>
      */
@@ -1804,7 +1774,6 @@ public final class EventDungeonProto {
     com.google.protobuf.ByteString
         getUserTaskUuidBytes();
 
-    // optional int32 taskId = 4;
     /**
      * <code>optional int32 taskId = 4;</code>
      */
@@ -1814,7 +1783,6 @@ public final class EventDungeonProto {
      */
     int getTaskId();
 
-    // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;
     /**
      * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
      */
@@ -1828,8 +1796,9 @@ public final class EventDungeonProto {
    * Protobuf type {@code com.lvl6.proto.BeginDungeonResponseProto}
    */
   public static final class BeginDungeonResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BeginDungeonResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginDungeonResponseProto)
+      BeginDungeonResponseProtoOrBuilder {
     // Use BeginDungeonResponseProto.newBuilder() to construct.
     private BeginDungeonResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1897,8 +1866,9 @@ public final class EventDungeonProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userTaskUuid_ = input.readBytes();
+              userTaskUuid_ = bs;
               break;
             }
             case 32: {
@@ -2042,7 +2012,6 @@ public final class EventDungeonProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2064,7 +2033,6 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.TaskStageProto tsp = 2;
     public static final int TSP_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.TaskProto.TaskStageProto> tsp_;
     /**
@@ -2100,7 +2068,6 @@ public final class EventDungeonProto {
       return tsp_.get(index);
     }
 
-    // optional string userTaskUuid = 3;
     public static final int USERTASKUUID_FIELD_NUMBER = 3;
     private java.lang.Object userTaskUuid_;
     /**
@@ -2143,7 +2110,6 @@ public final class EventDungeonProto {
       }
     }
 
-    // optional int32 taskId = 4;
     public static final int TASKID_FIELD_NUMBER = 4;
     private int taskId_;
     /**
@@ -2159,7 +2125,6 @@ public final class EventDungeonProto {
       return taskId_;
     }
 
-    // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;
     public static final int STATUS_FIELD_NUMBER = 5;
     private com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus status_;
     /**
@@ -2185,7 +2150,8 @@ public final class EventDungeonProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2320,8 +2286,9 @@ public final class EventDungeonProto {
      * Protobuf type {@code com.lvl6.proto.BeginDungeonResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginDungeonResponseProto)
+        com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDungeonProto.internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor;
@@ -2514,7 +2481,6 @@ public final class EventDungeonProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2623,7 +2589,7 @@ public final class EventDungeonProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2631,7 +2597,6 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.TaskStageProto tsp = 2;
       private java.util.List<com.lvl6.proto.TaskProto.TaskStageProto> tsp_ =
         java.util.Collections.emptyList();
       private void ensureTspIsMutable() {
@@ -2773,7 +2738,8 @@ public final class EventDungeonProto {
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.TaskStageProto> values) {
         if (tspBuilder_ == null) {
           ensureTspIsMutable();
-          super.addAll(values, tsp_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, tsp_);
           onChanged();
         } else {
           tspBuilder_.addAllMessages(values);
@@ -2871,7 +2837,6 @@ public final class EventDungeonProto {
         return tspBuilder_;
       }
 
-      // optional string userTaskUuid = 3;
       private java.lang.Object userTaskUuid_ = "";
       /**
        * <code>optional string userTaskUuid = 3;</code>
@@ -2885,9 +2850,12 @@ public final class EventDungeonProto {
       public java.lang.String getUserTaskUuid() {
         java.lang.Object ref = userTaskUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userTaskUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2945,7 +2913,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional int32 taskId = 4;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 4;</code>
@@ -2978,7 +2945,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;
       private com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
@@ -3025,10 +2991,10 @@ public final class EventDungeonProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginDungeonResponseProto)
   }
 
-  public interface EndDungeonRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EndDungeonRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndDungeonRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -3042,7 +3008,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional string userTaskUuid = 2;
     /**
      * <code>optional string userTaskUuid = 2;</code>
      */
@@ -3057,7 +3022,6 @@ public final class EventDungeonProto {
     com.google.protobuf.ByteString
         getUserTaskUuidBytes();
 
-    // optional bool userWon = 3;
     /**
      * <code>optional bool userWon = 3;</code>
      */
@@ -3067,7 +3031,6 @@ public final class EventDungeonProto {
      */
     boolean getUserWon();
 
-    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -3077,7 +3040,6 @@ public final class EventDungeonProto {
      */
     long getClientTime();
 
-    // optional bool firstTimeUserWonTask = 5;
     /**
      * <code>optional bool firstTimeUserWonTask = 5;</code>
      *
@@ -3099,7 +3061,6 @@ public final class EventDungeonProto {
      */
     boolean getFirstTimeUserWonTask();
 
-    // optional bool userBeatAllCityTasks = 6;
     /**
      * <code>optional bool userBeatAllCityTasks = 6;</code>
      *
@@ -3117,7 +3078,6 @@ public final class EventDungeonProto {
      */
     boolean getUserBeatAllCityTasks();
 
-    // repeated string droplessTsfuUuids = 7;
     /**
      * <code>repeated string droplessTsfuUuids = 7;</code>
      *
@@ -3125,8 +3085,8 @@ public final class EventDungeonProto {
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    java.util.List<java.lang.String>
-    getDroplessTsfuUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getDroplessTsfuUuidsList();
     /**
      * <code>repeated string droplessTsfuUuids = 7;</code>
      *
@@ -3157,8 +3117,9 @@ public final class EventDungeonProto {
    * Protobuf type {@code com.lvl6.proto.EndDungeonRequestProto}
    */
   public static final class EndDungeonRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EndDungeonRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndDungeonRequestProto)
+      EndDungeonRequestProtoOrBuilder {
     // Use EndDungeonRequestProto.newBuilder() to construct.
     private EndDungeonRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3218,8 +3179,9 @@ public final class EventDungeonProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userTaskUuid_ = input.readBytes();
+              userTaskUuid_ = bs;
               break;
             }
             case 24: {
@@ -3243,11 +3205,12 @@ public final class EventDungeonProto {
               break;
             }
             case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 droplessTsfuUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000040;
               }
-              droplessTsfuUuids_.add(input.readBytes());
+              droplessTsfuUuids_.add(bs);
               break;
             }
           }
@@ -3259,7 +3222,7 @@ public final class EventDungeonProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          droplessTsfuUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(droplessTsfuUuids_);
+          droplessTsfuUuids_ = droplessTsfuUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3293,7 +3256,6 @@ public final class EventDungeonProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -3315,7 +3277,6 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    // optional string userTaskUuid = 2;
     public static final int USERTASKUUID_FIELD_NUMBER = 2;
     private java.lang.Object userTaskUuid_;
     /**
@@ -3358,7 +3319,6 @@ public final class EventDungeonProto {
       }
     }
 
-    // optional bool userWon = 3;
     public static final int USERWON_FIELD_NUMBER = 3;
     private boolean userWon_;
     /**
@@ -3374,7 +3334,6 @@ public final class EventDungeonProto {
       return userWon_;
     }
 
-    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -3390,7 +3349,6 @@ public final class EventDungeonProto {
       return clientTime_;
     }
 
-    // optional bool firstTimeUserWonTask = 5;
     public static final int FIRSTTIMEUSERWONTASK_FIELD_NUMBER = 5;
     private boolean firstTimeUserWonTask_;
     /**
@@ -3418,7 +3376,6 @@ public final class EventDungeonProto {
       return firstTimeUserWonTask_;
     }
 
-    // optional bool userBeatAllCityTasks = 6;
     public static final int USERBEATALLCITYTASKS_FIELD_NUMBER = 6;
     private boolean userBeatAllCityTasks_;
     /**
@@ -3442,7 +3399,6 @@ public final class EventDungeonProto {
       return userBeatAllCityTasks_;
     }
 
-    // repeated string droplessTsfuUuids = 7;
     public static final int DROPLESSTSFUUUIDS_FIELD_NUMBER = 7;
     private com.google.protobuf.LazyStringList droplessTsfuUuids_;
     /**
@@ -3452,7 +3408,7 @@ public final class EventDungeonProto {
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getDroplessTsfuUuidsList() {
       return droplessTsfuUuids_;
     }
@@ -3500,7 +3456,8 @@ public final class EventDungeonProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3654,8 +3611,9 @@ public final class EventDungeonProto {
      * Protobuf type {@code com.lvl6.proto.EndDungeonRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDungeonProto.EndDungeonRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndDungeonRequestProto)
+        com.lvl6.proto.EventDungeonProto.EndDungeonRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDungeonProto.internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor;
@@ -3764,8 +3722,7 @@ public final class EventDungeonProto {
         }
         result.userBeatAllCityTasks_ = userBeatAllCityTasks_;
         if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          droplessTsfuUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              droplessTsfuUuids_);
+          droplessTsfuUuids_ = droplessTsfuUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.droplessTsfuUuids_ = droplessTsfuUuids_;
@@ -3842,7 +3799,6 @@ public final class EventDungeonProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -3951,7 +3907,7 @@ public final class EventDungeonProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3959,7 +3915,6 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      // optional string userTaskUuid = 2;
       private java.lang.Object userTaskUuid_ = "";
       /**
        * <code>optional string userTaskUuid = 2;</code>
@@ -3973,9 +3928,12 @@ public final class EventDungeonProto {
       public java.lang.String getUserTaskUuid() {
         java.lang.Object ref = userTaskUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userTaskUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4033,7 +3991,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool userWon = 3;
       private boolean userWon_ ;
       /**
        * <code>optional bool userWon = 3;</code>
@@ -4066,7 +4023,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -4099,7 +4055,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool firstTimeUserWonTask = 5;
       private boolean firstTimeUserWonTask_ ;
       /**
        * <code>optional bool firstTimeUserWonTask = 5;</code>
@@ -4156,7 +4111,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool userBeatAllCityTasks = 6;
       private boolean userBeatAllCityTasks_ ;
       /**
        * <code>optional bool userBeatAllCityTasks = 6;</code>
@@ -4205,7 +4159,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // repeated string droplessTsfuUuids = 7;
       private com.google.protobuf.LazyStringList droplessTsfuUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureDroplessTsfuUuidsIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
@@ -4220,9 +4173,9 @@ public final class EventDungeonProto {
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getDroplessTsfuUuidsList() {
-        return java.util.Collections.unmodifiableList(droplessTsfuUuids_);
+        return droplessTsfuUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string droplessTsfuUuids = 7;</code>
@@ -4299,7 +4252,8 @@ public final class EventDungeonProto {
       public Builder addAllDroplessTsfuUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureDroplessTsfuUuidsIsMutable();
-        super.addAll(values, droplessTsfuUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, droplessTsfuUuids_);
         onChanged();
         return this;
       }
@@ -4345,10 +4299,10 @@ public final class EventDungeonProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndDungeonRequestProto)
   }
 
-  public interface EndDungeonResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EndDungeonResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndDungeonResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -4362,7 +4316,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
      */
@@ -4372,7 +4325,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus getStatus();
 
-    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;</code>
      *
@@ -4417,7 +4369,6 @@ public final class EventDungeonProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
         int index);
 
-    // optional int32 taskId = 4;
     /**
      * <code>optional int32 taskId = 4;</code>
      *
@@ -4435,7 +4386,6 @@ public final class EventDungeonProto {
      */
     int getTaskId();
 
-    // optional bool userWon = 5;
     /**
      * <code>optional bool userWon = 5;</code>
      */
@@ -4445,7 +4395,6 @@ public final class EventDungeonProto {
      */
     boolean getUserWon();
 
-    // optional .com.lvl6.proto.UserItemProto userItem = 6;
     /**
      * <code>optional .com.lvl6.proto.UserItemProto userItem = 6;</code>
      */
@@ -4459,7 +4408,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUserItemOrBuilder();
 
-    // optional string taskMapSectionName = 7;
     /**
      * <code>optional string taskMapSectionName = 7;</code>
      *
@@ -4486,7 +4434,6 @@ public final class EventDungeonProto {
     com.google.protobuf.ByteString
         getTaskMapSectionNameBytes();
 
-    // optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;
     /**
      * <code>optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;</code>
      *
@@ -4516,8 +4463,9 @@ public final class EventDungeonProto {
    * Protobuf type {@code com.lvl6.proto.EndDungeonResponseProto}
    */
   public static final class EndDungeonResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EndDungeonResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndDungeonResponseProto)
+      EndDungeonResponseProtoOrBuilder {
     // Use EndDungeonResponseProto.newBuilder() to construct.
     private EndDungeonResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4619,8 +4567,9 @@ public final class EventDungeonProto {
               break;
             }
             case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              taskMapSectionName_ = input.readBytes();
+              taskMapSectionName_ = bs;
               break;
             }
             case 66: {
@@ -4761,7 +4710,6 @@ public final class EventDungeonProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -4783,7 +4731,6 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus status_;
     /**
@@ -4799,7 +4746,6 @@ public final class EventDungeonProto {
       return status_;
     }
 
-    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
     public static final int UPDATEDORNEW_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
     /**
@@ -4855,7 +4801,6 @@ public final class EventDungeonProto {
       return updatedOrNew_.get(index);
     }
 
-    // optional int32 taskId = 4;
     public static final int TASKID_FIELD_NUMBER = 4;
     private int taskId_;
     /**
@@ -4879,7 +4824,6 @@ public final class EventDungeonProto {
       return taskId_;
     }
 
-    // optional bool userWon = 5;
     public static final int USERWON_FIELD_NUMBER = 5;
     private boolean userWon_;
     /**
@@ -4895,7 +4839,6 @@ public final class EventDungeonProto {
       return userWon_;
     }
 
-    // optional .com.lvl6.proto.UserItemProto userItem = 6;
     public static final int USERITEM_FIELD_NUMBER = 6;
     private com.lvl6.proto.ItemsProto.UserItemProto userItem_;
     /**
@@ -4917,7 +4860,6 @@ public final class EventDungeonProto {
       return userItem_;
     }
 
-    // optional string taskMapSectionName = 7;
     public static final int TASKMAPSECTIONNAME_FIELD_NUMBER = 7;
     private java.lang.Object taskMapSectionName_;
     /**
@@ -4972,7 +4914,6 @@ public final class EventDungeonProto {
       }
     }
 
-    // optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;
     public static final int UTCP_FIELD_NUMBER = 8;
     private com.lvl6.proto.TaskProto.UserTaskCompletedProto utcp_;
     /**
@@ -5019,7 +4960,8 @@ public final class EventDungeonProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5175,8 +5117,9 @@ public final class EventDungeonProto {
      * Protobuf type {@code com.lvl6.proto.EndDungeonResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDungeonProto.EndDungeonResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndDungeonResponseProto)
+        com.lvl6.proto.EventDungeonProto.EndDungeonResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDungeonProto.internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor;
@@ -5414,7 +5357,6 @@ public final class EventDungeonProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -5523,7 +5465,7 @@ public final class EventDungeonProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -5531,7 +5473,6 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;
       private com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
@@ -5567,7 +5508,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedOrNewIsMutable() {
@@ -5749,7 +5689,8 @@ public final class EventDungeonProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (updatedOrNewBuilder_ == null) {
           ensureUpdatedOrNewIsMutable();
-          super.addAll(values, updatedOrNew_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedOrNew_);
           onChanged();
         } else {
           updatedOrNewBuilder_.addAllMessages(values);
@@ -5879,7 +5820,6 @@ public final class EventDungeonProto {
         return updatedOrNewBuilder_;
       }
 
-      // optional int32 taskId = 4;
       private int taskId_ ;
       /**
        * <code>optional int32 taskId = 4;</code>
@@ -5928,7 +5868,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional bool userWon = 5;
       private boolean userWon_ ;
       /**
        * <code>optional bool userWon = 5;</code>
@@ -5961,7 +5900,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserItemProto userItem = 6;
       private com.lvl6.proto.ItemsProto.UserItemProto userItem_ = com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> userItemBuilder_;
@@ -6070,7 +6008,7 @@ public final class EventDungeonProto {
         if (userItemBuilder_ == null) {
           userItemBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
-                  userItem_,
+                  getUserItem(),
                   getParentForChildren(),
                   isClean());
           userItem_ = null;
@@ -6078,7 +6016,6 @@ public final class EventDungeonProto {
         return userItemBuilder_;
       }
 
-      // optional string taskMapSectionName = 7;
       private java.lang.Object taskMapSectionName_ = "";
       /**
        * <code>optional string taskMapSectionName = 7;</code>
@@ -6100,9 +6037,12 @@ public final class EventDungeonProto {
       public java.lang.String getTaskMapSectionName() {
         java.lang.Object ref = taskMapSectionName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          taskMapSectionName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            taskMapSectionName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -6176,7 +6116,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserTaskCompletedProto utcp = 8;
       private com.lvl6.proto.TaskProto.UserTaskCompletedProto utcp_ = com.lvl6.proto.TaskProto.UserTaskCompletedProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder> utcpBuilder_;
@@ -6321,7 +6260,7 @@ public final class EventDungeonProto {
         if (utcpBuilder_ == null) {
           utcpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.TaskProto.UserTaskCompletedProto, com.lvl6.proto.TaskProto.UserTaskCompletedProto.Builder, com.lvl6.proto.TaskProto.UserTaskCompletedProtoOrBuilder>(
-                  utcp_,
+                  getUtcp(),
                   getParentForChildren(),
                   isClean());
           utcp_ = null;
@@ -6340,10 +6279,10 @@ public final class EventDungeonProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndDungeonResponseProto)
   }
 
-  public interface ReviveInDungeonRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ReviveInDungeonRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ReviveInDungeonRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -6357,7 +6296,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string userTaskUuid = 2;
     /**
      * <code>optional string userTaskUuid = 2;</code>
      */
@@ -6372,7 +6310,6 @@ public final class EventDungeonProto {
     com.google.protobuf.ByteString
         getUserTaskUuidBytes();
 
-    // optional int64 clientTime = 3;
     /**
      * <code>optional int64 clientTime = 3;</code>
      *
@@ -6390,7 +6327,6 @@ public final class EventDungeonProto {
      */
     long getClientTime();
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;
     /**
      * <code>repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;</code>
      */
@@ -6415,7 +6351,6 @@ public final class EventDungeonProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getReviveMeOrBuilder(
         int index);
 
-    // optional int32 gemsSpent = 5;
     /**
      * <code>optional int32 gemsSpent = 5;</code>
      *
@@ -6439,8 +6374,9 @@ public final class EventDungeonProto {
    * Protobuf type {@code com.lvl6.proto.ReviveInDungeonRequestProto}
    */
   public static final class ReviveInDungeonRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ReviveInDungeonRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ReviveInDungeonRequestProto)
+      ReviveInDungeonRequestProtoOrBuilder {
     // Use ReviveInDungeonRequestProto.newBuilder() to construct.
     private ReviveInDungeonRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6500,8 +6436,9 @@ public final class EventDungeonProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userTaskUuid_ = input.readBytes();
+              userTaskUuid_ = bs;
               break;
             }
             case 24: {
@@ -6565,7 +6502,6 @@ public final class EventDungeonProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -6587,7 +6523,6 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    // optional string userTaskUuid = 2;
     public static final int USERTASKUUID_FIELD_NUMBER = 2;
     private java.lang.Object userTaskUuid_;
     /**
@@ -6630,7 +6565,6 @@ public final class EventDungeonProto {
       }
     }
 
-    // optional int64 clientTime = 3;
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
     private long clientTime_;
     /**
@@ -6654,7 +6588,6 @@ public final class EventDungeonProto {
       return clientTime_;
     }
 
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;
     public static final int REVIVEME_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> reviveMe_;
     /**
@@ -6690,7 +6623,6 @@ public final class EventDungeonProto {
       return reviveMe_.get(index);
     }
 
-    // optional int32 gemsSpent = 5;
     public static final int GEMSSPENT_FIELD_NUMBER = 5;
     private int gemsSpent_;
     /**
@@ -6726,7 +6658,8 @@ public final class EventDungeonProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -6861,8 +6794,9 @@ public final class EventDungeonProto {
      * Protobuf type {@code com.lvl6.proto.ReviveInDungeonRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ReviveInDungeonRequestProto)
+        com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDungeonProto.internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor;
@@ -7055,7 +6989,6 @@ public final class EventDungeonProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -7164,7 +7097,7 @@ public final class EventDungeonProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -7172,7 +7105,6 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      // optional string userTaskUuid = 2;
       private java.lang.Object userTaskUuid_ = "";
       /**
        * <code>optional string userTaskUuid = 2;</code>
@@ -7186,9 +7118,12 @@ public final class EventDungeonProto {
       public java.lang.String getUserTaskUuid() {
         java.lang.Object ref = userTaskUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userTaskUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -7246,7 +7181,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // optional int64 clientTime = 3;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 3;</code>
@@ -7295,7 +7229,6 @@ public final class EventDungeonProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> reviveMe_ =
         java.util.Collections.emptyList();
       private void ensureReviveMeIsMutable() {
@@ -7437,7 +7370,8 @@ public final class EventDungeonProto {
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
         if (reviveMeBuilder_ == null) {
           ensureReviveMeIsMutable();
-          super.addAll(values, reviveMe_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, reviveMe_);
           onChanged();
         } else {
           reviveMeBuilder_.addAllMessages(values);
@@ -7535,7 +7469,6 @@ public final class EventDungeonProto {
         return reviveMeBuilder_;
       }
 
-      // optional int32 gemsSpent = 5;
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 5;</code>
@@ -7599,10 +7532,10 @@ public final class EventDungeonProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReviveInDungeonRequestProto)
   }
 
-  public interface ReviveInDungeonResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ReviveInDungeonResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ReviveInDungeonResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -7616,7 +7549,6 @@ public final class EventDungeonProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
      */
@@ -7630,8 +7562,9 @@ public final class EventDungeonProto {
    * Protobuf type {@code com.lvl6.proto.ReviveInDungeonResponseProto}
    */
   public static final class ReviveInDungeonResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ReviveInDungeonResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ReviveInDungeonResponseProto)
+      ReviveInDungeonResponseProtoOrBuilder {
     // Use ReviveInDungeonResponseProto.newBuilder() to construct.
     private ReviveInDungeonResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7832,7 +7765,6 @@ public final class EventDungeonProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -7854,7 +7786,6 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status_;
     /**
@@ -7877,7 +7808,8 @@ public final class EventDungeonProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7991,8 +7923,9 @@ public final class EventDungeonProto {
      * Protobuf type {@code com.lvl6.proto.ReviveInDungeonResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ReviveInDungeonResponseProto)
+        com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventDungeonProto.internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor;
@@ -8123,7 +8056,6 @@ public final class EventDungeonProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -8232,7 +8164,7 @@ public final class EventDungeonProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -8240,7 +8172,6 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;
       private com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
@@ -8287,32 +8218,32 @@ public final class EventDungeonProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReviveInDungeonResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginDungeonRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginDungeonResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndDungeonRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndDungeonResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8376,49 +8307,13 @@ public final class EventDungeonProto {
       "L_OTHER\020\003B\023B\021EventDungeonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_BeginDungeonRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ClientTime", "TaskId", "UserBeatAllCityTasks", "IsEvent", "PersistentEventId", "GemsSpent", "QuestIds", "Elem", "ForceEnemyElem", "AlreadyCompletedMiniTutorialTask", });
-          internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_BeginDungeonResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Tsp", "UserTaskUuid", "TaskId", "Status", });
-          internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_EndDungeonRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserTaskUuid", "UserWon", "ClientTime", "FirstTimeUserWonTask", "UserBeatAllCityTasks", "DroplessTsfuUuids", });
-          internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_EndDungeonResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "TaskId", "UserWon", "UserItem", "TaskMapSectionName", "Utcp", });
-          internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserTaskUuid", "ClientTime", "ReviveMe", "GemsSpent", });
-          internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -8428,6 +8323,47 @@ public final class EventDungeonProto {
           com.lvl6.proto.TaskProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_BeginDungeonRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ClientTime", "TaskId", "UserBeatAllCityTasks", "IsEvent", "PersistentEventId", "GemsSpent", "QuestIds", "Elem", "ForceEnemyElem", "AlreadyCompletedMiniTutorialTask", });
+    internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_BeginDungeonResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Tsp", "UserTaskUuid", "TaskId", "Status", });
+    internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_EndDungeonRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserTaskUuid", "UserWon", "ClientTime", "FirstTimeUserWonTask", "UserBeatAllCityTasks", "DroplessTsfuUuids", });
+    internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_EndDungeonResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "TaskId", "UserWon", "UserItem", "TaskMapSectionName", "Utcp", });
+    internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserTaskUuid", "ClientTime", "ReviveMe", "GemsSpent", });
+    internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.TaskProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

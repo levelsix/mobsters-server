@@ -8,10 +8,10 @@ public final class EventResearchProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface PerformResearchRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PerformResearchRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PerformResearchRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventResearchProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 researchId = 2;
     /**
      * <code>optional int32 researchId = 2;</code>
      *
@@ -43,7 +42,6 @@ public final class EventResearchProto {
      */
     int getResearchId();
 
-    // optional string userResearchUuid = 3;
     /**
      * <code>optional string userResearchUuid = 3;</code>
      *
@@ -70,7 +68,6 @@ public final class EventResearchProto {
     com.google.protobuf.ByteString
         getUserResearchUuidBytes();
 
-    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -80,7 +77,6 @@ public final class EventResearchProto {
      */
     long getClientTime();
 
-    // optional int32 gemsCost = 5;
     /**
      * <code>optional int32 gemsCost = 5;</code>
      */
@@ -90,7 +86,6 @@ public final class EventResearchProto {
      */
     int getGemsCost();
 
-    // optional sint32 resourceCost = 6;
     /**
      * <code>optional sint32 resourceCost = 6;</code>
      *
@@ -108,7 +103,6 @@ public final class EventResearchProto {
      */
     int getResourceCost();
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
@@ -122,8 +116,9 @@ public final class EventResearchProto {
    * Protobuf type {@code com.lvl6.proto.PerformResearchRequestProto}
    */
   public static final class PerformResearchRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PerformResearchRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PerformResearchRequestProto)
+      PerformResearchRequestProtoOrBuilder {
     // Use PerformResearchRequestProto.newBuilder() to construct.
     private PerformResearchRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -188,8 +183,9 @@ public final class EventResearchProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userResearchUuid_ = input.readBytes();
+              userResearchUuid_ = bs;
               break;
             }
             case 32: {
@@ -258,7 +254,6 @@ public final class EventResearchProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -280,7 +275,6 @@ public final class EventResearchProto {
       return sender_;
     }
 
-    // optional int32 researchId = 2;
     public static final int RESEARCHID_FIELD_NUMBER = 2;
     private int researchId_;
     /**
@@ -304,7 +298,6 @@ public final class EventResearchProto {
       return researchId_;
     }
 
-    // optional string userResearchUuid = 3;
     public static final int USERRESEARCHUUID_FIELD_NUMBER = 3;
     private java.lang.Object userResearchUuid_;
     /**
@@ -359,7 +352,6 @@ public final class EventResearchProto {
       }
     }
 
-    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -375,7 +367,6 @@ public final class EventResearchProto {
       return clientTime_;
     }
 
-    // optional int32 gemsCost = 5;
     public static final int GEMSCOST_FIELD_NUMBER = 5;
     private int gemsCost_;
     /**
@@ -391,7 +382,6 @@ public final class EventResearchProto {
       return gemsCost_;
     }
 
-    // optional sint32 resourceCost = 6;
     public static final int RESOURCECOST_FIELD_NUMBER = 6;
     private int resourceCost_;
     /**
@@ -415,7 +405,6 @@ public final class EventResearchProto {
       return resourceCost_;
     }
 
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     /**
@@ -443,7 +432,8 @@ public final class EventResearchProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -592,8 +582,9 @@ public final class EventResearchProto {
      * Protobuf type {@code com.lvl6.proto.PerformResearchRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventResearchProto.PerformResearchRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PerformResearchRequestProto)
+        com.lvl6.proto.EventResearchProto.PerformResearchRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventResearchProto.internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor;
@@ -771,7 +762,6 @@ public final class EventResearchProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -880,7 +870,7 @@ public final class EventResearchProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -888,7 +878,6 @@ public final class EventResearchProto {
         return senderBuilder_;
       }
 
-      // optional int32 researchId = 2;
       private int researchId_ ;
       /**
        * <code>optional int32 researchId = 2;</code>
@@ -937,7 +926,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional string userResearchUuid = 3;
       private java.lang.Object userResearchUuid_ = "";
       /**
        * <code>optional string userResearchUuid = 3;</code>
@@ -959,9 +947,12 @@ public final class EventResearchProto {
       public java.lang.String getUserResearchUuid() {
         java.lang.Object ref = userResearchUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userResearchUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userResearchUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1035,7 +1026,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -1068,7 +1058,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional int32 gemsCost = 5;
       private int gemsCost_ ;
       /**
        * <code>optional int32 gemsCost = 5;</code>
@@ -1101,7 +1090,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional sint32 resourceCost = 6;
       private int resourceCost_ ;
       /**
        * <code>optional sint32 resourceCost = 6;</code>
@@ -1150,7 +1138,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
       private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
@@ -1197,10 +1184,10 @@ public final class EventResearchProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PerformResearchRequestProto)
   }
 
-  public interface PerformResearchResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PerformResearchResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PerformResearchResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1214,7 +1201,6 @@ public final class EventResearchProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
      */
@@ -1224,7 +1210,6 @@ public final class EventResearchProto {
      */
     com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus getStatus();
 
-    // optional string userResearchUuid = 3;
     /**
      * <code>optional string userResearchUuid = 3;</code>
      */
@@ -1243,8 +1228,9 @@ public final class EventResearchProto {
    * Protobuf type {@code com.lvl6.proto.PerformResearchResponseProto}
    */
   public static final class PerformResearchResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PerformResearchResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PerformResearchResponseProto)
+      PerformResearchResponseProtoOrBuilder {
     // Use PerformResearchResponseProto.newBuilder() to construct.
     private PerformResearchResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1315,8 +1301,9 @@ public final class EventResearchProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userResearchUuid_ = input.readBytes();
+              userResearchUuid_ = bs;
               break;
             }
           }
@@ -1468,7 +1455,6 @@ public final class EventResearchProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1490,7 +1476,6 @@ public final class EventResearchProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus status_;
     /**
@@ -1506,7 +1491,6 @@ public final class EventResearchProto {
       return status_;
     }
 
-    // optional string userResearchUuid = 3;
     public static final int USERRESEARCHUUID_FIELD_NUMBER = 3;
     private java.lang.Object userResearchUuid_;
     /**
@@ -1557,7 +1541,8 @@ public final class EventResearchProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1678,8 +1663,9 @@ public final class EventResearchProto {
      * Protobuf type {@code com.lvl6.proto.PerformResearchResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventResearchProto.PerformResearchResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PerformResearchResponseProto)
+        com.lvl6.proto.EventResearchProto.PerformResearchResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventResearchProto.internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor;
@@ -1821,7 +1807,6 @@ public final class EventResearchProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1930,7 +1915,7 @@ public final class EventResearchProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1938,7 +1923,6 @@ public final class EventResearchProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;
       private com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus status_ = com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
@@ -1974,7 +1958,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional string userResearchUuid = 3;
       private java.lang.Object userResearchUuid_ = "";
       /**
        * <code>optional string userResearchUuid = 3;</code>
@@ -1988,9 +1971,12 @@ public final class EventResearchProto {
       public java.lang.String getUserResearchUuid() {
         java.lang.Object ref = userResearchUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userResearchUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userResearchUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2059,10 +2045,10 @@ public final class EventResearchProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PerformResearchResponseProto)
   }
 
-  public interface FinishPerformingResearchRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface FinishPerformingResearchRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FinishPerformingResearchRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2076,7 +2062,6 @@ public final class EventResearchProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional string userResearchUuid = 2;
     /**
      * <code>optional string userResearchUuid = 2;</code>
      */
@@ -2091,7 +2076,6 @@ public final class EventResearchProto {
     com.google.protobuf.ByteString
         getUserResearchUuidBytes();
 
-    // optional int32 gemsCost = 3;
     /**
      * <code>optional int32 gemsCost = 3;</code>
      */
@@ -2105,8 +2089,9 @@ public final class EventResearchProto {
    * Protobuf type {@code com.lvl6.proto.FinishPerformingResearchRequestProto}
    */
   public static final class FinishPerformingResearchRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FinishPerformingResearchRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FinishPerformingResearchRequestProto)
+      FinishPerformingResearchRequestProtoOrBuilder {
     // Use FinishPerformingResearchRequestProto.newBuilder() to construct.
     private FinishPerformingResearchRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2166,8 +2151,9 @@ public final class EventResearchProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userResearchUuid_ = input.readBytes();
+              userResearchUuid_ = bs;
               break;
             }
             case 24: {
@@ -2215,7 +2201,6 @@ public final class EventResearchProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2237,7 +2222,6 @@ public final class EventResearchProto {
       return sender_;
     }
 
-    // optional string userResearchUuid = 2;
     public static final int USERRESEARCHUUID_FIELD_NUMBER = 2;
     private java.lang.Object userResearchUuid_;
     /**
@@ -2280,7 +2264,6 @@ public final class EventResearchProto {
       }
     }
 
-    // optional int32 gemsCost = 3;
     public static final int GEMSCOST_FIELD_NUMBER = 3;
     private int gemsCost_;
     /**
@@ -2304,7 +2287,8 @@ public final class EventResearchProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2425,8 +2409,9 @@ public final class EventResearchProto {
      * Protobuf type {@code com.lvl6.proto.FinishPerformingResearchRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FinishPerformingResearchRequestProto)
+        com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventResearchProto.internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor;
@@ -2568,7 +2553,6 @@ public final class EventResearchProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2677,7 +2661,7 @@ public final class EventResearchProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2685,7 +2669,6 @@ public final class EventResearchProto {
         return senderBuilder_;
       }
 
-      // optional string userResearchUuid = 2;
       private java.lang.Object userResearchUuid_ = "";
       /**
        * <code>optional string userResearchUuid = 2;</code>
@@ -2699,9 +2682,12 @@ public final class EventResearchProto {
       public java.lang.String getUserResearchUuid() {
         java.lang.Object ref = userResearchUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userResearchUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userResearchUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2759,7 +2745,6 @@ public final class EventResearchProto {
         return this;
       }
 
-      // optional int32 gemsCost = 3;
       private int gemsCost_ ;
       /**
        * <code>optional int32 gemsCost = 3;</code>
@@ -2803,10 +2788,10 @@ public final class EventResearchProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FinishPerformingResearchRequestProto)
   }
 
-  public interface FinishPerformingResearchResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface FinishPerformingResearchResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FinishPerformingResearchResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2820,7 +2805,6 @@ public final class EventResearchProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
      */
@@ -2838,8 +2822,9 @@ public final class EventResearchProto {
    * </pre>
    */
   public static final class FinishPerformingResearchResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FinishPerformingResearchResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FinishPerformingResearchResponseProto)
+      FinishPerformingResearchResponseProtoOrBuilder {
     // Use FinishPerformingResearchResponseProto.newBuilder() to construct.
     private FinishPerformingResearchResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3040,7 +3025,6 @@ public final class EventResearchProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3062,7 +3046,6 @@ public final class EventResearchProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status_;
     /**
@@ -3085,7 +3068,8 @@ public final class EventResearchProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3203,8 +3187,9 @@ public final class EventResearchProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FinishPerformingResearchResponseProto)
+        com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventResearchProto.internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor;
@@ -3335,7 +3320,6 @@ public final class EventResearchProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3444,7 +3428,7 @@ public final class EventResearchProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3452,7 +3436,6 @@ public final class EventResearchProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;
       private com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status_ = com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
@@ -3499,22 +3482,22 @@ public final class EventResearchProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FinishPerformingResearchResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PerformResearchRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PerformResearchResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3558,43 +3541,45 @@ public final class EventResearchProto {
       "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_PerformResearchRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ResearchId", "UserResearchUuid", "ClientTime", "GemsCost", "ResourceCost", "ResourceType", });
-          internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_PerformResearchResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "UserResearchUuid", });
-          internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserResearchUuid", "GemsCost", });
-          internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_PerformResearchRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ResearchId", "UserResearchUuid", "ClientTime", "GemsCost", "ResourceCost", "ResourceType", });
+    internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_PerformResearchResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PerformResearchResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "UserResearchUuid", });
+    internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserResearchUuid", "GemsCost", });
+    internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

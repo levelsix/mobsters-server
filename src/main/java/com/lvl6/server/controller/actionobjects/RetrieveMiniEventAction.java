@@ -176,8 +176,8 @@ public class RetrieveMiniEventAction {
 		if (!valid) {
 			//if for whatever reason there is no longer a MiniEventForPlayerLevel
 			//treat as if the user does not have a MiniEvent
-			log.error("WTF...missing MiniEvent data. So, invalid mefu={}",
-					mefu);
+			log.warn("WTF...missing MiniEvent data. So, invalid mefu={}, me={}",
+					mefu, me);
 			mefu = null;
 			cleanUp();
 			return true;
@@ -344,8 +344,8 @@ public class RetrieveMiniEventAction {
 		lvlEntered = miniEventForPlayerLvlRetrieveUtils
 				.getMiniEventForPlayerLvl(meId, userLvl);
 		if (null == lvlEntered) {
-			log.error("miniEvent doesn't have MiniEventForPlayerLvl. miniEvent={}",
-					curActiveMiniEvent);
+			log.warn("miniEvent doesn't have MiniEventForPlayerLvl. miniEvent={}, userLvl={}",
+					curActiveMiniEvent, userLvl);
 			return false;
 		}
 
@@ -417,6 +417,7 @@ public class RetrieveMiniEventAction {
 	private boolean retrieveCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
+		
 		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(meId);
 
 		if (null == curActiveMiniEvent) {
@@ -427,7 +428,8 @@ public class RetrieveMiniEventAction {
 		}
 
 		//common case: MiniEvent exists
-		int userLvl = u.getLevel();
+//		int userLvl = u.getLevel();
+		int userLvl = mefu.getUserLvl();
 		log.info("user's current MiniEvent: {}", curActiveMiniEvent);
 
 		boolean success = retrieveMiniEventRelatedData(meId, userLvl);
@@ -453,7 +455,8 @@ public class RetrieveMiniEventAction {
 		}
 
 		int curActiveMeId = curActiveMiniEvent.getId();
-		int userLvl = u.getLevel();
+//		int userLvl = u.getLevel();
+		int userLvl = mefu.getUserLvl();
 		if (meId == curActiveMeId) {
 			log.info("not replacing UserMiniEvent since the same MiniEvent is still ongoing");
 			return retrieveMiniEventRelatedData(meId, userLvl);
@@ -462,13 +465,17 @@ public class RetrieveMiniEventAction {
 		//mini events are different
 		boolean success = retrieveMiniEventRelatedData(curActiveMeId, userLvl);
 		if (!success) {
-			log.warn("unable to continue replaceCurrentUserMiniEvent()");
-			return success;
+			log.warn("invalid/insufficient MiniEventData: so no MiniEvent. mefu={}, curMe={}, usrLvl={}",
+					new Object[] { mefu, curActiveMiniEvent, userLvl });
+			curActiveMiniEvent = null;
+			mefu = null;
+			return true;
 		}
 
 		log.info("replaceCurrentUserMiniEvent. oldId:{}, \t newEvent:{}",
 				meId, curActiveMiniEvent);
-		success = insertUpdateUserMiniEvent(curActiveMeId, userLvl);
+		int currUserLvl = u.getLevel();
+		success = insertUpdateUserMiniEvent(curActiveMeId, currUserLvl);
 		if (!success) {
 			log.warn("unable to replace MiniEvent for the user.");
 		}

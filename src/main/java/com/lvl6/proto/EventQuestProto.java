@@ -8,10 +8,10 @@ public final class EventQuestProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface QuestAcceptRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface QuestAcceptRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestAcceptRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 questId = 2;
     /**
      * <code>optional int32 questId = 2;</code>
      */
@@ -39,8 +38,9 @@ public final class EventQuestProto {
    * Protobuf type {@code com.lvl6.proto.QuestAcceptRequestProto}
    */
   public static final class QuestAcceptRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestAcceptRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestAcceptRequestProto)
+      QuestAcceptRequestProtoOrBuilder {
     // Use QuestAcceptRequestProto.newBuilder() to construct.
     private QuestAcceptRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -144,7 +144,6 @@ public final class EventQuestProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -166,7 +165,6 @@ public final class EventQuestProto {
       return sender_;
     }
 
-    // optional int32 questId = 2;
     public static final int QUESTID_FIELD_NUMBER = 2;
     private int questId_;
     /**
@@ -189,7 +187,8 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -303,8 +302,9 @@ public final class EventQuestProto {
      * Protobuf type {@code com.lvl6.proto.QuestAcceptRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestAcceptRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestAcceptRequestProto)
+        com.lvl6.proto.EventQuestProto.QuestAcceptRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor;
@@ -435,7 +435,6 @@ public final class EventQuestProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -544,7 +543,7 @@ public final class EventQuestProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -552,7 +551,6 @@ public final class EventQuestProto {
         return senderBuilder_;
       }
 
-      // optional int32 questId = 2;
       private int questId_ ;
       /**
        * <code>optional int32 questId = 2;</code>
@@ -596,10 +594,10 @@ public final class EventQuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestAcceptRequestProto)
   }
 
-  public interface QuestAcceptResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface QuestAcceptResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestAcceptResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -613,7 +611,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
      */
@@ -631,8 +628,9 @@ public final class EventQuestProto {
    * </pre>
    */
   public static final class QuestAcceptResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestAcceptResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestAcceptResponseProto)
+      QuestAcceptResponseProtoOrBuilder {
     // Use QuestAcceptResponseProto.newBuilder() to construct.
     private QuestAcceptResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -842,7 +840,6 @@ public final class EventQuestProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -864,7 +861,6 @@ public final class EventQuestProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus status_;
     /**
@@ -887,7 +883,8 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1005,8 +1002,9 @@ public final class EventQuestProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestAcceptResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestAcceptResponseProto)
+        com.lvl6.proto.EventQuestProto.QuestAcceptResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor;
@@ -1137,7 +1135,6 @@ public final class EventQuestProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1246,7 +1243,7 @@ public final class EventQuestProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1254,7 +1251,6 @@ public final class EventQuestProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
       private com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus status_ = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
@@ -1301,10 +1297,10 @@ public final class EventQuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestAcceptResponseProto)
   }
 
-  public interface QuestProgressRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface QuestProgressRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestProgressRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1318,7 +1314,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional int32 questId = 2;
     /**
      * <code>optional int32 questId = 2;</code>
      */
@@ -1328,7 +1323,6 @@ public final class EventQuestProto {
      */
     int getQuestId();
 
-    // optional bool isComplete = 3;
     /**
      * <code>optional bool isComplete = 3;</code>
      */
@@ -1338,7 +1332,6 @@ public final class EventQuestProto {
      */
     boolean getIsComplete();
 
-    // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
     /**
      * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
      *
@@ -1388,7 +1381,6 @@ public final class EventQuestProto {
     com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
         int index);
 
-    // repeated string deleteUserMonsterUuids = 5;
     /**
      * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
@@ -1397,8 +1389,8 @@ public final class EventQuestProto {
      *will be set for only one quest job
      * </pre>
      */
-    java.util.List<java.lang.String>
-    getDeleteUserMonsterUuidsList();
+    com.google.protobuf.ProtocolStringList
+        getDeleteUserMonsterUuidsList();
     /**
      * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
@@ -1437,8 +1429,9 @@ public final class EventQuestProto {
    * </pre>
    */
   public static final class QuestProgressRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestProgressRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestProgressRequestProto)
+      QuestProgressRequestProtoOrBuilder {
     // Use QuestProgressRequestProto.newBuilder() to construct.
     private QuestProgressRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1516,11 +1509,12 @@ public final class EventQuestProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 deleteUserMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000010;
               }
-              deleteUserMonsterUuids_.add(input.readBytes());
+              deleteUserMonsterUuids_.add(bs);
               break;
             }
           }
@@ -1535,7 +1529,7 @@ public final class EventQuestProto {
           userQuestJobs_ = java.util.Collections.unmodifiableList(userQuestJobs_);
         }
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          deleteUserMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(deleteUserMonsterUuids_);
+          deleteUserMonsterUuids_ = deleteUserMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1569,7 +1563,6 @@ public final class EventQuestProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1591,7 +1584,6 @@ public final class EventQuestProto {
       return sender_;
     }
 
-    // optional int32 questId = 2;
     public static final int QUESTID_FIELD_NUMBER = 2;
     private int questId_;
     /**
@@ -1607,7 +1599,6 @@ public final class EventQuestProto {
       return questId_;
     }
 
-    // optional bool isComplete = 3;
     public static final int ISCOMPLETE_FIELD_NUMBER = 3;
     private boolean isComplete_;
     /**
@@ -1623,7 +1614,6 @@ public final class EventQuestProto {
       return isComplete_;
     }
 
-    // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
     public static final int USERQUESTJOBS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> userQuestJobs_;
     /**
@@ -1684,7 +1674,6 @@ public final class EventQuestProto {
       return userQuestJobs_.get(index);
     }
 
-    // repeated string deleteUserMonsterUuids = 5;
     public static final int DELETEUSERMONSTERUUIDS_FIELD_NUMBER = 5;
     private com.google.protobuf.LazyStringList deleteUserMonsterUuids_;
     /**
@@ -1695,7 +1684,7 @@ public final class EventQuestProto {
      *will be set for only one quest job
      * </pre>
      */
-    public java.util.List<java.lang.String>
+    public com.google.protobuf.ProtocolStringList
         getDeleteUserMonsterUuidsList() {
       return deleteUserMonsterUuids_;
     }
@@ -1744,7 +1733,8 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1889,8 +1879,9 @@ public final class EventQuestProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestProgressRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestProgressRequestProto)
+        com.lvl6.proto.EventQuestProto.QuestProgressRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor;
@@ -1997,8 +1988,7 @@ public final class EventQuestProto {
           result.userQuestJobs_ = userQuestJobsBuilder_.build();
         }
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          deleteUserMonsterUuids_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              deleteUserMonsterUuids_);
+          deleteUserMonsterUuids_ = deleteUserMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.deleteUserMonsterUuids_ = deleteUserMonsterUuids_;
@@ -2090,7 +2080,6 @@ public final class EventQuestProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2199,7 +2188,7 @@ public final class EventQuestProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2207,7 +2196,6 @@ public final class EventQuestProto {
         return senderBuilder_;
       }
 
-      // optional int32 questId = 2;
       private int questId_ ;
       /**
        * <code>optional int32 questId = 2;</code>
@@ -2240,7 +2228,6 @@ public final class EventQuestProto {
         return this;
       }
 
-      // optional bool isComplete = 3;
       private boolean isComplete_ ;
       /**
        * <code>optional bool isComplete = 3;</code>
@@ -2273,7 +2260,6 @@ public final class EventQuestProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
       private java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> userQuestJobs_ =
         java.util.Collections.emptyList();
       private void ensureUserQuestJobsIsMutable() {
@@ -2465,7 +2451,8 @@ public final class EventQuestProto {
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.UserQuestJobProto> values) {
         if (userQuestJobsBuilder_ == null) {
           ensureUserQuestJobsIsMutable();
-          super.addAll(values, userQuestJobs_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userQuestJobs_);
           onChanged();
         } else {
           userQuestJobsBuilder_.addAllMessages(values);
@@ -2603,7 +2590,6 @@ public final class EventQuestProto {
         return userQuestJobsBuilder_;
       }
 
-      // repeated string deleteUserMonsterUuids = 5;
       private com.google.protobuf.LazyStringList deleteUserMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureDeleteUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
@@ -2619,9 +2605,9 @@ public final class EventQuestProto {
        *will be set for only one quest job
        * </pre>
        */
-      public java.util.List<java.lang.String>
+      public com.google.protobuf.ProtocolStringList
           getDeleteUserMonsterUuidsList() {
-        return java.util.Collections.unmodifiableList(deleteUserMonsterUuids_);
+        return deleteUserMonsterUuids_.getUnmodifiableView();
       }
       /**
        * <code>repeated string deleteUserMonsterUuids = 5;</code>
@@ -2704,7 +2690,8 @@ public final class EventQuestProto {
       public Builder addAllDeleteUserMonsterUuids(
           java.lang.Iterable<java.lang.String> values) {
         ensureDeleteUserMonsterUuidsIsMutable();
-        super.addAll(values, deleteUserMonsterUuids_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, deleteUserMonsterUuids_);
         onChanged();
         return this;
       }
@@ -2752,10 +2739,10 @@ public final class EventQuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestProgressRequestProto)
   }
 
-  public interface QuestProgressResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface QuestProgressResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestProgressResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2769,7 +2756,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
      */
@@ -2787,8 +2773,9 @@ public final class EventQuestProto {
    * </pre>
    */
   public static final class QuestProgressResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestProgressResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestProgressResponseProto)
+      QuestProgressResponseProtoOrBuilder {
     // Use QuestProgressResponseProto.newBuilder() to construct.
     private QuestProgressResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3033,7 +3020,6 @@ public final class EventQuestProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -3055,7 +3041,6 @@ public final class EventQuestProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus status_;
     /**
@@ -3078,7 +3063,8 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3196,8 +3182,9 @@ public final class EventQuestProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestProgressResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestProgressResponseProto)
+        com.lvl6.proto.EventQuestProto.QuestProgressResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor;
@@ -3328,7 +3315,6 @@ public final class EventQuestProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -3437,7 +3423,7 @@ public final class EventQuestProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3445,7 +3431,6 @@ public final class EventQuestProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;
       private com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus status_ = com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
@@ -3492,10 +3477,10 @@ public final class EventQuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestProgressResponseProto)
   }
 
-  public interface QuestRedeemRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface QuestRedeemRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestRedeemRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -3509,7 +3494,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional int32 questId = 2;
     /**
      * <code>optional int32 questId = 2;</code>
      */
@@ -3523,8 +3507,9 @@ public final class EventQuestProto {
    * Protobuf type {@code com.lvl6.proto.QuestRedeemRequestProto}
    */
   public static final class QuestRedeemRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestRedeemRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestRedeemRequestProto)
+      QuestRedeemRequestProtoOrBuilder {
     // Use QuestRedeemRequestProto.newBuilder() to construct.
     private QuestRedeemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3628,7 +3613,6 @@ public final class EventQuestProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -3650,7 +3634,6 @@ public final class EventQuestProto {
       return sender_;
     }
 
-    // optional int32 questId = 2;
     public static final int QUESTID_FIELD_NUMBER = 2;
     private int questId_;
     /**
@@ -3673,7 +3656,8 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3787,8 +3771,9 @@ public final class EventQuestProto {
      * Protobuf type {@code com.lvl6.proto.QuestRedeemRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestRedeemRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestRedeemRequestProto)
+        com.lvl6.proto.EventQuestProto.QuestRedeemRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor;
@@ -3919,7 +3904,6 @@ public final class EventQuestProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -4028,7 +4012,7 @@ public final class EventQuestProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4036,7 +4020,6 @@ public final class EventQuestProto {
         return senderBuilder_;
       }
 
-      // optional int32 questId = 2;
       private int questId_ ;
       /**
        * <code>optional int32 questId = 2;</code>
@@ -4080,10 +4063,10 @@ public final class EventQuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestRedeemRequestProto)
   }
 
-  public interface QuestRedeemResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface QuestRedeemResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestRedeemResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -4097,7 +4080,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;
     /**
      * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
      */
@@ -4122,7 +4104,6 @@ public final class EventQuestProto {
     com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getNewlyAvailableQuestsOrBuilder(
         int index);
 
-    // optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
      */
@@ -4132,7 +4113,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus getStatus();
 
-    // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
     /**
      * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
      */
@@ -4146,7 +4126,6 @@ public final class EventQuestProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
 
-    // optional int32 questId = 5;
     /**
      * <code>optional int32 questId = 5;</code>
      */
@@ -4164,8 +4143,9 @@ public final class EventQuestProto {
    * </pre>
    */
   public static final class QuestRedeemResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestRedeemResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestRedeemResponseProto)
+      QuestRedeemResponseProtoOrBuilder {
     // Use QuestRedeemResponseProto.newBuilder() to construct.
     private QuestRedeemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4395,7 +4375,6 @@ public final class EventQuestProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -4417,7 +4396,6 @@ public final class EventQuestProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;
     public static final int NEWLYAVAILABLEQUESTS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> newlyAvailableQuests_;
     /**
@@ -4453,7 +4431,6 @@ public final class EventQuestProto {
       return newlyAvailableQuests_.get(index);
     }
 
-    // optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus status_;
     /**
@@ -4469,7 +4446,6 @@ public final class EventQuestProto {
       return status_;
     }
 
-    // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
     public static final int FUMP_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_;
     /**
@@ -4491,7 +4467,6 @@ public final class EventQuestProto {
       return fump_;
     }
 
-    // optional int32 questId = 5;
     public static final int QUESTID_FIELD_NUMBER = 5;
     private int questId_;
     /**
@@ -4517,7 +4492,8 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4656,8 +4632,9 @@ public final class EventQuestProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestRedeemResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestRedeemResponseProto)
+        com.lvl6.proto.EventQuestProto.QuestRedeemResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor;
@@ -4857,7 +4834,6 @@ public final class EventQuestProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -4966,7 +4942,7 @@ public final class EventQuestProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4974,7 +4950,6 @@ public final class EventQuestProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;
       private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> newlyAvailableQuests_ =
         java.util.Collections.emptyList();
       private void ensureNewlyAvailableQuestsIsMutable() {
@@ -5116,7 +5091,8 @@ public final class EventQuestProto {
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
         if (newlyAvailableQuestsBuilder_ == null) {
           ensureNewlyAvailableQuestsIsMutable();
-          super.addAll(values, newlyAvailableQuests_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, newlyAvailableQuests_);
           onChanged();
         } else {
           newlyAvailableQuestsBuilder_.addAllMessages(values);
@@ -5214,7 +5190,6 @@ public final class EventQuestProto {
         return newlyAvailableQuestsBuilder_;
       }
 
-      // optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;
       private com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus status_ = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
@@ -5250,7 +5225,6 @@ public final class EventQuestProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpBuilder_;
@@ -5359,7 +5333,7 @@ public final class EventQuestProto {
         if (fumpBuilder_ == null) {
           fumpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  fump_,
+                  getFump(),
                   getParentForChildren(),
                   isClean());
           fump_ = null;
@@ -5367,7 +5341,6 @@ public final class EventQuestProto {
         return fumpBuilder_;
       }
 
-      // optional int32 questId = 5;
       private int questId_ ;
       /**
        * <code>optional int32 questId = 5;</code>
@@ -5411,32 +5384,32 @@ public final class EventQuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestRedeemResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -5491,49 +5464,13 @@ public final class EventQuestProto {
       "tQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", });
-          internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterUuids", });
-          internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", });
-          internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", "QuestId", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -5541,6 +5478,45 @@ public final class EventQuestProto {
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "QuestId", });
+    internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterUuids", });
+    internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "QuestId", });
+    internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", "QuestId", });
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

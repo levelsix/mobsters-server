@@ -11,15 +11,18 @@ public class FileDownload implements Serializable {
 	private int priority;
 	private boolean downloadOnlyOverWifi;
 	private boolean useIphone6Prefix;
+	private boolean useIpadSuffix;
 
 	public FileDownload(int id, String fileName, int priority,
-			boolean downloadOnlyOverWifi, boolean useIphone6Prefix) {
+			boolean downloadOnlyOverWifi, boolean useIphone6Prefix,
+			boolean useIpadSuffix) {
 		super();
 		this.id = id;
 		this.fileName = fileName;
 		this.priority = priority;
 		this.downloadOnlyOverWifi = downloadOnlyOverWifi;
 		this.useIphone6Prefix = useIphone6Prefix;
+		this.useIpadSuffix = useIpadSuffix;
 	}
 
 	public int getId() {
@@ -61,13 +64,23 @@ public class FileDownload implements Serializable {
 	public void setUseIphone6Prefix(boolean useIphone6Prefix) {
 		this.useIphone6Prefix = useIphone6Prefix;
 	}
+	
+	
+
+	public boolean isUseIpadSuffix() {
+		return useIpadSuffix;
+	}
+
+	public void setUseIpadSuffix(boolean useIpadSuffix) {
+		this.useIpadSuffix = useIpadSuffix;
+	}
 
 	@Override
 	public String toString() {
 		return "FileDownload [id=" + id + ", fileName=" + fileName
 				+ ", priority=" + priority + ", downloadOnlyOverWifi="
 				+ downloadOnlyOverWifi + ", useIphone6Prefix="
-				+ useIphone6Prefix + "]";
+				+ useIphone6Prefix + ", useIpadSuffix=" + useIpadSuffix + "]";
 	}
 
 }

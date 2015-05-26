@@ -64,6 +64,8 @@ public class ExchangeGemsForResourcesController extends EventController {
 		ExchangeGemsForResourcesRequestProto reqProto = ((ExchangeGemsForResourcesRequestEvent) event)
 				.getExchangeGemsForResourcesRequestProto();
 
+		log.info("reqProto: ", reqProto);
+		
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
 				.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
@@ -116,6 +118,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 				previousCurrency.put(miscMethods.cash, user.getCash());
 				previousCurrency.put(miscMethods.oil, user.getOil());
 				previousCurrency.put(miscMethods.gems, user.getGems());
+				previousCurrency.put(miscMethods.gachaCredits, user.getGachaCredits());
 				successful = writeChangesToDb(user, numGems, resourceType,
 						numResources, maxCash, maxOil, currencyChange);
 			}
@@ -192,6 +195,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 		int cashChange = 0;
 		int oilChange = 0;
+		int gachaCreditsChange = 0;
 		int gemChange = -1 * numGems;
 
 		if (ResourceType.CASH == resourceType) {
@@ -208,22 +212,25 @@ public class ExchangeGemsForResourcesController extends EventController {
 				int maxOilUserCanGain = maxOil - curOil;
 				oilChange = Math.min(numResources, maxOilUserCanGain);
 			}
+		} else if (ResourceType.GACHA_CREDITS == resourceType) {
+			gachaCreditsChange = numResources;
 		}
+		
 
-		if (0 == oilChange && 0 == cashChange) {
+		if (0 == oilChange && 0 == cashChange && 0 == gachaCreditsChange) {
 			//  		log.error("oil and cash (user exchanged) for gems are both 0. oilChange=" +
 			//  				oilChange + "\t cashChange=" + cashChange + "\t gemChange=" + gemChange +
 			//  				"\t maxOil=" + maxOil + "\t maxCash=" + maxCash);
-			String preface = "oil and cash (user exchanged) for gems are both 0.";
+			String preface = "oil and cash and gachacredits (user exchanged) for gems are all 0.";
 			log.error(String.format(
-					"%s oilChange=%s, cashChange=%s, gemChange=%s", preface,
-					oilChange, cashChange, gemChange));
+					"%s oilChange=%s, cashChange=%s, gachaCreditsChange = %s, gemChange=%s", preface,
+					oilChange, cashChange, gachaCreditsChange, gemChange));
 			return false;
 		}
 
 		log.info(String.format("user before: %s", user));
 		int numUpdated = user.updateRelativeCashAndOilAndGems(cashChange,
-				oilChange, gemChange);
+				oilChange, gemChange, gachaCreditsChange);
 		if (2 != numUpdated && 1 != numUpdated) {
 			log.error(String.format("did not increase user's %s by %s",
 					resourceType, numResources));
@@ -234,6 +241,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 			}
 			if (0 != oilChange) {
 				currencyChange.put(miscMethods.oil, oilChange);
+			}
+			if( 0 != gachaCreditsChange) {
+				currencyChange.put(miscMethods.gachaCredits, gachaCreditsChange);
 			}
 			if (0 != gemChange) {
 				currencyChange.put(miscMethods.gems, gemChange);
@@ -254,6 +264,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 		String cash = miscMethods.cash;
 		String oil = miscMethods.oil;
 		String gems = miscMethods.gems;
+		String gachaCredits = miscMethods.gachaCredits;
 
 		String reasonForChange = ControllerConstants.UCHRFC__CURRENCY_EXCHANGE;
 		StringBuilder detailsSb = new StringBuilder();
@@ -272,12 +283,15 @@ public class ExchangeGemsForResourcesController extends EventController {
 		currentCurrencies.put(cash, aUser.getCash());
 		currentCurrencies.put(oil, aUser.getOil());
 		currentCurrencies.put(gems, aUser.getGems());
+		currentCurrencies.put(gachaCredits, aUser.getGachaCredits());
 		reasonsForChanges.put(cash, reasonForChange);
 		reasonsForChanges.put(oil, reasonForChange);
 		reasonsForChanges.put(gems, reasonForChange);
+		reasonsForChanges.put(gachaCredits, reasonForChange);
 		details.put(cash, detailsSb.toString());
 		details.put(oil, detailsSb.toString());
 		details.put(gems, detailsSb.toString());
+		details.put(gachaCredits, detailsSb.toString());
 
 		miscMethods
 				.writeToUserCurrencyOneUser(userId, curTime, currencyChange,

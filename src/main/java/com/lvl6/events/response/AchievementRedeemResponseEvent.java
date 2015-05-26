@@ -27,5 +27,9 @@ public class AchievementRedeemResponseEvent extends NormalResponseEvent<Achievem
 			AchievementRedeemResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return achievementRedeemResponseProto.getSerializedSize();
+	}
 
 }

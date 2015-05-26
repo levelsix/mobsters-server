@@ -3,6 +3,7 @@ package com.lvl6.server.controller.actionobjects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
@@ -20,6 +22,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
@@ -43,6 +46,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final CreateInfoProtoUtils createInfoProtoUtils;
 	private final ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 	private final MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private final BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
@@ -53,7 +57,9 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			MonsterStuffUtils monsterStuffUtils,
 			CreateInfoProtoUtils createInfoProtoUtils,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil)
+	{
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
@@ -65,6 +71,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.createInfoProtoUtils = createInfoProtoUtils;
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.battleReplayForUserRetrieveUtil = battleReplayForUserRetrieveUtil;
 	}
 
 	//derived state
@@ -73,7 +80,9 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private List<PvpBattleHistory> attackedOthersHistoryList;
 	private Set<String> userIds;
 	private Set<String> attackerIds;
+	private Set<String> replayIds;
 
+	private Map<String, BattleReplayForUser> replayIdToReplay;
 	private List<String> attackerIdsList;
 	private Map<String, List<MonsterForUser>> userIdsToUserMonsters;
 	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
@@ -123,6 +132,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	public void separateHistory() {
 		gotAttackedHistoryList = new ArrayList<PvpBattleHistory>();
 		attackedOthersHistoryList = new ArrayList<PvpBattleHistory>();
+		replayIds = new HashSet<String>();
+
 		for (PvpBattleHistory history : historyList) {
 			String attackerId = history.getAttackerId();
 			if (attackerId.equals(userId)) {
@@ -130,6 +141,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 				attackedOthersHistoryList.add(history);
 			} else {
 				gotAttackedHistoryList.add(history);
+			}
+			String replayId = history.getReplayId();
+			if (null != replayId && !replayId.isEmpty())
+			{
+				replayIds.add(replayId);
 			}
 		}
 	}
@@ -140,6 +156,9 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			return;
 		}
 
+		//TODO: consider searching by creatorId as well
+		replayIdToReplay = battleReplayForUserRetrieveUtil
+				.getBattleReplayIdsToReplays(replayIds);
 		if (null != gotAttackedHistoryList && !gotAttackedHistoryList.isEmpty()) {
 			setGotAttackedProtos(useMe);
 		}
@@ -186,7 +205,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings);
+						attackerIdsToProspectiveOilWinnings,
+						replayIdToReplay);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);
 	}
@@ -299,7 +319,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//create PvpHistory for battles where this user attacked others
 		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 				.createAttackedOthersPvpHistoryProto(userId, idsToUsers,
-						attackedOthersHistoryList);
+						attackedOthersHistoryList, replayIdToReplay);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);
 

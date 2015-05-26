@@ -31,5 +31,9 @@ public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateU
 	public UpdateUserCurrencyResponseProto getUpdateUserCurrencyResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return updateUserCurrencyResponseProto.getSerializedSize();
+	}
 
 }

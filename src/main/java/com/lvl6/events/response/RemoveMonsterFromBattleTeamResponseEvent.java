@@ -31,5 +31,9 @@ public class RemoveMonsterFromBattleTeamResponseEvent extends	NormalResponseEven
 	public RemoveMonsterFromBattleTeamResponseProto getRemoveMonsterFromBattleTeamResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return removeMonsterFromBattleTeamResponseProto.getSerializedSize();
+	}
 
 }

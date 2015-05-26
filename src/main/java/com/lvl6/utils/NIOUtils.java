@@ -25,7 +25,11 @@ public class NIOUtils {
 	 * first, writes the header, then the event into the given ByteBuffer in
 	 * preparation for the channel write
 	 */
-	public static void prepBuffer(ResponseEvent event, ByteBuffer writeBuffer) {
+	public static ByteBuffer prepBuffer(ResponseEvent event) {
+
+		ByteBuffer writeBuffer = ByteBuffer
+				.allocateDirect(event.eventSize()+Attachment.HEADER_SIZE);
+		
 		// write header
 		writeBuffer.clear();
 		
@@ -52,6 +56,8 @@ public class NIOUtils {
 
 		// prepare for a channel.write
 		writeBuffer.flip();
+		
+		return writeBuffer;
 	}
 
 	/**

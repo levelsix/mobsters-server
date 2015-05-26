@@ -27,5 +27,10 @@ public class AttackClanRaidMonsterResponseEvent extends NormalResponseEvent<Atta
 			AttackClanRaidMonsterResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	
+	public int eventSize() {
+		return attackClanRaidMonsterResponseProto.getSerializedSize();
+	}
 
 }

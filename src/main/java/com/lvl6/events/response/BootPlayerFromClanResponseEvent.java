@@ -27,5 +27,9 @@ public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPla
 			BootPlayerFromClanResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return bootPlayerFromClanResponseProto.getSerializedSize();
+	}
 
 }

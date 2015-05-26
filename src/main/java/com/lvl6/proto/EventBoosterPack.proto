@@ -1,8 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "BoosterPackStuff.proto";
-import "Item.proto";
-import "MonsterStuff.proto";
+import "Reward.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -23,6 +22,11 @@ message PurchaseBoosterPackRequestProto {
 	//used to implement one free booster pack per day,
 	//set to true to make server not charge user
 	optional bool dailyFreeBoosterPack = 4;
+	
+	optional bool buyingInBulk = 5; //cant be true when getting rigged pack
+	
+	optional int32 gemsSpent = 6;
+	optional int32 gachaCreditsChange = 7;
 }
 
 message PurchaseBoosterPackResponseProto {
@@ -33,15 +37,16 @@ message PurchaseBoosterPackResponseProto {
 	//and he needs one to complete an existing monster
 	//there would be one monster that would be completed
 	//and another that would be the remaining pieces of the monster
-	repeated FullUserMonsterProto updatedOrNew = 3;
 	
-	optional BoosterItemProto prize = 4;
-	repeated UserItemProto updatedUserItems = 5;
+	repeated BoosterItemProto prize = 4;
+	
+	optional UserRewardProto reward = 6;
 	
 	enum PurchaseBoosterPackStatus {
 		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_INSUFFICIENT_GACHA_CREDITS = 2;
 		FAIL_OTHER = 3;
+		FAIL_INSUFFICIENT_GEMS  = 4;
 	}
 }
 

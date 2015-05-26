@@ -3,6 +3,7 @@
 import "BoosterPackStuff.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
+import "Reward.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -29,6 +30,9 @@ message TradeItemForBoosterResponseProto {
 	
 	optional BoosterItemProto prize = 4;
 	repeated UserItemProto updatedUserItems = 5;
+	
+	optional UserRewardProto rewards = 6;
+	
 	
 	enum TradeItemForBoosterStatus {
 		SUCCESS = 1;

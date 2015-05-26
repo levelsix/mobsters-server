@@ -8,10 +8,10 @@ public final class SalesProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface SalesPackageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SalesPackageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SalesPackageProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 salesPackageId = 1;
     /**
      * <code>optional int32 salesPackageId = 1;</code>
      */
@@ -21,7 +21,6 @@ public final class SalesProto {
      */
     int getSalesPackageId();
 
-    // optional string salesProductId = 2;
     /**
      * <code>optional string salesProductId = 2;</code>
      */
@@ -36,7 +35,6 @@ public final class SalesProto {
     com.google.protobuf.ByteString
         getSalesProductIdBytes();
 
-    // optional int64 price = 3;
     /**
      * <code>optional int64 price = 3;</code>
      */
@@ -46,7 +44,6 @@ public final class SalesProto {
      */
     long getPrice();
 
-    // optional string uuid = 4;
     /**
      * <code>optional string uuid = 4;</code>
      */
@@ -61,7 +58,6 @@ public final class SalesProto {
     com.google.protobuf.ByteString
         getUuidBytes();
 
-    // repeated .com.lvl6.proto.SalesItemProto sip = 5;
     /**
      * <code>repeated .com.lvl6.proto.SalesItemProto sip = 5;</code>
      */
@@ -86,7 +82,6 @@ public final class SalesProto {
     com.lvl6.proto.SalesProto.SalesItemProtoOrBuilder getSipOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.SalesDisplayItemProto sdip = 6;
     /**
      * <code>repeated .com.lvl6.proto.SalesDisplayItemProto sdip = 6;</code>
      */
@@ -111,7 +106,6 @@ public final class SalesProto {
     com.lvl6.proto.SalesProto.SalesDisplayItemProtoOrBuilder getSdipOrBuilder(
         int index);
 
-    // repeated .com.lvl6.proto.CustomMenuProto cmp = 7;
     /**
      * <code>repeated .com.lvl6.proto.CustomMenuProto cmp = 7;</code>
      */
@@ -136,7 +130,6 @@ public final class SalesProto {
     com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder getCmpOrBuilder(
         int index);
 
-    // optional int32 succId = 8;
     /**
      * <code>optional int32 succId = 8;</code>
      */
@@ -146,7 +139,6 @@ public final class SalesProto {
      */
     int getSuccId();
 
-    // optional int64 timeStart = 9;
     /**
      * <code>optional int64 timeStart = 9;</code>
      */
@@ -156,7 +148,6 @@ public final class SalesProto {
      */
     long getTimeStart();
 
-    // optional int64 timeEnd = 10;
     /**
      * <code>optional int64 timeEnd = 10;</code>
      */
@@ -166,7 +157,6 @@ public final class SalesProto {
      */
     long getTimeEnd();
 
-    // optional string animatingIcon = 11;
     /**
      * <code>optional string animatingIcon = 11;</code>
      */
@@ -181,7 +171,6 @@ public final class SalesProto {
     com.google.protobuf.ByteString
         getAnimatingIconBytes();
 
-    // optional string slamIcon = 12;
     /**
      * <code>optional string slamIcon = 12;</code>
      */
@@ -196,7 +185,6 @@ public final class SalesProto {
     com.google.protobuf.ByteString
         getSlamIconBytes();
 
-    // optional string titleColor = 13;
     /**
      * <code>optional string titleColor = 13;</code>
      */
@@ -210,13 +198,23 @@ public final class SalesProto {
      */
     com.google.protobuf.ByteString
         getTitleColorBytes();
+
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    boolean hasPriority();
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    int getPriority();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SalesPackageProto}
    */
   public static final class SalesPackageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SalesPackageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SalesPackageProto)
+      SalesPackageProtoOrBuilder {
     // Use SalesPackageProto.newBuilder() to construct.
     private SalesPackageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -268,8 +266,9 @@ public final class SalesProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              salesProductId_ = input.readBytes();
+              salesProductId_ = bs;
               break;
             }
             case 24: {
@@ -278,8 +277,9 @@ public final class SalesProto {
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              uuid_ = input.readBytes();
+              uuid_ = bs;
               break;
             }
             case 42: {
@@ -322,18 +322,26 @@ public final class SalesProto {
               break;
             }
             case 90: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              animatingIcon_ = input.readBytes();
+              animatingIcon_ = bs;
               break;
             }
             case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              slamIcon_ = input.readBytes();
+              slamIcon_ = bs;
               break;
             }
             case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
-              titleColor_ = input.readBytes();
+              titleColor_ = bs;
+              break;
+            }
+            case 112: {
+              bitField0_ |= 0x00000400;
+              priority_ = input.readInt32();
               break;
             }
           }
@@ -385,7 +393,6 @@ public final class SalesProto {
     }
 
     private int bitField0_;
-    // optional int32 salesPackageId = 1;
     public static final int SALESPACKAGEID_FIELD_NUMBER = 1;
     private int salesPackageId_;
     /**
@@ -401,7 +408,6 @@ public final class SalesProto {
       return salesPackageId_;
     }
 
-    // optional string salesProductId = 2;
     public static final int SALESPRODUCTID_FIELD_NUMBER = 2;
     private java.lang.Object salesProductId_;
     /**
@@ -444,7 +450,6 @@ public final class SalesProto {
       }
     }
 
-    // optional int64 price = 3;
     public static final int PRICE_FIELD_NUMBER = 3;
     private long price_;
     /**
@@ -460,7 +465,6 @@ public final class SalesProto {
       return price_;
     }
 
-    // optional string uuid = 4;
     public static final int UUID_FIELD_NUMBER = 4;
     private java.lang.Object uuid_;
     /**
@@ -503,7 +507,6 @@ public final class SalesProto {
       }
     }
 
-    // repeated .com.lvl6.proto.SalesItemProto sip = 5;
     public static final int SIP_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.SalesProto.SalesItemProto> sip_;
     /**
@@ -539,7 +542,6 @@ public final class SalesProto {
       return sip_.get(index);
     }
 
-    // repeated .com.lvl6.proto.SalesDisplayItemProto sdip = 6;
     public static final int SDIP_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.SalesProto.SalesDisplayItemProto> sdip_;
     /**
@@ -575,7 +577,6 @@ public final class SalesProto {
       return sdip_.get(index);
     }
 
-    // repeated .com.lvl6.proto.CustomMenuProto cmp = 7;
     public static final int CMP_FIELD_NUMBER = 7;
     private java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> cmp_;
     /**
@@ -611,7 +612,6 @@ public final class SalesProto {
       return cmp_.get(index);
     }
 
-    // optional int32 succId = 8;
     public static final int SUCCID_FIELD_NUMBER = 8;
     private int succId_;
     /**
@@ -627,7 +627,6 @@ public final class SalesProto {
       return succId_;
     }
 
-    // optional int64 timeStart = 9;
     public static final int TIMESTART_FIELD_NUMBER = 9;
     private long timeStart_;
     /**
@@ -643,7 +642,6 @@ public final class SalesProto {
       return timeStart_;
     }
 
-    // optional int64 timeEnd = 10;
     public static final int TIMEEND_FIELD_NUMBER = 10;
     private long timeEnd_;
     /**
@@ -659,7 +657,6 @@ public final class SalesProto {
       return timeEnd_;
     }
 
-    // optional string animatingIcon = 11;
     public static final int ANIMATINGICON_FIELD_NUMBER = 11;
     private java.lang.Object animatingIcon_;
     /**
@@ -702,7 +699,6 @@ public final class SalesProto {
       }
     }
 
-    // optional string slamIcon = 12;
     public static final int SLAMICON_FIELD_NUMBER = 12;
     private java.lang.Object slamIcon_;
     /**
@@ -745,7 +741,6 @@ public final class SalesProto {
       }
     }
 
-    // optional string titleColor = 13;
     public static final int TITLECOLOR_FIELD_NUMBER = 13;
     private java.lang.Object titleColor_;
     /**
@@ -788,6 +783,21 @@ public final class SalesProto {
       }
     }
 
+    public static final int PRIORITY_FIELD_NUMBER = 14;
+    private int priority_;
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 priority = 14;</code>
+     */
+    public int getPriority() {
+      return priority_;
+    }
+
     private void initFields() {
       salesPackageId_ = 0;
       salesProductId_ = "";
@@ -802,11 +812,13 @@ public final class SalesProto {
       animatingIcon_ = "";
       slamIcon_ = "";
       titleColor_ = "";
+      priority_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -853,6 +865,9 @@ public final class SalesProto {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(13, getTitleColorBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(14, priority_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -914,6 +929,10 @@ public final class SalesProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(13, getTitleColorBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(14, priority_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -997,8 +1016,9 @@ public final class SalesProto {
      * Protobuf type {@code com.lvl6.proto.SalesPackageProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SalesPackageProto)
+        com.lvl6.proto.SalesProto.SalesPackageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SalesProto.internal_static_com_lvl6_proto_SalesPackageProto_descriptor;
@@ -1072,6 +1092,8 @@ public final class SalesProto {
         bitField0_ = (bitField0_ & ~0x00000800);
         titleColor_ = "";
         bitField0_ = (bitField0_ & ~0x00001000);
+        priority_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -1167,6 +1189,10 @@ public final class SalesProto {
           to_bitField0_ |= 0x00000200;
         }
         result.titleColor_ = titleColor_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.priority_ = priority_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1301,6 +1327,9 @@ public final class SalesProto {
           titleColor_ = other.titleColor_;
           onChanged();
         }
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1328,7 +1357,6 @@ public final class SalesProto {
       }
       private int bitField0_;
 
-      // optional int32 salesPackageId = 1;
       private int salesPackageId_ ;
       /**
        * <code>optional int32 salesPackageId = 1;</code>
@@ -1361,7 +1389,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional string salesProductId = 2;
       private java.lang.Object salesProductId_ = "";
       /**
        * <code>optional string salesProductId = 2;</code>
@@ -1375,9 +1402,12 @@ public final class SalesProto {
       public java.lang.String getSalesProductId() {
         java.lang.Object ref = salesProductId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          salesProductId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            salesProductId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1435,7 +1465,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional int64 price = 3;
       private long price_ ;
       /**
        * <code>optional int64 price = 3;</code>
@@ -1468,7 +1497,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional string uuid = 4;
       private java.lang.Object uuid_ = "";
       /**
        * <code>optional string uuid = 4;</code>
@@ -1482,9 +1510,12 @@ public final class SalesProto {
       public java.lang.String getUuid() {
         java.lang.Object ref = uuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          uuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            uuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1542,7 +1573,6 @@ public final class SalesProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.SalesItemProto sip = 5;
       private java.util.List<com.lvl6.proto.SalesProto.SalesItemProto> sip_ =
         java.util.Collections.emptyList();
       private void ensureSipIsMutable() {
@@ -1684,7 +1714,8 @@ public final class SalesProto {
           java.lang.Iterable<? extends com.lvl6.proto.SalesProto.SalesItemProto> values) {
         if (sipBuilder_ == null) {
           ensureSipIsMutable();
-          super.addAll(values, sip_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, sip_);
           onChanged();
         } else {
           sipBuilder_.addAllMessages(values);
@@ -1782,7 +1813,6 @@ public final class SalesProto {
         return sipBuilder_;
       }
 
-      // repeated .com.lvl6.proto.SalesDisplayItemProto sdip = 6;
       private java.util.List<com.lvl6.proto.SalesProto.SalesDisplayItemProto> sdip_ =
         java.util.Collections.emptyList();
       private void ensureSdipIsMutable() {
@@ -1924,7 +1954,8 @@ public final class SalesProto {
           java.lang.Iterable<? extends com.lvl6.proto.SalesProto.SalesDisplayItemProto> values) {
         if (sdipBuilder_ == null) {
           ensureSdipIsMutable();
-          super.addAll(values, sdip_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, sdip_);
           onChanged();
         } else {
           sdipBuilder_.addAllMessages(values);
@@ -2022,7 +2053,6 @@ public final class SalesProto {
         return sdipBuilder_;
       }
 
-      // repeated .com.lvl6.proto.CustomMenuProto cmp = 7;
       private java.util.List<com.lvl6.proto.CustomMenuesProto.CustomMenuProto> cmp_ =
         java.util.Collections.emptyList();
       private void ensureCmpIsMutable() {
@@ -2164,7 +2194,8 @@ public final class SalesProto {
           java.lang.Iterable<? extends com.lvl6.proto.CustomMenuesProto.CustomMenuProto> values) {
         if (cmpBuilder_ == null) {
           ensureCmpIsMutable();
-          super.addAll(values, cmp_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, cmp_);
           onChanged();
         } else {
           cmpBuilder_.addAllMessages(values);
@@ -2262,7 +2293,6 @@ public final class SalesProto {
         return cmpBuilder_;
       }
 
-      // optional int32 succId = 8;
       private int succId_ ;
       /**
        * <code>optional int32 succId = 8;</code>
@@ -2295,7 +2325,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional int64 timeStart = 9;
       private long timeStart_ ;
       /**
        * <code>optional int64 timeStart = 9;</code>
@@ -2328,7 +2357,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional int64 timeEnd = 10;
       private long timeEnd_ ;
       /**
        * <code>optional int64 timeEnd = 10;</code>
@@ -2361,7 +2389,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional string animatingIcon = 11;
       private java.lang.Object animatingIcon_ = "";
       /**
        * <code>optional string animatingIcon = 11;</code>
@@ -2375,9 +2402,12 @@ public final class SalesProto {
       public java.lang.String getAnimatingIcon() {
         java.lang.Object ref = animatingIcon_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          animatingIcon_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            animatingIcon_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2435,7 +2465,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional string slamIcon = 12;
       private java.lang.Object slamIcon_ = "";
       /**
        * <code>optional string slamIcon = 12;</code>
@@ -2449,9 +2478,12 @@ public final class SalesProto {
       public java.lang.String getSlamIcon() {
         java.lang.Object ref = slamIcon_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          slamIcon_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            slamIcon_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2509,7 +2541,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional string titleColor = 13;
       private java.lang.Object titleColor_ = "";
       /**
        * <code>optional string titleColor = 13;</code>
@@ -2523,9 +2554,12 @@ public final class SalesProto {
       public java.lang.String getTitleColor() {
         java.lang.Object ref = titleColor_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          titleColor_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            titleColor_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2583,6 +2617,38 @@ public final class SalesProto {
         return this;
       }
 
+      private int priority_ ;
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public int getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public Builder setPriority(int value) {
+        bitField0_ |= 0x00002000;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 priority = 14;</code>
+       */
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        priority_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SalesPackageProto)
     }
 
@@ -2594,10 +2660,10 @@ public final class SalesProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SalesPackageProto)
   }
 
-  public interface SalesItemProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SalesItemProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SalesItemProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 salesItemId = 1;
     /**
      * <code>optional int32 salesItemId = 1;</code>
      */
@@ -2607,7 +2673,6 @@ public final class SalesProto {
      */
     int getSalesItemId();
 
-    // optional int32 salesPackageId = 2;
     /**
      * <code>optional int32 salesPackageId = 2;</code>
      */
@@ -2617,7 +2682,6 @@ public final class SalesProto {
      */
     int getSalesPackageId();
 
-    // optional .com.lvl6.proto.RewardProto reward = 3;
     /**
      * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
@@ -2635,8 +2699,9 @@ public final class SalesProto {
    * Protobuf type {@code com.lvl6.proto.SalesItemProto}
    */
   public static final class SalesItemProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SalesItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SalesItemProto)
+      SalesItemProtoOrBuilder {
     // Use SalesItemProto.newBuilder() to construct.
     private SalesItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2745,7 +2810,6 @@ public final class SalesProto {
     }
 
     private int bitField0_;
-    // optional int32 salesItemId = 1;
     public static final int SALESITEMID_FIELD_NUMBER = 1;
     private int salesItemId_;
     /**
@@ -2761,7 +2825,6 @@ public final class SalesProto {
       return salesItemId_;
     }
 
-    // optional int32 salesPackageId = 2;
     public static final int SALESPACKAGEID_FIELD_NUMBER = 2;
     private int salesPackageId_;
     /**
@@ -2777,7 +2840,6 @@ public final class SalesProto {
       return salesPackageId_;
     }
 
-    // optional .com.lvl6.proto.RewardProto reward = 3;
     public static final int REWARD_FIELD_NUMBER = 3;
     private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
@@ -2807,7 +2869,8 @@ public final class SalesProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2928,8 +2991,9 @@ public final class SalesProto {
      * Protobuf type {@code com.lvl6.proto.SalesItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SalesProto.SalesItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SalesItemProto)
+        com.lvl6.proto.SalesProto.SalesItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SalesProto.internal_static_com_lvl6_proto_SalesItemProto_descriptor;
@@ -3069,7 +3133,6 @@ public final class SalesProto {
       }
       private int bitField0_;
 
-      // optional int32 salesItemId = 1;
       private int salesItemId_ ;
       /**
        * <code>optional int32 salesItemId = 1;</code>
@@ -3102,7 +3165,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional int32 salesPackageId = 2;
       private int salesPackageId_ ;
       /**
        * <code>optional int32 salesPackageId = 2;</code>
@@ -3135,7 +3197,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.RewardProto reward = 3;
       private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
@@ -3244,7 +3305,7 @@ public final class SalesProto {
         if (rewardBuilder_ == null) {
           rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  reward_,
+                  getReward(),
                   getParentForChildren(),
                   isClean());
           reward_ = null;
@@ -3263,10 +3324,10 @@ public final class SalesProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SalesItemProto)
   }
 
-  public interface SalesDisplayItemProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface SalesDisplayItemProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SalesDisplayItemProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 salesItemId = 1;
     /**
      * <code>optional int32 salesItemId = 1;</code>
      */
@@ -3276,7 +3337,6 @@ public final class SalesProto {
      */
     int getSalesItemId();
 
-    // optional int32 salesPackageId = 2;
     /**
      * <code>optional int32 salesPackageId = 2;</code>
      */
@@ -3286,7 +3346,6 @@ public final class SalesProto {
      */
     int getSalesPackageId();
 
-    // optional .com.lvl6.proto.RewardProto reward = 3;
     /**
      * <code>optional .com.lvl6.proto.RewardProto reward = 3;</code>
      */
@@ -3304,8 +3363,9 @@ public final class SalesProto {
    * Protobuf type {@code com.lvl6.proto.SalesDisplayItemProto}
    */
   public static final class SalesDisplayItemProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SalesDisplayItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SalesDisplayItemProto)
+      SalesDisplayItemProtoOrBuilder {
     // Use SalesDisplayItemProto.newBuilder() to construct.
     private SalesDisplayItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3414,7 +3474,6 @@ public final class SalesProto {
     }
 
     private int bitField0_;
-    // optional int32 salesItemId = 1;
     public static final int SALESITEMID_FIELD_NUMBER = 1;
     private int salesItemId_;
     /**
@@ -3430,7 +3489,6 @@ public final class SalesProto {
       return salesItemId_;
     }
 
-    // optional int32 salesPackageId = 2;
     public static final int SALESPACKAGEID_FIELD_NUMBER = 2;
     private int salesPackageId_;
     /**
@@ -3446,7 +3504,6 @@ public final class SalesProto {
       return salesPackageId_;
     }
 
-    // optional .com.lvl6.proto.RewardProto reward = 3;
     public static final int REWARD_FIELD_NUMBER = 3;
     private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
@@ -3476,7 +3533,8 @@ public final class SalesProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3597,8 +3655,9 @@ public final class SalesProto {
      * Protobuf type {@code com.lvl6.proto.SalesDisplayItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SalesProto.SalesDisplayItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SalesDisplayItemProto)
+        com.lvl6.proto.SalesProto.SalesDisplayItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SalesProto.internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor;
@@ -3738,7 +3797,6 @@ public final class SalesProto {
       }
       private int bitField0_;
 
-      // optional int32 salesItemId = 1;
       private int salesItemId_ ;
       /**
        * <code>optional int32 salesItemId = 1;</code>
@@ -3771,7 +3829,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional int32 salesPackageId = 2;
       private int salesPackageId_ ;
       /**
        * <code>optional int32 salesPackageId = 2;</code>
@@ -3804,7 +3861,6 @@ public final class SalesProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.RewardProto reward = 3;
       private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
@@ -3913,7 +3969,7 @@ public final class SalesProto {
         if (rewardBuilder_ == null) {
           rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  reward_,
+                  getReward(),
                   getParentForChildren(),
                   isClean());
           reward_ = null;
@@ -3932,17 +3988,17 @@ public final class SalesProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SalesDisplayItemProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SalesPackageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SalesItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3958,7 +4014,7 @@ public final class SalesProto {
     java.lang.String[] descriptorData = {
       "\n\013Sales.proto\022\016com.lvl6.proto\032\nChat.prot" +
       "o\032\020CustomMenu.proto\032\014Reward.proto\032\026Share" +
-      "dEnumConfig.proto\032\nUser.proto\"\341\002\n\021SalesP" +
+      "dEnumConfig.proto\032\nUser.proto\"\363\002\n\021SalesP" +
       "ackageProto\022\026\n\016salesPackageId\030\001 \001(\005\022\026\n\016s" +
       "alesProductId\030\002 \001(\t\022\r\n\005price\030\003 \001(\003\022\014\n\004uu" +
       "id\030\004 \001(\t\022+\n\003sip\030\005 \003(\0132\036.com.lvl6.proto.S" +
@@ -3967,40 +4023,22 @@ public final class SalesProto {
       "\037.com.lvl6.proto.CustomMenuProto\022\016\n\006succ" +
       "Id\030\010 \001(\005\022\021\n\ttimeStart\030\t \001(\003\022\017\n\007timeEnd\030\n",
       " \001(\003\022\025\n\ranimatingIcon\030\013 \001(\t\022\020\n\010slamIcon\030" +
-      "\014 \001(\t\022\022\n\ntitleColor\030\r \001(\t\"j\n\016SalesItemPr" +
-      "oto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackage" +
-      "Id\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.prot" +
-      "o.RewardProto\"q\n\025SalesDisplayItemProto\022\023" +
-      "\n\013salesItemId\030\001 \001(\005\022\026\n\016salesPackageId\030\002 " +
-      "\001(\005\022+\n\006reward\030\003 \001(\0132\033.com.lvl6.proto.Rew" +
-      "ardProtoB\014B\nSalesProto"
+      "\014 \001(\t\022\022\n\ntitleColor\030\r \001(\t\022\020\n\010priority\030\016 " +
+      "\001(\005\"j\n\016SalesItemProto\022\023\n\013salesItemId\030\001 \001" +
+      "(\005\022\026\n\016salesPackageId\030\002 \001(\005\022+\n\006reward\030\003 \001" +
+      "(\0132\033.com.lvl6.proto.RewardProto\"q\n\025Sales" +
+      "DisplayItemProto\022\023\n\013salesItemId\030\001 \001(\005\022\026\n" +
+      "\016salesPackageId\030\002 \001(\005\022+\n\006reward\030\003 \001(\0132\033." +
+      "com.lvl6.proto.RewardProtoB\014B\nSalesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_SalesPackageProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SalesPackageProto_descriptor,
-              new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "Cmp", "SuccId", "TimeStart", "TimeEnd", "AnimatingIcon", "SlamIcon", "TitleColor", });
-          internal_static_com_lvl6_proto_SalesItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SalesItemProto_descriptor,
-              new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
-          internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_SalesDisplayItemProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor,
-              new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -4010,6 +4048,29 @@ public final class SalesProto {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_SalesPackageProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_SalesPackageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SalesPackageProto_descriptor,
+        new java.lang.String[] { "SalesPackageId", "SalesProductId", "Price", "Uuid", "Sip", "Sdip", "Cmp", "SuccId", "TimeStart", "TimeEnd", "AnimatingIcon", "SlamIcon", "TitleColor", "Priority", });
+    internal_static_com_lvl6_proto_SalesItemProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_SalesItemProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SalesItemProto_descriptor,
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
+    internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_SalesDisplayItemProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SalesDisplayItemProto_descriptor,
+        new java.lang.String[] { "SalesItemId", "SalesPackageId", "Reward", });
+    com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.CustomMenuesProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

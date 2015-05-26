@@ -8,10 +8,10 @@ public final class UserProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface MinimumClanProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumClanProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumClanProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string clanUuid = 1;
     /**
      * <code>optional string clanUuid = 1;</code>
      */
@@ -26,7 +26,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getClanUuidBytes();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -41,7 +40,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int64 createTime = 4;
     /**
      * <code>optional int64 createTime = 4;</code>
      *
@@ -59,7 +57,6 @@ public final class UserProto {
      */
     long getCreateTime();
 
-    // optional string description = 5;
     /**
      * <code>optional string description = 5;</code>
      */
@@ -74,7 +71,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
-    // optional string tag = 6;
     /**
      * <code>optional string tag = 6;</code>
      */
@@ -89,7 +85,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getTagBytes();
 
-    // optional bool requestToJoinRequired = 7;
     /**
      * <code>optional bool requestToJoinRequired = 7;</code>
      */
@@ -99,7 +94,6 @@ public final class UserProto {
      */
     boolean getRequestToJoinRequired();
 
-    // optional int32 clanIconId = 8;
     /**
      * <code>optional int32 clanIconId = 8;</code>
      */
@@ -119,8 +113,9 @@ public final class UserProto {
    * </pre>
    */
   public static final class MinimumClanProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumClanProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumClanProto)
+      MinimumClanProtoOrBuilder {
     // Use MinimumClanProto.newBuilder() to construct.
     private MinimumClanProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -167,13 +162,15 @@ public final class UserProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              clanUuid_ = input.readBytes();
+              clanUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 32: {
@@ -182,13 +179,15 @@ public final class UserProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              description_ = input.readBytes();
+              description_ = bs;
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              tag_ = input.readBytes();
+              tag_ = bs;
               break;
             }
             case 56: {
@@ -241,7 +240,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string clanUuid = 1;
     public static final int CLANUUID_FIELD_NUMBER = 1;
     private java.lang.Object clanUuid_;
     /**
@@ -284,7 +282,6 @@ public final class UserProto {
       }
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -327,7 +324,6 @@ public final class UserProto {
       }
     }
 
-    // optional int64 createTime = 4;
     public static final int CREATETIME_FIELD_NUMBER = 4;
     private long createTime_;
     /**
@@ -351,7 +347,6 @@ public final class UserProto {
       return createTime_;
     }
 
-    // optional string description = 5;
     public static final int DESCRIPTION_FIELD_NUMBER = 5;
     private java.lang.Object description_;
     /**
@@ -394,7 +389,6 @@ public final class UserProto {
       }
     }
 
-    // optional string tag = 6;
     public static final int TAG_FIELD_NUMBER = 6;
     private java.lang.Object tag_;
     /**
@@ -437,7 +431,6 @@ public final class UserProto {
       }
     }
 
-    // optional bool requestToJoinRequired = 7;
     public static final int REQUESTTOJOINREQUIRED_FIELD_NUMBER = 7;
     private boolean requestToJoinRequired_;
     /**
@@ -453,7 +446,6 @@ public final class UserProto {
       return requestToJoinRequired_;
     }
 
-    // optional int32 clanIconId = 8;
     public static final int CLANICONID_FIELD_NUMBER = 8;
     private int clanIconId_;
     /**
@@ -481,7 +473,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -636,8 +629,9 @@ public final class UserProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumClanProto)
+        com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumClanProto_descriptor;
@@ -812,7 +806,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string clanUuid = 1;
       private java.lang.Object clanUuid_ = "";
       /**
        * <code>optional string clanUuid = 1;</code>
@@ -826,9 +819,12 @@ public final class UserProto {
       public java.lang.String getClanUuid() {
         java.lang.Object ref = clanUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          clanUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            clanUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -886,7 +882,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -900,9 +895,12 @@ public final class UserProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -960,7 +958,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 createTime = 4;
       private long createTime_ ;
       /**
        * <code>optional int64 createTime = 4;</code>
@@ -1009,7 +1006,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string description = 5;
       private java.lang.Object description_ = "";
       /**
        * <code>optional string description = 5;</code>
@@ -1023,9 +1019,12 @@ public final class UserProto {
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          description_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            description_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1083,7 +1082,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string tag = 6;
       private java.lang.Object tag_ = "";
       /**
        * <code>optional string tag = 6;</code>
@@ -1097,9 +1095,12 @@ public final class UserProto {
       public java.lang.String getTag() {
         java.lang.Object ref = tag_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          tag_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tag_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1157,7 +1158,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional bool requestToJoinRequired = 7;
       private boolean requestToJoinRequired_ ;
       /**
        * <code>optional bool requestToJoinRequired = 7;</code>
@@ -1190,7 +1190,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 clanIconId = 8;
       private int clanIconId_ ;
       /**
        * <code>optional int32 clanIconId = 8;</code>
@@ -1234,10 +1233,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumClanProto)
   }
 
-  public interface MinimumUserProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumUserProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -1252,7 +1251,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -1267,7 +1265,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional .com.lvl6.proto.MinimumClanProto clan = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto clan = 3;</code>
      */
@@ -1281,7 +1278,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getClanOrBuilder();
 
-    // optional int32 avatarMonsterId = 4;
     /**
      * <code>optional int32 avatarMonsterId = 4;</code>
      */
@@ -1295,8 +1291,9 @@ public final class UserProto {
    * Protobuf type {@code com.lvl6.proto.MinimumUserProto}
    */
   public static final class MinimumUserProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumUserProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserProto)
+      MinimumUserProtoOrBuilder {
     // Use MinimumUserProto.newBuilder() to construct.
     private MinimumUserProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1343,13 +1340,15 @@ public final class UserProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 26: {
@@ -1410,7 +1409,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -1453,7 +1451,6 @@ public final class UserProto {
       }
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -1496,7 +1493,6 @@ public final class UserProto {
       }
     }
 
-    // optional .com.lvl6.proto.MinimumClanProto clan = 3;
     public static final int CLAN_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumClanProto clan_;
     /**
@@ -1518,7 +1514,6 @@ public final class UserProto {
       return clan_;
     }
 
-    // optional int32 avatarMonsterId = 4;
     public static final int AVATARMONSTERID_FIELD_NUMBER = 4;
     private int avatarMonsterId_;
     /**
@@ -1543,7 +1538,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1671,8 +1667,9 @@ public final class UserProto {
      * Protobuf type {@code com.lvl6.proto.MinimumUserProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserProto)
+        com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProto_descriptor;
@@ -1825,7 +1822,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -1839,9 +1835,12 @@ public final class UserProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1899,7 +1898,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -1913,9 +1911,12 @@ public final class UserProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1973,7 +1974,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.MinimumClanProto clan = 3;
       private com.lvl6.proto.UserProto.MinimumClanProto clan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> clanBuilder_;
@@ -2082,7 +2082,7 @@ public final class UserProto {
         if (clanBuilder_ == null) {
           clanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  clan_,
+                  getClan(),
                   getParentForChildren(),
                   isClean());
           clan_ = null;
@@ -2090,7 +2090,6 @@ public final class UserProto {
         return clanBuilder_;
       }
 
-      // optional int32 avatarMonsterId = 4;
       private int avatarMonsterId_ ;
       /**
        * <code>optional int32 avatarMonsterId = 4;</code>
@@ -2134,10 +2133,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProto)
   }
 
-  public interface MinimumUserProtoWithLevelOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumUserProtoWithLevelOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserProtoWithLevel)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
      */
@@ -2151,7 +2150,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
 
-    // optional int32 level = 2;
     /**
      * <code>optional int32 level = 2;</code>
      */
@@ -2165,8 +2163,9 @@ public final class UserProto {
    * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithLevel}
    */
   public static final class MinimumUserProtoWithLevel extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumUserProtoWithLevelOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserProtoWithLevel)
+      MinimumUserProtoWithLevelOrBuilder {
     // Use MinimumUserProtoWithLevel.newBuilder() to construct.
     private MinimumUserProtoWithLevel(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2270,7 +2269,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     public static final int MINUSERPROTO_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
     /**
@@ -2292,7 +2290,6 @@ public final class UserProto {
       return minUserProto_;
     }
 
-    // optional int32 level = 2;
     public static final int LEVEL_FIELD_NUMBER = 2;
     private int level_;
     /**
@@ -2315,7 +2312,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2429,8 +2427,9 @@ public final class UserProto {
      * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithLevel}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserProtoWithLevel)
+        com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor;
@@ -2561,7 +2560,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
@@ -2670,7 +2668,7 @@ public final class UserProto {
         if (minUserProtoBuilder_ == null) {
           minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  minUserProto_,
+                  getMinUserProto(),
                   getParentForChildren(),
                   isClean());
           minUserProto_ = null;
@@ -2678,7 +2676,6 @@ public final class UserProto {
         return minUserProtoBuilder_;
       }
 
-      // optional int32 level = 2;
       private int level_ ;
       /**
        * <code>optional int32 level = 2;</code>
@@ -2722,10 +2719,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithLevel)
   }
 
-  public interface MinimumUserProtoWithFacebookIdOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumUserProtoWithFacebookIdOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserProtoWithFacebookId)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
      */
@@ -2739,7 +2736,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
 
-    // optional string facebookId = 2;
     /**
      * <code>optional string facebookId = 2;</code>
      */
@@ -2758,8 +2754,9 @@ public final class UserProto {
    * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithFacebookId}
    */
   public static final class MinimumUserProtoWithFacebookId extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumUserProtoWithFacebookIdOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserProtoWithFacebookId)
+      MinimumUserProtoWithFacebookIdOrBuilder {
     // Use MinimumUserProtoWithFacebookId.newBuilder() to construct.
     private MinimumUserProtoWithFacebookId(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2819,8 +2816,9 @@ public final class UserProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              facebookId_ = input.readBytes();
+              facebookId_ = bs;
               break;
             }
           }
@@ -2863,7 +2861,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     public static final int MINUSERPROTO_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
     /**
@@ -2885,7 +2882,6 @@ public final class UserProto {
       return minUserProto_;
     }
 
-    // optional string facebookId = 2;
     public static final int FACEBOOKID_FIELD_NUMBER = 2;
     private java.lang.Object facebookId_;
     /**
@@ -2935,7 +2931,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3049,8 +3046,9 @@ public final class UserProto {
      * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithFacebookId}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserProtoWithFacebookId)
+        com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor;
@@ -3183,7 +3181,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
@@ -3292,7 +3289,7 @@ public final class UserProto {
         if (minUserProtoBuilder_ == null) {
           minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  minUserProto_,
+                  getMinUserProto(),
                   getParentForChildren(),
                   isClean());
           minUserProto_ = null;
@@ -3300,7 +3297,6 @@ public final class UserProto {
         return minUserProtoBuilder_;
       }
 
-      // optional string facebookId = 2;
       private java.lang.Object facebookId_ = "";
       /**
        * <code>optional string facebookId = 2;</code>
@@ -3314,9 +3310,12 @@ public final class UserProto {
       public java.lang.String getFacebookId() {
         java.lang.Object ref = facebookId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          facebookId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            facebookId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3385,10 +3384,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithFacebookId)
   }
 
-  public interface MinimumUserProtoWithMaxResourcesOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MinimumUserProtoWithMaxResourcesOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserProtoWithMaxResources)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
      */
@@ -3402,7 +3401,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
 
-    // optional int32 maxCash = 2;
     /**
      * <code>optional int32 maxCash = 2;</code>
      */
@@ -3412,7 +3410,6 @@ public final class UserProto {
      */
     int getMaxCash();
 
-    // optional int32 maxOil = 3;
     /**
      * <code>optional int32 maxOil = 3;</code>
      */
@@ -3431,8 +3428,9 @@ public final class UserProto {
    * </pre>
    */
   public static final class MinimumUserProtoWithMaxResources extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumUserProtoWithMaxResourcesOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserProtoWithMaxResources)
+      MinimumUserProtoWithMaxResourcesOrBuilder {
     // Use MinimumUserProtoWithMaxResources.newBuilder() to construct.
     private MinimumUserProtoWithMaxResources(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3541,7 +3539,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
     public static final int MINUSERPROTO_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
     /**
@@ -3563,7 +3560,6 @@ public final class UserProto {
       return minUserProto_;
     }
 
-    // optional int32 maxCash = 2;
     public static final int MAXCASH_FIELD_NUMBER = 2;
     private int maxCash_;
     /**
@@ -3579,7 +3575,6 @@ public final class UserProto {
       return maxCash_;
     }
 
-    // optional int32 maxOil = 3;
     public static final int MAXOIL_FIELD_NUMBER = 3;
     private int maxOil_;
     /**
@@ -3603,7 +3598,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3729,8 +3725,9 @@ public final class UserProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserProtoWithMaxResources)
+        com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor;
@@ -3870,7 +3867,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
@@ -3979,7 +3975,7 @@ public final class UserProto {
         if (minUserProtoBuilder_ == null) {
           minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  minUserProto_,
+                  getMinUserProto(),
                   getParentForChildren(),
                   isClean());
           minUserProto_ = null;
@@ -3987,7 +3983,6 @@ public final class UserProto {
         return minUserProtoBuilder_;
       }
 
-      // optional int32 maxCash = 2;
       private int maxCash_ ;
       /**
        * <code>optional int32 maxCash = 2;</code>
@@ -4020,7 +4015,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 maxOil = 3;
       private int maxOil_ ;
       /**
        * <code>optional int32 maxOil = 3;</code>
@@ -4064,10 +4058,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithMaxResources)
   }
 
-  public interface UserFacebookInviteForSlotProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserFacebookInviteForSlotProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserFacebookInviteForSlotProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string inviteUuid = 1;
     /**
      * <code>optional string inviteUuid = 1;</code>
      */
@@ -4082,7 +4076,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getInviteUuidBytes();
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId inviter = 2;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithFacebookId inviter = 2;</code>
      */
@@ -4096,7 +4089,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getInviterOrBuilder();
 
-    // optional string recipientFacebookId = 3;
     /**
      * <code>optional string recipientFacebookId = 3;</code>
      */
@@ -4111,7 +4103,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getRecipientFacebookIdBytes();
 
-    // optional int64 timeOfInvite = 4;
     /**
      * <code>optional int64 timeOfInvite = 4;</code>
      */
@@ -4121,7 +4112,6 @@ public final class UserProto {
      */
     long getTimeOfInvite();
 
-    // optional int64 timeAccepted = 5;
     /**
      * <code>optional int64 timeAccepted = 5;</code>
      */
@@ -4131,7 +4121,6 @@ public final class UserProto {
      */
     long getTimeAccepted();
 
-    // optional string userStructUuid = 6;
     /**
      * <code>optional string userStructUuid = 6;</code>
      */
@@ -4146,7 +4135,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getUserStructUuidBytes();
 
-    // optional int32 structFbLvl = 7;
     /**
      * <code>optional int32 structFbLvl = 7;</code>
      *
@@ -4166,7 +4154,6 @@ public final class UserProto {
      */
     int getStructFbLvl();
 
-    // optional int64 redeemedTime = 8;
     /**
      * <code>optional int64 redeemedTime = 8;</code>
      */
@@ -4180,8 +4167,9 @@ public final class UserProto {
    * Protobuf type {@code com.lvl6.proto.UserFacebookInviteForSlotProto}
    */
   public static final class UserFacebookInviteForSlotProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserFacebookInviteForSlotProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserFacebookInviteForSlotProto)
+      UserFacebookInviteForSlotProtoOrBuilder {
     // Use UserFacebookInviteForSlotProto.newBuilder() to construct.
     private UserFacebookInviteForSlotProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4228,8 +4216,9 @@ public final class UserProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              inviteUuid_ = input.readBytes();
+              inviteUuid_ = bs;
               break;
             }
             case 18: {
@@ -4246,8 +4235,9 @@ public final class UserProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              recipientFacebookId_ = input.readBytes();
+              recipientFacebookId_ = bs;
               break;
             }
             case 32: {
@@ -4261,8 +4251,9 @@ public final class UserProto {
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              userStructUuid_ = input.readBytes();
+              userStructUuid_ = bs;
               break;
             }
             case 56: {
@@ -4315,7 +4306,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string inviteUuid = 1;
     public static final int INVITEUUID_FIELD_NUMBER = 1;
     private java.lang.Object inviteUuid_;
     /**
@@ -4358,7 +4348,6 @@ public final class UserProto {
       }
     }
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId inviter = 2;
     public static final int INVITER_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId inviter_;
     /**
@@ -4380,7 +4369,6 @@ public final class UserProto {
       return inviter_;
     }
 
-    // optional string recipientFacebookId = 3;
     public static final int RECIPIENTFACEBOOKID_FIELD_NUMBER = 3;
     private java.lang.Object recipientFacebookId_;
     /**
@@ -4423,7 +4411,6 @@ public final class UserProto {
       }
     }
 
-    // optional int64 timeOfInvite = 4;
     public static final int TIMEOFINVITE_FIELD_NUMBER = 4;
     private long timeOfInvite_;
     /**
@@ -4439,7 +4426,6 @@ public final class UserProto {
       return timeOfInvite_;
     }
 
-    // optional int64 timeAccepted = 5;
     public static final int TIMEACCEPTED_FIELD_NUMBER = 5;
     private long timeAccepted_;
     /**
@@ -4455,7 +4441,6 @@ public final class UserProto {
       return timeAccepted_;
     }
 
-    // optional string userStructUuid = 6;
     public static final int USERSTRUCTUUID_FIELD_NUMBER = 6;
     private java.lang.Object userStructUuid_;
     /**
@@ -4498,7 +4483,6 @@ public final class UserProto {
       }
     }
 
-    // optional int32 structFbLvl = 7;
     public static final int STRUCTFBLVL_FIELD_NUMBER = 7;
     private int structFbLvl_;
     /**
@@ -4524,7 +4508,6 @@ public final class UserProto {
       return structFbLvl_;
     }
 
-    // optional int64 redeemedTime = 8;
     public static final int REDEEMEDTIME_FIELD_NUMBER = 8;
     private long redeemedTime_;
     /**
@@ -4553,7 +4536,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4709,8 +4693,9 @@ public final class UserProto {
      * Protobuf type {@code com.lvl6.proto.UserFacebookInviteForSlotProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserFacebookInviteForSlotProto)
+        com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor;
@@ -4901,7 +4886,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string inviteUuid = 1;
       private java.lang.Object inviteUuid_ = "";
       /**
        * <code>optional string inviteUuid = 1;</code>
@@ -4915,9 +4899,12 @@ public final class UserProto {
       public java.lang.String getInviteUuid() {
         java.lang.Object ref = inviteUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          inviteUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            inviteUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4975,7 +4962,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId inviter = 2;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId inviter_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> inviterBuilder_;
@@ -5084,7 +5070,7 @@ public final class UserProto {
         if (inviterBuilder_ == null) {
           inviterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
-                  inviter_,
+                  getInviter(),
                   getParentForChildren(),
                   isClean());
           inviter_ = null;
@@ -5092,7 +5078,6 @@ public final class UserProto {
         return inviterBuilder_;
       }
 
-      // optional string recipientFacebookId = 3;
       private java.lang.Object recipientFacebookId_ = "";
       /**
        * <code>optional string recipientFacebookId = 3;</code>
@@ -5106,9 +5091,12 @@ public final class UserProto {
       public java.lang.String getRecipientFacebookId() {
         java.lang.Object ref = recipientFacebookId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          recipientFacebookId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            recipientFacebookId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -5166,7 +5154,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 timeOfInvite = 4;
       private long timeOfInvite_ ;
       /**
        * <code>optional int64 timeOfInvite = 4;</code>
@@ -5199,7 +5186,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 timeAccepted = 5;
       private long timeAccepted_ ;
       /**
        * <code>optional int64 timeAccepted = 5;</code>
@@ -5232,7 +5218,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string userStructUuid = 6;
       private java.lang.Object userStructUuid_ = "";
       /**
        * <code>optional string userStructUuid = 6;</code>
@@ -5246,9 +5231,12 @@ public final class UserProto {
       public java.lang.String getUserStructUuid() {
         java.lang.Object ref = userStructUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userStructUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -5306,7 +5294,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 structFbLvl = 7;
       private int structFbLvl_ ;
       /**
        * <code>optional int32 structFbLvl = 7;</code>
@@ -5359,7 +5346,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 redeemedTime = 8;
       private long redeemedTime_ ;
       /**
        * <code>optional int64 redeemedTime = 8;</code>
@@ -5403,10 +5389,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserFacebookInviteForSlotProto)
   }
 
-  public interface FullUserProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface FullUserProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FullUserProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -5421,7 +5407,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional string name = 2;
     /**
      * <code>optional string name = 2;</code>
      */
@@ -5436,7 +5421,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 level = 3;
     /**
      * <code>optional int32 level = 3;</code>
      */
@@ -5446,7 +5430,6 @@ public final class UserProto {
      */
     int getLevel();
 
-    // optional int32 gems = 4;
     /**
      * <code>optional int32 gems = 4;</code>
      */
@@ -5456,7 +5439,6 @@ public final class UserProto {
      */
     int getGems();
 
-    // optional int32 cash = 5;
     /**
      * <code>optional int32 cash = 5;</code>
      */
@@ -5466,7 +5448,6 @@ public final class UserProto {
      */
     int getCash();
 
-    // optional int32 oil = 42;
     /**
      * <code>optional int32 oil = 42;</code>
      */
@@ -5476,7 +5457,6 @@ public final class UserProto {
      */
     int getOil();
 
-    // optional int32 experience = 6;
     /**
      * <code>optional int32 experience = 6;</code>
      */
@@ -5486,7 +5466,6 @@ public final class UserProto {
      */
     int getExperience();
 
-    // optional int32 tasksCompleted = 7;
     /**
      * <code>optional int32 tasksCompleted = 7;</code>
      */
@@ -5496,7 +5475,6 @@ public final class UserProto {
      */
     int getTasksCompleted();
 
-    // optional string referralCode = 11;
     /**
      * <code>optional string referralCode = 11;</code>
      */
@@ -5511,7 +5489,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getReferralCodeBytes();
 
-    // optional int32 numReferrals = 12;
     /**
      * <code>optional int32 numReferrals = 12;</code>
      */
@@ -5521,7 +5498,6 @@ public final class UserProto {
      */
     int getNumReferrals();
 
-    // optional int64 lastLoginTime = 14;
     /**
      * <code>optional int64 lastLoginTime = 14;</code>
      *
@@ -5539,7 +5515,6 @@ public final class UserProto {
      */
     long getLastLoginTime();
 
-    // optional int64 lastLogoutTime = 15;
     /**
      * <code>optional int64 lastLogoutTime = 15;</code>
      */
@@ -5549,7 +5524,6 @@ public final class UserProto {
      */
     long getLastLogoutTime();
 
-    // optional bool isFake = 19;
     /**
      * <code>optional bool isFake = 19;</code>
      *
@@ -5569,7 +5543,6 @@ public final class UserProto {
      */
     boolean getIsFake();
 
-    // optional bool isAdmin = 21;
     /**
      * <code>optional bool isAdmin = 21;</code>
      *
@@ -5587,7 +5560,6 @@ public final class UserProto {
      */
     boolean getIsAdmin();
 
-    // optional int32 numCoinsRetrievedFromStructs = 23;
     /**
      * <code>optional int32 numCoinsRetrievedFromStructs = 23;</code>
      *
@@ -5605,7 +5577,6 @@ public final class UserProto {
      */
     int getNumCoinsRetrievedFromStructs();
 
-    // optional int32 numOilRetrievedFromStructs = 43;
     /**
      * <code>optional int32 numOilRetrievedFromStructs = 43;</code>
      */
@@ -5615,7 +5586,6 @@ public final class UserProto {
      */
     int getNumOilRetrievedFromStructs();
 
-    // optional .com.lvl6.proto.MinimumClanProto clan = 25;
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto clan = 25;</code>
      *
@@ -5641,7 +5611,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder getClanOrBuilder();
 
-    // optional bool hasReceivedfbReward = 28;
     /**
      * <code>optional bool hasReceivedfbReward = 28;</code>
      *
@@ -5661,7 +5630,6 @@ public final class UserProto {
      */
     boolean getHasReceivedfbReward();
 
-    // optional int32 numBeginnerSalesPurchased = 30;
     /**
      * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
      */
@@ -5671,7 +5639,6 @@ public final class UserProto {
      */
     int getNumBeginnerSalesPurchased();
 
-    // optional string facebookId = 40;
     /**
      * <code>optional string facebookId = 40;</code>
      */
@@ -5686,7 +5653,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getFacebookIdBytes();
 
-    // optional string gameCenterId = 45;
     /**
      * <code>optional string gameCenterId = 45;</code>
      *
@@ -5719,7 +5685,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getGameCenterIdBytes();
 
-    // optional int64 lastObstacleSpawnedTime = 47;
     /**
      * <code>optional int64 lastObstacleSpawnedTime = 47;</code>
      *
@@ -5737,7 +5702,6 @@ public final class UserProto {
      */
     long getLastObstacleSpawnedTime();
 
-    // optional int32 numObstaclesRemoved = 49;
     /**
      * <code>optional int32 numObstaclesRemoved = 49;</code>
      */
@@ -5747,7 +5711,6 @@ public final class UserProto {
      */
     int getNumObstaclesRemoved();
 
-    // optional int32 avatarMonsterId = 51;
     /**
      * <code>optional int32 avatarMonsterId = 51;</code>
      */
@@ -5757,7 +5720,6 @@ public final class UserProto {
      */
     int getAvatarMonsterId();
 
-    // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 48;
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 48;</code>
      */
@@ -5771,7 +5733,6 @@ public final class UserProto {
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder();
 
-    // optional int64 lastMiniJobSpawnedTime = 50;
     /**
      * <code>optional int64 lastMiniJobSpawnedTime = 50;</code>
      *
@@ -5789,7 +5750,6 @@ public final class UserProto {
      */
     long getLastMiniJobSpawnedTime();
 
-    // optional int64 lastFreeBoosterPackTime = 52;
     /**
      * <code>optional int64 lastFreeBoosterPackTime = 52;</code>
      *
@@ -5807,7 +5767,6 @@ public final class UserProto {
      */
     long getLastFreeBoosterPackTime();
 
-    // optional int32 numClanHelps = 53;
     /**
      * <code>optional int32 numClanHelps = 53;</code>
      */
@@ -5817,7 +5776,6 @@ public final class UserProto {
      */
     int getNumClanHelps();
 
-    // optional int64 lastSecretGiftCollectTime = 54;
     /**
      * <code>optional int64 lastSecretGiftCollectTime = 54;</code>
      */
@@ -5827,7 +5785,6 @@ public final class UserProto {
      */
     long getLastSecretGiftCollectTime();
 
-    // optional string pvpDefendingMessage = 56;
     /**
      * <code>optional string pvpDefendingMessage = 56;</code>
      */
@@ -5842,7 +5799,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getPvpDefendingMessageBytes();
 
-    // optional int64 lastTeamDonationSolicitation = 57;
     /**
      * <code>optional int64 lastTeamDonationSolicitation = 57;</code>
      */
@@ -5852,17 +5808,6 @@ public final class UserProto {
      */
     long getLastTeamDonationSolicitation();
 
-    // optional int64 totalStrength = 60;
-    /**
-     * <code>optional int64 totalStrength = 60;</code>
-     */
-    boolean hasTotalStrength();
-    /**
-     * <code>optional int64 totalStrength = 60;</code>
-     */
-    long getTotalStrength();
-
-    // optional float salesValue = 58;
     /**
      * <code>optional float salesValue = 58;</code>
      */
@@ -5872,7 +5817,6 @@ public final class UserProto {
      */
     float getSalesValue();
 
-    // optional int64 salesLastPurchaseTime = 59;
     /**
      * <code>optional int64 salesLastPurchaseTime = 59;</code>
      */
@@ -5882,7 +5826,38 @@ public final class UserProto {
      */
     long getSalesLastPurchaseTime();
 
-    // optional int32 segmentationGroup = 500;
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    boolean hasTotalStrength();
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    long getTotalStrength();
+
+    /**
+     * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+     */
+    boolean hasLastTangoGiftSentTime();
+    /**
+     * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+     */
+    long getLastTangoGiftSentTime();
+
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    boolean hasTangoId();
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    java.lang.String getTangoId();
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    com.google.protobuf.ByteString
+        getTangoIdBytes();
+
     /**
      * <code>optional int32 segmentationGroup = 500;</code>
      */
@@ -5892,7 +5867,15 @@ public final class UserProto {
      */
     int getSegmentationGroup();
 
-    // optional string udidForHistory = 46;
+    /**
+     * <code>optional int32 gachaCredits = 501;</code>
+     */
+    boolean hasGachaCredits();
+    /**
+     * <code>optional int32 gachaCredits = 501;</code>
+     */
+    int getGachaCredits();
+
     /**
      * <code>optional string udidForHistory = 46;</code>
      *
@@ -5922,7 +5905,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getUdidForHistoryBytes();
 
-    // optional string deviceToken = 16;
     /**
      * <code>optional string deviceToken = 16;</code>
      */
@@ -5937,7 +5919,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getDeviceTokenBytes();
 
-    // optional int32 numBadges = 18;
     /**
      * <code>optional int32 numBadges = 18;</code>
      */
@@ -5947,7 +5928,6 @@ public final class UserProto {
      */
     int getNumBadges();
 
-    // optional int64 createTime = 20;
     /**
      * <code>optional int64 createTime = 20;</code>
      */
@@ -5957,7 +5937,6 @@ public final class UserProto {
      */
     long getCreateTime();
 
-    // optional int32 apsalarId = 22;
     /**
      * <code>optional int32 apsalarId = 22;</code>
      */
@@ -5967,7 +5946,6 @@ public final class UserProto {
      */
     int getApsalarId();
 
-    // optional int32 numConsecutiveDaysPlayed = 24;
     /**
      * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
      */
@@ -5977,7 +5955,6 @@ public final class UserProto {
      */
     int getNumConsecutiveDaysPlayed();
 
-    // optional int64 lastWallPostNotificationTime = 26;
     /**
      * <code>optional int64 lastWallPostNotificationTime = 26;</code>
      */
@@ -5987,7 +5964,6 @@ public final class UserProto {
      */
     long getLastWallPostNotificationTime();
 
-    // optional string kabamNaid = 27;
     /**
      * <code>optional string kabamNaid = 27;</code>
      */
@@ -6002,7 +5978,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getKabamNaidBytes();
 
-    // optional bool fbIdSetOnUserCreate = 44;
     /**
      * <code>optional bool fbIdSetOnUserCreate = 44;</code>
      */
@@ -6012,7 +5987,6 @@ public final class UserProto {
      */
     boolean getFbIdSetOnUserCreate();
 
-    // optional string udid = 13;
     /**
      * <code>optional string udid = 13;</code>
      */
@@ -6031,8 +6005,9 @@ public final class UserProto {
    * Protobuf type {@code com.lvl6.proto.FullUserProto}
    */
   public static final class FullUserProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FullUserProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FullUserProto)
+      FullUserProtoOrBuilder {
     // Use FullUserProto.newBuilder() to construct.
     private FullUserProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6080,13 +6055,15 @@ public final class UserProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 24: {
@@ -6115,8 +6092,9 @@ public final class UserProto {
               break;
             }
             case 90: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              referralCode_ = input.readBytes();
+              referralCode_ = bs;
               break;
             }
             case 96: {
@@ -6125,8 +6103,9 @@ public final class UserProto {
               break;
             }
             case 106: {
-              bitField1_ |= 0x00001000;
-              udid_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField1_ |= 0x00008000;
+              udid_ = bs;
               break;
             }
             case 112: {
@@ -6140,12 +6119,13 @@ public final class UserProto {
               break;
             }
             case 130: {
-              bitField1_ |= 0x00000010;
-              deviceToken_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField1_ |= 0x00000080;
+              deviceToken_ = bs;
               break;
             }
             case 144: {
-              bitField1_ |= 0x00000020;
+              bitField1_ |= 0x00000100;
               numBadges_ = input.readInt32();
               break;
             }
@@ -6155,7 +6135,7 @@ public final class UserProto {
               break;
             }
             case 160: {
-              bitField1_ |= 0x00000040;
+              bitField1_ |= 0x00000200;
               createTime_ = input.readInt64();
               break;
             }
@@ -6165,7 +6145,7 @@ public final class UserProto {
               break;
             }
             case 176: {
-              bitField1_ |= 0x00000080;
+              bitField1_ |= 0x00000400;
               apsalarId_ = input.readInt32();
               break;
             }
@@ -6175,7 +6155,7 @@ public final class UserProto {
               break;
             }
             case 192: {
-              bitField1_ |= 0x00000100;
+              bitField1_ |= 0x00000800;
               numConsecutiveDaysPlayed_ = input.readInt32();
               break;
             }
@@ -6193,13 +6173,14 @@ public final class UserProto {
               break;
             }
             case 208: {
-              bitField1_ |= 0x00000200;
+              bitField1_ |= 0x00001000;
               lastWallPostNotificationTime_ = input.readInt64();
               break;
             }
             case 218: {
-              bitField1_ |= 0x00000400;
-              kabamNaid_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField1_ |= 0x00002000;
+              kabamNaid_ = bs;
               break;
             }
             case 224: {
@@ -6213,8 +6194,9 @@ public final class UserProto {
               break;
             }
             case 322: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00080000;
-              facebookId_ = input.readBytes();
+              facebookId_ = bs;
               break;
             }
             case 336: {
@@ -6228,18 +6210,20 @@ public final class UserProto {
               break;
             }
             case 352: {
-              bitField1_ |= 0x00000800;
+              bitField1_ |= 0x00004000;
               fbIdSetOnUserCreate_ = input.readBool();
               break;
             }
             case 362: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00100000;
-              gameCenterId_ = input.readBytes();
+              gameCenterId_ = bs;
               break;
             }
             case 370: {
-              bitField1_ |= 0x00000008;
-              udidForHistory_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField1_ |= 0x00000040;
+              udidForHistory_ = bs;
               break;
             }
             case 376: {
@@ -6291,8 +6275,9 @@ public final class UserProto {
               break;
             }
             case 450: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x20000000;
-              pvpDefendingMessage_ = input.readBytes();
+              pvpDefendingMessage_ = bs;
               break;
             }
             case 456: {
@@ -6301,23 +6286,39 @@ public final class UserProto {
               break;
             }
             case 469: {
-              bitField1_ |= 0x00000001;
+              bitField0_ |= 0x80000000;
               salesValue_ = input.readFloat();
               break;
             }
             case 472: {
-              bitField1_ |= 0x00000002;
+              bitField1_ |= 0x00000001;
               salesLastPurchaseTime_ = input.readInt64();
               break;
             }
             case 480: {
-              bitField0_ |= 0x80000000;
+              bitField1_ |= 0x00000002;
               totalStrength_ = input.readInt64();
               break;
             }
-            case 4000: {
+            case 488: {
               bitField1_ |= 0x00000004;
+              lastTangoGiftSentTime_ = input.readInt64();
+              break;
+            }
+            case 498: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField1_ |= 0x00000008;
+              tangoId_ = bs;
+              break;
+            }
+            case 4000: {
+              bitField1_ |= 0x00000010;
               segmentationGroup_ = input.readInt32();
+              break;
+            }
+            case 4008: {
+              bitField1_ |= 0x00000020;
+              gachaCredits_ = input.readInt32();
               break;
             }
           }
@@ -6361,7 +6362,6 @@ public final class UserProto {
 
     private int bitField0_;
     private int bitField1_;
-    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -6404,7 +6404,6 @@ public final class UserProto {
       }
     }
 
-    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     /**
@@ -6447,7 +6446,6 @@ public final class UserProto {
       }
     }
 
-    // optional int32 level = 3;
     public static final int LEVEL_FIELD_NUMBER = 3;
     private int level_;
     /**
@@ -6463,7 +6461,6 @@ public final class UserProto {
       return level_;
     }
 
-    // optional int32 gems = 4;
     public static final int GEMS_FIELD_NUMBER = 4;
     private int gems_;
     /**
@@ -6479,7 +6476,6 @@ public final class UserProto {
       return gems_;
     }
 
-    // optional int32 cash = 5;
     public static final int CASH_FIELD_NUMBER = 5;
     private int cash_;
     /**
@@ -6495,7 +6491,6 @@ public final class UserProto {
       return cash_;
     }
 
-    // optional int32 oil = 42;
     public static final int OIL_FIELD_NUMBER = 42;
     private int oil_;
     /**
@@ -6511,7 +6506,6 @@ public final class UserProto {
       return oil_;
     }
 
-    // optional int32 experience = 6;
     public static final int EXPERIENCE_FIELD_NUMBER = 6;
     private int experience_;
     /**
@@ -6527,7 +6521,6 @@ public final class UserProto {
       return experience_;
     }
 
-    // optional int32 tasksCompleted = 7;
     public static final int TASKSCOMPLETED_FIELD_NUMBER = 7;
     private int tasksCompleted_;
     /**
@@ -6543,7 +6536,6 @@ public final class UserProto {
       return tasksCompleted_;
     }
 
-    // optional string referralCode = 11;
     public static final int REFERRALCODE_FIELD_NUMBER = 11;
     private java.lang.Object referralCode_;
     /**
@@ -6586,7 +6578,6 @@ public final class UserProto {
       }
     }
 
-    // optional int32 numReferrals = 12;
     public static final int NUMREFERRALS_FIELD_NUMBER = 12;
     private int numReferrals_;
     /**
@@ -6602,7 +6593,6 @@ public final class UserProto {
       return numReferrals_;
     }
 
-    // optional int64 lastLoginTime = 14;
     public static final int LASTLOGINTIME_FIELD_NUMBER = 14;
     private long lastLoginTime_;
     /**
@@ -6626,7 +6616,6 @@ public final class UserProto {
       return lastLoginTime_;
     }
 
-    // optional int64 lastLogoutTime = 15;
     public static final int LASTLOGOUTTIME_FIELD_NUMBER = 15;
     private long lastLogoutTime_;
     /**
@@ -6642,7 +6631,6 @@ public final class UserProto {
       return lastLogoutTime_;
     }
 
-    // optional bool isFake = 19;
     public static final int ISFAKE_FIELD_NUMBER = 19;
     private boolean isFake_;
     /**
@@ -6668,7 +6656,6 @@ public final class UserProto {
       return isFake_;
     }
 
-    // optional bool isAdmin = 21;
     public static final int ISADMIN_FIELD_NUMBER = 21;
     private boolean isAdmin_;
     /**
@@ -6692,7 +6679,6 @@ public final class UserProto {
       return isAdmin_;
     }
 
-    // optional int32 numCoinsRetrievedFromStructs = 23;
     public static final int NUMCOINSRETRIEVEDFROMSTRUCTS_FIELD_NUMBER = 23;
     private int numCoinsRetrievedFromStructs_;
     /**
@@ -6716,7 +6702,6 @@ public final class UserProto {
       return numCoinsRetrievedFromStructs_;
     }
 
-    // optional int32 numOilRetrievedFromStructs = 43;
     public static final int NUMOILRETRIEVEDFROMSTRUCTS_FIELD_NUMBER = 43;
     private int numOilRetrievedFromStructs_;
     /**
@@ -6732,7 +6717,6 @@ public final class UserProto {
       return numOilRetrievedFromStructs_;
     }
 
-    // optional .com.lvl6.proto.MinimumClanProto clan = 25;
     public static final int CLAN_FIELD_NUMBER = 25;
     private com.lvl6.proto.UserProto.MinimumClanProto clan_;
     /**
@@ -6766,7 +6750,6 @@ public final class UserProto {
       return clan_;
     }
 
-    // optional bool hasReceivedfbReward = 28;
     public static final int HASRECEIVEDFBREWARD_FIELD_NUMBER = 28;
     private boolean hasReceivedfbReward_;
     /**
@@ -6792,7 +6775,6 @@ public final class UserProto {
       return hasReceivedfbReward_;
     }
 
-    // optional int32 numBeginnerSalesPurchased = 30;
     public static final int NUMBEGINNERSALESPURCHASED_FIELD_NUMBER = 30;
     private int numBeginnerSalesPurchased_;
     /**
@@ -6808,7 +6790,6 @@ public final class UserProto {
       return numBeginnerSalesPurchased_;
     }
 
-    // optional string facebookId = 40;
     public static final int FACEBOOKID_FIELD_NUMBER = 40;
     private java.lang.Object facebookId_;
     /**
@@ -6851,7 +6832,6 @@ public final class UserProto {
       }
     }
 
-    // optional string gameCenterId = 45;
     public static final int GAMECENTERID_FIELD_NUMBER = 45;
     private java.lang.Object gameCenterId_;
     /**
@@ -6912,7 +6892,6 @@ public final class UserProto {
       }
     }
 
-    // optional int64 lastObstacleSpawnedTime = 47;
     public static final int LASTOBSTACLESPAWNEDTIME_FIELD_NUMBER = 47;
     private long lastObstacleSpawnedTime_;
     /**
@@ -6936,7 +6915,6 @@ public final class UserProto {
       return lastObstacleSpawnedTime_;
     }
 
-    // optional int32 numObstaclesRemoved = 49;
     public static final int NUMOBSTACLESREMOVED_FIELD_NUMBER = 49;
     private int numObstaclesRemoved_;
     /**
@@ -6952,7 +6930,6 @@ public final class UserProto {
       return numObstaclesRemoved_;
     }
 
-    // optional int32 avatarMonsterId = 51;
     public static final int AVATARMONSTERID_FIELD_NUMBER = 51;
     private int avatarMonsterId_;
     /**
@@ -6968,7 +6945,6 @@ public final class UserProto {
       return avatarMonsterId_;
     }
 
-    // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 48;
     public static final int PVPLEAGUEINFO_FIELD_NUMBER = 48;
     private com.lvl6.proto.UserProto.UserPvpLeagueProto pvpLeagueInfo_;
     /**
@@ -6990,7 +6966,6 @@ public final class UserProto {
       return pvpLeagueInfo_;
     }
 
-    // optional int64 lastMiniJobSpawnedTime = 50;
     public static final int LASTMINIJOBSPAWNEDTIME_FIELD_NUMBER = 50;
     private long lastMiniJobSpawnedTime_;
     /**
@@ -7014,7 +6989,6 @@ public final class UserProto {
       return lastMiniJobSpawnedTime_;
     }
 
-    // optional int64 lastFreeBoosterPackTime = 52;
     public static final int LASTFREEBOOSTERPACKTIME_FIELD_NUMBER = 52;
     private long lastFreeBoosterPackTime_;
     /**
@@ -7038,7 +7012,6 @@ public final class UserProto {
       return lastFreeBoosterPackTime_;
     }
 
-    // optional int32 numClanHelps = 53;
     public static final int NUMCLANHELPS_FIELD_NUMBER = 53;
     private int numClanHelps_;
     /**
@@ -7054,7 +7027,6 @@ public final class UserProto {
       return numClanHelps_;
     }
 
-    // optional int64 lastSecretGiftCollectTime = 54;
     public static final int LASTSECRETGIFTCOLLECTTIME_FIELD_NUMBER = 54;
     private long lastSecretGiftCollectTime_;
     /**
@@ -7070,7 +7042,6 @@ public final class UserProto {
       return lastSecretGiftCollectTime_;
     }
 
-    // optional string pvpDefendingMessage = 56;
     public static final int PVPDEFENDINGMESSAGE_FIELD_NUMBER = 56;
     private java.lang.Object pvpDefendingMessage_;
     /**
@@ -7113,7 +7084,6 @@ public final class UserProto {
       }
     }
 
-    // optional int64 lastTeamDonationSolicitation = 57;
     public static final int LASTTEAMDONATIONSOLICITATION_FIELD_NUMBER = 57;
     private long lastTeamDonationSolicitation_;
     /**
@@ -7129,30 +7099,13 @@ public final class UserProto {
       return lastTeamDonationSolicitation_;
     }
 
-    // optional int64 totalStrength = 60;
-    public static final int TOTALSTRENGTH_FIELD_NUMBER = 60;
-    private long totalStrength_;
-    /**
-     * <code>optional int64 totalStrength = 60;</code>
-     */
-    public boolean hasTotalStrength() {
-      return ((bitField0_ & 0x80000000) == 0x80000000);
-    }
-    /**
-     * <code>optional int64 totalStrength = 60;</code>
-     */
-    public long getTotalStrength() {
-      return totalStrength_;
-    }
-
-    // optional float salesValue = 58;
     public static final int SALESVALUE_FIELD_NUMBER = 58;
     private float salesValue_;
     /**
      * <code>optional float salesValue = 58;</code>
      */
     public boolean hasSalesValue() {
-      return ((bitField1_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x80000000) == 0x80000000);
     }
     /**
      * <code>optional float salesValue = 58;</code>
@@ -7161,14 +7114,13 @@ public final class UserProto {
       return salesValue_;
     }
 
-    // optional int64 salesLastPurchaseTime = 59;
     public static final int SALESLASTPURCHASETIME_FIELD_NUMBER = 59;
     private long salesLastPurchaseTime_;
     /**
      * <code>optional int64 salesLastPurchaseTime = 59;</code>
      */
     public boolean hasSalesLastPurchaseTime() {
-      return ((bitField1_ & 0x00000002) == 0x00000002);
+      return ((bitField1_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional int64 salesLastPurchaseTime = 59;</code>
@@ -7177,14 +7129,85 @@ public final class UserProto {
       return salesLastPurchaseTime_;
     }
 
-    // optional int32 segmentationGroup = 500;
+    public static final int TOTALSTRENGTH_FIELD_NUMBER = 60;
+    private long totalStrength_;
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    public boolean hasTotalStrength() {
+      return ((bitField1_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 totalStrength = 60;</code>
+     */
+    public long getTotalStrength() {
+      return totalStrength_;
+    }
+
+    public static final int LASTTANGOGIFTSENTTIME_FIELD_NUMBER = 61;
+    private long lastTangoGiftSentTime_;
+    /**
+     * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+     */
+    public boolean hasLastTangoGiftSentTime() {
+      return ((bitField1_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+     */
+    public long getLastTangoGiftSentTime() {
+      return lastTangoGiftSentTime_;
+    }
+
+    public static final int TANGOID_FIELD_NUMBER = 62;
+    private java.lang.Object tangoId_;
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    public boolean hasTangoId() {
+      return ((bitField1_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    public java.lang.String getTangoId() {
+      java.lang.Object ref = tangoId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tangoId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string tangoId = 62;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTangoIdBytes() {
+      java.lang.Object ref = tangoId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tangoId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int SEGMENTATIONGROUP_FIELD_NUMBER = 500;
     private int segmentationGroup_;
     /**
      * <code>optional int32 segmentationGroup = 500;</code>
      */
     public boolean hasSegmentationGroup() {
-      return ((bitField1_ & 0x00000004) == 0x00000004);
+      return ((bitField1_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int32 segmentationGroup = 500;</code>
@@ -7193,7 +7216,21 @@ public final class UserProto {
       return segmentationGroup_;
     }
 
-    // optional string udidForHistory = 46;
+    public static final int GACHACREDITS_FIELD_NUMBER = 501;
+    private int gachaCredits_;
+    /**
+     * <code>optional int32 gachaCredits = 501;</code>
+     */
+    public boolean hasGachaCredits() {
+      return ((bitField1_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 gachaCredits = 501;</code>
+     */
+    public int getGachaCredits() {
+      return gachaCredits_;
+    }
+
     public static final int UDIDFORHISTORY_FIELD_NUMBER = 46;
     private java.lang.Object udidForHistory_;
     /**
@@ -7205,7 +7242,7 @@ public final class UserProto {
      * </pre>
      */
     public boolean hasUdidForHistory() {
-      return ((bitField1_ & 0x00000008) == 0x00000008);
+      return ((bitField1_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string udidForHistory = 46;</code>
@@ -7251,14 +7288,13 @@ public final class UserProto {
       }
     }
 
-    // optional string deviceToken = 16;
     public static final int DEVICETOKEN_FIELD_NUMBER = 16;
     private java.lang.Object deviceToken_;
     /**
      * <code>optional string deviceToken = 16;</code>
      */
     public boolean hasDeviceToken() {
-      return ((bitField1_ & 0x00000010) == 0x00000010);
+      return ((bitField1_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional string deviceToken = 16;</code>
@@ -7294,14 +7330,13 @@ public final class UserProto {
       }
     }
 
-    // optional int32 numBadges = 18;
     public static final int NUMBADGES_FIELD_NUMBER = 18;
     private int numBadges_;
     /**
      * <code>optional int32 numBadges = 18;</code>
      */
     public boolean hasNumBadges() {
-      return ((bitField1_ & 0x00000020) == 0x00000020);
+      return ((bitField1_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional int32 numBadges = 18;</code>
@@ -7310,14 +7345,13 @@ public final class UserProto {
       return numBadges_;
     }
 
-    // optional int64 createTime = 20;
     public static final int CREATETIME_FIELD_NUMBER = 20;
     private long createTime_;
     /**
      * <code>optional int64 createTime = 20;</code>
      */
     public boolean hasCreateTime() {
-      return ((bitField1_ & 0x00000040) == 0x00000040);
+      return ((bitField1_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional int64 createTime = 20;</code>
@@ -7326,14 +7360,13 @@ public final class UserProto {
       return createTime_;
     }
 
-    // optional int32 apsalarId = 22;
     public static final int APSALARID_FIELD_NUMBER = 22;
     private int apsalarId_;
     /**
      * <code>optional int32 apsalarId = 22;</code>
      */
     public boolean hasApsalarId() {
-      return ((bitField1_ & 0x00000080) == 0x00000080);
+      return ((bitField1_ & 0x00000400) == 0x00000400);
     }
     /**
      * <code>optional int32 apsalarId = 22;</code>
@@ -7342,14 +7375,13 @@ public final class UserProto {
       return apsalarId_;
     }
 
-    // optional int32 numConsecutiveDaysPlayed = 24;
     public static final int NUMCONSECUTIVEDAYSPLAYED_FIELD_NUMBER = 24;
     private int numConsecutiveDaysPlayed_;
     /**
      * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
      */
     public boolean hasNumConsecutiveDaysPlayed() {
-      return ((bitField1_ & 0x00000100) == 0x00000100);
+      return ((bitField1_ & 0x00000800) == 0x00000800);
     }
     /**
      * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
@@ -7358,14 +7390,13 @@ public final class UserProto {
       return numConsecutiveDaysPlayed_;
     }
 
-    // optional int64 lastWallPostNotificationTime = 26;
     public static final int LASTWALLPOSTNOTIFICATIONTIME_FIELD_NUMBER = 26;
     private long lastWallPostNotificationTime_;
     /**
      * <code>optional int64 lastWallPostNotificationTime = 26;</code>
      */
     public boolean hasLastWallPostNotificationTime() {
-      return ((bitField1_ & 0x00000200) == 0x00000200);
+      return ((bitField1_ & 0x00001000) == 0x00001000);
     }
     /**
      * <code>optional int64 lastWallPostNotificationTime = 26;</code>
@@ -7374,14 +7405,13 @@ public final class UserProto {
       return lastWallPostNotificationTime_;
     }
 
-    // optional string kabamNaid = 27;
     public static final int KABAMNAID_FIELD_NUMBER = 27;
     private java.lang.Object kabamNaid_;
     /**
      * <code>optional string kabamNaid = 27;</code>
      */
     public boolean hasKabamNaid() {
-      return ((bitField1_ & 0x00000400) == 0x00000400);
+      return ((bitField1_ & 0x00002000) == 0x00002000);
     }
     /**
      * <code>optional string kabamNaid = 27;</code>
@@ -7417,14 +7447,13 @@ public final class UserProto {
       }
     }
 
-    // optional bool fbIdSetOnUserCreate = 44;
     public static final int FBIDSETONUSERCREATE_FIELD_NUMBER = 44;
     private boolean fbIdSetOnUserCreate_;
     /**
      * <code>optional bool fbIdSetOnUserCreate = 44;</code>
      */
     public boolean hasFbIdSetOnUserCreate() {
-      return ((bitField1_ & 0x00000800) == 0x00000800);
+      return ((bitField1_ & 0x00004000) == 0x00004000);
     }
     /**
      * <code>optional bool fbIdSetOnUserCreate = 44;</code>
@@ -7433,14 +7462,13 @@ public final class UserProto {
       return fbIdSetOnUserCreate_;
     }
 
-    // optional string udid = 13;
     public static final int UDID_FIELD_NUMBER = 13;
     private java.lang.Object udid_;
     /**
      * <code>optional string udid = 13;</code>
      */
     public boolean hasUdid() {
-      return ((bitField1_ & 0x00001000) == 0x00001000);
+      return ((bitField1_ & 0x00008000) == 0x00008000);
     }
     /**
      * <code>optional string udid = 13;</code>
@@ -7508,10 +7536,13 @@ public final class UserProto {
       lastSecretGiftCollectTime_ = 0L;
       pvpDefendingMessage_ = "";
       lastTeamDonationSolicitation_ = 0L;
-      totalStrength_ = 0L;
       salesValue_ = 0F;
       salesLastPurchaseTime_ = 0L;
+      totalStrength_ = 0L;
+      lastTangoGiftSentTime_ = 0L;
+      tangoId_ = "";
       segmentationGroup_ = 0;
+      gachaCredits_ = 0;
       udidForHistory_ = "";
       deviceToken_ = "";
       numBadges_ = 0;
@@ -7526,7 +7557,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -7562,7 +7594,7 @@ public final class UserProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(12, numReferrals_);
       }
-      if (((bitField1_ & 0x00001000) == 0x00001000)) {
+      if (((bitField1_ & 0x00008000) == 0x00008000)) {
         output.writeBytes(13, getUdidBytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
@@ -7571,37 +7603,37 @@ public final class UserProto {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt64(15, lastLogoutTime_);
       }
-      if (((bitField1_ & 0x00000010) == 0x00000010)) {
+      if (((bitField1_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(16, getDeviceTokenBytes());
       }
-      if (((bitField1_ & 0x00000020) == 0x00000020)) {
+      if (((bitField1_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(18, numBadges_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeBool(19, isFake_);
       }
-      if (((bitField1_ & 0x00000040) == 0x00000040)) {
+      if (((bitField1_ & 0x00000200) == 0x00000200)) {
         output.writeInt64(20, createTime_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeBool(21, isAdmin_);
       }
-      if (((bitField1_ & 0x00000080) == 0x00000080)) {
+      if (((bitField1_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(22, apsalarId_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeInt32(23, numCoinsRetrievedFromStructs_);
       }
-      if (((bitField1_ & 0x00000100) == 0x00000100)) {
+      if (((bitField1_ & 0x00000800) == 0x00000800)) {
         output.writeInt32(24, numConsecutiveDaysPlayed_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeMessage(25, clan_);
       }
-      if (((bitField1_ & 0x00000200) == 0x00000200)) {
+      if (((bitField1_ & 0x00001000) == 0x00001000)) {
         output.writeInt64(26, lastWallPostNotificationTime_);
       }
-      if (((bitField1_ & 0x00000400) == 0x00000400)) {
+      if (((bitField1_ & 0x00002000) == 0x00002000)) {
         output.writeBytes(27, getKabamNaidBytes());
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
@@ -7619,13 +7651,13 @@ public final class UserProto {
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeInt32(43, numOilRetrievedFromStructs_);
       }
-      if (((bitField1_ & 0x00000800) == 0x00000800)) {
+      if (((bitField1_ & 0x00004000) == 0x00004000)) {
         output.writeBool(44, fbIdSetOnUserCreate_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         output.writeBytes(45, getGameCenterIdBytes());
       }
-      if (((bitField1_ & 0x00000008) == 0x00000008)) {
+      if (((bitField1_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(46, getUdidForHistoryBytes());
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
@@ -7658,17 +7690,26 @@ public final class UserProto {
       if (((bitField0_ & 0x40000000) == 0x40000000)) {
         output.writeInt64(57, lastTeamDonationSolicitation_);
       }
-      if (((bitField1_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x80000000) == 0x80000000)) {
         output.writeFloat(58, salesValue_);
       }
-      if (((bitField1_ & 0x00000002) == 0x00000002)) {
+      if (((bitField1_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(59, salesLastPurchaseTime_);
       }
-      if (((bitField0_ & 0x80000000) == 0x80000000)) {
+      if (((bitField1_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(60, totalStrength_);
       }
       if (((bitField1_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(61, lastTangoGiftSentTime_);
+      }
+      if (((bitField1_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(62, getTangoIdBytes());
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(500, segmentationGroup_);
+      }
+      if (((bitField1_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(501, gachaCredits_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7715,7 +7756,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, numReferrals_);
       }
-      if (((bitField1_ & 0x00001000) == 0x00001000)) {
+      if (((bitField1_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(13, getUdidBytes());
       }
@@ -7727,11 +7768,11 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(15, lastLogoutTime_);
       }
-      if (((bitField1_ & 0x00000010) == 0x00000010)) {
+      if (((bitField1_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(16, getDeviceTokenBytes());
       }
-      if (((bitField1_ & 0x00000020) == 0x00000020)) {
+      if (((bitField1_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(18, numBadges_);
       }
@@ -7739,7 +7780,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(19, isFake_);
       }
-      if (((bitField1_ & 0x00000040) == 0x00000040)) {
+      if (((bitField1_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(20, createTime_);
       }
@@ -7747,7 +7788,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(21, isAdmin_);
       }
-      if (((bitField1_ & 0x00000080) == 0x00000080)) {
+      if (((bitField1_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(22, apsalarId_);
       }
@@ -7755,7 +7796,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(23, numCoinsRetrievedFromStructs_);
       }
-      if (((bitField1_ & 0x00000100) == 0x00000100)) {
+      if (((bitField1_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(24, numConsecutiveDaysPlayed_);
       }
@@ -7763,11 +7804,11 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(25, clan_);
       }
-      if (((bitField1_ & 0x00000200) == 0x00000200)) {
+      if (((bitField1_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(26, lastWallPostNotificationTime_);
       }
-      if (((bitField1_ & 0x00000400) == 0x00000400)) {
+      if (((bitField1_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(27, getKabamNaidBytes());
       }
@@ -7791,7 +7832,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(43, numOilRetrievedFromStructs_);
       }
-      if (((bitField1_ & 0x00000800) == 0x00000800)) {
+      if (((bitField1_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(44, fbIdSetOnUserCreate_);
       }
@@ -7799,7 +7840,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(45, getGameCenterIdBytes());
       }
-      if (((bitField1_ & 0x00000008) == 0x00000008)) {
+      if (((bitField1_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(46, getUdidForHistoryBytes());
       }
@@ -7843,21 +7884,33 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(57, lastTeamDonationSolicitation_);
       }
-      if (((bitField1_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x80000000) == 0x80000000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(58, salesValue_);
       }
-      if (((bitField1_ & 0x00000002) == 0x00000002)) {
+      if (((bitField1_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(59, salesLastPurchaseTime_);
       }
-      if (((bitField0_ & 0x80000000) == 0x80000000)) {
+      if (((bitField1_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(60, totalStrength_);
       }
       if (((bitField1_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(61, lastTangoGiftSentTime_);
+      }
+      if (((bitField1_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(62, getTangoIdBytes());
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(500, segmentationGroup_);
+      }
+      if (((bitField1_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(501, gachaCredits_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7941,8 +7994,9 @@ public final class UserProto {
      * Protobuf type {@code com.lvl6.proto.FullUserProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.FullUserProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FullUserProto)
+        com.lvl6.proto.UserProto.FullUserProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_FullUserProto_descriptor;
@@ -8047,34 +8101,40 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x20000000);
         lastTeamDonationSolicitation_ = 0L;
         bitField0_ = (bitField0_ & ~0x40000000);
-        totalStrength_ = 0L;
-        bitField0_ = (bitField0_ & ~0x80000000);
         salesValue_ = 0F;
-        bitField1_ = (bitField1_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x80000000);
         salesLastPurchaseTime_ = 0L;
+        bitField1_ = (bitField1_ & ~0x00000001);
+        totalStrength_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000002);
-        segmentationGroup_ = 0;
+        lastTangoGiftSentTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000004);
-        udidForHistory_ = "";
+        tangoId_ = "";
         bitField1_ = (bitField1_ & ~0x00000008);
-        deviceToken_ = "";
+        segmentationGroup_ = 0;
         bitField1_ = (bitField1_ & ~0x00000010);
-        numBadges_ = 0;
+        gachaCredits_ = 0;
         bitField1_ = (bitField1_ & ~0x00000020);
-        createTime_ = 0L;
+        udidForHistory_ = "";
         bitField1_ = (bitField1_ & ~0x00000040);
-        apsalarId_ = 0;
+        deviceToken_ = "";
         bitField1_ = (bitField1_ & ~0x00000080);
-        numConsecutiveDaysPlayed_ = 0;
+        numBadges_ = 0;
         bitField1_ = (bitField1_ & ~0x00000100);
-        lastWallPostNotificationTime_ = 0L;
+        createTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00000200);
-        kabamNaid_ = "";
+        apsalarId_ = 0;
         bitField1_ = (bitField1_ & ~0x00000400);
-        fbIdSetOnUserCreate_ = false;
+        numConsecutiveDaysPlayed_ = 0;
         bitField1_ = (bitField1_ & ~0x00000800);
-        udid_ = "";
+        lastWallPostNotificationTime_ = 0L;
         bitField1_ = (bitField1_ & ~0x00001000);
+        kabamNaid_ = "";
+        bitField1_ = (bitField1_ & ~0x00002000);
+        fbIdSetOnUserCreate_ = false;
+        bitField1_ = (bitField1_ & ~0x00004000);
+        udid_ = "";
+        bitField1_ = (bitField1_ & ~0x00008000);
         return this;
       }
 
@@ -8240,57 +8300,69 @@ public final class UserProto {
         if (((from_bitField0_ & 0x80000000) == 0x80000000)) {
           to_bitField0_ |= 0x80000000;
         }
-        result.totalStrength_ = totalStrength_;
+        result.salesValue_ = salesValue_;
         if (((from_bitField1_ & 0x00000001) == 0x00000001)) {
           to_bitField1_ |= 0x00000001;
         }
-        result.salesValue_ = salesValue_;
+        result.salesLastPurchaseTime_ = salesLastPurchaseTime_;
         if (((from_bitField1_ & 0x00000002) == 0x00000002)) {
           to_bitField1_ |= 0x00000002;
         }
-        result.salesLastPurchaseTime_ = salesLastPurchaseTime_;
+        result.totalStrength_ = totalStrength_;
         if (((from_bitField1_ & 0x00000004) == 0x00000004)) {
           to_bitField1_ |= 0x00000004;
         }
-        result.segmentationGroup_ = segmentationGroup_;
+        result.lastTangoGiftSentTime_ = lastTangoGiftSentTime_;
         if (((from_bitField1_ & 0x00000008) == 0x00000008)) {
           to_bitField1_ |= 0x00000008;
         }
-        result.udidForHistory_ = udidForHistory_;
+        result.tangoId_ = tangoId_;
         if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
           to_bitField1_ |= 0x00000010;
         }
-        result.deviceToken_ = deviceToken_;
+        result.segmentationGroup_ = segmentationGroup_;
         if (((from_bitField1_ & 0x00000020) == 0x00000020)) {
           to_bitField1_ |= 0x00000020;
         }
-        result.numBadges_ = numBadges_;
+        result.gachaCredits_ = gachaCredits_;
         if (((from_bitField1_ & 0x00000040) == 0x00000040)) {
           to_bitField1_ |= 0x00000040;
         }
-        result.createTime_ = createTime_;
+        result.udidForHistory_ = udidForHistory_;
         if (((from_bitField1_ & 0x00000080) == 0x00000080)) {
           to_bitField1_ |= 0x00000080;
         }
-        result.apsalarId_ = apsalarId_;
+        result.deviceToken_ = deviceToken_;
         if (((from_bitField1_ & 0x00000100) == 0x00000100)) {
           to_bitField1_ |= 0x00000100;
         }
-        result.numConsecutiveDaysPlayed_ = numConsecutiveDaysPlayed_;
+        result.numBadges_ = numBadges_;
         if (((from_bitField1_ & 0x00000200) == 0x00000200)) {
           to_bitField1_ |= 0x00000200;
         }
-        result.lastWallPostNotificationTime_ = lastWallPostNotificationTime_;
+        result.createTime_ = createTime_;
         if (((from_bitField1_ & 0x00000400) == 0x00000400)) {
           to_bitField1_ |= 0x00000400;
         }
-        result.kabamNaid_ = kabamNaid_;
+        result.apsalarId_ = apsalarId_;
         if (((from_bitField1_ & 0x00000800) == 0x00000800)) {
           to_bitField1_ |= 0x00000800;
         }
-        result.fbIdSetOnUserCreate_ = fbIdSetOnUserCreate_;
+        result.numConsecutiveDaysPlayed_ = numConsecutiveDaysPlayed_;
         if (((from_bitField1_ & 0x00001000) == 0x00001000)) {
           to_bitField1_ |= 0x00001000;
+        }
+        result.lastWallPostNotificationTime_ = lastWallPostNotificationTime_;
+        if (((from_bitField1_ & 0x00002000) == 0x00002000)) {
+          to_bitField1_ |= 0x00002000;
+        }
+        result.kabamNaid_ = kabamNaid_;
+        if (((from_bitField1_ & 0x00004000) == 0x00004000)) {
+          to_bitField1_ |= 0x00004000;
+        }
+        result.fbIdSetOnUserCreate_ = fbIdSetOnUserCreate_;
+        if (((from_bitField1_ & 0x00008000) == 0x00008000)) {
+          to_bitField1_ |= 0x00008000;
         }
         result.udid_ = udid_;
         result.bitField0_ = to_bitField0_;
@@ -8415,25 +8487,36 @@ public final class UserProto {
         if (other.hasLastTeamDonationSolicitation()) {
           setLastTeamDonationSolicitation(other.getLastTeamDonationSolicitation());
         }
-        if (other.hasTotalStrength()) {
-          setTotalStrength(other.getTotalStrength());
-        }
         if (other.hasSalesValue()) {
           setSalesValue(other.getSalesValue());
         }
         if (other.hasSalesLastPurchaseTime()) {
           setSalesLastPurchaseTime(other.getSalesLastPurchaseTime());
         }
+        if (other.hasTotalStrength()) {
+          setTotalStrength(other.getTotalStrength());
+        }
+        if (other.hasLastTangoGiftSentTime()) {
+          setLastTangoGiftSentTime(other.getLastTangoGiftSentTime());
+        }
+        if (other.hasTangoId()) {
+          bitField1_ |= 0x00000008;
+          tangoId_ = other.tangoId_;
+          onChanged();
+        }
         if (other.hasSegmentationGroup()) {
           setSegmentationGroup(other.getSegmentationGroup());
         }
+        if (other.hasGachaCredits()) {
+          setGachaCredits(other.getGachaCredits());
+        }
         if (other.hasUdidForHistory()) {
-          bitField1_ |= 0x00000008;
+          bitField1_ |= 0x00000040;
           udidForHistory_ = other.udidForHistory_;
           onChanged();
         }
         if (other.hasDeviceToken()) {
-          bitField1_ |= 0x00000010;
+          bitField1_ |= 0x00000080;
           deviceToken_ = other.deviceToken_;
           onChanged();
         }
@@ -8453,7 +8536,7 @@ public final class UserProto {
           setLastWallPostNotificationTime(other.getLastWallPostNotificationTime());
         }
         if (other.hasKabamNaid()) {
-          bitField1_ |= 0x00000400;
+          bitField1_ |= 0x00002000;
           kabamNaid_ = other.kabamNaid_;
           onChanged();
         }
@@ -8461,7 +8544,7 @@ public final class UserProto {
           setFbIdSetOnUserCreate(other.getFbIdSetOnUserCreate());
         }
         if (other.hasUdid()) {
-          bitField1_ |= 0x00001000;
+          bitField1_ |= 0x00008000;
           udid_ = other.udid_;
           onChanged();
         }
@@ -8493,7 +8576,6 @@ public final class UserProto {
       private int bitField0_;
       private int bitField1_;
 
-      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -8507,9 +8589,12 @@ public final class UserProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8567,7 +8652,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string name = 2;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 2;</code>
@@ -8581,9 +8665,12 @@ public final class UserProto {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8641,7 +8728,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 level = 3;
       private int level_ ;
       /**
        * <code>optional int32 level = 3;</code>
@@ -8674,7 +8760,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 gems = 4;
       private int gems_ ;
       /**
        * <code>optional int32 gems = 4;</code>
@@ -8707,7 +8792,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 cash = 5;
       private int cash_ ;
       /**
        * <code>optional int32 cash = 5;</code>
@@ -8740,7 +8824,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 oil = 42;
       private int oil_ ;
       /**
        * <code>optional int32 oil = 42;</code>
@@ -8773,7 +8856,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 experience = 6;
       private int experience_ ;
       /**
        * <code>optional int32 experience = 6;</code>
@@ -8806,7 +8888,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 tasksCompleted = 7;
       private int tasksCompleted_ ;
       /**
        * <code>optional int32 tasksCompleted = 7;</code>
@@ -8839,7 +8920,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string referralCode = 11;
       private java.lang.Object referralCode_ = "";
       /**
        * <code>optional string referralCode = 11;</code>
@@ -8853,9 +8933,12 @@ public final class UserProto {
       public java.lang.String getReferralCode() {
         java.lang.Object ref = referralCode_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          referralCode_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            referralCode_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8913,7 +8996,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 numReferrals = 12;
       private int numReferrals_ ;
       /**
        * <code>optional int32 numReferrals = 12;</code>
@@ -8946,7 +9028,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 lastLoginTime = 14;
       private long lastLoginTime_ ;
       /**
        * <code>optional int64 lastLoginTime = 14;</code>
@@ -8995,7 +9076,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 lastLogoutTime = 15;
       private long lastLogoutTime_ ;
       /**
        * <code>optional int64 lastLogoutTime = 15;</code>
@@ -9028,7 +9108,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional bool isFake = 19;
       private boolean isFake_ ;
       /**
        * <code>optional bool isFake = 19;</code>
@@ -9081,7 +9160,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional bool isAdmin = 21;
       private boolean isAdmin_ ;
       /**
        * <code>optional bool isAdmin = 21;</code>
@@ -9130,7 +9208,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 numCoinsRetrievedFromStructs = 23;
       private int numCoinsRetrievedFromStructs_ ;
       /**
        * <code>optional int32 numCoinsRetrievedFromStructs = 23;</code>
@@ -9179,7 +9256,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 numOilRetrievedFromStructs = 43;
       private int numOilRetrievedFromStructs_ ;
       /**
        * <code>optional int32 numOilRetrievedFromStructs = 43;</code>
@@ -9212,7 +9288,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.MinimumClanProto clan = 25;
       private com.lvl6.proto.UserProto.MinimumClanProto clan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder> clanBuilder_;
@@ -9357,7 +9432,7 @@ public final class UserProto {
         if (clanBuilder_ == null) {
           clanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumClanProto, com.lvl6.proto.UserProto.MinimumClanProto.Builder, com.lvl6.proto.UserProto.MinimumClanProtoOrBuilder>(
-                  clan_,
+                  getClan(),
                   getParentForChildren(),
                   isClean());
           clan_ = null;
@@ -9365,7 +9440,6 @@ public final class UserProto {
         return clanBuilder_;
       }
 
-      // optional bool hasReceivedfbReward = 28;
       private boolean hasReceivedfbReward_ ;
       /**
        * <code>optional bool hasReceivedfbReward = 28;</code>
@@ -9418,7 +9492,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 numBeginnerSalesPurchased = 30;
       private int numBeginnerSalesPurchased_ ;
       /**
        * <code>optional int32 numBeginnerSalesPurchased = 30;</code>
@@ -9451,7 +9524,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string facebookId = 40;
       private java.lang.Object facebookId_ = "";
       /**
        * <code>optional string facebookId = 40;</code>
@@ -9465,9 +9537,12 @@ public final class UserProto {
       public java.lang.String getFacebookId() {
         java.lang.Object ref = facebookId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          facebookId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            facebookId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -9525,7 +9600,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string gameCenterId = 45;
       private java.lang.Object gameCenterId_ = "";
       /**
        * <code>optional string gameCenterId = 45;</code>
@@ -9551,9 +9625,12 @@ public final class UserProto {
       public java.lang.String getGameCenterId() {
         java.lang.Object ref = gameCenterId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          gameCenterId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            gameCenterId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -9635,7 +9712,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 lastObstacleSpawnedTime = 47;
       private long lastObstacleSpawnedTime_ ;
       /**
        * <code>optional int64 lastObstacleSpawnedTime = 47;</code>
@@ -9684,7 +9760,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 numObstaclesRemoved = 49;
       private int numObstaclesRemoved_ ;
       /**
        * <code>optional int32 numObstaclesRemoved = 49;</code>
@@ -9717,7 +9792,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 avatarMonsterId = 51;
       private int avatarMonsterId_ ;
       /**
        * <code>optional int32 avatarMonsterId = 51;</code>
@@ -9750,7 +9824,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 48;
       private com.lvl6.proto.UserProto.UserPvpLeagueProto pvpLeagueInfo_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> pvpLeagueInfoBuilder_;
@@ -9859,7 +9932,7 @@ public final class UserProto {
         if (pvpLeagueInfoBuilder_ == null) {
           pvpLeagueInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
-                  pvpLeagueInfo_,
+                  getPvpLeagueInfo(),
                   getParentForChildren(),
                   isClean());
           pvpLeagueInfo_ = null;
@@ -9867,7 +9940,6 @@ public final class UserProto {
         return pvpLeagueInfoBuilder_;
       }
 
-      // optional int64 lastMiniJobSpawnedTime = 50;
       private long lastMiniJobSpawnedTime_ ;
       /**
        * <code>optional int64 lastMiniJobSpawnedTime = 50;</code>
@@ -9916,7 +9988,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 lastFreeBoosterPackTime = 52;
       private long lastFreeBoosterPackTime_ ;
       /**
        * <code>optional int64 lastFreeBoosterPackTime = 52;</code>
@@ -9965,7 +10036,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 numClanHelps = 53;
       private int numClanHelps_ ;
       /**
        * <code>optional int32 numClanHelps = 53;</code>
@@ -9998,7 +10068,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 lastSecretGiftCollectTime = 54;
       private long lastSecretGiftCollectTime_ ;
       /**
        * <code>optional int64 lastSecretGiftCollectTime = 54;</code>
@@ -10031,7 +10100,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional string pvpDefendingMessage = 56;
       private java.lang.Object pvpDefendingMessage_ = "";
       /**
        * <code>optional string pvpDefendingMessage = 56;</code>
@@ -10045,9 +10113,12 @@ public final class UserProto {
       public java.lang.String getPvpDefendingMessage() {
         java.lang.Object ref = pvpDefendingMessage_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          pvpDefendingMessage_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            pvpDefendingMessage_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10105,7 +10176,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 lastTeamDonationSolicitation = 57;
       private long lastTeamDonationSolicitation_ ;
       /**
        * <code>optional int64 lastTeamDonationSolicitation = 57;</code>
@@ -10138,46 +10208,12 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 totalStrength = 60;
-      private long totalStrength_ ;
-      /**
-       * <code>optional int64 totalStrength = 60;</code>
-       */
-      public boolean hasTotalStrength() {
-        return ((bitField0_ & 0x80000000) == 0x80000000);
-      }
-      /**
-       * <code>optional int64 totalStrength = 60;</code>
-       */
-      public long getTotalStrength() {
-        return totalStrength_;
-      }
-      /**
-       * <code>optional int64 totalStrength = 60;</code>
-       */
-      public Builder setTotalStrength(long value) {
-        bitField0_ |= 0x80000000;
-        totalStrength_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 totalStrength = 60;</code>
-       */
-      public Builder clearTotalStrength() {
-        bitField0_ = (bitField0_ & ~0x80000000);
-        totalStrength_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // optional float salesValue = 58;
       private float salesValue_ ;
       /**
        * <code>optional float salesValue = 58;</code>
        */
       public boolean hasSalesValue() {
-        return ((bitField1_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x80000000) == 0x80000000);
       }
       /**
        * <code>optional float salesValue = 58;</code>
@@ -10189,7 +10225,7 @@ public final class UserProto {
        * <code>optional float salesValue = 58;</code>
        */
       public Builder setSalesValue(float value) {
-        bitField1_ |= 0x00000001;
+        bitField0_ |= 0x80000000;
         salesValue_ = value;
         onChanged();
         return this;
@@ -10198,19 +10234,18 @@ public final class UserProto {
        * <code>optional float salesValue = 58;</code>
        */
       public Builder clearSalesValue() {
-        bitField1_ = (bitField1_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x80000000);
         salesValue_ = 0F;
         onChanged();
         return this;
       }
 
-      // optional int64 salesLastPurchaseTime = 59;
       private long salesLastPurchaseTime_ ;
       /**
        * <code>optional int64 salesLastPurchaseTime = 59;</code>
        */
       public boolean hasSalesLastPurchaseTime() {
-        return ((bitField1_ & 0x00000002) == 0x00000002);
+        return ((bitField1_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional int64 salesLastPurchaseTime = 59;</code>
@@ -10222,7 +10257,7 @@ public final class UserProto {
        * <code>optional int64 salesLastPurchaseTime = 59;</code>
        */
       public Builder setSalesLastPurchaseTime(long value) {
-        bitField1_ |= 0x00000002;
+        bitField1_ |= 0x00000001;
         salesLastPurchaseTime_ = value;
         onChanged();
         return this;
@@ -10231,19 +10266,158 @@ public final class UserProto {
        * <code>optional int64 salesLastPurchaseTime = 59;</code>
        */
       public Builder clearSalesLastPurchaseTime() {
-        bitField1_ = (bitField1_ & ~0x00000002);
+        bitField1_ = (bitField1_ & ~0x00000001);
         salesLastPurchaseTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional int32 segmentationGroup = 500;
+      private long totalStrength_ ;
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public boolean hasTotalStrength() {
+        return ((bitField1_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public long getTotalStrength() {
+        return totalStrength_;
+      }
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public Builder setTotalStrength(long value) {
+        bitField1_ |= 0x00000002;
+        totalStrength_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 totalStrength = 60;</code>
+       */
+      public Builder clearTotalStrength() {
+        bitField1_ = (bitField1_ & ~0x00000002);
+        totalStrength_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long lastTangoGiftSentTime_ ;
+      /**
+       * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+       */
+      public boolean hasLastTangoGiftSentTime() {
+        return ((bitField1_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+       */
+      public long getLastTangoGiftSentTime() {
+        return lastTangoGiftSentTime_;
+      }
+      /**
+       * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+       */
+      public Builder setLastTangoGiftSentTime(long value) {
+        bitField1_ |= 0x00000004;
+        lastTangoGiftSentTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 lastTangoGiftSentTime = 61;</code>
+       */
+      public Builder clearLastTangoGiftSentTime() {
+        bitField1_ = (bitField1_ & ~0x00000004);
+        lastTangoGiftSentTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object tangoId_ = "";
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public boolean hasTangoId() {
+        return ((bitField1_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public java.lang.String getTangoId() {
+        java.lang.Object ref = tangoId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tangoId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTangoIdBytes() {
+        java.lang.Object ref = tangoId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tangoId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public Builder setTangoId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField1_ |= 0x00000008;
+        tangoId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public Builder clearTangoId() {
+        bitField1_ = (bitField1_ & ~0x00000008);
+        tangoId_ = getDefaultInstance().getTangoId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string tangoId = 62;</code>
+       */
+      public Builder setTangoIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField1_ |= 0x00000008;
+        tangoId_ = value;
+        onChanged();
+        return this;
+      }
+
       private int segmentationGroup_ ;
       /**
        * <code>optional int32 segmentationGroup = 500;</code>
        */
       public boolean hasSegmentationGroup() {
-        return ((bitField1_ & 0x00000004) == 0x00000004);
+        return ((bitField1_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int32 segmentationGroup = 500;</code>
@@ -10255,7 +10429,7 @@ public final class UserProto {
        * <code>optional int32 segmentationGroup = 500;</code>
        */
       public Builder setSegmentationGroup(int value) {
-        bitField1_ |= 0x00000004;
+        bitField1_ |= 0x00000010;
         segmentationGroup_ = value;
         onChanged();
         return this;
@@ -10264,13 +10438,44 @@ public final class UserProto {
        * <code>optional int32 segmentationGroup = 500;</code>
        */
       public Builder clearSegmentationGroup() {
-        bitField1_ = (bitField1_ & ~0x00000004);
+        bitField1_ = (bitField1_ & ~0x00000010);
         segmentationGroup_ = 0;
         onChanged();
         return this;
       }
 
-      // optional string udidForHistory = 46;
+      private int gachaCredits_ ;
+      /**
+       * <code>optional int32 gachaCredits = 501;</code>
+       */
+      public boolean hasGachaCredits() {
+        return ((bitField1_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 gachaCredits = 501;</code>
+       */
+      public int getGachaCredits() {
+        return gachaCredits_;
+      }
+      /**
+       * <code>optional int32 gachaCredits = 501;</code>
+       */
+      public Builder setGachaCredits(int value) {
+        bitField1_ |= 0x00000020;
+        gachaCredits_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gachaCredits = 501;</code>
+       */
+      public Builder clearGachaCredits() {
+        bitField1_ = (bitField1_ & ~0x00000020);
+        gachaCredits_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object udidForHistory_ = "";
       /**
        * <code>optional string udidForHistory = 46;</code>
@@ -10281,7 +10486,7 @@ public final class UserProto {
        * </pre>
        */
       public boolean hasUdidForHistory() {
-        return ((bitField1_ & 0x00000008) == 0x00000008);
+        return ((bitField1_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional string udidForHistory = 46;</code>
@@ -10294,9 +10499,12 @@ public final class UserProto {
       public java.lang.String getUdidForHistory() {
         java.lang.Object ref = udidForHistory_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          udidForHistory_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            udidForHistory_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10336,7 +10544,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00000008;
+  bitField1_ |= 0x00000040;
         udidForHistory_ = value;
         onChanged();
         return this;
@@ -10350,7 +10558,7 @@ public final class UserProto {
        * </pre>
        */
       public Builder clearUdidForHistory() {
-        bitField1_ = (bitField1_ & ~0x00000008);
+        bitField1_ = (bitField1_ & ~0x00000040);
         udidForHistory_ = getDefaultInstance().getUdidForHistory();
         onChanged();
         return this;
@@ -10368,19 +10576,18 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00000008;
+  bitField1_ |= 0x00000040;
         udidForHistory_ = value;
         onChanged();
         return this;
       }
 
-      // optional string deviceToken = 16;
       private java.lang.Object deviceToken_ = "";
       /**
        * <code>optional string deviceToken = 16;</code>
        */
       public boolean hasDeviceToken() {
-        return ((bitField1_ & 0x00000010) == 0x00000010);
+        return ((bitField1_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string deviceToken = 16;</code>
@@ -10388,9 +10595,12 @@ public final class UserProto {
       public java.lang.String getDeviceToken() {
         java.lang.Object ref = deviceToken_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          deviceToken_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            deviceToken_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10420,7 +10630,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00000010;
+  bitField1_ |= 0x00000080;
         deviceToken_ = value;
         onChanged();
         return this;
@@ -10429,7 +10639,7 @@ public final class UserProto {
        * <code>optional string deviceToken = 16;</code>
        */
       public Builder clearDeviceToken() {
-        bitField1_ = (bitField1_ & ~0x00000010);
+        bitField1_ = (bitField1_ & ~0x00000080);
         deviceToken_ = getDefaultInstance().getDeviceToken();
         onChanged();
         return this;
@@ -10442,19 +10652,18 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00000010;
+  bitField1_ |= 0x00000080;
         deviceToken_ = value;
         onChanged();
         return this;
       }
 
-      // optional int32 numBadges = 18;
       private int numBadges_ ;
       /**
        * <code>optional int32 numBadges = 18;</code>
        */
       public boolean hasNumBadges() {
-        return ((bitField1_ & 0x00000020) == 0x00000020);
+        return ((bitField1_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional int32 numBadges = 18;</code>
@@ -10466,7 +10675,7 @@ public final class UserProto {
        * <code>optional int32 numBadges = 18;</code>
        */
       public Builder setNumBadges(int value) {
-        bitField1_ |= 0x00000020;
+        bitField1_ |= 0x00000100;
         numBadges_ = value;
         onChanged();
         return this;
@@ -10475,19 +10684,18 @@ public final class UserProto {
        * <code>optional int32 numBadges = 18;</code>
        */
       public Builder clearNumBadges() {
-        bitField1_ = (bitField1_ & ~0x00000020);
+        bitField1_ = (bitField1_ & ~0x00000100);
         numBadges_ = 0;
         onChanged();
         return this;
       }
 
-      // optional int64 createTime = 20;
       private long createTime_ ;
       /**
        * <code>optional int64 createTime = 20;</code>
        */
       public boolean hasCreateTime() {
-        return ((bitField1_ & 0x00000040) == 0x00000040);
+        return ((bitField1_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional int64 createTime = 20;</code>
@@ -10499,7 +10707,7 @@ public final class UserProto {
        * <code>optional int64 createTime = 20;</code>
        */
       public Builder setCreateTime(long value) {
-        bitField1_ |= 0x00000040;
+        bitField1_ |= 0x00000200;
         createTime_ = value;
         onChanged();
         return this;
@@ -10508,19 +10716,18 @@ public final class UserProto {
        * <code>optional int64 createTime = 20;</code>
        */
       public Builder clearCreateTime() {
-        bitField1_ = (bitField1_ & ~0x00000040);
+        bitField1_ = (bitField1_ & ~0x00000200);
         createTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional int32 apsalarId = 22;
       private int apsalarId_ ;
       /**
        * <code>optional int32 apsalarId = 22;</code>
        */
       public boolean hasApsalarId() {
-        return ((bitField1_ & 0x00000080) == 0x00000080);
+        return ((bitField1_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional int32 apsalarId = 22;</code>
@@ -10532,7 +10739,7 @@ public final class UserProto {
        * <code>optional int32 apsalarId = 22;</code>
        */
       public Builder setApsalarId(int value) {
-        bitField1_ |= 0x00000080;
+        bitField1_ |= 0x00000400;
         apsalarId_ = value;
         onChanged();
         return this;
@@ -10541,19 +10748,18 @@ public final class UserProto {
        * <code>optional int32 apsalarId = 22;</code>
        */
       public Builder clearApsalarId() {
-        bitField1_ = (bitField1_ & ~0x00000080);
+        bitField1_ = (bitField1_ & ~0x00000400);
         apsalarId_ = 0;
         onChanged();
         return this;
       }
 
-      // optional int32 numConsecutiveDaysPlayed = 24;
       private int numConsecutiveDaysPlayed_ ;
       /**
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
        */
       public boolean hasNumConsecutiveDaysPlayed() {
-        return ((bitField1_ & 0x00000100) == 0x00000100);
+        return ((bitField1_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
@@ -10565,7 +10771,7 @@ public final class UserProto {
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
        */
       public Builder setNumConsecutiveDaysPlayed(int value) {
-        bitField1_ |= 0x00000100;
+        bitField1_ |= 0x00000800;
         numConsecutiveDaysPlayed_ = value;
         onChanged();
         return this;
@@ -10574,19 +10780,18 @@ public final class UserProto {
        * <code>optional int32 numConsecutiveDaysPlayed = 24;</code>
        */
       public Builder clearNumConsecutiveDaysPlayed() {
-        bitField1_ = (bitField1_ & ~0x00000100);
+        bitField1_ = (bitField1_ & ~0x00000800);
         numConsecutiveDaysPlayed_ = 0;
         onChanged();
         return this;
       }
 
-      // optional int64 lastWallPostNotificationTime = 26;
       private long lastWallPostNotificationTime_ ;
       /**
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
        */
       public boolean hasLastWallPostNotificationTime() {
-        return ((bitField1_ & 0x00000200) == 0x00000200);
+        return ((bitField1_ & 0x00001000) == 0x00001000);
       }
       /**
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
@@ -10598,7 +10803,7 @@ public final class UserProto {
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
        */
       public Builder setLastWallPostNotificationTime(long value) {
-        bitField1_ |= 0x00000200;
+        bitField1_ |= 0x00001000;
         lastWallPostNotificationTime_ = value;
         onChanged();
         return this;
@@ -10607,19 +10812,18 @@ public final class UserProto {
        * <code>optional int64 lastWallPostNotificationTime = 26;</code>
        */
       public Builder clearLastWallPostNotificationTime() {
-        bitField1_ = (bitField1_ & ~0x00000200);
+        bitField1_ = (bitField1_ & ~0x00001000);
         lastWallPostNotificationTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional string kabamNaid = 27;
       private java.lang.Object kabamNaid_ = "";
       /**
        * <code>optional string kabamNaid = 27;</code>
        */
       public boolean hasKabamNaid() {
-        return ((bitField1_ & 0x00000400) == 0x00000400);
+        return ((bitField1_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>optional string kabamNaid = 27;</code>
@@ -10627,9 +10831,12 @@ public final class UserProto {
       public java.lang.String getKabamNaid() {
         java.lang.Object ref = kabamNaid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          kabamNaid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            kabamNaid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10659,7 +10866,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00000400;
+  bitField1_ |= 0x00002000;
         kabamNaid_ = value;
         onChanged();
         return this;
@@ -10668,7 +10875,7 @@ public final class UserProto {
        * <code>optional string kabamNaid = 27;</code>
        */
       public Builder clearKabamNaid() {
-        bitField1_ = (bitField1_ & ~0x00000400);
+        bitField1_ = (bitField1_ & ~0x00002000);
         kabamNaid_ = getDefaultInstance().getKabamNaid();
         onChanged();
         return this;
@@ -10681,19 +10888,18 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00000400;
+  bitField1_ |= 0x00002000;
         kabamNaid_ = value;
         onChanged();
         return this;
       }
 
-      // optional bool fbIdSetOnUserCreate = 44;
       private boolean fbIdSetOnUserCreate_ ;
       /**
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
        */
       public boolean hasFbIdSetOnUserCreate() {
-        return ((bitField1_ & 0x00000800) == 0x00000800);
+        return ((bitField1_ & 0x00004000) == 0x00004000);
       }
       /**
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
@@ -10705,7 +10911,7 @@ public final class UserProto {
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
        */
       public Builder setFbIdSetOnUserCreate(boolean value) {
-        bitField1_ |= 0x00000800;
+        bitField1_ |= 0x00004000;
         fbIdSetOnUserCreate_ = value;
         onChanged();
         return this;
@@ -10714,19 +10920,18 @@ public final class UserProto {
        * <code>optional bool fbIdSetOnUserCreate = 44;</code>
        */
       public Builder clearFbIdSetOnUserCreate() {
-        bitField1_ = (bitField1_ & ~0x00000800);
+        bitField1_ = (bitField1_ & ~0x00004000);
         fbIdSetOnUserCreate_ = false;
         onChanged();
         return this;
       }
 
-      // optional string udid = 13;
       private java.lang.Object udid_ = "";
       /**
        * <code>optional string udid = 13;</code>
        */
       public boolean hasUdid() {
-        return ((bitField1_ & 0x00001000) == 0x00001000);
+        return ((bitField1_ & 0x00008000) == 0x00008000);
       }
       /**
        * <code>optional string udid = 13;</code>
@@ -10734,9 +10939,12 @@ public final class UserProto {
       public java.lang.String getUdid() {
         java.lang.Object ref = udid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          udid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            udid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -10766,7 +10974,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00001000;
+  bitField1_ |= 0x00008000;
         udid_ = value;
         onChanged();
         return this;
@@ -10775,7 +10983,7 @@ public final class UserProto {
        * <code>optional string udid = 13;</code>
        */
       public Builder clearUdid() {
-        bitField1_ = (bitField1_ & ~0x00001000);
+        bitField1_ = (bitField1_ & ~0x00008000);
         udid_ = getDefaultInstance().getUdid();
         onChanged();
         return this;
@@ -10788,7 +10996,7 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField1_ |= 0x00001000;
+  bitField1_ |= 0x00008000;
         udid_ = value;
         onChanged();
         return this;
@@ -10805,10 +11013,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserProto)
   }
 
-  public interface StaticUserLevelInfoProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface StaticUserLevelInfoProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StaticUserLevelInfoProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 level = 1;
     /**
      * <code>optional int32 level = 1;</code>
      */
@@ -10818,7 +11026,6 @@ public final class UserProto {
      */
     int getLevel();
 
-    // optional int32 requiredExperience = 2;
     /**
      * <code>optional int32 requiredExperience = 2;</code>
      */
@@ -10832,8 +11039,9 @@ public final class UserProto {
    * Protobuf type {@code com.lvl6.proto.StaticUserLevelInfoProto}
    */
   public static final class StaticUserLevelInfoProto extends
-      com.google.protobuf.GeneratedMessage
-      implements StaticUserLevelInfoProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.StaticUserLevelInfoProto)
+      StaticUserLevelInfoProtoOrBuilder {
     // Use StaticUserLevelInfoProto.newBuilder() to construct.
     private StaticUserLevelInfoProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -10929,7 +11137,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional int32 level = 1;
     public static final int LEVEL_FIELD_NUMBER = 1;
     private int level_;
     /**
@@ -10945,7 +11152,6 @@ public final class UserProto {
       return level_;
     }
 
-    // optional int32 requiredExperience = 2;
     public static final int REQUIREDEXPERIENCE_FIELD_NUMBER = 2;
     private int requiredExperience_;
     /**
@@ -10968,7 +11174,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11082,8 +11289,9 @@ public final class UserProto {
      * Protobuf type {@code com.lvl6.proto.StaticUserLevelInfoProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StaticUserLevelInfoProto)
+        com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor;
@@ -11205,7 +11413,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional int32 level = 1;
       private int level_ ;
       /**
        * <code>optional int32 level = 1;</code>
@@ -11238,7 +11445,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 requiredExperience = 2;
       private int requiredExperience_ ;
       /**
        * <code>optional int32 requiredExperience = 2;</code>
@@ -11282,10 +11488,10 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.StaticUserLevelInfoProto)
   }
 
-  public interface UserPvpLeagueProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UserPvpLeagueProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserPvpLeagueProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string userUuid = 1;
     /**
      * <code>optional string userUuid = 1;</code>
      */
@@ -11300,7 +11506,6 @@ public final class UserProto {
     com.google.protobuf.ByteString
         getUserUuidBytes();
 
-    // optional int32 leagueId = 2;
     /**
      * <code>optional int32 leagueId = 2;</code>
      *
@@ -11318,7 +11523,6 @@ public final class UserProto {
      */
     int getLeagueId();
 
-    // optional int32 rank = 3;
     /**
      * <code>optional int32 rank = 3;</code>
      */
@@ -11328,7 +11532,6 @@ public final class UserProto {
      */
     int getRank();
 
-    // optional int32 elo = 4;
     /**
      * <code>optional int32 elo = 4;</code>
      *
@@ -11346,7 +11549,6 @@ public final class UserProto {
      */
     int getElo();
 
-    // optional int32 battlesWon = 5;
     /**
      * <code>optional int32 battlesWon = 5;</code>
      */
@@ -11356,7 +11558,6 @@ public final class UserProto {
      */
     int getBattlesWon();
 
-    // optional int32 battlesLost = 6;
     /**
      * <code>optional int32 battlesLost = 6;</code>
      */
@@ -11366,7 +11567,6 @@ public final class UserProto {
      */
     int getBattlesLost();
 
-    // optional int64 shieldEndTime = 7;
     /**
      * <code>optional int64 shieldEndTime = 7;</code>
      */
@@ -11376,7 +11576,6 @@ public final class UserProto {
      */
     long getShieldEndTime();
 
-    // optional float monsterDmgMultiplier = 8;
     /**
      * <code>optional float monsterDmgMultiplier = 8;</code>
      */
@@ -11394,8 +11593,9 @@ public final class UserProto {
    * </pre>
    */
   public static final class UserPvpLeagueProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserPvpLeagueProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserPvpLeagueProto)
+      UserPvpLeagueProtoOrBuilder {
     // Use UserPvpLeagueProto.newBuilder() to construct.
     private UserPvpLeagueProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -11442,8 +11642,9 @@ public final class UserProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userUuid_ = input.readBytes();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -11521,7 +11722,6 @@ public final class UserProto {
     }
 
     private int bitField0_;
-    // optional string userUuid = 1;
     public static final int USERUUID_FIELD_NUMBER = 1;
     private java.lang.Object userUuid_;
     /**
@@ -11564,7 +11764,6 @@ public final class UserProto {
       }
     }
 
-    // optional int32 leagueId = 2;
     public static final int LEAGUEID_FIELD_NUMBER = 2;
     private int leagueId_;
     /**
@@ -11588,7 +11787,6 @@ public final class UserProto {
       return leagueId_;
     }
 
-    // optional int32 rank = 3;
     public static final int RANK_FIELD_NUMBER = 3;
     private int rank_;
     /**
@@ -11604,7 +11802,6 @@ public final class UserProto {
       return rank_;
     }
 
-    // optional int32 elo = 4;
     public static final int ELO_FIELD_NUMBER = 4;
     private int elo_;
     /**
@@ -11628,7 +11825,6 @@ public final class UserProto {
       return elo_;
     }
 
-    // optional int32 battlesWon = 5;
     public static final int BATTLESWON_FIELD_NUMBER = 5;
     private int battlesWon_;
     /**
@@ -11644,7 +11840,6 @@ public final class UserProto {
       return battlesWon_;
     }
 
-    // optional int32 battlesLost = 6;
     public static final int BATTLESLOST_FIELD_NUMBER = 6;
     private int battlesLost_;
     /**
@@ -11660,7 +11855,6 @@ public final class UserProto {
       return battlesLost_;
     }
 
-    // optional int64 shieldEndTime = 7;
     public static final int SHIELDENDTIME_FIELD_NUMBER = 7;
     private long shieldEndTime_;
     /**
@@ -11676,7 +11870,6 @@ public final class UserProto {
       return shieldEndTime_;
     }
 
-    // optional float monsterDmgMultiplier = 8;
     public static final int MONSTERDMGMULTIPLIER_FIELD_NUMBER = 8;
     private float monsterDmgMultiplier_;
     /**
@@ -11705,7 +11898,8 @@ public final class UserProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -11865,8 +12059,9 @@ public final class UserProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserPvpLeagueProto)
+        com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor;
@@ -12044,7 +12239,6 @@ public final class UserProto {
       }
       private int bitField0_;
 
-      // optional string userUuid = 1;
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 1;</code>
@@ -12058,9 +12252,12 @@ public final class UserProto {
       public java.lang.String getUserUuid() {
         java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          userUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -12118,7 +12315,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 leagueId = 2;
       private int leagueId_ ;
       /**
        * <code>optional int32 leagueId = 2;</code>
@@ -12167,7 +12363,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 rank = 3;
       private int rank_ ;
       /**
        * <code>optional int32 rank = 3;</code>
@@ -12200,7 +12395,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 elo = 4;
       private int elo_ ;
       /**
        * <code>optional int32 elo = 4;</code>
@@ -12249,7 +12443,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 battlesWon = 5;
       private int battlesWon_ ;
       /**
        * <code>optional int32 battlesWon = 5;</code>
@@ -12282,7 +12475,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int32 battlesLost = 6;
       private int battlesLost_ ;
       /**
        * <code>optional int32 battlesLost = 6;</code>
@@ -12315,7 +12507,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional int64 shieldEndTime = 7;
       private long shieldEndTime_ ;
       /**
        * <code>optional int64 shieldEndTime = 7;</code>
@@ -12348,7 +12539,6 @@ public final class UserProto {
         return this;
       }
 
-      // optional float monsterDmgMultiplier = 8;
       private float monsterDmgMultiplier_ ;
       /**
        * <code>optional float monsterDmgMultiplier = 8;</code>
@@ -12392,47 +12582,47 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserPvpLeagueProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumClanProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumClanProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullUserProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -12468,7 +12658,7 @@ public final class UserProto {
       "bookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014t",
       "imeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022" +
       "\026\n\016userStructUuid\030\006 \001(\t\022\023\n\013structFbLvl\030\007" +
-      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\225\t\n\rFullUserP" +
+      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\334\t\n\rFullUserP" +
       "roto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005" +
       "level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022" +
       "\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016task" +
@@ -12489,89 +12679,91 @@ public final class UserProto {
       "osterPackTime\0304 \001(\003\022\024\n\014numClanHelps\0305 \001(" +
       "\005\022!\n\031lastSecretGiftCollectTime\0306 \001(\003\022\033\n\023" +
       "pvpDefendingMessage\0308 \001(\t\022$\n\034lastTeamDon" +
-      "ationSolicitation\0309 \001(\003\022\025\n\rtotalStrength" +
-      "\030< \001(\003\022\022\n\nsalesValue\030: \001(\002\022\035\n\025salesLastP" +
-      "urchaseTime\030; \001(\003\022\032\n\021segmentationGroup\030\364" +
-      "\003 \001(\005\022\026\n\016udidForHistory\030. \001(\t\022\023\n\013deviceT" +
-      "oken\030\020 \001(\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateT" +
-      "ime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConse" +
-      "cutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPostNo",
-      "tificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022" +
-      "\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004udid\030\r \001" +
-      "(\t\"E\n\030StaticUserLevelInfoProto\022\r\n\005level\030" +
-      "\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\"\261\001\n\022Us" +
-      "erPvpLeagueProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010le" +
-      "agueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022" +
-      "\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005" +
-      "\022\025\n\rshieldEndTime\030\007 \001(\003\022\034\n\024monsterDmgMul" +
-      "tiplier\030\010 \001(\002B\013B\tUserProto"
+      "ationSolicitation\0309 \001(\003\022\022\n\nsalesValue\030: " +
+      "\001(\002\022\035\n\025salesLastPurchaseTime\030; \001(\003\022\025\n\rto" +
+      "talStrength\030< \001(\003\022\035\n\025lastTangoGiftSentTi" +
+      "me\030= \001(\003\022\017\n\007tangoId\030> \001(\t\022\032\n\021segmentatio" +
+      "nGroup\030\364\003 \001(\005\022\025\n\014gachaCredits\030\365\003 \001(\005\022\026\n\016" +
+      "udidForHistory\030. \001(\t\022\023\n\013deviceToken\030\020 \001(" +
+      "\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003",
+      "\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecutiveDay" +
+      "sPlayed\030\030 \001(\005\022$\n\034lastWallPostNotificatio" +
+      "nTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbIdSe" +
+      "tOnUserCreate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030Sta" +
+      "ticUserLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022" +
+      "requiredExperience\030\002 \001(\005\"\261\001\n\022UserPvpLeag" +
+      "ueProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010leagueId\030\002 " +
+      "\001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattle" +
+      "sWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005\022\025\n\rshiel" +
+      "dEndTime\030\007 \001(\003\022\034\n\024monsterDmgMultiplier\030\010",
+      " \001(\002B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_MinimumClanProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_MinimumClanProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumClanProto_descriptor,
-              new java.lang.String[] { "ClanUuid", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", "ClanIconId", });
-          internal_static_com_lvl6_proto_MinimumUserProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_MinimumUserProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumUserProto_descriptor,
-              new java.lang.String[] { "UserUuid", "Name", "Clan", "AvatarMonsterId", });
-          internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor,
-              new java.lang.String[] { "MinUserProto", "Level", });
-          internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor,
-              new java.lang.String[] { "MinUserProto", "FacebookId", });
-          internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor,
-              new java.lang.String[] { "MinUserProto", "MaxCash", "MaxOil", });
-          internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor,
-              new java.lang.String[] { "InviteUuid", "Inviter", "RecipientFacebookId", "TimeOfInvite", "TimeAccepted", "UserStructUuid", "StructFbLvl", "RedeemedTime", });
-          internal_static_com_lvl6_proto_FullUserProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FullUserProto_descriptor,
-              new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "TotalStrength", "SalesValue", "SalesLastPurchaseTime", "SegmentationGroup", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
-          internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor,
-              new java.lang.String[] { "Level", "RequiredExperience", });
-          internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_com_lvl6_proto_UserPvpLeagueProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor,
-              new java.lang.String[] { "UserUuid", "LeagueId", "Rank", "Elo", "BattlesWon", "BattlesLost", "ShieldEndTime", "MonsterDmgMultiplier", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_com_lvl6_proto_MinimumClanProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_MinimumClanProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumClanProto_descriptor,
+        new java.lang.String[] { "ClanUuid", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", "ClanIconId", });
+    internal_static_com_lvl6_proto_MinimumUserProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_MinimumUserProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumUserProto_descriptor,
+        new java.lang.String[] { "UserUuid", "Name", "Clan", "AvatarMonsterId", });
+    internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor,
+        new java.lang.String[] { "MinUserProto", "Level", });
+    internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor,
+        new java.lang.String[] { "MinUserProto", "FacebookId", });
+    internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor,
+        new java.lang.String[] { "MinUserProto", "MaxCash", "MaxOil", });
+    internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor,
+        new java.lang.String[] { "InviteUuid", "Inviter", "RecipientFacebookId", "TimeOfInvite", "TimeAccepted", "UserStructUuid", "StructFbLvl", "RedeemedTime", });
+    internal_static_com_lvl6_proto_FullUserProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FullUserProto_descriptor,
+        new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "SalesValue", "SalesLastPurchaseTime", "TotalStrength", "LastTangoGiftSentTime", "TangoId", "SegmentationGroup", "GachaCredits", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
+    internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor,
+        new java.lang.String[] { "Level", "RequiredExperience", });
+    internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_UserPvpLeagueProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor,
+        new java.lang.String[] { "UserUuid", "LeagueId", "Rank", "Elo", "BattlesWon", "BattlesLost", "ShieldEndTime", "MonsterDmgMultiplier", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

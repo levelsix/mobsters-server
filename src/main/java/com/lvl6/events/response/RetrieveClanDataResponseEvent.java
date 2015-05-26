@@ -27,5 +27,9 @@ public class RetrieveClanDataResponseEvent extends NormalResponseEvent<RetrieveC
 			RetrieveClanDataResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return retrieveClanDataResponseProto.getSerializedSize();
+	}
 
 }

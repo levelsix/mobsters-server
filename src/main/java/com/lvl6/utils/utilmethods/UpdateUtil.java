@@ -13,6 +13,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -255,5 +256,6 @@ public interface UpdateUtil {
 
 	public abstract boolean updateUserClanGiftHasBeenCollected(String userId, List<ClanGiftForUser> cgfuList);
 
+	public abstract boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList);
 
 }

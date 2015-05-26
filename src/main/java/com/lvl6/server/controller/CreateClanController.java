@@ -27,6 +27,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -35,8 +36,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class CreateClanController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(CreateClanController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -64,6 +65,9 @@ public class CreateClanController extends EventController {
 	
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected ResourceUtil resourceUtil;
 	
 	
 	public CreateClanController() {
@@ -128,7 +132,7 @@ public class CreateClanController extends EventController {
 			
 			CreateClanAction cca = new CreateClanAction(userId, cashChange, gemsSpent, userRetrieveUtil,
 					insertUtil, deleteUtil, miscMethods, clanName, tag, requestToJoinRequired, 
-					description, clanIconId, clanRetrieveUtils);
+					description, clanIconId, clanRetrieveUtils, resourceUtil);
 			
 			cca.execute(resBuilder);
 

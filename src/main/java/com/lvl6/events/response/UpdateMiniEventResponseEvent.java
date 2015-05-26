@@ -28,4 +28,7 @@ public class UpdateMiniEventResponseEvent extends NormalResponseEvent<UpdateMini
 		this.responseProto = responseProto;
 	}
 
+	public int eventSize() {
+		return updateMiniEventResponseProto.getSerializedSize();
+	}
 }

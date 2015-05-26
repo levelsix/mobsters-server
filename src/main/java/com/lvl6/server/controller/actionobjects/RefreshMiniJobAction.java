@@ -245,7 +245,7 @@ public class RefreshMiniJobAction {
 			//charge the user
 			log.info("user before: {}", user);
 			int gemChange = -1 * Math.abs(gemsSpent);
-			numUpdated = user.updateRelativeCashAndOilAndGems(0, 0, gemChange);
+			numUpdated = user.updateRelativeCashAndOilAndGems(0, 0, gemChange, 0);
 			log.info("user after: {}", user);
 
 			prepCurrencyHistory();

@@ -25,6 +25,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -1890,7 +1891,9 @@ public class UpdateUtils implements UpdateUtil {
 			absoluteParams.put(DBConstants.USER__SALES_VALUE, newSalesValue);
 		}
 
-		absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
+		if(now != null) {
+			absoluteParams.put(DBConstants.USER__SALES_LAST_PURCHASE_TIME, new Timestamp(now.getTime()));
+		}
 
 		int numUpdated = DBConnection.get().updateTableRows(
 				DBConstants.TABLE_USER, null, absoluteParams,
@@ -2100,19 +2103,53 @@ public class UpdateUtils implements UpdateUtil {
 		log.info(query);
 
 		try {
-//			this.jdbcTemplate.execute(query);
 			this.jdbcTemplate.update(query, values.toArray());
 
 		} catch (Exception e) {
 			log.error("error updating quantities for user battle items.", e);
 			return false;
-			//		} finally {
-			//			DBConnection.get().close(rs, null, conn);
 		}
 		return true;
+	}
 
+	@Override
+	public boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
 
+		log.debug("updating GiftForUser collect status for userId {}",
+				userId);
 
+		List<Object> values = new ArrayList<Object>();
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("insert into %s (%s) values ");
+		List<String> questionsList = Collections.nCopies(gfuList.size(),"(?)");
+		String questionMarks = StringUtils.csvList(questionsList);
+
+		for(GiftForUser gfu : gfuList) {
+			values.add(gfu.getId());
+		}
+
+		sb.append(questionMarks);
+		sb.append(" on duplicate key update %s = %s");
+
+		log.info("updateQuery={}, values={}", sb.toString(), values);
+
+		String query = String.format(sb.toString(), tableName,
+				DBConstants.GIFT_FOR_USER__ID, DBConstants.GIFT_FOR_USER__COLLECTED,
+				true);
+
+		log.info(query);
+
+		try {
+			this.jdbcTemplate.update(query, values.toArray());
+
+		} catch (Exception e) {
+			log.error("error updating quantities for GiftForUser.", e);
+			return false;
+		}
+
+		return true;
 	}
 
 }

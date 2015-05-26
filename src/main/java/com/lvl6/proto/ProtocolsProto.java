@@ -474,17 +474,41 @@ public final class ProtocolsProto {
      */
     C_REFRESH_MINI_JOB_EVENT(110, 212),
     /**
+     * <code>C_SET_TANGO_ID_EVENT = 213;</code>
+     */
+    C_SET_TANGO_ID_EVENT(111, 213),
+    /**
+     * <code>C_SEND_TANGO_GIFT_EVENT = 214;</code>
+     */
+    C_SEND_TANGO_GIFT_EVENT(112, 214),
+    /**
+     * <code>C_DELETE_GIFT_EVENT = 215;</code>
+     */
+    C_DELETE_GIFT_EVENT(113, 215),
+    /**
+     * <code>C_COLLECT_GIFT_EVENT = 216;</code>
+     */
+    C_COLLECT_GIFT_EVENT(114, 216),
+    /**
+     * <code>C_RETRIEVE_BATTLE_REPLAY_EVENT = 217;</code>
+     */
+    C_RETRIEVE_BATTLE_REPLAY_EVENT(115, 217),
+    /**
      * <code>C_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
      */
-    C_COLLECT_CLAN_GIFTS_EVENT(111, 500),
+    C_COLLECT_CLAN_GIFTS_EVENT(116, 500),
     /**
      * <code>C_DELETE_CLAN_GIFTS_EVENT = 501;</code>
      */
-    C_DELETE_CLAN_GIFTS_EVENT(112, 501),
+    C_DELETE_CLAN_GIFTS_EVENT(117, 501),
     /**
      * <code>C_RECEIVED_CLAN_GIFTS_EVENT = 502;</code>
      */
-    C_RECEIVED_CLAN_GIFTS_EVENT(113, 502),
+    C_RECEIVED_CLAN_GIFTS_EVENT(118, 502),
+    /**
+     * <code>C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
+     */
+    C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT(119, 503),
     ;
 
     /**
@@ -948,6 +972,26 @@ public final class ProtocolsProto {
      */
     public static final int C_REFRESH_MINI_JOB_EVENT_VALUE = 212;
     /**
+     * <code>C_SET_TANGO_ID_EVENT = 213;</code>
+     */
+    public static final int C_SET_TANGO_ID_EVENT_VALUE = 213;
+    /**
+     * <code>C_SEND_TANGO_GIFT_EVENT = 214;</code>
+     */
+    public static final int C_SEND_TANGO_GIFT_EVENT_VALUE = 214;
+    /**
+     * <code>C_DELETE_GIFT_EVENT = 215;</code>
+     */
+    public static final int C_DELETE_GIFT_EVENT_VALUE = 215;
+    /**
+     * <code>C_COLLECT_GIFT_EVENT = 216;</code>
+     */
+    public static final int C_COLLECT_GIFT_EVENT_VALUE = 216;
+    /**
+     * <code>C_RETRIEVE_BATTLE_REPLAY_EVENT = 217;</code>
+     */
+    public static final int C_RETRIEVE_BATTLE_REPLAY_EVENT_VALUE = 217;
+    /**
      * <code>C_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
      */
     public static final int C_COLLECT_CLAN_GIFTS_EVENT_VALUE = 500;
@@ -959,6 +1003,10 @@ public final class ProtocolsProto {
      * <code>C_RECEIVED_CLAN_GIFTS_EVENT = 502;</code>
      */
     public static final int C_RECEIVED_CLAN_GIFTS_EVENT_VALUE = 502;
+    /**
+     * <code>C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
+     */
+    public static final int C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT_VALUE = 503;
 
 
     public final int getNumber() { return value; }
@@ -1076,9 +1124,15 @@ public final class ProtocolsProto {
         case 210: return C_TRANSLATE_SELECT_MESSAGES_EVENT;
         case 211: return C_UPDATE_USER_STRENGTH_EVENT;
         case 212: return C_REFRESH_MINI_JOB_EVENT;
+        case 213: return C_SET_TANGO_ID_EVENT;
+        case 214: return C_SEND_TANGO_GIFT_EVENT;
+        case 215: return C_DELETE_GIFT_EVENT;
+        case 216: return C_COLLECT_GIFT_EVENT;
+        case 217: return C_RETRIEVE_BATTLE_REPLAY_EVENT;
         case 500: return C_COLLECT_CLAN_GIFTS_EVENT;
         case 501: return C_DELETE_CLAN_GIFTS_EVENT;
         case 502: return C_RECEIVED_CLAN_GIFTS_EVENT;
+        case 503: return C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT;
         default: return null;
       }
     }
@@ -1580,69 +1634,97 @@ public final class ProtocolsProto {
      */
     S_RETRIEVE_CLAN_DATA_EVENT(106, 110),
     /**
+     * <code>S_RECEIVED_GIFT_EVENT = 111;</code>
+     */
+    S_RECEIVED_GIFT_EVENT(107, 111),
+    /**
      * <code>S_DEV_EVENT = 200;</code>
      */
-    S_DEV_EVENT(107, 200),
+    S_DEV_EVENT(108, 200),
     /**
      * <code>S_PERFORM_RESEARCH_EVENT = 201;</code>
      */
-    S_PERFORM_RESEARCH_EVENT(108, 201),
+    S_PERFORM_RESEARCH_EVENT(109, 201),
     /**
      * <code>S_FINISH_PERFORMING_RESEARCH_EVENT = 202;</code>
      */
-    S_FINISH_PERFORMING_RESEARCH_EVENT(109, 202),
+    S_FINISH_PERFORMING_RESEARCH_EVENT(110, 202),
     /**
      * <code>S_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT = 203;</code>
      */
-    S_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT(110, 203),
+    S_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT(111, 203),
     /**
      * <code>S_CREATE_BATTLE_ITEM_EVENT = 204;</code>
      */
-    S_CREATE_BATTLE_ITEM_EVENT(111, 204),
+    S_CREATE_BATTLE_ITEM_EVENT(112, 204),
     /**
      * <code>S_DISCARD_BATTLE_ITEM_EVENT = 205;</code>
      */
-    S_DISCARD_BATTLE_ITEM_EVENT(112, 205),
+    S_DISCARD_BATTLE_ITEM_EVENT(113, 205),
     /**
      * <code>S_COMPLETE_BATTLE_ITEM_EVENT = 206;</code>
      */
-    S_COMPLETE_BATTLE_ITEM_EVENT(113, 206),
+    S_COMPLETE_BATTLE_ITEM_EVENT(114, 206),
     /**
      * <code>S_REDEEM_MINI_EVENT_REWARD_EVENT = 207;</code>
      */
-    S_REDEEM_MINI_EVENT_REWARD_EVENT(114, 207),
+    S_REDEEM_MINI_EVENT_REWARD_EVENT(115, 207),
     /**
      * <code>S_RETRIEVE_MINI_EVENT_EVENT = 208;</code>
      */
-    S_RETRIEVE_MINI_EVENT_EVENT(115, 208),
+    S_RETRIEVE_MINI_EVENT_EVENT(116, 208),
     /**
      * <code>S_UPDATE_MINI_EVENT_EVENT = 209;</code>
      */
-    S_UPDATE_MINI_EVENT_EVENT(116, 209),
+    S_UPDATE_MINI_EVENT_EVENT(117, 209),
     /**
      * <code>S_TRANSLATE_SELECT_MESSAGES_EVENT = 210;</code>
      */
-    S_TRANSLATE_SELECT_MESSAGES_EVENT(117, 210),
+    S_TRANSLATE_SELECT_MESSAGES_EVENT(118, 210),
     /**
      * <code>S_UPDATE_USER_STRENGTH_EVENT = 211;</code>
      */
-    S_UPDATE_USER_STRENGTH_EVENT(118, 211),
+    S_UPDATE_USER_STRENGTH_EVENT(119, 211),
     /**
      * <code>S_REFRESH_MINI_JOB_EVENT = 212;</code>
      */
-    S_REFRESH_MINI_JOB_EVENT(119, 212),
+    S_REFRESH_MINI_JOB_EVENT(120, 212),
+    /**
+     * <code>S_SET_TANGO_ID_EVENT = 213;</code>
+     */
+    S_SET_TANGO_ID_EVENT(121, 213),
+    /**
+     * <code>S_SEND_TANGO_GIFT_EVENT = 214;</code>
+     */
+    S_SEND_TANGO_GIFT_EVENT(122, 214),
+    /**
+     * <code>S_DELETE_GIFT_EVENT = 215;</code>
+     */
+    S_DELETE_GIFT_EVENT(123, 215),
+    /**
+     * <code>S_COLLECT_GIFT_EVENT = 216;</code>
+     */
+    S_COLLECT_GIFT_EVENT(124, 216),
+    /**
+     * <code>S_RETRIEVE_BATTLE_REPLAY_EVENT = 217;</code>
+     */
+    S_RETRIEVE_BATTLE_REPLAY_EVENT(125, 217),
     /**
      * <code>S_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
      */
-    S_COLLECT_CLAN_GIFTS_EVENT(120, 500),
+    S_COLLECT_CLAN_GIFTS_EVENT(126, 500),
     /**
      * <code>S_DELETE_CLAN_GIFTS_EVENT = 501;</code>
      */
-    S_DELETE_CLAN_GIFTS_EVENT(121, 501),
+    S_DELETE_CLAN_GIFTS_EVENT(127, 501),
     /**
      * <code>S_RECEIVED_CLAN_GIFTS_EVENT = 502;</code>
      */
-    S_RECEIVED_CLAN_GIFTS_EVENT(122, 502),
+    S_RECEIVED_CLAN_GIFTS_EVENT(128, 502),
+    /**
+     * <code>S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
+     */
+    S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT(129, 503),
     ;
 
     /**
@@ -2090,6 +2172,10 @@ public final class ProtocolsProto {
      */
     public static final int S_RETRIEVE_CLAN_DATA_EVENT_VALUE = 110;
     /**
+     * <code>S_RECEIVED_GIFT_EVENT = 111;</code>
+     */
+    public static final int S_RECEIVED_GIFT_EVENT_VALUE = 111;
+    /**
      * <code>S_DEV_EVENT = 200;</code>
      */
     public static final int S_DEV_EVENT_VALUE = 200;
@@ -2142,6 +2228,26 @@ public final class ProtocolsProto {
      */
     public static final int S_REFRESH_MINI_JOB_EVENT_VALUE = 212;
     /**
+     * <code>S_SET_TANGO_ID_EVENT = 213;</code>
+     */
+    public static final int S_SET_TANGO_ID_EVENT_VALUE = 213;
+    /**
+     * <code>S_SEND_TANGO_GIFT_EVENT = 214;</code>
+     */
+    public static final int S_SEND_TANGO_GIFT_EVENT_VALUE = 214;
+    /**
+     * <code>S_DELETE_GIFT_EVENT = 215;</code>
+     */
+    public static final int S_DELETE_GIFT_EVENT_VALUE = 215;
+    /**
+     * <code>S_COLLECT_GIFT_EVENT = 216;</code>
+     */
+    public static final int S_COLLECT_GIFT_EVENT_VALUE = 216;
+    /**
+     * <code>S_RETRIEVE_BATTLE_REPLAY_EVENT = 217;</code>
+     */
+    public static final int S_RETRIEVE_BATTLE_REPLAY_EVENT_VALUE = 217;
+    /**
      * <code>S_COLLECT_CLAN_GIFTS_EVENT = 500;</code>
      */
     public static final int S_COLLECT_CLAN_GIFTS_EVENT_VALUE = 500;
@@ -2153,6 +2259,10 @@ public final class ProtocolsProto {
      * <code>S_RECEIVED_CLAN_GIFTS_EVENT = 502;</code>
      */
     public static final int S_RECEIVED_CLAN_GIFTS_EVENT_VALUE = 502;
+    /**
+     * <code>S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
+     */
+    public static final int S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT_VALUE = 503;
 
 
     public final int getNumber() { return value; }
@@ -2266,6 +2376,7 @@ public final class ProtocolsProto {
         case 108: return S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT;
         case 109: return S_FORCE_LOGOUT_EVENT;
         case 110: return S_RETRIEVE_CLAN_DATA_EVENT;
+        case 111: return S_RECEIVED_GIFT_EVENT;
         case 200: return S_DEV_EVENT;
         case 201: return S_PERFORM_RESEARCH_EVENT;
         case 202: return S_FINISH_PERFORMING_RESEARCH_EVENT;
@@ -2279,9 +2390,15 @@ public final class ProtocolsProto {
         case 210: return S_TRANSLATE_SELECT_MESSAGES_EVENT;
         case 211: return S_UPDATE_USER_STRENGTH_EVENT;
         case 212: return S_REFRESH_MINI_JOB_EVENT;
+        case 213: return S_SET_TANGO_ID_EVENT;
+        case 214: return S_SEND_TANGO_GIFT_EVENT;
+        case 215: return S_DELETE_GIFT_EVENT;
+        case 216: return S_COLLECT_GIFT_EVENT;
+        case 217: return S_RETRIEVE_BATTLE_REPLAY_EVENT;
         case 500: return S_COLLECT_CLAN_GIFTS_EVENT;
         case 501: return S_DELETE_CLAN_GIFTS_EVENT;
         case 502: return S_RECEIVED_CLAN_GIFTS_EVENT;
+        case 503: return S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT;
         default: return null;
       }
     }
@@ -2333,10 +2450,10 @@ public final class ProtocolsProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EventProtocolResponse)
   }
 
-  public interface EventProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface EventProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EventProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 eventType = 1;
     /**
      * <code>optional int32 eventType = 1;</code>
      */
@@ -2346,7 +2463,6 @@ public final class ProtocolsProto {
      */
     int getEventType();
 
-    // optional int32 tagNum = 2;
     /**
      * <code>optional int32 tagNum = 2;</code>
      */
@@ -2356,7 +2472,6 @@ public final class ProtocolsProto {
      */
     int getTagNum();
 
-    // optional string eventUuid = 3;
     /**
      * <code>optional string eventUuid = 3;</code>
      */
@@ -2371,7 +2486,6 @@ public final class ProtocolsProto {
     com.google.protobuf.ByteString
         getEventUuidBytes();
 
-    // optional bytes eventBytes = 4;
     /**
      * <code>optional bytes eventBytes = 4;</code>
      */
@@ -2385,8 +2499,9 @@ public final class ProtocolsProto {
    * Protobuf type {@code com.lvl6.proto.EventProto}
    */
   public static final class EventProto extends
-      com.google.protobuf.GeneratedMessage
-      implements EventProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EventProto)
+      EventProtoOrBuilder {
     // Use EventProto.newBuilder() to construct.
     private EventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2443,8 +2558,9 @@ public final class ProtocolsProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              eventUuid_ = input.readBytes();
+              eventUuid_ = bs;
               break;
             }
             case 34: {
@@ -2492,7 +2608,6 @@ public final class ProtocolsProto {
     }
 
     private int bitField0_;
-    // optional int32 eventType = 1;
     public static final int EVENTTYPE_FIELD_NUMBER = 1;
     private int eventType_;
     /**
@@ -2508,7 +2623,6 @@ public final class ProtocolsProto {
       return eventType_;
     }
 
-    // optional int32 tagNum = 2;
     public static final int TAGNUM_FIELD_NUMBER = 2;
     private int tagNum_;
     /**
@@ -2524,7 +2638,6 @@ public final class ProtocolsProto {
       return tagNum_;
     }
 
-    // optional string eventUuid = 3;
     public static final int EVENTUUID_FIELD_NUMBER = 3;
     private java.lang.Object eventUuid_;
     /**
@@ -2567,7 +2680,6 @@ public final class ProtocolsProto {
       }
     }
 
-    // optional bytes eventBytes = 4;
     public static final int EVENTBYTES_FIELD_NUMBER = 4;
     private com.google.protobuf.ByteString eventBytes_;
     /**
@@ -2592,7 +2704,8 @@ public final class ProtocolsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2720,8 +2833,9 @@ public final class ProtocolsProto {
      * Protobuf type {@code com.lvl6.proto.EventProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ProtocolsProto.EventProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EventProto)
+        com.lvl6.proto.ProtocolsProto.EventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ProtocolsProto.internal_static_com_lvl6_proto_EventProto_descriptor;
@@ -2863,7 +2977,6 @@ public final class ProtocolsProto {
       }
       private int bitField0_;
 
-      // optional int32 eventType = 1;
       private int eventType_ ;
       /**
        * <code>optional int32 eventType = 1;</code>
@@ -2896,7 +3009,6 @@ public final class ProtocolsProto {
         return this;
       }
 
-      // optional int32 tagNum = 2;
       private int tagNum_ ;
       /**
        * <code>optional int32 tagNum = 2;</code>
@@ -2929,7 +3041,6 @@ public final class ProtocolsProto {
         return this;
       }
 
-      // optional string eventUuid = 3;
       private java.lang.Object eventUuid_ = "";
       /**
        * <code>optional string eventUuid = 3;</code>
@@ -2943,9 +3054,12 @@ public final class ProtocolsProto {
       public java.lang.String getEventUuid() {
         java.lang.Object ref = eventUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          eventUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            eventUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3003,7 +3117,6 @@ public final class ProtocolsProto {
         return this;
       }
 
-      // optional bytes eventBytes = 4;
       private com.google.protobuf.ByteString eventBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes eventBytes = 4;</code>
@@ -3050,7 +3163,7 @@ public final class ProtocolsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EventProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3073,241 +3186,247 @@ public final class ProtocolsProto {
       "ventBoosterPack.proto\032\017EventChat.proto\032\017" +
       "EventCity.proto\032\017EventClan.proto\032\016EventD" +
       "ev.proto\032\022EventDungeon.proto\032\030EventInApp" +
-      "Purchase.proto\032\017EventItem.proto\032\024EventMi",
-      "niEvent.proto\032\022EventMiniJob.proto\032\022Event" +
-      "Monster.proto\032\016EventPvp.proto\032\020EventQues" +
-      "t.proto\032\023EventResearch.proto\032\023EventRefer" +
-      "ral.proto\032\022EventStartup.proto\032\025EventStat" +
-      "icData.proto\032\024EventStructure.proto\032\025Even" +
-      "tTournament.proto\032\017EventUser.proto\032\023InAp" +
-      "pPurchase.proto\032\nItem.proto\032\017MiniEvent.p" +
-      "roto\032\023MiniJobConfig.proto\032\022MonsterStuff." +
-      "proto\032\022Prerequisite.proto\032\013Quest.proto\032\016" +
-      "Research.proto\032\014Reward.proto\032\026SharedEnum",
-      "Config.proto\032\013Skill.proto\032\020StaticData.pr" +
-      "oto\032\017Structure.proto\032\nTask.proto\032\025Tourna" +
-      "mentStuff.proto\032\nUser.proto\"V\n\nEventProt" +
-      "o\022\021\n\teventType\030\001 \001(\005\022\016\n\006tagNum\030\002 \001(\005\022\021\n\t" +
-      "eventUuid\030\003 \001(\t\022\022\n\neventBytes\030\004 \001(\014*\301\036\n\024" +
-      "EventProtocolRequest\022\023\n\017C_STARTUP_EVENT\020" +
-      "\001\022\033\n\027C_IN_APP_PURCHASE_EVENT\020\002\022#\n\037C_PURC" +
-      "HASE_NORM_STRUCTURE_EVENT\020\003\022)\n%C_MOVE_OR" +
-      "_ROTATE_NORM_STRUCTURE_EVENT\020\004\022\033\n\027C_SET_" +
-      "FACEBOOK_ID_EVENT\020\005\022\"\n\036C_UPGRADE_NORM_ST",
-      "RUCTURE_EVENT\020\006\0221\n-C_RETRIEVE_CURRENCY_F" +
-      "ROM_NORM_STRUCTURE_EVENT\020\007\0225\n1C_FINISH_N" +
-      "ORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT\020" +
-      "\010\022%\n!C_NORM_STRUCT_WAIT_COMPLETE_EVENT\020\t" +
-      "\022\034\n\030C_LOAD_PLAYER_CITY_EVENT\020\n\022\'\n#C_EXCH" +
-      "ANGE_GEMS_FOR_RESOURCES_EVENT\020\013\022\030\n\024C_QUE" +
-      "ST_ACCEPT_EVENT\020\014\022\032\n\026C_QUEST_PROGRESS_EV" +
-      "ENT\020\r\022\030\n\024C_QUEST_REDEEM_EVENT\020\016\022#\n\037C_PUR" +
-      "CHASE_CITY_EXPANSION_EVENT\020\017\022#\n\037C_EXPANS" +
-      "ION_WAIT_COMPLETE_EVENT\020\020\022\024\n\020C_LEVEL_UP_",
-      "EVENT\020\021\022\027\n\023C_ENABLE_APNS_EVENT\020\022\022\027\n\023C_US" +
-      "ER_CREATE_EVENT\020\023\022\025\n\021C_LOAD_CITY_EVENT\020\024" +
-      "\022\'\n#C_RETRIEVE_USERS_FOR_USER_IDS_EVENT\020" +
-      "\025\022\036\n\032C_EARN_FREE_DIAMONDS_EVENT\020\026\022\033\n\027C_S" +
-      "END_GROUP_CHAT_EVENT\020\027\022\027\n\023C_CREATE_CLAN_" +
-      "EVENT\020\030\022\026\n\022C_LEAVE_CLAN_EVENT\020\031\022\035\n\031C_REQ" +
-      "UEST_JOIN_CLAN_EVENT\020\032\022%\n!C_RETRACT_REQU" +
-      "EST_JOIN_CLAN_EVENT\020\033\0222\n.C_APPROVE_OR_RE" +
-      "JECT_REQUEST_TO_JOIN_CLAN_EVENT\020\034\022\035\n\031C_T" +
-      "RANSFER_CLAN_OWNERSHIP\020\035\022\036\n\032C_RETRIEVE_C",
-      "LAN_INFO_EVENT\020\036\022 \n\034C_CHANGE_CLAN_SETTIN" +
-      "GS_EVENT\020\037\022!\n\035C_BOOT_PLAYER_FROM_CLAN_EV" +
-      "ENT\020 \022\031\n\025C_PICK_LOCK_BOX_EVENT\020!\022(\n$C_RE" +
-      "TRIEVE_TOURNAMENT_RANKINGS_EVENT\020\"\022&\n\"C_" +
-      "SUBMIT_MONSTER_ENHANCEMENT_EVENT\020#\022\032\n\026C_" +
-      "EVOLVE_MONSTER_EVENT\020$\022!\n\035C_PURCHASE_BOO" +
-      "STER_PACK_EVENT\020%\022\036\n\032C_EVOLUTION_FINISHE" +
-      "D_EVENT\020&\022 \n\034C_ACHIEVEMENT_PROGRESS_EVEN" +
-      "T\020\'\022\035\n\031C_PRIVATE_CHAT_POST_EVENT\020(\022&\n\"C_" +
-      "RETRIEVE_PRIVATE_CHAT_POST_EVENT\020)\022&\n\"C_",
-      "REDEEM_USER_LOCK_BOX_ITEMS_EVENT\020*\022\031\n\025C_" +
-      "BEGIN_DUNGEON_EVENT\020+\022\027\n\023C_END_DUNGEON_E" +
-      "VENT\020,\022\035\n\031C_REVIVE_IN_DUNGEON_EVENT\020-\022\024\n" +
-      "\020C_QUEUE_UP_EVENT\020.\022!\n\035C_UPDATE_MONSTER_" +
-      "HEALTH_EVENT\020/\022\030\n\024C_HEAL_MONSTER_EVENT\0200" +
-      "\022\036\n\032C_ACHIEVEMENT_REDEEM_EVENT\0201\022&\n\"C_AD" +
-      "D_MONSTER_TO_BATTLE_TEAM_EVENT\0202\022+\n\'C_RE" +
-      "MOVE_MONSTER_FROM_BATTLE_TEAM_EVENT\0203\022+\n" +
-      "\'C_INCREASE_MONSTER_INVENTORY_SLOT_EVENT" +
-      "\0204\022*\n&C_ENHANCEMENT_WAIT_TIME_COMPLETE_E",
-      "VENT\0205\022\'\n#C_COMBINE_USER_MONSTER_PIECES_" +
-      "EVENT\0206\022\035\n\031C_SELL_USER_MONSTER_EVENT\0207\022\'" +
-      "\n#C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT\0208\022" +
-      "1\n-C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLO" +
-      "TS_EVENT\0209\022 \n\034C_UPDATE_USER_CURRENCY_EVE" +
-      "NT\020;\022\034\n\030C_BEGIN_PVP_BATTLE_EVENT\020<\022\032\n\026C_" +
-      "END_PVP_BATTLE_EVENT\020=\022\033\n\027C_BEGIN_CLAN_R" +
-      "AID_EVENT\020>\022$\n C_ATTACK_CLAN_RAID_MONSTE" +
-      "R_EVENT\020?\022\"\n\036C_RECORD_CLAN_RAID_STATS_EV" +
-      "ENT\020@\022&\n\"C_PROMOTE_DEMOTE_CLAN_MEMBER_EV",
-      "ENT\020A\022\036\n\032C_SET_GAME_CENTER_ID_EVENT\020B\022\032\n" +
-      "\026C_SPAWN_OBSTACLE_EVENT\020C\022\"\n\036C_BEGIN_OBS" +
-      "TACLE_REMOVAL_EVENT\020D\022%\n!C_OBSTACLE_REMO" +
-      "VAL_COMPLETE_EVENT\020E\022\032\n\026C_SPAWN_MINI_JOB" +
-      "_EVENT\020F\022\032\n\026C_BEGIN_MINI_JOB_EVENT\020G\022\035\n\031" +
-      "C_COMPLETE_MINI_JOB_EVENT\020H\022\033\n\027C_REDEEM_" +
-      "MINI_JOB_EVENT\020I\022\036\n\032C_SET_AVATAR_MONSTER" +
-      "_EVENT\020J\022!\n\035C_RESTRICT_USER_MONSTER_EVEN" +
-      "T\020K\022#\n\037C_UNRESTRICT_USER_MONSTER_EVENT\020L" +
-      "\022\033\n\027C_ENHANCE_MONSTER_EVENT\020M\022\"\n\036C_TRADE",
-      "_ITEM_FOR_BOOSTER_EVENT\020N\022\035\n\031C_SOLICIT_C" +
-      "LAN_HELP_EVENT\020O\022\032\n\026C_GIVE_CLAN_HELP_EVE" +
-      "NT\020P\022\031\n\025C_END_CLAN_HELP_EVENT\020Q\022\032\n\026C_INV" +
-      "ITE_TO_CLAN_EVENT\020R\022(\n$C_ACCEPT_OR_REJEC" +
-      "T_CLAN_INVITE_EVENT\020S\022\'\n#C_COLLECT_MONST" +
-      "ER_ENHANCEMENT_EVENT\020T\022$\n C_TRADE_ITEM_F" +
-      "OR_SPEED_UPS_EVENT\020U\022!\n\035C_REMOVE_USER_IT" +
-      "EM_USED_EVENT\020V\022$\n C_TRADE_ITEM_FOR_RESO" +
-      "URCES_EVENT\020W\022\036\n\032C_REDEEM_SECRET_GIFT_EV" +
-      "ENT\020X\022\035\n\031C_SET_DEFENDING_MSG_EVENT\020Y\022\037\n\033",
-      "C_BEGIN_CLAN_AVENGING_EVENT\020Z\022\035\n\031C_END_C" +
-      "LAN_AVENGING_EVENT\020[\022\034\n\030C_AVENGE_CLAN_MA" +
-      "TE_EVENT\020\\\022$\n C_UPDATE_CLIENT_TASK_STATE" +
-      "_EVENT\020]\022!\n\035C_SOLICIT_TEAM_DONATION_EVEN" +
-      "T\020^\022.\n*C_FULFILL_TEAM_DONATION_SOLICITAT" +
-      "ION_EVENT\020_\022+\n\'C_VOID_TEAM_DONATION_SOLI" +
-      "CITATION_EVENT\020`\022&\n\"C_RETRIEVE_USER_MONS" +
-      "TER_TEAM_EVENT\020a\022(\n$C_DESTROY_MONEY_TREE" +
-      "_STRUCTURE_EVENT\020b\022\022\n\016C_LOGOUT_EVENT\020e\022\020" +
-      "\n\013C_DEV_EVENT\020\310\001\022\035\n\030C_PERFORM_RESEARCH_E",
-      "VENT\020\311\001\022\'\n\"C_FINISH_PERFORMING_RESEARCH_" +
-      "EVENT\020\312\001\022)\n$C_CUSTOMIZE_PVP_BOARD_OBSTAC" +
-      "LE_EVENT\020\313\001\022\037\n\032C_CREATE_BATTLE_ITEM_EVEN" +
-      "T\020\314\001\022 \n\033C_DISCARD_BATTLE_ITEM_EVENT\020\315\001\022!" +
-      "\n\034C_COMPLETE_BATTLE_ITEM_EVENT\020\316\001\022%\n C_R" +
-      "EDEEM_MINI_EVENT_REWARD_EVENT\020\317\001\022 \n\033C_RE" +
-      "TRIEVE_MINI_EVENT_EVENT\020\320\001\022\036\n\031C_UPDATE_M" +
-      "INI_EVENT_EVENT\020\321\001\022&\n!C_TRANSLATE_SELECT" +
-      "_MESSAGES_EVENT\020\322\001\022!\n\034C_UPDATE_USER_STRE" +
-      "NGTH_EVENT\020\323\001\022\035\n\030C_REFRESH_MINI_JOB_EVEN",
-      "T\020\324\001\022\037\n\032C_COLLECT_CLAN_GIFTS_EVENT\020\364\003\022\036\n" +
-      "\031C_DELETE_CLAN_GIFTS_EVENT\020\365\003\022 \n\033C_RECEI" +
-      "VED_CLAN_GIFTS_EVENT\020\366\003*\200!\n\025EventProtoco" +
-      "lResponse\022\023\n\017S_STARTUP_EVENT\020\001\022\033\n\027S_IN_A" +
-      "PP_PURCHASE_EVENT\020\002\022#\n\037S_PURCHASE_NORM_S" +
-      "TRUCTURE_EVENT\020\003\022)\n%S_MOVE_OR_ROTATE_NOR" +
-      "M_STRUCTURE_EVENT\020\004\022\033\n\027S_SET_FACEBOOK_ID" +
-      "_EVENT\020\005\022\"\n\036S_UPGRADE_NORM_STRUCTURE_EVE" +
-      "NT\020\006\0221\n-S_RETRIEVE_CURRENCY_FROM_NORM_ST" +
-      "RUCTURE_EVENT\020\007\0225\n1S_FINISH_NORM_STRUCT_",
-      "WAITTIME_WITH_DIAMONDS_EVENT\020\010\022%\n!S_NORM" +
-      "_STRUCT_WAIT_COMPLETE_EVENT\020\t\022\034\n\030S_LOAD_" +
-      "PLAYER_CITY_EVENT\020\n\022\'\n#S_EXCHANGE_GEMS_F" +
-      "OR_RESOURCES_EVENT\020\013\022\030\n\024S_QUEST_ACCEPT_E" +
-      "VENT\020\014\022\032\n\026S_QUEST_PROGRESS_EVENT\020\r\022\030\n\024S_" +
-      "QUEST_REDEEM_EVENT\020\016\022#\n\037S_PURCHASE_CITY_" +
-      "EXPANSION_EVENT\020\017\022#\n\037S_EXPANSION_WAIT_CO" +
-      "MPLETE_EVENT\020\020\022\024\n\020S_LEVEL_UP_EVENT\020\021\022\027\n\023" +
-      "S_ENABLE_APNS_EVENT\020\022\022\027\n\023S_USER_CREATE_E" +
-      "VENT\020\023\022\025\n\021S_LOAD_CITY_EVENT\020\024\022\'\n#S_RETRI",
-      "EVE_USERS_FOR_USER_IDS_EVENT\020\025\022\036\n\032S_EARN" +
-      "_FREE_DIAMONDS_EVENT\020\026\022\033\n\027S_SEND_GROUP_C" +
-      "HAT_EVENT\020\027\022\027\n\023S_CREATE_CLAN_EVENT\020\030\022\026\n\022" +
-      "S_LEAVE_CLAN_EVENT\020\031\022\035\n\031S_REQUEST_JOIN_C" +
-      "LAN_EVENT\020\032\022%\n!S_RETRACT_REQUEST_JOIN_CL" +
-      "AN_EVENT\020\033\0222\n.S_APPROVE_OR_REJECT_REQUES" +
-      "T_TO_JOIN_CLAN_EVENT\020\034\022\035\n\031S_TRANSFER_CLA" +
-      "N_OWNERSHIP\020\035\022\036\n\032S_RETRIEVE_CLAN_INFO_EV" +
-      "ENT\020\036\022 \n\034S_CHANGE_CLAN_SETTINGS_EVENT\020\037\022" +
-      "!\n\035S_BOOT_PLAYER_FROM_CLAN_EVENT\020 \022\031\n\025S_",
-      "PICK_LOCK_BOX_EVENT\020!\022(\n$S_RETRIEVE_TOUR" +
-      "NAMENT_RANKINGS_EVENT\020\"\022&\n\"S_SUBMIT_MONS" +
-      "TER_ENHANCEMENT_EVENT\020#\022\032\n\026S_EVOLVE_MONS" +
-      "TER_EVENT\020$\022!\n\035S_PURCHASE_BOOSTER_PACK_E" +
-      "VENT\020%\022\036\n\032S_EVOLUTION_FINISHED_EVENT\020&\022 " +
-      "\n\034S_ACHIEVEMENT_PROGRESS_EVENT\020\'\022\035\n\031S_PR" +
-      "IVATE_CHAT_POST_EVENT\020(\022&\n\"S_RETRIEVE_PR" +
-      "IVATE_CHAT_POST_EVENT\020)\022&\n\"S_REDEEM_USER" +
-      "_LOCK_BOX_ITEMS_EVENT\020*\022\031\n\025S_BEGIN_DUNGE" +
-      "ON_EVENT\020+\022\027\n\023S_END_DUNGEON_EVENT\020,\022\035\n\031S",
-      "_REVIVE_IN_DUNGEON_EVENT\020-\022\024\n\020S_QUEUE_UP" +
-      "_EVENT\020.\022!\n\035S_UPDATE_MONSTER_HEALTH_EVEN" +
-      "T\020/\022\030\n\024S_HEAL_MONSTER_EVENT\0200\022\036\n\032S_ACHIE" +
-      "VEMENT_REDEEM_EVENT\0201\022&\n\"S_ADD_MONSTER_T" +
-      "O_BATTLE_TEAM_EVENT\0202\022+\n\'S_REMOVE_MONSTE" +
-      "R_FROM_BATTLE_TEAM_EVENT\0203\022+\n\'S_INCREASE" +
-      "_MONSTER_INVENTORY_SLOT_EVENT\0204\022*\n&S_ENH" +
-      "ANCEMENT_WAIT_TIME_COMPLETE_EVENT\0205\022\'\n#S" +
-      "_COMBINE_USER_MONSTER_PIECES_EVENT\0206\022\035\n\031" +
-      "S_SELL_USER_MONSTER_EVENT\0207\022\'\n#S_INVITE_",
-      "FB_FRIENDS_FOR_SLOTS_EVENT\0208\0221\n-S_ACCEPT" +
-      "_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT\0209\022" +
-      " \n\034S_UPDATE_USER_CURRENCY_EVENT\020;\022\034\n\030S_B" +
-      "EGIN_PVP_BATTLE_EVENT\020<\022\032\n\026S_END_PVP_BAT" +
-      "TLE_EVENT\020=\022\033\n\027S_BEGIN_CLAN_RAID_EVENT\020>" +
-      "\022$\n S_ATTACK_CLAN_RAID_MONSTER_EVENT\020?\022\"" +
-      "\n\036S_RECORD_CLAN_RAID_STATS_EVENT\020@\022&\n\"S_" +
-      "PROMOTE_DEMOTE_CLAN_MEMBER_EVENT\020A\022\036\n\032S_" +
-      "SET_GAME_CENTER_ID_EVENT\020B\022\032\n\026S_SPAWN_OB" +
-      "STACLE_EVENT\020C\022\"\n\036S_BEGIN_OBSTACLE_REMOV",
-      "AL_EVENT\020D\022%\n!S_OBSTACLE_REMOVAL_COMPLET" +
-      "E_EVENT\020E\022\032\n\026S_SPAWN_MINI_JOB_EVENT\020F\022\032\n" +
-      "\026S_BEGIN_MINI_JOB_EVENT\020G\022\035\n\031S_COMPLETE_" +
-      "MINI_JOB_EVENT\020H\022\033\n\027S_REDEEM_MINI_JOB_EV" +
-      "ENT\020I\022\036\n\032S_SET_AVATAR_MONSTER_EVENT\020J\022!\n" +
-      "\035S_RESTRICT_USER_MONSTER_EVENT\020K\022#\n\037S_UN" +
-      "RESTRICT_USER_MONSTER_EVENT\020L\022\033\n\027S_ENHAN" +
-      "CE_MONSTER_EVENT\020M\022\"\n\036S_TRADE_ITEM_FOR_B" +
-      "OOSTER_EVENT\020N\022\035\n\031S_SOLICIT_CLAN_HELP_EV" +
-      "ENT\020O\022\032\n\026S_GIVE_CLAN_HELP_EVENT\020P\022\031\n\025S_E",
-      "ND_CLAN_HELP_EVENT\020Q\022\032\n\026S_INVITE_TO_CLAN" +
-      "_EVENT\020R\022(\n$S_ACCEPT_OR_REJECT_CLAN_INVI" +
-      "TE_EVENT\020S\022\'\n#S_COLLECT_MONSTER_ENHANCEM" +
-      "ENT_EVENT\020T\022$\n S_TRADE_ITEM_FOR_SPEED_UP" +
-      "S_EVENT\020U\022!\n\035S_REMOVE_USER_ITEM_USED_EVE" +
-      "NT\020V\022$\n S_TRADE_ITEM_FOR_RESOURCES_EVENT" +
-      "\020W\022\036\n\032S_REDEEM_SECRET_GIFT_EVENT\020X\022\035\n\031S_" +
-      "SET_DEFENDING_MSG_EVENT\020Y\022\037\n\033S_BEGIN_CLA" +
-      "N_AVENGING_EVENT\020Z\022\035\n\031S_END_CLAN_AVENGIN" +
-      "G_EVENT\020[\022\034\n\030S_AVENGE_CLAN_MATE_EVENT\020\\\022",
-      "$\n S_UPDATE_CLIENT_TASK_STATE_EVENT\020]\022!\n" +
-      "\035S_SOLICIT_TEAM_DONATION_EVENT\020^\022.\n*S_FU" +
-      "LFILL_TEAM_DONATION_SOLICITATION_EVENT\020_" +
-      "\022+\n\'S_VOID_TEAM_DONATION_SOLICITATION_EV" +
-      "ENT\020`\022&\n\"S_RETRIEVE_USER_MONSTER_TEAM_EV" +
-      "ENT\020a\022(\n$S_DESTROY_MONEY_TREE_STRUCTURE_" +
-      "EVENT\020b\022\036\n\032S_UPDATE_CLIENT_USER_EVENT\020e\022" +
-      "\036\n\032S_REFERRAL_CODE_USED_EVENT\020f\022\035\n\031S_PUR" +
-      "GE_STATIC_DATA_EVENT\020g\022\037\n\033S_RECEIVED_GRO" +
-      "UP_CHAT_EVENT\020h\022\036\n\032S_SEND_ADMIN_MESSAGE_",
-      "EVENT\020i\022 \n\034S_GENERAL_NOTIFICATION_EVENT\020" +
-      "j\022*\n&S_RECEIVED_RARE_BOOSTER_PURCHASE_EV" +
-      "ENT\020k\022(\n$S_AWARD_CLAN_RAID_STAGE_REWARD_" +
-      "EVENT\020l\022\030\n\024S_FORCE_LOGOUT_EVENT\020m\022\036\n\032S_R" +
-      "ETRIEVE_CLAN_DATA_EVENT\020n\022\020\n\013S_DEV_EVENT" +
-      "\020\310\001\022\035\n\030S_PERFORM_RESEARCH_EVENT\020\311\001\022\'\n\"S_" +
-      "FINISH_PERFORMING_RESEARCH_EVENT\020\312\001\022)\n$S" +
-      "_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT\020\313\001\022\037" +
-      "\n\032S_CREATE_BATTLE_ITEM_EVENT\020\314\001\022 \n\033S_DIS" +
-      "CARD_BATTLE_ITEM_EVENT\020\315\001\022!\n\034S_COMPLETE_",
-      "BATTLE_ITEM_EVENT\020\316\001\022%\n S_REDEEM_MINI_EV" +
-      "ENT_REWARD_EVENT\020\317\001\022 \n\033S_RETRIEVE_MINI_E" +
-      "VENT_EVENT\020\320\001\022\036\n\031S_UPDATE_MINI_EVENT_EVE" +
-      "NT\020\321\001\022&\n!S_TRANSLATE_SELECT_MESSAGES_EVE" +
-      "NT\020\322\001\022!\n\034S_UPDATE_USER_STRENGTH_EVENT\020\323\001" +
-      "\022\035\n\030S_REFRESH_MINI_JOB_EVENT\020\324\001\022\037\n\032S_COL" +
-      "LECT_CLAN_GIFTS_EVENT\020\364\003\022\036\n\031S_DELETE_CLA" +
-      "N_GIFTS_EVENT\020\365\003\022 \n\033S_RECEIVED_CLAN_GIFT" +
-      "S_EVENT\020\366\003B\020B\016ProtocolsProto"
+      "Purchase.proto\032\017EventItem.proto\032\026EventLe",
+      "aderBoard.proto\032\024EventMiniEvent.proto\032\022E" +
+      "ventMiniJob.proto\032\022EventMonster.proto\032\016E" +
+      "ventPvp.proto\032\020EventQuest.proto\032\023EventRe" +
+      "ferral.proto\032\023EventResearch.proto\032\021Event" +
+      "Reward.proto\032\022EventStartup.proto\032\025EventS" +
+      "taticData.proto\032\024EventStructure.proto\032\025E" +
+      "ventTournament.proto\032\017EventUser.proto\032\023I" +
+      "nAppPurchase.proto\032\nItem.proto\032\021LeaderBo" +
+      "ard.proto\032\017MiniEvent.proto\032\023MiniJobConfi" +
+      "g.proto\032\022MonsterStuff.proto\032\022Prerequisit",
+      "e.proto\032\013Quest.proto\032\016Research.proto\032\014Re" +
+      "ward.proto\032\026SharedEnumConfig.proto\032\013Skil" +
+      "l.proto\032\020StaticData.proto\032\017Structure.pro" +
+      "to\032\nTask.proto\032\025TournamentStuff.proto\032\nU" +
+      "ser.proto\"V\n\nEventProto\022\021\n\teventType\030\001 \001" +
+      "(\005\022\016\n\006tagNum\030\002 \001(\005\022\021\n\teventUuid\030\003 \001(\t\022\022\n" +
+      "\neventBytes\030\004 \001(\014*\201 \n\024EventProtocolReque" +
+      "st\022\023\n\017C_STARTUP_EVENT\020\001\022\033\n\027C_IN_APP_PURC" +
+      "HASE_EVENT\020\002\022#\n\037C_PURCHASE_NORM_STRUCTUR" +
+      "E_EVENT\020\003\022)\n%C_MOVE_OR_ROTATE_NORM_STRUC",
+      "TURE_EVENT\020\004\022\033\n\027C_SET_FACEBOOK_ID_EVENT\020" +
+      "\005\022\"\n\036C_UPGRADE_NORM_STRUCTURE_EVENT\020\006\0221\n" +
+      "-C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE" +
+      "_EVENT\020\007\0225\n1C_FINISH_NORM_STRUCT_WAITTIM" +
+      "E_WITH_DIAMONDS_EVENT\020\010\022%\n!C_NORM_STRUCT" +
+      "_WAIT_COMPLETE_EVENT\020\t\022\034\n\030C_LOAD_PLAYER_" +
+      "CITY_EVENT\020\n\022\'\n#C_EXCHANGE_GEMS_FOR_RESO" +
+      "URCES_EVENT\020\013\022\030\n\024C_QUEST_ACCEPT_EVENT\020\014\022" +
+      "\032\n\026C_QUEST_PROGRESS_EVENT\020\r\022\030\n\024C_QUEST_R" +
+      "EDEEM_EVENT\020\016\022#\n\037C_PURCHASE_CITY_EXPANSI",
+      "ON_EVENT\020\017\022#\n\037C_EXPANSION_WAIT_COMPLETE_" +
+      "EVENT\020\020\022\024\n\020C_LEVEL_UP_EVENT\020\021\022\027\n\023C_ENABL" +
+      "E_APNS_EVENT\020\022\022\027\n\023C_USER_CREATE_EVENT\020\023\022" +
+      "\025\n\021C_LOAD_CITY_EVENT\020\024\022\'\n#C_RETRIEVE_USE" +
+      "RS_FOR_USER_IDS_EVENT\020\025\022\036\n\032C_EARN_FREE_D" +
+      "IAMONDS_EVENT\020\026\022\033\n\027C_SEND_GROUP_CHAT_EVE" +
+      "NT\020\027\022\027\n\023C_CREATE_CLAN_EVENT\020\030\022\026\n\022C_LEAVE" +
+      "_CLAN_EVENT\020\031\022\035\n\031C_REQUEST_JOIN_CLAN_EVE" +
+      "NT\020\032\022%\n!C_RETRACT_REQUEST_JOIN_CLAN_EVEN" +
+      "T\020\033\0222\n.C_APPROVE_OR_REJECT_REQUEST_TO_JO",
+      "IN_CLAN_EVENT\020\034\022\035\n\031C_TRANSFER_CLAN_OWNER" +
+      "SHIP\020\035\022\036\n\032C_RETRIEVE_CLAN_INFO_EVENT\020\036\022 " +
+      "\n\034C_CHANGE_CLAN_SETTINGS_EVENT\020\037\022!\n\035C_BO" +
+      "OT_PLAYER_FROM_CLAN_EVENT\020 \022\031\n\025C_PICK_LO" +
+      "CK_BOX_EVENT\020!\022(\n$C_RETRIEVE_TOURNAMENT_" +
+      "RANKINGS_EVENT\020\"\022&\n\"C_SUBMIT_MONSTER_ENH" +
+      "ANCEMENT_EVENT\020#\022\032\n\026C_EVOLVE_MONSTER_EVE" +
+      "NT\020$\022!\n\035C_PURCHASE_BOOSTER_PACK_EVENT\020%\022" +
+      "\036\n\032C_EVOLUTION_FINISHED_EVENT\020&\022 \n\034C_ACH" +
+      "IEVEMENT_PROGRESS_EVENT\020\'\022\035\n\031C_PRIVATE_C",
+      "HAT_POST_EVENT\020(\022&\n\"C_RETRIEVE_PRIVATE_C" +
+      "HAT_POST_EVENT\020)\022&\n\"C_REDEEM_USER_LOCK_B" +
+      "OX_ITEMS_EVENT\020*\022\031\n\025C_BEGIN_DUNGEON_EVEN" +
+      "T\020+\022\027\n\023C_END_DUNGEON_EVENT\020,\022\035\n\031C_REVIVE" +
+      "_IN_DUNGEON_EVENT\020-\022\024\n\020C_QUEUE_UP_EVENT\020" +
+      ".\022!\n\035C_UPDATE_MONSTER_HEALTH_EVENT\020/\022\030\n\024" +
+      "C_HEAL_MONSTER_EVENT\0200\022\036\n\032C_ACHIEVEMENT_" +
+      "REDEEM_EVENT\0201\022&\n\"C_ADD_MONSTER_TO_BATTL" +
+      "E_TEAM_EVENT\0202\022+\n\'C_REMOVE_MONSTER_FROM_" +
+      "BATTLE_TEAM_EVENT\0203\022+\n\'C_INCREASE_MONSTE",
+      "R_INVENTORY_SLOT_EVENT\0204\022*\n&C_ENHANCEMEN" +
+      "T_WAIT_TIME_COMPLETE_EVENT\0205\022\'\n#C_COMBIN" +
+      "E_USER_MONSTER_PIECES_EVENT\0206\022\035\n\031C_SELL_" +
+      "USER_MONSTER_EVENT\0207\022\'\n#C_INVITE_FB_FRIE" +
+      "NDS_FOR_SLOTS_EVENT\0208\0221\n-C_ACCEPT_AND_RE" +
+      "JECT_FB_INVITE_FOR_SLOTS_EVENT\0209\022 \n\034C_UP" +
+      "DATE_USER_CURRENCY_EVENT\020;\022\034\n\030C_BEGIN_PV" +
+      "P_BATTLE_EVENT\020<\022\032\n\026C_END_PVP_BATTLE_EVE" +
+      "NT\020=\022\033\n\027C_BEGIN_CLAN_RAID_EVENT\020>\022$\n C_A" +
+      "TTACK_CLAN_RAID_MONSTER_EVENT\020?\022\"\n\036C_REC",
+      "ORD_CLAN_RAID_STATS_EVENT\020@\022&\n\"C_PROMOTE" +
+      "_DEMOTE_CLAN_MEMBER_EVENT\020A\022\036\n\032C_SET_GAM" +
+      "E_CENTER_ID_EVENT\020B\022\032\n\026C_SPAWN_OBSTACLE_" +
+      "EVENT\020C\022\"\n\036C_BEGIN_OBSTACLE_REMOVAL_EVEN" +
+      "T\020D\022%\n!C_OBSTACLE_REMOVAL_COMPLETE_EVENT" +
+      "\020E\022\032\n\026C_SPAWN_MINI_JOB_EVENT\020F\022\032\n\026C_BEGI" +
+      "N_MINI_JOB_EVENT\020G\022\035\n\031C_COMPLETE_MINI_JO" +
+      "B_EVENT\020H\022\033\n\027C_REDEEM_MINI_JOB_EVENT\020I\022\036" +
+      "\n\032C_SET_AVATAR_MONSTER_EVENT\020J\022!\n\035C_REST" +
+      "RICT_USER_MONSTER_EVENT\020K\022#\n\037C_UNRESTRIC",
+      "T_USER_MONSTER_EVENT\020L\022\033\n\027C_ENHANCE_MONS" +
+      "TER_EVENT\020M\022\"\n\036C_TRADE_ITEM_FOR_BOOSTER_" +
+      "EVENT\020N\022\035\n\031C_SOLICIT_CLAN_HELP_EVENT\020O\022\032" +
+      "\n\026C_GIVE_CLAN_HELP_EVENT\020P\022\031\n\025C_END_CLAN" +
+      "_HELP_EVENT\020Q\022\032\n\026C_INVITE_TO_CLAN_EVENT\020" +
+      "R\022(\n$C_ACCEPT_OR_REJECT_CLAN_INVITE_EVEN" +
+      "T\020S\022\'\n#C_COLLECT_MONSTER_ENHANCEMENT_EVE" +
+      "NT\020T\022$\n C_TRADE_ITEM_FOR_SPEED_UPS_EVENT" +
+      "\020U\022!\n\035C_REMOVE_USER_ITEM_USED_EVENT\020V\022$\n" +
+      " C_TRADE_ITEM_FOR_RESOURCES_EVENT\020W\022\036\n\032C",
+      "_REDEEM_SECRET_GIFT_EVENT\020X\022\035\n\031C_SET_DEF" +
+      "ENDING_MSG_EVENT\020Y\022\037\n\033C_BEGIN_CLAN_AVENG" +
+      "ING_EVENT\020Z\022\035\n\031C_END_CLAN_AVENGING_EVENT" +
+      "\020[\022\034\n\030C_AVENGE_CLAN_MATE_EVENT\020\\\022$\n C_UP" +
+      "DATE_CLIENT_TASK_STATE_EVENT\020]\022!\n\035C_SOLI" +
+      "CIT_TEAM_DONATION_EVENT\020^\022.\n*C_FULFILL_T" +
+      "EAM_DONATION_SOLICITATION_EVENT\020_\022+\n\'C_V" +
+      "OID_TEAM_DONATION_SOLICITATION_EVENT\020`\022&" +
+      "\n\"C_RETRIEVE_USER_MONSTER_TEAM_EVENT\020a\022(" +
+      "\n$C_DESTROY_MONEY_TREE_STRUCTURE_EVENT\020b",
+      "\022\022\n\016C_LOGOUT_EVENT\020e\022\020\n\013C_DEV_EVENT\020\310\001\022\035" +
+      "\n\030C_PERFORM_RESEARCH_EVENT\020\311\001\022\'\n\"C_FINIS" +
+      "H_PERFORMING_RESEARCH_EVENT\020\312\001\022)\n$C_CUST" +
+      "OMIZE_PVP_BOARD_OBSTACLE_EVENT\020\313\001\022\037\n\032C_C" +
+      "REATE_BATTLE_ITEM_EVENT\020\314\001\022 \n\033C_DISCARD_" +
+      "BATTLE_ITEM_EVENT\020\315\001\022!\n\034C_COMPLETE_BATTL" +
+      "E_ITEM_EVENT\020\316\001\022%\n C_REDEEM_MINI_EVENT_R" +
+      "EWARD_EVENT\020\317\001\022 \n\033C_RETRIEVE_MINI_EVENT_" +
+      "EVENT\020\320\001\022\036\n\031C_UPDATE_MINI_EVENT_EVENT\020\321\001" +
+      "\022&\n!C_TRANSLATE_SELECT_MESSAGES_EVENT\020\322\001",
+      "\022!\n\034C_UPDATE_USER_STRENGTH_EVENT\020\323\001\022\035\n\030C" +
+      "_REFRESH_MINI_JOB_EVENT\020\324\001\022\031\n\024C_SET_TANG" +
+      "O_ID_EVENT\020\325\001\022\034\n\027C_SEND_TANGO_GIFT_EVENT" +
+      "\020\326\001\022\030\n\023C_DELETE_GIFT_EVENT\020\327\001\022\031\n\024C_COLLE" +
+      "CT_GIFT_EVENT\020\330\001\022#\n\036C_RETRIEVE_BATTLE_RE" +
+      "PLAY_EVENT\020\331\001\022\037\n\032C_COLLECT_CLAN_GIFTS_EV" +
+      "ENT\020\364\003\022\036\n\031C_DELETE_CLAN_GIFTS_EVENT\020\365\003\022 " +
+      "\n\033C_RECEIVED_CLAN_GIFTS_EVENT\020\366\003\022+\n&C_RE" +
+      "TRIEVE_STRENGTH_LEADER_BOARD_EVENT\020\367\003*\333\"" +
+      "\n\025EventProtocolResponse\022\023\n\017S_STARTUP_EVE",
+      "NT\020\001\022\033\n\027S_IN_APP_PURCHASE_EVENT\020\002\022#\n\037S_P" +
+      "URCHASE_NORM_STRUCTURE_EVENT\020\003\022)\n%S_MOVE" +
+      "_OR_ROTATE_NORM_STRUCTURE_EVENT\020\004\022\033\n\027S_S" +
+      "ET_FACEBOOK_ID_EVENT\020\005\022\"\n\036S_UPGRADE_NORM" +
+      "_STRUCTURE_EVENT\020\006\0221\n-S_RETRIEVE_CURRENC" +
+      "Y_FROM_NORM_STRUCTURE_EVENT\020\007\0225\n1S_FINIS" +
+      "H_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVE" +
+      "NT\020\010\022%\n!S_NORM_STRUCT_WAIT_COMPLETE_EVEN" +
+      "T\020\t\022\034\n\030S_LOAD_PLAYER_CITY_EVENT\020\n\022\'\n#S_E" +
+      "XCHANGE_GEMS_FOR_RESOURCES_EVENT\020\013\022\030\n\024S_",
+      "QUEST_ACCEPT_EVENT\020\014\022\032\n\026S_QUEST_PROGRESS" +
+      "_EVENT\020\r\022\030\n\024S_QUEST_REDEEM_EVENT\020\016\022#\n\037S_" +
+      "PURCHASE_CITY_EXPANSION_EVENT\020\017\022#\n\037S_EXP" +
+      "ANSION_WAIT_COMPLETE_EVENT\020\020\022\024\n\020S_LEVEL_" +
+      "UP_EVENT\020\021\022\027\n\023S_ENABLE_APNS_EVENT\020\022\022\027\n\023S" +
+      "_USER_CREATE_EVENT\020\023\022\025\n\021S_LOAD_CITY_EVEN" +
+      "T\020\024\022\'\n#S_RETRIEVE_USERS_FOR_USER_IDS_EVE" +
+      "NT\020\025\022\036\n\032S_EARN_FREE_DIAMONDS_EVENT\020\026\022\033\n\027" +
+      "S_SEND_GROUP_CHAT_EVENT\020\027\022\027\n\023S_CREATE_CL" +
+      "AN_EVENT\020\030\022\026\n\022S_LEAVE_CLAN_EVENT\020\031\022\035\n\031S_",
+      "REQUEST_JOIN_CLAN_EVENT\020\032\022%\n!S_RETRACT_R" +
+      "EQUEST_JOIN_CLAN_EVENT\020\033\0222\n.S_APPROVE_OR" +
+      "_REJECT_REQUEST_TO_JOIN_CLAN_EVENT\020\034\022\035\n\031" +
+      "S_TRANSFER_CLAN_OWNERSHIP\020\035\022\036\n\032S_RETRIEV" +
+      "E_CLAN_INFO_EVENT\020\036\022 \n\034S_CHANGE_CLAN_SET" +
+      "TINGS_EVENT\020\037\022!\n\035S_BOOT_PLAYER_FROM_CLAN" +
+      "_EVENT\020 \022\031\n\025S_PICK_LOCK_BOX_EVENT\020!\022(\n$S" +
+      "_RETRIEVE_TOURNAMENT_RANKINGS_EVENT\020\"\022&\n" +
+      "\"S_SUBMIT_MONSTER_ENHANCEMENT_EVENT\020#\022\032\n" +
+      "\026S_EVOLVE_MONSTER_EVENT\020$\022!\n\035S_PURCHASE_",
+      "BOOSTER_PACK_EVENT\020%\022\036\n\032S_EVOLUTION_FINI" +
+      "SHED_EVENT\020&\022 \n\034S_ACHIEVEMENT_PROGRESS_E" +
+      "VENT\020\'\022\035\n\031S_PRIVATE_CHAT_POST_EVENT\020(\022&\n" +
+      "\"S_RETRIEVE_PRIVATE_CHAT_POST_EVENT\020)\022&\n" +
+      "\"S_REDEEM_USER_LOCK_BOX_ITEMS_EVENT\020*\022\031\n" +
+      "\025S_BEGIN_DUNGEON_EVENT\020+\022\027\n\023S_END_DUNGEO" +
+      "N_EVENT\020,\022\035\n\031S_REVIVE_IN_DUNGEON_EVENT\020-" +
+      "\022\024\n\020S_QUEUE_UP_EVENT\020.\022!\n\035S_UPDATE_MONST" +
+      "ER_HEALTH_EVENT\020/\022\030\n\024S_HEAL_MONSTER_EVEN" +
+      "T\0200\022\036\n\032S_ACHIEVEMENT_REDEEM_EVENT\0201\022&\n\"S",
+      "_ADD_MONSTER_TO_BATTLE_TEAM_EVENT\0202\022+\n\'S" +
+      "_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT\0203" +
+      "\022+\n\'S_INCREASE_MONSTER_INVENTORY_SLOT_EV" +
+      "ENT\0204\022*\n&S_ENHANCEMENT_WAIT_TIME_COMPLET" +
+      "E_EVENT\0205\022\'\n#S_COMBINE_USER_MONSTER_PIEC" +
+      "ES_EVENT\0206\022\035\n\031S_SELL_USER_MONSTER_EVENT\020" +
+      "7\022\'\n#S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT" +
+      "\0208\0221\n-S_ACCEPT_AND_REJECT_FB_INVITE_FOR_" +
+      "SLOTS_EVENT\0209\022 \n\034S_UPDATE_USER_CURRENCY_" +
+      "EVENT\020;\022\034\n\030S_BEGIN_PVP_BATTLE_EVENT\020<\022\032\n",
+      "\026S_END_PVP_BATTLE_EVENT\020=\022\033\n\027S_BEGIN_CLA" +
+      "N_RAID_EVENT\020>\022$\n S_ATTACK_CLAN_RAID_MON" +
+      "STER_EVENT\020?\022\"\n\036S_RECORD_CLAN_RAID_STATS" +
+      "_EVENT\020@\022&\n\"S_PROMOTE_DEMOTE_CLAN_MEMBER" +
+      "_EVENT\020A\022\036\n\032S_SET_GAME_CENTER_ID_EVENT\020B" +
+      "\022\032\n\026S_SPAWN_OBSTACLE_EVENT\020C\022\"\n\036S_BEGIN_" +
+      "OBSTACLE_REMOVAL_EVENT\020D\022%\n!S_OBSTACLE_R" +
+      "EMOVAL_COMPLETE_EVENT\020E\022\032\n\026S_SPAWN_MINI_" +
+      "JOB_EVENT\020F\022\032\n\026S_BEGIN_MINI_JOB_EVENT\020G\022" +
+      "\035\n\031S_COMPLETE_MINI_JOB_EVENT\020H\022\033\n\027S_REDE",
+      "EM_MINI_JOB_EVENT\020I\022\036\n\032S_SET_AVATAR_MONS" +
+      "TER_EVENT\020J\022!\n\035S_RESTRICT_USER_MONSTER_E" +
+      "VENT\020K\022#\n\037S_UNRESTRICT_USER_MONSTER_EVEN" +
+      "T\020L\022\033\n\027S_ENHANCE_MONSTER_EVENT\020M\022\"\n\036S_TR" +
+      "ADE_ITEM_FOR_BOOSTER_EVENT\020N\022\035\n\031S_SOLICI" +
+      "T_CLAN_HELP_EVENT\020O\022\032\n\026S_GIVE_CLAN_HELP_" +
+      "EVENT\020P\022\031\n\025S_END_CLAN_HELP_EVENT\020Q\022\032\n\026S_" +
+      "INVITE_TO_CLAN_EVENT\020R\022(\n$S_ACCEPT_OR_RE" +
+      "JECT_CLAN_INVITE_EVENT\020S\022\'\n#S_COLLECT_MO" +
+      "NSTER_ENHANCEMENT_EVENT\020T\022$\n S_TRADE_ITE",
+      "M_FOR_SPEED_UPS_EVENT\020U\022!\n\035S_REMOVE_USER" +
+      "_ITEM_USED_EVENT\020V\022$\n S_TRADE_ITEM_FOR_R" +
+      "ESOURCES_EVENT\020W\022\036\n\032S_REDEEM_SECRET_GIFT" +
+      "_EVENT\020X\022\035\n\031S_SET_DEFENDING_MSG_EVENT\020Y\022" +
+      "\037\n\033S_BEGIN_CLAN_AVENGING_EVENT\020Z\022\035\n\031S_EN" +
+      "D_CLAN_AVENGING_EVENT\020[\022\034\n\030S_AVENGE_CLAN" +
+      "_MATE_EVENT\020\\\022$\n S_UPDATE_CLIENT_TASK_ST" +
+      "ATE_EVENT\020]\022!\n\035S_SOLICIT_TEAM_DONATION_E" +
+      "VENT\020^\022.\n*S_FULFILL_TEAM_DONATION_SOLICI" +
+      "TATION_EVENT\020_\022+\n\'S_VOID_TEAM_DONATION_S",
+      "OLICITATION_EVENT\020`\022&\n\"S_RETRIEVE_USER_M" +
+      "ONSTER_TEAM_EVENT\020a\022(\n$S_DESTROY_MONEY_T" +
+      "REE_STRUCTURE_EVENT\020b\022\036\n\032S_UPDATE_CLIENT" +
+      "_USER_EVENT\020e\022\036\n\032S_REFERRAL_CODE_USED_EV" +
+      "ENT\020f\022\035\n\031S_PURGE_STATIC_DATA_EVENT\020g\022\037\n\033" +
+      "S_RECEIVED_GROUP_CHAT_EVENT\020h\022\036\n\032S_SEND_" +
+      "ADMIN_MESSAGE_EVENT\020i\022 \n\034S_GENERAL_NOTIF" +
+      "ICATION_EVENT\020j\022*\n&S_RECEIVED_RARE_BOOST" +
+      "ER_PURCHASE_EVENT\020k\022(\n$S_AWARD_CLAN_RAID" +
+      "_STAGE_REWARD_EVENT\020l\022\030\n\024S_FORCE_LOGOUT_",
+      "EVENT\020m\022\036\n\032S_RETRIEVE_CLAN_DATA_EVENT\020n\022" +
+      "\031\n\025S_RECEIVED_GIFT_EVENT\020o\022\020\n\013S_DEV_EVEN" +
+      "T\020\310\001\022\035\n\030S_PERFORM_RESEARCH_EVENT\020\311\001\022\'\n\"S" +
+      "_FINISH_PERFORMING_RESEARCH_EVENT\020\312\001\022)\n$" +
+      "S_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT\020\313\001\022" +
+      "\037\n\032S_CREATE_BATTLE_ITEM_EVENT\020\314\001\022 \n\033S_DI" +
+      "SCARD_BATTLE_ITEM_EVENT\020\315\001\022!\n\034S_COMPLETE" +
+      "_BATTLE_ITEM_EVENT\020\316\001\022%\n S_REDEEM_MINI_E" +
+      "VENT_REWARD_EVENT\020\317\001\022 \n\033S_RETRIEVE_MINI_" +
+      "EVENT_EVENT\020\320\001\022\036\n\031S_UPDATE_MINI_EVENT_EV",
+      "ENT\020\321\001\022&\n!S_TRANSLATE_SELECT_MESSAGES_EV" +
+      "ENT\020\322\001\022!\n\034S_UPDATE_USER_STRENGTH_EVENT\020\323" +
+      "\001\022\035\n\030S_REFRESH_MINI_JOB_EVENT\020\324\001\022\031\n\024S_SE" +
+      "T_TANGO_ID_EVENT\020\325\001\022\034\n\027S_SEND_TANGO_GIFT" +
+      "_EVENT\020\326\001\022\030\n\023S_DELETE_GIFT_EVENT\020\327\001\022\031\n\024S" +
+      "_COLLECT_GIFT_EVENT\020\330\001\022#\n\036S_RETRIEVE_BAT" +
+      "TLE_REPLAY_EVENT\020\331\001\022\037\n\032S_COLLECT_CLAN_GI" +
+      "FTS_EVENT\020\364\003\022\036\n\031S_DELETE_CLAN_GIFTS_EVEN" +
+      "T\020\365\003\022 \n\033S_RECEIVED_CLAN_GIFTS_EVENT\020\366\003\022+" +
+      "\n&S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT",
+      "\020\367\003B\020B\016ProtocolsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_EventProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_EventProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_EventProto_descriptor,
-              new java.lang.String[] { "EventType", "TagNum", "EventUuid", "EventBytes", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -3331,13 +3450,15 @@ public final class ProtocolsProto {
           com.lvl6.proto.EventDungeonProto.getDescriptor(),
           com.lvl6.proto.EventInAppPurchaseProto.getDescriptor(),
           com.lvl6.proto.EventItemProto.getDescriptor(),
+          com.lvl6.proto.EventLeaderBoardProto.getDescriptor(),
           com.lvl6.proto.EventMiniEventProto.getDescriptor(),
           com.lvl6.proto.EventMiniJobProto.getDescriptor(),
           com.lvl6.proto.EventMonsterProto.getDescriptor(),
           com.lvl6.proto.EventPvpProto.getDescriptor(),
           com.lvl6.proto.EventQuestProto.getDescriptor(),
-          com.lvl6.proto.EventResearchProto.getDescriptor(),
           com.lvl6.proto.EventReferralProto.getDescriptor(),
+          com.lvl6.proto.EventResearchProto.getDescriptor(),
+          com.lvl6.proto.EventRewardProto.getDescriptor(),
           com.lvl6.proto.EventStartupProto.getDescriptor(),
           com.lvl6.proto.EventStaticDataProto.getDescriptor(),
           com.lvl6.proto.EventStructureProto.getDescriptor(),
@@ -3345,6 +3466,7 @@ public final class ProtocolsProto {
           com.lvl6.proto.EventUserProto.getDescriptor(),
           com.lvl6.proto.InAppPurchaseProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
+          com.lvl6.proto.LeaderBoardProto.getDescriptor(),
           com.lvl6.proto.MiniEventProtos.getDescriptor(),
           com.lvl6.proto.MiniJobConfigProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
@@ -3360,6 +3482,63 @@ public final class ProtocolsProto {
           com.lvl6.proto.TournamentStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_EventProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_EventProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EventProto_descriptor,
+        new java.lang.String[] { "EventType", "TagNum", "EventUuid", "EventBytes", });
+    com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.BattleItemsProto.getDescriptor();
+    com.lvl6.proto.BoardProto.getDescriptor();
+    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
+    com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.ClanProto.getDescriptor();
+    com.lvl6.proto.DevProto.getDescriptor();
+    com.lvl6.proto.EventAchievementProto.getDescriptor();
+    com.lvl6.proto.EventApnsProto.getDescriptor();
+    com.lvl6.proto.EventBattleItemProto.getDescriptor();
+    com.lvl6.proto.EventBoosterPackProto.getDescriptor();
+    com.lvl6.proto.EventChatProto.getDescriptor();
+    com.lvl6.proto.EventCityProto.getDescriptor();
+    com.lvl6.proto.EventClanProto.getDescriptor();
+    com.lvl6.proto.EventDevProto.getDescriptor();
+    com.lvl6.proto.EventDungeonProto.getDescriptor();
+    com.lvl6.proto.EventInAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.EventItemProto.getDescriptor();
+    com.lvl6.proto.EventLeaderBoardProto.getDescriptor();
+    com.lvl6.proto.EventMiniEventProto.getDescriptor();
+    com.lvl6.proto.EventMiniJobProto.getDescriptor();
+    com.lvl6.proto.EventMonsterProto.getDescriptor();
+    com.lvl6.proto.EventPvpProto.getDescriptor();
+    com.lvl6.proto.EventQuestProto.getDescriptor();
+    com.lvl6.proto.EventReferralProto.getDescriptor();
+    com.lvl6.proto.EventResearchProto.getDescriptor();
+    com.lvl6.proto.EventRewardProto.getDescriptor();
+    com.lvl6.proto.EventStartupProto.getDescriptor();
+    com.lvl6.proto.EventStaticDataProto.getDescriptor();
+    com.lvl6.proto.EventStructureProto.getDescriptor();
+    com.lvl6.proto.EventTournamentProto.getDescriptor();
+    com.lvl6.proto.EventUserProto.getDescriptor();
+    com.lvl6.proto.InAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.LeaderBoardProto.getDescriptor();
+    com.lvl6.proto.MiniEventProtos.getDescriptor();
+    com.lvl6.proto.MiniJobConfigProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.PrerequisiteProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.ResearchsProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.SkillsProto.getDescriptor();
+    com.lvl6.proto.StaticDataStuffProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.TaskProto.getDescriptor();
+    com.lvl6.proto.TournamentStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

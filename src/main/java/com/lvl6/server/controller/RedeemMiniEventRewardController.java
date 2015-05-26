@@ -27,7 +27,9 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -44,8 +46,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class RedeemMiniEventRewardController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(RedeemMiniEventRewardController.class);
 
 	public RedeemMiniEventRewardController() {
 		
@@ -56,6 +58,12 @@ public class RedeemMiniEventRewardController extends EventController {
 	protected Locker locker;
 
 	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+	@Autowired
+	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+
+	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
@@ -63,7 +71,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
@@ -72,19 +80,19 @@ public class RedeemMiniEventRewardController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected  MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	
+
 	@Autowired
 	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;;
-	
+
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -147,9 +155,14 @@ public class RedeemMiniEventRewardController extends EventController {
 
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
 					userId, null, maxCash, maxOil, mefplId, rt, clientTime,
+					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtil, mefuRetrieveUtil, itemForUserRetrieveUtil,
-					insertUtil, updateUtil, monsterStuffUtils, miniEventForPlayerLvlRetrieveUtils,
-					miniEventTierRewardRetrieveUtils, rewardRetrieveUtils, monsterLevelInfoRetrieveUtils);
+					insertUtil, updateUtil, monsterStuffUtils,
+					miniEventForPlayerLvlRetrieveUtils,
+					miniEventTierRewardRetrieveUtils,
+					rewardRetrieveUtils,
+					monsterLevelInfoRetrieveUtils,
+					createInfoProtoUtils);
 
 			rmera.execute(resBuilder);
 
@@ -164,7 +177,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 				//TODO: protofy the rewards
 				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
-						nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, null);
+						nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, 0, null);
 				resBuilder.setRewards(urp);
 			}
 

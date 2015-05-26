@@ -32,4 +32,8 @@ public class CollectClanGiftsResponseEvent extends NormalResponseEvent<CollectCl
 		return responseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return collectClanGiftsResponseProto.getSerializedSize();
+	}
 }

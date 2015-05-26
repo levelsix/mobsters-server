@@ -28,4 +28,7 @@ public class SetGameCenterIdResponseEvent extends NormalResponseEvent<SetGameCen
 		this.responseProto = responseProto;
 	}
 
+	public int eventSize() {
+		return setGameCenterIdResponseProto.getSerializedSize();
+	}
 }

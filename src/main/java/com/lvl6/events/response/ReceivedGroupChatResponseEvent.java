@@ -27,5 +27,9 @@ public class ReceivedGroupChatResponseEvent extends NormalResponseEvent<Received
 			ReceivedGroupChatResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return receivedGroupChatResponseProto.getSerializedSize();
+	}
 
 }

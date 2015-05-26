@@ -717,4 +717,46 @@ public class DeleteUtils implements DeleteUtil {
 		else return false;
 	}
 
+	@Override
+	public int deleteGiftForUser(Collection<String> gfuIds) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
+
+		int size = gfuIds.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String
+				.format("DELETE FROM %s WHERE %s IN (%s)", tableName,
+						DBConstants.GIFT_FOR_USER__ID,
+						questionMarks);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(gfuIds);
+
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
+				values);
+		return numDeleted;
+	}
+
+	@Override
+	public int deleteGiftForTangoUser(Collection<String> gfuIds) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_TANGO_USER;
+
+		int size = gfuIds.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String
+				.format("DELETE FROM %s WHERE %s IN (%s)", tableName,
+						DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID,
+						questionMarks);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(gfuIds);
+
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
+				values);
+		return numDeleted;
+	}
+
 }

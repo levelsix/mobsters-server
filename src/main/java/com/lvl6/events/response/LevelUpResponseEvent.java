@@ -27,5 +27,9 @@ public class LevelUpResponseEvent extends NormalResponseEvent<LevelUpResponsePro
 			LevelUpResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return levelUpResponseProto.getSerializedSize();
+	}
 
 }

@@ -28,5 +28,9 @@ public class FulfillTeamDonationSolicitationResponseEvent extends	NormalResponse
 			FulfillTeamDonationSolicitationResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return fulfillTeamDonationSolicitationResponseProto.getSerializedSize();
+	}
 
 }

@@ -132,7 +132,6 @@ public class ClanTest {
 
 	@Before
 	public void setUp() {
-
 		if (userId1 == null) {
 			endOfTesting = false;
 			log.info("setUp");
@@ -276,7 +275,6 @@ public class ClanTest {
 		if (numDeleted5 != 1) {
 			log.error("did not delete userclan for user when cleaning up");
 		}
-
 	}
 
 

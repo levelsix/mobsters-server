@@ -42,6 +42,47 @@ public class UserRetrieveUtils2 {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+
+	public Map<String, User> getUsersForTangoIdsMap(Collection<String> tangoIds) {
+		log.debug("retrieving users with tangoIds {}", tangoIds);
+
+		List<User> usersList = getUsersForTangoIds(tangoIds);
+		Map<String, User> userIdToUserMap = new HashMap<String, User>();
+		for (User user : usersList) {
+			userIdToUserMap.put(user.getId(), user);
+		}
+
+		return userIdToUserMap;
+	}
+	public List<User> getUsersForTangoIds(Collection<String> tangoIds) {
+		if (null == tangoIds || tangoIds.isEmpty()) {
+			return new ArrayList<User>();
+		}
+
+		int amount = tangoIds.size();
+		List<String> questions = Collections.nCopies(amount, "?");
+		String qStr = StringUtils.csvList(questions);
+
+		String query = String.format("select * from %s where %s in (%s)",
+				TABLE_NAME, DBConstants.USER__TANGO_ID, qStr);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(tangoIds);
+
+		List<User> usersList = null;
+		try {
+			 usersList = this.jdbcTemplate.query(query,
+					values.toArray(), rowMapper);
+
+		} catch (Exception e) {
+			log.error("user retrieve db error.", e);
+			usersList = new ArrayList<User>();
+			//		} finally {
+			//			DBConnection.get().close(rs, null, conn);
+		}
+		return usersList;
+	}
+
 	public List<String> getUserIdsForFacebookIds(List<String> facebookIds) {
 		int amount = facebookIds.size();
 		List<String> questionMarkList = Collections.nCopies(amount, "?");
@@ -142,13 +183,14 @@ public class UserRetrieveUtils2 {
 				"select count(*) from %s where %s like concat(?, \"%%\");",
 				TABLE_NAME, DBConstants.USER__UDID_FOR_HISTORY, udid);
 		try {
-			return this.jdbcTemplate.queryForInt(query, udid);
+			return this.jdbcTemplate.queryForObject(
+					query, new Object[] { udid }, Integer.class);
+//			return this.jdbcTemplate.queryForInt(query, udid);
 
 		} catch (Exception e) {
 			log.error("numAccountsForUDID error", e);
 		}
-		log.warn(String.format(
-				"No accounts found when counting accounts for udid=%s", udid));
+		log.warn( "No accounts found when counting accounts for udid={}", udid );
 		return 0;
 	}
 
@@ -157,13 +199,14 @@ public class UserRetrieveUtils2 {
 				TABLE_NAME, DBConstants.USER__IS_FAKE);
 
 		try {
-			return this.jdbcTemplate.queryForInt(query, isFake);
+			return this.jdbcTemplate.queryForObject(
+					query, new Object[] { isFake }, Integer.class);
+//			return this.jdbcTemplate.queryForInt(query, isFake);
 
 		} catch (Exception e) {
 			log.error("countUsers error", e);
 		}
-		log.warn(String.format(
-				"No users found when counting users for isFake=%s", isFake));
+		log.warn( "No users found when counting users for isFake={}", isFake );
 		return 0;
 	}
 
@@ -336,7 +379,7 @@ public class UserRetrieveUtils2 {
 	//says so (search for "private static final")
 	private static final class UserForClientMapper implements RowMapper<User> {
 
-		private static List<String> columnsSelected;
+//		private static List<String> columnsSelected;
 
 		@Override
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -507,6 +550,20 @@ public class UserRetrieveUtils2 {
 
 			int segmentationGroup = rs.getInt(DBConstants.USER__SEGMENTATION_GROUP);
 
+			int gachaCredits = rs.getInt(DBConstants.USER__GACHA_CREDITS);
+
+			Date lastTangoGiftSentTime = null;
+			try {
+				ts = rs.getTimestamp(DBConstants.USER__LAST_TANGO_GIFT_SENT_TIME);
+				if (!rs.wasNull()) {
+					lastTangoGiftSentTime = new Date(ts.getTime());
+				}
+			} catch (Exception e) {
+				log.error("lastTangoGiftSentTime null...?", e);
+			}
+
+			String tangoId = rs.getString(DBConstants.USER__TANGO_ID);
+
 			User user = new User(id, name, level, gems, cash, oil, experience,
 					tasksCompleted, referralCode, numReferrals, udidForHistory,
 					lastLogin, lastLogout, deviceToken, numBadges, isFake,
@@ -521,74 +578,75 @@ public class UserRetrieveUtils2 {
 					lastSecretGiftCollectTime, pvpDefendingMessage,
 					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
 					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength,
-					segmentationGroup);
+					segmentationGroup, gachaCredits, lastTangoGiftSentTime,
+					tangoId);
 
 			return user;
 		}
 
-		public static List<String> getColumnsSelected() {
-			if (null == columnsSelected) {
-				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.USER__ID);
-				columnsSelected.add(DBConstants.USER__NAME);
-				columnsSelected.add(DBConstants.USER__LEVEL);
-				columnsSelected.add(DBConstants.USER__GEMS);
-				columnsSelected.add(DBConstants.USER__CASH);
-				columnsSelected.add(DBConstants.USER__OIL);
-				columnsSelected.add(DBConstants.USER__EXPERIENCE);
-
-				columnsSelected.add(DBConstants.USER__TASKS_COMPLETED);
-				columnsSelected.add(DBConstants.USER__REFERRAL_CODE);
-				columnsSelected.add(DBConstants.USER__NUM_REFERRALS);
-				columnsSelected.add(DBConstants.USER__UDID_FOR_HISTORY);
-				columnsSelected.add(DBConstants.USER__LAST_LOGIN);
-				columnsSelected.add(DBConstants.USER__LAST_LOGOUT);
-				columnsSelected.add(DBConstants.USER__DEVICE_TOKEN);
-
-				columnsSelected.add(DBConstants.USER__NUM_BADGES);
-				columnsSelected.add(DBConstants.USER__IS_FAKE);
-				columnsSelected.add(DBConstants.USER__CREATE_TIME);
-				columnsSelected.add(DBConstants.USER__IS_ADMIN);
-				columnsSelected.add(DBConstants.USER__APSALAR_ID);
-				columnsSelected
-						.add(DBConstants.USER__NUM_COINS_RETRIEVED_FROM_STRUCTS);
-				columnsSelected
-						.add(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS);
-
-				columnsSelected
-						.add(DBConstants.USER__NUM_CONSECUTIVE_DAYS_PLAYED);
-				columnsSelected.add(DBConstants.USER__CLAN_ID);
-				columnsSelected
-						.add(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME);
-				columnsSelected.add(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
-				columnsSelected
-						.add(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
-				columnsSelected.add(DBConstants.USER__FACEBOOK_ID);
-				columnsSelected.add(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
-
-				columnsSelected.add(DBConstants.USER__GAME_CENTER_ID);
-				columnsSelected.add(DBConstants.USER__UDID);
-				columnsSelected
-						.add(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME);
-				columnsSelected.add(DBConstants.USER__NUM_OBSTACLES_REMOVED);
-				columnsSelected
-						.add(DBConstants.USER__LAST_MINI_JOB_GENERATED_TIME);
-				columnsSelected.add(DBConstants.USER__AVATAR_MONSTER_ID);
-				columnsSelected.add(DBConstants.USER__CLAN_HELPS);
-
-				columnsSelected.add(DBConstants.USER__PVP_DEFENDING_MESSAGE);
-				columnsSelected
-						.add(DBConstants.USER__LAST_TEAM_DONATE_SOLICITATION);
-				columnsSelected
-						.add(DBConstants.USER__BOUGHT_RIGGED_BOOSTER_PACK);
-				columnsSelected
-						.add(DBConstants.USER__SALES_VALUE);
-				columnsSelected
-						.add(DBConstants.USER__SALES_LAST_PURCHASE_TIME);
-
-			}
-			return columnsSelected;
-		}
+//		public static List<String> getColumnsSelected() {
+//			if (null == columnsSelected) {
+//				columnsSelected = new ArrayList<String>();
+//				columnsSelected.add(DBConstants.USER__ID);
+//				columnsSelected.add(DBConstants.USER__NAME);
+//				columnsSelected.add(DBConstants.USER__LEVEL);
+//				columnsSelected.add(DBConstants.USER__GEMS);
+//				columnsSelected.add(DBConstants.USER__CASH);
+//				columnsSelected.add(DBConstants.USER__OIL);
+//				columnsSelected.add(DBConstants.USER__EXPERIENCE);
+//
+//				columnsSelected.add(DBConstants.USER__TASKS_COMPLETED);
+//				columnsSelected.add(DBConstants.USER__REFERRAL_CODE);
+//				columnsSelected.add(DBConstants.USER__NUM_REFERRALS);
+//				columnsSelected.add(DBConstants.USER__UDID_FOR_HISTORY);
+//				columnsSelected.add(DBConstants.USER__LAST_LOGIN);
+//				columnsSelected.add(DBConstants.USER__LAST_LOGOUT);
+//				columnsSelected.add(DBConstants.USER__DEVICE_TOKEN);
+//
+//				columnsSelected.add(DBConstants.USER__NUM_BADGES);
+//				columnsSelected.add(DBConstants.USER__IS_FAKE);
+//				columnsSelected.add(DBConstants.USER__CREATE_TIME);
+//				columnsSelected.add(DBConstants.USER__IS_ADMIN);
+//				columnsSelected.add(DBConstants.USER__APSALAR_ID);
+//				columnsSelected
+//						.add(DBConstants.USER__NUM_COINS_RETRIEVED_FROM_STRUCTS);
+//				columnsSelected
+//						.add(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS);
+//
+//				columnsSelected
+//						.add(DBConstants.USER__NUM_CONSECUTIVE_DAYS_PLAYED);
+//				columnsSelected.add(DBConstants.USER__CLAN_ID);
+//				columnsSelected
+//						.add(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME);
+//				columnsSelected.add(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
+//				columnsSelected
+//						.add(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
+//				columnsSelected.add(DBConstants.USER__FACEBOOK_ID);
+//				columnsSelected.add(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
+//
+//				columnsSelected.add(DBConstants.USER__GAME_CENTER_ID);
+//				columnsSelected.add(DBConstants.USER__UDID);
+//				columnsSelected
+//						.add(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME);
+//				columnsSelected.add(DBConstants.USER__NUM_OBSTACLES_REMOVED);
+//				columnsSelected
+//						.add(DBConstants.USER__LAST_MINI_JOB_GENERATED_TIME);
+//				columnsSelected.add(DBConstants.USER__AVATAR_MONSTER_ID);
+//				columnsSelected.add(DBConstants.USER__CLAN_HELPS);
+//
+//				columnsSelected.add(DBConstants.USER__PVP_DEFENDING_MESSAGE);
+//				columnsSelected
+//						.add(DBConstants.USER__LAST_TEAM_DONATE_SOLICITATION);
+//				columnsSelected
+//						.add(DBConstants.USER__BOUGHT_RIGGED_BOOSTER_PACK);
+//				columnsSelected
+//						.add(DBConstants.USER__SALES_VALUE);
+//				columnsSelected
+//						.add(DBConstants.USER__SALES_LAST_PURCHASE_TIME);
+//
+//			}
+//			return columnsSelected;
+//		}
 	}
 
 }

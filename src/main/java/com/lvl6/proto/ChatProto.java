@@ -226,10 +226,10 @@ public final class ChatProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TranslateLanguages)
   }
 
-  public interface PrivateChatPostProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PrivateChatPostProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PrivateChatPostProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string privateChatPostUuid = 1;
     /**
      * <code>optional string privateChatPostUuid = 1;</code>
      */
@@ -244,7 +244,6 @@ public final class ChatProto {
     com.google.protobuf.ByteString
         getPrivateChatPostUuidBytes();
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
      */
@@ -258,7 +257,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder();
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
      */
@@ -272,7 +270,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder();
 
-    // optional int64 timeOfPost = 4;
     /**
      * <code>optional int64 timeOfPost = 4;</code>
      */
@@ -282,7 +279,6 @@ public final class ChatProto {
      */
     long getTimeOfPost();
 
-    // optional string content = 5;
     /**
      * <code>optional string content = 5;</code>
      */
@@ -297,7 +293,6 @@ public final class ChatProto {
     com.google.protobuf.ByteString
         getContentBytes();
 
-    // optional .com.lvl6.proto.TranslateLanguages originalContentLanguage = 7;
     /**
      * <code>optional .com.lvl6.proto.TranslateLanguages originalContentLanguage = 7;</code>
      */
@@ -307,7 +302,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.ChatProto.TranslateLanguages getOriginalContentLanguage();
 
-    // repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;
     /**
      * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;</code>
      */
@@ -336,8 +330,9 @@ public final class ChatProto {
    * Protobuf type {@code com.lvl6.proto.PrivateChatPostProto}
    */
   public static final class PrivateChatPostProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PrivateChatPostProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PrivateChatPostProto)
+      PrivateChatPostProtoOrBuilder {
     // Use PrivateChatPostProto.newBuilder() to construct.
     private PrivateChatPostProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -384,8 +379,9 @@ public final class ChatProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              privateChatPostUuid_ = input.readBytes();
+              privateChatPostUuid_ = bs;
               break;
             }
             case 18: {
@@ -420,8 +416,9 @@ public final class ChatProto {
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              content_ = input.readBytes();
+              content_ = bs;
               break;
             }
             case 50: {
@@ -486,7 +483,6 @@ public final class ChatProto {
     }
 
     private int bitField0_;
-    // optional string privateChatPostUuid = 1;
     public static final int PRIVATECHATPOSTUUID_FIELD_NUMBER = 1;
     private java.lang.Object privateChatPostUuid_;
     /**
@@ -529,7 +525,6 @@ public final class ChatProto {
       }
     }
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;
     public static final int POSTER_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel poster_;
     /**
@@ -551,7 +546,6 @@ public final class ChatProto {
       return poster_;
     }
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;
     public static final int RECIPIENT_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel recipient_;
     /**
@@ -573,7 +567,6 @@ public final class ChatProto {
       return recipient_;
     }
 
-    // optional int64 timeOfPost = 4;
     public static final int TIMEOFPOST_FIELD_NUMBER = 4;
     private long timeOfPost_;
     /**
@@ -589,7 +582,6 @@ public final class ChatProto {
       return timeOfPost_;
     }
 
-    // optional string content = 5;
     public static final int CONTENT_FIELD_NUMBER = 5;
     private java.lang.Object content_;
     /**
@@ -632,7 +624,6 @@ public final class ChatProto {
       }
     }
 
-    // optional .com.lvl6.proto.TranslateLanguages originalContentLanguage = 7;
     public static final int ORIGINALCONTENTLANGUAGE_FIELD_NUMBER = 7;
     private com.lvl6.proto.ChatProto.TranslateLanguages originalContentLanguage_;
     /**
@@ -648,7 +639,6 @@ public final class ChatProto {
       return originalContentLanguage_;
     }
 
-    // repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;
     public static final int TRANSLATEDCONTENT_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_;
     /**
@@ -696,7 +686,8 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -845,8 +836,9 @@ public final class ChatProto {
      * Protobuf type {@code com.lvl6.proto.PrivateChatPostProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PrivateChatPostProto)
+        com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor;
@@ -1068,7 +1060,6 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      // optional string privateChatPostUuid = 1;
       private java.lang.Object privateChatPostUuid_ = "";
       /**
        * <code>optional string privateChatPostUuid = 1;</code>
@@ -1082,9 +1073,12 @@ public final class ChatProto {
       public java.lang.String getPrivateChatPostUuid() {
         java.lang.Object ref = privateChatPostUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          privateChatPostUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            privateChatPostUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1142,7 +1136,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> posterBuilder_;
@@ -1251,7 +1244,7 @@ public final class ChatProto {
         if (posterBuilder_ == null) {
           posterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  poster_,
+                  getPoster(),
                   getParentForChildren(),
                   isClean());
           poster_ = null;
@@ -1259,7 +1252,6 @@ public final class ChatProto {
         return posterBuilder_;
       }
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> recipientBuilder_;
@@ -1368,7 +1360,7 @@ public final class ChatProto {
         if (recipientBuilder_ == null) {
           recipientBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  recipient_,
+                  getRecipient(),
                   getParentForChildren(),
                   isClean());
           recipient_ = null;
@@ -1376,7 +1368,6 @@ public final class ChatProto {
         return recipientBuilder_;
       }
 
-      // optional int64 timeOfPost = 4;
       private long timeOfPost_ ;
       /**
        * <code>optional int64 timeOfPost = 4;</code>
@@ -1409,7 +1400,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional string content = 5;
       private java.lang.Object content_ = "";
       /**
        * <code>optional string content = 5;</code>
@@ -1423,9 +1413,12 @@ public final class ChatProto {
       public java.lang.String getContent() {
         java.lang.Object ref = content_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          content_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            content_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1483,7 +1476,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.TranslateLanguages originalContentLanguage = 7;
       private com.lvl6.proto.ChatProto.TranslateLanguages originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages originalContentLanguage = 7;</code>
@@ -1519,7 +1511,6 @@ public final class ChatProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 6;
       private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_ =
         java.util.Collections.emptyList();
       private void ensureTranslatedContentIsMutable() {
@@ -1661,7 +1652,8 @@ public final class ChatProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.TranslatedTextProto> values) {
         if (translatedContentBuilder_ == null) {
           ensureTranslatedContentIsMutable();
-          super.addAll(values, translatedContent_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, translatedContent_);
           onChanged();
         } else {
           translatedContentBuilder_.addAllMessages(values);
@@ -1770,10 +1762,10 @@ public final class ChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PrivateChatPostProto)
   }
 
-  public interface ColorProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ColorProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ColorProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 red = 1;
     /**
      * <code>optional int32 red = 1;</code>
      */
@@ -1783,7 +1775,6 @@ public final class ChatProto {
      */
     int getRed();
 
-    // optional int32 green = 2;
     /**
      * <code>optional int32 green = 2;</code>
      */
@@ -1793,7 +1784,6 @@ public final class ChatProto {
      */
     int getGreen();
 
-    // optional int32 blue = 3;
     /**
      * <code>optional int32 blue = 3;</code>
      */
@@ -1807,8 +1797,9 @@ public final class ChatProto {
    * Protobuf type {@code com.lvl6.proto.ColorProto}
    */
   public static final class ColorProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ColorProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ColorProto)
+      ColorProtoOrBuilder {
     // Use ColorProto.newBuilder() to construct.
     private ColorProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1909,7 +1900,6 @@ public final class ChatProto {
     }
 
     private int bitField0_;
-    // optional int32 red = 1;
     public static final int RED_FIELD_NUMBER = 1;
     private int red_;
     /**
@@ -1925,7 +1915,6 @@ public final class ChatProto {
       return red_;
     }
 
-    // optional int32 green = 2;
     public static final int GREEN_FIELD_NUMBER = 2;
     private int green_;
     /**
@@ -1941,7 +1930,6 @@ public final class ChatProto {
       return green_;
     }
 
-    // optional int32 blue = 3;
     public static final int BLUE_FIELD_NUMBER = 3;
     private int blue_;
     /**
@@ -1965,7 +1953,8 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2086,8 +2075,9 @@ public final class ChatProto {
      * Protobuf type {@code com.lvl6.proto.ColorProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.ColorProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ColorProto)
+        com.lvl6.proto.ChatProto.ColorProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_descriptor;
@@ -2218,7 +2208,6 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      // optional int32 red = 1;
       private int red_ ;
       /**
        * <code>optional int32 red = 1;</code>
@@ -2251,7 +2240,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional int32 green = 2;
       private int green_ ;
       /**
        * <code>optional int32 green = 2;</code>
@@ -2284,7 +2272,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional int32 blue = 3;
       private int blue_ ;
       /**
        * <code>optional int32 blue = 3;</code>
@@ -2328,10 +2315,10 @@ public final class ChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ColorProto)
   }
 
-  public interface GroupChatMessageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface GroupChatMessageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GroupChatMessageProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
      */
@@ -2345,7 +2332,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder();
 
-    // optional int64 timeOfChat = 2;
     /**
      * <code>optional int64 timeOfChat = 2;</code>
      */
@@ -2355,7 +2341,6 @@ public final class ChatProto {
      */
     long getTimeOfChat();
 
-    // optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;
     /**
      * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
      *
@@ -2373,7 +2358,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.ChatProto.TranslateLanguages getContentLanguage();
 
-    // optional string content = 3;
     /**
      * <code>optional string content = 3;</code>
      */
@@ -2388,7 +2372,6 @@ public final class ChatProto {
     com.google.protobuf.ByteString
         getContentBytes();
 
-    // repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 4;
     /**
      * <code>repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 4;</code>
      */
@@ -2413,7 +2396,6 @@ public final class ChatProto {
     com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder getTranslatedContentOrBuilder(
         int index);
 
-    // optional bool isAdmin = 5;
     /**
      * <code>optional bool isAdmin = 5;</code>
      */
@@ -2423,7 +2405,6 @@ public final class ChatProto {
      */
     boolean getIsAdmin();
 
-    // optional string chatUuid = 6;
     /**
      * <code>optional string chatUuid = 6;</code>
      */
@@ -2442,8 +2423,9 @@ public final class ChatProto {
    * Protobuf type {@code com.lvl6.proto.GroupChatMessageProto}
    */
   public static final class GroupChatMessageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements GroupChatMessageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GroupChatMessageProto)
+      GroupChatMessageProtoOrBuilder {
     // Use GroupChatMessageProto.newBuilder() to construct.
     private GroupChatMessageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2508,8 +2490,9 @@ public final class ChatProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              content_ = input.readBytes();
+              content_ = bs;
               break;
             }
             case 34: {
@@ -2526,8 +2509,9 @@ public final class ChatProto {
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              chatUuid_ = input.readBytes();
+              chatUuid_ = bs;
               break;
             }
             case 56: {
@@ -2584,7 +2568,6 @@ public final class ChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_;
     /**
@@ -2606,7 +2589,6 @@ public final class ChatProto {
       return sender_;
     }
 
-    // optional int64 timeOfChat = 2;
     public static final int TIMEOFCHAT_FIELD_NUMBER = 2;
     private long timeOfChat_;
     /**
@@ -2622,7 +2604,6 @@ public final class ChatProto {
       return timeOfChat_;
     }
 
-    // optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;
     public static final int CONTENTLANGUAGE_FIELD_NUMBER = 7;
     private com.lvl6.proto.ChatProto.TranslateLanguages contentLanguage_;
     /**
@@ -2646,7 +2627,6 @@ public final class ChatProto {
       return contentLanguage_;
     }
 
-    // optional string content = 3;
     public static final int CONTENT_FIELD_NUMBER = 3;
     private java.lang.Object content_;
     /**
@@ -2689,7 +2669,6 @@ public final class ChatProto {
       }
     }
 
-    // repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 4;
     public static final int TRANSLATEDCONTENT_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_;
     /**
@@ -2725,7 +2704,6 @@ public final class ChatProto {
       return translatedContent_.get(index);
     }
 
-    // optional bool isAdmin = 5;
     public static final int ISADMIN_FIELD_NUMBER = 5;
     private boolean isAdmin_;
     /**
@@ -2741,7 +2719,6 @@ public final class ChatProto {
       return isAdmin_;
     }
 
-    // optional string chatUuid = 6;
     public static final int CHATUUID_FIELD_NUMBER = 6;
     private java.lang.Object chatUuid_;
     /**
@@ -2796,7 +2773,8 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2945,8 +2923,9 @@ public final class ChatProto {
      * Protobuf type {@code com.lvl6.proto.GroupChatMessageProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GroupChatMessageProto)
+        com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor;
@@ -3159,7 +3138,6 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> senderBuilder_;
@@ -3268,7 +3246,7 @@ public final class ChatProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3276,7 +3254,6 @@ public final class ChatProto {
         return senderBuilder_;
       }
 
-      // optional int64 timeOfChat = 2;
       private long timeOfChat_ ;
       /**
        * <code>optional int64 timeOfChat = 2;</code>
@@ -3309,7 +3286,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;
       private com.lvl6.proto.ChatProto.TranslateLanguages contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages contentLanguage = 7;</code>
@@ -3361,7 +3337,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional string content = 3;
       private java.lang.Object content_ = "";
       /**
        * <code>optional string content = 3;</code>
@@ -3375,9 +3350,12 @@ public final class ChatProto {
       public java.lang.String getContent() {
         java.lang.Object ref = content_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          content_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            content_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3435,7 +3413,6 @@ public final class ChatProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.TranslatedTextProto translatedContent = 4;
       private java.util.List<com.lvl6.proto.ChatProto.TranslatedTextProto> translatedContent_ =
         java.util.Collections.emptyList();
       private void ensureTranslatedContentIsMutable() {
@@ -3577,7 +3554,8 @@ public final class ChatProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.TranslatedTextProto> values) {
         if (translatedContentBuilder_ == null) {
           ensureTranslatedContentIsMutable();
-          super.addAll(values, translatedContent_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, translatedContent_);
           onChanged();
         } else {
           translatedContentBuilder_.addAllMessages(values);
@@ -3675,7 +3653,6 @@ public final class ChatProto {
         return translatedContentBuilder_;
       }
 
-      // optional bool isAdmin = 5;
       private boolean isAdmin_ ;
       /**
        * <code>optional bool isAdmin = 5;</code>
@@ -3708,7 +3685,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional string chatUuid = 6;
       private java.lang.Object chatUuid_ = "";
       /**
        * <code>optional string chatUuid = 6;</code>
@@ -3722,9 +3698,12 @@ public final class ChatProto {
       public java.lang.String getChatUuid() {
         java.lang.Object ref = chatUuid_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          chatUuid_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            chatUuid_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3793,10 +3772,10 @@ public final class ChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GroupChatMessageProto)
   }
 
-  public interface TranslatedTextProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface TranslatedTextProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TranslatedTextProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.TranslateLanguages language = 1;
     /**
      * <code>optional .com.lvl6.proto.TranslateLanguages language = 1;</code>
      */
@@ -3806,7 +3785,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.ChatProto.TranslateLanguages getLanguage();
 
-    // optional string text = 2;
     /**
      * <code>optional string text = 2;</code>
      */
@@ -3825,8 +3803,9 @@ public final class ChatProto {
    * Protobuf type {@code com.lvl6.proto.TranslatedTextProto}
    */
   public static final class TranslatedTextProto extends
-      com.google.protobuf.GeneratedMessage
-      implements TranslatedTextProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TranslatedTextProto)
+      TranslatedTextProtoOrBuilder {
     // Use TranslatedTextProto.newBuilder() to construct.
     private TranslatedTextProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3884,8 +3863,9 @@ public final class ChatProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              text_ = input.readBytes();
+              text_ = bs;
               break;
             }
           }
@@ -3928,7 +3908,6 @@ public final class ChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.TranslateLanguages language = 1;
     public static final int LANGUAGE_FIELD_NUMBER = 1;
     private com.lvl6.proto.ChatProto.TranslateLanguages language_;
     /**
@@ -3944,7 +3923,6 @@ public final class ChatProto {
       return language_;
     }
 
-    // optional string text = 2;
     public static final int TEXT_FIELD_NUMBER = 2;
     private java.lang.Object text_;
     /**
@@ -3994,7 +3972,8 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4108,8 +4087,9 @@ public final class ChatProto {
      * Protobuf type {@code com.lvl6.proto.TranslatedTextProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TranslatedTextProto)
+        com.lvl6.proto.ChatProto.TranslatedTextProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_TranslatedTextProto_descriptor;
@@ -4233,7 +4213,6 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.TranslateLanguages language = 1;
       private com.lvl6.proto.ChatProto.TranslateLanguages language_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages language = 1;</code>
@@ -4269,7 +4248,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional string text = 2;
       private java.lang.Object text_ = "";
       /**
        * <code>optional string text = 2;</code>
@@ -4283,9 +4261,12 @@ public final class ChatProto {
       public java.lang.String getText() {
         java.lang.Object ref = text_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          text_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            text_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4354,10 +4335,10 @@ public final class ChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TranslatedTextProto)
   }
 
-  public interface DefaultLanguagesProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface DefaultLanguagesProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.DefaultLanguagesProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.TranslateLanguages globalDefaultLanguage = 1;
     /**
      * <code>optional .com.lvl6.proto.TranslateLanguages globalDefaultLanguage = 1;</code>
      */
@@ -4367,7 +4348,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.ChatProto.TranslateLanguages getGlobalDefaultLanguage();
 
-    // repeated .com.lvl6.proto.PrivateChatDefaultLanguageProto privateDefaultLanguage = 2;
     /**
      * <code>repeated .com.lvl6.proto.PrivateChatDefaultLanguageProto privateDefaultLanguage = 2;</code>
      */
@@ -4392,7 +4372,6 @@ public final class ChatProto {
     com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProtoOrBuilder getPrivateDefaultLanguageOrBuilder(
         int index);
 
-    // optional bool globalTranslateOn = 3;
     /**
      * <code>optional bool globalTranslateOn = 3;</code>
      */
@@ -4406,8 +4385,9 @@ public final class ChatProto {
    * Protobuf type {@code com.lvl6.proto.DefaultLanguagesProto}
    */
   public static final class DefaultLanguagesProto extends
-      com.google.protobuf.GeneratedMessage
-      implements DefaultLanguagesProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.DefaultLanguagesProto)
+      DefaultLanguagesProtoOrBuilder {
     // Use DefaultLanguagesProto.newBuilder() to construct.
     private DefaultLanguagesProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4520,7 +4500,6 @@ public final class ChatProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.TranslateLanguages globalDefaultLanguage = 1;
     public static final int GLOBALDEFAULTLANGUAGE_FIELD_NUMBER = 1;
     private com.lvl6.proto.ChatProto.TranslateLanguages globalDefaultLanguage_;
     /**
@@ -4536,7 +4515,6 @@ public final class ChatProto {
       return globalDefaultLanguage_;
     }
 
-    // repeated .com.lvl6.proto.PrivateChatDefaultLanguageProto privateDefaultLanguage = 2;
     public static final int PRIVATEDEFAULTLANGUAGE_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto> privateDefaultLanguage_;
     /**
@@ -4572,7 +4550,6 @@ public final class ChatProto {
       return privateDefaultLanguage_.get(index);
     }
 
-    // optional bool globalTranslateOn = 3;
     public static final int GLOBALTRANSLATEON_FIELD_NUMBER = 3;
     private boolean globalTranslateOn_;
     /**
@@ -4596,7 +4573,8 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4717,8 +4695,9 @@ public final class ChatProto {
      * Protobuf type {@code com.lvl6.proto.DefaultLanguagesProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.DefaultLanguagesProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.DefaultLanguagesProto)
+        com.lvl6.proto.ChatProto.DefaultLanguagesProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor;
@@ -4882,7 +4861,6 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.TranslateLanguages globalDefaultLanguage = 1;
       private com.lvl6.proto.ChatProto.TranslateLanguages globalDefaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages globalDefaultLanguage = 1;</code>
@@ -4918,7 +4896,6 @@ public final class ChatProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.PrivateChatDefaultLanguageProto privateDefaultLanguage = 2;
       private java.util.List<com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto> privateDefaultLanguage_ =
         java.util.Collections.emptyList();
       private void ensurePrivateDefaultLanguageIsMutable() {
@@ -5060,7 +5037,8 @@ public final class ChatProto {
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto> values) {
         if (privateDefaultLanguageBuilder_ == null) {
           ensurePrivateDefaultLanguageIsMutable();
-          super.addAll(values, privateDefaultLanguage_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, privateDefaultLanguage_);
           onChanged();
         } else {
           privateDefaultLanguageBuilder_.addAllMessages(values);
@@ -5158,7 +5136,6 @@ public final class ChatProto {
         return privateDefaultLanguageBuilder_;
       }
 
-      // optional bool globalTranslateOn = 3;
       private boolean globalTranslateOn_ ;
       /**
        * <code>optional bool globalTranslateOn = 3;</code>
@@ -5202,10 +5179,10 @@ public final class ChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.DefaultLanguagesProto)
   }
 
-  public interface PrivateChatDefaultLanguageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface PrivateChatDefaultLanguageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PrivateChatDefaultLanguageProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string recipientUserId = 1;
     /**
      * <code>optional string recipientUserId = 1;</code>
      */
@@ -5220,7 +5197,6 @@ public final class ChatProto {
     com.google.protobuf.ByteString
         getRecipientUserIdBytes();
 
-    // optional string senderUserId = 2;
     /**
      * <code>optional string senderUserId = 2;</code>
      */
@@ -5235,7 +5211,6 @@ public final class ChatProto {
     com.google.protobuf.ByteString
         getSenderUserIdBytes();
 
-    // optional .com.lvl6.proto.TranslateLanguages defaultLanguage = 3;
     /**
      * <code>optional .com.lvl6.proto.TranslateLanguages defaultLanguage = 3;</code>
      */
@@ -5245,7 +5220,6 @@ public final class ChatProto {
      */
     com.lvl6.proto.ChatProto.TranslateLanguages getDefaultLanguage();
 
-    // optional bool translateOn = 4;
     /**
      * <code>optional bool translateOn = 4;</code>
      */
@@ -5259,8 +5233,9 @@ public final class ChatProto {
    * Protobuf type {@code com.lvl6.proto.PrivateChatDefaultLanguageProto}
    */
   public static final class PrivateChatDefaultLanguageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PrivateChatDefaultLanguageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PrivateChatDefaultLanguageProto)
+      PrivateChatDefaultLanguageProtoOrBuilder {
     // Use PrivateChatDefaultLanguageProto.newBuilder() to construct.
     private PrivateChatDefaultLanguageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5307,13 +5282,15 @@ public final class ChatProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              recipientUserId_ = input.readBytes();
+              recipientUserId_ = bs;
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              senderUserId_ = input.readBytes();
+              senderUserId_ = bs;
               break;
             }
             case 24: {
@@ -5372,7 +5349,6 @@ public final class ChatProto {
     }
 
     private int bitField0_;
-    // optional string recipientUserId = 1;
     public static final int RECIPIENTUSERID_FIELD_NUMBER = 1;
     private java.lang.Object recipientUserId_;
     /**
@@ -5415,7 +5391,6 @@ public final class ChatProto {
       }
     }
 
-    // optional string senderUserId = 2;
     public static final int SENDERUSERID_FIELD_NUMBER = 2;
     private java.lang.Object senderUserId_;
     /**
@@ -5458,7 +5433,6 @@ public final class ChatProto {
       }
     }
 
-    // optional .com.lvl6.proto.TranslateLanguages defaultLanguage = 3;
     public static final int DEFAULTLANGUAGE_FIELD_NUMBER = 3;
     private com.lvl6.proto.ChatProto.TranslateLanguages defaultLanguage_;
     /**
@@ -5474,7 +5448,6 @@ public final class ChatProto {
       return defaultLanguage_;
     }
 
-    // optional bool translateOn = 4;
     public static final int TRANSLATEON_FIELD_NUMBER = 4;
     private boolean translateOn_;
     /**
@@ -5499,7 +5472,8 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5627,8 +5601,9 @@ public final class ChatProto {
      * Protobuf type {@code com.lvl6.proto.PrivateChatDefaultLanguageProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PrivateChatDefaultLanguageProto)
+        com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor;
@@ -5772,7 +5747,6 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      // optional string recipientUserId = 1;
       private java.lang.Object recipientUserId_ = "";
       /**
        * <code>optional string recipientUserId = 1;</code>
@@ -5786,9 +5760,12 @@ public final class ChatProto {
       public java.lang.String getRecipientUserId() {
         java.lang.Object ref = recipientUserId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          recipientUserId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            recipientUserId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -5846,7 +5823,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional string senderUserId = 2;
       private java.lang.Object senderUserId_ = "";
       /**
        * <code>optional string senderUserId = 2;</code>
@@ -5860,9 +5836,12 @@ public final class ChatProto {
       public java.lang.String getSenderUserId() {
         java.lang.Object ref = senderUserId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          senderUserId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            senderUserId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -5920,7 +5899,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.TranslateLanguages defaultLanguage = 3;
       private com.lvl6.proto.ChatProto.TranslateLanguages defaultLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       /**
        * <code>optional .com.lvl6.proto.TranslateLanguages defaultLanguage = 3;</code>
@@ -5956,7 +5934,6 @@ public final class ChatProto {
         return this;
       }
 
-      // optional bool translateOn = 4;
       private boolean translateOn_ ;
       /**
        * <code>optional bool translateOn = 4;</code>
@@ -6000,32 +5977,32 @@ public final class ChatProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PrivateChatDefaultLanguageProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ColorProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TranslatedTextProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TranslatedTextProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_DefaultLanguagesProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -6075,54 +6052,55 @@ public final class ChatProto {
       "IAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor,
-              new java.lang.String[] { "PrivateChatPostUuid", "Poster", "Recipient", "TimeOfPost", "Content", "OriginalContentLanguage", "TranslatedContent", });
-          internal_static_com_lvl6_proto_ColorProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ColorProto_descriptor,
-              new java.lang.String[] { "Red", "Green", "Blue", });
-          internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor,
-              new java.lang.String[] { "Sender", "TimeOfChat", "ContentLanguage", "Content", "TranslatedContent", "IsAdmin", "ChatUuid", });
-          internal_static_com_lvl6_proto_TranslatedTextProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_TranslatedTextProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TranslatedTextProto_descriptor,
-              new java.lang.String[] { "Language", "Text", });
-          internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_DefaultLanguagesProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor,
-              new java.lang.String[] { "GlobalDefaultLanguage", "PrivateDefaultLanguage", "GlobalTranslateOn", });
-          internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor,
-              new java.lang.String[] { "RecipientUserId", "SenderUserId", "DefaultLanguage", "TranslateOn", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor,
+        new java.lang.String[] { "PrivateChatPostUuid", "Poster", "Recipient", "TimeOfPost", "Content", "OriginalContentLanguage", "TranslatedContent", });
+    internal_static_com_lvl6_proto_ColorProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ColorProto_descriptor,
+        new java.lang.String[] { "Red", "Green", "Blue", });
+    internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor,
+        new java.lang.String[] { "Sender", "TimeOfChat", "ContentLanguage", "Content", "TranslatedContent", "IsAdmin", "ChatUuid", });
+    internal_static_com_lvl6_proto_TranslatedTextProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_TranslatedTextProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TranslatedTextProto_descriptor,
+        new java.lang.String[] { "Language", "Text", });
+    internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_DefaultLanguagesProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_DefaultLanguagesProto_descriptor,
+        new java.lang.String[] { "GlobalDefaultLanguage", "PrivateDefaultLanguage", "GlobalTranslateOn", });
+    internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PrivateChatDefaultLanguageProto_descriptor,
+        new java.lang.String[] { "RecipientUserId", "SenderUserId", "DefaultLanguage", "TranslateOn", });
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

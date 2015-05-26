@@ -1,14 +1,10 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -20,40 +16,41 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniJobRequestEvent;
 import com.lvl6.events.response.RedeemMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.MiniJob;
-import com.lvl6.info.MiniJobForUser;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto;
-import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus;
-import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.utils.BoosterItemUtils;
+import com.lvl6.server.controller.actionobjects.RedeemMiniJobAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
 public class RedeemMiniJobController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(RedeemMiniJobController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -62,10 +59,16 @@ public class RedeemMiniJobController extends EventController {
 	protected MiscMethods miscMethods;
 
 	@Autowired
+	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+
+	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	@Autowired
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
+
+	@Autowired
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -77,6 +80,15 @@ public class RedeemMiniJobController extends EventController {
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
 
 	@Autowired
+	protected RewardRetrieveUtils rewardRetrieveUtils;
+
+	@Autowired
+	protected InsertUtil insertUtil;
+
+	@Autowired
+	protected DeleteUtil deleteUtil;
+
+	@Autowired
 	protected UpdateUtil updateUtil;
 
 	@Autowired
@@ -84,6 +96,10 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
+
 
 	public RedeemMiniJobController() {
 		
@@ -150,30 +166,22 @@ public class RedeemMiniJobController extends EventController {
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			//retrieve whatever is necessary from the db
-			//TODO: consider only retrieving user if the request is valid
-			User user = getUserRetrieveUtils().getUserById(
-					senderProto.getUserUuid());
-			List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>();
+			RedeemMiniJobAction rmja = new RedeemMiniJobAction(userId, userMiniJobId, clientTime,
+					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
+					userRetrieveUtils, itemForUserRetrieveUtil,
+					deleteUtil, updateUtil, insertUtil, miniJobForUserRetrieveUtil,
+					miniJobRetrieveUtils, monsterStuffUtils, monsterForUserRetrieveUtils, umchpList,
+					monsterLevelInfoRetrieveUtils, rewardRetrieveUtils,
+					createInfoProtoUtils);
 
-			Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
+			rmja.execute(resBuilder);
 
-			boolean legit = checkLegit(resBuilder, userId, user, userMiniJobId,
-					mjfuList, umchpList, userMonsterIdToExpectedHealth);
-
-			boolean success = false;
-			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
-			Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
-			if (legit) {
-				MiniJobForUser mjfu = mjfuList.get(0);
-				success = writeChangesToDB(resBuilder, userId, user,
-						userMiniJobId, mjfu, now, clientTime, maxCash, maxOil,
-						userMonsterIdToExpectedHealth, currencyChange,
-						previousCurrency);
-			}
-
-			if (success) {
-				resBuilder.setStatus(RedeemMiniJobStatus.SUCCESS);
+			if (RedeemMiniJobStatus.SUCCESS.equals(resBuilder.getStatus())) {
+				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(rmja.getAra().getNuOrUpdatedItems(),
+						rmja.getAra().getNuOrUpdatedMonsters(), rmja.getAra().getGemsGained(),
+						rmja.getAra().getCashGained(), rmja.getAra().getOilGained(), rmja.getAra().getGachaCreditsGained(), null);
+				resBuilder.setRewards(urp);
+				log.info("rewards: {}", urp);
 			}
 
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
@@ -182,17 +190,16 @@ public class RedeemMiniJobController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (success) {
+			if (resBuilder.getStatus().equals(RedeemMiniJobStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-								user, null, null);
+								rmja.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
 
-				//TODO: track the MiniJobForUser history
-				writeToUserCurrencyHistory(user, userMiniJobId, currencyChange,
-						clientTime, previousCurrency);
+				writeToUserCurrencyHistory(rmja.getUser(), userMiniJobId, rmja.getAra().getCurrencyDeltas(),
+						clientTime, rmja.getAra().getPreviousCurrencies());
 			}
 
 		} catch (Exception e) {
@@ -214,225 +221,225 @@ public class RedeemMiniJobController extends EventController {
 		}
 	}
 
-	//userMonsterIdToExpectedHealth  may be modified
-	private boolean checkLegit(Builder resBuilder, String userId, User user,
-			String userMiniJobId, List<MiniJobForUser> mjfuList,
-			List<UserMonsterCurrentHealthProto> umchpList,
-			Map<String, Integer> userMonsterIdToExpectedHealth) {
-
-		Collection<String> userMiniJobIds = Collections
-				.singleton(userMiniJobId);
-		Map<String, MiniJobForUser> idToUserMiniJob = getMiniJobForUserRetrieveUtil()
-				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
-
-		if (idToUserMiniJob.isEmpty() || umchpList.isEmpty()) {
-			log.error("no UserMiniJob exists with id="
-					+ userMiniJobId
-					+ "or invalid userMonsterIds (monsters need to be damaged). "
-					+ " userMonsters=" + umchpList);
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
-			return false;
-		}
-
-		MiniJobForUser mjfu = idToUserMiniJob.get(userMiniJobId);
-		if (null == mjfu.getTimeCompleted()) {
-			//sanity check
-			log.error("MiniJobForUser incomplete: " + mjfu);
-			return false;
-		}
-
-		//sanity check
-		int miniJobId = mjfu.getMiniJobId();
-		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
-		if (null == mj) {
-			log.error("no MiniJob exists with id=" + miniJobId
-					+ "\t invalid MiniJobForUser=" + mjfu);
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
-			return false;
-		}
-
-		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
-				umchpList, userMonsterIdToExpectedHealth);
-
-		Map<String, MonsterForUser> mfuIdsToUserMonsters = getMonsterForUserRetrieveUtils()
-				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
-
-		//keep only valid userMonsterIds another sanity check
-		if (userMonsterIds.size() != mfuIdsToUserMonsters.size()) {
-			log.warn("some userMonsterIds client sent are invalid."
-					+ " Keeping valid ones. userMonsterIds=" + userMonsterIds
-					+ " mfuIdsToUserMonsters=" + mfuIdsToUserMonsters);
-
-			//since client sent some invalid monsters, keep only the valid
-			//mappings from userMonsterId to health
-			Set<String> existing = mfuIdsToUserMonsters.keySet();
-			userMonsterIdToExpectedHealth.keySet().retainAll(existing);
-		}
-
-		if (userMonsterIds.isEmpty()) {
-			log.error("no valid user monster ids sent by client");
-			return false;
-		}
-
-		mjfuList.add(mjfu);
-		return true;
-	}
-
-	private boolean writeChangesToDB(Builder resBuilder, String userId,
-			User user, String userMiniJobId, MiniJobForUser mjfu, Date now,
-			Timestamp clientTime, int maxCash, int maxOil,
-			Map<String, Integer> userMonsterIdToExpectedHealth,
-			Map<String, Integer> currencyChange,
-			Map<String, Integer> previousCurrency) {
-		int miniJobId = mjfu.getMiniJobId();
-		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
-
-		int prevGems = user.getGems();
-		int prevCash = user.getCash();
-		int prevOil = user.getOil();
-
-		//update user currency
-		int gemsChange = mj.getGemReward();
-		int cashChange = mj.getCashReward();
-		int oilChange = mj.getOilReward();
-		int expChange = mj.getExpReward();
-
-		if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange,
-				maxOil, expChange)) {
-			log.error(String
-					.format("could not decrement user gems by %s, cash by %s, and oil by %s",
-							gemsChange, cashChange, oilChange));
-			return false;
-		} else {
-			if (0 != gemsChange) {
-				currencyChange.put(miscMethods.gems, gemsChange);
-				previousCurrency.put(miscMethods.gems, prevGems);
-			}
-			if (0 != cashChange) {
-				currencyChange.put(miscMethods.cash, cashChange);
-				previousCurrency.put(miscMethods.cash, prevCash);
-			}
-			if (0 != oilChange) {
-				currencyChange.put(miscMethods.oil, oilChange);
-				previousCurrency.put(miscMethods.oil, prevOil);
-			}
-		}
-
-		int monsterIdReward = mj.getMonsterIdReward();
-		//give the user the monster if he got one
-		if (0 != monsterIdReward) {
-			StringBuilder mfusopB = new StringBuilder();
-			mfusopB.append(ControllerConstants.MFUSOP__MINI_JOB);
-			mfusopB.append(" ");
-			mfusopB.append(miniJobId);
-			String mfusop = mfusopB.toString();
-			Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-			monsterIdToNumPieces.put(monsterIdReward, 1);
-
-			log.info("rewarding user with {monsterId->amount}: {}",
-					monsterIdToNumPieces);
-			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
-					.updateUserMonsters(userId, monsterIdToNumPieces, null,
-							mfusop, now, monsterLevelInfoRetrieveUtils);
-			FullUserMonsterProto fump = newOrUpdated.get(0);
-			resBuilder.setFump(fump);
-		}
-
-		List<ItemForUser> ifuList = calculateItemRewards(userId, mj);
-		log.info("ifuList={}", ifuList);
-		if (null != ifuList && !ifuList.isEmpty()) {
-			updateUtil.updateItemForUser(ifuList);
-		}
-
-		//delete the user mini job
-		int numDeleted = DeleteUtils.get().deleteMiniJobForUser(userMiniJobId);
-		log.info("userMiniJob numDeleted=" + numDeleted);
-
-		log.info("updating user's monsters' healths");
-		int numUpdated = updateUtil
-				.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-		log.info("numUpdated=" + numUpdated);
-
-		//number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
-		//so returns 2 if one row was updated, 1 if inserted
-		if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
-			log.warn("unexpected error: more than user monsters were"
-					+ " updated. actual numUpdated=" + numUpdated
-					+ "expected: userMonsterIdToExpectedHealth="
-					+ userMonsterIdToExpectedHealth);
-		}
-
-		return true;
-	}
-
-	private List<ItemForUser> calculateItemRewards(String userId, MiniJob mj) {
-		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-
-		int itemIdReward = mj.getItemIdReward();
-		int itemRewardQuantity = mj.getItemRewardQuantity();
-		int secondItemIdReward = mj.getSecondItemIdReward();
-		int secondItemRewardQuantity = mj.getSecondItemRewardQuantity();
-		if (itemIdReward > 0 && itemRewardQuantity > 0) {
-			itemIdToQuantity.put(itemIdReward, itemRewardQuantity);
-
-			//    	ItemForUser ifuOne = new ItemForUser(userId,
-			//    		itemIdReward, itemRewardQuantity);
-			//    	int numUpdated = updateUtil.updateItemForUser(
-			//    		userId, itemIdReward, itemRewardQuantity);
-			//
-			//
-			//    	String preface = "rewarding user with more items.";
-			//    	log.info(
-			//    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
-			//    		new Object[] { preface, itemIdReward, itemRewardQuantity,
-			//    			numUpdated});
-		}
-
-		if (secondItemIdReward > 0 && secondItemRewardQuantity > 0) {
-			int newQuantity = secondItemRewardQuantity;
-			if (itemIdToQuantity.containsKey(secondItemIdReward)) {
-				newQuantity += itemIdToQuantity.get(secondItemIdReward);
-			}
-			itemIdToQuantity.put(secondItemIdReward, newQuantity);
-		}
-
-		List<ItemForUser> ifuList = BoosterItemUtils
-				.calculateItemRewards(userId, itemForUserRetrieveUtil,
-						itemIdToQuantity);
-		return ifuList;
-	}
-
-	private boolean updateUser(User u, int gemsChange, int cashChange,
-			int maxCash, int oilChange, int maxOil, int expChange) {
-		//capping how much the user can gain of a certain resource
-		int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
-		int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
-		cashChange = Math.min(maxCashUserCanGain, cashChange);
-
-		int curOil = Math.min(u.getOil(), maxOil); //in case user's oil is more than maxOil
-		int maxOilUserCanGain = maxOil - curOil;
-		oilChange = Math.min(maxOilUserCanGain, oilChange);
-
-		if (0 == cashChange && 0 == oilChange && 0 == gemsChange
-				&& 0 == expChange) {
-			log.info("after caping rewards to max, user gets no resources");
-			return true;
-		}
-
-		//    int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
-		//        oilChange, gemsChange);
-
-		//    if (numChange <= 0) {
-		if (!u.updateRelativeGemsCashOilExperienceNaive(gemsChange, cashChange,
-				oilChange, expChange)) {
-			String preface = "could not update user gems, cash, oil, exp.";
-			log.error(String.format(
-					"%s gemChange=%s, cash=%s, oil=%s, exp=%s, user=%s",
-					preface, gemsChange, cashChange, oilChange, expChange, u));
-			return false;
-		}
-		return true;
-	}
+//	//userMonsterIdToExpectedHealth  may be modified
+//	private boolean checkLegit(Builder resBuilder, String userId, User user,
+//			String userMiniJobId, List<MiniJobForUser> mjfuList,
+//			List<UserMonsterCurrentHealthProto> umchpList,
+//			Map<String, Integer> userMonsterIdToExpectedHealth) {
+//
+//		Collection<String> userMiniJobIds = Collections
+//				.singleton(userMiniJobId);
+//		Map<String, MiniJobForUser> idToUserMiniJob = getMiniJobForUserRetrieveUtil()
+//				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
+//
+//		if (idToUserMiniJob.isEmpty() || umchpList.isEmpty()) {
+//			log.error("no UserMiniJob exists with id="
+//					+ userMiniJobId
+//					+ "or invalid userMonsterIds (monsters need to be damaged). "
+//					+ " userMonsters=" + umchpList);
+//			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
+//			return false;
+//		}
+//
+//		MiniJobForUser mjfu = idToUserMiniJob.get(userMiniJobId);
+//		if (null == mjfu.getTimeCompleted()) {
+//			//sanity check
+//			log.error("MiniJobForUser incomplete: " + mjfu);
+//			return false;
+//		}
+//
+//		//sanity check
+//		int miniJobId = mjfu.getMiniJobId();
+//		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+//		if (null == mj) {
+//			log.error("no MiniJob exists with id=" + miniJobId
+//					+ "\t invalid MiniJobForUser=" + mjfu);
+//			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
+//			return false;
+//		}
+//
+//		List<String> userMonsterIds = monsterStuffUtils.getUserMonsterIds(
+//				umchpList, userMonsterIdToExpectedHealth);
+//
+//		Map<String, MonsterForUser> mfuIdsToUserMonsters = getMonsterForUserRetrieveUtils()
+//				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
+//
+//		//keep only valid userMonsterIds another sanity check
+//		if (userMonsterIds.size() != mfuIdsToUserMonsters.size()) {
+//			log.warn("some userMonsterIds client sent are invalid."
+//					+ " Keeping valid ones. userMonsterIds=" + userMonsterIds
+//					+ " mfuIdsToUserMonsters=" + mfuIdsToUserMonsters);
+//
+//			//since client sent some invalid monsters, keep only the valid
+//			//mappings from userMonsterId to health
+//			Set<String> existing = mfuIdsToUserMonsters.keySet();
+//			userMonsterIdToExpectedHealth.keySet().retainAll(existing);
+//		}
+//
+//		if (userMonsterIds.isEmpty()) {
+//			log.error("no valid user monster ids sent by client");
+//			return false;
+//		}
+//
+//		mjfuList.add(mjfu);
+//		return true;
+//	}
+//
+//	private boolean writeChangesToDB(Builder resBuilder, String userId,
+//			User user, String userMiniJobId, MiniJobForUser mjfu, Date now,
+//			Timestamp clientTime, int maxCash, int maxOil,
+//			Map<String, Integer> userMonsterIdToExpectedHealth,
+//			Map<String, Integer> currencyChange,
+//			Map<String, Integer> previousCurrency) {
+//		int miniJobId = mjfu.getMiniJobId();
+//		MiniJob mj = miniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+//
+//		int prevGems = user.getGems();
+//		int prevCash = user.getCash();
+//		int prevOil = user.getOil();
+//
+//		//update user currency
+//		int gemsChange = mj.getGemReward();
+//		int cashChange = mj.getCashReward();
+//		int oilChange = mj.getOilReward();
+//		int expChange = mj.getExpReward();
+//
+//		if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange,
+//				maxOil, expChange)) {
+//			log.error(String
+//					.format("could not decrement user gems by %s, cash by %s, and oil by %s",
+//							gemsChange, cashChange, oilChange));
+//			return false;
+//		} else {
+//			if (0 != gemsChange) {
+//				currencyChange.put(miscMethods.gems, gemsChange);
+//				previousCurrency.put(miscMethods.gems, prevGems);
+//			}
+//			if (0 != cashChange) {
+//				currencyChange.put(miscMethods.cash, cashChange);
+//				previousCurrency.put(miscMethods.cash, prevCash);
+//			}
+//			if (0 != oilChange) {
+//				currencyChange.put(miscMethods.oil, oilChange);
+//				previousCurrency.put(miscMethods.oil, prevOil);
+//			}
+//		}
+//
+//		int monsterIdReward = mj.getMonsterIdReward();
+//		//give the user the monster if he got one
+//		if (0 != monsterIdReward) {
+//			StringBuilder mfusopB = new StringBuilder();
+//			mfusopB.append(ControllerConstants.MFUSOP__MINI_JOB);
+//			mfusopB.append(" ");
+//			mfusopB.append(miniJobId);
+//			String mfusop = mfusopB.toString();
+//			Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+//			monsterIdToNumPieces.put(monsterIdReward, 1);
+//
+//			log.info("rewarding user with {monsterId->amount}: {}",
+//					monsterIdToNumPieces);
+//			List<FullUserMonsterProto> newOrUpdated = monsterStuffUtils
+//					.updateUserMonsters(userId, monsterIdToNumPieces, null,
+//							mfusop, now, monsterLevelInfoRetrieveUtils);
+//			FullUserMonsterProto fump = newOrUpdated.get(0);
+//			resBuilder.setFump(fump);
+//		}
+//
+//		List<ItemForUser> ifuList = calculateItemRewards(userId, mj);
+//		log.info("ifuList={}", ifuList);
+//		if (null != ifuList && !ifuList.isEmpty()) {
+//			updateUtil.updateItemForUser(ifuList);
+//		}
+//
+//		//delete the user mini job
+//		int numDeleted = DeleteUtils.get().deleteMiniJobForUser(userMiniJobId);
+//		log.info("userMiniJob numDeleted=" + numDeleted);
+//
+//		log.info("updating user's monsters' healths");
+//		int numUpdated = updateUtil
+//				.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+//		log.info("numUpdated=" + numUpdated);
+//
+//		//number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
+//		//so returns 2 if one row was updated, 1 if inserted
+//		if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
+//			log.warn("unexpected error: more than user monsters were"
+//					+ " updated. actual numUpdated=" + numUpdated
+//					+ "expected: userMonsterIdToExpectedHealth="
+//					+ userMonsterIdToExpectedHealth);
+//		}
+//
+//		return true;
+//	}
+//
+//	private List<ItemForUser> calculateItemRewards(String userId, MiniJob mj) {
+//		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+//
+//		int itemIdReward = mj.getItemIdReward();
+//		int itemRewardQuantity = mj.getItemRewardQuantity();
+//		int secondItemIdReward = mj.getSecondItemIdReward();
+//		int secondItemRewardQuantity = mj.getSecondItemRewardQuantity();
+//		if (itemIdReward > 0 && itemRewardQuantity > 0) {
+//			itemIdToQuantity.put(itemIdReward, itemRewardQuantity);
+//
+//			//    	ItemForUser ifuOne = new ItemForUser(userId,
+//			//    		itemIdReward, itemRewardQuantity);
+//			//    	int numUpdated = updateUtil.updateItemForUser(
+//			//    		userId, itemIdReward, itemRewardQuantity);
+//			//
+//			//
+//			//    	String preface = "rewarding user with more items.";
+//			//    	log.info(
+//			//    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
+//			//    		new Object[] { preface, itemIdReward, itemRewardQuantity,
+//			//    			numUpdated});
+//		}
+//
+//		if (secondItemIdReward > 0 && secondItemRewardQuantity > 0) {
+//			int newQuantity = secondItemRewardQuantity;
+//			if (itemIdToQuantity.containsKey(secondItemIdReward)) {
+//				newQuantity += itemIdToQuantity.get(secondItemIdReward);
+//			}
+//			itemIdToQuantity.put(secondItemIdReward, newQuantity);
+//		}
+//
+//		List<ItemForUser> ifuList = BoosterItemUtils
+//				.calculateItemRewards(userId, itemForUserRetrieveUtil,
+//						itemIdToQuantity);
+//		return ifuList;
+//	}
+//
+//	private boolean updateUser(User u, int gemsChange, int cashChange,
+//			int maxCash, int oilChange, int maxOil, int expChange) {
+//		//capping how much the user can gain of a certain resource
+//		int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
+//		int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
+//		cashChange = Math.min(maxCashUserCanGain, cashChange);
+//
+//		int curOil = Math.min(u.getOil(), maxOil); //in case user's oil is more than maxOil
+//		int maxOilUserCanGain = maxOil - curOil;
+//		oilChange = Math.min(maxOilUserCanGain, oilChange);
+//
+//		if (0 == cashChange && 0 == oilChange && 0 == gemsChange
+//				&& 0 == expChange) {
+//			log.info("after caping rewards to max, user gets no resources");
+//			return true;
+//		}
+//
+//		//    int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
+//		//        oilChange, gemsChange);
+//
+//		//    if (numChange <= 0) {
+//		if (!u.updateRelativeGemsCashOilExperienceNaive(gemsChange, cashChange,
+//				oilChange, expChange)) {
+//			String preface = "could not update user gems, cash, oil, exp.";
+//			log.error(String.format(
+//					"%s gemChange=%s, cash=%s, oil=%s, exp=%s, user=%s",
+//					preface, gemsChange, cashChange, oilChange, expChange, u));
+//			return false;
+//		}
+//		return true;
+//	}
 
 	private void writeToUserCurrencyHistory(User aUser, String userMiniJobId,
 			Map<String, Integer> currencyChange, Timestamp curTime,
@@ -455,7 +462,6 @@ public class RedeemMiniJobController extends EventController {
 		miscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
 				previousCurrency, currentCurrency, reasonsForChanges,
 				detailsMap);
-
 	}
 
 	public Locker getLocker() {

@@ -31,5 +31,9 @@ public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupCha
 	public SendGroupChatResponseProto getSendGroupChatResponseProto() { //required for APNS
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return sendGroupChatResponseProto.getSerializedSize();
+	}
 
 }

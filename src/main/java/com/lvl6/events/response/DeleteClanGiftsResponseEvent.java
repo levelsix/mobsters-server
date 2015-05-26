@@ -28,4 +28,9 @@ public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
 		this.responseProto = responseProto;
 	}
 
+	@Override
+	public int eventSize() {
+		return deleteClanGiftsResponseProto.getSerializedSize();
+	}
+
 }

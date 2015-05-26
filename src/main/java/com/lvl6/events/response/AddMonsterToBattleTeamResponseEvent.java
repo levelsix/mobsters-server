@@ -31,5 +31,9 @@ public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<Add
 	public AddMonsterToBattleTeamResponseProto getAddMonsterToBattleTeamResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return addMonsterToBattleTeamResponseProto.getSerializedSize();
+	}
 
 }

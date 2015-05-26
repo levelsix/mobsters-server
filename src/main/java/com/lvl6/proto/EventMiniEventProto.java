@@ -8,10 +8,10 @@ public final class EventMiniEventProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface RetrieveMiniEventRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveMiniEventRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveMiniEventRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -34,8 +34,9 @@ public final class EventMiniEventProto {
    * </pre>
    */
   public static final class RetrieveMiniEventRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RetrieveMiniEventRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveMiniEventRequestProto)
+      RetrieveMiniEventRequestProtoOrBuilder {
     // Use RetrieveMiniEventRequestProto.newBuilder() to construct.
     private RetrieveMiniEventRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -134,7 +135,6 @@ public final class EventMiniEventProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -162,7 +162,8 @@ public final class EventMiniEventProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -274,8 +275,9 @@ public final class EventMiniEventProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveMiniEventRequestProto)
+        com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniEventProto.internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor;
@@ -397,7 +399,6 @@ public final class EventMiniEventProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -506,7 +507,7 @@ public final class EventMiniEventProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -525,10 +526,10 @@ public final class EventMiniEventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveMiniEventRequestProto)
   }
 
-  public interface RetrieveMiniEventResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RetrieveMiniEventResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RetrieveMiniEventResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -542,7 +543,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 2;
     /**
      * <code>optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 2;</code>
      */
@@ -556,7 +556,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUserMiniEventOrBuilder();
 
-    // optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;
     /**
      * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
      */
@@ -570,8 +569,9 @@ public final class EventMiniEventProto {
    * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventResponseProto}
    */
   public static final class RetrieveMiniEventResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RetrieveMiniEventResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RetrieveMiniEventResponseProto)
+      RetrieveMiniEventResponseProtoOrBuilder {
     // Use RetrieveMiniEventResponseProto.newBuilder() to construct.
     private RetrieveMiniEventResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -776,7 +776,6 @@ public final class EventMiniEventProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -798,7 +797,6 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 2;
     public static final int USERMINIEVENT_FIELD_NUMBER = 2;
     private com.lvl6.proto.MiniEventProtos.UserMiniEventProto userMiniEvent_;
     /**
@@ -820,7 +818,6 @@ public final class EventMiniEventProto {
       return userMiniEvent_;
     }
 
-    // optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status_;
     /**
@@ -844,7 +841,8 @@ public final class EventMiniEventProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -965,8 +963,9 @@ public final class EventMiniEventProto {
      * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RetrieveMiniEventResponseProto)
+        com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniEventProto.internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor;
@@ -1115,7 +1114,6 @@ public final class EventMiniEventProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -1224,7 +1222,7 @@ public final class EventMiniEventProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -1232,7 +1230,6 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UserMiniEventProto userMiniEvent = 2;
       private com.lvl6.proto.MiniEventProtos.UserMiniEventProto userMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder> userMiniEventBuilder_;
@@ -1341,7 +1338,7 @@ public final class EventMiniEventProto {
         if (userMiniEventBuilder_ == null) {
           userMiniEventBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MiniEventProtos.UserMiniEventProto, com.lvl6.proto.MiniEventProtos.UserMiniEventProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder>(
-                  userMiniEvent_,
+                  getUserMiniEvent(),
                   getParentForChildren(),
                   isClean());
           userMiniEvent_ = null;
@@ -1349,7 +1346,6 @@ public final class EventMiniEventProto {
         return userMiniEventBuilder_;
       }
 
-      // optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;
       private com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status_ = com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
@@ -1396,10 +1392,10 @@ public final class EventMiniEventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveMiniEventResponseProto)
   }
 
-  public interface UpdateMiniEventRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UpdateMiniEventRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UpdateMiniEventRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -1413,7 +1409,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;
     /**
      * <code>repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;</code>
      */
@@ -1446,8 +1441,9 @@ public final class EventMiniEventProto {
    * </pre>
    */
   public static final class UpdateMiniEventRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UpdateMiniEventRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UpdateMiniEventRequestProto)
+      UpdateMiniEventRequestProtoOrBuilder {
     // Use UpdateMiniEventRequestProto.newBuilder() to construct.
     private UpdateMiniEventRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1557,7 +1553,6 @@ public final class EventMiniEventProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -1579,7 +1574,6 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    // repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;
     public static final int UPDATEDGOALS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> updatedGoals_;
     /**
@@ -1622,7 +1616,8 @@ public final class EventMiniEventProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1740,8 +1735,9 @@ public final class EventMiniEventProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UpdateMiniEventRequestProto)
+        com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniEventProto.internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor;
@@ -1905,7 +1901,6 @@ public final class EventMiniEventProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2014,7 +2009,7 @@ public final class EventMiniEventProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2022,7 +2017,6 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      // repeated .com.lvl6.proto.UserMiniEventGoalProto updatedGoals = 2;
       private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> updatedGoals_ =
         java.util.Collections.emptyList();
       private void ensureUpdatedGoalsIsMutable() {
@@ -2164,7 +2158,8 @@ public final class EventMiniEventProto {
           java.lang.Iterable<? extends com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> values) {
         if (updatedGoalsBuilder_ == null) {
           ensureUpdatedGoalsIsMutable();
-          super.addAll(values, updatedGoals_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedGoals_);
           onChanged();
         } else {
           updatedGoalsBuilder_.addAllMessages(values);
@@ -2273,10 +2268,10 @@ public final class EventMiniEventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateMiniEventRequestProto)
   }
 
-  public interface UpdateMiniEventResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface UpdateMiniEventResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UpdateMiniEventResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -2290,7 +2285,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;
     /**
      * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
      */
@@ -2304,8 +2298,9 @@ public final class EventMiniEventProto {
    * Protobuf type {@code com.lvl6.proto.UpdateMiniEventResponseProto}
    */
   public static final class UpdateMiniEventResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UpdateMiniEventResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UpdateMiniEventResponseProto)
+      UpdateMiniEventResponseProtoOrBuilder {
     // Use UpdateMiniEventResponseProto.newBuilder() to construct.
     private UpdateMiniEventResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2497,7 +2492,6 @@ public final class EventMiniEventProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -2519,7 +2513,6 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status_;
     /**
@@ -2542,7 +2535,8 @@ public final class EventMiniEventProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2656,8 +2650,9 @@ public final class EventMiniEventProto {
      * Protobuf type {@code com.lvl6.proto.UpdateMiniEventResponseProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UpdateMiniEventResponseProto)
+        com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniEventProto.internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor;
@@ -2788,7 +2783,6 @@ public final class EventMiniEventProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -2897,7 +2891,7 @@ public final class EventMiniEventProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -2905,7 +2899,6 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;
       private com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
       /**
        * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
@@ -2952,10 +2945,10 @@ public final class EventMiniEventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateMiniEventResponseProto)
   }
 
-  public interface RedeemMiniEventRewardRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RedeemMiniEventRewardRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RedeemMiniEventRewardRequestProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
@@ -2969,7 +2962,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;
     /**
      * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
      *
@@ -2987,7 +2979,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier getTierRedeemed();
 
-    // optional int32 mefplId = 3;
     /**
      * <code>optional int32 mefplId = 3;</code>
      *
@@ -3005,7 +2996,6 @@ public final class EventMiniEventProto {
      */
     int getMefplId();
 
-    // optional int64 clientTime = 4;
     /**
      * <code>optional int64 clientTime = 4;</code>
      */
@@ -3019,8 +3009,9 @@ public final class EventMiniEventProto {
    * Protobuf type {@code com.lvl6.proto.RedeemMiniEventRewardRequestProto}
    */
   public static final class RedeemMiniEventRewardRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RedeemMiniEventRewardRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RedeemMiniEventRewardRequestProto)
+      RedeemMiniEventRewardRequestProtoOrBuilder {
     // Use RedeemMiniEventRewardRequestProto.newBuilder() to construct.
     private RedeemMiniEventRewardRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3231,7 +3222,6 @@ public final class EventMiniEventProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
@@ -3253,7 +3243,6 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;
     public static final int TIERREDEEMED_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed_;
     /**
@@ -3277,7 +3266,6 @@ public final class EventMiniEventProto {
       return tierRedeemed_;
     }
 
-    // optional int32 mefplId = 3;
     public static final int MEFPLID_FIELD_NUMBER = 3;
     private int mefplId_;
     /**
@@ -3301,7 +3289,6 @@ public final class EventMiniEventProto {
       return mefplId_;
     }
 
-    // optional int64 clientTime = 4;
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
     private long clientTime_;
     /**
@@ -3326,7 +3313,8 @@ public final class EventMiniEventProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3454,8 +3442,9 @@ public final class EventMiniEventProto {
      * Protobuf type {@code com.lvl6.proto.RedeemMiniEventRewardRequestProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RedeemMiniEventRewardRequestProto)
+        com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniEventProto.internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor;
@@ -3604,7 +3593,6 @@ public final class EventMiniEventProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
@@ -3713,7 +3701,7 @@ public final class EventMiniEventProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -3721,7 +3709,6 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;
       private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier.TIER_ONE;
       /**
        * <code>optional .com.lvl6.proto.RedeemMiniEventRewardRequestProto.RewardTier tierRedeemed = 2;</code>
@@ -3773,7 +3760,6 @@ public final class EventMiniEventProto {
         return this;
       }
 
-      // optional int32 mefplId = 3;
       private int mefplId_ ;
       /**
        * <code>optional int32 mefplId = 3;</code>
@@ -3822,7 +3808,6 @@ public final class EventMiniEventProto {
         return this;
       }
 
-      // optional int64 clientTime = 4;
       private long clientTime_ ;
       /**
        * <code>optional int64 clientTime = 4;</code>
@@ -3866,10 +3851,10 @@ public final class EventMiniEventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemMiniEventRewardRequestProto)
   }
 
-  public interface RedeemMiniEventRewardResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RedeemMiniEventRewardResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RedeemMiniEventRewardResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
@@ -3883,7 +3868,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
-    // optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];
     /**
      * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
      */
@@ -3893,7 +3877,6 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus getStatus();
 
-    // optional .com.lvl6.proto.UserRewardProto rewards = 3;
     /**
      * <code>optional .com.lvl6.proto.UserRewardProto rewards = 3;</code>
      */
@@ -3915,8 +3898,9 @@ public final class EventMiniEventProto {
    * </pre>
    */
   public static final class RedeemMiniEventRewardResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RedeemMiniEventRewardResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RedeemMiniEventRewardResponseProto)
+      RedeemMiniEventRewardResponseProtoOrBuilder {
     // Use RedeemMiniEventRewardResponseProto.newBuilder() to construct.
     private RedeemMiniEventRewardResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4121,7 +4105,6 @@ public final class EventMiniEventProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
@@ -4143,7 +4126,6 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
-    // optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status_;
     /**
@@ -4159,7 +4141,6 @@ public final class EventMiniEventProto {
       return status_;
     }
 
-    // optional .com.lvl6.proto.UserRewardProto rewards = 3;
     public static final int REWARDS_FIELD_NUMBER = 3;
     private com.lvl6.proto.RewardsProto.UserRewardProto rewards_;
     /**
@@ -4189,7 +4170,8 @@ public final class EventMiniEventProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4314,8 +4296,9 @@ public final class EventMiniEventProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RedeemMiniEventRewardResponseProto)
+        com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventMiniEventProto.internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor;
@@ -4464,7 +4447,6 @@ public final class EventMiniEventProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
@@ -4573,7 +4555,7 @@ public final class EventMiniEventProto {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
@@ -4581,7 +4563,6 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      // optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];
       private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus.FAIL_OTHER;
       /**
        * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
@@ -4617,7 +4598,6 @@ public final class EventMiniEventProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.UserRewardProto rewards = 3;
       private com.lvl6.proto.RewardsProto.UserRewardProto rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder> rewardsBuilder_;
@@ -4726,7 +4706,7 @@ public final class EventMiniEventProto {
         if (rewardsBuilder_ == null) {
           rewardsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.RewardsProto.UserRewardProto, com.lvl6.proto.RewardsProto.UserRewardProto.Builder, com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder>(
-                  rewards_,
+                  getRewards(),
                   getParentForChildren(),
                   isClean());
           rewards_ = null;
@@ -4745,32 +4725,32 @@ public final class EventMiniEventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RedeemMiniEventRewardResponseProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -4822,49 +4802,13 @@ public final class EventMiniEventProto {
       "OTHER\020\002B\025B\023EventMiniEventProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor,
-              new java.lang.String[] { "Sender", });
-          internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "UserMiniEvent", "Status", });
-          internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UpdatedGoals", });
-          internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", });
-          internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "TierRedeemed", "MefplId", "ClientTime", });
-          internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "Rewards", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -4872,6 +4816,45 @@ public final class EventMiniEventProto {
           com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor,
+        new java.lang.String[] { "Sender", });
+    internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "UserMiniEvent", "Status", });
+    internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UpdatedGoals", });
+    internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RedeemMiniEventRewardRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "TierRedeemed", "MefplId", "ClientTime", });
+    internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RedeemMiniEventRewardResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", "Rewards", });
+    com.lvl6.proto.MiniEventProtos.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

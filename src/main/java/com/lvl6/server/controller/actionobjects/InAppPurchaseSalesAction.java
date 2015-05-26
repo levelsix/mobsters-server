@@ -1,3 +1,4 @@
+
 package com.lvl6.server.controller.actionobjects;
 
 import java.sql.Timestamp;
@@ -22,7 +23,9 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -45,6 +48,7 @@ public class InAppPurchaseSalesAction {
 	private Date now;
 	private String uuid;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	protected InsertUtil insertUtil;
@@ -58,6 +62,7 @@ public class InAppPurchaseSalesAction {
 	private SalesPackage salesPackage;
 	private InAppPurchaseUtils inAppPurchaseUtils;
 	private RewardRetrieveUtils rewardRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 
 	public InAppPurchaseSalesAction() {
@@ -68,6 +73,7 @@ public class InAppPurchaseSalesAction {
 	public InAppPurchaseSalesAction(String userId, User user,
 			JSONObject receiptFromApple, Date now,
 			String uuid, IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
@@ -79,6 +85,7 @@ public class InAppPurchaseSalesAction {
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
 			SalesPackage salesPackage, InAppPurchaseUtils inAppPurchaseUtils,
 			RewardRetrieveUtils rewardRetrieveUtils,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil) {
 		super();
 		this.userId = userId;
@@ -87,6 +94,7 @@ public class InAppPurchaseSalesAction {
 		this.now = now;
 		this.uuid = uuid;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.insertUtil = insertUtil;
@@ -100,6 +108,7 @@ public class InAppPurchaseSalesAction {
 		this.salesPackage = salesPackage;
 		this.inAppPurchaseUtils = inAppPurchaseUtils;
 		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
@@ -113,6 +122,7 @@ public class InAppPurchaseSalesAction {
 	private boolean isBuilderPack;
 	private String packageName;
 	private int salesValue;
+	private double realLifeCashCost;
 
 
 	public void execute(Builder resBuilder) {
@@ -195,7 +205,7 @@ public class InAppPurchaseSalesAction {
 		if(!saleIsWithinTimeConstraints()) {
 			log.error("sales package being bought when outside of start/end times. userId = {} , salespackageId = {}", userId, salesPackage.getId());
 		}
-		
+
 		if (duplicateReceipt) {
 			log.error("user should be buying more expensive sales package! {}",
 					 user);
@@ -246,15 +256,16 @@ public class InAppPurchaseSalesAction {
 			processSalesPackagePurchase(resBuilder);
 			updateIfBeginnerPack();
 
+			realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
 			if(!salesPackageLessThanUserSalesValue()) {
 				updateUserSalesValueAndLastPurchaseTime();
 			}
 			else {
 				success = updateUtil.updateUserSalesValue(userId, 0, now);
 			}
-			
+
 			if (!insertUtil.insertIAPHistoryElem(receiptFromApple, 0,
-					user, salesPackagePrice, salesPackage.getUuid())) {
+					user, realLifeCashCost, salesPackage.getUuid())) {
 				log.error(
 						"problem with logging in-app purchase history for receipt:{} and user {}",
 						receiptFromApple.toString(4), user);
@@ -274,9 +285,12 @@ public class InAppPurchaseSalesAction {
 
 	public void processSalesPackagePurchase(Builder resBuilder) {
 
-		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package", listOfRewards,
-				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
-				monsterLevelInfoRetrieveUtils);
+		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package",
+				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
+				insertUtil, updateUtil, monsterStuffUtils,
+				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
+				rewardRetrieveUtils, userClanRetrieveUtils,
+				createInfoProtoUtils);
 
 		ara.execute();
 
@@ -309,7 +323,7 @@ public class InAppPurchaseSalesAction {
 				return true;
 		}
 		else if(salesValue == 1) {
-			if(salesPackagePrice < 10) {
+			if(salesPackagePrice < 10 || isBuilderPack) {
 				return true;
 			}
 		}

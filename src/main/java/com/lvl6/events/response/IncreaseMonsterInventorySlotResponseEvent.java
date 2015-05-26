@@ -31,5 +31,9 @@ public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEve
 	public IncreaseMonsterInventorySlotResponseProto getIncreaseMonsterInventorySlotResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return increaseMonsterInventorySlotResponseProto.getSerializedSize();
+	}
 
 }

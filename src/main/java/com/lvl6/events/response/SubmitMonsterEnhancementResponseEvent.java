@@ -27,5 +27,9 @@ public class SubmitMonsterEnhancementResponseEvent extends NormalResponseEvent<S
 			SubmitMonsterEnhancementResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return submitMonsterEnhanceResponseProto.getSerializedSize();
+	}
 
 }

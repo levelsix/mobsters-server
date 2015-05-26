@@ -18,7 +18,9 @@ import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGi
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -33,9 +35,11 @@ public class CollectClanGiftsAction {
 	}.getClass().getEnclosingClass());
 
 	private String userId;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtils;
 	private ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtils;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
@@ -52,8 +56,10 @@ public class CollectClanGiftsAction {
 
 
 	public CollectClanGiftsAction(String userId,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtils,
 			ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
@@ -63,9 +69,11 @@ public class CollectClanGiftsAction {
 			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.userId = userId;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.clanGiftForUserRetrieveUtils = clanGiftForUserRetrieveUtils;
-		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.rewardRetrieveUtil = rewardRetrieveUtils;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
@@ -114,7 +122,7 @@ public class CollectClanGiftsAction {
 			return false;
 		}
 
-		rewardIdsToRewards = rewardRetrieveUtils.getRewardIdsToRewards();
+		rewardIdsToRewards = rewardRetrieveUtil.getRewardIdsToRewards();
 
 		if(rewardIdsToRewards == null || rewardIdsToRewards.isEmpty()) {
 			return false;
@@ -135,13 +143,15 @@ public class CollectClanGiftsAction {
 		//give the rewards
 		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, new Date(),
 				reasonForGift, listOfRewards, userRetrieveUtils, itemForUserRetrieveUtil,
-				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils);
+				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtil,
+				userClanRetrieveUtils, createInfoProtoUtils);
 
 		ara.execute();
-		
-		urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(), 
+
+		urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(),
 				ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
-				ara.getOilGained(), null);
+				ara.getOilGained(), ara.getGachaCreditsGained(), null);
 
 		//delete the rows in clan gifts for user
 		boolean success = updateUtil.updateUserClanGiftHasBeenCollected(userId, listOfClanGifts);
@@ -206,11 +216,11 @@ public class CollectClanGiftsAction {
 	}
 
 	public RewardRetrieveUtils getRewardRetrieveUtils() {
-		return rewardRetrieveUtils;
+		return rewardRetrieveUtil;
 	}
 
 	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
-		this.rewardRetrieveUtils = rewardRetrieveUtils;
+		this.rewardRetrieveUtil = rewardRetrieveUtils;
 	}
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {

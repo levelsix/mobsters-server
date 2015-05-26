@@ -27,5 +27,9 @@ public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookI
 			SetFacebookIdResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return setFacebookIdResponseProto.getSerializedSize();
+	}
 
 }

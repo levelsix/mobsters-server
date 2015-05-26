@@ -31,5 +31,9 @@ public class BeginPvpBattleResponseEvent extends NormalResponseEvent<BeginPvpBat
 	public BeginPvpBattleResponseProto getBeginPvpBattleResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return beginPvpBattleResponseProto.getSerializedSize();
+	}
 
 }

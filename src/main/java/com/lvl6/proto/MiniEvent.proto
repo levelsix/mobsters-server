@@ -1,6 +1,8 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Reward.proto";
+
 package com.lvl6.proto;
 
 option java_outer_classname = "MiniEventProtos";
@@ -41,6 +43,7 @@ message MiniEventGoalProto {
 
 		SPIN_BASIC_GRAB = 4;
 		SPIN_ULTIMATE_GRAB = 5;
+		SPIN_MULTI = 23;
 
 		ENHANCE_COMMON = 6;
 		ENHANCE_RARE = 7;
@@ -63,6 +66,8 @@ message MiniEventGoalProto {
 		PVP_CATCH_SUPER = 20;
 		PVP_CATCH_ULTRA = 21;
 		PVP_CATCH_EPIC = 22;
+		
+		//SPIN_MULTI = 23;
 	} 
 }
 
@@ -88,7 +93,7 @@ message MiniEventForPlayerLevelProto {
 message MiniEventTierRewardProto {
 	optional int32 metrId = 1;
 	optional int32 mefplId = 2;
-	optional int32 rewardId = 3;
+	optional RewardProto rewardProto = 3;
 	//tier one, two, or three
 	optional int32 tierLvl = 4;
 }
@@ -98,7 +103,7 @@ message MiniEventTierRewardProto {
 message MiniEventLeaderboardRewardProto {
 	optional int32 melrId = 1;
 	optional int32 miniEventId = 2;
-	optional int32 rewardId = 3;
+	optional RewardProto rewardProto = 3;
 	//minimum position (inclusive)
 	optional int32 leaderboardMinPos = 4;
 }

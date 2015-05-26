@@ -27,5 +27,9 @@ public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent<Record
 			RecordClanRaidStatsResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return recordClanRaidStatsResponseProto.getSerializedSize();
+	}
 
 }

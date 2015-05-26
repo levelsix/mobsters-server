@@ -9,6 +9,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.*;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -42,6 +47,7 @@ import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-spring-application-context.xml")
@@ -79,6 +85,9 @@ public class PurchaseBoosterPackTest {
 
 	@Autowired
 	CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	InsertUtils insertUtils;
 
 	@Resource
 	public void setDataSource(DataSource dataSource) {
@@ -116,6 +125,7 @@ public class PurchaseBoosterPackTest {
 
 		mup = createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user,
 				null);
+
 	}
 
 	@After
@@ -199,4 +209,58 @@ public class PurchaseBoosterPackTest {
 		assertTrue(ifuList.size() == 14);
 		assertTrue(user2.getNumBeginnerSalesPurchased() == 1);
 	}
+
+	@Test
+	public void testPurchaseBoosterPacks() {
+		User user1 = userRetrieveUtil.getUserById(userId);
+		int userCash1 = user1.getCash();
+		int userOil1 = user1.getOil();
+		int userGems1 = user1.getGems();
+		List<MonsterForUser> mfuList1 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
+		
+		PurchaseBoosterPackRequestProto.Builder pbprp = PurchaseBoosterPackRequestProto
+				.newBuilder();
+		pbprp.setSender(mup);
+		pbprp.setBoosterPackId(1);
+		pbprp.setClientTime(new Date().getTime());
+		pbprp.setDailyFreeBoosterPack(false);
+		pbprp.setBuyingInBulk(false);
+		
+		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
+		pbpre.setTag(1);
+		pbpre.setPurchaseBoosterPackRequestProto(pbprp.build());
+		purchaseBoosterPackController.handleEvent(pbpre);
+
+		User user2 = userRetrieveUtil.getUserById(user.getId());
+		
+		List<MonsterForUser> mfuList2 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
+		
+		assertTrue(mfuList1.size() + 1 == mfuList2.size());
+		assertTrue(userGems1 - 20 == user2.getGems());
+		
+		//test buying in bulk
+		PurchaseBoosterPackRequestProto.Builder pbprp2 = PurchaseBoosterPackRequestProto
+				.newBuilder();
+		pbprp2.setSender(mup);
+		pbprp2.setBoosterPackId(2);
+		pbprp2.setClientTime(new Date().getTime());
+		pbprp2.setDailyFreeBoosterPack(false);
+		pbprp2.setBuyingInBulk(true);
+
+		PurchaseBoosterPackRequestEvent pbpre2 = new PurchaseBoosterPackRequestEvent();
+		pbpre2.setTag(1);
+		pbpre2.setPurchaseBoosterPackRequestProto(pbprp2.build());
+		purchaseBoosterPackController.handleEvent(pbpre2);
+
+		User user3 = userRetrieveUtil.getUserById(user.getId());
+
+		List<MonsterForUser> mfuList3 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
+
+		assertTrue(mfuList3.size() == mfuList2.size() + 11);
+		assertTrue(user2.getGems() - 400 == user3.getGems());
+
+		
+		
+	}
+
 }

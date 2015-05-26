@@ -108,10 +108,10 @@ public final class InAppPurchaseProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EarnFreeDiamondsType)
   }
 
-  public interface InAppPurchasePackageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface InAppPurchasePackageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.InAppPurchasePackageProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string iapPackageId = 1;
     /**
      * <code>optional string iapPackageId = 1;</code>
      */
@@ -126,7 +126,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getIapPackageIdBytes();
 
-    // optional int32 currencyAmount = 2;
     /**
      * <code>optional int32 currencyAmount = 2;</code>
      */
@@ -136,7 +135,6 @@ public final class InAppPurchaseProto {
      */
     int getCurrencyAmount();
 
-    // optional string imageName = 3;
     /**
      * <code>optional string imageName = 3;</code>
      */
@@ -151,7 +149,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getImageNameBytes();
 
-    // optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;
     /**
      * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
      */
@@ -165,8 +162,9 @@ public final class InAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.InAppPurchasePackageProto}
    */
   public static final class InAppPurchasePackageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements InAppPurchasePackageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.InAppPurchasePackageProto)
+      InAppPurchasePackageProtoOrBuilder {
     // Use InAppPurchasePackageProto.newBuilder() to construct.
     private InAppPurchasePackageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -213,8 +211,9 @@ public final class InAppPurchaseProto {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              iapPackageId_ = input.readBytes();
+              iapPackageId_ = bs;
               break;
             }
             case 16: {
@@ -223,8 +222,9 @@ public final class InAppPurchaseProto {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              imageName_ = input.readBytes();
+              imageName_ = bs;
               break;
             }
             case 32: {
@@ -310,6 +310,10 @@ public final class InAppPurchaseProto {
        * <code>STARTER_BUILDER_PACK = 7;</code>
        */
       STARTER_BUILDER_PACK(6, 7),
+      /**
+       * <code>GACHA_MULTI_SPIN = 8;</code>
+       */
+      GACHA_MULTI_SPIN(7, 8),
       ;
 
       /**
@@ -340,6 +344,10 @@ public final class InAppPurchaseProto {
        * <code>STARTER_BUILDER_PACK = 7;</code>
        */
       public static final int STARTER_BUILDER_PACK_VALUE = 7;
+      /**
+       * <code>GACHA_MULTI_SPIN = 8;</code>
+       */
+      public static final int GACHA_MULTI_SPIN_VALUE = 8;
 
 
       public final int getNumber() { return value; }
@@ -353,6 +361,7 @@ public final class InAppPurchaseProto {
           case 5: return SALE;
           case 6: return BUILDER_PACK;
           case 7: return STARTER_BUILDER_PACK;
+          case 8: return GACHA_MULTI_SPIN;
           default: return null;
         }
       }
@@ -405,7 +414,6 @@ public final class InAppPurchaseProto {
     }
 
     private int bitField0_;
-    // optional string iapPackageId = 1;
     public static final int IAPPACKAGEID_FIELD_NUMBER = 1;
     private java.lang.Object iapPackageId_;
     /**
@@ -448,7 +456,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional int32 currencyAmount = 2;
     public static final int CURRENCYAMOUNT_FIELD_NUMBER = 2;
     private int currencyAmount_;
     /**
@@ -464,7 +471,6 @@ public final class InAppPurchaseProto {
       return currencyAmount_;
     }
 
-    // optional string imageName = 3;
     public static final int IMAGENAME_FIELD_NUMBER = 3;
     private java.lang.Object imageName_;
     /**
@@ -507,7 +513,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;
     public static final int IAPPACKAGETYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType_;
     /**
@@ -532,7 +537,8 @@ public final class InAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -660,8 +666,9 @@ public final class InAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.InAppPurchasePackageProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.InAppPurchasePackageProto)
+        com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.InAppPurchaseProto.internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor;
@@ -805,7 +812,6 @@ public final class InAppPurchaseProto {
       }
       private int bitField0_;
 
-      // optional string iapPackageId = 1;
       private java.lang.Object iapPackageId_ = "";
       /**
        * <code>optional string iapPackageId = 1;</code>
@@ -819,9 +825,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getIapPackageId() {
         java.lang.Object ref = iapPackageId_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          iapPackageId_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            iapPackageId_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -879,7 +888,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional int32 currencyAmount = 2;
       private int currencyAmount_ ;
       /**
        * <code>optional int32 currencyAmount = 2;</code>
@@ -912,7 +920,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string imageName = 3;
       private java.lang.Object imageName_ = "";
       /**
        * <code>optional string imageName = 3;</code>
@@ -926,9 +933,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getImageName() {
         java.lang.Object ref = imageName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          imageName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imageName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -986,7 +996,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;
       private com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType_ = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.InAppPurchasePackageType.NO_IN_APP_PURCHASE_PACKAGE_TYPE;
       /**
        * <code>optional .com.lvl6.proto.InAppPurchasePackageProto.InAppPurchasePackageType iapPackageType = 4;</code>
@@ -1033,10 +1042,10 @@ public final class InAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.InAppPurchasePackageProto)
   }
 
-  public interface GoldSaleProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface GoldSaleProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GoldSaleProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 saleId = 1;
     /**
      * <code>optional int32 saleId = 1;</code>
      */
@@ -1046,7 +1055,6 @@ public final class InAppPurchaseProto {
      */
     int getSaleId();
 
-    // optional int64 startDate = 2;
     /**
      * <code>optional int64 startDate = 2;</code>
      */
@@ -1056,7 +1064,6 @@ public final class InAppPurchaseProto {
      */
     long getStartDate();
 
-    // optional int64 endDate = 3;
     /**
      * <code>optional int64 endDate = 3;</code>
      */
@@ -1066,7 +1073,6 @@ public final class InAppPurchaseProto {
      */
     long getEndDate();
 
-    // optional string package1SaleIdentifier = 4;
     /**
      * <code>optional string package1SaleIdentifier = 4;</code>
      */
@@ -1081,7 +1087,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackage1SaleIdentifierBytes();
 
-    // optional string package2SaleIdentifier = 5;
     /**
      * <code>optional string package2SaleIdentifier = 5;</code>
      */
@@ -1096,7 +1101,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackage2SaleIdentifierBytes();
 
-    // optional string package3SaleIdentifier = 6;
     /**
      * <code>optional string package3SaleIdentifier = 6;</code>
      */
@@ -1111,7 +1115,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackage3SaleIdentifierBytes();
 
-    // optional string package4SaleIdentifier = 7;
     /**
      * <code>optional string package4SaleIdentifier = 7;</code>
      */
@@ -1126,7 +1129,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackage4SaleIdentifierBytes();
 
-    // optional string package5SaleIdentifier = 8;
     /**
      * <code>optional string package5SaleIdentifier = 8;</code>
      */
@@ -1141,7 +1143,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackage5SaleIdentifierBytes();
 
-    // optional string goldShoppeImageName = 9;
     /**
      * <code>optional string goldShoppeImageName = 9;</code>
      */
@@ -1156,7 +1157,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getGoldShoppeImageNameBytes();
 
-    // optional string goldBarImageName = 10;
     /**
      * <code>optional string goldBarImageName = 10;</code>
      */
@@ -1171,7 +1171,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getGoldBarImageNameBytes();
 
-    // optional string packageS1SaleIdentifier = 11;
     /**
      * <code>optional string packageS1SaleIdentifier = 11;</code>
      */
@@ -1186,7 +1185,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackageS1SaleIdentifierBytes();
 
-    // optional string packageS2SaleIdentifier = 12;
     /**
      * <code>optional string packageS2SaleIdentifier = 12;</code>
      */
@@ -1201,7 +1199,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackageS2SaleIdentifierBytes();
 
-    // optional string packageS3SaleIdentifier = 13;
     /**
      * <code>optional string packageS3SaleIdentifier = 13;</code>
      */
@@ -1216,7 +1213,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackageS3SaleIdentifierBytes();
 
-    // optional string packageS4SaleIdentifier = 14;
     /**
      * <code>optional string packageS4SaleIdentifier = 14;</code>
      */
@@ -1231,7 +1227,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackageS4SaleIdentifierBytes();
 
-    // optional string packageS5SaleIdentifier = 15;
     /**
      * <code>optional string packageS5SaleIdentifier = 15;</code>
      */
@@ -1246,7 +1241,6 @@ public final class InAppPurchaseProto {
     com.google.protobuf.ByteString
         getPackageS5SaleIdentifierBytes();
 
-    // optional bool isBeginnerSale = 16;
     /**
      * <code>optional bool isBeginnerSale = 16;</code>
      */
@@ -1260,8 +1254,9 @@ public final class InAppPurchaseProto {
    * Protobuf type {@code com.lvl6.proto.GoldSaleProto}
    */
   public static final class GoldSaleProto extends
-      com.google.protobuf.GeneratedMessage
-      implements GoldSaleProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GoldSaleProto)
+      GoldSaleProtoOrBuilder {
     // Use GoldSaleProto.newBuilder() to construct.
     private GoldSaleProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1323,63 +1318,75 @@ public final class InAppPurchaseProto {
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              package1SaleIdentifier_ = input.readBytes();
+              package1SaleIdentifier_ = bs;
               break;
             }
             case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              package2SaleIdentifier_ = input.readBytes();
+              package2SaleIdentifier_ = bs;
               break;
             }
             case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              package3SaleIdentifier_ = input.readBytes();
+              package3SaleIdentifier_ = bs;
               break;
             }
             case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000040;
-              package4SaleIdentifier_ = input.readBytes();
+              package4SaleIdentifier_ = bs;
               break;
             }
             case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
-              package5SaleIdentifier_ = input.readBytes();
+              package5SaleIdentifier_ = bs;
               break;
             }
             case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000100;
-              goldShoppeImageName_ = input.readBytes();
+              goldShoppeImageName_ = bs;
               break;
             }
             case 82: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
-              goldBarImageName_ = input.readBytes();
+              goldBarImageName_ = bs;
               break;
             }
             case 90: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000400;
-              packageS1SaleIdentifier_ = input.readBytes();
+              packageS1SaleIdentifier_ = bs;
               break;
             }
             case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000800;
-              packageS2SaleIdentifier_ = input.readBytes();
+              packageS2SaleIdentifier_ = bs;
               break;
             }
             case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00001000;
-              packageS3SaleIdentifier_ = input.readBytes();
+              packageS3SaleIdentifier_ = bs;
               break;
             }
             case 114: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00002000;
-              packageS4SaleIdentifier_ = input.readBytes();
+              packageS4SaleIdentifier_ = bs;
               break;
             }
             case 122: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00004000;
-              packageS5SaleIdentifier_ = input.readBytes();
+              packageS5SaleIdentifier_ = bs;
               break;
             }
             case 128: {
@@ -1427,7 +1434,6 @@ public final class InAppPurchaseProto {
     }
 
     private int bitField0_;
-    // optional int32 saleId = 1;
     public static final int SALEID_FIELD_NUMBER = 1;
     private int saleId_;
     /**
@@ -1443,7 +1449,6 @@ public final class InAppPurchaseProto {
       return saleId_;
     }
 
-    // optional int64 startDate = 2;
     public static final int STARTDATE_FIELD_NUMBER = 2;
     private long startDate_;
     /**
@@ -1459,7 +1464,6 @@ public final class InAppPurchaseProto {
       return startDate_;
     }
 
-    // optional int64 endDate = 3;
     public static final int ENDDATE_FIELD_NUMBER = 3;
     private long endDate_;
     /**
@@ -1475,7 +1479,6 @@ public final class InAppPurchaseProto {
       return endDate_;
     }
 
-    // optional string package1SaleIdentifier = 4;
     public static final int PACKAGE1SALEIDENTIFIER_FIELD_NUMBER = 4;
     private java.lang.Object package1SaleIdentifier_;
     /**
@@ -1518,7 +1521,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string package2SaleIdentifier = 5;
     public static final int PACKAGE2SALEIDENTIFIER_FIELD_NUMBER = 5;
     private java.lang.Object package2SaleIdentifier_;
     /**
@@ -1561,7 +1563,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string package3SaleIdentifier = 6;
     public static final int PACKAGE3SALEIDENTIFIER_FIELD_NUMBER = 6;
     private java.lang.Object package3SaleIdentifier_;
     /**
@@ -1604,7 +1605,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string package4SaleIdentifier = 7;
     public static final int PACKAGE4SALEIDENTIFIER_FIELD_NUMBER = 7;
     private java.lang.Object package4SaleIdentifier_;
     /**
@@ -1647,7 +1647,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string package5SaleIdentifier = 8;
     public static final int PACKAGE5SALEIDENTIFIER_FIELD_NUMBER = 8;
     private java.lang.Object package5SaleIdentifier_;
     /**
@@ -1690,7 +1689,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string goldShoppeImageName = 9;
     public static final int GOLDSHOPPEIMAGENAME_FIELD_NUMBER = 9;
     private java.lang.Object goldShoppeImageName_;
     /**
@@ -1733,7 +1731,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string goldBarImageName = 10;
     public static final int GOLDBARIMAGENAME_FIELD_NUMBER = 10;
     private java.lang.Object goldBarImageName_;
     /**
@@ -1776,7 +1773,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string packageS1SaleIdentifier = 11;
     public static final int PACKAGES1SALEIDENTIFIER_FIELD_NUMBER = 11;
     private java.lang.Object packageS1SaleIdentifier_;
     /**
@@ -1819,7 +1815,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string packageS2SaleIdentifier = 12;
     public static final int PACKAGES2SALEIDENTIFIER_FIELD_NUMBER = 12;
     private java.lang.Object packageS2SaleIdentifier_;
     /**
@@ -1862,7 +1857,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string packageS3SaleIdentifier = 13;
     public static final int PACKAGES3SALEIDENTIFIER_FIELD_NUMBER = 13;
     private java.lang.Object packageS3SaleIdentifier_;
     /**
@@ -1905,7 +1899,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string packageS4SaleIdentifier = 14;
     public static final int PACKAGES4SALEIDENTIFIER_FIELD_NUMBER = 14;
     private java.lang.Object packageS4SaleIdentifier_;
     /**
@@ -1948,7 +1941,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional string packageS5SaleIdentifier = 15;
     public static final int PACKAGES5SALEIDENTIFIER_FIELD_NUMBER = 15;
     private java.lang.Object packageS5SaleIdentifier_;
     /**
@@ -1991,7 +1983,6 @@ public final class InAppPurchaseProto {
       }
     }
 
-    // optional bool isBeginnerSale = 16;
     public static final int ISBEGINNERSALE_FIELD_NUMBER = 16;
     private boolean isBeginnerSale_;
     /**
@@ -2028,7 +2019,8 @@ public final class InAppPurchaseProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2240,8 +2232,9 @@ public final class InAppPurchaseProto {
      * Protobuf type {@code com.lvl6.proto.GoldSaleProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GoldSaleProto)
+        com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.InAppPurchaseProto.internal_static_com_lvl6_proto_GoldSaleProto_descriptor;
@@ -2513,7 +2506,6 @@ public final class InAppPurchaseProto {
       }
       private int bitField0_;
 
-      // optional int32 saleId = 1;
       private int saleId_ ;
       /**
        * <code>optional int32 saleId = 1;</code>
@@ -2546,7 +2538,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional int64 startDate = 2;
       private long startDate_ ;
       /**
        * <code>optional int64 startDate = 2;</code>
@@ -2579,7 +2570,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional int64 endDate = 3;
       private long endDate_ ;
       /**
        * <code>optional int64 endDate = 3;</code>
@@ -2612,7 +2602,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string package1SaleIdentifier = 4;
       private java.lang.Object package1SaleIdentifier_ = "";
       /**
        * <code>optional string package1SaleIdentifier = 4;</code>
@@ -2626,9 +2615,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackage1SaleIdentifier() {
         java.lang.Object ref = package1SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          package1SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            package1SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2686,7 +2678,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string package2SaleIdentifier = 5;
       private java.lang.Object package2SaleIdentifier_ = "";
       /**
        * <code>optional string package2SaleIdentifier = 5;</code>
@@ -2700,9 +2691,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackage2SaleIdentifier() {
         java.lang.Object ref = package2SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          package2SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            package2SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2760,7 +2754,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string package3SaleIdentifier = 6;
       private java.lang.Object package3SaleIdentifier_ = "";
       /**
        * <code>optional string package3SaleIdentifier = 6;</code>
@@ -2774,9 +2767,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackage3SaleIdentifier() {
         java.lang.Object ref = package3SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          package3SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            package3SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2834,7 +2830,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string package4SaleIdentifier = 7;
       private java.lang.Object package4SaleIdentifier_ = "";
       /**
        * <code>optional string package4SaleIdentifier = 7;</code>
@@ -2848,9 +2843,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackage4SaleIdentifier() {
         java.lang.Object ref = package4SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          package4SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            package4SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2908,7 +2906,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string package5SaleIdentifier = 8;
       private java.lang.Object package5SaleIdentifier_ = "";
       /**
        * <code>optional string package5SaleIdentifier = 8;</code>
@@ -2922,9 +2919,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackage5SaleIdentifier() {
         java.lang.Object ref = package5SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          package5SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            package5SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2982,7 +2982,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string goldShoppeImageName = 9;
       private java.lang.Object goldShoppeImageName_ = "";
       /**
        * <code>optional string goldShoppeImageName = 9;</code>
@@ -2996,9 +2995,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getGoldShoppeImageName() {
         java.lang.Object ref = goldShoppeImageName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          goldShoppeImageName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            goldShoppeImageName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3056,7 +3058,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string goldBarImageName = 10;
       private java.lang.Object goldBarImageName_ = "";
       /**
        * <code>optional string goldBarImageName = 10;</code>
@@ -3070,9 +3071,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getGoldBarImageName() {
         java.lang.Object ref = goldBarImageName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          goldBarImageName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            goldBarImageName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3130,7 +3134,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string packageS1SaleIdentifier = 11;
       private java.lang.Object packageS1SaleIdentifier_ = "";
       /**
        * <code>optional string packageS1SaleIdentifier = 11;</code>
@@ -3144,9 +3147,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackageS1SaleIdentifier() {
         java.lang.Object ref = packageS1SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          packageS1SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            packageS1SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3204,7 +3210,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string packageS2SaleIdentifier = 12;
       private java.lang.Object packageS2SaleIdentifier_ = "";
       /**
        * <code>optional string packageS2SaleIdentifier = 12;</code>
@@ -3218,9 +3223,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackageS2SaleIdentifier() {
         java.lang.Object ref = packageS2SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          packageS2SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            packageS2SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3278,7 +3286,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string packageS3SaleIdentifier = 13;
       private java.lang.Object packageS3SaleIdentifier_ = "";
       /**
        * <code>optional string packageS3SaleIdentifier = 13;</code>
@@ -3292,9 +3299,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackageS3SaleIdentifier() {
         java.lang.Object ref = packageS3SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          packageS3SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            packageS3SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3352,7 +3362,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string packageS4SaleIdentifier = 14;
       private java.lang.Object packageS4SaleIdentifier_ = "";
       /**
        * <code>optional string packageS4SaleIdentifier = 14;</code>
@@ -3366,9 +3375,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackageS4SaleIdentifier() {
         java.lang.Object ref = packageS4SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          packageS4SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            packageS4SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3426,7 +3438,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional string packageS5SaleIdentifier = 15;
       private java.lang.Object packageS5SaleIdentifier_ = "";
       /**
        * <code>optional string packageS5SaleIdentifier = 15;</code>
@@ -3440,9 +3451,12 @@ public final class InAppPurchaseProto {
       public java.lang.String getPackageS5SaleIdentifier() {
         java.lang.Object ref = packageS5SaleIdentifier_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          packageS5SaleIdentifier_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            packageS5SaleIdentifier_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3500,7 +3514,6 @@ public final class InAppPurchaseProto {
         return this;
       }
 
-      // optional bool isBeginnerSale = 16;
       private boolean isBeginnerSale_ ;
       /**
        * <code>optional bool isBeginnerSale = 16;</code>
@@ -3544,12 +3557,12 @@ public final class InAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GoldSaleProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InAppPurchasePackageProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_GoldSaleProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3563,56 +3576,56 @@ public final class InAppPurchaseProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\334\002" +
+      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\362\002" +
       "\n\031InAppPurchasePackageProto\022\024\n\014iapPackag" +
       "eId\030\001 \001(\t\022\026\n\016currencyAmount\030\002 \001(\005\022\021\n\tima" +
       "geName\030\003 \001(\t\022Z\n\016iapPackageType\030\004 \001(\0162B.c" +
       "om.lvl6.proto.InAppPurchasePackageProto." +
-      "InAppPurchasePackageType\"\241\001\n\030InAppPurcha" +
+      "InAppPurchasePackageType\"\267\001\n\030InAppPurcha" +
       "sePackageType\022#\n\037NO_IN_APP_PURCHASE_PACK" +
       "AGE_TYPE\020\004\022\010\n\004GEMS\020\001\022\020\n\014STARTER_PACK\020\002\022\016" +
       "\n\nMONEY_TREE\020\003\022\010\n\004SALE\020\005\022\020\n\014BUILDER_PACK" +
-      "\020\006\022\030\n\024STARTER_BUILDER_PACK\020\007\"\327\003\n\rGoldSal",
-      "eProto\022\016\n\006saleId\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(" +
-      "\003\022\017\n\007endDate\030\003 \001(\003\022\036\n\026package1SaleIdenti" +
-      "fier\030\004 \001(\t\022\036\n\026package2SaleIdentifier\030\005 \001" +
-      "(\t\022\036\n\026package3SaleIdentifier\030\006 \001(\t\022\036\n\026pa" +
-      "ckage4SaleIdentifier\030\007 \001(\t\022\036\n\026package5Sa" +
-      "leIdentifier\030\010 \001(\t\022\033\n\023goldShoppeImageNam" +
-      "e\030\t \001(\t\022\030\n\020goldBarImageName\030\n \001(\t\022\037\n\027pac" +
-      "kageS1SaleIdentifier\030\013 \001(\t\022\037\n\027packageS2S" +
-      "aleIdentifier\030\014 \001(\t\022\037\n\027packageS3SaleIden" +
-      "tifier\030\r \001(\t\022\037\n\027packageS4SaleIdentifier\030",
-      "\016 \001(\t\022\037\n\027packageS5SaleIdentifier\030\017 \001(\t\022\026" +
-      "\n\016isBeginnerSale\030\020 \001(\010*Q\n\024EarnFreeDiamon" +
-      "dsType\022\016\n\nFB_CONNECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FL" +
-      "URRY_VIDEO\020\003\022\013\n\007TWITTER\020\004B\024B\022InAppPurcha" +
-      "seProto"
+      "\020\006\022\030\n\024STARTER_BUILDER_PACK\020\007\022\024\n\020GACHA_MU",
+      "LTI_SPIN\020\010\"\327\003\n\rGoldSaleProto\022\016\n\006saleId\030\001" +
+      " \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007endDate\030\003 \001(\003" +
+      "\022\036\n\026package1SaleIdentifier\030\004 \001(\t\022\036\n\026pack" +
+      "age2SaleIdentifier\030\005 \001(\t\022\036\n\026package3Sale" +
+      "Identifier\030\006 \001(\t\022\036\n\026package4SaleIdentifi" +
+      "er\030\007 \001(\t\022\036\n\026package5SaleIdentifier\030\010 \001(\t" +
+      "\022\033\n\023goldShoppeImageName\030\t \001(\t\022\030\n\020goldBar" +
+      "ImageName\030\n \001(\t\022\037\n\027packageS1SaleIdentifi" +
+      "er\030\013 \001(\t\022\037\n\027packageS2SaleIdentifier\030\014 \001(" +
+      "\t\022\037\n\027packageS3SaleIdentifier\030\r \001(\t\022\037\n\027pa",
+      "ckageS4SaleIdentifier\030\016 \001(\t\022\037\n\027packageS5" +
+      "SaleIdentifier\030\017 \001(\t\022\026\n\016isBeginnerSale\030\020" +
+      " \001(\010*Q\n\024EarnFreeDiamondsType\022\016\n\nFB_CONNE" +
+      "CT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_VIDEO\020\003\022\013\n\007TW" +
+      "ITTER\020\004B\024B\022InAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_InAppPurchasePackageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor,
-              new java.lang.String[] { "IapPackageId", "CurrencyAmount", "ImageName", "IapPackageType", });
-          internal_static_com_lvl6_proto_GoldSaleProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_GoldSaleProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_GoldSaleProto_descriptor,
-              new java.lang.String[] { "SaleId", "StartDate", "EndDate", "Package1SaleIdentifier", "Package2SaleIdentifier", "Package3SaleIdentifier", "Package4SaleIdentifier", "Package5SaleIdentifier", "GoldShoppeImageName", "GoldBarImageName", "PackageS1SaleIdentifier", "PackageS2SaleIdentifier", "PackageS3SaleIdentifier", "PackageS4SaleIdentifier", "PackageS5SaleIdentifier", "IsBeginnerSale", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_InAppPurchasePackageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor,
+        new java.lang.String[] { "IapPackageId", "CurrencyAmount", "ImageName", "IapPackageType", });
+    internal_static_com_lvl6_proto_GoldSaleProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_GoldSaleProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_GoldSaleProto_descriptor,
+        new java.lang.String[] { "SaleId", "StartDate", "EndDate", "Package1SaleIdentifier", "Package2SaleIdentifier", "Package3SaleIdentifier", "Package4SaleIdentifier", "Package5SaleIdentifier", "GoldShoppeImageName", "GoldBarImageName", "PackageS1SaleIdentifier", "PackageS2SaleIdentifier", "PackageS3SaleIdentifier", "PackageS4SaleIdentifier", "PackageS5SaleIdentifier", "IsBeginnerSale", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

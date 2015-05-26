@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,6 +22,7 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -44,6 +46,7 @@ public class AwardRewardAction {
 	private MonsterStuffUtils monsterStuffUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtil; //only here because of recursive rewards
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -55,7 +58,11 @@ public class AwardRewardAction {
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			MonsterStuffUtils monsterStuffUtils,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			RewardRetrieveUtils rewardRetrieveUtil,
+			UserClanRetrieveUtils2 userClanRetrieveUtils,
+			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.userId = userId;
 		this.u = u;
@@ -70,6 +77,10 @@ public class AwardRewardAction {
 		this.updateUtil = updateUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.rewardRetrieveUtil = rewardRetrieveUtil;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -92,6 +103,7 @@ public class AwardRewardAction {
 	private int gemsGained = 0;
 	private int cashGained = 0;
 	private int oilGained = 0;
+	private int gachaCreditsGained = 0;
 	private Map<String, Integer> currencyDeltas;
 	private Map<String, Integer> prevCurrencies;
 	private Map<String, Integer> curCurrencies;
@@ -141,6 +153,10 @@ public class AwardRewardAction {
 //		return true;
 //	}
 
+	protected int gemsGainedTemp = 0;
+	protected int cashGainedTemp = 0;
+	protected int oilGainedTemp = 0;
+	protected int gachaCreditsGainedTemp = 0;
 	private boolean writeChangesToDB() {
 
 		//aggregate like Rewards
@@ -149,10 +165,6 @@ public class AwardRewardAction {
 		Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity =
 				new HashMap<Integer, Map<Integer, Integer>>();
 		Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-		int gemsGainedTemp = 0;
-		int cashGainedTemp = 0;
-		int oilGainedTemp = 0;
-
 
 		Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt =
 				new HashMap<String, Map<Integer,Integer>>();
@@ -162,62 +174,25 @@ public class AwardRewardAction {
 			int staticDataId = r.getStaticDataId();
 			int amt = r.getAmt();  //amount means nothing for clan gifts
 
-			if(RewardType.CLAN_GIFT.name().equals(type)) {
-				acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift", 
-						clanGiftRewardsRetrieveUtils, userClanRetrieveUtils, 
-						insertUtil, createInfoProtoUtils);
-				
-			} else if (RewardType.ITEM.name().equals(type)) {
-				aggregateItems(itemIdToQuantity, staticDataId, amt);
+			if (RewardType.REWARD.name().equals(type)) {
+				log.info("recursive reward: old={}", r);
 
-			} else if (RewardType.GEMS.name().equals(type)) {
-
-				gemsGainedTemp += amt;
-
-			} else if (RewardType.CASH.name().equals(type)) {
-				cashGainedTemp += amt;
-
-			} else if (RewardType.OIL.name().equals(type)) {
-				oilGainedTemp += amt;
-
-			} else if (RewardType.MONSTER.name().equals(type)) {
-
-				aggregateMonsters(r, staticDataId, amt, monsterIdToQuantity,
-						monsterIdToLvlToQuantity);
-
+				Reward actualReward = rewardRetrieveUtil.getRewardById(staticDataId);
+				int actualRewardId = actualReward.getId();
+				String actualType = actualReward.getType();
+				int actualRewardStaticDataId = actualReward.getStaticDataId();
+				int actualRewardAmt = actualReward.getAmt();
+				for (int i = 0; i < amt; i++) {
+					processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
+							itemIdToQuantity, resourceTypeToRewardIdToAmt, actualReward,
+							actualRewardId, actualType, actualRewardStaticDataId,
+							actualRewardAmt);
+				}
 			} else {
-				log.warn("no implementation for awarding {}", r);
+				processReward(monsterIdToQuantity, monsterIdToLvlToQuantity,
+						itemIdToQuantity, resourceTypeToRewardIdToAmt, r, id, type,
+						staticDataId, amt);
 			}
-
-			//following logic is for currency history purposes
-			if (RewardType.GEMS.name().equals(type) ||
-				RewardType.CASH.name().equals(type) ||
-				RewardType.OIL.name().equals(type))
-			{
-				String currencyType = null;
-				if (type.equalsIgnoreCase(MiscMethods.gems)) {
-					currencyType = MiscMethods.gems;
-				} else if (type.equalsIgnoreCase(MiscMethods.cash)) {
-					currencyType = MiscMethods.cash;
-				} else if (type.equalsIgnoreCase(MiscMethods.oil)) {
-					currencyType = MiscMethods.oil;
-				}
-
-				if (!resourceTypeToRewardIdToAmt.containsKey(type)) {
-					resourceTypeToRewardIdToAmt.put(
-							currencyType, new HashMap<Integer, Integer>());
-				}
-
-				Map<Integer, Integer> rewardIdToAmt =
-						resourceTypeToRewardIdToAmt.get(currencyType);
-				int existing = 0;
-				if (rewardIdToAmt.containsKey(id))
-				{
-					existing = rewardIdToAmt.get(id);
-				}
-				rewardIdToAmt.put(id, existing + amt);
-			}
-
 		}
 
 		boolean success = awardItems(itemIdToQuantity);
@@ -225,13 +200,90 @@ public class AwardRewardAction {
 			return false;
 		}
 		success = awardCurrency(gemsGainedTemp, cashGainedTemp, oilGainedTemp,
-				resourceTypeToRewardIdToAmt);
+				gachaCreditsGainedTemp, resourceTypeToRewardIdToAmt);
 		if (!success) {
 			return false;
 		}
 		success = awardMonsters(monsterIdToQuantity, monsterIdToLvlToQuantity);
+		if(!success) {
+			log.error("error awarding monsters for userId {}", userId);
+		}
+
+		//save to reward history
+		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), rewards, awardReason);
+		if(!success) {
+			log.error("error saving to user reward history for userId {}", userId);
+		}
 
 		return true;
+	}
+
+	private void processReward(Map<Integer, Integer> monsterIdToQuantity,
+			Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity,
+			Map<Integer, Integer> itemIdToQuantity,
+			Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt,
+			Reward r, int id, String type, int staticDataId, int amt)
+	{
+		if(RewardType.CLAN_GIFT.name().equals(type)) {
+			acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift",
+					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
+					insertUtil, createInfoProtoUtils);
+
+		} else if (RewardType.ITEM.name().equals(type)) {
+			aggregateItems(itemIdToQuantity, staticDataId, amt);
+
+		} else if (RewardType.GEMS.name().equals(type)) {
+			gemsGainedTemp += amt;
+
+		} else if (RewardType.CASH.name().equals(type)) {
+			cashGainedTemp += amt;
+
+		} else if (RewardType.OIL.name().equals(type)) {
+			oilGainedTemp += amt;
+
+		} else if (RewardType.GACHA_CREDITS.name().equals(type)) {
+			gachaCreditsGainedTemp += amt;
+
+		} else if (RewardType.MONSTER.name().equals(type)) {
+			aggregateMonsters(r, staticDataId, amt, monsterIdToQuantity,
+					monsterIdToLvlToQuantity);
+
+		} else {
+			log.warn("no implementation for awarding {}", r);
+			return;
+		}
+
+		//following logic is for currency history purposes
+		if (RewardType.GEMS.name().equals(type) ||
+			RewardType.CASH.name().equals(type) ||
+			RewardType.OIL.name().equals(type) ||
+			RewardType.GACHA_CREDITS.name().equals(type))
+		{
+			String currencyType = null;
+			if (type.equalsIgnoreCase(MiscMethods.gems)) {
+				currencyType = MiscMethods.gems;
+			} else if (type.equalsIgnoreCase(MiscMethods.cash)) {
+				currencyType = MiscMethods.cash;
+			} else if (type.equalsIgnoreCase(MiscMethods.oil)) {
+				currencyType = MiscMethods.oil;
+			} else if (type.equalsIgnoreCase(MiscMethods.gachaCredits)) {
+				currencyType = MiscMethods.gachaCredits;
+			}
+
+			if (!resourceTypeToRewardIdToAmt.containsKey(type)) {
+				resourceTypeToRewardIdToAmt.put(
+						currencyType, new HashMap<Integer, Integer>());
+			}
+
+			Map<Integer, Integer> rewardIdToAmt =
+					resourceTypeToRewardIdToAmt.get(currencyType);
+			int existing = 0;
+			if (rewardIdToAmt.containsKey(id))
+			{
+				existing = rewardIdToAmt.get(id);
+			}
+			rewardIdToAmt.put(id, existing + amt);
+		}
 	}
 
 	private void aggregateItems(Map<Integer, Integer> itemIdToQuantity,
@@ -327,13 +379,14 @@ public class AwardRewardAction {
 	}
 
 	private boolean awardCurrency(int gemsGainedTemp, int cashGainedTemp,
-			int oilGainedTemp,
+			int oilGainedTemp, int gachaCreditsGainedTemp,
 			Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt)
 	{
 		boolean awardGems = gemsGainedTemp > 0;
 		boolean awardCash = cashGainedTemp > 0;
 		boolean awardOil = oilGainedTemp > 0;
-		awardResources = awardGems || awardCash || awardOil;
+		boolean awardGachaCredits = gachaCreditsGainedTemp > 0;
+		awardResources = awardGems || awardCash || awardOil || awardGachaCredits;
 
 		if ( awardResources ) {
 			prevCurrencies = new HashMap<String, Integer>();
@@ -345,6 +398,10 @@ public class AwardRewardAction {
 		if ( awardGems ) {
 			prevCurrencies.put(MiscMethods.gems, u.getGems());
 			gemsGained = gemsGainedTemp;
+		}
+		if( awardGachaCredits) {
+			prevCurrencies.put(MiscMethods.gachaCredits, u.getGachaCredits());
+			gachaCreditsGained = gachaCreditsGainedTemp;
 		}
 		if ( awardCash ) {
 			int curCash = u.getCash();
@@ -365,7 +422,7 @@ public class AwardRewardAction {
 			return true;
 		}
 
-		if (u.updateRelativeCashAndOilAndGems(cashGained, oilGained, gemsGained) <= 0)
+		if (u.updateRelativeCashAndOilAndGems(cashGained, oilGained, gemsGained, gachaCreditsGained) <= 0)
 		{
 			log.error("won't continue processing. unable to award cash={}, oil={}, gems={}",
 					new Object[] { cashGained, oilGained, gemsGained } );
@@ -385,6 +442,7 @@ public class AwardRewardAction {
 		String gems = MiscMethods.gems;
 		String cash = MiscMethods.cash;
 		String oil = MiscMethods.oil;
+		String gachaCredits = MiscMethods.gachaCredits;
 
 		currencyDeltas = new HashMap<String, Integer>();
 		curCurrencies = new HashMap<String, Integer>();
@@ -394,6 +452,12 @@ public class AwardRewardAction {
 			curCurrencies.put(gems, u.getGems());
 			reasonsForChanges
 					.put(gems, awardReason);
+		}
+		if (0 != gachaCreditsGained) {
+			currencyDeltas.put(gachaCredits, gachaCreditsGained);
+			curCurrencies.put(gachaCredits, u.getGachaCredits());
+			reasonsForChanges
+					.put(gachaCredits, awardReason);
 		}
 		if (0 != cashGained) {
 			currencyDeltas.put(cash, cashGained);
@@ -521,5 +585,15 @@ public class AwardRewardAction {
 	public void setAcga(AwardClanGiftsAction acga) {
 		this.acga = acga;
 	}
-	
+
+
+	public int getGachaCreditsGained() {
+		return gachaCreditsGained;
+	}
+
+	public void setGachaCreditsGained(int gachaCreditsGained) {
+		this.gachaCreditsGained = gachaCreditsGained;
+	}
+
+
 }

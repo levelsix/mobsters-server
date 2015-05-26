@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "MonsterStuff.proto";
+import "Reward.proto";
 import "SharedEnumConfig.proto";
 import "Structure.proto";
 
@@ -36,6 +37,10 @@ message MiniJobProto {
      //optional int32 itemRewardQuantity = 18;
      //optional int32 secondItemIdReward = 19;
      //optional int32 secondItemRewardQuantity = 20;
+     
+     optional RewardProto rewardOne = 21;
+     optional RewardProto rewardTwo = 22;
+     optional RewardProto rewardThree = 23;
      
 }
 

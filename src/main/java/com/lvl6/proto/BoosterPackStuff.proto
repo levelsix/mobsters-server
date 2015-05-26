@@ -1,7 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 //import "MonsterStuff.proto";
-import "SharedEnumConfig.proto";
+import "Reward.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -23,6 +23,7 @@ message BoosterPackProto {
 	optional int32 boosterPackId = 1;
 	optional string boosterPackName = 2;
 	optional int32 gemPrice = 3;
+	optional int32 gachaCreditsPrice = 12;
 	repeated BoosterItemProto specialItems = 4; //in the "featured mobsters section"
 												//in the ui
 	optional string listBackgroundImgName = 5;
@@ -32,6 +33,8 @@ message BoosterPackProto {
 	optional string machineImgName = 9;
 	repeated BoosterDisplayItemProto displayItems = 10; //these go on the bottom
 	optional BoosterPackType type = 11 [default = NO_TYPE];
+	
+	//optional int32 gachaCreditsPrice = 12; defined above
 	
 	enum BoosterPackType {
 		NO_TYPE = 1;
@@ -47,18 +50,10 @@ message BoosterPackProto {
 message BoosterItemProto {
 	optional int32 boosterItemId = 1;
 	optional int32 boosterPackId = 2;
-	optional int32 monsterId = 3;
-	optional int32 numPieces = 4;
-	optional bool isComplete = 5; 
 	optional bool isSpecial = 6;
-	optional int32 gemReward = 7;
-	
-	//not going to be used
-	optional int32 cashReward = 8;
 	
 	optional float chanceToAppear = 9;
-	optional int32 itemId = 10;
-	optional int32 itemQuantity = 11;
+	optional RewardProto reward = 10;
 }
 
 //------------------------------------------------------------------------------------------
@@ -67,12 +62,5 @@ message BoosterDisplayItemProto {
 	 //not really needed, but eh
 	optional int32 boosterPackId = 1;
 	
-	//true means monster, false means gems
-	optional bool isMonster = 2;
-	optional bool isComplete = 3;
-	optional Quality quality = 4 [default = NO_QUALITY];
-	optional int32 gemReward = 5;
-	optional int32 quantity = 6;
-	optional int32 itemId = 7;
-	optional int32 itemQuantity = 8;
+	optional RewardProto reward = 2;
 }

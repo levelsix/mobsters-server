@@ -27,5 +27,9 @@ public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<
 			MoveOrRotateNormStructureResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return moveOrRotateNormStructureResponseProto.getSerializedSize();
+	}
 
 }

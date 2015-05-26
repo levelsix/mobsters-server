@@ -361,7 +361,7 @@ public class EvolveMonsterController extends EventController {
 		int gemChange = -1 * gemsSpent;
 
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange,
-				oilChange, gemChange);
+				oilChange, gemChange, 0);
 		if (1 != numChange) {
 			log.error(String
 					.format("problem updating user stats: gemChange=%s, oilChange=%s, user=%s",

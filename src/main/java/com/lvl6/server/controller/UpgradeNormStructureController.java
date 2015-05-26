@@ -294,7 +294,7 @@ public class UpgradeNormStructureController extends EventController {
 		}
 
 		int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange,
-				gemChange);
+				gemChange, 0);
 		if (1 != num) {
 			log.error(String
 					.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",

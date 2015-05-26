@@ -9,6 +9,7 @@ public class DBConstants {
 	public static final String TABLE_BATTLE_ITEM_CONFIG = "battle_item_config";
 	public static final String TABLE_BATTLE_ITEM_FOR_USER = "battle_item_for_user";
 	public static final String TABLE_BATTLE_ITEM_QUEUE_FOR_USER = "battle_item_queue_for_user";
+	public static final String TABLE_BATTLE_REPLAY_FOR_USER = "battle_replay_for_user";
 	public static final String TABLE_BOARD_CONFIG = "board_config";
 	public static final String TABLE_BOARD_OBSTACLE_CONFIG = "board_obstacle_config";
 	public static final String TABLE_BOARD_PROPERTY_CONFIG = "board_property_config";
@@ -50,6 +51,8 @@ public class DBConstants {
 	public static final String TABLE_EXPANSION_COST_CONFIG = "expansion_cost_config";				//TODO: delete
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";	//TODO: delete
 	public static final String TABLE_FILE_DOWNLOAD_CONFIG = "file_download_config";
+	public static final String TABLE_GIFT_FOR_TANGO_USER = "gift_for_tango_user";
+	public static final String TABLE_GIFT_FOR_USER = "gift_for_user";
 	public static final String TABLE_GOLD_SALE_CONFIG = "gold_sale_config";							//TODO: delete
 	public static final String TABLE_IAP_HISTORY = "iap_history";
 	public static final String TABLE_ITEM_CONFIG = "item_config";
@@ -129,6 +132,8 @@ public class DBConstants {
 	public static final String TABLE_STRUCTURE_TEAM_CENTER_CONFIG = "structure_team_center_config";
 	public static final String TABLE_STRUCTURE_TOWN_HALL_CONFIG = "structure_town_hall_config";
 	public static final String TABLE_STRUCTURE_MONEY_TREE_CONFIG = "structure_money_tree_config";
+	public static final String TABLE_TANGO_GIFT_CONFIG = "tango_gift_config";
+	public static final String TABLE_TANGO_GIFT_REWARD_CONFIG = "tango_gift_reward_config";
 	public static final String TABLE_TASK_CONFIG = "task_config";
 	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
@@ -149,6 +154,7 @@ public class DBConstants {
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
 	public static final String TABLE_USER_FACEBOOK_INVITE_FOR_SLOT = "user_facebook_invite_for_slot";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
+	public static final String TABLE_USER_REWARD_HISTORY = "user_reward_history";
 	public static final String TABLE_USER_SESSION = "user_session";
 
 	/*COLUMNNAMES*/
@@ -180,6 +186,12 @@ public class DBConstants {
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__BATTLE_ITEM_ID = "battle_item_id";
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 	public static final String BATTLE_ITEM_QUEUE_FOR_USER__ELAPSED_TIME = "elapsed_time";
+
+	/*BATTLE ITEM FOR USER*/
+	public static final String BATTLE_REPLAY_FOR_USER__ID = GENERIC__ID;
+	public static final String BATTLE_REPLAY_FOR_USER__CREATOR_ID = "creator_id";
+	public static final String BATTLE_REPLAY_FOR_USER__REPLAY = "replay";
+	public static final String BATTLE_REPLAY_FOR_USER__CREATE_TIME = "create_time";
 
 	/*BOOSTER PACK PURCHASE HISTORY*/
 	public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
@@ -377,6 +389,23 @@ public class DBConstants {
 	public static final String EXPANSION_PURCHASE_FOR_USER__Y_POSITION = "y_position";
 	public static final String EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING = "is_expanding";
 	public static final String EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME = "expand_start_time";
+
+	/*GIFT FOR TANGO USER*/
+	public static final String GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID = "gift_for_user_id";
+	public static final String GIFT_FOR_TANGO_USER__GIFTER_USER_ID = "gifter_user_id";
+	public static final String GIFT_FOR_TANGO_USER__GIFTER_TANGO_USER_ID = "gifter_tango_user_id";
+
+	/*GIFT FOR USER*/
+	public static final String GIFT_FOR_USER__ID = GENERIC__ID;
+	public static final String GIFT_FOR_USER__GIFTER_USER_ID = "gifter_user_id";
+	public static final String GIFT_FOR_USER__RECEIVER_USER_ID = "receiver_user_id";
+	public static final String GIFT_FOR_USER__GIFT_TYPE = "gift_type";
+	public static final String GIFT_FOR_USER__STATIC_DATA_ID = "static_data_id";
+	public static final String GIFT_FOR_USER__TIME_OF_ENTRY = "time_of_entry";
+	public static final String GIFT_FOR_USER__REWARD_ID = "reward_id";
+	public static final String GIFT_FOR_USER__COLLECTED = "collected";
+	public static final String GIFT_FOR_USER__MINUTES_TILL_EXPIRATION = "minutes_till_expiration";
+	public static final String GIFT_FOR_USER__REASON_FOR_GIFT = "reason_for_gift";
 
 	/*IAP TABLE*/
 	public static final String IAP_HISTORY__ID = GENERIC__ID;
@@ -615,6 +644,7 @@ public class DBConstants {
 	public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
 	//public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 	public static final String PVP_BATTLE_HISTORY__CLAN_AVENGED = "clan_avenged";
+	public static final String PVP_BATTLE_HISTORY__REPLAY_ID = "replay_id";
 
 	/*PVP_BOARD_OBSTACLE_FOR_USER*/
 	public static final String PVP_BOARD_OBSTACLE_FOR_USER__ID = GENERIC__ID;
@@ -825,6 +855,9 @@ public class DBConstants {
 	public static final String USER__SALES_JUMP_TWO_TIERS = "sales_jump_two_tiers";
 	public static final String USER__TOTAL_STRENGTH = "total_strength";
 	public static final String USER__SEGMENTATION_GROUP = "segmentation_group";
+	public static final String USER__GACHA_CREDITS = "gacha_credits";
+	public static final String USER__LAST_TANGO_GIFT_SENT_TIME = "last_tango_gift_sent_time";
+	public static final String USER__TANGO_ID = "tango_id";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -862,6 +895,14 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
+	
+	/*USER REWARD HISTORY*/
+	public static final String USER_REWARD_HISTORY__ID = GENERIC__ID;
+	public static final String USER_REWARD_HISTORY__USER_ID = "user_id";
+	public static final String USER_REWARD_HISTORY__DATE = "date";
+	public static final String USER_REWARD_HISTORY__REWARD_ID = "reward_id";
+	public static final String USER_REWARD_HISTORY__REASON_FOR_REWARD = "reason_for_reward";
+	public static final String USER_REWARD_HISTORY__DETAILS = "details";
 
 	/*USER SESSIONS*/
 	public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
@@ -940,6 +981,7 @@ public class DBConstants {
 	public static final String BOOSTER_DISPLAY_ITEM__QUANTITY = "quantity";
 	public static final String BOOSTER_DISPLAY_ITEM__ITEM_ID = "item_id";
 	public static final String BOOSTER_DISPLAY_ITEM__ITEM_QUANTITY = "item_quantity";
+	public static final String BOOSTER_DISPLAY_ITEM__REWARD_ID = "reward_id";
 
 	public static final String BOOSTER_ITEM__ID = GENERIC__ID;
 	public static final String BOOSTER_ITEM__BOOSTER_PACK_ID = "booster_pack_id";
@@ -952,6 +994,7 @@ public class DBConstants {
 	public static final String BOOSTER_ITEM__CHANCE_TO_APPEAR = "chance_to_appear";
 	public static final String BOOSTER_ITEM__ITEM_ID = "item_id";
 	public static final String BOOSTER_ITEM__ITEM_QUANTITY = "item_quantity";
+	public static final String BOOSTER_ITEM__REWARD_ID = "reward_id";
 
 	public static final String BOOSTER_PACK__ID = GENERIC__ID;
 	public static final String BOOSTER_PACK__NAME = "name";
@@ -965,6 +1008,7 @@ public class DBConstants {
 	public static final String BOOSTER_PACK__DISPLAY_TO_USER = "display_to_user";
 	public static final String BOOSTER_PACK__RIGGED_ID = "rigged_id";
 	public static final String BOOSTER_PACK__TYPE = "type";
+	public static final String BOOSTER_PACK__GACHA_CREDITS_PRICE = "gacha_credits_price";
 
 	public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
@@ -1008,6 +1052,7 @@ public class DBConstants {
 	public static final String FILE_DOWNLOAD__PRIORITY = "priority";
 	public static final String FILE_DOWNLOAD__DOWNLOAD_ONLY_OVER_WIFI = "download_only_over_wifi";
 	public static final String FILE_DOWNLOAD__USE_IPHONE6_PREFIX = "use_iphone6_prefix";
+	public static final String FILE_DOWNLOAD__USE_IPAD_SUFFIX = "use_ipad_suffix";
 
 	public static final String ITEM__ID = GENERIC__ID;
 	public static final String ITEM__NAME = "name";
@@ -1076,6 +1121,9 @@ public class DBConstants {
 	public static final String MINI_JOB__DURATION_MIN_MINUTES = "duration_min_minutes";
 	public static final String MINI_JOB__DURATION_MAX_MINUTES = "duration_max_minutes";
 	public static final String MINI_JOB__EXP_REWARD = "exp_reward";
+	public static final String MINI_JOB__REWARD_ID_ONE = "reward_id_one";
+	public static final String MINI_JOB__REWARD_ID_TWO = "reward_id_two";
+	public static final String MINI_JOB__REWARD_ID_THREE = "reward_id_three";
 
 	public static final String MINI_JOB_REFRESH_ITEM__STRUCT_ID = "struct_id";
 	public static final String MINI_JOB_REFRESH_ITEM__ITEM_ID = "item_id";
@@ -1263,6 +1311,7 @@ public class DBConstants {
 	public static final String SALES_PACKAGE__START_TIME = "time_start";
 	public static final String SALES_PACKAGE__END_TIME = "time_end";
     public static final String SALES_PACKAGE__SUCC_ID = "succ_id";
+    public static final String SALES_PACKAGE__PRIORITY = "priority";
     public static final String SALES_PACKAGE__CUSTOM_MENU_ID = "custom_menu_id";
     public static final String SALES_PACKAGE__ANIMATING_ICON = "animating_icon";
     public static final String SALES_PACKAGE__SLAM_ICON = "slam_icon";
@@ -1413,6 +1462,16 @@ public class DBConstants {
 	public static final String STRUCTURE_TOWN_HALL__PVP_QUEUE_CASH_COST = "pvp_queue_cash_cost";
 	public static final String STRUCTURE_TOWN_HALL__RESOURCE_CAPACITY = "resource_capacity";
 	public static final String STRUCTURE_TOWN_HALL__NUM_EVO_CHAMBERS = "num_evo_chambers";
+
+	public static final String TANGO_GIFT__ID = GENERIC__ID;
+	public static final String TANGO_GIFT__NAME = "name";
+	public static final String TANGO_GIFT__HOURS_UNTIL_EXPIRATION = "hours_until_expiration";
+	public static final String TANGO_GIFT__IMAGE_NAME = "image_name";
+
+	public static final String TANGO_GIFT_REWARD__ID = GENERIC__ID;
+	public static final String TANGO_GIFT_REWARD__TANGO_GIFT_ID = "tango_gift_id";
+	public static final String TANGO_GIFT_REWARD__REWARD_ID = "reward_id";
+	public static final String TANGO_GIFT_REWARD__CHANCE_OF_DROP = "chance_of_drop";
 
 	public static final String TASK__ID = "id";
 	public static final String TASK__GOOD_NAME = "good_name";

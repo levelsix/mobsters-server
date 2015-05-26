@@ -28,4 +28,7 @@ public class BeginClanAvengingResponseEvent extends NormalResponseEvent<BeginCla
 		this.responseProto = responseProto;
 	}
 
+	public int eventSize() {
+		return beginClanAvengingResponseProto.getSerializedSize();
+	}
 }

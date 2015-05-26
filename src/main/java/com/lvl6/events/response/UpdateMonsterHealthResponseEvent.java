@@ -31,5 +31,9 @@ public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<Update
 	public UpdateMonsterHealthResponseProto getUpdateMonsterHealthResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return updateMonsterHealthResponseProto.getSerializedSize();
+	}
 
 }

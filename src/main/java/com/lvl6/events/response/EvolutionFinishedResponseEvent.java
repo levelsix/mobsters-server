@@ -27,5 +27,9 @@ public class EvolutionFinishedResponseEvent extends NormalResponseEvent<Evolutio
 			EvolutionFinishedResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return evolutionFinishedResponseProto.getSerializedSize();
+	}
 
 }

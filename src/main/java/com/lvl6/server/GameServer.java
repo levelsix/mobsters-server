@@ -15,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -24,6 +22,8 @@ import com.hazelcast.core.HazelcastInstanceAware;
 import com.hazelcast.core.IMap;
 import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.events.ResponseEvent;
+import com.lvl6.leaderboards.LeaderBoardImpl;
+//import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.misc.ReloadAllRareChangeStaticData;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
@@ -44,6 +44,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	@Autowired
 	protected ReloadAllRareChangeStaticData reloadAllRareChangeStaticData;
+	
+	@Autowired
+	protected LeaderBoardImpl leaderBoardImpl;
 
 
 	@Resource(name = "playersPreDatabaseByUDID")
@@ -179,6 +182,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		log.info("init : Server initializing");
 		reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
 		reloadRecommendedClans();
+		leaderBoardImpl.reload();
 	}
 
 	public void reloadRecommendedClans() {

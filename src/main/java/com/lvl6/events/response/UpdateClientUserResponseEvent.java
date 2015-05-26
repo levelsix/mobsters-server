@@ -34,5 +34,9 @@ public class UpdateClientUserResponseEvent extends NormalResponseEvent<UpdateCli
 			UpdateClientUserResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return updateClientUserResponseProto.getSerializedSize();
+	}
 
 }

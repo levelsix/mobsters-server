@@ -31,5 +31,10 @@ public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponsePro
 	public QueueUpResponseProto getQueueUpResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+
+	public int eventSize() {
+		return QueueUpResponseProto.getSerializedSize();
+	}
 
 }

@@ -27,5 +27,9 @@ public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent<Ret
 			RetractRequestJoinClanResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return retractRequestJoinClanResponseProto.getSerializedSize();
+	}
 
 }

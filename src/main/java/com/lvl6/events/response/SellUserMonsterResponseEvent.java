@@ -31,5 +31,9 @@ public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMo
 	public SellUserMonsterResponseProto getSellUserMonsterResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	
+	public int eventSize() {
+		return sellUserMonsterResponseProto.getSerializedSize();
+	}
 
 }

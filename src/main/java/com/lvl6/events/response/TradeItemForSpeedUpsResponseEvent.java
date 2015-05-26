@@ -27,5 +27,9 @@ public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<Trade
 			TradeItemForSpeedUpsResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return tradeItemForSpeedUpsResponseProto.getSerializedSize();
+	}
 
 }

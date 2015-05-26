@@ -20,6 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
+import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.ClanAvenge;
@@ -31,6 +32,8 @@ import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.GiftForTangoUser;
+import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
@@ -46,6 +49,7 @@ import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
+import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -736,65 +740,65 @@ public class InsertUtils implements InsertUtil {
 		return numInserted;
 	}
 
-	@Override
-	public int insertIntoBoosterPackPurchaseHistory(String userId,
-			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
-			List<String> userMonsterIds) {
-		String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
-
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-		int boosterItemId = bi.getId();
-		int monsterId = bi.getMonsterId();
-		int numPieces = bi.getNumPieces();
-		boolean isComplete = bi.isComplete();
-		boolean isSpecial = bi.isSpecial();
-		int gemReward = bi.getGemReward();
-		float chanceToAppear = bi.getChanceToAppear();
-
-		insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID,
-				userId);
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID,
-				boosterPackId);
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE,
-				timeOfPurchase);
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID,
-				boosterItemId);
-		//monster prize and gem prize are mutually exclusive
-		if (monsterId > 0) {
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID,
-					monsterId);
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES,
-					numPieces);
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE,
-					isComplete);
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL,
-					isSpecial);
-
-			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
-			insertParams
-			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
-					userMonsterIdsStr);
-		} else if (gemReward > 0) {
-			insertParams.put(
-					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
-					gemReward);
-		}
-
-		insertParams.put(
-				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR,
-				chanceToAppear);
-
-		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
-				insertParams);
-		return numInserted;
-	}
+	//	@Override
+	//	public int insertIntoBoosterPackPurchaseHistory(String userId,
+	//			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
+	//			List<String> userMonsterIds) {
+	//		String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
+	//
+	//		Map<String, Object> insertParams = new HashMap<String, Object>();
+	//		int boosterItemId = bi.getId();
+	//		int monsterId = bi.getMonsterId();
+	//		int numPieces = bi.getNumPieces();
+	//		boolean isComplete = bi.isComplete();
+	//		boolean isSpecial = bi.isSpecial();
+	//		int gemReward = bi.getGemReward();
+	//		float chanceToAppear = bi.getChanceToAppear();
+	//
+	//		insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID,
+	//				userId);
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID,
+	//				boosterPackId);
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE,
+	//				timeOfPurchase);
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID,
+	//				boosterItemId);
+	//		//monster prize and gem prize are mutually exclusive
+	//		if (monsterId > 0) {
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID,
+	//					monsterId);
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES,
+	//					numPieces);
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE,
+	//					isComplete);
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL,
+	//					isSpecial);
+	//
+	//			String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
+	//			insertParams
+	//			.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
+	//					userMonsterIdsStr);
+	//		} else if (gemReward > 0) {
+	//			insertParams.put(
+	//					DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD,
+	//					gemReward);
+	//		}
+	//
+	//		insertParams.put(
+	//				DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR,
+	//				chanceToAppear);
+	//
+	//		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
+	//				insertParams);
+	//		return numInserted;
+	//	}
 
 	@Override
 	public String insertIntoPrivateChatPosts(String posterId,
@@ -2071,6 +2075,9 @@ public class InsertUtils implements InsertUtil {
 				pbh.isCancelled());
 		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE,
 				pbh.isExactedRevenge());
+
+		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__REPLAY_ID,
+				pbh.getReplayId());
 		//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
 
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName,
@@ -2782,8 +2789,6 @@ public class InsertUtils implements InsertUtil {
 			log.error("map containing ids to translations is null");
 		}
 
-		log.info("list of private chat posts:" + listOfPrivateChatPosts);
-		
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
@@ -2881,7 +2886,6 @@ public class InsertUtils implements InsertUtil {
 	public boolean insertIntoUpdateMiniEventGoalForUser(
 			Collection<MiniEventGoalForUser> megfuList)
 	{
-
 		String tableName = DBConstants.TABLE_MINI_EVENT_GOAL_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
@@ -2909,6 +2913,53 @@ public class InsertUtils implements InsertUtil {
 			log.error("numUpdated={}", numUpdated);
 			return false;
 		}
+	}
+
+	@Override
+	public boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
+			Collection<Reward> listOfRewards, String reasonForReward) {
+		if(listOfRewards == null) {
+			log.error("list containing rewards is null");
+		}
+
+		String tableName = DBConstants.TABLE_USER_REWARD_HISTORY;
+		int size = listOfRewards.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+		List<String> idList = new ArrayList<String>();
+		List<String> userIdList = new ArrayList<String>();
+		List<Timestamp> timestampList = new ArrayList<Timestamp>();
+		List<Integer> rewardIdList = new ArrayList<Integer>();
+		List<String> reasonForRewardList = new ArrayList<String>();
+
+		try {
+			for(Reward r : listOfRewards) {
+				String id = randomUUID();
+				int rewardId = r.getId();
+				idList.add(id);
+				userIdList.add(userId);
+				timestampList.add(ts);
+				rewardIdList.add(rewardId);
+				reasonForRewardList.add(reasonForReward);
+			}
+		} catch (Exception e) {
+			log.error("error converting language to string");
+			e.printStackTrace();
+		}
+
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__ID, idList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__USER_ID, userIdList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__DATE, timestampList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__REWARD_ID, rewardIdList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__REASON_FOR_REWARD, reasonForRewardList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		} else
+			return false;
 	}
 
 	@Override
@@ -2970,5 +3021,109 @@ public class InsertUtils implements InsertUtil {
 		else return false;
 	}
 
+	@Override
+	public boolean insertGiftForUser(Collection<GiftForUser> giftForUsers) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
+		int size = giftForUsers.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+		List<String> idList = new ArrayList<String>();
+		List<String> gifterUserIdList = new ArrayList<String>();
+		List<String> receiverUserIdList = new ArrayList<String>();
+		List<String> giftTypeList = new ArrayList<String>();
+		List<Integer> staticDataIdList = new ArrayList<Integer>();
+		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
+		List<Integer> rewardIdList = new ArrayList<Integer>();
+		List<Integer> minutesTillExpirationList = new ArrayList<Integer>();
+		List<String> reasonForGiftList = new ArrayList<String>();
+
+
+		for(GiftForUser gfu : giftForUsers) {
+			String id = randomUUID();
+			gfu.setId(id);
+			idList.add(id);
+			gifterUserIdList.add(gfu.getGifterUserId());
+			receiverUserIdList.add(gfu.getReceiverUserId());
+			giftTypeList.add(gfu.getGiftType());
+			staticDataIdList.add(gfu.getStaticDataId());
+			Timestamp ts = new Timestamp(gfu.getTimeOfEntry().getTime());
+			timeReceivedList.add(ts);
+			rewardIdList.add(gfu.getRewardId());
+			minutesTillExpirationList.add(gfu.getMinutesTillExpiration());
+			reasonForGiftList.add(gfu.getReasonForGift());
+		}
+
+		insertParams.put(DBConstants.GIFT_FOR_USER__ID, idList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__GIFT_TYPE, giftTypeList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__STATIC_DATA_ID, staticDataIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__TIME_OF_ENTRY, timeReceivedList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__REWARD_ID, rewardIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__MINUTES_TILL_EXPIRATION, minutesTillExpirationList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__REASON_FOR_GIFT, reasonForGiftList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		}
+		else return false;
+	}
+
+
+	@Override
+	public boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers) {
+		String tableName = DBConstants.TABLE_GIFT_FOR_TANGO_USER;
+		int size = giftForTangoUsers.size();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+
+		List<String> giftForUserIdList = new ArrayList<String>();
+		List<String> gifterUserIdList = new ArrayList<String>();
+		List<String> gifterTangoUserIdList = new ArrayList<String>();
+
+		for(GiftForTangoUser gftu : giftForTangoUsers) {;
+			giftForUserIdList.add(gftu.getGiftForUserId());
+			gifterUserIdList.add(gftu.getGifterUserId());
+			gifterTangoUserIdList.add(gftu.getGifterTangoUserId());
+		}
+
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID, giftForUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_USER_ID, gifterUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_TANGO_USER_ID, gifterTangoUserIdList);
+
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, size);
+
+		if (numInserted == size) {
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public int insertBattleReplayForUser(BattleReplayForUser brfu)
+	{
+		brfu.setId(randomUUID());
+		String tableName = DBConstants.TABLE_BATTLE_REPLAY_FOR_USER;
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(
+				DBConstants.BATTLE_REPLAY_FOR_USER__ID,
+				brfu.getId());
+		insertParams.put(DBConstants.BATTLE_REPLAY_FOR_USER__CREATOR_ID,
+				brfu.getCreatorId());
+		insertParams.put(DBConstants.BATTLE_REPLAY_FOR_USER__REPLAY,
+				brfu.getReplay());
+
+		Timestamp now = new Timestamp(brfu.getTimeCreated().getTime());
+		insertParams.put(DBConstants.BATTLE_REPLAY_FOR_USER__CREATE_TIME,
+				now);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(
+				tableName, insertParams);
+		return numUpdated;
+	}
 
 }
+

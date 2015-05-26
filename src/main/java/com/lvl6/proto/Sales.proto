@@ -29,6 +29,7 @@ message SalesPackageProto {
 	optional string animatingIcon = 11;
 	optional string slamIcon = 12;
 	optional string titleColor = 13;
+	optional int32 priority = 14;
 }
 
 //------------------------------------------------------------------------------------------

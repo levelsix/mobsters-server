@@ -27,5 +27,9 @@ public class InviteToClanResponseEvent extends NormalResponseEvent<InviteToClanR
 			InviteToClanResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return inviteToClanResponseProto.getSerializedSize();
+	}
 
 }

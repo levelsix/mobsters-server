@@ -1,0 +1,20 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "User.proto";
+
+
+package com.lvl6.proto;
+
+option java_outer_classname = "LeaderBoardProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message StrengthLeaderBoardProto {
+	optional int32 rank = 1;
+	optional MinimumUserProto mup = 2;
+	optional int64 strength = 3;
+	optional int32 monsterId = 4;
+}

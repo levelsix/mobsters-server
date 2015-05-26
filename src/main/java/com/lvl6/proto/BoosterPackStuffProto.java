@@ -8,10 +8,10 @@ public final class BoosterPackStuffProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface RareBoosterPurchaseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RareBoosterPurchaseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RareBoosterPurchaseProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .com.lvl6.proto.MinimumUserProto user = 1;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto user = 1;</code>
      */
@@ -25,7 +25,6 @@ public final class BoosterPackStuffProto {
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getUserOrBuilder();
 
-    // optional .com.lvl6.proto.BoosterPackProto booster = 2;
     /**
      * <code>optional .com.lvl6.proto.BoosterPackProto booster = 2;</code>
      */
@@ -39,7 +38,6 @@ public final class BoosterPackStuffProto {
      */
     com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder getBoosterOrBuilder();
 
-    // optional uint64 timeOfPurchase = 3;
     /**
      * <code>optional uint64 timeOfPurchase = 3;</code>
      */
@@ -49,7 +47,6 @@ public final class BoosterPackStuffProto {
      */
     long getTimeOfPurchase();
 
-    // optional int32 monsterId = 4;
     /**
      * <code>optional int32 monsterId = 4;</code>
      */
@@ -67,8 +64,9 @@ public final class BoosterPackStuffProto {
    * </pre>
    */
   public static final class RareBoosterPurchaseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements RareBoosterPurchaseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RareBoosterPurchaseProto)
+      RareBoosterPurchaseProtoOrBuilder {
     // Use RareBoosterPurchaseProto.newBuilder() to construct.
     private RareBoosterPurchaseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -190,7 +188,6 @@ public final class BoosterPackStuffProto {
     }
 
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto user = 1;
     public static final int USER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto user_;
     /**
@@ -212,7 +209,6 @@ public final class BoosterPackStuffProto {
       return user_;
     }
 
-    // optional .com.lvl6.proto.BoosterPackProto booster = 2;
     public static final int BOOSTER_FIELD_NUMBER = 2;
     private com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto booster_;
     /**
@@ -234,7 +230,6 @@ public final class BoosterPackStuffProto {
       return booster_;
     }
 
-    // optional uint64 timeOfPurchase = 3;
     public static final int TIMEOFPURCHASE_FIELD_NUMBER = 3;
     private long timeOfPurchase_;
     /**
@@ -250,7 +245,6 @@ public final class BoosterPackStuffProto {
       return timeOfPurchase_;
     }
 
-    // optional int32 monsterId = 4;
     public static final int MONSTERID_FIELD_NUMBER = 4;
     private int monsterId_;
     /**
@@ -275,7 +269,8 @@ public final class BoosterPackStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -407,8 +402,9 @@ public final class BoosterPackStuffProto {
      * </pre>
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RareBoosterPurchaseProto)
+        com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor;
@@ -566,7 +562,6 @@ public final class BoosterPackStuffProto {
       }
       private int bitField0_;
 
-      // optional .com.lvl6.proto.MinimumUserProto user = 1;
       private com.lvl6.proto.UserProto.MinimumUserProto user_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> userBuilder_;
@@ -675,7 +670,7 @@ public final class BoosterPackStuffProto {
         if (userBuilder_ == null) {
           userBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  user_,
+                  getUser(),
                   getParentForChildren(),
                   isClean());
           user_ = null;
@@ -683,7 +678,6 @@ public final class BoosterPackStuffProto {
         return userBuilder_;
       }
 
-      // optional .com.lvl6.proto.BoosterPackProto booster = 2;
       private com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto booster_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder> boosterBuilder_;
@@ -792,7 +786,7 @@ public final class BoosterPackStuffProto {
         if (boosterBuilder_ == null) {
           boosterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder>(
-                  booster_,
+                  getBooster(),
                   getParentForChildren(),
                   isClean());
           booster_ = null;
@@ -800,7 +794,6 @@ public final class BoosterPackStuffProto {
         return boosterBuilder_;
       }
 
-      // optional uint64 timeOfPurchase = 3;
       private long timeOfPurchase_ ;
       /**
        * <code>optional uint64 timeOfPurchase = 3;</code>
@@ -833,7 +826,6 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // optional int32 monsterId = 4;
       private int monsterId_ ;
       /**
        * <code>optional int32 monsterId = 4;</code>
@@ -877,10 +869,10 @@ public final class BoosterPackStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RareBoosterPurchaseProto)
   }
 
-  public interface BoosterPackProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BoosterPackProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoosterPackProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 boosterPackId = 1;
     /**
      * <code>optional int32 boosterPackId = 1;</code>
      */
@@ -890,7 +882,6 @@ public final class BoosterPackStuffProto {
      */
     int getBoosterPackId();
 
-    // optional string boosterPackName = 2;
     /**
      * <code>optional string boosterPackName = 2;</code>
      */
@@ -905,7 +896,6 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.ByteString
         getBoosterPackNameBytes();
 
-    // optional int32 gemPrice = 3;
     /**
      * <code>optional int32 gemPrice = 3;</code>
      */
@@ -915,7 +905,15 @@ public final class BoosterPackStuffProto {
      */
     int getGemPrice();
 
-    // repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    boolean hasGachaCreditsPrice();
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    int getGachaCreditsPrice();
+
     /**
      * <code>repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;</code>
      *
@@ -960,7 +958,6 @@ public final class BoosterPackStuffProto {
     com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getSpecialItemsOrBuilder(
         int index);
 
-    // optional string listBackgroundImgName = 5;
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
      *
@@ -987,7 +984,6 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.ByteString
         getListBackgroundImgNameBytes();
 
-    // optional string listDescription = 6;
     /**
      * <code>optional string listDescription = 6;</code>
      */
@@ -1002,7 +998,6 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.ByteString
         getListDescriptionBytes();
 
-    // optional string navBarImgName = 7;
     /**
      * <code>optional string navBarImgName = 7;</code>
      */
@@ -1017,7 +1012,6 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.ByteString
         getNavBarImgNameBytes();
 
-    // optional string navTitleImgName = 8;
     /**
      * <code>optional string navTitleImgName = 8;</code>
      */
@@ -1032,7 +1026,6 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.ByteString
         getNavTitleImgNameBytes();
 
-    // optional string machineImgName = 9;
     /**
      * <code>optional string machineImgName = 9;</code>
      */
@@ -1047,7 +1040,6 @@ public final class BoosterPackStuffProto {
     com.google.protobuf.ByteString
         getMachineImgNameBytes();
 
-    // repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;
     /**
      * <code>repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;</code>
      *
@@ -1092,7 +1084,6 @@ public final class BoosterPackStuffProto {
     com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder getDisplayItemsOrBuilder(
         int index);
 
-    // optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];
     /**
      * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
      */
@@ -1106,8 +1097,9 @@ public final class BoosterPackStuffProto {
    * Protobuf type {@code com.lvl6.proto.BoosterPackProto}
    */
   public static final class BoosterPackProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BoosterPackProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoosterPackProto)
+      BoosterPackProtoOrBuilder {
     // Use BoosterPackProto.newBuilder() to construct.
     private BoosterPackProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1159,8 +1151,9 @@ public final class BoosterPackStuffProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              boosterPackName_ = input.readBytes();
+              boosterPackName_ = bs;
               break;
             }
             case 24: {
@@ -1169,42 +1162,47 @@ public final class BoosterPackStuffProto {
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 specialItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               specialItems_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.PARSER, extensionRegistry));
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000008;
-              listBackgroundImgName_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              listBackgroundImgName_ = bs;
               break;
             }
             case 50: {
-              bitField0_ |= 0x00000010;
-              listDescription_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              listDescription_ = bs;
               break;
             }
             case 58: {
-              bitField0_ |= 0x00000020;
-              navBarImgName_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              navBarImgName_ = bs;
               break;
             }
             case 66: {
-              bitField0_ |= 0x00000040;
-              navTitleImgName_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              navTitleImgName_ = bs;
               break;
             }
             case 74: {
-              bitField0_ |= 0x00000080;
-              machineImgName_ = input.readBytes();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              machineImgName_ = bs;
               break;
             }
             case 82: {
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
                 displayItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto>();
-                mutable_bitField0_ |= 0x00000200;
+                mutable_bitField0_ |= 0x00000400;
               }
               displayItems_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.PARSER, extensionRegistry));
               break;
@@ -1215,9 +1213,14 @@ public final class BoosterPackStuffProto {
               if (value == null) {
                 unknownFields.mergeVarintField(11, rawValue);
               } else {
-                bitField0_ |= 0x00000100;
+                bitField0_ |= 0x00000200;
                 type_ = value;
               }
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000008;
+              gachaCreditsPrice_ = input.readInt32();
               break;
             }
           }
@@ -1228,10 +1231,10 @@ public final class BoosterPackStuffProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           specialItems_ = java.util.Collections.unmodifiableList(specialItems_);
         }
-        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           displayItems_ = java.util.Collections.unmodifiableList(displayItems_);
         }
         this.unknownFields = unknownFields.build();
@@ -1375,7 +1378,6 @@ public final class BoosterPackStuffProto {
     }
 
     private int bitField0_;
-    // optional int32 boosterPackId = 1;
     public static final int BOOSTERPACKID_FIELD_NUMBER = 1;
     private int boosterPackId_;
     /**
@@ -1391,7 +1393,6 @@ public final class BoosterPackStuffProto {
       return boosterPackId_;
     }
 
-    // optional string boosterPackName = 2;
     public static final int BOOSTERPACKNAME_FIELD_NUMBER = 2;
     private java.lang.Object boosterPackName_;
     /**
@@ -1434,7 +1435,6 @@ public final class BoosterPackStuffProto {
       }
     }
 
-    // optional int32 gemPrice = 3;
     public static final int GEMPRICE_FIELD_NUMBER = 3;
     private int gemPrice_;
     /**
@@ -1450,7 +1450,21 @@ public final class BoosterPackStuffProto {
       return gemPrice_;
     }
 
-    // repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;
+    public static final int GACHACREDITSPRICE_FIELD_NUMBER = 12;
+    private int gachaCreditsPrice_;
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    public boolean hasGachaCreditsPrice() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 gachaCreditsPrice = 12;</code>
+     */
+    public int getGachaCreditsPrice() {
+      return gachaCreditsPrice_;
+    }
+
     public static final int SPECIALITEMS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> specialItems_;
     /**
@@ -1506,7 +1520,6 @@ public final class BoosterPackStuffProto {
       return specialItems_.get(index);
     }
 
-    // optional string listBackgroundImgName = 5;
     public static final int LISTBACKGROUNDIMGNAME_FIELD_NUMBER = 5;
     private java.lang.Object listBackgroundImgName_;
     /**
@@ -1517,7 +1530,7 @@ public final class BoosterPackStuffProto {
      * </pre>
      */
     public boolean hasListBackgroundImgName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional string listBackgroundImgName = 5;</code>
@@ -1561,14 +1574,13 @@ public final class BoosterPackStuffProto {
       }
     }
 
-    // optional string listDescription = 6;
     public static final int LISTDESCRIPTION_FIELD_NUMBER = 6;
     private java.lang.Object listDescription_;
     /**
      * <code>optional string listDescription = 6;</code>
      */
     public boolean hasListDescription() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional string listDescription = 6;</code>
@@ -1604,14 +1616,13 @@ public final class BoosterPackStuffProto {
       }
     }
 
-    // optional string navBarImgName = 7;
     public static final int NAVBARIMGNAME_FIELD_NUMBER = 7;
     private java.lang.Object navBarImgName_;
     /**
      * <code>optional string navBarImgName = 7;</code>
      */
     public boolean hasNavBarImgName() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string navBarImgName = 7;</code>
@@ -1647,14 +1658,13 @@ public final class BoosterPackStuffProto {
       }
     }
 
-    // optional string navTitleImgName = 8;
     public static final int NAVTITLEIMGNAME_FIELD_NUMBER = 8;
     private java.lang.Object navTitleImgName_;
     /**
      * <code>optional string navTitleImgName = 8;</code>
      */
     public boolean hasNavTitleImgName() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional string navTitleImgName = 8;</code>
@@ -1690,14 +1700,13 @@ public final class BoosterPackStuffProto {
       }
     }
 
-    // optional string machineImgName = 9;
     public static final int MACHINEIMGNAME_FIELD_NUMBER = 9;
     private java.lang.Object machineImgName_;
     /**
      * <code>optional string machineImgName = 9;</code>
      */
     public boolean hasMachineImgName() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string machineImgName = 9;</code>
@@ -1733,7 +1742,6 @@ public final class BoosterPackStuffProto {
       }
     }
 
-    // repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;
     public static final int DISPLAYITEMS_FIELD_NUMBER = 10;
     private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> displayItems_;
     /**
@@ -1789,14 +1797,13 @@ public final class BoosterPackStuffProto {
       return displayItems_.get(index);
     }
 
-    // optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];
     public static final int TYPE_FIELD_NUMBER = 11;
     private com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType type_;
     /**
      * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
      */
     public boolean hasType() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
@@ -1809,6 +1816,7 @@ public final class BoosterPackStuffProto {
       boosterPackId_ = 0;
       boosterPackName_ = "";
       gemPrice_ = 0;
+      gachaCreditsPrice_ = 0;
       specialItems_ = java.util.Collections.emptyList();
       listBackgroundImgName_ = "";
       listDescription_ = "";
@@ -1821,7 +1829,8 @@ public final class BoosterPackStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1842,26 +1851,29 @@ public final class BoosterPackStuffProto {
       for (int i = 0; i < specialItems_.size(); i++) {
         output.writeMessage(4, specialItems_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getListBackgroundImgNameBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getListDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(7, getNavBarImgNameBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(8, getNavTitleImgNameBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(9, getMachineImgNameBytes());
       }
       for (int i = 0; i < displayItems_.size(); i++) {
         output.writeMessage(10, displayItems_.get(i));
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeEnum(11, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(12, gachaCreditsPrice_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1888,23 +1900,23 @@ public final class BoosterPackStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, specialItems_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getListBackgroundImgNameBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getListDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, getNavBarImgNameBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(8, getNavTitleImgNameBytes());
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getMachineImgNameBytes());
       }
@@ -1912,9 +1924,13 @@ public final class BoosterPackStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, displayItems_.get(i));
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(11, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, gachaCreditsPrice_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1998,8 +2014,9 @@ public final class BoosterPackStuffProto {
      * Protobuf type {@code com.lvl6.proto.BoosterPackProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoosterPackProto)
+        com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterPackProto_descriptor;
@@ -2040,30 +2057,32 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         gemPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        gachaCreditsPrice_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (specialItemsBuilder_ == null) {
           specialItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           specialItemsBuilder_.clear();
         }
         listBackgroundImgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
-        listDescription_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        navBarImgName_ = "";
+        listDescription_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        navTitleImgName_ = "";
+        navBarImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        machineImgName_ = "";
+        navTitleImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        machineImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         if (displayItemsBuilder_ == null) {
           displayItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000400);
         } else {
           displayItemsBuilder_.clear();
         }
         type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -2104,46 +2123,50 @@ public final class BoosterPackStuffProto {
           to_bitField0_ |= 0x00000004;
         }
         result.gemPrice_ = gemPrice_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gachaCreditsPrice_ = gachaCreditsPrice_;
         if (specialItemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             specialItems_ = java.util.Collections.unmodifiableList(specialItems_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.specialItems_ = specialItems_;
         } else {
           result.specialItems_ = specialItemsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.listBackgroundImgName_ = listBackgroundImgName_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.listDescription_ = listDescription_;
+        result.listBackgroundImgName_ = listBackgroundImgName_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.navBarImgName_ = navBarImgName_;
+        result.listDescription_ = listDescription_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.navTitleImgName_ = navTitleImgName_;
+        result.navBarImgName_ = navBarImgName_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000080;
         }
+        result.navTitleImgName_ = navTitleImgName_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
         result.machineImgName_ = machineImgName_;
         if (displayItemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
             displayItems_ = java.util.Collections.unmodifiableList(displayItems_);
-            bitField0_ = (bitField0_ & ~0x00000200);
+            bitField0_ = (bitField0_ & ~0x00000400);
           }
           result.displayItems_ = displayItems_;
         } else {
           result.displayItems_ = displayItemsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000100;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000200;
         }
         result.type_ = type_;
         result.bitField0_ = to_bitField0_;
@@ -2173,11 +2196,14 @@ public final class BoosterPackStuffProto {
         if (other.hasGemPrice()) {
           setGemPrice(other.getGemPrice());
         }
+        if (other.hasGachaCreditsPrice()) {
+          setGachaCreditsPrice(other.getGachaCreditsPrice());
+        }
         if (specialItemsBuilder_ == null) {
           if (!other.specialItems_.isEmpty()) {
             if (specialItems_.isEmpty()) {
               specialItems_ = other.specialItems_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureSpecialItemsIsMutable();
               specialItems_.addAll(other.specialItems_);
@@ -2190,7 +2216,7 @@ public final class BoosterPackStuffProto {
               specialItemsBuilder_.dispose();
               specialItemsBuilder_ = null;
               specialItems_ = other.specialItems_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               specialItemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSpecialItemsFieldBuilder() : null;
@@ -2200,27 +2226,27 @@ public final class BoosterPackStuffProto {
           }
         }
         if (other.hasListBackgroundImgName()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
           listBackgroundImgName_ = other.listBackgroundImgName_;
           onChanged();
         }
         if (other.hasListDescription()) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
           listDescription_ = other.listDescription_;
           onChanged();
         }
         if (other.hasNavBarImgName()) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
           navBarImgName_ = other.navBarImgName_;
           onChanged();
         }
         if (other.hasNavTitleImgName()) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
           navTitleImgName_ = other.navTitleImgName_;
           onChanged();
         }
         if (other.hasMachineImgName()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
           machineImgName_ = other.machineImgName_;
           onChanged();
         }
@@ -2228,7 +2254,7 @@ public final class BoosterPackStuffProto {
           if (!other.displayItems_.isEmpty()) {
             if (displayItems_.isEmpty()) {
               displayItems_ = other.displayItems_;
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000400);
             } else {
               ensureDisplayItemsIsMutable();
               displayItems_.addAll(other.displayItems_);
@@ -2241,7 +2267,7 @@ public final class BoosterPackStuffProto {
               displayItemsBuilder_.dispose();
               displayItemsBuilder_ = null;
               displayItems_ = other.displayItems_;
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000400);
               displayItemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getDisplayItemsFieldBuilder() : null;
@@ -2280,7 +2306,6 @@ public final class BoosterPackStuffProto {
       }
       private int bitField0_;
 
-      // optional int32 boosterPackId = 1;
       private int boosterPackId_ ;
       /**
        * <code>optional int32 boosterPackId = 1;</code>
@@ -2313,7 +2338,6 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // optional string boosterPackName = 2;
       private java.lang.Object boosterPackName_ = "";
       /**
        * <code>optional string boosterPackName = 2;</code>
@@ -2327,9 +2351,12 @@ public final class BoosterPackStuffProto {
       public java.lang.String getBoosterPackName() {
         java.lang.Object ref = boosterPackName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          boosterPackName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            boosterPackName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2387,7 +2414,6 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // optional int32 gemPrice = 3;
       private int gemPrice_ ;
       /**
        * <code>optional int32 gemPrice = 3;</code>
@@ -2420,13 +2446,44 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;
+      private int gachaCreditsPrice_ ;
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public boolean hasGachaCreditsPrice() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public int getGachaCreditsPrice() {
+        return gachaCreditsPrice_;
+      }
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public Builder setGachaCreditsPrice(int value) {
+        bitField0_ |= 0x00000008;
+        gachaCreditsPrice_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gachaCreditsPrice = 12;</code>
+       */
+      public Builder clearGachaCreditsPrice() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gachaCreditsPrice_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> specialItems_ =
         java.util.Collections.emptyList();
       private void ensureSpecialItemsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           specialItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto>(specialItems_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -2602,7 +2659,8 @@ public final class BoosterPackStuffProto {
           java.lang.Iterable<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> values) {
         if (specialItemsBuilder_ == null) {
           ensureSpecialItemsIsMutable();
-          super.addAll(values, specialItems_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, specialItems_);
           onChanged();
         } else {
           specialItemsBuilder_.addAllMessages(values);
@@ -2619,7 +2677,7 @@ public final class BoosterPackStuffProto {
       public Builder clearSpecialItems() {
         if (specialItemsBuilder_ == null) {
           specialItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           specialItemsBuilder_.clear();
@@ -2724,7 +2782,7 @@ public final class BoosterPackStuffProto {
           specialItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder>(
                   specialItems_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           specialItems_ = null;
@@ -2732,7 +2790,6 @@ public final class BoosterPackStuffProto {
         return specialItemsBuilder_;
       }
 
-      // optional string listBackgroundImgName = 5;
       private java.lang.Object listBackgroundImgName_ = "";
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
@@ -2742,7 +2799,7 @@ public final class BoosterPackStuffProto {
        * </pre>
        */
       public boolean hasListBackgroundImgName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional string listBackgroundImgName = 5;</code>
@@ -2754,9 +2811,12 @@ public final class BoosterPackStuffProto {
       public java.lang.String getListBackgroundImgName() {
         java.lang.Object ref = listBackgroundImgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          listBackgroundImgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            listBackgroundImgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2794,7 +2854,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         listBackgroundImgName_ = value;
         onChanged();
         return this;
@@ -2807,7 +2867,7 @@ public final class BoosterPackStuffProto {
        * </pre>
        */
       public Builder clearListBackgroundImgName() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         listBackgroundImgName_ = getDefaultInstance().getListBackgroundImgName();
         onChanged();
         return this;
@@ -2824,19 +2884,18 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         listBackgroundImgName_ = value;
         onChanged();
         return this;
       }
 
-      // optional string listDescription = 6;
       private java.lang.Object listDescription_ = "";
       /**
        * <code>optional string listDescription = 6;</code>
        */
       public boolean hasListDescription() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional string listDescription = 6;</code>
@@ -2844,9 +2903,12 @@ public final class BoosterPackStuffProto {
       public java.lang.String getListDescription() {
         java.lang.Object ref = listDescription_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          listDescription_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            listDescription_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2876,7 +2938,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         listDescription_ = value;
         onChanged();
         return this;
@@ -2885,7 +2947,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string listDescription = 6;</code>
        */
       public Builder clearListDescription() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         listDescription_ = getDefaultInstance().getListDescription();
         onChanged();
         return this;
@@ -2898,19 +2960,18 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000040;
         listDescription_ = value;
         onChanged();
         return this;
       }
 
-      // optional string navBarImgName = 7;
       private java.lang.Object navBarImgName_ = "";
       /**
        * <code>optional string navBarImgName = 7;</code>
        */
       public boolean hasNavBarImgName() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string navBarImgName = 7;</code>
@@ -2918,9 +2979,12 @@ public final class BoosterPackStuffProto {
       public java.lang.String getNavBarImgName() {
         java.lang.Object ref = navBarImgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          navBarImgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            navBarImgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -2950,7 +3014,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         navBarImgName_ = value;
         onChanged();
         return this;
@@ -2959,7 +3023,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string navBarImgName = 7;</code>
        */
       public Builder clearNavBarImgName() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         navBarImgName_ = getDefaultInstance().getNavBarImgName();
         onChanged();
         return this;
@@ -2972,19 +3036,18 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000080;
         navBarImgName_ = value;
         onChanged();
         return this;
       }
 
-      // optional string navTitleImgName = 8;
       private java.lang.Object navTitleImgName_ = "";
       /**
        * <code>optional string navTitleImgName = 8;</code>
        */
       public boolean hasNavTitleImgName() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string navTitleImgName = 8;</code>
@@ -2992,9 +3055,12 @@ public final class BoosterPackStuffProto {
       public java.lang.String getNavTitleImgName() {
         java.lang.Object ref = navTitleImgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          navTitleImgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            navTitleImgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3024,7 +3090,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         navTitleImgName_ = value;
         onChanged();
         return this;
@@ -3033,7 +3099,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string navTitleImgName = 8;</code>
        */
       public Builder clearNavTitleImgName() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         navTitleImgName_ = getDefaultInstance().getNavTitleImgName();
         onChanged();
         return this;
@@ -3046,19 +3112,18 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         navTitleImgName_ = value;
         onChanged();
         return this;
       }
 
-      // optional string machineImgName = 9;
       private java.lang.Object machineImgName_ = "";
       /**
        * <code>optional string machineImgName = 9;</code>
        */
       public boolean hasMachineImgName() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string machineImgName = 9;</code>
@@ -3066,9 +3131,12 @@ public final class BoosterPackStuffProto {
       public java.lang.String getMachineImgName() {
         java.lang.Object ref = machineImgName_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          machineImgName_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            machineImgName_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -3098,7 +3166,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         machineImgName_ = value;
         onChanged();
         return this;
@@ -3107,7 +3175,7 @@ public final class BoosterPackStuffProto {
        * <code>optional string machineImgName = 9;</code>
        */
       public Builder clearMachineImgName() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         machineImgName_ = getDefaultInstance().getMachineImgName();
         onChanged();
         return this;
@@ -3120,19 +3188,18 @@ public final class BoosterPackStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         machineImgName_ = value;
         onChanged();
         return this;
       }
 
-      // repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> displayItems_ =
         java.util.Collections.emptyList();
       private void ensureDisplayItemsIsMutable() {
-        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           displayItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto>(displayItems_);
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000400;
          }
       }
 
@@ -3308,7 +3375,8 @@ public final class BoosterPackStuffProto {
           java.lang.Iterable<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> values) {
         if (displayItemsBuilder_ == null) {
           ensureDisplayItemsIsMutable();
-          super.addAll(values, displayItems_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, displayItems_);
           onChanged();
         } else {
           displayItemsBuilder_.addAllMessages(values);
@@ -3325,7 +3393,7 @@ public final class BoosterPackStuffProto {
       public Builder clearDisplayItems() {
         if (displayItemsBuilder_ == null) {
           displayItems_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000400);
           onChanged();
         } else {
           displayItemsBuilder_.clear();
@@ -3430,7 +3498,7 @@ public final class BoosterPackStuffProto {
           displayItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder>(
                   displayItems_,
-                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           displayItems_ = null;
@@ -3438,13 +3506,12 @@ public final class BoosterPackStuffProto {
         return displayItemsBuilder_;
       }
 
-      // optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];
       private com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
       /**
        * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
        */
       public boolean hasType() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
        * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
@@ -3459,7 +3526,7 @@ public final class BoosterPackStuffProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         type_ = value;
         onChanged();
         return this;
@@ -3468,7 +3535,7 @@ public final class BoosterPackStuffProto {
        * <code>optional .com.lvl6.proto.BoosterPackProto.BoosterPackType type = 11 [default = NO_TYPE];</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         type_ = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType.NO_TYPE;
         onChanged();
         return this;
@@ -3485,10 +3552,10 @@ public final class BoosterPackStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoosterPackProto)
   }
 
-  public interface BoosterItemProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BoosterItemProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoosterItemProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 boosterItemId = 1;
     /**
      * <code>optional int32 boosterItemId = 1;</code>
      */
@@ -3498,7 +3565,6 @@ public final class BoosterPackStuffProto {
      */
     int getBoosterItemId();
 
-    // optional int32 boosterPackId = 2;
     /**
      * <code>optional int32 boosterPackId = 2;</code>
      */
@@ -3508,37 +3574,6 @@ public final class BoosterPackStuffProto {
      */
     int getBoosterPackId();
 
-    // optional int32 monsterId = 3;
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    boolean hasMonsterId();
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    int getMonsterId();
-
-    // optional int32 numPieces = 4;
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    boolean hasNumPieces();
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    int getNumPieces();
-
-    // optional bool isComplete = 5;
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    boolean hasIsComplete();
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    boolean getIsComplete();
-
-    // optional bool isSpecial = 6;
     /**
      * <code>optional bool isSpecial = 6;</code>
      */
@@ -3548,35 +3583,6 @@ public final class BoosterPackStuffProto {
      */
     boolean getIsSpecial();
 
-    // optional int32 gemReward = 7;
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    int getGemReward();
-
-    // optional int32 cashReward = 8;
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    boolean hasCashReward();
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    int getCashReward();
-
-    // optional float chanceToAppear = 9;
     /**
      * <code>optional float chanceToAppear = 9;</code>
      */
@@ -3586,32 +3592,26 @@ public final class BoosterPackStuffProto {
      */
     float getChanceToAppear();
 
-    // optional int32 itemId = 10;
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    boolean hasItemId();
+    boolean hasReward();
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    int getItemId();
-
-    // optional int32 itemQuantity = 11;
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
     /**
-     * <code>optional int32 itemQuantity = 11;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    boolean hasItemQuantity();
-    /**
-     * <code>optional int32 itemQuantity = 11;</code>
-     */
-    int getItemQuantity();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoosterItemProto}
    */
   public static final class BoosterItemProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BoosterItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoosterItemProto)
+      BoosterItemProtoOrBuilder {
     // Use BoosterItemProto.newBuilder() to construct.
     private BoosterItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3667,49 +3667,27 @@ public final class BoosterPackStuffProto {
               boosterPackId_ = input.readInt32();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              monsterId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              numPieces_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              isComplete_ = input.readBool();
-              break;
-            }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000004;
               isSpecial_ = input.readBool();
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              gemReward_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              cashReward_ = input.readInt32();
-              break;
-            }
             case 77: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000008;
               chanceToAppear_ = input.readFloat();
               break;
             }
-            case 80: {
-              bitField0_ |= 0x00000200;
-              itemId_ = input.readInt32();
-              break;
-            }
-            case 88: {
-              bitField0_ |= 0x00000400;
-              itemQuantity_ = input.readInt32();
+            case 82: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
               break;
             }
           }
@@ -3752,7 +3730,6 @@ public final class BoosterPackStuffProto {
     }
 
     private int bitField0_;
-    // optional int32 boosterItemId = 1;
     public static final int BOOSTERITEMID_FIELD_NUMBER = 1;
     private int boosterItemId_;
     /**
@@ -3768,7 +3745,6 @@ public final class BoosterPackStuffProto {
       return boosterItemId_;
     }
 
-    // optional int32 boosterPackId = 2;
     public static final int BOOSTERPACKID_FIELD_NUMBER = 2;
     private int boosterPackId_;
     /**
@@ -3784,62 +3760,13 @@ public final class BoosterPackStuffProto {
       return boosterPackId_;
     }
 
-    // optional int32 monsterId = 3;
-    public static final int MONSTERID_FIELD_NUMBER = 3;
-    private int monsterId_;
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    public boolean hasMonsterId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 monsterId = 3;</code>
-     */
-    public int getMonsterId() {
-      return monsterId_;
-    }
-
-    // optional int32 numPieces = 4;
-    public static final int NUMPIECES_FIELD_NUMBER = 4;
-    private int numPieces_;
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    public boolean hasNumPieces() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 numPieces = 4;</code>
-     */
-    public int getNumPieces() {
-      return numPieces_;
-    }
-
-    // optional bool isComplete = 5;
-    public static final int ISCOMPLETE_FIELD_NUMBER = 5;
-    private boolean isComplete_;
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bool isComplete = 5;</code>
-     */
-    public boolean getIsComplete() {
-      return isComplete_;
-    }
-
-    // optional bool isSpecial = 6;
     public static final int ISSPECIAL_FIELD_NUMBER = 6;
     private boolean isSpecial_;
     /**
      * <code>optional bool isSpecial = 6;</code>
      */
     public boolean hasIsSpecial() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional bool isSpecial = 6;</code>
@@ -3848,54 +3775,13 @@ public final class BoosterPackStuffProto {
       return isSpecial_;
     }
 
-    // optional int32 gemReward = 7;
-    public static final int GEMREWARD_FIELD_NUMBER = 7;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 gemReward = 7;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
-    }
-
-    // optional int32 cashReward = 8;
-    public static final int CASHREWARD_FIELD_NUMBER = 8;
-    private int cashReward_;
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    public boolean hasCashReward() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 cashReward = 8;</code>
-     *
-     * <pre>
-     *not going to be used
-     * </pre>
-     */
-    public int getCashReward() {
-      return cashReward_;
-    }
-
-    // optional float chanceToAppear = 9;
     public static final int CHANCETOAPPEAR_FIELD_NUMBER = 9;
     private float chanceToAppear_;
     /**
      * <code>optional float chanceToAppear = 9;</code>
      */
     public boolean hasChanceToAppear() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional float chanceToAppear = 9;</code>
@@ -3904,55 +3790,39 @@ public final class BoosterPackStuffProto {
       return chanceToAppear_;
     }
 
-    // optional int32 itemId = 10;
-    public static final int ITEMID_FIELD_NUMBER = 10;
-    private int itemId_;
+    public static final int REWARD_FIELD_NUMBER = 10;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+    public boolean hasReward() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 itemId = 10;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    // optional int32 itemQuantity = 11;
-    public static final int ITEMQUANTITY_FIELD_NUMBER = 11;
-    private int itemQuantity_;
-    /**
-     * <code>optional int32 itemQuantity = 11;</code>
-     */
-    public boolean hasItemQuantity() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional int32 itemQuantity = 11;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
      */
-    public int getItemQuantity() {
-      return itemQuantity_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     private void initFields() {
       boosterItemId_ = 0;
       boosterPackId_ = 0;
-      monsterId_ = 0;
-      numPieces_ = 0;
-      isComplete_ = false;
       isSpecial_ = false;
-      gemReward_ = 0;
-      cashReward_ = 0;
       chanceToAppear_ = 0F;
-      itemId_ = 0;
-      itemQuantity_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3968,31 +3838,13 @@ public final class BoosterPackStuffProto {
         output.writeInt32(2, boosterPackId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, monsterId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, numPieces_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, isComplete_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(6, isSpecial_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, gemReward_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, cashReward_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeFloat(9, chanceToAppear_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, itemId_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, itemQuantity_);
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(10, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4013,39 +3865,15 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, monsterId_);
+          .computeBoolSize(6, isSpecial_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, numPieces_);
+          .computeFloatSize(9, chanceToAppear_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isComplete_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, isSpecial_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, gemReward_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, cashReward_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(9, chanceToAppear_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, itemId_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, itemQuantity_);
+          .computeMessageSize(10, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4129,8 +3957,9 @@ public final class BoosterPackStuffProto {
      * Protobuf type {@code com.lvl6.proto.BoosterItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoosterItemProto)
+        com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterItemProto_descriptor;
@@ -4155,6 +3984,7 @@ public final class BoosterPackStuffProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4167,24 +3997,16 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         boosterPackId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        monsterId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        numPieces_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        isComplete_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
         isSpecial_ = false;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        cashReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000004);
         chanceToAppear_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
-        itemQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -4224,39 +4046,19 @@ public final class BoosterPackStuffProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.monsterId_ = monsterId_;
+        result.isSpecial_ = isSpecial_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.numPieces_ = numPieces_;
+        result.chanceToAppear_ = chanceToAppear_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.isComplete_ = isComplete_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
         }
-        result.isSpecial_ = isSpecial_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.cashReward_ = cashReward_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.chanceToAppear_ = chanceToAppear_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.itemId_ = itemId_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.itemQuantity_ = itemQuantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4279,32 +4081,14 @@ public final class BoosterPackStuffProto {
         if (other.hasBoosterPackId()) {
           setBoosterPackId(other.getBoosterPackId());
         }
-        if (other.hasMonsterId()) {
-          setMonsterId(other.getMonsterId());
-        }
-        if (other.hasNumPieces()) {
-          setNumPieces(other.getNumPieces());
-        }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
-        }
         if (other.hasIsSpecial()) {
           setIsSpecial(other.getIsSpecial());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasCashReward()) {
-          setCashReward(other.getCashReward());
         }
         if (other.hasChanceToAppear()) {
           setChanceToAppear(other.getChanceToAppear());
         }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        if (other.hasItemQuantity()) {
-          setItemQuantity(other.getItemQuantity());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4333,7 +4117,6 @@ public final class BoosterPackStuffProto {
       }
       private int bitField0_;
 
-      // optional int32 boosterItemId = 1;
       private int boosterItemId_ ;
       /**
        * <code>optional int32 boosterItemId = 1;</code>
@@ -4366,7 +4149,6 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // optional int32 boosterPackId = 2;
       private int boosterPackId_ ;
       /**
        * <code>optional int32 boosterPackId = 2;</code>
@@ -4399,112 +4181,12 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // optional int32 monsterId = 3;
-      private int monsterId_ ;
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public boolean hasMonsterId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public int getMonsterId() {
-        return monsterId_;
-      }
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public Builder setMonsterId(int value) {
-        bitField0_ |= 0x00000004;
-        monsterId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 monsterId = 3;</code>
-       */
-      public Builder clearMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        monsterId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 numPieces = 4;
-      private int numPieces_ ;
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public boolean hasNumPieces() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public int getNumPieces() {
-        return numPieces_;
-      }
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public Builder setNumPieces(int value) {
-        bitField0_ |= 0x00000008;
-        numPieces_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 numPieces = 4;</code>
-       */
-      public Builder clearNumPieces() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        numPieces_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional bool isComplete = 5;
-      private boolean isComplete_ ;
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public boolean getIsComplete() {
-        return isComplete_;
-      }
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000010;
-        isComplete_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isComplete = 5;</code>
-       */
-      public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        isComplete_ = false;
-        onChanged();
-        return this;
-      }
-
-      // optional bool isSpecial = 6;
       private boolean isSpecial_ ;
       /**
        * <code>optional bool isSpecial = 6;</code>
        */
       public boolean hasIsSpecial() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional bool isSpecial = 6;</code>
@@ -4516,7 +4198,7 @@ public final class BoosterPackStuffProto {
        * <code>optional bool isSpecial = 6;</code>
        */
       public Builder setIsSpecial(boolean value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000004;
         isSpecial_ = value;
         onChanged();
         return this;
@@ -4525,101 +4207,18 @@ public final class BoosterPackStuffProto {
        * <code>optional bool isSpecial = 6;</code>
        */
       public Builder clearIsSpecial() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000004);
         isSpecial_ = false;
         onChanged();
         return this;
       }
 
-      // optional int32 gemReward = 7;
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000040;
-        gemReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 gemReward = 7;</code>
-       */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 cashReward = 8;
-      private int cashReward_ ;
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public boolean hasCashReward() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public int getCashReward() {
-        return cashReward_;
-      }
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public Builder setCashReward(int value) {
-        bitField0_ |= 0x00000080;
-        cashReward_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 cashReward = 8;</code>
-       *
-       * <pre>
-       *not going to be used
-       * </pre>
-       */
-      public Builder clearCashReward() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        cashReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional float chanceToAppear = 9;
       private float chanceToAppear_ ;
       /**
        * <code>optional float chanceToAppear = 9;</code>
        */
       public boolean hasChanceToAppear() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional float chanceToAppear = 9;</code>
@@ -4631,7 +4230,7 @@ public final class BoosterPackStuffProto {
        * <code>optional float chanceToAppear = 9;</code>
        */
       public Builder setChanceToAppear(float value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000008;
         chanceToAppear_ = value;
         onChanged();
         return this;
@@ -4640,76 +4239,126 @@ public final class BoosterPackStuffProto {
        * <code>optional float chanceToAppear = 9;</code>
        */
       public Builder clearChanceToAppear() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000008);
         chanceToAppear_ = 0F;
         onChanged();
         return this;
       }
 
-      // optional int32 itemId = 10;
-      private int itemId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+      public boolean hasReward() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public int getItemId() {
-        return itemId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000200;
-        itemId_ = value;
-        onChanged();
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <code>optional int32 itemId = 10;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        itemId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 itemQuantity = 11;
-      private int itemQuantity_ ;
-      /**
-       * <code>optional int32 itemQuantity = 11;</code>
-       */
-      public boolean hasItemQuantity() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional int32 itemQuantity = 11;</code>
-       */
-      public int getItemQuantity() {
-        return itemQuantity_;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 11;</code>
-       */
-      public Builder setItemQuantity(int value) {
-        bitField0_ |= 0x00000400;
-        itemQuantity_ = value;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <code>optional int32 itemQuantity = 11;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
        */
-      public Builder clearItemQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        itemQuantity_ = 0;
-        onChanged();
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterItemProto)
@@ -4723,10 +4372,10 @@ public final class BoosterPackStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoosterItemProto)
   }
 
-  public interface BoosterDisplayItemProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface BoosterDisplayItemProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BoosterDisplayItemProto)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 boosterPackId = 1;
     /**
      * <code>optional int32 boosterPackId = 1;</code>
      *
@@ -4744,90 +4393,26 @@ public final class BoosterPackStuffProto {
      */
     int getBoosterPackId();
 
-    // optional bool isMonster = 2;
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    boolean hasIsMonster();
+    boolean hasReward();
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    boolean getIsMonster();
-
-    // optional bool isComplete = 3;
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
     /**
-     * <code>optional bool isComplete = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    boolean hasIsComplete();
-    /**
-     * <code>optional bool isComplete = 3;</code>
-     */
-    boolean getIsComplete();
-
-    // optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    boolean hasQuality();
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
-
-    // optional int32 gemReward = 5;
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    boolean hasGemReward();
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    int getGemReward();
-
-    // optional int32 quantity = 6;
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    boolean hasQuantity();
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    int getQuantity();
-
-    // optional int32 itemId = 7;
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    boolean hasItemId();
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    int getItemId();
-
-    // optional int32 itemQuantity = 8;
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    boolean hasItemQuantity();
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    int getItemQuantity();
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BoosterDisplayItemProto}
    */
   public static final class BoosterDisplayItemProto extends
-      com.google.protobuf.GeneratedMessage
-      implements BoosterDisplayItemProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BoosterDisplayItemProto)
+      BoosterDisplayItemProtoOrBuilder {
     // Use BoosterDisplayItemProto.newBuilder() to construct.
     private BoosterDisplayItemProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4878,45 +4463,17 @@ public final class BoosterPackStuffProto {
               boosterPackId_ = input.readInt32();
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              isMonster_ = input.readBool();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              isComplete_ = input.readBool();
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                quality_ = value;
+            case 18: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = reward_.toBuilder();
               }
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              gemReward_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              quantity_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              itemId_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              itemQuantity_ = input.readInt32();
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -4959,7 +4516,6 @@ public final class BoosterPackStuffProto {
     }
 
     private int bitField0_;
-    // optional int32 boosterPackId = 1;
     public static final int BOOSTERPACKID_FIELD_NUMBER = 1;
     private int boosterPackId_;
     /**
@@ -4983,140 +4539,36 @@ public final class BoosterPackStuffProto {
       return boosterPackId_;
     }
 
-    // optional bool isMonster = 2;
-    public static final int ISMONSTER_FIELD_NUMBER = 2;
-    private boolean isMonster_;
+    public static final int REWARD_FIELD_NUMBER = 2;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    public boolean hasIsMonster() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional bool isMonster = 2;</code>
-     *
-     * <pre>
-     *true means monster, false means gems
-     * </pre>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    public boolean getIsMonster() {
-      return isMonster_;
-    }
-
-    // optional bool isComplete = 3;
-    public static final int ISCOMPLETE_FIELD_NUMBER = 3;
-    private boolean isComplete_;
-    /**
-     * <code>optional bool isComplete = 3;</code>
-     */
-    public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional bool isComplete = 3;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
      */
-    public boolean getIsComplete() {
-      return isComplete_;
-    }
-
-    // optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];
-    public static final int QUALITY_FIELD_NUMBER = 4;
-    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    public boolean hasQuality() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-     */
-    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-      return quality_;
-    }
-
-    // optional int32 gemReward = 5;
-    public static final int GEMREWARD_FIELD_NUMBER = 5;
-    private int gemReward_;
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 gemReward = 5;</code>
-     */
-    public int getGemReward() {
-      return gemReward_;
-    }
-
-    // optional int32 quantity = 6;
-    public static final int QUANTITY_FIELD_NUMBER = 6;
-    private int quantity_;
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    public boolean hasQuantity() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 quantity = 6;</code>
-     */
-    public int getQuantity() {
-      return quantity_;
-    }
-
-    // optional int32 itemId = 7;
-    public static final int ITEMID_FIELD_NUMBER = 7;
-    private int itemId_;
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 itemId = 7;</code>
-     */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    // optional int32 itemQuantity = 8;
-    public static final int ITEMQUANTITY_FIELD_NUMBER = 8;
-    private int itemQuantity_;
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    public boolean hasItemQuantity() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 itemQuantity = 8;</code>
-     */
-    public int getItemQuantity() {
-      return itemQuantity_;
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     private void initFields() {
       boosterPackId_ = 0;
-      isMonster_ = false;
-      isComplete_ = false;
-      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      gemReward_ = 0;
-      quantity_ = 0;
-      itemId_ = 0;
-      itemQuantity_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5129,25 +4581,7 @@ public final class BoosterPackStuffProto {
         output.writeInt32(1, boosterPackId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBool(2, isMonster_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBool(3, isComplete_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, gemReward_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, quantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, itemId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, itemQuantity_);
+        output.writeMessage(2, reward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5164,31 +4598,7 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, isMonster_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, isComplete_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, gemReward_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, quantity_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, itemId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, itemQuantity_);
+          .computeMessageSize(2, reward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5272,8 +4682,9 @@ public final class BoosterPackStuffProto {
      * Protobuf type {@code com.lvl6.proto.BoosterDisplayItemProto}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BoosterDisplayItemProto)
+        com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor;
@@ -5298,6 +4709,7 @@ public final class BoosterPackStuffProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5308,20 +4720,12 @@ public final class BoosterPackStuffProto {
         super.clear();
         boosterPackId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        isMonster_ = false;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        isComplete_ = false;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        quantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        itemQuantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -5357,31 +4761,11 @@ public final class BoosterPackStuffProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.isMonster_ = isMonster_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
         }
-        result.isComplete_ = isComplete_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.quality_ = quality_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.quantity_ = quantity_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.itemId_ = itemId_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.itemQuantity_ = itemQuantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5401,26 +4785,8 @@ public final class BoosterPackStuffProto {
         if (other.hasBoosterPackId()) {
           setBoosterPackId(other.getBoosterPackId());
         }
-        if (other.hasIsMonster()) {
-          setIsMonster(other.getIsMonster());
-        }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
-        }
-        if (other.hasQuality()) {
-          setQuality(other.getQuality());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasQuantity()) {
-          setQuantity(other.getQuantity());
-        }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        if (other.hasItemQuantity()) {
-          setItemQuantity(other.getItemQuantity());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5449,7 +4815,6 @@ public final class BoosterPackStuffProto {
       }
       private int bitField0_;
 
-      // optional int32 boosterPackId = 1;
       private int boosterPackId_ ;
       /**
        * <code>optional int32 boosterPackId = 1;</code>
@@ -5498,254 +4863,120 @@ public final class BoosterPackStuffProto {
         return this;
       }
 
-      // optional bool isMonster = 2;
-      private boolean isMonster_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public boolean hasIsMonster() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public boolean getIsMonster() {
-        return isMonster_;
-      }
-      /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
-       */
-      public Builder setIsMonster(boolean value) {
-        bitField0_ |= 0x00000002;
-        isMonster_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isMonster = 2;</code>
-       *
-       * <pre>
-       *true means monster, false means gems
-       * </pre>
-       */
-      public Builder clearIsMonster() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        isMonster_ = false;
-        onChanged();
-        return this;
-      }
-
-      // optional bool isComplete = 3;
-      private boolean isComplete_ ;
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public boolean getIsComplete() {
-        return isComplete_;
-      }
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000004;
-        isComplete_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool isComplete = 3;</code>
-       */
-      public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        isComplete_ = false;
-        onChanged();
-        return this;
-      }
-
-      // optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];
-      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-       */
-      public boolean hasQuality() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-       */
-      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-        return quality_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
-       */
-      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
         }
-        bitField0_ |= 0x00000008;
-        quality_ = value;
-        onChanged();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
+       */
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 gemReward = 5;
-      private int gemReward_ ;
-      /**
-       * <code>optional int32 gemReward = 5;</code>
-       */
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 gemReward = 5;</code>
-       */
-      public int getGemReward() {
-        return gemReward_;
-      }
-      /**
-       * <code>optional int32 gemReward = 5;</code>
-       */
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000010;
-        gemReward_ = value;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional int32 gemReward = 5;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 quantity = 6;
-      private int quantity_ ;
-      /**
-       * <code>optional int32 quantity = 6;</code>
-       */
-      public boolean hasQuantity() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 quantity = 6;</code>
-       */
-      public int getQuantity() {
-        return quantity_;
-      }
-      /**
-       * <code>optional int32 quantity = 6;</code>
-       */
-      public Builder setQuantity(int value) {
-        bitField0_ |= 0x00000020;
-        quantity_ = value;
-        onChanged();
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional int32 quantity = 6;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        quantity_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 itemId = 7;
-      private int itemId_ ;
-      /**
-       * <code>optional int32 itemId = 7;</code>
-       */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 itemId = 7;</code>
-       */
-      public int getItemId() {
-        return itemId_;
-      }
-      /**
-       * <code>optional int32 itemId = 7;</code>
-       */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000040;
-        itemId_ = value;
-        onChanged();
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional int32 itemId = 7;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        itemId_ = 0;
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000002;
         onChanged();
-        return this;
-      }
-
-      // optional int32 itemQuantity = 8;
-      private int itemQuantity_ ;
-      /**
-       * <code>optional int32 itemQuantity = 8;</code>
-       */
-      public boolean hasItemQuantity() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return getRewardFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional int32 itemQuantity = 8;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public int getItemQuantity() {
-        return itemQuantity_;
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
       }
       /**
-       * <code>optional int32 itemQuantity = 8;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 2;</code>
        */
-      public Builder setItemQuantity(int value) {
-        bitField0_ |= 0x00000080;
-        itemQuantity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 itemQuantity = 8;</code>
-       */
-      public Builder clearItemQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        itemQuantity_ = 0;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterDisplayItemProto)
@@ -5759,22 +4990,22 @@ public final class BoosterPackStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoosterDisplayItemProto)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RareBoosterPurchaseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BoosterPackProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BoosterItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -5789,75 +5020,72 @@ public final class BoosterPackStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026BoosterPackStuff.proto\022\016com.lvl6.proto" +
-      "\032\026SharedEnumConfig.proto\032\nUser.proto\"\250\001\n" +
-      "\030RareBoosterPurchaseProto\022.\n\004user\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\0221\n\007boo" +
-      "ster\030\002 \001(\0132 .com.lvl6.proto.BoosterPackP" +
-      "roto\022\026\n\016timeOfPurchase\030\003 \001(\004\022\021\n\tmonsterI" +
-      "d\030\004 \001(\005\"\346\003\n\020BoosterPackProto\022\025\n\rboosterP" +
-      "ackId\030\001 \001(\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010" +
-      "gemPrice\030\003 \001(\005\0226\n\014specialItems\030\004 \003(\0132 .c" +
-      "om.lvl6.proto.BoosterItemProto\022\035\n\025listBa",
-      "ckgroundImgName\030\005 \001(\t\022\027\n\017listDescription" +
-      "\030\006 \001(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTitl" +
-      "eImgName\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022=" +
-      "\n\014displayItems\030\n \003(\0132\'.com.lvl6.proto.Bo" +
-      "osterDisplayItemProto\022G\n\004type\030\013 \001(\01620.co" +
-      "m.lvl6.proto.BoosterPackProto.BoosterPac" +
-      "kType:\007NO_TYPE\"P\n\017BoosterPackType\022\013\n\007NO_" +
-      "TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010ULTIMATE\020\003\022\013\n\007START" +
-      "ER\020\004\022\n\n\006RIGGED\020\005\"\362\001\n\020BoosterItemProto\022\025\n" +
-      "\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPackId\030\002 ",
-      "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001(" +
-      "\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(\010" +
-      "\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005\022" +
-      "\026\n\016chanceToAppear\030\t \001(\002\022\016\n\006itemId\030\n \001(\005\022" +
-      "\024\n\014itemQuantity\030\013 \001(\005\"\330\001\n\027BoosterDisplay" +
-      "ItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n\tisMo" +
-      "nster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\0224\n\007quali" +
-      "ty\030\004 \001(\0162\027.com.lvl6.proto.Quality:\nNO_QU" +
-      "ALITY\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010quantity\030\006 \001" +
-      "(\005\022\016\n\006itemId\030\007 \001(\005\022\024\n\014itemQuantity\030\010 \001(\005",
-      "B\027B\025BoosterPackStuffProto"
+      "\032\014Reward.proto\032\nUser.proto\"\250\001\n\030RareBoost" +
+      "erPurchaseProto\022.\n\004user\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\0221\n\007booster\030\002 \001(\013" +
+      "2 .com.lvl6.proto.BoosterPackProto\022\026\n\016ti" +
+      "meOfPurchase\030\003 \001(\004\022\021\n\tmonsterId\030\004 \001(\005\"\201\004" +
+      "\n\020BoosterPackProto\022\025\n\rboosterPackId\030\001 \001(" +
+      "\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010gemPrice\030\003" +
+      " \001(\005\022\031\n\021gachaCreditsPrice\030\014 \001(\005\0226\n\014speci" +
+      "alItems\030\004 \003(\0132 .com.lvl6.proto.BoosterIt",
+      "emProto\022\035\n\025listBackgroundImgName\030\005 \001(\t\022\027" +
+      "\n\017listDescription\030\006 \001(\t\022\025\n\rnavBarImgName" +
+      "\030\007 \001(\t\022\027\n\017navTitleImgName\030\010 \001(\t\022\026\n\016machi" +
+      "neImgName\030\t \001(\t\022=\n\014displayItems\030\n \003(\0132\'." +
+      "com.lvl6.proto.BoosterDisplayItemProto\022G" +
+      "\n\004type\030\013 \001(\01620.com.lvl6.proto.BoosterPac" +
+      "kProto.BoosterPackType:\007NO_TYPE\"P\n\017Boost" +
+      "erPackType\022\013\n\007NO_TYPE\020\001\022\t\n\005BASIC\020\002\022\014\n\010UL" +
+      "TIMATE\020\003\022\013\n\007STARTER\020\004\022\n\n\006RIGGED\020\005\"\230\001\n\020Bo" +
+      "osterItemProto\022\025\n\rboosterItemId\030\001 \001(\005\022\025\n",
+      "\rboosterPackId\030\002 \001(\005\022\021\n\tisSpecial\030\006 \001(\010\022" +
+      "\026\n\016chanceToAppear\030\t \001(\002\022+\n\006reward\030\n \001(\0132" +
+      "\033.com.lvl6.proto.RewardProto\"]\n\027BoosterD" +
+      "isplayItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022+" +
+      "\n\006reward\030\002 \001(\0132\033.com.lvl6.proto.RewardPr" +
+      "otoB\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_RareBoosterPurchaseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor,
-              new java.lang.String[] { "User", "Booster", "TimeOfPurchase", "MonsterId", });
-          internal_static_com_lvl6_proto_BoosterPackProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BoosterPackProto_descriptor,
-              new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", "Type", });
-          internal_static_com_lvl6_proto_BoosterItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BoosterItemProto_descriptor,
-              new java.lang.String[] { "BoosterItemId", "BoosterPackId", "MonsterId", "NumPieces", "IsComplete", "IsSpecial", "GemReward", "CashReward", "ChanceToAppear", "ItemId", "ItemQuantity", });
-          internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor,
-              new java.lang.String[] { "BoosterPackId", "IsMonster", "IsComplete", "Quality", "GemReward", "Quantity", "ItemId", "ItemQuantity", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_RareBoosterPurchaseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor,
+        new java.lang.String[] { "User", "Booster", "TimeOfPurchase", "MonsterId", });
+    internal_static_com_lvl6_proto_BoosterPackProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoosterPackProto_descriptor,
+        new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "GachaCreditsPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", "Type", });
+    internal_static_com_lvl6_proto_BoosterItemProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoosterItemProto_descriptor,
+        new java.lang.String[] { "BoosterItemId", "BoosterPackId", "IsSpecial", "ChanceToAppear", "Reward", });
+    internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor,
+        new java.lang.String[] { "BoosterPackId", "Reward", });
+    com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

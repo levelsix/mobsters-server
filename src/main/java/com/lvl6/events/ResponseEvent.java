@@ -32,6 +32,8 @@ public abstract class ResponseEvent<T extends GeneratedMessage> extends GameEven
 	public EventProtocolResponse getEventType() {
 		return eventType;
 	}
+	
+	public abstract int eventSize();
 
 	public abstract int write(ByteBuffer bb);
 

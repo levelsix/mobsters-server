@@ -34,5 +34,9 @@ public class InAppPurchaseResponseEvent extends NormalResponseEvent<InAppPurchas
 			InAppPurchaseResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return inAppPurchaseResponseProto.getSerializedSize();
+	}
 
 }

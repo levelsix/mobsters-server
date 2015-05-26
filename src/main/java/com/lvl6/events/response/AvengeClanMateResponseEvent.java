@@ -27,5 +27,9 @@ public class AvengeClanMateResponseEvent extends NormalResponseEvent<AvengeClanM
 			AvengeClanMateResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return avengeClanMateResponseProto.getSerializedSize();
+	}
 
 }

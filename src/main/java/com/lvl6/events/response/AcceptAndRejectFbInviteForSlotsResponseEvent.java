@@ -15,6 +15,10 @@ public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponse
 		super(playerId);
 		eventType = EventProtocolResponse.S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT;
 	}
+	
+	public int eventSize() {
+		return acceptAndRejectFbInviteForSlotsResponseProto.getSerializedSize();
+	}
 
 	@Override
 	public int write(ByteBuffer bb) {

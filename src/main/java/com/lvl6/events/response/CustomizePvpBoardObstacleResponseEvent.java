@@ -27,5 +27,9 @@ public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<
 			CustomizePvpBoardObstacleResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
+	
+	public int eventSize() {
+		return customizePvpBoardObstacleResponseProto.getSerializedSize();
+	}
 
 }

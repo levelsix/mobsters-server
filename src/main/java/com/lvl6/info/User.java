@@ -16,10 +16,10 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 
+	private static final long serialVersionUID = -858952596036387308L;
+
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-
-	private static final long serialVersionUID = -1551162148806486099L;
 
 	private String id;
 	private String name;
@@ -67,7 +67,9 @@ public class User implements Serializable {
 	private boolean salesJumpTwoTiers;
 	private long totalStrength;
 	private int segmentationGroup;
-
+	private int gachaCredits;
+	private Date lastTangoGiftSentTime;
+	private String tangoId;
 
 	public User() {
 		super();
@@ -89,8 +91,9 @@ public class User implements Serializable {
 			Date lastSecretGiftCollectTime, String pvpDefendingMessage,
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
 			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
-			long totalStrength, int segmentationGroup) {
-
+			long totalStrength, int segmentationGroup, int gachaCredits,
+			Date lastTangoGiftSentTime, String tangoId)
+	{
 		super();
 		this.id = id;
 		this.name = name;
@@ -138,10 +141,10 @@ public class User implements Serializable {
 		this.salesJumpTwoTiers = salesJumpTwoTiers;
 		this.totalStrength = totalStrength;
 		this.segmentationGroup = segmentationGroup;
-
+		this.gachaCredits = gachaCredits;
+		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
+		this.tangoId = tangoId;
 	}
-
-
 
 	public boolean updateSetdevicetoken(String deviceToken) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -527,13 +530,16 @@ public class User implements Serializable {
 	}
 
 	public int updateRelativeCashAndOilAndGems(int cashDelta, int oilDelta,
-			int gemsDelta) {
+			int gemsDelta, int gachaCreditsDelta) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
 		if (gemsDelta != 0) {
 			relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
+		}
+		if (gachaCreditsDelta != 0) {
+			relativeParams.put(DBConstants.USER__GACHA_CREDITS, gachaCreditsDelta);
 		}
 		if (oilDelta != 0) {
 			relativeParams.put(DBConstants.USER__OIL, oilDelta);
@@ -553,6 +559,7 @@ public class User implements Serializable {
 			this.gems += gemsDelta;
 			this.oil += oilDelta;
 			this.cash += cashDelta;
+			this.gachaCredits += gachaCreditsDelta;
 		}
 		return numUpdated;
 	}
@@ -925,8 +932,8 @@ public class User implements Serializable {
 
 	}
 
-	public boolean updateBoughtBoosterPack(int gemChange, Date now,
-			boolean freeBoosterPack, boolean riggedBoosterPack) {
+	public boolean updateBoughtBoosterPack(int gemChange, int gachaCreditsChange,
+			Date now, boolean freeBoosterPack, boolean riggedBoosterPack) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -934,6 +941,9 @@ public class User implements Serializable {
 
 		if (gemChange != 0) {
 			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+		if (gachaCreditsChange != 0) {
+			relativeParams.put(DBConstants.USER__GACHA_CREDITS, gachaCreditsChange);
 		}
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
@@ -957,6 +967,7 @@ public class User implements Serializable {
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.gems += gemChange;
+			this.gachaCredits += gachaCreditsChange;
 
 			if (freeBoosterPack) {
 				this.lastFreeBoosterPackTime = now;
@@ -1148,6 +1159,47 @@ public class User implements Serializable {
 		log.error("did not update user segmentation group");
 		return false;
 	}
+
+	public boolean updateLastTangoGiftSentTime(Date time, int gemReward) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		Timestamp ts = new Timestamp(time.getTime());
+		absoluteParams.put(DBConstants.USER__LAST_TANGO_GIFT_SENT_TIME, ts);
+
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		relativeParams.put(DBConstants.USER__GEMS, gemReward);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, relativeParams, absoluteParams, conditionParams,
+				"and");
+		if (numUpdated == 1) {
+			this.lastTangoGiftSentTime = time;
+			this.gems += gemReward;
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean updateTangoId(String tangoId) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__TANGO_ID, tangoId);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, null, absoluteParams, conditionParams,
+				"and");
+		if (numUpdated == 1) {
+			this.tangoId = tangoId;
+			return true;
+		}
+		return false;
+	}
+
 
 	public String getId() {
 		return id;
@@ -1478,45 +1530,6 @@ public class User implements Serializable {
 		this.boughtRiggedBoosterPack = boughtRiggedBoosterPack;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level
-				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
-				+ ", experience=" + experience + ", tasksCompleted="
-				+ tasksCompleted + ", referralCode=" + referralCode
-				+ ", numReferrals=" + numReferrals + ", udidForHistory="
-				+ udidForHistory + ", lastLogin=" + lastLogin + ", lastLogout="
-				+ lastLogout + ", deviceToken=" + deviceToken + ", numBadges="
-				+ numBadges + ", isFake=" + isFake + ", createTime="
-				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId="
-				+ apsalarId + ", numCoinsRetrievedFromStructs="
-				+ numCoinsRetrievedFromStructs
-				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
-				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
-				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
-				+ lastWallPostNotificationTime + ", hasReceivedfbReward="
-				+ hasReceivedfbReward + ", numBeginnerSalesPurchased="
-				+ numBeginnerSalesPurchased + ", facebookId=" + facebookId
-				+ ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
-				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
-				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime
-				+ ", numObstaclesRemoved=" + numObstaclesRemoved
-				+ ", lastMiniJobGeneratedTime=" + lastMiniJobGeneratedTime
-				+ ", avatarMonsterId=" + avatarMonsterId
-				+ ", lastFreeBoosterPackTime=" + lastFreeBoosterPackTime
-				+ ", clanHelps=" + clanHelps + ", lastSecretGiftCollectTime="
-				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
-				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
-				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
-				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
-				+ ", lastPurchaseTime=" + lastPurchaseTime
-				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
-				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
-				+ segmentationGroup + "]";
-	}
-
 	public int getSalesValue() {
 		return salesValue;
 	}
@@ -1558,5 +1571,67 @@ public class User implements Serializable {
 		this.segmentationGroup = segmentationGroup;
 	}
 
+	public int getGachaCredits() {
+		return gachaCredits;
+	}
+
+	public void setGachaCredits(int gachaCredits) {
+		this.gachaCredits = gachaCredits;
+	}
+
+	public Date getLastTangoGiftSentTime() {
+		return lastTangoGiftSentTime;
+	}
+
+	public void setLastTangoGiftSentTime(Date lastTangoGiftSentTime) {
+		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
+	}
+
+	public String getTangoId() {
+		return tangoId;
+	}
+
+	public void setTangoId(String tangoId) {
+		this.tangoId = tangoId;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", level=" + level
+				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
+				+ ", experience=" + experience + ", tasksCompleted="
+				+ tasksCompleted + ", referralCode=" + referralCode
+				+ ", numReferrals=" + numReferrals + ", udidForHistory="
+				+ udidForHistory + ", lastLogin=" + lastLogin + ", lastLogout="
+				+ lastLogout + ", deviceToken=" + deviceToken + ", numBadges="
+				+ numBadges + ", isFake=" + isFake + ", createTime="
+				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId="
+				+ apsalarId + ", numCoinsRetrievedFromStructs="
+				+ numCoinsRetrievedFromStructs
+				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
+				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
+				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
+				+ lastWallPostNotificationTime + ", hasReceivedfbReward="
+				+ hasReceivedfbReward + ", numBeginnerSalesPurchased="
+				+ numBeginnerSalesPurchased + ", facebookId=" + facebookId
+				+ ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
+				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
+				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime
+				+ ", numObstaclesRemoved=" + numObstaclesRemoved
+				+ ", lastMiniJobGeneratedTime=" + lastMiniJobGeneratedTime
+				+ ", avatarMonsterId=" + avatarMonsterId
+				+ ", lastFreeBoosterPackTime=" + lastFreeBoosterPackTime
+				+ ", clanHelps=" + clanHelps + ", lastSecretGiftCollectTime="
+				+ lastSecretGiftCollectTime + ", pvpDefendingMessage="
+				+ pvpDefendingMessage + ", lastTeamDonateSolicitation="
+				+ lastTeamDonateSolicitation + ", boughtRiggedBoosterPack="
+				+ boughtRiggedBoosterPack + ", salesValue=" + salesValue
+				+ ", lastPurchaseTime=" + lastPurchaseTime
+				+ ", salesJumpTwoTiers=" + salesJumpTwoTiers
+				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
+				+ segmentationGroup + ", gachaCredits=" + gachaCredits
+				+ ", lastTangoGiftSentTime=" + lastTangoGiftSentTime
+				+ ", tangoId=" + tangoId + "]";
+	}
 
 }
