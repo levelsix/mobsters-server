@@ -177,8 +177,8 @@ public class ControllerConstants {
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
 			10000, 100000, 1000000, 3000000, 100000000 };
-	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
-			720, 2160, 72000 };
+	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 5, 45, 400,
+			3600, 10800, 360000 };
 	
 	// had to increase by 1 because of a bug on the client
 	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 502, 1001,
@@ -213,7 +213,7 @@ public class ControllerConstants {
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = { 1, 300, 3600, 86400,
 			604800, 157852800 };
-	public static final int[] SPEED_UP__NUM_GEMS = { 1, 1, 12, 144, 840, 219240 };
+	public static final int[] SPEED_UP__NUM_GEMS = { 1, 5, 60, 720, 4200, 1096200 };
 
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
@@ -260,8 +260,8 @@ public class ControllerConstants {
 	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON = 6;
 	public static final int TUTORIAL__INIT_CASH = 2500;
 	public static final int TUTORIAL__INIT_OIL = 2500;
-	public static final int TUTORIAL__INIT_GEMS = 50;
-	public static final int TUTORIAL__GACHA_CREDITS = 100000;  //TODO: this value needs to be set
+	public static final int TUTORIAL__INIT_GEMS = 100;
+	public static final int TUTORIAL__GACHA_CREDITS = 500;
 	public static final int TUTORIAL__INIT_RANK = 100;
 	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2, 2, 2, 2, 2,
 			2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
