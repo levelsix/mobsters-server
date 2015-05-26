@@ -105,6 +105,7 @@ public class TradeItemForResourcesAction {
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
+		setUpDaos();
 		resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
@@ -125,6 +126,12 @@ public class TradeItemForResourcesAction {
 			return;
 		}
 		resBuilder.setStatus(TradeItemForResourcesStatus.SUCCESS);
+	}
+	
+	public void setUpDaos() {
+		Configuration config = new DefaultConfiguration().set(DBConnection.get()
+				.getConnection()).set(SQLDialect.MYSQL);
+		userCurrencyHistoryDao = new UserCurrencyHistoryDao(config);
 	}
 	
 	private boolean verifySyntax(Builder resBuilder) {
