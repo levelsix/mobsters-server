@@ -153,6 +153,7 @@ public class PurchaseBoosterPackAction {
 	private int gachaCreditsReward;
 
 	public void execute(Builder resBuilder) {
+		setUpDaos();
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
@@ -358,7 +359,7 @@ public class PurchaseBoosterPackAction {
 	private void updateUserCurrency() {
 		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
 		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
-
+		
 		if (freeBoosterPack) {
 			gachaCreditsChange = 0;
 		}
@@ -373,11 +374,11 @@ public class PurchaseBoosterPackAction {
 		log.info("updated, user bought boosterPack? {}", updated);
 		
 		historyUtils.insertUserCurrencyHistoryForGacha(userId, now, gachaCreditsChange, userGachaCredits,
-				userGachaCredits + gachaCreditsChange, "spin gacha", "buying in bulk " + buyingInBulk, 
+				userGachaCredits + gachaCreditsChange, "spin gacha", "buying in bulk ".concat(Boolean.toString(buyingInBulk)), 
 				uchDao, "gachaCredits");
 		if(gemChange != 0) {
 			historyUtils.insertUserCurrencyHistoryForGacha(userId, now, gemChange, userGems, 
-					userGems + gemChange, "spin gacha", "buying in bulk " + buyingInBulk, 
+					userGems + gemChange, "spin gacha", "buying in bulk ".concat(Boolean.toString(buyingInBulk)), 
 					uchDao, "gems");
 		}
 	}

@@ -36,5 +36,3 @@ target/
 *.out
 *.log*
 
-## 
-runOnTomcat.sh
