@@ -285,9 +285,9 @@
 									<packageName>com.lvl6.mobsters.db.jooq.generated</packageName>
 									<directory>src/main/java</directory>
 								</target>
-<!-- 								<strategy> -->
-<!-- 									<name>com.lvl6.misc.CustomDatabaseStrategy</name> -->
-<!-- 								</strategy> -->
+								<!-- <strategy> -->
+								<!-- <name>com.lvl6.misc.CustomDatabaseStrategy</name> -->
+								<!-- </strategy> -->
 							</generator>
 						</configuration>
 					</plugin>
@@ -594,6 +594,16 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-websocket</artifactId>
+				<version>8.0.23</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.websocket</groupId>
+				<artifactId>javax.websocket-api</artifactId>
+				<version>1.1</version>
+			</dependency>
 			<dependency>
 				<groupId>com.typesafe.scala-logging</groupId>
 				<artifactId>scala-logging-slf4j_2.11</artifactId>
@@ -998,6 +1008,14 @@
 
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.typesafe.scala-logging</groupId>
 			<artifactId>scala-logging-slf4j_2.11</artifactId>
