@@ -291,8 +291,8 @@ public class QueueUpAction {
 					//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
 					//					fakeUserMonsters, attackerElo);
 				} else {
-					log.error("no fake users generated. minElo={} \t maxElo={}",
-							minElo, maxElo);
+//					log.error("no fake users generated. minElo={} \t maxElo={}",
+//							minElo, maxElo);
 				}
 			} catch (Exception e) {
 				log.error(
