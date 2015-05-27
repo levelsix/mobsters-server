@@ -456,7 +456,6 @@ public class InAppPurchaseController extends EventController {
         
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
-            log.info("sales package: {}", salesPackage);
         }
         else {
             successorSalesPackage = salesPackagesMap.get(salesPackage.getSuccId());
@@ -501,6 +500,10 @@ public class InAppPurchaseController extends EventController {
 			//do nothing
 		}
 		else if(user.getSalesValue() < 4 && salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
+			//do nothing
+		}
+		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
+				&& salesPackage.getTimeStart() == null) {
 			//do nothing
 		}
 		else {
