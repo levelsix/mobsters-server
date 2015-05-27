@@ -80,7 +80,7 @@ public class GenerateFakeUsersWithoutInput {
 		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
 		if (insertUtils.insertUser(name, null, level, 0, 0, 0, 0, true, null,
 				new Timestamp((new Date()).getTime()), facebookId,
-				avatarMonsterId, "foobar@bohica.com", "All my facebook data!") != null) {
+				avatarMonsterId, "foobar@bohica.com", "All my facebook data!", 0) != null) {
 			System.out.println("error in creating user");
 		}
 

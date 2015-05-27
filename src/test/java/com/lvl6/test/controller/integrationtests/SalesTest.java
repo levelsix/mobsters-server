@@ -97,7 +97,7 @@ public class SalesTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		//		if (null == userId) {
 		//			throw new RuntimeException("no user was created!");
