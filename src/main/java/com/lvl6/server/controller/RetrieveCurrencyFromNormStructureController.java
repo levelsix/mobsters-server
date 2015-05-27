@@ -34,6 +34,7 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -64,6 +65,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public RetrieveCurrencyFromNormStructureController() {
 		numAllocatedThreads = 8;
@@ -212,6 +216,12 @@ public class RetrieveCurrencyFromNormStructureController extends
 
 			if (userStructIdToStructureRetrieval.containsKey(userStructId)) {
 				duplicates.add(userStructId);
+				int duplicateAmount = srProto.getAmountCollected();
+				StructureRetrieval srInMap = userStructIdToStructureRetrieval.get(userStructId);
+				srInMap.setAmountCollected(srInMap.getAmountCollected() + duplicateAmount);
+				if(timeUtils.isFirstEarlierThanSecond(srInMap.getTimeOfRetrieval(), new Date(srProto.getTimeOfRetrieval()))) {
+					srInMap.setTimeOfRetrieval(new Date(srProto.getTimeOfRetrieval()));
+				}
 				continue;
 			}
 
