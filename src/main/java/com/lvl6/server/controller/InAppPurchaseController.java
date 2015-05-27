@@ -456,6 +456,7 @@ public class InAppPurchaseController extends EventController {
         
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
+            log.info("sales package: {}", salesPackage);
         }
         else {
             successorSalesPackage = salesPackagesMap.get(salesPackage.getSuccId());
@@ -494,7 +495,7 @@ public class InAppPurchaseController extends EventController {
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
 				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
 		resBuilder.setPurchasedSalesPackage(curSpp);
-//		log.info("prespp: " + preSpp);
+		log.info("prespp: " + preSpp);
 
 		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
 			//do nothing
