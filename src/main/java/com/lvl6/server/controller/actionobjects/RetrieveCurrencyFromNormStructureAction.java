@@ -125,11 +125,11 @@ public class RetrieveCurrencyFromNormStructureAction {
 			return false;
 		}
 
-		if (!duplicates.isEmpty()) {
-			log.error("clients sent duplicates={}, {}", duplicates,
-					userStructIdsToStructRetrievals);
-			return false;
-		}
+//		if (!duplicates.isEmpty()) {
+//			log.error("clients sent duplicates={}, {}", duplicates,
+//					userStructIdsToStructRetrievals);
+//			return false;
+//		}
 
 		userStructIds = userStructIdsToStructRetrievals.keySet();
 
