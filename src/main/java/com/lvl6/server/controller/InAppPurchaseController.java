@@ -506,6 +506,10 @@ public class InAppPurchaseController extends EventController {
 		else if(user.getSalesValue() < 4 && salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
 			//do nothing
 		}
+		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
+				&& salesPackage.getTimeStart() == null) {
+			//do nothing
+		}
 		else {
 			resBuilder.setSuccessorSalesPackage(preSpp);
 		}
