@@ -1363,7 +1363,27 @@ class StartupService extends LazyLogging{
 				val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 
         val salesProtoList = new ArrayList[SalesPackageProto]()
-				val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
+        val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(user.getId(), null);
+        val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
+
+        var hasHighRoller = false
+        itemIdToUserItems.keySet().foreach { itemId =>
+          //TODO: Make a constant out of this number for builder's id
+          if (itemId == ControllerConstants.ITEM_ID__HIGH_ROLLER_MODE) {
+            hasHighRoller = true
+          }
+        }
+        if(!hasHighRoller && userSalesValue > 0) {
+          idsToSalesPackages.values().foreach { sp:SalesPackage =>
+            if(sp.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
+              val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                  sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
+                  customMenuRetrieveUtil);
+              salesProtoList.add(spProto)
+            }
+          }
+        }
+        
 				idsToSalesPackages.values().foreach { sp:SalesPackage =>
 					if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
 							&& !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
@@ -1374,7 +1394,9 @@ class StartupService extends LazyLogging{
 							  val spProto = inAppPurchaseUtil.createSalesPackageProto(
 								  sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
 								  customMenuRetrieveUtil);
-                salesProtoList.add(spProto)
+                if(!salesProtoList.contains(spProto)) {
+                  salesProtoList.add(spProto)  
+                }
             }
           }
 				}

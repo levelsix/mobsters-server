@@ -75,7 +75,7 @@ public class InAppPurchaseUtils {
 			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils,
 			CustomMenuRetrieveUtils customMenuRetrieveUtils) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
-		b.setSalesPackageId(sp.getId());
+		b.setSalesPackageId((int)Math.random()*2000000000);
 
 		String str = sp.getProductId();
 		if (null != str && !str.isEmpty()) {

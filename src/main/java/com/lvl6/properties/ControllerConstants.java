@@ -77,6 +77,8 @@ public class ControllerConstants {
 
 	//FACEBOOK POP UP
 	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
+	
+	public static final int ITEM_ID__HIGH_ROLLER_MODE = 50000;
 
 	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 1000;
 
@@ -196,6 +198,8 @@ public class ControllerConstants {
 	//REWARDS
 	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
 	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
+	
+	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000000;
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
@@ -213,7 +217,7 @@ public class ControllerConstants {
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = { 1, 300, 3600, 86400,
 			604800, 157852800 };
-	public static final int[] SPEED_UP__NUM_GEMS = { 1, 5, 60, 720, 4200, 1096200 };
+	public static final int[] SPEED_UP__NUM_GEMS = { 1, 2, 60, 720, 4200, 1096200 };
 
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;

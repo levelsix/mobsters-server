@@ -398,7 +398,7 @@ public class InsertUtils implements InsertUtil {
 	public String insertUser(String name, String udid, int level,
 			int experience, int cash, int oil, int gems, boolean isFake,
 			String deviceToken, Timestamp createTime, String facebookId,
-			int avatarMonsterId, String email, String fbData) {
+			int avatarMonsterId, String email, String fbData, int gachaCredits) {
 		String userId = randomUUID();
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -439,7 +439,8 @@ public class InsertUtils implements InsertUtil {
 				createTime);
 		insertParams.put(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME,
 				createTime);
-
+		insertParams.put(DBConstants.USER__GACHA_CREDITS, gachaCredits);
+		
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				DBConstants.TABLE_USER, insertParams);
 		if (numChanged != 1) {

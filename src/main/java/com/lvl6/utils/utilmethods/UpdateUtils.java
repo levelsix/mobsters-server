@@ -412,7 +412,8 @@ public class UpdateUtils implements UpdateUtil {
 			Map<String, StructureRetrieval> userStructIdsToRetrievals,
 			Map<String, StructureForUser> structIdsToUserStructs) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
-
+		List<String> userIdsWeHaveSeen = new ArrayList<String>();
+		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		for (String userStructId : userStructIdsToRetrievals.keySet()) {
 			StructureRetrieval sr = userStructIdsToRetrievals.get(userStructId);
@@ -420,24 +421,40 @@ public class UpdateUtils implements UpdateUtil {
 			Timestamp lastRetrievedTime = new Timestamp(d.getTime());
 			StructureForUser us = structIdsToUserStructs.get(userStructId);
 
-			Map<String, Object> aRow = new HashMap<String, Object>();
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, us.getUserId());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID,
-					us.getStructId());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED,
-					lastRetrievedTime);
-			CoordinatePair cp = us.getCoordinates();
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, cp.getX());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, cp.getY());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME,
-					us.getPurchaseTime());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE,
-					us.isComplete());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION,
-					us.getOrientation());
+			if(userIdsWeHaveSeen.contains(userStructId)) {
+				for(Map<String, Object> map : newRows) {
+					for(String s : map.keySet()) {
+						if(s.equals(DBConstants.STRUCTURE_FOR_USER__ID)) {
+							if(map.get(s).equals(userStructId)) {
+								map.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, 
+										lastRetrievedTime);
+								break;
+							}
+						}
+					}
+				}
+			}
+			else {
+				Map<String, Object> aRow = new HashMap<String, Object>();
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, us.getUserId());
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID,
+						us.getStructId());
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED,
+						lastRetrievedTime);
+				CoordinatePair cp = us.getCoordinates();
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, cp.getX());
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, cp.getY());
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME,
+						us.getPurchaseTime());
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE,
+						us.isComplete());
+				aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION,
+						us.getOrientation());
 
-			newRows.add(aRow);
+				userIdsWeHaveSeen.add(userStructId);
+				newRows.add(aRow);
+			}
 		}
 
 		//		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);

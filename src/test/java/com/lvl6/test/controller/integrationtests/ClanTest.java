@@ -151,7 +151,7 @@ public class ClanTest {
 
 			userId1 = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
 					oil, gems, false, deviceToken, createTime, facebookId,
-					avatarMonsterId, email, fbData);
+					avatarMonsterId, email, fbData, 0);
 
 			String name2 = "bobUnitTest";
 			String udid2 = "bobUdid";
@@ -168,7 +168,7 @@ public class ClanTest {
 
 			userId2 = insertUtil.insertUser(name2, udid2, lvl2, playerExp2, cash2,
 					oil2, gems2, false, deviceToken2, createTime, facebookId2,
-					avatarMonsterId2, email2, fbData2);
+					avatarMonsterId2, email2, fbData2, 0);
 
 			String name3 = "bobUnitTest";
 			String udid3 = "bobUdid";
@@ -185,7 +185,7 @@ public class ClanTest {
 
 			userId3 = insertUtil.insertUser(name3, udid3, lvl3, playerExp3, cash3,
 					oil3, gems3, false, deviceToken3, createTime, facebookId3,
-					avatarMonsterId3, email3, fbData3);
+					avatarMonsterId3, email3, fbData3, 0);
 
 			String name4 = "bobUnitTest";
 			String udid4 = "bobUdid";
@@ -202,7 +202,7 @@ public class ClanTest {
 
 			userId4 = insertUtil.insertUser(name4, udid4, lvl4, playerExp4, cash4,
 					oil4, gems4, false, deviceToken4, createTime, facebookId4,
-					avatarMonsterId4, email4, fbData4);
+					avatarMonsterId4, email4, fbData4, 0);
 
 			List<String> userIds = new ArrayList<String>();
 			userIds.add(userId1);
