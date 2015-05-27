@@ -7266,6 +7266,8 @@ public final class EventStructureProto {
      *if the structure is a generator, the uncollected resources will be lost when upgraded
      *server will compute last retrieved times
      *this is just for history purposes
+     *newer comment: this curTime now represents the time client has calculated for when
+     *a resource generator completed it's upgrade 
      * </pre>
      */
     boolean hasCurTime();
@@ -7276,6 +7278,8 @@ public final class EventStructureProto {
      *if the structure is a generator, the uncollected resources will be lost when upgraded
      *server will compute last retrieved times
      *this is just for history purposes
+     *newer comment: this curTime now represents the time client has calculated for when
+     *a resource generator completed it's upgrade 
      * </pre>
      */
     long getCurTime();
@@ -7466,6 +7470,8 @@ public final class EventStructureProto {
      *if the structure is a generator, the uncollected resources will be lost when upgraded
      *server will compute last retrieved times
      *this is just for history purposes
+     *newer comment: this curTime now represents the time client has calculated for when
+     *a resource generator completed it's upgrade 
      * </pre>
      */
     public boolean hasCurTime() {
@@ -7478,6 +7484,8 @@ public final class EventStructureProto {
      *if the structure is a generator, the uncollected resources will be lost when upgraded
      *server will compute last retrieved times
      *this is just for history purposes
+     *newer comment: this curTime now represents the time client has calculated for when
+     *a resource generator completed it's upgrade 
      * </pre>
      */
     public long getCurTime() {
@@ -7991,6 +7999,8 @@ public final class EventStructureProto {
        *if the structure is a generator, the uncollected resources will be lost when upgraded
        *server will compute last retrieved times
        *this is just for history purposes
+       *newer comment: this curTime now represents the time client has calculated for when
+       *a resource generator completed it's upgrade 
        * </pre>
        */
       public boolean hasCurTime() {
@@ -8003,6 +8013,8 @@ public final class EventStructureProto {
        *if the structure is a generator, the uncollected resources will be lost when upgraded
        *server will compute last retrieved times
        *this is just for history purposes
+       *newer comment: this curTime now represents the time client has calculated for when
+       *a resource generator completed it's upgrade 
        * </pre>
        */
       public long getCurTime() {
@@ -8015,6 +8027,8 @@ public final class EventStructureProto {
        *if the structure is a generator, the uncollected resources will be lost when upgraded
        *server will compute last retrieved times
        *this is just for history purposes
+       *newer comment: this curTime now represents the time client has calculated for when
+       *a resource generator completed it's upgrade 
        * </pre>
        */
       public Builder setCurTime(long value) {
@@ -8030,6 +8044,8 @@ public final class EventStructureProto {
        *if the structure is a generator, the uncollected resources will be lost when upgraded
        *server will compute last retrieved times
        *this is just for history purposes
+       *newer comment: this curTime now represents the time client has calculated for when
+       *a resource generator completed it's upgrade 
        * </pre>
        */
       public Builder clearCurTime() {
