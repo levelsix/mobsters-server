@@ -296,9 +296,14 @@ public class UpgradeNormStructureController extends EventController {
 		int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange,
 				gemChange, 0);
 		if (1 != num) {
-			log.error(String
-					.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
-							gemChange, cashChange, oilChange, num));
+			if(userStruct.getStructId() == ControllerConstants.STRUCTURE__LAB_ID) {
+				log.info("userid {} is upgrading lab", user.getId());
+			}
+			else {
+				log.error(String
+						.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
+								gemChange, cashChange, oilChange, num));
+			}
 		} else {//things went ok
 			if (0 != gemChange) {
 				money.put(miscMethods.gems, gemChange);

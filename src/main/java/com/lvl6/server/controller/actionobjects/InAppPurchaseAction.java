@@ -114,12 +114,12 @@ public class InAppPurchaseAction {
 
 		if(duplicateReceipt) {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
+			log.error("user trying to buy gems with duplicate receipt");
+			return false;
 		}
 
 		if (duplicateReceipt) {
-			log.error("user trying to buy the starter pack again! {}, {}",
-					packageName, user);
-			return false;
+			
 		}
 		return true;
 	}
