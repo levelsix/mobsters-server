@@ -3,6 +3,7 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,12 +12,15 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.controller.utils.PvpUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -39,6 +43,8 @@ public class CreateClanAction {
 	private int clanIconId;
 	private ClanRetrieveUtils2 clanRetrieveUtils;
 	private ResourceUtil resourceUtil;
+	private PvpLeagueForUserDao pvpLeagueForUserDao;
+	private PvpUtils pvpUtils;
 
 	public CreateClanAction(
 			String userId,
@@ -47,7 +53,9 @@ public class CreateClanAction {
 			MiscMethods miscMethods, String clanName, String tag,
 			boolean requestToJoinRequired, String description, int clanIconId,
 			ClanRetrieveUtils2 clanRetrieveUtils,
-			ResourceUtil resourceUtil) {
+			ResourceUtil resourceUtil, 
+			PvpLeagueForUserDao pvpLeagueForUserDao,
+			PvpUtils pvpUtils) {
 		super();
 		this.userId = userId;
 		this.cashChange = cashChange;
@@ -63,6 +71,8 @@ public class CreateClanAction {
 		this.clanIconId = clanIconId;
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.resourceUtil = resourceUtil;
+		this.pvpLeagueForUserDao = pvpLeagueForUserDao;
+		this.pvpUtils = pvpUtils;
 	}
 
 	private User user;
@@ -200,6 +210,8 @@ public class CreateClanAction {
 		}
 		deleteUtil.deleteUserClansForUserExceptSpecificClan(
 				user.getId(), clanId);
+		
+		pvpUtils.updateClanIdInPvpLeagueForUser(userId, clanId, pvpLeagueForUserDao);
 
 		updateUserCurrency();
 

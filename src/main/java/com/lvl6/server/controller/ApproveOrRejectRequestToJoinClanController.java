@@ -17,6 +17,7 @@ import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
 import com.lvl6.events.response.ApproveOrRejectRequestToJoinClanResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProto;
@@ -98,6 +99,10 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	
+	@Autowired
+	protected PvpLeagueForUserDao pvpLeagueForUserDao;
+	
 
 	public ApproveOrRejectRequestToJoinClanController() {
 		numAllocatedThreads = 4;
@@ -171,7 +176,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		try {
 			ApproveOrRejectRequestToJoinAction aorrtja = new ApproveOrRejectRequestToJoinAction(userId,
 					requesterId, accept, lockedClan, userRetrieveUtil, updateUtil, deleteUtil, 
-					userClanRetrieveUtils, clanStuffUtils);
+					userClanRetrieveUtils, clanStuffUtils, pvpLeagueForUserDao);
 			aorrtja.execute(resBuilder);
 
 			// Only need to set clan data if user accepted.

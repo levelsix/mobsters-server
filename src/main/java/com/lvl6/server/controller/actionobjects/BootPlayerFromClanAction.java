@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
@@ -20,6 +21,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.server.controller.utils.PvpUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -42,6 +44,8 @@ public class BootPlayerFromClanAction {
 	private ClanStuffUtils clanStuffUtils;
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 	private ClanSearch clanSearch;
+	private PvpLeagueForUserDao pvpLeagueForUserDao;
+	private PvpUtils pvpUtils;
 
 	public BootPlayerFromClanAction(
 			String userId, String bootedUserId,
@@ -52,7 +56,9 @@ public class BootPlayerFromClanAction {
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			ClanStuffUtils clanStuffUtils,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
-			ClanSearch clanSearch) {
+			ClanSearch clanSearch,
+			PvpLeagueForUserDao pvpLeagueForUserDao,
+			PvpUtils pvpUtils) {
 		super();
 		this.userId = userId;
 		this.bootedUserId = bootedUserId;
@@ -67,6 +73,8 @@ public class BootPlayerFromClanAction {
 		this.clanStuffUtils = clanStuffUtils;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 		this.clanSearch = clanSearch;
+		this.pvpLeagueForUserDao = pvpLeagueForUserDao;
+		this.pvpUtils = pvpUtils;
 	}
 
 	private User user;
@@ -174,6 +182,7 @@ public class BootPlayerFromClanAction {
 
 			return false;
 		}
+		pvpUtils.updateClanIdInPvpLeagueForUser(playerToBoot.getId(), clanId, pvpLeagueForUserDao);
 		Date lastChatPost = clanChatPostRetrieveUtil.getLastChatPost(clanId);
 
 		if (null == lastChatPost) {
@@ -188,7 +197,7 @@ public class BootPlayerFromClanAction {
 
 		return true;
 	}
-
+	
 
 	public User getUser() {
 		return user;

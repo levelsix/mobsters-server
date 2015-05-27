@@ -17,6 +17,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto;
@@ -68,6 +69,9 @@ public class CreateClanController extends EventController {
 	
 	@Autowired
 	protected ResourceUtil resourceUtil;
+	
+	@Autowired
+	protected PvpLeagueForUserDao pvpLeagueForUserDao;
 	
 	
 	public CreateClanController() {
@@ -132,7 +136,7 @@ public class CreateClanController extends EventController {
 			
 			CreateClanAction cca = new CreateClanAction(userId, cashChange, gemsSpent, userRetrieveUtil,
 					insertUtil, deleteUtil, miscMethods, clanName, tag, requestToJoinRequired, 
-					description, clanIconId, clanRetrieveUtils, resourceUtil);
+					description, clanIconId, clanRetrieveUtils, resourceUtil, pvpLeagueForUserDao);
 			
 			cca.execute(resBuilder);
 
