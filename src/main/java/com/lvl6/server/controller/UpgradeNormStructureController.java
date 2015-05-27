@@ -73,7 +73,8 @@ public class UpgradeNormStructureController extends EventController {
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent) event)
 				.getUpgradeNormStructureRequestProto();
-
+		log.info("reqProto: {}", reqProto);
+		
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		String userStructId = reqProto.getUserStructUuid();
