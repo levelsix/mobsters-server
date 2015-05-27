@@ -425,7 +425,7 @@ class StartupService extends LazyLogging{
 					+ isFirstTimeUser);
 
 			if (isFirstTimeUser) {
-				logger.info("new player with udid {}", udid);
+				logger.info(s"new player with udid $udid");
 				insertUtil.insertIntoFirstTimeUsers(udid, null, reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
 			}
 
@@ -447,7 +447,7 @@ class StartupService extends LazyLogging{
 		try {
 			//force other devices on this account to logout
 			forceLogoutOthers(udid, playerId, user, fbId)
-			logger.info(s"no major update... getting user info")
+			logger.info("no major update... getting user info")
 			val userId = playerId;
 
 			//NOTE: will only ever be executed once for each user
@@ -645,7 +645,7 @@ class StartupService extends LazyLogging{
 				resBuilder.setSender(fup);
 				finishStartup(sd)
 			}catch{
-			    case t:Throwable => logger.error("Error finishing login for user: $playerId", t)
+			    case t:Throwable => logger.error(s"Error finishing login for user: $playerId", t)
 			}finally {
 				loginFinished(playerId)
 			}
@@ -1005,7 +1005,7 @@ class StartupService extends LazyLogging{
 					val attackerPu = new PvpUser(attackerPlfu);
 					hazelcastPvpUtil.replacePvpUser(attackerPu, userId);
 
-					if(defenderId != null) {
+					if (null != defenderUuid) {//(defenderId != null) {
 						val defenderPlfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(defenderId);
 
 						defenderEloBefore = defenderPlfu.getElo();
