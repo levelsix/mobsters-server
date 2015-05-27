@@ -203,7 +203,8 @@ public class InAppPurchaseSalesAction {
 		}
 
 		if(!saleIsWithinTimeConstraints()) {
-			log.error("sales package being bought when outside of start/end times. userId = {} , salespackageId = {}", userId, salesPackage.getId());
+			log.error("this could be result of buying high roller pack, sales package being bought when "
+					+ "outside of start/end times. userId = {} , salespackageId = {}", userId, salesPackage.getId());
 		}
 
 		if (duplicateReceipt) {

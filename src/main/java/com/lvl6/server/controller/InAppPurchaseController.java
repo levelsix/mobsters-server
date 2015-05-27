@@ -31,6 +31,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
@@ -456,7 +457,7 @@ public class InAppPurchaseController extends EventController {
         Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
         
         //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
-
+        
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
         }
@@ -487,7 +488,9 @@ public class InAppPurchaseController extends EventController {
     				return sp2.getPriority() - sp1.getPriority();
     			}
     		});
-        	successorSalesPackage = tenDollarPacks.get(0);
+        	if(!tenDollarPacks.isEmpty()) {
+            	successorSalesPackage = tenDollarPacks.get(0);
+        	}
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
@@ -498,6 +501,9 @@ public class InAppPurchaseController extends EventController {
 //		log.info("prespp: " + preSpp);
 
 		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
+		}
+		else if(user.getSalesValue() < 4 && salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
 			//do nothing
 		}
 		else {
