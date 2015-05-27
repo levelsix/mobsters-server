@@ -207,7 +207,7 @@ public class TradeItemForResourcesAction {
 
 		if(gemsSpent == 0) {
 			if (null == inDb || inDb.size() != nuUserItems.size()) {
-				log.info(String.format("inconsistent itemForUser"));
+				log.error(String.format("inconsistent itemForUser"));
 				return false;
 			}
 
