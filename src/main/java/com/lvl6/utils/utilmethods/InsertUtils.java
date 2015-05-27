@@ -2402,8 +2402,10 @@ public class InsertUtils implements InsertUtil {
 				chcfu.getUserId());
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID,
 				chcfu.getClanId());
+
+		Date d = chcfu.getDate();
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__DATE,
-				chcfu.getDate());
+				new Timestamp(d.getTime()));
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED,
 				newSolicited);
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
