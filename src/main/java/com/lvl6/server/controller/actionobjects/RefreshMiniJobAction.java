@@ -266,8 +266,10 @@ public class RefreshMiniJobAction {
 		}
 
 		//delete the user's mini jobs
-		int deleted = deleteUtil.deleteMiniJobForUser(userId, deleteUserMiniJobIds);
-		log.info("num deleted={}", deleted);
+		if (deleteUserMiniJobIds != null && !deleteUserMiniJobIds.isEmpty()) {
+			int deleted = deleteUtil.deleteMiniJobForUser(userId, deleteUserMiniJobIds);
+			log.info("num deleted={}", deleted);
+		}
 
 		//update the user's mini jobs
 		//TODO: COPY PASTED FROM SpawnMiniJobController.
