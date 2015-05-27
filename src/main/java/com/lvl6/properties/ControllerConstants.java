@@ -213,7 +213,7 @@ public class ControllerConstants {
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = { 1, 300, 3600, 86400,
 			604800, 157852800 };
-	public static final int[] SPEED_UP__NUM_GEMS = { 1, 5, 60, 720, 4200, 1096200 };
+	public static final int[] SPEED_UP__NUM_GEMS = { 1, 2, 60, 720, 4200, 1096200 };
 
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
