@@ -91,6 +91,7 @@ public class TradeItemForSpeedUpsAction {
 	private UserCurrencyHistory gemsUserCurrencyHistory;
 
 	public void execute(Builder resBuilder) {
+		setUpDaos();
 		resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
