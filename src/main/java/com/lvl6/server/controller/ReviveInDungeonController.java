@@ -212,12 +212,22 @@ public class ReviveInDungeonController extends EventController {
 
 		//see if the user has the equips
 		if (userMonsters.size() != reviveMeProtoList.size()) {
-			log.error("unexpected error: mismatch between user equips client sent and "
+			log.error("this error is probably someone trying to heal donated toons,"
+					+ "unexpected error: mismatch between user equips client sent and "
 					+ "what is in the db. clientUserMonsterIds="
 					+ userMonsterIds
 					+ "\t inDb="
 					+ userMonsters
 					+ "\t continuing the processing");
+			String idToDelete = "";
+			for(String id : userMonsterIdToExpectedHealth.keySet()) {
+				for(UserMonsterCurrentHealthProto umchp : reviveMeProtoList) {
+					if(!umchp.getUserMonsterUuid().equals(id)) {
+						idToDelete = id;
+					}
+				}
+			}
+			userMonsterIdToExpectedHealth.remove(idToDelete);
 		}
 
 		//make sure user has enough diamonds/gold?
