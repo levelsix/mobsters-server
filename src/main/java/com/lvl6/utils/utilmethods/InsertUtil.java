@@ -105,7 +105,7 @@ public interface InsertUtil {
 	public abstract String insertUser(String name, String udid, int level,
 			int experience, int cash, int oil, int gems, boolean isFake,
 			String deviceToken, Timestamp createTime, String facebookId,
-			int avatarMonsterId, String email, String fbData);
+			int avatarMonsterId, String email, String fbData, int gachaCredits);
 
 	public abstract int insertPvpLeagueForUser(String userId, int pvpLeagueId,
 			int rank, int elo, Timestamp shieldEndTime,
