@@ -136,7 +136,7 @@ public class CreateClanController extends EventController {
 			
 			CreateClanAction cca = new CreateClanAction(userId, cashChange, gemsSpent, userRetrieveUtil,
 					insertUtil, deleteUtil, miscMethods, clanName, tag, requestToJoinRequired, 
-					description, clanIconId, clanRetrieveUtils, resourceUtil, pvpLeagueForUserDao);
+					description, clanIconId, clanRetrieveUtils, resourceUtil);
 			
 			cca.execute(resBuilder);
 

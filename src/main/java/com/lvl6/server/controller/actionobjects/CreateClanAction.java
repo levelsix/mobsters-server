@@ -43,8 +43,7 @@ public class CreateClanAction {
 	private int clanIconId;
 	private ClanRetrieveUtils2 clanRetrieveUtils;
 	private ResourceUtil resourceUtil;
-	private PvpLeagueForUserDao pvpLeagueForUserDao;
-	private PvpUtils pvpUtils;
+
 
 	public CreateClanAction(
 			String userId,
@@ -53,9 +52,7 @@ public class CreateClanAction {
 			MiscMethods miscMethods, String clanName, String tag,
 			boolean requestToJoinRequired, String description, int clanIconId,
 			ClanRetrieveUtils2 clanRetrieveUtils,
-			ResourceUtil resourceUtil, 
-			PvpLeagueForUserDao pvpLeagueForUserDao,
-			PvpUtils pvpUtils) {
+			ResourceUtil resourceUtil) {
 		super();
 		this.userId = userId;
 		this.cashChange = cashChange;
@@ -71,8 +68,7 @@ public class CreateClanAction {
 		this.clanIconId = clanIconId;
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.resourceUtil = resourceUtil;
-		this.pvpLeagueForUserDao = pvpLeagueForUserDao;
-		this.pvpUtils = pvpUtils;
+
 	}
 
 	private User user;
@@ -211,8 +207,6 @@ public class CreateClanAction {
 		deleteUtil.deleteUserClansForUserExceptSpecificClan(
 				user.getId(), clanId);
 		
-		pvpUtils.updateClanIdInPvpLeagueForUser(userId, clanId, pvpLeagueForUserDao);
-
 		updateUserCurrency();
 
 		prepCurrencyHistory();

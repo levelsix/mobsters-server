@@ -36,17 +36,13 @@ public class ApproveOrRejectRequestToJoinAction {
 	protected DeleteUtil deleteUtil;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private ClanStuffUtils clanStuffUtils;
-	private PvpLeagueForUserDao pvpLeagueForUserDao;
-	private PvpUtils pvpUtils;
 
 
 	public ApproveOrRejectRequestToJoinAction(String userId, String requesterId,
 			boolean accept, boolean lockedClan, UserRetrieveUtils2 userRetrieveUtils, 
 			UpdateUtil updateUtil, DeleteUtil deleteUtil, 
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
-			ClanStuffUtils clanStuffUtils,
-			PvpLeagueForUserDao pvpLeagueForUserDao,
-			PvpUtils pvpUtils) {
+			ClanStuffUtils clanStuffUtils) {
 		super();
 		this.userId = userId;
 		this.requesterId = requesterId;
@@ -57,8 +53,7 @@ public class ApproveOrRejectRequestToJoinAction {
 		this.deleteUtil = deleteUtil;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.clanStuffUtils = clanStuffUtils;
-		this.pvpLeagueForUserDao = pvpLeagueForUserDao;
-		this.pvpUtils = pvpUtils;
+
 	}
 
 	private User user;
@@ -222,7 +217,6 @@ public class ApproveOrRejectRequestToJoinAction {
 						requester, user.getClanId());
 				return false;
 			}
-			pvpUtils.updateClanIdInPvpLeagueForUser(requesterId, user.getClanId(), pvpLeagueForUserDao);
 			if (!updateUtil.updateUserClanStatus(requester.getId(),
 					user.getClanId(), UserClanStatus.MEMBER)) {
 				log.error("problem updating user clan status to MEMBER for requester {} and clan id {}",

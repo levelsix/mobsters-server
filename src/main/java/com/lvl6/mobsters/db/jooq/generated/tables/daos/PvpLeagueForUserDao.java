@@ -134,11 +134,4 @@ public class PvpLeagueForUserDao extends DAOImpl<PvpLeagueForUserRecord, com.lvl
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser> fetchByMonsterDmgMultiplier(Double... values) {
 		return fetch(PvpLeagueForUser.PVP_LEAGUE_FOR_USER.MONSTER_DMG_MULTIPLIER, values);
 	}
-
-	/**
-	 * Fetch records that have <code>clan_id IN (values)</code>
-	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpLeagueForUser> fetchByClanId(String... values) {
-		return fetch(PvpLeagueForUser.PVP_LEAGUE_FOR_USER.CLAN_ID, values);
-	}
 }

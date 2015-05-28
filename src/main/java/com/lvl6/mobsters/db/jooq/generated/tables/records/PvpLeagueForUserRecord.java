@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record12;
+import org.jooq.Record11;
 import org.jooq.Row;
-import org.jooq.Row12;
+import org.jooq.Row11;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -38,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "pvp_league_for_user", schema = "mobsters")
-public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUserRecord> implements Record12<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double, String>, IPvpLeagueForUser {
+public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUserRecord> implements Record11<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double>, IPvpLeagueForUser {
 
-	private static final long serialVersionUID = 1744668789;
+	private static final long serialVersionUID = 1929098810;
 
 	/**
 	 * Setter for <code>mobsters.pvp_league_for_user.user_id</code>.
@@ -245,25 +245,6 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 		return (Double) getValue(10);
 	}
 
-	/**
-	 * Setter for <code>mobsters.pvp_league_for_user.clan_id</code>.
-	 */
-	@Override
-	public PvpLeagueForUserRecord setClanId(String value) {
-		setValue(11, value);
-		return this;
-	}
-
-	/**
-	 * Getter for <code>mobsters.pvp_league_for_user.clan_id</code>.
-	 */
-	@Column(name = "clan_id", length = 45)
-	@Size(max = 45)
-	@Override
-	public String getClanId() {
-		return (String) getValue(11);
-	}
-
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -277,23 +258,23 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	}
 
 	// -------------------------------------------------------------------------
-	// Record12 type implementation
+	// Record11 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double, String> fieldsRow() {
-		return (Row12) super.fieldsRow();
+	public Row11<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double> fieldsRow() {
+		return (Row11) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row12<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double, String> valuesRow() {
-		return (Row12) super.valuesRow();
+	public Row11<String, Integer, Integer, Integer, Timestamp, Timestamp, Integer, Integer, Integer, Integer, Double> valuesRow() {
+		return (Row11) super.valuesRow();
 	}
 
 	/**
@@ -388,14 +369,6 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field12() {
-		return PvpLeagueForUser.PVP_LEAGUE_FOR_USER.CLAN_ID;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public String value1() {
 		return getUserId();
 	}
@@ -478,14 +451,6 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	@Override
 	public Double value11() {
 		return getMonsterDmgMultiplier();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String value12() {
-		return getClanId();
 	}
 
 	/**
@@ -591,16 +556,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public PvpLeagueForUserRecord value12(String value) {
-		setClanId(value);
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public PvpLeagueForUserRecord values(String value1, Integer value2, Integer value3, Integer value4, Timestamp value5, Timestamp value6, Integer value7, Integer value8, Integer value9, Integer value10, Double value11, String value12) {
+	public PvpLeagueForUserRecord values(String value1, Integer value2, Integer value3, Integer value4, Timestamp value5, Timestamp value6, Integer value7, Integer value8, Integer value9, Integer value10, Double value11) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -612,7 +568,6 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 		value9(value9);
 		value10(value10);
 		value11(value11);
-		value12(value12);
 		return this;
 	}
 
@@ -636,7 +591,6 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 		setAttacksLost(from.getAttacksLost());
 		setDefensesLost(from.getDefensesLost());
 		setMonsterDmgMultiplier(from.getMonsterDmgMultiplier());
-		setClanId(from.getClanId());
 	}
 
 	/**
@@ -662,7 +616,7 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 	/**
 	 * Create a detached, initialised PvpLeagueForUserRecord
 	 */
-	public PvpLeagueForUserRecord(String userId, Integer leagueId, Integer rank, Integer elo, Timestamp shieldEndTime, Timestamp battleEndTime, Integer attacksWon, Integer defensesWon, Integer attacksLost, Integer defensesLost, Double monsterDmgMultiplier, String clanId) {
+	public PvpLeagueForUserRecord(String userId, Integer leagueId, Integer rank, Integer elo, Timestamp shieldEndTime, Timestamp battleEndTime, Integer attacksWon, Integer defensesWon, Integer attacksLost, Integer defensesLost, Double monsterDmgMultiplier) {
 		super(PvpLeagueForUser.PVP_LEAGUE_FOR_USER);
 
 		setValue(0, userId);
@@ -676,6 +630,5 @@ public class PvpLeagueForUserRecord extends UpdatableRecordImpl<PvpLeagueForUser
 		setValue(8, attacksLost);
 		setValue(9, defensesLost);
 		setValue(10, monsterDmgMultiplier);
-		setValue(11, clanId);
 	}
 }

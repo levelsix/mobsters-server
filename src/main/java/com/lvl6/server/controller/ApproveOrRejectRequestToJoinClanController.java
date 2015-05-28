@@ -176,7 +176,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		try {
 			ApproveOrRejectRequestToJoinAction aorrtja = new ApproveOrRejectRequestToJoinAction(userId,
 					requesterId, accept, lockedClan, userRetrieveUtil, updateUtil, deleteUtil, 
-					userClanRetrieveUtils, clanStuffUtils, pvpLeagueForUserDao);
+					userClanRetrieveUtils, clanStuffUtils);
 			aorrtja.execute(resBuilder);
 
 			// Only need to set clan data if user accepted.

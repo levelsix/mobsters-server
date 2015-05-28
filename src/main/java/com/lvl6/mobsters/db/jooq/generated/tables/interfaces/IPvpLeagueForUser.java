@@ -157,18 +157,6 @@ public interface IPvpLeagueForUser extends Serializable {
 	@Column(name = "monster_dmg_multiplier", precision = 12)
 	public Double getMonsterDmgMultiplier();
 
-	/**
-	 * Setter for <code>mobsters.pvp_league_for_user.clan_id</code>.
-	 */
-	public IPvpLeagueForUser setClanId(String value);
-
-	/**
-	 * Getter for <code>mobsters.pvp_league_for_user.clan_id</code>.
-	 */
-	@Column(name = "clan_id", length = 45)
-	@Size(max = 45)
-	public String getClanId();
-
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PvpLeagueForUser extends TableImpl<PvpLeagueForUserRecord> {
 
-	private static final long serialVersionUID = -1964224715;
+	private static final long serialVersionUID = 148746861;
 
 	/**
 	 * The reference instance of <code>mobsters.pvp_league_for_user</code>
@@ -103,11 +103,6 @@ public class PvpLeagueForUser extends TableImpl<PvpLeagueForUserRecord> {
 	 * The column <code>mobsters.pvp_league_for_user.monster_dmg_multiplier</code>.
 	 */
 	public final TableField<PvpLeagueForUserRecord, Double> MONSTER_DMG_MULTIPLIER = createField("monster_dmg_multiplier", org.jooq.impl.SQLDataType.FLOAT.defaulted(true), this, "");
-
-	/**
-	 * The column <code>mobsters.pvp_league_for_user.clan_id</code>.
-	 */
-	public final TableField<PvpLeagueForUserRecord, String> CLAN_ID = createField("clan_id", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
 
 	/**
 	 * Create a <code>mobsters.pvp_league_for_user</code> table reference

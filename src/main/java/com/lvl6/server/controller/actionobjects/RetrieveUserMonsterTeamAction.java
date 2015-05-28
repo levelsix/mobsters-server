@@ -557,5 +557,9 @@ public class RetrieveUserMonsterTeamAction {
 	public Map<String, List<ResearchForUser>> getAllButRetrieverUserIdToUserResearch() {
 		return allButRetrieverUserIdToUserResearch;
 	}
+	
+	public Map<String, User> getAllUsers() {
+		return userIdToUser;
+	}
 
 }

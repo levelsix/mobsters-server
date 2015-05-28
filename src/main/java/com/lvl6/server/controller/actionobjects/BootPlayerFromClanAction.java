@@ -44,8 +44,7 @@ public class BootPlayerFromClanAction {
 	private ClanStuffUtils clanStuffUtils;
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 	private ClanSearch clanSearch;
-	private PvpLeagueForUserDao pvpLeagueForUserDao;
-	private PvpUtils pvpUtils;
+
 
 	public BootPlayerFromClanAction(
 			String userId, String bootedUserId,
@@ -56,9 +55,7 @@ public class BootPlayerFromClanAction {
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			ClanStuffUtils clanStuffUtils,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
-			ClanSearch clanSearch,
-			PvpLeagueForUserDao pvpLeagueForUserDao,
-			PvpUtils pvpUtils) {
+			ClanSearch clanSearch) {
 		super();
 		this.userId = userId;
 		this.bootedUserId = bootedUserId;
@@ -73,8 +70,7 @@ public class BootPlayerFromClanAction {
 		this.clanStuffUtils = clanStuffUtils;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 		this.clanSearch = clanSearch;
-		this.pvpLeagueForUserDao = pvpLeagueForUserDao;
-		this.pvpUtils = pvpUtils;
+
 	}
 
 	private User user;
@@ -182,7 +178,6 @@ public class BootPlayerFromClanAction {
 
 			return false;
 		}
-		pvpUtils.updateClanIdInPvpLeagueForUser(playerToBoot.getId(), clanId, pvpLeagueForUserDao);
 		Date lastChatPost = clanChatPostRetrieveUtil.getLastChatPost(clanId);
 
 		if (null == lastChatPost) {
