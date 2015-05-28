@@ -114,7 +114,7 @@ public class InAppPurchaseAction {
 
 		if(duplicateReceipt) {
 			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
-			log.error("user trying to buy gems with duplicate receipt");
+			log.error("user trying to buy gems with duplicate receipt {}", packageName);
 			return false;
 		}
 
