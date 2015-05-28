@@ -855,7 +855,7 @@ public class CreateInfoProtoUtils {
 				long time = shieldEndTime.getTime();
 				uplpb.setShieldEndTime(time);
 			}
-
+			uplpb.setBattlesWon(plfu.getBattlesWon());
 			uplpb.setMonsterDmgMultiplier(plfu.getMonsterDmgMultiplier());
 
 		} else if (null != pu) {
@@ -870,7 +870,7 @@ public class CreateInfoProtoUtils {
 				long time = shieldEndTime.getTime();
 				uplpb.setShieldEndTime(time);
 			}
-
+			uplpb.setBattlesWon(pu.getBattlesWon());
 			uplpb.setMonsterDmgMultiplier(pu.getMonsterDmgMultiplier());
 
 		}
