@@ -541,7 +541,9 @@ public class MiscMethods {
 		cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
 		cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
 
-		cb.setAddAllFbFriends(globals.isAddAllFbFriends());
+		boolean addAllFbFriends = serverToggleRetrieveUtils
+				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__ADD_ALL_FB_FRIENDS);
+		cb.setAddAllFbFriends(addAllFbFriends);
 		cb.setFacebookPopUp(ControllerConstants.FACEBOOK_POP_UP__ACTIVE);
 		MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
 		cb.setMiniTuts(miniTuts);

@@ -77,7 +77,7 @@ public class ControllerConstants {
 
 	//FACEBOOK POP UP
 	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
-	
+
 	public static final int ITEM_ID__HIGH_ROLLER_MODE = 50000;
 
 	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 1000;
@@ -181,7 +181,7 @@ public class ControllerConstants {
 			10000, 100000, 1000000, 3000000, 100000000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 5, 45, 400,
 			3600, 10800, 360000 };
-	
+
 	// had to increase by 1 because of a bug on the client
 	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 502, 1001,
 		2501, 5001, 20001, 50001, 100001, 1000001 };
@@ -198,11 +198,12 @@ public class ControllerConstants {
 	//REWARDS
 	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
 	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
-	
+
 	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000001;
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
+	public static final String SERVER_TOGGLE__ADD_ALL_FB_FRIENDS = "add_all_fb_friends";
 	public static final String SERVER_TOGGLE__LOGGING_BOOSTER_ITEM_SELECTION_DETAILS = "logging_booster_item_selection_details";
 	public static final String SERVER_TOGGLE__LOGGING_PVP_BATTLE_OUTCOME_DETAILS = "logging_pvp_battle_outcome_details";
 	public static final String SERVER_TOGGLE__PVP_BOT_SET_ELO = "pvp_bot_set_elo";
@@ -220,7 +221,7 @@ public class ControllerConstants {
 	public static final int[] SPEED_UP__NUM_GEMS = { 1, 2, 60, 720, 4200, 1096200 };
 
 	public static final int STRUCTURE__LAB_ID = 800;
-	
+
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
