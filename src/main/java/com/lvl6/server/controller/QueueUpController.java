@@ -300,14 +300,16 @@ public class QueueUpController extends EventController {
 
 			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
 					.getStatus())) {
-				Map<String, User> allUsersMap = rumta.getAllUsers();
-				String clanId = allUsersMap.get(attackerId).getClanId();
 				List<User> usersExceptRetriever = rumta.getAllUsersExceptRetriever();	
-				Iterator<User> iter = usersExceptRetriever.iterator();
-				while(iter.hasNext()) {
-					User opponent = iter.next();
-					if(opponent.getClanId().equals(clanId)) {
-						iter.remove();
+				Map<String, User> allUsersMap = rumta.getAllUsers();
+				if(allUsersMap != null && !allUsersMap.isEmpty()) {
+					String clanId = allUsersMap.get(attackerId).getClanId();
+					Iterator<User> iter = usersExceptRetriever.iterator();
+					while(iter.hasNext()) {
+						User opponent = iter.next();
+						if(opponent.getClanId().equals(clanId)) {
+							iter.remove();
+						}
 					}
 				}
 
