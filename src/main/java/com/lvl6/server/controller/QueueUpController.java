@@ -305,10 +305,8 @@ public class QueueUpController extends EventController {
 					Iterator<User> iter = usersExceptRetriever.iterator();
 					while(iter.hasNext()) {
 						User opponent = iter.next();
-						if(opponent.getClanId() != null) {
-							if(opponent.getClanId().equals(clanId)) {
-								iter.remove();
-							}
+						if(opponent.getClanId().equals(clanId)) {
+							iter.remove();
 						}
 					}
 				}
