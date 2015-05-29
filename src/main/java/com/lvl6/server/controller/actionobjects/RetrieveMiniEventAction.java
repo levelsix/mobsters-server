@@ -54,25 +54,28 @@ public class RetrieveMiniEventAction {
 	private MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
 	private TimeUtils timeUtil;
 
-	public RetrieveMiniEventAction(String userId, Date now,
+	public RetrieveMiniEventAction(
+			String userId,
+			Date now,
 			boolean completedClanAchievements,
 			UserRetrieveUtils2 userRetrieveUtil,
 			AchievementForUserRetrieveUtil achievementForUserRetrieveUtil,
 			MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil,
 			MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil,
-			InsertUtil insertUtil, DeleteUtil deleteUtil,
+			InsertUtil insertUtil,
+			DeleteUtil deleteUtil,
 			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils,
 			MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils,
 			MiniEventRetrieveUtils miniEventRetrieveUtils,
 			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
 			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils,
-			TimeUtils timeUtil)
-	{
+			TimeUtils timeUtil) {
 		super();
 		this.userId = userId;
 		this.now = now;
 		this.completedClanAchievements = completedClanAchievements;
 		this.userRetrieveUtil = userRetrieveUtil;
+		this.achievementForUserRetrieveUtil = achievementForUserRetrieveUtil;
 		this.miniEventForUserRetrieveUtil = miniEventForUserRetrieveUtil;
 		this.miniEventGoalForUserRetrieveUtil = miniEventGoalForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
