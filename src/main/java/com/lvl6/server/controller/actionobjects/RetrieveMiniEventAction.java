@@ -142,6 +142,7 @@ public class RetrieveMiniEventAction {
 	private boolean verifySemantics(Builder resBuilder) {
 
 		u = userRetrieveUtil.getUserById(userId);
+		replaceExistingUserMiniEvent = false;
 
 		if (null == u) {
 			log.error("no user with id={}", userId);
@@ -186,7 +187,6 @@ public class RetrieveMiniEventAction {
 		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(userId);
 
 		boolean allRewardsCollected = verifyRewardsCollected();
-		replaceExistingUserMiniEvent = false;
 
 		if (allRewardsCollected) {
 			replaceExistingUserMiniEvent = true;
