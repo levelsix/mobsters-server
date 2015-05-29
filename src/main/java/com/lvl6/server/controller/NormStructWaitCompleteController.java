@@ -270,10 +270,21 @@ public class NormStructWaitCompleteController extends EventController {
 			List<StructureForUser> buildsDone, List<Timestamp> newRetrievedTimes) {
 		if (!UpdateUtils.get().updateUserStructsBuildingIsComplete(userId,
 				buildsDone, newRetrievedTimes)) {
-			log.error(String
-					.format("problem marking norm struct builds as complete for a struct: %s",
-							buildsDone));
-			return false;
+			boolean allComplete = true;
+			for(StructureForUser sfu : buildsDone) {
+				if(!sfu.isComplete()) {
+					allComplete = false;
+				}
+			}
+			if(allComplete) {
+				log.error("all the structures are already complete, structures: {}", buildsDone);
+			}
+			else {
+				log.error(String
+						.format("problem marking norm struct builds as complete for a struct: %s",
+								buildsDone));
+				return false;
+			}
 		}
 
 		int expReward = 0;

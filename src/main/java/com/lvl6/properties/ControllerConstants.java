@@ -219,6 +219,8 @@ public class ControllerConstants {
 			604800, 157852800 };
 	public static final int[] SPEED_UP__NUM_GEMS = { 1, 2, 60, 720, 4200, 1096200 };
 
+	public static final int STRUCTURE__LAB_ID = 800;
+	
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;

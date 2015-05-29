@@ -271,10 +271,11 @@ public class QueueUpAction {
 		log.info("generating fake users.");
 		
 		fakeUserMonsters = new ArrayList<List<MonsterForPvp>>();
-		for(EloPair ep : listOfEloPairs) {
+		for(int i=0; i<numWanted; i++) {
+			EloPair ep = listOfEloPairs.get(i);
 			int minElo = ep.getMinElo();
 			int maxElo = ep.getMaxElo();
-			
+
 			Set<MonsterForPvp> fakeMonsters = monsterForPvpRetrieveUtil
 					.retrievePvpMonsters(minElo, maxElo);
 
@@ -291,8 +292,8 @@ public class QueueUpAction {
 					//				List<PvpProto> pvpProtoListTemp = createPvpProtosFromFakeUser(
 					//					fakeUserMonsters, attackerElo);
 				} else {
-//					log.error("no fake users generated. minElo={} \t maxElo={}",
-//							minElo, maxElo);
+					log.info("no fake users generated. minElo={} \t maxElo={}",
+							minElo, maxElo);
 				}
 			} catch (Exception e) {
 				log.error(
@@ -301,6 +302,7 @@ public class QueueUpAction {
 								fakeMonsters, numWanted), e);
 			}
 		}
+
 	}
 
 	private List<List<MonsterForPvp>> createFakeUserMonsters(
