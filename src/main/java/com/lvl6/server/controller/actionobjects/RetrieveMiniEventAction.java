@@ -316,7 +316,8 @@ public class RetrieveMiniEventAction {
 		{
 			int goalId = megfu.getMiniEventGoalId();
 			if (!goalIdToGoal.containsKey(goalId)) {
-				log.error("MiniEventGoalForUser with nonexisting MiniEventGoal. {}", megfu);
+				log.error("MiniEventGoalForUser {} inconsistent with MiniEventGoals. {}",
+						megfu, goals);
 				continue;
 			}
 
