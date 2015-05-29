@@ -301,7 +301,7 @@ public class UpgradeNormStructureController extends EventController {
 				log.info("userid {} is upgrading lab", user.getId());
 			}
 			else {
-				log.error(String
+				log.info(String
 						.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
 								gemChange, cashChange, oilChange, num));
 			}
