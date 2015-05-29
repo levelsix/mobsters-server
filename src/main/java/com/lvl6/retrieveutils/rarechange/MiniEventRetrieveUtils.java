@@ -108,8 +108,8 @@ public class MiniEventRetrieveUtils {
 			return null;
 		} else {
 			MiniEvent active = ongoing.iterator().next();
-			log.info("selected MiniEvent {}, allOngoing:{}",
-					active, ongoing);
+			log.info("now={}, selected MiniEvent:{}, allOngoing:{}",
+					new Object[] { now, active, ongoing });
 			return active;
 		}
 	}
