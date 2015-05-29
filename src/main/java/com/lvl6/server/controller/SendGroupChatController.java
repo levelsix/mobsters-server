@@ -201,7 +201,7 @@ public class SendGroupChatController extends EventController {
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == ChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcrp, globalLanguage);
+						censoredChatMessage, rgcrp, translateMap, globalLanguage);
 
 				// send messages in background so sending player can unlock
 				/*
@@ -232,7 +232,7 @@ public class SendGroupChatController extends EventController {
 			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
 			boolean isForClan, String clanId, boolean isAdmin, long time,
 			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr,
-			TranslateLanguages globalLanguage) {
+			Map<TranslateLanguages, String> translateMap, TranslateLanguages globalLanguage) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(rgcr);
@@ -244,7 +244,7 @@ public class SendGroupChatController extends EventController {
 			//add new message to front of list
 			chatMessages.add(0, createInfoProtoUtils
 					.createGroupChatMessageProto(time, chatProto.getSender(),
-							censoredChatMessage, isAdmin, null, null, globalLanguage));
+							censoredChatMessage, isAdmin, null, translateMap, globalLanguage));
 			//remove older messages
 			try {
 				while (chatMessages.size() > CHAT_MESSAGES_MAX_SIZE) {
