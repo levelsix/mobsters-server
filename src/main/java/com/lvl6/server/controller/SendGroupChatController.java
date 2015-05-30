@@ -71,7 +71,7 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
 
@@ -176,7 +176,7 @@ public class SendGroupChatController extends EventController {
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 
-				Language contentLanguage = miscMethods.convertFromEnumToLanguage(globalLanguage);
+				Language contentLanguage = null; //miscMethods.convertFromEnumToLanguage(globalLanguage);
 				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(contentLanguage, censoredChatMessage);
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
