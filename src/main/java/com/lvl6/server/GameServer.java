@@ -99,12 +99,12 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
-	@Autowired
+/*	@Autowired
 	private EventWriterOld eventWriter;
 
 	public void setEventWriter(EventWriterOld eventWriter) {
 		this.eventWriter = eventWriter;
-	}
+	}*/
 
 	@Autowired
 	private APNSWriter apnsWriter;
@@ -233,9 +233,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 
 	}
 
-	/**
+/*	*//**
 	 * pass the event on to the EventWriter
-	 */
+	 *//*
 	public void writeEvent(ResponseEvent e) {
 		eventWriter.handleEvent(e);
 	}
@@ -244,9 +244,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		eventWriter.processGlobalChatResponseEvent(e);
 	}
 
-	/**
+	*//**
 	 * pass the clan event on to the EventWriter
-	 */
+	 *//*
 	public void writeClanEvent(ResponseEvent e, String clanId) {
 		eventWriter.handleClanEvent(e, clanId);
 	}
@@ -254,15 +254,15 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	public void writeApnsClanEvent(ResponseEvent e, String clanId) {
 		apnsWriter.handleClanEvent(e, clanId);
 		eventWriter.handleClanEvent(e, clanId);
-	}
+	}*/
 
-
-	/**
+/*
+	*//**
 	 * pass the event on to the EventWriter
-	 */
+	 *//*
 	public void writePreDBEvent(ResponseEvent e, String udid) {
 		eventWriter.processPreDBResponseEvent(e, udid);
-	}
+	}*/
 
 	/**
 	 * pass the event on to the APNSWriter

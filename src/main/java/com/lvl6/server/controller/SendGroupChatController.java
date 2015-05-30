@@ -44,8 +44,8 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
-import com.lvl6.server.EventWriterOld;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -62,9 +62,6 @@ public class SendGroupChatController extends EventController {
 
 	@Resource(name = "globalChat")
 	protected IList<GroupChatMessageProto> chatMessages;
-
-	@Resource
-	protected EventWriterOld eventWriter;
 
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -201,7 +198,7 @@ public class SendGroupChatController extends EventController {
 				sendChatMessage(userId, chatProto, event.getTag(),
 						scope == ChatScope.CLAN, user.getClanId(),
 						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcrp, globalLanguage);
+						censoredChatMessage, rgcrp, globalLanguage, responses);
 
 				// send messages in background so sending player can unlock
 				/*
@@ -232,13 +229,14 @@ public class SendGroupChatController extends EventController {
 			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
 			boolean isForClan, String clanId, boolean isAdmin, long time,
 			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr,
-			TranslateLanguages globalLanguage) {
+			TranslateLanguages globalLanguage, ToClientEvents responses) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(rgcr);
 		if (isForClan) {
 			log.info("Sending event to clan " + clanId);
-			eventWriter.handleClanEvent(ce, clanId);
+			//eventWriter.handleClanEvent(ce, clanId);
+			responses.clanResponseEvents().add(new ClanResponseEvent(ce, clanId, false));
 		} else {
 			log.info("Sending global chat ");
 			//add new message to front of list
@@ -253,7 +251,8 @@ public class SendGroupChatController extends EventController {
 			} catch (Exception e) {
 				log.error("Error sending chat message", e);
 			}
-			eventWriter.processGlobalChatResponseEvent(ce);
+			//eventWriter.processGlobalChatResponseEvent(ce);
+			responses.globalChatResponseEvents().add(ce);
 		}
 	}
 

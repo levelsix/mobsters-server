@@ -19,7 +19,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.NIOUtils;
 
-@Component
+//@Component
 public class EventWriterAmqpOld extends EventWriterOld {
 
 	@Resource(name = "chatMessagesTemplate")
