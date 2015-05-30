@@ -595,19 +595,16 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-websocket</artifactId>
-				<version>4.1.6.RELEASE</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.tomcat</groupId>
 				<artifactId>tomcat-websocket</artifactId>
 				<version>8.0.23</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>javax.websocket</groupId>
 				<artifactId>javax.websocket-api</artifactId>
 				<version>1.1</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.typesafe.scala-logging</groupId>
@@ -1013,10 +1010,6 @@
 
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-websocket</artifactId>
