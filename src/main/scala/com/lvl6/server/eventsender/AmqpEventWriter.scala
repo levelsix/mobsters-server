@@ -6,7 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
 import javax.annotation.Resource
 import org.springframework.amqp.core.Message
 import org.springframework.stereotype.Component
-
+import com.lvl6.server.eventsender.RoutingKeys._
 
 @Component
 class AmqpEventWriter extends EventWriter with LazyLogging{
@@ -15,11 +15,7 @@ class AmqpEventWriter extends EventWriter with LazyLogging{
   @Resource(name="chatMessagesTemplate") var chatTemplate:RabbitTemplate = null
   @Resource(name="clientMessagesTemplate") var clientTemplate:RabbitTemplate = null
   
-  def preDBFaceBookRoutingKey(facebookId:String) = "client_facebookid_"+facebookId
-  def preDBRoutingKey(udid:String) = "client_udid_"+udid
-  def toUserRoutingKey(playerId:String) = "client_userid_"+playerId
-  def clanRoutingKey(clanId:String) = "clan_"+clanId
-  val globalchatRoutingKey = "chat_global"
+
   
   
   def sendPreDBFacebookEvent(facebookId:String, event:Array[Byte])={

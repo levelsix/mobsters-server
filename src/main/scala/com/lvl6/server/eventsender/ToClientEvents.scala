@@ -10,5 +10,10 @@ case class ToClientEvents(
     preDBResponseEvents:java.util.List[PreDBResponseEvent]= new ArrayList[PreDBResponseEvent](),
     preDBFacebookEvents:java.util.List[PreDBFacebookEvent]= new ArrayList[PreDBFacebookEvent](),
     clanResponseEvents:java.util.List[ClanResponseEvent]= new ArrayList[ClanResponseEvent](),
-    apnsResponseEvents:java.util.List[ResponseEvent[_ <: GeneratedMessage]]= new ArrayList[ResponseEvent[_ <: GeneratedMessage]]())
+    apnsResponseEvents:java.util.List[ResponseEvent[_ <: GeneratedMessage]]= new ArrayList[ResponseEvent[_ <: GeneratedMessage]]()) {
+  
+  var clanChanged = false
+  var newClanId = "";
+  var userId = ""
+}
 

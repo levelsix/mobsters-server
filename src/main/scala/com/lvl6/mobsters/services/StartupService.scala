@@ -309,6 +309,15 @@ class StartupService extends LazyLogging{
 
 			if (user != null) {
 				playerId = user.getId();
+        
+        //for setting up websocket
+        responses.userId = playerId
+        if(user.getClanId != null) {
+          responses.newClanId = user.getClanId
+          responses.clanChanged = true
+        }
+        
+        
 				//if can't lock player, exception will be thrown
 				locker.lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
 				startupStatus = StartupStatus.USER_IN_DB;
