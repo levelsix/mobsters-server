@@ -1838,7 +1838,7 @@ public class MiscMethods {
 //					returnMap.put(tl, text);
 //				}
 //				else {
-					translatedText = Translate.execute(text, language2);
+					translatedText = Translate.execute(text, sourceLanguage, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
 					log.info("Translating to {}: {}", language2, translatedText);
@@ -1851,8 +1851,8 @@ public class MiscMethods {
 
 	}
 
-	private TranslateLanguages convertFromLanguageToEnum(Language language) {
-		TranslateLanguages tl = null;
+	public TranslateLanguages convertFromLanguageToEnum(Language language) {
+		TranslateLanguages tl = TranslateLanguages.NO_TRANSLATION;
 		try {
 			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
 				tl = TranslateLanguages.ARABIC;
@@ -1906,8 +1906,16 @@ public class MiscMethods {
 	}
 
 	public Language detectedLanguage(String text) {
-		Detect.setClientId(pClientId);
-        Detect.setClientSecret(secretId);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__USE_BYRON_TRANSLATIONS))
+		{
+			log.error("byron translator on!");
+			Translate.setClientId(byronPClientId);
+			Translate.setClientSecret(byronSecretId);
+		} else {
+			Translate.setClientId(pClientId);
+			Translate.setClientSecret(secretId);
+		}
         Language detectedLanguage = null;
 
         try {
