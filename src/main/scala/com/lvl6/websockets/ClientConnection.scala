@@ -34,6 +34,7 @@ import com.lvl6.events.PreDatabaseRequestEvent
 import com.lvl6.server.eventsender.PreDBFacebookEvent
 import com.lvl6.events.request.StartupRequestEvent
 import java.util.UUID
+import java.nio.ByteBuffer
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -153,7 +154,10 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     session match{
       case Some(sess)=>{
         sess.isOpen() match{
-          case true =>  sess.getAsyncRemote.sendObject(bytes)
+          case true =>  {
+        	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
+            sess.synchronized{sess.getBasicRemote.sendBinary(buff)}
+          }
           case false => logger.warn(s"Cannot send message. Socket is closed. $this")
         }
       }
