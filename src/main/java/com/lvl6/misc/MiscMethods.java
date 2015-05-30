@@ -134,9 +134,9 @@ public class MiscMethods {
 	public static final String oil = "oil";
 	public static final String gachaCredits = "gachaCredits";
 	public static final String boosterPackId = "boosterPackId";
-
-//	private static String pClientId = "ToonSquad";
-//	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
+	
+	private static String byronPClientId = "ToonSquad";
+    private static String byronSecretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
 	private static String pClientId = "ToonSquadProd";
 	private static String secretId = "KhWUZfHUsJ484zCVAOmWOdqzYhqFri0EzgutiLRdqJg=";
