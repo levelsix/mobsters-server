@@ -116,9 +116,9 @@ trait GameEventHandler extends LazyLogging  {
     if(!user.isAdmin){
       if(re.isInstanceOf[PreDatabaseRequestEvent] ){
         val udid = re.asInstanceOf[PreDatabaseRequestEvent].getUdid
-        messagingUtil.sendMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid)
+        //messagingUtil.sendMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid)
       }else{
-        messagingUtil.sendMaintanenceModeMessage(appMode.getMessageForUsers, playerId)
+        //messagingUtil.sendMaintanenceModeMessage(appMode.getMessageForUsers, playerId)
       }
     }
   } 

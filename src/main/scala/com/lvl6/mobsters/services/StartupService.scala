@@ -321,19 +321,19 @@ class StartupService extends LazyLogging{
 				userIdSet = false;
 				tutorialUserAccounting(reqProto, udid, now);
 				val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
-				finishStartup(sd)
+				finishStartup(sd, responses)
 			}
 		} else {
             resBuilder.setServerTimeMillis((new Date()).getTime())
             resEvent.setStartupResponseProto(resBuilder.build())
             logger.debug(s"Update available. Writing event response: $resEvent")
-            server.writePreDBEvent(resEvent, udid)
-
+            //server.writePreDBEvent(resEvent, udid)
+            responses.preDBResponseEvents.add(PreDBResponseEvent(resEvent, udid))
         }
 	}
 
 
-	def finishStartup(sd:StartupData)={
+	def finishStartup(sd:StartupData, responses:ToClientEvents)={
 		setAllStaticData(sd.resBuilder, sd.playerId, sd.userIdSet);
 		sd.resBuilder.setStartupStatus(sd.startupStatus);
 		setConstants(sd.resBuilder, sd.startupStatus);
@@ -341,7 +341,8 @@ class StartupService extends LazyLogging{
 		sd.resEvent.setStartupResponseProto(sd.resBuilder.build())
 		val resEvent = sd.resEvent
 		logger.debug(s"Writing event response: $resEvent")
-		server.writePreDBEvent(resEvent, sd.udid);
+		//server.writePreDBEvent(resEvent, sd.udid);
+    responses.preDBResponseEvents.add(PreDBResponseEvent(resEvent, sd.udid))
 		timed("StartupService.startupFinished"){
 			insertUtil.insertIntoLoginHistory(sd.udid, sd.playerId, sd.now, sd.isLogin, sd.goingThroughTutorial);
 			updateLeaderboard(sd.apsalarId, sd.user, sd.now, sd.newNumConsecutiveDaysLoggedIn);
@@ -484,7 +485,7 @@ class StartupService extends LazyLogging{
 							} yield plfu
 
 			userInfo onSuccess {
-			    case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd) 
+			    case plfu:PvpLeagueForUser =>  finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd, responses) 
 			}
 
 			userInfo onFailure {
@@ -506,7 +507,7 @@ class StartupService extends LazyLogging{
 	}
 
 
-	def finishLoginExisting(resBuilder:Builder, user:User, playerId:String, nowDate:Date, plfu:PvpLeagueForUser, sd:StartupData) = {
+	def finishLoginExisting(resBuilder:Builder, user:User, playerId:String, nowDate:Date, plfu:PvpLeagueForUser, sd:StartupData, responses:ToClientEvents) = {
 		timed("StartupService.finishExistingLogin"){
 			try {
 				val sgcma = new SetGlobalChatMessageAction(resBuilder, user, chatMessages);
@@ -651,7 +652,7 @@ class StartupService extends LazyLogging{
 				}
 				val fup = createInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
 				resBuilder.setSender(fup);
-				finishStartup(sd)
+				finishStartup(sd, responses)
 			}catch{
 			    case t:Throwable => logger.error("Error finishing login for user: $playerId", t)
 			}finally {
