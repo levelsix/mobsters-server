@@ -277,8 +277,10 @@ public class RetrievePrivateChatPostsController extends EventController {
 							String[] translatedTextArray = miscMethods.translateInBulk(textArray, miscMethods.convertFromEnumToLanguage(translateLanguage));
 
 							//add results to returnMap
-							for(int i=0; i<chatIdsArray.length; i++) {
-								returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+							if (translatedTextArray != null) {
+								for(int i=0; i<chatIdsArray.length; i++) {
+									returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+								}
 							}
 
 							//convert private chat post to group chat message proto
