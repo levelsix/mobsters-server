@@ -97,8 +97,6 @@ public class SendGroupChatController extends EventController {
 		numAllocatedThreads = 4;
 	}
 
-	private ReceivedGroupChatResponseProto rgcrp;
-
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new SendGroupChatRequestEvent();
@@ -187,21 +185,18 @@ public class SendGroupChatController extends EventController {
 
 				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap, TranslateLanguages.NO_TRANSLATION);
 
 				chatProto.setMessage(gcmp);
 
                 //legacy implementation
                 chatProto.setChatMessage(censoredChatMessage);
 
-				rgcrp = chatProto.build();
+				ReceivedGroupChatResponseProto rgcrp = chatProto.build();
 
 				log.info("receive group chat response proto : {}", rgcrp);
 
-				sendChatMessage(userId, chatProto, event.getTag(),
-						scope == ChatScope.CLAN, user.getClanId(),
-						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcrp, translateMap, globalLanguage);
+				sendChatMessage(userId, scope == ChatScope.CLAN, user.getClanId(), rgcrp);
 
 				// send messages in background so sending player can unlock
 				/*
@@ -229,10 +224,7 @@ public class SendGroupChatController extends EventController {
 	}
 
 	protected void sendChatMessage(String senderId,
-			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
-			boolean isForClan, String clanId, boolean isAdmin, long time,
-			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr,
-			Map<TranslateLanguages, String> translateMap, TranslateLanguages globalLanguage) {
+			boolean isForClan, String clanId, ReceivedGroupChatResponseProto rgcr) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(rgcr);
@@ -242,9 +234,7 @@ public class SendGroupChatController extends EventController {
 		} else {
 			log.info("Sending global chat ");
 			//add new message to front of list
-			chatMessages.add(0, createInfoProtoUtils
-					.createGroupChatMessageProto(time, chatProto.getSender(),
-							censoredChatMessage, isAdmin, null, translateMap, globalLanguage));
+			chatMessages.add(0, rgcr.getMessage());
 			//remove older messages
 			try {
 				while (chatMessages.size() > CHAT_MESSAGES_MAX_SIZE) {
@@ -416,15 +406,6 @@ public class SendGroupChatController extends EventController {
 	public void setClanSearch(ClanSearch clanSearch) {
 		this.clanSearch = clanSearch;
 	}
-
-	public ReceivedGroupChatResponseProto getRgcrp() {
-		return rgcrp;
-	}
-
-	public void setRgcrp(ReceivedGroupChatResponseProto rgcrp) {
-		this.rgcrp = rgcrp;
-	}
-
 
 
 }

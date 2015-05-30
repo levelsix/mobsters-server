@@ -1735,8 +1735,7 @@ public class MiscMethods {
 		try {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translateInBulk", e);
 		}
 		return returnArray;
 	}
@@ -1784,8 +1783,7 @@ public class MiscMethods {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translate", e);
 		}
 		return returnMap;
 	}
@@ -1809,19 +1807,19 @@ public class MiscMethods {
 
 		try {
 			for(Language language2 : listOfLanguages) {
-				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
-					TranslateLanguages tl = convertFromLanguageToEnum(language2);
-					returnMap.put(tl, text);
-				}
-				else {
-					translatedText = Translate.execute(text, sourceLanguage, language2);
+//				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
+//					TranslateLanguages tl = convertFromLanguageToEnum(language2);
+//					returnMap.put(tl, text);
+//				}
+//				else {
+					translatedText = Translate.execute(text, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
-				}
+					log.info("Translating to {}: {}", language2, translatedText);
+//				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translateForGlobal", e);
 		}
 		return returnMap;
 
