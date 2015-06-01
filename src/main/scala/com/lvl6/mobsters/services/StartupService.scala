@@ -1092,8 +1092,9 @@ class StartupService extends LazyLogging{
 			}
 		}
 	}
-	def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date):Future[Unit]={
+	def setMiniEventForUser(resBuilder:Builder, u:User, userId:String, now:Date) {
 		Future{
+            logger.info("setMiniEventForUser in future");
 			timed("StartupService.setMiniEventForUser"){
 				val rmeaResBuilder =  RetrieveMiniEventResponseProto.newBuilder();
 				val rmea = new RetrieveMiniEventAction(

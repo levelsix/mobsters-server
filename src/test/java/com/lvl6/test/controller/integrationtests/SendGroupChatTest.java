@@ -146,26 +146,26 @@ public class SendGroupChatTest {
 //		return totalDeleted;
 //	}
 
-	@Test
-	public void testSendGroupChat() {
-		User user1 = userRetrieveUtil.getUserById(userId);
-		int userGems1 = user1.getGems();
-		SendGroupChatRequestProto.Builder sgcrpb = SendGroupChatRequestProto
-				.newBuilder();
-
-		sgcrpb.setSender(mup);
-		sgcrpb.setScope(ChatScope.GLOBAL);
-		sgcrpb.setChatMessage("this is a test");
-		sgcrpb.setClientTime(new Date().getTime());
-		sgcrpb.setGlobalLanguage(TranslateLanguages.ENGLISH);
-
-		SendGroupChatRequestEvent sgcre = new SendGroupChatRequestEvent();
-		sgcre.setTag(1);
-		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
-		sendGroupChatController.handleEvent(sgcre);
-
-		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
-
-	}
+//	@Test
+//	public void testSendGroupChat() {
+//		User user1 = userRetrieveUtil.getUserById(userId);
+//		int userGems1 = user1.getGems();
+//		SendGroupChatRequestProto.Builder sgcrpb = SendGroupChatRequestProto
+//				.newBuilder();
+//
+//		sgcrpb.setSender(mup);
+//		sgcrpb.setScope(ChatScope.GLOBAL);
+//		sgcrpb.setChatMessage("this is a test");
+//		sgcrpb.setClientTime(new Date().getTime());
+//		sgcrpb.setGlobalLanguage(TranslateLanguages.ENGLISH);
+//
+//		SendGroupChatRequestEvent sgcre = new SendGroupChatRequestEvent();
+//		sgcre.setTag(1);
+//		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
+//		sendGroupChatController.handleEvent(sgcre);
+//
+//		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
+//
+//	}
 
 }

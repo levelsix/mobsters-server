@@ -134,9 +134,12 @@ public class MiscMethods {
 	public static final String oil = "oil";
 	public static final String gachaCredits = "gachaCredits";
 	public static final String boosterPackId = "boosterPackId";
+	
+	private static String byronPClientId = "ToonSquad";
+    private static String byronSecretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
 
-	private static String pClientId = "ToonSquad";
-	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
+	private static String pClientId = "ToonSquadProd";
+	private static String secretId = "KhWUZfHUsJ484zCVAOmWOdqzYhqFri0EzgutiLRdqJg=";
 
 	public static final String CASH = "CASH";
 	public static final String OIL = "OIL";
@@ -1782,8 +1785,7 @@ public class MiscMethods {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translate", e);
 		}
 		return returnMap;
 	}
@@ -1807,26 +1809,26 @@ public class MiscMethods {
 
 		try {
 			for(Language language2 : listOfLanguages) {
-				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
-					TranslateLanguages tl = convertFromLanguageToEnum(language2);
-					returnMap.put(tl, text);
-				}
-				else {
+//				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
+//					TranslateLanguages tl = convertFromLanguageToEnum(language2);
+//					returnMap.put(tl, text);
+//				}
+//				else {
 					translatedText = Translate.execute(text, sourceLanguage, language2);
 					TranslateLanguages tl = convertFromLanguageToEnum(language2);
 					returnMap.put(tl, translatedText);
-				}
+					log.info("Translating to {}: {}", language2, translatedText);
+//				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translateForGlobal", e);
 		}
 		return returnMap;
 
 	}
 
-	private TranslateLanguages convertFromLanguageToEnum(Language language) {
-		TranslateLanguages tl = null;
+	public TranslateLanguages convertFromLanguageToEnum(Language language) {
+		TranslateLanguages tl = TranslateLanguages.NO_TRANSLATION;
 		try {
 			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
 				tl = TranslateLanguages.ARABIC;
@@ -1880,8 +1882,16 @@ public class MiscMethods {
 	}
 
 	public Language detectedLanguage(String text) {
-		Detect.setClientId(pClientId);
-        Detect.setClientSecret(secretId);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__USE_BYRON_TRANSLATIONS))
+		{
+			log.error("byron translator on!");
+			Translate.setClientId(byronPClientId);
+			Translate.setClientSecret(byronSecretId);
+		} else {
+			Translate.setClientId(pClientId);
+			Translate.setClientSecret(secretId);
+		}
         Language detectedLanguage = null;
 
         try {
