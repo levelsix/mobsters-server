@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEvent {
+public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEvent<RetrieveStrengthLeaderBoardResponseProto> {
 
 	private RetrieveStrengthLeaderBoardResponseProto retrieveStrengthLeaderBoardResponseProto;
 

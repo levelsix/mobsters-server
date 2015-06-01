@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveBattleReplayResponseEvent extends NormalResponseEvent {
+public class RetrieveBattleReplayResponseEvent extends NormalResponseEvent<RetrieveBattleReplayResponseProto> {
 
 	private RetrieveBattleReplayResponseProto retrieveBattleReplayResponseProto;
 

@@ -1,6 +1,8 @@
 package com.lvl6.events;
 
-public abstract class PreDatabaseResponseEvent extends ResponseEvent {
+import com.google.protobuf.GeneratedMessage;
+
+public abstract class PreDatabaseResponseEvent<T extends GeneratedMessage> extends ResponseEvent<T> {
 	protected String udid;
 
 	public PreDatabaseResponseEvent(String udid) {

@@ -7,7 +7,7 @@ import com.lvl6.events.PreDatabaseResponseEvent;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UserCreateResponseEvent extends PreDatabaseResponseEvent {
+public class UserCreateResponseEvent extends PreDatabaseResponseEvent<UserCreateResponseProto> {
 
 	private UserCreateResponseProto responseProto;
 
