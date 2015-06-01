@@ -160,6 +160,9 @@ import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
 import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
 import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
+import scala.concurrent.Await
+import scala.concurrent._
+import scala.concurrent.duration._
 
 case class StartupData(
   resBuilder: Builder,
@@ -454,7 +457,7 @@ class StartupService extends LazyLogging {
     try {
       //force other devices on this account to logout
       forceLogoutOthers(udid, playerId, user, fbId, responses)
-      logger.info(s"no major update... getting user info")
+      //logger.info(s"no major update... getting user info")
       val userId = playerId;
 
       val userInfo: Future[PvpLeagueForUser] = for {
@@ -476,15 +479,16 @@ class StartupService extends LazyLogging {
         sbiqfu <- setBattleItemQueueForUser(resBuilder, userId)
         ssfu <- setSalesForUser(resBuilder, user)
         scrs <- setClanRaidStuff(resBuilder, user, userId, now)
-        plfu <- pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
         sttslb <- setTopThreeStrengthLeaderBoard(resBuilder)
+        plfu <- pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
-
-      userInfo onSuccess {
-        case plfu: PvpLeagueForUser => finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd, responses)
-      }
-
-      userInfo onFailure {
+      
+      
+      //TODO: Change responses to be non-blocking
+      try {
+        val plfu = Await.result(userInfo, 90.seconds);
+        finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd, responses)
+      }catch{
         case t: Throwable => {
           logger.error("Error running login futures", t)
           loginFinished(playerId)
