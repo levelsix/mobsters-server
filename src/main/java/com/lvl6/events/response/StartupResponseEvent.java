@@ -31,12 +31,12 @@ public class StartupResponseEvent extends PreDatabaseResponseEvent<StartupRespon
 	}
 
 	public void setStartupResponseProto(StartupResponseProto rProto) {
-		log.info("Setting response proto: {} this: {}", rProto, this);
+		//log.info("Setting response proto: {} this: {}", rProto, this);
 		this.responseProto = rProto;
 	}
 
 	public int eventSize() {
-		log.info("Getting size of proto: {} this: {}", responseProto, this);
+		//log.info("Getting size of proto: {} this: {}", this);
 		return responseProto.getSerializedSize();
 	}
 
