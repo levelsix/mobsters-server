@@ -135,8 +135,11 @@ public class MiscMethods {
 	public static final String gachaCredits = "gachaCredits";
 	public static final String boosterPackId = "boosterPackId";
 
-	private static String pClientId = "ToonSquad";
-	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
+	private static String byronPClientId = "ToonSquad";
+	private static String byronSecretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
+
+	private static String pClientId = "ToonSquadProd";
+	private static String secretId = "KhWUZfHUsJ484zCVAOmWOdqzYhqFri0EzgutiLRdqJg=";
 
 	public static final String CASH = "CASH";
 	public static final String OIL = "OIL";
@@ -1727,15 +1730,22 @@ public class MiscMethods {
 	//	}
 
 	public String[] translateInBulk(String[] text, Language recipientLanguage) {
-		Translate.setClientId(pClientId);
-		Translate.setClientSecret(secretId);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__USE_BYRON_TRANSLATIONS))
+		{
+			log.error("byron translator on!");
+			Translate.setClientId(byronPClientId);
+			Translate.setClientSecret(byronSecretId);
+		} else {
+			Translate.setClientId(pClientId);
+			Translate.setClientSecret(secretId);
+		}
 		String[] returnArray = null;
 
 		try {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translateInBulk", e);
 		}
 		return returnArray;
 	}
@@ -1743,8 +1753,16 @@ public class MiscMethods {
 
 	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
 			Language recipientLanguage, String text) {
-		Translate.setClientId(pClientId);
-		Translate.setClientSecret(secretId);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__USE_BYRON_TRANSLATIONS))
+		{
+			log.error("byron translator on!");
+			Translate.setClientId(byronPClientId);
+			Translate.setClientSecret(byronSecretId);
+		} else {
+			Translate.setClientId(pClientId);
+			Translate.setClientSecret(secretId);
+		}
 
 		String translatedText = "";
 		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
@@ -1783,8 +1801,7 @@ public class MiscMethods {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translate", e);
 		}
 		return returnMap;
 	}
@@ -1792,8 +1809,16 @@ public class MiscMethods {
 
 
 	public Map<TranslateLanguages, String> translateForGlobal(Language sourceLanguage, String text) {
-		Translate.setClientId(pClientId);
-		Translate.setClientSecret(secretId);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__USE_BYRON_TRANSLATIONS))
+		{
+			log.error("byron translator on!");
+			Translate.setClientId(byronPClientId);
+			Translate.setClientSecret(byronSecretId);
+		} else {
+			Translate.setClientId(pClientId);
+			Translate.setClientSecret(secretId);
+		}
 
 		String translatedText = "";
 		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
@@ -1825,15 +1850,14 @@ public class MiscMethods {
 				//				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("translateForGlobal", e);
 		}
 		return returnMap;
 
 	}
 
-	private TranslateLanguages convertFromLanguageToEnum(Language language) {
-		TranslateLanguages tl = null;
+	public TranslateLanguages convertFromLanguageToEnum(Language language) {
+		TranslateLanguages tl = TranslateLanguages.NO_TRANSLATION;
 		try {
 			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
 				tl = TranslateLanguages.ARABIC;
@@ -1887,8 +1911,16 @@ public class MiscMethods {
 	}
 
 	public Language detectedLanguage(String text) {
-		Detect.setClientId(pClientId);
-        Detect.setClientSecret(secretId);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__USE_BYRON_TRANSLATIONS))
+		{
+			log.error("byron translator on!");
+			Translate.setClientId(byronPClientId);
+			Translate.setClientSecret(byronSecretId);
+		} else {
+			Translate.setClientId(pClientId);
+			Translate.setClientSecret(secretId);
+		}
         Language detectedLanguage = null;
 
         try {

@@ -71,7 +71,7 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	BannedUserRetrieveUtils bannedUserRetrieveUtils;
 
@@ -96,8 +96,6 @@ public class SendGroupChatController extends EventController {
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
 	}
-
-	private ReceivedGroupChatResponseProto rgcrp;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -207,14 +205,11 @@ public class SendGroupChatController extends EventController {
                 //legacy implementation
                 chatProto.setChatMessage(censoredChatMessage);
 
-				rgcrp = chatProto.build();
+				ReceivedGroupChatResponseProto rgcrp = chatProto.build();
 
 				log.info("receive group chat response proto : {}", rgcrp);
 
-				sendChatMessage(userId, chatProto, event.getTag(),
-						scope == ChatScope.CLAN, user.getClanId(),
-						user.isAdmin(), timeOfPost.getTime(), user.getLevel(),
-						censoredChatMessage, rgcrp, globalLanguage);
+				sendChatMessage(userId, scope == ChatScope.CLAN, user.getClanId(), rgcrp);
 
 				// send messages in background so sending player can unlock
 				/*
@@ -242,10 +237,7 @@ public class SendGroupChatController extends EventController {
 	}
 
 	protected void sendChatMessage(String senderId,
-			ReceivedGroupChatResponseProto.Builder chatProto, int tag,
-			boolean isForClan, String clanId, boolean isAdmin, long time,
-			int level, String censoredChatMessage, ReceivedGroupChatResponseProto rgcr,
-			TranslateLanguages globalLanguage) {
+			boolean isForClan, String clanId, ReceivedGroupChatResponseProto rgcr) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(rgcr);
@@ -255,9 +247,7 @@ public class SendGroupChatController extends EventController {
 		} else {
 			log.info("Sending global chat ");
 			//add new message to front of list
-			chatMessages.add(0, createInfoProtoUtils
-					.createGroupChatMessageProto(time, chatProto.getSender(),
-							censoredChatMessage, isAdmin, null, null, globalLanguage));
+			chatMessages.add(0, rgcr.getMessage());
 			//remove older messages
 			try {
 				while (chatMessages.size() > CHAT_MESSAGES_MAX_SIZE) {
@@ -429,15 +419,6 @@ public class SendGroupChatController extends EventController {
 	public void setClanSearch(ClanSearch clanSearch) {
 		this.clanSearch = clanSearch;
 	}
-
-	public ReceivedGroupChatResponseProto getRgcrp() {
-		return rgcrp;
-	}
-
-	public void setRgcrp(ReceivedGroupChatResponseProto rgcrp) {
-		this.rgcrp = rgcrp;
-	}
-
 
 
 }
