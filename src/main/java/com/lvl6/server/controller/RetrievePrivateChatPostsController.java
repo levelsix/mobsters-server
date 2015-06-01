@@ -35,8 +35,9 @@ import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -65,6 +66,12 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
 
 	public RetrievePrivateChatPostsController() {
 		numAllocatedThreads = 5;
@@ -274,7 +281,8 @@ public class RetrievePrivateChatPostsController extends EventController {
 								textArray[i] = chatIdToPcP.get(chatIdsArray[i]).getContent();
 							}
 
-							String[] translatedTextArray = miscMethods.translateInBulk(textArray, miscMethods.convertFromEnumToLanguage(translateLanguage));
+							String[] translatedTextArray = translationUtils.translateInBulk(textArray,
+									translationUtils.convertFromEnumToLanguage(translateLanguage), toggle);
 
 							//add results to returnMap
 							if (translatedTextArray != null) {

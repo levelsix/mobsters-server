@@ -76,8 +76,8 @@ public interface IUserCurrencyHistory extends Serializable {
 	/**
 	 * Getter for <code>mobsters.user_currency_history.resource_type</code>.
 	 */
-	@Column(name = "resource_type", length = 45)
-	@Size(max = 45)
+	@Column(name = "resource_type", length = 100)
+	@Size(max = 100)
 	public String getResourceType();
 
 	/**

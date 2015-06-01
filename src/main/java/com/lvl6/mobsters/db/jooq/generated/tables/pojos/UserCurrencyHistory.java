@@ -32,7 +32,11 @@ import javax.validation.constraints.Size;
 @Table(name = "user_currency_history", schema = "mobsters")
 public class UserCurrencyHistory implements IUserCurrencyHistory {
 
+<<<<<<< HEAD
 	private static final long serialVersionUID = 1954739453;
+=======
+	private static final long serialVersionUID = 216548163;
+>>>>>>> 20986e4... regenerated tables
 
 	private String    id;
 	private String    userId;
@@ -120,8 +124,8 @@ public class UserCurrencyHistory implements IUserCurrencyHistory {
 		return this;
 	}
 
-	@Column(name = "resource_type", length = 45)
-	@Size(max = 45)
+	@Column(name = "resource_type", length = 100)
+	@Size(max = 100)
 	@Override
 	public String getResourceType() {
 		return this.resourceType;

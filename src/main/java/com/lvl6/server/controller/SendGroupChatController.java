@@ -45,11 +45,12 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.memetix.mst.language.Language;
 
 @Component
 @DependsOn("gameServer")
@@ -92,6 +93,12 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
 
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
@@ -184,7 +191,7 @@ public class SendGroupChatController extends EventController {
 //				}
 				
 //				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(detectedLanguage, censoredChatMessage);
-				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(null, censoredChatMessage);
+				Map<TranslateLanguages, String> translateMap = translationUtils.translateForGlobal(null, censoredChatMessage, toggle);
 
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils

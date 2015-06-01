@@ -51,6 +51,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
@@ -210,6 +211,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRaidStageMonsterCo
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRaidStageRewardConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.CustomMenuConfigRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.CustomTranslationsRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentForUserRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionCostConfigRecord;
@@ -442,6 +444,7 @@ public class Keys {
 	public static final UniqueKey<ClanRaidStageMonsterConfigRecord> KEY_CLAN_RAID_STAGE_MONSTER_CONFIG_PRIMARY = UniqueKeys0.KEY_CLAN_RAID_STAGE_MONSTER_CONFIG_PRIMARY;
 	public static final UniqueKey<ClanRaidStageRewardConfigRecord> KEY_CLAN_RAID_STAGE_REWARD_CONFIG_PRIMARY = UniqueKeys0.KEY_CLAN_RAID_STAGE_REWARD_CONFIG_PRIMARY;
 	public static final UniqueKey<CustomMenuConfigRecord> KEY_CUSTOM_MENU_CONFIG_PRIMARY = UniqueKeys0.KEY_CUSTOM_MENU_CONFIG_PRIMARY;
+	public static final UniqueKey<CustomTranslationsRecord> KEY_CUSTOM_TRANSLATIONS_PRIMARY = UniqueKeys0.KEY_CUSTOM_TRANSLATIONS_PRIMARY;
 	public static final UniqueKey<EventPersistentConfigRecord> KEY_EVENT_PERSISTENT_CONFIG_PRIMARY = UniqueKeys0.KEY_EVENT_PERSISTENT_CONFIG_PRIMARY;
 	public static final UniqueKey<EventPersistentForUserRecord> KEY_EVENT_PERSISTENT_FOR_USER_PRIMARY = UniqueKeys0.KEY_EVENT_PERSISTENT_FOR_USER_PRIMARY;
 	public static final UniqueKey<ExpansionCostConfigRecord> KEY_EXPANSION_COST_CONFIG_PRIMARY = UniqueKeys0.KEY_EXPANSION_COST_CONFIG_PRIMARY;
@@ -667,6 +670,7 @@ public class Keys {
 		public static final UniqueKey<ClanRaidStageMonsterConfigRecord> KEY_CLAN_RAID_STAGE_MONSTER_CONFIG_PRIMARY = createUniqueKey(ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG, ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG.ID);
 		public static final UniqueKey<ClanRaidStageRewardConfigRecord> KEY_CLAN_RAID_STAGE_REWARD_CONFIG_PRIMARY = createUniqueKey(ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG, ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG.ID);
 		public static final UniqueKey<CustomMenuConfigRecord> KEY_CUSTOM_MENU_CONFIG_PRIMARY = createUniqueKey(CustomMenuConfig.CUSTOM_MENU_CONFIG, CustomMenuConfig.CUSTOM_MENU_CONFIG.CUSTOM_MENU_ID, CustomMenuConfig.CUSTOM_MENU_CONFIG.POSITION_Z);
+		public static final UniqueKey<CustomTranslationsRecord> KEY_CUSTOM_TRANSLATIONS_PRIMARY = createUniqueKey(CustomTranslations.CUSTOM_TRANSLATIONS, CustomTranslations.CUSTOM_TRANSLATIONS.ID);
 		public static final UniqueKey<EventPersistentConfigRecord> KEY_EVENT_PERSISTENT_CONFIG_PRIMARY = createUniqueKey(EventPersistentConfig.EVENT_PERSISTENT_CONFIG, EventPersistentConfig.EVENT_PERSISTENT_CONFIG.ID);
 		public static final UniqueKey<EventPersistentForUserRecord> KEY_EVENT_PERSISTENT_FOR_USER_PRIMARY = createUniqueKey(EventPersistentForUser.EVENT_PERSISTENT_FOR_USER, EventPersistentForUser.EVENT_PERSISTENT_FOR_USER.USER_ID, EventPersistentForUser.EVENT_PERSISTENT_FOR_USER.EVENT_PERSISTENT_ID);
 		public static final UniqueKey<ExpansionCostConfigRecord> KEY_EXPANSION_COST_CONFIG_PRIMARY = createUniqueKey(ExpansionCostConfig.EXPANSION_COST_CONFIG, ExpansionCostConfig.EXPANSION_COST_CONFIG.ID);

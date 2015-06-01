@@ -34,7 +34,11 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 
+<<<<<<< HEAD
 	private static final long serialVersionUID = -1258145879;
+=======
+	private static final long serialVersionUID = 1526330646;
+>>>>>>> 20986e4... regenerated tables
 
 	/**
 	 * The reference instance of <code>mobsters.user_currency_history</code>
@@ -67,7 +71,7 @@ public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 	/**
 	 * The column <code>mobsters.user_currency_history.resource_type</code>.
 	 */
-	public final TableField<UserCurrencyHistoryRecord, String> RESOURCE_TYPE = createField("resource_type", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
+	public final TableField<UserCurrencyHistoryRecord, String> RESOURCE_TYPE = createField("resource_type", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
 	/**
 	 * The column <code>mobsters.user_currency_history.currency_change</code>.

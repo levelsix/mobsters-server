@@ -29,6 +29,7 @@ import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemType;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
+import com.lvl6.proto.BattleProto.BattleReplayProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
@@ -203,6 +204,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -1425,7 +1427,7 @@ public class CreateInfoProtoUtils {
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap,
-			TranslateLanguages contentLanguage) {
+			TranslateLanguages contentLanguage, TranslationUtils translationUtils) {
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
@@ -1442,7 +1444,7 @@ public class CreateInfoProtoUtils {
 
 		if(!turnOffTranslation) {
 			if(translatedMap == null) {
-				translatedMap = miscMethods.translate(null, null, content);
+				translatedMap = translationUtils.translate(null, null, content, serverToggleRetrieveUtils);
 			}
 			for(TranslateLanguages tl : translatedMap.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();

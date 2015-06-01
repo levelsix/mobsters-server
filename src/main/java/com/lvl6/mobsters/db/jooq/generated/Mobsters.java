@@ -51,6 +51,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
@@ -189,7 +190,11 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
+<<<<<<< HEAD
 	private static final long serialVersionUID = 1899956259;
+=======
+	private static final long serialVersionUID = -1436386027;
+>>>>>>> 20986e4... regenerated tables
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -259,6 +264,7 @@ public class Mobsters extends SchemaImpl {
 			ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG,
 			ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG,
 			CustomMenuConfig.CUSTOM_MENU_CONFIG,
+			CustomTranslations.CUSTOM_TRANSLATIONS,
 			EventPersistentConfig.EVENT_PERSISTENT_CONFIG,
 			EventPersistentForUser.EVENT_PERSISTENT_FOR_USER,
 			ExpansionCostConfig.EXPANSION_COST_CONFIG,

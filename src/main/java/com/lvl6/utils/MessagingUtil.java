@@ -95,44 +95,44 @@ public class MessagingUtil {
 		eventWriter.handleEvent(ev);
 	}
 
-	public void sendAdminMessage(String message) {
-		log.info("Sending admin message: {}", message);
-		//send admin message
-		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
-				.newBuilder();
-		samrp.setMessage(message);
-		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
-				samrp.getSenderUuid());
-		ev.setSendAdminMessageResponseProto(samrp.build());
-		eventWriter.processGlobalChatResponseEvent(ev);
-		//send regular global˙ chat
-		log.info("Sending admin message global chat");
-		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
-				.newBuilder();
-		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
-		final ChatScope scope = ChatScope.GLOBAL;
-		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
-		chatProto.setChatMessage(message);
-		chatProto.setSender(senderProto);
-		chatProto.setScope(scope);
-		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto,
-				1, timeOfPost.getTime());
-	}
-
-	protected void sendChatMessage(String senderId,
-			ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
-		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
-				senderId);
-		ce.setReceivedGroupChatResponseProto(chatProto.build());
-		ce.setTag(tag);
-		log.info("Sending global chat ");
-		//add new message to front of list
-		chatMessages.add(0, createInfoProtoUtils.createGroupChatMessageProto(
-				time, chatProto.getSender(), chatProto.getChatMessage(), true,
-				null, null, null));
-		eventWriter.processGlobalChatResponseEvent(ce);
-	}
+//	public void sendAdminMessage(String message) {
+//		log.info("Sending admin message: {}", message);
+//		//send admin message
+//		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
+//				.newBuilder();
+//		samrp.setMessage(message);
+//		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+//		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
+//				samrp.getSenderUuid());
+//		ev.setSendAdminMessageResponseProto(samrp.build());
+//		eventWriter.processGlobalChatResponseEvent(ev);
+//		//send regular global˙ chat
+//		log.info("Sending admin message global chat");
+//		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
+//				.newBuilder();
+//		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
+//		final ChatScope scope = ChatScope.GLOBAL;
+//		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
+//		chatProto.setChatMessage(message);
+//		chatProto.setSender(senderProto);
+//		chatProto.setScope(scope);
+//		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto,
+//				1, timeOfPost.getTime());
+//	}
+//
+//	protected void sendChatMessage(String senderId,
+//			ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
+//		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
+//				senderId);
+//		ce.setReceivedGroupChatResponseProto(chatProto.build());
+//		ce.setTag(tag);
+//		log.info("Sending global chat ");
+//		//add new message to front of list
+//		chatMessages.add(0, createInfoProtoUtils.createGroupChatMessageProto(
+//				time, chatProto.getSender(), chatProto.getChatMessage(), true,
+//				null, null, null, ""));
+//		eventWriter.processGlobalChatResponseEvent(ce);
+//	}
 
 	public void sendGlobalMessage(ResponseEvent re) {
 		eventWriter.processGlobalChatResponseEvent(re);
