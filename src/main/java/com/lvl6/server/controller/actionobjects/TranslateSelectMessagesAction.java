@@ -1,8 +1,11 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,8 @@ import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builde
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
@@ -37,6 +42,8 @@ public class TranslateSelectMessagesAction {
 	protected UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
 	private ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+	private TranslationUtils translationUtils;
+	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 
 	public TranslateSelectMessagesAction(String recipientUserId,
@@ -45,7 +52,9 @@ public class TranslateSelectMessagesAction {
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
 			boolean translateOn, InsertUtil insertUtil, UpdateUtil updateUtil,
 			MiscMethods miscMethods,
-			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils) {
+			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils,
+			TranslationUtils translationUtils,
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils) {
 		super();
 		this.recipientUserId = recipientUserId;
 		this.senderUserId = senderUserId;
@@ -58,6 +67,8 @@ public class TranslateSelectMessagesAction {
 		this.updateUtil = updateUtil;
 		this.miscMethods = miscMethods;
 		this.chatTranslationsRetrieveUtils = chatTranslationsRetrieveUtils;
+		this.translationUtils = translationUtils;
+		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
 	}
 
 	private User recipientUser;
@@ -92,7 +103,7 @@ public class TranslateSelectMessagesAction {
 			return true;
 		}
 
-		language = miscMethods.convertFromEnumToLanguage(languageEnum);
+		language = translationUtils.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
 			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
 			log.error("not valid language for TranslationLanguage: " + languageEnum);
@@ -131,16 +142,21 @@ public class TranslateSelectMessagesAction {
 		if(!languageEnum.toString().equalsIgnoreCase("NO_TRANSLATION")) {
 			if(!listOfPrivateChatPosts.isEmpty()) {
 				privateChatPostMap = new HashMap<String, PrivateChatPost>();
-				Map<String, String> chatIdsToTranslations = new HashMap<String, String>();
+				LinkedHashMap<String, String> chatIdsToTranslations = new LinkedHashMap<String, String>();
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 					String message = pcp.getContent();
 					chatIdsToTranslations.put(pcp.getId(), message);
-					Map<TranslateLanguages, String> translatedMessage = miscMethods.translate(null, language, message);
+				}
+				Collection<String> messages = chatIdsToTranslations.values();
+				
+				String[] textArray = (String[]) messages.toArray();
+				String[] translations = translationUtils.translateInBulk(textArray, language, serverToggleRetrieveUtils);
 
-					for(TranslateLanguages tl : translatedMessage.keySet()) {
+				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
+					for(int i=0; i<translations.length; i++) {
 						TranslatedText tt = new TranslatedText();
-						tt.setLanguage(tl.toString());
-						tt.setText(translatedMessage.get(tl));
+						tt.setLanguage(language.toString());
+						tt.setText(translations[i]);
 						pcp.setTranslatedText(tt);
 					}
 					privateChatPostMap.put(pcp.getId(), pcp);

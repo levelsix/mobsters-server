@@ -4,21 +4,16 @@
 package com.lvl6.mobsters.db.jooq.generated.tables.daos;
 
 
-import static org.jooq.impl.DSL.using;
+import com.lvl6.mobsters.db.jooq.generated.tables.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.UserRecord;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Generated;
 
-import org.jooq.Condition;
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-
-import com.lvl6.mobsters.db.jooq.generated.Tables;
-import com.lvl6.mobsters.db.jooq.generated.tables.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.records.UserRecord;
-
 
 
 /**
@@ -426,5 +421,4 @@ public class UserDao extends DAOImpl<UserRecord, com.lvl6.mobsters.db.jooq.gener
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.User> fetchByTangoId(String... values) {
 		return fetch(User.USER.TANGO_ID, values);
 	}
-
 }
