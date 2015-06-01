@@ -1733,6 +1733,7 @@ public class MiscMethods {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			log.error("something messed up with bulk translations, text array: {}", text);
 			e.printStackTrace();
 		}
 		return returnArray;
