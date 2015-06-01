@@ -136,11 +136,13 @@ public class TradeItemForResourcesAction {
 	
 	private boolean verifySyntax(Builder resBuilder) {
 
-		if (itemIdsUsed.isEmpty() || nuUserItems.isEmpty()) {
-			log.error(String
-					.format("invalid itemIdsUsed=%s or nuUserItems=%s. At least one is empty.",
-							itemIdsUsed, nuUserItems));
-			return false;
+		if(gemsSpent == 0) {
+			if (itemIdsUsed.isEmpty() || nuUserItems.isEmpty()) {
+				log.error(String
+						.format("invalid itemIdsUsed=%s or nuUserItems=%s. At least one is empty.",
+								itemIdsUsed, nuUserItems));
+				return false;
+			}
 		}
 
 		return true;
