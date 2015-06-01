@@ -176,8 +176,18 @@ public class SendGroupChatController extends EventController {
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 
-				Language contentLanguage = miscMethods.convertFromEnumToLanguage(globalLanguage);
-				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(contentLanguage, censoredChatMessage);
+//				Language detectedLanguage = miscMethods.detectedLanguage(censoredChatMessage);
+//				log.info("detected language={}", detectedLanguage);
+				
+//				if (detectedLanguage == null) {
+//					// Default to the content language
+//					detectedLanguage = miscMethods.convertFromEnumToLanguage(globalLanguage);
+//					log.info("defaulting to content language={}", detectedLanguage);
+//				}
+				
+//				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(detectedLanguage, censoredChatMessage);
+				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(null, censoredChatMessage);
+
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
@@ -185,10 +195,13 @@ public class SendGroupChatController extends EventController {
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
 
+//				GroupChatMessageProto gcmp = createInfoProtoUtils
+//						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
+//								censoredChatMessage, user.isAdmin(), "global msg", translateMap, miscMethods.convertFromLanguageToEnum(detectedLanguage));
 				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
 								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
-
+				
 				chatProto.setMessage(gcmp);
 
                 //legacy implementation
