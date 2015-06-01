@@ -1809,16 +1809,21 @@ public class MiscMethods {
 
 		try {
 			for(Language language2 : listOfLanguages) {
-//				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
-//					TranslateLanguages tl = convertFromLanguageToEnum(language2);
-//					returnMap.put(tl, text);
-//				}
-//				else {
+				//				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
+				//					TranslateLanguages tl = convertFromLanguageToEnum(language2);
+				//					returnMap.put(tl, text);
+				//				}
+				//				else {
+				if(sourceLanguage == null) {
+					translatedText = Translate.execute(text, language2);
+				}
+				else {
 					translatedText = Translate.execute(text, sourceLanguage, language2);
-					TranslateLanguages tl = convertFromLanguageToEnum(language2);
-					returnMap.put(tl, translatedText);
-					log.info("Translating to {}: {}", language2, translatedText);
-//				}
+				}
+				TranslateLanguages tl = convertFromLanguageToEnum(language2);
+				returnMap.put(tl, translatedText);
+				log.info("Translating to {}: {}", language2, translatedText);
+				//				}
 			}
 		} catch (Exception e) {
 			log.error("translateForGlobal", e);
