@@ -194,20 +194,20 @@ public class TradeItemForResourcesAction {
 			quantities.add(amount);
 		}
 
-		//mapify nuUserItems to make access easier later on
-		itemIdToNuQuantity = new HashMap<Integer, Integer>();
-		for (ItemForUser ifu : nuUserItems) {
-			int itemId = ifu.getItemId();
-			itemIdToNuQuantity.put(itemId, ifu.getQuantity());
-		}
-
-		//get current ItemForUser data, calculate if user is spending
-		//correct amount
-		Map<Integer, ItemForUser> inDb = itemForUserRetrieveUtil
-				.getSpecificOrAllItemForUserMap(userId,
-						itemIdToQuantityUsed.keySet());
-
 		if(gemsSpent == 0) {
+			//mapify nuUserItems to make access easier later on
+			itemIdToNuQuantity = new HashMap<Integer, Integer>();
+			for (ItemForUser ifu : nuUserItems) {
+				int itemId = ifu.getItemId();
+				itemIdToNuQuantity.put(itemId, ifu.getQuantity());
+			}
+
+			//get current ItemForUser data, calculate if user is spending
+			//correct amount
+			Map<Integer, ItemForUser> inDb = itemForUserRetrieveUtil
+					.getSpecificOrAllItemForUserMap(userId,
+							itemIdToQuantityUsed.keySet());
+			
 			if (null == inDb || inDb.size() != nuUserItems.size()) {
 				log.error(String.format("inconsistent itemForUser"));
 				return false;
