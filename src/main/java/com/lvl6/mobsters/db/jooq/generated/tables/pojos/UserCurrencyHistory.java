@@ -33,10 +33,14 @@ import javax.validation.constraints.Size;
 public class UserCurrencyHistory implements IUserCurrencyHistory {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private static final long serialVersionUID = 216548163;
 =======
 	private static final long serialVersionUID = -249186595;
 >>>>>>> cleaning up shit
+=======
+	private static final long serialVersionUID = 216548163;
+>>>>>>> regenerated tables
 
 	private String    id;
 	private String    userId;

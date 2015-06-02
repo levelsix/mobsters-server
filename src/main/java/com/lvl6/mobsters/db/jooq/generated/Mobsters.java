@@ -192,10 +192,14 @@ import org.jooq.impl.SchemaImpl;
 public class Mobsters extends SchemaImpl {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private static final long serialVersionUID = -1436386027;
 =======
 	private static final long serialVersionUID = 622539059;
 >>>>>>> rebase
+=======
+	private static final long serialVersionUID = -1436386027;
+>>>>>>> regenerated tables
 
 	/**
 	 * The reference instance of <code>mobsters</code>
