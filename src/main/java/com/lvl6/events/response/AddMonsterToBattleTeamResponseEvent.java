@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<AddMonsterToBattleTeamResponseProto> {
 
-	private AddMonsterToBattleTeamResponseProto responseProto;
+	
 
 	public AddMonsterToBattleTeamResponseEvent(String playerId) {
 		super(playerId);

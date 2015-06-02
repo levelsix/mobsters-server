@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QuestAcceptResponseEvent extends NormalResponseEvent<QuestAcceptResponseProto> {
 
-	private QuestAcceptResponseProto responseProto;
+	
 
 	public QuestAcceptResponseEvent(String playerId) {
 		super(playerId);

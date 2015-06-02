@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent<NormStructWaitCompleteResponseProto> {
 
-	private NormStructWaitCompleteResponseProto responseProto;
+	
 
 	public NormStructWaitCompleteResponseEvent(String playerId) {
 		super(playerId);

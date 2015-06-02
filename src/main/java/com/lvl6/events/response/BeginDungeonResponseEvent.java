@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginDungeonResponseEvent extends NormalResponseEvent<BeginDungeonResponseProto> {
 
-	private BeginDungeonResponseProto responseProto;
+	
 
 	public BeginDungeonResponseEvent(String playerId) {
 		super(playerId);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent<RetractRequestJoinClanResponseProto> {
 
-	private RetractRequestJoinClanResponseProto responseProto;
+	
 
 	public RetractRequestJoinClanResponseEvent(String playerId) {
 		super(playerId);

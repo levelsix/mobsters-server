@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalResponseEvent<ApproveOrRejectRequestToJoinClanResponseProto> {
 
-	private ApproveOrRejectRequestToJoinClanResponseProto responseProto;
+	
 
 	public ApproveOrRejectRequestToJoinClanResponseEvent(String playerId) {
 		super(playerId);

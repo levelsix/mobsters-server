@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent<RecordClanRaidStatsResponseProto> {
 
-	private RecordClanRaidStatsResponseProto responseProto;
+	
 
 	public RecordClanRaidStatsResponseEvent(String playerId) {
 		super(playerId);

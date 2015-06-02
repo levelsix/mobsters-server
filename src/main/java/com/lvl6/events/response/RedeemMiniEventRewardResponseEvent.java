@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RedeemMiniEventRewardResponseEvent extends NormalResponseEvent<RedeemMiniEventRewardResponseProto> {
 
-	private RedeemMiniEventRewardResponseProto responseProto;
+	
 
 	public RedeemMiniEventRewardResponseEvent(String playerId) {
 		super(playerId);

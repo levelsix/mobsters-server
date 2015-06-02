@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DevResponseEvent extends NormalResponseEvent<DevResponseProto> {
 
-	private DevResponseProto responseProto;
+	
 
 	public DevResponseEvent(String playerId) {
 		super(playerId);

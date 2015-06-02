@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DiscardBattleItemResponseEvent extends NormalResponseEvent<DiscardBattleItemResponseProto> {
 
-	private DiscardBattleItemResponseProto responseProto;
+	
 
 	public DiscardBattleItemResponseEvent(String playerId) {
 		super(playerId);

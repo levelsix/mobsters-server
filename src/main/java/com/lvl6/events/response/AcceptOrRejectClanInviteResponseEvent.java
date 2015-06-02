@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AcceptOrRejectClanInviteResponseEvent extends NormalResponseEvent<AcceptOrRejectClanInviteResponseProto> {
 
-	//private AcceptOrRejectClanInviteResponseProto responseProto;
+	//
 
 	public AcceptOrRejectClanInviteResponseEvent(String playerId) {
 		super(playerId);

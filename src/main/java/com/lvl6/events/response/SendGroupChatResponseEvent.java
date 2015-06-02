@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupChatResponseProto> {
 
-	private SendGroupChatResponseProto responseProto;
+	
 
 	public SendGroupChatResponseEvent(String playerId) {
 		super(playerId);

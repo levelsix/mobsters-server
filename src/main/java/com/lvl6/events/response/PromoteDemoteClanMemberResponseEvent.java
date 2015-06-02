@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent<PromoteDemoteClanMemberResponseProto> {
 
-	private PromoteDemoteClanMemberResponseProto responseProto;
+	
 
 	public PromoteDemoteClanMemberResponseEvent(String playerId) {
 		super(playerId);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent<CombineUserMonsterPiecesResponseProto> {
 
-	private CombineUserMonsterPiecesResponseProto responseProto;
+	
 
 	public CombineUserMonsterPiecesResponseEvent(String playerId) {
 		super(playerId);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent<UpdateClientTaskStateResponseProto> {
 
-	private UpdateClientTaskStateResponseProto responseProto;
+	
 
 	public UpdateClientTaskStateResponseEvent(String playerId) {
 		super(playerId);

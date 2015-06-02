@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponseProto> {
 
-	private QueueUpResponseProto responseProto;
+	
 
 	public QueueUpResponseEvent(String playerId) {
 		super(playerId);

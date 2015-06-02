@@ -9,7 +9,7 @@
 //
 //public class ReferralCodeUsedResponseEvent extends NormalResponseEvent<ReferralCodeUsedResponseProto>{
 //
-//  private ReferralCodeUsedResponseProto responseProto;
+//  
 //  
 //  public ReferralCodeUsedResponseEvent(String playerId) {
 //    super(playerId);

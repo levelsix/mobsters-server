@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendingMsgResponseProto> {
 
-	private SetDefendingMsgResponseProto responseProto;
+	
 
 	public SetDefendingMsgResponseEvent(String playerId) {
 		super(playerId);

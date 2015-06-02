@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent<RetrievePrivateChatPostsResponseProto> {
 
-	private RetrievePrivateChatPostsResponseProto responseProto;
+	
 
 	public RetrievePrivateChatPostsResponseEvent(String playerId) {
 		super(playerId);

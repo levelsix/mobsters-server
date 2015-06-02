@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEvent<IncreaseMonsterInventorySlotResponseProto> {
 
-	private IncreaseMonsterInventorySlotResponseProto responseProto;
+	
 
 	public IncreaseMonsterInventorySlotResponseEvent(String playerId) {
 		super(playerId);

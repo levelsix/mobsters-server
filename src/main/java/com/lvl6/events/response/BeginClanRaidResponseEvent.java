@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginClanRaidResponseEvent extends NormalResponseEvent<BeginClanRaidResponseProto> {
 
-	private BeginClanRaidResponseProto responseProto;
+	
 
 	public BeginClanRaidResponseEvent(String playerId) {
 		super(playerId);

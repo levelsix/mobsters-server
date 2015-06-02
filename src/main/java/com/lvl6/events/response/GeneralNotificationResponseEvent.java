@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class GeneralNotificationResponseEvent extends NormalResponseEvent<GeneralNotificationResponseProto> {
 
-	private GeneralNotificationResponseProto responseProto;
+	
 
 	//The input argument is not used.
 	public GeneralNotificationResponseEvent(String playerId) {

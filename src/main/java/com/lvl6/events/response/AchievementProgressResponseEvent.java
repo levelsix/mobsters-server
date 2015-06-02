@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AchievementProgressResponseEvent extends NormalResponseEvent<AchievementProgressResponseProto> {
 
-	private AchievementProgressResponseProto responseProto;
+	
 
 	public AchievementProgressResponseEvent(String playerId) {
 		super(playerId);

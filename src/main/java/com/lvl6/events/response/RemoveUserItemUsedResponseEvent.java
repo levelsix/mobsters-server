@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent<RemoveUserItemUsedResponseProto> {
 
-	private RemoveUserItemUsedResponseProto responseProto;
+	
 
 	public RemoveUserItemUsedResponseEvent(String playerId) {
 		super(playerId);

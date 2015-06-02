@@ -9,7 +9,7 @@
 //
 //public class RetrieveTournamentRankingsResponseEvent extends NormalResponseEvent<RetrieveTournamentRankingsResponseProto> {
 //
-//  private RetrieveTournamentRankingsResponseProto responseProto;
+//  
 //  
 //  public RetrieveTournamentRankingsResponseEvent(String playerId) {
 //    super(playerId);

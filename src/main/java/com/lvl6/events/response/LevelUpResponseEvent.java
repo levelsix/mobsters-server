@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LevelUpResponseEvent extends NormalResponseEvent<LevelUpResponseProto> {
 
-	private LevelUpResponseProto responseProto;
+	
 
 	public LevelUpResponseEvent(String playerId) {
 		super(playerId);

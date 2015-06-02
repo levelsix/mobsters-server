@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDungeonResponseProto> {
 
-	private ReviveInDungeonResponseProto responseProto;
+	
 
 	public ReviveInDungeonResponseEvent(String playerId) {
 		super(playerId);

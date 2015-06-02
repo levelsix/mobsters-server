@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<MoveOrRotateNormStructureResponseProto> {
 
-	private MoveOrRotateNormStructureResponseProto responseProto;
+	
 
 	public MoveOrRotateNormStructureResponseEvent(String playerId) {
 		super(playerId);

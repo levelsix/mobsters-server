@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<ExchangeGemsForResourcesResponseProto> {
 
-	private ExchangeGemsForResourcesResponseProto responseProto;
+	
 
 	public ExchangeGemsForResourcesResponseEvent(String playerId) {
 		super(playerId);

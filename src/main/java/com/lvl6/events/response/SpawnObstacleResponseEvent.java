@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SpawnObstacleResponseEvent extends NormalResponseEvent<SpawnObstacleResponseProto> {
 
-	private SpawnObstacleResponseProto responseProto;
+	
 
 	public SpawnObstacleResponseEvent(String playerId) {
 		super(playerId);

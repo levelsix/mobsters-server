@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UserCreateResponseEvent extends PreDatabaseResponseEvent<UserCreateResponseProto> {
 
-	private UserCreateResponseProto responseProto;
+	
 
 	public UserCreateResponseEvent(String udid) {
 		super(udid);

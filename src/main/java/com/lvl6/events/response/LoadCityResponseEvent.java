@@ -9,7 +9,7 @@
 //
 //public class LoadCityResponseEvent extends NormalResponseEvent<LoadCityResponseProto>{
 //
-//  private LoadCityResponseProto responseProto;
+//  
 //  
 //  public LoadCityResponseEvent(String playerId) {
 //    super(playerId);

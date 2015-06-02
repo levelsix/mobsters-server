@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CollectClanGiftsResponseEvent extends NormalResponseEvent<CollectClanGiftsResponseProto> {
 
-	private CollectClanGiftsResponseProto responseProto;
+	
 
 	public CollectClanGiftsResponseEvent(String playerId) {
 		super(playerId);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSResponseProto> {
 
-	private EnableAPNSResponseProto responseProto;
+	
 
 	public EnableAPNSResponseEvent(String playerId) {
 		super(playerId);

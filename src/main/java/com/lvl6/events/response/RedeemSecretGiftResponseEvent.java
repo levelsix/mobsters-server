@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RedeemSecretGiftResponseEvent extends NormalResponseEvent<RedeemSecretGiftResponseProto> {
 
-	private RedeemSecretGiftResponseProto responseProto;
+	
 
 	public RedeemSecretGiftResponseEvent(String playerId) {
 		super(playerId);

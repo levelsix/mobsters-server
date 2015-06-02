@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMonsterResponseProto> {
 
-	private SellUserMonsterResponseProto responseProto;
+	
 
 	public SellUserMonsterResponseEvent(String playerId) {
 		super(playerId);

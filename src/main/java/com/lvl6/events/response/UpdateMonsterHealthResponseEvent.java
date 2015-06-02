@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<UpdateMonsterHealthResponseProto> {
 
-	private UpdateMonsterHealthResponseProto responseProto;
+	
 
 	public UpdateMonsterHealthResponseEvent(String playerId) {
 		super(playerId);

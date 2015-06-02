@@ -15,8 +15,6 @@ public class StartupResponseEvent extends PreDatabaseResponseEvent<StartupRespon
 	
 	private static final Logger log = LoggerFactory.getLogger(StartupResponseEvent.class);
 	
-	private StartupResponseProto	responseProto;
-
 	public StartupResponseEvent(String udid) {
 		super(udid);
 		eventType = EventProtocolResponse.S_STARTUP_EVENT;

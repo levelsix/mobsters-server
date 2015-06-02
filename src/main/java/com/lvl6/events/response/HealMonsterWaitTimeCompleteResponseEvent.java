@@ -9,7 +9,7 @@
 //
 //public class HealMonsterWaitTimeCompleteResponseEvent extends NormalResponseEvent<HealMonsterWaitTimeCompleteResponseProto> {
 //
-//  private HealMonsterWaitTimeCompleteResponseProto responseProto;
+//  
 //  
 //  public HealMonsterWaitTimeCompleteResponseEvent(int playerId){
 //    super(playerId);

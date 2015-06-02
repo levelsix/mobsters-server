@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpgradeNormStructureResponseEvent extends NormalResponseEvent<UpgradeNormStructureResponseProto> {
 
-	private UpgradeNormStructureResponseProto responseProto;
+	
 
 	public UpgradeNormStructureResponseEvent(String playerId) {
 		super(playerId);

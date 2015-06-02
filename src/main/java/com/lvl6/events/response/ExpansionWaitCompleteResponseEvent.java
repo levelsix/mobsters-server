@@ -9,7 +9,7 @@
 //
 //public class ExpansionWaitCompleteResponseEvent extends NormalResponseEvent<ExpansionWaitCompleteResponseProto> {
 //
-//  private ExpansionWaitCompleteResponseProto responseProto;
+//  
 //  
 //  public ExpansionWaitCompleteResponseEvent(String playerId){
 //    super(playerId);

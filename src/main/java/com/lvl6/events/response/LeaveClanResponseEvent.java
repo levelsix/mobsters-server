@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LeaveClanResponseEvent extends NormalResponseEvent<LeaveClanResponseProto> {
 
-	private LeaveClanResponseProto responseProto;
+	
 
 	public LeaveClanResponseEvent(String playerId) {
 		super(playerId);
