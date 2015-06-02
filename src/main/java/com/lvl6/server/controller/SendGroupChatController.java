@@ -198,7 +198,7 @@ public class SendGroupChatController extends EventController {
 				
 //				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(detectedLanguage, censoredChatMessage);
 				String customTranslationLanguage = null;
-				List<CustomTranslations> result = customTranslationsDao.fetchByPhrase(censoredChatMessage);
+				List<CustomTranslations> result = customTranslationsDao.fetchByPhrase(censoredChatMessage.toLowerCase());
 				if(result.size() > 1) {
 					log.error("there's double entries in custom translations table for phrase {}", censoredChatMessage);
 				}
