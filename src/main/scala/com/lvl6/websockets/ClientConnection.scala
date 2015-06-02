@@ -131,7 +131,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
       val bytes = EventParser.getResponseBytes(uuid, revent)
       //If it's the requester this should be their connection
-      if(this.userId.get.equals(plyrId)) {
+      if(userId.isEmpty || userId.get.equals(plyrId)) {
         sendToThisSocket(bytes)
       }else {
         ClientConnections.getConnection(plyrId) match{

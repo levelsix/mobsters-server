@@ -312,6 +312,7 @@ class StartupService extends LazyLogging {
 
       if (user != null) {
         playerId = user.getId();
+        responses.userId = playerId;
         //if can't lock player, exception will be thrown
         locker.lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
         startupStatus = StartupStatus.USER_IN_DB;
