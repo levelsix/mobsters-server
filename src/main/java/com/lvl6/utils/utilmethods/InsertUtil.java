@@ -346,7 +346,7 @@ public interface InsertUtil {
 			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
 	
 	public abstract boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
-			Collection<Reward> listOfRewards, String reasonForReward);
+			Collection<Reward> listOfRewards, String reasonForReward, String awardReasonDetail);
 	
 
 	public abstract boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,

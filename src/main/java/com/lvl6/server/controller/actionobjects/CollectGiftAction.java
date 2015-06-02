@@ -163,7 +163,7 @@ public class CollectGiftAction {
 				awardReason, rewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtil, monsterLevelInfoRetrieveUtils,
 				clanGiftRewardsRetrieveUtils, rewardRetrieveUtil, userClanRetrieveUtils,
-				createInfoProtoUtils);
+				createInfoProtoUtils, null);
 
 		boolean awardedRewards = ara.execute();
 

@@ -327,12 +327,13 @@ public class PurchaseBoosterPackAction {
 			listOfRewards.add(r);
 		}
 
+		String awardReasonDetail = "booster pack id: " + boosterPackId;
 		ara = new AwardRewardAction(userId, user, 0, 0, now,
 				"booster packs id " + aPack.getId(), listOfRewards,
 				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil,
 				updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
 				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
-				userClanRetrieveUtils, createInfoProtoUtils);
+				userClanRetrieveUtils, createInfoProtoUtils, awardReasonDetail);
 
 		ara.execute();
 
