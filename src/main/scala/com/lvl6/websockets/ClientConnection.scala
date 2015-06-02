@@ -37,6 +37,7 @@ import java.util.UUID
 import java.nio.ByteBuffer
 import org.springframework.beans.factory.annotation.Autowired
 import scala.beans.BeanProperty
+import javax.annotation.Resource
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -64,9 +65,9 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   var rabbitConnectionFactory:ConnectionFactory = null
   @Autowired
   var amqpAdmin:AmqpAdmin = null
-  @Autowired
+  @Resource(name="gamemessages")
   var gameExchange:DirectExchange = null
-  @Autowired
+  @Resource(name="chatmessages")
   var chatExchange:TopicExchange = null
   
   
