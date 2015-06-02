@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateUserStrengthResponseEvent extends NormalResponseEvent<UpdateUserStrengthResponseProto> {
 
-	private UpdateUserStrengthResponseProto responseProto;
+	
 
 	public UpdateUserStrengthResponseEvent(String playerId) {
 		super(playerId);

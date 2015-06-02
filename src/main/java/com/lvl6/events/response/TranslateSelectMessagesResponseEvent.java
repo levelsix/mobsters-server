@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<TranslateSelectMessagesResponseProto> {
 
-	private TranslateSelectMessagesResponseProto responseProto;
+	
 
 	public TranslateSelectMessagesResponseEvent(String playerId) {
 		super(playerId);

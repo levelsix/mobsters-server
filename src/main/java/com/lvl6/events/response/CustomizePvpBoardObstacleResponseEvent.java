@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<CustomizePvpBoardObstacleResponseProto> {
 
-	private CustomizePvpBoardObstacleResponseProto responseProto;
+	
 
 	public CustomizePvpBoardObstacleResponseEvent(String playerId) {
 		super(playerId);

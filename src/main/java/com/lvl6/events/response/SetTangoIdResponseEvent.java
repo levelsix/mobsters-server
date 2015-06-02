@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetTangoIdResponseEvent extends NormalResponseEvent {
+public class SetTangoIdResponseEvent extends NormalResponseEvent<SetTangoIdResponseProto> {
 
 	private SetTangoIdResponseProto setTangoIdResponseProto;
 

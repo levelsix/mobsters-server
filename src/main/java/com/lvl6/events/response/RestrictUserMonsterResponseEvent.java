@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<RestrictUserMonsterResponseProto> {
 
-	private RestrictUserMonsterResponseProto responseProto;
+	
 
 	public RestrictUserMonsterResponseEvent(String playerId) {
 		super(playerId);

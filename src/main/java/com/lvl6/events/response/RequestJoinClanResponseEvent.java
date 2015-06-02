@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RequestJoinClanResponseEvent extends NormalResponseEvent<RequestJoinClanResponseProto> {
 
-	private RequestJoinClanResponseProto responseProto;
+	
 
 	public RequestJoinClanResponseEvent(String playerId) {
 		super(playerId);

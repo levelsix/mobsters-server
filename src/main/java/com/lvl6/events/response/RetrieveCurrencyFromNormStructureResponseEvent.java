@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalResponseEvent<RetrieveCurrencyFromNormStructureResponseProto> {
 
-	private RetrieveCurrencyFromNormStructureResponseProto responseProto;
+	
 
 	public RetrieveCurrencyFromNormStructureResponseEvent(String playerId) {
 		super(playerId);

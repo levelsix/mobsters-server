@@ -9,7 +9,7 @@
 //
 //public class EarnFreeDiamondsResponseEvent extends NormalResponseEvent<EarnFreeDiamondsResponseProto> {
 //
-//  private EarnFreeDiamondsResponseProto responseProto;
+//  
 //  
 //  public EarnFreeDiamondsResponseEvent(int playerId){
 //    super(playerId);

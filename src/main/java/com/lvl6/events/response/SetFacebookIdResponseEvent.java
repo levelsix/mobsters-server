@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookIdResponseProto> {
 
-	private SetFacebookIdResponseProto responseProto;
+	
 
 	public SetFacebookIdResponseEvent(String playerId) {
 		super(playerId);

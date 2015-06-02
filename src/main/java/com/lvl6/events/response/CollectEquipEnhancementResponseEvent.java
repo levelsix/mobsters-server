@@ -9,7 +9,7 @@
 //
 //public class CollectEquipEnhancementResponseEvent extends NormalResponseEvent<CollectEquipEnhancementResponseProto> {
 //
-//  private CollectEquipEnhancementResponseProto responseProto;
+//  
 //  
 //  public CollectEquipEnhancementResponseEvent(int playerId){
 //    super(playerId);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent<PurgeClientStaticDataResponseProto>{
 
-	private PurgeClientStaticDataResponseProto responseProto;
+	
 
 	public PurgeClientStaticDataResponseEvent(String playerId) {
 		super(playerId);

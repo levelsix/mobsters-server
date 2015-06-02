@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<TradeItemForSpeedUpsResponseProto> {
 
-	private TradeItemForSpeedUpsResponseProto responseProto;
+	
 
 	public TradeItemForSpeedUpsResponseEvent(String playerId) {
 		super(playerId);

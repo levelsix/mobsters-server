@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent<CollectMonsterEnhancementResponseProto> {
 
-	private CollectMonsterEnhancementResponseProto responseProto;
+	
 
 	public CollectMonsterEnhancementResponseEvent(String playerId) {
 		super(playerId);

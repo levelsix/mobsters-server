@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class FinishNormStructWaittimeWithDiamondsResponseEvent extends	NormalResponseEvent<FinishNormStructWaittimeWithDiamondsResponseProto> {
 
-	private FinishNormStructWaittimeWithDiamondsResponseProto responseProto;
+	
 
 	public FinishNormStructWaittimeWithDiamondsResponseEvent(String playerId) {
 		super(playerId);

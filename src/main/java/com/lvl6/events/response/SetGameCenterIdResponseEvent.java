@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetGameCenterIdResponseEvent extends NormalResponseEvent<SetGameCenterIdResponseProto> {
 
-	private SetGameCenterIdResponseProto responseProto;
+	
 
 	public SetGameCenterIdResponseEvent(String playerId) {
 		super(playerId);

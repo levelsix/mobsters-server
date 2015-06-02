@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SolicitTeamDonationResponseEvent extends NormalResponseEvent<SolicitTeamDonationResponseProto> {
 
-	private SolicitTeamDonationResponseProto responseProto;
+	
 
 	public SolicitTeamDonationResponseEvent(String playerId) {
 		super(playerId);

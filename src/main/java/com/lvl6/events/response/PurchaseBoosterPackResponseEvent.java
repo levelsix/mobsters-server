@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<PurchaseBoosterPackResponseProto> {
 
-	private PurchaseBoosterPackResponseProto responseProto;
+	
 
 	public PurchaseBoosterPackResponseEvent(String playerId) {
 		super(playerId);

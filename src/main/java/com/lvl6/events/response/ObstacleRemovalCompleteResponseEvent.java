@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent<ObstacleRemovalCompleteResponseProto> {
 
-	private ObstacleRemovalCompleteResponseProto responseProto;
+	
 
 	public ObstacleRemovalCompleteResponseEvent(String playerId) {
 		super(playerId);

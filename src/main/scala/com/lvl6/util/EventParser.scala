@@ -27,7 +27,11 @@ object EventParser extends LazyLogging{
   implicit def intToBytes(int:Int):Array[Byte]={
     EventParser.buffer().putInt(int).array()
   }
- 
+
+  implicit def intToLittleBytes(int:Int):Array[Byte]={
+    EventParser.buffer().order(ByteOrder.LITTLE_ENDIAN).putInt(int).array()
+  }
+  
   implicit def bytestoInt(bytes:Array[Byte]):Int={
     EventParser.buffer().put(bytes).position(0).asInstanceOf[ByteBuffer].getInt
   }
@@ -68,7 +72,7 @@ object EventParser extends LazyLogging{
     ep.setEventUuid(uuid)
     ep.setEventBytes(event.getByteString())
     val bytes = ep.build().toByteArray()
-    intToBytes(bytes.length) ++ bytes
+    intToLittleBytes(bytes.length) ++ bytes
   }
   
 }

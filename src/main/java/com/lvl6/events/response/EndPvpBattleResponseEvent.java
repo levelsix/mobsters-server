@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndPvpBattleResponseEvent extends NormalResponseEvent<EndPvpBattleResponseProto> {
 
-	private EndPvpBattleResponseProto responseProto;
+	
 
 	public EndPvpBattleResponseEvent(String playerId) {
 		super(playerId);

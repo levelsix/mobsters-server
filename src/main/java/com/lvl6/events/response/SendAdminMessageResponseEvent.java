@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdminMessageResponseProto> {
 
-	private SendAdminMessageResponseProto responseProto;
+	
 
 	public SendAdminMessageResponseProto getSendAdminMessageResponseProto() {
 		return responseProto;

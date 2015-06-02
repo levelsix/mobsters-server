@@ -9,7 +9,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ForceLogoutResponseEvent extends NormalResponseEvent<ForceLogoutResponseProto> {
 
-	private ForceLogoutResponseProto responseProto;
 
 	public ForceLogoutResponseEvent(String playerId) {
 		super(playerId);

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CreateBattleItemResponseEvent extends NormalResponseEvent<CreateBattleItemResponseProto> {
 
-	private CreateBattleItemResponseProto responseProto;
+	
 
 	public CreateBattleItemResponseEvent(String playerId) {
 		super(playerId);

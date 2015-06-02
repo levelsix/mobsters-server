@@ -95,7 +95,7 @@ class DynamoDBService extends LazyLogging {
   }
   
   val ttlFilterKey = ":ttlTime"
-  @Scheduled(fixedDelay=300000l)
+  //@Scheduled(fixedDelay=300000l)
   def checkTTL={
      tableDefinitions.foreach(checkTTLForTable)   
   }

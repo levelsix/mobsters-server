@@ -121,7 +121,8 @@ public class AdminPage extends TemplatePage {
 				super.onSubmit();
 				MessagingUtil util = AppContext.getApplicationContext()
 						.getBean(MessagingUtil.class);
-				util.sendAdminMessage(message.getModelObject());
+				//TODO: Fix this
+				//util.sendAdminMessage(message.getModelObject());
 				message.setModelObject("Admin message sent");
 			}
 		};

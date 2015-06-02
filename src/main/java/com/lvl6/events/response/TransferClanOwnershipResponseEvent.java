@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TransferClanOwnershipResponseEvent extends NormalResponseEvent<TransferClanOwnershipResponseProto> {
 
-	private TransferClanOwnershipResponseProto responseProto;
+	
 
 	public TransferClanOwnershipResponseEvent(String playerId) {
 		super(playerId);

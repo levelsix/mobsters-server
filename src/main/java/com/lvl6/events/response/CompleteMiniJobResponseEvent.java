@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CompleteMiniJobResponseEvent extends NormalResponseEvent<CompleteMiniJobResponseProto> {
 
-	private CompleteMiniJobResponseProto responseProto;
+	
 
 	public CompleteMiniJobResponseEvent(String playerId) {
 		super(playerId);

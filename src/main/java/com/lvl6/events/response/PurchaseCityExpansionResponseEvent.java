@@ -9,7 +9,7 @@
 //
 //public class PurchaseCityExpansionResponseEvent extends NormalResponseEvent<PurchaseCityExpansionResponseProto> {
 //
-//  private PurchaseCityExpansionResponseProto responseProto;
+//  
 //  
 //  public PurchaseCityExpansionResponseEvent(String playerId){
 //    super(playerId);

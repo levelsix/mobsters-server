@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateUserCurrencyResponseProto> {
 
-	private UpdateUserCurrencyResponseProto responseProto;
+	
 
 	public UpdateUserCurrencyResponseEvent(String playerId) {
 		super(playerId);

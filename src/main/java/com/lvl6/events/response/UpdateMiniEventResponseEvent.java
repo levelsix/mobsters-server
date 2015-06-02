@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateMiniEventResponseEvent extends NormalResponseEvent<UpdateMiniEventResponseProto> {
 
-	private UpdateMiniEventResponseProto responseProto;
+	
 
 	public UpdateMiniEventResponseEvent(String playerId) {
 		super(playerId);

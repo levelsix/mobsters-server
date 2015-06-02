@@ -9,7 +9,7 @@
 //
 //public class EndPersistentEventCoolDownTimerResponseEvent extends NormalResponseEvent<EndPersistentEventCoolDownTimerResponseProto> {
 //
-//  private EndPersistentEventCoolDownTimerResponseProto responseProto;
+//  
 //  
 //  public EndPersistentEventCoolDownTimerResponseEvent(int playerId){
 //    super(playerId);

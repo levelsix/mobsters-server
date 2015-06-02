@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent<AwardClanRaidStageRewardResponseProto> {
 
-	private AwardClanRaidStageRewardResponseProto responseProto;
+	
 
 	public AwardClanRaidStageRewardResponseEvent(String playerId) {
 		super(playerId);

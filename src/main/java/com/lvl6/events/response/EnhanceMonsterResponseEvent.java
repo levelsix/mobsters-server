@@ -9,7 +9,7 @@
 //
 //public class EnhanceMonsterResponseEvent extends NormalResponseEvent<EnhanceMonsterResponseProto> {
 //
-//  private EnhanceMonsterResponseProto responseProto;
+//  
 //  
 //  public EnhanceMonsterResponseEvent(String playerId){
 //    super(playerId);

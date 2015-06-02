@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AvengeClanMateResponseEvent extends NormalResponseEvent<AvengeClanMateResponseProto> {
 
-	private AvengeClanMateResponseProto responseProto;
+	
 
 	public AvengeClanMateResponseEvent(String playerId) {
 		super(playerId);

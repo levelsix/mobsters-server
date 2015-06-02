@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetAvatarMonsterResponseEvent extends NormalResponseEvent<SetAvatarMonsterResponseProto> {
 
-	private SetAvatarMonsterResponseProto responseProto;
+	
 
 	public SetAvatarMonsterResponseEvent(String playerId) {
 		super(playerId);

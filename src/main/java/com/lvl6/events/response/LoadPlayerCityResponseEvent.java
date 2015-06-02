@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LoadPlayerCityResponseEvent extends NormalResponseEvent<LoadPlayerCityResponseProto> {
 
-	private LoadPlayerCityResponseProto responseProto;
+	
 
 	public LoadPlayerCityResponseEvent(String playerId) {
 		super(playerId);

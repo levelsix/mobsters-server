@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class FinishPerformingResearchResponseEvent extends NormalResponseEvent<FinishPerformingResearchResponseProto> {
 
-	private FinishPerformingResearchResponseProto responseProto;
+	
 
 	public FinishPerformingResearchResponseEvent(String playerId) {
 		super(playerId);
