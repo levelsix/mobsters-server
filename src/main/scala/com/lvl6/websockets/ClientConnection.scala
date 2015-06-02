@@ -38,6 +38,7 @@ import java.nio.ByteBuffer
 import org.springframework.beans.factory.annotation.Autowired
 import scala.beans.BeanProperty
 import javax.annotation.Resource
+import com.lvl6.events.response.StartupResponseEvent
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -127,6 +128,9 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
       val bytes = EventParser.getResponseBytes(uuid, revent)
       //If it's the requester this should be their connection
+      if(revent.isInstanceOf[StartupResponseEvent]) {
+        this.userId = Some(plyrId)
+      }
       if(this.userId.get.equals(plyrId)) {
         sendToThisSocket(bytes)
       }else {
