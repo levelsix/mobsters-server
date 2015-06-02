@@ -10909,6 +10909,7 @@ public final class EventItemProto {
     java.lang.String[] descriptorData = {
       "\n\017EventItem.proto\022\016com.lvl6.proto\032\026Boost" +
       "erPackStuff.proto\032\nItem.proto\032\022MonsterSt" +
+<<<<<<< HEAD
       "uff.proto\032\014Reward.proto\032\nUser.proto\"w\n\037T" +
       "radeItemForBoosterRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
@@ -10970,6 +10971,67 @@ public final class EventItemProto {
       "mSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_I" +
       "TEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Ev" +
       "entItemProto"
+=======
+      "uff.proto\032\nUser.proto\"w\n\037TradeItemForBoo" +
+      "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\016\n\006itemId\030\002 \001" +
+      "(\005\022\022\n\nclientTime\030\003 \001(\003\"\254\003\n TradeItemForB" +
+      "oosterResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022Z\n\006status\030" +
+      "\002 \001(\0162J.com.lvl6.proto.TradeItemForBoost" +
+      "erResponseProto.TradeItemForBoosterStatu",
+      "s\022:\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto" +
+      ".FullUserMonsterProto\022/\n\005prize\030\004 \001(\0132 .c" +
+      "om.lvl6.proto.BoosterItemProto\0227\n\020update" +
+      "dUserItems\030\005 \003(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\"T\n\031TradeItemForBoosterStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFF" +
+      "ICIENT_ITEM\020\003\"\322\001\n TradeItemForSpeedUpsRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\0225\n\titemsUsed\030\002 \003(\0132" +
+      "\".com.lvl6.proto.UserItemUsageProto\0222\n\013n",
+      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
+      "emProto\022\021\n\tgemsSpent\030\004 \001(\005\"\245\002\n!TradeItem" +
+      "ForSpeedUpsResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\\\n\006st" +
+      "atus\030\002 \001(\0162L.com.lvl6.proto.TradeItemFor" +
+      "SpeedUpsResponseProto.TradeItemForSpeedU" +
+      "psStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.lvl6.p" +
+      "roto.UserItemUsageProto\"9\n\032TradeItemForS" +
+      "peedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
+      "\020\002\"l\n\036RemoveUserItemUsedRequestProto\0220\n\006",
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001\n\037Rem" +
+      "oveUserItemUsedResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022X" +
+      "\n\006status\030\002 \001(\0162H.com.lvl6.proto.RemoveUs" +
+      "erItemUsedResponseProto.RemoveUserItemUs" +
+      "edStatus\"7\n\030RemoveUserItemUsedStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\325\001\n!TradeItemF" +
+      "orResourcesRequestProto\022@\n\006sender\030\001 \001(\0132" +
+      "0.com.lvl6.proto.MinimumUserProtoWithMax",
+      "Resources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nuUser" +
+      "Items\030\003 \003(\0132\035.com.lvl6.proto.UserItemPro" +
+      "to\022\022\n\nclientTime\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(" +
+      "\005\"\202\002\n\"TradeItemForResourcesResponseProto" +
+      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
+      "mUserProtoWithMaxResources\022^\n\006status\030\002 \001" +
+      "(\0162N.com.lvl6.proto.TradeItemForResource" +
+      "sResponseProto.TradeItemForResourcesStat" +
+      "us\":\n\033TradeItemForResourcesStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecretGi",
+      "ftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\022\n\nclientTime\030\002" +
+      " \001(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\261\002\n\035RedeemSecretG" +
+      "iftResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\0228\n\007nuGifts\030\002 \003(\013" +
+      "2\'.com.lvl6.proto.UserItemSecretGiftProt" +
+      "o\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Redee" +
+      "mSecretGiftResponseProto.RedeemSecretGif" +
+      "tStatus\"Q\n\026RedeemSecretGiftStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n\nFA",
+      "IL_OTHER\020\003B\020B\016EventItemProto"
+>>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

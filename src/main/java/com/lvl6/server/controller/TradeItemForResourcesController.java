@@ -125,7 +125,11 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
 					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
+<<<<<<< HEAD
 					UpdateUtils.get(), miscMethods, gemsSpent, historyUtils);
+=======
+					UpdateUtils.get(), miscMethods, gemsSpent);
+>>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 
 			tifsua.execute(resBuilder);
 

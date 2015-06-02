@@ -121,8 +121,12 @@ public class TradeItemForSpeedUpsController extends EventController {
 
 			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
 					userId, itemsUsed, nuUserItems, itemForUserRetrieveUtil,
+<<<<<<< HEAD
 					InsertUtils.get(), UpdateUtils.get(), gemsSpent, miscMethods,
 					historyUtils);
+=======
+					InsertUtils.get(), UpdateUtils.get(), gemsSpent);
+>>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 
 			tifsua.execute(resBuilder);
 
@@ -142,6 +146,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+<<<<<<< HEAD
 								tifsua.getUserPojo(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
@@ -149,6 +154,15 @@ public class TradeItemForSpeedUpsController extends EventController {
 //				writeToUserCurrencyHistory(user, previousCurrency,
 //						currencyChange, curTime, resourceType, numResources,
 //						numGems);
+=======
+								user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+				writeToUserCurrencyHistory(user, previousCurrency,
+						currencyChange, curTime, resourceType, numResources,
+						numGems);
+>>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 			}
 
 			TradeItemForSpeedUpsResponseProto resProto = resBuilder.build();
