@@ -16,12 +16,9 @@ import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-<<<<<<< HEAD
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
-=======
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;
@@ -29,11 +26,8 @@ import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
-<<<<<<< HEAD
 import com.lvl6.server.controller.utils.HistoryUtils;
-=======
 import com.lvl6.utils.DBConnection;
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class TradeItemForResourcesAction {
@@ -51,10 +45,7 @@ public class TradeItemForResourcesAction {
 	private UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
 	private int gemsSpent;
-<<<<<<< HEAD
 	private HistoryUtils historyUtils;
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 	
 	public TradeItemForResourcesAction(String userId,
 			List<Integer> itemIdsUsed, List<ItemForUser> nuUserItems,
@@ -62,12 +53,8 @@ public class TradeItemForResourcesAction {
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			ItemRetrieveUtils itemRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil, UpdateUtil updateUtil,
-<<<<<<< HEAD
 			MiscMethods miscMethods, int gemsSpent,
 			HistoryUtils historyUtils) {
-=======
-			MiscMethods miscMethods, int gemsSpent) {
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 		super();
 		this.userId = userId;
 		this.itemIdsUsed = itemIdsUsed;
@@ -80,10 +67,7 @@ public class TradeItemForResourcesAction {
 		this.updateUtil = updateUtil;
 		this.miscMethods = miscMethods;
 		this.gemsSpent = gemsSpent;
-<<<<<<< HEAD
 		this.historyUtils = historyUtils;
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -260,17 +244,7 @@ public class TradeItemForResourcesAction {
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		prevCurrencies = new HashMap<String, Integer>();
-
-		if (0 != gemsGained || gemsSpent != 0) {
-			prevCurrencies.put(miscMethods.gems, user.getGems());
-		}
-		if (0 != cashGained) {
-			prevCurrencies.put(miscMethods.cash, user.getCash());
-		}
-		if (0 != oilGained) {
-			prevCurrencies.put(miscMethods.oil, user.getOil());
-		}
+		prepCurrencyHistory();
 
 		//update items to reflect being used
 		int numUpdated = updateUtil.updateItemForUser(nuUserItems);
@@ -279,19 +253,13 @@ public class TradeItemForResourcesAction {
 
 		//give user the resources
 		log.info(String.format("user before: %s \t\t", user));
-<<<<<<< HEAD
 		user.updateRelativeCashAndOilAndGems(cashGained, oilGained, -1*gemsSpent, 0);
-=======
-		user.updateRelativeCashAndOilAndGems(cashGained, oilGained, -1*gemsSpent);
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 		log.info(String.format("user after: %s", user));
-
-		prepCurrencyHistory();
+		insertCurrencyHistory();
 
 		return true;
 	}
 
-<<<<<<< HEAD
 //	private void prepCurrencyHistory() {
 //		String gems = miscMethods.gems;
 //		String cash = miscMethods.cash;
@@ -361,40 +329,6 @@ public class TradeItemForResourcesAction {
 		String details = "";
 		for(Integer itemId : itemIdsUsed) {
 			details.concat(" itemId: " + itemId);
-=======
-	private void prepCurrencyHistory() {
-		String gems = miscMethods.gems;
-		String cash = miscMethods.cash;
-		String oil = miscMethods.oil;
-
-		currencyDeltas = new HashMap<String, Integer>();
-		curCurrencies = new HashMap<String, Integer>();
-		reasonsForChanges = new HashMap<String, String>();
-		if (0 != gemsGained || gemsSpent != 0) {
-			currencyDeltas.put(gems, gemsGained);
-			curCurrencies.put(gems, user.getGems());
-			reasonsForChanges.put(gems,
-					ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES);
-		}
-		if (0 != cashGained) {
-			currencyDeltas.put(cash, cashGained);
-			curCurrencies.put(cash, user.getCash());
-			reasonsForChanges.put(cash,
-					ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES);
-		}
-		if (0 != oilGained) {
-			currencyDeltas.put(oil, oilGained);
-			curCurrencies.put(oil, user.getOil());
-			reasonsForChanges.put(oil,
-					ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES);
-		}
-
-		details = new HashMap<String, String>();
-		for (Integer key : itemIdToResourceToQuantities.keySet()) {
-			String value = itemIdToResourceToQuantities.get(key).toString();
-
-			details.put(key.toString(), value);
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 		}
 		historyUtils.insertUserCurrencyHistory(userId, uchList, now, reasonForChange, details, userCurrencyHistoryDao);
 	}

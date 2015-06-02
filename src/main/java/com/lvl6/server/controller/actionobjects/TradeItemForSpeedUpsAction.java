@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
-<<<<<<< HEAD
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
@@ -25,13 +24,11 @@ import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.controller.utils.HistoryUtils;
-=======
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -47,22 +44,16 @@ public class TradeItemForSpeedUpsAction {
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 	private int gemsSpent;
-<<<<<<< HEAD
 	private MiscMethods miscMethods;
 	private HistoryUtils historyUtils;
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 
 	public TradeItemForSpeedUpsAction(String userId,
 			List<ItemForUserUsage> itemsUsed, List<ItemForUser> nuUserItems,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
-<<<<<<< HEAD
 			int gemsSpent, MiscMethods miscMethods,
 			HistoryUtils historyUtils) {
-=======
-			int gemsSpent) {
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
+
 		super();
 		this.userId = userId;
 		this.itemsUsed = itemsUsed;
@@ -71,11 +62,8 @@ public class TradeItemForSpeedUpsAction {
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 		this.gemsSpent = gemsSpent;
-<<<<<<< HEAD
 		this.miscMethods = miscMethods;
 		this.historyUtils = historyUtils;
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -95,10 +83,7 @@ public class TradeItemForSpeedUpsAction {
 	private Map<Integer, Integer> itemIdToQuantityUsed;
 	private Map<Integer, Integer> itemIdToNuQuantity;
 	private UserDao userDao;
-<<<<<<< HEAD
 	private UserCurrencyHistoryDao userCurrencyHistoryDao;
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 	private User userPojo;
 
 	private List<String> itemForUserUsageIds;
@@ -134,10 +119,7 @@ public class TradeItemForSpeedUpsAction {
 		Configuration config = new DefaultConfiguration().set(DBConnection.get()
 				.getConnection()).set(SQLDialect.MYSQL);
 		userDao = new UserDao(config);
-<<<<<<< HEAD
 		userCurrencyHistoryDao = new UserCurrencyHistoryDao(config);
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -230,10 +212,7 @@ public class TradeItemForSpeedUpsAction {
 		userPojo.setGems(userPojo.getGems() - gemsSpent);
 		userDao.update(userPojo);
 		
-<<<<<<< HEAD
 		insertCurrencyHistory();
-=======
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 		return true;
 	}
 

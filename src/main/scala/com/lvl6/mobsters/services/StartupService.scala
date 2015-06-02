@@ -607,16 +607,16 @@ class StartupService extends LazyLogging{
 						createInfoProtoUtils);
 				scga.setUp(fillMe);
                 
-                val sga = new SetGiftsAction(
-                        resBuilder,
-                        user,
-                        playerId,
-                        giftForUserRetrieveUtil,
-                        giftForTangoUserRetrieveUtil,
-                        tangoGiftRetrieveUtil,
-                        rewardRetrieveUtil,
-                        createInfoProtoUtils)
-                sga.setUp(fillMe);
+        val sga = new SetGiftsAction(
+            resBuilder,
+            user,
+            playerId,
+            giftForUserRetrieveUtil,
+            giftForTangoUserRetrieveUtil,
+            tangoGiftRetrieveUtil,
+            rewardRetrieveUtil,
+            createInfoProtoUtils)
+        sga.setUp(fillMe);
 
 				//Now since all the ids of resources are known, get them from db
 				fillMe.fetch();

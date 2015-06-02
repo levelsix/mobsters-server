@@ -125,11 +125,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
 					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
-<<<<<<< HEAD
 					UpdateUtils.get(), miscMethods, gemsSpent, historyUtils);
-=======
-					UpdateUtils.get(), miscMethods, gemsSpent);
->>>>>>> e5112981309b7b113326f5c06c483a84f6cabc34
 
 			tifsua.execute(resBuilder);
 
@@ -177,11 +173,11 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
-			TradeItemForResourcesAction tifsua) {
+			TradeItemForResourcesAction tifra) {
 		miscMethods.writeToUserCurrencyOneUser(userId, date,
-				tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
-				tifsua.getCurrentCurrencies(), tifsua.getReasons(),
-				tifsua.getDetails());
+				tifra.getCurrencyDeltas(), tifra.getPreviousCurrencies(),
+				tifra.getCurrentCurrencies(), tifra.getReasons(),
+				tifra.getDetails());
 	}
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
