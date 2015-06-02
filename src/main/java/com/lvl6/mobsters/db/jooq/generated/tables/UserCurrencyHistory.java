@@ -34,15 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private static final long serialVersionUID = 1526330646;
-=======
-	private static final long serialVersionUID = 1238514026;
->>>>>>> cleaning up shit
-=======
-	private static final long serialVersionUID = 1526330646;
->>>>>>> regenerated tables
 
 	/**
 	 * The reference instance of <code>mobsters.user_currency_history</code>

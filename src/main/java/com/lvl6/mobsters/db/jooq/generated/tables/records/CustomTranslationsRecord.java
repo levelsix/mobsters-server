@@ -38,7 +38,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "custom_translations", schema = "mobsters")
 public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslationsRecord> implements Record3<Integer, String, String>, ICustomTranslations {
 
-	private static final long serialVersionUID = -1067978579;
+	private static final long serialVersionUID = 10588905;
 
 	/**
 	 * Setter for <code>mobsters.custom_translations.id</code>.
@@ -61,7 +61,7 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	}
 
 	/**
-	 * Setter for <code>mobsters.custom_translations.phrase</code>.
+	 * Setter for <code>mobsters.custom_translations.phrase</code>. needs to be lower case
 	 */
 	@Override
 	public CustomTranslationsRecord setPhrase(String value) {
@@ -70,7 +70,7 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	}
 
 	/**
-	 * Getter for <code>mobsters.custom_translations.phrase</code>.
+	 * Getter for <code>mobsters.custom_translations.phrase</code>. needs to be lower case
 	 */
 	@Column(name = "phrase", length = 45)
 	@Size(max = 45)

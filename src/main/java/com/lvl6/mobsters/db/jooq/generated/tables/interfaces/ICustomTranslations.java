@@ -44,12 +44,12 @@ public interface ICustomTranslations extends Serializable {
 	public Integer getId();
 
 	/**
-	 * Setter for <code>mobsters.custom_translations.phrase</code>.
+	 * Setter for <code>mobsters.custom_translations.phrase</code>. needs to be lower case
 	 */
 	public ICustomTranslations setPhrase(String value);
 
 	/**
-	 * Getter for <code>mobsters.custom_translations.phrase</code>.
+	 * Getter for <code>mobsters.custom_translations.phrase</code>. needs to be lower case
 	 */
 	@Column(name = "phrase", length = 45)
 	@Size(max = 45)

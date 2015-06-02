@@ -40,15 +40,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "user_currency_history", schema = "mobsters")
 public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyHistoryRecord> implements Record9<String, String, Timestamp, String, Integer, Integer, Integer, String, String>, IUserCurrencyHistory {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private static final long serialVersionUID = -1461869140;
-=======
-	private static final long serialVersionUID = 1639762834;
->>>>>>> cleaning up shit
-=======
-	private static final long serialVersionUID = -1461869140;
->>>>>>> regenerated tables
 
 	/**
 	 * Setter for <code>mobsters.user_currency_history.id</code>.
