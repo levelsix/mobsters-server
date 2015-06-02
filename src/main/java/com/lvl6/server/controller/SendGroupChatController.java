@@ -213,6 +213,14 @@ public class SendGroupChatController extends EventController {
 					translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
 							null, censoredChatMessage, toggle);
 				}
+				
+				for(TranslateLanguages tl : translateMap.keySet()) {
+					String translatedContent = translateMap.get(tl);
+					if(translatedContent.toLowerCase().contains("ArgumentOutOfRangeException".toLowerCase())) {
+						translateMap.put(tl, censoredChatMessage);
+						log.error("argumentoutofrangeexception for translating, word was {}", chatMessage);
+					}
+				}
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
