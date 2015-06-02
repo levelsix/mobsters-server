@@ -164,7 +164,7 @@ public class SendGroupChatTest {
 		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
 		sendGroupChatController.handleEvent(sgcre);
 
-		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
+//		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
 
 	}
 
