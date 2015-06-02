@@ -24,17 +24,21 @@ case class ParsedEvent(eventProto:EventProto, eventType:EventProtocolRequest, ev
 
 object EventParser extends LazyLogging{
   
-  implicit def intToBytes(int:Int, byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN):Array[Byte]={
-    EventParser.buffer(byteOrder).putInt(int).array()
+  implicit def intToBytes(int:Int):Array[Byte]={
+    EventParser.buffer().putInt(int).array()
   }
- 
+
+  implicit def intToLittleBytes(int:Int):Array[Byte]={
+    EventParser.buffer().order(ByteOrder.LITTLE_ENDIAN).putInt(int).array()
+  }
+  
   implicit def bytestoInt(bytes:Array[Byte]):Int={
     EventParser.buffer().put(bytes).position(0).asInstanceOf[ByteBuffer].getInt
   }
    
   
-  def buffer(byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN, size:Int=Integer.BYTES):ByteBuffer={
-    ByteBuffer.allocate(Integer.BYTES).order(byteOrder)
+  def buffer(size:Int=Integer.BYTES, byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN):ByteBuffer={
+    ByteBuffer.allocate(Integer.BYTES)//.order(ByteOrder.LITTLE_ENDIAN)
   }
   
   def parseEventProtos(eventBytes:Array[Byte], byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN):Vector[ParsedEventProto]={
@@ -68,7 +72,7 @@ object EventParser extends LazyLogging{
     ep.setEventUuid(uuid)
     ep.setEventBytes(event.getByteString())
     val bytes = ep.build().toByteArray()
-    intToBytes(bytes.length, ByteOrder.BIG_ENDIAN) ++ bytes
+    intToLittleBytes(bytes.length) ++ bytes
   }
   
 }
