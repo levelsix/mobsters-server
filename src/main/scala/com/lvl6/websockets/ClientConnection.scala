@@ -76,6 +76,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     logger.info("Opening connection")
     lastMessageReceived = new DateTime()
     this.session = Some(session)
+    wireBeans
   }
   
   @OnClose
