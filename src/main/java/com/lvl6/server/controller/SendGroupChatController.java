@@ -205,9 +205,14 @@ public class SendGroupChatController extends EventController {
 				for(CustomTranslations ct : result) {
 					customTranslationLanguage = ct.getLanguage();
 				}
-				
-				Map<TranslateLanguages, String> translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
-						null, censoredChatMessage, toggle);
+				Map<TranslateLanguages, String> translateMap = null;
+				if(customTranslationLanguage == null) {
+					translateMap = translationUtils.translate(null, null, censoredChatMessage, toggle);
+				}
+				else {
+					translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
+							null, censoredChatMessage, toggle);
+				}
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
