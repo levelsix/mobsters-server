@@ -123,14 +123,14 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     if(responses.clanChanged) {
       changeClan(responses.newClanId)
     }
+    if(userId.isEmpty && !responses.userId.isEmpty()) {
+      this.userId = Some(responses.userId)
+    }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
       val bytes = EventParser.getResponseBytes(uuid, revent)
       //If it's the requester this should be their connection
-      if(revent.isInstanceOf[StartupResponseEvent]) {
-        this.userId = Some(plyrId)
-      }
       if(this.userId.get.equals(plyrId)) {
         sendToThisSocket(bytes)
       }else {
