@@ -32,9 +32,11 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TranslateSelectMessagesAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -74,6 +76,13 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	
 
 	public TranslateSelectMessagesController() {
 		numAllocatedThreads = 4;
@@ -152,7 +161,8 @@ public class TranslateSelectMessagesController extends EventController {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId,
 					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil,
-					translateOn, insertUtil, updateUtil, miscMethods, chatTranslationsRetrieveUtils);
+					translateOn, insertUtil, updateUtil, miscMethods, chatTranslationsRetrieveUtils,
+					translationUtils, serverToggleRetrieveUtils);
 
 			tsma.execute(resBuilder);
 
