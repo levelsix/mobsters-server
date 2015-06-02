@@ -10,18 +10,22 @@ object ClientConnections extends LazyLogging{
   def addConnection(connection:ClientConnection)={
     connection.userId match{
       case Some(userId) => connectionsByUserId.put(userId, connection)
+      case None =>
     }
     connection.udid match{
       case Some(udid) => connectionsByUdid.put(udid, connection)
+      case None =>
     }
   }
   
   def removeConnection(connection:ClientConnection)={
     connection.userId match{
       case Some(userId) => connectionsByUserId.remove(userId)
+      case None =>
     }
     connection.udid match{
       case Some(udid) => connectionsByUdid.remove(udid)
+      case None =>
     }
   }
   
