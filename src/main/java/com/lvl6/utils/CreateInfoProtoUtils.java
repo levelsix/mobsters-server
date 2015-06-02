@@ -29,7 +29,6 @@ import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemType;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
-import com.lvl6.proto.BattleProto.BattleReplayProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;

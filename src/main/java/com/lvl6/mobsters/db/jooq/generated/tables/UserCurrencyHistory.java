@@ -34,11 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 
-<<<<<<< HEAD
-	private static final long serialVersionUID = -1258145879;
-=======
 	private static final long serialVersionUID = 1526330646;
->>>>>>> 20986e4... regenerated tables
 
 	/**
 	 * The reference instance of <code>mobsters.user_currency_history</code>
@@ -91,7 +87,7 @@ public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 	/**
 	 * The column <code>mobsters.user_currency_history.reason_for_change</code>.
 	 */
-	public final TableField<UserCurrencyHistoryRecord, String> REASON_FOR_CHANGE = createField("reason_for_change", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+	public final TableField<UserCurrencyHistoryRecord, String> REASON_FOR_CHANGE = createField("reason_for_change", org.jooq.impl.SQLDataType.VARCHAR.length(95), this, "");
 
 	/**
 	 * The column <code>mobsters.user_currency_history.details</code>.

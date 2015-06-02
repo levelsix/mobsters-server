@@ -91,4 +91,11 @@ public class FileDownloadConfigDao extends DAOImpl<FileDownloadConfigRecord, com
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.FileDownloadConfig> fetchByUseIphone6Prefix(Boolean... values) {
 		return fetch(FileDownloadConfig.FILE_DOWNLOAD_CONFIG.USE_IPHONE6_PREFIX, values);
 	}
+
+	/**
+	 * Fetch records that have <code>use_ipad_suffix IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.FileDownloadConfig> fetchByUseIpadSuffix(Boolean... values) {
+		return fetch(FileDownloadConfig.FILE_DOWNLOAD_CONFIG.USE_IPAD_SUFFIX, values);
+	}
 }

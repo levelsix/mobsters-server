@@ -4,8 +4,8 @@
 package com.lvl6.mobsters.db.jooq.generated.tables.records;
 
 
-import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
-import com.lvl6.mobsters.db.jooq.generated.tables.interfaces.ICustomTranslations;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.interfaces.ISecretGiftConfig;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
@@ -35,22 +34,22 @@ import org.jooq.impl.UpdatableRecordImpl;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
-@Table(name = "custom_translations", schema = "mobsters")
-public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslationsRecord> implements Record3<Integer, String, String>, ICustomTranslations {
+@Table(name = "secret_gift_config", schema = "mobsters")
+public class SecretGiftConfigRecord extends UpdatableRecordImpl<SecretGiftConfigRecord> implements Record3<Integer, Integer, Double>, ISecretGiftConfig {
 
-	private static final long serialVersionUID = 10588905;
+	private static final long serialVersionUID = 1263500583;
 
 	/**
-	 * Setter for <code>mobsters.custom_translations.id</code>.
+	 * Setter for <code>mobsters.secret_gift_config.id</code>.
 	 */
 	@Override
-	public CustomTranslationsRecord setId(Integer value) {
+	public SecretGiftConfigRecord setId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>mobsters.custom_translations.id</code>.
+	 * Getter for <code>mobsters.secret_gift_config.id</code>.
 	 */
 	@Id
 	@Column(name = "id", unique = true, nullable = false, precision = 10)
@@ -61,41 +60,39 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	}
 
 	/**
-	 * Setter for <code>mobsters.custom_translations.phrase</code>. needs to be lower case
+	 * Setter for <code>mobsters.secret_gift_config.reward_id</code>.
 	 */
 	@Override
-	public CustomTranslationsRecord setPhrase(String value) {
+	public SecretGiftConfigRecord setRewardId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>mobsters.custom_translations.phrase</code>. needs to be lower case
+	 * Getter for <code>mobsters.secret_gift_config.reward_id</code>.
 	 */
-	@Column(name = "phrase", length = 45)
-	@Size(max = 45)
+	@Column(name = "reward_id", precision = 10)
 	@Override
-	public String getPhrase() {
-		return (String) getValue(1);
+	public Integer getRewardId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
-	 * Setter for <code>mobsters.custom_translations.language</code>.
+	 * Setter for <code>mobsters.secret_gift_config.chance_to_be_selected</code>.
 	 */
 	@Override
-	public CustomTranslationsRecord setLanguage(String value) {
+	public SecretGiftConfigRecord setChanceToBeSelected(Double value) {
 		setValue(2, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>mobsters.custom_translations.language</code>.
+	 * Getter for <code>mobsters.secret_gift_config.chance_to_be_selected</code>.
 	 */
-	@Column(name = "language", length = 45)
-	@Size(max = 45)
+	@Column(name = "chance_to_be_selected", precision = 12)
 	@Override
-	public String getLanguage() {
-		return (String) getValue(2);
+	public Double getChanceToBeSelected() {
+		return (Double) getValue(2);
 	}
 
 	// -------------------------------------------------------------------------
@@ -118,7 +115,7 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, String, String> fieldsRow() {
+	public Row3<Integer, Integer, Double> fieldsRow() {
 		return (Row3) super.fieldsRow();
 	}
 
@@ -126,7 +123,7 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<Integer, String, String> valuesRow() {
+	public Row3<Integer, Integer, Double> valuesRow() {
 		return (Row3) super.valuesRow();
 	}
 
@@ -135,23 +132,23 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 */
 	@Override
 	public Field<Integer> field1() {
-		return CustomTranslations.CUSTOM_TRANSLATIONS.ID;
+		return SecretGiftConfig.SECRET_GIFT_CONFIG.ID;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field2() {
-		return CustomTranslations.CUSTOM_TRANSLATIONS.PHRASE;
+	public Field<Integer> field2() {
+		return SecretGiftConfig.SECRET_GIFT_CONFIG.REWARD_ID;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field3() {
-		return CustomTranslations.CUSTOM_TRANSLATIONS.LANGUAGE;
+	public Field<Double> field3() {
+		return SecretGiftConfig.SECRET_GIFT_CONFIG.CHANCE_TO_BE_SELECTED;
 	}
 
 	/**
@@ -166,23 +163,23 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value2() {
-		return getPhrase();
+	public Integer value2() {
+		return getRewardId();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value3() {
-		return getLanguage();
+	public Double value3() {
+		return getChanceToBeSelected();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CustomTranslationsRecord value1(Integer value) {
+	public SecretGiftConfigRecord value1(Integer value) {
 		setId(value);
 		return this;
 	}
@@ -191,8 +188,8 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CustomTranslationsRecord value2(String value) {
-		setPhrase(value);
+	public SecretGiftConfigRecord value2(Integer value) {
+		setRewardId(value);
 		return this;
 	}
 
@@ -200,8 +197,8 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CustomTranslationsRecord value3(String value) {
-		setLanguage(value);
+	public SecretGiftConfigRecord value3(Double value) {
+		setChanceToBeSelected(value);
 		return this;
 	}
 
@@ -209,7 +206,7 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CustomTranslationsRecord values(Integer value1, String value2, String value3) {
+	public SecretGiftConfigRecord values(Integer value1, Integer value2, Double value3) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -224,17 +221,17 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void from(ICustomTranslations from) {
+	public void from(ISecretGiftConfig from) {
 		setId(from.getId());
-		setPhrase(from.getPhrase());
-		setLanguage(from.getLanguage());
+		setRewardId(from.getRewardId());
+		setChanceToBeSelected(from.getChanceToBeSelected());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public <E extends ICustomTranslations> E into(E into) {
+	public <E extends ISecretGiftConfig> E into(E into) {
 		into.from(this);
 		return into;
 	}
@@ -244,20 +241,20 @@ public class CustomTranslationsRecord extends UpdatableRecordImpl<CustomTranslat
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Create a detached CustomTranslationsRecord
+	 * Create a detached SecretGiftConfigRecord
 	 */
-	public CustomTranslationsRecord() {
-		super(CustomTranslations.CUSTOM_TRANSLATIONS);
+	public SecretGiftConfigRecord() {
+		super(SecretGiftConfig.SECRET_GIFT_CONFIG);
 	}
 
 	/**
-	 * Create a detached, initialised CustomTranslationsRecord
+	 * Create a detached, initialised SecretGiftConfigRecord
 	 */
-	public CustomTranslationsRecord(Integer id, String phrase, String language) {
-		super(CustomTranslations.CUSTOM_TRANSLATIONS);
+	public SecretGiftConfigRecord(Integer id, Integer rewardId, Double chanceToBeSelected) {
+		super(SecretGiftConfig.SECRET_GIFT_CONFIG);
 
 		setValue(0, id);
-		setValue(1, phrase);
-		setValue(2, language);
+		setValue(1, rewardId);
+		setValue(2, chanceToBeSelected);
 	}
 }

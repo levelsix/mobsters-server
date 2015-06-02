@@ -3,22 +3,17 @@
  */
 package com.lvl6.mobsters.db.jooq.generated.tables.daos;
 
+
 import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.IapHistoryRecord;
-import com.lvl6.properties.DBConstants;
-import com.lvl6.properties.IAPValues;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Generated;
 
 import org.jooq.Configuration;
 import org.jooq.impl.DAOImpl;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 /**
@@ -174,51 +169,4 @@ public class IapHistoryDao extends DAOImpl<IapHistoryRecord, com.lvl6.mobsters.d
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistory> fetchBySalesUuid(String... values) {
 		return fetch(IapHistory.IAP_HISTORY.SALES_UUID, values);
 	}
-	
-	/**
-	 *  Inserting into IAPHistory using same parameters as old insertUtils method
-	 */
-	public void insertIAPHistoryElem(JSONObject appleReceipt, int gemChange,
-			User user, double cashCost, String salesUuid) {
-		com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistory iapHistory = 
-				new com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistory();
-		
-		String id = randomUUID();
-		iapHistory.setId(id);
-		iapHistory.setUserId(user.getId());
-		
-		try {
-			iapHistory.setTransactionId(Long.parseLong(appleReceipt.getString(IAPValues.TRANSACTION_ID)));
-			iapHistory.setPurchaseDate(new Timestamp(appleReceipt
-					.getLong(IAPValues.PURCHASE_DATE_MS)));
-			iapHistory.setProductId(appleReceipt.getString(IAPValues.PRODUCT_ID));
-			iapHistory.setQuantity(Integer.parseInt(appleReceipt.getString(IAPValues.QUANTITY)));
-			iapHistory.setBid(appleReceipt.getString(IAPValues.BID));
-			iapHistory.setBvrs(appleReceipt.getString(IAPValues.BVRS));
-			if (appleReceipt.has(IAPValues.APP_ITEM_ID)) {
-				iapHistory.setAppItemId(appleReceipt.getString(IAPValues.APP_ITEM_ID));
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		iapHistory.setPremiumcurPurchased(gemChange);
-		iapHistory.setCashSpent(cashCost);
-		iapHistory.setUdid(user.getUdid());
-		iapHistory.setFbId(user.getFacebookId());
-		
-		if(salesUuid != null) {
-			iapHistory.setSalesUuid(salesUuid);
-		}
-		this.insert(iapHistory);
-	}
-	
-	private String randomUUID() {
-		return UUID.randomUUID().toString();
-	}
-
 }

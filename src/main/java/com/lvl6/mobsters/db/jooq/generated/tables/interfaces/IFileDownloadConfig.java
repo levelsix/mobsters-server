@@ -92,6 +92,18 @@ public interface IFileDownloadConfig extends Serializable {
 	@NotNull
 	public Boolean getUseIphone6Prefix();
 
+	/**
+	 * Setter for <code>mobsters.file_download_config.use_ipad_suffix</code>.
+	 */
+	public IFileDownloadConfig setUseIpadSuffix(Boolean value);
+
+	/**
+	 * Getter for <code>mobsters.file_download_config.use_ipad_suffix</code>.
+	 */
+	@Column(name = "use_ipad_suffix", nullable = false, precision = 1)
+	@NotNull
+	public Boolean getUseIpadSuffix();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

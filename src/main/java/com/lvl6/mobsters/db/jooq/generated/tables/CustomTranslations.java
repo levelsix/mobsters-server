@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CustomTranslations extends TableImpl<CustomTranslationsRecord> {
 
-	private static final long serialVersionUID = 2144526786;
+	private static final long serialVersionUID = -561404474;
 
 	/**
 	 * The reference instance of <code>mobsters.custom_translations</code>
@@ -54,9 +54,9 @@ public class CustomTranslations extends TableImpl<CustomTranslationsRecord> {
 	public final TableField<CustomTranslationsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
-	 * The column <code>mobsters.custom_translations.phrase</code>.
+	 * The column <code>mobsters.custom_translations.phrase</code>. needs to be lower case
 	 */
-	public final TableField<CustomTranslationsRecord, String> PHRASE = createField("phrase", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
+	public final TableField<CustomTranslationsRecord, String> PHRASE = createField("phrase", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "needs to be lower case");
 
 	/**
 	 * The column <code>mobsters.custom_translations.language</code>.

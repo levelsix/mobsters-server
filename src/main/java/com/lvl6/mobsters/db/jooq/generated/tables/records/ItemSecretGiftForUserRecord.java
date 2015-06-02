@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record3;
-import org.jooq.Record5;
+import org.jooq.Record6;
 import org.jooq.Row;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -40,9 +40,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "item_secret_gift_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"id", "user_id", "item_id"})
 })
-public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretGiftForUserRecord> implements Record5<String, String, String, Integer, Timestamp>, IItemSecretGiftForUser {
+public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretGiftForUserRecord> implements Record6<String, String, String, Integer, Timestamp, Integer>, IItemSecretGiftForUser {
 
-	private static final long serialVersionUID = -1264145810;
+	private static final long serialVersionUID = 1714122345;
 
 	/**
 	 * Setter for <code>mobsters.item_secret_gift_for_user.id</code>.
@@ -140,6 +140,25 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 		return (Timestamp) getValue(4);
 	}
 
+	/**
+	 * Setter for <code>mobsters.item_secret_gift_for_user.reward_id</code>.
+	 */
+	@Override
+	public ItemSecretGiftForUserRecord setRewardId(Integer value) {
+		setValue(5, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.item_secret_gift_for_user.reward_id</code>.
+	 */
+	@Column(name = "reward_id", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getRewardId() {
+		return (Integer) getValue(5);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -153,23 +172,23 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 	}
 
 	// -------------------------------------------------------------------------
-	// Record5 type implementation
+	// Record6 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<String, String, String, Integer, Timestamp> fieldsRow() {
-		return (Row5) super.fieldsRow();
+	public Row6<String, String, String, Integer, Timestamp, Integer> fieldsRow() {
+		return (Row6) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<String, String, String, Integer, Timestamp> valuesRow() {
-		return (Row5) super.valuesRow();
+	public Row6<String, String, String, Integer, Timestamp, Integer> valuesRow() {
+		return (Row6) super.valuesRow();
 	}
 
 	/**
@@ -216,6 +235,14 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Field<Integer> field6() {
+		return ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER.REWARD_ID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String value1() {
 		return getId();
 	}
@@ -250,6 +277,14 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 	@Override
 	public Timestamp value5() {
 		return getCreateTime();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value6() {
+		return getRewardId();
 	}
 
 	/**
@@ -301,12 +336,22 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemSecretGiftForUserRecord values(String value1, String value2, String value3, Integer value4, Timestamp value5) {
+	public ItemSecretGiftForUserRecord value6(Integer value) {
+		setRewardId(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemSecretGiftForUserRecord values(String value1, String value2, String value3, Integer value4, Timestamp value5, Integer value6) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
 		value4(value4);
 		value5(value5);
+		value6(value6);
 		return this;
 	}
 
@@ -324,6 +369,7 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 		setItemId(from.getItemId());
 		setSecsUntilCollection(from.getSecsUntilCollection());
 		setCreateTime(from.getCreateTime());
+		setRewardId(from.getRewardId());
 	}
 
 	/**
@@ -349,7 +395,7 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 	/**
 	 * Create a detached, initialised ItemSecretGiftForUserRecord
 	 */
-	public ItemSecretGiftForUserRecord(String id, String userId, String itemId, Integer secsUntilCollection, Timestamp createTime) {
+	public ItemSecretGiftForUserRecord(String id, String userId, String itemId, Integer secsUntilCollection, Timestamp createTime, Integer rewardId) {
 		super(ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER);
 
 		setValue(0, id);
@@ -357,5 +403,6 @@ public class ItemSecretGiftForUserRecord extends UpdatableRecordImpl<ItemSecretG
 		setValue(2, itemId);
 		setValue(3, secsUntilCollection);
 		setValue(4, createTime);
+		setValue(5, rewardId);
 	}
 }
