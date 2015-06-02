@@ -32,11 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user", schema = "mobsters")
 public class User implements IUser {
 
-<<<<<<< HEAD
 	private static final long serialVersionUID = 2217423;
-=======
-	private static final long serialVersionUID = -1350548100;
->>>>>>> regenerated tables
 
 	private String    id;
 	private String    name;

@@ -191,7 +191,11 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
+<<<<<<< HEAD
 	private static final long serialVersionUID = -1436386027;
+=======
+	private static final long serialVersionUID = 622539059;
+>>>>>>> rebase
 
 	/**
 	 * The reference instance of <code>mobsters</code>

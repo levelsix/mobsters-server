@@ -380,7 +380,6 @@ public class Keys {
 	public static final Identity<ReferralCodeAvailableConfigRecord, Integer> IDENTITY_REFERRAL_CODE_AVAILABLE_CONFIG = Identities0.IDENTITY_REFERRAL_CODE_AVAILABLE_CONFIG;
 	public static final Identity<ReferralCodeGeneratedConfigRecord, Integer> IDENTITY_REFERRAL_CODE_GENERATED_CONFIG = Identities0.IDENTITY_REFERRAL_CODE_GENERATED_CONFIG;
 	public static final Identity<ResearchPropertyConfigRecord, Integer> IDENTITY_RESEARCH_PROPERTY_CONFIG = Identities0.IDENTITY_RESEARCH_PROPERTY_CONFIG;
-	public static final Identity<RewardConfigRecord, Integer> IDENTITY_REWARD_CONFIG = Identities0.IDENTITY_REWARD_CONFIG;
 	public static final Identity<SalesDisplayItemConfigRecord, Integer> IDENTITY_SALES_DISPLAY_ITEM_CONFIG = Identities0.IDENTITY_SALES_DISPLAY_ITEM_CONFIG;
 	public static final Identity<SalesPackageConfigRecord, Integer> IDENTITY_SALES_PACKAGE_CONFIG = Identities0.IDENTITY_SALES_PACKAGE_CONFIG;
 	public static final Identity<SecretGiftConfigRecord, Integer> IDENTITY_SECRET_GIFT_CONFIG = Identities0.IDENTITY_SECRET_GIFT_CONFIG;
@@ -611,7 +610,6 @@ public class Keys {
 		public static Identity<ReferralCodeAvailableConfigRecord, Integer> IDENTITY_REFERRAL_CODE_AVAILABLE_CONFIG = createIdentity(ReferralCodeAvailableConfig.REFERRAL_CODE_AVAILABLE_CONFIG, ReferralCodeAvailableConfig.REFERRAL_CODE_AVAILABLE_CONFIG.ID);
 		public static Identity<ReferralCodeGeneratedConfigRecord, Integer> IDENTITY_REFERRAL_CODE_GENERATED_CONFIG = createIdentity(ReferralCodeGeneratedConfig.REFERRAL_CODE_GENERATED_CONFIG, ReferralCodeGeneratedConfig.REFERRAL_CODE_GENERATED_CONFIG.ID);
 		public static Identity<ResearchPropertyConfigRecord, Integer> IDENTITY_RESEARCH_PROPERTY_CONFIG = createIdentity(ResearchPropertyConfig.RESEARCH_PROPERTY_CONFIG, ResearchPropertyConfig.RESEARCH_PROPERTY_CONFIG.ID);
-		public static Identity<RewardConfigRecord, Integer> IDENTITY_REWARD_CONFIG = createIdentity(RewardConfig.REWARD_CONFIG, RewardConfig.REWARD_CONFIG.ID);
 		public static Identity<SalesDisplayItemConfigRecord, Integer> IDENTITY_SALES_DISPLAY_ITEM_CONFIG = createIdentity(SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG, SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG.ID);
 		public static Identity<SalesPackageConfigRecord, Integer> IDENTITY_SALES_PACKAGE_CONFIG = createIdentity(SalesPackageConfig.SALES_PACKAGE_CONFIG, SalesPackageConfig.SALES_PACKAGE_CONFIG.ID);
 		public static Identity<SecretGiftConfigRecord, Integer> IDENTITY_SECRET_GIFT_CONFIG = createIdentity(SecretGiftConfig.SECRET_GIFT_CONFIG, SecretGiftConfig.SECRET_GIFT_CONFIG.ID);

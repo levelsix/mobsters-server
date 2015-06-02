@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -34,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RewardConfig extends TableImpl<RewardConfigRecord> {
 
-	private static final long serialVersionUID = -423831807;
+	private static final long serialVersionUID = 647868549;
 
 	/**
 	 * The reference instance of <code>mobsters.reward_config</code>
@@ -93,14 +92,6 @@ public class RewardConfig extends TableImpl<RewardConfigRecord> {
 
 	private RewardConfig(String alias, Table<RewardConfigRecord> aliased, Field<?>[] parameters) {
 		super(alias, Mobsters.MOBSTERS, aliased, parameters, "");
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Identity<RewardConfigRecord, Integer> getIdentity() {
-		return Keys.IDENTITY_REWARD_CONFIG;
 	}
 
 	/**

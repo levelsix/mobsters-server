@@ -317,6 +317,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
 	public static final String UCHRFC__TANGO_GIFT = "tango gift";
 	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
+	public static final String UCHRFC__TRADE_ITEM_FOR_SPEEDUP = "trade item for speedup";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
 
 	//old aoc constants

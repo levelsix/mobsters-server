@@ -10909,7 +10909,6 @@ public final class EventItemProto {
     java.lang.String[] descriptorData = {
       "\n\017EventItem.proto\022\016com.lvl6.proto\032\026Boost" +
       "erPackStuff.proto\032\nItem.proto\032\022MonsterSt" +
-<<<<<<< HEAD
       "uff.proto\032\014Reward.proto\032\nUser.proto\"w\n\037T" +
       "radeItemForBoosterRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
@@ -10925,165 +10924,52 @@ public final class EventItemProto {
       "6.proto.UserItemProto\0220\n\007rewards\030\006 \001(\0132\037" +
       ".com.lvl6.proto.UserRewardProto\"T\n\031Trade" +
       "ItemForBoosterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
-      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\277\001" +
+      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\322\001" +
       "\n TradeItemForSpeedUpsRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
       "roto\0225\n\titemsUsed\030\002 \003(\0132\".com.lvl6.proto" +
       ".UserItemUsageProto\0222\n\013nuUserItems\030\003 \003(\013" +
-      "2\035.com.lvl6.proto.UserItemProto\"\245\002\n!Trad" +
-      "eItemForSpeedUpsResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\\\n\006status\030\002 \001(\0162L.com.lvl6.proto.TradeIt" +
-      "emForSpeedUpsResponseProto.TradeItemForS" +
-      "peedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.l" +
-      "vl6.proto.UserItemUsageProto\"9\n\032TradeIte" +
-      "mForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_",
-      "OTHER\020\002\"l\n\036RemoveUserItemUsedRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001" +
-      "\n\037RemoveUserItemUsedResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Rem" +
-      "oveUserItemUsedResponseProto.RemoveUserI" +
-      "temUsedStatus\"7\n\030RemoveUserItemUsedStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\302\001\n!Trade" +
-      "ItemForResourcesRequestProto\022@\n\006sender\030\001",
-      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013n" +
-      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
-<<<<<<< HEAD
-      "emProto\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\"TradeIte" +
-      "mForResourcesResponseProto\022@\n\006sender\030\001 \001" +
-      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
-      "MaxResources\022^\n\006status\030\002 \001(\0162N.com.lvl6." +
-      "proto.TradeItemForResourcesResponseProto" +
-      ".TradeItemForResourcesStatus\":\n\033TradeIte" +
-      "mForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL",
-      "_OTHER\020\002\"v\n\034RedeemSecretGiftRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUu" +
-      "id\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponsePro" +
-      "to\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.pr" +
-      "oto.UserItemSecretGiftProto\022T\n\006status\030\003 " +
-      "\001(\0162D.com.lvl6.proto.RedeemSecretGiftRes" +
-      "ponseProto.RedeemSecretGiftStatus\"Q\n\026Red" +
-      "eemSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL",
-      "_ITEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016" +
-      "EventItemProto"
-=======
-      "emProto\"\245\002\n!TradeItemForSpeedUpsResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\\\n\006status\030\002 \001(\0162L.com.lv" +
-      "l6.proto.TradeItemForSpeedUpsResponsePro" +
-      "to.TradeItemForSpeedUpsStatus\0225\n\titemsUs" +
-      "ed\030\003 \003(\0132\".com.lvl6.proto.UserItemUsageP" +
-      "roto\"9\n\032TradeItemForSpeedUpsStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"l\n\036RemoveUserIte" +
-      "mUsedRequestProto\0220\n\006sender\030\001 \001(\0132 .com.",
-      "lvl6.proto.MinimumUserProto\022\030\n\020userItemU" +
-      "sedUuid\030\002 \003(\t\"\346\001\n\037RemoveUserItemUsedResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022X\n\006status\030\002 \001(\0162H.co" +
-      "m.lvl6.proto.RemoveUserItemUsedResponseP" +
-      "roto.RemoveUserItemUsedStatus\"7\n\030RemoveU" +
-      "serItemUsedStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002\"\302\001\n!TradeItemForResourcesRequestP" +
-      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
-      "nimumUserProtoWithMaxResources\022\023\n\013itemId",
-      "sUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132\035.com.l" +
-      "vl6.proto.UserItemProto\022\022\n\nclientTime\030\004 " +
-      "\001(\003\"\202\002\n\"TradeItemForResourcesResponsePro" +
-      "to\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mini" +
-      "mumUserProtoWithMaxResources\022^\n\006status\030\002" +
-      " \001(\0162N.com.lvl6.proto.TradeItemForResour" +
-      "cesResponseProto.TradeItemForResourcesSt" +
-      "atus\":\n\033TradeItemForResourcesStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecret" +
-      "GiftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l",
-      "vl6.proto.MinimumUserProto\022\022\n\nclientTime" +
-      "\030\002 \001(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\261\002\n\035RedeemSecre" +
-      "tGiftResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\0228\n\007nuGifts\030\002 \003" +
-      "(\0132\'.com.lvl6.proto.UserItemSecretGiftPr" +
-      "oto\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Red" +
-      "eemSecretGiftResponseProto.RedeemSecretG" +
-      "iftStatus\"Q\n\026RedeemSecretGiftStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n\n" +
-      "FAIL_OTHER\020\003\"\227\001\n!PurchaseItemsWithGemsRe",
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\021\n\tgemsSpent\030\002 \001(\005\022" +
-      "-\n\nitemBought\030\003 \001(\0132\031.com.lvl6.proto.Ite" +
-      "mProto\"\211\002\n\"PurchaseItemsWithGemsResponse" +
-      "Proto\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022^\n\006status\030\002 \001(\0162N.com.lvl6." +
-      "proto.PurchaseItemsWithGemsResponseProto" +
-      ".PurchaseItemsWithGemsStatus\"T\n\033Purchase" +
-      "ItemsWithGemsStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL" +
-      "_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Ev",
+      "2\035.com.lvl6.proto.UserItemProto\022\021\n\tgemsS" +
+      "pent\030\004 \001(\005\"\245\002\n!TradeItemForSpeedUpsRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L.com" +
+      ".lvl6.proto.TradeItemForSpeedUpsResponse" +
+      "Proto.TradeItemForSpeedUpsStatus\0225\n\titem" +
+      "sUsed\030\003 \003(\0132\".com.lvl6.proto.UserItemUsa" +
+      "geProto\"9\n\032TradeItemForSpeedUpsStatus\022\013\n",
+      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"l\n\036RemoveUser" +
+      "ItemUsedRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\030\n\020userIt" +
+      "emUsedUuid\030\002 \003(\t\"\346\001\n\037RemoveUserItemUsedR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022X\n\006status\030\002 \001(\0162H" +
+      ".com.lvl6.proto.RemoveUserItemUsedRespon" +
+      "seProto.RemoveUserItemUsedStatus\"7\n\030Remo" +
+      "veUserItemUsedStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
+      "L_OTHER\020\002\"\325\001\n!TradeItemForResourcesReque",
+      "stProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto" +
+      ".MinimumUserProtoWithMaxResources\022\023\n\013ite" +
+      "mIdsUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132\035.co" +
+      "m.lvl6.proto.UserItemProto\022\022\n\nclientTime" +
+      "\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\"\202\002\n\"TradeItemF" +
+      "orResourcesResponseProto\022@\n\006sender\030\001 \001(\013" +
+      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
+      "xResources\022^\n\006status\030\002 \001(\0162N.com.lvl6.pr" +
+      "oto.TradeItemForResourcesResponseProto.T" +
+      "radeItemForResourcesStatus\":\n\033TradeItemF",
+      "orResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002\"v\n\034RedeemSecretGiftRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUuid" +
+      "\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponseProto" +
+      "\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.prot" +
+      "o.UserItemSecretGiftProto\022T\n\006status\030\003 \001(" +
+      "\0162D.com.lvl6.proto.RedeemSecretGiftRespo" +
+      "nseProto.RedeemSecretGiftStatus\"Q\n\026Redee",
+      "mSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_I" +
+      "TEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Ev" +
       "entItemProto"
->>>>>>> created response request events
-=======
-      "uff.proto\032\nUser.proto\"w\n\037TradeItemForBoo" +
-      "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\016\n\006itemId\030\002 \001" +
-      "(\005\022\022\n\nclientTime\030\003 \001(\003\"\254\003\n TradeItemForB" +
-      "oosterResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022Z\n\006status\030" +
-      "\002 \001(\0162J.com.lvl6.proto.TradeItemForBoost" +
-      "erResponseProto.TradeItemForBoosterStatu",
-      "s\022:\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto" +
-      ".FullUserMonsterProto\022/\n\005prize\030\004 \001(\0132 .c" +
-      "om.lvl6.proto.BoosterItemProto\0227\n\020update" +
-      "dUserItems\030\005 \003(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\"T\n\031TradeItemForBoosterStatus\022\013\n\007" +
-      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFF" +
-      "ICIENT_ITEM\020\003\"\322\001\n TradeItemForSpeedUpsRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\0225\n\titemsUsed\030\002 \003(\0132" +
-      "\".com.lvl6.proto.UserItemUsageProto\0222\n\013n",
-      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\022\021\n\tgemsSpent\030\004 \001(\005\"\245\002\n!TradeItem" +
-      "ForSpeedUpsResponseProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\\\n\006st" +
-      "atus\030\002 \001(\0162L.com.lvl6.proto.TradeItemFor" +
-      "SpeedUpsResponseProto.TradeItemForSpeedU" +
-      "psStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.lvl6.p" +
-      "roto.UserItemUsageProto\"9\n\032TradeItemForS" +
-      "peedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
-      "\020\002\"l\n\036RemoveUserItemUsedRequestProto\0220\n\006",
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001\n\037Rem" +
-      "oveUserItemUsedResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022X" +
-      "\n\006status\030\002 \001(\0162H.com.lvl6.proto.RemoveUs" +
-      "erItemUsedResponseProto.RemoveUserItemUs" +
-      "edStatus\"7\n\030RemoveUserItemUsedStatus\022\013\n\007" +
-      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\325\001\n!TradeItemF" +
-      "orResourcesRequestProto\022@\n\006sender\030\001 \001(\0132" +
-      "0.com.lvl6.proto.MinimumUserProtoWithMax",
-      "Resources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nuUser" +
-      "Items\030\003 \003(\0132\035.com.lvl6.proto.UserItemPro" +
-      "to\022\022\n\nclientTime\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(" +
-      "\005\"\202\002\n\"TradeItemForResourcesResponseProto" +
-      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
-      "mUserProtoWithMaxResources\022^\n\006status\030\002 \001" +
-      "(\0162N.com.lvl6.proto.TradeItemForResource" +
-      "sResponseProto.TradeItemForResourcesStat" +
-      "us\":\n\033TradeItemForResourcesStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecretGi",
-      "ftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\022\n\nclientTime\030\002" +
-      " \001(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\261\002\n\035RedeemSecretG" +
-      "iftResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\0228\n\007nuGifts\030\002 \003(\013" +
-      "2\'.com.lvl6.proto.UserItemSecretGiftProt" +
-      "o\022T\n\006status\030\003 \001(\0162D.com.lvl6.proto.Redee" +
-      "mSecretGiftResponseProto.RedeemSecretGif" +
-      "tStatus\"Q\n\026RedeemSecretGiftStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n\nFA",
-      "IL_OTHER\020\003B\020B\016EventItemProto"
->>>>>>> edits to trade item for speedups by adding gemsspent, start refactoring createupdateclientresponseevent
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
