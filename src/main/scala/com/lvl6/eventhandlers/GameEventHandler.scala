@@ -40,7 +40,7 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var apnsWriter:APNSWriter = null
   
   @BeanProperty
-  var responseCachingEnabled = true
+  var responseCachingEnabled = false
   
   def processEvent(eventBytes:Array[Byte])={
     try{
