@@ -13,6 +13,7 @@
 
 	<security:http pattern="/iddiction*" security="none"/>
 	<security:http pattern="/client*" security="none"/>
+	<security:http pattern="/client/connection*" security="none"/>
 
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/admin*" access="ROLE_ADMIN" />
@@ -20,6 +21,8 @@
 		<security:intercept-url pattern="/logs*" access="ROLE_ADMIN" />
 		<security:intercept-url pattern="/stat*" access="ROLE_ADMIN" />
 		<security:intercept-url pattern="/"	access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/client*"	access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/client/connection*"	access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	</security:http>
 	
 

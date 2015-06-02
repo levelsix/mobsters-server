@@ -63,7 +63,7 @@
 		</init-param>
 		<init-param>
 			<param-name>ignorePaths</param-name>
-			<param-value>/iddiction,/healthcheck</param-value>
+			<param-value>/iddiction,/healthcheck,/client/connection</param-value>
 		</init-param>
 		<init-param>
 			<param-name>configuration</param-name>
