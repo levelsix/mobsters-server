@@ -52,15 +52,16 @@ trait GameEventHandler extends LazyLogging  {
           updatePlayerToServerMaps(parsedEvent)
           val eventUuid = parsedEvent.eventProto.getEventUuid
           val playerId = parsedEvent.event.getPlayerId
-          if(responseCachingEnabled && responseCacheService.isResponseCached(eventUuid)) {
-            logger.info(s"Event $eventUuid was already cached.. sending cached responses")
-            val cachedResponses = responseCacheService.getCachedResponses(eventUuid)
-            val toClientEvents = new ToClientEvents()
-            cachedResponses match {
-              case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(playerId, cr.event)}
-              case None =>
+          if(responseCachingEnabled) {
+            if(responseCacheService.isResponseCached(eventUuid)) {
+              logger.info(s"Event $eventUuid was already cached.. sending cached responses")
+              val cachedResponses = responseCacheService.getCachedResponses(eventUuid)
+              val toClientEvents = new ToClientEvents()
+              cachedResponses match {
+                case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(playerId, cr.event)}
+                case None =>
+              }
             }
-            //toClientEvents.normalResponseEvents.addAll(cacheResponses)
           }else{
             parsedEvent.eventController.processEvent(parsedEvent.event) match{
               case Some(events)=>{
