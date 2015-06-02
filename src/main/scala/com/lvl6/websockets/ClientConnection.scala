@@ -35,6 +35,8 @@ import com.lvl6.server.eventsender.PreDBFacebookEvent
 import com.lvl6.events.request.StartupRequestEvent
 import java.util.UUID
 import java.nio.ByteBuffer
+import org.springframework.beans.factory.annotation.Autowired
+import scala.beans.BeanProperty
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -58,9 +60,13 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   
   //beans
+  @Autowired
   var rabbitConnectionFactory:ConnectionFactory = null
+  @Autowired
   var amqpAdmin:AmqpAdmin = null
+  @Autowired
   var gameExchange:DirectExchange = null
+  @Autowired
   var chatExchange:TopicExchange = null
   
   
@@ -250,8 +256,11 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   }
   
   def wireBeans= {
-    rabbitConnectionFactory = AppContext.getApplicationContext.getBean(classOf[ConnectionFactory])
-    amqpAdmin = AppContext.getApplicationContext.getBean(classOf[AmqpAdmin])
+    val factory = AppContext.getApplicationContext.getAutowireCapableBeanFactory();
+    factory.autowireBean(this);
+    factory.initializeBean(this, this.connectionId );
+    //rabbitConnectionFactory = AppContext.getApplicationContext.getBean(classOf[ConnectionFactory])
+    //amqpAdmin = AppContext.getApplicationContext.getBean(classOf[AmqpAdmin])
   }
   
   
