@@ -2920,7 +2920,8 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
-			Collection<Reward> listOfRewards, String reasonForReward) {
+			Collection<Reward> listOfRewards, String reasonForReward, 
+			String awardReasonDetail) {
 		if(listOfRewards == null) {
 			log.error("list containing rewards is null");
 		}
@@ -2934,6 +2935,7 @@ public class InsertUtils implements InsertUtil {
 		List<Timestamp> timestampList = new ArrayList<Timestamp>();
 		List<Integer> rewardIdList = new ArrayList<Integer>();
 		List<String> reasonForRewardList = new ArrayList<String>();
+		List<String> awardReasonDetailList = new ArrayList<String>();
 
 		try {
 			for(Reward r : listOfRewards) {
@@ -2944,6 +2946,7 @@ public class InsertUtils implements InsertUtil {
 				timestampList.add(ts);
 				rewardIdList.add(rewardId);
 				reasonForRewardList.add(reasonForReward);
+				awardReasonDetailList.add(awardReasonDetail);
 			}
 		} catch (Exception e) {
 			log.error("error converting language to string");
@@ -2955,6 +2958,9 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__DATE, timestampList);
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__REWARD_ID, rewardIdList);
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__REASON_FOR_REWARD, reasonForRewardList);
+		if(awardReasonDetail != null) {
+			insertParams.put(DBConstants.USER_REWARD_HISTORY__DETAILS, awardReasonDetailList);
+		}
 
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, size);

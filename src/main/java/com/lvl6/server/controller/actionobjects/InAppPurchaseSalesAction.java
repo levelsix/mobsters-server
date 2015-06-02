@@ -286,12 +286,13 @@ public class InAppPurchaseSalesAction {
 
 	public void processSalesPackagePurchase(Builder resBuilder) {
 
+		String awardReasonDetail = "sales pack id: " + salesPackage.getId();
 		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package",
 				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
 				rewardRetrieveUtils, userClanRetrieveUtils,
-				createInfoProtoUtils);
+				createInfoProtoUtils, awardReasonDetail);
 
 		ara.execute();
 

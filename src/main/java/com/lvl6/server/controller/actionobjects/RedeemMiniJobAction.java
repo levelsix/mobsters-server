@@ -251,7 +251,7 @@ public class RedeemMiniJobAction {
 				insertUtil, updateUtil,
 				monsterStuffUtils, monsterLevelInfoRetrieveUtils,
 				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
-				userClanRetrieveUtils, createInfoProtoUtils);
+				userClanRetrieveUtils, createInfoProtoUtils, null);
 
 		ara.execute();
 

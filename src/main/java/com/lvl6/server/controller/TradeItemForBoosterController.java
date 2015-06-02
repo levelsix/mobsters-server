@@ -387,11 +387,13 @@ public class TradeItemForBoosterController extends EventController {
 			listOfRewards.add(r);
 		}
 
+		String awardReasonDetail = "booster pack id: " + bPackId;
 		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, now,
 				"trade item for booster", listOfRewards, userRetrieveUtils,
 				itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
-				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils);
+				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils, 
+				awardReasonDetail);
 		ara.execute();
 		createRewardProto(resBuilder, ara);
 		return true;
