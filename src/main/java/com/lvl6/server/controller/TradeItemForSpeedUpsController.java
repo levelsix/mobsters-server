@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,8 +14,10 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForSpeedUpsRequestEvent;
 import com.lvl6.events.response.TradeItemForSpeedUpsResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
@@ -22,7 +26,9 @@ import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.actionobjects.TradeItemForSpeedUpsAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -43,8 +49,14 @@ public class TradeItemForSpeedUpsController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 	
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
+	@Autowired
+	protected HistoryUtils historyUtils;
+	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new TradeItemForSpeedUpsRequestEvent();
@@ -66,6 +78,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<UserItemUsageProto> itemsUsedProtos = reqProto.getItemsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
+		int gemsSpent = reqProto.getGemsSpent();
 
 		TradeItemForSpeedUpsResponseProto.Builder resBuilder = TradeItemForSpeedUpsResponseProto
 				.newBuilder();
@@ -111,7 +124,8 @@ public class TradeItemForSpeedUpsController extends EventController {
 
 			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
 					userId, itemsUsed, nuUserItems, itemForUserRetrieveUtil,
-					InsertUtils.get(), UpdateUtils.get());
+					InsertUtils.get(), UpdateUtils.get(), gemsSpent, miscMethods,
+					historyUtils);
 
 			tifsua.execute(resBuilder);
 
@@ -119,9 +133,25 @@ public class TradeItemForSpeedUpsController extends EventController {
 					TradeItemForSpeedUpsStatus.SUCCESS)) {
 				List<ItemForUserUsage> itemsUsedWithIds = tifsua
 						.getItemForUserUsages();
-				List<UserItemUsageProto> uiupList = createInfoProtoUtils
-						.createUserItemUsageProto(itemsUsedWithIds);
-				resBuilder.addAllItemsUsed(uiupList);
+				if(!itemsUsedWithIds.isEmpty()) {
+					List<UserItemUsageProto> uiupList = createInfoProtoUtils
+							.createUserItemUsageProto(itemsUsedWithIds);
+					resBuilder.addAllItemsUsed(uiupList);
+				}
+			}
+			
+			if (resBuilder.getStatus().equals(
+					TradeItemForSpeedUpsStatus.SUCCESS)) {
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								tifsua.getUserPojo(), null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
 			}
 
 			TradeItemForSpeedUpsResponseProto resProto = resBuilder.build();
@@ -154,7 +184,8 @@ public class TradeItemForSpeedUpsController extends EventController {
 					.getSimpleName());
 		}
 	}
-
+	
+	
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}

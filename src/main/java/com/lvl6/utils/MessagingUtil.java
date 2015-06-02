@@ -130,7 +130,7 @@ public class MessagingUtil {
 		//add new message to front of list
 		chatMessages.add(0, createInfoProtoUtils.createGroupChatMessageProto(
 				time, chatProto.getSender(), chatProto.getChatMessage(), true,
-				null, null, null));
+				null, null, null, ""));
 		eventWriter.processGlobalChatResponseEvent(ce);
 	}
 

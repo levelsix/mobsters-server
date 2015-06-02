@@ -51,6 +51,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
@@ -417,6 +418,11 @@ public class Tables {
 	 * The table mobsters.custom_menu_config
 	 */
 	public static final CustomMenuConfig CUSTOM_MENU_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig.CUSTOM_MENU_CONFIG;
+
+	/**
+	 * The table mobsters.custom_translations
+	 */
+	public static final CustomTranslations CUSTOM_TRANSLATIONS = com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations.CUSTOM_TRANSLATIONS;
 
 	/**
 	 * The table mobsters.event_persistent_config

@@ -27,6 +27,8 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomTranslations;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
@@ -45,8 +47,10 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.memetix.mst.language.Language;
@@ -92,6 +96,15 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
+	
+	@Autowired
+	protected CustomTranslationsDao customTranslationsDao;
 
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
@@ -184,8 +197,30 @@ public class SendGroupChatController extends EventController {
 //				}
 				
 //				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(detectedLanguage, censoredChatMessage);
-				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(null, censoredChatMessage);
-
+				String customTranslationLanguage = null;
+				List<CustomTranslations> result = customTranslationsDao.fetchByPhrase(censoredChatMessage.toLowerCase());
+				if(result.size() > 1) {
+					log.error("there's double entries in custom translations table for phrase {}", censoredChatMessage);
+				}
+				for(CustomTranslations ct : result) {
+					customTranslationLanguage = ct.getLanguage();
+				}
+				Map<TranslateLanguages, String> translateMap = null;
+				if(customTranslationLanguage == null) {
+					translateMap = translationUtils.translate(null, null, censoredChatMessage, toggle);
+				}
+				else {
+					translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
+							null, censoredChatMessage, toggle);
+				}
+				
+				for(TranslateLanguages tl : translateMap.keySet()) {
+					String translatedContent = translateMap.get(tl);
+					if(translatedContent.toLowerCase().contains("ArgumentOutOfRangeException".toLowerCase())) {
+						translateMap.put(tl, censoredChatMessage);
+						log.error("argumentoutofrangeexception for translating, word was {}", chatMessage);
+					}
+				}
 
 				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
 						.createMinimumUserProtoWithLevel(user, null,
@@ -198,7 +233,8 @@ public class SendGroupChatController extends EventController {
 //								censoredChatMessage, user.isAdmin(), "global msg", translateMap, miscMethods.convertFromLanguageToEnum(detectedLanguage));
 				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage);
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage,
+								translationUtils);
 				
 				chatProto.setMessage(gcmp);
 

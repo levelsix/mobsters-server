@@ -43,6 +43,8 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -84,6 +86,13 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
+	
 
 	private PrivateChatPostResponseProto pcprp;
 
@@ -230,7 +239,7 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
+						translatedMessage = translationUtils.translate(posterLanguage, recipientLanguage, censoredContent, toggle);
 
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatScope chatType = ChatScope.PRIVATE;

@@ -28,6 +28,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -53,6 +54,9 @@ public class TradeItemForResourcesController extends EventController {
 	
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -78,6 +82,7 @@ public class TradeItemForResourcesController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<Integer> itemIdsUsed = reqProto.getItemIdsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
+		int gemsSpent = reqProto.getGemsSpent();
 
 		Timestamp date = new Timestamp(reqProto.getClientTime());
 
@@ -120,7 +125,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
 					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
-					UpdateUtils.get(), miscMethods);
+					UpdateUtils.get(), miscMethods, gemsSpent, historyUtils);
 
 			tifsua.execute(resBuilder);
 
@@ -168,11 +173,11 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
-			TradeItemForResourcesAction tifsua) {
+			TradeItemForResourcesAction tifra) {
 		miscMethods.writeToUserCurrencyOneUser(userId, date,
-				tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
-				tifsua.getCurrentCurrencies(), tifsua.getReasons(),
-				tifsua.getDetails());
+				tifra.getCurrencyDeltas(), tifra.getPreviousCurrencies(),
+				tifra.getCurrentCurrencies(), tifra.getReasons(),
+				tifra.getDetails());
 	}
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
