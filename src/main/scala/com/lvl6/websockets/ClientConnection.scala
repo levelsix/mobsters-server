@@ -79,11 +79,21 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     ClientConnections.removeConnection(this)
   }
   
-  @OnMessage
+  /*@OnMessage
   def message(message:Array[Byte])={
     lastMessageReceived = new DateTime()
     logger.info(s"Received message on $this")
+  }*/
+  
+  
+  @OnMessage
+  def message(message:String)={
+    lastMessageReceived = new DateTime()
+    logger.info(s"Received message: $message")
+    session.get.getBasicRemote.sendText(s"You sent: $message")
   }
+  
+  
   
   @OnError
   def error(t:Throwable)={
