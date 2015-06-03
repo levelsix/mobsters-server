@@ -123,38 +123,43 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     if(responses.clanChanged) {
       changeClan(responses.newClanId)
     }
-    if(userId.isEmpty && !responses.userId.isEmpty()) {
-      this.userId = Some(responses.userId)
-    }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
       val bytes = EventParser.getResponseBytes(uuid, revent)
       //If it's the requester this should be their connection
-      if(userId.isEmpty || userId.get.equals(plyrId)) {
+      if(userId.get.equals(plyrId)) {
         sendToThisSocket(bytes)
       }else {
         ClientConnections.getConnection(plyrId) match{
           //If it's not the requester then the player might have a socket on this server
           case Some(lc)=> lc.sendToThisSocket(bytes)
      		  //If they are not on this server send to amqp
-          case None=> eventWriter.sendToSinglePlayer(plyrId, bytes)
+          case None=> {
+            logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
+            eventWriter.sendToSinglePlayer(plyrId, bytes)
+          }
         }
       }
     }
     responses.preDBResponseEvents.foreach{ revent =>
+      logger.info("Sending preDbResponse event to amqp")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))
     }
     responses.preDBFacebookEvents.foreach{ revent =>
+      logger.info("Sending preDbFacebookResponse event to amqp")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))  
     }
     responses.clanResponseEvents.foreach{ revent =>
+      logger.info("Sending clanResponse event to amqp")
       eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(uuid, revent.event))  
     }
     responses.globalChatResponseEvents.foreach{ revent =>
+      logger.info("Sending globalChatResponse event to amqp")
       eventWriter.sendGlobalChat(EventParser.getResponseBytes(uuid, revent))
     }
     responses.apnsResponseEvents.foreach{ revent =>
+      logger.info("Sending apnsResponse event to amqp")
       apnsWriter.handleEvent(revent)
     }
   }
@@ -178,6 +183,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       case Some(sess)=>{
         sess.isOpen() match{
           case true =>  {
+            logger.info(s"Sending message this this socket: $this")
         	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             sess.synchronized{sess.getBasicRemote.sendBinary(buff)}
           }
