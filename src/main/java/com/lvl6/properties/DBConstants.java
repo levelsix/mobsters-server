@@ -45,7 +45,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_RAID_STAGE_CONFIG = "clan_raid_stage_config";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG = "clan_raid_stage_monster_config";
 	public static final String TABLE_CLAN_RAID_STAGE_REWARD_CONFIG = "clan_raid_stage_reward_config";
-	public static final String TABLE_CUSTOM_TRANSLATION = "custom_translation";
+	public static final String TABLE_CUSTOM_TRANSLATION = "custom_translations";
 	public static final String TABLE_CUSTOM_MENU_CONFIG = "custom_menu_config";
 	public static final String TABLE_EVENT_PERSISTENT_CONFIG = "event_persistent_config";
 	public static final String TABLE_EVENT_PERSISTENT_FOR_USER = "event_persistent_for_user";
