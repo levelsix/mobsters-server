@@ -25,6 +25,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomTranslationRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -141,6 +142,9 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+	
+	@Autowired
+	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
 
 	@Autowired
 	protected EventPersistentRetrieveUtils eventPersistentRetrieveUtils;
@@ -338,6 +342,7 @@ public class ReloadAllRareChangeStaticData {
 		clanRaidStageRetrieveUtils.reload();
 		clanRaidStageRewardRetrieveUtils.reload();
 		customMenuRetrieveUtils.reload();
+		customTranslationRetrieveUtils.reload();
 		eventPersistentRetrieveUtils.reload();
 		//		ExpansionCostRetrieveUtils.reload();
 		fileDownloadRetrieveUtils.reload();
