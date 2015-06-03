@@ -191,33 +191,35 @@ public class SendGroupChatController extends EventController {
 				final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 						.newBuilder();
 
-//				Language detectedLanguage = miscMethods.detectedLanguage(censoredChatMessage);
-//				log.info("detected language={}", detectedLanguage);
+				Language detectedLanguage = translationUtils.detectedLanguage(censoredChatMessage, toggle);
+				log.info("detected language={}", detectedLanguage);
 				
-//				if (detectedLanguage == null) {
-//					// Default to the content language
-//					detectedLanguage = miscMethods.convertFromEnumToLanguage(globalLanguage);
-//					log.info("defaulting to content language={}", detectedLanguage);
-//				}
+				if (detectedLanguage == null) {
+					// Default to the content language
+					detectedLanguage = translationUtils.convertFromEnumToLanguage(globalLanguage);
+					log.info("defaulting to content language={}", detectedLanguage);
+				}
 				
-//				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(detectedLanguage, censoredChatMessage);
-				String customTranslationLanguage = null;
+//				Map<TranslateLanguages, String> translateMap = translationUtils.translateForGlobal(detectedLanguage, censoredChatMessage);
+//				String customTranslationLanguage = null;
 				Map<Integer, CustomTranslations> ctMap = customTranslationRetrieveUtils.getIdsToCustomTranslationss();
 			
 				for(int id : ctMap.keySet()) {
 					String phrase = ctMap.get(id).getPhrase();
 					if(phrase.equalsIgnoreCase(censoredChatMessage)) {
-						customTranslationLanguage = ctMap.get(id).getLanguage();
+						detectedLanguage = Language.valueOf(ctMap.get(id).getLanguage());
 					}
 				}
-				Map<TranslateLanguages, String> translateMap = null;
-				if(customTranslationLanguage == null) {
-					translateMap = translationUtils.translate(null, null, censoredChatMessage, toggle);
-				}
-				else {
-					translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
-							null, censoredChatMessage, toggle);
-				}
+//				Map<TranslateLanguages, String> translateMap = null;
+//				if(customTranslationLanguage == null) {
+//					translateMap = translationUtils.translate(null, null, censoredChatMessage, toggle);
+//				}
+//				else {
+//					translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
+//							null, censoredChatMessage, toggle);
+//				}
+				Map<TranslateLanguages, String> translateMap = translationUtils.translate(detectedLanguage, null, 
+						censoredChatMessage, toggle);
 				
 				for(TranslateLanguages tl : translateMap.keySet()) {
 					String translatedContent = translateMap.get(tl);
@@ -233,13 +235,15 @@ public class SendGroupChatController extends EventController {
 				chatProto.setSender(mupWithLvl);
 				chatProto.setScope(scope);
 
-//				GroupChatMessageProto gcmp = createInfoProtoUtils
-//						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-//								censoredChatMessage, user.isAdmin(), "global msg", translateMap, miscMethods.convertFromLanguageToEnum(detectedLanguage));
 				GroupChatMessageProto gcmp = createInfoProtoUtils
 						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage,
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap, 
+								translationUtils.convertFromLanguageToEnum(detectedLanguage, toggle),
 								translationUtils);
+//				GroupChatMessageProto gcmp = createInfoProtoUtils
+//						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
+//								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage,
+//								translationUtils);
 				
 				chatProto.setMessage(gcmp);
 
