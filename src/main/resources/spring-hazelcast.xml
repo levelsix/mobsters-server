@@ -36,7 +36,8 @@
 	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks" instance-ref="hazel" />
  
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
-
+	
+	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel"/>
 		
 	<hz:map id="initializationFlags" name="initializationFlags" instance-ref="hazel"/>
 	<!-- need to prevent more than one initialization per cluster restart -->
