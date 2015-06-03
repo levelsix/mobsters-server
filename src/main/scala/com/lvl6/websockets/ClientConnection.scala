@@ -187,7 +187,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
             logger.info(s"Sending message to this socket: $this")
         	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             synchronized{
-              sess.getBasicRemote.sendBinary(buff)
+              sess.getBasicRemote.sendBinary(buff, true)
               logger.info(s"Message sent")
             }
           }
