@@ -93,7 +93,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   def message(message:Array[Byte])={
     lastMessageReceived = new DateTime()
     logger.info(s"Received message on $this")
-    sess
+    sendToThisSocket("Sending a test message to client")
     //processEvent(message)
   }
   
