@@ -47,6 +47,7 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomTranslationRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
@@ -105,6 +106,9 @@ public class SendGroupChatController extends EventController {
 	
 	@Autowired
 	protected CustomTranslationsDao customTranslationsDao;
+	
+	@Autowired
+	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
 
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
@@ -198,12 +202,13 @@ public class SendGroupChatController extends EventController {
 				
 //				Map<TranslateLanguages, String> translateMap = miscMethods.translateForGlobal(detectedLanguage, censoredChatMessage);
 				String customTranslationLanguage = null;
-				List<CustomTranslations> result = customTranslationsDao.fetchByPhrase(censoredChatMessage.toLowerCase());
-				if(result.size() > 1) {
-					log.error("there's double entries in custom translations table for phrase {}", censoredChatMessage);
-				}
-				for(CustomTranslations ct : result) {
-					customTranslationLanguage = ct.getLanguage();
+				Map<Integer, CustomTranslations> ctMap = customTranslationRetrieveUtils.getIdsToCustomTranslationss();
+			
+				for(int id : ctMap.keySet()) {
+					String phrase = ctMap.get(id).getPhrase();
+					if(phrase.equalsIgnoreCase(censoredChatMessage)) {
+						customTranslationLanguage = ctMap.get(id).getLanguage();
+					}
 				}
 				Map<TranslateLanguages, String> translateMap = null;
 				if(customTranslationLanguage == null) {
