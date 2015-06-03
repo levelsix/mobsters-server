@@ -48,6 +48,7 @@ public class TranslationUtils {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
 			log.error("translateInBulk", e);
+			log.info("string array of text that exceptioned: {}", text);
 		}
 		return returnArray;
 	}
