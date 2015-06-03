@@ -45,6 +45,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -110,6 +111,9 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
@@ -189,7 +193,7 @@ public class PurchaseBoosterPackController extends EventController {
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
 					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil,
 					serverToggleRetrieveUtils, boosterItemUtils, gemsSpent, gachaCreditsChange,
-					createInfoProtoUtils);
+					createInfoProtoUtils, historyUtils);
 
 			pbpa.execute(resBuilder);
 
