@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -236,17 +237,41 @@ public class InAppPurchaseController extends EventController {
             URL url = new URL(PRODUCTION_URL);
 
             log.info("Sending purchase request to: {}", url.toString());
+            
+            URLConnection conn = null;
+            OutputStreamWriter wr = null;
+            BufferedReader rd = null;
 
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(
-                    conn.getOutputStream());
-            wr.write(jsonReceipt.toString());
-            wr.flush();
+            // Try 3 times in case apple fails
+            for (int i = 0; i < 3; i++) {
+            	try {
 
-            // Get the response
-            BufferedReader rd = new BufferedReader(new InputStreamReader(
-                    conn.getInputStream()));
+                    conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    wr = new OutputStreamWriter(
+                            conn.getOutputStream());
+                    wr.write(jsonReceipt.toString());
+                    wr.flush();
+
+                    // Get the response
+                    rd = new BufferedReader(new InputStreamReader(
+                            conn.getInputStream()));
+            	} catch (IOException io) {
+            		log.error("failed to get response. iteration "+i, io);
+            		
+            		if (wr != null) {
+                		wr.close();
+            		}
+            		
+            		if (rd != null) {
+            			rd.close();
+            		}
+            		
+            		if (i == 2) {
+            			throw new Exception("failed to contact apple server. do something with the receipt." + jsonReceipt);
+            		}
+            	}
+            }
 
             String responseString = "";
             String line;
