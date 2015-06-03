@@ -39,6 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import scala.beans.BeanProperty
 import javax.annotation.Resource
 import com.lvl6.events.response.StartupResponseEvent
+import com.lvl6.server.eventsender.PreDBResponseEvent
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -143,11 +144,11 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       }
     }
     responses.preDBResponseEvents.foreach{ revent =>
-      logger.info("Sending preDbResponse event to amqp")
+      logger.info("Sending preDbResponse event")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))
     }
     responses.preDBFacebookEvents.foreach{ revent =>
-      logger.info("Sending preDbFacebookResponse event to amqp")
+      logger.info("Sending preDbFacebookResponse event")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))  
     }
     responses.clanResponseEvents.foreach{ revent =>
@@ -159,7 +160,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       eventWriter.sendGlobalChat(EventParser.getResponseBytes(uuid, revent))
     }
     responses.apnsResponseEvents.foreach{ revent =>
-      logger.info("Sending apnsResponse event to amqp")
+      logger.info("Sending apnsResponse event")
       apnsWriter.handleEvent(revent)
     }
   }
@@ -183,7 +184,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       case Some(sess)=>{
         sess.isOpen() match{
           case true =>  {
-            logger.info(s"Sending message this this socket: $this")
+            logger.info(s"Sending message to this socket: $this")
         	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             sess.synchronized{sess.getBasicRemote.sendBinary(buff)}
           }
