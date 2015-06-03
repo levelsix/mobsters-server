@@ -2362,6 +2362,7 @@ public class CreateInfoProtoUtils {
 		ItemGemPriceProto.Builder igppb = ItemGemPriceProto.newBuilder();
 		igppb.setGemPrice(mjri.getGemPrice());
 		igppb.setItemId(mjri.getItemId());
+		igppb.setStructId(mjri.getStructId());
 
 		return igppb.build();
 	}
@@ -5658,6 +5659,7 @@ public class CreateInfoProtoUtils {
 			ItemGemPriceProto.Builder b = ItemGemPriceProto.newBuilder();
 			b.setItemId(mjric.getItemId());
 			b.setGemPrice(mjric.getGemPrice());
+			b.setStructId(mjric.getStructId());
 			igppList.add(b.build());
 		}
 		return igppList;
