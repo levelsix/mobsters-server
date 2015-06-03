@@ -93,7 +93,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   def message(message:Array[Byte])={
     lastMessageReceived = new DateTime()
     logger.info(s"Received message on $this")
-    processEvent(message)
+    sess
+    //processEvent(message)
   }
   
 /*  
@@ -188,6 +189,27 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
         	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             synchronized{
               sess.getBasicRemote.sendBinary(buff, true)
+              logger.info(s"Message sent")
+            }
+          }
+          case false => logger.warn(s"Cannot send message. Socket is closed. $this")
+        }
+      }
+      case None=>{
+        logger.warn(s"Cannot send message. There is no session: $this")
+      }
+    }
+  }
+  
+  def sendToThisSocket(bytes:String) = {
+    session match{
+      case Some(sess)=>{
+        sess.isOpen() match{
+          case true =>  {
+            logger.info(s"Sending message to this socket: $this")
+            //val buff = ByteBuffer.allocate(bytes.length).put(bytes)
+            synchronized{
+              sess.getBasicRemote.sendText(bytes)
               logger.info(s"Message sent")
             }
           }
