@@ -1183,27 +1183,27 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
     java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> 
-        getRefreshMiniJobItemPricesList();
+        getStructureItemPricesList();
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index);
+    com.lvl6.proto.ItemsProto.ItemGemPriceProto getStructureItemPrices(int index);
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    int getRefreshMiniJobItemPricesCount();
+    int getStructureItemPricesCount();
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
     java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-        getRefreshMiniJobItemPricesOrBuilderList();
+        getStructureItemPricesOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
+    com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getStructureItemPricesOrBuilder(
         int index);
   }
   /**
@@ -1615,10 +1615,10 @@ public final class StaticDataStuffProto {
             }
             case 378: {
               if (!((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
-                refreshMiniJobItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>();
+                structureItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>();
                 mutable_bitField1_ |= 0x00000800;
               }
-              refreshMiniJobItemPrices_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemGemPriceProto.PARSER, extensionRegistry));
+              structureItemPrices_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemGemPriceProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1753,7 +1753,7 @@ public final class StaticDataStuffProto {
           clanGifts_ = java.util.Collections.unmodifiableList(clanGifts_);
         }
         if (((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
-          refreshMiniJobItemPrices_ = java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+          structureItemPrices_ = java.util.Collections.unmodifiableList(structureItemPrices_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3424,39 +3424,39 @@ public final class StaticDataStuffProto {
       return clanGifts_.get(index);
     }
 
-    public static final int REFRESHMINIJOBITEMPRICES_FIELD_NUMBER = 47;
-    private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> refreshMiniJobItemPrices_;
+    public static final int STRUCTUREITEMPRICES_FIELD_NUMBER = 47;
+    private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> structureItemPrices_;
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getRefreshMiniJobItemPricesList() {
-      return refreshMiniJobItemPrices_;
+    public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getStructureItemPricesList() {
+      return structureItemPrices_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
     public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-        getRefreshMiniJobItemPricesOrBuilderList() {
-      return refreshMiniJobItemPrices_;
+        getStructureItemPricesOrBuilderList() {
+      return structureItemPrices_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    public int getRefreshMiniJobItemPricesCount() {
-      return refreshMiniJobItemPrices_.size();
+    public int getStructureItemPricesCount() {
+      return structureItemPrices_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    public com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index) {
-      return refreshMiniJobItemPrices_.get(index);
+    public com.lvl6.proto.ItemsProto.ItemGemPriceProto getStructureItemPrices(int index) {
+      return structureItemPrices_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+     * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
-    public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
+    public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getStructureItemPricesOrBuilder(
         int index) {
-      return refreshMiniJobItemPrices_.get(index);
+      return structureItemPrices_.get(index);
     }
 
     private void initFields() {
@@ -3503,7 +3503,7 @@ public final class StaticDataStuffProto {
       battleItem_ = java.util.Collections.emptyList();
       pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
       clanGifts_ = java.util.Collections.emptyList();
-      refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
+      structureItemPrices_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3647,8 +3647,8 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < clanGifts_.size(); i++) {
         output.writeMessage(46, clanGifts_.get(i));
       }
-      for (int i = 0; i < refreshMiniJobItemPrices_.size(); i++) {
-        output.writeMessage(47, refreshMiniJobItemPrices_.get(i));
+      for (int i = 0; i < structureItemPrices_.size(); i++) {
+        output.writeMessage(47, structureItemPrices_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3831,9 +3831,9 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(46, clanGifts_.get(i));
       }
-      for (int i = 0; i < refreshMiniJobItemPrices_.size(); i++) {
+      for (int i = 0; i < structureItemPrices_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(47, refreshMiniJobItemPrices_.get(i));
+          .computeMessageSize(47, structureItemPrices_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3987,7 +3987,7 @@ public final class StaticDataStuffProto {
           getBattleItemFieldBuilder();
           getPvpBoardObstacleProtosFieldBuilder();
           getClanGiftsFieldBuilder();
-          getRefreshMiniJobItemPricesFieldBuilder();
+          getStructureItemPricesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4254,11 +4254,11 @@ public final class StaticDataStuffProto {
         } else {
           clanGiftsBuilder_.clear();
         }
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
+        if (structureItemPricesBuilder_ == null) {
+          structureItemPrices_ = java.util.Collections.emptyList();
           bitField1_ = (bitField1_ & ~0x00000800);
         } else {
-          refreshMiniJobItemPricesBuilder_.clear();
+          structureItemPricesBuilder_.clear();
         }
         return this;
       }
@@ -4674,14 +4674,14 @@ public final class StaticDataStuffProto {
         } else {
           result.clanGifts_ = clanGiftsBuilder_.build();
         }
-        if (refreshMiniJobItemPricesBuilder_ == null) {
+        if (structureItemPricesBuilder_ == null) {
           if (((bitField1_ & 0x00000800) == 0x00000800)) {
-            refreshMiniJobItemPrices_ = java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+            structureItemPrices_ = java.util.Collections.unmodifiableList(structureItemPrices_);
             bitField1_ = (bitField1_ & ~0x00000800);
           }
-          result.refreshMiniJobItemPrices_ = refreshMiniJobItemPrices_;
+          result.structureItemPrices_ = structureItemPrices_;
         } else {
-          result.refreshMiniJobItemPrices_ = refreshMiniJobItemPricesBuilder_.build();
+          result.structureItemPrices_ = structureItemPricesBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -5771,29 +5771,29 @@ public final class StaticDataStuffProto {
             }
           }
         }
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          if (!other.refreshMiniJobItemPrices_.isEmpty()) {
-            if (refreshMiniJobItemPrices_.isEmpty()) {
-              refreshMiniJobItemPrices_ = other.refreshMiniJobItemPrices_;
+        if (structureItemPricesBuilder_ == null) {
+          if (!other.structureItemPrices_.isEmpty()) {
+            if (structureItemPrices_.isEmpty()) {
+              structureItemPrices_ = other.structureItemPrices_;
               bitField1_ = (bitField1_ & ~0x00000800);
             } else {
-              ensureRefreshMiniJobItemPricesIsMutable();
-              refreshMiniJobItemPrices_.addAll(other.refreshMiniJobItemPrices_);
+              ensureStructureItemPricesIsMutable();
+              structureItemPrices_.addAll(other.structureItemPrices_);
             }
             onChanged();
           }
         } else {
-          if (!other.refreshMiniJobItemPrices_.isEmpty()) {
-            if (refreshMiniJobItemPricesBuilder_.isEmpty()) {
-              refreshMiniJobItemPricesBuilder_.dispose();
-              refreshMiniJobItemPricesBuilder_ = null;
-              refreshMiniJobItemPrices_ = other.refreshMiniJobItemPrices_;
+          if (!other.structureItemPrices_.isEmpty()) {
+            if (structureItemPricesBuilder_.isEmpty()) {
+              structureItemPricesBuilder_.dispose();
+              structureItemPricesBuilder_ = null;
+              structureItemPrices_ = other.structureItemPrices_;
               bitField1_ = (bitField1_ & ~0x00000800);
-              refreshMiniJobItemPricesBuilder_ = 
+              structureItemPricesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getRefreshMiniJobItemPricesFieldBuilder() : null;
+                   getStructureItemPricesFieldBuilder() : null;
             } else {
-              refreshMiniJobItemPricesBuilder_.addAllMessages(other.refreshMiniJobItemPrices_);
+              structureItemPricesBuilder_.addAllMessages(other.structureItemPrices_);
             }
           }
         }
@@ -16473,244 +16473,244 @@ public final class StaticDataStuffProto {
         return clanGiftsBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> refreshMiniJobItemPrices_ =
+      private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> structureItemPrices_ =
         java.util.Collections.emptyList();
-      private void ensureRefreshMiniJobItemPricesIsMutable() {
+      private void ensureStructureItemPricesIsMutable() {
         if (!((bitField1_ & 0x00000800) == 0x00000800)) {
-          refreshMiniJobItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>(refreshMiniJobItemPrices_);
+          structureItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>(structureItemPrices_);
           bitField1_ |= 0x00000800;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> refreshMiniJobItemPricesBuilder_;
+          com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> structureItemPricesBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getRefreshMiniJobItemPricesList() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+      public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> getStructureItemPricesList() {
+        if (structureItemPricesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(structureItemPrices_);
         } else {
-          return refreshMiniJobItemPricesBuilder_.getMessageList();
+          return structureItemPricesBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public int getRefreshMiniJobItemPricesCount() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return refreshMiniJobItemPrices_.size();
+      public int getStructureItemPricesCount() {
+        if (structureItemPricesBuilder_ == null) {
+          return structureItemPrices_.size();
         } else {
-          return refreshMiniJobItemPricesBuilder_.getCount();
+          return structureItemPricesBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto getRefreshMiniJobItemPrices(int index) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return refreshMiniJobItemPrices_.get(index);
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto getStructureItemPrices(int index) {
+        if (structureItemPricesBuilder_ == null) {
+          return structureItemPrices_.get(index);
         } else {
-          return refreshMiniJobItemPricesBuilder_.getMessage(index);
+          return structureItemPricesBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder setRefreshMiniJobItemPrices(
+      public Builder setStructureItemPrices(
           int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
+        if (structureItemPricesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.set(index, value);
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.set(index, value);
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.setMessage(index, value);
+          structureItemPricesBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder setRefreshMiniJobItemPrices(
+      public Builder setStructureItemPrices(
           int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.set(index, builderForValue.build());
+        if (structureItemPricesBuilder_ == null) {
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.set(index, builderForValue.build());
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.setMessage(index, builderForValue.build());
+          structureItemPricesBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder addRefreshMiniJobItemPrices(com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
+      public Builder addStructureItemPrices(com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
+        if (structureItemPricesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(value);
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.add(value);
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(value);
+          structureItemPricesBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder addRefreshMiniJobItemPrices(
+      public Builder addStructureItemPrices(
           int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto value) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
+        if (structureItemPricesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(index, value);
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.add(index, value);
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(index, value);
+          structureItemPricesBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder addRefreshMiniJobItemPrices(
+      public Builder addStructureItemPrices(
           com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(builderForValue.build());
+        if (structureItemPricesBuilder_ == null) {
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.add(builderForValue.build());
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(builderForValue.build());
+          structureItemPricesBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder addRefreshMiniJobItemPrices(
+      public Builder addStructureItemPrices(
           int index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder builderForValue) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.add(index, builderForValue.build());
+        if (structureItemPricesBuilder_ == null) {
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.add(index, builderForValue.build());
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.addMessage(index, builderForValue.build());
+          structureItemPricesBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder addAllRefreshMiniJobItemPrices(
+      public Builder addAllStructureItemPrices(
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProto> values) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
+        if (structureItemPricesBuilder_ == null) {
+          ensureStructureItemPricesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, refreshMiniJobItemPrices_);
+              values, structureItemPrices_);
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.addAllMessages(values);
+          structureItemPricesBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder clearRefreshMiniJobItemPrices() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          refreshMiniJobItemPrices_ = java.util.Collections.emptyList();
+      public Builder clearStructureItemPrices() {
+        if (structureItemPricesBuilder_ == null) {
+          structureItemPrices_ = java.util.Collections.emptyList();
           bitField1_ = (bitField1_ & ~0x00000800);
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.clear();
+          structureItemPricesBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public Builder removeRefreshMiniJobItemPrices(int index) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          ensureRefreshMiniJobItemPricesIsMutable();
-          refreshMiniJobItemPrices_.remove(index);
+      public Builder removeStructureItemPrices(int index) {
+        if (structureItemPricesBuilder_ == null) {
+          ensureStructureItemPricesIsMutable();
+          structureItemPrices_.remove(index);
           onChanged();
         } else {
-          refreshMiniJobItemPricesBuilder_.remove(index);
+          structureItemPricesBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder getRefreshMiniJobItemPricesBuilder(
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder getStructureItemPricesBuilder(
           int index) {
-        return getRefreshMiniJobItemPricesFieldBuilder().getBuilder(index);
+        return getStructureItemPricesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getRefreshMiniJobItemPricesOrBuilder(
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder getStructureItemPricesOrBuilder(
           int index) {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          return refreshMiniJobItemPrices_.get(index);  } else {
-          return refreshMiniJobItemPricesBuilder_.getMessageOrBuilder(index);
+        if (structureItemPricesBuilder_ == null) {
+          return structureItemPrices_.get(index);  } else {
+          return structureItemPricesBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
       public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-           getRefreshMiniJobItemPricesOrBuilderList() {
-        if (refreshMiniJobItemPricesBuilder_ != null) {
-          return refreshMiniJobItemPricesBuilder_.getMessageOrBuilderList();
+           getStructureItemPricesOrBuilderList() {
+        if (structureItemPricesBuilder_ != null) {
+          return structureItemPricesBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(refreshMiniJobItemPrices_);
+          return java.util.Collections.unmodifiableList(structureItemPrices_);
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addRefreshMiniJobItemPricesBuilder() {
-        return getRefreshMiniJobItemPricesFieldBuilder().addBuilder(
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addStructureItemPricesBuilder() {
+        return getStructureItemPricesFieldBuilder().addBuilder(
             com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
-      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addRefreshMiniJobItemPricesBuilder(
+      public com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder addStructureItemPricesBuilder(
           int index) {
-        return getRefreshMiniJobItemPricesFieldBuilder().addBuilder(
+        return getStructureItemPricesFieldBuilder().addBuilder(
             index, com.lvl6.proto.ItemsProto.ItemGemPriceProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.ItemGemPriceProto refreshMiniJobItemPrices = 47;</code>
+       * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
        */
       public java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder> 
-           getRefreshMiniJobItemPricesBuilderList() {
-        return getRefreshMiniJobItemPricesFieldBuilder().getBuilderList();
+           getStructureItemPricesBuilderList() {
+        return getStructureItemPricesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder> 
-          getRefreshMiniJobItemPricesFieldBuilder() {
-        if (refreshMiniJobItemPricesBuilder_ == null) {
-          refreshMiniJobItemPricesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getStructureItemPricesFieldBuilder() {
+        if (structureItemPricesBuilder_ == null) {
+          structureItemPricesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder>(
-                  refreshMiniJobItemPrices_,
+                  structureItemPrices_,
                   ((bitField1_ & 0x00000800) == 0x00000800),
                   getParentForChildren(),
                   isClean());
-          refreshMiniJobItemPrices_ = null;
+          structureItemPrices_ = null;
         }
-        return refreshMiniJobItemPricesBuilder_;
+        return structureItemPricesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
@@ -16746,7 +16746,7 @@ public final class StaticDataStuffProto {
       "o\032\022Prerequisite.proto\032\013Quest.proto\032\016Rese" +
       "arch.proto\032\013Sales.proto\032\014Reward.proto\032\013S" +
       "kill.proto\032\017Structure.proto\032\nTask.proto\032" +
-      "\nUser.proto\"\252\023\n\017StaticDataProto\0220\n\006sende" +
+      "\nUser.proto\"\245\023\n\017StaticDataProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
       "o\022>\n\016expansionCosts\030\002 \003(\0132&.com.lvl6.pro" +
       "to.CityExpansionCostProto\0220\n\tallCities\030\003" +
@@ -16806,9 +16806,9 @@ public final class StaticDataStuffProto {
       "to.BattleItemProto\022E\n\026pvpBoardObstaclePr" +
       "otos\030( \003(\0132%.com.lvl6.proto.PvpBoardObst" +
       "acleProto\0220\n\tclanGifts\030. \003(\0132\035.com.lvl6." +
-      "proto.ClanGiftProto\022C\n\030refreshMiniJobIte" +
-      "mPrices\030/ \003(\0132!.com.lvl6.proto.ItemGemPr",
-      "iceProtoB\026B\024StaticDataStuffProto"
+      "proto.ClanGiftProto\022>\n\023structureItemPric" +
+      "es\030/ \003(\0132!.com.lvl6.proto.ItemGemPricePr",
+      "otoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16846,7 +16846,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "ClanGifts", "RefreshMiniJobItemPrices", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "ClanGifts", "StructureItemPrices", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();

@@ -99,7 +99,7 @@ message StaticDataProto {
 	
 	repeated ClanGiftProto clanGifts = 46;
 	
-	repeated ItemGemPriceProto refreshMiniJobItemPrices = 47;
+	repeated ItemGemPriceProto structureItemPrices = 47;
 	
 	
 }

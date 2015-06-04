@@ -1186,7 +1186,7 @@ public class StaticDataContainer {
 				.getConnection()).set(SQLDialect.MYSQL);
 		MiniJobRefreshItemConfigDao miniJobRefreshDao = new MiniJobRefreshItemConfigDao(config);
 		List<MiniJobRefreshItemConfig> mjricList = miniJobRefreshDao.findAll();
-		sdpb.addAllRefreshMiniJobItemPrices(createInfoProtoUtils.
+		sdpb.addAllStructureItemPrices(createInfoProtoUtils.
 				createItemGemPriceProtoFromMiniJobs(mjricList));
 	}
 
