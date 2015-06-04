@@ -39,6 +39,14 @@
 	
 	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel"/>
 	
+	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" instance-ref="hazel"/>
+	
+	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap" instance-ref="hazel"/>
+	
+	<hz:map id="chatsPastHourMap" name="chatsPastHourMap" instance-ref="hazel"/>
+
+	<hz:map id="clanMemberCountMap" name="clanMemberCountMap" instance-ref="hazel"/>
+
 		
 	<hz:map id="initializationFlags" name="initializationFlags" instance-ref="hazel"/>
 	<!-- need to prevent more than one initialization per cluster restart -->
