@@ -49,6 +49,7 @@ trait GameEventHandler extends LazyLogging  {
         if(appMode.isMaintenanceMode()){
           handleMaintenanceMode(parsedEvent)                
         }else{
+          logger.info(s"Processing event: $parsedEvent")
           updatePlayerToServerMaps(parsedEvent)
           val eventUuid = parsedEvent.eventProto.getEventUuid
           val playerId = parsedEvent.event.getPlayerId
@@ -74,7 +75,7 @@ trait GameEventHandler extends LazyLogging  {
         }
       }
     }catch{
-      case t:Throwable => logger.error("Error processing amqp message", t)
+      case t:Throwable => logger.error("Error processing message", t)
     }
   }
   

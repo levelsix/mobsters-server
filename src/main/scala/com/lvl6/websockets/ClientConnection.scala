@@ -127,6 +127,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
+      logger.info(s"Sending normal response: $revent")
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
       val bytes = EventParser.getResponseBytes(uuid, revent)
       //If it's the requester this should be their connection
@@ -145,15 +146,15 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       }
     }
     responses.preDBResponseEvents.foreach{ revent =>
-      logger.info("Sending preDbResponse event")
+      logger.info(s"Sending preDbResponse event: $revent")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))
     }
     responses.preDBFacebookEvents.foreach{ revent =>
-      logger.info("Sending preDbFacebookResponse event")
+      logger.info(s"Sending preDbFacebookResponse event: $revent")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))  
     }
     responses.clanResponseEvents.foreach{ revent =>
-      logger.info("Sending clanResponse event to amqp")
+      logger.info(s"Sending clanResponse event to amqp: $revent")
       eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(uuid, revent.event))  
     }
     responses.globalChatResponseEvents.foreach{ revent =>
