@@ -225,6 +225,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   //rabbit listener
   def onMessage(msg:Message) = {
+    logger.info(s"Recieved message from amqp on socket: $this")
     sendToThisSocket(msg.getBody)
   }
   
@@ -241,6 +242,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     globalChatListener match{
       case Some(gcl) => //already setup
       case None => {
+        logger.info(s"Setting up global chat listener for $this")
         globalChatListener = Some(setupRabbitListener(chatExchange, globalchatRoutingKey))
       }
     }
@@ -248,7 +250,10 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       case Some(uidl) => //already setup
       case None => {
         userId match {
-          case Some(uid) => userIdListener = Some(setupRabbitListener(gameExchange, toUserRoutingKey(uid)))
+          case Some(uid) => {
+            logger.info(s"Setting up userId listener for $this")
+            userIdListener = Some(setupRabbitListener(gameExchange, toUserRoutingKey(uid)))
+          }
           case None =>
         }
       }
@@ -257,7 +262,10 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       case Some(cidl)=> //already setup
       case None =>{
         clanId match{
-          case Some(cid)=> clanIdListener = Some(setupRabbitListener(gameExchange, clanRoutingKey(cid)))
+          case Some(cid)=> {
+            logger.info(s"Setting up clanId listener for $this")
+            clanIdListener = Some(setupRabbitListener(gameExchange, clanRoutingKey(cid)))
+          }
           case None=>
         }
       }
