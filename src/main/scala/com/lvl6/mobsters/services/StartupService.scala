@@ -652,6 +652,8 @@ class StartupService extends LazyLogging {
         var clan: Clan = null;
         if (user.getClanId() != null) {
           clan = fillMe.getClanIdsToClans().get(user.getClanId());
+          responses.clanChanged = true;//for setting up amqp clan listeners
+          responses.newClanId = user.getClanId()
         }
         val fup = createInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
         resBuilder.setSender(fup);
