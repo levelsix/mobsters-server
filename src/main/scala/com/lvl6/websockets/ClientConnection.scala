@@ -280,6 +280,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     container.setConnectionFactory(rabbitConnectionFactory);
     container.setQueues(queue)
     container.setMessageListener(this);
+    container.start();
     amqpAdmin.declareBinding(binding)
     ClientRabbitListener(routingKey, queue, binding, container)
   }
