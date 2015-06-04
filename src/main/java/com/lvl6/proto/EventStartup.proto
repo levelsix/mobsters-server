@@ -419,7 +419,13 @@ message ForceLogoutResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+//when socket disconnects, this allows client to reestablish user id/clan id
+message ReconnectRequestProto {
+	optional MinimumUserProto sender = 1;
+}
 
-
+message ReconnectResponseProto {
+	optional MinimumUserProto sender = 1;
+}
 
 
