@@ -52,7 +52,7 @@ public class ReconnectController extends EventController {
 		resEvent.setResponseProto(resProto);
 		responses.normalResponseEvents().add(resEvent);
 		
-		responses.userId_$eq(senderProto.getUserUuid());
+		responses.setUserId(senderProto.getUserUuid());
 		
 		if (senderProto.hasClan() && senderProto.getClan().getClanUuid() != null && senderProto.getClan().getClanUuid().length() > 0) {
 			responses.newClanId_$eq(senderProto.getClan().getClanUuid());
