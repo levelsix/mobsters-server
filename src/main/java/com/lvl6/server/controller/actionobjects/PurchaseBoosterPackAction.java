@@ -6,9 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.jooq.Configuration;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +15,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemConfigDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
@@ -41,8 +34,8 @@ import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -184,8 +177,9 @@ public class PurchaseBoosterPackAction {
 	}
 	
 	public void setUpDaos() {
-		Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
-		uchDao = new UserCurrencyHistoryDao(config);
+		//Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
+		uchDao = AppContext.getApplicationContext().getBean(UserCurrencyHistoryDao.class);//TODO: These actions should be created in spring
+		//I will modify them to support autowiring
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
