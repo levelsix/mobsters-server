@@ -281,6 +281,9 @@ public class RequestJoinClanController extends EventController {
 									rjca.getUser(), null, rjca.getClan());
 					resEventUpdate.setTag(event.getTag());
 					responses.normalResponseEvents().add(resEventUpdate);
+					responses.setUserId(userId);
+					responses.setClanChanged(true);
+					responses.setNewClanId(clanId);
 
 					//this is so user gets all up to date clan information
 					sendClanData(event, senderProto, userId, cdp, responses);

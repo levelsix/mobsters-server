@@ -224,6 +224,11 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			} else {
 				//if success to clan and the requester
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
+				if(accept) {
+					responses.setUserId(userId);
+					responses.setClanChanged(true);
+					responses.setNewClanId(clanId);
+				}
 				// Send message to the new guy
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						requesterId);

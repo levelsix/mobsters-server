@@ -26,8 +26,9 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.server.controller.utils.ResourceUtil;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -145,6 +146,9 @@ public class CreateClanController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());  
 			responses.normalResponseEvents().add(resEvent);
+			responses.setUserId(userId);
+			responses.setClanChanged(true);
+			responses.setNewClanId(cca.getClanId());
 			resEvent.setResponseProto(resBuilder.build());
 
 			if (CreateClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
