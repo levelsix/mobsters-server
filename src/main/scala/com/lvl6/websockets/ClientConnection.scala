@@ -210,7 +210,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
           case true =>  {
             logger.info(s"Sending message to this socket: $this")
             //val buff = ByteBuffer.allocate(bytes.length).put(bytes)
-            synchronized{
+            sess.synchronized{
               sess.getBasicRemote.sendText(bytes)
               logger.info(s"Message sent: $bytes")
             }
@@ -227,7 +227,11 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   //rabbit listener
   def onMessage(msg:Message) = {
     logger.info(s"Recieved message from amqp on socket: $this")
-    sendToThisSocket(msg.getBody)
+    try {
+      sendToThisSocket(msg.getBody)
+    }catch{
+      case t:Throwable => logger.error("Error sending amqp message to socket", t)
+    }
   }
   
   
