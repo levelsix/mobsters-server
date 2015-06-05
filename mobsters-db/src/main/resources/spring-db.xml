@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/tx 
      	http://www.springframework.org/schema/tx/spring-tx.xsd
 		">
-	
+
 	<bean id="dynamoDBService" class="com.lvl6.server.dynamodb.DynamoDBService">
 		<property name="tablePrefix" value="${dynamodb.table.prefix}" />
 		<property name="isLocal" value="${dynamodb.isLocal}" />
@@ -84,17 +84,28 @@
         <property name="connectionProvider" ref="connectionProvider" />
     </bean>
     
-<!--     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftConfigDao" id="giftConfigDao"> -->
-<!--         <constructor-arg index="0" ref="config" /> -->
-<!--     </bean> -->
+    <bean class="org.jooq.impl.DefaultDSLContext" id="dslContext">
+       <constructor-arg index="0" ref="config" />
+    </bean>
 
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao" id="CustomTranslationsDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftConfigDao" id="giftConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftForTangoUserDao" id="giftForTangoUserDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftRewardConfigDao" id="giftRewardConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao" id="PvpLeagueForUserDao">
         <constructor-arg index="0" ref="config" />
     </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao" id="CustomTranslationsDao">
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao" id="UserCurrencyHistoryDao">
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SecretGiftConfigDao" id="secretGiftConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
 <!--     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao" id="structureForUserDao"> -->

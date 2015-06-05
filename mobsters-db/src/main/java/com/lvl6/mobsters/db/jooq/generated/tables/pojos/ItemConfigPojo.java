@@ -39,7 +39,6 @@ public class ItemConfigPojo implements IItemConfig {
 	private String  itemType;
 	private Integer staticDataId;
 	private Integer amount;
-	private Double  secretGiftChance;
 	private Boolean alwaysDisplayToUser;
 	private String  actionGameType;
 	private String  quality;
@@ -54,7 +53,6 @@ public class ItemConfigPojo implements IItemConfig {
 		this.itemType = value.itemType;
 		this.staticDataId = value.staticDataId;
 		this.amount = value.amount;
-		this.secretGiftChance = value.secretGiftChance;
 		this.alwaysDisplayToUser = value.alwaysDisplayToUser;
 		this.actionGameType = value.actionGameType;
 		this.quality = value.quality;
@@ -68,7 +66,6 @@ public class ItemConfigPojo implements IItemConfig {
 		String  itemType,
 		Integer staticDataId,
 		Integer amount,
-		Double  secretGiftChance,
 		Boolean alwaysDisplayToUser,
 		String  actionGameType,
 		String  quality
@@ -80,7 +77,6 @@ public class ItemConfigPojo implements IItemConfig {
 		this.itemType = itemType;
 		this.staticDataId = staticDataId;
 		this.amount = amount;
-		this.secretGiftChance = secretGiftChance;
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
 		this.actionGameType = actionGameType;
 		this.quality = quality;
@@ -176,18 +172,6 @@ public class ItemConfigPojo implements IItemConfig {
 		return this;
 	}
 
-	@Column(name = "secret_gift_chance", precision = 12)
-	@Override
-	public Double getSecretGiftChance() {
-		return this.secretGiftChance;
-	}
-
-	@Override
-	public ItemConfigPojo setSecretGiftChance(Double secretGiftChance) {
-		this.secretGiftChance = secretGiftChance;
-		return this;
-	}
-
 	@Column(name = "always_display_to_user", precision = 1)
 	@Override
 	public Boolean getAlwaysDisplayToUser() {
@@ -242,7 +226,6 @@ public class ItemConfigPojo implements IItemConfig {
 		setItemType(from.getItemType());
 		setStaticDataId(from.getStaticDataId());
 		setAmount(from.getAmount());
-		setSecretGiftChance(from.getSecretGiftChance());
 		setAlwaysDisplayToUser(from.getAlwaysDisplayToUser());
 		setActionGameType(from.getActionGameType());
 		setQuality(from.getQuality());

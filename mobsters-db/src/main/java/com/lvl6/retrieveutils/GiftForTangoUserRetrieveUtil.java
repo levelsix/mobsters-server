@@ -21,7 +21,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.GiftForTangoUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftForTangoUserDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -41,8 +42,12 @@ public class GiftForTangoUserRetrieveUtil {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	//TODO: Consider deleting, rendered obsolete with GiftRewardConfigDao
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
+
+	@Autowired
+	protected GiftForTangoUserDao giftForTangoUserDao;
 
 	//CONTROLLER LOGIC******************************************************************
 
@@ -92,6 +97,35 @@ public class GiftForTangoUserRetrieveUtil {
 		return gftuList;
 	}
 
+	public GiftForTangoUser getGftuForGfuId(String gfuId) {
+		GiftForTangoUser gftu = null;
+		if (null == gfuId || gfuId.isEmpty()) {
+			return gftu;
+		}
+
+		/*Object[] values = new Object[] { gfuId };
+		String query = String.format("select * from %s where %s in (?)",
+				TABLE_NAME, DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID );
+				log.info("getGftuForGfuIds() query={} values={}", query, values);
+		*/
+		try {
+			/*List<GiftForTangoUser> gftuList = this.jdbcTemplate.query(
+					query, values, rowMapper);
+
+			if (null != gftuList && !gftuList.isEmpty())
+			{
+				gftu = gftuList.get(0);
+			}*/
+
+			gftu = giftForTangoUserDao.fetchOneByGiftForUserId(gfuId);
+		} catch (Exception e) {
+			log.error(String.format(
+					"could not retrieve GiftForTangoUser for gfuId=%s",
+					gfuId), e);
+		}
+		return gftu;
+	}
+
 	public QueryConstructionUtil getQueryConstructionUtil() {
 		return queryConstructionUtil;
 	}
@@ -123,10 +157,8 @@ public class GiftForTangoUserRetrieveUtil {
 			GiftForTangoUser gftu = new GiftForTangoUser();
 			gftu.setGiftForUserId(rs
 					.getString(DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID));
-			gftu.setGifterUserId(rs
-					.getString(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_USER_ID));
-			gftu.setGifterTangoUserId(rs
-					.getString(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_TANGO_USER_ID));
+			gftu.setGifterTangoName(rs
+					.getString(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_TANGO_NAME));
 
 			return gftu;
 		}

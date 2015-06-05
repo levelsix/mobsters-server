@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForBoosterRequestEvent;
+import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.TradeItemForBoosterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BoosterItem;
@@ -33,6 +34,7 @@ import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
@@ -42,7 +44,8 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -62,8 +65,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class TradeItemForBoosterController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(TradeItemForBoosterController.class);
 
 	public TradeItemForBoosterController() {
 		
@@ -82,7 +85,10 @@ public class TradeItemForBoosterController extends EventController {
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
 
 	@Autowired
-	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -212,14 +218,16 @@ public class TradeItemForBoosterController extends EventController {
 			int gemReward = 0;
 			int gachaCreditsReward = 0;
 			boolean successful = false;
+			List<AwardRewardAction> araContainer = new ArrayList<AwardRewardAction>();
 			if (legit) {
 				boolean rigged = riggedContainer.get(0);
 				gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtil);
 				gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtil);
 				//set the FullUserMonsterProtos (in resBuilder) to send to the client
+
 				successful = writeChangesToDB(resBuilder, aUser, userId, ifu,
 						itemId, boosterPackId, itemsUserReceives, now,
-						gemReward, gachaCreditsReward, rigged);
+						gemReward, gachaCreditsReward, rigged, araContainer);
 			}
 
 			if (successful) {
@@ -247,6 +255,11 @@ public class TradeItemForBoosterController extends EventController {
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
+
+				if (!araContainer.isEmpty()) {
+					AwardRewardAction ara = araContainer.get(0);
+					sendClanGiftIfExists(userId, ara, senderProto);
+				}
 
 				writeToUserCurrencyHistory(aUser, boosterPackId, nowTimestamp,
 						previousGems, itemsUserReceives, gemReward);
@@ -356,7 +369,8 @@ public class TradeItemForBoosterController extends EventController {
 	private boolean writeChangesToDB(Builder resBuilder, User user,
 			String userId, ItemForUser ifu, int itemId, int bPackId,
 			List<BoosterItem> itemsUserReceives, Date now, int gemReward,
-			int gachaCreditsReward, boolean rigged) {
+			int gachaCreditsReward, boolean rigged,
+			List<AwardRewardAction> araContainer) {
 
 		//update user items, user, and user_monsters
 		//    int numUpdated = UpdateUtils.get().updateItemForUser(userId, itemId, -1);
@@ -391,11 +405,14 @@ public class TradeItemForBoosterController extends EventController {
 		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, now,
 				"trade item for booster", listOfRewards, userRetrieveUtils,
 				itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
-				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
+				monsterLevelInfoRetrieveUtils,
+				giftRetrieveUtil, giftRewardRetrieveUtils,
 				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils, 
 				awardReasonDetail);
 		ara.execute();
 		createRewardProto(resBuilder, ara);
+
+		araContainer.add(ara);
 		return true;
 	}
 
@@ -411,9 +428,25 @@ public class TradeItemForBoosterController extends EventController {
         //TODO: protofy the rewards
         UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(
                 nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained, gachaGained, null);
-        log.info("proto for reward: " + urp);
+        log.info("proto for reward: {}", urp);
         resBuilder.setRewards(urp);
     }
+
+    private void sendClanGiftIfExists(String userId,
+    		AwardRewardAction ara, MinimumUserProto mup) {
+		try {
+			if (null != ara && ara.existsClanGift()) {
+				ReceivedGiftResponseProto rgrp = ara.getClanGift();
+				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
+				rgre.setReceivedGiftResponseProto(rgrp);
+
+				String clanId = mup.getClan().getClanUuid();
+				server.writeClanEvent(rgre, clanId);
+			}
+		} catch (Exception e) {
+			log.error("failed to send ClanGift notification", e);
+		}
+	}
 
 	private void writeToUserCurrencyHistory(User aUser, int packId,
 			Timestamp date, int previousGems, List<BoosterItem> items,

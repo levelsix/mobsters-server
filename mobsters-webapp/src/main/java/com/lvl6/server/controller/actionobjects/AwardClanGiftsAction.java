@@ -1,68 +1,84 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.ClanGiftForUser;
-import com.lvl6.info.ClanGiftRewards;
+import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftRewardConfig;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
+import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class AwardClanGiftsAction {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(AwardClanGiftsAction.class);
 
 	private String gifterUserId;
 	private User gifterUser;
 	private String clanId;
-	private int clanGiftId;
+	private int giftId;
 	private String reasonForGift;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtil;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private InsertUtil insertUtil;
 	private CreateInfoProtoUtils createInfoProtoUtils;
+	private Random rand;
 
 	public AwardClanGiftsAction() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public AwardClanGiftsAction(String gifterUserId, User gifterUser, int clanGiftId, 
-			String reasonForGift, ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+	public AwardClanGiftsAction(String gifterUserId, User gifterUser, int giftId,
+			String reasonForGift, GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
+			RewardRetrieveUtils rewardRetrieveUtil,
 			UserClanRetrieveUtils2 userClanRetrieveUtils, InsertUtil insertUtil,
 			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
 		this.gifterUserId = gifterUserId;
 		this.gifterUser = gifterUser;
-		this.clanGiftId = clanGiftId;
+		this.giftId = giftId;
 		this.reasonForGift = reasonForGift;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
+		this.rewardRetrieveUtil = rewardRetrieveUtil;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.insertUtil = insertUtil;
 		this.createInfoProtoUtils = createInfoProtoUtils;
+
+		this.rand = ControllerConstants.RAND;
 	}
 
-	private List<ClanGiftRewards> rewardsForClanGift;
+//	private Collection<GiftRewardConfig> rewardsForClanGift;
+	private GiftConfig gc;
 	private List<UserClan> clanMembers;
-	private ReceivedClanGiftResponseProto.Builder chatProto;
+	private ReceivedGiftResponseProto.Builder chatProto;
 	private MinimumUserProto mup; //this is the dude who sent the gifts
-	private ClanGiftForUser giftersClanGift;
-	
+	private GiftForUser giftersClanGift;
+
 	public boolean execute() {
 
 		//check out inputs before db interaction
@@ -73,7 +89,7 @@ public class AwardClanGiftsAction {
 //		}
 
 		setUpReceivedClanGiftResponseProtoBuilder();
-		
+
 		boolean valid = verifySemantics();
 
 		if (!valid) {
@@ -87,25 +103,35 @@ public class AwardClanGiftsAction {
 
 		return true;
 	}
-	
+
 	public void setUpReceivedClanGiftResponseProtoBuilder() {
-		chatProto = ReceivedClanGiftResponseProto.newBuilder();
-		
+		chatProto = ReceivedGiftResponseProto.newBuilder();
+
 		mup = createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(gifterUser, null);
-		
+
 		chatProto.setSender(mup);
 		chatProto.setScope(ChatScope.CLAN);
 	}
 
 	private boolean verifySemantics() {
-		rewardsForClanGift = clanGiftRewardsRetrieveUtils.getClanGiftRewardsForClanGift(clanGiftId);
+		gc = giftRetrieveUtil.getGift(giftId);
+		if (null == gc) {
+			log.error("no ClanGift for id {}", giftId);
+		}
 
-		if(rewardsForClanGift == null || rewardsForClanGift.isEmpty()) {
-			log.error("there are no rewards for clan gift id {}", clanGiftId);
+		boolean rewardsExist = giftRewardRetrieveUtils.rewardsExist(giftId);
+		if(!rewardsExist) {
+			log.error("there are no rewards for ClanGift id {}", giftId);
 			return false;
 		}
 
-		clanMembers = userClanRetrieveUtils.getUserClansRelatedToClan(clanId);
+		List<String> statuses = new ArrayList<String>();
+		statuses.add(UserClanStatus.LEADER.name());
+		statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+		statuses.add(UserClanStatus.CAPTAIN.name());
+		statuses.add(UserClanStatus.MEMBER.name());
+		clanMembers = userClanRetrieveUtils.getUserUserClansWithStatuses(
+				clanId, statuses);
 		if(clanMembers == null || clanMembers.isEmpty()) {
 			log.error("there are no clan members for clan id {}", clanId);
 			return false;
@@ -116,183 +142,58 @@ public class AwardClanGiftsAction {
 	}
 
 	private boolean writeChangesToDB() {
-		//create a map of userId to rewardId they received
-		Map<String, Integer> userIdToRewardId = new HashMap<String, Integer>();
+		//create a map of userId to rewardId all clan MEMBERS received
+		Timestamp toe = new Timestamp((new Date()).getTime());
+		Collection<GiftForUser> gifts = new ArrayList<GiftForUser>();
 
 		for(UserClan uc : clanMembers) {
-			if(!uc.getStatus().equalsIgnoreCase(UserClanStatus.REQUESTING.toString())) {
-				String receiverUserId = uc.getUserId();
-				int rewardId = determineReward();
-				userIdToRewardId.put(receiverUserId, rewardId);
-				ClanGiftForUser cgfu = new ClanGiftForUser();
-				cgfu.setClanGiftId(clanGiftId);
-				cgfu.setGifterUserId(gifterUserId);
-				cgfu.setReasonForGift(reasonForGift);
-				cgfu.setReceiverUserId(receiverUserId);
-				cgfu.setRewardId(rewardId);
-				cgfu.setTimeReceived(new Date());
-				cgfu.setHasBeenCollected(false);
-				UserClanGiftProto ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
-				chatProto.addUserClanGifts(ucgp);
-				
-				if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
-					giftersClanGift = cgfu;
-				}
+//			if(!uc.getStatus().equalsIgnoreCase(UserClanStatus.REQUESTING.toString())) {
+			String receiverUserId = uc.getUserId();
+
+			GiftRewardConfig grc = determineReward();
+			int rewardId = grc.getRewardId();
+
+			GiftForUser gfu = new GiftForUser();
+			gfu.setGiftId(giftId);
+			gfu.setGifterUserId(gifterUserId);
+			gfu.setReasonForGift(reasonForGift);
+			gfu.setReceiverUserId(receiverUserId);
+			gfu.setRewardId(rewardId);
+			gfu.setTimeOfEntry(toe);
+			gfu.setCollected(false);
+
+			if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
+				giftersClanGift = gfu;
 			}
+//			}
 		}
 
 		//insert all the clan gifts for users into table
-		boolean success = insertUtil.insertClanGiftForUsers(userIdToRewardId, gifterUserId, clanGiftId, reasonForGift);
+		boolean success = insertUtil.insertGiftForUser(gifts);
 		if(!success) {
-			log.error("error inserting clan gifts into clan gift for user table");
+			log.error("error inserting clan gifts into GiftForUser table");
 		}
 
+		for (GiftForUser gfu : gifts) {
+			int rewardId = gfu.getRewardId();
+			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
+			UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
+					gfu, mup, r, gc, null);
+
+			chatProto.addUserGifts(ugp);
+		}
 		return true;
 	}
 
-	public int determineReward() {
-		double randomValue = Math.random();
-		float runningCount = 0;
-		ClanGiftRewards currentClanGiftRewards = null;
+	private GiftRewardConfig determineReward() {
+		double probability = rand.nextDouble();
+		GiftRewardConfig grc = giftRewardRetrieveUtils.nextGiftReward(giftId, probability);
 
-		for(ClanGiftRewards cgr : rewardsForClanGift) {
-			currentClanGiftRewards = cgr;
-			runningCount += cgr.getChanceOfDrop();
-			if(runningCount > randomValue) {
-				return cgr.getRewardId();
-			}
-		}
-
-		return currentClanGiftRewards.getRewardId();
+		return grc;
 	}
 
-
-
-	public static Logger getLog() {
-		return log;
+	public ReceivedGiftResponseProto getChatProto() {
+		return chatProto.build();
 	}
-
-	public static void setLog(Logger log) {
-		AwardClanGiftsAction.log = log;
-	}
-
-	public String getGifterUserId() {
-		return gifterUserId;
-	}
-
-	public void setGifterUserId(String gifterUserId) {
-		this.gifterUserId = gifterUserId;
-	}
-
-	public String getClanId() {
-		return clanId;
-	}
-
-	public void setClanId(String clanId) {
-		this.clanId = clanId;
-	}
-
-	public int getClanGiftId() {
-		return clanGiftId;
-	}
-
-	public void setClanGiftId(int clanGiftId) {
-		this.clanGiftId = clanGiftId;
-	}
-
-
-	public String getReasonForGift() {
-		return reasonForGift;
-	}
-
-	public void setReasonForGift(String reasonForGift) {
-		this.reasonForGift = reasonForGift;
-	}
-
-	public ClanGiftRewardsRetrieveUtils getClanGiftRewardsRetrieveUtils() {
-		return clanGiftRewardsRetrieveUtils;
-	}
-
-	public void setClanGiftRewardsRetrieveUtils(
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils) {
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
-	}
-
-	public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
-		return userClanRetrieveUtils;
-	}
-
-	public void setUserClanRetrieveUtils(
-			UserClanRetrieveUtils2 userClanRetrieveUtils) {
-		this.userClanRetrieveUtils = userClanRetrieveUtils;
-	}
-
-	public InsertUtil getInsertUtil() {
-		return insertUtil;
-	}
-
-	public void setInsertUtil(InsertUtil insertUtil) {
-		this.insertUtil = insertUtil;
-	}
-
-	public List<ClanGiftRewards> getRewardsForClanGift() {
-		return rewardsForClanGift;
-	}
-
-	public void setRewardsForClanGift(List<ClanGiftRewards> rewardsForClanGift) {
-		this.rewardsForClanGift = rewardsForClanGift;
-	}
-
-	public List<UserClan> getClanMembers() {
-		return clanMembers;
-	}
-
-	public void setClanMembers(List<UserClan> clanMembers) {
-		this.clanMembers = clanMembers;
-	}
-
-	public User getGifterUser() {
-		return gifterUser;
-	}
-
-	public void setGifterUser(User gifterUser) {
-		this.gifterUser = gifterUser;
-	}
-
-	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
-		return createInfoProtoUtils;
-	}
-
-	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
-		this.createInfoProtoUtils = createInfoProtoUtils;
-	}
-
-	public ReceivedClanGiftResponseProto.Builder getChatProto() {
-		return chatProto;
-	}
-
-	public void setChatProto(ReceivedClanGiftResponseProto.Builder chatProto) {
-		this.chatProto = chatProto;
-	}
-
-	public MinimumUserProto getMup() {
-		return mup;
-	}
-
-	public void setMup(MinimumUserProto mup) {
-		this.mup = mup;
-	}
-
-	public ClanGiftForUser getGiftersClanGift() {
-		return giftersClanGift;
-	}
-
-	public void setGiftersClanGift(ClanGiftForUser giftersClanGift) {
-		this.giftersClanGift = giftersClanGift;
-	}
-
-
-
-
 
 }

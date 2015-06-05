@@ -1,5 +1,9 @@
 package com.lvl6.server.controller;
 
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
+import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 
@@ -60,9 +64,6 @@ public class StartupControllerOld {//extends EventController {
 	protected UpdateUtil updateUtil;
 
 	@Autowired
-	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
-	
-	@Autowired
 	protected InAppPurchaseUtils inAppPurchaseUtils;
 
 	@Autowired
@@ -112,9 +113,6 @@ public class StartupControllerOld {//extends EventController {
 
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
-
-	@Autowired
-	protected ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtil;
 
 	@Autowired
 	protected BattleItemQueueForUserRetrieveUtil battleItemQueueForUserRetrieveUtil;
@@ -189,7 +187,7 @@ public class StartupControllerOld {//extends EventController {
 	protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
 
 	@Autowired
-	protected ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	protected SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
 
 	@Autowired
 	protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
@@ -214,6 +212,9 @@ public class StartupControllerOld {//extends EventController {
 
 	@Autowired
 	protected GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil;
+
+	@Autowired
+	protected GiftRetrieveUtils giftRetrieveUtil;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
@@ -253,9 +254,6 @@ public class StartupControllerOld {//extends EventController {
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtil;
-
-    @Autowired
-    protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
 
     @Autowired
     protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
@@ -677,15 +675,10 @@ public class StartupControllerOld {//extends EventController {
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 			
-			SetClanGiftsAction scga = new SetClanGiftsAction(resBuilder, user, playerId, 
-					clanGiftForUserRetrieveUtils, createInfoProtoUtils);
-			scga.setUp(fillMe);
-			log.info("{}ms at SetClanGiftsAction", stopWatch.getTime());
-
 			//not sure if need clan so putting here for now
 			SetGiftsAction sga = new SetGiftsAction(resBuilder, user, playerId,
 					giftForUserRetrieveUtil, giftForTangoUserRetrieveUtil,
-					tangoGiftRetrieveUtil, rewardRetrieveUtil, createInfoProtoUtils);
+					giftRetrieveUtil, rewardRetrieveUtil, createInfoProtoUtils);
 			sga.setUp(fillMe);
 			log.info("{}ms at SetGiftsAction", stopWatch.getTime());
 			
@@ -715,8 +708,6 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			scmtda.execute(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-			scga.execute(fillMe);
-			log.info("{}ms at setClanGifts", stopWatch.getTime());
 			sga.execute(fillMe);;
 			log.info("{}ms at setGifts", stopWatch.getTime());
 			
@@ -1602,13 +1593,13 @@ public class StartupControllerOld {//extends EventController {
 	}
 
 	private void setSecretGifts(Builder resBuilder, String userId, long now) {
-		Collection<ItemSecretGiftForUser> gifts = itemSecretGiftForUserRetrieveUtil
-				.getSpecificOrAllItemSecretGiftForUser(userId, null);
+		Collection<SecretGiftForUser> gifts = secretGiftForUserRetrieveUtil
+				.getSpecificOrAllSecretGiftForUser(userId, null);
 
 		//need to enforce 2 gift minimum
 		int numGifts = 0;
 		if (null == gifts || gifts.isEmpty()) {
-			gifts = new ArrayList<ItemSecretGiftForUser>();
+			gifts = new ArrayList<SecretGiftForUser>();
 			numGifts = 2;
 
 		} else if (null != gifts && gifts.size() == 1) {
@@ -1619,26 +1610,26 @@ public class StartupControllerOld {//extends EventController {
 			giveGifts(userId, now, gifts, numGifts);
 		}
 
-		Collection<UserItemSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
-				.createUserItemSecretGiftProto(gifts);
+		Collection<UserSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
+				.createUserSecretGiftProto(gifts);
 		resBuilder.addAllGifts(nuGiftsProtos);
 	}
 
 	//need to enforce 2 gift minimum
 	private void giveGifts(String userId, long now,
-			Collection<ItemSecretGiftForUser> gifts, int numGifts) {
-		List<ItemSecretGiftForUser> giftList = secretGiftUtils
+			Collection<SecretGiftForUser> gifts, int numGifts) {
+		List<SecretGiftForUser> giftList = secretGiftUtils
 				.calculateGiftsForUser(userId, numGifts, now);
 
 		List<String> ids = insertUtil
-				.insertIntoItemSecretGiftForUserGetId(giftList);
+				.insertIntoSecretGiftForUserGetId(giftList);
 
 		//need to set the ids
 		if (null != ids && ids.size() == giftList.size()) {
 
 			for (int index = 0; index < ids.size(); index++) {
 				String id = ids.get(index);
-				ItemSecretGiftForUser isgfu = giftList.get(index);
+				SecretGiftForUser isgfu = giftList.get(index);
 
 				isgfu.setId(id);
 			}
@@ -2801,13 +2792,13 @@ public class StartupControllerOld {//extends EventController {
 		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
 	}
 
-	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil() {
-		return itemSecretGiftForUserRetrieveUtil;
+	public SecretGiftForUserRetrieveUtil getSecretGiftForUserRetrieveUtil() {
+		return secretGiftForUserRetrieveUtil;
 	}
 
-	public void setItemSecretGiftForUserRetrieveUtil(
-			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil) {
-		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
+	public void setSecretGiftForUserRetrieveUtil(
+			SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil) {
+		this.secretGiftForUserRetrieveUtil = secretGiftForUserRetrieveUtil;
 	}
 
 	public ResearchForUserRetrieveUtils getResearchForUserRetrieveUtil() {

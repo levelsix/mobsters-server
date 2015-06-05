@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniEventRewardRequestEvent;
+import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.RedeemMiniEventRewardResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
@@ -20,6 +21,7 @@ import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
@@ -29,12 +31,14 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -46,19 +50,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class RedeemMiniEventRewardController extends EventController {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(RedeemMiniEventRewardController.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemMiniEventRewardController.class);
 
 	public RedeemMiniEventRewardController() {
 		
 	}
-	
+
 	
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
-	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
@@ -155,7 +162,8 @@ public class RedeemMiniEventRewardController extends EventController {
 
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
 					userId, null, maxCash, maxOil, mefplId, rt, clientTime,
-					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
+					giftRetrieveUtil,
+					giftRewardRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtil, mefuRetrieveUtil, itemForUserRetrieveUtil,
 					insertUtil, updateUtil, monsterStuffUtils,
 					miniEventForPlayerLvlRetrieveUtils,
@@ -198,6 +206,8 @@ public class RedeemMiniEventRewardController extends EventController {
 					resEventUpdate.setTag(event.getTag());
 					responses.normalResponseEvents().add(resEventUpdate);
 
+					sendClanGiftIfExists(userId, rmera);
+
 					writeToCurrencyHistory(userId, clientTime, rmera);
 				} else {
 					log.warn("unable to update client's user.");
@@ -224,6 +234,24 @@ public class RedeemMiniEventRewardController extends EventController {
 			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		}
 	}
+
+	private void sendClanGiftIfExists(String userId,
+			RedeemMiniEventRewardAction rmea) {
+		try {
+			AwardRewardAction ara = rmea.getAra();
+			if (null != ara && ara.existsClanGift()) {
+				ReceivedGiftResponseProto rgrp = ara.getClanGift();
+				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
+				rgre.setReceivedGiftResponseProto(rgrp);
+				String clanId = rmea.getUser().getClanId();
+
+				server.writeClanEvent(rgre, clanId);
+			}
+		} catch (Exception e) {
+			log.error("failed to send ClanGift notification", e);
+		}
+	}
+
 
 	private void writeToCurrencyHistory(String userId, Date date,
 			RedeemMiniEventRewardAction rmera)

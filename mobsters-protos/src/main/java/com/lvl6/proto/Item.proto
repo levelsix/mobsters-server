@@ -69,15 +69,6 @@ message UserItemUsageProto {
 }
 
 //------------------------------------------------------------------------------------------
-message UserItemSecretGiftProto {
-	optional string uisgUuid = 1;
-	optional string userUuid = 2;
-	optional int32 secsTillCollection = 3;
-	optional int32 itemId = 4;
-	optional int64 createTime = 5;
-}
-
-//------------------------------------------------------------------------------------------
 message ItemGemPriceProto {
 	optional int32 itemId = 1;
 	optional int32 gemPrice = 2;

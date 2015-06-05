@@ -24,7 +24,8 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -35,8 +36,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class RedeemMiniEventRewardAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemMiniEventRewardAction.class);
 
 	private String userId;
 	private User user;
@@ -45,7 +47,8 @@ public class RedeemMiniEventRewardAction {
 	private int mefplId;
 	private RewardTier rt;
 	private Date clientTime;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private MiniEventForUserRetrieveUtil mefuRetrieveUtil;
@@ -61,7 +64,8 @@ public class RedeemMiniEventRewardAction {
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
-			Date clientTime, ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			Date clientTime, GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
@@ -82,7 +86,8 @@ public class RedeemMiniEventRewardAction {
 		this.mefplId = mefplId;
 		this.rt = rt;
 		this.clientTime = clientTime;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.mefuRetrieveUtil = mefuRetrieveUtil;
@@ -238,7 +243,8 @@ public class RedeemMiniEventRewardAction {
 				userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils,
-				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				giftRetrieveUtil,
+				giftRewardRetrieveUtils, rewardRetrieveUtils,
 				userClanRetrieveUtils, createInfoProtoUtils, null);
 
 		boolean awardedRewards = ara.execute();
@@ -326,4 +332,13 @@ public class RedeemMiniEventRewardAction {
 		}
 		return null;
 	}
+
+	public AwardRewardAction getAra() {
+		return ara;
+	}
+
+	public void setAra(AwardRewardAction ara) {
+		this.ara = ara;
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniJobRequestEvent;
+import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.RedeemMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
@@ -22,6 +22,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
@@ -32,11 +33,13 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemMiniJobAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -48,8 +51,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @Component
 public class RedeemMiniJobController extends EventController {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(RedeemMiniJobController.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemMiniJobController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -58,7 +61,10 @@ public class RedeemMiniJobController extends EventController {
 	protected MiscMethods miscMethods;
 
 	@Autowired
-	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -95,7 +101,7 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -127,7 +133,6 @@ public class RedeemMiniJobController extends EventController {
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 
 		String userId = senderProto.getUserUuid();
-		Date now = new Date(reqProto.getClientTime());
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		String userMiniJobId = reqProto.getUserMiniJobUuid();
 
@@ -166,7 +171,7 @@ public class RedeemMiniJobController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			RedeemMiniJobAction rmja = new RedeemMiniJobAction(userId, userMiniJobId, clientTime,
-					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
+					giftRetrieveUtil, giftRewardRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtils, itemForUserRetrieveUtil,
 					deleteUtil, updateUtil, insertUtil, miniJobForUserRetrieveUtil,
 					miniJobRetrieveUtils, monsterStuffUtils, monsterForUserRetrieveUtils, umchpList,
@@ -196,6 +201,8 @@ public class RedeemMiniJobController extends EventController {
 								rmja.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
+
+				sendClanGiftIfExists(userId, rmja);
 
 				writeToUserCurrencyHistory(rmja.getUser(), userMiniJobId, rmja.getAra().getCurrencyDeltas(),
 						clientTime, rmja.getAra().getPreviousCurrencies());
@@ -439,6 +446,23 @@ public class RedeemMiniJobController extends EventController {
 //		}
 //		return true;
 //	}
+
+	private void sendClanGiftIfExists(String userId,
+			RedeemMiniJobAction rmja) {
+		try {
+			AwardRewardAction ara = rmja.getAra();
+			if (null != ara && ara.existsClanGift()) {
+				ReceivedGiftResponseProto rgrp = ara.getClanGift();
+				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
+				rgre.setReceivedGiftResponseProto(rgrp);
+				String clanId = rmja.getUser().getClanId();
+
+				server.writeClanEvent(rgre, clanId);
+			}
+		} catch (Exception e) {
+			log.error("failed to send ClanGift notification", e);
+		}
+	}
 
 	private void writeToUserCurrencyHistory(User aUser, String userMiniJobId,
 			Map<String, Integer> currencyChange, Timestamp curTime,

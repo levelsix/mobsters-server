@@ -66,7 +66,7 @@ public class GiftForTangoUserDao extends DAOImpl<GiftForTangoUserRecord, GiftFor
 	}
 
 	/**
-	 * Fetch records that have <code>gifter_user_id IN (values)</code>
+	 * Fetch records that have <code>gifter_tango_name IN (values)</code>
 	 */
 	public List<GiftForTangoUserPojo> fetchByGifterUserId(String... values) {
 		return fetch(GiftForTangoUser.GIFT_FOR_TANGO_USER.GIFTER_USER_ID, values);

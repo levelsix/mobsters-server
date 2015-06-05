@@ -8,12 +8,12 @@ import org.slf4j.LoggerFactory;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftRequestProto;
 
 public class RedeemSecretGiftRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemSecretGiftRequestEvent.class);
 
 	private RedeemSecretGiftRequestProto redeemSecretGiftRequestProto;
 

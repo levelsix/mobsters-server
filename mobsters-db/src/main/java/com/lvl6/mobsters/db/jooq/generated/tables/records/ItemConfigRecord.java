@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record11;
+import org.jooq.Record10;
 import org.jooq.Row;
-import org.jooq.Row11;
+import org.jooq.Row10;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -36,9 +36,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "item_config", schema = "mobsters")
-public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> implements Record11<Integer, String, String, String, String, Integer, Integer, Double, Boolean, String, String>, IItemConfig {
+public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> implements Record10<Integer, String, String, String, String, Integer, Integer, Boolean, String, String>, IItemConfig {
 
-	private static final long serialVersionUID = 816307939;
+	private static final long serialVersionUID = -91602342;
 
 	/**
 	 * Setter for <code>mobsters.item_config.id</code>.
@@ -173,29 +173,11 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	}
 
 	/**
-	 * Setter for <code>mobsters.item_config.secret_gift_chance</code>.
-	 */
-	@Override
-	public ItemConfigRecord setSecretGiftChance(Double value) {
-		setValue(7, value);
-		return this;
-	}
-
-	/**
-	 * Getter for <code>mobsters.item_config.secret_gift_chance</code>.
-	 */
-	@Column(name = "secret_gift_chance", precision = 12)
-	@Override
-	public Double getSecretGiftChance() {
-		return (Double) getValue(7);
-	}
-
-	/**
 	 * Setter for <code>mobsters.item_config.always_display_to_user</code>.
 	 */
 	@Override
 	public ItemConfigRecord setAlwaysDisplayToUser(Boolean value) {
-		setValue(8, value);
+		setValue(7, value);
 		return this;
 	}
 
@@ -205,7 +187,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	@Column(name = "always_display_to_user", precision = 1)
 	@Override
 	public Boolean getAlwaysDisplayToUser() {
-		return (Boolean) getValue(8);
+		return (Boolean) getValue(7);
 	}
 
 	/**
@@ -213,7 +195,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 */
 	@Override
 	public ItemConfigRecord setActionGameType(String value) {
-		setValue(9, value);
+		setValue(8, value);
 		return this;
 	}
 
@@ -224,7 +206,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	@Size(max = 45)
 	@Override
 	public String getActionGameType() {
-		return (String) getValue(9);
+		return (String) getValue(8);
 	}
 
 	/**
@@ -232,7 +214,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 */
 	@Override
 	public ItemConfigRecord setQuality(String value) {
-		setValue(10, value);
+		setValue(9, value);
 		return this;
 	}
 
@@ -243,7 +225,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	@Size(max = 15)
 	@Override
 	public String getQuality() {
-		return (String) getValue(10);
+		return (String) getValue(9);
 	}
 
 	// -------------------------------------------------------------------------
@@ -259,23 +241,23 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	}
 
 	// -------------------------------------------------------------------------
-	// Record11 type implementation
+	// Record10 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<Integer, String, String, String, String, Integer, Integer, Double, Boolean, String, String> fieldsRow() {
-		return (Row11) super.fieldsRow();
+	public Row10<Integer, String, String, String, String, Integer, Integer, Boolean, String, String> fieldsRow() {
+		return (Row10) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<Integer, String, String, String, String, Integer, Integer, Double, Boolean, String, String> valuesRow() {
-		return (Row11) super.valuesRow();
+	public Row10<Integer, String, String, String, String, Integer, Integer, Boolean, String, String> valuesRow() {
+		return (Row10) super.valuesRow();
 	}
 
 	/**
@@ -338,15 +320,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Double> field8() {
-		return ItemConfig.ITEM_CONFIG.SECRET_GIFT_CHANCE;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Field<Boolean> field9() {
+	public Field<Boolean> field8() {
 		return ItemConfig.ITEM_CONFIG.ALWAYS_DISPLAY_TO_USER;
 	}
 
@@ -354,7 +328,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field10() {
+	public Field<String> field9() {
 		return ItemConfig.ITEM_CONFIG.ACTION_GAME_TYPE;
 	}
 
@@ -362,7 +336,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field11() {
+	public Field<String> field10() {
 		return ItemConfig.ITEM_CONFIG.QUALITY;
 	}
 
@@ -426,15 +400,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Double value8() {
-		return getSecretGiftChance();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Boolean value9() {
+	public Boolean value8() {
 		return getAlwaysDisplayToUser();
 	}
 
@@ -442,7 +408,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value10() {
+	public String value9() {
 		return getActionGameType();
 	}
 
@@ -450,7 +416,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value11() {
+	public String value10() {
 		return getQuality();
 	}
 
@@ -521,16 +487,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemConfigRecord value8(Double value) {
-		setSecretGiftChance(value);
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ItemConfigRecord value9(Boolean value) {
+	public ItemConfigRecord value8(Boolean value) {
 		setAlwaysDisplayToUser(value);
 		return this;
 	}
@@ -539,7 +496,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemConfigRecord value10(String value) {
+	public ItemConfigRecord value9(String value) {
 		setActionGameType(value);
 		return this;
 	}
@@ -548,7 +505,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemConfigRecord value11(String value) {
+	public ItemConfigRecord value10(String value) {
 		setQuality(value);
 		return this;
 	}
@@ -557,7 +514,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ItemConfigRecord values(Integer value1, String value2, String value3, String value4, String value5, Integer value6, Integer value7, Double value8, Boolean value9, String value10, String value11) {
+	public ItemConfigRecord values(Integer value1, String value2, String value3, String value4, String value5, Integer value6, Integer value7, Boolean value8, String value9, String value10) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -568,7 +525,6 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 		value8(value8);
 		value9(value9);
 		value10(value10);
-		value11(value11);
 		return this;
 	}
 
@@ -588,7 +544,6 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 		setItemType(from.getItemType());
 		setStaticDataId(from.getStaticDataId());
 		setAmount(from.getAmount());
-		setSecretGiftChance(from.getSecretGiftChance());
 		setAlwaysDisplayToUser(from.getAlwaysDisplayToUser());
 		setActionGameType(from.getActionGameType());
 		setQuality(from.getQuality());
@@ -617,7 +572,7 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 	/**
 	 * Create a detached, initialised ItemConfigRecord
 	 */
-	public ItemConfigRecord(Integer id, String name, String shortName, String imgName, String itemType, Integer staticDataId, Integer amount, Double secretGiftChance, Boolean alwaysDisplayToUser, String actionGameType, String quality) {
+	public ItemConfigRecord(Integer id, String name, String shortName, String imgName, String itemType, Integer staticDataId, Integer amount, Boolean alwaysDisplayToUser, String actionGameType, String quality) {
 		super(ItemConfig.ITEM_CONFIG);
 
 		setValue(0, id);
@@ -627,9 +582,8 @@ public class ItemConfigRecord extends UpdatableRecordImpl<ItemConfigRecord> impl
 		setValue(4, itemType);
 		setValue(5, staticDataId);
 		setValue(6, amount);
-		setValue(7, secretGiftChance);
-		setValue(8, alwaysDisplayToUser);
-		setValue(9, actionGameType);
-		setValue(10, quality);
+		setValue(7, alwaysDisplayToUser);
+		setValue(8, actionGameType);
+		setValue(9, quality);
 	}
 }

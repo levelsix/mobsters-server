@@ -55,7 +55,7 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -71,7 +71,7 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
@@ -154,6 +154,16 @@ public class HealMonsterController extends EventController {
 					"UUID error. incorrect userId=%s, userMonsterIds=%s",
 					userId, userMonsterIds), e);
 			invalidUuids = true;
+		}
+
+		if (invalidUuids) {
+			log.info("invalid UUIDS.");
+			resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER);
+			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
+					userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setHealMonsterResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 		}
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
@@ -247,23 +257,23 @@ public class HealMonsterController extends EventController {
 	 * Return true if user request is valid; false otherwise and set the
 	 * builder status to the appropriate value. delete, update, new maps
 	 * MIGHT BE MODIFIED.
-	 * 
+	 *
 	 * from HealMonsterWaitTimeComplete controller logic
 	 * @healedUp MIGHT ALSO BE MODIFIED.
-	 * 
+	 *
 	 * For the most part, will always return success. Why?
-	 * (Will return fail if user does not have enough funds.) 
+	 * (Will return fail if user does not have enough funds.)
 	 * Answer: For the map
-	 * 
+	 *
 	 * delete - The monsters to be removed from healing will only be the ones
 	 * the user already has in healing.
 	 * update - Same logic as above.
 	 * new - Same as above.
-	 * 
+	 *
 	 * Ex. If user wants to delete a monster, 'A', that isn't healing, along with some
 	 * monsters already healing, 'B', i.e. wants to delete (A, B), then only the valid
-	 * monster(s), 'B', will be deleted. Same logic with update and new. 
-	 * 
+	 * monster(s), 'B', will be deleted. Same logic with update and new.
+	 *
 	 */
 	private boolean checkLegit(Builder resBuilder, User u, String userId,
 			int cashChange, int gemCost,
@@ -342,7 +352,7 @@ public class HealMonsterController extends EventController {
 		return true;
 	}
 
-	//only the entries in the map that have their key in validIds will be kept  
+	//only the entries in the map that have their key in validIds will be kept
 	//idsToValues contains keys that are in validIds and some that aren't
 	private Map<String, Integer> getValidEntries(List<String> validIds,
 			Map<String, Integer> idsToValues) {

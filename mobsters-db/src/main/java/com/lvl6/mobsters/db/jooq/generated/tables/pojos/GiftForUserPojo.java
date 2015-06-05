@@ -37,8 +37,7 @@ public class GiftForUserPojo implements IGiftForUser {
 	private String    id;
 	private String    gifterUserId;
 	private String    receiverUserId;
-	private String    giftType;
-	private Integer   staticDataId;
+	private Integer   giftId;
 	private Timestamp timeOfEntry;
 	private Integer   rewardId;
 	private Boolean   collected;
@@ -51,8 +50,7 @@ public class GiftForUserPojo implements IGiftForUser {
 		this.id = value.id;
 		this.gifterUserId = value.gifterUserId;
 		this.receiverUserId = value.receiverUserId;
-		this.giftType = value.giftType;
-		this.staticDataId = value.staticDataId;
+		this.giftId = value.giftId;
 		this.timeOfEntry = value.timeOfEntry;
 		this.rewardId = value.rewardId;
 		this.collected = value.collected;
@@ -64,8 +62,7 @@ public class GiftForUserPojo implements IGiftForUser {
 		String    id,
 		String    gifterUserId,
 		String    receiverUserId,
-		String    giftType,
-		Integer   staticDataId,
+		Integer   giftId,
 		Timestamp timeOfEntry,
 		Integer   rewardId,
 		Boolean   collected,
@@ -75,8 +72,7 @@ public class GiftForUserPojo implements IGiftForUser {
 		this.id = id;
 		this.gifterUserId = gifterUserId;
 		this.receiverUserId = receiverUserId;
-		this.giftType = giftType;
-		this.staticDataId = staticDataId;
+		this.giftId = giftId;
 		this.timeOfEntry = timeOfEntry;
 		this.rewardId = rewardId;
 		this.collected = collected;
@@ -125,28 +121,15 @@ public class GiftForUserPojo implements IGiftForUser {
 		return this;
 	}
 
-	@Column(name = "gift_type", length = 45)
-	@Size(max = 45)
+	@Column(name = "gift_id", precision = 10)
 	@Override
-	public String getGiftType() {
-		return this.giftType;
+	public Integer getGiftId() {
+		return this.giftId;
 	}
 
 	@Override
-	public GiftForUserPojo setGiftType(String giftType) {
-		this.giftType = giftType;
-		return this;
-	}
-
-	@Column(name = "static_data_id", precision = 10)
-	@Override
-	public Integer getStaticDataId() {
-		return this.staticDataId;
-	}
-
-	@Override
-	public GiftForUserPojo setStaticDataId(Integer staticDataId) {
-		this.staticDataId = staticDataId;
+	public GiftForUser setGiftId(Integer giftId) {
+		this.giftId = giftId;
 		return this;
 	}
 
@@ -223,8 +206,7 @@ public class GiftForUserPojo implements IGiftForUser {
 		setId(from.getId());
 		setGifterUserId(from.getGifterUserId());
 		setReceiverUserId(from.getReceiverUserId());
-		setGiftType(from.getGiftType());
-		setStaticDataId(from.getStaticDataId());
+		setGiftId(from.getGiftId());
 		setTimeOfEntry(from.getTimeOfEntry());
 		setRewardId(from.getRewardId());
 		setCollected(from.getCollected());

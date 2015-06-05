@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -29,8 +28,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class GiftForUserRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(GiftForUserRetrieveUtils.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_GIFT_FOR_USER;
 	private static final UserGiftForClientMapper rowMapper = new UserGiftForClientMapper();
@@ -203,21 +203,16 @@ public class GiftForUserRetrieveUtils {
 			String id = rs.getString(DBConstants.GIFT_FOR_USER__ID);
 			String gifterUserId = rs.getString(DBConstants.GIFT_FOR_USER__GIFTER_USER_ID);
 			String receiverUserId = rs.getString(DBConstants.GIFT_FOR_USER__RECEIVER_USER_ID);
-			String giftType = rs.getString(DBConstants.GIFT_FOR_USER__GIFT_TYPE);
-			int staticDataId = rs.getInt(DBConstants.GIFT_FOR_USER__STATIC_DATA_ID);
+			int giftId = rs.getInt(DBConstants.GIFT_FOR_USER__GIFT_ID);
 			Timestamp ts = rs.getTimestamp(DBConstants.GIFT_FOR_USER__TIME_OF_ENTRY);
-			Date timeReceived = null;
-			if (!rs.wasNull()) {
-				timeReceived = new Date(ts.getTime());
-			}
+
 			int rewardId = rs.getInt(DBConstants.GIFT_FOR_USER__REWARD_ID);
 			boolean collected = rs.getBoolean(DBConstants.GIFT_FOR_USER__COLLECTED);
 			int minTillExp = rs.getInt(DBConstants.GIFT_FOR_USER__MINUTES_TILL_EXPIRATION);
 			String reasonForGift = rs.getString(DBConstants.GIFT_FOR_USER__REASON_FOR_GIFT);
 
-			return new GiftForUser(id, gifterUserId, receiverUserId, giftType,
-					staticDataId, timeReceived, rewardId, collected, minTillExp,
-					reasonForGift);
+			return new GiftForUser(id, gifterUserId, receiverUserId, giftId,
+					ts, rewardId, collected, minTillExp, reasonForGift);
 		}
 
 //		public static List<String> getColumnsSelected() {

@@ -45,28 +45,16 @@ public interface IGiftForTangoUser extends Serializable {
 	public String getGiftForUserId();
 
 	/**
-	 * Setter for <code>mobsters.gift_for_tango_user.gifter_user_id</code>.
+	 * Setter for <code>mobsters.gift_for_tango_user.gifter_tango_name</code>.
 	 */
-	public IGiftForTangoUser setGifterUserId(String value);
+	public IGiftForTangoUser setGifterTangoName(String value);
 
 	/**
-	 * Getter for <code>mobsters.gift_for_tango_user.gifter_user_id</code>.
+	 * Getter for <code>mobsters.gift_for_tango_user.gifter_tango_name</code>.
 	 */
-	@Column(name = "gifter_user_id", length = 36)
-	@Size(max = 36)
-	public String getGifterUserId();
-
-	/**
-	 * Setter for <code>mobsters.gift_for_tango_user.gifter_tango_user_id</code>.
-	 */
-	public IGiftForTangoUser setGifterTangoUserId(String value);
-
-	/**
-	 * Getter for <code>mobsters.gift_for_tango_user.gifter_tango_user_id</code>.
-	 */
-	@Column(name = "gifter_tango_user_id", length = 100)
+	@Column(name = "gifter_tango_name", length = 100)
 	@Size(max = 100)
-	public String getGifterTangoUserId();
+	public String getGifterTangoName();
 
 	// -------------------------------------------------------------------------
 	// FROM and INTO

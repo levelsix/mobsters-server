@@ -25,7 +25,8 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -37,13 +38,15 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class RedeemMiniJobAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemMiniJobAction.class);
 
 	private String userId;
 	private String userMiniJobId;
 	private Timestamp clientTime;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -63,7 +66,8 @@ public class RedeemMiniJobAction {
 			String userId,
 			String userMiniJobId,
 			Timestamp clientTime,
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -81,7 +85,8 @@ public class RedeemMiniJobAction {
 		this.userId = userId;
 		this.userMiniJobId = userMiniJobId;
 		this.clientTime = clientTime;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
@@ -245,24 +250,25 @@ public class RedeemMiniJobAction {
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 
-		ara = new AwardRewardAction(userId, user, 0, 0, clientTime,
+		ara = new AwardRewardAction(userId, user, user.getCash(), user.getOil(), clientTime,
 				"userminijob with id " + userMiniJobId,
 				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil,
 				monsterStuffUtils, monsterLevelInfoRetrieveUtils,
-				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				giftRetrieveUtil,
+				giftRewardRetrieveUtils, rewardRetrieveUtils,
 				userClanRetrieveUtils, createInfoProtoUtils, null);
 
 		ara.execute();
 
 		//delete the user mini job
 		int numDeleted = DeleteUtils.get().deleteMiniJobForUser(userMiniJobId);
-		log.info("userMiniJob numDeleted=" + numDeleted);
+		log.info("userMiniJob numDeleted={}", numDeleted);
 
 		log.info("updating user's monsters' healths");
 		int numUpdated = updateUtil
 				.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-		log.info("numUpdated=" + numUpdated);
+		log.info("numUpdated={}", numUpdated);
 
 		//number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
 		//so returns 2 if one row was updated, 1 if inserted

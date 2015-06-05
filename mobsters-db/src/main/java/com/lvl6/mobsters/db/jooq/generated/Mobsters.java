@@ -38,9 +38,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClanHist
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentUserReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanIconConfig;
@@ -57,14 +54,15 @@ import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionPurchaseForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.FileDownloadConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.GiftForTangoUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.GoldSaleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
-import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -121,6 +119,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesScheduleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
@@ -142,8 +141,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceGeneratorConf
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceStorageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTeamCenterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserClientState;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserCompleted;
@@ -250,9 +247,6 @@ public class Mobsters extends SchemaImpl {
 			ClanEventPersistentForUser.CLAN_EVENT_PERSISTENT_FOR_USER,
 			ClanEventPersistentUserReward.CLAN_EVENT_PERSISTENT_USER_REWARD,
 			ClanForUser.CLAN_FOR_USER,
-			ClanGiftConfig.CLAN_GIFT_CONFIG,
-			ClanGiftForUser.CLAN_GIFT_FOR_USER,
-			ClanGiftRewardConfig.CLAN_GIFT_REWARD_CONFIG,
 			ClanHelp.CLAN_HELP,
 			ClanHelpCountForUser.CLAN_HELP_COUNT_FOR_USER,
 			ClanIconConfig.CLAN_ICON_CONFIG,
@@ -269,14 +263,15 @@ public class Mobsters extends SchemaImpl {
 			ExpansionCostConfig.EXPANSION_COST_CONFIG,
 			ExpansionPurchaseForUser.EXPANSION_PURCHASE_FOR_USER,
 			FileDownloadConfig.FILE_DOWNLOAD_CONFIG,
+			GiftConfig.GIFT_CONFIG,
 			GiftForTangoUser.GIFT_FOR_TANGO_USER,
 			GiftForUser.GIFT_FOR_USER,
+			GiftRewardConfig.GIFT_REWARD_CONFIG,
 			GoldSaleConfig.GOLD_SALE_CONFIG,
 			IapHistory.IAP_HISTORY,
 			ItemConfig.ITEM_CONFIG,
 			ItemForUser.ITEM_FOR_USER,
 			ItemForUserUsage.ITEM_FOR_USER_USAGE,
-			ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER,
 			LoadTestingEvents.LOAD_TESTING_EVENTS,
 			LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG,
 			LockBoxEventForUser.LOCK_BOX_EVENT_FOR_USER,
@@ -333,6 +328,7 @@ public class Mobsters extends SchemaImpl {
 			SalesPackageConfig.SALES_PACKAGE_CONFIG,
 			SalesScheduleConfig.SALES_SCHEDULE_CONFIG,
 			SecretGiftConfig.SECRET_GIFT_CONFIG,
+			SecretGiftForUser.SECRET_GIFT_FOR_USER,
 			ServerToggleConfig.SERVER_TOGGLE_CONFIG,
 			SkillConfig.SKILL_CONFIG,
 			SkillPropertyConfig.SKILL_PROPERTY_CONFIG,
@@ -354,8 +350,6 @@ public class Mobsters extends SchemaImpl {
 			StructureResourceStorageConfig.STRUCTURE_RESOURCE_STORAGE_CONFIG,
 			StructureTeamCenterConfig.STRUCTURE_TEAM_CENTER_CONFIG,
 			StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG,
-			TangoGiftConfig.TANGO_GIFT_CONFIG,
-			TangoGiftRewardConfig.TANGO_GIFT_REWARD_CONFIG,
 			TaskConfig.TASK_CONFIG,
 			TaskForUserClientState.TASK_FOR_USER_CLIENT_STATE,
 			TaskForUserCompleted.TASK_FOR_USER_COMPLETED,

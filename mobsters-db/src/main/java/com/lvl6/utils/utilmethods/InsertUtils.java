@@ -31,10 +31,7 @@ import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.GiftForTangoUser;
-import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUserUsage;
-import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniJobForUser;
@@ -52,6 +49,9 @@ import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -2277,27 +2277,27 @@ public class InsertUtils implements InsertUtil {
 	}
 
 	@Override
-	public List<String> insertIntoItemSecretGiftForUserGetId(
-			List<ItemSecretGiftForUser> gifts) {
-		String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
+	public List<String> insertIntoSecretGiftForUserGetId(
+			List<SecretGiftForUser> gifts) {
+		String tableName = DBConstants.TABLE_SECRET_GIFT_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
 		List<String> ids = new ArrayList<String>();
-		for (ItemSecretGiftForUser isgfu : gifts) {
+		for (SecretGiftForUser sgfu : gifts) {
 			String id = randomUUID();
 			ids.add(id);
 
 			Map<String, Object> newRow = new HashMap<String, Object>();
-			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID, id);
-			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID,
-					isgfu.getUserId());
-			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID,
-					isgfu.getItemId());
+			newRow.put(DBConstants.SECRET_GIFT_FOR_USER__ID, id);
+			newRow.put(DBConstants.SECRET_GIFT_FOR_USER__USER_ID,
+					sgfu.getUserId());
+			newRow.put(DBConstants.SECRET_GIFT_FOR_USER__REWARD_ID,
+					sgfu.getRewardId());
 			newRow.put(
-					DBConstants.ITEM_SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION,
-					isgfu.getSecsTillCollection());
-			newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME,
-					new Timestamp(isgfu.getCreateTime().getTime()));
+					DBConstants.SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION,
+					sgfu.getSecsUntilCollection());
+			newRow.put(DBConstants.SECRET_GIFT_FOR_USER__CREATE_TIME,
+					sgfu.getCreateTime());
 
 			newRows.add(newRow);
 		}
@@ -2972,64 +2972,62 @@ public class InsertUtils implements InsertUtil {
 			return false;
 	}
 
-	@Override
-	public boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
-			String gifterUserId, int clanGiftId, String reasonForGift) {
-		if(userIdsToRewardIds == null || userIdsToRewardIds.isEmpty()) {
-			log.error("map containing ids to translations is null/empty");
-		}
-
-		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
-		int size = userIdsToRewardIds.size();
-		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-
-		List<String> idList = new ArrayList<String>();
-		List<String> receiverUserIdList = new ArrayList<String>();
-		List<Integer> rewardIdList = new ArrayList<Integer>();
-		List<String> gifterUserIdList = new ArrayList<String>();
-		List<Integer> clanGiftIdList = new ArrayList<Integer>();
-		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
-		List<String> reasonForGiftList = new ArrayList<String>();
-		Timestamp now = new Timestamp(new Date().getTime());
-
-		try {
-			for(String receiverUserId : userIdsToRewardIds.keySet()) {
-				idList.add(randomUUID());
-				receiverUserIdList.add(receiverUserId);
-				rewardIdList.add(userIdsToRewardIds.get(receiverUserId));
-				if(gifterUserId != null) {
-					gifterUserIdList.add(gifterUserId);
-				}
-				clanGiftIdList.add(clanGiftId);
-				timeReceivedList.add(now);
-				reasonForGiftList.add(reasonForGift);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error("error converting language to string");
-			e.printStackTrace();
-		}
-
-		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__ID, idList);
-		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
-		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REWARD_ID, rewardIdList);
-
-		if(!gifterUserIdList.isEmpty()) {
-			insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
-		}
-
-		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__CLAN_GIFT_ID, clanGiftIdList);
-		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__TIME_RECEIVED, timeReceivedList);
-		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REASON_FOR_GIFT, reasonForGiftList);
-
-		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-				tableName, insertParams, size);
-
-		if (numInserted == size) {
-			return true;
-		}
-		else return false;
-	}
+//	@Override
+//	public boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
+//			String gifterUserId, int clanGiftId, String reasonForGift) {
+//		if(userIdsToRewardIds == null || userIdsToRewardIds.isEmpty()) {
+//			log.error("map containing ids to translations is null/empty");
+//		}
+//
+//		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
+//		int size = userIdsToRewardIds.size();
+//		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+//
+//		List<String> idList = new ArrayList<String>();
+//		List<String> receiverUserIdList = new ArrayList<String>();
+//		List<Integer> rewardIdList = new ArrayList<Integer>();
+//		List<String> gifterUserIdList = new ArrayList<String>();
+//		List<Integer> clanGiftIdList = new ArrayList<Integer>();
+//		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
+//		List<String> reasonForGiftList = new ArrayList<String>();
+//		Timestamp now = new Timestamp(new Date().getTime());
+//
+//		try {
+//			for(String receiverUserId : userIdsToRewardIds.keySet()) {
+//				idList.add(randomUUID());
+//				receiverUserIdList.add(receiverUserId);
+//				rewardIdList.add(userIdsToRewardIds.get(receiverUserId));
+//				if(gifterUserId != null) {
+//					gifterUserIdList.add(gifterUserId);
+//				}
+//				clanGiftIdList.add(clanGiftId);
+//				timeReceivedList.add(now);
+//				reasonForGiftList.add(reasonForGift);
+//			}
+//		} catch (Exception e) {
+//			log.error("error converting language to string", e);
+//		}
+//
+//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__ID, idList);
+//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
+//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REWARD_ID, rewardIdList);
+//
+//		if(!gifterUserIdList.isEmpty()) {
+//			insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
+//		}
+//
+//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__CLAN_GIFT_ID, clanGiftIdList);
+//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__TIME_RECEIVED, timeReceivedList);
+//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REASON_FOR_GIFT, reasonForGiftList);
+//
+//		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+//				tableName, insertParams, size);
+//
+//		if (numInserted == size) {
+//			return true;
+//		}
+//		else return false;
+//	}
 
 	@Override
 	public boolean insertGiftForUser(Collection<GiftForUser> giftForUsers) {
@@ -3040,8 +3038,7 @@ public class InsertUtils implements InsertUtil {
 		List<String> idList = new ArrayList<String>();
 		List<String> gifterUserIdList = new ArrayList<String>();
 		List<String> receiverUserIdList = new ArrayList<String>();
-		List<String> giftTypeList = new ArrayList<String>();
-		List<Integer> staticDataIdList = new ArrayList<Integer>();
+		List<Integer> giftIdList = new ArrayList<Integer>();
 		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
 		List<Integer> rewardIdList = new ArrayList<Integer>();
 		List<Integer> minutesTillExpirationList = new ArrayList<Integer>();
@@ -3054,8 +3051,7 @@ public class InsertUtils implements InsertUtil {
 			idList.add(id);
 			gifterUserIdList.add(gfu.getGifterUserId());
 			receiverUserIdList.add(gfu.getReceiverUserId());
-			giftTypeList.add(gfu.getGiftType());
-			staticDataIdList.add(gfu.getStaticDataId());
+			giftIdList.add(gfu.getGiftId());
 			Timestamp ts = new Timestamp(gfu.getTimeOfEntry().getTime());
 			timeReceivedList.add(ts);
 			rewardIdList.add(gfu.getRewardId());
@@ -3066,8 +3062,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.GIFT_FOR_USER__ID, idList);
 		insertParams.put(DBConstants.GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
 		insertParams.put(DBConstants.GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
-		insertParams.put(DBConstants.GIFT_FOR_USER__GIFT_TYPE, giftTypeList);
-		insertParams.put(DBConstants.GIFT_FOR_USER__STATIC_DATA_ID, staticDataIdList);
+		insertParams.put(DBConstants.GIFT_FOR_USER__GIFT_ID, giftIdList);
 		insertParams.put(DBConstants.GIFT_FOR_USER__TIME_OF_ENTRY, timeReceivedList);
 		insertParams.put(DBConstants.GIFT_FOR_USER__REWARD_ID, rewardIdList);
 		insertParams.put(DBConstants.GIFT_FOR_USER__MINUTES_TILL_EXPIRATION, minutesTillExpirationList);
@@ -3090,18 +3085,15 @@ public class InsertUtils implements InsertUtil {
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 
 		List<String> giftForUserIdList = new ArrayList<String>();
-		List<String> gifterUserIdList = new ArrayList<String>();
-		List<String> gifterTangoUserIdList = new ArrayList<String>();
+		List<String> gifterTangoNameList = new ArrayList<String>();
 
 		for(GiftForTangoUser gftu : giftForTangoUsers) {
 			giftForUserIdList.add(gftu.getGiftForUserId());
-			gifterUserIdList.add(gftu.getGifterUserId());
-			gifterTangoUserIdList.add(gftu.getGifterTangoUserId());
+			gifterTangoNameList.add(gftu.getGifterTangoName());
 		}
 
 		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID, giftForUserIdList);
-		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_USER_ID, gifterUserIdList);
-		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_TANGO_USER_ID, gifterTangoUserIdList);
+		insertParams.put(DBConstants.GIFT_FOR_TANGO_USER__GIFTER_TANGO_NAME, gifterTangoNameList);
 
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, size);

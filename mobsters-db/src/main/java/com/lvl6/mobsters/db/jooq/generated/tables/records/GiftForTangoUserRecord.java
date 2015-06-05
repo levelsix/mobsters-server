@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record3;
+import org.jooq.Record2;
 import org.jooq.Row;
-import org.jooq.Row3;
+import org.jooq.Row2;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -36,9 +36,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "gift_for_tango_user", schema = "mobsters")
-public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUserRecord> implements Record3<String, String, String>, IGiftForTangoUser {
+public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUserRecord> implements Record2<String, String>, IGiftForTangoUser {
 
-	private static final long serialVersionUID = 165664698;
+	private static final long serialVersionUID = 591169377;
 
 	/**
 	 * Setter for <code>mobsters.gift_for_tango_user.gift_for_user_id</code>.
@@ -62,41 +62,22 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	}
 
 	/**
-	 * Setter for <code>mobsters.gift_for_tango_user.gifter_user_id</code>.
+	 * Setter for <code>mobsters.gift_for_tango_user.gifter_tango_name</code>.
 	 */
 	@Override
-	public GiftForTangoUserRecord setGifterUserId(String value) {
+	public GiftForTangoUserRecord setGifterTangoName(String value) {
 		setValue(1, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>mobsters.gift_for_tango_user.gifter_user_id</code>.
+	 * Getter for <code>mobsters.gift_for_tango_user.gifter_tango_name</code>.
 	 */
-	@Column(name = "gifter_user_id", length = 36)
-	@Size(max = 36)
-	@Override
-	public String getGifterUserId() {
-		return (String) getValue(1);
-	}
-
-	/**
-	 * Setter for <code>mobsters.gift_for_tango_user.gifter_tango_user_id</code>.
-	 */
-	@Override
-	public GiftForTangoUserRecord setGifterTangoUserId(String value) {
-		setValue(2, value);
-		return this;
-	}
-
-	/**
-	 * Getter for <code>mobsters.gift_for_tango_user.gifter_tango_user_id</code>.
-	 */
-	@Column(name = "gifter_tango_user_id", length = 100)
+	@Column(name = "gifter_tango_name", length = 100)
 	@Size(max = 100)
 	@Override
-	public String getGifterTangoUserId() {
-		return (String) getValue(2);
+	public String getGifterTangoName() {
+		return (String) getValue(1);
 	}
 
 	// -------------------------------------------------------------------------
@@ -112,23 +93,23 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	}
 
 	// -------------------------------------------------------------------------
-	// Record3 type implementation
+	// Record2 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<String, String, String> fieldsRow() {
-		return (Row3) super.fieldsRow();
+	public Row2<String, String> fieldsRow() {
+		return (Row2) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<String, String, String> valuesRow() {
-		return (Row3) super.valuesRow();
+	public Row2<String, String> valuesRow() {
+		return (Row2) super.valuesRow();
 	}
 
 	/**
@@ -144,15 +125,7 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	 */
 	@Override
 	public Field<String> field2() {
-		return GiftForTangoUser.GIFT_FOR_TANGO_USER.GIFTER_USER_ID;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Field<String> field3() {
-		return GiftForTangoUser.GIFT_FOR_TANGO_USER.GIFTER_TANGO_USER_ID;
+		return GiftForTangoUser.GIFT_FOR_TANGO_USER.GIFTER_TANGO_NAME;
 	}
 
 	/**
@@ -168,15 +141,7 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	 */
 	@Override
 	public String value2() {
-		return getGifterUserId();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String value3() {
-		return getGifterTangoUserId();
+		return getGifterTangoName();
 	}
 
 	/**
@@ -193,7 +158,7 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	 */
 	@Override
 	public GiftForTangoUserRecord value2(String value) {
-		setGifterUserId(value);
+		setGifterTangoName(value);
 		return this;
 	}
 
@@ -201,19 +166,9 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForTangoUserRecord value3(String value) {
-		setGifterTangoUserId(value);
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public GiftForTangoUserRecord values(String value1, String value2, String value3) {
+	public GiftForTangoUserRecord values(String value1, String value2) {
 		value1(value1);
 		value2(value2);
-		value3(value3);
 		return this;
 	}
 
@@ -227,8 +182,7 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	@Override
 	public void from(IGiftForTangoUser from) {
 		setGiftForUserId(from.getGiftForUserId());
-		setGifterUserId(from.getGifterUserId());
-		setGifterTangoUserId(from.getGifterTangoUserId());
+		setGifterTangoName(from.getGifterTangoName());
 	}
 
 	/**
@@ -254,11 +208,10 @@ public class GiftForTangoUserRecord extends UpdatableRecordImpl<GiftForTangoUser
 	/**
 	 * Create a detached, initialised GiftForTangoUserRecord
 	 */
-	public GiftForTangoUserRecord(String giftForUserId, String gifterUserId, String gifterTangoUserId) {
+	public GiftForTangoUserRecord(String giftForUserId, String gifterTangoName) {
 		super(GiftForTangoUser.GIFT_FOR_TANGO_USER);
 
 		setValue(0, giftForUserId);
-		setValue(1, gifterUserId);
-		setValue(2, gifterTangoUserId);
+		setValue(1, gifterTangoName);
 	}
 }

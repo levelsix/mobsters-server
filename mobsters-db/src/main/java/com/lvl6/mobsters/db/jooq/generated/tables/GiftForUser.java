@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class GiftForUser extends TableImpl<GiftForUserRecord> {
 
-	private static final long serialVersionUID = -788059213;
+	private static final long serialVersionUID = 311910126;
 
 	/**
 	 * The reference instance of <code>mobsters.gift_for_user</code>
@@ -65,14 +65,9 @@ public class GiftForUser extends TableImpl<GiftForUserRecord> {
 	public final TableField<GiftForUserRecord, String> RECEIVER_USER_ID = createField("receiver_user_id", org.jooq.impl.SQLDataType.CHAR.length(36), this, "");
 
 	/**
-	 * The column <code>mobsters.gift_for_user.gift_type</code>. at the moment: GENERIC_GIFT, CLAN_GIFT, TANGO_GIFT
+	 * The column <code>mobsters.gift_for_user.gift_id</code>.
 	 */
-	public final TableField<GiftForUserRecord, String> GIFT_TYPE = createField("gift_type", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "at the moment: GENERIC_GIFT, CLAN_GIFT, TANGO_GIFT");
-
-	/**
-	 * The column <code>mobsters.gift_for_user.static_data_id</code>. at the moment can reference clan_gift_config and tango_gift_config
-	 */
-	public final TableField<GiftForUserRecord, Integer> STATIC_DATA_ID = createField("static_data_id", org.jooq.impl.SQLDataType.INTEGER, this, "at the moment can reference clan_gift_config and tango_gift_config");
+	public final TableField<GiftForUserRecord, Integer> GIFT_ID = createField("gift_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.gift_for_user.time_of_entry</code>.

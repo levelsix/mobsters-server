@@ -32,8 +32,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class UpdateMonsterHealthController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(UpdateMonsterHealthController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -96,18 +96,16 @@ public class UpdateMonsterHealthController extends EventController {
 		resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
-		UUID userTaskUuid = null;
-		UUID droplessTsfuUuid = null;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
 
-			if (userTaskUuid != null) {//TODO: this doesn't make sense
-				userTaskUuid = UUID.fromString(userTaskId);
+			if (userTaskId != null) {
+				UUID.fromString(userTaskId);
 			}
 
 			if (droplessTsfuId != null) {
-				droplessTsfuUuid = UUID.fromString(droplessTsfuId);
+				UUID.fromString(droplessTsfuId);
 			}
 
 			invalidUuids = false;

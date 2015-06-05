@@ -134,8 +134,7 @@ message StartupResponseProto {
 	optional ClanDataProto clanData = 43;
 
 	repeated UserItemUsageProto itemsInUse = 44;
-	repeated UserItemSecretGiftProto gifts = 45;
-		
+	repeated UserSecretGiftProto gifts = 45;
 		
 	//repeated UserTaskCompletedProto completedTasks = 46; defined above 
 
@@ -146,11 +145,9 @@ message StartupResponseProto {
 	repeated SalesPackageProto salesPackages = 51;
 
 	optional UserMiniEventProto userMiniEvent = 52;
-
 	optional DefaultLanguagesProto userDefaultLanguages = 53;
-	
 	repeated UserGiftProto userGifts = 54;
-	repeated UserClanGiftProto userClanGifts = 500; 
+	
 	repeated StrengthLeaderBoardProto topStrengthLeaderBoards = 501; 
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
