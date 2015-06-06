@@ -183,7 +183,7 @@ public class RetrieveUserMonsterTeamAction {
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
 		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters, 
+				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters,
 						monsterLevelInfoRetrieveUtils);
 
 		if (isAvengeRevenge) {
@@ -194,7 +194,7 @@ public class RetrieveUserMonsterTeamAction {
 				}
 			}
 		}
-		
+
 		//calculate the PvpBattleOutcome
 		StartUpResource sup = new StartUpResource(userRetrieveUtil,
 				clanRetrieveUtil);
@@ -225,6 +225,20 @@ public class RetrieveUserMonsterTeamAction {
 					potentialResult.getUnsignedCashAttackerWins());
 			allButRetrieverUserIdToOilLost.put(userId,
 					potentialResult.getUnsignedOilAttackerWins());
+		}
+
+		if (isAvengeRevenge) {
+			for (String userId : allButRetrieverUserIdToCashLost.keySet()) {
+				float reducedCash = allButRetrieverUserIdToCashLost.get(userId) * 0.15F;
+				int reducedCashInt = (int) reducedCash;
+				allButRetrieverUserIdToCashLost.put(userId, reducedCashInt);
+			}
+
+			for (String userId : allButRetrieverUserIdToOilLost.keySet()) {
+				float reducedOil = allButRetrieverUserIdToOilLost.get(userId) * 0.15F;
+				int reducedOilInt = (int) reducedOil;
+				allButRetrieverUserIdToOilLost.put(userId, reducedOilInt);
+			}
 		}
 
 		//get the team monster donation solicitations by all clans
@@ -273,7 +287,7 @@ public class RetrieveUserMonsterTeamAction {
 		//need to calculate whether or not these donated monsters drop a piece
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
 			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
-					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu, 
+					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu,
 							monsterLevelInfoRetrieveUtils);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
@@ -569,7 +583,7 @@ public class RetrieveUserMonsterTeamAction {
 	public Map<String, List<ResearchForUser>> getAllButRetrieverUserIdToUserResearch() {
 		return allButRetrieverUserIdToUserResearch;
 	}
-	
+
 	public Map<String, User> getAllUsers() {
 		return userIdToUser;
 	}
