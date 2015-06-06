@@ -422,6 +422,8 @@ message ForceLogoutResponseProto {
 //when socket disconnects, this allows client to reestablish user id/clan id
 message ReconnectRequestProto {
 	optional MinimumUserProto sender = 1;
+	optional string udid = 2;
+	optional string facebookId = 3;
 }
 
 message ReconnectResponseProto {
