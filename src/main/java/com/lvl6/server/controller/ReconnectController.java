@@ -50,9 +50,9 @@ public class ReconnectController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String udid = reqProto.getUdid();
-		String fbId = reqProto.getFacebookId();
 
 		User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
+		String fbId = user.getFacebookId();
 		
 		if (user != null) {
 			forceLogoutOthers(udid, senderProto.getUserUuid(), user, fbId, responses);

@@ -40821,20 +40821,6 @@ public final class EventStartupProto {
      */
     com.google.protobuf.ByteString
         getUdidBytes();
-
-    /**
-     * <code>optional string facebookId = 3;</code>
-     */
-    boolean hasFacebookId();
-    /**
-     * <code>optional string facebookId = 3;</code>
-     */
-    java.lang.String getFacebookId();
-    /**
-     * <code>optional string facebookId = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getFacebookIdBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ReconnectRequestProto}
@@ -40909,12 +40895,6 @@ public final class EventStartupProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
               udid_ = bs;
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              facebookId_ = bs;
               break;
             }
           }
@@ -41020,52 +41000,9 @@ public final class EventStartupProto {
       }
     }
 
-    public static final int FACEBOOKID_FIELD_NUMBER = 3;
-    private java.lang.Object facebookId_;
-    /**
-     * <code>optional string facebookId = 3;</code>
-     */
-    public boolean hasFacebookId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string facebookId = 3;</code>
-     */
-    public java.lang.String getFacebookId() {
-      java.lang.Object ref = facebookId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          facebookId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string facebookId = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getFacebookIdBytes() {
-      java.lang.Object ref = facebookId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        facebookId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       udid_ = "";
-      facebookId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -41086,9 +41023,6 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getUdidBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getFacebookIdBytes());
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -41105,10 +41039,6 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getUdidBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getFacebookIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -41240,8 +41170,6 @@ public final class EventStartupProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         udid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        facebookId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -41282,10 +41210,6 @@ public final class EventStartupProto {
           to_bitField0_ |= 0x00000002;
         }
         result.udid_ = udid_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.facebookId_ = facebookId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -41308,11 +41232,6 @@ public final class EventStartupProto {
         if (other.hasUdid()) {
           bitField0_ |= 0x00000002;
           udid_ = other.udid_;
-          onChanged();
-        }
-        if (other.hasFacebookId()) {
-          bitField0_ |= 0x00000004;
-          facebookId_ = other.facebookId_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -41530,82 +41449,6 @@ public final class EventStartupProto {
   }
   bitField0_ |= 0x00000002;
         udid_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object facebookId_ = "";
-      /**
-       * <code>optional string facebookId = 3;</code>
-       */
-      public boolean hasFacebookId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string facebookId = 3;</code>
-       */
-      public java.lang.String getFacebookId() {
-        java.lang.Object ref = facebookId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            facebookId_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string facebookId = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getFacebookIdBytes() {
-        java.lang.Object ref = facebookId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          facebookId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string facebookId = 3;</code>
-       */
-      public Builder setFacebookId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        facebookId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string facebookId = 3;</code>
-       */
-      public Builder clearFacebookId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        facebookId_ = getDefaultInstance().getFacebookId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string facebookId = 3;</code>
-       */
-      public Builder setFacebookIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        facebookId_ = value;
         onChanged();
         return this;
       }
@@ -42492,12 +42335,12 @@ public final class EventStartupProto {
       "StartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NO" +
       "T_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030" +
       "ForceLogoutResponseProto\022\031\n\021previousLogi" +
-      "nTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\t\"k\n\025ReconnectRe" +
+      "nTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\t\"W\n\025ReconnectRe" +
       "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\014\n\004udid\030\002 \001(\t\022\022\n\nfa" +
-      "cebookId\030\003 \001(\t\"J\n\026ReconnectResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProtoB\023B\021EventStartupProto"
+      "oto.MinimumUserProto\022\014\n\004udid\030\002 \001(\t\"J\n\026Re" +
+      "connectResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProtoB\023B\021EventS" +
+      "tartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -42670,7 +42513,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_ReconnectRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ReconnectRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Udid", "FacebookId", });
+        new java.lang.String[] { "Sender", "Udid", });
     internal_static_com_lvl6_proto_ReconnectResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_ReconnectResponseProto_fieldAccessorTable = new

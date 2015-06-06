@@ -423,7 +423,6 @@ message ForceLogoutResponseProto {
 message ReconnectRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string udid = 2;
-	optional string facebookId = 3;
 }
 
 message ReconnectResponseProto {
