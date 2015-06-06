@@ -60,6 +60,22 @@
 	<bean id="playersInAction" class="com.lvl6.utils.PlayerSet" scope="singleton" >
 		<property name="players" ref="playersInActionSet" />
 	</bean>
+	
+	<bean class="com.lvl6.clansearch.ClanChatPostDao2" id="clanChatPostDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    <bean class="com.lvl6.clansearch.ClanHelpCountForUserDao2" id="clanHelpCountForUserDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    <bean class="com.lvl6.clansearch.ClanMemberTeamDonationDao2" id="clanMemberTeamDonationDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao" id="clanForUserDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
 	 
 	
 	<bean id="serverMessageHandler" class="com.lvl6.eventhandlers.ServerEventHandler" lazy-init="false" scope="singleton" />

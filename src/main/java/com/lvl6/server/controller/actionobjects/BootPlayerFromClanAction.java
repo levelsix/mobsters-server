@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
@@ -21,7 +21,6 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
-import com.lvl6.server.controller.utils.PvpUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -43,7 +42,7 @@ public class BootPlayerFromClanAction {
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private ClanStuffUtils clanStuffUtils;
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
-	private ClanSearch clanSearch;
+	private HazelcastClanSearchImpl hzClanSearch;
 
 
 	public BootPlayerFromClanAction(
@@ -55,7 +54,7 @@ public class BootPlayerFromClanAction {
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			ClanStuffUtils clanStuffUtils,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
-			ClanSearch clanSearch) {
+			HazelcastClanSearchImpl hzClanSearch) {
 		super();
 		this.userId = userId;
 		this.bootedUserId = bootedUserId;
@@ -69,7 +68,7 @@ public class BootPlayerFromClanAction {
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.clanStuffUtils = clanStuffUtils;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
-		this.clanSearch = clanSearch;
+		this.hzClanSearch = hzClanSearch;
 
 	}
 
@@ -187,7 +186,7 @@ public class BootPlayerFromClanAction {
 
 		//need to account for this user leaving clan
 		ExitClanAction eca = new ExitClanAction(bootedUserId, clanId, clanSizeContainer.size() - 1,
-				lastChatPost, timeUtils, updateUtil, clanSearch);
+				lastChatPost, timeUtils, updateUtil, hzClanSearch);
 		eca.execute();
 
 		return true;
@@ -300,12 +299,13 @@ public class BootPlayerFromClanAction {
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public User getPlayerToBoot() {

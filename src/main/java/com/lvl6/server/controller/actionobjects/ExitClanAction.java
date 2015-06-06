@@ -6,7 +6,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -23,11 +23,11 @@ public class ExitClanAction {
 	private Date lastChatPost;
 	private TimeUtils timeUtil;
 	private UpdateUtil updateUtil;
-	private ClanSearch cs;
+	private HazelcastClanSearchImpl hzClanSearch;
 
 	public ExitClanAction(String userId, String clanId, int clanSize,
 			Date lastChatPost, TimeUtils timeUtil, UpdateUtil updateUtil,
-			ClanSearch cs) {
+			HazelcastClanSearchImpl hzClanSearch) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -35,7 +35,7 @@ public class ExitClanAction {
 		this.lastChatPost = lastChatPost;
 		this.timeUtil = timeUtil;
 		this.updateUtil = updateUtil;
-		this.cs = cs;
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public void execute() {
@@ -58,10 +58,8 @@ public class ExitClanAction {
 		log.info("num PvpBattleHistory clan_avenged marked as true: {}",
 				numUpdated);
 
-		//exiting a clan can delete clan if the user who left is owner
-		//so only update clan search rank if clan contains members
-		if (clanSize > 0) {
-			cs.updateClanSearchRank(clanId, clanSize, lastChatPost);
-		}
+		//if user is last user in clan, clan gets removed from hz
+		hzClanSearch.updateRankForClanSearch(clanId, now, 0, 0, 0, 0, -1);
+
 	}
 }

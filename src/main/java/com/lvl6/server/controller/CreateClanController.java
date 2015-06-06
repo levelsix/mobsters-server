@@ -10,6 +10,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CreateClanRequestEvent;
 import com.lvl6.events.response.CreateClanResponseEvent;
@@ -53,7 +54,7 @@ public class CreateClanController extends EventController {
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -186,11 +187,7 @@ public class CreateClanController extends EventController {
 
 	private void updateClanCache(Clan clan) {
 		String clanId = clan.getId();
-		//need to account for this user creating clan
-		int clanSize = 1;
-		Date lastChatTime = ControllerConstants.INCEPTION_DATE;
-
-		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
 	}
 
 	private void writeToUserCurrencyHistory(CreateClanAction cca) {
@@ -216,12 +213,13 @@ public class CreateClanController extends EventController {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
+
 
 }

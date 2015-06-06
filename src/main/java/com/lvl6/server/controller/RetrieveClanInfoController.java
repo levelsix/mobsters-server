@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.hazelcast.core.IMap;
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;
@@ -77,7 +79,7 @@ public class RetrieveClanInfoController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	@Autowired
-	protected ClanSearch cs;
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanHelpCountForUserRetrieveUtil clanHelpCountForUserRetrieveUtil;
@@ -195,7 +197,7 @@ public class RetrieveClanInfoController extends EventController {
 			String clanId, String clanName, ClanInfoGrabType grabType,
 			RetrieveClanInfoResponseProto.Builder resBuilder) {
 		if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
-			List<String> clanIds = cs
+			List<String> clanIds = hzClanSearch
 					.getTopNClans(ControllerConstants.CLAN__TOP_N_CLANS);
 
 			List<Clan> clanList = orderRecommendedClans(clanIds);
@@ -327,7 +329,7 @@ public class RetrieveClanInfoController extends EventController {
 
 	private List<Clan> orderRecommendedClans(List<String> clanIds) {
 		Map<String, Clan> clanMap = clanRetrieveUtils.getClansByIds(clanIds);
-
+		
 		List<Clan> clanList = new ArrayList<Clan>();
 		if (null == clanMap || clanMap.isEmpty()) {
 			return clanList;
@@ -348,22 +350,13 @@ public class RetrieveClanInfoController extends EventController {
 		if (null == clanList || clanList.isEmpty()) {
 			return;
 		}
-		List<String> clanIds = clanRetrieveUtils.getClanIdsFromClans(clanList);
-
-		List<String> statuses = new ArrayList<String>();
-		statuses.add(UserClanStatus.LEADER.name());
-		statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-		statuses.add(UserClanStatus.CAPTAIN.name());
-		statuses.add(UserClanStatus.MEMBER.name());
-
-		Map<String, Integer> clanIdsToSizes = getUserClanRetrieveUtils()
-				.getClanSizeForClanIdsAndStatuses(clanIds, statuses);
+		IMap<String, Integer> clanMemberSize = hzClanSearch.getClanMemberCountMap();
 
 		for (Clan c : clanList) {
 			String clanId = c.getId();
 
-			if (clanIdsToSizes.containsKey(clanId)) {
-				int size = clanIdsToSizes.get(clanId);
+			if (clanMemberSize.containsKey(clanId)) {
+				int size = clanMemberSize.get(clanId);
 				resBuilder.addClanInfo(createInfoProtoUtils
 						.createFullClanProtoWithClanSize(c, size));
 			} else {
