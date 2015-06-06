@@ -501,12 +501,13 @@ public class RetrieveClanInfoController extends EventController {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 
-	public ClanSearch getCs() {
-		return cs;
+
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setCs(ClanSearch cs) {
-		this.cs = cs;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanHelpCountForUserRetrieveUtil getClanHelpCountForUserRetrieveUtil() {
