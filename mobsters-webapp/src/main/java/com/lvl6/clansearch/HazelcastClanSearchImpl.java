@@ -227,6 +227,7 @@ public class HazelcastClanSearchImpl {
 		else {
 			map.put(clanId, map.get(clanId) + numNewMembers);
 		}
+		log.info("successful insert into clan members count map");
 	}
 	
 	public int retrieveFromHazelCast(IMap<String, Map<Date, Integer>> map, String clanId,
