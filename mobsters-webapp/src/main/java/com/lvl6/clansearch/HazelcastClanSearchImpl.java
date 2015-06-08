@@ -179,6 +179,7 @@ public class HazelcastClanSearchImpl {
 		long clanStrength = members/10 * (chatsPastHour + 1) * (chatsPastDay/12) *
 				filledDonations * (helpsPastDay/100);
 		clanSearchRanking.add(clanId, clanStrength);
+		log.info("updating clan search rank, clanId {}, clanStrength{}", clanId, clanStrength);
 	}
 	
 //	public List<String> getTopClanRanksForSearch() {
