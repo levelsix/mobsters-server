@@ -284,7 +284,7 @@ public class HazelcastClanSearchImpl {
 		for(ClanHelpCountForUser chcfu : helpsPastDay) {
 			String clanId = chcfu.getClanId();
 			if(chcfu.getGiven() > 0)
-				saveToHazelCast(dailyDonateCompletesMap, clanId, chcfu.getDate(), 1);
+				saveToHazelCast(dailyHelpsMap, clanId, chcfu.getDate(), 1);
 		}
 		
 		for(ClanForUser cfu : usersInClans) {
