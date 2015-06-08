@@ -243,6 +243,7 @@ public class HazelcastClanSearchImpl {
 				total += innerMap.get(d);
 			}
 		}
+		log.info("RETRIEVE amount = {}", total);
 		return total;
 	}
 	
