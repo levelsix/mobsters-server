@@ -55,7 +55,7 @@ message FullClanProtoWithClanSize {
 //------------------------------------------------------------------------------------------
 
 message MinimumUserProtoForClans {
-	optional MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
+	optional MinimumUserProto sender = 1;
 	optional UserClanStatus clanStatus = 2;
 	optional float raidContribution = 3;
 	optional int32 battlesWon = 4;

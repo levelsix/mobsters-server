@@ -45,7 +45,7 @@ message SendGroupChatResponseProto {
 }
 
 message ReceivedGroupChatResponseProto {
-	optional MinimumUserProtoWithLevel sender = 1;
+	optional MinimumUserProto sender = 1;
 	optional ChatScope scope = 2 [default = CLAN];
 	optional GroupChatMessageProto message = 3;
 	optional string chatMessage = 4 [deprecated = true];
