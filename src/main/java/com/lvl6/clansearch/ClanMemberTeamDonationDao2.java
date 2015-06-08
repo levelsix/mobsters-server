@@ -6,12 +6,20 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.jooq.Configuration;
+
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanMemberTeamDonation;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanMemberTeamDonationDao;
 
 
 public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
+
+	
+	
+	public ClanMemberTeamDonationDao2(Configuration configuration) {
+		super(configuration);
+	}
 
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonation> fetchForClanSearch(Date d) {
 		Timestamp oneDayAgoTimestamp = new Timestamp(d.getTime());
