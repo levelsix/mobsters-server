@@ -3088,17 +3088,17 @@ public final class EventChatProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.ChatScope scope = 2 [default = CLAN];</code>
@@ -3198,11 +3198,11 @@ public final class EventChatProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = sender_.toBuilder();
               }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(sender_);
                 sender_ = subBuilder.buildPartial();
@@ -3286,23 +3286,23 @@ public final class EventChatProto {
 
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
@@ -3400,7 +3400,7 @@ public final class EventChatProto {
     }
 
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       scope_ = com.lvl6.proto.ChatProto.ChatScope.CLAN;
       message_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
       chatMessage_ = "";
@@ -3583,7 +3583,7 @@ public final class EventChatProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -3716,19 +3716,19 @@ public final class EventChatProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -3736,9 +3736,9 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3752,10 +3752,10 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -3766,14 +3766,14 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -3785,11 +3785,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -3798,17 +3798,17 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -3816,14 +3816,14 @@ public final class EventChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
                   getSender(),
                   getParentForChildren(),
                   isClean());
@@ -10936,60 +10936,60 @@ public final class EventChatProto {
       "\001(\0162>.com.lvl6.proto.SendGroupChatRespon" +
       "seProto.SendGroupChatStatus\"L\n\023SendGroup" +
       "ChatStatus\022\013\n\007SUCCESS\020\001\022\014\n\010TOO_LONG\020\002\022\016\n" +
-      "\nOTHER_FAIL\020\003\022\n\n\006BANNED\020\004\"\361\001\n\036ReceivedGr" +
-      "oupChatResponseProto\0229\n\006sender\030\001 \001(\0132).c" +
-      "om.lvl6.proto.MinimumUserProtoWithLevel\022",
-      ".\n\005scope\030\002 \001(\0162\031.com.lvl6.proto.ChatScop" +
-      "e:\004CLAN\0226\n\007message\030\003 \001(\0132%.com.lvl6.prot" +
-      "o.GroupChatMessageProto\022\027\n\013chatMessage\030\004" +
-      " \001(\tB\002\030\001\022\023\n\007isAdmin\030\005 \001(\010B\002\030\001\"\275\001\n\033Privat" +
-      "eChatPostRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022\025\n\rrecip" +
-      "ientUuid\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\022D\n\017conte" +
-      "ntLanguage\030\004 \001(\0162\".com.lvl6.proto.Transl" +
-      "ateLanguages:\007ENGLISH\"\315\003\n\034PrivateChatPos" +
-      "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl",
-      "6.proto.MinimumUserProto\022R\n\006status\030\002 \001(\016" +
-      "2B.com.lvl6.proto.PrivateChatPostRespons" +
-      "eProto.PrivateChatPostStatus\0222\n\004post\030\003 \001" +
+      "\nOTHER_FAIL\020\003\022\n\n\006BANNED\020\004\"\350\001\n\036ReceivedGr" +
+      "oupChatResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022.\n\005scope\030",
+      "\002 \001(\0162\031.com.lvl6.proto.ChatScope:\004CLAN\0226" +
+      "\n\007message\030\003 \001(\0132%.com.lvl6.proto.GroupCh" +
+      "atMessageProto\022\027\n\013chatMessage\030\004 \001(\tB\002\030\001\022" +
+      "\023\n\007isAdmin\030\005 \001(\010B\002\030\001\"\275\001\n\033PrivateChatPost" +
+      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022\025\n\rrecipientUuid\030" +
+      "\002 \001(\t\022\017\n\007content\030\003 \001(\t\022D\n\017contentLanguag" +
+      "e\030\004 \001(\0162\".com.lvl6.proto.TranslateLangua" +
+      "ges:\007ENGLISH\"\315\003\n\034PrivateChatPostResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
+      "inimumUserProto\022R\n\006status\030\002 \001(\0162B.com.lv" +
+      "l6.proto.PrivateChatPostResponseProto.Pr" +
+      "ivateChatPostStatus\0222\n\004post\030\003 \001(\0132$.com." +
+      "lvl6.proto.PrivateChatPostProto\022K\n\022trans" +
+      "lationSetting\030\004 \001(\0132/.com.lvl6.proto.Pri" +
+      "vateChatDefaultLanguageProto\022;\n\014adminMes" +
+      "sage\030\005 \001(\0132%.com.lvl6.proto.GroupChatMes" +
+      "sageProto\"i\n\025PrivateChatPostStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022\n\016POST_TOO" +
+      "_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\306\001\n",
+      "$RetrievePrivateChatPostsRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\025\n\rotherUserUuid\030\002 \001(\t\022\037\n\023before" +
+      "PrivateChatId\030\003 \001(\005B\002\030\001\0224\n\010language\030\004 \001(" +
+      "\0162\".com.lvl6.proto.TranslateLanguages\"\346\002" +
+      "\n%RetrievePrivateChatPostsResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\0224\n\005posts\030\002 \003(\0132%.com.lvl6.prot" +
+      "o.GroupChatMessageProto\022\037\n\023beforePrivate" +
+      "ChatId\030\003 \001(\005B\002\030\001\022d\n\006status\030\004 \001(\0162T.com.l",
+      "vl6.proto.RetrievePrivateChatPostsRespon" +
+      "seProto.RetrievePrivateChatPostsStatus\022\025" +
+      "\n\rotherUserUuid\030\005 \001(\t\"7\n\036RetrievePrivate" +
+      "ChatPostsStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\254" +
+      "\002\n#TranslateSelectMessagesRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022+\n\010chatType\030\002 \001(\0162\031.com.lvl6.pr" +
+      "oto.ChatScope\022\025\n\rotherUserUuid\030\003 \001(\t\0224\n\010" +
+      "language\030\004 \001(\0162\".com.lvl6.proto.Translat" +
+      "eLanguages\022D\n\026messagesToBeTranslated\030\005 \003",
       "(\0132$.com.lvl6.proto.PrivateChatPostProto" +
-      "\022K\n\022translationSetting\030\004 \001(\0132/.com.lvl6." +
-      "proto.PrivateChatDefaultLanguageProto\022;\n" +
-      "\014adminMessage\030\005 \001(\0132%.com.lvl6.proto.Gro" +
-      "upChatMessageProto\"i\n\025PrivateChatPostSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022\n" +
-      "\016POST_TOO_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BAN",
-      "NED\020\005\"\306\001\n$RetrievePrivateChatPostsReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\025\n\rotherUserUuid\030\002 \001(\t\022" +
-      "\037\n\023beforePrivateChatId\030\003 \001(\005B\002\030\001\0224\n\010lang" +
-      "uage\030\004 \001(\0162\".com.lvl6.proto.TranslateLan" +
-      "guages\"\346\002\n%RetrievePrivateChatPostsRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\0224\n\005posts\030\002 \003(\0132%.com." +
-      "lvl6.proto.GroupChatMessageProto\022\037\n\023befo" +
-      "rePrivateChatId\030\003 \001(\005B\002\030\001\022d\n\006status\030\004 \001(",
-      "\0162T.com.lvl6.proto.RetrievePrivateChatPo" +
-      "stsResponseProto.RetrievePrivateChatPost" +
-      "sStatus\022\025\n\rotherUserUuid\030\005 \001(\t\"7\n\036Retrie" +
-      "vePrivateChatPostsStatus\022\013\n\007SUCCESS\020\001\022\010\n" +
-      "\004FAIL\020\002\"\254\002\n#TranslateSelectMessagesReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022+\n\010chatType\030\002 \001(\0162\031.co" +
-      "m.lvl6.proto.ChatScope\022\025\n\rotherUserUuid\030" +
-      "\003 \001(\t\0224\n\010language\030\004 \001(\0162\".com.lvl6.proto" +
-      ".TranslateLanguages\022D\n\026messagesToBeTrans",
-      "lated\030\005 \003(\0132$.com.lvl6.proto.PrivateChat" +
-      "PostProto\022\023\n\013translateOn\030\006 \001(\010\"\331\002\n$Trans" +
-      "lateSelectMessagesResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022@\n\022messagesTranslated\030\002 \003(\0132$.com.lvl6" +
-      ".proto.PrivateChatPostProto\022b\n\006status\030\003 " +
-      "\001(\0162R.com.lvl6.proto.TranslateSelectMess" +
-      "agesResponseProto.TranslateSelectMessage" +
-      "sStatus\"Y\n\035TranslateSelectMessagesStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_NO",
-      "T_VALID_LANGUAGE\020\003B\020B\016EventChatProto"
+      "\022\023\n\013translateOn\030\006 \001(\010\"\331\002\n$TranslateSelec" +
+      "tMessagesResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022@\n\022mess" +
+      "agesTranslated\030\002 \003(\0132$.com.lvl6.proto.Pr" +
+      "ivateChatPostProto\022b\n\006status\030\003 \001(\0162R.com" +
+      ".lvl6.proto.TranslateSelectMessagesRespo" +
+      "nseProto.TranslateSelectMessagesStatus\"Y" +
+      "\n\035TranslateSelectMessagesStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_NOT_VALID_L",
+      "ANGUAGE\020\003B\020B\016EventChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

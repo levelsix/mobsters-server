@@ -28,7 +28,6 @@ import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
@@ -42,7 +41,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 @Component
 public class RetrievePrivateChatPostsController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(RetrievePrivateChatPostsController.class);
 
 	@Autowired
@@ -65,15 +64,15 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected TranslationUtils translationUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
 
 	public RetrievePrivateChatPostsController() {
-		
+
 	}
 
 	@Override
@@ -151,7 +150,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								userIds);
 
 						//for not hitting the db for every private chat post
-						Map<String, MinimumUserProtoWithLevel> userIdsToMups = generateUserIdsToMupsWithLevel(
+						Map<String, MinimumUserProto> userIdsToMups = generateUserIdsToMups(
 								usersByIds, userId, senderProto, otherUserId);
 
 						List<String> chatIds = new ArrayList<String>();
@@ -175,7 +174,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								}
 
 								long time = pwp.getTimeOfPost().getTime();
-								MinimumUserProtoWithLevel user = userIdsToMups
+								MinimumUserProto user = userIdsToMups
 										.get(posterId);
 								String content = pwp.getContent();
 								boolean isAdmin = false;
@@ -183,14 +182,14 @@ public class RetrievePrivateChatPostsController extends EventController {
 								String chatId = pwp.getId();
 
 								GroupChatMessageProto gcmp = createInfoProtoUtils
-										.createGroupChatMessageProto(time, user, content, 
+										.createGroupChatMessageProto(time, user, content,
 												isAdmin, chatId, tl, null, null);
 								resBuilder.addPosts(gcmp);
 							}
 						}
 						else {
 
-							//CHECK IF the contentLanguage of the private chat matches translateLanguage						
+							//CHECK IF the contentLanguage of the private chat matches translateLanguage
 							for(PrivateChatPost pcp3 : recentPrivateChatPosts) {
 								if(pcp3.getContentLanguage() != null) {
 									if(pcp3.getContentLanguage().toString().equalsIgnoreCase(translateLanguage.toString())) {
@@ -234,7 +233,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 									String contentLanguage = pwp.getContentLanguage();
 									if(contentLanguage == null || contentLanguage.isEmpty()) {
 										userIdsWithoutContentLanguage.add(posterId);
-									}	
+									}
 								}
 							}
 
@@ -246,10 +245,10 @@ public class RetrievePrivateChatPostsController extends EventController {
 								if(!tsfuMap.containsKey(uId)) {
 									userIdsToContentLanguage.put(uId, ControllerConstants.TRANSLATION_SETTINGS__DEFAULT_LANGUAGE);
 								}
-								else userIdsToContentLanguage.put(uId, tsfuMap.get(uId).getLanguage()); 
+								else userIdsToContentLanguage.put(uId, tsfuMap.get(uId).getLanguage());
 							}
 
-							//now check the private chat posts with null content language, if the user's global language setting matches 
+							//now check the private chat posts with null content language, if the user's global language setting matches
 							//translateLanguage, we'll use the text
 							for(PrivateChatPost pcp2 : recentPrivateChatPosts) {
 								if(!returnMap.containsKey(pcp2.getId())) {
@@ -258,7 +257,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 										String posterGlobalLanguage = userIdsToContentLanguage.get(posterId);
 										if(posterGlobalLanguage.equalsIgnoreCase(translateLanguage.toString())) {
 											returnMap.put(pcp2.getId(), pcp2.getContent());
-										}	
+										}
 									}
 								}
 							}
@@ -301,7 +300,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								}
 
 								long time = pwp.getTimeOfPost().getTime();
-								MinimumUserProtoWithLevel user = userIdsToMups
+								MinimumUserProto user = userIdsToMups
 										.get(posterId);
 								String content = pwp.getContent();
 								boolean isAdmin = false;
@@ -309,7 +308,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 								String chatId = pwp.getId();
 
 								GroupChatMessageProto gcmp = createInfoProtoUtils
-										.createGroupChatMessageProto(time, user, content, 
+										.createGroupChatMessageProto(time, user, content,
 												isAdmin, chatId, tl, translateLanguage,
 												returnMap.get(chatId));
 								resBuilder.addPosts(gcmp);
@@ -353,16 +352,16 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	}
 
-	private Map<String, MinimumUserProtoWithLevel> generateUserIdsToMupsWithLevel(
+	private Map<String, MinimumUserProto> generateUserIdsToMups(
 			Map<String, User> usersByIds, String userId,
 			MinimumUserProto userMup, String otherUserId) {
-		Map<String, MinimumUserProtoWithLevel> userIdsToMups = new HashMap<String, MinimumUserProtoWithLevel>();
+		Map<String, MinimumUserProto> userIdsToMups = new HashMap<String, MinimumUserProto>();
 
 		User aUser = usersByIds.get(userId);
 		User otherUser = usersByIds.get(otherUserId);
 
-		MinimumUserProtoWithLevel mup1 = createInfoProtoUtils
-				.createMinimumUserProtoWithLevel(aUser, null, userMup);
+		MinimumUserProto mup1 = createInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(aUser, null);
 		userIdsToMups.put(userId, mup1);
 
 		Clan otherUserClan = null;
@@ -371,8 +370,8 @@ public class RetrievePrivateChatPostsController extends EventController {
 					otherUser.getClanId());
 		}
 
-		MinimumUserProtoWithLevel mup2 = createInfoProtoUtils
-				.createMinimumUserProtoWithLevel(otherUser, otherUserClan, null);
+		MinimumUserProto mup2 = createInfoProtoUtils
+				.createMinimumUserProtoFromUserAndClan(otherUser, otherUserClan);
 		userIdsToMups.put(otherUserId, mup2);
 
 		return userIdsToMups;

@@ -23,7 +23,6 @@ import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAve
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.BeginClanAvengingAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
@@ -42,15 +41,15 @@ public class BeginClanAvengingController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
 
 	public BeginClanAvengingController() {
-		
+
 	}
 
 	@Override
@@ -135,7 +134,7 @@ public class BeginClanAvengingController extends EventController {
 		try {
 			List<ClanAvenge> caList = clanStuffUtils.javafyPvpHistoryProto(
 					userId, clanId, recentNBattles, clientTime);
-			Map<String, MinimumUserProtoWithLevel> attackerMupwlMap = clanStuffUtils
+			Map<String, MinimumUserProto> attackerMupMap = clanStuffUtils
 					.extractAttackerFullUserProto(recentNBattles);
 
 			BeginClanAvengingAction bcaa = new BeginClanAvengingAction(userId,
@@ -154,7 +153,7 @@ public class BeginClanAvengingController extends EventController {
 						.getRetaliationRequestsWithIds();
 				List<PvpClanAvengeProto> retaliationProtos = createInfoProtoUtils
 						.createPvpClanAvengeProto(retaliationRequestsWithIds,
-								senderProto, clanId, attackerMupwlMap);
+								senderProto, clanId, attackerMupMap);
 
 				resBuilder.addAllClanAvengings(retaliationProtos);
 
@@ -228,7 +227,7 @@ public class BeginClanAvengingController extends EventController {
 	//			  RetrieveClanDataResponseProto.newBuilder();
 	//		  rcdrpb.setMup(senderProto);
 	//		  rcdrpb.setClanData(cdp);
-	//		  
+	//
 	//		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
 	//		  responses.normalResponseEvents().add(rcdre);
 	//	  }

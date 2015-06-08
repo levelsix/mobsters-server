@@ -104,17 +104,17 @@ public final class BattleProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
      */
     boolean hasDefender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender();
+    com.lvl6.proto.UserProto.MinimumUserProto getDefender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder();
 
     /**
      * <code>repeated .com.lvl6.proto.PvpMonsterProto defenderMonsters = 3;</code>
@@ -375,11 +375,11 @@ public final class BattleProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = defender_.toBuilder();
               }
-              defender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              defender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(defender_);
                 defender_ = subBuilder.buildPartial();
@@ -508,23 +508,23 @@ public final class BattleProto {
 
     private int bitField0_;
     public static final int DEFENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel defender_;
+    private com.lvl6.proto.UserProto.MinimumUserProto defender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
      */
     public boolean hasDefender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
       return defender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
       return defender_;
     }
 
@@ -830,7 +830,7 @@ public final class BattleProto {
     }
 
     private void initFields() {
-      defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       defenderMonsters_ = java.util.Collections.emptyList();
       prospectiveCashWinnings_ = 0;
       prospectiveOilWinnings_ = 0;
@@ -1057,7 +1057,7 @@ public final class BattleProto {
       public Builder clear() {
         super.clear();
         if (defenderBuilder_ == null) {
-          defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
           defenderBuilder_.clear();
         }
@@ -1339,19 +1339,19 @@ public final class BattleProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> defenderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> defenderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
       public boolean hasDefender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
         if (defenderBuilder_ == null) {
           return defender_;
         } else {
@@ -1359,9 +1359,9 @@ public final class BattleProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
-      public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (defenderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1375,10 +1375,10 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
       public Builder setDefender(
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (defenderBuilder_ == null) {
           defender_ = builderForValue.build();
           onChanged();
@@ -1389,14 +1389,14 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
-      public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (defenderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              defender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+              defender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
             defender_ =
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(defender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(defender_).mergeFrom(value).buildPartial();
           } else {
             defender_ = value;
           }
@@ -1408,11 +1408,11 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
       public Builder clearDefender() {
         if (defenderBuilder_ == null) {
-          defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
           defenderBuilder_.clear();
@@ -1421,17 +1421,17 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getDefenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getDefenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getDefenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
         if (defenderBuilder_ != null) {
           return defenderBuilder_.getMessageOrBuilder();
         } else {
@@ -1439,14 +1439,14 @@ public final class BattleProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getDefenderFieldBuilder() {
         if (defenderBuilder_ == null) {
           defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
                   getDefender(),
                   getParentForChildren(),
                   isClean());
@@ -7748,7 +7748,7 @@ public final class BattleProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      *
      * <pre>
      *in clan avenge, this user is the one that will be attacked
@@ -7756,21 +7756,21 @@ public final class BattleProto {
      */
     boolean hasAttacker();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      *
      * <pre>
      *in clan avenge, this user is the one that will be attacked
      * </pre>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker();
+    com.lvl6.proto.UserProto.MinimumUserProto getAttacker();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      *
      * <pre>
      *in clan avenge, this user is the one that will be attacked
      * </pre>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
@@ -7917,11 +7917,11 @@ public final class BattleProto {
               break;
             }
             case 26: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = attacker_.toBuilder();
               }
-              attacker_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              attacker_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(attacker_);
                 attacker_ = subBuilder.buildPartial();
@@ -8079,9 +8079,9 @@ public final class BattleProto {
     }
 
     public static final int ATTACKER_FIELD_NUMBER = 3;
-    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_;
+    private com.lvl6.proto.UserProto.MinimumUserProto attacker_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      *
      * <pre>
      *in clan avenge, this user is the one that will be attacked
@@ -8091,23 +8091,23 @@ public final class BattleProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      *
      * <pre>
      *in clan avenge, this user is the one that will be attacked
      * </pre>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getAttacker() {
       return attacker_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      *
      * <pre>
      *in clan avenge, this user is the one that will be attacked
      * </pre>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder() {
       return attacker_;
     }
 
@@ -8235,7 +8235,7 @@ public final class BattleProto {
     private void initFields() {
       clanAvengeUuid_ = "";
       usersAvenging_ = java.util.Collections.emptyList();
-      attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       battleEndTime_ = 0L;
       avengeRequestTime_ = 0L;
@@ -8446,7 +8446,7 @@ public final class BattleProto {
           usersAvengingBuilder_.clear();
         }
         if (attackerBuilder_ == null) {
-          attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
           attackerBuilder_.clear();
         }
@@ -8939,11 +8939,11 @@ public final class BattleProto {
         return usersAvengingBuilder_;
       }
 
-      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> attackerBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> attackerBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
@@ -8953,13 +8953,13 @@ public final class BattleProto {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getAttacker() {
         if (attackerBuilder_ == null) {
           return attacker_;
         } else {
@@ -8967,13 +8967,13 @@ public final class BattleProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
-      public Builder setAttacker(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder setAttacker(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (attackerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8987,14 +8987,14 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
       public Builder setAttacker(
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (attackerBuilder_ == null) {
           attacker_ = builderForValue.build();
           onChanged();
@@ -9005,18 +9005,18 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
-      public Builder mergeAttacker(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder mergeAttacker(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (attackerBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              attacker_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+              attacker_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
             attacker_ =
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(attacker_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(attacker_).mergeFrom(value).buildPartial();
           } else {
             attacker_ = value;
           }
@@ -9028,7 +9028,7 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
@@ -9036,7 +9036,7 @@ public final class BattleProto {
        */
       public Builder clearAttacker() {
         if (attackerBuilder_ == null) {
-          attacker_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
           attackerBuilder_.clear();
@@ -9045,25 +9045,25 @@ public final class BattleProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getAttackerBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getAttackerBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getAttackerFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder() {
         if (attackerBuilder_ != null) {
           return attackerBuilder_.getMessageOrBuilder();
         } else {
@@ -9071,18 +9071,18 @@ public final class BattleProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        *
        * <pre>
        *in clan avenge, this user is the one that will be attacked
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getAttackerFieldBuilder() {
         if (attackerBuilder_ == null) {
           attackerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
                   getAttacker(),
                   getParentForChildren(),
                   isClean());
@@ -11180,57 +11180,56 @@ public final class BattleProto {
     java.lang.String[] descriptorData = {
       "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
       "tuff.proto\032\016Research.proto\032\017Structure.pr" +
-      "oto\032\nUser.proto\"\351\003\n\010PvpProto\022;\n\010defender" +
-      "\030\001 \001(\0132).com.lvl6.proto.MinimumUserProto" +
-      "WithLevel\0229\n\020defenderMonsters\030\003 \003(\0132\037.co" +
-      "m.lvl6.proto.PvpMonsterProto\022\037\n\027prospect" +
-      "iveCashWinnings\030\004 \001(\005\022\036\n\026prospectiveOilW" +
-      "innings\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006 \001(\0132\"." +
-      "com.lvl6.proto.UserPvpLeagueProto\022\023\n\013def" +
-      "enderMsg\030\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.com.lvl6.",
-      "proto.ClanMemberTeamDonationProto\022\030\n\020mon" +
-      "sterIdDropped\030\t \001(\005\022E\n\022userBoardObstacle" +
-      "s\030\n \003(\0132).com.lvl6.proto.UserPvpBoardObs" +
-      "tacleProto\0227\n\014userResearch\030\013 \003(\0132!.com.l" +
-      "vl6.proto.UserResearchProto\"m\n\017PvpMonste" +
-      "rProto\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lv" +
-      "l6.proto.MinimumUserMonsterProto\022\030\n\020mons" +
-      "terIdDropped\030\002 \001(\005\"\267\005\n\017PvpHistoryProto\022\025" +
-      "\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132" +
-      "\035.com.lvl6.proto.FullUserProto\022:\n\021attack",
-      "ersMonsters\030\002 \003(\0132\037.com.lvl6.proto.PvpMo" +
-      "nsterProto\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defen" +
-      "derCashChange\030\004 \001(\021\022\031\n\021defenderOilChange" +
-      "\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037\n\027prospe" +
-      "ctiveCashWinnings\030\007 \001(\005\022\036\n\026prospectiveOi" +
-      "lWinnings\030\010 \001(\005\022:\n\016attackerBefore\030\n \001(\0132" +
-      "\".com.lvl6.proto.UserPvpLeagueProto\0229\n\ra" +
-      "ttackerAfter\030\013 \001(\0132\".com.lvl6.proto.User" +
-      "PvpLeagueProto\022:\n\016defenderBefore\030\014 \001(\0132\"" +
-      ".com.lvl6.proto.UserPvpLeagueProto\0229\n\rde",
-      "fenderAfter\030\r \001(\0132\".com.lvl6.proto.UserP" +
-      "vpLeagueProto\022/\n\010defender\030\016 \001(\0132\035.com.lv" +
-      "l6.proto.FullUserProto\022\032\n\022attackerCashCh" +
-      "ange\030\017 \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n" +
-      "\013clanAvenged\030\021 \001(\010\022\020\n\010replayId\030\023 \001(\t\"^\n\016" +
-      "PvpLeagueProto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleag" +
-      "ueName\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013descr" +
-      "iption\030\005 \001(\t\"\250\002\n\022PvpClanAvengeProto\022\026\n\016c" +
-      "lanAvengeUuid\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003" +
-      "(\0132&.com.lvl6.proto.PvpUserClanAvengePro",
-      "to\022;\n\010attacker\030\003 \001(\0132).com.lvl6.proto.Mi" +
-      "nimumUserProtoWithLevel\0222\n\010defender\030\004 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\025\n\rb" +
-      "attleEndTime\030\005 \001(\003\022\031\n\021avengeRequestTime\030" +
-      "\006 \001(\003\022\030\n\020defenderClanUuid\030\007 \001(\t\"h\n\026PvpUs" +
-      "erClanAvengeProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010c" +
-      "lanUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n" +
-      "\navengeTime\030\004 \001(\003\"`\n\021BattleReplayProto\022\022" +
-      "\n\nreplayUuid\030\001 \001(\t\022\023\n\013creatorUuid\030\002 \001(\t\022" +
-      "\016\n\006replay\030\003 \001(\014\022\022\n\ncreateTime\030\004 \001(\005*E\n\014B",
-      "attleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDE" +
-      "R_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProt" +
-      "o"
+      "oto\032\nUser.proto\"\340\003\n\010PvpProto\0222\n\010defender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\0229\n\020defenderMonsters\030\003 \003(\0132\037.com.lvl6.pr" +
+      "oto.PvpMonsterProto\022\037\n\027prospectiveCashWi" +
+      "nnings\030\004 \001(\005\022\036\n\026prospectiveOilWinnings\030\005" +
+      " \001(\005\022:\n\016pvpLeagueStats\030\006 \001(\0132\".com.lvl6." +
+      "proto.UserPvpLeagueProto\022\023\n\013defenderMsg\030" +
+      "\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.com.lvl6.proto.Cla",
+      "nMemberTeamDonationProto\022\030\n\020monsterIdDro" +
+      "pped\030\t \001(\005\022E\n\022userBoardObstacles\030\n \003(\0132)" +
+      ".com.lvl6.proto.UserPvpBoardObstacleProt" +
+      "o\0227\n\014userResearch\030\013 \003(\0132!.com.lvl6.proto" +
+      ".UserResearchProto\"m\n\017PvpMonsterProto\022@\n" +
+      "\017defenderMonster\030\001 \001(\0132\'.com.lvl6.proto." +
+      "MinimumUserMonsterProto\022\030\n\020monsterIdDrop" +
+      "ped\030\002 \001(\005\"\267\005\n\017PvpHistoryProto\022\025\n\rbattleE" +
+      "ndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com.lvl" +
+      "6.proto.FullUserProto\022:\n\021attackersMonste",
+      "rs\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterProt" +
+      "o\022\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defenderCashCh" +
+      "ange\030\004 \001(\021\022\031\n\021defenderOilChange\030\005 \001(\021\022\026\n" +
+      "\016exactedRevenge\030\006 \001(\010\022\037\n\027prospectiveCash" +
+      "Winnings\030\007 \001(\005\022\036\n\026prospectiveOilWinnings" +
+      "\030\010 \001(\005\022:\n\016attackerBefore\030\n \001(\0132\".com.lvl" +
+      "6.proto.UserPvpLeagueProto\0229\n\rattackerAf" +
+      "ter\030\013 \001(\0132\".com.lvl6.proto.UserPvpLeague" +
+      "Proto\022:\n\016defenderBefore\030\014 \001(\0132\".com.lvl6" +
+      ".proto.UserPvpLeagueProto\0229\n\rdefenderAft",
+      "er\030\r \001(\0132\".com.lvl6.proto.UserPvpLeagueP" +
+      "roto\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.proto." +
+      "FullUserProto\022\032\n\022attackerCashChange\030\017 \001(" +
+      "\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanAven" +
+      "ged\030\021 \001(\010\022\020\n\010replayId\030\023 \001(\t\"^\n\016PvpLeague" +
+      "Proto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 " +
+      "\001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013description\030\005 " +
+      "\001(\t\"\237\002\n\022PvpClanAvengeProto\022\026\n\016clanAvenge" +
+      "Uuid\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.com." +
+      "lvl6.proto.PvpUserClanAvengeProto\0222\n\010att",
+      "acker\030\003 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\0222\n\010defender\030\004 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\025\n\rbattleEndTime\030\005 \001(\003" +
+      "\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderC" +
+      "lanUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022" +
+      "\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016c" +
+      "lanAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003\"" +
+      "`\n\021BattleReplayProto\022\022\n\nreplayUuid\030\001 \001(\t" +
+      "\022\023\n\013creatorUuid\030\002 \001(\t\022\016\n\006replay\030\003 \001(\014\022\022\n" +
+      "\ncreateTime\030\004 \001(\005*E\n\014BattleResult\022\020\n\014ATT",
+      "ACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKE" +
+      "R_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

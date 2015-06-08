@@ -114,7 +114,7 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 		if (connectedPlayer != null) {
 			log.info("wrote a response event to connected player with id "
 					+ playerId + " instead of sending APNS message");
-			
+
 		} else {
 			log.info("received APNS notification to send to player with id "
 					+ playerId);
@@ -274,7 +274,7 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 
 	/**
 	 * sends to offline people
-	 * 
+	 *
 	 * @param event
 	 * @param playerId - person to send event to
 	 */
@@ -334,7 +334,7 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 					content += "...";
 				}
 			}
-			MinimumUserProto mup = post.getPoster().getMinUserProto();
+			MinimumUserProto mup = post.getPoster();
 			String clanId = "";
 			if (null != mup.getClan()) {
 				clanId = mup.getClan().getClanUuid();

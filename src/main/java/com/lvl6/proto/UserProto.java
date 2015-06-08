@@ -1286,6 +1286,15 @@ public final class UserProto {
      * <code>optional int32 avatarMonsterId = 4;</code>
      */
     int getAvatarMonsterId();
+
+    /**
+     * <code>optional int64 strength = 5;</code>
+     */
+    boolean hasStrength();
+    /**
+     * <code>optional int64 strength = 5;</code>
+     */
+    long getStrength();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserProto}
@@ -1367,6 +1376,11 @@ public final class UserProto {
             case 32: {
               bitField0_ |= 0x00000008;
               avatarMonsterId_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              strength_ = input.readInt64();
               break;
             }
           }
@@ -1529,11 +1543,27 @@ public final class UserProto {
       return avatarMonsterId_;
     }
 
+    public static final int STRENGTH_FIELD_NUMBER = 5;
+    private long strength_;
+    /**
+     * <code>optional int64 strength = 5;</code>
+     */
+    public boolean hasStrength() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 strength = 5;</code>
+     */
+    public long getStrength() {
+      return strength_;
+    }
+
     private void initFields() {
       userUuid_ = "";
       name_ = "";
       clan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       avatarMonsterId_ = 0;
+      strength_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1560,6 +1590,9 @@ public final class UserProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, avatarMonsterId_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, strength_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1584,6 +1617,10 @@ public final class UserProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, avatarMonsterId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, strength_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1715,6 +1752,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         avatarMonsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        strength_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -1763,6 +1802,10 @@ public final class UserProto {
           to_bitField0_ |= 0x00000008;
         }
         result.avatarMonsterId_ = avatarMonsterId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.strength_ = strength_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1794,6 +1837,9 @@ public final class UserProto {
         }
         if (other.hasAvatarMonsterId()) {
           setAvatarMonsterId(other.getAvatarMonsterId());
+        }
+        if (other.hasStrength()) {
+          setStrength(other.getStrength());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2122,6 +2168,38 @@ public final class UserProto {
         return this;
       }
 
+      private long strength_ ;
+      /**
+       * <code>optional int64 strength = 5;</code>
+       */
+      public boolean hasStrength() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 strength = 5;</code>
+       */
+      public long getStrength() {
+        return strength_;
+      }
+      /**
+       * <code>optional int64 strength = 5;</code>
+       */
+      public Builder setStrength(long value) {
+        bitField0_ |= 0x00000010;
+        strength_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 strength = 5;</code>
+       */
+      public Builder clearStrength() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        strength_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumUserProto)
     }
 
@@ -2131,592 +2209,6 @@ public final class UserProto {
     }
 
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProto)
-  }
-
-  public interface MinimumUserProtoWithLevelOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.MinimumUserProtoWithLevel)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-     */
-    boolean hasMinUserProto();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
-
-    /**
-     * <code>optional int32 level = 2;</code>
-     */
-    boolean hasLevel();
-    /**
-     * <code>optional int32 level = 2;</code>
-     */
-    int getLevel();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithLevel}
-   */
-  public static final class MinimumUserProtoWithLevel extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.MinimumUserProtoWithLevel)
-      MinimumUserProtoWithLevelOrBuilder {
-    // Use MinimumUserProtoWithLevel.newBuilder() to construct.
-    private MinimumUserProtoWithLevel(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private MinimumUserProtoWithLevel(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final MinimumUserProtoWithLevel defaultInstance;
-    public static MinimumUserProtoWithLevel getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public MinimumUserProtoWithLevel getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private MinimumUserProtoWithLevel(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = minUserProto_.toBuilder();
-              }
-              minUserProto_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(minUserProto_);
-                minUserProto_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              level_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.class, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<MinimumUserProtoWithLevel> PARSER =
-        new com.google.protobuf.AbstractParser<MinimumUserProtoWithLevel>() {
-      public MinimumUserProtoWithLevel parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MinimumUserProtoWithLevel(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MinimumUserProtoWithLevel> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int MINUSERPROTO_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-     */
-    public boolean hasMinUserProto() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto() {
-      return minUserProto_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder() {
-      return minUserProto_;
-    }
-
-    public static final int LEVEL_FIELD_NUMBER = 2;
-    private int level_;
-    /**
-     * <code>optional int32 level = 2;</code>
-     */
-    public boolean hasLevel() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 level = 2;</code>
-     */
-    public int getLevel() {
-      return level_;
-    }
-
-    private void initFields() {
-      minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      level_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, minUserProto_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, level_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, minUserProto_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, level_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.MinimumUserProtoWithLevel}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.MinimumUserProtoWithLevel)
-        com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.class, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMinUserProtoFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (minUserProtoBuilder_ == null) {
-          minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          minUserProtoBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        level_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor;
-      }
-
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefaultInstanceForType() {
-        return com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel build() {
-        com.lvl6.proto.UserProto.MinimumUserProtoWithLevel result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel buildPartial() {
-        com.lvl6.proto.UserProto.MinimumUserProtoWithLevel result = new com.lvl6.proto.UserProto.MinimumUserProtoWithLevel(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (minUserProtoBuilder_ == null) {
-          result.minUserProto_ = minUserProto_;
-        } else {
-          result.minUserProto_ = minUserProtoBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.level_ = level_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.UserProto.MinimumUserProtoWithLevel) {
-          return mergeFrom((com.lvl6.proto.UserProto.MinimumUserProtoWithLevel)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel other) {
-        if (other == com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) return this;
-        if (other.hasMinUserProto()) {
-          mergeMinUserProto(other.getMinUserProto());
-        }
-        if (other.hasLevel()) {
-          setLevel(other.getLevel());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.UserProto.MinimumUserProtoWithLevel parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.UserProto.MinimumUserProtoWithLevel) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public boolean hasMinUserProto() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto() {
-        if (minUserProtoBuilder_ == null) {
-          return minUserProto_;
-        } else {
-          return minUserProtoBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public Builder setMinUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (minUserProtoBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          minUserProto_ = value;
-          onChanged();
-        } else {
-          minUserProtoBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public Builder setMinUserProto(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (minUserProtoBuilder_ == null) {
-          minUserProto_ = builderForValue.build();
-          onChanged();
-        } else {
-          minUserProtoBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public Builder mergeMinUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (minUserProtoBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              minUserProto_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            minUserProto_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(minUserProto_).mergeFrom(value).buildPartial();
-          } else {
-            minUserProto_ = value;
-          }
-          onChanged();
-        } else {
-          minUserProtoBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public Builder clearMinUserProto() {
-        if (minUserProtoBuilder_ == null) {
-          minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          minUserProtoBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMinUserProtoBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getMinUserProtoFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder() {
-        if (minUserProtoBuilder_ != null) {
-          return minUserProtoBuilder_.getMessageOrBuilder();
-        } else {
-          return minUserProto_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getMinUserProtoFieldBuilder() {
-        if (minUserProtoBuilder_ == null) {
-          minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getMinUserProto(),
-                  getParentForChildren(),
-                  isClean());
-          minUserProto_ = null;
-        }
-        return minUserProtoBuilder_;
-      }
-
-      private int level_ ;
-      /**
-       * <code>optional int32 level = 2;</code>
-       */
-      public boolean hasLevel() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 level = 2;</code>
-       */
-      public int getLevel() {
-        return level_;
-      }
-      /**
-       * <code>optional int32 level = 2;</code>
-       */
-      public Builder setLevel(int value) {
-        bitField0_ |= 0x00000002;
-        level_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 level = 2;</code>
-       */
-      public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        level_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumUserProtoWithLevel)
-    }
-
-    static {
-      defaultInstance = new MinimumUserProtoWithLevel(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithLevel)
   }
 
   public interface MinimumUserProtoWithFacebookIdOrBuilder extends
@@ -5422,13 +4914,13 @@ public final class UserProto {
         getNameBytes();
 
     /**
-     * <code>optional int32 level = 3;</code>
+     * <code>optional int32 level = 3 [deprecated = true];</code>
      */
-    boolean hasLevel();
+    @java.lang.Deprecated boolean hasLevel();
     /**
-     * <code>optional int32 level = 3;</code>
+     * <code>optional int32 level = 3 [deprecated = true];</code>
      */
-    int getLevel();
+    @java.lang.Deprecated int getLevel();
 
     /**
      * <code>optional int32 gems = 4;</code>
@@ -6449,15 +5941,15 @@ public final class UserProto {
     public static final int LEVEL_FIELD_NUMBER = 3;
     private int level_;
     /**
-     * <code>optional int32 level = 3;</code>
+     * <code>optional int32 level = 3 [deprecated = true];</code>
      */
-    public boolean hasLevel() {
+    @java.lang.Deprecated public boolean hasLevel() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 level = 3;</code>
+     * <code>optional int32 level = 3 [deprecated = true];</code>
      */
-    public int getLevel() {
+    @java.lang.Deprecated public int getLevel() {
       return level_;
     }
 
@@ -8730,30 +8222,30 @@ public final class UserProto {
 
       private int level_ ;
       /**
-       * <code>optional int32 level = 3;</code>
+       * <code>optional int32 level = 3 [deprecated = true];</code>
        */
-      public boolean hasLevel() {
+      @java.lang.Deprecated public boolean hasLevel() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 level = 3;</code>
+       * <code>optional int32 level = 3 [deprecated = true];</code>
        */
-      public int getLevel() {
+      @java.lang.Deprecated public int getLevel() {
         return level_;
       }
       /**
-       * <code>optional int32 level = 3;</code>
+       * <code>optional int32 level = 3 [deprecated = true];</code>
        */
-      public Builder setLevel(int value) {
+      @java.lang.Deprecated public Builder setLevel(int value) {
         bitField0_ |= 0x00000004;
         level_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 level = 3;</code>
+       * <code>optional int32 level = 3 [deprecated = true];</code>
        */
-      public Builder clearLevel() {
+      @java.lang.Deprecated public Builder clearLevel() {
         bitField0_ = (bitField0_ & ~0x00000004);
         level_ = 0;
         onChanged();
@@ -12593,11 +12085,6 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -12640,63 +12127,61 @@ public final class UserProto {
       "ClanProto\022\020\n\010clanUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(" +
       "\t\022\022\n\ncreateTime\030\004 \001(\003\022\023\n\013description\030\005 \001" +
       "(\t\022\013\n\003tag\030\006 \001(\t\022\035\n\025requestToJoinRequired" +
-      "\030\007 \001(\010\022\022\n\nclanIconId\030\010 \001(\005\"{\n\020MinimumUse" +
-      "rProto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022." +
-      "\n\004clan\030\003 \001(\0132 .com.lvl6.proto.MinimumCla" +
-      "nProto\022\027\n\017avatarMonsterId\030\004 \001(\005\"b\n\031Minim" +
-      "umUserProtoWithLevel\0226\n\014minUserProto\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\r\n\005",
-      "level\030\002 \001(\005\"l\n\036MinimumUserProtoWithFaceb" +
-      "ookId\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\022\n\nfacebookId\030\002 \001(" +
-      "\t\"{\n MinimumUserProtoWithMaxResources\0226\n" +
-      "\014minUserProto\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\017\n\007maxCash\030\002 \001(\005\022\016\n\006maxOil" +
-      "\030\003 \001(\005\"\201\002\n\036UserFacebookInviteForSlotProt" +
-      "o\022\022\n\ninviteUuid\030\001 \001(\t\022?\n\007inviter\030\002 \001(\0132." +
-      ".com.lvl6.proto.MinimumUserProtoWithFace" +
-      "bookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014t",
-      "imeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022" +
-      "\026\n\016userStructUuid\030\006 \001(\t\022\023\n\013structFbLvl\030\007" +
-      " \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\334\t\n\rFullUserP" +
-      "roto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005" +
-      "level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022" +
-      "\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016task" +
-      "sCompleted\030\007 \001(\005\022\024\n\014referralCode\030\013 \001(\t\022\024" +
-      "\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030\016 " +
-      "\001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030\023 " +
-      "\001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetrieve",
-      "dFromStructs\030\027 \001(\005\022\"\n\032numOilRetrievedFro" +
-      "mStructs\030+ \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6." +
-      "proto.MinimumClanProto\022\033\n\023hasReceivedfbR" +
-      "eward\030\034 \001(\010\022!\n\031numBeginnerSalesPurchased" +
-      "\030\036 \001(\005\022\022\n\nfacebookId\030( \001(\t\022\024\n\014gameCenter" +
-      "Id\030- \001(\t\022\037\n\027lastObstacleSpawnedTime\030/ \001(" +
-      "\003\022\033\n\023numObstaclesRemoved\0301 \001(\005\022\027\n\017avatar" +
-      "MonsterId\0303 \001(\005\0229\n\rpvpLeagueInfo\0300 \001(\0132\"" +
-      ".com.lvl6.proto.UserPvpLeagueProto\022\036\n\026la" +
-      "stMiniJobSpawnedTime\0302 \001(\003\022\037\n\027lastFreeBo",
-      "osterPackTime\0304 \001(\003\022\024\n\014numClanHelps\0305 \001(" +
-      "\005\022!\n\031lastSecretGiftCollectTime\0306 \001(\003\022\033\n\023" +
-      "pvpDefendingMessage\0308 \001(\t\022$\n\034lastTeamDon" +
-      "ationSolicitation\0309 \001(\003\022\022\n\nsalesValue\030: " +
-      "\001(\002\022\035\n\025salesLastPurchaseTime\030; \001(\003\022\025\n\rto" +
-      "talStrength\030< \001(\003\022\035\n\025lastTangoGiftSentTi" +
-      "me\030= \001(\003\022\017\n\007tangoId\030> \001(\t\022\032\n\021segmentatio" +
-      "nGroup\030\364\003 \001(\005\022\025\n\014gachaCredits\030\365\003 \001(\005\022\026\n\016" +
-      "udidForHistory\030. \001(\t\022\023\n\013deviceToken\030\020 \001(" +
-      "\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003",
-      "\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecutiveDay" +
-      "sPlayed\030\030 \001(\005\022$\n\034lastWallPostNotificatio" +
-      "nTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbIdSe" +
-      "tOnUserCreate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030Sta" +
-      "ticUserLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022" +
-      "requiredExperience\030\002 \001(\005\"\261\001\n\022UserPvpLeag" +
-      "ueProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010leagueId\030\002 " +
-      "\001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattle" +
-      "sWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005\022\025\n\rshiel" +
-      "dEndTime\030\007 \001(\003\022\034\n\024monsterDmgMultiplier\030\010",
-      " \001(\002B\013B\tUserProto"
+      "\030\007 \001(\010\022\022\n\nclanIconId\030\010 \001(\005\"\215\001\n\020MinimumUs" +
+      "erProto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022" +
+      ".\n\004clan\030\003 \001(\0132 .com.lvl6.proto.MinimumCl" +
+      "anProto\022\027\n\017avatarMonsterId\030\004 \001(\005\022\020\n\010stre" +
+      "ngth\030\005 \001(\003\"l\n\036MinimumUserProtoWithFacebo" +
+      "okId\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6.pr",
+      "oto.MinimumUserProto\022\022\n\nfacebookId\030\002 \001(\t" +
+      "\"{\n MinimumUserProtoWithMaxResources\0226\n\014" +
+      "minUserProto\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\017\n\007maxCash\030\002 \001(\005\022\016\n\006maxOil\030" +
+      "\003 \001(\005\"\201\002\n\036UserFacebookInviteForSlotProto" +
+      "\022\022\n\ninviteUuid\030\001 \001(\t\022?\n\007inviter\030\002 \001(\0132.." +
+      "com.lvl6.proto.MinimumUserProtoWithFaceb" +
+      "ookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014ti" +
+      "meOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022\026" +
+      "\n\016userStructUuid\030\006 \001(\t\022\023\n\013structFbLvl\030\007 ",
+      "\001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\340\t\n\rFullUserPr" +
+      "oto\022\020\n\010userUuid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\021\n\005l" +
+      "evel\030\003 \001(\005B\002\030\001\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001" +
+      "(\005\022\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016t" +
+      "asksCompleted\030\007 \001(\005\022\024\n\014referralCode\030\013 \001(" +
+      "\t\022\024\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLoginTime" +
+      "\030\016 \001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake" +
+      "\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetri" +
+      "evedFromStructs\030\027 \001(\005\022\"\n\032numOilRetrieved" +
+      "FromStructs\030+ \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lv",
+      "l6.proto.MinimumClanProto\022\033\n\023hasReceived" +
+      "fbReward\030\034 \001(\010\022!\n\031numBeginnerSalesPurcha" +
+      "sed\030\036 \001(\005\022\022\n\nfacebookId\030( \001(\t\022\024\n\014gameCen" +
+      "terId\030- \001(\t\022\037\n\027lastObstacleSpawnedTime\030/" +
+      " \001(\003\022\033\n\023numObstaclesRemoved\0301 \001(\005\022\027\n\017ava" +
+      "tarMonsterId\0303 \001(\005\0229\n\rpvpLeagueInfo\0300 \001(" +
+      "\0132\".com.lvl6.proto.UserPvpLeagueProto\022\036\n" +
+      "\026lastMiniJobSpawnedTime\0302 \001(\003\022\037\n\027lastFre" +
+      "eBoosterPackTime\0304 \001(\003\022\024\n\014numClanHelps\0305" +
+      " \001(\005\022!\n\031lastSecretGiftCollectTime\0306 \001(\003\022",
+      "\033\n\023pvpDefendingMessage\0308 \001(\t\022$\n\034lastTeam" +
+      "DonationSolicitation\0309 \001(\003\022\022\n\nsalesValue" +
+      "\030: \001(\002\022\035\n\025salesLastPurchaseTime\030; \001(\003\022\025\n" +
+      "\rtotalStrength\030< \001(\003\022\035\n\025lastTangoGiftSen" +
+      "tTime\030= \001(\003\022\017\n\007tangoId\030> \001(\t\022\032\n\021segmenta" +
+      "tionGroup\030\364\003 \001(\005\022\025\n\014gachaCredits\030\365\003 \001(\005\022" +
+      "\026\n\016udidForHistory\030. \001(\t\022\023\n\013deviceToken\030\020" +
+      " \001(\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 " +
+      "\001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecutive" +
+      "DaysPlayed\030\030 \001(\005\022$\n\034lastWallPostNotifica",
+      "tionTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbI" +
+      "dSetOnUserCreate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030" +
+      "StaticUserLevelInfoProto\022\r\n\005level\030\001 \001(\005\022" +
+      "\032\n\022requiredExperience\030\002 \001(\005\"\261\001\n\022UserPvpL" +
+      "eagueProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010leagueId" +
+      "\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbat" +
+      "tlesWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005\022\025\n\rsh" +
+      "ieldEndTime\030\007 \001(\003\022\034\n\024monsterDmgMultiplie" +
+      "r\030\010 \001(\002B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12721,45 +12206,39 @@ public final class UserProto {
     internal_static_com_lvl6_proto_MinimumUserProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserProto_descriptor,
-        new java.lang.String[] { "UserUuid", "Name", "Clan", "AvatarMonsterId", });
-    internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor,
-        new java.lang.String[] { "MinUserProto", "Level", });
+        new java.lang.String[] { "UserUuid", "Name", "Clan", "AvatarMonsterId", "Strength", });
     internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor,
         new java.lang.String[] { "MinUserProto", "FacebookId", });
     internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserProtoWithMaxResources_descriptor,
         new java.lang.String[] { "MinUserProto", "MaxCash", "MaxOil", });
     internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor,
         new java.lang.String[] { "InviteUuid", "Inviter", "RecipientFacebookId", "TimeOfInvite", "TimeAccepted", "UserStructUuid", "StructFbLvl", "RedeemedTime", });
     internal_static_com_lvl6_proto_FullUserProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserProto_descriptor,
         new java.lang.String[] { "UserUuid", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "AvatarMonsterId", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "LastFreeBoosterPackTime", "NumClanHelps", "LastSecretGiftCollectTime", "PvpDefendingMessage", "LastTeamDonationSolicitation", "SalesValue", "SalesLastPurchaseTime", "TotalStrength", "LastTangoGiftSentTime", "TangoId", "SegmentationGroup", "GachaCredits", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", });
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor,
         new java.lang.String[] { "Level", "RequiredExperience", });
     internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_UserPvpLeagueProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor,
