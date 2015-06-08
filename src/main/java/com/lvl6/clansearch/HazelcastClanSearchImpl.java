@@ -294,15 +294,26 @@ public class HazelcastClanSearchImpl {
 		//calculate each clan's strength value and save to hz
 		Date now = new Date();
 		for(String clanId : clanMemberCountMap.keySet()) {
+			log.info("clanId {}", clanId);
 			long members2 = clanMemberCountMap.get(clanId);
+			log.info("members {}", members2);
+
 			long chatsPastHour2 = (long) retrieveFromHazelCast(chatsPastHourMap, clanId,
 					now, minutesPastHour);
+			log.info("chatsPastHour {}", chatsPastHour2);
+
 			long chatsPastDay2 = (long) retrieveFromHazelCast(chatsPastHourMap, clanId,
 					now, minutesPastDay);
+			log.info("chats past day {}", chatsPastDay2);
+			
 			long filledDonations2 = (long) retrieveFromHazelCast(dailyDonateCompletesMap, 
 					clanId, now, minutesPastDay);
+			log.info("filled donations {}", filledDonations2);
+
 			long helpsPastDay2 = (long) retrieveFromHazelCast(dailyHelpsMap, clanId, 
 					now, minutesPastDay);
+			log.info("helps past day {}", helpsPastDay2);
+
 			
 			long clanStrength2 = members2/10 * (chatsPastHour2 + 1) * (chatsPastDay2/12) *
 					filledDonations2 * (helpsPastDay2/100);
