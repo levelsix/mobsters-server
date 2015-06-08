@@ -30,7 +30,7 @@ message MinimumUserProto {
 	optional string name = 2;   
 	optional MinimumClanProto clan = 3;
 	optional int32 avatarMonsterId = 4;
-	optional int32 strength = 5;
+	optional int64 strength = 5;
 }
 
 //------------------------------------------------------------------------------------------
