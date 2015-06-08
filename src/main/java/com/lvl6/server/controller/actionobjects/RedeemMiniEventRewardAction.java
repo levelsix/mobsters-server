@@ -239,7 +239,7 @@ public class RedeemMiniEventRewardAction {
 				insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils,
 				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
-				userClanRetrieveUtils, createInfoProtoUtils);
+				userClanRetrieveUtils, createInfoProtoUtils, null);
 
 		boolean awardedRewards = ara.execute();
 

@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserRewardHistory extends TableImpl<UserRewardHistoryRecord> {
 
-	private static final long serialVersionUID = -509551111;
+	private static final long serialVersionUID = 1437948298;
 
 	/**
 	 * The reference instance of <code>mobsters.user_reward_history</code>
@@ -72,12 +72,12 @@ public class UserRewardHistory extends TableImpl<UserRewardHistoryRecord> {
 	/**
 	 * The column <code>mobsters.user_reward_history.reason_for_reward</code>.
 	 */
-	public final TableField<UserRewardHistoryRecord, String> REASON_FOR_REWARD = createField("reason_for_reward", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
+	public final TableField<UserRewardHistoryRecord, String> REASON_FOR_REWARD = createField("reason_for_reward", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
 	/**
 	 * The column <code>mobsters.user_reward_history.details</code>.
 	 */
-	public final TableField<UserRewardHistoryRecord, String> DETAILS = createField("details", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
+	public final TableField<UserRewardHistoryRecord, String> DETAILS = createField("details", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "");
 
 	/**
 	 * Create a <code>mobsters.user_reward_history</code> table reference

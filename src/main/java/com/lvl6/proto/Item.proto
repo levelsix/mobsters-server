@@ -81,4 +81,5 @@ message UserItemSecretGiftProto {
 message ItemGemPriceProto {
 	optional int32 itemId = 1;
 	optional int32 gemPrice = 2;
+	optional int32 structId = 3;
 }

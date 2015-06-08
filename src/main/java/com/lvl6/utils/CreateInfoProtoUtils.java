@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
@@ -29,10 +30,10 @@ import com.lvl6.proto.BattleItemsProto.BattleItemProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemType;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
+import com.lvl6.proto.BattleProto.BattleReplayProto;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
-import com.lvl6.proto.BattleProto.BattleReplayProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -205,6 +206,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -855,7 +857,7 @@ public class CreateInfoProtoUtils {
 				long time = shieldEndTime.getTime();
 				uplpb.setShieldEndTime(time);
 			}
-
+			uplpb.setBattlesWon(plfu.getBattlesWon());
 			uplpb.setMonsterDmgMultiplier(plfu.getMonsterDmgMultiplier());
 
 		} else if (null != pu) {
@@ -870,7 +872,7 @@ public class CreateInfoProtoUtils {
 				long time = shieldEndTime.getTime();
 				uplpb.setShieldEndTime(time);
 			}
-
+			uplpb.setBattlesWon(pu.getBattlesWon());
 			uplpb.setMonsterDmgMultiplier(pu.getMonsterDmgMultiplier());
 
 		}
@@ -1489,7 +1491,7 @@ public class CreateInfoProtoUtils {
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
 			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap,
-			TranslateLanguages contentLanguage) {
+			TranslateLanguages contentLanguage, TranslationUtils translationUtils) {
 
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
@@ -1504,9 +1506,9 @@ public class CreateInfoProtoUtils {
 
 		boolean turnOffTranslation = serverToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
 
-		if(!turnOffTranslation || contentLanguage.toString().equalsIgnoreCase("NO_TRANSLATION")) {
+		if(!turnOffTranslation) {
 			if(translatedMap == null) {
-				translatedMap = miscMethods.translate(null, null, content);
+				translatedMap = translationUtils.translate(null, null, content, serverToggleRetrieveUtils);
 			}
 			for(TranslateLanguages tl : translatedMap.keySet()) {
 				TranslatedTextProto.Builder ttpb = TranslatedTextProto.newBuilder();
@@ -2360,6 +2362,7 @@ public class CreateInfoProtoUtils {
 		ItemGemPriceProto.Builder igppb = ItemGemPriceProto.newBuilder();
 		igppb.setGemPrice(mjri.getGemPrice());
 		igppb.setItemId(mjri.getItemId());
+		igppb.setStructId(mjri.getStructId());
 
 		return igppb.build();
 	}
@@ -4233,12 +4236,6 @@ public class CreateInfoProtoUtils {
 		smjcpb.setHoursBetweenJobGeneration(miniJobCenter
 				.getHoursBetweenJobGeneration());
 
-		if (null != idToMjriMap && !idToMjriMap.isEmpty())
-		{
-			List<ItemGemPriceProto> igppList = createItemGemPriceProto(idToMjriMap);
-			smjcpb.addAllRefreshMiniJobItemPrices(igppList);
-		}
-
 		return smjcpb.build();
 	}
 
@@ -5339,6 +5336,128 @@ public class CreateInfoProtoUtils {
 
 		return builder.build();
 	}
+	
+	//using user pojo
+	public FullUserProto createFullUserProtoFromUser(
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User u,
+			PvpLeagueForUser plfu, Clan c) {
+		FullUserProto.Builder builder = FullUserProto.newBuilder();
+		String userId = u.getId();
+		builder.setUserUuid(userId);
+		builder.setName(u.getName());
+		builder.setLevel(u.getLevel());
+		builder.setGems(u.getGems());
+		builder.setCash(u.getCash());
+		builder.setOil(u.getOil());
+		builder.setExperience(u.getExperience());
+		builder.setTasksCompleted(u.getTasksCompleted());
+		if (u.getReferralCode() != null) {
+			builder.setReferralCode(u.getReferralCode());
+		}
+		builder.setNumReferrals(u.getNumReferrals());
+		if (u.getLastLogin() != null) {
+			builder.setLastLoginTime(u.getLastLogin().getTime());
+		}
+		if (u.getLastLogout() != null) {
+			builder.setLastLogoutTime(u.getLastLogout().getTime());
+		}
+		if (u.getIsFake().compareTo((byte)0) == 0) {
+			builder.setIsFake(false);
+		}
+		else builder.setIsFake(true);
+		
+		builder.setCreateTime(u.getCreateTime().getTime());
+		if (u.getIsAdmin().compareTo((byte)0) == 0) {
+			builder.setIsAdmin(false);
+		}
+		else builder.setIsAdmin(true);
+		
+		builder.setNumCoinsRetrievedFromStructs(u
+				.getNumCoinsRetrievedFromStructs());
+		builder.setNumOilRetrievedFromStructs(u.getNumOilRetrievedFromStructs());
+		//		if (u.getClanId() > 0) {
+		if (null != c) {
+			//			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
+			builder.setClan(createMinimumClanProtoFromClan(c));
+		}
+		if (u.getHasReceivedFbReward().compareTo((byte)0) == 0) {
+			builder.setHasReceivedfbReward(false);
+		}
+		else builder.setHasReceivedfbReward(true);
+
+		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
+		builder.setAvatarMonsterId(u.getAvatarMonsterId());
+
+		String facebookId = u.getFacebookId();
+		if (null != facebookId) {
+			builder.setFacebookId(facebookId);
+		}
+
+		String gameCenterId = u.getGameCenterId();
+		if (null != gameCenterId) {
+			builder.setGameCenterId(gameCenterId);
+		}
+
+		Date lastObstacleSpawnedTime = u.getLastObstacleSpawnedTime();
+		if (null != lastObstacleSpawnedTime) {
+			builder.setLastObstacleSpawnedTime(lastObstacleSpawnedTime
+					.getTime());
+		}
+
+		if (null != plfu) {
+			//every user should have one, since pvp info created when user is created
+			//but could be null if not important to have it
+			UserPvpLeagueProto pvpLeagueInfo = createUserPvpLeagueProto(userId,
+					plfu, null, false);
+			builder.setPvpLeagueInfo(pvpLeagueInfo);
+		}
+
+		int numObstaclesRemoved = u.getNumObstaclesRemoved();
+		builder.setNumObstaclesRemoved(numObstaclesRemoved);
+
+		Date lastMiniJobSpawnedTime = u.getLastMiniJobGeneratedTime();
+		if (null != lastMiniJobSpawnedTime) {
+			builder.setLastMiniJobSpawnedTime(lastMiniJobSpawnedTime.getTime());
+		}
+
+		Date lastFreeBoosterPackTime = u.getLastFreeBoosterPackTime();
+		if (null != lastFreeBoosterPackTime) {
+			builder.setLastFreeBoosterPackTime(lastFreeBoosterPackTime
+					.getTime());
+		}
+
+		Date lastSecretGiftCollectTime = u.getLastSecretGiftCollectTime();
+		if (null != lastSecretGiftCollectTime) {
+			builder.setLastSecretGiftCollectTime(lastSecretGiftCollectTime
+					.getTime());
+		}
+
+		String pvpDefendingMessage = u.getPvpDefendingMessage();
+		if (null != pvpDefendingMessage) {
+			builder.setPvpDefendingMessage(pvpDefendingMessage);
+		}
+
+		//add new columns above here, not below the if. if case for is fake
+
+		int numClanHelps = u.getClanHelps();
+		builder.setNumClanHelps(numClanHelps);
+
+		Date lastTeamDonationSolicitation = u.getLastTeamDonateSolicitation();
+		if (null != lastTeamDonationSolicitation) {
+			builder.setLastTeamDonationSolicitation(lastTeamDonationSolicitation
+					.getTime());
+		}
+
+		long totalStrength = u.getTotalStrength();
+		builder.setTotalStrength(totalStrength);
+
+		int segmentationGroup = u.getSegmentationGroup();
+		builder.setSegmentationGroup(segmentationGroup);
+
+		//don't add setting new columns/properties here, add up above
+
+		return builder.build();
+	}
 
 	public MinimumUserProtoWithLevel createMinimumUserProto(
 			FullUserProto fup) {
@@ -5532,6 +5651,18 @@ public class CreateInfoProtoUtils {
 			slbpList.add(b.build());
 		}
 		return slbpList;
+	}
+	
+	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfig> mjricList) {
+		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
+		for(MiniJobRefreshItemConfig mjric : mjricList) {
+			ItemGemPriceProto.Builder b = ItemGemPriceProto.newBuilder();
+			b.setItemId(mjric.getItemId());
+			b.setGemPrice(mjric.getGemPrice());
+			b.setStructId(mjric.getStructId());
+			igppList.add(b.build());
+		}
+		return igppList;
 	}
 
 

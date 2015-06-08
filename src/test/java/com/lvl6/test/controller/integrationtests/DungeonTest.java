@@ -77,7 +77,7 @@ public class DungeonTest {
 
 			userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
 					oil, gems, false, deviceToken, createTime, facebookId,
-					avatarMonsterId, email, fbData);
+					avatarMonsterId, email, fbData, 0);
 			user = userRetrieveUtil.getUserById(userId);
 		}
 	}

@@ -35,14 +35,15 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-
 public class RetrievePrivateChatPostsController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(RetrievePrivateChatPostsController.class);
 
 	@Autowired
 	protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
@@ -64,6 +65,12 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
 
 	public RetrievePrivateChatPostsController() {
 		
@@ -273,11 +280,14 @@ public class RetrievePrivateChatPostsController extends EventController {
 								textArray[i] = chatIdToPcP.get(chatIdsArray[i]).getContent();
 							}
 
-							String[] translatedTextArray = miscMethods.translateInBulk(textArray, miscMethods.convertFromEnumToLanguage(translateLanguage));
+							String[] translatedTextArray = translationUtils.translateInBulk(textArray,
+									translationUtils.convertFromEnumToLanguage(translateLanguage), toggle);
 
 							//add results to returnMap
-							for(int i=0; i<chatIdsArray.length; i++) {
-								returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+							if (translatedTextArray != null) {
+								for(int i=0; i<chatIdsArray.length; i++) {
+									returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+								}
 							}
 
 							//convert private chat post to group chat message proto

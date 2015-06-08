@@ -4292,6 +4292,15 @@ public final class ItemsProto {
      * <code>optional int32 gemPrice = 2;</code>
      */
     int getGemPrice();
+
+    /**
+     * <code>optional int32 structId = 3;</code>
+     */
+    boolean hasStructId();
+    /**
+     * <code>optional int32 structId = 3;</code>
+     */
+    int getStructId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemGemPriceProto}
@@ -4357,6 +4366,11 @@ public final class ItemsProto {
             case 16: {
               bitField0_ |= 0x00000002;
               gemPrice_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              structId_ = input.readInt32();
               break;
             }
           }
@@ -4429,9 +4443,25 @@ public final class ItemsProto {
       return gemPrice_;
     }
 
+    public static final int STRUCTID_FIELD_NUMBER = 3;
+    private int structId_;
+    /**
+     * <code>optional int32 structId = 3;</code>
+     */
+    public boolean hasStructId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 structId = 3;</code>
+     */
+    public int getStructId() {
+      return structId_;
+    }
+
     private void initFields() {
       itemId_ = 0;
       gemPrice_ = 0;
+      structId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4452,6 +4482,9 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, gemPrice_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, structId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4468,6 +4501,10 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, gemPrice_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, structId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4594,6 +4631,8 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         gemPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        structId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -4630,6 +4669,10 @@ public final class ItemsProto {
           to_bitField0_ |= 0x00000002;
         }
         result.gemPrice_ = gemPrice_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.structId_ = structId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4651,6 +4694,9 @@ public final class ItemsProto {
         }
         if (other.hasGemPrice()) {
           setGemPrice(other.getGemPrice());
+        }
+        if (other.hasStructId()) {
+          setStructId(other.getStructId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4743,6 +4789,38 @@ public final class ItemsProto {
         return this;
       }
 
+      private int structId_ ;
+      /**
+       * <code>optional int32 structId = 3;</code>
+       */
+      public boolean hasStructId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 structId = 3;</code>
+       */
+      public int getStructId() {
+        return structId_;
+      }
+      /**
+       * <code>optional int32 structId = 3;</code>
+       */
+      public Builder setStructId(int value) {
+        bitField0_ |= 0x00000004;
+        structId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 structId = 3;</code>
+       */
+      public Builder clearStructId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        structId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ItemGemPriceProto)
     }
 
@@ -4806,13 +4884,13 @@ public final class ItemsProto {
       "roto.GameActionType:\007NO_HELP\"}\n\027UserItem" +
       "SecretGiftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010use" +
       "rUuid\030\002 \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022" +
-      "\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003\"5\n\021I" +
+      "\016\n\006itemId\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003\"G\n\021I" +
       "temGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022\020\n\010gemP",
-      "rice\030\002 \001(\005*\227\001\n\010ItemType\022\020\n\014BOOSTER_PACK\020" +
-      "\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\025\n\021ITEM_G" +
-      "ACHA_CREDIT\020\010\022\014\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005" +
-      "\022\024\n\020REFRESH_MINI_JOB\020\006\022\024\n\020GACHA_MULTI_SP" +
-      "IN\020\007B\014B\nItemsProto"
+      "rice\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005*\227\001\n\010ItemTyp" +
+      "e\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITE" +
+      "M_CASH\020\003\022\025\n\021ITEM_GACHA_CREDIT\020\010\022\014\n\010SPEED" +
+      "_UP\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006" +
+      "\022\024\n\020GACHA_MULTI_SPIN\020\007B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4856,7 +4934,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemGemPriceProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemGemPriceProto_descriptor,
-        new java.lang.String[] { "ItemId", "GemPrice", });
+        new java.lang.String[] { "ItemId", "GemPrice", "StructId", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

@@ -9,14 +9,17 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
+
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.Future
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -25,7 +28,6 @@ import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.info.AchievementForUser
 import com.lvl6.info.Clan
 import com.lvl6.info.ClanEventPersistentUserReward
-import com.lvl6.info.ClanGiftForUser
 import com.lvl6.info.ItemForUser
 import com.lvl6.info.ItemSecretGiftForUser
 import com.lvl6.info.MiniJobForUser
@@ -60,11 +62,13 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto
+import com.lvl6.proto.SalesProto.SalesPackageProto
 import com.lvl6.pvp.HazelcastPvpUtil
 import com.lvl6.pvp.PvpUser
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil
 import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil
+import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2
 import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil
 import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil
@@ -118,12 +122,13 @@ import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
-import com.lvl6.server.GameServer
+import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
 import com.lvl6.server.Locker
 import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
@@ -149,20 +154,8 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import javax.annotation.Resource
-import com.lvl6.proto.ChatProto.ChatScope
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
-import com.lvl6.info.ClanGiftForUser
-import com.lvl6.server.EventWriterOld
-import com.lvl6.server.eventsender.ToClientEvents
-import com.lvl6.server.eventsender._
-import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
-import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil
-import com.lvl6.proto.SalesProto.SalesPackageProto
-import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
-import scala.concurrent.Await
-import scala.concurrent._
-import scala.concurrent.duration._
 
 case class StartupData(
   resBuilder: Builder,
@@ -180,7 +173,6 @@ case class StartupData(
   apsalarId: String,
   newNumConsecutiveDaysLoggedIn: Int,
   freshRestart: Boolean)
-  
 @Component
 class StartupService extends LazyLogging {
 
@@ -216,7 +208,6 @@ class StartupService extends LazyLogging {
   @Autowired var monsterSnapshotForUserRetrieveUtil: MonsterSnapshotForUserRetrieveUtil = null
   @Autowired var privateChatPostRetrieveUtils: PrivateChatPostRetrieveUtils2 = null
   @Autowired var pvpBattleForUserRetrieveUtils: PvpBattleForUserRetrieveUtils2 = null
-
   @Autowired var pvpLeagueForUserRetrieveUtil: PvpLeagueForUserRetrieveUtil2 = null
   @Autowired var pvpBattleHistoryRetrieveUtil: PvpBattleHistoryRetrieveUtil2 = null
   @Autowired var pvpBoardObstacleForUserRetrieveUtil: PvpBoardObstacleForUserRetrieveUtil = null
@@ -231,6 +222,7 @@ class StartupService extends LazyLogging {
   @Autowired var userClanRetrieveUtils: UserClanRetrieveUtils2 = null
   @Autowired var userFacebookInviteForSlotRetrieveUtils: UserFacebookInviteForSlotRetrieveUtils2 = null
   @Autowired var userRetrieveUtils: UserRetrieveUtils2 = null
+
   @Autowired var customMenuRetrieveUtil: CustomMenuRetrieveUtils = null
   @Autowired var inAppPurchaseUtil: InAppPurchaseUtils = null
   @Autowired var miniEventRetrieveUtil: MiniEventRetrieveUtils = null
@@ -259,7 +251,6 @@ class StartupService extends LazyLogging {
   @Autowired var timeUtils: TimeUtils = null
   @Autowired var miscMethods: MiscMethods = null
   @Autowired var locker: Locker = null
-  @Autowired var eventWriter: EventWriter = null
   @Autowired var leaderBoard: LeaderBoardImpl = null
 
   @Autowired var globals: Globals = null
@@ -269,7 +260,7 @@ class StartupService extends LazyLogging {
   //TODO: Refactor GameServer class
   @Autowired var server: GameServer = null
 
-  def startup(event: RequestEvent, responses: ToClientEvents) = {
+  def startup(event: RequestEvent, responses:ToClientEvents) = {
     val reqProto = (event.asInstanceOf[StartupRequestEvent]).getStartupRequestProto();
     logger.info(s"Processing startup request reqProto:$reqProto")
     val udid = reqProto.getUdid();
@@ -278,7 +269,7 @@ class StartupService extends LazyLogging {
       apsalarId = reqProto.getApsalarId()
     }
     var playerId: String = null;
-    //miscMethods.setMDCProperties(udid, null, miscMethods.getIPOfPlayer(server, null, udid));
+    miscMethods.setMDCProperties(udid, null, miscMethods.getIPOfPlayer(server, null, udid));
     var version: VersionNumberProto = null;
     if (reqProto.hasVersionNumberProto()) {
       version = reqProto.getVersionNumberProto();
@@ -312,7 +303,6 @@ class StartupService extends LazyLogging {
 
       if (user != null) {
         playerId = user.getId();
-        responses.userId = playerId;
         //if can't lock player, exception will be thrown
         locker.lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
         startupStatus = StartupStatus.USER_IN_DB;
@@ -336,7 +326,7 @@ class StartupService extends LazyLogging {
     }
   }
 
-  def finishStartup(sd: StartupData, responses: ToClientEvents) = {
+  def finishStartup(sd: StartupData) = {
     setAllStaticData(sd.resBuilder, sd.playerId, sd.userIdSet);
     sd.resBuilder.setStartupStatus(sd.startupStatus);
     setConstants(sd.resBuilder, sd.startupStatus);
@@ -372,9 +362,7 @@ class StartupService extends LazyLogging {
         val preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
         logger.error(s"$preface clientVersion=$superNum.$majorNum.$minorNum \t serverVersion=$serverSuperNum.$serverMajorNum.$serverMinorNum")
         updateStatus = UpdateStatus.NO_UPDATE;
-      }
-
-      if (superNum < serverSuperNum || majorNum < serverMajorNum) {
+      } else if (superNum < serverSuperNum || majorNum < serverMajorNum) {
         updateStatus = UpdateStatus.MAJOR_UPDATE;
         logger.info("player has been notified of forced update");
 
@@ -400,7 +388,6 @@ class StartupService extends LazyLogging {
     }
     return updateStatus
   }
-
 
   def selectUser(users: java.util.List[User], udid: String, fbId: String): User = {
     var numUsers = users.size();
@@ -438,7 +425,7 @@ class StartupService extends LazyLogging {
         + isFirstTimeUser);
 
       if (isFirstTimeUser) {
-        logger.info("new player with udid {}", udid);
+        logger.info(s"new player with udid $udid");
         insertUtil.insertIntoFirstTimeUsers(udid, null, reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
       }
 
@@ -1008,7 +995,7 @@ class StartupService extends LazyLogging {
         val attackerPu = new PvpUser(attackerPlfu);
         hazelcastPvpUtil.replacePvpUser(attackerPu, userId);
 
-        if (defenderId != null) {
+        if (null != defenderUuid) { //(defenderId != null) {
           val defenderPlfu = pvpLeagueForUserRetrieveUtil.getUserPvpLeagueForId(defenderId);
 
           defenderEloBefore = defenderPlfu.getElo();
@@ -1093,6 +1080,7 @@ class StartupService extends LazyLogging {
   }
   def setMiniEventForUser(resBuilder: Builder, u: User, userId: String, now: Date): Future[Unit] = {
     Future {
+      logger.info("setMiniEventForUser in future");
       timed("StartupService.setMiniEventForUser") {
         val rmeaResBuilder = RetrieveMiniEventResponseProto.newBuilder();
         val rmea = new RetrieveMiniEventAction(
@@ -1364,7 +1352,27 @@ class StartupService extends LazyLogging {
         val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 
         val salesProtoList = new ArrayList[SalesPackageProto]()
+        val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(user.getId(), null);
         val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
+
+        var hasHighRoller = false
+        itemIdToUserItems.keySet().foreach { itemId =>
+          //TODO: Make a constant out of this number for builder's id
+          if (itemId == ControllerConstants.ITEM_ID__HIGH_ROLLER_MODE) {
+            hasHighRoller = true
+          }
+        }
+        if (!hasHighRoller && userSalesValue > 0) {
+          idsToSalesPackages.values().foreach { sp: SalesPackage =>
+            if (sp.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
+              val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
+                customMenuRetrieveUtil);
+              salesProtoList.add(spProto)
+            }
+          }
+        }
+
         idsToSalesPackages.values().foreach { sp: SalesPackage =>
           if (!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
             && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
@@ -1374,7 +1382,9 @@ class StartupService extends LazyLogging {
               val spProto = inAppPurchaseUtil.createSalesPackageProto(
                 sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
                 customMenuRetrieveUtil);
-              salesProtoList.add(spProto)
+              if (!salesProtoList.contains(spProto)) {
+                salesProtoList.add(spProto)
+              }
             }
           }
         }

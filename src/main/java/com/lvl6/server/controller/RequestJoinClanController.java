@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RequestJoinClanRequestEvent;
 import com.lvl6.events.response.RequestJoinClanResponseEvent;
@@ -110,7 +111,7 @@ public class RequestJoinClanController extends EventController {
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
@@ -433,10 +434,8 @@ public class RequestJoinClanController extends EventController {
 	private void updateClanCache(String clanId, List<Integer> clanSizeList,
 			List<Date> lastChatTimeContainer) {
 		//need to account for this user joining clan
-		int clanSize = clanSizeList.get(0) + 1;
-		Date lastChatTime = lastChatTimeContainer.get(0);
 
-		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
 	}
 
 	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,	String userId, ClanDataProto cdp, ToClientEvents responses) {
@@ -560,12 +559,13 @@ public class RequestJoinClanController extends EventController {
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanRetrieveUtils2 getClanRetrieveUtil() {

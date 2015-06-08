@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus;
@@ -18,6 +19,7 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponsePro
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.server.controller.utils.PvpUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -51,6 +53,7 @@ public class ApproveOrRejectRequestToJoinAction {
 		this.deleteUtil = deleteUtil;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.clanStuffUtils = clanStuffUtils;
+
 	}
 
 	private User user;
@@ -233,7 +236,7 @@ public class ApproveOrRejectRequestToJoinAction {
 			return true;
 		}
 	}
-
+	
 
 	public User getUser() {
 		return user;

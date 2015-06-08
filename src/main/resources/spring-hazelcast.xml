@@ -36,6 +36,16 @@
 	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks" instance-ref="hazel" />
  
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
+	
+	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel"/>
+	
+	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" instance-ref="hazel"/>
+	
+	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap" instance-ref="hazel"/>
+	
+	<hz:map id="chatsPastHourMap" name="chatsPastHourMap" instance-ref="hazel"/>
+
+	<hz:map id="clanMemberCountMap" name="clanMemberCountMap" instance-ref="hazel"/>
 
 		
 	<hz:map id="initializationFlags" name="initializationFlags" instance-ref="hazel"/>
@@ -50,6 +60,22 @@
 	<bean id="playersInAction" class="com.lvl6.utils.PlayerSet" scope="singleton" >
 		<property name="players" ref="playersInActionSet" />
 	</bean>
+	
+	<bean class="com.lvl6.clansearch.ClanChatPostDao2" id="clanChatPostDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    <bean class="com.lvl6.clansearch.ClanHelpCountForUserDao2" id="clanHelpCountForUserDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    <bean class="com.lvl6.clansearch.ClanMemberTeamDonationDao2" id="clanMemberTeamDonationDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao" id="clanForUserDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
 	 
 	
 	<bean id="serverMessageHandler" class="com.lvl6.eventhandlers.ServerEventHandler" lazy-init="false" scope="singleton" />

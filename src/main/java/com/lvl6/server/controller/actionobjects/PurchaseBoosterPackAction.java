@@ -15,6 +15,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
@@ -30,8 +31,10 @@ import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -65,6 +68,7 @@ public class PurchaseBoosterPackAction {
 	private CreateInfoProtoUtils createInfoProtoUtils;
 	private int gemsSpent;
 	private int gachaCreditsChange;
+	private HistoryUtils historyUtils;
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
@@ -83,7 +87,8 @@ public class PurchaseBoosterPackAction {
 			InsertUtil insertUtil,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
 			BoosterItemUtils boosterItemUtils, int gemsSpent,
-			int gachaCreditsChange, CreateInfoProtoUtils createInfoProtoUtils) {
+			int gachaCreditsChange, CreateInfoProtoUtils createInfoProtoUtils,
+			HistoryUtils historyUtils) {
 		super();
 		this.userId = userId;
 		this.boosterPackId = boosterPackId;
@@ -110,6 +115,7 @@ public class PurchaseBoosterPackAction {
 		this.gemsSpent = gemsSpent;
 		this.gachaCreditsChange = gachaCreditsChange;
 		this.createInfoProtoUtils = createInfoProtoUtils;
+		this.historyUtils = historyUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -137,11 +143,14 @@ public class PurchaseBoosterPackAction {
 	private List<Reward> listOfRewards;
 	private List<ItemForUser> ifuList;
 	private AwardRewardAction ara;
+	private UserCurrencyHistoryDao uchDao;
+	private int userGems;
 
 	private int gemReward;
 	private int gachaCreditsReward;
 
 	public void execute(Builder resBuilder) {
+		setUpDaos();
 		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
@@ -165,6 +174,12 @@ public class PurchaseBoosterPackAction {
 
 		resBuilder.setStatus(PurchaseBoosterPackStatus.SUCCESS);
 
+	}
+	
+	public void setUpDaos() {
+		//Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
+		uchDao = AppContext.getApplicationContext().getBean(UserCurrencyHistoryDao.class);//TODO: These actions should be created in spring
+		//I will modify them to support autowiring
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -236,7 +251,7 @@ public class PurchaseBoosterPackAction {
 		}
 
 		if(gemsSpent != 0) {
-			int userGems = user.getGems();
+			userGems = user.getGems();
 			if(userGems < gemsSpent) {
 				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 				return false;
@@ -327,12 +342,13 @@ public class PurchaseBoosterPackAction {
 			listOfRewards.add(r);
 		}
 
+		String awardReasonDetail = "booster pack id: " + boosterPackId;
 		ara = new AwardRewardAction(userId, user, 0, 0, now,
 				"booster packs id " + aPack.getId(), listOfRewards,
 				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil,
 				updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
 				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
-				userClanRetrieveUtils, createInfoProtoUtils);
+				userClanRetrieveUtils, createInfoProtoUtils, awardReasonDetail);
 
 		ara.execute();
 
@@ -342,7 +358,7 @@ public class PurchaseBoosterPackAction {
 	private void updateUserCurrency() {
 		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
 		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
-
+		
 		if (freeBoosterPack) {
 			gachaCreditsChange = 0;
 		}
@@ -355,6 +371,15 @@ public class PurchaseBoosterPackAction {
 		boolean updated = user.updateBoughtBoosterPack(gemChange, gachaCreditsChange, now,
 				freeBoosterPack, riggedPack);
 		log.info("updated, user bought boosterPack? {}", updated);
+		
+		historyUtils.insertUserCurrencyHistoryForGacha(userId, now, gachaCreditsChange, userGachaCredits,
+				userGachaCredits + gachaCreditsChange, "spin gacha", "buying in bulk ".concat(Boolean.toString(buyingInBulk)), 
+				uchDao, "gachaCredits");
+		if(gemChange != 0) {
+			historyUtils.insertUserCurrencyHistoryForGacha(userId, now, gemChange, userGems, 
+					userGems + gemChange, "spin gacha", "buying in bulk ".concat(Boolean.toString(buyingInBulk)), 
+					uchDao, "gems");
+		}
 	}
 
 

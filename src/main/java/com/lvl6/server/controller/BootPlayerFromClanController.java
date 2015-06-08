@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
@@ -55,7 +56,7 @@ public class BootPlayerFromClanController extends EventController {
 	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -146,7 +147,7 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanAction bpfca = new BootPlayerFromClanAction(userId, playerToBootId,
 					lockedClan, userRetrieveUtils, insertUtil, updateUtil, deleteUtil, timeUtils, 
 					clanRetrieveUtils, userClanRetrieveUtils, clanStuffUtils, 
-					clanChatPostRetrieveUtil, clanSearch);
+					clanChatPostRetrieveUtil, hzClanSearch);
 			bpfca.execute(resBuilder);
 			
 			if (BootPlayerFromClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -224,12 +225,14 @@ public class BootPlayerFromClanController extends EventController {
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
+
+
 
 }

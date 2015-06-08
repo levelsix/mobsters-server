@@ -101,7 +101,7 @@ public class PrivateChatPostTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -127,7 +127,7 @@ public class PrivateChatPostTest {
 
 		userId2 = insertUtil.insertUser(name2, udid2, lvl2, playerExp2, cash2, oil2,
 				gems2, false, deviceToken2, createTime, facebookId2,
-				avatarMonsterId2, email2, fbData2);
+				avatarMonsterId2, email2, fbData2, 0);
 
 		user2 = userRetrieveUtil.getUserById(userId2);
 

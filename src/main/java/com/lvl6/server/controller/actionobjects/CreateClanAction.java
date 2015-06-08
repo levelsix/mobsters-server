@@ -40,6 +40,7 @@ public class CreateClanAction {
 	private ClanRetrieveUtils2 clanRetrieveUtils;
 	private ResourceUtil resourceUtil;
 
+
 	public CreateClanAction(
 			String userId,
 			int cashChange, int gemsSpent, UserRetrieveUtils2 userRetrieveUtil,
@@ -63,6 +64,7 @@ public class CreateClanAction {
 		this.clanIconId = clanIconId;
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.resourceUtil = resourceUtil;
+
 	}
 
 	private User user;
@@ -200,7 +202,7 @@ public class CreateClanAction {
 		}
 		deleteUtil.deleteUserClansForUserExceptSpecificClan(
 				user.getId(), clanId);
-
+		
 		updateUserCurrency();
 
 		prepCurrencyHistory();

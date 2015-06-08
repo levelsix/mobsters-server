@@ -1163,9 +1163,8 @@ public class StartupControllerOld {//extends EventController {
 					attackerCurLeague, attackerCurRank, eloAttackerLoses, null,
 					null, 0, 0, 1, 0, -1);
 
-			log.info(String
-					.format("num updated when changing attacker's elo because of reset=%s",
-							numUpdated));
+			log.info("num updated when changing attacker's elo because of reset={}",
+					numUpdated);
 			attackerPlfu.setElo(attackerCurElo);
 			attackerPlfu.setPvpLeagueId(attackerCurLeague);
 			attackerPlfu.setRank(attackerCurRank);
@@ -1174,7 +1173,7 @@ public class StartupControllerOld {//extends EventController {
 			getHazelcastPvpUtil().replacePvpUser(attackerPu, userId);
 
 			//update defender if real, TODO: might need to cap defenderElo
-			if (null != defenderId) {
+			if (null != defenderUuid) {//defenderId) {
 				PvpLeagueForUser defenderPlfu = getPvpLeagueForUserRetrieveUtil()
 						.getUserPvpLeagueForId(defenderId);
 

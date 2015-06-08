@@ -43,17 +43,18 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.memetix.mst.language.Language;
 
 @Component
-
 public class PrivateChatPostController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(PrivateChatPostController.class);
 
 	@Autowired
 	protected AdminChatUtil adminChatUtil;
@@ -84,6 +85,13 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
+	
 
 	private PrivateChatPostResponseProto pcprp;
 
@@ -230,7 +238,7 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
+						translatedMessage = translationUtils.translate(posterLanguage, recipientLanguage, censoredContent, toggle);
 
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatScope chatType = ChatScope.PRIVATE;
@@ -375,7 +383,7 @@ public class PrivateChatPostController extends EventController {
 			return false;
 		}
 		// maybe use different controller constants...
-		if (content.length() >= ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
+		if (content.length() > ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
 			resBuilder.setStatus(PrivateChatPostStatus.POST_TOO_LARGE);
 			log.error("wall post is too long. content length is "
 					+ content.length()

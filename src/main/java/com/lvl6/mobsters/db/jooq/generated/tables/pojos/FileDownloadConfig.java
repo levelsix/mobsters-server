@@ -30,13 +30,14 @@ import javax.validation.constraints.Size;
 @Table(name = "file_download_config", schema = "mobsters")
 public class FileDownloadConfig implements IFileDownloadConfig {
 
-	private static final long serialVersionUID = -2036228260;
+	private static final long serialVersionUID = 2004133981;
 
 	private Integer id;
 	private String  filename;
 	private Integer priority;
 	private Boolean downloadOnlyOverWifi;
 	private Boolean useIphone6Prefix;
+	private Boolean useIpadSuffix;
 
 	public FileDownloadConfig() {}
 
@@ -46,6 +47,7 @@ public class FileDownloadConfig implements IFileDownloadConfig {
 		this.priority = value.priority;
 		this.downloadOnlyOverWifi = value.downloadOnlyOverWifi;
 		this.useIphone6Prefix = value.useIphone6Prefix;
+		this.useIpadSuffix = value.useIpadSuffix;
 	}
 
 	public FileDownloadConfig(
@@ -53,13 +55,15 @@ public class FileDownloadConfig implements IFileDownloadConfig {
 		String  filename,
 		Integer priority,
 		Boolean downloadOnlyOverWifi,
-		Boolean useIphone6Prefix
+		Boolean useIphone6Prefix,
+		Boolean useIpadSuffix
 	) {
 		this.id = id;
 		this.filename = filename;
 		this.priority = priority;
 		this.downloadOnlyOverWifi = downloadOnlyOverWifi;
 		this.useIphone6Prefix = useIphone6Prefix;
+		this.useIpadSuffix = useIpadSuffix;
 	}
 
 	@Id
@@ -129,6 +133,19 @@ public class FileDownloadConfig implements IFileDownloadConfig {
 		return this;
 	}
 
+	@Column(name = "use_ipad_suffix", nullable = false, precision = 1)
+	@NotNull
+	@Override
+	public Boolean getUseIpadSuffix() {
+		return this.useIpadSuffix;
+	}
+
+	@Override
+	public FileDownloadConfig setUseIpadSuffix(Boolean useIpadSuffix) {
+		this.useIpadSuffix = useIpadSuffix;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -143,6 +160,7 @@ public class FileDownloadConfig implements IFileDownloadConfig {
 		setPriority(from.getPriority());
 		setDownloadOnlyOverWifi(from.getDownloadOnlyOverWifi());
 		setUseIphone6Prefix(from.getUseIphone6Prefix());
+		setUseIpadSuffix(from.getUseIpadSuffix());
 	}
 
 	/**

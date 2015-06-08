@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -30,6 +31,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
@@ -235,17 +237,41 @@ public class InAppPurchaseController extends EventController {
             URL url = new URL(PRODUCTION_URL);
 
             log.info("Sending purchase request to: {}", url.toString());
+            
+            URLConnection conn = null;
+            OutputStreamWriter wr = null;
+            BufferedReader rd = null;
 
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(
-                    conn.getOutputStream());
-            wr.write(jsonReceipt.toString());
-            wr.flush();
+            // Try 3 times in case apple fails
+            for (int i = 0; i < 3; i++) {
+            	try {
 
-            // Get the response
-            BufferedReader rd = new BufferedReader(new InputStreamReader(
-                    conn.getInputStream()));
+                    conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    wr = new OutputStreamWriter(
+                            conn.getOutputStream());
+                    wr.write(jsonReceipt.toString());
+                    wr.flush();
+
+                    // Get the response
+                    rd = new BufferedReader(new InputStreamReader(
+                            conn.getInputStream()));
+            	} catch (IOException io) {
+            		log.error("failed to get response. iteration "+i, io);
+            		
+            		if (wr != null) {
+                		wr.close();
+            		}
+            		
+            		if (rd != null) {
+            			rd.close();
+            		}
+            		
+            		if (i == 2) {
+            			throw new Exception("failed to contact apple server. do something with the receipt." + jsonReceipt);
+            		}
+            	}
+            }
 
             String responseString = "";
             String line;
@@ -456,7 +482,7 @@ public class InAppPurchaseController extends EventController {
         Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
         
         //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
-
+        
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
         }
@@ -487,7 +513,9 @@ public class InAppPurchaseController extends EventController {
     				return sp2.getPriority() - sp1.getPriority();
     			}
     		});
-        	successorSalesPackage = tenDollarPacks.get(0);
+        	if(!tenDollarPacks.isEmpty()) {
+            	successorSalesPackage = tenDollarPacks.get(0);
+        	}
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
@@ -498,6 +526,13 @@ public class InAppPurchaseController extends EventController {
 //		log.info("prespp: " + preSpp);
 
 		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
+		}
+		else if(user.getSalesValue() < 4 && salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
+			//do nothing
+		}
+		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
+				&& salesPackage.getTimeStart() == null) {
 			//do nothing
 		}
 		else {

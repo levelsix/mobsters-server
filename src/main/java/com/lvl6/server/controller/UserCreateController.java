@@ -113,10 +113,11 @@ public class UserCreateController extends EventController {
 		int cash = Math.max(reqProto.getCash(), 0);
 		int oil = Math.max(reqProto.getOil(), 0);
 		int gems = Math.max(reqProto.getGems(), 0);
-
+		
 		cash = Math.min(cash, ControllerConstants.TUTORIAL__INIT_CASH);
 		oil = Math.min(oil, ControllerConstants.TUTORIAL__INIT_OIL);
 		gems = Math.min(gems, ControllerConstants.TUTORIAL__INIT_GEMS);
+		int gachaCredits = ControllerConstants.TUTORIAL__GACHA_CREDITS;
 
 		String email = reqProto.getEmail();
 		String fbData = reqProto.getFbData();
@@ -140,7 +141,7 @@ public class UserCreateController extends EventController {
 				//			  String newReferCode = grabNewReferCode();
 				userId = writeChangeToDb(resBuilder, name, udid, cash, oil,
 						gems, deviceToken, createTime, facebookId, email,
-						fbData);
+						fbData, gachaCredits);
 			}
 
 			UserCreateResponseProto resProto = resBuilder.build();
@@ -265,7 +266,8 @@ public class UserCreateController extends EventController {
 
 	private String writeChangeToDb(Builder resBuilder, String name,
 			String udid, int cash, int oil, int gems, String deviceToken,
-			Timestamp createTime, String facebookId, String email, String fbData) {
+			Timestamp createTime, String facebookId, String email, String fbData,
+			int gachaCredits) {
 		//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
 		int playerExp = 10;
@@ -273,7 +275,7 @@ public class UserCreateController extends EventController {
 
 		String userId = insertUtils.insertUser(name, udid, lvl, playerExp,
 				cash, oil, gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, gachaCredits);
 
 		if (userId != null) {
 			/*locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());*//*

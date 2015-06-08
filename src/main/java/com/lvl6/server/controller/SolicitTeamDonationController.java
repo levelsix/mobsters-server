@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitTeamDonationRequestEvent;
 import com.lvl6.events.response.SolicitTeamDonationResponseEvent;
@@ -35,8 +36,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class SolicitTeamDonationController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(SolicitTeamDonationController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -49,6 +50,9 @@ public class SolicitTeamDonationController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	public SolicitTeamDonationController() {
 		
@@ -153,8 +157,10 @@ public class SolicitTeamDonationController extends EventController {
 								senderProto, null);
 				resBuilder.setSolicitation(cmtdp);
 
+				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 1, 0, 0, 0);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
+
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);

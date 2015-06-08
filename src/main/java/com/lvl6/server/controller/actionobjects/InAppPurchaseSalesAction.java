@@ -203,7 +203,8 @@ public class InAppPurchaseSalesAction {
 		}
 
 		if(!saleIsWithinTimeConstraints()) {
-			log.error("sales package being bought when outside of start/end times. userId = {} , salespackageId = {}", userId, salesPackage.getId());
+			log.error("this could be result of buying high roller pack, sales package being bought when "
+					+ "outside of start/end times. userId = {} , salespackageId = {}", userId, salesPackage.getId());
 		}
 
 		if (duplicateReceipt) {
@@ -285,12 +286,13 @@ public class InAppPurchaseSalesAction {
 
 	public void processSalesPackagePurchase(Builder resBuilder) {
 
+		String awardReasonDetail = "sales pack id: " + salesPackage.getId();
 		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package",
 				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
 				rewardRetrieveUtils, userClanRetrieveUtils,
-				createInfoProtoUtils);
+				createInfoProtoUtils, awardReasonDetail);
 
 		ara.execute();
 

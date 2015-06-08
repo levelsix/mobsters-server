@@ -133,9 +133,6 @@ public class MiscMethods {
 	public static final String gachaCredits = "gachaCredits";
 	public static final String boosterPackId = "boosterPackId";
 
-	private static String pClientId = "ToonSquad";
-	private static String secretId = "bZ3WX/tZHV2KoljCFOwYOWRuR9WpSaa7O/L4oZuUhHo=";
-
 	public static final String CASH = "CASH";
 	public static final String OIL = "OIL";
 	public static final String MONSTER = "MONSTER";
@@ -305,6 +302,40 @@ public class MiscMethods {
 			User user, PvpLeagueForUser plfu, Clan clan) {
 		try {
 			if (!user.isFake()) {
+				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
+				leaderboard.updateLeaderboardForUser(user, plfu);*/
+			}
+		} catch (Exception e) {
+			log.error("Failed to update leaderboard.");
+		}
+
+		// Retrieve clan if its not set
+		if (clan == null && user.getClanId() != null
+				&& !user.getClanId().isEmpty()) {
+			ClanRetrieveUtils2 clanRetrieveUtils = AppContext
+					.getApplicationContext().getBean(ClanRetrieveUtils2.class);
+			clan = clanRetrieveUtils.getClanWithId(user.getClanId());
+		} else if (clan != null && !clan.getId().equals(user.getClanId())) {
+			log.error("Trying to set clan for user with different clan id.");
+			clan = null;
+		}
+
+		UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(
+				user.getId());
+		UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto
+				.newBuilder()
+				.setSender(
+						createInfoProtoUtils.createFullUserProtoFromUser(user,
+								plfu, clan))
+				.setTimeOfUserUpdate(new Date().getTime()).build();
+		resEvent.setUpdateClientUserResponseProto(resProto);
+		return resEvent;
+	}
+	
+	public UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User user, PvpLeagueForUser plfu, Clan clan) {
+		try {
+			if (user.getIsFake().compareTo((byte)0) == 0) {
 				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 				leaderboard.updateLeaderboardForUser(user, plfu);*/
 			}
@@ -538,7 +569,9 @@ public class MiscMethods {
 		cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
 		cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
 
-		cb.setAddAllFbFriends(globals.isAddAllFbFriends());
+		boolean addAllFbFriends = serverToggleRetrieveUtils
+				.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__ADD_ALL_FB_FRIENDS);
+		cb.setAddAllFbFriends(addAllFbFriends);
 		cb.setFacebookPopUp(ControllerConstants.FACEBOOK_POP_UP__ACTIVE);
 		MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
 		cb.setMiniTuts(miniTuts);
@@ -1716,174 +1749,6 @@ public class MiscMethods {
 	//		sdpb.addAllPersistentClanEvents(staticData.getPersistentClanEventsList());
 	//	}
 
-	public String[] translateInBulk(String[] text, Language recipientLanguage) {
-		Translate.setClientId(pClientId);
-		Translate.setClientSecret(secretId);
-		String[] returnArray = null;
-
-		try {
-			returnArray = Translate.execute(text, recipientLanguage);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return returnArray;
-	}
-
-
-	public Map<TranslateLanguages, String> translate(Language sourceLanguage,
-			Language recipientLanguage, String text) {
-		Translate.setClientId(pClientId);
-		Translate.setClientSecret(secretId);
-
-		String translatedText = "";
-		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
-
-		List<Language> listOfLanguages = new ArrayList<Language>();
-		listOfLanguages.add(Language.ARABIC);
-		listOfLanguages.add(Language.ENGLISH);
-		listOfLanguages.add(Language.FRENCH);
-		listOfLanguages.add(Language.GERMAN);
-		listOfLanguages.add(Language.SPANISH);
-		listOfLanguages.add(Language.RUSSIAN);
-
-		try {
-			if(recipientLanguage != null) {
-				if(sourceLanguage == null) {
-					translatedText = Translate.execute(text, recipientLanguage);
-				}
-				else {
-					translatedText = Translate.execute(text, sourceLanguage, recipientLanguage);
-				}
-				TranslateLanguages tl2 = convertFromLanguageToEnum(recipientLanguage);
-				returnMap.put(tl2, translatedText);
-			}
-			else {
-				for(Language language2 : listOfLanguages) {
-					if(sourceLanguage != null) {
-						if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
-							TranslateLanguages tl = convertFromLanguageToEnum(language2);
-							returnMap.put(tl, text);
-						}
-					}
-					else {
-						translatedText = Translate.execute(text, language2);
-
-					}
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return returnMap;
-	}
-
-
-
-	public Map<TranslateLanguages, String> translateForGlobal(Language sourceLanguage, String text) {
-		Translate.setClientId(pClientId);
-		Translate.setClientSecret(secretId);
-
-		String translatedText = "";
-		Map<TranslateLanguages, String> returnMap = new HashMap<TranslateLanguages, String>();
-
-		List<Language> listOfLanguages = new ArrayList<Language>();
-		listOfLanguages.add(Language.ARABIC);
-		listOfLanguages.add(Language.ENGLISH);
-		listOfLanguages.add(Language.FRENCH);
-		listOfLanguages.add(Language.GERMAN);
-		listOfLanguages.add(Language.SPANISH);
-		listOfLanguages.add(Language.RUSSIAN);
-
-		try {
-			for(Language language2 : listOfLanguages) {
-				if(sourceLanguage.toString().equalsIgnoreCase(language2.toString())) {
-					TranslateLanguages tl = convertFromLanguageToEnum(language2);
-					returnMap.put(tl, text);
-				}
-				else {
-					translatedText = Translate.execute(text, sourceLanguage, language2);
-					TranslateLanguages tl = convertFromLanguageToEnum(language2);
-					returnMap.put(tl, translatedText);
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return returnMap;
-
-	}
-
-	private TranslateLanguages convertFromLanguageToEnum(Language language) {
-		TranslateLanguages tl = null;
-		try {
-			if(language.getName(Language.ENGLISH).equalsIgnoreCase("ARABIC")) {
-				tl = TranslateLanguages.ARABIC;
-			}
-			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("ENGLISH")) {
-				tl = TranslateLanguages.ENGLISH;
-			}
-			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("FRENCH")) {
-				tl = TranslateLanguages.FRENCH;
-			}
-			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("GERMAN")) {
-				tl = TranslateLanguages.GERMAN;
-			}
-			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("RUSSIAN")) {
-				tl = TranslateLanguages.RUSSIAN;
-			}
-			else if(language.getName(Language.ENGLISH).equalsIgnoreCase("SPANISH")){
-				tl = TranslateLanguages.SPANISH;
-			}
-			else {
-				tl = TranslateLanguages.NO_TRANSLATION;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return tl;
-
-	}
-
-	public Language convertFromEnumToLanguage(TranslateLanguages tl) {
-		if(tl.toString().equalsIgnoreCase("ARABIC")) {
-			return Language.ARABIC;
-		}
-		else if(tl.toString().equalsIgnoreCase("ENGLISH")) {
-			return Language.ENGLISH;
-		}
-		else if(tl.toString().equalsIgnoreCase("FRENCH")) {
-			return Language.FRENCH;
-		}
-		else if(tl.toString().equalsIgnoreCase("GERMAN")) {
-			return Language.GERMAN;
-		}
-		else if(tl.toString().equalsIgnoreCase("SPANISH")) {
-			return Language.SPANISH;
-		}
-		else if(tl.toString().equalsIgnoreCase("RUSSIAN")) {
-			return Language.RUSSIAN;
-		}
-		else return null;
-	}
-
-	public Language detectedLanguage(String text) {
-		Detect.setClientId(pClientId);
-        Detect.setClientSecret(secretId);
-        Language detectedLanguage = null;
-
-        try {
-			detectedLanguage = Detect.execute(text);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error("error detecting language of text=%s", text);
-			e.printStackTrace();
-		}
-        return detectedLanguage;
-	}
 
 
 

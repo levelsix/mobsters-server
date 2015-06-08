@@ -42,7 +42,7 @@ public class TaskMapElementRetrieveUtils {
 			setStaticIdToTaskMapElement();
 		}
 		if (!taskIdToTaskMapElement.containsKey(taskId)) {
-			log.error(String
+			log.info(String
 					.format("no task map element for taskId=%s", taskId));
 			return null;
 		}

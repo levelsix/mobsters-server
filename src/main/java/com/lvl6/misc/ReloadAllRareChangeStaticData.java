@@ -15,6 +15,7 @@ import com.lvl6.retrieveutils.rarechange.BoardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
@@ -24,6 +25,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CustomTranslationRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -53,7 +55,6 @@ import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillSideEffectRetrieveUtils;
@@ -98,10 +99,10 @@ public class ReloadAllRareChangeStaticData {
 	protected BoardObstacleRetrieveUtils boardObstacleRetrieveUtils;
 
 	@Autowired
-	protected BoardRetrieveUtils boardRetrieveUtils;
+	protected BoardPropertyRetrieveUtils boardPropertyRetrieveUtils;
 
 	@Autowired
-	protected BoardPropertyRetrieveUtils boardPropertyRetrieveUtils;
+	protected BoardRetrieveUtils boardRetrieveUtils;
 
 	@Autowired
 	protected BoosterDisplayItemRetrieveUtils boosterDisplayItemRetrieveUtils;
@@ -113,6 +114,12 @@ public class ReloadAllRareChangeStaticData {
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
 
 	@Autowired
+	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
+
+	@Autowired
+	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
+
+	@Autowired
 	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
 
 	@Autowired
@@ -122,22 +129,22 @@ public class ReloadAllRareChangeStaticData {
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
 
 	@Autowired
-	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
-
-	@Autowired
 	protected ClanRaidRetrieveUtils clanRaidRetrieveUtils;
 
 	@Autowired
-	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
+	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
 
 	@Autowired
-	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
+	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
 
 	@Autowired
 	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
 
 	@Autowired
 	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
+	
+	@Autowired
+	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
 
 	@Autowired
 	protected EventPersistentRetrieveUtils eventPersistentRetrieveUtils;
@@ -150,9 +157,6 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-
-	@Autowired
-	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
 
 	@Autowired
 	protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
@@ -179,6 +183,9 @@ public class ReloadAllRareChangeStaticData {
 	protected MonsterBattleDialogueRetrieveUtils monsterBattleDialogueRetrieveUtils;
 
 	@Autowired
+	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
+
+	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	@Autowired
@@ -197,10 +204,10 @@ public class ReloadAllRareChangeStaticData {
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
 
 	@Autowired
-	protected QuestJobRetrieveUtils questJobRetrieveUtils;
+	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
 
 	@Autowired
-	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
+	protected QuestJobRetrieveUtils questJobRetrieveUtils;
 
 	@Autowired
 	protected QuestRetrieveUtils questRetrieveUtils;
@@ -227,10 +234,10 @@ public class ReloadAllRareChangeStaticData {
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	@Autowired
-	protected SkillRetrieveUtils skillRetrieveUtils;
+	protected SkillPropertyRetrieveUtils skillPropertyRetrieveUtils;
 
 	@Autowired
-	protected SkillPropertyRetrieveUtils skillPropertyRetrieveUtils;
+	protected SkillRetrieveUtils skillRetrieveUtils;
 
 	@Autowired
 	protected SkillSideEffectRetrieveUtils skillSideEffectRetrieveUtils;
@@ -315,33 +322,33 @@ public class ReloadAllRareChangeStaticData {
 		achievementRetrieveUtils.reload();
 		bannedUserRetrieveUtils.reload();
 		battleItemRetrieveUtils.reload();
-		boardRetrieveUtils.reload();
 		boardObstacleRetrieveUtils.reload();
 		boardPropertyRetrieveUtils.reload();
+		boardRetrieveUtils.reload();
 		boosterDisplayItemRetrieveUtils.reload();
 		boosterItemRetrieveUtils.reload();
 		boosterPackRetrieveUtils.reload();
-		//    CityBossRetrieveUtils.reload();
+		chatTranslationsRetrieveUtils.reload();
 		//		CityElementsRetrieveUtils.reload();
 		//		CityRetrieveUtils.reload();
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
+		clanEventPersistentRetrieveUtils.reload();
 		clanGiftRetrieveUtils.reload();
 		clanGiftRewardsRetrieveUtils.reload();
 		clanIconRetrieveUtils.reload();
-		clanEventPersistentRetrieveUtils.reload();
 		clanRaidRetrieveUtils.reload();
-		clanRaidStageRetrieveUtils.reload();
 		clanRaidStageMonsterRetrieveUtils.reload();
+		clanRaidStageRetrieveUtils.reload();
 		clanRaidStageRewardRetrieveUtils.reload();
 		customMenuRetrieveUtils.reload();
+		customTranslationRetrieveUtils.reload();
 		eventPersistentRetrieveUtils.reload();
-		fileDownloadRetrieveUtils.reload();
 		//		ExpansionCostRetrieveUtils.reload();
+		fileDownloadRetrieveUtils.reload();
 		goldSaleRetrieveUtils.reload();
 		itemRetrieveUtils.reload();
 		//		LockBoxEventRetrieveUtils.reload();
-		monsterForPvpRetrieveUtil.reload();
 		miniEventForPlayerLvlRetrieveUtils.reload();
 		miniEventGoalRetrieveUtils.reload();
 		miniEventLeaderboardRewardRetrieveUtils.reload();
@@ -350,25 +357,26 @@ public class ReloadAllRareChangeStaticData {
 		miniJobRetrieveUtils.reload();
 		miniJobRefreshItemRetrieveUtils.reload();
 		monsterBattleDialogueRetrieveUtils.reload();
+		monsterForPvpRetrieveUtil.reload();
 		monsterLevelInfoRetrieveUtils.reload();
 		monsterRetrieveUtils.reload();
 		obstacleRetrieveUtils.reload();
 		prerequisiteRetrieveUtils.reload();
 		profanityRetrieveUtils.reload();
 		pvpLeagueRetrieveUtils.reload();
-		questJobRetrieveUtils.reload();
 		questJobMonsterItemRetrieveUtils.reload();
+		questJobRetrieveUtils.reload();
 		questRetrieveUtils.reload();
-		researchRetrieveUtils.reload();
 		researchPropertyRetrieveUtils.reload();
+		researchRetrieveUtils.reload();
 		rewardRetrieveUtils.reload();
-		skillRetrieveUtils.reload();
-		skillPropertyRetrieveUtils.reload();
-		skillSideEffectRetrieveUtils.reload();
 		salesDisplayItemRetrieveUtils.reload();
 		salesItemRetrieveUtils.reload();
 		salesPackageRetrieveUtils.reload();
 		serverToggleRetrieveUtils.reload();
+		skillPropertyRetrieveUtils.reload();
+		skillRetrieveUtils.reload();
+		skillSideEffectRetrieveUtils.reload();
 		startupStuffRetrieveUtils.reload();
 		staticUserLevelInfoRetrieveUtils.reload();
 		structureBattleItemFactoryRetrieveUtils.reload();

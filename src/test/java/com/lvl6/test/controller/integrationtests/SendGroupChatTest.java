@@ -98,7 +98,7 @@ public class SendGroupChatTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -165,7 +165,7 @@ public class SendGroupChatTest {
 		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
 		sendGroupChatController.processRequestEvent(sgcre, EventsUtil.getToClientEvents());
 
-		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
+//		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
 
 	}
 

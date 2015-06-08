@@ -3,7 +3,9 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,6 +19,7 @@ import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
+import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
@@ -297,9 +300,24 @@ public class QueueUpController extends EventController {
 
 			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
 					.getStatus())) {
+				List<User> usersExceptRetriever = rumta.getAllUsersExceptRetriever();	
+				Map<String, User> allUsersMap = rumta.getAllUsers();
+				if(allUsersMap != null && !allUsersMap.isEmpty()) {
+					String clanId = allUsersMap.get(attackerId).getClanId();
+					Iterator<User> iter = usersExceptRetriever.iterator();
+					while(iter.hasNext()) {
+						User opponent = iter.next();
+						if(opponent.getClanId() != null) {
+							if(opponent.getClanId().equals(clanId)) {
+								iter.remove();
+							}
+						}
+					}
+				}
+
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
-								rumta.getAllUsersExceptRetriever(),
+								usersExceptRetriever,
 								rumta.getUserIdToClan(),
 								null,
 								rumta.getUserIdToPvpUsers(),

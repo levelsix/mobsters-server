@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FileDownloadConfig extends TableImpl<FileDownloadConfigRecord> {
 
-	private static final long serialVersionUID = -1895941558;
+	private static final long serialVersionUID = 79653017;
 
 	/**
 	 * The reference instance of <code>mobsters.file_download_config</code>
@@ -73,6 +73,11 @@ public class FileDownloadConfig extends TableImpl<FileDownloadConfigRecord> {
 	 * The column <code>mobsters.file_download_config.use_iphone6_prefix</code>. certain case for iPhone 6
 	 */
 	public final TableField<FileDownloadConfigRecord, Boolean> USE_IPHONE6_PREFIX = createField("use_iphone6_prefix", org.jooq.impl.SQLDataType.BIT.nullable(false), this, "certain case for iPhone 6");
+
+	/**
+	 * The column <code>mobsters.file_download_config.use_ipad_suffix</code>.
+	 */
+	public final TableField<FileDownloadConfigRecord, Boolean> USE_IPAD_SUFFIX = createField("use_ipad_suffix", org.jooq.impl.SQLDataType.BIT.nullable(false), this, "");
 
 	/**
 	 * Create a <code>mobsters.file_download_config</code> table reference

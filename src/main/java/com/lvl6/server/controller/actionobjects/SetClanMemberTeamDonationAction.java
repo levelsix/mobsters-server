@@ -68,7 +68,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 
 		List<ClanMemberTeamDonation> clanMemberTeamDonations = clanMemberTeamDonationRetrieveUtil
 				.getClanMemberTeamDonationForClanId(clanId);
-		log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
+		log.debug("clanMemberTeamDonations={}", clanMemberTeamDonations);
 
 		//log.info(String.format("clanMemberTeamDonations=%s", clanMemberTeamDonations));
 		if (null == clanMemberTeamDonations
@@ -89,7 +89,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 
 		}
 
-		log.info("userIdToDonationSolicitations={}",
+		log.debug("userIdToDonationSolicitations={}",
 				userIdToDonationSolicitations);
 
 		fillMe.addUserId(userIdToDonationSolicitations.keySet());
@@ -129,7 +129,7 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 	public void execute(StartUpResource useMe) {
 		if (null == userIdToDonationSolicitations
 				|| userIdToDonationSolicitations.isEmpty()) {
-			log.info("userIdToDonationSolicitations={}",
+			log.debug("userIdToDonationSolicitations={}",
 					userIdToDonationSolicitations);
 			return;
 		}
@@ -137,12 +137,12 @@ public class SetClanMemberTeamDonationAction implements StartUpAction {
 				.getUserIdsToUsers(userIdToDonationSolicitations.keySet());
 
 		if (null == solicitors || solicitors.isEmpty()) {
-			log.info("solicitors={}", solicitors);
+			log.debug("solicitors={}", solicitors);
 			return;
 		}
 
 		Clan c = useMe.getClan(clanId);
-		log.info("c={}", c);
+		log.debug("c={}", c);
 
 		User donator = null;
 		if (null != donatorId) {

@@ -49,6 +49,7 @@ public class AwardRewardAction {
 	private RewardRetrieveUtils rewardRetrieveUtil; //only here because of recursive rewards
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private CreateInfoProtoUtils createInfoProtoUtils;
+	private String awardReasonDetail;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement
 	public AwardRewardAction(String userId, User u, int maxCash,
@@ -62,7 +63,8 @@ public class AwardRewardAction {
 			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtil,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+			CreateInfoProtoUtils createInfoProtoUtils,
+			String awardReasonDetail) {
 		super();
 		this.userId = userId;
 		this.u = u;
@@ -81,6 +83,7 @@ public class AwardRewardAction {
 		this.rewardRetrieveUtil = rewardRetrieveUtil;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
+		this.awardReasonDetail = awardReasonDetail;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -210,7 +213,8 @@ public class AwardRewardAction {
 		}
 
 		//save to reward history
-		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), rewards, awardReason);
+		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), 
+				rewards, awardReason, awardReasonDetail);
 		if(!success) {
 			log.error("error saving to user reward history for userId {}", userId);
 		}
