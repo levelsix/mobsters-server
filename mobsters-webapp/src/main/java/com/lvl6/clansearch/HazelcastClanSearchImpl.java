@@ -180,6 +180,11 @@ public class HazelcastClanSearchImpl {
 				filledDonations * (helpsPastDay/100);
 		clanSearchRanking.add(clanId, clanStrength);
 		log.info("updating clan search rank, clanId {}, clanStrength{}", clanId, clanStrength);
+		log.info("CLAN MEMBER MAP: {}", clanMemberCountMap);
+		log.info("DAILY HELPS MAP: {}", dailyHelpsMap);
+		log.info("DAILY DONATE REQUEST MAP: {}", dailyDonateRequestsMap);
+		log.info("DAILY DONATE COMPLETES MAP: {}", dailyDonateCompletesMap);
+		log.info("CHATS PAST HR MAP: {}", chatsPastHourMap);
 	}
 	
 //	public List<String> getTopClanRanksForSearch() {
