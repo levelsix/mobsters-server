@@ -1,12 +1,13 @@
 package com.lvl6.clansearch;
 
+import static org.jooq.impl.DSL.using;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.jooq.Configuration;
 import org.springframework.stereotype.Component;
-
-import static org.jooq.impl.DSL.using;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPost;
@@ -14,6 +15,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanChatPostDao;
 
 @Component
 public class ClanChatPostDao2 extends ClanChatPostDao{
+	
+	public ClanChatPostDao2(Configuration configuration) {
+		super(configuration);
+	}
 
 	/**
 	 * Fetch records on two columns

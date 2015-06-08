@@ -86,6 +86,4 @@ public class ClanChatPostDao extends DAOImpl<ClanChatPostRecord, com.lvl6.mobste
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanChatPost> fetchByContent(String... values) {
 		return fetch(ClanChatPost.CLAN_CHAT_POST.CONTENT, values);
 	}
-	
-	
 }

@@ -43,7 +43,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 })
 public class ClanMemberTeamDonationRecord extends UpdatableRecordImpl<ClanMemberTeamDonationRecord> implements Record7<String, String, String, Integer, Boolean, String, Timestamp>, IClanMemberTeamDonation {
 
-	private static final long serialVersionUID = -1844062146;
+	private static final long serialVersionUID = -1580932542;
 
 	/**
 	 * Setter for <code>mobsters.clan_member_team_donation.id</code>.
@@ -153,8 +153,8 @@ public class ClanMemberTeamDonationRecord extends UpdatableRecordImpl<ClanMember
 	/**
 	 * Getter for <code>mobsters.clan_member_team_donation.msg</code>.
 	 */
-	@Column(name = "msg", length = 105)
-	@Size(max = 105)
+	@Column(name = "msg", length = 65535)
+	@Size(max = 65535)
 	@Override
 	public String getMsg() {
 		return (String) getValue(5);
