@@ -9,17 +9,14 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.Future
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -154,8 +151,13 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
+import scala.concurrent.Await
+import scala.concurrent._
+import scala.concurrent.duration._
+import com.lvl6.server.eventsender.PreDBResponseEvent
+import com.lvl6.server.eventsender.ToClientEvents
+import com.lvl6.server.eventsender.PreDBFacebookEvent
 
 case class StartupData(
   resBuilder: Builder,
@@ -257,8 +259,6 @@ class StartupService extends LazyLogging {
   @Resource(name = "globalChat") var chatMessages: IList[GroupChatMessageProto] = null
   @Resource(name = "goodEquipsRecievedFromBoosterPacks") var goodEquipsRecievedFromBoosterPacks: IList[RareBoosterPurchaseProto] = null
 
-  //TODO: Refactor GameServer class
-  @Autowired var server: GameServer = null
 
   def startup(event: RequestEvent, responses:ToClientEvents) = {
     val reqProto = (event.asInstanceOf[StartupRequestEvent]).getStartupRequestProto();
@@ -269,7 +269,7 @@ class StartupService extends LazyLogging {
       apsalarId = reqProto.getApsalarId()
     }
     var playerId: String = null;
-    miscMethods.setMDCProperties(udid, null, miscMethods.getIPOfPlayer(server, null, udid));
+    //miscMethods.setMDCProperties(udid, null, miscMethods.getIPOfPlayer(server, null, udid));
     var version: VersionNumberProto = null;
     if (reqProto.hasVersionNumberProto()) {
       version = reqProto.getVersionNumberProto();
@@ -326,7 +326,7 @@ class StartupService extends LazyLogging {
     }
   }
 
-  def finishStartup(sd: StartupData) = {
+  def finishStartup(sd: StartupData, responses:ToClientEvents) = {
     setAllStaticData(sd.resBuilder, sd.playerId, sd.userIdSet);
     sd.resBuilder.setStartupStatus(sd.startupStatus);
     setConstants(sd.resBuilder, sd.startupStatus);
@@ -375,7 +375,7 @@ class StartupService extends LazyLogging {
 
     } else {
       val tempClientVersionNum: Float = clientVersionNum * 10F;
-      val tempLatestVersionNum: Float = GameServer.clientVersionNumber * 10F;
+      val tempLatestVersionNum: Float = Globals.VERSION_NUMBER() * 10F;
       // Check version number
       if (tempClientVersionNum.asInstanceOf[Int] < tempLatestVersionNum.asInstanceOf[Int]) {
         updateStatus = UpdateStatus.MAJOR_UPDATE;

@@ -1,7 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +24,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
 import com.lvl6.server.controller.actionobjects.TradeItemForSpeedUpsAction;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.ItemUtil;
@@ -38,11 +35,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 @Component
 public class TradeItemForSpeedUpsController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(TradeItemForSpeedUpsController.class);
 
 	public TradeItemForSpeedUpsController() {
-		
 	}
 	
 	@Autowired
@@ -150,11 +146,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								tifsua.getUserPojo(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
-
-
-				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 			TradeItemForSpeedUpsResponseProto resProto = resBuilder.build();

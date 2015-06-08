@@ -246,7 +246,7 @@ public class SendGroupChatController extends EventController {
 
 				log.info("receive group chat response proto : {}", rgcrp);
 
-				sendChatMessage(userId, scope == ChatScope.CLAN, user.getClanId(), rgcrp);
+				sendChatMessage(userId, scope == ChatScope.CLAN, user.getClanId(), rgcrp, responses);
 
 				// send messages in background so sending player can unlock
 				/*
@@ -274,7 +274,7 @@ public class SendGroupChatController extends EventController {
 	}
 
 	protected void sendChatMessage(String senderId,
-			boolean isForClan, String clanId, ReceivedGroupChatResponseProto rgcr) {
+			boolean isForClan, String clanId, ReceivedGroupChatResponseProto rgcr, ToClientEvents responses) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
 		ce.setReceivedGroupChatResponseProto(rgcr);
