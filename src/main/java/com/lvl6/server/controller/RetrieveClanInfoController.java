@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +17,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
-import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
@@ -28,7 +28,6 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
@@ -197,8 +196,8 @@ public class RetrieveClanInfoController extends EventController {
 			String clanId, String clanName, ClanInfoGrabType grabType,
 			RetrieveClanInfoResponseProto.Builder resBuilder) {
 		if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
-			List<String> clanIds = hzClanSearch
-					.getTopNClans(ControllerConstants.CLAN__TOP_N_CLANS);
+			//retrieve 100 clans, we sort and display 50 of them
+			List<String> clanIds = hzClanSearch.getTopNClans(100);
 
 			List<Clan> clanList = orderRecommendedClans(clanIds);
 
@@ -327,6 +326,7 @@ public class RetrieveClanInfoController extends EventController {
 		}
 	}
 
+	//ordering is 4 open, 1 closed, 4 open, 1 closed etc... 
 	private List<Clan> orderRecommendedClans(List<String> clanIds) {
 		Map<String, Clan> clanMap = clanRetrieveUtils.getClansByIds(clanIds);
 		
@@ -336,11 +336,39 @@ public class RetrieveClanInfoController extends EventController {
 		}
 
 		//need to order clans by rank
-		for (String cId : clanIds) {
-			if (!clanMap.containsKey(cId)) {
-				continue;
+		LinkedList<String> closedClans = new LinkedList<String>();
+		LinkedList<String> openClans = new LinkedList<String>();
+		int size = clanIds.size();
+		
+		for(String clanId : clanIds) {
+			if(clanMap.get(clanId).isRequestToJoinRequired()) {
+				closedClans.add(clanId);
 			}
-			clanList.add(clanMap.get(cId));
+			else {
+				openClans.add(clanId);
+			}
+		}
+		
+		for(int i=1; i<=size; i++) {
+			if(i%5 == 0) {
+				if(!closedClans.isEmpty()) {
+					clanList.add(clanMap.get(closedClans.pop()));
+				}
+				else {
+					clanList.add(clanMap.get(openClans.pop()));
+				}
+			}
+			else {
+				if(openClans.isEmpty()) {
+					clanList.add(clanMap.get(openClans.pop()));
+				}
+				else {
+					clanList.add(clanMap.get(closedClans.pop()));
+				}
+			}
+			if(i== 50) {
+				break;
+			}
 		}
 		return clanList;
 	}
