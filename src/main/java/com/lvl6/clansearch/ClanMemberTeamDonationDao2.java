@@ -16,6 +16,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanMemberTeamDonationDao
 @Component
 public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
 	
+	public ClanMemberTeamDonationDao2() {
+		super();
+	}
+	
 	public ClanMemberTeamDonationDao2(Configuration configuration) {
 		super(configuration);
 	}

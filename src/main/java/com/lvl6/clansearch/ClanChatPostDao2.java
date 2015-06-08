@@ -18,6 +18,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanChatPostDao;
 @Component
 public class ClanChatPostDao2 extends ClanChatPostDao{
 	
+	public ClanChatPostDao2() {
+		super();
+	}
+	
 	@Autowired
 	public ClanChatPostDao2(DefaultConfiguration configuration) {
 		super(configuration);

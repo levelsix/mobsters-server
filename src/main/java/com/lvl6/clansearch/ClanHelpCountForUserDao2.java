@@ -16,6 +16,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanHelpCountForUserDao;
 @Component
 public class ClanHelpCountForUserDao2 extends ClanHelpCountForUserDao{
 	
+	public ClanHelpCountForUserDao2() {
+		super();
+	}
+	
 	public ClanHelpCountForUserDao2(Configuration configuration) {
 		super(configuration);
 	}
