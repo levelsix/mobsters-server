@@ -196,10 +196,12 @@ public class HazelcastClanSearchImpl {
 	
 	public void saveToHazelCast(IMap<String, Map<Date, Integer>> map, 
 			String clanId, Date now, int amount) {
+		log.info("attemping to save to hazelcast for map {}", map);
 		if(!map.containsKey(clanId)) {
 			HashMap<Date, Integer> newInnerMap = new HashMap<Date, Integer>();
 			newInnerMap.put(now, amount);
 			map.put(clanId, newInnerMap, 7, TimeUnit.DAYS);
+			log.info("successful insert into map");
 		}
 		else {
 			boolean updated = false;
@@ -208,10 +210,12 @@ public class HazelcastClanSearchImpl {
 				if(timeUtils.numMinutesDifference(d, now) <= minuteIntervals) {
 					innerMap.put(d, innerMap.get(d) + amount);
 					updated = true;
+					log.info("successful insert into map2");
 				}
 			}
 			if(!updated) {
 				innerMap.put(now, amount);
+				log.info("successful insert into map3");
 			}
 		}
 	}
