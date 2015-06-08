@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.jooq.Configuration;
+import org.jooq.impl.DefaultConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
@@ -16,7 +18,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanChatPostDao;
 @Component
 public class ClanChatPostDao2 extends ClanChatPostDao{
 	
-	public ClanChatPostDao2(Configuration configuration) {
+	@Autowired
+	public ClanChatPostDao2(DefaultConfiguration configuration) {
 		super(configuration);
 	}
 
