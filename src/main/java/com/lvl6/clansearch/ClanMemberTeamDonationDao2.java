@@ -6,11 +6,13 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanMemberTeamDonation;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanMemberTeamDonationDao;
 
-
+@Component
 public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
 
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonation> fetchForClanSearch(Date d) {

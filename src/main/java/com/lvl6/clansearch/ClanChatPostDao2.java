@@ -4,13 +4,15 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import static org.jooq.impl.DSL.using;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPost;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanChatPostDao;
 
-
+@Component
 public class ClanChatPostDao2 extends ClanChatPostDao{
 
 	/**

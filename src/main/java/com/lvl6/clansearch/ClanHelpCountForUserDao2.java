@@ -6,12 +6,13 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.lvl6.mobsters.db.jooq.generated.Tables;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanHelpCountForUserDao;
 
-
+@Component
 public class ClanHelpCountForUserDao2 extends ClanHelpCountForUserDao{
 
 	/**
