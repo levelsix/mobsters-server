@@ -59,6 +59,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   var globalChatListener:Option[ClientRabbitListener] = None
   var clanIdListener:Option[ClientRabbitListener] = None
   var userIdListener:Option[ClientRabbitListener] = None
+  var facebookIdListener:Option[ClientRabbitListener] = None
 
   
   
@@ -151,7 +152,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
     responses.preDBFacebookEvents.foreach{ revent =>
       logger.info(s"Sending preDbFacebookResponse event: $revent")
-      sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))  
+      val bytes = EventParser.getResponseBytes(uuid, revent.event)
+      eventWriter.sendToSinglePlayer(revent.event.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId(), bytes)  
     }
     responses.clanResponseEvents.foreach{ revent =>
       logger.info(s"Sending clanResponse event to amqp: $revent")
