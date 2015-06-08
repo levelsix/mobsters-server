@@ -295,6 +295,7 @@ public class HazelcastClanSearchImpl {
 			long clanStrength2 = members2/10 * (chatsPastHour2 + 1) * (chatsPastDay2/12) *
 					filledDonations2 * (helpsPastDay2/100);
 			clanSearchRanking.add(clanId, clanStrength2);
+			log.info("added to clan search ranking, clanId {}, clanStrength{}", clanId, clanStrength2);
 		}
 	}	
 }
