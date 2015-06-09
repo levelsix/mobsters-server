@@ -350,20 +350,20 @@ public class CreateInfoProtoUtils {
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashWinnings, int prospectiveOilWinnings,
+			int prospectiveCashPercentage, int prospectiveOilPercentage,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
 			List<ResearchForUser> rfuList) {
 
-		MinimumUserProto defenderProto = createMinimumUserProtoFromUserAndClan(
-				defender, clan);
+		FullUserProto defenderProto = createFullUserProtoFromUser(defender, plfu, clan);
+
 		String userId = defender.getId();
 		String msg = defender.getPvpDefendingMessage();
 
 		return createPvpProto(userId, plfu, pu, userMonsters,
-				userMonsterIdToDropped, prospectiveCashWinnings,
-				prospectiveOilWinnings, defenderProto, msg, cmtd, msfu,
+				userMonsterIdToDropped, prospectiveCashPercentage,
+				prospectiveOilPercentage, defenderProto, msg, cmtd, msfu,
 				msfuMonsterIdDropped, boardObstacles, rfuList);
 	}
 
@@ -371,8 +371,8 @@ public class CreateInfoProtoUtils {
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashWinnings, int prospectiveOilWinnings,
-			MinimumUserProto defender, String defenderMsg,
+			float prospectiveCashPercentage, int prospectiveOilPercentage,
+			FullUserProto defender, String defenderMsg,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
@@ -384,8 +384,8 @@ public class CreateInfoProtoUtils {
 		ppb.addAllDefenderMonsters(defenderMonsters);
 
 		ppb.setDefender(defender);
-		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
-		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+		ppb.setProspectiveCashPercentage(prospectiveCashPercentage);
+		ppb.setProspectiveOilPercentage(prospectiveOilPercentage);
 
 		UserPvpLeagueProto uplp = createUserPvpLeagueProto(defenderId, plfu,
 				pu, true);
@@ -514,19 +514,19 @@ public class CreateInfoProtoUtils {
 
 	//this is used to create fake users for PvpProtos
 	public PvpProto createFakePvpProto(String userId, String name,
-			int lvl, int elo, int prospectiveCashWinnings,
-			int prospectiveOilWinnings, List<MonsterForPvp> mfpList,
+			int lvl, int elo, int prospectiveCashPercentage,
+			int prospectiveOilPercentage, List<MonsterForPvp> mfpList,
 			List<Integer> monsterIdsDropped, boolean setElo) {
 
 		//create the fake user
-		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		//mupb.setUserUuid(userId); // fake user will never have id
-		mupb.setName(name);
-		MinimumUserProto mup = mupb.build();
+		fupb.setName(name);
+		FullUserProto fup = fupb.build();
 
 		//THE ACTUAL PROTO
 		PvpProto.Builder ppb = PvpProto.newBuilder();
-		ppb.setDefender(mup);
+		ppb.setDefender(fup);
 		//    ppb.setCurElo(elo);
 
 		//set the defenderMonsters
@@ -534,8 +534,8 @@ public class CreateInfoProtoUtils {
 				monsterIdsDropped);
 		ppb.addAllDefenderMonsters(pmpList);
 
-		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
-		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+		ppb.setProspectiveCashPercentage(prospectiveCashPercentage);
+		ppb.setProspectiveOilPercentage(prospectiveOilPercentage);
 
 		UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(userId, elo,
 				setElo);
