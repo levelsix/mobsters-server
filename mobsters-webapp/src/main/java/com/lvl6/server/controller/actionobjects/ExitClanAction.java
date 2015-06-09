@@ -31,7 +31,7 @@ public class ExitClanAction {
 
 	public ExitClanAction(String userId, String clanId, int clanSize,
 			Date lastChatPost, TimeUtils timeUtil, UpdateUtil updateUtil,
-			HazelcastClanSearchImpl hzClanSearch,
+			HazelcastClanSearchImpl hzClanSearch, ClanSearch clanSearch,
 			ServerToggleRetrieveUtils toggle) {
 		super();
 		this.userId = userId;
@@ -41,6 +41,7 @@ public class ExitClanAction {
 		this.timeUtil = timeUtil;
 		this.updateUtil = updateUtil;
 		this.hzClanSearch = hzClanSearch;
+		this.clanSearch = clanSearch;
 		this.toggle = toggle;
 	}
 
