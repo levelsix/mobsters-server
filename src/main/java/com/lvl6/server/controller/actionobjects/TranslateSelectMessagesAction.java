@@ -151,23 +151,25 @@ public class TranslateSelectMessagesAction {
 				
 				Object[] array = messages.toArray();
 				String[] textArray = Arrays.copyOf(array, array.length, String[].class);
+				String[] translations = null;
 				if(textArray.length == 0) {
 					log.info("text array passed into translate is empty");
 				}
-				String[] translations = translationUtils.translateInBulk(textArray, language, serverToggleRetrieveUtils);
-
-				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
-					for(int i=0; i<translations.length; i++) {
-						TranslatedText tt = new TranslatedText();
-						try {
-							tt.setLanguage(language.getName(Language.ENGLISH).toUpperCase());
-						} catch (Exception e) {
-							log.error("error getting name of language " + language, e);
+				else {
+					translations = translationUtils.translateInBulk(textArray, language, serverToggleRetrieveUtils);
+					for(PrivateChatPost pcp : listOfPrivateChatPosts) {
+						for(int i=0; i<translations.length; i++) {
+							TranslatedText tt = new TranslatedText();
+							try {
+								tt.setLanguage(language.getName(Language.ENGLISH).toUpperCase());
+							} catch (Exception e) {
+								log.error("error getting name of language " + language, e);
+							}
+							tt.setText(translations[i]);
+							pcp.setTranslatedText(tt);
 						}
-						tt.setText(translations[i]);
-						pcp.setTranslatedText(tt);
+						privateChatPostMap.put(pcp.getId(), pcp);
 					}
-					privateChatPostMap.put(pcp.getId(), pcp);
 				}
 
 				boolean successfulTranslationInsertion = insertUtil.insertMultipleTranslationsForPrivateChat(
