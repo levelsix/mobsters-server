@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
-import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SendGroupChatRequestEvent;
@@ -36,18 +35,17 @@ import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
-import com.lvl6.server.Locker;
-import com.lvl6.server.eventsender.ClanResponseEvent;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.retrieveutils.rarechange.CustomTranslationRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TranslationUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.memetix.mst.language.Language;
@@ -55,7 +53,7 @@ import com.memetix.mst.language.Language;
 @Component
 public class SendGroupChatController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(SendGroupChatController.class);
 
 	public static int CHAT_MESSAGES_MAX_SIZE = 50;
@@ -89,21 +87,21 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
-	
+
 	@Autowired
 	protected TranslationUtils translationUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
-	
+
 	@Autowired
 	protected CustomTranslationsDao customTranslationsDao;
-	
+
 	@Autowired
 	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
 
 	public SendGroupChatController() {
-		
+
 	}
 
 	@Override
@@ -185,17 +183,17 @@ public class SendGroupChatController extends EventController {
 
 				Language detectedLanguage = translationUtils.detectedLanguage(censoredChatMessage, toggle);
 				log.info("detected language={}", detectedLanguage);
-				
+
 				if (detectedLanguage == null) {
 					// Default to the content language
 					detectedLanguage = translationUtils.convertFromEnumToLanguage(globalLanguage);
 					log.info("defaulting to content language={}", detectedLanguage);
 				}
-				
+
 //				Map<TranslateLanguages, String> translateMap = translationUtils.translateForGlobal(detectedLanguage, censoredChatMessage);
 //				String customTranslationLanguage = null;
 				Map<Integer, CustomTranslations> ctMap = customTranslationRetrieveUtils.getIdsToCustomTranslationss();
-			
+
 				for(int id : ctMap.keySet()) {
 					String phrase = ctMap.get(id).getPhrase();
 					if(phrase.equalsIgnoreCase(censoredChatMessage)) {
@@ -210,9 +208,9 @@ public class SendGroupChatController extends EventController {
 //					translateMap = translationUtils.translate(Language.valueOf(customTranslationLanguage),
 //							null, censoredChatMessage, toggle);
 //				}
-				Map<TranslateLanguages, String> translateMap = translationUtils.translate(detectedLanguage, null, 
+				Map<TranslateLanguages, String> translateMap = translationUtils.translate(detectedLanguage, null,
 						censoredChatMessage, toggle);
-				
+
 				for(TranslateLanguages tl : translateMap.keySet()) {
 					String translatedContent = translateMap.get(tl);
 					if(translatedContent.toLowerCase().contains("ArgumentOutOfRangeException".toLowerCase())) {
@@ -221,22 +219,21 @@ public class SendGroupChatController extends EventController {
 					}
 				}
 
-				MinimumUserProtoWithLevel mupWithLvl = createInfoProtoUtils
-						.createMinimumUserProtoWithLevel(user, null,
-								senderProto);
-				chatProto.setSender(mupWithLvl);
+				MinimumUserProto mup = createInfoProtoUtils
+						.createMinimumUserProtoFromUserAndClan(user, null);
+				chatProto.setSender(mup);
 				chatProto.setScope(scope);
-				
+
 				GroupChatMessageProto gcmp = createInfoProtoUtils
-						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
-								censoredChatMessage, user.isAdmin(), "global msg", translateMap, 
+						.createGroupChatMessageProto(timeOfPost.getTime(), mup,
+								censoredChatMessage, user.isAdmin(), "global msg", translateMap,
 								translationUtils.convertFromLanguageToEnum(detectedLanguage, toggle),
 								translationUtils);
 //				GroupChatMessageProto gcmp = createInfoProtoUtils
 //						.createGroupChatMessageProto(timeOfPost.getTime(), mupWithLvl,
 //								censoredChatMessage, user.isAdmin(), "global msg", translateMap, globalLanguage,
 //								translationUtils);
-				
+
 				chatProto.setMessage(gcmp);
 
                 //legacy implementation

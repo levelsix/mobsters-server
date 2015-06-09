@@ -21,7 +21,6 @@ import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.server.eventsender.EventWriter;
 import com.lvl6.util.EventParser;
 
@@ -30,13 +29,13 @@ public class MessagingUtil {
 	private static final Logger log = LoggerFactory
 			.getLogger(MessagingUtil.class);
 
-	
+
 	//TODO: Fix this whole class to work with websockets
-	
-	
+
+
 	@Autowired
 	EventWriter eventWriter;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -63,13 +62,6 @@ public class MessagingUtil {
 		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
 				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		return createInfoProtoUtils.createMinimumUserProtoFromUserAndClan(alex,
-				null);
-	}
-
-	public MinimumUserProtoWithLevel getAlexUserProtoWithLvl() {
-		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
-				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return createInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null,
 				null);
 	}
 
@@ -116,13 +108,13 @@ public class MessagingUtil {
 		log.info("Sending admin message global chat");
 		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 				.newBuilder();
-		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
+		MinimumUserProto senderProto = getAlexUserProto();
 		final ChatScope scope = ChatScope.GLOBAL;
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
 		chatProto.setChatMessage(message);
 		chatProto.setSender(senderProto);
 		chatProto.setScope(scope);
-		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto,
+		sendChatMessage(senderProto.getUserUuid(), chatProto,
 				1, timeOfPost.getTime());
 	}
 

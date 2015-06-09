@@ -9,8 +9,8 @@ option java_outer_classname = "ChatProto";
 
 message PrivateChatPostProto {
 	optional string privateChatPostUuid = 1;
-	optional MinimumUserProtoWithLevel poster = 2;
-	optional MinimumUserProtoWithLevel recipient = 3;
+	optional MinimumUserProto poster = 2;
+	optional MinimumUserProto recipient = 3;
 	optional int64 timeOfPost = 4;
 	optional string content = 5;
 	optional TranslateLanguages originalContentLanguage = 7; 
@@ -28,7 +28,7 @@ message ColorProto {
 //-----------------------------------------------------------------------------------------
 
 message GroupChatMessageProto {
-	optional MinimumUserProtoWithLevel sender = 1;
+	optional MinimumUserProto sender = 1;
 	optional int64 timeOfChat = 2;
 	optional TranslateLanguages contentLanguage = 7;  //the language of original content
 	optional string content = 3;

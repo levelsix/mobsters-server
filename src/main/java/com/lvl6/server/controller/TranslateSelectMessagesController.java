@@ -43,7 +43,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @Component
 public class TranslateSelectMessagesController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(TranslateSelectMessagesController.class);
 
 	@Autowired
@@ -75,16 +75,16 @@ public class TranslateSelectMessagesController extends EventController {
 
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
-	
+
 	@Autowired
 	protected TranslationUtils translationUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	
+
 
 	public TranslateSelectMessagesController() {
-		
+
 	}
 
 	@Override
@@ -209,8 +209,8 @@ public class TranslateSelectMessagesController extends EventController {
 		for(PrivateChatPostProto pcpp : list) {
 			PrivateChatPost pcp = new PrivateChatPost();
 			pcp.setId(pcpp.getPrivateChatPostUuid());
-			pcp.setPosterId(pcpp.getPoster().getMinUserProto().getUserUuid());
-			pcp.setRecipientId(pcpp.getRecipient().getMinUserProto().getUserUuid());
+			pcp.setPosterId(pcpp.getPoster().getUserUuid());
+			pcp.setRecipientId(pcpp.getRecipient().getUserUuid());
 			pcp.setTimeOfPost(new Date(pcpp.getTimeOfPost()));
 			pcp.setContent(pcpp.getContent());
 			pcp.setContentLanguage(pcpp.getOriginalContentLanguage().toString());

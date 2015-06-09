@@ -82,6 +82,7 @@ public class ReconnectController extends EventController {
 	public void forceLogoutOthers(String udid, String playerId, User u, String fbId, ToClientEvents responses) {
 		ForceLogoutResponseProto logoutResponse = ForceLogoutResponseProto.newBuilder().setUdid(udid).setPreviousLoginTime(u.getLastLogin().getTime()).build();
 		ForceLogoutResponseEvent event = new ForceLogoutResponseEvent(playerId);
+		event.setResponseProto(logoutResponse);
 		
 		responses.preDBResponseEvents().add(new PreDBResponseEvent(event, udid));
 		responses.normalResponseEvents().add(event);

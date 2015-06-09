@@ -182,7 +182,6 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
@@ -346,19 +345,6 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** Battle.proto ***************************************************/
-	/*public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(
-		  User u, PvpLeagueForUser plfu) {
-	MinimumUserProtoWithLevel mup = createMinimumUserProtoWithLevelFromUser(u);
-	MinimumUserProtoWithBattleHistory.Builder mupwbhb = MinimumUserProtoWithBattleHistory.newBuilder();
-	mupwbhb.setMinUserProtoWithLevel(mup);
-
-	int battlesWon = plfu.getAttacksWon() + plfu.getDefensesWon();
-	mupwbhb.setBattlesWon(battlesWon);
-	int battlesLost = plfu.getAttacksLost() + plfu.getDefensesLost();
-	mupwbhb.setBattlesLost(battlesLost);
-
-	return mupwbhb.build();
-	}*/
 
 	public PvpProto createPvpProto(User defender, Clan clan,
 			PvpLeagueForUser plfu, PvpUser pu,
@@ -370,8 +356,8 @@ public class CreateInfoProtoUtils {
 			List<PvpBoardObstacleForUser> boardObstacles,
 			List<ResearchForUser> rfuList) {
 
-		MinimumUserProtoWithLevel defenderProto = createMinimumUserProtoWithLevel(
-				defender, clan, null);
+		MinimumUserProto defenderProto = createMinimumUserProtoFromUserAndClan(
+				defender, clan);
 		String userId = defender.getId();
 		String msg = defender.getPvpDefendingMessage();
 
@@ -386,7 +372,7 @@ public class CreateInfoProtoUtils {
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
-			MinimumUserProtoWithLevel defender, String defenderMsg,
+			MinimumUserProto defender, String defenderMsg,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
@@ -538,15 +524,9 @@ public class CreateInfoProtoUtils {
 		mupb.setName(name);
 		MinimumUserProto mup = mupb.build();
 
-		MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel
-				.newBuilder();
-		mupwlb.setMinUserProto(mup);
-		mupwlb.setLevel(lvl);
-		MinimumUserProtoWithLevel mupwl = mupwlb.build();
-
 		//THE ACTUAL PROTO
 		PvpProto.Builder ppb = PvpProto.newBuilder();
-		ppb.setDefender(mupwl);
+		ppb.setDefender(mup);
 		//    ppb.setCurElo(elo);
 
 		//set the defenderMonsters
@@ -919,7 +899,7 @@ public class CreateInfoProtoUtils {
 			Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans) {
 		List<PvpClanAvengeProto> pcapList = new ArrayList<PvpClanAvengeProto>();
 
-		Map<String, MinimumUserProtoWithLevel> userIdToMupwl = createMinimumUserProtoWithLevel(
+		Map<String, MinimumUserProto> userIdToMup = createMinimumUserProtoFromUserAndClan(
 				userIdsToUsers, userIdsToClans);
 
 		for (ClanAvenge ca : retaliations) {
@@ -931,7 +911,7 @@ public class CreateInfoProtoUtils {
 			}
 
 			PvpClanAvengeProto pcap = createPvpClanAvengeProto(ca, cauList,
-					userIdToMupwl);
+					userIdToMup);
 			pcapList.add(pcap);
 		}
 		return pcapList;
@@ -939,18 +919,18 @@ public class CreateInfoProtoUtils {
 
 	public PvpClanAvengeProto createPvpClanAvengeProto(ClanAvenge ca,
 			List<ClanAvengeUser> cauList,
-			Map<String, MinimumUserProtoWithLevel> userIdToMupwl) {
+			Map<String, MinimumUserProto> userIdToMup) {
 		String attackerId = ca.getAttackerId();
 		String defenderId = ca.getDefenderId();
 		String defenderClanUuid = ca.getClanId();
 
-		MinimumUserProtoWithLevel attacker = userIdToMupwl.get(attackerId);
-		MinimumUserProtoWithLevel defender = userIdToMupwl.get(defenderId);
+		MinimumUserProto attacker = userIdToMup.get(attackerId);
+		MinimumUserProto defender = userIdToMup.get(defenderId);
 
 		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
 		pcapb.setClanAvengeUuid(ca.getId());
 		pcapb.setAttacker(attacker);
-		pcapb.setDefender(defender.getMinUserProto());
+		pcapb.setDefender(defender);
 
 		Date time = ca.getBattleEndTime();
 		pcapb.setBattleEndTime(time.getTime());
@@ -1000,15 +980,15 @@ public class CreateInfoProtoUtils {
 	public List<PvpClanAvengeProto> createPvpClanAvengeProto(
 			List<ClanAvenge> retaliations, MinimumUserProto defenderMup,
 			String clanUuid,
-			Map<String, MinimumUserProtoWithLevel> attackerIdsToMupwls) {
+			Map<String, MinimumUserProto> attackerIdsToMups) {
 		List<PvpClanAvengeProto> pcapList = new ArrayList<PvpClanAvengeProto>();
 
 		for (ClanAvenge ca : retaliations) {
 			String attackerId = ca.getAttackerId();
-			MinimumUserProtoWithLevel attackerMupwl = attackerIdsToMupwls
+			MinimumUserProto attackerMup = attackerIdsToMups
 					.get(attackerId);
 
-			PvpClanAvengeProto pcap = createPvpClanAvengeProto(attackerMupwl,
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(attackerMup,
 					defenderMup, clanUuid, ca);
 
 			pcapList.add(pcap);
@@ -1017,7 +997,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpClanAvengeProto createPvpClanAvengeProto(
-			MinimumUserProtoWithLevel attacker, MinimumUserProto defender,
+			MinimumUserProto attacker, MinimumUserProto defender,
 			String defenderClanUuid, ClanAvenge ca) {
 		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
 		pcapb.setClanAvengeUuid(ca.getId());
@@ -1274,10 +1254,10 @@ public class CreateInfoProtoUtils {
 			PrivateChatPost p, User poster, Clan posterClan, User recipient,
 			Clan recipientClan, Map<TranslateLanguages, String> translatedMessage,
 			TranslateLanguages contentLanguage) {
-		MinimumUserProtoWithLevel mupwlPoster = createMinimumUserProtoWithLevel(
-				poster, posterClan, null);
-		MinimumUserProtoWithLevel mupwlRecipient = createMinimumUserProtoWithLevel(
-				recipient, recipientClan, null);
+		MinimumUserProto mupPoster = createMinimumUserProtoFromUserAndClan(
+				poster, posterClan);
+		MinimumUserProto mupRecipient = createMinimumUserProtoFromUserAndClan(
+				recipient, recipientClan);
 
 		// Truncate time because db truncates it (?)
 		long time = p.getTimeOfPost().getTime();
@@ -1285,8 +1265,8 @@ public class CreateInfoProtoUtils {
 
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
 		pcppb.setPrivateChatPostUuid(p.getId());
-		pcppb.setPoster(mupwlPoster);
-		pcppb.setRecipient(mupwlRecipient);
+		pcppb.setPoster(mupPoster);
+		pcppb.setRecipient(mupRecipient);
 		pcppb.setTimeOfPost(time);
 		pcppb.setContent(p.getContent());
 
@@ -1308,14 +1288,14 @@ public class CreateInfoProtoUtils {
 
 
 	public PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-			PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
-			MinimumUserProtoWithLevel mupwlRecipient,
+			PrivateChatPost p, MinimumUserProto mupPoster,
+			MinimumUserProto mupRecipient,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
 
 		pcppb.setPrivateChatPostUuid(p.getId());
-		pcppb.setPoster(mupwlPoster);
-		pcppb.setRecipient(mupwlRecipient);
+		pcppb.setPoster(mupPoster);
+		pcppb.setRecipient(mupRecipient);
 		pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
 		pcppb.setContent(p.getContent());
 
@@ -1351,18 +1331,18 @@ public class CreateInfoProtoUtils {
 
 	public List<PrivateChatPostProto> createPrivateChatPostProtoFromPrivateChatPostsAndProtos(
 			List<PrivateChatPost> pList,
-			Map<Integer, MinimumUserProtoWithLevel> idsToMupwls,
+			Map<Integer, MinimumUserProto> idsToMups,
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 
 		for (PrivateChatPost pcp : pList) {
-			MinimumUserProtoWithLevel mupwlPoster = idsToMupwls.get(pcp
+			MinimumUserProto mupPoster = idsToMups.get(pcp
 					.getPosterId());
-			MinimumUserProtoWithLevel mupwlRecipient = idsToMupwls.get(pcp
+			MinimumUserProto mupRecipient = idsToMups.get(pcp
 					.getRecipientId());
 
 			PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-					pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
+					pcp, mupPoster, mupRecipient, translationSettingsForUserRetrieveUtil);
 
 			pcppList.add(pcpp);
 		}
@@ -1384,12 +1364,12 @@ public class CreateInfoProtoUtils {
 			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
-		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel = new HashMap<String, MinimumUserProtoWithLevel>();
+		Map<String, MinimumUserProto> userIdToMinimumUserProto = new HashMap<String, MinimumUserProto>();
 		//construct the minimum user protos for the users that have clans
 		//and the clanless users
 		createMinimumUserProtosFromClannedAndClanlessUsers(clanIdsToClans,
 				clanIdsToUserIdSet, clanlessUserIds, userIdsToUsers,
-				userIdToMinimumUserProtoWithLevel);
+				userIdToMinimumUserProto);
 
 		//now actually construct the PrivateChatPostProtos
 		if (null != privateChatPostIds && !privateChatPostIds.isEmpty()) {
@@ -1399,26 +1379,26 @@ public class CreateInfoProtoUtils {
 				String posterId = pcp.getPosterId();
 				String recipientId = pcp.getRecipientId();
 
-				MinimumUserProtoWithLevel mupwlPoster = userIdToMinimumUserProtoWithLevel
+				MinimumUserProto mupPoster = userIdToMinimumUserProto
 						.get(posterId);
-				MinimumUserProtoWithLevel mupwlRecipient = userIdToMinimumUserProtoWithLevel
+				MinimumUserProto mupRecipient = userIdToMinimumUserProto
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
+						pcp, mupPoster, mupRecipient, translationSettingsForUserRetrieveUtil);
 				pcppList.add(pcpp);
 			}
 		} else {
 			for (PrivateChatPost pcp : postIdsToPrivateChatPosts.values()) {
 				String posterId = pcp.getPosterId();
 				String recipientId = pcp.getRecipientId();
-				MinimumUserProtoWithLevel mupwlPoster = userIdToMinimumUserProtoWithLevel
+				MinimumUserProto mupPoster = userIdToMinimumUserProto
 						.get(posterId);
-				MinimumUserProtoWithLevel mupwlRecipient = userIdToMinimumUserProtoWithLevel
+				MinimumUserProto mupRecipient = userIdToMinimumUserProto
 						.get(recipientId);
 
 				PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-						pcp, mupwlPoster, mupwlRecipient, translationSettingsForUserRetrieveUtil);
+						pcp, mupPoster, mupRecipient, translationSettingsForUserRetrieveUtil);
 				pcppList.add(pcpp);
 			}
 		}
@@ -1430,7 +1410,7 @@ public class CreateInfoProtoUtils {
 			ClanChatPost p, User user, Clan clan) {
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
 				.newBuilder();
-		gcmpb.setSender(createMinimumUserProtoWithLevel(user, clan, null));
+		gcmpb.setSender(createMinimumUserProtoFromUserAndClan(user, clan));
 		gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
 
 		//		boolean turnOffTranslation = ServerToggleRetrieveUtils.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__TURN_OFF_TRANSLATIONS);
@@ -1453,7 +1433,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
-			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
+			MinimumUserProto user, String content, boolean isAdmin,
 			String chatId, TranslateLanguages contentLanguage, TranslateLanguages translatedLanguage,
 			String translatedContent) {
 		GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto
@@ -1489,7 +1469,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public GroupChatMessageProto createGroupChatMessageProto(long time,
-			MinimumUserProtoWithLevel user, String content, boolean isAdmin,
+			MinimumUserProto user, String content, boolean isAdmin,
 			String chatId, Map<TranslateLanguages, String> translatedMap,
 			TranslateLanguages contentLanguage, TranslationUtils translationUtils) {
 
@@ -1702,12 +1682,12 @@ public class CreateInfoProtoUtils {
 	public MinimumUserProtoForClans createMinimumUserProtoForClans(
 			User u, Clan clan, String userClanStatus,
 			float clanRaidContribution, int battlesWon, UserClanHelpCount uchc) {
-		MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u,
-				clan, null);
+		MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(u,
+				clan);
 
 		MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans
 				.newBuilder();
-		mupfcb.setMinUserProtoWithLevel(mupwl);
+		mupfcb.setSender(mup);
 
 		try {
 			UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
@@ -1731,12 +1711,12 @@ public class CreateInfoProtoUtils {
 	public MinimumUserProtoForClans createMinimumUserProtoForClans(
 			User u, Clan clan, UserClanStatus userClanStatus,
 			float clanRaidContribution, int battlesWon, UserClanHelpCount uchc) {
-		MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u,
-				clan, null);
+		MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(u,
+				clan);
 
 		MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans
 				.newBuilder();
-		mupfcb.setMinUserProtoWithLevel(mupwl);
+		mupfcb.setSender(mup);
 
 		mupfcb.setClanStatus(userClanStatus);
 		mupfcb.setRaidContribution(clanRaidContribution);
@@ -5092,17 +5072,6 @@ public class CreateInfoProtoUtils {
 	//		return b.build();
 	//	}
 
-	/*
-	public static MinimumUserProtoWithLevelForTournament createMinimumUserProtoWithLevelForTournament(User u, int rank, double score) {
-	MinimumUserProto mup = createMinimumUserProtoFromUser(u);
-	MinimumUserProtoWithLevelForTournament.Builder mupwlftb = MinimumUserProtoWithLevelForTournament.newBuilder();
-	mupwlftb.setMinUserProto(mup);
-	mupwlftb.setLevel(u.getLevel());
-	mupwlftb.setTournamentRank(rank);
-	mupwlftb.setTournamentScore(score);
-	return mupwlftb.build();
-	}*/
-
 	/** User.proto *****************************************************/
 	public MinimumClanProto createMinimumClanProtoFromClan(Clan c) {
 		MinimumClanProto.Builder mcpb = MinimumClanProto.newBuilder();
@@ -5139,23 +5108,9 @@ public class CreateInfoProtoUtils {
 			builder.setClan(createMinimumClanProtoFromClan(c));
 		}
 		builder.setAvatarMonsterId(u.getAvatarMonsterId());
+		builder.setStrength(u.getTotalStrength());
 
 		return builder.build();
-	}
-
-	public MinimumUserProtoWithLevel createMinimumUserProtoWithLevel(
-			User u, Clan c, MinimumUserProto mup) {
-
-		if (null == mup) {
-			mup = createMinimumUserProtoFromUserAndClan(u, c);
-		}
-
-		MinimumUserProtoWithLevel.Builder mupWithLevel = MinimumUserProtoWithLevel
-				.newBuilder();
-		mupWithLevel.setMinUserProto(mup);
-
-		mupWithLevel.setLevel(u.getLevel());
-		return mupWithLevel.build();
 	}
 
 	public MinimumUserProtoWithFacebookId createMinimumUserProtoWithFacebookId(
@@ -5336,7 +5291,7 @@ public class CreateInfoProtoUtils {
 
 		return builder.build();
 	}
-	
+
 	//using user pojo
 	public FullUserProto createFullUserProtoFromUser(
 			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User u,
@@ -5365,13 +5320,13 @@ public class CreateInfoProtoUtils {
 			builder.setIsFake(false);
 		}
 		else builder.setIsFake(true);
-		
+
 		builder.setCreateTime(u.getCreateTime().getTime());
 		if (u.getIsAdmin().compareTo((byte)0) == 0) {
 			builder.setIsAdmin(false);
 		}
 		else builder.setIsAdmin(true);
-		
+
 		builder.setNumCoinsRetrievedFromStructs(u
 				.getNumCoinsRetrievedFromStructs());
 		builder.setNumOilRetrievedFromStructs(u.getNumOilRetrievedFromStructs());
@@ -5459,7 +5414,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public MinimumUserProtoWithLevel createMinimumUserProto(
+	public MinimumUserProto createMinimumUserProto(
 			FullUserProto fup) {
 		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
 		String str = fup.getUserUuid();
@@ -5482,27 +5437,23 @@ public class CreateInfoProtoUtils {
 			mupb.setAvatarMonsterId(avatarMonsterId);
 		}
 
-		MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel
-				.newBuilder();
-		mupwlb.setLevel(fup.getLevel());
-		mupwlb.setMinUserProto(mupb.build());
 
-		return mupwlb.build();
+		return mupb.build();
 	}
 
-	public Map<String, MinimumUserProtoWithLevel> createMinimumUserProtoWithLevel(
+	public Map<String, MinimumUserProto> createMinimumUserProtoFromUserAndClan(
 			Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans) {
-		Map<String, MinimumUserProtoWithLevel> userIdToMupwl = new HashMap<String, MinimumUserProtoWithLevel>();
+		Map<String, MinimumUserProto> userIdToMup = new HashMap<String, MinimumUserProto>();
 		for (User u : userIdsToUsers.values()) {
 			String userId = u.getId();
 			Clan c = userIdsToClans.get(userId);
 
-			MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(
-					u, c, null);
+			MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(
+					u, c);
 
-			userIdToMupwl.put(userId, mupwl);
+			userIdToMup.put(userId, mup);
 		}
-		return userIdToMupwl;
+		return userIdToMup;
 	}
 
 	//  public static ReferralNotificationProto createReferralNotificationProtoFromReferral(
@@ -5526,29 +5477,19 @@ public class CreateInfoProtoUtils {
 			Map<String, Set<String>> clanIdsToUserIdSet,
 			List<String> clanlessUserIds,
 			Map<String, User> userIdsToUsers,
-			Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel) {
+			Map<String, MinimumUserProto> userIdToMinimumUserProto) {
 		//construct the minimum user protos for the clanless users
 		for (String userId : clanlessUserIds) {
 			User u = userIdsToUsers.get(userId);
-			MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(
-					u, null, null);
-			userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
+			MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(
+					u, null);
+			userIdToMinimumUserProto.put(userId, mup);
 		}
 
 		//construct the minimum user protos for the users that have clans
 		if (null == clanIdsToClans) {
 			return;
 		}
-		//		for (int clanId : clanIdsToClans.keySet()) {
-		//			Clan c = clanIdsToClans.get(clanId);
-		//
-		//			//create minimum user protos for users associated with clan
-		//			for (int userId: clanIdsToUserIdSet.get(clanId)) {
-		//				User u = userIdsToUsers.get(userId);
-		//				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, c, null);
-		//				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
-		//			}
-		//		}
 		for (String clanId : clanIdsToUserIdSet.keySet()) {
 
 			//precautionary measure
@@ -5565,9 +5506,9 @@ public class CreateInfoProtoUtils {
 			//create minimum user protos for users associated with clan
 			for (String userId : clanIdsToUserIdSet.get(clanId)) {
 				User u = userIdsToUsers.get(userId);
-				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(
-						u, c, null);
-				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
+				MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(
+						u, c);
+				userIdToMinimumUserProto.put(userId, mup);
 			}
 		}
 	}
@@ -5617,7 +5558,7 @@ public class CreateInfoProtoUtils {
 		for(StrengthLeaderBoard slb : slbList) {
 			userIds.add(slb.getUserId());
 		}
-		
+
 		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
 		for(StrengthLeaderBoard slb : slbList) {
 			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
@@ -5625,12 +5566,12 @@ public class CreateInfoProtoUtils {
 			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
 			b.setRank(slb.getRank());
 			b.setStrength(slb.getStrength());
-			
+
 			slbpList.add(b.build());
 		}
 		return slbpList;
 	}
-	
+
 	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtos(List<StrengthLeaderBoard> slbList,
 			UserRetrieveUtils2 userRetrieveUtils) {
 		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
@@ -5652,7 +5593,7 @@ public class CreateInfoProtoUtils {
 		}
 		return slbpList;
 	}
-	
+
 	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfig> mjricList) {
 		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
 		for(MiniJobRefreshItemConfig mjric : mjricList) {

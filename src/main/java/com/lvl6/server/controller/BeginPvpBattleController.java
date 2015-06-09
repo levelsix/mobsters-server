@@ -57,7 +57,7 @@ public class BeginPvpBattleController extends EventController {
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 
 	public BeginPvpBattleController() {
-		
+
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class BeginPvpBattleController extends EventController {
 		try {
 			UUID.fromString(attackerId);
 
-			enemyUserId = enemyProto.getDefender().getMinUserProto()
+			enemyUserId = enemyProto.getDefender()
 					.getUserUuid();
 			if (!"".equals(enemyUserId)) {
 				enemyUserUuid = UUID.fromString(enemyUserId);

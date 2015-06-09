@@ -245,30 +245,30 @@ public final class ChatProto {
         getPrivateChatPostUuidBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
      */
     boolean hasPoster();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getPoster();
+    com.lvl6.proto.UserProto.MinimumUserProto getPoster();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getPosterOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
      */
     boolean hasRecipient();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getRecipient();
+    com.lvl6.proto.UserProto.MinimumUserProto getRecipient();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getRecipientOrBuilder();
 
     /**
      * <code>optional int64 timeOfPost = 4;</code>
@@ -385,11 +385,11 @@ public final class ChatProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = poster_.toBuilder();
               }
-              poster_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              poster_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(poster_);
                 poster_ = subBuilder.buildPartial();
@@ -398,11 +398,11 @@ public final class ChatProto {
               break;
             }
             case 26: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = recipient_.toBuilder();
               }
-              recipient_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              recipient_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(recipient_);
                 recipient_ = subBuilder.buildPartial();
@@ -526,44 +526,44 @@ public final class ChatProto {
     }
 
     public static final int POSTER_FIELD_NUMBER = 2;
-    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel poster_;
+    private com.lvl6.proto.UserProto.MinimumUserProto poster_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
      */
     public boolean hasPoster() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getPoster() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getPoster() {
       return poster_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getPosterOrBuilder() {
       return poster_;
     }
 
     public static final int RECIPIENT_FIELD_NUMBER = 3;
-    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel recipient_;
+    private com.lvl6.proto.UserProto.MinimumUserProto recipient_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
      */
     public boolean hasRecipient() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getRecipient() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getRecipient() {
       return recipient_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getRecipientOrBuilder() {
       return recipient_;
     }
 
@@ -676,8 +676,8 @@ public final class ChatProto {
 
     private void initFields() {
       privateChatPostUuid_ = "";
-      poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
-      recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      poster_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      recipient_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       timeOfPost_ = 0L;
       content_ = "";
       originalContentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
@@ -877,13 +877,13 @@ public final class ChatProto {
         privateChatPostUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (posterBuilder_ == null) {
-          poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          poster_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
           posterBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
         if (recipientBuilder_ == null) {
-          recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          recipient_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
           recipientBuilder_.clear();
         }
@@ -1136,19 +1136,19 @@ public final class ChatProto {
         return this;
       }
 
-      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto poster_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> posterBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> posterBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
       public boolean hasPoster() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getPoster() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getPoster() {
         if (posterBuilder_ == null) {
           return poster_;
         } else {
@@ -1156,9 +1156,9 @@ public final class ChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
-      public Builder setPoster(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder setPoster(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (posterBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1172,10 +1172,10 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
       public Builder setPoster(
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (posterBuilder_ == null) {
           poster_ = builderForValue.build();
           onChanged();
@@ -1186,14 +1186,14 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
-      public Builder mergePoster(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder mergePoster(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (posterBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              poster_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+              poster_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
             poster_ =
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(poster_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(poster_).mergeFrom(value).buildPartial();
           } else {
             poster_ = value;
           }
@@ -1205,11 +1205,11 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
       public Builder clearPoster() {
         if (posterBuilder_ == null) {
-          poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          poster_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
           posterBuilder_.clear();
@@ -1218,17 +1218,17 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getPosterBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getPosterBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getPosterFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getPosterOrBuilder() {
         if (posterBuilder_ != null) {
           return posterBuilder_.getMessageOrBuilder();
         } else {
@@ -1236,14 +1236,14 @@ public final class ChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto poster = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getPosterFieldBuilder() {
         if (posterBuilder_ == null) {
           posterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
                   getPoster(),
                   getParentForChildren(),
                   isClean());
@@ -1252,19 +1252,19 @@ public final class ChatProto {
         return posterBuilder_;
       }
 
-      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto recipient_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> recipientBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> recipientBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
       public boolean hasRecipient() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getRecipient() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getRecipient() {
         if (recipientBuilder_ == null) {
           return recipient_;
         } else {
@@ -1272,9 +1272,9 @@ public final class ChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
-      public Builder setRecipient(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder setRecipient(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (recipientBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1288,10 +1288,10 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
       public Builder setRecipient(
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (recipientBuilder_ == null) {
           recipient_ = builderForValue.build();
           onChanged();
@@ -1302,14 +1302,14 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
-      public Builder mergeRecipient(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder mergeRecipient(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (recipientBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              recipient_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+              recipient_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
             recipient_ =
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(recipient_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(recipient_).mergeFrom(value).buildPartial();
           } else {
             recipient_ = value;
           }
@@ -1321,11 +1321,11 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
       public Builder clearRecipient() {
         if (recipientBuilder_ == null) {
-          recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          recipient_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
           recipientBuilder_.clear();
@@ -1334,17 +1334,17 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getRecipientBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getRecipientBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getRecipientFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getRecipientOrBuilder() {
         if (recipientBuilder_ != null) {
           return recipientBuilder_.getMessageOrBuilder();
         } else {
@@ -1352,14 +1352,14 @@ public final class ChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto recipient = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getRecipientFieldBuilder() {
         if (recipientBuilder_ == null) {
           recipientBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
                   getRecipient(),
                   getParentForChildren(),
                   isClean());
@@ -2320,17 +2320,17 @@ public final class ChatProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
      * <code>optional int64 timeOfChat = 2;</code>
@@ -2472,11 +2472,11 @@ public final class ChatProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = sender_.toBuilder();
               }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(sender_);
                 sender_ = subBuilder.buildPartial();
@@ -2569,23 +2569,23 @@ public final class ChatProto {
 
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
@@ -2762,7 +2762,7 @@ public final class ChatProto {
     }
 
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       timeOfChat_ = 0L;
       contentLanguage_ = com.lvl6.proto.ChatProto.TranslateLanguages.ENGLISH;
       content_ = "";
@@ -2961,7 +2961,7 @@ public final class ChatProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -3138,19 +3138,19 @@ public final class ChatProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -3158,9 +3158,9 @@ public final class ChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3174,10 +3174,10 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -3188,14 +3188,14 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -3207,11 +3207,11 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -3220,17 +3220,17 @@ public final class ChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -3238,14 +3238,14 @@ public final class ChatProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
                   getSender(),
                   getParentForChildren(),
                   isClean());
@@ -6017,39 +6017,39 @@ public final class ChatProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nChat.proto\022\016com.lvl6.proto\032\nUser.proto" +
-      "\"\326\002\n\024PrivateChatPostProto\022\033\n\023privateChat" +
-      "PostUuid\030\001 \001(\t\0229\n\006poster\030\002 \001(\0132).com.lvl" +
-      "6.proto.MinimumUserProtoWithLevel\022<\n\trec" +
-      "ipient\030\003 \001(\0132).com.lvl6.proto.MinimumUse" +
-      "rProtoWithLevel\022\022\n\ntimeOfPost\030\004 \001(\003\022\017\n\007c" +
-      "ontent\030\005 \001(\t\022C\n\027originalContentLanguage\030" +
-      "\007 \001(\0162\".com.lvl6.proto.TranslateLanguage" +
-      "s\022>\n\021translatedContent\030\006 \003(\0132#.com.lvl6." +
-      "proto.TranslatedTextProto\"6\n\nColorProto\022",
-      "\013\n\003red\030\001 \001(\005\022\r\n\005green\030\002 \001(\005\022\014\n\004blue\030\003 \001(" +
-      "\005\"\227\002\n\025GroupChatMessageProto\0229\n\006sender\030\001 " +
-      "\001(\0132).com.lvl6.proto.MinimumUserProtoWit" +
-      "hLevel\022\022\n\ntimeOfChat\030\002 \001(\003\022;\n\017contentLan" +
-      "guage\030\007 \001(\0162\".com.lvl6.proto.TranslateLa" +
-      "nguages\022\017\n\007content\030\003 \001(\t\022>\n\021translatedCo" +
-      "ntent\030\004 \003(\0132#.com.lvl6.proto.TranslatedT" +
-      "extProto\022\017\n\007isAdmin\030\005 \001(\010\022\020\n\010chatUuid\030\006 " +
-      "\001(\t\"Y\n\023TranslatedTextProto\0224\n\010language\030\001" +
-      " \001(\0162\".com.lvl6.proto.TranslateLanguages",
-      "\022\014\n\004text\030\002 \001(\t\"\306\001\n\025DefaultLanguagesProto" +
-      "\022A\n\025globalDefaultLanguage\030\001 \001(\0162\".com.lv" +
-      "l6.proto.TranslateLanguages\022O\n\026privateDe" +
-      "faultLanguage\030\002 \003(\0132/.com.lvl6.proto.Pri" +
-      "vateChatDefaultLanguageProto\022\031\n\021globalTr" +
-      "anslateOn\030\003 \001(\010\"\242\001\n\037PrivateChatDefaultLa" +
-      "nguageProto\022\027\n\017recipientUserId\030\001 \001(\t\022\024\n\014" +
-      "senderUserId\030\002 \001(\t\022;\n\017defaultLanguage\030\003 " +
-      "\001(\0162\".com.lvl6.proto.TranslateLanguages\022" +
-      "\023\n\013translateOn\030\004 \001(\010*.\n\tChatScope\022\n\n\006GLO",
-      "BAL\020\001\022\010\n\004CLAN\020\002\022\013\n\007PRIVATE\020\003*s\n\022Translat" +
-      "eLanguages\022\013\n\007ENGLISH\020\001\022\n\n\006FRENCH\020\002\022\n\n\006G" +
-      "ERMAN\020\003\022\013\n\007SPANISH\020\004\022\n\n\006ARABIC\020\005\022\013\n\007RUSS" +
-      "IAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013B\tChatProto"
+      "\"\304\002\n\024PrivateChatPostProto\022\033\n\023privateChat" +
+      "PostUuid\030\001 \001(\t\0220\n\006poster\030\002 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\0223\n\trecipient\030\003 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\022\n" +
+      "\ntimeOfPost\030\004 \001(\003\022\017\n\007content\030\005 \001(\t\022C\n\027or" +
+      "iginalContentLanguage\030\007 \001(\0162\".com.lvl6.p" +
+      "roto.TranslateLanguages\022>\n\021translatedCon" +
+      "tent\030\006 \003(\0132#.com.lvl6.proto.TranslatedTe" +
+      "xtProto\"6\n\nColorProto\022\013\n\003red\030\001 \001(\005\022\r\n\005gr",
+      "een\030\002 \001(\005\022\014\n\004blue\030\003 \001(\005\"\216\002\n\025GroupChatMes" +
+      "sageProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\022\n\ntimeOfChat\030\002 \001(\003\022" +
+      ";\n\017contentLanguage\030\007 \001(\0162\".com.lvl6.prot" +
+      "o.TranslateLanguages\022\017\n\007content\030\003 \001(\t\022>\n" +
+      "\021translatedContent\030\004 \003(\0132#.com.lvl6.prot" +
+      "o.TranslatedTextProto\022\017\n\007isAdmin\030\005 \001(\010\022\020" +
+      "\n\010chatUuid\030\006 \001(\t\"Y\n\023TranslatedTextProto\022" +
+      "4\n\010language\030\001 \001(\0162\".com.lvl6.proto.Trans" +
+      "lateLanguages\022\014\n\004text\030\002 \001(\t\"\306\001\n\025DefaultL",
+      "anguagesProto\022A\n\025globalDefaultLanguage\030\001" +
+      " \001(\0162\".com.lvl6.proto.TranslateLanguages" +
+      "\022O\n\026privateDefaultLanguage\030\002 \003(\0132/.com.l" +
+      "vl6.proto.PrivateChatDefaultLanguageProt" +
+      "o\022\031\n\021globalTranslateOn\030\003 \001(\010\"\242\001\n\037Private" +
+      "ChatDefaultLanguageProto\022\027\n\017recipientUse" +
+      "rId\030\001 \001(\t\022\024\n\014senderUserId\030\002 \001(\t\022;\n\017defau" +
+      "ltLanguage\030\003 \001(\0162\".com.lvl6.proto.Transl" +
+      "ateLanguages\022\023\n\013translateOn\030\004 \001(\010*.\n\tCha" +
+      "tScope\022\n\n\006GLOBAL\020\001\022\010\n\004CLAN\020\002\022\013\n\007PRIVATE\020",
+      "\003*s\n\022TranslateLanguages\022\013\n\007ENGLISH\020\001\022\n\n\006" +
+      "FRENCH\020\002\022\n\n\006GERMAN\020\003\022\013\n\007SPANISH\020\004\022\n\n\006ARA" +
+      "BIC\020\005\022\013\n\007RUSSIAN\020\006\022\022\n\016NO_TRANSLATION\020\007B\013" +
+      "B\tChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
