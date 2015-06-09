@@ -151,7 +151,9 @@ public class TranslateSelectMessagesAction {
 				
 				Object[] array = messages.toArray();
 				String[] textArray = Arrays.copyOf(array, array.length, String[].class);
-				log.info("textarray: {}", textArray);
+				if(textArray.length == 0) {
+					log.info("text array passed into translate is empty");
+				}
 				String[] translations = translationUtils.translateInBulk(textArray, language, serverToggleRetrieveUtils);
 
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
