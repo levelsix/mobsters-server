@@ -183,10 +183,10 @@ public class ControllerConstants {
 			3600, 10800, 360000 };
 	
 	// had to increase by 1 because of a bug on the client
-	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 502, 1001,
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 501, 1001,
 		2501, 5001, 20001, 50001, 100001, 1000001 };
-	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS = { 1, 251, 450,
-		900, 1500, 5000, 12000, 24000, 240000 };
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS = { 1, 250, 475,
+		1150, 2150, 7500, 12000, 24000, 240000 };
 
 
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
