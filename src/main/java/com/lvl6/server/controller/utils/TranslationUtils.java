@@ -47,8 +47,7 @@ public class TranslationUtils {
 		try {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
-			log.error("translateInBulk", e);
-			log.info("string array of text that exceptioned: {}", text);
+			log.error("translateInBulk error, textarray: " + text, e);
 		}
 		return returnArray;
 	}
@@ -194,8 +193,7 @@ public class TranslationUtils {
 				tl = TranslateLanguages.NO_TRANSLATION;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("error converting from language to enum, language " + language, e);
 		}
 		return tl;
 

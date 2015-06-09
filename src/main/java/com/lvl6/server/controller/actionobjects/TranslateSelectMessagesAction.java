@@ -160,10 +160,9 @@ public class TranslateSelectMessagesAction {
 					for(int i=0; i<translations.length; i++) {
 						TranslatedText tt = new TranslatedText();
 						try {
-							tt.setLanguage(language.getName(Language.ENGLISH));
+							tt.setLanguage(language.getName(Language.ENGLISH).toUpperCase());
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							log.error("error getting name of language " + language, e);
 						}
 						tt.setText(translations[i]);
 						pcp.setTranslatedText(tt);

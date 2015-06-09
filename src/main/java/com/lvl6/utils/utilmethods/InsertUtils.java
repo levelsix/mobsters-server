@@ -2788,7 +2788,7 @@ public class InsertUtils implements InsertUtil {
 			log.error("map containing ids to translations is null");
 		}
 
-		log.info("list of private chat posts:" + listOfPrivateChatPosts);
+		log.info("list of private chat posts: {}", listOfPrivateChatPosts);
 
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
@@ -2820,7 +2820,6 @@ public class InsertUtils implements InsertUtil {
 				log.info("language: {}", pcp.getTranslatedText().getLanguage());
 				ct.setTranslateLanguage(TranslateLanguages.
 						valueOf(pcp.getTranslatedText().getLanguage()));
-				
 				log.info("error3");
 				ct.setText(pcp.getTranslatedText().getText());
 				log.info("error4");
