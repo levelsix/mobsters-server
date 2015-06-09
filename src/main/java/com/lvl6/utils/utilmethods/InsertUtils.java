@@ -2810,6 +2810,7 @@ public class InsertUtils implements InsertUtil {
 				chatTypeList.add(ChatScope.PRIVATE.toString());
 				chatIdList.add(chatId);
 				languageList.add(pcp.getTranslatedText().getLanguage());
+				log.info("error1");
 				textList.add(pcp.getTranslatedText().getText());
 
 				//adding to the cached table
@@ -2817,9 +2818,12 @@ public class InsertUtils implements InsertUtil {
 				ct.setId(id);
 				ct.setChatId(chatId);
 				ct.setChatType(ChatScope.PRIVATE);
+				log.info("error2");
 				ct.setTranslateLanguage(TranslateLanguages.
 						valueOf(pcp.getTranslatedText().getLanguage()));
+				log.info("error3");
 				ct.setText(pcp.getTranslatedText().getText());
+				log.info("error4");
 				chatTranslationsRetrieveUtils.addChatTranslationToMap(ct);
 			}
 		} catch (Exception e) {
