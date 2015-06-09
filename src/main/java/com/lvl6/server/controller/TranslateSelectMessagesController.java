@@ -214,6 +214,7 @@ public class TranslateSelectMessagesController extends EventController {
 			pcp.setTimeOfPost(new Date(pcpp.getTimeOfPost()));
 			pcp.setContent(pcpp.getContent());
 			pcp.setContentLanguage(pcpp.getOriginalContentLanguage().toString());
+			log.info("CONTENT LANGUAGE TOSTRING : {}", pcpp.getOriginalContentLanguage().toString());
 			returnList.add(pcp);
 		}
 		return returnList;
