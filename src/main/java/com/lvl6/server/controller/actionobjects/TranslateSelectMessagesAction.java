@@ -159,7 +159,12 @@ public class TranslateSelectMessagesAction {
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
 					for(int i=0; i<translations.length; i++) {
 						TranslatedText tt = new TranslatedText();
-						tt.setLanguage(language.toString());
+						try {
+							tt.setLanguage(language.getName(Language.ENGLISH));
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						tt.setText(translations[i]);
 						pcp.setTranslatedText(tt);
 					}
