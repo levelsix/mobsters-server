@@ -2819,8 +2819,10 @@ public class InsertUtils implements InsertUtil {
 				ct.setChatId(chatId);
 				ct.setChatType(ChatScope.PRIVATE);
 				log.info("error2");
+				log.info("language: {}", pcp.getTranslatedText().getLanguage());
 				ct.setTranslateLanguage(TranslateLanguages.
 						valueOf(pcp.getTranslatedText().getLanguage()));
+				
 				log.info("error3");
 				ct.setText(pcp.getTranslatedText().getText());
 				log.info("error4");

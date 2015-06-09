@@ -114,6 +114,8 @@ public class PrivateChatPostController extends EventController {
 		PrivateChatPostRequestProto reqProto = ((PrivateChatPostRequestEvent) event)
 				.getPrivateChatPostRequestProto();
 
+		log.info("reqProto: {}", reqProto);
+		
 		// from client
 		MinimumUserProto senderProto = reqProto.getSender();
 		String posterId = senderProto.getUserUuid();
