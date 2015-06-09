@@ -30,11 +30,11 @@ enum BattleResult {
 //------------------------------------------------------------------------------------------
 
 message PvpProto {
-	optional MinimumUserProto defender = 1;
+	optional FullUserProto defender = 1;
 	//optional int32 curElo = 2; //the defender's current elo
 	repeated PvpMonsterProto defenderMonsters = 3;
-	optional int32 prospectiveCashWinnings = 4;
-	optional int32 prospectiveOilWinnings = 5;
+	optional float prospectiveCashPercentage = 4;
+	optional float prospectiveOilPercentage = 5;
 	
 	optional UserPvpLeagueProto pvpLeagueStats = 6; //defender info
 	
@@ -53,6 +53,7 @@ message PvpProto {
 	repeated UserPvpBoardObstacleProto userBoardObstacles = 10;
 	
 	repeated UserResearchProto userResearch = 11;
+	repeated FullUserStructureProto userStructure = 12;
 }
 
 message PvpMonsterProto {
