@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -148,7 +149,9 @@ public class TranslateSelectMessagesAction {
 				}
 				Collection<String> messages = chatIdsToTranslations.values();
 				
-				String[] textArray = (String[]) messages.toArray();
+				Object[] array = messages.toArray();
+				String[] textArray = Arrays.copyOf(array, array.length, String[].class);
+				log.info("textarray: {}", textArray);
 				String[] translations = translationUtils.translateInBulk(textArray, language, serverToggleRetrieveUtils);
 
 				for(PrivateChatPost pcp : listOfPrivateChatPosts) {
