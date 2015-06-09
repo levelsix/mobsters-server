@@ -213,7 +213,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		log.info("init : Server initializing");
 		loadEventControllers();
 		reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
-//		reloadRecommendedClans();
+		reloadRecommendedClans();
 		leaderBoardImpl.reload();
 		hzClanSearch.reload();
 		log.info("finished init");
