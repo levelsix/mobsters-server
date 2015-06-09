@@ -170,7 +170,7 @@ public class TranslateSelectMessagesController extends EventController {
 				privateChatPostMap = tsma.getPrivateChatPostMap();
 				log.info("PRIVATE CHAT POST MAP: " + privateChatPostMap);
 
-				if (null != privateChatPostMap) {
+				if (null != privateChatPostMap && !privateChatPostMap.isEmpty()) {
 					List<PrivateChatPostProto> pcppList = createNewPrivateChatPostProtoWithTranslations(
 							listOfPrivateChatProtos, privateChatPostMap);
 					log.info("pcppList" + pcppList);

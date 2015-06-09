@@ -279,13 +279,15 @@ public class RetrievePrivateChatPostsController extends EventController {
 								textArray[i] = chatIdToPcP.get(chatIdsArray[i]).getContent();
 							}
 
-							String[] translatedTextArray = translationUtils.translateInBulk(textArray,
-									translationUtils.convertFromEnumToLanguage(translateLanguage), toggle);
-
-							//add results to returnMap
-							if (translatedTextArray != null) {
-								for(int i=0; i<chatIdsArray.length; i++) {
-									returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+							if(textArray.length != 0) {
+								String[] translatedTextArray = translationUtils.translateInBulk(textArray,
+										translationUtils.convertFromEnumToLanguage(translateLanguage), toggle);
+								
+								//add results to returnMap
+								if (translatedTextArray != null) {
+									for(int i=0; i<chatIdsArray.length; i++) {
+										returnMap.put(chatIdsArray[i], translatedTextArray[i]);
+									}
 								}
 							}
 
