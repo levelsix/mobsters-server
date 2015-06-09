@@ -47,7 +47,11 @@ public class TranslationUtils {
 		try {
 			returnArray = Translate.execute(text, recipientLanguage);
 		} catch (Exception e) {
-			log.error("translateInBulk error, textarray: " + text, e);
+			List<String> listForLog = new ArrayList<String>();
+			for(int i=0; i<text.length; i++) {
+				listForLog.add(text[i]);
+			}
+			log.error("translateInBulk error, textarray: {}", listForLog, e);
 		}
 		return returnArray;
 	}
