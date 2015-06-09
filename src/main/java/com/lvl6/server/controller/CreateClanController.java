@@ -27,6 +27,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
 import com.lvl6.server.controller.utils.ResourceUtil;
@@ -73,6 +74,12 @@ public class CreateClanController extends EventController {
 	
 	@Autowired
 	protected PvpLeagueForUserDao pvpLeagueForUserDao;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	
+	@Autowired
+	protected ClanSearch clanSearch;
 	
 	
 	public CreateClanController() {
@@ -187,7 +194,17 @@ public class CreateClanController extends EventController {
 
 	private void updateClanCache(Clan clan) {
 		String clanId = clan.getId();
-		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+		if(serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+			//need to account for this user creating clan
+			int clanSize = 1;
+			Date lastChatTime = ControllerConstants.INCEPTION_DATE;
+
+			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		}
+		else {
+			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+		}
 	}
 
 	private void writeToUserCurrencyHistory(CreateClanAction cca) {

@@ -6,8 +6,10 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -24,10 +26,13 @@ public class ExitClanAction {
 	private TimeUtils timeUtil;
 	private UpdateUtil updateUtil;
 	private HazelcastClanSearchImpl hzClanSearch;
+	private ClanSearch clanSearch;
+	private ServerToggleRetrieveUtils toggle;
 
 	public ExitClanAction(String userId, String clanId, int clanSize,
 			Date lastChatPost, TimeUtils timeUtil, UpdateUtil updateUtil,
-			HazelcastClanSearchImpl hzClanSearch) {
+			HazelcastClanSearchImpl hzClanSearch,
+			ServerToggleRetrieveUtils toggle) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -36,6 +41,7 @@ public class ExitClanAction {
 		this.timeUtil = timeUtil;
 		this.updateUtil = updateUtil;
 		this.hzClanSearch = hzClanSearch;
+		this.toggle = toggle;
 	}
 
 	public void execute() {
@@ -59,7 +65,13 @@ public class ExitClanAction {
 				numUpdated);
 
 		//if user is last user in clan, clan gets removed from hz
-		hzClanSearch.updateRankForClanSearch(clanId, now, 0, 0, 0, 0, -1);
-
+		if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+			if (clanSize > 0) {
+				clanSearch.updateClanSearchRank(clanId, clanSize, lastChatPost);
+			}
+		}
+		else {
+			hzClanSearch.updateRankForClanSearch(clanId, now, 0, 0, 0, 0, -1);
+		}
 	}
 }

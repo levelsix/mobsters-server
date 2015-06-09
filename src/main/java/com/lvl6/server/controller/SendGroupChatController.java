@@ -1,7 +1,10 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -22,6 +25,7 @@ import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendGroupChatResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao;
@@ -30,6 +34,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
@@ -105,6 +110,10 @@ public class SendGroupChatController extends EventController {
 	
 	@Autowired
 	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
+	
+	@Autowired
+	protected ClanSearch clanSearch;
+		
 
 	public SendGroupChatController() {
 		numAllocatedThreads = 4;
@@ -348,9 +357,31 @@ public class SendGroupChatController extends EventController {
 //			}
 
 			//update clan cache
-			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 1, 0);
-		}
+			if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+				Clan c = clanRetrieveUtil.getClanWithId(clanId);
+				int clanSize = ClanSearch.penalizedClanSize;
+				Date lastChatTime = ControllerConstants.INCEPTION_DATE;
 
+				if (!c.isRequestToJoinRequired()) {
+					//people can join clan freely
+					List<String> clanIdList = Collections.singletonList(clanId);
+					List<String> statuses = new ArrayList<String>();
+					statuses.add(UserClanStatus.LEADER.name());
+					statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+					statuses.add(UserClanStatus.CAPTAIN.name());
+					statuses.add(UserClanStatus.MEMBER.name());
+					Map<String, Integer> clanIdToSize = userClanRetrieveUtil
+							.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+
+					clanSize = clanIdToSize.get(clanId);
+					lastChatTime = new Date(timeOfPost.getTime());
+				}
+				clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+			}
+			else {
+				hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 1, 0);
+			}	
+		}
 	}
 
 	private boolean checkLegitSend(Builder resBuilder, User user,

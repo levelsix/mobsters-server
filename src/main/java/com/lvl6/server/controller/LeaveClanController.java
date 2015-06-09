@@ -23,6 +23,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.LeaveClanAction;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -62,6 +63,13 @@ public class LeaveClanController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
+	
 	
 	public LeaveClanController() {
 		numAllocatedThreads = 4;
@@ -132,7 +140,7 @@ public class LeaveClanController extends EventController {
 			LeaveClanAction lca = new LeaveClanAction(userId, clanId, lockedClan,
 					userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils, 
 					userClanRetrieveUtils, hzClanSearch, clanChatPostRetrieveUtil, 
-					timeUtils);
+					timeUtils, clanSearch, toggle);
 			lca.execute(resBuilder);
 			
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);

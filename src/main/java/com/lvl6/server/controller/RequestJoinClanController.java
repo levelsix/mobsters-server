@@ -28,6 +28,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
@@ -54,6 +55,7 @@ import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RequestJoinClanAction;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
@@ -132,6 +134,12 @@ public class RequestJoinClanController extends EventController {
 	
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
+	@Autowired
+	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
 
 
 	public RequestJoinClanController() {
@@ -428,8 +436,15 @@ public class RequestJoinClanController extends EventController {
 	private void updateClanCache(String clanId, List<Integer> clanSizeList,
 			List<Date> lastChatTimeContainer) {
 		//need to account for this user joining clan
+		if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+			int clanSize = clanSizeList.get(0) + 1;
+			Date lastChatTime = lastChatTimeContainer.get(0);
 
-		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		}
+		else {
+			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+		}		
 	}
 
 	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,
