@@ -362,9 +362,7 @@ class StartupService extends LazyLogging{
 				val preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
 				logger.error(s"$preface clientVersion=$superNum.$majorNum.$minorNum \t serverVersion=$serverSuperNum.$serverMajorNum.$serverMinorNum")
 				updateStatus = UpdateStatus.NO_UPDATE;
-			}
-
-			if (superNum < serverSuperNum || majorNum < serverMajorNum) {
+			} else if (superNum < serverSuperNum || majorNum < serverMajorNum) {
 				updateStatus = UpdateStatus.MAJOR_UPDATE;
 				logger.info("player has been notified of forced update");
 

@@ -158,7 +158,8 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
 					monsterStuffUtils, serverToggleRetrieveUtil,
-					monsterLevelInfoRetrieveUtils);
+					monsterLevelInfoRetrieveUtils,
+					true);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(

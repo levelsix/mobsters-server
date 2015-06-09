@@ -1,7 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
 import org.jooq.Configuration;
-import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +19,7 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.server.controller.utils.HistoryUtils;
-import com.lvl6.utils.DBConnection;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 
@@ -85,7 +84,7 @@ public class InAppPurchaseMultiSpinAction {
 	}
 	
 	public void setUpDaos() {
-		Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
+		Configuration config = AppContext.getApplicationContext().getBean(DefaultConfiguration.class);//new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
 		userDao = new UserDao(config);
 		itemConfigDao = new ItemConfigDao(config);
 		itemForUserDao = new ItemForUserDao(config);

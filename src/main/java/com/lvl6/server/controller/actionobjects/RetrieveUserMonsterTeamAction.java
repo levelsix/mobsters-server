@@ -60,6 +60,7 @@ public class RetrieveUserMonsterTeamAction {
 	private MonsterStuffUtils monsterStuffUtils;
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private boolean isAvengeRevenge;
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -75,7 +76,8 @@ public class RetrieveUserMonsterTeamAction {
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils)
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			boolean isAvengeRevenge)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -92,6 +94,7 @@ public class RetrieveUserMonsterTeamAction {
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.isAvengeRevenge = isAvengeRevenge;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -180,8 +183,17 @@ public class RetrieveUserMonsterTeamAction {
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
 		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters, 
+				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters,
 						monsterLevelInfoRetrieveUtils);
+
+		if (isAvengeRevenge) {
+			for (String userId : allButRetrieverUserIdToUserMonsterIdToDroppedId.keySet()) {
+				Map<String, Integer> userMonsterIdToDroppedId = allButRetrieverUserIdToUserMonsterIdToDroppedId.get(userId);
+				for (String userMonsterId : userMonsterIdToDroppedId.keySet()) {
+					userMonsterIdToDroppedId.put(userMonsterId, -1);
+				}
+			}
+		}
 
 		//calculate the PvpBattleOutcome
 		StartUpResource sup = new StartUpResource(userRetrieveUtil,
@@ -213,6 +225,20 @@ public class RetrieveUserMonsterTeamAction {
 					potentialResult.getUnsignedCashAttackerWins());
 			allButRetrieverUserIdToOilLost.put(userId,
 					potentialResult.getUnsignedOilAttackerWins());
+		}
+
+		if (isAvengeRevenge) {
+			for (String userId : allButRetrieverUserIdToCashLost.keySet()) {
+				float reducedCash = allButRetrieverUserIdToCashLost.get(userId) * 0.15F;
+				int reducedCashInt = (int) reducedCash;
+				allButRetrieverUserIdToCashLost.put(userId, reducedCashInt);
+			}
+
+			for (String userId : allButRetrieverUserIdToOilLost.keySet()) {
+				float reducedOil = allButRetrieverUserIdToOilLost.get(userId) * 0.15F;
+				int reducedOilInt = (int) reducedOil;
+				allButRetrieverUserIdToOilLost.put(userId, reducedOilInt);
+			}
 		}
 
 		//get the team monster donation solicitations by all clans
@@ -261,7 +287,7 @@ public class RetrieveUserMonsterTeamAction {
 		//need to calculate whether or not these donated monsters drop a piece
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
 			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
-					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu, 
+					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu,
 							monsterLevelInfoRetrieveUtils);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
@@ -557,7 +583,7 @@ public class RetrieveUserMonsterTeamAction {
 	public Map<String, List<ResearchForUser>> getAllButRetrieverUserIdToUserResearch() {
 		return allButRetrieverUserIdToUserResearch;
 	}
-	
+
 	public Map<String, User> getAllUsers() {
 		return userIdToUser;
 	}

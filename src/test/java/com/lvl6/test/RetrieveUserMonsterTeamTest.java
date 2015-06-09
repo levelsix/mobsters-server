@@ -246,7 +246,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 				pvpLeagueForUserRetrieveUtil,
 				pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-				monsterStuffUtil, serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil);
+				monsterStuffUtil, serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil, false);
 		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
 				.newBuilder();
 		rumta.execute(resBuilder);
