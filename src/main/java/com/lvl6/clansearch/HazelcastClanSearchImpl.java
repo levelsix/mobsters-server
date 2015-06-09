@@ -156,7 +156,7 @@ public class HazelcastClanSearchImpl {
 //		(members / 10) * (chats_in_past_hour+1) * (chats_in_past_24_hrs / 12) 
 //		* filled_donations_in_24hrs  * (helps_in_24_hrs/100)
 		
-		long members = (long) clanMemberCountMap.get(clanId);
+		double members = (double) clanMemberCountMap.get(clanId);
 		
 		if(members == 0) {
 			clanSearchRanking.remove(clanId);
@@ -168,18 +168,19 @@ public class HazelcastClanSearchImpl {
 			return;
 		}
 		
-		long chatsPastHour = (long) retrieveFromHazelCast(chatsPastHourMap, clanId,
+		double chatsPastHour = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
 				now, minutesPastHour);
-		long chatsPastDay = (long) retrieveFromHazelCast(chatsPastHourMap, clanId,
+		double chatsPastDay = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
 				now, minutesPastDay);
-		long filledDonations = (long) retrieveFromHazelCast(dailyDonateCompletesMap, 
+		double filledDonations = (double) retrieveFromHazelCast(dailyDonateCompletesMap, 
 				clanId, now, minutesPastDay);
-		long helpsPastDay = (long) retrieveFromHazelCast(dailyHelpsMap, clanId, 
+		double helpsPastDay = (double) retrieveFromHazelCast(dailyHelpsMap, clanId, 
 				now, minutesPastDay);
 		
-		long clanStrength = members/10 * (chatsPastHour + 1) * (chatsPastDay/12) *
-				filledDonations * (helpsPastDay/100);
-		clanSearchRanking.add(clanId, clanStrength);
+		double clanStrength = members/(double)10 * (chatsPastHour + 1) * (chatsPastDay/(double)12) *
+				filledDonations * (helpsPastDay/(double)100);
+		long clanStrengthLong = (long) clanStrength;
+		clanSearchRanking.add(clanId, clanStrengthLong);
 		log.info("updating clan search rank, clanId {}, clanStrength{}", clanId, clanStrength);
 		log.info("CLAN MEMBER MAP: {}", clanMemberCountMap);
 		log.info("DAILY HELPS MAP: {}", dailyHelpsMap);
@@ -284,7 +285,7 @@ public class HazelcastClanSearchImpl {
 		for(ClanHelpCountForUser chcfu : helpsPastDay) {
 			String clanId = chcfu.getClanId();
 			if(chcfu.getGiven() > 0)
-				saveToHazelCast(dailyHelpsMap, clanId, chcfu.getDate(), 1);
+				saveToHazelCast(dailyHelpsMap, clanId, chcfu.getDate(), chcfu.getGiven());
 		}
 		
 		for(ClanForUser cfu : usersInClans) {
@@ -296,29 +297,30 @@ public class HazelcastClanSearchImpl {
 		Date now = new Date();
 		for(String clanId : clanMemberCountMap.keySet()) {
 			log.info("clanId {}", clanId);
-			long members2 = clanMemberCountMap.get(clanId);
+			double members2 = clanMemberCountMap.get(clanId);
 			log.info("members {}", members2);
 
-			long chatsPastHour2 = (long) retrieveFromHazelCast(chatsPastHourMap, clanId,
+			double chatsPastHour2 = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
 					now, minutesPastHour);
 			log.info("chatsPastHour {}", chatsPastHour2);
 
-			long chatsPastDay2 = (long) retrieveFromHazelCast(chatsPastHourMap, clanId,
+			double chatsPastDay2 = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
 					now, minutesPastDay);
 			log.info("chats past day {}", chatsPastDay2);
 			
-			long filledDonations2 = (long) retrieveFromHazelCast(dailyDonateCompletesMap, 
+			double filledDonations2 = (double) retrieveFromHazelCast(dailyDonateCompletesMap, 
 					clanId, now, minutesPastDay);
 			log.info("filled donations {}", filledDonations2);
 
-			long helpsPastDay2 = (long) retrieveFromHazelCast(dailyHelpsMap, clanId, 
+			double helpsPastDay2 = (double) retrieveFromHazelCast(dailyHelpsMap, clanId, 
 					now, minutesPastDay);
 			log.info("helps past day {}", helpsPastDay2);
 
 			
-			long clanStrength2 = members2/10 * (chatsPastHour2 + 1) * (chatsPastDay2/12) *
-					filledDonations2 * (helpsPastDay2/100);
-			clanSearchRanking.add(clanId, clanStrength2);
+			double clanStrength2 = members2/(double)10 * (chatsPastHour2 + 1) * (chatsPastDay2/(double)12) *
+					filledDonations2 * (helpsPastDay2/(double)100);
+			long clanStrength2Long = (long) clanStrength2;
+			clanSearchRanking.add(clanId, clanStrength2Long);
 			log.info("added to clan search ranking, clanId {}, clanStrength{}", clanId, clanStrength2);
 		}
 	}	
