@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -355,6 +356,7 @@ public class QueueUpController extends EventController {
 			return;
 		}
 
+		Collections.shuffle(pvpProtoList);
 		resBuilder.addAllDefenderInfoList(pvpProtoList);
 		//log.info("pvpProtoList={}", pvpProtoList);
 	}
