@@ -532,7 +532,7 @@ public class InAppPurchaseController extends EventController {
 			//do nothing
 		}
 		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
-				&& timeUtils.isFirstEarlierThanSecond(now, salesPackage.getTimeEnd())) {
+				&& timeUtils.isFirstEarlierThanSecond(now, successorSalesPackage.getTimeEnd())) {
 			//do nothing
 		}
 		else {
