@@ -36,6 +36,7 @@ import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.spring.AppContext;
@@ -2163,5 +2164,35 @@ public class UpdateUtils implements UpdateUtil {
 
 		return true;
 	}
+	
+	public boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators) {
+		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (StructStolen ss : listOfGenerators) {
+			Map<String, Object> aRow = new HashMap<String, Object>();
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__ID, ss.getUserStructUuid());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED,
+					ss.getTimeOfRetrieval());
+			newRows.add(aRow);
+		}
+
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
+		int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
+						replaceTheseColumns);
+
+		log.info("num userStructs updated: {}. Number of userStructs: {}",
+				numUpdated, listOfGenerators.size());
+
+		int maxNum = listOfGenerators.size() * 2;
+		int minNum = listOfGenerators.size();
+		if (numUpdated >= minNum && numUpdated <= maxNum) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

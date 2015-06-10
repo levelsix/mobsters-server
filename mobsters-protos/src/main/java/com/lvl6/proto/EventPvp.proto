@@ -98,8 +98,8 @@ message EndPvpBattleRequestProto {
 	//positive means reward attacker. don't forsee being negative 
 	//If attacker loses, then these are 0
 	//these are also the raw values (uncapped) that the defender loses
-	optional int32 oilChange = 6; //should be named amount stolen
-	optional int32 cashChange = 7; //should be named amount stolen
+	optional int32 oilStolenFromStorage = 6; //should be named amount stolen
+	optional int32 cashStolenFromStorage = 7; //should be named amount stolen
 	
 	//Note for server, if <= 0 then don't update db.
 	optional float nuPvpDmgMultiplier = 8;
@@ -108,6 +108,17 @@ message EndPvpBattleRequestProto {
 	repeated int32 monsterDropIds = 9;
 	
 	optional bytes replay = 10;
+	
+	optional int32 oilStolenFromGenerator = 11;
+	optional int32 cashStolenFromGenerator = 12;
+	
+	repeated StructStolen structStolen = 13;
+	
+	message StructStolen {
+		optional string userStructUuid = 1;
+		optional int64 timeOfRetrieval = 2;
+	}
+	
 }
 
 message EndPvpBattleResponseProto {
