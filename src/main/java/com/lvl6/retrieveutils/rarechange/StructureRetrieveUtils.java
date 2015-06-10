@@ -77,13 +77,14 @@ public class StructureRetrieveUtils {
 	//RECURSION!!!
 	public Structure getPredecessorStructForStructIdAndLvl(int structId,
 			int lvl) {
-		log.debug("retrieve predecessor struct data for structId=" + structId
-				+ " and lvl=" + lvl);
+		log.debug("retrieve predecessor struct data for structId={} and lvl={}",
+				structId, lvl);
 		if (null == structIdsToStructs) {
 			setStaticStructIdsToStructs();
 		}
 		//base case, structure does not have a predecessor with specified level "lvl"
 		if (!structIdsToStructs.containsKey(structId)) {
+			log.error("no Structure for id={}, lvl={}", structId, lvl);
 			return null;
 		}
 
@@ -192,7 +193,7 @@ public class StructureRetrieveUtils {
 				buildResourceType = newBuildResourceType;
 			}
 		}
-		
+
 		int strength = rs.getInt(DBConstants.STRUCTURE__STRENGTH);
 
 		Structure s = new Structure(id, name, level, structType,

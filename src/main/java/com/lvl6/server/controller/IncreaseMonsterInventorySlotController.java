@@ -63,16 +63,16 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 	@Autowired
 	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResidenceRetrieveUtils structureResidenceRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
@@ -103,7 +103,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		String userId = senderProto.getUserUuid();
 		IncreaseSlotType increaseType = reqProto.getIncreaseSlotType();
 		String userStructId = reqProto.getUserStructUuid();
-		//the invites to redeem     
+		//the invites to redeem
 		List<String> userFbInviteIds = reqProto
 				.getUserFbInviteForSlotUuidsList();
 		Timestamp curTime = new Timestamp((new Date()).getTime());
@@ -280,7 +280,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 				return false;
 			}
 
-			//check if user struct is already at its max fb invite lvl, 
+			//check if user struct is already at its max fb invite lvl,
 			int structId = sfu.getStructId();
 			Structure struct = structureRetrieveUtils
 					.getStructForStructId(structId);
@@ -457,7 +457,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		//get the structure
 		int structId = sfu.getStructId();
 		Structure struct = structureRetrieveUtils
-				.getStructForStructId(structId);
+				.getPredecessorStructForStructIdAndLvl(structId, sfu.getFbInviteStructLvl());
 		String structType = struct.getStructType();
 
 		int gemPrice = Integer.MAX_VALUE;
@@ -480,7 +480,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		//NOTE: if for some reason user manages to send two of these events
 		//and both are for the same userStruct and the second event
 		//is a duplicate of the first, need to only increases
-		//the userStruct's fbLvl only once 
+		//the userStruct's fbLvl only once
 		int nuFbInviteLevel = sfu.getFbInviteStructLvl();
 
 		if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
@@ -501,7 +501,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 					curTime, nEarliestInvites);
 			log.info("num saved: {}", num);
 
-			//using goalLvl stored in the invite, in the case of 
+			//using goalLvl stored in the invite, in the case of
 			//duplicate events being sent as mentioned above
 			nuFbInviteLevel = nEarliestInvites.get(0).getUserStructFbLvl();
 
