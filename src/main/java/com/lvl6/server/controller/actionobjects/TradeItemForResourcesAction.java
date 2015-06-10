@@ -267,6 +267,9 @@ public class TradeItemForResourcesAction {
 		if(gemsSpent != 0) {
 			user.updateRelativeCashAndOilAndGems(cashGained, oilGained, -1*gemsSpent, 0);
 		}
+		else {
+			user.updateRelativeCashAndOilAndGems(cashGained, oilGained, 0, 0);
+		}
 		log.info(String.format("user after: %s", user));
 		insertCurrencyHistory();
 
