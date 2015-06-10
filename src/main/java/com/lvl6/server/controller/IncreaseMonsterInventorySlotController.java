@@ -454,10 +454,14 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	}
 
 	private int getGemPriceFromStruct(StructureForUser sfu) {
-		//get the structure
+		//get the structure, based off of fbInviteStructLvl
+		//fbInviteStructLvl starts off at 0. If sfu is the very
+		//first level then need to find gem price of structure at lvl =
+		//fbInviteStructLvl + 1
 		int structId = sfu.getStructId();
 		Structure struct = structureRetrieveUtils
-				.getPredecessorStructForStructIdAndLvl(structId, sfu.getFbInviteStructLvl());
+				.getPredecessorStructForStructIdAndLvl(
+						structId, sfu.getFbInviteStructLvl() + 1);
 		String structType = struct.getStructType();
 
 		int gemPrice = Integer.MAX_VALUE;
