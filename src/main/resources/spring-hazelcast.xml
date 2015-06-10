@@ -76,10 +76,6 @@
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao" id="clanForUserDao">
         <constructor-arg index="0" ref="config" />
     </bean>
-    
-    <bean class="com.lvl6.retrieveutils.daos.StructureForUserDao2" id="structureForUserDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
 	 
 	
 	<bean id="serverMessageHandler" class="com.lvl6.eventhandlers.ServerEventHandler" lazy-init="false" scope="singleton" />

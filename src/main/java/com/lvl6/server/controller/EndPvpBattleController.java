@@ -29,6 +29,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
+import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -146,8 +147,10 @@ public class EndPvpBattleController extends EventController {
 		String defenderId = reqProto.getDefenderUuid();
 		boolean attackerAttacked = reqProto.getUserAttacked();
 		boolean attackerWon = reqProto.getUserWon();
-		int oilStolen = reqProto.getOilChange(); //non negative
-		int cashStolen = reqProto.getCashChange(); // non negative
+		int oilStolenFromStorage = reqProto.getOilStolenFromStorage(); //non negative
+		int cashStolenFromStorage = reqProto.getCashStolenFromStorage(); // non negative
+		int oilStolenFromGenerators = reqProto.getOilStolenFromGenerator();
+		int cashStolenFromGenerators = reqProto.getCashStolenFromGenerator();
 		float nuPvpDmgMultiplier = reqProto.getNuPvpDmgMultiplier();
 		List<Integer> monsterDropIds = reqProto.getMonsterDropIdsList();
 		int attackerMaxOil = senderProtoMaxResources.getMaxOil();
@@ -155,16 +158,19 @@ public class EndPvpBattleController extends EventController {
 		Timestamp curTime = new Timestamp(reqProto.getClientTime());
 		Date curDate = new Date(curTime.getTime());
 		ByteString replay = reqProto.getReplay();
+		List<StructStolen> listOfGenerators = reqProto.getStructStolenList();
 
-		if (!attackerWon && oilStolen != 0) {
-			log.error("oilStolen should be 0 since attacker lost!\t client sent {}",
-					oilStolen);
-			oilStolen = 0;
+		if (!attackerWon && (oilStolenFromStorage + oilStolenFromGenerators) != 0) {
+			log.error("oilStolen should be 0 since attacker lost!\t client sent oilFromStorage"
+					+ " {} and oilFromGenerator {}", oilStolenFromStorage, oilStolenFromGenerators);
+			oilStolenFromStorage = 0;
+			oilStolenFromGenerators = 0;
 		}
-		if (!attackerWon && cashStolen != 0) {
-			log.error("cashStolen should be 0 since attacker lost!\t client sent {}",
-					cashStolen);
-			cashStolen = 0;
+		if (!attackerWon && (cashStolenFromStorage + cashStolenFromGenerators) != 0) {
+			log.error("cashStolen should be 0 since attacker lost!\t client sent cashFromStorage"
+					+ "{} and cashFromGenerator{}", cashStolenFromStorage, cashStolenFromGenerators);
+			cashStolenFromStorage = 0;
+			cashStolenFromGenerators = 0;
 		}
 
 		//set some values to send to the client (the response proto)
@@ -218,8 +224,8 @@ public class EndPvpBattleController extends EventController {
 
 		try {
 			EndPvpBattleAction epba = new EndPvpBattleAction(attackerId,
-					defenderId, attackerAttacked, attackerWon, oilStolen,
-					cashStolen, nuPvpDmgMultiplier, monsterDropIds,
+					defenderId, attackerAttacked, attackerWon, oilStolenFromStorage,
+					cashStolenFromStorage, nuPvpDmgMultiplier, monsterDropIds,
 					attackerMaxOil, attackerMaxCash, reqProto.getClientTime(),
 					curDate, curTime, replay, resourceUtil, userRetrieveUtil,
 					pvpBattleForUserRetrieveUtil,
@@ -227,7 +233,8 @@ public class EndPvpBattleController extends EventController {
 					monsterForUserRetrieveUtil, monsterStuffUtils,
 					pvpLeagueRetrieveUtils, createInfoProtoUtils,
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil,
-					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil);
+					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
+					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators);
 
 			epba.execute(resBuilder);
 

@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.jooq.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 
 @Component
 public class StructureForUserDao2 extends StructureForUserDao {
@@ -21,6 +23,7 @@ public class StructureForUserDao2 extends StructureForUserDao {
 		super();
 	}
 	
+	@Autowired
 	public StructureForUserDao2(Configuration configuration) {
 		super(configuration);
 		// TODO Auto-generated constructor stub
@@ -49,5 +52,4 @@ public class StructureForUserDao2 extends StructureForUserDao {
 		}
 		return returnMap;
 	}
-	
 }

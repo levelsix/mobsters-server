@@ -19,6 +19,7 @@ import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -29,6 +30,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
@@ -48,8 +50,8 @@ public class EndPvpBattleAction {
 	private String defenderId;
 	private boolean attackerAttacked;
 	private boolean attackerWon;
-	private int oilStolen;
-	private int cashStolen;
+	private int oilStolenFromStorage;
+	private int cashStolenFromStorage;
 	private float nuPvpDmgMultiplier;
 	private List<Integer> monsterDropIds;
 	private int attackerMaxOil;
@@ -74,6 +76,9 @@ public class EndPvpBattleAction {
 	private TimeUtils timeUtil;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
+	private List<StructStolen> listOfGenerators;
+	private int oilStolenFromGenerators;
+	private int cashStolenFromGenerators;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -94,15 +99,16 @@ public class EndPvpBattleAction {
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil,
 			MiscMethods miscMethods, HazelcastPvpUtil hazelcastPvpUtil,
 			TimeUtils timeUtil, InsertUtil insertUtil,
-			UpdateUtil updateUtil)
+			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
+			int oilStolenFromGenerators, int cashStolenFromGenerators)
 	{
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
 		this.attackerAttacked = attackerAttacked;
 		this.attackerWon = attackerWon;
-		this.oilStolen = oilStolen;
-		this.cashStolen = cashStolen;
+		this.oilStolenFromStorage = oilStolen;
+		this.cashStolenFromStorage = cashStolen;
 		this.nuPvpDmgMultiplier = nuPvpDmgMultiplier;
 		this.monsterDropIds = monsterDropIds;
 		this.attackerMaxOil = attackerMaxOil;
@@ -127,6 +133,9 @@ public class EndPvpBattleAction {
 		this.timeUtil = timeUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
+		this.listOfGenerators = listOfGenerators;
+		this.oilStolenFromGenerators = oilStolenFromGenerators;
+		this.cashStolenFromGenerators = cashStolenFromGenerators;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -155,8 +164,8 @@ public class EndPvpBattleAction {
 	protected int attackerCurLeague;
 	protected int attackerPrevRank;
 	protected int attackerCurRank;
-	protected int attackerCashChange;
-	protected int attackerOilChange;
+	protected int attackerStorageCashChange;
+	protected int attackerStorageOilChange;
 	protected int attackerAttacksWonDelta;
 	protected int attackerAttacksLostDelta;
 
@@ -171,8 +180,8 @@ public class EndPvpBattleAction {
 	protected int defenderCurLeague;
 	protected int defenderPrevRank;
 	protected int defenderCurRank;
-	protected int defenderCashChange;
-	protected int defenderOilChange;
+	protected int defenderStorageCashChange;
+	protected int defenderStorageOilChange;
 	protected int defenderDefensesWonDelta;
 	protected int defenderDefensesLostDelta;
 	protected Date defenderShieldEndTime;
@@ -334,8 +343,8 @@ public class EndPvpBattleAction {
 		attackerCurLeague = attackerPrevLeague;
 		attackerPrevRank = attackerPlfu.getRank();
 		attackerCurRank = attackerPrevRank;
-		attackerCashChange = 0;
-		attackerOilChange = 0;
+		attackerStorageCashChange = 0;
+		attackerStorageOilChange = 0;
 		attackerWon = false;
 
 		defenderEloChange = 0;
@@ -350,8 +359,8 @@ public class EndPvpBattleAction {
 		defenderEloAfter = defenderEloBefore;
 		defenderCurLeague = defenderPrevLeague;
 		defenderCurRank = defenderPrevRank;
-		defenderCashChange = 0;
-		defenderOilChange = 0;
+		defenderStorageCashChange = 0;
+		defenderStorageOilChange = 0;
 	}
 
 	private void createHistory()
@@ -380,10 +389,10 @@ public class EndPvpBattleAction {
 		pbh.setDefenderPrevRank(defenderPrevRank);
 		pbh.setDefenderCurRank(defenderCurRank);
 
-		pbh.setAttackerCashChange(attackerCashChange);
-		pbh.setDefenderCashChange(defenderCashChange);
-		pbh.setAttackerOilChange(attackerOilChange);
-		pbh.setDefenderOilChange(defenderOilChange);
+		pbh.setAttackerCashChange(attackerStorageCashChange);
+		pbh.setDefenderCashChange(defenderStorageCashChange);
+		pbh.setAttackerOilChange(attackerStorageOilChange);
+		pbh.setDefenderOilChange(defenderStorageOilChange);
 
 		pbh.setCancelled(cancelled);
 		pbh.setExactedRevenge(false);
@@ -477,10 +486,10 @@ public class EndPvpBattleAction {
 				attackerEloAfter, attackerPrevLeague);
 		attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(attackerEloAfter,
 				attackerCurLeague);
-		attackerCashChange = resourceUtil.calculateMaxResourceChange(attacker,
-				attackerMaxCash, minResource, cashStolen, attackerWon, MiscMethods.cash);
-		attackerOilChange = resourceUtil.calculateMaxResourceChange(attacker,
-				attackerMaxOil, minResource, oilStolen, attackerWon, MiscMethods.oil);
+		attackerStorageCashChange = resourceUtil.calculateMaxResourceChange(attacker,
+				attackerMaxCash, minResource, cashStolenFromStorage, attackerWon, MiscMethods.cash);
+		attackerStorageOilChange = resourceUtil.calculateMaxResourceChange(attacker,
+				attackerMaxOil, minResource, oilStolenFromStorage, attackerWon, MiscMethods.oil);
 
 		if (attackerWon) {
 			attackerAttacksWonDelta = 1;
@@ -500,11 +509,11 @@ public class EndPvpBattleAction {
 
 	private void updateAttacker() {
 		//update attacker's cash, oil
-		if (0 != attackerOilChange || 0 != attackerCashChange) {
+		if (0 != attackerStorageOilChange || 0 != attackerStorageCashChange) {
 			log.info( "attacker before currency update: {}",
 					attacker);
 			int numUpdated = attacker.updateRelativeCashAndOilAndGems(
-					attackerCashChange, attackerOilChange, 0, 0);
+					attackerStorageCashChange, attackerStorageOilChange, 0, 0);
 			log.info( "attacker after currency update: {}",
 					attacker );
 			log.info( "num updated when changing attacker's currency={}",
@@ -543,8 +552,8 @@ public class EndPvpBattleAction {
 	{
 		if (!isRealDefender) {
 			log.info( "attacker attacked fake defender." );
-			defenderCashChange = 0;
-			defenderOilChange = 0;
+			defenderStorageCashChange = 0;
+			defenderStorageOilChange = 0;
 			displayToDefender = false;
 			return;
 		}
@@ -567,10 +576,10 @@ public class EndPvpBattleAction {
 		int defenderCash = defender.getCash();
 		int defenderOil = defender.getOil();
 		int minResource = 0;
-		defenderCashChange = resourceUtil.calculateMaxResourceChange(defender,
-				defenderCash, minResource, cashStolen, defenderWon, MiscMethods.cash);
-		defenderOilChange = resourceUtil.calculateMaxResourceChange(defender,
-				defenderOil, minResource, oilStolen, defenderWon, MiscMethods.oil);
+		defenderStorageCashChange = resourceUtil.calculateMaxResourceChange(defender,
+				defenderCash, minResource, cashStolenFromStorage, defenderWon, MiscMethods.cash);
+		defenderStorageOilChange = resourceUtil.calculateMaxResourceChange(defender,
+				defenderOil, minResource, oilStolenFromStorage, defenderWon, MiscMethods.oil);
 		displayToDefender = true;
 
 		if (defenderWon) {
@@ -603,16 +612,18 @@ public class EndPvpBattleAction {
 		}
 
 		//if attacker won then defender money would need to be updated
-		boolean resourceChanged = (0 != defenderCashChange) ||
-				(0 != defenderOilChange);
+		boolean resourceChanged = (0 != defenderStorageCashChange) ||
+				(0 != defenderStorageOilChange);
 		if (attackerWon && resourceChanged) {
 			log.info("defender before currency update:{}", defender);
 			int numUpdated = defender.updateRelativeCashAndOilAndGems(
-					defenderCashChange, defenderOilChange, 0, 0);
+					defenderStorageCashChange, defenderStorageOilChange, 0, 0);
 			log.info("num updated when changing defender's currency={}",
 					numUpdated);
 			log.info("defender after currency update: {}",
 					defender);
+			log.info("updating defender user struct's to account for resources stolen");
+			updateUtil.updateUserStructAfterPvp(listOfGenerators);
 		}
 
 		Timestamp shieldEndTime = new Timestamp(
@@ -673,8 +684,8 @@ public class EndPvpBattleAction {
 
 		currencyDeltasMap = new HashMap<String, Map<String, Integer>>();
 		Map<String, Integer> intMap = new HashMap<String, Integer>();
-		intMap.put(cash, attackerCashChange);
-		intMap.put(oil, attackerOilChange);
+		intMap.put(cash, attackerStorageCashChange);
+		intMap.put(oil, attackerStorageOilChange);
 		currencyDeltasMap.put(attackerId, intMap);
 
 		curCurrenciesMap = new HashMap<String, Map<String, Integer>>();
@@ -695,8 +706,10 @@ public class EndPvpBattleAction {
 			aWon = 1;
 		}
 		detailsMap = new HashMap<String, Map<String, String>>();
-		String detailSb = String.format("a:{}, d:{}, t:{}, aWon:{}",
-				new Object[] { attackerId, defenderId, clientDateTime, aWon} );
+		String detailSb = String.format("a:{}, d:{}, t:{}, aWon:{}, "
+				+ "cashstolefromgenerator {}, oilstolenfromgenerator {}",
+				new Object[] { attackerId, defenderId, clientDateTime, aWon,
+						cashStolenFromGenerators, oilStolenFromGenerators} );
 		strMap = new HashMap<String, String>();
 		strMap.put(MiscMethods.cash, detailSb);
 		strMap.put(MiscMethods.oil, detailSb);
@@ -704,8 +717,8 @@ public class EndPvpBattleAction {
 
 		if (isRealDefender) {
 			intMap = new HashMap<String, Integer>();
-			intMap.put(cash, defenderCashChange);
-			intMap.put(oil, defenderOilChange);
+			intMap.put(cash, defenderStorageCashChange);
+			intMap.put(oil, defenderStorageOilChange);
 			currencyDeltasMap.put(defenderId, intMap);
 
 			intMap = new HashMap<String, Integer>();
