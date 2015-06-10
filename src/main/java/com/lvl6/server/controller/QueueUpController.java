@@ -21,6 +21,7 @@ import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
@@ -41,6 +42,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -106,6 +108,9 @@ public class QueueUpController extends EventController {
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+	
+	@Autowired
+	protected StructureForUserDao2 structureForUserDao;
 
 
 	//	@Autowired
@@ -316,6 +321,10 @@ public class QueueUpController extends EventController {
 					}
 				}
 
+				List<String> userIds = new ArrayList<String>();
+				userIds.addAll(rumta.getAllUsers().keySet());
+				Map<String, List<StructureForUser>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
+				
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
 								usersExceptRetriever,
@@ -330,7 +339,8 @@ public class QueueUpController extends EventController {
 								rumta.getAllButRetrieverUserIdToMsfu(),
 								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
 								rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
-								rumta.getAllButRetrieverUserIdToUserResearch());
+								rumta.getAllButRetrieverUserIdToUserResearch(),
+								userIdsToSfuList);
 
 				log.info("ppList={}", ppList);
 				//user should see real people before fake ones

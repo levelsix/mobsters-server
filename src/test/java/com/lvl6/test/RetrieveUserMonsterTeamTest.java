@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -27,6 +28,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -40,6 +42,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
@@ -106,6 +109,9 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 	@Autowired
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil;
+	
+	@Autowired
+	protected StructureForUserDao2 structureForUserDao;
 
 	@Autowired
 	private InsertUtil insertUtil;
@@ -257,6 +263,10 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 						+ rumta.getAllButRetrieverUserIdToUserMonsters(),
 				amount, rumta.getAllButRetrieverUserIdToUserMonsters().size());
 
+		List<String> userIds = new ArrayList<String>();
+		userIds.addAll(rumta.getAllUsers().keySet());
+		Map<String, List<StructureForUser>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
+		
 		List<PvpProto> ppList = createInfoProtoUtil.createPvpProtos(
 				rumta.getAllUsersExceptRetriever(), rumta.getUserIdToClan(),
 				null, rumta.getUserIdToPvpUsers(),
@@ -268,7 +278,8 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				rumta.getAllButRetrieverUserIdToMsfu(),
 				rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
 				rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
-				rumta.getAllButRetrieverUserIdToUserResearch());
+				rumta.getAllButRetrieverUserIdToUserResearch(),
+				userIdsToSfuList);
 
 		//not every user will have pvp board obstacles
 		//		assertNotNull(rumta.getAllButRetrieverUserIdToPvpBoardObstacles());
