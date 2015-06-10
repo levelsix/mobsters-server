@@ -467,6 +467,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		int gemPrice = Integer.MAX_VALUE;
 		//at the moment, invites are only for residences
 		if (StructType.valueOf(structType) == StructType.RESIDENCE) {
+			structId = struct.getId();
 			StructureResidence residence = structureResidenceRetrieveUtils
 					.getResidenceForStructId(structId);
 			gemPrice = residence.getNumGemsRequired();
