@@ -19,11 +19,15 @@ public class PvpBattleOutcome {
 	private static double ELO_SCALE_DIVIDEND_MULTIPLE = 0.05D;
 	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;//changed from 0.4
 
+	private static double RESOURCE_GENERATOR_CONSTANT = 2.0; 
+	//amount stolen from generators relative to storage/status quo															
+	
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
 
 	public static final int CASH__MIN_REWARD = 100;
 	public static final int OIL__MIN_REWARD = 100;
+
 
 	private User attacker;
 	private String attackerId;
@@ -60,6 +64,8 @@ public class PvpBattleOutcome {
 	private double meanForCnd;
 	private double standardDeviationForCnd;
 	private double lowerElo;
+	private float prospectiveCashPercentage;
+	private float prospectiveOilPercentage;
 
 	private void setLoggingBoolean() {
 		loggingOn = serverToggleRetrieveUtils
@@ -257,6 +263,7 @@ public class PvpBattleOutcome {
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
+		prospectiveCashPercentage = (float)scale * (float)RESOURCE_GENERATOR_CONSTANT;
 		if (loggingOn) {
 			log.info(
 					"cashAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
@@ -320,6 +327,8 @@ public class PvpBattleOutcome {
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
+		prospectiveOilPercentage = (float)scale * (float)RESOURCE_GENERATOR_CONSTANT;
+
 		if (loggingOn) {
 			log.info(
 					"oilAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
@@ -351,5 +360,23 @@ public class PvpBattleOutcome {
 				+ ", standardDeviationForCnd=" + standardDeviationForCnd
 				+ ", lowerElo=" + lowerElo + "]";
 	}
+
+	public float getProspectiveCashPercentage() {
+		return prospectiveCashPercentage;
+	}
+
+	public void setProspectiveCashPercentage(float prospectiveCashPercentage) {
+		this.prospectiveCashPercentage = prospectiveCashPercentage;
+	}
+
+	public float getProspectiveOilPercentage() {
+		return prospectiveOilPercentage;
+	}
+
+	public void setProspectiveOilPercentage(float prospectiveOilPercentage) {
+		this.prospectiveOilPercentage = prospectiveOilPercentage;
+	}
+	
+	
 
 }

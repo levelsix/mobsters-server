@@ -349,11 +349,12 @@ public class CreateInfoProtoUtils {
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashPercentage, int prospectiveOilPercentage,
+			float prospectiveCashPercentage, float prospectiveOilPercentage,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
-			List<ResearchForUser> rfuList) {
+			List<ResearchForUser> rfuList,
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList) {
 
 		FullUserProto defenderProto = createFullUserProtoFromUser(defender, plfu, clan);
 
@@ -363,19 +364,20 @@ public class CreateInfoProtoUtils {
 		return createPvpProto(userId, plfu, pu, userMonsters,
 				userMonsterIdToDropped, prospectiveCashPercentage,
 				prospectiveOilPercentage, defenderProto, msg, cmtd, msfu,
-				msfuMonsterIdDropped, boardObstacles, rfuList);
+				msfuMonsterIdDropped, boardObstacles, rfuList, sfuList);
 	}
 
 	public PvpProto createPvpProto(String defenderId,
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			float prospectiveCashPercentage, int prospectiveOilPercentage,
+			float prospectiveCashPercentage, float prospectiveOilPercentage,
 			FullUserProto defender, String defenderMsg,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
-			List<ResearchForUser> rfuList) {
+			List<ResearchForUser> rfuList,
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList) {
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 
 		Collection<PvpMonsterProto> defenderMonsters = createPvpMonsterProto(
@@ -419,6 +421,15 @@ public class CreateInfoProtoUtils {
 		if (null != rfuList && !rfuList.isEmpty()) {
 			Collection<UserResearchProto> urpList = createUserResearchProto(rfuList);
 			ppb.addAllUserResearch(urpList);
+		}
+		
+		if (null != sfuList && !sfuList.isEmpty()) {
+			List<FullUserStructureProto> uspList = new ArrayList<FullUserStructureProto>();
+			for(com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser sfu : sfuList) {
+				uspList.add(createFullUserStructureProtoFromUserStructPojo(sfu));
+
+			}
+			ppb.addAllUserStructure(uspList);
 		}
 
 		return ppb.build();
@@ -549,13 +560,14 @@ public class CreateInfoProtoUtils {
 			Map<String, PvpUser> userIdToPvpUser,
 			Map<String, List<MonsterForUser>> userIdToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
-			Map<String, Integer> userIdToCashReward,
-			Map<String, Integer> userIdToOilReward,
+			Map<String, Float> userIdToCashReward,
+			Map<String, Float> userIdToOilReward,
 			Map<String, ClanMemberTeamDonation> userIdToCmtd,
 			Map<String, MonsterSnapshotForUser> userIdToMsfu,
 			Map<String, Integer> userIdToMsfuMonsterIdDropped,
 			Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles,
-			Map<String, List<ResearchForUser>> userIdToRfuList) {
+			Map<String, List<ResearchForUser>> userIdToRfuList,
+			Map<String, List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser>> userIdToSfuList) {
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
 		for (User u : queuedOpponents) {
@@ -572,8 +584,8 @@ public class CreateInfoProtoUtils {
 			}
 			List<MonsterForUser> userMonsters = userIdToUserMonsters
 					.get(userId);
-			int prospectiveCashWinnings = userIdToCashReward.get(userId);
-			int prospectiveOilWinnings = userIdToOilReward.get(userId);
+			float prospectiveCashWinnings = userIdToCashReward.get(userId);
+			float prospectiveOilWinnings = userIdToOilReward.get(userId);
 
 			Clan clan = null;
 			if (userIdToClan.containsKey(userId)) {
@@ -606,11 +618,16 @@ public class CreateInfoProtoUtils {
 			if (userIdToRfuList.containsKey(userId)) {
 				rfuList = userIdToRfuList.get(userId);
 			}
+			
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList = null;
+			if (userIdToSfuList.containsKey(userId)) {
+				sfuList = userIdToSfuList.get(userId);
+			}
 
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 					userMonsterIdToDropped, prospectiveCashWinnings,
 					prospectiveOilWinnings, cmtd, msfu, msfuMonsterIdDropped,
-					boardObstacles, rfuList);
+					boardObstacles, rfuList, sfuList);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
@@ -4249,6 +4266,47 @@ public class CreateInfoProtoUtils {
 		}
 		if (userStruct.getLastRetrieved() != null) {
 			builder.setLastRetrieved(userStruct.getLastRetrieved().getTime());
+		}
+		//    if (userStruct.getLastUpgradeTime() != null) {
+		//      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());
+		//    }
+		return builder.build();
+	}
+	
+	public FullUserStructureProto createFullUserStructureProtoFromUserStructPojo(
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser userStructPojo) {
+		FullUserStructureProto.Builder builder = FullUserStructureProto
+				.newBuilder();
+		builder.setUserStructUuid(userStructPojo.getId());
+		builder.setUserUuid(userStructPojo.getUserId());
+		builder.setStructId(userStructPojo.getStructId());
+		//    builder.setLevel(userStruct.getLevel());
+		builder.setFbInviteStructLvl(userStructPojo.getFbInviteStructLvl());
+		
+		if(userStructPojo.getIsComplete().equals((byte) 0)) {
+			builder.setIsComplete(false);
+		}
+		else {
+			builder.setIsComplete(true);
+		}
+		
+		CoordinatePair cp = new CoordinatePair(userStructPojo.getXcoord(), userStructPojo.getYcoord());
+		builder.setCoordinates(createCoordinateProtoFromCoordinatePair(cp));
+		String orientation = userStructPojo.getOrientation();
+		try {
+			StructOrientation so = StructOrientation.valueOf(orientation);
+			builder.setOrientation(so);
+		} catch (Exception e) {
+			log.error(String.format(
+					"incorrect orientation. structureForUser=%s", userStructPojo),
+					e);
+		}
+
+		if (userStructPojo.getPurchaseTime() != null) {
+			builder.setPurchaseTime(userStructPojo.getPurchaseTime().getTime());
+		}
+		if (userStructPojo.getLastRetrieved() != null) {
+			builder.setLastRetrieved(userStructPojo.getLastRetrieved().getTime());
 		}
 		//    if (userStruct.getLastUpgradeTime() != null) {
 		//      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());

@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureMoneyTree;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.utils.utilmethods.StringUtils;

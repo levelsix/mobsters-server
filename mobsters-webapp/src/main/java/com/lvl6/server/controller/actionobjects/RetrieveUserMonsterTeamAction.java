@@ -114,8 +114,8 @@ public class RetrieveUserMonsterTeamAction {
 	private Map<String, Map<String, Integer>> allButRetrieverUserIdToUserMonsterIdToDroppedId;
 	private Map<String, User> userIdToUser;
 	private Map<String, Clan> userIdToClan;
-	private Map<String, Integer> allButRetrieverUserIdToCashLost;
-	private Map<String, Integer> allButRetrieverUserIdToOilLost;
+	private Map<String, Float> allButRetrieverUserIdToCashLost;
+	private Map<String, Float> allButRetrieverUserIdToOilLost;
 
 	private Map<String, ClanMemberTeamDonation> allButRetrieverUserIdToCmtd;
 	private Map<String, MonsterSnapshotForUser> allButRetrieverUserIdToMsfu;
@@ -192,8 +192,8 @@ public class RetrieveUserMonsterTeamAction {
 		userIdToUser = sup.getUserIdsToUsers();
 		userIdToClan = sup.getUserIdsToClans(userIdsExceptRetriever);
 
-		allButRetrieverUserIdToCashLost = new HashMap<String, Integer>();
-		allButRetrieverUserIdToOilLost = new HashMap<String, Integer>();
+		allButRetrieverUserIdToCashLost = new HashMap<String, Float>();
+		allButRetrieverUserIdToOilLost = new HashMap<String, Float>();
 		log.info("calculating the PvpBattleOutcomes");
 		int retrieverElo = this.retrieverPu.getElo();
 		User retrieveUser = userRetrieveUtil.getUserById(retrieverUserId);
@@ -210,9 +210,9 @@ public class RetrieveUserMonsterTeamAction {
 					serverToggleRetrieveUtil);
 
 			allButRetrieverUserIdToCashLost.put(userId,
-					potentialResult.getUnsignedCashAttackerWins());
+					potentialResult.getProspectiveCashPercentage());
 			allButRetrieverUserIdToOilLost.put(userId,
-					potentialResult.getUnsignedOilAttackerWins());
+					potentialResult.getProspectiveOilPercentage());
 		}
 
 		//get the team monster donation solicitations by all clans
@@ -530,11 +530,11 @@ public class RetrieveUserMonsterTeamAction {
 		return allButRetrieverUserIdToUserMonsterIdToDroppedId;
 	}
 
-	public Map<String, Integer> getAllButRetrieverUserIdToCashLost() {
+	public Map<String, Float> getAllButRetrieverUserIdToCashLost() {
 		return allButRetrieverUserIdToCashLost;
 	}
 
-	public Map<String, Integer> getAllButRetrieverUserIdToOilLost() {
+	public Map<String, Float> getAllButRetrieverUserIdToOilLost() {
 		return allButRetrieverUserIdToOilLost;
 	}
 
