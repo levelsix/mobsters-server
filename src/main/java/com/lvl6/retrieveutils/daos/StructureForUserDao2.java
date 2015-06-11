@@ -52,4 +52,7 @@ public class StructureForUserDao2 extends StructureForUserDao {
 		}
 		return returnMap;
 	}
+	
+	
+	
 }

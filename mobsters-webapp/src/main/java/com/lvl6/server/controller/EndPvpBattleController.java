@@ -117,6 +117,10 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 
 	public EndPvpBattleController() {
 		
@@ -234,7 +238,8 @@ public class EndPvpBattleController extends EventController {
 					pvpLeagueRetrieveUtils, createInfoProtoUtils,
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil,
 					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
-					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators);
+					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators,
+					timeUtils);
 
 			epba.execute(resBuilder);
 
