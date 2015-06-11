@@ -18,6 +18,8 @@ import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
@@ -30,13 +32,13 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -79,6 +81,7 @@ public class EndPvpBattleAction {
 	private List<StructStolen> listOfGenerators;
 	private int oilStolenFromGenerators;
 	private int cashStolenFromGenerators;
+	private TimeUtils timeUtils;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -100,7 +103,8 @@ public class EndPvpBattleAction {
 			MiscMethods miscMethods, HazelcastPvpUtil hazelcastPvpUtil,
 			TimeUtils timeUtil, InsertUtil insertUtil,
 			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
-			int oilStolenFromGenerators, int cashStolenFromGenerators)
+			int oilStolenFromGenerators, int cashStolenFromGenerators,
+			TimeUtils timeUtils)
 	{
 		super();
 		this.attackerId = attackerId;
@@ -136,6 +140,7 @@ public class EndPvpBattleAction {
 		this.listOfGenerators = listOfGenerators;
 		this.oilStolenFromGenerators = oilStolenFromGenerators;
 		this.cashStolenFromGenerators = cashStolenFromGenerators;
+		this.timeUtils = timeUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -623,7 +628,7 @@ public class EndPvpBattleAction {
 			log.info("defender after currency update: {}",
 					defender);
 			log.info("updating defender user struct's to account for resources stolen");
-			updateUtil.updateUserStructAfterPvp(listOfGenerators);
+			updateDefenderUserStructs();
 		}
 
 		Timestamp shieldEndTime = new Timestamp(
@@ -645,6 +650,34 @@ public class EndPvpBattleAction {
 		hazelcastPvpUtil.replacePvpUser(defenderPu, defenderId);
 		log.info( "defender PvpLeagueForUser after battle outcome: %s",
 				defenderPlfu );
+	}
+	
+	public void updateDefenderUserStructs() {
+		StructureForUserDao sfuDao = AppContext.getApplicationContext().getBean(StructureForUserDao.class);
+		Map<String, Long> generatorsMap = new HashMap<String, Long>();
+		for(StructStolen ss : listOfGenerators) {
+			generatorsMap.put(ss.getUserStructUuid(), ss.getTimeOfRetrieval());
+		}
+		List<StructureForUser> defenderUserStructs = sfuDao.fetchByUserId(defenderId);
+		Map<String, StructureForUser> defenderSfuMap = new HashMap<String, StructureForUser>();
+		for(StructureForUser sfu : defenderUserStructs) {
+			defenderSfuMap.put(sfu.getId(), sfu);
+		}
+		List<StructureForUser> updateList = new ArrayList<StructureForUser>();
+		for(String generatorsId : generatorsMap.keySet()) {
+			StructureForUser sfu = defenderSfuMap.get(generatorsId);
+			Long clientCollectTime = generatorsMap.get(generatorsId);
+			Date clientCollectTimeDate = new Date(clientCollectTime);
+			Timestamp dbLastCollectTime = sfu.getLastRetrieved();
+			Date dbLastCollectTimeDate = new Date(dbLastCollectTime.getTime());
+			if(timeUtils.isFirstEarlierThanSecond(dbLastCollectTimeDate, clientCollectTimeDate)) {
+				sfu.setLastRetrieved(new Timestamp(clientCollectTimeDate.getTime()));
+				updateList.add(sfu);
+			}
+		}
+		if(!updateList.isEmpty()) {
+			sfuDao.update(updateList);
+		}
 	}
 
 	private void createReplay() {
