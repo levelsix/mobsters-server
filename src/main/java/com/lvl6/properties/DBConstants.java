@@ -110,6 +110,7 @@ public class DBConstants {
 	public static final String TABLE_SALES_DISPLAY_ITEM_CONFIG = "sales_display_item_config";
 	public static final String TABLE_SALES_ITEM_CONFIG = "sales_item_config";
 	public static final String TABLE_SALES_PACKAGE_CONFIG = "sales_package_config";
+	public static final String TABLE_SALES_SCHEDULE_CONFIG = "sales_schedule_config";
 	public static final String TABLE_REWARD_CONFIG = "reward_config";
 	public static final String TABLE_SERVER_TOGGLE_CONFIG = "server_toggle_config";
 	public static final String TABLE_SKILL_CONFIG = "skill_config";
@@ -1313,6 +1314,11 @@ public class DBConstants {
     public static final String SALES_PACKAGE__ANIMATING_ICON = "animating_icon";
     public static final String SALES_PACKAGE__SLAM_ICON = "slam_icon";
     public static final String SALES_PACKAGE__TITLE_COLOR = "title_color";
+    
+    public static final String SALES_SCHEDULE__ID = GENERIC__ID;
+    public static final String SALES_SCHEDULE__SALES_PACKAGE_ID = "sales_package_id";
+    public static final String SALES_SCHEDULE__TIME_START = "time_start";
+    public static final String SALES_SCHEDULE__TIME_END = "time_end";
 
 	public static final String REWARD__ID = GENERIC__ID;
 	public static final String REWARD__STATIC_DATA_ID = "static_data_id";

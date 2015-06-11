@@ -18,6 +18,7 @@ import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesSchedule;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
@@ -31,8 +32,10 @@ import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -64,6 +67,8 @@ public class InAppPurchaseSalesAction {
 	private RewardRetrieveUtils rewardRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
+	private SalesScheduleRetrieveUtils salesScheduleRetrieveUtils;
+	private TimeUtils timeUtils;
 
 	public InAppPurchaseSalesAction() {
 		super();
@@ -86,7 +91,9 @@ public class InAppPurchaseSalesAction {
 			SalesPackage salesPackage, InAppPurchaseUtils inAppPurchaseUtils,
 			RewardRetrieveUtils rewardRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
-			UserRetrieveUtils2 userRetrieveUtil) {
+			UserRetrieveUtils2 userRetrieveUtil,
+			SalesScheduleRetrieveUtils salesScheduleRetrieveUtils,
+			TimeUtils timeUtils) {
 		super();
 		this.userId = userId;
 		this.user = user;
@@ -110,6 +117,8 @@ public class InAppPurchaseSalesAction {
 		this.rewardRetrieveUtils = rewardRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
+		this.salesScheduleRetrieveUtils = salesScheduleRetrieveUtils;
+		this.timeUtils = timeUtils;
 	}
 
 	//derived state
@@ -236,19 +245,12 @@ public class InAppPurchaseSalesAction {
 
 	//when start and end time both null, it's for starter/builder packs, they dont expire
 	public boolean saleIsWithinTimeConstraints() {
-		Date saleStartTime = salesPackage.getTimeStart();
-		Date saleEndTime = salesPackage.getTimeEnd();
-
-		if(saleStartTime == null && saleEndTime == null) {
-			return true;
+		Map<Integer, SalesSchedule> listOfSalesSchedule = salesScheduleRetrieveUtils.
+				getActiveSalesPackagesIdsToSalesSchedule(now, timeUtils);
+		if(!listOfSalesSchedule.containsKey(salesPackage.getId())) {
+			log.error("sales pack with id {} is not currently active..", salesPackage.getId());
 		}
-
-		if((now.getTime() - saleStartTime.getTime() > 0) && (saleEndTime.getTime() - now.getTime() > 0)) {
-			return true;
-		}
-		log.error("sale didn't begin or is over, sale start time is {}, end time is {}",
-				new Timestamp(saleStartTime.getTime()), new Timestamp(saleEndTime.getTime()) );
-		return false;
+		return true;
 	}
 
 	public boolean writeChangesToDB(Builder resBuilder) {

@@ -43,6 +43,7 @@ import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesSchedule
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
 import com.lvl6.properties.IAPValues
@@ -124,6 +125,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
@@ -236,6 +238,7 @@ class StartupService extends LazyLogging{
 	@Autowired var  salesDisplayItemRetrieveUtil : SalesDisplayItemRetrieveUtils = null
 	@Autowired var  salesItemRetrieveUtil : SalesItemRetrieveUtils = null
 	@Autowired var  salesPackageRetrieveUtil : SalesPackageRetrieveUtils = null
+  @Autowired var  salesScheduleRetrieveUtil : SalesScheduleRetrieveUtils = null
 	@Autowired var  serverToggleRetrieveUtil : ServerToggleRetrieveUtils = null
 	@Autowired var  startupStuffRetrieveUtil : StartupStuffRetrieveUtils = null
     @Autowired var  tangoGiftRetrieveUtil : TangoGiftRetrieveUtils = null;
@@ -1199,7 +1202,7 @@ class StartupService extends LazyLogging{
 							sp,
 							salesItemRetrieveUtil,
 							salesDisplayItemRetrieveUtil,
-							customMenuRetrieveUtil);
+							customMenuRetrieveUtil, null, null);
 						resBuilder.addSalesPackages(spProto);
                     }
 				}
@@ -1218,7 +1221,7 @@ class StartupService extends LazyLogging{
 						sp,
 						salesItemRetrieveUtil,
 						salesDisplayItemRetrieveUtil,
-						customMenuRetrieveUtil);
+						customMenuRetrieveUtil, null, null);
 						resBuilder.addSalesPackages(spProto);
 					}
 			    }
@@ -1244,7 +1247,7 @@ class StartupService extends LazyLogging{
 							sp,
 							salesItemRetrieveUtil,
 							salesDisplayItemRetrieveUtil,
-							customMenuRetrieveUtil);
+							customMenuRetrieveUtil, null, null);
 						resBuilder.addSalesPackages(spProto);
 				    }
 				}
@@ -1367,7 +1370,8 @@ class StartupService extends LazyLogging{
         val salesProtoList = new ArrayList[SalesPackageProto]()
         val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(user.getId(), null);
         val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
-
+        val mapOfActiveSales = salesScheduleRetrieveUtil.getActiveSalesPackagesIdsToSalesSchedule(now, timeUtils)
+        
         var hasHighRoller = false
         itemIdToUserItems.keySet().foreach { itemId =>
           //TODO: Make a constant out of this number for builder's id
@@ -1380,22 +1384,22 @@ class StartupService extends LazyLogging{
             if(sp.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
               val spProto = inAppPurchaseUtil.createSalesPackageProto(
                   sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
-                  customMenuRetrieveUtil);
+                  customMenuRetrieveUtil, null, null);
               salesProtoList.add(spProto)
             }
           }
         }
         
-				idsToSalesPackages.values().foreach { sp:SalesPackage =>
-					if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
+				mapOfActiveSales.values().foreach { ss:SalesSchedule =>
+					val sp = idsToSalesPackages.get(ss.getSalesPackageId())
+          if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
 							&& !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
 							&& !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
 					{ //make sure it's not starter pack
-						if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-								timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+						if(sp.getPrice() == newMinPrice) {
 							  val spProto = inAppPurchaseUtil.createSalesPackageProto(
 								  sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
-								  customMenuRetrieveUtil);
+								  customMenuRetrieveUtil, ss.getTimeStart, ss.getTimeEnd);
                 if(!salesProtoList.contains(spProto)) {
                   salesProtoList.add(spProto)  
                 }

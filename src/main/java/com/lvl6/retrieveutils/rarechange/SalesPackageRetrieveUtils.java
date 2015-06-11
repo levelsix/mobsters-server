@@ -130,27 +130,6 @@ public class SalesPackageRetrieveUtils {
 		String productId = rs.getString(DBConstants.SALES_PACKAGE__PRODUCT_ID);
 		int price = rs.getInt(DBConstants.SALES_PACKAGE__PRICE);
 		String uuid = rs.getString(DBConstants.SALES_PACKAGE__UUID);
-		Date timeStart = null;
-		Date timeEnd = null;
-		Timestamp ts = null;
-
-		try {
-			ts = rs.getTimestamp(DBConstants.SALES_PACKAGE__START_TIME);
-			if (!rs.wasNull()) {
-				timeStart = new Date(ts.getTime());
-			}
-		} catch (Exception e) {
-			log.error("last_purchase_time null...?", e);
-		}
-
-		try {
-			ts = rs.getTimestamp(DBConstants.SALES_PACKAGE__END_TIME);
-			if (!rs.wasNull()) {
-				timeEnd = new Date(ts.getTime());
-			}
-		} catch (Exception e) {
-			log.error("last_purchase_time null...?", e);
-		}
 
 		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
 		int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);
@@ -186,7 +165,7 @@ public class SalesPackageRetrieveUtils {
         }
 
 		SalesPackage salesPackage = new SalesPackage(id, productId, name, price, uuid, 
-				timeStart, timeEnd, succId, priority, customMenuId, animatingIcon, 
+				succId, priority, customMenuId, animatingIcon, 
 				slamIcon, titleColor);
 		return salesPackage;
 	}

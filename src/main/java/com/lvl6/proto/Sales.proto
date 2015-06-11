@@ -48,3 +48,4 @@ message SalesDisplayItemProto {
 	optional RewardProto reward = 3;
 	
 }
+

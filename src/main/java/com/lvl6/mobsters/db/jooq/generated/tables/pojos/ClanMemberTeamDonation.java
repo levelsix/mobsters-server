@@ -35,7 +35,7 @@ import javax.validation.constraints.Size;
 })
 public class ClanMemberTeamDonation implements IClanMemberTeamDonation {
 
-	private static final long serialVersionUID = -1435081834;
+	private static final long serialVersionUID = 2089054490;
 
 	private String    id;
 	private String    userId;
@@ -141,8 +141,8 @@ public class ClanMemberTeamDonation implements IClanMemberTeamDonation {
 		return this;
 	}
 
-	@Column(name = "msg", length = 105)
-	@Size(max = 105)
+	@Column(name = "msg", length = 65535)
+	@Size(max = 65535)
 	@Override
 	public String getMsg() {
 		return this.msg;

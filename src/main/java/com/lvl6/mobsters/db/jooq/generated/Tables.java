@@ -118,6 +118,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SalesSchedule;
 import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
@@ -753,6 +754,11 @@ public class Tables {
 	 * The table mobsters.sales_package_config
 	 */
 	public static final SalesPackageConfig SALES_PACKAGE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig.SALES_PACKAGE_CONFIG;
+
+	/**
+	 * The table mobsters.sales_schedule
+	 */
+	public static final SalesSchedule SALES_SCHEDULE = com.lvl6.mobsters.db.jooq.generated.tables.SalesSchedule.SALES_SCHEDULE;
 
 	/**
 	 * The table mobsters.secret_gift_config

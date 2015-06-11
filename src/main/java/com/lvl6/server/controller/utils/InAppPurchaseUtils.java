@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.utils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CustomMenu;
-import com.lvl6.info.FileDownload;
 import com.lvl6.info.Reward;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
@@ -73,7 +73,8 @@ public class InAppPurchaseUtils {
 	public SalesPackageProto createSalesPackageProto(SalesPackage sp,
 			SalesItemRetrieveUtils salesItemRetrieveUtils,
 			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils,
-			CustomMenuRetrieveUtils customMenuRetrieveUtils) {
+			CustomMenuRetrieveUtils customMenuRetrieveUtils,
+			Timestamp startTime, Timestamp endTime) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
 		b.setSalesPackageId((int)Math.random()*2000000000);
 
@@ -91,20 +92,17 @@ public class InAppPurchaseUtils {
 
 		b.setSuccId(sp.getSuccId());
 
-		if(sp.getTimeStart() != null) {
-			b.setTimeStart(sp.getTimeStart().getTime());
-		}
-
-		if(sp.getTimeEnd() != null) {
-			b.setTimeEnd(sp.getTimeEnd().getTime());
-		}
-
 		b.setPriority(sp.getPriority());
 		b.setAnimatingIcon(sp.getAnimatingIcon());
 		b.setSlamIcon(sp.getSlamIcon());
 		b.setTitleColor(sp.getTitleColor());
 
-
+		if(startTime != null) {
+			b.setTimeStart(startTime.getTime());
+		}
+		if(endTime != null) {
+			b.setTimeEnd(endTime.getTime());
+		}
 		Map<Integer, List<SalesItem>> salesPackageIdToSalesItems = salesItemRetrieveUtils
 				.getSalesItemIdsToSalesItemsForSalesPackIds();
 		Map<Integer, Map<Integer, SalesDisplayItem>> salesPackageIdToDisplayIdsToDisplayItems = salesDisplayItemRetrieveUtils

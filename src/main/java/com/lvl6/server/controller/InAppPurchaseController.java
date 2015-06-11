@@ -32,6 +32,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesSchedule;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
@@ -57,6 +58,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
@@ -155,6 +157,9 @@ public class InAppPurchaseController extends EventController {
     
     @Autowired
     protected HistoryUtils historyUtils;
+    
+    @Autowired
+    protected SalesScheduleRetrieveUtils salesScheduleRetrieveUtils;
 
 
     public InAppPurchaseController() {
@@ -405,7 +410,7 @@ public class InAppPurchaseController extends EventController {
                         createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
                         salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
                         salesPackage, inAppPurchaseUtils, rewardRetrieveUtils,
-                        userClanRetrieveUtil, userRetrieveUtil);
+                        userClanRetrieveUtil, userRetrieveUtil, salesScheduleRetrieveUtils, timeUtils);
 
                 iapsa.execute(resBuilder);
             }
@@ -480,6 +485,12 @@ public class InAppPurchaseController extends EventController {
 //        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
         Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
+        Map<Integer, SalesSchedule> listOfActiveSalesPackages = salesScheduleRetrieveUtils.getActiveSalesPackagesIdsToSalesSchedule(new Date(), timeUtils);
+        
+        
+        if(listOfActiveSalesPackages.isEmpty()) {
+        	log.error("there are no sales packs currently running?");
+        }
         
         //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
         
@@ -500,10 +511,9 @@ public class InAppPurchaseController extends EventController {
         
         if(iapsa.isStarterPack() || iapsa.isBuilderPack()) {
         	List<SalesPackage> tenDollarPacks = new ArrayList<SalesPackage>();
-        	for(Integer id : salesPackagesMap.keySet()) {
+        	for(Integer id : listOfActiveSalesPackages.keySet()) {
         		SalesPackage sp = salesPackagesMap.get(id);
-        		if(sp.getPrice() == 10 && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-                        timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+        		if(sp.getPrice() == 10) {
         			tenDollarPacks.add(sp);
         		}
         	}
@@ -518,10 +528,31 @@ public class InAppPurchaseController extends EventController {
         	}
         }
 
+        Timestamp salesPackageStartTime = null;
+        Timestamp salesPackageEndTime = null;
+        Timestamp successorSalesPackageStartTime = null;
+        Timestamp successorSalesPackageEndTime = null;
+        
+        for(Integer id : listOfActiveSalesPackages.keySet()) {
+        	if(salesPackage.getId() == id) {
+        		salesPackageStartTime =  listOfActiveSalesPackages.get(id).getTimeStart();
+        		salesPackageEndTime =  listOfActiveSalesPackages.get(id).getTimeEnd();
+        	}
+        }
+        
+        for(Integer id : listOfActiveSalesPackages.keySet()) {
+        	if(successorSalesPackage.getId() == id) {
+        		successorSalesPackageStartTime =  listOfActiveSalesPackages.get(id).getTimeStart();
+        		successorSalesPackageEndTime =  listOfActiveSalesPackages.get(id).getTimeEnd();
+        	}
+        }
+        
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
-				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils,
+				salesPackageStartTime, salesPackageEndTime);
 		SalesPackageProto preSpp = inAppPurchaseUtils.createSalesPackageProto(successorSalesPackage,
-				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+				salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils,
+				successorSalesPackageStartTime, successorSalesPackageEndTime);
 		resBuilder.setPurchasedSalesPackage(curSpp);
 		log.info("prespp: " + preSpp);
 
@@ -532,7 +563,7 @@ public class InAppPurchaseController extends EventController {
 			//do nothing
 		}
 		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
-				&& timeUtils.isFirstEarlierThanSecond(now, successorSalesPackage.getTimeEnd())) {
+				&& !listOfActiveSalesPackages.containsKey(successorSalesPackage.getId())) {
 			//do nothing
 		}
 		else {

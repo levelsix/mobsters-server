@@ -1748,7 +1748,7 @@ public class StartupControllerOld extends EventController {
 			for(SalesPackage sp : idsToSalesPackages.values()) {
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) {
 					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils, null, null);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}
@@ -1763,7 +1763,7 @@ public class StartupControllerOld extends EventController {
 			for(SalesPackage sp : idsToSalesPackages.values()) {
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)) {
 					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils, null, null);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}
@@ -1785,7 +1785,7 @@ public class StartupControllerOld extends EventController {
 			for(SalesPackage sp : idsToSalesPackages.values()) {
 				if(sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)) {
 					SalesPackageProto spProto = inAppPurchaseUtils.createSalesPackageProto(sp, salesItemRetrieveUtils,
-							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+							salesDisplayItemRetrieveUtils, customMenuRetrieveUtils, null, null);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}
@@ -1873,6 +1873,7 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
+	//TODO: IF THIS FILE IS EVER USED AGAIN FOR SOME REASON...FIX THIS
 	public void setSalesForUser(Builder resBuilder, User user) {
 
 		Map<Integer, SalesPackage> idsToSalesPackages = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
@@ -1886,14 +1887,15 @@ public class StartupControllerOld extends EventController {
 			if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK) &&
 					!sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK) &&
 					!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
-				if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-						timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
+//				if(sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
+//						timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
 					SalesPackageProto spProto = inAppPurchaseUtils
-							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils);
+							.createSalesPackageProto(sp, salesItemRetrieveUtils, salesDisplayItemRetrieveUtils, customMenuRetrieveUtils
+									, null, null);
 					resBuilder.addSalesPackages(spProto);
 				}
 			}
-		}
+//		}
 	}
 
 	public int priceForSalesPackToBeShown(int userSalesValue) {

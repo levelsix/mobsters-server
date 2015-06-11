@@ -118,6 +118,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SalesSchedule;
 import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
@@ -191,7 +192,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = -1436386027;
+	private static final long serialVersionUID = -1520457399;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -328,6 +329,7 @@ public class Mobsters extends SchemaImpl {
 			SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG,
 			SalesItemConfig.SALES_ITEM_CONFIG,
 			SalesPackageConfig.SALES_PACKAGE_CONFIG,
+			SalesSchedule.SALES_SCHEDULE,
 			SecretGiftConfig.SECRET_GIFT_CONFIG,
 			ServerToggleConfig.SERVER_TOGGLE_CONFIG,
 			SkillConfig.SKILL_CONFIG,
