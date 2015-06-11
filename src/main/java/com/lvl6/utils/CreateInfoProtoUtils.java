@@ -5437,6 +5437,7 @@ public class CreateInfoProtoUtils {
 			mupb.setAvatarMonsterId(avatarMonsterId);
 		}
 
+		mupb.setStrength(fup.getTotalStrength());
 
 		return mupb.build();
 	}

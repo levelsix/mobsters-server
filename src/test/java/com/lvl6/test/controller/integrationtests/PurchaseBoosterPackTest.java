@@ -80,7 +80,7 @@ public class PurchaseBoosterPackTest {
 
 	@Autowired
 	CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	InsertUtils insertUtils;
 
@@ -102,6 +102,7 @@ public class PurchaseBoosterPackTest {
 		int cash = 10000;
 		int oil = 10000;
 		int gems = 10000;
+		int gachaCredits = 10000;
 		String deviceToken = "bobToken";
 		String facebookId = null;
 		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
@@ -110,7 +111,7 @@ public class PurchaseBoosterPackTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData, 0);
+				avatarMonsterId, email, fbData, gachaCredits);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -208,11 +209,10 @@ public class PurchaseBoosterPackTest {
 	@Test
 	public void testPurchaseBoosterPacks() {
 		User user1 = userRetrieveUtil.getUserById(userId);
-		int userCash1 = user1.getCash();
-		int userOil1 = user1.getOil();
 		int userGems1 = user1.getGems();
+		int userGachaCredits1 = user1.getGachaCredits();
 		List<MonsterForUser> mfuList1 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
-		
+
 		PurchaseBoosterPackRequestProto.Builder pbprp = PurchaseBoosterPackRequestProto
 				.newBuilder();
 		pbprp.setSender(mup);
@@ -220,19 +220,26 @@ public class PurchaseBoosterPackTest {
 		pbprp.setClientTime(new Date().getTime());
 		pbprp.setDailyFreeBoosterPack(false);
 		pbprp.setBuyingInBulk(false);
-		
+		int gemsSpent = 20;
+		pbprp.setGemsSpent(gemsSpent);
+		int gachaCreditsChange = -250;
+		pbprp.setGachaCreditsChange(-250);
+
 		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
 		pbpre.setTag(1);
 		pbpre.setPurchaseBoosterPackRequestProto(pbprp.build());
 		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEvents());
 
-		User user2 = userRetrieveUtil.getUserById(user.getId());
-		
+		User user2 = userRetrieveUtil.getUserById(userId);
+
 		List<MonsterForUser> mfuList2 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
-		
-		assertTrue(mfuList1.size() + 1 == mfuList2.size());
-		assertTrue(userGems1 - 20 == user2.getGems());
-		
+
+		assertEquals(mfuList1.size() + 1, mfuList2.size());
+		assertEquals(String.format("user1 %s, user2 %s", user1, user2),
+				userGems1 - gemsSpent, user2.getGems());
+		assertEquals(String.format("user1 %s, user2 %s", user1, user2),
+				userGachaCredits1 + gachaCreditsChange, user2.getGachaCredits());
+
 		//test buying in bulk
 		PurchaseBoosterPackRequestProto.Builder pbprp2 = PurchaseBoosterPackRequestProto
 				.newBuilder();
@@ -241,6 +248,10 @@ public class PurchaseBoosterPackTest {
 		pbprp2.setClientTime(new Date().getTime());
 		pbprp2.setDailyFreeBoosterPack(false);
 		pbprp2.setBuyingInBulk(true);
+		int gemsSpent2 = 400;
+		pbprp2.setGemsSpent(gemsSpent2);
+		int gachaCreditsChange2 = -5000;
+		pbprp2.setGachaCreditsChange(gachaCreditsChange2);
 
 		PurchaseBoosterPackRequestEvent pbpre2 = new PurchaseBoosterPackRequestEvent();
 		pbpre2.setTag(1);
@@ -251,11 +262,39 @@ public class PurchaseBoosterPackTest {
 
 		List<MonsterForUser> mfuList3 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
 
-		assertTrue(mfuList3.size() == mfuList2.size() + 11);
-		assertTrue(user2.getGems() - 400 == user3.getGems());
+		assertEquals(mfuList3.size(), mfuList2.size() + 11);
+		assertEquals(user2.getGems() - gemsSpent2, user3.getGems());
+		assertEquals(String.format("user2 %s, user3 %s", user2, user3),
+				user2.getGachaCredits() + gachaCreditsChange2, user3.getGachaCredits());
 
-		
-		
+
+		//test insufficient gems
+		PurchaseBoosterPackRequestProto.Builder pbprp3 = PurchaseBoosterPackRequestProto
+				.newBuilder();
+		pbprp3.setSender(mup);
+		pbprp3.setBoosterPackId(2);
+		pbprp3.setClientTime(new Date().getTime());
+		pbprp3.setDailyFreeBoosterPack(false);
+		pbprp3.setBuyingInBulk(true);
+		int gemsSpent3 = 4000000;
+		pbprp3.setGemsSpent(gemsSpent3);
+		int gachaCreditsChange3 = -5000000;
+		pbprp3.setGachaCreditsChange(gachaCreditsChange3);
+
+		PurchaseBoosterPackRequestEvent pbpre3 = new PurchaseBoosterPackRequestEvent();
+		pbpre3.setTag(1);
+		pbpre3.setPurchaseBoosterPackRequestProto(pbprp3.build());
+		purchaseBoosterPackController.processRequestEvent(pbpre3, EventsUtil.getToClientEvents());
+
+		User user4 = userRetrieveUtil.getUserById(user.getId());
+
+		List<MonsterForUser> mfuList4 = monsterForUserRetrieveUtils.getMonstersForUser(userId);
+		// no change
+		assertEquals(mfuList3.size(), mfuList4.size());
+		assertEquals(user3.getGems(), user4.getGems());
+		assertEquals(String.format("user1 %s, user2 %s", user1, user2),
+				user3.getGachaCredits(), user4.getGachaCredits());
+
 	}
 
 }

@@ -654,7 +654,7 @@ public class MiscMethods {
 		}
 
 		BoosterPackConstantsProto.Builder bpcpb = BoosterPackConstantsProto.newBuilder();
-		bpcpb.setPurchaseAmountRequired(ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE);
+		bpcpb.setPurchaseAmountRequired(ControllerConstants.BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE_HIGH_ROLLER);
 		bpcpb.setNumberOfPacksGiven(ControllerConstants.BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE);
 
 		cb.setBoosterPackConstantProto(bpcpb.build());

@@ -46,6 +46,7 @@ import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -111,18 +112,21 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected HistoryUtils historyUtils;
 
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
+	@Autowired
+	protected ResourceUtil resourceUtil;
+
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
 
 	public PurchaseBoosterPackController() {
-		
+
 	}
 
 	@Override
@@ -186,14 +190,14 @@ public class PurchaseBoosterPackController extends EventController {
 		try {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
-					timeUtils, clanGiftRewardsRetrieveUtils,
-					userClanRetrieveUtils,
+					buyingInBulk, gemsSpent, gachaCreditsChange, timeUtils,
+					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtils, boosterPackRetrieveUtils,
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
-					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil,
-					serverToggleRetrieveUtils, boosterItemUtils, gemsSpent, gachaCreditsChange,
-					createInfoProtoUtils, historyUtils);
+					monsterRetrieveUtils, rewardRetrieveUtils, insertUtil,
+					serverToggleRetrieveUtils, boosterItemUtils,
+					createInfoProtoUtils, historyUtils, resourceUtil);
 
 			pbpa.execute(resBuilder);
 

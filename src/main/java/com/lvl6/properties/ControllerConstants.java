@@ -33,7 +33,7 @@ public class ControllerConstants {
 
 	//BOOSTER_PACK
 	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
-	public static final int BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE = 10;
+	public static final int BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE_HIGH_ROLLER = 10;
 	public static final int BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE = 11;
 
 	//clan
@@ -315,6 +315,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
+	public static final String UCHRFC__SPIN_GACHA = "spin_gacha";
 	public static final String UCHRFC__TANGO_GIFT = "tango gift";
 	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
 	public static final String UCHRFC__TRADE_ITEM_FOR_SPEEDUP = "trade item for speedup";
