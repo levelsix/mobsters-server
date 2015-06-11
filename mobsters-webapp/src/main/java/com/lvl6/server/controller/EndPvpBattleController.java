@@ -26,6 +26,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
@@ -120,6 +121,9 @@ public class EndPvpBattleController extends EventController {
 	
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected StructureForUserDao sfuDao;
 	
 
 	public EndPvpBattleController() {
@@ -239,7 +243,7 @@ public class EndPvpBattleController extends EventController {
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil,
 					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
 					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators,
-					timeUtils);
+					timeUtils, sfuDao);
 
 			epba.execute(resBuilder);
 
@@ -247,8 +251,7 @@ public class EndPvpBattleController extends EventController {
 			Map<String, Map<String, Integer>> previousCurrencyMap = new HashMap<String, Map<String, Integer>>();
 
 			PvpBattleHistory battleJustEnded = epba.getPbh();
-			Map<String, BattleReplayForUser> replayIdToReplay = epba
-					.getReplayIdToReplay();
+
 			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<PvpHistoryProto> historyProtoList = null;
 				if (null != battleJustEnded) {
@@ -256,8 +259,7 @@ public class EndPvpBattleController extends EventController {
 					historyProtoList = createInfoProtoUtils
 							.createAttackedOthersPvpHistoryProto(attackerId,
 									epba.getIdToUser(),
-									Collections.singletonList(battleJustEnded),
-									replayIdToReplay);
+									Collections.singletonList(battleJustEnded));
 				}
 				if (null != historyProtoList && !historyProtoList.isEmpty()) {
 					PvpHistoryProto attackedOtherHistory = historyProtoList
@@ -284,7 +286,7 @@ public class EndPvpBattleController extends EventController {
 				if (null != epba.getDefender()) {
 					if (null != battleJustEnded) {
 						PvpHistoryProto php = createPvpProto(attacker,
-								defender, curDate, battleJustEnded, replayIdToReplay);
+								defender, curDate, battleJustEnded);
 						log.info("gotAttackedHistory {}", php);
 						resBuilder.setBattleThatJustEnded(php);
 					}
@@ -431,8 +433,7 @@ public class EndPvpBattleController extends EventController {
 
 	//TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
 	private PvpHistoryProto createPvpProto(User attacker, User defender,
-			Date curDate, PvpBattleHistory gotAttackedHistory,
-			Map<String, BattleReplayForUser> replayIdToReplay) {
+			Date curDate, PvpBattleHistory gotAttackedHistory) {
 		if (null == defender) {
 			return null;
 		}
@@ -497,8 +498,7 @@ public class EndPvpBattleController extends EventController {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings,
-						replayIdToReplay);
+						attackerIdsToProspectiveOilWinnings);
 
 		if (null != historyProtoList && !historyProtoList.isEmpty()) {
 			PvpHistoryProto pp = historyProtoList.get(0);
