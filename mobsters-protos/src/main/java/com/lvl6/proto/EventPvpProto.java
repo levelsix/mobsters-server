@@ -3949,27 +3949,27 @@ public final class EventPvpProto {
     int getCashStolenFromGenerator();
 
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    java.util.List<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen> 
+    java.util.List<com.lvl6.proto.EventPvpProto.StructStolen> 
         getStructStolenList();
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen getStructStolen(int index);
+    com.lvl6.proto.EventPvpProto.StructStolen getStructStolen(int index);
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
     int getStructStolenCount();
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    java.util.List<? extends com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.EventPvpProto.StructStolenOrBuilder> 
         getStructStolenOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder getStructStolenOrBuilder(
+    com.lvl6.proto.EventPvpProto.StructStolenOrBuilder getStructStolenOrBuilder(
         int index);
   }
   /**
@@ -4111,10 +4111,10 @@ public final class EventPvpProto {
             }
             case 106: {
               if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
-                structStolen_ = new java.util.ArrayList<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen>();
+                structStolen_ = new java.util.ArrayList<com.lvl6.proto.EventPvpProto.StructStolen>();
                 mutable_bitField0_ |= 0x00001000;
               }
-              structStolen_.add(input.readMessage(com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.PARSER, extensionRegistry));
+              structStolen_.add(input.readMessage(com.lvl6.proto.EventPvpProto.StructStolen.PARSER, extensionRegistry));
               break;
             }
           }
@@ -4160,560 +4160,6 @@ public final class EventPvpProto {
     @java.lang.Override
     public com.google.protobuf.Parser<EndPvpBattleRequestProto> getParserForType() {
       return PARSER;
-    }
-
-    public interface StructStolenOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndPvpBattleRequestProto.StructStolen)
-        com.google.protobuf.MessageOrBuilder {
-
-      /**
-       * <code>optional string userStructUuid = 1;</code>
-       */
-      boolean hasUserStructUuid();
-      /**
-       * <code>optional string userStructUuid = 1;</code>
-       */
-      java.lang.String getUserStructUuid();
-      /**
-       * <code>optional string userStructUuid = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getUserStructUuidBytes();
-
-      /**
-       * <code>optional int64 timeOfRetrieval = 2;</code>
-       */
-      boolean hasTimeOfRetrieval();
-      /**
-       * <code>optional int64 timeOfRetrieval = 2;</code>
-       */
-      long getTimeOfRetrieval();
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.EndPvpBattleRequestProto.StructStolen}
-     */
-    public static final class StructStolen extends
-        com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndPvpBattleRequestProto.StructStolen)
-        StructStolenOrBuilder {
-      // Use StructStolen.newBuilder() to construct.
-      private StructStolen(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-        super(builder);
-        this.unknownFields = builder.getUnknownFields();
-      }
-      private StructStolen(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-      private static final StructStolen defaultInstance;
-      public static StructStolen getDefaultInstance() {
-        return defaultInstance;
-      }
-
-      public StructStolen getDefaultInstanceForType() {
-        return defaultInstance;
-      }
-
-      private final com.google.protobuf.UnknownFieldSet unknownFields;
-      @java.lang.Override
-      public final com.google.protobuf.UnknownFieldSet
-          getUnknownFields() {
-        return this.unknownFields;
-      }
-      private StructStolen(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        initFields();
-        int mutable_bitField0_ = 0;
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              default: {
-                if (!parseUnknownField(input, unknownFields,
-                                       extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-              case 10: {
-                com.google.protobuf.ByteString bs = input.readBytes();
-                bitField0_ |= 0x00000001;
-                userStructUuid_ = bs;
-                break;
-              }
-              case 16: {
-                bitField0_ |= 0x00000002;
-                timeOfRetrieval_ = input.readInt64();
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e.getMessage()).setUnfinishedMessage(this);
-        } finally {
-          this.unknownFields = unknownFields.build();
-          makeExtensionsImmutable();
-        }
-      }
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.class, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder.class);
-      }
-
-      public static com.google.protobuf.Parser<StructStolen> PARSER =
-          new com.google.protobuf.AbstractParser<StructStolen>() {
-        public StructStolen parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StructStolen(input, extensionRegistry);
-        }
-      };
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<StructStolen> getParserForType() {
-        return PARSER;
-      }
-
-      private int bitField0_;
-      public static final int USERSTRUCTUUID_FIELD_NUMBER = 1;
-      private java.lang.Object userStructUuid_;
-      /**
-       * <code>optional string userStructUuid = 1;</code>
-       */
-      public boolean hasUserStructUuid() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string userStructUuid = 1;</code>
-       */
-      public java.lang.String getUserStructUuid() {
-        java.lang.Object ref = userStructUuid_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userStructUuid_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string userStructUuid = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUserStructUuidBytes() {
-        java.lang.Object ref = userStructUuid_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userStructUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
-      public static final int TIMEOFRETRIEVAL_FIELD_NUMBER = 2;
-      private long timeOfRetrieval_;
-      /**
-       * <code>optional int64 timeOfRetrieval = 2;</code>
-       */
-      public boolean hasTimeOfRetrieval() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int64 timeOfRetrieval = 2;</code>
-       */
-      public long getTimeOfRetrieval() {
-        return timeOfRetrieval_;
-      }
-
-      private void initFields() {
-        userStructUuid_ = "";
-        timeOfRetrieval_ = 0L;
-      }
-      private byte memoizedIsInitialized = -1;
-      public final boolean isInitialized() {
-        byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
-
-        memoizedIsInitialized = 1;
-        return true;
-      }
-
-      public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
-        getSerializedSize();
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getUserStructUuidBytes());
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeInt64(2, timeOfRetrieval_);
-        }
-        getUnknownFields().writeTo(output);
-      }
-
-      private int memoizedSerializedSize = -1;
-      public int getSerializedSize() {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-
-        size = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getUserStructUuidBytes());
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt64Size(2, timeOfRetrieval_);
-        }
-        size += getUnknownFields().getSerializedSize();
-        memoizedSerializedSize = size;
-        return size;
-      }
-
-      private static final long serialVersionUID = 0L;
-      @java.lang.Override
-      protected java.lang.Object writeReplace()
-          throws java.io.ObjectStreamException {
-        return super.writeReplace();
-      }
-
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input, extensionRegistry);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-
-      public static Builder newBuilder() { return Builder.create(); }
-      public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen prototype) {
-        return newBuilder().mergeFrom(prototype);
-      }
-      public Builder toBuilder() { return newBuilder(this); }
-
-      @java.lang.Override
-      protected Builder newBuilderForType(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        Builder builder = new Builder(parent);
-        return builder;
-      }
-      /**
-       * Protobuf type {@code com.lvl6.proto.EndPvpBattleRequestProto.StructStolen}
-       */
-      public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndPvpBattleRequestProto.StructStolen)
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder {
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_descriptor;
-        }
-
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                  com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.class, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder.class);
-        }
-
-        // Construct using com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.newBuilder()
-        private Builder() {
-          maybeForceBuilderInitialization();
-        }
-
-        private Builder(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          }
-        }
-        private static Builder create() {
-          return new Builder();
-        }
-
-        public Builder clear() {
-          super.clear();
-          userStructUuid_ = "";
-          bitField0_ = (bitField0_ & ~0x00000001);
-          timeOfRetrieval_ = 0L;
-          bitField0_ = (bitField0_ & ~0x00000002);
-          return this;
-        }
-
-        public Builder clone() {
-          return create().mergeFrom(buildPartial());
-        }
-
-        public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
-          return com.lvl6.proto.EventPvpProto.internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_descriptor;
-        }
-
-        public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen getDefaultInstanceForType() {
-          return com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.getDefaultInstance();
-        }
-
-        public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen build() {
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen result = buildPartial();
-          if (!result.isInitialized()) {
-            throw newUninitializedMessageException(result);
-          }
-          return result;
-        }
-
-        public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen buildPartial() {
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen result = new com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen(this);
-          int from_bitField0_ = bitField0_;
-          int to_bitField0_ = 0;
-          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-            to_bitField0_ |= 0x00000001;
-          }
-          result.userStructUuid_ = userStructUuid_;
-          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-            to_bitField0_ |= 0x00000002;
-          }
-          result.timeOfRetrieval_ = timeOfRetrieval_;
-          result.bitField0_ = to_bitField0_;
-          onBuilt();
-          return result;
-        }
-
-        public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen) {
-            return mergeFrom((com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen)other);
-          } else {
-            super.mergeFrom(other);
-            return this;
-          }
-        }
-
-        public Builder mergeFrom(com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen other) {
-          if (other == com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.getDefaultInstance()) return this;
-          if (other.hasUserStructUuid()) {
-            bitField0_ |= 0x00000001;
-            userStructUuid_ = other.userStructUuid_;
-            onChanged();
-          }
-          if (other.hasTimeOfRetrieval()) {
-            setTimeOfRetrieval(other.getTimeOfRetrieval());
-          }
-          this.mergeUnknownFields(other.getUnknownFields());
-          return this;
-        }
-
-        public final boolean isInitialized() {
-          return true;
-        }
-
-        public Builder mergeFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen parsedMessage = null;
-          try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen) e.getUnfinishedMessage();
-            throw e;
-          } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
-          return this;
-        }
-        private int bitField0_;
-
-        private java.lang.Object userStructUuid_ = "";
-        /**
-         * <code>optional string userStructUuid = 1;</code>
-         */
-        public boolean hasUserStructUuid() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        /**
-         * <code>optional string userStructUuid = 1;</code>
-         */
-        public java.lang.String getUserStructUuid() {
-          java.lang.Object ref = userStructUuid_;
-          if (!(ref instanceof java.lang.String)) {
-            com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            if (bs.isValidUtf8()) {
-              userStructUuid_ = s;
-            }
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>optional string userStructUuid = 1;</code>
-         */
-        public com.google.protobuf.ByteString
-            getUserStructUuidBytes() {
-          java.lang.Object ref = userStructUuid_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            userStructUuid_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string userStructUuid = 1;</code>
-         */
-        public Builder setUserStructUuid(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          userStructUuid_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string userStructUuid = 1;</code>
-         */
-        public Builder clearUserStructUuid() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          userStructUuid_ = getDefaultInstance().getUserStructUuid();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string userStructUuid = 1;</code>
-         */
-        public Builder setUserStructUuidBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          userStructUuid_ = value;
-          onChanged();
-          return this;
-        }
-
-        private long timeOfRetrieval_ ;
-        /**
-         * <code>optional int64 timeOfRetrieval = 2;</code>
-         */
-        public boolean hasTimeOfRetrieval() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        /**
-         * <code>optional int64 timeOfRetrieval = 2;</code>
-         */
-        public long getTimeOfRetrieval() {
-          return timeOfRetrieval_;
-        }
-        /**
-         * <code>optional int64 timeOfRetrieval = 2;</code>
-         */
-        public Builder setTimeOfRetrieval(long value) {
-          bitField0_ |= 0x00000002;
-          timeOfRetrieval_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional int64 timeOfRetrieval = 2;</code>
-         */
-        public Builder clearTimeOfRetrieval() {
-          bitField0_ = (bitField0_ & ~0x00000002);
-          timeOfRetrieval_ = 0L;
-          onChanged();
-          return this;
-        }
-
-        // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndPvpBattleRequestProto.StructStolen)
-      }
-
-      static {
-        defaultInstance = new StructStolen(true);
-        defaultInstance.initFields();
-      }
-
-      // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndPvpBattleRequestProto.StructStolen)
     }
 
     private int bitField0_;
@@ -5002,36 +4448,36 @@ public final class EventPvpProto {
     }
 
     public static final int STRUCTSTOLEN_FIELD_NUMBER = 13;
-    private java.util.List<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen> structStolen_;
+    private java.util.List<com.lvl6.proto.EventPvpProto.StructStolen> structStolen_;
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    public java.util.List<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen> getStructStolenList() {
+    public java.util.List<com.lvl6.proto.EventPvpProto.StructStolen> getStructStolenList() {
       return structStolen_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    public java.util.List<? extends com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.EventPvpProto.StructStolenOrBuilder> 
         getStructStolenOrBuilderList() {
       return structStolen_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
     public int getStructStolenCount() {
       return structStolen_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen getStructStolen(int index) {
+    public com.lvl6.proto.EventPvpProto.StructStolen getStructStolen(int index) {
       return structStolen_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+     * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
      */
-    public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder getStructStolenOrBuilder(
+    public com.lvl6.proto.EventPvpProto.StructStolenOrBuilder getStructStolenOrBuilder(
         int index) {
       return structStolen_.get(index);
     }
@@ -6207,22 +5653,22 @@ public final class EventPvpProto {
         return this;
       }
 
-      private java.util.List<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen> structStolen_ =
+      private java.util.List<com.lvl6.proto.EventPvpProto.StructStolen> structStolen_ =
         java.util.Collections.emptyList();
       private void ensureStructStolenIsMutable() {
         if (!((bitField0_ & 0x00001000) == 0x00001000)) {
-          structStolen_ = new java.util.ArrayList<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen>(structStolen_);
+          structStolen_ = new java.util.ArrayList<com.lvl6.proto.EventPvpProto.StructStolen>(structStolen_);
           bitField0_ |= 0x00001000;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder> structStolenBuilder_;
+          com.lvl6.proto.EventPvpProto.StructStolen, com.lvl6.proto.EventPvpProto.StructStolen.Builder, com.lvl6.proto.EventPvpProto.StructStolenOrBuilder> structStolenBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public java.util.List<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen> getStructStolenList() {
+      public java.util.List<com.lvl6.proto.EventPvpProto.StructStolen> getStructStolenList() {
         if (structStolenBuilder_ == null) {
           return java.util.Collections.unmodifiableList(structStolen_);
         } else {
@@ -6230,7 +5676,7 @@ public final class EventPvpProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public int getStructStolenCount() {
         if (structStolenBuilder_ == null) {
@@ -6240,9 +5686,9 @@ public final class EventPvpProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen getStructStolen(int index) {
+      public com.lvl6.proto.EventPvpProto.StructStolen getStructStolen(int index) {
         if (structStolenBuilder_ == null) {
           return structStolen_.get(index);
         } else {
@@ -6250,10 +5696,10 @@ public final class EventPvpProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder setStructStolen(
-          int index, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen value) {
+          int index, com.lvl6.proto.EventPvpProto.StructStolen value) {
         if (structStolenBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6267,10 +5713,10 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder setStructStolen(
-          int index, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder builderForValue) {
+          int index, com.lvl6.proto.EventPvpProto.StructStolen.Builder builderForValue) {
         if (structStolenBuilder_ == null) {
           ensureStructStolenIsMutable();
           structStolen_.set(index, builderForValue.build());
@@ -6281,9 +5727,9 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public Builder addStructStolen(com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen value) {
+      public Builder addStructStolen(com.lvl6.proto.EventPvpProto.StructStolen value) {
         if (structStolenBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6297,10 +5743,10 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder addStructStolen(
-          int index, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen value) {
+          int index, com.lvl6.proto.EventPvpProto.StructStolen value) {
         if (structStolenBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6314,10 +5760,10 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder addStructStolen(
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder builderForValue) {
+          com.lvl6.proto.EventPvpProto.StructStolen.Builder builderForValue) {
         if (structStolenBuilder_ == null) {
           ensureStructStolenIsMutable();
           structStolen_.add(builderForValue.build());
@@ -6328,10 +5774,10 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder addStructStolen(
-          int index, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder builderForValue) {
+          int index, com.lvl6.proto.EventPvpProto.StructStolen.Builder builderForValue) {
         if (structStolenBuilder_ == null) {
           ensureStructStolenIsMutable();
           structStolen_.add(index, builderForValue.build());
@@ -6342,10 +5788,10 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder addAllStructStolen(
-          java.lang.Iterable<? extends com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.EventPvpProto.StructStolen> values) {
         if (structStolenBuilder_ == null) {
           ensureStructStolenIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -6357,7 +5803,7 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder clearStructStolen() {
         if (structStolenBuilder_ == null) {
@@ -6370,7 +5816,7 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
       public Builder removeStructStolen(int index) {
         if (structStolenBuilder_ == null) {
@@ -6383,16 +5829,16 @@ public final class EventPvpProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder getStructStolenBuilder(
+      public com.lvl6.proto.EventPvpProto.StructStolen.Builder getStructStolenBuilder(
           int index) {
         return getStructStolenFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder getStructStolenOrBuilder(
+      public com.lvl6.proto.EventPvpProto.StructStolenOrBuilder getStructStolenOrBuilder(
           int index) {
         if (structStolenBuilder_ == null) {
           return structStolen_.get(index);  } else {
@@ -6400,9 +5846,9 @@ public final class EventPvpProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public java.util.List<? extends com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.EventPvpProto.StructStolenOrBuilder> 
            getStructStolenOrBuilderList() {
         if (structStolenBuilder_ != null) {
           return structStolenBuilder_.getMessageOrBuilderList();
@@ -6411,33 +5857,33 @@ public final class EventPvpProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder addStructStolenBuilder() {
+      public com.lvl6.proto.EventPvpProto.StructStolen.Builder addStructStolenBuilder() {
         return getStructStolenFieldBuilder().addBuilder(
-            com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.getDefaultInstance());
+            com.lvl6.proto.EventPvpProto.StructStolen.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder addStructStolenBuilder(
+      public com.lvl6.proto.EventPvpProto.StructStolen.Builder addStructStolenBuilder(
           int index) {
         return getStructStolenFieldBuilder().addBuilder(
-            index, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.getDefaultInstance());
+            index, com.lvl6.proto.EventPvpProto.StructStolen.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.EndPvpBattleRequestProto.StructStolen structStolen = 13;</code>
+       * <code>repeated .com.lvl6.proto.StructStolen structStolen = 13;</code>
        */
-      public java.util.List<com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder> 
+      public java.util.List<com.lvl6.proto.EventPvpProto.StructStolen.Builder> 
            getStructStolenBuilderList() {
         return getStructStolenFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder> 
+          com.lvl6.proto.EventPvpProto.StructStolen, com.lvl6.proto.EventPvpProto.StructStolen.Builder, com.lvl6.proto.EventPvpProto.StructStolenOrBuilder> 
           getStructStolenFieldBuilder() {
         if (structStolenBuilder_ == null) {
           structStolenBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen.Builder, com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolenOrBuilder>(
+              com.lvl6.proto.EventPvpProto.StructStolen, com.lvl6.proto.EventPvpProto.StructStolen.Builder, com.lvl6.proto.EventPvpProto.StructStolenOrBuilder>(
                   structStolen_,
                   ((bitField0_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
@@ -14144,11 +13590,6 @@ public final class EventPvpProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -14221,7 +13662,7 @@ public final class EventPvpProto {
       "proto.BeginPvpBattleResponseProto.BeginP" +
       "vpBattleStatus\"O\n\024BeginPvpBattleStatus\022\013" +
       "\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAILABLE\020\002\022" +
-      "\016\n\nFAIL_OTHER\020\003\"\375\003\n\030EndPvpBattleRequestP" +
+      "\016\n\nFAIL_OTHER\020\003\"\243\003\n\030EndPvpBattleRequestP" +
       "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi" +
       "nimumUserProtoWithMaxResources\022\024\n\014defend" +
       "erUuid\030\002 \001(\t\022\024\n\014userAttacked\030\003 \001(\010\022\017\n\007us" +
@@ -14230,57 +13671,55 @@ public final class EventPvpProto {
       "torage\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 \001(\002" +
       "\022\026\n\016monsterDropIds\030\t \003(\005\022\016\n\006replay\030\n \001(\014" +
       "\022\036\n\026oilStolenFromGenerator\030\013 \001(\005\022\037\n\027cash" +
-      "StolenFromGenerator\030\014 \001(\005\022K\n\014structStole" +
-      "n\030\r \003(\01325.com.lvl6.proto.EndPvpBattleReq" +
-      "uestProto.StructStolen\032?\n\014StructStolen\022\026" +
-      "\n\016userStructUuid\030\001 \001(\t\022\027\n\017timeOfRetrieva" +
-      "l\030\002 \001(\003\"\347\004\n\031EndPvpBattleResponseProto\022@\n" +
-      "\006sender\030\001 \001(\01320.com.lvl6.proto.MinimumUs" +
-      "erProtoWithMaxResources\022\024\n\014defenderUuid\030",
-      "\002 \001(\t\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attac" +
-      "kerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6." +
-      "proto.EndPvpBattleResponseProto.EndPvpBa" +
-      "ttleStatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.l" +
-      "vl6.proto.FullUserMonsterProto\022<\n\023battle" +
-      "ThatJustEnded\030\013 \001(\0132\037.com.lvl6.proto.Pvp" +
-      "HistoryProto\0227\n\013statsBefore\030\014 \001(\0132\".com." +
-      "lvl6.proto.UserPvpLeagueProto\0226\n\nstatsAf" +
-      "ter\030\r \001(\0132\".com.lvl6.proto.UserPvpLeague" +
-      "Proto\0228\n\022updatedUserStructs\030\016 \003(\0132\034.com.",
-      "lvl6.proto.StructStolen\"P\n\022EndPvpBattleS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FA" +
-      "IL_BATTLE_TOOK_TOO_LONG\020\003\"?\n\014StructStole" +
-      "n\022\026\n\016userStructUuid\030\001 \001(\t\022\027\n\017timeOfRetri" +
-      "eval\030\002 \001(\003\"\\\n\033SetDefendingMsgRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendin" +
-      "gMsgResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022R\n\006status\030\002 " +
-      "\001(\0162B.com.lvl6.proto.SetDefendingMsgResp",
-      "onseProto.SetDefendingMsgStatus\"4\n\025SetDe" +
-      "fendingMsgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
-      "HER\020\002\"\271\001\n%CustomizePvpBoardObstacleReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022G\n\024nuOrUpdatedObstacle" +
-      "s\030\002 \003(\0132).com.lvl6.proto.UserPvpBoardObs" +
-      "tacleProto\022\025\n\rremoveUpboIds\030\003 \003(\005\"\202\002\n&Cu" +
-      "stomizePvpBoardObstacleResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022f\n\006status\030\002 \001(\0162V.com.lvl6.proto.",
-      "CustomizePvpBoardObstacleResponseProto.C" +
-      "ustomizePvpBoardObstacleStatus\">\n\037Custom" +
-      "izePvpBoardObstacleStatus\022\013\n\007SUCCESS\020\001\022\016" +
-      "\n\nFAIL_OTHER\020\002\"f\n RetrieveBattleReplayRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\020\n\010replayId\030\002 \001(\t\"\236" +
-      "\002\n!RetrieveBattleReplayResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022.\n\003brp\030\002 \001(\0132!.com.lvl6.proto.Bat" +
-      "tleReplayProto\022\\\n\006status\030\003 \001(\0162L.com.lvl",
-      "6.proto.RetrieveBattleReplayResponseProt" +
-      "o.RetrieveBattleReplayStatus\"9\n\032Retrieve" +
-      "BattleReplayStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002B\017B\rEventPvpProto"
+      "StolenFromGenerator\030\014 \001(\005\0222\n\014structStole" +
+      "n\030\r \003(\0132\034.com.lvl6.proto.StructStolen\"\347\004" +
+      "\n\031EndPvpBattleResponseProto\022@\n\006sender\030\001 " +
+      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
+      "hMaxResources\022\024\n\014defenderUuid\030\002 \001(\t\022\030\n\020a" +
+      "ttackerAttacked\030\003 \001(\010\022\023\n\013attackerWon\030\004 \001" +
+      "(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto.EndP",
+      "vpBattleResponseProto.EndPvpBattleStatus" +
+      "\022:\n\014updatedOrNew\030\n \003(\0132$.com.lvl6.proto." +
+      "FullUserMonsterProto\022<\n\023battleThatJustEn" +
+      "ded\030\013 \001(\0132\037.com.lvl6.proto.PvpHistoryPro" +
+      "to\0227\n\013statsBefore\030\014 \001(\0132\".com.lvl6.proto" +
+      ".UserPvpLeagueProto\0226\n\nstatsAfter\030\r \001(\0132" +
+      "\".com.lvl6.proto.UserPvpLeagueProto\0228\n\022u" +
+      "pdatedUserStructs\030\016 \003(\0132\034.com.lvl6.proto" +
+      ".StructStolen\"P\n\022EndPvpBattleStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_",
+      "TOOK_TOO_LONG\020\003\"?\n\014StructStolen\022\026\n\016userS" +
+      "tructUuid\030\001 \001(\t\022\027\n\017timeOfRetrieval\030\002 \001(\003" +
+      "\"\\\n\033SetDefendingMsgRequestProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefendingMsgRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022R\n\006status\030\002 \001(\0162B.com." +
+      "lvl6.proto.SetDefendingMsgResponseProto." +
+      "SetDefendingMsgStatus\"4\n\025SetDefendingMsg" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\271\001\n%",
+      "CustomizePvpBoardObstacleRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022G\n\024nuOrUpdatedObstacles\030\002 \003(\0132)." +
+      "com.lvl6.proto.UserPvpBoardObstacleProto" +
+      "\022\025\n\rremoveUpboIds\030\003 \003(\005\"\202\002\n&CustomizePvp" +
+      "BoardObstacleResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022f\n\006" +
+      "status\030\002 \001(\0162V.com.lvl6.proto.CustomizeP" +
+      "vpBoardObstacleResponseProto.CustomizePv" +
+      "pBoardObstacleStatus\">\n\037CustomizePvpBoar",
+      "dObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
+      "ER\020\002\"f\n RetrieveBattleReplayRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\020\n\010replayId\030\002 \001(\t\"\236\002\n!Retriev" +
+      "eBattleReplayResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022.\n\003" +
+      "brp\030\002 \001(\0132!.com.lvl6.proto.BattleReplayP" +
+      "roto\022\\\n\006status\030\003 \001(\0162L.com.lvl6.proto.Re" +
+      "trieveBattleReplayResponseProto.Retrieve" +
+      "BattleReplayStatus\"9\n\032RetrieveBattleRepl",
+      "ayStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B" +
+      "\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14328,12 +13767,6 @@ public final class EventPvpProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
         new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilStolenFromStorage", "CashStolenFromStorage", "NuPvpDmgMultiplier", "MonsterDropIds", "Replay", "OilStolenFromGenerator", "CashStolenFromGenerator", "StructStolen", });
-    internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_descriptor =
-      internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor.getNestedTypes().get(0);
-    internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_EndPvpBattleRequestProto_StructStolen_descriptor,
-        new java.lang.String[] { "UserStructUuid", "TimeOfRetrieval", });
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new

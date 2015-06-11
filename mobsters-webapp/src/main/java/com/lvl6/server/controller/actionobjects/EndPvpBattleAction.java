@@ -2,7 +2,6 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,12 +17,11 @@ import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
@@ -32,13 +30,13 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -83,7 +81,7 @@ public class EndPvpBattleAction {
 	private int oilStolenFromGenerators;
 	private int cashStolenFromGenerators;
 	private TimeUtils timeUtils;
-	private StructureForUserDao sfuDao;
+	private StructureForUserDao2 sfuDao;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -106,7 +104,7 @@ public class EndPvpBattleAction {
 			TimeUtils timeUtil, InsertUtil insertUtil,
 			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
 			int oilStolenFromGenerators, int cashStolenFromGenerators,
-			TimeUtils timeUtils, StructureForUserDao sfuDao)
+			TimeUtils timeUtils, StructureForUserDao2 sfuDao)
 	{
 		super();
 		this.attackerId = attackerId;
