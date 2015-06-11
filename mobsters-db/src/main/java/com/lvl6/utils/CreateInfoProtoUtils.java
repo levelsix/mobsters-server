@@ -349,12 +349,13 @@ public class CreateInfoProtoUtils {
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			float prospectiveCashPercentage, float prospectiveOilPercentage,
+			int prospectiveCashStolenFromStorage, int prospectiveOilStolenFromStorage,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
 			List<ResearchForUser> rfuList,
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList) {
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList,
+			float percentageToStealFromGenerator) {
 
 		FullUserProto defenderProto = createFullUserProtoFromUser(defender, plfu, clan);
 
@@ -362,22 +363,24 @@ public class CreateInfoProtoUtils {
 		String msg = defender.getPvpDefendingMessage();
 
 		return createPvpProto(userId, plfu, pu, userMonsters,
-				userMonsterIdToDropped, prospectiveCashPercentage,
-				prospectiveOilPercentage, defenderProto, msg, cmtd, msfu,
-				msfuMonsterIdDropped, boardObstacles, rfuList, sfuList);
+				userMonsterIdToDropped, prospectiveCashStolenFromStorage,
+				prospectiveOilStolenFromStorage, defenderProto, msg, cmtd, msfu,
+				msfuMonsterIdDropped, boardObstacles, rfuList, sfuList,
+				percentageToStealFromGenerator);
 	}
 
 	public PvpProto createPvpProto(String defenderId,
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			float prospectiveCashPercentage, float prospectiveOilPercentage,
+			int prospectiveCashStolenFromStorage, int prospectiveOilStolenFromStorage,
 			FullUserProto defender, String defenderMsg,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
 			List<ResearchForUser> rfuList,
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList) {
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList,
+			float percentageToStealFromGenerator) {
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 
 		Collection<PvpMonsterProto> defenderMonsters = createPvpMonsterProto(
@@ -385,8 +388,8 @@ public class CreateInfoProtoUtils {
 		ppb.addAllDefenderMonsters(defenderMonsters);
 
 		ppb.setDefender(defender);
-		ppb.setProspectiveCashPercentage(prospectiveCashPercentage);
-		ppb.setProspectiveOilPercentage(prospectiveOilPercentage);
+		ppb.setProspectiveCashStolenFromStorage(prospectiveCashStolenFromStorage);
+		ppb.setProspectiveOilStolenFromStorage(prospectiveOilStolenFromStorage);
 
 		UserPvpLeagueProto uplp = createUserPvpLeagueProto(defenderId, plfu,
 				pu, true);
@@ -431,6 +434,8 @@ public class CreateInfoProtoUtils {
 			}
 			ppb.addAllUserStructure(uspList);
 		}
+		
+		ppb.setPercentageToStealFromGenerator(percentageToStealFromGenerator);
 
 		return ppb.build();
 	}
@@ -524,8 +529,8 @@ public class CreateInfoProtoUtils {
 
 	//this is used to create fake users for PvpProtos
 	public PvpProto createFakePvpProto(String userId, String name,
-			int lvl, int elo, int prospectiveCashPercentage,
-			int prospectiveOilPercentage, List<MonsterForPvp> mfpList,
+			int lvl, int elo, int prospectiveCashStolenFromStorage,
+			int prospectiveOilStolenFromStorage, List<MonsterForPvp> mfpList,
 			List<Integer> monsterIdsDropped, boolean setElo) {
 
 		//create the fake user
@@ -544,8 +549,8 @@ public class CreateInfoProtoUtils {
 				monsterIdsDropped);
 		ppb.addAllDefenderMonsters(pmpList);
 
-		ppb.setProspectiveCashPercentage(prospectiveCashPercentage);
-		ppb.setProspectiveOilPercentage(prospectiveOilPercentage);
+		ppb.setProspectiveCashStolenFromStorage(prospectiveCashStolenFromStorage);
+		ppb.setProspectiveOilStolenFromStorage(prospectiveOilStolenFromStorage);
 
 		UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(userId, elo,
 				setElo);
@@ -560,14 +565,15 @@ public class CreateInfoProtoUtils {
 			Map<String, PvpUser> userIdToPvpUser,
 			Map<String, List<MonsterForUser>> userIdToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
-			Map<String, Float> userIdToCashReward,
-			Map<String, Float> userIdToOilReward,
+			Map<String, Integer> userIdToCashReward,
+			Map<String, Integer> userIdToOilReward,
 			Map<String, ClanMemberTeamDonation> userIdToCmtd,
 			Map<String, MonsterSnapshotForUser> userIdToMsfu,
 			Map<String, Integer> userIdToMsfuMonsterIdDropped,
 			Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles,
 			Map<String, List<ResearchForUser>> userIdToRfuList,
-			Map<String, List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser>> userIdToSfuList) {
+			Map<String, List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser>> userIdToSfuList,
+			Map<String, Float> userIdToPercentageStealFromGenerator) {
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
 		for (User u : queuedOpponents) {
@@ -584,9 +590,16 @@ public class CreateInfoProtoUtils {
 			}
 			List<MonsterForUser> userMonsters = userIdToUserMonsters
 					.get(userId);
-			float prospectiveCashWinnings = userIdToCashReward.get(userId);
-			float prospectiveOilWinnings = userIdToOilReward.get(userId);
-
+			int prospectiveCashWinnings = 0;
+			if(userIdToCashReward.containsKey(userId)) {
+				prospectiveCashWinnings = userIdToCashReward.get(userId);;
+			}
+			
+			int prospectiveOilWinnings = 0;
+			if(userIdToCashReward.containsKey(userId)) {
+				prospectiveOilWinnings = userIdToCashReward.get(userId);;
+			}
+			
 			Clan clan = null;
 			if (userIdToClan.containsKey(userId)) {
 				clan = userIdToClan.get(userId);
@@ -623,11 +636,17 @@ public class CreateInfoProtoUtils {
 			if (userIdToSfuList.containsKey(userId)) {
 				sfuList = userIdToSfuList.get(userId);
 			}
+			
+			float percentageToStealFromGenerator = 0;
+			if(userIdToPercentageStealFromGenerator.containsKey(userId)) {
+				percentageToStealFromGenerator = 
+						userIdToPercentageStealFromGenerator.get(userId);
+			}
 
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 					userMonsterIdToDropped, prospectiveCashWinnings,
 					prospectiveOilWinnings, cmtd, msfu, msfuMonsterIdDropped,
-					boardObstacles, rfuList, sfuList);
+					boardObstacles, rfuList, sfuList, percentageToStealFromGenerator);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
