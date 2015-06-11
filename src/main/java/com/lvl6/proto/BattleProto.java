@@ -161,22 +161,22 @@ public final class BattleProto {
         int index);
 
     /**
-     * <code>optional float prospectiveCashPercentage = 4;</code>
+     * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
      */
-    boolean hasProspectiveCashPercentage();
+    boolean hasProspectiveCashStolenFromStorage();
     /**
-     * <code>optional float prospectiveCashPercentage = 4;</code>
+     * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
      */
-    float getProspectiveCashPercentage();
+    int getProspectiveCashStolenFromStorage();
 
     /**
-     * <code>optional float prospectiveOilPercentage = 5;</code>
+     * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
      */
-    boolean hasProspectiveOilPercentage();
+    boolean hasProspectiveOilStolenFromStorage();
     /**
-     * <code>optional float prospectiveOilPercentage = 5;</code>
+     * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
      */
-    float getProspectiveOilPercentage();
+    int getProspectiveOilStolenFromStorage();
 
     /**
      * <code>optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueStats = 6;</code>
@@ -345,6 +345,15 @@ public final class BattleProto {
      */
     com.lvl6.proto.StructureProto.FullUserStructureProtoOrBuilder getUserStructureOrBuilder(
         int index);
+
+    /**
+     * <code>optional float percentageToStealFromGenerator = 13;</code>
+     */
+    boolean hasPercentageToStealFromGenerator();
+    /**
+     * <code>optional float percentageToStealFromGenerator = 13;</code>
+     */
+    float getPercentageToStealFromGenerator();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpProto}
@@ -419,14 +428,14 @@ public final class BattleProto {
               defenderMonsters_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpMonsterProto.PARSER, extensionRegistry));
               break;
             }
-            case 37: {
+            case 32: {
               bitField0_ |= 0x00000002;
-              prospectiveCashPercentage_ = input.readFloat();
+              prospectiveCashStolenFromStorage_ = input.readInt32();
               break;
             }
-            case 45: {
+            case 40: {
               bitField0_ |= 0x00000004;
-              prospectiveOilPercentage_ = input.readFloat();
+              prospectiveOilStolenFromStorage_ = input.readInt32();
               break;
             }
             case 50: {
@@ -488,6 +497,11 @@ public final class BattleProto {
                 mutable_bitField0_ |= 0x00000400;
               }
               userStructure_.add(input.readMessage(com.lvl6.proto.StructureProto.FullUserStructureProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 109: {
+              bitField0_ |= 0x00000080;
+              percentageToStealFromGenerator_ = input.readFloat();
               break;
             }
           }
@@ -618,34 +632,34 @@ public final class BattleProto {
       return defenderMonsters_.get(index);
     }
 
-    public static final int PROSPECTIVECASHPERCENTAGE_FIELD_NUMBER = 4;
-    private float prospectiveCashPercentage_;
+    public static final int PROSPECTIVECASHSTOLENFROMSTORAGE_FIELD_NUMBER = 4;
+    private int prospectiveCashStolenFromStorage_;
     /**
-     * <code>optional float prospectiveCashPercentage = 4;</code>
+     * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
      */
-    public boolean hasProspectiveCashPercentage() {
+    public boolean hasProspectiveCashStolenFromStorage() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional float prospectiveCashPercentage = 4;</code>
+     * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
      */
-    public float getProspectiveCashPercentage() {
-      return prospectiveCashPercentage_;
+    public int getProspectiveCashStolenFromStorage() {
+      return prospectiveCashStolenFromStorage_;
     }
 
-    public static final int PROSPECTIVEOILPERCENTAGE_FIELD_NUMBER = 5;
-    private float prospectiveOilPercentage_;
+    public static final int PROSPECTIVEOILSTOLENFROMSTORAGE_FIELD_NUMBER = 5;
+    private int prospectiveOilStolenFromStorage_;
     /**
-     * <code>optional float prospectiveOilPercentage = 5;</code>
+     * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
      */
-    public boolean hasProspectiveOilPercentage() {
+    public boolean hasProspectiveOilStolenFromStorage() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional float prospectiveOilPercentage = 5;</code>
+     * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
      */
-    public float getProspectiveOilPercentage() {
-      return prospectiveOilPercentage_;
+    public int getProspectiveOilStolenFromStorage() {
+      return prospectiveOilStolenFromStorage_;
     }
 
     public static final int PVPLEAGUESTATS_FIELD_NUMBER = 6;
@@ -899,11 +913,26 @@ public final class BattleProto {
       return userStructure_.get(index);
     }
 
+    public static final int PERCENTAGETOSTEALFROMGENERATOR_FIELD_NUMBER = 13;
+    private float percentageToStealFromGenerator_;
+    /**
+     * <code>optional float percentageToStealFromGenerator = 13;</code>
+     */
+    public boolean hasPercentageToStealFromGenerator() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional float percentageToStealFromGenerator = 13;</code>
+     */
+    public float getPercentageToStealFromGenerator() {
+      return percentageToStealFromGenerator_;
+    }
+
     private void initFields() {
       defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
       defenderMonsters_ = java.util.Collections.emptyList();
-      prospectiveCashPercentage_ = 0F;
-      prospectiveOilPercentage_ = 0F;
+      prospectiveCashStolenFromStorage_ = 0;
+      prospectiveOilStolenFromStorage_ = 0;
       pvpLeagueStats_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defenderMsg_ = "";
       cmtd_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
@@ -911,6 +940,7 @@ public final class BattleProto {
       userBoardObstacles_ = java.util.Collections.emptyList();
       userResearch_ = java.util.Collections.emptyList();
       userStructure_ = java.util.Collections.emptyList();
+      percentageToStealFromGenerator_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -932,10 +962,10 @@ public final class BattleProto {
         output.writeMessage(3, defenderMonsters_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeFloat(4, prospectiveCashPercentage_);
+        output.writeInt32(4, prospectiveCashStolenFromStorage_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeFloat(5, prospectiveOilPercentage_);
+        output.writeInt32(5, prospectiveOilStolenFromStorage_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(6, pvpLeagueStats_);
@@ -958,6 +988,9 @@ public final class BattleProto {
       for (int i = 0; i < userStructure_.size(); i++) {
         output.writeMessage(12, userStructure_.get(i));
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeFloat(13, percentageToStealFromGenerator_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -977,11 +1010,11 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, prospectiveCashPercentage_);
+          .computeInt32Size(4, prospectiveCashStolenFromStorage_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(5, prospectiveOilPercentage_);
+          .computeInt32Size(5, prospectiveOilStolenFromStorage_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1010,6 +1043,10 @@ public final class BattleProto {
       for (int i = 0; i < userStructure_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, userStructure_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(13, percentageToStealFromGenerator_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1147,9 +1184,9 @@ public final class BattleProto {
         } else {
           defenderMonstersBuilder_.clear();
         }
-        prospectiveCashPercentage_ = 0F;
+        prospectiveCashStolenFromStorage_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        prospectiveOilPercentage_ = 0F;
+        prospectiveOilStolenFromStorage_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         if (pvpLeagueStatsBuilder_ == null) {
           pvpLeagueStats_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
@@ -1185,6 +1222,8 @@ public final class BattleProto {
         } else {
           userStructureBuilder_.clear();
         }
+        percentageToStealFromGenerator_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -1233,11 +1272,11 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.prospectiveCashPercentage_ = prospectiveCashPercentage_;
+        result.prospectiveCashStolenFromStorage_ = prospectiveCashStolenFromStorage_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.prospectiveOilPercentage_ = prospectiveOilPercentage_;
+        result.prospectiveOilStolenFromStorage_ = prospectiveOilStolenFromStorage_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -1289,6 +1328,10 @@ public final class BattleProto {
         } else {
           result.userStructure_ = userStructureBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.percentageToStealFromGenerator_ = percentageToStealFromGenerator_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1334,11 +1377,11 @@ public final class BattleProto {
             }
           }
         }
-        if (other.hasProspectiveCashPercentage()) {
-          setProspectiveCashPercentage(other.getProspectiveCashPercentage());
+        if (other.hasProspectiveCashStolenFromStorage()) {
+          setProspectiveCashStolenFromStorage(other.getProspectiveCashStolenFromStorage());
         }
-        if (other.hasProspectiveOilPercentage()) {
-          setProspectiveOilPercentage(other.getProspectiveOilPercentage());
+        if (other.hasProspectiveOilStolenFromStorage()) {
+          setProspectiveOilStolenFromStorage(other.getProspectiveOilStolenFromStorage());
         }
         if (other.hasPvpLeagueStats()) {
           mergePvpLeagueStats(other.getPvpLeagueStats());
@@ -1431,6 +1474,9 @@ public final class BattleProto {
               userStructureBuilder_.addAllMessages(other.userStructure_);
             }
           }
+        }
+        if (other.hasPercentageToStealFromGenerator()) {
+          setPercentageToStealFromGenerator(other.getPercentageToStealFromGenerator());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1887,66 +1933,66 @@ public final class BattleProto {
         return defenderMonstersBuilder_;
       }
 
-      private float prospectiveCashPercentage_ ;
+      private int prospectiveCashStolenFromStorage_ ;
       /**
-       * <code>optional float prospectiveCashPercentage = 4;</code>
+       * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
        */
-      public boolean hasProspectiveCashPercentage() {
+      public boolean hasProspectiveCashStolenFromStorage() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional float prospectiveCashPercentage = 4;</code>
+       * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
        */
-      public float getProspectiveCashPercentage() {
-        return prospectiveCashPercentage_;
+      public int getProspectiveCashStolenFromStorage() {
+        return prospectiveCashStolenFromStorage_;
       }
       /**
-       * <code>optional float prospectiveCashPercentage = 4;</code>
+       * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
        */
-      public Builder setProspectiveCashPercentage(float value) {
+      public Builder setProspectiveCashStolenFromStorage(int value) {
         bitField0_ |= 0x00000004;
-        prospectiveCashPercentage_ = value;
+        prospectiveCashStolenFromStorage_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float prospectiveCashPercentage = 4;</code>
+       * <code>optional int32 prospectiveCashStolenFromStorage = 4;</code>
        */
-      public Builder clearProspectiveCashPercentage() {
+      public Builder clearProspectiveCashStolenFromStorage() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        prospectiveCashPercentage_ = 0F;
+        prospectiveCashStolenFromStorage_ = 0;
         onChanged();
         return this;
       }
 
-      private float prospectiveOilPercentage_ ;
+      private int prospectiveOilStolenFromStorage_ ;
       /**
-       * <code>optional float prospectiveOilPercentage = 5;</code>
+       * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
        */
-      public boolean hasProspectiveOilPercentage() {
+      public boolean hasProspectiveOilStolenFromStorage() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional float prospectiveOilPercentage = 5;</code>
+       * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
        */
-      public float getProspectiveOilPercentage() {
-        return prospectiveOilPercentage_;
+      public int getProspectiveOilStolenFromStorage() {
+        return prospectiveOilStolenFromStorage_;
       }
       /**
-       * <code>optional float prospectiveOilPercentage = 5;</code>
+       * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
        */
-      public Builder setProspectiveOilPercentage(float value) {
+      public Builder setProspectiveOilStolenFromStorage(int value) {
         bitField0_ |= 0x00000008;
-        prospectiveOilPercentage_ = value;
+        prospectiveOilStolenFromStorage_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float prospectiveOilPercentage = 5;</code>
+       * <code>optional int32 prospectiveOilStolenFromStorage = 5;</code>
        */
-      public Builder clearProspectiveOilPercentage() {
+      public Builder clearProspectiveOilStolenFromStorage() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        prospectiveOilPercentage_ = 0F;
+        prospectiveOilStolenFromStorage_ = 0;
         onChanged();
         return this;
       }
@@ -3162,6 +3208,38 @@ public final class BattleProto {
           userStructure_ = null;
         }
         return userStructureBuilder_;
+      }
+
+      private float percentageToStealFromGenerator_ ;
+      /**
+       * <code>optional float percentageToStealFromGenerator = 13;</code>
+       */
+      public boolean hasPercentageToStealFromGenerator() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional float percentageToStealFromGenerator = 13;</code>
+       */
+      public float getPercentageToStealFromGenerator() {
+        return percentageToStealFromGenerator_;
+      }
+      /**
+       * <code>optional float percentageToStealFromGenerator = 13;</code>
+       */
+      public Builder setPercentageToStealFromGenerator(float value) {
+        bitField0_ |= 0x00000800;
+        percentageToStealFromGenerator_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float percentageToStealFromGenerator = 13;</code>
+       */
+      public Builder clearPercentageToStealFromGenerator() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        percentageToStealFromGenerator_ = 0F;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpProto)
@@ -11540,58 +11618,59 @@ public final class BattleProto {
     java.lang.String[] descriptorData = {
       "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
       "tuff.proto\032\016Research.proto\032\017Structure.pr" +
-      "oto\032\nUser.proto\"\240\004\n\010PvpProto\022/\n\010defender" +
+      "oto\032\nUser.proto\"\326\004\n\010PvpProto\022/\n\010defender" +
       "\030\001 \001(\0132\035.com.lvl6.proto.FullUserProto\0229\n" +
       "\020defenderMonsters\030\003 \003(\0132\037.com.lvl6.proto" +
-      ".PvpMonsterProto\022!\n\031prospectiveCashPerce" +
-      "ntage\030\004 \001(\002\022 \n\030prospectiveOilPercentage\030" +
-      "\005 \001(\002\022:\n\016pvpLeagueStats\030\006 \001(\0132\".com.lvl6" +
-      ".proto.UserPvpLeagueProto\022\023\n\013defenderMsg" +
-      "\030\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.com.lvl6.proto.Cl",
-      "anMemberTeamDonationProto\022\030\n\020monsterIdDr" +
-      "opped\030\t \001(\005\022E\n\022userBoardObstacles\030\n \003(\0132" +
-      ").com.lvl6.proto.UserPvpBoardObstaclePro" +
-      "to\0227\n\014userResearch\030\013 \003(\0132!.com.lvl6.prot" +
-      "o.UserResearchProto\022=\n\ruserStructure\030\014 \003" +
-      "(\0132&.com.lvl6.proto.FullUserStructurePro" +
-      "to\"m\n\017PvpMonsterProto\022@\n\017defenderMonster" +
-      "\030\001 \001(\0132\'.com.lvl6.proto.MinimumUserMonst" +
-      "erProto\022\030\n\020monsterIdDropped\030\002 \001(\005\"\267\005\n\017Pv" +
-      "pHistoryProto\022\025\n\rbattleEndTime\030\t \001(\003\022/\n\010",
-      "attacker\030\001 \001(\0132\035.com.lvl6.proto.FullUser" +
-      "Proto\022:\n\021attackersMonsters\030\002 \003(\0132\037.com.l" +
-      "vl6.proto.PvpMonsterProto\022\023\n\013attackerWon" +
-      "\030\003 \001(\010\022\032\n\022defenderCashChange\030\004 \001(\021\022\031\n\021de" +
-      "fenderOilChange\030\005 \001(\021\022\026\n\016exactedRevenge\030" +
-      "\006 \001(\010\022\037\n\027prospectiveCashWinnings\030\007 \001(\005\022\036" +
-      "\n\026prospectiveOilWinnings\030\010 \001(\005\022:\n\016attack" +
-      "erBefore\030\n \001(\0132\".com.lvl6.proto.UserPvpL" +
-      "eagueProto\0229\n\rattackerAfter\030\013 \001(\0132\".com." +
-      "lvl6.proto.UserPvpLeagueProto\022:\n\016defende",
-      "rBefore\030\014 \001(\0132\".com.lvl6.proto.UserPvpLe" +
-      "agueProto\0229\n\rdefenderAfter\030\r \001(\0132\".com.l" +
-      "vl6.proto.UserPvpLeagueProto\022/\n\010defender" +
-      "\030\016 \001(\0132\035.com.lvl6.proto.FullUserProto\022\032\n" +
-      "\022attackerCashChange\030\017 \001(\005\022\031\n\021attackerOil" +
-      "Change\030\020 \001(\005\022\023\n\013clanAvenged\030\021 \001(\010\022\020\n\010rep" +
-      "layId\030\023 \001(\t\"^\n\016PvpLeagueProto\022\020\n\010leagueI" +
-      "d\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefix" +
-      "\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\237\002\n\022PvpClanA" +
-      "vengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\rus",
-      "ersAvenging\030\002 \003(\0132&.com.lvl6.proto.PvpUs" +
-      "erClanAvengeProto\0222\n\010attacker\030\003 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\0222\n\010defende" +
-      "r\030\004 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\025\n\rbattleEndTime\030\005 \001(\003\022\031\n\021avengeReques" +
-      "tTime\030\006 \001(\003\022\030\n\020defenderClanUuid\030\007 \001(\t\"h\n" +
-      "\026PvpUserClanAvengeProto\022\020\n\010userUuid\030\001 \001(" +
-      "\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 " +
-      "\001(\t\022\022\n\navengeTime\030\004 \001(\003\"`\n\021BattleReplayP" +
-      "roto\022\022\n\nreplayUuid\030\001 \001(\t\022\023\n\013creatorUuid\030",
-      "\002 \001(\t\022\016\n\006replay\030\003 \001(\014\022\022\n\ncreateTime\030\004 \001(" +
-      "\005*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014D" +
-      "EFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013Batt" +
-      "leProto"
+      ".PvpMonsterProto\022(\n prospectiveCashStole" +
+      "nFromStorage\030\004 \001(\005\022\'\n\037prospectiveOilStol" +
+      "enFromStorage\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006 " +
+      "\001(\0132\".com.lvl6.proto.UserPvpLeagueProto\022" +
+      "\023\n\013defenderMsg\030\007 \001(\t\0229\n\004cmtd\030\010 \001(\0132+.com",
+      ".lvl6.proto.ClanMemberTeamDonationProto\022" +
+      "\030\n\020monsterIdDropped\030\t \001(\005\022E\n\022userBoardOb" +
+      "stacles\030\n \003(\0132).com.lvl6.proto.UserPvpBo" +
+      "ardObstacleProto\0227\n\014userResearch\030\013 \003(\0132!" +
+      ".com.lvl6.proto.UserResearchProto\022=\n\ruse" +
+      "rStructure\030\014 \003(\0132&.com.lvl6.proto.FullUs" +
+      "erStructureProto\022&\n\036percentageToStealFro" +
+      "mGenerator\030\r \001(\002\"m\n\017PvpMonsterProto\022@\n\017d" +
+      "efenderMonster\030\001 \001(\0132\'.com.lvl6.proto.Mi" +
+      "nimumUserMonsterProto\022\030\n\020monsterIdDroppe",
+      "d\030\002 \001(\005\"\267\005\n\017PvpHistoryProto\022\025\n\rbattleEnd" +
+      "Time\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com.lvl6." +
+      "proto.FullUserProto\022:\n\021attackersMonsters" +
+      "\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterProto\022" +
+      "\023\n\013attackerWon\030\003 \001(\010\022\032\n\022defenderCashChan" +
+      "ge\030\004 \001(\021\022\031\n\021defenderOilChange\030\005 \001(\021\022\026\n\016e" +
+      "xactedRevenge\030\006 \001(\010\022\037\n\027prospectiveCashWi" +
+      "nnings\030\007 \001(\005\022\036\n\026prospectiveOilWinnings\030\010" +
+      " \001(\005\022:\n\016attackerBefore\030\n \001(\0132\".com.lvl6." +
+      "proto.UserPvpLeagueProto\0229\n\rattackerAfte",
+      "r\030\013 \001(\0132\".com.lvl6.proto.UserPvpLeaguePr" +
+      "oto\022:\n\016defenderBefore\030\014 \001(\0132\".com.lvl6.p" +
+      "roto.UserPvpLeagueProto\0229\n\rdefenderAfter" +
+      "\030\r \001(\0132\".com.lvl6.proto.UserPvpLeaguePro" +
+      "to\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.proto.Fu" +
+      "llUserProto\022\032\n\022attackerCashChange\030\017 \001(\005\022" +
+      "\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanAvenge" +
+      "d\030\021 \001(\010\022\020\n\010replayId\030\023 \001(\t\"^\n\016PvpLeaguePr" +
+      "oto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(" +
+      "\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013description\030\005 \001(",
+      "\t\"\237\002\n\022PvpClanAvengeProto\022\026\n\016clanAvengeUu" +
+      "id\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.com.lv" +
+      "l6.proto.PvpUserClanAvengeProto\0222\n\010attac" +
+      "ker\030\003 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\0222\n\010defender\030\004 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\025\n\rbattleEndTime\030\005 \001(\003\022\031" +
+      "\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderCla" +
+      "nUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020\n" +
+      "\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016cla" +
+      "nAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003\"`\n",
+      "\021BattleReplayProto\022\022\n\nreplayUuid\030\001 \001(\t\022\023" +
+      "\n\013creatorUuid\030\002 \001(\t\022\016\n\006replay\030\003 \001(\014\022\022\n\nc" +
+      "reateTime\030\004 \001(\005*E\n\014BattleResult\022\020\n\014ATTAC" +
+      "KER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_" +
+      "FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11614,7 +11693,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpProto_descriptor,
-        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashPercentage", "ProspectiveOilPercentage", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", "UserBoardObstacles", "UserResearch", "UserStructure", });
+        new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashStolenFromStorage", "ProspectiveOilStolenFromStorage", "PvpLeagueStats", "DefenderMsg", "Cmtd", "MonsterIdDropped", "UserBoardObstacles", "UserResearch", "UserStructure", "PercentageToStealFromGenerator", });
     internal_static_com_lvl6_proto_PvpMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_PvpMonsterProto_fieldAccessorTable = new
