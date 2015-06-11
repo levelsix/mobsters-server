@@ -19,8 +19,8 @@ public class PvpBattleOutcome {
 	private static double ELO_SCALE_DIVIDEND_MULTIPLE = 0.05D;
 	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;//changed from 0.4
 
-	private static double RESOURCE_GENERATOR_CONSTANT = 2.0; 
-	//amount stolen from generators relative to storage/status quo															
+	private static double RESOURCE_GENERATOR_CONSTANT = 1.67; 
+	//amount multiple stolen from generators relative to storage/status quo															
 	
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
@@ -262,7 +262,6 @@ public class PvpBattleOutcome {
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
-		percentageStealFromGenerator = (float)scale * (float)RESOURCE_GENERATOR_CONSTANT;
 		if (loggingOn) {
 			log.info(
 					"cashAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
@@ -270,6 +269,7 @@ public class PvpBattleOutcome {
 		}
 
 		double retVal = (winnerLoserCndVal - offset) * scale;
+		percentageStealFromGenerator = (float)(retVal * RESOURCE_GENERATOR_CONSTANT/defenderCash);
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal);
