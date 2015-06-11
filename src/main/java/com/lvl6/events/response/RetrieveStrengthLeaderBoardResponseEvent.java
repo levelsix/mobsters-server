@@ -9,8 +9,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEvent<RetrieveStrengthLeaderBoardResponseProto> {
 
-	private RetrieveStrengthLeaderBoardResponseProto retrieveStrengthLeaderBoardResponseProto;
-
 	public RetrieveStrengthLeaderBoardResponseEvent(String playerId) {
 		super(playerId);
 		eventType = EventProtocolResponse.S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT;
@@ -18,14 +16,14 @@ public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEven
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = retrieveStrengthLeaderBoardResponseProto.toByteString();
+		ByteString b = responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRetrieveStrengthLeaderBoardResponseProto(
 			RetrieveStrengthLeaderBoardResponseProto retrieveStrengthLeaderBoardResponseProto) {
-		this.retrieveStrengthLeaderBoardResponseProto = retrieveStrengthLeaderBoardResponseProto;
+		this.responseProto = retrieveStrengthLeaderBoardResponseProto;
 	}
 	
 	public int eventSize() {
