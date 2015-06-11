@@ -70,6 +70,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
@@ -5683,5 +5684,16 @@ public class CreateInfoProtoUtils {
 		return igppList;
 	}
 
+	public List<StructStolen> createStructStolenFromGeneratorsMap(Map<String, Long> generatorsMap) {
+		List<StructStolen> returnList = new ArrayList<StructStolen>();
+		for(String generatorId : generatorsMap.keySet()) {
+			StructStolen.Builder b = StructStolen.newBuilder();
+			b.setUserStructUuid(generatorId);
+			b.setTimeOfRetrieval(generatorsMap.get(generatorId));
+			returnList.add(b.build());
+		}
+		return returnList;
+	}
+	
 
 }

@@ -114,11 +114,6 @@ message EndPvpBattleRequestProto {
 	
 	repeated StructStolen structStolen = 13;
 	
-	message StructStolen {
-		optional string userStructUuid = 1;
-		optional int64 timeOfRetrieval = 2;
-	}
-	
 }
 
 message EndPvpBattleResponseProto {
@@ -150,6 +145,8 @@ message EndPvpBattleResponseProto {
 	optional UserPvpLeagueProto statsBefore = 12;
 	optional UserPvpLeagueProto statsAfter = 13;
 	
+	repeated StructStolen updatedUserStructs = 14;
+	
 	enum EndPvpBattleStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
@@ -158,6 +155,13 @@ message EndPvpBattleResponseProto {
 }
 
 ///atm, the necessary non event protos for pvp are in Battle.proto
+
+//------------------------------------------------------------------------------------------
+
+message StructStolen {
+		optional string userStructUuid = 1;
+		optional int64 timeOfRetrieval = 2;
+}
 
 //------------------------------------------------------------------------------------------
 

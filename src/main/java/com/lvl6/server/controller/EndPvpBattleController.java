@@ -265,6 +265,11 @@ public class EndPvpBattleController extends EventController {
 					log.info("attackedOtherHistory {}", attackedOtherHistory);
 					resBuilder.setBattleThatJustEnded(attackedOtherHistory);
 				}
+				Map<String, Long> generatorsMap = epba.getGeneratorsMap();
+				if(generatorsMap != null && !generatorsMap.isEmpty()) {
+					resBuilder.addAllUpdatedUserStructs(createInfoProtoUtils
+							.createStructStolenFromGeneratorsMap(generatorsMap));
+				}
 			}
 
 			//respond to the attacker
