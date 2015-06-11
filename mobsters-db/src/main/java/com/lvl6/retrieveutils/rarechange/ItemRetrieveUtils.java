@@ -122,8 +122,6 @@ public class ItemRetrieveUtils {
 		}
 		int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
 		int amount = rs.getInt(DBConstants.ITEM__AMOUNT);
-		float secretGiftChance = rs
-				.getFloat(DBConstants.ITEM__SECRET_GIFT_CHANCE);
 		boolean alwaysDisplayToUser = rs
 				.getBoolean(DBConstants.ITEM__ALWAYS_DISPLAY_TO_USER);
 		String actionGameType = rs.getString(DBConstants.ITEM__ACTION_GAME_TYPE);
@@ -151,7 +149,7 @@ public class ItemRetrieveUtils {
 
 
 		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId, amount,
-				secretGiftChance, alwaysDisplayToUser, actionGameType, quality);
+				alwaysDisplayToUser, actionGameType, quality);
 		return item;
 	}
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-	private static final long serialVersionUID = 7492830836189155716L;
+	private static final long serialVersionUID = 8650746165009271972L;
 
 	private int id;
 	private String name;
@@ -13,7 +13,6 @@ public class Item implements Serializable {
 	private String itemType;
 	private int staticDataId;
 	private int amount;
-	private float secretGiftChance;
 	private boolean alwaysDisplayToUser;
 	private String gameActionType;
 	private String quality;
@@ -27,7 +26,7 @@ public class Item implements Serializable {
 
 	public Item(int id, String name, String shortName, String imgName,
 			String itemType, int staticDataId, int amount,
-			float secretGiftChance, boolean alwaysDisplayToUser,
+			boolean alwaysDisplayToUser,
 			String gameActionType, String quality)
  	{
 		super();
@@ -38,7 +37,6 @@ public class Item implements Serializable {
 		this.itemType = itemType;
 		this.staticDataId = staticDataId;
 		this.amount = amount;
-		this.secretGiftChance = secretGiftChance;
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
 		this.gameActionType = gameActionType;
 		this.quality = quality;
@@ -106,14 +104,6 @@ public class Item implements Serializable {
 		this.amount = amount;
 	}
 
-	public float getSecretGiftChance() {
-		return secretGiftChance;
-	}
-
-	public void setSecretGiftChance(float secretGiftChance) {
-		this.secretGiftChance = secretGiftChance;
-	}
-
 	public float getNormalizedSecretGiftProbability() {
 		return normalizedSecretGiftProbability;
 	}
@@ -152,7 +142,6 @@ public class Item implements Serializable {
 		return "Item [id=" + id + ", name=" + name + ", shortName=" + shortName
 				+ ", imgName=" + imgName + ", itemType=" + itemType
 				+ ", staticDataId=" + staticDataId + ", amount=" + amount
-				+ ", secretGiftChance=" + secretGiftChance
 				+ ", alwaysDisplayToUser=" + alwaysDisplayToUser
 				+ ", gameActionType=" + gameActionType
 				+ ", normalizedSecretGiftProbability="
