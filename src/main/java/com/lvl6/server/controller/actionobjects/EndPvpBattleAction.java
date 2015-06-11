@@ -82,6 +82,7 @@ public class EndPvpBattleAction {
 	private int oilStolenFromGenerators;
 	private int cashStolenFromGenerators;
 	private TimeUtils timeUtils;
+	private StructureForUserDao sfuDao;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -104,7 +105,7 @@ public class EndPvpBattleAction {
 			TimeUtils timeUtil, InsertUtil insertUtil,
 			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
 			int oilStolenFromGenerators, int cashStolenFromGenerators,
-			TimeUtils timeUtils)
+			TimeUtils timeUtils, StructureForUserDao sfuDao)
 	{
 		super();
 		this.attackerId = attackerId;
@@ -141,6 +142,7 @@ public class EndPvpBattleAction {
 		this.oilStolenFromGenerators = oilStolenFromGenerators;
 		this.cashStolenFromGenerators = cashStolenFromGenerators;
 		this.timeUtils = timeUtils;
+		this.sfuDao = sfuDao;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -655,7 +657,6 @@ public class EndPvpBattleAction {
 	}
 	
 	public void updateDefenderUserStructs() {
-		StructureForUserDao sfuDao = AppContext.getApplicationContext().getBean(StructureForUserDao.class);
 		generatorsMap = new HashMap<String, Long>();
 		for(StructStolen ss : listOfGenerators) {
 			generatorsMap.put(ss.getUserStructUuid(), ss.getTimeOfRetrieval());
@@ -821,15 +822,15 @@ public class EndPvpBattleAction {
 		this.pbh = pbh;
 	}
 
-	public Map<String, BattleReplayForUser> getReplayIdToReplay()
-	{
-		if (null == replay)
-		{
-			return new HashMap<String, BattleReplayForUser>();
-		}
-		return Collections.singletonMap(brfu.getId(), brfu);
-
-	}
+//	public Map<String, BattleReplayForUser> getReplayIdToReplay()
+//	{
+//		if (null == replay)
+//		{
+//			return new HashMap<String, BattleReplayForUser>();
+//		}
+//		return Collections.singletonMap(brfu.getId(), brfu);
+//
+//	}
 
 	public Map<String, Long> getGeneratorsMap() {
 		return generatorsMap;

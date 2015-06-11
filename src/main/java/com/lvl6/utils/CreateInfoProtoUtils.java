@@ -693,8 +693,7 @@ public class CreateInfoProtoUtils {
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
-			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
-			Map<String, BattleReplayForUser> replayIdToReplay)
+			Map<String, Integer> attackerIdsToProspectiveOilWinnings)
 	{
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
@@ -737,8 +736,7 @@ public class CreateInfoProtoUtils {
 
 	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
-			List<PvpBattleHistory> historyList,
-			Map<String, BattleReplayForUser> replayIdToReplay) {
+			List<PvpBattleHistory> historyList) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		fupb.setUserUuid(attackerId);
