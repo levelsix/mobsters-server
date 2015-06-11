@@ -115,6 +115,6 @@ message UserSecretGiftProto {
 	optional string uisgUuid = 1;
 	optional string userUuid = 2;
 	optional int32 secsTillCollection = 3;
-	optional int32 rewardId = 4;
+	optional RewardProto reward = 4;
 	optional int64 createTime = 5;
 }

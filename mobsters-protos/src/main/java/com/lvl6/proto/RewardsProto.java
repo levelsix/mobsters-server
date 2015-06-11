@@ -6215,13 +6215,17 @@ public final class RewardsProto {
     int getSecsTillCollection();
 
     /**
-     * <code>optional int32 rewardId = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    boolean hasRewardId();
+    boolean hasReward();
     /**
-     * <code>optional int32 rewardId = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    int getRewardId();
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
 
     /**
      * <code>optional int64 createTime = 5;</code>
@@ -6305,9 +6309,17 @@ public final class RewardsProto {
               secsTillCollection_ = input.readInt32();
               break;
             }
-            case 32: {
+            case 34: {
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000008;
-              rewardId_ = input.readInt32();
               break;
             }
             case 40: {
@@ -6454,19 +6466,25 @@ public final class RewardsProto {
       return secsTillCollection_;
     }
 
-    public static final int REWARDID_FIELD_NUMBER = 4;
-    private int rewardId_;
+    public static final int REWARD_FIELD_NUMBER = 4;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional int32 rewardId = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    public boolean hasRewardId() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 rewardId = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    public int getRewardId() {
-      return rewardId_;
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+     */
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
     }
 
     public static final int CREATETIME_FIELD_NUMBER = 5;
@@ -6488,7 +6506,7 @@ public final class RewardsProto {
       uisgUuid_ = "";
       userUuid_ = "";
       secsTillCollection_ = 0;
-      rewardId_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -6514,7 +6532,7 @@ public final class RewardsProto {
         output.writeInt32(3, secsTillCollection_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, rewardId_);
+        output.writeMessage(4, reward_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, createTime_);
@@ -6542,7 +6560,7 @@ public final class RewardsProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, rewardId_);
+          .computeMessageSize(4, reward_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6661,6 +6679,7 @@ public final class RewardsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6675,7 +6694,11 @@ public final class RewardsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         secsTillCollection_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        rewardId_ = 0;
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
         createTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -6722,7 +6745,11 @@ public final class RewardsProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.rewardId_ = rewardId_;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
@@ -6756,8 +6783,8 @@ public final class RewardsProto {
         if (other.hasSecsTillCollection()) {
           setSecsTillCollection(other.getSecsTillCollection());
         }
-        if (other.hasRewardId()) {
-          setRewardId(other.getRewardId());
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
         }
         if (other.hasCreateTime()) {
           setCreateTime(other.getCreateTime());
@@ -6973,36 +7000,120 @@ public final class RewardsProto {
         return this;
       }
 
-      private int rewardId_ ;
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional int32 rewardId = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public boolean hasRewardId() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 rewardId = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public int getRewardId() {
-        return rewardId_;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 rewardId = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public Builder setRewardId(int value) {
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          reward_ = value;
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000008;
-        rewardId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 rewardId = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public Builder clearRewardId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        rewardId_ = 0;
-        onChanged();
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
       }
 
       private long createTime_ ;
@@ -7118,10 +7229,11 @@ public final class RewardsProto {
       "n\030\010 \001(\005\0225\n\ttangoGift\030\t \001(\0132\".com.lvl6.pr" +
       "oto.UserTangoGiftProto\"C\n\022UserTangoGiftP",
       "roto\022\024\n\014userGiftUuid\030\001 \001(\t\022\027\n\017gifterTang" +
-      "oName\030\002 \001(\t\"{\n\023UserSecretGiftProto\022\020\n\010ui" +
-      "sgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n\022secsTi" +
-      "llCollection\030\003 \001(\005\022\020\n\010rewardId\030\004 \001(\005\022\022\n\n" +
-      "createTime\030\005 \001(\003B\016B\014RewardsProto"
+      "oName\030\002 \001(\t\"\226\001\n\023UserSecretGiftProto\022\020\n\010u" +
+      "isgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n\022secsT" +
+      "illCollection\030\003 \001(\005\022+\n\006reward\030\004 \001(\0132\033.co" +
+      "m.lvl6.proto.RewardProto\022\022\n\ncreateTime\030\005" +
+      " \001(\003B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7174,7 +7286,7 @@ public final class RewardsProto {
     internal_static_com_lvl6_proto_UserSecretGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor,
-        new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "RewardId", "CreateTime", });
+        new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "Reward", "CreateTime", });
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();

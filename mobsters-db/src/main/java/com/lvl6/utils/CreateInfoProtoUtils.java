@@ -2357,21 +2357,6 @@ public class CreateInfoProtoUtils {
 		return gifs;
 	}
 
-	public UserSecretGiftProto createUserSecretGiftProto(
-			SecretGiftForUser secretGift) {
-		UserSecretGiftProto.Builder uisgpb = UserSecretGiftProto
-				.newBuilder();
-		uisgpb.setUisgUuid(secretGift.getId());
-		uisgpb.setUserUuid(secretGift.getUserId());
-		uisgpb.setSecsTillCollection(secretGift.getSecsUntilCollection());
-		uisgpb.setRewardId(secretGift.getRewardId());
-
-		Date createTime = secretGift.getCreateTime();
-		uisgpb.setCreateTime(createTime.getTime());
-
-		return uisgpb.build();
-	}
-
 	public List<ItemGemPriceProto> createItemGemPriceProto(
 			Map<Integer, MiniJobRefreshItem> idToMjriMap)
 	{
@@ -3810,6 +3795,23 @@ public class CreateInfoProtoUtils {
 	}
 
 		return gpb.build();
+	}
+
+	public UserSecretGiftProto createUserSecretGiftProto(
+			SecretGiftForUser secretGift) {
+		UserSecretGiftProto.Builder uisgpb = UserSecretGiftProto
+				.newBuilder();
+		uisgpb.setUisgUuid(secretGift.getId());
+		uisgpb.setUserUuid(secretGift.getUserId());
+		uisgpb.setSecsTillCollection(secretGift.getSecsUntilCollection());
+
+		Reward r = rewardRetrieveUtils.getRewardById(secretGift.getRewardId());
+		uisgpb.setReward(createRewardProto(r));
+
+		Date createTime = secretGift.getCreateTime();
+		uisgpb.setCreateTime(createTime.getTime());
+
+		return uisgpb.build();
 	}
 
 	/** Skill.proto ***************************************************/
