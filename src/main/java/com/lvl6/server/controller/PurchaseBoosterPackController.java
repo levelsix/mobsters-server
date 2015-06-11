@@ -237,7 +237,7 @@ public class PurchaseBoosterPackController extends EventController {
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
 
-				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
+//				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
 
 				//just assume user can only buy one booster pack at a time
 				writeToBoosterPackPurchaseHistory(userId, boosterPackId,
@@ -317,13 +317,13 @@ public class PurchaseBoosterPackController extends EventController {
 	//    return numPurchased;
 	//  }
 
-	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-			PurchaseBoosterPackAction pbpa) {
-		miscMethods.writeToUserCurrencyOneUser(userId, date,
-				pbpa.getAra().getCurrencyDeltas(), pbpa.getAra().getPreviousCurrencies(),
-				pbpa.getAra().getCurrentCurrencies(), pbpa.getAra().getReasons(),
-				pbpa.getAra().getDetails());
-	}
+//	private void writeToUserCurrencyHistory(String userId, Timestamp date,
+//			PurchaseBoosterPackAction pbpa) {
+//		miscMethods.writeToUserCurrencyOneUser(userId, date,
+//				pbpa.getAra().getCurrencyDeltas(), pbpa.getAra().getPreviousCurrencies(),
+//				pbpa.getAra().getCurrentCurrencies(), pbpa.getAra().getReasons(),
+//				pbpa.getAra().getDetails());
+//	}
 
 	private void writeToBoosterPackPurchaseHistory(String userId,
 			int boosterPackId, List<BoosterItem> itemsUserReceives,
