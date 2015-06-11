@@ -1,5 +1,8 @@
 package com.lvl6.retrieveutils.rarechange;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,62 +10,113 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomMenuConfigDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
+import com.lvl6.properties.DBConstants;
+import com.lvl6.utils.DBConnection;
 
 @Component
 @DependsOn("gameServer")
 public class CustomMenuRetrieveUtils {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(CustomMenuRetrieveUtils.class);
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
-	@Autowired
-	protected CustomMenuConfigDao customMenuDao;
+	private static Map<Integer, List<CustomMenuConfigPojo>> idsToCustomMenus;
 
-	private static Map<Integer, List<CustomMenuConfigPojo>> idsToCustomMenuConfigs;
+	private static final String TABLE_NAME = DBConstants.TABLE_CUSTOM_MENU_CONFIG;
 
-//	private static final String TABLE_NAME = DBConstants.TABLE_CUSTOM_MENU_CONFIG;
-
-	public Map<Integer, List<CustomMenuConfigPojo>> getIdsToCustomMenuConfigs() {
-		log.debug("retrieving all CustomMenu map");
-		if (null == idsToCustomMenuConfigs) {
-			setStaticIdsToCustomMenuConfigs();
+	public Map<Integer, List<CustomMenuConfigPojo>> getIdsToCustomMenus() {
+		log.debug("retrieving all filedownload map");
+		if (null == idsToCustomMenus) {
+			setStaticIdsToCustomMenus();
 		}
-		return idsToCustomMenuConfigs;
+		return idsToCustomMenus;
 	}
 
-	public List<CustomMenuConfigPojo> getCustomMenuConfigForId(int customMenuId) {
-		log.debug("retrieve CustomMenus for id={}", customMenuId);
-		if (null == idsToCustomMenuConfigs) {
-			setStaticIdsToCustomMenuConfigs();
+	public List<CustomMenuConfigPojo> getCustomMenuForId(int customMenuId) {
+		log.debug(String.format("retrieve skill data for skill=%s",
+				customMenuId));
+		if (null == idsToCustomMenus) {
+			setStaticIdsToCustomMenus();
 		}
-		return idsToCustomMenuConfigs.get(customMenuId);
+		return idsToCustomMenus.get(customMenuId);
 	}
 
-	private void setStaticIdsToCustomMenuConfigs() {
-		log.debug("setting static map of ids to CustomMenus");
+	private void setStaticIdsToCustomMenus() {
+		log.debug("setting static map of skillIds to skills");
 
-		Map<Integer, List<CustomMenuConfigPojo>> idsToCustomMenuConfigTemp = new HashMap<Integer, List<CustomMenuConfigPojo>>();
-		for (CustomMenuConfigPojo cmc : customMenuDao.findAll()) {
-			int id = cmc.getCustomMenuId();
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = null;
+		try {
+			if (conn != null) {
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-			if (!idsToCustomMenuConfigTemp.containsKey(id)) {
-				idsToCustomMenuConfigTemp.put(id, new ArrayList<CustomMenuConfigPojo>());
+				if (rs != null) {
+					try {
+						rs.last();
+						rs.beforeFirst();
+						Map<Integer, List<CustomMenuConfigPojo>> idsToCustomMenuTemp = new HashMap<Integer, List<CustomMenuConfigPojo>>();
+						//loop through each row and convert it into a java object
+						while (rs.next()) {
+							CustomMenuConfigPojo fd = convertRSRowToCustomMenu(rs);
+							if (fd == null) {
+								continue;
+							}
+
+							int customMenuId = fd.getCustomMenuId();
+							
+							List<CustomMenuConfigPojo> cms = idsToCustomMenuTemp.get(customMenuId);
+							
+							if (cms == null) {
+							    cms = new ArrayList<CustomMenuConfigPojo>();
+							    idsToCustomMenuTemp.put(customMenuId, cms);
+							}
+							
+							cms.add(fd);
+						}
+						idsToCustomMenus = idsToCustomMenuTemp;
+
+					} catch (SQLException e) {
+						log.error("problem with database call.", e);
+
+					}
+				}
 			}
-
-			List<CustomMenuConfigPojo> cms = idsToCustomMenuConfigTemp.get(id);
-			cms.add(cmc);
+		} catch (Exception e) {
+			log.error("skill retrieve db error.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
 		}
-		idsToCustomMenuConfigs = idsToCustomMenuConfigTemp;
 	}
 
 	public void reload() {
-		setStaticIdsToCustomMenuConfigs();
+		setStaticIdsToCustomMenus();
+	}
+
+	/*
+	 * assumes the resultset is apprpriately set up. traverses the row it's on.
+	 */
+	private CustomMenuConfigPojo convertRSRowToCustomMenu(ResultSet rs)
+			throws SQLException {
+		int id = rs.getInt(DBConstants.CUSTOM_MENU__ID);
+		int positionX = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_X);
+		int positionY = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Y);
+		int positionZ = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Z);
+        boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
+        String imgName = rs.getString(DBConstants.CUSTOM_MENU__IMAGE_NAME);
+
+        CustomMenuConfigPojo cmcp = new CustomMenuConfigPojo();
+        cmcp.setCustomMenuId(id);
+        cmcp.setPositionX(positionX);
+        cmcp.setPositionY(positionY);
+        cmcp.setPositionZ(positionZ);
+        cmcp.setIsJiggle(isJiggle);
+        cmcp.setImageName(imgName);
+        
+		return cmcp;
 	}
 
 }

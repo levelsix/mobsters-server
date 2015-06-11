@@ -20,28 +20,29 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
-import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesSchedule;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
-import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
+import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -49,9 +50,8 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -61,7 +61,6 @@ import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMoneyTreeAction;
 import com.lvl6.server.controller.actionobjects.InAppPurchaseMultiSpinAction;
@@ -69,19 +68,17 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.server.eventsender.ClanResponseEvent;
-import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-
+@DependsOn("gameServer")
 public class InAppPurchaseController extends EventController {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(InAppPurchaseController.class);
+    private static Logger log = LoggerFactory.getLogger(new Object() {
+    }.getClass().getEnclosingClass());
 
     private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
     private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
@@ -105,10 +102,7 @@ public class InAppPurchaseController extends EventController {
     protected UpdateUtil updateUtil;
 
     @Autowired
-    protected GiftRetrieveUtils giftRetrieveUtil;
-
-    @Autowired
-    protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
+    protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
 
     @Autowired
     protected UserRetrieveUtils2 userRetrieveUtil;
@@ -139,9 +133,6 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils;
-    
-    @Autowired
-    protected SalesScheduleRetrieveUtils salesScheduleRetrieveUtils;
 
     @Autowired
     protected MonsterStuffUtils monsterStuffUtils;
@@ -154,7 +145,7 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
-
+    
     @Autowired
     protected TimeUtils timeUtils;
 
@@ -163,13 +154,16 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtils;
-
+    
     @Autowired
     protected HistoryUtils historyUtils;
+    
+    @Autowired
+    protected SalesScheduleRetrieveUtils salesScheduleRetrieveUtils;
 
 
     public InAppPurchaseController() {
-
+        numAllocatedThreads = 2;
     }
 
     @Override
@@ -191,7 +185,7 @@ public class InAppPurchaseController extends EventController {
      */
     // @SuppressWarnings("deprecation")
     @Override
-    public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+    protected void processRequestEvent(RequestEvent event) throws Exception {
         InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
                 .getInAppPurchaseRequestProto();
 
@@ -226,20 +220,18 @@ public class InAppPurchaseController extends EventController {
 
         //UUID checks
         if (invalidUuids) {
-            resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+            resBuilder.setStatus(InAppPurchaseStatus.FAIL);
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     userId);
             resEvent.setTag(event.getTag());
-            resEvent.setResponseProto(resBuilder.build());
-            responses.normalResponseEvents().add(resEvent);
+            resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+            server.writeEvent(resEvent);
             return;
         }
 
-        boolean gotLock = false;
+        // Lock this player's ID
+        locker.lockPlayer(userUuid, this.getClass().getSimpleName());
         try {
-        	// Lock this player's ID
-        	gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
-
             User user = userRetrieveUtil.getUserById(userId);
 
             JSONObject response;
@@ -250,7 +242,7 @@ public class InAppPurchaseController extends EventController {
             URL url = new URL(PRODUCTION_URL);
 
             log.info("Sending purchase request to: {}", url.toString());
-
+            
             URLConnection conn = null;
             OutputStreamWriter wr = null;
             BufferedReader rd = null;
@@ -271,15 +263,15 @@ public class InAppPurchaseController extends EventController {
                             conn.getInputStream()));
             	} catch (IOException io) {
             		log.error("failed to get response. iteration "+i, io);
-
+            		
             		if (wr != null) {
                 		wr.close();
             		}
-
+            		
             		if (rd != null) {
             			rd.close();
             		}
-
+            		
             		if (i == 2) {
             			throw new Exception("failed to contact apple server. do something with the receipt." + jsonReceipt);
             		}
@@ -315,12 +307,9 @@ public class InAppPurchaseController extends EventController {
             }
 
             JSONObject receiptFromApple = null;
-            List<InAppPurchaseSalesAction> iapsaContainer =
-            		new ArrayList<InAppPurchaseSalesAction>();
             if (response.getInt(IAPValues.STATUS) == 0) {
                 receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-                writeChangesToDb(userId, resBuilder, user, receiptFromApple, uuid,
-                		iapsaContainer);
+                writeChangesToDb(userId, resBuilder, user, receiptFromApple, uuid);
             } else {
                 log.error(
                         "problem with in-app purchase that client sent, with receipt {}",
@@ -331,16 +320,17 @@ public class InAppPurchaseController extends EventController {
             rd.close();
 
             if (!resBuilder.hasStatus()) {
-                resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+                resBuilder.setStatus(InAppPurchaseStatus.FAIL);
             }
 
             InAppPurchaseResponseProto resProto = resBuilder.build();
+            log.info("res proto: " + resProto);
 
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     senderProto.getUserUuid());
             resEvent.setTag(event.getTag());
-            resEvent.setResponseProto(resProto);
-            responses.normalResponseEvents().add(resEvent);
+            resEvent.setInAppPurchaseResponseProto(resProto);
+            server.writeEvent(resEvent);
 
             /*if (Globals.KABAM_ENABLED()) {
 			if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
@@ -355,12 +345,7 @@ public class InAppPurchaseController extends EventController {
                     .createUpdateClientUserResponseEventAndUpdateLeaderboard(
                             user, null, null);
             resEventUpdate.setTag(event.getTag());
-            responses.normalResponseEvents().add(resEventUpdate);
-
-            if (!iapsaContainer.isEmpty()) {
-            	InAppPurchaseSalesAction iapsa = iapsaContainer.get(0);
-            	sendClanGiftIfExists(responses, userId, iapsa);
-            }
+            server.writeEvent(resEventUpdate);
 
             //      //in case user has a mentor, check if user completed mentor's quest
             //      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
@@ -371,29 +356,25 @@ public class InAppPurchaseController extends EventController {
             log.error("exception in InAppPurchaseController processEvent", e);
             //don't let the client hang
             try {
-                resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+                resBuilder.setStatus(InAppPurchaseStatus.FAIL);
                 InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                         userId);
                 resEvent.setTag(event.getTag());
-                resEvent.setResponseProto(resBuilder.build());
-                responses.normalResponseEvents().add(resEvent);
+                resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+                server.writeEvent(resEvent);
             } catch (Exception e2) {
                 log.error("exception2 in InAppPurchaseController processEvent",
                         e);
             }
         } finally {
-        	if (gotLock) {
-        		// Unlock this player
-        		locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
-        	}
+            // Unlock this player
+            locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
         }
     }
 
     private void writeChangesToDb(String userId,
             InAppPurchaseResponseProto.Builder resBuilder, User user,
-            JSONObject receiptFromApple, String uuid,
-            List<InAppPurchaseSalesAction> iapsaContainer)
-    {
+            JSONObject receiptFromApple, String uuid) {
         try {
             String packageName = receiptFromApple
                     .getString(IAPValues.PRODUCT_ID);
@@ -410,7 +391,7 @@ public class InAppPurchaseController extends EventController {
             boolean isSalesPack = false;
             boolean isGachaMultiSpin = false;
             boolean isBuyingGems = false;
-
+            
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
                 iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
@@ -424,7 +405,7 @@ public class InAppPurchaseController extends EventController {
                 isSalesPack = true;
                 iapsa = new InAppPurchaseSalesAction(userId,
                         user, receiptFromApple, now, uuid, iapHistoryRetrieveUtil,
-                        giftRetrieveUtil, giftRewardRetrieveUtils,
+                        clanGiftRewardsRetrieveUtils,
                         itemForUserRetrieveUtil, monsterStuffUtils, insertUtil, updateUtil,
                         createInfoProtoUtils, miscMethods, salesPackageRetrieveUtils,
                         salesItemRetrieveUtils, monsterRetrieveUtils, monsterLevelInfoRetrieveUtils,
@@ -432,8 +413,6 @@ public class InAppPurchaseController extends EventController {
                         userClanRetrieveUtil, userRetrieveUtil, salesScheduleRetrieveUtils, timeUtils);
 
                 iapsa.execute(resBuilder);
-
-                iapsaContainer.add(iapsa);
             }
             else if(IAPValues.packageIsGachaMultiSpin(packageName)) {
             	isGachaMultiSpin = true;
@@ -449,7 +428,7 @@ public class InAppPurchaseController extends EventController {
                 iapa.execute(resBuilder);
             }
 
-            if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS)) {
+            if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS)) {
                 resBuilder.setPackageName(packageName);
                 resBuilder.setPackagePrice(realLifeCashCost);
 
@@ -457,14 +436,16 @@ public class InAppPurchaseController extends EventController {
                         "successful in-app purchase from user {} for package {}",
                         userId, packageName);
 
-                log.info("isSalesPack: {}", isSalesPack);
+                log.info("isSalesPack: ", isSalesPack);
 				Timestamp date = new Timestamp(now.getTime());
 
 				if(isMoneyTree) {
 					writeToUserCurrencyHistory(userId, date, null, iapmta, null);
 				}
 				else if(isSalesPack) {
+					log.info("got here1");
 					setNewAndPurchasedSalesPackage(resBuilder, iapsa, iapsa.getUser());
+					log.info("got here2");
 					createRewardProto(resBuilder, iapsa, null);
 					writeToUserCurrencyHistory(userId, date, null, null, iapsa);
 				}
@@ -504,7 +485,7 @@ public class InAppPurchaseController extends EventController {
 //        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
         Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-        Map<Integer, SalesScheduleConfigPojo> listOfActiveSalesPackages = salesScheduleRetrieveUtils.getActiveSalesPackagesIdsToSalesSchedule(new Date(), timeUtils);
+        Map<Integer, SalesSchedule> listOfActiveSalesPackages = salesScheduleRetrieveUtils.getActiveSalesPackagesIdsToSalesSchedule(new Date(), timeUtils);
         
         
         if(listOfActiveSalesPackages.isEmpty()) {
@@ -619,24 +600,25 @@ public class InAppPurchaseController extends EventController {
     	UserRewardProto urp = null;
     	if(iapsa != null) {
     		Collection<ItemForUser> nuOrUpdatedItems = iapsa.getAra().getNuOrUpdatedItems();
+    		log.info("LIST OF ITEMS: {}", nuOrUpdatedItems);
     		Collection<FullUserMonsterProto> fumpList = iapsa.getAra().getNuOrUpdatedMonsters();
     		int gemsGained = iapsa.getAra().getGemsGained();
     		int cashGained = iapsa.getAra().getCashGained();
     		int oilGained = iapsa.getAra().getOilGained();
     		int gachaCreditsGained = iapsa.getAra().getGachaCreditsGained();
 
-    		AwardRewardAction ara = iapsa.getAra();
-    		//NOTE: clan gifts are sent later in a ReceivedGiftResponseEvent
-
-//    		Collection<UserGiftProto> clanGifts = null;
-//    		if( null != ara && ara.existsClanGift() ) {
-//    			clanGifts = ara.getClanGift().getUserGiftsList();
-//    		}
+    		//TODO: protofy the rewards
+    		UserClanGiftProto ucgp = null;
+    		if(iapsa.getAra().getAcga() != null) {
+    			ClanGiftForUser cgfu = iapsa.getAra().getAcga().getGiftersClanGift();
+    			MinimumUserProto mup = iapsa.getAra().getAcga().getMup();
+    			ucgp = createInfoProtoUtils.createUserClanGiftProto(cgfu, mup);
+    		}
 
     		urp = createInfoProtoUtils.createUserRewardProto(
     				nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
-    				gachaCreditsGained, null); //clanGifts);
-    		//        log.info("proto for reward: {}", urp);
+    				gachaCreditsGained, ucgp);
+    		//        log.info("proto for reward: " + urp);
     	}
     	else if(iapmsa != null) {
     		ItemForUser ifu = new ItemForUser(); //mixing old objects with new...so gross
@@ -679,25 +661,6 @@ public class InAppPurchaseController extends EventController {
 
     }
 
-    private void sendClanGiftIfExists(
-			ToClientEvents responses,
-			String userId,
-			InAppPurchaseSalesAction iapsa) {
-		try {
-			AwardRewardAction ara = iapsa.getAra();
-			if (null != ara && ara.existsClanGift()) {
-				ReceivedGiftResponseProto rgrp = ara.getClanGift();
-				log.info("rgrp={}", rgrp);
-				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setResponseProto(rgrp);
-				String clanId = iapsa.getUser().getClanId();
-
-				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
-			}
-		} catch (Exception e) {
-			log.error("failed to send ClanGift notification", e);
-		}
-	}
 
     /*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
 	log.info("Posting to Kabam");

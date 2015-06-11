@@ -11,8 +11,6 @@ public class SalesPackage implements Serializable {
     private String productId;
     private int price;
     private String uuid;
-    private Date timeStart;
-    private Date timeEnd;
     private int succId;
     private int priority;
     private int customMenuId;
@@ -27,7 +25,7 @@ public class SalesPackage implements Serializable {
 	}
 
 	public SalesPackage(int id, String productId, String name, int price, String uuid,
-			Date timeStart, Date timeEnd, int succId, int priority, int customMenuId,
+			int succId, int priority, int customMenuId,
 			String animatingIcon, String slamIcon, String titleColor) {
 		super();
 		this.id = id;
@@ -35,8 +33,6 @@ public class SalesPackage implements Serializable {
 		this.name = name;
 		this.price = price;
 		this.uuid = uuid;
-		this.timeStart = timeStart;
-		this.timeEnd = timeEnd;
 		this.succId = succId;
 		this.priority = priority;
 		this.customMenuId = customMenuId;
@@ -85,25 +81,13 @@ public class SalesPackage implements Serializable {
 	@Override
 	public String toString() {
 		return "SalesPackage [id=" + id + ", productId=" + productId
-				+ ", price=" + price + ", uuid=" + uuid + ", timeStart="
-				+ timeStart + ", timeEnd=" + timeEnd + ", succId=" + succId
+				+ ", price=" + price + ", uuid=" + uuid + ", succId=" + succId
 				+ ", priority=" + priority + ", customMenuId=" + customMenuId
 				+ ", name=" + name + ", animatingIcon=" + animatingIcon
 				+ ", slamIcon=" + slamIcon + ", titleColor=" + titleColor + "]";
 	}
 
-	public Date getTimeStart() {
-		return timeStart;
-	}
-	public void setTimeStart(Date timeStart) {
-		this.timeStart = timeStart;
-	}
-	public Date getTimeEnd() {
-		return timeEnd;
-	}
-	public void setTimeEnd(Date timeEnd) {
-		this.timeEnd = timeEnd;
-	}
+
 	public int getSuccId() {
 		return succId;
 	}

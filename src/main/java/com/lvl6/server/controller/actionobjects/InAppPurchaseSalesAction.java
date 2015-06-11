@@ -1,6 +1,7 @@
 
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,9 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
@@ -20,16 +18,15 @@ import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesSchedule;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
+import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -38,51 +35,50 @@ import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component@Scope("prototype")public class InAppPurchaseSalesAction {
+public class InAppPurchaseSalesAction {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(InAppPurchaseSalesAction.class);
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private String userId;
 	private User user;
 	private JSONObject receiptFromApple;
 	private Date now;
 	private String uuid;
-	@Autowired protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil; 
-	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
-	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
-	@Autowired protected InsertUtil insertUtil;
-	@Autowired protected UpdateUtil updateUtil;
-	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private MonsterStuffUtils monsterStuffUtils;
+	protected InsertUtil insertUtil;
+	protected UpdateUtil updateUtil;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 	private MiscMethods miscMethods;
-	@Autowired protected SalesPackageRetrieveUtils salesPackageRetrieveUtils; 
-	@Autowired protected SalesItemRetrieveUtils salesItemRetrieveUtils; 
-	@Autowired protected MonsterRetrieveUtils monsterRetrieveUtils; 
-	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	private SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	private SalesItemRetrieveUtils salesItemRetrieveUtils;
+	private MonsterRetrieveUtils monsterRetrieveUtils;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private SalesPackage salesPackage;
-	@Autowired protected InAppPurchaseUtils inAppPurchaseUtils; 
-	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	private InAppPurchaseUtils inAppPurchaseUtils;
+	private RewardRetrieveUtils rewardRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	private UserRetrieveUtils2 userRetrieveUtil;
 	private SalesScheduleRetrieveUtils salesScheduleRetrieveUtils;
 	private TimeUtils timeUtils;
 
 	public InAppPurchaseSalesAction() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public InAppPurchaseSalesAction(String userId, User user,
 			JSONObject receiptFromApple, Date now,
 			String uuid, IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
-			GiftRetrieveUtils giftRetrieveUtil,
-			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
+			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
@@ -105,8 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.now = now;
 		this.uuid = uuid;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
-		this.giftRetrieveUtil = giftRetrieveUtil;
-		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.insertUtil = insertUtil;
@@ -140,7 +135,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		resBuilder.setStatus(InAppPurchaseStatus.FAIL);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -160,7 +155,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(ResponseStatus.SUCCESS);
+		resBuilder.setStatus(InAppPurchaseStatus.SUCCESS);
 
 	}
 
@@ -168,7 +163,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		try {
 			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
 		} catch (JSONException e) {
-			log.error("receiptFromApple.getString() error", e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		List<SalesItem> salesItemList = salesItemRetrieveUtils.getSalesItemsForSalesPackageId(salesPackage.getId());
@@ -205,7 +201,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
 		if(duplicateReceipt) {
-			resBuilder.setStatus(ResponseStatus.FAIL_DUPLICATE_RECEIPT);
+			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
 		}
 
 		isBuilderPack = false;
@@ -249,7 +245,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	//when start and end time both null, it's for starter/builder packs, they dont expire
 	public boolean saleIsWithinTimeConstraints() {
-		Map<Integer, SalesScheduleConfigPojo> listOfSalesSchedule = salesScheduleRetrieveUtils.
+		Map<Integer, SalesSchedule> listOfSalesSchedule = salesScheduleRetrieveUtils.
 				getActiveSalesPackagesIdsToSalesSchedule(now, timeUtils);
 		if(!listOfSalesSchedule.containsKey(salesPackage.getId())) {
 			log.error("sales pack with id {} is not currently active..", salesPackage.getId());
@@ -296,8 +292,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package",
 				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
-				monsterLevelInfoRetrieveUtils, giftRetrieveUtil,
-				giftRewardRetrieveUtils,
+				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
 				rewardRetrieveUtils, userClanRetrieveUtils,
 				createInfoProtoUtils, awardReasonDetail);
 
@@ -365,6 +360,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		return userId;
 	}
 
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -373,12 +372,37 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.user = user;
 	}
 
+	public JSONObject getReceiptFromApple() {
+		return receiptFromApple;
+	}
+
+	public void setReceiptFromApple(JSONObject receiptFromApple) {
+		this.receiptFromApple = receiptFromApple;
+	}
+
 	public Date getNow() {
 		return now;
 	}
 
 	public void setNow(Date now) {
 		this.now = now;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil() {
+		return iapHistoryRetrieveUtil;
+	}
+
+	public void setIapHistoryRetrieveUtil(
+			IAPHistoryRetrieveUtils iapHistoryRetrieveUtil) {
+		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 	}
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
@@ -390,8 +414,70 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
+	public MonsterStuffUtils getMonsterStuffUtils() {
+		return monsterStuffUtils;
+	}
+
+	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
+		this.monsterStuffUtils = monsterStuffUtils;
+	}
+
+	public InsertUtil getInsertUtil() {
+		return insertUtil;
+	}
+
+	public void setInsertUtil(InsertUtil insertUtil) {
+		this.insertUtil = insertUtil;
+	}
+
+	public UpdateUtil getUpdateUtil() {
+		return updateUtil;
+	}
+
 	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
+	}
+
+	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
+		return salesPackageRetrieveUtils;
+	}
+
+	public void setSalesPackageRetrieveUtils(
+			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
+		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
+	}
+
+	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
+		return salesItemRetrieveUtils;
+	}
+
+	public void setSalesItemRetrieveUtils(
+			SalesItemRetrieveUtils salesItemRetrieveUtils) {
+		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
+	}
+
+	public MonsterRetrieveUtils getMonsterRetrieveUtils() {
+		return monsterRetrieveUtils;
+	}
+
+	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
+		this.monsterRetrieveUtils = monsterRetrieveUtils;
 	}
 
 	public SalesPackage getSalesPackage() {
@@ -406,24 +492,89 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		return salesPackagePrice;
 	}
 
+	public void setSalesPackagePrice(double salesPackagePrice) {
+		this.salesPackagePrice = salesPackagePrice;
+	}
+
 	public int getGemChange() {
 		return gemChange;
+	}
+
+	public void setGemChange(int gemChange) {
+		this.gemChange = gemChange;
+	}
+
+	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
+		return monsterLevelInfoRetrieveUtils;
+	}
+
+	public void setMonsterLevelInfoRetrieveUtils(
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	public boolean isSalesJumpTwoTiers() {
 		return salesJumpTwoTiers;
 	}
 
+	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
+		this.salesJumpTwoTiers = salesJumpTwoTiers;
+	}
+
 	public AwardRewardAction getAra() {
 		return ara;
+	}
+
+	public void setAra(AwardRewardAction ara) {
+		this.ara = ara;
 	}
 
 	public boolean isStarterPack() {
 		return isStarterPack;
 	}
 
+	public void setStarterPack(boolean isStarterPack) {
+		this.isStarterPack = isStarterPack;
+	}
+
 	public boolean isBuilderPack() {
 		return isBuilderPack;
+	}
+
+	public void setBuilderPack(boolean isBuilderPack) {
+		this.isBuilderPack = isBuilderPack;
+	}
+
+	public static Logger getLog() {
+		return log;
+	}
+
+	public static void setLog(Logger log) {
+		InAppPurchaseSalesAction.log = log;
+	}
+
+	public InAppPurchaseUtils getInAppPurchaseUtils() {
+		return inAppPurchaseUtils;
+	}
+
+	public void setInAppPurchaseUtils(InAppPurchaseUtils inAppPurchaseUtils) {
+		this.inAppPurchaseUtils = inAppPurchaseUtils;
+	}
+
+	public RewardRetrieveUtils getRewardRetrieveUtils() {
+		return rewardRetrieveUtils;
+	}
+
+	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
+		this.rewardRetrieveUtils = rewardRetrieveUtils;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil() {
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
 	public List<Reward> getListOfRewards() {
@@ -438,6 +589,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		return packageName;
 	}
 
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
 	public int getSalesValue() {
 		return salesValue;
 	}
@@ -445,5 +600,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	public void setSalesValue(int salesValue) {
 		this.salesValue = salesValue;
 	}
+
+
 
 }

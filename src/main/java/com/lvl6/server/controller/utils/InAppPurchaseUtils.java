@@ -15,11 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.CustomMenu;
 import com.lvl6.info.Reward;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
 import com.lvl6.proto.SalesProto.SalesItemProto;
@@ -143,10 +143,10 @@ public class InAppPurchaseUtils {
 			}
 		}
 
-		List<CustomMenuConfigPojo> cms = customMenuRetrieveUtils.getCustomMenuForId(sp.getCustomMenuId());
+		List<CustomMenu> cms = customMenuRetrieveUtils.getCustomMenuForId(sp.getCustomMenuId());
 
 		if (cms != null && !cms.isEmpty()) {
-		    for (CustomMenuConfigPojo cm : cms) {
+		    for (CustomMenu cm : cms) {
 		        b.addCmp(createInfoProtoUtils.createCustomMenuProto(cm));
 		    }
 		}

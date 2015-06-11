@@ -24,7 +24,8 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class SalesPackageRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(SalesPackageRetrieveUtils.class);
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private static Map<Integer, SalesPackage> salesPackageIdsToSalesPackages;
 
@@ -129,9 +130,6 @@ public class SalesPackageRetrieveUtils {
 		String productId = rs.getString(DBConstants.SALES_PACKAGE__PRODUCT_ID);
 		int price = rs.getInt(DBConstants.SALES_PACKAGE__PRICE);
 		String uuid = rs.getString(DBConstants.SALES_PACKAGE__UUID);
-		Date timeStart = null;
-		Date timeEnd = null;
-		Timestamp ts = null;
 
 		int succId = rs.getInt(DBConstants.SALES_PACKAGE__SUCC_ID);
 		int customMenuId = rs.getInt(DBConstants.SALES_PACKAGE__CUSTOM_MENU_ID);

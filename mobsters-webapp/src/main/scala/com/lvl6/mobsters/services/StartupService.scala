@@ -9,19 +9,16 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.Await
 import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -130,6 +127,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
 import com.lvl6.server.Locker
@@ -161,13 +159,13 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
 import scala.util.Success
 import scala.util.Failure
 import com.lvl6.server.eventsender.AsyncResponder
 import com.lvl6.spring.AppContext
 import scala.beans.BeanProperty
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo
 
 case class StartupData(
   resBuilder: Builder,
@@ -248,6 +246,8 @@ class StartupService extends LazyLogging {
   @Autowired var salesDisplayItemRetrieveUtil: SalesDisplayItemRetrieveUtils = null
   @Autowired var salesItemRetrieveUtil: SalesItemRetrieveUtils = null
   @Autowired var salesPackageRetrieveUtil: SalesPackageRetrieveUtils = null
+  @Autowired var  salesScheduleRetrieveUtil : SalesScheduleRetrieveUtils = null
+
 
   @Autowired var startupStuffRetrieveUtil: StartupStuffRetrieveUtils = null
 
@@ -1152,7 +1152,7 @@ class StartupService extends LazyLogging {
               sp,
               salesItemRetrieveUtil,
               salesDisplayItemRetrieveUtil,
-              customMenuRetrieveUtil);
+              customMenuRetrieveUtil, null, null);
             resBuilder.addSalesPackages(spProto);
           }
         }
@@ -1171,7 +1171,7 @@ class StartupService extends LazyLogging {
               sp,
               salesItemRetrieveUtil,
               salesDisplayItemRetrieveUtil,
-              customMenuRetrieveUtil);
+              customMenuRetrieveUtil, null, null);
             resBuilder.addSalesPackages(spProto);
           }
         }
@@ -1197,7 +1197,7 @@ class StartupService extends LazyLogging {
               sp,
               salesItemRetrieveUtil,
               salesDisplayItemRetrieveUtil,
-              customMenuRetrieveUtil);
+              customMenuRetrieveUtil, null, null);
             resBuilder.addSalesPackages(spProto);
           }
         }
@@ -1294,20 +1294,21 @@ class StartupService extends LazyLogging {
     }
   }
 
-  def setSalesForUser(resBuilder: Builder, user: User): Future[Unit] = {
-    Future {
-      timed("StartupService.setSalesForUser") {
+  def setSalesForUser(resBuilder:Builder ,  user:User):Future[Unit]= {
+    Future{
+      timed("StartupService.setSalesForUser"){
         var userSalesValue = user.getSalesValue()
         val salesLastPurchaseTime = user.getLastPurchaseTime();
         val now = new Date
-        logger.info("setting regular sales for user");
-        if (salesLastPurchaseTime == null) {
+                logger.info("setting regular sales for user");
+        if(salesLastPurchaseTime == null) {
           val ts = new Timestamp(now.getTime());
           updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
-        } else {
-          if (userSalesValue == 0) {
-            logger.info("checking if longer than 5 days");
-            if (Math.abs(timeUtils.numDaysDifference(salesLastPurchaseTime, now)) > 5) {
+        }
+        else {
+          if(userSalesValue == 0) {
+                        logger.info("checking if longer than 5 days");
+            if(Math.abs(timeUtils.numDaysDifference(salesLastPurchaseTime, now)) > 5) {
               logger.info("updating user sales value, been longer than 5 days");
               updateUtil.updateUserSalesValue(user.getId(), 1, null);
               userSalesValue = 1;
@@ -1319,7 +1320,9 @@ class StartupService extends LazyLogging {
         val salesProtoList = new ArrayList[SalesPackageProto]()
         val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(user.getId(), null);
         val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
-
+        val mapOfActiveSales = salesScheduleRetrieveUtil.getActiveSalesPackagesIdsToSalesSchedule(now, timeUtils)
+        logger.info(s"active sales:$mapOfActiveSales");
+        
         var hasHighRoller = false
         itemIdToUserItems.keySet().foreach { itemId =>
           //TODO: Make a constant out of this number for builder's id
@@ -1327,29 +1330,30 @@ class StartupService extends LazyLogging {
             hasHighRoller = true
           }
         }
-        if (!hasHighRoller && userSalesValue > 0) {
-          idsToSalesPackages.values().foreach { sp: SalesPackage =>
-            if (sp.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
+        if(!hasHighRoller && userSalesValue > 0) {
+          idsToSalesPackages.values().foreach { sp:SalesPackage =>
+            if(sp.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
               val spProto = inAppPurchaseUtil.createSalesPackageProto(
-                sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
-                customMenuRetrieveUtil);
+                  sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
+                  customMenuRetrieveUtil, null, null);
               salesProtoList.add(spProto)
             }
           }
         }
-
-        idsToSalesPackages.values().foreach { sp: SalesPackage =>
-          if (!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
-            && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
-            && !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK)) { //make sure it's not starter pack
-            if (sp.getPrice() == newMinPrice && timeUtils.isFirstEarlierThanSecond(sp.getTimeStart(), now) &&
-              timeUtils.isFirstEarlierThanSecond(now, sp.getTimeEnd())) {
-              val spProto = inAppPurchaseUtil.createSalesPackageProto(
-                sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
-                customMenuRetrieveUtil);
-              if (!salesProtoList.contains(spProto)) {
-                salesProtoList.add(spProto)
-              }
+        
+        mapOfActiveSales.values().foreach { ss:SalesScheduleConfigPojo =>
+          val sp = idsToSalesPackages.get(ss.getSalesPackageId())
+          if(!sp.getProductId().equalsIgnoreCase(IAPValues.STARTERPACK)
+              && !sp.getProductId().equalsIgnoreCase(IAPValues.BUILDERPACK)
+              && !sp.getProductId().equalsIgnoreCase(IAPValues.STARTERBUILDERPACK))
+          { //make sure it's not starter pack
+            if(sp.getPrice() == newMinPrice) {
+                val spProto = inAppPurchaseUtil.createSalesPackageProto(
+                  sp, salesItemRetrieveUtil, salesDisplayItemRetrieveUtil,
+                  customMenuRetrieveUtil, ss.getTimeStart, ss.getTimeEnd);
+                if(!salesProtoList.contains(spProto)) {
+                  salesProtoList.add(spProto)  
+                }
             }
           }
         }

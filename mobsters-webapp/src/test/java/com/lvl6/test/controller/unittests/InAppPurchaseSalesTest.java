@@ -83,28 +83,28 @@ public class InAppPurchaseSalesTest {
 
 	}
 
-	@Test
-	public void testSaleIsWithinTimeConstraints() {
-		SalesPackage sp = new SalesPackage();
-		sp.setTimeStart(new Date(new Date().getTime()-1000));
-		sp.setTimeEnd(new Date(new Date().getTime()-500));
-
-		iapa.setSalesPackage(sp);
-		iapa.setNow(new Date());
-
-		assertFalse(iapa.saleIsWithinTimeConstraints());
-
-		sp.setTimeEnd(new Date(new Date().getTime()+100));
-		assertTrue(iapa.saleIsWithinTimeConstraints());
-
-		sp.setTimeStart(new Date(new Date().getTime()+50));
-		assertFalse(iapa.saleIsWithinTimeConstraints());
-
-		sp.setTimeStart(null);
-		sp.setTimeEnd(null);
-
-		assertTrue(iapa.saleIsWithinTimeConstraints());
-	}
+//	@Test
+//	public void testSaleIsWithinTimeConstraints() {
+//		SalesPackage sp = new SalesPackage();
+//		sp.setTimeStart(new Date(new Date().getTime()-1000));
+//		sp.setTimeEnd(new Date(new Date().getTime()-500));
+//
+//		iapa.setSalesPackage(sp);
+//		iapa.setNow(new Date());
+//
+//		assertFalse(iapa.saleIsWithinTimeConstraints());
+//
+//		sp.setTimeEnd(new Date(new Date().getTime()+100));
+//		assertTrue(iapa.saleIsWithinTimeConstraints());
+//
+//		sp.setTimeStart(new Date(new Date().getTime()+50));
+//		assertFalse(iapa.saleIsWithinTimeConstraints());
+//
+//		sp.setTimeStart(null);
+//		sp.setTimeEnd(null);
+//
+//		assertTrue(iapa.saleIsWithinTimeConstraints());
+//	}
 
 	@Test
 	public void testUpdateUserSalesValueAndLastPurchaseTime() {
