@@ -20,19 +20,17 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
-import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.StructStolen;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -45,6 +43,7 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
@@ -123,7 +122,7 @@ public class EndPvpBattleController extends EventController {
 	protected TimeUtils timeUtils;
 	
 	@Autowired
-	protected StructureForUserDao sfuDao;
+	protected StructureForUserDao2 sfuDao;
 	
 
 	public EndPvpBattleController() {
