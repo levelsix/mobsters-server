@@ -1371,6 +1371,7 @@ class StartupService extends LazyLogging{
         val itemIdToUserItems = itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(user.getId(), null);
         val idsToSalesPackages = salesPackageRetrieveUtil.getSalesPackageIdsToSalesPackages()
         val mapOfActiveSales = salesScheduleRetrieveUtil.getActiveSalesPackagesIdsToSalesSchedule(now, timeUtils)
+        logger.info(s"active sales:$mapOfActiveSales");
         
         var hasHighRoller = false
         itemIdToUserItems.keySet().foreach { itemId =>
