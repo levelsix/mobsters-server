@@ -279,7 +279,8 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
 				rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
 				rumta.getAllButRetrieverUserIdToUserResearch(),
-				userIdsToSfuList);
+				userIdsToSfuList,
+				rumta.getPercentageStolenFromGenerators());
 
 		//not every user will have pvp board obstacles
 		//		assertNotNull(rumta.getAllButRetrieverUserIdToPvpBoardObstacles());

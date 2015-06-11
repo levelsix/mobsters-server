@@ -114,8 +114,8 @@ public class RetrieveUserMonsterTeamAction {
 	private Map<String, Map<String, Integer>> allButRetrieverUserIdToUserMonsterIdToDroppedId;
 	private Map<String, User> userIdToUser;
 	private Map<String, Clan> userIdToClan;
-	private Map<String, Float> allButRetrieverUserIdToCashLost;
-	private Map<String, Float> allButRetrieverUserIdToOilLost;
+	private Map<String, Integer> allButRetrieverUserIdToCashLost;
+	private Map<String, Integer> allButRetrieverUserIdToOilLost;
 
 	private Map<String, ClanMemberTeamDonation> allButRetrieverUserIdToCmtd;
 	private Map<String, MonsterSnapshotForUser> allButRetrieverUserIdToMsfu;
@@ -125,6 +125,7 @@ public class RetrieveUserMonsterTeamAction {
 
 	private List<String> allUsersIdsExceptRetriever;
 	private List<User> allUsersExceptRetriever;
+	private Map<String, Float> percentageStolenFromGenerators;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
@@ -192,8 +193,9 @@ public class RetrieveUserMonsterTeamAction {
 		userIdToUser = sup.getUserIdsToUsers();
 		userIdToClan = sup.getUserIdsToClans(userIdsExceptRetriever);
 
-		allButRetrieverUserIdToCashLost = new HashMap<String, Float>();
-		allButRetrieverUserIdToOilLost = new HashMap<String, Float>();
+		allButRetrieverUserIdToCashLost = new HashMap<String, Integer>();
+		allButRetrieverUserIdToOilLost = new HashMap<String, Integer>();
+		percentageStolenFromGenerators = new HashMap<String, Float>();
 		log.info("calculating the PvpBattleOutcomes");
 		int retrieverElo = this.retrieverPu.getElo();
 		User retrieveUser = userRetrieveUtil.getUserById(retrieverUserId);
@@ -210,9 +212,11 @@ public class RetrieveUserMonsterTeamAction {
 					serverToggleRetrieveUtil);
 
 			allButRetrieverUserIdToCashLost.put(userId,
-					potentialResult.getProspectiveCashPercentage());
+					potentialResult.getUnsignedCashAttackerWins());
 			allButRetrieverUserIdToOilLost.put(userId,
-					potentialResult.getProspectiveOilPercentage());
+					potentialResult.getUnsignedOilAttackerWins());
+			percentageStolenFromGenerators.put(userId,
+					potentialResult.getPercentageStealFromGenerator());
 		}
 
 		//get the team monster donation solicitations by all clans
@@ -530,11 +534,11 @@ public class RetrieveUserMonsterTeamAction {
 		return allButRetrieverUserIdToUserMonsterIdToDroppedId;
 	}
 
-	public Map<String, Float> getAllButRetrieverUserIdToCashLost() {
+	public Map<String, Integer> getAllButRetrieverUserIdToCashLost() {
 		return allButRetrieverUserIdToCashLost;
 	}
 
-	public Map<String, Float> getAllButRetrieverUserIdToOilLost() {
+	public Map<String, Integer> getAllButRetrieverUserIdToOilLost() {
 		return allButRetrieverUserIdToOilLost;
 	}
 
@@ -562,4 +566,16 @@ public class RetrieveUserMonsterTeamAction {
 		return userIdToUser;
 	}
 
+	public Map<String, Float> getPercentageStolenFromGenerators() {
+		return percentageStolenFromGenerators;
+	}
+
+	public void setPercentageStolenFromGenerators(
+			Map<String, Float> percentageStolenFromGenerators) {
+		this.percentageStolenFromGenerators = percentageStolenFromGenerators;
+	}
+
+
+
+	
 }

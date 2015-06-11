@@ -190,7 +190,8 @@ public class RetrieveUserMonsterTeamController extends EventController {
 								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
 								rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
 								rumta.getAllButRetrieverUserIdToUserResearch(),
-								userIdsToSfuList);
+								userIdsToSfuList,
+								rumta.getPercentageStolenFromGenerators());
 				
 				log.info("ppList={}", ppList);
 				resBuilder.addAllUserMonsterTeam(ppList);

@@ -340,7 +340,8 @@ public class QueueUpController extends EventController {
 								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
 								rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
 								rumta.getAllButRetrieverUserIdToUserResearch(),
-								userIdsToSfuList);
+								userIdsToSfuList,
+								rumta.getPercentageStolenFromGenerators());
 
 				log.info("ppList={}", ppList);
 				//user should see real people before fake ones

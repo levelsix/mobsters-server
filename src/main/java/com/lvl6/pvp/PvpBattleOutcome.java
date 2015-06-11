@@ -64,8 +64,7 @@ public class PvpBattleOutcome {
 	private double meanForCnd;
 	private double standardDeviationForCnd;
 	private double lowerElo;
-	private float prospectiveCashPercentage;
-	private float prospectiveOilPercentage;
+	private float percentageStealFromGenerator;
 
 	private void setLoggingBoolean() {
 		loggingOn = serverToggleRetrieveUtils
@@ -263,7 +262,7 @@ public class PvpBattleOutcome {
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
-		prospectiveCashPercentage = (float)scale * (float)RESOURCE_GENERATOR_CONSTANT;
+		percentageStealFromGenerator = (float)scale * (float)RESOURCE_GENERATOR_CONSTANT;
 		if (loggingOn) {
 			log.info(
 					"cashAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
@@ -327,7 +326,7 @@ public class PvpBattleOutcome {
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
-		prospectiveOilPercentage = (float)scale * (float)RESOURCE_GENERATOR_CONSTANT;
+		percentageStealFromGenerator = (float)RESOURCE_GENERATOR_CONSTANT;
 
 		if (loggingOn) {
 			log.info(
@@ -361,21 +360,15 @@ public class PvpBattleOutcome {
 				+ ", lowerElo=" + lowerElo + "]";
 	}
 
-	public float getProspectiveCashPercentage() {
-		return prospectiveCashPercentage;
+	public float getPercentageStealFromGenerator() {
+		return percentageStealFromGenerator;
 	}
 
-	public void setProspectiveCashPercentage(float prospectiveCashPercentage) {
-		this.prospectiveCashPercentage = prospectiveCashPercentage;
+	public void setPercentageStealFromGenerator(float percentageStealFromGenerator) {
+		this.percentageStealFromGenerator = percentageStealFromGenerator;
 	}
 
-	public float getProspectiveOilPercentage() {
-		return prospectiveOilPercentage;
-	}
 
-	public void setProspectiveOilPercentage(float prospectiveOilPercentage) {
-		this.prospectiveOilPercentage = prospectiveOilPercentage;
-	}
 	
 	
 
