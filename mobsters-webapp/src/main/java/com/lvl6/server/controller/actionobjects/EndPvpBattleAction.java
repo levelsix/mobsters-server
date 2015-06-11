@@ -195,6 +195,8 @@ public class EndPvpBattleAction {
 
 	private BattleReplayForUser brfu;
 	private PvpBattleHistory pbh;
+	
+	private Map<String, Long> generatorsMap;
 
 	private Map<String, Map<String, Integer>> currencyDeltasMap;
 	private Map<String, Map<String, Integer>> prevCurrenciesMap;
@@ -655,7 +657,7 @@ public class EndPvpBattleAction {
 	
 	public void updateDefenderUserStructs() {
 		StructureForUserDao sfuDao = AppContext.getApplicationContext().getBean(StructureForUserDao.class);
-		Map<String, Long> generatorsMap = new HashMap<String, Long>();
+		generatorsMap = new HashMap<String, Long>();
 		for(StructStolen ss : listOfGenerators) {
 			generatorsMap.put(ss.getUserStructUuid(), ss.getTimeOfRetrieval());
 		}
@@ -674,6 +676,9 @@ public class EndPvpBattleAction {
 			if(timeUtils.isFirstEarlierThanSecond(dbLastCollectTimeDate, clientCollectTimeDate)) {
 				sfu.setLastRetrieved(new Timestamp(clientCollectTimeDate.getTime()));
 				updateList.add(sfu);
+			}
+			else {
+				generatorsMap.put(generatorsId, dbLastCollectTimeDate.getTime());
 			}
 		}
 		if(!updateList.isEmpty()) {
@@ -826,4 +831,14 @@ public class EndPvpBattleAction {
 		return Collections.singletonMap(brfu.getId(), brfu);
 
 	}
+
+	public Map<String, Long> getGeneratorsMap() {
+		return generatorsMap;
+	}
+
+	public void setGeneratorsMap(Map<String, Long> generatorsMap) {
+		this.generatorsMap = generatorsMap;
+	}
+	
+	
 }
