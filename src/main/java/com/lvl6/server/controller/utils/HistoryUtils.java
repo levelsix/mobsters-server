@@ -84,7 +84,6 @@ public class HistoryUtils {
 		}
 	}
 	
-	
 	public void insertUserCurrencyHistoryForGacha(String userId, Date now, int currChange,
 			int currBeforeChange, int currAfterChange, String reason, String detail,
 			UserCurrencyHistoryDao uchDao, String resourceType) {
@@ -99,6 +98,24 @@ public class HistoryUtils {
 		uch.setReasonForChange(reason);
 		uch.setDetails(detail);
 		uchDao.insert(uch);
+	}
+	
+	public UserCurrencyHistory createUserCurrencyHistory(String userId, Date now,
+			String resourceType, int currChange,
+			int currBeforeChange, int currAfterChange, String reason, String detail)
+	{
+		UserCurrencyHistory uch = new UserCurrencyHistory();
+		uch.setId(randomUUID());
+		uch.setUserId(userId);
+		uch.setDate(new Timestamp(now.getTime()));
+		uch.setResourceType(resourceType);
+		uch.setCurrencyChange(currChange);
+		uch.setCurrencyBeforeChange(currBeforeChange);
+		uch.setCurrencyAfterChange(currAfterChange);
+		uch.setReasonForChange(reason);
+		uch.setDetails(detail);
+
+		return uch;
 	}
 	
 	public PvpBattleHistory createPvpBattleHistory(String attackerId, String defenderId, Date clientDateTime,

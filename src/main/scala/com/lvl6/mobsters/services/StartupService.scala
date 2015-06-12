@@ -9,14 +9,19 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
+
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
+import scala.concurrent.Await
 import scala.concurrent.Future
+import scala.concurrent.duration.DurationInt
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -110,6 +115,7 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2
 import com.lvl6.retrieveutils.UserRetrieveUtils2
+import com.lvl6.retrieveutils.daos.PvpBattleHistoryDao2
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils
@@ -141,23 +147,22 @@ import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction
 import com.lvl6.server.controller.actionobjects.StartUpResource
 import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
+import com.lvl6.server.controller.utils.HistoryUtils
 import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
 import com.lvl6.server.controller.utils.SecretGiftUtils
 import com.lvl6.server.controller.utils.TimeUtils
+import com.lvl6.server.eventsender.PreDBFacebookEvent
+import com.lvl6.server.eventsender.PreDBResponseEvent
+import com.lvl6.server.eventsender.ToClientEvents
 import com.lvl6.server.metrics.Metrics.timed
 import com.lvl6.utils.CreateInfoProtoUtils
 import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import javax.annotation.Resource
-import scala.concurrent.Await
-import scala.concurrent._
-import scala.concurrent.duration._
-import com.lvl6.server.eventsender.PreDBResponseEvent
-import com.lvl6.server.eventsender.ToClientEvents
-import com.lvl6.server.eventsender.PreDBFacebookEvent
 
 case class StartupData(
   resBuilder: Builder,
@@ -254,6 +259,9 @@ class StartupService extends LazyLogging {
   @Autowired var miscMethods: MiscMethods = null
   @Autowired var locker: Locker = null
   @Autowired var leaderBoard: LeaderBoardImpl = null
+  @Autowired var historyUtils: HistoryUtils = null
+
+  @Autowired var pbhDao: PvpBattleHistoryDao2 = null
 
   @Autowired var globals: Globals = null
   @Resource(name = "globalChat") var chatMessages: IList[GroupChatMessageProto] = null
@@ -556,7 +564,9 @@ class StartupService extends LazyLogging {
           createInfoProtoUtils,
           serverToggleRetrieveUtil,
           monsterLevelInfoRetrieveUtil,
-          battleReplayForUserRetrieveUtil);
+          battleReplayForUserRetrieveUtil,
+          historyUtils,
+          pbhDao);
         spbha.setUp(fillMe);
 
         //CLAN DATA

@@ -655,7 +655,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createGotAttackedPvpHistoryProto(
-			User attacker, Clan c, PvpBattleHistory info,
+			User attacker, Clan c, 
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
@@ -687,7 +688,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
-			List<PvpBattleHistory> historyList,
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> historyList,
 			Map<String, User> attackerIdsToAttackers,
 			Map<String, Clan> attackerIdsToClans,
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
@@ -698,7 +699,7 @@ public class CreateInfoProtoUtils {
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 
-		for (PvpBattleHistory history : historyList) {
+		for (com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory history : historyList) {
 			String attackerId = history.getAttackerId();
 
 			User attacker = attackerIdsToAttackers.get(attackerId);
@@ -736,13 +737,13 @@ public class CreateInfoProtoUtils {
 
 	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
-			List<PvpBattleHistory> historyList) {
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> historyList) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		fupb.setUserUuid(attackerId);
 		FullUserProto fup = fupb.build();
 
-		for (PvpBattleHistory pbh : historyList) {
+		for (com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory pbh : historyList) {
 			//no fake users are displayed, but check in case
 			String defenderId = pbh.getDefenderId();
 			if (null == defenderId || defenderId.isEmpty()) {
@@ -769,7 +770,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
-			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info,
+			FullUserProto fup, FullUserProto defenderFup, 
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory info,
 			String replayId) //BattleReplayForUser brfu)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
@@ -792,15 +794,15 @@ public class CreateInfoProtoUtils {
 	}
 
 	private void modifyPvpHistoryProto(Builder phpb,
-			PvpBattleHistory info) {
-		phpb.setAttackerWon(info.isAttackerWon());
+			com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory info) {
+		phpb.setAttackerWon(info.getAttackerWon());
 
 		int defenderCashChange = info.getDefenderCashChange();
 		phpb.setDefenderCashChange(defenderCashChange);
 		int defenderOilChange = info.getDefenderOilChange();
 		phpb.setDefenderOilChange(defenderOilChange);
 
-		phpb.setExactedRevenge(info.isExactedRevenge());
+		phpb.setExactedRevenge(info.getExactedRevenge());
 
 		Date endDate = info.getBattleEndTime();
 		//endDate should not be null, it's the primary key
@@ -829,7 +831,7 @@ public class CreateInfoProtoUtils {
 		int attackerOilChange = info.getAttackerOilChange();
 		phpb.setAttackerOilChange(attackerOilChange);
 
-		phpb.setClanAvenged(info.isClanAvenged());
+		phpb.setClanAvenged(info.getClanAvenged());
 	}
 
 	public PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
