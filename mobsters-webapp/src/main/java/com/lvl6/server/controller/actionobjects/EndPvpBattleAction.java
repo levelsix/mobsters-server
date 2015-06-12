@@ -13,10 +13,11 @@ import org.slf4j.LoggerFactory;
 import com.google.protobuf.ByteString;
 import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.PvpBattleForUser;
-import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
@@ -34,6 +35,7 @@ import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -80,8 +82,9 @@ public class EndPvpBattleAction {
 	private List<StructStolen> listOfGenerators;
 	private int oilStolenFromGenerators;
 	private int cashStolenFromGenerators;
-	private TimeUtils timeUtils;
 	private StructureForUserDao2 sfuDao;
+	private HistoryUtils historyUtils;
+	private PvpBattleHistoryDao pbhDao;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -104,7 +107,8 @@ public class EndPvpBattleAction {
 			TimeUtils timeUtil, InsertUtil insertUtil,
 			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
 			int oilStolenFromGenerators, int cashStolenFromGenerators,
-			TimeUtils timeUtils, StructureForUserDao2 sfuDao)
+			StructureForUserDao2 sfuDao, HistoryUtils historyUtils,
+			PvpBattleHistoryDao pbhDao)
 	{
 		super();
 		this.attackerId = attackerId;
@@ -140,8 +144,9 @@ public class EndPvpBattleAction {
 		this.listOfGenerators = listOfGenerators;
 		this.oilStolenFromGenerators = oilStolenFromGenerators;
 		this.cashStolenFromGenerators = cashStolenFromGenerators;
-		this.timeUtils = timeUtils;
 		this.sfuDao = sfuDao;
+		this.historyUtils = historyUtils;
+		this.pbhDao = pbhDao;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -320,12 +325,8 @@ public class EndPvpBattleAction {
 	}
 
 	private void processCancellation() {
-
 		cancellationSetup();
-		createHistory();
-
-		int numInserted = insertUtil.insertIntoPvpBattleHistory(pbh);
-		log.info("num inserted into history={}", numInserted);
+		insertIntoPvpBattleHistory();
 	}
 
 	private void cancellationSetup() {
@@ -372,48 +373,21 @@ public class EndPvpBattleAction {
 		defenderStorageOilChange = 0;
 	}
 
-	private void createHistory()
-	{
-		pbh = new PvpBattleHistory();
-		pbh.setAttackerId(attackerId);
-		pbh.setDefenderId(defenderId);
-		pbh.setBattleEndTime(clientDateTime);
-		pbh.setBattleStartTime(pvpBattleInfo.getBattleStartTime());
-
-		pbh.setAttackerEloChange(attackerEloChange);
-		pbh.setAttackerEloBefore(attackerEloBefore);
-		pbh.setAttackerEloAfter(attackerEloAfter);
-
-		pbh.setDefenderEloChange(defenderEloChange);
-		pbh.setDefenderEloBefore(defenderEloBefore);
-		pbh.setDefenderEloAfter(defenderEloBefore);
-
-		pbh.setAttackerPrevLeague(attackerPrevLeague);
-		pbh.setAttackerCurLeague(attackerCurLeague);
-		pbh.setDefenderPrevLeague(defenderPrevLeague);
-		pbh.setDefenderCurLeague(defenderCurLeague);
-
-		pbh.setAttackerPrevRank(attackerPrevRank);
-		pbh.setAttackerCurRank(attackerCurRank);
-		pbh.setDefenderPrevRank(defenderPrevRank);
-		pbh.setDefenderCurRank(defenderCurRank);
-
-		pbh.setAttackerCashChange(attackerStorageCashChange);
-		pbh.setDefenderCashChange(defenderStorageCashChange);
-		pbh.setAttackerOilChange(attackerStorageOilChange);
-		pbh.setDefenderOilChange(defenderStorageOilChange);
-
-		pbh.setCancelled(cancelled);
-		pbh.setExactedRevenge(false);
-
-		pbh.setPvpDmgMultiplier(nuPvpDmgMultiplier);
-		pbh.setClanAvenged(false);
-		
-		pbh.setAttackerWon(attackerWon);
-		if (null != brfu)
-		{
-			pbh.setReplayId( brfu.getId() );
+	private void insertIntoPvpBattleHistory() {
+		String replayId = null;
+		if (null != brfu) {
+			replayId = brfu.getId();
 		}
+		pbh = historyUtils.createPvpBattleHistory(attackerId, defenderId, 
+				clientDateTime, pvpBattleInfo.getBattleStartTime(), attackerEloChange, 
+				attackerEloBefore, attackerEloAfter, defenderEloChange, defenderEloBefore, 
+				defenderEloAfter, attackerPrevLeague, attackerCurLeague, defenderPrevLeague, 
+				defenderCurLeague, attackerPrevRank, attackerCurRank, defenderPrevRank, 
+				defenderCurRank, attackerStorageCashChange, attackerStorageOilChange, 
+				defenderStorageCashChange, defenderStorageOilChange, cashStolenFromStorage, 
+				cashStolenFromGenerators, oilStolenFromStorage, oilStolenFromGenerators,
+				cancelled, false, nuPvpDmgMultiplier, false, attackerWon, replayId);
+		pbhDao.insert(pbh);
 	}
 
 	private void processOutcome() {
@@ -428,10 +402,8 @@ public class EndPvpBattleAction {
 
 		createReplay();
 		int numInserted = insertUtil.insertBattleReplayForUser(brfu);
-		createHistory();
-		numInserted = insertUtil.insertIntoPvpBattleHistory(pbh);
-		log.info("num inserted into history={}", numInserted);
-
+		insertIntoPvpBattleHistory();
+		log.info("num inserted into battle replay history={}", numInserted);
 	}
 
 	private void getAttackerDefenderEloChanges() {
@@ -673,7 +645,7 @@ public class EndPvpBattleAction {
 			Date clientCollectTimeDate = new Date(clientCollectTime);
 			Timestamp dbLastCollectTime = sfu.getLastRetrieved();
 			Date dbLastCollectTimeDate = new Date(dbLastCollectTime.getTime());
-			if(timeUtils.isFirstEarlierThanSecond(dbLastCollectTimeDate, clientCollectTimeDate)) {
+			if(timeUtil.isFirstEarlierThanSecond(dbLastCollectTimeDate, clientCollectTimeDate)) {
 				sfu.setLastRetrieved(new Timestamp(clientCollectTimeDate.getTime()));
 				updateList.add(sfu);
 			}
