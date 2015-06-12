@@ -17,8 +17,10 @@ import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
@@ -85,6 +87,7 @@ public class EndPvpBattleAction {
 	private StructureForUserDao2 sfuDao;
 	private HistoryUtils historyUtils;
 	private PvpBattleHistoryDao pbhDao;
+	private UserCurrencyHistoryDao uchDao;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -108,7 +111,7 @@ public class EndPvpBattleAction {
 			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
 			int oilStolenFromGenerators, int cashStolenFromGenerators,
 			StructureForUserDao2 sfuDao, HistoryUtils historyUtils,
-			PvpBattleHistoryDao pbhDao)
+			PvpBattleHistoryDao pbhDao, UserCurrencyHistoryDao uchDao)
 	{
 		super();
 		this.attackerId = attackerId;
@@ -147,6 +150,7 @@ public class EndPvpBattleAction {
 		this.sfuDao = sfuDao;
 		this.historyUtils = historyUtils;
 		this.pbhDao = pbhDao;
+		this.uchDao = uchDao;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -179,6 +183,10 @@ public class EndPvpBattleAction {
 	protected int attackerStorageOilChange;
 	protected int attackerAttacksWonDelta;
 	protected int attackerAttacksLostDelta;
+	protected int attackerPrevCash;
+	protected int attackerPrevOil;
+	protected int defenderPrevCash;
+	protected int defenderPrevOil;
 
 	protected User defender;
 	protected PvpLeagueForUser defenderPlfu;
@@ -315,7 +323,7 @@ public class EndPvpBattleAction {
 			//user attacked so either he won or lost
 			processOutcome();
 			awardMonsters(resBuilder);
-			prepCurrencyHistory();
+			doCurrencyHistory();
 		}
 
 		//need to delete PvpBattleForUser
@@ -482,10 +490,8 @@ public class EndPvpBattleAction {
 			attackerPlfu.setAttacksLost(attackerAttacksLostDelta  + attackerPlfu.getAttacksLost());
 		}
 
-		Map<String, Integer> prevCurrencies = new HashMap<String, Integer>();
-		prevCurrencies.put(MiscMethods.cash, attacker.getCash());
-		prevCurrencies.put(MiscMethods.oil, attacker.getOil());
-		prevCurrenciesMap.put(attackerId, prevCurrencies);
+		attackerPrevCash = attacker.getCash();
+		attackerPrevOil = attacker.getOil();		
 	}
 
 	private void updateAttacker() {
@@ -554,13 +560,13 @@ public class EndPvpBattleAction {
 				defenderEloAfter, defenderCurLeague);
 
 		boolean defenderWon = !attackerWon;
-		int defenderCash = defender.getCash();
-		int defenderOil = defender.getOil();
+		defenderPrevCash = defender.getCash();
+		defenderPrevOil = defender.getOil();
 		int minResource = 0;
 		defenderStorageCashChange = resourceUtil.calculateMaxResourceChange(defender,
-				defenderCash, minResource, cashStolenFromStorage, defenderWon, MiscMethods.cash);
+				defenderPrevCash, minResource, cashStolenFromStorage, defenderWon, MiscMethods.cash);
 		defenderStorageOilChange = resourceUtil.calculateMaxResourceChange(defender,
-				defenderOil, minResource, oilStolenFromStorage, defenderWon, MiscMethods.oil);
+				defenderPrevOil, minResource, oilStolenFromStorage, defenderWon, MiscMethods.oil);
 		displayToDefender = true;
 
 		if (defenderWon) {
@@ -575,12 +581,6 @@ public class EndPvpBattleAction {
 			defenderShieldEndTime = timeUtil.createDateAddHours(clientDateTime,
 					ControllerConstants.PVP__LOST_BATTLE_SHIELD_DURATION_HOURS);
 		}
-
-		Map<String, Integer> defenderPreviousCurrency = new HashMap<String, Integer>();
-		defenderPreviousCurrency.put(MiscMethods.cash, defenderCash);
-		defenderPreviousCurrency.put(MiscMethods.oil, defenderOil);
-		prevCurrenciesMap.put(defenderId, defenderPreviousCurrency);
-
 	}
 
 	private void updateDefender()
@@ -689,60 +689,86 @@ public class EndPvpBattleAction {
 		resBuilder.addAllUpdatedOrNew(newOrUpdated);
 	}
 
-	private void prepCurrencyHistory() {
-		String cash = MiscMethods.cash;
-		String oil = MiscMethods.oil;
-
-		currencyDeltasMap = new HashMap<String, Map<String, Integer>>();
-		Map<String, Integer> intMap = new HashMap<String, Integer>();
-		intMap.put(cash, attackerStorageCashChange);
-		intMap.put(oil, attackerStorageOilChange);
-		currencyDeltasMap.put(attackerId, intMap);
-
-		curCurrenciesMap = new HashMap<String, Map<String, Integer>>();
-		intMap = new HashMap<String, Integer>();
-		intMap.put(cash, attacker.getCash());
-		intMap.put(oil, attacker.getOil());
-		curCurrenciesMap.put(attackerId, intMap);
-
-		reasonsForChangesMap = new HashMap<String, Map<String, String>>();
+//	private void prepCurrencyHistory() {
+//		String cash = MiscMethods.cash;
+//		String oil = MiscMethods.oil;
+//
+//		currencyDeltasMap = new HashMap<String, Map<String, Integer>>();
+//		Map<String, Integer> intMap = new HashMap<String, Integer>();
+//		intMap.put(cash, attackerStorageCashChange);
+//		intMap.put(oil, attackerStorageOilChange);
+//		currencyDeltasMap.put(attackerId, intMap);
+//
+//		curCurrenciesMap = new HashMap<String, Map<String, Integer>>();
+//		intMap = new HashMap<String, Integer>();
+//		intMap.put(cash, attacker.getCash());
+//		intMap.put(oil, attacker.getOil());
+//		curCurrenciesMap.put(attackerId, intMap);
+//
+//		reasonsForChangesMap = new HashMap<String, Map<String, String>>();
+//		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
+//		Map<String, String> strMap = new HashMap<String, String>();
+//		strMap.put(cash, reasonForChange);
+//		strMap.put(oil, reasonForChange);
+//		reasonsForChangesMap.put(attackerId, strMap);
+//
+//		int aWon = 0;
+//		if (attackerWon) {
+//			aWon = 1;
+//		}
+//		detailsMap = new HashMap<String, Map<String, String>>();
+//		String detailSb = String.format("a:{}, d:{}, t:{}, aWon:{}, "
+//				+ "cashstolefromgenerator {}, oilstolenfromgenerator {}",
+//				new Object[] { attackerId, defenderId, clientDateTime, aWon,
+//						cashStolenFromGenerators, oilStolenFromGenerators} );
+//		strMap = new HashMap<String, String>();
+//		strMap.put(MiscMethods.cash, detailSb);
+//		strMap.put(MiscMethods.oil, detailSb);
+//		detailsMap.put(attackerId, strMap);
+//
+//		if (isRealDefender) {
+//			intMap = new HashMap<String, Integer>();
+//			intMap.put(cash, defenderStorageCashChange);
+//			intMap.put(oil, defenderStorageOilChange);
+//			currencyDeltasMap.put(defenderId, intMap);
+//
+//			intMap = new HashMap<String, Integer>();
+//			intMap.put(cash, defender.getCash());
+//			intMap.put(oil, defender.getOil());
+//			curCurrenciesMap.put(defenderId, intMap);
+//
+//			strMap = new HashMap<String, String>();
+//			strMap.put(cash, reasonForChange);
+//			strMap.put(oil, reasonForChange);
+//			reasonsForChangesMap.put(defenderId, strMap);
+//
+//			detailsMap.put(defenderId, strMap);
+//		}
+//	}
+	
+	public void doCurrencyHistory() {
+		List<UserCurrencyHistory> uchList = new ArrayList<UserCurrencyHistory>();
 		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
-		Map<String, String> strMap = new HashMap<String, String>();
-		strMap.put(cash, reasonForChange);
-		strMap.put(oil, reasonForChange);
-		reasonsForChangesMap.put(attackerId, strMap);
-
-		int aWon = 0;
-		if (attackerWon) {
-			aWon = 1;
-		}
-		detailsMap = new HashMap<String, Map<String, String>>();
-		String detailSb = String.format("a:{}, d:{}, t:{}, aWon:{}, "
-				+ "cashstolefromgenerator {}, oilstolenfromgenerator {}",
-				new Object[] { attackerId, defenderId, clientDateTime, aWon,
-						cashStolenFromGenerators, oilStolenFromGenerators} );
-		strMap = new HashMap<String, String>();
-		strMap.put(MiscMethods.cash, detailSb);
-		strMap.put(MiscMethods.oil, detailSb);
-		detailsMap.put(attackerId, strMap);
-
-		if (isRealDefender) {
-			intMap = new HashMap<String, Integer>();
-			intMap.put(cash, defenderStorageCashChange);
-			intMap.put(oil, defenderStorageOilChange);
-			currencyDeltasMap.put(defenderId, intMap);
-
-			intMap = new HashMap<String, Integer>();
-			intMap.put(cash, defender.getCash());
-			intMap.put(oil, defender.getOil());
-			curCurrenciesMap.put(defenderId, intMap);
-
-			strMap = new HashMap<String, String>();
-			strMap.put(cash, reasonForChange);
-			strMap.put(oil, reasonForChange);
-			reasonsForChangesMap.put(defenderId, strMap);
-
-			detailsMap.put(defenderId, strMap);
+		if(attackerWon) {
+			UserCurrencyHistory attackerCashUch = historyUtils.createUserCurrencyHistory(attackerId, 
+					curDateTime, MiscMethods.cash, attackerStorageCashChange, attackerPrevCash, attacker.getCash(), 
+					reasonForChange, "beat " + defenderId);
+			uchList.add(attackerCashUch);
+			UserCurrencyHistory attackerOilUch = historyUtils.createUserCurrencyHistory(attackerId, 
+					curDateTime, MiscMethods.oil, attackerStorageOilChange, attackerPrevOil, attacker.getOil(), 
+					reasonForChange, "beat " + defenderId);
+			uchList.add(attackerOilUch);
+			if (isRealDefender) {
+				UserCurrencyHistory defenderCashUch = historyUtils.createUserCurrencyHistory(defenderId, 
+						curDateTime, MiscMethods.cash, defenderStorageCashChange, defenderPrevCash, defender.getCash(), 
+						reasonForChange, "lost to " + attackerId);
+				uchList.add(defenderCashUch);
+				UserCurrencyHistory defenderOilUch = historyUtils.createUserCurrencyHistory(defenderId, 
+						curDateTime, MiscMethods.oil, defenderStorageOilChange, defenderPrevCash, defender.getCash(), 
+						reasonForChange, "lost to " + attackerId);
+				uchList.add(defenderOilUch);
+			}
+			uchDao.insert(uchList);
 		}
 	}
 

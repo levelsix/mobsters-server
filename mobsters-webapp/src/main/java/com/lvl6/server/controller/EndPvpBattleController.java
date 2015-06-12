@@ -22,9 +22,11 @@ import com.lvl6.events.response.EndPvpBattleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
@@ -50,6 +52,7 @@ import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.EndPvpBattleAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -124,6 +127,15 @@ public class EndPvpBattleController extends EventController {
 	
 	@Autowired
 	protected StructureForUserDao2 sfuDao;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
+	
+	@Autowired
+	protected PvpBattleHistoryDao pbhDao;
+	
+	@Autowired
+	protected UserCurrencyHistoryDao uchDao;
 	
 
 	public EndPvpBattleController() {
@@ -243,7 +255,7 @@ public class EndPvpBattleController extends EventController {
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil,
 					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
 					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators,
-					timeUtils, sfuDao);
+					sfuDao, historyUtils, pbhDao, uchDao);
 
 			epba.execute(resBuilder);
 
