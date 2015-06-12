@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.AchievementForUser;
-import com.lvl6.info.MiniEvent;
 import com.lvl6.info.MiniEventForPlayerLvl;
 import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniEventGoal;
@@ -18,6 +17,8 @@ import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
@@ -30,6 +31,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -52,6 +54,7 @@ public class RetrieveMiniEventAction {
 	private MiniEventRetrieveUtils miniEventRetrieveUtils;
 	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
 	private MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	private MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
 	private TimeUtils timeUtil;
 
 	public RetrieveMiniEventAction(
@@ -69,6 +72,7 @@ public class RetrieveMiniEventAction {
 			MiniEventRetrieveUtils miniEventRetrieveUtils,
 			MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils,
 			MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils,
+			MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil,
 			TimeUtils timeUtil) {
 		super();
 		this.userId = userId;
@@ -85,6 +89,7 @@ public class RetrieveMiniEventAction {
 		this.miniEventRetrieveUtils = miniEventRetrieveUtils;
 		this.miniEventTierRewardRetrieveUtils = miniEventTierRewardRetrieveUtils;
 		this.miniEventLeaderboardRewardRetrieveUtils = miniEventLeaderboardRewardRetrieveUtils;
+		this.miniEventTimetableRetrieveUtil = miniEventTimetableRetrieveUtil;
 		this.timeUtil = timeUtil;
 	}
 
@@ -103,7 +108,8 @@ public class RetrieveMiniEventAction {
 
 	//derived state
 	private User u;
-	private MiniEvent curActiveMiniEvent;
+	private MiniEventConfig curActiveMiniEvent;
+	private MiniEventTimetableConfig curActiveMiniEventTimetable;
 	private MiniEventForPlayerLvl lvlEntered;
 	private MiniEventForUser mefu;
 	private Collection<MiniEventGoalForUser> megfus;
@@ -167,14 +173,17 @@ public class RetrieveMiniEventAction {
 
 		int miniEventId = mefu.getMiniEventId();
 		//if the event has not even started yet then don't send it
-		MiniEvent me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
-		if (null == me || timeUtil.isFirstEarlierThanSecond(now, me.getStartTime()))
+		MiniEventTimetableConfig meTimetable = miniEventTimetableRetrieveUtil
+				.getTimetableForMiniEventId(miniEventId);
+		if (null == meTimetable ||
+				timeUtil.isFirstEarlierThanSecond(now, meTimetable.getStartTime()))
 		{
-			log.warn("user's miniEvent not active. {} \t {}", mefu, me);
+			log.warn("user's miniEvent not active. {}.\t timeActive={}", mefu, meTimetable);
 			mefu = null;
 			return true;
 		}
 
+		MiniEventConfig me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
 		int userLvl = mefu.getUserLvl();
 		boolean valid = retrieveMiniEventRelatedData(miniEventId, me, userLvl);
 		if (!valid) {
@@ -235,7 +244,7 @@ public class RetrieveMiniEventAction {
 		}
 	}
 
-	private boolean retrieveMiniEventRelatedData(int meId, MiniEvent me, int userLvl)
+	private boolean retrieveMiniEventRelatedData(int meId, MiniEventConfig me, int userLvl)
 	{
 
 		lvlEntered = miniEventForPlayerLvlRetrieveUtils
@@ -360,11 +369,13 @@ public class RetrieveMiniEventAction {
 
 	private boolean processNonexistentUserMiniEvent()
 	{
-		curActiveMiniEvent = miniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
-		if (null == curActiveMiniEvent) {
+		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
+		if (null == curActiveMiniEventTimetable) {
 			log.info("no currently active MiniEvent");
 			return true;
 		}
+		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(
+				curActiveMiniEventTimetable.getMiniEventId());
 
 		int meId = curActiveMiniEvent.getId();
 		int userLvl = u.getLevel();
@@ -457,7 +468,7 @@ public class RetrieveMiniEventAction {
 	private boolean replaceCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
-		curActiveMiniEvent = miniEventRetrieveUtils.getCurrentlyActiveMiniEvent(now);
+		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
 
 		if (null == curActiveMiniEvent) {
 			//NOTE: reaching here means, user has collected all the rewards he can
@@ -466,6 +477,8 @@ public class RetrieveMiniEventAction {
 			mefu = null;
 			return true;
 		}
+		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(
+				curActiveMiniEventTimetable.getMiniEventId());
 
 		int curActiveMeId = curActiveMiniEvent.getId();
 //		int userLvl = u.getLevel();
@@ -504,61 +517,36 @@ public class RetrieveMiniEventAction {
 		this.u = u;
 	}
 
-	public MiniEvent getCurActiveMiniEvent() {
+	public MiniEventConfig getCurActiveMiniEvent() {
 		return curActiveMiniEvent;
 	}
 
-	public void setCurActiveMiniEvent(MiniEvent curActiveMiniEvent) {
-		this.curActiveMiniEvent = curActiveMiniEvent;
+	public MiniEventTimetableConfig getCurActiveMiniEventTimetable() {
+		return curActiveMiniEventTimetable;
 	}
 
 	public MiniEventForPlayerLvl getLvlEntered() {
 		return lvlEntered;
 	}
 
-	public void setLvlEntered(MiniEventForPlayerLvl lvlEntered) {
-		this.lvlEntered = lvlEntered;
-	}
-
 	public MiniEventForUser getMefu() {
 		return mefu;
-	}
-
-	public void setMefu(MiniEventForUser mefu) {
-		this.mefu = mefu;
 	}
 
 	public Collection<MiniEventGoalForUser> getMegfus() {
 		return megfus;
 	}
 
-	public void setMegfus(Collection<MiniEventGoalForUser> megfus) {
-		this.megfus = megfus;
-	}
-
 	public Collection<MiniEventTierReward> getRewards() {
 		return rewards;
-	}
-
-	public void setRewards(Collection<MiniEventTierReward> rewards) {
-		this.rewards = rewards;
 	}
 
 	public Collection<MiniEventGoal> getGoals() {
 		return goals;
 	}
 
-	public void setGoals(Collection<MiniEventGoal> goals) {
-		this.goals = goals;
-	}
-
 	public Collection<MiniEventLeaderboardReward> getLeaderboardRewards() {
 		return leaderboardRewards;
-	}
-
-	public void setLeaderboardRewards(
-			Collection<MiniEventLeaderboardReward> leaderboardRewards) {
-		this.leaderboardRewards = leaderboardRewards;
 	}
 
 }

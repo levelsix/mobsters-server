@@ -40,7 +40,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "mini_event_config", schema = "mobsters")
 public class MiniEventConfigRecord extends UpdatableRecordImpl<MiniEventConfigRecord> implements Record7<Integer, Timestamp, Timestamp, String, String, String, String>, IMiniEventConfig {
 
-	private static final long serialVersionUID = 90242605;
+	private static final long serialVersionUID = -963701651;
 
 	/**
 	 * Setter for <code>mobsters.mini_event_config.id</code>.
@@ -63,7 +63,7 @@ public class MiniEventConfigRecord extends UpdatableRecordImpl<MiniEventConfigRe
 	}
 
 	/**
-	 * Setter for <code>mobsters.mini_event_config.start_time</code>.
+	 * Setter for <code>mobsters.mini_event_config.start_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	@Override
 	public MiniEventConfigRecord setStartTime(Timestamp value) {
@@ -72,7 +72,7 @@ public class MiniEventConfigRecord extends UpdatableRecordImpl<MiniEventConfigRe
 	}
 
 	/**
-	 * Getter for <code>mobsters.mini_event_config.start_time</code>.
+	 * Getter for <code>mobsters.mini_event_config.start_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	@Column(name = "start_time")
 	@Override
@@ -81,7 +81,7 @@ public class MiniEventConfigRecord extends UpdatableRecordImpl<MiniEventConfigRe
 	}
 
 	/**
-	 * Setter for <code>mobsters.mini_event_config.end_time</code>.
+	 * Setter for <code>mobsters.mini_event_config.end_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	@Override
 	public MiniEventConfigRecord setEndTime(Timestamp value) {
@@ -90,7 +90,7 @@ public class MiniEventConfigRecord extends UpdatableRecordImpl<MiniEventConfigRe
 	}
 
 	/**
-	 * Getter for <code>mobsters.mini_event_config.end_time</code>.
+	 * Getter for <code>mobsters.mini_event_config.end_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	@Column(name = "end_time")
 	@Override

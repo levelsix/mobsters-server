@@ -116,6 +116,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils
@@ -232,6 +233,7 @@ class StartupService extends LazyLogging {
   @Autowired var miniEventGoalRetrieveUtil: MiniEventGoalRetrieveUtils = null
   @Autowired var miniEventLeaderboardRewardRetrieveUtil: MiniEventLeaderboardRewardRetrieveUtils = null
   @Autowired var miniEventTierRewardRetrieveUtil: MiniEventTierRewardRetrieveUtils = null
+  @Autowired var miniEventTimetableRetrieveUtil: MiniEventTimetableRetrieveUtils = null
   @Autowired var monsterLevelInfoRetrieveUtil: MonsterLevelInfoRetrieveUtils = null
   @Autowired var pvpLeagueRetrieveUtil: PvpLeagueRetrieveUtils = null
   @Autowired var questRetrieveUtil: QuestRetrieveUtils = null
@@ -1099,6 +1101,7 @@ class StartupService extends LazyLogging {
           miniEventRetrieveUtil,
           miniEventTierRewardRetrieveUtil,
           miniEventLeaderboardRewardRetrieveUtil,
+          miniEventTimetableRetrieveUtil,
           timeUtils);
         rmea.execute(rmeaResBuilder);
         if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) && null != rmea.getCurActiveMiniEvent()) {
@@ -1106,6 +1109,7 @@ class StartupService extends LazyLogging {
           val umep = createInfoProtoUtils.createUserMiniEventProto(
             rmea.getMefu(),
             rmea.getCurActiveMiniEvent(),
+            rmea.getCurActiveMiniEventTimetable(),
             rmea.getMegfus(),
             rmea.getLvlEntered(),
             rmea.getRewards(),
@@ -1576,7 +1580,7 @@ class StartupService extends LazyLogging {
     if (user != null) {
       val userId = user.getId()
       logger.info(s"Updating leaderboard for user $userId");
-      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn);
+      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn)
     }
   }
 }
