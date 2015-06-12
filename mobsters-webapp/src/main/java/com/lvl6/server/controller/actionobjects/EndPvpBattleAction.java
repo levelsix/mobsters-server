@@ -197,6 +197,7 @@ public class EndPvpBattleAction {
 	private PvpBattleHistory pbh;
 	
 	private Map<String, Long> generatorsMap;
+	private List<StructureForUser> updateList;
 
 	private Map<String, Map<String, Integer>> currencyDeltasMap;
 	private Map<String, Map<String, Integer>> prevCurrenciesMap;
@@ -665,7 +666,7 @@ public class EndPvpBattleAction {
 		for(StructureForUser sfu : defenderUserStructs) {
 			defenderSfuMap.put(sfu.getId(), sfu);
 		}
-		List<StructureForUser> updateList = new ArrayList<StructureForUser>();
+		updateList = new ArrayList<StructureForUser>();
 		for(String generatorsId : generatorsMap.keySet()) {
 			StructureForUser sfu = defenderSfuMap.get(generatorsId);
 			Long clientCollectTime = generatorsMap.get(generatorsId);
@@ -837,6 +838,14 @@ public class EndPvpBattleAction {
 
 	public void setGeneratorsMap(Map<String, Long> generatorsMap) {
 		this.generatorsMap = generatorsMap;
+	}
+
+	public List<StructureForUser> getUpdateList() {
+		return updateList;
+	}
+
+	public void setUpdateList(List<StructureForUser> updateList) {
+		this.updateList = updateList;
 	}
 	
 	
