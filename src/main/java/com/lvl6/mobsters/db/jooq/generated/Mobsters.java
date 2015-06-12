@@ -77,6 +77,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboardRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTierRewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTimetableConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniJobConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniJobForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniJobForUserHistory;
@@ -118,6 +119,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SalesScheduleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
@@ -191,7 +193,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = -1436386027;
+	private static final long serialVersionUID = 568465681;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -287,6 +289,7 @@ public class Mobsters extends SchemaImpl {
 			MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER,
 			MiniEventLeaderboardRewardConfig.MINI_EVENT_LEADERBOARD_REWARD_CONFIG,
 			MiniEventTierRewardConfig.MINI_EVENT_TIER_REWARD_CONFIG,
+			MiniEventTimetableConfig.MINI_EVENT_TIMETABLE_CONFIG,
 			MiniJobConfig.MINI_JOB_CONFIG,
 			MiniJobForUser.MINI_JOB_FOR_USER,
 			MiniJobForUserHistory.MINI_JOB_FOR_USER_HISTORY,
@@ -328,6 +331,7 @@ public class Mobsters extends SchemaImpl {
 			SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG,
 			SalesItemConfig.SALES_ITEM_CONFIG,
 			SalesPackageConfig.SALES_PACKAGE_CONFIG,
+			SalesScheduleConfig.SALES_SCHEDULE_CONFIG,
 			SecretGiftConfig.SECRET_GIFT_CONFIG,
 			ServerToggleConfig.SERVER_TOGGLE_CONFIG,
 			SkillConfig.SKILL_CONFIG,

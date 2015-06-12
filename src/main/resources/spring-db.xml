@@ -100,5 +100,8 @@
     </bean>
 
     
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomMenuConfigDao" id="customMenuConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
     
 </beans>

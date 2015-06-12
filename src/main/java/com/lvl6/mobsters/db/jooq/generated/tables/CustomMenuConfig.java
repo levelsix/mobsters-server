@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CustomMenuConfig extends TableImpl<CustomMenuConfigRecord> {
 
-	private static final long serialVersionUID = 612520174;
+	private static final long serialVersionUID = 1777684261;
 
 	/**
 	 * The reference instance of <code>mobsters.custom_menu_config</code>
@@ -71,12 +71,22 @@ public class CustomMenuConfig extends TableImpl<CustomMenuConfigRecord> {
 	/**
 	 * The column <code>mobsters.custom_menu_config.is_jiggle</code>.
 	 */
-	public final TableField<CustomMenuConfigRecord, String> IS_JIGGLE = createField("is_jiggle", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
+	public final TableField<CustomMenuConfigRecord, Boolean> IS_JIGGLE = createField("is_jiggle", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.custom_menu_config.image_name</code>.
 	 */
 	public final TableField<CustomMenuConfigRecord, String> IMAGE_NAME = createField("image_name", org.jooq.impl.SQLDataType.VARCHAR.length(45), this, "");
+
+	/**
+	 * The column <code>mobsters.custom_menu_config.ipad_position_x</code>.
+	 */
+	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_X = createField("ipad_position_x", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>mobsters.custom_menu_config.ipad_position_y</code>.
+	 */
+	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_Y = createField("ipad_position_y", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>mobsters.custom_menu_config</code> table reference

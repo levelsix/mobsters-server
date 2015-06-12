@@ -82,7 +82,7 @@ public class CustomMenuConfigDao extends DAOImpl<CustomMenuConfigRecord, com.lvl
 	/**
 	 * Fetch records that have <code>is_jiggle IN (values)</code>
 	 */
-	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig> fetchByIsJiggle(String... values) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig> fetchByIsJiggle(Boolean... values) {
 		return fetch(CustomMenuConfig.CUSTOM_MENU_CONFIG.IS_JIGGLE, values);
 	}
 
@@ -91,5 +91,19 @@ public class CustomMenuConfigDao extends DAOImpl<CustomMenuConfigRecord, com.lvl
 	 */
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig> fetchByImageName(String... values) {
 		return fetch(CustomMenuConfig.CUSTOM_MENU_CONFIG.IMAGE_NAME, values);
+	}
+
+	/**
+	 * Fetch records that have <code>ipad_position_x IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig> fetchByIpadPositionX(Integer... values) {
+		return fetch(CustomMenuConfig.CUSTOM_MENU_CONFIG.IPAD_POSITION_X, values);
+	}
+
+	/**
+	 * Fetch records that have <code>ipad_position_y IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig> fetchByIpadPositionY(Integer... values) {
+		return fetch(CustomMenuConfig.CUSTOM_MENU_CONFIG.IPAD_POSITION_Y, values);
 	}
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -5514,13 +5515,13 @@ public class CreateInfoProtoUtils {
 		}
 	}
 
-	public CustomMenuProto createCustomMenuProto(CustomMenu cm) {
+	public CustomMenuProto createCustomMenuProto(CustomMenuConfig cm) {
 		CustomMenuProto.Builder cmpb = CustomMenuProto.newBuilder();
-		cmpb.setCustomMenuId(cm.getId());
+		cmpb.setCustomMenuId(cm.getCustomMenuId());
 		cmpb.setPositionX(cm.getPositionX());
 		cmpb.setPositionY(cm.getPositionY());
 		cmpb.setPositionZ(cm.getPositionZ());
-		cmpb.setIsJiggle(cm.isJiggle());
+		cmpb.setIsJiggle(cm.getIsJiggle());
 		cmpb.setImageName(cm.getImageName());
 		cmpb.setIpadPositionX(cm.getIpadPositionX());
 		cmpb.setIpadPositionY(cm.getIpadPositionY());
