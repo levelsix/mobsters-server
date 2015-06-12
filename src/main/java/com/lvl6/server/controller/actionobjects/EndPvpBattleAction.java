@@ -475,9 +475,9 @@ public class EndPvpBattleAction {
 		attackerCurRank = pvpLeagueRetrieveUtils.getRankForElo(attackerEloAfter,
 				attackerCurLeague);
 		attackerStorageCashChange = resourceUtil.calculateMaxResourceChange(attacker,
-				attackerMaxCash, minResource, cashStolenFromStorage, attackerWon, MiscMethods.cash);
+				attackerMaxCash, minResource, cashStolenFromStorage + cashStolenFromGenerators, attackerWon, MiscMethods.cash);
 		attackerStorageOilChange = resourceUtil.calculateMaxResourceChange(attacker,
-				attackerMaxOil, minResource, oilStolenFromStorage, attackerWon, MiscMethods.oil);
+				attackerMaxOil, minResource, oilStolenFromStorage + cashStolenFromGenerators, attackerWon, MiscMethods.oil);
 
 		if (attackerWon) {
 			attackerAttacksWonDelta = 1;
