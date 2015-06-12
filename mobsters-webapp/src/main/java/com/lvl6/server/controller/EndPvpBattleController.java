@@ -326,12 +326,12 @@ public class EndPvpBattleController extends EventController {
 					responses.normalResponseEvents().add(resEventUpdateDefender);
 				}
 
-				if (attackerWon) {
-					//TRACK CURRENCY HISTORY, resource changes only if attacker won
-					writeToUserCurrencyHistory(attackerId, attacker,
-							defenderId, defender, attackerWon, curTime,
-							changeMap, previousCurrencyMap);
-				}
+//				if (attackerWon) {
+//					//TRACK CURRENCY HISTORY, resource changes only if attacker won
+//					writeToUserCurrencyHistory(attackerId, attacker,
+//							defenderId, defender, attackerWon, curTime,
+//							changeMap, previousCurrencyMap);
+//				}
 			}
 
 		} catch (Exception e) {
@@ -358,90 +358,90 @@ public class EndPvpBattleController extends EventController {
 		}
 	}
 
-	private void writeToUserCurrencyHistory(String attackerId, User attacker,
-			String defenderId, User defender, boolean attackerWon,
-			Timestamp curTime, Map<String, Map<String, Integer>> changeMap,
-			Map<String, Map<String, Integer>> previousCurrencyMap) {
-
-		Map<String, Map<String, Integer>> currentCurrencyMap = new HashMap<String, Map<String, Integer>>();
-		Map<String, Map<String, String>> changeReasonsMap = new HashMap<String, Map<String, String>>();
-		Map<String, Map<String, String>> detailsMap = new HashMap<String, Map<String, String>>();
-		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
-		String oil = MiscMethods.oil;
-		String cash = MiscMethods.cash;
-
-		//reasons
-		Map<String, String> reasonMap = new HashMap<String, String>();
-		reasonMap.put(cash, reasonForChange);
-		reasonMap.put(oil, reasonForChange);
-		changeReasonsMap.put(attackerId, reasonMap);
-		changeReasonsMap.put(defenderId, reasonMap);
-
-		//attacker stuff
-		//current currency stuff
-		int attackerCash = attacker.getCash();
-		int attackerOil = attacker.getOil();
-		Map<String, Integer> attackerCurrency = new HashMap<String, Integer>();
-		attackerCurrency.put(cash, attackerCash);
-		attackerCurrency.put(oil, attackerOil);
-		//aggregate currency
-		currentCurrencyMap.put(attackerId, attackerCurrency);
-
-		//details
-		StringBuilder attackerDetailsSb = new StringBuilder();
-		if (attackerWon) {
-			attackerDetailsSb.append("beat ");
-		} else {
-			attackerDetailsSb.append("lost to ");
-		}
-		attackerDetailsSb.append(defenderId);
-		String attackerDetails = attackerDetailsSb.toString();
-		Map<String, String> attackerDetailsMap = new HashMap<String, String>();
-		attackerDetailsMap.put(cash, attackerDetails);
-		attackerDetailsMap.put(oil, attackerDetails);
-		//aggregate details
-		detailsMap.put(attackerId, attackerDetailsMap);
-
-		//defender stuff
-		if (null != defender) {
-			//current currency stuff
-			int defenderCash = defender.getCash();
-			int defenderOil = defender.getOil();
-			Map<String, Integer> defenderCurrency = new HashMap<String, Integer>();
-			defenderCurrency.put(cash, defenderCash);
-			defenderCurrency.put(oil, defenderOil);
-			//aggregate currency
-			currentCurrencyMap.put(defenderId, defenderCurrency);
-
-			//details
-			StringBuilder defenderDetailsSb = new StringBuilder();
-			if (attackerWon) {
-				defenderDetailsSb.append("lost to ");
-			} else {
-				defenderDetailsSb.append("beat ");
-			}
-			defenderDetailsSb.append(attackerId);
-			String defenderDetails = defenderDetailsSb.toString();
-			Map<String, String> defenderDetailsMap = new HashMap<String, String>();
-			defenderDetailsMap.put(cash, defenderDetails);
-			defenderDetailsMap.put(oil, defenderDetails);
-			//aggregate details
-			detailsMap.put(defenderId, defenderDetailsMap);
-
-		}
-
-		List<String> userIds = new ArrayList<String>();
-		userIds.add(attackerId);
-
-		if (null != defender && !defenderId.isEmpty()) {
-			userIds.add(defenderId);
-		}
-
-		miscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
-				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
-				detailsMap);
-
-	}
+//	private void writeToUserCurrencyHistory(String attackerId, User attacker,
+//			String defenderId, User defender, boolean attackerWon,
+//			Timestamp curTime, Map<String, Map<String, Integer>> changeMap,
+//			Map<String, Map<String, Integer>> previousCurrencyMap) {
+//
+//		Map<String, Map<String, Integer>> currentCurrencyMap = new HashMap<String, Map<String, Integer>>();
+//		Map<String, Map<String, String>> changeReasonsMap = new HashMap<String, Map<String, String>>();
+//		Map<String, Map<String, String>> detailsMap = new HashMap<String, Map<String, String>>();
+//		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
+//		String oil = MiscMethods.oil;
+//		String cash = MiscMethods.cash;
+//
+//		//reasons
+//		Map<String, String> reasonMap = new HashMap<String, String>();
+//		reasonMap.put(cash, reasonForChange);
+//		reasonMap.put(oil, reasonForChange);
+//		changeReasonsMap.put(attackerId, reasonMap);
+//		changeReasonsMap.put(defenderId, reasonMap);
+//
+//		//attacker stuff
+//		//current currency stuff
+//		int attackerCash = attacker.getCash();
+//		int attackerOil = attacker.getOil();
+//		Map<String, Integer> attackerCurrency = new HashMap<String, Integer>();
+//		attackerCurrency.put(cash, attackerCash);
+//		attackerCurrency.put(oil, attackerOil);
+//		//aggregate currency
+//		currentCurrencyMap.put(attackerId, attackerCurrency);
+//
+//		//details
+//		StringBuilder attackerDetailsSb = new StringBuilder();
+//		if (attackerWon) {
+//			attackerDetailsSb.append("beat ");
+//		} else {
+//			attackerDetailsSb.append("lost to ");
+//		}
+//		attackerDetailsSb.append(defenderId);
+//		String attackerDetails = attackerDetailsSb.toString();
+//		Map<String, String> attackerDetailsMap = new HashMap<String, String>();
+//		attackerDetailsMap.put(cash, attackerDetails);
+//		attackerDetailsMap.put(oil, attackerDetails);
+//		//aggregate details
+//		detailsMap.put(attackerId, attackerDetailsMap);
+//
+//		//defender stuff
+//		if (null != defender) {
+//			//current currency stuff
+//			int defenderCash = defender.getCash();
+//			int defenderOil = defender.getOil();
+//			Map<String, Integer> defenderCurrency = new HashMap<String, Integer>();
+//			defenderCurrency.put(cash, defenderCash);
+//			defenderCurrency.put(oil, defenderOil);
+//			//aggregate currency
+//			currentCurrencyMap.put(defenderId, defenderCurrency);
+//
+//			//details
+//			StringBuilder defenderDetailsSb = new StringBuilder();
+//			if (attackerWon) {
+//				defenderDetailsSb.append("lost to ");
+//			} else {
+//				defenderDetailsSb.append("beat ");
+//			}
+//			defenderDetailsSb.append(attackerId);
+//			String defenderDetails = defenderDetailsSb.toString();
+//			Map<String, String> defenderDetailsMap = new HashMap<String, String>();
+//			defenderDetailsMap.put(cash, defenderDetails);
+//			defenderDetailsMap.put(oil, defenderDetails);
+//			//aggregate details
+//			detailsMap.put(defenderId, defenderDetailsMap);
+//
+//		}
+//
+//		List<String> userIds = new ArrayList<String>();
+//		userIds.add(attackerId);
+//
+//		if (null != defender && !defenderId.isEmpty()) {
+//			userIds.add(defenderId);
+//		}
+//
+//		miscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
+//				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
+//				detailsMap);
+//
+//	}
 
 	//TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
 	private PvpHistoryProto createPvpProto(User attacker, User defender,
