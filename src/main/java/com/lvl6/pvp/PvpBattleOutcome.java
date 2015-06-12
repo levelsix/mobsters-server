@@ -323,7 +323,7 @@ public class PvpBattleOutcome {
 		double scaleDividend = Math
 				.abs((Math.abs(diffInPlayerLvl
 						* RESOURCE_SCALE_DIVIDEND_MULTIPLE) - RESOURCE_SCALE_DIVIDEND_MULTIPLE * 100))
-				* convertBackToDouble * defenderOil;
+				* convertBackToDouble;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(
 				-1 * matchRange)
 				- offset;
@@ -335,7 +335,9 @@ public class PvpBattleOutcome {
 					new Object[] { scaleDividend, scaleDivisor, scale });
 		}
 
-		double retVal = (winnerLoserCndVal - offset) * scale;
+		double percentage = (winnerLoserCndVal - offset) * scale;
+		double retVal = percentage * defenderOil;
+		
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal);
