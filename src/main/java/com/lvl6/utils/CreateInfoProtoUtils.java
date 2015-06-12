@@ -5682,12 +5682,13 @@ public class CreateInfoProtoUtils {
 		return igppList;
 	}
 
-	public List<StructStolen> createStructStolenFromGeneratorsMap(Map<String, Long> generatorsMap) {
+	public List<StructStolen> createStructStolenFromGenerators(
+			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> updateList) {
 		List<StructStolen> returnList = new ArrayList<StructStolen>();
-		for(String generatorId : generatorsMap.keySet()) {
+		for(com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser sfu : updateList) {
 			StructStolen.Builder b = StructStolen.newBuilder();
-			b.setUserStructUuid(generatorId);
-			b.setTimeOfRetrieval(generatorsMap.get(generatorId));
+			b.setUserStructUuid(sfu.getId());
+			b.setTimeOfRetrieval(sfu.getLastRetrieved().getTime());
 			returnList.add(b.build());
 		}
 		return returnList;

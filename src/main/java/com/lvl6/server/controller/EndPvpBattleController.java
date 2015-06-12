@@ -25,6 +25,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
@@ -266,10 +267,10 @@ public class EndPvpBattleController extends EventController {
 					log.info("attackedOtherHistory {}", attackedOtherHistory);
 					resBuilder.setBattleThatJustEnded(attackedOtherHistory);
 				}
-				Map<String, Long> generatorsMap = epba.getGeneratorsMap();
-				if(generatorsMap != null && !generatorsMap.isEmpty()) {
+				List<StructureForUser> updateList = epba.getUpdateList();
+				if(updateList != null && !updateList.isEmpty()) {
 					resBuilder.addAllUpdatedUserStructs(createInfoProtoUtils
-							.createStructStolenFromGeneratorsMap(generatorsMap));
+							.createStructStolenFromGenerators(updateList));
 				}
 			}
 
