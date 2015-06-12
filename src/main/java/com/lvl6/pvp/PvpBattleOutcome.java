@@ -269,7 +269,7 @@ public class PvpBattleOutcome {
 		}
 
 		double retVal = (winnerLoserCndVal - offset) * scale * defenderCash;
-		percentageStealFromGenerator = (float)(retVal * RESOURCE_GENERATOR_CONSTANT/defenderCash);
+		percentageStealFromGenerator = 0.5f;//(float)(retVal * RESOURCE_GENERATOR_CONSTANT/defenderCash);
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal);
@@ -334,7 +334,6 @@ public class PvpBattleOutcome {
 		}
 
 		double percentage = (winnerLoserCndVal - offset) * scale;
-		percentageStealFromGenerator = (float)(percentage * RESOURCE_GENERATOR_CONSTANT);
 		double retVal = percentage * defenderOil;
 		
 		//July 24, 2014. The amount shouldn't be greater than
