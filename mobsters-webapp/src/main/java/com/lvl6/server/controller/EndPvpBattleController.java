@@ -293,7 +293,7 @@ public class EndPvpBattleController extends EventController {
 
 					EndPvpBattleResponseEvent resEventDefender = new EndPvpBattleResponseEvent(
 							defenderId);
-					resEvent.setTag(0);
+					resEventDefender.setTag(0);
 					resEventDefender.setEndPvpBattleResponseProto(resBuilder
 							.build());
 					responses.normalResponseEvents().add(resEventDefender);
@@ -310,7 +310,7 @@ public class EndPvpBattleController extends EventController {
 					UpdateClientUserResponseEvent resEventUpdateDefender = miscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									defender, epba.getDefenderPlfu(), null);
-					resEventUpdate.setTag(event.getTag());
+					resEventUpdate.setTag(0);
 					responses.normalResponseEvents().add(resEventUpdateDefender);
 				}
 
