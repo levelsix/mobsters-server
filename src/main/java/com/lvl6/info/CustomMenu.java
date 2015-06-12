@@ -1,6 +1,10 @@
 package com.lvl6.info;
 
-public class CustomMenu {
+import java.io.Serializable;
+
+public class CustomMenu implements Serializable {
+
+	private static final long serialVersionUID = 6088649625609749363L;
 
 	private int id;
 	private int positionX;
@@ -8,9 +12,12 @@ public class CustomMenu {
 	private int positionZ;
 	private boolean isJiggle;
 	private String imageName;
+	private int ipadPositionX;
+	private int ipadPositionY;
 
 	public CustomMenu(int id, int positionX, int positionY, int positionZ,
-			boolean isJiggle, String imageName) {
+			boolean isJiggle, String imageName, int ipadPositionX,
+			int ipadPositionY) {
 		super();
 		this.id = id;
 		this.positionX = positionX;
@@ -18,6 +25,8 @@ public class CustomMenu {
 		this.positionZ = positionZ;
 		this.isJiggle = isJiggle;
 		this.imageName = imageName;
+		this.ipadPositionX = ipadPositionX;
+		this.ipadPositionY = ipadPositionY;
 	}
 
 	public int getId() {
@@ -59,11 +68,29 @@ public class CustomMenu {
         this.imageName = imageName;
     }
 
-    @Override
-    public String toString() {
-        return "CustomMenu [id=" + id + ", positionX=" + positionX
-                + ", positionY=" + positionY + ", positionZ=" + positionZ
-                + ", isJiggle=" + isJiggle + ", imageName=" + imageName + "]";
-    }
+    public int getIpadPositionX() {
+		return ipadPositionX;
+	}
+
+	public void setIpadPositionX(int ipadPositionX) {
+		this.ipadPositionX = ipadPositionX;
+	}
+
+	public int getIpadPositionY() {
+		return ipadPositionY;
+	}
+
+	public void setIpadPositionY(int ipadPositionY) {
+		this.ipadPositionY = ipadPositionY;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomMenu [id=" + id + ", positionX=" + positionX
+				+ ", positionY=" + positionY + ", positionZ=" + positionZ
+				+ ", isJiggle=" + isJiggle + ", imageName=" + imageName
+				+ ", ipadPositionX=" + ipadPositionX + ", ipadPositionY="
+				+ ipadPositionY + "]";
+	}
 
 }

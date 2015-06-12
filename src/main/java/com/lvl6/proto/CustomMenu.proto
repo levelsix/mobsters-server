@@ -17,4 +17,6 @@ message CustomMenuProto {
 	optional int32 positionZ = 4;
 	optional bool isJiggle = 5;
 	optional string imageName = 6;
+	optional int32 ipadPositionX = 7;
+	optional int32 ipadPositionY = 8;
 }

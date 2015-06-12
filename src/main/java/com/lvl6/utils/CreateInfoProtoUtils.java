@@ -5522,6 +5522,8 @@ public class CreateInfoProtoUtils {
 		cmpb.setPositionZ(cm.getPositionZ());
 		cmpb.setIsJiggle(cm.isJiggle());
 		cmpb.setImageName(cm.getImageName());
+		cmpb.setIpadPositionX(cm.getIpadPositionX());
+		cmpb.setIpadPositionY(cm.getIpadPositionY());
 		return cmpb.build();
 	}
 

@@ -67,14 +67,14 @@ public class CustomMenuRetrieveUtils {
 							}
 
 							int customMenuId = fd.getId();
-							
+
 							List<CustomMenu> cms = idsToCustomMenuTemp.get(customMenuId);
-							
+
 							if (cms == null) {
 							    cms = new ArrayList<CustomMenu>();
 							    idsToCustomMenuTemp.put(customMenuId, cms);
 							}
-							
+
 							cms.add(fd);
 						}
 						idsToCustomMenus = idsToCustomMenuTemp;
@@ -107,8 +107,11 @@ public class CustomMenuRetrieveUtils {
 		int positionZ = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Z);
         boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
         String imgName = rs.getString(DBConstants.CUSTOM_MENU__IMAGE_NAME);
+        int ipadPositionX = rs.getInt(DBConstants.CUSTOM_MENU__IPAD_POSITION_X);
+        int ipadPositionY = rs.getInt(DBConstants.CUSTOM_MENU__IPAD_POSITION_Y);
 
-		CustomMenu fd = new CustomMenu(id, positionX, positionY, positionZ, isJiggle, imgName);
+		CustomMenu fd = new CustomMenu(id, positionX, positionY, positionZ, isJiggle,
+				imgName, ipadPositionX, ipadPositionY);
 		return fd;
 	}
 

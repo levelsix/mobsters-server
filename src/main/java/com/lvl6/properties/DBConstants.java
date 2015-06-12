@@ -383,7 +383,7 @@ public class DBConstants {
 	public static final String CUSTOM_TRANSLATION__ID = GENERIC__ID;
 	public static final String CUSTOM_TRANSLATION__PHRASE = "phrase";
 	public static final String CUSTOM_TRANSLATION__LANGUAGE = "language";
-	
+
 	/*EVENT PERSISTENT FOR USER*/
 	public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
 	public static final String EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID = "event_persistent_id";
@@ -901,7 +901,7 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
-	
+
 	/*USER REWARD HISTORY*/
 	public static final String USER_REWARD_HISTORY__ID = GENERIC__ID;
 	public static final String USER_REWARD_HISTORY__USER_ID = "user_id";
@@ -1043,6 +1043,8 @@ public class DBConstants {
 	public static final String CUSTOM_MENU__POSITION_Z = "position_z";
     public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
     public static final String CUSTOM_MENU__IMAGE_NAME = "image_name";
+    public static final String CUSTOM_MENU__IPAD_POSITION_X = "ipad_position_x";
+	public static final String CUSTOM_MENU__IPAD_POSITION_Y = "ipad_position_y";
 
 	public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
