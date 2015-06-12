@@ -77,6 +77,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboardRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTierRewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTimetableConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniJobConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniJobForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniJobForUserHistory;
@@ -118,6 +119,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SalesScheduleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
@@ -550,6 +552,11 @@ public class Tables {
 	public static final MiniEventTierRewardConfig MINI_EVENT_TIER_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTierRewardConfig.MINI_EVENT_TIER_REWARD_CONFIG;
 
 	/**
+	 * The table mobsters.mini_event_timetable_config
+	 */
+	public static final MiniEventTimetableConfig MINI_EVENT_TIMETABLE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTimetableConfig.MINI_EVENT_TIMETABLE_CONFIG;
+
+	/**
 	 * The table mobsters.mini_job_config
 	 */
 	public static final MiniJobConfig MINI_JOB_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.MiniJobConfig.MINI_JOB_CONFIG;
@@ -753,6 +760,11 @@ public class Tables {
 	 * The table mobsters.sales_package_config
 	 */
 	public static final SalesPackageConfig SALES_PACKAGE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig.SALES_PACKAGE_CONFIG;
+
+	/**
+	 * The table mobsters.sales_schedule_config
+	 */
+	public static final SalesScheduleConfig SALES_SCHEDULE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SalesScheduleConfig.SALES_SCHEDULE_CONFIG;
 
 	/**
 	 * The table mobsters.secret_gift_config

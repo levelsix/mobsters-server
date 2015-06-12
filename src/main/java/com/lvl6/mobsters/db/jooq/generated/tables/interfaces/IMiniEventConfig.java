@@ -45,23 +45,23 @@ public interface IMiniEventConfig extends Serializable {
 	public Integer getId();
 
 	/**
-	 * Setter for <code>mobsters.mini_event_config.start_time</code>.
+	 * Setter for <code>mobsters.mini_event_config.start_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	public IMiniEventConfig setStartTime(Timestamp value);
 
 	/**
-	 * Getter for <code>mobsters.mini_event_config.start_time</code>.
+	 * Getter for <code>mobsters.mini_event_config.start_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	@Column(name = "start_time")
 	public Timestamp getStartTime();
 
 	/**
-	 * Setter for <code>mobsters.mini_event_config.end_time</code>.
+	 * Setter for <code>mobsters.mini_event_config.end_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	public IMiniEventConfig setEndTime(Timestamp value);
 
 	/**
-	 * Getter for <code>mobsters.mini_event_config.end_time</code>.
+	 * Getter for <code>mobsters.mini_event_config.end_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
 	@Column(name = "end_time")
 	public Timestamp getEndTime();

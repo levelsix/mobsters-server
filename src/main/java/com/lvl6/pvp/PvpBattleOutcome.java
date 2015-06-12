@@ -257,7 +257,7 @@ public class PvpBattleOutcome {
 		double scaleDividend = Math
 				.abs((Math.abs(diffInPlayerLvl
 						* RESOURCE_SCALE_DIVIDEND_MULTIPLE) - RESOURCE_SCALE_DIVIDEND_MULTIPLE * 100))
-				* convertBackToDouble * defenderCash;
+				* convertBackToDouble;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(
 				-1 * matchRange)
 				- offset;
@@ -268,8 +268,9 @@ public class PvpBattleOutcome {
 					new Object[] { scaleDividend, scaleDivisor, scale });
 		}
 
-		double retVal = (winnerLoserCndVal - offset) * scale;
-		percentageStealFromGenerator = (float)(retVal * RESOURCE_GENERATOR_CONSTANT/defenderCash);
+		double finalPercentageToSteal = (winnerLoserCndVal - offset) * scale;
+		double retVal = finalPercentageToSteal * defenderCash;
+		percentageStealFromGenerator = (float)(finalPercentageToSteal * RESOURCE_GENERATOR_CONSTANT);
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal);
@@ -326,7 +327,6 @@ public class PvpBattleOutcome {
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
-		percentageStealFromGenerator = (float)RESOURCE_GENERATOR_CONSTANT;
 
 		if (loggingOn) {
 			log.info(

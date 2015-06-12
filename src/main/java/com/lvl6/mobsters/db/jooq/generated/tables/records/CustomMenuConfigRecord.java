@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record2;
-import org.jooq.Record6;
+import org.jooq.Record8;
 import org.jooq.Row;
-import org.jooq.Row6;
+import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -38,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "custom_menu_config", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"custom_menu_id", "position_z"})
 })
-public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfigRecord> implements Record6<Integer, Integer, Integer, Integer, String, String>, ICustomMenuConfig {
+public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfigRecord> implements Record8<Integer, Integer, Integer, Integer, Boolean, String, Integer, Integer>, ICustomMenuConfig {
 
-	private static final long serialVersionUID = -432858226;
+	private static final long serialVersionUID = -1874594767;
 
 	/**
 	 * Setter for <code>mobsters.custom_menu_config.custom_menu_id</code>.
@@ -120,7 +120,7 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	 * Setter for <code>mobsters.custom_menu_config.is_jiggle</code>.
 	 */
 	@Override
-	public CustomMenuConfigRecord setIsJiggle(String value) {
+	public CustomMenuConfigRecord setIsJiggle(Boolean value) {
 		setValue(4, value);
 		return this;
 	}
@@ -128,11 +128,10 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	/**
 	 * Getter for <code>mobsters.custom_menu_config.is_jiggle</code>.
 	 */
-	@Column(name = "is_jiggle", length = 45)
-	@Size(max = 45)
+	@Column(name = "is_jiggle", precision = 1)
 	@Override
-	public String getIsJiggle() {
-		return (String) getValue(4);
+	public Boolean getIsJiggle() {
+		return (Boolean) getValue(4);
 	}
 
 	/**
@@ -154,6 +153,42 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 		return (String) getValue(5);
 	}
 
+	/**
+	 * Setter for <code>mobsters.custom_menu_config.ipad_position_x</code>.
+	 */
+	@Override
+	public CustomMenuConfigRecord setIpadPositionX(Integer value) {
+		setValue(6, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.custom_menu_config.ipad_position_x</code>.
+	 */
+	@Column(name = "ipad_position_x", precision = 10)
+	@Override
+	public Integer getIpadPositionX() {
+		return (Integer) getValue(6);
+	}
+
+	/**
+	 * Setter for <code>mobsters.custom_menu_config.ipad_position_y</code>.
+	 */
+	@Override
+	public CustomMenuConfigRecord setIpadPositionY(Integer value) {
+		setValue(7, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.custom_menu_config.ipad_position_y</code>.
+	 */
+	@Column(name = "ipad_position_y", precision = 10)
+	@Override
+	public Integer getIpadPositionY() {
+		return (Integer) getValue(7);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -167,23 +202,23 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	}
 
 	// -------------------------------------------------------------------------
-	// Record6 type implementation
+	// Record8 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row6<Integer, Integer, Integer, Integer, String, String> fieldsRow() {
-		return (Row6) super.fieldsRow();
+	public Row8<Integer, Integer, Integer, Integer, Boolean, String, Integer, Integer> fieldsRow() {
+		return (Row8) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row6<Integer, Integer, Integer, Integer, String, String> valuesRow() {
-		return (Row6) super.valuesRow();
+	public Row8<Integer, Integer, Integer, Integer, Boolean, String, Integer, Integer> valuesRow() {
+		return (Row8) super.valuesRow();
 	}
 
 	/**
@@ -222,7 +257,7 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field5() {
+	public Field<Boolean> field5() {
 		return CustomMenuConfig.CUSTOM_MENU_CONFIG.IS_JIGGLE;
 	}
 
@@ -232,6 +267,22 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	@Override
 	public Field<String> field6() {
 		return CustomMenuConfig.CUSTOM_MENU_CONFIG.IMAGE_NAME;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Integer> field7() {
+		return CustomMenuConfig.CUSTOM_MENU_CONFIG.IPAD_POSITION_X;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Integer> field8() {
+		return CustomMenuConfig.CUSTOM_MENU_CONFIG.IPAD_POSITION_Y;
 	}
 
 	/**
@@ -270,7 +321,7 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value5() {
+	public Boolean value5() {
 		return getIsJiggle();
 	}
 
@@ -280,6 +331,22 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	@Override
 	public String value6() {
 		return getImageName();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value7() {
+		return getIpadPositionX();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value8() {
+		return getIpadPositionY();
 	}
 
 	/**
@@ -322,7 +389,7 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CustomMenuConfigRecord value5(String value) {
+	public CustomMenuConfigRecord value5(Boolean value) {
 		setIsJiggle(value);
 		return this;
 	}
@@ -340,13 +407,33 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CustomMenuConfigRecord values(Integer value1, Integer value2, Integer value3, Integer value4, String value5, String value6) {
+	public CustomMenuConfigRecord value7(Integer value) {
+		setIpadPositionX(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public CustomMenuConfigRecord value8(Integer value) {
+		setIpadPositionY(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public CustomMenuConfigRecord values(Integer value1, Integer value2, Integer value3, Integer value4, Boolean value5, String value6, Integer value7, Integer value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
 		value4(value4);
 		value5(value5);
 		value6(value6);
+		value7(value7);
+		value8(value8);
 		return this;
 	}
 
@@ -365,6 +452,8 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 		setPositionZ(from.getPositionZ());
 		setIsJiggle(from.getIsJiggle());
 		setImageName(from.getImageName());
+		setIpadPositionX(from.getIpadPositionX());
+		setIpadPositionY(from.getIpadPositionY());
 	}
 
 	/**
@@ -390,7 +479,7 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 	/**
 	 * Create a detached, initialised CustomMenuConfigRecord
 	 */
-	public CustomMenuConfigRecord(Integer customMenuId, Integer positionX, Integer positionY, Integer positionZ, String isJiggle, String imageName) {
+	public CustomMenuConfigRecord(Integer customMenuId, Integer positionX, Integer positionY, Integer positionZ, Boolean isJiggle, String imageName, Integer ipadPositionX, Integer ipadPositionY) {
 		super(CustomMenuConfig.CUSTOM_MENU_CONFIG);
 
 		setValue(0, customMenuId);
@@ -399,5 +488,7 @@ public class CustomMenuConfigRecord extends UpdatableRecordImpl<CustomMenuConfig
 		setValue(3, positionZ);
 		setValue(4, isJiggle);
 		setValue(5, imageName);
+		setValue(6, ipadPositionX);
+		setValue(7, ipadPositionY);
 	}
 }

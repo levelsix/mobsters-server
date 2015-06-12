@@ -38,7 +38,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 })
 public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistoryRecord> implements IPvpBattleHistory {
 
-	private static final long serialVersionUID = 385726312;
+	private static final long serialVersionUID = 1121818523;
 
 	/**
 	 * Setter for <code>mobsters.pvp_battle_history.attacker_id</code>.
@@ -442,11 +442,83 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	}
 
 	/**
+	 * Setter for <code>mobsters.pvp_battle_history.cash_stolen_from_storage</code>.
+	 */
+	@Override
+	public PvpBattleHistoryRecord setCashStolenFromStorage(Integer value) {
+		setValue(22, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.pvp_battle_history.cash_stolen_from_storage</code>.
+	 */
+	@Column(name = "cash_stolen_from_storage", precision = 10)
+	@Override
+	public Integer getCashStolenFromStorage() {
+		return (Integer) getValue(22);
+	}
+
+	/**
+	 * Setter for <code>mobsters.pvp_battle_history.cash_stolen_from_generators</code>.
+	 */
+	@Override
+	public PvpBattleHistoryRecord setCashStolenFromGenerators(Integer value) {
+		setValue(23, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.pvp_battle_history.cash_stolen_from_generators</code>.
+	 */
+	@Column(name = "cash_stolen_from_generators", precision = 10)
+	@Override
+	public Integer getCashStolenFromGenerators() {
+		return (Integer) getValue(23);
+	}
+
+	/**
+	 * Setter for <code>mobsters.pvp_battle_history.oil_stolen_from_storage</code>.
+	 */
+	@Override
+	public PvpBattleHistoryRecord setOilStolenFromStorage(Integer value) {
+		setValue(24, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.pvp_battle_history.oil_stolen_from_storage</code>.
+	 */
+	@Column(name = "oil_stolen_from_storage", precision = 10)
+	@Override
+	public Integer getOilStolenFromStorage() {
+		return (Integer) getValue(24);
+	}
+
+	/**
+	 * Setter for <code>mobsters.pvp_battle_history.oil_stolen_from_generators</code>.
+	 */
+	@Override
+	public PvpBattleHistoryRecord setOilStolenFromGenerators(Integer value) {
+		setValue(25, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.pvp_battle_history.oil_stolen_from_generators</code>.
+	 */
+	@Column(name = "oil_stolen_from_generators", precision = 10)
+	@Override
+	public Integer getOilStolenFromGenerators() {
+		return (Integer) getValue(25);
+	}
+
+	/**
 	 * Setter for <code>mobsters.pvp_battle_history.attacker_won</code>.
 	 */
 	@Override
 	public PvpBattleHistoryRecord setAttackerWon(Boolean value) {
-		setValue(22, value);
+		setValue(26, value);
 		return this;
 	}
 
@@ -456,7 +528,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Column(name = "attacker_won", precision = 1)
 	@Override
 	public Boolean getAttackerWon() {
-		return (Boolean) getValue(22);
+		return (Boolean) getValue(26);
 	}
 
 	/**
@@ -464,7 +536,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	 */
 	@Override
 	public PvpBattleHistoryRecord setCancelled(Boolean value) {
-		setValue(23, value);
+		setValue(27, value);
 		return this;
 	}
 
@@ -474,7 +546,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Column(name = "cancelled", precision = 1)
 	@Override
 	public Boolean getCancelled() {
-		return (Boolean) getValue(23);
+		return (Boolean) getValue(27);
 	}
 
 	/**
@@ -482,7 +554,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	 */
 	@Override
 	public PvpBattleHistoryRecord setExactedRevenge(Boolean value) {
-		setValue(24, value);
+		setValue(28, value);
 		return this;
 	}
 
@@ -492,7 +564,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Column(name = "exacted_revenge", precision = 1)
 	@Override
 	public Boolean getExactedRevenge() {
-		return (Boolean) getValue(24);
+		return (Boolean) getValue(28);
 	}
 
 	/**
@@ -500,7 +572,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	 */
 	@Override
 	public PvpBattleHistoryRecord setDisplayToDefender(Boolean value) {
-		setValue(25, value);
+		setValue(29, value);
 		return this;
 	}
 
@@ -510,7 +582,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Column(name = "display_to_defender", precision = 1)
 	@Override
 	public Boolean getDisplayToDefender() {
-		return (Boolean) getValue(25);
+		return (Boolean) getValue(29);
 	}
 
 	/**
@@ -518,7 +590,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	 */
 	@Override
 	public PvpBattleHistoryRecord setPvpDmgMultiplier(Double value) {
-		setValue(26, value);
+		setValue(30, value);
 		return this;
 	}
 
@@ -528,7 +600,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Column(name = "pvp_dmg_multiplier", precision = 12)
 	@Override
 	public Double getPvpDmgMultiplier() {
-		return (Double) getValue(26);
+		return (Double) getValue(30);
 	}
 
 	/**
@@ -536,7 +608,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	 */
 	@Override
 	public PvpBattleHistoryRecord setClanAvenged(Boolean value) {
-		setValue(27, value);
+		setValue(31, value);
 		return this;
 	}
 
@@ -546,7 +618,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Column(name = "clan_avenged", precision = 1)
 	@Override
 	public Boolean getClanAvenged() {
-		return (Boolean) getValue(27);
+		return (Boolean) getValue(31);
 	}
 
 	/**
@@ -554,7 +626,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	 */
 	@Override
 	public PvpBattleHistoryRecord setReplayId(String value) {
-		setValue(28, value);
+		setValue(32, value);
 		return this;
 	}
 
@@ -565,7 +637,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	@Size(max = 36)
 	@Override
 	public String getReplayId() {
-		return (String) getValue(28);
+		return (String) getValue(32);
 	}
 
 	// -------------------------------------------------------------------------
@@ -611,6 +683,10 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 		setDefenderCashChange(from.getDefenderCashChange());
 		setAttackerOilChange(from.getAttackerOilChange());
 		setDefenderOilChange(from.getDefenderOilChange());
+		setCashStolenFromStorage(from.getCashStolenFromStorage());
+		setCashStolenFromGenerators(from.getCashStolenFromGenerators());
+		setOilStolenFromStorage(from.getOilStolenFromStorage());
+		setOilStolenFromGenerators(from.getOilStolenFromGenerators());
 		setAttackerWon(from.getAttackerWon());
 		setCancelled(from.getCancelled());
 		setExactedRevenge(from.getExactedRevenge());
@@ -643,7 +719,7 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 	/**
 	 * Create a detached, initialised PvpBattleHistoryRecord
 	 */
-	public PvpBattleHistoryRecord(String attackerId, String defenderId, Timestamp battleEndTime, Timestamp battleStartTime, Integer attackerEloChange, Integer attackerEloBefore, Integer attackerEloAfter, Integer defenderEloChange, Integer defenderEloBefore, Integer defenderEloAfter, Integer attackerPrevLeague, Integer attackerCurLeague, Integer defenderPrevLeague, Integer defenderCurLeague, Integer attackerPrevRank, Integer attackerCurRank, Integer defenderPrevRank, Integer defenderCurRank, Integer attackerCashChange, Integer defenderCashChange, Integer attackerOilChange, Integer defenderOilChange, Boolean attackerWon, Boolean cancelled, Boolean exactedRevenge, Boolean displayToDefender, Double pvpDmgMultiplier, Boolean clanAvenged, String replayId) {
+	public PvpBattleHistoryRecord(String attackerId, String defenderId, Timestamp battleEndTime, Timestamp battleStartTime, Integer attackerEloChange, Integer attackerEloBefore, Integer attackerEloAfter, Integer defenderEloChange, Integer defenderEloBefore, Integer defenderEloAfter, Integer attackerPrevLeague, Integer attackerCurLeague, Integer defenderPrevLeague, Integer defenderCurLeague, Integer attackerPrevRank, Integer attackerCurRank, Integer defenderPrevRank, Integer defenderCurRank, Integer attackerCashChange, Integer defenderCashChange, Integer attackerOilChange, Integer defenderOilChange, Integer cashStolenFromStorage, Integer cashStolenFromGenerators, Integer oilStolenFromStorage, Integer oilStolenFromGenerators, Boolean attackerWon, Boolean cancelled, Boolean exactedRevenge, Boolean displayToDefender, Double pvpDmgMultiplier, Boolean clanAvenged, String replayId) {
 		super(PvpBattleHistory.PVP_BATTLE_HISTORY);
 
 		setValue(0, attackerId);
@@ -668,12 +744,16 @@ public class PvpBattleHistoryRecord extends UpdatableRecordImpl<PvpBattleHistory
 		setValue(19, defenderCashChange);
 		setValue(20, attackerOilChange);
 		setValue(21, defenderOilChange);
-		setValue(22, attackerWon);
-		setValue(23, cancelled);
-		setValue(24, exactedRevenge);
-		setValue(25, displayToDefender);
-		setValue(26, pvpDmgMultiplier);
-		setValue(27, clanAvenged);
-		setValue(28, replayId);
+		setValue(22, cashStolenFromStorage);
+		setValue(23, cashStolenFromGenerators);
+		setValue(24, oilStolenFromStorage);
+		setValue(25, oilStolenFromGenerators);
+		setValue(26, attackerWon);
+		setValue(27, cancelled);
+		setValue(28, exactedRevenge);
+		setValue(29, displayToDefender);
+		setValue(30, pvpDmgMultiplier);
+		setValue(31, clanAvenged);
+		setValue(32, replayId);
 	}
 }
