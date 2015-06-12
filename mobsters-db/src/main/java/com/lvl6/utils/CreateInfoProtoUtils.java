@@ -597,8 +597,8 @@ public class CreateInfoProtoUtils {
 			}
 			
 			int prospectiveOilWinnings = 0;
-			if(userIdToCashReward.containsKey(userId)) {
-				prospectiveOilWinnings = userIdToCashReward.get(userId);;
+			if(userIdToOilReward.containsKey(userId)) {
+				prospectiveOilWinnings = userIdToOilReward.get(userId);;
 			}
 			
 			Clan clan = null;
