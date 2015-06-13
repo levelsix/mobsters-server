@@ -111,6 +111,7 @@ public class SalesScheduleRetrieveUtils {
 						HashMap<Integer, SalesSchedule> salesScheduleIdsToSalesSchedulesTemp = new HashMap<Integer, SalesSchedule>();
 						while (rs.next()) {  //should only be one
 							SalesSchedule salesSchedule = convertRSRowToSalesSchedule(rs);
+							log.info("salesschedule id {}, timeStart {}, timeEnd {}", new Object[]{salesSchedule.getId(), salesSchedule.getTimeStart(), salesSchedule.getTimeEnd()});
 							if (salesSchedule != null)
 								salesScheduleIdsToSalesSchedulesTemp.put(
 										salesSchedule.getId(), salesSchedule);

@@ -316,8 +316,8 @@ public class ReloadAllRareChangeStaticData {
 	protected StaticDataContainer staticDataContainer;
 
 	private static final Logger log = LoggerFactory
-			.getLogger(MiscMethods.class);
-
+			.getLogger(ReloadAllRareChangeStaticData.class);
+	
 	public void reloadAllRareChangeStaticData() {
 		log.info("Reloading rare change static data");
 		achievementRetrieveUtils.reload();
