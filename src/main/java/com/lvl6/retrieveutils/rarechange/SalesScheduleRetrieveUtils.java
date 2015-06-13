@@ -85,6 +85,9 @@ public class SalesScheduleRetrieveUtils {
 		for(Integer salesScheduleId : salesScheduleIdsToSalesSchedules.keySet()) {
 			SalesSchedule ss = salesScheduleIdsToSalesSchedules.get(salesScheduleId);
 			Date timeStart = new Date(ss.getTimeStart().getTime());
+			log.info("sales schedule time start: {}", ss.getTimeStart());
+			log.info("now time stamp: {}", new Timestamp(now.getTime()));
+			log.info("sales schedule time end: {}", ss.getTimeEnd());
 			Date timeEnd = new Date(ss.getTimeEnd().getTime());
 			if(timeUtils.isFirstEarlierThanSecond(timeStart, now) &&
                         timeUtils.isFirstEarlierThanSecond(now, timeEnd)) {
