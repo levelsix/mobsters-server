@@ -71,6 +71,7 @@ public class DBConstants {
 	public static final String TABLE_MINI_EVENT_GOAL_FOR_USER = "mini_event_goal_for_user";
 	public static final String TABLE_MINI_EVENT_LEADERBOARD_REWARD_CONFIG = "mini_event_leaderboard_reward_config";
 	public static final String TABLE_MINI_EVENT_TIER_REWARD_CONFIG = "mini_event_tier_reward_config";
+	public static final String TABLE_MINI_EVENT_TIMETABLE_CONFIG = "mini_event_timetable_config";
 	public static final String TABLE_MINI_JOB_CONFIG = "mini_job_config";
 	public static final String TABLE_MINI_JOB_FOR_USER = "mini_job_for_user";
 	public static final String TABLE_MINI_JOB_FOR_USER_HISTORY = "mini_job_for_user_history";
@@ -1107,6 +1108,11 @@ public class DBConstants {
 	public static final String MINI_EVENT_TIER_REWARD__MINI_EVENT_FOR_PLAYER_LVL_ID = "mini_event_for_player_lvl_id";
 	public static final String MINI_EVENT_TIER_REWARD__REWARD_ID = "reward_id";
 	public static final String MINI_EVENT_TIER_REWARD__REWARD_TIER = "reward_tier";
+
+	public static final String MINI_EVENT_TIMETABLE__ID = GENERIC__ID;
+	public static final String MINI_EVENT_TIMETABLE__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_TIMETABLE__START_TIME = "start_time";
+	public static final String MINI_EVENT_TIMETABLE__END_TIME = "end_time";
 
 	public static final String MINI_JOB__ID = GENERIC__ID;
 	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id";
