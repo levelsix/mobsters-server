@@ -21,6 +21,8 @@ import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -2350,7 +2352,8 @@ public class CreateInfoProtoUtils {
 
 	/** MiniEvent.proto ********************************************/
 	public UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
-			MiniEvent me, Collection<MiniEventGoalForUser> megfus,
+			MiniEventConfig me, MiniEventTimetableConfig metc,
+			Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards,
@@ -2358,7 +2361,7 @@ public class CreateInfoProtoUtils {
 	{
 		UserMiniEventProto.Builder umepb = createUserMiniEventProto(mefu);
 
-		MiniEventProto mep = createMiniEventProto(me, mefpl, rewards, goals,
+		MiniEventProto mep = createMiniEventProto(me, metc, mefpl, rewards, goals,
 				leaderboardRewards, rewardRetrieveUtil);
 		umepb.setMiniEvent(mep);
 
@@ -2386,7 +2389,8 @@ public class CreateInfoProtoUtils {
 		return umepb;
 	}
 
-	public MiniEventProto createMiniEventProto(MiniEvent me,
+	public MiniEventProto createMiniEventProto(MiniEventConfig me,
+			MiniEventTimetableConfig metc,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards,
@@ -2395,12 +2399,14 @@ public class CreateInfoProtoUtils {
 		MiniEventProto.Builder mepb = MiniEventProto.newBuilder();
 		mepb.setMiniEventId(me.getId());
 
-		Date d = me.getStartTime();
+		//Date d = me.getStartTime();
+		Date d = metc.getStartTime();
 		if (null != d) {
 			mepb.setMiniEventStartTime(d.getTime());
 		}
 
-		d = me.getEndTime();
+		//d = me.getEndTime();
+		d = metc.getEndTime();
 		if (null != d) {
 			mepb.setMiniEventEndTime(d.getTime());
 		}
@@ -2421,7 +2427,7 @@ public class CreateInfoProtoUtils {
 			mepb.setName(str);
 		}
 
-		str = me.getDesc();
+		str = me.getDescription();
 		if (null != str) {
 			mepb.setDesc(str);
 		}

@@ -35,6 +35,7 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRefreshItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
@@ -142,7 +143,7 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected CustomMenuRetrieveUtils customMenuRetrieveUtils;
-	
+
 	@Autowired
 	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
 
@@ -172,6 +173,9 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+
+	@Autowired
+	protected MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
 
 	@Autowired
 	protected MiniJobRetrieveUtils miniJobRetrieveUtils;
@@ -354,6 +358,7 @@ public class ReloadAllRareChangeStaticData {
 		miniEventLeaderboardRewardRetrieveUtils.reload();
 		miniEventRetrieveUtils.reload();
 		miniEventTierRewardRetrieveUtils.reload();
+		miniEventTimetableRetrieveUtil.reload();
 		miniJobRetrieveUtils.reload();
 		miniJobRefreshItemRetrieveUtils.reload();
 		monsterBattleDialogueRetrieveUtils.reload();

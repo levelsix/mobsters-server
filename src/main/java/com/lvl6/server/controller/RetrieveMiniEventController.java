@@ -26,8 +26,9 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
-import com.lvl6.server.Locker;
+import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -39,17 +40,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RetrieveMiniEventController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventController.class);
 
 	public RetrieveMiniEventController() {
-		
+
 	}
 	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
@@ -82,6 +83,9 @@ public class RetrieveMiniEventController extends EventController {
 
 	@Autowired
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+
+	@Autowired
+	protected MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtil;
@@ -149,7 +153,8 @@ public class RetrieveMiniEventController extends EventController {
 					insertUtil, deleteUtil, miniEventGoalRetrieveUtils,
 					miniEventForPlayerLvlRetrieveUtils, miniEventRetrieveUtils,
 					miniEventTierRewardRetrieveUtils,
-					miniEventLeaderboardRewardRetrieveUtils, timeUtil);
+					miniEventLeaderboardRewardRetrieveUtils,
+					miniEventTimetableRetrieveUtil, timeUtil);
 
 			rmea.execute(resBuilder);
 
@@ -161,6 +166,7 @@ public class RetrieveMiniEventController extends EventController {
 				UserMiniEventProto umep = createInfoProtoUtils
 						.createUserMiniEventProto(
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+								rmea.getCurActiveMiniEventTimetable(),
 								rmea.getMegfus(),
 								rmea.getLvlEntered(), rmea.getRewards(),
 								rmea.getGoals(), rmea.getLeaderboardRewards(),
