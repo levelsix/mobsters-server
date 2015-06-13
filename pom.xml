@@ -39,6 +39,7 @@
 	</scm>
 
 	<modules>
+		<module>jooq-custom-codegenerator</module>
 		<module>mobsters-protos</module>
 		<module>mobsters-db</module>
 		<module>mobsters-webapp</module>
