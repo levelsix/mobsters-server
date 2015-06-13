@@ -1,24 +1,5 @@
 package com.lvl6.server;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskExecutor;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.HazelcastInstanceAware;
-import com.hazelcast.core.ITopic;
-import com.hazelcast.core.MessageListener;
 
 public class ServerInstance{// implements InitializingBean,MessageListener<Message<?>>, HazelcastInstanceAware {
 

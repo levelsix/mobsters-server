@@ -39,9 +39,9 @@ import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
-import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.server.eventsender.PreDBResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 

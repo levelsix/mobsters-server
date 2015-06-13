@@ -32,14 +32,16 @@ import javax.validation.constraints.Size;
 })
 public class CustomMenuConfig implements ICustomMenuConfig {
 
-	private static final long serialVersionUID = -780964091;
+	private static final long serialVersionUID = 976554705;
 
 	private Integer customMenuId;
 	private Integer positionX;
 	private Integer positionY;
 	private Integer positionZ;
-	private String  isJiggle;
+	private Boolean isJiggle;
 	private String  imageName;
+	private Integer ipadPositionX;
+	private Integer ipadPositionY;
 
 	public CustomMenuConfig() {}
 
@@ -50,6 +52,8 @@ public class CustomMenuConfig implements ICustomMenuConfig {
 		this.positionZ = value.positionZ;
 		this.isJiggle = value.isJiggle;
 		this.imageName = value.imageName;
+		this.ipadPositionX = value.ipadPositionX;
+		this.ipadPositionY = value.ipadPositionY;
 	}
 
 	public CustomMenuConfig(
@@ -57,8 +61,10 @@ public class CustomMenuConfig implements ICustomMenuConfig {
 		Integer positionX,
 		Integer positionY,
 		Integer positionZ,
-		String  isJiggle,
-		String  imageName
+		Boolean isJiggle,
+		String  imageName,
+		Integer ipadPositionX,
+		Integer ipadPositionY
 	) {
 		this.customMenuId = customMenuId;
 		this.positionX = positionX;
@@ -66,6 +72,8 @@ public class CustomMenuConfig implements ICustomMenuConfig {
 		this.positionZ = positionZ;
 		this.isJiggle = isJiggle;
 		this.imageName = imageName;
+		this.ipadPositionX = ipadPositionX;
+		this.ipadPositionY = ipadPositionY;
 	}
 
 	@Column(name = "custom_menu_id", nullable = false, precision = 10)
@@ -118,15 +126,14 @@ public class CustomMenuConfig implements ICustomMenuConfig {
 		return this;
 	}
 
-	@Column(name = "is_jiggle", length = 45)
-	@Size(max = 45)
+	@Column(name = "is_jiggle", precision = 1)
 	@Override
-	public String getIsJiggle() {
+	public Boolean getIsJiggle() {
 		return this.isJiggle;
 	}
 
 	@Override
-	public CustomMenuConfig setIsJiggle(String isJiggle) {
+	public CustomMenuConfig setIsJiggle(Boolean isJiggle) {
 		this.isJiggle = isJiggle;
 		return this;
 	}
@@ -141,6 +148,30 @@ public class CustomMenuConfig implements ICustomMenuConfig {
 	@Override
 	public CustomMenuConfig setImageName(String imageName) {
 		this.imageName = imageName;
+		return this;
+	}
+
+	@Column(name = "ipad_position_x", precision = 10)
+	@Override
+	public Integer getIpadPositionX() {
+		return this.ipadPositionX;
+	}
+
+	@Override
+	public CustomMenuConfig setIpadPositionX(Integer ipadPositionX) {
+		this.ipadPositionX = ipadPositionX;
+		return this;
+	}
+
+	@Column(name = "ipad_position_y", precision = 10)
+	@Override
+	public Integer getIpadPositionY() {
+		return this.ipadPositionY;
+	}
+
+	@Override
+	public CustomMenuConfig setIpadPositionY(Integer ipadPositionY) {
+		this.ipadPositionY = ipadPositionY;
 		return this;
 	}
 
@@ -159,6 +190,8 @@ public class CustomMenuConfig implements ICustomMenuConfig {
 		setPositionZ(from.getPositionZ());
 		setIsJiggle(from.getIsJiggle());
 		setImageName(from.getImageName());
+		setIpadPositionX(from.getIpadPositionX());
+		setIpadPositionY(from.getIpadPositionY());
 	}
 
 	/**

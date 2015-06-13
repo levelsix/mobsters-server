@@ -18,7 +18,6 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;

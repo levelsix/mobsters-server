@@ -210,8 +210,12 @@
 			<artifactId>mockito-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.memetix</groupId>
-			<artifactId>microsoft-translator-java-api</artifactId>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
 		</dependency>
 	</dependencies>
 </project>

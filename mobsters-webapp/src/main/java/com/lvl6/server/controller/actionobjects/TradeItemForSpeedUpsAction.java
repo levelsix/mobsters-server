@@ -2,7 +2,6 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +23,6 @@ import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.controller.utils.HistoryUtils;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
-import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;

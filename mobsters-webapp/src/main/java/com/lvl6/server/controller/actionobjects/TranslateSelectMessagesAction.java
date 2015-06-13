@@ -22,7 +22,7 @@ import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Transl
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.server.controller.utils.TranslationUtils;
+import com.lvl6.utils.TranslationUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;

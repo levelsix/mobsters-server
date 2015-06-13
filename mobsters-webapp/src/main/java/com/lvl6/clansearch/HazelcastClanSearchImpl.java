@@ -19,7 +19,6 @@ import com.hazelcast.core.IMap;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
 import com.lvl6.datastructures.ZSetMember;
-import com.lvl6.info.StrengthLeaderBoard;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanChatPost;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanForUser;
@@ -27,7 +26,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanHelpCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonation;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
-import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.TimeUtils;
 
 @Component
 public class HazelcastClanSearchImpl {

@@ -22,7 +22,7 @@ import com.lvl6.pvp.PvpUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class QueueUpAction {

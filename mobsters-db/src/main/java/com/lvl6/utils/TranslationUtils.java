@@ -1,4 +1,4 @@
-package com.lvl6.server.controller.utils;
+package com.lvl6.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -242,9 +242,7 @@ public class TranslationUtils {
         try {
 			detectedLanguage = Detect.execute(text);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error("error detecting language of text=%s", text);
-			e.printStackTrace();
+			log.error("error detecting language of text={}", text, e);
 		}
         return detectedLanguage;
 	}

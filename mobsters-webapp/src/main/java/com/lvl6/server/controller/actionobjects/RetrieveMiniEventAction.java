@@ -32,13 +32,13 @@ import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
-import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RetrieveMiniEventAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventAction.class);
 
 	private String userId;
 	private Date now;

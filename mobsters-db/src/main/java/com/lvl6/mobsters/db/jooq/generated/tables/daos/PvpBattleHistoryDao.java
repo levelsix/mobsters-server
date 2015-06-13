@@ -207,6 +207,34 @@ public class PvpBattleHistoryDao extends DAOImpl<PvpBattleHistoryRecord, com.lvl
 	}
 
 	/**
+	 * Fetch records that have <code>cash_stolen_from_storage IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByCashStolenFromStorage(Integer... values) {
+		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.CASH_STOLEN_FROM_STORAGE, values);
+	}
+
+	/**
+	 * Fetch records that have <code>cash_stolen_from_generators IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByCashStolenFromGenerators(Integer... values) {
+		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.CASH_STOLEN_FROM_GENERATORS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>oil_stolen_from_storage IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByOilStolenFromStorage(Integer... values) {
+		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.OIL_STOLEN_FROM_STORAGE, values);
+	}
+
+	/**
+	 * Fetch records that have <code>oil_stolen_from_generators IN (values)</code>
+	 */
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByOilStolenFromGenerators(Integer... values) {
+		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.OIL_STOLEN_FROM_GENERATORS, values);
+	}
+
+	/**
 	 * Fetch records that have <code>attacker_won IN (values)</code>
 	 */
 	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> fetchByAttackerWon(Boolean... values) {

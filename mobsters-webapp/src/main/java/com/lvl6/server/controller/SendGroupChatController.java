@@ -43,10 +43,10 @@ import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomTranslationRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TranslationUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.memetix.mst.language.Language;
 

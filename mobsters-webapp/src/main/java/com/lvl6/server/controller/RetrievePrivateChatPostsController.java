@@ -33,10 +33,10 @@ import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.server.controller.utils.TranslationUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TranslationUtils;
 
 @Component
 public class RetrievePrivateChatPostsController extends EventController {

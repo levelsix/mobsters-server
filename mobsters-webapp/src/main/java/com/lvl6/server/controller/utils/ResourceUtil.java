@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 
 @Component
 public class ResourceUtil {

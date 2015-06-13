@@ -21,6 +21,7 @@ import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -206,6 +207,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.utils.TranslationUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -1485,7 +1487,6 @@ public class CreateInfoProtoUtils {
 
 		if(!turnOffTranslation) {
 			if(translatedMap == null) {
-
 				translatedMap = translationUtils.translate(null, null, content, serverToggleRetrieveUtils);
 			}
 			for(TranslateLanguages tl : translatedMap.keySet()) {

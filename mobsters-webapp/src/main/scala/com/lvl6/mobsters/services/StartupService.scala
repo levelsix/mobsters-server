@@ -145,7 +145,7 @@ import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction
 import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
 import com.lvl6.server.controller.utils.SecretGiftUtils
-import com.lvl6.server.controller.utils.TimeUtils
+import com.lvl6.utils.TimeUtils
 import com.lvl6.server.metrics.Metrics.timed
 import com.lvl6.utils.CreateInfoProtoUtils
 import com.lvl6.utils.utilmethods.DeleteUtil

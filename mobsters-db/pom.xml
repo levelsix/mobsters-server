@@ -152,5 +152,9 @@
 			<groupId>json-java</groupId>
 			<artifactId>json-java</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.memetix</groupId>
+			<artifactId>microsoft-translator-java-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>

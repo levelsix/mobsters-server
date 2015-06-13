@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.Sets;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniEventTimetableConfigDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
-import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.TimeUtils;
 
 @Component
 public class MiniEventTimetableRetrieveUtils {

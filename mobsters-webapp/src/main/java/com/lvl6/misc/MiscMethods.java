@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -30,7 +29,6 @@ import au.com.bytecode.opencsv.CSVReader;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
-import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.FileDownload;
@@ -44,7 +42,6 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
-import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.BoosterPackConstantsProto;
@@ -85,9 +82,6 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
-import com.memetix.mst.detect.Detect;
-import com.memetix.mst.language.Language;
-import com.memetix.mst.translate.Translate;
 
 @Component
 public class MiscMethods {

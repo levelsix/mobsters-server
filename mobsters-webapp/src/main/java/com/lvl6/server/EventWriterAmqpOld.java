@@ -9,13 +9,11 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.lvl6.events.BroadcastResponseEvent;
 import com.lvl6.events.GameEvent;
 import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.events.ResponseEvent;
-import com.lvl6.properties.Globals;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.NIOUtils;
 

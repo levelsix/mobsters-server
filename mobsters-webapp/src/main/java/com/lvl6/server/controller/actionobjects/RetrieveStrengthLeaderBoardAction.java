@@ -10,7 +10,6 @@ import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.Builder;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus;
 import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 

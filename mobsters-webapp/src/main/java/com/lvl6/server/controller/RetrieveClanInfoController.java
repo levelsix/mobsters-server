@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
-import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
@@ -27,7 +26,6 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
@@ -46,9 +44,9 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 
 @Component
 

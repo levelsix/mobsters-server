@@ -26,7 +26,6 @@ import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.server.eventsender.EventWriter;
-import com.lvl6.util.EventParser;
 import com.lvl6.utils.ConnectedPlayer;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {
@@ -223,7 +222,8 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 				purgeProto.setStaticDataStuff(sdp);
 
 				pcsd.setPurgeClientStaticDataResponseProto(purgeProto.build());
-				writer.sendToSinglePlayer(playa, EventParser.getResponseBytes("", pcsd));//handleEvent(pcsd);
+				//TODO: this has to be changed for websockets
+				//writer.sendToSinglePlayer(playa, EventParser.getResponseBytes("", pcsd));//handleEvent(pcsd);
 			}
 		}
 	}
