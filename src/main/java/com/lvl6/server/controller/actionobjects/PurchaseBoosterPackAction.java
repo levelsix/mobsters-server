@@ -185,15 +185,15 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
-		if (gemsSpent <= 0) {
+		if (gemsSpent < 0) {
 			log.warn("client sent negative gems. {}. Making positive", gemsSpent);
 			gemsSpent = Math.abs(gemsSpent);
 		}
 
-		if (gachaCreditsChange >= 0) {
-			log.warn("client sent positive gachaCredits. {}. Making negative",
-					gachaCreditsChange);
-			gachaCreditsChange = -1 * gachaCreditsChange;
+		if (gachaCreditsChange >= 0 && gemsSpent <= 0) {
+			log.warn("client sent nonnegative gachaCredits={}, nonpositive gems={}",
+					gachaCreditsChange, gemsSpent);
+//			gachaCreditsChange = -1 * gachaCreditsChange;
 		}
 
 		return true;

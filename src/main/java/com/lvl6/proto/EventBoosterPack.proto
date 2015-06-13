@@ -25,7 +25,10 @@ message PurchaseBoosterPackRequestProto {
 	
 	optional bool buyingInBulk = 5; //cant be true when getting rigged pack
 	
+	//should only be positive;
 	optional int32 gemsSpent = 6;
+	//can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+	//user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
 	optional int32 gachaCreditsChange = 7;
 }
 
