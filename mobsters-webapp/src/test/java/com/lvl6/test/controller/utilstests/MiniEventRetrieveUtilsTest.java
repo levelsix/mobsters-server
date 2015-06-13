@@ -18,9 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
-import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
-import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.utils.TimeUtils;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration("/test-spring-application-context.xml")
