@@ -24,7 +24,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -33,7 +33,7 @@ public class ClanStuffUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -109,19 +109,19 @@ public class ClanStuffUtils {
 		return caList;
 	}
 
-	public Map<String, MinimumUserProtoWithLevel> extractAttackerFullUserProto(
+	public Map<String, MinimumUserProto> extractAttackerFullUserProto(
 			List<PvpHistoryProto> phpList) {
-		Map<String, MinimumUserProtoWithLevel> idToMupWl = new HashMap<String, MinimumUserProtoWithLevel>();
+		Map<String, MinimumUserProto> idToMup = new HashMap<String, MinimumUserProto>();
 
 		for (PvpHistoryProto php : phpList) {
 			FullUserProto attacker = php.getAttacker();
 			String attackerId = attacker.getUserUuid();
-			MinimumUserProtoWithLevel mupwl = createInfoProtoUtils
+			MinimumUserProto mup = createInfoProtoUtils
 					.createMinimumUserProto(attacker);
 
-			idToMupWl.put(attackerId, mupwl);
+			idToMup.put(attackerId, mup);
 		}
-		return idToMupWl;
+		return idToMup;
 	}
 
 	public List<ClanAvengeUser> extractClanAvengeUser(
@@ -168,8 +168,8 @@ public class ClanStuffUtils {
 		}
 		return cmtd;
 	}
-	
-	public Set<String> getAuthorizedClanMembers(User user, 
+
+	public Set<String> getAuthorizedClanMembers(User user,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			Map<String, String> userIdsToStatuses,
 			String leaderStatus, String jrLeaderStatus) {

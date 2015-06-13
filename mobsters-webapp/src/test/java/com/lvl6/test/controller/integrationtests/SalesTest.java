@@ -1,6 +1,8 @@
 package com.lvl6.test.controller.integrationtests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -34,6 +36,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.InAppPurchaseController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -41,8 +44,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class SalesTest {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SalesTest.class);
 
 	private JdbcTemplate jdbcTemplate;
 	private boolean endOfTesting;
@@ -97,7 +99,7 @@ public class SalesTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		//		if (null == userId) {
 		//			throw new RuntimeException("no user was created!");
@@ -185,7 +187,7 @@ public class SalesTest {
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-		inAppPurchaseController.handleEvent(iapre);
+		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
 
 		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtil.getMonstersForUser(userId);
 		
@@ -317,6 +319,10 @@ public class SalesTest {
 //		Map<String, Object> conditionParams = new HashMap<String, Object>();
 //		int totalDeleted = 0;
 //
+//		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
+//		iapre.setTag(1);
+//		iapre.setInAppPurchaseRequestProto(iaprpb.build());
+//		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
 //		conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
 //				userId);
 //		int numDeleted = DBConnection.get().deleteRows(tableName,
@@ -325,5 +331,115 @@ public class SalesTest {
 //
 //		return totalDeleted;
 //	}
+//		
+//
+////		String receipt2 = "ewoJInNpZ25hdHVyZSIgPSAiQW5JVHhmUkJFaEc5dldtQmZzTU1QTHpPc0xKSFgvZGpGMURBTFhSWTB"
+////				+ "MMTZ5QWZpb3NLM2VCbGQ1dmhsTjBxNHNjdGNmdEdmdUllSTFSaVpaRjVTSUp2cGUrN3g2N3dNUFNKWjhIczlwSU"
+////				+ "5hTGVUdjZCVVFrdDMrK2lhYVVLWVU0QVd1QW1mMjB6cWY3dElJVnFaK0h4SHFZdDdPRGlDd0JqMCtRbE93Vj"
+////				+ "lFYkFBQURWekNDQTFNd2dnSTdvQU1DQVFJQ0NCdXA0K1BBaG0vTE1BMEdDU3FHU0liM0RRRUJCUVVBTUg4eEN"
+////				+ "6QUpCZ05WQkFZVEFsVlRNUk13RVFZRFZRUUtEQXBCY0hCc1pTQkpibU11TVNZd0pBWURWUVFMREIxQmNIQnNa"
+////				+ "U0JEWlhKMGFXWnBZMkYwYVc5dUlFRjFkR2h2Y21sMGVURXpNREVHQTFVRUF3d3FRWEJ3YkdVZ2FWUjFibVZ6S"
+////				+ "UZOMGIzSmxJRU5sY25ScFptbGpZWFJwYjI0Z1FYVjBhRzl5YVhSNU1CNFhEVEUwTURZd056QXdNREl5TVZvWER"
+////				+ "URTJNRFV4T0RFNE16RXpNRm93WkRFak1DRUdBMVVFQXd3YVVIVnlZMmhoYzJWU1pXTmxhWEIwUTJWeWRHbG1hV"
+////				+ "05oZEdVeEd6QVpCZ05WQkFzTUVrRndjR3hsSUdsVWRXNWxjeUJUZEc5eVpURVRNQkVHQTFVRUNnd0tRWEJ3Ykd"
+////				+ "VZ1NXNWpMakVMTUFrR0ExVUVCaE1DVlZNd2daOHdEUVlKS29aSWh2Y05BUUVCQlFBRGdZMEFNSUdKQW9HQkFNb"
+////				+ "VRFdUxnamltTHdSSnh5MW9FZjBlc1VORFZFSWU2d0Rzbm5hbDE0aE5CdDF2MTk1WDZuOTNZTzdnaTNvclBTdXg"
+////				+ "5RDU1NFNrTXArU2F5Zzg0bFRjMzYyVXRtWUxwV25iMzRucXlHeDlLQlZUeTVPR1Y0bGpFMU93QytvVG5STStRT"
+////				+ "FJDbWVOeE1iUFpoUzQ3VCtlWnRERWhWQjl1c2szK0pNMkNvZ2Z3bzdBZ01CQUFHamNqQndNQjBHQTFVZERnUVd"
+////				+ "CQlNKYUVlTnVxOURmNlpmTjY4RmUrSTJ1MjJzc0RBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZEl3UVlNQmFBR"
+////				+ "kRZZDZPS2RndElCR0xVeWF3N1hRd3VSV0VNNk1BNEdBMVVkRHdFQi93UUVBd0lIZ0RBUUJnb3Foa2lHOTJOa0J"
+////				+ "nVUJCQUlGQURBTkJna3Foa2lHOXcwQkFRVUZBQU9DQVFFQWVhSlYyVTUxcnhmY3FBQWU1QzIvZkVXOEtVbDRpT"
+////				+ "zRsTXV0YTdONlh6UDFwWkl6MU5ra0N0SUl3ZXlOajVVUllISytIalJLU1U5UkxndU5sMG5rZnhxT2JpTWNrd1J"
+////				+ "1ZEtTcTY5Tkluclp5Q0Q2NlI0Szc3bmI5bE1UQUJTU1lsc0t0OG9OdGxoZ1IvMWtqU1NSUWNIa3RzRGNTaVFHS"
+////				+ "01ka1NscDRBeVhmN3ZuSFBCZTR5Q3dZVjJQcFNOMDRrYm9pSjNwQmx4c0d3Vi9abEwyNk0ydWVZSEtZQ3VYaGR"
+////				+ "xRnd4VmdtNTJoM29lSk9PdC92WTRFY1FxN2VxSG02bTAzWjliN1BSellNMktHWEhEbU9Nazd2RHBlTVZsTERQU"
+////				+ "0dZejErVTNzRHhKemViU3BiYUptVDdpbXpVS2ZnZ0VZN3h4ZjRjemZIMHlqNXdOelNHVE92UT09IjsKCSJwdXJ"
+////				+ "jaGFzZS1pbmZvIiA9ICJld29KSW05eWFXZHBibUZzTFhCMWNtTm9ZWE5sTFdSaGRHVXRjSE4wSWlBOUlDSXlNR"
+////				+ "EUxTFRBeUxUSTBJREUwT2pBeU9qRTJJRUZ0WlhKcFkyRXZURzl6WDBGdVoyVnNaWE1pT3dvSkluVnVhWEYxWlMx"
+////				+ "cFpHVnVkR2xtYVdWeUlpQTlJQ0k0TlRGaFlUQmpNR0kwTWpjMVpESTFaakl4TVRBeU4yVTRNbUV3WVdSaU1qWmp"
+////				+ "NR0U0TXpoa0lqc0tDU0p2Y21sbmFXNWhiQzEwY21GdWMyRmpkR2x2YmkxcFpDSWdQU0FpTVRBd01EQXdNREUwT"
+////				+ "kRjM01URTBNaUk3Q2draVluWnljeUlnUFNBaU1TNHhMakV3TGpFeU5TSTdDZ2tpZEhKaGJuTmhZM1JwYjI0dGF"
+////				+ "XUWlJRDBnSWpFd01EQXdNREF4TkRRM056RXhORElpT3dvSkluRjFZVzUwYVhSNUlpQTlJQ0l4SWpzS0NTSnZjb"
+////				+ "WxuYVc1aGJDMXdkWEpqYUdGelpTMWtZWFJsTFcxeklpQTlJQ0l4TkRJME9ERTFNek0yTkRNeElqc0tDU0oxYm1s"
+////				+ "eGRXVXRkbVZ1Wkc5eUxXbGtaVzUwYVdacFpYSWlJRDBnSWtJM1JVWkdNamcwTFVJeE5Ea3ROREJGUmkxQ056ST"
+////				+ "BMVEV5UXpRek1qVTJRMEkyTVNJN0Nna2ljSEp2WkhWamRDMXBaQ0lnUFNBaVkyOXRMbk5qYjNCbGJIa3ViVzlp"
+////				+ "YzNGMVlXUXVjM1JoY25SbGNuQmhZMnNpT3dvSkltbDBaVzB0YVdRaUlEMGdJamsyTlRrNU16a3hNaUk3Q2draV"
+////				+ "ltbGtJaUE5SUNKamIyMHViSFpzTmk1dGIySnpkR1Z5Y3lJN0Nna2ljSFZ5WTJoaGMyVXRaR0YwWlMxdGN5SWdQ"
+////				+ "U0FpTVRReU5EZ3hOVE16TmpRek1TSTdDZ2tpY0hWeVkyaGhjMlV0WkdGMFpTSWdQU0FpTWpBeE5TMHdNaTB5Tk"
+////				+ "NBeU1qb3dNam94TmlCRmRHTXZSMDFVSWpzS0NTSndkWEpqYUdGelpTMWtZWFJsTFhCemRDSWdQU0FpTWpBeE5T"
+////				+ "MHdNaTB5TkNBeE5Eb3dNam94TmlCQmJXVnlhV05oTDB4dmMxOUJibWRsYkdWeklqc0tDU0p2Y21sbmFXNWhiQz"
+////				+ "F3ZFhKamFHRnpaUzFrWVhSbElpQTlJQ0l5TURFMUxUQXlMVEkwSURJeU9qQXlPakUySUVWMFl5OUhUVlFpT3dw"
+////				+ "OSI7CgkiZW52aXJvbm1lbnQiID0gIlNhbmRib3giOwoJInBvZCIgPSAiMTAwIjsKCSJzaWduaW5nLXN0YXR1cy"
+////				+ "IgPSAiMCI7Cn0";
+////
+////		User user2 = userRetrieveUtil.getUserById(user.getId());
+////		InAppPurchaseRequestProto.Builder iaprpb2 = InAppPurchaseRequestProto
+////				.newBuilder();
+////		iaprpb2.setSender(CreateInfoProtoUtils
+////				.createMinimumUserProtoFromUserAndClan(user2, null));
+////
+////		iaprpb2.setReceipt(receipt2);
+////
+////		InAppPurchaseRequestEvent iapre2 = new InAppPurchaseRequestEvent();
+////		iapre2.setTag(1);
+////		iapre2.setInAppPurchaseRequestProto(iaprpb2.build());
+////		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEvents());
+////		String userStructId = "";
+////
+////		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2
+////				.getUserStructsForUser(user2.getId());
+////		int salesCounter = 0;
+////		for (StructureForUser sfu : sfuList2) {
+////			if (sfu.getStructId() >= 10000) {
+////				salesCounter++;
+////				userStructId = sfu.getId();
+////			}
+////		}
+////		assertTrue(salesCounter == 1);
+////
+////		//destroy money tree
+////		User user3 = userRetrieveUtil.getUserById(user.getId());
+////		DestroySalesStructureRequestProto.Builder dmtsrpb = DestroySalesStructureRequestProto
+////				.newBuilder();
+////		dmtsrpb.setSender(CreateInfoProtoUtils
+////				.createMinimumUserProtoFromUserAndClan(user3, null));
+////
+////		dmtsrpb.addUserStructUuid(userStructId);
+////
+////		DestroySalesStructureRequestEvent dmtsre = new DestroySalesStructureRequestEvent();
+////		dmtsre.setTag(1);
+////		dmtsre.setDestroySalesStructureRequestProto(dmtsrpb.build());
+////		destroySalesStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEvents());
+////
+////		User user4 = userRetrieveUtil.getUserById(user.getId());
+////		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2
+////				.getUserStructsForUser(user4.getId());
+////		int salesCounter2 = 0;
+////		for (StructureForUser sfu : sfuList3) {
+////			if (sfu.getStructId() >= 10000) {
+////				salesCounter2++;
+////
+////			}
+////		}
+////		assertTrue(salesCounter2 == 0);
+////
+////	}
+////
+////	private int deleteSalesPurchases(String userId) {
+////		String tableName = DBConstants.TABLE_IAP_HISTORY;
+////		String condDelim = "and";
+////		Map<String, Object> conditionParams = new HashMap<String, Object>();
+////		int totalDeleted = 0;
+////
+////		conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
+////				userId);
+////		int numDeleted = DBConnection.get().deleteRows(tableName,
+////				conditionParams, condDelim);
+////		totalDeleted += numDeleted;
+////
+////		return totalDeleted;
+////	}
+//
+//}
 
 }

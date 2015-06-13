@@ -7,17 +7,17 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SendAdminMessageResponseEvent extends NormalResponseEvent {
+public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdminMessageResponseProto> {
 
-	private SendAdminMessageResponseProto sendAdminMessageResponseProto;
+	
 
 	public SendAdminMessageResponseProto getSendAdminMessageResponseProto() {
-		return sendAdminMessageResponseProto;
+		return responseProto;
 	}
 
 	public void setSendAdminMessageResponseProto(
-			SendAdminMessageResponseProto sendAdminMessageResponseProto) {
-		this.sendAdminMessageResponseProto = sendAdminMessageResponseProto;
+			SendAdminMessageResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public SendAdminMessageResponseEvent(String playerId) {
@@ -27,12 +27,12 @@ public class SendAdminMessageResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = sendAdminMessageResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public int eventSize() {
-		return sendAdminMessageResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetGameCenterIdResponseEvent extends NormalResponseEvent {
+public class SetGameCenterIdResponseEvent extends NormalResponseEvent<SetGameCenterIdResponseProto> {
 
-	private SetGameCenterIdResponseProto setGameCenterIdResponseProto;
+	
 
 	public SetGameCenterIdResponseEvent(String playerId) {
 		super(playerId);
@@ -18,17 +18,17 @@ public class SetGameCenterIdResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = setGameCenterIdResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSetGameCenterIdResponseProto(
-			SetGameCenterIdResponseProto setGameCenterIdResponseProto) {
-		this.setGameCenterIdResponseProto = setGameCenterIdResponseProto;
+			SetGameCenterIdResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public int eventSize() {
-		return setGameCenterIdResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

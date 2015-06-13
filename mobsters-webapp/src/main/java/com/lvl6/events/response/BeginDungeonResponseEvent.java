@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BeginDungeonResponseEvent extends NormalResponseEvent {
+public class BeginDungeonResponseEvent extends NormalResponseEvent<BeginDungeonResponseProto> {
 
-	private BeginDungeonResponseProto beginDungeonResponseProto;
+	
 
 	public BeginDungeonResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class BeginDungeonResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = beginDungeonResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setBeginDungeonResponseProto(
-			BeginDungeonResponseProto beginDungeonResponseProto) {
-		this.beginDungeonResponseProto = beginDungeonResponseProto;
+			BeginDungeonResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public BeginDungeonResponseProto getBeginDungeonResponseProto() {   //because APNS required
-		return beginDungeonResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return beginDungeonResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -30,11 +29,13 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class SolicitClanHelpController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -56,7 +57,7 @@ public class SolicitClanHelpController extends EventController {
 	protected TimeUtils timeUtil;
 
 	public SolicitClanHelpController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -70,7 +71,7 @@ public class SolicitClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SolicitClanHelpRequestProto reqProto = ((SolicitClanHelpRequestEvent) event)
 				.getSolicitClanHelpRequestProto();
 
@@ -112,8 +113,8 @@ public class SolicitClanHelpController extends EventController {
 			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -128,7 +129,7 @@ public class SolicitClanHelpController extends EventController {
 		if (0 != clanId) {
 			lockedClan = getLocker().lockClan(clanId);
 		} else {
-			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			User user = getUserRetrieveUtils().getUserById(userId);
@@ -147,8 +148,8 @@ public class SolicitClanHelpController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
-				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
@@ -160,8 +161,8 @@ public class SolicitClanHelpController extends EventController {
 				}
 
 				resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
-				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -173,8 +174,8 @@ public class SolicitClanHelpController extends EventController {
 				SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SolicitClanHelp processEvent", e);
 			}
@@ -182,7 +183,7 @@ public class SolicitClanHelpController extends EventController {
 			if (0 != clanId && lockedClan) {
 				getLocker().unlockClan(clanId);
 			} else {
-				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

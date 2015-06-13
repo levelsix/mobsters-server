@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveMiniEventResponseEvent extends NormalResponseEvent {
+public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<RetrieveMiniEventResponseProto> {
 
-	private RetrieveMiniEventResponseProto retrieveMiniEventResponseProto;
+	
 
 	public RetrieveMiniEventResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RetrieveMiniEventResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = retrieveMiniEventResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRetrieveMiniEventResponseProto(
-			RetrieveMiniEventResponseProto retrieveMiniEventResponseProto) {
-		this.retrieveMiniEventResponseProto = retrieveMiniEventResponseProto;
+			RetrieveMiniEventResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return retrieveMiniEventResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

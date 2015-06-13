@@ -10,8 +10,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 public class ReceivedGiftResponseEvent extends
 		NormalResponseEvent {
 
-	private ReceivedGiftResponseProto receivedGiftResponseProto;
-
 	public ReceivedGiftResponseEvent(String playerId) {
 		super(playerId);
 		eventType = EventProtocolResponse.S_RECEIVED_GIFT_EVENT;
@@ -19,19 +17,19 @@ public class ReceivedGiftResponseEvent extends
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = receivedGiftResponseProto.toByteString();
+		ByteString b = responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setReceivedGiftResponseProto(
 			ReceivedGiftResponseProto receivedGiftResponseProto) {
-		this.receivedGiftResponseProto = receivedGiftResponseProto;
+		this.responseProto = receivedGiftResponseProto;
 	}
 
 	@Override
 	public int eventSize() {
-		return receivedGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

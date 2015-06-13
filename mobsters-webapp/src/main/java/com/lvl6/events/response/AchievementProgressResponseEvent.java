@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AchievementProgressResponseEvent extends NormalResponseEvent {
+public class AchievementProgressResponseEvent extends NormalResponseEvent<AchievementProgressResponseProto> {
 
-	private AchievementProgressResponseProto achievementProgressResponseProto;
+	
 
 	public AchievementProgressResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class AchievementProgressResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = achievementProgressResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAchievementProgressResponseProto(
-			AchievementProgressResponseProto achievementProgressResponseProto) {
-		this.achievementProgressResponseProto = achievementProgressResponseProto;
+			AchievementProgressResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return achievementProgressResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

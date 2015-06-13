@@ -24,13 +24,13 @@
 //import com.lvl6.utils.RetrieveUtils;
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //
-//@Component @DependsOn("gameServer") public class EndPersistentEventCoolDownTimerController extends EventController {
+//@Component  public class EndPersistentEventCoolDownTimerController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
 //
 //  public EndPersistentEventCoolDownTimerController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -44,7 +44,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EndPersistentEventCoolDownTimerRequestProto reqProto = ((EndPersistentEventCoolDownTimerRequestEvent)event).getEndPersistentEventCoolDownTimerRequestProto();
 //
 //    //get values sent from the client (the request proto)
@@ -58,7 +58,7 @@
 //    resBuilder.setSender(senderProto);
 //    resBuilder.setStatus(EndPersistentEventCoolDownTimerStatus.FAIL_OTHER); //default
 //
-//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    try {
 //      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 ////      int previousGems = 0;
@@ -77,13 +77,13 @@
 //      
 //      EndPersistentEventCoolDownTimerResponseEvent resEvent = new EndPersistentEventCoolDownTimerResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
-//      resEvent.setEndPersistentEventCoolDownTimerResponseProto(resBuilder.build());
-//      server.writeEvent(resEvent);
+//      resEvent.setResponseProto(resBuilder.build());
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 //      resEventUpdate.setTag(event.getTag());
-//      server.writeEvent(resEventUpdate);
+//      responses.normalResponseEvents().add(resEventUpdate);
 //    } catch (Exception e) {
 //      log.error("exception in EndPersistentEventCoolDownTimerController processEvent", e);
 //      //don't let the client hang
@@ -91,13 +91,13 @@
 //    	  resBuilder.setStatus(EndPersistentEventCoolDownTimerStatus.FAIL_OTHER);
 //    	  EndPersistentEventCoolDownTimerResponseEvent resEvent = new EndPersistentEventCoolDownTimerResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setEndPersistentEventCoolDownTimerResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  resEvent.setResponseProto(resBuilder.build());
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in EndPersistentEventCoolDownTimerController processEvent", e);
 //      }
 //    } finally {
-//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    }
 //  }
 //

@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventCityProto.LoadCityResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class LoadCityResponseEvent extends NormalResponseEvent{
+//public class LoadCityResponseEvent extends NormalResponseEvent<LoadCityResponseProto>{
 //
-//  private LoadCityResponseProto loadCityResponseProto;
+//  
 //  
 //  public LoadCityResponseEvent(String playerId) {
 //    super(playerId);
@@ -24,14 +24,14 @@
 //   * versions on the client and use old-style socket input/output streams
 //   */
 //  public int write(ByteBuffer buff) {
-//    ByteString b = loadCityResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(buff);
 //    return b.size();
 //  }
 //
 //  public void setLoadCityResponseProto(
-//      LoadCityResponseProto loadCityResponseProto) {
-//    this.loadCityResponseProto = loadCityResponseProto;
+//      LoadCityResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //  
 //  

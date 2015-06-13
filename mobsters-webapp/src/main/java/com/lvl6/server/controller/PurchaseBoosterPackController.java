@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
@@ -45,14 +44,17 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class PurchaseBoosterPackController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -112,13 +114,19 @@ public class PurchaseBoosterPackController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	@Autowired
+	protected HistoryUtils historyUtils;
+
+	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+
+	@Autowired
+	protected ResourceUtil resourceUtil;
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
 
 	public PurchaseBoosterPackController() {
-		numAllocatedThreads = 4;
+
 	}
 
 	@Override
@@ -132,7 +140,7 @@ public class PurchaseBoosterPackController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PurchaseBoosterPackRequestProto reqProto = ((PurchaseBoosterPackRequestEvent) event)
 				.getPurchaseBoosterPackRequestProto();
 
@@ -173,8 +181,8 @@ public class PurchaseBoosterPackController extends EventController {
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -182,14 +190,14 @@ public class PurchaseBoosterPackController extends EventController {
 		try {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
-					timeUtils, clanGiftRewardsRetrieveUtils,
-					userClanRetrieveUtils,
+					buyingInBulk, gemsSpent, gachaCreditsChange, timeUtils,
+					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtils, boosterPackRetrieveUtils,
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
-					monsterRetrieveUtils, buyingInBulk, rewardRetrieveUtils, insertUtil,
-					serverToggleRetrieveUtils, boosterItemUtils, gemsSpent, gachaCreditsChange,
-					createInfoProtoUtils);
+					monsterRetrieveUtils, rewardRetrieveUtils, insertUtil,
+					serverToggleRetrieveUtils, boosterItemUtils,
+					createInfoProtoUtils, historyUtils, resourceUtil);
 
 			pbpa.execute(resBuilder);
 
@@ -216,8 +224,8 @@ public class PurchaseBoosterPackController extends EventController {
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setPurchaseBoosterPackResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (PurchaseBoosterPackStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
@@ -227,9 +235,9 @@ public class PurchaseBoosterPackController extends EventController {
 								pbpa.getUser(), null, null);
 
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
-				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
+//				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
 
 				//just assume user can only buy one booster pack at a time
 				writeToBoosterPackPurchaseHistory(userId, boosterPackId,
@@ -247,8 +255,8 @@ public class PurchaseBoosterPackController extends EventController {
 				PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SellUserMonsterController processEvent",
@@ -309,13 +317,13 @@ public class PurchaseBoosterPackController extends EventController {
 	//    return numPurchased;
 	//  }
 
-	private void writeToUserCurrencyHistory(String userId, Timestamp date,
-			PurchaseBoosterPackAction pbpa) {
-		miscMethods.writeToUserCurrencyOneUser(userId, date,
-				pbpa.getAra().getCurrencyDeltas(), pbpa.getAra().getPreviousCurrencies(),
-				pbpa.getAra().getCurrentCurrencies(), pbpa.getAra().getReasons(),
-				pbpa.getAra().getDetails());
-	}
+//	private void writeToUserCurrencyHistory(String userId, Timestamp date,
+//			PurchaseBoosterPackAction pbpa) {
+//		miscMethods.writeToUserCurrencyOneUser(userId, date,
+//				pbpa.getAra().getCurrencyDeltas(), pbpa.getAra().getPreviousCurrencies(),
+//				pbpa.getAra().getCurrentCurrencies(), pbpa.getAra().getReasons(),
+//				pbpa.getAra().getDetails());
+//	}
 
 	private void writeToBoosterPackPurchaseHistory(String userId,
 			int boosterPackId, List<BoosterItem> itemsUserReceives,

@@ -34,7 +34,7 @@
 //import com.lvl6.utils.utilmethods.UpdateUtils;
 //
 //
-//@Component @DependsOn("gameServer") public class ExpansionWaitCompleteController extends EventController{
+//@Component  public class ExpansionWaitCompleteController extends EventController{
 //
 //	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -42,7 +42,7 @@
 //	protected Locker locker;
 //
 //	public ExpansionWaitCompleteController() {
-//		numAllocatedThreads = 1;
+//		
 //	}
 //
 //	@Override
@@ -56,7 +56,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event) throws Exception {
+//	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
 //
 //		MinimumUserProto senderProto = reqProto.getSender();
@@ -99,8 +99,8 @@
 //			
 //			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserUuid());
 //			resEvent.setTag(event.getTag());
-//			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+//			resEvent.setResponseProto(resBuilder.build());  
+//			responses.normalResponseEvents().add(resEvent);
 //			
 //			if (success) {
 //				writeToUserCurrencyHistory(userId, user, xPosition, yPosition,
@@ -117,8 +117,8 @@
 //      	resBuilder.setStatus(ExpansionWaitCompleteStatus.FAIL_OTHER);
 //      	ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(userId);
 //      	resEvent.setTag(event.getTag());
-//      	resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());
-//      	server.writeEvent(resEvent);
+//      	resEvent.setResponseProto(resBuilder.build());
+//      	responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //      	log.error("exception2 in ExpansionWaitCompleteController processEvent", e);
 //      }

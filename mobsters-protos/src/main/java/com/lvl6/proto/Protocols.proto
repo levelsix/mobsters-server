@@ -57,6 +57,13 @@ package com.lvl6.proto;
 
 option java_outer_classname = "ProtocolsProto";
 
+message EventProto {
+	optional int32 eventType = 1;
+	optional int32 tagNum = 2;
+	optional string eventUuid = 3;
+	optional bytes eventBytes = 4;
+}
+
 enum EventProtocolRequest {
 	C_STARTUP_EVENT = 1;
 	C_IN_APP_PURCHASE_EVENT = 2;
@@ -204,6 +211,9 @@ enum EventProtocolRequest {
 	C_DELETE_CLAN_GIFTS_EVENT = 501;
 	C_RECEIVED_CLAN_GIFTS_EVENT = 502;
 	C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;
+	C_PURCHASE_ITEMS_WITH_GEMS_EVENT = 504;
+	
+	C_RECONNECT_EVENT = 505;
 	
 }
 
@@ -366,6 +376,9 @@ enum EventProtocolResponse {
 	S_DELETE_CLAN_GIFTS_EVENT = 501;
 	S_RECEIVED_CLAN_GIFTS_EVENT = 502;
 	S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;
+	
+	S_RECONNECT_EVENT = 504;
+	S_PURCHASE_ITEMS_WITH_GEMS_EVENT = 505;
 	
 	
 }

@@ -1,26 +1,11 @@
 package com.lvl6.eventhandlers;
 
-import java.io.FileNotFoundException;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.hazelcast.core.IMap;
-import com.lvl6.events.PreDatabaseRequestEvent;
-import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.server.controller.EventController;
-import com.lvl6.utils.ConnectedPlayer;
-
-public class GameEventHandler extends AbstractGameEventHandler {
-	private static final int DEFAULT_TTL = 9;
+public class GameEventHandlerOld{// extends AbstractGameEventHandler {
+/*	private static final int DEFAULT_TTL = 9;
 
 	private static final Logger log = LoggerFactory
-			.getLogger(GameEventHandler.class);
+			.getLogger(GameEventHandlerOld.class);
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
@@ -46,15 +31,14 @@ public class GameEventHandler extends AbstractGameEventHandler {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
-	/**
+	*//**
 	 * pass off an event to the appropriate GameController based on the GameName
 	 * of the event
 	 * 
 	 * @throws FileNotFoundException
-	 */
+	 *//*
 	@Override
-	protected void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType) {
+	protected void delegateEvent(RequestEvent event, EventProtocolRequest eventType) {
 		if (event != null && eventType.getNumber() < 0) {
 			log.error("the event type is < 0");
 			return;
@@ -64,7 +48,7 @@ public class GameEventHandler extends AbstractGameEventHandler {
 			log.error("No EventController for eventType: " + eventType);
 			return;
 		}
-		updatePlayerToServerMaps(event, ip_connection_id);
+		updatePlayerToServerMaps(event, "");
 		ec.handleEvent(event);
 	}
 
@@ -107,6 +91,6 @@ public class GameEventHandler extends AbstractGameEventHandler {
 					DEFAULT_TTL, TimeUnit.MINUTES);
 			log.info("New player with UdId: " + newp.getUdid());
 		}
-	}
+	}*/
 
 }

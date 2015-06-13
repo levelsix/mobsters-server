@@ -2,41 +2,40 @@ package com.lvl6.events.response;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.lvl6.events.PreDatabaseResponseEvent;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class StartupResponseEvent extends PreDatabaseResponseEvent {
+public class StartupResponseEvent extends PreDatabaseResponseEvent<StartupResponseProto> {
 
-	private StartupResponseProto startupResponseProto;
-
+	
+	private static final Logger log = LoggerFactory.getLogger(StartupResponseEvent.class);
+	
 	public StartupResponseEvent(String udid) {
 		super(udid);
 		eventType = EventProtocolResponse.S_STARTUP_EVENT;
 	}
 
-	/**
-	 * write the event to the given ByteBuffer
-	 * 
-	 * note we are using 1.4 ByteBuffers for both client and server depending on
-	 * the deployment you may need to support older java versions on the client
-	 * and use old-style socket input/output streams
-	 */
+
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = startupResponseProto.toByteString();
+		ByteString b = responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
-	public void setStartupResponseProto(
-			StartupResponseProto StartupResponseProto) {
-		this.startupResponseProto = StartupResponseProto;
+	public void setStartupResponseProto(StartupResponseProto rProto) {
+		//log.info("Setting response proto: {} this: {}", rProto, this);
+		this.responseProto = rProto;
 	}
-	
+
 	public int eventSize() {
-		return startupResponseProto.getSerializedSize();
+		//log.info("Getting size of proto: {} this: {}", this);
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -39,6 +39,9 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemMiniJobAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -46,8 +49,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @Component
 public class RedeemMiniJobController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(RedeemMiniJobController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -93,10 +96,13 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 
 	public RedeemMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -110,7 +116,7 @@ public class RedeemMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemMiniJobRequestProto reqProto = ((RedeemMiniJobRequestEvent) event)
 				.getRedeemMiniJobRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -153,8 +159,8 @@ public class RedeemMiniJobController extends EventController {
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -181,8 +187,8 @@ public class RedeemMiniJobController extends EventController {
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (resBuilder.getStatus().equals(RedeemMiniJobStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -190,7 +196,7 @@ public class RedeemMiniJobController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								rmja.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(rmja.getUser(), userMiniJobId, rmja.getAra().getCurrencyDeltas(),
 						clientTime, rmja.getAra().getPreviousCurrencies());
@@ -204,8 +210,8 @@ public class RedeemMiniJobController extends EventController {
 				RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRedeemMiniJobResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RedeemMiniJobController processEvent",
 						e);

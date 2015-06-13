@@ -1,218 +1,15 @@
 package com.lvl6.server.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.time.StopWatch;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-
-import com.hazelcast.core.IList;
-import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.StartupRequestEvent;
-import com.lvl6.events.response.ForceLogoutResponseEvent;
-import com.lvl6.events.response.StartupResponseEvent;
-import com.lvl6.info.AchievementForUser;
-import com.lvl6.info.BattleItemForUser;
-import com.lvl6.info.BattleItemQueueForUser;
-import com.lvl6.info.BoosterItem;
-import com.lvl6.info.CepfuRaidStageHistory;
-import com.lvl6.info.Clan;
-import com.lvl6.info.ClanEventPersistentForClan;
-import com.lvl6.info.ClanEventPersistentForUser;
-import com.lvl6.info.ClanEventPersistentUserReward;
-import com.lvl6.info.EventPersistentForUser;
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.ItemForUserUsage;
-import com.lvl6.info.ItemSecretGiftForUser;
-import com.lvl6.info.MiniJobForUser;
-import com.lvl6.info.MonsterEnhancingForUser;
-import com.lvl6.info.MonsterEvolvingForUser;
-import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.PvpBattleForUser;
-import com.lvl6.info.PvpBoardObstacleForUser;
-import com.lvl6.info.PvpLeagueForUser;
-import com.lvl6.info.Quest;
-import com.lvl6.info.QuestForUser;
-import com.lvl6.info.QuestJobForUser;
-import com.lvl6.info.ResearchForUser;
-import com.lvl6.info.SalesPackage;
-import com.lvl6.info.TaskForUserClientState;
-import com.lvl6.info.TaskForUserOngoing;
-import com.lvl6.info.TaskStageForUser;
-import com.lvl6.info.TranslationSettingsForUser;
-import com.lvl6.info.User;
-import com.lvl6.info.UserClan;
-import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
-import com.lvl6.properties.Globals;
-import com.lvl6.properties.IAPValues;
-import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
-import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
-import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
-import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
-import com.lvl6.proto.ChatProto.ChatScope;
-import com.lvl6.proto.ChatProto.DefaultLanguagesProto;
-import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ClanProto.ClanDataProto;
-import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
-import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
-import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
-import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
-import com.lvl6.proto.EventStartupProto.StartupRequestProto;
-import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
-import com.lvl6.proto.ItemsProto.UserItemProto;
-import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
-import com.lvl6.proto.ItemsProto.UserItemUsageProto;
-import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
-import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
-import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
-import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
-import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.QuestProto.FullUserQuestProto;
-import com.lvl6.proto.ResearchsProto.UserResearchProto;
-import com.lvl6.proto.SalesProto.SalesPackageProto;
-import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
-import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
-import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
-import com.lvl6.proto.TaskProto.TaskStageProto;
-import com.lvl6.proto.TaskProto.UserPersistentEventProto;
-import com.lvl6.proto.TaskProto.UserTaskCompletedProto;
-import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.PvpUser;
-import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
-import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.BattleItemQueueForUserRetrieveUtil;
-import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
-import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
-import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
-import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
-import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
-import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
-import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2;
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
-import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
-import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
-import com.lvl6.retrieveutils.ClanRetrieveUtils2;
-import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
-import com.lvl6.retrieveutils.GiftForTangoUserRetrieveUtil;
-import com.lvl6.retrieveutils.GiftForUserRetrieveUtils;
-import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
-import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
-import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
-import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
-import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
-import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
-import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
-import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil;
-import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
-import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
-import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
-import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
-import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
-import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
-import com.lvl6.server.GameServer;
-import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
-import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
-import com.lvl6.server.controller.actionobjects.SetClanGiftsAction;
-import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
-import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction;
-import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
-import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
-import com.lvl6.server.controller.actionobjects.SetGiftsAction;
-import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
-import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
-import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
-import com.lvl6.server.controller.actionobjects.StartUpResource;
-import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
-import com.lvl6.server.controller.utils.InAppPurchaseUtils;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.server.controller.utils.SecretGiftUtils;
-import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.utilmethods.DeleteUtil;
-import com.lvl6.utils.utilmethods.DeleteUtils;
-import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.UpdateUtil;
-import com.lvl6.utils.utilmethods.UpdateUtils;
+//import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 
 //@Component
-@DependsOn("gameServer")
-public class StartupControllerOld extends EventController {
+
+public class StartupControllerOld {//extends EventController {
 	//  private static String nameRulesFile = "namerulesElven.txt";
 	//  private static int syllablesInName1 = 2;
 	//  private static int syllablesInName2 = 3;
-
+/*
 	private static Logger log = LoggerFactory.getLogger(StartupControllerOld.class);
 
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
@@ -464,7 +261,7 @@ public class StartupControllerOld extends EventController {
     protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
 
 	public StartupControllerOld() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -478,7 +275,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event)
@@ -590,26 +387,26 @@ public class StartupControllerOld extends EventController {
 						.setStartupStatus(StartupStatus.SERVER_IN_MAINTENANCE); //DO NOT allow user to play
 				//				resEvent = new StartupResponseEvent(udid);
 				//				resEvent.setTag(event.getTag());
-				resEvent.setStartupResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				getEventWriter().processPreDBResponseEvent(resEvent, udid);
 			} catch (Exception e2) {
 				log.error("exception2 in StartupController processEvent", e);
 			}
 		}
 
-		/*
+		
 		if (Globals.KABAM_ENABLED()) {
 		String naid = retrieveKabamNaid(user, udid, reqProto.getMacAddress(),
 		  reqProto.getAdvertiserId());
 		resBuilder.setKabamNaid(naid);
-		}*/
+		}
 
 		//startup time
 		resBuilder.setServerTimeMillis((new Date()).getTime());
 		//		resEvent = new StartupResponseEvent(udid);
 		//		resEvent.setTag(event.getTag());
 
-		resEvent.setStartupResponseProto(resBuilder.build());
+		resEvent.setResponseProto(resBuilder.build());
 
 		log.debug("Writing event response: " + resEvent);
 		server.writePreDBEvent(resEvent, udid);
@@ -979,7 +776,7 @@ public class StartupControllerOld extends EventController {
 
 	private void setInProgressAndAvailableQuests(Builder resBuilder,
 			String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<QuestForUser> inProgressAndRedeemedUserQuests = getQuestForUserRetrieveUtils()
 				.getUserQuestsForUser(userId);
 
@@ -1010,7 +807,7 @@ public class StartupControllerOld extends EventController {
 		}
 
 		// get the QuestJobForUser for ONLY the inProgressQuests
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs = getQuestJobForUserRetrieveUtil()
 				.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, inProgressQuestsIds);
 
@@ -1026,7 +823,7 @@ public class StartupControllerOld extends EventController {
 
 	private void setUserClanInfos(StartupResponseProto.Builder resBuilder,
 			String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<UserClan> userClans = getUserClanRetrieveUtils()
 				.getUserClansRelatedToUser(userId);
 		for (UserClan uc : userClans) {
@@ -1036,7 +833,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setNoticesToPlayers(Builder resBuilder) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<String> notices = startupStuffRetrieveUtils.getAllActiveAlerts();
 		if (null != notices) {
 			for (String notice : notices) {
@@ -1047,7 +844,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setUserMonsterStuff(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<MonsterForUser> userMonsters = monsterForUserRetrieveUtils
 				.getMonstersForUser(userId);
 
@@ -1059,7 +856,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		//monsters in healing
 		Map<String, MonsterHealingForUser> userMonstersHealing = monsterHealingForUserRetrieveUtils
 				.getMonstersForUser(userId);
@@ -1074,7 +871,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		//enhancing monsters
 		Map<String, MonsterEnhancingForUser> userMonstersEnhancing = monsterEnhancingForUserRetrieveUtils
 				.getMonstersForUser(userId);
@@ -1121,7 +918,7 @@ public class StartupControllerOld extends EventController {
 			}
 		}
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		//evolving monsters
 		Map<String, MonsterEvolvingForUser> userMonsterEvolving = getMonsterEvolvingForUserRetrieveUtils()
 				.getCatalystIdsToEvolutionsForUser(userId);
@@ -1178,7 +975,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setTaskStuff(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<UserTaskCompleted> utcList = taskForUserCompletedRetrieveUtils
 				.getAllCompletedTasksForUser(userId);
 		List<UserTaskCompletedProto> utcpList = createInfoProtoUtils
@@ -1189,7 +986,7 @@ public class StartupControllerOld extends EventController {
 				.getTaskIds(utcList);
 		resBuilder.addAllCompletedTaskIds(taskIds);
 
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		TaskForUserOngoing aTaskForUser = getTaskForUserOngoingRetrieveUtils()
 				.getUserTaskForUserId(userId);
 		if (null != aTaskForUser) {
@@ -1210,7 +1007,7 @@ public class StartupControllerOld extends EventController {
 
 			//create protos for stages
 			String userTaskId = aTaskForUser.getId();
-			/*NOTE: DB CALL*/
+			NOTE: DB CALL
 			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
 					.getTaskStagesForUserWithTaskForUserId(userTaskId);
 
@@ -1249,7 +1046,7 @@ public class StartupControllerOld extends EventController {
 	}
 
 	private void setEventStuff(Builder resBuilder, String userId) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		List<EventPersistentForUser> events = getEventPersistentForUserRetrieveUtils()
 				.getUserPersistentEventForUserId(userId);
 
@@ -1366,9 +1163,8 @@ public class StartupControllerOld extends EventController {
 					attackerCurLeague, attackerCurRank, eloAttackerLoses, null,
 					null, 0, 0, 1, 0, -1);
 
-			log.info(String
-					.format("num updated when changing attacker's elo because of reset=%s",
-							numUpdated));
+			log.info("num updated when changing attacker's elo because of reset={}",
+					numUpdated);
 			attackerPlfu.setElo(attackerCurElo);
 			attackerPlfu.setPvpLeagueId(attackerCurLeague);
 			attackerPlfu.setRank(attackerCurRank);
@@ -1377,7 +1173,7 @@ public class StartupControllerOld extends EventController {
 			getHazelcastPvpUtil().replacePvpUser(attackerPu, userId);
 
 			//update defender if real, TODO: might need to cap defenderElo
-			if (null != defenderId) {
+			if (null != defenderUuid) {//defenderId) {
 				PvpLeagueForUser defenderPlfu = getPvpLeagueForUserRetrieveUtil()
 						.getUserPvpLeagueForId(defenderId);
 
@@ -1448,7 +1244,7 @@ public class StartupControllerOld extends EventController {
 		resBuilder.setStaticDataStuffProto(sdp);
 	}
 
-	/*
+	
 	private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
 		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
 
@@ -1584,10 +1380,10 @@ public class StartupControllerOld extends EventController {
 		}
 		return equipped;
 	}
-	*/
+	
 
 	private void setAchievementStuff(Builder resBuilder, String userId, User user, Date nowDate, StopWatch stopWatch) {
-		/*NOTE: DB CALL*/
+		NOTE: DB CALL
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = getAchievementForUserRetrieveUtil()
 				.getSpecificOrAllAchievementIdToAchievementForUserId(userId,
 						null);
@@ -2123,7 +1919,7 @@ public class StartupControllerOld extends EventController {
 		}
 	}
 
-	/*private String retrieveKabamNaid(User user, String openUdid, String mac, String advertiserId) {
+	private String retrieveKabamNaid(User user, String openUdid, String mac, String advertiserId) {
 	String host;
 	int port = 443;
 	int clientId;
@@ -2165,7 +1961,7 @@ public class StartupControllerOld extends EventController {
 	  log.error("Error retrieving kabam naid: " + naidResponse.getReturnCode());
 	}
 	return "";
-	}*/
+	}
 
 	protected void updateLeaderboard(String apsalarId, User user,
 			Timestamp now, int newNumConsecutiveDaysLoggedIn) {
@@ -2609,9 +2405,9 @@ public class StartupControllerOld extends EventController {
 
 		if (user.getNumBadges() != 0) {
 			if (user.getDeviceToken() != null) {
-				/*
+				
 				 * handled locally?
-				 */
+				 
 				// ApnsServiceBuilder builder =
 				// APNS.newService().withCert(APNSProperties.PATH_TO_CERT,
 				// APNSProperties.CERT_PASSWORD);
@@ -3239,5 +3035,5 @@ public class StartupControllerOld extends EventController {
 			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils) {
 		this.salesDisplayItemRetrieveUtils = salesDisplayItemRetrieveUtils;
 	}
-
+*/
 }

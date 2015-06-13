@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SendGroupChatResponseEvent extends NormalResponseEvent {
+public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupChatResponseProto> {
 
-	private SendGroupChatResponseProto sendGroupChatResponseProto;
+	
 
 	public SendGroupChatResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class SendGroupChatResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = sendGroupChatResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSendGroupChatResponseProto(
-			SendGroupChatResponseProto sendGroupChatResponseProto) {
-		this.sendGroupChatResponseProto = sendGroupChatResponseProto;
+			SendGroupChatResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public SendGroupChatResponseProto getSendGroupChatResponseProto() { //required for APNS
-		return sendGroupChatResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return sendGroupChatResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

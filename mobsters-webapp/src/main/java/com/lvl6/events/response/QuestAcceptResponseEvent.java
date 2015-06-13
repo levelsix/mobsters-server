@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class QuestAcceptResponseEvent extends NormalResponseEvent {
+public class QuestAcceptResponseEvent extends NormalResponseEvent<QuestAcceptResponseProto> {
 
-	private QuestAcceptResponseProto questAcceptResponseProto;
+	
 
 	public QuestAcceptResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class QuestAcceptResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = questAcceptResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setQuestAcceptResponseProto(
-			QuestAcceptResponseProto questAcceptResponseProto) {
-		this.questAcceptResponseProto = questAcceptResponseProto;
+			QuestAcceptResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return questAcceptResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

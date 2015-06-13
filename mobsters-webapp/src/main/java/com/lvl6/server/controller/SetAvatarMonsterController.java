@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -20,9 +19,10 @@ import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMons
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
-@DependsOn("gameServer")
+
 public class SetAvatarMonsterController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -35,7 +35,7 @@ public class SetAvatarMonsterController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public SetAvatarMonsterController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class SetAvatarMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetAvatarMonsterRequestProto reqProto = ((SetAvatarMonsterRequestEvent) event)
 				.getSetAvatarMonsterRequestProto();
 
@@ -79,12 +79,12 @@ public class SetAvatarMonsterController extends EventController {
 			SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
@@ -109,8 +109,8 @@ public class SetAvatarMonsterController extends EventController {
 			SetAvatarMonsterResponseProto resProto = resBuilder.build();
 			SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setSetAvatarMonsterResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//game center id might have changed
@@ -119,7 +119,7 @@ public class SetAvatarMonsterController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -130,15 +130,15 @@ public class SetAvatarMonsterController extends EventController {
 				SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SetAvatarMonsterController processEvent",
 						e);
 			}
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SendTangoGiftResponseEvent extends NormalResponseEvent {
+public class SendTangoGiftResponseEvent extends NormalResponseEvent<SendTangoGiftResponseProto> {
 
 	private SendTangoGiftResponseProto sendTangoGiftResponseProto;
 
@@ -30,7 +30,7 @@ public class SendTangoGiftResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return sendTangoGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

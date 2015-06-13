@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -17,12 +16,12 @@ import com.lvl6.events.request.CollectClanGiftsRequestEvent;
 import com.lvl6.events.response.CollectClanGiftsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ClanGiftForUser;
-import com.lvl6.proto.RewardsProto.ClanGiftProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsRequestProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto;
 import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto.CollectClanGiftsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.ClanGiftProto;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -34,12 +33,14 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CollectClanGiftsAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class CollectClanGiftsController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -80,9 +81,11 @@ public class CollectClanGiftsController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public CollectClanGiftsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -96,7 +99,7 @@ public class CollectClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CollectClanGiftsRequestProto reqProto = ((CollectClanGiftsRequestEvent) event)
 				.getCollectClanGiftsRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -132,8 +135,8 @@ public class CollectClanGiftsController extends EventController {
 			CollectClanGiftsResponseEvent resEvent = new CollectClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -155,19 +158,19 @@ public class CollectClanGiftsController extends EventController {
 			resEvent.setTag(event.getTag());
 			resBuilder.setReward(uusa.getUrp());
 
-			resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (CollectClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				log.info("reward proto for collect: " + uusa.getUrp());
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								uusa.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 			}
 
@@ -180,8 +183,8 @@ public class CollectClanGiftsController extends EventController {
 				CollectClanGiftsResponseEvent resEvent = new CollectClanGiftsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCollectClanGiftsResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CollectClanGiftsController processEvent",
@@ -228,6 +231,14 @@ public class CollectClanGiftsController extends EventController {
 
 	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
 		this.userRetrieveUtils = userRetrieveUtils;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 }

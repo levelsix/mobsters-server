@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -26,11 +25,12 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.FinishPerformingResearchAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class FinishPerformingResearchController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -58,7 +58,7 @@ public class FinishPerformingResearchController extends EventController {
 	protected InsertUtil insertUtil;
 
 	public FinishPerformingResearchController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class FinishPerformingResearchController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		FinishPerformingResearchRequestProto reqProto = ((FinishPerformingResearchRequestEvent) event)
 				.getFinishPerformingResearchRequestProto();
 
@@ -110,9 +110,9 @@ public class FinishPerformingResearchController extends EventController {
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishPerformingResearchResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -130,8 +130,8 @@ public class FinishPerformingResearchController extends EventController {
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setFinishPerformingResearchResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
 			if(gemsCost > 0 && resBuilder.getStatus().equals(FinishPerformingResearchStatus.SUCCESS)) {
@@ -140,7 +140,7 @@ public class FinishPerformingResearchController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								fpra.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				
 				writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
 			}
@@ -155,9 +155,9 @@ public class FinishPerformingResearchController extends EventController {
 				FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setFinishPerformingResearchResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SellUserMonsterController processEvent",

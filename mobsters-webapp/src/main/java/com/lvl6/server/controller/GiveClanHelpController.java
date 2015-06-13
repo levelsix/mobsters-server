@@ -7,9 +7,9 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.GiveClanHelpRequestEvent;
 import com.lvl6.events.response.GiveClanHelpResponseEvent;
@@ -27,12 +27,14 @@ import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class GiveClanHelpController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -52,9 +54,12 @@ public class GiveClanHelpController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtil;
+	
+	@Autowired
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	public GiveClanHelpController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -68,7 +73,7 @@ public class GiveClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent) event)
 				.getGiveClanHelpRequestProto();
 
@@ -114,8 +119,8 @@ public class GiveClanHelpController extends EventController {
 			GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -130,7 +135,7 @@ public class GiveClanHelpController extends EventController {
 		if (0 != clanId) {
 			lockedClan = getLocker().lockClan(clanId);
 		} else {
-			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			//      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -146,17 +151,18 @@ public class GiveClanHelpController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			if (!success) {
-				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
 				//send back most up to date ClanHelps that changed
 				//NOTE: Sending most up to date ClanHelps incurs a db read
+				hzClanSearch.updateRankForClanSearch(clanId, new Date(), clanHelpIds.size(), 0, 0, 0, 0);
 				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
 				resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
-				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {
@@ -166,8 +172,8 @@ public class GiveClanHelpController extends EventController {
 				GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in GiveClanHelp processEvent", e);
 			}
@@ -175,7 +181,7 @@ public class GiveClanHelpController extends EventController {
 			if (0 != clanId && lockedClan) {
 				getLocker().unlockClan(clanId);
 			} else {
-				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

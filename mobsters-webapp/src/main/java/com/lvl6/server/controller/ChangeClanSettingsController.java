@@ -3,16 +3,13 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
@@ -20,8 +17,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ChangeClanSettingsRequestEvent;
 import com.lvl6.events.response.ChangeClanSettingsResponseEvent;
 import com.lvl6.info.Clan;
-import com.lvl6.info.ClanIcon;
-import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProto;
@@ -37,19 +33,22 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.ChangeClanSettingsAction;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class ChangeClanSettingsController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ChangeClanSettingsController.class);
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
@@ -86,7 +85,6 @@ public class ChangeClanSettingsController extends EventController {
 		
 
 	public ChangeClanSettingsController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -100,7 +98,7 @@ public class ChangeClanSettingsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ChangeClanSettingsRequestProto reqProto = ((ChangeClanSettingsRequestEvent) event)
 				.getChangeClanSettingsRequestProto();
 
@@ -144,8 +142,8 @@ public class ChangeClanSettingsController extends EventController {
 			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -168,16 +166,16 @@ public class ChangeClanSettingsController extends EventController {
 			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			//if not successful only write to user
 			if (!ChangeClanSettingsStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if successful 
-				server.writeClanEvent(resEvent, ccsa.getClan().getId());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, ccsa.getClan().getId(), false));
 
 				updateClanCache(clanId, clanSizeContainer, isChangeJoinType,
 						requestToJoinRequired);
@@ -190,8 +188,8 @@ public class ChangeClanSettingsController extends EventController {
 				ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in ChangeClanSettings processEvent", e);
 			}
@@ -301,6 +299,14 @@ public class ChangeClanSettingsController extends EventController {
 
 	public void setClanSearch(ClanSearch clanSearch) {
 		this.clanSearch = clanSearch;
+	}
+
+	public MiscMethods getMiscMethods() {
+		return miscMethods;
+	}
+
+	public void setMiscMethods(MiscMethods miscMethods) {
+		this.miscMethods = miscMethods;
 	}
 
 }

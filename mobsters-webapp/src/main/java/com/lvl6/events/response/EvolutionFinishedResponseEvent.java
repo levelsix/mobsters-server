@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EvolutionFinishedResponseEvent extends NormalResponseEvent {
+public class EvolutionFinishedResponseEvent extends NormalResponseEvent<EvolutionFinishedResponseProto> {
 
-	private EvolutionFinishedResponseProto evolutionFinishedResponseProto;
+	
 
 	public EvolutionFinishedResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class EvolutionFinishedResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = evolutionFinishedResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEvolutionFinishedResponseProto(
-			EvolutionFinishedResponseProto evolutionFinishedResponseProto) {
-		this.evolutionFinishedResponseProto = evolutionFinishedResponseProto;
+			EvolutionFinishedResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return evolutionFinishedResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

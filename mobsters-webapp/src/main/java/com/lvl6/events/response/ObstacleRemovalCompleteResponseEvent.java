@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent {
+public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent<ObstacleRemovalCompleteResponseProto> {
 
-	private ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto;
+	
 
 	public ObstacleRemovalCompleteResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = obstacleRemovalCompleteResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setObstacleRemovalCompleteResponseProto(
-			ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto) {
-		this.obstacleRemovalCompleteResponseProto = obstacleRemovalCompleteResponseProto;
+			ObstacleRemovalCompleteResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return obstacleRemovalCompleteResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 

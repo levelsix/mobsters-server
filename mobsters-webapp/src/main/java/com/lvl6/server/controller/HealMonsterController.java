@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -43,11 +42,12 @@ import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class HealMonsterController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -76,7 +76,7 @@ public class HealMonsterController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public HealMonsterController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class HealMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent) event)
 				.getHealMonsterRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -210,8 +210,8 @@ public class HealMonsterController extends EventController {
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setHealMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -219,7 +219,7 @@ public class HealMonsterController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				//TODO: WRITE TO monster healing HISTORY
 				writeToUserCurrencyHistory(aUser, changeMap, money, curTime,
 						previousCash, previousGems, deleteMap, updateMap,
@@ -233,8 +233,8 @@ public class HealMonsterController extends EventController {
 				HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setHealMonsterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in HealMonsterController processEvent", e);
 			}

@@ -15,6 +15,7 @@ import com.lvl6.events.request.CollectGiftRequestEvent;
 import com.lvl6.events.response.CollectGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventRewardProto.CollectGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus;
@@ -28,8 +29,10 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CollectGiftAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -39,11 +42,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @DependsOn("gameServer")
 public class CollectGiftController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(CollectGiftController.class);
 
 	public CollectGiftController() {
-		numAllocatedThreads = 4;
 	}
 
 
@@ -79,6 +81,12 @@ public class CollectGiftController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected Locker locker;
+	
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -91,7 +99,7 @@ public class CollectGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		CollectGiftRequestProto reqProto = ((CollectGiftRequestEvent) event)
 				.getCollectGiftRequestProto();
 
@@ -132,12 +140,11 @@ public class CollectGiftController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectGiftResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
-				.getSimpleName());
+		locker.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			//
 			CollectGiftAction rsga = new CollectGiftAction(userId,
@@ -158,17 +165,16 @@ public class CollectGiftController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectGiftResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (CollectGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = rsga.getUser();
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-								u, null, null);
+				UpdateClientUserResponseEvent resEventUpdate = 
+						miscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(u, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -179,7 +185,7 @@ public class CollectGiftController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setCollectGiftResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CollectGiftController processEvent",
@@ -187,8 +193,7 @@ public class CollectGiftController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
-					.getSimpleName());
+			locker.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 

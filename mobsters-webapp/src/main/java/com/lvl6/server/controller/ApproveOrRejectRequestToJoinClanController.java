@@ -8,15 +8,16 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
 import com.lvl6.events.response.ApproveOrRejectRequestToJoinClanResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProto;
@@ -40,12 +41,14 @@ import com.lvl6.server.controller.actionobjects.ApproveOrRejectRequestToJoinActi
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class ApproveOrRejectRequestToJoinClanController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -79,7 +82,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 	
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
@@ -98,9 +101,13 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	
+	@Autowired
+	protected PvpLeagueForUserDao pvpLeagueForUserDao;
+	
 
 	public ApproveOrRejectRequestToJoinClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -114,7 +121,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent) event)
 				.getApproveOrRejectRequestToJoinClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -161,9 +168,9 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -214,15 +221,20 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			//if fail only to sender
 			if (!ApproveOrRejectRequestToJoinClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} else {
 				//if success to clan and the requester
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
+				if(accept) {
+					responses.setUserId(userId);
+					responses.setClanChanged(true);
+					responses.setNewClanId(clanId);
+				}
 				// Send message to the new guy
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						requesterId);
@@ -230,10 +242,10 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 						.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 								.build());
 				//in case user is not online write an apns
-				server.writeAPNSNotificationOrEvent(resEvent2);
-				//server.writeEvent(resEvent2);
+				responses.apnsResponseEvents().add(resEvent2);
+				//responses.normalResponseEvents().add(resEvent2);
 
-				sendClanData(event, requestMup, accept, requesterId, cdp);
+				sendClanData(event, requestMup, accept, requesterId, cdp, responses);
 			}
 		} catch (Exception e) {
 			log.error(
@@ -245,9 +257,9 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ApproveOrRejectRequestToJoinClan processEvent",
@@ -262,16 +274,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	private void updateClanCache(String clanId, List<Integer> clanSizeList,
 			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
-		//need to account for this user joining clan
-		int clanSize = clanSizeList.get(0) + 1;
-		Date lastChatTime = lastChatTimeContainer.get(0);
-
-		if (requestToJoinRequired) {
-			clanSize = ClanSearch.penalizedClanSize;
-			lastChatTime = ControllerConstants.INCEPTION_DATE;
-		}
-
-		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
 	}
 
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
@@ -287,7 +290,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	private void sendClanData(RequestEvent event,
 			MinimumUserProto requesterMup, boolean accepted,
-			String requesterId, ClanDataProto cdp) {
+			String requesterId, ClanDataProto cdp, ToClientEvents responses) {
 		if (!accepted || null == cdp) {
 			log.warn(String.format("accepted=%s, cdp=%s", accepted, cdp));
 			return;
@@ -302,7 +305,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		rcdrpb.setClanData(cdp);
 
 		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		server.writeEvent(rcdre);
+		responses.normalResponseEvents().add(rcdre);
 	}
 
 	public Locker getLocker() {
@@ -374,12 +377,13 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {

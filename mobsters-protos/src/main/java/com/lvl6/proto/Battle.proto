@@ -30,7 +30,7 @@ enum BattleResult {
 //------------------------------------------------------------------------------------------
 
 message PvpProto {
-	optional MinimumUserProtoWithLevel defender = 1;
+	optional MinimumUserProto defender = 1;
 	//optional int32 curElo = 2; //the defender's current elo
 	repeated PvpMonsterProto defenderMonsters = 3;
 	optional int32 prospectiveCashWinnings = 4;
@@ -120,7 +120,7 @@ message PvpClanAvengeProto {
 	repeated PvpUserClanAvengeProto usersAvenging = 2;
 	
 	//in clan avenge, this user is the one that will be attacked
-	optional MinimumUserProtoWithLevel attacker = 3;
+	optional MinimumUserProto attacker = 3;
 	
 	//in clan avenge, this user is in the clan
 	optional MinimumUserProto defender = 4;

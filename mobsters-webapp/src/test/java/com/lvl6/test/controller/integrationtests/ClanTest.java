@@ -55,10 +55,12 @@ import com.lvl6.server.controller.ApproveOrRejectRequestToJoinClanController;
 import com.lvl6.server.controller.BootPlayerFromClanController;
 import com.lvl6.server.controller.ChangeClanSettingsController;
 import com.lvl6.server.controller.CreateClanController;
+import com.lvl6.server.controller.LeaveClanController;
 import com.lvl6.server.controller.PromoteDemoteClanMemberController;
 import com.lvl6.server.controller.RequestJoinClanController;
 import com.lvl6.server.controller.RetractRequestJoinClanController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -66,8 +68,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class ClanTest {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(ClanTest.class);
 
 	private JdbcTemplate jdbcTemplate;
 	private static boolean endOfTesting;
@@ -118,6 +120,9 @@ public class ClanTest {
 	
 	@Autowired
 	BootPlayerFromClanController bootPlayerFromClanController;
+	
+	@Autowired
+	LeaveClanController leaveClanController;
 
 	@Autowired
 	CreateInfoProtoUtils createInfoProtoUtils;
@@ -151,7 +156,7 @@ public class ClanTest {
 
 			userId1 = insertUtil.insertUser(name, udid, lvl, playerExp, cash,
 					oil, gems, false, deviceToken, createTime, facebookId,
-					avatarMonsterId, email, fbData);
+					avatarMonsterId, email, fbData, 0);
 
 			String name2 = "bobUnitTest";
 			String udid2 = "bobUdid";
@@ -168,7 +173,7 @@ public class ClanTest {
 
 			userId2 = insertUtil.insertUser(name2, udid2, lvl2, playerExp2, cash2,
 					oil2, gems2, false, deviceToken2, createTime, facebookId2,
-					avatarMonsterId2, email2, fbData2);
+					avatarMonsterId2, email2, fbData2, 0);
 
 			String name3 = "bobUnitTest";
 			String udid3 = "bobUdid";
@@ -185,7 +190,7 @@ public class ClanTest {
 
 			userId3 = insertUtil.insertUser(name3, udid3, lvl3, playerExp3, cash3,
 					oil3, gems3, false, deviceToken3, createTime, facebookId3,
-					avatarMonsterId3, email3, fbData3);
+					avatarMonsterId3, email3, fbData3, 0);
 
 			String name4 = "bobUnitTest";
 			String udid4 = "bobUdid";
@@ -202,7 +207,7 @@ public class ClanTest {
 
 			userId4 = insertUtil.insertUser(name4, udid4, lvl4, playerExp4, cash4,
 					oil4, gems4, false, deviceToken4, createTime, facebookId4,
-					avatarMonsterId4, email4, fbData4);
+					avatarMonsterId4, email4, fbData4, 0);
 
 			List<String> userIds = new ArrayList<String>();
 			userIds.add(userId1);
@@ -297,7 +302,7 @@ public class ClanTest {
 		CreateClanRequestEvent ccre = new CreateClanRequestEvent();
 		ccre.setTag(1);
 		ccre.setCreateClanRequestProto(ccrpb.build());
-		createClanController.handleEvent(ccre);
+		createClanController.processRequestEvent(ccre, EventsUtil.getToClientEvents());
 
 		User user2 = userRetrieveUtil.getUserById(userId1);
 		assertEquals(userGems - 100, user2.getGems());
@@ -332,7 +337,7 @@ public class ClanTest {
 		ChangeClanSettingsRequestEvent ccsre = new ChangeClanSettingsRequestEvent();
 		ccsre.setTag(1);
 		ccsre.setChangeClanSettingsRequestProto(ccsrpb.build());
-		changeClanSettingsController.handleEvent(ccsre);
+		changeClanSettingsController.processRequestEvent(ccsre, EventsUtil.getToClientEvents());
 
 		Clan testClan2 = clanRetrieveUtil.getClanWithNameOrTag(
 				"test clan2", "tc2");
@@ -355,7 +360,7 @@ public class ClanTest {
 		RequestJoinClanRequestEvent rjcre = new RequestJoinClanRequestEvent();
 		rjcre.setTag(1);
 		rjcre.setRequestJoinClanRequestProto(rjcrpb.build());
-		requestJoinClanController.handleEvent(rjcre);
+		requestJoinClanController.processRequestEvent(rjcre, EventsUtil.getToClientEvents());
 
 		List<Clan> clanList3 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -381,7 +386,7 @@ public class ClanTest {
 		ApproveOrRejectRequestToJoinClanRequestEvent aorrtjcre = new ApproveOrRejectRequestToJoinClanRequestEvent();
 		aorrtjcre.setTag(1);
 		aorrtjcre.setApproveOrRejectRequestToJoinClanRequestProto(aorrtjcrpb.build());
-		approveOrRejectRequestToJoinClanController.handleEvent(aorrtjcre);
+		approveOrRejectRequestToJoinClanController.processRequestEvent(aorrtjcre, EventsUtil.getToClientEvents());
 
 		List<Clan> clanList4 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -403,7 +408,7 @@ public class ClanTest {
 		TransferClanOwnershipRequestEvent tcore = new TransferClanOwnershipRequestEvent();
 		tcore.setTag(1);
 		tcore.setTransferClanOwnershipRequestProto(tcorpb.build());
-		transferClanOwnershipController.handleEvent(tcore);
+		transferClanOwnershipController.processRequestEvent(tcore, EventsUtil.getToClientEvents());
 
 		UserClan uc4 = userClanRetrieveUtil.getSpecificUserClan(userId2, clanUuid);
 		assertTrue(uc4.getStatus().equals("LEADER"));
@@ -425,7 +430,7 @@ public class ClanTest {
 		PromoteDemoteClanMemberRequestEvent pdcmre = new PromoteDemoteClanMemberRequestEvent();
 		pdcmre.setTag(1);
 		pdcmre.setPromoteDemoteClanMemberRequestProto(pdcmrpb.build());
-		promoteDemoteClanMemberController.handleEvent(pdcmre);
+		promoteDemoteClanMemberController.processRequestEvent(pdcmre, EventsUtil.getToClientEvents());
 
 		UserClan uc6 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 		assertTrue(uc6.getStatus().equals("CAPTAIN"));
@@ -444,7 +449,7 @@ public class ClanTest {
 		PromoteDemoteClanMemberRequestEvent pdcmre2 = new PromoteDemoteClanMemberRequestEvent();
 		pdcmre2.setTag(1);
 		pdcmre2.setPromoteDemoteClanMemberRequestProto(pdcmrpb2.build());
-		promoteDemoteClanMemberController.handleEvent(pdcmre2);
+		promoteDemoteClanMemberController.processRequestEvent(pdcmre2, EventsUtil.getToClientEvents());
 
 		UserClan uc7 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 		assertTrue(uc7.getStatus().equals("MEMBER"));
@@ -462,7 +467,7 @@ public class ClanTest {
 		RequestJoinClanRequestEvent rjcre2 = new RequestJoinClanRequestEvent();
 		rjcre2.setTag(1);
 		rjcre2.setRequestJoinClanRequestProto(rjcrpb2.build());
-		requestJoinClanController.handleEvent(rjcre2);
+		requestJoinClanController.processRequestEvent(rjcre2, EventsUtil.getToClientEvents());
 
 		List<Clan> clanList5 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -484,7 +489,7 @@ public class ClanTest {
 		RetractRequestJoinClanRequestEvent rrjcre = new RetractRequestJoinClanRequestEvent();
 		rrjcre.setTag(1);
 		rrjcre.setRetractRequestJoinClanRequestProto(rrjcrpb.build());
-		retractRequestJoinClanController.handleEvent(rrjcre);
+		retractRequestJoinClanController.processRequestEvent(rrjcre, EventsUtil.getToClientEvents());
 		
 		List<Clan> clanList6 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -507,7 +512,7 @@ public class ClanTest {
 		BootPlayerFromClanRequestEvent bpfcre = new BootPlayerFromClanRequestEvent();
 		bpfcre.setTag(1);
 		bpfcre.setBootPlayerFromClanRequestProto(bpfcrpb.build());
-		bootPlayerFromClanController.handleEvent(bpfcre);
+		bootPlayerFromClanController.processRequestEvent(bpfcre, EventsUtil.getToClientEvents());
 
 		User leader = userRetrieveUtil.getUserById(userId2);
 		assertTrue(leader.getClanId().equals(clanUuid));
@@ -525,27 +530,27 @@ public class ClanTest {
 		BootPlayerFromClanRequestEvent bpfcre2 = new BootPlayerFromClanRequestEvent();
 		bpfcre2.setTag(1);
 		bpfcre2.setBootPlayerFromClanRequestProto(bpfcrpb2.build());
-		bootPlayerFromClanController.handleEvent(bpfcre2);
+		bootPlayerFromClanController.processRequestEvent(bpfcre2, EventsUtil.getToClientEvents());
 		
 		UserClan uc10 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 		assertTrue(uc10 == null);		
 		
-		//LEAVE CLAN
-		LeaveClanRequestProto.Builder lcrpb = LeaveClanRequestProto
-				.newBuilder();
-		User user12 = userRetrieveUtil.getUserById(userId1);
-
-		//member trying to boot leader
-		lcrpb.setSender(createInfoProtoUtils
-				.createMinimumUserProtoFromUserAndClan(user12, testClan3));
-		
-		LeaveClanRequestEvent lcre = new LeaveClanRequestEvent();
-		lcre.setTag(1);
-		lcre.setLeaveClanRequestProto(lcrpb.build());
-		bootPlayerFromClanController.handleEvent(bpfcre);
-
-		User leader1 = userRetrieveUtil.getUserById(userId2);
-		assertTrue(leader1.getClanId().equals(clanUuid));
+//		//LEAVE CLAN
+//		LeaveClanRequestProto.Builder lcrpb = LeaveClanRequestProto
+//				.newBuilder();
+//		User user12 = userRetrieveUtil.getUserById(userId1);
+//
+//		//member trying to boot leader
+//		lcrpb.setSender(createInfoProtoUtils
+//				.createMinimumUserProtoFromUserAndClan(user12, testClan3));
+//		
+//		LeaveClanRequestEvent lcre = new LeaveClanRequestEvent();
+//		lcre.setTag(1);
+//		lcre.setLeaveClanRequestProto(lcrpb.build());
+//		leaveClanController.handleEvent(lcre);
+//
+//		User leader1 = userRetrieveUtil.getUserById(userId2);
+//		assertTrue(leader1.getClanId().equals(clanUuid));
 	}
 
 }

@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;

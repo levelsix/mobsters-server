@@ -1,38 +1,15 @@
 package com.lvl6.eventhandlers;
 
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
+public class AmqpGameEventHandlerOld {//extends AbstractGameEventHandler implements	MessageListener {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hazelcast.core.IMap;
-import com.lvl6.events.PreDatabaseRequestEvent;
-import com.lvl6.events.RequestEvent;
-import com.lvl6.info.User;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.controller.EventController;
-import com.lvl6.utils.Attachment;
-import com.lvl6.utils.ConnectedPlayer;
-
-public class AmqpGameEventHandler extends AbstractGameEventHandler implements
-		MessageListener {
-
-	static Logger log = LoggerFactory.getLogger(GameEventHandler.class);
+/*	static Logger log = LoggerFactory.getLogger(GameEventHandlerOld.class);
 
 	private static final int DEFAULT_TTL = 9;
 
 	@Resource(name = "playersByPlayerId")
 	IMap<String, ConnectedPlayer> playersByPlayerId;
-	
+
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtils;
 
@@ -95,7 +72,7 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 
 		User user = null;
 		String playerId = event.getPlayerId();
-		
+
 		log.debug("Received event from client: " + event.getPlayerId());
 		if (getApplicationMode().isMaintenanceMode()) {
 			if(playerId != null && !playerId.isEmpty()) {
@@ -103,12 +80,16 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 			}
 			else if (event instanceof PreDatabaseRequestEvent) {
 				String udid = ((PreDatabaseRequestEvent) event).getUdid();
+				List<User> users = null;
 				if(udid != null) {
-					user = userRetrieveUtils.getUserByUDIDorFbId(udid, "").get(0);
+					users = userRetrieveUtils.getUserByUDIDorFbId(udid, "");
+				}
+				if(null != users && !users.isEmpty()) {
+					user = users.get(0);
 				}
 			}
 			if(user != null && user.isAdmin()) {
-				
+
 			}else {
 				//not an admin so send maintenance message and return
 				if (event instanceof PreDatabaseRequestEvent) {
@@ -122,15 +103,14 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 				return;
 			}
 		}
-		
+
 		updatePlayerToServerMaps(event);
 		ec.handleEvent(event);
-		
+
 	}
 
 	@Override
-	protected void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType) {
+	protected void delegateEvent(RequestEvent event,EventProtocolRequest eventType) {
 		if (event != null && eventType.getNumber() < 0) {
 			log.error("the event type is < 0");
 			return;
@@ -186,6 +166,6 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements
 			log.error(String.format("playerId not set for RequestEvent: %s",
 					event));
 		}
-	}
+	}*/
 
 }

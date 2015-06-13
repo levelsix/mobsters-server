@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -23,18 +22,19 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class LogoutController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public LogoutController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Resource(name = "playersByPlayerId")
@@ -72,7 +72,7 @@ public class LogoutController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LogoutRequestProto reqProto = ((LogoutRequestEvent) event)
 				.getLogoutRequestProto();
 

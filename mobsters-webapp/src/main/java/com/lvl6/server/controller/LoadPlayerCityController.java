@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -28,10 +27,11 @@ import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class LoadPlayerCityController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -56,7 +56,6 @@ public class LoadPlayerCityController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public LoadPlayerCityController() {
-		numAllocatedThreads = 10;
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class LoadPlayerCityController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent) event)
 				.getLoadPlayerCityRequestProto();
 
@@ -105,8 +104,8 @@ public class LoadPlayerCityController extends EventController {
 			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -148,8 +147,8 @@ public class LoadPlayerCityController extends EventController {
 			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in LoadPlayerCity processEvent", e);
@@ -158,8 +157,8 @@ public class LoadPlayerCityController extends EventController {
 				LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setLoadPlayerCityResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SubmitMonsterEnhancementController processEvent",

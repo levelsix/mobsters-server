@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class DeleteGiftResponseEvent extends NormalResponseEvent {
+public class DeleteGiftResponseEvent extends NormalResponseEvent<DeleteGiftResponseProto> {
 
 	private DeleteGiftResponseProto deleteGiftResponseProto;
 
@@ -30,7 +30,7 @@ public class DeleteGiftResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return deleteGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

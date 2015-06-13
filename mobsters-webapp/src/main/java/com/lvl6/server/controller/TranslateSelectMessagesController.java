@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -32,18 +31,20 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TranslateSelectMessagesAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
 public class TranslateSelectMessagesController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory.getLogger(TranslateSelectMessagesController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -75,8 +76,15 @@ public class TranslateSelectMessagesController extends EventController {
 	@Autowired
 	protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
 
+	@Autowired
+	protected TranslationUtils translationUtils;
+
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+
+
 	public TranslateSelectMessagesController() {
-		numAllocatedThreads = 4;
+
 	}
 
 	@Override
@@ -90,7 +98,7 @@ public class TranslateSelectMessagesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TranslateSelectMessagesRequestProto reqProto = ((TranslateSelectMessagesRequestEvent) event)
 				.getTranslateSelectMessagesRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -142,8 +150,8 @@ public class TranslateSelectMessagesController extends EventController {
 			TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTranslateSelectMessagesResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -152,7 +160,8 @@ public class TranslateSelectMessagesController extends EventController {
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId,
 					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil,
-					translateOn, insertUtil, updateUtil, miscMethods, chatTranslationsRetrieveUtils);
+					translateOn, insertUtil, updateUtil, miscMethods, chatTranslationsRetrieveUtils,
+					translationUtils, serverToggleRetrieveUtils);
 
 			tsma.execute(resBuilder);
 
@@ -161,7 +170,7 @@ public class TranslateSelectMessagesController extends EventController {
 				privateChatPostMap = tsma.getPrivateChatPostMap();
 				log.info("PRIVATE CHAT POST MAP: " + privateChatPostMap);
 
-				if (null != privateChatPostMap) {
+				if (null != privateChatPostMap && !privateChatPostMap.isEmpty()) {
 					List<PrivateChatPostProto> pcppList = createNewPrivateChatPostProtoWithTranslations(
 							listOfPrivateChatProtos, privateChatPostMap);
 					log.info("pcppList" + pcppList);
@@ -172,8 +181,8 @@ public class TranslateSelectMessagesController extends EventController {
 			TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTranslateSelectMessagesResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in TranslateSelectMessagesController processEvent", e);
@@ -183,8 +192,8 @@ public class TranslateSelectMessagesController extends EventController {
 				TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setTranslateSelectMessagesResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SellUserMonsterController processEvent",
@@ -200,8 +209,8 @@ public class TranslateSelectMessagesController extends EventController {
 		for(PrivateChatPostProto pcpp : list) {
 			PrivateChatPost pcp = new PrivateChatPost();
 			pcp.setId(pcpp.getPrivateChatPostUuid());
-			pcp.setPosterId(pcpp.getPoster().getMinUserProto().getUserUuid());
-			pcp.setRecipientId(pcpp.getRecipient().getMinUserProto().getUserUuid());
+			pcp.setPosterId(pcpp.getPoster().getUserUuid());
+			pcp.setRecipientId(pcpp.getRecipient().getUserUuid());
 			pcp.setTimeOfPost(new Date(pcpp.getTimeOfPost()));
 			pcp.setContent(pcpp.getContent());
 			pcp.setContentLanguage(pcpp.getOriginalContentLanguage().toString());

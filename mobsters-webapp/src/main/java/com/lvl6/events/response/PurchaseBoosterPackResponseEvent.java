@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent {
+public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<PurchaseBoosterPackResponseProto> {
 
-	private PurchaseBoosterPackResponseProto purchaseBoosterPackResponseProto;
+	
 
 	public PurchaseBoosterPackResponseEvent(String playerId) {
 		super(playerId);
@@ -18,17 +18,17 @@ public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = purchaseBoosterPackResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPurchaseBoosterPackResponseProto(
-			PurchaseBoosterPackResponseProto purchaseBoosterPackResponseProto) {
-		this.purchaseBoosterPackResponseProto = purchaseBoosterPackResponseProto;
+			PurchaseBoosterPackResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public int eventSize() {
-		return purchaseBoosterPackResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

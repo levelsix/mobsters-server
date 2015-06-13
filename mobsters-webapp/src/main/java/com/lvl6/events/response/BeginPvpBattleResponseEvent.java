@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BeginPvpBattleResponseEvent extends NormalResponseEvent {
+public class BeginPvpBattleResponseEvent extends NormalResponseEvent<BeginPvpBattleResponseProto> {
 
-	private BeginPvpBattleResponseProto beginPvpBattleResponseProto;
+	
 
 	public BeginPvpBattleResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class BeginPvpBattleResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = beginPvpBattleResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setBeginPvpBattleResponseProto(
-			BeginPvpBattleResponseProto beginPvpBattleResponseProto) {
-		this.beginPvpBattleResponseProto = beginPvpBattleResponseProto;
+			BeginPvpBattleResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public BeginPvpBattleResponseProto getBeginPvpBattleResponseProto() {   //because APNS required
-		return beginPvpBattleResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return beginPvpBattleResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

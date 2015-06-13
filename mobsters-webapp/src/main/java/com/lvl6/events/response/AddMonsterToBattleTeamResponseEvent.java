@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent {
+public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent<AddMonsterToBattleTeamResponseProto> {
 
-	private AddMonsterToBattleTeamResponseProto addMonsterToBattleTeamResponseProto;
+	
 
 	public AddMonsterToBattleTeamResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = addMonsterToBattleTeamResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAddMonsterToBattleTeamResponseProto(
-			AddMonsterToBattleTeamResponseProto addMonsterToBattleTeamResponseProto) {
-		this.addMonsterToBattleTeamResponseProto = addMonsterToBattleTeamResponseProto;
+			AddMonsterToBattleTeamResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public AddMonsterToBattleTeamResponseProto getAddMonsterToBattleTeamResponseProto() {   //because APNS required
-		return addMonsterToBattleTeamResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return addMonsterToBattleTeamResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

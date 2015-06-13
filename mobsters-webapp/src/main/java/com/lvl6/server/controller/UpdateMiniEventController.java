@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -21,19 +20,24 @@ import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.UpdateMiniEventAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class UpdateMiniEventController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public UpdateMiniEventController() {
-		numAllocatedThreads = 4;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -52,7 +56,7 @@ public class UpdateMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMiniEventRequestProto reqProto = ((UpdateMiniEventRequestEvent) event)
 				.getUpdateMiniEventRequestProto();
 
@@ -89,12 +93,12 @@ public class UpdateMiniEventController extends EventController {
 			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMiniEventResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(userId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		try {
 			List<MiniEventGoalForUser> megfuList = javafyUserMiniEventProto(umegpList);
 
@@ -107,8 +111,8 @@ public class UpdateMiniEventController extends EventController {
 			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMiniEventResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in UpdateMiniEventController processEvent",
@@ -118,8 +122,8 @@ public class UpdateMiniEventController extends EventController {
 				UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateMiniEventResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateMiniEventController processEvent",
@@ -127,7 +131,7 @@ public class UpdateMiniEventController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(userId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -155,6 +159,14 @@ public class UpdateMiniEventController extends EventController {
 
 	public void setInsertUtil(InsertUtil insertUtil) {
 		this.insertUtil = insertUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

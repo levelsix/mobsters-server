@@ -6,10 +6,10 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CreateClanRequestEvent;
 import com.lvl6.events.response.CreateClanResponseEvent;
@@ -17,6 +17,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto;
@@ -28,16 +29,18 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
 import com.lvl6.server.controller.utils.ResourceUtil;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class CreateClanController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(CreateClanController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -52,7 +55,7 @@ public class CreateClanController extends EventController {
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -69,9 +72,12 @@ public class CreateClanController extends EventController {
 	@Autowired
 	protected ResourceUtil resourceUtil;
 	
+	@Autowired
+	protected PvpLeagueForUserDao pvpLeagueForUserDao;
+	
 	
 	public CreateClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -85,7 +91,7 @@ public class CreateClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -122,8 +128,8 @@ public class CreateClanController extends EventController {
 			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCreateClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -143,17 +149,22 @@ public class CreateClanController extends EventController {
 
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCreateClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());  
+			responses.normalResponseEvents().add(resEvent);
+			responses.setUserId(userId);
+			responses.setClanChanged(true);
+			responses.setNewClanId(cca.getClanId());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (CreateClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(cca.getUser(), null, cca.getCreatedClan());
 				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+//				responses.normalResponseEvents().add(resEventUpdate);
 
-				sendGeneralNotification(cca.getUser().getName(), clanName);
+
+				sendGeneralNotification(cca.getUser().getName(), clanName, responses);
 
 				writeToUserCurrencyHistory(cca);
 			}
@@ -163,8 +174,8 @@ public class CreateClanController extends EventController {
 				resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCreateClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateClan processEvent", e);
 			}
@@ -173,20 +184,17 @@ public class CreateClanController extends EventController {
 		}
 	}
 
-	private void sendGeneralNotification(String userName, String clanName) {
+
+	private void sendGeneralNotification(String userName, String clanName, ToClientEvents responses) {
 		Notification createClanNotification = new Notification();
 		createClanNotification.setAsClanCreated(userName, clanName);
 
-		miscMethods.writeGlobalNotification(createClanNotification, server);
+		responses.globalChatResponseEvents().add(miscMethods.getGlobalNotification(createClanNotification));
 	}
 
 	private void updateClanCache(Clan clan) {
 		String clanId = clan.getId();
-		//need to account for this user creating clan
-		int clanSize = 1;
-		Date lastChatTime = ControllerConstants.INCEPTION_DATE;
-
-		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
 	}
 
 	private void writeToUserCurrencyHistory(CreateClanAction cca) {
@@ -212,12 +220,13 @@ public class CreateClanController extends EventController {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
+
 
 }

@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent {
+public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent<RetrieveUserMonsterTeamResponseProto> {
 
-	private RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto;
+	
 
 	public RetrieveUserMonsterTeamResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = retrieveUserMonsterTeamResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRetrieveUserMonsterTeamResponseProto(
-			RetrieveUserMonsterTeamResponseProto retrieveUserMonsterTeamResponseProto) {
-		this.retrieveUserMonsterTeamResponseProto = retrieveUserMonsterTeamResponseProto;
+			RetrieveUserMonsterTeamResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return retrieveUserMonsterTeamResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

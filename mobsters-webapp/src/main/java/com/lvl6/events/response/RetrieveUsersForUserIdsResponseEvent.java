@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent {
+public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent<RetrieveUsersForUserIdsResponseProto> {
 
-	private RetrieveUsersForUserIdsResponseProto retrieveUsersForUserIdsResponseProto;
+	
 
 	public RetrieveUsersForUserIdsResponseEvent(String playerId) {
 		super(playerId);
@@ -25,18 +25,18 @@ public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent {
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = retrieveUsersForUserIdsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setRetrieveUsersForUserIdsResponseProto(
-			RetrieveUsersForUserIdsResponseProto retrieveUsersForUserIdsResponseProto) {
-		this.retrieveUsersForUserIdsResponseProto = retrieveUsersForUserIdsResponseProto;
+			RetrieveUsersForUserIdsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return retrieveUsersForUserIdsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

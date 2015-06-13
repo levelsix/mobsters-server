@@ -30,6 +30,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.PrivateChatPostController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -100,7 +101,7 @@ public class PrivateChatPostTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -126,7 +127,7 @@ public class PrivateChatPostTest {
 
 		userId2 = insertUtil.insertUser(name2, udid2, lvl2, playerExp2, cash2, oil2,
 				gems2, false, deviceToken2, createTime, facebookId2,
-				avatarMonsterId2, email2, fbData2);
+				avatarMonsterId2, email2, fbData2, 0);
 
 		user2 = userRetrieveUtil.getUserById(userId2);
 
@@ -190,7 +191,7 @@ public class PrivateChatPostTest {
 		PrivateChatPostRequestEvent pcpre = new PrivateChatPostRequestEvent();
 		pcpre.setTag(1);
 		pcpre.setPrivateChatPostRequestProto(pcprpb.build());
-		privateChatPostController.handleEvent(pcpre);
+		privateChatPostController.processRequestEvent(pcpre, EventsUtil.getToClientEvents());
 
 		log.info("private chat post responseproto : {}", privateChatPostController.getPcprp());
 	}

@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -25,9 +24,10 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
-@DependsOn("gameServer")
+
 public class UpdateUserCurrencyController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -43,7 +43,7 @@ public class UpdateUserCurrencyController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public UpdateUserCurrencyController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class UpdateUserCurrencyController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateUserCurrencyRequestProto reqProto = ((UpdateUserCurrencyRequestEvent) event)
 				.getUpdateUserCurrencyRequestProto();
 
@@ -97,8 +97,8 @@ public class UpdateUserCurrencyController extends EventController {
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -129,8 +129,8 @@ public class UpdateUserCurrencyController extends EventController {
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -138,7 +138,7 @@ public class UpdateUserCurrencyController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, currencyChange, clientTime,
 						previousGems, previousCash, previousOil, reason,
@@ -163,8 +163,8 @@ public class UpdateUserCurrencyController extends EventController {
 				UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateUserCurrencyController processEvent",

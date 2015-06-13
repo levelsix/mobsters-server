@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent {
+public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent<CollectMonsterEnhancementResponseProto> {
 
-	private CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto;
+	
 
 	public CollectMonsterEnhancementResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent 
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = collectMonsterEnhancementResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setCollectMonsterEnhancementResponseProto(
-			CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto) {
-		this.collectMonsterEnhancementResponseProto = collectMonsterEnhancementResponseProto;
+			CollectMonsterEnhancementResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return collectMonsterEnhancementResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

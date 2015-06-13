@@ -18,18 +18,18 @@ import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBa
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveBattleReplayAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
 @DependsOn("gameServer")
 public class RetrieveBattleReplayController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
+	private static final Logger log = LoggerFactory.getLogger(RetrieveBattleReplayController.class);	
 	public RetrieveBattleReplayController() {
-		numAllocatedThreads = 1;
 	}
 
 	@Autowired
@@ -37,6 +37,9 @@ public class RetrieveBattleReplayController extends EventController {
 
 	@Autowired
 	CreateInfoProtoUtils createInfoProtoUtil;
+	
+	@Autowired
+	protected Locker locker;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -49,7 +52,7 @@ public class RetrieveBattleReplayController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses) {
 		RetrieveBattleReplayRequestProto reqProto = ((RetrieveBattleReplayRequestEvent) event)
 				.getRetrieveBattleReplayRequestProto();
 
@@ -82,11 +85,11 @@ public class RetrieveBattleReplayController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveBattleReplayResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(senderProto.getUserUuid(), this.getClass()
 				.getSimpleName());
 		try {
 			//
@@ -99,7 +102,7 @@ public class RetrieveBattleReplayController extends EventController {
 			{
 				BattleReplayForUser brfu = rsga.getBrfu();
 
-				resBuilder.setBrp(createInfoProtoUtils.createBattleReplayProto(brfu));
+				resBuilder.setBrp(createInfoProtoUtil.createBattleReplayProto(brfu));
 			}
 
 			RetrieveBattleReplayResponseProto resProto = resBuilder.build();
@@ -107,7 +110,7 @@ public class RetrieveBattleReplayController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRetrieveBattleReplayResponseProto(resProto);
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in RetrieveBattleReplayController processEvent", e);
@@ -117,7 +120,7 @@ public class RetrieveBattleReplayController extends EventController {
 						userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setRetrieveBattleReplayResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveBattleReplayController processEvent",
@@ -125,7 +128,7 @@ public class RetrieveBattleReplayController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(senderProto.getUserUuid(), this.getClass()
 					.getSimpleName());
 		}
 	}

@@ -14,7 +14,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -34,13 +33,14 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class AcceptAndRejectFbInvitesForSlotsController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -59,7 +59,6 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public AcceptAndRejectFbInvitesForSlotsController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -73,7 +72,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		AcceptAndRejectFbInviteForSlotsRequestProto reqProto = ((AcceptAndRejectFbInviteForSlotsRequestEvent) event)
 				.getAcceptAndRejectFbInviteForSlotsRequestProto();
 
@@ -124,9 +123,9 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 			AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -182,9 +181,9 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 			AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//write to the inviters this user accepted
@@ -200,7 +199,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 					newResEvent.setTag(0);
 					newResEvent
 							.setAcceptAndRejectFbInviteForSlotsResponseProto(responseProto);
-					server.writeEvent(newResEvent);
+					responses.normalResponseEvents().add(newResEvent);
 
 				}
 			}
@@ -216,9 +215,9 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 				AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in AcceptAndRejectFbInviteForSlotsController processEvent",

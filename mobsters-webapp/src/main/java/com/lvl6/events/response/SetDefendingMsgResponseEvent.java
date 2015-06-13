@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetDefendingMsgResponseEvent extends NormalResponseEvent {
+public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendingMsgResponseProto> {
 
-	private SetDefendingMsgResponseProto setDefendingMsgResponseProto;
+	
 
 	public SetDefendingMsgResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class SetDefendingMsgResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = setDefendingMsgResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSetDefendingMsgResponseProto(
-			SetDefendingMsgResponseProto setDefendingMsgResponseProto) {
-		this.setDefendingMsgResponseProto = setDefendingMsgResponseProto;
+			SetDefendingMsgResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return setDefendingMsgResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

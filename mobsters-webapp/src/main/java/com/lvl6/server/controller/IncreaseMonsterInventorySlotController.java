@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -42,11 +41,12 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class IncreaseMonsterInventorySlotController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -63,21 +63,21 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 	@Autowired
 	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResidenceRetrieveUtils structureResidenceRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public IncreaseMonsterInventorySlotController() {
-		numAllocatedThreads = 4;
+
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		IncreaseMonsterInventorySlotRequestProto reqProto = ((IncreaseMonsterInventorySlotRequestEvent) event)
 				.getIncreaseMonsterInventorySlotRequestProto();
 
@@ -103,7 +103,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		String userId = senderProto.getUserUuid();
 		IncreaseSlotType increaseType = reqProto.getIncreaseSlotType();
 		String userStructId = reqProto.getUserStructUuid();
-		//the invites to redeem     
+		//the invites to redeem
 		List<String> userFbInviteIds = reqProto
 				.getUserFbInviteForSlotUuidsList();
 		Timestamp curTime = new Timestamp((new Date()).getTime());
@@ -140,9 +140,9 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -179,9 +179,9 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -189,7 +189,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				if (increaseType == IncreaseSlotType.PURCHASE) {
 					writeToUserCurrencyHistory(aUser, sfu, increaseType,
@@ -209,9 +209,9 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 				IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in IncreaseMonsterInventorySlotController processEvent",
@@ -280,7 +280,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 				return false;
 			}
 
-			//check if user struct is already at its max fb invite lvl, 
+			//check if user struct is already at its max fb invite lvl,
 			int structId = sfu.getStructId();
 			Structure struct = structureRetrieveUtils
 					.getStructForStructId(structId);
@@ -454,15 +454,20 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 	}
 
 	private int getGemPriceFromStruct(StructureForUser sfu) {
-		//get the structure
+		//get the structure, based off of fbInviteStructLvl
+		//fbInviteStructLvl starts off at 0. If sfu is the very
+		//first level then need to find gem price of structure at lvl =
+		//fbInviteStructLvl + 1
 		int structId = sfu.getStructId();
 		Structure struct = structureRetrieveUtils
-				.getStructForStructId(structId);
+				.getPredecessorStructForStructIdAndLvl(
+						structId, sfu.getFbInviteStructLvl() + 1);
 		String structType = struct.getStructType();
 
 		int gemPrice = Integer.MAX_VALUE;
 		//at the moment, invites are only for residences
 		if (StructType.valueOf(structType) == StructType.RESIDENCE) {
+			structId = struct.getId();
 			StructureResidence residence = structureResidenceRetrieveUtils
 					.getResidenceForStructId(structId);
 			gemPrice = residence.getNumGemsRequired();
@@ -480,7 +485,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		//NOTE: if for some reason user manages to send two of these events
 		//and both are for the same userStruct and the second event
 		//is a duplicate of the first, need to only increases
-		//the userStruct's fbLvl only once 
+		//the userStruct's fbLvl only once
 		int nuFbInviteLevel = sfu.getFbInviteStructLvl();
 
 		if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
@@ -501,7 +506,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 					curTime, nEarliestInvites);
 			log.info("num saved: {}", num);
 
-			//using goalLvl stored in the invite, in the case of 
+			//using goalLvl stored in the invite, in the case of
 			//duplicate events being sent as mentioned above
 			nuFbInviteLevel = nEarliestInvites.get(0).getUserStructFbLvl();
 

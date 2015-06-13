@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent {
+public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent<CombineUserMonsterPiecesResponseProto> {
 
-	private CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto;
+	
 
 	public CombineUserMonsterPiecesResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = combineMonsterPiecesResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setCombineUserMonsterPiecesResponseProto(
-			CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto) {
-		this.combineMonsterPiecesResponseProto = combineMonsterPiecesResponseProto;
+			CombineUserMonsterPiecesResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public CombineUserMonsterPiecesResponseProto getCombineUserMonsterPiecesResponseProto() {   //because APNS required
-		return combineMonsterPiecesResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return combineMonsterPiecesResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

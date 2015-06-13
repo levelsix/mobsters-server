@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
+public class SetAvatarMonsterResponseEvent extends NormalResponseEvent<SetAvatarMonsterResponseProto> {
 
-	private SetAvatarMonsterResponseProto setAvatarMonsterResponseProto;
+	
 
 	public SetAvatarMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = setAvatarMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSetAvatarMonsterResponseProto(
-			SetAvatarMonsterResponseProto setAvatarMonsterResponseProto) {
-		this.setAvatarMonsterResponseProto = setAvatarMonsterResponseProto;
+			SetAvatarMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return setAvatarMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

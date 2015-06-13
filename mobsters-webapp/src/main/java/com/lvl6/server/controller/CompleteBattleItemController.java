@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -31,13 +30,14 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CompleteBattleItemAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class CompleteBattleItemController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -68,7 +68,7 @@ public class CompleteBattleItemController extends EventController {
 	protected DeleteUtil deleteUtil;
 
 	public CompleteBattleItemController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class CompleteBattleItemController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CompleteBattleItemRequestProto reqProto = ((CompleteBattleItemRequestEvent) event)
 				.getCompleteBattleItemRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -125,8 +125,8 @@ public class CompleteBattleItemController extends EventController {
 			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -154,8 +154,8 @@ public class CompleteBattleItemController extends EventController {
 			}
 
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -163,7 +163,7 @@ public class CompleteBattleItemController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user2, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				Date d = new Date();
 				Timestamp ts = new Timestamp(d.getTime());
@@ -178,8 +178,8 @@ public class CompleteBattleItemController extends EventController {
 				CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCompleteBattleItemResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CompleteBattleItemController processEvent",

@@ -31,7 +31,7 @@
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //import com.lvl6.utils.utilmethods.QuestUtils;
 //
-//  @Component @DependsOn("gameServer") public class QuestAcceptController extends EventController {
+//  @Component  public class QuestAcceptController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -47,7 +47,7 @@
 //
 //  
 //  public QuestAcceptController() {
-//    numAllocatedThreads = 5;
+//    
 //  }
 //  
 //  @Override
@@ -61,7 +61,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestAcceptRequestProto reqProto = ((QuestAcceptRequestEvent)event).getQuestAcceptRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();
@@ -92,8 +92,8 @@
 //      
 //      QuestAcceptResponseEvent resEvent = new QuestAcceptResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setQuestAcceptResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      resEvent.setResponseProto(resBuilder.build());  
+//      responses.normalResponseEvents().add(resEvent);
 //
 //
 //    } catch (Exception e) {

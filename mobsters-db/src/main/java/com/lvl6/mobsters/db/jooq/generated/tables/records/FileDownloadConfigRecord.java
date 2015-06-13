@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record5;
+import org.jooq.Record6;
 import org.jooq.Row;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -36,9 +36,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "file_download_config", schema = "mobsters")
-public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadConfigRecord> implements Record5<Integer, String, Integer, Boolean, Boolean>, IFileDownloadConfig {
+public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadConfigRecord> implements Record6<Integer, String, Integer, Boolean, Boolean, Boolean>, IFileDownloadConfig {
 
-	private static final long serialVersionUID = 51037447;
+	private static final long serialVersionUID = -2137479346;
 
 	/**
 	 * Setter for <code>mobsters.file_download_config.id</code>.
@@ -137,6 +137,25 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 		return (Boolean) getValue(4);
 	}
 
+	/**
+	 * Setter for <code>mobsters.file_download_config.use_ipad_suffix</code>.
+	 */
+	@Override
+	public FileDownloadConfigRecord setUseIpadSuffix(Boolean value) {
+		setValue(5, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.file_download_config.use_ipad_suffix</code>.
+	 */
+	@Column(name = "use_ipad_suffix", nullable = false, precision = 1)
+	@NotNull
+	@Override
+	public Boolean getUseIpadSuffix() {
+		return (Boolean) getValue(5);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -150,23 +169,23 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 	}
 
 	// -------------------------------------------------------------------------
-	// Record5 type implementation
+	// Record6 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<Integer, String, Integer, Boolean, Boolean> fieldsRow() {
-		return (Row5) super.fieldsRow();
+	public Row6<Integer, String, Integer, Boolean, Boolean, Boolean> fieldsRow() {
+		return (Row6) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row5<Integer, String, Integer, Boolean, Boolean> valuesRow() {
-		return (Row5) super.valuesRow();
+	public Row6<Integer, String, Integer, Boolean, Boolean, Boolean> valuesRow() {
+		return (Row6) super.valuesRow();
 	}
 
 	/**
@@ -213,6 +232,14 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Field<Boolean> field6() {
+		return FileDownloadConfig.FILE_DOWNLOAD_CONFIG.USE_IPAD_SUFFIX;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Integer value1() {
 		return getId();
 	}
@@ -247,6 +274,14 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 	@Override
 	public Boolean value5() {
 		return getUseIphone6Prefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean value6() {
+		return getUseIpadSuffix();
 	}
 
 	/**
@@ -298,12 +333,22 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public FileDownloadConfigRecord values(Integer value1, String value2, Integer value3, Boolean value4, Boolean value5) {
+	public FileDownloadConfigRecord value6(Boolean value) {
+		setUseIpadSuffix(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public FileDownloadConfigRecord values(Integer value1, String value2, Integer value3, Boolean value4, Boolean value5, Boolean value6) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
 		value4(value4);
 		value5(value5);
+		value6(value6);
 		return this;
 	}
 
@@ -321,6 +366,7 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 		setPriority(from.getPriority());
 		setDownloadOnlyOverWifi(from.getDownloadOnlyOverWifi());
 		setUseIphone6Prefix(from.getUseIphone6Prefix());
+		setUseIpadSuffix(from.getUseIpadSuffix());
 	}
 
 	/**
@@ -346,7 +392,7 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 	/**
 	 * Create a detached, initialised FileDownloadConfigRecord
 	 */
-	public FileDownloadConfigRecord(Integer id, String filename, Integer priority, Boolean downloadOnlyOverWifi, Boolean useIphone6Prefix) {
+	public FileDownloadConfigRecord(Integer id, String filename, Integer priority, Boolean downloadOnlyOverWifi, Boolean useIphone6Prefix, Boolean useIpadSuffix) {
 		super(FileDownloadConfig.FILE_DOWNLOAD_CONFIG);
 
 		setValue(0, id);
@@ -354,5 +400,6 @@ public class FileDownloadConfigRecord extends UpdatableRecordImpl<FileDownloadCo
 		setValue(2, priority);
 		setValue(3, downloadOnlyOverWifi);
 		setValue(4, useIphone6Prefix);
+		setValue(5, useIpadSuffix);
 	}
 }

@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
+public class DeleteClanGiftsResponseEvent extends NormalResponseEvent<DeleteClanGiftsResponseProto> {
 
-	private DeleteClanGiftsResponseProto deleteClanGiftsResponseProto;
+	
 
 	public DeleteClanGiftsResponseEvent(String playerId) {
 		super(playerId);
@@ -18,19 +18,19 @@ public class DeleteClanGiftsResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = deleteClanGiftsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setDeleteClanGiftsResponseProto(
-			DeleteClanGiftsResponseProto deleteClanGiftsResponseProto) {
-		this.deleteClanGiftsResponseProto = deleteClanGiftsResponseProto;
+			DeleteClanGiftsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	@Override
 	public int eventSize() {
-		return deleteClanGiftsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

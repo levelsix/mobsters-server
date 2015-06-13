@@ -6,14 +6,13 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.response.LeaveClanResponseEvent;
-
 import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus;
@@ -26,11 +25,13 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.LeaveClanAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class LeaveClanController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -55,7 +56,7 @@ public class LeaveClanController extends EventController {
 	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 	
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -64,7 +65,7 @@ public class LeaveClanController extends EventController {
 	protected DeleteUtil deleteUtil;
 	
 	public LeaveClanController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class LeaveClanController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LeaveClanRequestProto reqProto = ((LeaveClanRequestEvent) event)
 				.getLeaveClanRequestProto();
 
@@ -115,8 +116,8 @@ public class LeaveClanController extends EventController {
 			resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLeaveClanResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -126,12 +127,12 @@ public class LeaveClanController extends EventController {
 		if (null != clanId) {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}/* else {
-			server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}*/
 		try {
 			LeaveClanAction lca = new LeaveClanAction(userId, clanId, lockedClan,
 					userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils, 
-					userClanRetrieveUtils, clanSearch, clanChatPostRetrieveUtil, 
+					userClanRetrieveUtils, hzClanSearch, clanChatPostRetrieveUtil, 
 					timeUtils);
 			lca.execute(resBuilder);
 			
@@ -140,12 +141,15 @@ public class LeaveClanController extends EventController {
 			//only write to user if failed
 			if (!LeaveClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
 				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
+				responses.setUserId(userId);
+				responses.setClanChanged(true);
+				responses.setNewClanId(clanId);
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -157,8 +161,8 @@ public class LeaveClanController extends EventController {
 				LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setLeaveClanResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in LeaveClan processEvent", e);
 			}
@@ -166,7 +170,7 @@ public class LeaveClanController extends EventController {
 			if (null != clanUuid && lockedClan) {
 				getLocker().unlockClan(clanUuid);
 			}/* else {
-				server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 				}*/
 		}
 	}
@@ -233,12 +237,13 @@ public class LeaveClanController extends EventController {
 		this.timeUtils = timeUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
+
 
 }

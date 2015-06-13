@@ -9,17 +9,23 @@ import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput
 import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
 import java.util.concurrent.TimeUnit
 
-//@Component
+
+case class CachedClientResponse(request_uuid:String, date:Long, eventType:Int, event:Array[Byte])
+
+
+@Component
 class CachedClientResponses extends TableDefinition {
   
   val dateColumn = "date"
   val eventColumn = "event"
-  def hashKeyName = "uuid"
-  def rangeKeyName:Option[String] = None
+  val eventTypeColumn = "eventType"
+  def hashKeyName = "request_uuid"
+  def rangeKeyName:Option[String] = Some("response_uuid")
   def tableName = "CachedClientResponses"
   def attributes = List(
       AttributeDef(hashKeyName, ScalarAttributeType.S), 
       AttributeDef(eventColumn, ScalarAttributeType.B),
+      AttributeDef(eventTypeColumn, ScalarAttributeType.N),
       AttributeDef(dateColumn, ScalarAttributeType.N))
  
   override def itemTTL = Some(TTLDef(180l, TimeUnit.SECONDS, dateColumn))

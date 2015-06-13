@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -27,22 +26,30 @@ import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class RetrieveMiniEventController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventController.class);
 
 	public RetrieveMiniEventController() {
-		numAllocatedThreads = 4;
+
 	}
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -78,6 +85,9 @@ public class RetrieveMiniEventController extends EventController {
 	protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
 
 	@Autowired
+	protected MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
+
+	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtil;
 
 	@Autowired
@@ -94,7 +104,7 @@ public class RetrieveMiniEventController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		//should really be renamed to something like UpdateToCurrentMiniEvent or something
 		RetrieveMiniEventRequestProto reqProto = ((RetrieveMiniEventRequestEvent) event)
 				.getRetrieveMiniEventRequestProto();
@@ -128,12 +138,12 @@ public class RetrieveMiniEventController extends EventController {
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveMiniEventResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(userId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		try {
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
@@ -143,7 +153,8 @@ public class RetrieveMiniEventController extends EventController {
 					insertUtil, deleteUtil, miniEventGoalRetrieveUtils,
 					miniEventForPlayerLvlRetrieveUtils, miniEventRetrieveUtils,
 					miniEventTierRewardRetrieveUtils,
-					miniEventLeaderboardRewardRetrieveUtils, timeUtil);
+					miniEventLeaderboardRewardRetrieveUtils,
+					miniEventTimetableRetrieveUtil, timeUtil);
 
 			rmea.execute(resBuilder);
 
@@ -155,6 +166,7 @@ public class RetrieveMiniEventController extends EventController {
 				UserMiniEventProto umep = createInfoProtoUtils
 						.createUserMiniEventProto(
 								rmea.getMefu(), rmea.getCurActiveMiniEvent(),
+								rmea.getCurActiveMiniEventTimetable(),
 								rmea.getMegfus(),
 								rmea.getLvlEntered(), rmea.getRewards(),
 								rmea.getGoals(), rmea.getLeaderboardRewards(),
@@ -167,8 +179,8 @@ public class RetrieveMiniEventController extends EventController {
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveMiniEventResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in RetrieveMiniEventController processEvent",
@@ -178,8 +190,8 @@ public class RetrieveMiniEventController extends EventController {
 				RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveMiniEventResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveMiniEventController processEvent",
@@ -187,7 +199,7 @@ public class RetrieveMiniEventController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(userId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -231,6 +243,22 @@ public class RetrieveMiniEventController extends EventController {
 
 	public void setDeleteUtil(DeleteUtil deleteUtil) {
 		this.deleteUtil = deleteUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
+		return createInfoProtoUtils;
+	}
+
+	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
+		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 }

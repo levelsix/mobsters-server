@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -18,21 +17,27 @@ import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserI
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RemoveUserItemUsedAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class RemoveUserItemUsedController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public RemoveUserItemUsedController() {
-		numAllocatedThreads = 1;
+		
 	}
 
+
+	@Autowired
+	protected Locker locker;
+	
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -47,7 +52,7 @@ public class RemoveUserItemUsedController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RemoveUserItemUsedRequestProto reqProto = ((RemoveUserItemUsedRequestEvent) event)
 				.getRemoveUserItemUsedRequestProto();
 
@@ -82,12 +87,14 @@ public class RemoveUserItemUsedController extends EventController {
 			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		
+		
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 
@@ -100,8 +107,8 @@ public class RemoveUserItemUsedController extends EventController {
 			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRemoveUserItemUsedResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in RemoveUserItemUsedController processEvent",
@@ -111,8 +118,8 @@ public class RemoveUserItemUsedController extends EventController {
 				RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRemoveUserItemUsedResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RemoveUserItemUsedController processEvent",
@@ -120,9 +127,17 @@ public class RemoveUserItemUsedController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

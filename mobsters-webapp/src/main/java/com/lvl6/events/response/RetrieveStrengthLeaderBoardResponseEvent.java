@@ -7,9 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEvent {
-
-	private RetrieveStrengthLeaderBoardResponseProto retrieveStrengthLeaderBoardResponseProto;
+public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEvent<RetrieveStrengthLeaderBoardResponseProto> {
 
 	public RetrieveStrengthLeaderBoardResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +16,18 @@ public class RetrieveStrengthLeaderBoardResponseEvent extends NormalResponseEven
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = retrieveStrengthLeaderBoardResponseProto.toByteString();
+		ByteString b = responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRetrieveStrengthLeaderBoardResponseProto(
 			RetrieveStrengthLeaderBoardResponseProto retrieveStrengthLeaderBoardResponseProto) {
-		this.retrieveStrengthLeaderBoardResponseProto = retrieveStrengthLeaderBoardResponseProto;
+		this.responseProto = retrieveStrengthLeaderBoardResponseProto;
 	}
 	
 	public int eventSize() {
-		return retrieveStrengthLeaderBoardResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

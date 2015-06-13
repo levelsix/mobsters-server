@@ -12,7 +12,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -54,13 +53,15 @@ import com.lvl6.server.controller.utils.ClanEventUtil;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class AttackClanRaidMonsterController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -111,7 +112,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 
 	public AttackClanRaidMonsterController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public class AttackClanRaidMonsterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AttackClanRaidMonsterRequestProto reqProto = ((AttackClanRaidMonsterRequestEvent) event)
 				.getAttackClanRaidMonsterRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -199,8 +200,8 @@ public class AttackClanRaidMonsterController extends EventController {
 			AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAttackClanRaidMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -237,18 +238,18 @@ public class AttackClanRaidMonsterController extends EventController {
 			AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAttackClanRaidMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			//tell whole clan on a successful attack
 			if (AttackClanRaidMonsterStatus.SUCCESS.equals(resBuilder
 					.getStatus())
 					|| AttackClanRaidMonsterStatus.SUCCESS_MONSTER_JUST_DIED
 							.equals(resBuilder.getStatus())) {
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				if (!allRewards.isEmpty()) {
-					setClanEventRewards(allRewards, eventDetails);
+					setClanEventRewards(allRewards, eventDetails, responses);
 				}
 			}
 
@@ -260,9 +261,9 @@ public class AttackClanRaidMonsterController extends EventController {
 				AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAttackClanRaidMonsterResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in AttackClanRaidMonster processEvent", e);
 			}
@@ -362,7 +363,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			UserCurrentMonsterTeamProto ucmtp,
 			Map<String, Integer> userMonsterIdToExpectedHealth,
 			Map<String, ClanEventPersistentForUser> userIdToCepfu,
-			List<ClanEventPersistentUserReward> allRewards) throws Exception {
+			List<ClanEventPersistentUserReward> allRewards)  {
 
 		log.info(String.format("clanEventInDb=%s", clanEvent));
 		log.info(String.format("clanEventClientSent=%s", clanEventClientSent));
@@ -429,7 +430,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			ClanEventPersistentForClan clanEventClientSent,
 			UserCurrentMonsterTeamProto ucmtp,
 			Map<String, ClanEventPersistentForUser> userIdToCepfu,
-			List<ClanEventPersistentUserReward> allRewards) throws Exception {
+			List<ClanEventPersistentUserReward> allRewards)  {
 		log.info("updating clan raid");
 
 		int curCrId = clanEvent.getCrId();
@@ -713,7 +714,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			ClanRaidStage nextStage, Timestamp curTime,
 			ClanEventPersistentForClan cepfc,
 			Map<String, ClanEventPersistentForUser> userIdToCepfu)
-			throws Exception {
+			 {
 		int eventId = cepfc.getClanEventPersistentId();
 		Timestamp stageStartTime = new Timestamp(cepfc.getStageStartTime()
 				.getTime());
@@ -724,7 +725,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 		if (null == nextCrsFirstCrsm) {
 			//WTF???
-			throw new Exception(String.format(
+			throw new RuntimeException(String.format(
 					"WTF!!!! clan raid stage has no monsters! >:( crs=%s",
 					nextStage));
 		}
@@ -960,7 +961,7 @@ public class AttackClanRaidMonsterController extends EventController {
 	//there are rewards
 	private void setClanEventRewards(
 			List<ClanEventPersistentUserReward> allRewards,
-			PersistentClanEventClanInfoProto eventDetails) {
+			PersistentClanEventClanInfoProto eventDetails, ToClientEvents responses) {
 		if (null == allRewards) {
 			return;
 		}
@@ -981,9 +982,9 @@ public class AttackClanRaidMonsterController extends EventController {
 		AwardClanRaidStageRewardResponseEvent resEvent = new AwardClanRaidStageRewardResponseEvent(
 				clanId);
 		resEvent.setTag(0);
-		resEvent.setAwardClanRaidStageRewardResponseProto(resBuilder.build());
+		resEvent.setResponseProto(resBuilder.build());
 
-		server.writeClanEvent(resEvent, clanId);
+		responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 	}
 
 	protected Locker getLocker() {

@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -32,10 +31,11 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class RetrieveUsersForUserIdsController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -58,7 +58,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 
 	public RetrieveUsersForUserIdsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveUsersForUserIdsRequestProto reqProto = ((RetrieveUsersForUserIdsRequestEvent) event)
 				.getRetrieveUsersForUserIdsRequestProto();
 
@@ -158,8 +158,8 @@ public class RetrieveUsersForUserIdsController extends EventController {
 		RetrieveUsersForUserIdsResponseEvent resEvent = new RetrieveUsersForUserIdsResponseEvent(
 				senderProto.getUserUuid());
 		resEvent.setTag(event.getTag());
-		resEvent.setRetrieveUsersForUserIdsResponseProto(resProto);
-		server.writeEvent(resEvent);
+		resEvent.setResponseProto(resProto);
+		responses.normalResponseEvents().add(resEvent);
 	}
 
 	private List<UserCurrentMonsterTeamProto> constructTeamsForUsers(

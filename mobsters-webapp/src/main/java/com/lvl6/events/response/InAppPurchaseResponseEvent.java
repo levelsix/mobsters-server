@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class InAppPurchaseResponseEvent extends NormalResponseEvent {
+public class InAppPurchaseResponseEvent extends NormalResponseEvent<InAppPurchaseResponseProto> {
 
-	private InAppPurchaseResponseProto inAppPurchaseResponseProto;
+	
 
 	public InAppPurchaseResponseEvent(String playerId) {
 		super(playerId);
@@ -25,18 +25,18 @@ public class InAppPurchaseResponseEvent extends NormalResponseEvent {
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = inAppPurchaseResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setInAppPurchaseResponseProto(
-			InAppPurchaseResponseProto inAppPurchaseResponseProto) {
-		this.inAppPurchaseResponseProto = inAppPurchaseResponseProto;
+			InAppPurchaseResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return inAppPurchaseResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

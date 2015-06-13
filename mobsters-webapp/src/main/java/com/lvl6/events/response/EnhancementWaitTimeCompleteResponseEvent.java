@@ -7,10 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EnhancementWaitTimeCompleteResponseEvent extends
-		NormalResponseEvent {
+public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEvent<EnhancementWaitTimeCompleteResponseProto> {
 
-	private EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto;
+	
 
 	public EnhancementWaitTimeCompleteResponseEvent(String playerId) {
 		super(playerId);
@@ -19,18 +18,18 @@ public class EnhancementWaitTimeCompleteResponseEvent extends
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = enhancementWaitTimeCompleteResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEnhancementWaitTimeCompleteResponseProto(
-			EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto) {
-		this.enhancementWaitTimeCompleteResponseProto = enhancementWaitTimeCompleteResponseProto;
+			EnhancementWaitTimeCompleteResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return enhancementWaitTimeCompleteResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

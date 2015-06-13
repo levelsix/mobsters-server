@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -31,10 +30,11 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class UpgradeNormStructureController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -56,7 +56,7 @@ public class UpgradeNormStructureController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public UpgradeNormStructureController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class UpgradeNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpgradeNormStructureRequestProto reqProto = ((UpgradeNormStructureRequestEvent) event)
 				.getUpgradeNormStructureRequestProto();
 
@@ -107,8 +107,8 @@ public class UpgradeNormStructureController extends EventController {
 			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -136,8 +136,8 @@ public class UpgradeNormStructureController extends EventController {
 			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (legitUpgrade) {
 				previousCash = user.getCash();
@@ -152,7 +152,7 @@ public class UpgradeNormStructureController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(user, userStruct, currentStruct,
 						nextLevelStruct, timeOfUpgrade, money, previousCash,
@@ -165,9 +165,9 @@ public class UpgradeNormStructureController extends EventController {
 				UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpgradeNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in UpgradeNormStructure processEvent", e2);
 			}
@@ -296,9 +296,14 @@ public class UpgradeNormStructureController extends EventController {
 		int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange,
 				gemChange, 0);
 		if (1 != num) {
-			log.error(String
-					.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
-							gemChange, cashChange, oilChange, num));
+			if(userStruct.getStructId() == ControllerConstants.STRUCTURE__LAB_ID) {
+				log.info("userid {} is upgrading lab", user.getId());
+			}
+			else {
+				log.error(String
+						.format("problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
+								gemChange, cashChange, oilChange, num));
+			}
 		} else {//things went ok
 			if (0 != gemChange) {
 				money.put(miscMethods.gems, gemChange);

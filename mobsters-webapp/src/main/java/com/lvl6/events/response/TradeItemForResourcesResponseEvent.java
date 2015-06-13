@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TradeItemForResourcesResponseEvent extends NormalResponseEvent {
+public class TradeItemForResourcesResponseEvent extends NormalResponseEvent<TradeItemForResourcesResponseProto> {
 
-	private TradeItemForResourcesResponseProto tradeItemForResourcesResponseProto;
+	
 
 	public TradeItemForResourcesResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class TradeItemForResourcesResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = tradeItemForResourcesResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setTradeItemForResourcesResponseProto(
-			TradeItemForResourcesResponseProto tradeItemForResourcesResponseProto) {
-		this.tradeItemForResourcesResponseProto = tradeItemForResourcesResponseProto;
+			TradeItemForResourcesResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return tradeItemForResourcesResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

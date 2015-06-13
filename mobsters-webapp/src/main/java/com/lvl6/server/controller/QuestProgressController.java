@@ -41,7 +41,7 @@
 //import com.lvl6.utils.utilmethods.QuestUtils;
 //import com.lvl6.utils.utilmethods.UpdateUtil;
 //
-//  @Component @DependsOn("gameServer") public class QuestProgressController extends EventController {
+//  @Component  public class QuestProgressController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -55,7 +55,7 @@
 //  protected UpdateUtil updateUtil;
 //  
 //  public QuestProgressController() {
-//    numAllocatedThreads = 5;
+//    
 //  }
 //  
 //  @Override
@@ -69,7 +69,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    QuestProgressRequestProto reqProto = ((QuestProgressRequestEvent)event).getQuestProgressRequestProto();
 //    
 //    log.info("reqProto=" + reqProto);
@@ -135,8 +135,8 @@
 //
 //    	QuestProgressResponseEvent resEvent = new QuestProgressResponseEvent(senderProto.getUserUuid());
 //    	resEvent.setTag(event.getTag());
-//    	resEvent.setQuestProgressResponseProto(resBuilder.build());  
-//    	server.writeEvent(resEvent);
+//    	resEvent.setResponseProto(resBuilder.build());  
+//    	responses.normalResponseEvents().add(resEvent);
 //
 //    	if (success) {
 //    		//TODO: RECORD THAT THE USER DELETED THESE MONSERS AND THE REASON

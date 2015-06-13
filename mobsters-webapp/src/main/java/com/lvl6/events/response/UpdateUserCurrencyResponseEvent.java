@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent {
+public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateUserCurrencyResponseProto> {
 
-	private UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto;
+	
 
 	public UpdateUserCurrencyResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = updateUserCurrencyResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setUpdateUserCurrencyResponseProto(
-			UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto) {
-		this.updateUserCurrencyResponseProto = updateUserCurrencyResponseProto;
+			UpdateUserCurrencyResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public UpdateUserCurrencyResponseProto getUpdateUserCurrencyResponseProto() {   //because APNS required
-		return updateUserCurrencyResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return updateUserCurrencyResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -31,7 +31,7 @@
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //
-//@Component @DependsOn("gameServer") public class RecordClanRaidStatsController extends EventController {
+//@Component  public class RecordClanRaidStatsController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //  
@@ -46,7 +46,7 @@
 //
 //
 //  public RecordClanRaidStatsController() {
-//	  numAllocatedThreads = 4;
+//	  
 //  }
 //
 //  @Override
@@ -60,7 +60,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    RecordClanRaidStatsRequestProto reqProto = ((RecordClanRaidStatsRequestEvent)event)
 //    		.getRecordClanRaidStatsRequestProto();
 //    final long startTime = System.nanoTime();
@@ -104,7 +104,7 @@
 //
 //      RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
-//      resEvent.setRecordClanRaidStatsResponseProto(resBuilder.build()); 
+//      resEvent.setResponseProto(resBuilder.build()); 
 //
 //      boolean success = false;
 //      if (legitRequest) { 
@@ -114,12 +114,12 @@
 //      endTimeAfterWriteChangesToDb = System.nanoTime();
 //      if (success) {
 //      }
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //      endTimeAfterWriteEvent = System.nanoTime();
 //      
 //      if (legitRequest) {
 //      	//only write to the user if the request was valid
-//      	server.writeClanEvent(resEvent, clanId);
+//      	responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 //      }
 //      endTimeAfterWriteClanEvent = System.nanoTime();
 //      
@@ -135,8 +135,8 @@
 //    	  resBuilder.setStatus(RecordClanRaidStatsStatus.FAIL_OTHER);
 //    	  RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setRecordClanRaidStatsResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  resEvent.setResponseProto(resBuilder.build());
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //      	log.error("exception in RecordClanRaidStats processEvent", e);
 //      }

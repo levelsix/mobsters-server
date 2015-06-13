@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent {
+public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent<RemoveUserItemUsedResponseProto> {
 
-	private RemoveUserItemUsedResponseProto removeUserItemUsedResponseProto;
+	
 
 	public RemoveUserItemUsedResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = removeUserItemUsedResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRemoveUserItemUsedResponseProto(
-			RemoveUserItemUsedResponseProto removeUserItemUsedResponseProto) {
-		this.removeUserItemUsedResponseProto = removeUserItemUsedResponseProto;
+			RemoveUserItemUsedResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return removeUserItemUsedResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

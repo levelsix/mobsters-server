@@ -7,10 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class FinishNormStructWaittimeWithDiamondsResponseEvent extends
-		NormalResponseEvent {
+public class FinishNormStructWaittimeWithDiamondsResponseEvent extends	NormalResponseEvent<FinishNormStructWaittimeWithDiamondsResponseProto> {
 
-	private FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto;
+	
 
 	public FinishNormStructWaittimeWithDiamondsResponseEvent(String playerId) {
 		super(playerId);
@@ -26,19 +25,19 @@ public class FinishNormStructWaittimeWithDiamondsResponseEvent extends
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = finishNormStructWaittimeWithDiamondsResponseProto
+		ByteString b =  responseProto
 				.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setFinishNormStructWaittimeWithDiamondsResponseProto(
-			FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto) {
-		this.finishNormStructWaittimeWithDiamondsResponseProto = finishNormStructWaittimeWithDiamondsResponseProto;
+			FinishNormStructWaittimeWithDiamondsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return finishNormStructWaittimeWithDiamondsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

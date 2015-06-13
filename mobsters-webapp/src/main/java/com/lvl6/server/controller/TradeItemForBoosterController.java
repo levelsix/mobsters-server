@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -52,6 +51,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -59,14 +59,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class TradeItemForBoosterController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public TradeItemForBoosterController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Autowired
@@ -132,7 +132,7 @@ public class TradeItemForBoosterController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForBoosterRequestProto reqProto = ((TradeItemForBoosterRequestEvent) event)
 				.getTradeItemForBoosterRequestProto();
 
@@ -164,12 +164,12 @@ public class TradeItemForBoosterController extends EventController {
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForBoosterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		//TODO: Logic similar to PurchaseBoosterPack, see what else can be optimized/shared
 		try {
 			User aUser = userRetrieveUtils.getUserById(
@@ -237,8 +237,8 @@ public class TradeItemForBoosterController extends EventController {
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForBoosterResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -246,7 +246,7 @@ public class TradeItemForBoosterController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, boosterPackId, nowTimestamp,
 						previousGems, itemsUserReceives, gemReward);
@@ -265,8 +265,8 @@ public class TradeItemForBoosterController extends EventController {
 				TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForBoosterResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in TradeItemForBoosterController processEvent",
@@ -274,7 +274,7 @@ public class TradeItemForBoosterController extends EventController {
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}
 	}
 
@@ -387,11 +387,13 @@ public class TradeItemForBoosterController extends EventController {
 			listOfRewards.add(r);
 		}
 
+		String awardReasonDetail = "booster pack id: " + bPackId;
 		AwardRewardAction ara = new AwardRewardAction(userId, user, 0, 0, now,
 				"trade item for booster", listOfRewards, userRetrieveUtils,
 				itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
-				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils);
+				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils, 
+				awardReasonDetail);
 		ara.execute();
 		createRewardProto(resBuilder, ara);
 		return true;

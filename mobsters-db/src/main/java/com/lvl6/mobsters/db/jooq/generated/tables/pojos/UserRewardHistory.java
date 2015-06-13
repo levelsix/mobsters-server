@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_reward_history", schema = "mobsters")
 public class UserRewardHistory implements IUserRewardHistory {
 
-	private static final long serialVersionUID = 1547059771;
+	private static final long serialVersionUID = -564672823;
 
 	private String    id;
 	private String    userId;
@@ -120,8 +120,8 @@ public class UserRewardHistory implements IUserRewardHistory {
 		return this;
 	}
 
-	@Column(name = "reason_for_reward", length = 45)
-	@Size(max = 45)
+	@Column(name = "reason_for_reward", length = 100)
+	@Size(max = 100)
 	@Override
 	public String getReasonForReward() {
 		return this.reasonForReward;
@@ -133,8 +133,8 @@ public class UserRewardHistory implements IUserRewardHistory {
 		return this;
 	}
 
-	@Column(name = "details", length = 45)
-	@Size(max = 45)
+	@Column(name = "details", length = 255)
+	@Size(max = 255)
 	@Override
 	public String getDetails() {
 		return this.details;

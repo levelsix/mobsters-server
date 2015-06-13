@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AvengeClanMateResponseEvent extends NormalResponseEvent {
+public class AvengeClanMateResponseEvent extends NormalResponseEvent<AvengeClanMateResponseProto> {
 
-	private AvengeClanMateResponseProto avengeClanMateResponseProto;
+	
 
 	public AvengeClanMateResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class AvengeClanMateResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = avengeClanMateResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAvengeClanMateResponseProto(
-			AvengeClanMateResponseProto avengeClanMateResponseProto) {
-		this.avengeClanMateResponseProto = avengeClanMateResponseProto;
+			AvengeClanMateResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return avengeClanMateResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

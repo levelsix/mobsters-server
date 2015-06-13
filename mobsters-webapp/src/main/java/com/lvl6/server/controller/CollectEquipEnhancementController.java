@@ -34,12 +34,12 @@
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //
-//  @Component @DependsOn("gameServer") public class CollectEquipEnhancementController extends EventController {
+//  @Component  public class CollectEquipEnhancementController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
 //  public CollectEquipEnhancementController() {
-//    numAllocatedThreads = 3;
+//    
 //  }
 //  
 //  @Override
@@ -53,7 +53,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    CollectEquipEnhancementRequestProto reqProto = ((CollectEquipEnhancementRequestEvent)event)
 //        .getCollectEquipEnhancementRequestProto();
 //
@@ -66,7 +66,7 @@
 //    CollectEquipEnhancementResponseProto.Builder resBuilder = CollectEquipEnhancementResponseProto.newBuilder();
 //    resBuilder.setSender(senderProto);
 //
-//    server.lockPlayer(userId, this.getClass().getSimpleName());
+//    locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 //    try {
 //      //The main equip that is being enhanced.
 //      EquipEnhancement equipUnderEnhancement = EquipEnhancementRetrieveUtils
@@ -101,13 +101,13 @@
 //      
 //      CollectEquipEnhancementResponseEvent resEvent = new CollectEquipEnhancementResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setCollectEquipEnhancementResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      resEvent.setResponseProto(resBuilder.build());  
+//      responses.normalResponseEvents().add(resEvent);
 //      
 //      if (successful) {
 //        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 //        resEventUpdate.setTag(event.getTag());
-//        server.writeEvent(resEventUpdate);
+//        responses.normalResponseEvents().add(resEventUpdate);
 //
 //        writeIntoEquipEnhancementHistory(equipUnderEnhancement, userEquipBuilder, speedUp, clientTime);
 //        writeIntoEquipEnhancementFeederHistory(equipEnhancementId, feedersForEnhancement);
@@ -117,7 +117,7 @@
 //    } catch (Exception e) {
 //      log.error("exception in EnhanceEquip processEvent", e);
 //    } finally {
-//      server.unlockPlayer(userId, this.getClass().getSimpleName());      
+//      locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());      
 //    }
 //  }
 //

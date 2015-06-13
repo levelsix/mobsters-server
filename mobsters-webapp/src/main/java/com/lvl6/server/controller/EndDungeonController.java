@@ -15,7 +15,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -52,6 +51,7 @@ import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -59,7 +59,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class EndDungeonController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -105,7 +105,7 @@ public class EndDungeonController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public EndDungeonController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class EndDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent) event)
 				.getEndDungeonRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -166,8 +166,8 @@ public class EndDungeonController extends EventController {
 			EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -252,8 +252,8 @@ public class EndDungeonController extends EventController {
 			EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -261,7 +261,7 @@ public class EndDungeonController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				writeToUserCurrencyHistory(aUser, curTime, userTaskId, taskId,
 						previousCash, previousOil, money);
 				writeToTaskForUserCompleted(userWon, firstTimeUserWonTask,
@@ -276,8 +276,8 @@ public class EndDungeonController extends EventController {
 				EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setEndDungeonResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndDungeonController processEvent", e);
 			}

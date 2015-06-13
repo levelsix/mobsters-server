@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -17,12 +16,12 @@ import com.lvl6.events.request.DeleteClanGiftsRequestEvent;
 import com.lvl6.events.response.DeleteClanGiftsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ClanGiftForUser;
-import com.lvl6.proto.RewardsProto.ClanGiftProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.EventClanProto.DeleteClanGiftsRequestProto;
 import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto;
 import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto.DeleteClanGiftsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.ClanGiftProto;
+import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -32,16 +31,15 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DeleteClanGiftsAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
 public class DeleteClanGiftsController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DeleteClanGiftsController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -73,8 +71,8 @@ public class DeleteClanGiftsController extends EventController {
 	@Autowired
 	protected UpdateUtil updateUtil;
 
+
 	public DeleteClanGiftsController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -88,9 +86,8 @@ public class DeleteClanGiftsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
-		DeleteClanGiftsRequestProto reqProto = ((DeleteClanGiftsRequestEvent) event)
-				.getDeleteClanGiftsRequestProto();
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses) {
+		DeleteClanGiftsRequestProto reqProto = ((DeleteClanGiftsRequestEvent) event).getDeleteClanGiftsRequestProto();
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -101,8 +98,7 @@ public class DeleteClanGiftsController extends EventController {
 		//all positive numbers, server will change to negative
 
 		//set some values to send to the client (the response proto)
-		DeleteClanGiftsResponseProto.Builder resBuilder = DeleteClanGiftsResponseProto
-				.newBuilder();
+		DeleteClanGiftsResponseProto.Builder resBuilder = DeleteClanGiftsResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(DeleteClanGiftsStatus.FAIL_OTHER); //default
 
@@ -123,8 +119,8 @@ public class DeleteClanGiftsController extends EventController {
 			DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -138,17 +134,17 @@ public class DeleteClanGiftsController extends EventController {
 			DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (DeleteClanGiftsStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
-				UpdateClientUserResponseEvent resEventUpdate = miscMethods
+				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								uusa.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 			}
 
@@ -161,8 +157,8 @@ public class DeleteClanGiftsController extends EventController {
 				DeleteClanGiftsResponseEvent resEvent = new DeleteClanGiftsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setDeleteClanGiftsResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in DeleteClanGiftsController processEvent",

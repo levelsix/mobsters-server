@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RefreshMiniJobResponseEvent extends NormalResponseEvent {
+public class RefreshMiniJobResponseEvent extends NormalResponseEvent<RefreshMiniJobResponseProto> {
 
-	private RefreshMiniJobResponseProto refreshMiniJobResponseProto;
+	
 
 	public RefreshMiniJobResponseEvent(String playerId) {
 		super(playerId);
@@ -18,19 +18,19 @@ public class RefreshMiniJobResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = refreshMiniJobResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRefreshMiniJobResponseProto(
-			RefreshMiniJobResponseProto refreshMiniJobResponseProto) {
-		this.refreshMiniJobResponseProto = refreshMiniJobResponseProto;
+			RefreshMiniJobResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	@Override
 	public int eventSize() {
-		return refreshMiniJobResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

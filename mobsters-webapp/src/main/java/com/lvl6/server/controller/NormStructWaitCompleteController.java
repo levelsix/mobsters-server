@@ -10,7 +10,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -29,11 +28,12 @@ import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class NormStructWaitCompleteController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -55,7 +55,7 @@ public class NormStructWaitCompleteController extends EventController {
 	protected StructureRetrieveUtils structureRetrieveUtils;
 
 	public NormStructWaitCompleteController() {
-		numAllocatedThreads = 5;
+		
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class NormStructWaitCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		NormStructWaitCompleteRequestProto reqProto = ((NormStructWaitCompleteRequestEvent) event)
 				.getNormStructWaitCompleteRequestProto();
 
@@ -112,8 +112,8 @@ public class NormStructWaitCompleteController extends EventController {
 			NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -149,8 +149,8 @@ public class NormStructWaitCompleteController extends EventController {
 			NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -162,9 +162,9 @@ public class NormStructWaitCompleteController extends EventController {
 				NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setNormStructWaitCompleteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in NormStructWaitCompleteController processEvent",
@@ -270,10 +270,21 @@ public class NormStructWaitCompleteController extends EventController {
 			List<StructureForUser> buildsDone, List<Timestamp> newRetrievedTimes) {
 		if (!UpdateUtils.get().updateUserStructsBuildingIsComplete(userId,
 				buildsDone, newRetrievedTimes)) {
-			log.error(String
-					.format("problem marking norm struct builds as complete for a struct: %s",
-							buildsDone));
-			return false;
+			boolean allComplete = true;
+			for(StructureForUser sfu : buildsDone) {
+				if(!sfu.isComplete()) {
+					allComplete = false;
+				}
+			}
+			if(allComplete) {
+				log.error("all the structures are already complete, structures: {}", buildsDone);
+			}
+			else {
+				log.error(String
+						.format("problem marking norm struct builds as complete for a struct: %s",
+								buildsDone));
+				return false;
+			}
 		}
 
 		int expReward = 0;

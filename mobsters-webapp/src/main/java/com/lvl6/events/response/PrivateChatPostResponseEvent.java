@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class PrivateChatPostResponseEvent extends NormalResponseEvent {
+public class PrivateChatPostResponseEvent extends NormalResponseEvent<PrivateChatPostResponseProto> {
 
-	private PrivateChatPostResponseProto privateChatPostResponseProto;
+	
 
 	public PrivateChatPostResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class PrivateChatPostResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = privateChatPostResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPrivateChatPostResponseProto(
-			PrivateChatPostResponseProto privateChatPostResponseProto) {
-		this.privateChatPostResponseProto = privateChatPostResponseProto;
+			PrivateChatPostResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public PrivateChatPostResponseProto getPrivateChatPostResponseProto() { //required for APNS
-		return privateChatPostResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return privateChatPostResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

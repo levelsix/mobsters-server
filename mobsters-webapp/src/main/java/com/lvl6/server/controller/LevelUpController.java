@@ -21,6 +21,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
 public class LevelUpController extends EventController {
@@ -38,7 +39,7 @@ public class LevelUpController extends EventController {
 	protected MiscMethods miscMethods;
 
 	public LevelUpController() {
-		numAllocatedThreads = 2;
+		
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class LevelUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		LevelUpRequestProto reqProto = ((LevelUpRequestEvent) event)
 				.getLevelUpRequestProto();
 
@@ -82,8 +83,8 @@ public class LevelUpController extends EventController {
 			resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
 			LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setLevelUpResponseProto(resBuilder.build());
-			getEventWriter().handleEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -105,8 +106,8 @@ public class LevelUpController extends EventController {
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			LevelUpResponseProto resProto = resBuilder.build();
-			resEvent.setLevelUpResponseProto(resProto);
-			getEventWriter().handleEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -114,7 +115,7 @@ public class LevelUpController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				getEventWriter().handleEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -124,8 +125,8 @@ public class LevelUpController extends EventController {
 				resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
 				LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setLevelUpResponseProto(resBuilder.build());
-				getEventWriter().handleEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in LevelUpController processEvent", e);
 			}

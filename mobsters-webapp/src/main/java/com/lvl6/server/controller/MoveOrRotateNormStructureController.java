@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -22,10 +21,11 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class MoveOrRotateNormStructureController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -38,7 +38,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
 	public MoveOrRotateNormStructureController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		MoveOrRotateNormStructureRequestProto reqProto = ((MoveOrRotateNormStructureRequestEvent) event)
 				.getMoveOrRotateNormStructureRequestProto();
 
@@ -94,9 +94,9 @@ public class MoveOrRotateNormStructureController extends EventController {
 			MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -151,9 +151,9 @@ public class MoveOrRotateNormStructureController extends EventController {
 			MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in MoveOrRotateNormStructure processEvent", e);
@@ -164,9 +164,9 @@ public class MoveOrRotateNormStructureController extends EventController {
 				MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in MoveOrRotateNormStructure processEvent",

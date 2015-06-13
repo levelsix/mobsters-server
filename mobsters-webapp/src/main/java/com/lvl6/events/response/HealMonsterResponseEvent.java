@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class HealMonsterResponseEvent extends NormalResponseEvent {
+public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterResponseProto> {
 
-	private HealMonsterResponseProto healMonsterResponseProto;
+	
 
 	public HealMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class HealMonsterResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = healMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setHealMonsterResponseProto(
-			HealMonsterResponseProto healMonsterResponseProto) {
-		this.healMonsterResponseProto = healMonsterResponseProto;
+			HealMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return healMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

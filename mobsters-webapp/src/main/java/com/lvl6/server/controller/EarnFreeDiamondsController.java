@@ -35,7 +35,7 @@
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //
 //@Component
-//@DependsOn("gameServer")
+//
 //public class EarnFreeDiamondsController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
@@ -63,7 +63,7 @@
 ////  private OAuthService oAuthService = null;
 //
 //  public EarnFreeDiamondsController() {
-//    numAllocatedThreads = 1;
+//    
 //  }
 //
 //  @Override
@@ -77,7 +77,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EarnFreeDiamondsRequestProto reqProto = ((EarnFreeDiamondsRequestEvent)event).getEarnFreeDiamondsRequestProto();
 //    MinimumUserProto senderProto = reqProto.getSender();
 //    String userId = senderProto.getUserUuid();
@@ -113,8 +113,8 @@
 //    	resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
 //    	EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
 //        resEvent.setTag(event.getTag());
-//        resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
-//    	server.writeEvent(resEvent);
+//        resEvent.setResponseProto(resBuilder.build());  
+//    	responses.normalResponseEvents().add(resEvent);
 //    	return;
 //    }
 //    
@@ -151,8 +151,8 @@
 //
 //      EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      resEvent.setResponseProto(resBuilder.build());  
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      if (legitFreeDiamondsEarn) {
 //        previousGems = user.getGems();
@@ -166,7 +166,7 @@
 //        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
 //        resEventUpdate.setTag(event.getTag());
-//        server.writeEvent(resEventUpdate);
+//        responses.normalResponseEvents().add(resEventUpdate);
 //
 ////        writeToDBHistory(user, freeDiamondsType, clientTime, kiipConfirmationReceipt, adColonyDigest, adColonyRewardType, adColonyAmountEarned);
 //        writeToUserCurrencyHistory(user, clientTime, money, keys,

@@ -39,7 +39,7 @@
 // * NOT READY/BEING USED YET
 // */
 //
-//@Component @DependsOn("gameServer") public class PurchaseCityExpansionController extends EventController {
+//@Component  public class PurchaseCityExpansionController extends EventController {
 //
 //	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -58,7 +58,7 @@
 //	}
 //
 //	public PurchaseCityExpansionController() {
-//		numAllocatedThreads = 1;
+//		
 //	}
 //
 //	@Override
@@ -72,7 +72,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event) throws Exception {
+//	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		PurchaseCityExpansionRequestProto reqProto = ((PurchaseCityExpansionRequestEvent)event).getPurchaseCityExpansionRequestProto();
 //
 //		//variables client sent
@@ -106,8 +106,8 @@
 //			//write to the client
 //			PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(senderProto.getUserUuid());
 //			resEvent.setTag(event.getTag());
-//			resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());  
-//			server.writeEvent(resEvent);
+//			resEvent.setResponseProto(resBuilder.build());  
+//			responses.normalResponseEvents().add(resEvent);
 //
 //			if (legitExpansion) {
 //				//update database tables
@@ -130,7 +130,7 @@
 //				resBuilder.setUcedp(CreateInfoProtoUtils
 //						.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
 //				resEventUpdate.setTag(event.getTag());
-//				server.writeEvent(resEventUpdate);
+//				responses.normalResponseEvents().add(resEventUpdate);
 //
 //				writeToUserCurrencyHistory(user, timeOfPurchase, xPosition,
 //						yPosition, previousCash, currencyChange);
@@ -141,8 +141,8 @@
 //    	  resBuilder.setStatus(PurchaseCityExpansionStatus.OTHER_FAIL);
 //    	  PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  resEvent.setResponseProto(resBuilder.build());
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in BeginDungeonController processEvent", e);
 //      }

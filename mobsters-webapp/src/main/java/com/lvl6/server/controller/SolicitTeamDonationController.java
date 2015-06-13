@@ -7,9 +7,9 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitTeamDonationRequestEvent;
 import com.lvl6.events.response.SolicitTeamDonationResponseEvent;
@@ -26,16 +26,18 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.SolicitTeamDonationAction;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class SolicitTeamDonationController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(SolicitTeamDonationController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -48,9 +50,12 @@ public class SolicitTeamDonationController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	public SolicitTeamDonationController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -64,7 +69,7 @@ public class SolicitTeamDonationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SolicitTeamDonationRequestProto reqProto = ((SolicitTeamDonationRequestEvent) event)
 				.getSolicitTeamDonationRequestProto();
 
@@ -107,8 +112,8 @@ public class SolicitTeamDonationController extends EventController {
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -123,7 +128,7 @@ public class SolicitTeamDonationController extends EventController {
 		if (0 != clanId) {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			SolicitTeamDonationAction stda = new SolicitTeamDonationAction(
@@ -136,13 +141,13 @@ public class SolicitTeamDonationController extends EventController {
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
 					SolicitTeamDonationStatus.SUCCESS)) {
-				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
@@ -152,8 +157,10 @@ public class SolicitTeamDonationController extends EventController {
 								senderProto, null);
 				resBuilder.setSolicitation(cmtdp);
 
-				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 1, 0, 0, 0);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
+
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -163,7 +170,7 @@ public class SolicitTeamDonationController extends EventController {
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									user, null, null);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdate);
+					responses.normalResponseEvents().add(resEventUpdate);
 
 					writeToCurrencyHistory(userId, clientTime, stda);
 				}
@@ -176,8 +183,8 @@ public class SolicitTeamDonationController extends EventController {
 				SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSolicitTeamDonationResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in SolicitTeamDonation processEvent", e);
 			}
@@ -185,7 +192,7 @@ public class SolicitTeamDonationController extends EventController {
 			if (0 != clanId && lockedClan) {
 			getLocker().unlockClan(clanId);
 			} else {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

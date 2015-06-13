@@ -22,7 +22,7 @@
 //import com.lvl6.utils.RetrieveUtils;
 //import com.lvl6.utils.utilmethods.InsertUtils;
 //
-//@Component @DependsOn("gameServer") public class InviteToClanController extends EventController {
+//@Component  public class InviteToClanController extends EventController {
 //
 //	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -33,7 +33,7 @@
 //	protected ClanInviteRetrieveUtil clanInviteRetrieveUtil;
 //	
 //	public InviteToClanController() {
-//		numAllocatedThreads = 4;
+//		
 //	}
 //
 //	@Override
@@ -47,7 +47,7 @@
 //	}
 //
 //	@Override
-//	protected void processRequestEvent(RequestEvent event) throws Exception {
+//	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //		InviteToClanRequestProto reqProto = ((InviteToClanRequestEvent)event).getInviteToClanRequestProto();
 //		log.info(String.format("reqProto=%s", reqProto));
 //
@@ -71,7 +71,7 @@
 //		//    if (0 != clanId) {
 //		//    	lockedClan = getLocker().lockClan(clanId);
 //		//    }/* else {
-//		//    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//		//    	locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //		//    }*/
 //		try {
 //
@@ -83,14 +83,14 @@
 //			
 //			InviteToClanResponseEvent resEvent = new InviteToClanResponseEvent(inviterId);
 //			resEvent.setTag(event.getTag());
-//			resEvent.setInviteToClanResponseProto(resBuilder.build());
+//			resEvent.setResponseProto(resBuilder.build());
 //			
 //			//only write to user if failed
 //			if (resBuilder.getStatus().equals(InviteToClanStatus.FAIL_OTHER)) {
-//				server.writeEvent(resEvent);
+//				responses.normalResponseEvents().add(resEvent);
 //
 //			} else {
-//				server.writeClanEvent(resEvent, clanId);
+//				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 //			}
 //		} catch (Exception e) {
 //			log.error("exception in InviteToClan processEvent", e);
@@ -98,8 +98,8 @@
 //				resBuilder.setStatus(InviteToClanStatus.FAIL_OTHER);
 //				InviteToClanResponseEvent resEvent = new InviteToClanResponseEvent(inviterId);
 //				resEvent.setTag(event.getTag());
-//				resEvent.setInviteToClanResponseProto(resBuilder.build());
-//				server.writeEvent(resEvent);
+//				resEvent.setResponseProto(resBuilder.build());
+//				responses.normalResponseEvents().add(resEvent);
 //			} catch (Exception e2) {
 //				log.error("exception2 in InviteToClan processEvent", e);
 //			}
@@ -107,7 +107,7 @@
 //			//    	if (0 != clanId && lockedClan) {
 //			//    		getLocker().unlockClan(clanId);
 //			//    	}/* else {
-//			//    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//			//    		locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //			//    	}*/
 //		}
 //	}

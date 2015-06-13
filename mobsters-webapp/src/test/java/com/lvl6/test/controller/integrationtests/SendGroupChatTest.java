@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.SendGroupChatController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -97,7 +98,7 @@ public class SendGroupChatTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -162,9 +163,9 @@ public class SendGroupChatTest {
 		SendGroupChatRequestEvent sgcre = new SendGroupChatRequestEvent();
 		sgcre.setTag(1);
 		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
-		sendGroupChatController.handleEvent(sgcre);
+		sendGroupChatController.processRequestEvent(sgcre, EventsUtil.getToClientEvents());
 
-		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
+//		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
 
 	}
 

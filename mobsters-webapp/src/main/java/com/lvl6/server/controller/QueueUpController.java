@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -19,6 +20,7 @@ import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
+import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
@@ -47,10 +49,11 @@ import com.lvl6.server.controller.actionobjects.QueueUpAction;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class QueueUpController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -117,7 +120,7 @@ public class QueueUpController extends EventController {
 	//	}
 
 	public QueueUpController() {
-		numAllocatedThreads = 10;
+		
 	}
 
 	@Override
@@ -131,7 +134,7 @@ public class QueueUpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		QueueUpRequestProto reqProto = ((QueueUpRequestEvent) event)
 				.getQueueUpRequestProto();
 
@@ -175,8 +178,8 @@ public class QueueUpController extends EventController {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -196,8 +199,8 @@ public class QueueUpController extends EventController {
 			//write event to the client
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//no need to update client since no currency or elo update
@@ -207,7 +210,7 @@ public class QueueUpController extends EventController {
 				//					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 				//						attacker, plfu, null);
 				//				resEventUpdate.setTag(event.getTag());
-				//				server.writeEvent(resEventUpdate);
+				//				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -215,8 +218,8 @@ public class QueueUpController extends EventController {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
-			resEvent.setQueueUpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 		}
 	}
 
@@ -298,9 +301,24 @@ public class QueueUpController extends EventController {
 
 			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
 					.getStatus())) {
+				List<User> usersExceptRetriever = rumta.getAllUsersExceptRetriever();	
+				Map<String, User> allUsersMap = rumta.getAllUsers();
+				if(allUsersMap != null && !allUsersMap.isEmpty()) {
+					String clanId = allUsersMap.get(attackerId).getClanId();
+					Iterator<User> iter = usersExceptRetriever.iterator();
+					while(iter.hasNext()) {
+						User opponent = iter.next();
+						if(opponent.getClanId() != null) {
+							if(opponent.getClanId().equals(clanId)) {
+								iter.remove();
+							}
+						}
+					}
+				}
+
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
-								rumta.getAllUsersExceptRetriever(),
+								usersExceptRetriever,
 								rumta.getUserIdToClan(),
 								null,
 								rumta.getUserIdToPvpUsers(),
@@ -338,6 +356,7 @@ public class QueueUpController extends EventController {
 			return;
 		}
 
+		Collections.shuffle(pvpProtoList);
 		resBuilder.addAllDefenderInfoList(pvpProtoList);
 		//log.info("pvpProtoList={}", pvpProtoList);
 	}

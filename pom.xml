@@ -38,6 +38,12 @@
 		<url>https://github.com/levelsix/mobsters-server.git</url>
 	</scm>
 
+	<modules>
+		<module>mobsters-protos</module>
+		<module>mobsters-db</module>
+		<module>mobsters-webapp</module>
+	</modules>
+
 	<repositories>
 		<repository>
 			<id>sonatype-releases</id>
@@ -60,7 +66,7 @@
 	</repositories>
 	<properties>
 		<!-- <jdbc.url><![CDATA[jdbc:mysql://kingdom-dev-1.cv5kxrel3z7x.us-east-1.rds.amazonaws.com/kingdom?useLegacyDatetimeCode=false]]></jdbc.url> -->
-		<jdbc.url><![CDATA[jdbc:mysql://54.148.68.13:3306/mobsters?useLegacyDatetimeCode=true]]></jdbc.url>
+		<jdbc.url><![CDATA[jdbc:mysql://localhost:3306/mobsters?useLegacyDatetimeCode=true]]></jdbc.url>
 		<jdbc.username>lvl6admin</jdbc.username>
 		<jdbc.password>robashen123</jdbc.password>
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
@@ -73,6 +79,10 @@
 		<jdbc.statementsCacheSize>500</jdbc.statementsCacheSize>
 		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
 
+
+		<dynamodb.table.prefix>local</dynamodb.table.prefix>
+		<dynamodb.isLocal>true</dynamodb.isLocal>
+		<dynamodb.response.caching.enabled>false</dynamodb.response.caching.enabled>
 
 		<hazelcast.ec2.security.group></hazelcast.ec2.security.group>
 		<hazelcast.ec2.region></hazelcast.ec2.region>
@@ -219,6 +229,69 @@
 				<hazelcast.port>6701</hazelcast.port>
 				<hazelcast.dev.ips>192.168.105.119, 192.168.1.7, 10.0.1.18</hazelcast.dev.ips>
 			</properties>
+		</profile>
+
+		<profile>
+			<id>jooq</id>
+			<build>
+				<plugins>
+					<plugin>
+						<!-- Specify the maven code generator plugin -->
+						<groupId>org.jooq</groupId>
+						<artifactId>jooq-codegen-maven</artifactId>
+						<version>3.6.1</version>
+
+						<!-- The plugin should hook into the generate goal -->
+						<executions>
+							<execution>
+								<id>generate-jooq</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+
+							<!-- JDBC connection parameters -->
+							<jdbc>
+								<driver>${jdbc.driverClassName}</driver>
+								<url>${jdbc.url}</url>
+								<user>${jdbc.username}</user>
+								<password>${jdbc.password}</password>
+							</jdbc>
+
+							<!-- Generator parameters -->
+							<generator>
+								<name>org.jooq.util.DefaultGenerator</name>
+								<database>
+									<name>org.jooq.util.mysql.MySQLDatabase</name>
+									<includes>.*</includes>
+									<excludes></excludes>
+									<inputSchema>mobsters</inputSchema>
+									<unsignedTypes>false</unsignedTypes>
+								</database>
+								<generate>
+									<records>true</records>
+									<immutablePojos>false</immutablePojos>
+									<interfaces>true</interfaces>
+									<daos>true</daos>
+									<jpaAnnotations>true</jpaAnnotations>
+									<validationAnnotations>true</validationAnnotations>
+									<fluentSetters>true</fluentSetters>
+								</generate>
+								<target>
+									<packageName>com.lvl6.mobsters.db.jooq.generated</packageName>
+									<directory>src/main/java</directory>
+								</target>
+								<!-- <strategy> -->
+								<!-- <name>com.lvl6.misc.CustomDatabaseStrategy</name> -->
+								<!-- </strategy> -->
+							</generator>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 
 	</profiles>
@@ -479,6 +552,18 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-websocket</artifactId>
+				<version>8.0.23</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.websocket</groupId>
+				<artifactId>javax.websocket-api</artifactId>
+				<version>1.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>com.typesafe.scala-logging</groupId>
 				<artifactId>scala-logging-slf4j_2.11</artifactId>
 				<version>2.1.2</version>
@@ -552,7 +637,7 @@
 			<dependency>
 				<groupId>com.google.protobuf</groupId>
 				<artifactId>protobuf-java</artifactId>
-				<version>2.6.0</version>
+				<version>2.6.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
@@ -837,36 +922,7 @@
 				<version>2.0.3-beta</version>
 				<scope>test</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-module-junit4</artifactId>
-				<version>1.5.4</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-api-mockito</artifactId>
-				<version>1.5.4</version>
-				<scope>test</scope>
-			</dependency>
 			<!-- Required for PowerMockRule -->
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-module-junit4-rule-agent</artifactId>
-				<version>1.5.4</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-module-javaagent</artifactId>
-				<version>1.6.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.powermock</groupId>
-				<artifactId>powermock-classloading-xstream</artifactId>
-				<version>1.5.4</version>
-				<scope>test</scope>
-			</dependency>
 			<dependency>
 				<groupId>com.memetix</groupId>
 				<artifactId>microsoft-translator-java-api</artifactId>
@@ -880,9 +936,7 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<modules>
-		<module>mobsters-protos</module>
-		<module>mobsters-db</module>
-		<module>mobsters-webapp</module>
-	</modules>
+
+
+
 </project>

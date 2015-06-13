@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -27,20 +26,26 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.ItemUtil;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class TradeItemForResourcesController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public TradeItemForResourcesController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
@@ -53,6 +58,9 @@ public class TradeItemForResourcesController extends EventController {
 	
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -65,7 +73,7 @@ public class TradeItemForResourcesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TradeItemForResourcesRequestProto reqProto = ((TradeItemForResourcesRequestEvent) event)
 				.getTradeItemForResourcesRequestProto();
 
@@ -78,6 +86,7 @@ public class TradeItemForResourcesController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<Integer> itemIdsUsed = reqProto.getItemIdsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
+		int gemsSpent = reqProto.getGemsSpent();
 
 		Timestamp date = new Timestamp(reqProto.getClientTime());
 
@@ -104,12 +113,12 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForResourcesResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 			List<ItemForUser> nuUserItems = null;
@@ -120,7 +129,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
 					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
 					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
-					UpdateUtils.get(), miscMethods);
+					UpdateUtils.get(), miscMethods, gemsSpent, historyUtils);
 
 			tifsua.execute(resBuilder);
 
@@ -128,8 +137,8 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setTradeItemForResourcesResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder
 					.getStatus())) {
@@ -138,7 +147,7 @@ public class TradeItemForResourcesController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToCurrencyHistory(userId, date, tifsua);
 			}
@@ -152,9 +161,9 @@ public class TradeItemForResourcesController extends EventController {
 				TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setTradeItemForResourcesResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in TradeItemForResourcesController processEvent",
@@ -162,17 +171,17 @@ public class TradeItemForResourcesController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
 
 	private void writeToCurrencyHistory(String userId, Timestamp date,
-			TradeItemForResourcesAction tifsua) {
+			TradeItemForResourcesAction tifra) {
 		miscMethods.writeToUserCurrencyOneUser(userId, date,
-				tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
-				tifsua.getCurrentCurrencies(), tifsua.getReasons(),
-				tifsua.getDetails());
+				tifra.getCurrencyDeltas(), tifra.getPreviousCurrencies(),
+				tifra.getCurrentCurrencies(), tifra.getReasons(),
+				tifra.getDetails());
 	}
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
@@ -190,6 +199,14 @@ public class TradeItemForResourcesController extends EventController {
 
 	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CreateBattleItemResponseEvent extends NormalResponseEvent {
+public class CreateBattleItemResponseEvent extends NormalResponseEvent<CreateBattleItemResponseProto> {
 
-	private CreateBattleItemResponseProto createBattleItemResponseProto;
+	
 
 	public CreateBattleItemResponseEvent(String playerId) {
 		super(playerId);
@@ -18,17 +18,17 @@ public class CreateBattleItemResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = createBattleItemResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setCreateBattleItemResponseProto(
-			CreateBattleItemResponseProto createBattleItemResponseProto) {
-		this.createBattleItemResponseProto = createBattleItemResponseProto;
+			CreateBattleItemResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public int eventSize() {
-		return createBattleItemResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

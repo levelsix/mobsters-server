@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent {
+public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<TradeItemForSpeedUpsResponseProto> {
 
-	private TradeItemForSpeedUpsResponseProto tradeItemForSpeedUpsResponseProto;
+	
 
 	public TradeItemForSpeedUpsResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = tradeItemForSpeedUpsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setTradeItemForSpeedUpsResponseProto(
-			TradeItemForSpeedUpsResponseProto tradeItemForSpeedUpsResponseProto) {
-		this.tradeItemForSpeedUpsResponseProto = tradeItemForSpeedUpsResponseProto;
+			TradeItemForSpeedUpsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return tradeItemForSpeedUpsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

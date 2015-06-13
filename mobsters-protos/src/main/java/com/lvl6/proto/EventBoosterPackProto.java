@@ -93,19 +93,37 @@ public final class EventBoosterPackProto {
 
     /**
      * <code>optional int32 gemsSpent = 6;</code>
+     *
+     * <pre>
+     *should only be positive;
+     * </pre>
      */
     boolean hasGemsSpent();
     /**
      * <code>optional int32 gemsSpent = 6;</code>
+     *
+     * <pre>
+     *should only be positive;
+     * </pre>
      */
     int getGemsSpent();
 
     /**
      * <code>optional int32 gachaCreditsChange = 7;</code>
+     *
+     * <pre>
+     *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+     *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+     * </pre>
      */
     boolean hasGachaCreditsChange();
     /**
      * <code>optional int32 gachaCreditsChange = 7;</code>
+     *
+     * <pre>
+     *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+     *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+     * </pre>
      */
     int getGachaCreditsChange();
   }
@@ -359,12 +377,20 @@ public final class EventBoosterPackProto {
     private int gemsSpent_;
     /**
      * <code>optional int32 gemsSpent = 6;</code>
+     *
+     * <pre>
+     *should only be positive;
+     * </pre>
      */
     public boolean hasGemsSpent() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional int32 gemsSpent = 6;</code>
+     *
+     * <pre>
+     *should only be positive;
+     * </pre>
      */
     public int getGemsSpent() {
       return gemsSpent_;
@@ -374,12 +400,22 @@ public final class EventBoosterPackProto {
     private int gachaCreditsChange_;
     /**
      * <code>optional int32 gachaCreditsChange = 7;</code>
+     *
+     * <pre>
+     *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+     *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+     * </pre>
      */
     public boolean hasGachaCreditsChange() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional int32 gachaCreditsChange = 7;</code>
+     *
+     * <pre>
+     *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+     *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+     * </pre>
      */
     public int getGachaCreditsChange() {
       return gachaCreditsChange_;
@@ -1044,18 +1080,30 @@ public final class EventBoosterPackProto {
       private int gemsSpent_ ;
       /**
        * <code>optional int32 gemsSpent = 6;</code>
+       *
+       * <pre>
+       *should only be positive;
+       * </pre>
        */
       public boolean hasGemsSpent() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int32 gemsSpent = 6;</code>
+       *
+       * <pre>
+       *should only be positive;
+       * </pre>
        */
       public int getGemsSpent() {
         return gemsSpent_;
       }
       /**
        * <code>optional int32 gemsSpent = 6;</code>
+       *
+       * <pre>
+       *should only be positive;
+       * </pre>
        */
       public Builder setGemsSpent(int value) {
         bitField0_ |= 0x00000020;
@@ -1065,6 +1113,10 @@ public final class EventBoosterPackProto {
       }
       /**
        * <code>optional int32 gemsSpent = 6;</code>
+       *
+       * <pre>
+       *should only be positive;
+       * </pre>
        */
       public Builder clearGemsSpent() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -1076,18 +1128,33 @@ public final class EventBoosterPackProto {
       private int gachaCreditsChange_ ;
       /**
        * <code>optional int32 gachaCreditsChange = 7;</code>
+       *
+       * <pre>
+       *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+       *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+       * </pre>
        */
       public boolean hasGachaCreditsChange() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional int32 gachaCreditsChange = 7;</code>
+       *
+       * <pre>
+       *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+       *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+       * </pre>
        */
       public int getGachaCreditsChange() {
         return gachaCreditsChange_;
       }
       /**
        * <code>optional int32 gachaCreditsChange = 7;</code>
+       *
+       * <pre>
+       *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+       *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+       * </pre>
        */
       public Builder setGachaCreditsChange(int value) {
         bitField0_ |= 0x00000040;
@@ -1097,6 +1164,11 @@ public final class EventBoosterPackProto {
       }
       /**
        * <code>optional int32 gachaCreditsChange = 7;</code>
+       *
+       * <pre>
+       *can be positive, 0, and negative. If positive, then gemsSpent should be positive as well.
+       *user can spend gems on a "gacha-tokens item" , effectively user gains gacha tokens in exchange for gems
+       * </pre>
        */
       public Builder clearGachaCreditsChange() {
         bitField0_ = (bitField0_ & ~0x00000040);

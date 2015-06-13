@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -33,12 +32,13 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class InviteFbFriendsForSlotsController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -57,7 +57,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
 	public InviteFbFriendsForSlotsController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent) event)
 				.getInviteFbFriendsForSlotsRequestProto();
 
@@ -113,8 +113,8 @@ public class InviteFbFriendsForSlotsController extends EventController {
 			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -175,8 +175,8 @@ public class InviteFbFriendsForSlotsController extends EventController {
 			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			//send this to all the recipients in fbIdsOfFriends that have a user id
 			//if want to send to the new ones only use newFacebookIdsToInvite
@@ -194,7 +194,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 					newResEvent.setTag(0);
 					newResEvent
 							.setInviteFbFriendsForSlotsResponseProto(responseProto);
-					server.writeEvent(newResEvent);
+					responses.normalResponseEvents().add(newResEvent);
 				}
 			}
 		} catch (Exception e) {
@@ -207,9 +207,9 @@ public class InviteFbFriendsForSlotsController extends EventController {
 				InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in InviteFbFriendsForSlotsController processEvent",

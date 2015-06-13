@@ -7,9 +7,9 @@ import com.lvl6.events.PreDatabaseResponseEvent;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UserCreateResponseEvent extends PreDatabaseResponseEvent {
+public class UserCreateResponseEvent extends PreDatabaseResponseEvent<UserCreateResponseProto> {
 
-	private UserCreateResponseProto userCreateResponseProto;
+	
 
 	public UserCreateResponseEvent(String udid) {
 		super(udid);
@@ -25,18 +25,18 @@ public class UserCreateResponseEvent extends PreDatabaseResponseEvent {
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = userCreateResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setUserCreateResponseProto(
-			UserCreateResponseProto UserCreateResponseProto) {
-		this.userCreateResponseProto = UserCreateResponseProto;
+			UserCreateResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return userCreateResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

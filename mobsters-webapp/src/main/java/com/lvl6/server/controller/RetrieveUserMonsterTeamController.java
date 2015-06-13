@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -33,10 +32,11 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class RetrieveUserMonsterTeamController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -83,7 +83,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 
 	public RetrieveUserMonsterTeamController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent) event)
 				.getRetrieveUserMonsterTeamRequestProto();
 
@@ -142,12 +142,12 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 
 			RetrieveUserMonsterTeamAction rumta = new RetrieveUserMonsterTeamAction(
@@ -188,8 +188,8 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveUserMonsterTeamResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -200,9 +200,9 @@ public class RetrieveUserMonsterTeamController extends EventController {
 				RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveUserMonsterTeamResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveUserMonsterTeamController processEvent",
@@ -210,7 +210,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			}
 
 			//		} finally {
-			//			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			//			      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}
 	}
 

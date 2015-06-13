@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -19,18 +18,23 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
-@DependsOn("gameServer")
+
 public class SetDefendingMsgController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public SetDefendingMsgController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
@@ -52,7 +56,7 @@ public class SetDefendingMsgController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent) event)
 				.getSetDefendingMsgRequestProto();
 
@@ -85,17 +89,17 @@ public class SetDefendingMsgController extends EventController {
 			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 			//
 			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
-					userRetrieveUtil, miscMethods);
+					userRetrieveUtil, miscMethods());
 
 			rsga.execute(resBuilder);
 
@@ -103,8 +107,8 @@ public class SetDefendingMsgController extends EventController {
 			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setSetDefendingMsgResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in SetDefendingMsgController processEvent", e);
@@ -113,8 +117,8 @@ public class SetDefendingMsgController extends EventController {
 				SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetDefendingMsgResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in SetDefendingMsgController processEvent",
@@ -122,7 +126,7 @@ public class SetDefendingMsgController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -133,6 +137,14 @@ public class SetDefendingMsgController extends EventController {
 
 	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
 		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

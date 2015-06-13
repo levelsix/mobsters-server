@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SpawnMiniJobResponseEvent extends NormalResponseEvent {
+public class SpawnMiniJobResponseEvent extends NormalResponseEvent<SpawnMiniJobResponseProto> {
 
-	private SpawnMiniJobResponseProto spawnMiniJobResponseProto;
+	
 
 	public SpawnMiniJobResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class SpawnMiniJobResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = spawnMiniJobResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSpawnMiniJobResponseProto(
-			SpawnMiniJobResponseProto spawnMiniJobResponseProto) {
-		this.spawnMiniJobResponseProto = spawnMiniJobResponseProto;
+			SpawnMiniJobResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return spawnMiniJobResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

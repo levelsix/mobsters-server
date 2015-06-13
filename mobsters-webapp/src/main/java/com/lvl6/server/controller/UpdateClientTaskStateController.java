@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
@@ -21,10 +20,11 @@ import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateCl
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class UpdateClientTaskStateController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -37,7 +37,7 @@ public class UpdateClientTaskStateController extends EventController {
 	protected InsertUtil insertUtil;
 
 	public UpdateClientTaskStateController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class UpdateClientTaskStateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateClientTaskStateRequestProto reqProto = ((UpdateClientTaskStateRequestEvent) event)
 				.getUpdateClientTaskStateRequestProto();
 
@@ -87,8 +87,8 @@ public class UpdateClientTaskStateController extends EventController {
 			resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
 			resEvent = new UpdateClientTaskStateResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -105,8 +105,8 @@ public class UpdateClientTaskStateController extends EventController {
 			log.info("numInserted TaskForUserClientState: {}", numUpdated);
 
 			resBuilder.setStatus(UpdateClientTaskStateStatus.SUCCESS);
-			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -117,9 +117,9 @@ public class UpdateClientTaskStateController extends EventController {
 				resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
 				resEvent = new UpdateClientTaskStateResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateClientTaskStateResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateClientTaskStateController processEvent",

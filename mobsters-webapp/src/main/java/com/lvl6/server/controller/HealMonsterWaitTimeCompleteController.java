@@ -32,13 +32,13 @@
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //import com.lvl6.utils.utilmethods.UpdateUtils;
 //
-//@Component @DependsOn("gameServer") public class HealMonsterWaitTimeCompleteController extends EventController {
+//@Component  public class HealMonsterWaitTimeCompleteController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
 //
 //  public HealMonsterWaitTimeCompleteController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -52,7 +52,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    HealMonsterWaitTimeCompleteRequestProto reqProto = ((HealMonsterWaitTimeCompleteRequestEvent)event).getHealMonsterWaitTimeCompleteRequestProto();
 //
 //    //get values sent from the client (the request proto)
@@ -73,7 +73,7 @@
 //    resBuilder.setSender(senderProto);
 //    resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER); //default
 //
-//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    try {
 //      int previousGems = 0;
 //    	//get whatever we need from the database
@@ -95,15 +95,15 @@
 //      
 //      HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
 //      resEvent.setTag(event.getTag());
-//      resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
-//      server.writeEvent(resEvent);
+//      resEvent.setResponseProto(resBuilder.build());
+//      responses.normalResponseEvents().add(resEvent);
 //
 //      if (successful) {
 //      	//since user's money most likely changed, tell client to update user
 //      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
 //      	resEventUpdate.setTag(event.getTag());
-//      	server.writeEvent(resEventUpdate);
+//      	responses.normalResponseEvents().add(resEventUpdate);
 //      	
 //      	//TODO: WRITE TO HISTORY
 //      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems);
@@ -115,13 +115,13 @@
 //    	  resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER);
 //    	  HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
 //    	  resEvent.setTag(event.getTag());
-//    	  resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
-//    	  server.writeEvent(resEvent);
+//    	  resEvent.setResponseProto(resBuilder.build());
+//    	  responses.normalResponseEvents().add(resEvent);
 //      } catch (Exception e2) {
 //    	  log.error("exception2 in HealMonsterWaitTimeCompleteController processEvent", e);
 //      }
 //    } finally {
-//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 //    }
 //  }
 //  

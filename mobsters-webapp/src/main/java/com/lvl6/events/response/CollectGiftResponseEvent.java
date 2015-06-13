@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class CollectGiftResponseEvent extends NormalResponseEvent {
+public class CollectGiftResponseEvent extends NormalResponseEvent<CollectGiftResponseProto> {
 
 	private CollectGiftResponseProto collectGiftResponseProto;
 
@@ -30,6 +30,6 @@ public class CollectGiftResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int eventSize() {
-		return collectGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

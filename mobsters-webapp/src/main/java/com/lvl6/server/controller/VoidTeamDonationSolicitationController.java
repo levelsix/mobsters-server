@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -28,10 +27,12 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.VoidTeamDonationSolicitationAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class VoidTeamDonationSolicitationController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -44,7 +45,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public VoidTeamDonationSolicitationController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		VoidTeamDonationSolicitationRequestProto reqProto = ((VoidTeamDonationSolicitationRequestEvent) event)
 				.getVoidTeamDonationSolicitationRequestProto();
 
@@ -127,9 +128,9 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -144,7 +145,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 		if (0 != clanId) {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		}*/
 		try {
 			VoidTeamDonationSolicitationAction stda = new VoidTeamDonationSolicitationAction(
@@ -155,26 +156,26 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
 					VoidTeamDonationSolicitationStatus.SUCCESS)) {
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				resBuilder.addAllClanTeamDonateUuid(donationIdsToSnapshots
 						.keySet());
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 				//write to the clans of the solicitations if success
 				for (String clanId : clanIds) {
-					server.writeClanEvent(resEvent, clanId);
+					responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				}
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
@@ -190,9 +191,9 @@ public class VoidTeamDonationSolicitationController extends EventController {
 				VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setVoidTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in VoidTeamDonationSolicitation processEvent",
@@ -202,7 +203,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 			if (0 != clanId && lockedClan) {
 			getLocker().unlockClan(clanId);
 			} else {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

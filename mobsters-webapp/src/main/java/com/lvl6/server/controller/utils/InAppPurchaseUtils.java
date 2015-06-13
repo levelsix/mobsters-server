@@ -14,12 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.CustomMenu;
 import com.lvl6.info.FileDownload;
 import com.lvl6.info.Reward;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
 import com.lvl6.proto.SalesProto.SalesItemProto;
@@ -75,14 +75,14 @@ public class InAppPurchaseUtils {
 			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils,
 			CustomMenuRetrieveUtils customMenuRetrieveUtils) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
-		b.setSalesPackageId(sp.getId());
+		b.setSalesPackageId((int)Math.random()*2000000000);
 
 		String str = sp.getProductId();
 		if (null != str && !str.isEmpty()) {
 			b.setSalesProductId(str);
 		}
 
-		b.setPrice((long)sp.getPrice());
+		b.setPrice(sp.getPrice());
 
 		str = sp.getUuid();
 		if (null != str && !str.isEmpty()) {
@@ -145,10 +145,10 @@ public class InAppPurchaseUtils {
 			}
 		}
 
-		List<CustomMenu> cms = customMenuRetrieveUtils.getCustomMenuForId(sp.getCustomMenuId());
+		List<CustomMenuConfig> cms = customMenuRetrieveUtils.getCustomMenuConfigForId(sp.getCustomMenuId());
 
 		if (cms != null && !cms.isEmpty()) {
-		    for (CustomMenu cm : cms) {
+		    for (CustomMenuConfig cm : cms) {
 		        b.addCmp(createInfoProtoUtils.createCustomMenuProto(cm));
 		    }
 		}
@@ -175,7 +175,7 @@ public class InAppPurchaseUtils {
 
 		return sdipb.build();
 	}
-	
+
 	public void sortSalesPackageProtoList(List<SalesPackageProto> sppList) {
 		Collections.sort(sppList, new Comparator<SalesPackageProto>() {
 			@Override

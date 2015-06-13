@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent {
+public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent<InviteFbFriendsForSlotsResponseProto> {
 
-	private InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto;
+	
 
 	public InviteFbFriendsForSlotsResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = inviteFbFriendsForSlotsResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setInviteFbFriendsForSlotsResponseProto(
-			InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto) {
-		this.inviteFbFriendsForSlotsResponseProto = inviteFbFriendsForSlotsResponseProto;
+			InviteFbFriendsForSlotsResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public InviteFbFriendsForSlotsResponseProto getInviteFbFriendsForSlotsResponseProto() {   //because APNS required
-		return inviteFbFriendsForSlotsResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return inviteFbFriendsForSlotsResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

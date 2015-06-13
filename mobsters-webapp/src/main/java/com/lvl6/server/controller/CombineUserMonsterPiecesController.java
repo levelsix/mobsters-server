@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -31,11 +30,12 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class CombineUserMonsterPiecesController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -54,7 +54,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public CombineUserMonsterPiecesController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CombineUserMonsterPiecesRequestProto reqProto = ((CombineUserMonsterPiecesRequestEvent) event)
 				.getCombineUserMonsterPiecesRequestProto();
 
@@ -104,9 +104,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -137,9 +137,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful && gemCost > 0) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -147,7 +147,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, money, curTime, previousGems,
 						userMonsterIds);
@@ -162,9 +162,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 				CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CombineUserMonsterPiecesController processEvent",

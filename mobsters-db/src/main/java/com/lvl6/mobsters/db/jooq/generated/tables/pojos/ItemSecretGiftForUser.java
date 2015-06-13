@@ -34,13 +34,14 @@ import javax.validation.constraints.Size;
 })
 public class ItemSecretGiftForUser implements IItemSecretGiftForUser {
 
-	private static final long serialVersionUID = -1941711535;
+	private static final long serialVersionUID = -1092351150;
 
 	private String    id;
 	private String    userId;
 	private String    itemId;
 	private Integer   secsUntilCollection;
 	private Timestamp createTime;
+	private Integer   rewardId;
 
 	public ItemSecretGiftForUser() {}
 
@@ -50,6 +51,7 @@ public class ItemSecretGiftForUser implements IItemSecretGiftForUser {
 		this.itemId = value.itemId;
 		this.secsUntilCollection = value.secsUntilCollection;
 		this.createTime = value.createTime;
+		this.rewardId = value.rewardId;
 	}
 
 	public ItemSecretGiftForUser(
@@ -57,13 +59,15 @@ public class ItemSecretGiftForUser implements IItemSecretGiftForUser {
 		String    userId,
 		String    itemId,
 		Integer   secsUntilCollection,
-		Timestamp createTime
+		Timestamp createTime,
+		Integer   rewardId
 	) {
 		this.id = id;
 		this.userId = userId;
 		this.itemId = itemId;
 		this.secsUntilCollection = secsUntilCollection;
 		this.createTime = createTime;
+		this.rewardId = rewardId;
 	}
 
 	@Column(name = "id", nullable = false, length = 36)
@@ -132,6 +136,19 @@ public class ItemSecretGiftForUser implements IItemSecretGiftForUser {
 		return this;
 	}
 
+	@Column(name = "reward_id", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getRewardId() {
+		return this.rewardId;
+	}
+
+	@Override
+	public ItemSecretGiftForUser setRewardId(Integer rewardId) {
+		this.rewardId = rewardId;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -146,6 +163,7 @@ public class ItemSecretGiftForUser implements IItemSecretGiftForUser {
 		setItemId(from.getItemId());
 		setSecsUntilCollection(from.getSecsUntilCollection());
 		setCreateTime(from.getCreateTime());
+		setRewardId(from.getRewardId());
 	}
 
 	/**

@@ -1,26 +1,9 @@
 package com.lvl6.eventhandlers;
 
-import java.nio.ByteBuffer;
-import java.util.Arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
+public abstract class AbstractGameEventHandler{// implements MessageHandler{
 
-import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.server.ApplicationMode;
-import com.lvl6.server.GameServer;
-import com.lvl6.server.controller.EventController;
-import com.lvl6.utils.Attachment;
-import com.lvl6.utils.MessagingUtil;
-
-public abstract class AbstractGameEventHandler implements MessageHandler {
-
-	protected static Logger log = LoggerFactory
+/*	protected static Logger log = LoggerFactory
 			.getLogger(AbstractGameEventHandler.class);
 
 	@Autowired
@@ -69,17 +52,15 @@ public abstract class AbstractGameEventHandler implements MessageHandler {
 		while (attachment.eventReady()) {
 			RequestEvent event = getEvent(attachment);
 			log.debug("Recieved event from client: " + event.getPlayerId());
-			delegateEvent(payload, event,
-					(String) msg.getHeaders().get("ip_connection_id"),
-					attachment.eventType);
+			delegateEvent(event,attachment.eventType);
 			attachment.reset();
 
 		}
 	}
 
-	/**
+	*//**
 	 * read an event from the attachment's payload
-	 */
+	 *//*
 	protected RequestEvent getEvent(Attachment attachment) {
 		RequestEvent event = null;
 		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOf(attachment.payload,
@@ -100,7 +81,6 @@ public abstract class AbstractGameEventHandler implements MessageHandler {
 		return event;
 	}
 
-	protected abstract void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType);
+	protected abstract void delegateEvent(RequestEvent event, EventProtocolRequest eventType);*/
 
 }

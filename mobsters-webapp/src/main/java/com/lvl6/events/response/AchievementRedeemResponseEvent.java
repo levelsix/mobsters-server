@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AchievementRedeemResponseEvent extends NormalResponseEvent {
+public class AchievementRedeemResponseEvent extends NormalResponseEvent<AchievementRedeemResponseProto> {
 
-	private AchievementRedeemResponseProto achievementRedeemResponseProto;
+	
 
 	public AchievementRedeemResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class AchievementRedeemResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = achievementRedeemResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAchievementRedeemResponseProto(
-			AchievementRedeemResponseProto achievementRedeemResponseProto) {
-		this.achievementRedeemResponseProto = achievementRedeemResponseProto;
+			AchievementRedeemResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return achievementRedeemResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

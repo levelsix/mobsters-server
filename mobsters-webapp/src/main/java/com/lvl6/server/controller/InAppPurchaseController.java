@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -19,7 +20,6 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -31,6 +31,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.SalesPackage;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
@@ -64,17 +65,18 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class InAppPurchaseController extends EventController {
 
-    private static Logger log = LoggerFactory.getLogger(new Object() {
-    }.getClass().getEnclosingClass());
+    
+	private static final Logger log = LoggerFactory.getLogger(InAppPurchaseController.class);
 
     private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
     private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
@@ -156,7 +158,7 @@ public class InAppPurchaseController extends EventController {
 
 
     public InAppPurchaseController() {
-        numAllocatedThreads = 2;
+        
     }
 
     @Override
@@ -178,7 +180,7 @@ public class InAppPurchaseController extends EventController {
      */
     // @SuppressWarnings("deprecation")
     @Override
-    protected void processRequestEvent(RequestEvent event) throws Exception {
+    public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
         InAppPurchaseRequestProto reqProto = ((InAppPurchaseRequestEvent) event)
                 .getInAppPurchaseRequestProto();
 
@@ -217,8 +219,8 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     userId);
             resEvent.setTag(event.getTag());
-            resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-            server.writeEvent(resEvent);
+            resEvent.setResponseProto(resBuilder.build());
+            responses.normalResponseEvents().add(resEvent);
             return;
         }
 
@@ -235,17 +237,41 @@ public class InAppPurchaseController extends EventController {
             URL url = new URL(PRODUCTION_URL);
 
             log.info("Sending purchase request to: {}", url.toString());
+            
+            URLConnection conn = null;
+            OutputStreamWriter wr = null;
+            BufferedReader rd = null;
 
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(
-                    conn.getOutputStream());
-            wr.write(jsonReceipt.toString());
-            wr.flush();
+            // Try 3 times in case apple fails
+            for (int i = 0; i < 3; i++) {
+            	try {
 
-            // Get the response
-            BufferedReader rd = new BufferedReader(new InputStreamReader(
-                    conn.getInputStream()));
+                    conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    wr = new OutputStreamWriter(
+                            conn.getOutputStream());
+                    wr.write(jsonReceipt.toString());
+                    wr.flush();
+
+                    // Get the response
+                    rd = new BufferedReader(new InputStreamReader(
+                            conn.getInputStream()));
+            	} catch (IOException io) {
+            		log.error("failed to get response. iteration "+i, io);
+            		
+            		if (wr != null) {
+                		wr.close();
+            		}
+            		
+            		if (rd != null) {
+            			rd.close();
+            		}
+            		
+            		if (i == 2) {
+            			throw new Exception("failed to contact apple server. do something with the receipt." + jsonReceipt);
+            		}
+            	}
+            }
 
             String responseString = "";
             String line;
@@ -298,8 +324,8 @@ public class InAppPurchaseController extends EventController {
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     senderProto.getUserUuid());
             resEvent.setTag(event.getTag());
-            resEvent.setInAppPurchaseResponseProto(resProto);
-            server.writeEvent(resEvent);
+            resEvent.setResponseProto(resProto);
+            responses.normalResponseEvents().add(resEvent);
 
             /*if (Globals.KABAM_ENABLED()) {
 			if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
@@ -314,7 +340,7 @@ public class InAppPurchaseController extends EventController {
                     .createUpdateClientUserResponseEventAndUpdateLeaderboard(
                             user, null, null);
             resEventUpdate.setTag(event.getTag());
-            server.writeEvent(resEventUpdate);
+            responses.normalResponseEvents().add(resEventUpdate);
 
             //      //in case user has a mentor, check if user completed mentor's quest
             //      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
@@ -329,8 +355,8 @@ public class InAppPurchaseController extends EventController {
                 InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                         userId);
                 resEvent.setTag(event.getTag());
-                resEvent.setInAppPurchaseResponseProto(resBuilder.build());
-                server.writeEvent(resEvent);
+                resEvent.setResponseProto(resBuilder.build());
+                responses.normalResponseEvents().add(resEvent);
             } catch (Exception e2) {
                 log.error("exception2 in InAppPurchaseController processEvent",
                         e);
@@ -456,7 +482,7 @@ public class InAppPurchaseController extends EventController {
         Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
         
         //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
-
+        
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
         }
@@ -487,7 +513,9 @@ public class InAppPurchaseController extends EventController {
     				return sp2.getPriority() - sp1.getPriority();
     			}
     		});
-        	successorSalesPackage = tenDollarPacks.get(0);
+        	if(!tenDollarPacks.isEmpty()) {
+            	successorSalesPackage = tenDollarPacks.get(0);
+        	}
         }
 
 		SalesPackageProto curSpp = inAppPurchaseUtils.createSalesPackageProto(salesPackage,
@@ -498,6 +526,13 @@ public class InAppPurchaseController extends EventController {
 //		log.info("prespp: " + preSpp);
 
 		if(user.getSalesValue() > 0 && (iapsa.isBuilderPack() || iapsa.isStarterPack())) {
+			//do nothing
+		}
+		else if(user.getSalesValue() < 4 && salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
+			//do nothing
+		}
+		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
+				&& timeUtils.isFirstEarlierThanSecond(now, successorSalesPackage.getTimeEnd())) {
 			//do nothing
 		}
 		else {

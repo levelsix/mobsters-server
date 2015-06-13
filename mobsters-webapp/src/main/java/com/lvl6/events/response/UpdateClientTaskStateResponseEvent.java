@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent {
+public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent<UpdateClientTaskStateResponseProto> {
 
-	private UpdateClientTaskStateResponseProto updateClientTaskStateResponseProto;
+	
 
 	public UpdateClientTaskStateResponseEvent(String playerId) {
 		super(playerId);
@@ -18,21 +18,21 @@ public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = updateClientTaskStateResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setUpdateClientTaskStateResponseProto(
-			UpdateClientTaskStateResponseProto updateClientTaskStateResponseProto) {
-		this.updateClientTaskStateResponseProto = updateClientTaskStateResponseProto;
+			UpdateClientTaskStateResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public UpdateClientTaskStateResponseProto getUpdateClientTaskStateResponseProto() {   //because APNS required
-		return updateClientTaskStateResponseProto;
+		return responseProto;
 	}
 	public int eventSize() {
-		return updateClientTaskStateResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

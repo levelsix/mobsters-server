@@ -12,7 +12,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -45,6 +44,8 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.ClanEventUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -52,7 +53,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class BeginClanRaidController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -92,7 +93,7 @@ public class BeginClanRaidController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public BeginClanRaidController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -106,7 +107,7 @@ public class BeginClanRaidController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent) event)
 				.getBeginClanRaidRequestProto();
 
@@ -161,8 +162,8 @@ public class BeginClanRaidController extends EventController {
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanRaidResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -210,13 +211,13 @@ public class BeginClanRaidController extends EventController {
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanRaidResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			log.info("resBuilder=" + resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//only write to the user if the request was valid
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {
@@ -226,8 +227,8 @@ public class BeginClanRaidController extends EventController {
 				BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginClanRaidResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginClanRaid processEvent", e);
 			}

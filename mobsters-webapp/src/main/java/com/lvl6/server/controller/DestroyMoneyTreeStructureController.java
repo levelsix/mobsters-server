@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -23,10 +22,11 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DestroyMoneyTreeStructureAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class DestroyMoneyTreeStructureController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -48,7 +48,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 
 	public DestroyMoneyTreeStructureController() {
-		numAllocatedThreads = 2;
+		
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 	 */
 	// @SuppressWarnings("deprecation")
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DestroyMoneyTreeStructureRequestProto reqProto = ((DestroyMoneyTreeStructureRequestEvent) event)
 				.getDestroyMoneyTreeStructureRequestProto();
 
@@ -96,9 +96,9 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDestroyMoneyTreeStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -119,8 +119,8 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setDestroyMoneyTreeStructureResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(

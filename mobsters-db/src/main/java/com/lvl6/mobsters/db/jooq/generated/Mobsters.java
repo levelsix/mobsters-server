@@ -51,6 +51,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
@@ -64,6 +65,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -117,6 +119,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
@@ -189,7 +192,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1899956259;
+	private static final long serialVersionUID = -825616517;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -259,6 +262,7 @@ public class Mobsters extends SchemaImpl {
 			ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG,
 			ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG,
 			CustomMenuConfig.CUSTOM_MENU_CONFIG,
+			CustomTranslations.CUSTOM_TRANSLATIONS,
 			EventPersistentConfig.EVENT_PERSISTENT_CONFIG,
 			EventPersistentForUser.EVENT_PERSISTENT_FOR_USER,
 			ExpansionCostConfig.EXPANSION_COST_CONFIG,
@@ -272,6 +276,7 @@ public class Mobsters extends SchemaImpl {
 			ItemForUser.ITEM_FOR_USER,
 			ItemForUserUsage.ITEM_FOR_USER_USAGE,
 			ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER,
+			LbCurHist.LB_CUR_HIST,
 			LoadTestingEvents.LOAD_TESTING_EVENTS,
 			LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG,
 			LockBoxEventForUser.LOCK_BOX_EVENT_FOR_USER,
@@ -325,6 +330,7 @@ public class Mobsters extends SchemaImpl {
 			SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG,
 			SalesItemConfig.SALES_ITEM_CONFIG,
 			SalesPackageConfig.SALES_PACKAGE_CONFIG,
+			SecretGiftConfig.SECRET_GIFT_CONFIG,
 			ServerToggleConfig.SERVER_TOGGLE_CONFIG,
 			SkillConfig.SKILL_CONFIG,
 			SkillPropertyConfig.SKILL_PROPERTY_CONFIG,

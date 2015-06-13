@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class EnableAPNSResponseEvent extends NormalResponseEvent {
+public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSResponseProto> {
 
-	private EnableAPNSResponseProto enableAPNSResponseProto;
+	
 
 	public EnableAPNSResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class EnableAPNSResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = enableAPNSResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setEnableAPNSResponseProto(
-			EnableAPNSResponseProto enableAPNSResponseProto) {
-		this.enableAPNSResponseProto = enableAPNSResponseProto;
+			EnableAPNSResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	
 	public int eventSize() {
-		return enableAPNSResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

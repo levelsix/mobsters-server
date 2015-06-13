@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class BeginClanAvengingResponseEvent extends NormalResponseEvent {
+public class BeginClanAvengingResponseEvent extends NormalResponseEvent<BeginClanAvengingResponseProto> {
 
-	private BeginClanAvengingResponseProto beginClanAvengingResponseProto;
+	
 
 	public BeginClanAvengingResponseEvent(String playerId) {
 		super(playerId);
@@ -18,17 +18,17 @@ public class BeginClanAvengingResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = beginClanAvengingResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setBeginClanAvengingResponseProto(
-			BeginClanAvengingResponseProto beginClanAvengingResponseProto) {
-		this.beginClanAvengingResponseProto = beginClanAvengingResponseProto;
+			BeginClanAvengingResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public int eventSize() {
-		return beginClanAvengingResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

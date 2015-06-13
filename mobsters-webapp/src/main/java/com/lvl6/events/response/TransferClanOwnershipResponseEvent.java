@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class TransferClanOwnershipResponseEvent extends NormalResponseEvent {
+public class TransferClanOwnershipResponseEvent extends NormalResponseEvent<TransferClanOwnershipResponseProto> {
 
-	private TransferClanOwnershipResponseProto transferClanOwnershipResponseProto;
+	
 
 	public TransferClanOwnershipResponseEvent(String playerId) {
 		super(playerId);
@@ -25,18 +25,18 @@ public class TransferClanOwnershipResponseEvent extends NormalResponseEvent {
 	 */
 	@Override
 	public int write(ByteBuffer buff) {
-		ByteString b = transferClanOwnershipResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(buff);
 		return b.size();
 	}
 
 	public void setTransferClanOwnershipResponseProto(
-			TransferClanOwnershipResponseProto transferClanOwnershipResponseProto) {
-		this.transferClanOwnershipResponseProto = transferClanOwnershipResponseProto;
+			TransferClanOwnershipResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return transferClanOwnershipResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

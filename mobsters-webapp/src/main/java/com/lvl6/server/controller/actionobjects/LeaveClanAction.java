@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -37,9 +38,10 @@ public class LeaveClanAction {
 	protected DeleteUtil deleteUtil;
 	private ClanRetrieveUtils2 clanRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private ClanSearch clanSearch;
+	private HazelcastClanSearchImpl hzClanSearch;
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 	private TimeUtils timeUtils;
+
 	
 	public LeaveClanAction(
 			String userId, String clanId,
@@ -47,7 +49,7 @@ public class LeaveClanAction {
 			InsertUtil insertUtil, DeleteUtil deleteUtil,
 			ClanRetrieveUtils2 clanRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
-			ClanSearch clanSearch,
+			HazelcastClanSearchImpl hzClanSearch,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
 			TimeUtils timeUtils) {
 		super();
@@ -59,7 +61,7 @@ public class LeaveClanAction {
 		this.deleteUtil = deleteUtil;
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
-		this.clanSearch = clanSearch;
+		this.hzClanSearch = hzClanSearch;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 		this.timeUtils = timeUtils;
 	}
@@ -195,7 +197,7 @@ public class LeaveClanAction {
 
 		//need to account for this user leaving clan
 		ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
-				lastChatPost, timeUtils, UpdateUtils.get(), clanSearch);
+				lastChatPost, timeUtils, UpdateUtils.get(), hzClanSearch);
 		eca.execute();
 
 		return true;
@@ -218,7 +220,6 @@ public class LeaveClanAction {
 				log.error("problem with deleting clan with id {}", clan.getId());
 				return;
 			}
-			clanSearch.removeClanId(clanId);
 		}
 
 	}
@@ -305,12 +306,12 @@ public class LeaveClanAction {
 		this.clan = clan;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil() {

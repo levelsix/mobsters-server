@@ -7,10 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ReceivedClanGiftResponseEvent extends
-		NormalResponseEvent {
+public class ReceivedClanGiftResponseEvent extends	NormalResponseEvent<ReceivedClanGiftResponseProto> {
 
-	private ReceivedClanGiftResponseProto receivedClanGiftResponseProto;
+	
 
 	public ReceivedClanGiftResponseEvent(String playerId) {
 		super(playerId);
@@ -19,19 +18,19 @@ public class ReceivedClanGiftResponseEvent extends
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = receivedClanGiftResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setReceivedClanGiftResponseProto(
-			ReceivedClanGiftResponseProto receivedClanGiftResponseProto) {
-		this.receivedClanGiftResponseProto = receivedClanGiftResponseProto;
+			ReceivedClanGiftResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	@Override
 	public int eventSize() {
-		return receivedClanGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

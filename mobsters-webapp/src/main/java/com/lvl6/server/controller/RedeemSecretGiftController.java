@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -27,8 +26,10 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -36,15 +37,19 @@ import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class RedeemSecretGiftController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public RedeemSecretGiftController() {
-		numAllocatedThreads = 1;
+		
 	}
+	
+	
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
@@ -75,7 +80,7 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent) event)
 				.getRedeemSecretGiftRequestProto();
 
@@ -111,12 +116,12 @@ public class RedeemSecretGiftController extends EventController {
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		server.lockPlayer(senderProto.getUserUuid(), this.getClass()
+		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
 			//
@@ -140,8 +145,8 @@ public class RedeemSecretGiftController extends EventController {
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRedeemSecretGiftResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
@@ -151,7 +156,7 @@ public class RedeemSecretGiftController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								u, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 			}
 
 		} catch (Exception e) {
@@ -161,8 +166,8 @@ public class RedeemSecretGiftController extends EventController {
 				RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRedeemSecretGiftResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RedeemSecretGiftController processEvent",
@@ -170,7 +175,7 @@ public class RedeemSecretGiftController extends EventController {
 			}
 
 		} finally {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -199,6 +204,14 @@ public class RedeemSecretGiftController extends EventController {
 	public void setItemForUserRetrieveUtil(
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

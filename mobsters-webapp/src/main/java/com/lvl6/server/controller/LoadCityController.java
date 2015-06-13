@@ -26,7 +26,7 @@
 //import com.lvl6.utils.CreateInfoProtoUtils;
 //import com.lvl6.utils.RetrieveUtils;
 //
-//  @Component @DependsOn("gameServer") public class LoadCityController extends EventController {
+//  @Component  public class LoadCityController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -34,7 +34,7 @@
 //  protected Locker locker;
 //
 //  public LoadCityController() {
-//    numAllocatedThreads = 3;
+//    
 //  }
 //
 //  @Override
@@ -48,7 +48,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    LoadCityRequestProto reqProto = ((LoadCityRequestEvent)event).getLoadCityRequestProto();
 //
 //    MinimumUserProto senderProto = reqProto.getSender();
@@ -89,8 +89,8 @@
 //
 //      LoadCityResponseEvent resEvent = new LoadCityResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setLoadCityResponseProto(resBuilder.build());  
-//      server.writeEvent(resEvent);
+//      resEvent.setResponseProto(resBuilder.build());  
+//      responses.normalResponseEvents().add(resEvent);
 //
 //    } catch (Exception e) {
 //      log.error("exception in LoadCity processEvent", e);

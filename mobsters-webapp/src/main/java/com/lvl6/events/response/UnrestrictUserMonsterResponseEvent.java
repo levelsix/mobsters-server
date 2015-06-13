@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class UnrestrictUserMonsterResponseEvent extends NormalResponseEvent {
+public class UnrestrictUserMonsterResponseEvent extends NormalResponseEvent<UnrestrictUserMonsterResponseProto> {
 
-	private UnrestrictUserMonsterResponseProto unrestrictUserMonsterResponseProto;
+	
 
 	public UnrestrictUserMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class UnrestrictUserMonsterResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = unrestrictUserMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setUnrestrictUserMonsterResponseProto(
-			UnrestrictUserMonsterResponseProto unrestrictUserMonsterResponseProto) {
-		this.unrestrictUserMonsterResponseProto = unrestrictUserMonsterResponseProto;
+			UnrestrictUserMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public UnrestrictUserMonsterResponseProto getUnrestrictUserMonsterResponseProto() {   //because APNS required
-		return unrestrictUserMonsterResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return unrestrictUserMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

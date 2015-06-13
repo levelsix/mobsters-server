@@ -2,6 +2,8 @@ package com.lvl6.events;
 
 import java.nio.ByteBuffer;
 
+import com.google.protobuf.ByteString;
+import com.google.protobuf.GeneratedMessage;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 /**
@@ -11,7 +13,17 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
  * completely different class may be used as required by a specific game.
  */
 
-public abstract class ResponseEvent extends GameEvent {
+public abstract class ResponseEvent<T extends GeneratedMessage> extends GameEvent {
+	
+	protected T responseProto;
+	
+	public T getResponseProto() {
+		return responseProto;
+	}
+
+	public void setResponseProto(T responseProto) {
+		this.responseProto = responseProto;
+	}
 
 	/** event type */
 	protected EventProtocolResponse eventType;
@@ -32,9 +44,16 @@ public abstract class ResponseEvent extends GameEvent {
 	public void setTag(int tag) {
 		this.tag = tag;
 	}
+	
 
-	//	@Override
-	//	public String toString() {
-	//		return ReflectionToStringBuilder.toString(this);
-	//	}
-}// GameEvent
+	
+	public byte[] getBytes(){
+		return getResponseProto().toByteArray();
+	}
+	
+	public ByteString getByteString(){
+		return getResponseProto().toByteString();
+	}
+
+
+}

@@ -45,6 +45,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_RAID_STAGE_CONFIG = "clan_raid_stage_config";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG = "clan_raid_stage_monster_config";
 	public static final String TABLE_CLAN_RAID_STAGE_REWARD_CONFIG = "clan_raid_stage_reward_config";
+	public static final String TABLE_CUSTOM_TRANSLATION = "custom_translations";
 	public static final String TABLE_CUSTOM_MENU_CONFIG = "custom_menu_config";
 	public static final String TABLE_EVENT_PERSISTENT_CONFIG = "event_persistent_config";
 	public static final String TABLE_EVENT_PERSISTENT_FOR_USER = "event_persistent_for_user";
@@ -70,6 +71,7 @@ public class DBConstants {
 	public static final String TABLE_MINI_EVENT_GOAL_FOR_USER = "mini_event_goal_for_user";
 	public static final String TABLE_MINI_EVENT_LEADERBOARD_REWARD_CONFIG = "mini_event_leaderboard_reward_config";
 	public static final String TABLE_MINI_EVENT_TIER_REWARD_CONFIG = "mini_event_tier_reward_config";
+	public static final String TABLE_MINI_EVENT_TIMETABLE_CONFIG = "mini_event_timetable_config";
 	public static final String TABLE_MINI_JOB_CONFIG = "mini_job_config";
 	public static final String TABLE_MINI_JOB_FOR_USER = "mini_job_for_user";
 	public static final String TABLE_MINI_JOB_FOR_USER_HISTORY = "mini_job_for_user_history";
@@ -377,6 +379,11 @@ public class DBConstants {
 	public static final String CLAN_MEMBER_TEAM_DONATION__FULFILLED = "fulfilled";
 	public static final String CLAN_MEMBER_TEAM_DONATION__MSG = "msg";
 	public static final String CLAN_MEMBER_TEAM_DONATION__TIME_OF_SOLICITATION = "time_of_solicitation";
+
+	/*CUSTOM TRANSLATION*/
+	public static final String CUSTOM_TRANSLATION__ID = GENERIC__ID;
+	public static final String CUSTOM_TRANSLATION__PHRASE = "phrase";
+	public static final String CUSTOM_TRANSLATION__LANGUAGE = "language";
 
 	/*EVENT PERSISTENT FOR USER*/
 	public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
@@ -895,7 +902,7 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
-	
+
 	/*USER REWARD HISTORY*/
 	public static final String USER_REWARD_HISTORY__ID = GENERIC__ID;
 	public static final String USER_REWARD_HISTORY__USER_ID = "user_id";
@@ -1037,6 +1044,8 @@ public class DBConstants {
 	public static final String CUSTOM_MENU__POSITION_Z = "position_z";
     public static final String CUSTOM_MENU__IS_JIGGLE = "is_jiggle";
     public static final String CUSTOM_MENU__IMAGE_NAME = "image_name";
+    public static final String CUSTOM_MENU__IPAD_POSITION_X = "ipad_position_x";
+	public static final String CUSTOM_MENU__IPAD_POSITION_Y = "ipad_position_y";
 
 	public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
@@ -1099,6 +1108,11 @@ public class DBConstants {
 	public static final String MINI_EVENT_TIER_REWARD__MINI_EVENT_FOR_PLAYER_LVL_ID = "mini_event_for_player_lvl_id";
 	public static final String MINI_EVENT_TIER_REWARD__REWARD_ID = "reward_id";
 	public static final String MINI_EVENT_TIER_REWARD__REWARD_TIER = "reward_tier";
+
+	public static final String MINI_EVENT_TIMETABLE__ID = GENERIC__ID;
+	public static final String MINI_EVENT_TIMETABLE__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_TIMETABLE__START_TIME = "start_time";
+	public static final String MINI_EVENT_TIMETABLE__END_TIME = "end_time";
 
 	public static final String MINI_JOB__ID = GENERIC__ID;
 	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id";

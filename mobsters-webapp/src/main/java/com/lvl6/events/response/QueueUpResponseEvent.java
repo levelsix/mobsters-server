@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class QueueUpResponseEvent extends NormalResponseEvent {
+public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponseProto> {
 
-	private QueueUpResponseProto QueueUpResponseProto;
+	
 
 	public QueueUpResponseEvent(String playerId) {
 		super(playerId);
@@ -18,23 +18,23 @@ public class QueueUpResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = QueueUpResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setQueueUpResponseProto(
-			QueueUpResponseProto QueueUpResponseProto) {
-		this.QueueUpResponseProto = QueueUpResponseProto;
+			QueueUpResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public QueueUpResponseProto getQueueUpResponseProto() {   //because APNS required
-		return QueueUpResponseProto;
+		return responseProto;
 	}
 	
 
 	public int eventSize() {
-		return QueueUpResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

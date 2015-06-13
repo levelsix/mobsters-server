@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -28,10 +27,11 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class ObstacleRemovalCompleteController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -50,7 +50,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public ObstacleRemovalCompleteController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ObstacleRemovalCompleteRequestProto reqProto = ((ObstacleRemovalCompleteRequestEvent) event)
 				.getObstacleRemovalCompleteRequestProto();
 
@@ -104,8 +104,8 @@ public class ObstacleRemovalCompleteController extends EventController {
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -131,8 +131,8 @@ public class ObstacleRemovalCompleteController extends EventController {
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success && (speedUp || atMaxObstacles)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -140,7 +140,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(userId, user, clientTime, money,
 						previousGems, ofu);
@@ -156,9 +156,9 @@ public class ObstacleRemovalCompleteController extends EventController {
 				ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setObstacleRemovalCompleteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ObstacleRemovalCompleteController processEvent",

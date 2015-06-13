@@ -11,7 +11,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -41,12 +40,13 @@ import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.utils.ConnectedPlayer;
+import com.lvl6.server.eventsender.PreDBResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class UserCreateController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -83,7 +83,7 @@ public class UserCreateController extends EventController {
 	protected TaskRetrieveUtils taskRetrieveUtils;
 
 	public UserCreateController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class UserCreateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UserCreateRequestProto reqProto = ((UserCreateRequestEvent) event)
 				.getUserCreateRequestProto();
 		String udid = reqProto.getUdid();
@@ -113,10 +113,11 @@ public class UserCreateController extends EventController {
 		int cash = Math.max(reqProto.getCash(), 0);
 		int oil = Math.max(reqProto.getOil(), 0);
 		int gems = Math.max(reqProto.getGems(), 0);
-
+		
 		cash = Math.min(cash, ControllerConstants.TUTORIAL__INIT_CASH);
 		oil = Math.min(oil, ControllerConstants.TUTORIAL__INIT_OIL);
 		gems = Math.min(gems, ControllerConstants.TUTORIAL__INIT_GEMS);
+		int gachaCredits = ControllerConstants.TUTORIAL__GACHA_CREDITS;
 
 		String email = reqProto.getEmail();
 		String fbData = reqProto.getFbData();
@@ -140,26 +141,28 @@ public class UserCreateController extends EventController {
 				//			  String newReferCode = grabNewReferCode();
 				userId = writeChangeToDb(resBuilder, name, udid, cash, oil,
 						gems, deviceToken, createTime, facebookId, email,
-						fbData);
+						fbData, gachaCredits);
 			}
 
 			UserCreateResponseProto resProto = resBuilder.build();
 			UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
 			resEvent.setTag(event.getTag());
-			resEvent.setUserCreateResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			log.info(String.format("Writing event: %s", resEvent));
-			server.writePreDBEvent(resEvent, udid);
+			responses.preDBResponseEvents().add(new PreDBResponseEvent(resEvent, udid));
 
 			if (userId != null) {
 				//recording that player is online I guess
-				ConnectedPlayer player = server.getPlayerByUdId(udid);
+				
+				//TODO: Not sure if this is needed... event processor will do it for you
+				/*ConnectedPlayer player = server.getPlayerByUdId(udid);
 				player.setPlayerId(userId);
 				server.getPlayersByPlayerId().put(userId, player);
-				server.getPlayersPreDatabaseByUDID().remove(udid);
+				server.getPlayersPreDatabaseByUDID().remove(udid);*/
 			}
 
 			if (legitUserCreate && userId != null) {
-				/*server.lockPlayer(userId, this.getClass().getSimpleName());*/
+				/*locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());*/
 				try {
 					//TAKE INTO ACCOUNT THE PROPERTIES SENT IN BY CLIENT
 					log.info("writing user structs");
@@ -181,7 +184,7 @@ public class UserCreateController extends EventController {
 					log.error("exception in UserCreateController processEvent",
 							e);
 				} /*finally {
-					server.unlockPlayer(userId, this.getClass().getSimpleName()); 
+					locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
 					}*/
 			}
 		} catch (Exception e) {
@@ -191,8 +194,8 @@ public class UserCreateController extends EventController {
 				UserCreateResponseEvent resEvent = new UserCreateResponseEvent(
 						udid);
 				resEvent.setTag(event.getTag());
-				resEvent.setUserCreateResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in UserCreateController processEvent", e);
 			}
@@ -263,7 +266,8 @@ public class UserCreateController extends EventController {
 
 	private String writeChangeToDb(Builder resBuilder, String name,
 			String udid, int cash, int oil, int gems, String deviceToken,
-			Timestamp createTime, String facebookId, String email, String fbData) {
+			Timestamp createTime, String facebookId, String email, String fbData,
+			int gachaCredits) {
 		//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;
 		int playerExp = 10;
@@ -271,10 +275,10 @@ public class UserCreateController extends EventController {
 
 		String userId = insertUtils.insertUser(name, udid, lvl, playerExp,
 				cash, oil, gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, gachaCredits);
 
 		if (userId != null) {
-			/*server.lockPlayer(userId, this.getClass().getSimpleName());*//*
+			/*locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());*//*
 																			try {
 																			user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 																			FullUserProto userProto = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
@@ -282,7 +286,7 @@ public class UserCreateController extends EventController {
 																			} catch (Exception e) {
 																			log.error("exception in UserCreateController processEvent", e);
 																			}*//*finally {
-																				server.unlockPlayer(userId, this.getClass().getSimpleName()); 
+																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
 																				}*/
 		} else {
 			resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
@@ -523,8 +527,8 @@ public class UserCreateController extends EventController {
 	//              .setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(referrer, null))
 	//              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null))
 	//              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
-	//          resEvent.setReferralCodeUsedResponseProto(resProto);
-	//          server.writeAPNSNotificationOrEvent(resEvent);
+	//          resEvent.setResponseProto(resProto);
+	//          responses.apnsResponseEvents().add((resEvent);
 	//          
 	//          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);
 	//        }

@@ -1,6 +1,8 @@
 package com.lvl6.events;
 
-public abstract class NormalResponseEvent extends ResponseEvent {
+import com.google.protobuf.GeneratedMessage;
+
+public abstract class NormalResponseEvent<T extends GeneratedMessage> extends ResponseEvent<T> {
 	protected String playerId;   //refers to whoever sent the event/triggered it
 
 	public String getPlayerId() {
@@ -10,4 +12,6 @@ public abstract class NormalResponseEvent extends ResponseEvent {
 	public NormalResponseEvent(String playerId) {
 		this.playerId = playerId;
 	}
+	
+
 }

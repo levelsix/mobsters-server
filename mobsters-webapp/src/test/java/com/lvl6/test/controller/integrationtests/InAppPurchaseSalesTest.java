@@ -39,6 +39,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.InAppPurchaseController;
+import com.lvl6.server.eventsender.EventsUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -106,7 +107,7 @@ public class InAppPurchaseSalesTest {
 
 		userId = insertUtil.insertUser(name, udid, lvl, playerExp, cash, oil,
 				gems, false, deviceToken, createTime, facebookId,
-				avatarMonsterId, email, fbData);
+				avatarMonsterId, email, fbData, 0);
 
 		user = userRetrieveUtil.getUserById(userId);
 
@@ -217,7 +218,7 @@ public class InAppPurchaseSalesTest {
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-		inAppPurchaseController.handleEvent(iapre);
+		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 

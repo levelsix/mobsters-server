@@ -6,9 +6,9 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.FulfillTeamDonationSolicitationRequestEvent;
 import com.lvl6.events.response.FulfillTeamDonationSolicitationResponseEvent;
@@ -23,20 +23,27 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.FulfillTeamDonationSolicitationAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class FulfillTeamDonationSolicitationController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
+	
+	@Autowired
+	protected Locker locker;
+	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
@@ -51,9 +58,12 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	public FulfillTeamDonationSolicitationController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -67,7 +77,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		FulfillTeamDonationSolicitationRequestProto reqProto = ((FulfillTeamDonationSolicitationRequestEvent) event)
 				.getFulfillTeamDonationSolicitationRequestProto();
 
@@ -125,9 +135,9 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 					donatorId);
 			resEvent.setTag(event.getTag());
-			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -143,7 +153,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
 		}*/
-		server.lockPlayer(solicitorId, this.getClass().getSimpleName());
+		locker.lockPlayer(UUID.fromString(solicitorId), this.getClass().getSimpleName());
 		try {
 			FulfillTeamDonationSolicitationAction ftdsa = new FulfillTeamDonationSolicitationAction(
 					donatorId, clanId, msfu, cmtd, clientTime,
@@ -155,15 +165,15 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 					donatorId);
 			resEvent.setTag(event.getTag());
-			resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
 					FulfillTeamDonationSolicitationStatus.SUCCESS)) {
-				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
@@ -174,10 +184,12 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 								msfuNew, solicitationProto.getSolicitor(),
 								senderProto);
 				resBuilder.setSolicitation(cmtdp);
+				
+				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 0, 1, 0, 0);
 
-				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -187,7 +199,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 					UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdate);
+					responses.normalResponseEvents().add(resEventUpdate);
 
 					writeToCurrencyHistory(userId, clientTime, stda);
 				}*/
@@ -203,16 +215,16 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 				FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 						donatorId);
 				resEvent.setTag(event.getTag());
-				resEvent.setFulfillTeamDonationSolicitationResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in FulfillTeamDonationSolicitation processEvent",
 						e);
 			}
 		} finally {
-			server.unlockPlayer(solicitorId, this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(solicitorId), this.getClass().getSimpleName());
 		}
 	}
 
@@ -245,6 +257,14 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	public void setClanMemberTeamDonationRetrieveUtil(
 			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil) {
 		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

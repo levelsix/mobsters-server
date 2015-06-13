@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class HealMonsterWaitTimeCompleteResponseEvent extends NormalResponseEvent {
+//public class HealMonsterWaitTimeCompleteResponseEvent extends NormalResponseEvent<HealMonsterWaitTimeCompleteResponseProto> {
 //
-//  private HealMonsterWaitTimeCompleteResponseProto healMonsterResponseProto;
+//  
 //  
 //  public HealMonsterWaitTimeCompleteResponseEvent(int playerId){
 //    super(playerId);
@@ -18,13 +18,13 @@
 //  
 //  @Override
 //  public int write(ByteBuffer bb) {
-//    ByteString b = healMonsterResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(bb);
 //    return b.size();
 //  }
 //
-//  public void setHealMonsterWaitTimeCompleteResponseProto(HealMonsterWaitTimeCompleteResponseProto healMonsterResponseProto) {
-//    this.healMonsterResponseProto = healMonsterResponseProto;
+//  public void setHealMonsterWaitTimeCompleteResponseProto(HealMonsterWaitTimeCompleteResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //
 //}

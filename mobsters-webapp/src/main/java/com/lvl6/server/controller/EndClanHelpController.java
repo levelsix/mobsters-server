@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -19,11 +18,13 @@ import com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class EndClanHelpController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -33,7 +34,7 @@ public class EndClanHelpController extends EventController {
 	protected Locker locker;
 
 	public EndClanHelpController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class EndClanHelpController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndClanHelpRequestProto reqProto = ((EndClanHelpRequestEvent) event)
 				.getEndClanHelpRequestProto();
 
@@ -91,8 +92,8 @@ public class EndClanHelpController extends EventController {
 			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setEndClanHelpResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -110,15 +111,15 @@ public class EndClanHelpController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!success) {
-				resEvent.setEndClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
 
 				resBuilder.setStatus(EndClanHelpStatus.SUCCESS);
-				resEvent.setEndClanHelpResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
@@ -130,8 +131,8 @@ public class EndClanHelpController extends EventController {
 				EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setEndClanHelpResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndClanHelp processEvent", e);
 			}
@@ -139,7 +140,7 @@ public class EndClanHelpController extends EventController {
 			if (0 != clanId && lockedClan) {
 			getLocker().unlockClan(clanId);
 			} else {
-			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 			}
 			}*/
 	}

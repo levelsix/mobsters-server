@@ -12,10 +12,11 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.hazelcast.core.IMap;
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;
@@ -46,10 +47,11 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class RetrieveClanInfoController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -77,7 +79,7 @@ public class RetrieveClanInfoController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	@Autowired
-	protected ClanSearch cs;
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanHelpCountForUserRetrieveUtil clanHelpCountForUserRetrieveUtil;
@@ -87,7 +89,7 @@ public class RetrieveClanInfoController extends EventController {
 
 
 	public RetrieveClanInfoController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -101,7 +103,7 @@ public class RetrieveClanInfoController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 
@@ -146,8 +148,8 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -163,8 +165,8 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 		} catch (Exception e) {
 			log.error("exception in RetrieveClanInfo processEvent", e);
 			try {
@@ -172,8 +174,8 @@ public class RetrieveClanInfoController extends EventController {
 				RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RetrieveClanInfo processEvent", e);
 			}
@@ -195,7 +197,7 @@ public class RetrieveClanInfoController extends EventController {
 			String clanId, String clanName, ClanInfoGrabType grabType,
 			RetrieveClanInfoResponseProto.Builder resBuilder) {
 		if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
-			List<String> clanIds = cs
+			List<String> clanIds = hzClanSearch
 					.getTopNClans(ControllerConstants.CLAN__TOP_N_CLANS);
 
 			List<Clan> clanList = orderRecommendedClans(clanIds);
@@ -327,7 +329,7 @@ public class RetrieveClanInfoController extends EventController {
 
 	private List<Clan> orderRecommendedClans(List<String> clanIds) {
 		Map<String, Clan> clanMap = clanRetrieveUtils.getClansByIds(clanIds);
-
+		
 		List<Clan> clanList = new ArrayList<Clan>();
 		if (null == clanMap || clanMap.isEmpty()) {
 			return clanList;
@@ -348,22 +350,13 @@ public class RetrieveClanInfoController extends EventController {
 		if (null == clanList || clanList.isEmpty()) {
 			return;
 		}
-		List<String> clanIds = clanRetrieveUtils.getClanIdsFromClans(clanList);
-
-		List<String> statuses = new ArrayList<String>();
-		statuses.add(UserClanStatus.LEADER.name());
-		statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-		statuses.add(UserClanStatus.CAPTAIN.name());
-		statuses.add(UserClanStatus.MEMBER.name());
-
-		Map<String, Integer> clanIdsToSizes = getUserClanRetrieveUtils()
-				.getClanSizeForClanIdsAndStatuses(clanIds, statuses);
+		IMap<String, Integer> clanMemberSize = hzClanSearch.getClanMemberCountMap();
 
 		for (Clan c : clanList) {
 			String clanId = c.getId();
 
-			if (clanIdsToSizes.containsKey(clanId)) {
-				int size = clanIdsToSizes.get(clanId);
+			if (clanMemberSize.containsKey(clanId)) {
+				int size = clanMemberSize.get(clanId);
 				resBuilder.addClanInfo(createInfoProtoUtils
 						.createFullClanProtoWithClanSize(c, size));
 			} else {
@@ -508,12 +501,13 @@ public class RetrieveClanInfoController extends EventController {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 
-	public ClanSearch getCs() {
-		return cs;
+
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setCs(ClanSearch cs) {
-		this.cs = cs;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanHelpCountForUserRetrieveUtil getClanHelpCountForUserRetrieveUtil() {

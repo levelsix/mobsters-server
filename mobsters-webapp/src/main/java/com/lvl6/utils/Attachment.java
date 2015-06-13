@@ -7,7 +7,10 @@ import java.nio.ByteOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.properties.Globals;
+import com.lvl6.proto.ProtocolsProto.EventProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 
 /**
@@ -23,6 +26,9 @@ public class Attachment {
 
 	private Logger log = LoggerFactory.getLogger(Attachment.class);
 
+	/** size in bytes of the payload (GameEvent) */
+	public int eventSize;
+
 	/** event type for this message */
 	public EventProtocolRequest eventType;
 
@@ -32,6 +38,9 @@ public class Attachment {
 	/** size in bytes of the payload (GameEvent) */
 	public int tag;
 
+	/** size in bytes of the payload (GameEvent) */
+	public String eventUuid;
+
 	/** do we have a full header yet? */
 	private boolean gotHeader;
 
@@ -40,6 +49,9 @@ public class Attachment {
 
 	/** temporary storage of the payload before it is read into an event */
 	public byte payload[];
+	
+	/** Event info */
+	public EventProto ep;
 
 	protected ByteOrder getByteOrder() {
 		return ByteOrder.BIG_ENDIAN;
@@ -64,7 +76,7 @@ public class Attachment {
 	 * @return true if the event is ready, otherwise false
 	 */
 	public boolean eventReady() throws IllegalArgumentException {
-		if (checkHeader() && checkPayload())
+		if (checkEvent())
 			return true;
 		else
 			return false;
@@ -82,12 +94,11 @@ public class Attachment {
 	 * 
 	 * @return true if the header is fully available, otherwise false
 	 */
-	private boolean checkHeader() throws IllegalArgumentException {
-		if (gotHeader)
-			return true;
-		if (readBuff.remaining() >= HEADER_SIZE) {
+	private boolean checkEvent() throws IllegalArgumentException {
+		if (!gotHeader && readBuff.remaining() >= HEADER_SIZE) {
 
 			// read the header info
+
 			eventType = EventProtocolRequest.valueOf(readBuff.getInt());
 			tag = readBuff.getInt();
 			payloadSize = readBuff.getInt();
@@ -96,24 +107,28 @@ public class Attachment {
 					+ payloadSize);
 
 			gotHeader = true;
-			return true;
-		} else {
-			return false;
 		}
-	}
 
-	/**
-	 * check for a complete payload
-	 */
-	private boolean checkPayload() {
-		if (readBuff.remaining() >= payloadSize) {
+		if (gotHeader && readBuff.remaining() >= eventSize) {
 			try {
-				readBuff.get(payload, 0, payloadSize);
+				ep = EventProto.parseFrom(ByteString.copyFrom(readBuff, eventSize));
+
+				tag = ep.getTagNum();
+				eventType = EventProtocolRequest.valueOf(ep.getEventType());
+				eventUuid = ep.getEventUuid();
+				setPayload(ep.getEventBytes().toByteArray());
+
+				log.debug("Read event type: " + eventType + " and size: "
+						+ payloadSize);
+
 				return true;
+			} catch (InvalidProtocolBufferException e) {
+				log.error("Invalid Protobuf exception", e);
 			} catch (BufferUnderflowException bue) {
 				log.error("buffer underflow", bue);
 			}
 		}
+		
 		return false;
-	}
+}
 }// Attachment

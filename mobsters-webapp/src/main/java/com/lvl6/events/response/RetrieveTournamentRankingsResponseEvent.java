@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class RetrieveTournamentRankingsResponseEvent extends NormalResponseEvent {
+//public class RetrieveTournamentRankingsResponseEvent extends NormalResponseEvent<RetrieveTournamentRankingsResponseProto> {
 //
-//  private RetrieveTournamentRankingsResponseProto retrieveTournamentRankingsResponseProto;
+//  
 //  
 //  public RetrieveTournamentRankingsResponseEvent(String playerId) {
 //    super(playerId);
@@ -24,14 +24,14 @@
 //   * versions on the client and use old-style socket input/output streams
 //   */
 //  public int write(ByteBuffer buff) {
-//    ByteString b = retrieveTournamentRankingsResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(buff);
 //    return b.size();
 //  }
 //
 //  public void setRetrieveTournamentRankingsResponseProto(
-//      RetrieveTournamentRankingsResponseProto retrieveTournamentRankingsResponseProto) {
-//    this.retrieveTournamentRankingsResponseProto = retrieveTournamentRankingsResponseProto;
+//      RetrieveTournamentRankingsResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //  
 //}

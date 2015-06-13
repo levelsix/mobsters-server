@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -31,10 +30,11 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class ReviveInDungeonController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -56,7 +56,7 @@ public class ReviveInDungeonController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public ReviveInDungeonController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class ReviveInDungeonController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ReviveInDungeonRequestProto reqProto = ((ReviveInDungeonRequestEvent) event)
 				.getReviveInDungeonRequestProto();
 
@@ -111,8 +111,8 @@ public class ReviveInDungeonController extends EventController {
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setReviveInDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -145,8 +145,8 @@ public class ReviveInDungeonController extends EventController {
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setReviveInDungeonResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -154,7 +154,7 @@ public class ReviveInDungeonController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 				writeToUserCurrencyHistory(userId, aUser, userTaskId, curTime,
 						previousGems, currencyChange);
 			}
@@ -166,8 +166,8 @@ public class ReviveInDungeonController extends EventController {
 				ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setReviveInDungeonResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ReviveInDungeonController processEvent",

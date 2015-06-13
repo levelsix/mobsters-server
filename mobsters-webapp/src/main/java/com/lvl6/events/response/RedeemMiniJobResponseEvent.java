@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RedeemMiniJobResponseEvent extends NormalResponseEvent {
+public class RedeemMiniJobResponseEvent extends NormalResponseEvent<RedeemMiniJobResponseProto> {
 
-	private RedeemMiniJobResponseProto redeemMiniJobResponseProto;
+	
 
 	public RedeemMiniJobResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RedeemMiniJobResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = redeemMiniJobResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRedeemMiniJobResponseProto(
-			RedeemMiniJobResponseProto redeemMiniJobResponseProto) {
-		this.redeemMiniJobResponseProto = redeemMiniJobResponseProto;
+			RedeemMiniJobResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return redeemMiniJobResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

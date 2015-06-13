@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SellUserMonsterResponseEvent extends NormalResponseEvent {
+public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMonsterResponseProto> {
 
-	private SellUserMonsterResponseProto sellUserMonsterResponseProto;
+	
 
 	public SellUserMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class SellUserMonsterResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = sellUserMonsterResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSellUserMonsterResponseProto(
-			SellUserMonsterResponseProto sellUserMonsterResponseProto) {
-		this.sellUserMonsterResponseProto = sellUserMonsterResponseProto;
+			SellUserMonsterResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public SellUserMonsterResponseProto getSellUserMonsterResponseProto() {   //because APNS required
-		return sellUserMonsterResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return sellUserMonsterResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class PurchaseNormStructureResponseEvent extends NormalResponseEvent {
+public class PurchaseNormStructureResponseEvent extends NormalResponseEvent<PurchaseNormStructureResponseProto> {
 
-	private PurchaseNormStructureResponseProto purchaseNormStructureResponseProto;
+	
 
 	public PurchaseNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -18,17 +18,17 @@ public class PurchaseNormStructureResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = purchaseNormStructureResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPurchaseNormStructureResponseProto(
-			PurchaseNormStructureResponseProto purchaseNormStructureResponseProto) {
-		this.purchaseNormStructureResponseProto = purchaseNormStructureResponseProto;
+			PurchaseNormStructureResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public int eventSize() {
-		return purchaseNormStructureResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

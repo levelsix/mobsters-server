@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
@@ -52,12 +51,13 @@ import com.lvl6.server.controller.actionobjects.EndPvpBattleAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class EndPvpBattleController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -118,7 +118,7 @@ public class EndPvpBattleController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	public EndPvpBattleController() {
-		numAllocatedThreads = 7;
+		
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class EndPvpBattleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndPvpBattleRequestProto reqProto = ((EndPvpBattleRequestEvent) event)
 				.getEndPvpBattleRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -199,7 +199,7 @@ public class EndPvpBattleController extends EventController {
 		if (invalidUuids) {
 			resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
 			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -256,8 +256,8 @@ public class EndPvpBattleController extends EventController {
 			}
 
 			//respond to the attacker
-			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			//TODO: NEED TO REFACTOR CONSTRUCTING THE PvpBattleHistoryProto
 			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -277,14 +277,14 @@ public class EndPvpBattleController extends EventController {
 					resEvent.setTag(0);
 					resEventDefender.setEndPvpBattleResponseProto(resBuilder
 							.build());
-					server.writeEvent(resEventDefender);
+					responses.normalResponseEvents().add(resEventDefender);
 				}
 				//regardless of whether the attacker won, his elo will change
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								attacker, epba.getAttackerPlfu(), null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				//defender's elo and resources changed only if attacker won, and defender is real
 				if (attackerWon && null != defender) {
@@ -292,7 +292,7 @@ public class EndPvpBattleController extends EventController {
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									defender, epba.getDefenderPlfu(), null);
 					resEventUpdate.setTag(event.getTag());
-					server.writeEvent(resEventUpdateDefender);
+					responses.normalResponseEvents().add(resEventUpdateDefender);
 				}
 
 				if (attackerWon) {
@@ -307,8 +307,8 @@ public class EndPvpBattleController extends EventController {
 			log.error("exception in EndPvpBattleController processEvent", e);
 			//don't let the client hang
 			try {
-				resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in EndPvpBattleController processEvent",
 						e);

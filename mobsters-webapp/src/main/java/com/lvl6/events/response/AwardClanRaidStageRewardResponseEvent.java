@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent {
+public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent<AwardClanRaidStageRewardResponseProto> {
 
-	private AwardClanRaidStageRewardResponseProto awardClanRaidStageRewardResponseProto;
+	
 
 	public AwardClanRaidStageRewardResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = awardClanRaidStageRewardResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setAwardClanRaidStageRewardResponseProto(
-			AwardClanRaidStageRewardResponseProto awardClanRaidStageRewardResponseProto) {
-		this.awardClanRaidStageRewardResponseProto = awardClanRaidStageRewardResponseProto;
+			AwardClanRaidStageRewardResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return awardClanRaidStageRewardResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

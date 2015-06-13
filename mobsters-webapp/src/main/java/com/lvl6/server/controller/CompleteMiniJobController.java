@@ -30,6 +30,7 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -55,7 +56,7 @@ public class CompleteMiniJobController extends EventController {
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
 
 	public CompleteMiniJobController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class CompleteMiniJobController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent) event)
 				.getCompleteMiniJobRequestProto();
 
@@ -108,8 +109,8 @@ public class CompleteMiniJobController extends EventController {
 			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -140,8 +141,8 @@ public class CompleteMiniJobController extends EventController {
 			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -149,7 +150,7 @@ public class CompleteMiniJobController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(user, userMiniJobId, currencyChange,
 						clientTime, previousGems);
@@ -163,8 +164,8 @@ public class CompleteMiniJobController extends EventController {
 				CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CompleteMiniJobController processEvent",

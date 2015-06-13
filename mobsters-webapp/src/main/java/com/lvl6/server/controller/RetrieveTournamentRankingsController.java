@@ -28,7 +28,7 @@
 //import com.lvl6.server.Locker;
 //
 //@Component
-//@DependsOn("gameServer")
+//
 //public class RetrieveTournamentRankingsController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -41,7 +41,7 @@
 //  protected Locker locker;
 //
 //  public RetrieveTournamentRankingsController() {
-//    numAllocatedThreads = 5;
+//    
 //  }
 //
 //  @Override
@@ -55,7 +55,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    RetrieveTournamentRankingsRequestProto reqProto = ((RetrieveTournamentRankingsRequestEvent) event)
 //        .getRetrieveTournamentRankingsRequestProto();
 //
@@ -102,9 +102,9 @@
 //      RetrieveTournamentRankingsResponseProto resProto = resBuilder.build();
 //      RetrieveTournamentRankingsResponseEvent resEvent = new RetrieveTournamentRankingsResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
-//      resEvent.setRetrieveTournamentRankingsResponseProto(resProto);
+//      resEvent.setResponseProto(resProto);
 //
-//      server.writeEvent(resEvent);
+//      responses.normalResponseEvents().add(resEvent);
 //    } catch (Exception e) {
 //      log.error(
 //          "exception in RetrieveTournamentController processEvent",

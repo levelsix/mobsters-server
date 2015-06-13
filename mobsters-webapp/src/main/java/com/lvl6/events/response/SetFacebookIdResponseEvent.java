@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SetFacebookIdResponseEvent extends NormalResponseEvent {
+public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookIdResponseProto> {
 
-	private SetFacebookIdResponseProto setFacebookIdResponseProto;
+	
 
 	public SetFacebookIdResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class SetFacebookIdResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = setFacebookIdResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSetFacebookIdResponseProto(
-			SetFacebookIdResponseProto setFacebookIdResponseProto) {
-		this.setFacebookIdResponseProto = setFacebookIdResponseProto;
+			SetFacebookIdResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return setFacebookIdResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

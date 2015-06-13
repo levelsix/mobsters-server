@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -26,10 +25,11 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class UpdateMonsterHealthController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -45,7 +45,7 @@ public class UpdateMonsterHealthController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public UpdateMonsterHealthController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class UpdateMonsterHealthController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent) event)
 				.getUpdateMonsterHealthRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -102,7 +102,7 @@ public class UpdateMonsterHealthController extends EventController {
 		try {
 			userUuid = UUID.fromString(userId);
 
-			if (userTaskUuid != null) {
+			if (userTaskUuid != null) {//TODO: this doesn't make sense
 				userTaskUuid = UUID.fromString(userTaskId);
 			}
 
@@ -125,8 +125,8 @@ public class UpdateMonsterHealthController extends EventController {
 			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -152,8 +152,8 @@ public class UpdateMonsterHealthController extends EventController {
 			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -165,8 +165,8 @@ public class UpdateMonsterHealthController extends EventController {
 				UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in UpdateMonsterHealthController processEvent",

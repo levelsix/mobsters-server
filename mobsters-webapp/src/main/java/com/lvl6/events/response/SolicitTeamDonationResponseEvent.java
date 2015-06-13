@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class SolicitTeamDonationResponseEvent extends NormalResponseEvent {
+public class SolicitTeamDonationResponseEvent extends NormalResponseEvent<SolicitTeamDonationResponseProto> {
 
-	private SolicitTeamDonationResponseProto solicitTeamDonationResponseProto;
+	
 
 	public SolicitTeamDonationResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class SolicitTeamDonationResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = solicitTeamDonationResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setSolicitTeamDonationResponseProto(
-			SolicitTeamDonationResponseProto solicitTeamDonationResponseProto) {
-		this.solicitTeamDonationResponseProto = solicitTeamDonationResponseProto;
+			SolicitTeamDonationResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return solicitTeamDonationResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

@@ -111,6 +111,10 @@ public class Locker {
 	//either returns true or throws exception
 	public boolean lockPlayer(UUID playerUuid, String lockedByClass) {
 		String playerId = playerUuid.toString();
+		return lockPlayer(playerId,lockedByClass);
+	}
+
+	public boolean lockPlayer(String playerId,String lockedByClass) {
 		log.info("Locking player {} from class {}", playerId, lockedByClass);
 		// Lock playerLock = hazel.getLock(playersInAction.lockName(playerId));
 		try {
@@ -155,6 +159,10 @@ public class Locker {
 
 	public void unlockPlayer(UUID playerUuid, String fromClass) {
 		String playerId = playerUuid.toString();
+		unlockPlayer(playerId, fromClass);
+	}
+
+	public void unlockPlayer(String playerId, String fromClass) {
 		log.info("Unlocking player: " + playerId + " from class: " + fromClass);
 		// ILock lock = hazel.getLock(playersInAction.lockName(playerId));
 		try {

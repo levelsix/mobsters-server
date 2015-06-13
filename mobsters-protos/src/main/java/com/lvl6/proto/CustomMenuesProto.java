@@ -70,6 +70,24 @@ public final class CustomMenuesProto {
      */
     com.google.protobuf.ByteString
         getImageNameBytes();
+
+    /**
+     * <code>optional int32 ipadPositionX = 7;</code>
+     */
+    boolean hasIpadPositionX();
+    /**
+     * <code>optional int32 ipadPositionX = 7;</code>
+     */
+    int getIpadPositionX();
+
+    /**
+     * <code>optional int32 ipadPositionY = 8;</code>
+     */
+    boolean hasIpadPositionY();
+    /**
+     * <code>optional int32 ipadPositionY = 8;</code>
+     */
+    int getIpadPositionY();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CustomMenuProto}
@@ -152,6 +170,16 @@ public final class CustomMenuesProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
               imageName_ = bs;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              ipadPositionX_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              ipadPositionY_ = input.readInt32();
               break;
             }
           }
@@ -311,6 +339,36 @@ public final class CustomMenuesProto {
       }
     }
 
+    public static final int IPADPOSITIONX_FIELD_NUMBER = 7;
+    private int ipadPositionX_;
+    /**
+     * <code>optional int32 ipadPositionX = 7;</code>
+     */
+    public boolean hasIpadPositionX() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 ipadPositionX = 7;</code>
+     */
+    public int getIpadPositionX() {
+      return ipadPositionX_;
+    }
+
+    public static final int IPADPOSITIONY_FIELD_NUMBER = 8;
+    private int ipadPositionY_;
+    /**
+     * <code>optional int32 ipadPositionY = 8;</code>
+     */
+    public boolean hasIpadPositionY() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 ipadPositionY = 8;</code>
+     */
+    public int getIpadPositionY() {
+      return ipadPositionY_;
+    }
+
     private void initFields() {
       customMenuId_ = 0;
       positionX_ = 0;
@@ -318,6 +376,8 @@ public final class CustomMenuesProto {
       positionZ_ = 0;
       isJiggle_ = false;
       imageName_ = "";
+      ipadPositionX_ = 0;
+      ipadPositionY_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -349,6 +409,12 @@ public final class CustomMenuesProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, ipadPositionX_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, ipadPositionY_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -382,6 +448,14 @@ public final class CustomMenuesProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, ipadPositionX_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, ipadPositionY_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -512,6 +586,10 @@ public final class CustomMenuesProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         imageName_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        ipadPositionX_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        ipadPositionY_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -564,6 +642,14 @@ public final class CustomMenuesProto {
           to_bitField0_ |= 0x00000020;
         }
         result.imageName_ = imageName_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.ipadPositionX_ = ipadPositionX_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.ipadPositionY_ = ipadPositionY_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -599,6 +685,12 @@ public final class CustomMenuesProto {
           bitField0_ |= 0x00000020;
           imageName_ = other.imageName_;
           onChanged();
+        }
+        if (other.hasIpadPositionX()) {
+          setIpadPositionX(other.getIpadPositionX());
+        }
+        if (other.hasIpadPositionY()) {
+          setIpadPositionY(other.getIpadPositionY());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -863,6 +955,70 @@ public final class CustomMenuesProto {
         return this;
       }
 
+      private int ipadPositionX_ ;
+      /**
+       * <code>optional int32 ipadPositionX = 7;</code>
+       */
+      public boolean hasIpadPositionX() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 ipadPositionX = 7;</code>
+       */
+      public int getIpadPositionX() {
+        return ipadPositionX_;
+      }
+      /**
+       * <code>optional int32 ipadPositionX = 7;</code>
+       */
+      public Builder setIpadPositionX(int value) {
+        bitField0_ |= 0x00000040;
+        ipadPositionX_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 ipadPositionX = 7;</code>
+       */
+      public Builder clearIpadPositionX() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        ipadPositionX_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int ipadPositionY_ ;
+      /**
+       * <code>optional int32 ipadPositionY = 8;</code>
+       */
+      public boolean hasIpadPositionY() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 ipadPositionY = 8;</code>
+       */
+      public int getIpadPositionY() {
+        return ipadPositionY_;
+      }
+      /**
+       * <code>optional int32 ipadPositionY = 8;</code>
+       */
+      public Builder setIpadPositionY(int value) {
+        bitField0_ |= 0x00000080;
+        ipadPositionY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 ipadPositionY = 8;</code>
+       */
+      public Builder clearIpadPositionY() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        ipadPositionY_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CustomMenuProto)
     }
 
@@ -888,11 +1044,12 @@ public final class CustomMenuesProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020CustomMenu.proto\022\016com.lvl6.proto\"\205\001\n\017C" +
+      "\n\020CustomMenu.proto\022\016com.lvl6.proto\"\263\001\n\017C" +
       "ustomMenuProto\022\024\n\014customMenuId\030\001 \001(\005\022\021\n\t" +
       "positionX\030\002 \001(\005\022\021\n\tpositionY\030\003 \001(\005\022\021\n\tpo" +
       "sitionZ\030\004 \001(\005\022\020\n\010isJiggle\030\005 \001(\010\022\021\n\timage" +
-      "Name\030\006 \001(\tB\023B\021CustomMenuesProto"
+      "Name\030\006 \001(\t\022\025\n\ripadPositionX\030\007 \001(\005\022\025\n\ripa" +
+      "dPositionY\030\010 \001(\005B\023B\021CustomMenuesProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -911,7 +1068,7 @@ public final class CustomMenuesProto {
     internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CustomMenuProto_descriptor,
-        new java.lang.String[] { "CustomMenuId", "PositionX", "PositionY", "PositionZ", "IsJiggle", "ImageName", });
+        new java.lang.String[] { "CustomMenuId", "PositionX", "PositionY", "PositionZ", "IsJiggle", "ImageName", "IpadPositionX", "IpadPositionY", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

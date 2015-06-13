@@ -5,11 +5,10 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.eventhandlers.AbstractGameEventHandler;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 
-public class GameEventSaveHandler extends AbstractGameEventHandler {
+public class GameEventSaveHandler{// extends AbstractGameEventHandler {
 
 	protected static Logger log = LoggerFactory
 			.getLogger(GameEventSaveHandler.class);
@@ -24,11 +23,9 @@ public class GameEventSaveHandler extends AbstractGameEventHandler {
 		this.recorder = recorder;
 	}
 
-	@Override
-	protected void delegateEvent(byte[] bytes, RequestEvent event,
-			String ip_connection_id, EventProtocolRequest eventType) {
+	protected void delegateEvent(RequestEvent event,EventProtocolRequest eventType) {
 		log.info("Persisting event for load testing");
-		recorder.persistEvent(event.getPlayerId(), eventType.getNumber(), bytes);
+		//recorder.persistEvent(event.getPlayerId(), eventType.getNumber(), event.);
 	}
 
 }

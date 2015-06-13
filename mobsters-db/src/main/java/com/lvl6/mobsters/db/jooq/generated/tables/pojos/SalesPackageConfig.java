@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "sales_package_config", schema = "mobsters")
 public class SalesPackageConfig implements ISalesPackageConfig {
 
-	private static final long serialVersionUID = -1489327440;
+	private static final long serialVersionUID = -1040029929;
 
 	private Integer   id;
 	private String    productId;
@@ -42,6 +42,7 @@ public class SalesPackageConfig implements ISalesPackageConfig {
 	private Timestamp timeStart;
 	private Timestamp timeEnd;
 	private Integer   succId;
+	private Integer   priority;
 	private Integer   customMenuId;
 	private String    animatingIcon;
 	private String    slamIcon;
@@ -58,6 +59,7 @@ public class SalesPackageConfig implements ISalesPackageConfig {
 		this.timeStart = value.timeStart;
 		this.timeEnd = value.timeEnd;
 		this.succId = value.succId;
+		this.priority = value.priority;
 		this.customMenuId = value.customMenuId;
 		this.animatingIcon = value.animatingIcon;
 		this.slamIcon = value.slamIcon;
@@ -73,6 +75,7 @@ public class SalesPackageConfig implements ISalesPackageConfig {
 		Timestamp timeStart,
 		Timestamp timeEnd,
 		Integer   succId,
+		Integer   priority,
 		Integer   customMenuId,
 		String    animatingIcon,
 		String    slamIcon,
@@ -86,6 +89,7 @@ public class SalesPackageConfig implements ISalesPackageConfig {
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.succId = succId;
+		this.priority = priority;
 		this.customMenuId = customMenuId;
 		this.animatingIcon = animatingIcon;
 		this.slamIcon = slamIcon;
@@ -194,6 +198,19 @@ public class SalesPackageConfig implements ISalesPackageConfig {
 		return this;
 	}
 
+	@Column(name = "priority", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getPriority() {
+		return this.priority;
+	}
+
+	@Override
+	public SalesPackageConfig setPriority(Integer priority) {
+		this.priority = priority;
+		return this;
+	}
+
 	@Column(name = "custom_menu_id", precision = 10)
 	@Override
 	public Integer getCustomMenuId() {
@@ -262,6 +279,7 @@ public class SalesPackageConfig implements ISalesPackageConfig {
 		setTimeStart(from.getTimeStart());
 		setTimeEnd(from.getTimeEnd());
 		setSuccId(from.getSuccId());
+		setPriority(from.getPriority());
 		setCustomMenuId(from.getCustomMenuId());
 		setAnimatingIcon(from.getAnimatingIcon());
 		setSlamIcon(from.getSlamIcon());

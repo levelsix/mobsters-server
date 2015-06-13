@@ -19,14 +19,25 @@ import com.lvl6.server.dynamodb.tables.TTLDef
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.ScanRequest
 import com.amazonaws.services.dynamodbv2.document.DeleteItemOutcome
+import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
+import com.amazonaws.services.dynamodbv2.document.Item
+import com.lvl6.server.dynamodb.Converter._
+import scala.beans.BeanProperty
 
-//@Component
+
+@Component
 class DynamoDBService extends LazyLogging {
+  
   
   protected var client:AmazonDynamoDBClient = null
   protected var dynamoDB:DynamoDB = null
 
+  @BeanProperty
   var tablePrefix:String = ""
+  
+  @BeanProperty
+  var isLocal = false//for testing dynamo locally
+  
   
   def provisionedThroughput:ProvisionedThroughput = {
     new ProvisionedThroughput().withReadCapacityUnits(10l).withWriteCapacityUnits(10l)
@@ -84,7 +95,7 @@ class DynamoDBService extends LazyLogging {
   }
   
   val ttlFilterKey = ":ttlTime"
-  @Scheduled(fixedDelay=300000l)
+  //@Scheduled(fixedDelay=300000l)
   def checkTTL={
      tableDefinitions.foreach(checkTTLForTable)   
   }
@@ -119,10 +130,21 @@ class DynamoDBService extends LazyLogging {
     atts
   }
   
+  def putItem(tableDef:TableDefinition, caseClass:AnyRef):PutItemOutcome={
+    val item:Item = new Item();
+    caseClassToMap(caseClass).foreach{ case (key, value) =>
+      if(key.equals(tableDef.hashKeyName))
+        item.withPrimaryKey(key, value)
+      else
+        item.`with`(key, value)
+    }
+    getTable(tableDef).putItem(item)
+  }
   
   @PostConstruct
   def setup={
     client = new AmazonDynamoDBClient()
+    if(isLocal) client.setEndpoint("http://localhost:8000")
     dynamoDB = new DynamoDB(client)
   }
   

@@ -7,10 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventBoosterPackProto.ReceivedRareBoosterPurchaseResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ReceivedRareBoosterPurchaseResponseEvent extends
-		NormalResponseEvent {
+public class ReceivedRareBoosterPurchaseResponseEvent extends	NormalResponseEvent<ReceivedRareBoosterPurchaseResponseProto> {
 
-	private ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto;
+	
 
 	public ReceivedRareBoosterPurchaseResponseEvent(String playerId) {
 		super(playerId);
@@ -19,18 +18,18 @@ public class ReceivedRareBoosterPurchaseResponseEvent extends
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = receivedRareBoosterPurchaseResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setReceivedRareBoosterPurchaseResponseProto(
-			ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto) {
-		this.receivedRareBoosterPurchaseResponseProto = receivedRareBoosterPurchaseResponseProto;
+			ReceivedRareBoosterPurchaseResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return receivedRareBoosterPurchaseResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 

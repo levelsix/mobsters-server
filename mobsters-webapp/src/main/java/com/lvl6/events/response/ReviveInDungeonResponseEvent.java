@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ReviveInDungeonResponseEvent extends NormalResponseEvent {
+public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDungeonResponseProto> {
 
-	private ReviveInDungeonResponseProto reviveInDungeonResponseProto;
+	
 
 	public ReviveInDungeonResponseEvent(String playerId) {
 		super(playerId);
@@ -18,22 +18,22 @@ public class ReviveInDungeonResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = reviveInDungeonResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setReviveInDungeonResponseProto(
-			ReviveInDungeonResponseProto reviveInDungeonResponseProto) {
-		this.reviveInDungeonResponseProto = reviveInDungeonResponseProto;
+			ReviveInDungeonResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public ReviveInDungeonResponseProto getReviveInDungeonResponseProto() {   //because APNS required
-		return reviveInDungeonResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return reviveInDungeonResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

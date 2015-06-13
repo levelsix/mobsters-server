@@ -12,19 +12,11 @@
         http://www.springframework.org/schema/tx 
      	http://www.springframework.org/schema/tx/spring-tx.xsd
 		">
-
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" -->
-	<!-- destroy-method="close" depends-on="contextApplicationContextProvider"> -->
-	<!-- <property name="driverClass" value="${jdbc.driverClassName}" /> -->
-	<!-- <property name="jdbcUrl" value="${jdbc.url}" /> -->
-	<!-- <property name="user" value="${jdbc.username}" /> -->
-	<!-- <property name="password" value="${jdbc.password}" /> -->
-	<!-- <property name="minPoolSize" value="5" /> -->
-	<!-- <property name="maxPoolSize" value="20" /> -->
-	<!-- <property name="maxStatements" value="50" /> -->
-	<!-- <property name="idleConnectionTestPeriod" value="3000" /> -->
-	<!-- <property name="loginTimeout" value="300" /> -->
-	<!-- </bean> -->
+	
+	<bean id="dynamoDBService" class="com.lvl6.server.dynamodb.DynamoDBService">
+		<property name="tablePrefix" value="${dynamodb.table.prefix}" />
+		<property name="isLocal" value="${dynamodb.isLocal}" />
+	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
@@ -63,8 +55,6 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	
-	
 	<!-- jooq -->
 
     <!-- Configure jOOQ's ConnectionProvider to use Spring's TransactionAwareDataSourceProxy,
@@ -93,4 +83,32 @@
         </property>
         <property name="connectionProvider" ref="connectionProvider" />
     </bean>
+    
+<!--     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftConfigDao" id="giftConfigDao"> -->
+<!--         <constructor-arg index="0" ref="config" /> -->
+<!--     </bean> -->
+
+    <!-- user data -->
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao" id="CustomTranslationsDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao" id="PvpLeagueForUserDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao" id="userCurrencyHistoryDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+
+    
+    <!-- static data -->
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomMenuConfigDao" id="customMenuConfigDao">
+       <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniEventConfigDao" id="miniEventConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniEventTimetableConfigDao" id="miniEventTimetableConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
 </beans>

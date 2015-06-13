@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -27,10 +26,11 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AvengeClanMateAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class AvengeClanMateController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -55,7 +55,7 @@ public class AvengeClanMateController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
 
 	public AvengeClanMateController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class AvengeClanMateController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AvengeClanMateRequestProto reqProto = ((AvengeClanMateRequestEvent) event)
 				.getAvengeClanMateRequestProto();
 
@@ -121,8 +121,8 @@ public class AvengeClanMateController extends EventController {
 			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAvengeClanMateResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -155,7 +155,7 @@ public class AvengeClanMateController extends EventController {
 			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (resBuilder.getStatus().equals(AvengeClanMateStatus.SUCCESS)) {
 				//				User defender = acma.getVictim();
@@ -180,10 +180,10 @@ public class AvengeClanMateController extends EventController {
 				//					cmtdId, msfu, msfuMonsterIdDropped);
 
 				//				resBuilder.setVictim(pp);
-				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 
 			}
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in AvengeClanMate processEvent", e);
@@ -192,8 +192,8 @@ public class AvengeClanMateController extends EventController {
 				AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in AvengeClanMate processEvent", e);
 			}
@@ -244,7 +244,7 @@ public class AvengeClanMateController extends EventController {
 	//		  rcdrpb.setClanData(cdp);
 	//		  
 	//		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-	//		  server.writeEvent(rcdre);
+	//		  responses.normalResponseEvents().add(rcdre);
 	//	  }
 
 	public Locker getLocker() {

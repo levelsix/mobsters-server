@@ -51,6 +51,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
@@ -64,6 +65,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -117,6 +119,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
@@ -418,6 +421,11 @@ public class Tables {
 	public static final CustomMenuConfig CUSTOM_MENU_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig.CUSTOM_MENU_CONFIG;
 
 	/**
+	 * The table mobsters.custom_translations
+	 */
+	public static final CustomTranslations CUSTOM_TRANSLATIONS = com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations.CUSTOM_TRANSLATIONS;
+
+	/**
 	 * The table mobsters.event_persistent_config
 	 */
 	public static final EventPersistentConfig EVENT_PERSISTENT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig.EVENT_PERSISTENT_CONFIG;
@@ -481,6 +489,11 @@ public class Tables {
 	 * The table mobsters.item_secret_gift_for_user
 	 */
 	public static final ItemSecretGiftForUser ITEM_SECRET_GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER;
+
+	/**
+	 * VIEW
+	 */
+	public static final LbCurHist LB_CUR_HIST = com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist.LB_CUR_HIST;
 
 	/**
 	 * The table mobsters.load_testing_events
@@ -746,6 +759,11 @@ public class Tables {
 	 * The table mobsters.sales_package_config
 	 */
 	public static final SalesPackageConfig SALES_PACKAGE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig.SALES_PACKAGE_CONFIG;
+
+	/**
+	 * The table mobsters.secret_gift_config
+	 */
+	public static final SecretGiftConfig SECRET_GIFT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig.SECRET_GIFT_CONFIG;
 
 	/**
 	 * The table mobsters.server_toggle_config

@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -23,18 +22,19 @@ import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.server.controller.actionobjects.CustomizePvpBoardObstacleAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class CustomizePvpBoardObstacleController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public CustomizePvpBoardObstacleController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Autowired
@@ -57,7 +57,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CustomizePvpBoardObstacleRequestProto reqProto = ((CustomizePvpBoardObstacleRequestEvent) event)
 				.getCustomizePvpBoardObstacleRequestProto();
 
@@ -91,13 +91,13 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			Collection<PvpBoardObstacleForUser> newOrUpdatedPbofus = javafyUserPvpBoardObstacleProto(nuOrUpdatedObstacles);
 			CustomizePvpBoardObstacleAction rsga = new CustomizePvpBoardObstacleAction(
@@ -109,9 +109,9 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error(
@@ -123,9 +123,9 @@ public class CustomizePvpBoardObstacleController extends EventController {
 				CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCustomizePvpBoardObstacleResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in CustomizePvpBoardObstacleController processEvent",
@@ -133,7 +133,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 			}
 
 		} finally {
-			//			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

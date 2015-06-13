@@ -509,6 +509,14 @@ public final class ProtocolsProto {
      * <code>C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
      */
     C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT(119, 503),
+    /**
+     * <code>C_PURCHASE_ITEMS_WITH_GEMS_EVENT = 504;</code>
+     */
+    C_PURCHASE_ITEMS_WITH_GEMS_EVENT(120, 504),
+    /**
+     * <code>C_RECONNECT_EVENT = 505;</code>
+     */
+    C_RECONNECT_EVENT(121, 505),
     ;
 
     /**
@@ -1007,6 +1015,14 @@ public final class ProtocolsProto {
      * <code>C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
      */
     public static final int C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT_VALUE = 503;
+    /**
+     * <code>C_PURCHASE_ITEMS_WITH_GEMS_EVENT = 504;</code>
+     */
+    public static final int C_PURCHASE_ITEMS_WITH_GEMS_EVENT_VALUE = 504;
+    /**
+     * <code>C_RECONNECT_EVENT = 505;</code>
+     */
+    public static final int C_RECONNECT_EVENT_VALUE = 505;
 
 
     public final int getNumber() { return value; }
@@ -1133,6 +1149,8 @@ public final class ProtocolsProto {
         case 501: return C_DELETE_CLAN_GIFTS_EVENT;
         case 502: return C_RECEIVED_CLAN_GIFTS_EVENT;
         case 503: return C_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT;
+        case 504: return C_PURCHASE_ITEMS_WITH_GEMS_EVENT;
+        case 505: return C_RECONNECT_EVENT;
         default: return null;
       }
     }
@@ -1725,6 +1743,14 @@ public final class ProtocolsProto {
      * <code>S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
      */
     S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT(129, 503),
+    /**
+     * <code>S_RECONNECT_EVENT = 504;</code>
+     */
+    S_RECONNECT_EVENT(130, 504),
+    /**
+     * <code>S_PURCHASE_ITEMS_WITH_GEMS_EVENT = 505;</code>
+     */
+    S_PURCHASE_ITEMS_WITH_GEMS_EVENT(131, 505),
     ;
 
     /**
@@ -2263,6 +2289,14 @@ public final class ProtocolsProto {
      * <code>S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT = 503;</code>
      */
     public static final int S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT_VALUE = 503;
+    /**
+     * <code>S_RECONNECT_EVENT = 504;</code>
+     */
+    public static final int S_RECONNECT_EVENT_VALUE = 504;
+    /**
+     * <code>S_PURCHASE_ITEMS_WITH_GEMS_EVENT = 505;</code>
+     */
+    public static final int S_PURCHASE_ITEMS_WITH_GEMS_EVENT_VALUE = 505;
 
 
     public final int getNumber() { return value; }
@@ -2399,6 +2433,8 @@ public final class ProtocolsProto {
         case 501: return S_DELETE_CLAN_GIFTS_EVENT;
         case 502: return S_RECEIVED_CLAN_GIFTS_EVENT;
         case 503: return S_RETRIEVE_STRENGTH_LEADER_BOARD_EVENT;
+        case 504: return S_RECONNECT_EVENT;
+        case 505: return S_PURCHASE_ITEMS_WITH_GEMS_EVENT;
         default: return null;
       }
     }
@@ -2450,6 +2486,724 @@ public final class ProtocolsProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EventProtocolResponse)
   }
 
+  public interface EventProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EventProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 eventType = 1;</code>
+     */
+    boolean hasEventType();
+    /**
+     * <code>optional int32 eventType = 1;</code>
+     */
+    int getEventType();
+
+    /**
+     * <code>optional int32 tagNum = 2;</code>
+     */
+    boolean hasTagNum();
+    /**
+     * <code>optional int32 tagNum = 2;</code>
+     */
+    int getTagNum();
+
+    /**
+     * <code>optional string eventUuid = 3;</code>
+     */
+    boolean hasEventUuid();
+    /**
+     * <code>optional string eventUuid = 3;</code>
+     */
+    java.lang.String getEventUuid();
+    /**
+     * <code>optional string eventUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getEventUuidBytes();
+
+    /**
+     * <code>optional bytes eventBytes = 4;</code>
+     */
+    boolean hasEventBytes();
+    /**
+     * <code>optional bytes eventBytes = 4;</code>
+     */
+    com.google.protobuf.ByteString getEventBytes();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.EventProto}
+   */
+  public static final class EventProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EventProto)
+      EventProtoOrBuilder {
+    // Use EventProto.newBuilder() to construct.
+    private EventProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private EventProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final EventProto defaultInstance;
+    public static EventProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public EventProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private EventProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              eventType_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              tagNum_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              eventUuid_ = bs;
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              eventBytes_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ProtocolsProto.internal_static_com_lvl6_proto_EventProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ProtocolsProto.internal_static_com_lvl6_proto_EventProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ProtocolsProto.EventProto.class, com.lvl6.proto.ProtocolsProto.EventProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<EventProto> PARSER =
+        new com.google.protobuf.AbstractParser<EventProto>() {
+      public EventProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EventProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<EventProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int EVENTTYPE_FIELD_NUMBER = 1;
+    private int eventType_;
+    /**
+     * <code>optional int32 eventType = 1;</code>
+     */
+    public boolean hasEventType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 eventType = 1;</code>
+     */
+    public int getEventType() {
+      return eventType_;
+    }
+
+    public static final int TAGNUM_FIELD_NUMBER = 2;
+    private int tagNum_;
+    /**
+     * <code>optional int32 tagNum = 2;</code>
+     */
+    public boolean hasTagNum() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 tagNum = 2;</code>
+     */
+    public int getTagNum() {
+      return tagNum_;
+    }
+
+    public static final int EVENTUUID_FIELD_NUMBER = 3;
+    private java.lang.Object eventUuid_;
+    /**
+     * <code>optional string eventUuid = 3;</code>
+     */
+    public boolean hasEventUuid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string eventUuid = 3;</code>
+     */
+    public java.lang.String getEventUuid() {
+      java.lang.Object ref = eventUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          eventUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string eventUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEventUuidBytes() {
+      java.lang.Object ref = eventUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        eventUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EVENTBYTES_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString eventBytes_;
+    /**
+     * <code>optional bytes eventBytes = 4;</code>
+     */
+    public boolean hasEventBytes() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes eventBytes = 4;</code>
+     */
+    public com.google.protobuf.ByteString getEventBytes() {
+      return eventBytes_;
+    }
+
+    private void initFields() {
+      eventType_ = 0;
+      tagNum_ = 0;
+      eventUuid_ = "";
+      eventBytes_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, eventType_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, tagNum_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getEventUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, eventBytes_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, eventType_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, tagNum_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getEventUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, eventBytes_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ProtocolsProto.EventProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ProtocolsProto.EventProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.EventProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EventProto)
+        com.lvl6.proto.ProtocolsProto.EventProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ProtocolsProto.internal_static_com_lvl6_proto_EventProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ProtocolsProto.internal_static_com_lvl6_proto_EventProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ProtocolsProto.EventProto.class, com.lvl6.proto.ProtocolsProto.EventProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ProtocolsProto.EventProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        eventType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tagNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        eventUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        eventBytes_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ProtocolsProto.internal_static_com_lvl6_proto_EventProto_descriptor;
+      }
+
+      public com.lvl6.proto.ProtocolsProto.EventProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ProtocolsProto.EventProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ProtocolsProto.EventProto build() {
+        com.lvl6.proto.ProtocolsProto.EventProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ProtocolsProto.EventProto buildPartial() {
+        com.lvl6.proto.ProtocolsProto.EventProto result = new com.lvl6.proto.ProtocolsProto.EventProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.eventType_ = eventType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.tagNum_ = tagNum_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.eventUuid_ = eventUuid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.eventBytes_ = eventBytes_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ProtocolsProto.EventProto) {
+          return mergeFrom((com.lvl6.proto.ProtocolsProto.EventProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ProtocolsProto.EventProto other) {
+        if (other == com.lvl6.proto.ProtocolsProto.EventProto.getDefaultInstance()) return this;
+        if (other.hasEventType()) {
+          setEventType(other.getEventType());
+        }
+        if (other.hasTagNum()) {
+          setTagNum(other.getTagNum());
+        }
+        if (other.hasEventUuid()) {
+          bitField0_ |= 0x00000004;
+          eventUuid_ = other.eventUuid_;
+          onChanged();
+        }
+        if (other.hasEventBytes()) {
+          setEventBytes(other.getEventBytes());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ProtocolsProto.EventProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ProtocolsProto.EventProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int eventType_ ;
+      /**
+       * <code>optional int32 eventType = 1;</code>
+       */
+      public boolean hasEventType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 eventType = 1;</code>
+       */
+      public int getEventType() {
+        return eventType_;
+      }
+      /**
+       * <code>optional int32 eventType = 1;</code>
+       */
+      public Builder setEventType(int value) {
+        bitField0_ |= 0x00000001;
+        eventType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 eventType = 1;</code>
+       */
+      public Builder clearEventType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        eventType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int tagNum_ ;
+      /**
+       * <code>optional int32 tagNum = 2;</code>
+       */
+      public boolean hasTagNum() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 tagNum = 2;</code>
+       */
+      public int getTagNum() {
+        return tagNum_;
+      }
+      /**
+       * <code>optional int32 tagNum = 2;</code>
+       */
+      public Builder setTagNum(int value) {
+        bitField0_ |= 0x00000002;
+        tagNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 tagNum = 2;</code>
+       */
+      public Builder clearTagNum() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        tagNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object eventUuid_ = "";
+      /**
+       * <code>optional string eventUuid = 3;</code>
+       */
+      public boolean hasEventUuid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string eventUuid = 3;</code>
+       */
+      public java.lang.String getEventUuid() {
+        java.lang.Object ref = eventUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            eventUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string eventUuid = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEventUuidBytes() {
+        java.lang.Object ref = eventUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          eventUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string eventUuid = 3;</code>
+       */
+      public Builder setEventUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        eventUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string eventUuid = 3;</code>
+       */
+      public Builder clearEventUuid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        eventUuid_ = getDefaultInstance().getEventUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string eventUuid = 3;</code>
+       */
+      public Builder setEventUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        eventUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString eventBytes_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes eventBytes = 4;</code>
+       */
+      public boolean hasEventBytes() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes eventBytes = 4;</code>
+       */
+      public com.google.protobuf.ByteString getEventBytes() {
+        return eventBytes_;
+      }
+      /**
+       * <code>optional bytes eventBytes = 4;</code>
+       */
+      public Builder setEventBytes(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        eventBytes_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes eventBytes = 4;</code>
+       */
+      public Builder clearEventBytes() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        eventBytes_ = getDefaultInstance().getEventBytes();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EventProto)
+    }
+
+    static {
+      defaultInstance = new EventProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.EventProto)
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_EventProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_EventProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2483,221 +3237,226 @@ public final class ProtocolsProto {
       "ward.proto\032\026SharedEnumConfig.proto\032\013Skil" +
       "l.proto\032\020StaticData.proto\032\017Structure.pro" +
       "to\032\nTask.proto\032\025TournamentStuff.proto\032\nU" +
-      "ser.proto*\201 \n\024EventProtocolRequest\022\023\n\017C_" +
-      "STARTUP_EVENT\020\001\022\033\n\027C_IN_APP_PURCHASE_EVE" +
-      "NT\020\002\022#\n\037C_PURCHASE_NORM_STRUCTURE_EVENT\020" +
-      "\003\022)\n%C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVE" +
-      "NT\020\004\022\033\n\027C_SET_FACEBOOK_ID_EVENT\020\005\022\"\n\036C_U" +
-      "PGRADE_NORM_STRUCTURE_EVENT\020\006\0221\n-C_RETRI",
-      "EVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT\020\007" +
-      "\0225\n1C_FINISH_NORM_STRUCT_WAITTIME_WITH_D" +
-      "IAMONDS_EVENT\020\010\022%\n!C_NORM_STRUCT_WAIT_CO" +
-      "MPLETE_EVENT\020\t\022\034\n\030C_LOAD_PLAYER_CITY_EVE" +
-      "NT\020\n\022\'\n#C_EXCHANGE_GEMS_FOR_RESOURCES_EV" +
-      "ENT\020\013\022\030\n\024C_QUEST_ACCEPT_EVENT\020\014\022\032\n\026C_QUE" +
-      "ST_PROGRESS_EVENT\020\r\022\030\n\024C_QUEST_REDEEM_EV" +
-      "ENT\020\016\022#\n\037C_PURCHASE_CITY_EXPANSION_EVENT" +
-      "\020\017\022#\n\037C_EXPANSION_WAIT_COMPLETE_EVENT\020\020\022" +
-      "\024\n\020C_LEVEL_UP_EVENT\020\021\022\027\n\023C_ENABLE_APNS_E",
-      "VENT\020\022\022\027\n\023C_USER_CREATE_EVENT\020\023\022\025\n\021C_LOA" +
-      "D_CITY_EVENT\020\024\022\'\n#C_RETRIEVE_USERS_FOR_U" +
-      "SER_IDS_EVENT\020\025\022\036\n\032C_EARN_FREE_DIAMONDS_" +
-      "EVENT\020\026\022\033\n\027C_SEND_GROUP_CHAT_EVENT\020\027\022\027\n\023" +
-      "C_CREATE_CLAN_EVENT\020\030\022\026\n\022C_LEAVE_CLAN_EV" +
-      "ENT\020\031\022\035\n\031C_REQUEST_JOIN_CLAN_EVENT\020\032\022%\n!" +
-      "C_RETRACT_REQUEST_JOIN_CLAN_EVENT\020\033\0222\n.C" +
-      "_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_" +
-      "EVENT\020\034\022\035\n\031C_TRANSFER_CLAN_OWNERSHIP\020\035\022\036" +
-      "\n\032C_RETRIEVE_CLAN_INFO_EVENT\020\036\022 \n\034C_CHAN",
-      "GE_CLAN_SETTINGS_EVENT\020\037\022!\n\035C_BOOT_PLAYE" +
-      "R_FROM_CLAN_EVENT\020 \022\031\n\025C_PICK_LOCK_BOX_E" +
-      "VENT\020!\022(\n$C_RETRIEVE_TOURNAMENT_RANKINGS" +
-      "_EVENT\020\"\022&\n\"C_SUBMIT_MONSTER_ENHANCEMENT" +
-      "_EVENT\020#\022\032\n\026C_EVOLVE_MONSTER_EVENT\020$\022!\n\035" +
-      "C_PURCHASE_BOOSTER_PACK_EVENT\020%\022\036\n\032C_EVO" +
-      "LUTION_FINISHED_EVENT\020&\022 \n\034C_ACHIEVEMENT" +
-      "_PROGRESS_EVENT\020\'\022\035\n\031C_PRIVATE_CHAT_POST" +
-      "_EVENT\020(\022&\n\"C_RETRIEVE_PRIVATE_CHAT_POST" +
-      "_EVENT\020)\022&\n\"C_REDEEM_USER_LOCK_BOX_ITEMS",
-      "_EVENT\020*\022\031\n\025C_BEGIN_DUNGEON_EVENT\020+\022\027\n\023C" +
-      "_END_DUNGEON_EVENT\020,\022\035\n\031C_REVIVE_IN_DUNG" +
-      "EON_EVENT\020-\022\024\n\020C_QUEUE_UP_EVENT\020.\022!\n\035C_U" +
-      "PDATE_MONSTER_HEALTH_EVENT\020/\022\030\n\024C_HEAL_M" +
-      "ONSTER_EVENT\0200\022\036\n\032C_ACHIEVEMENT_REDEEM_E" +
-      "VENT\0201\022&\n\"C_ADD_MONSTER_TO_BATTLE_TEAM_E" +
-      "VENT\0202\022+\n\'C_REMOVE_MONSTER_FROM_BATTLE_T" +
-      "EAM_EVENT\0203\022+\n\'C_INCREASE_MONSTER_INVENT" +
-      "ORY_SLOT_EVENT\0204\022*\n&C_ENHANCEMENT_WAIT_T" +
-      "IME_COMPLETE_EVENT\0205\022\'\n#C_COMBINE_USER_M",
-      "ONSTER_PIECES_EVENT\0206\022\035\n\031C_SELL_USER_MON" +
-      "STER_EVENT\0207\022\'\n#C_INVITE_FB_FRIENDS_FOR_" +
-      "SLOTS_EVENT\0208\0221\n-C_ACCEPT_AND_REJECT_FB_" +
-      "INVITE_FOR_SLOTS_EVENT\0209\022 \n\034C_UPDATE_USE" +
-      "R_CURRENCY_EVENT\020;\022\034\n\030C_BEGIN_PVP_BATTLE" +
-      "_EVENT\020<\022\032\n\026C_END_PVP_BATTLE_EVENT\020=\022\033\n\027" +
-      "C_BEGIN_CLAN_RAID_EVENT\020>\022$\n C_ATTACK_CL" +
-      "AN_RAID_MONSTER_EVENT\020?\022\"\n\036C_RECORD_CLAN" +
-      "_RAID_STATS_EVENT\020@\022&\n\"C_PROMOTE_DEMOTE_" +
-      "CLAN_MEMBER_EVENT\020A\022\036\n\032C_SET_GAME_CENTER",
-      "_ID_EVENT\020B\022\032\n\026C_SPAWN_OBSTACLE_EVENT\020C\022" +
-      "\"\n\036C_BEGIN_OBSTACLE_REMOVAL_EVENT\020D\022%\n!C" +
-      "_OBSTACLE_REMOVAL_COMPLETE_EVENT\020E\022\032\n\026C_" +
-      "SPAWN_MINI_JOB_EVENT\020F\022\032\n\026C_BEGIN_MINI_J" +
-      "OB_EVENT\020G\022\035\n\031C_COMPLETE_MINI_JOB_EVENT\020" +
-      "H\022\033\n\027C_REDEEM_MINI_JOB_EVENT\020I\022\036\n\032C_SET_" +
-      "AVATAR_MONSTER_EVENT\020J\022!\n\035C_RESTRICT_USE" +
-      "R_MONSTER_EVENT\020K\022#\n\037C_UNRESTRICT_USER_M" +
-      "ONSTER_EVENT\020L\022\033\n\027C_ENHANCE_MONSTER_EVEN" +
-      "T\020M\022\"\n\036C_TRADE_ITEM_FOR_BOOSTER_EVENT\020N\022",
-      "\035\n\031C_SOLICIT_CLAN_HELP_EVENT\020O\022\032\n\026C_GIVE" +
-      "_CLAN_HELP_EVENT\020P\022\031\n\025C_END_CLAN_HELP_EV" +
-      "ENT\020Q\022\032\n\026C_INVITE_TO_CLAN_EVENT\020R\022(\n$C_A" +
-      "CCEPT_OR_REJECT_CLAN_INVITE_EVENT\020S\022\'\n#C" +
-      "_COLLECT_MONSTER_ENHANCEMENT_EVENT\020T\022$\n " +
-      "C_TRADE_ITEM_FOR_SPEED_UPS_EVENT\020U\022!\n\035C_" +
-      "REMOVE_USER_ITEM_USED_EVENT\020V\022$\n C_TRADE" +
-      "_ITEM_FOR_RESOURCES_EVENT\020W\022\036\n\032C_REDEEM_" +
-      "SECRET_GIFT_EVENT\020X\022\035\n\031C_SET_DEFENDING_M" +
-      "SG_EVENT\020Y\022\037\n\033C_BEGIN_CLAN_AVENGING_EVEN",
-      "T\020Z\022\035\n\031C_END_CLAN_AVENGING_EVENT\020[\022\034\n\030C_" +
-      "AVENGE_CLAN_MATE_EVENT\020\\\022$\n C_UPDATE_CLI" +
-      "ENT_TASK_STATE_EVENT\020]\022!\n\035C_SOLICIT_TEAM" +
-      "_DONATION_EVENT\020^\022.\n*C_FULFILL_TEAM_DONA" +
-      "TION_SOLICITATION_EVENT\020_\022+\n\'C_VOID_TEAM" +
-      "_DONATION_SOLICITATION_EVENT\020`\022&\n\"C_RETR" +
-      "IEVE_USER_MONSTER_TEAM_EVENT\020a\022(\n$C_DEST" +
-      "ROY_MONEY_TREE_STRUCTURE_EVENT\020b\022\022\n\016C_LO" +
-      "GOUT_EVENT\020e\022\020\n\013C_DEV_EVENT\020\310\001\022\035\n\030C_PERF" +
-      "ORM_RESEARCH_EVENT\020\311\001\022\'\n\"C_FINISH_PERFOR",
-      "MING_RESEARCH_EVENT\020\312\001\022)\n$C_CUSTOMIZE_PV" +
-      "P_BOARD_OBSTACLE_EVENT\020\313\001\022\037\n\032C_CREATE_BA" +
-      "TTLE_ITEM_EVENT\020\314\001\022 \n\033C_DISCARD_BATTLE_I" +
-      "TEM_EVENT\020\315\001\022!\n\034C_COMPLETE_BATTLE_ITEM_E" +
-      "VENT\020\316\001\022%\n C_REDEEM_MINI_EVENT_REWARD_EV" +
-      "ENT\020\317\001\022 \n\033C_RETRIEVE_MINI_EVENT_EVENT\020\320\001" +
-      "\022\036\n\031C_UPDATE_MINI_EVENT_EVENT\020\321\001\022&\n!C_TR" +
-      "ANSLATE_SELECT_MESSAGES_EVENT\020\322\001\022!\n\034C_UP" +
-      "DATE_USER_STRENGTH_EVENT\020\323\001\022\035\n\030C_REFRESH" +
-      "_MINI_JOB_EVENT\020\324\001\022\031\n\024C_SET_TANGO_ID_EVE",
-      "NT\020\325\001\022\034\n\027C_SEND_TANGO_GIFT_EVENT\020\326\001\022\030\n\023C" +
-      "_DELETE_GIFT_EVENT\020\327\001\022\031\n\024C_COLLECT_GIFT_" +
-      "EVENT\020\330\001\022#\n\036C_RETRIEVE_BATTLE_REPLAY_EVE" +
-      "NT\020\331\001\022\037\n\032C_COLLECT_CLAN_GIFTS_EVENT\020\364\003\022\036" +
-      "\n\031C_DELETE_CLAN_GIFTS_EVENT\020\365\003\022 \n\033C_RECE" +
-      "IVED_CLAN_GIFTS_EVENT\020\366\003\022+\n&C_RETRIEVE_S" +
-      "TRENGTH_LEADER_BOARD_EVENT\020\367\003*\333\"\n\025EventP" +
-      "rotocolResponse\022\023\n\017S_STARTUP_EVENT\020\001\022\033\n\027" +
-      "S_IN_APP_PURCHASE_EVENT\020\002\022#\n\037S_PURCHASE_" +
-      "NORM_STRUCTURE_EVENT\020\003\022)\n%S_MOVE_OR_ROTA",
-      "TE_NORM_STRUCTURE_EVENT\020\004\022\033\n\027S_SET_FACEB" +
-      "OOK_ID_EVENT\020\005\022\"\n\036S_UPGRADE_NORM_STRUCTU" +
-      "RE_EVENT\020\006\0221\n-S_RETRIEVE_CURRENCY_FROM_N" +
-      "ORM_STRUCTURE_EVENT\020\007\0225\n1S_FINISH_NORM_S" +
-      "TRUCT_WAITTIME_WITH_DIAMONDS_EVENT\020\010\022%\n!" +
-      "S_NORM_STRUCT_WAIT_COMPLETE_EVENT\020\t\022\034\n\030S" +
-      "_LOAD_PLAYER_CITY_EVENT\020\n\022\'\n#S_EXCHANGE_" +
-      "GEMS_FOR_RESOURCES_EVENT\020\013\022\030\n\024S_QUEST_AC" +
-      "CEPT_EVENT\020\014\022\032\n\026S_QUEST_PROGRESS_EVENT\020\r" +
-      "\022\030\n\024S_QUEST_REDEEM_EVENT\020\016\022#\n\037S_PURCHASE",
-      "_CITY_EXPANSION_EVENT\020\017\022#\n\037S_EXPANSION_W" +
-      "AIT_COMPLETE_EVENT\020\020\022\024\n\020S_LEVEL_UP_EVENT" +
-      "\020\021\022\027\n\023S_ENABLE_APNS_EVENT\020\022\022\027\n\023S_USER_CR" +
-      "EATE_EVENT\020\023\022\025\n\021S_LOAD_CITY_EVENT\020\024\022\'\n#S" +
-      "_RETRIEVE_USERS_FOR_USER_IDS_EVENT\020\025\022\036\n\032" +
-      "S_EARN_FREE_DIAMONDS_EVENT\020\026\022\033\n\027S_SEND_G" +
-      "ROUP_CHAT_EVENT\020\027\022\027\n\023S_CREATE_CLAN_EVENT" +
-      "\020\030\022\026\n\022S_LEAVE_CLAN_EVENT\020\031\022\035\n\031S_REQUEST_" +
-      "JOIN_CLAN_EVENT\020\032\022%\n!S_RETRACT_REQUEST_J" +
-      "OIN_CLAN_EVENT\020\033\0222\n.S_APPROVE_OR_REJECT_",
-      "REQUEST_TO_JOIN_CLAN_EVENT\020\034\022\035\n\031S_TRANSF" +
-      "ER_CLAN_OWNERSHIP\020\035\022\036\n\032S_RETRIEVE_CLAN_I" +
-      "NFO_EVENT\020\036\022 \n\034S_CHANGE_CLAN_SETTINGS_EV" +
-      "ENT\020\037\022!\n\035S_BOOT_PLAYER_FROM_CLAN_EVENT\020 " +
-      "\022\031\n\025S_PICK_LOCK_BOX_EVENT\020!\022(\n$S_RETRIEV" +
-      "E_TOURNAMENT_RANKINGS_EVENT\020\"\022&\n\"S_SUBMI" +
-      "T_MONSTER_ENHANCEMENT_EVENT\020#\022\032\n\026S_EVOLV" +
-      "E_MONSTER_EVENT\020$\022!\n\035S_PURCHASE_BOOSTER_" +
-      "PACK_EVENT\020%\022\036\n\032S_EVOLUTION_FINISHED_EVE" +
-      "NT\020&\022 \n\034S_ACHIEVEMENT_PROGRESS_EVENT\020\'\022\035",
-      "\n\031S_PRIVATE_CHAT_POST_EVENT\020(\022&\n\"S_RETRI" +
-      "EVE_PRIVATE_CHAT_POST_EVENT\020)\022&\n\"S_REDEE" +
-      "M_USER_LOCK_BOX_ITEMS_EVENT\020*\022\031\n\025S_BEGIN" +
-      "_DUNGEON_EVENT\020+\022\027\n\023S_END_DUNGEON_EVENT\020" +
-      ",\022\035\n\031S_REVIVE_IN_DUNGEON_EVENT\020-\022\024\n\020S_QU" +
-      "EUE_UP_EVENT\020.\022!\n\035S_UPDATE_MONSTER_HEALT" +
-      "H_EVENT\020/\022\030\n\024S_HEAL_MONSTER_EVENT\0200\022\036\n\032S" +
-      "_ACHIEVEMENT_REDEEM_EVENT\0201\022&\n\"S_ADD_MON" +
-      "STER_TO_BATTLE_TEAM_EVENT\0202\022+\n\'S_REMOVE_" +
-      "MONSTER_FROM_BATTLE_TEAM_EVENT\0203\022+\n\'S_IN",
-      "CREASE_MONSTER_INVENTORY_SLOT_EVENT\0204\022*\n" +
-      "&S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT\020" +
-      "5\022\'\n#S_COMBINE_USER_MONSTER_PIECES_EVENT" +
-      "\0206\022\035\n\031S_SELL_USER_MONSTER_EVENT\0207\022\'\n#S_I" +
-      "NVITE_FB_FRIENDS_FOR_SLOTS_EVENT\0208\0221\n-S_" +
-      "ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EV" +
-      "ENT\0209\022 \n\034S_UPDATE_USER_CURRENCY_EVENT\020;\022" +
-      "\034\n\030S_BEGIN_PVP_BATTLE_EVENT\020<\022\032\n\026S_END_P" +
-      "VP_BATTLE_EVENT\020=\022\033\n\027S_BEGIN_CLAN_RAID_E" +
-      "VENT\020>\022$\n S_ATTACK_CLAN_RAID_MONSTER_EVE",
-      "NT\020?\022\"\n\036S_RECORD_CLAN_RAID_STATS_EVENT\020@" +
-      "\022&\n\"S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT\020A" +
-      "\022\036\n\032S_SET_GAME_CENTER_ID_EVENT\020B\022\032\n\026S_SP" +
-      "AWN_OBSTACLE_EVENT\020C\022\"\n\036S_BEGIN_OBSTACLE" +
-      "_REMOVAL_EVENT\020D\022%\n!S_OBSTACLE_REMOVAL_C" +
-      "OMPLETE_EVENT\020E\022\032\n\026S_SPAWN_MINI_JOB_EVEN" +
-      "T\020F\022\032\n\026S_BEGIN_MINI_JOB_EVENT\020G\022\035\n\031S_COM" +
-      "PLETE_MINI_JOB_EVENT\020H\022\033\n\027S_REDEEM_MINI_" +
-      "JOB_EVENT\020I\022\036\n\032S_SET_AVATAR_MONSTER_EVEN" +
-      "T\020J\022!\n\035S_RESTRICT_USER_MONSTER_EVENT\020K\022#",
-      "\n\037S_UNRESTRICT_USER_MONSTER_EVENT\020L\022\033\n\027S" +
-      "_ENHANCE_MONSTER_EVENT\020M\022\"\n\036S_TRADE_ITEM" +
-      "_FOR_BOOSTER_EVENT\020N\022\035\n\031S_SOLICIT_CLAN_H" +
-      "ELP_EVENT\020O\022\032\n\026S_GIVE_CLAN_HELP_EVENT\020P\022" +
-      "\031\n\025S_END_CLAN_HELP_EVENT\020Q\022\032\n\026S_INVITE_T" +
-      "O_CLAN_EVENT\020R\022(\n$S_ACCEPT_OR_REJECT_CLA" +
-      "N_INVITE_EVENT\020S\022\'\n#S_COLLECT_MONSTER_EN" +
-      "HANCEMENT_EVENT\020T\022$\n S_TRADE_ITEM_FOR_SP" +
-      "EED_UPS_EVENT\020U\022!\n\035S_REMOVE_USER_ITEM_US" +
-      "ED_EVENT\020V\022$\n S_TRADE_ITEM_FOR_RESOURCES",
-      "_EVENT\020W\022\036\n\032S_REDEEM_SECRET_GIFT_EVENT\020X" +
-      "\022\035\n\031S_SET_DEFENDING_MSG_EVENT\020Y\022\037\n\033S_BEG" +
-      "IN_CLAN_AVENGING_EVENT\020Z\022\035\n\031S_END_CLAN_A" +
-      "VENGING_EVENT\020[\022\034\n\030S_AVENGE_CLAN_MATE_EV" +
-      "ENT\020\\\022$\n S_UPDATE_CLIENT_TASK_STATE_EVEN" +
-      "T\020]\022!\n\035S_SOLICIT_TEAM_DONATION_EVENT\020^\022." +
-      "\n*S_FULFILL_TEAM_DONATION_SOLICITATION_E" +
-      "VENT\020_\022+\n\'S_VOID_TEAM_DONATION_SOLICITAT" +
-      "ION_EVENT\020`\022&\n\"S_RETRIEVE_USER_MONSTER_T" +
-      "EAM_EVENT\020a\022(\n$S_DESTROY_MONEY_TREE_STRU",
-      "CTURE_EVENT\020b\022\036\n\032S_UPDATE_CLIENT_USER_EV" +
-      "ENT\020e\022\036\n\032S_REFERRAL_CODE_USED_EVENT\020f\022\035\n" +
-      "\031S_PURGE_STATIC_DATA_EVENT\020g\022\037\n\033S_RECEIV" +
-      "ED_GROUP_CHAT_EVENT\020h\022\036\n\032S_SEND_ADMIN_ME" +
-      "SSAGE_EVENT\020i\022 \n\034S_GENERAL_NOTIFICATION_" +
-      "EVENT\020j\022*\n&S_RECEIVED_RARE_BOOSTER_PURCH" +
-      "ASE_EVENT\020k\022(\n$S_AWARD_CLAN_RAID_STAGE_R" +
-      "EWARD_EVENT\020l\022\030\n\024S_FORCE_LOGOUT_EVENT\020m\022" +
-      "\036\n\032S_RETRIEVE_CLAN_DATA_EVENT\020n\022\031\n\025S_REC" +
-      "EIVED_GIFT_EVENT\020o\022\020\n\013S_DEV_EVENT\020\310\001\022\035\n\030",
-      "S_PERFORM_RESEARCH_EVENT\020\311\001\022\'\n\"S_FINISH_" +
-      "PERFORMING_RESEARCH_EVENT\020\312\001\022)\n$S_CUSTOM" +
-      "IZE_PVP_BOARD_OBSTACLE_EVENT\020\313\001\022\037\n\032S_CRE" +
-      "ATE_BATTLE_ITEM_EVENT\020\314\001\022 \n\033S_DISCARD_BA" +
-      "TTLE_ITEM_EVENT\020\315\001\022!\n\034S_COMPLETE_BATTLE_" +
-      "ITEM_EVENT\020\316\001\022%\n S_REDEEM_MINI_EVENT_REW" +
-      "ARD_EVENT\020\317\001\022 \n\033S_RETRIEVE_MINI_EVENT_EV" +
-      "ENT\020\320\001\022\036\n\031S_UPDATE_MINI_EVENT_EVENT\020\321\001\022&" +
-      "\n!S_TRANSLATE_SELECT_MESSAGES_EVENT\020\322\001\022!" +
-      "\n\034S_UPDATE_USER_STRENGTH_EVENT\020\323\001\022\035\n\030S_R",
-      "EFRESH_MINI_JOB_EVENT\020\324\001\022\031\n\024S_SET_TANGO_" +
-      "ID_EVENT\020\325\001\022\034\n\027S_SEND_TANGO_GIFT_EVENT\020\326" +
-      "\001\022\030\n\023S_DELETE_GIFT_EVENT\020\327\001\022\031\n\024S_COLLECT" +
-      "_GIFT_EVENT\020\330\001\022#\n\036S_RETRIEVE_BATTLE_REPL" +
-      "AY_EVENT\020\331\001\022\037\n\032S_COLLECT_CLAN_GIFTS_EVEN" +
-      "T\020\364\003\022\036\n\031S_DELETE_CLAN_GIFTS_EVENT\020\365\003\022 \n\033" +
-      "S_RECEIVED_CLAN_GIFTS_EVENT\020\366\003\022+\n&S_RETR" +
-      "IEVE_STRENGTH_LEADER_BOARD_EVENT\020\367\003B\020B\016P" +
-      "rotocolsProto"
+      "ser.proto\"V\n\nEventProto\022\021\n\teventType\030\001 \001" +
+      "(\005\022\016\n\006tagNum\030\002 \001(\005\022\021\n\teventUuid\030\003 \001(\t\022\022\n" +
+      "\neventBytes\030\004 \001(\014*\300 \n\024EventProtocolReque" +
+      "st\022\023\n\017C_STARTUP_EVENT\020\001\022\033\n\027C_IN_APP_PURC" +
+      "HASE_EVENT\020\002\022#\n\037C_PURCHASE_NORM_STRUCTUR" +
+      "E_EVENT\020\003\022)\n%C_MOVE_OR_ROTATE_NORM_STRUC",
+      "TURE_EVENT\020\004\022\033\n\027C_SET_FACEBOOK_ID_EVENT\020" +
+      "\005\022\"\n\036C_UPGRADE_NORM_STRUCTURE_EVENT\020\006\0221\n" +
+      "-C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE" +
+      "_EVENT\020\007\0225\n1C_FINISH_NORM_STRUCT_WAITTIM" +
+      "E_WITH_DIAMONDS_EVENT\020\010\022%\n!C_NORM_STRUCT" +
+      "_WAIT_COMPLETE_EVENT\020\t\022\034\n\030C_LOAD_PLAYER_" +
+      "CITY_EVENT\020\n\022\'\n#C_EXCHANGE_GEMS_FOR_RESO" +
+      "URCES_EVENT\020\013\022\030\n\024C_QUEST_ACCEPT_EVENT\020\014\022" +
+      "\032\n\026C_QUEST_PROGRESS_EVENT\020\r\022\030\n\024C_QUEST_R" +
+      "EDEEM_EVENT\020\016\022#\n\037C_PURCHASE_CITY_EXPANSI",
+      "ON_EVENT\020\017\022#\n\037C_EXPANSION_WAIT_COMPLETE_" +
+      "EVENT\020\020\022\024\n\020C_LEVEL_UP_EVENT\020\021\022\027\n\023C_ENABL" +
+      "E_APNS_EVENT\020\022\022\027\n\023C_USER_CREATE_EVENT\020\023\022" +
+      "\025\n\021C_LOAD_CITY_EVENT\020\024\022\'\n#C_RETRIEVE_USE" +
+      "RS_FOR_USER_IDS_EVENT\020\025\022\036\n\032C_EARN_FREE_D" +
+      "IAMONDS_EVENT\020\026\022\033\n\027C_SEND_GROUP_CHAT_EVE" +
+      "NT\020\027\022\027\n\023C_CREATE_CLAN_EVENT\020\030\022\026\n\022C_LEAVE" +
+      "_CLAN_EVENT\020\031\022\035\n\031C_REQUEST_JOIN_CLAN_EVE" +
+      "NT\020\032\022%\n!C_RETRACT_REQUEST_JOIN_CLAN_EVEN" +
+      "T\020\033\0222\n.C_APPROVE_OR_REJECT_REQUEST_TO_JO",
+      "IN_CLAN_EVENT\020\034\022\035\n\031C_TRANSFER_CLAN_OWNER" +
+      "SHIP\020\035\022\036\n\032C_RETRIEVE_CLAN_INFO_EVENT\020\036\022 " +
+      "\n\034C_CHANGE_CLAN_SETTINGS_EVENT\020\037\022!\n\035C_BO" +
+      "OT_PLAYER_FROM_CLAN_EVENT\020 \022\031\n\025C_PICK_LO" +
+      "CK_BOX_EVENT\020!\022(\n$C_RETRIEVE_TOURNAMENT_" +
+      "RANKINGS_EVENT\020\"\022&\n\"C_SUBMIT_MONSTER_ENH" +
+      "ANCEMENT_EVENT\020#\022\032\n\026C_EVOLVE_MONSTER_EVE" +
+      "NT\020$\022!\n\035C_PURCHASE_BOOSTER_PACK_EVENT\020%\022" +
+      "\036\n\032C_EVOLUTION_FINISHED_EVENT\020&\022 \n\034C_ACH" +
+      "IEVEMENT_PROGRESS_EVENT\020\'\022\035\n\031C_PRIVATE_C",
+      "HAT_POST_EVENT\020(\022&\n\"C_RETRIEVE_PRIVATE_C" +
+      "HAT_POST_EVENT\020)\022&\n\"C_REDEEM_USER_LOCK_B" +
+      "OX_ITEMS_EVENT\020*\022\031\n\025C_BEGIN_DUNGEON_EVEN" +
+      "T\020+\022\027\n\023C_END_DUNGEON_EVENT\020,\022\035\n\031C_REVIVE" +
+      "_IN_DUNGEON_EVENT\020-\022\024\n\020C_QUEUE_UP_EVENT\020" +
+      ".\022!\n\035C_UPDATE_MONSTER_HEALTH_EVENT\020/\022\030\n\024" +
+      "C_HEAL_MONSTER_EVENT\0200\022\036\n\032C_ACHIEVEMENT_" +
+      "REDEEM_EVENT\0201\022&\n\"C_ADD_MONSTER_TO_BATTL" +
+      "E_TEAM_EVENT\0202\022+\n\'C_REMOVE_MONSTER_FROM_" +
+      "BATTLE_TEAM_EVENT\0203\022+\n\'C_INCREASE_MONSTE",
+      "R_INVENTORY_SLOT_EVENT\0204\022*\n&C_ENHANCEMEN" +
+      "T_WAIT_TIME_COMPLETE_EVENT\0205\022\'\n#C_COMBIN" +
+      "E_USER_MONSTER_PIECES_EVENT\0206\022\035\n\031C_SELL_" +
+      "USER_MONSTER_EVENT\0207\022\'\n#C_INVITE_FB_FRIE" +
+      "NDS_FOR_SLOTS_EVENT\0208\0221\n-C_ACCEPT_AND_RE" +
+      "JECT_FB_INVITE_FOR_SLOTS_EVENT\0209\022 \n\034C_UP" +
+      "DATE_USER_CURRENCY_EVENT\020;\022\034\n\030C_BEGIN_PV" +
+      "P_BATTLE_EVENT\020<\022\032\n\026C_END_PVP_BATTLE_EVE" +
+      "NT\020=\022\033\n\027C_BEGIN_CLAN_RAID_EVENT\020>\022$\n C_A" +
+      "TTACK_CLAN_RAID_MONSTER_EVENT\020?\022\"\n\036C_REC",
+      "ORD_CLAN_RAID_STATS_EVENT\020@\022&\n\"C_PROMOTE" +
+      "_DEMOTE_CLAN_MEMBER_EVENT\020A\022\036\n\032C_SET_GAM" +
+      "E_CENTER_ID_EVENT\020B\022\032\n\026C_SPAWN_OBSTACLE_" +
+      "EVENT\020C\022\"\n\036C_BEGIN_OBSTACLE_REMOVAL_EVEN" +
+      "T\020D\022%\n!C_OBSTACLE_REMOVAL_COMPLETE_EVENT" +
+      "\020E\022\032\n\026C_SPAWN_MINI_JOB_EVENT\020F\022\032\n\026C_BEGI" +
+      "N_MINI_JOB_EVENT\020G\022\035\n\031C_COMPLETE_MINI_JO" +
+      "B_EVENT\020H\022\033\n\027C_REDEEM_MINI_JOB_EVENT\020I\022\036" +
+      "\n\032C_SET_AVATAR_MONSTER_EVENT\020J\022!\n\035C_REST" +
+      "RICT_USER_MONSTER_EVENT\020K\022#\n\037C_UNRESTRIC",
+      "T_USER_MONSTER_EVENT\020L\022\033\n\027C_ENHANCE_MONS" +
+      "TER_EVENT\020M\022\"\n\036C_TRADE_ITEM_FOR_BOOSTER_" +
+      "EVENT\020N\022\035\n\031C_SOLICIT_CLAN_HELP_EVENT\020O\022\032" +
+      "\n\026C_GIVE_CLAN_HELP_EVENT\020P\022\031\n\025C_END_CLAN" +
+      "_HELP_EVENT\020Q\022\032\n\026C_INVITE_TO_CLAN_EVENT\020" +
+      "R\022(\n$C_ACCEPT_OR_REJECT_CLAN_INVITE_EVEN" +
+      "T\020S\022\'\n#C_COLLECT_MONSTER_ENHANCEMENT_EVE" +
+      "NT\020T\022$\n C_TRADE_ITEM_FOR_SPEED_UPS_EVENT" +
+      "\020U\022!\n\035C_REMOVE_USER_ITEM_USED_EVENT\020V\022$\n" +
+      " C_TRADE_ITEM_FOR_RESOURCES_EVENT\020W\022\036\n\032C",
+      "_REDEEM_SECRET_GIFT_EVENT\020X\022\035\n\031C_SET_DEF" +
+      "ENDING_MSG_EVENT\020Y\022\037\n\033C_BEGIN_CLAN_AVENG" +
+      "ING_EVENT\020Z\022\035\n\031C_END_CLAN_AVENGING_EVENT" +
+      "\020[\022\034\n\030C_AVENGE_CLAN_MATE_EVENT\020\\\022$\n C_UP" +
+      "DATE_CLIENT_TASK_STATE_EVENT\020]\022!\n\035C_SOLI" +
+      "CIT_TEAM_DONATION_EVENT\020^\022.\n*C_FULFILL_T" +
+      "EAM_DONATION_SOLICITATION_EVENT\020_\022+\n\'C_V" +
+      "OID_TEAM_DONATION_SOLICITATION_EVENT\020`\022&" +
+      "\n\"C_RETRIEVE_USER_MONSTER_TEAM_EVENT\020a\022(" +
+      "\n$C_DESTROY_MONEY_TREE_STRUCTURE_EVENT\020b",
+      "\022\022\n\016C_LOGOUT_EVENT\020e\022\020\n\013C_DEV_EVENT\020\310\001\022\035" +
+      "\n\030C_PERFORM_RESEARCH_EVENT\020\311\001\022\'\n\"C_FINIS" +
+      "H_PERFORMING_RESEARCH_EVENT\020\312\001\022)\n$C_CUST" +
+      "OMIZE_PVP_BOARD_OBSTACLE_EVENT\020\313\001\022\037\n\032C_C" +
+      "REATE_BATTLE_ITEM_EVENT\020\314\001\022 \n\033C_DISCARD_" +
+      "BATTLE_ITEM_EVENT\020\315\001\022!\n\034C_COMPLETE_BATTL" +
+      "E_ITEM_EVENT\020\316\001\022%\n C_REDEEM_MINI_EVENT_R" +
+      "EWARD_EVENT\020\317\001\022 \n\033C_RETRIEVE_MINI_EVENT_" +
+      "EVENT\020\320\001\022\036\n\031C_UPDATE_MINI_EVENT_EVENT\020\321\001" +
+      "\022&\n!C_TRANSLATE_SELECT_MESSAGES_EVENT\020\322\001",
+      "\022!\n\034C_UPDATE_USER_STRENGTH_EVENT\020\323\001\022\035\n\030C" +
+      "_REFRESH_MINI_JOB_EVENT\020\324\001\022\031\n\024C_SET_TANG" +
+      "O_ID_EVENT\020\325\001\022\034\n\027C_SEND_TANGO_GIFT_EVENT" +
+      "\020\326\001\022\030\n\023C_DELETE_GIFT_EVENT\020\327\001\022\031\n\024C_COLLE" +
+      "CT_GIFT_EVENT\020\330\001\022#\n\036C_RETRIEVE_BATTLE_RE" +
+      "PLAY_EVENT\020\331\001\022\037\n\032C_COLLECT_CLAN_GIFTS_EV" +
+      "ENT\020\364\003\022\036\n\031C_DELETE_CLAN_GIFTS_EVENT\020\365\003\022 " +
+      "\n\033C_RECEIVED_CLAN_GIFTS_EVENT\020\366\003\022+\n&C_RE" +
+      "TRIEVE_STRENGTH_LEADER_BOARD_EVENT\020\367\003\022%\n" +
+      " C_PURCHASE_ITEMS_WITH_GEMS_EVENT\020\370\003\022\026\n\021",
+      "C_RECONNECT_EVENT\020\371\003*\232#\n\025EventProtocolRe" +
+      "sponse\022\023\n\017S_STARTUP_EVENT\020\001\022\033\n\027S_IN_APP_" +
+      "PURCHASE_EVENT\020\002\022#\n\037S_PURCHASE_NORM_STRU" +
+      "CTURE_EVENT\020\003\022)\n%S_MOVE_OR_ROTATE_NORM_S" +
+      "TRUCTURE_EVENT\020\004\022\033\n\027S_SET_FACEBOOK_ID_EV" +
+      "ENT\020\005\022\"\n\036S_UPGRADE_NORM_STRUCTURE_EVENT\020" +
+      "\006\0221\n-S_RETRIEVE_CURRENCY_FROM_NORM_STRUC" +
+      "TURE_EVENT\020\007\0225\n1S_FINISH_NORM_STRUCT_WAI" +
+      "TTIME_WITH_DIAMONDS_EVENT\020\010\022%\n!S_NORM_ST" +
+      "RUCT_WAIT_COMPLETE_EVENT\020\t\022\034\n\030S_LOAD_PLA",
+      "YER_CITY_EVENT\020\n\022\'\n#S_EXCHANGE_GEMS_FOR_" +
+      "RESOURCES_EVENT\020\013\022\030\n\024S_QUEST_ACCEPT_EVEN" +
+      "T\020\014\022\032\n\026S_QUEST_PROGRESS_EVENT\020\r\022\030\n\024S_QUE" +
+      "ST_REDEEM_EVENT\020\016\022#\n\037S_PURCHASE_CITY_EXP" +
+      "ANSION_EVENT\020\017\022#\n\037S_EXPANSION_WAIT_COMPL" +
+      "ETE_EVENT\020\020\022\024\n\020S_LEVEL_UP_EVENT\020\021\022\027\n\023S_E" +
+      "NABLE_APNS_EVENT\020\022\022\027\n\023S_USER_CREATE_EVEN" +
+      "T\020\023\022\025\n\021S_LOAD_CITY_EVENT\020\024\022\'\n#S_RETRIEVE" +
+      "_USERS_FOR_USER_IDS_EVENT\020\025\022\036\n\032S_EARN_FR" +
+      "EE_DIAMONDS_EVENT\020\026\022\033\n\027S_SEND_GROUP_CHAT",
+      "_EVENT\020\027\022\027\n\023S_CREATE_CLAN_EVENT\020\030\022\026\n\022S_L" +
+      "EAVE_CLAN_EVENT\020\031\022\035\n\031S_REQUEST_JOIN_CLAN" +
+      "_EVENT\020\032\022%\n!S_RETRACT_REQUEST_JOIN_CLAN_" +
+      "EVENT\020\033\0222\n.S_APPROVE_OR_REJECT_REQUEST_T" +
+      "O_JOIN_CLAN_EVENT\020\034\022\035\n\031S_TRANSFER_CLAN_O" +
+      "WNERSHIP\020\035\022\036\n\032S_RETRIEVE_CLAN_INFO_EVENT" +
+      "\020\036\022 \n\034S_CHANGE_CLAN_SETTINGS_EVENT\020\037\022!\n\035" +
+      "S_BOOT_PLAYER_FROM_CLAN_EVENT\020 \022\031\n\025S_PIC" +
+      "K_LOCK_BOX_EVENT\020!\022(\n$S_RETRIEVE_TOURNAM" +
+      "ENT_RANKINGS_EVENT\020\"\022&\n\"S_SUBMIT_MONSTER",
+      "_ENHANCEMENT_EVENT\020#\022\032\n\026S_EVOLVE_MONSTER" +
+      "_EVENT\020$\022!\n\035S_PURCHASE_BOOSTER_PACK_EVEN" +
+      "T\020%\022\036\n\032S_EVOLUTION_FINISHED_EVENT\020&\022 \n\034S" +
+      "_ACHIEVEMENT_PROGRESS_EVENT\020\'\022\035\n\031S_PRIVA" +
+      "TE_CHAT_POST_EVENT\020(\022&\n\"S_RETRIEVE_PRIVA" +
+      "TE_CHAT_POST_EVENT\020)\022&\n\"S_REDEEM_USER_LO" +
+      "CK_BOX_ITEMS_EVENT\020*\022\031\n\025S_BEGIN_DUNGEON_" +
+      "EVENT\020+\022\027\n\023S_END_DUNGEON_EVENT\020,\022\035\n\031S_RE" +
+      "VIVE_IN_DUNGEON_EVENT\020-\022\024\n\020S_QUEUE_UP_EV" +
+      "ENT\020.\022!\n\035S_UPDATE_MONSTER_HEALTH_EVENT\020/",
+      "\022\030\n\024S_HEAL_MONSTER_EVENT\0200\022\036\n\032S_ACHIEVEM" +
+      "ENT_REDEEM_EVENT\0201\022&\n\"S_ADD_MONSTER_TO_B" +
+      "ATTLE_TEAM_EVENT\0202\022+\n\'S_REMOVE_MONSTER_F" +
+      "ROM_BATTLE_TEAM_EVENT\0203\022+\n\'S_INCREASE_MO" +
+      "NSTER_INVENTORY_SLOT_EVENT\0204\022*\n&S_ENHANC" +
+      "EMENT_WAIT_TIME_COMPLETE_EVENT\0205\022\'\n#S_CO" +
+      "MBINE_USER_MONSTER_PIECES_EVENT\0206\022\035\n\031S_S" +
+      "ELL_USER_MONSTER_EVENT\0207\022\'\n#S_INVITE_FB_" +
+      "FRIENDS_FOR_SLOTS_EVENT\0208\0221\n-S_ACCEPT_AN" +
+      "D_REJECT_FB_INVITE_FOR_SLOTS_EVENT\0209\022 \n\034",
+      "S_UPDATE_USER_CURRENCY_EVENT\020;\022\034\n\030S_BEGI" +
+      "N_PVP_BATTLE_EVENT\020<\022\032\n\026S_END_PVP_BATTLE" +
+      "_EVENT\020=\022\033\n\027S_BEGIN_CLAN_RAID_EVENT\020>\022$\n" +
+      " S_ATTACK_CLAN_RAID_MONSTER_EVENT\020?\022\"\n\036S" +
+      "_RECORD_CLAN_RAID_STATS_EVENT\020@\022&\n\"S_PRO" +
+      "MOTE_DEMOTE_CLAN_MEMBER_EVENT\020A\022\036\n\032S_SET" +
+      "_GAME_CENTER_ID_EVENT\020B\022\032\n\026S_SPAWN_OBSTA" +
+      "CLE_EVENT\020C\022\"\n\036S_BEGIN_OBSTACLE_REMOVAL_" +
+      "EVENT\020D\022%\n!S_OBSTACLE_REMOVAL_COMPLETE_E" +
+      "VENT\020E\022\032\n\026S_SPAWN_MINI_JOB_EVENT\020F\022\032\n\026S_",
+      "BEGIN_MINI_JOB_EVENT\020G\022\035\n\031S_COMPLETE_MIN" +
+      "I_JOB_EVENT\020H\022\033\n\027S_REDEEM_MINI_JOB_EVENT" +
+      "\020I\022\036\n\032S_SET_AVATAR_MONSTER_EVENT\020J\022!\n\035S_" +
+      "RESTRICT_USER_MONSTER_EVENT\020K\022#\n\037S_UNRES" +
+      "TRICT_USER_MONSTER_EVENT\020L\022\033\n\027S_ENHANCE_" +
+      "MONSTER_EVENT\020M\022\"\n\036S_TRADE_ITEM_FOR_BOOS" +
+      "TER_EVENT\020N\022\035\n\031S_SOLICIT_CLAN_HELP_EVENT" +
+      "\020O\022\032\n\026S_GIVE_CLAN_HELP_EVENT\020P\022\031\n\025S_END_" +
+      "CLAN_HELP_EVENT\020Q\022\032\n\026S_INVITE_TO_CLAN_EV" +
+      "ENT\020R\022(\n$S_ACCEPT_OR_REJECT_CLAN_INVITE_",
+      "EVENT\020S\022\'\n#S_COLLECT_MONSTER_ENHANCEMENT" +
+      "_EVENT\020T\022$\n S_TRADE_ITEM_FOR_SPEED_UPS_E" +
+      "VENT\020U\022!\n\035S_REMOVE_USER_ITEM_USED_EVENT\020" +
+      "V\022$\n S_TRADE_ITEM_FOR_RESOURCES_EVENT\020W\022" +
+      "\036\n\032S_REDEEM_SECRET_GIFT_EVENT\020X\022\035\n\031S_SET" +
+      "_DEFENDING_MSG_EVENT\020Y\022\037\n\033S_BEGIN_CLAN_A" +
+      "VENGING_EVENT\020Z\022\035\n\031S_END_CLAN_AVENGING_E" +
+      "VENT\020[\022\034\n\030S_AVENGE_CLAN_MATE_EVENT\020\\\022$\n " +
+      "S_UPDATE_CLIENT_TASK_STATE_EVENT\020]\022!\n\035S_" +
+      "SOLICIT_TEAM_DONATION_EVENT\020^\022.\n*S_FULFI",
+      "LL_TEAM_DONATION_SOLICITATION_EVENT\020_\022+\n" +
+      "\'S_VOID_TEAM_DONATION_SOLICITATION_EVENT" +
+      "\020`\022&\n\"S_RETRIEVE_USER_MONSTER_TEAM_EVENT" +
+      "\020a\022(\n$S_DESTROY_MONEY_TREE_STRUCTURE_EVE" +
+      "NT\020b\022\036\n\032S_UPDATE_CLIENT_USER_EVENT\020e\022\036\n\032" +
+      "S_REFERRAL_CODE_USED_EVENT\020f\022\035\n\031S_PURGE_" +
+      "STATIC_DATA_EVENT\020g\022\037\n\033S_RECEIVED_GROUP_" +
+      "CHAT_EVENT\020h\022\036\n\032S_SEND_ADMIN_MESSAGE_EVE" +
+      "NT\020i\022 \n\034S_GENERAL_NOTIFICATION_EVENT\020j\022*" +
+      "\n&S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT",
+      "\020k\022(\n$S_AWARD_CLAN_RAID_STAGE_REWARD_EVE" +
+      "NT\020l\022\030\n\024S_FORCE_LOGOUT_EVENT\020m\022\036\n\032S_RETR" +
+      "IEVE_CLAN_DATA_EVENT\020n\022\031\n\025S_RECEIVED_GIF" +
+      "T_EVENT\020o\022\020\n\013S_DEV_EVENT\020\310\001\022\035\n\030S_PERFORM" +
+      "_RESEARCH_EVENT\020\311\001\022\'\n\"S_FINISH_PERFORMIN" +
+      "G_RESEARCH_EVENT\020\312\001\022)\n$S_CUSTOMIZE_PVP_B" +
+      "OARD_OBSTACLE_EVENT\020\313\001\022\037\n\032S_CREATE_BATTL" +
+      "E_ITEM_EVENT\020\314\001\022 \n\033S_DISCARD_BATTLE_ITEM" +
+      "_EVENT\020\315\001\022!\n\034S_COMPLETE_BATTLE_ITEM_EVEN" +
+      "T\020\316\001\022%\n S_REDEEM_MINI_EVENT_REWARD_EVENT",
+      "\020\317\001\022 \n\033S_RETRIEVE_MINI_EVENT_EVENT\020\320\001\022\036\n" +
+      "\031S_UPDATE_MINI_EVENT_EVENT\020\321\001\022&\n!S_TRANS" +
+      "LATE_SELECT_MESSAGES_EVENT\020\322\001\022!\n\034S_UPDAT" +
+      "E_USER_STRENGTH_EVENT\020\323\001\022\035\n\030S_REFRESH_MI" +
+      "NI_JOB_EVENT\020\324\001\022\031\n\024S_SET_TANGO_ID_EVENT\020" +
+      "\325\001\022\034\n\027S_SEND_TANGO_GIFT_EVENT\020\326\001\022\030\n\023S_DE" +
+      "LETE_GIFT_EVENT\020\327\001\022\031\n\024S_COLLECT_GIFT_EVE" +
+      "NT\020\330\001\022#\n\036S_RETRIEVE_BATTLE_REPLAY_EVENT\020" +
+      "\331\001\022\037\n\032S_COLLECT_CLAN_GIFTS_EVENT\020\364\003\022\036\n\031S" +
+      "_DELETE_CLAN_GIFTS_EVENT\020\365\003\022 \n\033S_RECEIVE",
+      "D_CLAN_GIFTS_EVENT\020\366\003\022+\n&S_RETRIEVE_STRE" +
+      "NGTH_LEADER_BOARD_EVENT\020\367\003\022\026\n\021S_RECONNEC" +
+      "T_EVENT\020\370\003\022%\n S_PURCHASE_ITEMS_WITH_GEMS" +
+      "_EVENT\020\371\003B\020B\016ProtocolsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2762,6 +3521,12 @@ public final class ProtocolsProto {
           com.lvl6.proto.TournamentStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_EventProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_EventProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EventProto_descriptor,
+        new java.lang.String[] { "EventType", "TagNum", "EventUuid", "EventBytes", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();

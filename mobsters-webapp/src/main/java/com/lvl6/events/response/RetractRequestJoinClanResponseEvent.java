@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent {
+public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent<RetractRequestJoinClanResponseProto> {
 
-	private RetractRequestJoinClanResponseProto retractRequestJoinClanResponseProto;
+	
 
 	public RetractRequestJoinClanResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = retractRequestJoinClanResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRetractRequestJoinClanResponseProto(
-			RetractRequestJoinClanResponseProto retractRequestJoinClanResponseProto) {
-		this.retractRequestJoinClanResponseProto = retractRequestJoinClanResponseProto;
+			RetractRequestJoinClanResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return retractRequestJoinClanResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

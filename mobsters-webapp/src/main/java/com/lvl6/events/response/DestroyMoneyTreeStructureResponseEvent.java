@@ -7,7 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class DestroyMoneyTreeStructureResponseEvent extends NormalResponseEvent {
+public class DestroyMoneyTreeStructureResponseEvent extends NormalResponseEvent<DestroyMoneyTreeStructureResponseProto> {
 
 	private DestroyMoneyTreeStructureResponseProto destroyMoneyTreeStructureResponse;
 
@@ -36,7 +36,7 @@ public class DestroyMoneyTreeStructureResponseEvent extends NormalResponseEvent 
 	}
 	
 	public int eventSize() {
-		return destroyMoneyTreeStructureResponse.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

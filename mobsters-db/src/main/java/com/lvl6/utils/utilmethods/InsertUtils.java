@@ -21,7 +21,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.BattleReplayForUser;
-import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ChatTranslations;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -399,7 +398,7 @@ public class InsertUtils implements InsertUtil {
 	public String insertUser(String name, String udid, int level,
 			int experience, int cash, int oil, int gems, boolean isFake,
 			String deviceToken, Timestamp createTime, String facebookId,
-			int avatarMonsterId, String email, String fbData) {
+			int avatarMonsterId, String email, String fbData, int gachaCredits) {
 		String userId = randomUUID();
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -440,7 +439,8 @@ public class InsertUtils implements InsertUtil {
 				createTime);
 		insertParams.put(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME,
 				createTime);
-
+		insertParams.put(DBConstants.USER__GACHA_CREDITS, gachaCredits);
+		
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				DBConstants.TABLE_USER, insertParams);
 		if (numChanged != 1) {
@@ -2401,8 +2401,10 @@ public class InsertUtils implements InsertUtil {
 				chcfu.getUserId());
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__CLAN_ID,
 				chcfu.getClanId());
+
+		Date d = chcfu.getDate();
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__DATE,
-				chcfu.getDate());
+				new Timestamp(d.getTime()));
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__SOLICITED,
 				newSolicited);
 		insertParams.put(DBConstants.CLAN_HELP_COUNT_FOR_USER__GIVEN, newGiven);
@@ -2789,6 +2791,8 @@ public class InsertUtils implements InsertUtil {
 			log.error("map containing ids to translations is null");
 		}
 
+		log.info("list of private chat posts: {}", listOfPrivateChatPosts);
+
 		String tableName = DBConstants.TABLE_CHAT_TRANSLATIONS;
 		int size = listOfPrivateChatPosts.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
@@ -2917,7 +2921,8 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
-			Collection<Reward> listOfRewards, String reasonForReward) {
+			Collection<Reward> listOfRewards, String reasonForReward, 
+			String awardReasonDetail) {
 		if(listOfRewards == null) {
 			log.error("list containing rewards is null");
 		}
@@ -2931,6 +2936,7 @@ public class InsertUtils implements InsertUtil {
 		List<Timestamp> timestampList = new ArrayList<Timestamp>();
 		List<Integer> rewardIdList = new ArrayList<Integer>();
 		List<String> reasonForRewardList = new ArrayList<String>();
+		List<String> awardReasonDetailList = new ArrayList<String>();
 
 		try {
 			for(Reward r : listOfRewards) {
@@ -2941,6 +2947,7 @@ public class InsertUtils implements InsertUtil {
 				timestampList.add(ts);
 				rewardIdList.add(rewardId);
 				reasonForRewardList.add(reasonForReward);
+				awardReasonDetailList.add(awardReasonDetail);
 			}
 		} catch (Exception e) {
 			log.error("error converting language to string");
@@ -2952,6 +2959,9 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__DATE, timestampList);
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__REWARD_ID, rewardIdList);
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__REASON_FOR_REWARD, reasonForRewardList);
+		if(awardReasonDetail != null) {
+			insertParams.put(DBConstants.USER_REWARD_HISTORY__DETAILS, awardReasonDetailList);
+		}
 
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, size);

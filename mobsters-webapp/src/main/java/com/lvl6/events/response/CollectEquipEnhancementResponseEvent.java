@@ -4,12 +4,12 @@
 //
 //import com.google.protobuf.ByteString;
 //import com.lvl6.events.NormalResponseEvent;
-//import com.lvl6.proto.EventProto.CollectEquipEnhancementResponseProto;
+//import responseProto;
 //import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 //
-//public class CollectEquipEnhancementResponseEvent extends NormalResponseEvent {
+//public class CollectEquipEnhancementResponseEvent extends NormalResponseEvent<CollectEquipEnhancementResponseProto> {
 //
-//  private CollectEquipEnhancementResponseProto collectEquipEnhanceResponseProto;
+//  
 //  
 //  public CollectEquipEnhancementResponseEvent(int playerId){
 //    super(playerId);
@@ -18,13 +18,13 @@
 //  
 //  @Override
 //  public int write(ByteBuffer bb) {
-//    ByteString b = collectEquipEnhanceResponseProto.toByteString();
+//    ByteString b =  responseProto.toByteString();
 //    b.copyTo(bb);
 //    return b.size();
 //  }
 //
-//  public void setCollectEquipEnhancementResponseProto(CollectEquipEnhancementResponseProto collectEquipEnhanceResponseProto) {
-//    this.collectEquipEnhanceResponseProto = collectEquipEnhanceResponseProto;
+//  public void setCollectEquipEnhancementResponseProto(CollectEquipEnhancementResponseProto responseProto) {
+//    this.responseProto = responseProto;
 //  }
 //
 //}

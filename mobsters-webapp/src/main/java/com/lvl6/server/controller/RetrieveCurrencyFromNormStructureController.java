@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -34,10 +33,11 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class RetrieveCurrencyFromNormStructureController extends
 		EventController {
 
@@ -66,7 +66,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 	protected UpdateUtil updateUtil;
 
 	public RetrieveCurrencyFromNormStructureController() {
-		numAllocatedThreads = 8;
+		
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent) event)
 				.getRetrieveCurrencyFromNormStructureRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -137,9 +137,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -158,9 +158,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (RetrieveCurrencyFromNormStructureStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
@@ -170,7 +170,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToCurrencyHistory(userId, curTime, rcfnsa);
 			}
@@ -185,9 +185,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 				RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in RetrieveCurrencyFromNormStructureController processEvent",

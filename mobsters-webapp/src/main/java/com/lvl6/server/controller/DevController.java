@@ -10,7 +10,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -32,19 +31,21 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class DevController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
-
+	
+	private static final Logger log = LoggerFactory.getLogger(DevController.class);
+	
+	
 	public DevController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Autowired
@@ -73,7 +74,7 @@ public class DevController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		DevRequestProto reqProto = ((DevRequestEvent) event)
 				.getDevRequestProto();
 		log.info("reqProto={}", reqProto);
@@ -103,12 +104,12 @@ public class DevController extends EventController {
 			resBuilder.setStatus(DevStatus.FAIL_OTHER);
 			DevResponseEvent resEvent = new DevResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDevResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
@@ -131,15 +132,15 @@ public class DevController extends EventController {
 			DevResponseProto resProto = resBuilder.build();
 			DevResponseEvent resEvent = new DevResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setDevResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			resEvent.setTag(event.getTag());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			UpdateClientUserResponseEvent resEventUpdate = miscMethods
 					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 							aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
-			server.writeEvent(resEventUpdate);
+			responses.normalResponseEvents().add(resEventUpdate);
 
 		} catch (Exception e) {
 			log.error("exception in DevController processEvent", e);
@@ -147,13 +148,14 @@ public class DevController extends EventController {
 				resBuilder.setStatus(DevStatus.FAIL_OTHER);
 				DevResponseEvent resEvent = new DevResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setDevResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in DevController processEvent", e);
 			}
 
 		} finally {
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}

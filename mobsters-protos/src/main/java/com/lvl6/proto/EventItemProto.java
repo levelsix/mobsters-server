@@ -2796,6 +2796,15 @@ public final class EventItemProto {
      */
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
         int index);
+
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    boolean hasGemsSpent();
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    int getGemsSpent();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForSpeedUpsRequestProto}
@@ -2881,6 +2890,11 @@ public final class EventItemProto {
                 mutable_bitField0_ |= 0x00000004;
               }
               nuUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              gemsSpent_ = input.readInt32();
               break;
             }
           }
@@ -3060,10 +3074,26 @@ public final class EventItemProto {
       return nuUserItems_.get(index);
     }
 
+    public static final int GEMSSPENT_FIELD_NUMBER = 4;
+    private int gemsSpent_;
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 gemsSpent = 4;</code>
+     */
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       itemsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
+      gemsSpent_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3087,6 +3117,9 @@ public final class EventItemProto {
       for (int i = 0; i < nuUserItems_.size(); i++) {
         output.writeMessage(3, nuUserItems_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(4, gemsSpent_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3107,6 +3140,10 @@ public final class EventItemProto {
       for (int i = 0; i < nuUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, nuUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, gemsSpent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3251,6 +3288,8 @@ public final class EventItemProto {
         } else {
           nuUserItemsBuilder_.clear();
         }
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -3305,6 +3344,10 @@ public final class EventItemProto {
         } else {
           result.nuUserItems_ = nuUserItemsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gemsSpent_ = gemsSpent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3375,6 +3418,9 @@ public final class EventItemProto {
               nuUserItemsBuilder_.addAllMessages(other.nuUserItems_);
             }
           }
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4141,6 +4187,38 @@ public final class EventItemProto {
           nuUserItems_ = null;
         }
         return nuUserItemsBuilder_;
+      }
+
+      private int gemsSpent_ ;
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000008;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 4;</code>
+       */
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForSpeedUpsRequestProto)
@@ -6841,6 +6919,15 @@ public final class EventItemProto {
      * <code>optional int64 clientTime = 4;</code>
      */
     long getClientTime();
+
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    boolean hasGemsSpent();
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    int getGemsSpent();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
@@ -6939,6 +7026,11 @@ public final class EventItemProto {
             case 32: {
               bitField0_ |= 0x00000002;
               clientTime_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000004;
+              gemsSpent_ = input.readInt32();
               break;
             }
           }
@@ -7112,11 +7204,27 @@ public final class EventItemProto {
       return clientTime_;
     }
 
+    public static final int GEMSSPENT_FIELD_NUMBER = 5;
+    private int gemsSpent_;
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 gemsSpent = 5;</code>
+     */
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       itemIdsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
       clientTime_ = 0L;
+      gemsSpent_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7142,6 +7250,9 @@ public final class EventItemProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(4, clientTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(5, gemsSpent_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7172,6 +7283,10 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, clientTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemsSpent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7308,6 +7423,8 @@ public final class EventItemProto {
         }
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -7362,6 +7479,10 @@ public final class EventItemProto {
           to_bitField0_ |= 0x00000002;
         }
         result.clientTime_ = clientTime_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.gemsSpent_ = gemsSpent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7419,6 +7540,9 @@ public final class EventItemProto {
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8005,6 +8129,38 @@ public final class EventItemProto {
       public Builder clearClientTime() {
         bitField0_ = (bitField0_ & ~0x00000008);
         clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int gemsSpent_ ;
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000010;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemsSpent = 5;</code>
+       */
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
         onChanged();
         return this;
       }
@@ -10768,51 +10924,52 @@ public final class EventItemProto {
       "6.proto.UserItemProto\0220\n\007rewards\030\006 \001(\0132\037" +
       ".com.lvl6.proto.UserRewardProto\"T\n\031Trade" +
       "ItemForBoosterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
-      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\277\001" +
+      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\322\001" +
       "\n TradeItemForSpeedUpsRequestProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
       "roto\0225\n\titemsUsed\030\002 \003(\0132\".com.lvl6.proto" +
       ".UserItemUsageProto\0222\n\013nuUserItems\030\003 \003(\013" +
-      "2\035.com.lvl6.proto.UserItemProto\"\245\002\n!Trad" +
-      "eItemForSpeedUpsResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\\\n\006status\030\002 \001(\0162L.com.lvl6.proto.TradeIt" +
-      "emForSpeedUpsResponseProto.TradeItemForS" +
-      "peedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.l" +
-      "vl6.proto.UserItemUsageProto\"9\n\032TradeIte" +
-      "mForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_",
-      "OTHER\020\002\"l\n\036RemoveUserItemUsedRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001" +
-      "\n\037RemoveUserItemUsedResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Rem" +
-      "oveUserItemUsedResponseProto.RemoveUserI" +
-      "temUsedStatus\"7\n\030RemoveUserItemUsedStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\302\001\n!Trade" +
-      "ItemForResourcesRequestProto\022@\n\006sender\030\001",
-      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013n" +
-      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\"TradeIte" +
-      "mForResourcesResponseProto\022@\n\006sender\030\001 \001" +
-      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
-      "MaxResources\022^\n\006status\030\002 \001(\0162N.com.lvl6." +
-      "proto.TradeItemForResourcesResponseProto" +
-      ".TradeItemForResourcesStatus\":\n\033TradeIte" +
-      "mForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL",
-      "_OTHER\020\002\"v\n\034RedeemSecretGiftRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUu" +
-      "id\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponsePro" +
-      "to\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.pr" +
-      "oto.UserItemSecretGiftProto\022T\n\006status\030\003 " +
-      "\001(\0162D.com.lvl6.proto.RedeemSecretGiftRes" +
-      "ponseProto.RedeemSecretGiftStatus\"Q\n\026Red" +
-      "eemSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL",
-      "_ITEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016" +
-      "EventItemProto"
+      "2\035.com.lvl6.proto.UserItemProto\022\021\n\tgemsS" +
+      "pent\030\004 \001(\005\"\245\002\n!TradeItemForSpeedUpsRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L.com" +
+      ".lvl6.proto.TradeItemForSpeedUpsResponse" +
+      "Proto.TradeItemForSpeedUpsStatus\0225\n\titem" +
+      "sUsed\030\003 \003(\0132\".com.lvl6.proto.UserItemUsa" +
+      "geProto\"9\n\032TradeItemForSpeedUpsStatus\022\013\n",
+      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"l\n\036RemoveUser" +
+      "ItemUsedRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\030\n\020userIt" +
+      "emUsedUuid\030\002 \003(\t\"\346\001\n\037RemoveUserItemUsedR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022X\n\006status\030\002 \001(\0162H" +
+      ".com.lvl6.proto.RemoveUserItemUsedRespon" +
+      "seProto.RemoveUserItemUsedStatus\"7\n\030Remo" +
+      "veUserItemUsedStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
+      "L_OTHER\020\002\"\325\001\n!TradeItemForResourcesReque",
+      "stProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto" +
+      ".MinimumUserProtoWithMaxResources\022\023\n\013ite" +
+      "mIdsUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132\035.co" +
+      "m.lvl6.proto.UserItemProto\022\022\n\nclientTime" +
+      "\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\"\202\002\n\"TradeItemF" +
+      "orResourcesResponseProto\022@\n\006sender\030\001 \001(\013" +
+      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
+      "xResources\022^\n\006status\030\002 \001(\0162N.com.lvl6.pr" +
+      "oto.TradeItemForResourcesResponseProto.T" +
+      "radeItemForResourcesStatus\":\n\033TradeItemF",
+      "orResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002\"v\n\034RedeemSecretGiftRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUuid" +
+      "\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponseProto" +
+      "\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.prot" +
+      "o.UserItemSecretGiftProto\022T\n\006status\030\003 \001(" +
+      "\0162D.com.lvl6.proto.RedeemSecretGiftRespo" +
+      "nseProto.RedeemSecretGiftStatus\"Q\n\026Redee",
+      "mSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_I" +
+      "TEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Ev" +
+      "entItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10848,7 +11005,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForSpeedUpsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", });
+        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", "GemsSpent", });
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_fieldAccessorTable = new
@@ -10872,7 +11029,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", });
+        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", "GemsSpent", });
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new

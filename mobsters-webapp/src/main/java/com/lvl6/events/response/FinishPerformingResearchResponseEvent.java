@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class FinishPerformingResearchResponseEvent extends NormalResponseEvent {
+public class FinishPerformingResearchResponseEvent extends NormalResponseEvent<FinishPerformingResearchResponseProto> {
 
-	private FinishPerformingResearchResponseProto finishPerformingResearchResponseProto;
+	
 
 	public FinishPerformingResearchResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class FinishPerformingResearchResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = finishPerformingResearchResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setFinishPerformingResearchResponseProto(
-			FinishPerformingResearchResponseProto finishPerformingResearchResponseProto) {
-		this.finishPerformingResearchResponseProto = finishPerformingResearchResponseProto;
+			FinishPerformingResearchResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return finishPerformingResearchResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }

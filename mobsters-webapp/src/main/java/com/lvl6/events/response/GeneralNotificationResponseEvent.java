@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class GeneralNotificationResponseEvent extends NormalResponseEvent {
+public class GeneralNotificationResponseEvent extends NormalResponseEvent<GeneralNotificationResponseProto> {
 
-	private GeneralNotificationResponseProto generalNotificationResponseProto;
+	
 
 	//The input argument is not used.
 	public GeneralNotificationResponseEvent(String playerId) {
@@ -19,21 +19,21 @@ public class GeneralNotificationResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = generalNotificationResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setGeneralNotificationResponseProto(
-			GeneralNotificationResponseProto generalNotificationResponseProto) {
-		this.generalNotificationResponseProto = generalNotificationResponseProto;
+			GeneralNotificationResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public GeneralNotificationResponseProto getGeneralNotificationResponseProto() {
-		return generalNotificationResponseProto;
+		return responseProto;
 	}
 	
 	public int eventSize() {
-		return generalNotificationResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

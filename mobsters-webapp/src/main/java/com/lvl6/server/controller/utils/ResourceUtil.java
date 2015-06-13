@@ -112,7 +112,7 @@ public class ResourceUtil {
 				actualResourceChange );
 		return actualResourceChange;
 	}
-	
+
 	public boolean hasEnoughCash(User user, int cashChange) {
 		//if user's aggregate cash is < cost, don't allow transaction
 		int userCash = user.getCash();
@@ -122,40 +122,58 @@ public class ResourceUtil {
 		//have more than a negative amount
 		int cashRequired = -1 * cashChange;
 		if (userCash < cashRequired) {
-			log.error("user error: user does not have enough cash. userCash="
-					+ userCash + "\t cashSpent=" + cashChange);
+			log.error("not enough cash. userCash={}\t cashChange={}",
+					userCash, cashChange);
 			return false;
 		}
 		return true;
 	}
 
 	public boolean hasEnoughOil(User user, int oilChange) {
-		//if user's aggregate cash is < cost, don't allow transaction
-		int userCash = user.getCash();
+		//if user's aggregate oil is < cost, don't allow transaction
+		int userOil = user.getOil();
 
 		//since negative resourceChange means charge, then negative of that is
 		//the cost. If resourceChange is positive, meaning refund, user will always
 		//have more than a negative amount
 		int oilRequired = -1 * oilChange;
-		if (userCash < oilRequired) {
-			log.error("user error: user does not have enough cash. userCash="
-					+ userCash + "\t cashSpent=" + oilChange);
+		if (userOil < oilRequired) {
+			log.error("not enough oil. userOil={}\t oilChange={}",
+					userOil, oilChange);
 			return false;
 		}
 		return true;
 	}
-	
+
+	public boolean hasEnoughGachaCredits(User user, int gachaCreditsChange) {
+		//if user's aggregate gachaCredits is < cost, don't allow transaction
+		int userGachaCredits = user.getGachaCredits();
+
+		//since negative resourceChange means charge, then negative of that is
+		//the cost. If resourceChange is positive, meaning refund, user will always
+		//have more than a negative amount
+		int gachaCreditsRequired = -1 * gachaCreditsChange;
+		if (userGachaCredits < gachaCreditsRequired) {
+			log.error("not enough gachaCredits. userGachaCredits={}\t gachaCreditsChange={}",
+					userGachaCredits, gachaCreditsChange);
+			return false;
+		}
+		return true;
+	}
+
 	public boolean hasEnoughGems(User user, int gemsSpent) {
 		if (gemsSpent > 0) {
 			int userGems = user.getGems();
 			//check if user can afford to buy however many more user wants to buy
 			if (userGems < gemsSpent) {
+				log.error("not enough gems. userGems={}\t gemsSpent={}",
+						userGems, gemsSpent);
 				return false;
 			}
 		}
 		return true;
 	}
-	
-	
-	
+
+
+
 }

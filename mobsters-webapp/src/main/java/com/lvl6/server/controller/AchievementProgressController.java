@@ -10,7 +10,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -28,10 +27,11 @@ import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.AchievementStuffUtil;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-@DependsOn("gameServer")
+
 public class AchievementProgressController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -53,7 +53,7 @@ public class AchievementProgressController extends EventController {
 	protected UpdateUtil updateUtil;
 
 	public AchievementProgressController() {
-		numAllocatedThreads = 3;
+		
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class AchievementProgressController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent) event)
 				.getAchievementProgressRequestProto();
 
@@ -105,8 +105,8 @@ public class AchievementProgressController extends EventController {
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -131,8 +131,8 @@ public class AchievementProgressController extends EventController {
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
 			log.error("exception in AchievementProgress processEvent", e);
@@ -140,8 +140,8 @@ public class AchievementProgressController extends EventController {
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAchievementProgressResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}

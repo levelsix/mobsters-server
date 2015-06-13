@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -24,16 +23,17 @@ import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAve
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.BeginClanAvengingAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class BeginClanAvengingController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -41,15 +41,15 @@ public class BeginClanAvengingController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
 
 	public BeginClanAvengingController() {
-		numAllocatedThreads = 4;
+
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class BeginClanAvengingController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginClanAvengingRequestProto reqProto = ((BeginClanAvengingRequestEvent) event)
 				.getBeginClanAvengingRequestProto();
 
@@ -124,8 +124,8 @@ public class BeginClanAvengingController extends EventController {
 			BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -134,7 +134,7 @@ public class BeginClanAvengingController extends EventController {
 		try {
 			List<ClanAvenge> caList = clanStuffUtils.javafyPvpHistoryProto(
 					userId, clanId, recentNBattles, clientTime);
-			Map<String, MinimumUserProtoWithLevel> attackerMupwlMap = clanStuffUtils
+			Map<String, MinimumUserProto> attackerMupMap = clanStuffUtils
 					.extractAttackerFullUserProto(recentNBattles);
 
 			BeginClanAvengingAction bcaa = new BeginClanAvengingAction(userId,
@@ -145,7 +145,7 @@ public class BeginClanAvengingController extends EventController {
 			BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 
 			if (resBuilder.getStatus().equals(BeginClanAvengingStatus.SUCCESS)) {
 				//only write to clan if success
@@ -153,12 +153,12 @@ public class BeginClanAvengingController extends EventController {
 						.getRetaliationRequestsWithIds();
 				List<PvpClanAvengeProto> retaliationProtos = createInfoProtoUtils
 						.createPvpClanAvengeProto(retaliationRequestsWithIds,
-								senderProto, clanId, attackerMupwlMap);
+								senderProto, clanId, attackerMupMap);
 
 				resBuilder.addAllClanAvengings(retaliationProtos);
 
-				resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
-				server.writeClanEvent(resEvent, clanId);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				//				User user = bcaa.getProspectiveMember();
 				//				Clan clan = bcaa.getProspectiveClan();
@@ -167,7 +167,7 @@ public class BeginClanAvengingController extends EventController {
 
 			} else {
 				//only write to user if just reject or fail
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			}
 
 		} catch (Exception e) {
@@ -177,8 +177,8 @@ public class BeginClanAvengingController extends EventController {
 				BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BeginClanAvenging processEvent", e);
 			}
@@ -227,9 +227,9 @@ public class BeginClanAvengingController extends EventController {
 	//			  RetrieveClanDataResponseProto.newBuilder();
 	//		  rcdrpb.setMup(senderProto);
 	//		  rcdrpb.setClanData(cdp);
-	//		  
+	//
 	//		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-	//		  server.writeEvent(rcdre);
+	//		  responses.normalResponseEvents().add(rcdre);
 	//	  }
 
 	public Locker getLocker() {

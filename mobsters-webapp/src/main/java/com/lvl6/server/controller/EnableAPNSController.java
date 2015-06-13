@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -14,17 +13,18 @@ import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto;
 import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class EnableAPNSController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
 	public EnableAPNSController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class EnableAPNSController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EnableAPNSRequestProto reqProto = ((EnableAPNSRequestEvent) event)
 				.getEnableAPNSRequestProto();
 
@@ -50,7 +50,7 @@ public class EnableAPNSController extends EventController {
 		EnableAPNSResponseProto.Builder resBuilder = EnableAPNSResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
@@ -64,8 +64,8 @@ public class EnableAPNSController extends EventController {
 			EnableAPNSResponseProto resProto = resBuilder.build();
 			EnableAPNSResponseEvent resEvent = new EnableAPNSResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setEnableAPNSResponseProto(resProto);
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resProto);
+			responses.normalResponseEvents().add(resEvent);
 
 			boolean isDifferent = checkIfNewTokenDifferent(
 					user.getDeviceToken(), deviceToken);
@@ -79,7 +79,7 @@ public class EnableAPNSController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in EnableAPNSController processEvent", e);
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName()); 
 		}
 	}
 

@@ -21,17 +21,21 @@ import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
-import com.lvl6.server.EventWriter;
+import com.lvl6.server.eventsender.EventWriter;
+import com.lvl6.util.EventParser;
 
 @Component
 public class MessagingUtil {
 	private static final Logger log = LoggerFactory
 			.getLogger(MessagingUtil.class);
 
+
+	//TODO: Fix this whole class to work with websockets
+
+
 	@Autowired
 	EventWriter eventWriter;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -61,14 +65,7 @@ public class MessagingUtil {
 				null);
 	}
 
-	public MinimumUserProtoWithLevel getAlexUserProtoWithLvl() {
-		User alex = RetrieveUtils.userRetrieveUtils().getUserById(
-				ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return createInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null,
-				null);
-	}
-
-	public void sendMaintanenceModeMessageUdid(String message, String udid) {
+	public void sendMaintanenceModeMessageUdid(String message, String udid, String uuid) {
 		log.info("Sending maintenance mode message: \"{}\" to player {}",
 				message, udid);
 		//send admin message
@@ -78,10 +75,11 @@ public class MessagingUtil {
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent("");
 		ev.setSendAdminMessageResponseProto(samrp.build());
-		eventWriter.processPreDBResponseEvent(ev, udid);
+		eventWriter.sendPreDBResponseEvent(udid, EventParser.getResponseBytes(uuid, ev));
+		//eventWriter.processPreDBResponseEvent(ev, udid);
 	}
 
-	public void sendMaintanenceModeMessage(String message, String playerId) {
+	public void sendMaintanenceModeMessage(String message, String playerId, String uuid) {
 		log.info("Sending maintenance mode message: \"{}\" to player {}",
 				message, playerId);
 		//send admin message
@@ -92,10 +90,10 @@ public class MessagingUtil {
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
 				playerId);
 		ev.setSendAdminMessageResponseProto(samrp.build());
-		eventWriter.handleEvent(ev);
+		eventWriter.sendToSinglePlayer(playerId, EventParser.getResponseBytes(uuid, ev));
 	}
 
-	public void sendAdminMessage(String message) {
+	public void sendAdminMessage(String message, String uuid) {
 		log.info("Sending admin message: {}", message);
 		//send admin message
 		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto
@@ -105,18 +103,18 @@ public class MessagingUtil {
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
 				samrp.getSenderUuid());
 		ev.setSendAdminMessageResponseProto(samrp.build());
-		eventWriter.processGlobalChatResponseEvent(ev);
+		//eventWriter.processGlobalChatResponseEvent(ev);
 		//send regular global˙ chat
 		log.info("Sending admin message global chat");
 		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
 				.newBuilder();
-		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
+		MinimumUserProto senderProto = getAlexUserProto();
 		final ChatScope scope = ChatScope.GLOBAL;
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
 		chatProto.setChatMessage(message);
 		chatProto.setSender(senderProto);
 		chatProto.setScope(scope);
-		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto,
+		sendChatMessage(senderProto.getUserUuid(), chatProto,
 				1, timeOfPost.getTime());
 	}
 
@@ -130,11 +128,12 @@ public class MessagingUtil {
 		//add new message to front of list
 		chatMessages.add(0, createInfoProtoUtils.createGroupChatMessageProto(
 				time, chatProto.getSender(), chatProto.getChatMessage(), true,
-				null, null, null));
-		eventWriter.processGlobalChatResponseEvent(ce);
+				null, null, null, ""));
+		//TODO: Fix this
+		//eventWriter.processGlobalChatResponseEvent(ce);
 	}
 
 	public void sendGlobalMessage(ResponseEvent re) {
-		eventWriter.processGlobalChatResponseEvent(re);
+		//eventWriter.processGlobalChatResponseEvent(re);
 	}
 }

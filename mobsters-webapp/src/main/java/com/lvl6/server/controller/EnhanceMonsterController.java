@@ -35,7 +35,7 @@
 //import com.lvl6.utils.utilmethods.DeleteUtils;
 //import com.lvl6.utils.utilmethods.UpdateUtils;
 //
-//@Component @DependsOn("gameServer") public class EnhanceMonsterController extends EventController {
+//@Component  public class EnhanceMonsterController extends EventController {
 //
 //  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 //
@@ -43,7 +43,7 @@
 //  protected Locker locker;
 //
 //  public EnhanceMonsterController() {
-//    numAllocatedThreads = 4;
+//    
 //  }
 //
 //  @Override
@@ -57,7 +57,7 @@
 //  }
 //
 //  @Override
-//  protected void processRequestEvent(RequestEvent event) throws Exception {
+//  public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 //    EnhanceMonsterRequestProto reqProto = ((EnhanceMonsterRequestEvent)event).getEnhanceMonsterRequestProto();
 //
 //    log.info(
@@ -105,8 +105,8 @@
 //
 //    	EnhanceMonsterResponseEvent resEvent = new EnhanceMonsterResponseEvent(userId);
 //    	resEvent.setTag(event.getTag());
-//    	resEvent.setEnhanceMonsterResponseProto(resBuilder.build());
-//    	server.writeEvent(resEvent);
+//    	resEvent.setResponseProto(resBuilder.build());
+//    	responses.normalResponseEvents().add(resEvent);
 //
 //    	/*
 //    	if (successful) {
@@ -115,7 +115,7 @@
 //    		UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 //    			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
 //    		resEventUpdate.setTag(event.getTag());
-//    		server.writeEvent(resEventUpdate);
+//    		responses.normalResponseEvents().add(resEventUpdate);
 //
 ////    		writeChangesToHistory(userId, inEnhancing, userMonsterIdsThatFinished);
 //    		writeToUserCurrencyHistory(aUser, curTime, result.getUserMonsterId(), money, previousGems);
@@ -127,8 +127,8 @@
 //    		resBuilder.setStatus(EnhanceMonsterStatus.FAIL_OTHER);
 //    		EnhanceMonsterResponseEvent resEvent = new EnhanceMonsterResponseEvent(userId);
 //    		resEvent.setTag(event.getTag());
-//    		resEvent.setEnhanceMonsterResponseProto(resBuilder.build());
-//    		server.writeEvent(resEvent);
+//    		resEvent.setResponseProto(resBuilder.build());
+//    		responses.normalResponseEvents().add(resEvent);
 //    	} catch (Exception e2) {
 //    		log.error("exception2 in EnhanceMonsterController processEvent", e);
 //    	}

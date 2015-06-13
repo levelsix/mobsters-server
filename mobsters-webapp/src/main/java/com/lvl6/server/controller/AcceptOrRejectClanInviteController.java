@@ -8,10 +8,10 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AcceptOrRejectClanInviteRequestEvent;
 import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
@@ -41,13 +41,15 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AcceptOrRejectClanInviteAction;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
+import com.lvl6.server.eventsender.ClanResponseEvent;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
-@DependsOn("gameServer")
+
 public class AcceptOrRejectClanInviteController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -81,7 +83,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
 	@Autowired
-	protected ClanSearch clanSearch;
+	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
@@ -90,7 +92,6 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 
 	public AcceptOrRejectClanInviteController() {
-		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AcceptOrRejectClanInviteRequestProto reqProto = ((AcceptOrRejectClanInviteRequestEvent) event)
 				.getAcceptOrRejectClanInviteRequestProto();
 
@@ -148,9 +149,9 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -183,13 +184,13 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
 
 			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)
 					&& null != accepted) {
 				//only write to clan if user accepted and success
-				server.writeClanEvent(resEvent, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				User user = aorcia.getProspectiveMember();
 				Clan clan = aorcia.getProspectiveClan();
@@ -206,7 +207,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 				ClanDataProto cdp = scdpa.execute();
 
-				sendClanData(event, senderProto, userId, cdp);
+				sendClanData(event, senderProto, userId, cdp, responses);
 
 				//update clan cache
 				updateClanCache(clanId, aorcia.getClanSize(),
@@ -214,7 +215,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 			} else {
 				//only write to user if just reject or fail
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			}
 
 		} catch (Exception e) {
@@ -224,9 +225,9 @@ public class AcceptOrRejectClanInviteController extends EventController {
 				AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
-				server.writeEvent(resEvent);
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in AcceptOrRejectClanInvite processEvent",
@@ -272,7 +273,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	//	}
 
 	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,
-			String userId, ClanDataProto cdp) {
+			String userId, ClanDataProto cdp, ToClientEvents responses) {
 		if (null == cdp) {
 			return;
 		}
@@ -285,21 +286,12 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		rcdrpb.setClanData(cdp);
 
 		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		server.writeEvent(rcdre);
+		responses.normalResponseEvents().add(rcdre);
 	}
 
 	private void updateClanCache(String clanId, int clanSize,
 			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
-		//need to account for this user joining clan
-		clanSize += 1;
-		Date lastChatTime = lastChatTimeContainer.get(0);
-
-		if (requestToJoinRequired) {
-			clanSize = ClanSearch.penalizedClanSize;
-			lastChatTime = ControllerConstants.INCEPTION_DATE;
-		}
-
-		clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
 	}
 
 	public Locker getLocker() {
@@ -371,12 +363,13 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
-	public ClanSearch getClanSearch() {
-		return clanSearch;
+
+	public HazelcastClanSearchImpl getHzClanSearch() {
+		return hzClanSearch;
 	}
 
-	public void setClanSearch(ClanSearch clanSearch) {
-		this.clanSearch = clanSearch;
+	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {

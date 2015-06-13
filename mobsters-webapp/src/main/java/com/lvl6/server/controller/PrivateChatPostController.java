@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -43,17 +42,19 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TranslationUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.memetix.mst.language.Language;
 
 @Component
-@DependsOn("gameServer")
 public class PrivateChatPostController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(PrivateChatPostController.class);
 
 	@Autowired
 	protected AdminChatUtil adminChatUtil;
@@ -84,11 +85,18 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	
+	@Autowired
+	protected TranslationUtils translationUtils;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
+	
 
 	private PrivateChatPostResponseProto pcprp;
 
 	public PrivateChatPostController() {
-		numAllocatedThreads = 4;
+		
 	}
 
 	@Override
@@ -102,10 +110,12 @@ public class PrivateChatPostController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		PrivateChatPostRequestProto reqProto = ((PrivateChatPostRequestEvent) event)
 				.getPrivateChatPostRequestProto();
 
+		log.info("reqProto: {}", reqProto);
+		
 		// from client
 		MinimumUserProto senderProto = reqProto.getSender();
 		String posterId = senderProto.getUserUuid();
@@ -143,8 +153,8 @@ public class PrivateChatPostController extends EventController {
 			PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(
 					posterId);
 			resEvent.setTag(event.getTag());
-			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -230,7 +240,7 @@ public class PrivateChatPostController extends EventController {
 						translationRequired = false;
 					}
 					else {
-						translatedMessage = miscMethods.translate(posterLanguage, recipientLanguage, censoredContent);
+						translatedMessage = translationUtils.translate(posterLanguage, recipientLanguage, censoredContent, toggle);
 
 						for(TranslateLanguages tl : translatedMessage.keySet()) {
 							ChatScope chatType = ChatScope.PRIVATE;
@@ -314,12 +324,12 @@ public class PrivateChatPostController extends EventController {
 							recipientId);
 					pcprp = resBuilder.build();
 					resEvent2.setPrivateChatPostResponseProto(pcprp);
-					server.writeAPNSNotificationOrEvent(resEvent2);
+					responses.apnsResponseEvents().add(resEvent2);
 				}
 			}
 			// send to sender of the private chat post
-			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
 
 			// if (legitPost && recipientId != posterId) {
 			// User wallOwner = users.get(recipientId);
@@ -337,8 +347,8 @@ public class PrivateChatPostController extends EventController {
 				PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(
 						posterId);
 				resEvent.setTag(event.getTag());
-				resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-				server.writeEvent(resEvent);
+				resEvent.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in PrivateChatPostController processEvent",
@@ -375,7 +385,7 @@ public class PrivateChatPostController extends EventController {
 			return false;
 		}
 		// maybe use different controller constants...
-		if (content.length() >= ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
+		if (content.length() > ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
 			resBuilder.setStatus(PrivateChatPostStatus.POST_TOO_LARGE);
 			log.error("wall post is too long. content length is "
 					+ content.length()

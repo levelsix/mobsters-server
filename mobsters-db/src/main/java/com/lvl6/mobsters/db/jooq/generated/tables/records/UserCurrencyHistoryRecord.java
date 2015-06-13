@@ -40,7 +40,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "user_currency_history", schema = "mobsters")
 public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyHistoryRecord> implements Record9<String, String, Timestamp, String, Integer, Integer, Integer, String, String>, IUserCurrencyHistory {
 
-	private static final long serialVersionUID = 737866098;
+	private static final long serialVersionUID = -1461869140;
 
 	/**
 	 * Setter for <code>mobsters.user_currency_history.id</code>.
@@ -112,8 +112,8 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	/**
 	 * Getter for <code>mobsters.user_currency_history.resource_type</code>.
 	 */
-	@Column(name = "resource_type", length = 45)
-	@Size(max = 45)
+	@Column(name = "resource_type", length = 100)
+	@Size(max = 100)
 	@Override
 	public String getResourceType() {
 		return (String) getValue(3);
@@ -185,8 +185,8 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	/**
 	 * Getter for <code>mobsters.user_currency_history.reason_for_change</code>.
 	 */
-	@Column(name = "reason_for_change", length = 50)
-	@Size(max = 50)
+	@Column(name = "reason_for_change", length = 95)
+	@Size(max = 95)
 	@Override
 	public String getReasonForChange() {
 		return (String) getValue(7);

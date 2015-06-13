@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -28,9 +27,10 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.eventsender.ToClientEvents;
 
 @Component
-@DependsOn("gameServer")
+
 public class ExchangeGemsForResourcesController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -46,7 +46,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	public ExchangeGemsForResourcesController() {
-		numAllocatedThreads = 1;
+		
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 	}
 
 	@Override
-	protected void processRequestEvent(RequestEvent event) throws Exception {
+	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ExchangeGemsForResourcesRequestProto reqProto = ((ExchangeGemsForResourcesRequestEvent) event)
 				.getExchangeGemsForResourcesRequestProto();
 
@@ -98,9 +98,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setExchangeGemsForResourcesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
 
@@ -129,9 +129,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseProto resProto = resBuilder.build();
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
-			resEvent.setExchangeGemsForResourcesResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			resEvent.setTag(event.getTag());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -139,7 +139,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
+				responses.normalResponseEvents().add(resEventUpdate);
 
 				writeToUserCurrencyHistory(user, previousCurrency,
 						currencyChange, curTime, resourceType, numResources,
@@ -153,9 +153,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setExchangeGemsForResourcesResponseProto(resBuilder
+			resEvent.setResponseProto(resBuilder
 					.build());
-			server.writeEvent(resEvent);
+			responses.normalResponseEvents().add(resEvent);
 		} finally {
 			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}

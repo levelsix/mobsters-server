@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.BattleReplayForUser;
@@ -104,7 +106,7 @@ public interface InsertUtil {
 	public abstract String insertUser(String name, String udid, int level,
 			int experience, int cash, int oil, int gems, boolean isFake,
 			String deviceToken, Timestamp createTime, String facebookId,
-			int avatarMonsterId, String email, String fbData);
+			int avatarMonsterId, String email, String fbData, int gachaCredits);
 
 	public abstract int insertPvpLeagueForUser(String userId, int pvpLeagueId,
 			int rank, int elo, Timestamp shieldEndTime,
@@ -345,7 +347,7 @@ public interface InsertUtil {
 			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
 	
 	public abstract boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
-			Collection<Reward> listOfRewards, String reasonForReward);
+			Collection<Reward> listOfRewards, String reasonForReward, String awardReasonDetail);
 	
 
 	public abstract boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,

@@ -145,7 +145,7 @@ public class CollectClanGiftsAction {
 				reasonForGift, listOfRewards, userRetrieveUtils, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
 				clanGiftRewardsRetrieveUtils, rewardRetrieveUtil,
-				userClanRetrieveUtils, createInfoProtoUtils);
+				userClanRetrieveUtils, createInfoProtoUtils, null);
 
 		ara.execute();
 

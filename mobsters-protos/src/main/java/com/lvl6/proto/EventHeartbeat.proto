@@ -1,0 +1,21 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventHeartbeatProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+// THIS IS SENT BY THE SERVER
+message HeartbeatRequestProto {
+	optional string heartbeatUuid = 1;
+}
+
+																						//DONE
+message HeartbeatResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional string heartbeatUuid = 2;
+}
+
+//------------------------------------------------------------------------------------------

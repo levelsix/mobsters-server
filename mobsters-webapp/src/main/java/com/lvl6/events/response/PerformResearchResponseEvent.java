@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class PerformResearchResponseEvent extends NormalResponseEvent {
+public class PerformResearchResponseEvent extends NormalResponseEvent<PerformResearchResponseProto> {
 
-	private PerformResearchResponseProto performResearchResponseProto;
+	
 
 	public PerformResearchResponseEvent(String playerId) {
 		super(playerId);
@@ -18,17 +18,17 @@ public class PerformResearchResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = performResearchResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setPerformResearchResponseProto(
-			PerformResearchResponseProto performResearchResponseProto) {
-		this.performResearchResponseProto = performResearchResponseProto;
+			PerformResearchResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 
 	public int eventSize() {
-		return performResearchResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 }

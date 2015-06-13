@@ -125,7 +125,7 @@ public class ClanEventUtil implements InitializingBean {
 	//SETUP STUFF
 	//REQUIRED INITIALIZING BEAN STUFF
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet()  {
 		setupClanRaidMonsterDmgMap();
 	}
 

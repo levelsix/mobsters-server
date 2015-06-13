@@ -7,9 +7,9 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class RedeemSecretGiftResponseEvent extends NormalResponseEvent {
+public class RedeemSecretGiftResponseEvent extends NormalResponseEvent<RedeemSecretGiftResponseProto> {
 
-	private RedeemSecretGiftResponseProto redeemSecretGiftResponseProto;
+	
 
 	public RedeemSecretGiftResponseEvent(String playerId) {
 		super(playerId);
@@ -18,18 +18,18 @@ public class RedeemSecretGiftResponseEvent extends NormalResponseEvent {
 
 	@Override
 	public int write(ByteBuffer bb) {
-		ByteString b = redeemSecretGiftResponseProto.toByteString();
+		ByteString b =  responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
 	}
 
 	public void setRedeemSecretGiftResponseProto(
-			RedeemSecretGiftResponseProto redeemSecretGiftResponseProto) {
-		this.redeemSecretGiftResponseProto = redeemSecretGiftResponseProto;
+			RedeemSecretGiftResponseProto responseProto) {
+		this.responseProto = responseProto;
 	}
 	
 	public int eventSize() {
-		return redeemSecretGiftResponseProto.getSerializedSize();
+		return responseProto.getSerializedSize();
 	}
 
 }
