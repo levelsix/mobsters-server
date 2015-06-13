@@ -595,16 +595,18 @@ public class EndPvpBattleAction {
 		//if attacker won then defender money would need to be updated
 		boolean resourceChanged = (0 != defenderStorageCashChange) ||
 				(0 != defenderStorageOilChange);
-		if (attackerWon && resourceChanged) {
-			log.info("defender before currency update:{}", defender);
-			int numUpdated = defender.updateRelativeCashAndOilAndGems(
-					defenderStorageCashChange, defenderStorageOilChange, 0, 0);
-			log.info("num updated when changing defender's currency={}",
-					numUpdated);
-			log.info("defender after currency update: {}",
-					defender);
+		if (attackerWon) {
 			log.info("updating defender user struct's to account for resources stolen");
 			updateDefenderUserStructs();
+			if(resourceChanged) {
+				log.info("defender before currency update:{}", defender);
+				int numUpdated = defender.updateRelativeCashAndOilAndGems(
+						defenderStorageCashChange, defenderStorageOilChange, 0, 0);
+				log.info("num updated when changing defender's currency={}",
+						numUpdated);
+				log.info("defender after currency update: {}",
+						defender);
+			}
 		}
 
 		Timestamp shieldEndTime = new Timestamp(
