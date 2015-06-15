@@ -46,18 +46,24 @@ public class LeaderboardTest {
 	
 	@Test
 	public void testLeaderboard() {
-		List<StrengthLeaderBoard> slbList = leaderBoardImpl.getTopNStrengths(3);
-		assertTrue(!slbList.isEmpty());
-		log.info("slbList: {}", slbList);
+		int sizeOfLeaderBoard = leaderBoardImpl.getSize();
+		List<StrengthLeaderBoard> top50List = leaderBoardImpl.getTopNStrengths(50);
+		assertTrue(!top50List.isEmpty());
+		assertTrue(top50List.size() == 50);
+		long strength50 = 0;
 		
-		leaderBoardImpl.addToLeaderboard("hi1", (long)280072663);
-		log.info("user rank {}", leaderBoardImpl.getUserRank("hi1"));
-		List<StrengthLeaderBoard> slbList3 = leaderBoardImpl.getTopNStrengths(3);
-		log.info("slbList3: {}", slbList3);
+		for(StrengthLeaderBoard slb : top50List) {
+			if(slb.getRank() == 50) {
+				strength50 = slb.getStrength();
+			}
+		}
 		
-		List<StrengthLeaderBoard> slbList4 = leaderBoardImpl.getStrengths(25, 30);
-		log.info("slbList4 {}", slbList4);
+		leaderBoardImpl.addToLeaderboard("test", (long)(strength50 + 1));
+		
+		assertTrue(leaderBoardImpl.getUserRank("test") == 50);
+		assertTrue(sizeOfLeaderBoard + 1 == leaderBoardImpl.getSize());
 	}
+		
 	
 	
 }
