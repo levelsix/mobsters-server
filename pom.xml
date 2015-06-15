@@ -232,68 +232,6 @@
 			</properties>
 		</profile>
 
-		<profile>
-			<id>jooq</id>
-			<build>
-				<plugins>
-					<plugin>
-						<!-- Specify the maven code generator plugin -->
-						<groupId>org.jooq</groupId>
-						<artifactId>jooq-codegen-maven</artifactId>
-						<version>3.6.1</version>
-
-						<!-- The plugin should hook into the generate goal -->
-						<executions>
-							<execution>
-								<id>generate-jooq</id>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>generate</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-
-							<!-- JDBC connection parameters -->
-							<jdbc>
-								<driver>${jdbc.driverClassName}</driver>
-								<url>${jdbc.url}</url>
-								<user>${jdbc.username}</user>
-								<password>${jdbc.password}</password>
-							</jdbc>
-
-							<!-- Generator parameters -->
-							<generator>
-								<name>org.jooq.util.DefaultGenerator</name>
-								<database>
-									<name>org.jooq.util.mysql.MySQLDatabase</name>
-									<includes>.*</includes>
-									<excludes></excludes>
-									<inputSchema>mobsters</inputSchema>
-									<unsignedTypes>false</unsignedTypes>
-								</database>
-								<generate>
-									<records>true</records>
-									<immutablePojos>false</immutablePojos>
-									<interfaces>true</interfaces>
-									<daos>true</daos>
-									<jpaAnnotations>true</jpaAnnotations>
-									<validationAnnotations>true</validationAnnotations>
-									<fluentSetters>true</fluentSetters>
-								</generate>
-								<target>
-									<packageName>com.lvl6.mobsters.db.jooq.generated</packageName>
-									<directory>src/main/java</directory>
-								</target>
-								<!-- <strategy> -->
-								<!-- <name>com.lvl6.misc.CustomDatabaseStrategy</name> -->
-								<!-- </strategy> -->
-							</generator>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 
 	</profiles>
 
@@ -552,6 +490,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen</artifactId>
+				<version>3.7.0.lvl6</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.tomcat</groupId>
 				<artifactId>tomcat-websocket</artifactId>
