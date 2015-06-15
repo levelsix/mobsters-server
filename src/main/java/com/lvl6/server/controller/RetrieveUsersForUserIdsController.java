@@ -20,17 +20,23 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ResearchForUser;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.ResearchsProto.AllUserResearchProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.ResearchForUserDao2;
+import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import com.lvl6.server.controller.utils.ResearchUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -55,6 +61,18 @@ public class RetrieveUsersForUserIdsController extends EventController {
 	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected ResearchForUserDao2 rfuDao;
+	
+	@Autowired
+	protected ResearchUtil researchUtil;
+	
+	@Autowired
+	protected ResearchRetrieveUtils researchRetrieveUtils;
+	
+	@Autowired
+	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
 
 
 	public RetrieveUsersForUserIdsController() {
@@ -143,12 +161,17 @@ public class RetrieveUsersForUserIdsController extends EventController {
 			}
 
 			List<UserCurrentMonsterTeamProto> teams = null;
+			List<AllUserResearchProto> research = null;
 			if (includeCurMonsterTeam) {
 				teams = constructTeamsForUsers(requestedUserIds);
+				research = createResearchProtos(requestedUserIds);
 			}
 
 			if (null != teams && !teams.isEmpty()) {
 				resBuilder.addAllCurTeam(teams);
+			}
+			if (null != research && !research.isEmpty()) {
+				resBuilder.addAllUserResearch(research);
 			}
 
 		} else {
@@ -186,6 +209,12 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 		return retVal;
 	}
+	
+	public List<AllUserResearchProto> createResearchProtos(List<String> userIds) {
+		Map<String, List<ResearchForUser>> rfuMap = rfuDao.fetchByUserIds(userIds);
+		return researchUtil.createAllUserResearchProto(rfuMap, researchRetrieveUtils, researchPropertyRetrieveUtils);
+	}
+	
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;

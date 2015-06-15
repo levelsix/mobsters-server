@@ -81,14 +81,13 @@ public interface ICustomMenuConfig extends Serializable {
 	/**
 	 * Setter for <code>mobsters.custom_menu_config.is_jiggle</code>.
 	 */
-	public ICustomMenuConfig setIsJiggle(String value);
+	public ICustomMenuConfig setIsJiggle(Boolean value);
 
 	/**
 	 * Getter for <code>mobsters.custom_menu_config.is_jiggle</code>.
 	 */
-	@Column(name = "is_jiggle", length = 45)
-	@Size(max = 45)
-	public String getIsJiggle();
+	@Column(name = "is_jiggle", precision = 1)
+	public Boolean getIsJiggle();
 
 	/**
 	 * Setter for <code>mobsters.custom_menu_config.image_name</code>.
@@ -101,6 +100,28 @@ public interface ICustomMenuConfig extends Serializable {
 	@Column(name = "image_name", length = 45)
 	@Size(max = 45)
 	public String getImageName();
+
+	/**
+	 * Setter for <code>mobsters.custom_menu_config.ipad_position_x</code>.
+	 */
+	public ICustomMenuConfig setIpadPositionX(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.custom_menu_config.ipad_position_x</code>.
+	 */
+	@Column(name = "ipad_position_x", precision = 10)
+	public Integer getIpadPositionX();
+
+	/**
+	 * Setter for <code>mobsters.custom_menu_config.ipad_position_y</code>.
+	 */
+	public ICustomMenuConfig setIpadPositionY(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.custom_menu_config.ipad_position_y</code>.
+	 */
+	@Column(name = "ipad_position_y", precision = 10)
+	public Integer getIpadPositionY();
 
 	// -------------------------------------------------------------------------
 	// FROM and INTO

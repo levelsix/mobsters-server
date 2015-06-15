@@ -103,8 +103,8 @@ public interface IClanMemberTeamDonation extends Serializable {
 	/**
 	 * Getter for <code>mobsters.clan_member_team_donation.msg</code>.
 	 */
-	@Column(name = "msg", length = 105)
-	@Size(max = 105)
+	@Column(name = "msg", length = 65535)
+	@Size(max = 65535)
 	public String getMsg();
 
 	/**

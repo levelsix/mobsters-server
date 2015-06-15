@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniEventConfig extends TableImpl<MiniEventConfigRecord> {
 
-	private static final long serialVersionUID = 1609415205;
+	private static final long serialVersionUID = 327281241;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_event_config</code>
@@ -56,14 +56,14 @@ public class MiniEventConfig extends TableImpl<MiniEventConfigRecord> {
 	public final TableField<MiniEventConfigRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
-	 * The column <code>mobsters.mini_event_config.start_time</code>.
+	 * The column <code>mobsters.mini_event_config.start_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
-	public final TableField<MiniEventConfigRecord, Timestamp> START_TIME = createField("start_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+	public final TableField<MiniEventConfigRecord, Timestamp> START_TIME = createField("start_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "DEPRECATED. Use mini_event_timetable_config");
 
 	/**
-	 * The column <code>mobsters.mini_event_config.end_time</code>.
+	 * The column <code>mobsters.mini_event_config.end_time</code>. DEPRECATED. Use mini_event_timetable_config
 	 */
-	public final TableField<MiniEventConfigRecord, Timestamp> END_TIME = createField("end_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+	public final TableField<MiniEventConfigRecord, Timestamp> END_TIME = createField("end_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "DEPRECATED. Use mini_event_timetable_config");
 
 	/**
 	 * The column <code>mobsters.mini_event_config.name</code>.

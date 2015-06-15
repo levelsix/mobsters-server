@@ -9,14 +9,19 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
+
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
+import scala.concurrent.Await
 import scala.concurrent.Future
+import scala.concurrent.duration.DurationInt
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -145,19 +150,17 @@ import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
 import com.lvl6.server.controller.utils.SecretGiftUtils
 import com.lvl6.server.controller.utils.TimeUtils
+import com.lvl6.server.eventsender.PreDBFacebookEvent
+import com.lvl6.server.eventsender.PreDBResponseEvent
+import com.lvl6.server.eventsender.ToClientEvents
 import com.lvl6.server.metrics.Metrics.timed
 import com.lvl6.utils.CreateInfoProtoUtils
 import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import javax.annotation.Resource
-import scala.concurrent.Await
-import scala.concurrent._
-import scala.concurrent.duration._
-import com.lvl6.server.eventsender.PreDBResponseEvent
-import com.lvl6.server.eventsender.ToClientEvents
-import com.lvl6.server.eventsender.PreDBFacebookEvent
 
 case class StartupData(
   resBuilder: Builder,

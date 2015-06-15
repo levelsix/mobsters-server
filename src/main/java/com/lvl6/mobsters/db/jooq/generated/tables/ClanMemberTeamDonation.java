@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClanMemberTeamDonation extends TableImpl<ClanMemberTeamDonationRecord> {
 
-	private static final long serialVersionUID = -457190558;
+	private static final long serialVersionUID = 1945373448;
 
 	/**
 	 * The reference instance of <code>mobsters.clan_member_team_donation</code>
@@ -77,7 +77,7 @@ public class ClanMemberTeamDonation extends TableImpl<ClanMemberTeamDonationReco
 	/**
 	 * The column <code>mobsters.clan_member_team_donation.msg</code>.
 	 */
-	public final TableField<ClanMemberTeamDonationRecord, String> MSG = createField("msg", org.jooq.impl.SQLDataType.VARCHAR.length(105), this, "");
+	public final TableField<ClanMemberTeamDonationRecord, String> MSG = createField("msg", org.jooq.impl.SQLDataType.CLOB, this, "");
 
 	/**
 	 * The column <code>mobsters.clan_member_team_donation.time_of_solicitation</code>.
