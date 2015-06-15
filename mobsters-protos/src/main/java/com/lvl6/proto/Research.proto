@@ -102,3 +102,14 @@ message UserResearchProto {
 	optional int64 timePurchased = 4;
 	optional bool complete = 5;
 }
+
+
+message AllUserResearchProto {
+	optional string userUuid = 1;
+	repeated ResearchProto userResearch = 2;
+}
+
+
+
+
+

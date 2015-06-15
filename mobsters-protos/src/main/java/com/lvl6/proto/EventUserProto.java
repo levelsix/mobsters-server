@@ -4591,6 +4591,30 @@ public final class EventUserProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getCurTeamOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    java.util.List<com.lvl6.proto.ResearchsProto.AllUserResearchProto> 
+        getUserResearchList();
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    com.lvl6.proto.ResearchsProto.AllUserResearchProto getUserResearch(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    int getUserResearchCount();
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder> 
+        getUserResearchOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder getUserResearchOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveUsersForUserIdsResponseProto}
@@ -4677,6 +4701,14 @@ public final class EventUserProto {
               curTeam_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.PARSER, extensionRegistry));
               break;
             }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.AllUserResearchProto>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              userResearch_.add(input.readMessage(com.lvl6.proto.ResearchsProto.AllUserResearchProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4690,6 +4722,9 @@ public final class EventUserProto {
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           curTeam_ = java.util.Collections.unmodifiableList(curTeam_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          userResearch_ = java.util.Collections.unmodifiableList(userResearch_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -4814,10 +4849,46 @@ public final class EventUserProto {
       return curTeam_.get(index);
     }
 
+    public static final int USERRESEARCH_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.ResearchsProto.AllUserResearchProto> userResearch_;
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    public java.util.List<com.lvl6.proto.ResearchsProto.AllUserResearchProto> getUserResearchList() {
+      return userResearch_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder> 
+        getUserResearchOrBuilderList() {
+      return userResearch_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    public int getUserResearchCount() {
+      return userResearch_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.AllUserResearchProto getUserResearch(int index) {
+      return userResearch_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder getUserResearchOrBuilder(
+        int index) {
+      return userResearch_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       requestedUsers_ = java.util.Collections.emptyList();
       curTeam_ = java.util.Collections.emptyList();
+      userResearch_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4841,6 +4912,9 @@ public final class EventUserProto {
       for (int i = 0; i < curTeam_.size(); i++) {
         output.writeMessage(3, curTeam_.get(i));
       }
+      for (int i = 0; i < userResearch_.size(); i++) {
+        output.writeMessage(4, userResearch_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4861,6 +4935,10 @@ public final class EventUserProto {
       for (int i = 0; i < curTeam_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, curTeam_.get(i));
+      }
+      for (int i = 0; i < userResearch_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, userResearch_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4978,6 +5056,7 @@ public final class EventUserProto {
           getSenderFieldBuilder();
           getRequestedUsersFieldBuilder();
           getCurTeamFieldBuilder();
+          getUserResearchFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5003,6 +5082,12 @@ public final class EventUserProto {
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           curTeamBuilder_.clear();
+        }
+        if (userResearchBuilder_ == null) {
+          userResearch_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          userResearchBuilder_.clear();
         }
         return this;
       }
@@ -5057,6 +5142,15 @@ public final class EventUserProto {
           result.curTeam_ = curTeam_;
         } else {
           result.curTeam_ = curTeamBuilder_.build();
+        }
+        if (userResearchBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            userResearch_ = java.util.Collections.unmodifiableList(userResearch_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.userResearch_ = userResearch_;
+        } else {
+          result.userResearch_ = userResearchBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -5126,6 +5220,32 @@ public final class EventUserProto {
                    getCurTeamFieldBuilder() : null;
             } else {
               curTeamBuilder_.addAllMessages(other.curTeam_);
+            }
+          }
+        }
+        if (userResearchBuilder_ == null) {
+          if (!other.userResearch_.isEmpty()) {
+            if (userResearch_.isEmpty()) {
+              userResearch_ = other.userResearch_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureUserResearchIsMutable();
+              userResearch_.addAll(other.userResearch_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userResearch_.isEmpty()) {
+            if (userResearchBuilder_.isEmpty()) {
+              userResearchBuilder_.dispose();
+              userResearchBuilder_ = null;
+              userResearch_ = other.userResearch_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              userResearchBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserResearchFieldBuilder() : null;
+            } else {
+              userResearchBuilder_.addAllMessages(other.userResearch_);
             }
           }
         }
@@ -5750,6 +5870,246 @@ public final class EventUserProto {
           curTeam_ = null;
         }
         return curTeamBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ResearchsProto.AllUserResearchProto> userResearch_ =
+        java.util.Collections.emptyList();
+      private void ensureUserResearchIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.AllUserResearchProto>(userResearch_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.AllUserResearchProto, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder, com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder> userResearchBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.AllUserResearchProto> getUserResearchList() {
+        if (userResearchBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userResearch_);
+        } else {
+          return userResearchBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public int getUserResearchCount() {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.size();
+        } else {
+          return userResearchBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto getUserResearch(int index) {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.get(index);
+        } else {
+          return userResearchBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder setUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.AllUserResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.set(index, value);
+          onChanged();
+        } else {
+          userResearchBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder setUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder addUserResearch(com.lvl6.proto.ResearchsProto.AllUserResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.add(value);
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder addUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.AllUserResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.add(index, value);
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder addUserResearch(
+          com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder addUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder addAllUserResearch(
+          java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.AllUserResearchProto> values) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userResearch_);
+          onChanged();
+        } else {
+          userResearchBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder clearUserResearch() {
+        if (userResearchBuilder_ == null) {
+          userResearch_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          userResearchBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public Builder removeUserResearch(int index) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.remove(index);
+          onChanged();
+        } else {
+          userResearchBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder getUserResearchBuilder(
+          int index) {
+        return getUserResearchFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder getUserResearchOrBuilder(
+          int index) {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.get(index);  } else {
+          return userResearchBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder> 
+           getUserResearchOrBuilderList() {
+        if (userResearchBuilder_ != null) {
+          return userResearchBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userResearch_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder addUserResearchBuilder() {
+        return getUserResearchFieldBuilder().addBuilder(
+            com.lvl6.proto.ResearchsProto.AllUserResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder addUserResearchBuilder(
+          int index) {
+        return getUserResearchFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ResearchsProto.AllUserResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.AllUserResearchProto userResearch = 4;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder> 
+           getUserResearchBuilderList() {
+        return getUserResearchFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.AllUserResearchProto, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder, com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder> 
+          getUserResearchFieldBuilder() {
+        if (userResearchBuilder_ == null) {
+          userResearchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ResearchsProto.AllUserResearchProto, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder, com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder>(
+                  userResearch_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          userResearch_ = null;
+        }
+        return userResearchBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveUsersForUserIdsResponseProto)
@@ -17795,108 +18155,110 @@ public final class EventUserProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
-      "erStuff.proto\032\017Structure.proto\032\nUser.pro" +
-      "to\"\344\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
-      "\001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013deviceToken\030\003 \001(\t\022\022" +
-      "\n\nfacebookId\030\004 \001(\t\022=\n\020structsJustBuilt\030\005" +
-      " \003(\0132#.com.lvl6.proto.TutorialStructProt" +
-      "o\022\014\n\004cash\030\n \001(\005\022\013\n\003oil\030\013 \001(\005\022\014\n\004gems\030\014 \001" +
-      "(\005\022\r\n\005email\030\r \001(\t\022\016\n\006fbData\030\016 \001(\t\"\230\002\n\027Us" +
-      "erCreateResponseProto\022H\n\006status\030\002 \001(\01628." +
-      "com.lvl6.proto.UserCreateResponseProto.U",
-      "serCreateStatus\"\262\001\n\020UserCreateStatus\022\013\n\007" +
-      "SUCCESS\020\001\022\025\n\021FAIL_INVALID_NAME\020\002\022&\n\"FAIL" +
-      "_USER_WITH_UDID_ALREADY_EXISTS\020\003\022\033\n\027FAIL" +
-      "_INVALID_REFER_CODE\020\004\022%\n!FAIL_USER_WITH_" +
-      "FACEBOOK_ID_EXISTS\020\005\022\016\n\nFAIL_OTHER\020\006\"Z\n\023" +
-      "LevelUpRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022\021\n\tnextLev" +
-      "el\030\002 \001(\005\"\272\001\n\024LevelUpResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022B\n\006status\030\002 \001(\01622.com.lvl6.proto.Lev",
-      "elUpResponseProto.LevelUpStatus\",\n\rLevel" +
-      "UpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\222\001" +
-      "\n#RetrieveUsersForUserIdsRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\032\n\022requestedUserUuids\030\002 \003(\t\022\035\n\025i" +
-      "ncludeCurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveU" +
-      "sersForUserIdsResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\0225\n" +
-      "\016requestedUsers\030\002 \003(\0132\035.com.lvl6.proto.F" +
-      "ullUserProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6",
-      ".proto.UserCurrentMonsterTeamProto\"F\n\022Lo" +
-      "goutRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\"h\n\035UpdateClie" +
-      "ntUserResponseProto\022-\n\006sender\030\001 \001(\0132\035.co" +
-      "m.lvl6.proto.FullUserProto\022\030\n\020timeOfUser" +
-      "Update\030\002 \001(\003\"\220\001\n\031SetFacebookIdRequestPro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\014\n\004fbId\030\002 \001(\t\022\024\n\014isUserCrea" +
-      "te\030\003 \001(\010\022\r\n\005email\030\004 \001(\t\022\016\n\006fbData\030\005 \001(\t\"" +
-      "\276\002\n\032SetFacebookIdResponseProto\0220\n\006sender",
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022N\n\006status\030\002 \001(\0162>.com.lvl6.proto.SetFac" +
-      "ebookIdResponseProto.SetFacebookIdStatus" +
-      "\0222\n\010existing\030\003 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\"j\n\023SetFacebookIdStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021FAIL_FB_ID_E" +
-      "XISTS\020\003\022\037\n\033FAIL_USER_FB_ID_ALREADY_SET\020\004" +
-      "\"\277\001\n\036UpdateUserCurrencyRequestProto\0220\n\006s" +
+      "erStuff.proto\032\016Research.proto\032\017Structure" +
+      ".proto\032\nUser.proto\"\344\001\n\026UserCreateRequest" +
+      "Proto\022\014\n\004udid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013dev" +
+      "iceToken\030\003 \001(\t\022\022\n\nfacebookId\030\004 \001(\t\022=\n\020st" +
+      "ructsJustBuilt\030\005 \003(\0132#.com.lvl6.proto.Tu" +
+      "torialStructProto\022\014\n\004cash\030\n \001(\005\022\013\n\003oil\030\013" +
+      " \001(\005\022\014\n\004gems\030\014 \001(\005\022\r\n\005email\030\r \001(\t\022\016\n\006fbD" +
+      "ata\030\016 \001(\t\"\230\002\n\027UserCreateResponseProto\022H\n" +
+      "\006status\030\002 \001(\01628.com.lvl6.proto.UserCreat",
+      "eResponseProto.UserCreateStatus\"\262\001\n\020User" +
+      "CreateStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_INVALI" +
+      "D_NAME\020\002\022&\n\"FAIL_USER_WITH_UDID_ALREADY_" +
+      "EXISTS\020\003\022\033\n\027FAIL_INVALID_REFER_CODE\020\004\022%\n" +
+      "!FAIL_USER_WITH_FACEBOOK_ID_EXISTS\020\005\022\016\n\n" +
+      "FAIL_OTHER\020\006\"Z\n\023LevelUpRequestProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001",
-      "(\021\022\021\n\tgemsSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(" +
-      "\003\022\016\n\006reason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037U" +
-      "pdateUserCurrencyResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Update" +
-      "UserCurrencyResponseProto.UpdateUserCurr" +
-      "encyStatus\"\212\001\n\030UpdateUserCurrencyStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INS" +
-      "UFFICIENT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OI" +
-      "L\020\004\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\005\"e\n\033SetGa",
-      "meCenterIdRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\024\n\014game" +
-      "CenterId\030\002 \001(\t\"\360\001\n\034SetGameCenterIdRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\022" +
-      "R\n\006status\030\003 \001(\0162B.com.lvl6.proto.SetGame" +
-      "CenterIdResponseProto.SetGameCenterIdSta" +
-      "tus\"4\n\025SetGameCenterIdStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\"c\n\034SetAvatarMonsterReq" +
-      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
-      "to.MinimumUserProto\022\021\n\tmonsterId\030\002 \001(\005\"\336" +
-      "\001\n\035SetAvatarMonsterResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.SetA" +
-      "vatarMonsterResponseProto.SetAvatarMonst" +
-      "erStatus\"5\n\026SetAvatarMonsterStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"h\n!UpdateClientT" +
-      "askStateRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\021\n\ttaskSt" +
-      "ate\030\002 \001(\014\"\205\002\n\"UpdateClientTaskStateRespo",
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\021\n\ttaskState\030\002 \001(\014\022^\n" +
-      "\006status\030\003 \001(\0162N.com.lvl6.proto.UpdateCli" +
-      "entTaskStateResponseProto.UpdateClientTa" +
-      "skStateStatus\":\n\033UpdateClientTaskStateSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"k\n\036Upd" +
-      "ateUserStrengthRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\027\n" +
-      "\017updatedStrength\030\002 \001(\003\"\346\001\n\037UpdateUserStr" +
-      "engthResponseProto\0220\n\006sender\030\001 \001(\0132 .com",
-      ".lvl6.proto.MinimumUserProto\022X\n\006status\030\002" +
-      " \001(\0162H.com.lvl6.proto.UpdateUserStrength" +
-      "ResponseProto.UpdateUserStrengthStatus\"7" +
-      "\n\030UpdateUserStrengthStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\016\n\nFAIL_OTHER\020\002\"[\n\026SetTangoIdRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\017\n\007tangoId\030\002 \001(\t\"\327\001\n\027SetTang" +
-      "oIdResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\017\n\007tangoId\030\002 " +
-      "\001(\t\022H\n\006status\030\003 \001(\01628.com.lvl6.proto.Set",
-      "TangoIdResponseProto.SetTangoIdStatus\"/\n" +
-      "\020SetTangoIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\020B\016EventUserProto"
+      "Proto\022\021\n\tnextLevel\030\002 \001(\005\"\272\001\n\024LevelUpResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022B\n\006status\030\002 \001(\01622.co",
+      "m.lvl6.proto.LevelUpResponseProto.LevelU" +
+      "pStatus\",\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"\222\001\n#RetrieveUsersForUserId" +
+      "sRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022\032\n\022requestedUser" +
+      "Uuids\030\002 \003(\t\022\035\n\025includeCurMonsterTeam\030\003 \001" +
+      "(\010\"\211\002\n$RetrieveUsersForUserIdsResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\0225\n\016requestedUsers\030\002 \003(\0132\035." +
+      "com.lvl6.proto.FullUserProto\022<\n\007curTeam\030",
+      "\003 \003(\0132+.com.lvl6.proto.UserCurrentMonste" +
+      "rTeamProto\022:\n\014userResearch\030\004 \003(\0132$.com.l" +
+      "vl6.proto.AllUserResearchProto\"F\n\022Logout" +
+      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\"h\n\035UpdateClientUs" +
+      "erResponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lv" +
+      "l6.proto.FullUserProto\022\030\n\020timeOfUserUpda" +
+      "te\030\002 \001(\003\"\220\001\n\031SetFacebookIdRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\014\n\004fbId\030\002 \001(\t\022\024\n\014isUserCreate\030\003",
+      " \001(\010\022\r\n\005email\030\004 \001(\t\022\016\n\006fbData\030\005 \001(\t\"\276\002\n\032" +
+      "SetFacebookIdResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022N\n\006" +
+      "status\030\002 \001(\0162>.com.lvl6.proto.SetFaceboo" +
+      "kIdResponseProto.SetFacebookIdStatus\0222\n\010" +
+      "existing\030\003 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\"j\n\023SetFacebookIdStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021FAIL_FB_ID_EXIST" +
+      "S\020\003\022\037\n\033FAIL_USER_FB_ID_ALREADY_SET\020\004\"\277\001\n" +
+      "\036UpdateUserCurrencyRequestProto\0220\n\006sende",
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021" +
+      "\n\tgemsSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n" +
+      "\006reason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037Updat" +
+      "eUserCurrencyResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022X\n\006" +
+      "status\030\002 \001(\0162H.com.lvl6.proto.UpdateUser" +
+      "CurrencyResponseProto.UpdateUserCurrency" +
+      "Status\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFI",
+      "CIENT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022" +
+      "\032\n\026FAIL_INSUFFICIENT_GEMS\020\005\"e\n\033SetGameCe" +
+      "nterIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\024\n\014gameCent" +
+      "erId\030\002 \001(\t\"\360\001\n\034SetGameCenterIdResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\022R\n\006s" +
+      "tatus\030\003 \001(\0162B.com.lvl6.proto.SetGameCent" +
+      "erIdResponseProto.SetGameCenterIdStatus\"" +
+      "4\n\025SetGameCenterIdStatus\022\013\n\007SUCCESS\020\001\022\016\n",
+      "\nFAIL_OTHER\020\002\"c\n\034SetAvatarMonsterRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\021\n\tmonsterId\030\002 \001(\005\"\336\001\n\035S" +
+      "etAvatarMonsterResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022T" +
+      "\n\006status\030\002 \001(\0162D.com.lvl6.proto.SetAvata" +
+      "rMonsterResponseProto.SetAvatarMonsterSt" +
+      "atus\"5\n\026SetAvatarMonsterStatus\022\013\n\007SUCCES" +
+      "S\020\001\022\016\n\nFAIL_OTHER\020\002\"h\n!UpdateClientTaskS" +
+      "tateRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l",
+      "vl6.proto.MinimumUserProto\022\021\n\ttaskState\030" +
+      "\002 \001(\014\"\205\002\n\"UpdateClientTaskStateResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022\021\n\ttaskState\030\002 \001(\014\022^\n\006sta" +
+      "tus\030\003 \001(\0162N.com.lvl6.proto.UpdateClientT" +
+      "askStateResponseProto.UpdateClientTaskSt" +
+      "ateStatus\":\n\033UpdateClientTaskStateStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"k\n\036UpdateU" +
+      "serStrengthRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\027\n\017upd",
+      "atedStrength\030\002 \001(\003\"\346\001\n\037UpdateUserStrengt" +
+      "hResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022X\n\006status\030\002 \001(\016" +
+      "2H.com.lvl6.proto.UpdateUserStrengthResp" +
+      "onseProto.UpdateUserStrengthStatus\"7\n\030Up" +
+      "dateUserStrengthStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\"[\n\026SetTangoIdRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\017\n\007tangoId\030\002 \001(\t\"\327\001\n\027SetTangoIdR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.",
+      "proto.MinimumUserProto\022\017\n\007tangoId\030\002 \001(\t\022" +
+      "H\n\006status\030\003 \001(\01628.com.lvl6.proto.SetTang" +
+      "oIdResponseProto.SetTangoIdStatus\"/\n\020Set" +
+      "TangoIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
+      "\020\002B\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17910,6 +18272,7 @@ public final class EventUserProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.ResearchsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -17948,7 +18311,7 @@ public final class EventUserProto {
     internal_static_com_lvl6_proto_RetrieveUsersForUserIdsResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrieveUsersForUserIdsResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "RequestedUsers", "CurTeam", });
+        new java.lang.String[] { "Sender", "RequestedUsers", "CurTeam", "UserResearch", });
     internal_static_com_lvl6_proto_LogoutRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_LogoutRequestProto_fieldAccessorTable = new
@@ -18046,6 +18409,7 @@ public final class EventUserProto {
         internal_static_com_lvl6_proto_SetTangoIdResponseProto_descriptor,
         new java.lang.String[] { "Sender", "TangoId", "Status", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.ResearchsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
