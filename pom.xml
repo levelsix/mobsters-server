@@ -493,7 +493,7 @@
 			<dependency>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen</artifactId>
-				<version>3.7.0.lvl6</version>
+				<version>3.6.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.tomcat</groupId>

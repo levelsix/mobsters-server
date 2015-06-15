@@ -13,7 +13,7 @@ import org.jooq.util.Database
 import java.lang.RuntimeException
 
 class MobstersJooqCodeGenerator extends JavaGenerator {
-  private val log:JooqLogger = JooqLogger.getLogger(classOf[MobstersJooqCodeGenerator])
+/*  private val log:JooqLogger = JooqLogger.getLogger(classOf[MobstersJooqCodeGenerator])
   val nl = System.lineSeparator()
   
   override def generateUserDefinedTypes(schema:SchemaDefinition)={
@@ -66,6 +66,6 @@ s"""
   
   protected def addSpringDaosFooter(sb:StringBuilder)={
     sb.append(nl).append("""</beans>""")
-  }
+  }*/
   
 }
