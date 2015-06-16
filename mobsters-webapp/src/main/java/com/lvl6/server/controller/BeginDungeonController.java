@@ -61,39 +61,39 @@ public class BeginDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
 
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobMonsterItemRetrieveUtils questJobMonsterItemRetrieveUtils;
-	
+
 	@Autowired
 	protected QuestJobRetrieveUtils questJobRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
 
 	public BeginDungeonController() {
-		
+
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class BeginDungeonController extends EventController {
 		List<Integer> questIds = reqProto.getQuestIdsList();
 
 		//used for element tutorial, client sets what enemy monster element should appear
-		//and only that one guy should appear (quest tasks should have only one stage in db)	
+		//and only that one guy should appear (quest tasks should have only one stage in db)
 		Element elem = reqProto.getElem();
 		// if not set, then go select monsters at random
 		boolean forceEnemyElem = reqProto.getForceEnemyElem();
@@ -262,7 +262,7 @@ public class BeginDungeonController extends EventController {
 			//DELETE TASK AND PUT IT INTO TASK HISTORY
 			String userTaskId = aTaskForUser.getId();
 			deleteExistingTaskForUser(userTaskId, aTaskForUser);
-			//DELETE FROM TASK STAGE FOR USER AND PUT IT INTO TASK STAGE HISTORY 
+			//DELETE FROM TASK STAGE FOR USER AND PUT IT INTO TASK STAGE HISTORY
 			deleteExistingTaskStagesForUser(userTaskId);
 		}
 
@@ -270,7 +270,7 @@ public class BeginDungeonController extends EventController {
 		//right now just relying on client
 		//    if (isEvent) {
 		//    	if (eventId > 0) {
-		//    		
+		//
 		//    	} else {
 		//    		log.error("isEvent set to true but eventId not positive " + "\t eventId=" +
 		//    				eventId + "\t gemsSpent=" + gemsSpent);
@@ -308,7 +308,7 @@ public class BeginDungeonController extends EventController {
 		log.warn(String
 				.format("deleted existing task_for_user. taskForUser=%s, (should be 1) numDeleted=%s",
 						aTaskForUser, num));
-		//meh, fogedaboudit 
+		//meh, fogedaboudit
 		num = InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId,
 				taskId, expGained, cashGained, oilGained, numRevives,
 				startTime, endTime, userWon, cancelled, taskStageId);
@@ -394,7 +394,7 @@ public class BeginDungeonController extends EventController {
 		int cashGained = cashList.get(0);
 		int oilGained = oilList.get(0);
 
-		//record into user_task table	  
+		//record into user_task table
 		int tsId = taskStageRetrieveUtils.getFirstTaskStageIdForTaskId(tId);
 		String userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId,
 				tId, expGained, cashGained, oilGained, clientTime, tsId);
@@ -406,7 +406,7 @@ public class BeginDungeonController extends EventController {
 		recordStages(userTaskId, tId, stageNumToStages, stageNumsToProtos);
 
 		success = true;
-		log.info(String.format("stageNumsToProtosTemp=%s", stageNumsToProtos));
+		log.debug("stageNumsToProtosTemp={}", stageNumsToProtos);
 
 		//start the cool down timer if for event
 		if (isEvent) {
@@ -624,7 +624,7 @@ public class BeginDungeonController extends EventController {
 			//aggregate to later be saved to db
 			List<TaskStageForUser> tsfuList = stageNumToStages.get(stageNum);
 
-			//don't forget to set the taskForUserId 
+			//don't forget to set the taskForUserId
 			for (TaskStageForUser tsfu : tsfuList) {
 				tsfu.setUserTaskId(userTaskId);
 			}
@@ -678,7 +678,7 @@ public class BeginDungeonController extends EventController {
 	}
 
 	//see if quest job id and monster id have an item. if yes, see if it drops.
-	//If it drops return the item id. 
+	//If it drops return the item id.
 	//default return -1
 	private int generateQuestJobMonsterItem(List<Integer> questJobIds,
 			TaskStageMonster tsm) {

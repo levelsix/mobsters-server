@@ -9,7 +9,7 @@ echo "Removing old webapp from $tomcatWebappsDir"
 rm -rf $tomcatWebappsDir/*
 
 echo "Copying new war to $tomcatWebappsDir"
-cp target/mobsters-server-1.0-SNAPSHOT.war $tomcatWebappsDir/ROOT.war
+cp mobsters-webapp/target/mobsters-webapp-1.0-SNAPSHOT.war $tomcatWebappsDir/ROOT.war
 
 echo "Starting tomcat"
 /Library/Tomcat/bin/startup.sh

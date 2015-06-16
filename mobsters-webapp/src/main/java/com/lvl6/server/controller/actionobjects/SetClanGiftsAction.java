@@ -45,17 +45,17 @@ public class SetClanGiftsAction implements StartUpAction {
 	@Override
 	public void setUp(StartUpResource fillMe) {
 		allClanGifts = clanGiftForUserRetrieveUtils.getUserClanGiftsForUser(userId);
-		log.info(String.format("allClanGifts=%s", allClanGifts));
+		log.debug(String.format("allClanGifts=%s", allClanGifts));
 
 		if (null == allClanGifts || allClanGifts.isEmpty()) {
 			return;
 		}
-		
+
 		userIds = new ArrayList<String>();
 		for(ClanGiftForUser cgfu : allClanGifts) {
 			userIds.add(cgfu.getGifterUserId());
 		}
-		
+
 		fillMe.addUserId(userIds);
 
 	}
@@ -75,7 +75,7 @@ public class SetClanGiftsAction implements StartUpAction {
 		Map<String, MinimumUserProto> mupGifters = new HashMap<String, MinimumUserProto>();
 		for (String gifterId : gifters.keySet()) {
 			User gifterUser = gifters.get(gifterId);
-			
+
 			MinimumUserProto mup = createInfoProtoUtils
 					.createMinimumUserProtoFromUserAndClan(gifterUser, null);
 			mupGifters.put(gifterId, mup);

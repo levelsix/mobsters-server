@@ -213,6 +213,9 @@ public class MonsterLevelInfoRetrieveUtils {
 				//			  }
 				allLvlToPartialInfo.put(curLvl, nextLvlInfo);
 
+				if (curLvl == minLvl) {
+					log.info("minLvlInfo={}, newMinLvlInfo={}", minLvlInfo, nextLvlInfo);
+				}
 				//			  log.info("MonsterLevelInfo={}", nextLvlInfo);
 			}
 
