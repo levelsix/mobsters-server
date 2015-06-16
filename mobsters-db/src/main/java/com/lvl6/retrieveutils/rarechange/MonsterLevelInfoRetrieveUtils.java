@@ -152,7 +152,6 @@ public class MonsterLevelInfoRetrieveUtils {
 	//since only given first and last monsterLevelInfo, need to compute
 	//inbetween values
 	private void computePartials() {
-		log.info("computePartials");
 		Map<Integer, Map<Integer, MonsterLevelInfo>> allPartialMonsterLevelInfo = new HashMap<Integer, Map<Integer, MonsterLevelInfo>>();
 
 		for (Integer monsterId : monsterIdToLevelToInfo.keySet()) {
@@ -212,11 +211,6 @@ public class MonsterLevelInfoRetrieveUtils {
 				//					  hp, exp, curLvl));
 				//			  }
 				allLvlToPartialInfo.put(curLvl, nextLvlInfo);
-
-				if (curLvl == minLvl) {
-					log.info("minLvlInfo={}, newMinLvlInfo={}", minLvlInfo, nextLvlInfo);
-				}
-				//			  log.info("MonsterLevelInfo={}", nextLvlInfo);
 			}
 
 			allPartialMonsterLevelInfo.put(monsterId, allLvlToPartialInfo);
