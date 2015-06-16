@@ -61,118 +61,39 @@
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
 					<configurationTemplate>${ec2.configuration}</configurationTemplate>
 					<templateName>${ec2.configuration}</templateName>
-					<!-- <solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7	Java 7</solutionStack>
-					<configurationTemplates>
-						<configurationTemplate>
-							<id>mobsters-prod-1</id>
-							<solutionStack>64bit Amazon Linux running Tomcat 7</solutionStack>
-							<optionSettings>
-								<optionSetting>
-									<namespace>aws:autoscaling:launchconfiguration</namespace>
-									<optionName>EC2KeyName</optionName>
-									<value>MobstersProdInstances</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elasticbeanstalk:application</namespace>
-									<optionName>Application Healthcheck URL</optionName>
-									<value>/index.html</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
-									<optionName>Xms</optionName>
-									<value>${ec2.tomcat.memory}</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
-									<optionName>Xmx</optionName>
-									<value>${ec2.tomcat.memory}</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
-									<optionName>XX:MaxPermSize</optionName>
-									<value>${ec2.tomcat.max.permsize}</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:launchconfiguration</namespace>
-									<optionName>SecurityGroups</optionName>
-									<value>elasticbeanstalk-default</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:asg</namespace>
-									<optionName>MinSize</optionName>
-									<value>${ec2.instance.count.minimum}</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:asg</namespace>
-									<optionName>MaxSize</optionName>
-									<value>${ec2.instance.count.maximum}</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:asg</namespace>
-									<optionName>Availability Zones</optionName>
-									<value>Any 1</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:trigger</namespace>
-									<optionName>Period</optionName>
-									<value>5</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:trigger</namespace>
-									<optionName>Statistic</optionName>
-									<value>Average</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:trigger</namespace>
-									<optionName>MeasureName</optionName>
-									<value>NetworkOut</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:trigger</namespace>
-									<optionName>Unit</optionName>
-									<value>Bytes</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:trigger</namespace>
-									<optionName>UpperThreshold</optionName>
-									<value>12000000</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:trigger</namespace>
-									<optionName>LowerThreshold</optionName>
-									<value>2000000</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elb:loadbalancer</namespace>
-									<optionName>LoadBalancerHTTPPort</optionName>
-									<value>80</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elb:policies</namespace>
-									<optionName>Stickiness Cookie Expiration</optionName>
-									<value>0</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elb:policies</namespace>
-									<optionName>Stickiness Policy</optionName>
-									<value>true</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:elasticbeanstalk:hostmanager</namespace>
-									<optionName>LogPublicationControl</optionName>
-									<value>true</value>
-								</optionSetting>
-								<optionSetting>
-									<namespace>aws:autoscaling:launchconfiguration</namespace>
-									<optionName>InstanceType</optionName>
-									<value>${ec2.instance.size}</value>
-								</optionSetting>
-							</optionSettings>
-						</configurationTemplate>
-					</configurationTemplates> -->
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.html</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*.p12</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>*.p12</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
 	</build>
 	<dependencies>
 		<dependency>
