@@ -39,7 +39,8 @@
 								<goals>
 									<goal>upload-source-bundle</goal>
 									<goal>create-application-version</goal>
-									<goal>update-environment</goal>
+									<goal>create-environment</goal>
+									<goal>wait-for-environment</goal>
 								</goals>
 								<configuration>
 									<applicationName>${application.release.name}</applicationName>
