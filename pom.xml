@@ -66,6 +66,8 @@
 		</repository>
 	</repositories>
 	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+
 		<!-- <jdbc.url><![CDATA[jdbc:mysql://kingdom-dev-1.cv5kxrel3z7x.us-east-1.rds.amazonaws.com/kingdom?useLegacyDatetimeCode=false]]></jdbc.url> -->
 		<jdbc.url><![CDATA[jdbc:mysql://localhost:3306/mobsters?useLegacyDatetimeCode=true]]></jdbc.url>
 		<jdbc.username>lvl6admin</jdbc.username>
