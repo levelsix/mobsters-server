@@ -14,18 +14,7 @@
 
 	<profiles>
 		<profile>
-			<id>deploy</id>
-			<properties>
-				<maven.install.skip>true</maven.install.skip>
-				<maven.deploy.skip>true</maven.deploy.skip>
-				<beanstalk.applicationName>mywebapp</beanstalk.applicationName>
-				<beanstalk.cnamePrefix>mywebapp</beanstalk.cnamePrefix>
-				<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-				<beanstalk.s3Bucket>ingenieux-beanstalk-apps</beanstalk.s3Bucket>
-				<beanstalk.s3Key>${project.artifactId}/${project.build.finalName}-${maven.build.timestamp}.war</beanstalk.s3Key>
-				<beanstalk.multipartUpload>false</beanstalk.multipartUpload>
-				<beanstalk.useLatestVersion>false</beanstalk.useLatestVersion>
-			</properties>
+			<id>beanstalk-deploy</id>
 			<build>
 				<defaultGoal>deploy</defaultGoal>
 				<plugins>
