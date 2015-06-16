@@ -37,14 +37,12 @@
 								<configuration>
 									<applicationName>${application.release.name}</applicationName>
 									<environmentName>${cname.prefix}-${maven.build.timestamp}</environmentName>
-									<defaultEnvironmentName>default</defaultEnvironmentName>
 									<cnamePrefix>${cname.prefix}-${maven.build.timestamp}</cnamePrefix>
 									<environmentRef>${cname.prefix}-${maven.build.timestamp}.elasticbeanstalk.com</environmentRef>
 									<timeoutMins>80</timeoutMins>
 									<region>${ec2.region}</region>
 									<s3Bucket>prodWars</s3Bucket>
 									<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
-									<configurationTemplate>${ec2.configuration}</configurationTemplate>
 									<templateName>${ec2.configuration}</templateName>
 								</configuration>
 							</execution>
