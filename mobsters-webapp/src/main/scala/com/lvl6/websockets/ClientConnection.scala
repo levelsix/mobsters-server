@@ -317,10 +317,10 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     listener match{
       case Some(listener)=>{
     	  listener.listener.stop()
-        listener.listener.setMessageListener(null)
         listener.listener.removeQueues(listener.queue)
     	  amqpAdmin.removeBinding(listener.binding)
     	  amqpAdmin.deleteQueue(listener.queue.getName)
+    	  listener.listener.destroy()
       }
       case None =>
     }
