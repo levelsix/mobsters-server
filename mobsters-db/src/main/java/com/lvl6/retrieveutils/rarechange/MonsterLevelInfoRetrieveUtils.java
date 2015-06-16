@@ -152,7 +152,7 @@ public class MonsterLevelInfoRetrieveUtils {
 	//since only given first and last monsterLevelInfo, need to compute
 	//inbetween values
 	private void computePartials() {
-
+		log.info("computePartials");
 		Map<Integer, Map<Integer, MonsterLevelInfo>> allPartialMonsterLevelInfo = new HashMap<Integer, Map<Integer, MonsterLevelInfo>>();
 
 		for (Integer monsterId : monsterIdToLevelToInfo.keySet()) {

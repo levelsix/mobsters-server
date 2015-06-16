@@ -412,7 +412,7 @@ public class MonsterStuffUtils {
 				//.getMonsterLevelInfoForMonsterId(monzter.getId());
 				.getAllPartialMonsterLevelInfo(monzter.getId());
 		MonsterLevelInfo info = levelToInfo.get(1); //not sure if this is right
-
+		log.info("levelToInfo={}", levelToInfo);
 		int numPiecesForCompletion = monzter.getNumPuzzlePieces();
 
 		//TODO: FIGURE OUT IF THESE ARE TEH CORRECT DEFAULT VALUES
