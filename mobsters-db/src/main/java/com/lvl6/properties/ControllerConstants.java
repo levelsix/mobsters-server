@@ -199,7 +199,7 @@ public class ControllerConstants {
 	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
 	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
 
-	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000001;
+	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000000;
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";

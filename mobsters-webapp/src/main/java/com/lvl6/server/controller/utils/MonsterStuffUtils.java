@@ -409,7 +409,8 @@ public class MonsterStuffUtils {
 		List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
 
 		Map<Integer, MonsterLevelInfo> levelToInfo = monsterLevelInfoRetrieveUtils
-				.getMonsterLevelInfoForMonsterId(monzter.getId());
+				//.getMonsterLevelInfoForMonsterId(monzter.getId());
+				.getAllPartialMonsterLevelInfo(monzter.getId());
 		MonsterLevelInfo info = levelToInfo.get(1); //not sure if this is right
 
 		int numPiecesForCompletion = monzter.getNumPuzzlePieces();
