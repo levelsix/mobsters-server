@@ -187,13 +187,13 @@ public class MonsterLevelInfoRetrieveUtils {
 			//given min and max range, generate MonsterLevelInfo data inbetween
 			allLvlToPartialInfo.put(minLvl, minLvlInfo);
 
-			// Don't know why this comment is here. IGNORE the following:
 			//due to hackery the max lvl info needs to be calculated as well,
 			//specifically exp. The exp value is the max value
 			//corresponding to the max lvl of 99, not max.getLevel()
 			//allLvlToPartialInfo.put(maxLvl, maxLvlInfo);
 
-			for (int curLvl = minLvl + 1; curLvl <= maxLvl; curLvl++) {
+			//for (int curLvl = minLvl + 1; curLvl <= maxLvl; curLvl++) {
+			for (int curLvl = minLvl; curLvl <= maxLvl; curLvl++) {
 				MonsterLevelInfo nextLvlInfo = new MonsterLevelInfo();
 				int hp = calculateHp(minLvlInfo, maxLvlInfo, curLvl);
 				nextLvlInfo.setHp(hp);
