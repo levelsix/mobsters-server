@@ -100,7 +100,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   @OnError
   def error(t:Throwable)={
-    logger.error(s"Error in ClientConnection", t)
+    logger.debug(s"Error in ClientConnection", t)
   }
   
   
