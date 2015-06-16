@@ -441,9 +441,8 @@ public class RetrieveMiniEventAction {
 	private boolean retrieveCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
-
 		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(meId);
-
+		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getTimetableForMiniEventId(meId);
 		if (null == curActiveMiniEvent) {
 			//uncommon case because someone would have to delete the MiniEvent
 			log.error("MiniEvent no longer exists. {}. Giving user new one",
