@@ -75,7 +75,7 @@
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
 		<jdbc.idleConnectionTestPeriodInMinutes>1</jdbc.idleConnectionTestPeriodInMinutes>
 		<jdbc.idleMaxAgeInMinutes>5</jdbc.idleMaxAgeInMinutes>
-		<jdbc.maxConnectionsPerPartition>30</jdbc.maxConnectionsPerPartition>
+		<jdbc.maxConnectionsPerPartition>80</jdbc.maxConnectionsPerPartition>
 		<jdbc.minConnectionsPerPartition>2</jdbc.minConnectionsPerPartition>
 		<jdbc.partitionCount>3</jdbc.partitionCount>
 		<jdbc.acquireIncrement>2</jdbc.acquireIncrement>
