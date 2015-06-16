@@ -42,8 +42,9 @@
 									<timeoutMins>80</timeoutMins>
 									<region>${ec2.region}</region>
 									<s3Bucket>prodWars</s3Bucket>
-									<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
+									<s3Key>${application.release.name}-${maven.build.timestamp}.war</s3Key>
 									<templateName>${ec2.configuration}</templateName>
+									<configurationTemplate>${ec2.configuration}</configurationTemplate>
 								</configuration>
 							</execution>
 						</executions>
