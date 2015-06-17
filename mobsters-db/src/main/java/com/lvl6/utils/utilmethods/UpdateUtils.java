@@ -964,12 +964,12 @@ public class UpdateUtils implements UpdateUtil {
 			aRow.put(DBConstants.MONSTER_FOR_USER__USER_ID, mfu.getUserId());
 			aRow.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID,
 					mfu.getMonsterId());
-			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE,
-					mfu.getCurrentExp());
-			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL,
-					mfu.getCurrentLvl());
-			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH,
-					mfu.getCurrentHealth());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE,
+//					mfu.getCurrentExp());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL,
+//					mfu.getCurrentLvl());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH,
+//					mfu.getCurrentHealth());
 			aRow.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES,
 					mfu.getNumPieces());
 			aRow.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES,
@@ -978,18 +978,30 @@ public class UpdateUtils implements UpdateUtil {
 					mfu.isComplete());
 			aRow.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME,
 					combineStartTime);
-			aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM,
-					mfu.getTeamSlotNum());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM,
+//					mfu.getTeamSlotNum());
 			aRow.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES,
 					newSourceOfPieces);
 			newRows.add(aRow);
 		}
-		log.info("newRows=" + newRows);
-		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName,
-				newRows);
+//		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName,
+//				newRows);
 
-		log.info("num monster_for_user updated: " + numUpdated
-				+ ". Number of monster_for_user: " + monsterForUserList.size());
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__NUM_PIECES);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
+		int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
+						replaceTheseColumns);
+
 		return numUpdated;
 	}
 

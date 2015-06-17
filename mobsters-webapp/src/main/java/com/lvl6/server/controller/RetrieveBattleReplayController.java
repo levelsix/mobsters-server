@@ -28,7 +28,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 public class RetrieveBattleReplayController extends EventController {
 
 
-	private static final Logger log = LoggerFactory.getLogger(RetrieveBattleReplayController.class);	
+	private static final Logger log = LoggerFactory.getLogger(RetrieveBattleReplayController.class);
 	public RetrieveBattleReplayController() {
 	}
 
@@ -37,7 +37,7 @@ public class RetrieveBattleReplayController extends EventController {
 
 	@Autowired
 	CreateInfoProtoUtils createInfoProtoUtil;
-	
+
 	@Autowired
 	protected Locker locker;
 
@@ -84,7 +84,7 @@ public class RetrieveBattleReplayController extends EventController {
 			RetrieveBattleReplayResponseEvent resEvent = new RetrieveBattleReplayResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveBattleReplayResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -109,7 +109,7 @@ public class RetrieveBattleReplayController extends EventController {
 			RetrieveBattleReplayResponseEvent resEvent = new RetrieveBattleReplayResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveBattleReplayResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -119,7 +119,7 @@ public class RetrieveBattleReplayController extends EventController {
 				RetrieveBattleReplayResponseEvent resEvent = new RetrieveBattleReplayResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveBattleReplayResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

@@ -37,7 +37,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RetrieveMiniEventAction {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventAction.class);
 
 	private String userId;
@@ -441,9 +441,8 @@ public class RetrieveMiniEventAction {
 	private boolean retrieveCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
-
 		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(meId);
-
+		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getTimetableForMiniEventId(meId);
 		if (null == curActiveMiniEvent) {
 			//uncommon case because someone would have to delete the MiniEvent
 			log.error("MiniEvent no longer exists. {}. Giving user new one",
@@ -470,7 +469,7 @@ public class RetrieveMiniEventAction {
 		int meId = mefu.getMiniEventId();
 		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
 
-		if (null == curActiveMiniEvent) {
+		if (null == curActiveMiniEventTimetable) {
 			//NOTE: reaching here means, user has collected all the rewards he can
 			//since there is no active MiniEvent, act as if the user doesn't have one
 			log.info("client wants new UserMiniEvent; no active MiniEvent");

@@ -23,11 +23,6 @@ public class RetrieveBattleReplayResponseEvent extends NormalResponseEvent<Retri
 		return b.size();
 	}
 
-	public void setRetrieveBattleReplayResponseProto(
-			RetrieveBattleReplayResponseProto retrieveBattleReplayResponseProto) {
-		this.retrieveBattleReplayResponseProto = retrieveBattleReplayResponseProto;
-	}
-
 	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
