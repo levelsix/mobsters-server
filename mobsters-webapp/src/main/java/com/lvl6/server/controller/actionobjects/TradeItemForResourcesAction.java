@@ -17,7 +17,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;
@@ -91,10 +91,10 @@ public class TradeItemForResourcesAction {
 	private int oilGained;
 	private User user;
 	private UserCurrencyHistoryDao userCurrencyHistoryDao;
-	private UserCurrencyHistory cashUserCurrencyHistory;
-	private UserCurrencyHistory oilUserCurrencyHistory;
-	private UserCurrencyHistory gemsUserCurrencyHistory;
-	private List<UserCurrencyHistory> uchList;
+	private UserCurrencyHistoryPojo cashUserCurrencyHistory;
+	private UserCurrencyHistoryPojo oilUserCurrencyHistory;
+	private UserCurrencyHistoryPojo gemsUserCurrencyHistory;
+	private List<UserCurrencyHistoryPojo> uchList;
 
 
 	private Map<String, Integer> currencyDeltas;
@@ -311,19 +311,19 @@ public class TradeItemForResourcesAction {
 //	}
 	
 	public void prepCurrencyHistory() {
-		uchList = new ArrayList<UserCurrencyHistory>();
+		uchList = new ArrayList<UserCurrencyHistoryPojo>();
 		
-		gemsUserCurrencyHistory = new UserCurrencyHistory();
+		gemsUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		gemsUserCurrencyHistory.setResourceType(miscMethods.gems);
 		gemsUserCurrencyHistory.setCurrencyBeforeChange(user.getGems());
 		uchList.add(gemsUserCurrencyHistory);
 		
-		cashUserCurrencyHistory = new UserCurrencyHistory();
+		cashUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		cashUserCurrencyHistory.setResourceType(miscMethods.cash);
 		cashUserCurrencyHistory.setCurrencyBeforeChange(user.getCash());
 		uchList.add(cashUserCurrencyHistory);
 		
-		oilUserCurrencyHistory = new UserCurrencyHistory();
+		oilUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		oilUserCurrencyHistory.setResourceType(miscMethods.oil);
 		oilUserCurrencyHistory.setCurrencyBeforeChange(user.getOil());		
 		uchList.add(oilUserCurrencyHistory);

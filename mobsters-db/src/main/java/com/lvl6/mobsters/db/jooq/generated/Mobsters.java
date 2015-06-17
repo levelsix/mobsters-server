@@ -65,7 +65,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -194,7 +193,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1130457169;
+	private static final long serialVersionUID = 568465681;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -278,7 +277,6 @@ public class Mobsters extends SchemaImpl {
 			ItemForUser.ITEM_FOR_USER,
 			ItemForUserUsage.ITEM_FOR_USER_USAGE,
 			ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER,
-			LbCurHist.LB_CUR_HIST,
 			LoadTestingEvents.LOAD_TESTING_EVENTS,
 			LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG,
 			LockBoxEventForUser.LOCK_BOX_EVENT_FOR_USER,

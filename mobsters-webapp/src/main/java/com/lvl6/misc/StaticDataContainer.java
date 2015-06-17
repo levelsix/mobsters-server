@@ -60,7 +60,7 @@ import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniJobRefreshItemConfigDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleItemsProto.BattleItemProto;
@@ -1185,7 +1185,7 @@ public class StaticDataContainer {
 		Configuration config = new DefaultConfiguration().set(DBConnection.get()
 				.getConnection()).set(SQLDialect.MYSQL);
 		MiniJobRefreshItemConfigDao miniJobRefreshDao = new MiniJobRefreshItemConfigDao(config);
-		List<MiniJobRefreshItemConfig> mjricList = miniJobRefreshDao.findAll();
+		List<MiniJobRefreshItemConfigPojo> mjricList = miniJobRefreshDao.findAll();
 		sdpb.addAllStructureItemPrices(createInfoProtoUtils.
 				createItemGemPriceProtoFromMiniJobs(mjricList));
 	}

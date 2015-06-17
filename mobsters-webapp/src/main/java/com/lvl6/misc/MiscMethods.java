@@ -37,6 +37,7 @@ import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
@@ -327,7 +328,7 @@ public class MiscMethods {
 	}
 	
 	public UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User user, PvpLeagueForUser plfu, Clan clan) {
+			UserPojo user, PvpLeagueForUser plfu, Clan clan) {
 		try {
 			if (user.getIsFake().compareTo((byte)0) == 0) {
 				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);

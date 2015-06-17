@@ -18,7 +18,7 @@ import com.lvl6.info.Reward;
 import com.lvl6.info.SalesDisplayItem;
 import com.lvl6.info.SalesItem;
 import com.lvl6.info.SalesPackage;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
 import com.lvl6.proto.SalesProto.SalesItemProto;
@@ -74,7 +74,7 @@ public class InAppPurchaseUtils {
 			SalesDisplayItemRetrieveUtils salesDisplayItemRetrieveUtils,
 			CustomMenuRetrieveUtils customMenuRetrieveUtils) {
 		SalesPackageProto.Builder b = SalesPackageProto.newBuilder();
-		b.setSalesPackageId((int)Math.random()*2000000000);
+		b.setSalesPackageId(sp.getId());
 
 		String str = sp.getProductId();
 		if (null != str && !str.isEmpty()) {
@@ -144,10 +144,10 @@ public class InAppPurchaseUtils {
 			}
 		}
 
-		List<CustomMenuConfig> cms = customMenuRetrieveUtils.getCustomMenuConfigForId(sp.getCustomMenuId());
+		List<CustomMenuConfigPojo> cms = customMenuRetrieveUtils.getCustomMenuConfigForId(sp.getCustomMenuId());
 
 		if (cms != null && !cms.isEmpty()) {
-		    for (CustomMenuConfig cm : cms) {
+		    for (CustomMenuConfigPojo cm : cms) {
 		        b.addCmp(createInfoProtoUtils.createCustomMenuProto(cm));
 		    }
 		}

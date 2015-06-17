@@ -17,8 +17,8 @@ import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
@@ -108,8 +108,8 @@ public class RetrieveMiniEventAction {
 
 	//derived state
 	private User u;
-	private MiniEventConfig curActiveMiniEvent;
-	private MiniEventTimetableConfig curActiveMiniEventTimetable;
+	private MiniEventConfigPojo curActiveMiniEvent;
+	private MiniEventTimetableConfigPojo curActiveMiniEventTimetable;
 	private MiniEventForPlayerLvl lvlEntered;
 	private MiniEventForUser mefu;
 	private Collection<MiniEventGoalForUser> megfus;
@@ -173,7 +173,7 @@ public class RetrieveMiniEventAction {
 
 		int miniEventId = mefu.getMiniEventId();
 		//if the event has not even started yet then don't send it
-		MiniEventTimetableConfig meTimetable = miniEventTimetableRetrieveUtil
+		MiniEventTimetableConfigPojo meTimetable = miniEventTimetableRetrieveUtil
 				.getTimetableForMiniEventId(miniEventId);
 		if (null == meTimetable ||
 				timeUtil.isFirstEarlierThanSecond(now, meTimetable.getStartTime()))
@@ -183,7 +183,7 @@ public class RetrieveMiniEventAction {
 			return true;
 		}
 
-		MiniEventConfig me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
+		MiniEventConfigPojo me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
 		int userLvl = mefu.getUserLvl();
 		boolean valid = retrieveMiniEventRelatedData(miniEventId, me, userLvl);
 		if (!valid) {
@@ -244,7 +244,7 @@ public class RetrieveMiniEventAction {
 		}
 	}
 
-	private boolean retrieveMiniEventRelatedData(int meId, MiniEventConfig me, int userLvl)
+	private boolean retrieveMiniEventRelatedData(int meId, MiniEventConfigPojo me, int userLvl)
 	{
 
 		lvlEntered = miniEventForPlayerLvlRetrieveUtils
@@ -517,11 +517,11 @@ public class RetrieveMiniEventAction {
 		this.u = u;
 	}
 
-	public MiniEventConfig getCurActiveMiniEvent() {
+	public MiniEventConfigPojo getCurActiveMiniEvent() {
 		return curActiveMiniEvent;
 	}
 
-	public MiniEventTimetableConfig getCurActiveMiniEventTimetable() {
+	public MiniEventTimetableConfigPojo getCurActiveMiniEventTimetable() {
 		return curActiveMiniEventTimetable;
 	}
 

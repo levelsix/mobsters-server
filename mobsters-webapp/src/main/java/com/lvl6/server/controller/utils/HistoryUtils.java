@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.IAPValues;
 
 @Component
@@ -31,9 +32,8 @@ public class HistoryUtils {
 	 *  Inserting into IAPHistory using same parameters as old insertUtils method
 	 */
 	public void insertIAPHistoryElem(JSONObject appleReceipt, int gemChange,
-			User user, double cashCost, String salesUuid, IapHistoryDao iapDao) {
-		com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistory iapHistory =
-				new com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistory();
+			UserPojo user, double cashCost, String salesUuid, IapHistoryDao iapDao) {
+		IapHistoryPojo iapHistory = new IapHistoryPojo();
 
 		String id = randomUUID();
 		iapHistory.setId(id);
@@ -67,9 +67,9 @@ public class HistoryUtils {
 		iapDao.insert(iapHistory);
 	}
 
-	public void insertUserCurrencyHistory(String userId, List<UserCurrencyHistory> uchList,
+	public void insertUserCurrencyHistory(String userId, List<UserCurrencyHistoryPojo> uchList,
 			Date now, String reasonForChange, String details, UserCurrencyHistoryDao userCurrencyHistoryDao) {
-		for(UserCurrencyHistory uch : uchList) {
+		for(UserCurrencyHistoryPojo uch : uchList) {
 			uch.setId(randomUUID());
 			uch.setUserId(userId);
 			uch.setDate(new Timestamp(now.getTime()));
@@ -79,11 +79,11 @@ public class HistoryUtils {
 		}
 	}
 
-	public UserCurrencyHistory createUserCurrencyHistory(String userId, Date now,
+	public UserCurrencyHistoryPojo createUserCurrencyHistory(String userId, Date now,
 			String resourceType, int currChange,
 			int currBeforeChange, int currAfterChange, String reason, String detail)
 	{
-		UserCurrencyHistory uch = new UserCurrencyHistory();
+		UserCurrencyHistoryPojo uch = new UserCurrencyHistoryPojo();
 		uch.setId(randomUUID());
 		uch.setUserId(userId);
 		uch.setDate(new Timestamp(now.getTime()));

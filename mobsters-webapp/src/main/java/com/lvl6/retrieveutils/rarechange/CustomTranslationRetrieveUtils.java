@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomTranslations;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomTranslationsPojo;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -22,11 +22,11 @@ public class CustomTranslationRetrieveUtils {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private static Map<Integer, CustomTranslations> idsToCustomTranslationss;
+	private static Map<Integer, CustomTranslationsPojo> idsToCustomTranslationss;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CUSTOM_TRANSLATION;
 
-	public Map<Integer, CustomTranslations> getIdsToCustomTranslationss() {
+	public Map<Integer, CustomTranslationsPojo> getIdsToCustomTranslationss() {
 		log.debug("retrieving all custom translations map");
 		if (null == idsToCustomTranslationss) {
 			setStaticIdsToCustomTranslationss();
@@ -34,7 +34,7 @@ public class CustomTranslationRetrieveUtils {
 		return idsToCustomTranslationss;
 	}
 
-	public CustomTranslations getCustomTranslationsForId(int customTranslationId) {
+	public CustomTranslationsPojo getCustomTranslationsForId(int customTranslationId) {
 		log.debug(String.format("retrieve custom translation for id {}",
 				customTranslationId));
 		if (null == idsToCustomTranslationss) {
@@ -57,10 +57,10 @@ public class CustomTranslationRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, CustomTranslations> idsToCustomTranslationsTemp = new HashMap<Integer, CustomTranslations>();
+						Map<Integer, CustomTranslationsPojo> idsToCustomTranslationsTemp = new HashMap<Integer, CustomTranslationsPojo>();
 						//loop through each row and convert it into a java object
 						while (rs.next()) {
-							CustomTranslations ct = convertRSRowToCustomTranslations(rs);
+							CustomTranslationsPojo ct = convertRSRowToCustomTranslations(rs);
 							if (ct == null) {
 								continue;
 							}
@@ -90,13 +90,13 @@ public class CustomTranslationRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private CustomTranslations convertRSRowToCustomTranslations(ResultSet rs)
+	private CustomTranslationsPojo convertRSRowToCustomTranslations(ResultSet rs)
 			throws SQLException {
 		int id = rs.getInt(DBConstants.CUSTOM_TRANSLATION__ID);
 		String phrase = rs.getString(DBConstants.CUSTOM_TRANSLATION__PHRASE);
 		String language = rs.getString(DBConstants.CUSTOM_TRANSLATION__LANGUAGE);
 		
-		CustomTranslations ct = new CustomTranslations(id, phrase, language);
+		CustomTranslationsPojo ct = new CustomTranslationsPojo(id, phrase, language);
 		return ct;
 	}
 

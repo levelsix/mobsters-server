@@ -11,6 +11,7 @@ import org.jooq.util.GeneratorStrategy.Mode
 import java.beans.Introspector
 import org.jooq.util.Database
 import java.lang.RuntimeException
+import org.jooq.util.JavaWriter
 
 class MobstersJooqCodeGenerator extends JavaGenerator {
 /*  private val log:JooqLogger = JooqLogger.getLogger(classOf[MobstersJooqCodeGenerator])
@@ -68,4 +69,14 @@ s"""
     sb.append(nl).append("""</beans>""")
   }*/
   
+  override def generatePojoClassFooter(table:TableDefinition, out:JavaWriter)={
+      super.generatePojoClassFooter(table, out)
+      
+      out.println();
+      out.tab(1).println()
+      out.tab(1).println("public String toString() {");
+      out.tab(2).println("return \"MyRecord[\" + valuesRow() + \"]\"");
+      out.tab(1).println("}");
+  }
+
 }

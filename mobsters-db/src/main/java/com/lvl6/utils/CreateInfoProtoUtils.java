@@ -19,10 +19,11 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
@@ -207,7 +208,6 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.utils.TranslationUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -2348,7 +2348,7 @@ public class CreateInfoProtoUtils {
 
 	/** MiniEvent.proto ********************************************/
 	public UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
-			MiniEventConfig me, MiniEventTimetableConfig metc,
+			MiniEventConfigPojo me, MiniEventTimetableConfigPojo metc,
 			Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
@@ -2385,8 +2385,8 @@ public class CreateInfoProtoUtils {
 		return umepb;
 	}
 
-	public MiniEventProto createMiniEventProto(MiniEventConfig me,
-			MiniEventTimetableConfig metc,
+	public MiniEventProto createMiniEventProto(MiniEventConfigPojo me,
+			MiniEventTimetableConfigPojo metc,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards,
@@ -5297,7 +5297,7 @@ public class CreateInfoProtoUtils {
 
 	//using user pojo
 	public FullUserProto createFullUserProtoFromUser(
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User u,
+			UserPojo u,
 			PvpLeagueForUser plfu, Clan c) {
 		FullUserProto.Builder builder = FullUserProto.newBuilder();
 		String userId = u.getId();
@@ -5517,7 +5517,7 @@ public class CreateInfoProtoUtils {
 		}
 	}
 
-	public CustomMenuProto createCustomMenuProto(CustomMenuConfig cm) {
+	public CustomMenuProto createCustomMenuProto(CustomMenuConfigPojo cm) {
 		CustomMenuProto.Builder cmpb = CustomMenuProto.newBuilder();
 		cmpb.setCustomMenuId(cm.getCustomMenuId());
 		cmpb.setPositionX(cm.getPositionX());
@@ -5600,9 +5600,9 @@ public class CreateInfoProtoUtils {
 		return slbpList;
 	}
 
-	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfig> mjricList) {
+	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfigPojo> mjricList) {
 		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
-		for(MiniJobRefreshItemConfig mjric : mjricList) {
+		for(MiniJobRefreshItemConfigPojo mjric : mjricList) {
 			ItemGemPriceProto.Builder b = ItemGemPriceProto.newBuilder();
 			b.setItemId(mjric.getItemId());
 			b.setGemPrice(mjric.getGemPrice());
