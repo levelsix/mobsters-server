@@ -25,7 +25,7 @@ public class MiniEventTimetableRetrieveUtils {
 
 //	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_TIMETABLE_CONFIG;
 
-	private Map<Integer, MiniEventTimetableConfig> idToMiniEventTimetableConfig;
+	private Map<Integer, MiniEventTimetableConfig> miniEventIdToMiniEventTimetableConfig;
 	private TreeSet<MiniEventTimetableConfig> meStartTimeTree;
 	private TreeSet<MiniEventTimetableConfig> meEndTimeTree;
 	private static final MeStartTimeComparator stComparator = new MeStartTimeComparator();
@@ -116,23 +116,23 @@ public class MiniEventTimetableRetrieveUtils {
 	public MiniEventTimetableConfig getTimetableForMiniEventId(int miniEventId) {
 		log.debug("retrieving Timetable for miniEventId={}", miniEventId);
 
-		if (null == idToMiniEventTimetableConfig || idToMiniEventTimetableConfig.isEmpty()) {
+		if (null == miniEventIdToMiniEventTimetableConfig || miniEventIdToMiniEventTimetableConfig.isEmpty()) {
 			reload();
 		}
 
-		if (!idToMiniEventTimetableConfig.containsKey(miniEventId)) {
+		if (!miniEventIdToMiniEventTimetableConfig.containsKey(miniEventId)) {
 			log.error("no MiniEventTimetable for miniEventId={}", miniEventId);
 			return null;
 		}
-		return idToMiniEventTimetableConfig.get(miniEventId);
+		return miniEventIdToMiniEventTimetableConfig.get(miniEventId);
 	}
 
 	public Map<Integer, MiniEventTimetableConfig> getAllIdsToMiniEventTimetableConfigs() {
-		if (null == idToMiniEventTimetableConfig) {
+		if (null == miniEventIdToMiniEventTimetableConfig) {
 			reload();
 		}
 
-		return idToMiniEventTimetableConfig;
+		return miniEventIdToMiniEventTimetableConfig;
 	}
 
 	public void reload() {
@@ -150,18 +150,18 @@ public class MiniEventTimetableRetrieveUtils {
 			miniEventIdToMiniEventTimetableConfigTemp.put(miniEventId, metc);
 		}
 
-		idToMiniEventTimetableConfig = miniEventIdToMiniEventTimetableConfigTemp;
+		miniEventIdToMiniEventTimetableConfig = miniEventIdToMiniEventTimetableConfigTemp;
 	}
 
 	private void setOrderedMiniEventTimetableConfigs() {
-		if ( null == idToMiniEventTimetableConfig) {
+		if ( null == miniEventIdToMiniEventTimetableConfig) {
 			log.warn("NO MINIEVENTS!");
 			return;
 		}
 
 		TreeSet<MiniEventTimetableConfig> meStartTimeTreeTemp = new TreeSet<MiniEventTimetableConfig>(stComparator);
 		TreeSet<MiniEventTimetableConfig> meEndTimeTreeTemp = new TreeSet<MiniEventTimetableConfig>(etComparator);
-		for (MiniEventTimetableConfig me : idToMiniEventTimetableConfig.values()) {
+		for (MiniEventTimetableConfig me : miniEventIdToMiniEventTimetableConfig.values()) {
 			boolean added = meStartTimeTreeTemp.add(me);
 			if (!added) {
 				log.error("(shouldn't happen...) can't add MiniEventTimetableConfig={} to treeSet={}",
