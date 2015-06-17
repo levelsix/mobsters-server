@@ -19,7 +19,7 @@ object ClientConnections extends LazyLogging{
       pingConnections(connectionsByConnectionId)
     }
   }
-  pingTimer.schedule(pingTask, 20000)
+  pingTimer.scheduleAtFixedRate(pingTask, 20000, 20000)
   
   def addConnection(connection:ClientConnection)={
     connection.userId match{
