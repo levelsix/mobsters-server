@@ -26,8 +26,8 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
@@ -262,7 +262,7 @@ public class EndPvpBattleController extends EventController {
 			Map<String, Map<String, Integer>> changeMap = new HashMap<String, Map<String, Integer>>();
 			Map<String, Map<String, Integer>> previousCurrencyMap = new HashMap<String, Map<String, Integer>>();
 
-			PvpBattleHistory battleJustEnded = epba.getPbh();
+			PvpBattleHistoryPojo battleJustEnded = epba.getPbh();
 
 			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<PvpHistoryProto> historyProtoList = null;
@@ -279,7 +279,7 @@ public class EndPvpBattleController extends EventController {
 					log.info("attackedOtherHistory {}", attackedOtherHistory);
 					resBuilder.setBattleThatJustEnded(attackedOtherHistory);
 				}
-				List<StructureForUser> updateList = epba.getUpdateList();
+				List<StructureForUserPojo> updateList = epba.getUpdateList();
 				if(updateList != null && !updateList.isEmpty()) {
 					resBuilder.addAllUpdatedUserStructs(createInfoProtoUtils
 							.createStructStolenFromGenerators(updateList));
@@ -445,7 +445,7 @@ public class EndPvpBattleController extends EventController {
 
 	//TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
 	private PvpHistoryProto createPvpProto(User attacker, User defender,
-			Date curDate, PvpBattleHistory gotAttackedHistory) {
+			Date curDate, PvpBattleHistoryPojo gotAttackedHistory) {
 		if (null == defender) {
 			return null;
 		}
@@ -466,7 +466,7 @@ public class EndPvpBattleController extends EventController {
 		int defenderElo = defenderPu.getElo();
 
 		//hopefully this gets this pvpHistory just created
-		List<PvpBattleHistory> gotAttackedHistoryList = Collections
+		List<PvpBattleHistoryPojo> gotAttackedHistoryList = Collections
 				.singletonList(gotAttackedHistory);
 
 		log.info("gotAttackedHistoryList {}", gotAttackedHistoryList);

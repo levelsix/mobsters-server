@@ -102,6 +102,11 @@ message PvpHistoryProto {
 	optional bool clanAvenged = 17;
 	//optional BattleReplayProto replay = 18;
 	optional string replayId = 19;
+	
+	optional int32 cashStolenFromStorage = 20;
+	optional int32 cashStolenFromGenerators = 21;
+	optional int32 oilStolenFromStorage = 22;
+	optional int32 oilStolenFromGenerators = 23;
 }
 
 //------------------------------------------------------------------------------------------

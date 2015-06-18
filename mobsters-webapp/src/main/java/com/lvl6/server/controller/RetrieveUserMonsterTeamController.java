@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveUserMonsterTeamRequestEvent;
 import com.lvl6.events.response.RetrieveUserMonsterTeamResponseEvent;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
@@ -173,7 +173,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 				//TODO: replace QueueUp and Avenge controller logic with this
 				List<String> userIds = new ArrayList<String>();
 				userIds.addAll(rumta.getAllUsers().keySet());
-				Map<String, List<StructureForUser>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
+				Map<String, List<StructureForUserPojo>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
 				
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(

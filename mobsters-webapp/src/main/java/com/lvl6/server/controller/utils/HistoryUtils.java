@@ -16,8 +16,9 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistoryPojo;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
+
 import com.lvl6.properties.IAPValues;
 
 @Component
@@ -84,7 +85,7 @@ public class HistoryUtils {
 	public void insertUserCurrencyHistoryForGacha(String userId, Date now, int currChange,
 			int currBeforeChange, int currAfterChange, String reason, String detail,
 			UserCurrencyHistoryDao uchDao, String resourceType) {
-		UserCurrencyHistory uch = new UserCurrencyHistory();
+		UserCurrencyHistoryPojo uch = new UserCurrencyHistoryPojo();
 		uch.setId(randomUUID());
 		uch.setUserId(userId);
 		uch.setDate(new Timestamp(now.getTime()));
@@ -97,11 +98,11 @@ public class HistoryUtils {
 		uchDao.insert(uch);
 	}
 	
-	public UserCurrencyHistory createUserCurrencyHistory(String userId, Date now,
+	public UserCurrencyHistoryPojo createUserCurrencyHistory(String userId, Date now,
 			String resourceType, int currChange,
 			int currBeforeChange, int currAfterChange, String reason, String detail)
 	{
-		UserCurrencyHistory uch = new UserCurrencyHistory();
+		UserCurrencyHistoryPojo uch = new UserCurrencyHistoryPojo();
 		uch.setId(randomUUID());
 		uch.setUserId(userId);
 		uch.setDate(new Timestamp(now.getTime()));
@@ -115,7 +116,7 @@ public class HistoryUtils {
 		return uch;
 	}
 	
-	public PvpBattleHistory createPvpBattleHistory(String attackerId, String defenderId, Date clientDateTime,
+	public PvpBattleHistoryPojo createPvpBattleHistory(String attackerId, String defenderId, Date clientDateTime,
 			Date battleStartTime, int attackerEloChange, int attackerEloBefore, int attackerEloAfter,
 			int defenderEloChange, int defenderEloBefore, int defenderEloAfter, int attackerPrevLeague,
 			int attackerCurLeague, int defenderPrevLeague, int defenderCurLeague, int attackerPrevRank,
@@ -124,7 +125,7 @@ public class HistoryUtils {
 			int cashStolenFromStorage, int cashStolenFromGenerators, int oilStolenFromStorage, 
 			int oilStolenFromGenerators, boolean cancelled, boolean revenge, float nuPvpDmgMultiplier, 
 			boolean avenged, boolean attackerWon, String replayId) {
-		PvpBattleHistory pbh = new PvpBattleHistory();
+		PvpBattleHistoryPojo pbh = new PvpBattleHistoryPojo();
 		pbh.setAttackerId(attackerId);
 		pbh.setDefenderId(defenderId);
 		pbh.setBattleEndTime(new Timestamp(clientDateTime.getTime()));

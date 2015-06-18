@@ -152,12 +152,13 @@ import com.lvl6.server.controller.utils.HistoryUtils
 import com.lvl6.server.controller.utils.InAppPurchaseUtils
 import com.lvl6.server.controller.utils.MonsterStuffUtils
 import com.lvl6.server.controller.utils.SecretGiftUtils
-import com.lvl6.server.controller.utils.TimeUtils
+import com.lvl6.utils.TimeUtils
 import com.lvl6.server.eventsender.PreDBFacebookEvent
 import com.lvl6.server.eventsender.PreDBResponseEvent
 import com.lvl6.server.eventsender.ToClientEvents
 import com.lvl6.server.metrics.Metrics.timed
 import com.lvl6.utils.CreateInfoProtoUtils
+import com.lvl6.utils.TimeUtils
 import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil

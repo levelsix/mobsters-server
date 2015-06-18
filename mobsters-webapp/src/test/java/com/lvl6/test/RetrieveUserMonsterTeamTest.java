@@ -28,7 +28,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -265,7 +265,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 		List<String> userIds = new ArrayList<String>();
 		userIds.addAll(rumta.getAllUsers().keySet());
-		Map<String, List<StructureForUser>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
+		Map<String, List<StructureForUserPojo>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
 		
 		List<PvpProto> ppList = createInfoProtoUtil.createPvpProtos(
 				rumta.getAllUsersExceptRetriever(), rumta.getUserIdToClan(),

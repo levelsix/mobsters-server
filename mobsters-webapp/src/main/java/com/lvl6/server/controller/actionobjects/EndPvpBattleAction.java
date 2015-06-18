@@ -18,9 +18,9 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
@@ -40,7 +40,6 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
-import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -207,10 +206,10 @@ public class EndPvpBattleAction {
 	protected boolean displayToDefender;
 
 	private BattleReplayForUser brfu;
-	private PvpBattleHistory pbh;
+	private PvpBattleHistoryPojo pbh;
 	
 	private Map<String, Long> generatorsMap;
-	private List<StructureForUser> updateList;
+	private List<StructureForUserPojo> updateList;
 
 	private Map<String, Map<String, Integer>> currencyDeltasMap;
 	private Map<String, Map<String, Integer>> prevCurrenciesMap;
@@ -635,14 +634,14 @@ public class EndPvpBattleAction {
 		for(StructStolen ss : listOfGenerators) {
 			generatorsMap.put(ss.getUserStructUuid(), ss.getTimeOfRetrieval());
 		}
-		List<StructureForUser> defenderUserStructs = sfuDao.fetchByUserId(defenderId);
-		Map<String, StructureForUser> defenderSfuMap = new HashMap<String, StructureForUser>();
-		for(StructureForUser sfu : defenderUserStructs) {
+		List<StructureForUserPojo> defenderUserStructs = sfuDao.fetchByUserId(defenderId);
+		Map<String, StructureForUserPojo> defenderSfuMap = new HashMap<String, StructureForUserPojo>();
+		for(StructureForUserPojo sfu : defenderUserStructs) {
 			defenderSfuMap.put(sfu.getId(), sfu);
 		}
-		updateList = new ArrayList<StructureForUser>();
+		updateList = new ArrayList<StructureForUserPojo>();
 		for(String generatorsId : generatorsMap.keySet()) {
-			StructureForUser sfu = defenderSfuMap.get(generatorsId);
+			StructureForUserPojo sfu = defenderSfuMap.get(generatorsId);
 			Long clientCollectTime = generatorsMap.get(generatorsId);
 			Date clientCollectTimeDate = new Date(clientCollectTime);
 			Timestamp dbLastCollectTime = sfu.getLastRetrieved();
@@ -749,23 +748,23 @@ public class EndPvpBattleAction {
 //	}
 	
 	public void doCurrencyHistory() {
-		List<UserCurrencyHistory> uchList = new ArrayList<UserCurrencyHistory>();
+		List<UserCurrencyHistoryPojo> uchList = new ArrayList<UserCurrencyHistoryPojo>();
 		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
 		if(attackerWon) {
-			UserCurrencyHistory attackerCashUch = historyUtils.createUserCurrencyHistory(attackerId, 
+			UserCurrencyHistoryPojo attackerCashUch = historyUtils.createUserCurrencyHistory(attackerId, 
 					curDateTime, MiscMethods.cash, attackerStorageCashChange, attackerPrevCash, attacker.getCash(), 
 					reasonForChange, "beat " + defenderId);
 			uchList.add(attackerCashUch);
-			UserCurrencyHistory attackerOilUch = historyUtils.createUserCurrencyHistory(attackerId, 
+			UserCurrencyHistoryPojo attackerOilUch = historyUtils.createUserCurrencyHistory(attackerId, 
 					curDateTime, MiscMethods.oil, attackerStorageOilChange, attackerPrevOil, attacker.getOil(), 
 					reasonForChange, "beat " + defenderId);
 			uchList.add(attackerOilUch);
 			if (isRealDefender) {
-				UserCurrencyHistory defenderCashUch = historyUtils.createUserCurrencyHistory(defenderId, 
+				UserCurrencyHistoryPojo defenderCashUch = historyUtils.createUserCurrencyHistory(defenderId, 
 						curDateTime, MiscMethods.cash, defenderStorageCashChange, defenderPrevCash, defender.getCash(), 
 						reasonForChange, "lost to " + attackerId);
 				uchList.add(defenderCashUch);
-				UserCurrencyHistory defenderOilUch = historyUtils.createUserCurrencyHistory(defenderId, 
+				UserCurrencyHistoryPojo defenderOilUch = historyUtils.createUserCurrencyHistory(defenderId, 
 						curDateTime, MiscMethods.oil, defenderStorageOilChange, defenderPrevCash, defender.getCash(), 
 						reasonForChange, "lost to " + attackerId);
 				uchList.add(defenderOilUch);
@@ -814,11 +813,11 @@ public class EndPvpBattleAction {
 		this.idToUser = idToUser;
 	}
 
-	public PvpBattleHistory getPbh() {
+	public PvpBattleHistoryPojo getPbh() {
 		return pbh;
 	}
 
-	public void setPbh(PvpBattleHistory pbh) {
+	public void setPbh(PvpBattleHistoryPojo pbh) {
 		this.pbh = pbh;
 	}
 
@@ -840,11 +839,11 @@ public class EndPvpBattleAction {
 		this.generatorsMap = generatorsMap;
 	}
 
-	public List<StructureForUser> getUpdateList() {
+	public List<StructureForUserPojo> getUpdateList() {
 		return updateList;
 	}
 
-	public void setUpdateList(List<StructureForUser> updateList) {
+	public void setUpdateList(List<StructureForUserPojo> updateList) {
 		this.updateList = updateList;
 	}
 	

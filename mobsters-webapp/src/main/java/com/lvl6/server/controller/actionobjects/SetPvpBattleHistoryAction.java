@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
@@ -81,9 +81,9 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	}
 
 	//derived state
-	private List<PvpBattleHistory> historyList;
-	private List<PvpBattleHistory> gotAttackedHistoryList;
-	private List<PvpBattleHistory> attackedOthersHistoryList;
+	private List<PvpBattleHistoryPojo> historyList;
+	private List<PvpBattleHistoryPojo> gotAttackedHistoryList;
+	private List<PvpBattleHistoryPojo> attackedOthersHistoryList;
 	private Set<String> userIds;
 	private Set<String> attackerIds;
 
@@ -131,28 +131,28 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	}
 	
 	public Set<String> getAttackerIdsFromHistory(
-			List<PvpBattleHistory> historyList) {
+			List<PvpBattleHistoryPojo> historyList) {
 		Set<String> attackerIdList = new HashSet<String>();
 
 		if (null == historyList) {
 			return attackerIdList;
 		}
 
-		for (PvpBattleHistory history : historyList) {
+		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 			attackerIdList.add(attackerId);
 		}
 		return attackerIdList;
 	}
 
-	public Set<String> getUserIdsFromHistory(List<PvpBattleHistory> historyList) {
+	public Set<String> getUserIdsFromHistory(List<PvpBattleHistoryPojo> historyList) {
 		Set<String> userIdSet = new HashSet<String>();
 
 		if (null == historyList) {
 			return userIdSet;
 		}
 
-		for (PvpBattleHistory history : historyList) {
+		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 			userIdSet.add(attackerId);
 
@@ -166,10 +166,10 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	}
 
 	public void separateHistory() {
-		gotAttackedHistoryList = new ArrayList<PvpBattleHistory>();
-		attackedOthersHistoryList = new ArrayList<PvpBattleHistory>();
+		gotAttackedHistoryList = new ArrayList<PvpBattleHistoryPojo>();
+		attackedOthersHistoryList = new ArrayList<PvpBattleHistoryPojo>();
 
-		for (PvpBattleHistory history : historyList) {
+		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 			if (attackerId.equals(userId)) {
 				//user attacked someone

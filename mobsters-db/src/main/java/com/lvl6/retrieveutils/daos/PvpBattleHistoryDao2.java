@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 
 @Component
 public class PvpBattleHistoryDao2 extends PvpBattleHistoryDao {
@@ -29,7 +29,7 @@ public class PvpBattleHistoryDao2 extends PvpBattleHistoryDao {
 	 * select * from pvp_battle_history where (defender_id in (?) or attacker_id in (?)) and cancelled=false order by 
 	 * battle_end_time desc limit n
 	*/
-	public List<PvpBattleHistory> getRecentNBattlesForUserId(String userId, int n) {
+	public List<PvpBattleHistoryPojo> getRecentNBattlesForUserId(String userId, int n) {
 		return using(configuration())
 				.selectFrom(Tables.PVP_BATTLE_HISTORY)
 				.where(com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleHistory.PVP_BATTLE_HISTORY.DEFENDER_ID.in(userId)

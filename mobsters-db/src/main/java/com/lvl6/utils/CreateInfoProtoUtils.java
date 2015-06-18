@@ -23,6 +23,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -355,7 +357,7 @@ public class CreateInfoProtoUtils {
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
 			List<ResearchForUser> rfuList,
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList,
+			List<StructureForUserPojo> sfuList,
 			float percentageToStealFromGenerator) {
 
 		FullUserProto defenderProto = createFullUserProtoFromUser(defender, plfu, clan);
@@ -380,7 +382,7 @@ public class CreateInfoProtoUtils {
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
 			List<ResearchForUser> rfuList,
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList,
+			List<StructureForUserPojo> sfuList,
 			float percentageToStealFromGenerator) {
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 
@@ -429,7 +431,7 @@ public class CreateInfoProtoUtils {
 		
 		if (null != sfuList && !sfuList.isEmpty()) {
 			List<FullUserStructureProto> uspList = new ArrayList<FullUserStructureProto>();
-			for(com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser sfu : sfuList) {
+			for(StructureForUserPojo sfu : sfuList) {
 				uspList.add(createFullUserStructureProtoFromUserStructPojo(sfu));
 
 			}
@@ -573,7 +575,7 @@ public class CreateInfoProtoUtils {
 			Map<String, Integer> userIdToMsfuMonsterIdDropped,
 			Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles,
 			Map<String, List<ResearchForUser>> userIdToRfuList,
-			Map<String, List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser>> userIdToSfuList,
+			Map<String, List<StructureForUserPojo>> userIdToSfuList,
 			Map<String, Float> userIdToPercentageStealFromGenerator) {
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
@@ -633,7 +635,7 @@ public class CreateInfoProtoUtils {
 				rfuList = userIdToRfuList.get(userId);
 			}
 			
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> sfuList = null;
+			List<StructureForUserPojo> sfuList = null;
 			if (userIdToSfuList.containsKey(userId)) {
 				sfuList = userIdToSfuList.get(userId);
 			}
@@ -655,7 +657,7 @@ public class CreateInfoProtoUtils {
 
 	public PvpHistoryProto createGotAttackedPvpHistoryProto(
 			User attacker, Clan c, 
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory info,
+			PvpBattleHistoryPojo info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
@@ -687,7 +689,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> historyList,
+			List<PvpBattleHistoryPojo> historyList,
 			Map<String, User> attackerIdsToAttackers,
 			Map<String, Clan> attackerIdsToClans,
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
@@ -698,7 +700,7 @@ public class CreateInfoProtoUtils {
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 
-		for (com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory history : historyList) {
+		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 
 			User attacker = attackerIdsToAttackers.get(attackerId);
@@ -736,13 +738,13 @@ public class CreateInfoProtoUtils {
 
 	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory> historyList) {
+			List<PvpBattleHistoryPojo> historyList) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		fupb.setUserUuid(attackerId);
 		FullUserProto fup = fupb.build();
 
-		for (com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory pbh : historyList) {
+		for (PvpBattleHistoryPojo pbh : historyList) {
 			//no fake users are displayed, but check in case
 			String defenderId = pbh.getDefenderId();
 			if (null == defenderId || defenderId.isEmpty()) {
@@ -770,7 +772,7 @@ public class CreateInfoProtoUtils {
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
 			FullUserProto fup, FullUserProto defenderFup, 
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory info,
+			PvpBattleHistoryPojo info,
 			String replayId) //BattleReplayForUser brfu)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
@@ -793,7 +795,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	private void modifyPvpHistoryProto(Builder phpb,
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistory info) {
+			PvpBattleHistoryPojo info) {
 		phpb.setAttackerWon(info.getAttackerWon());
 
 		int defenderCashChange = info.getDefenderCashChange();
@@ -4294,7 +4296,7 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public FullUserStructureProto createFullUserStructureProtoFromUserStructPojo(
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser userStructPojo) {
+			StructureForUserPojo userStructPojo) {
 		FullUserStructureProto.Builder builder = FullUserStructureProto
 				.newBuilder();
 		builder.setUserStructUuid(userStructPojo.getId());
@@ -5691,9 +5693,9 @@ public class CreateInfoProtoUtils {
 	}
 
 	public List<StructStolen> createStructStolenFromGenerators(
-			List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser> updateList) {
+			List<StructureForUserPojo> updateList) {
 		List<StructStolen> returnList = new ArrayList<StructStolen>();
-		for(com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser sfu : updateList) {
+		for(StructureForUserPojo sfu : updateList) {
 			StructStolen.Builder b = StructStolen.newBuilder();
 			b.setUserStructUuid(sfu.getId());
 			b.setTimeOfRetrieval(sfu.getLastRetrieved().getTime());

@@ -21,7 +21,7 @@ import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
@@ -323,7 +323,7 @@ public class QueueUpController extends EventController {
 
 				List<String> userIds = new ArrayList<String>();
 				userIds.addAll(rumta.getAllUsers().keySet());
-				Map<String, List<StructureForUser>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
+				Map<String, List<StructureForUserPojo>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
 				
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(

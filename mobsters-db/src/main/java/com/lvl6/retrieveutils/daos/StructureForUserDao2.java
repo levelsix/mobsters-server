@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 
 @Component
 public class StructureForUserDao2 extends StructureForUserDao {
@@ -29,22 +29,22 @@ public class StructureForUserDao2 extends StructureForUserDao {
 	}
 
 
-	public Map<String, List<StructureForUser>> fetchByUserIds(List<String> userIds) {
-		List<StructureForUser> list = using(configuration())
+	public Map<String, List<StructureForUserPojo>> fetchByUserIds(List<String> userIds) {
+		List<StructureForUserPojo> list = using(configuration())
 				.selectFrom(Tables.STRUCTURE_FOR_USER)
 				.where(com.lvl6.mobsters.db.jooq.generated.tables.StructureForUser.STRUCTURE_FOR_USER.USER_ID.in(userIds))
 				.fetch()
 				.map(mapper());
-		Map<String, List<StructureForUser>> returnMap = new HashMap<String, List<StructureForUser>>();
-		for(StructureForUser sfu : list) {
+		Map<String, List<StructureForUserPojo>> returnMap = new HashMap<String, List<StructureForUserPojo>>();
+		for(StructureForUserPojo sfu : list) {
 			String userId = sfu.getUserId();
 			if(!returnMap.containsKey(userId)) {
-				List<StructureForUser> innerList = new ArrayList<StructureForUser>();
+				List<StructureForUserPojo> innerList = new ArrayList<StructureForUserPojo>();
 				innerList.add(sfu);
 				returnMap.put(userId, innerList);
 			}
 			else {
-				List<StructureForUser> innerList = returnMap.get(userId);
+				List<StructureForUserPojo> innerList = returnMap.get(userId);
 				innerList.add(sfu);
 				returnMap.put(userId, innerList);
 			}
