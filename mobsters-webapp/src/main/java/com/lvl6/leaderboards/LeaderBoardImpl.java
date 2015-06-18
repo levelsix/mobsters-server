@@ -64,6 +64,7 @@ public class LeaderBoardImpl {
 	
 	public void addToLeaderboard(String userId, long strength) {
 		strLeaderboard.add(userId, strength);
+		log.info("adding to leaderboard userId{}, str {}", userId, strength);
 	}
 	
 	public List<StrengthLeaderBoard> getStrengths(int minRank, int maxRank) {
