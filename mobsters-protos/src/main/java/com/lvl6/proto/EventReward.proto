@@ -18,6 +18,7 @@ message SendTangoGiftRequestProto {
 	
 	optional string senderTangoUserId = 4; 	
 	optional int32 gemReward = 5;
+	optional string senderTangoName = 6;
 	
 }
 																						//DONE
@@ -82,3 +83,26 @@ message CollectGiftResponseProto {
           FAIL_OTHER = 2;
      }
 }
+
+//------------------------------------------------------------------------------------------
+
+message RedeemSecretGiftRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
+	repeated string uisgUuid = 3; //primary key ids for the user's secret gifs
+}
+
+message RedeemSecretGiftResponseProto {
+	optional MinimumUserProto mup = 1;
+	repeated UserSecretGiftProto nuGifts = 2; //new gifts after redeeming cur one
+	
+	optional RedeemSecretGiftStatus status = 3;
+	optional UserRewardProto reward = 4;
+	
+	enum RedeemSecretGiftStatus {
+		SUCCESS = 1;
+		FAIL_ITEMS_NONEXISTENT = 2;
+		FAIL_OTHER = 3;
+	}
+}
+//------------------------------------------------------------------------------------------

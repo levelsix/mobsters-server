@@ -23,11 +23,6 @@ public class SendTangoGiftResponseEvent extends NormalResponseEvent<SendTangoGif
 		return b.size();
 	}
 
-	public void setSendTangoGiftResponseProto(
-			SendTangoGiftResponseProto sendTangoGiftResponseProto) {
-		this.sendTangoGiftResponseProto = sendTangoGiftResponseProto;
-	}
-
 	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();

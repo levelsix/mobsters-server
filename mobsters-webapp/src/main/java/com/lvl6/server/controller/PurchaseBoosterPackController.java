@@ -17,6 +17,7 @@ import com.hazelcast.core.IList;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseBoosterPackRequestEvent;
 import com.lvl6.events.response.PurchaseBoosterPackResponseEvent;
+import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -27,6 +28,7 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
@@ -36,17 +38,20 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.PurchaseBoosterPackAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
@@ -57,8 +62,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class PurchaseBoosterPackController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(PurchaseBoosterPackController.class);
 
 	public static int BOOSTER_PURCHASES_MAX_SIZE = 50;
 
@@ -75,7 +80,10 @@ public class PurchaseBoosterPackController extends EventController {
 	protected TimeUtils timeUtils;
 
 	@Autowired
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+    protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 
 	@Autowired
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
@@ -191,7 +199,7 @@ public class PurchaseBoosterPackController extends EventController {
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
 					buyingInBulk, gemsSpent, gachaCreditsChange, timeUtils,
-					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
+					giftRetrieveUtil, giftRewardRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtils, boosterPackRetrieveUtils,
 					boosterItemRetrieveUtils, itemForUserRetrieveUtil,
 					monsterStuffUtils, updateUtil, miscMethods, monsterLevelInfoRetrieveUtils,
@@ -233,9 +241,10 @@ public class PurchaseBoosterPackController extends EventController {
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								pbpa.getUser(), null, null);
-
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
+
+				sendClanGiftIfExists(responses, userId, pbpa);
 
 //				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
 
@@ -316,6 +325,25 @@ public class PurchaseBoosterPackController extends EventController {
 	//
 	//    return numPurchased;
 	//  }
+
+	private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
+			PurchaseBoosterPackAction pbpa) {
+		try {
+			AwardRewardAction ara = pbpa.getAra();
+			if (null != ara && ara.existsClanGift()) {
+				ReceivedGiftResponseProto rgrp = ara.getClanGift();
+				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
+				rgre.setResponseProto(rgrp);
+				String clanId = pbpa.getUser().getClanId();
+
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
+			}
+		} catch (Exception e) {
+			log.error("failed to send ClanGift notification", e);
+		}
+	}
 
 //	private void writeToUserCurrencyHistory(String userId, Timestamp date,
 //			PurchaseBoosterPackAction pbpa) {

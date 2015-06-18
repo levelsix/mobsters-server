@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserCreateRequestEvent;
 import com.lvl6.events.response.UserCreateResponseEvent;
-import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
@@ -24,6 +23,7 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
@@ -49,8 +49,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 public class UserCreateController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(UserCreateController.class);
 
 	@Autowired
 	protected InsertUtil insertUtils;
@@ -83,7 +83,7 @@ public class UserCreateController extends EventController {
 	protected TaskRetrieveUtils taskRetrieveUtils;
 
 	public UserCreateController() {
-		
+
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class UserCreateController extends EventController {
 		int cash = Math.max(reqProto.getCash(), 0);
 		int oil = Math.max(reqProto.getOil(), 0);
 		int gems = Math.max(reqProto.getGems(), 0);
-		
+
 		cash = Math.min(cash, ControllerConstants.TUTORIAL__INIT_CASH);
 		oil = Math.min(oil, ControllerConstants.TUTORIAL__INIT_OIL);
 		gems = Math.min(gems, ControllerConstants.TUTORIAL__INIT_GEMS);
@@ -153,7 +153,7 @@ public class UserCreateController extends EventController {
 
 			if (userId != null) {
 				//recording that player is online I guess
-				
+
 				//TODO: Not sure if this is needed... event processor will do it for you
 				/*ConnectedPlayer player = server.getPlayerByUdId(udid);
 				player.setPlayerId(userId);
@@ -184,7 +184,7 @@ public class UserCreateController extends EventController {
 					log.error("exception in UserCreateController processEvent",
 							e);
 				} /*finally {
-					locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
+					locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 					}*/
 			}
 		} catch (Exception e) {
@@ -286,7 +286,7 @@ public class UserCreateController extends EventController {
 																			} catch (Exception e) {
 																			log.error("exception in UserCreateController processEvent", e);
 																			}*//*finally {
-																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
+																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 																				}*/
 		} else {
 			resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
@@ -475,25 +475,25 @@ public class UserCreateController extends EventController {
 	}
 
 	private void writeSecretGifts(String userId, Date createTime) {
-		List<ItemSecretGiftForUser> gifts = new ArrayList<ItemSecretGiftForUser>();
+		List<SecretGiftForUserPojo> gifts = new ArrayList<SecretGiftForUserPojo>();
 
-		int[] itemIds = ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS;
-		int[] waitTimeSeconds = ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS;
+		int[] rewardIds = ControllerConstants.SECRET_GIFT_FOR_USER__REWARD_IDS;
+		int[] waitTimeSeconds = ControllerConstants.SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS;
 
-		int len = itemIds.length;
+		int len = rewardIds.length;
 		for (int index = 0; index < len; index++) {
-			ItemSecretGiftForUser isgfu = new ItemSecretGiftForUser();
+			SecretGiftForUserPojo isgfu = new SecretGiftForUserPojo();
 			isgfu.setUserId(userId);
-			isgfu.setItemId(itemIds[index]);
+			isgfu.setRewardId(rewardIds[index]);
 
-			Date newTime = new Date(createTime.getTime() + index * 1000);
-			isgfu.setSecsTillCollection(waitTimeSeconds[index]);
+			Timestamp newTime = new Timestamp(createTime.getTime() + index * 1000);
+			isgfu.setSecsUntilCollection(waitTimeSeconds[index]);
 			isgfu.setCreateTime(newTime);
 
 			gifts.add(isgfu);
 		}
 
-		insertUtils.insertIntoItemSecretGiftForUserGetId(gifts);
+		insertUtils.insertIntoSecretGiftForUserGetId(gifts);
 	}
 
 	//  private String grabNewReferCode() {

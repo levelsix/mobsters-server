@@ -31,7 +31,6 @@ import com.lvl6.info.AchievementForUser
 import com.lvl6.info.Clan
 import com.lvl6.info.ClanEventPersistentUserReward
 import com.lvl6.info.ItemForUser
-import com.lvl6.info.ItemSecretGiftForUser
 import com.lvl6.info.MiniJobForUser
 import com.lvl6.info.MonsterForUser
 import com.lvl6.info.MonsterHealingForUser
@@ -46,6 +45,7 @@ import com.lvl6.info.User
 import com.lvl6.info.UserClan
 import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
 import com.lvl6.properties.IAPValues
@@ -78,7 +78,6 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2
-import com.lvl6.retrieveutils.ClanGiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
 import com.lvl6.retrieveutils.ClanRetrieveUtils2
@@ -89,7 +88,6 @@ import com.lvl6.retrieveutils.GiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil
@@ -107,6 +105,7 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils
+import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil
 import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2
@@ -117,6 +116,7 @@ import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2
 import com.lvl6.retrieveutils.UserRetrieveUtils2
 import com.lvl6.retrieveutils.daos.PvpBattleHistoryDao2
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.MiniEventLeaderboardRewardRetrieveUtils
@@ -132,12 +132,10 @@ import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils
-import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils
 import com.lvl6.server.Locker
 import com.lvl6.server.concurrent.FutureThreadPool.ec
 import com.lvl6.server.controller.actionobjects.RetrieveMiniEventAction
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction
-import com.lvl6.server.controller.actionobjects.SetClanGiftsAction
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction
 import com.lvl6.server.controller.actionobjects.SetClanMemberTeamDonationAction
 import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction
@@ -196,7 +194,6 @@ class StartupService extends LazyLogging {
   @Autowired var clanEventPersistentForClanRetrieveUtils: ClanEventPersistentForClanRetrieveUtils2 = null
   @Autowired var clanEventPersistentForUserRetrieveUtils: ClanEventPersistentForUserRetrieveUtils2 = null
   @Autowired var clanEventPersistentUserRewardRetrieveUtils: ClanEventPersistentUserRewardRetrieveUtils2 = null
-  @Autowired var clanGiftForUserRetrieveUtil: ClanGiftForUserRetrieveUtils = null
   @Autowired var clanHelpRetrieveUtil: ClanHelpRetrieveUtil = null
   @Autowired var clanMemberTeamDonationRetrieveUtil: ClanMemberTeamDonationRetrieveUtil = null
   @Autowired var clanRetrieveUtils: ClanRetrieveUtils2 = null
@@ -206,7 +203,6 @@ class StartupService extends LazyLogging {
   @Autowired var itemForUserRetrieveUtil: ItemForUserRetrieveUtil = null
   @Autowired var itemForUserUsageRetrieveUtil: ItemForUserUsageRetrieveUtil = null
   @Autowired var iapHistoryRetrieveUtils: IAPHistoryRetrieveUtils = null
-  @Autowired var itemSecretGiftForUserRetrieveUtil: ItemSecretGiftForUserRetrieveUtil = null
   @Autowired var miniEventForUserRetrieveUtil: MiniEventForUserRetrieveUtil = null
   @Autowired var miniEventGoalForUserRetrieveUtil: MiniEventGoalForUserRetrieveUtil = null
   @Autowired var miniJobForUserRetrieveUtil: MiniJobForUserRetrieveUtil = null
@@ -223,6 +219,7 @@ class StartupService extends LazyLogging {
   @Autowired var questForUserRetrieveUtils: QuestForUserRetrieveUtils2 = null
   @Autowired var questJobForUserRetrieveUtil: QuestJobForUserRetrieveUtil = null
   @Autowired var researchForUserRetrieveUtil: ResearchForUserRetrieveUtils = null
+  @Autowired var secretGiftForUserRetrieveUtil: SecretGiftForUserRetrieveUtil = null
   @Autowired var taskForUserCompletedRetrieveUtils: TaskForUserCompletedRetrieveUtils = null
   @Autowired var taskForUserClientStateRetrieveUtil: TaskForUserClientStateRetrieveUtil = null
   @Autowired var taskForUserOngoingRetrieveUtils: TaskForUserOngoingRetrieveUtils2 = null
@@ -233,6 +230,7 @@ class StartupService extends LazyLogging {
   @Autowired var userRetrieveUtils: UserRetrieveUtils2 = null
 
   @Autowired var customMenuRetrieveUtil: CustomMenuRetrieveUtils = null
+  @Autowired var giftRetrieveUtil : GiftRetrieveUtils = null;
   @Autowired var inAppPurchaseUtil: InAppPurchaseUtils = null
   @Autowired var miniEventRetrieveUtil: MiniEventRetrieveUtils = null
   @Autowired var miniEventForPlayerLvlRetrieveUtil: MiniEventForPlayerLvlRetrieveUtils = null
@@ -249,7 +247,6 @@ class StartupService extends LazyLogging {
   @Autowired var salesPackageRetrieveUtil: SalesPackageRetrieveUtils = null
   @Autowired var serverToggleRetrieveUtil: ServerToggleRetrieveUtils = null
   @Autowired var startupStuffRetrieveUtil: StartupStuffRetrieveUtils = null
-  @Autowired var tangoGiftRetrieveUtil: TangoGiftRetrieveUtils = null;
 
   @Autowired var createInfoProtoUtils: CreateInfoProtoUtils = null
   @Autowired var deleteUtil: DeleteUtil = null
@@ -608,13 +605,13 @@ class StartupService extends LazyLogging {
         scmtda.setUp(fillMe);
 
         //SETTING CLAN GIFTS, it adds protos straight to resbuilder
-        val scga = new SetClanGiftsAction(
-          resBuilder,
-          user,
-          playerId,
-          clanGiftForUserRetrieveUtil,
-          createInfoProtoUtils);
-        scga.setUp(fillMe);
+//        val scga = new SetClanGiftsAction(
+//          resBuilder,
+//          user,
+//          playerId,
+//          clanGiftForUserRetrieveUtil,
+//          createInfoProtoUtils);
+//        scga.setUp(fillMe);
 
         val sga = new SetGiftsAction(
           resBuilder,
@@ -622,7 +619,7 @@ class StartupService extends LazyLogging {
           playerId,
           giftForUserRetrieveUtil,
           giftForTangoUserRetrieveUtil,
-          tangoGiftRetrieveUtil,
+          giftRetrieveUtil,
           rewardRetrieveUtil,
           createInfoProtoUtils)
         sga.setUp(fillMe);
@@ -638,7 +635,7 @@ class StartupService extends LazyLogging {
         scha.execute(fillMe);
         scra.execute(fillMe);
         scmtda.execute(fillMe);
-        scga.execute(fillMe);
+//        scga.execute(fillMe);
         sga.execute(fillMe);
         resBuilder.setClanData(cdpb.build());
         //TODO: DELETE IN FUTURE. This is for legacy client
@@ -1268,11 +1265,11 @@ class StartupService extends LazyLogging {
   def setSecretGifts(resBuilder: Builder, userId: String, now: Long): Future[Unit] = {
     Future {
       timed("StartupService.setSecretGifts") {
-        var gifts = itemSecretGiftForUserRetrieveUtil.getSpecificOrAllItemSecretGiftForUser(userId, null);
+        var gifts = secretGiftForUserRetrieveUtil.getSpecificOrAllSecretGiftForUser(userId, null);
         //need to enforce 2 gift minimum
         var numGifts = 0;
         if (null == gifts || gifts.isEmpty()) {
-          gifts = new ArrayList[ItemSecretGiftForUser]();
+          gifts = new ArrayList[SecretGiftForUserPojo]();
           numGifts = 2;
         } else if (null != gifts && gifts.size() == 1) {
           numGifts = 1;
@@ -1280,7 +1277,7 @@ class StartupService extends LazyLogging {
         if (numGifts > 0) {
           giveGifts(userId, now, gifts, numGifts);
         }
-        val nuGiftsProtos = createInfoProtoUtils.createUserItemSecretGiftProto(gifts);
+        val nuGiftsProtos = createInfoProtoUtils.createUserSecretGiftProto(gifts);
         resBuilder.addAllGifts(nuGiftsProtos);
       }
     }
@@ -1290,11 +1287,11 @@ class StartupService extends LazyLogging {
   def giveGifts(
     userId: String,
     now: Long,
-    gifts: Collection[ItemSecretGiftForUser],
+    gifts: Collection[SecretGiftForUserPojo],
     numGifts: Int) {
     timed("StartupService.giveGifts") {
       var giftList = secretGiftUtil.calculateGiftsForUser(userId, numGifts, now);
-      var ids = insertUtil.insertIntoItemSecretGiftForUserGetId(giftList);
+      var ids = insertUtil.insertIntoSecretGiftForUserGetId(giftList);
       //need to set the ids
       if (null != ids && ids.size() == giftList.size()) {
         for (index: Int <- 0 to ids.size - 1) {

@@ -22,10 +22,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
-import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -2085,46 +2083,7 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	@Override
-	public boolean updateUserClanGiftHasBeenCollected(String userId, List<ClanGiftForUser> cgfuList) {
-		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
-
-		log.debug(String.format("updating userclangift collect status for userid %s",
-				userId));
-
-		List<Object> values = new ArrayList<Object>();
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("insert into %s (%s) values ");
-		List<String> questionsList = Collections.nCopies(cgfuList.size(),"(?)");
-		String questionMarks = StringUtils.csvList(questionsList);
-
-		for(ClanGiftForUser cgfu : cgfuList) {
-			values.add(cgfu.getId());
-		}
-
-		sb.append(questionMarks);
-		sb.append(" on duplicate key update %s = %s");
-
-		log.info(sb.toString());
-		log.info(""+ values);
-
-		String query = String.format(sb.toString(), tableName,
-				DBConstants.CLAN_GIFT_FOR_USER__ID, DBConstants.CLAN_GIFT_FOR_USER__HAS_BEEN_COLLECTED,
-				true);
-
-		log.info(query);
-
-		try {
-			this.jdbcTemplate.update(query, values.toArray());
-
-		} catch (Exception e) {
-			log.error("error updating quantities for user battle items.", e);
-			return false;
-		}
-		return true;
-	}
-
+	/*
 	@Override
 	public boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList) {
 		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
@@ -2163,8 +2122,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 
 		return true;
-	}
-	
+	}*/
+
 	public boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 

@@ -10,10 +10,8 @@ import java.util.Set;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
-import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.GiftForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -255,10 +253,8 @@ public interface UpdateUtil {
 
 	public abstract boolean updateUserSalesLastPurchaseTime(String userId, Timestamp ts);
 
-	public abstract boolean updateUserClanGiftHasBeenCollected(String userId, List<ClanGiftForUser> cgfuList);
+//	public abstract boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList);
 
-	public abstract boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList);
-	
 	public abstract boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators);
 	
 }
