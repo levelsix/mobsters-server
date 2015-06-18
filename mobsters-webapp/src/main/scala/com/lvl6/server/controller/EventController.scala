@@ -9,6 +9,7 @@ import javax.annotation.Resource
 import com.codahale.metrics.MetricRegistry
 import com.lvl6.server.metrics.Metrics._
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import com.lvl6.util.MDCUtil
 
 abstract class EventController{
   
@@ -24,7 +25,7 @@ abstract class EventController{
   def processEvent(event:RequestEvent):Option[ToClientEvents]={
     timed(getMetricName){
       try{
-        miscMethods.setMDCProperties("", event.getPlayerId, "")
+        MDCUtil.setMDCProperties("", event.getPlayerId, "")
         //logger.info(s"Received event: ${event.getClass.getSimpleName}")
         val responses = new ToClientEvents()
         processRequestEvent(event, responses)
