@@ -10,13 +10,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetDefendingMsgRequestEvent;
 import com.lvl6.events.response.SetDefendingMsgResponseEvent;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgRequestProto;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.SetDefendingMsgStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
@@ -26,24 +25,21 @@ import com.lvl6.server.eventsender.ToClientEvents;
 
 public class SetDefendingMsgController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(SetDefendingMsgController.class);
 
 	public SetDefendingMsgController() {
-		
+
 	}
-	
+
+	@Autowired
+	protected MiscMethods miscMethods;
+
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
-	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
-
-	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-
-	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -71,10 +67,9 @@ public class SetDefendingMsgController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
 
-		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			userUuid = UUID.fromString(userId);
+			UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format("UUID error. incorrect userId=%s", userId),
@@ -99,7 +94,7 @@ public class SetDefendingMsgController extends EventController {
 		try {
 			//
 			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
-					userRetrieveUtil, miscMethods());
+					userRetrieveUtil, miscMethods);
 
 			rsga.execute(resBuilder);
 

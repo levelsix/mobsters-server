@@ -15,12 +15,15 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.RewardsProto.GiftProto.GiftType;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -29,8 +32,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class AwardRewardAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(AwardRewardAction.class);
 
 	private String userId;
 	private User u;
@@ -45,7 +49,8 @@ public class AwardRewardAction {
 	private UpdateUtil updateUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	private RewardRetrieveUtils rewardRetrieveUtil; //only here because of recursive rewards
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private CreateInfoProtoUtils createInfoProtoUtils;
@@ -60,7 +65,8 @@ public class AwardRewardAction {
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtil,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			CreateInfoProtoUtils createInfoProtoUtils,
@@ -79,7 +85,8 @@ public class AwardRewardAction {
 		this.updateUtil = updateUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
 		this.rewardRetrieveUtil = rewardRetrieveUtil;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
@@ -112,6 +119,7 @@ public class AwardRewardAction {
 	private Map<String, Integer> curCurrencies;
 	private Map<String, String> reasonsForChanges;
 	private Map<String, String> details;
+	private boolean existsClanGift;
 	private AwardClanGiftsAction acga;
 
 	public boolean execute() {
@@ -228,10 +236,13 @@ public class AwardRewardAction {
 			Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt,
 			Reward r, int id, String type, int staticDataId, int amt)
 	{
-		if(RewardType.CLAN_GIFT.name().equals(type)) {
+		if(GiftType.CLAN_GIFT.name().equals(type)) {
+			//If ever to give out multiplie clan gifts, the clan gifts should be aggregated
 			acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift",
-					clanGiftRewardsRetrieveUtils, userClanRetrieveUtils,
+					giftRetrieveUtil, giftRewardRetrieveUtils,
+					rewardRetrieveUtil, userClanRetrieveUtils,
 					insertUtil, createInfoProtoUtils);
+			existsClanGift = true;
 
 		} else if (RewardType.ITEM.name().equals(type)) {
 			aggregateItems(itemIdToQuantity, staticDataId, amt);
@@ -537,11 +548,6 @@ public class AwardRewardAction {
 		return nuOrUpdatedMonsters;
 	}
 
-	public void setNuOrUpdatedMonsters(
-			List<FullUserMonsterProto> nuOrUpdatedMonsters) {
-		this.nuOrUpdatedMonsters = nuOrUpdatedMonsters;
-	}
-
 	public boolean isAwardResources() {
 		return awardResources;
 	}
@@ -556,10 +562,6 @@ public class AwardRewardAction {
 
 	public int getOilGained() {
 		return oilGained;
-	}
-
-	public void setNuOrUpdatedItems(List<ItemForUser> nuOrUpdatedItems) {
-		this.nuOrUpdatedItems = nuOrUpdatedItems;
 	}
 
 	public Map<String, Integer> getCurrencyDeltas() {
@@ -582,22 +584,19 @@ public class AwardRewardAction {
 		return details;
 	}
 
-	public AwardClanGiftsAction getAcga() {
-		return acga;
+	public boolean existsClanGift() {
+		return existsClanGift;
 	}
 
-	public void setAcga(AwardClanGiftsAction acga) {
-		this.acga = acga;
+	public ReceivedGiftResponseProto getClanGift() {
+		if (existsClanGift) {
+			return acga.getChatProto();
+		}
+		return null;
 	}
-
 
 	public int getGachaCreditsGained() {
 		return gachaCreditsGained;
 	}
-
-	public void setGachaCreditsGained(int gachaCreditsGained) {
-		this.gachaCreditsGained = gachaCreditsGained;
-	}
-
 
 }

@@ -30,28 +30,24 @@ import javax.validation.constraints.Size;
 @Table(name = "gift_for_tango_user", schema = "mobsters")
 public class GiftForTangoUserPojo implements IGiftForTangoUser {
 
-	private static final long serialVersionUID = 1620894288;
+	private static final long serialVersionUID = 1473853880;
 
 	private String giftForUserId;
-	private String gifterUserId;
-	private String gifterTangoUserId;
+	private String gifterTangoName;
 
 	public GiftForTangoUserPojo() {}
 
 	public GiftForTangoUserPojo(GiftForTangoUserPojo value) {
 		this.giftForUserId = value.giftForUserId;
-		this.gifterUserId = value.gifterUserId;
-		this.gifterTangoUserId = value.gifterTangoUserId;
+		this.gifterTangoName = value.gifterTangoName;
 	}
 
 	public GiftForTangoUserPojo(
 		String giftForUserId,
-		String gifterUserId,
-		String gifterTangoUserId
+		String gifterTangoName
 	) {
 		this.giftForUserId = giftForUserId;
-		this.gifterUserId = gifterUserId;
-		this.gifterTangoUserId = gifterTangoUserId;
+		this.gifterTangoName = gifterTangoName;
 	}
 
 	@Id
@@ -69,29 +65,16 @@ public class GiftForTangoUserPojo implements IGiftForTangoUser {
 		return this;
 	}
 
-	@Column(name = "gifter_user_id", length = 36)
-	@Size(max = 36)
-	@Override
-	public String getGifterUserId() {
-		return this.gifterUserId;
-	}
-
-	@Override
-	public GiftForTangoUserPojo setGifterUserId(String gifterUserId) {
-		this.gifterUserId = gifterUserId;
-		return this;
-	}
-
-	@Column(name = "gifter_tango_user_id", length = 100)
+	@Column(name = "gifter_tango_name", length = 100)
 	@Size(max = 100)
 	@Override
-	public String getGifterTangoUserId() {
-		return this.gifterTangoUserId;
+	public String getGifterTangoName() {
+		return this.gifterTangoName;
 	}
 
 	@Override
-	public GiftForTangoUserPojo setGifterTangoUserId(String gifterTangoUserId) {
-		this.gifterTangoUserId = gifterTangoUserId;
+	public GiftForTangoUserPojo setGifterTangoName(String gifterTangoName) {
+		this.gifterTangoName = gifterTangoName;
 		return this;
 	}
 
@@ -105,8 +88,7 @@ public class GiftForTangoUserPojo implements IGiftForTangoUser {
 	@Override
 	public void from(IGiftForTangoUser from) {
 		setGiftForUserId(from.getGiftForUserId());
-		setGifterUserId(from.getGifterUserId());
-		setGifterTangoUserId(from.getGifterTangoUserId());
+		setGifterTangoName(from.getGifterTangoName());
 	}
 
 	/**

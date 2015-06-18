@@ -20,12 +20,12 @@ import com.lvl6.events.request.SendTangoGiftRequestEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.SendTangoGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.GiftForTangoUser;
-import com.lvl6.info.GiftForUser;
 import com.lvl6.info.Reward;
-import com.lvl6.info.TangoGift;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
@@ -35,9 +35,9 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.SendTangoGiftAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -47,28 +47,28 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @DependsOn("gameServer")
 public class SendTangoGiftController extends EventController {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(SendTangoGiftController.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(SendTangoGiftController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
-	protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
+	protected GiftRetrieveUtils giftRetrieveUtil;
 
 	@Autowired
-	protected TangoGiftRewardRetrieveUtils tangoGiftRewardRetrieveUtil;
+	protected GiftRewardRetrieveUtils giftRewardRetrieveUtil;
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtil;
-	
-	
+
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -97,6 +97,7 @@ public class SendTangoGiftController extends EventController {
 		List<String> tangoIds = reqProto.getTangoUserIdsList();
 		String senderTangoUserId = reqProto.getSenderTangoUserId();
 		int gemReward = reqProto.getGemReward();
+		String senderTangoName = reqProto.getSenderTangoName();
 
 		SendTangoGiftResponseProto.Builder resBuilder = SendTangoGiftResponseProto
 				.newBuilder();
@@ -120,7 +121,7 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSendTangoGiftResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -129,9 +130,10 @@ public class SendTangoGiftController extends EventController {
 		try {
 			Set<String> uniqTangoIds = new HashSet<String>(tangoIds);
 			SendTangoGiftAction stga = new SendTangoGiftAction(
-					userId, senderTangoUserId, gemReward, clientTime, uniqTangoIds,
-					userRetrieveUtil, tangoGiftRetrieveUtil,
-					tangoGiftRewardRetrieveUtil, insertUtil);
+					userId, senderTangoUserId, senderTangoName, gemReward,
+					clientTime, uniqTangoIds,
+					userRetrieveUtil, giftRetrieveUtil,
+					giftRewardRetrieveUtil, insertUtil);
 			stga.execute(resBuilder);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
@@ -147,19 +149,19 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftResponseProto resProto = resBuilder.build();
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setSendTangoGiftResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 
-				List<GiftForUser> receiverGifts = stga.getReceiverGifts();
+				List<GiftForUserPojo> receiverGifts = stga.getReceiverGifts();
 				if (null != receiverGifts && !receiverGifts.isEmpty()) {
 					//notify users who did get gifts
-					Map<String, GiftForTangoUser> gfuIdToGftu = stga
-							.getGiftForUserIdToGiftForTangoUser();
-					TangoGift tg = stga.getTangoGift();
-					for (GiftForUser gfu : receiverGifts) {
+					Map<String, GiftForTangoUserPojo> gfuIdToGftu = stga
+							.getGiftForUserPojoIdToGiftForTangoUserPojo();
+					GiftConfigPojo tg = stga.getTangoGift();
+					for (GiftForUserPojo gfu : receiverGifts) {
 						String receiverUserId = gfu.getReceiverUserId();
 						ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(
 								receiverUserId);
@@ -169,7 +171,7 @@ public class SendTangoGiftController extends EventController {
 								gfuIdToGftu, tg, gfu, rgrp);
 						rgrp.addUserGifts(ugp);
 
-						rgre.setReceivedGiftResponseProto(rgrp.build());
+						rgre.setResponseProto(rgrp.build());
 
 						responses.normalResponseEvents().add(rgre);
 					}
@@ -193,7 +195,7 @@ public class SendTangoGiftController extends EventController {
 				SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSendTangoGiftResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
@@ -206,16 +208,17 @@ public class SendTangoGiftController extends EventController {
 	}
 
 	private UserGiftProto createUserGiftProto(MinimumUserProto senderProto,
-			Map<String, GiftForTangoUser> gfuIdToGftu, TangoGift tg,
-			GiftForUser gfu, ReceivedGiftResponseProto.Builder rgrp) {
+			Map<String, GiftForTangoUserPojo> gfuIdToGftu, GiftConfigPojo tg,
+			GiftForUserPojo gfu, ReceivedGiftResponseProto.Builder rgrp) {
 		rgrp.setSender(senderProto);
 		rgrp.setScope(ChatScope.PRIVATE);
 
 		int rewardId = gfu.getRewardId();
 		Reward r = rewardRetrieveUtil.getRewardById(rewardId);
-		GiftForTangoUser gftu = gfuIdToGftu.get(gfu.getId());
+		GiftForTangoUserPojo gftu = gfuIdToGftu.get(gfu.getId());
 
-		UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(gfu, senderProto, r, null, gftu, tg);
+		UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
+				gfu, senderProto, r, tg, gftu);
 		return ugp;
 	}
 

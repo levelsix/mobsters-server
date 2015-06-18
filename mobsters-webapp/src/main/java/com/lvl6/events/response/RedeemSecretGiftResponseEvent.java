@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RedeemSecretGiftResponseEvent extends NormalResponseEvent<RedeemSecretGiftResponseProto> {
@@ -27,7 +27,8 @@ public class RedeemSecretGiftResponseEvent extends NormalResponseEvent<RedeemSec
 			RedeemSecretGiftResponseProto responseProto) {
 		this.responseProto = responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

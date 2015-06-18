@@ -24,7 +24,6 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.ClanEventPersistent;
-import com.lvl6.info.ClanGift;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.EventPersistent;
@@ -74,7 +73,7 @@ import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
-import com.lvl6.proto.RewardsProto.ClanGiftProto;
+import com.lvl6.proto.RewardsProto.GiftProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillSideEffectProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -110,8 +109,6 @@ import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -120,6 +117,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRefreshItemRetrieveUtils;
@@ -209,12 +207,6 @@ public class StaticDataContainer {
 	protected BoosterPackRetrieveUtils boosterPackRetrieveUtils;
 
 	@Autowired
-	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
-
-	@Autowired
-	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
-
-	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
 
 	@Autowired
@@ -240,6 +232,9 @@ public class StaticDataContainer {
 
 	@Autowired
 	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
+
+	@Autowired
+	protected GiftRetrieveUtils giftRetrieveUtil;
 
 	@Autowired
 	protected GoldSaleRetrieveUtils goldSaleRetrieveUtils;
@@ -424,7 +419,7 @@ public class StaticDataContainer {
 		setBattleItem(sdpb);
 //		setRewards(sdpb);
 //		setSales(sdpb);
-		setClanGifts(sdpb);
+//		setClanGifts(sdpb);
 		setRefreshMiniJobItemPrices(sdpb);
 
 		staticDataBuilder = sdpb;
@@ -1166,20 +1161,26 @@ public class StaticDataContainer {
 		}
 	}
 */
-	private void setClanGifts(Builder sdpb) {
-		Map<Integer, ClanGift> idsToClanGift = clanGiftRetrieveUtils.getClanGiftIdsToClanGifts();
+/*
+	private void setGifts(Builder sdpb) {
+		Map<Integer, GiftConfig> idsToReward = giftRetrieveUtil
+				.getIdsToGifts();
 
-		if(null == idsToClanGift || idsToClanGift.isEmpty()) {
-			log.warn("setClanGifts no clan gifts");
+		if (null == idsToReward || idsToReward.isEmpty()) {
+			log.warn("setGift() no Gifts");
 			return;
 		}
 
-		for(Integer clanGiftId : idsToClanGift.keySet()) {
-			ClanGift cg = idsToClanGift.get(clanGiftId);
-			ClanGiftProto cgp = createInfoProtoUtils.createClanGiftProto(cg);
-			sdpb.addClanGifts(cgp);
+		for (Integer id : idsToReward.keySet()) {
+			GiftConfig r = idsToReward.get(id);
+
+			GiftProto rp = createInfoProtoUtils
+					.createGiftProto(r);
+
+			sdpb.addReward(rp);
 		}
 	}
+ */
 	
 	private void setRefreshMiniJobItemPrices(Builder sdpb) {
 		Configuration config = new DefaultConfiguration().set(DBConnection.get()

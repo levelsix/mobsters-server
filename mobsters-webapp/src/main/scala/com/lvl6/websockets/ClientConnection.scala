@@ -80,6 +80,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     logger.debug("Opening connection")
     lastMessageReceived = new DateTime()
     this.session = Some(session)
+    ClientConnections.addConnection(this)
     wireBeans
   }
   
@@ -257,6 +258,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   }
   
   def setupRabbitListeners= {
+    ClientConnections.addConnection(this)
     synchronized {
       globalChatListener match{
         case Some(gcl) => //already setup

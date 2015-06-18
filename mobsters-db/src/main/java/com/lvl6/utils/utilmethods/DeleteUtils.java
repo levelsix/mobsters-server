@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 
 import com.lvl6.info.BattleItemQueueForUser;
-import com.lvl6.info.ClanGiftForUser;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
@@ -515,8 +514,8 @@ public class DeleteUtils implements DeleteUtil {
 	}
 
 	@Override
-	public int deleteItemSecretGifts(String userId, List<String> ids) {
-		String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
+	public int deleteSecretGifts(String userId, List<String> ids) {
+		String tableName = DBConstants.TABLE_SECRET_GIFT_FOR_USER;
 
 		int size = ids.size();
 		List<String> questions = Collections.nCopies(size, "?");
@@ -524,8 +523,8 @@ public class DeleteUtils implements DeleteUtil {
 
 		String query = String.format(
 				"DELETE FROM %s WHERE %s IN (%s) AND %s=?", tableName,
-				DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID, questionMarks,
-				DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID);
+				DBConstants.SECRET_GIFT_FOR_USER__ID, questionMarks,
+				DBConstants.SECRET_GIFT_FOR_USER__USER_ID);
 
 		List<Object> values = new ArrayList<Object>();
 		values.addAll(ids);
@@ -688,33 +687,6 @@ public class DeleteUtils implements DeleteUtil {
 
 		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
 		return numDeleted;
-	}
-
-	@Override
-	public boolean deleteFromClanGiftForUser(List<ClanGiftForUser> cgfuList) {
-		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
-
-		int size = cgfuList.size();
-		List<String> questions = Collections.nCopies(size, "?");
-		String questionMarks = StringUtils.csvList(questions);
-
-		String query = String
-				.format("DELETE FROM %s WHERE %s IN (%s)", tableName,
-						DBConstants.CLAN_GIFT_FOR_USER__ID,
-						questionMarks);
-
-		List<Object> values = new ArrayList<Object>();
-
-		for (ClanGiftForUser cgfu : cgfuList) {
-			values.add(cgfu.getId());
-		}
-
-		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
-				values);
-		if(numDeleted == size) {
-			return true;
-		}
-		else return false;
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -29,8 +28,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class GiftForUserRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(GiftForUserRetrieveUtils.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_GIFT_FOR_USER;
 	private static final UserGiftForClientMapper rowMapper = new UserGiftForClientMapper();
@@ -42,18 +42,18 @@ public class GiftForUserRetrieveUtils {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public Map<String, GiftForUser> getUserGiftsForUserMap(Collection<String> gfuIds)
+	public Map<String, GiftForUserPojo> getUserGiftsForUserMap(Collection<String> gfuIds)
 	{
 		log.debug("retrieving GiftForUser map for ids {}",
 				gfuIds);
 		if (null == gfuIds || gfuIds.isEmpty()) {
-			return new HashMap<String, GiftForUser>();
+			return new HashMap<String, GiftForUserPojo>();
 		}
 
-		Map<String, GiftForUser> idToGfu =
-				new HashMap<String, GiftForUser>();
-		List<GiftForUser> gfuList = getUserGiftsForUser(gfuIds);
-		for (GiftForUser gfu : gfuList) {
+		Map<String, GiftForUserPojo> idToGfu =
+				new HashMap<String, GiftForUserPojo>();
+		List<GiftForUserPojo> gfuList = getUserGiftsForUser(gfuIds);
+		for (GiftForUserPojo gfu : gfuList) {
 			String id = gfu.getId();
 			idToGfu.put(id, gfu);
 		}
@@ -61,15 +61,15 @@ public class GiftForUserRetrieveUtils {
 		return idToGfu;
 	}
 
-	public List<GiftForUser> getUserGiftsForUser(Collection<String> gfuIds)
+	public List<GiftForUserPojo> getUserGiftsForUser(Collection<String> gfuIds)
 	{
 		if (null == gfuIds || gfuIds.isEmpty()) {
-			return new ArrayList<GiftForUser>();
+			return new ArrayList<GiftForUserPojo>();
 		}
 
 		log.debug("retrieving GiftForUser for ids {}",
 				gfuIds);
-		List<GiftForUser> gfuList = null;
+		List<GiftForUserPojo> gfuList = null;
 		try {
 			int amount = gfuIds.size();
 			List<String> questions = Collections.nCopies(amount, "?");
@@ -82,13 +82,13 @@ public class GiftForUserRetrieveUtils {
 		} catch (Exception e) {
 			log.error(String.format(
 					"GiftForUser retrieve db error, ids=%s", gfuIds), e);
-			gfuList = new ArrayList<GiftForUser>();
+			gfuList = new ArrayList<GiftForUserPojo>();
 		}
 
 		return gfuList;
 	}
 
-	public List<GiftForUser> getUserGiftsForUser(String userId) {
+	public List<GiftForUserPojo> getUserGiftsForUser(String userId) {
 		log.debug("retrieving GiftForUser for userId {}",
 				userId);
 
@@ -96,13 +96,13 @@ public class GiftForUserRetrieveUtils {
 		String query = String.format("select * from %s where %s=?", TABLE_NAME,
 				DBConstants.GIFT_FOR_USER__RECEIVER_USER_ID);
 
-		List<GiftForUser> userGifts = null;
+		List<GiftForUserPojo> userGifts = null;
 		try {
 			userGifts = this.jdbcTemplate.query(query, values, rowMapper);
 
 		} catch (Exception e) {
 			log.error(" GiftForUser retrieve db error.", e);
-			userGifts = new ArrayList<GiftForUser>();
+			userGifts = new ArrayList<GiftForUserPojo>();
 			//		} finally {
 			//			DBConnection.get().close(rs, null, conn);
 		}
@@ -193,31 +193,26 @@ public class GiftForUserRetrieveUtils {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserGiftForClientMapper implements
-			RowMapper<GiftForUser> {
+			RowMapper<GiftForUserPojo> {
 
 //		private static List<String> columnsSelected;
 
 		@Override
-		public GiftForUser mapRow(ResultSet rs, int rowNum)
+		public GiftForUserPojo mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
 			String id = rs.getString(DBConstants.GIFT_FOR_USER__ID);
 			String gifterUserId = rs.getString(DBConstants.GIFT_FOR_USER__GIFTER_USER_ID);
 			String receiverUserId = rs.getString(DBConstants.GIFT_FOR_USER__RECEIVER_USER_ID);
-			String giftType = rs.getString(DBConstants.GIFT_FOR_USER__GIFT_TYPE);
-			int staticDataId = rs.getInt(DBConstants.GIFT_FOR_USER__STATIC_DATA_ID);
+			int giftId = rs.getInt(DBConstants.GIFT_FOR_USER__GIFT_ID);
 			Timestamp ts = rs.getTimestamp(DBConstants.GIFT_FOR_USER__TIME_OF_ENTRY);
-			Date timeReceived = null;
-			if (!rs.wasNull()) {
-				timeReceived = new Date(ts.getTime());
-			}
+
 			int rewardId = rs.getInt(DBConstants.GIFT_FOR_USER__REWARD_ID);
 			boolean collected = rs.getBoolean(DBConstants.GIFT_FOR_USER__COLLECTED);
 			int minTillExp = rs.getInt(DBConstants.GIFT_FOR_USER__MINUTES_TILL_EXPIRATION);
 			String reasonForGift = rs.getString(DBConstants.GIFT_FOR_USER__REASON_FOR_GIFT);
 
-			return new GiftForUser(id, gifterUserId, receiverUserId, giftType,
-					staticDataId, timeReceived, rewardId, collected, minTillExp,
-					reasonForGift);
+			return new GiftForUserPojo(id, gifterUserId, receiverUserId, giftId,
+					ts, rewardId, collected, minTillExp, reasonForGift);
 		}
 
 //		public static List<String> getColumnsSelected() {

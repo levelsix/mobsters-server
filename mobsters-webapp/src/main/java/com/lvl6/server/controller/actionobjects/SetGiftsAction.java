@@ -10,40 +10,40 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.GiftForTangoUser;
-import com.lvl6.info.GiftForUser;
 import com.lvl6.info.Reward;
-import com.lvl6.info.TangoGift;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
-import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
+import com.lvl6.proto.RewardsProto.GiftProto.GiftType;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.GiftForTangoUserRetrieveUtil;
 import com.lvl6.retrieveutils.GiftForUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class SetGiftsAction implements StartUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(SetGiftsAction.class);
 
 	private final StartupResponseProto.Builder resBuilder;
 	private final User user;
 	private final String userId;
-//	private final ClanGiftForUserRetrieveUtils clanGiftForUserRetrieveUtils;
 	private final GiftForUserRetrieveUtils giftForUserRetrieveUtil;
 	private final GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil;
-	private final TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
+	private final GiftRetrieveUtils giftRetrieveUtil;
 	private final RewardRetrieveUtils rewardRetrieveUtil;
 	private final CreateInfoProtoUtils createInfoProtoUtils;
 
 	public SetGiftsAction(Builder resBuilder, User user, String userId,
 			GiftForUserRetrieveUtils giftForUserRetrieveUtil,
 			GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil,
-			TangoGiftRetrieveUtils tangoGiftRetrieveUtil,
+			GiftRetrieveUtils giftRetrieveUtil,
 			RewardRetrieveUtils rewardRetrieveUtil,
 			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
@@ -52,15 +52,15 @@ public class SetGiftsAction implements StartUpAction {
 		this.userId = userId;
 		this.giftForUserRetrieveUtil = giftForUserRetrieveUtil;
 		this.giftForTangoUserRetrieveUtil = giftForTangoUserRetrieveUtil;
-		this.tangoGiftRetrieveUtil = tangoGiftRetrieveUtil;
+		this.giftRetrieveUtil = giftRetrieveUtil;
 		this.rewardRetrieveUtil = rewardRetrieveUtil;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
 //	private List<ClanGiftForUser> allClanGifts;
-	private List<GiftForUser> allGifts;
-	private Map<String, GiftForTangoUser> gfuIdToGftu;
+	private List<GiftForUserPojo> allGifts;
+	private Map<String, GiftForTangoUserPojo> gfuIdToGftu;
 	private List<String> userIds;
 
 	//Extracted from Startup
@@ -80,7 +80,7 @@ public class SetGiftsAction implements StartUpAction {
 		Set<String> gfuIds = new HashSet<String>();
 		userIds = new ArrayList<String>();
 		allGifts = giftForUserRetrieveUtil.getUserGiftsForUser(userId);
-		for (GiftForUser gfu : allGifts) {
+		for (GiftForUserPojo gfu : allGifts) {
 			gfuIds.add(gfu.getId());
 			userIds.add(gfu.getGifterUserId());
 		}
@@ -115,16 +115,9 @@ public class SetGiftsAction implements StartUpAction {
 			mupGifters.put(gifterId, mup);
 		}
 
-		for (GiftForUser gfu : allGifts) {
-			TangoGift tg = null;
-			int staticDataId = gfu.getStaticDataId();
-			String giftType = gfu.getGiftType();
-			if (RewardType.TANGO_GIFT.name().equalsIgnoreCase(giftType)) {
-				tg = tangoGiftRetrieveUtil.getTangoGiftForTangoGiftId(staticDataId);
-			} else {
-				log.error("unsupported giftType: {}", giftType);
-				continue;
-			}
+		for (GiftForUserPojo gfu : allGifts) {
+			int giftId = gfu.getGiftId();
+			GiftConfigPojo gc = giftRetrieveUtil.getGift(giftId);
 
 			MinimumUserProto gifterMup = mupGifters.get(gfu.getGifterUserId());
 			int rewardId = gfu.getRewardId();
@@ -133,11 +126,22 @@ public class SetGiftsAction implements StartUpAction {
 				log.error("no reward with id: {}", r);
 				continue;
 			}
-			GiftForTangoUser gftu = gfuIdToGftu.get(gfu.getId());
 
+			String giftType = gc.getGiftType();
+			GiftForTangoUserPojo gftu = null;
+
+			if (GiftType.TANGO_GIFT.name().equalsIgnoreCase(giftType)) {
+				gftu = gfuIdToGftu.get(gfu.getId());
+
+			} else if (GiftType.CLAN_GIFT.name().equalsIgnoreCase(giftType)) {
+
+			} else {
+				log.error("unsupported giftType: {}", giftType);
+				continue;
+			}
 
 			UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
-					gfu, gifterMup, r, null, gftu, tg);
+					gfu, gifterMup, r, gc, gftu);
 			resBuilder.addUserGifts(ugp);
 		}
 

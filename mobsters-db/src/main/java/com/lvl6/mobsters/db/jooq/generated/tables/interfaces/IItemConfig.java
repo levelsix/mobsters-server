@@ -114,17 +114,6 @@ public interface IItemConfig extends Serializable {
 	public Integer getAmount();
 
 	/**
-	 * Setter for <code>mobsters.item_config.secret_gift_chance</code>.
-	 */
-	public IItemConfig setSecretGiftChance(Double value);
-
-	/**
-	 * Getter for <code>mobsters.item_config.secret_gift_chance</code>.
-	 */
-	@Column(name = "secret_gift_chance", precision = 12)
-	public Double getSecretGiftChance();
-
-	/**
 	 * Setter for <code>mobsters.item_config.always_display_to_user</code>.
 	 */
 	public IItemConfig setAlwaysDisplayToUser(Boolean value);

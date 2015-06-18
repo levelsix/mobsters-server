@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record10;
+import org.jooq.Record9;
 import org.jooq.Row;
-import org.jooq.Row10;
+import org.jooq.Row9;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -38,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "gift_for_user", schema = "mobsters")
-public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> implements Record10<String, String, String, String, Integer, Timestamp, Integer, Boolean, Integer, String>, IGiftForUser {
+public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> implements Record9<String, String, String, Integer, Timestamp, Integer, Boolean, Integer, String>, IGiftForUser {
 
-	private static final long serialVersionUID = -1304744353;
+	private static final long serialVersionUID = -734982068;
 
 	/**
 	 * Setter for <code>mobsters.gift_for_user.id</code>.
@@ -102,40 +102,21 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	}
 
 	/**
-	 * Setter for <code>mobsters.gift_for_user.gift_type</code>. at the moment: GENERIC_GIFT, CLAN_GIFT, TANGO_GIFT
+	 * Setter for <code>mobsters.gift_for_user.gift_id</code>.
 	 */
 	@Override
-	public GiftForUserRecord setGiftType(String value) {
+	public GiftForUserRecord setGiftId(Integer value) {
 		setValue(3, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>mobsters.gift_for_user.gift_type</code>. at the moment: GENERIC_GIFT, CLAN_GIFT, TANGO_GIFT
+	 * Getter for <code>mobsters.gift_for_user.gift_id</code>.
 	 */
-	@Column(name = "gift_type", length = 45)
-	@Size(max = 45)
+	@Column(name = "gift_id", precision = 10)
 	@Override
-	public String getGiftType() {
-		return (String) getValue(3);
-	}
-
-	/**
-	 * Setter for <code>mobsters.gift_for_user.static_data_id</code>. at the moment can reference clan_gift_config and tango_gift_config
-	 */
-	@Override
-	public GiftForUserRecord setStaticDataId(Integer value) {
-		setValue(4, value);
-		return this;
-	}
-
-	/**
-	 * Getter for <code>mobsters.gift_for_user.static_data_id</code>. at the moment can reference clan_gift_config and tango_gift_config
-	 */
-	@Column(name = "static_data_id", precision = 10)
-	@Override
-	public Integer getStaticDataId() {
-		return (Integer) getValue(4);
+	public Integer getGiftId() {
+		return (Integer) getValue(3);
 	}
 
 	/**
@@ -143,7 +124,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 */
 	@Override
 	public GiftForUserRecord setTimeOfEntry(Timestamp value) {
-		setValue(5, value);
+		setValue(4, value);
 		return this;
 	}
 
@@ -153,7 +134,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	@Column(name = "time_of_entry")
 	@Override
 	public Timestamp getTimeOfEntry() {
-		return (Timestamp) getValue(5);
+		return (Timestamp) getValue(4);
 	}
 
 	/**
@@ -161,7 +142,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 */
 	@Override
 	public GiftForUserRecord setRewardId(Integer value) {
-		setValue(6, value);
+		setValue(5, value);
 		return this;
 	}
 
@@ -171,7 +152,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	@Column(name = "reward_id", precision = 10)
 	@Override
 	public Integer getRewardId() {
-		return (Integer) getValue(6);
+		return (Integer) getValue(5);
 	}
 
 	/**
@@ -179,7 +160,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 */
 	@Override
 	public GiftForUserRecord setCollected(Boolean value) {
-		setValue(7, value);
+		setValue(6, value);
 		return this;
 	}
 
@@ -189,7 +170,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	@Column(name = "collected", precision = 1)
 	@Override
 	public Boolean getCollected() {
-		return (Boolean) getValue(7);
+		return (Boolean) getValue(6);
 	}
 
 	/**
@@ -197,7 +178,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 */
 	@Override
 	public GiftForUserRecord setMinutesTillExpiration(Integer value) {
-		setValue(8, value);
+		setValue(7, value);
 		return this;
 	}
 
@@ -207,7 +188,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	@Column(name = "minutes_till_expiration", precision = 10)
 	@Override
 	public Integer getMinutesTillExpiration() {
-		return (Integer) getValue(8);
+		return (Integer) getValue(7);
 	}
 
 	/**
@@ -215,7 +196,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 */
 	@Override
 	public GiftForUserRecord setReasonForGift(String value) {
-		setValue(9, value);
+		setValue(8, value);
 		return this;
 	}
 
@@ -226,7 +207,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	@Size(max = 75)
 	@Override
 	public String getReasonForGift() {
-		return (String) getValue(9);
+		return (String) getValue(8);
 	}
 
 	// -------------------------------------------------------------------------
@@ -242,23 +223,23 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	}
 
 	// -------------------------------------------------------------------------
-	// Record10 type implementation
+	// Record9 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<String, String, String, String, Integer, Timestamp, Integer, Boolean, Integer, String> fieldsRow() {
-		return (Row10) super.fieldsRow();
+	public Row9<String, String, String, Integer, Timestamp, Integer, Boolean, Integer, String> fieldsRow() {
+		return (Row9) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row10<String, String, String, String, Integer, Timestamp, Integer, Boolean, Integer, String> valuesRow() {
-		return (Row10) super.valuesRow();
+	public Row9<String, String, String, Integer, Timestamp, Integer, Boolean, Integer, String> valuesRow() {
+		return (Row9) super.valuesRow();
 	}
 
 	/**
@@ -289,23 +270,15 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field4() {
-		return GiftForUser.GIFT_FOR_USER.GIFT_TYPE;
+	public Field<Integer> field4() {
+		return GiftForUser.GIFT_FOR_USER.GIFT_ID;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Integer> field5() {
-		return GiftForUser.GIFT_FOR_USER.STATIC_DATA_ID;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Field<Timestamp> field6() {
+	public Field<Timestamp> field5() {
 		return GiftForUser.GIFT_FOR_USER.TIME_OF_ENTRY;
 	}
 
@@ -313,7 +286,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Integer> field7() {
+	public Field<Integer> field6() {
 		return GiftForUser.GIFT_FOR_USER.REWARD_ID;
 	}
 
@@ -321,7 +294,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Boolean> field8() {
+	public Field<Boolean> field7() {
 		return GiftForUser.GIFT_FOR_USER.COLLECTED;
 	}
 
@@ -329,7 +302,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Integer> field9() {
+	public Field<Integer> field8() {
 		return GiftForUser.GIFT_FOR_USER.MINUTES_TILL_EXPIRATION;
 	}
 
@@ -337,7 +310,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field10() {
+	public Field<String> field9() {
 		return GiftForUser.GIFT_FOR_USER.REASON_FOR_GIFT;
 	}
 
@@ -369,23 +342,15 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value4() {
-		return getGiftType();
+	public Integer value4() {
+		return getGiftId();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer value5() {
-		return getStaticDataId();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Timestamp value6() {
+	public Timestamp value5() {
 		return getTimeOfEntry();
 	}
 
@@ -393,7 +358,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer value7() {
+	public Integer value6() {
 		return getRewardId();
 	}
 
@@ -401,7 +366,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Boolean value8() {
+	public Boolean value7() {
 		return getCollected();
 	}
 
@@ -409,7 +374,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer value9() {
+	public Integer value8() {
 		return getMinutesTillExpiration();
 	}
 
@@ -417,7 +382,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value10() {
+	public String value9() {
 		return getReasonForGift();
 	}
 
@@ -452,8 +417,8 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord value4(String value) {
-		setGiftType(value);
+	public GiftForUserRecord value4(Integer value) {
+		setGiftId(value);
 		return this;
 	}
 
@@ -461,16 +426,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord value5(Integer value) {
-		setStaticDataId(value);
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public GiftForUserRecord value6(Timestamp value) {
+	public GiftForUserRecord value5(Timestamp value) {
 		setTimeOfEntry(value);
 		return this;
 	}
@@ -479,7 +435,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord value7(Integer value) {
+	public GiftForUserRecord value6(Integer value) {
 		setRewardId(value);
 		return this;
 	}
@@ -488,7 +444,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord value8(Boolean value) {
+	public GiftForUserRecord value7(Boolean value) {
 		setCollected(value);
 		return this;
 	}
@@ -497,7 +453,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord value9(Integer value) {
+	public GiftForUserRecord value8(Integer value) {
 		setMinutesTillExpiration(value);
 		return this;
 	}
@@ -506,7 +462,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord value10(String value) {
+	public GiftForUserRecord value9(String value) {
 		setReasonForGift(value);
 		return this;
 	}
@@ -515,7 +471,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public GiftForUserRecord values(String value1, String value2, String value3, String value4, Integer value5, Timestamp value6, Integer value7, Boolean value8, Integer value9, String value10) {
+	public GiftForUserRecord values(String value1, String value2, String value3, Integer value4, Timestamp value5, Integer value6, Boolean value7, Integer value8, String value9) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -525,7 +481,6 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 		value7(value7);
 		value8(value8);
 		value9(value9);
-		value10(value10);
 		return this;
 	}
 
@@ -541,8 +496,7 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 		setId(from.getId());
 		setGifterUserId(from.getGifterUserId());
 		setReceiverUserId(from.getReceiverUserId());
-		setGiftType(from.getGiftType());
-		setStaticDataId(from.getStaticDataId());
+		setGiftId(from.getGiftId());
 		setTimeOfEntry(from.getTimeOfEntry());
 		setRewardId(from.getRewardId());
 		setCollected(from.getCollected());
@@ -573,18 +527,17 @@ public class GiftForUserRecord extends UpdatableRecordImpl<GiftForUserRecord> im
 	/**
 	 * Create a detached, initialised GiftForUserRecord
 	 */
-	public GiftForUserRecord(String id, String gifterUserId, String receiverUserId, String giftType, Integer staticDataId, Timestamp timeOfEntry, Integer rewardId, Boolean collected, Integer minutesTillExpiration, String reasonForGift) {
+	public GiftForUserRecord(String id, String gifterUserId, String receiverUserId, Integer giftId, Timestamp timeOfEntry, Integer rewardId, Boolean collected, Integer minutesTillExpiration, String reasonForGift) {
 		super(GiftForUser.GIFT_FOR_USER);
 
 		setValue(0, id);
 		setValue(1, gifterUserId);
 		setValue(2, receiverUserId);
-		setValue(3, giftType);
-		setValue(4, staticDataId);
-		setValue(5, timeOfEntry);
-		setValue(6, rewardId);
-		setValue(7, collected);
-		setValue(8, minutesTillExpiration);
-		setValue(9, reasonForGift);
+		setValue(3, giftId);
+		setValue(4, timeOfEntry);
+		setValue(5, rewardId);
+		setValue(6, collected);
+		setValue(7, minutesTillExpiration);
+		setValue(8, reasonForGift);
 	}
 }

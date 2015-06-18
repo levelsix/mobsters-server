@@ -3,14 +3,9 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,35 +20,10 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class ItemRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
-	private static final ItemSecretGiftComparator comparator = new ItemSecretGiftComparator();
-
-	private static final class ItemSecretGiftComparator implements
-			Comparator<Item> {
-		@Override
-		public int compare(Item o1, Item o2) {
-			if (o1.getNormalizedSecretGiftProbability() < o2
-					.getNormalizedSecretGiftProbability()) {
-				return -1;
-			} else if (o1.getNormalizedSecretGiftProbability() > o2
-					.getNormalizedSecretGiftProbability()) {
-				return 1;
-			} else if (o1.getId() < o2.getId()) {
-				//since same probability, order by id
-				return -1;
-			} else if (o1.getId() > o2.getId()) {
-				return 1;
-			} else {
-				return 0;
-			}
-		}
-	}
+	private static final Logger log = LoggerFactory
+			.getLogger(ItemRetrieveUtils.class);
 
 	private static Map<Integer, Item> itemIdsToItems;
-	private static float secretGiftProbabilitySum = 0F;
-	private static TreeSet<Item> christmasTree; //secretGiftTree;
-
 	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_CONFIG;
 
 	public Map<Integer, Item> getItemIdsToItems() {
@@ -71,7 +41,7 @@ public class ItemRetrieveUtils {
 		}
 
 		if (!itemIdsToItems.containsKey(itemId)) {
-			log.error("no item for id=" + itemId);
+			log.error("no item for id={}", itemId);
 			return null;
 		}
 		return itemIdsToItems.get(itemId);
@@ -91,27 +61,10 @@ public class ItemRetrieveUtils {
 		return returnMap;
 	}
 
-	public Item nextItem(float probability) {
-		if (null == christmasTree) {
-			log.error("object to select secret gift nonexistent.");
-			return null;
-		}
-		//selects the item with the least probability that is still greater
-		//than the given probability
-		Item i = new Item();
-		i.setId(0);
-		i.setNormalizedSecretGiftProbability(probability);
-
-		Item secretGift = christmasTree.ceiling(i);
-
-		log.info(String.format("for giving probability=%s, selected %s",
-				probability, secretGift));
-		return secretGift;
-	}
-
 	private void setStaticItemIdsToItems() {
-		log.debug("setting static map of item ids to items");
+		log.debug("setting static map of itemIds to Items");
 
+		Map<Integer, Item> itemIdsToItemsTemp = new HashMap<Integer, Item>();
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
 		try {
@@ -122,22 +75,14 @@ public class ItemRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Map<Integer, Item> itemIdsToItemsTemp = new HashMap<Integer, Item>();
-						float secretGiftProbabilitySumTemp = 0F;
 
 						//loop through each row and convert it into a java object
 						while (rs.next()) {
 							Item item = convertRSRowToItem(rs);
-
 							int itemId = item.getId();
 							itemIdsToItemsTemp.put(itemId, item);
-
-							secretGiftProbabilitySumTemp += item
-									.getSecretGiftChance();
 						}
 
-						itemIdsToItems = itemIdsToItemsTemp;
-						secretGiftProbabilitySum = secretGiftProbabilitySumTemp;
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
@@ -149,49 +94,11 @@ public class ItemRetrieveUtils {
 		} finally {
 			DBConnection.get().close(rs, null, conn);
 		}
-	}
-
-	private void setUpRandomItemSelection() {
-		log.debug("setting setUpRandomItemSelection");
-		if (secretGiftProbabilitySum <= 0) {
-			log.error("There are no items with secret gift probabilities set.");
-			return;
-		}
-		//using a TreeSet to hold the items, so that it is easier
-		//to select an Item at random to reward a user.
-		TreeSet<Item> christmasTreeTemp = new TreeSet<Item>(comparator);
-
-		//sort item ids, not sure if necessary, but whatevs
-		List<Integer> itemIds = new ArrayList<Integer>();
-		itemIds.addAll(itemIdsToItems.keySet());
-
-		Collections.sort(itemIds);
-
-		// for each item ordered in ascending id numbers, set its chance
-		// (out of 1) to be selected as a secret gift
-		float floatSoFar = 0F;
-		for (Integer itemId : itemIds) {
-			Item item = itemIdsToItems.get(itemId);
-
-			floatSoFar += item.getSecretGiftChance();
-			float normalizedSecretGiftProbability = floatSoFar
-					/ secretGiftProbabilitySum;
-
-			item.setNormalizedSecretGiftProbability(normalizedSecretGiftProbability);
-
-			boolean added = christmasTreeTemp.add(item);
-			if (!added) {
-				log.error("(shouldn't happen...) can't add item={} to treeSet={}",
-						item, christmasTreeTemp);
-			}
-		}
-
-		christmasTree = christmasTreeTemp;
+		itemIdsToItems = itemIdsToItemsTemp;
 	}
 
 	public void reload() {
 		setStaticItemIdsToItems();
-		setUpRandomItemSelection();
 	}
 
 	/*
@@ -214,8 +121,6 @@ public class ItemRetrieveUtils {
 		}
 		int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
 		int amount = rs.getInt(DBConstants.ITEM__AMOUNT);
-		float secretGiftChance = rs
-				.getFloat(DBConstants.ITEM__SECRET_GIFT_CHANCE);
 		boolean alwaysDisplayToUser = rs
 				.getBoolean(DBConstants.ITEM__ALWAYS_DISPLAY_TO_USER);
 		String actionGameType = rs.getString(DBConstants.ITEM__ACTION_GAME_TYPE);
@@ -242,8 +147,8 @@ public class ItemRetrieveUtils {
 		}
 
 
-		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId, amount,
-				secretGiftChance, alwaysDisplayToUser, actionGameType, quality);
+		Item item = new Item(id, name, shortName, imgName, itemType, staticDataId,
+				amount, alwaysDisplayToUser, actionGameType, quality);
 		return item;
 	}
 }

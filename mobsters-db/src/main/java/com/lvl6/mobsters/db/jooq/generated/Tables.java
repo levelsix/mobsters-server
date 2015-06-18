@@ -38,9 +38,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClanHist
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentUserReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanIconConfig;
@@ -57,14 +54,15 @@ import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionCostConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ExpansionPurchaseForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.FileDownloadConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.GiftForTangoUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.GiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.GoldSaleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
-import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -121,6 +119,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesScheduleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
@@ -142,8 +141,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceGeneratorConf
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceStorageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTeamCenterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserClientState;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserCompleted;
@@ -357,21 +354,6 @@ public class Tables {
 	public static final ClanForUser CLAN_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ClanForUser.CLAN_FOR_USER;
 
 	/**
-	 * The table mobsters.clan_gift_config
-	 */
-	public static final ClanGiftConfig CLAN_GIFT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftConfig.CLAN_GIFT_CONFIG;
-
-	/**
-	 * The table mobsters.clan_gift_for_user
-	 */
-	public static final ClanGiftForUser CLAN_GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftForUser.CLAN_GIFT_FOR_USER;
-
-	/**
-	 * The table mobsters.clan_gift_reward_config
-	 */
-	public static final ClanGiftRewardConfig CLAN_GIFT_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftRewardConfig.CLAN_GIFT_REWARD_CONFIG;
-
-	/**
 	 * The table mobsters.clan_help
 	 */
 	public static final ClanHelp CLAN_HELP = com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp.CLAN_HELP;
@@ -452,6 +434,11 @@ public class Tables {
 	public static final FileDownloadConfig FILE_DOWNLOAD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.FileDownloadConfig.FILE_DOWNLOAD_CONFIG;
 
 	/**
+	 * The table mobsters.gift_config
+	 */
+	public static final GiftConfig GIFT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.GiftConfig.GIFT_CONFIG;
+
+	/**
 	 * The table mobsters.gift_for_tango_user
 	 */
 	public static final GiftForTangoUser GIFT_FOR_TANGO_USER = com.lvl6.mobsters.db.jooq.generated.tables.GiftForTangoUser.GIFT_FOR_TANGO_USER;
@@ -460,6 +447,11 @@ public class Tables {
 	 * The table mobsters.gift_for_user
 	 */
 	public static final GiftForUser GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.GiftForUser.GIFT_FOR_USER;
+
+	/**
+	 * The table mobsters.gift_reward_config
+	 */
+	public static final GiftRewardConfig GIFT_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.GiftRewardConfig.GIFT_REWARD_CONFIG;
 
 	/**
 	 * The table mobsters.gold_sale_config
@@ -485,11 +477,6 @@ public class Tables {
 	 * The table mobsters.item_for_user_usage
 	 */
 	public static final ItemForUserUsage ITEM_FOR_USER_USAGE = com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage.ITEM_FOR_USER_USAGE;
-
-	/**
-	 * The table mobsters.item_secret_gift_for_user
-	 */
-	public static final ItemSecretGiftForUser ITEM_SECRET_GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER;
 
 	/**
 	 * The table mobsters.load_testing_events
@@ -772,6 +759,11 @@ public class Tables {
 	public static final SecretGiftConfig SECRET_GIFT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftConfig.SECRET_GIFT_CONFIG;
 
 	/**
+	 * The table mobsters.secret_gift_for_user
+	 */
+	public static final SecretGiftForUser SECRET_GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftForUser.SECRET_GIFT_FOR_USER;
+
+	/**
 	 * The table mobsters.server_toggle_config
 	 */
 	public static final ServerToggleConfig SERVER_TOGGLE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ServerToggleConfig.SERVER_TOGGLE_CONFIG;
@@ -875,16 +867,6 @@ public class Tables {
 	 * The table mobsters.structure_town_hall_config
 	 */
 	public static final StructureTownHallConfig STRUCTURE_TOWN_HALL_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG;
-
-	/**
-	 * The table mobsters.tango_gift_config
-	 */
-	public static final TangoGiftConfig TANGO_GIFT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig.TANGO_GIFT_CONFIG;
-
-	/**
-	 * The table mobsters.tango_gift_reward_config
-	 */
-	public static final TangoGiftRewardConfig TANGO_GIFT_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig.TANGO_GIFT_REWARD_CONFIG;
 
 	/**
 	 * The table mobsters.task_config

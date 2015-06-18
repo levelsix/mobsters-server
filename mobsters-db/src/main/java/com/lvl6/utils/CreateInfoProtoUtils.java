@@ -19,11 +19,16 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
@@ -83,7 +88,6 @@ import com.lvl6.proto.ItemsProto.ItemGemPriceProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
-import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.proto.MiniEventProtos.MiniEventForPlayerLevelProto;
@@ -125,13 +129,13 @@ import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
-import com.lvl6.proto.RewardsProto.ClanGiftProto;
+import com.lvl6.proto.RewardsProto.GiftProto;
+import com.lvl6.proto.RewardsProto.GiftProto.GiftType;
 import com.lvl6.proto.RewardsProto.RewardProto;
 import com.lvl6.proto.RewardsProto.RewardProto.RewardType;
-import com.lvl6.proto.RewardsProto.TangoGiftProto;
-import com.lvl6.proto.RewardsProto.UserClanGiftProto;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
+import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
 import com.lvl6.proto.RewardsProto.UserTangoGiftProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
@@ -198,7 +202,6 @@ import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskComplete
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
@@ -215,9 +218,6 @@ import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 @Component
 @DependsOn("gameServer")
 public class CreateInfoProtoUtils {
-
-	@Autowired
-	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
 
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
@@ -428,7 +428,7 @@ public class CreateInfoProtoUtils {
 			Collection<UserResearchProto> urpList = createUserResearchProto(rfuList);
 			ppb.addAllUserResearch(urpList);
 		}
-		
+
 		if (null != sfuList && !sfuList.isEmpty()) {
 			List<FullUserStructureProto> uspList = new ArrayList<FullUserStructureProto>();
 			for(StructureForUserPojo sfu : sfuList) {
@@ -437,7 +437,7 @@ public class CreateInfoProtoUtils {
 			}
 			ppb.addAllUserStructure(uspList);
 		}
-		
+
 		ppb.setPercentageToStealFromGenerator(percentageToStealFromGenerator);
 
 		return ppb.build();
@@ -597,12 +597,12 @@ public class CreateInfoProtoUtils {
 			if(userIdToCashReward.containsKey(userId)) {
 				prospectiveCashWinnings = userIdToCashReward.get(userId);;
 			}
-			
+
 			int prospectiveOilWinnings = 0;
 			if(userIdToOilReward.containsKey(userId)) {
 				prospectiveOilWinnings = userIdToOilReward.get(userId);;
 			}
-			
+
 			Clan clan = null;
 			if (userIdToClan.containsKey(userId)) {
 				clan = userIdToClan.get(userId);
@@ -634,15 +634,15 @@ public class CreateInfoProtoUtils {
 			if (userIdToRfuList.containsKey(userId)) {
 				rfuList = userIdToRfuList.get(userId);
 			}
-			
+
 			List<StructureForUserPojo> sfuList = null;
 			if (userIdToSfuList.containsKey(userId)) {
 				sfuList = userIdToSfuList.get(userId);
 			}
-			
+
 			float percentageToStealFromGenerator = 0;
 			if(userIdToPercentageStealFromGenerator.containsKey(userId)) {
-				percentageToStealFromGenerator = 
+				percentageToStealFromGenerator =
 						userIdToPercentageStealFromGenerator.get(userId);
 			}
 
@@ -656,7 +656,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createGotAttackedPvpHistoryProto(
-			User attacker, Clan c, 
+			User attacker, Clan c,
 			PvpBattleHistoryPojo info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
@@ -682,7 +682,7 @@ public class CreateInfoProtoUtils {
 		phpb.setCashStolenFromGenerators(cashStolenFromGenerators);
 		phpb.setOilStolenFromStorage(oilStolenFromStorage);
 		phpb.setOilStolenFromGenerators(oilStolenFromGenerators);
-		
+
 		modifyPvpHistoryProto(phpb, info);
 
 //		if (null != brfu) {
@@ -703,9 +703,9 @@ public class CreateInfoProtoUtils {
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
 			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
-			Map<String, Integer> cashStolenFromStorageMap, 
+			Map<String, Integer> cashStolenFromStorageMap,
 			Map<String, Integer> cashStolenFromGeneratorsMap,
-			Map<String, Integer> oilStolenFromStorageMap, 
+			Map<String, Integer> oilStolenFromStorageMap,
 			Map<String, Integer> oilStolenFromGeneratorsMap)
 	{
 
@@ -742,8 +742,8 @@ public class CreateInfoProtoUtils {
 			int cashStolenFromGenerators = cashStolenFromGeneratorsMap.get(attackerId);
 			int oilStolenFromStorage = oilStolenFromStorageMap.get(attackerId);
 			int oilStolenFromGenerators = oilStolenFromGeneratorsMap.get(attackerId);
-			
-			
+
+
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 					clan, history, attackerMonsters, userMonsterIdToDropped,
 					prospectiveCashWinnings, prospectiveOilWinnings,
@@ -789,7 +789,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
-			FullUserProto fup, FullUserProto defenderFup, 
+			FullUserProto fup, FullUserProto defenderFup,
 			PvpBattleHistoryPojo info,
 			String replayId) //BattleReplayForUser brfu)
 	{
@@ -2251,7 +2251,6 @@ public class CreateInfoProtoUtils {
 
 		ipb.setStaticDataId(item.getStaticDataId());
 		ipb.setAmount(item.getAmount());
-		ipb.setSecretGiftChance(item.getSecretGiftChance());
 		ipb.setAlwaysDisplayToUser(item.isAlwaysDisplayToUser());
 
 		str = item.getGameActionType();
@@ -2348,34 +2347,6 @@ public class CreateInfoProtoUtils {
 		}
 
 		return uiupb.build();
-	}
-
-	public Collection<UserItemSecretGiftProto> createUserItemSecretGiftProto(
-			Collection<ItemSecretGiftForUser> secretGifts) {
-		Collection<UserItemSecretGiftProto> gifs = new ArrayList<UserItemSecretGiftProto>();
-		if (null == secretGifts || secretGifts.isEmpty()) {
-			return gifs;
-		}
-
-		for (ItemSecretGiftForUser isgfu : secretGifts) {
-			gifs.add(createUserItemSecretGiftProto(isgfu));
-		}
-		return gifs;
-	}
-
-	public UserItemSecretGiftProto createUserItemSecretGiftProto(
-			ItemSecretGiftForUser secretGift) {
-		UserItemSecretGiftProto.Builder uisgpb = UserItemSecretGiftProto
-				.newBuilder();
-		uisgpb.setUisgUuid(secretGift.getId());
-		uisgpb.setUserUuid(secretGift.getUserId());
-		uisgpb.setSecsTillCollection(secretGift.getSecsTillCollection());
-		uisgpb.setItemId(secretGift.getItemId());
-
-		Date createTime = secretGift.getCreateTime();
-		uisgpb.setCreateTime(createTime.getTime());
-
-		return uisgpb.build();
 	}
 
 	public List<ItemGemPriceProto> createItemGemPriceProto(
@@ -3728,7 +3699,8 @@ public class CreateInfoProtoUtils {
 	public UserRewardProto createUserRewardProto(
 			Collection<ItemForUser> newOrUpdatedIfu,
 			Collection<FullUserMonsterProto> fumpList,
-			int gems, int cash, int oil, int gachaCredits, UserClanGiftProto ucgp)
+			int gems, int cash, int oil, int gachaCredits,
+			Collection<UserGiftProto> ugps) //ugps includes clan gifts
 	{
 		UserRewardProto.Builder urp = UserRewardProto.newBuilder();
 
@@ -3745,89 +3717,105 @@ public class CreateInfoProtoUtils {
 		urp.setCash(cash);
 		urp.setOil(oil);
 
-		if(ucgp != null) {
-			urp.setClanGift(ucgp);
+		if(null != ugps && !ugps.isEmpty()) {
+			urp.addAllGift(ugps);
 		}
 		urp.setGachaCredits(gachaCredits);
 
 		return urp.build();
 	}
 
-	public UserGiftProto createUserGiftProto(GiftForUser gfu,
-			MinimumUserProto gifterMup, Reward r, ClanGift cg,
-			GiftForTangoUser gftu, TangoGift tg)
+	public UserGiftProto createUserGiftProto(GiftForUserPojo gfu,
+			MinimumUserProto gifterMup, Reward r, GiftConfigPojo g,
+			GiftForTangoUserPojo gftu)
 	{
 		UserGiftProto.Builder ugpb = UserGiftProto.newBuilder();
-		ugpb.setUgId(gfu.getId());
-		ugpb.setReceiverUserId(gfu.getReceiverUserId());
+		ugpb.setUgUuid(gfu.getId());
+		ugpb.setReceiverUserUuid(gfu.getReceiverUserId());
 		ugpb.setGifterUser(gifterMup);
 
-		String gt = gfu.getGiftType();
-		if (null != gt && !gt.isEmpty()) {
-			try {
-				RewardType rt = RewardType.valueOf(gt);
-				ugpb.setGiftType(rt);
-
-				switch (rt) {
-				case CLAN_GIFT:
-					ugpb.setClanGift(createClanGiftProto(cg));
-					break;
-				case TANGO_GIFT:
-					ugpb.setTangoGift(createUserTangoGiftProto(gftu, tg));
-				default:
-					break;
-				}
-
-			} catch(Exception e) {
-				log.error(
-						String.format("incorrect enum RewardType. GiftForUser=%s.", gfu),
-						e);
-			}
-		}
-
+		ugpb.setGift(createGiftProto(g));
 		Date timeOfEntry = gfu.getTimeOfEntry();
 		ugpb.setTimeReceived(timeOfEntry.getTime());
-		ugpb.setRp(createRewardProto(r));
-		ugpb.setHasBeenCollected(gfu.isCollected());
+		ugpb.setReward(createRewardProto(r));
+		ugpb.setHasBeenCollected(gfu.getCollected());
 		ugpb.setMinutesTillExpiration(gfu.getMinutesTillExpiration());
 
+		if (GiftType.TANGO_GIFT.name().equalsIgnoreCase(g.getGiftType())) {
+			ugpb.setTangoGift(createUserTangoGiftProto(gftu));
+				}
+
 		return ugpb.build();
-	}
+			}
 
-	public ClanGiftProto createClanGiftProto(ClanGift cg) {
-		ClanGiftProto.Builder b = ClanGiftProto.newBuilder();
-		b.setClanGiftId(cg.getId());
-		if(cg.getName() != null) {
-			b.setName(cg.getName());
-		}
-
-		b.setHoursUntilExpiration(cg.getHoursUntilExpiration());
-		b.setImageName(cg.getImageName());
-//		b.setQuality(Quality.valueOf(cg.getQuality()));
-
-		return b.build();
-	}
-
-	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUser gftu,
-			TangoGift tg)
+	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUserPojo gftu)
 	{
 		UserTangoGiftProto.Builder utgpb = UserTangoGiftProto.newBuilder();
-		utgpb.setUserGiftId(gftu.getGifterUserId());
-		utgpb.setGifterTangoUserId(gftu.getGifterTangoUserId());
-
-		TangoGiftProto tgp = createTangoGiftProto(tg);
-		utgpb.setTangoGift(tgp);
+		utgpb.setUserGiftUuid(gftu.getGiftForUserId());
+		utgpb.setGifterTangoName(gftu.getGifterTangoName());
 
 		return utgpb.build();
+		}
+
+	public GiftProto createGiftProto(GiftConfigPojo gc)
+	{
+		GiftProto.Builder gpb = GiftProto.newBuilder();
+
+		gpb.setGiftId(gc.getId());
+		String str = gc.getName();
+		if (null != str && !str.isEmpty()) {
+			gpb.setName(str);
 	}
 
-	public TangoGiftProto createTangoGiftProto(TangoGift tg) {
-		TangoGiftProto.Builder tgpb = TangoGiftProto.newBuilder();
-		tgpb.setTangoGiftId(tg.getId());
-		tgpb.setName(tg.getName());
-		tgpb.setHoursUntilExpiration(tg.getHoursUntilExpiration());
-		tgpb.setImageName(tg.getImageName());
-		return tgpb.build();
+		gpb.setHoursUntilExpiration(gc.getHoursUntilExpiration());
+
+		str = gc.getImageName();
+		if (null != str && !str.isEmpty()) {
+			gpb.setImageName(str);
+		}
+
+		str = gc.getGiftType();
+		try {
+			if (null != str && !str.isEmpty()) {
+				GiftType gt = GiftType.valueOf(str);
+				gpb.setGiftType(gt);
+			}
+		} catch (Exception e) {
+			log.error(String.format(
+					"incorrect GiftType: %s", str),
+					e);
+	}
+
+		return gpb.build();
+	}
+
+	public UserSecretGiftProto createUserSecretGiftProto(
+			SecretGiftForUserPojo secretGift) {
+		UserSecretGiftProto.Builder uisgpb = UserSecretGiftProto
+				.newBuilder();
+		uisgpb.setUisgUuid(secretGift.getId());
+		uisgpb.setUserUuid(secretGift.getUserId());
+		uisgpb.setSecsTillCollection(secretGift.getSecsUntilCollection());
+
+		Reward r = rewardRetrieveUtils.getRewardById(secretGift.getRewardId());
+		uisgpb.setReward(createRewardProto(r));
+
+		uisgpb.setCreateTime(secretGift.getCreateTime().getTime());
+		return uisgpb.build();
+	}
+
+
+	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
+			Collection<SecretGiftForUserPojo> secretGifts) {
+		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
+		if (null == secretGifts || secretGifts.isEmpty()) {
+			return gifs;
+		}
+
+		for (SecretGiftForUserPojo isgfu : secretGifts) {
+			gifs.add(createUserSecretGiftProto(isgfu));
+		}
+		return gifs;
 	}
 
 	/** Skill.proto ***************************************************/
@@ -4312,7 +4300,7 @@ public class CreateInfoProtoUtils {
 		//    }
 		return builder.build();
 	}
-	
+
 	public FullUserStructureProto createFullUserStructureProtoFromUserStructPojo(
 			StructureForUserPojo userStructPojo) {
 		FullUserStructureProto.Builder builder = FullUserStructureProto
@@ -4322,14 +4310,14 @@ public class CreateInfoProtoUtils {
 		builder.setStructId(userStructPojo.getStructId());
 		//    builder.setLevel(userStruct.getLevel());
 		builder.setFbInviteStructLvl(userStructPojo.getFbInviteStructLvl());
-		
+
 		if(userStructPojo.getIsComplete().equals((byte) 0)) {
 			builder.setIsComplete(false);
 		}
 		else {
 			builder.setIsComplete(true);
 		}
-		
+
 		CoordinatePair cp = new CoordinatePair(userStructPojo.getXcoord(), userStructPojo.getYcoord());
 		builder.setCoordinates(createCoordinateProtoFromCoordinatePair(cp));
 		String orientation = userStructPojo.getOrientation();
@@ -5509,6 +5497,18 @@ public class CreateInfoProtoUtils {
 
 		int segmentationGroup = u.getSegmentationGroup();
 		builder.setSegmentationGroup(segmentationGroup);
+		int gachaCredits = u.getGachaCredits();
+		builder.setGachaCredits(gachaCredits);
+
+		Date lastTangoGiftSentTime = u.getLastTangoGiftSentTime();
+		if (null != lastTangoGiftSentTime) {
+			builder.setLastTangoGiftSentTime(lastTangoGiftSentTime.getTime());
+		}
+
+		String tangoId = u.getTangoId();
+		if (null != tangoId && !tangoId.isEmpty()) {
+			builder.setTangoId(tangoId);
+		}
 
 		//don't add setting new columns/properties here, add up above
 
@@ -5633,27 +5633,27 @@ public class CreateInfoProtoUtils {
 
 	///////////////////////////////CLAN GIFTS PROTOS/////////////////////////////////////////////
 
-	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg, MinimumUserProto mup) {
-		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();
-		b.setUserClanGiftId(ucg.getId());
-		b.setReceiverUserId(ucg.getReceiverUserId());
-
-		if(mup != null) {
-			b.setGifterUser(mup);
-		}
-
-		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
-
-		b.setClanGift(createClanGiftProto(cg));
-		b.setTimeReceived(ucg.getTimeReceived().getTime());
-
-		Reward r = rewardRetrieveUtils.getRewardById(ucg.getRewardId());
-		b.setReward(createRewardProto(r));
-
-		b.setHasBeenCollected(ucg.isHasBeenCollected());
-
-		return b.build();
-	}
+//	public UserClanGiftProto createUserClanGiftProto(ClanGiftForUser ucg, MinimumUserProto mup) {
+//		UserClanGiftProto.Builder b = UserClanGiftProto.newBuilder();
+//		b.setUserClanGiftId(ucg.getId());
+//		b.setReceiverUserId(ucg.getReceiverUserId());
+//
+//		if(mup != null) {
+//			b.setGifterUser(mup);
+//		}
+//
+//		ClanGift cg = clanGiftRetrieveUtils.getClanGiftForClanGiftId(ucg.getClanGiftId());
+//
+//		b.setClanGift(createClanGiftProto(cg));
+//		b.setTimeReceived(ucg.getTimeReceived().getTime());
+//
+//		Reward r = rewardRetrieveUtils.getRewardById(ucg.getRewardId());
+//		b.setReward(createRewardProto(r));
+//
+//		b.setHasBeenCollected(ucg.isHasBeenCollected());
+//
+//		return b.build();
+//	}
 
 	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtosWithMonsterId(List<StrengthLeaderBoard> slbList,
 			UserRetrieveUtils2 userRetrieveUtils, MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
@@ -5672,7 +5672,7 @@ public class CreateInfoProtoUtils {
 			b.setStrength(slb.getStrength());
 
 			slbpList.add(b.build());
-		}
+	}
 		return slbpList;
 	}
 
@@ -5721,6 +5721,6 @@ public class CreateInfoProtoUtils {
 		}
 		return returnList;
 	}
-	
+
 
 }

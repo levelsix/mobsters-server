@@ -25,7 +25,8 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -39,8 +40,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class InAppPurchaseSalesAction {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(InAppPurchaseSalesAction.class);
 
 	private String userId;
 	private User user;
@@ -48,7 +49,8 @@ public class InAppPurchaseSalesAction {
 	private Date now;
 	private String uuid;
 	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private MonsterStuffUtils monsterStuffUtils;
 	protected InsertUtil insertUtil;
@@ -67,13 +69,13 @@ public class InAppPurchaseSalesAction {
 
 	public InAppPurchaseSalesAction() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public InAppPurchaseSalesAction(String userId, User user,
 			JSONObject receiptFromApple, Date now,
 			String uuid, IAPHistoryRetrieveUtils iapHistoryRetrieveUtil,
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			InsertUtil insertUtil, UpdateUtil updateUtil,
@@ -94,7 +96,8 @@ public class InAppPurchaseSalesAction {
 		this.now = now;
 		this.uuid = uuid;
 		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.insertUtil = insertUtil;
@@ -154,8 +157,7 @@ public class InAppPurchaseSalesAction {
 		try {
 			packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("receiptFromApple.getString() error", e);
 		}
 
 		List<SalesItem> salesItemList = salesItemRetrieveUtils.getSalesItemsForSalesPackageId(salesPackage.getId());
@@ -290,7 +292,8 @@ public class InAppPurchaseSalesAction {
 		ara = new AwardRewardAction(userId, user, 0, 0, now, "sales package",
 				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
-				monsterLevelInfoRetrieveUtils, clanGiftRewardsRetrieveUtils,
+				monsterLevelInfoRetrieveUtils, giftRetrieveUtil,
+				giftRewardRetrieveUtils,
 				rewardRetrieveUtils, userClanRetrieveUtils,
 				createInfoProtoUtils, awardReasonDetail);
 
@@ -358,10 +361,6 @@ public class InAppPurchaseSalesAction {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -370,37 +369,12 @@ public class InAppPurchaseSalesAction {
 		this.user = user;
 	}
 
-	public JSONObject getReceiptFromApple() {
-		return receiptFromApple;
-	}
-
-	public void setReceiptFromApple(JSONObject receiptFromApple) {
-		this.receiptFromApple = receiptFromApple;
-	}
-
 	public Date getNow() {
 		return now;
 	}
 
 	public void setNow(Date now) {
 		this.now = now;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtil() {
-		return iapHistoryRetrieveUtil;
-	}
-
-	public void setIapHistoryRetrieveUtil(
-			IAPHistoryRetrieveUtils iapHistoryRetrieveUtil) {
-		this.iapHistoryRetrieveUtil = iapHistoryRetrieveUtil;
 	}
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
@@ -412,70 +386,8 @@ public class InAppPurchaseSalesAction {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
-	public MonsterStuffUtils getMonsterStuffUtils() {
-		return monsterStuffUtils;
-	}
-
-	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
-		this.monsterStuffUtils = monsterStuffUtils;
-	}
-
-	public InsertUtil getInsertUtil() {
-		return insertUtil;
-	}
-
-	public void setInsertUtil(InsertUtil insertUtil) {
-		this.insertUtil = insertUtil;
-	}
-
-	public UpdateUtil getUpdateUtil() {
-		return updateUtil;
-	}
-
 	public void setUpdateUtil(UpdateUtil updateUtil) {
 		this.updateUtil = updateUtil;
-	}
-
-	public CreateInfoProtoUtils getCreateInfoProtoUtils() {
-		return createInfoProtoUtils;
-	}
-
-	public void setCreateInfoProtoUtils(CreateInfoProtoUtils createInfoProtoUtils) {
-		this.createInfoProtoUtils = createInfoProtoUtils;
-	}
-
-	public MiscMethods getMiscMethods() {
-		return miscMethods;
-	}
-
-	public void setMiscMethods(MiscMethods miscMethods) {
-		this.miscMethods = miscMethods;
-	}
-
-	public SalesPackageRetrieveUtils getSalesPackageRetrieveUtils() {
-		return salesPackageRetrieveUtils;
-	}
-
-	public void setSalesPackageRetrieveUtils(
-			SalesPackageRetrieveUtils salesPackageRetrieveUtils) {
-		this.salesPackageRetrieveUtils = salesPackageRetrieveUtils;
-	}
-
-	public SalesItemRetrieveUtils getSalesItemRetrieveUtils() {
-		return salesItemRetrieveUtils;
-	}
-
-	public void setSalesItemRetrieveUtils(
-			SalesItemRetrieveUtils salesItemRetrieveUtils) {
-		this.salesItemRetrieveUtils = salesItemRetrieveUtils;
-	}
-
-	public MonsterRetrieveUtils getMonsterRetrieveUtils() {
-		return monsterRetrieveUtils;
-	}
-
-	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
-		this.monsterRetrieveUtils = monsterRetrieveUtils;
 	}
 
 	public SalesPackage getSalesPackage() {
@@ -490,89 +402,24 @@ public class InAppPurchaseSalesAction {
 		return salesPackagePrice;
 	}
 
-	public void setSalesPackagePrice(double salesPackagePrice) {
-		this.salesPackagePrice = salesPackagePrice;
-	}
-
 	public int getGemChange() {
 		return gemChange;
-	}
-
-	public void setGemChange(int gemChange) {
-		this.gemChange = gemChange;
-	}
-
-	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
-		return monsterLevelInfoRetrieveUtils;
-	}
-
-	public void setMonsterLevelInfoRetrieveUtils(
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 	}
 
 	public boolean isSalesJumpTwoTiers() {
 		return salesJumpTwoTiers;
 	}
 
-	public void setSalesJumpTwoTiers(boolean salesJumpTwoTiers) {
-		this.salesJumpTwoTiers = salesJumpTwoTiers;
-	}
-
 	public AwardRewardAction getAra() {
 		return ara;
-	}
-
-	public void setAra(AwardRewardAction ara) {
-		this.ara = ara;
 	}
 
 	public boolean isStarterPack() {
 		return isStarterPack;
 	}
 
-	public void setStarterPack(boolean isStarterPack) {
-		this.isStarterPack = isStarterPack;
-	}
-
 	public boolean isBuilderPack() {
 		return isBuilderPack;
-	}
-
-	public void setBuilderPack(boolean isBuilderPack) {
-		this.isBuilderPack = isBuilderPack;
-	}
-
-	public static Logger getLog() {
-		return log;
-	}
-
-	public static void setLog(Logger log) {
-		InAppPurchaseSalesAction.log = log;
-	}
-
-	public InAppPurchaseUtils getInAppPurchaseUtils() {
-		return inAppPurchaseUtils;
-	}
-
-	public void setInAppPurchaseUtils(InAppPurchaseUtils inAppPurchaseUtils) {
-		this.inAppPurchaseUtils = inAppPurchaseUtils;
-	}
-
-	public RewardRetrieveUtils getRewardRetrieveUtils() {
-		return rewardRetrieveUtils;
-	}
-
-	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
-		this.rewardRetrieveUtils = rewardRetrieveUtils;
-	}
-
-	public UserRetrieveUtils2 getUserRetrieveUtil() {
-		return userRetrieveUtil;
-	}
-
-	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
-		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
 	public List<Reward> getListOfRewards() {
@@ -587,10 +434,6 @@ public class InAppPurchaseSalesAction {
 		return packageName;
 	}
 
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
-
 	public int getSalesValue() {
 		return salesValue;
 	}
@@ -598,7 +441,5 @@ public class InAppPurchaseSalesAction {
 	public void setSalesValue(int salesValue) {
 		this.salesValue = salesValue;
 	}
-
-
 
 }

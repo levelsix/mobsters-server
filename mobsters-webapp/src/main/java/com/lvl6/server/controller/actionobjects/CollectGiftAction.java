@@ -8,9 +8,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.GiftForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.Builder;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus;
@@ -19,7 +19,8 @@ import com.lvl6.retrieveutils.GiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -44,7 +45,8 @@ public class CollectGiftAction {
 	private UpdateUtil updateUtil;
 	private MonsterStuffUtils monsterStuffUtil;
 	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -57,7 +59,8 @@ public class CollectGiftAction {
 			InsertUtil insertUtil, UpdateUtil updateUtil,
 			MonsterStuffUtils monsterStuffUtil,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			CreateInfoProtoUtils createInfoProtoUtils) {
 		super();
@@ -74,7 +77,8 @@ public class CollectGiftAction {
 		this.updateUtil = updateUtil;
 		this.monsterStuffUtil = monsterStuffUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
@@ -94,7 +98,7 @@ public class CollectGiftAction {
 
 	//derived state
 	private User user;
-	private Map<String, GiftForUser> gfuIdToGiftForUser;
+	private Map<String, GiftForUserPojo> gfuIdToGiftForUserPojo;
 	private List<Reward> rewards;
 	private AwardRewardAction ara;
 	private UserRewardProto urp;
@@ -134,21 +138,21 @@ public class CollectGiftAction {
 	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
-			log.error(String.format("no user with id=%s", userId));
+			log.error("no user with id={}", userId);
 			return false;
 		}
 
 		//get the secret gifts to redeem, check to see if they exist
-		gfuIdToGiftForUser = giftForUserRetrieveUtil
+		gfuIdToGiftForUserPojo = giftForUserRetrieveUtil
 				.getUserGiftsForUserMap(ugIds);
 		if (ugIds.isEmpty()) {
-			log.error("no GiftForUser in db with ids={}", ugIds);
+			log.error("no GiftForUserPojo in db with ids={}", ugIds);
 			return false;
 		}
 
-		if ( ugIds.size() != gfuIdToGiftForUser.size()) {
-			log.warn("inconsistent itemSecretGiftForUser in db: %s & what client sent: %s",
-					ugIds, gfuIdToGiftForUser);
+		if ( ugIds.size() != gfuIdToGiftForUserPojo.size()) {
+			log.warn("inconsistent itemSecretGiftForUserPojo in db: %s & what client sent: %s",
+					ugIds, gfuIdToGiftForUserPojo);
 		}
 
 		return true;
@@ -162,7 +166,8 @@ public class CollectGiftAction {
 		ara = new AwardRewardAction(userId, user, maxCash, maxOil, clientTime,
 				awardReason, rewards, userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtil, monsterLevelInfoRetrieveUtils,
-				clanGiftRewardsRetrieveUtils, rewardRetrieveUtil, userClanRetrieveUtils,
+				giftRetrieveUtil,
+				giftRewardRetrieveUtils, rewardRetrieveUtil, userClanRetrieveUtils,
 				createInfoProtoUtils, null);
 
 		boolean awardedRewards = ara.execute();
@@ -172,19 +177,20 @@ public class CollectGiftAction {
 					ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
 					ara.getOilGained(), ara.getGachaCreditsGained(), null);
 		} else {
-			log.error("unable to award rewards! {}", gfuIdToGiftForUser);
+			log.error("unable to award rewards! {}", gfuIdToGiftForUserPojo);
 			return false;
 		}
 
-		boolean success = updateUtil.updateUserGiftHasBeenCollected(
-				userId, gfuIdToGiftForUser.values());
-		return success;
+//		boolean success = updateUtil.updateUserGiftHasBeenCollected(
+//				userId, gfuIdToGiftForUserPojo.values());
+//		return success;
+		return true;
 	}
 
 	private void calculateRewards() {
 		rewards = new ArrayList<Reward>();
 
-		for (GiftForUser gfu : gfuIdToGiftForUser.values()) {
+		for (GiftForUserPojo gfu : gfuIdToGiftForUserPojo.values()) {
 			int rewardId = gfu.getRewardId();
 			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 			rewards.add(r);
@@ -197,6 +203,10 @@ public class CollectGiftAction {
 
 	public UserRewardProto getUrp() {
 		return urp;
+	}
+
+	public AwardRewardAction getAra() {
+		return ara;
 	}
 
 }
