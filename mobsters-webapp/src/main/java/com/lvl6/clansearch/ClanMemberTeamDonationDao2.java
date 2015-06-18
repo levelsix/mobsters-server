@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.jooq.Configuration;
-
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
@@ -16,6 +15,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonationPo
 
 @Component
 public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
+	
+	public ClanMemberTeamDonationDao2(Configuration configuration) {
+		super(configuration);
+	}
 
 	
 	

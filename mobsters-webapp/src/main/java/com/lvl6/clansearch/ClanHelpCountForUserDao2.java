@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.jooq.Configuration;
-
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
@@ -17,6 +16,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanHelpCountForUserPojo
 
 @Component
 public class ClanHelpCountForUserDao2 extends ClanHelpCountForUserDao{
+	
+	public ClanHelpCountForUserDao2(Configuration configuration) {
+		super(configuration);
+	}
 
 	
 	

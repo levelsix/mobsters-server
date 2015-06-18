@@ -35,7 +35,11 @@ import javax.validation.constraints.Size;
 })
 public class ClanMemberTeamDonationPojo implements IClanMemberTeamDonation {
 
+<<<<<<< HEAD:mobsters-db/src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/pojos/ClanMemberTeamDonationPojo.java
 	private static final long serialVersionUID = 1929524506;
+=======
+	private static final long serialVersionUID = 2089054490;
+>>>>>>> added constructor to daos:src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/pojos/ClanMemberTeamDonation.java
 
 	private String    id;
 	private String    userId;
