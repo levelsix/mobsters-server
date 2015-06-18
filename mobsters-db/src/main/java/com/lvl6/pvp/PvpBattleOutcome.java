@@ -19,11 +19,15 @@ public class PvpBattleOutcome {
 	private static double ELO_SCALE_DIVIDEND_MULTIPLE = 0.05D;
 	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;//changed from 0.4
 
+	private static double RESOURCE_GENERATOR_CONSTANT = 1.67; 
+	//amount multiple stolen from generators relative to storage/status quo															
+	
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
 
 	public static final int CASH__MIN_REWARD = 100;
 	public static final int OIL__MIN_REWARD = 100;
+
 
 	private User attacker;
 	private String attackerId;
@@ -60,6 +64,7 @@ public class PvpBattleOutcome {
 	private double meanForCnd;
 	private double standardDeviationForCnd;
 	private double lowerElo;
+	private float percentageStealFromGenerator;
 
 	private void setLoggingBoolean() {
 		loggingOn = serverToggleRetrieveUtils
@@ -252,7 +257,7 @@ public class PvpBattleOutcome {
 		double scaleDividend = Math
 				.abs((Math.abs(diffInPlayerLvl
 						* RESOURCE_SCALE_DIVIDEND_MULTIPLE) - RESOURCE_SCALE_DIVIDEND_MULTIPLE * 100))
-				* convertBackToDouble * defenderCash;
+				* convertBackToDouble;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(
 				-1 * matchRange)
 				- offset;
@@ -263,7 +268,10 @@ public class PvpBattleOutcome {
 					new Object[] { scaleDividend, scaleDivisor, scale });
 		}
 
-		double retVal = (winnerLoserCndVal - offset) * scale;
+		double finalPercentageToSteal = (winnerLoserCndVal - offset) * scale;
+		double retVal = finalPercentageToSteal * defenderCash;
+		percentageStealFromGenerator = (float)(finalPercentageToSteal * RESOURCE_GENERATOR_CONSTANT);
+		log.info("PERCENTAGE TO STEAL FROM GENERATOR IS {}", percentageStealFromGenerator);
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal);
@@ -315,18 +323,21 @@ public class PvpBattleOutcome {
 		double scaleDividend = Math
 				.abs((Math.abs(diffInPlayerLvl
 						* RESOURCE_SCALE_DIVIDEND_MULTIPLE) - RESOURCE_SCALE_DIVIDEND_MULTIPLE * 100))
-				* convertBackToDouble * defenderOil;
+				* convertBackToDouble;
 		double scaleDivisor = getAttackerWonCnd().cumulativeProbability(
 				-1 * matchRange)
 				- offset;
 		double scale = scaleDividend / scaleDivisor;
+
 		if (loggingOn) {
 			log.info(
 					"oilAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
 					new Object[] { scaleDividend, scaleDivisor, scale });
 		}
 
-		double retVal = (winnerLoserCndVal - offset) * scale;
+		double percentage = (winnerLoserCndVal - offset) * scale;
+		double retVal = percentage * defenderOil;
+		
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
 		int intRetVal = (int) Math.round(retVal);
@@ -351,5 +362,17 @@ public class PvpBattleOutcome {
 				+ ", standardDeviationForCnd=" + standardDeviationForCnd
 				+ ", lowerElo=" + lowerElo + "]";
 	}
+
+	public float getPercentageStealFromGenerator() {
+		return percentageStealFromGenerator;
+	}
+
+	public void setPercentageStealFromGenerator(float percentageStealFromGenerator) {
+		this.percentageStealFromGenerator = percentageStealFromGenerator;
+	}
+
+
+	
+	
 
 }

@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveUserMonsterTeamRequestEvent;
 import com.lvl6.events.response.RetrieveUserMonsterTeamResponseEvent;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
@@ -28,6 +31,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.RetrieveUserMonsterTeamAction;
@@ -80,6 +84,9 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	
+	@Autowired
+	protected StructureForUserDao2 structureForUserDao;
 
 
 	public RetrieveUserMonsterTeamController() {
@@ -164,6 +171,10 @@ public class RetrieveUserMonsterTeamController extends EventController {
 			if (resBuilder.getStatus().equals(
 					RetrieveUserMonsterTeamStatus.SUCCESS)) {
 				//TODO: replace QueueUp and Avenge controller logic with this
+				List<String> userIds = new ArrayList<String>();
+				userIds.addAll(rumta.getAllUsers().keySet());
+				Map<String, List<StructureForUserPojo>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
+				
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
 								rumta.getAllUsersExceptRetriever(),
@@ -178,8 +189,10 @@ public class RetrieveUserMonsterTeamController extends EventController {
 								rumta.getAllButRetrieverUserIdToMsfu(),
 								rumta.getAllButRetrieverUserIdToMsfuMonsterDropId(),
 								rumta.getAllButRetrieverUserIdToPvpBoardObstacles(),
-								rumta.getAllButRetrieverUserIdToUserResearch());
-
+								rumta.getAllButRetrieverUserIdToUserResearch(),
+								userIdsToSfuList,
+								rumta.getPercentageStolenFromGenerators());
+				
 				log.info("ppList={}", ppList);
 				resBuilder.addAllUserMonsterTeam(ppList);
 			}

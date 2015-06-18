@@ -23,6 +23,7 @@ import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 
@@ -257,5 +258,7 @@ public interface UpdateUtil {
 	public abstract boolean updateUserClanGiftHasBeenCollected(String userId, List<ClanGiftForUser> cgfuList);
 
 	public abstract boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList);
-
+	
+	public abstract boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators);
+	
 }
