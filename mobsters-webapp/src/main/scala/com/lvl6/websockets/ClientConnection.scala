@@ -77,7 +77,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   @OnOpen
   def open(session:Session)={
-    logger.info("Opening connection")
+    logger.debug("Opening connection")
     lastMessageReceived = new DateTime()
     this.session = Some(session)
     wireBeans
@@ -85,7 +85,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   @OnClose
   def close(session:Session, reason:CloseReason)= {
-    logger.info(s"Closing connection: $this reason: $reason")
+    logger.debug(s"Closing connection: $this reason: $reason")
     removeRabbitListeners
     ClientConnections.removeConnection(this)
   }
@@ -93,7 +93,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   @OnMessage
   def message(message:Array[Byte])={
     lastMessageReceived = new DateTime()
-    logger.info(s"Received message on $this")
+    logger.debug(s"Received message on $this")
     processEvent(message)
   }
   
@@ -118,7 +118,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
-      logger.info(s"Sending normal response: $revent")
+      logger.debug(s"Sending normal response: $revent")
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
       val bytes = EventParser.getResponseBytes(uuid, revent)
       //If it's the requester this should be their connection
@@ -130,31 +130,31 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
           case Some(lc)=> lc.sendToThisSocket(bytes)
      		  //If they are not on this server send to amqp
           case None=> {
-            logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
+            logger.debug(s"No connection found on this server for playerId: plyrId  sending to amqp")
             eventWriter.sendToSinglePlayer(plyrId, bytes)
           }
         }
       }
     }
     responses.preDBResponseEvents.foreach{ revent =>
-      logger.info(s"Sending preDbResponse event: $revent")
+      logger.debug(s"Sending preDbResponse event: $revent")
       sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))
     }
     responses.preDBFacebookEvents.foreach{ revent =>
-      logger.info(s"Sending preDbFacebookResponse event: $revent")
+      logger.debug(s"Sending preDbFacebookResponse event: $revent")
       val bytes = EventParser.getResponseBytes(uuid, revent.event)
       eventWriter.sendToSinglePlayer(revent.event.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId(), bytes)  
     }
     responses.clanResponseEvents.foreach{ revent =>
-      logger.info(s"Sending clanResponse event to amqp: $revent")
+      logger.debug(s"Sending clanResponse event to amqp: $revent")
       eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(uuid, revent.event))  
     }
     responses.globalChatResponseEvents.foreach{ revent =>
-      logger.info("Sending globalChatResponse event to amqp")
+      logger.debug("Sending globalChatResponse event to amqp")
       eventWriter.sendGlobalChat(EventParser.getResponseBytes(uuid, revent))
     }
     responses.apnsResponseEvents.foreach{ revent =>
-      logger.info("Sending apnsResponse event")
+      logger.debug("Sending apnsResponse event")
       apnsWriter.handleEvent(revent)
     }
   }
@@ -199,12 +199,12 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       case Some(sess)=>{
         sess.isOpen() match{
           case true =>  {
-            logger.info(s"Sending message to this socket: $this")
+            logger.debug(s"Sending message to this socket: $this")
         	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             buff.flip()
             synchronized{
               sess.getBasicRemote.sendBinary(buff)
-              logger.info(s"Message sent: $buff")
+              //logger.debug(s"Message sent: $buff")
             }
           }
           case false => logger.warn(s"Cannot send message. Socket is closed. $this")
@@ -225,7 +225,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
             //val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             sess.synchronized{
               sess.getBasicRemote.sendText(bytes)
-              logger.info(s"Message sent: $bytes")
+              //logger.info(s"Message sent: $bytes")
             }
           }
           case false => logger.warn(s"Cannot send message. Socket is closed. $this")
@@ -239,7 +239,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   //rabbit listener
   def onMessage(msg:Message) = {
-    logger.info(s"Received message from amqp on socket: $this")
+    logger.debug(s"Received message from amqp on socket: $this")
     try {
       sendToThisSocket(msg.getBody)
     }catch{
@@ -261,7 +261,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       globalChatListener match{
         case Some(gcl) => //already setup
         case None => {
-          logger.info(s"Setting up global chat listener for $this")
+          logger.debug(s"Setting up global chat listener for $this")
           globalChatListener = Some(setupRabbitListener(chatExchange, globalchatRoutingKey))
         }
       }
@@ -270,7 +270,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
         case None => {
           userId match {
             case Some(uid) => {
-              logger.info(s"Setting up userId listener for $this")
+              logger.debug(s"Setting up userId listener for $this")
               userIdListener = Some(setupRabbitListener(gameExchange, toUserRoutingKey(uid)))
             }
             case None =>
@@ -282,7 +282,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
         case None =>{
           clanId match{
             case Some(cid)=> {
-              logger.info(s"Setting up clanId listener for $this")
+              logger.debug(s"Setting up clanId listener for $this")
               clanIdListener = Some(setupRabbitListener(gameExchange, clanRoutingKey(cid)))
             }
             case None=>
