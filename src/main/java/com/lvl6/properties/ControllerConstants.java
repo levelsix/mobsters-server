@@ -33,7 +33,7 @@ public class ControllerConstants {
 
 	//BOOSTER_PACK
 	public static final int BOOSTER_PACK__INIT_PURCHASE_BOOSTER_PACK_ID = 3;
-	public static final int BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE_HIGH_ROLLER = 10;
+	public static final int BOOSTER_PACK__AMOUNT_NEEDED_TO_PURCHASE = 10;
 	public static final int BOOSTER_PACK__AMOUNT_RECEIVED_FROM_BULK_PURCHASE = 11;
 
 	//clan
@@ -81,6 +81,21 @@ public class ControllerConstants {
 	public static final int ITEM_ID__HIGH_ROLLER_MODE = 50000;
 
 	public static final int IN_APP_PURCHASE__STARTER_PACK_BOOSTER_PACK_ID = 1000;
+
+	//dof = degrees of freedom
+	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;
+	public static final ChiSquaredDistribution ITEM_SECRET_GIFT_FOR_USER__RANDOM = new ChiSquaredDistribution(
+			ITEM_SECRET_GIFT_FOR_USER__DOF);
+
+	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
+	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = { 52, 2,
+			21, 53, 3 };
+	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
+			90, 150, 179, 265, 2280 };
+	public static final int ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 2100;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME
+			- ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
 
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
@@ -163,15 +178,15 @@ public class ControllerConstants {
 	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 50;
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
-			10000, 100000, 1000000, 2000000000 };
+			10000, 100000, 1000000, 3000000, 100000000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 5, 45, 400,
 			3600, 10800, 360000 };
 
 	// had to increase by 1 because of a bug on the client
-	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 501, 1001,
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 502, 1001,
 		2501, 5001, 20001, 50001, 100001, 1000001 };
-	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS = { 1, 250, 475,
-		1150, 2150, 7500, 12000, 24000, 240000 };
+	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS = { 1, 251, 450,
+		900, 1500, 5000, 12000, 24000, 240000 };
 
 
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
@@ -181,41 +196,10 @@ public class ControllerConstants {
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
 	//REWARDS
-	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
-	public static final String REWARD_REASON__SECRET_GIFT = "secret_gift";
 	public static final String REWARD_REASON__TANGO_GIFT = "tango_gift";
+	public static final String REWARD_REASON__COLLECT_GIFT = "collect_gift";
 
-	//dof = degrees of freedom
-	public static final double SECRET_GIFT_FOR_USER__DOF = 4D;
-	public static final ChiSquaredDistribution SECRET_GIFT_FOR_USER__RANDOM = new ChiSquaredDistribution(
-			SECRET_GIFT_FOR_USER__DOF);
-
-	public static final int SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
-	public static final int[] SECRET_GIFT_FOR_USER__REWARD_IDS = { 2300201, 2100101,
-		2000101, 2100201, 2300301 };
-	public static final int[] SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
-			90, 150, 179, 265, 2280 };
-	public static final int SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
-	public static final int SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 2100;
-	public static final int SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME
-			- SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
-
-	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000000;
-	//SECRET GIFT
-	//dof = degrees of freedom
-	/*public static final double SECRET_GIFT_FOR_USER__DOF = 4D;
-	public static final ChiSquaredDistribution SECRET_GIFT_FOR_USER__RANDOM = new ChiSquaredDistribution(
-			SECRET_GIFT_FOR_USER__DOF);
-
-	public static final int SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
-	public static final int[] SECRET_GIFT_FOR_USER__REWARD_IDS = { 52, 2,
-		21, 53, 3 };
-	public static final int[] SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
-		90, 150, 179, 265, 2280 };
-	public static final int SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
-	public static final int SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 2100;
-	public static final int SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME
-			- SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;*/
+	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000001;
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
@@ -332,7 +316,6 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
-	public static final String UCHRFC__SPIN_GACHA = "spin_gacha";
 	public static final String UCHRFC__TANGO_GIFT = "tango gift";
 	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
 	public static final String UCHRFC__TRADE_ITEM_FOR_SPEEDUP = "trade item for speedup";

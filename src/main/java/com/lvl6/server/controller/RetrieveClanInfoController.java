@@ -13,6 +13,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
@@ -46,13 +47,12 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.utils.TimeUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-
+@DependsOn("gameServer")
 public class RetrieveClanInfoController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -96,7 +96,7 @@ public class RetrieveClanInfoController extends EventController {
 
 
 	public RetrieveClanInfoController() {
-		
+		numAllocatedThreads = 8;
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class RetrieveClanInfoController extends EventController {
 	}
 
 	@Override
-	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	protected void processRequestEvent(RequestEvent event) throws Exception {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 
@@ -155,8 +155,8 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());
-			responses.normalResponseEvents().add(resEvent);
+			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -172,8 +172,8 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());
-			responses.normalResponseEvents().add(resEvent);
+			resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 		} catch (Exception e) {
 			log.error("exception in RetrieveClanInfo processEvent", e);
 			try {
@@ -181,8 +181,8 @@ public class RetrieveClanInfoController extends EventController {
 				RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
-				resEvent.setResponseProto(resBuilder.build());
-				responses.normalResponseEvents().add(resEvent);
+				resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in RetrieveClanInfo processEvent", e);
 			}

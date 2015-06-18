@@ -10,8 +10,8 @@ import org.jooq.Configuration;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanMemberTeamDonation;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanMemberTeamDonationDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonationPojo;
 
 @Component
 public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
@@ -24,11 +24,11 @@ public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
 		super(configuration);
 	}
 
-	public List<ClanMemberTeamDonationPojo> fetchForClanSearch(Date d) {
+	public List<com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonation> fetchForClanSearch(Date d) {
 		Timestamp oneDayAgoTimestamp = new Timestamp(d.getTime());
 		return using(configuration())
 				.selectFrom(Tables.CLAN_MEMBER_TEAM_DONATION)
-				.where(com.lvl6.mobsters.db.jooq.generated.tables.ClanMemberTeamDonation.CLAN_MEMBER_TEAM_DONATION.TIME_OF_SOLICITATION
+				.where(ClanMemberTeamDonation.CLAN_MEMBER_TEAM_DONATION.TIME_OF_SOLICITATION
 						.greaterThan(oneDayAgoTimestamp))
 				.fetch()
 				.map(mapper());

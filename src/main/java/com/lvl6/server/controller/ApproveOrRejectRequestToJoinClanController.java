@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
@@ -42,14 +43,12 @@ import com.lvl6.server.controller.actionobjects.ApproveOrRejectRequestToJoinActi
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
-import com.lvl6.server.eventsender.ClanResponseEvent;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-
+@DependsOn("gameServer")
 public class ApproveOrRejectRequestToJoinClanController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -114,7 +113,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	
 
 	public ApproveOrRejectRequestToJoinClanController() {
-		
+		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -128,7 +127,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	}
 
 	@Override
-	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	protected void processRequestEvent(RequestEvent event) throws Exception {
 		ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent) event)
 				.getApproveOrRejectRequestToJoinClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
@@ -175,9 +174,9 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder
+			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 					.build());
-			responses.normalResponseEvents().add(resEvent);
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -228,20 +227,15 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder
+			resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 					.build());
 
 			//if fail only to sender
 			if (!ApproveOrRejectRequestToJoinClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				responses.normalResponseEvents().add(resEvent);
+				server.writeEvent(resEvent);
 			} else {
 				//if success to clan and the requester
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
-				if(accept) {
-					responses.setUserId(userId);
-					responses.setClanChanged(true);
-					responses.setNewClanId(clanId);
-				}
+				server.writeClanEvent(resEvent, clanId);
 				// Send message to the new guy
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						requesterId);
@@ -249,10 +243,10 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 						.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 								.build());
 				//in case user is not online write an apns
-				responses.apnsResponseEvents().add(resEvent2);
-				//responses.normalResponseEvents().add(resEvent2);
+				server.writeAPNSNotificationOrEvent(resEvent2);
+				//server.writeEvent(resEvent2);
 
-				sendClanData(event, requestMup, accept, requesterId, cdp, responses);
+				sendClanData(event, requestMup, accept, requesterId, cdp);
 			}
 		} catch (Exception e) {
 			log.error(
@@ -264,9 +258,9 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setResponseProto(resBuilder
+				resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
 						.build());
-				responses.normalResponseEvents().add(resEvent);
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error(
 						"exception2 in ApproveOrRejectRequestToJoinClan processEvent",
@@ -310,7 +304,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	private void sendClanData(RequestEvent event,
 			MinimumUserProto requesterMup, boolean accepted,
-			String requesterId, ClanDataProto cdp, ToClientEvents responses) {
+			String requesterId, ClanDataProto cdp) {
 		if (!accepted || null == cdp) {
 			log.warn(String.format("accepted=%s, cdp=%s", accepted, cdp));
 			return;
@@ -325,7 +319,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		rcdrpb.setClanData(cdp);
 
 		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
-		responses.normalResponseEvents().add(rcdre);
+		server.writeEvent(rcdre);
 	}
 
 	public Locker getLocker() {
