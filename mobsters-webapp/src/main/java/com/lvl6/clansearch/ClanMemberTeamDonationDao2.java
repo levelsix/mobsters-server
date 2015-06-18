@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.jooq.Configuration;
 
+import org.springframework.stereotype.Component;
+
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanMemberTeamDonationDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonationPojo;
 
-
+@Component
 public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
 
 	
