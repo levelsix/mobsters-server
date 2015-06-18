@@ -11,11 +11,10 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
@@ -26,8 +25,10 @@ import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.retrieveutils.daos.PvpBattleHistoryDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -47,6 +48,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private final ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 	private final MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	private final BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
+	private final HistoryUtils historyUtils;
+	private final PvpBattleHistoryDao2 pbhDao;
 
 	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
 			User user, String userId,
@@ -58,7 +61,8 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			CreateInfoProtoUtils createInfoProtoUtils,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
 			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil)
+			BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil,
+			HistoryUtils historyUtils, PvpBattleHistoryDao2 pbhDao)
 	{
 		this.resBuilder = resBuilder;
 		this.user = user;
@@ -72,17 +76,17 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
 		this.battleReplayForUserRetrieveUtil = battleReplayForUserRetrieveUtil;
+		this.historyUtils = historyUtils;
+		this.pbhDao = pbhDao;
 	}
 
 	//derived state
-	private List<PvpBattleHistory> historyList;
-	private List<PvpBattleHistory> gotAttackedHistoryList;
-	private List<PvpBattleHistory> attackedOthersHistoryList;
+	private List<PvpBattleHistoryPojo> historyList;
+	private List<PvpBattleHistoryPojo> gotAttackedHistoryList;
+	private List<PvpBattleHistoryPojo> attackedOthersHistoryList;
 	private Set<String> userIds;
 	private Set<String> attackerIds;
-	private Set<String> replayIds;
 
-	private Map<String, BattleReplayForUser> replayIdToReplay;
 	private List<String> attackerIdsList;
 	private Map<String, List<MonsterForUser>> userIdsToUserMonsters;
 	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
@@ -93,16 +97,13 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
 
 		//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
-		historyList = pvpBattleHistoryRetrieveUtil.getRecentNBattlesForUserId(
-				userId, n);
+		historyList = pbhDao.getRecentNBattlesForUserId(userId, n);
 //		log.info("historyList={}", historyList);
 
-		userIds = pvpBattleHistoryRetrieveUtil
-				.getUserIdsFromHistory(historyList);
+		userIds = getUserIdsFromHistory(historyList);
 //		log.info("attacker and defender ids={}", userIds);
 
-		attackerIds = pvpBattleHistoryRetrieveUtil
-				.getAttackerIdsFromHistory(historyList);
+		attackerIds = getAttackerIdsFromHistory(historyList);
 //		log.info("attacker ids={}", attackerIds);
 
 		if (null == historyList || historyList.isEmpty()) {
@@ -128,24 +129,53 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//only need the attacker ids, in order to calculate revenge stuff
 		//if this user takes revenge
 	}
+	
+	public Set<String> getAttackerIdsFromHistory(
+			List<PvpBattleHistoryPojo> historyList) {
+		Set<String> attackerIdList = new HashSet<String>();
+
+		if (null == historyList) {
+			return attackerIdList;
+		}
+
+		for (PvpBattleHistoryPojo history : historyList) {
+			String attackerId = history.getAttackerId();
+			attackerIdList.add(attackerId);
+		}
+		return attackerIdList;
+	}
+
+	public Set<String> getUserIdsFromHistory(List<PvpBattleHistoryPojo> historyList) {
+		Set<String> userIdSet = new HashSet<String>();
+
+		if (null == historyList) {
+			return userIdSet;
+		}
+
+		for (PvpBattleHistoryPojo history : historyList) {
+			String attackerId = history.getAttackerId();
+			userIdSet.add(attackerId);
+
+			String defenderId = history.getDefenderId();
+			//defender can be a fake player
+			if (null != defenderId && !defenderId.isEmpty()) {
+				userIdSet.add(defenderId);
+			}
+		}
+		return userIdSet;
+	}
 
 	public void separateHistory() {
-		gotAttackedHistoryList = new ArrayList<PvpBattleHistory>();
-		attackedOthersHistoryList = new ArrayList<PvpBattleHistory>();
-		replayIds = new HashSet<String>();
+		gotAttackedHistoryList = new ArrayList<PvpBattleHistoryPojo>();
+		attackedOthersHistoryList = new ArrayList<PvpBattleHistoryPojo>();
 
-		for (PvpBattleHistory history : historyList) {
+		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 			if (attackerId.equals(userId)) {
 				//user attacked someone
 				attackedOthersHistoryList.add(history);
 			} else {
 				gotAttackedHistoryList.add(history);
-			}
-			String replayId = history.getReplayId();
-			if (null != replayId && !replayId.isEmpty())
-			{
-				replayIds.add(replayId);
 			}
 		}
 	}
@@ -156,9 +186,6 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			return;
 		}
 
-		//TODO: consider searching by creatorId as well
-		replayIdToReplay = battleReplayForUserRetrieveUtil
-				.getBattleReplayIdsToReplays(replayIds);
 		if (null != gotAttackedHistoryList && !gotAttackedHistoryList.isEmpty()) {
 			setGotAttackedProtos(useMe);
 		}
@@ -205,8 +232,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings,
-						replayIdToReplay);
+						attackerIdsToProspectiveOilWinnings);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);
 	}
@@ -319,10 +345,9 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		//create PvpHistory for battles where this user attacked others
 		List<PvpHistoryProto> historyProtoList = createInfoProtoUtils
 				.createAttackedOthersPvpHistoryProto(userId, idsToUsers,
-						attackedOthersHistoryList, replayIdToReplay);
+						attackedOthersHistoryList);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);
 
 	}
-
 }

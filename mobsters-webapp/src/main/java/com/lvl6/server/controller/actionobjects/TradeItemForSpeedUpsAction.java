@@ -16,8 +16,8 @@ import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
@@ -78,11 +78,11 @@ public class TradeItemForSpeedUpsAction {
 	private Map<Integer, Integer> itemIdToNuQuantity;
 	private UserDao userDao;
 	private UserCurrencyHistoryDao userCurrencyHistoryDao;
-	private User userPojo;
+	private UserPojo userPojo;
 
 	private List<String> itemForUserUsageIds;
 	private List<ItemForUserUsage> itemsUsedWithIds;
-	private UserCurrencyHistory gemsUserCurrencyHistory;
+	private UserCurrencyHistoryPojo gemsUserCurrencyHistory;
 
 	public void execute(Builder resBuilder) {
 		setUpDaos();
@@ -171,7 +171,7 @@ public class TradeItemForSpeedUpsAction {
 	}
 	
 	public void prepCurrencyHistory() {
-		gemsUserCurrencyHistory = new UserCurrencyHistory();
+		gemsUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		gemsUserCurrencyHistory.setResourceType(miscMethods.gems);
 		gemsUserCurrencyHistory.setCurrencyBeforeChange(userPojo.getGems());
 	}
@@ -180,7 +180,7 @@ public class TradeItemForSpeedUpsAction {
 		Date now = new Date();
 		gemsUserCurrencyHistory.setCurrencyChange(-1 * gemsSpent);
 		gemsUserCurrencyHistory.setCurrencyAfterChange(userPojo.getGems());
-		List<UserCurrencyHistory> uchList = new ArrayList<UserCurrencyHistory>();
+		List<UserCurrencyHistoryPojo> uchList = new ArrayList<UserCurrencyHistoryPojo>();
 		uchList.add(gemsUserCurrencyHistory);
 		String reasonForChange = ControllerConstants.UCHRFC__TRADE_ITEM_FOR_SPEEDUP;
 		String details = "";
@@ -271,11 +271,11 @@ public class TradeItemForSpeedUpsAction {
 		this.userDao = userDao;
 	}
 
-	public User getUserPojo() {
+	public UserPojo getUserPojo() {
 		return userPojo;
 	}
 
-	public void setUserPojo(User userPojo) {
+	public void setUserPojo(UserPojo userPojo) {
 		this.userPojo = userPojo;
 	}
 

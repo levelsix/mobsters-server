@@ -20,17 +20,20 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -43,11 +46,13 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.EndPvpBattleAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -116,6 +121,22 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected StructureForUserDao2 sfuDao;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
+	
+	@Autowired
+	protected PvpBattleHistoryDao pbhDao;
+	
+	@Autowired
+	protected UserCurrencyHistoryDao uchDao;
+	
 
 	public EndPvpBattleController() {
 		
@@ -146,8 +167,10 @@ public class EndPvpBattleController extends EventController {
 		String defenderId = reqProto.getDefenderUuid();
 		boolean attackerAttacked = reqProto.getUserAttacked();
 		boolean attackerWon = reqProto.getUserWon();
-		int oilStolen = reqProto.getOilChange(); //non negative
-		int cashStolen = reqProto.getCashChange(); // non negative
+		int oilStolenFromStorage = reqProto.getOilStolenFromStorage(); //non negative
+		int cashStolenFromStorage = reqProto.getCashStolenFromStorage(); // non negative
+		int oilStolenFromGenerators = reqProto.getOilStolenFromGenerator();
+		int cashStolenFromGenerators = reqProto.getCashStolenFromGenerator();
 		float nuPvpDmgMultiplier = reqProto.getNuPvpDmgMultiplier();
 		List<Integer> monsterDropIds = reqProto.getMonsterDropIdsList();
 		int attackerMaxOil = senderProtoMaxResources.getMaxOil();
@@ -155,16 +178,19 @@ public class EndPvpBattleController extends EventController {
 		Timestamp curTime = new Timestamp(reqProto.getClientTime());
 		Date curDate = new Date(curTime.getTime());
 		ByteString replay = reqProto.getReplay();
+		List<StructStolen> listOfGenerators = reqProto.getStructStolenList();
 
-		if (!attackerWon && oilStolen != 0) {
-			log.error("oilStolen should be 0 since attacker lost!\t client sent {}",
-					oilStolen);
-			oilStolen = 0;
+		if (!attackerWon && (oilStolenFromStorage + oilStolenFromGenerators) != 0) {
+			log.error("oilStolen should be 0 since attacker lost!\t client sent oilFromStorage"
+					+ " {} and oilFromGenerator {}", oilStolenFromStorage, oilStolenFromGenerators);
+			oilStolenFromStorage = 0;
+			oilStolenFromGenerators = 0;
 		}
-		if (!attackerWon && cashStolen != 0) {
-			log.error("cashStolen should be 0 since attacker lost!\t client sent {}",
-					cashStolen);
-			cashStolen = 0;
+		if (!attackerWon && (cashStolenFromStorage + cashStolenFromGenerators) != 0) {
+			log.error("cashStolen should be 0 since attacker lost!\t client sent cashFromStorage"
+					+ "{} and cashFromGenerator{}", cashStolenFromStorage, cashStolenFromGenerators);
+			cashStolenFromStorage = 0;
+			cashStolenFromGenerators = 0;
 		}
 
 		//set some values to send to the client (the response proto)
@@ -218,8 +244,8 @@ public class EndPvpBattleController extends EventController {
 
 		try {
 			EndPvpBattleAction epba = new EndPvpBattleAction(attackerId,
-					defenderId, attackerAttacked, attackerWon, oilStolen,
-					cashStolen, nuPvpDmgMultiplier, monsterDropIds,
+					defenderId, attackerAttacked, attackerWon, oilStolenFromStorage,
+					cashStolenFromStorage, nuPvpDmgMultiplier, monsterDropIds,
 					attackerMaxOil, attackerMaxCash, reqProto.getClientTime(),
 					curDate, curTime, replay, resourceUtil, userRetrieveUtil,
 					pvpBattleForUserRetrieveUtil,
@@ -227,16 +253,17 @@ public class EndPvpBattleController extends EventController {
 					monsterForUserRetrieveUtil, monsterStuffUtils,
 					pvpLeagueRetrieveUtils, createInfoProtoUtils,
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil,
-					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil);
+					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
+					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators,
+					sfuDao, historyUtils, pbhDao, uchDao);
 
 			epba.execute(resBuilder);
 
 			Map<String, Map<String, Integer>> changeMap = new HashMap<String, Map<String, Integer>>();
 			Map<String, Map<String, Integer>> previousCurrencyMap = new HashMap<String, Map<String, Integer>>();
 
-			PvpBattleHistory battleJustEnded = epba.getPbh();
-			Map<String, BattleReplayForUser> replayIdToReplay = epba
-					.getReplayIdToReplay();
+			PvpBattleHistoryPojo battleJustEnded = epba.getPbh();
+
 			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<PvpHistoryProto> historyProtoList = null;
 				if (null != battleJustEnded) {
@@ -244,14 +271,18 @@ public class EndPvpBattleController extends EventController {
 					historyProtoList = createInfoProtoUtils
 							.createAttackedOthersPvpHistoryProto(attackerId,
 									epba.getIdToUser(),
-									Collections.singletonList(battleJustEnded),
-									replayIdToReplay);
+									Collections.singletonList(battleJustEnded));
 				}
 				if (null != historyProtoList && !historyProtoList.isEmpty()) {
 					PvpHistoryProto attackedOtherHistory = historyProtoList
 							.get(0);
 					log.info("attackedOtherHistory {}", attackedOtherHistory);
 					resBuilder.setBattleThatJustEnded(attackedOtherHistory);
+				}
+				List<StructureForUserPojo> updateList = epba.getUpdateList();
+				if(updateList != null && !updateList.isEmpty()) {
+					resBuilder.addAllUpdatedUserStructs(createInfoProtoUtils
+							.createStructStolenFromGenerators(updateList));
 				}
 			}
 
@@ -267,14 +298,14 @@ public class EndPvpBattleController extends EventController {
 				if (null != epba.getDefender()) {
 					if (null != battleJustEnded) {
 						PvpHistoryProto php = createPvpProto(attacker,
-								defender, curDate, battleJustEnded, replayIdToReplay);
+								defender, curDate, battleJustEnded);
 						log.info("gotAttackedHistory {}", php);
 						resBuilder.setBattleThatJustEnded(php);
 					}
 
 					EndPvpBattleResponseEvent resEventDefender = new EndPvpBattleResponseEvent(
 							defenderId);
-					resEvent.setTag(0);
+					resEventDefender.setTag(0);
 					resEventDefender.setEndPvpBattleResponseProto(resBuilder
 							.build());
 					responses.normalResponseEvents().add(resEventDefender);
@@ -291,16 +322,16 @@ public class EndPvpBattleController extends EventController {
 					UpdateClientUserResponseEvent resEventUpdateDefender = miscMethods
 							.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 									defender, epba.getDefenderPlfu(), null);
-					resEventUpdate.setTag(event.getTag());
+					resEventUpdateDefender.setTag(0);
 					responses.normalResponseEvents().add(resEventUpdateDefender);
 				}
 
-				if (attackerWon) {
-					//TRACK CURRENCY HISTORY, resource changes only if attacker won
-					writeToUserCurrencyHistory(attackerId, attacker,
-							defenderId, defender, attackerWon, curTime,
-							changeMap, previousCurrencyMap);
-				}
+//				if (attackerWon) {
+//					//TRACK CURRENCY HISTORY, resource changes only if attacker won
+//					writeToUserCurrencyHistory(attackerId, attacker,
+//							defenderId, defender, attackerWon, curTime,
+//							changeMap, previousCurrencyMap);
+//				}
 			}
 
 		} catch (Exception e) {
@@ -327,95 +358,94 @@ public class EndPvpBattleController extends EventController {
 		}
 	}
 
-	private void writeToUserCurrencyHistory(String attackerId, User attacker,
-			String defenderId, User defender, boolean attackerWon,
-			Timestamp curTime, Map<String, Map<String, Integer>> changeMap,
-			Map<String, Map<String, Integer>> previousCurrencyMap) {
-
-		Map<String, Map<String, Integer>> currentCurrencyMap = new HashMap<String, Map<String, Integer>>();
-		Map<String, Map<String, String>> changeReasonsMap = new HashMap<String, Map<String, String>>();
-		Map<String, Map<String, String>> detailsMap = new HashMap<String, Map<String, String>>();
-		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
-		String oil = MiscMethods.oil;
-		String cash = MiscMethods.cash;
-
-		//reasons
-		Map<String, String> reasonMap = new HashMap<String, String>();
-		reasonMap.put(cash, reasonForChange);
-		reasonMap.put(oil, reasonForChange);
-		changeReasonsMap.put(attackerId, reasonMap);
-		changeReasonsMap.put(defenderId, reasonMap);
-
-		//attacker stuff
-		//current currency stuff
-		int attackerCash = attacker.getCash();
-		int attackerOil = attacker.getOil();
-		Map<String, Integer> attackerCurrency = new HashMap<String, Integer>();
-		attackerCurrency.put(cash, attackerCash);
-		attackerCurrency.put(oil, attackerOil);
-		//aggregate currency
-		currentCurrencyMap.put(attackerId, attackerCurrency);
-
-		//details
-		StringBuilder attackerDetailsSb = new StringBuilder();
-		if (attackerWon) {
-			attackerDetailsSb.append("beat ");
-		} else {
-			attackerDetailsSb.append("lost to ");
-		}
-		attackerDetailsSb.append(defenderId);
-		String attackerDetails = attackerDetailsSb.toString();
-		Map<String, String> attackerDetailsMap = new HashMap<String, String>();
-		attackerDetailsMap.put(cash, attackerDetails);
-		attackerDetailsMap.put(oil, attackerDetails);
-		//aggregate details
-		detailsMap.put(attackerId, attackerDetailsMap);
-
-		//defender stuff
-		if (null != defender) {
-			//current currency stuff
-			int defenderCash = defender.getCash();
-			int defenderOil = defender.getOil();
-			Map<String, Integer> defenderCurrency = new HashMap<String, Integer>();
-			defenderCurrency.put(cash, defenderCash);
-			defenderCurrency.put(oil, defenderOil);
-			//aggregate currency
-			currentCurrencyMap.put(defenderId, defenderCurrency);
-
-			//details
-			StringBuilder defenderDetailsSb = new StringBuilder();
-			if (attackerWon) {
-				defenderDetailsSb.append("lost to ");
-			} else {
-				defenderDetailsSb.append("beat ");
-			}
-			defenderDetailsSb.append(attackerId);
-			String defenderDetails = defenderDetailsSb.toString();
-			Map<String, String> defenderDetailsMap = new HashMap<String, String>();
-			defenderDetailsMap.put(cash, defenderDetails);
-			defenderDetailsMap.put(oil, defenderDetails);
-			//aggregate details
-			detailsMap.put(defenderId, defenderDetailsMap);
-
-		}
-
-		List<String> userIds = new ArrayList<String>();
-		userIds.add(attackerId);
-
-		if (null != defender && !defenderId.isEmpty()) {
-			userIds.add(defenderId);
-		}
-
-		miscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
-				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
-				detailsMap);
-
-	}
+//	private void writeToUserCurrencyHistory(String attackerId, User attacker,
+//			String defenderId, User defender, boolean attackerWon,
+//			Timestamp curTime, Map<String, Map<String, Integer>> changeMap,
+//			Map<String, Map<String, Integer>> previousCurrencyMap) {
+//
+//		Map<String, Map<String, Integer>> currentCurrencyMap = new HashMap<String, Map<String, Integer>>();
+//		Map<String, Map<String, String>> changeReasonsMap = new HashMap<String, Map<String, String>>();
+//		Map<String, Map<String, String>> detailsMap = new HashMap<String, Map<String, String>>();
+//		String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
+//		String oil = MiscMethods.oil;
+//		String cash = MiscMethods.cash;
+//
+//		//reasons
+//		Map<String, String> reasonMap = new HashMap<String, String>();
+//		reasonMap.put(cash, reasonForChange);
+//		reasonMap.put(oil, reasonForChange);
+//		changeReasonsMap.put(attackerId, reasonMap);
+//		changeReasonsMap.put(defenderId, reasonMap);
+//
+//		//attacker stuff
+//		//current currency stuff
+//		int attackerCash = attacker.getCash();
+//		int attackerOil = attacker.getOil();
+//		Map<String, Integer> attackerCurrency = new HashMap<String, Integer>();
+//		attackerCurrency.put(cash, attackerCash);
+//		attackerCurrency.put(oil, attackerOil);
+//		//aggregate currency
+//		currentCurrencyMap.put(attackerId, attackerCurrency);
+//
+//		//details
+//		StringBuilder attackerDetailsSb = new StringBuilder();
+//		if (attackerWon) {
+//			attackerDetailsSb.append("beat ");
+//		} else {
+//			attackerDetailsSb.append("lost to ");
+//		}
+//		attackerDetailsSb.append(defenderId);
+//		String attackerDetails = attackerDetailsSb.toString();
+//		Map<String, String> attackerDetailsMap = new HashMap<String, String>();
+//		attackerDetailsMap.put(cash, attackerDetails);
+//		attackerDetailsMap.put(oil, attackerDetails);
+//		//aggregate details
+//		detailsMap.put(attackerId, attackerDetailsMap);
+//
+//		//defender stuff
+//		if (null != defender) {
+//			//current currency stuff
+//			int defenderCash = defender.getCash();
+//			int defenderOil = defender.getOil();
+//			Map<String, Integer> defenderCurrency = new HashMap<String, Integer>();
+//			defenderCurrency.put(cash, defenderCash);
+//			defenderCurrency.put(oil, defenderOil);
+//			//aggregate currency
+//			currentCurrencyMap.put(defenderId, defenderCurrency);
+//
+//			//details
+//			StringBuilder defenderDetailsSb = new StringBuilder();
+//			if (attackerWon) {
+//				defenderDetailsSb.append("lost to ");
+//			} else {
+//				defenderDetailsSb.append("beat ");
+//			}
+//			defenderDetailsSb.append(attackerId);
+//			String defenderDetails = defenderDetailsSb.toString();
+//			Map<String, String> defenderDetailsMap = new HashMap<String, String>();
+//			defenderDetailsMap.put(cash, defenderDetails);
+//			defenderDetailsMap.put(oil, defenderDetails);
+//			//aggregate details
+//			detailsMap.put(defenderId, defenderDetailsMap);
+//
+//		}
+//
+//		List<String> userIds = new ArrayList<String>();
+//		userIds.add(attackerId);
+//
+//		if (null != defender && !defenderId.isEmpty()) {
+//			userIds.add(defenderId);
+//		}
+//
+//		miscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
+//				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
+//				detailsMap);
+//
+//	}
 
 	//TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
 	private PvpHistoryProto createPvpProto(User attacker, User defender,
-			Date curDate, PvpBattleHistory gotAttackedHistory,
-			Map<String, BattleReplayForUser> replayIdToReplay) {
+			Date curDate, PvpBattleHistoryPojo gotAttackedHistory) {
 		if (null == defender) {
 			return null;
 		}
@@ -436,7 +466,7 @@ public class EndPvpBattleController extends EventController {
 		int defenderElo = defenderPu.getElo();
 
 		//hopefully this gets this pvpHistory just created
-		List<PvpBattleHistory> gotAttackedHistoryList = Collections
+		List<PvpBattleHistoryPojo> gotAttackedHistoryList = Collections
 				.singletonList(gotAttackedHistory);
 
 		log.info("gotAttackedHistoryList {}", gotAttackedHistoryList);
@@ -480,8 +510,7 @@ public class EndPvpBattleController extends EventController {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings,
-						replayIdToReplay);
+						attackerIdsToProspectiveOilWinnings);
 
 		if (null != historyProtoList && !historyProtoList.isEmpty()) {
 			PvpHistoryProto pp = historyProtoList.get(0);

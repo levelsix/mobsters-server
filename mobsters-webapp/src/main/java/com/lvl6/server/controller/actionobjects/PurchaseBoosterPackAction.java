@@ -16,7 +16,7 @@ import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistory;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
@@ -394,9 +394,9 @@ public class PurchaseBoosterPackAction {
 	}
 
 	private void saveCurrencyHistory(int gemChange) {
-		List<UserCurrencyHistory> uchList = new ArrayList<UserCurrencyHistory>();
+		List<UserCurrencyHistoryPojo> uchList = new ArrayList<UserCurrencyHistoryPojo>();
 		String detail = String.format("rewardIds:%s", rewardIds);
-		UserCurrencyHistory uch = historyUtils
+		UserCurrencyHistoryPojo uch = historyUtils
 				.createUserCurrencyHistory(userId, now, MiscMethods.gachaCredits,
 						gachaCreditsChange, prevUserGachaCredits,
 						prevUserGachaCredits + gachaCreditsChange,

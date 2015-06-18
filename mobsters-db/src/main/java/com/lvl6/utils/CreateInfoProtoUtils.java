@@ -19,10 +19,13 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
@@ -72,6 +75,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
@@ -207,7 +211,6 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.utils.TranslationUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -349,33 +352,38 @@ public class CreateInfoProtoUtils {
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashWinnings, int prospectiveOilWinnings,
+			int prospectiveCashStolenFromStorage, int prospectiveOilStolenFromStorage,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
-			List<ResearchForUser> rfuList) {
+			List<ResearchForUser> rfuList,
+			List<StructureForUserPojo> sfuList,
+			float percentageToStealFromGenerator) {
 
-		MinimumUserProto defenderProto = createMinimumUserProtoFromUserAndClan(
-				defender, clan);
+		FullUserProto defenderProto = createFullUserProtoFromUser(defender, plfu, clan);
+
 		String userId = defender.getId();
 		String msg = defender.getPvpDefendingMessage();
 
 		return createPvpProto(userId, plfu, pu, userMonsters,
-				userMonsterIdToDropped, prospectiveCashWinnings,
-				prospectiveOilWinnings, defenderProto, msg, cmtd, msfu,
-				msfuMonsterIdDropped, boardObstacles, rfuList);
+				userMonsterIdToDropped, prospectiveCashStolenFromStorage,
+				prospectiveOilStolenFromStorage, defenderProto, msg, cmtd, msfu,
+				msfuMonsterIdDropped, boardObstacles, rfuList, sfuList,
+				percentageToStealFromGenerator);
 	}
 
 	public PvpProto createPvpProto(String defenderId,
 			PvpLeagueForUser plfu, PvpUser pu,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
-			int prospectiveCashWinnings, int prospectiveOilWinnings,
-			MinimumUserProto defender, String defenderMsg,
+			int prospectiveCashStolenFromStorage, int prospectiveOilStolenFromStorage,
+			FullUserProto defender, String defenderMsg,
 			ClanMemberTeamDonation cmtd, MonsterSnapshotForUser msfu,
 			int msfuMonsterIdDropped,
 			List<PvpBoardObstacleForUser> boardObstacles,
-			List<ResearchForUser> rfuList) {
+			List<ResearchForUser> rfuList,
+			List<StructureForUserPojo> sfuList,
+			float percentageToStealFromGenerator) {
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 
 		Collection<PvpMonsterProto> defenderMonsters = createPvpMonsterProto(
@@ -383,8 +391,8 @@ public class CreateInfoProtoUtils {
 		ppb.addAllDefenderMonsters(defenderMonsters);
 
 		ppb.setDefender(defender);
-		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
-		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+		ppb.setProspectiveCashStolenFromStorage(prospectiveCashStolenFromStorage);
+		ppb.setProspectiveOilStolenFromStorage(prospectiveOilStolenFromStorage);
 
 		UserPvpLeagueProto uplp = createUserPvpLeagueProto(defenderId, plfu,
 				pu, true);
@@ -420,6 +428,17 @@ public class CreateInfoProtoUtils {
 			Collection<UserResearchProto> urpList = createUserResearchProto(rfuList);
 			ppb.addAllUserResearch(urpList);
 		}
+		
+		if (null != sfuList && !sfuList.isEmpty()) {
+			List<FullUserStructureProto> uspList = new ArrayList<FullUserStructureProto>();
+			for(StructureForUserPojo sfu : sfuList) {
+				uspList.add(createFullUserStructureProtoFromUserStructPojo(sfu));
+
+			}
+			ppb.addAllUserStructure(uspList);
+		}
+		
+		ppb.setPercentageToStealFromGenerator(percentageToStealFromGenerator);
 
 		return ppb.build();
 	}
@@ -513,19 +532,19 @@ public class CreateInfoProtoUtils {
 
 	//this is used to create fake users for PvpProtos
 	public PvpProto createFakePvpProto(String userId, String name,
-			int lvl, int elo, int prospectiveCashWinnings,
-			int prospectiveOilWinnings, List<MonsterForPvp> mfpList,
+			int lvl, int elo, int prospectiveCashStolenFromStorage,
+			int prospectiveOilStolenFromStorage, List<MonsterForPvp> mfpList,
 			List<Integer> monsterIdsDropped, boolean setElo) {
 
 		//create the fake user
-		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		//mupb.setUserUuid(userId); // fake user will never have id
-		mupb.setName(name);
-		MinimumUserProto mup = mupb.build();
+		fupb.setName(name);
+		FullUserProto fup = fupb.build();
 
 		//THE ACTUAL PROTO
 		PvpProto.Builder ppb = PvpProto.newBuilder();
-		ppb.setDefender(mup);
+		ppb.setDefender(fup);
 		//    ppb.setCurElo(elo);
 
 		//set the defenderMonsters
@@ -533,8 +552,8 @@ public class CreateInfoProtoUtils {
 				monsterIdsDropped);
 		ppb.addAllDefenderMonsters(pmpList);
 
-		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
-		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+		ppb.setProspectiveCashStolenFromStorage(prospectiveCashStolenFromStorage);
+		ppb.setProspectiveOilStolenFromStorage(prospectiveOilStolenFromStorage);
 
 		UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(userId, elo,
 				setElo);
@@ -555,7 +574,9 @@ public class CreateInfoProtoUtils {
 			Map<String, MonsterSnapshotForUser> userIdToMsfu,
 			Map<String, Integer> userIdToMsfuMonsterIdDropped,
 			Map<String, List<PvpBoardObstacleForUser>> userIdToPvpBoardObstacles,
-			Map<String, List<ResearchForUser>> userIdToRfuList) {
+			Map<String, List<ResearchForUser>> userIdToRfuList,
+			Map<String, List<StructureForUserPojo>> userIdToSfuList,
+			Map<String, Float> userIdToPercentageStealFromGenerator) {
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
 		for (User u : queuedOpponents) {
@@ -572,9 +593,16 @@ public class CreateInfoProtoUtils {
 			}
 			List<MonsterForUser> userMonsters = userIdToUserMonsters
 					.get(userId);
-			int prospectiveCashWinnings = userIdToCashReward.get(userId);
-			int prospectiveOilWinnings = userIdToOilReward.get(userId);
-
+			int prospectiveCashWinnings = 0;
+			if(userIdToCashReward.containsKey(userId)) {
+				prospectiveCashWinnings = userIdToCashReward.get(userId);;
+			}
+			
+			int prospectiveOilWinnings = 0;
+			if(userIdToOilReward.containsKey(userId)) {
+				prospectiveOilWinnings = userIdToOilReward.get(userId);;
+			}
+			
 			Clan clan = null;
 			if (userIdToClan.containsKey(userId)) {
 				clan = userIdToClan.get(userId);
@@ -606,18 +634,30 @@ public class CreateInfoProtoUtils {
 			if (userIdToRfuList.containsKey(userId)) {
 				rfuList = userIdToRfuList.get(userId);
 			}
+			
+			List<StructureForUserPojo> sfuList = null;
+			if (userIdToSfuList.containsKey(userId)) {
+				sfuList = userIdToSfuList.get(userId);
+			}
+			
+			float percentageToStealFromGenerator = 0;
+			if(userIdToPercentageStealFromGenerator.containsKey(userId)) {
+				percentageToStealFromGenerator = 
+						userIdToPercentageStealFromGenerator.get(userId);
+			}
 
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
 					userMonsterIdToDropped, prospectiveCashWinnings,
 					prospectiveOilWinnings, cmtd, msfu, msfuMonsterIdDropped,
-					boardObstacles, rfuList);
+					boardObstacles, rfuList, sfuList, percentageToStealFromGenerator);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
 	}
 
 	public PvpHistoryProto createGotAttackedPvpHistoryProto(
-			User attacker, Clan c, PvpBattleHistory info,
+			User attacker, Clan c, 
+			PvpBattleHistoryPojo info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
@@ -649,19 +689,18 @@ public class CreateInfoProtoUtils {
 	}
 
 	public List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
-			List<PvpBattleHistory> historyList,
+			List<PvpBattleHistoryPojo> historyList,
 			Map<String, User> attackerIdsToAttackers,
 			Map<String, Clan> attackerIdsToClans,
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
-			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
-			Map<String, BattleReplayForUser> replayIdToReplay)
+			Map<String, Integer> attackerIdsToProspectiveOilWinnings)
 	{
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 
-		for (PvpBattleHistory history : historyList) {
+		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 
 			User attacker = attackerIdsToAttackers.get(attackerId);
@@ -699,14 +738,13 @@ public class CreateInfoProtoUtils {
 
 	public List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
 			String attackerId, Map<String, User> idsToUsers,
-			List<PvpBattleHistory> historyList,
-			Map<String, BattleReplayForUser> replayIdToReplay) {
+			List<PvpBattleHistoryPojo> historyList) {
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
 		fupb.setUserUuid(attackerId);
 		FullUserProto fup = fupb.build();
 
-		for (PvpBattleHistory pbh : historyList) {
+		for (PvpBattleHistoryPojo pbh : historyList) {
 			//no fake users are displayed, but check in case
 			String defenderId = pbh.getDefenderId();
 			if (null == defenderId || defenderId.isEmpty()) {
@@ -733,7 +771,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
-			FullUserProto fup, FullUserProto defenderFup, PvpBattleHistory info,
+			FullUserProto fup, FullUserProto defenderFup, 
+			PvpBattleHistoryPojo info,
 			String replayId) //BattleReplayForUser brfu)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
@@ -756,15 +795,15 @@ public class CreateInfoProtoUtils {
 	}
 
 	private void modifyPvpHistoryProto(Builder phpb,
-			PvpBattleHistory info) {
-		phpb.setAttackerWon(info.isAttackerWon());
+			PvpBattleHistoryPojo info) {
+		phpb.setAttackerWon(info.getAttackerWon());
 
 		int defenderCashChange = info.getDefenderCashChange();
 		phpb.setDefenderCashChange(defenderCashChange);
 		int defenderOilChange = info.getDefenderOilChange();
 		phpb.setDefenderOilChange(defenderOilChange);
 
-		phpb.setExactedRevenge(info.isExactedRevenge());
+		phpb.setExactedRevenge(info.getExactedRevenge());
 
 		Date endDate = info.getBattleEndTime();
 		//endDate should not be null, it's the primary key
@@ -793,7 +832,7 @@ public class CreateInfoProtoUtils {
 		int attackerOilChange = info.getAttackerOilChange();
 		phpb.setAttackerOilChange(attackerOilChange);
 
-		phpb.setClanAvenged(info.isClanAvenged());
+		phpb.setClanAvenged(info.getClanAvenged());
 	}
 
 	public PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
@@ -2348,7 +2387,7 @@ public class CreateInfoProtoUtils {
 
 	/** MiniEvent.proto ********************************************/
 	public UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
-			MiniEventConfig me, MiniEventTimetableConfig metc,
+			MiniEventConfigPojo me, MiniEventTimetableConfigPojo metc,
 			Collection<MiniEventGoalForUser> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
@@ -2385,8 +2424,8 @@ public class CreateInfoProtoUtils {
 		return umepb;
 	}
 
-	public MiniEventProto createMiniEventProto(MiniEventConfig me,
-			MiniEventTimetableConfig metc,
+	public MiniEventProto createMiniEventProto(MiniEventConfigPojo me,
+			MiniEventTimetableConfigPojo metc,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards,
@@ -4255,6 +4294,47 @@ public class CreateInfoProtoUtils {
 		//    }
 		return builder.build();
 	}
+	
+	public FullUserStructureProto createFullUserStructureProtoFromUserStructPojo(
+			StructureForUserPojo userStructPojo) {
+		FullUserStructureProto.Builder builder = FullUserStructureProto
+				.newBuilder();
+		builder.setUserStructUuid(userStructPojo.getId());
+		builder.setUserUuid(userStructPojo.getUserId());
+		builder.setStructId(userStructPojo.getStructId());
+		//    builder.setLevel(userStruct.getLevel());
+		builder.setFbInviteStructLvl(userStructPojo.getFbInviteStructLvl());
+		
+		if(userStructPojo.getIsComplete().equals((byte) 0)) {
+			builder.setIsComplete(false);
+		}
+		else {
+			builder.setIsComplete(true);
+		}
+		
+		CoordinatePair cp = new CoordinatePair(userStructPojo.getXcoord(), userStructPojo.getYcoord());
+		builder.setCoordinates(createCoordinateProtoFromCoordinatePair(cp));
+		String orientation = userStructPojo.getOrientation();
+		try {
+			StructOrientation so = StructOrientation.valueOf(orientation);
+			builder.setOrientation(so);
+		} catch (Exception e) {
+			log.error(String.format(
+					"incorrect orientation. structureForUser=%s", userStructPojo),
+					e);
+		}
+
+		if (userStructPojo.getPurchaseTime() != null) {
+			builder.setPurchaseTime(userStructPojo.getPurchaseTime().getTime());
+		}
+		if (userStructPojo.getLastRetrieved() != null) {
+			builder.setLastRetrieved(userStructPojo.getLastRetrieved().getTime());
+		}
+		//    if (userStruct.getLastUpgradeTime() != null) {
+		//      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());
+		//    }
+		return builder.build();
+	}
 
 	public CoordinateProto createCoordinateProtoFromCoordinatePair(
 			CoordinatePair cp) {
@@ -5297,7 +5377,7 @@ public class CreateInfoProtoUtils {
 
 	//using user pojo
 	public FullUserProto createFullUserProtoFromUser(
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User u,
+			UserPojo u,
 			PvpLeagueForUser plfu, Clan c) {
 		FullUserProto.Builder builder = FullUserProto.newBuilder();
 		String userId = u.getId();
@@ -5517,7 +5597,7 @@ public class CreateInfoProtoUtils {
 		}
 	}
 
-	public CustomMenuProto createCustomMenuProto(CustomMenuConfig cm) {
+	public CustomMenuProto createCustomMenuProto(CustomMenuConfigPojo cm) {
 		CustomMenuProto.Builder cmpb = CustomMenuProto.newBuilder();
 		cmpb.setCustomMenuId(cm.getCustomMenuId());
 		cmpb.setPositionX(cm.getPositionX());
@@ -5600,9 +5680,9 @@ public class CreateInfoProtoUtils {
 		return slbpList;
 	}
 
-	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfig> mjricList) {
+	public List<ItemGemPriceProto> createItemGemPriceProtoFromMiniJobs(List<MiniJobRefreshItemConfigPojo> mjricList) {
 		List<ItemGemPriceProto> igppList = new ArrayList<ItemGemPriceProto>();
-		for(MiniJobRefreshItemConfig mjric : mjricList) {
+		for(MiniJobRefreshItemConfigPojo mjric : mjricList) {
 			ItemGemPriceProto.Builder b = ItemGemPriceProto.newBuilder();
 			b.setItemId(mjric.getItemId());
 			b.setGemPrice(mjric.getGemPrice());
@@ -5612,5 +5692,17 @@ public class CreateInfoProtoUtils {
 		return igppList;
 	}
 
+	public List<StructStolen> createStructStolenFromGenerators(
+			List<StructureForUserPojo> updateList) {
+		List<StructStolen> returnList = new ArrayList<StructStolen>();
+		for(StructureForUserPojo sfu : updateList) {
+			StructStolen.Builder b = StructStolen.newBuilder();
+			b.setUserStructUuid(sfu.getId());
+			b.setTimeOfRetrieval(sfu.getLastRetrieved().getTime());
+			returnList.add(b.build());
+		}
+		return returnList;
+	}
+	
 
 }

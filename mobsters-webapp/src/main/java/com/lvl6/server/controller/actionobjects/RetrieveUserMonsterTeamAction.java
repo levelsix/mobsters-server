@@ -125,6 +125,7 @@ public class RetrieveUserMonsterTeamAction {
 
 	private List<String> allUsersIdsExceptRetriever;
 	private List<User> allUsersExceptRetriever;
+	private Map<String, Float> percentageStolenFromGenerators;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
@@ -194,6 +195,7 @@ public class RetrieveUserMonsterTeamAction {
 
 		allButRetrieverUserIdToCashLost = new HashMap<String, Integer>();
 		allButRetrieverUserIdToOilLost = new HashMap<String, Integer>();
+		percentageStolenFromGenerators = new HashMap<String, Float>();
 		log.info("calculating the PvpBattleOutcomes");
 		int retrieverElo = this.retrieverPu.getElo();
 		User retrieveUser = userRetrieveUtil.getUserById(retrieverUserId);
@@ -213,6 +215,8 @@ public class RetrieveUserMonsterTeamAction {
 					potentialResult.getUnsignedCashAttackerWins());
 			allButRetrieverUserIdToOilLost.put(userId,
 					potentialResult.getUnsignedOilAttackerWins());
+			percentageStolenFromGenerators.put(userId,
+					potentialResult.getPercentageStealFromGenerator());
 		}
 
 		//get the team monster donation solicitations by all clans
@@ -562,4 +566,16 @@ public class RetrieveUserMonsterTeamAction {
 		return userIdToUser;
 	}
 
+	public Map<String, Float> getPercentageStolenFromGenerators() {
+		return percentageStolenFromGenerators;
+	}
+
+	public void setPercentageStolenFromGenerators(
+			Map<String, Float> percentageStolenFromGenerators) {
+		this.percentageStolenFromGenerators = percentageStolenFromGenerators;
+	}
+
+
+
+	
 }

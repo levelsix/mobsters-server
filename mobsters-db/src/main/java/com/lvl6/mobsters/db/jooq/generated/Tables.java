@@ -65,7 +65,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -491,11 +490,6 @@ public class Tables {
 	 * The table mobsters.item_secret_gift_for_user
 	 */
 	public static final ItemSecretGiftForUser ITEM_SECRET_GIFT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER;
-
-	/**
-	 * VIEW
-	 */
-	public static final LbCurHist LB_CUR_HIST = com.lvl6.mobsters.db.jooq.generated.tables.LbCurHist.LB_CUR_HIST;
 
 	/**
 	 * The table mobsters.load_testing_events

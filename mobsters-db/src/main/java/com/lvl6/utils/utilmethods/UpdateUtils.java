@@ -36,6 +36,7 @@ import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
 import com.lvl6.spring.AppContext;
@@ -964,12 +965,12 @@ public class UpdateUtils implements UpdateUtil {
 			aRow.put(DBConstants.MONSTER_FOR_USER__USER_ID, mfu.getUserId());
 			aRow.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID,
 					mfu.getMonsterId());
-			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE,
-					mfu.getCurrentExp());
-			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL,
-					mfu.getCurrentLvl());
-			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH,
-					mfu.getCurrentHealth());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE,
+//					mfu.getCurrentExp());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL,
+//					mfu.getCurrentLvl());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH,
+//					mfu.getCurrentHealth());
 			aRow.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES,
 					mfu.getNumPieces());
 			aRow.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES,
@@ -978,18 +979,30 @@ public class UpdateUtils implements UpdateUtil {
 					mfu.isComplete());
 			aRow.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME,
 					combineStartTime);
-			aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM,
-					mfu.getTeamSlotNum());
+//			aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM,
+//					mfu.getTeamSlotNum());
 			aRow.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES,
 					newSourceOfPieces);
 			newRows.add(aRow);
 		}
-		log.info("newRows=" + newRows);
-		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName,
-				newRows);
+//		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName,
+//				newRows);
 
-		log.info("num monster_for_user updated: " + numUpdated
-				+ ". Number of monster_for_user: " + monsterForUserList.size());
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__NUM_PIECES);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME);
+		replaceTheseColumns
+				.add(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
+		int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
+						replaceTheseColumns);
+
 		return numUpdated;
 	}
 
@@ -2151,5 +2164,35 @@ public class UpdateUtils implements UpdateUtil {
 
 		return true;
 	}
+	
+	public boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators) {
+		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (StructStolen ss : listOfGenerators) {
+			Map<String, Object> aRow = new HashMap<String, Object>();
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__ID, ss.getUserStructUuid());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED,
+					ss.getTimeOfRetrieval());
+			newRows.add(aRow);
+		}
+
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
+		int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
+						replaceTheseColumns);
+
+		log.info("num userStructs updated: {}. Number of userStructs: {}",
+				numUpdated, listOfGenerators.size());
+
+		int maxNum = listOfGenerators.size() * 2;
+		int minNum = listOfGenerators.size();
+		if (numUpdated >= minNum && numUpdated <= maxNum) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

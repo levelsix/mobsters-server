@@ -12,9 +12,9 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemConfigDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
@@ -51,11 +51,11 @@ public class InAppPurchaseMultiSpinAction {
 	private String packageName;
 	private int gachaMultiSpinItemId;
 	private UserDao userDao;
-	private User userPojo;
+	private UserPojo userPojo;
 	private ItemConfigDao itemConfigDao;
 	private ItemForUserDao itemForUserDao;
 	private IapHistoryDao iapHistoryDao;
-	private ItemForUser ifuPojo;
+	private ItemForUserPojo ifuPojo;
 
 	public void execute(Builder resBuilder) {
 		setUpDaos();
@@ -115,7 +115,7 @@ public class InAppPurchaseMultiSpinAction {
 	}
 	
 	public int findGachaMultiSpinItemId() {
-		ItemConfig item = itemConfigDao.fetchOne(Tables.ITEM_CONFIG.ITEM_TYPE, "GACHA_MULTI_SPIN");
+		ItemConfigPojo item = itemConfigDao.fetchOne(Tables.ITEM_CONFIG.ITEM_TYPE, "GACHA_MULTI_SPIN");
 		if(item == null) {
 			log.error("no item with item type of gacha_multi_spin");
 			return 0;
@@ -132,7 +132,7 @@ public class InAppPurchaseMultiSpinAction {
 			
 			historyUtils.insertIAPHistoryElem(receiptFromApple, gemChange,
 					userPojo, realLifeCashCost, null, iapHistoryDao);					
-			ifuPojo = new ItemForUser(userId, gachaMultiSpinItemId, 1);
+			ifuPojo = new ItemForUserPojo(userId, gachaMultiSpinItemId, 1);
 			itemForUserDao.insert(ifuPojo);
 
 			updateUserSalesValue();
@@ -198,11 +198,11 @@ public class InAppPurchaseMultiSpinAction {
 		this.userDao = userDao;
 	}
 
-	public User getUserPojo() {
+	public UserPojo getUserPojo() {
 		return userPojo;
 	}
 
-	public void setUserPojo(User userPojo) {
+	public void setUserPojo(UserPojo userPojo) {
 		this.userPojo = userPojo;
 	}
 
@@ -230,11 +230,11 @@ public class InAppPurchaseMultiSpinAction {
 		this.iapHistoryDao = iapHistoryDao;
 	}
 
-	public ItemForUser getIfuPojo() {
+	public ItemForUserPojo getIfuPojo() {
 		return ifuPojo;
 	}
 
-	public void setIfuPojo(ItemForUser ifuPojo) {
+	public void setIfuPojo(ItemForUserPojo ifuPojo) {
 		this.ifuPojo = ifuPojo;
 	}
 	

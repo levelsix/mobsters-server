@@ -23,7 +23,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomTranslations;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomTranslationsPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
@@ -192,7 +192,7 @@ public class SendGroupChatController extends EventController {
 
 //				Map<TranslateLanguages, String> translateMap = translationUtils.translateForGlobal(detectedLanguage, censoredChatMessage);
 //				String customTranslationLanguage = null;
-				Map<Integer, CustomTranslations> ctMap = customTranslationRetrieveUtils.getIdsToCustomTranslationss();
+				Map<Integer, CustomTranslationsPojo> ctMap = customTranslationRetrieveUtils.getIdsToCustomTranslationss();
 
 				for(int id : ctMap.keySet()) {
 					String phrase = ctMap.get(id).getPhrase();

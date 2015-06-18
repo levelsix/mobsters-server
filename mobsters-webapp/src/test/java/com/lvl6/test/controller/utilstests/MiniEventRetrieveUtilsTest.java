@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.retrieveutils.rarechange.MiniEventTimetableRetrieveUtils;
 import com.lvl6.utils.TimeUtils;
 
@@ -33,17 +33,17 @@ public class MiniEventRetrieveUtilsTest {
 //	@Autowired
 	protected static MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
 
-	private static NavigableSet<MiniEventTimetableConfig> started;
-	private static NavigableSet<MiniEventTimetableConfig> notYetEnded;
+	private static NavigableSet<MiniEventTimetableConfigPojo> started;
+	private static NavigableSet<MiniEventTimetableConfigPojo> notYetEnded;
 
 	@BeforeClass
 	public static void setUp() {
 		timeUtil = new TimeUtils();
 		miniEventTimetableRetrieveUtil = new MiniEventTimetableRetrieveUtils();
 
-		started = new TreeSet<MiniEventTimetableConfig>(new Comparator<MiniEventTimetableConfig>() {
+		started = new TreeSet<MiniEventTimetableConfigPojo>(new Comparator<MiniEventTimetableConfigPojo>() {
 			@Override
-			public int compare(MiniEventTimetableConfig o1, MiniEventTimetableConfig o2) {
+			public int compare(MiniEventTimetableConfigPojo o1, MiniEventTimetableConfigPojo o2) {
 				long o1Time = o1.getStartTime().getTime();
 				long o2Time = o2.getStartTime().getTime();
 				if ( o1Time < o2Time ) {
@@ -61,9 +61,9 @@ public class MiniEventRetrieveUtilsTest {
 			}
 		});
 
-		notYetEnded = new TreeSet<MiniEventTimetableConfig>(new Comparator<MiniEventTimetableConfig>() {
+		notYetEnded = new TreeSet<MiniEventTimetableConfigPojo>(new Comparator<MiniEventTimetableConfigPojo>() {
 			@Override
-			public int compare(MiniEventTimetableConfig o1, MiniEventTimetableConfig o2) {
+			public int compare(MiniEventTimetableConfigPojo o1, MiniEventTimetableConfigPojo o2) {
 				long o1Time = o1.getEndTime().getTime();
 				long o2Time = o2.getEndTime().getTime();
 				if ( o1Time < o2Time ) {
@@ -97,7 +97,7 @@ public class MiniEventRetrieveUtilsTest {
 		Date me2Et = timeUtil.createDateAddMinutes(now, 5);
 		Date me1Et = timeUtil.createDateAddMinutes(now, 10);
 
-		MiniEventTimetableConfig firstMe = new MiniEventTimetableConfig();
+		MiniEventTimetableConfigPojo firstMe = new MiniEventTimetableConfigPojo();
 		firstMe.setId(1);
 		firstMe.setMiniEventId(1);
 		firstMe.setStartTime(new Timestamp(me1St.getTime()));
@@ -105,16 +105,16 @@ public class MiniEventRetrieveUtilsTest {
 		started.add(firstMe);
 		notYetEnded.add(firstMe);
 
-		MiniEventTimetableConfig secondMe = new MiniEventTimetableConfig();
+		MiniEventTimetableConfigPojo secondMe = new MiniEventTimetableConfigPojo();
 		secondMe.setId(2);
 		secondMe.setStartTime(new Timestamp(me2St.getTime()));
 		secondMe.setEndTime(new Timestamp(me2Et.getTime()));
 		started.add(secondMe);
 		notYetEnded.add(secondMe);
 
-		TreeSet<MiniEventTimetableConfig> mockedTreeSet = mock(TreeSet.class);
-		when(mockedTreeSet.headSet(any(MiniEventTimetableConfig.class), any(Boolean.class))).thenReturn(started);
-		when(mockedTreeSet.tailSet(any(MiniEventTimetableConfig.class), any(Boolean.class))).thenReturn(notYetEnded);
+		TreeSet<MiniEventTimetableConfigPojo> mockedTreeSet = mock(TreeSet.class);
+		when(mockedTreeSet.headSet(any(MiniEventTimetableConfigPojo.class), any(Boolean.class))).thenReturn(started);
+		when(mockedTreeSet.tailSet(any(MiniEventTimetableConfigPojo.class), any(Boolean.class))).thenReturn(notYetEnded);
 
 		miniEventTimetableRetrieveUtil.setMeStartTimeTree(mockedTreeSet);
 		miniEventTimetableRetrieveUtil.setMeEndTimeTree(mockedTreeSet);
@@ -136,23 +136,23 @@ public class MiniEventRetrieveUtilsTest {
 		Date me1Et = timeUtil.createDateAddMinutes(now, 5);
 		Date me2Et = timeUtil.createDateAddMinutes(now, 10);
 
-		MiniEventTimetableConfig firstMe = new MiniEventTimetableConfig();
+		MiniEventTimetableConfigPojo firstMe = new MiniEventTimetableConfigPojo();
 		firstMe.setId(1);
 		firstMe.setStartTime(new Timestamp(me1St.getTime()));
 		firstMe.setEndTime(new Timestamp(me1Et.getTime()));
 		started.add(firstMe);
 		notYetEnded.add(firstMe);
 
-		MiniEventTimetableConfig secondMe = new MiniEventTimetableConfig();
+		MiniEventTimetableConfigPojo secondMe = new MiniEventTimetableConfigPojo();
 		secondMe.setId(2);
 		secondMe.setStartTime(new Timestamp(me2St.getTime()));
 		secondMe.setEndTime(new Timestamp(me2Et.getTime()));
 		started.add(secondMe);
 		notYetEnded.add(secondMe);
 
-		TreeSet<MiniEventTimetableConfig> mockedTreeSet = mock(TreeSet.class);
-		when(mockedTreeSet.headSet(any(MiniEventTimetableConfig.class), any(Boolean.class))).thenReturn(started);
-		when(mockedTreeSet.tailSet(any(MiniEventTimetableConfig.class), any(Boolean.class))).thenReturn(notYetEnded);
+		TreeSet<MiniEventTimetableConfigPojo> mockedTreeSet = mock(TreeSet.class);
+		when(mockedTreeSet.headSet(any(MiniEventTimetableConfigPojo.class), any(Boolean.class))).thenReturn(started);
+		when(mockedTreeSet.tailSet(any(MiniEventTimetableConfigPojo.class), any(Boolean.class))).thenReturn(notYetEnded);
 
 		miniEventTimetableRetrieveUtil.setMeStartTimeTree(mockedTreeSet);
 		miniEventTimetableRetrieveUtil.setMeEndTimeTree(mockedTreeSet);
@@ -173,23 +173,23 @@ public class MiniEventRetrieveUtilsTest {
 		Date me1Et = timeUtil.createDateAddMinutes(now, 5);
 		Date me2Et = timeUtil.createDateAddMinutes(now, 10);
 
-		MiniEventTimetableConfig firstMe = new MiniEventTimetableConfig();
+		MiniEventTimetableConfigPojo firstMe = new MiniEventTimetableConfigPojo();
 		firstMe.setId(1);
 		firstMe.setStartTime(new Timestamp(me1St.getTime()));
 		firstMe.setEndTime(new Timestamp(me1Et.getTime()));
 		started.add(firstMe);
 		notYetEnded.add(firstMe);
 
-		MiniEventTimetableConfig secondMe = new MiniEventTimetableConfig();
+		MiniEventTimetableConfigPojo secondMe = new MiniEventTimetableConfigPojo();
 		secondMe.setId(2);
 		secondMe.setStartTime(new Timestamp(me2St.getTime()));
 		secondMe.setEndTime(new Timestamp(me2Et.getTime()));
 		started.add(secondMe);
 		notYetEnded.add(secondMe);
 
-		TreeSet<MiniEventTimetableConfig> mockedTreeSet = mock(TreeSet.class);
-		when(mockedTreeSet.headSet(any(MiniEventTimetableConfig.class), any(Boolean.class))).thenReturn(started);
-		when(mockedTreeSet.tailSet(any(MiniEventTimetableConfig.class), any(Boolean.class))).thenReturn(notYetEnded);
+		TreeSet<MiniEventTimetableConfigPojo> mockedTreeSet = mock(TreeSet.class);
+		when(mockedTreeSet.headSet(any(MiniEventTimetableConfigPojo.class), any(Boolean.class))).thenReturn(started);
+		when(mockedTreeSet.tailSet(any(MiniEventTimetableConfigPojo.class), any(Boolean.class))).thenReturn(notYetEnded);
 
 		miniEventTimetableRetrieveUtil.setMeStartTimeTree(mockedTreeSet);
 		miniEventTimetableRetrieveUtil.setMeEndTimeTree(mockedTreeSet);

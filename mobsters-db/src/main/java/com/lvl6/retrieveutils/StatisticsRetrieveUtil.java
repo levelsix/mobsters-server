@@ -65,21 +65,34 @@ public class StatisticsRetrieveUtil {
 		return formatted;
 	}
 
-	//
 	public Integer countPayingPlayers() {
-		return jdbcTemplate.queryForInt("select count(*) from "
-				+ DBConstants.TABLE_USER + " where " + DBConstants.USER__ID
-				+ " in (select " + DBConstants.IAP_HISTORY__USER_ID + " from "
-				+ DBConstants.TABLE_IAP_HISTORY + " where "
-				+ DBConstants.IAP_HISTORY__PREMIUMCUR_PURCHASED + " > 0)");
-	}
+        return jdbcTemplate.queryForObject("select count(distinct " + DBConstants.IAP_HISTORY__USER_ID +
+                ") from " + DBConstants.TABLE_IAP_HISTORY + " where " + 
+                DBConstants.IAP_HISTORY__CASH_SPENT + " > 0", Integer.class);
+    }
 
+    //
+    public Long countInAppPurchases() {
+        return jdbcTemplate.queryForObject("select count(*) from " + 
+                DBConstants.TABLE_IAP_HISTORY + " where " + 
+                DBConstants.IAP_HISTORY__CASH_SPENT + " > 0", Long.class);
+    }
+	
 	//
-	public Long countInAppPurchases() {
-		return jdbcTemplate.queryForLong("select count(*) from "
-				+ DBConstants.TABLE_IAP_HISTORY + " where "
-				+ DBConstants.IAP_HISTORY__PREMIUMCUR_PURCHASED + " > 0");
-	}
+//	public Integer countPayingPlayers() {
+//		return jdbcTemplate.queryForInt("select count(*) from "
+//				+ DBConstants.TABLE_USER + " where " + DBConstants.USER__ID
+//				+ " in (select " + DBConstants.IAP_HISTORY__USER_ID + " from "
+//				+ DBConstants.TABLE_IAP_HISTORY + " where "
+//				+ DBConstants.IAP_HISTORY__PREMIUMCUR_PURCHASED + " > 0)");
+//	}
+//
+//	//
+//	public Long countInAppPurchases() {
+//		return jdbcTemplate.queryForLong("select count(*) from "
+//				+ DBConstants.TABLE_IAP_HISTORY + " where "
+//				+ DBConstants.IAP_HISTORY__PREMIUMCUR_PURCHASED + " > 0");
+//	}
 
 	//
 	public Long sumOfInAppPurchases() {

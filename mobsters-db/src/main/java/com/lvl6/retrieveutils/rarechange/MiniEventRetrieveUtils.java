@@ -14,7 +14,7 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniEventConfigDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
 
 @Component
 public class MiniEventRetrieveUtils {
@@ -23,12 +23,12 @@ public class MiniEventRetrieveUtils {
 
 //	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_CONFIG;
 
-	private Map<Integer, MiniEventConfig> idToMiniEventConfig;
+	private Map<Integer, MiniEventConfigPojo> idToMiniEventConfig;
 
 	@Autowired
 	protected MiniEventConfigDao miniEventConfigDao;
 
-	public Map<Integer, MiniEventConfig> getAllIdsToMiniEvents() {
+	public Map<Integer, MiniEventConfigPojo> getAllIdsToMiniEvents() {
 		if (null == idToMiniEventConfig) {
 			reload();
 		}
@@ -36,11 +36,11 @@ public class MiniEventRetrieveUtils {
 		return idToMiniEventConfig;
 	}
 
-	public MiniEventConfig getMiniEventById(int id) {
+	public MiniEventConfigPojo getMiniEventById(int id) {
 		if (null == idToMiniEventConfig) {
 			reload();
 		}
-		MiniEventConfig ep = idToMiniEventConfig.get(id);
+		MiniEventConfigPojo ep = idToMiniEventConfig.get(id);
 		if (null == ep) {
 			log.error("No MiniEventConfig for id={}", id);
 		}
@@ -54,9 +54,9 @@ public class MiniEventRetrieveUtils {
 	private void setStaticIdsToMiniEventConfigs() {
 		log.debug("setting static map of id to MiniEventConfig");
 
-		Map<Integer, MiniEventConfig> idToMiniEventConfigTemp = new HashMap<Integer, MiniEventConfig>();
+		Map<Integer, MiniEventConfigPojo> idToMiniEventConfigTemp = new HashMap<Integer, MiniEventConfigPojo>();
 		try {
-			for (MiniEventConfig mec : miniEventConfigDao.findAll()) {
+			for (MiniEventConfigPojo mec : miniEventConfigDao.findAll()) {
 				idToMiniEventConfigTemp.put(
 						mec.getId(), mec);
 			}

@@ -1,5 +1,7 @@
 package com.lvl6.retrieveutils.rarechange;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.StringTokenizer;
 
+import org.jooq.tools.csv.CSVReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +31,12 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class TaskStageMonsterRetrieveUtils {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(TaskStageMonsterRetrieveUtils.class);
-	
+
 	@Autowired
 	MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 
 	private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
 	private static Map<Integer, Set<Integer>> taskStageIdsToDroppableMonsterIds;
@@ -355,15 +359,11 @@ public class TaskStageMonsterRetrieveUtils {
 
 		Dialogue initD = null;
 		if (null != initDialogue && !initDialogue.isEmpty()) {
-			initD = null;
-			//TODO: Fix this
-			/*miscMethods.createDialogue(initDialogue);*/
+			initD = createDialogue(initDialogue);
 		}
 		Dialogue defaultD = null;
 		if (null != defaultDialogue && !defaultDialogue.isEmpty()) {
-			defaultD = null; 
-			//TODO: Fix this
-			/*miscMethods.createDialogue(defaultDialogue);*/
+			defaultD = createDialogue(defaultDialogue);
 		}
 
 		TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId,
@@ -380,5 +380,52 @@ public class TaskStageMonsterRetrieveUtils {
 		}
 		taskStageMonster.setRand(rand);
 		return taskStageMonster;
+	}
+
+	public Dialogue createDialogue(String dialogueBlob) {
+		if (dialogueBlob != null && dialogueBlob.length() > 0) {
+			StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
+
+			List<Boolean> isLeftSides = new ArrayList<Boolean>();
+			List<String> speakers = new ArrayList<String>();
+			List<String> speakerImages = new ArrayList<String>();
+			List<String> speakerTexts = new ArrayList<String>();
+
+			CSVReader reader = null;
+			try {
+				while (st.hasMoreTokens()) {
+					String tok = st.nextToken();
+					reader = new CSVReader(new StringReader(tok), '.');
+					String[] strs = reader.readNext();
+					if (strs.length == 4) {
+						Boolean isLeftSide = strs[0].toUpperCase().equals("L");
+						String speaker = strs[1];
+						String speakerImage = strs[2];
+						String speakerText = strs[3];
+						if (speakerText != null) {
+							isLeftSides.add(isLeftSide);
+							speakers.add(speaker);
+							speakerImages.add(speakerImage);
+							speakerTexts.add(speakerText);
+						}
+					}
+				}
+			} catch (Exception e) {
+				log.error(
+						"problem with creating dialogue object for this dialogueblob: {}",
+						dialogueBlob, e);
+			} finally {
+				if (null != reader) {
+					try {
+						reader.close();
+					} catch (IOException e) {
+						log.error("error trying to close CSVReader", e);
+					}
+				}
+			}
+			return new Dialogue(speakers, speakerImages, speakerTexts,
+					isLeftSides);
+		}
+		return null;
 	}
 }

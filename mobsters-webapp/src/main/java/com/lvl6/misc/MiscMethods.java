@@ -37,6 +37,7 @@ import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
@@ -171,52 +172,52 @@ public class MiscMethods {
 		return protos;
 	}
 
-	public Dialogue createDialogue(String dialogueBlob) {
-		if (dialogueBlob != null && dialogueBlob.length() > 0) {
-			StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
-
-			List<Boolean> isLeftSides = new ArrayList<Boolean>();
-			List<String> speakers = new ArrayList<String>();
-			List<String> speakerImages = new ArrayList<String>();
-			List<String> speakerTexts = new ArrayList<String>();
-
-			CSVReader reader = null;
-			try {
-				while (st.hasMoreTokens()) {
-					String tok = st.nextToken();
-					reader = new CSVReader(new StringReader(tok), '.');
-					String[] strs = reader.readNext();
-					if (strs.length == 4) {
-						Boolean isLeftSide = strs[0].toUpperCase().equals("L");
-						String speaker = strs[1];
-						String speakerImage = strs[2];
-						String speakerText = strs[3];
-						if (speakerText != null) {
-							isLeftSides.add(isLeftSide);
-							speakers.add(speaker);
-							speakerImages.add(speakerImage);
-							speakerTexts.add(speakerText);
-						}
-					}
-				}
-			} catch (Exception e) {
-				log.error(
-						"problem with creating dialogue object for this dialogueblob: {}",
-						dialogueBlob, e);
-			} finally {
-				if (null != reader) {
-					try {
-						reader.close();
-					} catch (IOException e) {
-						log.error("error trying to close CSVReader", e);
-					}
-				}
-			}
-			return new Dialogue(speakers, speakerImages, speakerTexts,
-					isLeftSides);
-		}
-		return null;
-	}
+//	public Dialogue createDialogue(String dialogueBlob) {
+//		if (dialogueBlob != null && dialogueBlob.length() > 0) {
+//			StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
+//
+//			List<Boolean> isLeftSides = new ArrayList<Boolean>();
+//			List<String> speakers = new ArrayList<String>();
+//			List<String> speakerImages = new ArrayList<String>();
+//			List<String> speakerTexts = new ArrayList<String>();
+//
+//			CSVReader reader = null;
+//			try {
+//				while (st.hasMoreTokens()) {
+//					String tok = st.nextToken();
+//					reader = new CSVReader(new StringReader(tok), '.');
+//					String[] strs = reader.readNext();
+//					if (strs.length == 4) {
+//						Boolean isLeftSide = strs[0].toUpperCase().equals("L");
+//						String speaker = strs[1];
+//						String speakerImage = strs[2];
+//						String speakerText = strs[3];
+//						if (speakerText != null) {
+//							isLeftSides.add(isLeftSide);
+//							speakers.add(speaker);
+//							speakerImages.add(speakerImage);
+//							speakerTexts.add(speakerText);
+//						}
+//					}
+//				}
+//			} catch (Exception e) {
+//				log.error(
+//						"problem with creating dialogue object for this dialogueblob: {}",
+//						dialogueBlob, e);
+//			} finally {
+//				if (null != reader) {
+//					try {
+//						reader.close();
+//					} catch (IOException e) {
+//						log.error("error trying to close CSVReader", e);
+//					}
+//				}
+//			}
+//			return new Dialogue(speakers, speakerImages, speakerTexts,
+//					isLeftSides);
+//		}
+//		return null;
+//	}
 
 	public void explodeIntoInts(String stringToExplode,
 			String delimiter, List<Integer> returnValue) {
@@ -325,9 +326,9 @@ public class MiscMethods {
 		resEvent.setUpdateClientUserResponseProto(resProto);
 		return resEvent;
 	}
-	
+
 	public UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
-			com.lvl6.mobsters.db.jooq.generated.tables.pojos.User user, PvpLeagueForUser plfu, Clan clan) {
+			UserPojo user, PvpLeagueForUser plfu, Clan clan) {
 		try {
 			if (user.getIsFake().compareTo((byte)0) == 0) {
 				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);

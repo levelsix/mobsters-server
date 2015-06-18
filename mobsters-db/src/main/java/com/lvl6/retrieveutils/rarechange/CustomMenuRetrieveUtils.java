@@ -12,7 +12,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomMenuConfigDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
 
 @Component
 @DependsOn("gameServer")
@@ -24,11 +24,11 @@ public class CustomMenuRetrieveUtils {
 	@Autowired
 	protected CustomMenuConfigDao customMenuDao;
 
-	private static Map<Integer, List<CustomMenuConfig>> idsToCustomMenuConfigs;
+	private static Map<Integer, List<CustomMenuConfigPojo>> idsToCustomMenuConfigs;
 
 //	private static final String TABLE_NAME = DBConstants.TABLE_CUSTOM_MENU_CONFIG;
 
-	public Map<Integer, List<CustomMenuConfig>> getIdsToCustomMenuConfigs() {
+	public Map<Integer, List<CustomMenuConfigPojo>> getIdsToCustomMenuConfigs() {
 		log.debug("retrieving all CustomMenu map");
 		if (null == idsToCustomMenuConfigs) {
 			setStaticIdsToCustomMenuConfigs();
@@ -36,7 +36,7 @@ public class CustomMenuRetrieveUtils {
 		return idsToCustomMenuConfigs;
 	}
 
-	public List<CustomMenuConfig> getCustomMenuConfigForId(int customMenuId) {
+	public List<CustomMenuConfigPojo> getCustomMenuConfigForId(int customMenuId) {
 		log.debug("retrieve CustomMenus for id={}", customMenuId);
 		if (null == idsToCustomMenuConfigs) {
 			setStaticIdsToCustomMenuConfigs();
@@ -47,15 +47,15 @@ public class CustomMenuRetrieveUtils {
 	private void setStaticIdsToCustomMenuConfigs() {
 		log.debug("setting static map of ids to CustomMenus");
 
-		Map<Integer, List<CustomMenuConfig>> idsToCustomMenuConfigTemp = new HashMap<Integer, List<CustomMenuConfig>>();
-		for (CustomMenuConfig cmc : customMenuDao.findAll()) {
+		Map<Integer, List<CustomMenuConfigPojo>> idsToCustomMenuConfigTemp = new HashMap<Integer, List<CustomMenuConfigPojo>>();
+		for (CustomMenuConfigPojo cmc : customMenuDao.findAll()) {
 			int id = cmc.getCustomMenuId();
 
 			if (!idsToCustomMenuConfigTemp.containsKey(id)) {
-				idsToCustomMenuConfigTemp.put(id, new ArrayList<CustomMenuConfig>());
+				idsToCustomMenuConfigTemp.put(id, new ArrayList<CustomMenuConfigPojo>());
 			}
 
-			List<CustomMenuConfig> cms = idsToCustomMenuConfigTemp.get(id);
+			List<CustomMenuConfigPojo> cms = idsToCustomMenuConfigTemp.get(id);
 			cms.add(cmc);
 		}
 		idsToCustomMenuConfigs = idsToCustomMenuConfigTemp;
