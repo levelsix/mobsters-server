@@ -23,9 +23,9 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
@@ -68,7 +68,7 @@ public class SendTangoGiftController extends EventController {
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtil;
 
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -121,7 +121,7 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSendTangoGiftResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -149,19 +149,19 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftResponseProto resProto = resBuilder.build();
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setSendTangoGiftResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 
-				List<GiftForUser> receiverGifts = stga.getReceiverGifts();
+				List<GiftForUserPojo> receiverGifts = stga.getReceiverGifts();
 				if (null != receiverGifts && !receiverGifts.isEmpty()) {
 					//notify users who did get gifts
-					Map<String, GiftForTangoUser> gfuIdToGftu = stga
-							.getGiftForUserIdToGiftForTangoUser();
-					GiftConfig tg = stga.getTangoGift();
-					for (GiftForUser gfu : receiverGifts) {
+					Map<String, GiftForTangoUserPojo> gfuIdToGftu = stga
+							.getGiftForUserPojoIdToGiftForTangoUserPojo();
+					GiftConfigPojo tg = stga.getTangoGift();
+					for (GiftForUserPojo gfu : receiverGifts) {
 						String receiverUserId = gfu.getReceiverUserId();
 						ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(
 								receiverUserId);
@@ -171,7 +171,7 @@ public class SendTangoGiftController extends EventController {
 								gfuIdToGftu, tg, gfu, rgrp);
 						rgrp.addUserGifts(ugp);
 
-						rgre.setReceivedGiftResponseProto(rgrp.build());
+						rgre.setResponseProto(rgrp.build());
 
 						responses.normalResponseEvents().add(rgre);
 					}
@@ -195,7 +195,7 @@ public class SendTangoGiftController extends EventController {
 				SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSendTangoGiftResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
@@ -208,14 +208,14 @@ public class SendTangoGiftController extends EventController {
 	}
 
 	private UserGiftProto createUserGiftProto(MinimumUserProto senderProto,
-			Map<String, GiftForTangoUser> gfuIdToGftu, GiftConfig tg,
-			GiftForUser gfu, ReceivedGiftResponseProto.Builder rgrp) {
+			Map<String, GiftForTangoUserPojo> gfuIdToGftu, GiftConfigPojo tg,
+			GiftForUserPojo gfu, ReceivedGiftResponseProto.Builder rgrp) {
 		rgrp.setSender(senderProto);
 		rgrp.setScope(ChatScope.PRIVATE);
 
 		int rewardId = gfu.getRewardId();
 		Reward r = rewardRetrieveUtil.getRewardById(rewardId);
-		GiftForTangoUser gftu = gfuIdToGftu.get(gfu.getId());
+		GiftForTangoUserPojo gftu = gfuIdToGftu.get(gfu.getId());
 
 		UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
 				gfu, senderProto, r, tg, gftu);

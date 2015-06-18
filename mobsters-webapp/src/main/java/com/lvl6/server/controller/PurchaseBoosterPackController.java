@@ -51,6 +51,7 @@ import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
@@ -119,7 +120,7 @@ public class PurchaseBoosterPackController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected HistoryUtils historyUtils;
 
@@ -243,9 +244,9 @@ public class PurchaseBoosterPackController extends EventController {
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
 
-				sendClanGiftIfExists(userId, pbpa);
+				sendClanGiftIfExists(responses, userId, pbpa);
 
-				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
+//				writeToUserCurrencyHistory(userId, nowTimestamp, pbpa);
 
 				//just assume user can only buy one booster pack at a time
 				writeToBoosterPackPurchaseHistory(userId, boosterPackId,
@@ -325,17 +326,19 @@ public class PurchaseBoosterPackController extends EventController {
 	//    return numPurchased;
 	//  }
 
-	private void sendClanGiftIfExists(String userId,
+	private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
 			PurchaseBoosterPackAction pbpa) {
 		try {
 			AwardRewardAction ara = pbpa.getAra();
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setReceivedGiftResponseProto(rgrp);
+				rgre.setResponseProto(rgrp);
 				String clanId = pbpa.getUser().getClanId();
 
-				server.writeClanEvent(rgre, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
 			}
 		} catch (Exception e) {
 			log.error("failed to send ClanGift notification", e);

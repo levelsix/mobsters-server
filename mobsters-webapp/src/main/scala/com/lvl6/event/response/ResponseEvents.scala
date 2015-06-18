@@ -30,12 +30,10 @@ import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto
-import com.lvl6.proto.EventClanProto.DeleteClanGiftsResponseProto
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto
-import com.lvl6.proto.EventClanProto.CollectClanGiftsResponseProto
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto
 import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto
@@ -76,7 +74,6 @@ import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto
-import com.lvl6.proto.EventClanProto.ReceivedClanGiftResponseProto
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto
 import com.lvl6.proto.EventStartupProto.StartupResponseProto
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto
@@ -100,7 +97,7 @@ import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto
@@ -154,7 +151,6 @@ object ResponseEvents {
   responsesMap += (EventProtocolResponse.S_BEGIN_PVP_BATTLE_EVENT -> classOf[BeginPvpBattleResponseProto])
   responsesMap += (EventProtocolResponse.S_BOOT_PLAYER_FROM_CLAN_EVENT -> classOf[BootPlayerFromClanResponseProto])
   responsesMap += (EventProtocolResponse.S_CHANGE_CLAN_SETTINGS_EVENT -> classOf[ChangeClanSettingsResponseProto])
-  responsesMap += (EventProtocolResponse.S_COLLECT_CLAN_GIFTS_EVENT -> classOf[CollectClanGiftsResponseProto])
   responsesMap += (EventProtocolResponse.S_COLLECT_MONSTER_ENHANCEMENT_EVENT -> classOf[CollectMonsterEnhancementResponseProto])
   responsesMap += (EventProtocolResponse.S_COMBINE_USER_MONSTER_PIECES_EVENT -> classOf[CombineUserMonsterPiecesResponseProto])
   responsesMap += (EventProtocolResponse.S_COMPLETE_BATTLE_ITEM_EVENT -> classOf[CompleteBattleItemResponseProto])
@@ -162,7 +158,6 @@ object ResponseEvents {
   responsesMap += (EventProtocolResponse.S_CREATE_BATTLE_ITEM_EVENT -> classOf[CreateBattleItemResponseProto])
   responsesMap += (EventProtocolResponse.S_CREATE_CLAN_EVENT -> classOf[CreateClanResponseProto])
   responsesMap += (EventProtocolResponse.S_CUSTOMIZE_PVP_BOARD_OBSTACLE_EVENT -> classOf[CustomizePvpBoardObstacleResponseProto])
-  responsesMap += (EventProtocolResponse.S_DELETE_CLAN_GIFTS_EVENT -> classOf[DeleteClanGiftsResponseProto])
   responsesMap += (EventProtocolResponse.S_DESTROY_MONEY_TREE_STRUCTURE_EVENT -> classOf[DestroyMoneyTreeStructureResponseProto])
   responsesMap += (EventProtocolResponse.S_DEV_EVENT -> classOf[DevResponseProto])
   responsesMap += (EventProtocolResponse.S_DISCARD_BATTLE_ITEM_EVENT -> classOf[DiscardBattleItemResponseProto])
@@ -202,7 +197,6 @@ object ResponseEvents {
   responsesMap += (EventProtocolResponse.S_QUEST_PROGRESS_EVENT -> classOf[QuestProgressResponseProto])
   responsesMap += (EventProtocolResponse.S_QUEST_REDEEM_EVENT -> classOf[QuestRedeemResponseProto])
   responsesMap += (EventProtocolResponse.S_QUEUE_UP_EVENT -> classOf[QueueUpResponseProto])
-  responsesMap += (EventProtocolResponse.S_RECEIVED_CLAN_GIFTS_EVENT -> classOf[ReceivedClanGiftResponseProto])
   responsesMap += (EventProtocolResponse.S_RECEIVED_GROUP_CHAT_EVENT -> classOf[ReceivedGroupChatResponseProto])
   responsesMap += (EventProtocolResponse.S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT -> classOf[ReceivedRareBoosterPurchaseResponseProto])
   responsesMap += (EventProtocolResponse.S_RECORD_CLAN_RAID_STATS_EVENT -> classOf[RecordClanRaidStatsResponseProto])

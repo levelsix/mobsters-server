@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterResponseProto> {
 
-	
+
 
 	public HealMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class HealMonsterResponseEvent extends NormalResponseEvent<HealMonsterRes
 		return b.size();
 	}
 
-	public void setHealMonsterResponseProto(
-			HealMonsterResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

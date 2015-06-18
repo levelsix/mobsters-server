@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftRewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftRewardConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ClanProto.UserClanStatus;
@@ -72,12 +72,12 @@ public class AwardClanGiftsAction {
 		this.rand = ControllerConstants.RAND;
 	}
 
-//	private Collection<GiftRewardConfig> rewardsForClanGift;
-	private GiftConfig gc;
+//	private Collection<GiftRewardConfigPojo> rewardsForClanGift;
+	private GiftConfigPojo gc;
 	private List<UserClan> clanMembers;
 	private ReceivedGiftResponseProto.Builder chatProto;
 	private MinimumUserProto mup; //this is the dude who sent the gifts
-	private GiftForUser giftersClanGift;
+	private GiftForUserPojo giftersClanGift;
 
 	public boolean execute() {
 
@@ -144,16 +144,16 @@ public class AwardClanGiftsAction {
 	private boolean writeChangesToDB() {
 		//create a map of userId to rewardId all clan MEMBERS received
 		Timestamp toe = new Timestamp((new Date()).getTime());
-		Collection<GiftForUser> gifts = new ArrayList<GiftForUser>();
+		Collection<GiftForUserPojo> gifts = new ArrayList<GiftForUserPojo>();
 
 		for(UserClan uc : clanMembers) {
 //			if(!uc.getStatus().equalsIgnoreCase(UserClanStatus.REQUESTING.toString())) {
 			String receiverUserId = uc.getUserId();
 
-			GiftRewardConfig grc = determineReward();
+			GiftRewardConfigPojo grc = determineReward();
 			int rewardId = grc.getRewardId();
 
-			GiftForUser gfu = new GiftForUser();
+			GiftForUserPojo gfu = new GiftForUserPojo();
 			gfu.setGiftId(giftId);
 			gfu.setGifterUserId(gifterUserId);
 			gfu.setReasonForGift(reasonForGift);
@@ -171,10 +171,10 @@ public class AwardClanGiftsAction {
 		//insert all the clan gifts for users into table
 		boolean success = insertUtil.insertGiftForUser(gifts);
 		if(!success) {
-			log.error("error inserting clan gifts into GiftForUser table");
+			log.error("error inserting clan gifts into GiftForUserPojo table");
 		}
 
-		for (GiftForUser gfu : gifts) {
+		for (GiftForUserPojo gfu : gifts) {
 			int rewardId = gfu.getRewardId();
 			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 			UserGiftProto ugp = createInfoProtoUtils.createUserGiftProto(
@@ -185,9 +185,9 @@ public class AwardClanGiftsAction {
 		return true;
 	}
 
-	private GiftRewardConfig determineReward() {
+	private GiftRewardConfigPojo determineReward() {
 		double probability = rand.nextDouble();
-		GiftRewardConfig grc = giftRewardRetrieveUtils.nextGiftReward(giftId, probability);
+		GiftRewardConfigPojo grc = giftRewardRetrieveUtils.nextGiftReward(giftId, probability);
 
 		return grc;
 	}

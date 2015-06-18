@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.Builder;
 import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
@@ -39,7 +39,7 @@ public class RedeemSecretGiftAction {
 	private String userId;
 	private List<String> rewardIdsRedeemed;
 	private Timestamp clientTime;
-	private SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
+	private ItemSecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private SecretGiftUtils secretGiftUtils;
@@ -58,7 +58,7 @@ public class RedeemSecretGiftAction {
 			String userId,
 			List<String> itemIdsRedeemed,
 			Timestamp clientTime,
-			SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil,
+			ItemSecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			SecretGiftUtils secretGiftUtils,
@@ -91,12 +91,12 @@ public class RedeemSecretGiftAction {
 
 	//derived state
 	private User user;
-	private Map<String, SecretGiftForUser> idToSecretGift;
+	private Map<String, SecretGiftForUserPojo> idToSecretGift;
 
 	private List<Reward> listOfRewards;
 	private AwardRewardAction ara;
 	private UserRewardProto urp;
-	private List<SecretGiftForUser> gifts;
+	private List<SecretGiftForUserPojo> gifts;
 
 	//	private Map<String, Integer> currencyDeltas;
 	//	private Map<String, Integer> prevCurrencies;
@@ -149,7 +149,7 @@ public class RedeemSecretGiftAction {
 
 		if (null == idToSecretGift
 				|| idToSecretGift.size() != rewardIdsRedeemed.size()) {
-			log.info("inconsistent itemSecretGiftForUser in db: {} and what client asked: {}",
+			log.info("inconsistent itemSecretGiftForUserPojo in db: {} and what client asked: {}",
 					idToSecretGift, rewardIdsRedeemed);
 			return false;
 		}
@@ -236,7 +236,7 @@ public class RedeemSecretGiftAction {
 	private void aggregateGifts() {
 		listOfRewards = new ArrayList<Reward>();
 
-		for (SecretGiftForUser gif : idToSecretGift.values()) {
+		for (SecretGiftForUserPojo gif : idToSecretGift.values()) {
 			int rewardId = gif.getRewardId();
 			Reward r = rewardRetrieveUtils.getRewardById(rewardId);
 			listOfRewards.add(r);
@@ -246,7 +246,7 @@ public class RedeemSecretGiftAction {
 	private void setGiftIds(List<String> ids) {
 		for (int index = 0; index < ids.size(); index++) {
 			String id = ids.get(index);
-			SecretGiftForUser isgfu = gifts.get(index);
+			SecretGiftForUserPojo isgfu = gifts.get(index);
 
 			isgfu.setId(id);
 		}
@@ -300,7 +300,7 @@ public class RedeemSecretGiftAction {
 		return ara;
 	}
 
-	public List<SecretGiftForUser> getGifts() {
+	public List<SecretGiftForUserPojo> getGifts() {
 		return gifts;
 	}
 

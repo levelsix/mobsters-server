@@ -49,9 +49,9 @@ import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -440,7 +440,7 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME,
 				createTime);
 		insertParams.put(DBConstants.USER__GACHA_CREDITS, gachaCredits);
-		
+
 		int numChanged = DBConnection.get().insertIntoTableBasic(
 				DBConstants.TABLE_USER, insertParams);
 		if (numChanged != 1) {
@@ -2278,12 +2278,12 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public List<String> insertIntoSecretGiftForUserGetId(
-			List<SecretGiftForUser> gifts) {
+			List<SecretGiftForUserPojo> gifts) {
 		String tableName = DBConstants.TABLE_SECRET_GIFT_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
 		List<String> ids = new ArrayList<String>();
-		for (SecretGiftForUser sgfu : gifts) {
+		for (SecretGiftForUserPojo sgfu : gifts) {
 			String id = randomUUID();
 			ids.add(id);
 
@@ -2921,7 +2921,7 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
-			Collection<Reward> listOfRewards, String reasonForReward, 
+			Collection<Reward> listOfRewards, String reasonForReward,
 			String awardReasonDetail) {
 		if(listOfRewards == null) {
 			log.error("list containing rewards is null");
@@ -3030,7 +3030,7 @@ public class InsertUtils implements InsertUtil {
 //	}
 
 	@Override
-	public boolean insertGiftForUser(Collection<GiftForUser> giftForUsers) {
+	public boolean insertGiftForUser(Collection<GiftForUserPojo> giftForUsers) {
 		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
 		int size = giftForUsers.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
@@ -3045,7 +3045,7 @@ public class InsertUtils implements InsertUtil {
 		List<String> reasonForGiftList = new ArrayList<String>();
 
 
-		for(GiftForUser gfu : giftForUsers) {
+		for(GiftForUserPojo gfu : giftForUsers) {
 			String id = randomUUID();
 			gfu.setId(id);
 			idList.add(id);
@@ -3079,7 +3079,7 @@ public class InsertUtils implements InsertUtil {
 
 
 	@Override
-	public boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers) {
+	public boolean insertGiftForTangoUser(Collection<GiftForTangoUserPojo> giftForTangoUsers) {
 		String tableName = DBConstants.TABLE_GIFT_FOR_TANGO_USER;
 		int size = giftForTangoUsers.size();
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
@@ -3087,7 +3087,7 @@ public class InsertUtils implements InsertUtil {
 		List<String> giftForUserIdList = new ArrayList<String>();
 		List<String> gifterTangoNameList = new ArrayList<String>();
 
-		for(GiftForTangoUser gftu : giftForTangoUsers) {
+		for(GiftForTangoUserPojo gftu : giftForTangoUsers) {
 			giftForUserIdList.add(gftu.getGiftForUserId());
 			gifterTangoNameList.add(gftu.getGifterTangoName());
 		}

@@ -22,7 +22,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftForTangoUserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -52,15 +52,15 @@ public class GiftForTangoUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<String, GiftForTangoUser> getGftuForGfuIdsMap(Collection<String> gfuIds)
+	public Map<String, GiftForTangoUserPojo> getGftuForGfuIdsMap(Collection<String> gfuIds)
 	{
 		if (null == gfuIds || gfuIds.isEmpty()) {
-			return new HashMap<String, GiftForTangoUser>();
+			return new HashMap<String, GiftForTangoUserPojo>();
 		}
 
-		Map<String, GiftForTangoUser> gfuIdToGftu = new HashMap<String, GiftForTangoUser>();
-		List<GiftForTangoUser> gftus = getGftuForGfuIds(gfuIds);
-		for (GiftForTangoUser gftu : gftus) {
+		Map<String, GiftForTangoUserPojo> gfuIdToGftu = new HashMap<String, GiftForTangoUserPojo>();
+		List<GiftForTangoUserPojo> gftus = getGftuForGfuIds(gfuIds);
+		for (GiftForTangoUserPojo gftu : gftus) {
 			String gfuId = gftu.getGiftForUserId();
 			gfuIdToGftu.put(gfuId, gftu);
 		}
@@ -68,9 +68,9 @@ public class GiftForTangoUserRetrieveUtil {
 		return gfuIdToGftu;
 	}
 
-	public List<GiftForTangoUser> getGftuForGfuIds(Collection<String> gfuIds) {
+	public List<GiftForTangoUserPojo> getGftuForGfuIds(Collection<String> gfuIds) {
 		if (null == gfuIds || gfuIds.isEmpty()) {
-			return new ArrayList<GiftForTangoUser>();
+			return new ArrayList<GiftForTangoUserPojo>();
 		}
 
 		int amt = gfuIds.size();
@@ -81,7 +81,7 @@ public class GiftForTangoUserRetrieveUtil {
 				TABLE_NAME, DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID,
 				questionMarks);
 
-		List<GiftForTangoUser> gftuList = null;
+		List<GiftForTangoUserPojo> gftuList = null;
 		log.info("getGftuForGfuIds() query={} values={}", query, gfuIds);
 		try {
 			gftuList = this.jdbcTemplate.query(
@@ -91,14 +91,14 @@ public class GiftForTangoUserRetrieveUtil {
 			log.error(String.format(
 					"could not retrieve GiftForTangoUser for gfuIds=%s",
 					gfuIds), e);
-			gftuList = new ArrayList<GiftForTangoUser>();
+			gftuList = new ArrayList<GiftForTangoUserPojo>();
 		}
 
 		return gftuList;
 	}
 
-	public GiftForTangoUser getGftuForGfuId(String gfuId) {
-		GiftForTangoUser gftu = null;
+	public GiftForTangoUserPojo getGftuForGfuId(String gfuId) {
+		GiftForTangoUserPojo gftu = null;
 		if (null == gfuId || gfuId.isEmpty()) {
 			return gftu;
 		}
@@ -147,14 +147,14 @@ public class GiftForTangoUserRetrieveUtil {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserTaskClientStateForClientMapper implements
-			RowMapper<GiftForTangoUser> {
+			RowMapper<GiftForTangoUserPojo> {
 
 //		private static List<String> columnsSelected;
 
 		@Override
-		public GiftForTangoUser mapRow(ResultSet rs, int rowNum)
+		public GiftForTangoUserPojo mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			GiftForTangoUser gftu = new GiftForTangoUser();
+			GiftForTangoUserPojo gftu = new GiftForTangoUserPojo();
 			gftu.setGiftForUserId(rs
 					.getString(DBConstants.GIFT_FOR_TANGO_USER__GIFT_FOR_USER_ID));
 			gftu.setGifterTangoName(rs

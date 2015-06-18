@@ -54,6 +54,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -69,7 +70,7 @@ public class TradeItemForBoosterController extends EventController {
 			.getLogger(TradeItemForBoosterController.class);
 
 	public TradeItemForBoosterController() {
-		
+
 	}
 
 	@Autowired
@@ -258,7 +259,7 @@ public class TradeItemForBoosterController extends EventController {
 
 				if (!araContainer.isEmpty()) {
 					AwardRewardAction ara = araContainer.get(0);
-					sendClanGiftIfExists(userId, ara, senderProto);
+					sendClanGiftIfExists(responses, userId, ara, senderProto);
 				}
 
 				writeToUserCurrencyHistory(aUser, boosterPackId, nowTimestamp,
@@ -407,7 +408,7 @@ public class TradeItemForBoosterController extends EventController {
 				itemForUserRetrieveUtil, insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils,
 				giftRetrieveUtil, giftRewardRetrieveUtils,
-				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils, 
+				rewardRetrieveUtil, userClanRetrieveUtils, createInfoProtoUtils,
 				awardReasonDetail);
 		ara.execute();
 		createRewardProto(resBuilder, ara);
@@ -432,16 +433,18 @@ public class TradeItemForBoosterController extends EventController {
         resBuilder.setRewards(urp);
     }
 
-    private void sendClanGiftIfExists(String userId,
-    		AwardRewardAction ara, MinimumUserProto mup) {
+    private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
+			AwardRewardAction ara, MinimumUserProto mup) {
 		try {
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setReceivedGiftResponseProto(rgrp);
+				rgre.setResponseProto(rgrp);
 
 				String clanId = mup.getClan().getClanUuid();
-				server.writeClanEvent(rgre, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
 			}
 		} catch (Exception e) {
 			log.error("failed to send ClanGift notification", e);

@@ -17,7 +17,7 @@ import com.lvl6.events.response.RedeemSecretGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.RedeemSecretGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto;
@@ -26,12 +26,13 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -47,30 +48,28 @@ public class RedeemSecretGiftController extends EventController {
 			.getLogger(RedeemSecretGiftController.class);
 
 	public RedeemSecretGiftController() {
-		
+
 	}
 
-	
+
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
-	SecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
 
-	@Autowired
-	
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected SecretGiftUtils secretGiftUtils;
 
@@ -137,7 +136,7 @@ public class RedeemSecretGiftController extends EventController {
 			rsga.execute(resBuilder);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				Collection<SecretGiftForUser> nuGifts = rsga.getGifts();
+				Collection<SecretGiftForUserPojo> nuGifts = rsga.getGifts();
 				Collection<UserSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
 						.createUserSecretGiftProto(nuGifts);
 				log.info("setting nuGifts: {},\t protos: {}",
@@ -162,9 +161,8 @@ public class RedeemSecretGiftController extends EventController {
 								u, null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
-				server.writeEvent(resEventUpdate);
 
-				sendClanGiftIfExists(userId, rsga);
+				sendClanGiftIfExists(responses, userId, rsga);
 			}
 
 		} catch (Exception e) {
@@ -188,17 +186,19 @@ public class RedeemSecretGiftController extends EventController {
 		}
 	}
 
-	private void sendClanGiftIfExists(String userId,
+	private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
 			RedeemSecretGiftAction rsga) {
 		try {
 			AwardRewardAction ara = rsga.getAra();
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setReceivedGiftResponseProto(rgrp);
+				rgre.setResponseProto(rgrp);
 				String clanId = rsga.getUser().getClanId();
 
-				server.writeClanEvent(rgre, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
 			}
 		} catch (Exception e) {
 			log.error("failed to send ClanGift notification", e);
@@ -206,13 +206,13 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 
-	public SecretGiftForUserRetrieveUtil getSecretGiftForUserRetrieveUtil() {
+	public ItemSecretGiftForUserRetrieveUtil getSecretGiftForUserPojoRetrieveUtil() {
 		return itemSecretGiftForUserRetrieveUtil;
 	}
 
-	public void setSecretGiftForUserRetrieveUtil(
-			SecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil) {
-		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
+	public void setSecretGiftForUserPojoRetrieveUtil(
+			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserPojoRetrieveUtil) {
+		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserPojoRetrieveUtil;
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil() {

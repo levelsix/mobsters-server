@@ -1,8 +1,6 @@
 package com.lvl6.server.controller;
 
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
 import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
-import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
@@ -259,7 +257,7 @@ public class StartupControllerOld {//extends EventController {
     protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
 
 	public StartupControllerOld() {
-		
+
 	}
 
 	@Override
@@ -392,7 +390,7 @@ public class StartupControllerOld {//extends EventController {
 			}
 		}
 
-		
+
 		if (Globals.KABAM_ENABLED()) {
 		String naid = retrieveKabamNaid(user, udid, reqProto.getMacAddress(),
 		  reqProto.getAdvertiserId());
@@ -593,7 +591,7 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setSalesForuser", stopWatch.getTime());
 			setMiniEventForUser(resBuilder, user, playerId, nowDate);
 			log.info("{}ms at setMiniEventForUser", stopWatch.getTime());
-			
+
 
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -674,14 +672,14 @@ public class StartupControllerOld {//extends EventController {
 					monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
 			scmtda.setUp(fillMe);
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
-			
+
 			//not sure if need clan so putting here for now
 			SetGiftsAction sga = new SetGiftsAction(resBuilder, user, playerId,
 					giftForUserRetrieveUtil, giftForTangoUserRetrieveUtil,
 					giftRetrieveUtil, rewardRetrieveUtil, createInfoProtoUtils);
 			sga.setUp(fillMe);
 			log.info("{}ms at SetGiftsAction", stopWatch.getTime());
-			
+
 
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
@@ -710,7 +708,7 @@ public class StartupControllerOld {//extends EventController {
 			log.info("{}ms at setClanMemberTeamDonation", stopWatch.getTime());
 			sga.execute(fillMe);;
 			log.info("{}ms at setGifts", stopWatch.getTime());
-			
+
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
 			resBuilder.addAllClanChats(cdpb.getClanChatsList());
@@ -731,7 +729,7 @@ public class StartupControllerOld {//extends EventController {
 					.createFullUserProtoFromUser(user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
-			
+
 
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);
@@ -1235,7 +1233,7 @@ public class StartupControllerOld {//extends EventController {
 		resBuilder.setStaticDataStuffProto(sdp);
 	}
 
-	
+
 	private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
 		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
 
@@ -1371,7 +1369,7 @@ public class StartupControllerOld {//extends EventController {
 		}
 		return equipped;
 	}
-	
+
 
 	private void setAchievementStuff(Builder resBuilder, String userId, User user, Date nowDate, StopWatch stopWatch) {
 		NOTE: DB CALL
@@ -2396,9 +2394,9 @@ public class StartupControllerOld {//extends EventController {
 
 		if (user.getNumBadges() != 0) {
 			if (user.getDeviceToken() != null) {
-				
+
 				 * handled locally?
-				 
+
 				// ApnsServiceBuilder builder =
 				// APNS.newService().withCert(APNSProperties.PATH_TO_CERT,
 				// APNSProperties.CERT_PASSWORD);

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.Builder;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus;
@@ -98,7 +98,7 @@ public class CollectGiftAction {
 
 	//derived state
 	private User user;
-	private Map<String, GiftForUser> gfuIdToGiftForUser;
+	private Map<String, GiftForUserPojo> gfuIdToGiftForUserPojo;
 	private List<Reward> rewards;
 	private AwardRewardAction ara;
 	private UserRewardProto urp;
@@ -143,16 +143,16 @@ public class CollectGiftAction {
 		}
 
 		//get the secret gifts to redeem, check to see if they exist
-		gfuIdToGiftForUser = giftForUserRetrieveUtil
+		gfuIdToGiftForUserPojo = giftForUserRetrieveUtil
 				.getUserGiftsForUserMap(ugIds);
 		if (ugIds.isEmpty()) {
-			log.error("no GiftForUser in db with ids={}", ugIds);
+			log.error("no GiftForUserPojo in db with ids={}", ugIds);
 			return false;
 		}
 
-		if ( ugIds.size() != gfuIdToGiftForUser.size()) {
-			log.warn("inconsistent itemSecretGiftForUser in db: %s & what client sent: %s",
-					ugIds, gfuIdToGiftForUser);
+		if ( ugIds.size() != gfuIdToGiftForUserPojo.size()) {
+			log.warn("inconsistent itemSecretGiftForUserPojo in db: %s & what client sent: %s",
+					ugIds, gfuIdToGiftForUserPojo);
 		}
 
 		return true;
@@ -177,12 +177,12 @@ public class CollectGiftAction {
 					ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
 					ara.getOilGained(), ara.getGachaCreditsGained(), null);
 		} else {
-			log.error("unable to award rewards! {}", gfuIdToGiftForUser);
+			log.error("unable to award rewards! {}", gfuIdToGiftForUserPojo);
 			return false;
 		}
 
 //		boolean success = updateUtil.updateUserGiftHasBeenCollected(
-//				userId, gfuIdToGiftForUser.values());
+//				userId, gfuIdToGiftForUserPojo.values());
 //		return success;
 		return true;
 	}
@@ -190,7 +190,7 @@ public class CollectGiftAction {
 	private void calculateRewards() {
 		rewards = new ArrayList<Reward>();
 
-		for (GiftForUser gfu : gfuIdToGiftForUser.values()) {
+		for (GiftForUserPojo gfu : gfuIdToGiftForUserPojo.values()) {
 			int rewardId = gfu.getRewardId();
 			Reward r = rewardRetrieveUtil.getRewardById(rewardId);
 			rewards.add(r);

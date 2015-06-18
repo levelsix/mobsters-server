@@ -68,6 +68,7 @@ import com.lvl6.server.controller.actionobjects.InAppPurchaseSalesAction;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.InAppPurchaseUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
@@ -149,7 +150,7 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
-    
+
     @Autowired
     protected TimeUtils timeUtils;
 
@@ -158,13 +159,13 @@ public class InAppPurchaseController extends EventController {
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtils;
-    
+
     @Autowired
     protected HistoryUtils historyUtils;
 
 
     public InAppPurchaseController() {
-        
+
     }
 
     @Override
@@ -243,7 +244,7 @@ public class InAppPurchaseController extends EventController {
             URL url = new URL(PRODUCTION_URL);
 
             log.info("Sending purchase request to: {}", url.toString());
-            
+
             URLConnection conn = null;
             OutputStreamWriter wr = null;
             BufferedReader rd = null;
@@ -264,15 +265,15 @@ public class InAppPurchaseController extends EventController {
                             conn.getInputStream()));
             	} catch (IOException io) {
             		log.error("failed to get response. iteration "+i, io);
-            		
+
             		if (wr != null) {
                 		wr.close();
             		}
-            		
+
             		if (rd != null) {
             			rd.close();
             		}
-            		
+
             		if (i == 2) {
             			throw new Exception("failed to contact apple server. do something with the receipt." + jsonReceipt);
             		}
@@ -353,7 +354,7 @@ public class InAppPurchaseController extends EventController {
 
             if (!iapsaContainer.isEmpty()) {
             	InAppPurchaseSalesAction iapsa = iapsaContainer.get(0);
-            	sendClanGiftIfExists(userId, iapsa);
+            	sendClanGiftIfExists(responses, userId, iapsa);
             }
 
             //      //in case user has a mentor, check if user completed mentor's quest
@@ -402,7 +403,7 @@ public class InAppPurchaseController extends EventController {
             boolean isSalesPack = false;
             boolean isGachaMultiSpin = false;
             boolean isBuyingGems = false;
-            
+
             if(IAPValues.packageIsMoneyTree(packageName)) {
                 isMoneyTree = true;
                 iapmta = new InAppPurchaseMoneyTreeAction(userId, user, receiptFromApple, now, uuid,
@@ -498,9 +499,9 @@ public class InAppPurchaseController extends EventController {
 //        boolean jumpTwoTiers = iapsa.isSalesJumpTwoTiers();
         SalesPackage successorSalesPackage;
         Map<Integer, SalesPackage> salesPackagesMap = salesPackageRetrieveUtils.getSalesPackageIdsToSalesPackages();
-        
+
         //if they bought the starterbuilderpack, successor is a $10 pack with highest priority
-        
+
         if(salesPackage.getSuccId() == 0) {
             successorSalesPackage = salesPackage;
         }
@@ -515,7 +516,7 @@ public class InAppPurchaseController extends EventController {
 //            }
         }
         Date now = new Date();
-        
+
         if(iapsa.isStarterPack() || iapsa.isBuilderPack()) {
         	List<SalesPackage> tenDollarPacks = new ArrayList<SalesPackage>();
         	for(Integer id : salesPackagesMap.keySet()) {
@@ -549,7 +550,7 @@ public class InAppPurchaseController extends EventController {
 		else if(user.getSalesValue() < 4 && salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER) {
 			//do nothing
 		}
-		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER 
+		else if(salesPackage.getId() == ControllerConstants.SALES_PACKAGE__HIGH_ROLLER
 				&& timeUtils.isFirstEarlierThanSecond(now, successorSalesPackage.getTimeEnd())) {
 			//do nothing
 		}
@@ -649,17 +650,19 @@ public class InAppPurchaseController extends EventController {
 
     }
 
-    private void sendClanGiftIfExists(String userId,
+    private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
 			InAppPurchaseSalesAction iapsa) {
 		try {
 			AwardRewardAction ara = iapsa.getAra();
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setReceivedGiftResponseProto(rgrp);
+				rgre.setResponseProto(rgrp);
 				String clanId = iapsa.getUser().getClanId();
 
-				server.writeClanEvent(rgre, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
 			}
 		} catch (Exception e) {
 			log.error("failed to send ClanGift notification", e);

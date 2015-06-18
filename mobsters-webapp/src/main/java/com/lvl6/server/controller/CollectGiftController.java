@@ -19,8 +19,8 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventRewardProto.CollectGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto;
-import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -36,6 +36,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.CollectGiftAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -49,11 +50,8 @@ public class CollectGiftController extends EventController {
 	private static final Logger log = LoggerFactory
 			.getLogger(CollectGiftController.class);
 
-	private static final Logger log = LoggerFactory.getLogger(CollectGiftController.class);
-
 	public CollectGiftController() {
 	}
-
 
 	@Autowired
 	protected GiftForUserRetrieveUtils giftForUserRetrieveUtil;
@@ -93,7 +91,7 @@ public class CollectGiftController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -148,7 +146,7 @@ public class CollectGiftController extends EventController {
 			CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setCollectGiftResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -173,20 +171,19 @@ public class CollectGiftController extends EventController {
 			CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setCollectGiftResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if (CollectGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = cga.getUser();
-				UpdateClientUserResponseEvent resEventUpdate = 
+				UpdateClientUserResponseEvent resEventUpdate =
 						miscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(u, null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
-				server.writeEvent(resEventUpdate);
 
-				sendClanGiftIfExists(userId, cga);
+				sendClanGiftIfExists(responses, userId, cga);
 			}
 
 		} catch (Exception e) {
@@ -196,7 +193,7 @@ public class CollectGiftController extends EventController {
 				CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setCollectGiftResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(
@@ -209,17 +206,19 @@ public class CollectGiftController extends EventController {
 		}
 	}
 
-	private void sendClanGiftIfExists(String userId,
+	private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
 			CollectGiftAction cga) {
 		try {
 			AwardRewardAction ara = cga.getAra();
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setReceivedGiftResponseProto(rgrp);
+				rgre.setResponseProto(rgrp);
 				String clanId = cga.getUser().getClanId();
 
-				server.writeClanEvent(rgre, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
 			}
 		} catch (Exception e) {
 			log.error("failed to send ClanGift notification", e);

@@ -38,9 +38,9 @@ import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
@@ -300,7 +300,7 @@ public interface InsertUtil {
 			List<ItemForUserUsage> itemsUsed);
 
 	public abstract List<String> insertIntoSecretGiftForUserGetId(
-			List<SecretGiftForUser> gifts);
+			List<SecretGiftForUserPojo> gifts);
 
 	public abstract List<String> insertIntoClanAvengeGetId(
 			List<ClanAvenge> caList, String clanId);
@@ -348,14 +348,14 @@ public interface InsertUtil {
 
 	public abstract boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
 			Collection<Reward> listOfRewards, String reasonForReward, String awardReasonDetail);
-	
+
 
 //	public abstract boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
 //			String gifterUserId, int clanGiftId, String reasonForGift);
 
-	public abstract boolean insertGiftForUser(Collection<GiftForUser> giftForUsers);
+	public abstract boolean insertGiftForUser(Collection<GiftForUserPojo> giftForUsers);
 
-	public abstract boolean insertGiftForTangoUser(Collection<GiftForTangoUser> giftForTangoUsers);
+	public abstract boolean insertGiftForTangoUser(Collection<GiftForTangoUserPojo> giftForTangoUsers);
 
 	public abstract int insertBattleReplayForUser(BattleReplayForUser brfu);
 }

@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUser;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.RewardsProto.GiftProto.GiftType;
@@ -59,8 +59,8 @@ public class SetGiftsAction implements StartUpAction {
 
 	//derived state
 //	private List<ClanGiftForUser> allClanGifts;
-	private List<GiftForUser> allGifts;
-	private Map<String, GiftForTangoUser> gfuIdToGftu;
+	private List<GiftForUserPojo> allGifts;
+	private Map<String, GiftForTangoUserPojo> gfuIdToGftu;
 	private List<String> userIds;
 
 	//Extracted from Startup
@@ -80,7 +80,7 @@ public class SetGiftsAction implements StartUpAction {
 		Set<String> gfuIds = new HashSet<String>();
 		userIds = new ArrayList<String>();
 		allGifts = giftForUserRetrieveUtil.getUserGiftsForUser(userId);
-		for (GiftForUser gfu : allGifts) {
+		for (GiftForUserPojo gfu : allGifts) {
 			gfuIds.add(gfu.getId());
 			userIds.add(gfu.getGifterUserId());
 		}
@@ -115,9 +115,9 @@ public class SetGiftsAction implements StartUpAction {
 			mupGifters.put(gifterId, mup);
 		}
 
-		for (GiftForUser gfu : allGifts) {
+		for (GiftForUserPojo gfu : allGifts) {
 			int giftId = gfu.getGiftId();
-			GiftConfig gc = giftRetrieveUtil.getGift(giftId);
+			GiftConfigPojo gc = giftRetrieveUtil.getGift(giftId);
 
 			MinimumUserProto gifterMup = mupGifters.get(gfu.getGifterUserId());
 			int rewardId = gfu.getRewardId();
@@ -128,7 +128,7 @@ public class SetGiftsAction implements StartUpAction {
 			}
 
 			String giftType = gc.getGiftType();
-			GiftForTangoUser gftu = null;
+			GiftForTangoUserPojo gftu = null;
 
 			if (GiftType.TANGO_GIFT.name().equalsIgnoreCase(giftType)) {
 				gftu = gfuIdToGftu.get(gfu.getId());

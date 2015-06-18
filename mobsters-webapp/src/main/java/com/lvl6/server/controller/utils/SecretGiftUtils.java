@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.rarechange.SecretGiftRetrieveUtils;
 
@@ -28,9 +28,9 @@ public class SecretGiftUtils {
 			.getLogger(MiscMethods.class);
 
 
-	public List<SecretGiftForUser> calculateGiftsForUser(
+	public List<SecretGiftForUserPojo> calculateGiftsForUser(
 			String userId, int numGifts, long now) {
-		List<SecretGiftForUser> gifts = new ArrayList<SecretGiftForUser>();
+		List<SecretGiftForUserPojo> gifts = new ArrayList<SecretGiftForUserPojo>();
 
 		//random to select an item
 		Random rand = ControllerConstants.RAND;
@@ -41,9 +41,9 @@ public class SecretGiftUtils {
 		//(round((chisq(df = 4)^3) * 6.5)+329)
 		for (int giftI = 0; giftI < numGifts; giftI++) {
 			float randFloat = rand.nextFloat();
-			SecretGiftConfig secretGift = secretGiftRetrieveUtils.nextSecretGift(randFloat);
+			SecretGiftConfigPojo secretGift = secretGiftRetrieveUtils.nextSecretGift(randFloat);
 
-			SecretGiftForUser sgfu = new SecretGiftForUser();
+			SecretGiftForUserPojo sgfu = new SecretGiftForUserPojo();
 			sgfu.setUserId(userId);
 			sgfu.setRewardId(secretGift.getRewardId());
 

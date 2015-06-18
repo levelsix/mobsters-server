@@ -41,6 +41,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemMiniEventRewardAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -54,10 +55,10 @@ public class RedeemMiniEventRewardController extends EventController {
 			.getLogger(RedeemMiniEventRewardController.class);
 
 	public RedeemMiniEventRewardController() {
-		
+
 	}
 
-	
+
 	@Autowired
 	protected Locker locker;
 
@@ -206,7 +207,7 @@ public class RedeemMiniEventRewardController extends EventController {
 					resEventUpdate.setTag(event.getTag());
 					responses.normalResponseEvents().add(resEventUpdate);
 
-					sendClanGiftIfExists(userId, rmera);
+					sendClanGiftIfExists(responses, userId, rmera);
 
 					writeToCurrencyHistory(userId, clientTime, rmera);
 				} else {
@@ -235,17 +236,19 @@ public class RedeemMiniEventRewardController extends EventController {
 		}
 	}
 
-	private void sendClanGiftIfExists(String userId,
+	private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
 			RedeemMiniEventRewardAction rmea) {
 		try {
 			AwardRewardAction ara = rmea.getAra();
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
-				rgre.setReceivedGiftResponseProto(rgrp);
+				rgre.setResponseProto(rgrp);
 				String clanId = rmea.getUser().getClanId();
 
-				server.writeClanEvent(rgre, clanId);
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
 			}
 		} catch (Exception e) {
 			log.error("failed to send ClanGift notification", e);

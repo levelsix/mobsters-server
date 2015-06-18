@@ -19,11 +19,16 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
+import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
@@ -432,7 +437,7 @@ public class CreateInfoProtoUtils {
 			}
 			ppb.addAllUserStructure(uspList);
 		}
-		
+
 		ppb.setPercentageToStealFromGenerator(percentageToStealFromGenerator);
 
 		return ppb.build();
@@ -592,7 +597,7 @@ public class CreateInfoProtoUtils {
 			if(userIdToCashReward.containsKey(userId)) {
 				prospectiveCashWinnings = userIdToCashReward.get(userId);;
 			}
-			
+
 			int prospectiveOilWinnings = 0;
 			if(userIdToOilReward.containsKey(userId)) {
 				prospectiveOilWinnings = userIdToOilReward.get(userId);;
@@ -634,10 +639,10 @@ public class CreateInfoProtoUtils {
 			if (userIdToSfuList.containsKey(userId)) {
 				sfuList = userIdToSfuList.get(userId);
 			}
-			
+
 			float percentageToStealFromGenerator = 0;
 			if(userIdToPercentageStealFromGenerator.containsKey(userId)) {
-				percentageToStealFromGenerator = 
+				percentageToStealFromGenerator =
 						userIdToPercentageStealFromGenerator.get(userId);
 			}
 
@@ -651,7 +656,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createGotAttackedPvpHistoryProto(
-			User attacker, Clan c, 
+			User attacker, Clan c,
 			PvpBattleHistoryPojo info,
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
@@ -677,7 +682,7 @@ public class CreateInfoProtoUtils {
 		phpb.setCashStolenFromGenerators(cashStolenFromGenerators);
 		phpb.setOilStolenFromStorage(oilStolenFromStorage);
 		phpb.setOilStolenFromGenerators(oilStolenFromGenerators);
-		
+
 		modifyPvpHistoryProto(phpb, info);
 
 //		if (null != brfu) {
@@ -698,9 +703,9 @@ public class CreateInfoProtoUtils {
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
 			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
-			Map<String, Integer> cashStolenFromStorageMap, 
+			Map<String, Integer> cashStolenFromStorageMap,
 			Map<String, Integer> cashStolenFromGeneratorsMap,
-			Map<String, Integer> oilStolenFromStorageMap, 
+			Map<String, Integer> oilStolenFromStorageMap,
 			Map<String, Integer> oilStolenFromGeneratorsMap)
 	{
 
@@ -737,8 +742,8 @@ public class CreateInfoProtoUtils {
 			int cashStolenFromGenerators = cashStolenFromGeneratorsMap.get(attackerId);
 			int oilStolenFromStorage = oilStolenFromStorageMap.get(attackerId);
 			int oilStolenFromGenerators = oilStolenFromGeneratorsMap.get(attackerId);
-			
-			
+
+
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 					clan, history, attackerMonsters, userMonsterIdToDropped,
 					prospectiveCashWinnings, prospectiveOilWinnings,
@@ -784,7 +789,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public PvpHistoryProto createAttackedOthersPvpHistoryProto(
-			FullUserProto fup, FullUserProto defenderFup, 
+			FullUserProto fup, FullUserProto defenderFup,
 			PvpBattleHistoryPojo info,
 			String replayId) //BattleReplayForUser brfu)
 	{
@@ -2345,13 +2350,13 @@ public class CreateInfoProtoUtils {
 	}
 
 	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
-			Collection<SecretGiftForUser> secretGifts) {
+			Collection<SecretGiftForUserPojo> secretGifts) {
 		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
 		if (null == secretGifts || secretGifts.isEmpty()) {
 			return gifs;
 		}
 
-		for (SecretGiftForUser isgfu : secretGifts) {
+		for (SecretGiftForUserPojo isgfu : secretGifts) {
 			gifs.add(createUserSecretGiftProto(isgfu));
 		}
 		return gifs;
@@ -3733,9 +3738,9 @@ public class CreateInfoProtoUtils {
 		return urp.build();
 	}
 
-	public UserGiftProto createUserGiftProto(GiftForUser gfu,
-			MinimumUserProto gifterMup, Reward r, GiftConfig g,
-			GiftForTangoUser gftu)
+	public UserGiftProto createUserGiftProto(GiftForUserPojo gfu,
+			MinimumUserProto gifterMup, Reward r, GiftConfigPojo g,
+			GiftForTangoUserPojo gftu)
 	{
 		UserGiftProto.Builder ugpb = UserGiftProto.newBuilder();
 		ugpb.setUgUuid(gfu.getId());
@@ -3756,7 +3761,7 @@ public class CreateInfoProtoUtils {
 		return ugpb.build();
 	}
 
-	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUser gftu)
+	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUserPojo gftu)
 	{
 		UserTangoGiftProto.Builder utgpb = UserTangoGiftProto.newBuilder();
 		utgpb.setUserGiftUuid(gftu.getGiftForUserId());
@@ -3765,7 +3770,7 @@ public class CreateInfoProtoUtils {
 		return utgpb.build();
 		}
 
-	public GiftProto createGiftProto(GiftConfig gc)
+	public GiftProto createGiftProto(GiftConfigPojo gc)
 	{
 		GiftProto.Builder gpb = GiftProto.newBuilder();
 
@@ -3798,7 +3803,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public UserSecretGiftProto createUserSecretGiftProto(
-			SecretGiftForUser secretGift) {
+			SecretGiftForUserPojo secretGift) {
 		UserSecretGiftProto.Builder uisgpb = UserSecretGiftProto
 				.newBuilder();
 		uisgpb.setUisgUuid(secretGift.getId());
@@ -4306,14 +4311,14 @@ public class CreateInfoProtoUtils {
 		builder.setStructId(userStructPojo.getStructId());
 		//    builder.setLevel(userStruct.getLevel());
 		builder.setFbInviteStructLvl(userStructPojo.getFbInviteStructLvl());
-		
+
 		if(userStructPojo.getIsComplete().equals((byte) 0)) {
 			builder.setIsComplete(false);
 		}
 		else {
 			builder.setIsComplete(true);
 		}
-		
+
 		CoordinatePair cp = new CoordinatePair(userStructPojo.getXcoord(), userStructPojo.getYcoord());
 		builder.setCoordinates(createCoordinateProtoFromCoordinatePair(cp));
 		String orientation = userStructPojo.getOrientation();
@@ -5658,7 +5663,7 @@ public class CreateInfoProtoUtils {
 		for(StrengthLeaderBoard slb : slbList) {
 			userIds.add(slb.getUserId());
 		}
-		
+
 		Map<String, User> userMap = userRetrieveUtils.getUsersByIds(userIds);
 		for(StrengthLeaderBoard slb : slbList) {
 			StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
@@ -5666,12 +5671,12 @@ public class CreateInfoProtoUtils {
 			b.setMup(createMinimumUserProtoFromUserAndClan(userMap.get(userId), null));
 			b.setRank(slb.getRank());
 			b.setStrength(slb.getStrength());
-			
+
 			slbpList.add(b.build());
 		}
 		return slbpList;
 	}
-	
+
 	public List<StrengthLeaderBoardProto> createStrengthLeaderBoardProtos(List<StrengthLeaderBoard> slbList,
 			UserRetrieveUtils2 userRetrieveUtils) {
 		List<StrengthLeaderBoardProto> slbpList = new ArrayList<StrengthLeaderBoardProto>();
@@ -5717,6 +5722,6 @@ public class CreateInfoProtoUtils {
 		}
 		return returnList;
 	}
-	
+
 
 }

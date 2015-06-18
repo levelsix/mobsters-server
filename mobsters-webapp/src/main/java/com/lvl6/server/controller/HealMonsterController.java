@@ -76,7 +76,7 @@ public class HealMonsterController extends EventController {
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public HealMonsterController() {
-		
+
 	}
 
 	@Override
@@ -137,14 +137,13 @@ public class HealMonsterController extends EventController {
 		resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
-		UUID userMonsterUuid = null;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
 
 			if (userMonsterIds != null) {
 				for (String userMonsterId : userMonsterIds) {
-					userMonsterUuid = UUID.fromString(userMonsterId);
+					UUID.fromString(userMonsterId);
 				}
 			}
 
@@ -162,11 +161,12 @@ public class HealMonsterController extends EventController {
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setHealMonsterResponseProto(resBuilder.build());
-			server.writeEvent(resEvent);
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			int previousCash = 0;
 			int previousGems = 0;
@@ -249,7 +249,7 @@ public class HealMonsterController extends EventController {
 				log.error("exception2 in HealMonsterController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 

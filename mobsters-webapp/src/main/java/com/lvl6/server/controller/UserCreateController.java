@@ -23,7 +23,7 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
@@ -66,24 +66,24 @@ public class UserCreateController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
 
 	public UserCreateController() {
-		
+
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class UserCreateController extends EventController {
 		int cash = Math.max(reqProto.getCash(), 0);
 		int oil = Math.max(reqProto.getOil(), 0);
 		int gems = Math.max(reqProto.getGems(), 0);
-		
+
 		cash = Math.min(cash, ControllerConstants.TUTORIAL__INIT_CASH);
 		oil = Math.min(oil, ControllerConstants.TUTORIAL__INIT_OIL);
 		gems = Math.min(gems, ControllerConstants.TUTORIAL__INIT_GEMS);
@@ -153,7 +153,7 @@ public class UserCreateController extends EventController {
 
 			if (userId != null) {
 				//recording that player is online I guess
-				
+
 				//TODO: Not sure if this is needed... event processor will do it for you
 				/*ConnectedPlayer player = server.getPlayerByUdId(udid);
 				player.setPlayerId(userId);
@@ -184,7 +184,7 @@ public class UserCreateController extends EventController {
 					log.error("exception in UserCreateController processEvent",
 							e);
 				} /*finally {
-					locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
+					locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 					}*/
 			}
 		} catch (Exception e) {
@@ -286,7 +286,7 @@ public class UserCreateController extends EventController {
 																			} catch (Exception e) {
 																			log.error("exception in UserCreateController processEvent", e);
 																			}*//*finally {
-																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName()); 
+																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 																				}*/
 		} else {
 			resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
@@ -475,14 +475,14 @@ public class UserCreateController extends EventController {
 	}
 
 	private void writeSecretGifts(String userId, Date createTime) {
-		List<SecretGiftForUser> gifts = new ArrayList<SecretGiftForUser>();
+		List<SecretGiftForUserPojo> gifts = new ArrayList<SecretGiftForUserPojo>();
 
 		int[] rewardIds = ControllerConstants.SECRET_GIFT_FOR_USER__REWARD_IDS;
 		int[] waitTimeSeconds = ControllerConstants.SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS;
 
 		int len = rewardIds.length;
 		for (int index = 0; index < len; index++) {
-			SecretGiftForUser isgfu = new SecretGiftForUser();
+			SecretGiftForUserPojo isgfu = new SecretGiftForUserPojo();
 			isgfu.setUserId(userId);
 			isgfu.setRewardId(rewardIds[index]);
 
@@ -513,7 +513,7 @@ public class UserCreateController extends EventController {
 	//      getLocker().lockPlayer(referrer.getId(), this.getClass().getSimpleName());
 	//      try {
 	//        int previousSilver = referrer.getCash();
-	//        
+	//
 	//        int coinsGivenToReferrer = miscMethods.calculateCoinsGivenToReferrer(referrer);
 	//        if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
 	//          log.error("problem with rewarding the referrer " + referrer + " with this many coins: " + coinsGivenToReferrer);
@@ -529,13 +529,13 @@ public class UserCreateController extends EventController {
 	//              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
 	//          resEvent.setResponseProto(resProto);
 	//          responses.apnsResponseEvents().add((resEvent);
-	//          
+	//
 	//          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);
 	//        }
 	//      } catch (Exception e) {
 	//        log.error("exception in UserCreateController processEvent", e);
 	//      } finally {
-	//        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName()); 
+	//        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName());
 	//      }
 	//    }
 	//  }
@@ -581,11 +581,11 @@ public class UserCreateController extends EventController {
 		//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		//    String silver = miscMethods.cash;
 		//    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATE_REFERRED_A_USER;
-		//    
+		//
 		//    goldSilverChange.put(silver, coinChange);
 		//    previousGoldSilver.put(silver, previousSilver);
 		//    reasonsForChanges.put(silver, reasonForChange);
-		//    
+		//
 		//    miscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 		//        previousGoldSilver, reasonsForChanges);
 	}
