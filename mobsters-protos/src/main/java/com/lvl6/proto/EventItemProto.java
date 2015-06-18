@@ -8924,7 +8924,6 @@ public final class EventItemProto {
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
       "roto\0225\n\titemsUsed\030\002 \003(\0132\".com.lvl6.proto" +
       ".UserItemUsageProto\0222\n\013nuUserItems\030\003 \003(\013" +
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/EventItemProto.java
       "2\035.com.lvl6.proto.UserItemProto\022\021\n\tgemsS" +
       "pent\030\004 \001(\005\"\245\002\n!TradeItemForSpeedUpsRespo" +
       "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
@@ -8955,37 +8954,6 @@ public final class EventItemProto {
       "radeItemForResourcesStatus\":\n\033TradeItemF",
       "orResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
       "THER\020\002B\020B\016EventItemProto"
-=======
-      "2\035.com.lvl6.proto.UserItemProto\"\245\002\n!Trad" +
-      "eItemForSpeedUpsResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\\\n\006status\030\002 \001(\0162L.com.lvl6.proto.TradeIt" +
-      "emForSpeedUpsResponseProto.TradeItemForS" +
-      "peedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.l" +
-      "vl6.proto.UserItemUsageProto\"9\n\032TradeIte" +
-      "mForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_",
-      "OTHER\020\002\"l\n\036RemoveUserItemUsedRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001" +
-      "\n\037RemoveUserItemUsedResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Rem" +
-      "oveUserItemUsedResponseProto.RemoveUserI" +
-      "temUsedStatus\"7\n\030RemoveUserItemUsedStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\302\001\n!Trade" +
-      "ItemForResourcesRequestProto\022@\n\006sender\030\001",
-      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013n" +
-      "uUserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\"TradeIte" +
-      "mForResourcesResponseProto\022@\n\006sender\030\001 \001" +
-      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
-      "MaxResources\022^\n\006status\030\002 \001(\0162N.com.lvl6." +
-      "proto.TradeItemForResourcesResponseProto" +
-      ".TradeItemForResourcesStatus\":\n\033TradeIte" +
-      "mForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL",
-      "_OTHER\020\002B\020B\016EventItemProto"
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/EventItemProto.java
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

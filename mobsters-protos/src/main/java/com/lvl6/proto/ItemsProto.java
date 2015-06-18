@@ -873,18 +873,6 @@ public final class ItemsProto {
     int getAmount();
 
     /**
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
-     * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated boolean hasSecretGiftChance();
-    /**
-     * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated float getSecretGiftChance();
-
-    /**
-=======
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
      * <code>optional bool alwaysDisplayToUser = 8;</code>
      *
      * <pre>
@@ -1256,24 +1244,6 @@ public final class ItemsProto {
       return amount_;
     }
 
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
-    public static final int SECRETGIFTCHANCE_FIELD_NUMBER = 7;
-    private float secretGiftChance_;
-    /**
-     * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated public boolean hasSecretGiftChance() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated public float getSecretGiftChance() {
-      return secretGiftChance_;
-    }
-
-=======
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
     public static final int ALWAYSDISPLAYTOUSER_FIELD_NUMBER = 8;
     private boolean alwaysDisplayToUser_;
     /**
@@ -2064,41 +2034,6 @@ public final class ItemsProto {
         return this;
       }
 
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
-      private float secretGiftChance_ ;
-      /**
-       * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public boolean hasSecretGiftChance() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public float getSecretGiftChance() {
-        return secretGiftChance_;
-      }
-      /**
-       * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public Builder setSecretGiftChance(float value) {
-        bitField0_ |= 0x00000040;
-        secretGiftChance_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float secretGiftChance = 7 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public Builder clearSecretGiftChance() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        secretGiftChance_ = 0F;
-        onChanged();
-        return this;
-      }
-
-=======
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
       private boolean alwaysDisplayToUser_ ;
       /**
        * <code>optional bool alwaysDisplayToUser = 8;</code>
@@ -3436,7 +3371,6 @@ public final class ItemsProto {
      * <code>optional int32 gemPrice = 2;</code>
      */
     int getGemPrice();
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
 
     /**
      * <code>optional int32 structId = 3;</code>
@@ -3446,8 +3380,6 @@ public final class ItemsProto {
      * <code>optional int32 structId = 3;</code>
      */
     int getStructId();
-=======
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemGemPriceProto}
@@ -3515,14 +3447,11 @@ public final class ItemsProto {
               gemPrice_ = input.readInt32();
               break;
             }
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
             case 24: {
               bitField0_ |= 0x00000004;
               structId_ = input.readInt32();
               break;
             }
-=======
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4014,27 +3943,6 @@ public final class ItemsProto {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
       "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
       "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
-<<<<<<< HEAD:mobsters-protos/src/main/java/com/lvl6/proto/ItemsProto.java
-      "\005\"\310\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
-      "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
-      "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
-      "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\034\n\020secretGiftCh" +
-      "ance\030\007 \001(\002B\002\030\001\022\033\n\023alwaysDisplayToUser\030\010 " +
-      "\001(\010\0226\n\016gameActionType\030\t \001(\0162\036.com.lvl6.p" +
-      "roto.GameActionType\022\021\n\tshortName\030\n \001(\t\0224",
-      "\n\007quality\030\013 \001(\0162\027.com.lvl6.proto.Quality" +
-      ":\nNO_QUALITY\"\261\001\n\022UserItemUsageProto\022\021\n\tu" +
-      "sageUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006item" +
-      "Id\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDat" +
-      "aUuid\030\005 \001(\t\022;\n\nactionType\030\006 \001(\0162\036.com.lv" +
-      "l6.proto.GameActionType:\007NO_HELP\"G\n\021Item" +
-      "GemPriceProto\022\016\n\006itemId\030\001 \001(\005\022\020\n\010gemPric" +
-      "e\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005*\227\001\n\010ItemType\022\020" +
-      "\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_C" +
-      "ASH\020\003\022\025\n\021ITEM_GACHA_CREDIT\020\010\022\014\n\010SPEED_UP",
-      "\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006\022\024\n" +
-      "\020GACHA_MULTI_SPIN\020\007B\014B\nItemsProto"
-=======
       "\005\"\252\002\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
       "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
       "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
@@ -4047,13 +3955,13 @@ public final class ItemsProto {
       "(\t\022\016\n\006itemId\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022" +
       "\024\n\014userDataUuid\030\005 \001(\t\022;\n\nactionType\030\006 \001(" +
       "\0162\036.com.lvl6.proto.GameActionType:\007NO_HE" +
-      "LP\"5\n\021ItemGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022" +
-      "\020\n\010gemPrice\030\002 \001(\005*\227\001\n\010ItemType\022\020\n\014BOOSTE" +
-      "R_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\025\n" +
-      "\021ITEM_GACHA_CREDIT\020\010\022\014\n\010SPEED_UP\020\004\022\013\n\007BU" +
-      "ILDER\020\005\022\024\n\020REFRESH_MINI_JOB\020\006\022\024\n\020GACHA_M",
-      "ULTI_SPIN\020\007B\014B\nItemsProto"
->>>>>>> changing secret gifts to use rewards:src/main/java/com/lvl6/proto/ItemsProto.java
+      "LP\"G\n\021ItemGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022" +
+      "\020\n\010gemPrice\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005*\227\001\n\010" +
+      "ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002" +
+      "\022\r\n\tITEM_CASH\020\003\022\025\n\021ITEM_GACHA_CREDIT\020\010\022\014" +
+      "\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MIN",
+      "I_JOB\020\006\022\024\n\020GACHA_MULTI_SPIN\020\007B\014B\nItemsPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
