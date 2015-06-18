@@ -87,8 +87,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   @OnClose
   def close(session:Session, reason:CloseReason)= {
     logger.debug(s"Closing connection: $this reason: $reason")
-    removeRabbitListeners
     ClientConnections.removeConnection(this)
+    removeRabbitListeners
   }
   
   @OnMessage
@@ -319,7 +319,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     listener match{
       case Some(listener)=>{
     	  listener.listener.stop()
-        listener.listener.removeQueues(listener.queue)
+        //listener.listener.removeQueues(listener.queue)
     	  amqpAdmin.removeBinding(listener.binding)
     	  amqpAdmin.deleteQueue(listener.queue.getName)
     	  listener.listener.destroy()
