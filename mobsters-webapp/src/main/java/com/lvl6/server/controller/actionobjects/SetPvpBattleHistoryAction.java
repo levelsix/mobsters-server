@@ -185,10 +185,19 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 				attackedOthersHistoryList.add(history);
 			} else {
 				gotAttackedHistoryList.add(history);
-				aIdsToCashStolenFromStorage.put(attackerId, history.getCashStolenFromStorage());
-				aIdsToCashStolenFromGenerators.put(attackerId, history.getCashStolenFromGenerators());
-				aIdsToOilStolenFromStorage.put(attackerId, history.getOilStolenFromStorage());
-				aIdsToOilStolenFromGenerators.put(attackerId, history.getOilStolenFromGenerators());
+				if(history.getCashStolenFromStorage() != null) {
+					aIdsToCashStolenFromStorage.put(attackerId, history.getCashStolenFromStorage());
+				}
+				if(history.getCashStolenFromGenerators() != null) {
+					aIdsToCashStolenFromGenerators.put(attackerId, history.getCashStolenFromGenerators());
+				}
+				if(history.getOilStolenFromStorage() != null) {
+					aIdsToOilStolenFromStorage.put(attackerId, history.getOilStolenFromStorage());
+				}
+				if(history.getOilStolenFromGenerators() != null) {
+					aIdsToOilStolenFromGenerators.put(attackerId, history.getOilStolenFromGenerators());
+				}
+				
 			}
 		}
 	}
