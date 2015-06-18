@@ -1,7 +1,7 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,19 +26,25 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
 
@@ -51,12 +57,8 @@ public class RedeemSecretGiftController extends EventController {
 
 	}
 
-
 	@Autowired
-	protected Locker locker;
-
-	@Autowired
-	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
 
 	@Autowired
 	protected MiscMethods miscMethods;
@@ -68,10 +70,43 @@ public class RedeemSecretGiftController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+
+	@Autowired
+	protected Locker locker;
+
+	@Autowired
+	protected MonsterStuffUtils monsterStuffUtil;
+
+	@Autowired
+	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+
+	@Autowired
+	private RewardRetrieveUtils rewardRetrieveUtil;
+
+	@Autowired
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+
+	@Autowired
+	private CreateInfoProtoUtils createInfoProtoUtil;
 
 	@Autowired
 	protected SecretGiftUtils secretGiftUtils;
+
+	@Autowired
+	protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtil;
+
+	@Autowired
+	protected DeleteUtil deleteUtil;
+
+	@Autowired
+	protected InsertUtil insertUtil;
+
+	@Autowired
+	protected UpdateUtil updateUtil;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -92,7 +127,7 @@ public class RedeemSecretGiftController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
+		Date clientTime = new Date(reqProto.getClientTime());
 		List<String> idsRedeemed = reqProto.getUisgUuidList();
 
 		RedeemSecretGiftResponseProto.Builder resBuilder = RedeemSecretGiftResponseProto
@@ -127,12 +162,15 @@ public class RedeemSecretGiftController extends EventController {
 		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 				.getSimpleName());
 		try {
-			//
 			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(userId,
-					idsRedeemed, clientTime, itemSecretGiftForUserRetrieveUtil,
-					userRetrieveUtil, itemForUserRetrieveUtil, secretGiftUtils,
-					DeleteUtils.get(), UpdateUtils.get(), InsertUtils.get());
-
+					idsRedeemed, clientTime, secretGiftForUserRetrieveUtil,
+					userRetrieveUtil, itemForUserRetrieveUtil,
+					monsterStuffUtil, monsterLevelInfoRetrieveUtils,
+					giftRetrieveUtil,
+					giftRewardRetrieveUtil, rewardRetrieveUtil,
+					userClanRetrieveUtils, createInfoProtoUtils,
+					secretGiftUtils,
+					deleteUtil, updateUtil,insertUtil);
 			rsga.execute(resBuilder);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -142,7 +180,8 @@ public class RedeemSecretGiftController extends EventController {
 				log.info("setting nuGifts: {},\t protos: {}",
 						nuGifts, nuGiftsProtos);
 				resBuilder.addAllNuGifts(nuGiftsProtos);
-				resBuilder.setRewards(rsga.getUrp());
+
+				resBuilder.setReward(rsga.getUrp());
 			}
 
 			RedeemSecretGiftResponseProto resProto = resBuilder.build();
@@ -206,13 +245,13 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 
-	public ItemSecretGiftForUserRetrieveUtil getSecretGiftForUserPojoRetrieveUtil() {
-		return itemSecretGiftForUserRetrieveUtil;
+	public SecretGiftForUserRetrieveUtil getSecretGiftForUserPojoRetrieveUtil() {
+		return secretGiftForUserRetrieveUtil;
 	}
 
 	public void setSecretGiftForUserPojoRetrieveUtil(
-			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserPojoRetrieveUtil) {
-		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserPojoRetrieveUtil;
+			SecretGiftForUserRetrieveUtil secretGiftForUserPojoRetrieveUtil) {
+		this.secretGiftForUserRetrieveUtil = secretGiftForUserPojoRetrieveUtil;
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil() {

@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
 import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 //import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
 

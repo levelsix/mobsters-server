@@ -111,6 +111,7 @@ message UserTangoGiftProto {
 }
 
 //------------------------------------------------------------------------------------------
+
 message UserSecretGiftProto {
 	optional string uisgUuid = 1;
 	optional string userUuid = 2;

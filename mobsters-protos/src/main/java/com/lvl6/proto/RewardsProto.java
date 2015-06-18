@@ -6238,10 +6238,6 @@ public final class RewardsProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserSecretGiftProto}
-   *
-   * <pre>
-   *------------------------------------------------------------------------------------------
-   * </pre>
    */
   public static final class UserSecretGiftProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -6646,10 +6642,6 @@ public final class RewardsProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.UserSecretGiftProto}
-     *
-     * <pre>
-     *------------------------------------------------------------------------------------------
-     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements

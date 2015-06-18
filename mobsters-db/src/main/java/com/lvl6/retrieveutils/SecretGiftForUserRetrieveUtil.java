@@ -26,12 +26,12 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
 @Component
-public class ItemSecretGiftForUserRetrieveUtil {
+public class SecretGiftForUserRetrieveUtil {
 	private static Logger log = LoggerFactory
-			.getLogger(ItemSecretGiftForUserRetrieveUtil.class);
+			.getLogger(SecretGiftForUserRetrieveUtil.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_SECRET_GIFT_FOR_USER;
-	private static final UserItemSecretGiftForClientMapper rowMapper = new UserItemSecretGiftForClientMapper();
+	private static final UserSecretGiftForClientMapper rowMapper = new UserSecretGiftForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -48,24 +48,24 @@ public class ItemSecretGiftForUserRetrieveUtil {
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<String, SecretGiftForUserPojo> getSpecificOrAllSecretGiftForUserMap(
 			String userId, Collection<String> ids) {
-		Map<String, SecretGiftForUserPojo> idToUserItemSecretGifts = new HashMap<String, SecretGiftForUserPojo>();
+		Map<String, SecretGiftForUserPojo> idToUserSecretGifts = new HashMap<String, SecretGiftForUserPojo>();
 		Collection<SecretGiftForUserPojo> secretGifts = getSpecificOrAllSecretGiftForUser(
 				userId, ids);
 
 		for (SecretGiftForUserPojo afu : secretGifts) {
 			String id = afu.getId();
 
-			idToUserItemSecretGifts.put(id, afu);
+			idToUserSecretGifts.put(id, afu);
 		}
 
-		return idToUserItemSecretGifts;
+		return idToUserSecretGifts;
 	}
 
 	public Collection<SecretGiftForUserPojo> getSpecificOrAllSecretGiftForUser(
 			String userId, Collection<String> ids) {
 		List<SecretGiftForUserPojo> secretGifts = null;
 		try {
-			List<String> columnsToSelected = UserItemSecretGiftForClientMapper
+			List<String> columnsToSelected = UserSecretGiftForClientMapper
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
@@ -94,8 +94,8 @@ public class ItemSecretGiftForUserRetrieveUtil {
 							inConditions, inDelim, overallDelim, values,
 							preparedStatement);
 
-			log.info(String.format(
-					"getSpecificOrAllSecretGiftForUserPojo() query=%s", query));
+			log.info( "getSpecificOrAllSecretGiftForUser() query={}",
+					query);
 
 			secretGifts = this.jdbcTemplate.query(query, values.toArray(),
 					rowMapper);
@@ -131,7 +131,7 @@ public class ItemSecretGiftForUserRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserItemSecretGiftForClientMapper implements
+	private static final class UserSecretGiftForClientMapper implements
 			RowMapper<SecretGiftForUserPojo> {
 
 		private static List<String> columnsSelected;
@@ -148,9 +148,8 @@ public class ItemSecretGiftForUserRetrieveUtil {
 			isgfu.setSecsUntilCollection(rs
 					.getInt(DBConstants.SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION));
 
-			Timestamp ts = rs
-					.getTimestamp(DBConstants.SECRET_GIFT_FOR_USER__CREATE_TIME);
-			isgfu.setCreateTime(ts);
+			isgfu.setCreateTime(rs
+					.getTimestamp(DBConstants.SECRET_GIFT_FOR_USER__CREATE_TIME));
 
 			return isgfu;
 		}

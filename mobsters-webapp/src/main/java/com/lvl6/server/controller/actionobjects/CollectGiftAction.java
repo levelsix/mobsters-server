@@ -138,7 +138,7 @@ public class CollectGiftAction {
 	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
-			log.error(String.format("no user with id=%s", userId));
+			log.error("no user with id={}", userId);
 			return false;
 		}
 

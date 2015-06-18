@@ -2349,19 +2349,6 @@ public class CreateInfoProtoUtils {
 		return uiupb.build();
 	}
 
-	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
-			Collection<SecretGiftForUserPojo> secretGifts) {
-		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
-		if (null == secretGifts || secretGifts.isEmpty()) {
-			return gifs;
-		}
-
-		for (SecretGiftForUserPojo isgfu : secretGifts) {
-			gifs.add(createUserSecretGiftProto(isgfu));
-		}
-		return gifs;
-	}
-
 	public List<ItemGemPriceProto> createItemGemPriceProto(
 			Map<Integer, MiniJobRefreshItem> idToMjriMap)
 	{
@@ -3756,10 +3743,10 @@ public class CreateInfoProtoUtils {
 
 		if (GiftType.TANGO_GIFT.name().equalsIgnoreCase(g.getGiftType())) {
 			ugpb.setTangoGift(createUserTangoGiftProto(gftu));
-		}
+				}
 
 		return ugpb.build();
-	}
+			}
 
 	public UserTangoGiftProto createUserTangoGiftProto(GiftForTangoUserPojo gftu)
 	{
@@ -3813,10 +3800,22 @@ public class CreateInfoProtoUtils {
 		Reward r = rewardRetrieveUtils.getRewardById(secretGift.getRewardId());
 		uisgpb.setReward(createRewardProto(r));
 
-		Date createTime = secretGift.getCreateTime();
-		uisgpb.setCreateTime(createTime.getTime());
-
+		uisgpb.setCreateTime(secretGift.getCreateTime().getTime());
 		return uisgpb.build();
+	}
+
+
+	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
+			Collection<SecretGiftForUserPojo> secretGifts) {
+		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
+		if (null == secretGifts || secretGifts.isEmpty()) {
+			return gifs;
+		}
+
+		for (SecretGiftForUserPojo isgfu : secretGifts) {
+			gifs.add(createUserSecretGiftProto(isgfu));
+		}
+		return gifs;
 	}
 
 	/** Skill.proto ***************************************************/
@@ -5673,7 +5672,7 @@ public class CreateInfoProtoUtils {
 			b.setStrength(slb.getStrength());
 
 			slbpList.add(b.build());
-		}
+	}
 		return slbpList;
 	}
 

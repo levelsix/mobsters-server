@@ -97,7 +97,7 @@ message RedeemSecretGiftResponseProto {
 	repeated UserSecretGiftProto nuGifts = 2; //new gifts after redeeming cur one
 	
 	optional RedeemSecretGiftStatus status = 3;
-	optional UserRewardProto rewards = 4;
+	optional UserRewardProto reward = 4;
 	
 	enum RedeemSecretGiftStatus {
 		SUCCESS = 1;
