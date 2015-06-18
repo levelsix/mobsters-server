@@ -24,12 +24,6 @@ public class ClanMemberTeamDonationDao2 extends ClanMemberTeamDonationDao{
 		super(configuration);
 	}
 
-	
-	
-	public ClanMemberTeamDonationDao2(Configuration configuration) {
-		super(configuration);
-	}
-
 	public List<ClanMemberTeamDonationPojo> fetchForClanSearch(Date d) {
 		Timestamp oneDayAgoTimestamp = new Timestamp(d.getTime());
 		return using(configuration())

@@ -20,13 +20,7 @@ public class ClanHelpCountForUserDao2 extends ClanHelpCountForUserDao{
 	public ClanHelpCountForUserDao2() {
 		super();
 	}
-	
-	public ClanHelpCountForUserDao2(Configuration configuration) {
-		super(configuration);
-	}
 
-	
-	
 	public ClanHelpCountForUserDao2(Configuration configuration) {
 		super(configuration);
 		// TODO Auto-generated constructor stub

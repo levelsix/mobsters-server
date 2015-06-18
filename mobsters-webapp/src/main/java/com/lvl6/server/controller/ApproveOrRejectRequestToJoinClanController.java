@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
@@ -17,6 +18,7 @@ import com.lvl6.events.response.ApproveOrRejectRequestToJoinClanResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto;
