@@ -78,6 +78,13 @@ public class BootPlayerFromClanController extends EventController {
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
 	
+	@Autowired
+	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
+	
+	
 	public BootPlayerFromClanController() {
 		
 	}
@@ -146,7 +153,7 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanAction bpfca = new BootPlayerFromClanAction(userId, playerToBootId,
 					lockedClan, userRetrieveUtils, insertUtil, updateUtil, deleteUtil, timeUtils, 
 					clanRetrieveUtils, userClanRetrieveUtils, clanStuffUtils, 
-					clanChatPostRetrieveUtil, hzClanSearch);
+					clanChatPostRetrieveUtil, hzClanSearch, clanSearch, toggle);
 			bpfca.execute(resBuilder);
 			
 			if (BootPlayerFromClanStatus.SUCCESS.equals(resBuilder.getStatus())) {

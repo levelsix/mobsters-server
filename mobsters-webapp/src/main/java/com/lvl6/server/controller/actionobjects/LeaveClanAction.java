@@ -19,7 +19,8 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.utils.TimeUtils;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -40,7 +41,8 @@ public class LeaveClanAction {
 	private HazelcastClanSearchImpl hzClanSearch;
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 	private TimeUtils timeUtils;
-
+	private ClanSearch clanSearch;
+	private ServerToggleRetrieveUtils toggle;
 	
 	public LeaveClanAction(
 			String userId, String clanId,
@@ -50,7 +52,8 @@ public class LeaveClanAction {
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			HazelcastClanSearchImpl hzClanSearch,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
-			TimeUtils timeUtils) {
+			TimeUtils timeUtils, ClanSearch clanSearch,
+			ServerToggleRetrieveUtils toggle) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -63,6 +66,8 @@ public class LeaveClanAction {
 		this.hzClanSearch = hzClanSearch;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 		this.timeUtils = timeUtils;
+		this.clanSearch = clanSearch;
+		this.toggle = toggle;
 	}
 
 	private User user;
@@ -196,7 +201,7 @@ public class LeaveClanAction {
 
 		//need to account for this user leaving clan
 		ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
-				lastChatPost, timeUtils, UpdateUtils.get(), hzClanSearch);
+				lastChatPost, timeUtils, UpdateUtils.get(), hzClanSearch, clanSearch, toggle);
 		eca.execute();
 
 		return true;
@@ -219,6 +224,7 @@ public class LeaveClanAction {
 				log.error("problem with deleting clan with id {}", clan.getId());
 				return;
 			}
+			clanSearch.removeClanId(clanId);
 		}
 
 	}

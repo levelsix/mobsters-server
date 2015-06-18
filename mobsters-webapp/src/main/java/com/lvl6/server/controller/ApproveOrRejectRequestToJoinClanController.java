@@ -34,6 +34,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.ApproveOrRejectRequestToJoinAction;
 import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
@@ -102,6 +103,12 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	
 	@Autowired
 	protected PvpLeagueForUserDao pvpLeagueForUserDao;
+	
+	@Autowired
+	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 	
 
 	public ApproveOrRejectRequestToJoinClanController() {
@@ -272,7 +279,20 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	private void updateClanCache(String clanId, List<Integer> clanSizeList,
 			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
-		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+		if (serverToggleRetrieveUtils.getToggleValueForName(
+				ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+			int clanSize = clanSizeList.get(0) + 1;
+			Date lastChatTime = lastChatTimeContainer.get(0);
+
+			if (requestToJoinRequired) {
+				clanSize = ClanSearch.penalizedClanSize;
+				lastChatTime = ControllerConstants.INCEPTION_DATE;
+			}
+			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+		}
+		else {
+			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+		}
 	}
 
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,

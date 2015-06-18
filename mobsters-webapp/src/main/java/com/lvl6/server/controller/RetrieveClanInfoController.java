@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
@@ -46,6 +47,8 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
 
@@ -85,6 +88,12 @@ public class RetrieveClanInfoController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired
+	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils toggle;
 
 
 	public RetrieveClanInfoController() {
@@ -197,7 +206,13 @@ public class RetrieveClanInfoController extends EventController {
 			RetrieveClanInfoResponseProto.Builder resBuilder) {
 		if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
 			//retrieve 100 clans, we sort and display 50 of them
-			List<String> clanIds = hzClanSearch.getTopNClans(100);
+			List<String> clanIds = new ArrayList<String>();
+			if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+				clanIds = clanSearch.getTopNClans(ControllerConstants.CLAN__TOP_N_CLANS);
+			}
+			else {
+				clanIds = hzClanSearch.getTopNClans(100);
+			}
 
 			List<Clan> clanList = orderRecommendedClans(clanIds);
 

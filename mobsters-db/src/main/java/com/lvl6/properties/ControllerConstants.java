@@ -233,6 +233,7 @@ public class ControllerConstants {
 	public static final String SERVER_TOGGLE__TASK_DISPLAY_RARITY = "task_display_rarity";
 	public static final String SERVER_TOGGLE__TURN_OFF_TRANSLATIONS = "turn_off_translations";
 	public static final String SERVER_TOGGLE__USE_BYRON_TRANSLATIONS = "use_byron_translations";
+	public static final String SERVER_TOGGLE__OLD_CLAN_SEARCH = "old_clan_search";
 
 	//SKILL
 	public static final int SKILL_FIRST_TASK_ID = 12;
