@@ -88,39 +88,39 @@
        <constructor-arg index="0" ref="config" />
     </bean>
 
-    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao" id="CustomTranslationsDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
-    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftConfigDao" id="giftConfigDao">
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao" id="customTranslationsDao">
         <constructor-arg index="0" ref="config" />
     </bean>
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftForTangoUserDao" id="giftForTangoUserDao">
         <constructor-arg index="0" ref="config" />
     </bean>
-    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftRewardConfigDao" id="giftRewardConfigDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao" id="PvpLeagueForUserDao">
         <constructor-arg index="0" ref="config" />
     </bean>
-    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomTranslationsDao" id="CustomTranslationsDao">
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao" id="UserCurrencyHistoryDao">
-    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SecretGiftConfigDao" id="secretGiftConfigDao">
-        <constructor-arg index="0" ref="config" />
+       <constructor-arg index="0" ref="config" />
     </bean>
 <!--     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao" id="structureForUserDao"> -->
 <!--         <constructor-arg index="0" ref="config" /> -->
 <!--     </bean> -->
 
-    
     <!-- static data -->
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.CustomMenuConfigDao" id="customMenuConfigDao">
        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftConfigDao" id="giftConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.GiftRewardConfigDao" id="giftRewardConfigDao">
+        <constructor-arg index="0" ref="config" />
     </bean>
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniEventConfigDao" id="miniEventConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniEventTimetableConfigDao" id="miniEventTimetableConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SecretGiftConfigDao" id="secretGiftConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
     
