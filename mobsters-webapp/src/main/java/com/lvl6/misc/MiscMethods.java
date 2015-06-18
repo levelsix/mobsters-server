@@ -746,20 +746,24 @@ public class MiscMethods {
 			StartupConstants.Builder cb) {
 		//create list of protos for each resource type: oil, cash
 		for (String type : ControllerConstants.RESOURCE_CONVERSION__TYPE) {
-			int i = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS.length;
-
 			ResourceType resourceType = null;
 			try {
 				resourceType = ResourceType.valueOf(type);
 			} catch (Exception e) {
 				log.error(String.format("incorrect ResourceType:%s", type), e);
+				continue;
+			}
+
+			int i = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS.length;
+			if (ResourceType.GACHA_CREDITS.equals(resourceType)) {
+				i = ControllerConstants.RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS.length;
 			}
 
 			//list of protos
 			for (int index = 0; index < i; index++) {
 				int numGems = 0;
 				int resourceAmt = 0;
-				if (type.equalsIgnoreCase(ResourceType.GACHA_CREDITS.name())) {
+				if (ResourceType.GACHA_CREDITS.equals(resourceType)) {
 					resourceAmt = ControllerConstants.RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT[index];
 					numGems = ControllerConstants.RESOURCE_CONVERSION__GACHA_CREDITS_NUM_GEMS[index];
 				}

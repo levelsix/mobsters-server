@@ -15,6 +15,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.RewardsProto.GiftProto.GiftType;
@@ -221,7 +222,7 @@ public class AwardRewardAction {
 		}
 
 		//save to reward history
-		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()), 
+		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()),
 				rewards, awardReason, awardReasonDetail);
 		if(!success) {
 			log.error("error saving to user reward history for userId {}", userId);
@@ -236,13 +237,25 @@ public class AwardRewardAction {
 			Map<String, Map<Integer, Integer>> resourceTypeToRewardIdToAmt,
 			Reward r, int id, String type, int staticDataId, int amt)
 	{
-		if(GiftType.CLAN_GIFT.name().equals(type)) {
-			//If ever to give out multiplie clan gifts, the clan gifts should be aggregated
-			acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift",
-					giftRetrieveUtil, giftRewardRetrieveUtils,
-					rewardRetrieveUtil, userClanRetrieveUtils,
-					insertUtil, createInfoProtoUtils);
-			existsClanGift = true;
+		if(RewardType.GIFT.name().equals(type)) {
+			GiftConfigPojo gcp = giftRetrieveUtil.getGift(staticDataId);
+			if (null == gcp) {
+				log.error("invalid reward={}. No associated gift.", r);
+				return;
+			}
+
+			if (GiftType.CLAN_GIFT.name().equals(gcp.getGiftType())) {
+				//NOTE: Only awards one clan gift at the moment
+				//If ever to give out multiplie clan gifts, the clan gifts should be aggregated
+				acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift",
+						giftRetrieveUtil, giftRewardRetrieveUtils,
+						rewardRetrieveUtil, userClanRetrieveUtils,
+						insertUtil, createInfoProtoUtils);
+				existsClanGift = true;
+			} else {
+				log.warn("no implementation for awarding gift {}", gcp);
+				return;
+			}
 
 		} else if (RewardType.ITEM.name().equals(type)) {
 			aggregateItems(itemIdToQuantity, staticDataId, amt);

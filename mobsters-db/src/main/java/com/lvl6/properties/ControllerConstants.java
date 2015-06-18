@@ -165,7 +165,7 @@ public class ControllerConstants {
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
 			10000, 100000, 1000000, 2000000000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 5, 45, 400,
-			3600, 10800, 360000 };
+			3600, 10800 };//, 360000 };
 
 	// had to increase by 1 because of a bug on the client
 	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 501, 1001,
