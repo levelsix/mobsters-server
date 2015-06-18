@@ -164,11 +164,11 @@ public class ControllerConstants {
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = { 1, 1000,
 			10000, 100000, 1000000, 2000000000 };
-	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 2,
-		18, 160, 1440, 2880000 };
-	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
-			720, 1440000 };
-			10000, 100000, 1000000, 3000000, 100000000 };
+//	public static final int[] RESOURCE_CONVERSION__GACHA_CREDITS_AMOUNT = { 2, 2,
+//		18, 160, 1440, 2880000 };
+//	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 1, 9, 80,
+//			720, 1440000 };
+//			10000, 100000, 1000000, 3000000, 100000000 };
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = { 1, 5, 45, 400,
 			3600, 10800, 360000 };
 
@@ -208,7 +208,7 @@ public class ControllerConstants {
 	public static final int SALES_PACKAGE__HIGH_ROLLER = 1000000;
 	//SECRET GIFT
 	//dof = degrees of freedom
-	public static final double SECRET_GIFT_FOR_USER__DOF = 4D;
+	/*public static final double SECRET_GIFT_FOR_USER__DOF = 4D;
 	public static final ChiSquaredDistribution SECRET_GIFT_FOR_USER__RANDOM = new ChiSquaredDistribution(
 			SECRET_GIFT_FOR_USER__DOF);
 
@@ -220,7 +220,7 @@ public class ControllerConstants {
 	public static final int SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
 	public static final int SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 2100;
 	public static final int SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME
-			- SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
+			- SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;*/
 
 	//TOGGLES
 	//	public static final String SERVER_TOGGLE__BOOSTER_PACKS_GIVE_EXP = "booster_packs_give_exp";
@@ -240,7 +240,7 @@ public class ControllerConstants {
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = { 1, 300, 3600, 86400,
 			604800, 157852800 };
-	public static final int[] SPEED_UP__NUM_GEMS = { 1, 1, 12, 144, 840, 219240 };
+	//public static final int[] SPEED_UP__NUM_GEMS = { 1, 1, 12, 144, 840, 219240 };
 	public static final int[] SPEED_UP__NUM_GEMS = { 1, 2, 60, 720, 4200, 1096200 };
 
 	public static final int STRUCTURE__LAB_ID = 800;

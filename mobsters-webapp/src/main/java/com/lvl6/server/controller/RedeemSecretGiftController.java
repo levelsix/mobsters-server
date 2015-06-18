@@ -29,11 +29,12 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.Locker;
-import com.lvl6.server.controller.actionobjects.AwardRewardAction;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
@@ -88,9 +89,15 @@ public class RedeemSecretGiftController extends EventController {
 
 	@Autowired
 	private CreateInfoProtoUtils createInfoProtoUtil;
-	
+
 	@Autowired
 	protected SecretGiftUtils secretGiftUtils;
+
+	@Autowired
+	protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtil;
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
@@ -120,7 +127,7 @@ public class RedeemSecretGiftController extends EventController {
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
+		Date clientTime = new Date(reqProto.getClientTime());
 		List<String> idsRedeemed = reqProto.getUisgUuidList();
 
 		RedeemSecretGiftResponseProto.Builder resBuilder = RedeemSecretGiftResponseProto
@@ -159,7 +166,8 @@ public class RedeemSecretGiftController extends EventController {
 					idsRedeemed, clientTime, secretGiftForUserRetrieveUtil,
 					userRetrieveUtil, itemForUserRetrieveUtil,
 					monsterStuffUtil, monsterLevelInfoRetrieveUtils,
-					clanGiftRewardsRetrieveUtils, rewardRetrieveUtil,
+					giftRetrieveUtil,
+					giftRewardRetrieveUtil, rewardRetrieveUtil,
 					userClanRetrieveUtils, createInfoProtoUtils,
 					secretGiftUtils,
 					deleteUtil, updateUtil,insertUtil);
@@ -237,13 +245,13 @@ public class RedeemSecretGiftController extends EventController {
 	}
 
 
-	public ItemSecretGiftForUserRetrieveUtil getSecretGiftForUserPojoRetrieveUtil() {
-		return itemSecretGiftForUserRetrieveUtil;
+	public SecretGiftForUserRetrieveUtil getSecretGiftForUserPojoRetrieveUtil() {
+		return secretGiftForUserRetrieveUtil;
 	}
 
 	public void setSecretGiftForUserPojoRetrieveUtil(
-			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserPojoRetrieveUtil) {
-		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserPojoRetrieveUtil;
+			SecretGiftForUserRetrieveUtil secretGiftForUserPojoRetrieveUtil) {
+		this.secretGiftForUserRetrieveUtil = secretGiftForUserPojoRetrieveUtil;
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil() {

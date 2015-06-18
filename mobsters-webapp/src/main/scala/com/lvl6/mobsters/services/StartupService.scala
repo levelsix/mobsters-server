@@ -88,7 +88,6 @@ import com.lvl6.retrieveutils.GiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
-import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil
@@ -106,6 +105,7 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils
+import com.lvl6.retrieveutils.SecretGiftForUserRetrieveUtil
 import com.lvl6.retrieveutils.TaskForUserClientStateRetrieveUtil
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2
@@ -219,7 +219,7 @@ class StartupService extends LazyLogging {
   @Autowired var questForUserRetrieveUtils: QuestForUserRetrieveUtils2 = null
   @Autowired var questJobForUserRetrieveUtil: QuestJobForUserRetrieveUtil = null
   @Autowired var researchForUserRetrieveUtil: ResearchForUserRetrieveUtils = null
-  @Autowired var secretGiftForUserRetrieveUtil: ItemSecretGiftForUserRetrieveUtil = null
+  @Autowired var secretGiftForUserRetrieveUtil: SecretGiftForUserRetrieveUtil = null
   @Autowired var taskForUserCompletedRetrieveUtils: TaskForUserCompletedRetrieveUtils = null
   @Autowired var taskForUserClientStateRetrieveUtil: TaskForUserClientStateRetrieveUtil = null
   @Autowired var taskForUserOngoingRetrieveUtils: TaskForUserOngoingRetrieveUtils2 = null

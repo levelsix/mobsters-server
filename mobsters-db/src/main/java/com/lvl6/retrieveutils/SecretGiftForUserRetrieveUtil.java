@@ -21,7 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.SecretGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
@@ -46,13 +46,13 @@ public class SecretGiftForUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<String, SecretGiftForUser> getSpecificOrAllSecretGiftForUserMap(
+	public Map<String, SecretGiftForUserPojo> getSpecificOrAllSecretGiftForUserMap(
 			String userId, Collection<String> ids) {
-		Map<String, SecretGiftForUser> idToUserSecretGifts = new HashMap<String, SecretGiftForUser>();
-		Collection<SecretGiftForUser> secretGifts = getSpecificOrAllSecretGiftForUser(
+		Map<String, SecretGiftForUserPojo> idToUserSecretGifts = new HashMap<String, SecretGiftForUserPojo>();
+		Collection<SecretGiftForUserPojo> secretGifts = getSpecificOrAllSecretGiftForUser(
 				userId, ids);
 
-		for (SecretGiftForUser afu : secretGifts) {
+		for (SecretGiftForUserPojo afu : secretGifts) {
 			String id = afu.getId();
 
 			idToUserSecretGifts.put(id, afu);
@@ -61,9 +61,9 @@ public class SecretGiftForUserRetrieveUtil {
 		return idToUserSecretGifts;
 	}
 
-	public Collection<SecretGiftForUser> getSpecificOrAllSecretGiftForUser(
+	public Collection<SecretGiftForUserPojo> getSpecificOrAllSecretGiftForUser(
 			String userId, Collection<String> ids) {
-		List<SecretGiftForUser> secretGifts = null;
+		List<SecretGiftForUserPojo> secretGifts = null;
 		try {
 			List<String> columnsToSelected = UserSecretGiftForClientMapper
 					.getColumnsSelected();
@@ -103,9 +103,9 @@ public class SecretGiftForUserRetrieveUtil {
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"could not retrieve SecretGiftForUser for userId=%s, ids=%s",
+							"could not retrieve SecretGiftForUserPojo for userId=%s, ids=%s",
 							userId, ids), e);
-			secretGifts = new ArrayList<SecretGiftForUser>();
+			secretGifts = new ArrayList<SecretGiftForUserPojo>();
 		}
 
 		return secretGifts;
@@ -132,25 +132,24 @@ public class SecretGiftForUserRetrieveUtil {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserSecretGiftForClientMapper implements
-			RowMapper<SecretGiftForUser> {
+			RowMapper<SecretGiftForUserPojo> {
 
 		private static List<String> columnsSelected;
 
 		@Override
-		public SecretGiftForUser mapRow(ResultSet rs, int rowNum)
+		public SecretGiftForUserPojo mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			SecretGiftForUser isgfu = new SecretGiftForUser();
+			SecretGiftForUserPojo isgfu = new SecretGiftForUserPojo();
 			isgfu.setId(rs.getString(DBConstants.SECRET_GIFT_FOR_USER__ID));
 			isgfu.setUserId(rs
 					.getString(DBConstants.SECRET_GIFT_FOR_USER__USER_ID));
 			isgfu.setRewardId(rs
 					.getInt(DBConstants.SECRET_GIFT_FOR_USER__REWARD_ID));
-			isgfu.setSecsTillCollection(rs
+			isgfu.setSecsUntilCollection(rs
 					.getInt(DBConstants.SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION));
 
-			Timestamp ts = rs
-					.getTimestamp(DBConstants.SECRET_GIFT_FOR_USER__CREATE_TIME);
-			isgfu.setCreateTime(new Date(ts.getTime()));
+			isgfu.setCreateTime(rs
+					.getTimestamp(DBConstants.SECRET_GIFT_FOR_USER__CREATE_TIME));
 
 			return isgfu;
 		}

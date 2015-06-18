@@ -2349,19 +2349,6 @@ public class CreateInfoProtoUtils {
 		return uiupb.build();
 	}
 
-	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
-			Collection<SecretGiftForUserPojo> secretGifts) {
-		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
-		if (null == secretGifts || secretGifts.isEmpty()) {
-			return gifs;
-		}
-
-		for (SecretGiftForUserPojo isgfu : secretGifts) {
-			gifs.add(createUserSecretGiftProto(isgfu));
-		}
-		return gifs;
-	}
-
 	public List<ItemGemPriceProto> createItemGemPriceProto(
 			Map<Integer, MiniJobRefreshItem> idToMjriMap)
 	{
@@ -3813,42 +3800,22 @@ public class CreateInfoProtoUtils {
 		Reward r = rewardRetrieveUtils.getRewardById(secretGift.getRewardId());
 		uisgpb.setReward(createRewardProto(r));
 
-
-	public TangoGiftProto createTangoGiftProto(TangoGift tg) {
-		TangoGiftProto.Builder tgpb = TangoGiftProto.newBuilder();
-		tgpb.setTangoGiftId(tg.getId());
-		tgpb.setName(tg.getName());
-		tgpb.setHoursUntilExpiration(tg.getHoursUntilExpiration());
-		tgpb.setImageName(tg.getImageName());
-		return tgpb.build();
+		uisgpb.setCreateTime(secretGift.getCreateTime().getTime());
+		return uisgpb.build();
 	}
 
+
 	public Collection<UserSecretGiftProto> createUserSecretGiftProto(
-			Collection<SecretGiftForUser> secretGifts) {
+			Collection<SecretGiftForUserPojo> secretGifts) {
 		Collection<UserSecretGiftProto> gifs = new ArrayList<UserSecretGiftProto>();
 		if (null == secretGifts || secretGifts.isEmpty()) {
 			return gifs;
 		}
 
-		for (SecretGiftForUser isgfu : secretGifts) {
+		for (SecretGiftForUserPojo isgfu : secretGifts) {
 			gifs.add(createUserSecretGiftProto(isgfu));
 		}
 		return gifs;
-	}
-
-	public UserSecretGiftProto createUserSecretGiftProto(
-			SecretGiftForUser secretGift) {
-		UserSecretGiftProto.Builder uisgpb = UserSecretGiftProto
-				.newBuilder();
-		uisgpb.setUisgUuid(secretGift.getId());
-		uisgpb.setUserUuid(secretGift.getUserId());
-		uisgpb.setSecsTillCollection(secretGift.getSecsTillCollection());
-		uisgpb.setRewardId(secretGift.getRewardId());
-
-		Date createTime = secretGift.getCreateTime();
-		uisgpb.setCreateTime(createTime.getTime());
-
-		return uisgpb.build();
 	}
 
 	/** Skill.proto ***************************************************/

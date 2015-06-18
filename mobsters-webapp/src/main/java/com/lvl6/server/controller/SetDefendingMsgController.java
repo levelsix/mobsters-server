@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetDefendingMsgRequestEvent;
 import com.lvl6.events.response.SetDefendingMsgResponseEvent;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgRequestProto;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.SetDefendingMsgStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetDefendingMsgAction;
@@ -29,8 +29,11 @@ public class SetDefendingMsgController extends EventController {
 			.getLogger(SetDefendingMsgController.class);
 
 	public SetDefendingMsgController() {
-		
+
 	}
+
+	@Autowired
+	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected Locker locker;
