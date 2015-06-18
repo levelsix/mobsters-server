@@ -2,57 +2,72 @@ package com.lvl6.server.controller.actionobjects;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.Reward;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.Builder;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
+import com.lvl6.proto.RewardsProto.UserGiftProto;
+import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class RedeemSecretGiftAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemSecretGiftAction.class);
 
 	private String userId;
-	private List<String> idsRedeemed;
+	private List<String> rewardIdsRedeemed;
 	private Timestamp clientTime;
-	private ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+	private ItemSecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 	private SecretGiftUtils secretGiftUtils;
 	private DeleteUtil deleteUtil;
 	private UpdateUtil updateUtil;
 	private InsertUtil insertUtil;
+	private MonsterStuffUtils monsterStuffUtils;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public RedeemSecretGiftAction(
 			String userId,
 			List<String> itemIdsRedeemed,
 			Timestamp clientTime,
-			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil,
+			ItemSecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil,
 			UserRetrieveUtils2 userRetrieveUtil,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 			SecretGiftUtils secretGiftUtils,
 			DeleteUtil deleteUtil, UpdateUtil updateUtil, InsertUtil insertUtil) {
 		super();
 		this.userId = userId;
-		this.idsRedeemed = itemIdsRedeemed;
+		this.rewardIdsRedeemed = itemIdsRedeemed;
 		this.clientTime = clientTime;
-		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
+		this.secretGiftForUserRetrieveUtil = secretGiftForUserRetrieveUtil;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.secretGiftUtils = secretGiftUtils;
@@ -63,24 +78,25 @@ public class RedeemSecretGiftAction {
 
 	//	//encapsulates the return value from this Action Object
 	//	static class RedeemSecretGiftResource {
-	//		
-	//		
+	//
+	//
 	//		public RedeemSecretGiftResource() {
-	//			
+	//
 	//		}
 	//	}
 	//
 	//	public RedeemSecretGiftResource execute() {
-	//		
+	//
 	//	}
 
 	//derived state
 	private User user;
-	private Map<String, ItemSecretGiftForUser> idToSecretGift;
+	private Map<String, SecretGiftForUserPojo> idToSecretGift;
 
-	private Map<Integer, Integer> itemIdToNuQuantity;
-	private Map<Integer, ItemForUser> itemIdToUserItem;
-	private List<ItemSecretGiftForUser> gifts;
+	private List<Reward> listOfRewards;
+	private AwardRewardAction ara;
+	private UserRewardProto urp;
+	private List<SecretGiftForUserPojo> gifts;
 
 	//	private Map<String, Integer> currencyDeltas;
 	//	private Map<String, Integer> prevCurrencies;
@@ -89,7 +105,7 @@ public class RedeemSecretGiftAction {
 	//	private Map<String, String> details;
 
 	//select items at random to gift to the user
-	
+
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
@@ -118,8 +134,8 @@ public class RedeemSecretGiftAction {
 
 	private boolean verifySyntax(Builder resBuilder) {
 
-		if (null == idsRedeemed || idsRedeemed.isEmpty()) {
-			log.error(String.format("invalid itemIdsRedeemed=%s.", idsRedeemed));
+		if (null == rewardIdsRedeemed || rewardIdsRedeemed.isEmpty()) {
+			log.error("invalid itemIdsRedeemed={}.", rewardIdsRedeemed);
 			return false;
 		}
 
@@ -128,20 +144,19 @@ public class RedeemSecretGiftAction {
 
 	private boolean verifySemantics(Builder resBuilder) {
 		//get the secret gifts to redeem, check to see if they exist
-		idToSecretGift = itemSecretGiftForUserRetrieveUtil
-				.getSpecificOrAllItemSecretGiftForUserMap(userId, idsRedeemed);
+		idToSecretGift = secretGiftForUserRetrieveUtil
+				.getSpecificOrAllSecretGiftForUserMap(userId, rewardIdsRedeemed);
 
 		if (null == idToSecretGift
-				|| idToSecretGift.size() != idsRedeemed.size()) {
-			log.info(String
-					.format("inconsistent itemSecretGiftForUser in db: %s and what client asked: %s",
-							idToSecretGift, idsRedeemed));
+				|| idToSecretGift.size() != rewardIdsRedeemed.size()) {
+			log.info("inconsistent itemSecretGiftForUserPojo in db: {} and what client asked: {}",
+					idToSecretGift, rewardIdsRedeemed);
 			return false;
 		}
 
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
-			log.error(String.format("no user with id=%s", userId));
+			log.error("no user with id={}", userId);
 			return false;
 		}
 
@@ -150,7 +165,7 @@ public class RedeemSecretGiftAction {
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		//		prevCurrencies = new HashMap<String, Integer>();
-		//		
+		//
 		//		if (0 != gemsGained) {
 		//			prevCurrencies.put(MiscMethods.gems, user.getGems());
 		//		}
@@ -160,44 +175,58 @@ public class RedeemSecretGiftAction {
 		//		if (0 != oilGained) {
 		//			prevCurrencies.put(MiscMethods.oil, user.getOil());
 		//		}
-		//		
+		//
 
 		//delete the SecretGifts
-		deleteUtil.deleteItemSecretGifts(userId, idsRedeemed);
+		deleteUtil.deleteSecretGifts(userId, rewardIdsRedeemed);
 
 		//update the user saying he got the gifts
 		user.updateLastSecretGiftCollectTime(clientTime);
 
-		//award the SecretGifts to the user (aggregate by itemId)
-		aggregateGifts();
-		//determine the new absolute amount of items for this user
-		calcNuUserItems();
-		//update db
-		List<ItemForUser> ifuList = new ArrayList<ItemForUser>();
-		ifuList.addAll(itemIdToUserItem.values());
-		int numUpdated = updateUtil.updateItemForUser(ifuList);
-		log.info(String.format(
-				"itemSecretGiftForUser numUpdated: %s, itemIdToUserItem=%s",
-				numUpdated, itemIdToUserItem));
-
 		//create new SecretGifts
 		gifts = secretGiftUtils.calculateGiftsForUser(userId,
-				ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
+				ControllerConstants.SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
 				clientTime.getTime());
 
 		List<String> ids = null;
 		if (null != gifts && !gifts.isEmpty()) {
 			//save new SecretGifts
-			ids = insertUtil.insertIntoItemSecretGiftForUserGetId(gifts);
+			ids = insertUtil.insertIntoSecretGiftForUserGetId(gifts);
 		}
 
 		if (null != ids && ids.size() == gifts.size()) {
 			setGiftIds(ids);
 		} else {
-			log.error(String
-					.format("Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
-							gifts, ids));
+			log.error("Error calculating the new SecretGifts. nuGifts={}, ids={}",
+					gifts, ids);
 		}
+
+		//award the SecretGifts to the user (aggregate by rewardId)
+		aggregateGifts();
+		ara = new AwardRewardAction(userId, user, user.getCash(), user.getOil(),
+				clientTime,
+				ControllerConstants.REWARD_REASON__SECRET_GIFT,
+				listOfRewards, userRetrieveUtil, itemForUserRetrieveUtil,
+				insertUtil, updateUtil,
+				monsterStuffUtils, monsterLevelInfoRetrieveUtils,
+				giftRetrieveUtil,
+				giftRewardRetrieveUtils, rewardRetrieveUtils,
+				userClanRetrieveUtils, createInfoProtoUtils, "");
+		boolean awardedRewards = ara.execute();
+		if (awardedRewards) {
+			List<UserGiftProto> gifts = null;
+			if (null != ara.getClanGift()) {
+				gifts = ara.getClanGift().getUserGiftsList();
+			}
+
+			urp = createInfoProtoUtils.createUserRewardProto(ara.getNuOrUpdatedItems(),
+					ara.getNuOrUpdatedMonsters(), ara.getGemsGained(), ara.getCashGained(),
+					ara.getOilGained(), ara.getGachaCreditsGained(), gifts);
+		} else {
+			log.error("unable to award rewards! {}", listOfRewards);
+			return false;
+		}
+
 
 		//		prepCurrencyHistory();
 
@@ -205,44 +234,19 @@ public class RedeemSecretGiftAction {
 	}
 
 	private void aggregateGifts() {
-		itemIdToNuQuantity = new HashMap<Integer, Integer>();
+		listOfRewards = new ArrayList<Reward>();
 
-		for (ItemSecretGiftForUser gif : idToSecretGift.values()) {
-			int itemId = gif.getItemId();
-			if (!itemIdToNuQuantity.containsKey(itemId)) {
-				itemIdToNuQuantity.put(itemId, 0);
-			}
-
-			int nuQuantity = itemIdToNuQuantity.get(itemId) + 1;
-			itemIdToNuQuantity.put(itemId, nuQuantity);
+		for (SecretGiftForUserPojo gif : idToSecretGift.values()) {
+			int rewardId = gif.getRewardId();
+			Reward r = rewardRetrieveUtils.getRewardById(rewardId);
+			listOfRewards.add(r);
 		}
-	}
-
-	private void calcNuUserItems() {
-		Collection<Integer> itemIds = itemIdToNuQuantity.keySet();
-
-		itemIdToUserItem = itemForUserRetrieveUtil
-				.getSpecificOrAllItemForUserMap(userId, itemIds);
-
-		for (Integer itemId : itemIds) {
-			if (!itemIdToUserItem.containsKey(itemId)) {
-				ItemForUser nuItemForUser = new ItemForUser(userId, itemId, 0);
-				itemIdToUserItem.put(itemId, nuItemForUser);
-			}
-
-			//combine quantity user has currently with amount he just got
-			ItemForUser ifu = itemIdToUserItem.get(itemId);
-			int nuQuantity = ifu.getQuantity() + itemIdToNuQuantity.get(itemId);
-
-			ifu.setQuantity(nuQuantity);
-		}
-
 	}
 
 	private void setGiftIds(List<String> ids) {
 		for (int index = 0; index < ids.size(); index++) {
 			String id = ids.get(index);
-			ItemSecretGiftForUser isgfu = gifts.get(index);
+			SecretGiftForUserPojo isgfu = gifts.get(index);
 
 			isgfu.setId(id);
 		}
@@ -253,7 +257,7 @@ public class RedeemSecretGiftAction {
 	//		String gems = MiscMethods.gems;
 	//		String cash = MiscMethods.cash;
 	//		String oil = MiscMethods.oil;
-	//		
+	//
 	//		currencyDeltas = new HashMap<String, Integer>();
 	//		curCurrencies = new HashMap<String, Integer>();
 	//		reasonsForChanges = new HashMap<String, String>();
@@ -275,11 +279,11 @@ public class RedeemSecretGiftAction {
 	//			reasonsForChanges.put(oil,
 	//				ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES);
 	//		}
-	//		
+	//
 	//		details = new HashMap<String, String>();
 	//		for (Integer key : itemIdToResourceToQuantities.keySet()) {
-	//			String value = itemIdToResourceToQuantities.get(key).toString(); 
-	//			
+	//			String value = itemIdToResourceToQuantities.get(key).toString();
+	//
 	//			details.put(key.toString(), value);
 	//		}
 	//	}
@@ -288,14 +292,22 @@ public class RedeemSecretGiftAction {
 		return user;
 	}
 
-	public List<ItemSecretGiftForUser> getGifts() {
+	public UserRewardProto getUrp() {
+		return urp;
+	}
+
+	public AwardRewardAction getAra() {
+		return ara;
+	}
+
+	public List<SecretGiftForUserPojo> getGifts() {
 		return gifts;
 	}
 
 	//	public Map<String, Integer> getCurrencyDeltas() {
 	//		return currencyDeltas;
 	//	}
-	//	
+	//
 	//	public Map<String, Integer> getPreviousCurrencies() {
 	//		return prevCurrencies;
 	//	}
@@ -303,11 +315,11 @@ public class RedeemSecretGiftAction {
 	//	public Map<String, Integer> getCurrentCurrencies() {
 	//		return curCurrencies;
 	//	}
-	//	
+	//
 	//	public Map<String, String> getReasons() {
 	//		return reasonsForChanges;
 	//	}
-	//	
+	//
 	//	public Map<String, String> getDetails() {
 	//		return details;
 	//	}

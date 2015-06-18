@@ -70,27 +70,15 @@ public interface IGiftForUser extends Serializable {
 	public String getReceiverUserId();
 
 	/**
-	 * Setter for <code>mobsters.gift_for_user.gift_type</code>. at the moment: GENERIC_GIFT, CLAN_GIFT, TANGO_GIFT
+	 * Setter for <code>mobsters.gift_for_user.gift_id</code>.
 	 */
-	public IGiftForUser setGiftType(String value);
+	public IGiftForUser setGiftId(Integer value);
 
 	/**
-	 * Getter for <code>mobsters.gift_for_user.gift_type</code>. at the moment: GENERIC_GIFT, CLAN_GIFT, TANGO_GIFT
+	 * Getter for <code>mobsters.gift_for_user.gift_id</code>.
 	 */
-	@Column(name = "gift_type", length = 45)
-	@Size(max = 45)
-	public String getGiftType();
-
-	/**
-	 * Setter for <code>mobsters.gift_for_user.static_data_id</code>. at the moment can reference clan_gift_config and tango_gift_config
-	 */
-	public IGiftForUser setStaticDataId(Integer value);
-
-	/**
-	 * Getter for <code>mobsters.gift_for_user.static_data_id</code>. at the moment can reference clan_gift_config and tango_gift_config
-	 */
-	@Column(name = "static_data_id", precision = 10)
-	public Integer getStaticDataId();
+	@Column(name = "gift_id", precision = 10)
+	public Integer getGiftId();
 
 	/**
 	 * Setter for <code>mobsters.gift_for_user.time_of_entry</code>.

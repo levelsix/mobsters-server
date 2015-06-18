@@ -21,8 +21,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class InAppPurchaseAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(InAppPurchaseAction.class);
 
 	private String userId;
 	private User user;
@@ -40,7 +41,6 @@ public class InAppPurchaseAction {
 
 	public InAppPurchaseAction() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public InAppPurchaseAction(String userId, User user,

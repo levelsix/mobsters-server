@@ -12,23 +12,27 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemSecretGiftRequestEvent;
+import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.RedeemSecretGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto;
-import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
-import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
+import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftRequestProto;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto;
+import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.utils.SecretGiftUtils;
+import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -40,32 +44,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class RedeemSecretGiftController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(RedeemSecretGiftController.class);
 
 	public RedeemSecretGiftController() {
-		
+
 	}
-	
-	
+
+
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected SecretGiftUtils secretGiftUtils;
 
@@ -84,7 +88,7 @@ public class RedeemSecretGiftController extends EventController {
 		RedeemSecretGiftRequestProto reqProto = ((RedeemSecretGiftRequestEvent) event)
 				.getRedeemSecretGiftRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -96,10 +100,9 @@ public class RedeemSecretGiftController extends EventController {
 		resBuilder.setMup(senderProto);
 		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
 
-		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			userUuid = UUID.fromString(userId);
+			UUID.fromString(userId);
 			StringUtils.convertToUUID(idsRedeemed);
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -133,12 +136,13 @@ public class RedeemSecretGiftController extends EventController {
 			rsga.execute(resBuilder);
 
 			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				Collection<ItemSecretGiftForUser> nuGifts = rsga.getGifts();
-				Collection<UserItemSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
-						.createUserItemSecretGiftProto(nuGifts);
-				log.info(String.format("setting nuGifts: %s,\t protos: %s",
-						nuGifts, nuGiftsProtos));
+				Collection<SecretGiftForUserPojo> nuGifts = rsga.getGifts();
+				Collection<UserSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
+						.createUserSecretGiftProto(nuGifts);
+				log.info("setting nuGifts: {},\t protos: {}",
+						nuGifts, nuGiftsProtos);
 				resBuilder.addAllNuGifts(nuGiftsProtos);
+				resBuilder.setRewards(rsga.getUrp());
 			}
 
 			RedeemSecretGiftResponseProto resProto = resBuilder.build();
@@ -157,6 +161,8 @@ public class RedeemSecretGiftController extends EventController {
 								u, null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
+
+				sendClanGiftIfExists(responses, userId, rsga);
 			}
 
 		} catch (Exception e) {
@@ -180,13 +186,33 @@ public class RedeemSecretGiftController extends EventController {
 		}
 	}
 
-	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil() {
+	private void sendClanGiftIfExists(
+			ToClientEvents responses,
+			String userId,
+			RedeemSecretGiftAction rsga) {
+		try {
+			AwardRewardAction ara = rsga.getAra();
+			if (null != ara && ara.existsClanGift()) {
+				ReceivedGiftResponseProto rgrp = ara.getClanGift();
+				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
+				rgre.setResponseProto(rgrp);
+				String clanId = rsga.getUser().getClanId();
+
+				responses.clanResponseEvents().add(new ClanResponseEvent(rgre, clanId, false));
+			}
+		} catch (Exception e) {
+			log.error("failed to send ClanGift notification", e);
+		}
+	}
+
+
+	public ItemSecretGiftForUserRetrieveUtil getSecretGiftForUserPojoRetrieveUtil() {
 		return itemSecretGiftForUserRetrieveUtil;
 	}
 
-	public void setItemSecretGiftForUserRetrieveUtil(
-			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil) {
-		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
+	public void setSecretGiftForUserPojoRetrieveUtil(
+			ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserPojoRetrieveUtil) {
+		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserPojoRetrieveUtil;
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil() {

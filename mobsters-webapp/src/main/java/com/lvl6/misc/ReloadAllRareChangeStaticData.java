@@ -17,8 +17,6 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
@@ -28,6 +26,8 @@ import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CustomTranslationRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.FileDownloadRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
@@ -76,8 +76,6 @@ import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTeamCenterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TangoGiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -121,12 +119,6 @@ public class ReloadAllRareChangeStaticData {
 	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
 
 	@Autowired
-	protected ClanGiftRetrieveUtils clanGiftRetrieveUtils;
-
-	@Autowired
-	protected ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
-
-	@Autowired
 	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
 
 	@Autowired
@@ -152,6 +144,12 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected FileDownloadRetrieveUtils fileDownloadRetrieveUtils;
+
+	@Autowired
+	protected GiftRetrieveUtils giftRetrieveUtil;
+
+	@Autowired
+	protected GiftRewardRetrieveUtils giftRewardRetrieveUtil;
 
 	@Autowired
 	protected GoldSaleRetrieveUtils goldSaleRetrieveUtils;
@@ -298,12 +296,6 @@ public class ReloadAllRareChangeStaticData {
 	protected StructureTownHallRetrieveUtils structureTownHallRetrieveUtils;
 
 	@Autowired
-	protected TangoGiftRetrieveUtils tangoGiftRetrieveUtil;
-
-	@Autowired
-	protected TangoGiftRewardRetrieveUtils tangoGiftRewardRetrieveUtil;
-
-	@Autowired
 	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
 
 	@Autowired
@@ -338,8 +330,6 @@ public class ReloadAllRareChangeStaticData {
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
 		clanEventPersistentRetrieveUtils.reload();
-		clanGiftRetrieveUtils.reload();
-		clanGiftRewardsRetrieveUtils.reload();
 		clanIconRetrieveUtils.reload();
 		clanRaidRetrieveUtils.reload();
 		clanRaidStageMonsterRetrieveUtils.reload();
@@ -350,6 +340,8 @@ public class ReloadAllRareChangeStaticData {
 		eventPersistentRetrieveUtils.reload();
 		//		ExpansionCostRetrieveUtils.reload();
 		fileDownloadRetrieveUtils.reload();
+		giftRetrieveUtil.reload();
+		giftRewardRetrieveUtil.reload();
 		goldSaleRetrieveUtils.reload();
 		itemRetrieveUtils.reload();
 		//		LockBoxEventRetrieveUtils.reload();
@@ -399,8 +391,6 @@ public class ReloadAllRareChangeStaticData {
 		structureRetrieveUtils.reload();
 		structureTeamCenterRetrieveUtils.reload();
 		structureTownHallRetrieveUtils.reload();
-		tangoGiftRetrieveUtil.reload();
-		tangoGiftRewardRetrieveUtil.reload();
 		taskMapElementRetrieveUtils.reload();
 		taskRetrieveUtils.reload();
 		taskStageMonsterRetrieveUtils.reload();

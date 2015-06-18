@@ -19,6 +19,7 @@ import com.lvl6.proto.EventRewardProto.DeleteGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.RewardsProto.GiftProto;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
@@ -30,8 +31,8 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 @DependsOn("gameServer")
 public class DeleteGiftController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static final Logger log = LoggerFactory
+			.getLogger(DeleteGiftController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -80,6 +81,7 @@ public class DeleteGiftController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses){
 		DeleteGiftRequestProto reqProto = ((DeleteGiftRequestEvent) event)
 				.getDeleteGiftRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -102,17 +104,18 @@ public class DeleteGiftController extends EventController {
 			userUuid = UUID.fromString(userId);
 
 			for (UserGiftProto ugp : listOfGiftProtos) {
-				String gfuId = ugp.getUgId();
+				String gfuId = ugp.getUgUuid();
 				UUID.fromString(gfuId);
 
 				giftForUserIds.add(gfuId);
 
-				switch (ugp.getGiftType()) {
+				GiftProto gp = ugp.getGift();
+
+				switch (gp.getGiftType()) {
 				case TANGO_GIFT:
 					giftForTangoUserGfuIds.add(gfuId);
 					break;
 				default:
-					log.error("GiftType unsupported: {}", ugp.getGiftType());
 					break;
 				}
 			}

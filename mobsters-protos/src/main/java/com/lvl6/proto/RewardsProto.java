@@ -248,20 +248,17 @@ public final class RewardsProto {
       GACHA_CREDITS(5, 7),
       /**
        * <code>MONSTER = 6;</code>
+       *
+       * <pre>
+       *CLAN_GIFT = 8  [deprecated = true];
+       *TANGO_GIFT = 9  [deprecated = true];
+       * </pre>
        */
       MONSTER(6, 6),
       /**
-       * <code>CLAN_GIFT = 8;</code>
-       */
-      CLAN_GIFT(7, 8),
-      /**
-       * <code>TANGO_GIFT = 9;</code>
-       */
-      TANGO_GIFT(8, 9),
-      /**
        * <code>REWARD = 100;</code>
        */
-      REWARD(9, 100),
+      REWARD(7, 100),
       ;
 
       /**
@@ -290,16 +287,13 @@ public final class RewardsProto {
       public static final int GACHA_CREDITS_VALUE = 7;
       /**
        * <code>MONSTER = 6;</code>
+       *
+       * <pre>
+       *CLAN_GIFT = 8  [deprecated = true];
+       *TANGO_GIFT = 9  [deprecated = true];
+       * </pre>
        */
       public static final int MONSTER_VALUE = 6;
-      /**
-       * <code>CLAN_GIFT = 8;</code>
-       */
-      public static final int CLAN_GIFT_VALUE = 8;
-      /**
-       * <code>TANGO_GIFT = 9;</code>
-       */
-      public static final int TANGO_GIFT_VALUE = 9;
       /**
        * <code>REWARD = 100;</code>
        */
@@ -317,8 +311,6 @@ public final class RewardsProto {
           case 5: return OIL;
           case 7: return GACHA_CREDITS;
           case 6: return MONSTER;
-          case 8: return CLAN_GIFT;
-          case 9: return TANGO_GIFT;
           case 100: return REWARD;
           default: return null;
         }
@@ -1210,17 +1202,28 @@ public final class RewardsProto {
     int getGachaCredits();
 
     /**
-     * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
      */
-    boolean hasClanGift();
+    java.util.List<com.lvl6.proto.RewardsProto.UserGiftProto> 
+        getGiftList();
     /**
-     * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
      */
-    com.lvl6.proto.RewardsProto.UserClanGiftProto getClanGift();
+    com.lvl6.proto.RewardsProto.UserGiftProto getGift(int index);
     /**
-     * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
      */
-    com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder getClanGiftOrBuilder();
+    int getGiftCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder> 
+        getGiftOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+     */
+    com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder getGiftOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserRewardProto}
@@ -1316,16 +1319,11 @@ public final class RewardsProto {
               break;
             }
             case 58: {
-              com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
-                subBuilder = clanGift_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                gift_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.UserGiftProto>();
+                mutable_bitField0_ |= 0x00000040;
               }
-              clanGift_ = input.readMessage(com.lvl6.proto.RewardsProto.UserClanGiftProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(clanGift_);
-                clanGift_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000010;
+              gift_.add(input.readMessage(com.lvl6.proto.RewardsProto.UserGiftProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1341,6 +1339,9 @@ public final class RewardsProto {
         }
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           updatedUserItems_ = java.util.Collections.unmodifiableList(updatedUserItems_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          gift_ = java.util.Collections.unmodifiableList(gift_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1512,25 +1513,39 @@ public final class RewardsProto {
       return gachaCredits_;
     }
 
-    public static final int CLANGIFT_FIELD_NUMBER = 7;
-    private com.lvl6.proto.RewardsProto.UserClanGiftProto clanGift_;
+    public static final int GIFT_FIELD_NUMBER = 7;
+    private java.util.List<com.lvl6.proto.RewardsProto.UserGiftProto> gift_;
     /**
-     * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
      */
-    public boolean hasClanGift() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+    public java.util.List<com.lvl6.proto.RewardsProto.UserGiftProto> getGiftList() {
+      return gift_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
      */
-    public com.lvl6.proto.RewardsProto.UserClanGiftProto getClanGift() {
-      return clanGift_;
+    public java.util.List<? extends com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder> 
+        getGiftOrBuilderList() {
+      return gift_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
      */
-    public com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder getClanGiftOrBuilder() {
-      return clanGift_;
+    public int getGiftCount() {
+      return gift_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserGiftProto getGift(int index) {
+      return gift_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+     */
+    public com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder getGiftOrBuilder(
+        int index) {
+      return gift_.get(index);
     }
 
     private void initFields() {
@@ -1540,7 +1555,7 @@ public final class RewardsProto {
       cash_ = 0;
       oil_ = 0;
       gachaCredits_ = 0;
-      clanGift_ = com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance();
+      gift_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1573,8 +1588,8 @@ public final class RewardsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(6, gachaCredits_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(7, clanGift_);
+      for (int i = 0; i < gift_.size(); i++) {
+        output.writeMessage(7, gift_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1609,9 +1624,9 @@ public final class RewardsProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, gachaCredits_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      for (int i = 0; i < gift_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, clanGift_);
+          .computeMessageSize(7, gift_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1729,7 +1744,7 @@ public final class RewardsProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getUpdatedOrNewMonstersFieldBuilder();
           getUpdatedUserItemsFieldBuilder();
-          getClanGiftFieldBuilder();
+          getGiftFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1758,12 +1773,12 @@ public final class RewardsProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         gachaCredits_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance();
+        if (giftBuilder_ == null) {
+          gift_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
-          clanGiftBuilder_.clear();
+          giftBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -1826,13 +1841,14 @@ public final class RewardsProto {
           to_bitField0_ |= 0x00000008;
         }
         result.gachaCredits_ = gachaCredits_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        if (clanGiftBuilder_ == null) {
-          result.clanGift_ = clanGift_;
+        if (giftBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            gift_ = java.util.Collections.unmodifiableList(gift_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.gift_ = gift_;
         } else {
-          result.clanGift_ = clanGiftBuilder_.build();
+          result.gift_ = giftBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1914,8 +1930,31 @@ public final class RewardsProto {
         if (other.hasGachaCredits()) {
           setGachaCredits(other.getGachaCredits());
         }
-        if (other.hasClanGift()) {
-          mergeClanGift(other.getClanGift());
+        if (giftBuilder_ == null) {
+          if (!other.gift_.isEmpty()) {
+            if (gift_.isEmpty()) {
+              gift_ = other.gift_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureGiftIsMutable();
+              gift_.addAll(other.gift_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.gift_.isEmpty()) {
+            if (giftBuilder_.isEmpty()) {
+              giftBuilder_.dispose();
+              giftBuilder_ = null;
+              gift_ = other.gift_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              giftBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getGiftFieldBuilder() : null;
+            } else {
+              giftBuilder_.addAllMessages(other.gift_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2568,120 +2607,244 @@ public final class RewardsProto {
         return this;
       }
 
-      private com.lvl6.proto.RewardsProto.UserClanGiftProto clanGift_ = com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.UserClanGiftProto, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder, com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder> clanGiftBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
-       */
-      public boolean hasClanGift() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+      private java.util.List<com.lvl6.proto.RewardsProto.UserGiftProto> gift_ =
+        java.util.Collections.emptyList();
+      private void ensureGiftIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          gift_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.UserGiftProto>(gift_);
+          bitField0_ |= 0x00000040;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserGiftProto, com.lvl6.proto.RewardsProto.UserGiftProto.Builder, com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder> giftBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public com.lvl6.proto.RewardsProto.UserClanGiftProto getClanGift() {
-        if (clanGiftBuilder_ == null) {
-          return clanGift_;
+      public java.util.List<com.lvl6.proto.RewardsProto.UserGiftProto> getGiftList() {
+        if (giftBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(gift_);
         } else {
-          return clanGiftBuilder_.getMessage();
+          return giftBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public Builder setClanGift(com.lvl6.proto.RewardsProto.UserClanGiftProto value) {
-        if (clanGiftBuilder_ == null) {
+      public int getGiftCount() {
+        if (giftBuilder_ == null) {
+          return gift_.size();
+        } else {
+          return giftBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserGiftProto getGift(int index) {
+        if (giftBuilder_ == null) {
+          return gift_.get(index);
+        } else {
+          return giftBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public Builder setGift(
+          int index, com.lvl6.proto.RewardsProto.UserGiftProto value) {
+        if (giftBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          clanGift_ = value;
+          ensureGiftIsMutable();
+          gift_.set(index, value);
           onChanged();
         } else {
-          clanGiftBuilder_.setMessage(value);
+          giftBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public Builder setClanGift(
-          com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder builderForValue) {
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = builderForValue.build();
+      public Builder setGift(
+          int index, com.lvl6.proto.RewardsProto.UserGiftProto.Builder builderForValue) {
+        if (giftBuilder_ == null) {
+          ensureGiftIsMutable();
+          gift_.set(index, builderForValue.build());
           onChanged();
         } else {
-          clanGiftBuilder_.setMessage(builderForValue.build());
+          giftBuilder_.setMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public Builder mergeClanGift(com.lvl6.proto.RewardsProto.UserClanGiftProto value) {
-        if (clanGiftBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              clanGift_ != com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance()) {
-            clanGift_ =
-              com.lvl6.proto.RewardsProto.UserClanGiftProto.newBuilder(clanGift_).mergeFrom(value).buildPartial();
-          } else {
-            clanGift_ = value;
+      public Builder addGift(com.lvl6.proto.RewardsProto.UserGiftProto value) {
+        if (giftBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
+          ensureGiftIsMutable();
+          gift_.add(value);
           onChanged();
         } else {
-          clanGiftBuilder_.mergeFrom(value);
+          giftBuilder_.addMessage(value);
         }
-        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public Builder clearClanGift() {
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance();
+      public Builder addGift(
+          int index, com.lvl6.proto.RewardsProto.UserGiftProto value) {
+        if (giftBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGiftIsMutable();
+          gift_.add(index, value);
           onChanged();
         } else {
-          clanGiftBuilder_.clear();
+          giftBuilder_.addMessage(index, value);
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder getClanGiftBuilder() {
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return getClanGiftFieldBuilder().getBuilder();
+      public Builder addGift(
+          com.lvl6.proto.RewardsProto.UserGiftProto.Builder builderForValue) {
+        if (giftBuilder_ == null) {
+          ensureGiftIsMutable();
+          gift_.add(builderForValue.build());
+          onChanged();
+        } else {
+          giftBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      public com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder getClanGiftOrBuilder() {
-        if (clanGiftBuilder_ != null) {
-          return clanGiftBuilder_.getMessageOrBuilder();
+      public Builder addGift(
+          int index, com.lvl6.proto.RewardsProto.UserGiftProto.Builder builderForValue) {
+        if (giftBuilder_ == null) {
+          ensureGiftIsMutable();
+          gift_.add(index, builderForValue.build());
+          onChanged();
         } else {
-          return clanGift_;
+          giftBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public Builder addAllGift(
+          java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.UserGiftProto> values) {
+        if (giftBuilder_ == null) {
+          ensureGiftIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, gift_);
+          onChanged();
+        } else {
+          giftBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public Builder clearGift() {
+        if (giftBuilder_ == null) {
+          gift_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          onChanged();
+        } else {
+          giftBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public Builder removeGift(int index) {
+        if (giftBuilder_ == null) {
+          ensureGiftIsMutable();
+          gift_.remove(index);
+          onChanged();
+        } else {
+          giftBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserGiftProto.Builder getGiftBuilder(
+          int index) {
+        return getGiftFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder getGiftOrBuilder(
+          int index) {
+        if (giftBuilder_ == null) {
+          return gift_.get(index);  } else {
+          return giftBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserClanGiftProto clanGift = 7;</code>
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.UserClanGiftProto, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder, com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder> 
-          getClanGiftFieldBuilder() {
-        if (clanGiftBuilder_ == null) {
-          clanGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.RewardsProto.UserClanGiftProto, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder, com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder>(
-                  getClanGift(),
+      public java.util.List<? extends com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder> 
+           getGiftOrBuilderList() {
+        if (giftBuilder_ != null) {
+          return giftBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(gift_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserGiftProto.Builder addGiftBuilder() {
+        return getGiftFieldBuilder().addBuilder(
+            com.lvl6.proto.RewardsProto.UserGiftProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public com.lvl6.proto.RewardsProto.UserGiftProto.Builder addGiftBuilder(
+          int index) {
+        return getGiftFieldBuilder().addBuilder(
+            index, com.lvl6.proto.RewardsProto.UserGiftProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserGiftProto gift = 7;</code>
+       */
+      public java.util.List<com.lvl6.proto.RewardsProto.UserGiftProto.Builder> 
+           getGiftBuilderList() {
+        return getGiftFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.RewardsProto.UserGiftProto, com.lvl6.proto.RewardsProto.UserGiftProto.Builder, com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder> 
+          getGiftFieldBuilder() {
+        if (giftBuilder_ == null) {
+          giftBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.RewardsProto.UserGiftProto, com.lvl6.proto.RewardsProto.UserGiftProto.Builder, com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder>(
+                  gift_,
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
-          clanGift_ = null;
+          gift_ = null;
         }
-        return clanGiftBuilder_;
+        return giftBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserRewardProto)
@@ -2695,18 +2858,18 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserRewardProto)
   }
 
-  public interface ClanGiftProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ClanGiftProto)
+  public interface GiftProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GiftProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 clanGiftId = 1;</code>
+     * <code>optional int32 giftId = 1;</code>
      */
-    boolean hasClanGiftId();
+    boolean hasGiftId();
     /**
-     * <code>optional int32 clanGiftId = 1;</code>
+     * <code>optional int32 giftId = 1;</code>
      */
-    int getClanGiftId();
+    int getGiftId();
 
     /**
      * <code>optional string name = 2;</code>
@@ -2746,34 +2909,34 @@ public final class RewardsProto {
         getImageNameBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+     * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
      */
-    @java.lang.Deprecated boolean hasQuality();
+    boolean hasGiftType();
     /**
-     * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+     * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
      */
-    @java.lang.Deprecated com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
+    com.lvl6.proto.RewardsProto.GiftProto.GiftType getGiftType();
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
+   * Protobuf type {@code com.lvl6.proto.GiftProto}
    */
-  public static final class ClanGiftProto extends
+  public static final class GiftProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ClanGiftProto)
-      ClanGiftProtoOrBuilder {
-    // Use ClanGiftProto.newBuilder() to construct.
-    private ClanGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GiftProto)
+      GiftProtoOrBuilder {
+    // Use GiftProto.newBuilder() to construct.
+    private GiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private ClanGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private GiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final ClanGiftProto defaultInstance;
-    public static ClanGiftProto getDefaultInstance() {
+    private static final GiftProto defaultInstance;
+    public static GiftProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public ClanGiftProto getDefaultInstanceForType() {
+    public GiftProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -2783,7 +2946,7 @@ public final class RewardsProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private ClanGiftProto(
+    private GiftProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2808,7 +2971,7 @@ public final class RewardsProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              clanGiftId_ = input.readInt32();
+              giftId_ = input.readInt32();
               break;
             }
             case 18: {
@@ -2830,12 +2993,12 @@ public final class RewardsProto {
             }
             case 40: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+              com.lvl6.proto.RewardsProto.GiftProto.GiftType value = com.lvl6.proto.RewardsProto.GiftProto.GiftType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
                 bitField0_ |= 0x00000010;
-                quality_ = value;
+                giftType_ = value;
               }
               break;
             }
@@ -2853,45 +3016,136 @@ public final class RewardsProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_ClanGiftProto_descriptor;
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_GiftProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_GiftProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.RewardsProto.ClanGiftProto.class, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder.class);
+              com.lvl6.proto.RewardsProto.GiftProto.class, com.lvl6.proto.RewardsProto.GiftProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ClanGiftProto> PARSER =
-        new com.google.protobuf.AbstractParser<ClanGiftProto>() {
-      public ClanGiftProto parsePartialFrom(
+    public static com.google.protobuf.Parser<GiftProto> PARSER =
+        new com.google.protobuf.AbstractParser<GiftProto>() {
+      public GiftProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClanGiftProto(input, extensionRegistry);
+        return new GiftProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ClanGiftProto> getParserForType() {
+    public com.google.protobuf.Parser<GiftProto> getParserForType() {
       return PARSER;
     }
 
-    private int bitField0_;
-    public static final int CLANGIFTID_FIELD_NUMBER = 1;
-    private int clanGiftId_;
     /**
-     * <code>optional int32 clanGiftId = 1;</code>
+     * Protobuf enum {@code com.lvl6.proto.GiftProto.GiftType}
      */
-    public boolean hasClanGiftId() {
+    public enum GiftType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>NO_GIFT = 1;</code>
+       */
+      NO_GIFT(0, 1),
+      /**
+       * <code>CLAN_GIFT = 2;</code>
+       */
+      CLAN_GIFT(1, 2),
+      /**
+       * <code>TANGO_GIFT = 3;</code>
+       */
+      TANGO_GIFT(2, 3),
+      ;
+
+      /**
+       * <code>NO_GIFT = 1;</code>
+       */
+      public static final int NO_GIFT_VALUE = 1;
+      /**
+       * <code>CLAN_GIFT = 2;</code>
+       */
+      public static final int CLAN_GIFT_VALUE = 2;
+      /**
+       * <code>TANGO_GIFT = 3;</code>
+       */
+      public static final int TANGO_GIFT_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static GiftType valueOf(int value) {
+        switch (value) {
+          case 1: return NO_GIFT;
+          case 2: return CLAN_GIFT;
+          case 3: return TANGO_GIFT;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<GiftType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<GiftType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<GiftType>() {
+              public GiftType findValueByNumber(int number) {
+                return GiftType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.RewardsProto.GiftProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final GiftType[] VALUES = values();
+
+      public static GiftType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private GiftType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GiftProto.GiftType)
+    }
+
+    private int bitField0_;
+    public static final int GIFTID_FIELD_NUMBER = 1;
+    private int giftId_;
+    /**
+     * <code>optional int32 giftId = 1;</code>
+     */
+    public boolean hasGiftId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 clanGiftId = 1;</code>
+     * <code>optional int32 giftId = 1;</code>
      */
-    public int getClanGiftId() {
-      return clanGiftId_;
+    public int getGiftId() {
+      return giftId_;
     }
 
     public static final int NAME_FIELD_NUMBER = 2;
@@ -2993,27 +3247,27 @@ public final class RewardsProto {
       }
     }
 
-    public static final int QUALITY_FIELD_NUMBER = 5;
-    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
+    public static final int GIFTTYPE_FIELD_NUMBER = 5;
+    private com.lvl6.proto.RewardsProto.GiftProto.GiftType giftType_;
     /**
-     * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+     * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
      */
-    @java.lang.Deprecated public boolean hasQuality() {
+    public boolean hasGiftType() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+     * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
      */
-    @java.lang.Deprecated public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-      return quality_;
+    public com.lvl6.proto.RewardsProto.GiftProto.GiftType getGiftType() {
+      return giftType_;
     }
 
     private void initFields() {
-      clanGiftId_ = 0;
+      giftId_ = 0;
       name_ = "";
       hoursUntilExpiration_ = 0;
       imageName_ = "";
-      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      giftType_ = com.lvl6.proto.RewardsProto.GiftProto.GiftType.NO_GIFT;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3029,7 +3283,7 @@ public final class RewardsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, clanGiftId_);
+        output.writeInt32(1, giftId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getNameBytes());
@@ -3041,7 +3295,7 @@ public final class RewardsProto {
         output.writeBytes(4, getImageNameBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeEnum(5, quality_.getNumber());
+        output.writeEnum(5, giftType_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -3054,7 +3308,7 @@ public final class RewardsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, clanGiftId_);
+          .computeInt32Size(1, giftId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3070,7 +3324,7 @@ public final class RewardsProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, quality_.getNumber());
+          .computeEnumSize(5, giftType_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3084,53 +3338,53 @@ public final class RewardsProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(byte[] data)
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.RewardsProto.GiftProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseDelimitedFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.ClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.GiftProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3139,7 +3393,7 @@ public final class RewardsProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.RewardsProto.ClanGiftProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.RewardsProto.GiftProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -3151,25 +3405,25 @@ public final class RewardsProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.ClanGiftProto}
+     * Protobuf type {@code com.lvl6.proto.GiftProto}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ClanGiftProto)
-        com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GiftProto)
+        com.lvl6.proto.RewardsProto.GiftProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_ClanGiftProto_descriptor;
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_GiftProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_GiftProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.RewardsProto.ClanGiftProto.class, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder.class);
+                com.lvl6.proto.RewardsProto.GiftProto.class, com.lvl6.proto.RewardsProto.GiftProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.RewardsProto.ClanGiftProto.newBuilder()
+      // Construct using com.lvl6.proto.RewardsProto.GiftProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -3189,7 +3443,7 @@ public final class RewardsProto {
 
       public Builder clear() {
         super.clear();
-        clanGiftId_ = 0;
+        giftId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -3197,7 +3451,7 @@ public final class RewardsProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         imageName_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        giftType_ = com.lvl6.proto.RewardsProto.GiftProto.GiftType.NO_GIFT;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -3208,29 +3462,29 @@ public final class RewardsProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_ClanGiftProto_descriptor;
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_GiftProto_descriptor;
       }
 
-      public com.lvl6.proto.RewardsProto.ClanGiftProto getDefaultInstanceForType() {
-        return com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
+      public com.lvl6.proto.RewardsProto.GiftProto getDefaultInstanceForType() {
+        return com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.RewardsProto.ClanGiftProto build() {
-        com.lvl6.proto.RewardsProto.ClanGiftProto result = buildPartial();
+      public com.lvl6.proto.RewardsProto.GiftProto build() {
+        com.lvl6.proto.RewardsProto.GiftProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.RewardsProto.ClanGiftProto buildPartial() {
-        com.lvl6.proto.RewardsProto.ClanGiftProto result = new com.lvl6.proto.RewardsProto.ClanGiftProto(this);
+      public com.lvl6.proto.RewardsProto.GiftProto buildPartial() {
+        com.lvl6.proto.RewardsProto.GiftProto result = new com.lvl6.proto.RewardsProto.GiftProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.clanGiftId_ = clanGiftId_;
+        result.giftId_ = giftId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -3246,25 +3500,25 @@ public final class RewardsProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.quality_ = quality_;
+        result.giftType_ = giftType_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.RewardsProto.ClanGiftProto) {
-          return mergeFrom((com.lvl6.proto.RewardsProto.ClanGiftProto)other);
+        if (other instanceof com.lvl6.proto.RewardsProto.GiftProto) {
+          return mergeFrom((com.lvl6.proto.RewardsProto.GiftProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.RewardsProto.ClanGiftProto other) {
-        if (other == com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance()) return this;
-        if (other.hasClanGiftId()) {
-          setClanGiftId(other.getClanGiftId());
+      public Builder mergeFrom(com.lvl6.proto.RewardsProto.GiftProto other) {
+        if (other == com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance()) return this;
+        if (other.hasGiftId()) {
+          setGiftId(other.getGiftId());
         }
         if (other.hasName()) {
           bitField0_ |= 0x00000002;
@@ -3279,8 +3533,8 @@ public final class RewardsProto {
           imageName_ = other.imageName_;
           onChanged();
         }
-        if (other.hasQuality()) {
-          setQuality(other.getQuality());
+        if (other.hasGiftType()) {
+          setGiftType(other.getGiftType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3294,11 +3548,11 @@ public final class RewardsProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.RewardsProto.ClanGiftProto parsedMessage = null;
+        com.lvl6.proto.RewardsProto.GiftProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.RewardsProto.ClanGiftProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.RewardsProto.GiftProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -3309,34 +3563,34 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
-      private int clanGiftId_ ;
+      private int giftId_ ;
       /**
-       * <code>optional int32 clanGiftId = 1;</code>
+       * <code>optional int32 giftId = 1;</code>
        */
-      public boolean hasClanGiftId() {
+      public boolean hasGiftId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 clanGiftId = 1;</code>
+       * <code>optional int32 giftId = 1;</code>
        */
-      public int getClanGiftId() {
-        return clanGiftId_;
+      public int getGiftId() {
+        return giftId_;
       }
       /**
-       * <code>optional int32 clanGiftId = 1;</code>
+       * <code>optional int32 giftId = 1;</code>
        */
-      public Builder setClanGiftId(int value) {
+      public Builder setGiftId(int value) {
         bitField0_ |= 0x00000001;
-        clanGiftId_ = value;
+        giftId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 clanGiftId = 1;</code>
+       * <code>optional int32 giftId = 1;</code>
        */
-      public Builder clearClanGiftId() {
+      public Builder clearGiftId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        clanGiftId_ = 0;
+        giftId_ = 0;
         onChanged();
         return this;
       }
@@ -3525,83 +3779,83 @@ public final class RewardsProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      private com.lvl6.proto.RewardsProto.GiftProto.GiftType giftType_ = com.lvl6.proto.RewardsProto.GiftProto.GiftType.NO_GIFT;
       /**
-       * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+       * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
        */
-      @java.lang.Deprecated public boolean hasQuality() {
+      public boolean hasGiftType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+       * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
        */
-      @java.lang.Deprecated public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-        return quality_;
+      public com.lvl6.proto.RewardsProto.GiftProto.GiftType getGiftType() {
+        return giftType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+       * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
        */
-      @java.lang.Deprecated public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+      public Builder setGiftType(com.lvl6.proto.RewardsProto.GiftProto.GiftType value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000010;
-        quality_ = value;
+        giftType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.Quality quality = 5 [deprecated = true];</code>
+       * <code>optional .com.lvl6.proto.GiftProto.GiftType giftType = 5 [default = NO_GIFT];</code>
        */
-      @java.lang.Deprecated public Builder clearQuality() {
+      public Builder clearGiftType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        giftType_ = com.lvl6.proto.RewardsProto.GiftProto.GiftType.NO_GIFT;
         onChanged();
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanGiftProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.GiftProto)
     }
 
     static {
-      defaultInstance = new ClanGiftProto(true);
+      defaultInstance = new GiftProto(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanGiftProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.GiftProto)
   }
 
-  public interface UserClanGiftProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserClanGiftProto)
+  public interface UserGiftProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserGiftProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string userClanGiftId = 1;</code>
+     * <code>optional string ugUuid = 1;</code>
      */
-    boolean hasUserClanGiftId();
+    boolean hasUgUuid();
     /**
-     * <code>optional string userClanGiftId = 1;</code>
+     * <code>optional string ugUuid = 1;</code>
      */
-    java.lang.String getUserClanGiftId();
+    java.lang.String getUgUuid();
     /**
-     * <code>optional string userClanGiftId = 1;</code>
+     * <code>optional string ugUuid = 1;</code>
      */
     com.google.protobuf.ByteString
-        getUserClanGiftIdBytes();
+        getUgUuidBytes();
 
     /**
-     * <code>optional string receiverUserId = 2;</code>
+     * <code>optional string receiverUserUuid = 2;</code>
      */
-    boolean hasReceiverUserId();
+    boolean hasReceiverUserUuid();
     /**
-     * <code>optional string receiverUserId = 2;</code>
+     * <code>optional string receiverUserUuid = 2;</code>
      */
-    java.lang.String getReceiverUserId();
+    java.lang.String getReceiverUserUuid();
     /**
-     * <code>optional string receiverUserId = 2;</code>
+     * <code>optional string receiverUserUuid = 2;</code>
      */
     com.google.protobuf.ByteString
-        getReceiverUserIdBytes();
+        getReceiverUserUuidBytes();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
@@ -3617,32 +3871,24 @@ public final class RewardsProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
      */
-    boolean hasClanGift();
+    boolean hasGift();
     /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
      */
-    com.lvl6.proto.RewardsProto.ClanGiftProto getClanGift();
+    com.lvl6.proto.RewardsProto.GiftProto getGift();
     /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
      */
-    com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder();
+    com.lvl6.proto.RewardsProto.GiftProtoOrBuilder getGiftOrBuilder();
 
     /**
      * <code>optional int64 timeReceived = 5;</code>
-     *
-     * <pre>
-     *when the gift gets sent out to everyone
-     * </pre>
      */
     boolean hasTimeReceived();
     /**
      * <code>optional int64 timeReceived = 5;</code>
-     *
-     * <pre>
-     *when the gift gets sent out to everyone
-     * </pre>
      */
     long getTimeReceived();
 
@@ -3667,27 +3913,69 @@ public final class RewardsProto {
      * <code>optional bool hasBeenCollected = 7;</code>
      */
     boolean getHasBeenCollected();
+
+    /**
+     * <code>optional int32 minutesTillExpiration = 8;</code>
+     *
+     * <pre>
+     *not always set
+     * </pre>
+     */
+    boolean hasMinutesTillExpiration();
+    /**
+     * <code>optional int32 minutesTillExpiration = 8;</code>
+     *
+     * <pre>
+     *not always set
+     * </pre>
+     */
+    int getMinutesTillExpiration();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+     *
+     * <pre>
+     *set or not set based on GiftType in gift
+     * </pre>
+     */
+    boolean hasTangoGift();
+    /**
+     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+     *
+     * <pre>
+     *set or not set based on GiftType in gift
+     * </pre>
+     */
+    com.lvl6.proto.RewardsProto.UserTangoGiftProto getTangoGift();
+    /**
+     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+     *
+     * <pre>
+     *set or not set based on GiftType in gift
+     * </pre>
+     */
+    com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder getTangoGiftOrBuilder();
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.UserClanGiftProto}
+   * Protobuf type {@code com.lvl6.proto.UserGiftProto}
    */
-  public static final class UserClanGiftProto extends
+  public static final class UserGiftProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserClanGiftProto)
-      UserClanGiftProtoOrBuilder {
-    // Use UserClanGiftProto.newBuilder() to construct.
-    private UserClanGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserGiftProto)
+      UserGiftProtoOrBuilder {
+    // Use UserGiftProto.newBuilder() to construct.
+    private UserGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private UserClanGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private UserGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final UserClanGiftProto defaultInstance;
-    public static UserClanGiftProto getDefaultInstance() {
+    private static final UserGiftProto defaultInstance;
+    public static UserGiftProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public UserClanGiftProto getDefaultInstanceForType() {
+    public UserGiftProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -3697,7 +3985,7 @@ public final class RewardsProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private UserClanGiftProto(
+    private UserGiftProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3723,13 +4011,13 @@ public final class RewardsProto {
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userClanGiftId_ = bs;
+              ugUuid_ = bs;
               break;
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              receiverUserId_ = bs;
+              receiverUserUuid_ = bs;
               break;
             }
             case 26: {
@@ -3746,14 +4034,14 @@ public final class RewardsProto {
               break;
             }
             case 34: {
-              com.lvl6.proto.RewardsProto.ClanGiftProto.Builder subBuilder = null;
+              com.lvl6.proto.RewardsProto.GiftProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
-                subBuilder = clanGift_.toBuilder();
+                subBuilder = gift_.toBuilder();
               }
-              clanGift_ = input.readMessage(com.lvl6.proto.RewardsProto.ClanGiftProto.PARSER, extensionRegistry);
+              gift_ = input.readMessage(com.lvl6.proto.RewardsProto.GiftProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(clanGift_);
-                clanGift_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(gift_);
+                gift_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000008;
               break;
@@ -3781,6 +4069,24 @@ public final class RewardsProto {
               hasBeenCollected_ = input.readBool();
               break;
             }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              minutesTillExpiration_ = input.readInt32();
+              break;
+            }
+            case 74: {
+              com.lvl6.proto.RewardsProto.UserTangoGiftProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                subBuilder = tangoGift_.toBuilder();
+              }
+              tangoGift_ = input.readMessage(com.lvl6.proto.RewardsProto.UserTangoGiftProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(tangoGift_);
+                tangoGift_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000100;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3795,45 +4101,45 @@ public final class RewardsProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.RewardsProto.UserClanGiftProto.class, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder.class);
+              com.lvl6.proto.RewardsProto.UserGiftProto.class, com.lvl6.proto.RewardsProto.UserGiftProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<UserClanGiftProto> PARSER =
-        new com.google.protobuf.AbstractParser<UserClanGiftProto>() {
-      public UserClanGiftProto parsePartialFrom(
+    public static com.google.protobuf.Parser<UserGiftProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserGiftProto>() {
+      public UserGiftProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserClanGiftProto(input, extensionRegistry);
+        return new UserGiftProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<UserClanGiftProto> getParserForType() {
+    public com.google.protobuf.Parser<UserGiftProto> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
-    public static final int USERCLANGIFTID_FIELD_NUMBER = 1;
-    private java.lang.Object userClanGiftId_;
+    public static final int UGUUID_FIELD_NUMBER = 1;
+    private java.lang.Object ugUuid_;
     /**
-     * <code>optional string userClanGiftId = 1;</code>
+     * <code>optional string ugUuid = 1;</code>
      */
-    public boolean hasUserClanGiftId() {
+    public boolean hasUgUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string userClanGiftId = 1;</code>
+     * <code>optional string ugUuid = 1;</code>
      */
-    public java.lang.String getUserClanGiftId() {
-      java.lang.Object ref = userClanGiftId_;
+    public java.lang.String getUgUuid() {
+      java.lang.Object ref = ugUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -3841,41 +4147,41 @@ public final class RewardsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          userClanGiftId_ = s;
+          ugUuid_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string userClanGiftId = 1;</code>
+     * <code>optional string ugUuid = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getUserClanGiftIdBytes() {
-      java.lang.Object ref = userClanGiftId_;
+        getUgUuidBytes() {
+      java.lang.Object ref = ugUuid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        userClanGiftId_ = b;
+        ugUuid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int RECEIVERUSERID_FIELD_NUMBER = 2;
-    private java.lang.Object receiverUserId_;
+    public static final int RECEIVERUSERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object receiverUserUuid_;
     /**
-     * <code>optional string receiverUserId = 2;</code>
+     * <code>optional string receiverUserUuid = 2;</code>
      */
-    public boolean hasReceiverUserId() {
+    public boolean hasReceiverUserUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string receiverUserId = 2;</code>
+     * <code>optional string receiverUserUuid = 2;</code>
      */
-    public java.lang.String getReceiverUserId() {
-      java.lang.Object ref = receiverUserId_;
+    public java.lang.String getReceiverUserUuid() {
+      java.lang.Object ref = receiverUserUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -3883,22 +4189,22 @@ public final class RewardsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          receiverUserId_ = s;
+          receiverUserUuid_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string receiverUserId = 2;</code>
+     * <code>optional string receiverUserUuid = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getReceiverUserIdBytes() {
-      java.lang.Object ref = receiverUserId_;
+        getReceiverUserUuidBytes() {
+      java.lang.Object ref = receiverUserUuid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        receiverUserId_ = b;
+        receiverUserUuid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -3926,45 +4232,37 @@ public final class RewardsProto {
       return gifterUser_;
     }
 
-    public static final int CLANGIFT_FIELD_NUMBER = 4;
-    private com.lvl6.proto.RewardsProto.ClanGiftProto clanGift_;
+    public static final int GIFT_FIELD_NUMBER = 4;
+    private com.lvl6.proto.RewardsProto.GiftProto gift_;
     /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
      */
-    public boolean hasClanGift() {
+    public boolean hasGift() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
      */
-    public com.lvl6.proto.RewardsProto.ClanGiftProto getClanGift() {
-      return clanGift_;
+    public com.lvl6.proto.RewardsProto.GiftProto getGift() {
+      return gift_;
     }
     /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+     * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
      */
-    public com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder() {
-      return clanGift_;
+    public com.lvl6.proto.RewardsProto.GiftProtoOrBuilder getGiftOrBuilder() {
+      return gift_;
     }
 
     public static final int TIMERECEIVED_FIELD_NUMBER = 5;
     private long timeReceived_;
     /**
      * <code>optional int64 timeReceived = 5;</code>
-     *
-     * <pre>
-     *when the gift gets sent out to everyone
-     * </pre>
      */
     public boolean hasTimeReceived() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 timeReceived = 5;</code>
-     *
-     * <pre>
-     *when the gift gets sent out to everyone
-     * </pre>
      */
     public long getTimeReceived() {
       return timeReceived_;
@@ -4006,14 +4304,72 @@ public final class RewardsProto {
       return hasBeenCollected_;
     }
 
+    public static final int MINUTESTILLEXPIRATION_FIELD_NUMBER = 8;
+    private int minutesTillExpiration_;
+    /**
+     * <code>optional int32 minutesTillExpiration = 8;</code>
+     *
+     * <pre>
+     *not always set
+     * </pre>
+     */
+    public boolean hasMinutesTillExpiration() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 minutesTillExpiration = 8;</code>
+     *
+     * <pre>
+     *not always set
+     * </pre>
+     */
+    public int getMinutesTillExpiration() {
+      return minutesTillExpiration_;
+    }
+
+    public static final int TANGOGIFT_FIELD_NUMBER = 9;
+    private com.lvl6.proto.RewardsProto.UserTangoGiftProto tangoGift_;
+    /**
+     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+     *
+     * <pre>
+     *set or not set based on GiftType in gift
+     * </pre>
+     */
+    public boolean hasTangoGift() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+     *
+     * <pre>
+     *set or not set based on GiftType in gift
+     * </pre>
+     */
+    public com.lvl6.proto.RewardsProto.UserTangoGiftProto getTangoGift() {
+      return tangoGift_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+     *
+     * <pre>
+     *set or not set based on GiftType in gift
+     * </pre>
+     */
+    public com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder getTangoGiftOrBuilder() {
+      return tangoGift_;
+    }
+
     private void initFields() {
-      userClanGiftId_ = "";
-      receiverUserId_ = "";
+      ugUuid_ = "";
+      receiverUserUuid_ = "";
       gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
+      gift_ = com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance();
       timeReceived_ = 0L;
       reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
       hasBeenCollected_ = false;
+      minutesTillExpiration_ = 0;
+      tangoGift_ = com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4029,16 +4385,16 @@ public final class RewardsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUserClanGiftIdBytes());
+        output.writeBytes(1, getUgUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getReceiverUserIdBytes());
+        output.writeBytes(2, getReceiverUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(3, gifterUser_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, clanGift_);
+        output.writeMessage(4, gift_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, timeReceived_);
@@ -4048,6 +4404,12 @@ public final class RewardsProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(7, hasBeenCollected_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, minutesTillExpiration_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(9, tangoGift_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4060,11 +4422,11 @@ public final class RewardsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUserClanGiftIdBytes());
+          .computeBytesSize(1, getUgUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getReceiverUserIdBytes());
+          .computeBytesSize(2, getReceiverUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4072,7 +4434,7 @@ public final class RewardsProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, clanGift_);
+          .computeMessageSize(4, gift_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4086,6 +4448,14 @@ public final class RewardsProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(7, hasBeenCollected_);
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, minutesTillExpiration_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, tangoGift_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -4098,53 +4468,53 @@ public final class RewardsProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(byte[] data)
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseDelimitedFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.UserClanGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4153,7 +4523,7 @@ public final class RewardsProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.RewardsProto.UserClanGiftProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.RewardsProto.UserGiftProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -4165,25 +4535,25 @@ public final class RewardsProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.UserClanGiftProto}
+     * Protobuf type {@code com.lvl6.proto.UserGiftProto}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserClanGiftProto)
-        com.lvl6.proto.RewardsProto.UserClanGiftProtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserGiftProto)
+        com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.RewardsProto.UserClanGiftProto.class, com.lvl6.proto.RewardsProto.UserClanGiftProto.Builder.class);
+                com.lvl6.proto.RewardsProto.UserGiftProto.class, com.lvl6.proto.RewardsProto.UserGiftProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.RewardsProto.UserClanGiftProto.newBuilder()
+      // Construct using com.lvl6.proto.RewardsProto.UserGiftProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4196,8 +4566,9 @@ public final class RewardsProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getGifterUserFieldBuilder();
-          getClanGiftFieldBuilder();
+          getGiftFieldBuilder();
           getRewardFieldBuilder();
+          getTangoGiftFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4206,9 +4577,9 @@ public final class RewardsProto {
 
       public Builder clear() {
         super.clear();
-        userClanGiftId_ = "";
+        ugUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        receiverUserId_ = "";
+        receiverUserUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         if (gifterUserBuilder_ == null) {
           gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -4216,10 +4587,10 @@ public final class RewardsProto {
           gifterUserBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
+        if (giftBuilder_ == null) {
+          gift_ = com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance();
         } else {
-          clanGiftBuilder_.clear();
+          giftBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         timeReceived_ = 0L;
@@ -4232,6 +4603,14 @@ public final class RewardsProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         hasBeenCollected_ = false;
         bitField0_ = (bitField0_ & ~0x00000040);
+        minutesTillExpiration_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        if (tangoGiftBuilder_ == null) {
+          tangoGift_ = com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance();
+        } else {
+          tangoGiftBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -4241,33 +4620,33 @@ public final class RewardsProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_descriptor;
       }
 
-      public com.lvl6.proto.RewardsProto.UserClanGiftProto getDefaultInstanceForType() {
-        return com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance();
+      public com.lvl6.proto.RewardsProto.UserGiftProto getDefaultInstanceForType() {
+        return com.lvl6.proto.RewardsProto.UserGiftProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.RewardsProto.UserClanGiftProto build() {
-        com.lvl6.proto.RewardsProto.UserClanGiftProto result = buildPartial();
+      public com.lvl6.proto.RewardsProto.UserGiftProto build() {
+        com.lvl6.proto.RewardsProto.UserGiftProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.RewardsProto.UserClanGiftProto buildPartial() {
-        com.lvl6.proto.RewardsProto.UserClanGiftProto result = new com.lvl6.proto.RewardsProto.UserClanGiftProto(this);
+      public com.lvl6.proto.RewardsProto.UserGiftProto buildPartial() {
+        com.lvl6.proto.RewardsProto.UserGiftProto result = new com.lvl6.proto.RewardsProto.UserGiftProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userClanGiftId_ = userClanGiftId_;
+        result.ugUuid_ = ugUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.receiverUserId_ = receiverUserId_;
+        result.receiverUserUuid_ = receiverUserUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -4279,10 +4658,10 @@ public final class RewardsProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        if (clanGiftBuilder_ == null) {
-          result.clanGift_ = clanGift_;
+        if (giftBuilder_ == null) {
+          result.gift_ = gift_;
         } else {
-          result.clanGift_ = clanGiftBuilder_.build();
+          result.gift_ = giftBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
@@ -4300,37 +4679,49 @@ public final class RewardsProto {
           to_bitField0_ |= 0x00000040;
         }
         result.hasBeenCollected_ = hasBeenCollected_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.minutesTillExpiration_ = minutesTillExpiration_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        if (tangoGiftBuilder_ == null) {
+          result.tangoGift_ = tangoGift_;
+        } else {
+          result.tangoGift_ = tangoGiftBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.RewardsProto.UserClanGiftProto) {
-          return mergeFrom((com.lvl6.proto.RewardsProto.UserClanGiftProto)other);
+        if (other instanceof com.lvl6.proto.RewardsProto.UserGiftProto) {
+          return mergeFrom((com.lvl6.proto.RewardsProto.UserGiftProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserClanGiftProto other) {
-        if (other == com.lvl6.proto.RewardsProto.UserClanGiftProto.getDefaultInstance()) return this;
-        if (other.hasUserClanGiftId()) {
+      public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserGiftProto other) {
+        if (other == com.lvl6.proto.RewardsProto.UserGiftProto.getDefaultInstance()) return this;
+        if (other.hasUgUuid()) {
           bitField0_ |= 0x00000001;
-          userClanGiftId_ = other.userClanGiftId_;
+          ugUuid_ = other.ugUuid_;
           onChanged();
         }
-        if (other.hasReceiverUserId()) {
+        if (other.hasReceiverUserUuid()) {
           bitField0_ |= 0x00000002;
-          receiverUserId_ = other.receiverUserId_;
+          receiverUserUuid_ = other.receiverUserUuid_;
           onChanged();
         }
         if (other.hasGifterUser()) {
           mergeGifterUser(other.getGifterUser());
         }
-        if (other.hasClanGift()) {
-          mergeClanGift(other.getClanGift());
+        if (other.hasGift()) {
+          mergeGift(other.getGift());
         }
         if (other.hasTimeReceived()) {
           setTimeReceived(other.getTimeReceived());
@@ -4340,6 +4731,12 @@ public final class RewardsProto {
         }
         if (other.hasHasBeenCollected()) {
           setHasBeenCollected(other.getHasBeenCollected());
+        }
+        if (other.hasMinutesTillExpiration()) {
+          setMinutesTillExpiration(other.getMinutesTillExpiration());
+        }
+        if (other.hasTangoGift()) {
+          mergeTangoGift(other.getTangoGift());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4353,11 +4750,11 @@ public final class RewardsProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.RewardsProto.UserClanGiftProto parsedMessage = null;
+        com.lvl6.proto.RewardsProto.UserGiftProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.RewardsProto.UserClanGiftProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.RewardsProto.UserGiftProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -4368,24 +4765,24 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
-      private java.lang.Object userClanGiftId_ = "";
+      private java.lang.Object ugUuid_ = "";
       /**
-       * <code>optional string userClanGiftId = 1;</code>
+       * <code>optional string ugUuid = 1;</code>
        */
-      public boolean hasUserClanGiftId() {
+      public boolean hasUgUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string userClanGiftId = 1;</code>
+       * <code>optional string ugUuid = 1;</code>
        */
-      public java.lang.String getUserClanGiftId() {
-        java.lang.Object ref = userClanGiftId_;
+      public java.lang.String getUgUuid() {
+        java.lang.Object ref = ugUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            userClanGiftId_ = s;
+            ugUuid_ = s;
           }
           return s;
         } else {
@@ -4393,75 +4790,75 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional string userClanGiftId = 1;</code>
+       * <code>optional string ugUuid = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getUserClanGiftIdBytes() {
-        java.lang.Object ref = userClanGiftId_;
+          getUgUuidBytes() {
+        java.lang.Object ref = ugUuid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          userClanGiftId_ = b;
+          ugUuid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string userClanGiftId = 1;</code>
+       * <code>optional string ugUuid = 1;</code>
        */
-      public Builder setUserClanGiftId(
+      public Builder setUgUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        userClanGiftId_ = value;
+        ugUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string userClanGiftId = 1;</code>
+       * <code>optional string ugUuid = 1;</code>
        */
-      public Builder clearUserClanGiftId() {
+      public Builder clearUgUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userClanGiftId_ = getDefaultInstance().getUserClanGiftId();
+        ugUuid_ = getDefaultInstance().getUgUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string userClanGiftId = 1;</code>
+       * <code>optional string ugUuid = 1;</code>
        */
-      public Builder setUserClanGiftIdBytes(
+      public Builder setUgUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        userClanGiftId_ = value;
+        ugUuid_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object receiverUserId_ = "";
+      private java.lang.Object receiverUserUuid_ = "";
       /**
-       * <code>optional string receiverUserId = 2;</code>
+       * <code>optional string receiverUserUuid = 2;</code>
        */
-      public boolean hasReceiverUserId() {
+      public boolean hasReceiverUserUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string receiverUserId = 2;</code>
+       * <code>optional string receiverUserUuid = 2;</code>
        */
-      public java.lang.String getReceiverUserId() {
-        java.lang.Object ref = receiverUserId_;
+      public java.lang.String getReceiverUserUuid() {
+        java.lang.Object ref = receiverUserUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            receiverUserId_ = s;
+            receiverUserUuid_ = s;
           }
           return s;
         } else {
@@ -4469,53 +4866,53 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional string receiverUserId = 2;</code>
+       * <code>optional string receiverUserUuid = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getReceiverUserIdBytes() {
-        java.lang.Object ref = receiverUserId_;
+          getReceiverUserUuidBytes() {
+        java.lang.Object ref = receiverUserUuid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          receiverUserId_ = b;
+          receiverUserUuid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string receiverUserId = 2;</code>
+       * <code>optional string receiverUserUuid = 2;</code>
        */
-      public Builder setReceiverUserId(
+      public Builder setReceiverUserUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        receiverUserId_ = value;
+        receiverUserUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string receiverUserId = 2;</code>
+       * <code>optional string receiverUserUuid = 2;</code>
        */
-      public Builder clearReceiverUserId() {
+      public Builder clearReceiverUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        receiverUserId_ = getDefaultInstance().getReceiverUserId();
+        receiverUserUuid_ = getDefaultInstance().getReceiverUserUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string receiverUserId = 2;</code>
+       * <code>optional string receiverUserUuid = 2;</code>
        */
-      public Builder setReceiverUserIdBytes(
+      public Builder setReceiverUserUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        receiverUserId_ = value;
+        receiverUserUuid_ = value;
         onChanged();
         return this;
       }
@@ -4636,149 +5033,137 @@ public final class RewardsProto {
         return gifterUserBuilder_;
       }
 
-      private com.lvl6.proto.RewardsProto.ClanGiftProto clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
+      private com.lvl6.proto.RewardsProto.GiftProto gift_ = com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder> clanGiftBuilder_;
+          com.lvl6.proto.RewardsProto.GiftProto, com.lvl6.proto.RewardsProto.GiftProto.Builder, com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> giftBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public boolean hasClanGift() {
+      public boolean hasGift() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public com.lvl6.proto.RewardsProto.ClanGiftProto getClanGift() {
-        if (clanGiftBuilder_ == null) {
-          return clanGift_;
+      public com.lvl6.proto.RewardsProto.GiftProto getGift() {
+        if (giftBuilder_ == null) {
+          return gift_;
         } else {
-          return clanGiftBuilder_.getMessage();
+          return giftBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public Builder setClanGift(com.lvl6.proto.RewardsProto.ClanGiftProto value) {
-        if (clanGiftBuilder_ == null) {
+      public Builder setGift(com.lvl6.proto.RewardsProto.GiftProto value) {
+        if (giftBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          clanGift_ = value;
+          gift_ = value;
           onChanged();
         } else {
-          clanGiftBuilder_.setMessage(value);
+          giftBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public Builder setClanGift(
-          com.lvl6.proto.RewardsProto.ClanGiftProto.Builder builderForValue) {
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = builderForValue.build();
+      public Builder setGift(
+          com.lvl6.proto.RewardsProto.GiftProto.Builder builderForValue) {
+        if (giftBuilder_ == null) {
+          gift_ = builderForValue.build();
           onChanged();
         } else {
-          clanGiftBuilder_.setMessage(builderForValue.build());
+          giftBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public Builder mergeClanGift(com.lvl6.proto.RewardsProto.ClanGiftProto value) {
-        if (clanGiftBuilder_ == null) {
+      public Builder mergeGift(com.lvl6.proto.RewardsProto.GiftProto value) {
+        if (giftBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              clanGift_ != com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance()) {
-            clanGift_ =
-              com.lvl6.proto.RewardsProto.ClanGiftProto.newBuilder(clanGift_).mergeFrom(value).buildPartial();
+              gift_ != com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance()) {
+            gift_ =
+              com.lvl6.proto.RewardsProto.GiftProto.newBuilder(gift_).mergeFrom(value).buildPartial();
           } else {
-            clanGift_ = value;
+            gift_ = value;
           }
           onChanged();
         } else {
-          clanGiftBuilder_.mergeFrom(value);
+          giftBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public Builder clearClanGift() {
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
+      public Builder clearGift() {
+        if (giftBuilder_ == null) {
+          gift_ = com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance();
           onChanged();
         } else {
-          clanGiftBuilder_.clear();
+          giftBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public com.lvl6.proto.RewardsProto.ClanGiftProto.Builder getClanGiftBuilder() {
+      public com.lvl6.proto.RewardsProto.GiftProto.Builder getGiftBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
-        return getClanGiftFieldBuilder().getBuilder();
+        return getGiftFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
-      public com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder() {
-        if (clanGiftBuilder_ != null) {
-          return clanGiftBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.RewardsProto.GiftProtoOrBuilder getGiftOrBuilder() {
+        if (giftBuilder_ != null) {
+          return giftBuilder_.getMessageOrBuilder();
         } else {
-          return clanGift_;
+          return gift_;
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 4;</code>
+       * <code>optional .com.lvl6.proto.GiftProto gift = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder> 
-          getClanGiftFieldBuilder() {
-        if (clanGiftBuilder_ == null) {
-          clanGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder>(
-                  getClanGift(),
+          com.lvl6.proto.RewardsProto.GiftProto, com.lvl6.proto.RewardsProto.GiftProto.Builder, com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> 
+          getGiftFieldBuilder() {
+        if (giftBuilder_ == null) {
+          giftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.GiftProto, com.lvl6.proto.RewardsProto.GiftProto.Builder, com.lvl6.proto.RewardsProto.GiftProtoOrBuilder>(
+                  getGift(),
                   getParentForChildren(),
                   isClean());
-          clanGift_ = null;
+          gift_ = null;
         }
-        return clanGiftBuilder_;
+        return giftBuilder_;
       }
 
       private long timeReceived_ ;
       /**
        * <code>optional int64 timeReceived = 5;</code>
-       *
-       * <pre>
-       *when the gift gets sent out to everyone
-       * </pre>
        */
       public boolean hasTimeReceived() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 timeReceived = 5;</code>
-       *
-       * <pre>
-       *when the gift gets sent out to everyone
-       * </pre>
        */
       public long getTimeReceived() {
         return timeReceived_;
       }
       /**
        * <code>optional int64 timeReceived = 5;</code>
-       *
-       * <pre>
-       *when the gift gets sent out to everyone
-       * </pre>
        */
       public Builder setTimeReceived(long value) {
         bitField0_ |= 0x00000010;
@@ -4788,10 +5173,6 @@ public final class RewardsProto {
       }
       /**
        * <code>optional int64 timeReceived = 5;</code>
-       *
-       * <pre>
-       *when the gift gets sent out to everyone
-       * </pre>
        */
       public Builder clearTimeReceived() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -4948,1492 +5329,6 @@ public final class RewardsProto {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserClanGiftProto)
-    }
-
-    static {
-      defaultInstance = new UserClanGiftProto(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserClanGiftProto)
-  }
-
-  public interface UserGiftProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserGiftProto)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional string ugId = 1;</code>
-     */
-    boolean hasUgId();
-    /**
-     * <code>optional string ugId = 1;</code>
-     */
-    java.lang.String getUgId();
-    /**
-     * <code>optional string ugId = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getUgIdBytes();
-
-    /**
-     * <code>optional string receiverUserId = 2;</code>
-     */
-    boolean hasReceiverUserId();
-    /**
-     * <code>optional string receiverUserId = 2;</code>
-     */
-    java.lang.String getReceiverUserId();
-    /**
-     * <code>optional string receiverUserId = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getReceiverUserIdBytes();
-
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-     */
-    boolean hasGifterUser();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProto getGifterUser();
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-     */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder();
-
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-     */
-    boolean hasGiftType();
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-     */
-    com.lvl6.proto.RewardsProto.RewardProto.RewardType getGiftType();
-
-    /**
-     * <code>optional int64 timeReceived = 5;</code>
-     */
-    boolean hasTimeReceived();
-    /**
-     * <code>optional int64 timeReceived = 5;</code>
-     */
-    long getTimeReceived();
-
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-     */
-    boolean hasRp();
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-     */
-    com.lvl6.proto.RewardsProto.RewardProto getRp();
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-     */
-    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRpOrBuilder();
-
-    /**
-     * <code>optional bool hasBeenCollected = 7;</code>
-     */
-    boolean hasHasBeenCollected();
-    /**
-     * <code>optional bool hasBeenCollected = 7;</code>
-     */
-    boolean getHasBeenCollected();
-
-    /**
-     * <code>optional int32 minutesTillExpiration = 8;</code>
-     *
-     * <pre>
-     *not always set
-     * </pre>
-     */
-    boolean hasMinutesTillExpiration();
-    /**
-     * <code>optional int32 minutesTillExpiration = 8;</code>
-     *
-     * <pre>
-     *not always set
-     * </pre>
-     */
-    int getMinutesTillExpiration();
-
-    /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-     *
-     * <pre>
-     *set or not set based on GiftType
-     * </pre>
-     */
-    boolean hasClanGift();
-    /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-     *
-     * <pre>
-     *set or not set based on GiftType
-     * </pre>
-     */
-    com.lvl6.proto.RewardsProto.ClanGiftProto getClanGift();
-    /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-     *
-     * <pre>
-     *set or not set based on GiftType
-     * </pre>
-     */
-    com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder();
-
-    /**
-     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
-     */
-    boolean hasTangoGift();
-    /**
-     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
-     */
-    com.lvl6.proto.RewardsProto.UserTangoGiftProto getTangoGift();
-    /**
-     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
-     */
-    com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder getTangoGiftOrBuilder();
-  }
-  /**
-   * Protobuf type {@code com.lvl6.proto.UserGiftProto}
-   */
-  public static final class UserGiftProto extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserGiftProto)
-      UserGiftProtoOrBuilder {
-    // Use UserGiftProto.newBuilder() to construct.
-    private UserGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private UserGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final UserGiftProto defaultInstance;
-    public static UserGiftProto getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public UserGiftProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UserGiftProto(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              ugId_ = bs;
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              receiverUserId_ = bs;
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = gifterUser_.toBuilder();
-              }
-              gifterUser_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(gifterUser_);
-                gifterUser_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.RewardsProto.RewardProto.RewardType value = com.lvl6.proto.RewardsProto.RewardProto.RewardType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                giftType_ = value;
-              }
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              timeReceived_ = input.readInt64();
-              break;
-            }
-            case 50: {
-              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000020) == 0x00000020)) {
-                subBuilder = rp_.toBuilder();
-              }
-              rp_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(rp_);
-                rp_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000020;
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              hasBeenCollected_ = input.readBool();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              minutesTillExpiration_ = input.readInt32();
-              break;
-            }
-            case 74: {
-              com.lvl6.proto.RewardsProto.ClanGiftProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000100) == 0x00000100)) {
-                subBuilder = clanGift_.toBuilder();
-              }
-              clanGift_ = input.readMessage(com.lvl6.proto.RewardsProto.ClanGiftProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(clanGift_);
-                clanGift_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000100;
-              break;
-            }
-            case 82: {
-              com.lvl6.proto.RewardsProto.UserTangoGiftProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000200) == 0x00000200)) {
-                subBuilder = tangoGift_.toBuilder();
-              }
-              tangoGift_ = input.readMessage(com.lvl6.proto.RewardsProto.UserTangoGiftProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(tangoGift_);
-                tangoGift_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000200;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.RewardsProto.UserGiftProto.class, com.lvl6.proto.RewardsProto.UserGiftProto.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<UserGiftProto> PARSER =
-        new com.google.protobuf.AbstractParser<UserGiftProto>() {
-      public UserGiftProto parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserGiftProto(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UserGiftProto> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int UGID_FIELD_NUMBER = 1;
-    private java.lang.Object ugId_;
-    /**
-     * <code>optional string ugId = 1;</code>
-     */
-    public boolean hasUgId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string ugId = 1;</code>
-     */
-    public java.lang.String getUgId() {
-      java.lang.Object ref = ugId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          ugId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string ugId = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getUgIdBytes() {
-      java.lang.Object ref = ugId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ugId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int RECEIVERUSERID_FIELD_NUMBER = 2;
-    private java.lang.Object receiverUserId_;
-    /**
-     * <code>optional string receiverUserId = 2;</code>
-     */
-    public boolean hasReceiverUserId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string receiverUserId = 2;</code>
-     */
-    public java.lang.String getReceiverUserId() {
-      java.lang.Object ref = receiverUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          receiverUserId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string receiverUserId = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getReceiverUserIdBytes() {
-      java.lang.Object ref = receiverUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        receiverUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int GIFTERUSER_FIELD_NUMBER = 3;
-    private com.lvl6.proto.UserProto.MinimumUserProto gifterUser_;
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-     */
-    public boolean hasGifterUser() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProto getGifterUser() {
-      return gifterUser_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-     */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder() {
-      return gifterUser_;
-    }
-
-    public static final int GIFTTYPE_FIELD_NUMBER = 4;
-    private com.lvl6.proto.RewardsProto.RewardProto.RewardType giftType_;
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-     */
-    public boolean hasGiftType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProto.RewardType getGiftType() {
-      return giftType_;
-    }
-
-    public static final int TIMERECEIVED_FIELD_NUMBER = 5;
-    private long timeReceived_;
-    /**
-     * <code>optional int64 timeReceived = 5;</code>
-     */
-    public boolean hasTimeReceived() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int64 timeReceived = 5;</code>
-     */
-    public long getTimeReceived() {
-      return timeReceived_;
-    }
-
-    public static final int RP_FIELD_NUMBER = 6;
-    private com.lvl6.proto.RewardsProto.RewardProto rp_;
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-     */
-    public boolean hasRp() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProto getRp() {
-      return rp_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-     */
-    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRpOrBuilder() {
-      return rp_;
-    }
-
-    public static final int HASBEENCOLLECTED_FIELD_NUMBER = 7;
-    private boolean hasBeenCollected_;
-    /**
-     * <code>optional bool hasBeenCollected = 7;</code>
-     */
-    public boolean hasHasBeenCollected() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional bool hasBeenCollected = 7;</code>
-     */
-    public boolean getHasBeenCollected() {
-      return hasBeenCollected_;
-    }
-
-    public static final int MINUTESTILLEXPIRATION_FIELD_NUMBER = 8;
-    private int minutesTillExpiration_;
-    /**
-     * <code>optional int32 minutesTillExpiration = 8;</code>
-     *
-     * <pre>
-     *not always set
-     * </pre>
-     */
-    public boolean hasMinutesTillExpiration() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 minutesTillExpiration = 8;</code>
-     *
-     * <pre>
-     *not always set
-     * </pre>
-     */
-    public int getMinutesTillExpiration() {
-      return minutesTillExpiration_;
-    }
-
-    public static final int CLANGIFT_FIELD_NUMBER = 9;
-    private com.lvl6.proto.RewardsProto.ClanGiftProto clanGift_;
-    /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-     *
-     * <pre>
-     *set or not set based on GiftType
-     * </pre>
-     */
-    public boolean hasClanGift() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-     *
-     * <pre>
-     *set or not set based on GiftType
-     * </pre>
-     */
-    public com.lvl6.proto.RewardsProto.ClanGiftProto getClanGift() {
-      return clanGift_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-     *
-     * <pre>
-     *set or not set based on GiftType
-     * </pre>
-     */
-    public com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder() {
-      return clanGift_;
-    }
-
-    public static final int TANGOGIFT_FIELD_NUMBER = 10;
-    private com.lvl6.proto.RewardsProto.UserTangoGiftProto tangoGift_;
-    /**
-     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
-     */
-    public boolean hasTangoGift() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
-     */
-    public com.lvl6.proto.RewardsProto.UserTangoGiftProto getTangoGift() {
-      return tangoGift_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
-     */
-    public com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder getTangoGiftOrBuilder() {
-      return tangoGift_;
-    }
-
-    private void initFields() {
-      ugId_ = "";
-      receiverUserId_ = "";
-      gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
-      timeReceived_ = 0L;
-      rp_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-      hasBeenCollected_ = false;
-      minutesTillExpiration_ = 0;
-      clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
-      tangoGift_ = com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUgIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getReceiverUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, gifterUser_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, giftType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, timeReceived_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(6, rp_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBool(7, hasBeenCollected_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, minutesTillExpiration_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeMessage(9, clanGift_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeMessage(10, tangoGift_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUgIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getReceiverUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, gifterUser_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, giftType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, timeReceived_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, rp_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, hasBeenCollected_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, minutesTillExpiration_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, clanGift_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, tangoGift_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.lvl6.proto.RewardsProto.UserGiftProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.RewardsProto.UserGiftProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.lvl6.proto.UserGiftProto}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserGiftProto)
-        com.lvl6.proto.RewardsProto.UserGiftProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.RewardsProto.UserGiftProto.class, com.lvl6.proto.RewardsProto.UserGiftProto.Builder.class);
-      }
-
-      // Construct using com.lvl6.proto.RewardsProto.UserGiftProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getGifterUserFieldBuilder();
-          getRpFieldBuilder();
-          getClanGiftFieldBuilder();
-          getTangoGiftFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        ugId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        receiverUserId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        if (gifterUserBuilder_ == null) {
-          gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          gifterUserBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        timeReceived_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        if (rpBuilder_ == null) {
-          rp_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-        } else {
-          rpBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000020);
-        hasBeenCollected_ = false;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        minutesTillExpiration_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
-        } else {
-          clanGiftBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000100);
-        if (tangoGiftBuilder_ == null) {
-          tangoGift_ = com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance();
-        } else {
-          tangoGiftBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000200);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserGiftProto_descriptor;
-      }
-
-      public com.lvl6.proto.RewardsProto.UserGiftProto getDefaultInstanceForType() {
-        return com.lvl6.proto.RewardsProto.UserGiftProto.getDefaultInstance();
-      }
-
-      public com.lvl6.proto.RewardsProto.UserGiftProto build() {
-        com.lvl6.proto.RewardsProto.UserGiftProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.lvl6.proto.RewardsProto.UserGiftProto buildPartial() {
-        com.lvl6.proto.RewardsProto.UserGiftProto result = new com.lvl6.proto.RewardsProto.UserGiftProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.ugId_ = ugId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.receiverUserId_ = receiverUserId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (gifterUserBuilder_ == null) {
-          result.gifterUser_ = gifterUser_;
-        } else {
-          result.gifterUser_ = gifterUserBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.giftType_ = giftType_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.timeReceived_ = timeReceived_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        if (rpBuilder_ == null) {
-          result.rp_ = rp_;
-        } else {
-          result.rp_ = rpBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.hasBeenCollected_ = hasBeenCollected_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.minutesTillExpiration_ = minutesTillExpiration_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        if (clanGiftBuilder_ == null) {
-          result.clanGift_ = clanGift_;
-        } else {
-          result.clanGift_ = clanGiftBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        if (tangoGiftBuilder_ == null) {
-          result.tangoGift_ = tangoGift_;
-        } else {
-          result.tangoGift_ = tangoGiftBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.RewardsProto.UserGiftProto) {
-          return mergeFrom((com.lvl6.proto.RewardsProto.UserGiftProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserGiftProto other) {
-        if (other == com.lvl6.proto.RewardsProto.UserGiftProto.getDefaultInstance()) return this;
-        if (other.hasUgId()) {
-          bitField0_ |= 0x00000001;
-          ugId_ = other.ugId_;
-          onChanged();
-        }
-        if (other.hasReceiverUserId()) {
-          bitField0_ |= 0x00000002;
-          receiverUserId_ = other.receiverUserId_;
-          onChanged();
-        }
-        if (other.hasGifterUser()) {
-          mergeGifterUser(other.getGifterUser());
-        }
-        if (other.hasGiftType()) {
-          setGiftType(other.getGiftType());
-        }
-        if (other.hasTimeReceived()) {
-          setTimeReceived(other.getTimeReceived());
-        }
-        if (other.hasRp()) {
-          mergeRp(other.getRp());
-        }
-        if (other.hasHasBeenCollected()) {
-          setHasBeenCollected(other.getHasBeenCollected());
-        }
-        if (other.hasMinutesTillExpiration()) {
-          setMinutesTillExpiration(other.getMinutesTillExpiration());
-        }
-        if (other.hasClanGift()) {
-          mergeClanGift(other.getClanGift());
-        }
-        if (other.hasTangoGift()) {
-          mergeTangoGift(other.getTangoGift());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.lvl6.proto.RewardsProto.UserGiftProto parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.RewardsProto.UserGiftProto) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object ugId_ = "";
-      /**
-       * <code>optional string ugId = 1;</code>
-       */
-      public boolean hasUgId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string ugId = 1;</code>
-       */
-      public java.lang.String getUgId() {
-        java.lang.Object ref = ugId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            ugId_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string ugId = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getUgIdBytes() {
-        java.lang.Object ref = ugId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ugId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string ugId = 1;</code>
-       */
-      public Builder setUgId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        ugId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string ugId = 1;</code>
-       */
-      public Builder clearUgId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        ugId_ = getDefaultInstance().getUgId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string ugId = 1;</code>
-       */
-      public Builder setUgIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        ugId_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object receiverUserId_ = "";
-      /**
-       * <code>optional string receiverUserId = 2;</code>
-       */
-      public boolean hasReceiverUserId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string receiverUserId = 2;</code>
-       */
-      public java.lang.String getReceiverUserId() {
-        java.lang.Object ref = receiverUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            receiverUserId_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string receiverUserId = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getReceiverUserIdBytes() {
-        java.lang.Object ref = receiverUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          receiverUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string receiverUserId = 2;</code>
-       */
-      public Builder setReceiverUserId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        receiverUserId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string receiverUserId = 2;</code>
-       */
-      public Builder clearReceiverUserId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        receiverUserId_ = getDefaultInstance().getReceiverUserId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string receiverUserId = 2;</code>
-       */
-      public Builder setReceiverUserIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        receiverUserId_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.UserProto.MinimumUserProto gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> gifterUserBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public boolean hasGifterUser() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto getGifterUser() {
-        if (gifterUserBuilder_ == null) {
-          return gifterUser_;
-        } else {
-          return gifterUserBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public Builder setGifterUser(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (gifterUserBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          gifterUser_ = value;
-          onChanged();
-        } else {
-          gifterUserBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public Builder setGifterUser(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (gifterUserBuilder_ == null) {
-          gifterUser_ = builderForValue.build();
-          onChanged();
-        } else {
-          gifterUserBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public Builder mergeGifterUser(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (gifterUserBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              gifterUser_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            gifterUser_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(gifterUser_).mergeFrom(value).buildPartial();
-          } else {
-            gifterUser_ = value;
-          }
-          onChanged();
-        } else {
-          gifterUserBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public Builder clearGifterUser() {
-        if (gifterUserBuilder_ == null) {
-          gifterUser_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          gifterUserBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getGifterUserBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getGifterUserFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getGifterUserOrBuilder() {
-        if (gifterUserBuilder_ != null) {
-          return gifterUserBuilder_.getMessageOrBuilder();
-        } else {
-          return gifterUser_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto gifterUser = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getGifterUserFieldBuilder() {
-        if (gifterUserBuilder_ == null) {
-          gifterUserBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getGifterUser(),
-                  getParentForChildren(),
-                  isClean());
-          gifterUser_ = null;
-        }
-        return gifterUserBuilder_;
-      }
-
-      private com.lvl6.proto.RewardsProto.RewardProto.RewardType giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-       */
-      public boolean hasGiftType() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto.RewardType getGiftType() {
-        return giftType_;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-       */
-      public Builder setGiftType(com.lvl6.proto.RewardsProto.RewardProto.RewardType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000008;
-        giftType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto.RewardType giftType = 4;</code>
-       */
-      public Builder clearGiftType() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        giftType_ = com.lvl6.proto.RewardsProto.RewardProto.RewardType.NO_REWARD;
-        onChanged();
-        return this;
-      }
-
-      private long timeReceived_ ;
-      /**
-       * <code>optional int64 timeReceived = 5;</code>
-       */
-      public boolean hasTimeReceived() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int64 timeReceived = 5;</code>
-       */
-      public long getTimeReceived() {
-        return timeReceived_;
-      }
-      /**
-       * <code>optional int64 timeReceived = 5;</code>
-       */
-      public Builder setTimeReceived(long value) {
-        bitField0_ |= 0x00000010;
-        timeReceived_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 timeReceived = 5;</code>
-       */
-      public Builder clearTimeReceived() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        timeReceived_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private com.lvl6.proto.RewardsProto.RewardProto rp_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rpBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public boolean hasRp() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto getRp() {
-        if (rpBuilder_ == null) {
-          return rp_;
-        } else {
-          return rpBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public Builder setRp(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          rp_ = value;
-          onChanged();
-        } else {
-          rpBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000020;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public Builder setRp(
-          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
-        if (rpBuilder_ == null) {
-          rp_ = builderForValue.build();
-          onChanged();
-        } else {
-          rpBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000020;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public Builder mergeRp(com.lvl6.proto.RewardsProto.RewardProto value) {
-        if (rpBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020) &&
-              rp_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
-            rp_ =
-              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(rp_).mergeFrom(value).buildPartial();
-          } else {
-            rp_ = value;
-          }
-          onChanged();
-        } else {
-          rpBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000020;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public Builder clearRp() {
-        if (rpBuilder_ == null) {
-          rp_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
-          onChanged();
-        } else {
-          rpBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000020);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRpBuilder() {
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return getRpFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRpOrBuilder() {
-        if (rpBuilder_ != null) {
-          return rpBuilder_.getMessageOrBuilder();
-        } else {
-          return rp_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.RewardProto rp = 6;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
-          getRpFieldBuilder() {
-        if (rpBuilder_ == null) {
-          rpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
-                  getRp(),
-                  getParentForChildren(),
-                  isClean());
-          rp_ = null;
-        }
-        return rpBuilder_;
-      }
-
-      private boolean hasBeenCollected_ ;
-      /**
-       * <code>optional bool hasBeenCollected = 7;</code>
-       */
-      public boolean hasHasBeenCollected() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional bool hasBeenCollected = 7;</code>
-       */
-      public boolean getHasBeenCollected() {
-        return hasBeenCollected_;
-      }
-      /**
-       * <code>optional bool hasBeenCollected = 7;</code>
-       */
-      public Builder setHasBeenCollected(boolean value) {
-        bitField0_ |= 0x00000040;
-        hasBeenCollected_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool hasBeenCollected = 7;</code>
-       */
-      public Builder clearHasBeenCollected() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        hasBeenCollected_ = false;
-        onChanged();
-        return this;
-      }
-
       private int minutesTillExpiration_ ;
       /**
        * <code>optional int32 minutesTillExpiration = 8;</code>
@@ -6482,169 +5377,25 @@ public final class RewardsProto {
         return this;
       }
 
-      private com.lvl6.proto.RewardsProto.ClanGiftProto clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder> clanGiftBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public boolean hasClanGift() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public com.lvl6.proto.RewardsProto.ClanGiftProto getClanGift() {
-        if (clanGiftBuilder_ == null) {
-          return clanGift_;
-        } else {
-          return clanGiftBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public Builder setClanGift(com.lvl6.proto.RewardsProto.ClanGiftProto value) {
-        if (clanGiftBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          clanGift_ = value;
-          onChanged();
-        } else {
-          clanGiftBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000100;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public Builder setClanGift(
-          com.lvl6.proto.RewardsProto.ClanGiftProto.Builder builderForValue) {
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = builderForValue.build();
-          onChanged();
-        } else {
-          clanGiftBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000100;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public Builder mergeClanGift(com.lvl6.proto.RewardsProto.ClanGiftProto value) {
-        if (clanGiftBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100) &&
-              clanGift_ != com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance()) {
-            clanGift_ =
-              com.lvl6.proto.RewardsProto.ClanGiftProto.newBuilder(clanGift_).mergeFrom(value).buildPartial();
-          } else {
-            clanGift_ = value;
-          }
-          onChanged();
-        } else {
-          clanGiftBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000100;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public Builder clearClanGift() {
-        if (clanGiftBuilder_ == null) {
-          clanGift_ = com.lvl6.proto.RewardsProto.ClanGiftProto.getDefaultInstance();
-          onChanged();
-        } else {
-          clanGiftBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000100);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public com.lvl6.proto.RewardsProto.ClanGiftProto.Builder getClanGiftBuilder() {
-        bitField0_ |= 0x00000100;
-        onChanged();
-        return getClanGiftFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      public com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder getClanGiftOrBuilder() {
-        if (clanGiftBuilder_ != null) {
-          return clanGiftBuilder_.getMessageOrBuilder();
-        } else {
-          return clanGift_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.ClanGiftProto clanGift = 9;</code>
-       *
-       * <pre>
-       *set or not set based on GiftType
-       * </pre>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder> 
-          getClanGiftFieldBuilder() {
-        if (clanGiftBuilder_ == null) {
-          clanGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.RewardsProto.ClanGiftProto, com.lvl6.proto.RewardsProto.ClanGiftProto.Builder, com.lvl6.proto.RewardsProto.ClanGiftProtoOrBuilder>(
-                  getClanGift(),
-                  getParentForChildren(),
-                  isClean());
-          clanGift_ = null;
-        }
-        return clanGiftBuilder_;
-      }
-
       private com.lvl6.proto.RewardsProto.UserTangoGiftProto tangoGift_ = com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.UserTangoGiftProto, com.lvl6.proto.RewardsProto.UserTangoGiftProto.Builder, com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder> tangoGiftBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public boolean hasTangoGift() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public com.lvl6.proto.RewardsProto.UserTangoGiftProto getTangoGift() {
         if (tangoGiftBuilder_ == null) {
@@ -6654,7 +5405,11 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public Builder setTangoGift(com.lvl6.proto.RewardsProto.UserTangoGiftProto value) {
         if (tangoGiftBuilder_ == null) {
@@ -6666,11 +5421,15 @@ public final class RewardsProto {
         } else {
           tangoGiftBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public Builder setTangoGift(
           com.lvl6.proto.RewardsProto.UserTangoGiftProto.Builder builderForValue) {
@@ -6680,15 +5439,19 @@ public final class RewardsProto {
         } else {
           tangoGiftBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public Builder mergeTangoGift(com.lvl6.proto.RewardsProto.UserTangoGiftProto value) {
         if (tangoGiftBuilder_ == null) {
-          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+          if (((bitField0_ & 0x00000100) == 0x00000100) &&
               tangoGift_ != com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance()) {
             tangoGift_ =
               com.lvl6.proto.RewardsProto.UserTangoGiftProto.newBuilder(tangoGift_).mergeFrom(value).buildPartial();
@@ -6699,11 +5462,15 @@ public final class RewardsProto {
         } else {
           tangoGiftBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public Builder clearTangoGift() {
         if (tangoGiftBuilder_ == null) {
@@ -6712,19 +5479,27 @@ public final class RewardsProto {
         } else {
           tangoGiftBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public com.lvl6.proto.RewardsProto.UserTangoGiftProto.Builder getTangoGiftBuilder() {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         onChanged();
         return getTangoGiftFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       public com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder getTangoGiftOrBuilder() {
         if (tangoGiftBuilder_ != null) {
@@ -6734,7 +5509,11 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 10;</code>
+       * <code>optional .com.lvl6.proto.UserTangoGiftProto tangoGift = 9;</code>
+       *
+       * <pre>
+       *set or not set based on GiftType in gift
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.RewardsProto.UserTangoGiftProto, com.lvl6.proto.RewardsProto.UserTangoGiftProto.Builder, com.lvl6.proto.RewardsProto.UserTangoGiftProtoOrBuilder> 
@@ -6766,45 +5545,32 @@ public final class RewardsProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string userGiftId = 1;</code>
+     * <code>optional string userGiftUuid = 1;</code>
      */
-    boolean hasUserGiftId();
+    boolean hasUserGiftUuid();
     /**
-     * <code>optional string userGiftId = 1;</code>
+     * <code>optional string userGiftUuid = 1;</code>
      */
-    java.lang.String getUserGiftId();
+    java.lang.String getUserGiftUuid();
     /**
-     * <code>optional string userGiftId = 1;</code>
+     * <code>optional string userGiftUuid = 1;</code>
      */
     com.google.protobuf.ByteString
-        getUserGiftIdBytes();
+        getUserGiftUuidBytes();
 
     /**
-     * <code>optional string gifterTangoUserId = 2;</code>
+     * <code>optional string gifterTangoName = 2;</code>
      */
-    boolean hasGifterTangoUserId();
+    boolean hasGifterTangoName();
     /**
-     * <code>optional string gifterTangoUserId = 2;</code>
+     * <code>optional string gifterTangoName = 2;</code>
      */
-    java.lang.String getGifterTangoUserId();
+    java.lang.String getGifterTangoName();
     /**
-     * <code>optional string gifterTangoUserId = 2;</code>
+     * <code>optional string gifterTangoName = 2;</code>
      */
     com.google.protobuf.ByteString
-        getGifterTangoUserIdBytes();
-
-    /**
-     * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-     */
-    boolean hasTangoGift();
-    /**
-     * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-     */
-    com.lvl6.proto.RewardsProto.TangoGiftProto getTangoGift();
-    /**
-     * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-     */
-    com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder getTangoGiftOrBuilder();
+        getGifterTangoNameBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserTangoGiftProto}
@@ -6861,26 +5627,13 @@ public final class RewardsProto {
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userGiftId_ = bs;
+              userGiftUuid_ = bs;
               break;
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              gifterTangoUserId_ = bs;
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.RewardsProto.TangoGiftProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = tangoGift_.toBuilder();
-              }
-              tangoGift_ = input.readMessage(com.lvl6.proto.RewardsProto.TangoGiftProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(tangoGift_);
-                tangoGift_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
+              gifterTangoName_ = bs;
               break;
             }
           }
@@ -6923,19 +5676,19 @@ public final class RewardsProto {
     }
 
     private int bitField0_;
-    public static final int USERGIFTID_FIELD_NUMBER = 1;
-    private java.lang.Object userGiftId_;
+    public static final int USERGIFTUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userGiftUuid_;
     /**
-     * <code>optional string userGiftId = 1;</code>
+     * <code>optional string userGiftUuid = 1;</code>
      */
-    public boolean hasUserGiftId() {
+    public boolean hasUserGiftUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string userGiftId = 1;</code>
+     * <code>optional string userGiftUuid = 1;</code>
      */
-    public java.lang.String getUserGiftId() {
-      java.lang.Object ref = userGiftId_;
+    public java.lang.String getUserGiftUuid() {
+      java.lang.Object ref = userGiftUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -6943,41 +5696,41 @@ public final class RewardsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          userGiftId_ = s;
+          userGiftUuid_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string userGiftId = 1;</code>
+     * <code>optional string userGiftUuid = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getUserGiftIdBytes() {
-      java.lang.Object ref = userGiftId_;
+        getUserGiftUuidBytes() {
+      java.lang.Object ref = userGiftUuid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        userGiftId_ = b;
+        userGiftUuid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int GIFTERTANGOUSERID_FIELD_NUMBER = 2;
-    private java.lang.Object gifterTangoUserId_;
+    public static final int GIFTERTANGONAME_FIELD_NUMBER = 2;
+    private java.lang.Object gifterTangoName_;
     /**
-     * <code>optional string gifterTangoUserId = 2;</code>
+     * <code>optional string gifterTangoName = 2;</code>
      */
-    public boolean hasGifterTangoUserId() {
+    public boolean hasGifterTangoName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string gifterTangoUserId = 2;</code>
+     * <code>optional string gifterTangoName = 2;</code>
      */
-    public java.lang.String getGifterTangoUserId() {
-      java.lang.Object ref = gifterTangoUserId_;
+    public java.lang.String getGifterTangoName() {
+      java.lang.Object ref = gifterTangoName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -6985,53 +5738,31 @@ public final class RewardsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          gifterTangoUserId_ = s;
+          gifterTangoName_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string gifterTangoUserId = 2;</code>
+     * <code>optional string gifterTangoName = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getGifterTangoUserIdBytes() {
-      java.lang.Object ref = gifterTangoUserId_;
+        getGifterTangoNameBytes() {
+      java.lang.Object ref = gifterTangoName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        gifterTangoUserId_ = b;
+        gifterTangoName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int TANGOGIFT_FIELD_NUMBER = 3;
-    private com.lvl6.proto.RewardsProto.TangoGiftProto tangoGift_;
-    /**
-     * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-     */
-    public boolean hasTangoGift() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-     */
-    public com.lvl6.proto.RewardsProto.TangoGiftProto getTangoGift() {
-      return tangoGift_;
-    }
-    /**
-     * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-     */
-    public com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder getTangoGiftOrBuilder() {
-      return tangoGift_;
-    }
-
     private void initFields() {
-      userGiftId_ = "";
-      gifterTangoUserId_ = "";
-      tangoGift_ = com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance();
+      userGiftUuid_ = "";
+      gifterTangoName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7047,13 +5778,10 @@ public final class RewardsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUserGiftIdBytes());
+        output.writeBytes(1, getUserGiftUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getGifterTangoUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, tangoGift_);
+        output.writeBytes(2, getGifterTangoNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -7066,15 +5794,11 @@ public final class RewardsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUserGiftIdBytes());
+          .computeBytesSize(1, getUserGiftUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getGifterTangoUserIdBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, tangoGift_);
+          .computeBytesSize(2, getGifterTangoNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7185,7 +5909,6 @@ public final class RewardsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getTangoGiftFieldBuilder();
         }
       }
       private static Builder create() {
@@ -7194,16 +5917,10 @@ public final class RewardsProto {
 
       public Builder clear() {
         super.clear();
-        userGiftId_ = "";
+        userGiftUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        gifterTangoUserId_ = "";
+        gifterTangoName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (tangoGiftBuilder_ == null) {
-          tangoGift_ = com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance();
-        } else {
-          tangoGiftBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -7235,19 +5952,11 @@ public final class RewardsProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userGiftId_ = userGiftId_;
+        result.userGiftUuid_ = userGiftUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.gifterTangoUserId_ = gifterTangoUserId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (tangoGiftBuilder_ == null) {
-          result.tangoGift_ = tangoGift_;
-        } else {
-          result.tangoGift_ = tangoGiftBuilder_.build();
-        }
+        result.gifterTangoName_ = gifterTangoName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7264,18 +5973,15 @@ public final class RewardsProto {
 
       public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserTangoGiftProto other) {
         if (other == com.lvl6.proto.RewardsProto.UserTangoGiftProto.getDefaultInstance()) return this;
-        if (other.hasUserGiftId()) {
+        if (other.hasUserGiftUuid()) {
           bitField0_ |= 0x00000001;
-          userGiftId_ = other.userGiftId_;
+          userGiftUuid_ = other.userGiftUuid_;
           onChanged();
         }
-        if (other.hasGifterTangoUserId()) {
+        if (other.hasGifterTangoName()) {
           bitField0_ |= 0x00000002;
-          gifterTangoUserId_ = other.gifterTangoUserId_;
+          gifterTangoName_ = other.gifterTangoName_;
           onChanged();
-        }
-        if (other.hasTangoGift()) {
-          mergeTangoGift(other.getTangoGift());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7304,24 +6010,24 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
-      private java.lang.Object userGiftId_ = "";
+      private java.lang.Object userGiftUuid_ = "";
       /**
-       * <code>optional string userGiftId = 1;</code>
+       * <code>optional string userGiftUuid = 1;</code>
        */
-      public boolean hasUserGiftId() {
+      public boolean hasUserGiftUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string userGiftId = 1;</code>
+       * <code>optional string userGiftUuid = 1;</code>
        */
-      public java.lang.String getUserGiftId() {
-        java.lang.Object ref = userGiftId_;
+      public java.lang.String getUserGiftUuid() {
+        java.lang.Object ref = userGiftUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            userGiftId_ = s;
+            userGiftUuid_ = s;
           }
           return s;
         } else {
@@ -7329,75 +6035,75 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional string userGiftId = 1;</code>
+       * <code>optional string userGiftUuid = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getUserGiftIdBytes() {
-        java.lang.Object ref = userGiftId_;
+          getUserGiftUuidBytes() {
+        java.lang.Object ref = userGiftUuid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          userGiftId_ = b;
+          userGiftUuid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string userGiftId = 1;</code>
+       * <code>optional string userGiftUuid = 1;</code>
        */
-      public Builder setUserGiftId(
+      public Builder setUserGiftUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        userGiftId_ = value;
+        userGiftUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string userGiftId = 1;</code>
+       * <code>optional string userGiftUuid = 1;</code>
        */
-      public Builder clearUserGiftId() {
+      public Builder clearUserGiftUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userGiftId_ = getDefaultInstance().getUserGiftId();
+        userGiftUuid_ = getDefaultInstance().getUserGiftUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string userGiftId = 1;</code>
+       * <code>optional string userGiftUuid = 1;</code>
        */
-      public Builder setUserGiftIdBytes(
+      public Builder setUserGiftUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        userGiftId_ = value;
+        userGiftUuid_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object gifterTangoUserId_ = "";
+      private java.lang.Object gifterTangoName_ = "";
       /**
-       * <code>optional string gifterTangoUserId = 2;</code>
+       * <code>optional string gifterTangoName = 2;</code>
        */
-      public boolean hasGifterTangoUserId() {
+      public boolean hasGifterTangoName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string gifterTangoUserId = 2;</code>
+       * <code>optional string gifterTangoName = 2;</code>
        */
-      public java.lang.String getGifterTangoUserId() {
-        java.lang.Object ref = gifterTangoUserId_;
+      public java.lang.String getGifterTangoName() {
+        java.lang.Object ref = gifterTangoName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            gifterTangoUserId_ = s;
+            gifterTangoName_ = s;
           }
           return s;
         } else {
@@ -7405,171 +6111,55 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional string gifterTangoUserId = 2;</code>
+       * <code>optional string gifterTangoName = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getGifterTangoUserIdBytes() {
-        java.lang.Object ref = gifterTangoUserId_;
+          getGifterTangoNameBytes() {
+        java.lang.Object ref = gifterTangoName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          gifterTangoUserId_ = b;
+          gifterTangoName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string gifterTangoUserId = 2;</code>
+       * <code>optional string gifterTangoName = 2;</code>
        */
-      public Builder setGifterTangoUserId(
+      public Builder setGifterTangoName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        gifterTangoUserId_ = value;
+        gifterTangoName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string gifterTangoUserId = 2;</code>
+       * <code>optional string gifterTangoName = 2;</code>
        */
-      public Builder clearGifterTangoUserId() {
+      public Builder clearGifterTangoName() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        gifterTangoUserId_ = getDefaultInstance().getGifterTangoUserId();
+        gifterTangoName_ = getDefaultInstance().getGifterTangoName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string gifterTangoUserId = 2;</code>
+       * <code>optional string gifterTangoName = 2;</code>
        */
-      public Builder setGifterTangoUserIdBytes(
+      public Builder setGifterTangoNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        gifterTangoUserId_ = value;
+        gifterTangoName_ = value;
         onChanged();
         return this;
-      }
-
-      private com.lvl6.proto.RewardsProto.TangoGiftProto tangoGift_ = com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.TangoGiftProto, com.lvl6.proto.RewardsProto.TangoGiftProto.Builder, com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder> tangoGiftBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public boolean hasTangoGift() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public com.lvl6.proto.RewardsProto.TangoGiftProto getTangoGift() {
-        if (tangoGiftBuilder_ == null) {
-          return tangoGift_;
-        } else {
-          return tangoGiftBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public Builder setTangoGift(com.lvl6.proto.RewardsProto.TangoGiftProto value) {
-        if (tangoGiftBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          tangoGift_ = value;
-          onChanged();
-        } else {
-          tangoGiftBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public Builder setTangoGift(
-          com.lvl6.proto.RewardsProto.TangoGiftProto.Builder builderForValue) {
-        if (tangoGiftBuilder_ == null) {
-          tangoGift_ = builderForValue.build();
-          onChanged();
-        } else {
-          tangoGiftBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public Builder mergeTangoGift(com.lvl6.proto.RewardsProto.TangoGiftProto value) {
-        if (tangoGiftBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              tangoGift_ != com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance()) {
-            tangoGift_ =
-              com.lvl6.proto.RewardsProto.TangoGiftProto.newBuilder(tangoGift_).mergeFrom(value).buildPartial();
-          } else {
-            tangoGift_ = value;
-          }
-          onChanged();
-        } else {
-          tangoGiftBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public Builder clearTangoGift() {
-        if (tangoGiftBuilder_ == null) {
-          tangoGift_ = com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance();
-          onChanged();
-        } else {
-          tangoGiftBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public com.lvl6.proto.RewardsProto.TangoGiftProto.Builder getTangoGiftBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getTangoGiftFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      public com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder getTangoGiftOrBuilder() {
-        if (tangoGiftBuilder_ != null) {
-          return tangoGiftBuilder_.getMessageOrBuilder();
-        } else {
-          return tangoGift_;
-        }
-      }
-      /**
-       * <code>optional .com.lvl6.proto.TangoGiftProto tangoGift = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.RewardsProto.TangoGiftProto, com.lvl6.proto.RewardsProto.TangoGiftProto.Builder, com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder> 
-          getTangoGiftFieldBuilder() {
-        if (tangoGiftBuilder_ == null) {
-          tangoGiftBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.RewardsProto.TangoGiftProto, com.lvl6.proto.RewardsProto.TangoGiftProto.Builder, com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder>(
-                  getTangoGift(),
-                  getParentForChildren(),
-                  isClean());
-          tangoGift_ = null;
-        }
-        return tangoGiftBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserTangoGiftProto)
@@ -7583,92 +6173,93 @@ public final class RewardsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserTangoGiftProto)
   }
 
-  public interface TangoGiftProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TangoGiftProto)
+  public interface UserSecretGiftProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserSecretGiftProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 tangoGiftId = 1;</code>
+     * <code>optional string uisgUuid = 1;</code>
      */
-    boolean hasTangoGiftId();
+    boolean hasUisgUuid();
     /**
-     * <code>optional int32 tangoGiftId = 1;</code>
+     * <code>optional string uisgUuid = 1;</code>
      */
-    int getTangoGiftId();
-
+    java.lang.String getUisgUuid();
     /**
-     * <code>optional string name = 2;</code>
-     *
-     * <pre>
-     *name of the gift
-     * </pre>
-     */
-    boolean hasName();
-    /**
-     * <code>optional string name = 2;</code>
-     *
-     * <pre>
-     *name of the gift
-     * </pre>
-     */
-    java.lang.String getName();
-    /**
-     * <code>optional string name = 2;</code>
-     *
-     * <pre>
-     *name of the gift
-     * </pre>
+     * <code>optional string uisgUuid = 1;</code>
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+        getUisgUuidBytes();
 
     /**
-     * <code>optional int32 hoursUntilExpiration = 3;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    boolean hasHoursUntilExpiration();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 hoursUntilExpiration = 3;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    int getHoursUntilExpiration();
-
+    java.lang.String getUserUuid();
     /**
-     * <code>optional string imageName = 4;</code>
-     */
-    boolean hasImageName();
-    /**
-     * <code>optional string imageName = 4;</code>
-     */
-    java.lang.String getImageName();
-    /**
-     * <code>optional string imageName = 4;</code>
+     * <code>optional string userUuid = 2;</code>
      */
     com.google.protobuf.ByteString
-        getImageNameBytes();
+        getUserUuidBytes();
+
+    /**
+     * <code>optional int32 secsTillCollection = 3;</code>
+     */
+    boolean hasSecsTillCollection();
+    /**
+     * <code>optional int32 secsTillCollection = 3;</code>
+     */
+    int getSecsTillCollection();
+
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+     */
+    boolean hasReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProto getReward();
+    /**
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+     */
+    com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder();
+
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    long getCreateTime();
   }
   /**
-   * Protobuf type {@code com.lvl6.proto.TangoGiftProto}
+   * Protobuf type {@code com.lvl6.proto.UserSecretGiftProto}
    *
    * <pre>
-   *similar to ClanGiftProto
+   *------------------------------------------------------------------------------------------
    * </pre>
    */
-  public static final class TangoGiftProto extends
+  public static final class UserSecretGiftProto extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TangoGiftProto)
-      TangoGiftProtoOrBuilder {
-    // Use TangoGiftProto.newBuilder() to construct.
-    private TangoGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserSecretGiftProto)
+      UserSecretGiftProtoOrBuilder {
+    // Use UserSecretGiftProto.newBuilder() to construct.
+    private UserSecretGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private TangoGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private UserSecretGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final TangoGiftProto defaultInstance;
-    public static TangoGiftProto getDefaultInstance() {
+    private static final UserSecretGiftProto defaultInstance;
+    public static UserSecretGiftProto getDefaultInstance() {
       return defaultInstance;
     }
 
-    public TangoGiftProto getDefaultInstanceForType() {
+    public UserSecretGiftProto getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -7678,7 +6269,7 @@ public final class RewardsProto {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private TangoGiftProto(
+    private UserSecretGiftProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7701,26 +6292,39 @@ public final class RewardsProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              tangoGiftId_ = input.readInt32();
+              uisgUuid_ = bs;
               break;
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = bs;
+              userUuid_ = bs;
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              hoursUntilExpiration_ = input.readInt32();
+              secsTillCollection_ = input.readInt32();
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.RewardsProto.RewardProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = reward_.toBuilder();
+              }
+              reward_ = input.readMessage(com.lvl6.proto.RewardsProto.RewardProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(reward_);
+                reward_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000008;
-              imageName_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              createTime_ = input.readInt64();
               break;
             }
           }
@@ -7737,68 +6341,87 @@ public final class RewardsProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_TangoGiftProto_descriptor;
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_TangoGiftProto_fieldAccessorTable
+      return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserSecretGiftProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.RewardsProto.TangoGiftProto.class, com.lvl6.proto.RewardsProto.TangoGiftProto.Builder.class);
+              com.lvl6.proto.RewardsProto.UserSecretGiftProto.class, com.lvl6.proto.RewardsProto.UserSecretGiftProto.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<TangoGiftProto> PARSER =
-        new com.google.protobuf.AbstractParser<TangoGiftProto>() {
-      public TangoGiftProto parsePartialFrom(
+    public static com.google.protobuf.Parser<UserSecretGiftProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserSecretGiftProto>() {
+      public UserSecretGiftProto parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new TangoGiftProto(input, extensionRegistry);
+        return new UserSecretGiftProto(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<TangoGiftProto> getParserForType() {
+    public com.google.protobuf.Parser<UserSecretGiftProto> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
-    public static final int TANGOGIFTID_FIELD_NUMBER = 1;
-    private int tangoGiftId_;
+    public static final int UISGUUID_FIELD_NUMBER = 1;
+    private java.lang.Object uisgUuid_;
     /**
-     * <code>optional int32 tangoGiftId = 1;</code>
+     * <code>optional string uisgUuid = 1;</code>
      */
-    public boolean hasTangoGiftId() {
+    public boolean hasUisgUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 tangoGiftId = 1;</code>
+     * <code>optional string uisgUuid = 1;</code>
      */
-    public int getTangoGiftId() {
-      return tangoGiftId_;
+    public java.lang.String getUisgUuid() {
+      java.lang.Object ref = uisgUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          uisgUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUisgUuidBytes() {
+      java.lang.Object ref = uisgUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        uisgUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int NAME_FIELD_NUMBER = 2;
-    private java.lang.Object name_;
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional string name = 2;</code>
-     *
-     * <pre>
-     *name of the gift
-     * </pre>
+     * <code>optional string userUuid = 2;</code>
      */
-    public boolean hasName() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string name = 2;</code>
-     *
-     * <pre>
-     *name of the gift
-     * </pre>
+     * <code>optional string userUuid = 2;</code>
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -7806,94 +6429,85 @@ public final class RewardsProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          name_ = s;
+          userUuid_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string name = 2;</code>
-     *
-     * <pre>
-     *name of the gift
-     * </pre>
+     * <code>optional string userUuid = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        userUuid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int HOURSUNTILEXPIRATION_FIELD_NUMBER = 3;
-    private int hoursUntilExpiration_;
+    public static final int SECSTILLCOLLECTION_FIELD_NUMBER = 3;
+    private int secsTillCollection_;
     /**
-     * <code>optional int32 hoursUntilExpiration = 3;</code>
+     * <code>optional int32 secsTillCollection = 3;</code>
      */
-    public boolean hasHoursUntilExpiration() {
+    public boolean hasSecsTillCollection() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 hoursUntilExpiration = 3;</code>
+     * <code>optional int32 secsTillCollection = 3;</code>
      */
-    public int getHoursUntilExpiration() {
-      return hoursUntilExpiration_;
+    public int getSecsTillCollection() {
+      return secsTillCollection_;
     }
 
-    public static final int IMAGENAME_FIELD_NUMBER = 4;
-    private java.lang.Object imageName_;
+    public static final int REWARD_FIELD_NUMBER = 4;
+    private com.lvl6.proto.RewardsProto.RewardProto reward_;
     /**
-     * <code>optional string imageName = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    public boolean hasImageName() {
+    public boolean hasReward() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional string imageName = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    public java.lang.String getImageName() {
-      java.lang.Object ref = imageName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          imageName_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+      return reward_;
     }
     /**
-     * <code>optional string imageName = 4;</code>
+     * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
      */
-    public com.google.protobuf.ByteString
-        getImageNameBytes() {
-      java.lang.Object ref = imageName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        imageName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+      return reward_;
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 5;
+    private long createTime_;
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
     }
 
     private void initFields() {
-      tangoGiftId_ = 0;
-      name_ = "";
-      hoursUntilExpiration_ = 0;
-      imageName_ = "";
+      uisgUuid_ = "";
+      userUuid_ = "";
+      secsTillCollection_ = 0;
+      reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7909,16 +6523,19 @@ public final class RewardsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, tangoGiftId_);
+        output.writeBytes(1, getUisgUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getNameBytes());
+        output.writeBytes(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, hoursUntilExpiration_);
+        output.writeInt32(3, secsTillCollection_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getImageNameBytes());
+        output.writeMessage(4, reward_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, createTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7931,19 +6548,23 @@ public final class RewardsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, tangoGiftId_);
+          .computeBytesSize(1, getUisgUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getNameBytes());
+          .computeBytesSize(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, hoursUntilExpiration_);
+          .computeInt32Size(3, secsTillCollection_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getImageNameBytes());
+          .computeMessageSize(4, reward_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7957,53 +6578,53 @@ public final class RewardsProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(byte[] data)
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseDelimitedFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.RewardsProto.TangoGiftProto parseFrom(
+    public static com.lvl6.proto.RewardsProto.UserSecretGiftProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8012,7 +6633,7 @@ public final class RewardsProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.RewardsProto.TangoGiftProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.RewardsProto.UserSecretGiftProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -8024,29 +6645,29 @@ public final class RewardsProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.lvl6.proto.TangoGiftProto}
+     * Protobuf type {@code com.lvl6.proto.UserSecretGiftProto}
      *
      * <pre>
-     *similar to ClanGiftProto
+     *------------------------------------------------------------------------------------------
      * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TangoGiftProto)
-        com.lvl6.proto.RewardsProto.TangoGiftProtoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserSecretGiftProto)
+        com.lvl6.proto.RewardsProto.UserSecretGiftProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_TangoGiftProto_descriptor;
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_TangoGiftProto_fieldAccessorTable
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserSecretGiftProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.RewardsProto.TangoGiftProto.class, com.lvl6.proto.RewardsProto.TangoGiftProto.Builder.class);
+                com.lvl6.proto.RewardsProto.UserSecretGiftProto.class, com.lvl6.proto.RewardsProto.UserSecretGiftProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.RewardsProto.TangoGiftProto.newBuilder()
+      // Construct using com.lvl6.proto.RewardsProto.UserSecretGiftProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -8058,6 +6679,7 @@ public final class RewardsProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRewardFieldBuilder();
         }
       }
       private static Builder create() {
@@ -8066,14 +6688,20 @@ public final class RewardsProto {
 
       public Builder clear() {
         super.clear();
-        tangoGiftId_ = 0;
+        uisgUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        name_ = "";
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        hoursUntilExpiration_ = 0;
+        secsTillCollection_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        imageName_ = "";
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -8083,72 +6711,83 @@ public final class RewardsProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_TangoGiftProto_descriptor;
+        return com.lvl6.proto.RewardsProto.internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor;
       }
 
-      public com.lvl6.proto.RewardsProto.TangoGiftProto getDefaultInstanceForType() {
-        return com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance();
+      public com.lvl6.proto.RewardsProto.UserSecretGiftProto getDefaultInstanceForType() {
+        return com.lvl6.proto.RewardsProto.UserSecretGiftProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.RewardsProto.TangoGiftProto build() {
-        com.lvl6.proto.RewardsProto.TangoGiftProto result = buildPartial();
+      public com.lvl6.proto.RewardsProto.UserSecretGiftProto build() {
+        com.lvl6.proto.RewardsProto.UserSecretGiftProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.RewardsProto.TangoGiftProto buildPartial() {
-        com.lvl6.proto.RewardsProto.TangoGiftProto result = new com.lvl6.proto.RewardsProto.TangoGiftProto(this);
+      public com.lvl6.proto.RewardsProto.UserSecretGiftProto buildPartial() {
+        com.lvl6.proto.RewardsProto.UserSecretGiftProto result = new com.lvl6.proto.RewardsProto.UserSecretGiftProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.tangoGiftId_ = tangoGiftId_;
+        result.uisgUuid_ = uisgUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.name_ = name_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.hoursUntilExpiration_ = hoursUntilExpiration_;
+        result.secsTillCollection_ = secsTillCollection_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.imageName_ = imageName_;
+        if (rewardBuilder_ == null) {
+          result.reward_ = reward_;
+        } else {
+          result.reward_ = rewardBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.RewardsProto.TangoGiftProto) {
-          return mergeFrom((com.lvl6.proto.RewardsProto.TangoGiftProto)other);
+        if (other instanceof com.lvl6.proto.RewardsProto.UserSecretGiftProto) {
+          return mergeFrom((com.lvl6.proto.RewardsProto.UserSecretGiftProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.RewardsProto.TangoGiftProto other) {
-        if (other == com.lvl6.proto.RewardsProto.TangoGiftProto.getDefaultInstance()) return this;
-        if (other.hasTangoGiftId()) {
-          setTangoGiftId(other.getTangoGiftId());
+      public Builder mergeFrom(com.lvl6.proto.RewardsProto.UserSecretGiftProto other) {
+        if (other == com.lvl6.proto.RewardsProto.UserSecretGiftProto.getDefaultInstance()) return this;
+        if (other.hasUisgUuid()) {
+          bitField0_ |= 0x00000001;
+          uisgUuid_ = other.uisgUuid_;
+          onChanged();
         }
-        if (other.hasName()) {
+        if (other.hasUserUuid()) {
           bitField0_ |= 0x00000002;
-          name_ = other.name_;
+          userUuid_ = other.userUuid_;
           onChanged();
         }
-        if (other.hasHoursUntilExpiration()) {
-          setHoursUntilExpiration(other.getHoursUntilExpiration());
+        if (other.hasSecsTillCollection()) {
+          setSecsTillCollection(other.getSecsTillCollection());
         }
-        if (other.hasImageName()) {
-          bitField0_ |= 0x00000008;
-          imageName_ = other.imageName_;
-          onChanged();
+        if (other.hasReward()) {
+          mergeReward(other.getReward());
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8162,11 +6801,11 @@ public final class RewardsProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.RewardsProto.TangoGiftProto parsedMessage = null;
+        com.lvl6.proto.RewardsProto.UserSecretGiftProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.RewardsProto.TangoGiftProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.RewardsProto.UserSecretGiftProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -8177,64 +6816,100 @@ public final class RewardsProto {
       }
       private int bitField0_;
 
-      private int tangoGiftId_ ;
+      private java.lang.Object uisgUuid_ = "";
       /**
-       * <code>optional int32 tangoGiftId = 1;</code>
+       * <code>optional string uisgUuid = 1;</code>
        */
-      public boolean hasTangoGiftId() {
+      public boolean hasUisgUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 tangoGiftId = 1;</code>
+       * <code>optional string uisgUuid = 1;</code>
        */
-      public int getTangoGiftId() {
-        return tangoGiftId_;
+      public java.lang.String getUisgUuid() {
+        java.lang.Object ref = uisgUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            uisgUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 tangoGiftId = 1;</code>
+       * <code>optional string uisgUuid = 1;</code>
        */
-      public Builder setTangoGiftId(int value) {
-        bitField0_ |= 0x00000001;
-        tangoGiftId_ = value;
+      public com.google.protobuf.ByteString
+          getUisgUuidBytes() {
+        java.lang.Object ref = uisgUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          uisgUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public Builder setUisgUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        uisgUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 tangoGiftId = 1;</code>
+       * <code>optional string uisgUuid = 1;</code>
        */
-      public Builder clearTangoGiftId() {
+      public Builder clearUisgUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        tangoGiftId_ = 0;
+        uisgUuid_ = getDefaultInstance().getUisgUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public Builder setUisgUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        uisgUuid_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object name_ = "";
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional string name = 2;</code>
-       *
-       * <pre>
-       *name of the gift
-       * </pre>
+       * <code>optional string userUuid = 2;</code>
        */
-      public boolean hasName() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string name = 2;</code>
-       *
-       * <pre>
-       *name of the gift
-       * </pre>
+       * <code>optional string userUuid = 2;</code>
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            name_ = s;
+            userUuid_ = s;
           }
           return s;
         } else {
@@ -8242,190 +6917,246 @@ public final class RewardsProto {
         }
       }
       /**
-       * <code>optional string name = 2;</code>
-       *
-       * <pre>
-       *name of the gift
-       * </pre>
+       * <code>optional string userUuid = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          userUuid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string name = 2;</code>
-       *
-       * <pre>
-       *name of the gift
-       * </pre>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder setName(
+      public Builder setUserUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        name_ = value;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 2;</code>
-       *
-       * <pre>
-       *name of the gift
-       * </pre>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder clearName() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        name_ = getDefaultInstance().getName();
+        userUuid_ = getDefaultInstance().getUserUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 2;</code>
-       *
-       * <pre>
-       *name of the gift
-       * </pre>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder setNameBytes(
+      public Builder setUserUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        name_ = value;
+        userUuid_ = value;
         onChanged();
         return this;
       }
 
-      private int hoursUntilExpiration_ ;
+      private int secsTillCollection_ ;
       /**
-       * <code>optional int32 hoursUntilExpiration = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public boolean hasHoursUntilExpiration() {
+      public boolean hasSecsTillCollection() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 hoursUntilExpiration = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public int getHoursUntilExpiration() {
-        return hoursUntilExpiration_;
+      public int getSecsTillCollection() {
+        return secsTillCollection_;
       }
       /**
-       * <code>optional int32 hoursUntilExpiration = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public Builder setHoursUntilExpiration(int value) {
+      public Builder setSecsTillCollection(int value) {
         bitField0_ |= 0x00000004;
-        hoursUntilExpiration_ = value;
+        secsTillCollection_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 hoursUntilExpiration = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public Builder clearHoursUntilExpiration() {
+      public Builder clearSecsTillCollection() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        hoursUntilExpiration_ = 0;
+        secsTillCollection_ = 0;
         onChanged();
         return this;
       }
 
-      private java.lang.Object imageName_ = "";
+      private com.lvl6.proto.RewardsProto.RewardProto reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> rewardBuilder_;
       /**
-       * <code>optional string imageName = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public boolean hasImageName() {
+      public boolean hasReward() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string imageName = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public java.lang.String getImageName() {
-        java.lang.Object ref = imageName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            imageName_ = s;
+      public com.lvl6.proto.RewardsProto.RewardProto getReward() {
+        if (rewardBuilder_ == null) {
+          return reward_;
+        } else {
+          return rewardBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public Builder setReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          reward_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          rewardBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string imageName = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getImageNameBytes() {
-        java.lang.Object ref = imageName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          imageName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string imageName = 4;</code>
-       */
-      public Builder setImageName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        imageName_ = value;
-        onChanged();
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional string imageName = 4;</code>
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
        */
-      public Builder clearImageName() {
+      public Builder setReward(
+          com.lvl6.proto.RewardsProto.RewardProto.Builder builderForValue) {
+        if (rewardBuilder_ == null) {
+          reward_ = builderForValue.build();
+          onChanged();
+        } else {
+          rewardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public Builder mergeReward(com.lvl6.proto.RewardsProto.RewardProto value) {
+        if (rewardBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              reward_ != com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance()) {
+            reward_ =
+              com.lvl6.proto.RewardsProto.RewardProto.newBuilder(reward_).mergeFrom(value).buildPartial();
+          } else {
+            reward_ = value;
+          }
+          onChanged();
+        } else {
+          rewardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public Builder clearReward() {
+        if (rewardBuilder_ == null) {
+          reward_ = com.lvl6.proto.RewardsProto.RewardProto.getDefaultInstance();
+          onChanged();
+        } else {
+          rewardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        imageName_ = getDefaultInstance().getImageName();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProto.Builder getRewardBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getRewardFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      public com.lvl6.proto.RewardsProto.RewardProtoOrBuilder getRewardOrBuilder() {
+        if (rewardBuilder_ != null) {
+          return rewardBuilder_.getMessageOrBuilder();
+        } else {
+          return reward_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RewardProto reward = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder> 
+          getRewardFieldBuilder() {
+        if (rewardBuilder_ == null) {
+          rewardBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.RewardsProto.RewardProto, com.lvl6.proto.RewardsProto.RewardProto.Builder, com.lvl6.proto.RewardsProto.RewardProtoOrBuilder>(
+                  getReward(),
+                  getParentForChildren(),
+                  isClean());
+          reward_ = null;
+        }
+        return rewardBuilder_;
+      }
+
+      private long createTime_ ;
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000010;
+        createTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string imageName = 4;</code>
+       * <code>optional int64 createTime = 5;</code>
        */
-      public Builder setImageNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        imageName_ = value;
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        createTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TangoGiftProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserSecretGiftProto)
     }
 
     static {
-      defaultInstance = new TangoGiftProto(true);
+      defaultInstance = new UserSecretGiftProto(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TangoGiftProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserSecretGiftProto)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -8439,15 +7170,10 @@ public final class RewardsProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_ClanGiftProto_descriptor;
+    internal_static_com_lvl6_proto_GiftProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_UserClanGiftProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_GiftProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserGiftProto_descriptor;
   private static
@@ -8459,10 +7185,10 @@ public final class RewardsProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserTangoGiftProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_TangoGiftProto_descriptor;
+    internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_TangoGiftProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_UserSecretGiftProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8474,47 +7200,40 @@ public final class RewardsProto {
     java.lang.String[] descriptorData = {
       "\n\014Reward.proto\022\016com.lvl6.proto\032\nItem.pro" +
       "to\032\022MonsterStuff.proto\032\026SharedEnumConfig" +
-      ".proto\032\nUser.proto\"\272\002\n\013RewardProto\022\020\n\010re" +
+      ".proto\032\nUser.proto\"\232\002\n\013RewardProto\022\020\n\010re" +
       "wardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223\n\003ty" +
       "p\030\003 \001(\0162&.com.lvl6.proto.RewardProto.Rew" +
       "ardType\022\013\n\003amt\030\004 \001(\005\0221\n\014actualReward\030\005 \001" +
-      "(\0132\033.com.lvl6.proto.RewardProto\"\215\001\n\nRewa" +
-      "rdType\022\r\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020" +
-      "\003\022\010\n\004CASH\020\004\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022" +
-      "\013\n\007MONSTER\020\006\022\r\n\tCLAN_GIFT\020\010\022\016\n\nTANGO_GIF",
-      "T\020\t\022\n\n\006REWARD\020d\"\202\002\n\017UserRewardProto\022B\n\024u" +
-      "pdatedOrNewMonsters\030\001 \003(\0132$.com.lvl6.pro" +
-      "to.FullUserMonsterProto\0227\n\020updatedUserIt" +
-      "ems\030\002 \003(\0132\035.com.lvl6.proto.UserItemProto" +
-      "\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003oil\030\005 \001(" +
-      "\005\022\024\n\014gachaCredits\030\006 \001(\005\0223\n\010clanGift\030\007 \001(" +
-      "\0132!.com.lvl6.proto.UserClanGiftProto\"\220\001\n" +
-      "\rClanGiftProto\022\022\n\nclanGiftId\030\001 \001(\005\022\014\n\004na" +
-      "me\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021" +
-      "\n\timageName\030\004 \001(\t\022,\n\007quality\030\005 \001(\0162\027.com",
-      ".lvl6.proto.QualityB\002\030\001\"\207\002\n\021UserClanGift" +
-      "Proto\022\026\n\016userClanGiftId\030\001 \001(\t\022\026\n\016receive" +
-      "rUserId\030\002 \001(\t\0224\n\ngifterUser\030\003 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022/\n\010clanGift\030" +
-      "\004 \001(\0132\035.com.lvl6.proto.ClanGiftProto\022\024\n\014" +
-      "timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(\0132\033.com" +
-      ".lvl6.proto.RewardProto\022\030\n\020hasBeenCollec" +
-      "ted\030\007 \001(\010\"\205\003\n\rUserGiftProto\022\014\n\004ugId\030\001 \001(" +
-      "\t\022\026\n\016receiverUserId\030\002 \001(\t\0224\n\ngifterUser\030" +
-      "\003 \001(\0132 .com.lvl6.proto.MinimumUserProto\022",
-      "8\n\010giftType\030\004 \001(\0162&.com.lvl6.proto.Rewar" +
-      "dProto.RewardType\022\024\n\014timeReceived\030\005 \001(\003\022" +
-      "\'\n\002rp\030\006 \001(\0132\033.com.lvl6.proto.RewardProto" +
-      "\022\030\n\020hasBeenCollected\030\007 \001(\010\022\035\n\025minutesTil" +
-      "lExpiration\030\010 \001(\005\022/\n\010clanGift\030\t \001(\0132\035.co" +
-      "m.lvl6.proto.ClanGiftProto\0225\n\ttangoGift\030" +
-      "\n \001(\0132\".com.lvl6.proto.UserTangoGiftProt" +
-      "o\"v\n\022UserTangoGiftProto\022\022\n\nuserGiftId\030\001 " +
-      "\001(\t\022\031\n\021gifterTangoUserId\030\002 \001(\t\0221\n\ttangoG" +
-      "ift\030\003 \001(\0132\036.com.lvl6.proto.TangoGiftProt",
-      "o\"d\n\016TangoGiftProto\022\023\n\013tangoGiftId\030\001 \001(\005" +
-      "\022\014\n\004name\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003" +
-      " \001(\005\022\021\n\timageName\030\004 \001(\tB\016B\014RewardsProto"
+      "(\0132\033.com.lvl6.proto.RewardProto\"n\n\nRewar" +
+      "dType\022\r\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003" +
+      "\022\010\n\004CASH\020\004\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013" +
+      "\n\007MONSTER\020\006\022\n\n\006REWARD\020d\"\372\001\n\017UserRewardPr",
+      "oto\022B\n\024updatedOrNewMonsters\030\001 \003(\0132$.com." +
+      "lvl6.proto.FullUserMonsterProto\0227\n\020updat" +
+      "edUserItems\030\002 \003(\0132\035.com.lvl6.proto.UserI" +
+      "temProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003" +
+      "oil\030\005 \001(\005\022\024\n\014gachaCredits\030\006 \001(\005\022+\n\004gift\030" +
+      "\007 \003(\0132\035.com.lvl6.proto.UserGiftProto\"\321\001\n" +
+      "\tGiftProto\022\016\n\006giftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t" +
+      "\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021\n\timageN" +
+      "ame\030\004 \001(\t\022=\n\010giftType\030\005 \001(\0162\".com.lvl6.p" +
+      "roto.GiftProto.GiftType:\007NO_GIFT\"6\n\010Gift",
+      "Type\022\013\n\007NO_GIFT\020\001\022\r\n\tCLAN_GIFT\020\002\022\016\n\nTANG" +
+      "O_GIFT\020\003\"\313\002\n\rUserGiftProto\022\016\n\006ugUuid\030\001 \001" +
+      "(\t\022\030\n\020receiverUserUuid\030\002 \001(\t\0224\n\ngifterUs" +
+      "er\030\003 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\'\n\004gift\030\004 \001(\0132\031.com.lvl6.proto.GiftPr" +
+      "oto\022\024\n\014timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(" +
+      "\0132\033.com.lvl6.proto.RewardProto\022\030\n\020hasBee" +
+      "nCollected\030\007 \001(\010\022\035\n\025minutesTillExpiratio" +
+      "n\030\010 \001(\005\0225\n\ttangoGift\030\t \001(\0132\".com.lvl6.pr" +
+      "oto.UserTangoGiftProto\"C\n\022UserTangoGiftP",
+      "roto\022\024\n\014userGiftUuid\030\001 \001(\t\022\027\n\017gifterTang" +
+      "oName\030\002 \001(\t\"\226\001\n\023UserSecretGiftProto\022\020\n\010u" +
+      "isgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n\022secsT" +
+      "illCollection\030\003 \001(\005\022+\n\006reward\030\004 \001(\0132\033.co" +
+      "m.lvl6.proto.RewardProto\022\022\n\ncreateTime\030\005" +
+      " \001(\003B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8543,37 +7262,31 @@ public final class RewardsProto {
     internal_static_com_lvl6_proto_UserRewardProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserRewardProto_descriptor,
-        new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", "GachaCredits", "ClanGift", });
-    internal_static_com_lvl6_proto_ClanGiftProto_descriptor =
+        new java.lang.String[] { "UpdatedOrNewMonsters", "UpdatedUserItems", "Gems", "Cash", "Oil", "GachaCredits", "Gift", });
+    internal_static_com_lvl6_proto_GiftProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_lvl6_proto_ClanGiftProto_fieldAccessorTable = new
+    internal_static_com_lvl6_proto_GiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_ClanGiftProto_descriptor,
-        new java.lang.String[] { "ClanGiftId", "Name", "HoursUntilExpiration", "ImageName", "Quality", });
-    internal_static_com_lvl6_proto_UserClanGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_lvl6_proto_UserClanGiftProto_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_UserClanGiftProto_descriptor,
-        new java.lang.String[] { "UserClanGiftId", "ReceiverUserId", "GifterUser", "ClanGift", "TimeReceived", "Reward", "HasBeenCollected", });
+        internal_static_com_lvl6_proto_GiftProto_descriptor,
+        new java.lang.String[] { "GiftId", "Name", "HoursUntilExpiration", "ImageName", "GiftType", });
     internal_static_com_lvl6_proto_UserGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_UserGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserGiftProto_descriptor,
-        new java.lang.String[] { "UgId", "ReceiverUserId", "GifterUser", "GiftType", "TimeReceived", "Rp", "HasBeenCollected", "MinutesTillExpiration", "ClanGift", "TangoGift", });
+        new java.lang.String[] { "UgUuid", "ReceiverUserUuid", "GifterUser", "Gift", "TimeReceived", "Reward", "HasBeenCollected", "MinutesTillExpiration", "TangoGift", });
     internal_static_com_lvl6_proto_UserTangoGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_UserTangoGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserTangoGiftProto_descriptor,
-        new java.lang.String[] { "UserGiftId", "GifterTangoUserId", "TangoGift", });
-    internal_static_com_lvl6_proto_TangoGiftProto_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_com_lvl6_proto_TangoGiftProto_fieldAccessorTable = new
+        new java.lang.String[] { "UserGiftUuid", "GifterTangoName", });
+    internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_UserSecretGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_lvl6_proto_TangoGiftProto_descriptor,
-        new java.lang.String[] { "TangoGiftId", "Name", "HoursUntilExpiration", "ImageName", });
+        internal_static_com_lvl6_proto_UserSecretGiftProto_descriptor,
+        new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "Reward", "CreateTime", });
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();

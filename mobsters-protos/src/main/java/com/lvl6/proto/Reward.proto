@@ -25,7 +25,7 @@ message RewardProto {
 	
 	//NOTE: if RewardType is MONSTER, then amt is repurposed to:
 	//amt = 0 means only one piece is given
-	//amt > 0 means one monster with a lvl equal to 'amt' is given
+	//amt > 0 means one monster with a lvl equal to 'amt' is given  
 	
 	// This outer reward proto just specifies quantity.
 	// The inner reward specifies the actual reward.
@@ -40,8 +40,8 @@ message RewardProto {
 		OIL = 5;
 		GACHA_CREDITS = 7;
 		MONSTER = 6;
-		CLAN_GIFT = 8;
-		TANGO_GIFT = 9;
+		//CLAN_GIFT = 8  [deprecated = true];
+		//TANGO_GIFT = 9  [deprecated = true];
 		
 		REWARD = 100;
 	}
@@ -57,62 +57,64 @@ message UserRewardProto {
 	optional int32 cash = 4;
 	optional int32 oil = 5;
 	optional int32 gachaCredits = 6;
-	optional UserClanGiftProto clanGift = 7;
+	repeated UserGiftProto gift = 7;
 }
 
 //------------------------------------------------------------------------------------------
-
-message ClanGiftProto {
+//TODO: Deprecate, replaced with GiftProto
+/*message ClanGiftProto {
 	optional int32 clanGiftId = 1;
 	optional string name = 2;
 	optional int32 hoursUntilExpiration = 3;	
 	optional string imageName = 4;
 	optional Quality quality = 5 [deprecated = true];
-}
+}*/
 
 //------------------------------------------------------------------------------------------
 
-message UserClanGiftProto {
-	optional string userClanGiftId = 1;
-	optional string receiverUserId = 2;
-	optional MinimumUserProto gifterUser = 3;
-	optional ClanGiftProto clanGift = 4;
-	optional int64 timeReceived = 5; //when the gift gets sent out to everyone
-	optional RewardProto reward = 6;
-	optional bool hasBeenCollected = 7;
+message GiftProto {
+	optional int32 giftId = 1;
+	optional string name = 2;
+	optional int32 hoursUntilExpiration = 3;
+	optional string imageName = 4;
+	optional GiftType giftType = 5 [default = NO_GIFT];
+	
+	enum GiftType {
+		NO_GIFT = 1;
+		CLAN_GIFT = 2;
+		TANGO_GIFT = 3;
+	}
 }
 
 //------------------------------------------------------------------------------------------
 
 message UserGiftProto {
-    optional string ugId = 1;
-    optional string receiverUserId = 2;
+    optional string ugUuid = 1;
+    optional string receiverUserUuid = 2;
     optional MinimumUserProto gifterUser = 3;
-    optional RewardProto.RewardType giftType = 4;
+    optional GiftProto gift = 4;
     optional int64 timeReceived = 5;
-    optional RewardProto rp = 6;
+    optional RewardProto reward = 6;
     optional bool hasBeenCollected = 7;
 
     //not always set
     optional int32 minutesTillExpiration = 8; 
 
-    //set or not set based on GiftType
-    optional ClanGiftProto clanGift = 9;
-    optional UserTangoGiftProto tangoGift = 10;
+    //set or not set based on GiftType in gift
+    optional UserTangoGiftProto tangoGift = 9;
     
 }
 
 message UserTangoGiftProto {
-	optional string userGiftId = 1;
-	optional string gifterTangoUserId = 2;
-	optional TangoGiftProto tangoGift = 3;
+	optional string userGiftUuid = 1;
+	optional string gifterTangoName = 2;
 }
 
-//similar to ClanGiftProto
-message TangoGiftProto {
-    optional int32 tangoGiftId = 1;
-    //name of the gift
-    optional string name = 2;
-    optional int32 hoursUntilExpiration = 3;
-    optional string imageName = 4;
+//------------------------------------------------------------------------------------------
+message UserSecretGiftProto {
+	optional string uisgUuid = 1;
+	optional string userUuid = 2;
+	optional int32 secsTillCollection = 3;
+	optional RewardProto reward = 4;
+	optional int64 createTime = 5;
 }

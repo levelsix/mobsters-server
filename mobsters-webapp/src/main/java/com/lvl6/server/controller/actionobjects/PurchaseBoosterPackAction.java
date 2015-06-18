@@ -26,7 +26,8 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
@@ -42,8 +43,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class PurchaseBoosterPackAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+	private static final Logger log = LoggerFactory
+			.getLogger(PurchaseBoosterPackAction.class);
 
 	private String userId;
 	private int boosterPackId;
@@ -54,7 +56,8 @@ public class PurchaseBoosterPackAction {
 	private int gemsSpent;
 	private int gachaCreditsChange;
 	private TimeUtils timeUtil;
-	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private GiftRetrieveUtils giftRetrieveUtil;
+	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private UserRetrieveUtils2 userRetrieveUtil;
 	private BoosterPackRetrieveUtils boosterPackRetrieveUtils;
@@ -77,7 +80,8 @@ public class PurchaseBoosterPackAction {
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
 			boolean buyingInBulk, int gemsSpent, int gachaCreditsChange,
 			TimeUtils timeUtil,
-			ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
+			GiftRetrieveUtils giftRetrieveUtil,
+			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil,
 			BoosterPackRetrieveUtils boosterPackRetrieveUtils,
@@ -103,7 +107,8 @@ public class PurchaseBoosterPackAction {
 		this.gemsSpent = gemsSpent;
 		this.gachaCreditsChange = gachaCreditsChange;
 		this.timeUtil = timeUtil;
-		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
+		this.giftRetrieveUtil = giftRetrieveUtil;
+		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
@@ -177,7 +182,7 @@ public class PurchaseBoosterPackAction {
 		resBuilder.setStatus(PurchaseBoosterPackStatus.SUCCESS);
 
 	}
-
+	
 	public void setUpDaos() {
 		//Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
 		uchDao = AppContext.getApplicationContext().getBean(UserCurrencyHistoryDao.class);//TODO: These actions should be created in spring
@@ -219,7 +224,7 @@ public class PurchaseBoosterPackAction {
 		if (freeBoosterPack) {
 			if (!validFreeBoosterPack(resBuilder)) {
 				return false;
-			}
+		}
 
 		} else {
 			if ( !resourceUtil.hasEnoughGems(user, gemsSpent) ) {
@@ -228,8 +233,8 @@ public class PurchaseBoosterPackAction {
 			} else if ( !resourceUtil.hasEnoughGachaCredits(user, gachaCreditsChange) ) {
 				resBuilder.setStatus(
 						PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
-				return false;
-			}
+			return false;
+		}
 		}
 
 		return true;
@@ -266,7 +271,7 @@ public class PurchaseBoosterPackAction {
 		}
 
 		return legitPack;
-	}
+		}
 
 	private boolean verifyBoosterPack(Builder resBuilder, int bpId) {
 		aPack = boosterPackRetrieveUtils.getBoosterPackForBoosterPackId(bpId);
@@ -365,7 +370,8 @@ public class PurchaseBoosterPackAction {
 				"booster packs id " + aPack.getId(), listOfRewards,
 				userRetrieveUtil, itemForUserRetrieveUtil, insertUtil,
 				updateUtil, monsterStuffUtils, monsterLevelInfoRetrieveUtils,
-				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
+				giftRetrieveUtil,
+				giftRewardRetrieveUtils, rewardRetrieveUtils,
 				userClanRetrieveUtils, createInfoProtoUtils, awardReasonDetail);
 
 		ara.execute();
@@ -376,7 +382,7 @@ public class PurchaseBoosterPackAction {
 	private void updateUserCurrency() {
 		gemReward = boosterItemUtils.determineGemReward(itemsUserReceives, rewardRetrieveUtils);
 		gachaCreditsReward = boosterItemUtils.determineGachaCreditsReward(itemsUserReceives, rewardRetrieveUtils);
-
+		
 		if (freeBoosterPack) {
 			gachaCreditsChange = 0;
 		}
@@ -389,7 +395,7 @@ public class PurchaseBoosterPackAction {
 		boolean updated = user.updateBoughtBoosterPack(gemChange, gachaCreditsChange, now,
 				freeBoosterPack, riggedPack);
 		log.info("updated, user bought boosterPack? {}", updated);
-
+		
 		saveCurrencyHistory(gemChange);
 	}
 
@@ -434,217 +440,32 @@ public class PurchaseBoosterPackAction {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public int getBoosterPackId() {
-		return boosterPackId;
-	}
-
-	public void setBoosterPackId(int boosterPackId) {
-		this.boosterPackId = boosterPackId;
-	}
-
-	public Date getNow() {
-		return now;
-	}
-
-	public void setNow(Date now) {
-		this.now = now;
-	}
-
-	public Timestamp getClientTime() {
-		return clientTime;
-	}
-
-	public void setClientTime(Timestamp clientTime) {
-		this.clientTime = clientTime;
-	}
-
-	public boolean isFreeBoosterPack() {
-		return freeBoosterPack;
-	}
-
-	public void setFreeBoosterPack(boolean freeBoosterPack) {
-		this.freeBoosterPack = freeBoosterPack;
-	}
-
-	public TimeUtils getTimeUtil() {
-		return timeUtil;
-	}
-
-	public void setTimeUtil(TimeUtils timeUtil) {
-		this.timeUtil = timeUtil;
-	}
-
-	public UserRetrieveUtils2 getUserRetrieveUtil() {
-		return userRetrieveUtil;
-	}
-
-	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
-		this.userRetrieveUtil = userRetrieveUtil;
-	}
-
-	public BoosterPackRetrieveUtils getBoosterPackRetrieveUtils() {
-		return boosterPackRetrieveUtils;
-	}
-
-	public void setBoosterPackRetrieveUtils(
-			BoosterPackRetrieveUtils boosterPackRetrieveUtils) {
-		this.boosterPackRetrieveUtils = boosterPackRetrieveUtils;
-	}
-
-	public BoosterItemRetrieveUtils getBoosterItemRetrieveUtils() {
-		return boosterItemRetrieveUtils;
-	}
-
-	public void setBoosterItemRetrieveUtils(
-			BoosterItemRetrieveUtils boosterItemRetrieveUtils) {
-		this.boosterItemRetrieveUtils = boosterItemRetrieveUtils;
-	}
-
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
-		return itemForUserRetrieveUtil;
-	}
-
-	public void setItemForUserRetrieveUtil(
-			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
-		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-	}
-
-	public MonsterStuffUtils getMonsterStuffUtils() {
-		return monsterStuffUtils;
-	}
-
-	public void setMonsterStuffUtils(MonsterStuffUtils monsterStuffUtils) {
-		this.monsterStuffUtils = monsterStuffUtils;
-	}
-
-	public UpdateUtil getUpdateUtil() {
-		return updateUtil;
-	}
-
-	public void setUpdateUtil(UpdateUtil updateUtil) {
-		this.updateUtil = updateUtil;
-	}
-
-	public MiscMethods getMiscMethods() {
-		return miscMethods;
-	}
-
-	public void setMiscMethods(MiscMethods miscMethods) {
-		this.miscMethods = miscMethods;
-	}
-
-	public MonsterLevelInfoRetrieveUtils getMonsterLevelInfoRetrieveUtils() {
-		return monsterLevelInfoRetrieveUtils;
-	}
-
-	public void setMonsterLevelInfoRetrieveUtils(
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
-	}
-
-	public MonsterRetrieveUtils getMonsterRetrieveUtils() {
-		return monsterRetrieveUtils;
-	}
-
-	public void setMonsterRetrieveUtils(MonsterRetrieveUtils monsterRetrieveUtils) {
-		this.monsterRetrieveUtils = monsterRetrieveUtils;
-	}
-
-	public boolean isBuyingInBulk() {
-		return buyingInBulk;
-	}
-
-	public void setBuyingInBulk(boolean buyingInBulk) {
-		this.buyingInBulk = buyingInBulk;
-	}
-
-	public RewardRetrieveUtils getRewardRetrieveUtils() {
-		return rewardRetrieveUtils;
-	}
-
-	public void setRewardRetrieveUtils(RewardRetrieveUtils rewardRetrieveUtils) {
-		this.rewardRetrieveUtils = rewardRetrieveUtils;
-	}
-
-	public InsertUtil getInsertUtil() {
-		return insertUtil;
-	}
-
-	public void setInsertUtil(InsertUtil insertUtil) {
-		this.insertUtil = insertUtil;
-	}
-
 	public BoosterPack getaPack() {
 		return aPack;
-	}
-
-	public void setaPack(BoosterPack aPack) {
-		this.aPack = aPack;
 	}
 
 	public boolean isRiggedPack() {
 		return riggedPack;
 	}
 
-	public void setRiggedPack(boolean riggedPack) {
-		this.riggedPack = riggedPack;
-	}
-
 	public int getBoosterPackIdPurchased() {
 		return boosterPackIdPurchased;
-	}
-
-	public void setBoosterPackIdPurchased(int boosterPackIdPurchased) {
-		this.boosterPackIdPurchased = boosterPackIdPurchased;
 	}
 
 	public Map<Integer, BoosterItem> getBoosterItemIdsToBoosterItems() {
 		return boosterItemIdsToBoosterItems;
 	}
 
-	public void setBoosterItemIdsToBoosterItems(
-			Map<Integer, BoosterItem> boosterItemIdsToBoosterItems) {
-		this.boosterItemIdsToBoosterItems = boosterItemIdsToBoosterItems;
-	}
-
 	public List<Reward> getListOfRewards() {
 		return listOfRewards;
-	}
-
-	public void setListOfRewards(List<Reward> listOfRewards) {
-		this.listOfRewards = listOfRewards;
 	}
 
 	public AwardRewardAction getAra() {
 		return ara;
 	}
 
-	public void setAra(AwardRewardAction ara) {
-		this.ara = ara;
-	}
-
 	public int getGemReward() {
 		return gemReward;
-	}
-
-	public void setGemReward(int gemReward) {
-		this.gemReward = gemReward;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public void setItemsUserReceives(List<BoosterItem> itemsUserReceives) {
-		this.itemsUserReceives = itemsUserReceives;
-	}
-
-	public void setIfuList(List<ItemForUser> ifuList) {
-		this.ifuList = ifuList;
 	}
 
 	public int getGachaCreditsChange() {
@@ -657,10 +478,6 @@ public class PurchaseBoosterPackAction {
 
 	public int getGachaCreditsReward() {
 		return gachaCreditsReward;
-	}
-
-	public void setGachaCreditsReward(int gachaCreditsReward) {
-		this.gachaCreditsReward = gachaCreditsReward;
 	}
 
 }

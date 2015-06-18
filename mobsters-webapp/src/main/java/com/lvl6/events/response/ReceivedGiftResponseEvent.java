@@ -7,8 +7,7 @@ import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ReceivedGiftResponseEvent extends
-		NormalResponseEvent {
+public class ReceivedGiftResponseEvent extends NormalResponseEvent<ReceivedGiftResponseProto> {
 
 	public ReceivedGiftResponseEvent(String playerId) {
 		super(playerId);
@@ -20,11 +19,6 @@ public class ReceivedGiftResponseEvent extends
 		ByteString b = responseProto.toByteString();
 		b.copyTo(bb);
 		return b.size();
-	}
-
-	public void setReceivedGiftResponseProto(
-			ReceivedGiftResponseProto receivedGiftResponseProto) {
-		this.responseProto = receivedGiftResponseProto;
 	}
 
 	@Override

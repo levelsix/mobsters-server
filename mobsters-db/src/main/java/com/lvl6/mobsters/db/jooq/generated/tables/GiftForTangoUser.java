@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class GiftForTangoUser extends TableImpl<GiftForTangoUserRecord> {
 
-	private static final long serialVersionUID = -1780415698;
+	private static final long serialVersionUID = -794932904;
 
 	/**
 	 * The reference instance of <code>mobsters.gift_for_tango_user</code>
@@ -54,14 +54,9 @@ public class GiftForTangoUser extends TableImpl<GiftForTangoUserRecord> {
 	public final TableField<GiftForTangoUserRecord, String> GIFT_FOR_USER_ID = createField("gift_for_user_id", org.jooq.impl.SQLDataType.CHAR.length(36).nullable(false), this, "");
 
 	/**
-	 * The column <code>mobsters.gift_for_tango_user.gifter_user_id</code>.
+	 * The column <code>mobsters.gift_for_tango_user.gifter_tango_name</code>.
 	 */
-	public final TableField<GiftForTangoUserRecord, String> GIFTER_USER_ID = createField("gifter_user_id", org.jooq.impl.SQLDataType.CHAR.length(36), this, "");
-
-	/**
-	 * The column <code>mobsters.gift_for_tango_user.gifter_tango_user_id</code>.
-	 */
-	public final TableField<GiftForTangoUserRecord, String> GIFTER_TANGO_USER_ID = createField("gifter_tango_user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+	public final TableField<GiftForTangoUserRecord, String> GIFTER_TANGO_NAME = createField("gifter_tango_name", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
 	/**
 	 * Create a <code>mobsters.gift_for_tango_user</code> table reference

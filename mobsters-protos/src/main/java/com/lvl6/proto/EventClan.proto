@@ -1,11 +1,8 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Battle.proto";
-import "Chat.proto";
 import "Clan.proto";
 import "MonsterStuff.proto";
-import "Reward.proto";
-//import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -663,10 +660,11 @@ message VoidTeamDonationSolicitationResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+/*
 message CollectClanGiftsRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserClanGiftProto userClanGift = 2;
+	//repeated UserClanGiftProto userClanGift = 2;
+	repeated UserGiftProto userGift = 2;
 }
 
 message CollectClanGiftsResponseProto {
@@ -679,12 +677,13 @@ message CollectClanGiftsResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
-
+*/
 //------------------------------------------------------------------------------------------
-
+/*
 message DeleteClanGiftsRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserClanGiftProto expiredGifts = 2;
+	//repeated UserClanGiftProto expiredGifts = 2;
+	repeated UserGiftProto expiredGifts = 2;
 }
 
 message DeleteClanGiftsResponseProto {
@@ -696,12 +695,13 @@ message DeleteClanGiftsResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
-
+*/
 //------------------------------------------------------------------------------------------
-
+/*
 message ReceivedClanGiftResponseProto {
 	optional MinimumUserProto sender = 1;  //person who gave out the gift to everyone
 	optional ChatScope scope = 2 [default = CLAN];
-	repeated UserClanGiftProto userClanGifts = 3;
+	//repeated UserClanGiftProto userClanGifts = 3;
+	repeated UserGiftProto userGifts = 3;
 }
-
+*/
