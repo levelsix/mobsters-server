@@ -248,17 +248,21 @@ public final class RewardsProto {
       GACHA_CREDITS(5, 7),
       /**
        * <code>MONSTER = 6;</code>
+       */
+      MONSTER(6, 6),
+      /**
+       * <code>GIFT = 10;</code>
        *
        * <pre>
        *CLAN_GIFT = 8  [deprecated = true];
        *TANGO_GIFT = 9  [deprecated = true];
        * </pre>
        */
-      MONSTER(6, 6),
+      GIFT(7, 10),
       /**
        * <code>REWARD = 100;</code>
        */
-      REWARD(7, 100),
+      REWARD(8, 100),
       ;
 
       /**
@@ -287,13 +291,17 @@ public final class RewardsProto {
       public static final int GACHA_CREDITS_VALUE = 7;
       /**
        * <code>MONSTER = 6;</code>
+       */
+      public static final int MONSTER_VALUE = 6;
+      /**
+       * <code>GIFT = 10;</code>
        *
        * <pre>
        *CLAN_GIFT = 8  [deprecated = true];
        *TANGO_GIFT = 9  [deprecated = true];
        * </pre>
        */
-      public static final int MONSTER_VALUE = 6;
+      public static final int GIFT_VALUE = 10;
       /**
        * <code>REWARD = 100;</code>
        */
@@ -311,6 +319,7 @@ public final class RewardsProto {
           case 5: return OIL;
           case 7: return GACHA_CREDITS;
           case 6: return MONSTER;
+          case 10: return GIFT;
           case 100: return REWARD;
           default: return null;
         }
@@ -7192,40 +7201,40 @@ public final class RewardsProto {
     java.lang.String[] descriptorData = {
       "\n\014Reward.proto\022\016com.lvl6.proto\032\nItem.pro" +
       "to\032\022MonsterStuff.proto\032\026SharedEnumConfig" +
-      ".proto\032\nUser.proto\"\232\002\n\013RewardProto\022\020\n\010re" +
+      ".proto\032\nUser.proto\"\244\002\n\013RewardProto\022\020\n\010re" +
       "wardId\030\001 \001(\005\022\024\n\014staticDataId\030\002 \001(\005\0223\n\003ty" +
       "p\030\003 \001(\0162&.com.lvl6.proto.RewardProto.Rew" +
       "ardType\022\013\n\003amt\030\004 \001(\005\0221\n\014actualReward\030\005 \001" +
-      "(\0132\033.com.lvl6.proto.RewardProto\"n\n\nRewar" +
+      "(\0132\033.com.lvl6.proto.RewardProto\"x\n\nRewar" +
       "dType\022\r\n\tNO_REWARD\020\001\022\010\n\004ITEM\020\002\022\010\n\004GEMS\020\003" +
       "\022\010\n\004CASH\020\004\022\007\n\003OIL\020\005\022\021\n\rGACHA_CREDITS\020\007\022\013" +
-      "\n\007MONSTER\020\006\022\n\n\006REWARD\020d\"\372\001\n\017UserRewardPr",
-      "oto\022B\n\024updatedOrNewMonsters\030\001 \003(\0132$.com." +
-      "lvl6.proto.FullUserMonsterProto\0227\n\020updat" +
-      "edUserItems\030\002 \003(\0132\035.com.lvl6.proto.UserI" +
-      "temProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash\030\004 \001(\005\022\013\n\003" +
-      "oil\030\005 \001(\005\022\024\n\014gachaCredits\030\006 \001(\005\022+\n\004gift\030" +
-      "\007 \003(\0132\035.com.lvl6.proto.UserGiftProto\"\321\001\n" +
-      "\tGiftProto\022\016\n\006giftId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t" +
-      "\022\034\n\024hoursUntilExpiration\030\003 \001(\005\022\021\n\timageN" +
-      "ame\030\004 \001(\t\022=\n\010giftType\030\005 \001(\0162\".com.lvl6.p" +
-      "roto.GiftProto.GiftType:\007NO_GIFT\"6\n\010Gift",
-      "Type\022\013\n\007NO_GIFT\020\001\022\r\n\tCLAN_GIFT\020\002\022\016\n\nTANG" +
-      "O_GIFT\020\003\"\313\002\n\rUserGiftProto\022\016\n\006ugUuid\030\001 \001" +
-      "(\t\022\030\n\020receiverUserUuid\030\002 \001(\t\0224\n\ngifterUs" +
-      "er\030\003 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\'\n\004gift\030\004 \001(\0132\031.com.lvl6.proto.GiftPr" +
-      "oto\022\024\n\014timeReceived\030\005 \001(\003\022+\n\006reward\030\006 \001(" +
-      "\0132\033.com.lvl6.proto.RewardProto\022\030\n\020hasBee" +
-      "nCollected\030\007 \001(\010\022\035\n\025minutesTillExpiratio" +
-      "n\030\010 \001(\005\0225\n\ttangoGift\030\t \001(\0132\".com.lvl6.pr" +
-      "oto.UserTangoGiftProto\"C\n\022UserTangoGiftP",
-      "roto\022\024\n\014userGiftUuid\030\001 \001(\t\022\027\n\017gifterTang" +
-      "oName\030\002 \001(\t\"\226\001\n\023UserSecretGiftProto\022\020\n\010u" +
-      "isgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\032\n\022secsT" +
-      "illCollection\030\003 \001(\005\022+\n\006reward\030\004 \001(\0132\033.co" +
-      "m.lvl6.proto.RewardProto\022\022\n\ncreateTime\030\005" +
-      " \001(\003B\016B\014RewardsProto"
+      "\n\007MONSTER\020\006\022\010\n\004GIFT\020\n\022\n\n\006REWARD\020d\"\372\001\n\017Us",
+      "erRewardProto\022B\n\024updatedOrNewMonsters\030\001 " +
+      "\003(\0132$.com.lvl6.proto.FullUserMonsterProt" +
+      "o\0227\n\020updatedUserItems\030\002 \003(\0132\035.com.lvl6.p" +
+      "roto.UserItemProto\022\014\n\004gems\030\003 \001(\005\022\014\n\004cash" +
+      "\030\004 \001(\005\022\013\n\003oil\030\005 \001(\005\022\024\n\014gachaCredits\030\006 \001(" +
+      "\005\022+\n\004gift\030\007 \003(\0132\035.com.lvl6.proto.UserGif" +
+      "tProto\"\321\001\n\tGiftProto\022\016\n\006giftId\030\001 \001(\005\022\014\n\004" +
+      "name\030\002 \001(\t\022\034\n\024hoursUntilExpiration\030\003 \001(\005" +
+      "\022\021\n\timageName\030\004 \001(\t\022=\n\010giftType\030\005 \001(\0162\"." +
+      "com.lvl6.proto.GiftProto.GiftType:\007NO_GI",
+      "FT\"6\n\010GiftType\022\013\n\007NO_GIFT\020\001\022\r\n\tCLAN_GIFT" +
+      "\020\002\022\016\n\nTANGO_GIFT\020\003\"\313\002\n\rUserGiftProto\022\016\n\006" +
+      "ugUuid\030\001 \001(\t\022\030\n\020receiverUserUuid\030\002 \001(\t\0224" +
+      "\n\ngifterUser\030\003 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\'\n\004gift\030\004 \001(\0132\031.com.lvl6.pr" +
+      "oto.GiftProto\022\024\n\014timeReceived\030\005 \001(\003\022+\n\006r" +
+      "eward\030\006 \001(\0132\033.com.lvl6.proto.RewardProto" +
+      "\022\030\n\020hasBeenCollected\030\007 \001(\010\022\035\n\025minutesTil" +
+      "lExpiration\030\010 \001(\005\0225\n\ttangoGift\030\t \001(\0132\".c" +
+      "om.lvl6.proto.UserTangoGiftProto\"C\n\022User",
+      "TangoGiftProto\022\024\n\014userGiftUuid\030\001 \001(\t\022\027\n\017" +
+      "gifterTangoName\030\002 \001(\t\"\226\001\n\023UserSecretGift" +
+      "Proto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(" +
+      "\t\022\032\n\022secsTillCollection\030\003 \001(\005\022+\n\006reward\030" +
+      "\004 \001(\0132\033.com.lvl6.proto.RewardProto\022\022\n\ncr" +
+      "eateTime\030\005 \001(\003B\016B\014RewardsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

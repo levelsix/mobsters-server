@@ -42,6 +42,7 @@ message RewardProto {
 		MONSTER = 6;
 		//CLAN_GIFT = 8  [deprecated = true];
 		//TANGO_GIFT = 9  [deprecated = true];
+		GIFT = 10;
 		
 		REWARD = 100;
 	}
