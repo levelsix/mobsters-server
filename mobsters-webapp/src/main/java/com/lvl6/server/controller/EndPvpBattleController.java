@@ -526,7 +526,7 @@ public class EndPvpBattleController extends EventController {
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
 						attackerIdsToProspectiveOilWinnings,
-						attackerIdsToCashStolenFromStorage, attackerIdsToCashStolenFromStorage,
+						attackerIdsToCashStolenFromStorage, attackerIdsToCashStolenFromGenerators,
 						attackerIdsToOilStolenFromStorage, attackerIdsToOilStolenFromGenerators);
 
 		if (null != historyProtoList && !historyProtoList.isEmpty()) {
