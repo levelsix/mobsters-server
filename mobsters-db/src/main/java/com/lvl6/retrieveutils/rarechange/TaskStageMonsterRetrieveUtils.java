@@ -359,13 +359,11 @@ public class TaskStageMonsterRetrieveUtils {
 
 		Dialogue initD = null;
 		if (null != initDialogue && !initDialogue.isEmpty()) {
-			initD = null;
-			createDialogue(initDialogue);
+			initD = createDialogue(initDialogue);
 		}
 		Dialogue defaultD = null;
 		if (null != defaultDialogue && !defaultDialogue.isEmpty()) {
-			defaultD = null;
-			createDialogue(defaultDialogue);
+			defaultD = createDialogue(defaultDialogue);
 		}
 
 		TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId,
