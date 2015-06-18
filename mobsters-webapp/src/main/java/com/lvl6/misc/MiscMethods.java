@@ -248,21 +248,7 @@ public class MiscMethods {
 		return "amqp";
 	}
 
-	public void purgeMDCProperties() {
-		MDC.remove(MDCKeys.UDID);
-		MDC.remove(MDCKeys.PLAYER_ID);
-		MDC.remove(MDCKeys.IP);
-	}
 
-	public void setMDCProperties(String udid, String playerId, String ip) {
-		purgeMDCProperties();
-		if (udid != null)
-			MDC.put(MDCKeys.UDID, udid);
-		if (ip != null)
-			MDC.put(MDCKeys.IP, ip);
-		if (null != playerId && !playerId.isEmpty())
-			MDC.put(MDCKeys.PLAYER_ID, playerId);
-	}
 
 	public int calculateCoinsGivenToReferrer(User referrer) {
 		return Math

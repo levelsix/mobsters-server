@@ -99,6 +99,10 @@ public class RetrieveStrengthLeaderBoardAction {
 		resBuilder.setSenderLeaderBoardInfo(b.build());
 		
 		List<StrengthLeaderBoard> slbpList = leaderBoard.getStrengths(minRank, maxRank);
+		for(StrengthLeaderBoard slb : slbpList) {
+			log.info("rank {}, str {}", slb.getRank(), slb.getStrength());
+		}
+
 		resBuilder.addAllLeaderBoardInfo(createInfoProtoUtils.
                 createStrengthLeaderBoardProtos(slbpList, userRetrieveUtils));
 	}
