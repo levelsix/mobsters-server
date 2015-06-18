@@ -173,6 +173,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 		gotAttackedHistoryList = new ArrayList<PvpBattleHistoryPojo>();
 		attackedOthersHistoryList = new ArrayList<PvpBattleHistoryPojo>();
 
+		aIdsToCashStolenFromStorage = new HashMap<String, Integer>();
+		aIdsToCashStolenFromGenerators = new HashMap<String, Integer>();
+		aIdsToOilStolenFromStorage = new HashMap<String, Integer>();
+		aIdsToOilStolenFromGenerators = new HashMap<String, Integer>();
+		
 		for (PvpBattleHistoryPojo history : historyList) {
 			String attackerId = history.getAttackerId();
 			if (attackerId.equals(userId)) {
