@@ -19,14 +19,15 @@ import com.hazelcast.core.IMap;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
 import com.lvl6.datastructures.ZSetMember;
+import com.lvl6.info.StrengthLeaderBoard;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanChatPostPojo;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanForUserPojo;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanHelpCountForUserPojo;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonationPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanChatPost;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanHelpCountForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ClanMemberTeamDonation;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
-import com.lvl6.utils.TimeUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 
 @Component
 public class HazelcastClanSearchImpl {
@@ -260,20 +261,20 @@ public class HazelcastClanSearchImpl {
 		//retrieve all the data relevant (past hour or 24 hrs)
 		Date hourAgo = timeUtils.createDateAddHours(new Date(), -1);
 		Date dayAgo = timeUtils.createDateAddHours(new Date(), -24);
-		List<ClanChatPostPojo> chatsPastDay = clanChatPostDao.fetchForClanSearch(dayAgo);
-		List<ClanHelpCountForUserPojo> helpsPastDay = clanHelpCountForUserDao.fetchForClanSearch(dayAgo);
-		List<ClanMemberTeamDonationPojo> donatesPastDay = clanMemberTeamDonationDao.fetchForClanSearch(dayAgo);
-		List<ClanForUserPojo> usersInClans = clanForUserDao.fetchByStatus(UserClanStatus.LEADER.toString(),
+		List<ClanChatPost> chatsPastDay = clanChatPostDao.fetchForClanSearch(dayAgo);
+		List<ClanHelpCountForUser> helpsPastDay = clanHelpCountForUserDao.fetchForClanSearch(dayAgo);
+		List<ClanMemberTeamDonation> donatesPastDay = clanMemberTeamDonationDao.fetchForClanSearch(dayAgo);
+		List<ClanForUser> usersInClans = clanForUserDao.fetchByStatus(UserClanStatus.LEADER.toString(),
 				UserClanStatus.JUNIOR_LEADER.toString(), UserClanStatus.CAPTAIN.toString(),
 				UserClanStatus.MEMBER.toString());
 		
 		//reorganize data retrieved
-		for(ClanChatPostPojo ccp : chatsPastDay) {
+		for(ClanChatPost ccp : chatsPastDay) {
 			String clanId = ccp.getClanId();
 			saveToHazelCast(chatsPastHourMap, clanId, ccp.getTimeOfPost(), 1);
 		}
 		
-		for(ClanMemberTeamDonationPojo cmtd : donatesPastDay) {
+		for(ClanMemberTeamDonation cmtd : donatesPastDay) {
 			String clanId = cmtd.getClanId();
 			saveToHazelCast(dailyDonateRequestsMap, clanId, cmtd.getTimeOfSolicitation(), 1);
 			if(cmtd.getFulfilled()) {
@@ -281,13 +282,13 @@ public class HazelcastClanSearchImpl {
 			}
 		}
 		
-		for(ClanHelpCountForUserPojo chcfu : helpsPastDay) {
+		for(ClanHelpCountForUser chcfu : helpsPastDay) {
 			String clanId = chcfu.getClanId();
 			if(chcfu.getGiven() > 0)
 				saveToHazelCast(dailyHelpsMap, clanId, chcfu.getDate(), chcfu.getGiven());
 		}
 		
-		for(ClanForUserPojo cfu : usersInClans) {
+		for(ClanForUser cfu : usersInClans) {
 			String clanId = cfu.getClanId();
 			saveNumberOfMembers(clanMemberCountMap, clanId, 1);
 		}

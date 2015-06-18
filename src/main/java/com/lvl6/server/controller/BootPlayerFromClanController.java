@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
@@ -26,16 +27,14 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.BootPlayerFromClanAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
-import com.lvl6.server.eventsender.ClanResponseEvent;
-import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
-
+@DependsOn("gameServer")
 public class BootPlayerFromClanController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
@@ -88,7 +87,7 @@ public class BootPlayerFromClanController extends EventController {
 	
 	
 	public BootPlayerFromClanController() {
-		
+		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -102,7 +101,7 @@ public class BootPlayerFromClanController extends EventController {
 	}
 
 	@Override
-	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	protected void processRequestEvent(RequestEvent event) throws Exception {
 		BootPlayerFromClanRequestProto reqProto = ((BootPlayerFromClanRequestEvent) event)
 				.getBootPlayerFromClanRequestProto();
 
@@ -144,8 +143,8 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());
-			responses.normalResponseEvents().add(resEvent);
+			resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -168,17 +167,14 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
 
 			if (BootPlayerFromClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//if successful write to clan
-				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
-				responses.setUserId(userId);
-				responses.setClanChanged(true);
-				responses.setNewClanId(clanId);
+				server.writeClanEvent(resEvent, clanId);
 			} else {
 				//write to user if fail
-				responses.normalResponseEvents().add(resEvent);
+				server.writeEvent(resEvent);
 			}
 		} catch (Exception e) {
 			log.error("exception in BootPlayerFromClan processEvent", e);
@@ -187,8 +183,8 @@ public class BootPlayerFromClanController extends EventController {
 				BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setResponseProto(resBuilder.build());
-				responses.normalResponseEvents().add(resEvent);
+				resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in BootPlayerFromClan processEvent", e);
 			}

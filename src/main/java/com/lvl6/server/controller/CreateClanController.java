@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
@@ -30,17 +31,16 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateClanAction;
 import com.lvl6.server.controller.utils.ResourceUtil;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
-
+@DependsOn("gameServer")
 public class CreateClanController extends EventController {
 
-	
-	private static final Logger log = LoggerFactory.getLogger(CreateClanController.class);
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected Locker locker;
@@ -83,7 +83,7 @@ public class CreateClanController extends EventController {
 	
 	
 	public CreateClanController() {
-		
+		numAllocatedThreads = 4;
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class CreateClanController extends EventController {
 	}
 
 	@Override
-	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
+	protected void processRequestEvent(RequestEvent event) throws Exception {
 		CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
 		log.info(String.format("reqProto=%s", reqProto));
 
@@ -134,8 +134,8 @@ public class CreateClanController extends EventController {
 			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());
-			responses.normalResponseEvents().add(resEvent);
+			resEvent.setCreateClanResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 			return;
 		}
 
@@ -155,22 +155,17 @@ public class CreateClanController extends EventController {
 
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());  
-			responses.normalResponseEvents().add(resEvent);
-			responses.setUserId(userId);
-			responses.setClanChanged(true);
-			responses.setNewClanId(cca.getClanId());
-			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setCreateClanResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 
 			if (CreateClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(cca.getUser(), null, cca.getCreatedClan());
 				resEventUpdate.setTag(event.getTag());
-//				responses.normalResponseEvents().add(resEventUpdate);
+//				server.writeEvent(resEventUpdate);
 
-
-				sendGeneralNotification(cca.getUser().getName(), clanName, responses);
+				sendGeneralNotification(cca.getUser().getName(), clanName);
 
 				writeToUserCurrencyHistory(cca);
 			}
@@ -180,8 +175,8 @@ public class CreateClanController extends EventController {
 				resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setResponseProto(resBuilder.build());
-				responses.normalResponseEvents().add(resEvent);
+				resEvent.setCreateClanResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
 			} catch (Exception e2) {
 				log.error("exception2 in CreateClan processEvent", e);
 			}
@@ -190,12 +185,11 @@ public class CreateClanController extends EventController {
 		}
 	}
 
-
-	private void sendGeneralNotification(String userName, String clanName, ToClientEvents responses) {
+	private void sendGeneralNotification(String userName, String clanName) {
 		Notification createClanNotification = new Notification();
 		createClanNotification.setAsClanCreated(userName, clanName);
 
-		responses.globalChatResponseEvents().add(miscMethods.getGlobalNotification(createClanNotification));
+		miscMethods.writeGlobalNotification(createClanNotification, server);
 	}
 
 	private void updateClanCache(Clan clan) {

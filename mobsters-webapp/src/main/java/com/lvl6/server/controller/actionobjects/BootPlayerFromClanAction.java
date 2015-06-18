@@ -9,6 +9,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -19,6 +20,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -42,6 +44,8 @@ public class BootPlayerFromClanAction {
 	private ClanStuffUtils clanStuffUtils;
 	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 	private HazelcastClanSearchImpl hzClanSearch;
+	private ClanSearch clanSearch;
+	private ServerToggleRetrieveUtils toggle;
 
 
 	public BootPlayerFromClanAction(
@@ -53,7 +57,9 @@ public class BootPlayerFromClanAction {
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			ClanStuffUtils clanStuffUtils,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
-			HazelcastClanSearchImpl hzClanSearch) {
+			HazelcastClanSearchImpl hzClanSearch,
+			ClanSearch clanSearch,
+			ServerToggleRetrieveUtils toggle) {
 		super();
 		this.userId = userId;
 		this.bootedUserId = bootedUserId;
@@ -68,7 +74,8 @@ public class BootPlayerFromClanAction {
 		this.clanStuffUtils = clanStuffUtils;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 		this.hzClanSearch = hzClanSearch;
-
+		this.clanSearch = clanSearch;
+		this.toggle = toggle;
 	}
 
 	private User user;
@@ -185,7 +192,7 @@ public class BootPlayerFromClanAction {
 
 		//need to account for this user leaving clan
 		ExitClanAction eca = new ExitClanAction(bootedUserId, clanId, clanSizeContainer.size() - 1,
-				lastChatPost, timeUtils, updateUtil, hzClanSearch);
+				lastChatPost, timeUtils, updateUtil, hzClanSearch, clanSearch, toggle);
 		eca.execute();
 
 		return true;
