@@ -91,6 +91,10 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 	private Map<String, List<MonsterForUser>> userIdsToUserMonsters;
 	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
 	private Map<String, Integer> attackerIdsToProspectiveOilWinnings;
+	private Map<String, Integer> aIdsToCashStolenFromStorage;
+	private Map<String, Integer> aIdsToCashStolenFromGenerators;
+	private Map<String, Integer> aIdsToOilStolenFromStorage;
+	private Map<String, Integer> aIdsToOilStolenFromGenerators;
 
 	@Override
 	public void setUp(StartUpResource fillMe) {
@@ -176,6 +180,10 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 				attackedOthersHistoryList.add(history);
 			} else {
 				gotAttackedHistoryList.add(history);
+				aIdsToCashStolenFromStorage.put(attackerId, history.getCashStolenFromStorage());
+				aIdsToCashStolenFromGenerators.put(attackerId, history.getCashStolenFromGenerators());
+				aIdsToOilStolenFromStorage.put(attackerId, history.getOilStolenFromStorage());
+				aIdsToOilStolenFromGenerators.put(attackerId, history.getOilStolenFromGenerators());
 			}
 		}
 	}
@@ -232,7 +240,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings);
+						attackerIdsToProspectiveOilWinnings,
+						aIdsToCashStolenFromStorage,
+						aIdsToCashStolenFromGenerators,
+						aIdsToOilStolenFromStorage,
+						aIdsToOilStolenFromGenerators);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);
 	}
