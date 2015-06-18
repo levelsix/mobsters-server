@@ -12,14 +12,6 @@ object ClientConnections extends LazyLogging{
   protected val connectionsByUdid = new ConcurrentHashMap[String, ClientConnection]()
   protected val connectionsByConnectionId = new ConcurrentHashMap[String, ClientConnection]()
   
-  val pingTimer = new Timer("Client Ping Timer")
-  val pingTask = new TimerTask() {
-    def run= {
-      logger.info(s"Pinging ${connectionsByConnectionId.size()} connections")
-      pingConnections(connectionsByConnectionId)
-    }
-  }
-  pingTimer.scheduleAtFixedRate(pingTask, 20000, 20000)
   
   def addConnection(connection:ClientConnection)={
     connection.userId match{
@@ -61,8 +53,9 @@ object ClientConnections extends LazyLogging{
     return None
   }
   
-  protected def pingConnections(connections:ConcurrentHashMap[String, ClientConnection]) ={
-    connections.elements().foreach{ connection =>
+  def pingConnections ={
+    logger.info(s"Pinging ${connectionsByConnectionId.size()} connections")
+    connectionsByConnectionId.elements().foreach{ connection =>
       connection.sendPing    
     }
   }
