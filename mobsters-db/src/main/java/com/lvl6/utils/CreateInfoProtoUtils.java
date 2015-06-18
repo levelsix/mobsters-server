@@ -738,10 +738,22 @@ public class CreateInfoProtoUtils {
 //				brfu = replayIdToReplay.get(replayId);
 //			}
 
-			int cashStolenFromStorage = cashStolenFromStorageMap.get(attackerId);
-			int cashStolenFromGenerators = cashStolenFromGeneratorsMap.get(attackerId);
-			int oilStolenFromStorage = oilStolenFromStorageMap.get(attackerId);
-			int oilStolenFromGenerators = oilStolenFromGeneratorsMap.get(attackerId);
+			int cashStolenFromStorage = 0;
+			if (cashStolenFromStorageMap.containsKey(attackerId)) {
+				cashStolenFromStorage = cashStolenFromStorageMap.get(attackerId);
+			}
+			int cashStolenFromGenerators = 0;
+			if (cashStolenFromGeneratorsMap.containsKey(attackerId)) {
+				cashStolenFromGenerators = cashStolenFromGeneratorsMap.get(attackerId);
+			}
+			int oilStolenFromStorage = 0;
+			if (oilStolenFromStorageMap.containsKey(attackerId)) {
+				oilStolenFromStorage = oilStolenFromStorageMap.get(attackerId);
+			}
+			int oilStolenFromGenerators = 0;
+			if (oilStolenFromGeneratorsMap.containsKey(attackerId)) {
+				oilStolenFromGenerators = oilStolenFromGeneratorsMap.get(attackerId);
+			}
 
 
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
