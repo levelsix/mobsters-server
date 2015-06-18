@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "item_config", schema = "mobsters")
 public class ItemConfigPojo implements IItemConfig {
 
-	private static final long serialVersionUID = -168232996;
+	private static final long serialVersionUID = -2024516962;
 
 	private Integer id;
 	private String  name;
@@ -42,7 +42,6 @@ public class ItemConfigPojo implements IItemConfig {
 	private Boolean alwaysDisplayToUser;
 	private String  actionGameType;
 	private String  quality;
-	private Double  secretGiftChance;
 
 	public ItemConfigPojo() {}
 
@@ -57,7 +56,6 @@ public class ItemConfigPojo implements IItemConfig {
 		this.alwaysDisplayToUser = value.alwaysDisplayToUser;
 		this.actionGameType = value.actionGameType;
 		this.quality = value.quality;
-		this.secretGiftChance = value.secretGiftChance;
 	}
 
 	public ItemConfigPojo(
@@ -70,8 +68,7 @@ public class ItemConfigPojo implements IItemConfig {
 		Integer amount,
 		Boolean alwaysDisplayToUser,
 		String  actionGameType,
-		String  quality,
-		Double  secretGiftChance
+		String  quality
 	) {
 		this.id = id;
 		this.name = name;
@@ -83,7 +80,6 @@ public class ItemConfigPojo implements IItemConfig {
 		this.alwaysDisplayToUser = alwaysDisplayToUser;
 		this.actionGameType = actionGameType;
 		this.quality = quality;
-		this.secretGiftChance = secretGiftChance;
 	}
 
 	@Id
@@ -214,18 +210,6 @@ public class ItemConfigPojo implements IItemConfig {
 		return this;
 	}
 
-	@Column(name = "secret_gift_chance", precision = 12)
-	@Override
-	public Double getSecretGiftChance() {
-		return this.secretGiftChance;
-	}
-
-	@Override
-	public ItemConfigPojo setSecretGiftChance(Double secretGiftChance) {
-		this.secretGiftChance = secretGiftChance;
-		return this;
-	}
-
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -245,7 +229,6 @@ public class ItemConfigPojo implements IItemConfig {
 		setAlwaysDisplayToUser(from.getAlwaysDisplayToUser());
 		setActionGameType(from.getActionGameType());
 		setQuality(from.getQuality());
-		setSecretGiftChance(from.getSecretGiftChance());
 	}
 
 	/**

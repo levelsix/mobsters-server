@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 
-	private static final long serialVersionUID = -1055138370;
+	private static final long serialVersionUID = 1389305326;
 
 	private String    attackerId;
 	private String    defenderId;
@@ -58,6 +58,10 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 	private Integer   defenderCashChange;
 	private Integer   attackerOilChange;
 	private Integer   defenderOilChange;
+	private Integer   cashStolenFromStorage;
+	private Integer   cashStolenFromGenerators;
+	private Integer   oilStolenFromStorage;
+	private Integer   oilStolenFromGenerators;
 	private Boolean   attackerWon;
 	private Boolean   cancelled;
 	private Boolean   exactedRevenge;
@@ -91,6 +95,10 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 		this.defenderCashChange = value.defenderCashChange;
 		this.attackerOilChange = value.attackerOilChange;
 		this.defenderOilChange = value.defenderOilChange;
+		this.cashStolenFromStorage = value.cashStolenFromStorage;
+		this.cashStolenFromGenerators = value.cashStolenFromGenerators;
+		this.oilStolenFromStorage = value.oilStolenFromStorage;
+		this.oilStolenFromGenerators = value.oilStolenFromGenerators;
 		this.attackerWon = value.attackerWon;
 		this.cancelled = value.cancelled;
 		this.exactedRevenge = value.exactedRevenge;
@@ -123,6 +131,10 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 		Integer   defenderCashChange,
 		Integer   attackerOilChange,
 		Integer   defenderOilChange,
+		Integer   cashStolenFromStorage,
+		Integer   cashStolenFromGenerators,
+		Integer   oilStolenFromStorage,
+		Integer   oilStolenFromGenerators,
 		Boolean   attackerWon,
 		Boolean   cancelled,
 		Boolean   exactedRevenge,
@@ -153,6 +165,10 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 		this.defenderCashChange = defenderCashChange;
 		this.attackerOilChange = attackerOilChange;
 		this.defenderOilChange = defenderOilChange;
+		this.cashStolenFromStorage = cashStolenFromStorage;
+		this.cashStolenFromGenerators = cashStolenFromGenerators;
+		this.oilStolenFromStorage = oilStolenFromStorage;
+		this.oilStolenFromGenerators = oilStolenFromGenerators;
 		this.attackerWon = attackerWon;
 		this.cancelled = cancelled;
 		this.exactedRevenge = exactedRevenge;
@@ -431,6 +447,54 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 		return this;
 	}
 
+	@Column(name = "cash_stolen_from_storage", precision = 10)
+	@Override
+	public Integer getCashStolenFromStorage() {
+		return this.cashStolenFromStorage;
+	}
+
+	@Override
+	public PvpBattleHistoryPojo setCashStolenFromStorage(Integer cashStolenFromStorage) {
+		this.cashStolenFromStorage = cashStolenFromStorage;
+		return this;
+	}
+
+	@Column(name = "cash_stolen_from_generators", precision = 10)
+	@Override
+	public Integer getCashStolenFromGenerators() {
+		return this.cashStolenFromGenerators;
+	}
+
+	@Override
+	public PvpBattleHistoryPojo setCashStolenFromGenerators(Integer cashStolenFromGenerators) {
+		this.cashStolenFromGenerators = cashStolenFromGenerators;
+		return this;
+	}
+
+	@Column(name = "oil_stolen_from_storage", precision = 10)
+	@Override
+	public Integer getOilStolenFromStorage() {
+		return this.oilStolenFromStorage;
+	}
+
+	@Override
+	public PvpBattleHistoryPojo setOilStolenFromStorage(Integer oilStolenFromStorage) {
+		this.oilStolenFromStorage = oilStolenFromStorage;
+		return this;
+	}
+
+	@Column(name = "oil_stolen_from_generators", precision = 10)
+	@Override
+	public Integer getOilStolenFromGenerators() {
+		return this.oilStolenFromGenerators;
+	}
+
+	@Override
+	public PvpBattleHistoryPojo setOilStolenFromGenerators(Integer oilStolenFromGenerators) {
+		this.oilStolenFromGenerators = oilStolenFromGenerators;
+		return this;
+	}
+
 	@Column(name = "attacker_won", precision = 1)
 	@Override
 	public Boolean getAttackerWon() {
@@ -547,6 +611,10 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 		setDefenderCashChange(from.getDefenderCashChange());
 		setAttackerOilChange(from.getAttackerOilChange());
 		setDefenderOilChange(from.getDefenderOilChange());
+		setCashStolenFromStorage(from.getCashStolenFromStorage());
+		setCashStolenFromGenerators(from.getCashStolenFromGenerators());
+		setOilStolenFromStorage(from.getOilStolenFromStorage());
+		setOilStolenFromGenerators(from.getOilStolenFromGenerators());
 		setAttackerWon(from.getAttackerWon());
 		setCancelled(from.getCancelled());
 		setExactedRevenge(from.getExactedRevenge());
