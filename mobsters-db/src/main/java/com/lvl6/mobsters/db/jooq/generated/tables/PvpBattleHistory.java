@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PvpBattleHistory extends TableImpl<PvpBattleHistoryRecord> {
 
-	private static final long serialVersionUID = -839647680;
+	private static final long serialVersionUID = -1569342554;
 
 	/**
 	 * The reference instance of <code>mobsters.pvp_battle_history</code>
@@ -158,26 +158,6 @@ public class PvpBattleHistory extends TableImpl<PvpBattleHistoryRecord> {
 	 * The column <code>mobsters.pvp_battle_history.defender_oil_change</code>.
 	 */
 	public final TableField<PvpBattleHistoryRecord, Integer> DEFENDER_OIL_CHANGE = createField("defender_oil_change", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
-
-	/**
-	 * The column <code>mobsters.pvp_battle_history.cash_stolen_from_storage</code>.
-	 */
-	public final TableField<PvpBattleHistoryRecord, Integer> CASH_STOLEN_FROM_STORAGE = createField("cash_stolen_from_storage", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-	/**
-	 * The column <code>mobsters.pvp_battle_history.cash_stolen_from_generators</code>.
-	 */
-	public final TableField<PvpBattleHistoryRecord, Integer> CASH_STOLEN_FROM_GENERATORS = createField("cash_stolen_from_generators", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-	/**
-	 * The column <code>mobsters.pvp_battle_history.oil_stolen_from_storage</code>.
-	 */
-	public final TableField<PvpBattleHistoryRecord, Integer> OIL_STOLEN_FROM_STORAGE = createField("oil_stolen_from_storage", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-	/**
-	 * The column <code>mobsters.pvp_battle_history.oil_stolen_from_generators</code>.
-	 */
-	public final TableField<PvpBattleHistoryRecord, Integer> OIL_STOLEN_FROM_GENERATORS = createField("oil_stolen_from_generators", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.pvp_battle_history.attacker_won</code>.

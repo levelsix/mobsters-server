@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CustomMenuConfig extends TableImpl<CustomMenuConfigRecord> {
 
-	private static final long serialVersionUID = 667728645;
+	private static final long serialVersionUID = 1777684261;
 
 	/**
 	 * The reference instance of <code>mobsters.custom_menu_config</code>
@@ -81,12 +81,12 @@ public class CustomMenuConfig extends TableImpl<CustomMenuConfigRecord> {
 	/**
 	 * The column <code>mobsters.custom_menu_config.ipad_position_x</code>.
 	 */
-	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_X = createField("ipad_position_x", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
+	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_X = createField("ipad_position_x", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>mobsters.custom_menu_config.ipad_position_y</code>.
 	 */
-	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_Y = createField("ipad_position_y", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
+	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_Y = createField("ipad_position_y", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>mobsters.custom_menu_config</code> table reference

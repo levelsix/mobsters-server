@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemConfig extends TableImpl<ItemConfigRecord> {
 
-	private static final long serialVersionUID = 2076486708;
+	private static final long serialVersionUID = -85262573;
 
 	/**
 	 * The reference instance of <code>mobsters.item_config</code>
@@ -97,6 +97,11 @@ public class ItemConfig extends TableImpl<ItemConfigRecord> {
 	 * The column <code>mobsters.item_config.quality</code>.
 	 */
 	public final TableField<ItemConfigRecord, String> QUALITY = createField("quality", org.jooq.impl.SQLDataType.VARCHAR.length(15), this, "");
+
+	/**
+	 * The column <code>mobsters.item_config.secret_gift_chance</code>.
+	 */
+	public final TableField<ItemConfigRecord, Double> SECRET_GIFT_CHANCE = createField("secret_gift_chance", org.jooq.impl.SQLDataType.FLOAT, this, "");
 
 	/**
 	 * Create a <code>mobsters.item_config</code> table reference

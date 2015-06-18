@@ -208,34 +208,6 @@ public class PvpBattleHistoryDao extends DAOImpl<PvpBattleHistoryRecord, PvpBatt
 	}
 
 	/**
-	 * Fetch records that have <code>cash_stolen_from_storage IN (values)</code>
-	 */
-	public List<PvpBattleHistoryPojo> fetchByCashStolenFromStorage(Integer... values) {
-		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.CASH_STOLEN_FROM_STORAGE, values);
-	}
-
-	/**
-	 * Fetch records that have <code>cash_stolen_from_generators IN (values)</code>
-	 */
-	public List<PvpBattleHistoryPojo> fetchByCashStolenFromGenerators(Integer... values) {
-		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.CASH_STOLEN_FROM_GENERATORS, values);
-	}
-
-	/**
-	 * Fetch records that have <code>oil_stolen_from_storage IN (values)</code>
-	 */
-	public List<PvpBattleHistoryPojo> fetchByOilStolenFromStorage(Integer... values) {
-		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.OIL_STOLEN_FROM_STORAGE, values);
-	}
-
-	/**
-	 * Fetch records that have <code>oil_stolen_from_generators IN (values)</code>
-	 */
-	public List<PvpBattleHistoryPojo> fetchByOilStolenFromGenerators(Integer... values) {
-		return fetch(PvpBattleHistory.PVP_BATTLE_HISTORY.OIL_STOLEN_FROM_GENERATORS, values);
-	}
-
-	/**
 	 * Fetch records that have <code>attacker_won IN (values)</code>
 	 */
 	public List<PvpBattleHistoryPojo> fetchByAttackerWon(Boolean... values) {

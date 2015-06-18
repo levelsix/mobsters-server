@@ -83,15 +83,8 @@ public class GiftForUserDao extends DAOImpl<GiftForUserRecord, GiftForUserPojo, 
 	/**
 	 * Fetch records that have <code>gift_id IN (values)</code>
 	 */
-	public List<GiftForUserPojo> fetchByGiftType(String... values) {
-		return fetch(GiftForUser.GIFT_FOR_USER.GIFT_TYPE, values);
-	}
-
-	/**
-	 * Fetch records that have <code>static_data_id IN (values)</code>
-	 */
-	public List<GiftForUserPojo> fetchByStaticDataId(Integer... values) {
-		return fetch(GiftForUser.GIFT_FOR_USER.STATIC_DATA_ID, values);
+	public List<GiftForUserPojo> fetchByGiftId(Integer... values) {
+		return fetch(GiftForUser.GIFT_FOR_USER.GIFT_ID, values);
 	}
 
 	/**

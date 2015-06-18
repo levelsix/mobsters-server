@@ -108,13 +108,6 @@ public class ItemConfigDao extends DAOImpl<ItemConfigRecord, ItemConfigPojo, Int
 	}
 
 	/**
-	 * Fetch records that have <code>secret_gift_chance IN (values)</code>
-	 */
-	public List<ItemConfigPojo> fetchBySecretGiftChance(Double... values) {
-		return fetch(ItemConfig.ITEM_CONFIG.SECRET_GIFT_CHANCE, values);
-	}
-
-	/**
 	 * Fetch records that have <code>always_display_to_user IN (values)</code>
 	 */
 	public List<ItemConfigPojo> fetchByAlwaysDisplayToUser(Boolean... values) {
@@ -133,5 +126,12 @@ public class ItemConfigDao extends DAOImpl<ItemConfigRecord, ItemConfigPojo, Int
 	 */
 	public List<ItemConfigPojo> fetchByQuality(String... values) {
 		return fetch(ItemConfig.ITEM_CONFIG.QUALITY, values);
+	}
+
+	/**
+	 * Fetch records that have <code>secret_gift_chance IN (values)</code>
+	 */
+	public List<ItemConfigPojo> fetchBySecretGiftChance(Double... values) {
+		return fetch(ItemConfig.ITEM_CONFIG.SECRET_GIFT_CHANCE, values);
 	}
 }

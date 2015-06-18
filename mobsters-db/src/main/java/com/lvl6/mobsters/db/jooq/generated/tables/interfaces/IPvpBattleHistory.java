@@ -281,50 +281,6 @@ public interface IPvpBattleHistory extends Serializable {
 	public Integer getDefenderOilChange();
 
 	/**
-	 * Setter for <code>mobsters.pvp_battle_history.cash_stolen_from_storage</code>.
-	 */
-	public IPvpBattleHistory setCashStolenFromStorage(Integer value);
-
-	/**
-	 * Getter for <code>mobsters.pvp_battle_history.cash_stolen_from_storage</code>.
-	 */
-	@Column(name = "cash_stolen_from_storage", precision = 10)
-	public Integer getCashStolenFromStorage();
-
-	/**
-	 * Setter for <code>mobsters.pvp_battle_history.cash_stolen_from_generators</code>.
-	 */
-	public IPvpBattleHistory setCashStolenFromGenerators(Integer value);
-
-	/**
-	 * Getter for <code>mobsters.pvp_battle_history.cash_stolen_from_generators</code>.
-	 */
-	@Column(name = "cash_stolen_from_generators", precision = 10)
-	public Integer getCashStolenFromGenerators();
-
-	/**
-	 * Setter for <code>mobsters.pvp_battle_history.oil_stolen_from_storage</code>.
-	 */
-	public IPvpBattleHistory setOilStolenFromStorage(Integer value);
-
-	/**
-	 * Getter for <code>mobsters.pvp_battle_history.oil_stolen_from_storage</code>.
-	 */
-	@Column(name = "oil_stolen_from_storage", precision = 10)
-	public Integer getOilStolenFromStorage();
-
-	/**
-	 * Setter for <code>mobsters.pvp_battle_history.oil_stolen_from_generators</code>.
-	 */
-	public IPvpBattleHistory setOilStolenFromGenerators(Integer value);
-
-	/**
-	 * Getter for <code>mobsters.pvp_battle_history.oil_stolen_from_generators</code>.
-	 */
-	@Column(name = "oil_stolen_from_generators", precision = 10)
-	public Integer getOilStolenFromGenerators();
-
-	/**
 	 * Setter for <code>mobsters.pvp_battle_history.attacker_won</code>.
 	 */
 	public IPvpBattleHistory setAttackerWon(Boolean value);

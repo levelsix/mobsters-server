@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "gift_for_user", schema = "mobsters")
 public class GiftForUserPojo implements IGiftForUser {
 
-	private static final long serialVersionUID = 982247042;
+	private static final long serialVersionUID = 673574216;
 
 	private String    id;
 	private String    gifterUserId;
@@ -128,7 +128,7 @@ public class GiftForUserPojo implements IGiftForUser {
 	}
 
 	@Override
-	public GiftForUser setGiftId(Integer giftId) {
+	public GiftForUserPojo setGiftId(Integer giftId) {
 		this.giftId = giftId;
 		return this;
 	}
